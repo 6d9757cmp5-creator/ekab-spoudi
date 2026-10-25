@@ -28,3 +28,11 @@ document.querySelectorAll('img.course-diagram').forEach(img=>{
  hide();
  document.addEventListener('DOMContentLoaded',hide,{once:true});
 })();
+
+/* Load license-attributed source figures selected in the four-semester visual audit. */
+(function(){
+ const s=document.createElement('script');
+ s.src='saek-reviewed-image-ui.js';
+ s.async=true;
+ document.head.appendChild(s);
+})();
