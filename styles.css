@@ -73,3 +73,43 @@ html[data-theme="dark"] .utility-button .icon-sun{display:block}
 .legacy-utilities .utility{width:auto;margin:0;flex-wrap:nowrap}
 @media(max-width:590px){.header-row{gap:8px}.header-row .brand{gap:7px}.header-row .logo{width:33px;height:33px;font-size:19px;border-radius:10px}.header-row .brand h1{font-size:1.06rem}.header-row .brand p{font-size:.66rem}.top .utility{width:auto;gap:5px}.utility-button{width:36px;height:36px;min-width:36px;min-height:36px}.nav{margin-top:17px}}
 @media(max-width:345px){.header-row .brand p{font-size:.6rem}.header-row .brand h1{font-size:.98rem}.header-row .logo{width:30px;height:30px}.utility-button{width:34px;height:34px;min-width:34px;min-height:34px}.header-row{gap:5px}}
+
+/* v24: comprehensive first-semester reader with companion video slots */
+.reader-layout{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:17px;align-items:start}
+.reader-layout .reader-main{min-width:0}
+.reader-layout .video-panel{position:sticky;top:12px;background:#f1f7fa;border:1px solid #dbe8ef;border-radius:12px;padding:13px;color:#31566b;min-width:0}
+.video-panel h3{font-size:.88rem;color:inherit;margin:0 0 10px}
+.video-panel p{font-size:.81rem;line-height:1.55;margin:0 0 8px}
+.video-panel small{font-size:.72rem;color:#657f8d}
+.video-panel a{font-size:.78rem;line-height:1.4;white-space:normal;text-align:center}
+html[data-theme="dark"] .video-panel{background:#1a3448;border-color:#385569;color:#daebf4}
+html[data-theme="dark"] .video-panel small{color:#afc6d2}
+@media(max-width:580px){.reader-layout{grid-template-columns:1fr;gap:8px}.reader-layout .video-panel{position:static;margin-top:10px;padding:12px}.video-panel h3{margin-bottom:4px}}
+
+/* v25 semester A comprehensive reading layout */
+.lesson-expanded{margin:16px 0;padding:13px 16px;border-left:3px solid #317c9a;background:rgba(45,130,158,.055);border-radius:0 11px 11px 0}
+.lesson-expanded h3{margin:0 0 9px;font-size:1rem}
+.lesson-expanded p{margin:0;line-height:1.75;font-size:.95rem}
+.chapter-toc{margin:15px 0 18px}
+.chapter-toc-links{padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px}
+.chapter-toc-links a{display:block;font-size:.86rem;padding:9px 11px;border-radius:8px;background:rgba(48,130,158,.06);color:var(--link,#167da5);text-decoration:none}
+.chapter-toc-links a:focus-visible,.chapter-toc-links a:hover{text-decoration:underline;outline-offset:2px}
+.chapter-direct-link{font-size:.82rem;margin-left:9px;color:#587789;text-decoration:none}
+@media(max-width:640px){.chapter-toc-links{grid-template-columns:1fr}.lesson-expanded{padding:12px}}
+html[data-theme="dark"] .lesson-expanded{background:#173242}
+html[data-theme="dark"] .chapter-toc-links a{background:#193647;color:#bddde9}
+
+/* v26 exam-first SAΕΚ study, video area held for a later release */
+.reader-layout{display:block!important;grid-template-columns:1fr!important}
+.reader-layout>.reader-main{width:100%;min-width:0}
+.lesson-more{margin:11px 0 13px;border:1px solid var(--line,#d9e5ec);border-radius:10px;overflow:hidden}
+.lesson-more>summary{padding:9px 12px;cursor:pointer;font-size:.85rem;color:var(--link,#287595);font-weight:600}
+.lesson-more>p,.lesson-more>h3{padding:0 13px;margin:9px 0;line-height:1.55}
+.lesson-more>h3{font-size:.9rem}
+.lesson-sos{border-left:3px solid #287f9f;padding:11px 13px;margin:12px 0;background:rgba(43,126,160,.055);border-radius:0 8px 8px 0;font-size:.91rem;line-height:1.55}
+.reader-chapters .reader-fold>.body{padding-top:13px}
+.reader-chapters .reader-fold>summary{min-height:44px}
+@media(max-width:640px){.lesson-sos{padding:10px 11px}}
+html[data-theme="dark"] .lesson-sos{background:#193747;border-left-color:#79c2db}
+html[data-theme="dark"] .lesson-more{border-color:#365668}
+html[data-theme="dark"] .lesson-more>summary{color:#aad8ef}
