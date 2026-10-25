@@ -1,27 +1,23 @@
-/* PWA update lifecycle: detect automatically, apply only after user approval and checkpoint. */
+/* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
- const CURRENT='27.1.11';let reg=null,changed=false,prompted=false;let serverVersion=null;
- const $=id=>document.getElementById(id);
- function display(msg,showButton){const box=$('updateBanner');if(!box)return;box.hidden=false;$('updateDescription').textContent=msg;$('applyUpdate').hidden=!showButton;}
- async function detect(){try{if(reg)await reg.update();if(reg.waiting&&navigator.serviceWorker.controller){prompted=true;display('Νέα έκδοση διαθέσιμη. Η πρόοδός σου θα αποθηκευτεί πριν εφαρμοστεί.',true);return}const r=await fetch('./version.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j.version!==CURRENT){serverVersion=j.version;display('Νέα έκδοση v'+j.version+' διαθέσιμη. Πάτησε «Ενημέρωση τώρα».',true)}}catch(e){/* Offline: keep running installed app */}}
- async function apply(){const btn=$('applyUpdate');if(!btn)return;btn.disabled=true;const desc=$('updateDescription');desc.textContent='Αποθήκευση προόδου πριν από την ενημέρωση...';try{const good=await Promise.race([Promise.resolve().then(()=>window.EkabProgress?.flush?.() ?? true).catch(()=>false),new Promise(resolve=>setTimeout(()=>resolve(false),4000))]);if(!good){desc.textContent='Η πρόσθετη αποθήκευση δεν ολοκληρώθηκε. Εξήγαγε πρώτα την πρόοδο σε JSON. Η ενημέρωση δεν διαγράφει τα τοπικά δεδομένα.';btn.disabled=false;return} // localStorage keys stay untouched by service worker updates.
-  if(reg?.waiting){reg.waiting.postMessage({type:'SKIP_WAITING'});desc.textContent='Ενεργοποίηση ενημέρωσης…';setTimeout(()=>{if(!changed){btn.disabled=false;desc.textContent='Ανανέωσε τη σελίδα για να φορτώσει η νέα έκδοση.'}},4000);return}
-  if(serverVersion&&serverVersion!==CURRENT){desc.textContent='Φόρτωση νέας έκδοσης…';window.location.replace('./index.html?appVersion='+encodeURIComponent(serverVersion)+'&reload='+Date.now());setTimeout(()=>{btn.disabled=false},5000);return}
-  await detect();desc.textContent='Δεν έχει ολοκληρωθεί η λήψη της έκδοσης. Δοκίμασε ξανά όταν έχεις σύνδεση.';btn.disabled=false;
- }catch(e){desc.textContent='Η ενημέρωση δεν εφαρμόστηκε. Η πρόοδος παραμένει αποθηκευμένη.';btn.disabled=false}}
- async function start(){const theme=$('themeToggle');if(theme){const updateTheme=()=>{let dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{let next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}updateTheme()};updateTheme()}
-  if($('currentAppVersion'))$('currentAppVersion').textContent='v'+CURRENT;
-  if($('footerAppVersion'))$('footerAppVersion').textContent='v'+CURRENT;
-  $('checkAppUpdates')?.addEventListener('click',checkVisible);
-  $('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
-  if(!('serviceWorker'in navigator)||location.protocol==='file:')return;
-  try{reg=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(changed)return;changed=true;window.location.reload()});
-    if(reg.waiting&&navigator.serviceWorker.controller)display('Νέα έκδοση διαθέσιμη.',true);
-    reg.addEventListener('updatefound',()=>{let w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller){prompted=true;display('Μια νέα έκδοση είναι έτοιμη. Ενημέρωσε όταν θέλεις.',true)}})});
-    detect();window.addEventListener('online',detect);window.addEventListener('focus',detect);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')detect()});setInterval(detect,30*60*1000);
-  }catch(e){console.warn('Η ενημέρωση PWA δεν είναι διαθέσιμη',e)}
- }
- async function checkVisible(){const out=$('updateCheckStatus');if(out)out.textContent='Έλεγχος έκδοσης v'+CURRENT+'…';try{if(reg)await reg.update();const r=await fetch('./version.json?check='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Αδυναμία λήψης έκδοσης');const j=await r.json();if(!j.version)throw Error('Μη έγκυρη απάντηση');serverVersion=j.version;if(out)out.textContent=j.version===CURRENT?'Έχεις την τελευταία έκδοση: v'+CURRENT+'.':'Εγκατεστημένη: v'+CURRENT+' · Διαθέσιμη: v'+j.version+'.';if(j.version!==CURRENT){display('Νέα έκδοση v'+j.version+' διαθέσιμη. Πάτησε «Ενημέρωση τώρα» για ασφαλή ανανέωση.',true);await detect()}}catch(e){if(out)out.textContent='Τρέχουσα έκδοση: v'+CURRENT+'. Δεν ήταν δυνατός ο διαδικτυακός έλεγχος.'}}
- window.EkabUpdates={check:checkVisible};
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+const CURRENT='27.1.13', $=id=>document.getElementById(id);
+let registration=null,remoteVersion=null,applying=false;
+function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
+function report(message){const e=$('updateCheckStatus');if(e)e.textContent=message;}
+async function remote(){const response=await fetch('./version.json?nocache='+Date.now(),{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(!/^\d+\.\d+\.\d+$/.test(data.version||''))throw Error('invalid version');return data.version;}
+async function check(){try{if(registration)await Promise.race([registration.update(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),10000))]);remoteVersion=await remote();report('Τρέχουσα έκδοση: v'+CURRENT+' · Διαθέσιμη: v'+remoteVersion);if(remoteVersion!==CURRENT||registration?.waiting&&navigator.serviceWorker.controller)show('Διαθέσιμη ενημέρωση v'+remoteVersion+'. Πάτησε «Ενημέρωση τώρα».',true);else{$('updateBanner')?.setAttribute('hidden','');report('Έχεις την τελευταία έκδοση: v'+CURRENT+'.')}}catch(e){report('Έκδοση v'+CURRENT+' · Ο έλεγχος απέτυχε. Δοκίμασε ξανά με internet.');}}
+async function apply(){if(applying)return;applying=true;const b=$('applyUpdate'),d=$('updateDescription');b.disabled=true;d.textContent='Προετοιμασία ενημέρωσης…';try{
+if(!registration&&'serviceWorker'in navigator)registration=await navigator.serviceWorker.getRegistration('./');
+if(registration){await Promise.race([registration.update(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),10000))]);}
+if(registration?.waiting){d.textContent='Ενεργοποίηση νέας έκδοσης…';registration.waiting.postMessage({type:'SKIP_WAITING'});await Promise.race([new Promise(resolve=>navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true})),new Promise(resolve=>setTimeout(resolve,4500))]);}
+d.textContent='Ανανέωση εφαρμογής…';location.reload();
+}catch(e){d.textContent='Η ενημέρωση δεν ολοκληρώθηκε. Η πρόοδός σου παραμένει στη συσκευή. Δοκίμασε ξανά.';b.disabled=false;applying=false;}}
+async function start(){
+const theme=$('themeToggle');if(theme){const sync=()=>{const dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}sync()};sync();}
+if($('currentAppVersion'))$('currentAppVersion').textContent='v'+CURRENT;if($('footerAppVersion'))$('footerAppVersion').textContent='v'+CURRENT;
+$('checkAppUpdates')?.addEventListener('click',check);$('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
+if(!('serviceWorker'in navigator)||location.protocol==='file:'){report('Έκδοση v'+CURRENT+' · Ο offline μηχανισμός δεν υποστηρίζεται εδώ.');return}
+try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying)return;location.reload()});registration.addEventListener('updatefound',()=>{const worker=registration.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)check()})});await check();window.addEventListener('online',check);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()})}catch(e){report('Έκδοση v'+CURRENT+' · Αδυναμία εγγραφής ενημερώσεων.');}}
+window.EkabUpdates={check};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
