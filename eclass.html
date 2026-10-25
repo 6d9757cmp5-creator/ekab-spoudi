@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="el">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#153c54">
+ <meta name="description" content="Επίσημο eClass ΕΚΑΒ μέσα από την εφαρμογή ΕΚΑΒ Σπουδή.">
+ <link rel="manifest" href="manifest.webmanifest">
+ <link rel="stylesheet" href="styles.css">
+ <script src="theme-init.js"></script>
+ <title>eClass ΕΚΑΒ — ΕΚΑΒ Σπουδή</title>
+</head>
+<body>
+ <header class="top"><div class="container">
+  <div class="header-row">
+   <div class="brand"><div aria-hidden="true" class="logo">✚</div><div><h1>ΕΚΑΒ Σπουδή</h1><p>Διασώστης – Πλήρωμα Ασθενοφόρου</p></div></div>
+   <div class="utility" role="group" aria-label="Γρήγορες ρυθμίσεις"><button class="utility-button" id="themeToggle" type="button" aria-label="Ενεργοποίηση σκοτεινού θέματος" title="Σκούρο θέμα">◐</button></div>
+  </div>
+  <nav class="nav" aria-label="Κύριες ενότητες"><a href="index.html">Θεωρία ΕΟΠΠΕΠ</a><a href="practical_exam.html">Πρακτικό ΕΟΠΠΕΠ</a><a class="active" href="saek.html">Κατάρτιση ΣΑΕΚ</a></nav>
+ </div></header>
+ <aside aria-live="polite" class="update-banner" id="updateBanner" hidden><div class="update-inner"><div><strong>Ενημέρωση εφαρμογής</strong><p id="updateDescription">Υπάρχει διαθέσιμη νέα έκδοση.</p></div><div class="update-actions"><button type="button" class="btn compact" id="applyUpdate">Ενημέρωση τώρα</button><button type="button" class="btn compact ghost" id="dismissUpdate">Αργότερα</button></div></div></aside>
+ <main class="main">
+  <p class="reader-breadcrumb"><a href="saek.html">← Πίσω στα μαθήματα ΣΑΕΚ</a></p>
+  <section class="panel eclass-card">
+   <p class="eyebrow">Επίσημη πλατφόρμα καθηγητών</p>
+   <h2>eClass ΕΚΑΒ</h2>
+   <p class="small muted">Εδώ εμφανίζεται ο <strong>επίσημος ιστότοπος του ΕΚΑΒ</strong>, όχι αντίγραφο της φόρμας σύνδεσης.</p>
+   <div class="eclass-toolbar">
+    <a class="btn secondary compact" href="saek.html">← Επιστροφή στην εφαρμογή</a>
+    <a class="btn compact" href="https://www.ekab.gr/eclass/" target="_blank" rel="noopener noreferrer">Άνοιγμα στο Safari ↗</a>
+   </div>
+   <p class="small muted" id="eclassNotice">Αν το eClass δεν εμφανίζεται στο παρακάτω πλαίσιο ή δεν επιτρέπει σύνδεση, πάτησε «Άνοιγμα στο Safari». Η ενσωμάτωση και η διάρκεια της σύνδεσης καθορίζονται από το ΕΚΑΒ και τον browser.</p>
+   <iframe class="eclass-frame" title="Επίσημη πλατφόρμα eClass ΕΚΑΒ — www.ekab.gr" src="https://www.ekab.gr/eclass/" referrerpolicy="no-referrer"></iframe>
+   <p class="small muted">Ασφάλεια: πληκτρολόγησε τους κωδικούς σου μόνο στον επίσημο ιστότοπο <strong>www.ekab.gr</strong>. Η ΕΚΑΒ Σπουδή δεν ζητά, δεν διαβάζει και δεν αποθηκεύει τους κωδικούς σου. Η διατήρηση σύνδεσης εξαρτάται από τα cookies και τις ρυθμίσεις του eClass.</p>
+  </section>
+ </main>
+ <script defer src="updates.js"></script>
+</body>
+</html>
