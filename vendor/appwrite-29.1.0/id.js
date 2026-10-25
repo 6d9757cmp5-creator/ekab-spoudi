@@ -1,0 +1,2 @@
+var t,r;"function"==typeof SuppressedError&&SuppressedError;class e{static custom(t){return t}static unique(e=7){const o=function(r,e,o,n){if("function"==typeof t?r!==t||!n:!t.has(r))throw new TypeError("Cannot read private member from an object whose class did not declare it");return n}(t,0,0,r).call(t);let n="";for(let t=0;t<e;t++)n+=Math.floor(16*Math.random()).toString(16);return o+n}}t=e,r=function(){const t=new Date,r=Math.floor(t.getTime()/1e3),e=t.getMilliseconds();return r.toString(16)+e.toString(16).padStart(5,"0")};export{e as ID};
+//# sourceMappingURL=id.js.map

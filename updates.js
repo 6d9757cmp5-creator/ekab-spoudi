@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.28', $=id=>document.getElementById(id);
+const CURRENT='27.1.29', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
 function report(message){const e=$('updateCheckStatus');if(e)e.textContent=message;}
@@ -22,3 +22,11 @@ try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCach
 window.EkabUpdates={check};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
+// Optional cloud setup never blocks the local app or update controls.
+import(new URL('./appwrite-client.js', document.currentScript.src).href)
+  .then(({ startAppwrite }) => startAppwrite())
+  .catch(() => {
+    document.querySelectorAll('[data-appwrite-status]').forEach(el => {
+      el.textContent = 'Appwrite: μη διαθέσιμο. Η μελέτη συνεχίζεται τοπικά.';
+    });
+  });
