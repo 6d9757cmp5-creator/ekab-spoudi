@@ -42,3 +42,28 @@ html[data-theme="dark"] .saek-compact-toc .chapter-toc-links{background:#132639;
 .saek-phys-figure figcaption{color:#244255!important;font-size:1rem!important;font-weight:500;line-height:1.55}
 .saek-phys-map-go{display:block;margin:12px 12px 18px;border:0;border-radius:11px;padding:13px 16px;background:#176189!important;color:#fff!important;font-size:1rem;font-weight:750;cursor:pointer}
 @media(max-width:500px){.saek-learning-chapter-map{padding:9px}.saek-learning-figure{margin:10px 2px}.saek-learning-figure figcaption{font-size:.98rem}}
+
+/* Greek-labelled source images — opt-in chapter fold, never alter anatomy. */
+.saek-source-section{margin:18px 0;padding:0;border:1px solid #a9c8d9;border-radius:14px;background:#fff;color:#163446;overflow:hidden}
+.saek-source-summary{display:list-item;cursor:pointer;padding:13px 17px;background:#e7f2f8;color:#12374c;font-weight:750;font-size:1rem;line-height:1.5}
+.saek-source-section[open]>.saek-source-summary{border-bottom:1px solid #a9c8d9}
+.saek-source-note{font-size:.9rem;line-height:1.5;margin:13px 14px;color:#304c5b}
+.saek-source-figure{margin:14px;border:1px solid #d3e2e9;border-radius:12px;padding:12px;background:#fff;color:#1a3445;overflow:hidden}
+.saek-source-title{margin:0 0 12px;font-size:1.08rem;line-height:1.45;color:#173449}
+.saek-source-image{display:block;width:100%;max-width:760px;height:auto;max-height:700px;object-fit:contain;margin:0 auto;border-radius:8px;background:#fff}
+.saek-source-image[hidden],.saek-source-action[hidden]{display:none!important}
+.saek-source-caption{font-size:1rem;line-height:1.6;margin:12px 0;color:#163446}
+.saek-source-credit{font-size:.87rem;line-height:1.55;margin:8px 0;color:#334f60}
+.saek-source-credit a{color:#065c88;text-decoration:underline}
+.saek-source-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+.saek-source-action{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;background:#e9f4fa;color:#164263!important;border:1px solid #8bb3cc;border-radius:10px;font:inherit;font-weight:700;font-size:.93rem;text-decoration:none;cursor:pointer}
+.saek-source-action:focus-visible{outline:3px solid #256c9a;outline-offset:2px}
+.saek-source-fallback{font-size:.94rem;color:#6d2b21}
+.saek-source-dialog{border:0;border-radius:13px;padding:0;width:min(96vw,1050px);max-width:96vw;max-height:94vh;background:#fff;color:#172f40;box-shadow:0 18px 60px #0009}
+.saek-source-dialog::backdrop{background:rgba(5,20,35,.8)}
+.saek-source-dialog-bar{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;background:#e4f1f8;padding:10px}
+.saek-source-close{font:inherit;font-weight:750;background:#173b54;color:#fff;border:0;border-radius:9px;min-height:44px;padding:8px 16px}
+.saek-source-zoom-frame{overflow:auto;max-height:calc(94vh - 65px);padding:8px;touch-action:pan-x pan-y}
+.saek-source-full{display:block;width:max(650px,100%);height:auto;max-width:none;margin:0 auto;background:#fff}
+@media(max-width:400px){.saek-source-figure{margin:10px;padding:9px}.saek-source-summary{padding:12px}.saek-source-image{max-height:620px}}
+html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-source-figure{background:#fff!important;color:#163446!important}
