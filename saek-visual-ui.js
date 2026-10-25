@@ -19,3 +19,5 @@ document.querySelectorAll('img.course-diagram').forEach(img=>{
  img.insertAdjacentElement('afterend',caption);
 });
 })();
+/* Topic-specific illustrations for all SAEK lessons. */
+(function(){'use strict';if(!/saek-course-\d{2}\.html$/.test(location.pathname)||/saek-course-02\.html$/.test(location.pathname))return;const script=document.createElement('script');script.src='saek-learning-maps.js';script.defer=true;document.body.append(script)})();
