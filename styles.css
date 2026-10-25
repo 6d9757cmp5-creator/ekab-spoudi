@@ -133,3 +133,55 @@ html[data-theme="dark"] .lesson-process>summary{color:#eaf3f8}
 @media(max-width:430px){.eclass-toolbar .btn{flex:1 1 100%}.eclass-frame{height:72vh;min-height:390px}}
 \n.pdf-item{display:flex;flex-direction:column;gap:8px;padding:14px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.pdf-item:last-child{border-bottom:0}.pdf-item .actions{margin-top:0}\n
 .pdf-reader-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:12px 0}.pdf-canvas-host{width:100%;overflow:hidden;background:#e8edf2;border-radius:12px;padding:6px;text-align:center}.pdf-canvas-host canvas{display:block;max-width:100%;height:auto;margin:0 auto;background:white}@media(max-width:430px){.pdf-reader-controls .btn{font-size:.8rem;padding:8px}}
+
+
+/* v27.1.25 — Responsive desktop/tablet shell; existing mobile layout stays intact. */
+@media (min-width:720px) and (max-width:959px) {
+ .container,.main,.update-banner,.recovery-banner{max-width:920px}
+ .container,.main{padding-left:22px;padding-right:22px}
+}
+@media (min-width:960px) {
+ .container,.main,.update-banner,.recovery-banner{max-width:1180px}
+ .container{padding-left:30px;padding-right:30px}
+ .main{padding:28px 30px 90px}
+ .top{padding-top:14px}
+ .top>.container{display:flex;align-items:center;justify-content:space-between;gap:24px}
+ .top>.container>.header-row,.top>.container>.brand{flex:1 1 auto;min-width:0}
+ .top .nav{flex:0 0 auto;display:flex;align-items:center;gap:12px;margin-top:0}
+ .top .nav a,.top .nav button{padding:18px 8px;font-size:.88rem;white-space:nowrap}
+ .header-row .brand h1{font-size:1.35rem}
+ .header-row .brand p{font-size:.8rem}
+ .panel{padding:26px;margin-bottom:18px}
+ .panel h2{font-size:1.3rem}
+ .fold{margin-bottom:18px}
+ .stats{gap:12px}
+ .stat{padding:18px 10px}
+ .stat b{font-size:1.65rem}
+ .stat span{font-size:.8rem}
+ #homeView{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,1fr);align-items:start;gap:18px}
+ #homeView>*{min-width:0}
+ #homeView>.panel:first-child{grid-column:1;grid-row:1/span 2;margin-bottom:0}
+ #homeView>.fold{margin-bottom:0}
+ #homeView>.intro-note{grid-column:1/-1}
+ #examView{max-width:1020px;margin-left:auto;margin-right:auto}
+ #examView .qtitle{font-size:1.35rem;line-height:1.48}
+ #examView textarea{min-height:190px}
+ .course-section .course-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+ .course-section .course-tile{min-width:0;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:13px;transition:border-color .15s ease,transform .15s ease}
+ .course-section .course-tile:last-child{border-bottom:1px solid var(--line)}
+ .course-section .course-tile:hover{border-color:var(--blue);transform:translateY(-1px)}
+ .course-section .course-tile:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+ html[data-theme="dark"] .course-section .course-tile{background:#1b3345}
+ .main.reader-main{max-width:1020px}
+ .reader-layout .reader-main{max-width:100%}
+ .chapter-toc-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .eclass-frame{height:min(78vh,920px)}
+ .main img,.main video,.main canvas{max-width:100%}
+}
+@media (min-width:1280px){
+ .course-section .course-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){
+ .course-section .course-tile{transition:none}
+ .course-section .course-tile:hover{transform:none}
+}
