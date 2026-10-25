@@ -84,4 +84,16 @@ if(location.hash.startsWith('#lesson-')){
  chapters.forEach((ch,i)=>ch.addEventListener('toggle',()=>{if(ch.open&&i!==index)select(i,false)}));
  select(index,false);
 })();
-</script><style>.saek-visual-fold{margin:0}.saek-visual-fold>summary{cursor:pointer;font-weight:700;font-size:1.05rem;padding:4px 0}.saek-visual-fold[open]>summary{margin-bottom:12px}</style><script>(function(){document.querySelectorAll('section.panel').forEach(section=>{if(!section.querySelector('img.course-diagram'))return;const heading=section.querySelector('h2');if(!heading)return;const details=document.createElement('details');details.className='saek-visual-fold';const summary=document.createElement('summary');summary.textContent=heading.textContent;details.append(summary);heading.remove();while(section.firstChild)details.append(section.firstChild);section.append(details);});})();</script><script src="saek-visual-ui.js"></script></body></html>
+</script><style>.saek-visual-fold{margin:0}.saek-visual-fold>summary{cursor:pointer;font-weight:700;font-size:1.05rem;padding:4px 0}.saek-visual-fold[open]>summary{margin-bottom:12px}</style><script>(function(){document.querySelectorAll('section.panel').forEach(section=>{if(!section.querySelector('img.course-diagram'))return;const heading=section.querySelector('h2');if(!heading)return;const details=document.createElement('details');details.className='saek-visual-fold';const summary=document.createElement('summary');summary.textContent=heading.textContent;details.append(summary);heading.remove();while(section.firstChild)details.append(section.firstChild);section.append(details);});})();</script><script src="saek-visual-ui.js"></script><style>
+/* Εκπαιδευτικοί χάρτες Φυσιολογίας */
+.saek-phys-maps .saek-visual-fold>summary{font-weight:750;cursor:pointer}
+.saek-phys-entry{border:1px solid var(--line,#cfdee8);border-radius:12px;margin:11px 0;overflow:hidden;background:var(--surface,#fff)}
+.saek-phys-entry>summary{padding:14px 12px;cursor:pointer;font-weight:650;line-height:1.4}
+.saek-phys-entry[open]>summary{border-bottom:1px solid var(--line,#cfdee8)}
+.saek-phys-figure{margin:12px 0 20px;max-width:100%}
+.saek-phys-figure svg{width:100%;max-width:760px;display:block;margin:auto;height:auto;background:#f5f9fc;border-radius:12px}
+.saek-phys-figure figcaption{margin:10px 8px 0;color:var(--text,#263d4f);font-size:.93rem;line-height:1.5;text-align:left}
+.saek-phys-chapter-map{border:1px solid var(--line,#cfdee8);border-radius:13px;padding:12px;margin:18px 0;background:var(--surface,#fff)}
+.saek-phys-chapter-map h3{margin:0 0 10px;font-size:1.02rem}
+@media(max-width:480px){.saek-phys-chapter-map{padding:8px}.saek-phys-figure figcaption{font-size:.85rem}}
+</style><script src="saek-physiology-maps.js"></script></body></html>
