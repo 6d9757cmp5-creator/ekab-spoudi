@@ -1,24 +1,24 @@
 (function courseMapModule(){
 'use strict';
 const types={
-1:"body skeleton lungs organs brain+heart cell spine brain joints heart airway digestive kidney abdomen",
+1:"body skeleton lungs organs brain+heart cell spine brain+meninges joints heart upperair digestive kidney+pelvis abdomen",
 3:"team privacy safety transport privacy privacy ergonomic mental team mental",
-4:"hygiene infection population population pathogen pathogen hygiene disinfect vaccine sharps",
+4:"hygiene infection population population epi pathogen hygiene disinfect vaccine sharps",
 5:"safety abcde vital history safety abcde abcde airway blood brain vital history pain transport",
 6:"vital pain transport body skeleton lungs heart pain abcde team",
-7:"phone phone radio phone airway command phone mental radio digital phone",
-8:"digital radio privacy radio radio map privacy digital computer radio history",
+7:"phone phone radio phone phone+airway command phone mental radio digital phone",
+8:"digital radio privacy radio radio map privacy telemed computer radio history",
 9:"van drive safety drive brakes safety drive equipment van transport mental",
 10:"heart stroke lungs+allergy glucose+heat pregnancy abcde heart heart lungs lungs glucose allergy shock seizure medication abdomen kidney",
 11:"triage abcde transport abcde vital airway bleed team pain pregnancy equipment",
-12:"medication syringe medication vital medication medication medication allergy syringe oxygen medication medication",
+12:"medication syringe medication vital pharmacokinetics pharmacodynamics medication allergy syringe oxygen medication dose",
 13:"triage command phone triage digital command team digital triage hazard ed",
 14:"trauma bleed spine bandage abcde trauma lungs abdomen brain spine bandage burn heat history",
 15:"hazard triage zones hazard hazard command triage zones triage transport hazard radio team",
 16:"abcde vital team abcde abcde stroke cpr lungs allergy seizure pregnancy elder team",
 17:"equipment cpr team abcde history pain vital airway cpr oxygen heart stroke pregnancy",
 18:"trauma bleed transport trauma bleed bandage trauma spine lungs abdomen burn team team",
-19:"transport vital ed transport transport van oxygen vital airway transport pregnancy team digital",
+19:"transport vital ed transport transport van oxygen vital airway airtransport neonate team digital",
 20:"ed triage hygiene ed triage cpr team transport hygiene team vital team team"
 };
 const conceptNotes={
@@ -170,6 +170,30 @@ function svg(kind,title){
 }
 const kindLabels={
 body:"Ανατομικός προσανατολισμός",skeleton:"Οστά και σκελετός",lungs:"Πνεύμονες και αναπνοή",organs:"Κύρια όργανα",brain:"Εγκέφαλος και νεύρα",heart:"Καρδιά και κυκλοφορία",cell:"Κύτταρο",spine:"Σπονδυλική στήλη",joints:"Άρθρωση",airway:"Αναπνευστικές οδοί",digestive:"Πεπτικό σύστημα",kidney:"Νεφροί και ούρα",abdomen:"Περιοχές της κοιλιάς",team:"Παράδοση και ομάδα",privacy:"Εμπιστευτικότητα",safety:"Ασφάλεια σκηνής",transport:"Ασφαλής διακομιδή",ergonomic:"Εργονομία μεταφοράς",mental:"Ψυχολογική υποστήριξη",hygiene:"Υγιεινή χεριών",infection:"Μετάδοση λοιμώξεων",population:"Υγεία στον πληθυσμό",pathogen:"Μικροοργανισμοί",disinfect:"Καθαρισμός και απολύμανση",vaccine:"Εμβολιασμός",sharps:"Ασφαλής απόρριψη αιχμηρών",abcde:"Πρωτογενής εκτίμηση",vital:"Ζωτικά σημεία",history:"Συλλογή ιστορικού",blood:"Αιμάτωση και αίμα",pain:"Εκτίμηση πόνου",phone:"Επείγουσα κλήση",radio:"Ασύρματη επικοινωνία",command:"Συντονισμός πληρωμάτων",digital:"Ψηφιακό δελτίο",map:"Διαδρομή περιστατικού",computer:"Πληροφοριακό σύστημα",van:"Ασθενοφόρο",drive:"Οδική ασφάλεια",brakes:"Απόσταση ακινητοποίησης",equipment:"Εξοπλισμός",glucose:"Μετρητής γλυκόζης",heat:"Θερμορύθμιση",pregnancy:"Ειδικές ομάδες",stroke:"Αναγνώριση εγκεφαλικού",allergy:"Αναφυλαξία",shock:"Αιμάτωση και σοκ",seizure:"Επιληπτική κρίση",medication:"Φάρμακα και ασφάλεια",syringe:"Οδοί χορήγησης",oxygen:"Παροχή οξυγόνου",bleed:"Αιμορραγία",trauma:"Μηχανισμός κάκωσης",bandage:"Επίδεση και νάρθηκας",burn:"Εγκαύματα",triage:"Διαλογή περιστατικών",zones:"Ζώνες μαζικού συμβάντος",hazard:"Επικίνδυνη περιοχή",cpr:"Βασική αναζωογόνηση",ed:"Τμήμα Επειγόντων",elder:"Ηλικιωμένος ασθενής"};
+
+/* Εξειδικευμένα οπτικά θέματα, ώστε οι εικόνες να ακολουθούν την ύλη. */
+shapes.epi=()=>L(107,309,448,309,"#235d7a",5)+L(107,309,107,126,"#235d7a",5)+P("M113 300Q166 290 193 264Q223 223 253 187Q291 142 322 174Q351 213 377 266Q413 292 447 295","none","#c14b65",9)+T(273,357,"Χρόνος",22)+T(63,192,"Κρούσματα",17)+T(312,116,"Ενδεικτική καμπύλη",20);
+shapes.pharmacokinetics=()=>R(34,153,104,111,"#e5f3f7","#347895",14)+P("M73 168V209Q104 194 106 226","none","#b97565",12)+R(154,153,104,111,"#e5f3f7","#347895",14)+P("M165 215H246","none","#b14558",17)+P("M263 193Q318 152 358 194Q364 238 301 237Q264 235 263 193Z","#d9ad88","#a67558",3)+P("M386 181Q371 158 364 201Q361 257 397 257Q425 260 426 220Q421 198 438 181Z","#d4a4aa","#a3666c",3)+T(86,287,"Απορρόφηση",18)+T(205,287,"Κατανομή",18)+T(317,286,"Ήπαρ",19)+T(410,285,"Νεφρός",19)+L(142,209,154,209,"#2a7da2",5)+L(260,209,277,209,"#2a7da2",5)+L(356,209,366,209,"#2a7da2",5)+T(271,350,"Μεταβολισμός → Αποβολή",20);
+shapes.pharmacodynamics=()=>C(188,200,84,"#d9eff0","#3d8b93",4)+P("M236 139Q298 146 305 176L307 220Q282 248 239 256L218 240Q239 226 245 208Q234 189 217 181Z","#c0a0d5","#835da0",4)+P("M372 149L391 183L374 218L342 206L332 173Z","#f6be78","#b67939",4)+L(355,215,315,231,"#2b7390",4)+T(432,129,"Φάρμακο",20)+T(419,280,"Υποδοχέας",20)+T(193,341,"Κυτταρική απάντηση",19);
+shapes.dose=()=>R(101,120,116,191,"#e6f3fa","#367594",12,5)+R(122,93,74,26,"#bcd7e2","#367594",5)+T(159,230,"mg",27)+R(270,131,153,170,"#ecf3f8","#367594",11)+R(290,153,113,52,"#fff","#9dbcc9",6,2)+T(345,189,"mL",26)+T(346,261,"÷  ×",28)+T(265,365,"Έλεγχος μονάδων",20);
+shapes.telemed=()=>screen(75,130).replace('translate(75 130)','translate(62 142) scale(.66)')+R(343,142,143,172,"#e5f3f7","#3d7995",14)+C(412,188,24,"#d2e9f0","#3d7995")+P("M369 273Q370 222 410 220Q449 222 454 273Z","#c3e1e9","#3d7995",3)+P("M268 221Q310 170 351 224","none","#247cac",5)+T(413,342,"Εξ αποστάσεως ιατρός",18);
+shapes.airtransport=()=>P("M103 223L241 223L275 190L393 190L436 224L470 224L452 244L117 244Z","#d6e9f0","#306d8d",4)+R(225,184,81,31,"#d8eef6","#306d8d",5)+L(227,143,332,143,"#306d8d",6)+L(279,143,279,186,"#306d8d",5)+L(123,259,431,259,"#306d8d",5)+T(272,318,"Αεροδιακομιδή",22);
+shapes.neonate=()=>R(100,151,339,153,"#e2f2f8","#357b97",35,5)+R(121,164,297,126,"#f7fbfc","#7ba5b7",29,3)+C(227,211,27,"#f1d3be","#a98169",3)+P("M247 210Q305 176 362 222L348 255H247Z","#badbe5","#5c91a8",3)+L(157,309,157,342,"#357b97",6)+L(398,309,398,342,"#357b97",6)+T(270,375,"Νεογνική θερμοκοιτίδα",20);
+shapes.upperair=()=>P("M174 116Q241 92 279 149Q285 173 270 195L241 207L239 262L203 302L157 293L176 238L148 190Q139 146 174 116Z","#eed6c7","#aa8575",4)+P("M158 159Q205 131 242 161Q229 183 201 178L169 180","none","#4c90a2",7)+P("M172 211Q209 205 238 221L249 268","none","#4c90a2",8)+P("M248 264V337","none","#4c90a2",12)+T(417,147,"Ρινική κοιλότητα",19)+L(261,157,349,148)+T(414,227,"Φάρυγγας",21)+L(255,215,367,226)+T(417,319,"Τραχεία",22)+L(260,320,375,319);
+shapes.meninges=()=>C(270,204,115,"#f5eef7","#8a7c9a",9)+C(270,204,92,"#e8dae9","#a987b6",7)+C(270,204,71,"#e4c9de","#c399b3",6)+P("M221 223Q211 180 256 170Q290 137 328 182Q350 224 297 257Q254 267 221 223Z","#d1a0bf","#9e689b",4)+T(437,140,"Κρανίο",22)+L(351,134,386,139)+T(428,212,"Μήνιγγες",21)+L(365,211,383,211)+T(421,294,"Εγκέφαλος",21)+L(320,276,381,286);
+shapes.pelvis=()=>P("M239 143Q225 112 198 138Q200 166 235 171L256 212L256 291","none","#b77b92",10)+P("M281 143Q298 112 326 138Q323 166 284 171L264 211L264 291","none","#b77b92",10)+P("M246 182Q260 173 274 182L288 253Q262 294 233 253Z","#e8b7c7","#b77b92",4)+C(196,138,13,"#e7c19d","#b77b92",3)+C(326,138,13,"#e7c19d","#b77b92",3)+T(431,160,"Ωοθήκες",21)+L(340,151,389,153)+T(435,266,"Μήτρα",22)+L(291,247,388,264);
+conceptNotes.epi="Οι καμπύλες επιδημίας απεικονίζουν την εξέλιξη κρουσμάτων στον χρόνο· το σχήμα είναι υποθετικό και δεν παρουσιάζει πραγματικά δεδομένα.";
+conceptNotes.pharmacokinetics="Φαρμακοκινητική: απορρόφηση, κατανομή, μεταβολισμός και αποβολή. Ο χρόνος και η έκταση διαφέρουν ανά φάρμακο και οδό.";
+conceptNotes.pharmacodynamics="Φαρμακοδυναμική: η αλληλεπίδραση ενός φαρμάκου με στόχους όπως υποδοχείς μεταβάλλει τη λειτουργία κυττάρων.";
+conceptNotes.dose="Πριν από κάθε υπολογισμό δόσης επιβεβαιώνονται συγκέντρωση, μονάδες, προβλεπόμενη οδός και ισχύον πρωτόκολλο.";
+conceptNotes.telemed="Στην τηλεϊατρική μεταφέρονται πληροφορίες ή μετρήσεις για εκτίμηση από απομακρυσμένο επαγγελματία υγείας.";
+conceptNotes.airtransport="Η αεροδιακομιδή απαιτεί ειδική οργάνωση, ασφαλή φόρτωση, κατάλληλη υποστήριξη και συντονισμό.";
+conceptNotes.neonate="Η νεογνική διακομιδή απαιτεί ειδικό εξοπλισμό και συνεχή παρακολούθηση της θερμικής και κλινικής κατάστασης.";
+conceptNotes.upperair="Οι ανώτεροι αεραγωγοί περιλαμβάνουν ρινική κοιλότητα και φάρυγγα, ενώ η τραχεία αποτελεί τμήμα των κατώτερων αεραγωγών.";
+conceptNotes.meninges="Οι μήνιγγες περιβάλλουν τον εγκέφαλο και τον νωτιαίο μυελό. Τα στρώματα παρουσιάζονται σχηματικά και όχι σε κλίμακα.";
+conceptNotes.pelvis="Απλοποιημένη εικόνα της μήτρας και των ωοθηκών· η αναπαραγωγική ανατομία διακρίνεται από την ουροποιητική.";
+Object.assign(kindLabels,{epi:"Επιδημιολογική καμπύλη",pharmacokinetics:"Η διαδρομή του φαρμάκου",pharmacodynamics:"Δράση φαρμάκου στον στόχο",dose:"Μονάδες και δόσεις",telemed:"Τηλεϊατρική",airtransport:"Εναέρια μεταφορά",neonate:"Νεογνική διακομιδή",upperair:"Ανώτεροι αεραγωγοί",meninges:"Εγκέφαλος και μήνιγγες",pelvis:"Αναπαραγωγικό σύστημα"});
+const bilingual={body:"anterior / posterior — πρόσθιο / οπίσθιο",skeleton:"bone — οστό",lungs:"lungs — πνεύμονες",heart:"heart — καρδιά",pain:"pain — πόνος",abcde:"assessment — εκτίμηση",vital:"vital signs — ζωτικά σημεία",transport:"transport — διακομιδή",triage:"triage — διαλογή",airway:"airway — αεραγωγός",bleed:"bleeding — αιμορραγία",team:"handover — παράδοση",equipment:"equipment — εξοπλισμός",pregnancy:"pregnancy — εγκυμοσύνη"};
 const num=Number(location.pathname.match(/saek-course-(\d{2})\.html/)?.[1]);if(!num||!types[num])return;
 const chapterNodes=[...document.querySelectorAll('.reader-chapters > details.reader-fold')];
 const keys=types[num].trim().split(/\s+/);
@@ -188,7 +212,7 @@ function navigate(n){
 }
 function oneIllustration(kind,title){
  const fig=document.createElement('figure');fig.className='saek-learning-figure';fig.innerHTML=svg(kind,title);
- const caption=document.createElement('figcaption');caption.textContent=conceptNotes[kind]||"Εκπαιδευτική απεικόνιση σχετική με το κεφάλαιο.";fig.append(caption);
+ const caption=document.createElement('figcaption');caption.textContent=(conceptNotes[kind]||"Εκπαιδευτική απεικόνιση σχετική με το κεφάλαιο.")+((num===6||num===11)&&bilingual[kind]?"  |  "+bilingual[kind]:"");fig.append(caption);
  return fig;
 }
 chapterNodes.forEach((chapter,i)=>{
