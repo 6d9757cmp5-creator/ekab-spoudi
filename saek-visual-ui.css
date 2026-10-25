@@ -1,0 +1,13 @@
+/* SAEK consistent compact heading and responsive educational diagrams */
+.saek-lesson-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 10px}
+.saek-lesson-heading .reader-title{margin:0;flex:1 1 200px;min-width:0}
+.saek-compact-toc{position:relative;margin:0!important;flex:0 0 auto;max-width:100%;z-index:20}
+.saek-compact-toc>summary{list-style:none;cursor:pointer;padding:8px 12px!important;border:1px solid var(--line,#d3e0e9);border-radius:12px;font-size:.86rem!important;font-weight:650;white-space:nowrap}
+.saek-compact-toc>summary::-webkit-details-marker{display:none}
+.saek-compact-toc .chapter-toc-links{position:absolute;top:calc(100% + 6px);right:0;width:min(340px,86vw);max-height:55vh;overflow-y:auto;background:var(--surface,#12283b);color:var(--text,#fff);border:1px solid var(--line,#d3e0e9);border-radius:12px;box-shadow:0 10px 26px #0004;padding:10px;z-index:30}
+.saek-compact-toc .chapter-toc-links a{display:block;padding:9px 8px}
+.saek-visual-figure{margin:14px 0 4px}
+.saek-topic-svg{display:block;width:100%;height:auto;max-width:720px;margin:0 auto;border-radius:12px}
+.saek-visual-figure figcaption,.saek-diagram-caption{margin:10px 0 2px;text-align:center}
+.saek-visual-fold>summary{cursor:pointer;font-weight:700}
+@media(max-width:430px){.saek-lesson-heading .reader-title{flex-basis:145px;font-size:1.18rem!important}.saek-compact-toc>summary{font-size:.78rem!important;padding:7px 9px!important}}
