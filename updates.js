@@ -1,6 +1,6 @@
 /* PWA update lifecycle: detect automatically, apply only after user approval and checkpoint. */
 (function(){'use strict';
- const CURRENT='27.1.4';let reg=null,changed=false,prompted=false;
+ const CURRENT='27.1.5';let reg=null,changed=false,prompted=false;
  const $=id=>document.getElementById(id);
  function display(msg,showButton){const box=$('updateBanner');if(!box)return;box.hidden=false;$('updateDescription').textContent=msg;$('applyUpdate').hidden=!showButton;}
  async function detect(){if(!reg)return;try{await reg.update();if(reg.waiting&&navigator.serviceWorker.controller){prompted=true;display('Νέα έκδοση διαθέσιμη. Η πρόοδός σου θα αποθηκευτεί πριν εφαρμοστεί.',true);return}const r=await fetch('./version.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j.version!==CURRENT&&navigator.serviceWorker.controller)display('Εντοπίστηκε νέα έκδοση '+j.version+'. Ολοκληρώνεται η λήψη...',false)}catch(e){/* Offline: keep running installed app */}}
