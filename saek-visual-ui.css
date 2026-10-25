@@ -20,3 +20,25 @@
 html[data-theme="dark"] .saek-compact-toc .chapter-toc-links{background:#132639;color:#e7f2f8}
 .saek-compact-toc .chapter-toc-links a{color:inherit;text-decoration:none;border-bottom:1px solid #7893a633}
 .saek-compact-toc .chapter-toc-links a:active,.saek-compact-toc .chapter-toc-links a:focus-visible{background:#84c8e522}
+
+/* Υψηλή αντίθεση και σωστή ανάγνωση εικόνων σε ανοιχτό και σκοτεινό θέμα */
+.saek-learning-gallery{margin:18px 0}
+.saek-learning-gallery>.saek-visual-fold>summary{font-size:1.08rem;font-weight:750;cursor:pointer;padding:8px 0}
+.saek-learning-entry{margin:12px 0;border:1px solid #b6cddc;border-radius:14px;overflow:hidden;background:#fff!important;color:#173449!important}
+.saek-learning-entry>summary{font-size:1rem;line-height:1.5;font-weight:700;padding:14px;cursor:pointer;color:#173449!important;background:#e8f3f9!important}
+.saek-learning-entry[open]>summary{border-bottom:1px solid #b6cddc}
+.saek-learning-figure{margin:14px 10px 17px;max-width:100%;color:#173449!important;background:#fff!important}
+.saek-learning-figure .saek-learning-svg{display:block;width:100%;height:auto;max-width:540px;margin:0 auto;background:#fff;border:1px solid #c5dce8}
+.saek-learning-figure figcaption{color:#244255!important;font-size:1rem;line-height:1.56;font-weight:500;margin:12px 5px 0;text-align:left}
+.saek-map-go{display:block;margin:0 14px 16px;padding:13px 17px;background:#176189!important;color:#fff!important;border:0;border-radius:11px;font-weight:750;font-size:1rem;cursor:pointer}
+.saek-map-go:focus-visible{outline:3px solid #d18027;outline-offset:2px}
+.saek-learning-chapter-map{border:1px solid #bbd2df!important;border-radius:14px;background:#fff!important;color:#173449!important;padding:14px;margin:18px 0}
+.saek-learning-chapter-map h3{color:#173449!important;font-size:1.06rem;font-weight:750;margin:0 0 12px;line-height:1.5}
+.saek-phys-chapter-map{background:#fff!important;color:#173449!important;border:1px solid #b6cddc!important}
+.saek-phys-chapter-map h3{color:#173449!important;background:transparent!important;text-shadow:none!important;font-size:1.07rem!important}
+.saek-phys-entry{background:#fff!important;color:#173449!important;border-color:#b6cddc!important}
+.saek-phys-entry>summary{color:#173449!important;background:#e8f3f9!important}
+.saek-phys-figure{background:#fff!important;color:#173449!important}
+.saek-phys-figure figcaption{color:#244255!important;font-size:1rem!important;font-weight:500;line-height:1.55}
+.saek-phys-map-go{display:block;margin:12px 12px 18px;border:0;border-radius:11px;padding:13px 16px;background:#176189!important;color:#fff!important;font-size:1rem;font-weight:750;cursor:pointer}
+@media(max-width:500px){.saek-learning-chapter-map{padding:9px}.saek-learning-figure{margin:10px 2px}.saek-learning-figure figcaption{font-size:.98rem}}
