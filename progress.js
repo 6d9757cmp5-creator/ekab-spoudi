@@ -8,7 +8,7 @@
  async function putDb(data){const db=await openDb();return new Promise((resolve,reject)=>{const t=db.transaction(STORE,'readwrite'),os=t.objectStore(STORE);os.put(data,'latest');t.oncomplete=resolve;t.onerror=()=>reject(t.error||new Error('Σφάλμα αντιγράφου'));t.onabort=()=>reject(t.error||new Error('Ακύρωση αντιγράφου'))})}
  function validProgress(v){if(!v||typeof v!=='object'||Array.isArray(v))return false;if(JSON.stringify(v).length>3000000)return false;const keys=Object.keys(v);if(keys.length>500)return false;for(const [k,val] of Object.entries(v)){if(k===QKEY){if(typeof val!=='string'||val.length>2400000)return false;let parsed;try{parsed=JSON.parse(val)}catch{return false}if(!parsed||typeof parsed!=='object'||Array.isArray(parsed))return false;}else if(/^ekab\.saek\.read\.v1\.\d{2}\.\d{1,2}$/.test(k)){if(val!=='1'&&val!=='0')return false}else return false;}return true}
  async function persist(){const obj=entries(),data=JSON.stringify(obj);if(data===lastSerialized)return true;await putDb({at:new Date().toISOString(),schema:'ekab-progress-checkpoint-v1',items:obj});lastSerialized=data;return true}
- function notify(msg,problem){document.querySelectorAll('[data-save-status]').forEach(el=>{el.textContent=msg;el.dataset.problem=String(Boolean(problem))})}
+ function notify(msg,problem){if(document.getElementById('saek-storage-status')){msg='Η αποθήκευση προόδου δεν είναι διαθέσιμη σε αυτόν τον browser.';problem=true;}document.querySelectorAll('[data-save-status]').forEach(el=>{el.textContent=msg;el.dataset.problem=String(Boolean(problem))})}
  function checkpoint(){busy=busy.then(persist,persist).then(()=>{notify('Η πρόοδός σου αποθηκεύτηκε.');return true}).catch(e=>{console.warn('Αντίγραφο IndexedDB:',e);notify('Η πρόσθετη αποθήκευση απέτυχε — εξήγαγε αντίγραφο.',true);return false});return busy}
  function schedule(){clearTimeout(timer);timer=setTimeout(checkpoint,400)}
  async function flush(){clearTimeout(timer);timer=null;return checkpoint()}
@@ -30,3 +30,4 @@
   recovery().finally(()=>{notify('Αυτόματη αποθήκευση ενεργή.');const p=entries();if(Object.values(p).some(v=>v&&v!=='{}'&&v!=='0'))schedule()});
  });
 })();
+
