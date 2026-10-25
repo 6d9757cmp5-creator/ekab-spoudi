@@ -17,7 +17,7 @@ for(let i=1;i<=20;i++){
   const section=sections[j];
   const match=section.match(/^<details class="fold reader-fold" id="lesson-(\d+)">/);
   if(!match||Number(match[1])!==j+1)fail(file+': λανθασμένη αρίθμηση κεφαλαίου '+(j+1));
-  for(const marker of ['class="lesson-sos"','class="lesson-more"','class="knowledge-check"','class="check-question"','class="check-answer"','class="chapter-source-note"','data-lesson="'+(j+1)+'"']){
+  for(const marker of ['class="lesson-sos"','class="lesson-more"','class="knowledge-check"','class="check-question"','class="check-answer"','class="small muted chapter-source-note"','data-lesson="'+(j+1)+'"']){
    if(!section.includes(marker))fail(file+', κεφάλαιο '+(j+1)+': λείπει '+marker);
   }
   if(!section.includes('https://www.ekab.gr/files/2024/10/'))fail(file+', κεφάλαιο '+(j+1)+': χωρίς επιβεβαιωμένο σύνδεσμο Οδηγού');
