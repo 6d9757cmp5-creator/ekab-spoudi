@@ -63,7 +63,7 @@ html[data-theme="dark"] .saek-picker{background:#1b384c}
   if(!select.value)return;
   if(picker.dataset.mode==='course'){location.href=select.value;return}
   const target=document.querySelector(select.value);
-  if(target){sections.forEach(s=>{const f=s.querySelector('.saek-semester-fold');if(f)f.open=f===target});target.scrollIntoView({behavior:'smooth',block:'start'});picker.hidden=true;openCourseForSemester(target)}
+  if(target){sections.forEach(s=>{const f=s.querySelector('.saek-semester-fold');if(f)f.open=false});openCourseForSemester(target)}
  });
 })();
 </script></body></html>
