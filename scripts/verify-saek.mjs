@@ -12,6 +12,7 @@ for(let i=1;i<=20;i++){
  const sections=html.split(/(?=<details class="fold reader-fold" id="lesson-\d+">)/).slice(1);
  if(sections.length!==expected[i-1])fail(file+': κεφάλαια '+sections.length+'/'+expected[i-1]);
  if(!html.includes('class="reader-chapters"'))fail(file+': λείπει ο αναγνώστης κεφαλαίων');
+ if((html.match(/Only one chapter is displayed at a time/g)||[]).length!==1)fail(file+': λείπει ο ενιαίος αναγνώστης ενός κεφαλαίου');
  for(let j=0;j<sections.length;j++){
   const section=sections[j];
   const match=section.match(/^<details class="fold reader-fold" id="lesson-(\d+)">/);
@@ -20,6 +21,8 @@ for(let i=1;i<=20;i++){
    if(!section.includes(marker))fail(file+', κεφάλαιο '+(j+1)+': λείπει '+marker);
   }
   if(!section.includes('https://www.ekab.gr/files/2024/10/'))fail(file+', κεφάλαιο '+(j+1)+': χωρίς επιβεβαιωμένο σύνδεσμο Οδηγού');
+  // έλεγχος ενιαίας σειράς: θεωρία → αυτοέλεγχος → ολοκλήρωση
+  if(section.indexOf('<details class="lesson-more"')>section.indexOf('<details class="knowledge-check"'))fail(file+', κεφάλαιο '+(j+1)+': η θεωρία εμφανίζεται μετά τον αυτοέλεγχο');
   const plain=section.replace(/<p class="small muted chapter-source-note">[\s\S]*?<\/p>/g,'').replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|amp|quot|lt|gt);/g,' ').trim().replace(/\s+/g,' ');
   const words=plain?plain.split(' ').length:0;
   if(words<170)fail(file+', κεφάλαιο '+(j+1)+': μόνο '+words+' λέξεις (κάτω από ενδεικτικό κατώφλι 170)');
