@@ -1,4 +1,4 @@
-import { client, cloudFeatures } from './appwrite-client.js';
+import { client, cloudFeatures } from './appwrite-client.js?app=27.1.32';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 
 const account = new Account(client);
