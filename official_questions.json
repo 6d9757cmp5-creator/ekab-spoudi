@@ -919,6 +919,16 @@
         "https://teachmeanatomy.info/ABDOMEN/VISCERA/LIVER/"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "ambiguous_or_incomplete_original_question",
+      "finding": "Τρίτη επιφάνεια ήπατος: απαιτείται συγκεκριμένο εξεταστικό βιβλίο ή ορισμός ταξινόμησης.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK500014/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1319,11 +1329,11 @@
     "group": "A",
     "page": 6,
     "question": "Πως ονομάζεται και πως αναφέρεται η δόση φαρμακευτικής ουσίας : α) που προκαλεί το επιθυμητό φαρμακολογικό αποτέλεσμα στο 50% των ατόμων που χορηγήθηκε; β) που προκαλεί τοξικές αντιδράσεις στο 50% των ατόμων που χορηγήθηκε; γ) που προκαλεί το θάνατο στο 100% των ατόμων που χορηγήθηκε;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
-    "answer": "ED₅₀: διάμεση αποτελεσματική δόση, με επιθυμητό αποτέλεσμα στο 50% του πληθυσμού. TD₅₀: διάμεση τοξική δόση, με καθορισμένο τοξικό αποτέλεσμα στο 50%. LD₁₀₀: θανατηφόρα δόση για το 100% συγκεκριμένου πειραματικού πληθυσμού — όχι κλινικό εργαλείο δοσολογίας σε ανθρώπους.",
-    "sourceUrl": "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/pharmacokinetics",
-    "sourceLocation": "Merck Manual, Pharmacokinetics",
+    "answer": "ED₅₀ είναι η διάμεση αποτελεσματική δόση που προκαλεί καθορισμένο αποτέλεσμα στο 50% μελετώμενου πληθυσμού. TD₅₀ είναι η διάμεση τοξική δόση για το 50%. LD₁₀₀ είναι η δόση που προκαλεί θάνατο στο 100% συγκεκριμένου πειραματικού πληθυσμού υπό συγκεκριμένες συνθήκες — όχι κλινικό μέτρο ασφαλούς δόσης σε ανθρώπους.",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK538269/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Προϊστορικός ορισμός LD100 και κλινική καταλληλότητα",
     "answerProvenance": "Εκπαιδευτική σύνοψη από θεσμικές/ακαδημαϊκές πηγές, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
     "reviewAudit20261026": {
@@ -1333,6 +1343,17 @@
       "finding": "ED50 TD50 LD100 σωστή βασική διάκριση, αλλά η πηγή φαρμακοκινητικής δεν επαρκεί για LD100.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "ED50/TD50 και πειραματική LD100 έχουν ειδική φαρμακολογική τεκμηρίωση.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK538269/",
+        "https://goldbook.iupac.org/terms/view/A00025"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1354,11 +1375,11 @@
     "group": "A",
     "page": 6,
     "question": "Αναφέρετε τον τρόπο χορήγησης, τις ενδείξεις χορήγησης και τις ανεπιθύμητες δράσεις της αδρεναλίνης.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Η αδρεναλίνη είναι αδρενεργικός αγωνιστής α/β υποδοχέων. Εκπαιδευτικά, σημαντικές ενδείξεις είναι η αναφυλαξία (ενδομυϊκά σύμφωνα με τις οδηγίες) και η καρδιακή ανακοπή (ενδοφλέβια/ενδοοστικά από εξουσιοδοτημένη ALS ομάδα). Πιθανές ανεπιθύμητες ενέργειες: ταχυκαρδία, τρόμος, υπέρταση, αρρυθμίες. **Δόση και οδός εξαρτώνται από την ένδειξη και το υπηρεσιακό πρωτόκολλο.**",
-    "sourceUrl": "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/pharmacokinetics",
-    "sourceLocation": "Merck Manual, Pharmacokinetics",
+    "sourceUrl": "https://www.medicines.org.uk/emc/product/3673/smpc",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Διασταύρωση ειδικών ενδείξεων/οδών φαρμάκου",
     "answerProvenance": "Εκπαιδευτική σύνοψη από θεσμικές/ακαδημαϊκές πηγές, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
     "reviewAudit20261026": {
@@ -1371,6 +1392,18 @@
         "https://www.resus.org.uk/cy/node/36438"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Αδρεναλίνη: διακριτές ενδείξεις και οδοί χορήγησης· ελληνική αρμοδιότητα ξεχωριστή.",
+      "sources": [
+        "https://www.medicines.org.uk/emc/product/3673/smpc",
+        "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis",
+        "https://www.poedhn.gr/search/item/download/1310_a64fac4f510914fbc82fb728e8f09fb5"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1379,11 +1412,11 @@
     "group": "A",
     "page": 7,
     "question": "Περιγράψτε τι επιτυγχάνεται με τη χορήγηση γενικής αναισθησίας και τις φάσεις στις οποίες χωρίζεται.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Η γενική αναισθησία προκαλεί αναστρέψιμη απώλεια συνείδησης/ανταπόκρισης και, ανάλογα με φάρμακα, αμνησία, αναλγησία και μυοχάλαση. Σύγχρονα περιγράφονται φάσεις εισαγωγής, διατήρησης και ανάνηψης. Οι ιστορικές «4 στάθμες Guedel» αφορούν κυρίως παλαιότερες εισπνευστικές τεχνικές και δεν ισχύουν ως ενιαίο σχήμα για όλα τα σημερινά αναισθητικά.",
-    "sourceUrl": "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/pharmacokinetics",
-    "sourceLocation": "Merck Manual, Pharmacokinetics",
+    "answer": "Η γενική αναισθησία προκαλεί ελεγχόμενη αναστρέψιμη απώλεια συνείδησης/ανταπόκρισης και, ανάλογα με τα φάρμακα, αμνησία, αναλγησία και μυοχάλαση. Σύγχρονες φάσεις: εισαγωγή, διατήρηση, αφύπνιση/ανάνηψη. Τα τέσσερα ιστορικά στάδια Guedel αφορούσαν κυρίως αναισθησία με αιθέρα και δεν εφαρμόζονται αυτολεξεί σε όλες τις σημερινές τεχνικές.",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK557596/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αλλαγές στην περιγραφή ιστορικών σταδίων αναισθησίας",
     "answerProvenance": "Εκπαιδευτική σύνοψη από θεσμικές/ακαδημαϊκές πηγές, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
     "reviewAudit20261026": {
@@ -1393,6 +1426,16 @@
       "finding": "Χρειάζεται ειδική αναισθησιολογική πηγή για φάσεις και τα παλιά στάδια Guedel.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Σύγχρονες φάσεις αναισθησίας και παλαιότερα στάδια Guedel τεκμηριώνονται διαφορετικά.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK557596/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1438,11 +1481,11 @@
     "group": "A",
     "page": 7,
     "question": "Ποια φάρμακα αν χορηγηθούν προκαλούν μύση και ποια μυδρίαση;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Οπιοειδή (π.χ. μορφίνη) και χολινεργικοί αγωνιστές μπορούν να προκαλέσουν μύση. Αντιχολινεργικά (π.χ. ατροπίνη) και συμπαθητικομιμητικά μπορούν να προκαλέσουν μυδρίαση. Οι κόρες επηρεάζονται και από νευρολογικά αίτια.",
-    "sourceUrl": "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/pharmacokinetics",
-    "sourceLocation": "Merck Manual, Pharmacokinetics",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK603732/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Φαρμακολογικές επιδράσεις στις κόρες",
     "answerProvenance": "Εκπαιδευτική σύνοψη από θεσμικές/ακαδημαϊκές πηγές, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
     "reviewAudit20261026": {
@@ -1452,6 +1495,16 @@
       "finding": "Οι φαρμακευτικές επιδράσεις στις κόρες απαιτούν ειδική πηγή, όχι γενική φαρμακοκινητική.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Μύση/μυδρίαση από συγκεκριμένες κατηγορίες φαρμάκων, με κλινικές εξαιρέσεις.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK603732/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1537,12 +1590,12 @@
     "group": "B",
     "page": 8,
     "question": "Πώς συμπεριφέρεστε κατά την κίνηση σε στροφή;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Ελαττώνουμε ταχύτητα πριν από τη στροφή, εκτιμούμε οδόστρωμα και ορατότητα, διατηρούμε ομαλό τιμόνι/επιτάχυνση, αποφεύγουμε απότομο φρενάρισμα εντός στροφής και τηρούμε τη λωρίδα και τις αποστάσεις ασφαλείας.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured",
-    "sourceLocation": "WHO/ICRC Basic Emergency Care: ABCDE, Trauma, Breathing, Shock, Altered Mental Status, Transfer",
+    "sourceUrl": "https://www.hellenicparliament.gr/nomothetiko-ergo/anazitisi-nomothetikou-ergou?law_id=7377b0f9-4ac6-404a-9f2d-b2ee000f5b7f",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Απαιτείται ελληνική τεκμηρίωση ασφαλούς οδήγησης ασθενοφόρου",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -1554,6 +1607,16 @@
         "https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Γενική ασφάλεια στροφών και ελληνικός ΚΟΚ 5209/2025· ειδικό πρωτόκολλο ασθενοφόρου ξεχωριστό.",
+      "sources": [
+        "https://www.hellenicparliament.gr/nomothetiko-ergo/anazitisi-nomothetikou-ergou?law_id=7377b0f9-4ac6-404a-9f2d-b2ee000f5b7f"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1562,12 +1625,12 @@
     "group": "B",
     "page": 8,
     "question": "Ποιος είναι ο ιατρικός εξοπλισμός που θεωρείται κατάλληλος για τηλεματικές εφαρμογές στην υγεία;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Για τηλεϊατρική μπορούν να διαβιβάζουν δεδομένα ψηφιακό ΗΚΓ/monitor, πιεσόμετρο, παλμικό οξύμετρο, μετρητής γλυκόζης και, όπου υποστηρίζεται, ιατρικές εικόνες/βίντεο. Απαιτούνται ασφάλεια δεδομένων, διαλειτουργικότητα και αξιόπιστη σύνδεση.",
+    "answer": "Στις τηλεματικές εφαρμογές υγείας χρησιμοποιούνται συνδεδεμένα ψηφιακά ΗΚΓ/monitor, πιεσόμετρα, οξύμετρα, μετρητές γλυκόζης και συστήματα μετάδοσης εικόνων και βίντεο. Απαιτείται ασφάλεια δεδομένων, κατάλληλη ιατροτεχνολογική καταλληλότητα και διαλειτουργικότητα. Η παλαιά ερώτηση δεν κατονομάζει συγκεκριμένο τύπο συστήματος.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured",
-    "sourceLocation": "WHO/ICRC Basic Emergency Care: ABCDE, Trauma, Breathing, Shock, Altered Mental Status, Transfer",
+    "sourceUrl": "https://telehealth.hhs.gov/providers/getting-started",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Η συγκεκριμένη τηλεϊατρική τεχνολογία του παλαιού θέματος μπορεί να έχει αλλάξει",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -1576,6 +1639,16 @@
       "finding": "Απαιτείται πηγή για συγκεκριμένα τηλεϊατρικά συστήματα της παλιάς ερώτησης.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Παραδείγματα συσκευών τηλεϊατρικής και κλινικής τηλεμετρίας, όχι μοναδικός ιστορικός κατάλογος.",
+      "sources": [
+        "https://telehealth.hhs.gov/providers/getting-started"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1854,12 +1927,12 @@
     "group": "B",
     "page": 8,
     "question": "Να αναφέρετε: α) με ποιο τρόπο γίνεται η οριστική αποκατάσταση του αεραγωγού, και β) τρεις περιπτώσεις που θα χρειαστούν οριστικό αεραγωγό.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Οριστικός αεραγωγός συνήθως σημαίνει τραχειακό σωλήνα με cuff τοποθετημένο από εξειδικευμένο επαγγελματία. Ενδείξεις: αδυναμία προστασίας αεραγωγού, σοβαρή αποτυχία οξυγόνωσης/αερισμού, αναμενόμενη απόφραξη ή σοβαρό τραύμα/διαταραχή συνείδησης που απαιτεί ελεγχόμενο αεραγωγό.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Guidelines 2025 – Adult ALS",
+    "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Επεμβατικός αεραγωγός/αρμοδιότητες",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -1871,6 +1944,18 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Οριστικός αεραγωγός από ειδικό· δεν τεκμηριώνει αυτοτελή ελληνική αρμοδιότητα.",
+      "sources": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines",
+        "https://www.resus.org.uk/cy/node/36438",
+        "https://www.poedhn.gr/search/item/download/1310_a64fac4f510914fbc82fb728e8f09fb5"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -1965,6 +2050,17 @@
         "https://www.resus.org.uk/cy/node/36438"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "Greek_protocol_or_device_IFU_needed",
+      "finding": "Απαιτούνται συγκεκριμένο μοντέλο λαρυγγικής μάσκας και IFU για ακριβείς αντενδείξεις.",
+      "sources": [
+        "https://www.resus.org.uk/cy/node/36438",
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2066,12 +2162,12 @@
     "group": "B",
     "page": 9,
     "question": "Να μεταφερθεί ο πίνακας στο τετράδιο συμπληρώνοντας τα αντίδοτα των ουσιών του πίνακα. ΟΠΙΟΥΧΑ ΟΡΓΑΝΟΦΩΣΦΟΡΙΚΟΙ ΕΣΤΕΡΕΣ ΒΕΝΖΟΔΙΑΖΕΠΙΝΕΣ ΚΥΑΝΙΔΙΑ",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
-    "answer": "Κλασικά αντίδοτα: οπιοειδή → ναλοξόνη· οργανοφωσφορικά → ατροπίνη και, κατά ένδειξη, οξίμη όπως πραλιδοξίμη· βενζοδιαζεπίνες → φλουμαζενίλη ΜΟΝΟ σε επιλεγμένες περιπτώσεις λόγω κινδύνου σπασμών· κυανιούχα → υδροξοκοβαλαμίνη. Πρώτα ABC και εξειδικευμένη τοξικολογική καθοδήγηση.",
+    "answer": "Οπιοειδή → ναλοξόνη· οργανοφωσφορικά → ατροπίνη και, κατά ένδειξη, πραλιδοξίμη· βενζοδιαζεπίνες → φλουμαζενίλη μόνο σε επιλεγμένες περιπτώσεις επειδή υπάρχει κίνδυνος σπασμών· κυανιούχα → υδροξοκοβαλαμίνη. Προέχουν ασφάλεια, ABCDE και εξειδικευμένη τοξικολογική/ιατρική καθοδήγηση. Δεν είναι οδηγία αυτόνομης χορήγησης.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://wwwn.cdc.gov/TSP/MMG/MMGDetails.aspx?mmgid=517&toxid=92",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αντίδοτα/δοσολογίες, τοξικολογικός έλεγχος",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2082,6 +2178,18 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Αντίδοτα τοξικολογίας, με σαφή κίνδυνο φλουμαζενίλης και ανάγκη ιατρικής κρίσης.",
+      "sources": [
+        "https://wwwn.cdc.gov/TSP/MMG/MMGDetails.aspx?mmgid=517&toxid=92",
+        "https://www.ema.europa.eu/en/medicines/human/EPAR/cyanokit",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC5135539/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2118,12 +2226,12 @@
     "group": "B",
     "page": 9,
     "question": "Να αναφέρετε τις αντενδείξεις χορήγησης της Αδρεναλίνης.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Δεν υπάρχει απόλυτη αντένδειξη στην IM αδρεναλίνη σε απειλητική αναφυλαξία ή στην αναζωογόνηση καρδιακής ανακοπής. Σε άλλες χρήσεις απαιτείται εκτίμηση αλληλεπιδράσεων, ισχαιμικής καρδιοπάθειας, αρρυθμιών και κινδύνου υπέρτασης. Η παλιά γενική ερώτηση έχει διαφορετική απάντηση ανά ένδειξη.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.medicines.org.uk/emc/product/3673/smpc",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αντενδείξεις αδρεναλίνης είναι ένδειξη-εξαρτώμενες",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2135,6 +2243,17 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Αναφυλαξία: καμία απόλυτη αντένδειξη σε σωτήρια ενδομυϊκή αδρεναλίνη.",
+      "sources": [
+        "https://www.medicines.org.uk/emc/product/3673/smpc",
+        "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2143,12 +2262,12 @@
     "group": "B",
     "page": 9,
     "question": "Να αναφέρετε τις ενδείξεις χορήγησης της Ατροπίνης.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Η ατροπίνη χρησιμοποιείται ως αντιμουσκαρινικό σε επιλεγμένη συμπτωματική βραδυκαρδία και ως μέρος της αντιμετώπισης οργανοφωσφορικής δηλητηρίασης από ειδικό προσωπικό. Δεν χρησιμοποιείται ρουτίνα στην ασυστολία.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Ατροπίνη: ένδειξη/φαρμακολογία σε ελληνικές υπηρεσιακές οδηγίες",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2159,6 +2278,17 @@
         "https://www.resus.org.uk/cy/node/36438"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Ατροπίνη σε επιλεγμένη βραδυκαρδία και δηλητηρίαση, όχι ρουτίνα ασυστολίας.",
+      "sources": [
+        "https://www.resus.org.uk/cy/node/36438",
+        "https://www.medicines.org.uk/emc/product/5361/smpc"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2167,12 +2297,12 @@
     "group": "B",
     "page": 9,
     "question": "Να αναφέρετε τις αντενδείξεις χορήγησης της Ατροπίνης.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Η ατροπίνη χρειάζεται προσοχή π.χ. σε ορισμένες ταχυαρρυθμίες, γλαύκωμα κλειστής γωνίας, κατακράτηση ούρων και ειλεό, αλλά οι σχετικές αντενδείξεις εξαρτώνται από την επείγουσα ένδειξη. Σε απειλητική οργανοφωσφορική δηλητηρίαση η σωτήρια δράση προηγείται πολλών σχετικών αντενδείξεων.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.medicines.org.uk/emc/product/5361/smpc",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αντενδείξεις ατροπίνης ανά ένδειξη",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2183,6 +2313,17 @@
         "https://www.resus.org.uk/cy/node/36438"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Ατροπίνη: σχετικές αντενδείξεις εξαρτώνται από κλινική ένδειξη.",
+      "sources": [
+        "https://www.medicines.org.uk/emc/product/5361/smpc",
+        "https://www.resus.org.uk/cy/node/36438"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2191,12 +2332,12 @@
     "group": "B",
     "page": 9,
     "question": "Να αναφέρετε τις ενδείξεις χορήγησης των Νιτρωδών.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Τα νιτρώδη (π.χ. νιτρογλυκερίνη) προκαλούν αγγειοδιαστολή και μπορούν να ανακουφίσουν ισχαιμικό θωρακικό άλγος και να χρησιμοποιηθούν σε επιλεγμένο πνευμονικό οίδημα με κατάλληλη αιμοδυναμική κατάσταση· απαιτείται πρωτόκολλο και εκτίμηση πίεσης.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.medicines.org.uk/emc/product/674/smpc",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Νιτρώδη: έλεγχος ελληνικών ιατρικών οδηγιών",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2208,6 +2349,17 @@
         "https://www.nice.org.uk/guidance/cg187/chapter/recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Νιτρώδη: ισχαιμικό άλγος και επιλεγμένες άλλες ενδείξεις ανά πίεση.",
+      "sources": [
+        "https://www.medicines.org.uk/emc/product/674/smpc",
+        "https://www.nice.org.uk/guidance/cg187/chapter/recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2216,12 +2368,12 @@
     "group": "B",
     "page": 9,
     "question": "Να αναφέρετε τις αντενδείξεις χορήγησης των Νιτρωδών.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Αντενδείξεις/σημαντικές προφυλάξεις νιτρωδών: σημαντική υπόταση, χρήση αναστολέων PDE-5 πρόσφατα (σιλδεναφίλη/ταδαλαφίλη ανά διάστημα), ύποπτη σημαντική συμμετοχή δεξιάς κοιλίας/προφορτίο-εξαρτώμενη κατάσταση και ορισμένες αποφρακτικές καρδιοπάθειες. Προϋποτίθεται εξουσιοδοτημένη χορήγηση.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.medicines.org.uk/emc/product/674/smpc",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Νιτρώδη: ειδικές αντενδείξεις/πρόσφατη λήψη φαρμάκων",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2232,6 +2384,16 @@
         "https://www.nhs.uk/medicines/glyceryl-trinitrate-gtn/common-questions-about-glyceryl-trinitrate-gtn/"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Νιτρώδη: υπόταση και πρόσφατοι PDE5 αναστολείς είναι σοβαρές αντενδείξεις.",
+      "sources": [
+        "https://www.medicines.org.uk/emc/product/674/smpc"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2240,12 +2402,12 @@
     "group": "B",
     "page": 9,
     "question": "Ποιες είναι οι οδοί χορήγησης φαρμάκων; Κατατάξτε τις σύμφωνα με την ταχύτητα δράσης του φαρμάκου;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Οδοί: ενδοφλέβια/ενδοοστική, ενδομυϊκή, υποδόρια, εισπνεόμενη, υπογλώσσια, από του στόματος, ορθική, δερματική κ.ά. Η ταχύτητα έναρξης δεν έχει ενιαία κατάταξη για όλα τα φάρμακα: η IV δράση είναι συνήθως άμεση, ενώ οι άλλες εξαρτώνται από ουσία, μορφή και αιμάτωση.",
+    "answer": "Οδοί χορήγησης: ενδοφλέβια, ενδοοστική, ενδομυϊκή, υποδόρια, εισπνεόμενη, υπογλώσσια, από του στόματος, ορθική, διαδερμική κ.ά. Η ενδοφλέβια δίνει γενικά την ταχύτερη συστηματική δράση, αλλά δεν υπάρχει ακριβής καθολική σειρά ταχύτητας για τις υπόλοιπες οδούς ανεξάρτητα από φάρμακο, μορφή και αιμάτωση.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK568677/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Κατάταξη ταχύτητας φαρμάκων δεν είναι καθολική",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2254,6 +2416,16 @@
       "finding": "Δεν υπάρχει καθολική κατάταξη ταχύτητας όλων των φαρμάκων από την οδό και μόνο.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Οδοί χορήγησης: δεν υπάρχει σταθερή ενιαία σειρά ταχύτητας για όλα τα φάρμακα.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK568677/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2286,12 +2458,12 @@
     "group": "B",
     "page": 9,
     "question": "Ποια είναι η αρχική ποσότητα χορήγησης υγρών στην αντιμετώπιση του shock στα παιδιά;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Τραύμα / Ακινητοποίηση",
     "answer": "Σοβαρό παιδιατρικό shock απαιτεί άμεση ABCDE εκτίμηση και διακομιδή. Η ποσότητα υγρών εξαρτάται από αιτία, πόρους και πρωτόκολλο: συχνά χρησιμοποιούνται διαδοχικές ισότονες bolus δόσεις 10 mL/kg με συχνή επανεκτίμηση, ενώ η αιμορραγική καταπληξία μπορεί να χρειάζεται έγκαιρα αίμα αντί υπερβολικών κρυσταλλοειδών. Μία «σταθερή» δόση για όλα τα shock είναι επισφαλής.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Παιδιατρικό shock: δοσολογία υγρών ανά αίτιο/περιβάλλον",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2302,6 +2474,17 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Παιδιατρικό shock: εξατομικευμένα bolus με επανεκτίμηση, διάκριση αιμορραγίας.",
+      "sources": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2349,12 +2532,12 @@
     "group": "B",
     "page": 9,
     "question": "Περιγράψτε την κλινική εικόνα της εκλαμψίας και πώς αντιμετωπίζεται.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Εκλαμψία είναι σπασμοί σε κύηση/λοχεία που συνδέονται με προεκλαμψία και δεν εξηγούνται καλύτερα από άλλη αιτία. Προτεραιότητα: ασφάλεια, ABCDE, πλάγια θέση όταν ενδείκνυται, οξυγόνωση/αεραγωγός, άμεση μαιευτική επείγουσα υποστήριξη. Θειικό μαγνήσιο και αντιυπερτασικά χορηγούνται από εξουσιοδοτημένη ομάδα.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines",
-    "sourceLocation": "ERC/RCUK Guidelines 2025 – Special Circumstances",
+    "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Μαγνήσιο/εκλαμψία: αρμοδιότητες και πρωτόκολλα",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2366,6 +2549,16 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Εκλαμψία: επείγουσα αντιμετώπιση και μαγνήσιο από ειδικό.",
+      "sources": [
+        "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2439,12 +2632,12 @@
     "group": "B",
     "page": 9,
     "question": "Να περιγράψετε την τεχνική τοποθέτησης αυχενικού κολάρου.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Επιλογή σωστού μεγέθους κολάρου σύμφωνα με κατασκευαστή, χειροκίνητη σταθεροποίηση κεφαλής/αυχένα σε ουδέτερη κατάλληλη θέση, εφαρμογή χωρίς υπερβολική πίεση και επανέλεγχος αναπνοής/νευρολογικής κατάστασης. Το κολάρο από μόνο του δεν εξασφαλίζει πλήρη περιορισμό κίνησης.",
+    "answer": "Για αυχενικό κολάρο απαιτείται εκτίμηση αναγκαιότητας, χειροκίνητη προστασία όταν ενδείκνυται, σωστό μέγεθος/μοντέλο, εφαρμογή κατά οδηγίες κατασκευαστή και επανέλεγχος αεραγωγού, αναπνοής και νευρολογικής κατάστασης. Δεν εξαναγκάζεται βίαια ουδέτερη θέση και το κολάρο δεν εξασφαλίζει από μόνο του πλήρη περιορισμό κινήσεων.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "sourceUrl": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations",
-    "sourceLocation": "NICE NG41 – Spinal Injury: Initial Management",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Τοποθέτηση κολάρου: ελέγχεται με οδηγίες κατασκευαστή",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2455,6 +2648,17 @@
         "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Κολάρο: ασφαλής εφαρμογή και επανέλεγχος με βάση συγκεκριμένο προϊόν.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations",
+        "https://www.ambuusa.com/emergency-care-and-training/extrication-collars/product/ambu-perfit-ace"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2463,12 +2667,12 @@
     "group": "B",
     "page": 9,
     "question": "Να περιγράψετε τον τρόπο μέτρησης του κατάλληλου μεγέθους αυχενικού κολάρου και να αναφέρετε τα είδη των αυχενικών κολάρων.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Μέτρηση κατά τις οδηγίες του κατασκευαστή, συνήθως από ώμο/τραπεζοειδή προς γωνία κάτω γνάθου με κεφάλι ουδέτερο. Υπάρχουν ρυθμιζόμενα/σταθερού μεγέθους, άκαμπτα και μαλακά κολάρα· σε σοβαρό τραύμα δεν εφαρμόζεται «τυφλή» διόρθωση στάσης.",
+    "answer": "Κολάρα: μαλακά και ημιάκαμπτα/άκαμπτα, σταθερού ή ρυθμιζόμενου μεγέθους. Στο παράδειγμα Ambu Perfit ACE μετράται η απόσταση από το επίπεδο κάτω από το πηγούνι μέχρι το πάνω μέρος του ώμου και αντιστοιχίζεται στην ένδειξη μεγέθους του συγκεκριμένου μοντέλου. Η τεχνική διαφέρει ανά κατασκευαστή και απαιτεί πρακτική εκπαίδευση.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations",
-    "sourceLocation": "NICE NG41 – Spinal Injury: Initial Management",
+    "sourceUrl": "https://www.ambuusa.com/emergency-care-and-training/extrication-collars/product/ambu-perfit-ace",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Διαστασιολόγηση κολάρου ανά προϊόν",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2479,6 +2683,17 @@
         "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Μέτρηση κολάρου εξαρτάται από κατασκευαστή· αναλυτικό παράδειγμα Ambu Perfit ACE.",
+      "sources": [
+        "https://www.ambuusa.com/emergency-care-and-training/extrication-collars/product/ambu-perfit-ace",
+        "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2487,12 +2702,12 @@
     "group": "B",
     "page": 9,
     "question": "Πότε χρησιμοποιούνται οι νάρθηκες αέρα (αερονάρθηκες) για ακινητοποίηση άκρων;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Τραύμα / Ακινητοποίηση",
-    "answer": "Οι αερονάρθηκες μπορούν να προσφέρουν προσωρινή σταθεροποίηση ορισμένων κακώσεων άκρων, όπου είναι κατάλληλοι. Απαιτείται έλεγχος περιφερικής αιμάτωσης/αισθητικότητας πριν και μετά και αποφυγή υπερβολικής πίεσης ή χρήσης σε ακατάλληλη κάκωση.",
+    "answer": "Οι αερονάρθηκες προσφέρουν προσωρινή σταθεροποίηση ορισμένων κακώσεων άκρων. Χρειάζεται κατάλληλο προϊόν και έλεγχος περιφερικής αιμάτωσης, αισθητικότητας και κινητικότητας πριν και μετά την εφαρμογή. Αποφεύγεται η υπερβολική πίεση· η τεχνική εξαρτάται από τον κατασκευαστή.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
-    "sourceLocation": "ERC/RCUK Guidelines 2025 – First Aid",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK557703/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αερονάρθηκες: επιλογή ανά κάκωση",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2503,6 +2718,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Αερονάρθηκες σε κατάλληλες κακώσεις, έλεγχος αιμάτωσης και πίεσης.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK557703/",
+        "https://www.poedhn.gr/search/item/download/1310_a64fac4f510914fbc82fb728e8f09fb5"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2602,12 +2828,12 @@
     "group": "B",
     "page": 10,
     "question": "Πώς διακρίνουμε σε διατιτραίνον τραύμα από πυροβόλο όπλο: α)την πύλη εισόδου; β)την πύλη εξόδου;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Η διαφορά εισόδου και εξόδου δεν είναι πάντα αξιόπιστη μόνο από την όψη. Τυπικά η είσοδος μπορεί να έχει δακτύλιο εκδοράς/απόξεσης, ενώ η έξοδος συχνά είναι ακανόνιστη και μπορεί να είναι μεγαλύτερη, αλλά υπάρχουν πολλές εξαιρέσεις. Δεν γίνεται τελική ιατροδικαστική εκτίμηση προνοσοκομειακά.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK556119/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Ιατροδικαστική περιγραφή διατιτραίνοντος τραύματος",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2616,6 +2842,16 @@
       "finding": "Πύλες εισόδου/εξόδου: απαιτείται ιατροδικαστική πηγή, όχι γενική οδηγία τραύματος.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Πύλες εισόδου/εξόδου πυροβολισμού: χαρακτηριστικές αλλά μη καθολικές διαφορές.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK556119/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2690,6 +2926,16 @@
       "finding": "Ο «πιο επικίνδυνος» τύπος παιδιατρικού κατάγματος δεν έχει μία απάντηση χωρίς κριτήρια.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "ambiguous_or_incomplete_original_question",
+      "finding": "Το «πιο επικίνδυνο» παιδικό κάταγμα εξαρτάται από τύπο και συνοδές βλάβες.",
+      "sources": [
+        "https://www.ncbi.nlm.nih.gov/books/NBK560546/"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2822,6 +3068,16 @@
         "https://www.nice.org.uk/guidance/NG232/chapter/recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "ambiguous_or_incomplete_original_question",
+      "finding": "Δεν υπάρχει επιβεβαιωμένη μία μοναδικά συχνότερη αιτία διέγερσης σε ΚΕΚ.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2830,12 +3086,12 @@
     "group": "B",
     "page": 11,
     "question": "Να αναφέρετε : α) Τι είδους ορό χορηγούμε σε κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ) κατά προτίμηση ενδοφλέβια; β) Ποια υγρά αποφεύγονται στην κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ) και γιατί;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Ανατομία / Φυσιολογία",
     "answer": "Σε σημαντική ΚΕΚ επιδιώκεται φυσιολογική οξυγόνωση και επαρκής αιμάτωση· όταν απαιτείται υγρό, προτιμώνται ισότονα κρυσταλλοειδή σύμφωνα με το πρωτόκολλο και αποφεύγονται υποτονικά διαλύματα που μπορεί να αυξήσουν το εγκεφαλικό οίδημα. Η επιλογή/ποσότητα απαιτεί εξειδικευμένη κρίση.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "sourceUrl": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations",
-    "sourceLocation": "NICE NG232 – Head Injury",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Επιλογή υγρών ΚΕΚ: επιμέρους αποδεικτικά δεδομένα",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2847,6 +3103,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "ΚΕΚ: αποφυγή υποτονικών υγρών και ανάγκη διατήρησης εγκεφαλικής αιμάτωσης.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations",
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -2959,12 +3226,12 @@
     "group": "B",
     "page": 11,
     "question": "Ποιος είναι ο καλύτερος οδηγός για την επαρκή χορήγηση υγρών σ’ έναν εγκαυματία;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Σε μεγάλου βαθμού εγκαύματα, η ανταπόκριση στην αναζωογόνηση εκτιμάται με κλινική αιμάτωση και ωριαία διούρηση (σε κατάλληλο κλινικό περιβάλλον), όχι μόνο από ένα τύπο υγρών. Οι υπολογισμοί είναι αρχική εκτίμηση και απαιτούν συνεχή επανεκτίμηση.",
+    "answer": "Σε σοβαρό έγκαυμα, η ωριαία διούρηση μαζί με αιμοδυναμικά και κλινικά στοιχεία είναι κρίσιμος δείκτης επάρκειας αναζωογόνησης με υγρά. Ενδεικτικοί στόχοι εξειδικευμένων πρωτοκόλλων είναι περίπου 0,5 mL/kg/ώρα για ενήλικες και 1 mL/kg/ώρα για παιδιά· απαιτείται εξατομίκευση. Ο αρχικός τύπος υγρών δεν αντικαθιστά την επανεκτίμηση.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://aci.health.nsw.gov.au/networks/burn-injury/resources/patient-management/fluid-resuscitation",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αναζωογόνηση εγκαυματία/διούρηση: εξειδικευμένο πρωτόκολλο",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -2975,6 +3242,16 @@
         "https://aci.health.nsw.gov.au/ecat/paediatric/assessment/burn"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Σοβαρό έγκαυμα: ωριαία διούρηση ως δείκτης για υγρά με κλινικό επανέλεγχο.",
+      "sources": [
+        "https://aci.health.nsw.gov.au/networks/burn-injury/resources/patient-management/fluid-resuscitation"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3229,12 +3506,12 @@
     "group": "B",
     "page": 12,
     "question": "Ποιοι χειρισμοί πρέπει να γίνουν στο οξύ πνευμονικό οίδημα;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Οξύ καρδιογενές πνευμονικό οίδημα: ABCDE, κατάλληλη θέση εφόσον ανεκτή, παρακολούθηση SpO₂, ΗΚΓ και πίεσης, οξυγόνο όταν υπάρχει υποξαιμία και έγκαιρη εξειδικευμένη βοήθεια. Το CPAP/NIV δεν εφαρμόζεται αυτομάτως σε κάθε περίπτωση· εξετάζεται σε σοβαρή δύσπνοια με οξέωση ή ανεπαρκή ανταπόκριση, από εκπαιδευμένη ομάδα. Φάρμακα/συσκευές κατά ισχύον πρωτόκολλο.",
+    "answer": "Οξύ καρδιογενές πνευμονικό οίδημα: ABCDE, θέση ανεκτή, έλεγχος αναπνοής, SpO₂, αρτηριακής πίεσης και ΗΚΓ, οξυγόνο σε υποξαιμία, επείγουσα εξειδικευμένη βοήθεια. Σύμφωνα με ESC 2026, NIV/CPAP εξετάζεται έγκαιρα σε σοβαρή αναπνευστική δυσχέρεια/υποξαιμία (ενδεικτικά RR>25/min και SpO₂<90%), με προσοχή σε υπόταση και μόνο από κατάλληλη ομάδα. Δεν εφαρμόζεται αυτόματα σε κάθε περίπτωση· φάρμακα κατά πρωτόκολλο.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations",
-    "sourceLocation": "NICE CG95 – Οξύ θωρακικό άλγος",
+    "sourceUrl": "https://academic.oup.com/eurheartj/article/47/38/5346/8766302",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Πνευμονικό οίδημα: CPAP/φάρμακα απαιτούν ειδική κατάρτιση",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -3245,6 +3522,17 @@
         "https://www.nice.org.uk/guidance/cg187/chapter/recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "ESC 2026: η μη επεμβατική υποστήριξη σε υποξαιμική οξεία αναπνευστική ανεπάρκεια δεν εφαρμόζεται σε όλους.",
+      "sources": [
+        "https://academic.oup.com/eurheartj/article/47/38/5346/8766302",
+        "https://www.nice.org.uk/guidance/cg187/chapter/recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3436,6 +3724,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "Greek_protocol_or_device_IFU_needed",
+      "finding": "Τεχνική επεμβατικής αποσυμπίεσης χωρίς ελεγμένο ελληνικό ειδικό πρωτόκολλο.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
+        "https://www.poedhn.gr/search/item/download/1310_a64fac4f510914fbc82fb728e8f09fb5"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3512,6 +3811,17 @@
         "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "Greek_protocol_or_device_IFU_needed",
+      "finding": "Ελληνικός υπεύθυνος αδειοδότησης εισόδου στην επικίνδυνη ζώνη δεν ταυτοποιήθηκε.",
+      "sources": [
+        "https://www.osha.gov/hazardous-waste/decontamination",
+        "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3609,12 +3919,12 @@
     "group": "B",
     "page": 12,
     "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν πολυτραυματία με αναπνευστική συχνότητα > 35 / min, καρδιακή συχνότητα 130/min και αρτηριακή πίεση 85/65 mmHg. α) Να περιγράψετε τις ενέργειές σας στα πλαίσια αντιμετώπισης αυτού του ασθενούς. β) Ποια είναι η αρχική φόρτιση του με υγρά;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Ανατομία / Φυσιολογία",
     "answer": "Πολυτραυματίας με RR>35, HR130 και ΑΠ85/65 έχει πιθανή απειλητική καταπληξία/υποάρδευση. Άμεση ασφάλεια, XABCDE, έλεγχος εξωτερικής αιμορραγίας, οξυγόνωση/θερμική προστασία, αναζήτηση εσωτερικής αιμορραγίας και ελαχιστοποίηση χρόνου ως οριστική χειρουργική φροντίδα. Τα υγρά χορηγούνται κατά πρωτόκολλο και αίμα όταν ενδείκνυται· αποφεύγεται αυθαίρετο σταθερό bolus.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Χορήγηση υγρών αιμορραγικού shock απαιτεί κλινική απόφαση",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -3625,6 +3935,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Πολυτραυματίας με shock: XABCDE, έλεγχος αιμορραγίας, εξατομικευμένα υγρά.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
+        "https://www.poedhn.gr/search/item/download/1310_a64fac4f510914fbc82fb728e8f09fb5"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3633,12 +3954,12 @@
     "group": "B",
     "page": 12,
     "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε εργάτη της Δ.Ε.Η. που, προσπαθώντας να επισκευάσει καλώδιο υψηλής τάσης κομμένο από τη χιονόπτωση της προηγούμενης ημέρας, παθαίνει ηλεκτροπληξία. Περιγράψτε τις ενέργειές σας.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Διακομιδή / Ασφάλεια",
-    "answer": "Σε ηλεκτρικό συμβάν υψηλής τάσης δεν προσεγγίζουμε μέχρι αρμόδια τεχνική υπηρεσία να δηλώσει ασφαλές το κύκλωμα και τη ζώνη. Μετά: ABCDE, έλεγχος καρδιακής ανακοπής/αρρυθμιών, τραύματος από πτώση και βαθιών ηλεκτρικών εγκαυμάτων και επείγουσα μεταφορά. Το αρχικό κείμενο έχει ελλείψεις στη ψηφιακή εξαγωγή.",
+    "answer": "Σε ηλεκτρικό συμβάν υψηλής τάσης δεν προσεγγίζουμε ασθενή ή καλώδια πριν αρμόδια υπηρεσία απομονώσει το ρεύμα και δηλώσει τον χώρο ασφαλή. Προστατεύουμε τους παρευρισκομένους. Κατόπιν ακολουθούν ABCDE, εκτίμηση πιθανής ανακοπής/αρρυθμίας, εγκαυμάτων και τραύματος από πτώση, επείγουσα υποστήριξη και διακομιδή.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceUrl": "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αποκατάσταση πρότασης από αλλαγή σελίδας",
     "originalExtraction": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν εργάτη της Δ.Ε.Η, ο οποίος στην προσπάθειά του να επισκευάσει καλώδιο υψηλής τάσης που έχει κοπεί από έντονη χιονόπτωση",
     "reviewAudit20261026": {
@@ -3651,6 +3972,17 @@
         "https://www.who.int/publications/9789240114067"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Ηλεκτροπληξία υψηλής τάσης: ασφαλής απομόνωση πριν προσέγγιση.",
+      "sources": [
+        "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf",
+        "https://www.who.int/publications/9789240114067"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3815,12 +4147,12 @@
     "group": "B",
     "page": 14,
     "question": "Να περιγράψετε τη δράση του συμπαθητικού στην καρδιά, στα αγγεία, στους βρόγχους, στο έντερο και στους αδένες.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Ανατομία / Φυσιολογία",
-    "answer": "Συμπαθητικό: αυξημένη καρδιακή συχνότητα/συσταλτικότητα, αγγειοσύσπαση σε πολλές αρτηριολικές κλίνες (α₁) και αγγειοδιαστολή σε επιλεγμένες (β₂), βρογχοδιαστολή, μείωση εντερικής κινητικότητας και κινητοποίηση ενέργειας· ενεργοποίηση ιδρωτοποιών αδένων.",
+    "answer": "Συμπαθητικό: στην καρδιά αυξάνει τη συχνότητα και τη συσταλτικότητα (β₁), στα αγγεία δρα με αγγειοσύσπαση σε πολλές κλίνες (α₁) και αγγειοδιαστολή σε ορισμένες (β₂), στους βρόγχους προκαλεί βρογχοδιαστολή (β₂) και στο έντερο μείωση κινητικότητας. Στους ιδρωτοποιούς αδένες δρα μέσω ειδικών συμπαθητικών χολινεργικών ινών.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured",
-    "sourceLocation": "WHO/ICRC Basic Emergency Care: ABCDE, Trauma, Breathing, Shock, Altered Mental Status, Transfer",
+    "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-2-autonomic-reflexes-and-homeostasis",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Δράση αυτόνομου νευρικού σε αγγεία/αδένες εξαρτάται από υποδοχείς",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -3829,6 +4161,16 @@
       "finding": "Συμπαθητικό: ειδική πηγή για ιδρωτοποιούς και διαφοροποιημένους αδρενεργικούς υποδοχείς.",
       "evidence": [],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Συμπαθητικό: α/β υποδοχείς και χολινεργικές ίνες ιδρωτοποιών.",
+      "sources": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-2-autonomic-reflexes-and-homeostasis"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -3963,12 +4305,12 @@
     "group": "B",
     "page": 14,
     "question": "Ποια φάρμακα χρησιμοποιούμε κατά την διάρκεια αντιμετώπισης (ανεξαρτήτου βαρύτητας) αναφυλακτικής αντίδρασης;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Η **αναφυλαξία** (όχι κάθε ήπια αλλεργική αντίδραση) απαιτεί άμεσα IM αδρεναλίνη όταν υπάρχουν κριτήρια ABC διαταραχής. Αντιισταμινικά/κορτικοστεροειδή δεν αντικαθιστούν την αδρεναλίνη και δεν είναι πρώτης γραμμής για απειλητικές εκδηλώσεις. Χορήγηση ανά κατάρτιση, ηλικία/βάρος και πρωτόκολλο.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Δεν χορηγείται αδρεναλίνη σε κάθε απλή αλλεργία",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -3980,6 +4322,17 @@
         "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Αναφυλαξία ≠ απλή αλλεργική αντίδραση· IM αδρεναλίνη πρώτης γραμμής.",
+      "sources": [
+        "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis",
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4040,12 +4393,12 @@
     "group": "B",
     "page": 14,
     "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με υπό τάση πνευμοθώρακα;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Υπό τάση πνευμοθώρακας: κλινική επείγουσα αναγνώριση σε τραυματία με επιδεινούμενη αναπνευστική δυσχέρεια/shock, ABCDE, οξυγόνωση/αερισμός, άμεση κλήση ειδικής ομάδας και επείγουσα αποσυμπίεση μόνο από εξουσιοδοτημένο επαγγελματία. Δεν αναμένουμε απαραίτητα ακτινογραφία σε καταρρέοντα ασθενή.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Αποσυμπίεση υπό τάση: εξουσιοδότηση/κλινική απόφαση",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4056,6 +4409,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Πνευμοθώρακας υπό τάση: επείγουσα αναγνώριση, πράξη ειδικού.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
+        "https://www.poedhn.gr/search/item/download/1310_a64fac4f510914fbc82fb728e8f09fb5"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4064,12 +4428,12 @@
     "group": "B",
     "page": 14,
     "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης μιας ασθενούς με εκλαμψία;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Εκλαμψία: ABCDE, ασφαλές περιβάλλον/προστασία από τραυματισμό, αεραγωγός και οξυγόνωση, θέση που μειώνει αορτοκοιλική συμπίεση, άμεση μαιευτική βοήθεια. Θειικό μαγνήσιο αποτελεί φάρμακο επιλογής σε εξειδικευμένη αντιμετώπιση, με παρακολούθηση και πρωτόκολλο.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Εκλαμψία/μαγνήσιο: ιατρικό πρωτόκολλο",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4080,6 +4444,16 @@
         "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Εκλαμψία: ασφάλεια, ABCDE, εξειδικευμένο μαγνήσιο.",
+      "sources": [
+        "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4088,12 +4462,12 @@
     "group": "B",
     "page": 14,
     "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με ανοιχτό πνευμοθώρακα.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
     "answer": "Ανοικτός πνευμοθώρακας: ABCDE, άμεση κλήση εξειδικευμένης βοήθειας, κατάλληλη οξυγόνωση και επείγουσα διακομιδή. Η NICE NG39 περιγράφει απλό αποφρακτικό επίθεμα για την ανοικτή θωρακική πληγή, με συνεχή παρακολούθηση για εμφάνιση πνευμοθώρακα υπό τάση. Ειδικά αεριζόμενα επιθέματα και επεμβάσεις εφαρμόζονται σύμφωνα με εγκεκριμένο πρωτόκολλο.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Επίθεμα ανοικτού πνευμοθώρακα/εκτόνωση: πρωτόκολλο",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4104,6 +4478,16 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Ανοιχτός πνευμοθώρακας: επίθεμα και συνεχής επανεκτίμηση.",
+      "sources": [
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4229,12 +4613,12 @@
     "group": "B",
     "page": 15,
     "question": "Πως προσεγγίζει το ασθενοφόρο ένα πτητικό μέσο για την παραλαβή- παράδοση ασθενούς;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Διακομιδή / Ασφάλεια",
     "answer": "Προσέγγιση ελικοπτέρου/αεροσκάφους μόνο με ρητή άδεια πληρώματος και καθοδήγηση επίγειου συντονιστή, από εγκεκριμένη ασφαλή κατεύθυνση, με στερεωμένο εξοπλισμό και προσοχή σε ρότορες, καυσαέρια και έδαφος. Ποτέ προς ουρά ελικοπτέρου.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceUrl": "https://www.faa.gov/air_traffic/publications/aim_html/chap10_section_2.html",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Οδηγίες αεροδιακομιδής συγκεκριμένου αεροσκάφους",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4245,6 +4629,16 @@
         "https://www.who.int/publications/9789240114067"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Ελικόπτερο: προσέγγιση μόνον με άδεια πληρώματος, όχι προς ουραίο στροφείο.",
+      "sources": [
+        "https://www.faa.gov/air_traffic/publications/aim_html/chap10_section_2.html"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4269,6 +4663,17 @@
         "https://www.who.int/publications/9789240114067"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "Greek_protocol_or_device_IFU_needed",
+      "finding": "Δεν υπάρχει ταυτοποίηση πιστοποιημένου εξοπλισμού συγκεκριμένου ελικοπτέρου.",
+      "sources": [
+        "https://www.faa.gov/air_traffic/publications/aim_html/chap10_section_2.html",
+        "https://www.who.int/publications/9789240114067"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4293,6 +4698,16 @@
         "https://www.msdmanuals.com/professional/critical-care-medicine/how-to-do-basic-airway-procedures/how-to-do-bag-valve-mask-bvm-ventilation"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "ambiguous_or_incomplete_original_question",
+      "finding": "1.620 λίτρα αναπνευστικού μίγματος δεν ισοδυναμούν πάντα με κατανάλωση οξυγόνου.",
+      "sources": [
+        "https://www.aarc.org/wp-content/uploads/2020/04/guidance-document-additional-ventilators-may-pose-a-risk-to-hospital-gas-systems.pdf"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4442,12 +4857,12 @@
     "group": "B",
     "page": 15,
     "question": "Να αναφέρετε το πρωτόκολλο αντιμετώπισης ασθματικής κρίσης.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Κρίση άσθματος: ABCDE, αναγνώριση απειλητικών σημείων (σιωπηλός θώρακας, εξάντληση, μεταβολή συνείδησης), βολική καθιστική θέση, οξυγόνωση και εισπνεόμενος βρογχοδιασταλτικός αγωνιστής β₂ (π.χ. σαλβουταμόλη) σύμφωνα με πρωτόκολλο/εκπαίδευση, έγκαιρη διακομιδή. Εξειδικευμένα φάρμακα από αρμόδιους.",
+    "answer": "Οξεία ασθματική κρίση: ABCDE, αναγνώριση σοβαρής δύσπνοιας, αδυναμίας ομιλίας, σιωπηλού θώρακα ή διαταραχής συνείδησης, ανεκτή θέση, SpO₂ και οξυγόνο κατά ένδειξη. Ταχεία εισπνεόμενη βρογχοδιαστολή και επιπλέον αγωγή μόνο με κατάλληλο προσωπικό/ισχύον πρωτόκολλο. Η GINA 2026 διακρίνει την οξεία κρίση από τη χρόνια αντιφλεγμονώδη θεραπεία.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://ginasthma.org/2026-gina-summary-guide/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Δοσολογία βρογχοδιασταλτικών/πρωτόκολλο",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4458,6 +4873,17 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Οξεία κρίση άσθματος: GINA 2026 και διάκριση από μακροχρόνια αγωγή.",
+      "sources": [
+        "https://ginasthma.org/2026-gina-summary-guide/",
+        "https://www.resus.org.uk/cy/node/36438"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4707,12 +5133,12 @@
     "group": "B",
     "page": 16,
     "question": "Ποιες είναι οι αντενδείξεις τοποθέτησης της έλξης μηρού σε έναν τραυματία με κάκωση στην περιοχή του μηρού;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Τραύμα / Ακινητοποίηση",
-    "answer": "Έλξη μηρού αποφεύγεται/απαιτεί εξειδικευμένη κρίση σε κάταγμα λεκάνης, εξάρθρωση ισχίου, τραύμα γόνατος/κνήμης/αστραγάλου στην ίδια πλευρά, μερικό ακρωτηριασμό ή άλλες κακώσεις που καθιστούν την έλξη επικίνδυνη. Περιφερική νευροαγγειακή εκτίμηση είναι υποχρεωτική.",
+    "answer": "Νάρθηκας έλξης μηρού χρησιμοποιείται, ανά μοντέλο, σε επιλεγμένο μεμονωμένο κάταγμα διάφυσης μηριαίου. Ύποπτη κάκωση πυέλου/ισχίου ή συνυπάρχον τραύμα γόνατος, κνήμης ή ποδοκνημικής μπορεί να αποτελεί αντένδειξη (ενδεικτικά για Sager). Απαιτούνται IFU συγκεκριμένης συσκευής, επαγγελματική εκπαίδευση και έλεγχος περιφερικής κυκλοφορίας.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-    "sourceLocation": "NICE NG39 – Major Trauma: Assessment and Initial Management",
+    "sourceUrl": "https://emsconsultantgroup.com/wp-content/uploads/2016/12/COMBINED_PROTOCOLS1_FINAL-copy.pdf",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Συσκευή έλξης/συνδυασμένες κακώσεις",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4723,6 +5149,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Νάρθηκας Sager έχει συγκεκριμένες αντενδείξεις κακώσεων πυέλου, ισχίου, γόνατος ή κνήμης.",
+      "sources": [
+        "https://emsconsultantgroup.com/wp-content/uploads/2016/12/COMBINED_PROTOCOLS1_FINAL-copy.pdf",
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4747,6 +5184,16 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "ambiguous_or_incomplete_original_question",
+      "finding": "Ενδεικτικοί πίνακες απώλειας αίματος δεν είναι καθολικές τιμές ανά ασθενή.",
+      "sources": [
+        "https://www.clinician.com/articles/135668-damage-control-resuscitation"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4768,12 +5215,12 @@
     "group": "B",
     "page": 16,
     "question": "Ποια είναι η δόση εφόδου υγρών σε παιδί, κατά την αναζωογόνηση από Υπογκαιμικό shock;",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Φάρμακα και αντίδοτα",
     "answer": "Παιδιατρικό υποογκαιμικό shock: αρχικός όγκος ισότονου bolus εξαρτάται από αιτία και κατευθυντήριες οδηγίες, συχνά 10 mL/kg με επανεκτίμηση. Σε αιμορραγία η έγκαιρη αιμοστατική παρέμβαση/προϊόντα αίματος υπερισχύουν της άσκοπης χορήγησης μεγάλων κρυσταλλοειδών. Ο συγκεκριμένος αλγόριθμος απαιτεί πρωτόκολλο εξειδικευμένης ομάδας.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-    "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
+    "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Παιδιατρικό shock: δοσολογία υγρών μεταβάλλεται ανά αίτιο",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4785,6 +5232,17 @@
         "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Παιδιατρικό υπογκαιμικό shock: bolus κατά ένδειξη, διαφορετική διαχείριση αιμορραγίας.",
+      "sources": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   },
   {
@@ -4845,12 +5303,12 @@
     "group": "B",
     "page": 16,
     "question": "Να αναφέρετε τους σκοπούς της τραχειοβρογχικής αναρρόφησης.",
-    "answerStatus": "editorial_review_needed",
+    "answerStatus": "reviewed_educational",
     "studyTopic": "Λοιπές επίσημες ερωτήσεις",
-    "answer": "Τραχειοβρογχική αναρρόφηση στοχεύει στην απομάκρυνση εκκρίσεων/αίματος που δυσχεραίνουν τη βατότητα και τον αερισμό, περιορίζοντας απόφραξη και ανάγκη επείγουσας παρέμβασης. Είναι επεμβατικός χειρισμός που απαιτεί εκπαίδευση και παρακολούθηση για υποξαιμία/τραυματισμό.",
+    "answer": "Σκοπός τραχειοβρογχικής αναρρόφησης είναι η απομάκρυνση εκκρίσεων/αίματος που περιορίζουν βατότητα ή αερισμό και η αποτροπή απόφραξης τεχνητού αεραγωγού. Είναι εξειδικευμένη επεμβατική διαδικασία με κινδύνους υποξαιμίας, τραυματισμού και αρρυθμίας, που απαιτεί εκπαίδευση, ενδείξεις και παρακολούθηση.",
     "answerProvenance": "Εκπαιδευτική σύνθεση, όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
-    "sourceUrl": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured",
-    "sourceLocation": "WHO/ICRC Basic Emergency Care: ABCDE, Trauma, Breathing, Shock, Altered Mental Status, Transfer",
+    "sourceUrl": "https://www.aarc.org/resource/clinical-practice-guidelines/",
+    "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
     "reviewNote": "Τραχειοβρογχική αναρρόφηση: εξειδικευμένη διαδικασία",
     "reviewAudit20261026": {
       "date": "2026-10-26",
@@ -4861,6 +5319,17 @@
         "https://www.msdmanuals.com/professional/critical-care-medicine/how-to-do-basic-airway-procedures/how-to-do-bag-valve-mask-bvm-ventilation"
       ],
       "independentClinicalSignOff": false
+    },
+    "reviewAudit20261026Followup": {
+      "date": "2026-10-26",
+      "verdict": "educational_source_supported",
+      "finding": "Τραχειοβρογχική αναρρόφηση: αφαίρεση εκκρίσεων, ειδική εκπαίδευση.",
+      "sources": [
+        "https://www.aarc.org/resource/clinical-practice-guidelines/",
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines"
+      ],
+      "independentClinicalCertification": false,
+      "operationalTrainingStillRequired": true
     }
   }
 ]
