@@ -113,3 +113,16 @@ html[data-theme="dark"] .chapter-toc-links a{background:#193647;color:#bddde9}
 html[data-theme="dark"] .lesson-sos{background:#193747;border-left-color:#79c2db}
 html[data-theme="dark"] .lesson-more{border-color:#365668}
 html[data-theme="dark"] .lesson-more>summary{color:#aad8ef}
+
+/* v27 — σημειώσεις SOS και πτυσσόμενες πρακτικές σειρές */
+.lesson-sos{line-height:1.55}
+.lesson-process{margin:12px 0;border:1px solid var(--line,#dbe5ed);border-radius:12px;overflow:hidden;background:var(--surface,#f7fafc)}
+.lesson-process>summary{cursor:pointer;padding:12px 14px;font-weight:650;color:var(--ink,#19374c);list-style-position:inside}
+.lesson-process[open]{padding-bottom:13px}
+.lesson-process ol{margin:0 18px 8px 30px;padding-left:14px}
+.lesson-process li{margin:7px 0;line-height:1.55}
+.lesson-process p,.lesson-process>a{display:block;margin:10px 15px;font-size:.9rem}
+.lesson-source-link{display:inline-block;margin:4px 0 12px;font-size:.88rem}
+html[data-theme="dark"] .lesson-process{background:#183244;border-color:#355367}
+html[data-theme="dark"] .lesson-process>summary{color:#eaf3f8}
+@media(max-width:620px){.lesson-process ol{margin-right:13px}}
