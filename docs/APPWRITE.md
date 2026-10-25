@@ -1,6 +1,6 @@
 # Appwrite: σύνδεση και προετοιμασία συγχρονισμού
 
-## Ενημέρωση 27.1.35 — ενεργοποίηση ροής Google
+## Ενημέρωση 27.1.36 — Google χωρίς εξάρτηση από cookies τρίτων
 
 Στις 26/10/2026 ο ιδιοκτήτης ολοκλήρωσε το OAuth Web client στο Google Cloud και
 καταχώρισε τα στοιχεία στο Appwrite Console. Ο πάροχος εμφανίζεται ως Google enabled,
@@ -8,9 +8,13 @@
 Το client secret μένει αποκλειστικά στο Console και δεν προστέθηκε στον κώδικα.
 
 Το κουμπί «Σύνδεση» στην κορυφή ανοίγει τον λογαριασμό. Η «Συνέχεια με Google»
-χρησιμοποιεί Account.createOAuth2Session με σταθερά success/failure URLs στην ίδια
-εγκατάσταση GitHub Pages, χωρίς πρόσθετα Google scopes. Μετά την επιστροφή ελέγχεται
-το Account.get(). Υπάρχει αποσύνδεση χωρίς διαγραφή τοπικής προόδου.
+χρησιμοποιεί Account.createOAuth2Token με σταθερά success/failure URLs στην ίδια
+εγκατάσταση GitHub Pages, χωρίς πρόσθετα Google scopes. Το oauth-callback.html καταναλώνει
+το εφάπαξ userId/secret μέσω Account.createSession και επιβεβαιώνει Account.get() πριν
+επιστρέψει στην αρχική. Η URL καθαρίζεται πριν από οποιοδήποτε αίτημα συνεδρίας,
+ο callback έχει no-referrer και δεν αποθηκεύεται από τον service worker. Δεν αποθηκεύουμε
+το εφάπαξ secret χειροκίνητα: τη συνεδρία διαχειρίζεται ο επίσημος Web SDK με το δικό
+του cookie fallback. Υπάρχει αποσύνδεση χωρίς διαγραφή τοπικής προόδου.
 
 Η σημαία googleLogin είναι true. Η σημαία sync παραμένει false μέχρι να δημιουργηθούν
 και να δοκιμαστούν οι ιδιωτικοί πόροι που περιγράφονται παρακάτω. Η ενεργοποίηση του
@@ -112,3 +116,7 @@ compute. Ο client δεν μπορεί να αλλάξει το πρόγραμμ
 [τιμολόγηση και συμπεριφορά Free](https://appwrite.io/pricing),
 [OAuth2](https://appwrite.io/docs/products/auth/oauth2),
 [δικαιώματα](https://appwrite.io/docs/advanced/platform/permissions).
+
+Η προηγούμενη ροή 27.1.35 έφτασε στη Google και επέστρεψε με success, αλλά η εφαρμογή
+δεν αναγνώρισε συνεδρία στον Brave. Γι’ αυτό χρησιμοποιείται πλέον η επίσημη λύση
+[OAuth2 tokens](https://appwrite.io/blog/post/fixing-oauth2-issues-in-appwrite-cloud).

@@ -1,4 +1,4 @@
-import { client, cloudFeatures } from './appwrite-client.js?app=27.1.35';
+import { client, cloudFeatures } from './appwrite-client.js?app=27.1.36';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 
 const account = new Account(client);
@@ -8,9 +8,9 @@ let initialized = false;
 // Keep return URLs on this installation, including the GitHub Pages subdirectory.
 export function loginWithGoogle() {
   if (!cloudFeatures.googleLogin) throw new Error('google-not-configured');
-  const success = new URL('./index.html?login=success', import.meta.url).href;
+  const success = new URL('./oauth-callback.html', import.meta.url).href;
   const failure = new URL('./index.html?login=failed', import.meta.url).href;
-  return account.createOAuth2Session({ provider: 'google', success, failure });
+  return account.createOAuth2Token({ provider: 'google', success, failure });
 }
 
 export function initAccountUI() {
@@ -73,8 +73,16 @@ export function initAccountUI() {
   paint();
   // No session request until the provider is configured; never create guest users.
   if (cloudFeatures.googleLogin && navigator.onLine !== false) {
-    account.get().then(value => { user = value; paint(); }).catch(() => {});
     const params = new URL(location.href).searchParams;
+    account.get().then(value => {
+      user = value; paint();
+      if (params.get('login') === 'success') dialog.showModal();
+    }).catch(() => {
+      if (params.get('login') === 'success') {
+        message.textContent = 'Η συνεδρία σύνδεσης δεν επιβεβαιώθηκε. Δοκίμασε ξανά τη σύνδεση Google.';
+        dialog.showModal();
+      }
+    });
     if (params.get('login') === 'failed') {
       message.textContent = 'Η σύνδεση Google ακυρώθηκε ή απέτυχε. Η τοπική σου πρόοδος δεν επηρεάστηκε.';
       dialog.showModal();
