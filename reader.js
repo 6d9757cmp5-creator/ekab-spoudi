@@ -1,0 +1,10 @@
+
+(()=>{'use strict';const key='ekab-saek-read-v1';let progress={};try{progress=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch(_){progress={}}
+const save=()=>{try{localStorage.setItem(key,JSON.stringify(progress))}catch(_){}};
+const chapters=[...document.querySelectorAll('.chapter')];const buttons=[...document.querySelectorAll('.complete')];
+function status(){let done=0;buttons.forEach(btn=>{const checked=!!progress[btn.dataset.id];if(checked)done++;btn.classList.toggle('done',checked);btn.setAttribute('aria-pressed',checked?'true':'false');btn.textContent=checked?'✓ Ολοκληρώθηκε':'○ Σημείωσε ως διαβασμένο'});const summary=document.getElementById('progressSummary');if(summary)summary.textContent=`${done} / ${buttons.length} σελίδες διαβασμένες`}
+buttons.forEach(b=>b.addEventListener('click',()=>{progress[b.dataset.id]=!progress[b.dataset.id];save();status()}));status();
+const search=document.getElementById('search');const found=document.getElementById('results');if(search){search.addEventListener('input',()=>{let term=search.value.trim().toLocaleLowerCase('el-GR'),num=0;chapters.forEach(el=>{const match=!term||el.textContent.toLocaleLowerCase('el-GR').includes(term);el.classList.toggle('hide-by-search',!match);if(match)num++});if(found)found.textContent=term?`${num} από ${chapters.length} σελίδες`:'Αναζήτηση σε όλο το μάθημα'})}
+const fontBtns=document.querySelectorAll('[data-font]');let fontSize=1.025;fontBtns.forEach(b=>b.addEventListener('click',()=>{fontSize=Math.max(.88,Math.min(1.35,fontSize+(b.dataset.font==='up'?.09:-.09)));document.documentElement.style.setProperty('--read-size',fontSize+'rem')}));
+const firstLink=document.querySelector('.side a[href^="#"]');if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>{for(let e of entries){if(!e.isIntersecting)continue;for(const a of document.querySelectorAll('.side a[href^="#"]'))a.classList.toggle('active',a.hash==='#'+e.target.id)}},{rootMargin:'-10% 0px -80% 0px'});chapters.forEach(el=>io.observe(el))}
+})();
