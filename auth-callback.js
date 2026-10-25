@@ -1,4 +1,4 @@
-import { client } from './appwrite-client.js?app=27.1.36';
+import { client } from './appwrite-client.js?app=27.1.37';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 import { finishOAuthReturn } from './oauth-return.js';
 

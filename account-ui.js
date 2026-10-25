@@ -1,4 +1,4 @@
-import { client, cloudFeatures } from './appwrite-client.js?app=27.1.36';
+import { client, cloudFeatures } from './appwrite-client.js?app=27.1.37';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 
 const account = new Account(client);
@@ -74,6 +74,11 @@ export function initAccountUI() {
   // No session request until the provider is configured; never create guest users.
   if (cloudFeatures.googleLogin && navigator.onLine !== false) {
     const params = new URL(location.href).searchParams;
+    if (params.has('login')) {
+      const clean = new URL(location.href);
+      clean.searchParams.delete('login');
+      history.replaceState(null, '', clean.href);
+    }
     account.get().then(value => {
       user = value; paint();
       if (params.get('login') === 'success') dialog.showModal();
