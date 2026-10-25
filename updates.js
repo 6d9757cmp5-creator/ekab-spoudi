@@ -10,6 +10,7 @@
  }catch(e){desc.textContent='Η ενημέρωση δεν εφαρμόστηκε. Η πρόοδος παραμένει αποθηκευμένη.';btn.disabled=false}}
  async function start(){const theme=$('themeToggle');if(theme){const updateTheme=()=>{let dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{let next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}updateTheme()};updateTheme()}
   if($('currentAppVersion'))$('currentAppVersion').textContent='v'+CURRENT;
+  if($('footerAppVersion'))$('footerAppVersion').textContent='v'+CURRENT;
   $('checkAppUpdates')?.addEventListener('click',checkVisible);
   $('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
   if(!('serviceWorker'in navigator)||location.protocol==='file:')return;
