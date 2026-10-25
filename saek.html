@@ -36,34 +36,29 @@ html[data-theme="dark"] .saek-picker{background:#1b384c}
  const intro=document.querySelector('.library-summary');
  if(!intro)return;
  const picker=document.createElement('div');picker.className='saek-picker';picker.hidden=true;
- picker.innerHTML='<label for="saekQuickSelect">Γρήγορη επιλογή</label><select id="saekQuickSelect"><option value="">Επίλεξε…</option></select>';
+ picker.innerHTML='<label for="saekSemesterSelect">1. Επίλεξε εξάμηνο</label><select id="saekSemesterSelect"><option value="">Επίλεξε εξάμηνο…</option></select><div id="saekCourseChoice" hidden style="margin-top:14px"><label for="saekCourseSelect">2. Επίλεξε μάθημα</label><select id="saekCourseSelect" disabled><option value="">Πρώτα επίλεξε εξάμηνο…</option></select></div>';
  intro.after(picker);
- const select=picker.querySelector('select');
- const courseButton=document.getElementById('chooseCourse'),semesterButton=document.getElementById('chooseSemester');
- function openCourseForSemester(target){
-  picker.hidden=false;picker.dataset.mode='course';select.replaceChildren();
-  const first=document.createElement('option');first.value='';first.textContent='Επίλεξε μάθημα…';select.append(first);
-  const i=sections.indexOf(target.closest('section.course-section'));
-  target.querySelectorAll('.course-tile').forEach(link=>{const opt=document.createElement('option');opt.value=link.getAttribute('href');opt.textContent=link.querySelector('strong').textContent;select.append(opt)});
-  picker.querySelector('label').textContent=(labels[i]||'')+' εξάμηνο · Επίλεξε μάθημα';select.focus();
- }
- function openPicker(mode){
-  picker.hidden=false;select.replaceChildren();
-  const first=document.createElement('option');first.value='';first.textContent=mode==='course'?'Επίλεξε μάθημα…':'Επίλεξε εξάμηνο…';select.append(first);
-  if(mode==='course'){
-   sections.forEach((section,i)=>section.querySelectorAll('.course-tile').forEach(link=>{
-    const opt=document.createElement('option');opt.value=link.getAttribute('href');opt.textContent=labels[i]+' εξάμηνο · '+link.querySelector('strong').textContent;select.append(opt);
-   }));
-  }else sections.forEach((section,i)=>{const opt=document.createElement('option');opt.value='#saek-semester-'+(i+1);opt.textContent=labels[i]+' εξάμηνο';select.append(opt)});
-  picker.dataset.mode=mode;picker.querySelector('label').textContent='Επίλεξε πρώτα εξάμηνο';select.focus();
- }
- courseButton?.addEventListener('click',()=>openPicker('semester'));
- semesterButton?.addEventListener('click',()=>openPicker('semester'));
- select.addEventListener('change',()=>{
-  if(!select.value)return;
-  if(picker.dataset.mode==='course'){location.href=select.value;return}
-  const target=document.querySelector(select.value);
-  if(target){sections.forEach(s=>{const f=s.querySelector('.saek-semester-fold');if(f)f.open=false});openCourseForSemester(target)}
+ const semester=picker.querySelector('#saekSemesterSelect');
+ const course=picker.querySelector('#saekCourseSelect');
+ const courseWrap=picker.querySelector('#saekCourseChoice');
+ sections.forEach((section,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=labels[i]+' εξάμηνο';semester.append(option)});
+ function showPicker(){picker.hidden=false;}
+ document.getElementById('chooseCourse')?.addEventListener('click',showPicker);
+ document.getElementById('chooseSemester')?.addEventListener('click',showPicker);
+ semester.addEventListener('change',()=>{
+  const i=Number(semester.value);
+  course.replaceChildren();
+  const initial=document.createElement('option');initial.value='';initial.textContent='Επίλεξε μάθημα…';course.append(initial);
+  const valid=semester.value!==''&&Number.isInteger(i)&&i>=0&&i<sections.length;
+  courseWrap.hidden=!valid;course.disabled=!valid;
+  if(!valid)return;
+  sections[i].querySelectorAll('.course-tile').forEach(link=>{
+   const option=document.createElement('option');option.value=link.getAttribute('href');option.textContent=link.querySelector('strong').textContent;course.append(option);
+  });
+ });
+ course.addEventListener('change',()=>{
+  const path=course.value;
+  if(/^saek-course-\\d{2}\\.html$/.test(path))window.location.assign(path);
  });
 })();
 </script></body></html>
