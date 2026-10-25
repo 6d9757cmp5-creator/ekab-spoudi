@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.34', $=id=>document.getElementById(id);
+const CURRENT='27.1.35', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
 function report(message){const e=$('updateCheckStatus');if(e)e.textContent=message;}
@@ -23,9 +23,9 @@ window.EkabUpdates={check};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 // Optional cloud setup never blocks the local app or update controls.
-import(new URL('./appwrite-client.js?app=27.1.32', document.currentScript.src).href)
+import(new URL('./appwrite-client.js?app=27.1.35', document.currentScript.src).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.32', new URL('./appwrite-client.js?app=27.1.32', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.35', new URL('./appwrite-client.js?app=27.1.35', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {

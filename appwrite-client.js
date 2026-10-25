@@ -5,8 +5,8 @@ export const client = new Client()
   .setEndpoint('https://fra.cloud.appwrite.io/v1')
   .setProject('6ade83ec00260198ae34');
 
-// Deliberately disabled until OAuth, private resources and isolation tests exist.
-export const cloudFeatures = Object.freeze({ googleLogin: false, sync: false });
+// Google provider enabled in Console. Data sync remains disabled pending private resources and tests.
+export const cloudFeatures = Object.freeze({ googleLogin: true, sync: false });
 
 let startup;
 export let connectionStatus = Object.freeze({ state: 'idle' });

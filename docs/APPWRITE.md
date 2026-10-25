@@ -1,27 +1,24 @@
 # Appwrite: σύνδεση και προετοιμασία συγχρονισμού
 
-## Ενημέρωση 27.1.32 — εμφανής λογαριασμός
+## Ενημέρωση 27.1.35 — ενεργοποίηση ροής Google
 
-Το κουμπί «Σύνδεση» βρίσκεται στην κορυφή της αρχικής και προστίθεται από το κοινό
-`account-ui.js` στις υπόλοιπες σελίδες. Ο διάλογος δηλώνει ρητά ότι η Google αναμένει
-ρύθμιση. Δεν παρουσιάζει το ping ως login ή συγχρονισμό. Έχουν προστεθεί η κλήση
-`Account.createOAuth2Session`, σταθερά success/failure URLs κάτω από την εγκατάσταση
-GitHub Pages και logout. Οι κλήσεις λογαριασμού/ανακατευθύνσεις παραμένουν κλειστές
-όσο `cloudFeatures.googleLogin === false`. Ο συγχρονισμός παραμένει επίσης κλειστός.
+Στις 26/10/2026 ο ιδιοκτήτης ολοκλήρωσε το OAuth Web client στο Google Cloud και
+καταχώρισε τα στοιχεία στο Appwrite Console. Ο πάροχος εμφανίζεται ως Google enabled,
+με Browser sign-in ενεργό και Native sign-in ανενεργό. Το Appwrite εμφανίζεται Free.
+Το client secret μένει αποκλειστικά στο Console και δεν προστέθηκε στον κώδικα.
 
-Το Google Cloud project `ekab-spoudi` δημιουργήθηκε χωρίς ενεργοποίηση Billing ή
-Free Trial. Χρειάζεται ολοκλήρωση της ταυτότητας εφαρμογής και δημιουργία OAuth Web
-client από τον ιδιοκτήτη. Εξουσιοδοτημένο JavaScript origin:
-`https://6d9757cmp5-creator.github.io`. Ακριβές Google redirect URI:
-`https://fra.cloud.appwrite.io/v1/account/sessions/oauth2/callback/google/6ade83ec00260198ae34`.
-Το client secret καταχωρίζεται μόνο στο Appwrite Console, ποτέ σε frontend αρχείο.
+Το κουμπί «Σύνδεση» στην κορυφή ανοίγει τον λογαριασμό. Η «Συνέχεια με Google»
+χρησιμοποιεί Account.createOAuth2Session με σταθερά success/failure URLs στην ίδια
+εγκατάσταση GitHub Pages, χωρίς πρόσθετα Google scopes. Μετά την επιστροφή ελέγχεται
+το Account.get(). Υπάρχει αποσύνδεση χωρίς διαγραφή τοπικής προόδου.
 
-Μετά τη ρύθμιση provider: αλλάζει μόνο η σημαία `googleLogin`, γίνεται πραγματικό
-login/logout στον browser και ελέγχεται η επιστροφή στην εφαρμογή. Η σημαία `sync`
-μένει false μέχρι τους ελέγχους ιδιωτικών πόρων που περιγράφονται παρακάτω.
+Η σημαία googleLogin είναι true. Η σημαία sync παραμένει false μέχρι να δημιουργηθούν
+και να δοκιμαστούν οι ιδιωτικοί πόροι που περιγράφονται παρακάτω. Η ενεργοποίηση του
+παρόχου και οι έλεγχοι URL δεν αποδεικνύουν ολοκληρωμένο login χρήστη· απαιτείται
+πραγματική είσοδος, επιστροφή και logout στον browser.
 
-Έλεγχος της ροής URL/της απενεργοποίησης χωρίς δίκτυο:
-`node --experimental-vm-modules scripts/verify-account.mjs`.
+Έλεγχοι χωρίς πραγματικά credentials ή πρόσβαση σε λογαριασμό:
+node --experimental-vm-modules scripts/verify-account.mjs και verify-appwrite.mjs.
 
 ## Τι λειτουργεί σε αυτή την έκδοση
 
@@ -39,9 +36,8 @@ login/logout στον browser και ελέγχεται η επιστροφή σ
 Η κατάσταση εμφανίζεται στο παράθυρο λογαριασμού από το κουμπί «Σύνδεση».
 Είναι επίσης διαθέσιμη ως export `connectionStatus` και event `ekab:appwrite-status`.
 
-Δεν δημιουργείται session, δεν διαβάζεται η τοπική πρόοδος από τον νέο κώδικα και
-δεν ανεβαίνουν σημειώσεις/PDF/ρυθμίσεις. Τα `cloudFeatures.googleLogin` και
-`cloudFeatures.sync` είναι `false`. Δεν προστίθεται παραπλανητικό κουμπί Google.
+Δεν δημιουργείται ανώνυμο session. Η ροή Google ξεκινά μόνο από τον χρήστη. Δεν διαβάζεται η τοπική πρόοδος από τον νέο κώδικα και
+δεν ανεβαίνουν σημειώσεις/PDF/ρυθμίσεις. Το `cloudFeatures.googleLogin` είναι `true` και το `cloudFeatures.sync` παραμένει `false`.
 
 ## Platform και δωρεάν πρόγραμμα
 
