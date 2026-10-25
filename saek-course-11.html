@@ -13,4 +13,48 @@ document.querySelectorAll('.chapter-toc-links a[href^="#lesson-"]').forEach(link
 });
 if(location.hash.startsWith('#lesson-')){
  let match=document.getElementById(location.hash.slice(1));if(match)match.open=true;
-}</script></body></html>
+}</script><style>
+/* Compact, single-chapter reader: Anatomy pilot */
+.reader-chapters .reader-fold:not([open]){display:none}
+.reader-chapters .reader-fold[open]{display:block}
+.chapter-toc{margin-bottom:12px}
+.chapter-toc-links a{display:block}
+.saek-reader-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:12px 0 20px}
+.saek-reader-nav button{flex:1;min-width:110px}
+.saek-reader-nav .saek-reader-count{font-weight:650;text-align:center;flex:1}
+@media(max-width:480px){.saek-reader-nav{gap:6px}.saek-reader-nav button{min-width:90px}}
+</style>
+<script>
+/* Only one chapter is displayed at a time; original content and progress keys stay unchanged. */
+(function(){
+ const chapters=Array.from(document.querySelectorAll('.reader-chapters > details.reader-fold'));
+ if(!chapters.length)return;
+ const toc=document.querySelector('.chapter-toc');
+ const nav=document.createElement('div');nav.className='saek-reader-nav';nav.setAttribute('aria-label','Πλοήγηση κεφαλαίων');
+ nav.innerHTML='<button type="button" class="btn compact secondary" id="saekChapterPrev">‹ Προηγούμενο</button><span class="saek-reader-count" id="saekChapterCount" aria-live="polite"></span><button type="button" class="btn compact" id="saekChapterNext">Επόμενο ›</button>';
+ document.querySelector('.reader-chapters').after(nav);
+ const key='ekab.saek.lastchapter.11';
+ let index=0;
+ const hashMatch=location.hash.match(/^#lesson-(\d+)$/);
+ try{index=hashMatch?Number(hashMatch[1])-1:Number(localStorage.getItem(key)||1)-1}catch(e){index=hashMatch?Number(hashMatch[1])-1:0}
+ if(!Number.isInteger(index)||index<0||index>=chapters.length)index=0;
+ function select(i,scroll){
+  index=Math.max(0,Math.min(chapters.length-1,i));
+  chapters.forEach((ch,j)=>{ch.open=j===index;ch.style.display=j===index?'block':'none'});
+  document.getElementById('saekChapterCount').textContent=(index+1)+' / '+chapters.length;
+  document.getElementById('saekChapterPrev').disabled=index===0;
+  document.getElementById('saekChapterNext').disabled=index===chapters.length-1;
+  try{localStorage.setItem(key,String(index+1))}catch(e){}
+  if(toc)toc.open=false;
+  if(scroll)document.querySelector('.reader-chapters').scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ document.getElementById('saekChapterPrev').addEventListener('click',()=>select(index-1,true));
+ document.getElementById('saekChapterNext').addEventListener('click',()=>select(index+1,true));
+ if(toc)toc.querySelectorAll('a[href^="#lesson-"]').forEach(a=>a.addEventListener('click',e=>{
+  const n=Number(a.getAttribute('href').replace('#lesson-',''));
+  if(n>=1&&n<=chapters.length){e.preventDefault();e.stopImmediatePropagation();select(n-1,true)}
+ },true));
+ chapters.forEach((ch,i)=>ch.addEventListener('toggle',()=>{if(ch.open&&i!==index)select(i,false)}));
+ select(index,false);
+})();
+</script><style>.saek-visual-fold{margin:0}.saek-visual-fold>summary{cursor:pointer;font-weight:700;font-size:1.05rem;padding:4px 0}.saek-visual-fold[open]>summary{margin-bottom:12px}</style><script>(function(){document.querySelectorAll('section.panel').forEach(section=>{if(!section.querySelector('img.course-diagram'))return;const heading=section.querySelector('h2');if(!heading)return;const details=document.createElement('details');details.className='saek-visual-fold';const summary=document.createElement('summary');summary.textContent=heading.textContent;details.append(summary);heading.remove();while(section.firstChild)details.append(section.firstChild);section.append(details);});})();</script></body></html>
