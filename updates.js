@@ -1,6 +1,6 @@
 /* PWA update lifecycle: detect automatically, apply only after user approval and checkpoint. */
 (function(){'use strict';
- const CURRENT='22.0.0';let reg=null,changed=false,prompted=false;
+ const CURRENT='23.0.0';let reg=null,changed=false,prompted=false;
  const $=id=>document.getElementById(id);
  function display(msg,showButton){const box=$('updateBanner');if(!box)return;box.hidden=false;$('updateDescription').textContent=msg;$('applyUpdate').hidden=!showButton;}
  async function detect(){if(!reg)return;try{await reg.update();if(reg.waiting&&navigator.serviceWorker.controller){prompted=true;display('Νέα έκδοση διαθέσιμη. Η πρόοδός σου θα αποθηκευτεί πριν εφαρμοστεί.',true);return}const r=await fetch('./version.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(j.version!==CURRENT&&navigator.serviceWorker.controller)display('Εντοπίστηκε νέα έκδοση '+j.version+'. Ολοκληρώνεται η λήψη...',false)}catch(e){/* Offline: keep running installed app */}}
@@ -8,7 +8,7 @@
   if(reg?.waiting){const worker=reg.waiting;worker.postMessage({type:'SKIP_WAITING'});return}
   await detect();desc.textContent='Δεν έχει ολοκληρωθεί η λήψη της έκδοσης. Δοκίμασε ξανά όταν έχεις σύνδεση.';btn.disabled=false;
  }catch(e){desc.textContent='Η ενημέρωση δεν εφαρμόστηκε. Η πρόοδος παραμένει αποθηκευμένη.';btn.disabled=false}}
- async function start(){const theme=$('themeToggle');if(theme){const updateTheme=()=>{let dark=document.documentElement.dataset.theme==='dark';theme.textContent=dark?'☀️ Φωτεινό':'🌙 Σκούρο';theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{let next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}updateTheme()};updateTheme()}
+ async function start(){const theme=$('themeToggle');if(theme){const updateTheme=()=>{let dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{let next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}updateTheme()};updateTheme()}
   $('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
   if(!('serviceWorker'in navigator)||location.protocol==='file:')return;
   try{reg=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(changed)return;changed=true;window.location.reload()});

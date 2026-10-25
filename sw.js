@@ -1,4 +1,4 @@
-const CACHE='ekab-spoudi-v22';
+const CACHE='ekab-spoudi-v23';
 const ASSETS=["./","./index.html","./styles.css","./app.js","./progress.js","./updates.js","./theme-init.js","./version.json","./contacts.html","./official_questions.json","./eoppep-source.pdf","./eoppep-page-17.webp","./eoppep-page-18.webp","./practical_exam.html","./saek.html","./study_map.html","./farmaka.html","./supplementary_practice.html","./supplementary_exercises.json","./manifest.webmanifest","./icon.svg","./saek-skeleton.svg","./saek-organs.svg","./saek-circulation.svg","./saek-course-01.html","./saek-course-02.html","./saek-course-03.html","./saek-course-04.html","./saek-course-05.html","./saek-course-06.html","./saek-course-07.html","./saek-course-08.html","./saek-course-09.html","./saek-course-10.html","./saek-course-11.html","./saek-course-12.html","./saek-course-13.html","./saek-course-14.html","./saek-course-15.html","./saek-course-16.html","./saek-course-17.html","./saek-course-18.html","./saek-course-19.html","./saek-course-20.html"];
 
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));

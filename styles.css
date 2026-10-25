@@ -55,3 +55,21 @@ html[data-theme="dark"] .contact-call{background:#204257;color:#c8f0ff;border-co
 html[data-theme="dark"] .contact-call small{color:#b3d3e3}
 [data-save-status][data-problem="true"]{color:#b4452c;font-weight:700}
 @media(max-width:590px){.brand{gap:7px}.utility{width:100%;justify-content:flex-end}.utility-button{font-size:.75rem}.update-inner{display:block}.update-actions{justify-content:flex-start;margin-top:10px}.contact-grid{grid-template-columns:1fr 1fr}}
+
+/* v23 — Minimal actions in the top-right of the same header row. */
+.header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}
+.header-row .brand{min-width:0;flex:1;flex-wrap:nowrap;gap:9px;align-items:center}
+.header-row .brand>div:nth-child(2){flex:1;min-width:0}
+.header-row .brand h1{font-size:clamp(1.04rem,4.5vw,1.33rem);line-height:1.2}
+.header-row .brand p{font-size:clamp(.66rem,2.7vw,.78rem);line-height:1.3}
+.top .utility,.header-row .utility{width:auto;flex:0 0 auto;margin:0 0 0 auto;display:flex;flex-wrap:nowrap;gap:6px;align-items:center;justify-content:flex-end}
+.utility-button{width:38px;height:38px;min-width:38px;min-height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:11px;border:1px solid #ffffff33;background:#ffffff0f;color:#eef8ff!important;transition:background .15s ease}
+.utility-button:hover,.utility-button:focus-visible{background:#ffffff2a}
+.utility-button .ui-icon{width:19px;height:19px;display:block;flex:none}
+.utility-button .icon-sun{display:none}
+html[data-theme="dark"] .utility-button .icon-moon{display:none}
+html[data-theme="dark"] .utility-button .icon-sun{display:block}
+.legacy-utilities{padding:10px 16px!important;display:flex;align-items:center;justify-content:flex-end;background:#12334b}
+.legacy-utilities .utility{width:auto;margin:0;flex-wrap:nowrap}
+@media(max-width:590px){.header-row{gap:8px}.header-row .brand{gap:7px}.header-row .logo{width:33px;height:33px;font-size:19px;border-radius:10px}.header-row .brand h1{font-size:1.06rem}.header-row .brand p{font-size:.66rem}.top .utility{width:auto;gap:5px}.utility-button{width:36px;height:36px;min-width:36px;min-height:36px}.nav{margin-top:17px}}
+@media(max-width:345px){.header-row .brand p{font-size:.6rem}.header-row .brand h1{font-size:.98rem}.header-row .logo{width:30px;height:30px}.utility-button{width:34px;height:34px;min-width:34px;min-height:34px}.header-row{gap:5px}}
