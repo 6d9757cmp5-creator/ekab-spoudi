@@ -1,0 +1,32 @@
+name: Έλεγχος ποιότητας ΣΑΕΚ
+
+on:
+  push:
+    paths:
+      - 'saek-course-*.html'
+      - 'README.md'
+      - 'version.json'
+      - 'updates.js'
+      - 'sw.js'
+      - 'scripts/verify-saek.mjs'
+      - '.github/workflows/saek-verify.yml'
+  pull_request:
+    paths:
+      - 'saek-course-*.html'
+      - 'README.md'
+      - 'version.json'
+      - 'updates.js'
+      - 'sw.js'
+      - 'scripts/verify-saek.mjs'
+      - '.github/workflows/saek-verify.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check SAEK learning chapters and version consistency
+        run: node scripts/verify-saek.mjs
