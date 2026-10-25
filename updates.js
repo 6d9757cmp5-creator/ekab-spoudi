@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.13', $=id=>document.getElementById(id);
+const CURRENT='27.1.14', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
 function report(message){const e=$('updateCheckStatus');if(e)e.textContent=message;}
@@ -10,7 +10,7 @@ async function apply(){if(applying)return;applying=true;const b=$('applyUpdate')
 if(!registration&&'serviceWorker'in navigator)registration=await navigator.serviceWorker.getRegistration('./');
 if(registration){await Promise.race([registration.update(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),10000))]);}
 if(registration?.waiting){d.textContent='Ενεργοποίηση νέας έκδοσης…';registration.waiting.postMessage({type:'SKIP_WAITING'});await Promise.race([new Promise(resolve=>navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true})),new Promise(resolve=>setTimeout(resolve,4500))]);}
-d.textContent='Ανανέωση εφαρμογής…';location.reload();
+d.textContent='Ανανέωση εφαρμογής…';location.replace('./index.html?refresh='+Date.now());
 }catch(e){d.textContent='Η ενημέρωση δεν ολοκληρώθηκε. Η πρόοδός σου παραμένει στη συσκευή. Δοκίμασε ξανά.';b.disabled=false;applying=false;}}
 async function start(){
 const theme=$('themeToggle');if(theme){const sync=()=>{const dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}sync()};sync();}
