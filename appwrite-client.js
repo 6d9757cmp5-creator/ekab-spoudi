@@ -13,10 +13,10 @@ export let connectionStatus = Object.freeze({ state: 'idle' });
 function report(state) {
   connectionStatus = Object.freeze({ state });
   const messages = {
-    checking: 'Έλεγχος σύνδεσης Appwrite…',
-    connected: 'Appwrite: επιτυχής σύνδεση. Google και συγχρονισμός δεν έχουν ενεργοποιηθεί.',
-    offline: 'Appwrite: εκτός σύνδεσης. Η τοπική μελέτη παραμένει διαθέσιμη.',
-    unavailable: 'Appwrite: η σύνδεση δεν επιβεβαιώθηκε. Η μελέτη συνεχίζεται τοπικά.'
+    checking: 'Έλεγχος διαθεσιμότητας…',
+    connected: 'Η υπηρεσία σύνδεσης είναι διαθέσιμη.',
+    offline: 'Εκτός σύνδεσης. Η τοπική μελέτη παραμένει διαθέσιμη.',
+    unavailable: 'Η υπηρεσία σύνδεσης δεν είναι διαθέσιμη. Η μελέτη συνεχίζεται τοπικά.'
   };
   document.querySelectorAll('[data-appwrite-status]').forEach(el => {
     el.textContent = messages[state];

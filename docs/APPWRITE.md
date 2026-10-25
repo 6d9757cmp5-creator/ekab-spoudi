@@ -1,5 +1,28 @@
 # Appwrite: σύνδεση και προετοιμασία συγχρονισμού
 
+## Ενημέρωση 27.1.31 — εμφανής λογαριασμός
+
+Το κουμπί «Σύνδεση» βρίσκεται στην κορυφή της αρχικής και προστίθεται από το κοινό
+`account-ui.js` στις υπόλοιπες σελίδες. Ο διάλογος δηλώνει ρητά ότι η Google αναμένει
+ρύθμιση. Δεν παρουσιάζει το ping ως login ή συγχρονισμό. Έχουν προστεθεί η κλήση
+`Account.createOAuth2Session`, σταθερά success/failure URLs κάτω από την εγκατάσταση
+GitHub Pages και logout. Οι κλήσεις λογαριασμού/ανακατευθύνσεις παραμένουν κλειστές
+όσο `cloudFeatures.googleLogin === false`. Ο συγχρονισμός παραμένει επίσης κλειστός.
+
+Το Google Cloud project `ekab-spoudi` δημιουργήθηκε χωρίς ενεργοποίηση Billing ή
+Free Trial. Χρειάζεται ολοκλήρωση της ταυτότητας εφαρμογής και δημιουργία OAuth Web
+client από τον ιδιοκτήτη. Εξουσιοδοτημένο JavaScript origin:
+`https://6d9757cmp5-creator.github.io`. Ακριβές Google redirect URI:
+`https://fra.cloud.appwrite.io/v1/account/sessions/oauth2/callback/google/6ade83ec00260198ae34`.
+Το client secret καταχωρίζεται μόνο στο Appwrite Console, ποτέ σε frontend αρχείο.
+
+Μετά τη ρύθμιση provider: αλλάζει μόνο η σημαία `googleLogin`, γίνεται πραγματικό
+login/logout στον browser και ελέγχεται η επιστροφή στην εφαρμογή. Η σημαία `sync`
+μένει false μέχρι τους ελέγχους ιδιωτικών πόρων που περιγράφονται παρακάτω.
+
+Έλεγχος της ροής URL/της απενεργοποίησης χωρίς δίκτυο:
+`node --experimental-vm-modules scripts/verify-account.mjs`.
+
 ## Τι λειτουργεί σε αυτή την έκδοση
 
 Η εφαρμογή παραμένει HTML/CSS/JavaScript στο GitHub Pages, χωρίς React ή build step.
@@ -13,7 +36,7 @@
 Μετά από 8 δευτερόλεπτα αναμονής εμφανίζεται αποτυχία επιβεβαίωσης· το υποκείμενο
 αίτημα μπορεί να ολοκληρωθεί αργότερα, χωρίς δεύτερο αίτημα ή αλλαγή της κατάστασης.
 Το ping επιβεβαιώνει μόνο τη συνδεσιμότητα, όχι OAuth, πρόσβαση σε δεδομένα ή συγχρονισμό.
-Η κατάσταση εμφανίζεται στην αρχική, μέσα στην «Αποθήκευση & Διαχείριση Προόδου».
+Η κατάσταση εμφανίζεται στο παράθυρο λογαριασμού από το κουμπί «Σύνδεση».
 Είναι επίσης διαθέσιμη ως export `connectionStatus` και event `ekab:appwrite-status`.
 
 Δεν δημιουργείται session, δεν διαβάζεται η τοπική πρόοδος από τον νέο κώδικα και
@@ -43,7 +66,7 @@ compute. Ο client δεν μπορεί να αλλάξει το πρόγραμμ
 `node --experimental-vm-modules scripts/verify-appwrite.mjs` και
 `node scripts/verify-saek.mjs`.
 
-## Μελλοντική σύνδεση Google (δεν έχει υλοποιηθεί/δοκιμαστεί)
+## Σύνδεση Google (δεν έχει ενεργοποιηθεί ή δοκιμαστεί end-to-end)
 
 1. Δημιουργία Google OAuth Web client. Το client secret μένει αποκλειστικά στο
    Appwrite Console → Auth → Google, ποτέ στο repository ή στον browser.
