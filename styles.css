@@ -198,3 +198,32 @@ html[data-theme="dark"] .lesson-process>summary{color:#eaf3f8}
 html[data-theme="dark"] .account-dialog{background:var(--bg)}html[data-theme="dark"] .account-dialog p{color:var(--muted)}html[data-theme="dark"] .google-signin{background:#fff;color:#183548}html[data-theme="dark"] .save-state{color:#79d4b1}html[data-theme="dark"] .danger-button{color:#ffb4a9;border-color:#91564f}
 @media(min-width:900px){#homeView>.panel:first-child{grid-row:auto}#homeView>.storage-panel{grid-column:1/-1}.storage-panel .body{padding:0 24px 18px}}
 @media(max-width:590px){.header-row{flex-wrap:wrap;align-items:center}.header-row .brand{flex-basis:100%}.top .header-row .utility{margin-top:10px;width:100%;justify-content:flex-end}.account-button{margin-right:auto;min-width:124px}.backup-grid{grid-template-columns:1fr}.storage-panel .body{padding:0 15px 15px}.storage-panel>summary{padding:15px}.storage-summary-note{display:none}.app-version-row{align-items:flex-start;flex-wrap:wrap}.backup-card{padding:15px}}
+
+
+/* Clickable ΕΚΑΒ Σπουδή brand + compact onboarding (v1). */
+.brand-home{display:flex;align-items:center;gap:11px;min-width:0;max-width:100%;color:inherit!important;text-decoration:none!important;border-radius:12px}
+.brand-home:focus-visible{outline:3px solid #82dff8;outline-offset:4px}
+.brand-home:hover .logo,.brand-home:focus-visible .logo{background:#ffffff30}
+.brand-home h1,.brand-home p{color:inherit}
+.brand-home p{color:#bdd4e3}
+.ekab-guide-reopen{display:flex;justify-content:flex-end;margin:0 0 9px}
+.ekab-guide-reopen-button{appearance:none;background:transparent;border:0;color:var(--blue);font-size:.78rem;font-weight:700;padding:6px 3px;min-height:35px;cursor:pointer}
+.ekab-guide-reopen-button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+.ekab-guide-shade{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;background:rgba(7,27,43,.72);padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px))}
+.ekab-guide-card{width:min(100%,390px);max-height:90vh;overflow:auto;border-radius:19px;background:#fff!important;color:#183548!important;padding:19px;box-shadow:0 15px 65px rgba(0,0,0,.33);line-height:1.5}
+.ekab-guide-top{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.ekab-guide-step{color:#507487;font-weight:750;font-size:.77rem}
+.ekab-guide-close{font:inherit;border:0;background:transparent;color:#245774;font-weight:700;font-size:.8rem;cursor:pointer;min-height:40px;padding:7px}
+.ekab-guide-symbol{font-size:2.1rem;line-height:1.3;margin:5px 0 8px}
+.ekab-guide-title{font-size:1.23rem!important;line-height:1.3;margin:0 0 9px!important;color:#173b53!important}
+.ekab-guide-description{font-size:.94rem;line-height:1.6;min-height:65px;color:#28495c!important;margin:0 0 17px}
+.ekab-guide-dots{display:flex;justify-content:center;gap:7px;margin:0 0 17px}
+.ekab-guide-dot{width:7px;height:7px;background:#c4d7e3;border-radius:50%;display:block}
+.ekab-guide-dot.selected{width:21px;border-radius:9px;background:#147aaf}
+.ekab-guide-actions{display:flex;justify-content:space-between;gap:10px}
+.ekab-guide-actions button{font:inherit;font-weight:750;border-radius:10px;min-height:44px;padding:9px 18px;cursor:pointer}
+.ekab-guide-prev{background:#edf4f9;border:1px solid #bcd4e2;color:#22506c}
+.ekab-guide-prev[hidden]{visibility:hidden}
+.ekab-guide-next{background:#176e99;border:1px solid #176e99;color:white}
+.ekab-guide-card button:focus-visible{outline:3px solid #3a98c9;outline-offset:3px}
+@media(max-width:370px){.ekab-guide-card{padding:15px}.ekab-guide-description{min-height:85px}.ekab-guide-title{font-size:1.12rem!important}}
