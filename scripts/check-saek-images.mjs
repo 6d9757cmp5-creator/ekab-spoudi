@@ -43,7 +43,9 @@ for(const [key,pics] of chosen){
 }
 for(const [key,a] of Object.entries(assets)){
  if(!a.filename||!a.page||!a.author||!a.license||!a.title||!a.caption)addError('Λείπουν στοιχεία πηγής '+key);
- if(!(a.originalArtwork===true && a.localPath && a.page?.startsWith('https://openstax.org/books/anatomy-and-physiology-2e/pages/'))&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
+ const originalHost=(a.page||'').match(/^https:\/\/([^\/?#]+)(?:[\/?#]|$)/)?.[1];
+ const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','www.resus.org.uk','www.moh.gov.gr','www.osha.gov','highways.dot.gov']).has(originalHost);
+ if(!originalAllowed&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
  if(a.localPath){
   if(!/^assets\/education\/[a-z0-9-]+\.svg$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
   else try{const bytes=await readFile(a.localPath);if(createHash('sha256').update(bytes).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
