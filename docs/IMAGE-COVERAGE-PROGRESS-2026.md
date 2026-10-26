@@ -1,16 +1,16 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 11**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 12**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 34 | 10 | 37 |
+| Α | 71 | 35 | 10 | 36 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **50** | **26** | **197** |
+| **Total** | **247** | **51** | **26** | **196** |
 
 **Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b14`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
@@ -129,3 +129,13 @@ For each new asset: verify relevance and the original source/license; render and
 - Updated audit registry, two chapter placements and `sw.js` precache to draft cache **b14**. Validated registry: **247 chapters, 50 selected, no missing asset keys or chapter-placement mismatches**. Draft selected per semester **Α 34/71, Β 5/73, Γ 5/51, Δ 6/52**, **197 unselected**, **32 assets**, **25 local original SVG**. Main registry last checked **Α10/71, Β5/73, Γ5/51, Δ6/52 = 26/247**, not verified production. App production version **27.1.68**, unchanged.
 - **Critical remaining gates:** independent scientific review still **0 documented**; 04-07 is not full handwashing technique or all PPE, 04-10 not complete biological-waste policy; SVG visual review in real browser, source renderer behavior, offline E2E and public deployment remain unverified. The draft image renderer shows attributed source figures but source-selected status is **not clinical approval**. Do not merge as clinically certified.
 - **Next safe batch:** add a genuinely relevant original diagram for the next unselected chapter after reviewing its content and sources; validate rendered visual appearance and end-to-end when a suitable browser and assets are accessible. Notify user at milestone 50, then next 100.
+
+
+## Batch 12: prevention levels for 04-03 (2026-10-26)
+
+- Created original Greek-labelled SVG `assets/education/prevention-levels-el.svg`, an explicit three-stage progression with anatomical/health symbols and concrete examples: primary prevention (vaccination before illness), secondary prevention (screening/early detection), tertiary prevention (rehabilitation/reducing complications). No patient-specific clinical protocol is depicted.
+- Registered `prevention_levels` in `saek-image-audit-2026.json`, placement `04-03` and course 4 lesson 3. Added asset to `sw.js` precache **b15**. No unrelated app or theory changes.
+- Registry structurally checked in the write operation: **247 chapters, 51 with at least one selected source** (Α35/71, Β5/73, Γ5/51, Δ6/52); **196 without selected source**, 33 registered assets. All selected chapter asset keys resolved in the audit registry.
+- Main-branch registry last checked **26/247** (Α10, Β5, Γ5, Δ6), NOT evidence of live deployment. Production version **27.1.68** unchanged. PR #6 remains draft.
+- **Outstanding:** independent scientific review, live verification of linked reference pages, SVG XML/raster and actual-browser/zoom/offline E2E, source renderer and public deployment. This asset is selected in draft, not certified, clinically approved, or published. Source review date and SHA-256 remain unset until independently verified.
+- **Next:** run XML/raster/real-app checks for recent assets, fill remaining 04-01 or 04-04 only with specific explanatory diagrams; preserve milestone notification schedule (next 100).
