@@ -1,25 +1,39 @@
 {
-  "version": 2,
-  "scope": "Γενική ιατρική και επιστήμες υγείας — ελληνική/αγγλική ορολογία",
-  "status": "Expandable starter set; new source-backed entries may be added without changing the UI.",
+  "version": 3,
+  "updated": "2026-10-26",
+  "scope": "Πρωτότυπη γενική δίγλωσση ιατρική ορολογία ελληνικά–αγγλικά και σύμβολα",
   "languages": [
     "el",
     "en"
   ],
-  "count": 17,
-  "categories": [
-    "Αιματολογία",
-    "Αλλεργιολογία",
-    "Αναπνευστικό",
-    "Γενική ιατρική",
-    "Διαγνωστική",
-    "Επείγουσα ιατρική",
-    "Καρδιολογία",
-    "Λοιμωξιολογία",
-    "Ογκολογία",
-    "Παθολογία"
-  ],
+  "count": 203,
+  "description": "Σύντομοι εκπαιδευτικοί ορισμοί. Η θεματική βιβλιογραφία είναι γενική αναφορά, όχι τεκμήριο ατομικού ελέγχου κάθε λήμματος. Επιλεγμένα σχήματα Wikimedia Commons με απόδοση δημιουργού και άδειας.",
   "items": [
+    {
+      "term": "Αγγειακό εγκεφαλικό επεισόδιο",
+      "en": "Stroke",
+      "category": "Νευρολογία",
+      "symbols": [
+        "ΑΕΕ",
+        "CVA"
+      ],
+      "aliases": [],
+      "definition": "Οξύ νευρολογικό επεισόδιο λόγω ισχαιμίας ή αιμορραγίας στον εγκέφαλο.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αδρεναλίνη",
+      "en": "Epinephrine",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "adrenaline"
+      ],
+      "aliases": [],
+      "definition": "Ορμόνη και φάρμακο που δρα στους αδρενεργικούς υποδοχείς.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
     {
       "term": "Αεραγωγός",
       "aliases": [
@@ -32,6 +46,117 @@
       "category": "Αναπνευστικό"
     },
     {
+      "term": "Αερισμός με ασκό",
+      "en": "Bag-mask ventilation",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "BVM",
+        "bag valve mask"
+      ],
+      "aliases": [],
+      "definition": "Υποβοήθηση της αναπνοής με ασκό και μάσκα.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αιματοκρίτης",
+      "en": "Hematocrit",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "Hct",
+        "HCT",
+        "haematocrit"
+      ],
+      "aliases": [],
+      "definition": "Ποσοστό όγκου αίματος που καταλαμβάνουν τα ερυθρά αιμοσφαίρια.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αιμοκάθαρση",
+      "en": "Hemodialysis",
+      "category": "Νεφρολογία",
+      "symbols": [
+        "haemodialysis"
+      ],
+      "aliases": [],
+      "definition": "Μέθοδος εξωνεφρικής κάθαρσης αίματος μέσω ειδικής μεμβράνης.",
+      "source": "https://medlineplus.gov/kidneydiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αιμοπετάλιο",
+      "en": "Platelet",
+      "category": "Αιματολογία",
+      "symbols": [
+        "PLT",
+        "thrombocyte"
+      ],
+      "aliases": [],
+      "definition": "Κυτταρικό θραύσμα που συμμετέχει στην αιμόσταση.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αιμορραγία",
+      "en": "Bleeding",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "hemorrhage",
+        "haemorrhage"
+      ],
+      "aliases": [],
+      "definition": "Απώλεια αίματος από αγγεία, εξωτερικά ή μέσα σε ιστούς και κοιλότητες.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αιμόσταση",
+      "en": "Hemostasis",
+      "category": "Αιματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Διεργασίες που περιορίζουν την απώλεια αίματος από τραυματισμένο αγγείο.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αιμοσφαιρίνη",
+      "en": "Hemoglobin",
+      "category": "Αιματολογία",
+      "symbols": [
+        "Hb",
+        "Hgb",
+        "haemoglobin"
+      ],
+      "aliases": [],
+      "definition": "Πρωτεΐνη των ερυθρών αιμοσφαιρίων που μεταφέρει το μεγαλύτερο μέρος του οξυγόνου.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ακτινογραφία",
+      "en": "Radiography",
+      "category": "Απεικόνιση",
+      "symbols": [
+        "X-ray"
+      ],
+      "aliases": [],
+      "definition": "Απεικόνιση του σώματος με ακτίνες Χ.",
+      "source": "https://medlineplus.gov/diagnosticimaging.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αλλεργία",
+      "en": "Allergy",
+      "category": "Αλλεργιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αντίδραση υπερευαισθησίας σε κάποια ουσία.",
+      "source": "https://medlineplus.gov/allergy.html",
+      "sourceType": "category"
+    },
+    {
       "term": "Αναιμία",
       "en": "Anemia",
       "category": "Αιματολογία",
@@ -40,6 +165,53 @@
       "aliases": [
         "Anemia"
       ]
+    },
+    {
+      "term": "Αναλγητικό",
+      "en": "Analgesic",
+      "category": "Φαρμακολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Φάρμακο που ανακουφίζει τον πόνο.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αναπνευστική συχνότητα",
+      "en": "Respiratory rate",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "RR",
+        "breaths/min"
+      ],
+      "aliases": [],
+      "definition": "Αριθμός αναπνευστικών κύκλων ανά λεπτό.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αναπνοή",
+      "en": "Breathing",
+      "category": "Φυσιολογία",
+      "symbols": [
+        "ventilation"
+      ],
+      "aliases": [],
+      "definition": "Είσοδος και έξοδος αέρα από τους πνεύμονες.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αναρρόφηση",
+      "en": "Suction",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "suctioning"
+      ],
+      "aliases": [],
+      "definition": "Αφαίρεση εκκρίσεων ή υγρών με αρνητική πίεση.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
     },
     {
       "term": "Αναφυλαξία",
@@ -53,6 +225,104 @@
       "category": "Αλλεργιολογία"
     },
     {
+      "term": "Ανισοκορία",
+      "en": "Anisocoria",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Διαφορά μεγέθους ανάμεσα στις δύο κόρες των ματιών.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αντιαιμοπεταλιακό",
+      "en": "Antiplatelet",
+      "category": "Φαρμακολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Φάρμακο που αναστέλλει τη λειτουργία των αιμοπεταλίων.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αντιβιοτικό",
+      "en": "Antibiotic",
+      "category": "Φαρμακολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Φάρμακο δραστικό κατά βακτηρίων, όχι κατά των ιών.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αντιγόνο",
+      "en": "Antigen",
+      "category": "Ανοσολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μόριο ή δομή που αναγνωρίζεται από το ανοσοποιητικό σύστημα.",
+      "source": "https://medlineplus.gov/immunesystemanddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αντιπηκτικό",
+      "en": "Anticoagulant",
+      "category": "Φαρμακολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Φάρμακο που αναστέλλει διεργασίες της πήξης του αίματος.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αντιπυρετικό",
+      "en": "Antipyretic",
+      "category": "Φαρμακολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Φάρμακο που μειώνει τον πυρετό.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αντισώμα",
+      "en": "Antibody",
+      "category": "Ανοσολογία",
+      "symbols": [
+        "IgG",
+        "IgM",
+        "IgA",
+        "immunoglobulin"
+      ],
+      "aliases": [],
+      "definition": "Πρωτεΐνη που αναγνωρίζει συγκεκριμένο αντιγόνο και συμμετέχει στην ανοσολογική απάντηση.",
+      "source": "https://medlineplus.gov/immunesystemanddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αξονική τομογραφία",
+      "en": "Computed tomography",
+      "category": "Απεικόνιση",
+      "symbols": [
+        "CT",
+        "ΑΤ"
+      ],
+      "aliases": [],
+      "definition": "Τεχνική απεικόνισης με ακτίνες Χ και υπολογιστική ανασύνθεση τομών.",
+      "source": "https://medlineplus.gov/diagnosticimaging.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αορτή",
+      "en": "Aorta",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μεγαλύτερη αρτηρία που εξέρχεται από την αριστερή κοιλία.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
       "term": "Απινίδωση",
       "aliases": [
         "απινιδωτής",
@@ -63,6 +333,151 @@
       "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines",
       "en": "Defibrillation",
       "category": "Επείγουσα ιατρική"
+    },
+    {
+      "term": "Άπνοια",
+      "en": "Apnea",
+      "category": "Αναπνευστικό",
+      "symbols": [
+        "apnoea"
+      ],
+      "aliases": [],
+      "definition": "Προσωρινή παύση της αναπνοής.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Απώλεια συνείδησης",
+      "en": "Loss of consciousness",
+      "category": "Νευρολογία",
+      "symbols": [
+        "LOC"
+      ],
+      "aliases": [],
+      "definition": "Κατάσταση απουσίας συνειδητής επίγνωσης και φυσιολογικής ανταπόκρισης.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Άρθρωση",
+      "en": "Joint",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Περιοχή όπου συναντώνται δύο ή περισσότερα οστά.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αρρυθμία",
+      "en": "Arrhythmia",
+      "category": "Καρδιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Διαταραχή της συχνότητας, κανονικότητας ή προέλευσης του καρδιακού ρυθμού.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αρτηρία",
+      "en": "Artery",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αιμοφόρο αγγείο που μεταφέρει αίμα μακριά από την καρδιά.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αρτηριακή πίεση",
+      "en": "Blood pressure",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "BP",
+        "ΑΠ",
+        "mmHg"
+      ],
+      "aliases": [],
+      "definition": "Πίεση του αίματος στα τοιχώματα των αρτηριών.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Άσθμα",
+      "en": "Asthma",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Χρόνια φλεγμονώδης νόσος των αεραγωγών με μεταβλητά συμπτώματα και στένωση αεραγωγών.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ασυστολία",
+      "en": "Asystole",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Απουσία ανιχνεύσιμης ηλεκτρικής καρδιακής δραστηριότητας στο ηλεκτροκαρδιογράφημα.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αυτόματος εξωτερικός απινιδωτής",
+      "en": "Automated external defibrillator",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "AED",
+        "ΑΕΑ"
+      ],
+      "aliases": [],
+      "definition": "Συσκευή που αναλύει τον ρυθμό και καθοδηγεί τη χορήγηση ηλεκτρικού shock όταν ενδείκνυται.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αφασία",
+      "en": "Aphasia",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Επίκτητη διαταραχή γλωσσικών λειτουργιών λόγω εγκεφαλικής βλάβης.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Αφυδάτωση",
+      "en": "Dehydration",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Έλλειμμα ύδατος του οργανισμού.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Βαθμοί Κελσίου",
+      "en": "Degrees Celsius",
+      "category": "Μονάδες",
+      "symbols": [
+        "°C"
+      ],
+      "aliases": [],
+      "definition": "Μονάδα θερμοκρασίας στην κλίμακα Κελσίου.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Βακτήριο",
+      "en": "Bacterium",
+      "category": "Λοιμωξιολογία",
+      "symbols": [
+        "bacteria"
+      ],
+      "aliases": [],
+      "definition": "Μονοκύτταρος προκαρυωτικός οργανισμός, ορισμένα είδη του οποίου προκαλούν λοιμώξεις.",
+      "source": "https://medlineplus.gov/infections.html",
+      "sourceType": "category"
     },
     {
       "term": "Βιοψία",
@@ -86,6 +501,572 @@
       "category": "Καρδιολογία"
     },
     {
+      "term": "Βραδύπνοια",
+      "en": "Bradypnea",
+      "category": "Αναπνευστικό",
+      "symbols": [
+        "bradypnoea"
+      ],
+      "aliases": [],
+      "definition": "Αναπνευστική συχνότητα χαμηλότερη από την αναμενόμενη.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Βρέφος",
+      "en": "Infant",
+      "category": "Παιδιατρική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Παιδί κατά το πρώτο έτος ζωής.",
+      "source": "https://medlineplus.gov/childrenshealth.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Βρογχιόλιο",
+      "en": "Bronchiole",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μικρός κλάδος των αεραγωγών μέσα στον πνεύμονα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Βρόγχος",
+      "en": "Bronchus",
+      "category": "Ανατομία",
+      "symbols": [
+        "bronchi"
+      ],
+      "aliases": [],
+      "definition": "Μεγάλος αεραγωγός που μεταφέρει αέρα στο εσωτερικό των πνευμόνων.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Γενική αίματος",
+      "en": "Complete blood count",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "CBC",
+        "FBC"
+      ],
+      "aliases": [],
+      "definition": "Εργαστηριακή εξέταση βασικών παραμέτρων των κυττάρων του αίματος.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Γλυκόζη",
+      "en": "Glucose",
+      "category": "Ενδοκρινολογία",
+      "symbols": [
+        "BG"
+      ],
+      "aliases": [],
+      "definition": "Απλό σάκχαρο που κυκλοφορεί στο αίμα και χρησιμοποιείται για ενέργεια.",
+      "source": "https://medlineplus.gov/diabetes.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διάγνωση",
+      "en": "Diagnosis",
+      "category": "Διαγνωστική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αναγνώριση νόσου ή κατάστασης βάσει κλινικών πληροφοριών και εξετάσεων.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διαλογή ασθενών",
+      "en": "Triage",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ιεράρχηση περιστατικών ανάλογα με τον επείγοντα χαρακτήρα και τις διαθέσιμες δυνατότητες.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διάρροια",
+      "en": "Diarrhea",
+      "category": "Παθολογία",
+      "symbols": [
+        "diarrhoea"
+      ],
+      "aliases": [],
+      "definition": "Αποβολή πιο υδαρών ή συχνότερων κενώσεων από το συνηθισμένο.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διάσειση",
+      "en": "Concussion",
+      "category": "Τραυματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ήπια τραυματική εγκεφαλική κάκωση που διαταράσσει προσωρινά τη λειτουργία του εγκεφάλου.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διαστολική πίεση",
+      "en": "Diastolic blood pressure",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "DBP"
+      ],
+      "aliases": [],
+      "definition": "Αρτηριακή πίεση κατά τη διαστολή της καρδιάς.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διάστρεμμα",
+      "en": "Sprain",
+      "category": "Τραυματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κάκωση των συνδέσμων μιας άρθρωσης.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διασωλήνωση",
+      "en": "Intubation",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "ETI",
+        "endotracheal intubation"
+      ],
+      "aliases": [],
+      "definition": "Τοποθέτηση σωλήνα μέσα στην τραχεία για διατήρηση και υποστήριξη αεραγωγού.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διάφραγμα",
+      "en": "Diaphragm",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κύριος εισπνευστικός μυς που χωρίζει θωρακική και κοιλιακή κοιλότητα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Διοξείδιο του άνθρακα",
+      "en": "Carbon dioxide",
+      "category": "Φυσιολογία",
+      "symbols": [
+        "CO₂",
+        "CO2"
+      ],
+      "aliases": [],
+      "definition": "Αέριο προϊόν του μεταβολισμού που αποβάλλεται κυρίως με την εκπνοή.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Δυσκοιλιότητα",
+      "en": "Constipation",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Δυσκολία στην αφόδευση ή αραιές κενώσεις.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Δύσπνοια",
+      "en": "Dyspnea",
+      "category": "Αναπνευστικό",
+      "symbols": [
+        "dyspnoea"
+      ],
+      "aliases": [],
+      "definition": "Υποκειμενικό αίσθημα δυσκολίας ή δυσφορίας στην αναπνοή.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Έγκαυμα",
+      "en": "Burn",
+      "category": "Τραυματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Βλάβη ιστών από θερμότητα, χημικές ουσίες, ηλεκτρισμό ή ακτινοβολία.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Εγκεφαλικό στέλεχος",
+      "en": "Brainstem",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Δομή που συνδέει τον εγκέφαλο με τον νωτιαίο μυελό και συμμετέχει σε ζωτικές λειτουργίες.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Εγκέφαλος",
+      "en": "Brain",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κεντρικό όργανο επεξεργασίας πληροφοριών και ελέγχου του οργανισμού.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Εγκυμοσύνη",
+      "en": "Pregnancy",
+      "category": "Μαιευτική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κατάσταση κατά την οποία αναπτύσσεται έμβρυο στη μήτρα.",
+      "source": "https://medlineplus.gov/pregnancy.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Έκτοπη κύηση",
+      "en": "Ectopic pregnancy",
+      "category": "Μαιευτική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κύηση κατά την οποία η εμφύτευση γίνεται έξω από την κοιλότητα της μήτρας.",
+      "source": "https://medlineplus.gov/pregnancy.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Εμβολή",
+      "en": "Embolism",
+      "category": "Αιματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Απόφραξη αγγείου από υλικό που μεταφέρθηκε με τη ροή του αίματος.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Εμβόλιο",
+      "en": "Vaccine",
+      "category": "Ανοσολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Βιολογικό προϊόν που προκαλεί προστατευτική ανοσολογική απόκριση.",
+      "source": "https://medlineplus.gov/immunesystemanddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Έμετος",
+      "en": "Vomiting",
+      "category": "Παθολογία",
+      "symbols": [
+        "emesis"
+      ],
+      "aliases": [],
+      "definition": "Αποβολή γαστρικού περιεχομένου μέσω του στόματος.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Έμφραγμα μυοκαρδίου",
+      "en": "Myocardial infarction",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "MI"
+      ],
+      "aliases": [],
+      "definition": "Νέκρωση καρδιακού μυός λόγω ισχαιμίας σύμφωνα με συγκεκριμένα διαγνωστικά κριτήρια.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ενδομυϊκή χορήγηση",
+      "en": "Intramuscular administration",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "IM"
+      ],
+      "aliases": [],
+      "definition": "Χορήγηση φαρμάκου στον μυϊκό ιστό.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ενδοφλέβια χορήγηση",
+      "en": "Intravenous administration",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "IV",
+        "ΕΦ"
+      ],
+      "aliases": [],
+      "definition": "Χορήγηση φαρμάκου ή υγρού απευθείας μέσα σε φλέβα.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Έντερο",
+      "en": "Intestine",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Τμήμα του πεπτικού που απορροφά θρεπτικές ουσίες και προωθεί το περιεχόμενο.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Εξάρθρημα",
+      "en": "Dislocation",
+      "category": "Τραυματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Απώλεια της φυσιολογικής επαφής μεταξύ αρθρικών επιφανειών.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Επιληπτική κρίση",
+      "en": "Seizure",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Παροδική εκδήλωση συμπτωμάτων από παθολογική συγχρονισμένη ηλεκτρική δραστηριότητα νευρώνων.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Επιληψία",
+      "en": "Epilepsy",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Εγκεφαλική νόσος με διαρκή προδιάθεση για επιληπτικές κρίσεις.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ερυθροκύτταρο",
+      "en": "Red blood cell",
+      "category": "Αιματολογία",
+      "symbols": [
+        "RBC",
+        "erythrocyte"
+      ],
+      "aliases": [],
+      "definition": "Κύτταρο του αίματος που μεταφέρει οξυγόνο μέσω της αιμοσφαιρίνης.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ηλεκτροκαρδιογράφημα",
+      "en": "Electrocardiogram",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "ΗΚΓ",
+        "ECG",
+        "EKG"
+      ],
+      "aliases": [],
+      "definition": "Καταγραφή της ηλεκτρικής δραστηριότητας της καρδιάς από ηλεκτρόδια.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category",
+      "image": {
+        "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Normal_Sinus_Rhythm.svg",
+        "page": "https://commons.wikimedia.org/wiki/File:Normal_Sinus_Rhythm.svg",
+        "credit": "Rocuronium Bromide",
+        "license": "CC0",
+        "caption": "Παράδειγμα φυσιολογικού φλεβοκομβικού ρυθμού"
+      }
+    },
+    {
+      "term": "Ήπαρ",
+      "en": "Liver",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Όργανο με βασικές λειτουργίες μεταβολισμού, αποτοξίνωσης και παραγωγής χολής.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ηχοκαρδιογράφημα",
+      "en": "Echocardiogram",
+      "category": "Απεικόνιση",
+      "symbols": [
+        "Echo"
+      ],
+      "aliases": [],
+      "definition": "Υπερηχογραφική εξέταση της καρδιακής δομής και λειτουργίας.",
+      "source": "https://medlineplus.gov/diagnosticimaging.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Θερμοκρασία σώματος",
+      "en": "Body temperature",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "°C",
+        "°F"
+      ],
+      "aliases": [],
+      "definition": "Μέτρηση της θερμικής κατάστασης του οργανισμού.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Θρόμβωση",
+      "en": "Thrombosis",
+      "category": "Αιματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Σχηματισμός θρόμβου μέσα σε αγγείο ή καρδιακή κοιλότητα.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Θώρακας",
+      "en": "Thorax",
+      "category": "Ανατομία",
+      "symbols": [
+        "chest"
+      ],
+      "aliases": [],
+      "definition": "Περιοχή του κορμού που περιλαμβάνει καρδιά, πνεύμονες και μεγάλα αγγεία.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ίκτερος",
+      "en": "Jaundice",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κίτρινη χροιά δέρματος και οφθαλμών λόγω αύξησης χολερυθρίνης.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ίλιγγος",
+      "en": "Vertigo",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ψευδαίσθηση κίνησης του σώματος ή του περιβάλλοντος.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ινσουλίνη",
+      "en": "Insulin",
+      "category": "Ενδοκρινολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ορμόνη του παγκρέατος που βοηθά στη ρύθμιση της γλυκόζης.",
+      "source": "https://medlineplus.gov/diabetes.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ιός",
+      "en": "Virus",
+      "category": "Λοιμωξιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Λοιμογόνος παράγοντας που απαιτεί κύτταρα ξενιστή για αναπαραγωγή.",
+      "source": "https://medlineplus.gov/infections.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ιστός",
+      "en": "Tissue",
+      "category": "Φυσιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ομάδα κυττάρων και εξωκυττάριων συστατικών που επιτελούν λειτουργία.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κακοήθεια",
+      "en": "Malignancy",
+      "category": "Ογκολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ιδιότητα καρκινικών κυττάρων να διηθούν ιστούς και ενδεχομένως να δημιουργούν μεταστάσεις.",
+      "source": "https://www.cancer.gov/publications/dictionaries/cancer-terms",
+      "sourceType": "category"
+    },
+    {
+      "term": "Καρδιά",
+      "en": "Heart",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μυϊκό όργανο που αντλεί αίμα στην πνευμονική και τη συστηματική κυκλοφορία.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category",
+      "image": {
+        "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Diagram_of_the_human_heart_el.svg",
+        "page": "https://commons.wikimedia.org/wiki/File:Diagram_of_the_human_heart_el.svg",
+        "credit": "Jmarchn",
+        "license": "CC BY-SA 3.0",
+        "caption": "Σχηματική απεικόνιση καρδιάς με ελληνικές ενδείξεις"
+      }
+    },
+    {
+      "term": "Καρδιακή ανακοπή",
+      "en": "Cardiac arrest",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αιφνίδια διακοπή αποτελεσματικής καρδιακής μηχανικής λειτουργίας και κυκλοφορίας.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Καρδιακή ανεπάρκεια",
+      "en": "Heart failure",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "HF"
+      ],
+      "aliases": [],
+      "definition": "Κλινικό σύνδρομο από διαταραχή στη δομή ή λειτουργία της καρδιάς.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Καρδιακή συχνότητα",
+      "en": "Heart rate",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "HR",
+        "bpm"
+      ],
+      "aliases": [],
+      "definition": "Αριθμός καρδιακών παλμών ανά λεπτό.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Καρδιοπνευμονική αναζωογόνηση",
+      "en": "Cardiopulmonary resuscitation",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "ΚΑΡΠΑ",
+        "CPR"
+      ],
+      "aliases": [],
+      "definition": "Θωρακικές συμπιέσεις και όπου ενδείκνυται αερισμοί για υποστήριξη κυκλοφορίας σε ανακοπή.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
       "term": "Καρκίνος",
       "en": "Cancer",
       "category": "Ογκολογία",
@@ -97,6 +1078,197 @@
       ]
     },
     {
+      "term": "Καρωτιδική αρτηρία",
+      "en": "Carotid artery",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αρτηρία στον τράχηλο που συμβάλλει στην αιμάτωση της κεφαλής.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κάταγμα",
+      "en": "Fracture",
+      "category": "Τραυματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Διακοπή της συνέχειας οστού.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κετοξέωση",
+      "en": "Ketoacidosis",
+      "category": "Ενδοκρινολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μεταβολική οξέωση που σχετίζεται με υπερπαραγωγή κετονικών σωμάτων.",
+      "source": "https://medlineplus.gov/diabetes.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κεφαλαλγία",
+      "en": "Headache",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Πόνος στην περιοχή της κεφαλής.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κλίμακα Γλασκώβης",
+      "en": "Glasgow Coma Scale",
+      "category": "Νευρολογία",
+      "symbols": [
+        "GCS"
+      ],
+      "aliases": [],
+      "definition": "Κλίμακα εκτίμησης οφθαλμικής, λεκτικής και κινητικής ανταπόκρισης.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κλινικό σημείο",
+      "en": "Clinical sign",
+      "category": "Διαγνωστική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αντικειμενικό εύρημα που παρατηρείται ή μετριέται στην εξέταση.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κοιλιά",
+      "en": "Abdomen",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Περιοχή του κορμού κάτω από τον θώρακα που περιέχει πολλά όργανα του πεπτικού.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κοιλιακή μαρμαρυγή",
+      "en": "Ventricular fibrillation",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "VF",
+        "VFib"
+      ],
+      "aliases": [],
+      "definition": "Χαοτική ηλεκτρική δραστηριότητα των κοιλιών χωρίς αποτελεσματική εξώθηση αίματος.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κοιλιακή ταχυκαρδία",
+      "en": "Ventricular tachycardia",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "VT"
+      ],
+      "aliases": [],
+      "definition": "Ταχύς καρδιακός ρυθμός με προέλευση από τις κοιλίες.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κολπική μαρμαρυγή",
+      "en": "Atrial fibrillation",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "AF",
+        "AFib"
+      ],
+      "aliases": [],
+      "definition": "Αρρυθμία με αποδιοργανωμένη κολπική ηλεκτρική δραστηριότητα και συχνά ακανόνιστο σφυγμό.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κορεσμός οξυγόνου",
+      "en": "Oxygen saturation",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "SpO₂",
+        "SpO2",
+        "SaO₂",
+        "SaO2"
+      ],
+      "aliases": [],
+      "definition": "Ποσοστό θέσεων αιμοσφαιρίνης που είναι κατειλημμένες από οξυγόνο· το σύμβολο δηλώνει τον τρόπο μέτρησης.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κόρη οφθαλμού",
+      "en": "Pupil",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Άνοιγμα στο κέντρο της ίριδας που ρυθμίζει την είσοδο φωτός.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κρανίο",
+      "en": "Skull",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Οστέινη δομή που προστατεύει τον εγκέφαλο.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κρανιοεγκεφαλική κάκωση",
+      "en": "Traumatic brain injury",
+      "category": "Τραυματολογία",
+      "symbols": [
+        "ΚΕΚ",
+        "TBI"
+      ],
+      "aliases": [],
+      "definition": "Βλάβη του εγκεφάλου από εξωτερική μηχανική δύναμη.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κυάνωση",
+      "en": "Cyanosis",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κυανή απόχρωση δέρματος ή βλεννογόνων λόγω αλλαγών στην αιμοσφαιρίνη.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Κύτταρο",
+      "en": "Cell",
+      "category": "Φυσιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Βασική δομική και λειτουργική μονάδα των ζωντανών οργανισμών.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Λευκοκύτταρο",
+      "en": "White blood cell",
+      "category": "Αιματολογία",
+      "symbols": [
+        "WBC",
+        "leukocyte"
+      ],
+      "aliases": [],
+      "definition": "Κύτταρο άμυνας του ανοσοποιητικού συστήματος.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
       "term": "Λοίμωξη",
       "en": "Infection",
       "category": "Λοιμωξιολογία",
@@ -105,6 +1277,143 @@
       "aliases": [
         "Infection"
       ]
+    },
+    {
+      "term": "Μαγνητική τομογραφία",
+      "en": "Magnetic resonance imaging",
+      "category": "Απεικόνιση",
+      "symbols": [
+        "MRI",
+        "ΜΤ"
+      ],
+      "aliases": [],
+      "definition": "Απεικόνιση με μαγνητικό πεδίο και ραδιοκύματα, χωρίς ιονίζουσα ακτινοβολία.",
+      "source": "https://medlineplus.gov/diagnosticimaging.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μερική πίεση διοξειδίου του άνθρακα",
+      "en": "Arterial carbon dioxide partial pressure",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "PaCO₂",
+        "PaCO2"
+      ],
+      "aliases": [],
+      "definition": "Μερική πίεση διοξειδίου του άνθρακα στο αρτηριακό αίμα.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μερική πίεση οξυγόνου",
+      "en": "Arterial oxygen partial pressure",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "PaO₂",
+        "PaO2"
+      ],
+      "aliases": [],
+      "definition": "Μερική πίεση του διαλυμένου οξυγόνου στο αρτηριακό αίμα· δεν είναι ποσοστό κορεσμού.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μεταβολισμός",
+      "en": "Metabolism",
+      "category": "Φυσιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Σύνολο χημικών διεργασιών που επιτρέπουν τη λειτουργία του οργανισμού.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μετάσταση",
+      "en": "Metastasis",
+      "category": "Ογκολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Εξάπλωση καρκινικών κυττάρων σε απομακρυσμένο σημείο από την αρχική εστία.",
+      "source": "https://www.cancer.gov/publications/dictionaries/cancer-terms",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μήτρα",
+      "en": "Uterus",
+      "category": "Μαιευτική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μυϊκό όργανο όπου αναπτύσσεται το έμβρυο κατά την κύηση.",
+      "source": "https://medlineplus.gov/pregnancy.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μικρογραμμάριο",
+      "en": "Microgram",
+      "category": "Μονάδες",
+      "symbols": [
+        "μg",
+        "mcg",
+        "µg"
+      ],
+      "aliases": [],
+      "definition": "Μονάδα μάζας που ισούται με ένα εκατομμυριοστό του γραμμαρίου· 1000 μg = 1 mg.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μυϊκή θλάση",
+      "en": "Muscle strain",
+      "category": "Τραυματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Κάκωση μυός ή τένοντα από υπερφόρτιση ή διάταση.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μύκητας",
+      "en": "Fungus",
+      "category": "Λοιμωξιολογία",
+      "symbols": [
+        "fungi"
+      ],
+      "aliases": [],
+      "definition": "Ευκαρυωτικός οργανισμός, ορισμένα είδη του οποίου προκαλούν μυκητιάσεις.",
+      "source": "https://medlineplus.gov/infections.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Μυς",
+      "en": "Muscle",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ιστός που συσπάται για την παραγωγή κίνησης ή λειτουργίας οργάνων.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ναυτία",
+      "en": "Nausea",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Δυσάρεστο αίσθημα που μπορεί να προηγείται εμέτου.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Νεογνό",
+      "en": "Newborn",
+      "category": "Παιδιατρική",
+      "symbols": [
+        "neonate"
+      ],
+      "aliases": [],
+      "definition": "Παιδί κατά τις πρώτες 28 ημέρες ζωής.",
+      "source": "https://medlineplus.gov/childrenshealth.html",
+      "sourceType": "category"
     },
     {
       "term": "Νεόπλασμα",
@@ -119,6 +1428,36 @@
       ]
     },
     {
+      "term": "Νεύρο",
+      "en": "Nerve",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Δέσμη νευρικών ινών που μεταφέρει σήματα προς και από ιστούς.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Νεφρός",
+      "en": "Kidney",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Όργανο που φιλτράρει το αίμα και ρυθμίζει υγρά και ηλεκτρολύτες.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Νωτιαίος μυελός",
+      "en": "Spinal cord",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Τμήμα του κεντρικού νευρικού συστήματος μέσα στον σπονδυλικό σωλήνα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
       "term": "Οίδημα",
       "en": "Edema",
       "category": "Γενική ιατρική",
@@ -130,6 +1469,227 @@
       ]
     },
     {
+      "term": "Οισοφάγος",
+      "en": "Esophagus",
+      "category": "Ανατομία",
+      "symbols": [
+        "oesophagus"
+      ],
+      "aliases": [],
+      "definition": "Μυϊκός σωλήνας που μεταφέρει τροφή από τον φάρυγγα στο στομάχι.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ομοιόσταση",
+      "en": "Homeostasis",
+      "category": "Φυσιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Διατήρηση σχετικά σταθερών εσωτερικών συνθηκών μέσω ρυθμιστικών μηχανισμών.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Οξεία νεφρική βλάβη",
+      "en": "Acute kidney injury",
+      "category": "Νεφρολογία",
+      "symbols": [
+        "AKI"
+      ],
+      "aliases": [],
+      "definition": "Αιφνίδια επιδείνωση της νεφρικής λειτουργίας.",
+      "source": "https://medlineplus.gov/kidneydiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Οξύ στεφανιαίο σύνδρομο",
+      "en": "Acute coronary syndrome",
+      "category": "Καρδιολογία",
+      "symbols": [
+        "ACS",
+        "ΟΣΣ"
+      ],
+      "aliases": [],
+      "definition": "Φάσμα οξέων ισχαιμικών καρδιακών καταστάσεων.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Οξυγόνο",
+      "en": "Oxygen",
+      "category": "Φυσιολογία",
+      "symbols": [
+        "O₂",
+        "O2"
+      ],
+      "aliases": [],
+      "definition": "Αέριο απαραίτητο για τον αερόβιο μεταβολισμό των κυττάρων.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Οξύτητα αίματος",
+      "en": "Blood pH",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "pH"
+      ],
+      "aliases": [],
+      "definition": "Μέτρο της οξεοβασικής κατάστασης του αίματος.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Οστό",
+      "en": "Bone",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Σκληρός, ζωντανός ιστός που αποτελεί βασικό στοιχείο του σκελετού.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πάγκρεας",
+      "en": "Pancreas",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Όργανο που παράγει πεπτικά ένζυμα και ορμόνες όπως η ινσουλίνη.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Παλμική οξυμετρία",
+      "en": "Pulse oximetry",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "SpO₂",
+        "SpO2"
+      ],
+      "aliases": [],
+      "definition": "Μη επεμβατική εκτίμηση αρτηριακού κορεσμού οξυγόνου μέσω οπτικού αισθητήρα.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Παρακεταμόλη",
+      "en": "Paracetamol",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "acetaminophen"
+      ],
+      "aliases": [],
+      "definition": "Αναλγητικό και αντιπυρετικό φάρμακο.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Παρεγκεφαλίδα",
+      "en": "Cerebellum",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Περιοχή του εγκεφάλου σημαντική για τον συντονισμό κινήσεων και την ισορροπία.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Παροδικό ισχαιμικό επεισόδιο",
+      "en": "Transient ischemic attack",
+      "category": "Νευρολογία",
+      "symbols": [
+        "TIA",
+        "ΠΙΕ"
+      ],
+      "aliases": [],
+      "definition": "Παροδική νευρολογική δυσλειτουργία από εστιακή ισχαιμία χωρίς οξύ έμφρακτο.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πλακούντας",
+      "en": "Placenta",
+      "category": "Μαιευτική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Όργανο της κύησης που επιτρέπει ανταλλαγές ουσιών μεταξύ μητέρας και εμβρύου.",
+      "source": "https://medlineplus.gov/pregnancy.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πλάσμα αίματος",
+      "en": "Blood plasma",
+      "category": "Αιματολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Υγρό τμήμα του αίματος στο οποίο αιωρούνται κύτταρα και διαλυμένες ουσίες.",
+      "source": "https://medlineplus.gov/blooddisorders.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πλευρά",
+      "en": "Rib",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Οστό του θωρακικού κλωβού.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πνευμοθώρακας",
+      "en": "Pneumothorax",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Παρουσία αέρα στην υπεζωκοτική κοιλότητα που μπορεί να προκαλέσει σύμπτωση πνεύμονα.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πνεύμονας",
+      "en": "Lung",
+      "category": "Ανατομία",
+      "symbols": [
+        "lungs"
+      ],
+      "aliases": [],
+      "definition": "Όργανο του αναπνευστικού συστήματος όπου πραγματοποιείται η ανταλλαγή αερίων.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category",
+      "image": {
+        "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lungs_diagram_simple.svg",
+        "page": "https://commons.wikimedia.org/wiki/File:Lungs_diagram_simple.svg",
+        "credit": "Patrick J. Lynch",
+        "license": "CC BY 2.5",
+        "caption": "Διάγραμμα πνευμόνων και τραχείας"
+      }
+    },
+    {
+      "term": "Πνευμονία",
+      "en": "Pneumonia",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Λοίμωξη του πνευμονικού παρεγχύματος.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πνευμονική εμβολή",
+      "en": "Pulmonary embolism",
+      "category": "Αναπνευστικό",
+      "symbols": [
+        "PE"
+      ],
+      "aliases": [],
+      "definition": "Απόφραξη κλάδου της πνευμονικής αρτηρίας, συχνά από θρόμβο.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
       "term": "Πνευμονική κυψελίδα",
       "aliases": [
         "κυψελίδα",
@@ -138,7 +1698,70 @@
       "definition": "Μικροσκοπική δομή των πνευμόνων όπου πραγματοποιείται η ανταλλαγή οξυγόνου και διοξειδίου του άνθρακα με το αίμα.",
       "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange",
       "en": "Pulmonary alveolus",
-      "category": "Αναπνευστικό"
+      "category": "Αναπνευστικό",
+      "image": {
+        "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Alveolus_diagram.svg",
+        "page": "https://commons.wikimedia.org/wiki/File:Alveolus_diagram.svg",
+        "credit": "LadyofHats",
+        "license": "Public domain",
+        "caption": "Διάγραμμα πνευμονικής κυψελίδας"
+      }
+    },
+    {
+      "term": "Πνευμονικό οίδημα",
+      "en": "Pulmonary edema",
+      "category": "Αναπνευστικό",
+      "symbols": [
+        "pulmonary oedema"
+      ],
+      "aliases": [],
+      "definition": "Μη φυσιολογική συσσώρευση υγρού στους πνεύμονες.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πόνος",
+      "en": "Pain",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Δυσάρεστη αισθητηριακή και συναισθηματική εμπειρία που συνδέεται με πραγματική ή πιθανή ιστική βλάβη.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πρόγνωση",
+      "en": "Prognosis",
+      "category": "Διαγνωστική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Εκτίμηση της πιθανής εξέλιξης μίας νόσου.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Προεκλαμψία",
+      "en": "Preeclampsia",
+      "category": "Μαιευτική",
+      "symbols": [
+        "pre-eclampsia"
+      ],
+      "aliases": [],
+      "definition": "Υπερτασική διαταραχή της κύησης που μπορεί να συνοδεύεται από οργανική δυσλειτουργία.",
+      "source": "https://medlineplus.gov/pregnancy.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Πρωτογενής εκτίμηση ABCDE",
+      "en": "ABCDE assessment",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "ABCDE"
+      ],
+      "aliases": [],
+      "definition": "Δομημένη αρχική εκτίμηση αεραγωγού, αναπνοής, κυκλοφορίας, νευρολογικής κατάστασης και έκθεσης.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
     },
     {
       "term": "Πυρετός",
@@ -152,6 +1775,215 @@
       ]
     },
     {
+      "term": "Σακχαρώδης διαβήτης",
+      "en": "Diabetes mellitus",
+      "category": "Ενδοκρινολογία",
+      "symbols": [
+        "DM"
+      ],
+      "aliases": [],
+      "definition": "Ομάδα μεταβολικών νόσων με χρόνια υπεργλυκαιμία.",
+      "source": "https://medlineplus.gov/diabetes.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σαλβουταμόλη",
+      "en": "Salbutamol",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "albuterol",
+        "β₂",
+        "β2"
+      ],
+      "aliases": [],
+      "definition": "Βρογχοδιασταλτικό βραχείας δράσης που διεγείρει β₂-αδρενεργικούς υποδοχείς.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σηπτικό σοκ",
+      "en": "Septic shock",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Βαρύ υποσύνολο σήψης με σημαντικές κυκλοφορικές και μεταβολικές διαταραχές.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σήψη",
+      "en": "Sepsis",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Απειλητική για τη ζωή οργανική δυσλειτουργία λόγω δυσρυθμισμένης αντίδρασης σε λοίμωξη.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σκελετός",
+      "en": "Skeleton",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Το σύνολο των οστών που στηρίζουν το σώμα και προστατεύουν εσωτερικά όργανα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category",
+      "image": {
+        "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Human_skeleton_front_el.svg",
+        "page": "https://commons.wikimedia.org/wiki/File:Human_skeleton_front_el.svg",
+        "credit": "Αντιγόνη · LadyofHats",
+        "license": "Public domain",
+        "caption": "Ανθρώπινος σκελετός με ελληνικές ονομασίες οστών"
+      }
+    },
+    {
+      "term": "Σοκ",
+      "en": "Shock",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "καταπληξία"
+      ],
+      "aliases": [],
+      "definition": "Ανεπαρκής ιστική αιμάτωση λόγω σοβαρής κυκλοφορικής δυσλειτουργίας.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σπλήνας",
+      "en": "Spleen",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Όργανο του λεμφικού συστήματος με ανοσολογικές λειτουργίες.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σπονδυλική στήλη",
+      "en": "Vertebral column",
+      "category": "Ανατομία",
+      "symbols": [
+        "spine"
+      ],
+      "aliases": [],
+      "definition": "Σειρά σπονδύλων που στηρίζει τον κορμό και προστατεύει τον νωτιαίο μυελό.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σπόνδυλος",
+      "en": "Vertebra",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Οστό της σπονδυλικής στήλης.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Στέρνο",
+      "en": "Sternum",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Επίπεδο οστό στο πρόσθιο μέρος του θώρακα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Στηθάγχη",
+      "en": "Angina pectoris",
+      "category": "Καρδιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Θωρακική ενόχληση που σχετίζεται με ισχαιμία του καρδιακού μυός.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Στομάχι",
+      "en": "Stomach",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Όργανο της πέψης που συγκρατεί και αναμειγνύει τροφές.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Στρίδωρ",
+      "en": "Stridor",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Θορυβώδης αναπνευστικός ήχος που μπορεί να σχετίζεται με απόφραξη ανώτερου αεραγωγού.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Συγκοπή",
+      "en": "Syncope",
+      "category": "Νευρολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Παροδική απώλεια συνείδησης από συνολικά μειωμένη εγκεφαλική αιμάτωση, με αυτόματη ανάνηψη.",
+      "source": "https://medlineplus.gov/neurologicdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σύμπτωμα",
+      "en": "Symptom",
+      "category": "Διαγνωστική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Υποκειμενική ενόχληση που περιγράφει ο ασθενής.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Σύνδεσμος",
+      "en": "Ligament",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Συνδετικός ιστός που σταθεροποιεί συνδέσεις μεταξύ οστών.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Συριγμός",
+      "en": "Wheezing",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μουσικός αναπνευστικός ήχος που συχνά σχετίζεται με στένωση αεραγωγών.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Συστολική πίεση",
+      "en": "Systolic blood pressure",
+      "category": "Ζωτικά σημεία",
+      "symbols": [
+        "SBP"
+      ],
+      "aliases": [],
+      "definition": "Αρτηριακή πίεση κατά τη συστολή της καρδιάς.",
+      "source": "https://medlineplus.gov/vitalsigns.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Ταχυκαρδία",
+      "en": "Tachycardia",
+      "category": "Καρδιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Καρδιακή συχνότητα υψηλότερη από την αναμενόμενη για ηλικία και κατάσταση.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
       "term": "Ταχύπνοια",
       "aliases": [
         "γρήγορη αναπνοή",
@@ -163,6 +1995,127 @@
       "category": "Αναπνευστικό"
     },
     {
+      "term": "Τένοντας",
+      "en": "Tendon",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ισχυρός συνδετικός ιστός που συνδέει συνήθως μυ με οστό.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Τοκετός",
+      "en": "Childbirth",
+      "category": "Μαιευτική",
+      "symbols": [
+        "labor",
+        "labour"
+      ],
+      "aliases": [],
+      "definition": "Διαδικασία γέννησης του παιδιού.",
+      "source": "https://medlineplus.gov/pregnancy.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Τραύμα",
+      "en": "Wound",
+      "category": "Τραυματολογία",
+      "symbols": [
+        "injury"
+      ],
+      "aliases": [],
+      "definition": "Βλάβη ιστών από μηχανικό ή άλλο εξωτερικό παράγοντα.",
+      "source": "https://medlineplus.gov/injuriesandwounds.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Τραχεία",
+      "en": "Trachea",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αεραγωγός από τον λάρυγγα έως τους κύριους βρόγχους.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Τριχοειδές αγγείο",
+      "en": "Capillary",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Πολύ μικρό αγγείο όπου γίνονται ανταλλαγές ουσιών με τους ιστούς.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Τροπονίνη",
+      "en": "Troponin",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "cTn",
+        "hs-cTn"
+      ],
+      "aliases": [],
+      "definition": "Πρωτεΐνη που χρησιμοποιείται ως δείκτης βλάβης του μυοκαρδίου.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υπεζωκότας",
+      "en": "Pleura",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Λεπτός υμένας που καλύπτει τους πνεύμονες και το εσωτερικό του θώρακα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υπεραερισμός",
+      "en": "Hyperventilation",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Υπερβολικός κυψελιδικός αερισμός σε σχέση με την παραγωγή διοξειδίου του άνθρακα.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υπεργλυκαιμία",
+      "en": "Hyperglycemia",
+      "category": "Ενδοκρινολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αυξημένη συγκέντρωση γλυκόζης στο αίμα.",
+      "source": "https://medlineplus.gov/diabetes.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υπερηχογράφημα",
+      "en": "Ultrasound imaging",
+      "category": "Απεικόνιση",
+      "symbols": [
+        "US",
+        "sonography"
+      ],
+      "aliases": [],
+      "definition": "Απεικονιστική εξέταση που χρησιμοποιεί κύματα υπερήχων.",
+      "source": "https://medlineplus.gov/diagnosticimaging.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υπερθερμία",
+      "en": "Hyperthermia",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αύξηση θερμοκρασίας σώματος από υπερπαραγωγή ή ανεπαρκή αποβολή θερμότητας.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
+    },
+    {
       "term": "Υπέρταση",
       "en": "Hypertension",
       "category": "Καρδιολογία",
@@ -172,6 +2125,51 @@
         "Hypertension",
         "υψηλή πίεση"
       ]
+    },
+    {
+      "term": "Υποαερισμός",
+      "en": "Hypoventilation",
+      "category": "Αναπνευστικό",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Ανεπαρκής κυψελιδικός αερισμός σε σχέση με την παραγωγή διοξειδίου του άνθρακα.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υπογλυκαιμία",
+      "en": "Hypoglycemia",
+      "category": "Ενδοκρινολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Μειωμένη συγκέντρωση γλυκόζης στο αίμα που μπορεί να προκαλέσει συμπτώματα.",
+      "source": "https://medlineplus.gov/diabetes.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υποδόρια χορήγηση",
+      "en": "Subcutaneous administration",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "SC",
+        "SQ"
+      ],
+      "aliases": [],
+      "definition": "Χορήγηση φαρμάκου στον υποδόριο ιστό.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Υποθερμία",
+      "en": "Hypothermia",
+      "category": "Επείγουσα ιατρική",
+      "symbols": [
+        "<35°C"
+      ],
+      "aliases": [],
+      "definition": "Θερμοκρασία πυρήνα σώματος χαμηλότερη από 35 °C.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines",
+      "sourceType": "category"
     },
     {
       "term": "Υποξαιμία",
@@ -205,6 +2203,112 @@
         "Hypotension",
         "χαμηλή πίεση"
       ]
+    },
+    {
+      "term": "Φλέβα",
+      "en": "Vein",
+      "category": "Ανατομία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Αιμοφόρο αγγείο που επιστρέφει αίμα προς την καρδιά.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "sourceType": "category"
+    },
+    {
+      "term": "Φλεβοκομβικός ρυθμός",
+      "en": "Sinus rhythm",
+      "category": "Καρδιολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Καρδιακός ρυθμός που προέρχεται από τον φλεβόκομβο.",
+      "source": "https://medlineplus.gov/heartdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Φλεγμονή",
+      "en": "Inflammation",
+      "category": "Παθολογία",
+      "symbols": [],
+      "aliases": [],
+      "definition": "Απόκριση ιστών σε βλάβη ή βλαπτικό ερέθισμα.",
+      "source": "https://medlineplus.gov/healthtopics.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Χιλιοστό υδραργύρου",
+      "en": "Millimeter of mercury",
+      "category": "Μονάδες",
+      "symbols": [
+        "mmHg"
+      ],
+      "aliases": [],
+      "definition": "Μονάδα μέτρησης πίεσης που χρησιμοποιείται στην αρτηριακή πίεση.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Χιλιοστόγραμμο",
+      "en": "Milligram",
+      "category": "Μονάδες",
+      "symbols": [
+        "mg"
+      ],
+      "aliases": [],
+      "definition": "Μονάδα μάζας που ισούται με ένα χιλιοστό του γραμμαρίου.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Χιλιοστόλιτρο",
+      "en": "Milliliter",
+      "category": "Μονάδες",
+      "symbols": [
+        "mL",
+        "ml",
+        "millilitre"
+      ],
+      "aliases": [],
+      "definition": "Μονάδα όγκου ίση με ένα χιλιοστό του λίτρου.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
+    },
+    {
+      "term": "Χορήγηση από το στόμα",
+      "en": "Oral administration",
+      "category": "Φαρμακολογία",
+      "symbols": [
+        "PO",
+        "per os"
+      ],
+      "aliases": [],
+      "definition": "Χορήγηση φαρμάκου μέσω στόματος για κατάποση.",
+      "source": "https://medlineplus.gov/druginformation.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "Χρόνια αποφρακτική πνευμονοπάθεια",
+      "en": "Chronic obstructive pulmonary disease",
+      "category": "Αναπνευστικό",
+      "symbols": [
+        "ΧΑΠ",
+        "COPD"
+      ],
+      "aliases": [],
+      "definition": "Χρόνια νόσος με επίμονη απόφραξη στη ροή του αέρα.",
+      "source": "https://medlineplus.gov/lungdiseases.html",
+      "sourceType": "category"
+    },
+    {
+      "term": "C-αντιδρώσα πρωτεΐνη",
+      "en": "C-reactive protein",
+      "category": "Εργαστηριακά",
+      "symbols": [
+        "CRP"
+      ],
+      "aliases": [],
+      "definition": "Πρωτεΐνη οξείας φάσης που μπορεί να αυξηθεί σε φλεγμονή.",
+      "source": "https://medlineplus.gov/lab-tests/",
+      "sourceType": "category"
     }
   ]
 }
