@@ -78,6 +78,90 @@
         "public-domain status"
       ],
       "clinicalReview": "pending"
+    },
+    "feedback": {
+      "filename": "temperature-feedback-el.svg",
+      "localPath": "assets/education/temperature-feedback-el.svg",
+      "title": "Θερμορρύθμιση και αρνητική ανατροφοδότηση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "caption": "Πρωτότυπο διάγραμμα του μηχανισμού αποβολής θερμότητας. Δεν αποτελεί οδηγία αντιμετώπισης υπερθερμίας.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "7aa9ad963f33cd0e5b4c33565ad82e5b6c2a235869d9ee59bbcf2aa8bf0f51de"
+    },
+    "membrane": {
+      "filename": "membrane-bilayer-el.svg",
+      "localPath": "assets/education/membrane-bilayer-el.svg",
+      "title": "Φωσφολιπιδική διπλοστιβάδα",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/3-1-the-cell-membrane",
+      "caption": "Σχηματική λεπτομέρεια μεμβράνης. Παραλείπονται πρωτεΐνες και χοληστερόλη για σαφήνεια· δεν απεικονίζονται όλοι οι ιστοί ή οι τρόποι μεταφοράς.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "4efdec8a631521582e6ae75c3f0302db9ab2f44680c55be5bb8e862a86a51176"
+    },
+    "gas_diffusion": {
+      "filename": "alveolar-diffusion-el.svg",
+      "localPath": "assets/education/alveolar-diffusion-el.svg",
+      "title": "Πνευμονική ανταλλαγή αερίων",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange",
+      "caption": "Σχηματική απόδοση της φυσιολογικής κατεύθυνσης διάχυσης O₂ και CO₂. Δεν είναι ανατομική τομή ούτε διάγραμμα οξυγονοθεραπείας.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "fd8c40b4c8b782372c055a74af1cf776d973c724f75e4370840d08a2feed6ffb"
+    },
+    "quadrants": {
+      "filename": "abdominal-quadrants-el.svg",
+      "localPath": "assets/education/abdominal-quadrants-el.svg",
+      "title": "Τεταρτημόρια κοιλιάς σε πρόσθια όψη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+      "caption": "Οι πλευρές αναφέρονται στον ασθενή. Σχηματικός χάρτης τεσσάρων τεταρτημορίων, όχι απεικόνιση οργάνων ή των εννέα περιοχών.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "0cdc3db17a5e138fe7a6142106b96871263101c68e89d4e96b2cde1f55e2bfdb"
     }
   },
   "placements": {
@@ -101,7 +185,8 @@
     ],
     "02-02": [
       "lower",
-      "respiratory"
+      "respiratory",
+      "gas_diffusion"
     ],
     "02-03": [
       "heart"
@@ -162,10 +247,23 @@
       "brain_medial"
     ],
     "02-09": [
-      "respiratory"
+      "respiratory",
+      "gas_diffusion"
     ],
     "10-02": [
       "brain_medial"
+    ],
+    "02-01": [
+      "feedback"
+    ],
+    "01-06": [
+      "membrane"
+    ],
+    "02-05": [
+      "membrane"
+    ],
+    "01-14": [
+      "quadrants"
     ]
   },
   "courses": [
@@ -208,8 +306,10 @@
         },
         {
           "anchor": "#lesson-6",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "membrane"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-7",
@@ -258,8 +358,10 @@
         },
         {
           "anchor": "#lesson-14",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "quadrants"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         }
       ]
     },
@@ -270,14 +372,17 @@
       "chapters": [
         {
           "anchor": "#lesson-1",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "feedback"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-2",
           "images": [
             "lower",
-            "respiratory"
+            "respiratory",
+            "gas_diffusion"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
@@ -295,8 +400,10 @@
         },
         {
           "anchor": "#lesson-5",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "membrane"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-6",
@@ -316,7 +423,8 @@
         {
           "anchor": "#lesson-9",
           "images": [
-            "respiratory"
+            "respiratory",
+            "gas_diffusion"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },

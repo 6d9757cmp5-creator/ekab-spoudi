@@ -5,6 +5,7 @@
  * Medical/anatomical interpretation still requires separate expert review.
  */
 import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 const registry=JSON.parse(await readFile('saek-image-audit-2026.json','utf8'));
 const errors=[],warnings=[],remote=[];
 const addError=(detail)=>errors.push(detail);
@@ -42,13 +43,18 @@ for(const [key,pics] of chosen){
 }
 for(const [key,a] of Object.entries(assets)){
  if(!a.filename||!a.page||!a.author||!a.license||!a.title||!a.caption)addError('Λείπουν στοιχεία πηγής '+key);
- if(!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
+ if(!(a.originalArtwork===true && a.localPath && a.page?.startsWith('https://openstax.org/books/anatomy-and-physiology-2e/pages/'))&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
+ if(a.localPath){
+  if(!/^assets\/education\/[a-z0-9-]+\.svg$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
+  else try{const bytes=await readFile(a.localPath);if(createHash('sha256').update(bytes).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
+ }
  if(!allowedLicenses.has(a.license))addError('Άγνωστη άδεια εικόνας '+key+': '+a.license);
  if(![...chosen.values()].some(p=>p.includes(key)))warnings.push('Πηγή χωρίς χρήση '+key);
 }
 const remoteCheck=process.argv.includes('--remote');
 if(remoteCheck){
  await Promise.all(Object.entries(assets).map(async ([key,a])=>{
+  if(a.localPath){remote.push({key,local:true,available:!errors.some(e=>e.includes(key))});return;}
   const url='https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(a.filename);
   let controller=new AbortController(),timer=setTimeout(()=>controller.abort(),13000);
   try{

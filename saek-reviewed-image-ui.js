@@ -6,6 +6,8 @@
 'use strict';
 const licenseLinks={
  'CC BY-SA 3.0':'https://creativecommons.org/licenses/by-sa/3.0/',
+ 'CC0 1.0':'https://creativecommons.org/publicdomain/zero/1.0/',
+ 'CC BY 4.0':'https://creativecommons.org/licenses/by/4.0/',
  'Public domain':'https://creativecommons.org/publicdomain/mark/1.0/'
 };
 function el(tag,cls,txt){
@@ -15,6 +17,7 @@ function el(tag,cls,txt){
  return node;
 }
 function sourceUrl(asset){
+ if(asset.localPath)return asset.localPath;
  return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(asset.filename);
 }
 function zoom(imgUrl,alt){
@@ -51,11 +54,11 @@ function render(asset,lessonId){
  const caption=el('figcaption','saek-source-caption',asset.caption);
  const attribution=el('p','saek-source-credit');
  attribution.append(document.createTextNode('Πηγή: '+asset.author+' · '));
- const src=el('a','','Wikimedia Commons');
+ const src=el('a','',asset.originalArtwork?'Επιστημονική τεκμηρίωση':'Wikimedia Commons');
  src.href=asset.page;src.target='_blank';src.rel='noopener noreferrer';
  const space=document.createTextNode(' · Άδεια: ');
  const lic=el('a','',asset.license);
- lic.href=licenseLinks[asset.license]||asset.page;
+ lic.href=asset.licenseUrl||licenseLinks[asset.license]||asset.page;
  lic.target='_blank';lic.rel='noopener noreferrer';
  attribution.append(src,space,lic);
  const problem=el('p','saek-source-fallback','Η εικόνα δεν φορτώθηκε. Δείτε την αρχική σελίδα της πηγής.');
@@ -81,9 +84,9 @@ async function start(){
    const body=details.querySelector('.reader-main')||details.querySelector('.body');
    if(!body)continue;
    const wrap=el('details','saek-source-section');
-   const summary=el('summary','saek-source-summary','Εικόνες ανατομίας από τεκμηριωμένες πηγές ('+chapter.images.length+')');
+   const summary=el('summary','saek-source-summary','Εκπαιδευτικές εικόνες με τεκμηρίωση ('+chapter.images.length+')');
    wrap.append(summary);
-   const note=el('p','saek-source-note','Οι εικόνες είναι ανατομικές αναφορές με καταγεγραμμένη πηγή και άδεια. Εκκρεμεί ανεξάρτητος επιστημονικός έλεγχος της τελικής επιλογής· δεν υποκαθιστούν τις τρέχουσες κλινικές οδηγίες.');
+   const note=el('p','saek-source-note','Ανατομικές αναφορές και εκπαιδευτικά σχήματα με καταγεγραμμένη τεκμηρίωση και άδεια. Εκκρεμεί ανεξάρτητος επιστημονικός έλεγχος της τελικής επιλογής· δεν υποκαθιστούν τις τρέχουσες κλινικές οδηγίες.');
    wrap.append(note);
    for(const key of chapter.images){
     const asset=registry.assets[key];
