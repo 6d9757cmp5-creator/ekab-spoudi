@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.82', $=id=>document.getElementById(id);
+const CURRENT='27.1.83', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
@@ -9,6 +9,14 @@ if(!document.querySelector('link[data-ekab-global-tools]')){
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
  const script=document.createElement('script');script.src='global-tools.js?v=27.1.81';script.dataset.ekabGlobalTools='';document.head.append(script);
+}
+
+/* Ensure progress export/restore is available from Account on every page. */
+if(!window.EkabProgress && !Array.from(document.scripts).some(s=>/\\/progress\\.js(?:\\?|$)/.test(s.src))){
+ const progressScript=document.createElement('script');
+ progressScript.src='progress.js?v=27.1.83';
+ progressScript.dataset.ekabSharedProgress='1';
+ document.head.append(progressScript);
 }
 
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
@@ -25,16 +33,18 @@ d.textContent='Ανανέωση εφαρμογής…';location.replace('./index
 async function start(){
 const theme=$('themeToggle');if(theme){const sync=()=>{const dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next);window.dispatchEvent(new Event('ekab:progress-changed'))}catch{}sync()};sync();window.addEventListener('ekab:cloud-applied',sync);}
 if($('currentAppVersion'))$('currentAppVersion').textContent='v'+CURRENT;if($('footerAppVersion'))$('footerAppVersion').textContent='v'+CURRENT;
-$('checkAppUpdates')?.addEventListener('click',check);$('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
+document.addEventListener('click',event=>{
+  if(event.target.closest('#checkAppUpdates'))check();
+});$('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
 if(!('serviceWorker'in navigator)||location.protocol==='file:'){report('Έκδοση v'+CURRENT+' · Ο offline μηχανισμός δεν υποστηρίζεται εδώ.');return}
 try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying)return;location.reload()});registration.addEventListener('updatefound',()=>{const worker=registration.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)check()})});await check();window.addEventListener('online',check);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()})}catch(e){report('Έκδοση v'+CURRENT+' · Αδυναμία εγγραφής ενημερώσεων.');}}
-window.EkabUpdates={check};
+window.EkabUpdates={check,version:CURRENT};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 // Optional cloud setup never blocks the local app or update controls.
 import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.73', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.83', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {
