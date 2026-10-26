@@ -34,6 +34,8 @@ function makeBrandLink(){
 function installTour(){
  const home=document.querySelector('main.main #homeView');
  if(!home)return;
+ // Keep a single, user-opened help control even if another legacy guide is loaded.
+ if(home.querySelector('.ekab-guide-reopen'))return;
  let overlay=null;
  let lastFocus=null;
  let stepIndex=0;
@@ -109,7 +111,7 @@ function installTour(){
  reopen.addEventListener('click',open);
  slot.append(reopen);
  home.insertBefore(slot,home.firstChild);
- if(!wasSeen())open();
+ // Do not interrupt navigation: the guide opens only if the user presses Help.
 }
 function init(){makeBrandLink();installTour()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
