@@ -262,3 +262,45 @@ html[data-theme="dark"] .account-dialog{background:var(--bg)}html[data-theme="da
  #homeView.catalog-open-desktop>.panel:first-child{grid-column:1;grid-row:1/span 2}
  #homeView.catalog-open-desktop>.storage-panel{grid-column:1/-1}
 }
+
+/* EOPPEP: side-by-side READER (not the exam) plus due-review learning timeline. */
+.catalog-reader{background:var(--bg);border:1px solid var(--line);padding:17px;border-radius:13px;margin:13px 0 17px;min-width:0}
+.catalog-reader-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.catalog-reader-head .eyebrow{margin-bottom:8px}
+.catalog-reader-question{font-size:1.12rem;line-height:1.5;margin:18px 0 13px;overflow-wrap:anywhere}
+.catalog-reader h4{font-size:.98rem;margin:19px 0 9px}
+.catalog-reader-caution{font-size:.81rem;color:var(--muted);line-height:1.55}
+.catalog-reader-caution.review{color:#b17620;font-weight:700}
+.catalog-reader-answer{white-space:pre-wrap;line-height:1.7;border-left:3px solid var(--green);padding:13px;background:var(--light);border-radius:9px;font-size:.94rem;overflow-wrap:anywhere}
+.catalog-notes{margin-top:21px;padding-top:5px;border-top:1px solid var(--line)}
+.catalog-notes label{margin-top:13px}
+.catalog-notes textarea{min-height:95px;margin-bottom:4px;background:var(--bg)}
+.catalog-reader-sources{margin:16px 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.catalog-reader-sources summary{padding:12px;cursor:pointer;font-weight:700;font-size:.86rem}
+.catalog-reader-source-links{padding:3px 12px;overflow-wrap:anywhere}
+.catalog-reader-source-links p{font-size:.83rem;margin:10px 0;line-height:1.5}
+.catalog-reader-sources .btn{margin:7px 12px 13px}
+.catalog-reader-footer{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding-top:15px}
+.catalog-reader-footer p{margin:0;flex:1;min-width:170px}
+.all-question-item.selected{background:var(--light);border-color:var(--blue);box-shadow:inset 3px 0 0 var(--blue)}
+.all-questions-group li[hidden],.all-questions-heading[hidden]{display:none!important}
+#catalogSearch{margin:4px 0 12px}
+.due-section{border-top:1px solid var(--line);padding:17px 0 15px;margin:11px 0}
+.due-header h3{font-size:.97rem;display:flex;align-items:center;gap:8px;margin:0 0 4px}
+.due-header p{margin:5px 0 11px}
+.due-today-list{display:grid;gap:7px}
+.due-item{display:block;text-align:left;width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font-size:.81rem;line-height:1.45}
+.due-item:hover{border-color:var(--blue)}
+.due-item:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+html[data-theme="dark"] .catalog-reader-answer{background:#193849;color:#e6f0f6}
+html[data-theme="dark"] .catalog-reader-caution.review{color:#ffcb73}
+@media(min-width:960px){
+ #homeView.catalog-open-desktop>.panel:first-child{grid-column:1;grid-row:1}
+ #homeView.catalog-open-desktop>.all-questions-panel.catalog-side-panel{grid-column:2;grid-row:1;position:sticky;top:15px;max-height:min(84vh,950px)}
+ #homeView.catalog-open-desktop>#topicsFold{grid-column:2;grid-row:2}
+ #homeView.catalog-open-desktop>.storage-panel{grid-column:1/-1}
+}
+@media(max-width:959px){
+ .catalog-reader{padding:13px;margin:12px 0}
+ .catalog-reader-head{flex-wrap:wrap}
+}
