@@ -179,3 +179,41 @@ html[data-theme="dark"] .medical-glossary-more{background:#23516a;color:#e2f5ff;
 .top .utility .glossary-open:focus-visible {
   outline:3px solid #a9e6ff;outline-offset:2px;
 }
+
+
+/* v27.1.78 — compact, tap-to-open application search; breadcrumb-only navigation. */
+.top .utility .glossary-open[hidden]{display:none!important}
+.top .utility .ekab-search-box{position:relative;z-index:650;flex:none;display:flex;align-items:center}
+.top .utility .ekab-search-toggle{width:40px;height:40px;min-width:40px;min-height:40px;padding:9px;display:grid;place-items:center}
+.ekab-search-toggle svg{display:block;width:23px;height:23px}
+.ekab-search-toggle[aria-expanded="true"]{background:#ffffff33;border-color:#92d9f2}
+.ekab-search-popover{position:absolute;top:calc(100% + 10px);right:0;width:min(410px,calc(100vw - 28px));max-height:70dvh;overflow-y:auto;border:1px solid #b6d5e6;border-radius:16px;background:#fff;color:#1a3b50;box-shadow:0 18px 48px #00182f70;padding:14px;z-index:900}
+.ekab-search-popover[hidden]{display:none!important}
+.ekab-search-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ekab-search-head strong{font-size:.94rem;color:#183e56;line-height:1.3}
+.ekab-search-close{border:1px solid #d3e3ec;background:#f0f7fb;color:#224a60;border-radius:9px;min-width:32px;min-height:32px;font-size:1.3rem;line-height:1}
+.ekab-search-hint{font-size:.76rem;line-height:1.45;color:#577185;margin:9px 0 10px}
+.top .utility .ekab-search-field{width:100%;min-height:43px;border:1px solid #9dc5da;border-radius:10px;background:#f9fcfe;color:#173b50;font-size:.86rem;padding:10px 12px}
+.ekab-search-examples{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 8px;font-size:.73rem;color:#62798b}
+.ekab-search-chip{border:1px solid #d1e4ee;border-radius:999px;background:#eaf5fb;padding:5px 8px;color:#1a5c7d;font-size:.74rem;font-weight:700}
+.ekab-search-popover .saek-global-results{position:static;width:100%;max-width:100%;max-height:32dvh;overflow:auto;background:transparent;color:inherit;border:0;border-top:1px solid #e5edf2;border-radius:0;box-shadow:none;padding:4px 0;margin-top:6px}
+.ekab-search-popover .saek-result-item{display:grid;border-radius:9px}
+.ekab-search-popover .saek-show-all{margin:10px 0 0;text-align:center;padding:11px 9px}
+.top .nav.ekab-breadcrumb{display:flex!important;grid-template-columns:none!important;gap:12px;flex-wrap:wrap;justify-content:flex-start;align-items:center;margin-top:9px;padding-bottom:10px}
+.top .nav.ekab-breadcrumb a.ekab-home-back{font-size:.78rem;flex:none;border:1px solid #ffffff35;border-radius:999px;color:#e4f4fb;padding:6px 12px;background:#ffffff11;text-decoration:none}
+.top .nav.ekab-breadcrumb .ekab-section-name{font-size:.78rem;line-height:1.3;font-weight:650;color:#b9d6e6}
+html[data-theme="dark"] .ekab-search-popover{background:#142b3b;color:#e6f1f8;border-color:#426980}
+html[data-theme="dark"] .ekab-search-head strong{color:#e9f7ff}
+html[data-theme="dark"] .ekab-search-close{background:#28465a;border-color:#547587;color:#e6f5ff}
+html[data-theme="dark"] .ekab-search-hint,html[data-theme="dark"] .ekab-search-examples{color:#c2d6e1}
+html[data-theme="dark"] .top .utility .ekab-search-field{background:#102c40;color:#eef8ff;border-color:#6689a2}
+html[data-theme="dark"] .ekab-search-chip{background:#254b61;color:#d9f3ff;border-color:#456c84}
+html[data-theme="dark"] .ekab-search-popover .saek-global-results{border-top-color:#38566c}
+html[data-theme="dark"] .ekab-search-popover .saek-result-item strong{color:#eaf6ff}
+html[data-theme="dark"] .ekab-search-popover .saek-result-item small,html[data-theme="dark"] .ekab-search-popover .saek-result-preview,html[data-theme="dark"] .ekab-search-popover .saek-result-count{color:#bdd8e8}
+html[data-theme="dark"] .ekab-search-popover .saek-result-item:hover{background:#28495f!important}
+@media(max-width:680px){
+ .top .header-row .utility .ekab-search-box{order:-1}
+ .ekab-search-popover{right:auto;left:0;width:min(390px,calc(100vw - 28px));max-height:65dvh}
+ .top .nav.ekab-breadcrumb{margin-top:7px}
+}
