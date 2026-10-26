@@ -49,3 +49,29 @@ html[data-theme="dark"] .medical-glossary-entry{background:#1e3b4b;border-color:
 html[data-theme="dark"] .medical-glossary-entry p{color:#c9e2f0}
 html[data-theme="dark"] .medical-glossary-help{color:#c7dce8}
 html[data-theme="dark"] .medical-glossary-close{background:#2d4c5f;color:#fff}
+
+/* vNEXT: application-wide predictions, bilingual medical categories and complete search page. */
+.top .nav .saek-global-search{z-index:120}
+.top .nav .saek-search-label{color:#d4eaf6}
+.saek-show-all{display:block;margin:5px 3px 3px;padding:11px 9px;border-radius:8px;border-top:1px solid #dce9ef;background:#e7f4fa;color:#185878!important;font-weight:800;font-size:.78rem;text-decoration:none}
+.saek-show-all:hover,.saek-show-all:focus-visible{background:#d5edfa;outline:2px solid #2080aa}
+.medical-glossary-select{display:block;margin:9px 0;width:100%;padding:10px;border:1px solid #9db9c9;border-radius:9px;min-height:43px;background:#fff;color:#14364b}
+.medical-glossary-entry .medical-category{display:block;color:#48798e;font-weight:750;margin:0 0 8px}
+.global-search-main{max-width:1000px!important}
+.global-search-main .panel>h1{font-size:1.45rem;margin:2px 0 9px}
+.global-search-summary{font-weight:750;color:var(--ink);margin:15px 0}
+.global-search-category{border-top:1px solid var(--line);padding:17px 0 20px;display:grid;gap:8px}
+.global-search-category h2{font-size:1.12rem;margin:0 0 7px}
+.global-search-category .saek-result-item{display:grid;background:var(--bg)!important;border:1px solid var(--line)!important;border-radius:10px;color:var(--ink)!important;padding:13px!important;white-space:normal}
+.global-search-category .saek-result-item:hover{background:var(--light)!important}
+.global-exercise-preview{margin:14px 0 20px}
+.global-exercise-preview ol{padding-left:21px}
+.global-exercise-preview li{margin:9px 0}
+.global-exercise-answer{margin-top:12px;padding:12px;border:1px solid var(--line);background:var(--light);border-radius:9px}
+.global-exercise-answer[hidden]{display:none!important}
+html[data-theme="dark"] .medical-glossary-select{background:#193747;color:#e3f5ff;border-color:#557487}
+html[data-theme="dark"] .saek-show-all{background:#1b4155;color:#d8f0ff!important;border-color:#426880}
+html[data-theme="dark"] .global-search-category .saek-result-item{background:#1b3548!important;color:#e8f5fc!important}
+html[data-theme="dark"] .global-search-category .saek-result-item:hover{background:#294a5e!important}
+@media(max-width:959px){.top .nav .saek-global-search{grid-column:1/-1!important;max-width:none}}
+@media(min-width:960px){.top .nav .saek-global-search{flex:1 1 220px;max-width:360px}}

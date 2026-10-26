@@ -1,71 +1,210 @@
 {
-  "version": 1,
-  "description": "Μικρό αρχικό λεξικό ιατρικών όρων. Θα επεκταθεί με ξεχωριστή βιβλιογραφική επιμέλεια.",
+  "version": 2,
+  "scope": "Γενική ιατρική και επιστήμες υγείας — ελληνική/αγγλική ορολογία",
+  "status": "Expandable starter set; new source-backed entries may be added without changing the UI.",
+  "languages": [
+    "el",
+    "en"
+  ],
+  "count": 17,
+  "categories": [
+    "Αιματολογία",
+    "Αλλεργιολογία",
+    "Αναπνευστικό",
+    "Γενική ιατρική",
+    "Διαγνωστική",
+    "Επείγουσα ιατρική",
+    "Καρδιολογία",
+    "Λοιμωξιολογία",
+    "Ογκολογία",
+    "Παθολογία"
+  ],
   "items": [
     {
       "term": "Αεραγωγός",
       "aliases": [
-        "αναπνευστική οδός"
+        "αναπνευστική οδός",
+        "Airway"
       ],
       "definition": "Η διαδρομή από την οποία διέρχεται ο αέρας προς και από τους πνεύμονες.",
-      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system"
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
+      "en": "Airway",
+      "category": "Αναπνευστικό"
     },
     {
-      "term": "Πνευμονική κυψελίδα",
+      "term": "Αναιμία",
+      "en": "Anemia",
+      "category": "Αιματολογία",
+      "definition": "Κατάσταση στην οποία η ικανότητα του αίματος να μεταφέρει οξυγόνο είναι μειωμένη, συχνά λόγω χαμηλής αιμοσφαιρίνης ή ανεπαρκών ερυθρών αιμοσφαιρίων.",
+      "source": "https://medlineplus.gov/anemia.html",
       "aliases": [
-        "κυψελίδα"
-      ],
-      "definition": "Μικροσκοπική δομή των πνευμόνων όπου πραγματοποιείται η ανταλλαγή οξυγόνου και διοξειδίου του άνθρακα με το αίμα.",
-      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
-    },
-    {
-      "term": "Υποξαιμία",
-      "aliases": [
-        "χαμηλό οξυγόνο αίματος"
-      ],
-      "definition": "Μειωμένο επίπεδο οξυγόνου στο αρτηριακό αίμα. Δεν ταυτίζεται απαραίτητα με την υποξία ιστών.",
-      "source": "https://www.ncbi.nlm.nih.gov/books/NBK482316/"
-    },
-    {
-      "term": "Υποξία",
-      "aliases": [
-        "έλλειψη οξυγόνου ιστών"
-      ],
-      "definition": "Ανεπαρκής διαθεσιμότητα οξυγόνου στους ιστούς σε σχέση με τις ανάγκες τους.",
-      "source": "https://www.ncbi.nlm.nih.gov/books/NBK482316/"
-    },
-    {
-      "term": "Ταχύπνοια",
-      "aliases": [
-        "γρήγορη αναπνοή"
-      ],
-      "definition": "Αναπνευστική συχνότητα υψηλότερη από την αναμενόμενη για την ηλικία και την κλινική κατάσταση.",
-      "source": "https://www.ncbi.nlm.nih.gov/books/NBK482316/"
-    },
-    {
-      "term": "Βραδυκαρδία",
-      "aliases": [
-        "χαμηλός καρδιακός ρυθμός"
-      ],
-      "definition": "Καρδιακή συχνότητα χαμηλότερη από την αναμενόμενη. Η κλινική σημασία εξαρτάται από συμπτώματα, ηλικία και κατάσταση.",
-      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+        "Anemia"
+      ]
     },
     {
       "term": "Αναφυλαξία",
       "aliases": [
-        "σοβαρή αλλεργική αντίδραση"
+        "σοβαρή αλλεργική αντίδραση",
+        "Anaphylaxis"
       ],
       "definition": "Σοβαρή συστηματική αντίδραση υπερευαισθησίας που μπορεί να απειλήσει γρήγορα την αναπνοή ή την κυκλοφορία.",
-      "source": "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis"
+      "source": "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis",
+      "en": "Anaphylaxis",
+      "category": "Αλλεργιολογία"
     },
     {
       "term": "Απινίδωση",
       "aliases": [
         "απινιδωτής",
-        "AED"
+        "AED",
+        "Defibrillation"
       ],
       "definition": "Παροχή ελεγχόμενου ηλεκτρικού απινιδωτικού shock σε κατάλληλους καρδιακούς ρυθμούς, όπως κοιλιακή μαρμαρυγή και άσφυγμη κοιλιακή ταχυκαρδία.",
-      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines",
+      "en": "Defibrillation",
+      "category": "Επείγουσα ιατρική"
+    },
+    {
+      "term": "Βιοψία",
+      "en": "Biopsy",
+      "category": "Διαγνωστική",
+      "definition": "Λήψη κυττάρων ή ιστού για εργαστηριακή και συχνά ιστοπαθολογική εξέταση.",
+      "source": "https://www.cancer.gov/publications/dictionaries/cancer-terms/def/biopsy",
+      "aliases": [
+        "Biopsy"
+      ]
+    },
+    {
+      "term": "Βραδυκαρδία",
+      "aliases": [
+        "χαμηλός καρδιακός ρυθμός",
+        "Bradycardia"
+      ],
+      "definition": "Καρδιακή συχνότητα χαμηλότερη από την αναμενόμενη. Η κλινική σημασία εξαρτάται από συμπτώματα, ηλικία και κατάσταση.",
+      "source": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+      "en": "Bradycardia",
+      "category": "Καρδιολογία"
+    },
+    {
+      "term": "Καρκίνος",
+      "en": "Cancer",
+      "category": "Ογκολογία",
+      "definition": "Ομάδα νοσημάτων στα οποία κακοήθη κύτταρα πολλαπλασιάζονται ανεξέλεγκτα και μπορούν να διηθούν γειτονικούς ιστούς.",
+      "source": "https://www.cancer.gov/publications/dictionaries/cancer-terms/def/cancer",
+      "aliases": [
+        "Cancer",
+        "malignancy"
+      ]
+    },
+    {
+      "term": "Λοίμωξη",
+      "en": "Infection",
+      "category": "Λοιμωξιολογία",
+      "definition": "Εγκατάσταση και πολλαπλασιασμός μικροοργανισμών στο σώμα, με πιθανή τοπική ή γενικευμένη νόσο.",
+      "source": "https://www.cancer.gov/publications/dictionaries/cancer-terms/def/infection",
+      "aliases": [
+        "Infection"
+      ]
+    },
+    {
+      "term": "Νεόπλασμα",
+      "en": "Neoplasm",
+      "category": "Ογκολογία",
+      "definition": "Παθολογική μάζα ιστού από ανεξέλεγκτο πολλαπλασιασμό κυττάρων. Μπορεί να είναι καλοήθες ή κακοήθες.",
+      "source": "https://www.cancer.gov/publications/dictionaries/cancer-terms/def/neoplasm",
+      "aliases": [
+        "Neoplasm",
+        "όγκος",
+        "tumor"
+      ]
+    },
+    {
+      "term": "Οίδημα",
+      "en": "Edema",
+      "category": "Γενική ιατρική",
+      "definition": "Διόγκωση ιστού λόγω συσσώρευσης υγρού· μπορεί να αφορά μία περιοχή ή περισσότερες.",
+      "source": "https://medlineplus.gov/ency/article/003103.htm",
+      "aliases": [
+        "Edema",
+        "swelling"
+      ]
+    },
+    {
+      "term": "Πνευμονική κυψελίδα",
+      "aliases": [
+        "κυψελίδα",
+        "Pulmonary alveolus"
+      ],
+      "definition": "Μικροσκοπική δομή των πνευμόνων όπου πραγματοποιείται η ανταλλαγή οξυγόνου και διοξειδίου του άνθρακα με το αίμα.",
+      "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange",
+      "en": "Pulmonary alveolus",
+      "category": "Αναπνευστικό"
+    },
+    {
+      "term": "Πυρετός",
+      "en": "Fever",
+      "category": "Παθολογία",
+      "definition": "Αύξηση της θερμοκρασίας του σώματος που σχετίζεται με αντίδραση του οργανισμού σε νόσο ή άλλη αιτία.",
+      "source": "https://medlineplus.gov/fever.html",
+      "aliases": [
+        "Fever",
+        "Pyrexia"
+      ]
+    },
+    {
+      "term": "Ταχύπνοια",
+      "aliases": [
+        "γρήγορη αναπνοή",
+        "Tachypnea"
+      ],
+      "definition": "Αναπνευστική συχνότητα υψηλότερη από την αναμενόμενη για την ηλικία και την κλινική κατάσταση.",
+      "source": "https://www.ncbi.nlm.nih.gov/books/NBK482316/",
+      "en": "Tachypnea",
+      "category": "Αναπνευστικό"
+    },
+    {
+      "term": "Υπέρταση",
+      "en": "Hypertension",
+      "category": "Καρδιολογία",
+      "definition": "Αυξημένη αρτηριακή πίεση, όταν διαπιστώνεται σε επανειλημμένες κατάλληλες μετρήσεις.",
+      "source": "https://medlineplus.gov/highbloodpressure.html",
+      "aliases": [
+        "Hypertension",
+        "υψηλή πίεση"
+      ]
+    },
+    {
+      "term": "Υποξαιμία",
+      "aliases": [
+        "χαμηλό οξυγόνο αίματος",
+        "Hypoxemia"
+      ],
+      "definition": "Μειωμένο επίπεδο οξυγόνου στο αρτηριακό αίμα. Δεν ταυτίζεται απαραίτητα με την υποξία ιστών.",
+      "source": "https://www.ncbi.nlm.nih.gov/books/NBK482316/",
+      "en": "Hypoxemia",
+      "category": "Αναπνευστικό"
+    },
+    {
+      "term": "Υποξία",
+      "aliases": [
+        "έλλειψη οξυγόνου ιστών",
+        "Hypoxia"
+      ],
+      "definition": "Ανεπαρκής διαθεσιμότητα οξυγόνου στους ιστούς σε σχέση με τις ανάγκες τους.",
+      "source": "https://www.ncbi.nlm.nih.gov/books/NBK482316/",
+      "en": "Hypoxia",
+      "category": "Γενική ιατρική"
+    },
+    {
+      "term": "Υπόταση",
+      "en": "Hypotension",
+      "category": "Καρδιολογία",
+      "definition": "Αρτηριακή πίεση χαμηλότερη από τη συνήθη για τον ασθενή, ενίοτε με μειωμένη αιμάτωση ιστών.",
+      "source": "https://medlineplus.gov/ency/article/007278.htm",
+      "aliases": [
+        "Hypotension",
+        "χαμηλή πίεση"
+      ]
     }
   ]
 }
