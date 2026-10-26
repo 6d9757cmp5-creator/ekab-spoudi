@@ -77,3 +77,36 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
  s.defer=true;
  document.head.appendChild(s);
 })();
+
+
+/* EKAB-SAEK-VIDEO-AUTOLOADER
+ * Enable the shared video → written-chapter navigation in every SAEK course.
+ * New lessons need only a valid course/part entry in saek-videos.js, never page edits.
+ * Courses with explicit player script tags are left alone to avoid duplicate players.
+ */
+(function(){
+ 'use strict';
+ function install(){
+  if(!/\/saek-course-\d{2}\.html$/.test(location.pathname))return;
+  if(document.querySelector('script[src*="saek-course-series.js"]'))return;
+  const stylesheet=document.createElement('link');
+  stylesheet.rel='stylesheet';
+  stylesheet.href=new URL('./saek-course-series.css?v=27.1.90',document.baseURI).href;
+  stylesheet.dataset.saekSeriesAuto='css';
+  document.head.append(stylesheet);
+
+  const config=document.createElement('script');
+  config.src=new URL('./saek-videos.js?v=27.1.90',document.baseURI).href;
+  config.dataset.saekSeriesAuto='config';
+  config.onload=()=>{
+   if(document.querySelector('script[src*="saek-course-series.js"]'))return;
+   const player=document.createElement('script');
+   player.src=new URL('./saek-course-series.js?v=27.1.90',document.baseURI).href;
+   player.dataset.saekSeriesAuto='player';
+   document.body.append(player);
+  };
+  document.body.append(config);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+ else install();
+})();
