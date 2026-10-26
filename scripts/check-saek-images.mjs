@@ -79,4 +79,5 @@ const report={
 };
 await writeFile('saek-image-report.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({semesters:bySemester,selected:assigned,total,assets:report.imageSources,warnings:warnings.length,errors:errors.length,remote:remote.length},null,2));
+if(warnings.length)console.warn('Image audit warnings:\n'+warnings.join('\n'));
 if(errors.length){console.error(errors.join('\n'));process.exitCode=1;}
