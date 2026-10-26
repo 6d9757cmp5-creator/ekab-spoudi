@@ -354,6 +354,20 @@ async function init(){state=saved();try{const response=await fetch(BANK_URL);if(
   const catalog=$('#allQuestionsPanel');
   if(catalog){catalog.open=true;renderAllQuestions();requestAnimationFrame(()=>openCatalogQuestion(requested));}
  }
+
+ // Shortcuts from the new EOPPEP hub: select reading or active recall.
+ if(!requested){
+  const route=new URLSearchParams(location.search);
+  const group=['A','B'].includes(route.get('group'))?route.get('group'):'all';
+  if(route.get('mode')==='exam'){
+   showExam();$('#group').value=group;updateMatches();
+  }else if(route.get('view')==='catalog'){
+   $('#catalogGroupFilter').value=group;
+   const button=$('#allQuestionsToggle');
+   if(button&&!$('#allQuestionsPanel').open)button.click();
+   else {renderAllQuestions();filterCatalog()}
+  }
+ }
 }
 init(); // Service worker registration is managed by updates.js on every page.
 
