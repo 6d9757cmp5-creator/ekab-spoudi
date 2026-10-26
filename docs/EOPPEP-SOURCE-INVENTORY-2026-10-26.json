@@ -1,22 +1,22 @@
 {
   "date": "2026-10-26",
-  "purpose": "Ενιαίο μητρώο 314 πηγών ΕΟΠΠΕΠ με τρέχουσες, ανά ερώτηση, καταγραφές πραγματικού ελέγχου, ιστορικής ανασκόπησης και εκκρεμών αντιπαραβολών.",
+  "purpose": "Επικαιροποιημένη πλήρης απογραφή 314 ερωτήσεων: πραγματικά καταγεγραμμένοι έλεγχοι, ιστορικές ανασκοπήσεις και ειλικρινείς εκκρεμότητες.",
   "method": "Κατάσταση και διευθύνσεις πηγών συγχρονισμένες με το official_questions.json. Ατομική καταχώριση δεν σημαίνει αυτομάτως επαληθευμένο χωρίο. Η βιβλιογραφική/εκπαιδευτική ανασκόπηση δεν αποτελεί επίσημο κλειδί ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
   "counts": {
     "total": 314,
     "withRecord": 314,
     "withHttps": 314,
-    "documentedSourceCheck": 110,
+    "documentedSourceCheck": 116,
     "historicalTargetedReview": 60,
-    "pendingSpecificPassageCheck": 144,
-    "needsMoreSpecificLocation": 18,
-    "withRecordedSpecificReview": 110,
-    "withoutRecordedSpecificReview": 204,
-    "withDocumentedTargetedReview": 170,
-    "withoutDocumentedTargetedReview": 144,
-    "withRecordedSourceCheckedField": 110,
-    "withoutRecordedSourceCheckedField": 204,
-    "withNonSpecificIntroSources": 18,
+    "pendingSpecificPassageCheck": 138,
+    "needsMoreSpecificLocation": 12,
+    "withRecordedSpecificReview": 116,
+    "withoutRecordedSpecificReview": 198,
+    "withDocumentedTargetedReview": 176,
+    "withoutDocumentedTargetedReview": 138,
+    "withRecordedSourceCheckedField": 116,
+    "withoutRecordedSourceCheckedField": 198,
+    "withNonSpecificIntroSources": 12,
     "newlyVerifiedFromLiveWeb20261026": 6
   },
   "records": [
@@ -1319,62 +1319,78 @@
     {
       "id": "EOP-A-038",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-introduction",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 11: μυϊκό σύστημα",
-      "recordedPassageReview": false,
+      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+      "sourceLocation": "OpenStax A&P 2e §11.4 Muscles of the Thorax, Table 11.7; §11.5 Muscles that Position the Pectoral Girdle / Muscles That Move the Humerus",
+      "recordedPassageReview": true,
       "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review",
-        "general_chapter_reference"
+        "specific_source_passage_check_required"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
+      ],
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-introduction"
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Οι μεσοπλεύριοι και το διάφραγμα τεκμηριώνονται στο §11.4, ο μείζων/ελάσσων θωρακικός και ο πρόσθιος οδοντωτός στο §11.5.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-10-26",
+        "checkedTopic": "OpenStax A&P 2e §11.4 Muscles of the Thorax, Table 11.7; §11.5 Muscles that Position the Pectoral Girdle / Muscles That Move the Humerus",
+        "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+        "scope": "documented_educational_source_check",
+        "notes": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Οι μεσοπλεύριοι και το διάφραγμα τεκμηριώνονται στο §11.4, ο μείζων/ελάσσων θωρακικός και ο πρόσθιος οδοντωτός στο §11.5. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Οι μεσοπλεύριοι και το διάφραγμα τεκμηριώνονται στο §11.4, ο μείζων/ελάσσων θωρακικός και ο πρόσθιος οδοντωτός στο §11.5. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+      "sourceReviewStatusDescription": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Οι μεσοπλεύριοι και το διάφραγμα τεκμηριώνονται στο §11.4, ο μείζων/ελάσσων θωρακικός και ο πρόσθιος οδοντωτός στο §11.5."
     },
     {
       "id": "EOP-A-039",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-introduction",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 11: μυϊκό σύστημα",
-      "recordedPassageReview": false,
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK470334/",
+      "sourceLocation": "NCBI StatPearls Anatomy, Anterolateral Abdominal Wall Muscles, Flat Muscles / Vertical Muscles",
+      "recordedPassageReview": true,
       "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review",
-        "general_chapter_reference"
+        "specific_source_passage_check_required"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
+      ],
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-introduction"
+        "https://www.ncbi.nlm.nih.gov/books/NBK470334/",
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Επιβεβαιώνονται έξω/έσω λοξός, εγκάρσιος, ορθός κοιλιακός και πυραμοειδής. Ο τελευταίος μπορεί να απουσιάζει.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-10-26",
+        "checkedTopic": "NCBI StatPearls Anatomy, Anterolateral Abdominal Wall Muscles, Flat Muscles / Vertical Muscles",
+        "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK470334/",
+        "scope": "documented_educational_source_check",
+        "notes": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Επιβεβαιώνονται έξω/έσω λοξός, εγκάρσιος, ορθός κοιλιακός και πυραμοειδής. Ο τελευταίος μπορεί να απουσιάζει. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Επιβεβαιώνονται έξω/έσω λοξός, εγκάρσιος, ορθός κοιλιακός και πυραμοειδής. Ο τελευταίος μπορεί να απουσιάζει. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+      "sourceReviewStatusDescription": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Επιβεβαιώνονται έξω/έσω λοξός, εγκάρσιος, ορθός κοιλιακός και πυραμοειδής. Ο τελευταίος μπορεί να απουσιάζει."
     },
     {
       "id": "EOP-A-040",
@@ -1954,122 +1970,150 @@
     {
       "id": "EOP-A-056",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-introduction",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 23: πεπτικό σύστημα",
-      "recordedPassageReview": false,
+      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+      "sourceLocation": "OpenStax A&P 2e §23.6 The Liver, πρώτη παράγραφος και Figure 23.24",
+      "recordedPassageReview": true,
       "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review",
-        "general_chapter_reference"
+        "specific_source_passage_check_required"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
+      ],
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-introduction"
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Το ήπαρ κάτω από το διάφραγμα καταλαμβάνει κυρίως την άνω δεξιά κοιλιακή χώρα· περιγράφονται οι λοβοί και η ανατομική σχέση.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-10-26",
+        "checkedTopic": "OpenStax A&P 2e §23.6 The Liver, πρώτη παράγραφος και Figure 23.24",
+        "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder",
+        "scope": "documented_educational_source_check",
+        "notes": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Το ήπαρ κάτω από το διάφραγμα καταλαμβάνει κυρίως την άνω δεξιά κοιλιακή χώρα· περιγράφονται οι λοβοί και η ανατομική σχέση. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Το ήπαρ κάτω από το διάφραγμα καταλαμβάνει κυρίως την άνω δεξιά κοιλιακή χώρα· περιγράφονται οι λοβοί και η ανατομική σχέση. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+      "sourceReviewStatusDescription": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Το ήπαρ κάτω από το διάφραγμα καταλαμβάνει κυρίως την άνω δεξιά κοιλιακή χώρα· περιγράφονται οι λοβοί και η ανατομική σχέση."
     },
     {
       "id": "EOP-A-057",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-introduction",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 23: πεπτικό σύστημα",
-      "recordedPassageReview": false,
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK482235/",
+      "sourceLocation": "NCBI StatPearls Anatomy, Abdomen and Pelvis, Spleen (updated 31 Jan 2026), Introduction / Structure and Function",
+      "recordedPassageReview": true,
       "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review",
-        "general_chapter_reference"
+        "specific_source_passage_check_required"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
+      ],
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-introduction"
+        "https://www.ncbi.nlm.nih.gov/books/NBK482235/"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Αριστερό υποχόνδριο, σχέση με διάφραγμα και θόλο στομάχου, προβολή περίπου 9ης–11ης πλευρών.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-10-26",
+        "checkedTopic": "NCBI StatPearls Anatomy, Abdomen and Pelvis, Spleen (updated 31 Jan 2026), Introduction / Structure and Function",
+        "sourceUrl": "https://www.ncbi.nlm.nih.gov/books/NBK482235/",
+        "scope": "documented_educational_source_check",
+        "notes": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Αριστερό υποχόνδριο, σχέση με διάφραγμα και θόλο στομάχου, προβολή περίπου 9ης–11ης πλευρών. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Αριστερό υποχόνδριο, σχέση με διάφραγμα και θόλο στομάχου, προβολή περίπου 9ης–11ης πλευρών. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+      "sourceReviewStatusDescription": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Αριστερό υποχόνδριο, σχέση με διάφραγμα και θόλο στομάχου, προβολή περίπου 9ης–11ης πλευρών."
     },
     {
       "id": "EOP-A-058",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-introduction",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 13: ανατομία νευρικού συστήματος",
-      "recordedPassageReview": false,
+      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-4-the-peripheral-nervous-system",
+      "sourceLocation": "OpenStax A&P 2e §13.4 Cranial Nerves / Table 13.3 / Figure 13.23",
+      "recordedPassageReview": true,
       "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review",
-        "general_chapter_reference"
+        "specific_source_passage_check_required"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
+      ],
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-introduction"
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-4-the-peripheral-nervous-system"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Οι δώδεκα εγκεφαλικές συζυγίες I–XII ονομάζονται στο Table 13.3, με αισθητικές και κινητικές λειτουργίες.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-10-26",
+        "checkedTopic": "OpenStax A&P 2e §13.4 Cranial Nerves / Table 13.3 / Figure 13.23",
+        "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-4-the-peripheral-nervous-system",
+        "scope": "documented_educational_source_check",
+        "notes": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Οι δώδεκα εγκεφαλικές συζυγίες I–XII ονομάζονται στο Table 13.3, με αισθητικές και κινητικές λειτουργίες. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Οι δώδεκα εγκεφαλικές συζυγίες I–XII ονομάζονται στο Table 13.3, με αισθητικές και κινητικές λειτουργίες. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+      "sourceReviewStatusDescription": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Οι δώδεκα εγκεφαλικές συζυγίες I–XII ονομάζονται στο Table 13.3, με αισθητικές και κινητικές λειτουργίες."
     },
     {
       "id": "EOP-A-059",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-introduction",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 13: ανατομία νευρικού συστήματος",
-      "recordedPassageReview": false,
+      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-2-the-central-nervous-system",
+      "sourceLocation": "OpenStax A&P 2e §13.2 The Cerebrum / Lobes of Cerebral Cortex / Figure 13.6",
+      "recordedPassageReview": true,
       "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review",
-        "general_chapter_reference"
+        "specific_source_passage_check_required"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
+      ],
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-introduction"
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-2-the-central-nervous-system"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Επιβεβαιώνονται ο μετωπιαίος, βρεγματικός, κροταφικός, ινιακός και η νήσος. Ο μεταιχμιακός λοβός είναι λειτουργική/ταξινομική περιγραφή που απαιτεί διάκριση.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-10-26",
+        "checkedTopic": "OpenStax A&P 2e §13.2 The Cerebrum / Lobes of Cerebral Cortex / Figure 13.6",
+        "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-2-the-central-nervous-system",
+        "scope": "documented_educational_source_check",
+        "notes": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Επιβεβαιώνονται ο μετωπιαίος, βρεγματικός, κροταφικός, ινιακός και η νήσος. Ο μεταιχμιακός λοβός είναι λειτουργική/ταξινομική περιγραφή που απαιτεί διάκριση. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "26/10/2026: διασταυρώθηκε η εκπαιδευτική απάντηση με τις ακριβείς βιβλιογραφικές ενότητες. Επιβεβαιώνονται ο μετωπιαίος, βρεγματικός, κροταφικός, ινιακός και η νήσος. Ο μεταιχμιακός λοβός είναι λειτουργική/ταξινομική περιγραφή που απαιτεί διάκριση. Δεν είναι επίσημη λύση ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+      "sourceReviewStatusDescription": "Αντιπαραβολή με τη συγκεκριμένη ενότητα: Επιβεβαιώνονται ο μετωπιαίος, βρεγματικός, κροταφικός, ινιακός και η νήσος. Ο μεταιχμιακός λοβός είναι λειτουργική/ταξινομική περιγραφή που απαιτεί διάκριση."
     },
     {
       "id": "EOP-A-060",
