@@ -33,7 +33,7 @@ Updated `saek-image-audit-2026.json` mappings, `sw.js` offline precache, and add
 2. **Subject adequacy: not complete** for the four new placements; selected-source counts cannot be equated with complete coverage.
 3. **Browser rendering, zoom and offline end-to-end test:** not executed/verified for these new images in a real browser. CI XML parsing and cache-list inclusion do not prove this.
 4. **Live publication:** PR remains draft and unmerged. The public site could not be verified from the available browser/search path; no production increase is claimed.
-5. **Five CI warnings** remain in the remote image-source check. CI has 0 hard errors; investigate warnings in the generated report rather than treating a green check as source availability proof.
+5. **Five CI warnings** are HTTP 429 rate limits from Wikimedia Commons direct-file HEAD requests for `upper`, `spine`, `heart`, `respiratory`, `brain_medial` (run [40353733832](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353733832)). These are NOT confirmed broken links, but availability was not proven. Recheck with respectful rate limits / alternate verification; CI has 0 hard errors.
 
 ## Exact continuation
 
