@@ -43,7 +43,8 @@ for(let i=1;i<=20;i++){
   assert.ok(html.includes('id="lesson-'+ch.chapter+'"'),'bad chapter search link '+ch.href);
  }
 }
-const index=read('index.html'),app=read('app.js'),styles=read('styles.css'),theme=read('theme-init.js');
+const index=read('theory.html'),landing=read('index.html'),app=read('app.js'),styles=read('styles.css'),theme=read('theme-init.js');
+assert.ok(landing.includes("location.replace('theory.html'"),'legacy EOPPEP links must redirect from the landing page');
 assert.ok(index.includes('id="catalogReaderPlaceholder"')&&index.includes('id="catalogReaderReadySos"'));
 assert.ok(index.includes('id="catalogMore"')&&index.includes('id="catalogGroupFilter"'));
 const catalog=app.slice(app.indexOf('function openCatalogQuestion('),app.indexOf("$('#catalogReaderClose')"));
