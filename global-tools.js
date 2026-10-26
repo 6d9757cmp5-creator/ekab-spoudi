@@ -1,6 +1,8 @@
 /* EKAB Spoudi: one bilingual predictive search for the whole public app, plus expandable general medical lexicon. */
 (function(){
 'use strict';
+if(window.__ekabGlobalToolsLoaded)return;
+window.__ekabGlobalToolsLoaded=true;
 const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3').replace(/₄/g,'4').replace(/µ/g,'μ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ').trim();
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
@@ -206,7 +208,7 @@ function installGlossary(){
  const results=el('div','medical-glossary-results');
  const more=el('button','medical-glossary-more','Περισσότεροι όροι');more.type='button';more.hidden=true;
  inner.append(head,help,search,choice,count,results,more);dialog.append(inner);document.body.append(dialog);
- let terms=[],openId=null,limit=40;
+ let terms=[],openId=null,limit=40,returnFocus=null;
  function render(){
   const matched=findGlossary(search.value,terms,choice.value);results.replaceChildren();
   count.textContent=matched.length+' αποτελέσματα · '+terms.length+' λήμματα';
@@ -245,6 +247,7 @@ function installGlossary(){
   more.textContent='Περισσότεροι όροι ('+Math.min(40,matched.length-limit)+')';
  }
  function open(value){
+  returnFocus=document.activeElement;
   if(typeof dialog.showModal==='function'){if(!dialog.open)dialog.showModal()}else dialog.setAttribute('open','');
   if(value)search.value=value;
   results.replaceChildren(el('p',null,'Φόρτωση ιατρικών όρων…'));
@@ -259,7 +262,7 @@ function installGlossary(){
  window.EkabOpenMedicalGlossary=open;
  document.getElementById('homeGlossaryOpen')?.addEventListener('click',()=>open());
  btn.addEventListener('click',()=>open());
- closeBtn.addEventListener('click',()=>{if(typeof dialog.close==='function')dialog.close();else dialog.removeAttribute('open');btn.focus()});
+ closeBtn.addEventListener('click',()=>{if(typeof dialog.close==='function')dialog.close();else dialog.removeAttribute('open');if(returnFocus&&document.contains(returnFocus))returnFocus.focus()});
  dialog.addEventListener('click',e=>{if(e.target===dialog&&dialog.close)dialog.close()});
  search.addEventListener('input',()=>{openId=null;limit=40;render()});
  choice.addEventListener('change',()=>{openId=null;limit=40;render()});
