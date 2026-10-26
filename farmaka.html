@@ -20,7 +20,19 @@
 .ph-eyebrow{text-transform:uppercase;letter-spacing:.085em;font-size:.76rem;font-weight:800;color:#28719c}
 .ph-lead{max-width:77ch;line-height:1.68;margin:0 0 18px}
 .ph-counter{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.ph-counter>div{background:var(--bg);border:1px solid var(--line);padding:15px;border-radius:14px}
+.ph-counter>div,.ph-counter>button{background:var(--bg);border:1px solid var(--line);padding:15px;border-radius:14px}
+.ph-counter>button{font:inherit;text-align:left;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+.ph-counter>button:hover{border-color:var(--blue);background:var(--light)}
+.ph-counter>button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.ph-counter .ph-counter-action{display:block;margin-top:7px;font-size:.73rem;color:var(--blue);font-weight:700}
+.ph-group-dialog{width:min(94vw,600px);padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--panel,#fff);color:var(--ink);max-height:85dvh;overflow:auto}
+.ph-group-dialog::backdrop{background:#071d2bb3}
+.ph-group-dialog h2{margin:0 0 16px;font-size:1.15rem}
+.ph-group-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.ph-group-choices button{font:inherit;font-size:.88rem;text-align:left;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);cursor:pointer}
+.ph-group-choices button:hover{background:var(--light);border-color:var(--blue)}
+.ph-group-choices button:focus-visible{outline:3px solid var(--blue);outline-offset:1px}
+@media(max-width:500px){.ph-group-choices{grid-template-columns:1fr}}
 .ph-counter b{display:block;font-size:clamp(1.35rem,3vw,2rem)}
 .ph-counter span{font-size:.78rem;color:var(--muted)}
 .ph-alert{background:#fff3d7;color:#653b00;border-left:4px solid #dd9b1e;padding:14px 16px;border-radius:10px;margin:18px 0;line-height:1.58}
@@ -77,7 +89,7 @@ html[data-theme="dark"] .ph-tag.protocol{background:#233a55;color:#cce7ff}
 html[data-theme="dark"] .ph-tag.basic{background:#204631;color:#c5f5d9}
 html[data-theme="dark"] .ph-quiz-options button.correct{background:#21472f;color:#d8ffe5}
 html[data-theme="dark"] .ph-quiz-options button.wrong{background:#543030;color:#ffe0e0}
-@media(max-width:760px){.ph-tools{grid-template-columns:1fr 1fr}.ph-tools label:first-child{grid-column:1/-1}.ph-grid,.ph-lessons,.ph-sources{grid-template-columns:1fr}.ph-nav a{font-size:.72rem;padding:10px 2px}.ph-counter>div{padding:10px}}
+@media(max-width:760px){.ph-tools{grid-template-columns:1fr 1fr}.ph-tools label:first-child{grid-column:1/-1}.ph-grid,.ph-lessons,.ph-sources{grid-template-columns:1fr}.ph-nav a{font-size:.72rem;padding:10px 2px}.ph-counter>div,.ph-counter>button{padding:10px}}
 @media(max-width:370px){.ph-tools{grid-template-columns:1fr}.ph-tools label:first-child{grid-column:auto}.ph-counter span{font-size:.69rem}}
 @media print{.top,.ph-tools,.ph-button,#quiz{display:none}.ph-card-body{display:block!important}}
 
@@ -123,7 +135,7 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 <div class="ph-eyebrow">Εκπαιδευτική βιβλιοθήκη · Ανασκόπηση 26/10/2026</div>
 <h1 id="mainTitle">Φαρμακολογία προνοσοκομειακής φροντίδας</h1>
 <p class="ph-lead">Από τις βασικές αρχές έως την εξειδικευμένη υποστήριξη ζωής: μηχανισμός, ενδείξεις, κρίσιμες προφυλάξεις, παρακολούθηση και σύνδεση με τις επίσημες πηγές. Ελληνική και αγγλική ορολογία.</p>
-<div class="ph-counter"><div><b id="drugTotal">—</b><span>Φάρμακα / θεματικές καρτέλες</span></div><div><b id="groupTotal">—</b><span>Κλινικές ενότητες</span></div><div><b>2025–26</b><span>Πηγές ERC, GINA, NICE και άλλες</span></div></div>
+<div class="ph-counter"><button type="button" id="openDrugCatalog" aria-controls="drugResults"><b id="drugTotal">—</b><span>Φάρμακα / θεματικές καρτέλες</span><span class="ph-counter-action">Προβολή όλων ›</span></button><button type="button" id="openClinicalGroups" aria-haspopup="dialog" aria-controls="clinicalGroupsDialog"><b id="groupTotal">—</b><span>Κλινικές ενότητες</span><span class="ph-counter-action">Επιλογή ενότητας ›</span></button><div><b>2025–26</b><span>Πηγές ERC, GINA, NICE και άλλες</span></div></div>
 <div class="ph-alert" role="note"><strong>Εκπαιδευτικό υλικό — όχι πρωτόκολλο χορήγησης</strong>Ορισμένες καρτέλες αφορούν μόνο ιατρούς, εξειδικευμένα πληρώματα ή ειδικά εξουσιοδοτημένους επαγγελματίες. Οι διεθνείς οδηγίες δεν δίνουν αυτομάτως άδεια χορήγησης στην Ελλάδα. Πριν από οποιαδήποτε πραγματική πράξη απαιτούνται ισχύοντα πρωτόκολλα υπηρεσίας, επαγγελματικές αρμοδιότητες, κατάρτιση και όπου απαιτείται ιατρική οδηγία. Το υλικό δεν έχει λάβει ανεξάρτητη τελική κλινική έγκριση.</div>
 <a href="#catalog" class="ph-button" style="display:inline-block;text-decoration:none">Μετάβαση στις καρτέλες</a> <a href="#quiz" class="ph-button secondary" style="display:inline-block;text-decoration:none">Τεστ αυτοελέγχου</a>
 </section>
@@ -166,5 +178,43 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 <p class="ph-tip">Τελευταία εκπαιδευτική ανασκόπηση: 26 Οκτωβρίου 2026 · Προβλέπεται επανέλεγχος μετά από νέες επίσημες οδηγίες και έλεγχο από κλινικό εκπαιδευτή.</p>
 </section>
 </main>
+<dialog id="clinicalGroupsDialog" class="ph-group-dialog" aria-labelledby="clinicalGroupsTitle">
+<h2 id="clinicalGroupsTitle">Επίλεξε κλινική ενότητα</h2>
+<div id="clinicalGroupChoices" class="ph-group-choices"></div>
+<button type="button" id="closeClinicalGroups" class="ph-button secondary">Κλείσιμο</button>
+</dialog>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var catalogButton = document.getElementById('openDrugCatalog');
+  var groupButton = document.getElementById('openClinicalGroups');
+  var dialog = document.getElementById('clinicalGroupsDialog');
+  var category = document.getElementById('categoryFilter');
+  var search = document.getElementById('drugSearch');
+  var scope = document.getElementById('scopeFilter');
+  function selectCategory(value) {
+    search.value = '';
+    scope.value = 'all';
+    category.value = value;
+    category.dispatchEvent(new Event('change', {bubbles:true}));
+    if (dialog.open) dialog.close();
+    document.getElementById('catalog').scrollIntoView({block:'start'});
+    search.focus({preventScroll:true});
+  }
+  catalogButton.addEventListener('click', function () { selectCategory('all'); });
+  groupButton.addEventListener('click', function () {
+    var choices = document.getElementById('clinicalGroupChoices');
+    choices.replaceChildren();
+    Array.from(category.options).filter(function (o) { return o.value !== 'all'; }).forEach(function (option) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = option.textContent;
+      button.addEventListener('click', function () { selectCategory(option.value); });
+      choices.append(button);
+    });
+    dialog.showModal();
+  });
+  document.getElementById('closeClinicalGroups').addEventListener('click', function () { dialog.close(); });
+});
+</script>
 <script src="progress.js" defer></script><script src="updates.js" defer></script>
 </body></html>
