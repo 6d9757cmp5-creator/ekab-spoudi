@@ -5,9 +5,9 @@ const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3')
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
 let searchCache=null,glossaryCache=null;
-const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json','medical-terms.json?v=27.1.61'];
+const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json','medical-terms.json?v=27.1.62'];
 async function loadGlossary(){
- if(!glossaryCache)glossaryCache=fetchJson('medical-terms.json?v=27.1.61').then(o=>o.items||[]).catch(e=>{glossaryCache=null;throw e});
+ if(!glossaryCache)glossaryCache=fetchJson('medical-terms.json?v=27.1.62').then(o=>o.items||[]).catch(e=>{glossaryCache=null;throw e});
  return glossaryCache;
 }
 function entries(parts){
@@ -141,10 +141,12 @@ function installSearch(){
 function medNormal(value){return normalize(String(value??'').replace(/[₂]/g,'2').replace(/[₃]/g,'3').replace(/[₄]/g,'4').replace(/µ/g,'μ'))}
 function findGlossary(q,terms,category){
  const query=medNormal(q),words=query.split(/\s+/).filter(Boolean);
+ const shortSymbol=query.length<=2&&terms.some(t=>(t.symbols||[]).some(sym=>medNormal(sym)===query));
  return terms.map((t,id)=>{
   if(category&&t.category!==category)return null;
   const primary=[t.term,t.en].map(medNormal),secondary=[...(t.aliases||[]),...(t.symbols||[])].map(medNormal);
   const hay=[...primary,...secondary];
+  if(shortSymbol&&!secondary.some(sym=>sym===query))return null;
   if(words.length&&!words.every(w=>hay.some(h=>h.includes(w))||(w.length>=4&&medNormal(t.definition).includes(w))))return null;
   let score=primary.some(x=>x===query)?180:secondary.some(x=>x===query)?160:primary.some(x=>x.startsWith(query))?125:secondary.some(x=>x.startsWith(query))?110:primary.some(x=>x.includes(query))?75:secondary.some(x=>x.includes(query))?55:0;
   if(!query)score=0;
