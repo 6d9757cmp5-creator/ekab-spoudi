@@ -1,0 +1,61 @@
+name: SAEK Explain drafts (no Codex credits)
+
+on:
+  push:
+    paths:
+      - '.github/workflows/auto-saek-explain.yml'
+  schedule:
+    # 05:15 UTC daily; no local machine, Codex, or API key needed.
+    - cron: '15 5 * * *'
+  workflow_dispatch:
+    inputs:
+      max_new:
+        description: 'How many new draft videos (1–10)?'
+        required: false
+        default: '1'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: saek-explain-drafts
+  cancel-in-progress: false
+
+jobs:
+  create-drafts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Read source lessons
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install open-source MCP client and HTML parser
+        run: npm install --no-save --no-package-lock --ignore-scripts '@modelcontextprotocol/sdk@^1.25.0' 'cheerio@^1.2.0'
+      - name: Check script syntax
+        run: node --check scripts/generate-saek-explain.mjs
+      - name: Generate unlisted drafts from existing Greek lesson text
+        env:
+          MAX_NEW: ${{ github.event_name == 'push' && '1' || (github.event_name == 'workflow_dispatch' && inputs.max_new || '10') }}
+        run: node scripts/generate-saek-explain.mjs
+      - name: Save successful draft links (even if a later video failed)
+        if: always()
+        run: |
+          if [ ! -f saek-auto-video-drafts.json ]; then
+            echo "No draft manifest to save."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add saek-auto-video-drafts.json
+          if git diff --cached --quiet; then
+            echo "No new draft entries."
+            exit 0
+          fi
+          git commit -m "Record SAEK Explain draft videos for medical review [skip ci]"
+          git pull --rebase
+          git push
