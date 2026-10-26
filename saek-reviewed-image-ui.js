@@ -86,7 +86,7 @@ async function start(){
    const wrap=el('details','saek-source-section');
    const summary=el('summary','saek-source-summary','Εκπαιδευτικές εικόνες με τεκμηρίωση ('+chapter.images.length+')');
    wrap.append(summary);
-   const note=el('p','saek-source-note','Ανατομικές αναφορές και εκπαιδευτικά σχήματα με καταγεγραμμένη τεκμηρίωση και άδεια. Εκκρεμεί ανεξάρτητος επιστημονικός έλεγχος της τελικής επιλογής· δεν υποκαθιστούν τις τρέχουσες κλινικές οδηγίες.');
+   const note=el('p','saek-source-note','Εκπαιδευτικές εικόνες με καταγεγραμμένες πηγές και άδεια χρήσης. Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ούτε ανεξάρτητη επιστημονική έγκριση· τα σχήματα δεν υποκαθιστούν τις ισχύουσες κλινικές ή υπηρεσιακές οδηγίες.');
    wrap.append(note);
    for(const key of chapter.images){
     const asset=registry.assets[key];
