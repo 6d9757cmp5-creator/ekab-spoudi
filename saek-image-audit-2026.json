@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 50/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
+  "note": "Μητρώο επιλογών εικόνων: 51/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη, ανεξάρτητη επιστημονική έγκριση ή δημοσίευση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -642,6 +642,29 @@
         "CDC environmental control: disposal containers close to point of use"
       ],
       "sha256": "99b3679bd0ea7b49d577b76382aa2231692207e0365491036668d136023b1826"
+    },
+    "prevention_levels": {
+      "filename": "prevention-levels-el.svg",
+      "localPath": "assets/education/prevention-levels-el.svg",
+      "title": "Πρωτογενής, δευτερογενής και τριτογενής πρόληψη — τρία στάδια",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο εκπαιδευτικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.who.int/health-topics/health-promotion",
+      "additionalSources": [
+        "https://www.cdc.gov/chronic-disease/prevention/index.html"
+      ],
+      "caption": "Χρονική αλληλουχία πρόληψης με παραδείγματα εμβολιασμού, προσυμπτωματικού ελέγχου και αποκατάστασης. Τα παραδείγματα είναι ενδεικτικά και όχι οδηγίες για συγκεκριμένο ασθενή.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "pending independent live-source verification",
+      "sourcePageCheckedFor": [],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG authored with Greek labels; XML parser, raster, browser and offline E2E not yet verified"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": null
     }
   },
   "placements": {
@@ -807,6 +830,9 @@
     ],
     "04-10": [
       "sharps_disposal"
+    ],
+    "04-03": [
+      "prevention_levels"
     ]
   },
   "courses": [
@@ -1098,8 +1124,10 @@
         },
         {
           "anchor": "#lesson-3",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "prevention_levels"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-4",
