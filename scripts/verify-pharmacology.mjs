@@ -54,7 +54,9 @@ for(const f of ['farmaka.html','farmaka-catalog.js','farmaka-clinical-2026.js','
 const version=JSON.parse(read('version.json')).version;
 if(!sw.includes('ekab-spoudi-v'+version))fail('SW release mismatch');
 if(!read('updates.js').includes("CURRENT='"+version+"'"))fail('Update controller mismatch');
-if(!read('index.html').includes('app.js?v='+version)||!read('index.html').includes('updates.js?v='+version))fail('Home scripts mismatch');
+const home=read('index.html'),theory=read('theory.html');
+if(!home.includes('updates.js?v='+version))fail('Home update script version mismatch');
+if(!theory.includes('app.js?v=')||!theory.includes('progress.js?v='))fail('Theory reader scripts missing');
 const ui=read('farmaka-ui.js');
 if(!ui.includes('ph-extended-body'))fail('Expanded clinical cards are not shown');
 if(!ui.includes("var quiz = ["))fail('Self-assessment quiz not found');
