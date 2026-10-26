@@ -337,3 +337,35 @@ html[data-theme="dark"] .catalog-reader-caution.review{color:#ffcb73}
 }
 html[data-theme="dark"] #homeView.catalog-open-desktop>#catalogReader{background:#172f40}
 html[data-theme="dark"] .catalog-ready-sos{background:#233f50}
+
+
+/* SAEK self-check contrast: all lesson questions and answers in dark mode.
+   In light mode the existing educational layout is left unchanged. */
+html[data-theme="dark"] .knowledge-check {
+  background:#152d3d;
+  color:#edf6fc;
+  border-color:#49677a;
+}
+html[data-theme="dark"] .knowledge-check > summary {
+  color:#c5edff;
+}
+html[data-theme="dark"] .knowledge-check .check-question {
+  color:#f4f9fd;
+}
+html[data-theme="dark"] .knowledge-check > div > details {
+  background:#204054;
+  border:1px solid #4e7186;
+  color:#f0f7fb;
+  border-radius:9px;
+}
+html[data-theme="dark"] .knowledge-check > div > details > summary {
+  color:#bce9ff;
+}
+html[data-theme="dark"] .knowledge-check .check-answer {
+  color:#f2f8fd;
+}
+html[data-theme="dark"] .knowledge-check summary:focus-visible {
+  outline:3px solid #a5e2ff;
+  outline-offset:2px;
+  border-radius:5px;
+}
