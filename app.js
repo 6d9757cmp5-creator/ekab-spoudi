@@ -17,7 +17,7 @@ function labelStatus(q){const status=q.sourceReview?.status;if(status==='documen
 function learning(q){return scheduler.evaluate(state[q.id])}
 function isStudied(q){return learning(q).studied}
 function isMastered(q){return learning(q).mastered}
-function needsReview(q){const s=state[q.id];return Boolean(s&&(scheduler.isDue(s)||((s.weak||0)>0&&!isStudied(q))))}
+function needsReview(q){const s=state[q.id];return Boolean(s&&scheduler.isDue(s))}
 function renderDueToday(){
  const container=$('#dueTodayList'),count=$('#dueTodayCount');
  if(!container||!count)return;

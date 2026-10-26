@@ -3,7 +3,7 @@
  'use strict';
  const DAY=86400000;
  const INTERVAL_DAYS=[1,3,7,14,30];
- const HISTORY_LIMIT=120;
+ const HISTORY_LIMIT=72;
  function when(value){
   const d=value instanceof Date?new Date(value.getTime()):value?new Date(value):new Date();
   return Number.isFinite(d.getTime())?d:new Date();

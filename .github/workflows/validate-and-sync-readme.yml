@@ -21,6 +21,8 @@ jobs:
         run: node scripts/verify-eoppep.mjs
       - name: Verify dated recall schedule and legacy progress
         run: node scripts/verify-study-scheduler.mjs
+      - name: Validate browser JavaScript syntax
+        run: node --check app.js && node --check study-scheduler.js && node --check progress.js
       - name: Validate app files and normalize README
         shell: bash
         run: |

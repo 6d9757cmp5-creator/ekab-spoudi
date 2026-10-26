@@ -23,7 +23,7 @@ assert.equal(rules.evaluate(a,t('2026-10-10T12:00:00Z')).mastered,true,'fifth su
 assert.equal(rules.isDue(a,t('2026-11-09T12:00:00Z')),true,'due review after 30 days');
 rules.record(a,'incorrect',t('2026-10-11T12:00:00Z'));
 assert.equal(rules.evaluate(a,t('2026-10-11T12:00:00Z')).studied,false,'wrong resets current learning state');
-assert.equal(rules.isDue(a,t('2026-10-11T12:01:00Z')),true,'incorrect prioritizes today's review');
+assert.equal(rules.isDue(a,t('2026-10-11T12:01:00Z')),true,'incorrect prioritizes immediate review');
 assert.equal(a.selfCorrect,12,'old self-correct totals preserved');
 const b={seen:1,selfCorrect:0,selfAttempts:0,streak:0,weak:0};
 rules.record(b,'assisted',t('2026-10-11T12:00:00Z'));
