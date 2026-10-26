@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 46/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Πραγματικός browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
+  "note": "Μητρώο επιλογών εικόνων: 47/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Το SHA-256 νέας εικόνας 04-08 εκκρεμεί· πραγματικός browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -536,6 +536,32 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "a60ee4d0140da55b663780c8fcc75fd7faa9f71b32525cfe35551ed2e308cc04"
+    },
+    "clean_disinfect_sterilize": {
+      "filename": "clean-disinfect-sterilize-el.svg",
+      "localPath": "assets/education/clean-disinfect-sterilize-el.svg",
+      "title": "Καθαρισμός, απολύμανση, αποστείρωση: τρεις διαφορετικοί στόχοι",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/index.html",
+      "additionalSources": [
+        "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/summary-recommendations.html"
+      ],
+      "caption": "Πρωτότυπη σχηματική σύγκριση: ο καθαρισμός απομακρύνει ρύπους, η απολύμανση καταστρέφει ή αδρανοποιεί πολλούς παθογόνους μικροοργανισμούς (όχι απαραίτητα βακτηριακούς σπόρους), η αποστείρωση με επικυρωμένη διαδικασία στοχεύει σε όλες τις μορφές μικροβιακής ζωής. Τα σύμβολα δεν αποδίδουν μετρήσιμη αποτελεσματικότητα και δεν υποκαθιστούν οδηγίες κατασκευαστή ή υπηρεσίας.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "CDC distinction of cleaning, disinfection, sterilization; independently drawn schematic, not copied",
+        "Do not infer disinfection eliminates all bacterial spores or that cleaning sterilizes"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG source authored with Greek text and explicit panels; independent rendered visual, browser and offline tests pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": null
     }
   },
   "placements": {
@@ -689,6 +715,9 @@
     ],
     "04-06": [
       "microbe_structures"
+    ],
+    "04-08": [
+      "clean_disinfect_sterilize"
     ]
   },
   "courses": [
@@ -1009,8 +1038,10 @@
         },
         {
           "anchor": "#lesson-8",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "clean_disinfect_sterilize"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-9",
