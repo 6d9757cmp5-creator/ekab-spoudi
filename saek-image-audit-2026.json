@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Ελεγμένες αντιστοιχίσεις καταχωρίσεων: 55/247 κεφάλαια με τουλάχιστον μία επιλεγμένη εικόνα (όχι πλήρης κάλυψη/επιστημονική έγκριση/δημοσίευση).",
+  "note": "Επιλεγμένες εικόνες 59/247· επιλογή δεν σημαίνει πλήρη επάρκεια, ανεξάρτητη επιστημονική έγκριση ή δημόσια διαθεσιμότητα.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -664,7 +664,7 @@
         "scope": "SVG authored with Greek labels; XML parser, raster, browser and offline E2E not yet verified"
       },
       "subjectCompleteness": "partial",
-      "sha256": null
+      "sha256": "cfc8c24e03fa028f15263b51d2739312530864fb6287862320e3e710bf49878d"
     },
     "public_health_cycle": {
       "filename": "public-health-cycle-el.svg",
@@ -687,7 +687,7 @@
         "scope": "SVG source labels and arrows inspected in text; raster, browser and offline E2E pending"
       },
       "subjectCompleteness": "partial",
-      "sha256": null
+      "sha256": "8b71bfcabde65d4a0f6c6059f6c1bb12f448d93aead527ee4c3c7044541c6506"
     },
     "social_determinants_pathways": {
       "filename": "social-determinants-pathways-el.svg",
@@ -710,7 +710,7 @@
         "scope": "SVG source labels and arrows inspected in text; raster, browser and offline E2E pending"
       },
       "subjectCompleteness": "partial",
-      "sha256": null
+      "sha256": "b4bf9ba68511f95ee2865b2dee4703dbfef06ea2e19406a3e2a0a2cb198b3d1c"
     },
     "emergency_call_location": {
       "filename": "emergency-call-location-el.svg",
@@ -763,6 +763,58 @@
       },
       "subjectCompleteness": "partial",
       "sha256": null
+    },
+    "scene_safety_assessment": {
+      "filename": "scene-safety-assessment-el.svg",
+      "localPath": "assets/education/scene-safety-assessment-el.svg",
+      "title": "Ασφάλεια σκηνής: κίνηση, καπνός και ηλεκτρικός κίνδυνος",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο εκπαιδευτικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-27",
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "page": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
+      "additionalSources": [
+        "https://www.resus.org.uk/library/abcde-approach"
+      ],
+      "visualReview": {
+        "date": "2026-10-27",
+        "scope": "Greek labels and source code reviewed; browser, zoom, offline E2E and independent clinical review pending."
+      },
+      "caption": "Πρωτότυπο σχηματικό οδικού συμβάντος με διερχόμενα οχήματα, καπνό και ηλεκτρικό κίνδυνο. Προηγείται η εκτίμηση κινδύνων, η επιλογή κατάλληλων ΜΑΠ και η ανάγκη συνδρομής. Δεν καθορίζει επιχειρησιακές αποστάσεις ή τακτικές.",
+      "sourcePageCheckedFor": [
+        "RCUK 2025: attention to scene safety, road traffic, chemicals or violent persons before approaching",
+        "RCUK 2025: early call for help and competency limitations"
+      ],
+      "sha256": "22169ee98ab9ee2d4ea4a4ccea701d03dc4d944eb12b8ba7c9fb56445dab9653"
+    },
+    "primary_survey_abcde": {
+      "filename": "primary-survey-abcde-el.svg",
+      "localPath": "assets/education/primary-survey-abcde-el.svg",
+      "title": "Πρωτογενής εκτίμηση ABCDE: ανατομική επισκόπηση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο εκπαιδευτικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-27",
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "page": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
+      "additionalSources": [
+        "https://www.resus.org.uk/library/abcde-approach"
+      ],
+      "visualReview": {
+        "date": "2026-10-27",
+        "scope": "Greek labels and source code reviewed; browser, zoom, offline E2E and independent clinical review pending."
+      },
+      "caption": "Σχηματική ανθρώπινη μορφή με θέσεις εκτίμησης αεραγωγού, αναπνοής, κυκλοφορίας, νευρολογικής εικόνας και έκθεσης. Σε σοβαρό τραύμα η καταστροφική αιμορραγία μπορεί να προηγηθεί· ζητείται βοήθεια και γίνεται επανεκτίμηση. Εκπαίδευση και υπηρεσιακά πρωτόκολλα καθορίζουν τις επιτρεπόμενες πράξεις.",
+      "sourcePageCheckedFor": [
+        "RCUK 2025: structured ABCDE assessment and recognition of life-threatening bleeding",
+        "RCUK ABCDE: address life threats and reassess"
+      ],
+      "sha256": "666d5d6d8447699c2489cc0ae02ab4800f703341aa8571396459df50504c2bfb"
     }
   },
   "placements": {
@@ -943,6 +995,18 @@
     ],
     "09-01": [
       "ambulance_pretrip_points"
+    ],
+    "05-01": [
+      "scene_safety_assessment"
+    ],
+    "05-05": [
+      "scene_safety_assessment"
+    ],
+    "05-02": [
+      "primary_survey_abcde"
+    ],
+    "05-07": [
+      "primary_survey_abcde"
     ]
   },
   "courses": [
@@ -1299,13 +1363,17 @@
       "chapters": [
         {
           "anchor": "#lesson-1",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "scene_safety_assessment"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-2",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "primary_survey_abcde"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-3",
@@ -1319,8 +1387,10 @@
         },
         {
           "anchor": "#lesson-5",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "scene_safety_assessment"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-6",
@@ -1329,8 +1399,10 @@
         },
         {
           "anchor": "#lesson-7",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "primary_survey_abcde"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-8",
