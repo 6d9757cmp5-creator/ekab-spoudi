@@ -55,7 +55,7 @@ assert.ok(theme.includes('global-tools.js')&&theme.includes('global-tools.css'))
 const globalTools=read('global-tools.js');
 assert.ok(globalTools.includes('saek-search-')&&globalTools.includes('official_questions.json')&&globalTools.includes('app-pages-search-1.json'),'unified search should cover SAEK, EOPPEP and app pages');
 assert.ok(globalTools.includes('extra-exercises-search.json')&&globalTools.includes('medical-terms.json'));
-assert.ok(globalTools.includes('index.html?question=')&&globalTools.includes('search.html?q='));
+assert.ok(globalTools.includes('theory.html?question=')&&globalTools.includes('search.html?q='),'EOPPEP results must open the separate theory reader');
 const termData=JSON.parse(read('medical-terms.json'));
 assert.ok(termData.items.length>=17,'general bilingual medical glossary should have 17+ starter terms');
 const termCategories=termData.categories||[...new Set(termData.items.map(item=>item.category))];
