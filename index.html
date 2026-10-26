@@ -11,6 +11,14 @@
 <link rel="stylesheet" href="styles.css?v=27.1.78">
 <link rel="stylesheet" href="home.css?v=27.1.78">
 <script src="theme-init.js"></script>
+<script>
+/* Old links into the EOPPEP reader remain valid after the new landing page. */
+(function(){
+ const q=new URLSearchParams(location.search).get('question');
+ const previous=new Set(['#eoppepHomeSummary','#catalogReader','#allQuestionsPanel','#dueTodayPanel','#topicsFold','#setup']);
+ if(q||previous.has(location.hash))location.replace('theory.html'+location.search+location.hash);
+})();
+</script>
 <title>ΕΚΑΒ Σπουδή — Αρχική σελίδα</title>
 </head>
 <body>
