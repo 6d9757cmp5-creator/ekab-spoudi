@@ -47,6 +47,36 @@
     addPoint(body, 'Κίνδυνοι, αντενδείξεις και σφάλματα', m.caution, true);
     addPoint(body, 'Τι παρακολουθούμε', m.monitor);
     addPoint(body, 'Εκπαιδευτική σημείωση', m.notes);
+    /* Expanded clinical fields are separate from the introductory study summary.
+       No record is marked clinically approved until an authorized reviewer signs off. */
+    if (m.clinical) {
+      var info=m.clinical;
+      var extended=el('details','ph-extended');
+      var title=el('summary','','Κλινική επέκταση · Οδοί, δόσεις, ασφάλεια και τεκμηρίωση');
+      extended.append(title);
+      var detailBody=el('div','ph-extended-body');
+      addPoint(detailBody,'Δοσολογική πληροφορία ενηλίκου — μόνο για μελέτη',info.adultDose);
+      addPoint(detailBody,'Παιδιατρική αναφορά / ειδικός έλεγχος',info.paediatricDose);
+      addPoint(detailBody,'Οδός χορήγησης / περιορισμοί',info.route);
+      addPoint(detailBody,'Κρίσιμες αντενδείξεις και σφάλματα',info.contraindications,true);
+      addPoint(detailBody,'Αλληλεπιδράσεις και συγχορηγήσεις',info.interactions);
+      addPoint(detailBody,'Κύηση και γαλουχία',info.pregnancy);
+      addPoint(detailBody,'Νεφρική / ηπατική λειτουργία',info.renalLiver);
+      addPoint(detailBody,'Φύλαξη, συγκέντρωση και αραίωση',info.storage);
+      addPoint(detailBody,'Ελληνικό πλαίσιο επαγγελματικής πράξης',info.governance,true);
+      addPoint(detailBody,'Επίπεδο τεκμηρίωσης',info.evidenceLevel);
+      addPoint(detailBody,'Απαραίτητη κλινική επικύρωση',info.clinicalApproval,true);
+      if(info.extraNote) addPoint(detailBody,'Σημείωση επαλήθευσης',info.extraNote);
+      [info.evidenceKey,info.extraEvidenceKey].filter(Boolean).forEach(function(key){
+        var e=lib.sources[key];if(!e)return;
+        var line=el('p');
+        var link=el('a','',e.title+' ↗');
+        link.href=e.url;link.target='_blank';link.rel='noopener noreferrer';
+        line.append(link);detailBody.append(line);
+      });
+      extended.append(detailBody);
+      body.append(extended);
+    }
     var source = lib.sources[m.source];
     if (source) {
       var p = el('p');
@@ -69,7 +99,7 @@
     var selected = list.filter(function (m) {
       return (category === 'all' || m.category === category) &&
         (scope === 'all' || m.scope === scope) &&
-        (!q || normalize([m.name, m.english, m.category, m.mechanism, m.indication, m.caution, m.notes].join(' ')).includes(q));
+        (!q || normalize([m.name, m.english, m.category, m.mechanism, m.indication, m.caution, m.notes, m.clinical&&m.clinical.adultDose, m.clinical&&m.clinical.route, m.clinical&&m.clinical.contraindications].join(' ')).includes(q));
     });
     var root = byId('drugResults');
     root.replaceChildren();
