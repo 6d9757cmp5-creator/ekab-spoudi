@@ -45,6 +45,20 @@ function limited(user){
  rec.count++;return false;
 }
 async function findReference(input){
+ if(input.section==='saek'){
+  // Source of truth is bundled server-side: users cannot forge the reference answer.
+  if(!/^saek-(?:0[1-9]|1[0-9]|20)-(?:[1-9]|[1-9][0-9])$/.test(input.questionId||''))throw new Error('Μη έγκυρη ερώτηση ΣΑΕΚ');
+  const data=JSON.parse(await readFile(new URL('./saek-exam-rubrics.json',import.meta.url),'utf8'));
+  if(data?.count!==247||!Array.isArray(data.items)||data.items.length!==247)throw new Error('Η τράπεζα ΣΑΕΚ δεν είναι διαθέσιμη');
+  const q=data.items.find(x=>x.id===input.questionId);
+  if(!q||!q.question||!q.answer)throw new Error('Δεν βρέθηκε ερώτηση ΣΑΕΚ');
+  return {
+   question:cleanText(q.question,1200),
+   reference:cleanText(q.answer,4000),
+   context:'Κεφάλαιο: '+cleanText(q.chapterTitle,250)+' · '+cleanText(q.course,250)+' · '+q.semester+' εξάμηνο. Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημη εξέταση.',
+   kind:'Εξετάσεις ΣΑΕΚ'
+  };
+ }
  if(input.section==='seminar'){
   if(!/^(bls|pbls|ils|phtls|als)$/.test(input.courseId||'')||!Number.isInteger(input.questionIndex)||input.questionIndex<0||input.questionIndex>=48)throw new Error('Μη έγκυρη ερώτηση σεμιναρίου');
   const text=await readFile(new URL('./seminar-rubrics.json',import.meta.url),'utf8');
