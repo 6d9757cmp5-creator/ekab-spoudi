@@ -1,0 +1,48 @@
+/* Compact landing page for EKAB Spoudi. All learning modules stay on their existing pages. */
+.home-main{max-width:970px;padding-top:24px}
+.home-intro{text-align:left;margin:0 0 23px}
+.home-kicker{font-size:.72rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 8px}
+.home-intro h2{font-size:clamp(1.45rem,4vw,2.05rem);line-height:1.18;letter-spacing:-.025em;margin:0 0 10px}
+.home-intro p:last-child{color:var(--muted);font-size:.9rem;margin:0}
+.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.home-card{display:block;min-width:0;overflow:hidden;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;text-decoration:none;box-shadow:0 5px 16px #051e300b;transition:transform .15s ease,border-color .15s ease;cursor:pointer}
+.home-card:hover{border-color:#94c5dd;transform:translateY(-1px)}
+.home-card:focus-visible,.home-card:focus-within{outline:3px solid #63bce7;outline-offset:2px}
+.home-card-head,.home-card-summary{display:flex;gap:14px;align-items:center;padding:21px 18px;min-height:126px}
+.home-card-summary{list-style:none}
+.home-card-summary::-webkit-details-marker{display:none}
+.home-card-summary::marker{content:''}
+.home-card-icon{width:53px;height:53px;min-width:53px;border-radius:15px;display:grid;place-items:center;background:#e6f4fa;color:#176385}
+.home-card-icon svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.home-card-text{min-width:0;flex:1}
+.home-card-title{font-size:1.11rem;line-height:1.3;font-weight:800;display:block;margin-bottom:5px}
+.home-card-subtitle{font-size:.8rem;line-height:1.4;color:var(--muted);display:block}
+.home-card-chevron{color:var(--blue);font-size:1.45rem;flex:none;line-height:1}
+.home-card-eoppep[open] .home-card-chevron{transform:rotate(90deg)}
+.home-card-button{width:100%;border:0;text-align:left;font:inherit;cursor:pointer}
+.home-suboptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 17px 18px}
+.home-suboptions a{padding:13px 11px;display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;border:1px solid #b6d9e9;border-radius:10px;background:#eaf6fc;color:#145b7d;text-decoration:none;font-size:.87rem;font-weight:800;min-height:51px}
+.home-suboptions a:hover,.home-suboptions a:focus-visible{background:#dceff9;outline:2px solid #5baecc}
+.home-main footer{margin-top:25px}
+.home-app-note{font-size:.76rem;text-align:center;color:var(--muted);max-width:680px;margin:22px auto 0;line-height:1.55}
+html[data-theme="dark"] .home-card{background:#152c3f;border-color:#324f63;box-shadow:none}
+html[data-theme="dark"] .home-card-icon{background:#22475c;color:#b9e9ff}
+html[data-theme="dark"] .home-suboptions a{background:#22465c;border-color:#476d81;color:#e7f6ff}
+html[data-theme="dark"] .home-suboptions a:hover{background:#30586f}
+@media(max-width:620px){
+ .home-main{padding-top:19px}
+ .home-intro{margin-bottom:17px}
+ .home-tiles{grid-template-columns:1fr;gap:11px}
+ .home-card-head,.home-card-summary{padding:15px 16px;min-height:94px}
+ .home-card-icon{width:46px;height:46px;min-width:46px;border-radius:13px}
+ .home-card-icon svg{width:24px;height:24px}
+ .home-card-title{font-size:1.03rem}
+ .home-card-subtitle{font-size:.77rem}
+ .home-suboptions{padding:0 15px 15px}
+}
+@media(max-width:360px){
+ .home-card-head,.home-card-summary{gap:10px;padding:13px}
+ .home-card-icon{width:41px;height:41px;min-width:41px}
+ .home-suboptions{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.home-card{transition:none}.home-card:hover{transform:none}}
