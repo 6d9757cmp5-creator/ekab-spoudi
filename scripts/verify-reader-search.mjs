@@ -57,7 +57,9 @@ assert.ok(globalTools.includes('extra-exercises-search.json')&&globalTools.inclu
 assert.ok(globalTools.includes('index.html?question=')&&globalTools.includes('search.html?q='));
 const termData=JSON.parse(read('medical-terms.json'));
 assert.ok(termData.items.length>=17,'general bilingual medical glossary should have 17+ starter terms');
-assert.ok(termData.categories.length>=8,'include different medical disciplines');
+const termCategories=termData.categories||[...new Set(termData.items.map(item=>item.category))];
+assert.ok(termCategories.length>=8,'include different medical disciplines');
+if(termData.count!==undefined)assert.equal(termData.count,termData.items.length,'glossary count matches items');
 for(const term of termData.items){assert.ok(term.term&&term.en&&term.definition&&term.category);assert.match(term.source,/^https:\/\//)}
 const appPageCounts=[28,87,52];
 for(let i=1;i<=3;i++){
