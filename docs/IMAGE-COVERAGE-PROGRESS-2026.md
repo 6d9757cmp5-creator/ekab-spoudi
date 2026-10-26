@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest recorded checkpoint: **2026-10-27, post-batch-16 synchronized with parallel changes**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed registry checkpoint: **2026-10-27, milestone 100 (new draft batch 17)**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
-| Semester | Total chapters | Draft: source-selected (PR #6) | Main registry (last checked, not live proof) | Draft missing |
+| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified, not live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 50 | 10 | 21 |
+| Α | 71 | 58 | 10 | 13 |
 | Β | 73 | 13 | 5 | 60 |
 | Γ | 51 | 5 | 5 | 46 |
-| Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **74** | **26** | **173** |
+| Δ | 52 | 24 | 6 | 28 |
+| **Total** | **247** | **100** | **26** | **147** |
 
-**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b23`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b24`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -207,3 +207,14 @@ For each new asset: verify relevance and the original source/license; render and
 - Registry now reports **74/247** selected chapters; totals by semester: A 50, B 13, C 5, D 6. Total registered images: **51**, local SVGs **44**. Current main-registry comparison is historical and must not be treated as proven live publication.
 - The latest additional keys from parallel commits are `prehospital_care_pathway`, `closed_loop_handover`, `driver_fatigue_warning`; existing assets and the preceding batch remain intact. These additions are counted from actual current registry mappings rather than an outdated PR title.
 - The latest draft service-worker cache is `ekab-spoudi-v27.1.68-images-20261026-b23`. Local asset checksums are `0` missing at checkpoint. Independent medical review, browser rendering/zoom, offline end-to-end and production deployment are **not** established by this checkpoint.
+
+
+## Batch 17 — milestone **100/247** selected (2026-10-27)
+
+- Continued **existing branch** `coverage/greek-images-20261026` in **existing draft PR #6**, with no merge/deploy. Read original lesson content before selecting new chapter diagrams in courses 03, 05, 19 and 20.
+- Created **8 original, locally hosted, Greek-labelled SVG educational illustrations**: `circulation-observation-el.svg`, `transfer-types-el.svg`, `reassessment-timeline-el.svg`, `opqrst-pain-assessment-el.svg`, `health-information-privacy-el.svg`, `emergency-department-triage-flow-el.svg`, `emergency-bay-equipment-el.svg` and `bed-stretcher-safe-transfer-el.svg`. All original artwork, declared CC BY 4.0. They depict concrete body/medical/operational objects or floor/route views, rather than generic recap panels; no image was copied from its reference.
+- Mapped new illustrations alongside existing subject-relevant images to **26 previously unselected chapters**: 03-01/02/03/06, 05-06/09/13/14, 19-01/02/03/04/05/07/08/12/13, 20-02/03/05/06/07/08/09/11/12. Where an image serves a related but broader chapter, **coverage remains explicitly partial**; reusing an image does not mean the full chapter is illustrated.
+- References for educational concepts: [Resuscitation Council UK ABCDE](https://www.resus.org.uk/library/abcde-approach) and [First Aid Guidelines 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines); [WHO Prehospital Toolkit](https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit), [WHO triage](https://www.who.int/tools/triage) and [WHO Emergency Care Toolkit](https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit); [OSHA safe patient handling](https://www.osha.gov/healthcare/safe-patient-handling/); [European Data Protection Supervisor health data guidance](https://www.edps.europa.eu/data-protection/data-protection/reference-library/health-data-workplace_en); [EMS.gov EMT training](https://www.ems.gov/assets/EMT_Instructional_Guidelines.pdf). These sources give conceptual grounding, **not** independent medical signoff or current Greek-specific procedural authorization.
+- Current audit registry has **100/247 chapters with a selected source** (A 58/71, B 13/73, C 5/51, D 24/52), 147 with none; **59 registered assets, 52 local SVGs**. Source selections use `clinicalReview: pending`, `subjectCompleteness: partial`. Each new SVG is registered with SHA-256.
+- Source-level consistency checks: 247 numbered chapters; 100 selected; zero unknown asset keys, zero placement/course mapping mismatches and zero missing SVG checksums; all local assets listed in draft service-worker precache `ekab-spoudi-v27.1.68-images-20261026-b24`. This checks source wiring, **not** actual browser/mobile visibility or offline end-to-end.
+- Remaining quality gates: independent medical review **0 documented approvals**; actual SVG rendering/layout and accessibility in the running browser, image zoom, offline end-to-end and live deployment must be independently tested. Do **not** call the 100 chapters complete, scientifically approved, or published. Keep PR in draft pending those gates. Future coverage target may be tracked without increasing source-selected counts artificially.
