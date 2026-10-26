@@ -4,7 +4,7 @@ Latest completed batch: **2026-10-26, batch 14**. Continue on branch `coverage/g
 
 ## Selected sources versus published app
 
-| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
+| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified; NOT live proof) | Draft missing |
 |---|---:|---:|---:|---:|
 | Α | 71 | 41 | 10 | 30 |
 | Β | 73 | 9 | 5 | 64 |
@@ -12,7 +12,7 @@ Latest completed batch: **2026-10-26, batch 14**. Continue on branch `coverage/g
 | Δ | 52 | 6 | 6 | 46 |
 | **Total** | **247** | **61** | **26** | **186** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b14`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b19`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -158,3 +158,14 @@ For each new asset: verify relevance and the original source/license; render and
 - Registry selected count at checkpoint: **61/247** (Α 41/71, Β 9/73, Γ 5/51, Δ 6/52); **186 still without image**; 41 registered assets. This includes other concurrent additions and must not be mistaken for four additions alone. Main registry last independently verified **26/247** (Α 10, Β 5, Γ 5, Δ 6), not a live deployment test. Version **27.1.68** unchanged.
 - Reviewed public sources online: https://www.moh.gov.gr/articles/citizen/xrhsima-thlefwna-amp-dieythynseis/196-166-ekab , https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/ , https://www.osha.gov/motor-vehicle-safety/drivers , https://highways.dot.gov/safety/speed-management/guidelines-use-variable-speed-limit-systems-wet-weather/chapter-2-driver , https://www.cdc.gov/niosh/ems/crash-testing/index.html . Their presence does not confer independent clinical certification.
 - **Next:** verify visual/raster rendering and source-aware in-browser zoom/offline display for these diagrams; add only subject-specific images to the next genuinely missing chapters; next user milestone after 50 is 100.
+
+
+## Batch 14 — 2026-10-27: prehospital scene safety and ABCDE (course 05)
+
+- Added **two original Greek-labelled, locally hosted SVG illustrations**: `assets/education/scene-safety-assessment-el.svg` (illustrated road incident with traffic, smoke and electrical hazard; safety assessment and PPE) and `assets/education/primary-survey-abcde-el.svg` (body silhouette with airway, breathing, circulation, neurologic assessment and exposure/thermal protection callouts).
+- The scene-safety diagram is mapped to **05-01 and 05-05**. The anatomically oriented ABCDE diagram is mapped to **05-02 and 05-07**. In both cases, reuse addresses closely related lessons but **does not imply full lesson coverage**.
+- Educational guidance grounded in [Resuscitation Council UK 2025 first-aid guidance](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines) and its [ABCDE approach](https://www.resus.org.uk/library/abcde-approach); the artwork is original, attributed CC BY 4.0, **not copied from the source**. No intervention specifics or jurisdiction-specific operating distances are prescribed.
+- Registry uses exact SHA-256 for both files, `clinicalReview: pending` and `subjectCompleteness: partial`. Also backfilled missing SHA-256 in seven other previously created Greek SVGs (three public-health assets and four other concurrently authored assets). Image-audit source validation was corrected to accept original drawings grounded in named authoritative HTTPS source domains, rather than incorrectly requiring every original to cite only OpenStax Anatomy 2e.
+- Readback after concurrent contributions: **61/247 chapters with a selected source** (semester A 41, B 9, C 5, D 6), **186 still without**, **41 registered assets**, **34 local SVGs**. Changes in courses 07 and 09 were committed by a parallel workstream; they were preserved rather than overwritten. Every local SVG path was present in draft service-worker precache at checkpoint. Production has **not** been verified or changed by this batch.
+- Outstanding gates: **0 documented independent scientific approvals**, full XML/visual browser checking and zoom/offline end-to-end for new files pending, no completed CI result asserted, and PR #6 remains **open, draft, unmerged**. Selected-image totals are not measures of complete chapter illustrations or live app publication.
+- Next work: inspect and test the SVG renderings and remaining course 05/03 chapters, with actual source-specific diagrams and clinical review. Keep live deployment, independent approval and source-selected status distinct.
