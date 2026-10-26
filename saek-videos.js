@@ -24,6 +24,18 @@ window.EKAB_COURSE_VIDEO_SERIES = {
         "title": "Οστά του κορμού και των άκρων",
         "shortTitle": "Οστά κορμού και άκρων",
         "url": "https://scrimba.com/explain/guide00mid43ee?claim=rsjlvf8je7sj16p3"
+      },
+      {
+        "chapter": 3,
+        "title": "Θώρακας και αναπνευστικό σύστημα",
+        "shortTitle": "Θώρακας και αναπνοή",
+        "url": "https://scrimba.com/explain/guide0qcfv2796?claim=358r41su64k1knr2"
+      },
+      {
+        "chapter": 4,
+        "title": "Κοιλιακά όργανα",
+        "shortTitle": "Κοιλιακά όργανα",
+        "url": "https://scrimba.com/explain/guide0ffu06oih?claim=2791kcsac9vvo3b8"
       }
     ]
   }
