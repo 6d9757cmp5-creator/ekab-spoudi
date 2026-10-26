@@ -33,3 +33,13 @@ import(new URL('./appwrite-client.js?app=27.1.38', document.currentScript.src).h
       el.textContent = 'Appwrite: μη διαθέσιμο. Η μελέτη συνεχίζεται τοπικά.';
     });
   });
+
+/* Shared lightweight navigation and first-visit guidance; independent of user data. */
+(function(){
+ if(document.querySelector('script[data-ekab-first-run]'))return;
+ const s=document.createElement('script');
+ s.src=new URL('./ekab-first-run.js',document.currentScript?.src||document.baseURI).href;
+ s.dataset.ekabFirstRun='1';
+ s.defer=true;
+ document.head.appendChild(s);
+})();
