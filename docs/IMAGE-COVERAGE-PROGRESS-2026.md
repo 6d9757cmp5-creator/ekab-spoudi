@@ -1,6 +1,6 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 6**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 7**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
@@ -12,7 +12,7 @@ Latest completed batch: **2026-10-26, batch 6**. Continue on branch `coverage/gr
 | Δ | 52 | 6 | 6 | 46 |
 | **Total** | **247** | **45** | **26** | **202** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b8`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b10`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -74,3 +74,14 @@ For each new asset: verify relevance and the original source/license; render and
 - New source-selected count **45/247**: Α **29/71**, Β **5/73**, Γ **5/51**, Δ **6/52**. **202** without any selected image. **25** registered image assets, **18** local SVG. This chapter has **partial** subject coverage only (epidemiology includes other concepts and methods).
 
 **Quality gates:** independent scientific approvals **0 documented**; real-browser load/zoom and offline end-to-end unverified; production **unverified** (main registry remains A10/B5/C5/D6 and is not a proof of live deployment). The new figure is **non-protocol**, not a clinical procedure. Next: reproductive system 01-13, muscular anatomy 01-09, then epidemiology 04-06/04-07 with topic-specific drawings after source and clinical-scope verification. Do not substitute lesson summaries for illustrations. Validate image registry, SHA-256 and SVG structure in CI before any merge.
+
+## Batch 7 — 2026-10-26: reproductive anatomy for 01-13
+
+- Confirmed PR #6 open/draft/unmerged; existing branch ahead of main, 0 commits behind at start. Continued without new PR or reset.
+- Inspected the actual **01-13** lesson: it explicitly teaches urinary plus male and female reproductive organs. Added **two original Greek-labelled anatomical SVGs**: `assets/education/female-reproductive-system-el.svg` (uterus, uterine tubes, ovaries, cervix, vagina) and `assets/education/male-reproductive-system-el.svg` (testis, epididymis, ductus deferens, seminal vesicle, prostate, urethra, penis and bladder). These are actual organ illustrations, not text recap cards. The female image was corrected so ovary label leaders terminate on the organs.
+- Sources for anatomical relationships: [OpenStax A&P 2e 27.2](https://openstax.org/books/anatomy-and-physiology-2e/pages/27-2-anatomy-and-physiology-of-the-ovarian-reproductive-system) and [OpenStax A&P 2e 27.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/27-1-anatomy-and-physiology-of-the-testicular-reproductive-system). **No source figures were copied/traced**; both original SVG artworks are declared CC BY 4.0 with explicit license links. The source licenses are not being asserted as CC BY 4.0.
+- Registered `female_reproductive` and `male_reproductive` in the image audit with SHA-256 and `clinicalReview: pending`, and added both to **01-13** in placements and course chapter mapping. Added both local assets to `sw.js` precache, draft cache **b10**. Source and leader coordinates inspected; **raster rendering, actual browser loading/zoom, offline E2E and independent medical review not yet verified**.
+- Readback: **27 assets / 20 local SVG**, **45/247 selected chapters** (Α 29/71, Β 5/73, Γ 5/51, Δ 6/52); **202 chapters remain without selected images**. Chapter 01-13 improved from urinary-only to urinary plus two reproductive diagrams, but remains **partial** (no full kidney anatomy, pelvic spatial relationships, anatomical variations, or independent review). No additional chapter counted as selected, and no production release claimed.
+- Quality CI was still running when first checked for commit `7ea4ebf`: [workflow run 40384580359](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40384580359). Verify final results separately. No claim of a passing run until it completes.
+
+**Next continuation:** confirm SVG/checksum CI and inspect rendered images (including Greek labels and zoom); then develop subject-specific muscular anatomy for 01-09 and new uncovered lessons, without promoting unreviewed clinical procedures. Keep PR #6 in draft pending quality gates.
