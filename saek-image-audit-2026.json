@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 44/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
+  "note": "Μητρώο επιλογών εικόνων: 45/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -441,6 +441,28 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "0fb31dc9fd094ab6d197294c72b16539d8d6eed28e4bf5028880f23d1b38fc42"
+    },
+    "incidence_prevalence": {
+      "filename": "incidence-prevalence-el.svg",
+      "localPath": "assets/education/incidence-prevalence-el.svg",
+      "title": "Επίπτωση και σημειακός επιπολασμός: υποθετικός πληθυσμός 20 ατόμων",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/field-epi-manual/php/chapters/describing-epi-data.html",
+      "caption": "Πρωτότυπη απεικόνιση ίδιου υποθετικού πληθυσμού πριν και μετά την περίοδο: 2 προϋπάρχοντα και 3 νέα περιστατικά, χωρίς ανάρρωση ή αποχωρήσεις. Επίπτωση περιόδου 3/18 αρχικά σε κίνδυνο· σημειακός επιπολασμός τέλους 5/20. Όχι πραγματικά δεδομένα, όχι γενίκευση σε ρυθμό ανά ανθρωποχρόνο.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "CDC definition of incident versus prevalent cases, time window and denominators; original independent illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Exact SVG source reproduced locally, parsed and rasterized to PNG; Greek text, circle counts, arrows, arithmetic and layout inspected; real-browser zoom and offline end-to-end not verified"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "cafc8c66c26ed6000944c7ed8e065ba8d18c3973c922049fd506edfdb5b06b71"
     }
   },
   "placements": {
@@ -586,6 +608,9 @@
     ],
     "04-02": [
       "infection_chain"
+    ],
+    "04-05": [
+      "incidence_prevalence"
     ]
   },
   "courses": [
@@ -885,8 +910,10 @@
         },
         {
           "anchor": "#lesson-5",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "incidence_prevalence"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-6",
