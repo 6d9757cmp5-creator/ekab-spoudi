@@ -1,4 +1,4 @@
-import { client, cloudFeatures } from './appwrite-client.js?app=27.1.65';
+import { client, cloudFeatures } from './appwrite-client.js?app=27.1.68';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 
 const account = new Account(client);
@@ -56,7 +56,7 @@ export function initAccountUI() {
     if(!user||!cloudFeatures.sync||syncManager)return;
     const panel=dialog.querySelector('[data-cloud-controls]');panel.hidden=false;
     try {
-      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.65');
+      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.68');
       syncManager=await initCloudSync({user,status:panel.querySelector('[data-cloud-status]'),enableButton:panel.querySelector('[data-sync-enable]'),nowButton:panel.querySelector('[data-sync-now]'),pauseButton:panel.querySelector('[data-sync-pause]'),recoverButton:panel.querySelector('[data-sync-recover]')});
     }catch { panel.querySelector('[data-cloud-status]').textContent='Ο συγχρονισμός δεν είναι διαθέσιμος. Η τοπική αποθήκευση συνεχίζεται.'; }
   }

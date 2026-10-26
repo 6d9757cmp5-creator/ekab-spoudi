@@ -1,9 +1,10 @@
-import { client } from './appwrite-client.js?app=27.1.65';
+import { client } from './appwrite-client.js?app=27.1.68';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 import { Storage } from './vendor/appwrite-29.1.0/storage.js';
 import { Query } from './vendor/appwrite-29.1.0/client.js';
 import { SCHEMA, stable, validValue, captureEdits, mergeEntries, visibleEntries, validateManifest } from './sync-model.js';
 import { readState, saveState, allPdfs, readLocalValues, checkpoint, applyValues, applyPdfs, latestRecovery } from './sync-local.js';
+import { encodeState, decodeState } from './sync-codec.js?app=27.1.68';
 
 export const BUCKET='6ade94d200192fabecef';
 const MAX_FILE=50000000,MAX_STATE=20000000;
@@ -68,7 +69,7 @@ export async function initCloudSync({user,status,enableButton,nowButton,pauseBut
     let merged=state.entries;
     for(const file of latest.values()){
       let data=state.remote[file.$id];
-      if(!data){if(file.sizeOriginal>MAX_STATE)throw new Error('invalid-cloud-data');const raw=await binary(file.$id);data=validateManifest(raw instanceof ArrayBuffer?JSON.parse(new TextDecoder().decode(raw)):raw,userId);if(file.name!==nameFor(data.device))throw new Error('invalid-cloud-data');state.remote[file.$id]=data;}
+      if(!data){if(file.sizeOriginal>MAX_STATE)throw new Error('invalid-cloud-data');const raw=await binary(file.$id);data=validateManifest(await decodeState(raw),userId);if(file.name!==nameFor(data.device))throw new Error('invalid-cloud-data');state.remote[file.$id]=data;}
       merged=mergeEntries(merged,data.entries);
     }
     validateManifest({schema:SCHEMA,userId,device,entries:merged},userId);
@@ -96,7 +97,7 @@ export async function initCloudSync({user,status,enableButton,nowButton,pauseBut
     const own=latest.get(nameFor(device)),previous=own&&state.remote[own.$id];
     if(!previous||stable(previous.entries)!==stable(merged)){
       const data={schema:SCHEMA,userId,device,entries:merged};validateManifest(data,userId);
-      const file=new File([JSON.stringify(data)],nameFor(device),{type:'application/json'});if(file.size>MAX_STATE)throw new Error('state-too-large');
+      const file=new File([await encodeState(data)],nameFor(device),{type:'application/json'});if(file.size>MAX_STATE)throw new Error('state-too-large');
       await identity();
       const created=await storage.createFile({bucketId:BUCKET,fileId:randomId(),file,permissions:privatePermissions(userId)});
       if(!privateTo(created,userId))throw new Error('invalid-cloud-data');
@@ -123,7 +124,7 @@ export async function initCloudSync({user,status,enableButton,nowButton,pauseBut
       failures++;
       if(e.message?.startsWith('pdf-too-large:'))say('Δεν ολοκληρώθηκε: το PDF «'+e.message.slice(14)+'» υπερβαίνει το δωρεάν όριο 50 MB. Τα δεδομένα σου παραμένουν τοπικά.','error');
       else if(e.code===401||e.message==='account-changed')say('Χρειάζεται νέα σύνδεση Google. Οι τοπικές αλλαγές διατηρούνται.','error');
-      else if(e.message==='locks-unavailable')say('Ο browser δεν υποστηρίζει ασφαλή συντονισμό συγχρονισμού. Χρησιμοποίησε ενημερωμένο browser. Τα δεδομένα παραμένουν τοπικά.','error');
+      else if(e.message==='locks-unavailable'||e.message==='compression-unavailable')say('Χρειάζεται ενημερωμένος browser για ασφαλή συγχρονισμό και ανάγνωση συμπιεσμένων αντιγράφων. Τα δεδομένα παραμένουν τοπικά.','error');
       else say('Ο συγχρονισμός δεν ολοκληρώθηκε. Οι αλλαγές παραμένουν τοπικά. Έλεγξε το internet ή τα δωρεάν όρια και δοκίμασε ξανά.','error');
       schedule(Math.min(900000,30000*2**Math.min(failures,5)));
     }finally{busy=false;nowButton.disabled=false;}

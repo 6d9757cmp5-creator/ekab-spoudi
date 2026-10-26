@@ -371,3 +371,35 @@ html[data-theme="dark"] .knowledge-check summary:focus-visible {
 }
 
 .cloud-controls{border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:15px;margin:16px 0}.cloud-controls h3{font-size:.94rem;margin:0 0 7px}.cloud-controls [data-cloud-status]{font-size:.84rem;line-height:1.6}.cloud-controls .actions{gap:7px}.cloud-controls button{max-width:100%;white-space:normal}.sync-summary{font-size:.82rem;margin:18px 0 0;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}[data-sync-state="synced"]{color:var(--green)}[data-sync-state="error"]{color:#a33b2f}.account-button[data-sync-state]::before{content:'';width:7px;height:7px;border-radius:50%;background:#9bb2bf;margin-right:7px}.account-button[data-sync-state="synced"]::before{background:#237453}.account-button[data-sync-state="error"]::before{background:#b34336}.account-button[data-sync-state="working"]::before{background:#d19b28}html[data-theme="dark"] [data-sync-state="synced"]{color:#79d4b1}html[data-theme="dark"] [data-sync-state="error"]{color:#ffb4a9}.cloud-controls [hidden]{display:none!important}
+
+/* Calm study surfaces: consistent spacing and soft corners, with the existing
+   two-column question reader retained when its catalogue is open. */
+.panel{border-radius:24px;box-shadow:0 6px 26px #19374606}
+.fold{border-radius:22px}
+.stat{border-radius:20px}
+.btn{border-radius:999px;min-height:44px;padding-inline:20px}
+.btn.compact{min-height:40px;padding-inline:16px}
+.course-tile,.backup-card,.cloud-controls{border-radius:20px}
+dialog{border-radius:26px}
+.progress-row{padding-block:16px}
+.bar{height:9px;border-radius:999px}
+#homeView:not(.catalog-open-desktop){display:block;max-width:880px;margin-inline:auto}
+#homeView:not(.catalog-open-desktop)>.panel,
+#homeView:not(.catalog-open-desktop)>.fold{margin-bottom:18px}
+#eoppepHomeSummary{padding:clamp(20px,3.5vw,38px)}
+#eoppepHomeSummary h2{font-size:clamp(1.25rem,2.4vw,1.8rem);line-height:1.3;max-width:30ch}
+#eoppepHomeSummary .subtitle{max-width:65ch;line-height:1.65}
+#eoppepHomeSummary .stats{margin-block:24px;gap:12px}
+#eoppepHomeSummary .stat{display:flex;flex-direction:column;justify-content:center;min-height:112px}
+#eoppepHomeSummary .stat b{font-size:clamp(1.5rem,3vw,2rem)}
+#eoppepHomeSummary .stat-question-link{flex:1}
+#eoppepHomeSummary .btn.full{margin-top:24px}
+#homeView>.onboarding-help,#homeView>.guide-help{grid-column:1/-1}
+#homeView>.intro-note{max-width:78ch;margin:20px auto;line-height:1.7}
+@media(max-width:600px){
+ .panel,.fold{border-radius:20px}
+ #eoppepHomeSummary .stats{gap:8px;margin-block:20px}
+ #eoppepHomeSummary .stat{min-height:104px;padding:12px 5px;border-radius:17px}
+ #eoppepHomeSummary .stat-question-link{padding:10px 5px}
+ #eoppepHomeSummary .stat span{overflow-wrap:anywhere}
+}

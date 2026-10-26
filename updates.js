@@ -1,14 +1,14 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.67', $=id=>document.getElementById(id);
+const CURRENT='27.1.68', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
- const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.67';style.dataset.ekabGlobalTools='';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.68';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.67';script.dataset.ekabGlobalTools='';document.head.append(script);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.68';script.dataset.ekabGlobalTools='';document.head.append(script);
 }
 
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
@@ -32,9 +32,9 @@ window.EkabUpdates={check};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 // Optional cloud setup never blocks the local app or update controls.
-import(new URL('./appwrite-client.js?app=27.1.67', document.currentScript.src).href)
+import(new URL('./appwrite-client.js?app=27.1.68', document.currentScript.src).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.67', new URL('./appwrite-client.js?app=27.1.67', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.68', new URL('./appwrite-client.js?app=27.1.68', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {
