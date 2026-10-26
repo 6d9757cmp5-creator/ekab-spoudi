@@ -1,16 +1,16 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 13**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 14**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 37 | 10 | 34 |
-| Β | 73 | 5 | 5 | 68 |
+| Α | 71 | 41 | 10 | 30 |
+| Β | 73 | 9 | 5 | 64 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **53** | **26** | **194** |
+| **Total** | **247** | **61** | **26** | **186** |
 
 **Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b14`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
@@ -148,3 +148,13 @@ For each new asset: verify relevance and the original source/license; render and
 - Structural registry checks during commit: **247 total chapters, 53 source-selected (Α37/71, Β5/73, Γ5/51, Δ6/52), 194 missing**, 35 registered assets, no unresolved selected asset keys. Main last verified **26/247 (Α10/71, Β5/73, Γ5/51, Δ6/52)**, not verified production. App version **27.1.68** unchanged.
 - **Quality limits:** no documented independent clinical/scientific review; live source-page verification, SHA-256, full SVG XML/raster inspection, browser/zoom/offline E2E and live deployment remain pending. Do not call draft selections approved or published.
 - **Next:** perform real rendering and offline checks on newly added diagrams and extend coverage to the next genuinely missing lesson, without duplicate PR. Next notification milestone 100 selected chapters.
+
+
+## Batch 14: Emergency dispatch and ambulance safety (2026-10-26)
+
+- Preserved all concurrent edits and the same draft PR #6. Added four original, chapter-specific Greek-labelled vector drawings: `emergency-call-location-el.svg` (07-01, address and entrance on a street map + callback number and situation, based on Greek Ministry of Health and EKAB guidance), `ambulance-pretrip-points-el.svg` (09-01, side-view ambulance with actual tire/light/brake/mirror/equipment inspection leaders), `stopping-distance-ratio-el.svg` (09-05, proportional reaction/braking distance at 30 vs 60 km/h under stipulated constant conditions), and `ambulance-restraint-zones-el.svg` (09-08, overhead illustration of cot locks, patient belts, crew seat belt, secured oxygen and storage). All original CC BY 4.0 drawings, with their source URLs and limitations recorded in audit assets.
+- Registered four explicit matching placements and lesson image keys. `sw.js` contains the four new SVG paths in draft service-worker precache at **b19**. No unrelated theory, accounts, progress or sync edits.
+- Structural markup validation by balanced SVG tag stack / accessibility title+description / no raw ampersands / Greek-content check for each four remote files passed. Confirmed remote blob SHA readback; full XML-parser/raster inspection, real-browser/zoom/offline E2E, independent scientific evaluation and production publication **not confirmed**.
+- Registry selected count at checkpoint: **61/247** (Α 41/71, Β 9/73, Γ 5/51, Δ 6/52); **186 still without image**; 41 registered assets. This includes other concurrent additions and must not be mistaken for four additions alone. Main registry last independently verified **26/247** (Α 10, Β 5, Γ 5, Δ 6), not a live deployment test. Version **27.1.68** unchanged.
+- Reviewed public sources online: https://www.moh.gov.gr/articles/citizen/xrhsima-thlefwna-amp-dieythynseis/196-166-ekab , https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/ , https://www.osha.gov/motor-vehicle-safety/drivers , https://highways.dot.gov/safety/speed-management/guidelines-use-variable-speed-limit-systems-wet-weather/chapter-2-driver , https://www.cdc.gov/niosh/ems/crash-testing/index.html . Their presence does not confer independent clinical certification.
+- **Next:** verify visual/raster rendering and source-aware in-browser zoom/offline display for these diagrams; add only subject-specific images to the next genuinely missing chapters; next user milestone after 50 is 100.
