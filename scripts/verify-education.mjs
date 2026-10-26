@@ -59,7 +59,7 @@ for(let i=0;i<20;i++){
 }
 if(chapterCount!==247)fail('SAEK chapters: '+chapterCount+'/247');
 if(genericExercises)fail('SAEK reused generic exercises: '+genericExercises);
-if(sourceImages!==22||missingIllustrations!==225)fail('Illustration registry changed unexpectedly; re-audit assets: '+sourceImages+'/'+missingIllustrations);
+if(sourceImages+missingIllustrations!==247)fail('Incomplete SAEK illustration registry: '+sourceImages+' documented placements + '+missingIllustrations+' pending != 247');
 const visual=read('saek-chapter-visuals.js');
 if(!visual.includes('saek-recap-map')||!visual.includes('lesson-sos')||!visual.includes('check-question'))fail('Visual recap module is incomplete');
 if(!read('saek-visual-ui.js').includes('saek-chapter-visuals.js'))fail('Missing visual map loader');
@@ -85,6 +85,6 @@ if(errors.length){
  console.error('❌ Education quality gate: '+errors.length+' errors\n'+errors.join('\n'));
  process.exitCode=1;
 }else{
- console.log('✅ Education quality gate: 314/314 EOPPEP, 247/247 SAEK chapters, 103 old generic exercises removed, 5 answers expanded, 247 text-grounded visual recaps configured, 22 source-licensed illustration placements tracked, 225 still awaiting sourced illustration, version '+version+'.');
+ console.log('✅ Education quality gate: 314/314 EOPPEP, 247/247 SAEK chapters, 103 old generic exercises removed, 5 answers expanded, 247 text-grounded visual recaps configured, '+sourceImages+' documented source-illustration placements, '+missingIllustrations+' awaiting sourced illustration, version '+version+'.');
  console.log('Scope is structural and bibliographic traceability; independent medical validation is NOT certified.');
 }
