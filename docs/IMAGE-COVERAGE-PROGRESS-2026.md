@@ -1,18 +1,22 @@
 # Image coverage continuation checkpoint
 
-Latest committed source-selection milestone: **2026-10-27, 247/247 after batches 18–20**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+**Latest checked state: 2026-10-27 — 247/247 chapters have at least one selected image in the EXISTING DRAFT PR #6.** This is a **source-selection milestone only**, not full topic coverage, independent medical approval, browser verification or public deployment. Continue on branch `coverage/greek-images-20261026` and do not create another PR or reset concurrent commits.
 
-## Selected sources versus published app
+## Distinct quality gates — current draft, not live production
 
-| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified, NOT live publication) | Draft missing |
-|---|---:|---:|---:|---:|
-| Α | 71 | 71 | 10 | 0 |
-| Β | 73 | 73 | 5 | 0 |
-| Γ | 51 | 51 | 5 | 0 |
-| Δ | 52 | 52 | 6 | 0 |
-| **Total** | **247** | **247** | **26** | **0** |
+| Semester | Total chapters | Draft: at least one selected image | Missing selected image | Full subject adequacy independently documented | Independent scientific approval documented | Live publication of this draft verified |
+|---|---:|---:|---:|---:|---:|---:|
+| Α | 71 | 71 | 0 | 0 | 0 | 0 |
+| Β | 73 | 73 | 0 | 0 | 0 | 0 |
+| Γ | 51 | 51 | 0 | 0 | 0 | 0 |
+| Δ | 52 | 52 | 0 | 0 | 0 | 0 |
+| **Total** | **247** | **247** | **0** | **0 documented** | **0 documented** | **0 independently confirmed** |
 
-**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b28`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+Registry: **95 assets**, **88 locally hosted Greek-labelled SVGs**, **7 external Wikimedia Commons files**. All 247 selected chapters retain status `source-selected-pending-independent-scientific-review` and the draft is **not merged**. Main-branch registry last checked 2026-10-27 has **26/247 selected (Α10, Β5, Γ5, Δ6)**; this is a source-tree comparison, **not proof of public-site availability**. The production version and its deployment must be checked independently; draft service-worker cache **b29** is not a release.
+
+**CI evidence:** [image-audit run 40423256972](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423256972) completed successfully after correcting four actual SHA-256 mismatches; [SAEK quality run 40423268129](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423268129) also passed. A new 247-chapter DOM/precache integration gate has been added and needs its own successful run confirmed. Earlier image-audit failures were real checksum discrepancies, not clinical review results. Remote Commons HEAD requests can return 429 and remain warnings.
+
+**Next priority after source selection reaches 247:** assess actual topic-specific sufficiency chapter-by-chapter, review anatomical/clinical accuracy with an independent qualified reviewer, render every SVG on phone and desktop, exercise zoom and offline in a real browser, and verify actual deployment only after a reviewed merge. Do not disable recurring work until all gates have evidence.
 
 ## Batch 3: actual changes
 
@@ -231,3 +235,13 @@ For each new asset: verify relevance and the original source/license; render and
 - Registry-level evidence from the branch: exact chapter placements match the relevant course chapter keys, no unresolved selected asset keys, no missing SHA-256 for registered local SVGs and no missing local paths from the draft SW precache. These are **registry/source integrity checks**, not medical correctness or proof of successful rendered images.
 - **Critical, outstanding QA before considering publish/merge:** independent medical/scientific and jurisdictional review remains undocumented; complete SVG XML/raster/browser visual QA including overflow, Greek text layout on mobile, popup enlargement and screen reader accessibility has not been independently verified; end-to-end offline PWA, source URLs and public GitHub Pages deployment are not verified. The draft status should remain. Targeted redraw/augmentation may be necessary where the image is only partially relevant. Do not claim all 247 chapters are *fully illustrated*, *clinically approved* or *live*.
 - Recommended next stage is a structured, chapter-by-chapter acceptance review: the selected image must show the topic, Greek labels must be legible and accurate, image attribution must open correctly, the figure must render at mobile and desktop sizes including zoom/offline, and a clinician must sign off where medical content is represented. Only then may a lesson be called fully illustrated and reviewed.
+
+## Batch 18 — 2026-10-27: 247 selected, checksum repair and muscular anatomy
+
+- Read the current audit **before** editing and discovered the registry had advanced concurrently to **247/247 selected** (Α71/71, Β73/73, Γ51/51, Δ52/52), while this progress file still ended at 100. Preserved every concurrent mapping, asset and commit. No duplicate PR, no reset, no merge.
+- Inspected failing image-audit GitHub Actions [run 40422807105](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40422807105): **four real SHA-256 mismatches** for `emergency_call_location`, `ambulance_pretrip_points`, `stopping_distance_ratio`, `ambulance_restraint_zones`. Recomputed SHA-256 from the current remote SVG bytes using an implementation checked against the standard `abc` test vector, verified unchanged Git blob IDs, and corrected **registry hashes only**. Subsequent image CI [40423048136](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423048136) passed. This fixes integrity metadata, not clinical accuracy.
+- Produced **one additional original Greek-labelled image**, `assets/education/muscle-tissue-types-el.svg`, showing **skeletal, cardiac and smooth muscle** with their differing striations, nuclei and cardiac intercalated discs. This is a concrete morphology illustration for **01-09**, supplementing its existing synovial-joint diagram; it does **not** increase selected-chapter count because 01-09 already had an image. Checked the chapter text and compared the depicted features to [OpenStax Anatomy & Physiology 2e §10.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/10-1-overview-of-muscle-tissues) and [OpenStax Biology 2e §33.2](https://openstax.org/books/biology-2e/pages/33-2-animal-primary-tissues). No textbook artwork was copied; original drawing declared CC BY 4.0.
+- Rendered the exact new SVG to a **1140×720 PNG** locally with CairoSVG; inspected Greek text, panel geometry, striations, nuclei and label leader endpoints and removed stray leader lines. Verified the committed remote SVG SHA-256 equals the locally rendered source: `7fb44308ce946304fdc5b833931dfcbb934a46aacea86064e61d5671c1e61f62`. Added registry asset and both 01-09 mappings; included local SVG in draft service-worker precache **b29**. **No independent expert sign-off or real application browser test**.
+- Added `scripts/verify-saek-image-integration.mjs` and wired it into `.github/workflows/saek-image-review.yml`: checks actual 20 lesson HTML files / 247 DOM insertion targets, image UI loader and disclosure, local asset existence, registry mapping, and offline precache wiring. This is **static integration**, not an end-to-end test or clinical approval. The new CI run must be checked for completion and failures before relying on it.
+- Distinct state: **247 selected, 0 unselected; 0 independently documented full subject reviews; 0 independent medical approvals; 0 verified live published from this draft**. Keep draft PR #6 open until review and actual deployment are separately verified.
+
