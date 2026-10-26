@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 10**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 11**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 32 | 10 | 39 |
+| Α | 71 | 34 | 10 | 37 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **48** | **26** | **199** |
+| **Total** | **247** | **50** | **26** | **197** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b13`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b14`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -119,3 +119,13 @@ For each new asset: verify relevance and the original source/license; render and
 - **Draft selected: 48/247 (Α 32/71, Β 5/73, Γ 5/51, Δ 6/52), 199 unselected; 30 assets, 23 local SVG.** Main last checked: 26/247 (Α10, Β5, Γ5, Δ6), **not verified production**. Version `27.1.68` unchanged.
 - **Remaining gates:** independent scientific approval 0 documented, completeness partial, XML/raster/actual browser/zoom/offline E2E and published deployment unverified; container DNS prevented independent download for raster. This is a draft commit only; do not merge as clinically approved. 04-08 from prior batch is preserved.
 - **Next:** validate 04-08 and 04-09 image rendering/CI, then select genuinely missing 04-07 with current official infection-prevention references. Do not treat image selection as clinical approval or public deployment.
+
+
+## Batch 11: milestone 50 — 04-07 hand hygiene and 04-10 sharps safety (2026-10-26)
+
+- Added original Greek-labelled `assets/education/hand-hygiene-hotspots-el.svg` for 04-07, showing an anatomically schematic palm and high-miss zones (thumb, fingertips, between fingers), alongside the choice of alcohol hand rub versus soap/water and the limitation of gloves. Evidence: [CDC Clinical Safety: Hand Hygiene](https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html) and [CDC core practices](https://www.cdc.gov/infection-control/hcp/core-practices/index.html), checked 2026-10-26. SHA-256: `02542b36d526f73ce1a78da2305dc2ed978ddde1834f8fca3e24264329aac871`.
+- Added original Greek-labelled `assets/education/sharps-disposal-el.svg` for 04-10: syringe/needle, immediate disposal into close-by puncture-resistant container, maximum fill line and crossed-out recapping. Evidence: [CDC NIOSH Sharps Disposal (2024)](https://www.cdc.gov/niosh/healthcare/hcp/pandemic/sharps-disposal-mass-vaccination.html) and [CDC environmental control](https://www.cdc.gov/infection-control/hcp/environmental-control/summary-recommendations.html), checked 2026-10-26. SHA-256: `99b3679bd0ea7b49d577b76382aa2231692207e0365491036668d136023b1826`.
+- Verified remote source readback and SHA-256 for both files. Checked SVG group nesting and basic markup structure; **full XML parser, raster/browser zoom and offline application end-to-end NOT yet verified**. Both are original diagrams, CC BY 4.0. Recorded missing SHA-256 for previous 04-08 asset: `75ced0d681cecdd18bc32f9383314efb841d160a6480936889de5f6e5bef9c69`.
+- Updated audit registry, two chapter placements and `sw.js` precache to draft cache **b14**. Validated registry: **247 chapters, 50 selected, no missing asset keys or chapter-placement mismatches**. Draft selected per semester **Α 34/71, Β 5/73, Γ 5/51, Δ 6/52**, **197 unselected**, **32 assets**, **25 local original SVG**. Main registry last checked **Α10/71, Β5/73, Γ5/51, Δ6/52 = 26/247**, not verified production. App production version **27.1.68**, unchanged.
+- **Critical remaining gates:** independent scientific review still **0 documented**; 04-07 is not full handwashing technique or all PPE, 04-10 not complete biological-waste policy; SVG visual review in real browser, source renderer behavior, offline E2E and public deployment remain unverified. The draft image renderer shows attributed source figures but source-selected status is **not clinical approval**. Do not merge as clinically certified.
+- **Next safe batch:** add a genuinely relevant original diagram for the next unselected chapter after reviewing its content and sources; validate rendered visual appearance and end-to-end when a suitable browser and assets are accessible. Notify user at milestone 50, then next 100.
