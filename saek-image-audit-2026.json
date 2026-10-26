@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 48/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
+  "note": "Μητρώο επιλογών εικόνων: 50/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -561,7 +561,7 @@
         "scope": "SVG source authored with Greek text and explicit panels; independent rendered visual, browser and offline tests pending"
       },
       "subjectCompleteness": "partial",
-      "sha256": null
+      "sha256": "75ced0d681cecdd18bc32f9383314efb841d160a6480936889de5f6e5bef9c69"
     },
     "b_cell_memory": {
       "filename": "b-cell-memory-el.svg",
@@ -590,6 +590,58 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "5db766b7286cda61e864b1f37d341f128741bd57f0837d501ed66834370bd0e2"
+    },
+    "hand_hygiene_hotspots": {
+      "filename": "hand-hygiene-hotspots-el.svg",
+      "localPath": "assets/education/hand-hygiene-hotspots-el.svg",
+      "title": "Υγιεινή χεριών: παλάμη, αντίχειρας, δάκτυλα και επιλογή μεθόδου",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Readback of SVG source, XML tag nesting/Greek-label/leader endpoint structural checks; raster/browser/zoom/offline end-to-end and independent scientific review still pending."
+      },
+      "page": "https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html",
+      "additionalSources": [
+        "https://www.cdc.gov/infection-control/hcp/core-practices/index.html"
+      ],
+      "caption": "Πρωτότυπο σχηματικό περίγραμμα παλάμης με επισήμανση αντίχειρα, άκρων δακτύλων και μεσοδακτύλιων διαστημάτων που χρειάζονται σχολαστική κάλυψη. Όταν τα χέρια δεν είναι εμφανώς λερωμένα, στις περισσότερες κλινικές καταστάσεις προτιμάται αλκοολούχο αντισηπτικό· όταν είναι ορατά λερωμένα απαιτείται σαπούνι και νερό. Τα γάντια δεν υποκαθιστούν την υγιεινή χεριών, που απαιτείται και μετά την αφαίρεσή τους. Δεν αποτελεί πλήρη τεχνική πλυσίματος ή τοπικό πρωτόκολλο.",
+      "sourcePageCheckedFor": [
+        "CDC Clinical Safety: missed areas thumbs, fingertips, between fingers; alcohol rub preferred when hands not visibly soiled",
+        "CDC: soap and water for visibly soiled hands, gloves do not replace hand hygiene"
+      ],
+      "sha256": "02542b36d526f73ce1a78da2305dc2ed978ddde1834f8fca3e24264329aac871"
+    },
+    "sharps_disposal": {
+      "filename": "sharps-disposal-el.svg",
+      "localPath": "assets/education/sharps-disposal-el.svg",
+      "title": "Ασφαλής απόρριψη βελόνας σε άκαμπτο περιέκτη αιχμηρών",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Readback of SVG source, XML tag nesting/Greek-label/leader endpoint structural checks; raster/browser/zoom/offline end-to-end and independent scientific review still pending."
+      },
+      "page": "https://www.cdc.gov/niosh/healthcare/hcp/pandemic/sharps-disposal-mass-vaccination.html",
+      "additionalSources": [
+        "https://www.cdc.gov/infection-control/hcp/environmental-control/summary-recommendations.html"
+      ],
+      "caption": "Σχηματικό παράδειγμα άμεσης απόρριψης χρησιμοποιημένης βελόνας με σύριγγα σε κατάλληλο άκαμπτο, ανθεκτικό στη διάτρηση περιέκτη κοντά στο σημείο χρήσης. Επισημαίνονται άνοιγμα και όριο πλήρωσης. Δεν επανακαλύπτουμε, λυγίζουμε ή σπάμε χρησιμοποιημένες βελόνες. Η πραγματική διαδικασία ακολουθεί τα εγκεκριμένα δοχεία και την πολιτική της υπηρεσίας.",
+      "sourcePageCheckedFor": [
+        "CDC NIOSH 2024: immediate sharps disposal; close, puncture-resistant container; avoid recapping, bending, breaking",
+        "CDC environmental control: disposal containers close to point of use"
+      ],
+      "sha256": "99b3679bd0ea7b49d577b76382aa2231692207e0365491036668d136023b1826"
     }
   },
   "placements": {
@@ -749,6 +801,12 @@
     ],
     "04-09": [
       "b_cell_memory"
+    ],
+    "04-07": [
+      "hand_hygiene_hotspots"
+    ],
+    "04-10": [
+      "sharps_disposal"
     ]
   },
   "courses": [
@@ -1064,8 +1122,10 @@
         },
         {
           "anchor": "#lesson-7",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "hand_hygiene_hotspots"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-8",
@@ -1083,8 +1143,10 @@
         },
         {
           "anchor": "#lesson-10",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "sharps_disposal"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         }
       ]
     },
