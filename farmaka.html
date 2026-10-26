@@ -107,14 +107,6 @@ html[data-theme="dark"] .ph-extended>summary{color:#eaf2f9}
 html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 
 
-/* Compact, evidence-only icon/link. NOT an approval seal or certification badge. */
-.ph-headerline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.ph-proof{display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;flex-shrink:0;min-height:38px;padding:8px 11px;background:#f3fcff;color:#164c65!important;border:1px solid #b7dfe8;border-radius:999px;text-decoration:none;font-size:.75rem;font-weight:750}
-.ph-proof svg{color:#22765e}
-.ph-proof small{font-size:.65rem;opacity:.7}
-.ph-proof:hover{background:#e1f5fc}
-.ph-proof:focus-visible{outline:3px solid #7ecff7;outline-offset:2px}
-@media(max-width:540px){.ph-headerline{align-items:flex-start}.ph-proof{margin-left:52px}}
 
 
 /* Search-first pharmacology layout, shared by desktop and narrow screens. */
@@ -145,6 +137,12 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 @media(max-width:480px){.ph-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.ph-nav a{white-space:nowrap;padding:9px 4px}.ph-counter{grid-template-columns:1fr}.ph-counter>button{padding:11px 13px}.ph-tools{grid-template-columns:1fr}.ph-main h1{line-height:1.25}.ph-panel{margin-bottom:12px}.ph-hero .ph-eyebrow{font-size:.66rem}}
 @media print{.ph-quick-search,.ph-counter,.ph-quiz-link{display:none}.ph-basics::details-content,.ph-disclosure::details-content{display:block;content-visibility:visible}}
 
+/* Understated document reference inside the pharmacology introduction. */
+.ph-review-reference{margin:7px 0 12px;font-size:.77rem;line-height:1.5;color:var(--muted)}
+.ph-review-reference a{font:inherit;color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;text-underline-offset:3px}
+.ph-review-reference a:hover{text-decoration:underline}
+.ph-review-reference a:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:2px}
+
 </style>
 <script src="farmaka-catalog.js?v=2026.10.26" defer></script>
 <script src="farmaka-clinical-2026.js?v=2026.10.26" defer></script>
@@ -154,14 +152,13 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 </head>
 <body>
 <header class="top"><div class="container">
-<div class="ph-headerline"><div class="brand"><div class="logo" aria-hidden="true">✚</div><div><h1>ΕΚΑΒ Σπουδή</h1><p>Διασώστης – Πλήρωμα Ασθενοφόρου</p></div></div><a class="ph-proof" href="docs/pharmacology-review-status-2026-10-26.pdf" target="_blank" rel="noopener noreferrer" title="Δελτίο τεκμηρίωσης ελέγχου (PDF). Η ανεξάρτητη κλινική έγκριση εκκρεμεί." aria-label="Άνοιγμα μονοσέλιδου δελτίου τεκμηρίωσης κλινικού ελέγχου σε PDF. Δεν αποτελεί επίσημη πιστοποίηση.">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
-<span>Δελτίο ελέγχου</span><small>PDF</small></a></div>
+<div class="brand"><div class="logo" aria-hidden="true">✚</div><div><h1>ΕΚΑΒ Σπουδή</h1><p>Διασώστης – Πλήρωμα Ασθενοφόρου</p></div></div>
 <nav class="nav ph-nav" aria-label="Κύριες ενότητες"><a href="index.html">Θεωρία ΕΟΠΠΕΠ</a><a href="practical_exam.html">Πρακτικό ΕΟΠΠΕΠ</a><a href="saek.html">Κατάρτιση ΣΑΕΚ</a><a href="farmaka.html" class="active" aria-current="page">Φαρμακολογία</a></nav>
 </div></header>
 <main class="ph-main">
 <section class="ph-panel ph-hero" aria-labelledby="mainTitle">
 <div class="ph-eyebrow">Εκπαιδευτική βιβλιοθήκη · Ανασκόπηση 26/10/2026</div>
+<p class="ph-review-reference"><a href="docs/pharmacology-review-status-2026-10-26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Δελτίο ελέγχου της εκπαιδευτικής φαρμακολογίας σε PDF">Δελτίο ελέγχου</a></p>
 <h1 id="mainTitle">Φαρμακολογία προνοσοκομειακής φροντίδας</h1>
 <div class="ph-quick-search"><label for="drugSearch">Αναζήτηση φαρμάκου · Ελληνικά ή Αγγλικά<input type="search" id="drugSearch" placeholder="π.χ. αδρεναλίνη ή epinephrine" autocomplete="off"></label></div>
 
