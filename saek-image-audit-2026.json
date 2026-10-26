@@ -397,6 +397,28 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "f2c8cc0f9c73207a0e4681c043add2f87c1aa4f3ecdd476dade9a68247b343f5"
+    },
+    "anatomical_planes": {
+      "filename": "anatomical-planes-el.svg",
+      "localPath": "assets/education/anatomical-planes-el.svg",
+      "title": "Τρία ανατομικά επίπεδα: οβελιαίο, μετωπιαίο, εγκάρσιο",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+      "caption": "Τρεις εννοιολογικές τομές με ελληνικές επισημάνσεις. Η προοπτική και το πάχος είναι συμβολικά· δεν παρουσιάζει κοιλότητες, λοξό επίπεδο ή ιατρική απεικόνιση ασθενούς.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "official OpenStax 2e definition of sagittal, frontal/coronal and transverse planes; illustration independently drawn, not copied"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Local SVG parsed and rasterized to PNG; inspected Greek labels, panel spacing and plane orientation; real-browser and independent scientific review pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "d51da43fa735d5a8200a216b0230bcf212fc4e7eec712ec06696e4258e620c05"
     }
   },
   "placements": {
@@ -528,7 +550,8 @@
       "reflex_arc"
     ],
     "01-01": [
-      "anatomical_position"
+      "anatomical_position",
+      "anatomical_planes"
     ],
     "01-13": [
       "urinary_system"
@@ -549,7 +572,8 @@
         {
           "anchor": "#lesson-1",
           "images": [
-            "anatomical_position"
+            "anatomical_position",
+            "anatomical_planes"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
