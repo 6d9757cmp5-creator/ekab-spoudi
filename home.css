@@ -170,3 +170,25 @@ body:has(.home-main) .home-card-eoppep {
   body:has(.home-main) .home-main {flex:0 0 auto;}
   body:has(.home-main) .home-tiles {flex:0 0 auto;max-height:none;}
 }
+
+/* Visible academic-review references alongside all four landing-page headings.
+   Primary links retain the full-card click area; PDF links remain independent. */
+.home-tiles .home-card{position:relative}
+.home-card-title-line{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:9px;row-gap:2px;margin-bottom:4px}
+.home-card-title-line .home-card-title{display:inline;margin:0}
+.home-card-primary-link{color:inherit;text-decoration:none}
+.home-card-primary-link::after{content:"";position:absolute;inset:0;z-index:1}
+.home-card-primary-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.home-card-review-link{
+ position:relative;z-index:2;flex:none;display:inline-block;
+ font-size:.72rem;line-height:1.25;font-weight:650;
+ color:var(--blue);text-decoration:none;border-bottom:1px solid currentColor;
+ white-space:nowrap;padding:3px 0
+}
+.home-card-review-link:hover,.home-card-review-link:focus-visible{color:var(--ink);border-bottom-width:2px}
+.home-card-review-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+html[data-theme="dark"] .home-card-review-link{color:#9ddcf9}
+@media(max-width:620px){
+ .home-card-title-line{column-gap:8px;row-gap:0}
+ .home-card-review-link{font-size:.7rem;padding:2px 0}
+}
