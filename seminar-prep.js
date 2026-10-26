@@ -68,6 +68,9 @@ function renderTheory(){
  $('seminarPrevUnit').disabled=unit===0;$('seminarNextUnit').disabled=unit===11;
 }
 function renderQuestion(){
+ $('seminarAIResult').hidden=true;
+ $('seminarGradeAI').disabled=false;
+ $('seminarGradeAI').textContent='Αξιολόγηση με AI';
  const p=current(),i=question,topic=Math.floor(i/4),type=i%4,u=selected.units[topic];
  $('seminarQuestionCounter').textContent='Ερώτηση '+(i+1)+' / 48 · Θεματική '+(topic+1);
  $('seminarQuestionTitle').textContent=qPrompts[type](u[0]);
@@ -100,6 +103,29 @@ function bind(){
  $('seminarPrevQuestion').addEventListener('click',()=>{question=Math.max(0,question-1);renderQuestion()});
  $('seminarNextQuestion').addEventListener('click',()=>{question=Math.min(47,question+1);renderQuestion()});
  $('seminarQuestionNotes').addEventListener('input',e=>{current().qNotes[question]=e.target.value.slice(0,2000);save()});
+ $('seminarGradeAI').addEventListener('click',async ()=>{
+  const answer=$('seminarQuestionNotes').value.trim(),ai=window.EkabAIGrade;
+  const status=$('seminarAIResult');
+  if(!ai){status.hidden=false;status.textContent='Η υπηρεσία αξιολόγησης δεν φορτώθηκε.';return;}
+  if(answer.length<3){status.hidden=false;status.textContent='Γράψε πρώτα τη δική σου απάντηση.';return;}
+  const courseId=selected.id,questionId=question,button=$('seminarGradeAI');
+  button.disabled=true;button.textContent='Γίνεται αξιολόγηση…';
+  status.hidden=false;status.textContent='Έλεγχος νοήματος της απάντησης…';
+  try{
+   const result=await ai.evaluate({section:'seminar',courseId,questionIndex:questionId,answer});
+   if(!selected||courseId!==selected.id||questionId!==question)return;
+   if(result.verdict==='correct')setGrade('right');
+   else if(result.verdict==='partial'||result.verdict==='incorrect')setGrade('needs');
+   else renderQuestion();
+   ai.render(status,result);
+  }catch(err){
+   if(!selected||courseId!==selected.id||questionId!==question)return;
+   status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';
+   status.textContent=err.message||'Η αξιολόγηση δεν ολοκληρώθηκε.';
+  }finally{
+   if(selected&&courseId===selected.id&&questionId===question){button.disabled=false;button.textContent='Αξιολόγηση με AI';}
+  }
+ });
  $('seminarQuizReveal').addEventListener('click',()=>{$('seminarQuestionSolution').hidden=false;$('seminarQuizGrade').hidden=false;$('seminarQuizReveal').hidden=true});
  $('seminarGradeRight').addEventListener('click',()=>setGrade('right'));
  $('seminarGradeNeeds').addEventListener('click',()=>setGrade('needs'));
