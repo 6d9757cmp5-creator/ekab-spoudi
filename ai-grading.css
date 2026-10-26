@@ -1,0 +1,19 @@
+/* Shared semantic-AI grading: readable in light and dark mode. */
+.ai-grading-privacy{font-size:.75rem;line-height:1.55;color:var(--muted);margin:10px 0}
+.ai-grading-result{border:1px solid var(--line);border-left:4px solid var(--blue);background:var(--light);border-radius:12px;padding:14px;margin:14px 0;color:var(--ink);overflow-wrap:anywhere;font-size:.88rem;line-height:1.55}
+.ai-grading-result[hidden]{display:none!important}
+.ai-grading-result p{margin:7px 0}
+.ai-grading-result b{display:block;margin:10px 0 3px}
+.ai-grading-result ul{padding-left:21px;margin:4px 0 9px}
+.ai-grading-result small{display:block;margin-top:12px;font-size:.73rem;color:var(--muted)}
+.ai-grading-title{display:block;font-size:1rem;margin-bottom:8px}
+.ai-grading-correct{border-left-color:#237453}
+.ai-grading-partial{border-left-color:#b87b19}
+.ai-grading-incorrect{border-left-color:#ad4850}
+.ai-grading-uncertain,.ai-grading-unavailable{border-left-color:#457899}
+html[data-theme="dark"] .ai-grading-privacy{color:#bfd5e1}
+html[data-theme="dark"] .ai-grading-result{background:#183348;color:#f0f7fc;border-color:#42637b;border-left-width:4px}
+html[data-theme="dark"] .ai-grading-result small{color:#c5ddea}
+html[data-theme="dark"] .ai-grading-correct{border-left-color:#74d6ae}
+html[data-theme="dark"] .ai-grading-partial{border-left-color:#eac17c}
+html[data-theme="dark"] .ai-grading-incorrect{border-left-color:#f1a0a9}
