@@ -10,6 +10,6 @@
 
 /* Shared on desktop, phone and tablet: chapter suggestions and starter medical book. */
 (function(){
- const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='global-tools.css?v=27.1.54';document.head.appendChild(sheet);
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.54';script.async=true;document.head.appendChild(script);
+ const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='global-tools.css?v=27.1.55';document.head.appendChild(sheet);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.55';script.async=true;document.head.appendChild(script);
 })();
