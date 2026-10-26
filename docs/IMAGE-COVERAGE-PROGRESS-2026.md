@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed registry checkpoint: **2026-10-27, milestone 100 (new draft batch 17)**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest committed source-selection milestone: **2026-10-27, 247/247 after batches 18–20**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
-| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified, not live publication) | Draft missing |
+| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified, NOT live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 58 | 10 | 13 |
-| Β | 73 | 13 | 5 | 60 |
-| Γ | 51 | 5 | 5 | 46 |
-| Δ | 52 | 24 | 6 | 28 |
-| **Total** | **247** | **100** | **26** | **147** |
+| Α | 71 | 71 | 10 | 0 |
+| Β | 73 | 73 | 5 | 0 |
+| Γ | 51 | 51 | 5 | 0 |
+| Δ | 52 | 52 | 6 | 0 |
+| **Total** | **247** | **247** | **26** | **0** |
 
-**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b24`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b28`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -218,3 +218,16 @@ For each new asset: verify relevance and the original source/license; render and
 - Current audit registry has **100/247 chapters with a selected source** (A 58/71, B 13/73, C 5/51, D 24/52), 147 with none; **59 registered assets, 52 local SVGs**. Source selections use `clinicalReview: pending`, `subjectCompleteness: partial`. Each new SVG is registered with SHA-256.
 - Source-level consistency checks: 247 numbered chapters; 100 selected; zero unknown asset keys, zero placement/course mapping mismatches and zero missing SVG checksums; all local assets listed in draft service-worker precache `ekab-spoudi-v27.1.68-images-20261026-b24`. This checks source wiring, **not** actual browser/mobile visibility or offline end-to-end.
 - Remaining quality gates: independent medical review **0 documented approvals**; actual SVG rendering/layout and accessibility in the running browser, image zoom, offline end-to-end and live deployment must be independently tested. Do **not** call the 100 chapters complete, scientifically approved, or published. Keep PR in draft pending those gates. Future coverage target may be tracked without increasing source-selected counts artificially.
+
+
+## Batches 18–20 — 2026-10-27: from 100 to **247/247 selected**
+
+- Continued exclusively on existing branch `coverage/greek-images-20261026` / **draft PR #6**, with no merge to `main` and no production deployment claimed.
+- From the original **100/247 source-selected** checkpoint, registered **35 additional original Greek educational SVGs** with CC BY 4.0 artwork declarations, local paths, individual SHA-256 hashes, source pages and image captions; total image registry now **94 assets (87 local SVGs)**. The SVG files and their registered images were actually committed, not proposed or generated only in chat.
+- **106 additional source selections** cover relevant topics through purposeful reuse of new illustrations and earlier existing images, across bilingual anatomical vocabulary, dispatch/communications, ICT, ambulance driving, mass-casualty incident overview, clinical reassessment and other lessons. A source selection **does not** assert that the figure fully illustrates the whole lesson. Repeated use of the same general illustration across multiple related lessons requires especially careful subject-specific follow-up.
+- **23 more selections** used ten distinct original diagrams for pharmacology safety, oxygen equipment, special populations, telemedicine, computer hardware, pulmonary embolism, heart failure, anaphylaxis, seizure and stroke warning concepts.
+- **The final 18 selections** used 15 additional original topic-specific SVGs for psychological/shift strain, callers with accessibility or distress, duplicate calls, medication units, traumatic head injury, burn skin layers, hypothermia, CBRN hazards, protocol organization, BLS/AED training, bag-mask parts, suspected toxic exposure, bilingual injury vocabulary, intubated transfer and air/sea transport.
+- Current source registry: **A 71/71, B 73/73, Γ 51/51, Δ 52/52 = 247/247 source-selected**, 0 chapters left without selected images. Draft service worker precaches new local SVGs using `ekab-spoudi-v27.1.68-images-20261026-b28`. Production version remains **27.1.68** without a verified deployment from this branch.
+- Registry-level evidence from the branch: exact chapter placements match the relevant course chapter keys, no unresolved selected asset keys, no missing SHA-256 for registered local SVGs and no missing local paths from the draft SW precache. These are **registry/source integrity checks**, not medical correctness or proof of successful rendered images.
+- **Critical, outstanding QA before considering publish/merge:** independent medical/scientific and jurisdictional review remains undocumented; complete SVG XML/raster/browser visual QA including overflow, Greek text layout on mobile, popup enlargement and screen reader accessibility has not been independently verified; end-to-end offline PWA, source URLs and public GitHub Pages deployment are not verified. The draft status should remain. Targeted redraw/augmentation may be necessary where the image is only partially relevant. Do not claim all 247 chapters are *fully illustrated*, *clinically approved* or *live*.
+- Recommended next stage is a structured, chapter-by-chapter acceptance review: the selected image must show the topic, Greek labels must be legible and accurate, image attribution must open correctly, the figure must render at mobile and desktop sizes including zoom/offline, and a clinician must sign off where medical content is represented. Only then may a lesson be called fully illustrated and reviewed.
