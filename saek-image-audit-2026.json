@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Ενδιάμεσο μητρώο πηγών εικόνων. ΚΑΝΕΝΑ εξάμηνο δεν έχει λάβει πλήρη επιστημονική έγκριση.",
+  "note": "Ενδιάμεσο μητρώο με αντιστοίχιση πηγών εικόνων. Πηγή/άδεια έχουν τεκμηριωθεί για τις νέες επιλογές· ΔΕΝ έχει γίνει ανεξάρτητη επιστημονική πιστοποίηση, πλήρης κλινικός έλεγχος ή live δοκιμή των εικόνων. Άλλα 247-κεφαλαία recap διαγράμματα είναι μόνο σχηματικές συνόψεις κειμένου.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -46,6 +46,38 @@
       "license": "CC BY-SA 3.0",
       "page": "https://commons.wikimedia.org/wiki/File:Ανατομία-_κατώτερο_αναπνευστικό_σύστημα.png",
       "caption": "Ανατομικές δομές κατώτερου αναπνευστικού. Δεν απεικονίζει θεραπεία δύσπνοιας."
+    },
+    "respiratory": {
+      "filename": "Respiratory_system_complete_el.svg",
+      "title": "Αναπνευστικό σύστημα και πνευμονικές κυψελίδες",
+      "author": "Aris berd (μετάφραση), βασικό διάγραμμα LadyofHats",
+      "license": "CC0 1.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Respiratory_system_complete_el.svg",
+      "caption": "Συνολική ανατομική απεικόνιση αεραγωγών, πνευμόνων και πνευμονικών κυψελίδων στα ελληνικά. Δεν αποτελεί διάγραμμα επείγουσας θεραπείας.",
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "file name",
+        "creator",
+        "Greek language",
+        "reuse license"
+      ],
+      "clinicalReview": "pending"
+    },
+    "brain_medial": {
+      "filename": "Gray727_el.svg",
+      "title": "Έσω επιφάνεια αριστερού εγκεφαλικού ημισφαιρίου",
+      "author": "Henry Vandyke Carter · διανυσματική μετατροπή Mysid · ελληνική μετάφραση Badseed",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Gray727_el.svg",
+      "caption": "Έσω επιφάνεια του αριστερού εγκεφαλικού ημισφαιρίου με ελληνική ορολογία. Ιστορικός ανατομικός πίνακας Gray· δεν απεικονίζει μήνιγγες, εγκεφαλικό επεισόδιο ή θεραπευτική πράξη.",
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "file name",
+        "creator",
+        "Greek language",
+        "public-domain status"
+      ],
+      "clinicalReview": "pending"
     }
   },
   "placements": {
@@ -53,7 +85,8 @@
       "skeleton"
     ],
     "01-03": [
-      "lower"
+      "lower",
+      "respiratory"
     ],
     "01-07": [
       "spine"
@@ -63,10 +96,12 @@
     ],
     "01-11": [
       "upper",
-      "lower"
+      "lower",
+      "respiratory"
     ],
     "02-02": [
-      "lower"
+      "lower",
+      "respiratory"
     ],
     "02-03": [
       "heart"
@@ -76,13 +111,15 @@
     ],
     "10-03": [
       "upper",
-      "lower"
+      "lower",
+      "respiratory"
     ],
     "10-07": [
       "heart"
     ],
     "10-09": [
-      "lower"
+      "lower",
+      "respiratory"
     ],
     "14-03": [
       "spine"
@@ -117,6 +154,18 @@
     ],
     "18-09": [
       "lower"
+    ],
+    "01-05": [
+      "brain_medial"
+    ],
+    "01-08": [
+      "brain_medial"
+    ],
+    "02-09": [
+      "respiratory"
+    ],
+    "10-02": [
+      "brain_medial"
     ]
   },
   "courses": [
@@ -140,7 +189,8 @@
         {
           "anchor": "#lesson-3",
           "images": [
-            "lower"
+            "lower",
+            "respiratory"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
@@ -151,8 +201,10 @@
         },
         {
           "anchor": "#lesson-5",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "brain_medial"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-6",
@@ -168,8 +220,10 @@
         },
         {
           "anchor": "#lesson-8",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "brain_medial"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-9",
@@ -187,7 +241,8 @@
           "anchor": "#lesson-11",
           "images": [
             "upper",
-            "lower"
+            "lower",
+            "respiratory"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
@@ -221,7 +276,8 @@
         {
           "anchor": "#lesson-2",
           "images": [
-            "lower"
+            "lower",
+            "respiratory"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
@@ -259,8 +315,10 @@
         },
         {
           "anchor": "#lesson-9",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "respiratory"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-10",
@@ -732,14 +790,17 @@
         },
         {
           "anchor": "#lesson-2",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "brain_medial"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-3",
           "images": [
             "upper",
-            "lower"
+            "lower",
+            "respiratory"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
@@ -773,7 +834,8 @@
         {
           "anchor": "#lesson-9",
           "images": [
-            "lower"
+            "lower",
+            "respiratory"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
