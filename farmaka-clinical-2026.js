@@ -12,7 +12,7 @@ var sources={
   },
   "RCUK_PLS25": {
     "title": "RCUK / ERC — Paediatric Life Support 2025",
-    "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-life-support-guidelines",
+    "url": "https://www.resus.org.uk/cy/node/36439",
     "detail": "Παιδιατρική αναζωογόνηση, φαρμακευτικές δόσεις"
   },
   "RCUK_ANAPH25": {
