@@ -27,8 +27,8 @@ jobs:
           r=PdfReader(p)
           assert len(r.pages)==1, 'The document must contain exactly one page'
           t=r.pages[0].extract_text()
-          assert 'ΕΚΑΒ ΣΠΟΥΔΗ' in t and 'ΕΚΠΑΙΔΕΥΤΙΚΟΥ ΥΛΙΚΟΥ' in t, 'Academic review scope or document identity missing'
-          print('Verified 1-page PDF with explicit no-certification language')
+          assert 'EKAB SPOUDI' in t and 'Academic Content Review' in t and 'independent clinical sign-off remain' in t, 'Academic identity or evidence limitations missing'
+          print('Verified one-page English academic review PDF and transparent clinical review status')
           PY
       - name: Commit the PDF into GitHub Pages source
         shell: bash
