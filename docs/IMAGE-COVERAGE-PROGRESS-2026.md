@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 7**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 8**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 29 | 10 | 42 |
+| Α | 71 | 30 | 10 | 41 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **45** | **26** | **202** |
+| **Total** | **247** | **46** | **26** | **201** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b10`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b11`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -87,3 +87,15 @@ For each new asset: verify relevance and the original source/license; render and
 **Next continuation:** confirm SVG/checksum CI and inspect rendered images (including Greek labels and zoom); then develop subject-specific muscular anatomy for 01-09 and new uncovered lessons, without promoting unreviewed clinical procedures. Keep PR #6 in draft pending quality gates.
 
 **Post-batch verification (2026-10-26):** Remote readback confirmed both files, both chapter mappings and both service-worker precache paths. A source-level safety/Greek-label/ARIA check found no immediate issues. The pull-request-triggered [SAEK quality run 40384655117](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40384655117) **completed successfully** for the checkpoint commit `138b3b9`. This is not the image-audit SVG/checksum workflow and does not establish rendered-browser, zoom, offline E2E, medical review or live publication. Image-specific CI result for batch 7 remains unconfirmed.
+
+## Batch 8 — 2026-10-26: microbe structure illustration for uncovered 04-06
+
+- Verified PR #6 remained **open, draft, unmerged**, and read existing branch checkpoint and registry before changes. No branch reset or duplicate PR.
+- Read actual chapter **04-06, «Βακτήρια, ιοί και μύκητες»** in `saek-course-04.html`. Created an original three-panel **anatomical/biological** SVG `assets/education/microbe-structures-el.svg` with specific labelled structures: a bacterial prokaryotic cell (wall, ribosomes, nucleoid DNA); one **enveloped** virion (spikes, capsid, DNA-or-RNA genome); one **budding yeast** cell (cell wall, nucleus, bud). Diagram states examples are **not to scale** and not universal to all species. No diagnostic or treatment algorithm.
+- Scientific background checked against [OpenStax Microbiology §3.3](https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells), [§6.1](https://openstax.org/books/microbiology/pages/6-1-viruses) and [§5.3](https://openstax.org/books/microbiology/pages/5-3-fungi). The SVG is **independently drawn**, not a copy of textbook illustrations, and its original artwork is declared **CC BY 4.0**.
+- Parsed local SVG XML and rasterized it with CairoSVG; inspected the rendered Greek labels and leader endpoints, **corrected the viral spike leader** so it does not cross the virion. Also rendered SVG source in local Chromium via Playwright `page.set_content` and inspected the screenshot; `file://` navigation was blocked by browser environment policy. A Chromium CSS zoom call was exercised, but **actual application zoom and offline end-to-end are not verified**. Remote GitHub readback SHA-256 matches local: `a60ee4d0140da55b663780c8fcc75fd7faa9f71b32525cfe35551ed2e308cc04`.
+- Registered `microbe_structures` in audit assets, placement `04-06`, and course 4 chapter 6; added local SVG to `sw.js` precache. **Draft cache b11**, not a production version bump. The new source selection is **partial** subject coverage and `clinicalReview: pending`.
+- New counts: **46/247** chapters with at least one selected source (**Α 30/71, Β 5/73, Γ 5/51, Δ 6/52**), **201** with none. **28 registered assets, 21 local SVG**. **Independent scientific approvals: 0 documented**. Main-branch registry remains **26/247** as last checked, **not evidence of live publication**.
+- Remaining quality gates: full lesson adequacy (04-06 lacks mould hyphae and broader microbial variety), independent scientific review, complete real-app browser/zoom/offline tests, image-specific CI result and confirmed public deployment. **Do not merge or claim publication.**
+
+**Next safe batch:** add specific Greek-labelled muscular anatomy to **01-09**, or choose **04-07 / 04-08** only after reviewing current official infection-prevention instructions and image licensing. Keep registry, subject adequacy, independent approval and live production counts distinct.
