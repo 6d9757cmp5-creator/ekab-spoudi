@@ -72,6 +72,72 @@ window.EKAB_COURSE_VIDEO_SERIES = {
         "title": "Καρδιά, μεγάλα αγγεία και βαλβίδες",
         "shortTitle": "Καρδιά και βαλβίδες",
         "url": "https://scrimba.com/explain/guide0all9p5vj?claim=6a6h51m1nfcdj61p"
+      },
+      {
+        "chapter": 11,
+        "title": "Ανώτεροι και κατώτεροι αεραγωγοί",
+        "shortTitle": "Αεραγωγοί",
+        "url": "https://scrimba.com/explain/guide0hh4rv0g2?claim=t8s6lesv6kkujbn7"
+      },
+      {
+        "chapter": 12,
+        "title": "Πεπτικό σύστημα και αδένες",
+        "shortTitle": "Πεπτικό σύστημα",
+        "url": "https://scrimba.com/explain/guide0ru3v4eak?claim=e61qnhgb249dnloo"
+      },
+      {
+        "chapter": 13,
+        "title": "Ουροποιητικό και αναπαραγωγικό σύστημα",
+        "shortTitle": "Ουροποιητικό και αναπαραγωγή",
+        "url": "https://scrimba.com/explain/guide0t0ocsi8v?claim=71hqna7vcupo9m43"
+      },
+      {
+        "chapter": 14,
+        "title": "Ανατομικοί χώροι και τεταρτημόρια κοιλιάς",
+        "shortTitle": "Κοιλιακές περιοχές",
+        "url": "https://scrimba.com/explain/guide087ue7a2n?claim=m71suiap4jsbaavo"
+      }
+    ]
+  },
+  "02": {
+    "title": "Φυσιολογία",
+    "totalChapters": 13,
+    "parts": [
+      {
+        "chapter": 1,
+        "title": "Ομοιόσταση και ανατροφοδότηση",
+        "shortTitle": "Ομοιόσταση",
+        "url": "https://scrimba.com/explain/guide0r438lqaq?claim=aeo28psaqec6dpof"
+      },
+      {
+        "chapter": 2,
+        "title": "Φυσιολογία της αναπνοής",
+        "shortTitle": "Αναπνοή",
+        "url": "https://scrimba.com/explain/guide0b5vssoo8?claim=pi3dmagrirkm0n3m"
+      },
+      {
+        "chapter": 3,
+        "title": "Κυκλοφορία και αιμάτωση",
+        "shortTitle": "Αιμάτωση",
+        "url": "https://scrimba.com/explain/guide09etisai5?claim=1m2hhufeba8pvom7"
+      },
+      {
+        "chapter": 4,
+        "title": "Νευρική ρύθμιση και μεταβολισμός",
+        "shortTitle": "Νευρική ρύθμιση",
+        "url": "https://scrimba.com/explain/guide018obtotq?claim=l5ksr6tgo7hbag0h"
+      },
+      {
+        "chapter": 5,
+        "title": "Μεμβράνες και μεταφορά ουσιών",
+        "shortTitle": "Μεμβράνες",
+        "url": "https://scrimba.com/explain/guide0t1v8jfkm?claim=ithvlkgk4vfsuno1"
+      },
+      {
+        "chapter": 6,
+        "title": "Νευρική ώση και αντανακλαστικά",
+        "shortTitle": "Νευρική ώση",
+        "url": "https://scrimba.com/explain/guide0h066tsns?claim=n9mq4gv3e9u6clng"
       }
     ]
   }
