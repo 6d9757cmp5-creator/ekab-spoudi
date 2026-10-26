@@ -67,3 +67,14 @@ html[data-theme="dark"] .saek-compact-toc .chapter-toc-links{background:#132639;
 .saek-source-full{display:block;width:max(650px,100%);height:auto;max-width:none;margin:0 auto;background:#fff}
 @media(max-width:400px){.saek-source-figure{margin:10px;padding:9px}.saek-source-summary{padding:12px}.saek-source-image{max-height:620px}}
 html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-source-figure{background:#fff!important;color:#163446!important}
+
+/* Visual recaps summarize the existing lesson. They are not anatomical drawings. */
+.saek-recap-map{margin:16px 0;border:1px solid #a7c7d7;border-radius:13px;background:#f3f9fc;color:#163b52;overflow:hidden}
+.saek-recap-map>summary{padding:14px 16px;cursor:pointer;font-weight:750;line-height:1.5;min-height:48px}
+.saek-recap-map>summary:focus-visible{outline:3px solid #226998;outline-offset:-3px}
+.saek-recap-figure{margin:0;padding:12px;border-top:1px solid #a7c7d7;background:#fff}
+.saek-recap-figure svg{display:block;width:100%;height:auto;max-height:430px;min-height:190px;overflow:visible}
+.saek-recap-figure figcaption{font-size:.92rem;color:#344e61;line-height:1.55;margin:12px 4px 4px}
+html[data-theme="dark"] .saek-recap-map{color:#173b52;background:#f3f9fc!important}
+html[data-theme="dark"] .saek-recap-figure{background:#fff!important;color:#173b52!important}
+@media(max-width:620px){.saek-recap-figure{padding:7px}.saek-recap-figure svg{min-height:125px}.saek-recap-map>summary{font-size:.94rem}}
