@@ -25,7 +25,7 @@ RULE=HexColor('#adbec9')
 c = canvas.Canvas(str(OUT), pagesize=A4, pageCompression=1)
 c.setTitle('ΕΚΑΒ Σπουδή — Επικαιροποίηση κλινικού ελέγχου φαρμακολογίας')
 c.setAuthor('ΕΚΑΒ Σπουδή — Τεκμηρίωση εκπαιδευτικού υλικού')
-c.setSubject('Ακαδημαϊκή σύνοψη ελέγχου φαρμακολογίας, 26 Οκτωβρίου 2026')
+c.setSubject('Ακαδημαϊκή σύνοψη ελέγχου φαρμακολογίας προνοσοκομειακής φροντίδας')
 
 def t(x,y,value,size=9,bold=False,color=INK):
     c.setFillColor(color)
@@ -51,8 +51,8 @@ t(M,H-78,'ΜΗΤΡΩΟ ΑΝΑΣΚΟΠΗΣΗΣ ΕΚΠΑΙΔΕΥΤΙΚΟΥ ΥΛΙ�
 rule(H-89)
 t(M,H-117,'ΕΠΙΚΑΙΡΟΠΟΙΗΣΗ ΚΛΙΝΙΚΟΥ ΕΛΕΓΧΟΥ',14.2,True)
 t(M,H-137,'ΦΑΡΜΑΚΟΛΟΓΙΑΣ ΠΡΟΝΟΣΟΚΟΜΕΙΑΚΗΣ ΦΡΟΝΤΙΔΑΣ',10.6,True)
-t(M,H-158,'26 Οκτωβρίου 2026   ·   Έκδοση v27.1.74   ·   76 καρτέλες / 11 ενότητες',8.7,False,SUB)
-t(M,H-173,'Καταγραφή ελέγχου εκπαιδευτικού περιεχομένου',7.65,False,SUB)
+t(M,H-158,'76 εκπαιδευτικές καρτέλες   ·   11 κλινικές ενότητες',8.7,False,SUB)
+t(M,H-173,'Ακαδημαϊκή σύνοψη ανασκόπησης εκπαιδευτικού περιεχομένου',7.65,False,SUB)
 rule(H-185)
 
 y=H-210
@@ -87,7 +87,7 @@ c.linkURL(b,(M,y-4,W-M,y+12),relative=0)
 # Compact, truthful provenance in the running footer, not a disclaimer section.
 rule(61)
 t(M,44,'ΕΚΑΒ Σπουδή   ·   Ανασκόπηση εκπαιδευτικού υλικού',7.2,False,SUB)
-t(W-M-84,26,'26.10.2026  |  1/1',7.0,False,SUB)
+t(W-M-27,26,'1 / 1',7.0,False,SUB)
 if y < 77:
     raise RuntimeError(f'Body would overlap the footer: {y:.1f}')
 c.save()
