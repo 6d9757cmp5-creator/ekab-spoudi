@@ -44,7 +44,7 @@ for(const [key,pics] of chosen){
 for(const [key,a] of Object.entries(assets)){
  if(!a.filename||!a.page||!a.author||!a.license||!a.title||!a.caption)addError('Λείπουν στοιχεία πηγής '+key);
  const originalHost=(a.page||'').match(/^https:\/\/([^\/?#]+)(?:[\/?#]|$)/)?.[1];
- const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','www.resus.org.uk','www.ems.gov','www.moh.gov.gr','www.osha.gov','highways.dot.gov','www.edps.europa.eu','www.ncbi.nlm.nih.gov','www.nhs.uk','www.ahrq.gov','road-safety.transport.ec.europa.eu','www.usfa.fema.gov']).has(originalHost);
+ const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','www.resus.org.uk','www.ems.gov','www.moh.gov.gr','www.osha.gov','highways.dot.gov','www.edps.europa.eu','www.ncbi.nlm.nih.gov','www.nhs.uk','www.nhlbi.nih.gov','www.ahrq.gov','road-safety.transport.ec.europa.eu','www.usfa.fema.gov']).has(originalHost);
  if(!originalAllowed&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
  if(a.localPath){
   if(!/^assets\/education\/[a-z0-9-]+\.svg$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
