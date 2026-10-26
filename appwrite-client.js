@@ -5,8 +5,8 @@ export const client = new Client()
   .setEndpoint('https://fra.cloud.appwrite.io/v1')
   .setProject('6ade83ec00260198ae34');
 
-// Google provider enabled in Console. Data sync remains disabled pending private resources and tests.
-export const cloudFeatures = Object.freeze({ googleLogin: true, sync: false });
+// Google provider enabled in Console. Private file sync enabled after backend isolation and two-device tests.
+export const cloudFeatures = Object.freeze({ googleLogin: true, sync: true });
 
 let startup;
 export let connectionStatus = Object.freeze({ state: 'idle' });

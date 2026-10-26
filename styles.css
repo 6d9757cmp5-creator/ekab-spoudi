@@ -369,3 +369,5 @@ html[data-theme="dark"] .knowledge-check summary:focus-visible {
   outline-offset:2px;
   border-radius:5px;
 }
+
+.cloud-controls{border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:15px;margin:16px 0}.cloud-controls h3{font-size:.94rem;margin:0 0 7px}.cloud-controls [data-cloud-status]{font-size:.84rem;line-height:1.6}.cloud-controls .actions{gap:7px}.cloud-controls button{max-width:100%;white-space:normal}.sync-summary{font-size:.82rem;margin:18px 0 0;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}[data-sync-state="synced"]{color:var(--green)}[data-sync-state="error"]{color:#a33b2f}.account-button[data-sync-state]::before{content:'';width:7px;height:7px;border-radius:50%;background:#9bb2bf;margin-right:7px}.account-button[data-sync-state="synced"]::before{background:#237453}.account-button[data-sync-state="error"]::before{background:#b34336}.account-button[data-sync-state="working"]::before{background:#d19b28}html[data-theme="dark"] [data-sync-state="synced"]{color:#79d4b1}html[data-theme="dark"] [data-sync-state="error"]{color:#ffb4a9}.cloud-controls [hidden]{display:none!important}

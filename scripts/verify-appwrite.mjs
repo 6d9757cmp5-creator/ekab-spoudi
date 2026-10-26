@@ -50,7 +50,7 @@ assert.equal(headers.get('X-Appwrite-Project'), '6ade83ec00260198ae34');
 assert.equal(headers.has('X-Appwrite-Key'), false);
 assert.equal(options.body, undefined);
 assert.equal(success.api.cloudFeatures.googleLogin, true);
-assert.equal(success.api.cloudFeatures.sync, false);
+assert.equal(success.api.cloudFeatures.sync, true);
 assert.equal(success.timers.size, 0);
 await success.api.startAppwrite();
 assert.equal(success.calls.length, 1);

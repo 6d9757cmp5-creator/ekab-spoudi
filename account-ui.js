@@ -1,4 +1,4 @@
-import { client, cloudFeatures } from './appwrite-client.js?app=27.1.37';
+import { client, cloudFeatures } from './appwrite-client.js?app=27.1.65';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
 
 const account = new Account(client);
@@ -31,6 +31,7 @@ export function initAccountUI() {
   trigger.setAttribute('aria-controls', 'accountDialog');
   trigger.disabled = false;
   const dialog = document.createElement('dialog');
+  let syncManager = null;
   dialog.id = 'accountDialog';
   dialog.setAttribute('aria-labelledby', 'accountTitle');
   dialog.innerHTML = `<div class="dialog-inner account-dialog">
@@ -38,13 +39,27 @@ export function initAccountUI() {
     <p data-account-message></p>
     <button class="btn google-signin full" type="button" data-google-login><span class="google-mark" aria-hidden="true">G</span>Συνέχεια με Google</button>
     <button class="btn secondary full" type="button" data-account-logout hidden>Αποσύνδεση</button>
-    <p class="account-local-note">Η πρόοδος και τα PDF παραμένουν στη συσκευή σου. Ο συγχρονισμός μεταξύ συσκευών δεν είναι ακόμη διαθέσιμος.</p>
+    <section class="cloud-controls" data-cloud-controls hidden><h3>Συγχρονισμός συσκευών</h3>
+      <p data-cloud-status role="status" aria-live="polite">Έλεγχος συγχρονισμού…</p>
+      <div class="actions"><button class="btn compact" data-sync-enable type="button">Ενεργοποίηση σε αυτή τη συσκευή</button><button class="btn compact" data-sync-now type="button" hidden>Συγχρονισμός τώρα</button><button class="btn compact secondary" data-sync-pause type="button" hidden>Παύση</button></div>
+      <p class="small muted">Πρόοδος ΕΟΠΠΕΠ/ΣΑΕΚ, σημειώσεις, PDF και ρυθμίσεις. Ιδιωτικά στον λογαριασμό σου. Δωρεάν όριο: 50 MB ανά PDF.</p>
+      <button class="btn compact ghost" data-sync-recover type="button">Ανάκτηση τοπικού αντιγράφου</button>
+    </section>
+    <p class="account-local-note">Η τοπική αποθήκευση παραμένει ενεργή. Ο συγχρονισμός ενεργοποιείται ξεχωριστά σε κάθε συσκευή και συνεχίζει όταν επιστρέψει το internet.</p>
     <p class="small muted" data-appwrite-status role="status" aria-live="polite"></p>
   </div>`;
   document.body.append(dialog);
   const message = dialog.querySelector('[data-account-message]');
   const login = dialog.querySelector('[data-google-login]');
   const logout = dialog.querySelector('[data-account-logout]');
+  async function attachSync() {
+    if(!user||!cloudFeatures.sync||syncManager)return;
+    const panel=dialog.querySelector('[data-cloud-controls]');panel.hidden=false;
+    try {
+      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.65');
+      syncManager=await initCloudSync({user,status:panel.querySelector('[data-cloud-status]'),enableButton:panel.querySelector('[data-sync-enable]'),nowButton:panel.querySelector('[data-sync-now]'),pauseButton:panel.querySelector('[data-sync-pause]'),recoverButton:panel.querySelector('[data-sync-recover]')});
+    }catch { panel.querySelector('[data-cloud-status]').textContent='Ο συγχρονισμός δεν είναι διαθέσιμος. Η τοπική αποθήκευση συνεχίζεται.'; }
+  }
   function paint() {
     trigger.textContent = user ? 'Λογαριασμός' : 'Σύνδεση';
     login.hidden = Boolean(user);
@@ -66,7 +81,7 @@ export function initAccountUI() {
   });
   logout.addEventListener('click', async () => {
     logout.disabled = true;
-    try { await account.deleteSession({ sessionId: 'current' }); user = null; paint(); }
+    try { syncManager?.stop(); syncManager=null; await account.deleteSession({ sessionId: 'current' }); user = null; dialog.querySelector('[data-cloud-controls]').hidden=true; paint(); }
     catch { message.textContent = 'Η αποσύνδεση δεν ολοκληρώθηκε. Έλεγξε τη σύνδεσή σου.'; }
     finally { logout.disabled = false; }
   });
@@ -80,7 +95,7 @@ export function initAccountUI() {
       history.replaceState(null, '', clean.href);
     }
     account.get().then(value => {
-      user = value; paint();
+      user = value; paint(); attachSync();
       if (params.get('login') === 'success') dialog.showModal();
     }).catch(() => {
       if (params.get('login') === 'success') {

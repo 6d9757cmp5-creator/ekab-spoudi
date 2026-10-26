@@ -1,14 +1,14 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.64', $=id=>document.getElementById(id);
+const CURRENT='27.1.65', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
- const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.64';style.dataset.ekabGlobalTools='';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.65';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.64';script.dataset.ekabGlobalTools='';document.head.append(script);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.65';script.dataset.ekabGlobalTools='';document.head.append(script);
 }
 
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
@@ -23,7 +23,7 @@ if(registration?.waiting){d.textContent='Ενεργοποίηση νέας έκ�
 d.textContent='Ανανέωση εφαρμογής…';location.replace('./index.html?refresh='+Date.now());
 }catch(e){d.textContent='Η ενημέρωση δεν ολοκληρώθηκε. Η πρόοδός σου παραμένει στη συσκευή. Δοκίμασε ξανά.';b.disabled=false;applying=false;}}
 async function start(){
-const theme=$('themeToggle');if(theme){const sync=()=>{const dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next)}catch{}sync()};sync();}
+const theme=$('themeToggle');if(theme){const sync=()=>{const dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next);window.dispatchEvent(new Event('ekab:progress-changed'))}catch{}sync()};sync();window.addEventListener('ekab:cloud-applied',sync);}
 if($('currentAppVersion'))$('currentAppVersion').textContent='v'+CURRENT;if($('footerAppVersion'))$('footerAppVersion').textContent='v'+CURRENT;
 $('checkAppUpdates')?.addEventListener('click',check);$('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
 if(!('serviceWorker'in navigator)||location.protocol==='file:'){report('Έκδοση v'+CURRENT+' · Ο offline μηχανισμός δεν υποστηρίζεται εδώ.');return}
@@ -32,9 +32,9 @@ window.EkabUpdates={check};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 // Optional cloud setup never blocks the local app or update controls.
-import(new URL('./appwrite-client.js?app=27.1.38', document.currentScript.src).href)
+import(new URL('./appwrite-client.js?app=27.1.65', document.currentScript.src).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.38', new URL('./appwrite-client.js?app=27.1.38', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.65', new URL('./appwrite-client.js?app=27.1.65', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {

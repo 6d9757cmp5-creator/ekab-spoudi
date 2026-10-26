@@ -326,3 +326,6 @@ async function init(){state=saved();try{const response=await fetch(BANK_URL);if(
  }
 }
 init(); // Service worker registration is managed by updates.js on every page.
+
+// Cloud changes refresh the existing in-memory study state without restarting a question.
+window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});
