@@ -17,7 +17,21 @@ for(const q of bank){
  if(q.answerStatus!=='reviewed_educational')fail(q.id+': unreviewed educational field');
 }
 const inv=JSON.parse(read('docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'));
-if(inv.records.length!==314||inv.counts.total!==314)fail('Citation inventory not 314');
+const reviewStatuses=new Set(['documented_source_check','historical_targeted_review','citation_indexed_pending_passage_check']);
+for(const q of bank){
+ const record=q.sourceReview;
+ if(!record||!reviewStatuses.has(record.status))fail(q.id+': missing or invalid per-question sourceReview');
+ else{
+  if(record.reviewQuestion!==q.question)fail(q.id+': review question mismatch');
+  if(record.sourceUrl!==q.sourceUrl)fail(q.id+': review source URL mismatch');
+  if(!Array.isArray(record.reviewEvidence)||!record.reviewEvidence.length)fail(q.id+': review evidence URL missing');
+  if(record.status==='documented_source_check'&&!q.sourceChecked)fail(q.id+': source check status unsupported');
+  if(record.status==='citation_indexed_pending_passage_check'&&q.sourceChecked)fail(q.id+': pending status conflicts with checked source');
+  if(record.officialEoppepAnswerKey!==false||record.independentClinicalApproval!==false)fail(q.id+': false certification flag');
+ }
+}
+
+if(inv.records.length!==314||inv.counts.total!==314||inv.counts.withRecord!==314)fail('Citation/review inventory not 314');
 if(inv.records.some((r,i)=>r.id!==bank[i]?.id))fail('Citation inventory ID/order mismatch');
 const imgs=JSON.parse(read('saek-image-audit-2026.json'));
 if(imgs.courses.length!==20)fail('SAEK: image audit should list 20 courses');
