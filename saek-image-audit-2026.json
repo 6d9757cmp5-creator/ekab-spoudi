@@ -463,6 +463,28 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "cafc8c66c26ed6000944c7ed8e065ba8d18c3973c922049fd506edfdb5b06b71"
+    },
+    "female_reproductive": {
+      "filename": "female-reproductive-system-el.svg",
+      "localPath": "assets/education/female-reproductive-system-el.svg",
+      "title": "Γυναικείο αναπαραγωγικό σύστημα: εσωτερικά όργανα",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-2-anatomy-and-physiology-of-the-ovarian-reproductive-system",
+      "caption": "Σχηματική πρόσθια όψη μήτρας, σαλπίγγων, ωοθηκών, τραχήλου και κόλπου. Οι σάλπιγγες καταλήγουν κοντά στις ωοθήκες χωρίς άμεση συνέχεια. Δεν περιλαμβάνει αιμάτωση, εξωτερικά γεννητικά όργανα, μυϊκά στρώματα ή ανατομικές παραλλαγές.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "anatomical structure and relationship cross-checked with OpenStax A&P 2e 27.2; original artwork independently drawn, not copied"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Source code and label leader coordinates inspected; no independent clinical review, raster render or browser E2E verified"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "40792adcb7ca0ed788babc906f86dc4a23bd42e9eb73b1f8fa05e173825cc244"
     }
   },
   "placements": {
@@ -598,7 +620,8 @@
       "anatomical_planes"
     ],
     "01-13": [
-      "urinary_system"
+      "urinary_system",
+      "female_reproductive"
     ],
     "01-09": [
       "synovial_joint"
@@ -710,7 +733,8 @@
         {
           "anchor": "#lesson-13",
           "images": [
-            "urinary_system"
+            "urinary_system",
+            "female_reproductive"
           ],
           "status": "source-selected-pending-independent-scientific-review"
         },
