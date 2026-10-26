@@ -24,11 +24,19 @@
  window.addEventListener('ekab:progress-changed',schedule);
  window.addEventListener('pagehide',()=>{clearTimeout(timer);checkpoint()});
  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
- document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('[data-export-all]').forEach(b=>b.addEventListener('click',download));
-  document.querySelectorAll('[data-restore-all]').forEach(el=>el.addEventListener('change',async e=>{try{const f=e.target.files?.[0];if(f)await restoreFile(f)}catch(err){alert('Αποτυχία επαναφοράς: '+err.message)}finally{e.target.value=''}}));
-  recovery().finally(()=>{notify('Αυτόματη αποθήκευση ενεργή.');const p=entries();if(Object.values(p).some(v=>v&&v!=='{}'&&v!=='0'))schedule()});
+ document.addEventListener('click',event=>{
+  if(event.target.closest('[data-export-all]'))download();
  });
+ document.addEventListener('change',async event=>{
+  const input=event.target.closest('[data-restore-all]');
+  if(!input)return;
+  try{const file=input.files?.[0];if(file)await restoreFile(file)}
+  catch(err){alert('Αποτυχία επαναφοράς: '+err.message)}
+  finally{input.value=''}
+ });
+ const init=()=>{recovery().finally(()=>{notify('Αυτόματη αποθήκευση ενεργή.');const p=entries();if(Object.values(p).some(v=>v&&v!=='{}'&&v!=='0'))schedule()})};
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+ else init();
 })();
 
 window.addEventListener('ekab:cloud-applied',()=>{window.EkabProgress?.schedule();let total=0;document.querySelectorAll('[data-course-progress]').forEach(x=>{const id=x.dataset.courseProgress,n=parseInt(x.textContent.split('/')[1],10)||0;let done=0;for(let j=1;j<=n;j++)if(localStorage.getItem('ekab.saek.read.v1.'+id+'.'+j)==='1')done++;x.textContent=done+'/'+n+' διαβασμένα';total+=done;});const library=document.getElementById('library-done');if(library)library.textContent=total;const m=location.pathname.match(/saek-course-(\d{2})\.html/);if(!m)return;const buttons=[...document.querySelectorAll('[data-lesson]')];let done=0;for(const b of buttons){const n=b.dataset.lesson,read=localStorage.getItem('ekab.saek.read.v1.'+m[1]+'.'+n)==='1';if(read)done++;b.textContent=read?'✓ Διαβάστηκε · αναίρεση':'○ Ολοκλήρωσα την ανάγνωση';b.setAttribute('aria-pressed',String(read));b.classList.toggle('completed',read);const st=document.getElementById('status-'+n);if(st)st.textContent=read?'Διαβάστηκε':'Δεν ολοκληρώθηκε';}const percent=buttons.length?Math.round(100*done/buttons.length):0;const summary=document.getElementById('read-summary');if(summary)summary.textContent=done+'/'+buttons.length+' κεφάλαια μελετημένα';const p=document.getElementById('read-percent');if(p)p.textContent=percent+'%';const bar=document.getElementById('lesson-progress-bar');if(bar)bar.style.width=percent+'%';});
