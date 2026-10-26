@@ -77,4 +77,4 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
 .saek-recap-figure figcaption{font-size:.92rem;color:#344e61;line-height:1.55;margin:12px 4px 4px}
 html[data-theme="dark"] .saek-recap-map{color:#173b52;background:#f3f9fc!important}
 html[data-theme="dark"] .saek-recap-figure{background:#fff!important;color:#173b52!important}
-@media(max-width:620px){.saek-recap-figure{padding:7px}.saek-recap-figure svg{min-height:125px}.saek-recap-map>summary{font-size:.94rem}}
+@media(max-width:620px){.saek-recap-figure{padding:7px;overflow-x:auto;-webkit-overflow-scrolling:touch}.saek-recap-figure svg{width:960px;min-width:960px;max-width:none;height:300px;max-height:none;min-height:300px}.saek-recap-figure::before{content:'Σύρε οριζόντια για να δεις όλες τις κάρτες';display:block;font-size:.9rem;color:#284c63;padding:7px}.saek-recap-map>summary{font-size:.94rem}}
