@@ -11,10 +11,19 @@ function renderReadySos(questionId){
  host.replaceChildren();
  if(!eoppepSos){host.textContent='Φόρτωση έτοιμων SOS…';return}
  const entry=eoppepSos.get(questionId);
- if(!entry||!entry.points?.length){host.textContent='Δεν υπάρχουν ακόμη έτοιμα SOS για το συγκεκριμένο θέμα.';return}
+ const question=bank.find(q=>q.id===questionId);
+ if(!question){host.textContent='Δεν βρέθηκε η ερώτηση.';return}
+ const source=String(question.answer||'').replace(/\s+/g,' ').trim();
+ const listed=entry?.points||[];
+ // If another scientific review edited the official answer, never display stale SOS.
+ const exact=listed.length>0&&listed.every(point=>source.includes(point));
+ let points=exact?listed:source.split(/(?<=[.!?;])\s+(?=[Α-ΩΆΈΉΊΌΎΏA-Zα-ωάέήίόύώ0-9(«])/u).map(s=>s.trim()).filter(s=>s.length>=16).slice(0,4);
+ if(!points.length&&source)points=[source];
+ if(!points.length){host.textContent='Δεν υπάρχει ακόμη διαθέσιμη ενδεικτική απάντηση για SOS.';return}
  const list=document.createElement('ul');
- for(const point of entry.points){const li=document.createElement('li');li.textContent=point;list.append(li)}
+ for(const point of points){const li=document.createElement('li');li.textContent=point;list.append(li)}
  host.append(list);
+ if(!exact){const note=document.createElement('p');note.className='small muted';note.textContent='Τα SOS ανανεώθηκαν τοπικά από τη νεότερη ενδεικτική απάντηση, επειδή άλλαξε το περιεχόμενο της τράπεζας.';host.append(note)}
 }
 function loadReadySos(questionId){
  renderReadySos(questionId);
