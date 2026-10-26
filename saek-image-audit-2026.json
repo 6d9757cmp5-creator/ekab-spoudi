@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Ενδιάμεσο μητρώο με αντιστοίχιση πηγών εικόνων. Πηγή/άδεια έχουν τεκμηριωθεί για τις νέες επιλογές· ΔΕΝ έχει γίνει ανεξάρτητη επιστημονική πιστοποίηση, πλήρης κλινικός έλεγχος ή live δοκιμή των εικόνων. Άλλα 247-κεφαλαία recap διαγράμματα είναι μόνο σχηματικές συνόψεις κειμένου.",
+  "note": "Μητρώο επιλογών εικόνων: 41/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -309,6 +309,50 @@
         "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
       },
       "sha256": "4895c65f6cc440595e296739e713f43de134462d518c7e781ae9712237d9fe7f"
+    },
+    "anatomical_position": {
+      "filename": "anatomical-position-el.svg",
+      "localPath": "assets/education/anatomical-position-el.svg",
+      "title": "Ανατομική θέση σε πρόσθια όψη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+      "caption": "Πρωτότυπο σχέδιο της ανατομικής θέσης, με ελληνικές επισημάνσεις για δεξιά/αριστερά ασθενούς, μέση γραμμή και άνω/κάτω. Δεν καλύπτει τα ανατομικά επίπεδα, κοιλότητες ή όλους τους όρους προσανατολισμού.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific concepts verified against cited OpenStax 2e chapter; original drawing not copied"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG source structure, Greek labels and leader endpoints checked; independent scientific and rendered-browser visual review still pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "825f130ea5431b9a1ed98022ab6dcfc693beeb4157a502dd3bd9a882278a2190"
+    },
+    "urinary_system": {
+      "filename": "urinary-system-el.svg",
+      "localPath": "assets/education/urinary-system-el.svg",
+      "title": "Ουροποιητικό σύστημα σε πρόσθια σχηματική όψη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-2-gross-anatomy-of-urine-transport",
+      "caption": "Απεικονίζει δύο νεφρούς, δύο ουρητήρες, ουροδόχο κύστη και ουρήθρα. Δεν περιλαμβάνει το αναπαραγωγικό σύστημα, φυλετικές διαφορές ουρήθρας ή λεπτομερή ανατομία νεφρού.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific concepts verified against cited OpenStax 2e chapter; original drawing not copied"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG source structure, Greek labels and leader endpoints checked; independent scientific and rendered-browser visual review still pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "fadaeab745263dc5114c6d333b49a304010e141d1edea24e0a678d400a6d3074"
     }
   },
   "placements": {
@@ -438,6 +482,12 @@
     ],
     "02-06": [
       "reflex_arc"
+    ],
+    "01-01": [
+      "anatomical_position"
+    ],
+    "01-13": [
+      "urinary_system"
     ]
   },
   "courses": [
@@ -448,8 +498,10 @@
       "chapters": [
         {
           "anchor": "#lesson-1",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "anatomical_position"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-2",
@@ -529,8 +581,10 @@
         },
         {
           "anchor": "#lesson-13",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "urinary_system"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-14",
