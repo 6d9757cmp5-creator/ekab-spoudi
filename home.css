@@ -118,3 +118,15 @@ body:has(.home-main) .home-main footer{margin-top:5px;padding:3px 0 5px;font-siz
  body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:62px;padding-block:6px}
  body:has(.home-main) .home-app-note{margin-top:7px}
 }
+
+/* v27.1.85 — remove vertically centered landing gap */
+/* The landing begins below the header, not in the centre of an empty viewport.
+   Cards, text sizes, responsive columns and scrolling remain unchanged. */
+body:has(.home-main) .home-main {
+  flex:0 0 auto;
+  justify-content:flex-start;
+  padding-top:23px;
+}
+@media(max-width:620px){
+  body:has(.home-main) .home-main{padding-top:23px}
+}
