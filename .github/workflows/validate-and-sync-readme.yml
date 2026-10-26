@@ -17,6 +17,8 @@ jobs:
         run: node --experimental-vm-modules scripts/verify-appwrite.mjs
       - name: Verify Google login setup gate and return URLs
         run: node --experimental-vm-modules scripts/verify-account.mjs
+      - name: Verify EOPPEP question bank and source-trace labels
+        run: node scripts/verify-eoppep.mjs
       - name: Validate app files and normalize README
         shell: bash
         run: |
