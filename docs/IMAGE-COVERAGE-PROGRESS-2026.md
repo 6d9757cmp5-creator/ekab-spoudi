@@ -6,13 +6,13 @@ Latest recorded batch: **2026-10-27, batch 16**. Continue on branch `coverage/gr
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main registry (last checked, not live proof) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 48 | 10 | 23 |
-| Β | 73 | 11 | 5 | 62 |
+| Α | 71 | 50 | 10 | 21 |
+| Β | 73 | 13 | 5 | 60 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **70** | **26** | **177** |
+| **Total** | **247** | **74** | **26** | **173** |
 
-**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b21`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b23`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -189,3 +189,14 @@ For each new asset: verify relevance and the original source/license; render and
 - The audit provenance rule was expanded only to include the official US EMS documentation domain for original diagrams. Updated image registry mappings, source SHA-256 and original educational asset cache to draft SW **b21**. Previously added three parallel-workstream assets with missing SHA-256 were read back and assigned verified content hashes; all local asset paths are currently in precache.
 - After readback, **70/247 source-selected chapters** (Α 48/71, Β 11/73, Γ 5/51, Δ 6/52); **177 unselected**; **48 assets** (41 local SVGs). This is a **draft selection count**, not a claim of fully illustrated content or a live deployed build.
 - Remaining critical gates: independent scientific review 0 documented approvals; actual browser and mobile layout/zoom/offline E2E still unverified, GitHub Actions results must be inspected before merge, no production release claim. Keep this PR draft; next milestone notification is 100/247.
+
+
+## Batch 16 — 2026-10-27: EMS pathway, check-back and driver fatigue
+
+- Starting point at this run: **70/247** source-selected (Α48, Β11, Γ5, Δ6), including six additions by a concurrent workstream since the preceding 64-chapter checkpoint. Continued on the existing branch and **draft PR #6**, no new PR or merge.
+- Added **three new original, Greek-labelled SVG diagrams** and mapped **four previously uncovered chapters**: `03-04` → `prehospital-care-pathway-el.svg` (six illustrated steps from emergency call to handover); `03-09` and `07-09` → `closed-loop-handover-el.svg` (two persons, message, repeat-back, sender confirmation); `09-11` → `driver-fatigue-warning-el.svg` (ambulance drifting near lane marking, warning signs and safer response). All images are original CC BY 4.0 educational artwork, **not copies** of source figures.
+- Sources checked on 2026-10-27: WHO, *Prehospital emergency care — operational guidance for ambulance systems* (15 September 2025), https://www.who.int/publications/9789240114067 ; AHRQ TeamSTEPPS, *Check-Back* (last reviewed July 2023), https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/checkback.html ; CDC/NIOSH, *Driver Fatigue on the Job* (3 April 2024), https://www.cdc.gov/niosh/motor-vehicle/driver-fatigue/index.html . These support the illustrated concepts, **not independent clinical approval or Greek-specific protocol endorsement**.
+- Registered all three with computed SHA-256, `clinicalReview: pending`, `subjectCompleteness: partial` and source notes. Three previously missing SHA-256 values from batch 15 were also verified present in the registry. Added relevant source hosts to the checker allowlist, updated the image UI's Greek disclaimer to distinguish selection from completeness/approval, and precached all three files in draft SW **ekab-spoudi-v27.1.68-images-20261026-b23**.
+- Source-level readback confirmed all six recent SVGs (three from batch 15 plus three new) have Greek labels, title/desc, image role, matched element tags, and SW cache entries. Their registered SHA-256 values are present. The hash function was validated against the standard `abc` SHA-256 test vector. **Not yet verified:** actual XML-parser execution across entire repo, pixel/raster visual review, real-browser image zoom, offline end-to-end, CI workflow pass or production publishing.
+- **Distinct state measures at this checkpoint:** selected-image chapters **74/247** (Α 50/71, Β 13/73, Γ 5/51, Δ 6/52); **173 without selection**. Fully covered chapters: **0 documented as fully reviewed**, not a claim that every chapter is substantively incomplete. Independently scientifically approved chapter images: **0 documented**. Independently verified live published chapters from this PR: **0 documented**; main registry contains 26 selections but this is not production verification. Draft asset registry: **51 assets**.
+- Next user notification only on first crossing of **100 selected chapters**; 50 had been crossed previously. Continue independently reviewing visual fidelity, checking true source relevance, adding remaining images and verifying release before any claim of publication.
