@@ -46,3 +46,11 @@ html[data-theme="dark"] .home-suboptions a:hover{background:#30586f}
  .home-suboptions{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.home-card{transition:none}.home-card:hover{transform:none}}
+
+/* Learning path: SAEK, EOPPEP, pharmacology, seminars. */
+.home-tiles>.home-card-saek,.home-tiles>.home-card-eoppep{grid-column:1/-1}
+.home-card-saek{border-color:#a5cfe2}
+.home-card-eoppep .home-card-summary{min-height:96px;padding-bottom:10px}
+.home-card-eoppep .home-suboptions{padding:0 18px 18px}
+html[data-theme="dark"] .home-card-saek{border-color:#4a7590}
+@media(max-width:620px){.home-card-eoppep .home-card-summary{min-height:83px;padding-bottom:9px}.home-card-eoppep .home-suboptions{padding:0 15px 15px}}
