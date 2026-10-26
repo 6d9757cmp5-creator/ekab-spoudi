@@ -12,7 +12,7 @@ Latest completed batch: **2026-10-26, batch 3**. Continue on branch `coverage/gr
 | Δ | 52 | 6 | 6 | 46 |
 | **Total** | **247** | **43** | **26** | **204** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed; the CI figures cited below are for the prior three-asset snapshot, until the final four-asset checks complete. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b5`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b5`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -25,7 +25,7 @@ Four newly drawn original Greek SVG anatomical illustrations, all locally hosted
 
 Source background: OpenStax *Anatomy and Physiology 2e*, sections 1.6, 9.4, 25.2. The diagrams are original and not traced/copied OpenStax illustrations. Their licensing is the author's declared CC BY 4.0 for the original drawing, not an assertion about OpenStax's own image licensing.
 
-Updated `saek-image-audit-2026.json` mappings, `sw.js` offline precache, and added `scripts/validate-saek-svg.py` plus workflow enforcement for XML validity, accessibility labels, visible Greek, local references, prohibited scripts, and SHA-256. CI run [40353148589](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353148589): **passed**; 247 chapter mappings, 42 selected at that previous run, 21 image assets, 0 errors, 5 warnings (requires separate inspection). XML/SVG validator: **14 local SVG assets, 0 errors at that previous run**. SAEK content check [40353158467](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353158467): **passed**.
+Updated `saek-image-audit-2026.json` mappings, `sw.js` offline precache, and added `scripts/validate-saek-svg.py` plus workflow enforcement for XML validity, accessibility labels, visible Greek, local references, prohibited scripts, and SHA-256. CI run [40353543830](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353543830): **passed**; 247 chapter mappings, 43 selected, 22 image assets, 0 errors, 5 warnings (requires separate inspection). XML/SVG validator: **15 local SVG assets, 0 errors**. SAEK content check [40353551300](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353551300): **passed**.
 
 ## Critical quality gates (still open)
 
