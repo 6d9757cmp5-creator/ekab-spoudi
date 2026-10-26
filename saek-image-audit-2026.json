@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-27",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Επιλεγμένες εικόνες 70/247. Η επιλογή δεν πιστοποιεί πλήρη κάλυψη, ανεξάρτητη επιστημονική έγκριση ή δημοσίευση.",
+  "note": "Draft source-selected coverage: 74/247 chapters; selection does not mean full chapter subject coverage, independent scientific review, or verified production deployment.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -1042,6 +1042,72 @@
         "scope": "Source structural markup and Greek labels examined; live rendering, browser/zoom/offline E2E and independent clinical review pending"
       },
       "sha256": "42a6bf82d8355e718ca6461f4b2da82fe82abcd3a9400dfa33ce3500e14f3a28"
+    },
+    "prehospital_care_pathway": {
+      "filename": "prehospital-care-pathway-el.svg",
+      "localPath": "assets/education/prehospital-care-pathway-el.svg",
+      "title": "Αλυσίδα επείγουσας προνοσοκομειακής φροντίδας: έξι εικονογραφημένα στάδια",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο ελληνικό εκπαιδευτικό διάγραμμα",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.who.int/publications/9789240114067",
+      "caption": "Εικονογραφημένη αλληλουχία από κλήση και αποστολή έως άφιξη, εκτίμηση, ασφαλή διακομιδή και τεκμηριωμένη παράδοση. Δεν αποτυπώνει συγκεκριμένη διαδικασία του ΕΚΑΒ ή χρόνους ανταπόκρισης.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-27",
+      "sourcePageCheckedFor": [
+        "WHO 2025 operational guidance: emergency communication and dispatch centres, prehospital operations and structured handover."
+      ],
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "visualReview": {
+        "date": "2026-10-27",
+        "scope": "SVG source inspected for visible Greek labels, illustration-to-topic correspondence and XML structure. Raster/browser/zoom/offline end-to-end and independent clinical review not completed."
+      },
+      "sha256": "b31e19e765bc424f69cf382c88b6ee5b89421fa69c4bc5bf0d67f15977b877e3"
+    },
+    "closed_loop_handover": {
+      "filename": "closed-loop-handover-el.svg",
+      "localPath": "assets/education/closed-loop-handover-el.svg",
+      "title": "Κλειστός βρόχος επικοινωνίας: μήνυμα, επανάληψη και επιβεβαίωση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο ελληνικό εκπαιδευτικό διάγραμμα",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/checkback.html",
+      "caption": "Δύο μέλη ομάδας επικοινωνούν σε τρία βήματα με παράδειγμα διεύθυνσης: αποστολή, επανάληψη από παραλήπτη και επιβεβαίωση ή διόρθωση από αποστολέα. Αρχή AHRQ TeamSTEPPS, όχι επίσημο πρωτόκολλο ΕΚΑΒ.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-27",
+      "sourcePageCheckedFor": [
+        "AHRQ TeamSTEPPS Check-Back: sender message, receiver repeat-back, sender confirmation."
+      ],
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "visualReview": {
+        "date": "2026-10-27",
+        "scope": "SVG source inspected for visible Greek labels, illustration-to-topic correspondence and XML structure. Raster/browser/zoom/offline end-to-end and independent clinical review not completed."
+      },
+      "sha256": "b5f11336a7ddae4daea43dde801be6e3d4ead76bb8f5abe85817c7ee92c8af9c"
+    },
+    "driver_fatigue_warning": {
+      "filename": "driver-fatigue-warning-el.svg",
+      "localPath": "assets/education/driver-fatigue-warning-el.svg",
+      "title": "Ενδείξεις κόπωσης οδηγού ασθενοφόρου και ασφαλής αντίδραση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο ελληνικό εκπαιδευτικό διάγραμμα",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/niosh/motor-vehicle/driver-fatigue/index.html",
+      "caption": "Εικονική οδός και ασθενοφόρο με παρέκκλιση λωρίδας, υπνηλία και βραδύτερη αντίδραση. Υπογραμμίζει την αναφορά κόπωσης και ασφαλή στάση, χωρίς να υποκαθιστά υπηρεσιακή διαδικασία.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-27",
+      "sourcePageCheckedFor": [
+        "CDC NIOSH 2024 Driver Fatigue on the Job: signs and reporting, safe stopping."
+      ],
+      "clinicalReview": "pending",
+      "subjectCompleteness": "partial",
+      "visualReview": {
+        "date": "2026-10-27",
+        "scope": "SVG source inspected for visible Greek labels, illustration-to-topic correspondence and XML structure. Raster/browser/zoom/offline end-to-end and independent clinical review not completed."
+      },
+      "sha256": "2336f5994e66fa7e9e552521953fd4eb5b382b33d20bc7c679526b039a157a95"
     }
   },
   "placements": {
@@ -1267,6 +1333,18 @@
     ],
     "05-10": [
       "responsiveness_acvpu"
+    ],
+    "03-04": [
+      "prehospital_care_pathway"
+    ],
+    "03-09": [
+      "closed_loop_handover"
+    ],
+    "07-09": [
+      "closed_loop_handover"
+    ],
+    "09-11": [
+      "driver_fatigue_warning"
     ]
   },
   "courses": [
@@ -1504,8 +1582,10 @@
         },
         {
           "anchor": "#lesson-4",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "prehospital_care_pathway"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-5",
@@ -1531,8 +1611,10 @@
         },
         {
           "anchor": "#lesson-9",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "closed_loop_handover"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-10",
@@ -1823,8 +1905,10 @@
         },
         {
           "anchor": "#lesson-9",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "closed_loop_handover"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-10",
@@ -1965,8 +2049,10 @@
         },
         {
           "anchor": "#lesson-11",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "driver_fatigue_warning"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         }
       ]
     },
