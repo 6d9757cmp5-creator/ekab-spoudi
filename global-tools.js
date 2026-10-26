@@ -85,7 +85,7 @@ function resultLink(item){
  return link;
 }
 function installSectionNav(){
- const nav=document.querySelector('header.top .nav');if(!nav)return;
+ const nav=document.querySelector('header.top .nav');if(!nav||nav.classList.contains('ekab-breadcrumb'))return;
  const file=location.pathname.split('/').pop()||'index.html';
  if(file==='index.html'){nav.remove();return}
  const names={'theory.html':'Θεωρία ΕΟΠΠΕΠ','practical_exam.html':'Πρακτικό ΕΟΠΠΕΠ','saek.html':'Κατάρτιση ΣΑΕΚ','farmaka.html':'Φαρμακολογία','search.html':'Αποτελέσματα αναζήτησης'};
