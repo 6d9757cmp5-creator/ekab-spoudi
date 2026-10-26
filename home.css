@@ -130,3 +130,8 @@ body:has(.home-main) .home-main {
 @media(max-width:620px){
   body:has(.home-main) .home-main{padding-top:23px}
 }
+
+/* Hotfix: remove inherited .main vertical auto-margins on the landing */
+/* .main in styles.css uses margin:auto; within a flex-column body that
+   vertically centers the whole landing even with justify-content:flex-start. */
+.home-main { margin:0 auto; }
