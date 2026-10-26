@@ -3,4 +3,5 @@
 // Κλειδιά: "01-1" = Ανατομία κεφάλαιο 1, "05-11" = Προνοσοκομειακή εκτίμηση κεφάλαιο 11.
 // Επιτρεπόμενα YouTube/watch, youtu.be, Vimeo και http(s) σύνδεσμοι πηγών. Δεν φιλοξενεί βίντεο.
 window.EKAB_LESSON_VIDEOS = {
+  "01-1": "https://scrimba.com/explain/guide03gpa2uj7?claim=ki9ctoi3usaqlrrj" // Ανατομία: Ανατομική θέση και προσανατολισμός
 };
