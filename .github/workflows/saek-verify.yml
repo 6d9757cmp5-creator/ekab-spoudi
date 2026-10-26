@@ -12,7 +12,6 @@ on:
       - 'scripts/verify-education.mjs'
       - 'official_questions.json'
       - 'docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'
-      - 'saek-chapter-visuals.js'
       - 'saek-visual-ui.js'
       - 'saek-visual-ui.css'
       - '.github/workflows/saek-verify.yml'
@@ -27,7 +26,6 @@ on:
       - 'scripts/verify-education.mjs'
       - 'official_questions.json'
       - 'docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'
-      - 'saek-chapter-visuals.js'
       - 'saek-visual-ui.js'
       - 'saek-visual-ui.css'
       - '.github/workflows/saek-verify.yml'
@@ -42,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check SAEK learning chapters and version consistency
         run: node scripts/verify-saek.mjs
-      - name: Check EOPPEP references, 103 lesson-specific drills, 5 answers and 247 visual recaps
+      - name: Check EOPPEP references, lesson-specific drills, answers and source illustration registry
         run: node scripts/verify-education.mjs
       - name: Validate lesson-visual JavaScript syntax
-        run: node --check saek-chapter-visuals.js && node --check saek-visual-ui.js && node --check saek-reviewed-image-ui.js
+        run: node --check saek-visual-ui.js && node --check saek-reviewed-image-ui.js
