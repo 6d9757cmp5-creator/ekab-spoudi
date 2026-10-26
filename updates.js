@@ -1,14 +1,14 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.62', $=id=>document.getElementById(id);
+const CURRENT='27.1.63', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
- const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.62';style.dataset.ekabGlobalTools='';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.63';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.62';script.dataset.ekabGlobalTools='';document.head.append(script);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.63';script.dataset.ekabGlobalTools='';document.head.append(script);
 }
 
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
