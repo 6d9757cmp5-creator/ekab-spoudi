@@ -42,9 +42,11 @@
  <section id="seminarQuiz" class="panel seminar-practice" hidden aria-label="Τεστ αυτοελέγχου">
  <p class="eyebrow" id="seminarQuestionCounter"></p><h3 id="seminarQuestionTitle"></h3>
  <label for="seminarQuestionNotes">Η δική σου απάντηση</label><textarea id="seminarQuestionNotes" rows="4" maxlength="2000" placeholder="Απάντησε χωρίς βοήθεια πριν δεις τα βασικά σημεία…"></textarea>
- <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarQuizReveal">Έλεγχος απάντησης</button><span id="seminarQuestionState" class="seminar-state"></span></div>
+ <p class="ai-grading-privacy">Ο προαιρετικός έλεγχος AI στέλνει μόνο την απάντησή σου σε ασφαλή υπηρεσία αξιολόγησης όταν πατήσεις το κουμπί. Απαιτεί σύνδεση λογαριασμού και Internet. Η απάντηση δεν δημοσιεύεται.</p>
+ <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Αξιολόγηση με AI</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση · Αυτοαξιολόγηση</button><span id="seminarQuestionState" class="seminar-state"></span></div>
+ <div id="seminarAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
  <p id="seminarQuestionSolution" class="seminar-feedback" hidden></p><div id="seminarQuizGrade" class="seminar-grade" hidden><button type="button" class="btn compact" id="seminarGradeRight">Το θυμήθηκα σωστά</button><button type="button" class="btn compact secondary" id="seminarGradeNeeds">Χρειάζεται επανάληψη</button></div>
- <p class="seminar-fineprint">Το τεστ είναι αυτοαξιολόγηση ανοικτής απάντησης, όχι αυτόματη βαθμολόγηση ή επίσημο εξεταστικό θέμα.</p>
+ <p class="seminar-fineprint">Η AI αξιολόγηση βασίζεται στο νόημα, όχι στην ίδια διατύπωση. Αν δεν είναι διαθέσιμη, η χειροκίνητη αυτοαξιολόγηση παραμένει ενεργή. Δεν είναι επίσημη βαθμολογία.</p>
  <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevQuestion">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextQuestion">Επόμενη</button></div>
  </section>
  <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Προφορική άσκηση">
@@ -62,5 +64,6 @@
 <p id="seminarSaveStatus" class="seminar-save-status" role="status" aria-live="polite"></p>
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα · Δεν απονέμει πιστοποίηση · Οι εκπαιδευτικές ασκήσεις δεν αντικαθιστούν πρακτική εκπαίδευση ή τοπικά πρωτόκολλα.</footer>
 </main>
+<script src="ai-grading-config.js?v=1"></script><script src="ai-grading-client.js?v=1"></script>
 <script src="seminar-tracks.js?v=1"></script><script src="seminar-prep.js?v=1"></script><script src="updates.js?v=27.1.79" defer></script>
 </body></html>
