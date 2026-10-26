@@ -135,3 +135,38 @@ body:has(.home-main) .home-main {
 /* .main in styles.css uses margin:auto; within a flex-column body that
    vertically centers the whole landing even with justify-content:flex-start. */
 .home-main { margin:0 auto; }
+
+/* Balanced viewport layout v27.1.88: the landing cards fill the unused
+   vertical space, while compact windows can still scroll normally. */
+body:has(.home-main) .home-main {
+  flex:1 1 auto;
+  min-height:0;
+  margin:0 auto;
+  justify-content:flex-start;
+}
+body:has(.home-main) .home-tiles {
+  flex:1 1 auto;
+  min-height:min-content;
+  grid-template-rows:repeat(2,minmax(max-content,1fr));
+  max-height:min(55dvh,490px);
+}
+body:has(.home-main) .home-card:not(.home-card-eoppep) {
+  display:flex;
+  align-items:center;
+}
+body:has(.home-main) .home-card:not(.home-card-eoppep) .home-card-head {width:100%;}
+body:has(.home-main) .home-card-eoppep {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+@media(max-width:620px) {
+  body:has(.home-main) .home-tiles {
+    grid-template-rows:repeat(4,minmax(max-content,1fr));
+    max-height:min(64dvh,620px);
+  }
+}
+@media(max-height:650px) {
+  body:has(.home-main) .home-main {flex:0 0 auto;}
+  body:has(.home-main) .home-tiles {flex:0 0 auto;max-height:none;}
+}
