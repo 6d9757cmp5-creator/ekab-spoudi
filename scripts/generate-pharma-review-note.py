@@ -114,14 +114,7 @@ y = para(
     "outstanding</b> before the material can be treated as an operational medication protocol.",
     y-9, size=8.33, leading=13.65)
 
-y -= 14
-url1 = "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/PHARMACOLOGY-CLINICAL-AUDIT-2026-10-26.md"
-url2 = "https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40410346756"
-text(L, y, "Evidence register and detailed editorial record", "Body", 8.0, ACCENT)
-c.linkURL(url1, (L, y-4, PAGE_W-R, y+12), relative=0)
-y -= 18
-text(L, y, "Repository verification: pharmacology structural review", "Body", 8.0, ACCENT)
-c.linkURL(url2, (L, y-4, PAGE_W-R, y+12), relative=0)
+# References are identified in the academic prose above, without URLs or link annotations.
 
 if y < 91:
     raise RuntimeError(f"The document exceeds its single-page layout (last baseline {y:.1f})")
