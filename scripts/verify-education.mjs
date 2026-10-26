@@ -78,7 +78,10 @@ if(read('sw.js').includes('"./saek-chapter-visuals.js"'))fail('Removed recap mod
 if(!read('updates.js').includes("CURRENT='"+version+"'"))fail('Updates version mismatch');
 if(!read('README.md').includes('Έκδοση v'+version))fail('README version mismatch');
 const index=read('index.html');
-if(!index.includes('app.js?v='+version)||!index.includes('updates.js?v='+version))fail('Home script versions mismatch');
+const theory=read('theory.html');
+if(!index.includes('updates.js?v='+version))fail('Home update script version mismatch');
+if(!theory.includes('app.js?v=')||!theory.includes('updates.js?v='))fail('EOPPEP theory reader scripts missing');
+if(!index.includes("location.replace('theory.html'"))fail('Old EOPPEP reader links do not redirect');
 if(errors.length){
  console.error('❌ Education quality gate: '+errors.length+' errors\n'+errors.join('\n'));
  process.exitCode=1;
