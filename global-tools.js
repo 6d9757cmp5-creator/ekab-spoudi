@@ -3,11 +3,11 @@
 'use strict';
 const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3').replace(/₄/g,'4').replace(/µ/g,'μ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ').trim();
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
-const fetchJson=async url=>{const r=await fetch(url,{cache:'force-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
+const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
 let searchCache=null,glossaryCache=null;
-const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json','medical-terms.json'];
+const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json','medical-terms.json?v=27.1.61'];
 async function loadGlossary(){
- if(!glossaryCache)glossaryCache=fetchJson('medical-terms.json').then(o=>o.items||[]).catch(e=>{glossaryCache=null;throw e});
+ if(!glossaryCache)glossaryCache=fetchJson('medical-terms.json?v=27.1.61').then(o=>o.items||[]).catch(e=>{glossaryCache=null;throw e});
  return glossaryCache;
 }
 function entries(parts){
