@@ -17,7 +17,7 @@
   section.innerHTML=
     '<p class="eyebrow">Ενιαία βιντεοδιδασκαλία ανά μάθημα</p>'+
     '<h2 id="saek-series-title"></h2>'+
-    '<p class="saek-series-intro">Παρακολούθησε συνεχόμενα μέρη του ίδιου μαθήματος. Σύρε την μπάρα αριστερά ή πάτησε «Επόμενο» για να συνεχίσεις. Η αλλαγή σταματά το προηγούμενο βίντεο.</p>'+
+    '<p class="saek-series-intro">Παρακολούθησε τα μέρη με «Προηγούμενο», «Επόμενο» ή σύρσιμο. Πάτησε τον τίτλο ενός κεφαλαίου κάτω από τα βίντεο για να ανοίξεις αμέσως τη γραπτή θεωρία του.</p>'+
     '<div class="saek-series-viewport" data-series-viewport><div class="saek-series-track" data-series-track></div></div>'+
     '<div class="saek-series-swipe-strip" data-series-swipe>← Σύρε εδώ αριστερά για τη συνέχεια, δεξιά για επιστροφή →</div>'+
     '<div class="saek-series-controls">'+
@@ -36,6 +36,15 @@
   const note=section.querySelector('[data-series-note]');
   const frameNodes=[],tabNodes=[];
   let index=0;
+
+  // The chapter pills are navigation to the written course, not video-selection buttons.
+  // Open the native <details> before following its fragment, so every chapter is visible.
+  function openWrittenChapter(chapter){
+    const target=document.getElementById('lesson-'+chapter);
+    if(!target)return;
+    target.open=true;
+    requestAnimationFrame(()=>target.scrollIntoView({behavior:'smooth',block:'start'}));
+  }
   parts.forEach((part,i)=>{
     const slide=document.createElement('article');
     slide.className='saek-series-slide';
@@ -55,17 +64,16 @@
     external.textContent='Άνοιγμα βίντεο σε πλήρη οθόνη ↗';
     const toChapter=document.createElement('a');toChapter.href='#lesson-'+part.chapter;
     toChapter.textContent='Γραπτή θεωρία κεφαλαίου '+part.chapter;
-    toChapter.addEventListener('click',()=>{
-      const target=document.getElementById('lesson-'+part.chapter);
-      if(target)target.open=true;
-    });
+    toChapter.addEventListener('click',()=>openWrittenChapter(part.chapter));
     actions.append(external,toChapter);
     slide.append(kicker,title,frame,actions);
     track.append(slide);frameNodes.push(frame);
-    const tab=document.createElement('button');tab.type='button';
+    const tab=document.createElement('a');
+    tab.href='#lesson-'+part.chapter;
     tab.textContent=(i+1)+'. '+part.shortTitle;
-    tab.setAttribute('aria-label','Μετάβαση στο μέρος '+(i+1)+': '+part.title);
-    tab.addEventListener('click',()=>show(i));
+    tab.setAttribute('aria-label','Άνοιγμα γραπτής θεωρίας, κεφάλαιο '+part.chapter+': '+part.title);
+    tab.title='Μετάβαση στη γραπτή θεωρία κεφαλαίου '+part.chapter;
+    tab.addEventListener('click',()=>openWrittenChapter(part.chapter));
     tabs.append(tab);tabNodes.push(tab);
   });
   function show(i){
@@ -82,7 +90,7 @@
   }
   prev.addEventListener('click',()=>show(index-1));
   next.addEventListener('click',()=>show(index+1));
-  note.textContent='Διαθέσιμα '+parts.length+' από '+course.totalChapters+' κεφάλαια. Τα επόμενα θα εμφανίζονται εδώ μόλις ολοκληρωθεί ο έλεγχός τους. Η αλλαγή μέρους γίνεται χειροκίνητα.';
+  note.textContent='Πάτησε έναν τίτλο κεφαλαίου για τη γραπτή θεωρία του. Διαθέσιμα '+parts.length+' από '+course.totalChapters+' βίντεο· η μετάβαση μεταξύ βίντεο γίνεται με «Προηγούμενο», «Επόμενο» ή σύρσιμο.';
   let x0=null,y0=null;
   section.addEventListener('touchstart',event=>{
     if(event.touches.length!==1)return;
