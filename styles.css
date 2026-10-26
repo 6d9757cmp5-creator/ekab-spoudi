@@ -304,3 +304,36 @@ html[data-theme="dark"] .catalog-reader-caution.review{color:#ffcb73}
  .catalog-reader{padding:13px;margin:12px 0}
  .catalog-reader-head{flex-wrap:wrap}
 }
+
+/* vNEXT EOPPEP reader: remove duplicated homepage header and eliminate clipped question-list viewport. */
+#catalogReader [hidden],#allQuestionsPanel [hidden]{display:none!important}
+.catalog-reader-placeholder{min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 15px;gap:10px}
+.catalog-reader-placeholder>span{font-size:2.2rem}
+.catalog-reader-placeholder h3{margin:0;font-size:1.15rem}
+.catalog-reader-placeholder p{max-width:43ch;margin:0;color:var(--muted);font-size:.9rem;line-height:1.65}
+.catalog-ready-sos{margin:18px 0;background:var(--light);padding:15px;border:1px solid var(--line);border-radius:11px}
+.catalog-ready-sos h4{margin:0 0 9px!important}
+.catalog-ready-sos ul{padding-left:19px;margin:8px 0;line-height:1.62}
+.catalog-ready-sos li{padding-bottom:8px;font-size:.9rem}
+.catalog-ready-sos .muted{margin:8px 0 0}
+#catalogGroupFilter{width:100%;margin:6px 0 12px}
+#catalogResultInfo{padding:8px 2px;line-height:1.5}
+.catalog-more{margin:5px 0 16px;width:100%;min-height:45px}
+#allQuestionsPanel>.body{max-height:none!important;overflow:visible!important;padding-bottom:18px}
+#allQuestionsPanel{overflow:visible}
+@media(min-width:960px){
+ #homeView.catalog-open-desktop{grid-template-columns:minmax(0,1.2fr) minmax(300px,.95fr);align-items:start}
+ #homeView.catalog-open-desktop>#eoppepHomeSummary{display:none!important}
+ #homeView.catalog-open-desktop>#catalogReader{grid-column:1;grid-row:1;display:block!important;margin:0;min-width:0;background:#fff}
+ #homeView.catalog-open-desktop>.all-questions-panel.catalog-side-panel{grid-column:2;grid-row:1;position:static!important;max-height:none!important;height:auto!important;min-height:0;overflow:visible!important;display:block!important;margin:0}
+ #homeView.catalog-open-desktop>.all-questions-panel.catalog-side-panel>.body{max-height:none!important;overflow:visible!important;display:block!important}
+ #homeView.catalog-open-desktop>#topicsFold{grid-column:1/-1;grid-row:auto}
+ #homeView.catalog-open-desktop>.storage-panel{grid-column:1/-1}
+ #homeView.catalog-open-desktop>.intro-note{grid-column:1/-1}
+}
+@media(max-width:959px){
+ #catalogReader{margin-top:15px}
+ #homeView #eoppepHomeSummary{display:block}
+}
+html[data-theme="dark"] #homeView.catalog-open-desktop>#catalogReader{background:#172f40}
+html[data-theme="dark"] .catalog-ready-sos{background:#233f50}

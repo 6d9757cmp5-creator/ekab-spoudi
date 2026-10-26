@@ -1,0 +1,51 @@
+
+/* Common EKAB header controls: responsive SAEK suggestions and small medical dictionary. */
+.saek-global-search{position:relative;z-index:60;min-width:0;width:100%}
+.saek-search-label{display:block!important;font-size:.68rem;line-height:1.15;color:#cbe5f1;margin:0 0 3px;text-align:left;font-weight:700}
+.top .nav .saek-search-field{border:1px solid #7bc5e2;background:#f8fdff;color:#123a50;border-radius:9px;width:100%;padding:8px 11px;min-height:37px;font-size:.82rem;outline-offset:3px}
+.top .nav .saek-search-field::placeholder{color:#5a768a}
+.saek-global-results{position:absolute;top:calc(100% + 6px);left:0;width:max(100%,340px);max-width:min(500px,95vw);max-height:min(60dvh,500px);overflow-y:auto;background:#fff;color:#183548;border:1px solid #cbdce7;border-radius:12px;box-shadow:0 15px 36px #001f3566;z-index:500;padding:6px}
+.saek-global-results[hidden]{display:none!important}
+.saek-result-item{display:grid;gap:3px!important;text-align:left!important;color:#173e55!important;border:0!important;background:transparent!important;text-decoration:none!important;border-radius:8px;padding:9px 10px!important;white-space:normal!important}
+.saek-result-item:hover,.saek-result-item:focus-visible{background:#e9f4fa!important;outline:2px solid #378bb4;outline-offset:-2px}
+.saek-result-item strong{font-size:.86rem;font-weight:750}
+.saek-result-item small{font-size:.73rem;color:#4e6d83}
+.saek-result-preview{font-size:.74rem;color:#617989;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.saek-result-empty,.saek-result-count{font-size:.76rem;color:#496477;margin:7px;padding:4px 6px;line-height:1.4}
+.top .utility .glossary-open{white-space:nowrap;font-size:.72rem;letter-spacing:0;padding:7px 10px}
+.medical-glossary-dialog{padding:0;width:min(94vw,650px);max-height:88dvh;border:1px solid #a8c3d4;border-radius:18px;box-shadow:0 20px 80px #091e3077;background:#fff;color:#193849}
+.medical-glossary-dialog::backdrop{background:#061927b8}
+.medical-glossary-inner{padding:20px;overflow-y:auto;max-height:85dvh}
+.medical-glossary-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.medical-eyebrow{color:#197199;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;font-weight:800;margin:0 0 3px}
+.medical-glossary-head h2{margin:0;font-size:1.45rem}
+.medical-glossary-close{border:1px solid #cbdce7;border-radius:9px;background:#f1f7fb;color:#193849;padding:8px 12px}
+.medical-glossary-help{color:#516a79;font-size:.84rem;line-height:1.5}
+.medical-glossary-search{width:100%;min-height:44px;padding:10px;border:1px solid #a8bdcb;border-radius:9px}
+.medical-glossary-results{display:grid;gap:9px;margin-top:15px}
+.medical-glossary-entry{background:#f4f8fa;border:1px solid #dce9ef;padding:13px;border-radius:10px}
+.medical-glossary-entry h3{font-size:1rem;margin:0 0 6px}
+.medical-glossary-entry p{font-size:.85rem;line-height:1.5;margin:0 0 7px}
+.medical-glossary-entry a{font-size:.77rem}
+.medical-no-results{font-size:.85rem}
+@media(min-width:960px){
+ .top>.container{flex-wrap:wrap;gap:8px 15px}
+ .top>.container>.header-row{flex:0 1 300px}
+ .top .nav{flex:1 1 590px;display:flex;flex-wrap:wrap;gap:5px 9px;justify-content:flex-end}
+ .top .nav a{font-size:.78rem;padding:13px 5px}
+ .top .nav .saek-global-search{flex:1 1 205px;max-width:330px}
+}
+@media(max-width:959px){
+ .top .nav .saek-global-search{grid-column:1/-1;margin:6px 0 9px}
+ .saek-global-results{width:100%;max-width:100%}
+ .top .utility .glossary-open{font-size:.7rem}
+}
+@media(max-width:390px){
+ .top .nav .saek-search-field{font-size:.79rem}
+ .medical-glossary-inner{padding:14px}
+}
+html[data-theme="dark"] .medical-glossary-dialog{background:#142b3c;color:#e3eff5;border-color:#48667c}
+html[data-theme="dark"] .medical-glossary-entry{background:#1e3b4b;border-color:#385a6c}
+html[data-theme="dark"] .medical-glossary-entry p{color:#c9e2f0}
+html[data-theme="dark"] .medical-glossary-help{color:#c7dce8}
+html[data-theme="dark"] .medical-glossary-close{background:#2d4c5f;color:#fff}

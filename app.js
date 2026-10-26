@@ -5,6 +5,24 @@ let bank=[], state={}, pool=[], index=-1, shownAnswer=false;
 const scheduler=window.EkabStudyScheduler;
 if(!scheduler)throw new Error('Δεν φορτώθηκε ο προγραμματισμός επαναλήψεων. Ενημέρωσε την εφαρμογή.');
 let catalogSelectedId=null;
+let eoppepSos=null,eoppepSosPromise=null;
+function renderReadySos(questionId){
+ const host=$('#catalogReaderReadySos');if(!host)return;
+ host.replaceChildren();
+ if(!eoppepSos){host.textContent='Φόρτωση έτοιμων SOS…';return}
+ const entry=eoppepSos.get(questionId);
+ if(!entry||!entry.points?.length){host.textContent='Δεν υπάρχουν ακόμη έτοιμα SOS για το συγκεκριμένο θέμα.';return}
+ const list=document.createElement('ul');
+ for(const point of entry.points){const li=document.createElement('li');li.textContent=point;list.append(li)}
+ host.append(list);
+}
+function loadReadySos(questionId){
+ renderReadySos(questionId);
+ if(eoppepSos)return;
+ if(!eoppepSosPromise)eoppepSosPromise=fetch('eoppep-sos.json').then(r=>{if(!r.ok)throw Error('SOS HTTP '+r.status);return r.json()}).then(json=>{if(json.count!==314||json.items?.length!==314)throw Error('SOS inventory mismatch');eoppepSos=new Map(json.items.map(x=>[x.id,x]));return eoppepSos}).catch(err=>{eoppepSosPromise=null;console.warn('SOS',err);const host=$('#catalogReaderReadySos');if(host)host.textContent='Τα έτοιμα SOS δεν φορτώθηκαν. Δοκίμασε ενημέρωση της εφαρμογής.'});
+ eoppepSosPromise.then(()=>{if(catalogSelectedId===questionId)renderReadySos(questionId)});
+}
+
 function saved(){try{return JSON.parse(localStorage.getItem(STORAGE))||{}}catch{return{}}}
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));window.dispatchEvent(new Event('ekab:progress-changed'))}catch(e){console.warn('Αποτυχία αποθήκευσης',e)}}
 function st(q){return state[q.id]||(state[q.id]={seen:0,weak:0,selfCorrect:0,selfAttempts:0,streak:0,draft:''})}
@@ -141,7 +159,9 @@ function openScheduledQuestion(questionId){
 }
 function advance(n){index+=n;if(index>=pool.length){pool=makePool();index=0}if(index<0)index=0;present()}
 // The 314-question catalog is a READER, not the exam/self-assessment flow.
-let allQuestionsRendered=false;
+// Read-only 314-question catalog. Page results so the bottom is never clipped.
+let allQuestionsRendered=false,catalogVisibleLimit=24;
+function normalizeCatalogText(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ')}
 function renderAllQuestions(){
  const host=$('#allQuestionsList');
  if(!host||allQuestionsRendered)return;
@@ -152,37 +172,46 @@ function renderAllQuestions(){
   heading.textContent=group==='A'?'Ομάδα Α · Γενικές (105)':'Ομάδα Β · Ειδικές (209)';
   host.append(heading);
   const list=document.createElement('ol');list.className='all-questions-group';
-  for(const q of bank.filter(q=>q.group===group).sort((a,b)=>Number(a.number)-Number(b.number))){
+  for(const q of bank.filter(q=>q.group===group).sort((x,y)=>Number(x.number)-Number(y.number))){
    const li=document.createElement('li'),button=document.createElement('button');
-   button.type='button';button.className='all-question-item';button.dataset.questionId=q.id;
+   button.type='button';button.className='all-question-item';
+   button.dataset.questionId=q.id;button.dataset.group=q.group;
    button.textContent=String(q.number)+'. '+q.question;
    button.addEventListener('click',()=>openCatalogQuestion(q.id));
    li.append(button);list.append(li);
   }
   host.append(list);
  }
- allQuestionsRendered=true;
- filterCatalog();
+ allQuestionsRendered=true;filterCatalog();
 }
 function filterCatalog(){
- const term=($('#catalogSearch')?.value||'').trim().toLocaleLowerCase('el');
+ const q=normalizeCatalogText($('#catalogSearch')?.value||'').trim();
+ const group=$('#catalogGroupFilter')?.value||'all';
  const root=$('#allQuestionsList');if(!root)return;
- for(const button of root.querySelectorAll('.all-question-item')){
-  const visible=!term||button.textContent.toLocaleLowerCase('el').includes(term);
-  button.parentElement.hidden=!visible;
+ const all=[...root.querySelectorAll('.all-question-item')];
+ let total=0,visible=0;
+ for(const btn of all){
+  const matches=(group==='all'||btn.dataset.group===group)&&(!q||q.split(/\s+/).every(w=>normalizeCatalogText(btn.textContent).includes(w)));
+  if(matches){total++;const show=total<=catalogVisibleLimit;btn.parentElement.hidden=!show;if(show)visible++}
+  else btn.parentElement.hidden=true;
  }
  for(const heading of root.querySelectorAll('.all-questions-heading')){
   const list=heading.nextElementSibling;
   heading.hidden=!Array.from(list?.children||[]).some(li=>!li.hidden);
  }
+ const count=$('#catalogResultInfo');if(count)count.textContent=total?`Εμφανίζονται ${visible} από ${total} αποτελέσματα · κύλισε τη σελίδα για τα υπόλοιπα.`:'Δεν βρέθηκε αντίστοιχη ερώτηση.';
+ const more=$('#catalogMore');if(more){more.hidden=total<=catalogVisibleLimit;more.textContent=`Εμφάνιση ${Math.min(24,total-catalogVisibleLimit)} ακόμη ερωτήσεων`;}
 }
 function renderCatalogReader(q){
  const reader=$('#catalogReader');if(!reader)return;
  reader.classList.remove('hidden');
+ $('#catalogReaderPlaceholder').hidden=true;
+ $('#catalogReaderContent').hidden=false;
  $('#catalogReaderNumber').textContent=`Ομάδα ${q.group} · Ερώτηση ${q.number} / ${q.group==='A'?105:209}`;
  $('#catalogReaderQuestion').textContent=q.question;
  $('#catalogReaderTopic').textContent=q.studyTopic||'ΕΟΠΠΕΠ · Θεωρία';
  $('#catalogReaderAnswer').textContent=q.answer||'Δεν υπάρχει καταχωρισμένη απάντηση.';
+ loadReadySos(q.id);
  const caution=$('#catalogReaderCaution');
  caution.textContent=q.answerStatus==='reviewed_educational'?'Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.':'ΠΡΟΣΟΧΗ: Η ενδεικτική απάντηση παραμένει σε εκπαιδευτικό/επιστημονικό έλεγχο.';
  caution.classList.toggle('review',q.answerStatus!=='reviewed_educational');
@@ -211,7 +240,9 @@ function openCatalogQuestion(questionId){
  reader.scrollIntoView({behavior:'smooth',block:'start'});
 }
 $('#catalogReaderClose').addEventListener('click',()=>{
- $('#catalogReader').classList.add('hidden');
+ $('#catalogReaderContent').hidden=true;
+ $('#catalogReaderPlaceholder').hidden=false;
+ if(!$('#homeView').classList.contains('catalog-open-desktop'))$('#catalogReader').classList.add('hidden');
  if(catalogSelectedId){const btn=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item')).find(x=>x.dataset.questionId===catalogSelectedId);if(btn){btn.classList.remove('selected');btn.setAttribute('aria-pressed','false');btn.focus()}}
  catalogSelectedId=null;
 });
@@ -226,34 +257,39 @@ for(const [field,key] of [['#catalogReaderSosNotes','sosNotes'],['#catalogReader
   st(q)[key]=$(field).value.slice(0,15000);save();
  });
 }
-$('#catalogSearch').addEventListener('input',filterCatalog);
+$('#catalogSearch').addEventListener('input',()=>{catalogVisibleLimit=24;filterCatalog()});
+$('#catalogGroupFilter').addEventListener('change',()=>{catalogVisibleLimit=24;filterCatalog()});
+$('#catalogMore').addEventListener('click',()=>{catalogVisibleLimit+=24;filterCatalog()});
 const allQuestionsPanel=$('#allQuestionsPanel'),allQuestionsToggle=$('#allQuestionsToggle');
 if(allQuestionsPanel&&allQuestionsToggle){
- const home=$('#homeView');
- const originalParent=allQuestionsPanel.parentNode;
- const originalAnchor=document.createComment('restore-catalog-here');
- allQuestionsPanel.after(originalAnchor);
+ const home=$('#homeView'),reader=$('#catalogReader');
+ const originalParent=allQuestionsPanel.parentNode,originalReaderParent=reader.parentNode;
+ const listAnchor=document.createComment('catalog-original-position'),readerAnchor=document.createComment('reader-original-position');
+ allQuestionsPanel.after(listAnchor);reader.after(readerAnchor);
  const desktop=window.matchMedia('(min-width:960px)');
  function syncCatalogLayout(){
-  const asSide=desktop.matches&&allQuestionsPanel.open;
-  if(asSide){
-   if(allQuestionsPanel.parentNode!==home)home.insertBefore(allQuestionsPanel,home.firstElementChild.nextSibling);
-  }else if(allQuestionsPanel.parentNode!==originalParent){
-   originalParent.insertBefore(allQuestionsPanel,originalAnchor);
+  const aside=desktop.matches&&allQuestionsPanel.open;
+  if(aside){
+   if(reader.parentNode!==home)home.insertBefore(reader,home.firstChild);
+   if(allQuestionsPanel.parentNode!==home)home.insertBefore(allQuestionsPanel,home.querySelector('#topicsFold'));
+   reader.classList.remove('hidden');
+   if(!catalogSelectedId){$('#catalogReaderContent').hidden=true;$('#catalogReaderPlaceholder').hidden=false}
+  }else{
+   if(reader.parentNode!==originalReaderParent)originalReaderParent.insertBefore(reader,readerAnchor);
+   if(allQuestionsPanel.parentNode!==originalParent)originalParent.insertBefore(allQuestionsPanel,listAnchor);
+   if(!catalogSelectedId)reader.classList.add('hidden');
   }
-  allQuestionsPanel.classList.toggle('catalog-side-panel',asSide);
-  home.classList.toggle('catalog-open-desktop',asSide);
+  allQuestionsPanel.classList.toggle('catalog-side-panel',aside);
+  home.classList.toggle('catalog-open-desktop',aside);
+  allQuestionsToggle.setAttribute('aria-expanded',String(allQuestionsPanel.open));
  }
  desktop.addEventListener('change',syncCatalogLayout);
- allQuestionsPanel.addEventListener('toggle',()=>{
-  allQuestionsToggle.setAttribute('aria-expanded',String(allQuestionsPanel.open));
-  if(allQuestionsPanel.open)renderAllQuestions();
-  syncCatalogLayout();
- });
+ allQuestionsPanel.addEventListener('toggle',()=>{if(allQuestionsPanel.open)renderAllQuestions();syncCatalogLayout()});
  allQuestionsToggle.addEventListener('click',()=>{
   allQuestionsPanel.open=!allQuestionsPanel.open;
-  syncCatalogLayout();allQuestionsToggle.setAttribute('aria-expanded',String(allQuestionsPanel.open));
-  if(allQuestionsPanel.open){renderAllQuestions();if(!desktop.matches)allQuestionsPanel.scrollIntoView({behavior:'smooth',block:'start'})}
+  if(allQuestionsPanel.open){renderAllQuestions();catalogVisibleLimit=24;filterCatalog()}
+  syncCatalogLayout();
+  if(allQuestionsPanel.open&&!desktop.matches)allQuestionsPanel.scrollIntoView({behavior:'smooth',block:'start'});
  });
  syncCatalogLayout();
 }

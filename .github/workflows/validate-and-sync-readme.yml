@@ -23,6 +23,10 @@ jobs:
         run: node scripts/verify-study-scheduler.mjs
       - name: Validate browser JavaScript syntax
         run: node --check app.js && node --check study-scheduler.js && node --check progress.js
+      - name: Verify 247-chapter search, 314 SOS and separated reader
+        run: node scripts/verify-reader-search.mjs
+      - name: Check shared search script syntax
+        run: node --check global-tools.js
       - name: Validate app files and normalize README
         shell: bash
         run: |
