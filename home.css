@@ -54,3 +54,67 @@ html[data-theme="dark"] .home-suboptions a:hover{background:#30586f}
 .home-card-eoppep .home-suboptions{padding:0 18px 18px}
 html[data-theme="dark"] .home-card-saek{border-color:#4a7590}
 @media(max-width:620px){.home-card-eoppep .home-card-summary{min-height:83px;padding-bottom:9px}.home-card-eoppep .home-suboptions{padding:0 15px 15px}}
+
+
+/* Landing viewport fit v27.1.83: never truncate or disable scrolling. */
+body:has(.home-main){min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+body:has(.home-main) .top{flex:none}
+body:has(.home-main) .home-main{flex:1 0 auto;width:100%;max-width:1120px;display:flex;flex-direction:column;justify-content:center;padding:12px clamp(14px,3vw,26px) max(8px,env(safe-area-inset-bottom))}
+body:has(.home-main) .home-intro{margin:0 0 12px}
+body:has(.home-main) .home-kicker{margin-bottom:4px}
+body:has(.home-main) .home-intro h2{margin-bottom:5px}
+body:has(.home-main) .home-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+body:has(.home-main) .home-tiles>.home-card-saek,body:has(.home-main) .home-tiles>.home-card-eoppep{grid-column:auto}
+body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:82px;padding:12px 15px;gap:12px}
+body:has(.home-main) .home-card-icon{width:45px;height:45px;min-width:45px;border-radius:13px}
+body:has(.home-main) .home-card-icon svg{width:24px;height:24px}
+body:has(.home-main) .home-card-title{font-size:1.04rem;margin-bottom:3px}
+body:has(.home-main) .home-card-subtitle{font-size:.79rem;line-height:1.32}
+body:has(.home-main) .home-card-eoppep .home-card-summary{min-height:75px;padding-bottom:3px}
+body:has(.home-main) .home-card-eoppep .home-suboptions{padding:0 14px 11px;gap:8px}
+body:has(.home-main) .home-suboptions a{min-height:42px;padding:8px 10px}
+body:has(.home-main) .home-card-saek{display:flex;align-items:center}
+body:has(.home-main) .home-card-saek .home-card-head{width:100%}
+body:has(.home-main) .home-app-note{font-size:.7rem;line-height:1.35;margin:11px auto 0;max-width:80ch}
+body:has(.home-main) .home-main footer{margin-top:5px;padding:3px 0 5px;font-size:.67rem}
+@media(max-width:620px){
+ body:has(.home-main) .top{padding-top:8px}
+ body:has(.home-main) .top>.container{padding-inline:14px}
+ body:has(.home-main) .header-row{gap:5px}
+ body:has(.home-main) .header-row .brand{gap:8px}
+ body:has(.home-main) .header-row .logo{width:33px;height:33px;min-width:33px}
+ body:has(.home-main) .header-row .brand h1{font-size:1.05rem}
+ body:has(.home-main) .header-row .brand p{font-size:.65rem;line-height:1.24}
+ body:has(.home-main) .top .header-row .utility{margin-top:5px;gap:6px}
+ body:has(.home-main) .utility-button,body:has(.home-main) .top .utility .glossary-open{width:36px;height:36px;min-width:36px;min-height:36px}
+ body:has(.home-main) .account-button{min-height:36px;padding:6px 12px;font-size:.8rem}
+ body:has(.home-main) .home-main{padding:10px 14px max(7px,env(safe-area-inset-bottom))}
+ body:has(.home-main) .home-intro{margin-bottom:9px}
+ body:has(.home-main) .home-kicker{font-size:.64rem;letter-spacing:.075em;margin-bottom:3px}
+ body:has(.home-main) .home-intro h2{font-size:clamp(1.26rem,5.3vw,1.6rem);line-height:1.16;margin-bottom:3px}
+ body:has(.home-main) .home-intro p:last-child{font-size:.78rem;line-height:1.3}
+ body:has(.home-main) .home-tiles{grid-template-columns:1fr;gap:8px}
+ body:has(.home-main) .home-card{border-radius:15px}
+ body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:clamp(67px,9.5dvh,82px);padding:8px 12px;gap:11px}
+ body:has(.home-main) .home-card-icon{width:40px;height:40px;min-width:40px;border-radius:12px}
+ body:has(.home-main) .home-card-icon svg{width:22px;height:22px}
+ body:has(.home-main) .home-card-title{font-size:.96rem;line-height:1.24;margin-bottom:2px}
+ body:has(.home-main) .home-card-subtitle{font-size:.73rem;line-height:1.28}
+ body:has(.home-main) .home-card-chevron{font-size:1.25rem}
+ body:has(.home-main) .home-card-eoppep .home-card-summary{min-height:58px;padding-bottom:2px}
+ body:has(.home-main) .home-card-eoppep .home-suboptions{padding:0 11px 9px;gap:7px}
+ body:has(.home-main) .home-suboptions a{min-height:41px;padding:7px 9px;font-size:.79rem}
+ body:has(.home-main) .home-app-note{margin:9px auto 0;font-size:.66rem;line-height:1.32}
+ body:has(.home-main) .home-main footer{margin-top:4px;padding:2px 0 5px;font-size:.65rem}
+}
+@media(max-width:360px){
+ body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{gap:8px;padding-inline:10px}
+ body:has(.home-main) .home-card-title{font-size:.91rem}
+ body:has(.home-main) .home-suboptions{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-height:620px) and (max-width:620px){
+ body:has(.home-main) .home-intro{margin-bottom:7px}
+ body:has(.home-main) .home-tiles{gap:6px}
+ body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:62px;padding-block:6px}
+ body:has(.home-main) .home-app-note{margin-top:7px}
+}
