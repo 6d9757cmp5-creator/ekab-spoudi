@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 51/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη, ανεξάρτητη επιστημονική έγκριση ή δημοσίευση.",
+  "note": "Επιλεγμένες εικόνες 53/247· επιλογή δεν σημαίνει πλήρη επάρκεια, ανεξάρτητη επιστημονική έγκριση ή δημόσια διαθεσιμότητα.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -665,6 +665,52 @@
       },
       "subjectCompleteness": "partial",
       "sha256": null
+    },
+    "public_health_cycle": {
+      "filename": "public-health-cycle-el.svg",
+      "localPath": "assets/education/public-health-cycle-el.svg",
+      "title": "Κύκλος δημόσιας υγείας: επιτήρηση, εκτίμηση, παρέμβαση, αξιολόγηση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο εκπαιδευτικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.who.int/health-topics/social-determinants-of-health",
+      "additionalSources": [
+        "https://www.cdc.gov/public-health-gateway/php/about/index.html"
+      ],
+      "caption": "Σχηματική ροή από συλλογή πληθυσμιακών δεδομένων στην αξιολόγηση οργανωμένης πρόληψης.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "pending live verification",
+      "sourcePageCheckedFor": [],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG source labels and arrows inspected in text; raster, browser and offline E2E pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": null
+    },
+    "social_determinants_pathways": {
+      "filename": "social-determinants-pathways-el.svg",
+      "localPath": "assets/education/social-determinants-pathways-el.svg",
+      "title": "Κοινωνικοί προσδιοριστές υγείας: στέγαση, μετακίνηση, εργασία",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο εκπαιδευτικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.who.int/health-topics/social-determinants-of-health",
+      "additionalSources": [
+        "https://www.cdc.gov/public-health-gateway/php/about/index.html"
+      ],
+      "caption": "Τρεις συγκεκριμένες μηχανιστικές διαδρομές κοινωνικών παραγόντων προς έκθεση, πρόσβαση και πιθανά αποτελέσματα υγείας. Μη ντετερμινιστική απεικόνιση.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "pending live verification",
+      "sourcePageCheckedFor": [],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG source labels and arrows inspected in text; raster, browser and offline E2E pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": null
     }
   },
   "placements": {
@@ -833,6 +879,12 @@
     ],
     "04-03": [
       "prevention_levels"
+    ],
+    "04-01": [
+      "public_health_cycle"
+    ],
+    "04-04": [
+      "social_determinants_pathways"
     ]
   },
   "courses": [
@@ -1112,8 +1164,10 @@
       "chapters": [
         {
           "anchor": "#lesson-1",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "public_health_cycle"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-2",
@@ -1131,8 +1185,10 @@
         },
         {
           "anchor": "#lesson-4",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "social_determinants_pathways"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-5",
