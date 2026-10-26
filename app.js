@@ -136,6 +136,7 @@ function showExam(){$('#homeView').classList.add('hidden');$('#examView').classL
 function present(){
  if(!pool.length){$('#study').classList.add('hidden');$('#setup').classList.remove('hidden');return}
  const q=pool[index],s=st(q);s.seen=(s.seen||0)+1;save();updateMetrics();shownAnswer=false;
+ $('#eoppepAIResult').hidden=true;$('#eoppepGradeAI').disabled=false;$('#eoppepGradeAI').textContent='Αξιολόγηση με AI';
  $('#qmeta').textContent=`Ομάδα ${q.group} · Θέμα ${q.number}`;
  $('#qOriginal').href=qSourceLink(q);
  $('#qcount').textContent=`${index+1} / ${pool.length}`;
@@ -310,6 +311,37 @@ for(const el of ['#group','#topic','#order','#statusFilter','#search'])$(el).add
 $('#draft').oninput=e=>{if(pool[index]){st(pool[index]).draft=e.target.value;save()}};
 $('#qstatus').onclick=()=>{if(pool[index])sourceModal(pool[index])};
 $('#closeDialog').onclick=()=>$('#sourceDialog').close();$('#sourceDialog').onclick=e=>{if(e.target===$('#sourceDialog'))$('#sourceDialog').close()};
+$('#eoppepGradeAI').onclick=async ()=>{
+ const q=pool[index],ai=window.EkabAIGrade,button=$('#eoppepGradeAI'),output=$('#eoppepAIResult');
+ if(!q||!ai){output.hidden=false;output.textContent='Η αξιολόγηση AI δεν φορτώθηκε.';return}
+ if(q.answerStatus!=='reviewed_educational'){output.hidden=false;output.textContent='Αυτή η απάντηση βρίσκεται σε ειδικό έλεγχο και δεν βαθμολογείται αυτόματα.';return}
+ const answer=$('#draft').value.trim();
+ if(answer.length<3){output.hidden=false;output.textContent='Γράψε πρώτα τη δική σου απάντηση.';return}
+ if(shownAnswer){output.hidden=false;output.textContent='Έχεις ήδη εμφανίσει την ενδεικτική λύση. Προχώρησε σε άλλη ερώτηση και δοκίμασε χωρίς βοήθεια.';return}
+ const qid=q.id,started=index;
+ button.disabled=true;button.textContent='Γίνεται αξιολόγηση…';
+ output.hidden=false;output.textContent='Έλεγχος νοήματος της απάντησης…';
+ try{
+  const result=await ai.evaluate({section:'eoppep',questionId:qid,answer});
+  if(pool[index]?.id!==qid||index!==started)return;
+  const canRecord=!shownAnswer;
+  if(canRecord){
+   showAnswer();
+   if(result.verdict==='correct')assess('correct');
+   else if(result.verdict==='partial')assess('assisted');
+   else if(result.verdict==='incorrect')assess('incorrect');
+   // uncertain remains without counted recall; manual reassessment remains possible.
+  }
+  ai.render(output,result);
+  if(!canRecord){const notice=document.createElement('p');notice.textContent='Δεν καταχωρίστηκε αυτόματη πρόοδος, επειδή είχε εμφανιστεί η λύση.';output.append(notice);}
+ }catch(err){
+  if(pool[index]?.id!==qid||index!==started)return;
+  output.hidden=false;output.className='ai-grading-result ai-grading-unavailable';
+  output.textContent=err.message||'Η αξιολόγηση δεν ολοκληρώθηκε.';
+ }finally{
+  if(pool[index]?.id===qid&&index===started){button.disabled=false;button.textContent='Αξιολόγηση με AI';}
+ }
+};
 $('#showAnswer').onclick=showAnswer;$('#markReview').onclick=()=>{const q=pool[index];if(!q)return;const s=st(q);scheduler.markReview(s);save();updateMetrics();$('#qstatus').textContent='Σημειώθηκε για επανάληψη · πηγή ⓘ'};
 $('#selfCorrect').onclick=()=>assess('correct');$('#selfAssisted').onclick=()=>assess('assisted');$('#selfIncorrect').onclick=()=>assess('incorrect');
 $('#next').onclick=()=>advance(1);$('#prev').onclick=()=>advance(-1);
