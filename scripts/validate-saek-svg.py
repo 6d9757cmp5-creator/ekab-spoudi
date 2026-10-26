@@ -54,7 +54,7 @@ for key, asset in registry.get("assets", {}).items():
                 errors.append(f"{key}: event handler {attr}")
             if attr.endswith("href") and (value.startswith(("http:", "https:", "//", "data:"))):
                 errors.append(f"{key}: external or inline href")
-            for ref in re.findall(r"url\\(#([^)]*)\\)", value):
+            for ref in re.findall(r"url\(#([^)]*)\)", value):
                 if ref not in ids:
                     errors.append(f"{key}: missing referenced id {ref}")
 
