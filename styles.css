@@ -227,3 +227,20 @@ html[data-theme="dark"] .account-dialog{background:var(--bg)}html[data-theme="da
 .ekab-guide-next{background:#176e99;border:1px solid #176e99;color:white}
 .ekab-guide-card button:focus-visible{outline:3px solid #3a98c9;outline-offset:3px}
 @media(max-width:370px){.ekab-guide-card{padding:15px}.ekab-guide-description{min-height:85px}.ekab-guide-title{font-size:1.12rem!important}}
+
+/* Optional full EOPPEP catalog, accessible from the 314-question counter. */
+.stat-clickable{padding:0!important;overflow:hidden}
+.stat-question-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:100%;height:100%;min-height:75px;padding:12px 8px;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;border-radius:inherit}
+.stat-question-link b,.stat-question-link span{color:inherit}
+.stat-question-link small{font-size:.69rem;font-weight:650;color:var(--blue);line-height:1.35;text-align:center}
+.stat-question-link:hover{background:rgba(30,117,158,.08)}
+.stat-question-link:focus-visible{outline:3px solid #2387bb;outline-offset:-3px}
+.all-questions-panel{margin:13px 0 16px}
+.all-questions-panel>.body{max-height:min(69vh,700px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.all-questions-list{padding-bottom:6px}
+.all-questions-heading{font-size:.97rem;line-height:1.4;margin:16px 0 10px}
+.all-questions-group{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.all-questions-group li{min-width:0}
+.all-question-item{width:100%;min-height:44px;padding:11px 12px;text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;font:inherit;font-size:.9rem;line-height:1.5;cursor:pointer;white-space:normal;overflow-wrap:anywhere}
+.all-question-item:hover{border-color:var(--blue);background:var(--light)}
+.all-question-item:focus-visible{outline:3px solid #2685b8;outline-offset:2px}
