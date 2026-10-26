@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Σημεία εκτίμησης κυκλοφορίας και αιμάτωσης</title><desc id="desc">Απλουστευμένη ανατομική απεικόνιση καρδιάς, κύριων αγγείων, περιφερικού σφυγμού και εξωτερικής αιμορραγίας. Αναγνωρίζονται διαφορετικές κατηγορίες ευρημάτων· το σχήμα δεν δείχνει θεραπευτικές πράξεις, τη διάγνωση καταπληξίας ούτε φυσιολογικές τιμές.</desc>
+<rect width="1200" height="700" fill="#f4f8fc"/>
+<style>text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#173a52}.h{font-size:34px;font-weight:700}.sub{font-size:20px}.lbl{font-size:24px;font-weight:700}.small{font-size:18px}.panel{fill:#fff;stroke:#b8cfdf;stroke-width:3}.ink{stroke:#4b819c;stroke-width:5;fill:none;stroke-linejoin:round;stroke-linecap:round}.red{stroke:#c65d68;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<text x="600" y="51" text-anchor="middle" class="h">Εκτίμηση κυκλοφορίας: τι παρατηρούμε;</text>
+<text x="600" y="87" text-anchor="middle" class="sub">Η πίεση μόνη της δεν αρκεί για συμπέρασμα σχετικά με την αιμάτωση</text>
+<rect x="28" y="125" width="752" height="505" rx="22" class="panel"/>
+<!-- torso outline -->
+<circle cx="376" cy="220" r="58" fill="#e4eef5" stroke="#5c8aa4" stroke-width="5"/>
+<path d="M344 276L287 289L252 382L282 409L312 352L320 533H430L440 352L470 409L500 382L464 289L408 276Z" fill="#e4eef5" stroke="#5c8aa4" stroke-width="5" stroke-linejoin="round"/>
+<path d="M377 275V385" class="ink" stroke-width="7"/>
+<!-- heart -->
+<path d="M381 342Q356 307 330 333Q317 356 346 383L377 408L405 380Q438 345 417 327Q396 309 381 342Z" fill="#d77d87" stroke="#b34f5d" stroke-width="5"/>
+<!-- vessels -->
+<path d="M379 400V485M380 434L318 457M380 434L437 462" class="red"/>
+<path d="M385 407L405 425L421 449" class="ink"/>
+<!-- peripheral pulse -->
+<circle cx="475" cy="392" r="12" fill="#d87b82" stroke="#b24e5d" stroke-width="3"/>
+<path d="M475 392L615 343H731" class="red"/>
+<rect x="516" y="283" width="238" height="48" rx="11" fill="#fcebee" stroke="#d59a9f" stroke-width="2"/>
+<text x="634" y="314" text-anchor="middle" class="lbl">Σφυγμός</text>
+<!-- bleeding conceptual no intervention -->
+<path d="M270 399Q258 423 270 434Q286 445 291 426Q291 414 270 399Z" fill="#c65d68"/>
+<path d="M265 433L151 475H72" class="red"/>
+<rect x="50" y="489" width="267" height="55" rx="12" fill="#fcebee" stroke="#d59a9f" stroke-width="2"/>
+<text x="182" y="523" text-anchor="middle" class="lbl">Ορατή αιμορραγία</text>
+<!-- right checklist -->
+<rect x="808" y="125" width="364" height="505" rx="22" class="panel"/>
+<text x="990" y="170" text-anchor="middle" class="lbl">Κλινικά ευρήματα</text>
+<circle cx="848" cy="218" r="15" fill="#b95a64"/><text x="875" y="224" class="small">Σφυγμός και ρυθμός</text>
+<circle cx="848" cy="281" r="15" fill="#b95a64"/><text x="875" y="287" class="small">Χρώμα / θερμοκρασία</text>
+<circle cx="848" cy="344" r="15" fill="#b95a64"/><text x="875" y="350" class="small">Εμφανής αιμορραγία</text>
+<circle cx="848" cy="407" r="15" fill="#b95a64"/><text x="875" y="413" class="small">Αρτηριακή πίεση</text>
+<circle cx="848" cy="470" r="15" fill="#b95a64"/><text x="875" y="476" class="small">Μεταβολή συνείδησης</text>
+<path d="M837 522H1142" stroke="#d5e3eb" stroke-width="3"/>
+<text x="990" y="554" text-anchor="middle" class="small">Συνεκτίμηση ευρημάτων</text><text x="990" y="582" text-anchor="middle" class="small">και επανέλεγχος</text>
+<text x="600" y="669" text-anchor="middle" class="sub">Σχηματικό εκπαιδευτικό σχέδιο · οι ενέργειες ορίζονται από εκπαίδευση και ισχύον πρωτόκολλο</text></svg>
