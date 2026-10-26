@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-27",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Επιλεγμένες εικόνες 59/247· επιλογή δεν σημαίνει πλήρη επάρκεια, ανεξάρτητη επιστημονική έγκριση ή δημόσια διαθεσιμότητα.",
+  "note": "Η καταχώριση εικόνας δεν ισοδυναμεί με πλήρη κάλυψη αντικειμένου, ανεξάρτητη επιστημονική έγκριση ή δημοσίευση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -815,6 +815,57 @@
         "RCUK ABCDE: address life threats and reassess"
       ],
       "sha256": "666d5d6d8447699c2489cc0ae02ab4800f703341aa8571396459df50504c2bfb"
+    },
+    "stopping_distance_ratio": {
+      "filename": "stopping-distance-ratio-el.svg",
+      "localPath": "assets/education/stopping-distance-ratio-el.svg",
+      "title": "Αντίδραση και πέδηση σε διπλάσια ταχύτητα",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο ελληνικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://highways.dot.gov/safety/speed-management/guidelines-use-variable-speed-limit-systems-wet-weather/chapter-2-driver",
+      "additionalSources": [
+        "https://www.oxfordshire.gov.uk/fire-and-community-safety/community-safety/its-not-worth-risk/cut-your-speed",
+        "https://www.gov.uk/guidance/the-highway-code/general-rules-techniques-and-advice-for-all-drivers-and-riders-103-to-158"
+      ],
+      "caption": "Αναλογικό σχέδιο 30 και 60 km/h: με σταθερό χρόνο αντίδρασης η απόσταση αντίδρασης διπλασιάζεται, με ίδια σταθερή επιβράδυνση η απόσταση πέδησης τετραπλασιάζεται. Δεν δίνει πραγματικά μέτρα ασθενοφόρου.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "Online primary road safety or official EMS crash testing guidance; no independent clinical review"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Source SVG structural review in progress; raster/browser/zoom/offline E2E pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": null
+    },
+    "ambulance_restraint_zones": {
+      "filename": "ambulance-restraint-zones-el.svg",
+      "localPath": "assets/education/ambulance-restraint-zones-el.svg",
+      "title": "Συγκράτηση ασθενούς, φορείου, πληρώματος και εξοπλισμού μέσα στο ασθενοφόρο",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο ελληνικό διανυσματικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/niosh/ems/crash-testing/index.html",
+      "additionalSources": [
+        "https://www.osha.gov/motor-vehicle-safety/drivers"
+      ],
+      "caption": "Πρωτότυπη κάτοψη: ιμάντες ασθενούς, βάση φορείου, ζώνη πληρώματος, κλειστό ερμάριο και στερεωμένη φιάλη. Δεν υποκαθιστά εγκατάσταση και οδηγίες κατασκευαστή.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "Online primary road safety or official EMS crash testing guidance; no independent clinical review"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Source SVG structural review in progress; raster/browser/zoom/offline E2E pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": null
     }
   },
   "placements": {
@@ -1007,6 +1058,12 @@
     ],
     "05-07": [
       "primary_survey_abcde"
+    ],
+    "09-05": [
+      "stopping_distance_ratio"
+    ],
+    "09-08": [
+      "ambulance_restraint_zones"
     ]
   },
   "courses": [
@@ -1653,8 +1710,10 @@
         },
         {
           "anchor": "#lesson-5",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "stopping_distance_ratio"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-6",
@@ -1668,8 +1727,10 @@
         },
         {
           "anchor": "#lesson-8",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "ambulance_restraint_zones"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-9",
