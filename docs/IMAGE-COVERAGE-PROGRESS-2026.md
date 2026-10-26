@@ -1,16 +1,16 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 14**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 15**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified; NOT live proof) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 41 | 10 | 30 |
-| Β | 73 | 9 | 5 | 64 |
+| Α | 71 | 42 | 10 | 29 |
+| Β | 73 | 11 | 5 | 62 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **61** | **26** | **186** |
+| **Total** | **247** | **64** | **26** | **183** |
 
 **Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b19`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
@@ -169,3 +169,12 @@ For each new asset: verify relevance and the original source/license; render and
 - Readback after concurrent contributions: **61/247 chapters with a selected source** (semester A 41, B 9, C 5, D 6), **186 still without**, **41 registered assets**, **34 local SVGs**. Changes in courses 07 and 09 were committed by a parallel workstream; they were preserved rather than overwritten. Every local SVG path was present in draft service-worker precache at checkpoint. Production has **not** been verified or changed by this batch.
 - Outstanding gates: **0 documented independent scientific approvals**, full XML/visual browser checking and zoom/offline end-to-end for new files pending, no completed CI result asserted, and PR #6 remains **open, draft, unmerged**. Selected-image totals are not measures of complete chapter illustrations or live app publication.
 - Next work: inspect and test the SVG renderings and remaining course 05/03 chapters, with actual source-specific diagrams and clinical review. Keep live deployment, independent approval and source-selected status distinct.
+
+
+## Batch 15: Route, dispatch report and intersection diagrams (2026-10-26)
+
+- Added three original Greek-labelled explanatory SVGs, all CC BY 4.0 and mapped to distinct uncovered lessons: `patient-transfer-route-el.svg` for **03-07** (a real floor-plan with bed, movable stretcher, obstacles, door arc and stairs), `dispatch-crew-information-el.svg` for **07-03** (call-taker map and incident information transmitted to a crew with reported-vs-verified distinction), `intersection-visibility-el.svg` for **09-07** (intersection aerial map showing occluded lateral traffic by building, an approaching ambulance and risk zone).
+- Sources: WHO unsafe patient handling (`https://www.who.int/tools/occupational-hazards-in-health-sector/unsafe-patient-handling`); OSHA ED musculoskeletal hazards (`https://www.osha.gov/etools/hospitals/emergency-department/work-related-musculoskeletal-disorders`); European Commission emergency medical dispatch (`https://road-safety.transport.ec.europa.eu/european-road-safety-observatory/statistics-and-analysis-archive/post-impact-care/emergency-medical-dispatch_en`); US Fire Administration vehicle safety (`https://www.usfa.fema.gov/downloads/pdf/publications/fa_336.pdf`). These are conceptual safety references, not Greek operational protocols or independently approved clinical procedures.
+- Added 3 audit assets, chapter image keys and placements and precached all 3 under draft SW **ekab-spoudi-v27.1.68-images-20261026-b20**. Validated remote file readback, Greek wording, title/desc metadata, tag-stack structural balance and absence of unsafe raw XML ampersands. Attempted independent raw download for raster rendering but access denied; actual XML-parser, raster, browser zoom and offline E2E **not verified**.
+- At this checkpoint selected total is **64/247** (Α 42/71, Β 11/73, Γ 5/51, Δ 6/52); **183** remain without selected images. 44 image assets in registry. Main registry last independently verified at 26/247 (Α10, Β5, Γ5, Δ6), **not proof of production**.
+- Critical gaps: independent scientific review not documented, subjectCompleteness partial, actual visual browser/zoom/offline checks and live public deployment not verified. The app release version remains **27.1.68**. PR #6 is a draft; do not merge or claim publication on this basis. Next milestone user notification is 100 selected chapters.
