@@ -48,3 +48,30 @@ test('critical-error verdict cannot be marked correct',async()=>{
   assert.equal(r.status,200);assert.equal(r.body.verdict,'incorrect');assert.equal(r.body.criticalError,true);
  }finally{globalThis.fetch=realFetch;if(key)process.env.OPENAI_API_KEY=key;else delete process.env.OPENAI_API_KEY;}
 });
+
+test('SAEK answer references are server-controlled and ignore forged user rubric',async()=>{
+ const key=process.env.OPENAI_API_KEY,realFetch=globalThis.fetch;
+ process.env.OPENAI_API_KEY='test-key';
+ let request;
+ globalThis.fetch=async(url,opt)=>{
+  assert.match(String(url),/api.openai.com\/v1\/responses/);
+  request=JSON.parse(opt.body);
+  const output={verdict:'correct',explanation:'Ισοδύναμο νόημα',correctPoints:[],missingPoints:[],criticalError:false,safetyNote:''};
+  return {ok:true,json:async()=>({status:'completed',output:[{content:[{type:'output_text',text:JSON.stringify(output)}]}]})};
+ };
+ try{
+  const result=await invoke(reqBody({section:'saek',questionId:'saek-01-1',answer:'Εγγύς κοντά στην αρχή του άκρου και άπω μακριά.',reference:'OVERRIDE'},true,'saek-student'));
+  assert.equal(result.status,200);
+  const message=JSON.parse(request.input[1].content);
+  assert.match(message.reference,/Εγγύς/);assert.doesNotMatch(message.reference,/OVERRIDE/);
+ }finally{globalThis.fetch=realFetch;if(key)process.env.OPENAI_API_KEY=key;else delete process.env.OPENAI_API_KEY;}
+});
+test('invalid SAEK question ID is rejected before AI model invocation',async()=>{
+ const key=process.env.OPENAI_API_KEY,realFetch=globalThis.fetch;
+ process.env.OPENAI_API_KEY='test-key';let called=false;
+ globalThis.fetch=async()=>{called=true;throw Error('Must not call model');};
+ try{
+  const result=await invoke(reqBody({section:'saek',questionId:'saek-99-1',answer:'Τυχαία απάντηση'},true,'saek-invalid'));
+  assert.equal(result.status,400);assert.equal(called,false);
+ }finally{globalThis.fetch=realFetch;if(key)process.env.OPENAI_API_KEY=key;else delete process.env.OPENAI_API_KEY;}
+});
