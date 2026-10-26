@@ -5,6 +5,12 @@ on:
     paths:
       - 'saek-image-audit-2026.json'
       - 'scripts/check-saek-images.mjs'
+      - 'scripts/verify-saek-image-integration.mjs'
+      - 'saek-course-*.html'
+      - 'saek-reviewed-image-ui.js'
+      - 'saek-visual-ui.js'
+      - 'saek-visual-ui.css'
+      - 'sw.js'
       - 'scripts/validate-saek-svg.py'
       - 'assets/education/*.svg'
       - '.github/workflows/saek-image-review.yml'
@@ -28,6 +34,8 @@ jobs:
           node-version: '22'
       - name: Check sources, chapter mappings and media links
         run: node scripts/check-saek-images.mjs --remote
+      - name: Check 247 actual lesson DOM insertion points and offline image precache
+        run: node scripts/verify-saek-image-integration.mjs
       - name: Validate local SVG XML, accessibility, Greek labels and SHA-256
         run: python3 scripts/validate-saek-svg.py
       - name: Publish machine-readable audit report
@@ -35,6 +43,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: saek-image-audit-report
-          path: saek-image-report.json
+          path: |
+            saek-image-report.json
+            saek-image-integration-report.json
           retention-days: 30
           if-no-files-found: warn
