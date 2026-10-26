@@ -44,3 +44,5 @@ jobs:
         run: node scripts/verify-saek.mjs
       - name: Check EOPPEP references, 103 lesson-specific drills, 5 answers and 247 visual recaps
         run: node scripts/verify-education.mjs
+      - name: Validate lesson-visual JavaScript syntax
+        run: node --check saek-chapter-visuals.js && node --check saek-visual-ui.js && node --check saek-reviewed-image-ui.js
