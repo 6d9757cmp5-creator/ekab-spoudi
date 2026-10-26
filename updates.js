@@ -1,11 +1,11 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.85', $=id=>document.getElementById(id);
+const CURRENT='27.1.86', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
- const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.81';style.dataset.ekabGlobalTools='';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.86';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
  const script=document.createElement('script');script.src='global-tools.js?v=27.1.81';script.dataset.ekabGlobalTools='';document.head.append(script);
@@ -30,7 +30,22 @@ if(registration){await Promise.race([registration.update(),new Promise((_,reject
 if(registration?.waiting){d.textContent='Ενεργοποίηση νέας έκδοσης…';registration.waiting.postMessage({type:'SKIP_WAITING'});await Promise.race([new Promise(resolve=>navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true})),new Promise(resolve=>setTimeout(resolve,4500))]);}
 d.textContent='Ανανέωση εφαρμογής…';location.replace('./index.html?refresh='+Date.now());
 }catch(e){d.textContent='Η ενημέρωση δεν ολοκληρώθηκε. Η πρόοδός σου παραμένει στη συσκευή. Δοκίμασε ξανά.';b.disabled=false;applying=false;}}
+/* Render the live app version beside the EKAB Spoudi brand on every page. */
+function showBrandVersion(){
+ const heading=document.querySelector('header.top .brand h1');
+ if(!heading)return;
+ let version=heading.querySelector('.brand-version');
+ if(!version){
+  version=document.createElement('span');
+  version.className='brand-version';
+  heading.append(' ',version);
+ }
+ version.textContent='v'+CURRENT;
+ version.title='Έκδοση εφαρμογής v'+CURRENT;
+ version.setAttribute('aria-label','Έκδοση εφαρμογής v'+CURRENT);
+}
 async function start(){
+showBrandVersion();
 const theme=$('themeToggle');if(theme){const sync=()=>{const dark=document.documentElement.dataset.theme==='dark';theme.setAttribute('aria-label',dark?'Ενεργοποίηση φωτεινού θέματος':'Ενεργοποίηση σκοτεινού θέματος');theme.setAttribute('title',dark?'Φωτεινό θέμα':'Σκούρο θέμα');theme.setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0c1a29':'#153c54')};theme.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('ekab.theme.v1',next);window.dispatchEvent(new Event('ekab:progress-changed'))}catch{}sync()};sync();window.addEventListener('ekab:cloud-applied',sync);}
 if($('currentAppVersion'))$('currentAppVersion').textContent='v'+CURRENT;if($('footerAppVersion'))$('footerAppVersion').textContent='v'+CURRENT;
 document.addEventListener('click',event=>{

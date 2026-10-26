@@ -223,3 +223,16 @@ html[data-theme="dark"] .ekab-search-popover .saek-result-item:hover{background:
 .ekab-search-glossary:hover,.ekab-search-glossary:focus-visible{background:#e7f2f9;outline:2px solid #73b7d9;outline-offset:1px}
 html[data-theme="dark"] .ekab-search-glossary{background:#1c4053;color:#dcf1fc;border-color:#46687c}
 html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
+
+/* Inline application version — small, readable and synced with CURRENT. */
+.top .brand h1 .brand-version {
+ display:inline-block;
+ margin-left:5px;
+ font-size:.55em;
+ font-weight:600;
+ line-height:1.2;
+ letter-spacing:0;
+ vertical-align:baseline;
+ white-space:nowrap;
+ color:#bed8e8;
+}
