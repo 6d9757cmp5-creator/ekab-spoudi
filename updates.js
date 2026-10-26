@@ -1,7 +1,16 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.58', $=id=>document.getElementById(id);
+const CURRENT='27.1.59', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
+
+/* Shared tools load across public pages without duplicating headers or altering saved progress. */
+if(!document.querySelector('link[data-ekab-global-tools]')){
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.59';style.dataset.ekabGlobalTools='';document.head.append(style);
+}
+if(!document.querySelector('script[data-ekab-global-tools]')){
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.59';script.dataset.ekabGlobalTools='';document.head.append(script);
+}
+
 function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
 function report(message){const e=$('updateCheckStatus');if(e)e.textContent=message;}
 async function remote(){const response=await fetch('./version.json?nocache='+Date.now(),{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(!/^\d+\.\d+\.\d+$/.test(data.version||''))throw Error('invalid version');return data.version;}
