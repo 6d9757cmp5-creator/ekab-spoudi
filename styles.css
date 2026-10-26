@@ -403,3 +403,12 @@ dialog{border-radius:26px}
  #eoppepHomeSummary .stat-question-link{padding:10px 5px}
  #eoppepHomeSummary .stat span{overflow-wrap:anywhere}
 }
+
+/* Pharmacology as fourth first-class main area; responsive nav + readable dark study cards. */
+.nav:has(a[href="farmaka.html"]){grid-template-columns:repeat(4,minmax(0,1fr))}
+.nav:has(a[href="farmaka.html"]) a{min-width:0;overflow-wrap:anywhere}
+@media(max-width:580px){.nav:has(a[href="farmaka.html"]) a{font-size:.71rem;padding:10px 2px}}
+.ph-main{--panel:#fff}
+html[data-theme="dark"] .ph-main{--panel:#132639}
+html[data-theme="dark"] .ph-main .ph-button:not(.secondary){background:#247fa9;color:#fff}
+html[data-theme="dark"] .ph-main .ph-button.secondary{background:#234459;color:#e4f6ff}
