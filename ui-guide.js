@@ -107,7 +107,7 @@ function init(){
   button.type='button';button.addEventListener('click',openGuide);
   row.append(button);home.insertBefore(row,home.firstChild);
  }
- if(!isSeen())openGuide();
+ // Do not automatically open the guide when the user returns to Home.
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
 else init();
