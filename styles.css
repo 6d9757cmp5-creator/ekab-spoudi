@@ -244,3 +244,21 @@ html[data-theme="dark"] .account-dialog{background:var(--bg)}html[data-theme="da
 .all-question-item{width:100%;min-height:44px;padding:11px 12px;text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;font:inherit;font-size:.9rem;line-height:1.5;cursor:pointer;white-space:normal;overflow-wrap:anywhere}
 .all-question-item:hover{border-color:var(--blue);background:var(--light)}
 .all-question-item:focus-visible{outline:3px solid #2685b8;outline-offset:2px}
+
+/* EOPPEP: repeated self-assessments define studied progress, not opened questions. */
+.study-rule{font-size:.77rem;line-height:1.55;color:var(--muted);margin:12px 0 16px}
+.stat small{display:block;font-size:.67rem;color:var(--muted);margin-top:4px;line-height:1.35}
+.self-check-help{display:block;margin-top:8px;color:var(--muted);font-weight:400;line-height:1.5}
+.progress-row .detail{flex-wrap:wrap;row-gap:4px}
+@media(min-width:960px){
+ #homeView.catalog-open-desktop>.all-questions-panel.catalog-side-panel{
+   grid-column:2;grid-row:1;margin:0;min-width:0;
+   display:flex;flex-direction:column;max-height:min(77vh,800px);overflow:hidden;
+ }
+ #homeView.catalog-open-desktop>.all-questions-panel.catalog-side-panel>.body{
+   min-height:0;flex:1;overflow-y:auto;max-height:none;
+ }
+ #homeView.catalog-open-desktop>#topicsFold{grid-column:2;grid-row:2}
+ #homeView.catalog-open-desktop>.panel:first-child{grid-column:1;grid-row:1/span 2}
+ #homeView.catalog-open-desktop>.storage-panel{grid-column:1/-1}
+}

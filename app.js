@@ -10,26 +10,63 @@ function addLink(parent,href,label){if(typeof href!=='string'||!/^https:\/\//i.t
 function hasDocumentedReview(q){return Boolean(q.sourceChecked||q.reviewAudit20261026||q.reviewAudit20261026Followup||q.finalAudit20261026||q.webResearch20261026)}
 function scoped(){const group=$('#group').value,topic=$('#topic').value,status=$('#statusFilter').value,find=$('#search').value.trim().toLocaleLowerCase('el');return bank.filter(q=>(group==='all'||q.group===group)&&(topic==='all'||q.studyTopic===topic)&&(status==='all'||(status==='directly_checked'&&Boolean(q.sourceChecked))||(status==='documented_review'&&hasDocumentedReview(q))||q.answerStatus===status)&&(!find||q.question.toLocaleLowerCase('el').includes(find)||q.id.toLowerCase().includes(find)))}
 function labelStatus(q){if(hasDocumentedReview(q))return 'Εκπαιδευτική λύση · ιστορικό ανασκόπησης ⓘ';if(q.answerStatus==='reviewed_educational')return 'Εκπαιδευτική λύση · βιβλιογραφία (χωρίς ειδική καταγραφή ελέγχου) ⓘ';return 'Προσχέδιο · απαιτείται έλεγχος ⓘ'}
+// Viewing a question is not evidence of learning it. Only repeated correct self-assessments count.
+const STUDIED_CORRECT_STREAK=3, MASTERED_CORRECT_STREAK=5;
+function isStudied(q){const s=state[q.id];return Boolean(s&&(s.selfCorrect||0)>=STUDIED_CORRECT_STREAK&&(s.streak||0)>=STUDIED_CORRECT_STREAK)}
+function isMastered(q){const s=state[q.id];return Boolean(s&&(s.selfCorrect||0)>=MASTERED_CORRECT_STREAK&&(s.streak||0)>=MASTERED_CORRECT_STREAK)}
+function needsReview(q){const s=state[q.id];return Boolean(s&&(s.weak||0)>0&&!isStudied(q))}
 function updateMetrics(){
- $('#seenCount').textContent=bank.filter(q=>state[q.id]?.seen>0).length;
+ $('#seenCount').textContent=bank.filter(isStudied).length;
  $('#allCount').textContent=bank.length;
  $('#verifiedCount').textContent=bank.filter(q=>q.answerStatus==='reviewed_educational').length;
  const target=$('#groupProgress');target.replaceChildren();
  for(const [g,title] of [['A','Γενικές Ερωτήσεις'],['B','Ειδικές Ερωτήσεις']]){
-   const items=bank.filter(q=>q.group===g),seen=items.filter(q=>state[q.id]?.seen>0).length,mastered=items.filter(q=>(state[q.id]?.streak||0)>=5).length,weak=items.filter(q=>state[q.id]?.weak>0).length;
+   const items=bank.filter(q=>q.group===g);
+   const studied=items.filter(isStudied).length;
+   const viewed=items.filter(q=>(state[q.id]?.seen||0)>0).length;
+   const mastered=items.filter(isMastered).length;
+   const weak=items.filter(needsReview).length;
+   const percent=items.length?Math.round(100*studied/items.length):0;
    const node=document.createElement('div');node.className='progress-row';
    const top=document.createElement('div');top.className='line';
    const name=document.createElement('strong');name.textContent=`Ομάδα ${g} · ${title}`;
-   const percent=document.createElement('strong');percent.textContent=Math.round(100*seen/items.length)+'%';top.append(name,percent);
-   const progress=document.createElement('div');progress.className='bar';progress.setAttribute('role','progressbar');progress.setAttribute('aria-label',`Κάλυψη ομάδας ${g}`);progress.setAttribute('aria-valuenow',seen);progress.setAttribute('aria-valuemax',items.length);progress.setAttribute('aria-valuemin','0');const fill=document.createElement('span');fill.style.width=(100*seen/items.length)+'%';progress.append(fill);
-   const detail=document.createElement('div');detail.className='detail';const left=document.createElement('span');left.textContent=`${seen} / ${items.length} μελετημένες`;const right=document.createElement('span');right.textContent=`${mastered} εμπεδωμένες · ${weak} για επανάληψη`;detail.append(left,right);
-   node.append(top,progress,detail);target.append(node);
+   const label=document.createElement('strong');label.textContent=percent+'%';top.append(name,label);
+   const progress=document.createElement('div');progress.className='bar';progress.setAttribute('role','progressbar');
+   progress.setAttribute('aria-label',`Μελετημένες ερωτήσεις ομάδας ${g}`);
+   progress.setAttribute('aria-valuenow',studied);progress.setAttribute('aria-valuemax',items.length);progress.setAttribute('aria-valuemin','0');
+   const fill=document.createElement('span');fill.style.width=percent+'%';progress.append(fill);
+   const detail=document.createElement('div');detail.className='detail';
+   const left=document.createElement('span');left.textContent=`${studied} / ${items.length} μελετημένες · ${viewed} ανοιγμένες`;
+   const right=document.createElement('span');right.textContent=`${mastered} εμπεδωμένες · ${weak} για επανάληψη`;
+   detail.append(left,right);node.append(top,progress,detail);target.append(node);
  }
- const bytopic=$('#topicProgress');bytopic.replaceChildren();for(const topic of [...new Set(bank.map(q=>q.studyTopic))].sort((a,b)=>a.localeCompare(b,'el'))){const subset=bank.filter(q=>q.studyTopic===topic),seen=subset.filter(q=>state[q.id]?.seen>0).length,weak=subset.filter(q=>state[q.id]?.weak>0).length,mastered=subset.filter(q=>(state[q.id]?.streak||0)>=5).length;const wrap=document.createElement('div');wrap.className='topic-row';const title=document.createElement('div');title.className='title';title.textContent=topic;const details=document.createElement('div');details.className='detail';details.textContent=`${seen}/${subset.length} μελετημένες (${Math.round(100*seen/subset.length)}%) · ${mastered} εμπεδωμένες · ${weak} για επανάληψη`;wrap.append(title,details);bytopic.append(wrap)}
+ const bytopic=$('#topicProgress');bytopic.replaceChildren();
+ for(const topic of [...new Set(bank.map(q=>q.studyTopic))].sort((a,b)=>a.localeCompare(b,'el'))){
+   const subset=bank.filter(q=>q.studyTopic===topic);
+   const studied=subset.filter(isStudied).length;
+   const opened=subset.filter(q=>(state[q.id]?.seen||0)>0).length;
+   const weak=subset.filter(needsReview).length;
+   const mastered=subset.filter(isMastered).length;
+   const percent=subset.length?Math.round(100*studied/subset.length):0;
+   const wrap=document.createElement('div');wrap.className='topic-row';
+   const title=document.createElement('div');title.className='title';title.textContent=topic;
+   const details=document.createElement('div');details.className='detail';
+   details.textContent=`${studied}/${subset.length} μελετημένες (${percent}%) · ${opened} ανοιγμένες · ${mastered} εμπεδωμένες · ${weak} για επανάληψη`;
+   wrap.append(title,details);bytopic.append(wrap);
+ }
 }
 function updateMatches(){$('#matches').textContent=`${scoped().length} ερωτήσεις στα τρέχοντα φίλτρα.`}
 function shuffle(list){return list.map(q=>({q,r:Math.random()})).sort((a,b)=>a.r-b.r).map(x=>x.q)}
-function makePool(){const all=scoped(),mode=$('#order').value;if(mode==='number')return all;if(mode==='weak')return all.slice().sort((a,b)=>{const x=st(a),y=st(b);return(y.weak*4-y.streak*2-y.seen*.05)-(x.weak*4-x.streak*2-x.seen*.05)});const unseen=all.filter(q=>!st(q).seen),seen=all.filter(q=>st(q).seen);return [...shuffle(unseen),...shuffle(seen).sort((a,b)=>st(b).weak-st(a).weak||st(a).streak-st(b).streak)]}
+function makePool(){
+ const all=scoped(),mode=$('#order').value;
+ if(mode==='number')return all;
+ if(mode==='weak')return all.slice().sort((a,b)=>{const x=st(a),y=st(b);return(y.weak*4-y.streak*2-y.seen*.05)-(x.weak*4-x.streak*2-x.seen*.05)});
+ const unseen=all.filter(q=>!(state[q.id]?.seen>0));
+ const practicing=all.filter(q=>(state[q.id]?.seen>0)&&!isStudied(q));
+ const learned=all.filter(isStudied);
+ const byNeed=(a,b)=>(st(b).weak-st(a).weak)||(st(a).streak-st(b).streak);
+ return [...shuffle(unseen),...shuffle(practicing).sort(byNeed),...shuffle(learned).sort(byNeed)];
+}
 function sourceModal(q){
  const area=$('#sourceDialogContent');area.replaceChildren();
  const text=(str)=>{let p=document.createElement('p');p.textContent=str;area.append(p);return p};
@@ -114,14 +151,37 @@ function openCatalogQuestion(questionId){
 }
 const allQuestionsPanel=$('#allQuestionsPanel'),allQuestionsToggle=$('#allQuestionsToggle');
 if(allQuestionsPanel&&allQuestionsToggle){
+ const home=$('#homeView');
+ const originalParent=allQuestionsPanel.parentNode;
+ const originalAnchor=document.createComment('restore-catalog-here');
+ allQuestionsPanel.after(originalAnchor);
+ const desktop=window.matchMedia('(min-width:960px)');
+ function syncCatalogLayout(){
+  const asSide=desktop.matches&&allQuestionsPanel.open;
+  if(asSide){
+   if(allQuestionsPanel.parentNode!==home)home.insertBefore(allQuestionsPanel,home.firstElementChild.nextSibling);
+  }else if(allQuestionsPanel.parentNode!==originalParent){
+   originalParent.insertBefore(allQuestionsPanel,originalAnchor);
+  }
+  allQuestionsPanel.classList.toggle('catalog-side-panel',asSide);
+  home.classList.toggle('catalog-open-desktop',asSide);
+ }
+ desktop.addEventListener('change',syncCatalogLayout);
  allQuestionsPanel.addEventListener('toggle',()=>{
   allQuestionsToggle.setAttribute('aria-expanded',String(allQuestionsPanel.open));
   if(allQuestionsPanel.open)renderAllQuestions();
+  syncCatalogLayout();
  });
  allQuestionsToggle.addEventListener('click',()=>{
   allQuestionsPanel.open=!allQuestionsPanel.open;
-  if(allQuestionsPanel.open)allQuestionsPanel.scrollIntoView({behavior:'smooth',block:'start'});
+  syncCatalogLayout();
+  allQuestionsToggle.setAttribute('aria-expanded',String(allQuestionsPanel.open));
+  if(allQuestionsPanel.open){
+   renderAllQuestions();
+   if(!desktop.matches)allQuestionsPanel.scrollIntoView({behavior:'smooth',block:'start'});
+  }
  });
+ syncCatalogLayout();
 }
 $('#openExam').onclick=showExam;$('#goHome').onclick=showHome;
 $('#begin').onclick=()=>{pool=makePool();if(!pool.length)return updateMatches();index=0;$('#setup').classList.add('hidden');$('#study').classList.remove('hidden');present()};
