@@ -2,7 +2,7 @@
 <title id="title">Ανατομική επισκόπηση της πρωτογενούς εκτίμησης ABCDE</title>
 <desc id="desc">Σχηματική ανθρώπινη μορφή με οπτικούς δείκτες στον αεραγωγό, τους πνεύμονες, την κυκλοφορία, τον εγκέφαλο και την εξωτερική εξέταση. Οι πέντε ετικέτες A B C D E εξηγούν τις κατηγορίες αξιολόγησης, ενώ υπενθυμίζεται η προτεραιότητα της ασφάλειας, της σοβαρής εξωτερικής αιμορραγίας και της επανεκτίμησης.</desc>
 <rect width="1200" height="740" rx="18" fill="#f3f8fc"/>
-<style>text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#173c51}.heading{font-size:34px;font-weight:700}.sub{font-size:19px}.label{font-size:24px;font-weight:700}.detail{font-size:18px}.panel{fill:#fff;stroke:#b5ccda;stroke-width:2.5}.lead{stroke:#4a819a;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<style>text[fill='#fff']{fill:#fff}text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#173c51}.heading{font-size:34px;font-weight:700}.sub{font-size:19px}.label{font-size:24px;font-weight:700}.detail{font-size:18px}.panel{fill:#fff;stroke:#b5ccda;stroke-width:2.5}.lead{stroke:#4a819a;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
 <text x="600" y="49" class="heading" text-anchor="middle">Πρωτογενής εκτίμηση ABCDE</text>
 <text x="600" y="82" class="sub" text-anchor="middle">Πρώτα ασφάλεια σκηνής · παρατήρηση απειλών ζωής · έγκαιρη κλήση βοήθειας</text>
 <!-- Body outline with head and limbs -->
@@ -34,7 +34,7 @@
 <path d="M375 329H479L548 360" class="lead"/><circle cx="548" cy="360" r="6" fill="#247d9b"/>
 <rect x="25" y="432" width="348" height="100" rx="16" class="panel"/>
 <circle cx="65" cy="474" r="28" fill="#bf5964"/><text x="65" y="485" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">C</text>
-<text x="107" y="472" class="label">Κυκλοφορία</text><text x="107" y="506" class="detail">Αιμορραγία, σφυγμός, αιμάτωση</text>
+<text x="107" y="472" class="label">Κυκλοφορία</text><text x="107" y="506" class="detail">Αιμορραγία, σφυγμός</text>
 <path d="M375 482H472L585 427" class="lead"/><circle cx="585" cy="427" r="6" fill="#b24d58"/>
 <!-- Right panels -->
 <rect x="820" y="173" width="348" height="110" rx="16" class="panel"/>
