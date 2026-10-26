@@ -26,9 +26,11 @@ jobs:
           p='docs/pharmacology-review-status-2026-10-26.pdf'
           r=PdfReader(p)
           assert len(r.pages)==1, 'The document must contain exactly one page'
+          assert not r.pages[0].get('/Annots'), 'Embedded links or PDF annotations are not permitted'
+          assert b'/URI' not in open(p, 'rb').read(), 'PDF contains a URL action'
           t=r.pages[0].extract_text()
           assert 'EKAB SPOUDI' in t and 'Academic Content Review' in t and 'independent clinical sign-off remain' in t, 'Academic identity or evidence limitations missing'
-          print('Verified one-page English academic review PDF and transparent clinical review status')
+          print('Verified one-page English academic review PDF with no embedded links or URL actions')
           PY
       - name: Commit the PDF into GitHub Pages source
         shell: bash
