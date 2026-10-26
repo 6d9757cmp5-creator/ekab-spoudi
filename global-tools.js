@@ -5,7 +5,7 @@ const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3')
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
 let searchCache=null,glossaryCache=null;
-const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json','medical-terms.json?v=27.1.62'];
+const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json'];
 async function loadGlossary(){
  if(!glossaryCache)glossaryCache=fetchJson('medical-terms.json?v=27.1.62').then(o=>o.items||[]).catch(e=>{glossaryCache=null;throw e});
  return glossaryCache;
@@ -24,9 +24,6 @@ function entries(parts){
   if(!/^(?:[a-z0-9][a-z0-9_-]*\.html)(?:[?#][\w%=&#.-]+)?$/i.test(p.href))continue;
   results.push({kind:p.kind==='practice'?'practice':p.kind==='practical'?'practical':'page',title:p.title,subtitle:p.subtitle||'Ενότητα εφαρμογής',preview:p.preview||'',href:p.href,searchText:p.searchText||'',keywords:p.kind||''});
  }
- for(const t of parts[9]?.items||[]){
-  results.push({kind:'medical',title:t.term+' · '+(t.en||''),subtitle:'Ιατρικοί όροι · '+(t.category||'Γενική ιατρική'),preview:t.definition||'',href:'search.html?medicalTerm='+encodeURIComponent(t.term),searchText:t.definition||'',keywords:[t.term,t.en,t.category,...(t.aliases||[]),...(t.symbols||[])].join(' ')});
- }
  return results;
 }
 async function loadSearch(){
@@ -41,7 +38,7 @@ async function loadSearch(){
  }
  return searchCache;
 }
-const weight={medical:5,saek:4,eoppep:4,practical:3,practice:3,page:2};
+const weight={saek:4,eoppep:4,practical:3,practice:3,page:2};
 function find(query,data){
  const needle=normalize(query);
  if(!needle)return [];
@@ -81,7 +78,7 @@ function pickDiverse(found,limit){
 function resultLink(item){
  const link=el('a','saek-result-item');
  link.href=item.href;
- const icon=item.kind==='medical'?'📖':item.kind==='eoppep'?'❓':item.kind==='saek'?'📚':item.kind==='practical'?'🚑':'🔎';
+ const icon=item.kind==='eoppep'?'❓':item.kind==='saek'?'📚':item.kind==='practical'?'🚑':'🔎';
  link.append(el('strong',null,icon+' '+item.title));
  link.append(el('small',null,item.subtitle));
  if(item.preview)link.append(el('span','saek-result-preview',item.preview));
@@ -95,7 +92,7 @@ function installSearch(){
  const input=el('input','saek-search-field');
  input.id='ekabGlobalSearch';input.type='search';input.autocomplete='off';
  input.placeholder='Αναζήτηση σε όλη την εφαρμογή…';
- input.setAttribute('aria-label','Αναζήτηση σε όλη την ΕΚΑΒ Σπουδή: ΕΟΠΠΕΠ, ΣΑΕΚ, πρακτικό μέρος και ιατρικοί όροι');
+ input.setAttribute('aria-label','Αναζήτηση στην ΕΚΑΒ Σπουδή: ΕΟΠΠΕΠ, ΣΑΕΚ, πρακτικό μέρος και ασκήσεις');
  input.setAttribute('aria-controls','ekabGlobalResults');input.setAttribute('aria-expanded','false');
  label.htmlFor=input.id;
  const dropdown=el('div','saek-global-results');
@@ -116,7 +113,7 @@ function installSearch(){
  function render(){
   const token=++pending,q=input.value;
   if(!q.trim()){close();return}
-  dropdown.replaceChildren(el('p','saek-result-empty','Αναζήτηση σε ΕΟΠΠΕΠ, ΣΑΕΚ, πρακτικό και ιατρικό λεξικό…'));dropdown.hidden=false;
+  dropdown.replaceChildren(el('p','saek-result-empty','Αναζήτηση σε ΕΟΠΠΕΠ, ΣΑΕΚ, πρακτικό και ασκήσεις…'));dropdown.hidden=false;
   loadSearch().then(data=>{if(token!==pending)return;draw(find(q,data),q)})
    .catch(()=>{if(token!==pending)return;dropdown.replaceChildren(el('p','saek-result-empty','Η αναζήτηση δεν φορτώθηκε πλήρως. Έλεγξε τη σύνδεση και πάτησε «Ενημέρωση».'));dropdown.hidden=false});
  }
@@ -237,8 +234,8 @@ function showSearchPage(){
   const found=find(query,data);results.replaceChildren();
   const summary=el('p','global-search-summary',found.length+' αποτελέσματα στο δημόσιο εκπαιδευτικό περιεχόμενο της εφαρμογής.');
   results.append(summary);
-  if(!found.length){results.append(el('p','saek-result-empty','Δεν βρέθηκε αποτέλεσμα. Δοκίμασε συνώνυμο, ελληνική ή αγγλική ορολογία.'));return}
-  const kinds=[['eoppep','Ερωτήσεις ΕΟΠΠΕΠ'],['saek','Κατάρτιση ΣΑΕΚ'],['practical','Πρακτικό ΕΟΠΠΕΠ'],['practice','Συμπληρωματικές ασκήσεις'],['medical','Ιατρικό λεξικό'],['page','Ενότητες και σελίδες']];
+  if(!found.length){results.append(el('p','saek-result-empty','Δεν βρέθηκε αποτέλεσμα. Δοκίμασε διαφορετική λέξη ή όρο από τα μαθήματα.'));return}
+  const kinds=[['eoppep','Ερωτήσεις ΕΟΠΠΕΠ'],['saek','Κατάρτιση ΣΑΕΚ'],['practical','Πρακτικό ΕΟΠΠΕΠ'],['practice','Συμπληρωματικές ασκήσεις'],['page','Ενότητες και σελίδες']];
   for(const [kind,title] of kinds){
    const matches=found.filter(x=>x.kind===kind);if(!matches.length)continue;
    const section=el('section','global-search-category'),h=el('h2',null,title+' ('+matches.length+')');
