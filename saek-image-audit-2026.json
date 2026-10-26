@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 42/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
+  "note": "Μητρώο επιλογών εικόνων: 43/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -375,6 +375,28 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "3f902ec7ad894932e1aef734c73e6dad0915a83ac7357693194a2bdfca1a3415"
+    },
+    "abdominal_organs": {
+      "filename": "abdominal-organs-el.svg",
+      "localPath": "assets/education/abdominal-organs-el.svg",
+      "title": "Βασικά κοιλιακά όργανα σε πρόσθια προβολή",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "caption": "Απλουστευμένη πρόσθια προβολή ήπατος, χοληδόχου κύστης, στομάχου, σπλήνα, παγκρέατος, λεπτού και παχέος εντέρου. Δεν αποδίδει βάθος, φυσική κλίμακα, περιτόναιο ή όλα τα κοιλιακά όργανα.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "organ relations in anterior view; independently drawn original diagram, not copied from OpenStax"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Greek text, SVG source geometry and labelled leader endpoints checked; rendered-browser visual test and independent scientific review pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "f2c8cc0f9c73207a0e4681c043add2f87c1aa4f3ecdd476dade9a68247b343f5"
     }
   },
   "placements": {
@@ -513,6 +535,9 @@
     ],
     "01-09": [
       "synovial_joint"
+    ],
+    "01-04": [
+      "abdominal_organs"
     ]
   },
   "courses": [
@@ -545,8 +570,10 @@
         },
         {
           "anchor": "#lesson-4",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "abdominal_organs"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-5",
