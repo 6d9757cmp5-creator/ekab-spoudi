@@ -12,7 +12,7 @@ if(!document.querySelector('script[data-ekab-global-tools]')){
 }
 
 /* Ensure progress export/restore is available from Account on every page. */
-if(!window.EkabProgress && !Array.from(document.scripts).some(s=>/\\/progress\\.js(?:\\?|$)/.test(s.src))){
+if(!window.EkabProgress && !Array.from(document.scripts).some(node=>node.src.includes('/progress.js'))){
  const progressScript=document.createElement('script');
  progressScript.src='progress.js?v=27.1.83';
  progressScript.dataset.ekabSharedProgress='1';
