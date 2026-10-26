@@ -8,7 +8,7 @@ const reqBody=(data,loggedIn=true,user='test-user')=>({
  bodyJson:data
 });
 const invoke=async req=>handler({req,res:{json:(body,status=200)=>({body,status})}});
-const answer={section:'seminar',courseId:'bls',questionIndex:5,answer:'Πριν βοηθήσω ελέγχω αν είναι ασφαλής ο χώρος και φωνάζω βοήθεια.'};
+const answer={section:'seminar',courseId:'bls',questionIndex:1,answer:'Πριν βοηθήσω ελέγχω αν είναι ασφαλής ο χώρος και φωνάζω βοήθεια.'};
 test('anonymous execution cannot call model',async()=>{
  const out=await invoke(reqBody(answer,false));assert.equal(out.status,401);
 });
