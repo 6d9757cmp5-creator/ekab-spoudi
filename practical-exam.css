@@ -41,3 +41,17 @@ html[data-theme="dark"] .practical-page-button span,html[data-theme="dark"] .pra
 html[data-theme="dark"] .practical-image-dialog{background:#1d3648;color:#e9f3f8}
 html[data-theme="dark"] .practical-dialog-head button,html[data-theme="dark"] .practical-dialog-actions button{background:#203d50;color:#e9f3f8}
 @media(max-width:520px){.practical-page-grid{gap:8px}.practical-page-button{padding:9px}.practical-page-button img{height:115px}.practical-video-card>summary{padding:11px;gap:9px}.practical-video-body{padding:0 10px 10px}.practical-video-order{width:30px;height:30px}.practical-player{aspect-ratio:16/11}.practical-jump a{font-size:.77rem;padding:7px 10px}.practical-dialog-head,.practical-dialog-actions{padding:9px}}
+
+/* Ελεγμένες απαντήσεις κάτω από κάθε εκπαιδευτικό βίντεο — v27.1.46 */
+.practical-verified{border:1px solid var(--line);border-radius:12px;margin:11px 0 5px;background:var(--bg);padding:0 13px}
+.practical-verified>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:700;font-size:.86rem;padding:12px 0;color:var(--ink)}
+.practical-verified>summary::-webkit-details-marker{display:none}
+.practical-verified[open]>summary{border-bottom:1px solid var(--line)}
+.practical-verified .practical-verified-list{padding-left:22px;line-height:1.55;font-size:.84rem}
+.practical-verified-list li{padding:5px 0}
+.practical-verified>p{margin:10px 0;font-size:.83rem}
+.practical-verified ul{padding-left:22px;line-height:1.55;font-size:.83rem}
+.practical-audit-summary h2{margin-bottom:10px}
+.practical-audit-summary p{line-height:1.55}
+html[data-theme="dark"] .practical-verified{background:#1d3648;border-color:#385367}
+html[data-theme="dark"] .practical-verified>summary{color:#e9f3f8}
