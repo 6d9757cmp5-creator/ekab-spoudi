@@ -108,12 +108,19 @@ function bind(){
   const status=$('seminarAIResult');
   if(!ai){status.hidden=false;status.textContent='Η υπηρεσία αξιολόγησης δεν φορτώθηκε.';return;}
   if(answer.length<3){status.hidden=false;status.textContent='Γράψε πρώτα τη δική σου απάντηση.';return;}
+  if(!$('seminarQuestionSolution').hidden){status.hidden=false;status.textContent='Έχεις ήδη ανοίξει την ενδεικτική λύση. Δοκίμασε άλλη ερώτηση χωρίς βοήθεια.';return;}
   const courseId=selected.id,questionId=question,button=$('seminarGradeAI');
   button.disabled=true;button.textContent='Γίνεται αξιολόγηση…';
   status.hidden=false;status.textContent='Έλεγχος νοήματος της απάντησης…';
   try{
    const result=await ai.evaluate({section:'seminar',courseId,questionIndex:questionId,answer});
    if(!selected||courseId!==selected.id||questionId!==question)return;
+   // Showing the solution while a request is pending disqualifies automatic credit.
+   if(!$('seminarQuestionSolution').hidden){
+    ai.render(status,result);
+    const note=document.createElement('p');note.textContent='Δεν καταχωρίστηκε βαθμολογία επειδή εμφανίστηκε η λύση.';status.append(note);
+    return;
+   }
    if(result.verdict==='correct')setGrade('right');
    else if(result.verdict==='partial'||result.verdict==='incorrect')setGrade('needs');
    else renderQuestion();
