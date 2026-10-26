@@ -48,6 +48,30 @@ window.EKAB_COURSE_VIDEO_SERIES = {
         "title": "Κύτταρο, ιστοί και όργανα",
         "shortTitle": "Κύτταρο και ιστοί",
         "url": "https://scrimba.com/explain/guide04cimp8a0?claim=85g1u695eje0ijju"
+      },
+      {
+        "chapter": 7,
+        "title": "Σπονδυλική στήλη και νωτιαίος μυελός",
+        "shortTitle": "Σπονδυλική στήλη",
+        "url": "https://scrimba.com/explain/guide0hptegonu?claim=1adcvdto0h52conf"
+      },
+      {
+        "chapter": 8,
+        "title": "Κρανίο, εγκέφαλος και μήνιγγες",
+        "shortTitle": "Κρανίο και μήνιγγες",
+        "url": "https://scrimba.com/explain/guide0b3ubdkbn?claim=l1iserqpcm125r3h"
+      },
+      {
+        "chapter": 9,
+        "title": "Αρθρώσεις, σύνδεσμοι και μύες",
+        "shortTitle": "Αρθρώσεις και μύες",
+        "url": "https://scrimba.com/explain/guide057ta7j1i?claim=t0nm6p25k78bpoj5"
+      },
+      {
+        "chapter": 10,
+        "title": "Καρδιά, μεγάλα αγγεία και βαλβίδες",
+        "shortTitle": "Καρδιά και βαλβίδες",
+        "url": "https://scrimba.com/explain/guide0all9p5vj?claim=6a6h51m1nfcdj61p"
       }
     ]
   }
