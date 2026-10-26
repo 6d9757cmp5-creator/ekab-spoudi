@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 45/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
+  "note": "Μητρώο επιλογών εικόνων: 46/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Πραγματικός browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -507,6 +507,35 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "0af673ccf92bde64f11bc8a72aca838201048d92de739723257f4d3a22b80195"
+    },
+    "microbe_structures": {
+      "filename": "microbe-structures-el.svg",
+      "localPath": "assets/education/microbe-structures-el.svg",
+      "title": "Βακτήριο, ελυτροφόρος ιός και ζυμομύκητας: συγκεκριμένες δομές",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/microbiology/pages/1-3-types-of-microorganisms",
+      "additionalSources": [
+        "https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells",
+        "https://openstax.org/books/microbiology/pages/6-1-viruses",
+        "https://openstax.org/books/microbiology/pages/5-3-fungi"
+      ],
+      "caption": "Τρία πρωτότυπα σχηματικά παραδείγματα, όχι σε κοινή κλίμακα: προκαρυωτικό βακτηριακό κύτταρο με νουκλεοειδές, ριβοσώματα και τοίχωμα· ελυτροφόρος ιός με επιφανειακές ακίδες, καψίδιο και DNA ή RNA· εκβλαστάνων ζυμομύκητας με πυρήνα και κυτταρικό τοίχωμα. Δεν αντιπροσωπεύουν κάθε είδος ούτε αποτελούν διαγνωστικό οδηγό.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "Structural distinctions between bacterial, viral and fungal entities; original drawing not copied from OpenStax",
+        "Virus envelope shown as one example, not universal",
+        "Budding yeast one fungal example; no size equivalence claimed"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Local SVG XML parsed, rasterized with CairoSVG and visually inspected after leader-line correction; Greek labels and leader endpoints checked. Live browser/offline E2E and independent scientific review pending."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "a60ee4d0140da55b663780c8fcc75fd7faa9f71b32525cfe35551ed2e308cc04"
     }
   },
   "placements": {
@@ -657,6 +686,9 @@
     ],
     "04-05": [
       "incidence_prevalence"
+    ],
+    "04-06": [
+      "microbe_structures"
     ]
   },
   "courses": [
@@ -965,8 +997,10 @@
         },
         {
           "anchor": "#lesson-6",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "microbe_structures"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-7",
