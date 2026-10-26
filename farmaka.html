@@ -135,6 +135,7 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 .ph-main #catalog{scroll-margin-top:16px}
 @media(max-width:760px){.ph-tools label:first-child{grid-column:auto}.ph-headerline{gap:8px}.ph-proof{margin-left:0}.ph-main{padding:16px 12px 60px}}
 @media(max-width:480px){.ph-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.ph-nav a{white-space:nowrap;padding:9px 4px}.ph-counter{grid-template-columns:1fr}.ph-counter>button{padding:11px 13px}.ph-tools{grid-template-columns:1fr}.ph-main h1{line-height:1.25}.ph-panel{margin-bottom:12px}.ph-hero .ph-eyebrow{font-size:.66rem}}
+@media(max-width:640px){.ph-counter{grid-template-columns:1fr}.ph-counter>button{width:100%;min-width:0;justify-content:flex-start}.ph-section h2{scroll-margin-top:18px}}
 @media print{.ph-quick-search,.ph-counter,.ph-quiz-link{display:none}.ph-basics::details-content,.ph-disclosure::details-content{display:block;content-visibility:visible}}
 
 /* Understated document reference inside the pharmacology introduction. */
@@ -157,8 +158,6 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 </div></header>
 <main class="ph-main">
 <section class="ph-panel ph-hero" aria-labelledby="mainTitle">
-<div class="ph-eyebrow">Εκπαιδευτική βιβλιοθήκη · Ανασκόπηση 26/10/2026</div>
-<p class="ph-review-reference"><a href="docs/pharmacology-review-status-2026-10-26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Δελτίο ελέγχου της εκπαιδευτικής φαρμακολογίας σε PDF">Δελτίο ελέγχου</a></p>
 <h1 id="mainTitle">Φαρμακολογία προνοσοκομειακής φροντίδας</h1>
 <div class="ph-quick-search"><label for="drugSearch">Αναζήτηση φαρμάκου · Ελληνικά ή Αγγλικά<input type="search" id="drugSearch" placeholder="π.χ. αδρεναλίνη ή epinephrine" autocomplete="off"></label></div>
 
@@ -201,11 +200,11 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 <h2 id="quizTitle">04 · Αυτοέλεγχος κατανόησης</h2><p class="ph-tip">12 εκπαιδευτικές ερωτήσεις πολλαπλής επιλογής, βασισμένες στα αναφερόμενα πρωτόκολλα. Δεν αποτελούν επίσημες εξετάσεις ή πιστοποίηση.</p>
 <p id="quizProgress" class="ph-small" aria-live="polite"></p><h3 id="quizQuestion">Φόρτωση…</h3><div id="quizOptions" class="ph-quiz-options"></div><div id="quizFeedback" class="ph-feedback" hidden role="status"></div><button type="button" id="quizNext" class="ph-button" hidden>Επόμενη ερώτηση</button><button type="button" id="quizRestart" class="ph-button secondary" hidden>Νέα προσπάθεια</button>
 </section>
-<section class="ph-panel" id="references" aria-labelledby="refsTitle"><h2 id="refsTitle">05 · Επίσημες πηγές και τεκμηρίωση</h2>
+<details class="ph-panel ph-basics ph-reference-details" id="references"><summary><h2 id="refsTitle">Πηγές και τεκμηρίωση</h2></summary><div class="ph-reference-content"><p class="ph-review-reference"><a href="docs/pharmacology-review-status-2026-10-26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Δελτίο ελέγχου της εκπαιδευτικής φαρμακολογίας σε PDF">Δελτίο ελέγχου</a></p>
 <p class="ph-tip">Οι κατευθυντήριες πηγές τεκμηριώνουν αντίστοιχες κλινικές ενότητες, όχι απαραίτητα κάθε μεμονωμένη φαρμακολογική λεπτομέρεια. Οι καρτέλες που παραπέμπουν στη γενική ασφάλεια φαρμάκων του EMA απαιτούν διασταύρωση με την Περίληψη Χαρακτηριστικών Προϊόντος (ΠΧΠ/SmPC), πριν αξιοποιηθούν σε κλινική εκπαίδευση. Ο κατάλογος δεν υποκαθιστά το εγκεκριμένο πρωτόκολλο του ΕΚΑΒ.</p>
 <div id="sourceList" class="ph-sources"></div>
 <p class="ph-tip">Τελευταία εκπαιδευτική ανασκόπηση: 26 Οκτωβρίου 2026 · Προβλέπεται επανέλεγχος μετά από νέες επίσημες οδηγίες και έλεγχο από κλινικό εκπαιδευτή.</p>
-</section>
+</div></details>
 </main>
 <dialog id="clinicalGroupsDialog" class="ph-group-dialog" aria-labelledby="clinicalGroupsTitle">
 <h2 id="clinicalGroupsTitle">Επίλεξε κλινική ενότητα</h2>
@@ -220,15 +219,29 @@ document.addEventListener('DOMContentLoaded', function () {
   var category = document.getElementById('categoryFilter');
   var search = document.getElementById('drugSearch');
   var scope = document.getElementById('scopeFilter');
+  function focusResults() {
+    var target = document.querySelector('#drugResults .ph-section h2') ||
+      document.querySelector('#drugResults .ph-empty') ||
+      document.getElementById('resultCount');
+    if (!target) return;
+    target.setAttribute('tabindex', '-1');
+    target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    target.focus({preventScroll: true});
+  }
+  search.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      search.blur();
+      focusResults();
+    }
+  });
   function selectCategory(value) {
     search.value = '';
     scope.value = 'all';
     category.value = value;
     category.dispatchEvent(new Event('change', {bubbles:true}));
     if (dialog.open) dialog.close();
-    document.getElementById('catalog').scrollIntoView({block:'start'});
-    document.getElementById('catalogTitle').setAttribute('tabindex','-1');
-    document.getElementById('catalogTitle').focus({preventScroll:true});
+    focusResults();
   }
   catalogButton.addEventListener('click', function () { selectCategory('all'); });
   groupButton.addEventListener('click', function () {
