@@ -114,7 +114,13 @@ async function gradeAI(){
   status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';status.textContent=err.message||'Η AI αξιολόγηση δεν ολοκληρώθηκε. Χρησιμοποίησε τη χειροκίνητη αυτοαξιολόγηση.';
  }finally{
   requestPending=false;
-  if(state.active?.id===sessionId&&state.active.index===atIndex){$('examCheckAI').disabled=Boolean(current()?.revealed||current()?.grade);$('examCheckAI').textContent='Αξιολόγηση με AI';}
+  if(state.active?.id===sessionId&&state.active.index===atIndex){
+   $('examCheckAI').disabled=Boolean(current()?.revealed||current()?.grade);
+   $('examCheckAI').textContent='Αξιολόγηση με AI';
+   $('examPrev').disabled=state.active.index===0;
+   $('examNext').disabled=state.active.index===state.active.total-1;
+   $('examFinish').disabled=false;
+  }
  }
 }
 function next(direction){
