@@ -1,6 +1,6 @@
 # Image coverage continuation checkpoint
 
-Latest recorded batch: **2026-10-27, batch 16**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest recorded checkpoint: **2026-10-27, post-batch-16 synchronized with parallel changes**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
@@ -200,3 +200,10 @@ For each new asset: verify relevance and the original source/license; render and
 - Source-level readback confirmed all six recent SVGs (three from batch 15 plus three new) have Greek labels, title/desc, image role, matched element tags, and SW cache entries. Their registered SHA-256 values are present. The hash function was validated against the standard `abc` SHA-256 test vector. **Not yet verified:** actual XML-parser execution across entire repo, pixel/raster visual review, real-browser image zoom, offline end-to-end, CI workflow pass or production publishing.
 - **Distinct state measures at this checkpoint:** selected-image chapters **74/247** (Α 50/71, Β 13/73, Γ 5/51, Δ 6/52); **173 without selection**. Fully covered chapters: **0 documented as fully reviewed**, not a claim that every chapter is substantively incomplete. Independently scientifically approved chapter images: **0 documented**. Independently verified live published chapters from this PR: **0 documented**; main registry contains 26 selections but this is not production verification. Draft asset registry: **51 assets**.
 - Next user notification only on first crossing of **100 selected chapters**; 50 had been crossed previously. Continue independently reviewing visual fidelity, checking true source relevance, adding remaining images and verifying release before any claim of publication.
+
+
+## Concurrent follow-up checkpoint — 2026-10-27
+
+- Registry now reports **74/247** selected chapters; totals by semester: A 50, B 13, C 5, D 6. Total registered images: **51**, local SVGs **44**. Current main-registry comparison is historical and must not be treated as proven live publication.
+- The latest additional keys from parallel commits are `prehospital_care_pathway`, `closed_loop_handover`, `driver_fatigue_warning`; existing assets and the preceding batch remain intact. These additions are counted from actual current registry mappings rather than an outdated PR title.
+- The latest draft service-worker cache is `ekab-spoudi-v27.1.68-images-20261026-b23`. Local asset checksums are `0` missing at checkpoint. Independent medical review, browser rendering/zoom, offline end-to-end and production deployment are **not** established by this checkpoint.
