@@ -1,7 +1,9 @@
 /* EKAB Spoudi: εκπαιδευτικό βίντεο ανά μάθημα με οριζόντια διαδοχικά μέρη. */
 (function(){
   'use strict';
-  const course=window.EKAB_COURSE_VIDEO_SERIES?.['01'];
+  const matched=window.location.pathname.match(/saek-course-(\d+)\.html$/);
+  const courseId=matched?.[1]||'01';
+  const course=window.EKAB_COURSE_VIDEO_SERIES?.[courseId];
   const intro=document.querySelector('main.reader-main > section.panel');
   if(!intro||!course||!Array.isArray(course.parts)||!course.parts.length)return;
   const parts=course.parts.filter(p=>typeof p.url==='string'&&/^https:\/\/scrimba\.com\/explain\//.test(p.url));
@@ -9,12 +11,12 @@
 
   const section=document.createElement('section');
   section.className='panel saek-series';
-  section.id='anatomy-course-video';
+  section.id='saek-course-video-'+courseId;
   section.setAttribute('aria-labelledby','saek-series-title');
   section.tabIndex=0;
   section.innerHTML=
     '<p class="eyebrow">Ενιαία βιντεοδιδασκαλία ανά μάθημα</p>'+
-    '<h2 id="saek-series-title">Ανατομία — Εκπαιδευτικά βίντεο</h2>'+
+    '<h2 id="saek-series-title"></h2>'+
     '<p class="saek-series-intro">Παρακολούθησε συνεχόμενα μέρη του ίδιου μαθήματος. Σύρε την μπάρα αριστερά ή πάτησε «Επόμενο» για να συνεχίσεις. Η αλλαγή σταματά το προηγούμενο βίντεο.</p>'+
     '<div class="saek-series-viewport" data-series-viewport><div class="saek-series-track" data-series-track></div></div>'+
     '<div class="saek-series-swipe-strip" data-series-swipe>← Σύρε εδώ αριστερά για τη συνέχεια, δεξιά για επιστροφή →</div>'+
@@ -24,6 +26,7 @@
     '<button type="button" class="btn secondary compact" data-series-next>Επόμενο ›</button>'+
     '</div><div class="saek-series-parts" data-series-parts role="group" aria-label="Επιλογή διαθέσιμου μέρους"></div>'+
     '<p class="small muted" data-series-note></p>';
+  section.querySelector('#saek-series-title').textContent=course.title+' — Εκπαιδευτικά βίντεο';
   intro.insertAdjacentElement('afterend',section);
   const track=section.querySelector('[data-series-track]');
   const prev=section.querySelector('[data-series-prev]');
@@ -41,7 +44,7 @@
     kicker.textContent='Μέρος '+(i+1)+' · Κεφάλαιο '+part.chapter;
     const title=document.createElement('h3');title.textContent=part.title;
     const frame=document.createElement('iframe');frame.className='saek-series-frame';
-    frame.title='Ανατομία — Μέρος '+(i+1)+': '+part.title;
+    frame.title=course.title+' — Μέρος '+(i+1)+': '+part.title;
     frame.loading='lazy';frame.allow='autoplay; fullscreen';frame.allowFullscreen=true;
     frame.referrerPolicy='strict-origin-when-cross-origin';
     frame.dataset.src=part.url;
