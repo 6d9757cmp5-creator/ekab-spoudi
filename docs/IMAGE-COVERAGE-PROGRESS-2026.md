@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 4**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 5**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 27 | 10 | 44 |
+| Α | 71 | 28 | 10 | 43 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **43** | **26** | **204** |
+| **Total** | **247** | **44** | **26** | **203** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b6`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b7`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -52,3 +52,13 @@ For each new asset: verify relevance and the original source/license; render and
 **Still blocked/unverified:** 0 independent scientific approvals; real browser image/zoom/offline end-to-end and GitHub Pages publication not verified; full adequacy of lesson 01-01 still partial (body cavities, oblique planes, etc.). Structural CI for batch 4 should be checked separately after GitHub Actions runs. Never mark this batch clinically approved or published based on SVG parsing or service-worker inclusion.
 
 **Next safe batch:** add accurately sourced, Greek-labelled male/female reproductive anatomy to 01-13 (currently urinary only); then 01-09 muscular anatomy. For new unselected chapters in professional/public health courses, inspect actual lesson content first and choose concrete topic-relevant imagery. Continue in existing draft PR #6 without resetting its branch.
+
+## Batch 5 — 2026-10-26: new selected chapter 04-02
+
+- Inspected the actual text of **04-02** (“Αλυσίδα μετάδοσης λοιμώξεων”) before drawing; created original Greek SVG `assets/education/chain-of-infection-el.svg` showing six ordered components, directional arrows and concrete examples, rather than a generic lesson-summary card.
+- Verified terminology and sequence against official [CDC/NIOSH chain-of-infection components](https://www.cdc.gov/niosh/learning/safetyculturehc/module-2/3.html). Original artwork, declared CC BY 4.0; no CDC graphic copied. Distinct examples in nodes do not imply a single disease. No 2026-specific protocol asserted.
+- Locally parsed SVG and rendered it to PNG. Corrected heading overflow and arrow lengths after visual inspection. Browser zoom, service-worker offline end-to-end and independent scientific assessment **not** verified.
+- Added `infection_chain` asset with SHA-256 `0fb31dc9fd094ab6d197294c72b16539d8d6eed28e4bf5028880f23d1b38fc42` and `clinicalReview: pending`, `subjectCompleteness: partial`. Mapped it to `04-02` in both registry locations and added to offline precache. Draft cache key now `ekab-spoudi-v27.1.68-images-20261026-b7`.
+- New selected-source counts **44/247**: Α **28/71**, Β **5/73**, Γ **5/51**, Δ **6/52**. **203** chapters still have no selected source. Registry has **24** assets, including **17** locally hosted SVG. Selection does not establish full lesson adequacy or approval.
+
+**Remaining quality gates:** 0 documented independent scientific approvals; source/subject completeness pending; production deployment and real browser/offline/zoom verification pending. Public site version remains **27.1.68** according to previous checkpoint; this draft batch has not been merged or published. Next: reproductive anatomy 01-13, muscular anatomy 01-09, then further uncovered 04-xx chapters with verified source-specific figures.
