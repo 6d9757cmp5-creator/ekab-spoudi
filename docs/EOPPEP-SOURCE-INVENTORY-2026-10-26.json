@@ -1,23 +1,23 @@
 {
   "date": "2026-10-26",
   "purpose": "Επικαιροποιημένη πλήρης απογραφή 314 ερωτήσεων: πραγματικά καταγεγραμμένοι έλεγχοι, ιστορικές ανασκοπήσεις και ειλικρινείς εκκρεμότητες.",
-  "method": "Κατάσταση και διευθύνσεις πηγών συγχρονισμένες με το official_questions.json. Ατομική καταχώριση δεν σημαίνει αυτομάτως επαληθευμένο χωρίο. Η βιβλιογραφική/εκπαιδευτική ανασκόπηση δεν αποτελεί επίσημο κλειδί ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση.",
+  "method": "Κατάσταση και διευθύνσεις πηγών συγχρονισμένες με το official_questions.json. Ατομική καταχώριση δεν σημαίνει αυτομάτως επαληθευμένο χωρίο. Η βιβλιογραφική/εκπαιδευτική ανασκόπηση δεν αποτελεί επίσημο κλειδί ΕΟΠΠΕΠ ή ανεξάρτητη κλινική πιστοποίηση. Στις 26/10/2026 έγιναν 12 νέοι στοχευμένοι έλεγχοι με ERC/RCUK 2025 και ισχύουσα NICE (με ενημέρωση NG136 Φεβρουαρίου 2026). Η τεκμηρίωση της κεντρικής απάντησης δεν αποτελεί πλήρη πιστοποίηση κάθε κλινικής λεπτομέρειας.",
   "counts": {
     "total": 314,
     "withRecord": 314,
     "withHttps": 314,
-    "documentedSourceCheck": 116,
+    "documentedSourceCheck": 128,
     "historicalTargetedReview": 60,
-    "pendingSpecificPassageCheck": 138,
+    "pendingSpecificPassageCheck": 126,
     "needsMoreSpecificLocation": 12,
-    "withRecordedSpecificReview": 116,
-    "withoutRecordedSpecificReview": 198,
-    "withDocumentedTargetedReview": 176,
-    "withoutDocumentedTargetedReview": 138,
-    "withRecordedSourceCheckedField": 116,
-    "withoutRecordedSourceCheckedField": 198,
+    "withRecordedSpecificReview": 128,
+    "withoutRecordedSpecificReview": 186,
+    "withDocumentedTargetedReview": 188,
+    "withoutDocumentedTargetedReview": 126,
+    "withRecordedSourceCheckedField": 128,
+    "withoutRecordedSourceCheckedField": 186,
     "withNonSpecificIntroSources": 12,
-    "newlyVerifiedFromLiveWeb20261026": 6
+    "newlyVerifiedFromLiveWeb20261026": 18
   },
   "records": [
     {
@@ -3709,30 +3709,31 @@
       "id": "EOP-B-004",
       "group": "B",
       "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – Adult ALS",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceLocation": "RCUK / ERC Guidelines 2025, Adult ALS, shockable rhythms VF/pVT; defibrillation and drugs.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
         "https://www.resus.org.uk/cy/node/36438"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/cy/node/36438"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-005",
@@ -3772,31 +3773,33 @@
     {
       "id": "EOP-B-006",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
-      "sourceLocation": "RCUK 2025 First Aid, continue CPR",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Adult Basic Life Support, AED / When and how to use an AED; continue CPR and follow AED instructions.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines",
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-007",
@@ -3958,31 +3961,33 @@
     {
       "id": "EOP-B-012",
       "group": "B",
-      "sourceUrl": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations",
-      "sourceLocation": "NICE CG95 – Οξύ θωρακικό άλγος",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations",
+      "sourceLocation": "NICE CG95, Recommendations 1.2.1.12, 1.2.2 και 1.2.3 Immediate management of suspected ACS. Συστάσεις χρονολογίας 2010 που παραμένουν στο δημοσιευμένο guideline.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.nice.org.uk/guidance/cg95/chapter/recommendations",
         "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-013",
@@ -4347,31 +4352,33 @@
     {
       "id": "EOP-B-024",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – First Aid",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Paediatric Life Support, Foreign body airway obstruction (infants, children/adolescents).",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-025",
@@ -4745,31 +4752,33 @@
     {
       "id": "EOP-B-036",
       "group": "B",
-      "sourceUrl": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations",
-      "sourceLocation": "NICE CG95 – Οξύ θωρακικό άλγος",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations",
+      "sourceLocation": "NICE CG95, Recommendation 1.2.3.2, loading aspirin 300 mg for suspected ACS unless known allergy; επιπρόσθετες αντενδείξεις πρέπει να ελέγχονται στο ισχύον SmPC και στον υπεύθυνο ιατρό.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.nice.org.uk/guidance/cg95/chapter/recommendations",
         "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-037",
@@ -4843,31 +4852,33 @@
     {
       "id": "EOP-B-039",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/cy/node/36438",
-      "sourceLocation": "ERC/RCUK Adult ALS 2025 – εξειδικευμένη φαρμακολογία",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Special Circumstances: anaphylaxis (IM adrenaline); Adult ALS: vasopressor drugs in cardiac arrest, https://www.resus.org.uk/cy/node/36438.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines",
         "https://www.resus.org.uk/cy/node/36438"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-040",
@@ -5956,31 +5967,33 @@
     {
       "id": "EOP-B-075",
       "group": "B",
-      "sourceUrl": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations",
-      "sourceLocation": "NICE CG95 – Οξύ θωρακικό άλγος",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.nice.org.uk/guidance/ng128/chapter/recommendations",
+      "sourceLocation": "NICE NG128, Recommendations 1.1.1–1.1.3 rapid recognition: validated FAST outside hospital and hypoglycaemia exclusion; 1.3 urgent assessment and imaging.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.nice.org.uk/guidance/ng128/chapter/recommendations",
         "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.nice.org.uk/guidance/ng128/chapter/recommendations"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-076",
@@ -6368,31 +6381,33 @@
     {
       "id": "EOP-B-088",
       "group": "B",
-      "sourceUrl": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations",
-      "sourceLocation": "NICE CG95 – Οξύ θωρακικό άλγος",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.nice.org.uk/guidance/ng136/chapter/recommendations",
+      "sourceLocation": "NICE NG136, Recommendations 1.2.2–1.2.8 (diagnosis with clinic and ABPM/HBPM), 1.3.3 organ damage, update 26 February 2026.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.nice.org.uk/guidance/ng136/chapter/recommendations",
         "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.nice.org.uk/guidance/ng136/chapter/recommendations"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-089",
@@ -6551,89 +6566,95 @@
     {
       "id": "EOP-B-094",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/cy/node/36439",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – Paediatric Life Support",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Paediatric Life Support, Seizures; NICE NG217 §7, generalized convulsive status epilepticus and individualized emergency management.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
         "https://www.resus.org.uk/cy/node/36439"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-095",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/cy/node/36439",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – Paediatric Life Support",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Paediatric Life Support, Recognition and management of the critically ill child: airway/breathing/SpO2.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
         "https://www.resus.org.uk/cy/node/36439"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-096",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/cy/node/36439",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – Paediatric Life Support",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Paediatric Life Support, Recognition of the critically ill or injured child: work and effectiveness of breathing / clinical respiratory failure.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
         "https://www.resus.org.uk/cy/node/36439"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-097",
@@ -7168,31 +7189,33 @@
     {
       "id": "EOP-B-114",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – First Aid",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines",
+      "sourceLocation": "RCUK Guidelines 2025, Special Circumstances, Accidental hypothermia; και First Aid 2025, Prevention of hypothermia.",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines",
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "sourceCheckEvidence": [
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+      ],
+      "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
     },
     {
       "id": "EOP-B-115",
