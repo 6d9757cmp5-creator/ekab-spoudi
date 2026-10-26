@@ -125,7 +125,12 @@ function installSearch(){
  results.id='ekabGlobalResults';results.hidden=true;results.setAttribute('aria-live','polite');
  const all=el('a','saek-show-all','Πλήρης αναζήτηση · Όλα τα αποτελέσματα');
  all.href='search.html';
- popup.append(bar,hint,input,examples,results,all);wrap.append(toggle,popup);utility.prepend(wrap);
+ const glossaryAction=el('button','ekab-search-glossary','Ιατρικό λεξικό · Ελληνικά / English / Σύμβολα');
+ glossaryAction.type='button';
+ glossaryAction.setAttribute('aria-haspopup','dialog');
+ glossaryAction.setAttribute('aria-controls','medicalGlossaryDialog');
+ glossaryAction.addEventListener('click',()=>{close();window.EkabOpenMedicalGlossary?.()});
+ popup.append(bar,hint,input,examples,results,all,glossaryAction);wrap.append(toggle,popup);utility.prepend(wrap);
  let pending=0,links=[],selected=-1;
  const pageLink=q=>{all.href='search.html'+(q?'?q='+encodeURIComponent(q):'')};
  const close=()=>{popup.hidden=true;toggle.setAttribute('aria-expanded','false');input.setAttribute('aria-expanded','false');results.hidden=true;links=[];selected=-1};
