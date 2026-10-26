@@ -138,6 +138,72 @@ window.EKAB_COURSE_VIDEO_SERIES = {
         "title": "Νευρική ώση και αντανακλαστικά",
         "shortTitle": "Νευρική ώση",
         "url": "https://scrimba.com/explain/guide0h066tsns?claim=n9mq4gv3e9u6clng"
+      },
+      {
+        "chapter": 7,
+        "title": "Καρδιακός κύκλος και ηλεκτρική αγωγή",
+        "shortTitle": "Καρδιακός κύκλος",
+        "url": "https://scrimba.com/explain/guide084olnbg2?claim=cn7jjjifilv0atc7"
+      },
+      {
+        "chapter": 8,
+        "title": "Πίεση, αντίσταση και μικροκυκλοφορία",
+        "shortTitle": "Πίεση και μικροκυκλοφορία",
+        "url": "https://scrimba.com/explain/guide06kl86o7o?claim=5k81uvmogqdk0lck"
+      },
+      {
+        "chapter": 9,
+        "title": "Αερισμός, διάχυση και μεταφορά αερίων",
+        "shortTitle": "Μεταφορά αερίων",
+        "url": "https://scrimba.com/explain/guide05h54ooni?claim=rfcgc2671r40760s"
+      },
+      {
+        "chapter": 10,
+        "title": "Οξεοβασική ισορροπία",
+        "shortTitle": "Οξεοβασική ισορροπία",
+        "url": "https://scrimba.com/explain/guide0dard3kag?claim=msnln9isgtr0f1d5"
+      },
+      {
+        "chapter": 11,
+        "title": "Νεφρική λειτουργία και ισοζύγιο υγρών",
+        "shortTitle": "Νεφρική λειτουργία",
+        "url": "https://scrimba.com/explain/guide0jq6sl7dg?claim=339afagmi43jqi8p"
+      },
+      {
+        "chapter": 12,
+        "title": "Πέψη, απορρόφηση και θρέψη",
+        "shortTitle": "Πέψη και απορρόφηση",
+        "url": "https://scrimba.com/explain/guide0lh0kciva?claim=ikeqbaamd03or4i0"
+      },
+      {
+        "chapter": 13,
+        "title": "Ενδοκρινής ρύθμιση και γλυκόζη",
+        "shortTitle": "Ενδοκρινής ρύθμιση",
+        "url": "https://scrimba.com/explain/guide05n7d1euh?claim=p8sc8065t01kgbf9"
+      }
+    ]
+  },
+  "03": {
+    "title": "Ο Διασώστης – Επαγγελματίας Υγείας",
+    "totalChapters": 10,
+    "parts": [
+      {
+        "chapter": 1,
+        "title": "Αποστολή και επαγγελματικά όρια",
+        "shortTitle": "Επαγγελματικά όρια",
+        "url": "https://scrimba.com/explain/guide0a7i58umh?claim=bgi4urgms2pt6p7d"
+      },
+      {
+        "chapter": 2,
+        "title": "Επικοινωνία, αξιοπρέπεια και εμπιστευτικότητα",
+        "shortTitle": "Επικοινωνία",
+        "url": "https://scrimba.com/explain/guide0j53sq7b5?claim=mivtpce2c7hd844o"
+      },
+      {
+        "chapter": 3,
+        "title": "Ασφάλεια πληρώματος και συνεχής εκπαίδευση",
+        "shortTitle": "Ασφάλεια πληρώματος",
+        "url": "https://scrimba.com/explain/guide0el382jup?claim=hbs399por5j7sq2m"
       }
     ]
   }
