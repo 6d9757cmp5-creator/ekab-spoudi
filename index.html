@@ -5,7 +5,8 @@
 <main class="main">
 <div id="homeView">
 <section class="panel"><p class="eyebrow">Πιστοποίηση ΕΟΠΠΕΠ</p><h2>Επίσημη τράπεζα θεωρητικών ερωτήσεων</h2><p class="subtitle">Πραγματικά θέματα του καταλόγου της ειδικότητας · 105 γενικές και 209 ειδικές</p>
-<div class="stats"><div class="stat"><b id="allCount">314</b><span>Ερωτήσεις</span></div><div class="stat"><b id="seenCount">0</b><span>Μελετημένες</span></div><div class="stat"><b id="verifiedCount">0</b><span>Με βιβλιογραφία</span></div></div>
+<div class="stats"><div class="stat stat-clickable"><button type="button" class="stat-question-link" id="allQuestionsToggle" aria-controls="allQuestionsPanel" aria-expanded="false" title="Εμφάνιση όλων των 314 ερωτήσεων"><b id="allCount">314</b><span>Ερωτήσεις</span><small>Πάτησε για προβολή</small></button></div><div class="stat"><b id="seenCount">0</b><span>Μελετημένες</span></div><div class="stat"><b id="verifiedCount">0</b><span>Με βιβλιογραφία</span></div></div>
+<details class="fold all-questions-panel" id="allQuestionsPanel"><summary>Οι 314 ερωτήσεις · Άνοιγμα καταλόγου</summary><div class="body"><p class="small muted">Επιλέγεις οποιαδήποτε ερώτηση για να ανοίξει στη μελέτη. Οι ενδεικτικές απαντήσεις δεν αποτελούν επίσημο λυσάρι.</p><div id="allQuestionsList" class="all-questions-list" aria-live="polite">Πάτησε για εμφάνιση ερωτήσεων.</div></div></details>
 <div class="section-label">Πρόοδος ανά επίσημη ομάδα</div><div id="groupProgress" aria-live="polite"></div>
 <button class="btn full" id="openExam">Μελέτη θεωρητικών ερωτήσεων <span aria-hidden="true">›</span></button></section>
 <details class="fold" id="topicsFold"><summary>Πρόοδος ανά θεματική <span class="muted small">Ανάλυση</span></summary><div class="body"><p class="small muted">Οι θεματικές είναι βοηθητική ταξινόμηση της εφαρμογής, <strong>όχι επίσημες υποομάδες του ΕΟΠΠΕΠ.</strong></p><div id="topicProgress"></div></div></details>
