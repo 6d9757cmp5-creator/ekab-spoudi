@@ -36,6 +36,18 @@ window.EKAB_COURSE_VIDEO_SERIES = {
         "title": "Κοιλιακά όργανα",
         "shortTitle": "Κοιλιακά όργανα",
         "url": "https://scrimba.com/explain/guide0ffu06oih?claim=2791kcsac9vvo3b8"
+      },
+      {
+        "chapter": 5,
+        "title": "Νευρικό και κυκλοφορικό σύστημα",
+        "shortTitle": "Νεύρα και κυκλοφορία",
+        "url": "https://scrimba.com/explain/guide05liq68cc?claim=i886sq25u2vvo4ng"
+      },
+      {
+        "chapter": 6,
+        "title": "Κύτταρο, ιστοί και όργανα",
+        "shortTitle": "Κύτταρο και ιστοί",
+        "url": "https://scrimba.com/explain/guide04cimp8a0?claim=85g1u695eje0ijju"
       }
     ]
   }
