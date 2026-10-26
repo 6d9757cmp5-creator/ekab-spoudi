@@ -36,3 +36,6 @@ document.querySelectorAll('img.course-diagram').forEach(img=>{
  s.async=true;
  document.head.appendChild(s);
 })();
+
+/* Greek lesson-specific visual recap cards; separate from sourced anatomical figures. */
+(function(){const s=document.createElement('script');s.src='saek-chapter-visuals.js';s.async=true;document.head.appendChild(s);})();
