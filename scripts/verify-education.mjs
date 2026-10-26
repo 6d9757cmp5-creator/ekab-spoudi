@@ -33,6 +33,11 @@ for(const q of bank){
 
 if(inv.records.length!==314||inv.counts.total!==314||inv.counts.withRecord!==314)fail('Citation/review inventory not 314');
 if(inv.records.some((r,i)=>r.id!==bank[i]?.id))fail('Citation inventory ID/order mismatch');
+const checked=bank.filter(q=>Boolean(q.sourceChecked)).length;
+const recorded=bank.filter(q=>Boolean(q.sourceChecked||q.reviewAudit20261026||q.reviewAudit20261026Followup||q.finalAudit20261026||q.webResearch20261026)).length;
+if(inv.counts.withRecordedSourceCheckedField!==checked||inv.counts.withDocumentedTargetedReview!==recorded)fail('EOPPEP source inventory stale: '+checked+' sourceChecked and '+recorded+' reviewed expected');
+if(inv.records.some((r,i)=>r.sourceUrl!==bank[i]?.sourceUrl||Boolean(r.recordedPassageReview)!==Boolean(bank[i]?.sourceChecked)||Boolean(r.documentedTargetedReview)!==Boolean(bank[i]?.sourceChecked||bank[i]?.reviewAudit20261026||bank[i]?.reviewAudit20261026Followup||bank[i]?.finalAudit20261026||bank[i]?.webResearch20261026)))fail('EOPPEP inventory record metadata out of sync');
+
 const imgs=JSON.parse(read('saek-image-audit-2026.json'));
 if(imgs.courses.length!==20)fail('SAEK: image audit should list 20 courses');
 let chapterCount=0,sourceImages=0,missingIllustrations=0,genericExercises=0;
