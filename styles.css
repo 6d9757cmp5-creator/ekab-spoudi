@@ -412,3 +412,23 @@ dialog{border-radius:26px}
 html[data-theme="dark"] .ph-main{--panel:#132639}
 html[data-theme="dark"] .ph-main .ph-button:not(.secondary){background:#247fa9;color:#fff}
 html[data-theme="dark"] .ph-main .ph-button.secondary{background:#234459;color:#e4f6ff}
+
+
+/* Account settings: locally stored progress, backups and update controls. */
+#accountDialog{width:min(96vw,800px);max-height:90dvh;max-height:90vh;overflow-y:auto;overscroll-behavior:contain}
+#accountDialog .account-dialog{min-width:0;padding:clamp(15px,3vw,24px)}
+#accountDialog .account-dialog-heading{position:sticky;top:0;z-index:5;padding:7px 0 10px;background:var(--bg);border-bottom:1px solid var(--line)}
+#accountDialog .account-storage-panel{margin:15px 0;box-shadow:none}
+#accountDialog .account-storage-panel>.body{padding:0 16px 16px}
+#accountDialog .backup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#accountDialog .storage-summary-note{font-size:.72rem}
+#accountDialog .app-version-row{gap:12px}
+#accountDialog .storage-panel .sync-summary{line-height:1.5}
+@media(max-width:630px){
+ #accountDialog{width:min(96vw,560px);max-height:90dvh}
+ #accountDialog .backup-grid{grid-template-columns:1fr;gap:11px}
+ #accountDialog .account-storage-panel>.body{padding:0 12px 13px}
+ #accountDialog .account-storage-panel>summary{padding:13px}
+ #accountDialog .app-version-row{align-items:flex-start}
+}
+html[data-theme="dark"] #accountDialog .account-dialog-heading{background:#162c3c}
