@@ -5,6 +5,8 @@ on:
     paths:
       - 'saek-image-audit-2026.json'
       - 'scripts/check-saek-images.mjs'
+      - 'scripts/validate-saek-svg.py'
+      - 'assets/education/*.svg'
       - '.github/workflows/saek-image-review.yml'
   workflow_dispatch:
   schedule:
@@ -26,6 +28,8 @@ jobs:
           node-version: '22'
       - name: Check sources, chapter mappings and media links
         run: node scripts/check-saek-images.mjs --remote
+      - name: Validate local SVG XML, accessibility, Greek labels and SHA-256
+        run: python3 scripts/validate-saek-svg.py
       - name: Publish machine-readable audit report
         if: always()
         uses: actions/upload-artifact@v4
