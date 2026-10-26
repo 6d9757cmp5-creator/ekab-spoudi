@@ -1,16 +1,16 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 8**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 9**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 30 | 10 | 41 |
+| Α | 71 | 31 | 10 | 40 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **46** | **26** | **201** |
+| **Total** | **247** | **47** | **26** | **200** |
 
 **Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b11`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
@@ -101,3 +101,11 @@ For each new asset: verify relevance and the original source/license; render and
 **Next safe batch:** add specific Greek-labelled muscular anatomy to **01-09**, or choose **04-07 / 04-08** only after reviewing current official infection-prevention instructions and image licensing. Keep registry, subject adequacy, independent approval and live production counts distinct.
 
 **Batch 8 post-commit verification:** GitHub Actions [SAEK quality run 40385553873](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40385553873) completed **successfully** for checkpoint commit `f2812a05814b46d0efdcb40d866739fe209aaaf0`. Remote registry readback: 247 chapters, 46 selected, no broken registry asset keys or course/placement mismatches, and all local image paths present in `sw.js` precache. Main registry rechecked: A10/B5/C5/D6 (26/247); production version file `27.1.68`. Image-specific GitHub Actions CI not independently confirmed for this batch; no claim of full browser app/zoom/offline E2E or published deployment.
+
+
+## Batch 9: chapter 04-08 — cleaning, disinfection and sterilization (2026-10-26)
+
+- New original Greek-labelled three-panel SVG `assets/education/clean-disinfect-sterilize-el.svg` compares the distinct objectives of cleaning, disinfection and validated sterilization. Caption explicitly distinguishes bacterial spores and warns against treating the illustration as a procedure or proof of effectiveness. Background reference: [CDC infection-control disinfection and sterilization](https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/index.html); original drawing, CC BY 4.0.
+- Added asset key `clean_disinfect_sterilize`, registry placement `04-08`, course 4 chapter 8 source selection; draft service-worker precache b12. **47/247** chapters selected (Α 31/71, Β 5/73, Γ 5/51, Δ 6/52), **200** without an image, **29** registered assets, **22** local SVG. Main remains last observed 26/247; publication unverified.
+- **Quality gates pending:** independent clinical/scientific review, raster/browser visual inspection, actual course rendering and offline end-to-end, SHA-256 recording for this new SVG, new CI result and published app verification. `saek-visual-ui.js` currently hides draft visual panels and course diagrams, so source registration **does not** make the image visible to students. Do not merge or report as published. Other chapter 04-08 instrument risk categories and real procedures are not comprehensively illustrated.
+- **Next:** complete and validate the image-specific checks for batch 9, then add Greek-labelled diagrams for additional genuinely unselected chapters; milestone notification at 50/247, not 47/247.
