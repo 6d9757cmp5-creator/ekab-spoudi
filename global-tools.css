@@ -217,3 +217,9 @@ html[data-theme="dark"] .ekab-search-popover .saek-result-item:hover{background:
  .ekab-search-popover{right:auto;left:0;width:min(390px,calc(100vw - 28px));max-height:65dvh}
  .top .nav.ekab-breadcrumb{margin-top:7px}
 }
+
+/* Medical dictionary is a secondary tool in search, never an educational card. */
+.ekab-search-glossary{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 10px;border:1px solid #d6e5ee;border-radius:10px;background:#f5f9fc;color:#1f5873;font:inherit;font-size:.8rem;font-weight:750;line-height:1.45}
+.ekab-search-glossary:hover,.ekab-search-glossary:focus-visible{background:#e7f2f9;outline:2px solid #73b7d9;outline-offset:1px}
+html[data-theme="dark"] .ekab-search-glossary{background:#1c4053;color:#dcf1fc;border-color:#46687c}
+html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
