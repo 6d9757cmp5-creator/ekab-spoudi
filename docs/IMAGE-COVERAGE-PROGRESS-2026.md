@@ -1,16 +1,16 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 12**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 13**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 35 | 10 | 36 |
+| Α | 71 | 37 | 10 | 34 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **51** | **26** | **196** |
+| **Total** | **247** | **53** | **26** | **194** |
 
 **Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b14`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
@@ -139,3 +139,12 @@ For each new asset: verify relevance and the original source/license; render and
 - Main-branch registry last checked **26/247** (Α10, Β5, Γ5, Δ6), NOT evidence of live deployment. Production version **27.1.68** unchanged. PR #6 remains draft.
 - **Outstanding:** independent scientific review, live verification of linked reference pages, SVG XML/raster and actual-browser/zoom/offline E2E, source renderer and public deployment. This asset is selected in draft, not certified, clinically approved, or published. Source review date and SHA-256 remain unset until independently verified.
 - **Next:** run XML/raster/real-app checks for recent assets, fill remaining 04-01 or 04-04 only with specific explanatory diagrams; preserve milestone notification schedule (next 100).
+
+
+## Batch 13: public-health foundations 04-01 and 04-04 (2026-10-26)
+
+- Created original Greek-labelled SVGs `assets/education/public-health-cycle-el.svg` (four-stage surveillance → risk assessment → population intervention → evaluation with concrete examples) and `assets/education/social-determinants-pathways-el.svg` (housing, transport and work pathways through exposure/access/risk to health outcomes). Both are subject-specific educational diagrams, not generic text cards or patient protocols. Authored original illustrations licensed CC BY 4.0.
+- Registered `public_health_cycle` for 04-01 and `social_determinants_pathways` for 04-04 in the audit registry, course 4, and `sw.js` draft precache **b16**. No unrelated theory, study progress, login or synchronization modifications.
+- Structural registry checks during commit: **247 total chapters, 53 source-selected (Α37/71, Β5/73, Γ5/51, Δ6/52), 194 missing**, 35 registered assets, no unresolved selected asset keys. Main last verified **26/247 (Α10/71, Β5/73, Γ5/51, Δ6/52)**, not verified production. App version **27.1.68** unchanged.
+- **Quality limits:** no documented independent clinical/scientific review; live source-page verification, SHA-256, full SVG XML/raster inspection, browser/zoom/offline E2E and live deployment remain pending. Do not call draft selections approved or published.
+- **Next:** perform real rendering and offline checks on newly added diagrams and extend coverage to the next genuinely missing lesson, without duplicate PR. Next notification milestone 100 selected chapters.
