@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+<title id="title">Ενεργοποίηση Β λεμφοκυττάρου και δημιουργία ανοσολογικής μνήμης</title>
+<desc id="desc">Σχηματική Τ-εξαρτώμενη απόκριση: πρωτεϊνικό αντιγόνο αναγνωρίζεται από Β λεμφοκύτταρο, το οποίο λαμβάνει βοήθεια από Τ-βοηθητικό κύτταρο. Ακολουθούν κλωνική επέκταση και διαφοροποίηση σε πλασματοκύτταρο που εκκρίνει αντισώματα και Β κύτταρο μνήμης. Δεν απεικονίζεται όλη η ανοσολογική διαδικασία.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#476b80"/></marker><linearGradient id="cell" x2=".85" y2="1"><stop stop-color="#e7f6ff"/><stop offset="1" stop-color="#a7d5ed"/></linearGradient><linearGradient id="plasma" x2=".8" y2="1"><stop stop-color="#ffefd9"/><stop offset="1" stop-color="#eab36c"/></linearGradient></defs>
+<style>text{font-family:DejaVu Sans,Arial,sans-serif;fill:#143b52}.heading{font-size:27px;font-weight:700}.label{font-size:20px;font-weight:700}.sub{font-size:17px}.tiny{font-size:15px}.cell{stroke:#35769a;stroke-width:4;fill:url(#cell)}.nucleus{fill:#738bb9;stroke:#46618c;stroke-width:3}.flow{fill:none;stroke:#476b80;stroke-width:4;marker-end:url(#arrow);stroke-linecap:round}.antibody{fill:none;stroke:#286f9d;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.antigen{fill:#e77972;stroke:#ad3d43;stroke-width:3}.panel{fill:#fff;stroke:#c9dde8;stroke-width:2}</style>
+<rect width="1120" height="650" fill="#f6fbfe"/><rect x="18" y="18" width="1084" height="614" rx="20" class="panel"/>
+<text x="560" y="61" text-anchor="middle" class="heading">Β λεμφοκύτταρα: αντισώματα και ανοσολογική μνήμη</text>
+<text x="560" y="91" text-anchor="middle" class="sub">Παράδειγμα Τ-εξαρτώμενης απόκρισης σε πρωτεϊνικό αντιγόνο</text>
+<!-- antigen: an isolated protein epitope, not a pathogen -->
+<g transform="translate(113 250)"><path class="antigen" d="M0 -30L16 -18L29 -6L19 11L6 26L-12 20L-27 2L-17 -20Z"/><circle cx="2" cy="-2" r="6" fill="#ffd8a4"/></g>
+<text x="113" y="314" text-anchor="middle" class="label">Αντιγόνο</text><text x="113" y="338" text-anchor="middle" class="tiny">πρωτεϊνικό</text>
+<path class="flow" d="M153 250H258"/>
+<!-- B cell with surface receptor -->
+<circle cx="348" cy="249" r="75" class="cell"/><circle cx="349" cy="252" r="36" class="nucleus"/>
+<path d="M279 225L266 207M279 225L292 209M279 225L280 244" fill="none" stroke="#286f9d" stroke-width="6" stroke-linecap="round"/>
+<path class="antibody" d="M345 175L345 159M345 159L332 146M345 159L358 146"/>
+<text x="348" y="353" text-anchor="middle" class="label">Β λεμφοκύτταρο</text><text x="348" y="376" text-anchor="middle" class="tiny">ειδικός υποδοχέας αντιγόνου</text>
+<!-- helper T cell below, co-stimulation indicated -->
+<circle cx="348" cy="476" r="54" fill="#d6e8d5" stroke="#5c996a" stroke-width="4"/><circle cx="348" cy="476" r="24" fill="#8ab69c" stroke="#568669" stroke-width="2"/>
+<text x="348" y="557" text-anchor="middle" class="label">Τ-βοηθητικό</text><text x="348" y="579" text-anchor="middle" class="sub">λεμφοκύτταρο</text>
+<path class="flow" d="M348 417V331"/><text x="372" y="411" class="tiny">βοηθητικά</text><text x="372" y="431" class="tiny">σήματα</text>
+<!-- split to plasma and memory B cells -->
+<path class="flow" d="M429 231C502 210 528 195 595 195"/>
+<path class="flow" d="M429 274C501 318 521 446 595 446"/>
+<text x="511" y="175" text-anchor="middle" class="sub">Κλωνική επέκταση</text>
+<text x="511" y="196" text-anchor="middle" class="tiny">και διαφοροποίηση</text>
+<!-- plasma cell -->
+<ellipse cx="691" cy="195" rx="77" ry="64" fill="url(#plasma)" stroke="#bf854a" stroke-width="4"/><ellipse cx="667" cy="196" rx="26" ry="29" fill="#b98da5" stroke="#956b87" stroke-width="2"/>
+<path d="M702 166q30 15 0 27q29 14 0 28q29 13 0 24" fill="none" stroke="#b77c48" stroke-width="5" stroke-linecap="round"/>
+<text x="691" y="295" text-anchor="middle" class="label">Πλασματοκύτταρο</text><text x="691" y="320" text-anchor="middle" class="sub">εκκρίνει αντισώματα</text>
+<path class="flow" d="M778 194H864"/>
+<!-- Y-shaped antibody molecules, not bound to antigen -->
+<g class="antibody"><path d="M917 172v24m0 -24l-16 -16m16 16l16 -16"/><path d="M971 218v24m0 -24l-16 -16m16 16l16 -16"/><path d="M907 264v24m0 -24l-16 -16m16 16l16 -16"/><path d="M1025 175v24m0 -24l-16 -16m16 16l16 -16"/></g>
+<text x="950" y="320" text-anchor="middle" class="label">Αντισώματα</text><text x="950" y="345" text-anchor="middle" class="tiny">ειδικά για το αντιγόνο</text>
+<!-- memory B cell -->
+<circle cx="691" cy="445" r="67" class="cell"/><circle cx="691" cy="447" r="30" class="nucleus"/>
+<path class="antibody" d="M691 378v-13m0 0l-12 -12m12 12l12 -12"/>
+<text x="691" y="542" text-anchor="middle" class="label">Β κύτταρο μνήμης</text><text x="691" y="566" text-anchor="middle" class="sub">παραμένει μετά την απόκριση</text>
+<path class="flow" d="M776 446H857"/>
+<rect x="864" y="393" width="213" height="110" rx="14" fill="#e8f4e9" stroke="#87ad8e" stroke-width="2"/>
+<text x="970" y="422" text-anchor="middle" class="sub" font-weight="700">Νέα έκθεση στο</text><text x="970" y="447" text-anchor="middle" class="sub" font-weight="700">ίδιο αντιγόνο</text><text x="970" y="478" text-anchor="middle" class="tiny">ταχύτερη απόκριση</text>
+<text x="560" y="608" text-anchor="middle" class="tiny">Σχηματική απεικόνιση • όχι σε κλίμακα • δεν παρουσιάζονται όλα τα στάδια ή όλοι οι τύποι ανοσίας</text>
+</svg>
