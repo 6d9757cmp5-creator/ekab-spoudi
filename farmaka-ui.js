@@ -67,28 +67,36 @@
       addPoint(detailBody,'Επίπεδο τεκμηρίωσης',info.evidenceLevel);
       addPoint(detailBody,'Απαραίτητη κλινική επικύρωση',info.clinicalApproval,true);
       if(info.extraNote) addPoint(detailBody,'Σημείωση επαλήθευσης',info.extraNote);
+      var clinicalSources=el('details','compact-sources');
+      clinicalSources.append(el('summary','','Πηγές κλινικής επέκτασης'));
+      var clinicalSourceBody=el('div','compact-sources-body');
       [info.evidenceKey,info.extraEvidenceKey].filter(Boolean).forEach(function(key){
         var e=lib.sources[key];if(!e)return;
         var line=el('p');
         var link=el('a','',e.title+' ↗');
         link.href=e.url;link.target='_blank';link.rel='noopener noreferrer';
-        line.append(link);detailBody.append(line);
+        line.append(link);clinicalSourceBody.append(line);
       });
+      if(clinicalSourceBody.children.length){clinicalSources.append(clinicalSourceBody);detailBody.append(clinicalSources);}
       extended.append(detailBody);
       body.append(extended);
     }
     var source = lib.sources[m.source];
     if (source) {
+      var references = el('details', 'compact-sources');
+      references.append(el('summary', '', 'Πηγές και τεκμηρίωση'));
+      var referenceBody = el('div', 'compact-sources-body');
       var p = el('p');
       var a = el('a', '', 'Πηγή / κατευθυντήρια αναφορά ↗');
       a.href = source.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      p.append(a); body.append(p);
+      p.append(a); referenceBody.append(p);
       if (m.source === 'EMA') {
-        body.append(el('p', 'ph-small', 'ΠΡΟΣ ΚΛΙΝΙΚΟ ΕΛΕΓΧΟ: Η παραπομπή στον EMA είναι γενική και δεν επαληθεύει ειδική ένδειξη ή δόση. Συμβουλεύσου την ΠΧΠ του συγκεκριμένου φαρμάκου.'));
+        referenceBody.append(el('p', 'ph-small', 'ΠΡΟΣ ΚΛΙΝΙΚΟ ΕΛΕΓΧΟ: Η παραπομπή στον EMA είναι γενική και δεν επαληθεύει ειδική ένδειξη ή δόση. Συμβουλεύσου την ΠΧΠ του συγκεκριμένου φαρμάκου.'));
       } else {
-        body.append(el('p', 'ph-small', 'Η πηγή αφορά την κλινική ενότητα· έλεγξε την αντιστοιχία με την ισχύουσα έκδοση/το τοπικό πρωτόκολλο.'));
+        referenceBody.append(el('p', 'ph-small', 'Η πηγή αφορά την κλινική ενότητα· έλεγξε την αντιστοιχία με την ισχύουσα έκδοση/το τοπικό πρωτόκολλο.'));
       }
     }
+    if (source) { references.append(referenceBody); body.append(references); }
     card.append(body);
     return card;
   }
