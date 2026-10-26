@@ -165,3 +165,17 @@ html[data-theme="dark"] .medical-glossary-more{background:#23516a;color:#e2f5ff;
   .top .header-row .account-button {margin:0 auto 0 0}
   .top .nav {margin-top:12px}
 }
+
+/* Medical dictionary: icon-only header entry; description belongs in its dialog. */
+.top .utility .glossary-open {
+  width:40px;height:40px;min-width:40px;min-height:40px;
+  padding:7px;flex:0 0 40px;display:inline-flex;
+  align-items:center;justify-content:center;line-height:1;
+  border-radius:11px
+}
+.top .utility .glossary-open svg {
+  display:block;width:26px;height:26px;max-width:100%;flex:none;
+}
+.top .utility .glossary-open:focus-visible {
+  outline:3px solid #a9e6ff;outline-offset:2px;
+}

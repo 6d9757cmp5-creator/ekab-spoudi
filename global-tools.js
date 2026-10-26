@@ -152,7 +152,23 @@ function findGlossary(q,terms,category){
 }
 function installGlossary(){
  const util=document.querySelector('header.top .utility');if(!util||document.getElementById('medicalGlossaryOpen'))return;
- const btn=el('button','utility-button glossary-open','📖 Ιατρικό λεξικό');btn.type='button';btn.id='medicalGlossaryOpen';btn.title='Γενικό ελληνοαγγλικό ιατρικό λεξικό';util.prepend(btn);
+ const btn=el('button','utility-button glossary-open');btn.type='button';btn.id='medicalGlossaryOpen';
+ btn.setAttribute('aria-label','Άνοιγμα ιατρικού λεξικού — αναζήτηση όρων');
+ btn.setAttribute('aria-haspopup','dialog');
+ btn.setAttribute('aria-controls','medicalGlossaryDialog');
+ btn.title='Ιατρικό λεξικό — αναζήτηση όρων';
+ // Decorative book-with-search icon. The full explanation lives inside the dialog.
+ const svgNS='http://www.w3.org/2000/svg',svg=document.createElementNS(svgNS,'svg');
+ svg.setAttribute('viewBox','0 0 28 28');svg.setAttribute('fill','none');
+ svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','1.75');
+ svg.setAttribute('stroke-linejoin','round');svg.setAttribute('stroke-linecap','round');
+ svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+ const draw=(tag,attrs)=>{const node=document.createElementNS(svgNS,tag);for(const [key,val] of Object.entries(attrs))node.setAttribute(key,String(val));svg.append(node)};
+ draw('path',{d:'M13.3 7.4C10.6 5.9 7.5 5.6 4 6v14c3.5-.4 6.6-.1 9.3 1.4V7.4Zm0 0C16 5.9 19.2 5.6 22.5 6v7.2'});
+ draw('path',{d:'M13.3 7.4v14M5.7 9.1c2.2-.1 4 .1 5.6.9M5.7 12c2.2-.1 4 .1 5.6.9'});
+ draw('circle',{cx:'20.7',cy:'18.6',r:'3.3'});
+ draw('path',{d:'m23.1 21 2.8 2.8'});
+ btn.append(svg);util.prepend(btn);
  const dialog=el('dialog','medical-glossary-dialog');dialog.id='medicalGlossaryDialog';
  const inner=el('div','medical-glossary-inner'),head=el('div','medical-glossary-head');
  const heading=el('div');heading.append(el('p','medical-eyebrow','Ελληνικά · English · Σύμβολα'),el('h2',null,'Ιατρικό λεξικό'));
