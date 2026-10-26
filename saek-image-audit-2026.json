@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 41/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
+  "note": "Μητρώο επιλογών εικόνων: 42/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -353,6 +353,28 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "fadaeab745263dc5114c6d333b49a304010e141d1edea24e0a678d400a6d3074"
+    },
+    "synovial_joint": {
+      "filename": "synovial-joint-el.svg",
+      "localPath": "assets/education/synovial-joint-el.svg",
+      "title": "Βασική δομή υμενώδους άρθρωσης",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-4-synovial-joints",
+      "caption": "Σχηματική τομή με αρθρικούς χόνδρους, κοιλότητα, θύλακο, υμένα, σύνδεσμο (οστό–οστό) και τένοντα (μυς–οστό). Δεν απεικονίζει συγκεκριμένη άρθρωση ούτε όλες τις κατηγορίες αρθρώσεων ή τους μυς.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "synovial joint components, ligament/tendon roles; independently drawn artwork"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Greek labels, SVG source structure and leader coordinates reviewed; actual rendered-browser test and independent scientific review pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "3f902ec7ad894932e1aef734c73e6dad0915a83ac7357693194a2bdfca1a3415"
     }
   },
   "placements": {
@@ -488,6 +510,9 @@
     ],
     "01-13": [
       "urinary_system"
+    ],
+    "01-09": [
+      "synovial_joint"
     ]
   },
   "courses": [
@@ -553,8 +578,10 @@
         },
         {
           "anchor": "#lesson-9",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "synovial_joint"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-10",
