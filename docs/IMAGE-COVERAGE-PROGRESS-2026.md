@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 9**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 10**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 31 | 10 | 40 |
+| Α | 71 | 32 | 10 | 39 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **47** | **26** | **200** |
+| **Total** | **247** | **48** | **26** | **199** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b11`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b13`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -109,3 +109,13 @@ For each new asset: verify relevance and the original source/license; render and
 - Added asset key `clean_disinfect_sterilize`, registry placement `04-08`, course 4 chapter 8 source selection; draft service-worker precache b12. **47/247** chapters selected (Α 31/71, Β 5/73, Γ 5/51, Δ 6/52), **200** without an image, **29** registered assets, **22** local SVG. Main remains last observed 26/247; publication unverified.
 - **Quality gates pending:** independent clinical/scientific review, raster/browser visual inspection, actual course rendering and offline end-to-end, SHA-256 recording for this new SVG, new CI result and published app verification. `saek-visual-ui.js` currently hides draft visual panels and course diagrams, so source registration **does not** make the image visible to students. Do not merge or report as published. Other chapter 04-08 instrument risk categories and real procedures are not comprehensively illustrated.
 - **Next:** complete and validate the image-specific checks for batch 9, then add Greek-labelled diagrams for additional genuinely unselected chapters; milestone notification at 50/247, not 47/247.
+
+
+## Batch 10: chapter 04-09 — B-cell memory (2026-10-26)
+
+- Created `assets/education/b-cell-memory-el.svg` original Greek-labelled cellular immunology diagram with antigen, B-cell receptor, helper T cell, plasma cell secreting antibodies, memory B cell and secondary antigen response. Moved helper-T annotation clear of the illustrated cell. SVG SHA-256 `5db766b7286cda61e864b1f37d341f128741bd57f0837d501ed66834370bd0e2` recorded in registry. Original artwork CC BY 4.0.
+- Checked [OpenStax A&P 21.4](https://openstax.org/books/anatomy-and-physiology/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies), [OpenStax Microbiology 18.4](https://openstax.org/books/microbiology/pages/18-4-b-lymphocytes-and-humoral-immunity), [CDC vaccines](https://www.cdc.gov/vaccines/basics/explaining-how-vaccines-work.html) (2024). Diagram covers only T-dependent B-cell response, not all immunity or vaccination protocols.
+- Added audit asset `b_cell_memory`, `04-09` placement and Α-semester course 4 lesson 9; added SVG to draft `sw.js` precache **b13**. Existing audited-image renderer reads this registry; no changes to theory, accounts, progress or sync.
+- **Draft selected: 48/247 (Α 32/71, Β 5/73, Γ 5/51, Δ 6/52), 199 unselected; 30 assets, 23 local SVG.** Main last checked: 26/247 (Α10, Β5, Γ5, Δ6), **not verified production**. Version `27.1.68` unchanged.
+- **Remaining gates:** independent scientific approval 0 documented, completeness partial, XML/raster/actual browser/zoom/offline E2E and published deployment unverified; container DNS prevented independent download for raster. This is a draft commit only; do not merge as clinically approved. 04-08 from prior batch is preserved.
+- **Next:** validate 04-08 and 04-09 image rendering/CI, then select genuinely missing 04-07 with current official infection-prevention references. Do not treat image selection as clinical approval or public deployment.
