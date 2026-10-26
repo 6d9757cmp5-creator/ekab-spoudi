@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 5**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest completed batch: **2026-10-26, batch 6**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
 | Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (not proof of live publication) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 28 | 10 | 43 |
+| Α | 71 | 29 | 10 | 42 |
 | Β | 73 | 5 | 5 | 68 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **44** | **26** | **203** |
+| **Total** | **247** | **45** | **26** | **202** |
 
-**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b7`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Four new local drawings are now committed and their structural CI checks have passed. Production version file on main: `27.1.68` (build 2026-10-26). Draft uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b8`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -64,3 +64,13 @@ For each new asset: verify relevance and the original source/license; render and
 **Remaining quality gates:** 0 documented independent scientific approvals; source/subject completeness pending; production deployment and real browser/offline/zoom verification pending. Public site version remains **27.1.68** according to previous checkpoint; this draft batch has not been merged or published. Next: reproductive anatomy 01-13, muscular anatomy 01-09, then further uncovered 04-xx chapters with verified source-specific figures.
 
 **Post-batch-5 CI readback:** GitHub Actions SAEK quality run [40363485365](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40363485365) completed **successfully** for checkpoint commit `f97d27a12725bd5f322996c7cc25ed65127a5847`; the earlier image mapping and precache commits also had successful SAEK quality runs [40363416900](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40363416900) and [40363437507](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40363437507). A separate image-specific audit CI run for this batch has not been confirmed; do not infer it from SAEK quality CI. Remote readback verified registry counts and mappings. Main registry remains 26 selected (Α 10, Β 5, Γ 5, Δ 6), **not** a live browser publication proof.
+
+## Batch 6 — 2026-10-26: epidemiology 04-05
+
+- Inspected the actual course 04 lesson index and targeted **04-05, Βασικές έννοιες επιδημιολογίας**. Drew `assets/education/incidence-prevalence-el.svg` as a **specific population illustration**, not a generic recap card: the same 20 people at T0/T1, 2 pre-existing cases, 3 new cases, and explicit absence of recovery or attrition. Incidence proportion 3/18 = 16.7%; point prevalence at T1 5/20 = 25%. No person-time incidence rate claimed.
+- Definitions and denominators checked against [CDC Field Epidemiology Manual](https://www.cdc.gov/field-epi-manual/php/chapters/describing-epi-data.html) and [CDC Principles of Epidemiology, Lesson 3](https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson3/section2.html). Diagram is independently drawn and declared CC BY 4.0; no CDC artwork copied.
+- Reproduced the exact SVG locally, XML parsed and rendered to PNG; inspected Greek labels, 20 dots in each panel, 2 purple pre-existing, 3 orange new cases, denominator arithmetic and no overlap. SHA-256 `cafc8c66c26ed6000944c7ed8e065ba8d18c3973c922049fd506edfdb5b06b71` checked against remote GitHub content.
+- Registered `incidence_prevalence` in `assets`, `placements['04-05']`, and course 4 chapter 5. Added local SVG to service-worker precache and advanced **draft cache only** to `ekab-spoudi-v27.1.68-images-20261026-b8`. Existing PR #6 remains draft; no release or production claim.
+- New source-selected count **45/247**: Α **29/71**, Β **5/73**, Γ **5/51**, Δ **6/52**. **202** without any selected image. **25** registered image assets, **18** local SVG. This chapter has **partial** subject coverage only (epidemiology includes other concepts and methods).
+
+**Quality gates:** independent scientific approvals **0 documented**; real-browser load/zoom and offline end-to-end unverified; production **unverified** (main registry remains A10/B5/C5/D6 and is not a proof of live deployment). The new figure is **non-protocol**, not a clinical procedure. Next: reproductive system 01-13, muscular anatomy 01-09, then epidemiology 04-06/04-07 with topic-specific drawings after source and clinical-scope verification. Do not substitute lesson summaries for illustrations. Validate image registry, SHA-256 and SVG structure in CI before any merge.
