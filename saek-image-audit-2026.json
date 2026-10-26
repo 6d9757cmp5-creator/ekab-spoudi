@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 43/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
+  "note": "Μητρώο επιλογών εικόνων: 44/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Το προσχέδιο δεν έχει δημοσιευθεί· απαιτούνται οπτική δοκιμή σε browser, έλεγχοι αδειών και επαλήθευση πραγματικής παραγωγής. Παλαιά συνοπτικά διαγράμματα δεν μετρούν ως πλήρης ανατομική εικονογράφηση.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -419,6 +419,28 @@
       },
       "subjectCompleteness": "partial",
       "sha256": "d51da43fa735d5a8200a216b0230bcf212fc4e7eec712ec06696e4258e620c05"
+    },
+    "infection_chain": {
+      "filename": "chain-of-infection-el.svg",
+      "localPath": "assets/education/chain-of-infection-el.svg",
+      "title": "Οι έξι κρίκοι της αλυσίδας μετάδοσης λοιμώξεων",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/niosh/learning/safetyculturehc/module-2/3.html",
+      "caption": "Έξι κρίκοι από παθογόνο έως ευπαθή ξενιστή, με βέλη κατεύθυνσης και ενδεικτικές πύλες/τρόπους μετάδοσης. Τα παραδείγματα δεν αφορούν ενιαίο συγκεκριμένο νόσημα και δεν αποτελούν κλινικό πρωτόκολλο.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "CDC/NIOSH six infection-chain components and examples; original diagram independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Local SVG XML parse and PNG rendering inspected; corrected arrows and top label spacing; real-browser zoom/offline and independent review pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "0fb31dc9fd094ab6d197294c72b16539d8d6eed28e4bf5028880f23d1b38fc42"
     }
   },
   "placements": {
@@ -561,6 +583,9 @@
     ],
     "01-04": [
       "abdominal_organs"
+    ],
+    "04-02": [
+      "infection_chain"
     ]
   },
   "courses": [
@@ -843,8 +868,10 @@
         },
         {
           "anchor": "#lesson-2",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "infection_chain"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-3",
