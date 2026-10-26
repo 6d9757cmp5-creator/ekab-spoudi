@@ -432,3 +432,18 @@ html[data-theme="dark"] .ph-main .ph-button.secondary{background:#234459;color:#
  #accountDialog .app-version-row{align-items:flex-start}
 }
 html[data-theme="dark"] #accountDialog .account-dialog-heading{background:#162c3c}
+
+
+/* Subtle, clearly attributed PDF review references beside educational titles. */
+.academic-review-link{
+ display:inline-block;vertical-align:middle;margin-inline-start:.65rem;
+ padding:.18rem 0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ font-size:.72rem;font-weight:500;letter-spacing:0;text-transform:none;line-height:1.25;
+ color:inherit;opacity:.67;text-decoration:none;border-bottom:1px dotted currentColor;
+ white-space:nowrap
+}
+.academic-review-link:hover,.academic-review-link:focus-visible{
+ opacity:1;text-decoration:none;border-bottom-style:solid
+}
+.academic-review-link:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:520px){.academic-review-link{font-size:.68rem;margin-inline-start:.35rem;white-space:normal}}
