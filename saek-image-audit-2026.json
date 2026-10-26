@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-26",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
-  "note": "Μητρώο επιλογών εικόνων: 47/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Το SHA-256 νέας εικόνας 04-08 εκκρεμεί· πραγματικός browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
+  "note": "Μητρώο επιλογών εικόνων: 48/247 κεφάλαια με τουλάχιστον μία εικόνα. Επιλογή ≠ πλήρης κάλυψη αντικειμένου ή ανεξάρτητος επιστημονικός έλεγχος. Προσχέδιο, όχι δημοσίευση. Browser/zoom/offline end-to-end και κλινική έγκριση εκκρεμούν.",
   "legend": {
     "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
     "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
@@ -562,6 +562,34 @@
       },
       "subjectCompleteness": "partial",
       "sha256": null
+    },
+    "b_cell_memory": {
+      "filename": "b-cell-memory-el.svg",
+      "localPath": "assets/education/b-cell-memory-el.svg",
+      "title": "Β λεμφοκύτταρο, πλασματοκύτταρο και ανοσολογική μνήμη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies",
+      "additionalSources": [
+        "https://openstax.org/books/microbiology/pages/18-4-b-lymphocytes-and-humoral-immunity",
+        "https://www.cdc.gov/vaccines/basics/explaining-how-vaccines-work.html"
+      ],
+      "caption": "Σχηματική Τ-εξαρτώμενη απόκριση σε πρωτεϊνικό αντιγόνο: ειδικό Β λεμφοκύτταρο, Τ-βοηθητικό λεμφοκύτταρο, κλωνική επέκταση, πλασματοκύτταρο που εκκρίνει αντισώματα και Β κύτταρο μνήμης. Σε επόμενη έκθεση στο ίδιο αντιγόνο μπορεί να προκύψει ταχύτερη απόκριση. Δεν απεικονίζονται MHC II, κυτταροκίνες ή όλη η ανοσία. Όχι σε κλίμακα ούτε οδηγία εμβολιασμού.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "OpenStax A&P 21.4: T-cell help, plasma cells, memory B cells",
+        "OpenStax Microbiology 18.4: T-dependent versus T-independent activation",
+        "CDC vaccine explainer (2024): vaccination and immune memory"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG source and leader coordinates checked; helper T annotation moved clear of cell. Raster/browser/zoom/offline E2E not verified."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "5db766b7286cda61e864b1f37d341f128741bd57f0837d501ed66834370bd0e2"
     }
   },
   "placements": {
@@ -718,6 +746,9 @@
     ],
     "04-08": [
       "clean_disinfect_sterilize"
+    ],
+    "04-09": [
+      "b_cell_memory"
     ]
   },
   "courses": [
@@ -1045,8 +1076,10 @@
         },
         {
           "anchor": "#lesson-9",
-          "images": [],
-          "status": "no-image-approved"
+          "images": [
+            "b_cell_memory"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
         },
         {
           "anchor": "#lesson-10",
