@@ -1,18 +1,18 @@
 # Image coverage continuation checkpoint
 
-Latest completed batch: **2026-10-26, batch 15**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
+Latest recorded batch: **2026-10-27, batch 16**. Continue on branch `coverage/greek-images-20261026` and the **existing draft PR #6**. Inspect current refs, merged state, and this checkpoint before writing. Never restart from old main.
 
 ## Selected sources versus published app
 
-| Semester | Total chapters | Draft: source-selected (PR #6) | Main-branch registry (last verified; NOT live proof) | Draft missing |
+| Semester | Total chapters | Draft: source-selected (PR #6) | Main registry (last checked, not live proof) | Draft missing |
 |---|---:|---:|---:|---:|
-| Α | 71 | 42 | 10 | 29 |
+| Α | 71 | 48 | 10 | 23 |
 | Β | 73 | 11 | 5 | 62 |
 | Γ | 51 | 5 | 5 | 46 |
 | Δ | 52 | 6 | 6 | 46 |
-| **Total** | **247** | **64** | **26** | **183** |
+| **Total** | **247** | **70** | **26** | **177** |
 
-**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b19`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
+**Do not report the main-branch numbers as live verified.** Additional original Greek diagrams are committed in draft. Structural and browser validation must be checked per batch. Production version file on main: `27.1.68` (build 2026-10-26). Draft currently uses a service-worker cache variant `ekab-spoudi-v27.1.68-images-20261026-b21`; this is NOT a production version bump or a deployment. GitHub Pages visual/browser availability was not independently verified in this batch.
 
 ## Batch 3: actual changes
 
@@ -178,3 +178,14 @@ For each new asset: verify relevance and the original source/license; render and
 - Added 3 audit assets, chapter image keys and placements and precached all 3 under draft SW **ekab-spoudi-v27.1.68-images-20261026-b20**. Validated remote file readback, Greek wording, title/desc metadata, tag-stack structural balance and absence of unsafe raw XML ampersands. Attempted independent raw download for raster rendering but access denied; actual XML-parser, raster, browser zoom and offline E2E **not verified**.
 - At this checkpoint selected total is **64/247** (Α 42/71, Β 11/73, Γ 5/51, Δ 6/52); **183** remain without selected images. 44 image assets in registry. Main registry last independently verified at 26/247 (Α10, Β5, Γ5, Δ6), **not proof of production**.
 - Critical gaps: independent scientific review not documented, subjectCompleteness partial, actual visual browser/zoom/offline checks and live public deployment not verified. The app release version remains **27.1.68**. PR #6 is a draft; do not merge or claim publication on this basis. Next milestone user notification is 100 selected chapters.
+
+
+## Batch 16 — 2026-10-27: assessment diagrams for SAEK course 05
+
+- Created **four original Greek-labelled SVGs** in the existing draft PR #6: `vital-signs-assessment-el.svg`, `breathing-effort-observation-el.svg`, `sample-patient-history-el.svg` and `responsiveness-acvpu-el.svg` under `assets/education/`. Each has a semantic title and description, topic-specific illustrations, declared original CC BY 4.0 artwork, and SHA-256 stored in the audit registry.
+- Actual course 05 text was checked for each placement before selection: vital signs in **05-03 and 05-11**; airway / work of breathing in **05-08**; clinical history SAMPLE in **05-04 and 05-12**; responsiveness / brief neurological observation in **05-10**. Existing source placements in 05-01/02/05/07 were preserved. Six newly selected chapters use these four figures; `subjectCompleteness: partial` and `clinicalReview: pending` for all.
+- Conceptual source references: [RCUK ABCDE guidance](https://www.resus.org.uk/library/abcde-approach) and [RCUK First Aid Guidelines 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines) for physiological observations, airway/breathing and responsiveness; [US National EMS EMT Instructional Guidelines](https://www.ems.gov/assets/EMT_Instructional_Guidelines.pdf) for SAMPLE. No source illustration was copied, no treatment algorithm or local operational protocol is implied.
+- Basic source-level checks for four SVGs: Greek visible labels, title/desc and ARIA attributes present; XML-like tag stack balanced, no unescaped ampersands, inline script, foreignObject or event handler found. This **is not** a complete XML parser, professional anatomical review, mobile browser visual check or rendered offline test. Some SVG labels and sizing may still require visual QA.
+- The audit provenance rule was expanded only to include the official US EMS documentation domain for original diagrams. Updated image registry mappings, source SHA-256 and original educational asset cache to draft SW **b21**. Previously added three parallel-workstream assets with missing SHA-256 were read back and assigned verified content hashes; all local asset paths are currently in precache.
+- After readback, **70/247 source-selected chapters** (Α 48/71, Β 11/73, Γ 5/51, Δ 6/52); **177 unselected**; **48 assets** (41 local SVGs). This is a **draft selection count**, not a claim of fully illustrated content or a live deployed build.
+- Remaining critical gates: independent scientific review 0 documented approvals; actual browser and mobile layout/zoom/offline E2E still unverified, GitHub Actions results must be inspected before merge, no production release claim. Keep this PR draft; next milestone notification is 100/247.
