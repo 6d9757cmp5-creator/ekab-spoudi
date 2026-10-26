@@ -86,7 +86,7 @@ c.linkURL(b,(M,y-4,W-M,y+12),relative=0)
 
 # Compact, truthful provenance in the running footer, not a disclaimer section.
 rule(61)
-t(M,44,'ΕΚΑΒ Σπουδή   ·   Ανασκόπηση εκπαιδευτικού υλικού   ·   Δοκιμαστική έκδοση',7.2,False,SUB)
+t(M,44,'ΕΚΑΒ Σπουδή   ·   Ανασκόπηση εκπαιδευτικού υλικού',7.2,False,SUB)
 t(W-M-84,26,'26.10.2026  |  1/1',7.0,False,SUB)
 if y < 77:
     raise RuntimeError(f'Body would overlap the footer: {y:.1f}')
