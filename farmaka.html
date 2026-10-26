@@ -116,6 +116,35 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 .ph-proof:focus-visible{outline:3px solid #7ecff7;outline-offset:2px}
 @media(max-width:540px){.ph-headerline{align-items:flex-start}.ph-proof{margin-left:52px}}
 
+
+/* Search-first pharmacology layout, shared by desktop and narrow screens. */
+.ph-hero{padding:clamp(16px,2.5vw,24px)}
+.ph-main h1{font-size:clamp(1.45rem,3vw,2.1rem);margin-bottom:16px}
+.ph-quick-search{margin:0 0 14px}
+.ph-quick-search label{display:grid;gap:6px;font-size:.85rem;font-weight:650}
+.ph-quick-search input{width:100%;min-width:0;min-height:48px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel,#fff);color:var(--ink)}
+.ph-quick-search input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.ph-counter{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ph-counter>button{display:flex;align-items:center;gap:10px;padding:13px 15px;min-height:52px}
+.ph-counter>button>span{font-size:.94rem;font-weight:700;color:var(--ink)}
+.ph-counter>button>b{font-size:.79rem;font-weight:650;padding:2px 8px;border-radius:999px;background:var(--light);color:var(--ink)}
+.ph-counter>button::after{content:'›';margin-left:auto;font-size:1.3rem;color:var(--blue)}
+.ph-study-notice{margin:13px 0 8px;padding:10px 12px;border-left:3px solid #d99b22;border-radius:6px;background:var(--light);color:var(--ink);font-size:.8rem;line-height:1.5}
+.ph-disclosure{margin-top:7px}
+.ph-disclosure>summary{cursor:pointer;padding:6px 0;font-size:.8rem;font-weight:600;color:var(--ink)}
+.ph-disclosure>div{padding:5px 0;line-height:1.6}
+.ph-disclosure>div>strong{display:block}
+.ph-quiz-link{display:inline-flex;align-items:center;min-height:44px;font-size:.85rem;font-weight:650;text-decoration:none}
+.ph-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ph-tools input,.ph-tools select{font-size:16px}
+.ph-basics>summary{cursor:pointer;padding:2px 0}
+.ph-basics>summary h2{display:inline;font-size:1rem;margin:0}
+.ph-basics[open]>.ph-lessons{margin-top:16px}
+.ph-main #catalog{scroll-margin-top:16px}
+@media(max-width:760px){.ph-tools label:first-child{grid-column:auto}.ph-headerline{gap:8px}.ph-proof{margin-left:0}.ph-main{padding:16px 12px 60px}}
+@media(max-width:480px){.ph-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.ph-nav a{white-space:nowrap;padding:9px 4px}.ph-counter{grid-template-columns:1fr}.ph-counter>button{padding:11px 13px}.ph-tools{grid-template-columns:1fr}.ph-main h1{line-height:1.25}.ph-panel{margin-bottom:12px}.ph-hero .ph-eyebrow{font-size:.66rem}}
+@media print{.ph-quick-search,.ph-counter,.ph-quiz-link{display:none}.ph-basics::details-content,.ph-disclosure::details-content{display:block;content-visibility:visible}}
+
 </style>
 <script src="farmaka-catalog.js?v=2026.10.26" defer></script>
 <script src="farmaka-clinical-2026.js?v=2026.10.26" defer></script>
@@ -134,31 +163,34 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 <section class="ph-panel ph-hero" aria-labelledby="mainTitle">
 <div class="ph-eyebrow">Εκπαιδευτική βιβλιοθήκη · Ανασκόπηση 26/10/2026</div>
 <h1 id="mainTitle">Φαρμακολογία προνοσοκομειακής φροντίδας</h1>
-<p class="ph-lead">Από τις βασικές αρχές έως την εξειδικευμένη υποστήριξη ζωής: μηχανισμός, ενδείξεις, κρίσιμες προφυλάξεις, παρακολούθηση και σύνδεση με τις επίσημες πηγές. Ελληνική και αγγλική ορολογία.</p>
-<div class="ph-counter"><button type="button" id="openDrugCatalog" aria-controls="drugResults"><b id="drugTotal">—</b><span>Φάρμακα / θεματικές καρτέλες</span><span class="ph-counter-action">Προβολή όλων ›</span></button><button type="button" id="openClinicalGroups" aria-haspopup="dialog" aria-controls="clinicalGroupsDialog"><b id="groupTotal">—</b><span>Κλινικές ενότητες</span><span class="ph-counter-action">Επιλογή ενότητας ›</span></button><div><b>2025–26</b><span>Πηγές ERC, GINA, NICE και άλλες</span></div></div>
-<div class="ph-alert" role="note"><strong>Εκπαιδευτικό υλικό — όχι πρωτόκολλο χορήγησης</strong>Ορισμένες καρτέλες αφορούν μόνο ιατρούς, εξειδικευμένα πληρώματα ή ειδικά εξουσιοδοτημένους επαγγελματίες. Οι διεθνείς οδηγίες δεν δίνουν αυτομάτως άδεια χορήγησης στην Ελλάδα. Πριν από οποιαδήποτε πραγματική πράξη απαιτούνται ισχύοντα πρωτόκολλα υπηρεσίας, επαγγελματικές αρμοδιότητες, κατάρτιση και όπου απαιτείται ιατρική οδηγία. Το υλικό δεν έχει λάβει ανεξάρτητη τελική κλινική έγκριση.</div>
-<a href="#catalog" class="ph-button" style="display:inline-block;text-decoration:none">Μετάβαση στις καρτέλες</a> <a href="#quiz" class="ph-button secondary" style="display:inline-block;text-decoration:none">Τεστ αυτοελέγχου</a>
+<div class="ph-quick-search"><label for="drugSearch">Αναζήτηση φαρμάκου · Ελληνικά ή Αγγλικά<input type="search" id="drugSearch" placeholder="π.χ. αδρεναλίνη ή epinephrine" autocomplete="off"></label></div>
+
+<div class="ph-counter"><button type="button" id="openDrugCatalog" aria-controls="drugResults"><span>Όλα τα φάρμακα</span><b id="drugTotal">—</b></button><button type="button" id="openClinicalGroups" aria-haspopup="dialog" aria-controls="clinicalGroupsDialog"><span>Κλινικές ενότητες</span><b id="groupTotal">—</b></button></div>
+<div class="ph-study-notice" role="note"><strong>Για μελέτη — όχι οδηγίες χορήγησης.</strong> Η ανεξάρτητη κλινική έγκριση εκκρεμεί.
+<details class="ph-disclosure"><summary>Επαγγελματικά όρια και διευκρινίσεις</summary><div><strong>Εκπαιδευτικό υλικό — όχι πρωτόκολλο χορήγησης</strong>Ορισμένες καρτέλες αφορούν μόνο ιατρούς, εξειδικευμένα πληρώματα ή ειδικά εξουσιοδοτημένους επαγγελματίες. Οι διεθνείς οδηγίες δεν δίνουν αυτομάτως άδεια χορήγησης στην Ελλάδα. Πριν από οποιαδήποτε πραγματική πράξη απαιτούνται ισχύοντα πρωτόκολλα υπηρεσίας, επαγγελματικές αρμοδιότητες, κατάρτιση και όπου απαιτείται ιατρική οδηγία. Το υλικό δεν έχει λάβει ανεξάρτητη τελική κλινική έγκριση.</div></details></div>
+<a href="#quiz" class="ph-quiz-link">Τεστ αυτοελέγχου ›</a>
 </section>
-<section class="ph-panel" aria-labelledby="basicsTitle" id="basics">
-<h2 id="basicsTitle">01 · Βασικές αρχές για διασώστη</h2>
+
+<section class="ph-panel" id="catalog" aria-labelledby="catalogTitle">
+<h2 id="catalogTitle">Φάρμακα και κλινικές καταστάσεις</h2>
+<div class="ph-tools">
+
+<label for="categoryFilter">Κλινική κατηγορία<select id="categoryFilter"><option value="all">Όλες οι ενότητες</option></select></label>
+<label for="scopeFilter">Επίπεδο γνώσης<select id="scopeFilter"><option value="all">Όλα τα επίπεδα</option><option value="basic">Βασική γνώση</option><option value="protocol">Με πρωτόκολλο / εξουσιοδότηση</option><option value="advanced">Εξειδικευμένη ALS / ιατρός</option></select></label>
+</div>
+<p class="ph-tip" id="resultCount" role="status" aria-live="polite">Φόρτωση καρτελών…</p>
+<details class="ph-disclosure"><summary>Τι περιλαμβάνουν οι αναλυτικές καρτέλες</summary><p class="ph-clinical-note" id="phApprovalNotice"><strong>Αναλυτικές καρτέλες:</strong> Οι επιπρόσθετες πληροφορίες είναι προσανατολισμένες στη μελέτη, με ξεχωριστές ενδείξεις, δοσολογικό πλαίσιο, παιδιατρικούς περιορισμούς, ειδικούς πληθυσμούς, αλληλεπιδράσεις, πηγές και εκκρεμή επικύρωση. Όπου δεν έχει επαληθευθεί το συγκεκριμένο προϊόν ή SOP, η δόση δεν δίνεται ως οδηγία χορήγησης. Δεν έχει ολοκληρωθεί ανεξάρτητη κλινική έγκριση.</p></details>
+</section>
+<div id="drugResults" aria-label="Κατάλογος φαρμάκων"></div>
+<details class="ph-panel ph-basics" id="basics"><summary>
+<h2 id="basicsTitle">Βασικές αρχές για διασώστη</h2></summary>
 <div class="ph-lessons">
 <article class="ph-lesson"><h3>Φαρμακοδυναμική και φαρμακοκινητική</h3><p><strong>Φαρμακοδυναμική:</strong> τι κάνει το φάρμακο στον οργανισμό (υποδοχέας, επίδραση, ανεπιθύμητες). <strong>Φαρμακοκινητική:</strong> τι κάνει ο οργανισμός στο φάρμακο (απορρόφηση, κατανομή, μεταβολισμός, αποβολή).</p></article>
 <article class="ph-lesson"><h3>Οδοί και μονάδες</h3><p>PO (από στόμα), SL (υπογλώσσια), IM (ενδομυϊκά), IV (ενδοφλέβια), IO (ενδοοστικά), IN (ενδορρινικά), εισπνεόμενα. 1 g = 1000 mg, 1 mg = 1000 μg. Το mg/mL είναι συγκέντρωση, όχι από μόνο του δόση.</p></article>
 <article class="ph-lesson"><h3>Έλεγχος πριν από χορήγηση</h3><ul><li>Σωστός ασθενής, φάρμακο, δόση, οδός, χρόνος, καταγραφή.</li><li>Αλλεργίες, ηλικία/βάρος, κύηση, συνοδά φάρμακα, αντενδείξεις.</li><li>Έλεγχος σκευάσματος, συγκέντρωσης, λήξης και δεύτερου ελεγκτή όπου απαιτείται.</li></ul></article>
 <article class="ph-lesson"><h3>Προνοσοκομειακή λογική</h3><p>Πρώτα ασφάλεια σκηνής, xABCDE, κλήση ενίσχυσης και έγκαιρη μεταφορά. Έπειτα θεραπεία κατά εξουσιοδοτημένο πρωτόκολλο και επανεκτίμηση. Καταγραφή ώρας, οδού, απόκρισης και ανεπιθύμητων ενεργειών.</p></article>
 </div>
-</section>
-<section class="ph-panel" id="catalog" aria-labelledby="catalogTitle">
-<h2 id="catalogTitle">02 · Φάρμακα και κλινικές καταστάσεις</h2>
-<div class="ph-tools">
-<label for="drugSearch">Αναζήτηση ελληνικά ή αγγλικά<input type="search" id="drugSearch" placeholder="π.χ. αδρεναλίνη, epinephrine, shock" autocomplete="off"></label>
-<label for="categoryFilter">Κλινική κατηγορία<select id="categoryFilter"><option value="all">Όλες οι ενότητες</option></select></label>
-<label for="scopeFilter">Επίπεδο γνώσης<select id="scopeFilter"><option value="all">Όλα τα επίπεδα</option><option value="basic">Βασική γνώση</option><option value="protocol">Με πρωτόκολλο / εξουσιοδότηση</option><option value="advanced">Εξειδικευμένη ALS / ιατρός</option></select></label>
-</div>
-<p class="ph-tip" id="resultCount" role="status" aria-live="polite">Φόρτωση καρτελών…</p>
-<p class="ph-clinical-note" id="phApprovalNotice"><strong>Αναλυτικές καρτέλες:</strong> Οι επιπρόσθετες πληροφορίες είναι προσανατολισμένες στη μελέτη, με ξεχωριστές ενδείξεις, δοσολογικό πλαίσιο, παιδιατρικούς περιορισμούς, ειδικούς πληθυσμούς, αλληλεπιδράσεις, πηγές και εκκρεμή επικύρωση. Όπου δεν έχει επαληθευθεί το συγκεκριμένο προϊόν ή SOP, η δόση δεν δίνεται ως οδηγία χορήγησης. Δεν έχει ολοκληρωθεί ανεξάρτητη κλινική έγκριση.</p>
-</section>
-<div id="drugResults" aria-label="Κατάλογος φαρμάκων"></div>
+</details>
 <section class="ph-panel" aria-labelledby="safetyTitle" id="safety">
 <h2 id="safetyTitle">03 · Κλινικά SOS και λάθη υψηλού κινδύνου</h2>
 <div class="ph-lessons">
@@ -198,7 +230,8 @@ document.addEventListener('DOMContentLoaded', function () {
     category.dispatchEvent(new Event('change', {bubbles:true}));
     if (dialog.open) dialog.close();
     document.getElementById('catalog').scrollIntoView({block:'start'});
-    search.focus({preventScroll:true});
+    document.getElementById('catalogTitle').setAttribute('tabindex','-1');
+    document.getElementById('catalogTitle').focus({preventScroll:true});
   }
   catalogButton.addEventListener('click', function () { selectCategory('all'); });
   groupButton.addEventListener('click', function () {
