@@ -118,4 +118,4 @@ if(!document.querySelector('script[data-ekab-navigation]')){
 }
 
 /* Classroom image presentation mode. */
-if(!document.querySelector('script[data-ekab-classroom-images]')){const s=document.createElement('script');s.src='classroom-images.js?v=1';s.defer=true;s.dataset.ekabClassroomImages='';document.head.append(s)}
+if(!document.querySelector('script[data-ekab-classroom-images]')){const s=document.createElement('script');s.src='classroom-images.js?v=2';s.defer=true;s.dataset.ekabClassroomImages='';document.head.append(s)}
