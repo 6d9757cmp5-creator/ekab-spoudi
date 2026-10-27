@@ -4,7 +4,7 @@
 <meta name="theme-color" content="#153c54"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Προετοιμασία σεμιναρίων · ΕΚΑΒ Σπουδή</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css?v=27.1.79"><link rel="stylesheet" href="seminar-prep.css?v=mcq-1"><link rel="stylesheet" href="ai-grading.css?v=27.1.82">
+<link rel="stylesheet" href="styles.css?v=27.1.79"><link rel="stylesheet" href="seminar-prep.css?v=mixed-70-30-1"><link rel="stylesheet" href="ai-grading.css?v=27.1.82">
 <script src="theme-init.js"></script>
 </head><body>
 <header class="top"><div class="container">
@@ -27,7 +27,7 @@
  <div class="seminar-intro"><div class="seminar-intro-top"><p class="eyebrow">ΕΚΑΒ Σπουδή · Δοκιμαστική προετοιμασία</p><a class="seminar-external" href="https://www.erc.edu/education/for-professionals/course-rules/" target="_blank" rel="noopener noreferrer" title="Πλαίσιο εκπαίδευσης και κανονισμοί ERC">ΤΡΟΠΟΣ ΚΑΤΑΝΕΜΗΜΕΝΗΣ ΕΚΠΑΙΔΕΥΣΗΣ ↗</a></div>
  <h2>Προετοιμασία σεμιναρίων <a class="academic-review-link" href="docs/seminars-academic-review.pdf" target="_blank" rel="noopener noreferrer" aria-label="Δελτίο ελέγχου προετοιμασίας σεμιναρίων, PDF">Δελτίο ελέγχου</a></h2><p>Επίλεξε πρόγραμμα για να ξεκινήσεις.</p></div>
  <div id="seminarCards" class="seminar-cards" aria-label="Πέντε ανεξάρτητα προγράμματα"></div>
- <p class="seminar-hint">5 ξεχωριστά προγράμματα · 12 θεματικές το καθένα · 48 ερωτήσεις ανάπτυξης · 12 πολλαπλής επιλογής · 12 κλινικά σενάρια ανά πρόγραμμα.</p>
+ <p class="seminar-hint">5 ξεχωριστά προγράμματα · 12 θεματικές το καθένα · Ενιαίο τεστ 10 ερωτήσεων: 70% επιλογής και 30% ανάπτυξης · 12 κλινικά σενάρια ανά πρόγραμμα.</p>
 </section>
 <section id="seminarCourse" hidden aria-labelledby="seminarCourseTitle">
  <button class="seminar-back" type="button" id="seminarBack">‹ Όλα τα σεμινάρια</button>
@@ -39,29 +39,38 @@
   <button type="button" id="seminarMarkStudied" class="btn secondary full">Σημείωσε ως μελετημένη</button>
   <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevUnit">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextUnit">Επόμενη</button></div></article>
  </section>
- <section id="seminarQuiz" class="panel seminar-practice" hidden aria-label="Τεστ γνώσεων">
- <div class="seminar-quiz-modes" role="group" aria-label="Μορφή ερωτήσεων">
-  <button type="button" data-seminar-format="multiple" class="active" aria-pressed="true">Πολλαπλής επιλογής</button>
-  <button type="button" data-seminar-format="written" aria-pressed="false">Ανάπτυξης</button>
+ <section id="seminarQuiz" class="panel seminar-practice" hidden aria-label="Ενιαίο τεστ γνώσεων">
+ <div class="seminar-mixed-heading">
+  <div><p class="eyebrow">Ενιαίο τεστ · 10 ερωτήσεις</p><p class="seminar-mixed-subtitle">7 πολλαπλής επιλογής (70%) · 3 ανάπτυξης (30%)</p></div>
+  <button type="button" class="btn compact secondary" id="seminarRestartQuiz">Νέο τεστ</button>
  </div>
- <p class="eyebrow" id="seminarQuestionCounter"></p><h3 id="seminarQuestionTitle"></h3>
- <div id="seminarMultipleBody">
-  <p class="seminar-mcq-instruction">Επίλεξε μία από τις τέσσερις απαντήσεις και πάτησε «Έλεγχος απάντησης».</p>
-  <fieldset id="seminarMCQChoices" class="seminar-mcq-choices" aria-label="Επιλογές απάντησης"></fieldset>
-  <button type="button" class="btn" id="seminarMCQCheck" disabled>Έλεγχος απάντησης</button>
-  <div id="seminarMCQFeedback" class="seminar-mcq-feedback" role="status" aria-live="polite" hidden></div>
+ <p class="seminar-fineprint">Ανεξάρτητη εκπαιδευτική αναλογία της ΕΚΑΒ Σπουδή, όχι επίσημο ποσοστό εξετάσεων του ERC.</p>
+ <div id="seminarMixedQuestion">
+  <p class="eyebrow" id="seminarQuestionCounter"></p><h3 id="seminarQuestionTitle"></h3>
+  <div id="seminarMultipleBody" hidden>
+   <p class="seminar-mcq-instruction">Πάτησε μία απάντηση. Ελέγχεται αυτόματα, εμφανίζεται πράσινο ή κόκκινο και συνεχίζει στην επόμενη.</p>
+   <fieldset id="seminarMCQChoices" class="seminar-mcq-choices" aria-label="Επιλογές απάντησης"></fieldset>
+   <div id="seminarMCQFeedback" class="seminar-mcq-feedback" role="status" aria-live="polite" hidden></div>
+  </div>
+  <div id="seminarWrittenBody" hidden>
+   <label for="seminarQuestionNotes">Η δική σου απάντηση</label><textarea id="seminarQuestionNotes" rows="4" maxlength="2000" placeholder="Γράψε την απάντησή σου και μετά αξιολόγησέ την…"></textarea>
+   <p class="ai-grading-privacy">Ο προαιρετικός έλεγχος AI απαιτεί σύνδεση λογαριασμού και Internet. Η απάντηση αποστέλλεται μόνο όταν πατήσεις το κουμπί και δεν δημοσιεύεται.</p>
+   <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Αξιολόγηση με AI</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση · Αυτοαξιολόγηση</button></div>
+   <div id="seminarAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
+   <p id="seminarQuestionSolution" class="seminar-feedback" hidden></p>
+   <div id="seminarQuizGrade" class="seminar-grade" hidden><button type="button" class="btn compact" id="seminarGradeRight">Το απάντησα σωστά</button><button type="button" class="btn compact secondary" id="seminarGradeNeeds">Χρειάζεται επανάληψη</button></div>
+   <p class="seminar-fineprint">Η αυτοαξιολόγηση είναι εκπαιδευτική, όχι επίσημη βαθμολογία. Η υπηρεσία AI μπορεί να μην είναι ενεργή.</p>
+  </div>
+  <p id="seminarQuestionState" class="seminar-state" role="status"></p>
+  <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevQuestion" hidden>Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextQuestion" hidden>Επόμενη</button></div>
  </div>
- <div id="seminarWrittenBody" hidden>
-  <label for="seminarQuestionNotes">Η δική σου απάντηση</label><textarea id="seminarQuestionNotes" rows="4" maxlength="2000" placeholder="Απάντησε χωρίς βοήθεια πριν δεις τα βασικά σημεία…"></textarea>
-  <p class="ai-grading-privacy">Ο προαιρετικός έλεγχος AI στέλνει μόνο την απάντησή σου σε ασφαλή υπηρεσία αξιολόγησης όταν πατήσεις το κουμπί. Απαιτεί σύνδεση λογαριασμού και Internet. Η απάντηση δεν δημοσιεύεται.</p>
-  <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Αξιολόγηση με AI</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση · Αυτοαξιολόγηση</button></div>
-  <div id="seminarAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
-  <p id="seminarQuestionSolution" class="seminar-feedback" hidden></p>
-  <div id="seminarQuizGrade" class="seminar-grade" hidden><button type="button" class="btn compact" id="seminarGradeRight">Το θυμήθηκα σωστά</button><button type="button" class="btn compact secondary" id="seminarGradeNeeds">Χρειάζεται επανάληψη</button></div>
-  <p class="seminar-fineprint">Η AI αξιολόγηση βασίζεται στο νόημα, όχι στην ίδια διατύπωση. Αν δεν είναι διαθέσιμη, η χειροκίνητη αυτοαξιολόγηση παραμένει ενεργή. Δεν είναι επίσημη βαθμολογία.</p>
+ <div id="seminarMixedResults" class="seminar-mixed-results" hidden aria-live="polite">
+  <h3>Αποτελέσματα ενιαίου τεστ</h3>
+  <p id="seminarMixedScore"></p>
+  <p id="seminarMixedBreakdown"></p>
+  <p class="seminar-fineprint">Τα αποτελέσματα είναι εκπαιδευτικά. Οι πρακτικές δεξιότητες αξιολογούνται σε πιστοποιημένη εκπαίδευση.</p>
+  <button type="button" id="seminarRepeatQuiz" class="btn">Νέο τεστ με άλλες ερωτήσεις</button>
  </div>
- <p id="seminarQuestionState" class="seminar-state"></p>
- <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevQuestion">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextQuestion">Επόμενη</button></div>
  </section>
  <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικό σενάριο">
  <p class="eyebrow" id="seminarOralCounter"></p><h3 id="seminarOralTitle"></h3><p id="seminarOralCase" class="seminar-feedback"></p>
@@ -79,5 +88,5 @@
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα · Δεν απονέμει πιστοποίηση · Οι εκπαιδευτικές ασκήσεις δεν αντικαθιστούν πρακτική εκπαίδευση ή τοπικά πρωτόκολλα.</footer>
 </main>
 <script src="ai-grading-config.js?v=27.1.82"></script><script src="ai-grading-client.js?v=27.1.82"></script>
-<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=mcq-1"></script><script src="updates.js?v=27.1.82" defer></script>
+<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=mixed-70-30-1"></script><script src="updates.js?v=27.1.82" defer></script>
 </body></html>
