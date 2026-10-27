@@ -25,6 +25,37 @@ jobs:
         run: node scripts/verify-study-scheduler.mjs
       - name: Validate browser JavaScript syntax
         run: node --check app.js && node --check study-scheduler.js && node --check progress.js
+      - name: Verify seminar multiple-choice bank and UI wiring
+        run: |
+          node --check seminar-tracks.js
+          node --check seminar-prep.js
+          node - <<'JS'
+          const fs = require('fs');
+          const vm = require('vm');
+          const assert = require('assert');
+          const ctx = {window:{}};
+          vm.runInNewContext(fs.readFileSync('seminar-tracks.js','utf8'),ctx);
+          const courses = ctx.window.EkabSeminarTracks;
+          const questions = ctx.window.EkabSeminarMCQ;
+          assert.strictEqual(courses.length,5);
+          for (const course of courses) {
+            assert.strictEqual(course.units.length,12,course.id+' topic count');
+            assert.strictEqual(questions[course.id].length,12,course.id+' multiple-choice count');
+            for(const [index,q] of questions[course.id].entries()){
+              assert.strictEqual(q.length,6,course.id+'/'+index+' schema');
+              assert.strictEqual(new Set(q.slice(1,5)).size,4,course.id+'/'+index+' distinct answers');
+              assert(q.every(v=>typeof v==='string'&&v.length>4),course.id+'/'+index+' empty field');
+            }
+          }
+          const html=fs.readFileSync('seminar-prep.html','utf8');
+          const script=fs.readFileSync('seminar-prep.js','utf8');
+          for(const id of ['seminarMCQCheck','seminarMCQChoices','seminarMCQFeedback','seminarWrittenBody','seminarMultipleBody']){
+            assert(html.includes('id="'+id+'"'),id+' missing in HTML');
+            assert(script.includes(id),id+' missing in JavaScript');
+          }
+          for(const mode of ['multiple','written'])assert(html.includes('data-seminar-format="'+mode+'"'),mode+' mode');
+          console.log('Validated 60 authored multiple-choice questions, both test modes, and preserved writing UI.');
+          JS
       - name: Verify 247-chapter search, 314 SOS and separated reader
         run: node scripts/verify-reader-search.mjs
       - name: Check shared search script syntax
