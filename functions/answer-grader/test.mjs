@@ -7,7 +7,7 @@ const grade={verdict:'correct',explanation:'Σωστό νόημα',correctPoints
 const invoke=(body,user='user',authenticated=true)=>handler({req:{method:'POST',headers:authenticated?{'x-appwrite-user-id':user,'x-appwrite-user-jwt':'test-jwt'}:{},bodyJson:body},res:{json:(body,status=200)=>({body,status})}});
 async function setup(run){
  const env={...process.env},fetch=globalThis.fetch;
- delete process.env.OPENAI_API_KEY;delete process.env.OPENROUTER_API_KEY;
+ delete process.env.OPENAI_API_KEY;delete process.env.OPENROUTER_API_KEY;delete process.env.CLOUDFLARE_API_TOKEN;
  process.env.GROQ_API_KEY='test-only';process.env.GROQ_FREE_PLAN_CONFIRMED='true';
  try{await run();}finally{globalThis.fetch=fetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 }
@@ -19,6 +19,13 @@ test('no implicit paid provider; Groq requires confirmed Free account',()=>{
 test('OpenRouter rejects paid models and implicit models',()=>{
  for(const model of ['', 'openai/gpt-4o','foo:free:nitro'])assert.deepEqual(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:model}),[]);
  assert.equal(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:'vendor/model:free'}).length,1);
+});
+test('Cloudflare requires Free plan, valid account and an allowlisted model',()=>{
+ const cloud={CLOUDFLARE_API_TOKEN:'test',CLOUDFLARE_ACCOUNT_ID:'a'.repeat(32),CLOUDFLARE_FREE_PLAN_CONFIRMED:'true'};
+ assert.equal(freeProviders(cloud)[0].id,'cloudflare');
+ assert.deepEqual(freeProviders({...cloud,CLOUDFLARE_FREE_PLAN_CONFIRMED:'false'}),[]);
+ assert.deepEqual(freeProviders({...cloud,CLOUDFLARE_FREE_MODEL:'paid/model'}),[]);
+ assert.deepEqual(freeProviders({...cloud,CLOUDFLARE_ACCOUNT_ID:'../other'}),[]);
 });
 test('authentication and missing configuration stop before any request',async()=>setup(async()=>{
  globalThis.fetch=()=>assert.fail('must not call model');

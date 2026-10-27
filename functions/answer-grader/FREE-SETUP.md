@@ -1,19 +1,24 @@
 # Free-only AI grading (pending live validation)
 
-This branch replaces paid OpenAI calls with two optional server-side adapters. No account or API key is created by this change. No actual provider evaluation has passed yet.
+This branch replaces paid OpenAI calls with three optional server-side adapters. No account or API key is created by this change. No actual provider evaluation has passed yet.
 
 ## Server variables
+
+- `CLOUDFLARE_API_TOKEN`: secret, scoped to Workers AI only.
+- `CLOUDFLARE_ACCOUNT_ID`: account identifier (not secret).
+- `CLOUDFLARE_FREE_PLAN_CONFIRMED=true`: enable only after verifying Workers Free and no paid billing. A later upgrade requires rechecking this flag.
+- `CLOUDFLARE_FREE_MODEL`: optional; defaults to `@cf/meta/llama-3.3-70b-instruct-fp8-fast`. Only that model and `@cf/meta/llama-3.1-8b-instruct-fp8-fast` are allowed. They share the same daily free neuron budget.
 
 - `GROQ_API_KEY`: secret, set only in the Appwrite Function.
 - `GROQ_FREE_PLAN_CONFIRMED=true`: enable only after verifying the account remains on Groq Free, with no payment method or upgrade. The application cannot inspect or enforce a provider account's billing tier. Recheck before any billing change.
 - `OPENROUTER_API_KEY`: secret, set only in the Function.
 - `OPENROUTER_FREE_MODEL`: a specifically tested model ID ending `:free`. There is no default model or paid fallback. Requests additionally constrain prompt/completion prices to zero and disallow provider fallbacks.
 
-Groq is tried first, OpenRouter second. At most two provider calls, each with a 12-second timeout. Both exhausted/unconfigured means unavailable, never an invented grade. Model IDs and endpoint configuration cannot come from the browser. Only authenticated Appwrite executions are accepted; keep public/domain execution disabled and execute permission `users` only.
+Cloudflare is tried first, Groq second, OpenRouter third. At most three provider calls, each with an 8-second timeout. Both exhausted/unconfigured means unavailable, never an invented grade. Model IDs and endpoint configuration cannot come from the browser. Only authenticated Appwrite executions are accepted; keep public/domain execution disabled and execute permission `users` only.
 
 The short-lived cache is isolated per user, limited to 200 results and 10 minutes, and only shared within a running Function instance. It does not provide durable, cross-instance identical answers. Existing in-memory rate limits likewise are per instance.
 
-Both providers receive identical controlled reference data, prompts and output requirements. This does not guarantee equivalent semantic judgment. Existing references do not yet contain independent criterion IDs and weights, so this branch does not invent numeric scores or claim deterministic rubric scoring. No change to the adaptive difficulty engine.
+All providers receive identical controlled reference data, prompts and output requirements. This does not guarantee equivalent semantic judgment. Existing references do not yet contain independent criterion IDs and weights, so this branch does not invent numeric scores or claim deterministic rubric scoring. No change to the adaptive difficulty engine.
 
 ## Required live checks before enabling
 
@@ -23,7 +28,7 @@ Both providers receive identical controlled reference data, prompts and output r
 4. Calibrate each selected model against reviewed examples before public use. No scientific/clinical approval is claimed.
 5. Confirm the frontend service worker fetches the changed client asset before release to devices.
 
-Automated tests: `node --test functions/answer-grader/test.mjs` (11 passing mocked tests; not a live provider test).
+Automated tests: `node --test functions/answer-grader/test.mjs` (12 passing mocked tests; not a live provider test).
 
 Official API references checked 2026-10-27:
 - https://console.groq.com/docs/openai
@@ -31,4 +36,6 @@ Official API references checked 2026-10-27:
 - https://openrouter.ai/docs/api_reference/overview
 - https://openrouter.ai/docs/guides/routing/provider-selection
 
-Other providers from the research report are not integrated or enabled by this branch. Add only after account, free quota, API compatibility and grading-quality validation.
+Other providers apart from Cloudflare, Groq and OpenRouter from the research report are not integrated or enabled by this branch. Add only after account, free quota, API compatibility and grading-quality validation.
+
+Cloudflare compatibility: https://developers.cloudflare.com/workers-ai/configuration/open-ai-compatibility/
