@@ -9,13 +9,10 @@ export function freeProviders(env=process.env){
    id:'cloudflare',model:cloudModel,key:env.CLOUDFLARE_API_TOKEN,
    url:'https://api.cloudflare.com/client/v4/accounts/'+env.CLOUDFLARE_ACCOUNT_ID+'/ai/v1/chat/completions'
   });
- if(env.GROQ_API_KEY && env.GROQ_FREE_PLAN_CONFIRMED==='true')providers.push({
-  id:'groq',model:'openai/gpt-oss-20b',key:env.GROQ_API_KEY,
-  url:'https://api.groq.com/openai/v1/chat/completions'
- });
+ // Groq disabled until a free, non-OpenAI production model is verified.
  const model=env.OPENROUTER_FREE_MODEL||'';
  // Never allow :nitro, paid names, implicit defaults or automatic paid routing.
- if(env.OPENROUTER_API_KEY && /^[a-zA-Z0-9._/-]+:free$/.test(model))providers.push({
+ if(env.OPENROUTER_API_KEY && model==='meta-llama/llama-3.3-70b-instruct:free')providers.push({
   id:'openrouter',model,key:env.OPENROUTER_API_KEY,
   url:'https://openrouter.ai/api/v1/chat/completions'
  });
@@ -24,7 +21,7 @@ export function freeProviders(env=process.env){
 export async function requestFreeGrade(provider,messages){
  const body={model:provider.model,messages,temperature:0,max_tokens:1200,
   response_format:{type:'json_object'}};
- if(provider.id==='openrouter')body.provider={max_price:{prompt:0,completion:0},allow_fallbacks:false};
+ if(provider.id==='openrouter')body.provider={max_price:{prompt:0,completion:0,request:0},ignore:['OpenAI'],allow_fallbacks:false};
  const response=await fetch(provider.url,{
   method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+provider.key},
   body:JSON.stringify(body),signal:AbortSignal.timeout(8000)
