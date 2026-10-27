@@ -24,7 +24,10 @@
 .saek-hub .hub-study-title{display:flex;align-items:flex-start;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;margin-bottom:13px}
 .saek-hub .hub-study-title h3{font-size:1.15rem;line-height:1.25;margin:0}
 .saek-hub .hub-study-title p{font-size:.79rem;color:var(--muted);margin:3px 0 0}
-.saek-hub .hub-course-count{font-size:.72rem;color:var(--muted);white-space:nowrap;border:1px solid var(--line);padding:5px 8px;border-radius:999px}
+.saek-hub .hub-course-count{font:inherit;font-size:.72rem;color:var(--muted);white-space:nowrap;border:1px solid var(--line);padding:5px 8px;border-radius:999px;background:transparent;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.saek-hub .hub-course-count:hover:not([aria-pressed="true"]){border-color:var(--blue);background:var(--light);color:var(--blue)}
+.saek-hub .hub-course-count:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.saek-hub .hub-course-count[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
 .saek-hub .hub-semester-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:15px}
 .saek-hub .hub-semester-tabs button{min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;justify-content:center;background:var(--light);color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 5px;cursor:pointer}
 .saek-hub .hub-semester-tabs button strong{font-size:1rem;line-height:1.2}
@@ -33,6 +36,7 @@
 .saek-hub .hub-semester-tabs button[aria-pressed="true"] small{color:#dbedf6}
 .saek-hub .hub-semester-tabs button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .saek-hub .course-section{padding:0!important;margin:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.saek-hub .hub-course-lists[data-view="all"] .hub-semester + .hub-semester{margin-top:24px!important}
 .saek-hub .hub-list-head{display:flex;align-items:baseline;flex-wrap:wrap;justify-content:space-between;gap:5px 12px;border-bottom:1px solid var(--line);padding:0 0 9px}
 .saek-hub .hub-list-head h4{font-size:.89rem;margin:0}
 .saek-hub .hub-list-head span{color:var(--muted);font-size:.75rem}
@@ -73,6 +77,7 @@ html[data-theme="dark"] .saek-hub .hub-action:hover{background:#204258;border-co
 html[data-theme="dark"] .saek-hub .hub-action-icon{background:#24475c}
 html[data-theme="dark"] .saek-hub .hub-action-exam .hub-action-icon{background:#38445f}
 html[data-theme="dark"] .saek-hub .hub-action-copy small,html[data-theme="dark"] .saek-hub .hub-study-title p,html[data-theme="dark"] .saek-hub .hub-course-count,html[data-theme="dark"] .saek-hub .hub-list-head span,html[data-theme="dark"] .saek-hub .hub-resources>summary small,html[data-theme="dark"] .saek-hub .hub-links a small{color:#bfd5e4}
+html[data-theme="dark"] .saek-hub .hub-course-count[aria-pressed="true"]{background:#287b9e;border-color:#65badc;color:#fff}
 html[data-theme="dark"] .saek-hub .hub-semester-tabs button{background:#1d3b50;border-color:#3d5a6d;color:#e9f5fc}
 html[data-theme="dark"] .saek-hub .hub-semester-tabs button[aria-pressed="true"]{background:#287b9e;border-color:#65badc}
 html[data-theme="dark"] .saek-hub .hub-semester-tabs button small{color:#bfd5e4}
