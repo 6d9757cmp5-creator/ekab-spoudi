@@ -23,7 +23,7 @@ document.querySelectorAll('img.course-diagram').forEach(img=>{
 (function(){
  const hide=function(){
   document.querySelectorAll('.saek-visual-panel,.saek-learning-gallery,.saek-learning-chapter-map,.saek-phys-gallery,.saek-phys-chapter-map').forEach(function(el){el.remove()});
-  document.querySelectorAll('img.course-diagram').forEach(function(img){img.style.display='none'});
+  document.querySelectorAll('img.course-diagram').forEach(function(img){const panel=img.closest('section.panel');if(panel&&/saek-course-01\.html$/.test(location.pathname))panel.remove();else img.style.display='none';});
  };
  hide();
  document.addEventListener('DOMContentLoaded',hide,{once:true});
