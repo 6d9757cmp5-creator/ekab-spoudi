@@ -11,7 +11,7 @@
     if(data.schemaVersion===1&&data.approved&&typeof data.approved==='object')approvals=data.approved;
   }catch{}
   const authorized=(rawId,url)=>{
-    const parts=/^(\\d{2})-(\\d{1,2})$/.exec(rawId||'');
+    const parts=/^(\d{2})-(\d{1,2})$/.exec(rawId||'');
     if(!parts)return false;
     const item=approvals[parts[1]+'-'+String(Number(parts[2])).padStart(2,'0')];
     return Boolean(item&&item.status==='approved'&&item.url===url&&
