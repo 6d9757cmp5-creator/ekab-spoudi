@@ -12,13 +12,16 @@ async function setup(run){
  try{await run();}finally{globalThis.fetch=fetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 }
 const response=data=>({ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify(data)}}]})});
-test('no implicit paid provider; Groq requires confirmed Free account',()=>{
+test('no implicit paid provider; Groq is disabled',()=>{
  assert.deepEqual(freeProviders({OPENAI_API_KEY:'paid',GROQ_API_KEY:'key'}),[]);
  assert.deepEqual(freeProviders({GROQ_API_KEY:'key',GROQ_FREE_PLAN_CONFIRMED:'true'}),[]);
 });
 test('OpenRouter rejects paid models and implicit models',()=>{
  for(const model of ['', 'openai/gpt-4o','openai/gpt-oss-20b:free','foo:free:nitro','vendor/model:free'])assert.deepEqual(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:model}),[]);
  assert.equal(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:'google/gemma-4-31b-it:free'}).length,1);
+});
+test('NVIDIA free alternative stays on the explicit non-OpenAI allowlist',()=>{
+ assert.equal(freeProviders({OPENROUTER_API_KEY:'test',OPENROUTER_FREE_MODEL:'nvidia/nemotron-3.5-super-vl:free'}).length,1);
 });
 test('Cloudflare requires Free plan, valid account and an allowlisted model',()=>{
  const cloud={CLOUDFLARE_API_TOKEN:'test',CLOUDFLARE_ACCOUNT_ID:'a'.repeat(32),CLOUDFLARE_FREE_PLAN_CONFIRMED:'true'};
