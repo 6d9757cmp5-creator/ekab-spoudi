@@ -113,6 +113,6 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
 
 /* Shared back button, mobile edge swipe and replacement user guide. */
 if(!document.querySelector('script[data-ekab-navigation]')){
- const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=1';document.head.append(css);
- const script=document.createElement('script');script.src='navigation.js?v=1';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
+ const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=2';document.head.append(css);
+ const script=document.createElement('script');script.src='navigation.js?v=2';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
 }
