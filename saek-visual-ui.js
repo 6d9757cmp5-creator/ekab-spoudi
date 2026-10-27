@@ -59,3 +59,26 @@ document.querySelectorAll('img.course-diagram').forEach(img=>{
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+/* Shared SAEK gesture rule: swipe horizontally to navigate chapters,
+   except on videos, galleries, controls, links, or horizontally scrollable content. */
+(function(){
+ let x=null,y=null,origin=null;
+ document.addEventListener('touchstart',function(e){
+  if(e.touches.length!==1)return;
+  origin=e.target;
+  if(origin.closest('button,a,input,textarea,select,iframe,video,dialog,.saek-series,.saek-source-section,.saek-study-images,.saek-series-parts,[data-series-viewport]')){x=null;return;}
+  x=e.touches[0].clientX;y=e.touches[0].clientY;
+ },{passive:true});
+ document.addEventListener('touchend',function(e){
+  if(x===null||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;
+  x=y=null;
+  if(Math.abs(dx)<90||Math.abs(dx)<Math.abs(dy)*1.6)return;
+  const active=origin?.closest('.reader-chapters > details.reader-fold');
+  if(!active||active.style.display==='none')return;
+  const nav=active.querySelector('.saek-reader-nav');
+  const button=nav?.querySelector(dx<0?'#saekChapterNext':'#saekChapterPrev');
+  if(button&&!button.disabled)button.click();
+ },{passive:true});
+})();
