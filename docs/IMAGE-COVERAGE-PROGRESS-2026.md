@@ -249,3 +249,12 @@ For each new asset: verify relevance and the original source/license; render and
 ## Automated registry-integrity checkpoint — 2026-10-27
 
 A fresh cross-reference inspection of `saek-image-audit-2026.json` confirmed **247/247** chapters with at least one registered image (Α 71/71, Β 73/73, Γ 51/51, Δ 52/52), **95 distinct assets**, **88 locally stored SVG assets**, **zero unresolved chapter-to-asset references**, **zero assets missing title/caption/source URL/license**, and **zero local assets missing recorded SHA-256 metadata**. This is a **metadata and mapping check only**: it does **not** verify that the SHA-256 values match the current bytes, render or inspect every SVG, validate external licenses or references, establish suitability for each chapter, or confer medical/scientific approval. The draft remains unmerged.
+
+
+## Νέα απαίτηση εικονογράφησης — 28/10/2026
+
+**Εγκεκριμένος στόχος προϊόντος:** κάθε κεφάλαιο πρέπει να έχει **τουλάχιστον 2–3 διαφορετικές, ουσιαστικά σχετικές εκπαιδευτικές εικόνες όταν το θέμα το απαιτεί**. Σε σύνθετα θέματα (ανατομία, φυσιολογία, αλγόριθμοι, πρακτικές δεξιότητες) μπορεί να απαιτούνται περισσότερες. Δεν επιτρέπεται να συμπληρώνεται ο αριθμός με άσχετες, διπλότυπες ή τεχνητά επαναχρησιμοποιημένες εικόνες. Εξαιρέσεις για αμιγώς θεωρητικά κεφάλαια πρέπει να αιτιολογούνται ανά κεφάλαιο.
+
+**Μετρημένη αφετηρία από το τρέχον μητρώο του branch:** 247 κεφάλαια, 95 μοναδικά assets (88 τοπικά SVG), 296 συνολικές τοποθετήσεις εικόνων: 203 κεφάλαια με 1 εικόνα, 39 με 2, 5 με 3 ή περισσότερες. Συνεπώς η σημερινή αντιστοίχιση **δεν πληροί** τον νέο στόχο. Οι μετρήσεις αφορούν καταχωρίσεις, όχι έγκριση καταλληλότητας.
+
+**Κριτήρια ολοκλήρωσης PR #6:** (α) έλεγχος της διδακτικής ανάγκης και κατάλληλου πλήθους εικόνων για κάθε κεφάλαιο, (β) διαφορετικές και ακριβείς εικόνες με **ελληνικές ετικέτες** όπου υπάρχουν ορολογίες, (γ) ανεξάρτητος έλεγχος ανατομικής/ιατρικής ακρίβειας και αδειών, (δ) έλεγχος αναγνωσιμότητας και zoom σε κινητό, desktop και προβολέα, (ε) λειτουργικός έλεγχος offline και προσβασιμότητας, (στ) τεκμηρίωση των εξαιρέσεων. **Το 247/247 δεν ισοδυναμεί με ολοκλήρωση.** Μην συγχωνεύσετε ή παρουσιάσετε ως εγκεκριμένο πριν καλυφθούν τα παραπάνω.
