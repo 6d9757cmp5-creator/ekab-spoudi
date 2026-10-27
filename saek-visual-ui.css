@@ -84,3 +84,11 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
 .saek-chapter-actions>.saek-reader-nav button{min-width:0!important;min-height:44px;padding:10px 8px;white-space:normal;font-size:.9rem}
 .saek-chapter-actions>.saek-reader-nav .saek-reader-count{min-width:50px;font-size:.85rem;font-variant-numeric:tabular-nums}
 @media(max-width:480px){.saek-chapter-actions>.saek-reader-nav{gap:6px}.saek-chapter-actions>.saek-reader-nav button{font-size:.83rem;padding:10px 5px}}
+
+/* Mobile: keep image and attribution, remove redundant in-image controls. */
+@media(max-width:760px){
+ .saek-study-images .saek-study-toggle,
+ .saek-source-figure .saek-source-actions{display:none!important}
+ .saek-study-images .saek-source-section{display:block!important}
+ .saek-source-image{cursor:zoom-in}
+}
