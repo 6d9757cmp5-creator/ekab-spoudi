@@ -17,10 +17,44 @@ html[data-theme="dark"] .law-item,html[data-theme="dark"] .law-search{background
 html[data-theme="dark"] .law-alert,html[data-theme="dark"] .law-sources a{background:#1b4054}
 html[data-theme="dark"] .law-citation{color:#9bd8f7}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Μικρός ανεξάρτητος οδηγός πράξεων — χωρίς επηρεασμό ΣΑΕΚ/ΕΟΠΠΕΠ. */
+.act-lookup{border:1px solid var(--line);border-radius:19px;padding:17px;margin:22px 0 30px;background:var(--light)}
+.act-topline h2{margin:4px 0 8px;font-size:1.25rem;line-height:1.3}.act-topline p{font-size:.9rem;margin:0 0 15px}
+.act-eyebrow{font-size:.76rem;color:var(--blue);font-weight:750}.act-search-label{display:block;font-size:.92rem;font-weight:700;margin-bottom:7px}
+.act-examples{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}.act-examples button{border:1px solid #a6c4d5;color:var(--blue);background:#fff;border-radius:99px;padding:7px 11px;font-size:.8rem;font-weight:750}
+.act-examples button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}.act-examples button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.act-count{font-size:.82rem;font-weight:650;color:var(--muted);margin:12px 0}
+.act-results{display:grid;grid-template-columns:1fr;gap:11px}.act-card{background:#fff;border:1px solid #c8dbe4;border-radius:13px;padding:14px 15px}
+.act-card-heading{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px 9px;justify-content:space-between}.act-card-title{font-size:1.02rem;line-height:1.35;flex:1 1 180px;margin:0}
+.act-status{border:1px solid #8daebf;background:#e8f3f8;color:#164b68;border-radius:9px;padding:3px 8px;font-size:.72rem;font-weight:750}
+.act-summary,.act-limits{font-size:.9rem;line-height:1.55;margin:10px 0 0}.act-limits{color:#4c5962}
+.act-references{display:flex;flex-direction:column;gap:9px;margin-top:14px;padding-top:11px;border-top:1px solid #e0e9ed}
+.act-fek{color:#1b668b;font-size:.78rem;font-weight:750}.act-source-links{display:flex;flex-wrap:wrap;gap:7px}
+.act-link{font-size:.8rem;font-weight:700;text-decoration:none;background:#eef6fb;border:1px solid #c5d9e4;border-radius:9px;padding:6px 9px}.act-link:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.act-disclaimer{font-size:.82rem;line-height:1.6;color:#465765;margin:14px 0 0}
+.act-empty{background:#fff;border:1px dashed #97b4c2;border-radius:12px;padding:14px;font-size:.9rem}
+.law-reference-list h2{font-size:1.1rem;margin-bottom:3px}.law-reference-list p{margin:0 0 16px}
+html[data-theme="dark"] .act-lookup{background:#14384c;border-color:#41667b}html[data-theme="dark"] .act-card,html[data-theme="dark"] .act-examples button,html[data-theme="dark"] .act-empty{background:#193d50;color:#eaf6fc;border-color:#53798d}
+html[data-theme="dark"] .act-examples button[aria-pressed="true"]{background:#326b87}
+html[data-theme="dark"] .act-status,html[data-theme="dark"] .act-link{background:#214b63;color:#d3f0ff;border-color:#477995}
+html[data-theme="dark"] .act-fek,html[data-theme="dark"] .act-limits,html[data-theme="dark"] .act-disclaimer,html[data-theme="dark"] .act-eyebrow{color:#b9ddef}
+@media(max-width:480px){.act-lookup{padding:13px;margin-inline:-3px}.act-examples button{padding:8px 10px}.act-card{padding:13px}.act-card-heading{gap:7px}}
+
 </style></head>
 <body><header class="top"><div class="container"><div class="header-row"><div class="brand"><div class="logo" aria-hidden="true">✚</div><div><h1>ΕΚΑΒ Σπουδή</h1><p>Διασώστης – Πλήρωμα Ασθενοφόρου</p></div></div></div><nav class="nav" aria-label="Πλοήγηση"><a href="index.html">Θεωρία ΕΟΠΠΕΠ</a><a href="practical_exam.html">Πρακτικό ΕΟΠΠΕΠ</a><a href="saek.html">Κατάρτιση ΣΑΕΚ</a></nav></div></header>
 <main class="law-shell"><div class="law-hero"><h2>⚖ Επάγγελμα &amp; Νομοθεσία</h2><p class="law-muted">Ανεξάρτητος ενημερωτικός οδηγός · Δεν αποτελεί διδακτέα ή εξεταστέα ύλη ΣΑΕΚ/ΕΟΠΠΕΠ.</p></div>
 <div class="law-alert"><strong>Κάθε θέμα έχει δικό του ΦΕΚ, άρθρο και σημείο.</strong><p style="margin:6px 0 0">Οι απλές περιλήψεις δεν αντικαθιστούν το αυθεντικό κείμενο. Όταν υπάρχουν μεταγενέστερες τροποποιήσεις, παρατίθενται ξεχωριστά. Οι κλινικές τεχνικές ακολουθούν τις ισχύουσες οδηγίες και την υπηρεσιακή διαδικασία, όχι μόνο μια ιστορική ρύθμιση.</p></div>
+<section class="act-lookup" id="actLookup" aria-labelledby="actLookupTitle">
+<div class="act-topline"><span class="act-eyebrow">Γρήγορος νομικός έλεγχος · Π.Δ. 62/2007</span><h2 id="actLookupTitle">Τι προβλέπεται για κάθε πράξη;</h2><p>Πληκτρολόγησε μια πράξη ή επέλεξε παράδειγμα. Θα δεις τη νομική αναφορά και τους ειδικούς όρους, <strong>όχι αυτόματη άδεια εκτέλεσης</strong>.</p></div>
+<label class="act-search-label" for="actQuery">Αναζήτηση πράξης</label>
+<input id="actQuery" class="law-search" type="search" autocomplete="off" spellcheck="false" placeholder="π.χ. ΗΚΓ, οξυγόνο, φλέβα, ΚΑΡΠΑ" aria-controls="actResults">
+<div class="act-examples" role="group" aria-label="Γρήγορες αναζητήσεις"><button type="button" data-act="ΗΚΓ" aria-pressed="false">ΗΚΓ</button><button type="button" data-act="οξυγόνο" aria-pressed="false">Οξυγόνο</button><button type="button" data-act="ΚΑΡΠΑ" aria-pressed="false">ΚΑΡΠΑ</button><button type="button" data-act="φλέβα" aria-pressed="false">Φλεβική γραμμή</button><button type="button" data-act="φάρμακα" aria-pressed="false">Φάρμακα</button><button type="button" data-act="διασωλήνωση" aria-pressed="false">Διασωλήνωση</button></div>
+<p class="act-count" id="actCount" role="status" aria-live="polite">Φόρτωση ενδεικτικών πράξεων…</p>
+<div class="act-results" id="actResults"></div>
+<p class="act-disclaimer"><strong>Προσοχή:</strong> Η καταχώριση δηλώνει τι αναφέρεται στο Π.Δ. 62/2007, όχι ότι η πράξη επιτρέπεται αυτοτελώς σε κάθε περίπτωση. Η νομοθεσία, η εκπαίδευση, οι αρμοδιότητες και τα πρωτόκολλα υπηρεσίας εξετάζονται μαζί. Εάν μια πράξη δεν εμφανίζεται, αυτό δεν αποτελεί συμπέρασμα για τη νομιμότητά της.</p>
+</section>
+<section class="law-reference-list" aria-label="Επιπλέον νομοθετικές πληροφορίες"><h2>Άλλα θέματα νομοθεσίας</h2><p class="law-muted">Επαγγελματικά δικαιώματα, άδεια άσκησης και νεότερα ΦΕΚ.</p></section>
 <label for="lawFilter" style="display:block;font-weight:650;margin-bottom:7px">Αναζήτηση σε αρμοδιότητες, άρθρα και ΦΕΚ</label><input id="lawFilter" class="law-search" type="search" placeholder="π.χ. ΚΑΡΠΑ, άρθρο 4, 1242/2024" autocomplete="off">
 <p class="law-count" id="lawCount" aria-live="polite">12 διαθέσιμα θέματα</p>
 <section class="law-group"><h2>Επαγγελματικά δικαιώματα &amp; καθήκοντα</h2><details class="law-item"><summary><span class="law-title">Πού μπορεί να εργάζεται ο διασώστης</span><span class="law-citation">ΦΕΚ Α΄ 70/2007 · Π.Δ. 62/2007 · άρθρο 2</span></summary><div class="law-content"><p>Το Π.Δ. απαριθμεί ενδεικτικά ασθενοφόρα, κινητές ιατρικές μονάδες, συντονιστικά κέντρα μαζικών καταστροφών και άλλα προνοσοκομειακά μέσα.</p><div class="law-sources"><a href="https://api.et.gr/apiFEK/1/2007/70/pdf" target="_blank" rel="noopener noreferrer">Άνοιγμα πρωτότυπου ΦΕΚ ↗</a></div></div></details>
@@ -38,4 +72,4 @@ html[data-theme="dark"] .law-citation{color:#9bd8f7}
 <p class="law-muted" style="margin-top:30px">Τελευταία καταγραφή πηγών: 27/10/2026. Δεν έχει πραγματοποιηθεί ανεξάρτητη νομική πιστοποίηση ή εξαντλητικός έλεγχος όλων των μεταγενέστερων πράξεων. Για τρέχουσες διοικητικές απαιτήσεις ακολουθήστε τον επίσημο Μίτο και την αρμόδια Περιφέρεια.</p></main>
 <script>
 (function(){const input=document.getElementById('lawFilter'),count=document.getElementById('lawCount'),items=Array.from(document.querySelectorAll('.law-item'));input.addEventListener('input',function(){const q=input.value.toLocaleLowerCase('el-GR').trim();let shown=0;items.forEach(function(el){const ok=!q||el.textContent.toLocaleLowerCase('el-GR').includes(q);el.hidden=!ok;if(ok)shown++});document.querySelectorAll('.law-group').forEach(function(group){group.hidden=!group.querySelector('.law-item:not([hidden])')});count.textContent=shown+' διαθέσιμα θέματα';});})();
-</script></body></html>
+</script><script src="profession-acts.js" defer></script></body></html>
