@@ -49,12 +49,18 @@ jobs:
           const css=fs.readFileSync('seminar-prep.css','utf8');
           for(const id of ['seminarMCQChoices','seminarMCQFeedback','seminarMultipleBody','seminarWrittenBody',
                            'seminarMixedResults','seminarMixedQuestion','seminarRestartQuiz','seminarRepeatQuiz',
-                           'seminarQuestionNotes','seminarGradeRight']){
+                           'seminarQuestionNotes','seminarScenarioSubmit','seminarScenarioStatus','seminarScenarioResult','seminarOralNotes']){
             assert(html.includes('id="'+id+'"'),id+' missing from HTML');
             assert(script.includes(id),id+' missing from script');
           }
           assert(!html.includes('data-seminar-format='));
           assert(!html.includes('id="seminarMCQCheck"'));
+          assert(!html.includes('id="seminarMarkOral"'));
+          assert(!html.includes('id="seminarGradeRight"'));
+          assert(!html.includes('id="seminarGradeNeeds"'));
+          assert(script.includes("section:'seminar_case'"));
+          assert(script.includes("current().scenarioGrades[caseId]"));
+          assert(!script.includes("seminarMarkOral"));
           assert(script.includes("autoTimer=setTimeout("));
           assert(script.includes("p[correct?'mcRight':'mcNeeds'].push(index)"));
           assert(css.includes('.seminar-mcq-option.is-correct'));
@@ -73,6 +79,10 @@ jobs:
           }
           console.log('Verified 5 seminars, 60 MCQs, mixed 7/3 exam rule, independent grading, and accessible feedback.');
           JS
+      - name: Test authenticated clinical-scenario AI evaluator (mocked model, no real requests)
+        run: |
+          node --check functions/answer-grader/main.js
+          node --test functions/answer-grader/test.mjs
       - name: Verify 247-chapter search, 314 SOS and separated reader
         run: node scripts/verify-reader-search.mjs
       - name: Check shared search script syntax
