@@ -110,3 +110,9 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
  else install();
 })();
+
+/* Shared back button, mobile edge swipe and replacement user guide. */
+if(!document.querySelector('script[data-ekab-navigation]')){
+ const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=1';document.head.append(css);
+ const script=document.createElement('script');script.src='navigation.js?v=1';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
+}
