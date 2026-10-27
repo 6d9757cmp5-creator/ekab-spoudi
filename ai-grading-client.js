@@ -38,6 +38,7 @@ function render(container,result){
  container.append(title);
  const add=text=>{if(!text)return;const p=document.createElement('p');p.textContent=text;container.append(p);};
  add(result.explanation);
+ if(result.verdict==='uncertain')add('Δεν προκύπτει αξιόπιστη βαθμολογία. Αν κάποιο σημείο της απάντησής σου είναι ασαφές, γράψε το πιο συγκεκριμένα και προσεκτικά και πάτησε ξανά έλεγχο.');
  for(const [key,caption] of [['correctPoints','Τι απάντησες σωστά'],['missingPoints','Τι λείπει ή χρειάζεται διόρθωση']]){
   const items=Array.isArray(result[key])?result[key].slice(0,5):[];
   if(!items.length)continue;
