@@ -6,16 +6,24 @@
  const labels=['Α΄','Β΄','Γ΄','Δ΄'];
  const tabs=[...document.querySelectorAll('[data-semester-tab]')];
  const panels=[...document.querySelectorAll('[data-semester-panel]')];
- let active=0;
+ const allButton=document.getElementById('saekAllCoursesToggle');
+ const help=document.getElementById('saekLessonsHelp');
+ const lists=document.getElementById('saekSemesterLists');
+ let active=0,lastSemester=0;
  function getSaved(){
-  try{const raw=localStorage.getItem(KEY);return /^[0-3]$/.test(raw||'')?Number(raw):0}
+  try{const raw=localStorage.getItem(KEY);return raw==='all'?'all':/^[0-3]$/.test(raw||'')?Number(raw):0}
   catch{return 0}
  }
  function choose(index,saveSelection=true){
-  if(!Number.isInteger(index)||index<0||index>3||tabs.length!==4||panels.length!==4)return;
+  const all=index==='all';
+  if((!all&&(!Number.isInteger(index)||index<0||index>3))||tabs.length!==4||panels.length!==4)return;
   active=index;
-  tabs.forEach((tab,i)=>{const selected=i===index;tab.setAttribute('aria-pressed',String(selected))});
-  panels.forEach((panel,i)=>{panel.hidden=i!==index});
+  if(!all)lastSemester=index;
+  tabs.forEach((tab,i)=>{const selected=!all&&i===index;tab.setAttribute('aria-pressed',String(selected))});
+  panels.forEach((panel,i)=>{panel.hidden=!all&&i!==index});
+  if(allButton){allButton.setAttribute('aria-pressed',String(all));allButton.setAttribute('aria-label',all?'Επιστροφή στο επιλεγμένο εξάμηνο':'Προβολή και των 20 μαθημάτων')}
+  if(lists)lists.dataset.view=all?'all':'semester';
+  if(help)help.textContent=all?'Εμφανίζονται και τα 20 μαθήματα, ομαδοποιημένα ανά εξάμηνο.':'Επίλεξε εξάμηνο και άνοιξε το μάθημά σου.';
   if(saveSelection)try{localStorage.setItem(KEY,String(index))}catch{}
  }
  function updateProgress(){
@@ -46,6 +54,7 @@
  function init(){
   if(tabs.length!==4||panels.length!==4)return;
   tabs.forEach((tab,i)=>tab.addEventListener('click',()=>choose(i)));
+  if(allButton)allButton.addEventListener('click',()=>choose(active==='all'?lastSemester:'all'));
   choose(getSaved(),false);
   updateProgress();
   window.addEventListener('pageshow',updateProgress);
