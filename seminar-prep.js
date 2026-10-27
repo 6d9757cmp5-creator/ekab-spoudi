@@ -353,8 +353,13 @@ function bind(){
  $('seminarPrevOral').addEventListener('click',()=>{oral=Math.max(0,oral-1);renderOral();});
  $('seminarNextOral').addEventListener('click',()=>{oral=Math.min(11,oral+1);renderOral();});
  $('seminarOralNotes').addEventListener('input',e=>{
-  current().oralNotes[oral]=e.target.value.slice(0,3500);save();
-  $('seminarScenarioStatus').textContent='Αποθηκεύτηκε η περιγραφή. Πάτησε «Υποβολή» για έλεγχο από AI.';
+  const p=current();
+  p.oralNotes[oral]=e.target.value.slice(0,3500);
+  // A previously graded answer must never appear to verify newly edited steps.
+  if(p.scenarioGrades[oral]){delete p.scenarioGrades[oral];updateCourseProgress();}
+  save();
+  $('seminarScenarioResult').hidden=true;
+  $('seminarScenarioStatus').textContent='Αποθηκεύτηκε η νέα περιγραφή. Η προηγούμενη βαθμολογία δεν ισχύει πλέον· πάτησε «Υποβολή» για επανέλεγχο AI.';
  });
  $('seminarOralReveal').addEventListener('click',()=>{
   $('seminarOralHelp').hidden=false;$('seminarOralReveal').hidden=true;
