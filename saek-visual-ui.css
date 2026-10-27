@@ -115,3 +115,18 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
 .saek-clean-prev{left:12px;top:50%;transform:translateY(-50%)}
 .saek-clean-next{right:12px;top:50%;transform:translateY(-50%)}
 .saek-clean-lightbox button[hidden]{display:none!important}
+
+/* One disclosure only; desktop image rail contains images without captions or nested scrollbars. */
+.saek-study-toggle{display:none!important}
+@media(min-width:761px){
+ .saek-study-images{overflow:visible;max-height:none;position:sticky;top:12px}
+ .saek-study-images .saek-source-section{background:transparent!important;border:0!important;padding:0!important}
+ .saek-study-images .saek-source-section>.saek-source-note,
+ .saek-study-images .saek-source-figure>.saek-source-label,
+ .saek-study-images .saek-source-figure>.saek-source-caption,
+ .saek-study-images .saek-source-figure>.saek-source-credit,
+ .saek-study-images .saek-source-figure>.saek-source-actions,
+ .saek-study-images .saek-source-figure>.saek-source-fallback{display:none!important}
+ .saek-study-images .saek-source-figure{padding:6px!important;margin:8px 0!important}
+ .saek-study-images .saek-source-image{display:block;max-height:min(65vh,640px);width:100%;height:auto;object-fit:contain;margin:auto}
+}
