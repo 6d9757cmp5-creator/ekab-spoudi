@@ -89,3 +89,23 @@ html[data-theme="dark"] .seminar-mcq-feedback{background:#19384e;color:#edf8fe;b
 html[data-theme="dark"] .seminar-mcq-instruction{color:#bad1dc}
 html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option:has(input:checked){border-color:#80c8e8}
 @media(max-width:460px){.seminar-quiz-modes button{font-size:.77rem;min-height:41px;padding:9px 5px}.seminar-mcq-choices .seminar-mcq-option{padding:11px;font-size:.82rem}}
+
+
+/* Single mixed test: vivid, accessible feedback before automated advancement. */
+.seminar-mixed-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.seminar-mixed-heading .eyebrow{margin:0 0 6px}
+.seminar-mixed-subtitle{margin:0 0 5px;color:var(--ink);font-size:.9rem;font-weight:750}
+.seminar-mcq-choices .seminar-mcq-option.is-correct{background:#dff5e9!important;border:2px solid #238553!important;color:#11482f!important;box-shadow:inset 0 0 0 1px #238553}
+.seminar-mcq-choices .seminar-mcq-option.is-incorrect{background:#fee6e7!important;border:2px solid #bb303c!important;color:#71151b!important;box-shadow:inset 0 0 0 1px #bb303c}
+.seminar-mcq-option.is-correct .seminar-mcq-label::after{content:" ✓";font-weight:850}
+.seminar-mcq-option.is-incorrect .seminar-mcq-label::after{content:" ✗";font-weight:850}
+.seminar-mcq-feedback.is-correct{background:#e2f6e9;border:1px solid #238553;color:#145337}
+.seminar-mcq-feedback.is-incorrect{background:#fee8e8;border:1px solid #bb303c;color:#71151b}
+html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option.is-correct{background:#143f30!important;border-color:#66d5a0!important;color:#e2fff0!important}
+html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option.is-incorrect{background:#4a232b!important;border-color:#ff939d!important;color:#fff0f1!important}
+html[data-theme="dark"] .seminar-mcq-feedback.is-correct{background:#143f30;border-color:#66d5a0;color:#e2fff0}
+html[data-theme="dark"] .seminar-mcq-feedback.is-incorrect{background:#4a232b;border-color:#ff939d;color:#fff0f1}
+.seminar-mixed-results{padding:15px 0 4px}
+.seminar-mixed-results h3{font-size:1.18rem}
+.seminar-mixed-results #seminarMixedScore{font-size:1.03rem;font-weight:800}
+.seminar-mixed-results #seminarMixedBreakdown{color:var(--muted);line-height:1.55}
