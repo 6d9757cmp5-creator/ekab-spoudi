@@ -14,7 +14,7 @@ This branch replaces paid OpenAI calls with two active server-side adapters (Clo
 - `OPENROUTER_API_KEY`: secret, set only in the Function.
 - `OPENROUTER_FREE_MODEL`: the allowlisted Google Gemma model `google/gemma-4-31b-it:free`. There is no default model or paid fallback. Requests additionally constrain prompt/completion prices to zero and disallow provider fallbacks.
 
-Cloudflare is tried first, OpenRouter second. At most two provider calls, each with an 8-second timeout. Groq is disabled because no free non-OpenAI production model has been verified. Both exhausted/unconfigured means unavailable, never an invented grade. Model IDs and endpoint configuration cannot come from the browser. Only authenticated Appwrite executions are accepted; keep public/domain execution disabled and execute permission `users` only.
+Cloudflare is tried first, OpenRouter second. At most two provider calls, each with a 12-second timeout. Groq is disabled because no free non-OpenAI production model has been verified. Both exhausted/unconfigured means unavailable, never an invented grade. Model IDs and endpoint configuration cannot come from the browser. Only authenticated Appwrite executions are accepted; keep public/domain execution disabled and execute permission `users` only.
 
 The short-lived cache is isolated per user, limited to 200 results and 10 minutes, and only shared within a running Function instance. It does not provide durable, cross-instance identical answers. Existing in-memory rate limits likewise are per instance.
 
@@ -28,7 +28,7 @@ All providers receive identical controlled reference data, prompts and output re
 4. Calibrate each selected model against reviewed examples before public use. No scientific/clinical approval is claimed.
 5. Confirm the frontend service worker fetches the changed client asset before release to devices.
 
-Automated tests: `node --test functions/answer-grader/test.mjs` (12 passing mocked tests; not a live provider test).
+Automated tests: `node --test functions/answer-grader/test.mjs` (13 passing mocked tests; not a live provider test).
 
 Official API references checked 2026-10-27:
 - https://console.groq.com/docs/openai
@@ -41,3 +41,7 @@ Other providers apart from Cloudflare, Groq and OpenRouter from the research rep
 Cloudflare compatibility: https://developers.cloudflare.com/workers-ai/configuration/open-ai-compatibility/
 
 User constraint: no OpenAI models, no personal ChatGPT integration. OpenAI-branded models are rejected even through intermediaries. The OpenRouter adapter accepts only the Google Gemma allowlist and excludes the OpenAI provider. Existing OPENAI_API_KEY is ignored by this code. Groq variables do not enable any calls until a non-OpenAI model is verified in a future change.
+
+## Live verification 2026-10-27
+
+OpenRouter secret saved in Appwrite and never displayed. Google Gemma free returned HTTP 429. The current configured model is `nvidia/nemotron-3.5-super-vl:free`, also on the explicit allowlist, with zero-price constraints. Real console seminar request returned 200. Authenticated application tests passed for seminar_case, ambiguous seminar answer (uncertain and no grade), and its corrected seminar answer (correct). Function re-enabled with non-OpenAI code. These are integration checks, not broad medical/linguistic model calibration. Cloudflare token and other provider accounts remain pending user completion. No OpenAI API or personal ChatGPT subscription used.
