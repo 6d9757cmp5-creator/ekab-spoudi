@@ -12,7 +12,7 @@ This branch replaces paid OpenAI calls with two active server-side adapters (Clo
 - `GROQ_API_KEY`: secret, set only in the Appwrite Function.
 - `GROQ_FREE_PLAN_CONFIRMED=true`: enable only after verifying the account remains on Groq Free, with no payment method or upgrade. The application cannot inspect or enforce a provider account's billing tier. Recheck before any billing change.
 - `OPENROUTER_API_KEY`: secret, set only in the Function.
-- `OPENROUTER_FREE_MODEL`: the allowlisted Meta model `meta-llama/llama-3.3-70b-instruct:free`. There is no default model or paid fallback. Requests additionally constrain prompt/completion prices to zero and disallow provider fallbacks.
+- `OPENROUTER_FREE_MODEL`: the allowlisted Google Gemma model `google/gemma-4-31b-it:free`. There is no default model or paid fallback. Requests additionally constrain prompt/completion prices to zero and disallow provider fallbacks.
 
 Cloudflare is tried first, OpenRouter second. At most two provider calls, each with an 8-second timeout. Groq is disabled because no free non-OpenAI production model has been verified. Both exhausted/unconfigured means unavailable, never an invented grade. Model IDs and endpoint configuration cannot come from the browser. Only authenticated Appwrite executions are accepted; keep public/domain execution disabled and execute permission `users` only.
 
@@ -40,4 +40,4 @@ Other providers apart from Cloudflare, Groq and OpenRouter from the research rep
 
 Cloudflare compatibility: https://developers.cloudflare.com/workers-ai/configuration/open-ai-compatibility/
 
-User constraint: no OpenAI models, no personal ChatGPT integration. OpenAI-branded models are rejected even through intermediaries. The OpenRouter adapter accepts only the Meta Llama allowlist and excludes the OpenAI provider. Existing OPENAI_API_KEY is ignored by this code. Groq variables do not enable any calls until a non-OpenAI model is verified in a future change.
+User constraint: no OpenAI models, no personal ChatGPT integration. OpenAI-branded models are rejected even through intermediaries. The OpenRouter adapter accepts only the Google Gemma allowlist and excludes the OpenAI provider. Existing OPENAI_API_KEY is ignored by this code. Groq variables do not enable any calls until a non-OpenAI model is verified in a future change.
