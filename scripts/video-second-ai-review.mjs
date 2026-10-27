@@ -64,7 +64,7 @@ try{
  result.critical=Boolean(textReview.critical||visionReviews.some(x=>x.critical));
  result.score=Math.round(0.55*Number(textReview.score)+0.40*minVision+0.05*100);
  result.frameIntervalSeconds=interval;result.framesReviewed=frames.length;
- result.status=(!result.critical&&result.score>=90&&Number(textReview.score)>=90&&minVision>=90&&result.missingEvidence.length===0)?'ai_pass_human_review_required':'hold';
+ result.status=(!result.critical&&!result.findings.some(f=>f.severity==='major'||f.severity==='critical')&&result.score>=90&&Number(textReview.score)>=90&&minVision>=90&&result.missingEvidence.length===0)?'ai_pass_human_review_required':'hold';
  result.humanApprovalRequired=true;
  await writeFile(output,JSON.stringify(result,null,2)+'\n');
  console.log('Second AI review: '+result.status+' — '+result.score+'/100 — '+result.findings.length+' findings. Human review required.');
