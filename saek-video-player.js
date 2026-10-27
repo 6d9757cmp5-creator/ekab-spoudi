@@ -15,7 +15,7 @@
     if(!parts)return false;
     const item=approvals[parts[1]+'-'+String(Number(parts[2])).padStart(2,'0')];
     return Boolean(item&&item.status==='approved'&&item.url===url&&
-      /^[a-f0-9]{64}$/.test(item.videoSha256||'')&&item.approvedBy&&item.reportPath);
+      /^[a-f0-9]{64}$/.test(item.videoSha256||'')&&item.approvedBy&&item.clinicalReviewer&&item.reportPath);
   };
   document.querySelectorAll('[data-lesson-video]').forEach(node=>{
     const url=videos[node.dataset.lessonVideo],slot=node.querySelector('.video-content');
