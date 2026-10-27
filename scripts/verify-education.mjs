@@ -82,6 +82,21 @@ const theory=read('theory.html');
 if(!index.includes('updates.js?v='+version))fail('Home update script version mismatch');
 if(!theory.includes('app.js?v=')||!theory.includes('updates.js?v='))fail('EOPPEP theory reader scripts missing');
 if(!index.includes("location.replace('theory.html'"))fail('Old EOPPEP reader links do not redirect');
+
+// Prevent future changes from adding misleading direct Theory/Practical buttons
+// to the homepage when the EOPPEP certification hub already provides both.
+const certHomeCard=index.match(/<section class="home-card home-card-eoppep">([\s\S]*?)<\/section>/)?.[1]||'';
+if(!certHomeCard.includes('href="eoppep.html"'))fail('Homepage certification card must open the EOPPEP hub');
+if(certHomeCard.includes('home-suboptions')||/href="(?:theory|practical_exam)\.html"/.test(certHomeCard))
+ fail('Homepage must describe Theory/Practical without separate clickable links');
+const eopHub=read('eoppep.html'),eopHubJs=read('eoppep-hub.js');
+if(!eopHub.includes('data-eop-group="A"')||!eopHub.includes('data-eop-group="B"')||
+ !eopHub.includes('theory.html?view=catalog')||!eopHub.includes('theory.html?mode=exam')||
+ !eopHub.includes('href="practical_exam.html"'))
+ fail('EOPPEP certification hub missing group selector, reading, practice or practical route');
+if(!eopHubJs.includes("ekab-eoppep-official-v15")||!eopHubJs.includes('scheduler.evaluate(s).studied'))
+ fail('EOPPEP hub progress must reflect existing saved recall history without changing it');
+
 if(errors.length){
  console.error('❌ Education quality gate: '+errors.length+' errors\n'+errors.join('\n'));
  process.exitCode=1;
