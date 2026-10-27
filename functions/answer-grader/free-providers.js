@@ -26,7 +26,7 @@ export async function requestFreeGrade(provider,messages){
   method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+provider.key},
   body:JSON.stringify(body),signal:AbortSignal.timeout(8000)
  });
- if(!response.ok)throw new Error('Free provider unavailable');
+ if(!response.ok)throw new Error('provider_http_'+response.status);
  const data=await response.json(),choice=data.choices?.[0];
  if(choice?.finish_reason!=='stop'||typeof choice.message?.content!=='string')throw new Error('Incomplete result');
  return JSON.parse(choice.message.content);
