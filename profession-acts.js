@@ -9,36 +9,69 @@ const search=container.querySelector('#actQuery');
 const result=container.querySelector('#actResults');
 const count=container.querySelector('#actCount');
 const shortcut=container.querySelector('.act-examples');
-const suggestions=['ecg','oxygen','cpr','iv','drugs','intubation'];
+const showAllButton=container.querySelector('#actShowAll');
+const archive=document.getElementById('lawArchive');
+const archiveCount=document.getElementById('lawCount');
+const oldItems=Array.from(archive.querySelectorAll('.law-item'));
+const oldGroups=Array.from(archive.querySelectorAll('.law-group'));
+let showingAll=false;
 const plain=x=>(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el-GR');
 function add(parent,tag,className,content){const el=document.createElement(tag);if(className)el.className=className;if(content!==undefined)el.textContent=content;parent.appendChild(el);return el;}
 function link(parent,label,url){const a=add(parent,'a','act-link',label);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
 function renderCard(entry){
- const card=add(result,'article','act-card');
- const heading=add(card,'div','act-card-heading');
- add(heading,'h3','act-card-title',entry.title);
- add(heading,'span','act-status',entry.status);
- add(card,'p','act-summary',entry.summary);
- const limit=add(card,'p','act-limits');
+ const card=add(result,'details','act-card');
+ const heading=add(card,'summary','');
+ const titleRow=add(heading,'div','act-card-heading');
+ add(titleRow,'span','act-card-title',entry.title);
+ add(titleRow,'span','act-status',entry.status);
+ const body=add(card,'div','act-card-body');
+ add(body,'p','act-summary',entry.summary);
+ const limit=add(body,'p','act-limits');
  add(limit,'strong',null,'Προϋποθέσεις / όρια: ');
  limit.append(document.createTextNode(entry.limit));
- const refs=add(card,'div','act-references');
+ const refs=add(body,'div','act-references');
  const location=entry.article==='5'?'άρθρο 5':'άρθρο '+entry.article;
  add(refs,'span','act-fek','ΦΕΚ Α΄ 70/2007 · Π.Δ. 62/2007 · '+location);
  const sources=add(refs,'div','act-source-links');
  link(sources,'Πρωτότυπο ΦΕΚ ↗',sourcePdf);
  link(sources,'Διάταξη σε αναγνώσιμη μορφή ↗',sourceText);
 }
+function filterArchive(q){
+ let shown=0;
+ oldItems.forEach(el=>{
+  const match=!q||plain(el.textContent).includes(q);
+  el.hidden=!match;
+  if(q)el.open=false;
+  if(match)shown++;
+ });
+ oldGroups.forEach(group=>{group.hidden=!group.querySelector('.law-item:not([hidden])');});
+ archiveCount.textContent=q?shown+' σχετικά θέματα από 12 επιλεγμένα':'12 επιλεγμένα θέματα';
+ return shown;
+}
 function run(query){
  const q=plain(query.trim());
  const primary=q?data.filter(e=>plain([e.title,e.terms,e.article].join(' ')).includes(q)):[];
- const matches=q?(primary.length?primary:data.filter(e=>plain([e.status,e.summary,e.limit].join(' ')).includes(q))):data.filter(e=>suggestions.includes(e.id));
+ const matches=q?(primary.length?primary:data.filter(e=>plain([e.status,e.summary,e.limit].join(' ')).includes(q))):(showingAll?data:[]);
  result.replaceChildren();
- if(matches.length){matches.forEach(renderCard);}else{const warn=add(result,'p','act-empty','Δεν βρέθηκε αντίστοιχη καταχώριση σε αυτόν τον συνοπτικό οδηγό. Η απουσία δεν αποδεικνύει ούτε άδεια ούτε απαγόρευση πράξης. Ελέγξτε το πρωτότυπο ΦΕΚ και την αρμόδια υπηρεσία.');}
- count.textContent=q?matches.length+' αποτελέσματα για «'+query.trim()+'»':'Ενδεικτικές πράξεις — '+matches.length+' από '+data.length+' καταχωρίσεις';
+ matches.forEach(renderCard);
+ const older=filterArchive(q);
+ if(q&&older>0)archive.open=true;
+ else if(q)archive.open=false;
+ if(q&&!matches.length&&!older)add(result,'p','act-empty','Δεν βρέθηκε σχετική καταχώριση. Η απουσία δεν αποδεικνύει ούτε άδεια ούτε απαγόρευση πράξης.');
+ count.textContent=q?matches.length+' πράξεις · '+older+' άλλα θέματα':'27 καταχωρισμένες πράξεις · 12 επιλεγμένα νομοθετικά θέματα';
+ showAllButton.textContent=showingAll&&!q?'Απόκρυψη καταλόγου':'Προβολή 27 πράξεων';
+ showAllButton.setAttribute('aria-expanded',String(showingAll&&!q));
  shortcut.querySelectorAll('button[data-act]').forEach(b=>b.setAttribute('aria-pressed',String(q===plain(b.dataset.act))));
 }
-search.addEventListener('input',()=>run(search.value));
-shortcut.addEventListener('click',e=>{const b=e.target.closest('button[data-act]');if(!b)return;const term=b.dataset.act;search.value=plain(search.value)===plain(term)?'':term;run(search.value);search.focus({preventScroll:true});});
+search.addEventListener('input',()=>{showingAll=false;run(search.value);});
+shortcut.addEventListener('click',e=>{
+ const b=e.target.closest('button[data-act]');if(!b)return;
+ const term=b.dataset.act;
+ search.value=plain(search.value)===plain(term)?'':term;
+ showingAll=false;run(search.value);search.focus({preventScroll:true});
+});
+showAllButton.addEventListener('click',()=>{
+ search.value='';showingAll=!showingAll;archive.open=false;run('');
+});
 run('');
 })();
