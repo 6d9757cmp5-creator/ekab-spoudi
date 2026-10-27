@@ -92,3 +92,15 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
  .saek-study-images .saek-source-section{display:block!important}
  .saek-source-image{cursor:zoom-in}
 }
+
+/* Fullscreen image gallery: fit the whole illustration before zooming. */
+.saek-gallery-dialog{position:fixed;inset:0;margin:auto;width:100vw!important;max-width:100vw!important;height:100dvh;max-height:100dvh!important;border-radius:0!important;display:flex;flex-direction:column;overflow:hidden}
+.saek-gallery-dialog:not([open]){display:none}
+.saek-gallery-dialog .saek-source-dialog-bar{flex:0 0 auto;align-items:center;justify-content:space-between;gap:12px}
+.saek-gallery-count{font-weight:750;color:#173b54;font-variant-numeric:tabular-nums}
+.saek-gallery-frame{flex:1 1 auto;min-height:0;max-height:none!important;display:flex;align-items:center;justify-content:center;overflow:auto!important;padding:12px;background:#f7fbff;touch-action:pan-y}
+.saek-gallery-image{width:auto!important;height:auto!important;max-width:100%!important;max-height:100%!important;object-fit:contain;transform-origin:center center;cursor:zoom-in}
+.saek-gallery-controls{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:10px max(10px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom));background:#e4f1f8}
+.saek-gallery-controls button{min-height:44px;margin:0}
+.saek-gallery-controls button:disabled{opacity:.4}
+@media(max-width:620px){.saek-gallery-controls{display:grid;grid-template-columns:1fr 1fr}.saek-gallery-controls button{padding:9px 6px;font-size:.85rem}}
