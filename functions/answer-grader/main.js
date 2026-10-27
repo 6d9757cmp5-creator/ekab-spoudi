@@ -131,10 +131,11 @@ async function gradeAnswer(question,answer){
  const messages=[{role:'system',content:system},{role:'user',content:JSON.stringify({section:question.kind,question:question.question,reference:question.reference,case:question.context,studentAnswer:answer})}];
  // Isolated per authenticated user; cache never contains the original student text.
  // This is a bounded, short-lived per-process cache, not a durable cross-instance guarantee.
+ let failure='free_unavailable';
  for(const provider of providers){
-  try{return validateGrade(await requestFreeGrade(provider,messages));}catch{/* No answers, keys or provider response bodies in logs. */}
+  try{return validateGrade(await requestFreeGrade(provider,messages));}catch(err){if(/^provider_http_\d{3}$/.test(err.message))failure=err.message; /* No answers, keys or provider response bodies in logs. */}
  }
- throw new Error('Free AI unavailable');
+ throw new Error(failure);
 }
 async function cachedGrade(user,question,answer){
  const now=Date.now();
@@ -165,6 +166,6 @@ export default async function ({req,res}){
  }catch(err){
   if(/Μη έγκυρ|Άγνωστη|Δεν βρέθηκε|δεν είναι διαθέσιμο για αυτόματη/i.test(err.message))return reject(res,err.message,400);
   // Never log answers, question texts, keys or provider response bodies.
-  return reject(res,'Το δωρεάν AI δεν είναι διαθέσιμο ή έφτασε το όριό του. Δοκίμασε αργότερα. Η απάντηση παραμένει χωρίς βαθμό.',503);
+  return res.json({error:'Το δωρεάν AI δεν είναι διαθέσιμο ή έφτασε το όριό του. Δοκίμασε αργότερα. Η απάντηση παραμένει χωρίς βαθμό.',code:/^provider_http_\d{3}$/.test(err.message)?err.message:'free_unavailable'},503);
  }
 }
