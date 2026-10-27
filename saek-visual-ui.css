@@ -76,3 +76,11 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
 .saek-images-collapsed{grid-template-columns:minmax(0,1fr) auto}.saek-images-collapsed .saek-study-images .saek-source-section{display:none}
 .saek-images-collapsed .saek-study-images{max-height:none;overflow:visible}
 @media(max-width:760px){.saek-study-split,.saek-images-collapsed{display:block}.saek-study-images{position:static;max-height:none;overflow:visible;margin:14px 0}.saek-study-images .saek-source-image{max-height:290px}}
+
+/* SAEK: consistent, uncluttered chapter footer on phones and desktop. */
+.saek-chapter-actions{display:flex!important;flex-direction:column;gap:12px;align-items:stretch;margin-top:18px;padding:16px 0 max(18px,env(safe-area-inset-bottom));border-top:1px solid var(--line,#496070)}
+.saek-chapter-actions>.read-button{display:block;width:100%;min-height:48px;white-space:normal;line-height:1.4}
+.saek-chapter-actions>.saek-reader-nav{display:grid!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px;width:100%;margin:0!important}
+.saek-chapter-actions>.saek-reader-nav button{min-width:0!important;min-height:44px;padding:10px 8px;white-space:normal;font-size:.9rem}
+.saek-chapter-actions>.saek-reader-nav .saek-reader-count{min-width:50px;font-size:.85rem;font-variant-numeric:tabular-nums}
+@media(max-width:480px){.saek-chapter-actions>.saek-reader-nav{gap:6px}.saek-chapter-actions>.saek-reader-nav button{font-size:.83rem;padding:10px 5px}}
