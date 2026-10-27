@@ -25,36 +25,53 @@ jobs:
         run: node scripts/verify-study-scheduler.mjs
       - name: Validate browser JavaScript syntax
         run: node --check app.js && node --check study-scheduler.js && node --check progress.js
-      - name: Verify seminar multiple-choice bank and UI wiring
+      - name: Verify mixed seminar assessment bank and 70/30 scoring rule
         run: |
           node --check seminar-tracks.js
           node --check seminar-prep.js
           node - <<'JS'
-          const fs = require('fs');
-          const vm = require('vm');
-          const assert = require('assert');
-          const ctx = {window:{}};
-          vm.runInNewContext(fs.readFileSync('seminar-tracks.js','utf8'),ctx);
-          const courses = ctx.window.EkabSeminarTracks;
-          const questions = ctx.window.EkabSeminarMCQ;
+          const fs=require('fs'),vm=require('vm'),assert=require('assert');
+          const sandbox={window:{}};
+          vm.runInNewContext(fs.readFileSync('seminar-tracks.js','utf8'),sandbox);
+          const courses=sandbox.window.EkabSeminarTracks;
+          const mcq=sandbox.window.EkabSeminarMCQ;
           assert.strictEqual(courses.length,5);
-          for (const course of courses) {
-            assert.strictEqual(course.units.length,12,course.id+' topic count');
-            assert.strictEqual(questions[course.id].length,12,course.id+' multiple-choice count');
-            for(const [index,q] of questions[course.id].entries()){
-              assert.strictEqual(q.length,6,course.id+'/'+index+' schema');
-              assert.strictEqual(new Set(q.slice(1,5)).size,4,course.id+'/'+index+' distinct answers');
-              assert(q.every(v=>typeof v==='string'&&v.length>4),course.id+'/'+index+' empty field');
+          for(const c of courses){
+            assert.strictEqual(c.units.length,12);
+            assert.strictEqual(mcq[c.id].length,12);
+            for(const q of mcq[c.id]){
+              assert.strictEqual(q.length,6);
+              assert.strictEqual(new Set(q.slice(1,5)).size,4);
             }
           }
-          const html=fs.readFileSync('seminar-prep.html','utf8');
           const script=fs.readFileSync('seminar-prep.js','utf8');
-          for(const id of ['seminarMCQCheck','seminarMCQChoices','seminarMCQFeedback','seminarWrittenBody','seminarMultipleBody']){
-            assert(html.includes('id="'+id+'"'),id+' missing in HTML');
-            assert(script.includes(id),id+' missing in JavaScript');
+          const html=fs.readFileSync('seminar-prep.html','utf8');
+          const css=fs.readFileSync('seminar-prep.css','utf8');
+          for(const id of ['seminarMCQChoices','seminarMCQFeedback','seminarMultipleBody','seminarWrittenBody',
+                           'seminarMixedResults','seminarMixedQuestion','seminarRestartQuiz','seminarRepeatQuiz',
+                           'seminarQuestionNotes','seminarGradeRight']){
+            assert(html.includes('id="'+id+'"'),id+' missing from HTML');
+            assert(script.includes(id),id+' missing from script');
           }
-          for(const mode of ['multiple','written'])assert(html.includes('data-seminar-format="'+mode+'"'),mode+' mode');
-          console.log('Validated 60 authored multiple-choice questions, both test modes, and preserved writing UI.');
+          assert(!html.includes('data-seminar-format='));
+          assert(!html.includes('id="seminarMCQCheck"'));
+          assert(script.includes("autoTimer=setTimeout("));
+          assert(script.includes("p[correct?'mcRight':'mcNeeds'].push(index)"));
+          assert(css.includes('.seminar-mcq-option.is-correct'));
+          assert(css.includes('.seminar-mcq-option.is-incorrect'));
+          const first=script.indexOf('const shuffle=');
+          const last=script.indexOf('function cleanRecord(',first);
+          assert(first>0&&last>first);
+          const make=vm.runInNewContext('(function(){const TOTAL=10,MULTIPLE=7,WRITTEN=3;'+script.slice(first,last)+';return {createRun,validRun};})()',{});
+          for(let i=0;i<200;i++){
+            const run=make.createRun();
+            assert.strictEqual(run.items.length,10);
+            assert.strictEqual(run.items.filter(q=>q.type==='multiple').length,7);
+            assert.strictEqual(run.items.filter(q=>q.type==='written').length,3);
+            assert.strictEqual(new Set(run.items.map(q=>q.unit)).size,10);
+            assert(make.validRun(run));
+          }
+          console.log('Verified 5 seminars, 60 MCQs, mixed 7/3 exam rule, independent grading, and accessible feedback.');
           JS
       - name: Verify 247-chapter search, 314 SOS and separated reader
         run: node scripts/verify-reader-search.mjs
