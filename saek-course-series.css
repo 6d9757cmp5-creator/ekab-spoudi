@@ -31,3 +31,14 @@ html[data-theme="dark"] .saek-series-parts a[aria-current="step"]{background:#26
  .saek-series-slide .saek-series-frame{aspect-ratio:16/11}
 }
 @media(prefers-reduced-motion:reduce){.saek-series-track{transition:none}}
+
+/* Mobile embedded player: tall viewport without requiring a manual vertical-view switch. */
+@media(max-width:760px){
+ .saek-series,.saek-series-viewport,.saek-series-track,.saek-series-slide{min-width:0;max-width:100%;box-sizing:border-box}
+ .saek-series-viewport{width:100%;overflow:hidden}
+ .saek-series-slide .saek-series-frame{display:block;width:100%;height:min(72svh,650px);min-height:360px;aspect-ratio:auto;border:0}
+ .saek-series-slide{overflow:hidden}
+}
+@media(max-width:760px) and (orientation:landscape){
+ .saek-series-slide .saek-series-frame{height:min(75svh,480px);min-height:220px}
+}
