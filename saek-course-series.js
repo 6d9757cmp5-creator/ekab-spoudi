@@ -54,7 +54,7 @@
     const title=document.createElement('h3');title.textContent=part.title;
     const frame=document.createElement('iframe');frame.className='saek-series-frame';
     frame.title=course.title+' — Μέρος '+(i+1)+': '+part.title;
-    frame.loading='lazy';frame.allow='autoplay; fullscreen';frame.allowFullscreen=true;
+    frame.loading='lazy';frame.allow='fullscreen';frame.allowFullscreen=true;
     frame.referrerPolicy='strict-origin-when-cross-origin';
     frame.dataset.src=part.url;
     const actions=document.createElement('div');actions.className='saek-series-actions';
@@ -66,7 +66,11 @@
     toChapter.textContent='Γραπτή θεωρία κεφαλαίου '+part.chapter;
     toChapter.addEventListener('click',()=>openWrittenChapter(part.chapter));
     actions.append(external,toChapter);
-    slide.append(kicker,title,frame,actions);
+    const play=document.createElement('button');
+    play.type='button';play.className='btn saek-video-play';
+    play.textContent='▶ Αναπαραγωγή βίντεο';
+    play.addEventListener('click',()=>{frame.src=frame.dataset.src;play.hidden=true;});
+    slide.append(kicker,title,play,frame,actions);
     track.append(slide);frameNodes.push(frame);
     const tab=document.createElement('a');
     tab.href='#lesson-'+part.chapter;
@@ -80,8 +84,9 @@
     if(!Number.isInteger(i)||i<0||i>=parts.length)return;
     index=i;
     frameNodes.forEach((frame,j)=>{
-      if(j===index){if(!frame.hasAttribute('src'))frame.src=frame.dataset.src;}
-      else frame.removeAttribute('src');
+      if(j!==index)frame.removeAttribute('src');
+      const play=frame.parentElement.querySelector('.saek-video-play');
+      if(play)play.hidden=frame.hasAttribute('src');
     });
     track.style.transform='translateX(-'+(index*100)+'%)';
     prev.disabled=index===0;next.disabled=index===parts.length-1;
@@ -125,7 +130,7 @@
     content.hidden=closed;
     toggle.setAttribute('aria-expanded',String(!closed));
     toggle.textContent=closed?'Εμφάνιση βιντεοδιδασκαλίας +':'Απόκρυψη βιντεοδιδασκαλίας −';
-    if(closed){frameNodes.forEach(function(frame){frame.removeAttribute('src');});}
+    if(closed){frameNodes.forEach(function(frame){frame.removeAttribute('src');const play=frame.parentElement.querySelector('.saek-video-play');if(play)play.hidden=false;});}
     else{show(index);}
   });
 })();
