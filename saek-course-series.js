@@ -108,4 +108,24 @@
     if(event.key==='ArrowRight'){event.preventDefault();show(index+1);}
   });
   show(0);
+  // Collapsible teaching panel; unloading frames stops embedded playback.
+  const heading=section.querySelector('#saek-series-title');
+  const toggle=document.createElement('button');
+  toggle.type='button';
+  toggle.className='btn compact secondary';
+  toggle.textContent='Απόκρυψη βιντεοδιδασκαλίας −';
+  toggle.setAttribute('aria-expanded','true');
+  const content=document.createElement('div');
+  content.id='saek-video-content-'+courseId;
+  toggle.setAttribute('aria-controls',content.id);
+  while(heading.nextSibling)content.appendChild(heading.nextSibling);
+  heading.after(toggle,content);
+  toggle.addEventListener('click',function(){
+    const closed=!content.hidden;
+    content.hidden=closed;
+    toggle.setAttribute('aria-expanded',String(!closed));
+    toggle.textContent=closed?'Εμφάνιση βιντεοδιδασκαλίας +':'Απόκρυψη βιντεοδιδασκαλίας −';
+    if(closed){frameNodes.forEach(function(frame){frame.removeAttribute('src');});}
+    else{show(index);}
+  });
 })();
