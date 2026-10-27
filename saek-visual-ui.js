@@ -36,3 +36,26 @@ document.querySelectorAll('img.course-diagram').forEach(img=>{
  s.async=true;
  document.head.appendChild(s);
 })();
+
+/* Shared chapter action footer across every SAEK course. */
+(function(){
+ function init(){
+  const chapters=Array.from(document.querySelectorAll('.reader-chapters > details.reader-fold'));
+  const nav=document.querySelector('.saek-reader-nav');
+  if(!chapters.length||!nav||nav.dataset.ekabOrganized)return;
+  nav.dataset.ekabOrganized='1';
+  nav.setAttribute('aria-label','Μετάβαση μεταξύ κεφαλαίων');
+  function organize(){
+   const active=chapters.find(ch=>ch.open&&ch.style.display!=='none')||chapters.find(ch=>ch.style.display!=='none');
+   if(!active)return;
+   const actions=active.querySelector('.reader-actions');
+   if(!actions)return;
+   actions.classList.add('saek-chapter-actions');
+   if(nav.parentElement!==actions)actions.append(nav);
+  }
+  const observer=new MutationObserver(organize);
+  chapters.forEach(ch=>observer.observe(ch,{attributes:true,attributeFilter:['open','style']}));
+  organize();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
