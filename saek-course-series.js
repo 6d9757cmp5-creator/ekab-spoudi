@@ -21,7 +21,7 @@
     const approval=registry.approved[id];
     return approval?.status==='approved'&&approval.url===p.url&&
       typeof approval.videoSha256==='string'&&/^[a-f0-9]{64}$/.test(approval.videoSha256)&&
-      typeof approval.approvedBy==='string'&&Boolean(approval.reportPath);
+      typeof approval.approvedBy==='string'&&typeof approval.clinicalReviewer==='string'&&Boolean(approval.reportPath);
   });
   if(!parts.length){
     const message=document.createElement('section');
