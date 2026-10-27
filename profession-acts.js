@@ -31,7 +31,8 @@ function renderCard(entry){
 }
 function run(query){
  const q=plain(query.trim());
- const matches=q?data.filter(e=>plain([e.title,e.terms,e.article,e.status,e.summary,e.limit,'φεκ 70/2007'].join(' ')).includes(q)):data.filter(e=>suggestions.includes(e.id));
+ const primary=q?data.filter(e=>plain([e.title,e.terms,e.article].join(' ')).includes(q)):[];
+ const matches=q?(primary.length?primary:data.filter(e=>plain([e.status,e.summary,e.limit].join(' ')).includes(q))):data.filter(e=>suggestions.includes(e.id));
  result.replaceChildren();
  if(matches.length){matches.forEach(renderCard);}else{const warn=add(result,'p','act-empty','Δεν βρέθηκε αντίστοιχη καταχώριση σε αυτόν τον συνοπτικό οδηγό. Η απουσία δεν αποδεικνύει ούτε άδεια ούτε απαγόρευση πράξης. Ελέγξτε το πρωτότυπο ΦΕΚ και την αρμόδια υπηρεσία.');}
  count.textContent=q?matches.length+' αποτελέσματα για «'+query.trim()+'»':'Ενδεικτικές πράξεις — '+matches.length+' από '+data.length+' καταχωρίσεις';
