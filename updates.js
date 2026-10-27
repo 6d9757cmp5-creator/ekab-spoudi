@@ -113,6 +113,9 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
 
 /* Shared back button, mobile edge swipe and replacement user guide. */
 if(!document.querySelector('script[data-ekab-navigation]')){
- const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=2';document.head.append(css);
+ const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=3';document.head.append(css);
  const script=document.createElement('script');script.src='navigation.js?v=2';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
 }
+
+/* Classroom image presentation mode. */
+if(!document.querySelector('script[data-ekab-classroom-images]')){const s=document.createElement('script');s.src='classroom-images.js?v=1';s.defer=true;s.dataset.ekabClassroomImages='';document.head.append(s)}
