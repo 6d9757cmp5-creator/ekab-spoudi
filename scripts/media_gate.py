@@ -23,6 +23,7 @@ def main():
         print('FAIL: media-review.json missing');return 1
     try:
         entries=json.loads(manifest.read_text(encoding='utf-8'))['files']
+        if not isinstance(entries,dict): raise TypeError('files must be an object')
     except (ValueError,KeyError,TypeError) as exc:
         print('FAIL: invalid review manifest:',exc);return 1
     errors=[]
