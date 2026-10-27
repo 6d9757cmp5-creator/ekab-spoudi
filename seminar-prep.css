@@ -63,3 +63,29 @@ html[data-theme=dark] .seminar-feedback{background:#19384e;border-color:#45657a;
 html[data-theme=dark] .seminar-practice textarea{background:#13293b;color:#f1f8fb;border-color:#45657a}
 @media(max-width:700px){.seminar-learn{grid-template-columns:minmax(0,1fr)}.seminar-units{display:flex;overflow-x:auto;overflow-y:hidden;gap:7px;max-height:none;padding:3px 1px 8px;scroll-snap-type:x mandatory}.seminar-unit{flex:0 0 165px;scroll-snap-align:start;white-space:normal;min-height:48px}.seminar-lesson{padding:17px}.seminar-main{padding-top:13px}}
 @media(max-width:460px){.seminar-intro-top{display:block}.seminar-external{display:inline-block;margin-top:9px;font-size:.66rem}.seminar-card{padding:14px;gap:8px;align-items:center}.seminar-card h2{font-size:1.08rem}.seminar-card-sub{font-size:.78rem}.seminar-card-stats{font-size:.7rem}.seminar-start{min-width:82px;font-size:.78rem;padding:10px 8px}.seminar-tabs button{font-size:.72rem;padding:10px 4px}.seminar-practice{padding:16px}.seminar-next-prev .btn{font-size:.77rem;padding:10px 11px}}
+
+
+/* Two genuinely distinct examination modes: automatically graded MCQ and written recall. */
+.seminar-quiz-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:5px;margin:0 0 18px;border:1px solid var(--line);background:var(--light);border-radius:12px}
+.seminar-quiz-modes button{background:transparent;color:var(--ink);font:inherit;font-size:.85rem;font-weight:750;border:0;border-radius:9px;min-height:43px;padding:10px}
+.seminar-quiz-modes button.active{background:var(--navy);color:#fff}
+.seminar-mcq-instruction{font-size:.84rem;color:var(--muted);line-height:1.5;margin:4px 0 11px}
+.seminar-mcq-choices{display:grid;gap:9px;border:0;padding:0;margin:0 0 15px;min-width:0}
+.seminar-mcq-choices .seminar-mcq-option{display:flex;gap:11px;align-items:flex-start;margin:0;padding:13px 14px;border:1px solid var(--line);border-radius:11px;background:var(--light);color:var(--ink);line-height:1.45;font-size:.87rem;font-weight:500;cursor:pointer;min-width:0}
+.seminar-mcq-option:hover{border-color:var(--blue)}
+.seminar-mcq-option:has(input:checked){border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.seminar-mcq-option:focus-within{outline:2px solid var(--blue);outline-offset:2px}
+.seminar-mcq-option input{appearance:auto;accent-color:var(--blue);width:18px;height:18px;flex:0 0 18px;margin:2px 0 0}
+.seminar-mcq-label{min-width:0}
+.seminar-mcq-feedback{margin:13px 0;padding:13px 15px;border-radius:11px;border:1px solid var(--line);background:var(--light);line-height:1.6;font-size:.88rem}
+.seminar-mcq-feedback.is-correct{border-color:#679c85}
+.seminar-mcq-feedback.is-incorrect{border-color:#b89a62}
+#seminarMCQCheck:disabled{opacity:.52;cursor:not-allowed}
+html[data-theme="dark"] .seminar-quiz-modes{background:#19354a;border-color:#365267}
+html[data-theme="dark"] .seminar-quiz-modes button{color:#e8f5ff}
+html[data-theme="dark"] .seminar-quiz-modes button.active{background:#3182aa;color:#fff}
+html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option,
+html[data-theme="dark"] .seminar-mcq-feedback{background:#19384e;color:#edf8fe;border-color:#45657a}
+html[data-theme="dark"] .seminar-mcq-instruction{color:#bad1dc}
+html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option:has(input:checked){border-color:#80c8e8}
+@media(max-width:460px){.seminar-quiz-modes button{font-size:.77rem;min-height:41px;padding:9px 5px}.seminar-mcq-choices .seminar-mcq-option{padding:11px;font-size:.82rem}}
