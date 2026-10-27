@@ -39,7 +39,7 @@ jobs:
         env:
           VIDEO_URL: ${{ inputs.mp4_url }}
         run: |
-          node -e 'const u=new URL(process.env.VIDEO_URL); if(u.protocol!=="https:" || !u.hostname || /^(localhost|127\\.|10\\.|192\\.168\\.|169\\.254\\.)/.test(u.hostname))process.exit(1)'
+          node -e 'const u=new URL(process.env.VIDEO_URL); if(u.protocol!=="https:" || !u.hostname || /^(localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(u.hostname))process.exit(1)'
       - name: Download exported video
         env:
           VIDEO_URL: ${{ inputs.mp4_url }}
