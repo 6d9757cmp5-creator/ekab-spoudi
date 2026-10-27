@@ -130,3 +130,18 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
  .saek-study-images .saek-source-figure{padding:6px!important;margin:8px 0!important}
  .saek-study-images .saek-source-image{display:block;max-height:min(65vh,640px);width:100%;height:auto;object-fit:contain;margin:auto}
 }
+
+/* Mobile experiment: same minimal image card as desktop, one native disclosure. */
+@media(max-width:760px){
+ .saek-study-images{overflow:visible!important;max-height:none!important}
+ .saek-study-images .saek-source-section{background:transparent!important;border:0!important;padding:0!important;margin:10px 0!important}
+ .saek-study-images .saek-source-summary{font-size:.95rem;line-height:1.35}
+ .saek-study-images .saek-source-note,
+ .saek-study-images .saek-source-label,
+ .saek-study-images .saek-source-caption,
+ .saek-study-images .saek-source-credit,
+ .saek-study-images .saek-source-actions{display:none!important}
+ .saek-study-images .saek-source-figure{padding:4px!important;margin:8px 0!important;border:0!important;background:transparent!important}
+ .saek-study-images .saek-source-image{display:block!important;width:100%;height:auto;max-height:60svh;object-fit:contain;margin:0 auto;cursor:zoom-in}
+ .saek-study-images .saek-source-fallback:not([hidden]){display:block}
+}
