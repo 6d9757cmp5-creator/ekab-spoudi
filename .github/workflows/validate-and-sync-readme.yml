@@ -29,6 +29,8 @@ jobs:
         run: node scripts/verify-reader-search.mjs
       - name: Check shared search script syntax
         run: node --check global-tools.js
+      - name: Verify rescuer act lookup references and UI behavior
+        run: node scripts/verify-profession-acts.mjs
       - name: Validate app files and normalize README
         shell: bash
         run: |
