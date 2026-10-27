@@ -18,7 +18,7 @@ function sourceUrl(asset){
  return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(asset.filename);
 }
 function zoom(items,initial){
- let index=initial,scale=1,startX=null,startY=null;
+ let index=initial,scale=1,startX=null,startY=null,pinchDistance=null,pinchScale=1,panX=0,panY=0,panStart=null;
  const dialog=el('dialog','saek-source-dialog saek-gallery-dialog');
  const bar=el('div','saek-source-dialog-bar');
  const count=el('span','saek-gallery-count');
@@ -33,12 +33,12 @@ function zoom(items,initial){
  function show(n){
   index=(n+items.length)%items.length;scale=1;
   img.src=items[index].url;img.alt=items[index].alt;
-  img.style.transform='scale(1)';
+  panX=panY=0;img.style.transform='translate(0px,0px) scale(1)';
   count.textContent=(index+1)+' / '+items.length;
   prev.disabled=next.disabled=items.length<2;
  }
  function change(n){if(items.length>1)show(index+n);}
- function setScale(n){scale=Math.max(1,Math.min(4,n));img.style.transform='scale('+scale+')';magnify.textContent=scale>1?'Μεγέθυνση +':'Μεγέθυνση +';}
+ function setScale(n){scale=Math.max(1,Math.min(4,n));if(scale===1)panX=panY=0;img.style.transform='translate('+panX+'px,'+panY+'px) scale('+scale+')';magnify.textContent=scale>1?'Μεγέθυνση +':'Μεγέθυνση +';}
  close.type=prev.type=next.type=magnify.type=reset.type='button';
  close.addEventListener('click',()=>dialog.close());
  prev.addEventListener('click',()=>change(-1));
@@ -46,8 +46,26 @@ function zoom(items,initial){
  magnify.addEventListener('click',()=>setScale(scale===4?1:scale+1));
  reset.addEventListener('click',()=>setScale(1));
  img.addEventListener('click',()=>setScale(scale===1?2:1));
- frame.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;startX=e.touches[0].clientX;startY=e.touches[0].clientY;},{passive:true});
- frame.addEventListener('touchend',e=>{if(startX===null||!e.changedTouches.length)return;const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;startX=startY=null;if(scale===1&&Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4)change(dx<0?1:-1);},{passive:true});
+
+ function distance(t){return Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);}
+ frame.addEventListener('touchstart',e=>{
+  if(e.touches.length===2){pinchDistance=distance(e.touches);pinchScale=scale;startX=startY=null;panStart=null;}
+  else if(e.touches.length===1){startX=e.touches[0].clientX;startY=e.touches[0].clientY;panStart=scale>1?{x:startX,y:startY,px:panX,py:panY}:null;}
+ },{passive:true});
+ frame.addEventListener('touchmove',e=>{
+  if(e.touches.length===2&&pinchDistance){e.preventDefault();setScale(pinchScale*distance(e.touches)/pinchDistance);}
+  else if(e.touches.length===1&&scale>1&&panStart){
+   e.preventDefault();panX=panStart.px+e.touches[0].clientX-panStart.x;panY=panStart.py+e.touches[0].clientY-panStart.y;setScale(scale);
+  }
+ },{passive:false});
+ frame.addEventListener('touchend',e=>{
+  if(pinchDistance!==null){if(e.touches.length<2){pinchDistance=null;panStart=null;startX=startY=null;}return;}
+  if(startX===null||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;
+  startX=startY=null;panStart=null;
+  if(scale===1&&Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4)change(dx<0?1:-1);
+ },{passive:true});
+ frame.addEventListener('touchcancel',()=>{pinchDistance=null;panStart=null;startX=startY=null;});
  dialog.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();change(-1);}if(e.key==='ArrowRight'){e.preventDefault();change(1);}if(e.key==='Escape')dialog.close();});
  dialog.addEventListener('close',()=>dialog.remove());
  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
