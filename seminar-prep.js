@@ -339,8 +339,8 @@ function bind(){
    status.className='ai-grading-result ai-grading-unavailable';
    status.textContent=error.message||'Η αξιολόγηση δεν ολοκληρώθηκε.';
   }finally{
-   if(selected?.id===courseId&&view==='quiz'&&current().mixedRun===run&&run.pos===pos&&!run.responses[pos]){
-    button.disabled=false;button.textContent='Υποβολή · Αυτόματη αξιολόγηση AI';
+   if(selected?.id===courseId&&view==='quiz'&&current().mixedRun===run&&run.pos===pos){
+    button.disabled=!!run.responses[pos];button.textContent=run.responses[pos]?'Αξιολογήθηκε από AI':'Υποβολή · Αυτόματη αξιολόγηση AI';
    }
   }
  });
