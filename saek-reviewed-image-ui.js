@@ -60,8 +60,8 @@ function render(asset,lessonId,items,position){
  image.referrerPolicy='no-referrer';
  const figureActions=el('div','saek-source-actions');
  const bigger=el('button','saek-source-action','Μεγέθυνση εικόνας');
- bigger.type='button';bigger.addEventListener('click',()=>zoom(items,position));
- image.addEventListener('click',()=>zoom(items,position));
+ bigger.type='button';bigger.addEventListener('click',e=>{e.stopPropagation();zoom(items,position);});
+ image.addEventListener('click',e=>{e.stopPropagation();zoom(items,position);});
  image.style.cursor='zoom-in';
  const chapter=el('a','saek-source-action','Άνοιγμα κεφαλαίου');
  chapter.href='#lesson-'+lessonId;
