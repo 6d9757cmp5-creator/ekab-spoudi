@@ -8,7 +8,7 @@ const invoke=(body,user='user',authenticated=true)=>handler({req:{method:'POST',
 async function setup(run){
  const env={...process.env},fetch=globalThis.fetch;
  delete process.env.OPENAI_API_KEY;delete process.env.OPENROUTER_API_KEY;delete process.env.CLOUDFLARE_API_TOKEN;
- process.env.OPENROUTER_API_KEY='test-only';process.env.OPENROUTER_FREE_MODEL='meta-llama/llama-3.3-70b-instruct:free';
+ process.env.OPENROUTER_API_KEY='test-only';process.env.OPENROUTER_FREE_MODEL='google/gemma-4-31b-it:free';
  try{await run();}finally{globalThis.fetch=fetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 }
 const response=data=>({ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify(data)}}]})});
@@ -18,7 +18,7 @@ test('no implicit paid provider; Groq requires confirmed Free account',()=>{
 });
 test('OpenRouter rejects paid models and implicit models',()=>{
  for(const model of ['', 'openai/gpt-4o','openai/gpt-oss-20b:free','foo:free:nitro','vendor/model:free'])assert.deepEqual(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:model}),[]);
- assert.equal(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:'meta-llama/llama-3.3-70b-instruct:free'}).length,1);
+ assert.equal(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:'google/gemma-4-31b-it:free'}).length,1);
 });
 test('Cloudflare requires Free plan, valid account and an allowlisted model',()=>{
  const cloud={CLOUDFLARE_API_TOKEN:'test',CLOUDFLARE_ACCOUNT_ID:'a'.repeat(32),CLOUDFLARE_FREE_PLAN_CONFIRMED:'true'};
