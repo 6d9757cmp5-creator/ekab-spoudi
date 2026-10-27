@@ -8,17 +8,17 @@ const invoke=(body,user='user',authenticated=true)=>handler({req:{method:'POST',
 async function setup(run){
  const env={...process.env},fetch=globalThis.fetch;
  delete process.env.OPENAI_API_KEY;delete process.env.OPENROUTER_API_KEY;delete process.env.CLOUDFLARE_API_TOKEN;
- process.env.GROQ_API_KEY='test-only';process.env.GROQ_FREE_PLAN_CONFIRMED='true';
+ process.env.OPENROUTER_API_KEY='test-only';process.env.OPENROUTER_FREE_MODEL='meta-llama/llama-3.3-70b-instruct:free';
  try{await run();}finally{globalThis.fetch=fetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 }
 const response=data=>({ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify(data)}}]})});
 test('no implicit paid provider; Groq requires confirmed Free account',()=>{
  assert.deepEqual(freeProviders({OPENAI_API_KEY:'paid',GROQ_API_KEY:'key'}),[]);
- assert.equal(freeProviders({GROQ_API_KEY:'key',GROQ_FREE_PLAN_CONFIRMED:'true'}).length,1);
+ assert.deepEqual(freeProviders({GROQ_API_KEY:'key',GROQ_FREE_PLAN_CONFIRMED:'true'}),[]);
 });
 test('OpenRouter rejects paid models and implicit models',()=>{
- for(const model of ['', 'openai/gpt-4o','foo:free:nitro'])assert.deepEqual(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:model}),[]);
- assert.equal(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:'vendor/model:free'}).length,1);
+ for(const model of ['', 'openai/gpt-4o','openai/gpt-oss-20b:free','foo:free:nitro','vendor/model:free'])assert.deepEqual(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:model}),[]);
+ assert.equal(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:'meta-llama/llama-3.3-70b-instruct:free'}).length,1);
 });
 test('Cloudflare requires Free plan, valid account and an allowlisted model',()=>{
  const cloud={CLOUDFLARE_API_TOKEN:'test',CLOUDFLARE_ACCOUNT_ID:'a'.repeat(32),CLOUDFLARE_FREE_PLAN_CONFIRMED:'true'};
@@ -30,7 +30,7 @@ test('Cloudflare requires Free plan, valid account and an allowlisted model',()=
 test('authentication and missing configuration stop before any request',async()=>setup(async()=>{
  globalThis.fetch=()=>assert.fail('must not call model');
  assert.equal((await invoke(answer,'anonymous',false)).status,401);
- delete process.env.GROQ_API_KEY;
+ delete process.env.OPENROUTER_API_KEY;
  assert.equal((await invoke(answer,'missing')).status,503);
 }));
 test('blank and invalid references rejected',async()=>setup(async()=>{
@@ -40,7 +40,7 @@ test('blank and invalid references rejected',async()=>setup(async()=>{
 }));
 test('server controls reference; user cannot override it',async()=>setup(async()=>{
  globalThis.fetch=async(url,opt)=>{
-  assert.equal(url,'https://api.groq.com/openai/v1/chat/completions');
+  assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');
   const body=JSON.parse(opt.body),content=JSON.parse(body.messages[1].content);
   assert.equal(content.reference,'Εξασφάλισε τη δική σου ασφάλεια πριν πλησιάσεις.');
   assert.equal(body.temperature,0);assert.match(body.messages[0].content,/ασαφής/);
@@ -53,10 +53,10 @@ test('seminar_case uses controlled scenario reference',async()=>setup(async()=>{
  assert.equal((await invoke({section:'seminar_case',courseId:'bls',caseIndex:0,answer:answer.answer},'case')).status,200);
 }));
 test('429 switches once to free-only fallback with zero price constraint',async()=>setup(async()=>{
- process.env.OPENROUTER_API_KEY='test-key';process.env.OPENROUTER_FREE_MODEL='vendor/model:free';let calls=0;
+ process.env.CLOUDFLARE_API_TOKEN='test-key';process.env.CLOUDFLARE_ACCOUNT_ID='a'.repeat(32);process.env.CLOUDFLARE_FREE_PLAN_CONFIRMED='true';let calls=0;
  globalThis.fetch=async(url,opt)=>{calls++;if(calls===1)return {ok:false,status:429};
   assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');const request=JSON.parse(opt.body);
-  assert.deepEqual(request.provider.max_price,{prompt:0,completion:0});assert.equal(request.provider.allow_fallbacks,false);return response(grade);
+  assert.deepEqual(request.provider.max_price,{prompt:0,completion:0,request:0});assert.equal(request.provider.allow_fallbacks,false);return response(grade);
  };
  assert.equal((await invoke(answer,'fallback')).status,200);assert.equal(calls,2);
 }));
