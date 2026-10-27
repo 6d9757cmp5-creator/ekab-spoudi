@@ -115,15 +115,8 @@ async function start(){
    else body.insertBefore(wrap,body.firstChild);
    const layout=el('div','saek-study-split'),reading=el('div','saek-study-text'),visuals=el('aside','saek-study-images');
    visuals.setAttribute('aria-label','Εικόνες αναφοράς κεφαλαίου');
-   const toggle=el('button','saek-study-toggle','Ελαχιστοποίηση εικόνων −');
-   toggle.type='button';toggle.setAttribute('aria-expanded','true');
-   toggle.addEventListener('click',()=>{
-    const collapsed=layout.classList.toggle('saek-images-collapsed');
-    toggle.textContent=collapsed?'Εμφάνιση εικόνων +':'Ελαχιστοποίηση εικόνων −';
-    toggle.setAttribute('aria-expanded',String(!collapsed));
-   });
    while(body.firstChild){const node=body.firstChild;if(node===wrap)visuals.append(node);else reading.append(node);}
-   visuals.prepend(toggle);layout.append(reading,visuals);body.append(layout);wrap.open=true;
+   layout.append(reading,visuals);body.append(layout);wrap.open=true;
    // On phones, place the collapsible illustration immediately after the opening text.
    // On wider screens, restore the sticky right-hand reference panel.
    const mobile=window.matchMedia('(max-width:760px)');
