@@ -103,6 +103,17 @@ async function start(){
    });
    while(body.firstChild){const node=body.firstChild;if(node===wrap)visuals.append(node);else reading.append(node);}
    visuals.prepend(toggle);layout.append(reading,visuals);body.append(layout);wrap.open=true;
+   // On phones, place the collapsible illustration immediately after the opening text.
+   // On wider screens, restore the sticky right-hand reference panel.
+   const mobile=window.matchMedia('(max-width:760px)');
+   const mobileAnchor=reading.querySelector('p.reader-paragraph');
+   function positionVisuals(){
+    if(mobile.matches&&mobileAnchor){mobileAnchor.insertAdjacentElement('afterend',visuals);}
+    else if(visuals.parentElement!==layout){layout.append(visuals);}
+   }
+   positionVisuals();
+   if(mobile.addEventListener)mobile.addEventListener('change',positionVisuals);
+   else if(mobile.addListener)mobile.addListener(positionVisuals);
   }
  }catch(err){console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',err);}
 }
