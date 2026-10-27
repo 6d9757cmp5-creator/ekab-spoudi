@@ -12,7 +12,7 @@ export function freeProviders(env=process.env){
  // Groq disabled until a free, non-OpenAI production model is verified.
  const model=env.OPENROUTER_FREE_MODEL||'';
  // Never allow :nitro, paid names, implicit defaults or automatic paid routing.
- if(env.OPENROUTER_API_KEY && model==='meta-llama/llama-3.3-70b-instruct:free')providers.push({
+ if(env.OPENROUTER_API_KEY && model==='google/gemma-4-31b-it:free')providers.push({
   id:'openrouter',model,key:env.OPENROUTER_API_KEY,
   url:'https://openrouter.ai/api/v1/chat/completions'
  });
