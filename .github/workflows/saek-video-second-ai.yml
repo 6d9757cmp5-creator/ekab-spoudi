@@ -1,0 +1,67 @@
+name: SAEK — Independent second AI video review
+on:
+  workflow_dispatch:
+    inputs:
+      course:
+        description: 'Course 01..20'
+        required: true
+        type: string
+      chapter:
+        description: 'Chapter number'
+        required: true
+        type: string
+      mp4_url:
+        description: 'Direct HTTPS URL to exported MP4 (not a Scrimba viewing page)'
+        required: true
+        type: string
+      published_url:
+        description: 'Exact Scrimba or hosted URL users will see'
+        required: true
+        type: string
+      reference_path:
+        description: 'Reviewed reference: video-reviews/references/COURSE-CHAPTER.md'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  second-ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install audiovisual inspection utilities
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Validate source URL
+        env:
+          VIDEO_URL: ${{ inputs.mp4_url }}
+        run: |
+          node -e 'const u=new URL(process.env.VIDEO_URL); if(u.protocol!=="https:" || !u.hostname || /^(localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(u.hostname))process.exit(1)'
+      - name: Download exported video
+        env:
+          VIDEO_URL: ${{ inputs.mp4_url }}
+        run: |
+          curl --fail --silent --show-error --location --max-time 240 --max-filesize 150000000 --output reviewed-input.mp4 "$VIDEO_URL"
+          test -s reviewed-input.mp4
+      - name: Audit complete narration and sampled video frames
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AI_VIDEO_REVIEW_MODEL: gpt-4.1
+          REVIEW_COURSE: ${{ inputs.course }}
+          REVIEW_CHAPTER: ${{ inputs.chapter }}
+          REVIEW_REFERENCE: ${{ inputs.reference_path }}
+          REVIEW_PUBLIC_URL: ${{ inputs.published_url }}
+        run: |
+          test -n "$OPENAI_API_KEY" || { echo "OPENAI_API_KEY not configured; review remains blocked."; exit 1; }
+          node scripts/video-second-ai-review.mjs --video reviewed-input.mp4 --course "$REVIEW_COURSE" --chapter "$REVIEW_CHAPTER" --reference "$REVIEW_REFERENCE" --published-url "$REVIEW_PUBLIC_URL" --report video-ai-review-report.json
+      - name: Save review evidence, including failed audit findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: second-ai-video-review
+          path: video-ai-review-report.json
+          if-no-files-found: warn
+          retention-days: 30
