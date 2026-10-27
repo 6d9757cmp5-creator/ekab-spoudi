@@ -235,13 +235,12 @@ function renderWritten(item){
  $('seminarQuestionSolution').textContent=u[item.prompt+1];
  $('seminarQuestionSolution').hidden=true;
  $('seminarQuizReveal').hidden=false;
- $('seminarQuizGrade').hidden=true;
  $('seminarAIResult').hidden=true;
  $('seminarAIResult').className='ai-grading-result';
  $('seminarGradeAI').disabled=false;
- $('seminarGradeAI').textContent='Αξιολόγηση με AI';
- $('seminarNextQuestion').hidden=false;$('seminarNextQuestion').textContent='Παράλειψη';
- $('seminarQuestionState').textContent='Γράψε την απάντηση και κάνε αυτοαξιολόγηση. Μπορείς και να παραλείψεις.';
+ $('seminarGradeAI').textContent='Υποβολή · Αυτόματη αξιολόγηση AI';
+ $('seminarNextQuestion').hidden=false;$('seminarNextQuestion').textContent='Παράλειψη (χωρίς βαθμό)';
+ $('seminarQuestionState').textContent=window.EkabAIGrade?.available()?'Γράψε την απάντησή σου και πάτησε «Υποβολή» για πραγματικό αυτόματο έλεγχο AI.':'Η υπηρεσία AI δεν έχει ενεργοποιηθεί: δεν είναι δυνατή η βαθμολόγηση. Η απάντησή σου διατηρείται τοπικά.';
 }
 function renderResults(){
  const run=current().mixedRun,items=Object.entries(run.responses);
@@ -262,14 +261,13 @@ function nextMixed(){
 function gradeWritten(kind){
  const p=current(),run=p?.mixedRun,item=run?.items[run.pos];
  if(!item||item.type!=='written'||run.responses[run.pos])return;
- run.responses[run.pos]={grade:kind};
+ if(kind!=='right'&&kind!=='needs')return;
+ run.responses[run.pos]={grade:kind,checkedBy:'ai'};
  const index=item.unit*4+item.prompt;
- p.right=p.right.filter(i=>i!==index);
- p.needs=p.needs.filter(i=>i!==index);
+ p.right=p.right.filter(i=>i!==index);p.needs=p.needs.filter(i=>i!==index);
  p[kind==='right'?'right':'needs'].push(index);
  save();updateCourseProgress();
- $('seminarQuestionState').textContent=kind==='right'?'✓ Καταχωρίστηκε σωστά.':'↻ Καταχωρίστηκε για επανάληψη.';
- $('seminarQuizGrade').hidden=true;
+ $('seminarQuestionState').textContent=kind==='right'?'✓ Αξιολογήθηκε από AI: σωστή.':'↻ Αξιολογήθηκε από AI: χρειάζεται επανάληψη.';
  $('seminarGradeAI').disabled=true;
  $('seminarQuizReveal').hidden=true;
  $('seminarQuestionNotes').readOnly=true;
@@ -291,7 +289,12 @@ function renderOral(){
  $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
  $('seminarOralHelp').textContent=u[2];$('seminarOralHelp').hidden=true;
  $('seminarOralReveal').hidden=false;
- $('seminarMarkOral').textContent=p.oral.includes(oral)?'✓ Ολοκληρώθηκε':'Ολοκλήρωσα το σενάριο';
+ const prior=p.scenarioGrades[oral];
+ $('seminarScenarioStatus').textContent=prior?'Προηγούμενη αξιολόγηση AI: '+({correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Λανθασμένη',uncertain:'Απαιτεί επανέλεγχο'}[prior.verdict]||'Άγνωστη')+'. Μπορείς να υποβάλεις βελτιωμένη απάντηση.':
+  (window.EkabAIGrade?.available()?'Περιέγραψε το περιστατικό βήμα προς βήμα και υπέβαλε την απάντηση.':'Η υπηρεσία AI δεν έχει ενεργοποιηθεί. Δεν μπορεί να δοθεί βαθμός.');
+ $('seminarScenarioResult').hidden=true;
+ $('seminarScenarioSubmit').disabled=false;
+ $('seminarScenarioSubmit').textContent='Υποβολή · Αυτόματη αξιολόγηση AI';
  $('seminarPrevOral').disabled=oral===0;$('seminarNextOral').disabled=oral===11;
 }
 function bind(){
@@ -330,21 +333,23 @@ function bind(){
    ai.render(status,result);
    if(result.verdict==='correct')gradeWritten('right');
    else if(result.verdict==='partial'||result.verdict==='incorrect')gradeWritten('needs');
+   else $('seminarQuestionState').textContent='Το AI ζήτησε επανέλεγχο. Δεν καταχωρίστηκε βαθμολογία.';
   }catch(error){
    if(selected?.id!==courseId||view!=='quiz'||current().mixedRun!==run||run.pos!==pos)return;
    status.className='ai-grading-result ai-grading-unavailable';
    status.textContent=error.message||'Η αξιολόγηση δεν ολοκληρώθηκε.';
   }finally{
    if(selected?.id===courseId&&view==='quiz'&&current().mixedRun===run&&run.pos===pos&&!run.responses[pos]){
-    button.disabled=false;button.textContent='Αξιολόγηση με AI';
+    button.disabled=false;button.textContent='Υποβολή · Αυτόματη αξιολόγηση AI';
    }
   }
  });
  $('seminarQuizReveal').addEventListener('click',()=>{
-  $('seminarQuestionSolution').hidden=false;$('seminarQuizGrade').hidden=false;$('seminarQuizReveal').hidden=true;
+  $('seminarQuestionSolution').hidden=false;
+  $('seminarQuizReveal').hidden=true;
+  $('seminarGradeAI').disabled=true;
+  $('seminarQuestionState').textContent='Εμφανίστηκε η ενδεικτική λύση. Η ερώτηση παραμένει χωρίς βαθμό και μπορείς να συνεχίσεις με «Παράλειψη».';
  });
- $('seminarGradeRight').addEventListener('click',()=>gradeWritten('right'));
- $('seminarGradeNeeds').addEventListener('click',()=>gradeWritten('needs'));
  $('seminarPrevOral').addEventListener('click',()=>{oral=Math.max(0,oral-1);renderOral();});
  $('seminarNextOral').addEventListener('click',()=>{oral=Math.min(11,oral+1);renderOral();});
  $('seminarOralNotes').addEventListener('input',e=>{current().oralNotes[oral]=e.target.value.slice(0,2000);save();});
