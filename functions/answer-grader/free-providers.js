@@ -19,12 +19,12 @@ export function freeProviders(env=process.env){
  return providers;
 }
 export async function requestFreeGrade(provider,messages){
- const body={model:provider.model,messages,temperature:0,max_tokens:1200,
-  response_format:{type:'json_object'}};
+ const body={model:provider.model,messages,temperature:0,max_tokens:1800,
+  response_format:{type:'json_object'},reasoning:{enabled:false}};
  if(provider.id==='openrouter')body.provider={max_price:{prompt:0,completion:0,request:0},ignore:['OpenAI'],allow_fallbacks:false};
  const response=await fetch(provider.url,{
   method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+provider.key},
-  body:JSON.stringify(body),signal:AbortSignal.timeout(8000)
+  body:JSON.stringify(body),signal:AbortSignal.timeout(12000)
  });
  if(!response.ok)throw new Error('provider_http_'+response.status);
  const data=await response.json(),choice=data.choices?.[0];
