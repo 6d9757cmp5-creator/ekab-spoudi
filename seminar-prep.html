@@ -4,7 +4,7 @@
 <meta name="theme-color" content="#153c54"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Προετοιμασία σεμιναρίων · ΕΚΑΒ Σπουδή</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css?v=27.1.79"><link rel="stylesheet" href="seminar-prep.css?v=1"><link rel="stylesheet" href="ai-grading.css?v=27.1.82">
+<link rel="stylesheet" href="styles.css?v=27.1.79"><link rel="stylesheet" href="seminar-prep.css?v=mcq-1"><link rel="stylesheet" href="ai-grading.css?v=27.1.82">
 <script src="theme-init.js"></script>
 </head><body>
 <header class="top"><div class="container">
@@ -27,33 +27,47 @@
  <div class="seminar-intro"><div class="seminar-intro-top"><p class="eyebrow">ΕΚΑΒ Σπουδή · Δοκιμαστική προετοιμασία</p><a class="seminar-external" href="https://www.erc.edu/education/for-professionals/course-rules/" target="_blank" rel="noopener noreferrer" title="Πλαίσιο εκπαίδευσης και κανονισμοί ERC">ΤΡΟΠΟΣ ΚΑΤΑΝΕΜΗΜΕΝΗΣ ΕΚΠΑΙΔΕΥΣΗΣ ↗</a></div>
  <h2>Προετοιμασία σεμιναρίων <a class="academic-review-link" href="docs/seminars-academic-review.pdf" target="_blank" rel="noopener noreferrer" aria-label="Δελτίο ελέγχου προετοιμασίας σεμιναρίων, PDF">Δελτίο ελέγχου</a></h2><p>Επίλεξε πρόγραμμα για να ξεκινήσεις.</p></div>
  <div id="seminarCards" class="seminar-cards" aria-label="Πέντε ανεξάρτητα προγράμματα"></div>
- <p class="seminar-hint">5 ξεχωριστά προγράμματα · 12 θεματικές το καθένα · 48 ερωτήσεις ανάκλησης και 12 προφορικές ασκήσεις ανά πρόγραμμα.</p>
+ <p class="seminar-hint">5 ξεχωριστά προγράμματα · 12 θεματικές το καθένα · 48 ερωτήσεις ανάπτυξης · 12 πολλαπλής επιλογής · 12 κλινικά σενάρια ανά πρόγραμμα.</p>
 </section>
 <section id="seminarCourse" hidden aria-labelledby="seminarCourseTitle">
  <button class="seminar-back" type="button" id="seminarBack">‹ Όλα τα σεμινάρια</button>
  <div class="seminar-course-header"><div><p class="eyebrow">Δοκιμαστική προετοιμασία</p><h2 id="seminarCourseTitle"></h2><p id="seminarCourseSub"></p></div><p id="seminarCourseProgress" class="seminar-course-progress" aria-live="polite"></p></div>
- <div class="seminar-tabs" role="tablist" aria-label="Τρόπος μελέτης"><button type="button" data-seminar-tab="theory" role="tab" aria-selected="true">Θεωρία</button><button type="button" data-seminar-tab="quiz" role="tab" aria-selected="false">Τεστ</button><button type="button" data-seminar-tab="oral" role="tab" aria-selected="false">Προφορικές ασκήσεις</button></div>
+ <div class="seminar-tabs" role="tablist" aria-label="Τρόπος μελέτης"><button type="button" data-seminar-tab="theory" role="tab" aria-selected="true">Θεωρία</button><button type="button" data-seminar-tab="quiz" role="tab" aria-selected="false">Τεστ γνώσεων</button><button type="button" data-seminar-tab="oral" role="tab" aria-selected="false">Κλινικά σενάρια</button></div>
  <section id="seminarTheory" class="seminar-learn" aria-label="Μελέτη θεματικών">
   <div id="seminarUnits" class="seminar-units" aria-label="Επιλογή θεματικής"></div>
   <article class="panel seminar-lesson"><p class="eyebrow" id="seminarUnitNumber"></p><h3 id="seminarUnitTitle"></h3><p id="seminarUnitTheory"></p><h4>Κύρια προτεραιότητα</h4><p id="seminarUnitPriority"></p><h4>Προσοχή</h4><p id="seminarUnitAvoid"></p><h4>Ενδεικτικό σενάριο</h4><p id="seminarUnitCase"></p>
   <button type="button" id="seminarMarkStudied" class="btn secondary full">Σημείωσε ως μελετημένη</button>
   <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevUnit">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextUnit">Επόμενη</button></div></article>
  </section>
- <section id="seminarQuiz" class="panel seminar-practice" hidden aria-label="Τεστ αυτοελέγχου">
+ <section id="seminarQuiz" class="panel seminar-practice" hidden aria-label="Τεστ γνώσεων">
+ <div class="seminar-quiz-modes" role="group" aria-label="Μορφή ερωτήσεων">
+  <button type="button" data-seminar-format="multiple" class="active" aria-pressed="true">Πολλαπλής επιλογής</button>
+  <button type="button" data-seminar-format="written" aria-pressed="false">Ανάπτυξης</button>
+ </div>
  <p class="eyebrow" id="seminarQuestionCounter"></p><h3 id="seminarQuestionTitle"></h3>
- <label for="seminarQuestionNotes">Η δική σου απάντηση</label><textarea id="seminarQuestionNotes" rows="4" maxlength="2000" placeholder="Απάντησε χωρίς βοήθεια πριν δεις τα βασικά σημεία…"></textarea>
- <p class="ai-grading-privacy">Ο προαιρετικός έλεγχος AI στέλνει μόνο την απάντησή σου σε ασφαλή υπηρεσία αξιολόγησης όταν πατήσεις το κουμπί. Απαιτεί σύνδεση λογαριασμού και Internet. Η απάντηση δεν δημοσιεύεται.</p>
- <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Αξιολόγηση με AI</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση · Αυτοαξιολόγηση</button><span id="seminarQuestionState" class="seminar-state"></span></div>
- <div id="seminarAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
- <p id="seminarQuestionSolution" class="seminar-feedback" hidden></p><div id="seminarQuizGrade" class="seminar-grade" hidden><button type="button" class="btn compact" id="seminarGradeRight">Το θυμήθηκα σωστά</button><button type="button" class="btn compact secondary" id="seminarGradeNeeds">Χρειάζεται επανάληψη</button></div>
- <p class="seminar-fineprint">Η AI αξιολόγηση βασίζεται στο νόημα, όχι στην ίδια διατύπωση. Αν δεν είναι διαθέσιμη, η χειροκίνητη αυτοαξιολόγηση παραμένει ενεργή. Δεν είναι επίσημη βαθμολογία.</p>
+ <div id="seminarMultipleBody">
+  <p class="seminar-mcq-instruction">Επίλεξε μία από τις τέσσερις απαντήσεις και πάτησε «Έλεγχος απάντησης».</p>
+  <fieldset id="seminarMCQChoices" class="seminar-mcq-choices" aria-label="Επιλογές απάντησης"></fieldset>
+  <button type="button" class="btn" id="seminarMCQCheck" disabled>Έλεγχος απάντησης</button>
+  <div id="seminarMCQFeedback" class="seminar-mcq-feedback" role="status" aria-live="polite" hidden></div>
+ </div>
+ <div id="seminarWrittenBody" hidden>
+  <label for="seminarQuestionNotes">Η δική σου απάντηση</label><textarea id="seminarQuestionNotes" rows="4" maxlength="2000" placeholder="Απάντησε χωρίς βοήθεια πριν δεις τα βασικά σημεία…"></textarea>
+  <p class="ai-grading-privacy">Ο προαιρετικός έλεγχος AI στέλνει μόνο την απάντησή σου σε ασφαλή υπηρεσία αξιολόγησης όταν πατήσεις το κουμπί. Απαιτεί σύνδεση λογαριασμού και Internet. Η απάντηση δεν δημοσιεύεται.</p>
+  <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Αξιολόγηση με AI</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση · Αυτοαξιολόγηση</button></div>
+  <div id="seminarAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
+  <p id="seminarQuestionSolution" class="seminar-feedback" hidden></p>
+  <div id="seminarQuizGrade" class="seminar-grade" hidden><button type="button" class="btn compact" id="seminarGradeRight">Το θυμήθηκα σωστά</button><button type="button" class="btn compact secondary" id="seminarGradeNeeds">Χρειάζεται επανάληψη</button></div>
+  <p class="seminar-fineprint">Η AI αξιολόγηση βασίζεται στο νόημα, όχι στην ίδια διατύπωση. Αν δεν είναι διαθέσιμη, η χειροκίνητη αυτοαξιολόγηση παραμένει ενεργή. Δεν είναι επίσημη βαθμολογία.</p>
+ </div>
+ <p id="seminarQuestionState" class="seminar-state"></p>
  <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevQuestion">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextQuestion">Επόμενη</button></div>
  </section>
- <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Προφορική άσκηση">
+ <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικό σενάριο">
  <p class="eyebrow" id="seminarOralCounter"></p><h3 id="seminarOralTitle"></h3><p id="seminarOralCase" class="seminar-feedback"></p>
  <label for="seminarOralNotes">Προαιρετικές σημειώσεις</label><textarea id="seminarOralNotes" rows="4" maxlength="2000" placeholder="Τι θα έλεγες προφορικά;"></textarea>
  <button type="button" class="btn secondary compact" id="seminarOralReveal">Δες τη βασική προτεραιότητα</button><p id="seminarOralHelp" class="seminar-feedback" hidden></p>
- <button type="button" class="btn" id="seminarMarkOral">Ολοκλήρωσα την προφορική</button>
+ <button type="button" class="btn" id="seminarMarkOral">Ολοκλήρωσα το σενάριο</button>
  <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevOral">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextOral">Επόμενη</button></div>
  </section>
 </section>
@@ -65,5 +79,5 @@
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα · Δεν απονέμει πιστοποίηση · Οι εκπαιδευτικές ασκήσεις δεν αντικαθιστούν πρακτική εκπαίδευση ή τοπικά πρωτόκολλα.</footer>
 </main>
 <script src="ai-grading-config.js?v=27.1.82"></script><script src="ai-grading-client.js?v=27.1.82"></script>
-<script src="seminar-tracks.js?v=1"></script><script src="seminar-prep.js?v=27.1.82"></script><script src="updates.js?v=27.1.82" defer></script>
+<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=mcq-1"></script><script src="updates.js?v=27.1.82" defer></script>
 </body></html>
