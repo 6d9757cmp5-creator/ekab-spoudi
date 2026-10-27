@@ -92,6 +92,17 @@ async function start(){
    const paragraph=body.querySelector('p.reader-paragraph');
    if(paragraph)paragraph.insertAdjacentElement('afterend',wrap);
    else body.insertBefore(wrap,body.firstChild);
+   const layout=el('div','saek-study-split'),reading=el('div','saek-study-text'),visuals=el('aside','saek-study-images');
+   visuals.setAttribute('aria-label','Εικόνες αναφοράς κεφαλαίου');
+   const toggle=el('button','saek-study-toggle','Ελαχιστοποίηση εικόνων −');
+   toggle.type='button';toggle.setAttribute('aria-expanded','true');
+   toggle.addEventListener('click',()=>{
+    const collapsed=layout.classList.toggle('saek-images-collapsed');
+    toggle.textContent=collapsed?'Εμφάνιση εικόνων +':'Ελαχιστοποίηση εικόνων −';
+    toggle.setAttribute('aria-expanded',String(!collapsed));
+   });
+   while(body.firstChild){const node=body.firstChild;if(node===wrap)visuals.append(node);else reading.append(node);}
+   visuals.prepend(toggle);layout.append(reading,visuals);body.append(layout);wrap.open=true;
   }
  }catch(err){console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',err);}
 }
