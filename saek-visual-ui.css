@@ -145,3 +145,10 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
  .saek-study-images .saek-source-image{display:block!important;width:100%;height:auto;max-height:60svh;object-fit:contain;margin:0 auto;cursor:zoom-in}
  .saek-study-images .saek-source-fallback:not([hidden]){display:block}
 }
+
+/* Unified image viewer: light neutral backdrop, clear anatomy labels, no toolbar. */
+.saek-clean-lightbox,.saek-clean-lightbox::backdrop{background:#f4f7fa!important}
+.saek-clean-stage{background:#f4f7fa!important}
+.saek-clean-image{background:#fff;box-shadow:0 3px 22px rgba(23,47,64,.08)}
+.saek-clean-close,.saek-clean-prev,.saek-clean-next{background:rgba(17,47,68,.86);color:#fff}
+@media(max-width:760px){.saek-clean-lightbox{max-height:100dvh}.saek-clean-close{top:max(12px,env(safe-area-inset-top))}}
