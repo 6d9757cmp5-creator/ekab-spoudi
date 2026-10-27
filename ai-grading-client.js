@@ -7,7 +7,7 @@ const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect
 const allowed=new Set(Object.keys(labels));
 function available(){return /^[a-zA-Z0-9._-]{3,64}$/.test(window.EkabAIConfig?.functionId||'')}
 async function evaluate(input){
- if(!available())throw new Error('Η αξιολόγηση με AI δεν έχει ενεργοποιηθεί ακόμη. Μπορείς να συνεχίσεις με αυτοαξιολόγηση.');
+ if(!available())throw new Error('Η αξιολόγηση με AI δεν έχει ενεργοποιηθεί ακόμη. Η απάντηση παραμένει χωρίς βαθμό.');
  if(navigator.onLine===false)throw new Error('Χρειάζεται σύνδεση στο διαδίκτυο για αξιολόγηση AI.');
  const answer=typeof input?.answer==='string'?input.answer.trim():'';
  if(answer.length<3||answer.length>3500)throw new Error('Γράψε μια απάντηση από 3 έως 3500 χαρακτήρες.');
@@ -25,7 +25,7 @@ async function evaluate(input){
  let result;
  try{result=JSON.parse(execution.responseBody||'{}');}catch{throw new Error('Η υπηρεσία επέστρεψε μη αναγνωρίσιμη απάντηση.');}
  if(execution.responseStatusCode!==200||execution.status!=='completed'||!allowed.has(result.verdict)){
-  throw new Error(result.error||'Η αξιολόγηση δεν ολοκληρώθηκε. Χρησιμοποίησε την αυτοαξιολόγηση.');
+  throw new Error(result.error||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντηση παραμένει χωρίς βαθμολογία.');
  }
  if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
  return result;
