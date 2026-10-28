@@ -93,7 +93,7 @@ function installSectionNav(){
  const names={'theory.html':'Θεωρία ΕΟΠΠΕΠ','practical_exam.html':'Πρακτικό ΕΟΠΠΕΠ','saek.html':'Κατάρτιση ΣΑΕΚ','farmaka.html':'Φαρμακολογία','search.html':'Αποτελέσματα αναζήτησης'};
  const existing=nav.querySelector('a.active')?.textContent?.trim();
  const current=names[file]||(file.startsWith('saek-course-')?'Μάθημα ΣΑΕΚ':existing||'Εκπαιδευτικό υλικό');
- const home=el('a','ekab-home-back','← Αρχική');home.href='index.html';
+ const home=el('a','ekab-home-back','← Πίσω');home.href=file==='saek.html'?'index.html':'index.html';home.addEventListener('click',event=>{try{if(history.length>1&&document.referrer&&new URL(document.referrer).origin===location.origin){event.preventDefault();history.back()}}catch{}});
  nav.className='nav ekab-breadcrumb';nav.replaceChildren(home,el('span','ekab-section-name',current));
 }
 function installSearch(){
