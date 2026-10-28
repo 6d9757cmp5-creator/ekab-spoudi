@@ -4,7 +4,7 @@ import {mkdirSync,writeFileSync} from 'node:fs';
 const engine=process.env.ANATOMY_ENGINE||'chromium',base='http://127.0.0.1:8765/';
 mkdirSync('browser-qa-results',{recursive:true});
 const server=spawn('python3',['-m','http.server','8765','--bind','127.0.0.1'],{stdio:'ignore'});
-let browser,page,results=[],errors=[];
+let browser,page,results=[],errors=[],expectedLocalOriginErrors=[];
 const check=async(label,fn)=>{try{const note=await fn();results.push({label,ok:true,note});console.log('PASS '+label)}catch(e){results.push({label,ok:false,error:String(e)});console.error('FAIL '+label,e);try{await page.screenshot({path:'browser-qa-results/'+engine+'-'+results.length+'.png',fullPage:true})}catch{}}};
 const ensure=(x,msg)=>{if(!x)throw Error(msg)};
 try{
@@ -12,7 +12,7 @@ try{
  browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,args:engine==='chromium'?['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist']:[]});
  const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,serviceWorkers:'block'});
  page=await context.newPage();
- page.on('pageerror',err=>errors.push({url:page.url(),error:String(err)}));
+ page.on('pageerror',err=>{const event={url:page.url(),error:String(err)};if(event.error.includes('fra.cloud.appwrite.io/v1/ping')&&event.error.includes('access control'))expectedLocalOriginErrors.push(event);else errors.push(event);});
  page.setDefaultTimeout(15000);
  await check('Homepage has one 3D entry and four main topics',async()=>{
    const r=await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
@@ -44,6 +44,20 @@ try{
      ensure(await b.getAttribute('aria-pressed')==='true','mode not pressed '+mode);
    }
  });
+ await check('Isolate disabled without selection; system change clears old highlight',async()=>{
+   const iso=page.locator('#isolateBtn');
+   ensure(await iso.isDisabled(),'isolate enabled without selected anatomy');
+   const first=page.locator('#anatomyList button').first();
+   ensure(await first.count()===1,'no Greek anatomy point available for selection');
+   await first.click();
+   ensure(await iso.isEnabled(),'isolate remained disabled after selecting a point');
+   await page.locator('#systemFilter').selectOption('cardiac');
+   ensure(await iso.isDisabled(),'isolation remained enabled on cleared selection');
+   ensure(await page.locator('[data-mode="organs"]').getAttribute('aria-pressed')==='true','cardiac system did not enable organs view');
+   ensure((await page.locator('#modelTag').innerText()).includes('ΚΑΡΔΙΑ'),'model heading does not match cardiac filter');
+   await page.locator('#systemFilter').selectOption('skeletal');
+   ensure(await page.locator('[data-mode="skeleton"]').getAttribute('aria-pressed')==='true','skeletal filter did not enable skeleton view');
+ });
  await check('Anatomy quiz: four unique choices, answer and next',async()=>{
    await page.locator('#quizTab').click();await page.locator('#quizStart').click();
    const buttons=page.locator('#quizOptions button');
@@ -72,8 +86,9 @@ try{
  try{await page?.screenshot({path:'browser-qa-results/'+engine+'-last.png',fullPage:true})}catch{}
  await browser?.close().catch(()=>{});
  server.kill();
- writeFileSync('browser-qa-results/'+engine+'-report.json',JSON.stringify({engine,results,errors},null,2));
+ writeFileSync('browser-qa-results/'+engine+'-report.json',JSON.stringify({engine,results,errors,expectedLocalOriginErrors},null,2));
 }
 console.log('QA: '+results.filter(x=>x.ok).length+'/'+results.length+' browser journeys passed; page errors '+errors.length);
 for(const x of errors.slice(0,5))console.error('JS error',x);
-if(results.some(x=>!x.ok))process.exitCode=1;
+console.log('Expected localhost-only Appwrite ping CORS notes: '+expectedLocalOriginErrors.length);if(errors.length)console.error('Unexpected browser JS errors: '+errors.length);
+if(results.some(x=>!x.ok)||errors.length)process.exitCode=1;
