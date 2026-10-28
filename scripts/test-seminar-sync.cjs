@@ -47,6 +47,18 @@ const reset=model.captureEdits(merged,model.visibleEntries(merged),{},A,300);
 const afterReset=model.mergeEntries(merged,reset);
 assert.equal(afterReset['s:bls'].v,null);
 assert.equal(model.visibleEntries(afterReset)['s:bls'],undefined);
+// Even a later, smaller record from the PC must not erase richer mobile work.
+const rich=mk([0,1,2],{qNotes:{0:'Σημειώσεις κινητού'},scenarioGrades:{0:{verdict:'correct',criticalError:false}}});
+const fewer=mk([0]);
+const richOnMobile=model.captureEdits({}, {}, {'s:bls':rich},A,400);
+const reducedOnPc=model.captureEdits(richOnMobile,model.visibleEntries(richOnMobile),{'s:bls':fewer},B,500);
+const preserveRich=model.mergeEntries(richOnMobile,reducedOnPc);
+assert.deepEqual(model.visibleEntries(preserveRich)['s:bls'].studied,[0,1,2]);
+assert.equal(model.visibleEntries(preserveRich)['s:bls'].qNotes[0],'Σημειώσεις κινητού');
+assert.equal(model.visibleEntries(preserveRich)['s:bls'].scenarioGrades[0].verdict,'correct');
+// Explicit full-course reset after the merge is still respected.
+const confirmedReset=model.captureEdits(preserveRich,model.visibleEntries(preserveRich),{},A,600);
+assert.equal(model.mergeEntries(preserveRich,confirmedReset)['s:bls'].v,null);
 // Invalid or unexpectedly large entries must be rejected before cloud application.
 assert.equal(model.validValue('s:bls',{studied:[24]}),false);
 assert.equal(model.validValue('s:other',mk([0])),false);
