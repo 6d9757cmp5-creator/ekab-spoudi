@@ -470,7 +470,27 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "full_stored_educational_answer_and_historical_official_question_crosscheck",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "comparedClaims": [
+          "Η εκφώνηση «Περιγράψτε τη φάση της εκπνοής.» ταυτίζεται με την Ομάδα Α, ερώτηση 10, στη σελίδα 4 του παλαιότερου PDF θεμάτων ΕΟΠΠΕΠ που φιλοξενεί η ΣΑΕΚ Έδεσσας.",
+          "Στην ήρεμη εκπνοή χαλαρώνουν οι εισπνευστικοί μύες και η ελαστική επαναφορά μειώνει τον θωρακικό και πνευμονικό όγκο.",
+          "Η κυψελιδική πίεση αυξάνεται πάνω από την ατμοσφαιρική και ο αέρας εξέρχεται κατά μήκος της διαφοράς πίεσης.",
+          "Στην εξαναγκασμένη εκπνοή συμμετέχουν κοιλιακοί και έσω μεσοπλεύριοι μύες."
+        ],
+        "sources": [
+          "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax"
+        ],
+        "finding": "Η πλήρης αποθηκευμένη εκπαιδευτική απάντηση (241 χαρακτήρες) συμφωνεί με τις συγκεκριμένες φυσιολογικές ενότητες και η εκφώνηση ταυτίζεται με το ιστορικό PDF ΕΟΠΠΕΠ. Δεν αποτελεί επίσημο λυσάρι ή πιστοποίηση.",
+        "limits": "Το PDF είναι παλαιότερο αντίγραφο σε ιστότοπο ΣΑΕΚ και δεν επιβεβαιώθηκε ότι είναι η πιο πρόσφατη τράπεζα θεμάτων του ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητος δεύτερος επιστημονικός έλεγχος ούτε τελική έγκριση.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-011",
