@@ -96,3 +96,14 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
  .patient-tag{background:#284856;color:#d4e8f0}
  .patient-tag.noted{background:#1d533e;color:#c9f4e0}
 }
+
+/* Personal-study planner migrated from draft PR #22, scoped to Mentor lab only. */
+.study-goal-choices{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0 3px}
+.study-goal-choices label{display:flex;align-items:center;gap:8px;padding:10px 13px;border:1px solid var(--border);border-radius:11px;background:var(--surface2);cursor:pointer;min-height:44px}
+.study-goal-choices input{accent-color:var(--brand2);width:18px;height:18px}
+#study-path-mode{display:block;margin:8px 0 24px;padding:10px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--ink);min-width:180px;max-width:100%}
+.study-goals-plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;margin:12px 0}
+.study-goal-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:15px}
+.study-goal-card h4{margin:0 0 12px}.study-task{margin:7px 0;font-size:.9rem;color:var(--muted)}
+.study-goal-link{display:inline-block;margin-top:9px;color:var(--brand);font-weight:750}
+.study-goal-choices input:focus-visible,.study-goal-link:focus-visible,#study-path-mode:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
