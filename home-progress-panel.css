@@ -151,3 +151,27 @@ html[data-theme="dark"] .progress-panel-dialog-heading{background:#122637;color:
  .progress-panel-mini-label,.progress-panel-mini-practice{font-size:.68rem}
 }
 @media(prefers-reduced-motion:reduce){.progress-panel-mini-fill{transition:none}}
+
+/* Align the continue-studying row with the progress card and learning tiles. */
+body:has(.home-main) .study-resume{width:100%;max-width:100%;margin:0 0 11px}
+body:has(.home-main) .study-resume-link{
+ min-height:66px;padding:10px 15px;border:1px solid var(--line);
+ border-radius:16px;background:#fff;color:var(--ink);
+ box-shadow:0 5px 16px #051e300b;
+}
+body:has(.home-main) .study-resume-link:hover{background:#f6fafc;border-color:#94c5dd}
+body:has(.home-main) .study-resume-play{
+ background:#e6f4fa;color:#176385;border-radius:11px;
+ width:37px;height:37px;
+}
+body:has(.home-main) .study-resume-copy strong{font-size:.88rem;font-weight:780}
+body:has(.home-main) .study-resume-caption{font-size:.72rem}
+html[data-theme="dark"] body:has(.home-main) .study-resume-link{
+ background:#152c3f;border-color:#324f63;color:var(--ink);box-shadow:none
+}
+html[data-theme="dark"] body:has(.home-main) .study-resume-link:hover{background:#1c394c;border-color:#4a7590}
+html[data-theme="dark"] body:has(.home-main) .study-resume-play{background:#22475c;color:#b9e9ff}
+@media(max-width:620px){
+ body:has(.home-main) .study-resume{margin-bottom:9px}
+ body:has(.home-main) .study-resume-link{min-height:61px;padding:9px 12px;border-radius:15px}
+}
