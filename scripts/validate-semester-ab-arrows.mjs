@@ -6,7 +6,7 @@ for(const c of d.courses.filter(c=>['Α','Β'].includes(c.semester)))for(let i=0
  const ref=c.chapters[i].images.filter(x=>x.startsWith('sem_a_')||x.startsWith('sem_b_'));
  if(ref.length<1)errors.push('Missing diagram in '+c.course+'-'+(i+1));
  for(const k of ref){const a=d.assets[k];const img=fs.readFileSync(a.localPath,'utf8');count++;
-  const texts=[...img.matchAll(/<text\\b[^>]*>([\\s\\S]*?)<\\/text>/g)].map(x=>x[1]);
+  const texts=[...img.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)].map(x=>x[1]);
   const arrows=(img.match(/marker-end="url\(#arr\)"/g)||[]).length;
   if(arrows!==3)errors.push(k+': expected 3 arrows, found '+arrows);
   if(img.includes('…')||img.includes('...')||a.caption.includes('…'))errors.push(k+': truncated text');
