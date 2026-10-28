@@ -118,7 +118,7 @@ async function eoppep(){
  action(d,'openExam');
  el(d,'statusFilter').value='reviewed_educational';
  el(d,'statusFilter').dispatchEvent(new b.w.Event('input',{bubbles:true}));
- console.log('EOPPEP matching questions:',el(d,'matches').textContent,'selected status:',el(d,'statusFilter').value);
+ console.log('EOPPEP matching questions:',el(d,'matches').textContent,'selected status:',el(d,'statusFilter').value,'group:',el(d,'group').value,'topic:',el(d,'topic').value,'search:',el(d,'search').value,'bank:',rawBank.length,'first status:',rawBank[0].answerStatus);
  action(d,'begin');
  console.log('EOPPEP after begin:',el(d,'qtitle').textContent.slice(0,100),'study hidden:',el(d,'study').classList.contains('hidden'));
  assert(el(d,'qtitle').textContent.length>6);
