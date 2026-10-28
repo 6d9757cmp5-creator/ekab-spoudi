@@ -43,6 +43,23 @@ else{
  const txa=meds.find(m=>m.name==='Τρανεξαμικό οξύ (TXA)');
  if(txa&&!/2 ωρών/.test(txa.clinical.adultDose))fail('Missing special head injury 2 hour pathway');
 }
+/* Level 4 is a separate educational exercise, NOT a fourth permission scope. */
+try { vm.runInContext(read('farmaka-cases.js'),context,{filename:'farmaka-cases.js',timeout:3000}) }
+catch(e){ fail('Level 4 scenarios: runtime '+e.message) }
+const cases=win.EKAB_PHARMA_CASES;
+if(!Array.isArray(cases)||cases.length!==7)fail('Level 4: expected seven short cases');
+else {
+ const unique=new Set();
+ for(const item of cases){
+  if(!item.id||unique.has(item.id))fail('Level 4: duplicate/missing case ID '+item.id);
+  unique.add(item.id);
+  if(!item.topic||!item.question||!item.why)fail('Level 4: missing educational explanation '+item.id);
+  if(!Array.isArray(item.options)||item.options.length!==3||item.options.some(x=>!x?.trim()))fail('Level 4: three choices required '+item.id);
+  if(!Number.isInteger(item.correct)||item.correct<0||item.correct>=item.options.length)fail('Level 4: invalid correct index '+item.id);
+  if(!/^https:\/\//.test(item.sourceUrl||'')||!item.sourceTitle)fail('Level 4: verifiable source required '+item.id);
+ }
+}
+try{new vm.Script(read('farmaka-cases.js'),{filename:'farmaka-cases.js'})}catch(e){fail('Level 4 JS syntax: '+e.message)}
 const page=read('farmaka.html');
 const order=['farmaka-catalog.js','farmaka-clinical-2026.js','farmaka-ui.js'].map(f=>page.indexOf(f));
 if(order.some(x=>x<0)||!(order[0]<order[1]&&order[1]<order[2]))fail('Script missing or wrong execution order');
@@ -60,5 +77,10 @@ if(!theory.includes('app.js?v=')||!theory.includes('progress.js?v='))fail('Theor
 const ui=read('farmaka-ui.js');
 if(!ui.includes('ph-extended-body'))fail('Expanded clinical cards are not shown');
 if(!ui.includes("var quiz = ["))fail('Self-assessment quiz not found');
+if(!page.includes('id="scopeLegend"')||!page.includes('Τι σημαίνουν τα 3 χρώματα;'))fail('Scope legend must be concise and discoverable');
+if(!page.includes('id="clinicalThinking"')||!page.includes('id="phCaseStage"'))fail('Level 4 learning panel missing');
+if(!page.includes('farmaka-cases.js?v='))fail('Level 4 module not loaded by page');
+if(!sw.includes('"./farmaka-cases.js"'))fail('Level 4 not cached for offline study');
+if(!page.includes('Η ανεξάρτητη κλινική έγκριση εκκρεμεί'))fail('Medical disclaimer removed');
 if(failures.length){console.error('❌ Pharmacology: '+failures.length+' problems\n'+failures.join('\n'));process.exitCode=1;}
-else console.log('✅ Pharmacology structure: '+lib.medicines.length+' cards, 11 categories, mandatory scope/review flags, source links, 12-question teaching module, navigation, offline and release consistency. NOTE: this does not mean independent clinical/SmPC approval.');
+else console.log('✅ Pharmacology structure: '+lib.medicines.length+' cards, 11 categories, three permission scopes, seven Level 4 situations, source links, 12-question teaching module, navigation, offline and release consistency. NOTE: this does not mean independent clinical/SmPC approval.');
