@@ -137,3 +137,13 @@ html[data-theme=dark] .seminar-result-incorrect .seminar-result-flag{background:
 html[data-theme=dark] .seminar-result-partial .seminar-result-flag{background:#4e371a;color:#ffe5ad;border-color:#c3903c}
 html[data-theme=dark] .seminar-result-uncertain .seminar-result-flag{background:#293e52;color:#deebf3;border-color:#657b8f}
 @media(max-width:460px){.seminar-result-heading{padding:11px;gap:7px}.seminar-result-flag{padding:4px 6px;font-size:.69rem}}
+
+/* Focused clinical scenario retry */
+.seminar-retry-button{margin-top:16px;width:100%;min-height:44px}
+.seminar-retry-history{margin-top:15px;border:1px solid var(--line);border-radius:11px;padding:11px 13px}
+.seminar-retry-history>summary{cursor:pointer;font-weight:750}
+.seminar-retry-history-item{margin-top:11px;padding:10px;border:1px solid var(--line);border-radius:9px}
+.seminar-retry-history-item>summary{cursor:pointer;font-size:.82rem;font-weight:700}
+.seminar-retry-archive{padding-top:11px;font-size:.81rem;line-height:1.5;overflow-wrap:anywhere}
+.seminar-retry-archive p{margin:6px 0}
+html[data-theme=dark] .seminar-retry-history,html[data-theme=dark] .seminar-retry-history-item{border-color:#45657a}
