@@ -30,10 +30,10 @@
  font:inherit;font-size:.92rem;line-height:1.4}
 .ekab-notes-dialog textarea{resize:vertical;min-height:146px}
 .ekab-notes-tabs{display:grid;grid-template-columns:1.2fr .8fr .55fr;gap:6px;margin:11px 0}
-.ekab-notes-tabs button{font:700 .78rem/1.25 inherit;min-height:42px;border-radius:10px;
+.ekab-notes-tabs button{font-size:.78rem;font-weight:700;line-height:1.25;min-height:42px;border-radius:10px;
  background:#edf4f7;color:#204961;border:1px solid #cfe1ea;padding:8px 5px;cursor:pointer}
 .ekab-notes-tabs button[aria-pressed="true"]{background:#165a7d;border-color:#165a7d;color:#fff}
-.ekab-notes-new,.ekab-notes-more{font:700 .84rem/1.2 inherit;min-height:43px;padding:9px 12px;
+.ekab-notes-new,.ekab-notes-more{font-size:.84rem;font-weight:700;line-height:1.2;min-height:43px;padding:9px 12px;
  border-radius:11px;border:1px solid #b5d9e9;background:#e9f5fa;color:#145b7d;cursor:pointer}
 .ekab-notes-new{width:100%}
 .ekab-notes-status{font-size:.78rem;color:#527083;margin:7px 0 9px}
@@ -47,7 +47,7 @@
 .ekab-note-actions{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
 .ekab-note-actions button,.ekab-note-actions a{
  display:inline-flex;align-items:center;justify-content:center;min-height:36px;
- padding:7px 10px;font:650 .76rem/1.2 inherit;cursor:pointer;text-decoration:none;
+ padding:7px 10px;font-size:.76rem;font-weight:650;line-height:1.2;cursor:pointer;text-decoration:none;
  border:1px solid #b7d7e5;border-radius:9px;background:#eff7fb;color:#175270}
 .ekab-notes-more{width:100%;margin-top:12px}
 .ekab-note-empty{color:#577282;font-size:.88rem;padding:15px 6px}
@@ -58,7 +58,7 @@
 #ekabNotesEditStatus{min-height:1em;font-size:.79rem;color:#a13b2c}
 .ekab-notes-editor-actions{display:flex;gap:9px;flex-wrap:wrap}
 .ekab-notes-editor-actions button{flex:1 1 auto;min-height:44px;padding:9px 13px;border-radius:11px;
- border:1px solid #b7d7e5;background:#f0f7fb;color:#174e6c;font:700 .85rem/1.3 inherit;cursor:pointer}
+ border:1px solid #b7d7e5;background:#f0f7fb;color:#174e6c;font-size:.85rem;font-weight:700;line-height:1.3;cursor:pointer}
 .ekab-notes-editor-actions .ekab-notes-save{background:#166487;border-color:#166487;color:#fff}
 #ekabNotesRemove{border-color:#e8bdb7;background:#fff5f3;color:#a13b2c}
 .ekab-notes-chapter{display:inline-flex;align-items:center;min-height:36px;margin:4px 0 8px;
