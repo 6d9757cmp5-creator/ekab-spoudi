@@ -34,4 +34,3 @@ export async function requestFreeGrade(provider,messages){
  if(choice?.finish_reason!=='stop'||typeof choice.message?.content!=='string')throw new Error('Incomplete result');
  return JSON.parse(choice.message.content);
 }
-
