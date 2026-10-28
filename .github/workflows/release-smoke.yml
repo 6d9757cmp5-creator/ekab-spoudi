@@ -24,3 +24,5 @@ jobs:
           for file in account-ui.js appwrite-client.js cloud-sync.js sync-local.js sync-model.js seminar-sync.js; do
             node --input-type=module --check < "$file"
           done
+      - name: Verify cross-device seminar progress merge and deletion safety
+        run: node scripts/test-seminar-sync.cjs
