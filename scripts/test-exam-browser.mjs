@@ -118,7 +118,7 @@ async function eoppep(){
  console.log('EOPPEP bank status counts:',JSON.stringify(statusCounts));
  const b=open('theory.html',['study-scheduler.js','app.js'],{'official_questions.json':rawBank});
  const d=b.d;
- await wait(()=>el(d,'allCount').textContent==='314','314 EOPPEP bank');
+ await wait(()=>b.w.__examDebug().bank===314,'314 EOPPEP bank fully initialized');
  action(d,'openExam');
  el(d,'statusFilter').value='reviewed_educational';
  el(d,'statusFilter').dispatchEvent(new b.w.Event('input',{bubbles:true}));
