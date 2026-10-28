@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js theme-init.js global-tools.js app.js navigation.js; do
+          for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js home-progress-panel.js activity-time.js saek-exams.js theme-init.js global-tools.js app.js navigation.js; do
             node --check "$file"
           done
           for file in account-ui.js appwrite-client.js cloud-sync.js sync-local.js sync-model.js seminar-sync.js; do
@@ -26,3 +26,5 @@ jobs:
           done
       - name: Verify cross-device seminar progress merge and deletion safety
         run: node scripts/test-seminar-sync.cjs
+      - name: Verify minimal dual progress, practice-only seminars and reset isolation
+        run: node scripts/verify-progress-panel.cjs
