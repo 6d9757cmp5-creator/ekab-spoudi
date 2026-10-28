@@ -32,3 +32,6 @@
  .aed-compact-toolbar{gap:8px}
  .aed-range-control select{width:94px;padding-inline:8px}
 }
+
+/* On the contacts/first-aid screen, the global floating notebook overlaps vital map pins. Keep notes elsewhere and via the header. */
+body .ekab-notes-fab{display:none!important}
