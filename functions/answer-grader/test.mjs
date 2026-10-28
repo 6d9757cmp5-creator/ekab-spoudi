@@ -84,4 +84,3 @@ test('same user and same submission reuse result, different user does not',async
  const [a,b]=await Promise.all([invoke(answer,'cache'),invoke(answer,'cache')]);assert.deepEqual(a,b);assert.equal(calls,1);
  await invoke(answer,'cache');assert.equal(calls,1);await invoke(answer,'other-cache');assert.equal(calls,2);
 }));
-
