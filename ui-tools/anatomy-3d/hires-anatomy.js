@@ -1,0 +1,130 @@
+/* ΕΚΑΒ Σπουδή: anatomy mesh viewer, research preview.
+   Genuine anatomical meshes. Adult male: BodyParts3D; female: HuBMAP female organs +
+   anatomically fitted/transformed male-derived bones and other systems (not native female scans).
+   Data CC BY 4.0, code original. No reads/writes to student progress or accounts. */
+const threeURL='https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
+const PROVIDERS={
+  male:{
+    root:'https://cdn.jsdelivr.net/gh/slorksmo/Human-Atlas@5bb5713aab18d7fe9380c3339eb09f173491ea06/public/models/',
+    dataset:'BodyParts3D 4.0',credit:'BodyParts3D © Database Center for Life Science (DBCLS), CC BY 4.0. Προσαρμογή: slorksmo/Human-Atlas.',expectedParts:2234,
+    warning:'Ανδρικό πρότυπο BodyParts3D 4.0. Πλήρης κάλυψη των μοντελοποιημένων συστημάτων, όχι όλων των ανθρώπινων ανατομικών παραλλαγών.'
+  },
+  female:{
+    root:'https://cdn.jsdelivr.net/gh/HiMahendraBeniwal/female-atlas@b0a20fa3a009ca5f6bfa07b7479312e04c862af2/public/models/',
+    dataset:'Female Atlas (HuBMAP + BodyParts3D)',credit:'HuBMAP Female v1.5 © Kristen Browne & Heidi Schlehlein· BodyParts3D © DBCLS· προσαρμογές Mahendra Beniwal. CC BY 4.0.',
+    expectedParts:3004,
+    warning:'Σύνθετο γυναικείο μοντέλο: τα γυναικεία όργανα είναι HuBMAP/Visible Human· μέρος του σκελετού, των μυών και των αγγείων έχει προσαρμοστεί από ανδρικό BodyParts3D. Πλήρης κατανομή εκπαιδευτικών συστημάτων, ΟΧΙ ολοκληρωμένη αυθεντική γυναικεία σάρωση.'
+  }
+};
+const $=id=>document.getElementById(id);
+const systems={
+ skeletal:['skeletal'],nervous:['nervous','brain'],respiratory:['respiratory'],circulatory:['cardiac','arterial','venous'],digestive:['digestive'],
+ urinary:['urinary'],reproductive:['reproductive'],muscular:['muscular'],cardiac:['cardiac'],
+ arterial:['arterial'],venous:['venous'],lymphatic:['lymphatic'],endocrine:['endocrine'],integumentary:['integumentary'],
+ sensory:['sensory','brain'],connective:['connective'],pregnancy:['pregnancy']
+};
+const sysNames={skeletal:'Σκελετικό',muscular:'Μυϊκό',arterial:'Αρτηρίες',venous:'Φλέβες',cardiac:'Καρδιά',respiratory:'Αναπνευστικό',
+ nervous:'Νευρικό',brain:'Εγκέφαλος',digestive:'Πεπτικό',urinary:'Ουροποιητικό',reproductive:'Αναπαραγωγικό',
+ lymphatic:'Λεμφικό',endocrine:'Ενδοκρινικό',integumentary:'Δέρμα',sensory:'Αισθητήρια όργανα',connective:'Συνδετικός ιστός',pregnancy:'Κύηση'};
+const colors={skeletal:0xe6dec4,muscular:0xb26a60,arterial:0xcb5454,venous:0x4e7da6,cardiac:0xd16b72,
+ nervous:0xe1bc66,brain:0xc5a7dd,respiratory:0xabc9d7,digestive:0xc5a778,urinary:0xc18b69,
+ reproductive:0xd9a1a9,lymphatic:0x9ac4a3,endocrine:0xbfa8d4,integumentary:0x91c5b5,sensory:0xbad4cb,connective:0xc9c6af,pregnancy:0xddaebb};
+const GREEK={
+ 'skull':'Κρανίο','cranium':'Κρανίο','frontal bone':'Μετωπιαίο οστό','parietal bone':'Βρεγματικό οστό',
+ 'temporal bone':'Κροταφικό οστό','occipital bone':'Ινιακό οστό','sphenoid bone':'Σφηνοειδές οστό',
+ 'mandible':'Κάτω γνάθος','maxilla':'Άνω γνάθος','nasal bone':'Ρινικό οστό','zygomatic bone':'Ζυγωματικό οστό',
+ 'clavicle':'Κλείδα','scapula':'Ωμοπλάτη','sternum':'Στέρνο','rib':'Πλευρά','cervical vertebra':'Αυχενικός σπόνδυλος',
+ 'thoracic vertebra':'Θωρακικός σπόνδυλος','lumbar vertebra':'Οσφυϊκός σπόνδυλος',
+ 'sacrum':'Ιερό οστό','coccyx':'Κόκκυγας','pelvis':'Πύελος','ilium':'Λαγόνιο οστό',
+ 'ischium':'Ισχιακό οστό','pubis':'Ηβικό οστό','humerus':'Βραχιόνιο οστό',
+ 'ulna':'Ωλένη','radius':'Κερκίδα','femur':'Μηριαίο οστό','patella':'Επιγονατίδα',
+ 'tibia':'Κνήμη','fibula':'Περόνη','calcaneus':'Πτέρνα','talus':'Αστράγαλος',
+ 'brain':'Εγκέφαλος','cerebrum':'Εγκεφαλικά ημισφαίρια','cerebellum':'Παρεγκεφαλίδα',
+ 'medulla oblongata':'Προμήκης μυελός','spinal cord':'Νωτιαίος μυελός',
+ 'heart':'Καρδιά','aorta':'Αορτή','pulmonary artery':'Πνευμονική αρτηρία',
+ 'superior vena cava':'Άνω κοίλη φλέβα','inferior vena cava':'Κάτω κοίλη φλέβα',
+ 'trachea':'Τραχεία','lung':'Πνεύμονας','bronchus':'Βρόγχος','larynx':'Λάρυγγας',
+ 'diaphragm':'Διάφραγμα','esophagus':'Οισοφάγος','stomach':'Στομάχι',
+ 'liver':'Ήπαρ','gallbladder':'Χοληδόχος κύστη','spleen':'Σπλήνας',
+ 'pancreas':'Πάγκρεας','small intestine':'Λεπτό έντερο','large intestine':'Παχύ έντερο',
+ 'colon':'Κόλον','rectum':'Ορθό','kidney':'Νεφρός','ureter':'Ουρητήρας',
+ 'urinary bladder':'Ουροδόχος κύστη','urethra':'Ουρήθρα',
+ 'uterus':'Μήτρα','cervix':'Τράχηλος της μήτρας','ovary':'Ωοθήκη',
+ 'vagina':'Κόλπος','uterine tube':'Σάλπιγγα','fallopian tube':'Σάλπιγγα',
+ 'breast':'Μαστός','mammary gland':'Μαστικός αδένας',
+ 'prostate':'Προστάτης','testis':'Όρχις','penis':'Πέος',
+ 'thyroid gland':'Θυρεοειδής αδένας','adrenal gland':'Επινεφρίδιο'};
+const TRANSLATE=Object.entries(GREEK).sort((a,b)=>b[0].length-a[0].length);
+const ui={sex:'male',mode:'skeleton',system:'all',selected:null,isolate:false,opacity:.14,tab:'explore',quiz:false,answered:false,target:null,score:0,attempts:0,prev:null};
+let THREE,renderer,scene,camera,atlas,meshChunks=[],materials=[],meshData=[],partsById=new Map(),allMeshes=[],anim=0,token=0,abort=null,loading=false,selectedPartIndex=-1;
+let orbit={az:0,polar:Math.PI/2,r:3.7,y:.9,active:new Map(),lastX:0,lastY:0,pinch:0,moved:false};
+const maxItems=140;
+function greekLabel(name){const raw=String(name||'').trim();let base=raw.toLowerCase().replace(/\s*\([^)]*\)\s*/g,' ').trim();
+const side=/^left\b/i.test(base)?'Αριστερό ': /^right\b/i.test(base)?'Δεξιό ': '';
+base=base.replace(/^(left|right)\s+/,'');if(GREEK[base])return side+GREEK[base];
+for(const [en,el] of TRANSLATE){if(base===en||base.startsWith(en+' ')||base.endsWith(' '+en))return side+el+(base===en?'':' · '+raw);}
+return raw+' (μετάφραση προς έλεγχο)'}
+function partVisible(p){if(!p)return false;if(ui.system!=='all')return (systems[ui.system]||[]).includes(p.system);
+if(ui.mode==='skeleton')return p.system==='skeletal';
+if(ui.mode==='organs')return p.system!=='skeletal'&&p.system!=='muscular'&&p.system!=='integumentary'&&p.system!=='connective'&&p.system!=='pregnancy';
+return p.system!=='muscular'&&p.system!=='integumentary'&&p.system!=='connective'&&p.system!=='pregnancy'}
+function systemVisible(s){if(s==='integumentary')return ui.opacity>0&&!ui.isolate&&ui.system==='all';if(ui.system!=='all')return (systems[ui.system]||[]).includes(s);if(ui.mode==='skeleton')return s==='skeletal';if(ui.mode==='organs')return s!=='skeletal'&&s!=='muscular'&&s!=='integumentary'&&s!=='connective'&&s!=='pregnancy';return s!=='muscular'&&s!=='integumentary'&&s!=='connective'&&s!=='pregnancy'}
+function validPart(p){return p&&partVisible(p)}
+function countMessage(){const p=atlas?.parts||[];return p.filter(partVisible).length+' δομές'}
+function loadingUI(show,title,sub){$('loading').hidden=!show;loading=show;if(show){$('loading').querySelector('strong').textContent=title||'Φόρτωση πραγματικής ανατομίας…';$('loading').querySelector('small').textContent=sub||'Λήψη τρισδιάστατων ανατομικών πλεγμάτων'}}
+function setControls(){document.querySelectorAll('[data-sex]').forEach(b=>{const ok=b.dataset.sex===ui.sex;b.classList.toggle('active',ok);b.setAttribute('aria-pressed',String(ok))});document.querySelectorAll('[data-mode]').forEach(b=>{const ok=b.dataset.mode===ui.mode;b.classList.toggle('active',ok);b.setAttribute('aria-pressed',String(ok))});$('systemFilter').value=ui.system;$('modelTag').textContent=(ui.sex==='male'?'ΑΝΔΡΙΚΟ':'ΓΥΝΑΙΚΕΙΟ')+' · '+(ui.mode==='skeleton'?'ΣΚΕΛΕΤΟΣ':ui.mode==='organs'?'ΟΡΓΑΝΑ':'ΣΥΝΔΥΑΣΜΟΣ')}
+function describeSelected(){const p=partsById.get(ui.selected);$('detailIcon').textContent=p?.system==='skeletal'?'🦴':p?.system==='cardiac'?'❤️':'✚';
+$('detailName').textContent=p?greekLabel(p.name):'Επίλεξε μια δομή';
+$('detailSystem').textContent=p?(sysNames[p.system]||p.system):'Ανατομική εξερεύνηση';
+$('detailDescription').textContent=p?'Αυθεντικό ανατομικό πλέγμα από την πηγή. Πρωτότυπη ονομασία: '+p.name+'. Κωδικός: '+p.id+'. Δεν έχει προστεθεί εξατομικευμένη ιατρική ερμηνεία.':'Πάτησε μια πραγματική ανατομική δομή στο μοντέλο ή στη λίστα.';
+const note=$('detailSexNote');note.hidden=false;note.textContent=p?(ui.sex==='female'?'Το γυναικείο μοντέλο συνδυάζει γυναικεία HuBMAP όργανα με προσαρμοσμένες από άνδρα δομές. Δεν αποδεικνύεται ότι το επιλεγμένο μέρος είναι αυθεντική γυναικεία γεωμετρία χωρίς έλεγχο της ατομικής προέλευσής του.':PROVIDERS.male.warning):PROVIDERS[ui.sex].warning;}
+function list(){const q=$('anatomySearch').value.trim().toLocaleLowerCase('el');const filtered=(atlas?.parts||[]).filter(p=>validPart(p)&&(!q||(greekLabel(p.name)+' '+p.name+' '+p.id+' '+(sysNames[p.system]||p.system)).toLocaleLowerCase('el').includes(q)));
+$('itemCount').textContent=filtered.length+' δομές';$('quizItemCount').textContent=filtered.length+' δομές';
+for(const [id,forQuiz] of [['anatomyList',false],['quizAnatomyList',true]]){const el=$(id);el.replaceChildren();if(!filtered.length){let p=document.createElement('p');p.className='empty';p.textContent=atlas?'Δεν βρέθηκαν δομές με αυτά τα φίλτρα.':'Δεν φορτώθηκε ακόμη το μοντέλο.';el.append(p);continue}
+const doc=document.createDocumentFragment();for(const p of filtered.slice(0,maxItems)){const btn=document.createElement('button');btn.type='button';btn.className=!forQuiz&&ui.selected===p.id?'active':'';const symbol=document.createElement('span');symbol.className='item-icon';symbol.textContent=p.system==='skeletal'?'🦴':p.system==='cardiac'?'❤️':'◈';const label=document.createElement('span');label.className='item-text';const name=document.createElement('span');name.className='item-name';name.textContent=greekLabel(p.name);const sys=document.createElement('span');sys.className='item-system';sys.textContent=sysNames[p.system]||p.system;label.append(name,sys);btn.append(symbol,label);btn.addEventListener('click',()=>choose(p.id));doc.append(btn)}el.append(doc);if(filtered.length>maxItems){const tip=document.createElement('p');tip.className='empty';tip.textContent='Εμφανίζονται '+maxItems+' από '+filtered.length+'. Χρησιμοποίησε την αναζήτηση για να βρεις συγκεκριμένη δομή.';el.append(tip)}}}
+function setMode(mode){ui.mode=mode;ui.system='all';ui.selected=null;ui.isolate=false;setControls();describeSelected();list();updateScene();if(ui.quiz)nextQuiz()}
+function setSystem(system){ui.system=system;ui.selected=null;ui.isolate=false;setControls();describeSelected();list();updateScene();if(ui.quiz)nextQuiz()}
+function setTab(which){ui.tab=which;const isQuiz=which==='quiz';$('explorePanel').hidden=isQuiz;$('quizPanel').hidden=!isQuiz;$('exploreTab').setAttribute('aria-selected',String(!isQuiz));$('quizTab').setAttribute('aria-selected',String(isQuiz));list()}
+function choose(id){const p=partsById.get(id);if(!validPart(p))return;if(ui.quiz&&!ui.answered){answer(id);return}ui.selected=id;selectedPartIndex=p._index;describeSelected();list();updateScene();focusPart(p)}
+function chooseSex(sex){if(ui.sex===sex)return;ui.sex=sex;ui.system='all';ui.selected=null;ui.isolate=false;ui.quiz=false;ui.answered=false;resetQuiz();setControls();describeSelected();loadModel()}
+function updateScene(){if(!renderer)return;const filter=ui.system;for(const item of meshChunks){item.visible=systemVisible(item.userData.system)||ui.isolate&&(selectedPartIndex!==-1);const m=item.material;const isSkin=item.userData.system==='integumentary';m.transparent=isSkin||ui.mode==='both'&&item.userData.system==='skeletal';m.opacity=isSkin?ui.opacity:(ui.mode==='both'&&item.userData.system==='skeletal'?.62:1);m.depthWrite=!m.transparent;m.needsUpdate=true;if(m.userData.uniforms){m.userData.uniforms.selected.value=selectedPartIndex;m.userData.uniforms.isolate.value=ui.isolate?1:0}}$('isolateBtn').setAttribute('aria-pressed',String(ui.isolate));updateHotspot();requestPaint()}
+function resetQuiz(){ui.quiz=false;ui.answered=false;ui.target=null;ui.score=0;ui.attempts=0;ui.prev=null;$('quizScore').textContent='0';$('quizAttempts').textContent='0';$('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;$('quizFeedback').textContent='';$('quizQuestion').textContent='Βρες την ανατομική δομή';$('quizInstruction').textContent='Επίλεξε το σωστό σημείο στην τρισδιάστατη απεικόνιση ή στη λίστα.'}
+function nextQuiz(){const pool=(atlas?.parts||[]).filter(p=>validPart(p)&&p._loaded&&greekLabel(p.name).indexOf('μετάφραση προς έλεγχο')===-1&&p.id!==ui.prev);if(!pool.length){$('quizQuestion').textContent='Δεν υπάρχουν διαθέσιμες δομές για εξάσκηση';$('quizFeedback').textContent='Επίλεξε άλλο σύστημα ή περίμενε να φορτωθεί το μοντέλο.';ui.quiz=false;return}
+const p=pool[Math.floor(Math.random()*pool.length)];ui.quiz=true;ui.target=p.id;ui.prev=p.id;ui.answered=false;ui.selected=null;selectedPartIndex=-1;$('quizQuestion').textContent='Βρες: '+greekLabel(p.name);$('quizInstruction').textContent='Πάτησε τη δομή στο μοντέλο ή διάλεξε το σωστό όνομα.';$('quizFeedback').textContent='';$('quizFeedback').className='quiz-feedback';$('quizStart').hidden=true;$('quizStop').hidden=false;$('quizNext').hidden=true;updateScene();list()}
+function answer(id){if(!ui.quiz||ui.answered)return;ui.answered=true;ui.attempts++;const ok=id===ui.target;if(ok)ui.score++;$('quizAttempts').textContent=ui.attempts;$('quizScore').textContent=ui.score;const p=partsById.get(ui.target);$('quizFeedback').className='quiz-feedback '+(ok?'good':'bad');$('quizFeedback').textContent=ok?'Σωστά! '+greekLabel(p.name):'Λάθος. Σωστή απάντηση: '+greekLabel(p.name);$('quizNext').hidden=false;ui.selected=ui.target;selectedPartIndex=p._index;describeSelected();updateScene();focusPart(p)}
+function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{if(!ui.selected){$('detailName').textContent='Πρώτα επίλεξε μια δομή';return}ui.isolate=!ui.isolate;updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)){e.preventDefault();$('anatomySearch').focus()}if(e.target===$('anatomyViewport')){const keys={ArrowLeft:[-.12,0],ArrowRight:[.12,0],ArrowUp:[0,-.12],ArrowDown:[0,.12]};const v=keys[e.key];if(v){e.preventDefault();orbit.az+=v[0];orbit.polar=Math.min(Math.PI-.05,Math.max(.05,orbit.polar+v[1]));cameraMove()}}});
+resetQuiz();setControls();describeSelected();list()}
+function resetCamera(){orbit.az=0;orbit.polar=Math.PI/2;orbit.r=3.7;orbit.y=.85;cameraMove()}
+function cameraMove(){if(!camera)return;const d=orbit.r,a=orbit.az,p=orbit.polar;camera.position.set(d*Math.sin(p)*Math.sin(a),orbit.y+d*Math.cos(p),d*Math.sin(p)*Math.cos(a));camera.lookAt(0,orbit.y,0);requestPaint();updateHotspot()}
+let dirty=true;
+function requestPaint(){dirty=true}
+function animate(){anim=requestAnimationFrame(animate);if(dirty&&renderer&&scene&&!document.hidden){renderer.render(scene,camera);dirty=false;updateHotspot()}}
+function updateHotspot(){const h=$('hotspot');if(!THREE||!ui.selected||!atlas||!camera){h.hidden=true;return}const p=partsById.get(ui.selected);if(!p?.bounds){h.hidden=true;return}const a=p.bounds[0],b=p.bounds[1],center=new THREE.Vector3((a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2).project(camera);if(center.z<-1||center.z>1){h.hidden=true;return}const rect=$('renderMount').getBoundingClientRect();h.hidden=false;h.textContent=greekLabel(p.name);h.style.left=Math.min(rect.width-55,Math.max(55,(center.x+1)/2*rect.width))+'px';h.style.top=Math.min(rect.height-35,Math.max(45,(1-center.y)/2*rect.height))+'px'}
+function focusPart(p){const a=p.bounds[0],b=p.bounds[1];const w=Math.max(b[0]-a[0],b[1]-a[1],b[2]-a[2]);orbit.y=(a[1]+b[1])/2;orbit.r=Math.max(.22,Math.min(3.7,w*3.3+.18));cameraMove()}
+function pointerControls(){const c=renderer.domElement;const pointers=orbit.active;c.style.touchAction='none';c.addEventListener('pointerdown',e=>{c.setPointerCapture(e.pointerId);pointers.set(e.pointerId,[e.clientX,e.clientY]);orbit.lastX=e.clientX;orbit.lastY=e.clientY;orbit.moved=false;orbit.pinch=0});c.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,[e.clientX,e.clientY]);if(pointers.size===2){const v=[...pointers.values()],d=Math.hypot(v[0][0]-v[1][0],v[0][1]-v[1][1]);if(orbit.pinch)orbit.r=Math.max(.1,Math.min(40,orbit.r*orbit.pinch/d));orbit.pinch=d;orbit.moved=true;cameraMove();return}const dx=e.clientX-orbit.lastX,dy=e.clientY-orbit.lastY;orbit.lastX=e.clientX;orbit.lastY=e.clientY;if(Math.abs(dx)+Math.abs(dy)>2)orbit.moved=true;orbit.az-=dx*.007;orbit.polar=Math.min(Math.PI-.04,Math.max(.04,orbit.polar-dy*.006));cameraMove()});c.addEventListener('pointerup',e=>{if(!orbit.moved&&pointers.size===1)raypick(e);pointers.delete(e.pointerId);orbit.pinch=0});c.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);orbit.pinch=0});c.addEventListener('wheel',e=>{e.preventDefault();orbit.r=Math.max(.1,Math.min(40,orbit.r*Math.exp(e.deltaY*.001)));cameraMove()},{passive:false})}
+function raypick(e){if(!THREE||!camera)return;const rect=renderer.domElement.getBoundingClientRect();const m=new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);const ray=new THREE.Raycaster();ray.setFromCamera(m,camera);
+for(const hit of ray.intersectObjects(allMeshes.filter(x=>x.visible&&x.userData.system!=='integumentary'),false)){if(!hit.face)continue;const i=hit.object.geometry.getAttribute('partIndex').getX(hit.face.a);const part=atlas.parts[Math.round(i)];if(part&&partVisible(part)){choose(part.id);break}}}
+function freeModel(){for(const mesh of meshChunks){scene.remove(mesh);mesh.geometry.dispose()}for(const m of materials)m.dispose();meshChunks=[];materials=[];allMeshes=[];atlas=null;partsById.clear();selectedPartIndex=-1;ui.selected=null;ui.isolate=false;describeSelected();list();$('hotspot').hidden=true;requestPaint()}
+function newMaterial(system){const m=new THREE.MeshStandardMaterial({color:colors[system]||0xa9b4bc,roughness:.6,metalness:.02,side:THREE.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.14:1});
+const uniforms={selected:{value:-1},isolate:{value:0}};m.userData.uniforms=uniforms;
+m.onBeforeCompile=shader=>{shader.uniforms.anatomySelected=uniforms.selected;shader.uniforms.anatomyIsolate=uniforms.isolate;
+shader.vertexShader='attribute float partIndex; varying float anatomyPartIndex;\n'+shader.vertexShader;
+shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;');
+shader.fragmentShader='varying float anatomyPartIndex; uniform float anatomySelected; uniform float anatomyIsolate;\n'+shader.fragmentShader;
+shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif(anatomyIsolate > 0.5 && abs(anatomyPartIndex-anatomySelected) > 0.5) discard;');
+shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5) diffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.33,0.96,0.82),0.78);')};materials.push(m);return m}
+function makeGroup(system,parts,buffer){let vertices=0,indices=0;for(const p of parts){vertices+=p.vertexCount;indices+=p.indexCount}const pos=new Float32Array(vertices*3),norm=new Int16Array(vertices*3),partIndex=new Float32Array(vertices),index=new Uint32Array(indices);
+let vi=0,ii=0;for(const p of parts){pos.set(new Float32Array(buffer,p.positions,p.vertexCount*3),vi*3);norm.set(new Int16Array(buffer,p.normals,p.vertexCount*3),vi*3);partIndex.fill(p._index,vi,vi+p.vertexCount);const input=new Uint32Array(buffer,p.indices,p.indexCount);for(let k=0;k<input.length;k++)index[ii+k]=input[k]+vi;vi+=p.vertexCount;ii+=p.indexCount;p._loaded=true}
+const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('normal',new THREE.BufferAttribute(norm,3,true));g.setAttribute('partIndex',new THREE.BufferAttribute(partIndex,1));g.setIndex(new THREE.BufferAttribute(index,1));g.computeBoundingSphere();
+const mesh=new THREE.Mesh(g,newMaterial(system));mesh.userData.system=system;mesh.frustumCulled=false;mesh.visible=systemVisible(system);scene.add(mesh);meshChunks.push(mesh);allMeshes.push(mesh)}
+async function chunkBuffer(chunk,root,signal){const fname=String(chunk.gzip||chunk.url+'.gz').split('/').pop();const path=root+fname;
+let response=await fetch(path,{signal});if(!response.ok)throw Error('Αποτυχία λήψης 3D δεδομένων ('+response.status+').');
+let buf=await response.arrayBuffer();const bytes=new Uint8Array(buf);if(bytes[0]===0x1f&&bytes[1]===0x8b){if(typeof DecompressionStream==='undefined')throw Error('Η συσκευή δεν υποστηρίζει αποσυμπίεση gzip.');buf=await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()}
+if(buf.byteLength!==chunk.bytes)throw Error('Λανθασμένο μέγεθος ανατομικού αρχείου.');return buf}
+async function loadModel(){const current=++token;if(abort)abort.abort();abort=new AbortController();const signal=abort.signal;freeModel();$('errorBox').hidden=true;const p=PROVIDERS[ui.sex];loadingUI(true,'Φόρτωση '+(ui.sex==='male'?'ανδρικού':'γυναικείου')+' άτλαντα…','Επιστημονικά δεδομένα '+p.dataset+'. Πρώτη λήψη: δεκάδες MB.');
+try{const response=await fetch(p.root+'atlas.json',{signal});if(!response.ok)throw Error('Δεν φορτώθηκε το μητρώο ανατομικών δομών.');const data=await response.json();if(current!==token)return;if(!Array.isArray(data.parts)||!Array.isArray(data.chunks)||data.parts.length!==p.expectedParts)throw Error('Ο κατάλογος μοντέλων διαφέρει από τον ελεγμένο.');atlas=data;data.parts.forEach((x,i)=>{x._index=i;partsById.set(x.id,x)});list();$('detailDescription').textContent=p.warning;const load=async i=>{const buf=await chunkBuffer(data.chunks[i],p.root,signal);if(current!==token)return;const groups=new Map();for(const part of data.parts){if(part.chunk!==i)continue;const entry=groups.get(part.system)||[];entry.push(part);groups.set(part.system,entry)}
+for(const [system,parts] of groups)makeGroup(system,parts,buf);if(current!==token)return;completed++;loadingUI(true,'3D Ανατομία · '+Math.round(completed/data.chunks.length*100)+'%','Φορτώθηκαν '+completed+'/'+data.chunks.length+' αρχεία · '+data.parts.length.toLocaleString('el-GR')+' δομές');updateScene()};
+let completed=0;let cursor=0;await Promise.all(Array.from({length:2},async()=>{while(cursor<data.chunks.length&&current===token){const i=cursor++;await load(i)}}));if(current!==token)return;loadingUI(false);$('errorBox').hidden=true;list();updateScene()}catch(e){if(signal.aborted||current!==token)return;console.error('Anatomy mesh:',e);loadingUI(false);$('errorBox').hidden=false;$('errorBox').querySelector('strong').textContent='Δεν φορτώθηκε ο πλήρης 3D άτλας.';$('errorBox').querySelector('p').textContent=(e?.message||'Πρόβλημα δικτύου.')+' Η πραγματική ανατομία απαιτεί ενεργή σύνδεση και υποστήριξη WebGL. Δεν εμφανίζουμε ψεύτικο μοντέλο ως υποκατάστατο.'}}
+async function start(){initUI();try{THREE=await import(threeURL);const canvas=$('renderMount');renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<768?1.3:1.8));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;canvas.append(renderer.domElement);scene=new THREE.Scene();scene.add(new THREE.HemisphereLight(0xf5f9ff,0x334858,2.1));const sun=new THREE.DirectionalLight(0xffffff,2.8);sun.position.set(1,4,4);scene.add(sun);const rim=new THREE.DirectionalLight(0x85c4ee,1.5);rim.position.set(-3,2,-4);scene.add(rim);camera=new THREE.PerspectiveCamera(36,1,.005,100);resetCamera();pointerControls();const resize=()=>{let r=canvas.getBoundingClientRect();if(r.width<2||r.height<2)return;renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();requestPaint()};new ResizeObserver(resize).observe(canvas);resize();animate();await loadModel()}catch(e){console.error(e);loadingUI(false);$('errorBox').hidden=false;$('errorBox').querySelector('strong').textContent='Δεν ξεκίνησε η 3D μηχανή.';$('errorBox').querySelector('p').textContent='Απαιτείται υποστηριζόμενο WebGL και σύνδεση με την εξωτερική βιβλιοθήκη Three.js.'}}
+start();
