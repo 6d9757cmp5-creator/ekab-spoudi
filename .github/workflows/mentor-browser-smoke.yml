@@ -1,0 +1,36 @@
+name: Mentor browser simulation
+on:
+  pull_request:
+    paths:
+      - 'mentor-lab.html'
+      - 'mentor-lab.js'
+      - 'mentor-lab.css'
+      - 'mentor/core/**'
+      - 'scripts/verify-mentor-browser.mjs'
+      - '.github/workflows/mentor-browser-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Playwright and Chromium (CI only)
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Execute real browser scenario, persistent memory and no legacy writes
+        run: node scripts/verify-mentor-browser.mjs
+      - name: Keep screenshot for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-foundation-mobile-chromium
+          path: mentor-foundation-mobile.png
+          if-no-files-found: ignore
+          retention-days: 7
