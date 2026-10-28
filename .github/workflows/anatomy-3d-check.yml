@@ -1,0 +1,49 @@
+name: 3D anatomy lab — static integrity (prototype only)
+on:
+  pull_request:
+    paths:
+      - index.html
+      - ui-tools/anatomy-3d/**
+      - .github/workflows/anatomy-3d-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-3d-anatomy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: node --check ui-tools/anatomy-3d/anatomy.js
+      - name: Verify navigation, semantics, model coverage, and grade isolation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('ui-tools/anatomy-3d')
+          html=(root/'index.html').read_text()
+          js=(root/'anatomy.js').read_text()
+          css=(root/'anatomy.css').read_text()
+          home=Path('index.html').read_text()
+          assert 'href="ui-tools/anatomy-3d/index.html"' in home
+          assert 'Ανδρικό' in html and 'Γυναικείο' in html
+          assert all(('data-mode="'+m+'"') in html for m in ('skeleton','organs','both'))
+          assert all(('data-sex="'+s+'"') in html for s in ('male','female'))
+          assert all(('value="'+s+'"') in html for s in ('skeletal','nervous','respiratory','circulatory','digestive','urinary','reproductive'))
+          assert 'Εκπαιδευτικό σχηματικό 3D' in html
+          ids=set(re.findall(r'id="([^"]+)"',html))
+          used=set(re.findall(r"\$\('([^']+)'\)",js))
+          missing=used-ids
+          assert not missing, f'Missing DOM IDs: {sorted(missing)}'
+          records=re.findall(r"\['([^']+)','[^']+','([^']+)'",js)
+          atlas=[(key,sys) for key,sys in records if sys in ('skeletal','nervous','respiratory','circulatory','digestive','urinary','reproductive')]
+          assert len(atlas)>=35, len(atlas)
+          assert len({i for i,_ in atlas})==len(atlas), 'Duplicate atlas IDs'
+          assert all(x in js for x in ('function buildSkeleton','function buildOrgans','function buildSkin','function pointerControls','function raypick','function nextQuestion','function changeSex','function changeMode'))
+          assert "ui.sex==='female'" in js
+          assert "localStorage" not in js and "sessionStorage" not in js
+          assert 'appwrite' not in js.lower() and 'cloud-sync' not in js
+          assert 'three@0.180.0' in js and 'WebGLRenderer' in js
+          assert '.viewport' in css and '@media(max-width:560px)' in css
+          print(f'PASS: {len(atlas)} unique atlas entries, 2 sex presets, 3 views, no grade/storage access')
+          PY
