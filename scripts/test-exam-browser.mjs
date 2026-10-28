@@ -109,13 +109,18 @@ async function saek(){
  console.log('PASS SAEK: 247-item bank, scoring, result, uncertain ungraded, next and safe network failure');
 }
 async function eoppep(){
- const b=open('theory.html',['study-scheduler.js','app.js'],{'official_questions.json':JSON.parse(read('official_questions.json'))});
+ const rawBank=JSON.parse(read('official_questions.json'));
+ const statusCounts={};for(const q of rawBank)statusCounts[q.answerStatus||'undefined']=(statusCounts[q.answerStatus||'undefined']||0)+1;
+ console.log('EOPPEP bank status counts:',JSON.stringify(statusCounts));
+ const b=open('theory.html',['study-scheduler.js','app.js'],{'official_questions.json':rawBank});
  const d=b.d;
  await wait(()=>el(d,'allCount').textContent==='314','314 EOPPEP bank');
  action(d,'openExam');
  el(d,'statusFilter').value='reviewed_educational';
  el(d,'statusFilter').dispatchEvent(new b.w.Event('input',{bubbles:true}));
+ console.log('EOPPEP matching questions:',el(d,'matches').textContent,'selected status:',el(d,'statusFilter').value);
  action(d,'begin');
+ console.log('EOPPEP after begin:',el(d,'qtitle').textContent.slice(0,100),'study hidden:',el(d,'study').classList.contains('hidden'));
  assert(el(d,'qtitle').textContent.length>6);
  answer(d,'draft','Εξετάζω την ασφάλεια σκηνής και ακολουθώ την ορθή διαδικασία.');
  b.setMode('incorrect');action(d,'eoppepGradeAI');
