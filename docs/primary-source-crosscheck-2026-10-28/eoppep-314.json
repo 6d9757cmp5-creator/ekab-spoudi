@@ -181,7 +181,25 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "targeted_derived_answer_highlights_comparison_with_important_qualification",
+        "derivedFrom": "eoppep-sos.json (two highlights, not full official_questions.json educational answer)",
+        "derivedSourceBlobSha": "1de7e21dc68f40e6c046700b41da8f98747e9ef2",
+        "comparedClaims": [
+          "Ο κυψελιδικός αερισμός είναι ο όγκος αέρα ανά λεπτό που συμμετέχει στην ανταλλαγή αερίων.",
+          "Ο τύπος VA=(VT−VD)×RR υποστηρίζεται από NCBI StatPearls, Physiology, Tidal Volume.",
+          "Κρίσιμη διευκρίνιση: στον γενικό τύπο VD είναι ο φυσιολογικός νεκρός χώρος· ο ανατομικός αποτελεί προσέγγιση για υγιή ενήλικα, επειδή ο κυψελιδικός νεκρός χώρος είναι συνήθως αμελητέος."
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK482502/",
+          "https://www.ncbi.nlm.nih.gov/books/NBK482501/"
+        ],
+        "finding": "Τα δύο αποσπάσματα είναι συμβατά με τη φυσιολογία μόνο με την ήδη υπάρχουσα φράση «κατά προσέγγιση» και την πρόσθετη διευκρίνιση ότι ο γενικός τύπος χρησιμοποιεί φυσιολογικό/συνολικό νεκρό χώρο. Χρειάζεται έλεγχος αν το πλήρες εκπαιδευτικό κείμενο δίνει κατάλληλη προειδοποίηση για παθολογικές καταστάσεις.",
+        "limits": "Δεν αναγνώστηκε η πλήρης αρχική απάντηση από official_questions.json ούτε συγκρίθηκε η πλήρης εκφώνηση γραμμή-προς-γραμμή με το επίσημο PDF ΕΟΠΠΕΠ· δεν αποτελεί επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-008",
