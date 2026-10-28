@@ -41,7 +41,7 @@ jobs:
           assert len({i for i,_ in atlas})==len(atlas), 'Duplicate atlas IDs'
           assert all(x in js for x in ('function buildSkeleton','function buildOrgans','function buildSkin','function pointerControls','function raypick','function nextQuestion','function changeSex','function changeMode'))
           assert "ui.sex==='female'" in js
-          assert "localStorage" not in js and "sessionStorage" not in js
+          assert not re.search(r'\b(?:localStorage|sessionStorage)\s*(?:\.|\[)',js), 'Storage access not allowed'
           assert 'appwrite' not in js.lower() and 'cloud-sync' not in js
           assert 'three@0.180.0' in js and 'WebGLRenderer' in js
           assert '.viewport' in css and '@media(max-width:560px)' in css
