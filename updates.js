@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.97', $=id=>document.getElementById(id);
+const CURRENT='27.1.98', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;\nconst CHECK_INTERVAL_MS=60000;let lastNotice='';
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
@@ -57,12 +57,13 @@ window.EkabUpdates={check,version:CURRENT};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 // Optional cloud setup never blocks the local app or update controls.
-import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).href)
+import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
   .then(async ({ startAppwrite }) => {
     try { const { initAccountUI } = await import(new URL('./account-ui.js?app=scoped-reset-1', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {
+    const trigger=document.querySelector('[data-account-open]');if(trigger){trigger.disabled=false;trigger.addEventListener('click',()=>{alert('Η σύνδεση δεν φορτώθηκε. Ανανέωσε τη σελίδα με ενεργό internet. Η τοπική πρόοδος δεν επηρεάζεται.')},{once:false})}
     document.querySelectorAll('[data-appwrite-status]').forEach(el => {
       el.textContent = 'Appwrite: μη διαθέσιμο. Η μελέτη συνεχίζεται τοπικά.';
     });
