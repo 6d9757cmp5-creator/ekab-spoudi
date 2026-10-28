@@ -132,7 +132,9 @@ function render(){
  detailRoot.replaceChildren();
  const title=$('div','progress-panel-dialog-heading');
  const h2=$('h2','','Αναλυτική πρόοδος');h2.id='progressDetailHeading';
- title.append(h2,action('✕',closeDetails,'progress-panel-dialog-close'));
+ const closeButton=action('✕',closeDetails,'progress-panel-dialog-close');
+ closeButton.setAttribute('aria-label','Κλείσιμο αναλυτικής προόδου');
+ title.append(h2,closeButton);
  detailRoot.append(title);
  if(message)detailRoot.append($('p','progress-panel-notice',message));
  const main=$('div','progress-panel-list'),firstSem=rows.findIndex(x=>x.id!=='saek'&&x.id!=='eoppep');
