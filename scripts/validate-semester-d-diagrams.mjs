@@ -7,7 +7,8 @@ for(const c of d.courses)for(let i=0;i<c.chapters.length;i++){
  if(c.semester!=='Δ')continue;
  const keys=chapter.images.filter(k=>k.startsWith('sem_d_'));if(keys.length!==([17,18].includes(c.course)?3:2))errors.push('diagram count '+c.course+'-'+i);
  for(const k of keys){const a=d.assets[k],svg=fs.readFileSync(a.localPath,'utf8');count++;
-  if((svg.match(/marker-end="url\(#arrow\)"/g)||[]).length!==3)errors.push('missing arrows '+k);
+  const arrowRefs=[...svg.matchAll(/marker-end="url\(#([A-Za-z][\w:-]*)\)"/g)].map(m=>m[1]);
+  if(arrowRefs.length!==3||arrowRefs.some(id=>!svg.includes('<marker id="'+id+'"')))errors.push('missing or undefined arrows '+k);
   if(svg.includes('…')||a.caption.includes('…'))errors.push('truncated '+k);
   if(!svg.includes('role="img"')||!svg.includes('<desc'))errors.push('missing alt text '+k);
   const sum=crypto.createHash('sha256').update(svg).digest('hex');
