@@ -39,3 +39,16 @@ export function saveFloatingPosition(storage,key,point){
  if(!point||!Number.isFinite(point.x)||!Number.isFinite(point.y)||point.x<0||point.x>1||point.y<0||point.y>1)return false;
  try{storage.setItem(key,JSON.stringify({x:point.x,y:point.y}));return true}catch{return false}
 }
+
+/* A presentation preference, intentionally not included in personal-note sync. */
+export const NOTES_FAB_HIDDEN_KEY='ekab.notes.fab.hidden.v1';
+export function readFloatingVisibility(storage){
+ try{return storage.getItem(NOTES_FAB_HIDDEN_KEY)==='1'}catch{return false}
+}
+export function saveFloatingVisibility(storage,hidden){
+ try{
+  if(hidden)storage.setItem(NOTES_FAB_HIDDEN_KEY,'1');
+  else storage.removeItem(NOTES_FAB_HIDDEN_KEY);
+  return true;
+ }catch{return false}
+}

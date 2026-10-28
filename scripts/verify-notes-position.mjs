@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {clampFloating,ratiosForFloating,floatingFromRatios,readFloatingPosition,saveFloatingPosition,
- NOTES_FAB_POSITION,NOTES_WINDOW_POSITION} from '../notes-position.js';
+ NOTES_FAB_POSITION,NOTES_WINDOW_POSITION,NOTES_FAB_HIDDEN_KEY,readFloatingVisibility,saveFloatingVisibility} from '../notes-position.js';
 const approx=(a,b)=>assert(Math.abs(a-b)<.001,`Expected ${a} ≈ ${b}`);
 const clip=(p,w,h,vw,vh,pad=12)=>{
  assert(p.left>=-0.01&&p.top>=-0.01);
@@ -60,9 +60,32 @@ assert(css.includes("touch-action:none"));
 assert(css.includes("background:#101d30"));
 assert(css.includes("html[data-theme] .ekab-notes-dialog")); // both themes
 assert(css.includes(".ekab-notes-drag-hint"));
-assert(upd.includes("notes-panel.js?v=27.1.114"));
-assert(upd.includes("notes-panel.css?v=27.1.114"));
+const release=JSON.parse(fs.readFileSync('version.json','utf8')).version;
+assert(upd.includes('notes-panel.js?v='+release));
+assert(upd.includes('notes-panel.css?v='+release));
+assert(upd.includes("CURRENT='"+release+"'"));
 assert(sw.includes('"./notes-position.js"'));
-assert(sw.includes("ekab-spoudi-v27.1.114"));
+assert(sw.includes("ekab-spoudi-v"+release));
 assert(!js.includes("ekabGlobalSearch"));
-console.log('PASS: dark notes panel, touch/mouse drag, click suppression, mobile/desktop viewport safety, reset, keyboard move, persistent per-device positions and isolated global search.');
+// Visibility is a device-only UI choice, not a destructive notes change.
+assert.equal(readFloatingVisibility(storage),false);
+assert.equal(saveFloatingVisibility(storage,true),true);
+assert.equal(storage.getItem(NOTES_FAB_HIDDEN_KEY),'1');
+assert.equal(readFloatingVisibility(storage),true);
+assert.equal(readFloatingVisibility({getItem:()=>{throw Error('denied')}}),false);
+assert.equal(saveFloatingVisibility({setItem:()=>{throw Error('denied')}},true),false);
+assert.equal(saveFloatingVisibility(storage,false),true);
+assert.equal(storage.getItem(NOTES_FAB_HIDDEN_KEY),null);
+assert.equal(readFloatingVisibility(storage),false);
+assert(js.includes("setFloatingHidden(isFloatingHidden())"));
+assert(js.includes("trigger.hidden=!!hidden"));
+assert(js.includes("installVisibilityControl()"));
+assert(js.includes("ekabNotesHideFloating"));
+assert(js.includes("NOTES_FAB_HIDDEN_KEY"));
+assert(js.includes("saveFloatingVisibility(localStorage,hidden)"));
+assert(js.includes("window.addEventListener('storage'"));
+assert(css.includes(".ekab-notes-fab[hidden]{display:none!important}"));
+assert(css.includes(".ekab-notes-visibility-toggle"));
+assert(js.includes("visibilityToggle.setAttribute('aria-label',label)"));
+assert(js.includes("returnFocus=visibilityToggle"));
+console.log('PASS: draggable notes, dark UI, persistent device-only full hide/restore, cross-tab visibility, keyboard movement, and independent search.');
