@@ -45,6 +45,7 @@ function labelStatus(q){const status=q.sourceReview?.status;if(status==='documen
 // A question is learned only after successful recalls on separate dates.
 function learning(q){return scheduler.evaluate(state[q.id])}
 function isStudied(q){return learning(q).studied}
+function isRead(q){return typeof state[q.id]?.readCompletedAt==='string'&&Number.isFinite(Date.parse(state[q.id].readCompletedAt))}
 function isMastered(q){return learning(q).mastered}
 function needsReview(q){const s=state[q.id];return Boolean(s&&scheduler.isDue(s))}
 function renderDueToday(){
@@ -68,6 +69,7 @@ function renderDueToday(){
 }
 function updateMetrics(){
  $('#seenCount').textContent=bank.filter(isStudied).length;
+  $('#readCount').textContent=String(bank.filter(isRead).length);
  $('#allCount').textContent=bank.length;
  $('#verifiedCount').textContent=bank.filter(q=>q.answerStatus==='reviewed_educational').length;
  const old=bank.filter(q=>{const s=state[q.id];return s&&(s.selfCorrect||0)>0&&!(Array.isArray(s.reviewHistory)&&s.reviewHistory.length)}).length;
@@ -279,6 +281,10 @@ function renderCatalogReader(q){
  if(q.reviewNote){const p4=document.createElement('p');p4.textContent='Σημείωση ελέγχου: '+q.reviewNote;sources.append(p4)}
  $('#catalogReaderSosNotes').value=st(q).sosNotes||'';
  $('#catalogReaderPersonalNotes').value=st(q).readerNotes||'';
+  const read=isRead(q),markRead=$('#catalogReaderMarkRead');
+  markRead.textContent=read?'✓ Διαβάστηκε · Αναίρεση':'✓ Σημείωσε ως διαβασμένη';
+  markRead.setAttribute('aria-pressed',String(read));
+  markRead.classList.toggle('is-read',read);
  const previous=$('#catalogReaderReviewState');
  previous.textContent=needsReview(q)?'Είναι ήδη στη λίστα επανάληψης.':'Οι σημειώσεις SOS είναι προσωπικές· δεν αποτελούν επιβεβαιωμένη ιατρική οδηγία.';
  for(const btn of document.querySelectorAll('#allQuestionsList .all-question-item')){
@@ -299,6 +305,13 @@ function openCatalogQuestion(questionId){
 }
 $('#catalogReaderPrevious').addEventListener('click',()=>moveCatalogQuestion(-1));
 $('#catalogReaderNext').addEventListener('click',()=>moveCatalogQuestion(1));
+$('#catalogReaderMarkRead').addEventListener('click',()=>{
+  const q=bank.find(item=>item.id===catalogSelectedId);if(!q)return;
+  const progress=st(q);
+  if(isRead(q))delete progress.readCompletedAt;
+  else progress.readCompletedAt=new Date().toISOString();
+  save();renderCatalogReader(q);updateMetrics();
+});
 $('#catalogReaderClose').addEventListener('click',()=>{
  $('#catalogReaderContent').hidden=true;
  $('#catalogReaderPlaceholder').hidden=false;
@@ -430,4 +443,4 @@ async function init(){state=saved();try{const response=await fetch(BANK_URL);if(
 init(); // Service worker registration is managed by updates.js on every page.
 
 // Cloud changes refresh the existing in-memory study state without restarting a question.
-window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});
+window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(catalogSelectedId){const q=bank.find(item=>item.id===catalogSelectedId);if(q)renderCatalogReader(q)}if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});
