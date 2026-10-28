@@ -26,6 +26,8 @@ test('NVIDIA free alternative stays on the explicit non-OpenAI allowlist',()=>{
 test('Cloudflare requires Free plan, valid account and an allowlisted model',()=>{
  const cloud={CLOUDFLARE_API_TOKEN:'test',CLOUDFLARE_ACCOUNT_ID:'a'.repeat(32),CLOUDFLARE_FREE_PLAN_CONFIRMED:'true'};
  assert.equal(freeProviders(cloud)[0].id,'cloudflare');
+ for(const model of ['@cf/zai-org/glm-4.7-flash','@cf/google/gemma-4-26b-a4b-it','@cf/nvidia/nemotron-3-120b-a12b'])
+  assert.equal(freeProviders({...cloud,CLOUDFLARE_FREE_MODEL:model})[0].model,model);
  assert.deepEqual(freeProviders({...cloud,CLOUDFLARE_FREE_PLAN_CONFIRMED:'false'}),[]);
  assert.deepEqual(freeProviders({...cloud,CLOUDFLARE_FREE_MODEL:'paid/model'}),[]);
  assert.deepEqual(freeProviders({...cloud,CLOUDFLARE_ACCOUNT_ID:'../other'}),[]);
@@ -57,7 +59,7 @@ test('seminar_case uses controlled scenario reference',async()=>setup(async()=>{
 }));
 test('429 switches once to free-only fallback with zero price constraint',async()=>setup(async()=>{
  process.env.CLOUDFLARE_API_TOKEN='test-key';process.env.CLOUDFLARE_ACCOUNT_ID='a'.repeat(32);process.env.CLOUDFLARE_FREE_PLAN_CONFIRMED='true';let calls=0;
- globalThis.fetch=async(url,opt)=>{calls++;if(calls===1)return {ok:false,status:429};
+ globalThis.fetch=async(url,opt)=>{calls++;if(calls===1){assert.equal(JSON.parse(opt.body).reasoning,undefined);return {ok:false,status:429};}
   assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');const request=JSON.parse(opt.body);
   assert.deepEqual(request.provider.max_price,{prompt:0,completion:0,request:0});assert.equal(request.provider.allow_fallbacks,false);return response(grade);
  };
@@ -82,3 +84,4 @@ test('same user and same submission reuse result, different user does not',async
  const [a,b]=await Promise.all([invoke(answer,'cache'),invoke(answer,'cache')]);assert.deepEqual(a,b);assert.equal(calls,1);
  await invoke(answer,'cache');assert.equal(calls,1);await invoke(answer,'other-cache');assert.equal(calls,2);
 }));
+
