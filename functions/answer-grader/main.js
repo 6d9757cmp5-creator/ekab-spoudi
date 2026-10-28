@@ -133,7 +133,7 @@ async function gradeAnswer(question,answer){
  // This is a bounded, short-lived per-process cache, not a durable cross-instance guarantee.
  let failure='free_unavailable';
  for(const provider of providers){
-  try{return {...validateGrade(await requestFreeGrade(provider,messages)),provider:provider.id};}catch(err){if(/^provider_http_\d{3}$/.test(err.message))failure=err.message; /* No answers, keys or provider response bodies in logs. */}
+  try{const graded=validateGrade(await requestFreeGrade(provider,messages));console.log('AI grading provider:',provider.id);return {...graded,provider:provider.id};}catch(err){if(/^provider_http_\d{3}$/.test(err.message))failure=err.message; /* No answers, keys or provider response bodies in logs. */}
  }
  throw new Error(failure);
 }
