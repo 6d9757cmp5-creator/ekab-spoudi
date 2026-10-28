@@ -42,7 +42,7 @@ export function initAccountUI() {
     <section class="cloud-controls" data-cloud-controls hidden><h3>Συγχρονισμός συσκευών</h3>
       <p data-cloud-status role="status" aria-live="polite">Έλεγχος συγχρονισμού…</p>
       <div class="actions"><button class="btn compact" data-sync-enable type="button">Ενεργοποίηση σε αυτή τη συσκευή</button><button class="btn compact" data-sync-now type="button" hidden>Συγχρονισμός τώρα</button><button class="btn compact secondary" data-sync-pause type="button" hidden>Παύση</button></div>
-      <p class="small muted">Πρόοδος ΕΟΠΠΕΠ/ΣΑΕΚ, σημειώσεις, PDF και ρυθμίσεις. Ιδιωτικά στον λογαριασμό σου. Δωρεάν όριο: 50 MB ανά PDF.</p>
+      <p class="small muted">Πρόοδος ΕΟΠΠΕΠ/ΣΑΕΚ/σεμιναρίων, σημειώσεις, PDF και ρυθμίσεις. Ιδιωτικά στον λογαριασμό σου. Δωρεάν όριο: 50 MB ανά PDF.</p>
       <button class="btn compact ghost" data-sync-recover type="button">Ανάκτηση τοπικού αντιγράφου</button>
     </section>
     <details class="fold storage-panel"><summary>Αποθήκευση, αντίγραφα &amp; ενημερώσεις <span class="storage-summary-note">Στη συσκευή σου</span></summary><div class="body">
@@ -67,7 +67,7 @@ export function initAccountUI() {
     if(!user||!cloudFeatures.sync||syncManager)return;
     const panel=dialog.querySelector('[data-cloud-controls]');panel.hidden=false;
     try {
-      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.68');
+      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.102');
       syncManager=await initCloudSync({user,status:panel.querySelector('[data-cloud-status]'),enableButton:panel.querySelector('[data-sync-enable]'),nowButton:panel.querySelector('[data-sync-now]'),pauseButton:panel.querySelector('[data-sync-pause]'),recoverButton:panel.querySelector('[data-sync-recover]')});
     }catch { panel.querySelector('[data-cloud-status]').textContent='Ο συγχρονισμός δεν είναι διαθέσιμος. Η τοπική αποθήκευση συνεχίζεται.'; }
   }
