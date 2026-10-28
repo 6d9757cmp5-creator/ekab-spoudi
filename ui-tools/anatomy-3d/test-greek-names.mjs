@@ -21,9 +21,10 @@ assert.equal(anatomicalGreek('Unexpected highly specific structure'),null,'Unkno
 assert.deepEqual(anatomyName('Untranslated source mesh','skeletal',{skeletal:'Σκελετικό'}),{
  el:null,english:'Untranslated source mesh',label:'Μη μεταφρασμένη δομή',systemName:'Σκελετικό'
 });
-assert.equal(eligibleQuizName('Left sixth rib','skeletal'),true);
-assert.equal(eligibleQuizName('Gingiva of upper jaw','skeletal'),true);
+assert.equal(eligibleQuizName('Left sixth rib','skeletal'),false,'Tiny rib details are not good entry-level targets');
+assert.equal(eligibleQuizName('Gingiva of upper jaw','skeletal'),false,'Gums are not a practical 3D target');
 assert.equal(eligibleQuizName('Unexpected highly specific structure','skeletal'),false);
 assert.equal(eligibleQuizName('Right kidney','urinary'),true);
+assert.equal(eligibleQuizName('Left femur','skeletal'),true);
 assert.equal(eligibleQuizName('Left ovary','integumentary'),false);
 console.log('PASS Greek-first anatomy terms, precise side/number mapping and verified-only quiz pool');
