@@ -1,0 +1,53 @@
+name: AED provider compatibility inspection
+on:
+  pull_request:
+    paths:
+      - .github/workflows/map-provider-probe.yml
+permissions:
+  contents: read
+jobs:
+  inspect-public-page:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect public Crete AED map embedding and script endpoints
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.parse import urljoin, urlsplit
+          from urllib.error import URLError
+          import re
+          base='https://apinidotes.crete.gov.gr/Map'
+          try:
+              with urlopen(Request(base, headers={'User-Agent':'EKAB-Spoudi-Compatibility-Check/1.0'}),timeout=18) as r:
+                  body=r.read(1000000).decode('utf-8','replace')
+                  headers=dict(r.headers.items())
+                  print('FINAL_URL',r.url,'STATUS',r.status,'HTML_LEN',len(body))
+                  for k,v in headers.items():
+                      if k.lower() in ('content-security-policy','x-frame-options','cross-origin-resource-policy','access-control-allow-origin','content-type','permissions-policy'):
+                          print('HEADER',k,v[:400])
+          except Exception as exc:
+              print('PAGE_ERROR',repr(exc))
+              raise SystemExit(0)
+          scripts=re.findall(r'<script[^>]+src=["\']([^"\']+)["\']',body,re.I)
+          print('SCRIPTS',scripts[:45])
+          for phrase in ('api/','GetDefib','GetAed','lat','longitude','geolocation','iframe','fetch(','.ajax(','.get('):
+              match=re.search(re.escape(phrase),body,re.I)
+              if match:print('HTML_MATCH',phrase,body[max(0,match.start()-125):match.start()+250].replace('\n',' '))
+          seen=0
+          for raw in scripts:
+              url=urljoin(base,raw)
+              if urlsplit(url).netloc != 'apinidotes.crete.gov.gr':continue
+              if seen>=10:break
+              seen+=1
+              try:
+                  with urlopen(Request(url,headers={'User-Agent':'EKAB-Spoudi-Compatibility-Check/1.0'}),timeout=10) as r:
+                      js=r.read(500000).decode('utf-8','replace')
+                  print('SCRIPT',url,'LENGTH',len(js))
+                  patterns=r'getCurrentPosition|geolocation|api/|/api|fetch\\(|\\$\\.ajax|GetDefib|GetAed|latitude|longitude|markers|AED|apinid'
+                  matches=list(re.finditer(patterns,js,re.I))
+                  print('SCRIPT_MATCH_COUNT',len(matches))
+                  for m in matches[:12]:print('SCRIPT_SNIPPET',js[max(0,m.start()-90):m.start()+160].replace('\n',' ')[:250])
+              except Exception as exc:
+                  print('SCRIPT_ERROR',url,repr(exc))
+          PY
