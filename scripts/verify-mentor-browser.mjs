@@ -49,6 +49,48 @@ try{
   await page.screenshot({path:'mentor-foundation-mobile.png',fullPage:true});
   await page.reload({waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('step-count').textContent==='1 / 4');
+  // New multi-person lab: one case, 3 synthetic people and structured reporting.
+  await page.locator('#mode-mci').click();
+  await page.getByRole('button',{name:/Τροχαίο με τρεις εμπλεκομένους/}).click();
+  await page.waitForFunction(()=>document.getElementById('mci-title').textContent==='Τροχαίο με τρεις εμπλεκομένους');
+  assert.equal(await page.locator('#mci-people .patient-card').count(),3);
+  await page.locator('#mci-actions').getByRole('button',{name:/Ξεκινώ χωρίς έλεγχο κινδύνων/}).click();
+  await page.waitForFunction(()=>document.getElementById('mci-feedback').dataset.result==='review');
+  assert.equal((await page.locator('#mci-count').textContent()).trim(),'0 / 4');
+  await page.locator('#mci-actions').getByRole('button',{name:/Εξετάζω την ασφάλεια/}).click();
+  await page.waitForFunction(()=>document.getElementById('mci-count').textContent==='1 / 4');
+  await page.locator('#mci-actions').getByRole('button',{name:/Δίνω σαφή αρχική αναφορά/}).click();
+  await page.waitForFunction(()=>document.getElementById('mci-count').textContent==='2 / 4');
+  for(const letter of ['Α','Β','Γ']){
+    await page.locator('#mci-actions').getByRole('button',{name:new RegExp('Καταγράφω την παρουσία του Άτομο '+letter)}).click();
+  }
+  await page.waitForFunction(()=>document.getElementById('mci-count').textContent==='3 / 4');
+  assert.equal(await page.locator('#mci-people .patient-tag.noted').count(),3);
+  await page.locator('#mci-actions').getByRole('button',{name:/Παραδίδω μόνο τις παρατηρήσεις/}).click();
+  await page.waitForFunction(()=>document.getElementById('mci-count').textContent==='4 / 4');
+  assert.equal(await page.locator('#mci-done').isVisible(),true);
+
+  // Equipment training: a separate deterministic session and feedback.
+  await page.locator('#mode-equipment').click();
+  await page.getByRole('button',{name:/Αυτόματος εξωτερικός απινιδωτής/}).click();
+  await page.waitForFunction(()=>document.getElementById('equipment-title').textContent==='Αυτόματος εξωτερικός απινιδωτής');
+  await page.locator('#equipment-actions').getByRole('button',{name:/Μπορώ να τη χρησιμοποιήσω χωρίς να γνωρίζω/}).click();
+  await page.waitForFunction(()=>document.getElementById('equipment-feedback').dataset.result==='review');
+  await page.locator('#equipment-actions').getByRole('button',{name:/Εκπαιδευτική αναγνώριση ενός αυτόματου/}).click();
+  await page.locator('#equipment-actions').getByRole('button',{name:/Ακολουθώ εγκεκριμένη εκπαίδευση/}).click();
+  await page.locator('#equipment-actions').getByRole('button',{name:/Διαχωρίζω τις μετρήσεις/}).click();
+  await page.waitForFunction(()=>document.getElementById('equipment-count').textContent==='3 / 3');
+  assert.equal(await page.locator('#equipment-done').isVisible(),true);
+  await page.locator('#tab-memory').click();
+  await page.waitForFunction(()=>document.getElementById('extra-completed').textContent==='2');
+  assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'1');
+  assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'1');
+  await page.screenshot({path:'mentor-foundation-mobile-advanced.png',fullPage:true});
+  await page.reload({waitUntil:'networkidle'});
+  await page.locator('#mode-mci').click();
+  await page.waitForFunction(()=>document.getElementById('mci-count').textContent==='4 / 4');
+  await page.locator('#mode-equipment').click();
+  await page.waitForFunction(()=>document.getElementById('equipment-count').textContent==='3 / 3');
   const original='{"EOP-A-001":{"selfAttempts":2}}';
   await page.evaluate(x=>localStorage.setItem('ekab-eoppep-official-v15',x),original);
   await page.locator('#tab-route').click();
@@ -60,12 +102,19 @@ try{
   await page.locator('#export-mentor').click();
   const item=await download;
   assert.match(item.suggestedFilename(),/mentor-os-study-backup\.json/);
+  const backup=JSON.parse(await readFile(await item.path(),'utf8'));
+  assert.equal(backup.schema,'ekab-mentor-export-v2');
+  assert.equal(backup.sessions.length,1);
+  assert.equal(backup.activities.length,2);
   page.once('dialog',d=>d.accept());
   await page.locator('#clear-mentor').click();
   await page.waitForFunction(()=>document.getElementById('sessions-count').textContent==='0');
+  await page.waitForFunction(()=>document.getElementById('extra-completed').textContent==='0');
+  assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'0');
+  assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(errors,[],'No browser JS errors');
-  console.log('PASS: mobile Chromium real browser flow, IndexedDB persistence, read-only legacy fixture, export and selective delete');
+  console.log('PASS: mobile Chromium EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
   if(browser)await browser.close();
   await new Promise(ok=>server.close(ok));
