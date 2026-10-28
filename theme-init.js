@@ -17,7 +17,7 @@
 /* One tiny read-only resume tracker shared by Home, SAEK and EOPPEP. */
 (function(){
  const script=document.createElement('script');
- script.src='study-resume.js?v=20261028-1';
+ script.src='study-resume.js?v=resume-tile-polish-20261028';
  script.async=true;
  document.head.appendChild(script);
 })();
