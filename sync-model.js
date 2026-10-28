@@ -37,6 +37,14 @@ export function mergeEntry(key,a,b) {
   if (!a) return b;if(!b)return a;
   const retired=[...new Set([...(a.retired||[]),...(b.retired||[])])].sort();
   const ad=dominates(a.clock,b.clock),bd=dominates(b.clock,a.clock);
+  // A device with a shorter seminar record must not erase learning already
+  // present on the other device, even when its write is causally newer.
+  // A confirmed whole-course reset is represented by a null tombstone below.
+  if(key.startsWith('s:')&&a.v!==null&&b.v!==null&&stable(a.v)!==stable(b.v)){
+    const preferred=a.at>b.at || a.at===b.at&&(a.writer>b.writer||a.writer===b.writer&&stable(a.v)>stable(b.v))?a:b;
+    return {v:mergeSeminarCourse(a.v,b.v,preferred.v),clock:joinClock(a.clock,b.clock),
+      at:Math.max(a.at,b.at),writer:preferred.writer,retired};
+  }
   if(ad&&!bd)return {...a,retired};if(bd&&!ad)return {...b,retired};
   const winner=a.at>b.at || a.at===b.at&&(a.writer>b.writer||a.writer===b.writer&&stable(a.v)>stable(b.v))?a:b;
   let v=winner.v;
