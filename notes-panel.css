@@ -200,3 +200,21 @@ html[data-theme] .ekab-notes-new,html[data-theme] .ekab-notes-more{
  #ekabNotesResetPosition,#ekabNotesClose{min-width:36px;min-height:36px}
  .ekab-notes-drag-hint{font-size:.69rem}
 }
+
+/* Clear, non-destructive controls for every user-authored note. */
+.ekab-notes-dialog .ekab-note-actions .ekab-note-delete,
+html[data-theme] .ekab-note-actions .ekab-note-delete{
+ background:#5e2935;color:#ffe2dd;border:1px solid #b46b75;
+ min-height:38px;margin-left:auto;
+}
+.ekab-notes-dialog .ekab-note-actions .ekab-note-delete:hover,
+html[data-theme] .ekab-note-actions .ekab-note-delete:hover{
+ background:#7c3440;color:#fff4f1;border-color:#e89c9b;
+}
+.ekab-notes-action-status{font-size:.79rem;font-weight:700;line-height:1.35;color:#bee6b8;margin:0 0 7px}
+.ekab-notes-action-status:empty{display:none}
+.ekab-notes-dialog #ekabNotesRemove{background:#5e2935;color:#ffe5e0;border-color:#b46b75}
+@media(max-width:380px){
+ .ekab-notes-dialog .ekab-note-actions{gap:6px}
+ .ekab-notes-dialog .ekab-note-actions .ekab-note-delete{margin-left:0}
+}
