@@ -24,7 +24,35 @@ jobs:
       - name: Verify dated recall schedule and legacy progress
         run: node scripts/verify-study-scheduler.mjs
       - name: Validate browser JavaScript syntax
-        run: node --check app.js && node --check study-scheduler.js && node --check progress.js
+        run: node --check app.js && node --check study-scheduler.js && node --check progress.js && node --check ai-grading-client.js && node --check saek-exams.js
+      - name: Verify one-attempt grading and clear student-facing labels
+        run: |
+          node - <<'JS'
+          const fs=require('fs'),assert=require('node:assert/strict');
+          const read=name=>fs.readFileSync(name,'utf8');
+          const shared=read('ai-grading-client.js');
+          const seminar=read('seminar-prep.js');
+          const saek=read('saek-exams.js');
+          const eoppep=read('app.js');
+          const pages=['seminar-prep.html','saek-exams.html','theory.html'];
+          for(const path of pages){
+            const html=read(path);
+            assert(html.includes('Υποβολή αξιολόγησης'),path+' missing submit label');
+            assert(!html.includes('Αξιολόγηση με AI'),path+' exposes old grading label');
+            assert(html.includes('ai-grading-client.js?v=grading-compact-lock-1'),path+' stale grading client');
+          }
+          assert(shared.includes("section('Σωστή απάντηση'"));
+          assert(shared.includes("section('Γιατί'"));
+          assert(!shared.includes('Διευκρίνισε την απάντησή σου και δοκίμασε ξανά'));
+          assert(seminar.includes("else gradeWritten('skipped')"));
+          assert(seminar.includes("$('seminarQuestionNotes').readOnly=true"));
+          assert(seminar.includes("p.scenarioGrades[oral]"));
+          assert(saek.includes("current().feedback=result;current().revealed=true"));
+          assert(saek.includes("$('examManual').hidden=true"));
+          assert(eoppep.includes('lockedThisRun.add(qid)'));
+          assert(eoppep.includes("$('#draft').readOnly=true"));
+          console.log('Validated concise grading, fresh scripts and one-attempt locks.');
+          JS
       - name: Verify mixed seminar assessment bank and 70/30 scoring rule
         run: |
           node --check seminar-tracks.js
