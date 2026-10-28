@@ -54,6 +54,8 @@ function home(){
   name=document.getElementById('studyResumeName');
  if(!box||!link||!name)return;
  const target=destination(read())||destination(legacy());
+ // Expand the progress panel to the full row when no resume destination exists.
+ box.closest('.home-bottom-row')?.classList.toggle('has-resume',Boolean(target));
  if(!target){box.style.display='none';link.removeAttribute('href');return}
  name.textContent=target.compact||target.label;
  link.href=target.href;
