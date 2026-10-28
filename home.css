@@ -192,3 +192,19 @@ body:has(.home-main) .home-card-eoppep .home-card-head{width:100%;min-height:82p
 .home-mini-progress-track span{display:block;height:100%;width:0;background:var(--blue);border-radius:inherit;transition:width .35s ease}
 .home-mini-progress-message{font-size:.75rem!important;color:var(--muted);margin:6px 0 0!important}
 @media(prefers-reduced-motion:reduce){.home-mini-progress-track span{transition:none}}
+
+/* Last opened learning activity · unobtrusive, mobile-first. */
+.study-resume{margin:0 0 13px;max-width:970px;text-align:left}
+.study-resume-link{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 13px;border:1px solid #a1d5ec;border-radius:14px;background:#edf8ff;color:#164a64;text-decoration:none;box-shadow:0 2px 9px #082c4010;transition:border-color .15s ease,background .15s ease}
+.study-resume-link:hover{background:#e1f3fd;border-color:#72b8d7}
+.study-resume-link:focus-visible{outline:3px solid #50bbed;outline-offset:3px}
+.study-resume-play{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#caecfa;color:#17668b;font-size:.92rem}
+.study-resume-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px;line-height:1.3}
+.study-resume-caption{font-size:.72rem;font-weight:650;opacity:.83}
+.study-resume-copy strong{display:block;font-size:.86rem;font-weight:800;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.study-resume-arrow{flex:none;font-size:1.55rem;line-height:1;color:inherit}
+html[data-theme="dark"] .study-resume-link{background:#183749;border-color:#356882;color:#e7f7ff;box-shadow:none}
+html[data-theme="dark"] .study-resume-link:hover{background:#20455c;border-color:#65a6c6}
+html[data-theme="dark"] .study-resume-play{background:#27576f;color:#c7efff}
+@media(min-width:700px){.study-resume{max-width:570px}.study-resume-link{padding:11px 15px}}
+@media(prefers-reduced-motion:reduce){.study-resume-link{transition:none}}
