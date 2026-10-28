@@ -108,7 +108,7 @@ function cleanRecord(raw){
 let progress;
 try{progress=cleanRecord(JSON.parse(localStorage.getItem(STORE)||'{}'));}
 catch{progress=cleanRecord({});}
-let selected=null,unit=0,oral=0,view='theory',autoTimer=null,scenarioEpoch=0;
+let selected=null,unit=0,oral=0,view='theory',scenarioEpoch=0;
 let scenarioSubmitting=false,scenarioError='';
 // Only drafts written or explicitly restored during this page visit appear in editable fields.
 // Previously saved drafts remain in localStorage until the learner chooses to restore them.
@@ -123,7 +123,6 @@ function save(){
   $('seminarSaveStatus').textContent='Αδυναμία αποθήκευσης στη συσκευή· χρησιμοποίησε αντίγραφο.';
  }
 }
-function stopAuto(){if(autoTimer!==null){clearTimeout(autoTimer);autoTimer=null;}}
 function toggleIn(arr,i){const k=arr.indexOf(i);if(k<0)arr.push(i);else arr.splice(k,1);}
 function completedCount(run){return run?Object.keys(run.responses).length:0;}
 function updateCourseProgress(){
@@ -133,7 +132,7 @@ function updateCourseProgress(){
 }
 function showHome(){
  if(scenarioSubmitting)return;
- stopAuto();selected=null;
+ selected=null;
  $('seminarHome').hidden=false;$('seminarCourse').hidden=true;
  const host=$('seminarCards');host.replaceChildren();
  for(const c of COURSES){
@@ -152,7 +151,7 @@ function showHome(){
 function openCourse(id,updateHash=true){
  if(scenarioSubmitting)return;
  const course=COURSES.find(c=>c.id===id);if(!course)return;
- stopAuto();selected=course;unit=0;
+ selected=course;unit=0;
  // Opening a course is a fresh visit: prior editable drafts require explicit restoration.
  for(let i=0;i<12;i++)visibleOralDrafts.delete(oralDraftKey(id,i));
  // Resume at the first unassessed case; reviewing assessed cases keeps their answer read-only.
@@ -167,7 +166,7 @@ function openCourse(id,updateHash=true){
 }
 function switchView(target){
  if(scenarioSubmitting&&target!=='oral')return;
- stopAuto();
+ 
  view=target;
  for(const b of document.querySelectorAll('[data-seminar-tab]')){
   const active=b.dataset.seminarTab===view;
@@ -198,8 +197,8 @@ function renderTheory(){
 }
 function renderMixed(){
  const run=current()?.mixedRun;if(!run)return;
- stopAuto();
- while(run.pos<TOTAL&&run.responses[run.pos])run.pos++;
+ 
+ // Do not advance completed questions until Next is pressed.
  const finished=run.pos===TOTAL;
  $('seminarMixedQuestion').hidden=finished;
  $('seminarMixedResults').hidden=!finished;
@@ -215,58 +214,68 @@ function renderMixed(){
  else renderWritten(item);
 }
 function renderMultiple(item){
- const run=current().mixedRun,q=MCQ[selected.id][item.unit];
+ const run=current().mixedRun,pos=run.pos,q=MCQ[selected.id][item.unit];
  $('seminarQuestionTitle').textContent=q[0];
  const host=$('seminarMCQChoices');host.replaceChildren();
  const feedback=$('seminarMCQFeedback');feedback.hidden=true;
+ function showFeedback(){
+  const saved=run.responses[pos];if(!saved)return;
+  const correct=saved.choice===0;
+  for(const label of host.querySelectorAll('.seminar-mcq-option')){
+   const input=label.querySelector('input'),value=Number(input.value);
+   input.checked=value===saved.choice;input.disabled=true;
+   label.classList.remove('is-correct','is-incorrect');
+   if(value===saved.choice)label.classList.add(correct?'is-correct':'is-incorrect');
+   else if(value===0)label.classList.add('is-correct');
+  }
+  feedback.className='seminar-mcq-feedback '+(correct?'is-correct':'is-incorrect');
+  feedback.textContent=(correct?'✓ Σωστό. ':'✗ Λάθος. Σωστή απάντηση: '+q[1]+' ')+q[5];
+  feedback.hidden=false;
+  $('seminarQuestionState').textContent=correct?
+   '✓ Σωστή απάντηση. Μελέτησε την εξήγηση και συνέχισε όταν είσαι έτοιμος.':
+   '✗ Λάθος απάντηση. Διάβασε την επεξήγηση και συνέχισε όταν είσαι έτοιμος.';
+  const next=$('seminarNextQuestion');
+  next.hidden=false;next.disabled=false;
+  next.textContent=pos===TOTAL-1?'Δες αποτελέσματα':'Επόμενη ερώτηση';
+ }
  item.order.forEach((original,j)=>{
   const label=make('label','seminar-mcq-option');
   const radio=make('input');radio.type='radio';radio.name='seminarMCQAnswer';radio.value=String(original);
   label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(65+j)+'. '+q[original+1]));
   radio.addEventListener('change',()=>{
-   if(!selected||view!=='quiz'||current().mixedRun!==run||run.responses[run.pos])return;
+   if(!selected||view!=='quiz'||current().mixedRun!==run||run.pos!==pos||run.responses[pos])return;
    const correct=original===0;
-   run.responses[run.pos]={grade:correct?'right':'needs',choice:original};
+   run.responses[pos]={grade:correct?'right':'needs',choice:original};
    const p=current(),index=item.unit;
    p.mcAnswers[index]=original;
    p.mcRight=p.mcRight.filter(n=>n!==index);
    p.mcNeeds=p.mcNeeds.filter(n=>n!==index);
    p[correct?'mcRight':'mcNeeds'].push(index);
-   save();updateCourseProgress();
-   for(const choice of host.querySelectorAll('.seminar-mcq-option')){
-    const input=choice.querySelector('input'),value=Number(input.value);input.disabled=true;
-    if(value===original)choice.classList.add(correct?'is-correct':'is-incorrect');
-    else if(value===0)choice.classList.add('is-correct');
-   }
-   feedback.className='seminar-mcq-feedback '+(correct?'is-correct':'is-incorrect');
-   feedback.textContent=(correct?'✓ Σωστό. ':'✗ Λάθος. Σωστή απάντηση: '+q[1]+' ')+q[5];
-   feedback.hidden=false;
-   $('seminarQuestionState').textContent=correct?'✓ Καταχωρίστηκε σωστά.':'✗ Καταχωρίστηκε ως λάθος.';
-   const courseId=selected.id;
-   stopAuto();
-   autoTimer=setTimeout(()=>{
-    autoTimer=null;
-    if(view==='quiz'&&selected?.id===courseId&&current().mixedRun===run)nextMixed();
-   },1350);
+   save();updateCourseProgress();showFeedback();
   });
   host.append(label);
  });
+ // Support refresh and revisiting this tab before manually pressing Next.
+ if(run.responses[pos])showFeedback();
 }
 function renderWritten(item){
+ const run=current().mixedRun,prior=run.responses[run.pos];
  const index=item.unit*4+item.prompt,u=selected.units[item.unit],p=current();
  $('seminarQuestionTitle').textContent=qPrompts[item.prompt](u[0]);
  $('seminarQuestionNotes').value=p.qNotes[index]||'';
- $('seminarQuestionNotes').readOnly=false;
+ $('seminarQuestionNotes').readOnly=!!prior;
  $('seminarQuestionSolution').textContent=u[item.prompt+1];
- $('seminarQuestionSolution').hidden=true;
- $('seminarQuizReveal').hidden=false;$('seminarQuizReveal').disabled=false;
+ $('seminarQuestionSolution').hidden=!prior;
+ $('seminarQuizReveal').hidden=!!prior;$('seminarQuizReveal').disabled=!!prior;
  $('seminarNextQuestion').disabled=false;
  $('seminarAIResult').hidden=true;
  $('seminarAIResult').className='ai-grading-result';
- $('seminarGradeAI').disabled=false;
- $('seminarGradeAI').textContent='Υποβολή αξιολόγησης';
- $('seminarNextQuestion').hidden=false;$('seminarNextQuestion').textContent='Παράλειψη (χωρίς βαθμό)';
- $('seminarQuestionState').textContent=window.EkabAIGrade?.available()?'Γράψε την απάντησή σου και πάτησε «Υποβολή αξιολόγησης».':'Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη. Η απάντησή σου διατηρείται.';
+ $('seminarGradeAI').disabled=!!prior;
+ $('seminarGradeAI').textContent=prior?'Ολοκληρώθηκε':'Υποβολή αξιολόγησης';
+ $('seminarNextQuestion').hidden=false;
+ $('seminarNextQuestion').textContent=prior?(run.pos===TOTAL-1?'Δες αποτελέσματα':'Επόμενη ερώτηση'):'Παράλειψη (χωρίς βαθμό)';
+ $('seminarQuestionState').textContent=prior?'Η απάντηση καταχωρίστηκε. Διάβασε τη λύση και πάτησε Επόμενη όταν είσαι έτοιμος.':
+  window.EkabAIGrade?.available()?'Γράψε την απάντησή σου και πάτησε «Υποβολή αξιολόγησης».':'Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη. Η απάντησή σου διατηρείται.';
 }
 function renderResults(){
  const run=current().mixedRun,items=Object.entries(run.responses);
@@ -279,7 +288,7 @@ function renderResults(){
  $('seminarMixedBreakdown').textContent='Πολλαπλής επιλογής: '+mcCorrect+'/7 · Ανάπτυξης: '+writtenCorrect+'/3';
 }
 function nextMixed(){
- stopAuto();
+ 
  const run=current()?.mixedRun;if(!run)return;
  run.pos=Math.min(TOTAL,run.pos+1);
  save();renderMixed();
@@ -489,9 +498,13 @@ function bind(){
  $('seminarPrevUnit').addEventListener('click',()=>{unit=Math.max(0,unit-1);renderTheory();});
  $('seminarNextUnit').addEventListener('click',()=>{unit=Math.min(11,unit+1);renderTheory();});
  $('seminarNextQuestion').addEventListener('click',()=>{
-  const run=current().mixedRun,item=run.items[run.pos];
-  if(!item||item.type!=='written')return;
-  if(!run.responses[run.pos]){run.responses[run.pos]={grade:'skipped'};save();updateCourseProgress();}
+  const run=current()?.mixedRun,item=run?.items[run.pos];
+  if(!item)return;
+  if(item.type==='multiple'){
+   if(!run.responses[run.pos])return;
+  }else if(!run.responses[run.pos]){
+   run.responses[run.pos]={grade:'skipped'};save();updateCourseProgress();
+  }
   nextMixed();
  });
  $('seminarQuestionNotes').addEventListener('input',event=>{
@@ -568,7 +581,7 @@ function bind(){
    const data=JSON.parse(await file.text());
    if(data?.type!=='ekab-seminar-prep'||data.version!==1||!data.progress||typeof data.progress!=='object')throw Error('Μη αναγνωρισμένο αντίγραφο σεμιναρίων.');
    if(!confirm('Να αντικατασταθεί ΜΟΝΟ η πρόοδος σεμιναρίων αυτής της συσκευής; ΕΟΠΠΕΠ και ΣΑΕΚ δεν επηρεάζονται.'))return;
-   stopAuto();scenarioError='';visibleOralDrafts.clear();progress=cleanRecord(data.progress);save();
+   scenarioError='';visibleOralDrafts.clear();progress=cleanRecord(data.progress);save();
    if(selected)switchView(view);else showHome();
    $('seminarSaveStatus').textContent='Το αντίγραφο προετοιμασίας σεμιναρίων εισήχθη.';
   }catch(error){$('seminarSaveStatus').textContent=error.message||'Αποτυχία εισαγωγής.';}

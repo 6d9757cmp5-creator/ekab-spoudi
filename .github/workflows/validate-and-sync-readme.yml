@@ -89,7 +89,10 @@ jobs:
           assert(script.includes("section:'seminar_case'"));
           assert(script.includes("current().scenarioGrades[caseId]"));
           assert(!script.includes("seminarMarkOral"));
-          assert(script.includes("autoTimer=setTimeout("));
+          assert(!script.includes("autoTimer=setTimeout("));
+          assert(script.includes("if(run.responses[pos])showFeedback();"));
+          assert(script.includes("if(!run.responses[run.pos])return;"));
+          assert(script.includes("next.textContent=pos===TOTAL-1?'Δες αποτελέσματα':'Επόμενη ερώτηση'"));
           assert(script.includes("p[correct?'mcRight':'mcNeeds'].push(index)"));
           assert(css.includes('.seminar-mcq-option.is-correct'));
           assert(css.includes('.seminar-mcq-option.is-incorrect'));
