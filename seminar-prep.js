@@ -108,6 +108,10 @@ let progress;
 try{progress=cleanRecord(JSON.parse(localStorage.getItem(STORE)||'{}'));}
 catch{progress=cleanRecord({});}
 let selected=null,unit=0,oral=0,view='theory',autoTimer=null,scenarioEpoch=0;
+// Only drafts written or explicitly restored during this page visit appear in editable fields.
+// Previously saved drafts remain in localStorage until the learner chooses to restore them.
+const visibleOralDrafts=new Set();
+const oralDraftKey=(courseId,index)=>courseId+':'+index;
 const current=()=>selected?progress[selected.id]:null;
 function save(){
  try{
@@ -144,7 +148,12 @@ function showHome(){
 }
 function openCourse(id,updateHash=true){
  const course=COURSES.find(c=>c.id===id);if(!course)return;
- stopAuto();selected=course;unit=0;oral=0;view='theory';
+ stopAuto();selected=course;unit=0;
+ // Opening a course is a fresh visit: prior editable drafts require explicit restoration.
+ for(let i=0;i<12;i++)visibleOralDrafts.delete(oralDraftKey(id,i));
+ // Resume at the first unassessed case; reviewing assessed cases keeps their answer read-only.
+ oral=Array.from({length:12},(_,i)=>i).find(i=>!progress[id].scenarioGrades[i])??11;
+ view='theory';
  $('seminarHome').hidden=true;$('seminarCourse').hidden=false;
  $('seminarCourseTitle').textContent=course.name;
  $('seminarCourseSub').textContent=course.subtitle;
@@ -301,6 +310,7 @@ function restartOralCycle(){
  p.scenarioHistory.push({completed:Object.keys(p.scenarioGrades).length,grades:Object.values(p.scenarioGrades).map(x=>x.verdict)});
  p.scenarioHistory=p.scenarioHistory.slice(-20);
  scenarioEpoch++;
+ for(let i=0;i<12;i++)visibleOralDrafts.delete(oralDraftKey(selected.id,i));
  p.scenarioGrades={};p.scenarioFeedback={};p.oralNotes={};p.oral=[];
  oral=0;save();updateCourseProgress();renderOral();
 }
@@ -309,8 +319,13 @@ function renderOral(){
  const restart=$('seminarRestartOral');if(restart)restart.hidden=false;
  $('seminarOralCounter').textContent='Κλινικό σενάριο '+(oral+1)+' / 12';
  $('seminarOralTitle').textContent='Περιέγραψε τις ενέργειές σου, με σωστή σειρά: '+u[0];
- $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
+ $('seminarOralCase').textContent=u[4];
+ const savedDraft=p.oralNotes[oral]||'',isVisible=!!prior||visibleOralDrafts.has(oralDraftKey(selected.id,oral));
+ $('seminarOralNotes').value=isVisible?savedDraft:'';
  $('seminarOralNotes').readOnly=!!prior;
+ // Never prefill an editable answer with a draft from an earlier visit.
+ const restoreDraft=$('seminarRestoreOralDraft');
+ restoreDraft.hidden=!!prior||!savedDraft||isVisible;
  $('seminarOralHelp').textContent=u[2];$('seminarOralHelp').hidden=true;
  $('seminarOralReveal').hidden=!!prior;$('seminarOralReveal').disabled=!!prior;
  $('seminarScenarioSubmit').hidden=!!prior;
@@ -386,8 +401,17 @@ function bind(){
  });
  $('seminarPrevOral').addEventListener('click',()=>{oral=Math.max(0,oral-1);renderOral();});
  $('seminarNextOral').addEventListener('click',()=>{oral=Math.min(11,oral+1);renderOral();});
+ $('seminarRestoreOralDraft').addEventListener('click',()=>{
+  const p=current();if(!p||p.scenarioGrades[oral])return;
+  visibleOralDrafts.add(oralDraftKey(selected.id,oral));
+  $('seminarOralNotes').value=p.oralNotes[oral]||'';
+  $('seminarRestoreOralDraft').hidden=true;
+  $('seminarOralNotes').focus();
+ });
  $('seminarOralNotes').addEventListener('input',e=>{
-  const p=current();if(p.scenarioGrades[oral])return;
+  const p=current();if(!p||p.scenarioGrades[oral])return;
+  visibleOralDrafts.add(oralDraftKey(selected.id,oral));
+  $('seminarRestoreOralDraft').hidden=true;
   p.oralNotes[oral]=e.target.value.slice(0,3500);save();
   $('seminarScenarioStatus').textContent='Η απάντηση αποθηκεύτηκε. Πάτησε «Υποβολή αξιολόγησης» όταν είσαι έτοιμος.';
  });
@@ -462,7 +486,7 @@ function bind(){
    const data=JSON.parse(await file.text());
    if(data?.type!=='ekab-seminar-prep'||data.version!==1||!data.progress||typeof data.progress!=='object')throw Error('Μη αναγνωρισμένο αντίγραφο σεμιναρίων.');
    if(!confirm('Να αντικατασταθεί ΜΟΝΟ η πρόοδος σεμιναρίων αυτής της συσκευής; ΕΟΠΠΕΠ και ΣΑΕΚ δεν επηρεάζονται.'))return;
-   stopAuto();progress=cleanRecord(data.progress);save();
+   stopAuto();visibleOralDrafts.clear();progress=cleanRecord(data.progress);save();
    if(selected)switchView(view);else showHome();
    $('seminarSaveStatus').textContent='Το αντίγραφο προετοιμασίας σεμιναρίων εισήχθη.';
   }catch(error){$('seminarSaveStatus').textContent=error.message||'Αποτυχία εισαγωγής.';}
