@@ -1,0 +1,17 @@
+name: Mentor library verify
+on:
+  pull_request:
+    paths:
+      - 'mentor/library/**'
+      - '.github/workflows/mentor-library-verify.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test mentor/library/retrieval.test.mjs
+      - run: node -e "const c=require('./mentor/library/catalog.json'); if(c.sources.length<1 || c.sources.some(s=>s.fulltext_ingested!==false)) process.exit(1); console.log('Catalog validated:',c.sources.length)"
