@@ -98,6 +98,7 @@ function cleanRecord(raw){
    ).map(([key,val])=>[key,{verdict:val.verdict,criticalError:!!val.criticalError}])),
    mcAnswers,mcRight:indices(p.mcRight,12),mcNeeds:indices(p.mcNeeds,12),
    scenarioHistory:Array.isArray(p.scenarioHistory)?p.scenarioHistory.slice(-20):[],
+   retryIndices:indices(p.retryIndices,12),
    mixedRun:validRun(p.mixedRun)
   };
   obj[c.id].needs=obj[c.id].needs.filter(i=>!obj[c.id].right.includes(i));
@@ -155,7 +156,8 @@ function openCourse(id,updateHash=true){
  // Opening a course is a fresh visit: prior editable drafts require explicit restoration.
  for(let i=0;i<12;i++)visibleOralDrafts.delete(oralDraftKey(id,i));
  // Resume at the first unassessed case; reviewing assessed cases keeps their answer read-only.
- oral=Array.from({length:12},(_,i)=>i).find(i=>!progress[id].scenarioGrades[i])??11;
+ oral=progress[id].retryIndices.find(i=>!progress[id].scenarioGrades[i])??
+  (Array.from({length:12},(_,i)=>i).find(i=>!progress[id].scenarioGrades[i])??11);
  view='theory';
  $('seminarHome').hidden=true;$('seminarCourse').hidden=false;
  $('seminarCourseTitle').textContent=course.name;
@@ -315,17 +317,44 @@ function restartOralCycle(){
  p.scenarioHistory=p.scenarioHistory.slice(-20);
  scenarioEpoch++;scenarioError='';
  for(let i=0;i<12;i++)visibleOralDrafts.delete(oralDraftKey(selected.id,i));
- p.scenarioGrades={};p.scenarioFeedback={};p.oralNotes={};p.oral=[];
+ p.scenarioGrades={};p.scenarioFeedback={};p.oralNotes={};p.oral=[];p.retryIndices=[];
  oral=0;save();updateCourseProgress();renderOral();
+}
+const activeOralIndices=p=>p.retryIndices.length?p.retryIndices:Array.from({length:12},(_,i)=>i);
+function startIncorrectRetry(){
+ if(!selected||scenarioSubmitting)return;
+ const p=current();
+ if(p.retryIndices.length||!selected.units.every((_,i)=>!!p.scenarioGrades[i]))return;
+ const incorrect=Array.from({length:12},(_,i)=>i).filter(i=>p.scenarioGrades[i].verdict==='incorrect');
+ if(!incorrect.length)return;
+ if(!confirm('Να επαναλάβεις '+incorrect.length+' λανθασμένα σενάρια; Οι υπόλοιπες βαθμολογίες δεν θα αλλάξουν.'))return;
+ p.scenarioHistory.push({kind:'incorrect_retry',at:new Date().toISOString(),before:incorrect.map(index=>({
+  index,answer:p.oralNotes[index]||'',grade:{...p.scenarioGrades[index]},
+  feedback:p.scenarioFeedback[index]?{...p.scenarioFeedback[index]}:null
+ }))});
+ p.scenarioHistory=p.scenarioHistory.slice(-20);p.retryIndices=incorrect;
+ scenarioEpoch++;scenarioError='';
+ for(const i of incorrect){
+  delete p.scenarioGrades[i];delete p.scenarioFeedback[i];delete p.oralNotes[i];
+  visibleOralDrafts.delete(oralDraftKey(selected.id,i));
+ }
+ oral=incorrect[0];save();updateCourseProgress();renderOral();
+}
+function finishIncorrectRetry(p){
+ if(!p.retryIndices.length||!p.retryIndices.every(i=>!!p.scenarioGrades[i]))return;
+ const attempt=[...p.scenarioHistory].reverse().find(x=>x?.kind==='incorrect_retry'&&!x.after);
+ if(attempt)attempt.after=p.retryIndices.map(index=>({index,verdict:p.scenarioGrades[index].verdict}));
+ p.retryIndices=[];save();updateCourseProgress();
 }
 const oralAnswerReady=(p,i)=>!!p.scenarioGrades[i]||
  (visibleOralDrafts.has(oralDraftKey(selected.id,i))&&(p.oralNotes[i]||'').trim().length>=20);
 function renderOralDraftProgress(){
- const p=current(),ready=selected.units.filter((_,i)=>oralAnswerReady(p,i)).length;
- $('seminarDraftProgress').textContent='Απαντημένα: '+ready+'/12 · Μπορείς να διορθώσεις τις απαντήσεις πριν από την τελική υποβολή.';
+ const p=current(),active=activeOralIndices(p),ready=active.filter(i=>oralAnswerReady(p,i)).length;
+ $('seminarDraftProgress').textContent='Απαντημένα: '+ready+'/'+active.length+(p.retryIndices.length?' · Επανάληψη λανθασμένων σεναρίων.':' · Μπορείς να διορθώσεις τις απαντήσεις πριν από την τελική υποβολή.');
  const submit=$('seminarScenarioSubmit');
- submit.disabled=scenarioSubmitting||ready!==12;
+ submit.disabled=scenarioSubmitting||ready!==active.length;
  submit.textContent=scenarioSubmitting?'Αξιολογούνται τα σενάρια…':
+  p.retryIndices.length?'Υποβολή επανάληψης ('+active.length+' σενάρια)':
   Object.keys(p.scenarioGrades).length?'Συνέχεια τελικής αξιολόγησης':'Τελική υποβολή και αξιολόγηση (12 σενάρια)';
 }
 function renderOralResults(){
@@ -358,16 +387,38 @@ function renderOralResults(){
  $('seminarOralSummary').textContent=
   '✓ '+counts.correct+' σωστά · ✗ '+counts.incorrect+' λάθη · '+counts.partial+' μερικώς σωστά · '+counts.uncertain+' για επανέλεγχο';
  $('seminarScenarioStatus').textContent='';
+ const retry=$('seminarRetryIncorrect');retry.hidden=!counts.incorrect;
+ retry.textContent='Επανάληψη '+counts.incorrect+' λανθασμένων σεναρίων';
+ const archive=$('seminarRetryHistoryList');archive.replaceChildren();
+ const history=p.scenarioHistory.filter(x=>x?.kind==='incorrect_retry').slice(-10).reverse();
+ $('seminarRetryHistory').hidden=history.length===0;
+ for(const attempt of history){
+  const details=make('details','seminar-retry-history-item');
+  details.append(make('summary',null,'Επανάληψη · '+(attempt.at||'').slice(0,10)));
+  for(const before of (Array.isArray(attempt.before)?attempt.before:[]).slice(0,12)){
+   if(!Number.isInteger(before.index)||before.index<0||before.index>=12)continue;
+   const after=attempt.after?.find(x=>x.index===before.index);
+   const entry=make('div','seminar-retry-archive');
+   entry.append(make('strong',null,(before.index+1)+'. '+selected.units[before.index][0]+
+    ' · Πριν: '+(before.grade?.verdict||'χωρίς βαθμό')+' · Μετά: '+(after?.verdict||'εκκρεμεί')));
+   if(before.answer)entry.append(make('p',null,'Προηγούμενη απάντηση: '+before.answer));
+   if(before.feedback?.explanation)entry.append(make('p',null,'Παλαιότερη αξιολόγηση: '+before.feedback.explanation));
+   details.append(entry);
+  }
+  archive.append(details);
+ }
 }
 function renderOral(){
  if(!selected)return;
- const p=current(),finished=selected.units.every((_,i)=>Boolean(p.scenarioGrades[i]));
+ const p=current();finishIncorrectRetry(p);
+ const active=activeOralIndices(p),finished=selected.units.every((_,i)=>Boolean(p.scenarioGrades[i]));
  $('seminarRestartOral').hidden=false;
  $('seminarRestartOral').disabled=scenarioSubmitting;
  if(finished){renderOralResults();return;}
  $('seminarOralQuestion').hidden=false;$('seminarOralResults').hidden=true;
- const u=selected.units[oral],prior=p.scenarioGrades[oral];
- $('seminarOralCounter').textContent='Κλινικό σενάριο '+(oral+1)+' / 12';
+ if(!active.includes(oral))oral=active[0];
+ const step=active.indexOf(oral),u=selected.units[oral],prior=p.scenarioGrades[oral];
+ $('seminarOralCounter').textContent=(p.retryIndices.length?'Επανάληψη ':'Κλινικό σενάριο ')+(step+1)+' / '+active.length+(p.retryIndices.length?' · Αρχικό '+(oral+1):'');
  $('seminarOralTitle').textContent='Περιέγραψε τις ενέργειές σου, με σωστή σειρά: '+u[0];
  $('seminarOralCase').textContent=u[4];
  const savedDraft=p.oralNotes[oral]||'',isVisible=!!prior||visibleOralDrafts.has(oralDraftKey(selected.id,oral));
@@ -379,17 +430,17 @@ function renderOral(){
  $('seminarScenarioStatus').textContent=scenarioError||(prior?
   'Η απάντηση καταχωρίστηκε. Η αξιολόγηση θα εμφανιστεί συγκεντρωτικά όταν ολοκληρωθούν και τα 12.':
   'Συμπλήρωσε το σενάριο και προχώρησε στο επόμενο.');
- $('seminarPrevOral').disabled=scenarioSubmitting||oral===0;
- $('seminarNextOral').disabled=scenarioSubmitting||oral===11;
- $('seminarNextOral').textContent=oral===11?'Τελευταίο σενάριο':'Επόμενο';
+ $('seminarPrevOral').disabled=scenarioSubmitting||step===0;
+ $('seminarNextOral').disabled=scenarioSubmitting||step===active.length-1;
+ $('seminarNextOral').textContent=step===active.length-1?'Τελευταίο σενάριο':'Επόμενο';
  renderOralDraftProgress();
 }
 async function submitOralBatch(){
  if(!selected||scenarioSubmitting)return;
  const p=current(),courseId=selected.id,epoch=scenarioEpoch;
- const missing=selected.units.findIndex((_,i)=>!oralAnswerReady(p,i));
+ const active=activeOralIndices(p),missing=active.find(i=>!oralAnswerReady(p,i))??-1;
  if(missing!==-1){
-  oral=missing;renderOral();$('seminarScenarioStatus').textContent='Χρειάζονται απαντήσεις και στα 12 σενάρια (τουλάχιστον 20 χαρακτήρες το καθένα).';
+  oral=missing;renderOral();$('seminarScenarioStatus').textContent='Χρειάζονται απαντήσεις σε όλα τα σενάρια αυτής της προσπάθειας (τουλάχιστον 20 χαρακτήρες το καθένα).';
   return;
  }
  const ai=window.EkabAIGrade;
@@ -397,17 +448,17 @@ async function submitOralBatch(){
   scenarioError='Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη. Όλες οι απαντήσεις σου παραμένουν αποθηκευμένες.';
   renderOral();return;
  }
- if(!confirm('Να υποβληθούν τώρα όλα τα σενάρια; Οι απαντήσεις που αξιολογούνται κλειδώνουν. Οι βαθμολογίες θα εμφανιστούν όλες μαζί στο τέλος.'))return;
+ if(!confirm('Να υποβληθούν τώρα τα σενάρια της προσπάθειας; Οι απαντήσεις που αξιολογούνται κλειδώνουν. Οι βαθμολογίες θα εμφανιστούν όλες μαζί στο τέλος.'))return;
  scenarioSubmitting=true;scenarioError='';
  $('seminarOralNotes').readOnly=true;
  $('seminarPrevOral').disabled=true;$('seminarNextOral').disabled=true;
  $('seminarRestartOral').disabled=true;
  renderOralDraftProgress();
  try{
-  for(let caseId=0;caseId<12;caseId++){
+  for(const caseId of active){
    // A previous interrupted run can resume without spending requests on already graded cases.
    if(p.scenarioGrades[caseId])continue;
-   $('seminarScenarioStatus').textContent='Αξιολογείται το σενάριο '+(caseId+1)+'/12. Τα αποτελέσματα θα εμφανιστούν μαζί στο τέλος.';
+   $('seminarScenarioStatus').textContent='Αξιολογείται το σενάριο '+(active.indexOf(caseId)+1)+'/'+active.length+'. Τα αποτελέσματα θα εμφανιστούν μαζί στο τέλος.';
    const answer=(p.oralNotes[caseId]||'').trim();
    const result=await ai.evaluate({section:'seminar_case',courseId,caseIndex:caseId,answer});
    if(scenarioEpoch!==epoch||!selected||selected.id!==courseId)return;
@@ -483,8 +534,8 @@ function bind(){
   $('seminarQuestionSolution').hidden=false;
   gradeWritten('skipped');
  });
- $('seminarPrevOral').addEventListener('click',()=>{if(scenarioSubmitting)return;oral=Math.max(0,oral-1);renderOral();});
- $('seminarNextOral').addEventListener('click',()=>{if(scenarioSubmitting)return;oral=Math.min(11,oral+1);renderOral();});
+ $('seminarPrevOral').addEventListener('click',()=>{if(scenarioSubmitting)return;const a=activeOralIndices(current()),i=a.indexOf(oral);oral=a[Math.max(0,i-1)]??oral;renderOral();});
+ $('seminarNextOral').addEventListener('click',()=>{if(scenarioSubmitting)return;const a=activeOralIndices(current()),i=a.indexOf(oral);oral=a[Math.min(a.length-1,i+1)]??oral;renderOral();});
  $('seminarRestoreOralDraft').addEventListener('click',()=>{
   const p=current();if(!p||scenarioSubmitting||p.scenarioGrades[oral])return;
   visibleOralDrafts.add(oralDraftKey(selected.id,oral));
@@ -502,6 +553,7 @@ function bind(){
   renderOralDraftProgress();
  });
  $('seminarScenarioSubmit').addEventListener('click',submitOralBatch);
+ $('seminarRetryIncorrect').addEventListener('click',startIncorrectRetry);
  $('seminarExport').addEventListener('click',()=>{
   const payload={type:'ekab-seminar-prep',version:1,exportedAt:new Date().toISOString(),progress};
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
