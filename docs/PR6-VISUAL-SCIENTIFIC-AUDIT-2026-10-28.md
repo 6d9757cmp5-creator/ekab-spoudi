@@ -206,3 +206,5 @@
 - Στο code head `09b4761` τα τρία διαγράμματα ανασχεδιάστηκαν: διακριτά σχήματα αεραγωγού/πνευμόνων/καρδιάς για ABC· εγκέφαλος/ολόσωμη εκτίμηση/ασθενής για D/E· PPE/monitoring/επανεκτίμηση. Τα SVG δεν απεικονίζουν κλινικές τεχνικές ή πλήρη αλληλουχία αντιμετώπισης.
 - Πηγή: Resuscitation Council UK, ABCDE Approach (updated July 2024), για ονομασία των A–E, επανεκτίμηση και έγκαιρη κλήση βοήθειας. Πρόκειται για βρετανική εκπαιδευτική πηγή και όχι ελληνικό τοπικό πρωτόκολλο. `clinicalReview=pending`.
 - Γενικό EMS.gov source count μετά τη διόρθωση: 189/649 συνολικά, 107/137 στο Δ΄. Ανεξάρτητη επιστημονική και browser οπτική αξιολόγηση εκκρεμούν.
+
+- Επανεπαλήθευση code head `6ef5be1e7b976cb88344a33e417a11522bd1b672` σε καθαρό clone: SVG 642/0 errors, A/B arrows 295/0 problems, integration 247 chapters/649 placements/0 missing local/0 errors, static media 48 HTML/CSS/21 refs/0 missing. Δεν ελέγχεται εδώ browser rendering ή κλινική/επιστημονική εγκυρότητα.
