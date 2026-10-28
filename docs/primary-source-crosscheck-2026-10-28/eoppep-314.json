@@ -568,7 +568,27 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "targeted_full_stored_answer_official_archival_question_and_scientific_sources",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "comparedClaims": [
+          "Η εκφώνηση «Να αναφέρετε τις λειτουργίες του σπλήνα» συμφωνεί ακριβώς με το επίσημα αναρτημένο στον ΕΟΠΠΕΠ PDF παλαιού τύπου, Ομάδα Α, ερώτηση 13, τυπωμένη σελίδα 4/18.",
+          "Αναγνώστηκε ολόκληρη η αποθηκευμένη εκπαιδευτική απάντηση (192 χαρακτήρες): διήθηση αίματος, απομάκρυνση γηρασμένων ερυθροκυττάρων και μικροοργανισμών, ανοσολογική απόκριση μέσω λεμφοκυττάρων και αποθήκευση μέρους των αιμοπεταλίων.",
+          "Οι λειτουργίες διήθησης αίματος, μακροφάγων, απομάκρυνσης γηρασμένων ερυθροκυττάρων και ανοσολογικής απόκρισης συμφωνούν με OpenStax A&P §21.1 και NCBI Physiology, Spleen.",
+          "Η αποθήκευση/κατακράτηση μέρους των αιμοπεταλίων τεκμηριώνεται από NCBI Physiology, Spleen."
+        ],
+        "sources": [
+          "https://www.eoppep.gr/index.php/el/pistopoiiseis-eksetaseis/apofoitoi-saek/themata-exetaseon-saek/%CE%B8%CE%AD%CE%BC%CE%B1%CF%84%CE%B1-%CE%B5%CE%BE%CE%B5%CF%84%CE%AC%CF%83%CE%B5%CF%89%CE%BD-%CF%80%CE%B9%CF%83%CF%84%CE%BF%CF%80%CE%BF%CE%AF%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%81%CF%87%CE%B9%CE%BA%CE%AE%CF%82-%CE%B5%CF%80%CE%B1%CE%B3%CE%B3%CE%B5%CE%BB%CE%BC%CE%B1%CF%84%CE%B9%CE%BA%CE%AE%CF%82-%CE%BD-2009-1992-%CE%BA%CE%B1%CF%84%CE%AC%CE%BB%CE%BF%CE%B3%CE%BF%CF%82-%CE%B5%CF%81%CF%89%CF%84%CE%AE%CF%83%CE%B5%CF%89%CE%BD-%CF%80%CE%B1%CE%BB%CE%B1%CE%B9%CE%BF%CF%8D-%CF%84%CF%8D%CF%80%CE%BF%CF%85?download=207%3Adiasostis-pliroma-asthenoforoy",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-1-anatomy-of-the-lymphatic-and-immune-systems",
+          "https://www.ncbi.nlm.nih.gov/books/NBK537307/"
+        ],
+        "finding": "Η πλήρης αποθηκευμένη εκπαιδευτική απάντηση συμφωνεί στα τέσσερα δηλωμένα σημεία με OpenStax και NCBI. Η εκφώνηση ταυτίζεται με την επίσημη ιστορική ανάρτηση του ΕΟΠΠΕΠ (παλαιού τύπου), όχι κατ' ανάγκη με τη νεότερη ισχύουσα τράπεζα. Δεν εντοπίστηκε αντίφαση στα συγκεκριμένα σημεία.",
+        "limits": "Η επίσημη σελίδα αναφέρει ρητά «κατάλογος ερωτήσεων παλαιού τύπου». Δεν τεκμηριώθηκε ότι είναι η τρέχουσα τράπεζα ούτε ότι υπάρχει επίσημο κλειδί απαντήσεων. Απαιτείται δεύτερος ανεξάρτητος έλεγχος μετά την ολοκλήρωση 561 πρώτων ελέγχων. Δεν άλλαξε η παραγωγική απάντηση.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-014",
