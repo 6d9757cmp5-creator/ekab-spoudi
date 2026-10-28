@@ -66,6 +66,12 @@ test('429 switches once to free-only fallback with zero price constraint',async(
  };
  const result=await invoke(answer,'fallback');assert.equal(result.status,200);assert.equal(result.body.provider,'openrouter');assert.equal(calls,2);
 }));
+test('unsupported pulse requirement in BLS falls back instead of misgrading',async()=>setup(async()=>{
+ process.env.CLOUDFLARE_API_TOKEN='test-key';process.env.CLOUDFLARE_ACCOUNT_ID='a'.repeat(32);process.env.CLOUDFLARE_FREE_PLAN_CONFIRMED='true';let calls=0;
+ globalThis.fetch=async()=>{calls++;return response(calls===1?{...grade,verdict:'partial',missingPoints:['Έλεγχος παλμών'],explanation:'Λείπει ο έλεγχος παλμών.'}:grade);};
+ const result=await invoke({section:'seminar',courseId:'bls',questionIndex:7,answer:'Καλώ βοήθεια και ελέγχω την αναπνοή.'},'pulse-guard');
+ assert.equal(result.status,200);assert.equal(result.body.provider,'openrouter');assert.equal(result.body.verdict,'correct');assert.equal(calls,2);
+}));
 test('all unavailable never returns fabricated grade or calls paid OpenAI',async()=>setup(async()=>{
  let calls=0;globalThis.fetch=async url=>{assert.ok(!url.includes('api.openai.com'));calls++;return {ok:false,status:429};};
  const result=await invoke(answer,'exhausted');assert.equal(result.status,503);assert.equal(result.body.verdict,undefined);assert.equal(calls,1);
