@@ -38,7 +38,7 @@ function privateRows(){
  for(const [qid,entry] of Object.entries(questions)){
   if(!/^EOP-[AB]-\d{3}$/.test(qid)||!entry||typeof entry!=='object')continue;
   const label='ΕΟΠΠΕΠ · '+(qid[4]==='A'?'Ομάδα Α':'Ομάδα Β')+' · Ερώτηση '+Number(qid.slice(6));
-  for(const [field,title] of [['sosNotes','Τα SOS μου'],['readerNotes','Σημειώσεις και απορίες']]){
+  for(const [field,title] of [['sosNotes','Τα SOS μου'],['readerNotes','Σημειώσεις και απορίες'],['draft','Γραπτή απάντηση εξάσκησης']]){
    const body=entry[field];
    if(typeof body!=='string'||!body.trim())continue;
    rows.push({id:'q:'+qid+':'+field,kind:'source',title:title+' — '+label,
