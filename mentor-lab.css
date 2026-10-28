@@ -65,3 +65,34 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
  .hero{background:linear-gradient(120deg,#124159,#155b74)}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Foundation v0.2: isolated learning workspaces. */
+.module-select{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:17px;margin:12px 0 22px}
+.module-select .eyebrow{margin-bottom:11px}
+.mode-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mode-choice{border:1px solid var(--border);border-radius:11px;background:var(--surface2);color:var(--ink);padding:13px 10px;min-height:54px;font-weight:750;line-height:1.3}
+.mode-choice[aria-pressed="true"]{background:#125e78;color:#fff;border-color:#298ead;box-shadow:0 2px 7px #09364d25}
+.mode-choice:hover{border-color:var(--brand2)}
+.people-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:11px;margin:18px 0}
+.people-grid:empty{display:none}
+.patient-card{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:14px}
+.patient-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.patient-heading strong{font-size:.98rem}.patient-card p{font-size:.82rem;color:var(--muted);margin:9px 0 2px}
+.patient-tag{white-space:nowrap;font-size:.7rem;border-radius:40px;padding:3px 8px;background:#e4edf1;color:#3a5c69;font-weight:750}
+.patient-tag.noted{background:#cceee0;color:#135a45}
+.marked-tag{margin-left:auto;font-weight:800;color:var(--positive)}
+.device-placeholder{border:2px dashed var(--border);background:var(--surface2);border-radius:15px;padding:20px;min-height:175px;display:grid;justify-items:center;align-content:center;gap:6px;margin:18px 0}
+.device-symbol{font-size:3rem;line-height:1.4}.device-title{font-size:1.07rem}.device-subtitle{font-size:.77rem;color:var(--muted);text-align:center}
+.activity-done{margin-top:23px}.activity-done p{color:var(--muted);font-size:.9rem}
+.stats-secondary{margin-top:0}.stats-secondary strong{font-size:1.55rem}
+@media(max-width:640px){
+ .module-select{padding:12px}
+ .mode-buttons{grid-template-columns:1fr}
+ .mode-choice{text-align:left;padding:10px 15px;min-height:43px}
+ .people-grid{grid-template-columns:1fr}
+}
+@media(prefers-color-scheme:dark){
+ .mode-choice[aria-pressed="true"]{background:#1e7899}
+ .patient-tag{background:#284856;color:#d4e8f0}
+ .patient-tag.noted{background:#1d533e;color:#c9f4e0}
+}
