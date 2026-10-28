@@ -35,9 +35,13 @@ jobs:
                           print('ITEM_COUNT',len(data) if hasattr(data,'__len__') else '?')
                           if isinstance(data,list) and data:
                               print('SAMPLE_KEYS',sorted(data[0].keys()))
-                              for key in ('latitude','longtitude','longitude','availability','isActive','status','name','city','description','accessHours','hours','openingHours'):
+                              for key in ('latitude','longtitude','longitude','availability','functional','public','twentyFourSeven','workingHours','address','position'):
                                   if key in data[0]:
                                       v=data[0][key]
-                                      print('FIELD',key,'TYPE',type(v).__name__,'EXAMPLE',str(v)[:90] if key not in ('name','description') else '[redacted]')
+                                      print('FIELD',key,'TYPE',type(v).__name__,'EXAMPLE',str(v)[:90] if key not in ('address','position') else '[redacted]')
               except Exception as exc:print(method,'ERROR',repr(exc))
+                          from collections import Counter
+                          print('STATE_COUNTS',Counter((str(x.get('availability')),str(x.get('functional')),str(x.get('public'))) for x in data))
+                          print('WORKING_HOURS_COUNT',sum(bool(x.get('workingHours')) for x in data))
+                          print('TWENTY_FOUR_SEVEN_COUNT',sum(bool(x.get('twentyFourSeven')) for x in data))
           PY
