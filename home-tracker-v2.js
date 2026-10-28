@@ -8,7 +8,8 @@ function reset(kind,id,label){
  try{
   if(kind==='seminar'){const data=get(SEM);if(!data[id])return;delete data[id];localStorage.setItem(SEM,JSON.stringify(data))}
   else if(kind==='saek'){for(const key of Object.keys(localStorage)){if(/^ekab\.saek\.read\.v1\.\d{2}\.\d{1,2}$/.test(key))localStorage.removeItem(key)}}
-  else if(kind==='eoppep'){localStorage.removeItem(EOP)}\n  else return;
+  else if(kind==='eoppep'){localStorage.removeItem(EOP)}
+  else return;
   notify();
  }catch(e){window.alert('Δεν ήταν δυνατή η επαναφορά. Η πρόοδος μπορεί να μην έχει αλλάξει.')}
 }
