@@ -48,7 +48,7 @@ for(const [key,a] of Object.entries(assets)){
  if(!originalAllowed&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
  if(a.localPath){
   if(!/^assets\/education\/[a-z0-9-]+\.svg$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
-  else try{const bytes=await readFile(a.localPath);if(createHash('sha256').update(bytes).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
+  else try{const bytes=await readFile(a.localPath);const canonical=Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'),'utf8');if(createHash('sha256').update(canonical).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
  }
  if(!allowedLicenses.has(a.license))addError('Άγνωστη άδεια εικόνας '+key+': '+a.license);
  if(![...chosen.values()].some(p=>p.includes(key)))warnings.push('Πηγή χωρίς χρήση '+key);
