@@ -86,7 +86,25 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "targeted_derived_answer_highlights_comparison",
+        "derivedFrom": "eoppep-sos.json (not full original answer)",
+        "derivedSourceBlobSha": "1de7e21dc68f40e6c046700b41da8f98747e9ef2",
+        "comparedClaims": [
+          "Πνευμονικός αερισμός: μετακίνηση αέρα προς και από τους πνεύμονες",
+          "Εξωτερική αναπνοή: ανταλλαγή αερίων κυψελίδων με πνευμονικά τριχοειδή· εσωτερική αναπνοή: ανταλλαγή με ιστούς",
+          "Διάχυση οξυγόνου και διοξειδίου του άνθρακα καθοδηγούμενη από διαφορές μερικών πιέσεων"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+        ],
+        "finding": "Τα συγκεκριμένα αναφερόμενα αποσπάσματα συμφωνούν με τις στοχευμένες ανατομικές και φυσιολογικές βιβλιογραφικές παραπομπές. Δεν αποδίδεται πλήρης έγκριση.",
+        "limits": "Ελέγχθηκαν μόνο αποσπάσματα του eoppep-sos.json· όχι η πλήρης πρωτότυπη αποθηκευμένη απάντηση του official_questions.json ούτε αντιστοιχία εκφώνησης με το επίσημο PDF ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-005",
@@ -100,7 +118,25 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "targeted_derived_answer_highlights_comparison",
+        "derivedFrom": "eoppep-sos.json (not full original answer)",
+        "derivedSourceBlobSha": "1de7e21dc68f40e6c046700b41da8f98747e9ef2",
+        "comparedClaims": [
+          "Σπλαχνικός υπεζωκότας καλύπτει τον πνεύμονα, τοιχωματικός επενδύει την υπεζωκοτική κοιλότητα/θωρακικό τοίχωμα",
+          "Λεπτή στιβάδα υπεζωκοτικού υγρού μειώνει την τριβή",
+          "Υποατμοσφαιρική ενδοϋπεζωκοτική πίεση συντελεί στη φυσιολογική έκπτυξη πνευμόνων"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing"
+        ],
+        "finding": "Τα συγκεκριμένα αναφερόμενα αποσπάσματα συμφωνούν με τις στοχευμένες ανατομικές και φυσιολογικές βιβλιογραφικές παραπομπές. Δεν αποδίδεται πλήρης έγκριση.",
+        "limits": "Ελέγχθηκαν μόνο αποσπάσματα του eoppep-sos.json· όχι η πλήρης πρωτότυπη απάντηση ή ολόκληρο το επίσημο ερωτηματολόγιο ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-006",
