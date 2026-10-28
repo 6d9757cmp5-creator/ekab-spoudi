@@ -12,6 +12,7 @@ on:
       - 'saek-visual-ui.css'
       - 'sw.js'
       - 'scripts/validate-saek-svg.py'
+      - 'scripts/render-saek-contact-sheets.py'
       - 'scripts/validate-semester-c-diagram-text.mjs'
       - 'scripts/validate-semester-ab-arrows.mjs'
       - 'scripts/validate-semester-d-diagrams.mjs'
@@ -57,3 +58,25 @@ jobs:
             saek-image-integration-report.json
           retention-days: 30
           if-no-files-found: warn
+
+  image-contact-sheets:
+    name: Render all registered images for manual visual inspection
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image renderers
+        run: python -m pip install "CairoSVG>=2.7,<3" "Pillow>=11,<13"
+      - name: Generate image contact sheets and text-review candidates
+        run: python scripts/render-saek-contact-sheets.py
+      - name: Upload review sheets and JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saek-image-contact-sheets
+          path: image-contact-sheets/
+          retention-days: 30
+          if-no-files-found: error
