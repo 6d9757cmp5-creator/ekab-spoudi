@@ -535,7 +535,26 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "targeted_full_stored_educational_answer_and_archival_question_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "comparedClaims": [
+          "Η πλήρης αποθηκευμένη εκπαιδευτική απάντηση ορίζει την εγκεφαλική αυτορρύθμιση ως προσαρμογή αντίστασης αρτηριολίων για σχετικά σταθερή αιματική ροή εντός ορίων πίεσης — συμφωνεί με StatPearls Physiology, Cerebral Autoregulation.",
+          "Η απάντηση αναφέρει CO₂, pH και μεταβολική δραστηριότητα ως παράγοντες που επηρεάζουν την εγκεφαλική ροή, αλλά χρειάζεται σαφής διάκριση: η αντιδραστικότητα σε CO₂ και η σύζευξη ροής–μεταβολισμού δεν ταυτίζονται με την αυτορρύθμιση πίεσης–ροής.",
+          "Η αναφορά ότι τραύμα μπορεί να διαταράξει την αυτορρύθμιση είναι συμβατή με τη βιβλιογραφία, αλλά δεν επαληθεύθηκε κανένα συγκεκριμένο κλινικό πρωτόκολλο.",
+          "Η αποθηκευμένη εκφώνηση EOP-A-012 συμφωνεί ακριβώς με την Ομάδα Α, ερώτηση 12, τυπωμένη σελίδα 4, παλαιού αναρτημένου PDF θεμάτων."
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK553183/",
+          "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf"
+        ],
+        "finding": "Η βασική περιγραφή της πίεσης–ροής συμφωνεί με StatPearls. Εντοπίστηκε σημαντική εκπαιδευτική ανάγκη να διαχωρίζονται ρητά η αυτορρύθμιση της εγκεφαλικής ροής από την CO₂-αντιδραστικότητα και τη μεταβολική σύζευξη, οι οποίες αναφέρονται μαζί στη σύντομη απάντηση. Η εκφώνηση συμφωνεί με παλαιό αντίγραφο PDF θεμάτων ΕΟΠΠΕΠ (όχι βεβαιωμένη τρέχουσα έκδοση).",
+        "limits": "Δεν έχει επαληθευθεί η πιο πρόσφατη επίσημη τράπεζα ΕΟΠΠΕΠ ούτε υπάρχει επίσημο κλειδί απαντήσεων. Δεν έγινε δεύτερος ανεξάρτητος επιστημονικός έλεγχος. Δεν αλλάχθηκε η παραγωγική απάντηση. Ο πρώτος γύρος συνεχίζεται.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-013",
