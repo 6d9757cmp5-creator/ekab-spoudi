@@ -186,7 +186,7 @@ function resetQuiz(){
  selectedPartIndex=-1;
  $('quizScore').textContent='0';$('quizAttempts').textContent='0';
  $('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;
- $('quizOptions').replaceChildren();$('quizOptions').hidden=true;$('quizSee3D').hidden=true;
+ $('quizOptions').replaceChildren();$('quizOptions').hidden=true;$('quizSee3D').hidden=true;$('quizBackToAnswers').hidden=true;
  $('quizFeedback').textContent='';$('quizFeedback').className='quiz-feedback';
  $('quizQuestion').textContent='Αναγνώρισε ένα σημείο στο 3D';
  $('quizInstruction').textContent='Απάντησε σε τέσσερις επιλογές με ελληνικές ονομασίες.';
@@ -209,7 +209,7 @@ function nextQuiz(){
   $('quizQuestion').textContent='Δεν υπάρχουν ακόμη τέσσερα κατάλληλα σημεία';
   $('quizFeedback').textContent='Περίμενε να ολοκληρωθεί η φόρτωση ή επίλεξε σκελετό / όργανα με περισσότερες ελληνικές ονομασίες.';
   $('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;
-  $('quizOptions').hidden=true;$('quizSee3D').hidden=true;return;
+  $('quizOptions').hidden=true;$('quizSee3D').hidden=true;$('quizBackToAnswers').hidden=true;return;
  }
  const available=pool.filter(p=>p.id!==ui.prev);
  const p=available[Math.floor(Math.random()*available.length)]||pool[0];
@@ -221,7 +221,7 @@ function nextQuiz(){
  $('quizInstruction').textContent='Δες το φωτισμένο σημείο και διάλεξε τη σωστή ελληνική ονομασία.';
  $('quizFeedback').textContent='';$('quizFeedback').className='quiz-feedback';
  $('quizStart').hidden=true;$('quizStop').hidden=false;$('quizNext').hidden=true;
- $('quizSee3D').hidden=false;
+ $('quizSee3D').hidden=false;$('quizBackToAnswers').hidden=false;
  const box=$('quizOptions');box.replaceChildren();box.hidden=false;
  for(const choice of choices){
   const button=document.createElement('button');button.type='button';
@@ -248,7 +248,7 @@ function answer(id){
  ui.selected=ui.target;selectedPartIndex=correct._index;
  describeSelected();updateScene();
 }
-function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{if(!ui.selected){$('detailName').textContent='Πρώτα επίλεξε μια δομή';return}ui.isolate=!ui.isolate;updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
+function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{if(!ui.selected){$('detailName').textContent='Πρώτα επίλεξε μια δομή';return}ui.isolate=!ui.isolate;updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizBackToAnswers').addEventListener('click',()=>document.getElementById('quizOptions').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)){e.preventDefault();$('anatomySearch').focus()}if(e.target===$('anatomyViewport')){const keys={ArrowLeft:[-.12,0],ArrowRight:[.12,0],ArrowUp:[0,-.12],ArrowDown:[0,.12]};const v=keys[e.key];if(v){e.preventDefault();orbit.az+=v[0];orbit.polar=Math.min(Math.PI-.05,Math.max(.05,orbit.polar+v[1]));cameraMove()}}});
 resetQuiz();setControls();describeSelected();list();configureLessonReturn()}
 function resetCamera(){orbit.az=0;orbit.polar=Math.PI/2;orbit.r=3.7;orbit.y=.85;cameraMove()}
