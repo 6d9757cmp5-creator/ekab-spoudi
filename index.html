@@ -9,7 +9,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=27.1.93">
-<link rel="stylesheet" href="home.css?v=27.1.93-hub-only">
+<link rel="stylesheet" href="home.css?v=mini-progress-1">
 <script src="theme-init.js"></script>
 <script>
 /* Old links into the EOPPEP reader remain valid after the new landing page. */
@@ -27,7 +27,12 @@
 <main class="main home-main">
 <section class="home-intro" aria-labelledby="homeTitle">
 <p class="home-kicker">Καλώς ήρθες στην ΕΚΑΒ Σπουδή</p>
-<h2 id="homeTitle">Τι θέλεις να μελετήσεις;</h2>
+<div class="home-mini-progress" aria-label="Πρόοδος μελέτης ΕΟΠΠΕΠ">
+ <div class="home-mini-progress-label"><span>Η πρόοδός σου · ΕΟΠΠΕΠ</span><strong id="homeMiniCount">0/314</strong></div>
+ <div class="home-mini-progress-track" role="progressbar" aria-label="Μελετημένες ερωτήσεις ΕΟΠΠΕΠ" aria-valuemin="0" aria-valuemax="314" aria-valuenow="0" id="homeMiniProgress"><span id="homeMiniFill"></span></div>
+ <p class="home-mini-progress-message" id="homeMiniMessage">Κάθε ερώτηση σε φέρνει πιο κοντά στον στόχο σου.</p>
+ </div>
+ <h2 id="homeTitle">Τι θέλεις να μελετήσεις;</h2>
 <p>Διάλεξε ενότητα για να ξεκινήσεις.</p>
 </section>
 <section class="home-tiles" aria-label="Επιλογή εκπαιδευτικής ενότητας">
@@ -45,5 +50,5 @@
 <p class="home-app-note">Ανεξάρτητο εκπαιδευτικό βοήθημα για τη μελέτη. Δεν απονέμει πιστοποίηση και δεν υποκαθιστά την πρακτική εκπαίδευση.</p>
 <footer>ΕΚΑΒ Σπουδή · Έκδοση <span id="footerAppVersion">v27.1.96</span></footer>
 </main>
-<script src="updates.js?v=27.1.96" defer></script>
+<script src="study-scheduler.js" defer></script><script src="home-mini-progress.js?v=1" defer></script><script src="updates.js?v=27.1.96" defer></script>
 </body></html>
