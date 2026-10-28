@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Βιβλιογραφία MENTOR OS · ΕΚΑΒ Σπουδή</title>
+<link rel="stylesheet" href="mentor-lab.css">
+<style>
+.sources-wrap{max-width:1000px;margin:0 auto;padding:18px}
+.sources-summary{display:flex;gap:12px;flex-wrap:wrap}
+.sources-summary span{padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.sources-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.source-card{padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.source-card h2{font-size:1.03rem;margin:0 0 7px}.source-card p{font-size:.88rem;margin:7px 0;color:var(--muted);line-height:1.45}
+.source-card a{word-break:break-word}.source-card .pending{font-weight:700}
+</style>
+<script type="module" src="mentor-library.js" defer></script>
+</head>
+<body>
+<main class="sources-wrap">
+<p><a href="mentor-lab.html">← Εργαστήριο MENTOR OS</a></p>
+<h1>Βιβλιογραφία MENTOR OS</h1>
+<p>Απογραφή εκπαιδευτικών πηγών. <strong>Δεν αποτελεί εγκεκριμένη κλινική βιβλιοθήκη.</strong> Οι σύνδεσμοι οδηγούν στον αρχικό εκδότη.</p>
+<div id="source-counts" class="sources-summary" aria-live="polite"></div>
+<p role="status" id="library-status">Φόρτωση καταλόγου…</p>
+<ul id="sources-list" class="sources-list" aria-label="Πηγές βιβλιογραφίας"></ul>
+<p class="muted small">Η εξαγωγή κειμένου για εσωτερικό έλεγχο δεν ισοδυναμεί με άδεια δημοσίευσης ή ανεξάρτητη επιστημονική έγκριση. Δεν εμφανίζεται κλινικό κείμενο από τις υπό εξέταση πηγές.</p>
+</main>
+</body>
+</html>
