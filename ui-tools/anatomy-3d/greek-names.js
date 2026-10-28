@@ -111,8 +111,8 @@ function prefix(side,word){
  const l=side==='left';
  // Infer grammatical gender from the head noun, including multi-word
  // anatomical labels. Never infer from adjectives alone.
- const feminine=FEMININE.test(word)||/(αρτηρία|φλέβα|γνάθος|θηλή|πυραμίδα|κάψα|κόρη|ίριδα|κηλίδα|περιφέρεια|λίμνη|άλως|περόνη|κνήμη|φάλαγγα|σάλπιγγα|τραχεία|ωοθήκη)$/i.test(word);
- const masculine=MASCULINE.test(word)||/(χιτώνας|φακός|πόρος|μυς|αδένας|λοβός|κόλπος|κάλυκας|κορμός|δακτύλιος|σύνδεσμος|νεφρός|πνεύμονας|βρόγχος|φλοιός|μυελός)$/i.test(word);
+ const feminine=FEMININE.test(word)||/^(θηλή|νεφρική θηλή|νεφρική πυραμίδα|θηλαία άλως|ωχρά κηλίδα|νεφρική κάψα|πριονωτή περιφέρεια|δακρυϊκή λίμνη|ίριδα)/i.test(word)||/(αρτηρία|φλέβα|γνάθος|θηλή|πυραμίδα|κάψα|κόρη|ίριδα|κηλίδα|περιφέρεια|λίμνη|άλως|περόνη|κνήμη|φάλαγγα|σάλπιγγα|τραχεία|ωοθήκη)$/i.test(word);
+ const masculine=MASCULINE.test(word)||/^(φλοιός|μυελός|πρόσθιος θάλαμος|δακρυϊκός αδένας|κρεμαστήριος σύνδεσμος)/i.test(word)||/(χιτώνας|φακός|πόρος|μυς|αδένας|λοβός|κόλπος|κάλυκας|κορμός|δακτύλιος|σύνδεσμος|νεφρός|πνεύμονας|βρόγχος|φλοιός|μυελός)$/i.test(word);
  const form=feminine?(l?'Αριστερή':'Δεξιά'):masculine?(l?'Αριστερός':'Δεξιός'):(l?'Αριστερό':'Δεξιό');
  return form+' '+word.toLocaleLowerCase('el');
 }
