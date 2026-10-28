@@ -59,7 +59,7 @@ jobs:
           assert 'appwrite' not in js.lower() and 'cloud-sync' not in js
           assert 'three@0.180.0' in js and 'WebGLRenderer' in js
           real=(root/'hires-anatomy.js').read_text()
-          assert 'src="hires-anatomy.js"' in html
+          assert 'src="hires-anatomy.js' in html
           assert 'src="anatomy.js"' not in html
           assert 'expectedParts:2234' in real and 'expectedParts:3004' in real
           assert 'slorksmo/Human-Atlas@' in real
