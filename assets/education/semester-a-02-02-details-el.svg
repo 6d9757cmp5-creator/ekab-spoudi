@@ -1,32 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d">
-<title id="t">Ανταλλαγή οξυγόνου και διοξειδίου του άνθρακα στις κυψελίδες</title>
-<desc id="d">Σχηματική κυψελίδα περιβαλλόμενη από τριχοειδές. Το οξυγόνο διαχέεται από τον αέρα της κυψελίδας προς το αίμα και το διοξείδιο του άνθρακα από το αίμα προς την κυψελίδα. Δεν είναι σε κλίμακα.</desc>
-<defs><marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#287c9b"/></marker><marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a44b4b"/></marker></defs>
-<rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="113" fill="#347e75"/>
-<g font-family="DejaVu Sans,Arial,sans-serif"><text x="555" y="30" font-size="18" fill="#fff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 02</text><text x="555" y="72" font-size="23" fill="#fff" font-weight="720" text-anchor="middle">Φυσιολογία της αναπνοής</text>
-<!-- alveolar sac -->
-<path d="M462 230Q460 185 505 181Q537 150 567 180Q607 165 622 205Q667 214 656 257Q683 290 650 320Q659 360 619 373Q599 415 560 394Q528 425 500 391Q454 400 450 361Q416 340 441 305Q415 266 462 230Z" fill="#f4d9cf" stroke="#a86862" stroke-width="5"/>
-<!-- alveolar neck -->
-<path d="M555 181V145" stroke="#a86862" stroke-width="18" stroke-linecap="round"/>
-<!-- capillary wraps around sac -->
-<path d="M445 223C386 255 394 344 441 377M650 218C708 251 704 344 655 377" fill="none" stroke="#a44b4b" stroke-width="19" stroke-linecap="round"/>
-<path d="M410 240Q433 226 450 232M688 239Q666 226 650 232" fill="none" stroke="#db9a93" stroke-width="7"/>
-<!-- membrane -->
-<path d="M455 248Q430 302 458 350" fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="5 6"/>
-<path d="M645 248Q672 302 642 350" fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="5 6"/>
-<!-- gases -->
-<circle cx="505" cy="260" r="15" fill="#287c9b"/><text x="505" y="266" font-size="14" fill="#fff" font-weight="700" text-anchor="middle">O₂</text>
-<circle cx="604" cy="337" r="15" fill="#a44b4b"/><text x="604" y="343" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">CO₂</text>
-<path d="M510 275L466 292" stroke="#287c9b" stroke-width="4" marker-end="url(#arrBlue)"/>
-<path d="M625 330L582 330" stroke="#a44b4b" stroke-width="4" marker-end="url(#arrRed)"/>
-<!-- RBCs -->
-<ellipse cx="415" cy="293" rx="18" ry="9" fill="#ca7771" stroke="#8c4343" stroke-width="2" transform="rotate(-28 415 293)"/>
-<ellipse cx="685" cy="300" rx="18" ry="9" fill="#d9958e" stroke="#a3534d" stroke-width="2" transform="rotate(25 685 300)"/>
-<text x="555" y="322" font-size="17" fill="#7f4945" font-weight="700" text-anchor="middle">Αέρας κυψελίδας</text>
-</g>
-<path d="M384 195L445 225" stroke="#347e75" stroke-width="3" marker-end="url(#arrBlue)"/><text x="248" y="190" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700">Τριχοειδές αίμα</text>
-<path d="M738 218L652 246" stroke="#347e75" stroke-width="3" marker-end="url(#arrBlue)"/><text x="746" y="216" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700">Κυψελίδα</text>
-<text x="555" y="476" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700" text-anchor="middle">O₂: κυψελίδα → αίμα · CO₂: αίμα → κυψελίδα</text>
-<text x="555" y="514" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#526b78" text-anchor="middle">Διάχυση κατά μήκος μερικών πιέσεων · οι σχετικές κατευθύνσεις είναι σχηματικές</text>
-<text x="555" y="565" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#526b78" text-anchor="middle">Δεν απεικονίζονται ποσοστά αερίων, διαγνωστικές τιμές ή ανατομική κλίμακα.</text>
+<title id="t">Ανταλλαγή οξυγόνου και διοξειδίου του άνθρακα στην κυψελίδα</title><desc id="d">Σχηματική κυψελίδα περιβαλλόμενη από τριχοειδές. Το οξυγόνο διαχέεται από τον αέρα της κυψελίδας προς το αίμα και το διοξείδιο του άνθρακα από το αίμα προς την κυψελίδα. Δεν είναι σε κλίμακα.</desc>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker><marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#287c9b"/></marker><marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a44b4b"/></marker></defs>
+<rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="113" fill="#347e75"/><g font-family="DejaVu Sans,Arial,sans-serif"><text x="555" y="30" font-size="18" fill="#fff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 02</text><text x="555" y="72" font-size="23" fill="#fff" font-weight="720" text-anchor="middle">Φυσιολογία της αναπνοής</text>
+<!-- alveolar sac --> <path d="M462 230Q460 185 505 181Q537 150 567 180Q607 165 622 205Q667 214 656 257Q683 290 650 320Q659 360 619 373Q599 415 560 394Q528 425 500 391Q454 400 450 361Q416 340 441 305Q415 266 462 230Z" fill="#f4d9cf" stroke="#a86862" stroke-width="5"/><path d="M555 181V145" stroke="#a86862" stroke-width="18" stroke-linecap="round"/>
+<!-- capillary --> <path d="M445 223C386 255 394 344 441 377M650 218C708 251 704 344 655 377" fill="none" stroke="#a44b4b" stroke-width="19" stroke-linecap="round"/><path d="M410 240Q433 226 450 232M688 239Q666 226 650 232" fill="none" stroke="#db9a93" stroke-width="7"/>
+<!-- membrane --> <path d="M455 248Q430 302 458 350M645 248Q672 302 642 350" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="5 6"/>
+<circle cx="505" cy="260" r="15" fill="#287c9b"/><text x="505" y="266" font-size="14" fill="#fff" font-weight="700" text-anchor="middle">O₂</text><circle cx="604" cy="337" r="15" fill="#a44b4b"/><text x="604" y="343" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">CO₂</text>
+<!-- Gas arrows follow gradients -->
+<path d="M510 275L462 289" stroke="#287c9b" stroke-width="4" marker-end="url(#arrBlue)"/><path d="M646 324L577 322" stroke="#a44b4b" stroke-width="4" marker-end="url(#arrRed)"/>
+<ellipse cx="415" cy="293" rx="18" ry="9" fill="#ca7771" stroke="#8c4343" stroke-width="2" transform="rotate(-28 415 293)"/><ellipse cx="685" cy="300" rx="18" ry="9" fill="#d9958e" stroke="#a3534d" stroke-width="2" transform="rotate(25 685 300)"/>
+<text x="555" y="322" font-size="17" fill="#7f4945" font-weight="700" text-anchor="middle">Αέρας κυψελίδας</text></g>
+<path d="M384 195L445 225" stroke="#347e75" stroke-width="3" marker-end="url(#arr)"/><text x="248" y="190" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700">Τριχοειδές</text>
+<path d="M738 218L652 246" stroke="#347e75" stroke-width="3" marker-end="url(#arr)"/><text x="746" y="216" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700">Κυψελίδα</text>
+<text x="555" y="476" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700" text-anchor="middle">O₂: κυψελίδα → αίμα · CO₂: αίμα → κυψελίδα</text><text x="555" y="514" font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#526b78" text-anchor="middle">Διάχυση κατά μήκος μερικών πιέσεων · σχετικές κατευθύνσεις σχηματικές</text>
+<text x="555" y="560" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#526b78" text-anchor="middle">Δεν απεικονίζονται ποσοστά αερίων, διαγνωστικές τιμές ή φυσική κλίμακα.</text>
 </svg>
