@@ -6,6 +6,7 @@ import {newSession,currentPhase,perform,feedbackFor} from './mentor/core/engine.
 import {openMentorDb,createMentorStore,createVolatileMentorStore} from './mentor/core/store.mjs';
 import {resolveMentorScope} from './mentor/core/identity.mjs';
 import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
+import {mountActivities} from './mentor/activities-ui.mjs';
 
 const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{
@@ -14,7 +15,7 @@ const make=(tag,className,text)=>{
   if(text!==undefined)node.textContent=text;
   return node;
 };
-const state={scope:null,store:null,session:null,busy:false,initialized:false};
+const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false};
 function notify(text,error=false){
   const status=$('status');status.textContent=text;status.classList.toggle('is-error',error);
 }
@@ -28,6 +29,18 @@ function switchTab(target,focus=false){
   }
   if(target==='memory')void renderMemory();
   if(target==='route')void renderPlan();
+}
+function wireModes(){
+  for(const button of document.querySelectorAll('[data-mode]')){
+    button.addEventListener('click',()=>{
+      const mode=button.dataset.mode;
+      if(!['ekab','mci','equipment'].includes(mode))return;
+      for(const peer of document.querySelectorAll('[data-mode]'))
+        peer.setAttribute('aria-pressed',String(peer.dataset.mode===mode));
+      for(const kind of ['ekab','mci','equipment'])
+        $('module-'+kind).hidden=kind!==mode;
+    });
+  }
 }
 function wireTabs(){
   const tabs=[...document.querySelectorAll('[data-tab]')];
@@ -131,6 +144,10 @@ async function renderMemory(){
     $('sessions-count').textContent=String(overview.total_sessions);
     $('completed-count').textContent=String(overview.completed_sessions);
     $('review-count').textContent=String(Object.values(overview.competencies).reduce((n,c)=>n+c.needs_review,0));
+    const extra=state.activities?await state.activities.summary():null;
+    $('mci-sessions').textContent=String(extra?.mci.total||0);
+    $('equipment-sessions').textContent=String(extra?.equipment.total||0);
+    $('extra-completed').textContent=String(extra?.completed||0);
     const list=$('competency-list');list.replaceChildren();
     for(const competence of Object.values(overview.competencies)){
       const row=make('div','skill');
@@ -156,13 +173,20 @@ async function renderPlan(){
       make('p',null,'Μελέτη '+Math.round(minutes*.35)+' λεπτά · Διαδραστική αποστολή '+Math.round(minutes*.5)+' λεπτά · Ανασκόπηση '+(minutes-Math.round(minutes*.35)-Math.round(minutes*.5))+' λεπτά.'),
       make('p','muted small','Πρόταση βάσει καταγραφών Mentor, όχι πιστοποιημένη εκτίμηση ικανότητας.')
     );
+    if(state.activities){
+      const extra=await state.activities.summary();
+      target.append(make('p','muted small',
+        'Επιπλέον εξάσκηση: '+extra.mci.total+' καταγραφές συμβάντων, '+extra.equipment.total+
+        ' καρτέλες εξοπλισμού, '+extra.reviews+' επιλογές που χρειάζονται επανάληψη.'));
+    }
   }catch(e){notify('Δεν υπολογίστηκε η εκπαιδευτική διαδρομή: '+e.message,true);}
 }
 async function exportMentor(){
   try{
     const sessions=await state.store.list(state.scope);
-    const payload={schema:'ekab-mentor-export-v1',created_at:new Date().toISOString(),
-      includes:'synthetic educational sessions only',sessions};
+    const activities=state.activities?await state.activities.all():[];
+    const payload={schema:'ekab-mentor-export-v2',created_at:new Date().toISOString(),
+      includes:'synthetic educational sessions and standalone training activities only',sessions,activities};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob),anchor=make('a');
     anchor.href=url;anchor.download='mentor-os-study-backup.json';
@@ -175,6 +199,7 @@ async function eraseMentor(){
   if(!confirm('Να διαγραφούν οι δοκιμαστικές αποστολές και η μνήμη Mentor από αυτή την καρτέλα; Η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ δεν επηρεάζεται.'))return;
   try{
     await state.store.erase(state.scope);
+    if(state.activities)await state.activities.erase();
     state.session=null;
     renderMission();await renderMemory();await renderPlan();
     notify('Διαγράφηκαν μόνο οι δοκιμαστικές καταγραφές Mentor.');
@@ -194,6 +219,7 @@ function viewLegacy(){
 }
 async function boot(){
   wireTabs();
+  wireModes();
   $('study-duration').addEventListener('change',()=>void renderPlan());
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
@@ -205,9 +231,11 @@ async function boot(){
     try{state.store=createMentorStore(await openMentorDb());}
     catch{state.store=createVolatileMentorStore();}
     state.session=await state.store.active(state.scope);
+    state.activities=await mountActivities({scope:state.scope,notify,
+      onChange:async()=>{await renderMemory();await renderPlan();}});
     state.initialized=true;
     $('privacy-text').textContent=state.store.persistent?
-      'Οι δοκιμές Mentor αποθηκεύονται τοπικά σε ξεχωριστή IndexedDB. Η δοκιμαστική ταυτότητα επισκέπτη ισχύει μόνο για αυτή την καρτέλα. Δεν γίνεται συγχρονισμός στο cloud.':
+      'Οι δοκιμές Mentor αποθηκεύονται τοπικά σε δύο ξεχωριστές βάσεις IndexedDB. Η δοκιμαστική ταυτότητα επισκέπτη ισχύει μόνο για αυτή την καρτέλα. Δεν γίνεται συγχρονισμός στο cloud.':
       'Η τοπική αποθήκευση IndexedDB δεν είναι διαθέσιμη· οι δοκιμές θα χαθούν αν κλείσεις την καρτέλα. Δεν γίνεται συγχρονισμός.';
     notify(state.store.persistent?'Το εργαστήριο είναι έτοιμο. Η υπάρχουσα πρόοδος παραμένει ανέπαφη.':'Δοκιμαστική λειτουργία χωρίς μόνιμη αποθήκευση.');
     renderMission();await renderMemory();await renderPlan();
