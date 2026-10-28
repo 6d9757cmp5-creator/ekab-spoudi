@@ -18,9 +18,32 @@ export function freeProviders(env=process.env){
   id:'openrouter',model,key:env.OPENROUTER_API_KEY,
   url:'https://openrouter.ai/api/v1/chat/completions'
  });
+ const geminiModel=env.GEMINI_FREE_MODEL||'gemini-2.5-flash-lite';
+ // Explicit opt-in after verifying the Gemini API project is on the free tier.
+ if(env.GEMINI_API_KEY && env.GEMINI_FREE_PLAN_CONFIRMED==='true' &&
+  ['gemini-2.5-flash-lite','gemini-2.5-flash'].includes(geminiModel))providers.push({
+   id:'gemini',model:geminiModel,key:env.GEMINI_API_KEY,
+   url:'https://generativelanguage.googleapis.com/v1beta/models/'+geminiModel+':generateContent'
+  });
  return providers;
 }
 export async function requestFreeGrade(provider,messages){
+ if(provider.id==='gemini'){
+  const response=await fetch(provider.url,{
+   method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':provider.key},
+   body:JSON.stringify({systemInstruction:{parts:[{text:messages[0].content}]},
+    contents:[{role:'user',parts:[{text:messages[1].content}]}],
+    generationConfig:{temperature:0,maxOutputTokens:1800,responseMimeType:'application/json'}}),
+   signal:AbortSignal.timeout(12000)
+  });
+  if(!response.ok)throw new Error('provider_http_'+response.status);
+  const data=await response.json();
+  const candidate=data.candidates?.[0];
+  if(candidate?.finishReason!=='STOP')throw new Error('Incomplete result');
+  const content=candidate.content?.parts?.filter(p=>typeof p.text==='string').map(p=>p.text).join('');
+  if(!content)throw new Error('Invalid AI response');
+  return JSON.parse(content);
+ }
  const body={model:provider.model,messages,temperature:0,max_tokens:1800,
   response_format:{type:'json_object'}};
  if(provider.id==='openrouter')body.reasoning={enabled:false};
