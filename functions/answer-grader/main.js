@@ -14,8 +14,8 @@ const cache={until:0,bank:null};
 const attempts=new Map();
 const MAX_USER_CHARS=3500;
 const LIMIT=15, WINDOW_MS=20*60*1000;
-const AI_LIMIT_MESSAGE='Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις AI έχουν φτάσει προσωρινά στο όριό τους. Κάνε μια μικρή επανάληψη στη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
-const STUDENT_LIMIT_MESSAGE='Ώρα για μια μικρή επανάληψη! 📚 Έχεις φτάσει προσωρινά στο όριο των αξιολογήσεων AI. Διάβασε λίγη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
+const AI_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
+const STUDENT_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
 const schema={
  type:'object',additionalProperties:false,
  properties:{
@@ -209,7 +209,7 @@ export default async function ({req,res}){
  // Appwrite injects this header for authenticated executions. Never trust an arbitrary HTTP gateway forwarding it.
  const user=req.headers?.['x-appwrite-user-id'];
  if(!user||!req.headers?.['x-appwrite-user-jwt'])return reject(res,'Απαιτείται σύνδεση λογαριασμού',401);
- if(!freeProviders().length)return reject(res,'Δεν έχει συνδεθεί διαθέσιμο δωρεάν AI. Η απάντηση παραμένει χωρίς βαθμό.',503);
+ if(!freeProviders().length)return reject(res,'Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη αυτή τη στιγμή. Η απάντηση παραμένει χωρίς βαθμό.',503);
  const input=req.bodyJson;
  if(!input||typeof input!=='object'||Array.isArray(input)||typeof input.answer!=='string'||input.answer.trim().length<3||input.answer.length>MAX_USER_CHARS)return reject(res,'Γράψε απάντηση 3–3500 χαρακτήρων');
  if(limited(user))return res.json({error:STUDENT_LIMIT_MESSAGE,code:'student_ai_limit'},429);
@@ -221,6 +221,6 @@ export default async function ({req,res}){
   if(/Μη έγκυρ|Άγνωστη|Δεν βρέθηκε|δεν είναι διαθέσιμο για αυτόματη/i.test(err.message))return reject(res,err.message,400);
   if(err.message==='all_ai_limits')return res.json({error:AI_LIMIT_MESSAGE,code:'all_ai_limits'},503);
   // Never log answers, question texts, keys or provider response bodies.
-  return res.json({error:'Το δωρεάν AI δεν είναι διαθέσιμο ή έφτασε το όριό του. Δοκίμασε αργότερα. Η απάντηση παραμένει χωρίς βαθμό.',code:/^provider_http_\d{3}$/.test(err.message)?err.message:'free_unavailable'},503);
+  return res.json({error:'Η αξιολόγηση δεν ολοκληρώθηκε λόγω προσωρινού τεχνικού προβλήματος. Η απάντηση έχει αποθηκευτεί και δεν έχει βαθμολογηθεί.',code:/^provider_http_\d{3}$/.test(err.message)?err.message:'free_unavailable'},503);
  }
 }
