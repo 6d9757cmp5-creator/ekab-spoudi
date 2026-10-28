@@ -4,7 +4,7 @@
 <meta name="theme-color" content="#153c54"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Προετοιμασία σεμιναρίων · ΕΚΑΒ Σπουδή</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css?v=27.1.79"><link rel="stylesheet" href="seminar-prep.css?v=auto-grading-2"><link rel="stylesheet" href="ai-grading.css?v=grading-compact-lock-1">
+<link rel="stylesheet" href="styles.css?v=27.1.79"><link rel="stylesheet" href="seminar-prep.css?v=batch-results-1"><link rel="stylesheet" href="ai-grading.css?v=grading-compact-lock-1">
 <script src="theme-init.js"></script>
 </head><body>
 <header class="top"><div class="container">
@@ -72,16 +72,31 @@
   <button type="button" id="seminarRepeatQuiz" class="btn">Νέο τεστ με άλλες ερωτήσεις</button>
  </div>
  </section>
- <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικό σενάριο">
- <p class="eyebrow" id="seminarOralCounter"></p><button type="button" class="btn secondary" id="seminarRestartOral" hidden>Νέος κύκλος 12 σεναρίων</button><h3 id="seminarOralTitle"></h3><p id="seminarOralCase" class="seminar-feedback"></p>
- <label for="seminarOralNotes">Οι ενέργειές σου, βήμα προς βήμα</label><textarea id="seminarOralNotes" rows="6" maxlength="3500" autocomplete="off" placeholder="Περιέγραψε ασφάλεια σκηνής, αρχική εκτίμηση, σωστή σειρά ενεργειών, επανεκτίμηση και παράδοση — όπου απαιτούνται."></textarea>
- <button type="button" class="btn secondary compact" id="seminarRestoreOralDraft" hidden>Επαναφορά αποθηκευμένου πρόχειρου</button>
- <p class="seminar-fineprint">Η αξιολόγηση εξετάζει την ασφάλεια, τη σωστή σειρά ενεργειών και τα κρίσιμα λάθη. Μετά την υποβολή η απάντηση κλειδώνει. Απαιτούνται σύνδεση και Internet.</p>
- <button type="button" class="btn" id="seminarScenarioSubmit">Υποβολή αξιολόγησης</button>
- <p id="seminarScenarioStatus" class="seminar-state" role="status" aria-live="polite"></p>
- <div id="seminarScenarioResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
- <button type="button" class="btn secondary compact" id="seminarOralReveal">Δες την εκπαιδευτική προτεραιότητα (χωρίς βαθμό)</button><p id="seminarOralHelp" class="seminar-feedback" hidden></p>
- <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevOral">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextOral">Επόμενη</button></div>
+ <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικά σενάρια">
+  <button type="button" class="btn secondary compact" id="seminarRestartOral">Νέος κύκλος 12 σεναρίων</button>
+  <div id="seminarOralQuestion">
+   <p class="eyebrow" id="seminarOralCounter"></p>
+   <h3 id="seminarOralTitle"></h3>
+   <p id="seminarOralCase" class="seminar-feedback"></p>
+   <label for="seminarOralNotes">Οι ενέργειές σου, βήμα προς βήμα</label>
+   <textarea id="seminarOralNotes" rows="6" maxlength="3500" autocomplete="off" placeholder="Περιέγραψε τις ενέργειες που θα κάνεις, με τη σωστή σειρά."></textarea>
+   <button type="button" class="btn secondary compact" id="seminarRestoreOralDraft" hidden>Επαναφορά αποθηκευμένου πρόχειρου</button>
+   <p class="seminar-fineprint">Συμπλήρωσε πρώτα και τα 12 σενάρια. Δεν εμφανίζονται λύσεις ή βαθμοί πριν ολοκληρωθεί η τελική αξιολόγηση.</p>
+   <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevOral">Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextOral">Επόμενο</button></div>
+   <div class="seminar-batch-submit">
+    <p id="seminarDraftProgress" class="seminar-state"></p>
+    <button type="button" class="btn" id="seminarScenarioSubmit" disabled>Τελική υποβολή και αξιολόγηση (12 σενάρια)</button>
+    <p id="seminarScenarioStatus" class="seminar-state" role="status" aria-live="polite"></p>
+    <div id="seminarScenarioResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
+   </div>
+  </div>
+  <div id="seminarOralResults" class="seminar-orals-results" hidden>
+   <h3>Συγκεντρωτικά αποτελέσματα</h3>
+   <p id="seminarOralSummary" class="seminar-results-summary" aria-live="polite"></p>
+   <p class="seminar-fineprint">Πάτησε σε ένα σενάριο για να δεις την απάντησή σου, τις διορθώσεις και την εκπαιδευτική προτεραιότητα.</p>
+   <div id="seminarOralResultsList" class="seminar-results-list"></div>
+   <p class="seminar-fineprint">Η αξιολόγηση είναι εκπαιδευτική, όχι επίσημη βαθμολογία ή πιστοποίηση. Αν εντοπιστεί κρίσιμο λάθος, συμβουλεύσου εκπαιδευτή και επίσημα πρωτόκολλα.</p>
+  </div>
  </section>
 </section>
 <details class="seminar-backup"><summary>Πρόοδος και αντίγραφο ασφαλείας</summary><div class="seminar-backup-body">
@@ -92,5 +107,5 @@
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα · Δεν απονέμει πιστοποίηση · Οι εκπαιδευτικές ασκήσεις δεν αντικαθιστούν πρακτική εκπαίδευση ή τοπικά πρωτόκολλα.</footer>
 </main>
 <script src="ai-grading-config.js?v=27.1.82"></script><script src="ai-grading-client.js?v=grading-compact-lock-1"></script>
-<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=scenario-empty-drafts-1"></script><script src="updates.js?v=27.1.82" defer></script>
+<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=batch-results-1"></script><script src="updates.js?v=27.1.82" defer></script>
 </body></html>
