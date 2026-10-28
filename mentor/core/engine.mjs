@@ -4,6 +4,7 @@
  * Does not import or mutate any EKAB/SAEK/EOPPEP grade or progress modules.
  */
 import {getCase,COMPETENCIES} from './scenarios.mjs';
+import {resolveChoice} from './workflow.mjs';
 const ID=/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,95}$/;
 const MAX_EVENTS=64;
 function iso(at){
@@ -36,15 +37,11 @@ export function perform(session,actionId,{at=new Date().toISOString()}={}){
   const def=validateBase(session);
   if(session.finished)throw new Error('case-completed');
   if(session.events.length>=MAX_EVENTS)throw new Error('maximum-attempts');
-  const phase=currentPhase(session);
-  if(!phase)throw new Error('invalid-stage');
-  const action=phase.actions.find(a=>a.id===actionId);
-  if(!action)throw new Error('invalid-action');
+  const decision=resolveChoice(def.phases,session.stage_index,actionId);
+  const {stage:phase,action,result}=decision;
   const timestamp=iso(at);
   if(Date.parse(timestamp)<Date.parse(session.updated_at))throw new Error('backdated-action');
-  const result=action.outcome;
-  const advanced=result==='practice';
-  const nextStage=session.stage_index+(advanced?1:0);
+  const nextStage=decision.nextIndex;
   const event={seq:session.events.length+1,stage_id:phase.id,action_id:action.id,
     result,competency_id:phase.id,at:timestamp};
   return {schema_version:1,id:session.id,case_id:session.case_id,case_version:session.case_version,
