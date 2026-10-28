@@ -5,7 +5,7 @@ on:
       - 'mentor-lab.html'
       - 'mentor-lab.js'
       - 'mentor-lab.css'
-      - 'mentor/core/**'
+      - 'mentor/**'
       - 'scripts/verify-mentor-browser.mjs'
       - '.github/workflows/mentor-browser-smoke.yml'
   workflow_dispatch:
@@ -31,6 +31,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mentor-foundation-mobile-chromium
-          path: mentor-foundation-mobile.png
+          path: mentor-foundation-mobile*.png
           if-no-files-found: ignore
           retention-days: 7
