@@ -1,4 +1,5 @@
 import { readSeminarValues, applySeminarValues } from './seminar-sync.js';
+import { noteValues, applyNoteValues } from './notes-store.js';
 export const QKEY='ekab-eoppep-official-v15';
 let syncDb, pdfDb;
 function open(name, stores) {
@@ -19,7 +20,7 @@ export function readLocalValues() {
   const values={};
   const raw=localStorage.getItem(QKEY);const questions=raw?JSON.parse(raw):{};
   if(!questions||typeof questions!=='object'||Array.isArray(questions))throw new Error('invalid-local-data');
-  for(const [id,q]of Object.entries(questions))for(const field of ['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt','readCompletedAt'])if(q&&q[field]!==undefined)values['q:'+id+':'+field]=q[field];
+  for(const [id,q]of Object.entries(questions))for(const field of ['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt','readCompletedAt','sosNotes','readerNotes'])if(q&&q[field]!==undefined)values['q:'+id+':'+field]=q[field];
   for(let i=0;i<localStorage.length;i++){
     const k=localStorage.key(i);let m;
     if((m=/^ekab\.saek\.read\.v1\.(\d{2})\.(\d{1,2})$/.exec(k))&&localStorage.getItem(k)==='1')values[`r:${m[1]}:${m[2]}`]='1';
@@ -42,6 +43,7 @@ export function readLocalValues() {
       values['x:saek-exams']=exam.history;
   }
   Object.assign(values,readSeminarValues());
+  Object.assign(values,noteValues());
   return values;
 }
 export async function checkpoint(userId) {
@@ -60,7 +62,10 @@ export function applyValues(values) {
     if(!/^EOP-[AB]-\d{3}$/.test(id)||!record||typeof record!=='object')continue;
     for(const field of ['sosNotes','readerNotes']){
       if(typeof record[field]==='string'){
-        (q[id]||={seen:0,weak:0,selfCorrect:0,selfAttempts:0,streak:0,draft:''})[field]=record[field];
+        const target=q[id]||={seen:0,weak:0,selfCorrect:0,selfAttempts:0,streak:0,draft:''};
+        // Legacy local notes have no cloud counterpart. Once synchronized,
+        // the merged value wins, including a deliberate empty-string edit.
+        if(!Object.prototype.hasOwnProperty.call(target,field))target[field]=record[field];
       }
     }
   }
@@ -87,7 +92,9 @@ export function applyValues(values) {
     else localStorage.removeItem('ekab.saek.exams.v1');
   }
   applySeminarValues(values);
+  applyNoteValues(values);
   window.dispatchEvent(new Event('ekab:cloud-applied'));
+  window.dispatchEvent(new Event('ekab:notes-changed'));
 }
 export async function applyPdfs(values, blobs) {
   const existing=await allPdfs(),d=await pdf();
