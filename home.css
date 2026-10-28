@@ -210,3 +210,6 @@ html[data-theme="dark"] .study-resume-play{background:#27576f;color:#c7efff}
 @media(prefers-reduced-motion:reduce){.study-resume-link{transition:none}}
 
 /* UI-FASTLANE-SMOKE-20261028: harmless stylesheet-only deployment test. */
+
+/* Compact home tracker bars only; no other UI changes. */
+#homeMultiTracker .home-mini-progress-track{width:min(100%,380px);height:5px}
