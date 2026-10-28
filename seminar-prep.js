@@ -302,7 +302,7 @@ function restartOralCycle(){
 }
 function renderOral(){
  const p=current(),u=selected.units[oral],prior=p.scenarioGrades[oral];
- const restart=$('seminarRestartOral');if(restart)restart.hidden=Object.keys(p.scenarioGrades).length<12;
+ const restart=$('seminarRestartOral');if(restart)restart.hidden=oral!==11 && Object.keys(p.scenarioGrades).length<12;
  $('seminarOralCounter').textContent='Κλινικό σενάριο '+(oral+1)+' / 12';
  $('seminarOralTitle').textContent='Περιέγραψε τις ενέργειές σου, με σωστή σειρά: '+u[0];
  $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
