@@ -1,0 +1,23 @@
+/* Mentor OS: read-only adapter over existing educational progress. Only preferences are written. */
+(()=>{'use strict';
+const PREF='ekab.mentor.preferences.v1',read=(k)=>{try{return JSON.parse(localStorage.getItem(k)||'{}')}catch{return {}}};
+const checked=[...document.querySelectorAll('input[type=checkbox]')],duration=document.getElementById('duration'),mode=document.getElementById('mode'),missions=document.getElementById('missions'),memory=document.getElementById('memory');
+const saved=read(PREF);if(Array.isArray(saved.goals)&&saved.goals.length)checked.forEach(c=>c.checked=saved.goals.includes(c.value));
+if([10,15,25,30].includes(saved.minutes))duration.value=String(saved.minutes);if(['guided','practice','exam'].includes(saved.mode))mode.value=saved.mode;
+function goals(){return checked.filter(c=>c.checked).map(c=>c.value)}
+function save(){try{localStorage.setItem(PREF,JSON.stringify({goals:goals(),minutes:Number(duration.value),mode:mode.value}))}catch{}}
+function el(tag,content,cls){const e=document.createElement(tag);if(content!==undefined)e.textContent=content;if(cls)e.className=cls;return e}
+function line(parent,label,value){const p=el('p',label+': '+value,'small');parent.append(p)}
+function link(parent,label,href){const a=el('a',label);a.href=href;parent.append(a)}
+function saek(){let n=0;try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^ekab\.saek\.read\.v1\.\d{2}\.\d{1,2}$/.test(k)&&localStorage.getItem(k)==='1')n++}}catch{};const s=read('ekab.saek.exams.v1'),history=s.history&&typeof s.history==='object'?s.history:{};let evaluated=0,incorrect=0;for(const v of Object.values(history)){if(!v||typeof v!=='object')continue;const attempts=(Number(v.correct)||0)+(Number(v.partial)||0)+(Number(v.incorrect)||0);if(attempts>0)evaluated++;incorrect+=Math.max(0,Number(v.incorrect)||0)}return {read:n,total:247,evaluated,incorrect}}
+function eoppep(){const s=read('ekab-eoppep-official-v15');let studied=0,mastered=0,due=0;const scheduler=window.EkabStudyScheduler;if(scheduler)for(const [id,v] of Object.entries(s)){if(!/^EOP-[AB]-\d{3}$/.test(id)||!v||typeof v!=='object')continue;const r=scheduler.evaluate(v);if(r.studied)studied++;if(r.mastered)mastered++;if(r.due)due++}return {studied,mastered,due,total:314}}
+function render(){missions.replaceChildren();memory.replaceChildren();const g=goals(),mins=Number(duration.value),guided=mode.value==='guided';if(!g.length){missions.append(el('p','Επίλεξε τουλάχιστον έναν στόχο για να εμφανιστούν προτάσεις.'));return}
+const slices=[Math.round(mins*.6),Math.round(mins*.28)];slices.push(mins-slices[0]-slices[1]);
+for(const id of g){const section=el('div',undefined,'panel');const title=id==='saek'?'ΣΑΕΚ':id==='eoppep'?'ΕΟΠΠΕΠ':'Σεμινάρια';section.append(el('h3',title));if(id==='saek'){const s=saek();line(section,'Ανάγνωση',s.read+'/247 ('+Math.round(100*s.read/247)+'%)');line(section,'Αξιολογημένες διαφορετικές ερωτήσεις',String(s.evaluated));line(section,'Καταγεγραμμένες λανθασμένες προσπάθειες',String(s.incorrect));line(section,'Μεταγενέστερη επανάληψη','Δεν τεκμηριώνεται από το διαθέσιμο ιστορικό ΣΑΕΚ');link(section,'Άνοιγμα μαθημάτων','saek.html');section.append(el('p',s.incorrect?'Πρόταση: επανάλαβε τα σημεία που σε δυσκόλεψαν.':'Πρόταση: συνέχισε το επόμενο κεφάλαιο που δεν έχεις διαβάσει.','small'))}
+else if(id==='eoppep'){const s=eoppep();line(section,'Μελετημένες ερωτήσεις',s.studied+'/314 ('+Math.round(100*s.studied/314)+'%)');line(section,'Επιβεβαιωμένη επανάληψη',s.mastered+'/314');line(section,'Για επανάληψη',String(s.due));link(section,'Άνοιγμα ΕΟΠΠΕΠ','eoppep.html')}
+else{line(section,'Πρόοδος','Δεν υπάρχει κοινός αξιόπιστος παρονομαστής για ποσοστό');link(section,'Άνοιγμα σεμιναρίων','seminar-prep.html')}
+memory.append(section);
+const plan=el('div',undefined,'panel');plan.append(el('h3',title+' · '+mins+' λεπτά'));const tasks=guided?['Μελέτη με καθοδήγηση','Έλεγχος κατανόησης','Επανάληψη']:['Εξάσκηση','Αξιολόγηση','Ανασκόπηση'];tasks.forEach((t,i)=>line(plan,t,slices[i]+' λεπτά'));link(plan,'Μετάβαση στην υπάρχουσα ενότητα',id==='saek'?'saek.html':id==='eoppep'?'eoppep.html':'seminar-prep.html');missions.append(plan)}
+document.getElementById('reason').textContent='Οι αποστολές χρησιμοποιούν μόνο τις επιλεγμένες ενότητες και τα αποθηκευμένα στοιχεία. Η ανάγνωση, η αξιολόγηση και η μεταγενέστερη επανάληψη παρουσιάζονται χωριστά. Δεν απονέμεται αυτόματα επίπεδο γνώσης.'}
+checked.forEach(c=>c.addEventListener('change',()=>{save();render()}));[duration,mode].forEach(c=>c.addEventListener('change',()=>{save();render()}));document.getElementById('refresh').addEventListener('click',render);window.addEventListener('pageshow',render);render();
+})();
