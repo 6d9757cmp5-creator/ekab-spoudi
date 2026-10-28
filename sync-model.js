@@ -1,7 +1,7 @@
 import { validSeminarCourse, mergeSeminarCourse, SEMINAR_COURSES } from './seminar-sync.js';
 export const SCHEMA = 'ekab-sync-v1';
 export const DRAFT_SEPARATOR = '\n\n—— Σημείωση από άλλη συσκευή ——\n\n';
-const fields = new Set(['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt']);
+const fields = new Set(['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt','readCompletedAt']);
 const fileId = v => typeof v === 'string' && /^[A-Za-z0-9][\w.-]{0,35}$/.test(v);
 export function stable(value) {
   if (value === undefined) return 'null';
@@ -15,7 +15,7 @@ export function validValue(key, value) {
     if (!fields.has(match[4]) || +match[3]<1 || +match[3]>(match[2]==='A'?105:209)) return false;
     if(value===null)return true;
     if(match[4]==='reviewHistory')return Array.isArray(value)&&value.length<=72&&value.every(e=>e&&typeof e==='object'&&!Array.isArray(e)&&Object.keys(e).every(k=>['at','localDay','result'].includes(k))&&typeof e.at==='string'&&e.at.length<=40&&Number.isFinite(Date.parse(e.at))&&typeof e.localDay==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(e.localDay)&&['correct','assisted','incorrect','review'].includes(e.result));
-    if(match[4]==='nextReviewAt')return typeof value==='string'&&value.length<=40&&Number.isFinite(Date.parse(value));
+    if(match[4]==='nextReviewAt'||match[4]==='readCompletedAt')return typeof value==='string'&&value.length<=40&&Number.isFinite(Date.parse(value));
     return match[4]==='draft' ? typeof value==='string' && value.length<=250000 : Number.isSafeInteger(value)&&value>=0&&value<=1e9;
   }
   if (/^r:(0[1-9]|1\d|20):([1-9]|1\d|20)$/.test(key)) return value===null || value==='1';
@@ -52,6 +52,9 @@ export function mergeEntry(key,a,b) {
     const events=[...(a.v||[]),...(b.v||[])];v=[...new Map(events.map(e=>[stable(e),e])).values()].sort((x,y)=>Date.parse(x.at)-Date.parse(y.at)||x.result.localeCompare(y.result)).slice(-72);
   } else if(key.endsWith(':nextReviewAt')&&a.v&&b.v) {
     v=Date.parse(a.v)<Date.parse(b.v)?a.v:b.v;
+  } else if(key.endsWith(':readCompletedAt')) {
+    // Explicit undo (null) is allowed, including concurrent edits.
+    v=winner.v;
   } else if(/^q:/.test(key)&&typeof a.v==='number'&&typeof b.v==='number') {
     v=key.endsWith(':streak')?Math.min(a.v,b.v):Math.max(a.v,b.v);
   } else if((key.startsWith('p:')||key.startsWith('r:')||key.startsWith('q:'))&&(a.v===null||b.v===null)) v=a.v??b.v;

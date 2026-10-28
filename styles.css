@@ -270,7 +270,9 @@ html[data-theme="dark"] .account-dialog{background:var(--bg)}html[data-theme="da
 .catalog-reader-navigation{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:13px 0 8px}
 .catalog-reader-navigation .btn{min-height:42px;min-width:0;white-space:normal;text-align:center}
 .catalog-reader-navigation .btn:disabled{opacity:.48;cursor:not-allowed}
-@media(max-width:480px){.catalog-reader-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-reader-navigation .btn{padding:10px 8px;font-size:.78rem}}
+.catalog-reader-navigation #catalogReaderMarkRead.is-read{border-color:var(--green);background:var(--light);color:var(--ink)}
+html[data-theme="dark"] .catalog-reader-navigation #catalogReaderMarkRead.is-read{background:#193849;color:#d4f8de;border-color:#5fbd8d}
+@media(max-width:480px){.catalog-reader-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-reader-navigation .btn{padding:10px 8px;font-size:.78rem}.catalog-reader-navigation #catalogReaderMarkRead{grid-column:1/-1}}
 
 .catalog-reader-question{font-size:1.12rem;line-height:1.5;margin:18px 0 13px;overflow-wrap:anywhere}
 .catalog-reader h4{font-size:.98rem;margin:19px 0 9px}

@@ -10,6 +10,7 @@ on:
       - 'sw.js'
       - 'scripts/verify-saek.mjs'
       - 'scripts/verify-education.mjs'
+      - 'scripts/verify-eoppep-read-progress.mjs'
       - 'official_questions.json'
       - 'docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'
       - 'saek-visual-ui.js'
@@ -24,6 +25,7 @@ on:
       - 'sw.js'
       - 'scripts/verify-saek.mjs'
       - 'scripts/verify-education.mjs'
+      - 'scripts/verify-eoppep-read-progress.mjs'
       - 'official_questions.json'
       - 'docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'
       - 'saek-visual-ui.js'
@@ -42,5 +44,7 @@ jobs:
         run: node scripts/verify-saek.mjs
       - name: Check EOPPEP references, lesson-specific drills, answers and source illustration registry
         run: node scripts/verify-education.mjs
+      - name: Check EOPPEP reader read-completion, undo and sync
+        run: node scripts/verify-eoppep-read-progress.mjs
       - name: Validate lesson-visual JavaScript syntax
         run: node --check saek-visual-ui.js && node --check saek-reviewed-image-ui.js
