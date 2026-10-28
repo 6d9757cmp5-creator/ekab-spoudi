@@ -5,10 +5,8 @@
   const button = document.getElementById('aedFindNearby');
   const status = document.getElementById('aedNearbyStatus');
   const mapElement = document.getElementById('aedNearbyMap');
-  const results = document.getElementById('aedNearbyResults');
-  const count = document.getElementById('aedNearbyCount');
   const radiusSelect = document.getElementById('aedSearchRadius');
-  if (!button || !status || !mapElement || !results || !count) return;
+  if (!button || !status || !mapElement) return;
   const CRETE = { lat: 35.2, lon: 24.9 };
   const RADIUS = () => Math.max(1, Math.min(50, Number(radiusSelect?.value) || 10));
   const inCrete = (lat, lon) => lat >= 34.65 && lat <= 36.05 && lon >= 23.1 && lon <= 26.7;
@@ -19,7 +17,7 @@
       Math.cos(a * radians) * Math.cos(c * radians) * Math.sin(y / 2) ** 2;
     return 12742 * Math.asin(Math.min(1, Math.sqrt(h)));
   };
-  const msg = (s, error = false) => { status.textContent = s; status.dataset.error = String(error); };
+  const msg = (s, error = false) => { status.textContent = s; status.dataset.error = String(error); status.hidden = !s || (!error && s !== 'Εντοπισμός της θέσης σου…'); };
   let map, markerLayer, locationMarker, currentLocation, positions = [];
   let loaded = false, loading = false;
 
@@ -81,7 +79,6 @@
   const render = () => {
     if (!initMap()) return;
     markerLayer.clearLayers();
-    results.replaceChildren();
     if (locationMarker) { map.removeLayer(locationMarker); locationMarker = null; }
     const nearby = currentLocation ? positions.map(item => ({
       ...item, distance: kilometers(currentLocation.lat, currentLocation.lon, item.lat, item.lon)
@@ -97,30 +94,10 @@
         radius: 10, color: '#fff', weight: 3, fillColor: '#147cc6', fillOpacity: 1
       }).bindPopup('Η θέση σου (κατά προσέγγιση)').addTo(map);
       map.setView([lat, lon], 14);
-      count.textContent = chosen.length + ' επίσημοι καταχωρισμένοι ΑΕΑ σε ακτίνα ' +
-        radius + ' χλμ. · ' + positions.length + ' διαθέσιμοι και δημόσια προσβάσιμοι στη βάση της Κρήτης.';
-      for (const item of chosen.slice(0, 15)) {
-        const li = document.createElement('li');
-        const title = document.createElement('strong');
-        title.textContent = item.label;
-        const distance = document.createElement('span');
-        distance.textContent = ' · ' + item.distance.toFixed(2).replace('.', ',') +
-          ' χλμ. σε ευθεία · ' + item.hours;
-        const link = document.createElement('a');
-        link.href = directionsURL(item.lat, item.lon);
-        link.textContent = 'Διαδρομή ↗';
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        li.append(title, distance, document.createTextNode(' '), link);
-        results.appendChild(li);
-      }
-      msg(chosen.length ?
-        'Βρέθηκαν καταχωρίσεις ΑΕΑ κοντά σου, από το επίσημο Πρόγραμμα ΖΩΗ. Έλεγξε πρόσβαση/ωράριο πριν μετακινηθείς.' :
-        'Δεν βρέθηκε επίσημη διαθέσιμη καταχώριση εντός αυτής της ακτίνας. Αύξησε την απόσταση ή άνοιξε τον επίσημο χάρτη.');
+      msg(chosen.length ? '' : 'Δεν βρέθηκε διαθέσιμος απινιδωτής στην επιλεγμένη ακτίνα. Επίλεξε μεγαλύτερη.', chosen.length === 0);
     } else {
       map.setView([CRETE.lat, CRETE.lon], 9);
-      count.textContent = positions.length + ' διαθέσιμοι και δημόσια προσβάσιμοι απινιδωτές στην Κρήτη (σύμφωνα με την τελευταία ανάκτηση).';
-      msg('Ο επίσημος χάρτης φορτώθηκε. Επίτρεψε την τοποθεσία για να γίνει ζουμ κοντά σου.');
+      msg('');
     }
     requestAnimationFrame(() => map.invalidateSize());
   };
@@ -161,8 +138,6 @@
       render();
     } catch (_e) {
       loaded = false;
-      count.textContent = '';
-      results.replaceChildren();
       msg('Αδυναμία σύνδεσης με την επίσημη βάση απινιδωτών. Άνοιξε τον χάρτη της Περιφέρειας Κρήτης.', true);
     } finally {
       clearTimeout(timer);
