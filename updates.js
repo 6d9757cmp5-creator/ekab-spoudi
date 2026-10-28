@@ -14,8 +14,8 @@ if(!document.querySelector('script[data-ekab-global-tools]')){
 
 /* Independent floating notebook: private notes and SOS only, never global search. */
 if(!document.querySelector('script[data-ekab-notes-panel]')){
- const css=document.createElement('link');css.rel='stylesheet';css.href='notes-panel.css?v=27.1.114';css.dataset.ekabNotesPanel='css';document.head.append(css);
- const script=document.createElement('script');script.type='module';script.src='notes-panel.js?v=27.1.114';
+ const css=document.createElement('link');css.rel='stylesheet';css.href='notes-panel.css?v=27.1.115';css.dataset.ekabNotesPanel='css';document.head.append(css);
+ const script=document.createElement('script');script.type='module';script.src='notes-panel.js?v=27.1.115';
  script.dataset.ekabNotesPanel='js';document.head.append(script);
 }
 

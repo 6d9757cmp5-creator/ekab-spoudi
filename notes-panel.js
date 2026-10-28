@@ -4,6 +4,7 @@ import { readNotes, writeNotes, NOTE_LIMIT } from './notes-store.js';
 import { canDeletePersonalEntry, deletePersonalEntry } from './notes-delete.js';
 import { NOTES_FAB_POSITION, NOTES_WINDOW_POSITION, clampFloating, ratiosForFloating, floatingFromRatios, readFloatingPosition, saveFloatingPosition } from './notes-position.js';
 
+const NOTES_FAB_HIDDEN_KEY='ekab.notes.fab.hidden.v1';
 const EOP_KEY='ekab-eoppep-official-v15';
 const SEM_KEY='ekab.seminar-prep.local.v1';
 const SEM_NAMES={bls:'BLS/AED',pbls:'PBLS',ils:'ILS',phtls:'PHTLS',als:'ALS'};
@@ -96,7 +97,7 @@ function loadSos(){
  return sosPromise;
 }
 
-let dialog,trigger,search,results,status,actionStatus,more,editor,form,titleInput,bodyInput,sectionInput,contextInput;
+let dialog,trigger,visibilityToggle,search,results,status,actionStatus,more,editor,form,titleInput,bodyInput,sectionInput,contextInput;
 let mode='mine',limit=30,activeEditor=null,renderSequence=0,returnFocus=null;
 let suppressDraggedClick=false;
 let restoreOnResize=null;
@@ -172,7 +173,7 @@ function resetFloatingPositions(){
  clearPosition(trigger);clearPosition(dialog);
 }
 function refreshFloatingPositions(){
- restorePosition(trigger,NOTES_FAB_POSITION);
+ if(trigger&&!trigger.hidden)restorePosition(trigger,NOTES_FAB_POSITION);
  if(dialog?.open)restorePosition(dialog,NOTES_WINDOW_POSITION);
 }
 
@@ -182,6 +183,45 @@ function emit(){
 }
 function close(){
  if(dialog?.open)dialog.close();
+}
+/* The notebook visibility preference belongs to this device only.
+   It never touches the personal-note store or learning/sync data. */
+function isFloatingHidden(){
+ try{return localStorage.getItem(NOTES_FAB_HIDDEN_KEY)==='1'}catch{return false}
+}
+function setFloatingHidden(hidden,persist=false){
+ if(!trigger)return;
+ if(hidden&&dialog?.open){
+  returnFocus=visibilityToggle;
+  close();
+ }
+ trigger.hidden=!!hidden;
+ if(visibilityToggle){
+  visibilityToggle.setAttribute('aria-pressed',String(!hidden));
+  const label=hidden?'Εμφάνιση αιωρούμενων σημειώσεων':'Απόκρυψη αιωρούμενων σημειώσεων';
+  visibilityToggle.setAttribute('aria-label',label);
+  visibilityToggle.title=label;
+  if(!visibilityToggle.closest('header'))visibilityToggle.textContent='📝 '+label;
+ }
+ if(persist){
+  try{
+   if(hidden)localStorage.setItem(NOTES_FAB_HIDDEN_KEY,'1');
+   else localStorage.removeItem(NOTES_FAB_HIDDEN_KEY);
+  }catch{}
+ }
+ if(!hidden)requestAnimationFrame(()=>restorePosition(trigger,NOTES_FAB_POSITION));
+}
+function installVisibilityControl(){
+ visibilityToggle=button('📝',()=>setFloatingHidden(!trigger.hidden,true),'ekab-notes-visibility-toggle');
+ visibilityToggle.id='ekabNotesVisibilityToggle';
+ visibilityToggle.setAttribute('aria-controls','ekabNotesFab');
+ const utility=document.querySelector('header.top .utility');
+ if(utility)utility.append(visibilityToggle);
+ else{
+  visibilityToggle.classList.add('ekab-notes-visibility-fallback');
+  (document.querySelector('footer')||document.querySelector('main')||document.body).append(visibilityToggle);
+ }
+ setFloatingHidden(isFloatingHidden());
 }
 function setEditor(value){
  editor.hidden=!value;
@@ -338,7 +378,7 @@ function install(){
  dialog=document.createElement('dialog');dialog.id='ekabNotesDialog';dialog.className='ekab-notes-dialog';
  dialog.setAttribute('aria-labelledby','ekabNotesTitle');
  dialog.innerHTML=`<div class="ekab-notes-shell">
-  <div class="ekab-notes-head" id="ekabNotesDragHandle"><div><h2 id="ekabNotesTitle">📝 Οι σημειώσεις μου</h2><p>Ανεξάρτητη αναζήτηση μόνο για σημειώσεις και SOS</p><span class="ekab-notes-drag-hint" aria-hidden="true">⠿ Σύρε εδώ για μετακίνηση</span></div><div class="ekab-notes-head-actions"><button id="ekabNotesResetPosition" type="button" aria-label="Επαναφορά θέσης σημειώσεων" title="Επαναφορά θέσης">↺</button><button id="ekabNotesClose" type="button" aria-label="Κλείσιμο σημειώσεων">✕</button></div></div>
+  <div class="ekab-notes-head" id="ekabNotesDragHandle"><div><h2 id="ekabNotesTitle">📝 Οι σημειώσεις μου</h2><p>Ανεξάρτητη αναζήτηση μόνο για σημειώσεις και SOS</p><span class="ekab-notes-drag-hint" aria-hidden="true">⠿ Σύρε εδώ για μετακίνηση</span></div><div class="ekab-notes-head-actions"><button id="ekabNotesResetPosition" type="button" aria-label="Επαναφορά θέσης σημειώσεων" title="Επαναφορά θέσης">↺</button><button id="ekabNotesHideFloating" type="button" aria-label="Απόκρυψη αιωρούμενων σημειώσεων εντελώς" title="Κρύψε το αιωρούμενο κουμπί · εμφάνισέ το ξανά από την κεφαλίδα">⤓</button><button id="ekabNotesClose" type="button" aria-label="Κλείσιμο σημειώσεων">✕</button></div></div>
   <div id="ekabNotesBrowse">
    <div class="ekab-notes-controls"><label for="ekabNotesSearch">Αναζήτησε μέσα στις σημειώσεις σου</label>
    <input id="ekabNotesSearch" type="search" placeholder="Λέξη, θέμα, SOS, όρος…" autocomplete="off">
@@ -364,9 +404,10 @@ function install(){
   </form>
  </div>`;
  document.body.append(trigger,dialog);
+ installVisibilityControl();
  draggable(trigger,trigger,NOTES_FAB_POSITION);
  draggable(dialog,$('ekabNotesDragHandle'),NOTES_WINDOW_POSITION);
- restorePosition(trigger,NOTES_FAB_POSITION);
+ if(!trigger.hidden)restorePosition(trigger,NOTES_FAB_POSITION);
  window.addEventListener('resize',refreshFloatingPositions);
  window.visualViewport?.addEventListener('resize',refreshFloatingPositions);
  trigger.addEventListener('keydown',event=>{
@@ -387,6 +428,7 @@ function install(){
  search.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(()=>{limit=30;render()},120)});
  $('ekabNotesNew').addEventListener('click',()=>newNote());
  $('ekabNotesClose').addEventListener('click',close);
+ $('ekabNotesHideFloating').addEventListener('click',()=>{setFloatingHidden(true,true);visibilityToggle?.focus()});
  $('ekabNotesResetPosition').addEventListener('click',resetFloatingPositions);
  $('ekabNotesCancel').addEventListener('click',()=>{setEditor(null);render()});
  $('ekabNotesRemove').addEventListener('click',removeNote);
@@ -396,7 +438,10 @@ function install(){
  dialog.addEventListener('close',()=>{trigger.setAttribute('aria-expanded','false');setEditor(null);returnFocus?.focus?.();returnFocus=null});
  window.addEventListener('ekab:notes-changed',()=>{if(dialog.open)render()});
  window.addEventListener('ekab:cloud-applied',()=>{if(dialog.open)render()});
- window.addEventListener('storage',e=>{if(dialog.open&&[EOP_KEY,SEM_KEY,'ekab.personal-notes.v1'].includes(e.key))render()});
+ window.addEventListener('storage',e=>{
+  if(e.key===NOTES_FAB_HIDDEN_KEY)setFloatingHidden(isFloatingHidden());
+  if(dialog.open&&[EOP_KEY,SEM_KEY,'ekab.personal-notes.v1'].includes(e.key))render();
+ });
  window.EkabNotes=Object.freeze({open});
  addChapterButtons();
 }
