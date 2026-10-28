@@ -92,6 +92,14 @@ if(location.hash.startsWith('#lesson-')){
   const n=Number(a.getAttribute('href').replace('#lesson-',''));
   if(n>=1&&n<=chapters.length){e.preventDefault();e.stopImmediatePropagation();select(n-1,true)}
  },true));
+ window.addEventListener('keydown',event=>{
+  if(event.defaultPrevented||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return;
+  const target=event.target;
+  if(target instanceof Element&&(target.closest('input, textarea, select, [contenteditable="true"], [role="textbox"]')||target.closest('video, audio')))return;
+  if(document.fullscreenElement||document.querySelector('[role="dialog"][aria-modal="true"], dialog[open], .lightbox[open], .lightbox.active'))return;
+  if(event.key==='ArrowRight'&&index<chapters.length-1){event.preventDefault();select(index+1,true)}
+  else if(event.key==='ArrowLeft'&&index>0){event.preventDefault();select(index-1,true)}
+ });
  chapters.forEach((ch,i)=>ch.addEventListener('toggle',()=>{if(ch.open&&i!==index)select(i,false)}));
  select(index,false);
 })();
