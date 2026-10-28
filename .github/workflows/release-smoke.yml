@@ -21,10 +21,12 @@ jobs:
           for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js home-progress-panel.js activity-time.js saek-exams.js theme-init.js global-tools.js app.js navigation.js; do
             node --check "$file"
           done
-          for file in account-ui.js appwrite-client.js cloud-sync.js sync-local.js sync-model.js seminar-sync.js; do
+          for file in account-ui.js appwrite-client.js cloud-sync.js sync-local.js sync-model.js seminar-sync.js notes-store.js notes-panel.js; do
             node --input-type=module --check < "$file"
           done
       - name: Verify cross-device seminar progress merge and deletion safety
         run: node scripts/test-seminar-sync.cjs
+      - name: Verify searchable private notes, SOS source coverage and safe cloud merges
+        run: node scripts/verify-notes-panel.mjs
       - name: Verify minimal dual progress, practice-only seminars and reset isolation
         run: node scripts/verify-progress-panel.cjs
