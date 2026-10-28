@@ -11,7 +11,19 @@ export function freeProviders(env=process.env){
    id:'cloudflare',model:cloudModel,key:env.CLOUDFLARE_API_TOKEN,
    url:'https://api.cloudflare.com/client/v4/accounts/'+env.CLOUDFLARE_ACCOUNT_ID+'/ai/v1/chat/completions'
   });
- // Groq has no verified non-OpenAI production model on this Free account.
+ // Additional providers stay disabled until a Free account and its server-side key are verified.
+ if(env.GROQ_API_KEY && env.GROQ_FREE_PLAN_CONFIRMED==='true')providers.push({
+  id:'groq',model:'qwen/qwen3.8-27b',key:env.GROQ_API_KEY,
+  url:'https://api.groq.com/openai/v1/chat/completions'
+ });
+ if(env.MISTRAL_API_KEY && env.MISTRAL_FREE_PLAN_CONFIRMED==='true')providers.push({
+  id:'mistral',model:'mistral-small-latest',key:env.MISTRAL_API_KEY,
+  url:'https://api.mistral.ai/v1/chat/completions'
+ });
+ if(env.CEREBRAS_API_KEY && env.CEREBRAS_FREE_PLAN_CONFIRMED==='true')providers.push({
+  id:'cerebras',model:'zai-glm-4.7',key:env.CEREBRAS_API_KEY,
+  url:'https://api.cerebras.ai/v1/chat/completions'
+ });
  const model=env.OPENROUTER_FREE_MODEL||'';
  // Never allow :nitro, paid names, implicit defaults or automatic paid routing.
  if(env.OPENROUTER_API_KEY && ['google/gemma-4-31b-it:free','nvidia/nemotron-3.5-super-vl:free'].includes(model))providers.push({
@@ -46,6 +58,7 @@ export async function requestFreeGrade(provider,messages){
  }
  const body={model:provider.model,messages,temperature:0,max_tokens:1800,
   response_format:{type:'json_object'}};
+ if(provider.id==='cerebras')body.reasoning_effort='none';
  if(provider.id==='openrouter')body.reasoning={enabled:false};
  if(provider.id==='openrouter')body.provider={max_price:{prompt:0,completion:0,request:0},ignore:['OpenAI'],allow_fallbacks:false};
  const response=await fetch(provider.url,{
@@ -57,3 +70,4 @@ export async function requestFreeGrade(provider,messages){
  if(choice?.finish_reason!=='stop'||typeof choice.message?.content!=='string')throw new Error('Incomplete result');
  return JSON.parse(choice.message.content);
 }
+
