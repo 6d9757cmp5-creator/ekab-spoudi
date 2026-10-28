@@ -12,6 +12,7 @@ on:
       - 'saek-visual-ui.css'
       - 'sw.js'
       - 'scripts/validate-saek-svg.py'
+      - 'scripts/validate-semester-c-diagram-text.mjs'
       - 'assets/education/*.svg'
       - '.github/workflows/saek-image-review.yml'
   workflow_dispatch:
@@ -38,6 +39,8 @@ jobs:
         run: node scripts/verify-saek-image-integration.mjs
       - name: Validate local SVG XML, accessibility, Greek labels and SHA-256
         run: python3 scripts/validate-saek-svg.py
+      - name: Reject truncated or generic semester C diagrams
+        run: node scripts/validate-semester-c-diagram-text.mjs
       - name: Publish machine-readable audit report
         if: always()
         uses: actions/upload-artifact@v4
