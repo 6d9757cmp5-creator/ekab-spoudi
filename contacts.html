@@ -22,25 +22,30 @@
 <div class="aed-help-row"><a class="btn secondary compact" href="https://apinidotes.crete.gov.gr/Bls" target="_blank" rel="noopener noreferrer">Επίσημες οδηγίες ΚΑΡΠΑ ↗</a><a class="link-inline" href="https://apinidotes.crete.gov.gr/files/afisaBLS.pdf" target="_blank" rel="noopener noreferrer">Επίσημη αφίσα BLS (PDF) ↗</a></div>
 </section>
 <section class="panel" aria-labelledby="aedCreteMapTitle">
-<p class="eyebrow">Πρόγραμμα «Ζωή» · Περιφέρεια Κρήτης</p>
-<h2 id="aedCreteMapTitle">Χάρτης απινιδωτών στην Κρήτη</h2>
-<p class="small muted">Ο επίσημος διαδραστικός χάρτης της Περιφέρειας Κρήτης. Μέσα στον χάρτη χρησιμοποίησε τη λειτουργία εντοπισμού κοντά σου και επίλεξε σημείο για τις λεπτομέρειές του.</p>
-<div class="aed-help-row"><a href="https://apinidotes.crete.gov.gr/Map" target="_blank" rel="noopener noreferrer" class="btn secondary compact">Άνοιξε τον επίσημο χάρτη · κοντά μου ↗</a><a href="tel:112" class="btn compact">Κλήση 112</a></div>
-<div class="aed-map-frame"><iframe title="Επίσημος χάρτης απινιδωτών της Περιφέρειας Κρήτης" src="https://apinidotes.crete.gov.gr/Map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="geolocation" aria-label="Χάρτης απινιδωτών Κρήτης — εξωτερική υπηρεσία"></iframe></div>
-<p class="aed-map-attribution">Πηγή: <a href="https://apinidotes.crete.gov.gr/Map" target="_blank" rel="noopener noreferrer">Περιφέρεια Κρήτης, Πρόγραμμα «Ζωή»</a>. Αν ο εξωτερικός ιστότοπος εμποδίζει την ενσωμάτωση, άνοιξε τον χάρτη από το παραπάνω κουμπί.</p>
-<p class="aed-caution"><strong>Σημαντικό:</strong> Η ακριβής θέση, το ωράριο πρόσβασης και η διαθεσιμότητα κάθε ΑΕΑ πρέπει να επιβεβαιώνονται από τον επίσημο χάρτη. Η εφαρμογή δεν διατηρεί δικό της αντίγραφο θέσεων. Ο εντοπισμός κοντινών ΑΕΑ και το αυτόματο ζουμ ελέγχονται από τη λειτουργικότητα του εξωτερικού ιστοτόπου, όχι από το ΕΚΑΒ Σπουδή. Αν δεν λειτουργεί η τοποθεσία, επίτρεψε την πρόσβαση στον ιστότοπο της Περιφέρειας.</p>
-</section>
-<section class="panel" aria-labelledby="osmNearbyTitle">
-<p class="eyebrow">Προαιρετικός εντοπισμός θέσης</p>
-<h2 id="osmNearbyTitle">Απινιδωτές κοντά στη θέση μου</h2>
-<p class="small muted"><strong>Συμπληρωματική αναζήτηση OpenStreetMap — όχι επίσημος κατάλογος.</strong> Τα εμφανιζόμενα σημεία δεν έχουν επιβεβαιωθεί από το Πρόγραμμα «ΖΩΗ». Για πραγματικό περιστατικό βασίσου στον επίσημο χάρτη και στις οδηγίες του 112/166.</p>
-<p class="small muted">Πάτησε «Εντόπισέ με» για να εστιάσει ο βοηθητικός χάρτης στη θέση σου και να αναζητήσει πιθανές καταχωρίσεις σε ακτίνα 5 χιλιομέτρων. Εάν έχεις ήδη επιτρέψει την τοποθεσία, η αναζήτηση ξεκινά αυτόματα.</p>
-<div class="aed-help-row"><button type="button" id="aedFindNearby" class="btn secondary compact">⌖ Εντόπισέ με και δείξε κοντινά σημεία</button><a class="link-inline" href="https://apinidotes.crete.gov.gr/Map" target="_blank" rel="noopener noreferrer">Επίσημος χάρτης Κρήτης ↗</a></div>
-<p id="aedNearbyStatus" role="status" aria-live="polite" class="small muted">Χωρίς άδεια τοποθεσίας δεν γίνεται αναζήτηση.</p>
-<div id="aedNearbyMap" class="aed-nearby-map" aria-label="Βοηθητικός χάρτης OpenStreetMap" hidden></div>
+<p class="eyebrow">Περιφέρεια Κρήτης · Πρόγραμμα «ΖΩΗ»</p>
+<h2 id="aedCreteMapTitle">Επίσημος χάρτης απινιδωτών στην Κρήτη</h2>
+<p class="small muted">Τα σημεία ΑΕΑ φορτώνονται απευθείας από την επίσημη δημόσια υπηρεσία της Περιφέρειας Κρήτης. Ο χάρτης εμφανίζει διαθέσιμες, δημόσιες καταχωρίσεις χωρίς αποθήκευση προσωπικής τοποθεσίας.</p>
+<p class="small muted">Πάτησε <strong>«Εντόπισέ με»</strong> για να εστιάσει ο χάρτης αυτόματα στη θέση σου και να εμφανίσει τους κοντινότερους καταχωρισμένους ΑΕΑ. Αν έχεις ήδη επιτρέψει την τοποθεσία, η εστίαση γίνεται αυτόματα.</p>
+<div class="aed-help-row">
+<button type="button" id="aedFindNearby" class="btn secondary compact">⌖ Εντόπισέ με · κοντινοί ΑΕΑ</button>
+<label class="aed-radius-label" for="aedSearchRadius">Ακτίνα αναζήτησης
+<select id="aedSearchRadius" aria-label="Ακτίνα αναζήτησης απινιδωτών">
+<option value="5">5 χλμ.</option><option value="10" selected>10 χλμ.</option><option value="25">25 χλμ.</option><option value="50">50 χλμ.</option>
+</select></label>
+<a href="https://apinidotes.crete.gov.gr/Map" target="_blank" rel="noopener noreferrer" class="btn secondary compact">Χάρτης Περιφέρειας Κρήτης ↗</a>
+<a href="tel:112" class="btn compact">Κλήση 112</a>
+</div>
+<p id="aedNearbyStatus" role="status" aria-live="polite" class="small muted">Φόρτωση επίσημων δεδομένων...</p>
+<div id="aedNearbyMap" class="aed-nearby-map" aria-label="Χάρτης επίσημων απινιδωτών με εστίαση στη θέση σου" hidden></div>
 <p id="aedNearbyCount" class="small muted"></p>
-<ol id="aedNearbyResults" class="aed-nearby-results" aria-label="Πιθανές κοντινές καταχωρίσεις ΑΕΑ"></ol>
-<p class="aed-caution"><strong>Ιδιωτικότητα:</strong> Μόνο μετά την άδειά σου η θέση μεταφέρεται για την αναζήτηση στο Overpass API του OpenStreetMap. Δεν αποθηκεύεται στη συσκευή ή στον λογαριασμό του ΕΚΑΒ Σπουδή. Οι αποστάσεις είναι ευθείες, όχι διαδρομές πεζής πρόσβασης. Οι ώρες λειτουργίας/διαθεσιμότητας είναι άγνωστες: έλεγξέ τες στον επίσημο φορέα.</p>
+<ol id="aedNearbyResults" class="aed-nearby-results" aria-label="Κοντινότεροι διαθέσιμοι καταχωρισμένοι απινιδωτές"></ol>
+<p class="aed-map-attribution">Πηγή σημείων, διαθεσιμότητας και ωραρίων: <a href="https://apinidotes.crete.gov.gr/Map" target="_blank" rel="noopener noreferrer">Περιφέρεια Κρήτης – Πρόγραμμα ΖΩΗ</a>. Χαρτογραφικό υπόβαθρο: OpenStreetMap.</p>
+<p class="aed-caution"><strong>Σημαντικό:</strong> Η επίσημη καταχώριση «διαθέσιμος» δεν εγγυάται επιτόπια λειτουργία ή άμεση πρόσβαση. Οι αποστάσεις μετρώνται σε ευθεία και όχι κατά μήκος δρόμων. Επιβεβαίωσε τη διεύθυνση και το ωράριο. Σε πραγματικό επείγον κάλεσε αμέσως 112 ή 166 — μην καθυστερείς την παροχή ΚΑΡΠΑ.</p>
+<p class="aed-caution"><strong>Ιδιωτικότητα:</strong> Η θέση σου λαμβάνεται μόνο με την άδεια της συσκευής και χρησιμοποιείται τοπικά για εστίαση και υπολογισμό αποστάσεων. Το ΕΚΑΒ Σπουδή δεν τη στέλνει στην υπηρεσία απινιδωτών ούτε την αποθηκεύει. Όταν ανοίγεις χάρτες ή διαδρομές τρίτων ισχύουν οι δικές τους πολιτικές απορρήτου.</p>
+<details class="aed-official-embedded"><summary>Προβολή του πρωτότυπου χάρτη της Περιφέρειας</summary>
+<div class="aed-map-frame"><iframe title="Πρωτότυπος χάρτης απινιδωτών της Περιφέρειας Κρήτης" src="https://apinidotes.crete.gov.gr/Map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="geolocation"></iframe></div>
+<p class="small muted">Αν ο ενσωματωμένος χάρτης δεν εμφανίζεται, χρησιμοποίησε τον παραπάνω σύνδεσμο του επίσημου ιστοτόπου.</p>
+</details>
 </section>
 <section class="panel"><p class="eyebrow">Επικοινωνία Ηρακλείου</p><h2>ΕΚΑΒ Ηρακλείου</h2><p class="small muted">Διοικητική επικοινωνία — <strong>όχι για επείγουσα κλήση.</strong></p><p class="contact-number"><a href="tel:+302810377210">2810 377210</a></p><p><strong>Διεύθυνση:</strong> Διασταύρωση Βουτών &amp; Σταυρακίων, έναντι ΤΕΠ ΠΑΓΝΗ, Ηράκλειο Κρήτης.</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=%CE%95%CE%9A%CE%91%CE%92+%CE%97%CF%81%CE%B1%CE%BA%CE%BB%CE%B5%CE%AF%CE%BF%CF%85+%CE%92%CE%BF%CF%85%CF%84%CF%8E%CE%BD+%CE%A3%CF%84%CE%B1%CF%85%CF%81%CE%B1%CE%BA%CE%AF%CF%89%CE%BD" target="_blank" rel="noopener noreferrer" class="btn secondary compact">Τοποθεσία στον χάρτη ↗</a></p><a class="link-inline" href="https://www.ekab.gr/proselefsi-koinou/" target="_blank" rel="noopener noreferrer">Επίσημη πηγή ΕΚΑΒ ↗</a></section>
 <section class="panel"><p class="eyebrow">Γραμματεία σχολής</p><h2>ΣΑΕΚ ΕΚΑΒ Ηρακλείου</h2><p class="contact-number"><a href="tel:+302810377213">2810 377213</a></p><p><strong>Διεύθυνση:</strong> Διασταύρωση Βουτών &amp; Σταυρακίων, έναντι ΤΕΠ ΠΑΓΝΗ, Ηράκλειο Κρήτης, Τ.Κ. 71110.</p><a class="link-inline" href="https://www.ekab.gr/ekpedefsi/iek-ekav/" target="_blank" rel="noopener noreferrer">Επίσημη πηγή ΣΑΕΚ ΕΚΑΒ ↗</a></section><footer>ΕΚΑΒ Σπουδή v23 · χρήσιμες επαφές</footer></main><script src="progress.js" defer></script><script src="updates.js" defer></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script><script src="contacts-nearby-aed.js" defer></script></body></html>
