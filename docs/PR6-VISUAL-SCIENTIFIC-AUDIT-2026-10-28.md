@@ -224,3 +224,5 @@
 - Στο code head `94a1f18` ανασχεδιάστηκαν τα τρία SVG με σύμβολα για onset/trigger/quality, radiation/severity/time και σώμα/κλίμακα/δελτίο καταγραφής. Κάθε βέλος και λεζάντα δείχνει συγκεκριμένο στοιχείο· δεν προστίθενται ερμηνείες ή κλινικά thresholds.
 - Πηγή: επίσημος NREMT EMT User's Guide 2016, με OPQRST σε σενάρια εκπαίδευσης. Η πηγή είναι αμερικανικό εξεταστικό υλικό, όχι ελληνικό πρωτόκολλο. `clinicalReview=pending`.
 - Γενική EMS.gov πηγή: 183/649 συνολικά και 101/137 placements Δ΄. Πλήρης browser/επιστημονικός έλεγχος εκκρεμεί.
+
+- Επανέλεγχος ακριβούς code head `45ff18fb986fc68118dca90009f183ad639a1ae0` σε καθαρό clone: SVG 642/0 errors; A/B arrows 295/0 problems; integration 247/649/0 missing local/0 errors; static media 48 HTML/CSS/21 refs/0 missing. Αυτοί οι έλεγχοι δεν αποτελούν πλήρη οπτική ή κλινική αξιολόγηση.
