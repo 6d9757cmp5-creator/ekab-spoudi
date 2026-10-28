@@ -344,6 +344,7 @@ function bind(){
   if(!$('seminarQuestionSolution').hidden){status.hidden=false;status.textContent='Η ενδεικτική λύση έχει ήδη εμφανιστεί. Αυτή η απάντηση παραμένει χωρίς βαθμό.';return;}
   const courseId=selected.id,pos=run.pos,index=item.unit*4+item.prompt,button=$('seminarGradeAI');
   button.disabled=true;button.textContent='Γίνεται αξιολόγηση…';
+  $('seminarQuestionNotes').readOnly=true;$('seminarQuizReveal').disabled=true;$('seminarNextQuestion').disabled=true;
   status.hidden=false;status.textContent='Έλεγχος γραπτής απάντησης…';
   try{
    const result=await ai.evaluate({section:'seminar',courseId,questionIndex:index,answer});
@@ -360,6 +361,8 @@ function bind(){
   }finally{
    if(selected?.id===courseId&&view==='quiz'&&current().mixedRun===run&&run.pos===pos){
     button.disabled=!!run.responses[pos];button.textContent=run.responses[pos]?'Ολοκληρώθηκε':'Υποβολή αξιολόγησης';
+    $('seminarQuestionNotes').readOnly=!!run.responses[pos];
+    $('seminarQuizReveal').disabled=!!run.responses[pos];$('seminarNextQuestion').disabled=false;
    }
   }
  });
@@ -396,6 +399,8 @@ function bind(){
   if(!$('seminarOralHelp').hidden){info.textContent='Έχεις ήδη δει την εκπαιδευτική προτεραιότητα. Συνέχισε χωρίς βαθμολογία.';return;}
   const courseId=selected.id,caseId=oral,button=$('seminarScenarioSubmit');
   button.disabled=true;button.textContent='Ελέγχονται διαδικασίες και προτεραιότητες…';
+  $('seminarOralNotes').readOnly=true;$('seminarOralReveal').disabled=true;
+  $('seminarPrevOral').disabled=true;$('seminarNextOral').disabled=true;
   status.hidden=false;status.className='ai-grading-result';status.textContent='Γίνεται έλεγχος ασφάλειας, σειράς ενεργειών, παραλείψεων και κρίσιμων λαθών…';
   try{
    const result=await ai.evaluate({section:'seminar_case',courseId,caseIndex:caseId,answer});
@@ -423,6 +428,9 @@ function bind(){
   }finally{
    if(selected?.id===courseId&&view==='oral'&&oral===caseId){
     button.disabled=Boolean(current().scenarioGrades[caseId]);button.hidden=Boolean(current().scenarioGrades[caseId]);button.textContent='Υποβολή αξιολόγησης';
+    $('seminarOralNotes').readOnly=Boolean(current().scenarioGrades[caseId]);
+    $('seminarOralReveal').disabled=Boolean(current().scenarioGrades[caseId]);
+    $('seminarPrevOral').disabled=caseId===0;$('seminarNextOral').disabled=caseId===11;
    }
   }
  });
