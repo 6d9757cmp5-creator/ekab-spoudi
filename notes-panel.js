@@ -1,6 +1,7 @@
 /* EKAB Σπουδή — floating, searchable personal notebook, separate from global search.
    Personal writing is never used as searchable public study material. */
 import { readNotes, writeNotes, NOTE_LIMIT } from './notes-store.js';
+import { NOTES_FAB_POSITION, NOTES_WINDOW_POSITION, clampFloating, ratiosForFloating, floatingFromRatios, readFloatingPosition, saveFloatingPosition } from './notes-position.js';
 
 const EOP_KEY='ekab-eoppep-official-v15';
 const SEM_KEY='ekab.seminar-prep.local.v1';
@@ -96,10 +97,84 @@ function loadSos(){
 
 let dialog,trigger,search,results,status,more,editor,form,titleInput,bodyInput,sectionInput,contextInput;
 let mode='mine',limit=30,activeEditor=null,renderSequence=0,returnFocus=null;
+let suppressDraggedClick=false;
+let restoreOnResize=null;
 const tabButtons={};
 function button(label,fn,cls=''){
  const btn=make('button',cls,label);btn.type='button';btn.addEventListener('click',fn);return btn;
 }
+/* Pointer dragging works with mouse, touch and pen. A tap still opens notes.
+   Position is saved locally per device, separate from learning data/cloud sync. */
+function clearPosition(element){
+ if(!element)return;
+ for(const prop of ['inset','top','left','right','bottom'])element.style.removeProperty(prop);
+}
+function placeAt(element,left,top){
+ const rect=element.getBoundingClientRect();
+ const point=clampFloating(left,top,rect.width,rect.height,innerWidth,innerHeight);
+ element.style.inset='auto';
+ element.style.left=Math.round(point.left)+'px';
+ element.style.top=Math.round(point.top)+'px';
+ element.style.right='auto';
+ element.style.bottom='auto';
+}
+function savePosition(element,key){
+ const rect=element.getBoundingClientRect();
+ const ratio=ratiosForFloating(rect.left,rect.top,rect.width,rect.height,innerWidth,innerHeight);
+ saveFloatingPosition(localStorage,key,ratio);
+}
+function restorePosition(element,key){
+ const saved=readFloatingPosition(localStorage,key);
+ if(!saved)return;
+ const rect=element.getBoundingClientRect();
+ const point=floatingFromRatios(saved,rect.width,rect.height,innerWidth,innerHeight);
+ if(point)placeAt(element,point.left,point.top);
+}
+function draggable(element,handle,key){
+ let state=null;
+ handle.addEventListener('pointerdown',event=>{
+  if(event.button!==0||event.isPrimary===false||event.target.closest('button:not(.ekab-notes-fab),a,input,textarea,select'))return;
+  const rect=element.getBoundingClientRect();
+  state={id:event.pointerId,x:event.clientX,y:event.clientY,left:rect.left,top:rect.top,moved:false};
+  try{handle.setPointerCapture(event.pointerId)}catch{}
+ });
+ handle.addEventListener('pointermove',event=>{
+  if(!state||event.pointerId!==state.id)return;
+  const dx=event.clientX-state.x,dy=event.clientY-state.y;
+  if(!state.moved&&Math.hypot(dx,dy)<7)return;
+  state.moved=true;
+  event.preventDefault();
+  element.classList.add('ekab-is-dragging');
+  placeAt(element,state.left+dx,state.top+dy);
+ });
+ function finish(event){
+  if(!state||event.pointerId!==state.id)return;
+  const moved=state.moved;
+  state=null;element.classList.remove('ekab-is-dragging');
+  if(moved){
+   savePosition(element,key);
+   if(element===trigger){
+    suppressDraggedClick=true;
+    setTimeout(()=>{suppressDraggedClick=false},350);
+   }
+  }
+  try{if(handle.hasPointerCapture?.(event.pointerId))handle.releasePointerCapture(event.pointerId)}catch{}
+ }
+ handle.addEventListener('pointerup',finish);
+ handle.addEventListener('pointercancel',finish);
+ handle.addEventListener('lostpointercapture',event=>{
+  if(state?.id===event.pointerId){state=null;element.classList.remove('ekab-is-dragging')}
+ });
+}
+function resetFloatingPositions(){
+ try{localStorage.removeItem(NOTES_FAB_POSITION);localStorage.removeItem(NOTES_WINDOW_POSITION)}catch{}
+ clearPosition(trigger);clearPosition(dialog);
+}
+function refreshFloatingPositions(){
+ restorePosition(trigger,NOTES_FAB_POSITION);
+ if(dialog?.open)restorePosition(dialog,NOTES_WINDOW_POSITION);
+}
+
 function emit(){
  window.dispatchEvent(new Event('ekab:notes-changed'));
  window.dispatchEvent(new Event('ekab:progress-changed'));
@@ -110,7 +185,7 @@ function close(){
 function setEditor(value){
  editor.hidden=!value;
  $('ekabNotesBrowse').hidden=!!value;
- if(!value){activeEditor=null;return;}
+ if(!value){activeEditor=null;requestAnimationFrame(()=>{if(dialog?.open)restorePosition(dialog,NOTES_WINDOW_POSITION)});return;}
  activeEditor=value;
  titleInput.value=value.title||'';
  bodyInput.value=value.body||'';
@@ -119,6 +194,7 @@ function setEditor(value){
  $('ekabNotesEditorHeading').textContent=value.id?'Επεξεργασία σημείωσης':'Νέα προσωπική σημείωση';
  $('ekabNotesRemove').hidden=!value.id;
  titleInput.focus();
+ requestAnimationFrame(()=>{if(dialog?.open)restorePosition(dialog,NOTES_WINDOW_POSITION)});
 }
 function newNote(prefill={}){
  setEditor({id:null,title:prefill.title||'',body:'',section:prefill.section||'general',
@@ -198,6 +274,8 @@ function open(options={}){
  if(!dialog.open){
   returnFocus=document.activeElement;
   try{dialog.showModal()}catch{dialog.setAttribute('open','')}
+  trigger.setAttribute('aria-expanded','true');
+  restorePosition(dialog,NOTES_WINDOW_POSITION);
  }
  if(options?.prefill)newNote(options.prefill);
  else{setEditor(null);render();search.focus()}
@@ -219,12 +297,20 @@ function addChapterButtons(){
 }
 function install(){
  if($('ekabNotesFab'))return;
- trigger=button('📝 Σημειώσεις',()=>open(),'ekab-notes-fab');
- trigger.id='ekabNotesFab';trigger.setAttribute('aria-label','Άνοιγμα προσωπικών σημειώσεων και SOS');
+ trigger=button('📝 Σημειώσεις',event=>{
+  if(suppressDraggedClick&&event.detail!==0){suppressDraggedClick=false;return}
+  open();
+ },'ekab-notes-fab');
+ trigger.id='ekabNotesFab';
+ trigger.setAttribute('aria-label','Άνοιγμα σημειώσεων. Σύρε για μετακίνηση σε οποιοδήποτε σημείο της οθόνης.');
+ trigger.setAttribute('title','Πάτησε για σημειώσεις · Σύρε για μετακίνηση');
+ trigger.setAttribute('aria-controls','ekabNotesDialog');
+ trigger.setAttribute('aria-haspopup','dialog');
+ trigger.setAttribute('aria-expanded','false');
  dialog=document.createElement('dialog');dialog.id='ekabNotesDialog';dialog.className='ekab-notes-dialog';
  dialog.setAttribute('aria-labelledby','ekabNotesTitle');
  dialog.innerHTML=`<div class="ekab-notes-shell">
-  <div class="ekab-notes-head"><div><h2 id="ekabNotesTitle">📝 Οι σημειώσεις μου</h2><p>Ανεξάρτητη αναζήτηση μόνο για σημειώσεις και SOS</p></div><button id="ekabNotesClose" type="button" aria-label="Κλείσιμο σημειώσεων">✕</button></div>
+  <div class="ekab-notes-head" id="ekabNotesDragHandle"><div><h2 id="ekabNotesTitle">📝 Οι σημειώσεις μου</h2><p>Ανεξάρτητη αναζήτηση μόνο για σημειώσεις και SOS</p><span class="ekab-notes-drag-hint" aria-hidden="true">⠿ Σύρε εδώ για μετακίνηση</span></div><div class="ekab-notes-head-actions"><button id="ekabNotesResetPosition" type="button" aria-label="Επαναφορά θέσης σημειώσεων" title="Επαναφορά θέσης">↺</button><button id="ekabNotesClose" type="button" aria-label="Κλείσιμο σημειώσεων">✕</button></div></div>
   <div id="ekabNotesBrowse">
    <div class="ekab-notes-controls"><label for="ekabNotesSearch">Αναζήτησε μέσα στις σημειώσεις σου</label>
    <input id="ekabNotesSearch" type="search" placeholder="Λέξη, θέμα, SOS, όρος…" autocomplete="off">
@@ -249,6 +335,19 @@ function install(){
   </form>
  </div>`;
  document.body.append(trigger,dialog);
+ draggable(trigger,trigger,NOTES_FAB_POSITION);
+ draggable(dialog,$('ekabNotesDragHandle'),NOTES_WINDOW_POSITION);
+ restorePosition(trigger,NOTES_FAB_POSITION);
+ window.addEventListener('resize',refreshFloatingPositions);
+ window.visualViewport?.addEventListener('resize',refreshFloatingPositions);
+ trigger.addEventListener('keydown',event=>{
+  const arrows={ArrowLeft:[-18,0],ArrowRight:[18,0],ArrowUp:[0,-18],ArrowDown:[0,18]};
+  if(!event.altKey||!arrows[event.key])return;
+  event.preventDefault();
+  const rect=trigger.getBoundingClientRect(),[dx,dy]=arrows[event.key];
+  placeAt(trigger,rect.left+dx,rect.top+dy);
+  savePosition(trigger,NOTES_FAB_POSITION);
+ });
  search=$('ekabNotesSearch');results=$('ekabNotesResults');status=$('ekabNotesStatus');
  more=$('ekabNotesMore');editor=$('ekabNotesEditor');form=editor;
  titleInput=$('ekabNotesTitleInput');bodyInput=$('ekabNotesBody');sectionInput=$('ekabNotesSection');contextInput=$('ekabNotesContext');
@@ -259,12 +358,13 @@ function install(){
  search.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(()=>{limit=30;render()},120)});
  $('ekabNotesNew').addEventListener('click',()=>newNote());
  $('ekabNotesClose').addEventListener('click',close);
+ $('ekabNotesResetPosition').addEventListener('click',resetFloatingPositions);
  $('ekabNotesCancel').addEventListener('click',()=>{setEditor(null);render()});
  $('ekabNotesRemove').addEventListener('click',removeNote);
  form.addEventListener('submit',saveNote);
  more.addEventListener('click',()=>{limit+=30;render()});
  dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
- dialog.addEventListener('close',()=>{setEditor(null);returnFocus?.focus?.();returnFocus=null});
+ dialog.addEventListener('close',()=>{trigger.setAttribute('aria-expanded','false');setEditor(null);returnFocus?.focus?.();returnFocus=null});
  window.addEventListener('ekab:notes-changed',()=>{if(dialog.open)render()});
  window.addEventListener('ekab:cloud-applied',()=>{if(dialog.open)render()});
  window.addEventListener('storage',e=>{if(dialog.open&&[EOP_KEY,SEM_KEY,'ekab.personal-notes.v1'].includes(e.key))render()});
