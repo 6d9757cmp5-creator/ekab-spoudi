@@ -1,6 +1,7 @@
 /* EKAB Σπουδή — floating, searchable personal notebook, separate from global search.
    Personal writing is never used as searchable public study material. */
 import { readNotes, writeNotes, NOTE_LIMIT } from './notes-store.js';
+import { canDeletePersonalEntry, deletePersonalEntry } from './notes-delete.js';
 import { NOTES_FAB_POSITION, NOTES_WINDOW_POSITION, clampFloating, ratiosForFloating, floatingFromRatios, readFloatingPosition, saveFloatingPosition } from './notes-position.js';
 
 const EOP_KEY='ekab-eoppep-official-v15';
@@ -95,7 +96,7 @@ function loadSos(){
  return sosPromise;
 }
 
-let dialog,trigger,search,results,status,more,editor,form,titleInput,bodyInput,sectionInput,contextInput;
+let dialog,trigger,search,results,status,actionStatus,more,editor,form,titleInput,bodyInput,sectionInput,contextInput;
 let mode='mine',limit=30,activeEditor=null,renderSequence=0,returnFocus=null;
 let suppressDraggedClick=false;
 let restoreOnResize=null;
@@ -197,6 +198,7 @@ function setEditor(value){
  requestAnimationFrame(()=>{if(dialog?.open)restorePosition(dialog,NOTES_WINDOW_POSITION)});
 }
 function newNote(prefill={}){
+ if(actionStatus)actionStatus.textContent='';
  setEditor({id:null,title:prefill.title||'',body:'',section:prefill.section||'general',
   context:prefill.context||'',href:prefill.href||''});
 }
@@ -205,13 +207,33 @@ function editNote(id){
  if(!note){status.textContent='Η σημείωση δεν υπάρχει πλέον.';return;}
  setEditor({...note,id});
 }
+/* One deletion path for own notes and personal text stored within EOPPEP or
+   seminars. Published curriculum SOS has no delete action. */
+function removeVisibleNote(item){
+ if(!canDeletePersonalEntry(item))return;
+ const name=String(item.title||'Προσωπική σημείωση').slice(0,110);
+ if(!confirm('Να διαγραφεί η σημείωση «'+name+'»;\n\nΗ ενέργεια θα συγχρονιστεί με τις άλλες συσκευές όταν υπάρχει ενεργός συγχρονισμός.'))return;
+ try{
+  const removed=deletePersonalEntry(item);
+  if(!removed){
+   if(!editor.hidden)setEditor(null);
+   actionStatus.textContent='Η σημείωση δεν υπάρχει πλέον.';
+   render();return;
+  }
+  emit();
+  if(!editor.hidden)setEditor(null);
+  render();
+  actionStatus.textContent='Η σημείωση διαγράφηκε.';
+  if(dialog?.open)search.focus();
+ }catch{
+  const message='Η διαγραφή δεν πραγματοποιήθηκε. Η σημείωση παραμένει αποθηκευμένη.';
+  if(editor.hidden)actionStatus.textContent=message;
+  else $('ekabNotesEditStatus').textContent=message;
+ }
+}
 function removeNote(){
  if(!activeEditor?.id)return;
- if(!confirm('Να διαγραφεί οριστικά αυτή η προσωπική σημείωση;'))return;
- try{
-  const data=readNotes();delete data[activeEditor.id];
-  writeNotes(data);emit();setEditor(null);render();
- }catch{status.textContent='Δεν ήταν δυνατή η διαγραφή. Δεν τροποποιήθηκε η σημείωση.'}
+ removeVisibleNote({kind:'mine',editId:activeEditor.id,title:activeEditor.title||titleInput.value});
 }
 function saveNote(e){
  e.preventDefault();
@@ -237,6 +259,12 @@ function renderCard(item){
  const text=make('p','ekab-note-preview',item.body);card.append(text);
  const actions=make('div','ekab-note-actions');
  if(item.editId)actions.append(button('Επεξεργασία',()=>editNote(item.editId)));
+ if(canDeletePersonalEntry(item)){
+  const remove=button('Διαγραφή',()=>removeVisibleNote(item),'ekab-note-delete');
+  remove.setAttribute('aria-label','Διαγραφή σημείωσης: '+item.title);
+  remove.title='Διαγραφή αυτής της σημείωσης';
+  actions.append(remove);
+ }
  if(safeLink(item.href)){
   const a=make('a','ekab-note-source',item.kind==='source'?'Άνοιγμα για επεξεργασία':'Άνοιγμα ενότητας');
   a.href=item.href;actions.append(a);
@@ -320,6 +348,7 @@ function install(){
     <button type="button" data-ekab-notes-tab="all">Όλα</button>
    </div><button type="button" class="ekab-notes-new" id="ekabNotesNew">＋ Νέα σημείωση</button></div>
    <p class="ekab-notes-status" id="ekabNotesStatus" role="status"></p>
+   <p class="ekab-notes-action-status" id="ekabNotesActionStatus" role="status" aria-live="polite"></p>
    <div id="ekabNotesResults" class="ekab-notes-results"></div>
    <button type="button" class="ekab-notes-more" id="ekabNotesMore" hidden>Περισσότερα</button>
    <p class="ekab-notes-fine">Οι δικές σου σημειώσεις είναι διαφορετικές από τα έτοιμα εκπαιδευτικά SOS. Η γενική αναζήτηση του εργαλείου παραμένει ανεξάρτητη.</p>
@@ -348,7 +377,7 @@ function install(){
   placeAt(trigger,rect.left+dx,rect.top+dy);
   savePosition(trigger,NOTES_FAB_POSITION);
  });
- search=$('ekabNotesSearch');results=$('ekabNotesResults');status=$('ekabNotesStatus');
+ search=$('ekabNotesSearch');results=$('ekabNotesResults');status=$('ekabNotesStatus');actionStatus=$('ekabNotesActionStatus');
  more=$('ekabNotesMore');editor=$('ekabNotesEditor');form=editor;
  titleInput=$('ekabNotesTitleInput');bodyInput=$('ekabNotesBody');sectionInput=$('ekabNotesSection');contextInput=$('ekabNotesContext');
  for(const btn of dialog.querySelectorAll('[data-ekab-notes-tab]')){
