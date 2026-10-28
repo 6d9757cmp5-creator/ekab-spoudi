@@ -2,6 +2,30 @@
 (function(){
  'use strict';
  const KEY='ekab.saek.hub.semester.v1',PREFIX='ekab.saek.read.v1.';
+ let storageNotice=null;
+ function writableStorage(){
+  const probe='__ekab_saek_hub_probe__';
+  try{const old=localStorage.getItem(probe);localStorage.setItem(probe,'1');
+   if(localStorage.getItem(probe)!=='1')throw Error('blocked');
+   if(old===null)localStorage.removeItem(probe);else localStorage.setItem(probe,old);
+   return true;
+  }catch{return false}
+ }
+ function reportStorageState(){
+  const ok=writableStorage();
+  if(!ok){
+   if(!storageNotice){
+    storageNotice=document.createElement('p');storageNotice.id='saek-storage-status';
+    storageNotice.className='small';storageNotice.setAttribute('role','status');
+    const host=document.getElementById('library-done')?.closest('.hub-progress');
+    if(host)host.after(storageNotice);
+    else document.querySelector('main')?.prepend(storageNotice);
+   }
+   storageNotice.textContent='Η τοπική αποθήκευση προόδου δεν είναι διαθέσιμη. Μπορείς να διαβάσεις την ύλη, αλλά η πρόοδος δεν μπορεί να ενημερωθεί.';
+  }else if(storageNotice){storageNotice.remove();storageNotice=null}
+  for(const button of document.querySelectorAll('[data-export-all]'))button.disabled=!ok;
+ }
+
  const counts=[71,73,51,52];
  const labels=['Α΄','Β΄','Γ΄','Δ΄'];
  const tabs=[...document.querySelectorAll('[data-semester-tab]')];
@@ -27,6 +51,7 @@
   if(saveSelection)try{localStorage.setItem(KEY,String(index))}catch{}
  }
  function updateProgress(){
+  reportStorageState();
   let totalDone=0;
   panels.forEach((panel,index)=>{
    let semesterDone=0;

@@ -12,10 +12,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate required pages, Greek metadata and review registry
         run: python3 scripts/release_smoke.py
+      - name: Verify SAEK reading safety, storage and all 247 chapters
+        run: node scripts/verify-saek-reader-safety.cjs
       - name: Check JavaScript syntax when Node.js is available
         shell: bash
         run: |
           set -euo pipefail
-          for file in sw.js; do
+          for file in sw.js saek-reader-safe.js saek-hub.js progress.js; do
             node --check "$file"
           done
