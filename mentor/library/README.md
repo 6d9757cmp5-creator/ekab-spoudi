@@ -1,22 +1,28 @@
 # MENTOR OS — Clinical Intelligence Library
 
-This is a **source inventory**, not a downloaded medical corpus or trained AI model. The production app and existing AI answer grader remain untouched.
+## Confirmed actual import
+**Seven complete textbooks/manuals have been extracted as text**, placed in `corpus/*.json` in the isolated `feature/mentor-clinical-library` branch. **They are not merely links.** See `corpus/manifest.json` and `catalog.json` for exact counts, original publisher URLs and file SHA-256 hashes.
 
-## Mission
-Emergency-physician-depth medical education focused on emergency departments, prehospital care, triage, critical care and clinical reasoning. Exclude unrelated molecular/basic research. Teach each learner at their verified level and do not imply clinician accreditation or authorize out-of-scope procedures.
+Texts included:
+1. Emergency Medical Responder — WisTech Open (CC BY 4.0, third-party exceptions).
+2. Health Alterations — Open RN / WisTech Open (CC BY 4.0, third-party exceptions).
+3. Nursing Skills 2e — Open RN (CC BY 4.0, third-party exceptions).
+4. Nursing Pharmacology 2e — Open RN (CC BY 4.0, third-party exceptions).
+5. Nursing Advanced Skills — Open RN (CC BY 4.0, third-party exceptions).
+6. WHO-ICRC Basic Emergency Care Participant Workbook — WHO/ICRC (CC BY-NC-SA 3.0 IGO, **noncommercial only**, no WHO endorsement; share-alike).
+7. Medical-Surgical Nursing — source PDF at assets.openstax.org, linked from UOTI (the book PDF states CC BY 4.0; verify any current AI-specific restrictions before deployment).
 
-## Source statuses
-All 13 sources are currently **source-identified**. `fulltext_ingested:false` means no full book text has been uploaded. Do not claim that links have trained a model.
+**Only text** has been imported: figures, images and PDF layouts have **not** been approved or imported. Scientific and third-party-rights review pending on all seven. The extracted English-language sources have NOT been translated, fact-checked, used to train a model or enabled in the production Mentor.
 
-## Safe ingestion workflow
-1. Confirm per-edition source URL and content, provenance, licensing, and third-party images.
-2. Fetch the permitted official EPUB/PDF/HTML text to an authorized ingestion workspace (not automatically into the public Pages repository).
-3. Validate completeness, checksum, chapter structure, citation and document version; sanitize embedded media.
-4. Extract into source-linked passages; prepare searchable index with citation, edition, language and expiry/update metadata.
-5. Map concepts to Greek clinical vocabulary, SAEK/EOPPEP topics and role-scoped learning objectives.
-6. Independent clinical review before high-stakes clinical prompts, drug doses or protocol recommendations.
-7. Connect the Mentor's separate server-side retrieval gateway only after access control, budget limits, privacy and simulation tests.
+## Source attribution / review
+The text files preserve `source_id`, `source_url`, `section`, `id`, `review_status: draft` and manifest hashes. Each imported passage must pass medical review and be changed to `human-reviewed` only after documented review. Production retrieval only returns human-reviewed passages. The existing answer grader and live EKAB Spoudi app are unchanged.
 
-Do not commit a multi-gigabyte unvalidated corpus or secrets to GitHub Pages. GitHub is for the catalog, code and versioned manifests; large authorized book files belong in controlled storage. This source catalog is not a certification of completeness or clinical accuracy.
+## Verification
+- `node mentor/library/validate-corpus.mjs` checks the real book files, lengths, counts, hashes and license metadata.
+- `node --test mentor/library/corpus.test.mjs mentor/library/retrieval.test.mjs` checks filtering.
+- `node mentor/library/search-books.mjs "shock"` searches the draft books for human review, without claiming clinical approval.
 
-Source of license for WisTech EMR: https://wtcs.pressbooks.pub/emergencymedtech/front-matter/preface/ (CC BY 4.0, except otherwise noted).
+## Architecture
+The Mentor is an educational AI tutor with evidence-backed, source-linked clinical reasoning in emergency and prehospital medicine, not a qualified clinician. Future work: Greek terminology, medical source review, secure deployment and dedicated retrieval gateway; never silently alter existing grades or student progress. Exclude molecular/basic research unrelated to emergencies.
+
+**IMPORTANT**: This is a public review branch. Do not merge into `main` or deploy a user-facing AI that relies on unreviewed text. Keep edition, original publisher credit and license conditions in downstream use.
