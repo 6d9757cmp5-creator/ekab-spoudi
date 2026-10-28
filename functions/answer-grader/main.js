@@ -8,9 +8,7 @@ import { freeProviders, requestFreeGrade } from './free-providers.js';
 const results = new Map();
 const pending = new Map();
 
-const BANK_URL='https://raw.githubusercontent.com/6d9757cmp5-creator/ekab-spoudi/main/official_questions.json';
 const verdicts=new Set(['correct','partial','incorrect','uncertain']);
-const cache={until:0,bank:null};
 const attempts=new Map();
 const MAX_USER_CHARS=3500;
 const LIMIT=15, WINDOW_MS=20*60*1000;
@@ -134,13 +132,9 @@ async function findReference(input){
  }
  if(input.section==='eoppep'){
   if(!/^EOP-[AB]-\d{3}$/.test(input.questionId||''))throw new Error('Μη έγκυρο θέμα ΕΟΠΠΕΠ');
-  if(!cache.bank||Date.now()>cache.until){
-   const response=await fetch(BANK_URL,{signal:AbortSignal.timeout(12000),headers:{accept:'application/json'}});
-   if(!response.ok)throw new Error('Η τράπεζα ερωτήσεων δεν είναι διαθέσιμη');
-   const json=await response.json();if(!Array.isArray(json)||json.length!==314)throw new Error('Μη έγκυρη πηγή');
-   cache.bank=json;cache.until=Date.now()+10*60*1000;
-  }
-  const q=cache.bank.find(x=>x.id===input.questionId);
+  const bank=JSON.parse(await readFile(new URL('./eoppep-rubrics.json',import.meta.url),'utf8'));
+  if(!Array.isArray(bank)||bank.length!==314)throw new Error('Η τράπεζα ερωτήσεων δεν είναι διαθέσιμη');
+  const q=bank.find(x=>x.id===input.questionId);
   if(!q||q.answerStatus!=='reviewed_educational'||!cleanText(q.answer,12000))throw new Error('Το θέμα δεν είναι διαθέσιμο για αυτόματη αξιολόγηση');
   return {question:cleanText(q.question,1200),reference:cleanText(q.answer,8000),context:'Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημο λυσάρι.',kind:'ΕΟΠΠΕΠ θεωρία'};
  }
