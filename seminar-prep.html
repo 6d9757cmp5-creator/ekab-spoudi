@@ -54,12 +54,12 @@
   </div>
   <div id="seminarWrittenBody" hidden>
    <label for="seminarQuestionNotes">Η δική σου απάντηση</label><textarea id="seminarQuestionNotes" rows="4" maxlength="2000" placeholder="Γράψε την απάντησή σου και μετά αξιολόγησέ την…"></textarea>
-   <p class="ai-grading-privacy">Οι ερωτήσεις ανάπτυξης βαθμολογούνται μόνο μέσω αυτόματης αξιολόγησης AI όταν είναι ενεργή. Η απάντηση αποστέλλεται μόνο όταν πατήσεις «Υποβολή» και απαιτούνται λογαριασμός και Internet. Χωρίς υπηρεσία AI δεν αποδίδεται βαθμός.</p>
-   <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Υποβολή · Αυτόματη αξιολόγηση AI</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση (χωρίς βαθμολογία)</button></div>
+   <p class="ai-grading-privacy">Η αξιολόγηση γίνεται με την υποβολή της απάντησης. Χρειάζεται σύνδεση λογαριασμού και Internet. Χωρίς ολοκληρωμένο έλεγχο δεν αποδίδεται βαθμός.</p>
+   <div class="seminar-practice-actions"><button type="button" class="btn" id="seminarGradeAI">Υποβολή αξιολόγησης</button><button type="button" class="btn secondary" id="seminarQuizReveal">Ενδεικτική λύση (χωρίς βαθμολογία)</button></div>
    <div id="seminarAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
    <p id="seminarQuestionSolution" class="seminar-feedback" hidden></p>
    
-   <p class="seminar-fineprint">Η εκπαιδευτική βαθμολογία καταχωρίζεται μόνο μετά από πραγματική απάντηση της υπηρεσίας AI. Δεν αποτελεί πιστοποίηση. Αν το AI δεν είναι ενεργό, η ερώτηση παραμένει χωρίς βαθμό.</p>
+   <p class="seminar-fineprint">Η βαθμολογία καταχωρίζεται μόνο όταν ολοκληρωθεί ο έλεγχος. Μετά την αξιολόγηση η απάντηση κλειδώνει. Το αποτέλεσμα είναι εκπαιδευτικό, όχι πιστοποίηση.</p>
   </div>
   <p id="seminarQuestionState" class="seminar-state" role="status"></p>
   <div class="seminar-next-prev"><button type="button" class="btn compact ghost" id="seminarPrevQuestion" hidden>Προηγούμενη</button><button type="button" class="btn compact" id="seminarNextQuestion" hidden>Επόμενη</button></div>
@@ -75,8 +75,8 @@
  <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικό σενάριο">
  <p class="eyebrow" id="seminarOralCounter"></p><h3 id="seminarOralTitle"></h3><p id="seminarOralCase" class="seminar-feedback"></p>
  <label for="seminarOralNotes">Οι ενέργειές σου, βήμα προς βήμα</label><textarea id="seminarOralNotes" rows="6" maxlength="3500" placeholder="Περιέγραψε ασφάλεια σκηνής, αρχική εκτίμηση, σωστή σειρά ενεργειών, επανεκτίμηση και παράδοση — όπου απαιτούνται."></textarea>
- <p class="seminar-fineprint">Η αυτόματη αξιολόγηση AI ελέγχει εκπαιδευτικά ασφάλεια, προτεραιότητες, σειρά διαδικασιών, παραλείψεις και κρίσιμα λάθη. Απαιτεί ενεργή υπηρεσία και Internet. Η απάντησή σου αποστέλλεται μόνο με υποβολή.</p>
- <button type="button" class="btn" id="seminarScenarioSubmit">Υποβολή · Αυτόματη αξιολόγηση AI</button>
+ <p class="seminar-fineprint">Η αξιολόγηση εξετάζει την ασφάλεια, τη σωστή σειρά ενεργειών και τα κρίσιμα λάθη. Μετά την υποβολή η απάντηση κλειδώνει. Απαιτούνται σύνδεση και Internet.</p>
+ <button type="button" class="btn" id="seminarScenarioSubmit">Υποβολή αξιολόγησης</button>
  <p id="seminarScenarioStatus" class="seminar-state" role="status" aria-live="polite"></p>
  <div id="seminarScenarioResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
  <button type="button" class="btn secondary compact" id="seminarOralReveal">Δες την εκπαιδευτική προτεραιότητα (χωρίς βαθμό)</button><p id="seminarOralHelp" class="seminar-feedback" hidden></p>
