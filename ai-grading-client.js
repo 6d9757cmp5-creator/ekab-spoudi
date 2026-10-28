@@ -4,11 +4,11 @@
 'use strict';
 const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Χρειάζεται διόρθωση',uncertain:'Απαιτεί επανέλεγχο'};
 const allowed=new Set(Object.keys(labels));
-const AI_LIMIT_MESSAGE='Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις AI έχουν φτάσει προσωρινά στο όριό τους. Κάνε μια μικρή επανάληψη στη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
-const STUDENT_LIMIT_MESSAGE='Ώρα για μια μικρή επανάληψη! 📚 Έχεις φτάσει προσωρινά στο όριο αξιολογήσεων AI. Διάβασε λίγη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
+const AI_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
+const STUDENT_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
 function available(){return /^[a-zA-Z0-9._-]{3,64}$/.test(window.EkabAIConfig?.functionId||'')}
 async function evaluate(input){
- if(!available())throw new Error('Η αξιολόγηση με AI δεν έχει ενεργοποιηθεί ακόμη. Η απάντηση παραμένει χωρίς βαθμό.');
+ if(!available())throw new Error('Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη αυτή τη στιγμή. Η απάντηση παραμένει χωρίς βαθμό.');
  if(navigator.onLine===false)throw new Error('Χρειάζεται σύνδεση στο διαδίκτυο για αξιολόγηση AI.');
  const answer=typeof input?.answer==='string'?input.answer.trim():'';
  if(answer.length<3||answer.length>3500)throw new Error('Γράψε μια απάντηση από 3 έως 3500 χαρακτήρες.');
@@ -22,7 +22,7 @@ async function evaluate(input){
  catch(e){
   if(e.code===401||e.code===403)throw new Error('Συνδέσου στον λογαριασμό σου για ασφαλή αξιολόγηση AI.');
   if(e.code===429)throw new Error(STUDENT_LIMIT_MESSAGE);
-  throw new Error('Δεν ήταν δυνατή η σύνδεση με την αξιολόγηση AI. Η απάντησή σου παραμένει στη συσκευή.');
+  throw new Error('Δεν ήταν δυνατή η σύνδεση με την υπηρεσία αξιολόγησης. Η απάντησή σου παραμένει στη συσκευή.');
  }
  let result;
  try{result=JSON.parse(execution.responseBody||'{}');}catch{throw new Error('Η υπηρεσία επέστρεψε μη αναγνωρίσιμη απάντηση.');}
@@ -43,41 +43,37 @@ function render(container,result){
  const verdict=allowed.has(result.verdict)?result.verdict:'uncertain';
  container.className='ai-grading-result ai-grading-'+verdict;
  const title=document.createElement('strong');title.className='ai-grading-title';
- title.textContent='Αξιολόγηση της απάντησής σου: '+labels[verdict];container.append(title);
- const add=(content,css='')=>{
-  if(typeof content!=='string'||!content.trim())return;
-  const p=document.createElement('p');if(css)p.className=css;
-  p.textContent=content.trim();container.append(p);
- };
- const section=(caption,value,css='')=>{
-  if(typeof value!=='string'||!value.trim())return;
+ title.textContent='Αποτέλεσμα αξιολόγησης: '+(verdict==='uncertain'?'Χωρίς βαθμολογία':labels[verdict]);
+ container.append(title);
+ const section=(heading,body,css='')=>{
+  if(typeof body!=='string'||!body.trim())return;
   const block=document.createElement('section');block.className='ai-grading-section'+(css?' '+css:'');
-  const heading=document.createElement('strong');heading.className='ai-grading-heading';heading.textContent=caption;
-  const p=document.createElement('p');p.textContent=value.trim();
-  block.append(heading,p);container.append(block);
- };
- const points=(caption,values,css='')=>{
-  const filtered=Array.isArray(values)?values.filter(x=>typeof x==='string'&&x.trim()).slice(0,5):[];
-  if(!filtered.length)return;
-  const block=document.createElement('section');block.className='ai-grading-section'+(css?' '+css:'');
-  const heading=document.createElement('strong');heading.className='ai-grading-heading';heading.textContent=caption;
-  const ul=document.createElement('ul');
-  for(const item of filtered){const li=document.createElement('li');li.textContent=item.trim().slice(0,300);ul.append(li);}
-  block.append(heading,ul);container.append(block);
+  const name=document.createElement('strong');name.className='ai-grading-heading';name.textContent=heading;
+  const para=document.createElement('p');para.textContent=body.trim();
+  block.append(name,para);container.append(block);
  };
  section('Η απάντησή σου',result.studentAnswer,'ai-grading-student');
- const suggested=result.modelAnswer||result.referenceAnswer;
- section(verdict==='uncertain'?'Εκπαιδευτική απάντηση αναφοράς (όχι βαθμολογία)':'Ενδεικτική σωστή απάντηση',suggested,'ai-grading-reference');
- section('Γιατί;',result.explanation,'ai-grading-why');
- if(verdict==='partial'||verdict==='correct')points('Τι έγραψες σωστά',result.correctPoints,'ai-grading-good');
- if(verdict==='incorrect'||verdict==='partial')points('Τι χρειάζεται διόρθωση',result.missingPoints,'ai-grading-needs');
- section('Παράδειγμα για να το καταλάβεις',result.example,'ai-grading-example');
- section('Τι να θυμάσαι',result.takeaway,'ai-grading-takeaway');
- if(verdict==='uncertain')add('Δεν καταχωρίζεται αυτόματα βαθμολογία. Διευκρίνισε την απάντησή σου και δοκίμασε ξανά.');
- if(result.criticalError)add('Προσοχή: εντοπίστηκε πιθανό σφάλμα ασφάλειας. Συμβουλέψου την εκπαιδευτική πηγή και τον εκπαιδευτή.','ai-grading-warning');
- add(result.safetyNote,'ai-grading-safety');
+ // Prefer the reviewed, server-controlled educational reference when available.
+ const correct=result.referenceAnswer||result.modelAnswer;
+ section('Σωστή απάντηση',correct,'ai-grading-reference');
+ section('Γιατί',result.explanation,'ai-grading-why');
+ const takeaway=typeof result.takeaway==='string'&&result.takeaway.trim()?result.takeaway:
+   Array.isArray(result.missingPoints)&&result.missingPoints.length?result.missingPoints[0]:'';
+ // The takeaway only appears if it adds information, avoiding repeated paragraphs.
+ if(takeaway&&takeaway.trim()!==correct?.trim()&&takeaway.trim()!==result.explanation?.trim())
+  section('Τι να θυμάσαι',takeaway,'ai-grading-takeaway');
+ if(result.criticalError){
+  const warning=document.createElement('p');warning.className='ai-grading-warning';
+  warning.textContent='Προσοχή: πιθανό κρίσιμο σφάλμα ασφάλειας. Συμβουλεύσου το εκπαιδευτικό υλικό και τον εκπαιδευτή.';
+  container.append(warning);
+ }
+ if(verdict==='uncertain'){
+  const note=document.createElement('p');note.className='ai-grading-ungraded';
+  note.textContent='Δεν καταχωρίστηκε βαθμολογία. Συνέχισε στην επόμενη ερώτηση.';
+  container.append(note);
+ }
  const caveat=document.createElement('small');
- caveat.textContent='Εκπαιδευτική εκτίμηση AI, όχι επίσημη βαθμολογία ή πιστοποίηση. Το AI μπορεί να κάνει λάθη.';
+ caveat.textContent='Εκπαιδευτική αξιολόγηση, όχι επίσημη βαθμολογία ή πιστοποίηση.';
  container.append(caveat);
 }
 window.EkabAIGrade=Object.freeze({available,evaluate,render,labels});
