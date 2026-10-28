@@ -73,7 +73,7 @@ async function seminar(){
  b.setMode('partial');
  answer(d,'seminarOralNotes','Ελέγχω ασφάλεια σκηνής, εκτιμώ τον ασθενή και καλώ βοήθεια.');
  action(d,'seminarScenarioSubmit');
- await wait(()=>el(d,'seminarOralNotes').readOnly,'clinical lock');
+ await wait(()=>el(d,'seminarOralNotes').readOnly&&el(d,'seminarScenarioSubmit').hidden,'clinical result complete');
  assert.equal(el(d,'seminarScenarioSubmit').hidden,true);
  assert.equal(el(d,'seminarScenarioResult').hidden,false);
  action(d,'seminarNextOral');
