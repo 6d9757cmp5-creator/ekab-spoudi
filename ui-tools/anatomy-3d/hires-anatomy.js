@@ -68,7 +68,7 @@ function partVisible(p){if(!p)return false;if(ui.system!=='all')return (systems[
 if(ui.mode==='skeleton')return p.system==='skeletal';
 if(ui.mode==='organs')return p.system!=='skeletal'&&p.system!=='muscular'&&p.system!=='integumentary'&&p.system!=='connective'&&p.system!=='pregnancy';
 return p.system!=='muscular'&&p.system!=='integumentary'&&p.system!=='connective'&&p.system!=='pregnancy'}
-function systemVisible(s){if(s==='integumentary')return ui.opacity>0&&!ui.isolate&&ui.system==='all';if(ui.system!=='all')return (systems[ui.system]||[]).includes(s);if(ui.mode==='skeleton')return s==='skeletal';if(ui.mode==='organs')return s!=='skeletal'&&s!=='muscular'&&s!=='integumentary'&&s!=='connective'&&s!=='pregnancy';return s!=='muscular'&&s!=='integumentary'&&s!=='connective'&&s!=='pregnancy'}
+function systemVisible(s){if(s==='integumentary')return ui.system==='integumentary'||(ui.opacity>0&&!ui.isolate&&ui.system==='all');if(ui.system!=='all')return (systems[ui.system]||[]).includes(s);if(ui.mode==='skeleton')return s==='skeletal';if(ui.mode==='organs')return s!=='skeletal'&&s!=='muscular'&&s!=='integumentary'&&s!=='connective'&&s!=='pregnancy';return s!=='muscular'&&s!=='integumentary'&&s!=='connective'&&s!=='pregnancy'}
 function validPart(p){return p&&partVisible(p)}
 function countMessage(){const p=atlas?.parts||[];return p.filter(partVisible).length+' δομές'}
 function loadingUI(show,title,sub){$('loading').hidden=!show;loading=show;if(show){$('loading').querySelector('strong').textContent=title||'Φόρτωση πραγματικής ανατομίας…';$('loading').querySelector('small').textContent=sub||'Λήψη τρισδιάστατων ανατομικών πλεγμάτων'}}
