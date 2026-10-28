@@ -85,6 +85,8 @@ export function eligibleQuizName(name,system){
  // Do not quiz on surface, borrowed meshes, tissue debris, or compound
  // metanames that could be hard to identify visually.
  if(!['skeletal','respiratory','cardiac','digestive','urinary','reproductive','nervous','brain','arterial','venous','endocrine'].includes(system))return false;
- return /^(?:left|right)\s+(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|\d+(?:st|nd|rd|th)?)\s+rib$/.test(simplify(name)) ||
- Object.keys(CORE).includes(simplify(name).replace(/^(left|right)\s+/,''));
+ // On mobile, favour large, distinguishable structures. No individually
+ // numbered ribs, teeth, gum tissues or tiny fragments in an entry-level quiz.
+ const basic=new Set(['skull','cranium','mandible','maxilla','sternum','clavicle','scapula','sacrum','pelvis','ilium','humerus','ulna','radius','femur','patella','tibia','fibula','brain','cerebrum','cerebellum','spinal cord','heart','aorta','trachea','lung','larynx','esophagus','stomach','liver','spleen','pancreas','kidney','urinary bladder','uterus','ovary','thyroid gland','prostate','testis']);
+ return basic.has(simplify(name).replace(/^(left|right)\s+/,''));
 }
