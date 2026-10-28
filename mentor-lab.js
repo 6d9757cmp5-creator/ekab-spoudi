@@ -6,6 +6,7 @@ import {newSession,currentPhase,perform,feedbackFor} from './mentor/core/engine.
 import {openMentorDb,createMentorStore,createVolatileMentorStore} from './mentor/core/store.mjs';
 import {resolveMentorScope} from './mentor/core/identity.mjs';
 import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
+import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
 
 const $=id=>document.getElementById(id);
@@ -160,11 +161,54 @@ async function renderMemory(){
     }
   }catch(e){notify('Δεν φορτώθηκε η μνήμη Mentor: '+e.message,true);}
 }
+function currentStudyPreferences(){
+  return {
+    goals:[...document.querySelectorAll('[data-study-goal]')].filter(c=>c.checked).map(c=>c.dataset.studyGoal),
+    minutes:Number($('study-duration').value),
+    mode:$('study-path-mode').value
+  };
+}
+function renderPersonalPlan(){
+  const output=$('selected-goals-plan');
+  output.replaceChildren();
+  const plans=planForGoals(currentStudyPreferences());
+  if(!plans.length){
+    output.append(make('p','muted','Επίλεξε τουλάχιστον έναν στόχο για να δημιουργήσεις το προσωπικό σου πλάνο.'));
+    return;
+  }
+  for(const goal of plans){
+    const card=make('section','study-goal-card');
+    card.append(make('h4',null,goal.label));
+    for(const task of goal.tasks){
+      card.append(make('p','study-task',task.name+' · '+task.minutes+' λεπτά'));
+    }
+    const link=make('a','study-goal-link','Άνοιγμα ενότητας: '+goal.label);
+    link.href=goal.href;
+    card.append(link);
+    output.append(card);
+  }
+}
+function wireStudyPreferences(){
+  const previous=readStudyPreferences(localStorage);
+  for(const checkbox of document.querySelectorAll('[data-study-goal]'))
+    checkbox.checked=previous.goals.includes(checkbox.dataset.studyGoal);
+  $('study-duration').value=String(previous.minutes);
+  $('study-path-mode').value=previous.mode;
+  const changed=()=>{
+    saveStudyPreferences(localStorage,currentStudyPreferences());
+    void renderPlan();
+  };
+  for(const checkbox of document.querySelectorAll('[data-study-goal]'))
+    checkbox.addEventListener('change',changed);
+  $('study-duration').addEventListener('change',changed);
+  $('study-path-mode').addEventListener('change',changed);
+}
 async function renderPlan(){
+  renderPersonalPlan();
   if(!state.store)return;
   try{
     const summary=await state.store.overview(state.scope);
-    const minutes=Number($('study-duration').value)||20;
+    const minutes=Number($('study-duration').value)||25;
     const focus=summary.suggested_focus;
     const label=focus?COMPETENCIES[focus]:'Επόμενη αποστολή';
     const target=$('plan-output');target.replaceChildren();
@@ -220,7 +264,7 @@ function viewLegacy(){
 async function boot(){
   wireTabs();
   wireModes();
-  $('study-duration').addEventListener('change',()=>void renderPlan());
+  wireStudyPreferences();
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
