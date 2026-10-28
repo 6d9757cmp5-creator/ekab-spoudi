@@ -26,6 +26,21 @@ export function readLocalValues() {
     if((m=/^ekab\.saek\.lastchapter\.(\d{2})$/.exec(k)))values['c:'+m[1]]=localStorage.getItem(k);
   }
   const theme=localStorage.getItem('ekab.theme.v1');if(theme)values.theme=theme;
+  // Per-device monotone active-time counters are sync-safe across phone and PC.
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i),m=/^ekab\.activity\.v1\.([a-f0-9]{32})\.(saek|eoppep|bls|pbls|ils|phtls|als|pharma)\.(study|exam)$/.exec(key);
+    if(!m)continue;
+    const seconds=Number(localStorage.getItem(key));
+    if(Number.isSafeInteger(seconds)&&seconds>=0&&seconds<=315360000)
+      values['t:'+m[1]+':'+m[2]+':'+m[3]]=seconds;
+  }
+  // Synchronize SAEK question-level exam history without overwriting local unfinished exams.
+  const examRaw=localStorage.getItem('ekab.saek.exams.v1');
+  if(examRaw){
+    const exam=JSON.parse(examRaw);
+    if(exam&&typeof exam==='object'&&exam.history&&Object.keys(exam.history).length)
+      values['x:saek-exams']=exam.history;
+  }
   Object.assign(values,readSeminarValues());
   return values;
 }
@@ -57,6 +72,20 @@ export function applyValues(values) {
     if(key.startsWith('c:'))localStorage.setItem('ekab.saek.lastchapter.'+key.slice(2),v);
   }
   if(values.theme){localStorage.setItem('ekab.theme.v1',values.theme);document.documentElement.dataset.theme=values.theme;}else {localStorage.removeItem('ekab.theme.v1');document.documentElement.dataset.theme='light';}
+  const oldTime=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^ekab\.activity\.v1\.[a-f0-9]{32}\.(saek|eoppep|bls|pbls|ils|phtls|als|pharma)\.(study|exam)$/.test(k))oldTime.push(k);}
+  for(const k of oldTime)localStorage.removeItem(k);
+  for(const [key,value] of Object.entries(values))if(key.startsWith('t:')){
+    const parts=key.split(':');localStorage.setItem('ekab.activity.v1.'+parts[1]+'.'+parts[2]+'.'+parts[3],String(value));
+  }
+  let exam={};try{exam=JSON.parse(localStorage.getItem('ekab.saek.exams.v1')||'{}')||{}}catch{}
+  if(values['x:saek-exams']){
+    exam.history=values['x:saek-exams'];
+    localStorage.setItem('ekab.saek.exams.v1',JSON.stringify(exam));
+  }else if(exam.history){
+    delete exam.history;
+    if(exam.active||exam.runs?.length)localStorage.setItem('ekab.saek.exams.v1',JSON.stringify(exam));
+    else localStorage.removeItem('ekab.saek.exams.v1');
+  }
   applySeminarValues(values);
   window.dispatchEvent(new Event('ekab:cloud-applied'));
 }
