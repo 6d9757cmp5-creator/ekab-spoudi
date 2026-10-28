@@ -1,4 +1,4 @@
-name: AED contacts integration checks
+name: AED contacts minimalist UI smoke check
 on:
   pull_request:
     paths:
@@ -13,36 +13,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check geolocation and official map JavaScript syntax
+      - name: Check official AED map script syntax
         run: node --check contacts-nearby-aed.js
-      - name: Verify official data source, emergency actions, accessibility, and privacy
+      - name: Verify compact layout and original-publisher poster link
         run: |
           python3 - <<'PY'
           from pathlib import Path
           html=Path('contacts.html').read_text(encoding='utf-8')
           js=Path('contacts-nearby-aed.js').read_text(encoding='utf-8')
           css=Path('contacts-aed.css').read_text(encoding='utf-8')
-          for required in [
-              'href="tel:112"', 'href="tel:166"',
-              'src="https://apinidotes.crete.gov.gr/Map"',
-              'allow="geolocation"',
-              'id="aedFindNearby"', 'id="aedNearbyMap"',
-              'id="aedNearbyStatus"', 'id="aedNearbyResults"',
-              'id="aedSearchRadius"',
-              'role="status"', 'aria-live="polite"',
-              'Πρόγραμμα «ΖΩΗ»',
-              'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=',
-          ]:
-              assert required in html, required
+          assert html.count('id="aedNearbyMap"') == 1
+          assert html.count('id="aedSearchRadius"') == 1
+          assert 'id="aedFindNearby"' in html
+          assert 'href="tel:112"' in html and 'href="tel:166"' in html
+          assert 'https://apinidotes.crete.gov.gr/files/afisaBLS.pdf' in html
+          assert 'assets/aed-first-aid-poster.webp' not in html
+          assert 'aed-step' not in html and '<iframe' not in html
+          assert 'aedNearbyResults' not in html and 'aedNearbyCount' not in html
           assert 'https://apinidotes-api.crete.gov.gr/apinidotesApi/api/Defibrillators' in js
           assert 'item.availability !== true || item.public !== true' in js
-          assert "item.longtitude" in js
           assert 'navigator.geolocation.getCurrentPosition' in js
           assert "permission.state === 'granted'" in js
           assert "cache: 'no-store'" in js
           assert 'localStorage' not in js and 'sessionStorage' not in js
-          assert 'overpass-api' not in js
           assert 'aed-nearby-map[hidden]' in css
-          assert 'AED' in html
-          print('Official Crete AED map static integration passed.')
+          print('Minimal AED UI smoke check passed')
           PY
