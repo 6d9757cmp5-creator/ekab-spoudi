@@ -76,7 +76,8 @@ export function anatomicalGreek(name){
 }
 export function anatomyName(name,system,systemsGreek={}){
  const el=anatomicalGreek(name);
- return {el,english:String(name||'').trim(),label:el||'Μη μεταφρασμένη δομή',systemName:systemsGreek[system]||system||''};
+ const dental=/\b(gingiva|tooth|teeth)\b/i.test(String(name||''));
+ return {el,english:String(name||'').trim(),label:el||'Μη μεταφρασμένη δομή',systemName:dental?'Στοματική ανατομία':(systemsGreek[system]||system||'')};
 }
 /** Quiz on recognized and safely named elementary 3D parts only. */
 export function eligibleQuizName(name,system){
