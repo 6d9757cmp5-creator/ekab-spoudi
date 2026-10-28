@@ -1,9 +1,8 @@
-/* EKAB semantic evaluation client: signed-in user -> Appwrite execution -> AI result.
-   Never claim automatic grading if the backend function isn't configured.
- */
+/* Shared, beginner-friendly AI feedback for EOPPEP, SAEK exams and seminars.
+   The backend controls the reference; student content is always rendered as text, never HTML. */
 (function(){
 'use strict';
-const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Λανθασμένη',uncertain:'Απαιτεί επανέλεγχο'};
+const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Χρειάζεται διόρθωση',uncertain:'Απαιτεί επανέλεγχο'};
 const allowed=new Set(Object.keys(labels));
 function available(){return /^[a-zA-Z0-9._-]{3,64}$/.test(window.EkabAIConfig?.functionId||'')}
 async function evaluate(input){
@@ -28,26 +27,51 @@ async function evaluate(input){
   throw new Error(result.error||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντηση παραμένει χωρίς βαθμολογία.');
  }
  if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
- return result;
+ // Only appended in the browser. The server does not receive any extra personal history.
+ return {...result,studentAnswer:answer};
 }
 function render(container,result){
+ if(!container||!result)return;
  container.replaceChildren();container.hidden=false;
+ const verdict=allowed.has(result.verdict)?result.verdict:'uncertain';
+ container.className='ai-grading-result ai-grading-'+verdict;
  const title=document.createElement('strong');title.className='ai-grading-title';
- title.textContent='AI αξιολόγηση: '+labels[result.verdict];
- container.className='ai-grading-result ai-grading-'+result.verdict;
- container.append(title);
- const add=text=>{if(!text)return;const p=document.createElement('p');p.textContent=text;container.append(p);};
- add(result.explanation);
- if(result.verdict==='uncertain')add('Δεν προκύπτει αξιόπιστη βαθμολογία. Αν κάποιο σημείο της απάντησής σου είναι ασαφές, γράψε το πιο συγκεκριμένα και προσεκτικά και πάτησε ξανά έλεγχο.');
- for(const [key,caption] of [['correctPoints','Τι απάντησες σωστά'],['missingPoints','Τι λείπει ή χρειάζεται διόρθωση']]){
-  const items=Array.isArray(result[key])?result[key].slice(0,5):[];
-  if(!items.length)continue;
-  const sub=document.createElement('b');sub.textContent=caption;container.append(sub);
-  const ul=document.createElement('ul');for(const item of items){const li=document.createElement('li');li.textContent=String(item).slice(0,300);ul.append(li);}container.append(ul);
- }
- if(result.criticalError)add('Προσοχή: εντοπίστηκε πιθανό σφάλμα ασφάλειας.');
- add(result.safetyNote);
- const caveat=document.createElement('small');caveat.textContent='Εκπαιδευτική εκτίμηση AI, όχι επίσημη βαθμολογία ή πιστοποίηση. Το AI μπορεί να κάνει λάθη.';container.append(caveat);
+ title.textContent='Αξιολόγηση της απάντησής σου: '+labels[verdict];container.append(title);
+ const add=(content,css='')=>{
+  if(typeof content!=='string'||!content.trim())return;
+  const p=document.createElement('p');if(css)p.className=css;
+  p.textContent=content.trim();container.append(p);
+ };
+ const section=(caption,value,css='')=>{
+  if(typeof value!=='string'||!value.trim())return;
+  const block=document.createElement('section');block.className='ai-grading-section'+(css?' '+css:'');
+  const heading=document.createElement('strong');heading.className='ai-grading-heading';heading.textContent=caption;
+  const p=document.createElement('p');p.textContent=value.trim();
+  block.append(heading,p);container.append(block);
+ };
+ const points=(caption,values,css='')=>{
+  const filtered=Array.isArray(values)?values.filter(x=>typeof x==='string'&&x.trim()).slice(0,5):[];
+  if(!filtered.length)return;
+  const block=document.createElement('section');block.className='ai-grading-section'+(css?' '+css:'');
+  const heading=document.createElement('strong');heading.className='ai-grading-heading';heading.textContent=caption;
+  const ul=document.createElement('ul');
+  for(const item of filtered){const li=document.createElement('li');li.textContent=item.trim().slice(0,300);ul.append(li);}
+  block.append(heading,ul);container.append(block);
+ };
+ section('Η απάντησή σου',result.studentAnswer,'ai-grading-student');
+ const suggested=result.modelAnswer||result.referenceAnswer;
+ section(verdict==='uncertain'?'Εκπαιδευτική απάντηση αναφοράς (όχι βαθμολογία)':'Ενδεικτική σωστή απάντηση',suggested,'ai-grading-reference');
+ section('Γιατί;',result.explanation,'ai-grading-why');
+ if(verdict==='partial'||verdict==='correct')points('Τι έγραψες σωστά',result.correctPoints,'ai-grading-good');
+ if(verdict==='incorrect'||verdict==='partial')points('Τι χρειάζεται διόρθωση',result.missingPoints,'ai-grading-needs');
+ section('Παράδειγμα για να το καταλάβεις',result.example,'ai-grading-example');
+ section('Τι να θυμάσαι',result.takeaway,'ai-grading-takeaway');
+ if(verdict==='uncertain')add('Δεν καταχωρίζεται αυτόματα βαθμολογία. Διευκρίνισε την απάντησή σου και δοκίμασε ξανά.');
+ if(result.criticalError)add('Προσοχή: εντοπίστηκε πιθανό σφάλμα ασφάλειας. Συμβουλέψου την εκπαιδευτική πηγή και τον εκπαιδευτή.','ai-grading-warning');
+ add(result.safetyNote,'ai-grading-safety');
+ const caveat=document.createElement('small');
+ caveat.textContent='Εκπαιδευτική εκτίμηση AI, όχι επίσημη βαθμολογία ή πιστοποίηση. Το AI μπορεί να κάνει λάθη.';
+ container.append(caveat);
 }
 window.EkabAIGrade=Object.freeze({available,evaluate,render,labels});
 })();
