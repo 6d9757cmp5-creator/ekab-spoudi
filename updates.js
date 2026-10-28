@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.94', $=id=>document.getElementById(id);
+const CURRENT='27.1.96', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
@@ -101,7 +101,7 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
   config.onload=()=>{
    if(document.querySelector('script[src*="saek-course-series.js"]'))return;
    const player=document.createElement('script');
-   player.src=new URL('./saek-course-series.js?v=27.1.95-second-ai',document.baseURI).href;
+   player.src=new URL('./saek-course-series.js?v=27.1.96-second-ai',document.baseURI).href;
    player.dataset.saekSeriesAuto='player';
    document.body.append(player);
   };
@@ -110,3 +110,12 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
  else install();
 })();
+
+/* Shared back button, mobile edge swipe and replacement user guide. */
+if(!document.querySelector('script[data-ekab-navigation]')){
+ const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=3';document.head.append(css);
+ const script=document.createElement('script');script.src='navigation.js?v=2';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
+}
+
+/* Classroom image presentation mode. */
+if(!document.querySelector('script[data-ekab-classroom-images]')){const s=document.createElement('script');s.src='classroom-images.js?v=2';s.defer=true;s.dataset.ekabClassroomImages='';document.head.append(s)}
