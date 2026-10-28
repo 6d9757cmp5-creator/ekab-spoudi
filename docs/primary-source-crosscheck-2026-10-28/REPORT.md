@@ -210,3 +210,25 @@
 
 **Διαχωρισμός καταστάσεων:** Το `OWNER_APPROVED` είναι ρητή εξουσιοδότηση/αποδοχή του ιδιοκτήτη, **δεν είναι αποτέλεσμα ανεξάρτητου επιστημονικού ελέγχου και δεν πιστοποιεί 561/561 ιατρικά ορθές εγγραφές**. Τα αντικειμενικά πεδία `targetedReview`, `fullScientificApproval` και οι πέντε ανοιχτές διορθώσεις διατηρούνται χωρίς παραποίηση. Επίσης, η έγκριση ιδιοκτήτη δεν ισοδυναμεί με merge/deployment. Συνεχίζει η προηγούμενη σειρά ελέγχων, πρώτα 561 στοχευμένοι έλεγχοι και έπειτα δεύτερος πλήρης γύρος.
 
+## Πρώτος γύρος — παρτίδα 29/10/2026 01:53–02:00 Ελλάδας
+
+**Αποκλειστικά νέοι στοχευμένοι έλεγχοι πρώτου γύρου:** αναγνώστηκαν πλήρως τα τρία κεφάλαια `saek-course-02.html#lesson-11` έως `#lesson-13` (κύρια παράγραφος, SOS, εξήγηση, επιπλέον σημείωση, ερώτηση και απάντηση αυτοελέγχου) και οι οκτώ πλήρεις αποθηκευμένες απαντήσεις `EOP-A-023` έως `EOP-A-030` από το πραγματικό `official_questions.json` (blob `37dd3be8536b64d1a77ff26f4838d545c6025689`). Κάθε εγγραφή έχει δικό της `targetedReview` με συγκεκριμένους ισχυρισμούς, πηγές, εύρημα και όρια. Δεν προστέθηκε `fullScientificApproval`.
+
+| ID | Στοχευμένο αποτέλεσμα | Ειδική πηγή |
+|---|---|---|
+| SAEK-02-11 | Νεφρώνας, σπειραματική διήθηση, επαναρρόφηση/έκκριση, ADH/αλδοστερόνη· ο αυτοέλεγχος «νεφρώνας» συμφωνεί | [OpenStax §25.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/25-4-microscopic-anatomy-of-the-kidney), [§25.5](https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation) |
+| SAEK-02-12 | Πέψη μακροθρεπτικών, λάχνες, κύρια απορρόφηση στο λεπτό έντερο· αυτοέλεγχος σωστός | [OpenStax §23.7](https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look) |
+| SAEK-02-13 | Ινσουλίνη/γλυκαγόνη, αντίρροπη ρύθμιση γλυκόζης· αυτοέλεγχος σωστός· **όχι** απαίτηση ινσουλίνης από όλους τους ιστούς | [OpenStax §17.9](https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas) |
+| EOP-A-023 | CO = HR × SV· αριθμητικό παράδειγμα 70 × 70 = 4,9 L/min σωστό | [OpenStax §19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+| EOP-A-024 | Συσταλτικότητα και κύριοι ινότροποι παράγοντες· βασικός ορισμός συμφωνεί | [OpenStax §19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+| EOP-A-025 | Τασεοϋποδοχείς, διάταση και αντανακλαστική ρύθμιση πίεσης· συμφωνία | [OpenStax §20.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/20-4-homeostatic-regulation-of-the-vascular-system) |
+| EOP-A-026 | Παθητική κοιλιακή πλήρωση και κολπική συστολή· συμφωνία | [OpenStax §19.3](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-3-cardiac-cycle) |
+| EOP-A-027 | Αιματοκρίτης = ποσοστό όγκου ερυθροκυττάρων στο αίμα· συμφωνία | [OpenStax §18.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/18-1-an-overview-of-blood) |
+| **EOP-A-028** | **ΝΕΟ ΕΥΡΗΜΑ:** η ενιαία απόδοση αδρεναλίνης/νοραδρεναλίνης/**ντοπαμίνης** στον μυελό επινεφριδίων **και** στις συμπαθητικές απολήξεις είναι υπεργενίκευση· απαιτείται διόρθωση διατύπωσης | [OpenStax §17.6](https://openstax.org/books/anatomy-and-physiology-2e/pages/17-6-the-adrenal-glands), [§20.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/20-4-homeostatic-regulation-of-the-vascular-system) |
+| EOP-A-029 | Λειτουργίες αίματος και έμμορφα στοιχεία· σημείωση ότι αιμοπετάλια είναι **κυτταρικά θραύσματα** | [OpenStax §18.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/18-1-an-overview-of-blood) |
+| EOP-A-030 | Επιδερμίδα, χόριο, υποδόριος ιστός και λειτουργίες· συμφωνία | [OpenStax §§5.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/5-1-layers-of-the-skin), [5.3](https://openstax.org/books/anatomy-and-physiology-2e/pages/5-3-functions-of-the-integumentary-system) |
+
+**Νέα καταμέτρηση πρώτου γύρου:** ΣΑΕΚ **27/247**· ΕΟΠΠΕΠ **29/314**· σύνολο **56/561**. Απομένουν **505** πρώτοι έλεγχοι. Καταγεγραμμένα ειδικά ζητήματα ΕΟΠΠΕΠ **6**: τα προϋπάρχοντα `EOP-A-002`, `EOP-B-047`, `EOP-B-094`, `EOP-B-181`, `EOP-B-204` και το νέο `EOP-A-028`. Το νέο ζήτημα δεν έχει ακόμη διορθωθεί στο εκπαιδευτικό JSON. Παραμένουν επίσης εκκρεμείς η επιβεβαίωση νεότερης επίσημης τράπεζας, η πλήρης αντιστοίχιση όλων των στόχων του Οδηγού 2024 και η ανεξάρτητη δεύτερη επιστημονική επαλήθευση **μετά** την ολοκλήρωση του πρώτου γύρου. Η ρητή έγκριση ιδιοκτήτη (`OWNER_APPROVED`) παραμένει χωριστή από επιστημονική πιστοποίηση.
+
+**Commits μητρώων:** [ΣΑΕΚ `95d4be8`](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/95d4be83b7fef74aab3bd1ae1286ac0651d58a21), [ΕΟΠΠΕΠ `f3c2672`](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/f3c2672a99f0925bbb51f49ba0f935d51862cc5e). **Δεν έγινε merge ή deployment.**
+
