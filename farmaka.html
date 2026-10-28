@@ -144,10 +144,54 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 .ph-review-reference a:hover{text-decoration:underline}
 .ph-review-reference a:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:2px}
 
+
+/* Low-noise learning upgrades: scope legend and collapsed Level 4 scenarios. */
+.ph-scope-legend{margin:10px 0 0;padding:9px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg)}
+.ph-scope-legend>summary{cursor:pointer;color:var(--ink);font-size:.82rem;font-weight:720;list-style:revert}
+.ph-scope-legend>p{font-size:.78rem;color:var(--muted);margin:8px 0 0;line-height:1.5}
+.ph-scope-list{display:grid;gap:8px;margin:12px 0 3px}
+.ph-scope-list>div{display:flex;align-items:flex-start;gap:9px;font-size:.79rem;line-height:1.45}
+.ph-scope-dot{flex:none;width:11px;height:11px;border-radius:50%;margin-top:4px}
+.ph-scope-dot.basic{background:#2caa60}
+.ph-scope-dot.protocol{background:#4c95df}
+.ph-scope-dot.advanced{background:#d4924a}
+.ph-scope-list strong{display:block;color:var(--ink);font-size:.79rem}
+.ph-scope-list small{display:block;color:var(--muted);font-size:.74rem}
+.ph-case-panel{margin-top:16px}
+.ph-case-panel>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.ph-case-panel>summary::-webkit-details-marker{display:none}
+.ph-case-panel>summary:after{content:'+';font-weight:700;color:var(--blue);font-size:1.2rem}
+.ph-case-panel[open]>summary:after{content:'−'}
+.ph-case-heading strong{display:block;font-size:1.08rem;line-height:1.35}
+.ph-case-heading span{display:block;font-size:.77rem;color:var(--muted);margin-top:5px}
+.ph-case-intro{font-size:.82rem;color:var(--muted);line-height:1.55;margin:16px 0 12px}
+.ph-case-progress{font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums;margin:0 0 8px}
+.ph-case-topic{font-size:.71rem;font-weight:850;color:var(--blue);letter-spacing:.07em;text-transform:uppercase;margin:0 0 5px}
+.ph-case-question{font-size:1rem!important;line-height:1.55;margin:0 0 15px!important}
+.ph-case-options{display:grid;gap:9px}
+.ph-case-option{font:inherit;font-size:.88rem;text-align:left;line-height:1.42;padding:12px 14px;min-height:44px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);cursor:pointer}
+.ph-case-option:not(:disabled):hover{border-color:var(--blue)}
+.ph-case-option:focus-visible,.ph-case-panel>summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.ph-case-option:disabled{opacity:1;cursor:default}
+.ph-case-option.correct{background:#e0f4e8;color:#175230;border-color:#73ab85}
+.ph-case-option.wrong{background:#ffebeb;color:#842c33;border-color:#d88a90}
+.ph-case-feedback{margin:13px 0 0;padding:13px 15px;background:var(--light);border-radius:12px;line-height:1.52;font-size:.85rem}
+.ph-case-feedback[hidden]{display:none}
+.ph-case-feedback p{margin:7px 0}
+.ph-case-source{font-size:.77rem;line-height:1.45;overflow-wrap:anywhere}
+.ph-case-actions{display:flex;justify-content:flex-end;margin-top:12px}
+.ph-case-actions button[hidden]{display:none}
+.ph-case-result{font-weight:800}
+html[data-theme="dark"] .ph-case-option.correct{background:#204733;color:#d6f7e1;border-color:#44825b}
+html[data-theme="dark"] .ph-case-option.wrong{background:#4f292e;color:#ffdddd;border-color:#96545d}
+html[data-theme="dark"] .ph-case-feedback{background:#1b3c50}
+@media(max-width:480px){.ph-case-panel{padding:15px}.ph-case-heading strong{font-size:.98rem}.ph-case-option{font-size:.82rem;padding:11px 12px}}
+
 </style>
 <script src="farmaka-catalog.js?v=2026.10.26" defer></script>
 <script src="farmaka-clinical-2026.js?v=2026.10.26" defer></script>
 <script src="farmaka-ui.js?v=2026.10.26" defer></script>
+<script src="farmaka-cases.js?v=27.1.110" defer></script>
 <link rel="stylesheet" href="sources-ui.css?v=27.1.73">
 <script src="sources-ui.js?v=27.1.73" defer></script>
 </head>
@@ -174,6 +218,13 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 <label for="categoryFilter">Κλινική κατηγορία<select id="categoryFilter"><option value="all">Όλες οι ενότητες</option></select></label>
 <label for="scopeFilter">Επίπεδο γνώσης<select id="scopeFilter"><option value="all">Όλα τα επίπεδα</option><option value="basic">Βασική γνώση</option><option value="protocol">Με πρωτόκολλο / εξουσιοδότηση</option><option value="advanced">Εξειδικευμένη ALS / ιατρός</option></select></label>
 </div>
+<details class="ph-scope-legend" id="scopeLegend"><summary>Τι σημαίνουν τα 3 χρώματα;</summary>
+<div class="ph-scope-list">
+<div><span class="ph-scope-dot basic" aria-hidden="true"></span><span><strong>Πράσινο · Βασική γνώση</strong><small>Πρώτες βοήθειες και βασική αναγνώριση — σύμφωνα με την εκπαίδευση.</small></span></div>
+<div><span class="ph-scope-dot protocol" aria-hidden="true"></span><span><strong>Μπλε · Πρωτόκολλο και εξουσιοδότηση</strong><small>Απαιτείται συγκεκριμένη εκπαίδευση και νόμιμη υπηρεσιακή αρμοδιότητα.</small></span></div>
+<div><span class="ph-scope-dot advanced" aria-hidden="true"></span><span><strong>Πορτοκαλί · Εξειδικευμένη ομάδα</strong><small>Ιατρική καθοδήγηση, ALS ή νοσοκομειακό περιβάλλον.</small></span></div>
+</div><p>Τα χρώματα είναι εκπαιδευτικές ενδείξεις και όχι επίσημη άδεια χορήγησης ή βαθμίδες δυσκολίας.</p>
+</details>
 <p class="ph-tip" id="resultCount" role="status" aria-live="polite">Φόρτωση καρτελών…</p>
 <details class="ph-disclosure"><summary>Τι περιλαμβάνουν οι αναλυτικές καρτέλες</summary><p class="ph-clinical-note" id="phApprovalNotice"><strong>Αναλυτικές καρτέλες:</strong> Οι επιπρόσθετες πληροφορίες είναι προσανατολισμένες στη μελέτη, με ξεχωριστές ενδείξεις, δοσολογικό πλαίσιο, παιδιατρικούς περιορισμούς, ειδικούς πληθυσμούς, αλληλεπιδράσεις, πηγές και εκκρεμή επικύρωση. Όπου δεν έχει επαληθευθεί το συγκεκριμένο προϊόν ή SOP, η δόση δεν δίνεται ως οδηγία χορήγησης. Δεν έχει ολοκληρωθεί ανεξάρτητη κλινική έγκριση.</p></details>
 </section>
@@ -200,6 +251,11 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 <h2 id="quizTitle">04 · Αυτοέλεγχος κατανόησης</h2><p class="ph-tip">12 εκπαιδευτικές ερωτήσεις πολλαπλής επιλογής, βασισμένες στα αναφερόμενα πρωτόκολλα. Δεν αποτελούν επίσημες εξετάσεις ή πιστοποίηση.</p>
 <p id="quizProgress" class="ph-small" aria-live="polite"></p><h3 id="quizQuestion">Φόρτωση…</h3><div id="quizOptions" class="ph-quiz-options"></div><div id="quizFeedback" class="ph-feedback" hidden role="status"></div><button type="button" id="quizNext" class="ph-button" hidden>Επόμενη ερώτηση</button><button type="button" id="quizRestart" class="ph-button secondary" hidden>Νέα προσπάθεια</button>
 </section>
+<details class="ph-panel ph-case-panel" id="clinicalThinking" aria-labelledby="clinicalThinkingTitle">
+<summary><span class="ph-case-heading"><strong id="clinicalThinkingTitle">Επίπεδο 4 · Κλινική σκέψη</strong><span>7 σύντομα περιστατικά · ένα κάθε φορά · χωρίς δοσολογικά τεστ</span></span></summary>
+<p class="ph-case-intro">Πρώτα αναγνώρισε τον κίνδυνο, σκέψου την προτεραιότητα και απόφυγε το φαρμακευτικό λάθος. Η άσκηση είναι εκπαιδευτική, όχι άδεια χορήγησης. Οι απαντήσεις δεν αποθηκεύονται.</p>
+<div id="phCaseStage" aria-label="Ασκήσεις κλινικής σκέψης"><p class="ph-small">Φόρτωση εκπαιδευτικών περιστατικών…</p></div>
+</details>
 <details class="ph-panel ph-basics ph-reference-details" id="references"><summary><h2 id="refsTitle">Πηγές και τεκμηρίωση</h2></summary><div class="ph-reference-content">
 <p class="ph-tip">Οι κατευθυντήριες πηγές τεκμηριώνουν αντίστοιχες κλινικές ενότητες, όχι απαραίτητα κάθε μεμονωμένη φαρμακολογική λεπτομέρεια. Οι καρτέλες που παραπέμπουν στη γενική ασφάλεια φαρμάκων του EMA απαιτούν διασταύρωση με την Περίληψη Χαρακτηριστικών Προϊόντος (ΠΧΠ/SmPC), πριν αξιοποιηθούν σε κλινική εκπαίδευση. Ο κατάλογος δεν υποκαθιστά το εγκεκριμένο πρωτόκολλο του ΕΚΑΒ.</p>
 <div id="sourceList" class="ph-sources"></div>
