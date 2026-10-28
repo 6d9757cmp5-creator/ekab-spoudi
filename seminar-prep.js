@@ -122,7 +122,7 @@ function completedCount(run){return run?Object.keys(run.responses).length:0;}
 function updateCourseProgress(){
  if(!selected)return;
  const p=current();
- $('seminarCourseProgress').textContent=p.studied.length+'/12 θεματικές · '+completedCount(p.mixedRun)+'/10 τεστ · '+Object.keys(p.scenarioGrades).length+'/12 σενάρια (AI)';
+ $('seminarCourseProgress').textContent=p.studied.length+'/12 θεματικές · '+completedCount(p.mixedRun)+'/10 τεστ · '+Object.keys(p.scenarioGrades).length+'/12 σενάρια';
 }
 function showHome(){
  stopAuto();selected=null;
@@ -133,7 +133,7 @@ function showHome(){
   const card=make('article','seminar-card'),info=make('div','seminar-card-text');
   const heading=make('h2',null,c.name);
   const subtitle=make('p','seminar-card-sub',c.subtitle);
-  const stats=make('p','seminar-card-stats',p.studied.length+'/12 θεματικές · '+completedCount(p.mixedRun)+'/10 τεστ · '+Object.keys(p.scenarioGrades).length+'/12 σενάρια (AI)');
+  const stats=make('p','seminar-card-stats',p.studied.length+'/12 θεματικές · '+completedCount(p.mixedRun)+'/10 τεστ · '+Object.keys(p.scenarioGrades).length+'/12 σενάρια');
   info.append(heading,subtitle,stats);
   const btn=make('button','btn seminar-start',p.studied.length||completedCount(p.mixedRun)||p.right.length||p.mcRight.length||Object.keys(p.scenarioGrades).length||p.oral.length?'Συνέχεια':'Έναρξη');
   btn.type='button';btn.addEventListener('click',()=>openCourse(c.id));
