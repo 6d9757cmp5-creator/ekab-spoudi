@@ -32,11 +32,11 @@ jobs:
           js=(root/'anatomy.js').read_text()
           css=(root/'anatomy.css').read_text()
           home=Path('index.html').read_text()
-          assert 'home-anatomy-pair' in home
-          assert 'href="ui-tools/anatomy-3d/index.html?mode=skeleton&amp;system=skeletal"' in home
-          assert 'href="ui-tools/anatomy-3d/index.html?mode=organs"' in home
-          assert home.count('home-anatomy-tile ') == 2
-          assert 'saek-skeleton.svg' in home and 'saek-organs.svg' in home
+          assert 'home-anatomy-single-wrap' in home
+          assert 'href="ui-tools/anatomy-3d/index.html"' in home
+          assert home.count('class="home-anatomy-single"') == 1
+          assert 'home-anatomy-pair' not in home
+          assert 'Σκελετός · Όργανα · Συνδυασμός' in home
           assert 'Ανδρικό' in html and 'Γυναικείο' in html
           assert all(('data-mode="'+m+'"') in html for m in ('skeleton','organs','both'))
           assert all(('data-sex="'+s+'"') in html for s in ('male','female'))
@@ -86,6 +86,7 @@ jobs:
           assert 'localStorage.' not in real and 'appwrite.' not in real
           assert '.viewport' in css and '@media(max-width:560px)' in css
           home_css=Path('home.css').read_text()
-          assert '.home-anatomy-pair{display:grid;grid-template-columns:repeat(2' in home_css
+          assert '.home-anatomy-single{' in home_css
+          assert '.home-anatomy-pair' not in home_css
           print(f'PASS: {len(atlas)} unique atlas entries, 2 sex presets, 3 views, no grade/storage access')
           PY
