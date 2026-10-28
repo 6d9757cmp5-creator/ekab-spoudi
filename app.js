@@ -6,6 +6,15 @@ const lockedThisRun=new Set(), gradedFeedback=new Map();
 let gradingPending=false;
 const scheduler=window.EkabStudyScheduler;
 if(!scheduler)throw new Error('Δεν φορτώθηκε ο προγραμματισμός επαναλήψεων. Ενημέρωσε την εφαρμογή.');
+/* Saved location only; no modification to scores or review data. */
+function rememberEoppep(question,mode){
+ if(!question||!/^EOP-[AB]-\d{3}$/.test(question.id)||!['catalog','exam'].includes(mode))return;
+ try{localStorage.setItem('ekab.resume.v1',JSON.stringify({
+  kind:'eoppep',mode,question:question.id,
+  title:'ΕΟΠΠΕΠ · Ομάδα '+question.group+' · Θέμα '+question.number,
+  updatedAt:Date.now()
+ }))}catch{}
+}
 let catalogSelectedId=null;
 let eoppepSos=null,eoppepSosPromise=null;
 function renderReadySos(questionId){
@@ -137,7 +146,7 @@ function showHome(){if(pool[index]&&$('#draft'))st(pool[index]).draft=$('#draft'
 function showExam(){lockedThisRun.clear();gradedFeedback.clear();$('#homeView').classList.add('hidden');$('#examView').classList.remove('hidden');$('#setup').classList.remove('hidden');$('#study').classList.add('hidden');updateMatches();window.scrollTo({top:0,behavior:'smooth'})}
 function present(){
  if(!pool.length){$('#study').classList.add('hidden');$('#setup').classList.remove('hidden');return}
- const q=pool[index],s=st(q);s.seen=(s.seen||0)+1;save();updateMetrics();shownAnswer=false;
+ const q=pool[index],s=st(q);s.seen=(s.seen||0)+1;save();rememberEoppep(q,'exam');updateMetrics();shownAnswer=false;
  $('#eoppepAIResult').hidden=true;$('#eoppepGradeAI').disabled=false;$('#eoppepGradeAI').hidden=false;$('#showAnswer').hidden=false;$('#showAnswer').disabled=false;$('#eoppepGradeAI').textContent='Υποβολή αξιολόγησης';
  $('#qmeta').textContent=`Ομάδα ${q.group} · Θέμα ${q.number}`;
  $('#qOriginal').href=qSourceLink(q);
@@ -257,6 +266,7 @@ function openCatalogQuestion(questionId){
  const q=bank.find(item=>item.id===questionId);
  if(!q)return;
  catalogSelectedId=questionId;
+ rememberEoppep(q,'catalog');
  const progress=st(q);progress.seen=(Number(progress.seen)||0)+1;
  save();renderCatalogReader(q);updateMetrics();
  const reader=$('#catalogReader');
@@ -369,15 +379,18 @@ $('#next').onclick=()=>advance(1);$('#prev').onclick=()=>advance(-1);
 if ($('#export')) $('#export').onclick=()=>{let blob=new Blob([JSON.stringify({schema:'ekab-official-progress-v19',date:new Date().toISOString(),progress:state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ekab-eoppep-progress-v19.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 async function init(){state=saved();try{const response=await fetch(BANK_URL);if(!response.ok)throw Error('HTTP '+response.status);bank=await response.json();if(bank.length!==314||bank.filter(q=>q.group==='A').length!==105||bank.filter(q=>q.group==='B').length!==209)throw Error('Ασυμφωνία πλήθους επίσημων θεμάτων.')}catch(err){console.error(err);$('.intro-note').textContent='Δεν φορτώθηκε η επίσημη τράπεζα. Ανέβασε όλα τα αρχεία αποσυμπιεσμένα στον ίδιο φάκελο GitHub Pages.';return}for(const topic of [...new Set(bank.map(q=>q.studyTopic))].sort((a,b)=>a.localeCompare(b,'el'))){let option=document.createElement('option');option.value=topic;option.textContent=topic;$('#topic').append(option)}const documentedOption=$('#statusFilter option[value="documented_review"]');if(documentedOption)documentedOption.textContent=`Ιστορικό στοχευμένης ανασκόπησης (${bank.filter(hasDocumentedReview).length})`;const directOption=$('#statusFilter option[value="directly_checked"]');if(directOption)directOption.textContent=`Καταγεγραμμένος έλεγχος πηγής / sourceChecked (${bank.filter(q=>Boolean(q.sourceChecked)).length})`;const pendingOption=$('#statusFilter option[value="passage_check_pending"]');if(pendingOption)pendingOption.textContent=`Περιμένουν αντιπαραβολή χωρίου (${bank.filter(q=>q.sourceReview?.status==='citation_indexed_pending_passage_check').length})`;updateMetrics();updateMatches();if($('#allQuestionsPanel')?.open)renderAllQuestions();
  // Global search opens the selected question in the READER, never in exam mode.
- const requested=new URLSearchParams(location.search).get('question');
- if(requested&&/^EOP-[AB]-\d{3}$/.test(requested)&&bank.some(q=>q.id===requested)){
+ const route=new URLSearchParams(location.search);
+ const requested=route.get('question');
+ const found=/^EOP-[AB]-\d{3}$/.test(requested||'')&&bank.some(q=>q.id===requested);
+ if(found&&route.get('resume')==='exam'){
+  // Restore the exact current exam question and saved draft, never rewrite grades.
+  pool=bank.slice();index=pool.findIndex(q=>q.id===requested);
+  showExam();$('#setup').classList.add('hidden');$('#study').classList.remove('hidden');present();
+ }else if(found){
   const catalog=$('#allQuestionsPanel');
   if(catalog){catalog.open=true;renderAllQuestions();requestAnimationFrame(()=>openCatalogQuestion(requested));}
  }
-
- // Shortcuts from the new EOPPEP hub: select reading or active recall.
  if(!requested){
-  const route=new URLSearchParams(location.search);
   const group=['A','B'].includes(route.get('group'))?route.get('group'):'all';
   if(route.get('mode')==='exam'){
    showExam();$('#group').value=group;updateMatches();
@@ -385,9 +398,10 @@ async function init(){state=saved();try{const response=await fetch(BANK_URL);if(
    $('#catalogGroupFilter').value=group;
    const button=$('#allQuestionsToggle');
    if(button&&!$('#allQuestionsPanel').open)button.click();
-   else {renderAllQuestions();filterCatalog()}
+   else{renderAllQuestions();filterCatalog()}
   }
  }
+
 }
 init(); // Service worker registration is managed by updates.js on every page.
 
