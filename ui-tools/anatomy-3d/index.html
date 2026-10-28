@@ -8,7 +8,7 @@
 <title>3D Ανατομία | ΕΚΑΒ Σπουδή</title>
 <link rel="icon" href="../../icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="anatomy.css">
-<script type="module" src="anatomy.js"></script>
+<script type="module" src="hires-anatomy.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Μετάβαση στο περιεχόμενο</a>
@@ -42,10 +42,10 @@
           <div id="anatomyViewport" class="viewport" role="img" aria-label="Περιστρεφόμενο 3D εκπαιδευτικό μοντέλο σώματος. Διάλεξε μέρος από τη λίστα για χρήση χωρίς ποντίκι." tabindex="0">
             <div id="renderMount" class="render-mount"></div>
             <div id="loading" class="loading" role="status"><span class="spinner" aria-hidden="true"></span><strong>Φόρτωση 3D μοντέλου…</strong><small>Προετοιμασία ανατομικών στοιχείων</small></div>
-            <div id="errorBox" class="error-box" role="alert" hidden><strong>Η 3D απεικόνιση δεν φορτώθηκε.</strong><p>Απαιτείται WebGL και σύνδεση για την τρισδιάστατη βιβλιοθήκη. Η λίστα ανατομικών σημείων παραμένει διαθέσιμη.</p><button type="button" id="retryBtn">Νέα προσπάθεια</button></div>
+            <div id="errorBox" class="error-box" role="alert" hidden><strong>Η υψηλής λεπτομέρειας 3D ανατομία δεν φορτώθηκε.</strong><p>Απαιτείται WebGL και σύνδεση για τα ανατομικά αρχεία. Δεν προβάλλεται σχηματικό υποκατάστατο ως ακριβής ανατομία.</p><button type="button" id="retryBtn">Νέα προσπάθεια</button></div>
             <div class="viewport-head"><span id="modelTag">ΑΝΔΡΙΚΟ ΜΟΝΤΕΛΟ · ΣΚΕΛΕΤΟΣ</span><span class="live-dot" aria-label="Τρισδιάστατη διαδραστική προβολή">3D LIVE</span></div>
             <div class="view-guide" aria-hidden="true"><span class="guide-line"></span><span>ΠΡΟΣΘΙΑ ΟΨΗ</span></div>
-            <div id="viewHint" class="view-hint">↻ Σύρε για περιστροφή · Κάνε zoom με δύο δάχτυλα</div>
+            <div id="viewHint" class="view-hint">↻ Περιστροφή με σύρσιμο · Zoom με δύο δάχτυλα · Μεγάλα 3D αρχεία</div>
             <div class="camera-tools" role="group" aria-label="Έλεγχοι κάμερας">
               <button type="button" id="zoomIn" aria-label="Μεγέθυνση">+</button>
               <button type="button" id="zoomOut" aria-label="Σμίκρυνση">−</button>
@@ -59,18 +59,18 @@
         <div class="viewer-footer">
           <div class="system-filter"><label for="systemFilter">Σύστημα</label><select id="systemFilter">
             <option value="all">Όλα τα συστήματα</option>
-            <option value="skeletal">Σκελετικό</option>
+            <option value="skeletal">Σκελετικό</option><option value="muscular">Μυϊκό</option>
             <option value="nervous">Νευρικό</option>
             <option value="respiratory">Αναπνευστικό</option>
-            <option value="circulatory">Κυκλοφορικό</option>
+            <option value="circulatory">Κυκλοφορικό</option><option value="cardiac">Καρδιά</option><option value="arterial">Αρτηρίες</option><option value="venous">Φλέβες</option>
             <option value="digestive">Πεπτικό</option>
             <option value="urinary">Ουροποιητικό</option>
-            <option value="reproductive">Αναπαραγωγικό</option>
+            <option value="reproductive">Αναπαραγωγικό</option><option value="lymphatic">Λεμφικό</option><option value="endocrine">Ενδοκρινικό</option><option value="integumentary">Δέρμα</option><option value="sensory">Αισθητήρια όργανα</option><option value="connective">Συνδετικός ιστός</option><option value="pregnancy">Κύηση (ξεχωριστή αναφορά)</option>
           </select></div>
           <label class="opacity-control">Περίγραμμα σώματος <input id="outline" type="range" min="0" max="65" value="14" step="1"><output id="outlineValue" for="outline">14%</output></label>
           <button type="button" id="isolateBtn" aria-pressed="false">◎ Απομόνωση σημείου</button>
         </div>
-        <div class="notice"><span aria-hidden="true">ⓘ</span><p><strong>Εκπαιδευτικό σχηματικό 3D.</strong> Τα σχήματα απλοποιούν την πραγματική ανατομία και δεν αποτελούν πιστοποιημένη ή διαγνωστική αναπαράσταση. Η σωματική ποικιλομορφία δεν εξαντλείται στα δύο ενδεικτικά μοντέλα.</p></div>
+        <div class="notice"><span aria-hidden="true">ⓘ</span><p><strong>Ανατομικά πλέγματα από ερευνητικές πηγές.</strong> Ανδρικό: BodyParts3D. Γυναικείο: πραγματικά γυναικεία όργανα HuBMAP με συμπληρωματικό σκελετό, μυς και αγγεία προσαρμοσμένα από ανδρικά δεδομένα BodyParts3D. Δεν αποτελεί ενιαία σάρωση γυναίκας, διαγνωστικό εργαλείο ή πλήρη κάλυψη της ανατομικής ποικιλομορφίας. Απαιτεί σύνδεση για την πρώτη φόρτωση.</p></div>
       </section>
       <aside class="inspector" aria-label="Εξερεύνηση και πληροφορίες ανατομίας">
         <div class="inspector-head"><span class="eyebrow">ΕΞΕΡΕΥΝΗΣΗ</span><h2>Ανατομικός άτλας</h2><p>Πάτησε ένα σημείο στο μοντέλο ή επίλεξέ το από τη λίστα.</p></div>
@@ -101,6 +101,6 @@
     </div>
     <section class="reference"><div><span class="eyebrow">ΕΠΙΣΤΗΜΟΝΙΚΗ ΤΕΚΜΗΡΙΩΣΗ</span><h2>Μάθε την ανατομία με ασφάλεια</h2><p>Ενδεικτικές διαφορές στη λεκάνη και στο αναπαραγωγικό σύστημα. Οι διαφορές φύλου είναι πληθυσμιακές τάσεις, όχι απόλυτοι κανόνες για κάθε άνθρωπο.</p></div><div class="reference-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK545204/" target="_blank" rel="noopener noreferrer">NCBI · Οστέινη λεκάνη ↗</a><a href="https://my.clevelandclinic.org/health/body/pelvis" target="_blank" rel="noopener noreferrer">Cleveland Clinic · Πύελος ↗</a><a href="../../anatomia.html">Ύλη ΣΑΕΚ · Ανατομία ↗</a></div></section>
   </main>
-  <footer class="page-footer"><span>ΕΚΑΒ Σπουδή · 3D Anatomy Lab</span><span>Πρωτότυπη σχηματική μοντελοποίηση · Απαιτεί επιστημονική επιθεώρηση πριν από επίσημη δημοσίευση</span></footer>
+  <footer class="page-footer"><span>ΕΚΑΒ Σπουδή · 3D Anatomy Lab</span><span>BodyParts3D © DBCLS · HuBMAP © Browne / Schlehlein · προσαρμογές slorksmo / Mahendra Beniwal · CC BY 4.0 · Εκκρεμεί επιστημονική επιθεώρηση</span></footer>
 </div>
 </body></html>
