@@ -45,7 +45,8 @@ jobs:
           assert all(('value="'+s+'"') in html for s in ('skeletal','nervous','respiratory','circulatory','digestive','urinary','reproductive'))
           assert 'Ανατομικά πλέγματα από ερευνητικές πηγές' in html
           ids=set(re.findall(r'id="([^"]+)"',html))
-          used=set(re.findall(r"\$\('([^']+)'\)",js))
+          real=(root/'hires-anatomy.js').read_text()
+          used=set(re.findall(r"\$\('([^']+)'\)",real))
           missing=used-ids
           assert not missing, f'Missing DOM IDs: {sorted(missing)}'
           records=re.findall(r"\['([^']+)','[^']+','([^']+)'",js)
