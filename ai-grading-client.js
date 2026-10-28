@@ -4,6 +4,8 @@
 'use strict';
 const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Χρειάζεται διόρθωση',uncertain:'Απαιτεί επανέλεγχο'};
 const allowed=new Set(Object.keys(labels));
+const AI_LIMIT_MESSAGE='Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις AI έχουν φτάσει προσωρινά στο όριό τους. Κάνε μια μικρή επανάληψη στη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
+const STUDENT_LIMIT_MESSAGE='Ώρα για μια μικρή επανάληψη! 📚 Έχεις φτάσει προσωρινά στο όριο αξιολογήσεων AI. Διάβασε λίγη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
 function available(){return /^[a-zA-Z0-9._-]{3,64}$/.test(window.EkabAIConfig?.functionId||'')}
 async function evaluate(input){
  if(!available())throw new Error('Η αξιολόγηση με AI δεν έχει ενεργοποιηθεί ακόμη. Η απάντηση παραμένει χωρίς βαθμό.');
@@ -19,11 +21,16 @@ async function evaluate(input){
  try{execution=await client.call('POST',url,{'X-Appwrite-Project':client.config.project,'content-type':'application/json',accept:'application/json'},payload);}
  catch(e){
   if(e.code===401||e.code===403)throw new Error('Συνδέσου στον λογαριασμό σου για ασφαλή αξιολόγηση AI.');
+  if(e.code===429)throw new Error(STUDENT_LIMIT_MESSAGE);
   throw new Error('Δεν ήταν δυνατή η σύνδεση με την αξιολόγηση AI. Η απάντησή σου παραμένει στη συσκευή.');
  }
  let result;
  try{result=JSON.parse(execution.responseBody||'{}');}catch{throw new Error('Η υπηρεσία επέστρεψε μη αναγνωρίσιμη απάντηση.');}
  if(execution.responseStatusCode!==200||execution.status!=='completed'||!allowed.has(result.verdict)){
+  // Only explicit limit codes display the study-break message. Network,
+  // provider failures, and invalid responses retain their own clear errors.
+  if(result.code==='all_ai_limits')throw new Error(AI_LIMIT_MESSAGE);
+  if(result.code==='student_ai_limit'||execution.responseStatusCode===429)throw new Error(STUDENT_LIMIT_MESSAGE);
   throw new Error(result.error||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντηση παραμένει χωρίς βαθμολογία.');
  }
  if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
