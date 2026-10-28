@@ -1,1 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d"><title id="t">Φυσιολογία της αναπνοής — αναγνώριση σημείων</title><desc id="d">Τρεις ονομασμένες εικόνες με βέλος σε κάθε αντίστοιχο αντικείμενο: Εισπνοή, Διάφραγμα, Πνεύμονας. Απλοποιημένο σχήμα αναγνώρισης.</desc><defs><marker id="arr" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker></defs><rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="113" fill="#347e75"/><text x="555" y="30" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#ffffff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 02</text><text x="555" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="23" fill="#ffffff" font-weight="720" text-anchor="middle">Φυσιολογία της αναπνοής</text><circle cx="197" cy="299" r="85" fill="#eef4f8" stroke="#347e75" stroke-width="2.4"/><g transform="translate(197 299)" fill="none" stroke="#347e75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="-57" y="-45" width="114" height="90" rx="18"/><circle r="19"/><path d="M-34-23h23m23 0h23m-69 46h23m23 0h23"/></g><path d="M197 478L197 361" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/><rect x="48" y="487" width="298" height="93" rx="17" fill="#ffffff" stroke="#347e75" stroke-width="2"/><text x="197" y="526" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#253f52" font-weight="700" text-anchor="middle">Εισπνοή</text><circle cx="553" cy="303" r="85" fill="#eef4f8" stroke="#347e75" stroke-width="2.4"/><g transform="translate(553 303)" fill="none" stroke="#347e75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="-57" y="-45" width="114" height="90" rx="18"/><circle r="19"/><path d="M-34-23h23m23 0h23m-69 46h23m23 0h23"/></g><path d="M553 478L553 365" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/><rect x="404" y="487" width="298" height="93" rx="17" fill="#ffffff" stroke="#347e75" stroke-width="2"/><text x="553" y="526" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#253f52" font-weight="700" text-anchor="middle">Διάφραγμα</text><circle cx="909" cy="299" r="85" fill="#eef4f8" stroke="#347e75" stroke-width="2.4"/><g transform="translate(909 299)" fill="none" stroke="#347e75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="-57" y="-45" width="114" height="90" rx="18"/><circle r="19"/><path d="M-34-23h23m23 0h23m-69 46h23m23 0h23"/></g><path d="M909 478L909 361" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/><rect x="760" y="487" width="298" height="93" rx="17" fill="#ffffff" stroke="#347e75" stroke-width="2"/><text x="909" y="526" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#253f52" font-weight="700" text-anchor="middle">Πνεύμονας</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d">
+<title id="t">Φυσιολογία της αναπνοής — εισπνοή, διάφραγμα και πνεύμονες</title>
+<desc id="d">Απλοποιημένο πρόσθιο σχήμα θώρακα. Κατά την εισπνοή το διάφραγμα συσπάται και κατεβαίνει, ο θώρακας και οι πνεύμονες διατείνονται. Δεν παρουσιάζεται ανατομική τομή.</desc>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker></defs>
+<rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="113" fill="#347e75"/>
+<g font-family="DejaVu Sans,Arial,sans-serif"><text x="555" y="30" font-size="18" fill="#fff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 02</text><text x="555" y="72" font-size="23" fill="#fff" font-weight="720" text-anchor="middle">Φυσιολογία της αναπνοής</text>
+<!-- Thorax outline and ribs -->
+<path d="M555 160 C510 160 472 180 445 210 L420 325 Q425 386 462 418 L648 418 Q685 386 690 325 L665 210 C638 180 600 160 555 160Z" fill="#f1f6f8" stroke="#7294a3" stroke-width="5"/>
+<path d="M555 176V390" stroke="#aebfc7" stroke-width="4"/>
+<g fill="none" stroke="#aebfc7" stroke-width="3"><path d="M542 215Q485 202 449 229M568 215Q625 202 661 229"/><path d="M542 250Q482 235 438 264M568 250Q628 235 672 264"/><path d="M542 288Q480 274 431 303M568 288Q630 274 679 303"/><path d="M542 326Q484 312 432 340M568 326Q626 312 678 340"/></g>
+<!-- trachea and bifurcation -->
+<path d="M555 168V235M555 234L523 268M555 234L587 268" fill="none" stroke="#4c7985" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M551 178h8m-8 14h8m-8 14h8" stroke="#d7e8ec" stroke-width="3"/>
+<!-- lungs -->
+<path d="M517 253C493 242 472 259 462 287L452 360Q455 390 486 391Q519 388 530 355L537 286Q535 264 517 253Z" fill="#c67e78" stroke="#914d4d" stroke-width="3"/>
+<path d="M593 253C617 242 638 259 648 287L658 360Q655 390 624 391Q591 388 580 355L573 286Q575 264 593 253Z" fill="#c67e78" stroke="#914d4d" stroke-width="3"/>
+<!-- diaphragm dome contracting downward -->
+<path d="M445 396Q555 345 665 396" fill="none" stroke="#c18b46" stroke-width="10"/>
+<path d="M461 408Q555 428 649 408" fill="none" stroke="#e2be7f" stroke-width="6" stroke-dasharray="10 8"/>
+<!-- expansion arrows -->
+<path d="M454 300L420 300" stroke="#347e75" stroke-width="4" marker-end="url(#arr)"/><path d="M656 300L690 300" stroke="#347e75" stroke-width="4" marker-end="url(#arr)"/>
+<!-- descend diaphragm -->
+<path d="M555 367L555 410" stroke="#c18b46" stroke-width="4" marker-end="url(#arr)"/>
+<!-- Air in -->
+<path d="M555 137V195" stroke="#347e75" stroke-width="4" marker-end="url(#arr)"/>
+<text x="555" y="470" font-size="16" fill="#526b78" text-anchor="middle">Η διακεκομμένη καμπύλη δείχνει ενδεικτικά τη θέση μετά την κάθοδο</text>
+</g>
+<text x="555" y="535" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#253f52" font-weight="700" text-anchor="middle">Εισπνοή · Διάφραγμα · Πνεύμονες</text>
+<text x="555" y="582" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#526b78" text-anchor="middle">Σχηματική φυσιολογία — όχι εικόνα για διάγνωση ή διδασκαλία τεχνικής αερισμού</text>
+</svg>
