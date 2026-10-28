@@ -1,7 +1,8 @@
 import { validSeminarCourse, mergeSeminarCourse, SEMINAR_COURSES } from './seminar-sync.js';
+import { validNote, validNoteId } from './notes-store.js';
 export const SCHEMA = 'ekab-sync-v1';
 export const DRAFT_SEPARATOR = '\n\n—— Σημείωση από άλλη συσκευή ——\n\n';
-const fields = new Set(['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt','readCompletedAt']);
+const fields = new Set(['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt','readCompletedAt','sosNotes','readerNotes']);
 const fileId = v => typeof v === 'string' && /^[A-Za-z0-9][\w.-]{0,35}$/.test(v);
 export function stable(value) {
   if (value === undefined) return 'null';
@@ -16,7 +17,7 @@ export function validValue(key, value) {
     if(value===null)return true;
     if(match[4]==='reviewHistory')return Array.isArray(value)&&value.length<=72&&value.every(e=>e&&typeof e==='object'&&!Array.isArray(e)&&Object.keys(e).every(k=>['at','localDay','result'].includes(k))&&typeof e.at==='string'&&e.at.length<=40&&Number.isFinite(Date.parse(e.at))&&typeof e.localDay==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(e.localDay)&&['correct','assisted','incorrect','review'].includes(e.result));
     if(match[4]==='nextReviewAt'||match[4]==='readCompletedAt')return typeof value==='string'&&value.length<=40&&Number.isFinite(Date.parse(value));
-    return match[4]==='draft' ? typeof value==='string' && value.length<=250000 : Number.isSafeInteger(value)&&value>=0&&value<=1e9;
+    return match[4]==='draft' ? typeof value==='string'&&value.length<=250000 : ['sosNotes','readerNotes'].includes(match[4]) ? typeof value==='string'&&value.length<=15000 : Number.isSafeInteger(value)&&value>=0&&value<=1e9;
   }
   if (/^r:(0[1-9]|1\d|20):([1-9]|1\d|20)$/.test(key)) return value===null || value==='1';
   if (/^c:(0[1-9]|1\d|20)$/.test(key)) return value===null || typeof value==='string' && /^([1-9]|[12]\d|3[0-2])$/.test(value);
@@ -32,6 +33,7 @@ export function validValue(key, value) {
       &&['correct','partial','incorrect'].every(k=>Number.isSafeInteger(h[k])&&h[k]>=0&&h[k]<=100000)
       &&Number.isSafeInteger(h.lastAt)&&h.lastAt>=0&&h.lastAt<=4102444800000);
   }
+  if (key.startsWith('n:')&&validNoteId(key.slice(2)))return value===null||validNote(value);
   if (key==='theme') return value===null || value==='dark' || value==='light';
   if (/^s:(bls|pbls|ils|phtls|als)$/.test(key)) return value===null || validSeminarCourse(value);
   if (/^p:[A-Za-z0-9_-]{1,80}$/.test(key)) {
@@ -85,7 +87,14 @@ export function mergeEntry(key,a,b) {
     if(a.v===null||b.v===null)v=winner.v;
     else v=mergeSeminarCourse(a.v,b.v,winner.v);
   }
-  else if(key.endsWith(':draft')) {
+  else if(key.startsWith('n:')&&a.v&&b.v) {
+    // Distinct offline edits to the same personal note retain both texts,
+    // rather than silently discarding someone's work.
+    const pieces=[...new Set([a.v.body,b.v.body].filter(Boolean).flatMap(x=>x.split(DRAFT_SEPARATOR)))];
+    const combined=pieces.join(DRAFT_SEPARATOR);
+    v={...winner.v,body:combined.length<=8000?combined:winner.v.body};
+  }
+  else if(/:(?:draft|sosNotes|readerNotes)$/.test(key)) {
     const parts=[...new Set([a.v,b.v].filter(x=>x!==null&&x!=='').flatMap(x=>x.split(DRAFT_SEPARATOR)))].sort();
     v=parts.join(DRAFT_SEPARATOR);
   } else if(key.endsWith(':reviewHistory')) {
