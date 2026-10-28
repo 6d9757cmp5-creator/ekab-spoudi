@@ -23,6 +23,7 @@ BOOKS = [
     ("openrn-health", "Health Alterations", "https://wtcs.pressbooks.pub/healthalts/"),
     ("openrn-skills", "Nursing Skills 2e", "https://wtcs.pressbooks.pub/nursingskills/"),
     ("openrn-pharm", "Nursing Pharmacology 2e", "https://wtcs.pressbooks.pub/pharmacology2e/"),
+    ("openrn-advanced", "Nursing Advanced Skills", "https://wtcs.pressbooks.pub/nursingadvancedskills/"),
 ]
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; EKAB-Spoudi-Mentor-Research/1.0; educational open license)",
