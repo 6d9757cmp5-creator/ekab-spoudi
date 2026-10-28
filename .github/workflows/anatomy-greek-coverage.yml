@@ -28,6 +28,20 @@ jobs:
           path: ui-tools/anatomy-3d/translation-audit/
           if-no-files-found: warn
       - name: Coverage note
+        if: always()
         run: |
-          echo "The report enumerates untranslated mesh names. A passing technical run does NOT mean full translation." >> "$GITHUB_STEP_SUMMARY"
-          echo "Human review of terminology and per-mesh laterality remains required." >> "$GITHUB_STEP_SUMMARY"
+          echo "The report enumerates untranslated mesh names. Medical review is independent from numerical coverage." >> "$GITHUB_STEP_SUMMARY"
+          echo "Full Greek coverage is a hard requirement before publication." >> "$GITHUB_STEP_SUMMARY"
+      - name: Full Greek translation completion gate
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const p = 'ui-tools/anatomy-3d/translation-audit/summary.json';
+          const info = JSON.parse(fs.readFileSync(p, 'utf8'));
+          if (info.untranslated !== 0) {
+            console.error('Greek naming coverage: '+info.translated+'/'+info.meshes+' ('+info.coverage+'%).');
+            console.error(info.untranslated+' labels still untranslated. Do not merge this PR yet.');
+            process.exit(1);
+          }
+          console.log('All '+info.meshes+' anatomy mesh labels have Greek names. Medical nomenclature review is still separately required.');
+          NODE
