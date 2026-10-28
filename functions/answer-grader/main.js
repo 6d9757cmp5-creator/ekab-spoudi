@@ -30,6 +30,7 @@ const sys=`Είσαι αυστηρός αλλά δίκαιος ΕΛΛΗΝΟΦΩ�
 Σύγκρινε το νόημα της απάντησης με το δοσμένο εκπαιδευτικό σημείο αναφοράς, ΟΧΙ με πανομοιότυπες λέξεις.
 Δέξου συνώνυμα, συντομογραφίες (π.χ. ΚΑΡΠΑ/CPR, ΑΕΑ/AED, μαλάξεις/συμπιέσεις) όταν σημαίνουν το ίδιο.
 Μην απαιτείς επιπλέον πράγματα εκτός εκφώνησης, μην μαντεύεις όσα δεν γράφτηκαν.
+Στο απλό BLS/AED μην απαιτείς έλεγχο σφυγμού όταν δεν περιλαμβάνεται στο εκπαιδευτικό σημείο αναφοράς. Η άμεση κλήση βοήθειας και η εκτίμηση αναπνοής μετά την απουσία ανταπόκρισης είναι τα κρίσιμα βήματα.
 Αν η απάντηση μαθητή είναι ασαφής, verdict=uncertain: πες ποιο σημείο είναι ασαφές και παρότρυνε νέα, πιο προσεκτική και συγκεκριμένη διατύπωση. Μην επινοείς βαθμό. Σαφές αλλά λάθος περιεχόμενο είναι incorrect ή partial, όχι ασαφές.
 Χρειάζεται correct ΜΟΝΟ αν η ουσία καλύπτεται και δεν υπάρχει κρίσιμη ανακρίβεια.
 partial αν βασικό σωστό σημείο υπάρχει αλλά λείπει απαραίτητο βήμα· incorrect αν απαντά λάθος.
@@ -133,7 +134,13 @@ async function gradeAnswer(question,answer){
  // This is a bounded, short-lived per-process cache, not a durable cross-instance guarantee.
  let failure='free_unavailable';
  for(const provider of providers){
-  try{const graded=validateGrade(await requestFreeGrade(provider,messages));console.log('AI grading provider:',provider.id);return {...graded,provider:provider.id};}catch(err){if(/^provider_http_\d{3}$/.test(err.message))failure=err.message; /* No answers, keys or provider response bodies in logs. */}
+  try{
+   const graded=validateGrade(await requestFreeGrade(provider,messages));
+   // ERC 2025 BLS does not make a pulse check mandatory for this lay-rescuer reference.
+   if(question.kind==='Ανεπίσημη άσκηση BLS/AED'&&!/σφυγμ|παλμ/i.test(question.reference+' '+question.context)&&
+    /σφυγμ|παλμ/i.test(graded.missingPoints.join(' ')+' '+graded.explanation))throw new Error('unsupported_bls_pulse_requirement');
+   console.log('AI grading provider:',provider.id);return {...graded,provider:provider.id};
+  }catch(err){if(/^provider_http_\d{3}$/.test(err.message))failure=err.message; /* No answers, keys or provider response bodies in logs. */}
  }
  throw new Error(failure);
 }
