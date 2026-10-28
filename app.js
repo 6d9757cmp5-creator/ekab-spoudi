@@ -138,7 +138,7 @@ function showExam(){lockedThisRun.clear();gradedFeedback.clear();$('#homeView').
 function present(){
  if(!pool.length){$('#study').classList.add('hidden');$('#setup').classList.remove('hidden');return}
  const q=pool[index],s=st(q);s.seen=(s.seen||0)+1;save();updateMetrics();shownAnswer=false;
- $('#eoppepAIResult').hidden=true;$('#eoppepGradeAI').disabled=false;$('#eoppepGradeAI').hidden=false;$('#showAnswer').hidden=false;$('#eoppepGradeAI').textContent='Υποβολή αξιολόγησης';
+ $('#eoppepAIResult').hidden=true;$('#eoppepGradeAI').disabled=false;$('#eoppepGradeAI').hidden=false;$('#showAnswer').hidden=false;$('#showAnswer').disabled=false;$('#eoppepGradeAI').textContent='Υποβολή αξιολόγησης';
  $('#qmeta').textContent=`Ομάδα ${q.group} · Θέμα ${q.number}`;
  $('#qOriginal').href=qSourceLink(q);
  $('#qcount').textContent=`${index+1} / ${pool.length}`;
