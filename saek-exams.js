@@ -61,16 +61,16 @@ function renderQuestion(){
  $('examScopeLabel').textContent=q.semester+'΄ εξάμηνο · '+q.course;
  $('examDifficultyLabel').textContent='Επίπεδο ερώτησης: '+E.levels[q.difficulty];
  $('examQuestion').textContent=q.question;
- $('examDraft').value=step.draft||'';$('examDraft').disabled=Boolean(step.grade);
- $('examCheckAI').hidden=Boolean(step.grade);
+ $('examDraft').value=step.draft||'';$('examDraft').disabled=Boolean(step.grade||step.revealed||requestPending);
+ $('examCheckAI').hidden=Boolean(step.grade||step.revealed);
  $('examCheckAI').disabled=requestPending||Boolean(step.revealed);
- $('examCheckAI').textContent=requestPending?'Γίνεται αξιολόγηση…':'Αξιολόγηση με AI';
- $('examReveal').hidden=Boolean(step.revealed)||Boolean(step.grade);
+ $('examCheckAI').textContent=requestPending?'Γίνεται αξιολόγηση…':'Υποβολή αξιολόγησης';
+ $('examReveal').hidden=Boolean(step.revealed)||Boolean(step.grade);$('examReveal').disabled=requestPending;
  $('examReference').hidden=!step.revealed&&!step.grade;
  $('examReferenceText').textContent=q.answer;
  $('examSourceLink').href=q.href;
- $('examManual').hidden=Boolean(step.grade)||!step.revealed;
- $('examGradeState').textContent=step.grade?'Καταχωρίστηκε: '+({correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Για επανάληψη'}[step.grade])+(step.method==='ai'?' · AI αξιολόγηση':' · προσωπική αυτοαξιολόγηση'):'';
+ $('examManual').hidden=true;
+ $('examGradeState').textContent=step.grade?'Καταχωρίστηκε: '+({correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Για επανάληψη'}[step.grade]):step.revealed?'Η προσπάθεια ολοκληρώθηκε χωρίς βαθμολογία. Συνέχισε στην επόμενη ερώτηση.':'';
  const result=$('examAIResult');
  result.hidden=true;result.replaceChildren();
  if(step.feedback&&window.EkabAIGrade){window.EkabAIGrade.render(result,step.feedback);}
@@ -85,7 +85,7 @@ function manualReveal(){
  step.revealed=true;save();renderQuestion();
 }
 function recordGrade(grade,method,feedback=null){
- if(!['correct','partial','incorrect'].includes(grade))return;
+ if(!['correct','partial','incorrect'].includes(grade)||method==='self')return;
  const step=current();if(!step||step.grade)return;
  step.grade=grade;step.method=method;step.revealed=true;
  if(feedback)step.feedback=feedback;
@@ -98,25 +98,30 @@ async function gradeAI(){
  if(!step||step.grade||step.revealed)return;
  const answer=$('examDraft').value.trim();step.draft=answer;save();
  if(answer.length<3){status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';status.textContent='Γράψε πρώτα τη δική σου απάντηση.';return}
- if(!ai){status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';status.textContent='Η αξιολόγηση AI δεν φορτώθηκε.';return}
+ if(!ai){status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';status.textContent='Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη.';return}
  const sessionId=a.id,qid=step.id,atIndex=a.index;
- requestPending=true;$('examCheckAI').disabled=true;$('examCheckAI').textContent='Γίνεται αξιολόγηση…';
+ requestPending=true;$('examDraft').disabled=true;$('examReveal').disabled=true;$('examCheckAI').disabled=true;$('examCheckAI').textContent='Γίνεται αξιολόγηση…';
  status.hidden=false;status.className='ai-grading-result';status.textContent='Ελέγχεται το νόημα της απάντησης…';
  try{
   const result=await ai.evaluate({section:'saek',questionId:qid,answer});
   if(!state.active||state.active.id!==sessionId||state.active.index!==atIndex||current()?.id!==qid)return;
   // Do not credit an answer if the reference was shown while a request was pending.
   if(result.verdict!=='uncertain'&&!current().revealed&&!current().grade){
-   recordGrade(result.verdict,'ai',result);
-  }else{current().feedback=result;save();ai.render(status,result);if(current().revealed){const p=document.createElement('p');p.textContent='Δεν καταχωρίστηκε αυτόματα βαθμολογία, επειδή εμφανίστηκε η λύση.';status.append(p);}}
+   recordGrade(result.verdict,'service',result);
+  }else{
+   // Uncertain is a completed, locked attempt with no numeric grade.
+   current().feedback=result;current().revealed=true;save();renderQuestion();
+  }
  }catch(err){
   if(state.active?.id!==sessionId||state.active.index!==atIndex||current()?.id!==qid)return;
-  status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';status.textContent=err.message||'Η AI αξιολόγηση δεν ολοκληρώθηκε. Χρησιμοποίησε τη χειροκίνητη αυτοαξιολόγηση.';
+  status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';status.textContent=err.message||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντησή σου έχει αποθηκευτεί.';
  }finally{
   requestPending=false;
   if(state.active?.id===sessionId&&state.active.index===atIndex){
    $('examCheckAI').disabled=Boolean(current()?.revealed||current()?.grade);
-   $('examCheckAI').textContent='Αξιολόγηση με AI';
+   $('examCheckAI').textContent='Υποβολή αξιολόγησης';
+   $('examDraft').disabled=Boolean(current()?.revealed||current()?.grade);
+   $('examReveal').disabled=Boolean(current()?.revealed||current()?.grade);
    $('examPrev').disabled=state.active.index===0;
    $('examNext').disabled=state.active.index===state.active.total-1;
    $('examFinish').disabled=false;
@@ -154,7 +159,7 @@ function bind(){
  $('examStart').addEventListener('click',start);
  $('examResume').addEventListener('click',()=>{if(!validSession()){state.active=null;save();updateSetup();return}openView('examLive');renderQuestion()});
  $('examLeave').addEventListener('click',()=>{if(requestPending)return;save();updateSetup();openView('examSetup')});
- $('examDraft').addEventListener('input',e=>{const st=current();if(st&&!st.grade){st.draft=e.target.value.slice(0,3500);save()}});
+ $('examDraft').addEventListener('input',e=>{const st=current();if(st&&!st.grade&&!st.revealed&&!requestPending){st.draft=e.target.value.slice(0,3500);save()}});
  $('examReveal').addEventListener('click',manualReveal);
  $('examCheckAI').addEventListener('click',gradeAI);
  $('examMarkCorrect').addEventListener('click',()=>recordGrade('correct','self'));
