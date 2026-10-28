@@ -97,6 +97,7 @@ function cleanRecord(raw){
     Number.isInteger(Number(key))&&Number(key)>=0&&Number(key)<12&&val&&['correct','partial','incorrect','uncertain'].includes(val.verdict)
    ).map(([key,val])=>[key,{verdict:val.verdict,criticalError:!!val.criticalError}])),
    mcAnswers,mcRight:indices(p.mcRight,12),mcNeeds:indices(p.mcNeeds,12),
+   scenarioHistory:Array.isArray(p.scenarioHistory)?p.scenarioHistory.slice(-20):[],
    mixedRun:validRun(p.mixedRun)
   };
   obj[c.id].needs=obj[c.id].needs.filter(i=>!obj[c.id].right.includes(i));
@@ -106,7 +107,7 @@ function cleanRecord(raw){
 let progress;
 try{progress=cleanRecord(JSON.parse(localStorage.getItem(STORE)||'{}'));}
 catch{progress=cleanRecord({});}
-let selected=null,unit=0,oral=0,view='theory',autoTimer=null;
+let selected=null,unit=0,oral=0,view='theory',autoTimer=null,scenarioEpoch=0;
 const current=()=>selected?progress[selected.id]:null;
 function save(){
  try{
@@ -297,12 +298,15 @@ function restartOralCycle(){
  if(!selected)return;
  if(!confirm('Νέος κύκλος 12 κλινικών σεναρίων για '+selected.name+'; Οι απαντήσεις και η πρόοδος του προηγούμενου κύκλου θα μηδενιστούν. Η θεωρία και τα τεστ δεν επηρεάζονται.'))return;
  const p=current();
+ p.scenarioHistory.push({completed:Object.keys(p.scenarioGrades).length,grades:Object.values(p.scenarioGrades).map(x=>x.verdict)});
+ p.scenarioHistory=p.scenarioHistory.slice(-20);
+ scenarioEpoch++;
  p.scenarioGrades={};p.scenarioFeedback={};p.oralNotes={};p.oral=[];
  oral=0;save();updateCourseProgress();renderOral();
 }
 function renderOral(){
  const p=current(),u=selected.units[oral],prior=p.scenarioGrades[oral];
- const restart=$('seminarRestartOral');if(restart)restart.hidden=oral!==11 && Object.keys(p.scenarioGrades).length<12;
+ const restart=$('seminarRestartOral');if(restart)restart.hidden=false;
  $('seminarOralCounter').textContent='Κλινικό σενάριο '+(oral+1)+' / 12';
  $('seminarOralTitle').textContent='Περιέγραψε τις ενέργειές σου, με σωστή σειρά: '+u[0];
  $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
@@ -407,14 +411,14 @@ function bind(){
    return;
   }
   if(!$('seminarOralHelp').hidden){info.textContent='Έχεις ήδη δει την εκπαιδευτική προτεραιότητα. Συνέχισε χωρίς βαθμολογία.';return;}
-  const courseId=selected.id,caseId=oral,button=$('seminarScenarioSubmit');
+  const courseId=selected.id,caseId=oral,epoch=scenarioEpoch,button=$('seminarScenarioSubmit');
   button.disabled=true;button.textContent='Ελέγχονται διαδικασίες και προτεραιότητες…';
   $('seminarOralNotes').readOnly=true;$('seminarOralReveal').disabled=true;
   $('seminarPrevOral').disabled=true;$('seminarNextOral').disabled=true;
   status.hidden=false;status.className='ai-grading-result';status.textContent='Γίνεται έλεγχος ασφάλειας, σειράς ενεργειών, παραλείψεων και κρίσιμων λαθών…';
   try{
    const result=await ai.evaluate({section:'seminar_case',courseId,caseIndex:caseId,answer});
-   if(!selected||selected.id!==courseId||view!=='oral'||oral!==caseId)return;
+   if(!selected||selected.id!==courseId||view!=='oral'||oral!==caseId||scenarioEpoch!==epoch)return;
    ai.render(status,result);
    current().scenarioGrades[caseId]={verdict:result.verdict,criticalError:!!result.criticalError};
    current().scenarioFeedback[caseId]={
@@ -426,17 +430,17 @@ function bind(){
    $('seminarOralNotes').readOnly=true;
    button.disabled=true;button.hidden=true;
    $('seminarOralReveal').hidden=true;
-   save();updateCourseProgress();
+   save();updateCourseProgress();renderOral();
    info.textContent=result.verdict==='uncertain'?
     'Η προσπάθεια ολοκληρώθηκε χωρίς βαθμολογία. Συνέχισε στο επόμενο σενάριο.':
     'Η προσπάθεια ολοκληρώθηκε και κλειδώθηκε. Συνέχισε στο επόμενο σενάριο.';
   }catch(err){
-   if(!selected||selected.id!==courseId||view!=='oral'||oral!==caseId)return;
+   if(!selected||selected.id!==courseId||view!=='oral'||oral!==caseId||scenarioEpoch!==epoch)return;
    status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';
    status.textContent=err.message||'Η αξιολόγηση δεν ολοκληρώθηκε.';
    info.textContent='Δεν αποδόθηκε νέα βαθμολογία. Έλεγξε τη σύνδεση και ξαναπροσπάθησε.';
   }finally{
-   if(selected?.id===courseId&&view==='oral'&&oral===caseId){
+   if(selected?.id===courseId&&view==='oral'&&oral===caseId&&scenarioEpoch===epoch){
     button.disabled=Boolean(current().scenarioGrades[caseId]);button.hidden=Boolean(current().scenarioGrades[caseId]);button.textContent='Υποβολή αξιολόγησης';
     $('seminarOralNotes').readOnly=Boolean(current().scenarioGrades[caseId]);
     $('seminarOralReveal').disabled=Boolean(current().scenarioGrades[caseId]);
