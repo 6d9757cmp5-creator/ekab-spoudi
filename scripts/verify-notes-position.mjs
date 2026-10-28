@@ -60,9 +60,9 @@ assert(css.includes("touch-action:none"));
 assert(css.includes("background:#101d30"));
 assert(css.includes("html[data-theme] .ekab-notes-dialog")); // both themes
 assert(css.includes(".ekab-notes-drag-hint"));
-assert(upd.includes("notes-panel.js?v=27.1.113"));
-assert(upd.includes("notes-panel.css?v=27.1.113"));
+assert(upd.includes("notes-panel.js?v=27.1.114"));
+assert(upd.includes("notes-panel.css?v=27.1.114"));
 assert(sw.includes('"./notes-position.js"'));
-assert(sw.includes("ekab-spoudi-v27.1.113"));
+assert(sw.includes("ekab-spoudi-v27.1.114"));
 assert(!js.includes("ekabGlobalSearch"));
 console.log('PASS: dark notes panel, touch/mouse drag, click suppression, mobile/desktop viewport safety, reset, keyboard move, persistent per-device positions and isolated global search.');
