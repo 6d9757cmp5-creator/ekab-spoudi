@@ -20,6 +20,18 @@ export function validValue(key, value) {
   }
   if (/^r:(0[1-9]|1\d|20):([1-9]|1\d|20)$/.test(key)) return value===null || value==='1';
   if (/^c:(0[1-9]|1\d|20)$/.test(key)) return value===null || typeof value==='string' && /^([1-9]|[12]\d|3[0-2])$/.test(value);
+  if (/^t:[a-f0-9]{32}:(saek|eoppep|bls|pbls|ils|phtls|als|pharma):(study|exam)$/.test(key))
+    return value===null || Number.isSafeInteger(value)&&value>=0&&value<=315360000;
+  if (key==='x:saek-exams') {
+    if(value===null)return true;
+    if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).length>247)return false;
+    try{if(JSON.stringify(value).length>200000)return false}catch{return false}
+    return Object.entries(value).every(([id,h])=>
+      /^saek-(0[1-9]|1\d|20)-([1-9]|[12]\d|3[0-2])$/.test(id)&&h&&typeof h==='object'&&!Array.isArray(h)
+      &&Object.keys(h).every(k=>['correct','partial','incorrect','lastAt'].includes(k))
+      &&['correct','partial','incorrect'].every(k=>Number.isSafeInteger(h[k])&&h[k]>=0&&h[k]<=100000)
+      &&Number.isSafeInteger(h.lastAt)&&h.lastAt>=0&&h.lastAt<=4102444800000);
+  }
   if (key==='theme') return value===null || value==='dark' || value==='light';
   if (/^s:(bls|pbls|ils|phtls|als)$/.test(key)) return value===null || validSeminarCourse(value);
   if (/^p:[A-Za-z0-9_-]{1,80}$/.test(key)) {
@@ -44,6 +56,26 @@ export function mergeEntry(key,a,b) {
     const preferred=a.at>b.at || a.at===b.at&&(a.writer>b.writer||a.writer===b.writer&&stable(a.v)>stable(b.v))?a:b;
     return {v:mergeSeminarCourse(a.v,b.v,preferred.v),clock:joinClock(a.clock,b.clock),
       at:Math.max(a.at,b.at),writer:preferred.writer,retired};
+  }
+  // Independent device time counters only increase; never sum two copies of the same device.
+  if(key.startsWith('t:')&&a.v!==null&&b.v!==null){
+    const preferred=(a.v>=b.v)?a:b;
+    return {...preferred,v:Math.max(a.v,b.v),clock:joinClock(a.clock,b.clock),retired};
+  }
+  // Merge exam answers by question ID; preserve the larger observed counters.
+  if(key==='x:saek-exams'&&a.v!==null&&b.v!==null){
+    const history={...a.v};
+    for(const [id,h] of Object.entries(b.v)){
+      const old=history[id];
+      history[id]=old?{
+        correct:Math.max(old.correct,h.correct),
+        partial:Math.max(old.partial,h.partial),
+        incorrect:Math.max(old.incorrect,h.incorrect),
+        lastAt:Math.max(old.lastAt,h.lastAt)
+      }:h;
+    }
+    const preferred=a.at>=b.at?a:b;
+    return {v:history,clock:joinClock(a.clock,b.clock),at:Math.max(a.at,b.at),writer:preferred.writer,retired};
   }
   if(ad&&!bd)return {...a,retired};if(bd&&!ad)return {...b,retired};
   const winner=a.at>b.at || a.at===b.at&&(a.writer>b.writer||a.writer===b.writer&&stable(a.v)>stable(b.v))?a:b;
