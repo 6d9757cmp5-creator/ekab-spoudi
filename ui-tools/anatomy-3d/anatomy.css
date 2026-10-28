@@ -25,3 +25,7 @@
 .quiz-explainer{margin:10px 16px 17px;color:#a9c5d1;font-size:11px;line-height:1.5}
 @media(max-width:380px){.quiz-options{gap:7px}.quiz-choice{min-height:72px;padding:10px 5px;font-size:11px}.quiz-card{margin-inline:10px;padding:12px}.detail-card{margin-inline:10px}}
 @media(prefers-reduced-motion:reduce){.quiz-choice{transition:none}}
+
+.quiz-back-to-answers{position:absolute;z-index:16;bottom:22px;left:50%;transform:translateX(-50%);min-height:42px;max-width:90%;padding:9px 13px;border:1px solid #68d8d3;border-radius:999px;background:#0a3949e8;color:#e6fffd;font-size:12px;font-weight:800;box-shadow:0 4px 15px #00182599;white-space:nowrap}
+.quiz-back-to-answers[hidden]{display:none!important}
+.quiz-back-to-answers:focus-visible{outline:3px solid #77e6e0;outline-offset:3px}
