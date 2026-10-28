@@ -141,7 +141,7 @@ function describeSelected(){
  $('detailIcon').textContent=p.system==='skeletal'?'🦴':p.system==='cardiac'?'❤️':'◈';
  $('detailName').textContent=n.label;
  $('detailSystem').textContent=n.systemName;
- $('detailDescription').textContent=(INTRO[p.system]||'Εκπαιδευτική προβολή της θέσης και των σχέσεων αυτής της ανατομικής δομής.')+(n.el?'':' Δεν υπάρχει ακόμη ελεγμένη ελληνική ονομασία για το συγκεκριμένο πλέγμα.');
+ $('detailDescription').textContent=(/\b(gingiva|tooth|teeth)\b/i.test(p.name)?'Δομή της στοματικής κοιλότητας, που αφορά τα ούλα ή την οδοντοστοιχία.':(INTRO[p.system]||'Εκπαιδευτική προβολή της θέσης και των σχέσεων αυτής της ανατομικής δομής.'))+(n.el?'':' Δεν υπάρχει ακόμη ελεγμένη ελληνική ονομασία για το συγκεκριμένο πλέγμα.');
  $('detailOriginal').textContent='Πρωτότυπη ονομασία πηγής: '+p.name;
  const lesson=$('detailStudy'),chapter=TOPIC_LINKS[p.system];
  lesson.hidden=!chapter;
