@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.99', $=id=>document.getElementById(id);
+const CURRENT='27.1.100', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
@@ -116,7 +116,7 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
 /* Shared back button, mobile edge swipe and replacement user guide. */
 if(!document.querySelector('script[data-ekab-navigation]')){
  const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=3';document.head.append(css);
- const script=document.createElement('script');script.src='navigation.js?v=2';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
+ const script=document.createElement('script');script.src='navigation.js?v=3';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
 }
 
 /* Classroom image presentation mode. */

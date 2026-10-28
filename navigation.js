@@ -5,7 +5,7 @@ const root=()=>document.querySelector('main')||document.body;
 function back(){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign('index.html')}
 function make(tag,cls,label){const n=document.createElement(tag);n.className=cls;n.textContent=label;return n}
 function init(){
- if(!home&&!document.querySelector('[data-ekab-back]')){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';b.addEventListener('click',back);root().prepend(b)}
+ if(!home&&!document.querySelector('header.top .nav')&&!document.querySelector('[data-ekab-back]')){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';b.addEventListener('click',back);root().prepend(b)}
  if(!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}
  let start=null;
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];start=t.clientX<25?{x:t.clientX,y:t.clientY,target:e.target}:null},{passive:true});
