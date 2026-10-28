@@ -21,6 +21,7 @@ assert.equal(anatomicalGreek('Unexpected highly specific structure'),null,'Unkno
 assert.deepEqual(anatomyName('Untranslated source mesh','skeletal',{skeletal:'Σκελετικό'}),{
  el:null,english:'Untranslated source mesh',label:'Μη μεταφρασμένη δομή',systemName:'Σκελετικό'
 });
+assert.equal(anatomyName('Gingiva of upper jaw','skeletal',{skeletal:'Σκελετικό'}).systemName,'Στοματική ανατομία');
 assert.equal(eligibleQuizName('Left sixth rib','skeletal'),false,'Tiny rib details are not good entry-level targets');
 assert.equal(eligibleQuizName('Gingiva of upper jaw','skeletal'),false,'Gums are not a practical 3D target');
 assert.equal(eligibleQuizName('Unexpected highly specific structure','skeletal'),false);
