@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "purpose": "MENTOR OS Clinical Intelligence Library",
+  "record_type": "bibliographic source registry, not training corpus",
+  "sources": [
+    {
+      "id": "wistech-emr-2025",
+      "title": "Emergency Medical Responder",
+      "publisher": "WisTech Open",
+      "year": 2025,
+      "license": "CC BY 4.0 except where otherwise noted",
+      "url": "https://wtcs.pressbooks.pub/emergencymedtech/",
+      "coverage": [
+        "prehospital",
+        "assessment",
+        "airway",
+        "trauma",
+        "shock",
+        "pharmacology",
+        "special-populations",
+        "operations"
+      ],
+      "level": "EMR/EMT foundation",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "who-bec",
+      "title": "Basic Emergency Care",
+      "publisher": "WHO / ICRC",
+      "url": "https://www.who.int/publications/i/item/9789241513081",
+      "coverage": [
+        "emergency",
+        "ABCDE",
+        "trauma",
+        "shock"
+      ],
+      "level": "Emergency care core",
+      "license": "Review item-specific terms before ingestion",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "openrn-health",
+      "title": "Open RN Health Alterations",
+      "publisher": "Open RN / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK613078/",
+      "coverage": [
+        "clinical-reasoning",
+        "medical-emergencies"
+      ],
+      "level": "Clinical foundations",
+      "license": "Check edition/chapter third-party notices",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "openrn-skills",
+      "title": "Open RN Nursing Skills",
+      "publisher": "Open RN / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK596735/",
+      "coverage": [
+        "clinical-assessment",
+        "monitoring",
+        "procedures"
+      ],
+      "level": "Clinical foundations",
+      "license": "Check edition/chapter third-party notices",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "openrn-pharm",
+      "title": "Open RN Nursing Pharmacology",
+      "publisher": "Open RN / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK595000/",
+      "coverage": [
+        "pharmacology",
+        "medication-safety"
+      ],
+      "level": "Clinical foundations",
+      "license": "Check edition/chapter third-party notices",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "iem-project",
+      "title": "International Emergency Medicine Education Project",
+      "publisher": "iEM",
+      "url": "https://iem-student.org/how-to-use-this-website/",
+      "coverage": [
+        "emergency-medicine",
+        "clinical-reasoning",
+        "imaging",
+        "procedures"
+      ],
+      "level": "Medical student / emergency physician",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "saem-cdem",
+      "title": "CDEM Curriculum",
+      "publisher": "SAEM",
+      "url": "https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education",
+      "coverage": [
+        "emergency-medicine",
+        "clinical-reasoning",
+        "pediatrics"
+      ],
+      "level": "Medical student / emergency physician",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "open-acute-care",
+      "title": "Open Acute Care",
+      "publisher": "Open Acute Care",
+      "url": "https://openacutecare.org/",
+      "coverage": [
+        "emergency",
+        "critical-care"
+      ],
+      "level": "Emergency & critical care",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "who-triage",
+      "title": "Integrated Triage Tool",
+      "publisher": "WHO",
+      "url": "https://www.who.int/tools/triage",
+      "coverage": [
+        "triage",
+        "ED"
+      ],
+      "level": "Emergency department",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "who-toolkit",
+      "title": "Emergency Care Toolkit",
+      "publisher": "WHO",
+      "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit",
+      "coverage": [
+        "ED",
+        "resuscitation",
+        "handover"
+      ],
+      "level": "Emergency department",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "erc-2025",
+      "title": "Guidelines 2025",
+      "publisher": "European Resuscitation Council",
+      "url": "https://www.erc.edu/science-research/guidelines/guidelines-2025",
+      "coverage": [
+        "resuscitation",
+        "ALS",
+        "BLS",
+        "pediatric"
+      ],
+      "level": "Guideline",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "ems-education",
+      "title": "National EMS Education Standards",
+      "publisher": "US EMS.gov",
+      "url": "https://www.ems.gov/projects/ems-education-standards.html",
+      "coverage": [
+        "EMS-competencies"
+      ],
+      "level": "Curriculum",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "ekab-saek",
+      "title": "EKAB SAEK Study Guides",
+      "publisher": "EKAB",
+      "url": "https://www.ekab.gr/ekpedefsi/iek-ekav/",
+      "coverage": [
+        "Greek-EMS",
+        "SAEK"
+      ],
+      "level": "Greek curriculum",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    }
+  ]
+}
