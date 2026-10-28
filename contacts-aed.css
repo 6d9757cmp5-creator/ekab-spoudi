@@ -19,3 +19,13 @@
 html[data-theme="dark"] .aed-poster figcaption{background:#1c3544;color:#cee0e9}
 @media(max-width:730px){.aed-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.aed-steps{grid-template-columns:1fr;gap:8px}.aed-poster-head{padding:16px}.aed-poster-icon{width:48px;height:48px;font-size:21px}.aed-map-frame iframe{height:470px}}
+
+/* Optional geolocation: OSM points are intentionally separated from official records */
+.aed-nearby-map{height:clamp(350px,53vh,540px);border:1px solid var(--line);border-radius:14px;background:#eaf1f2;z-index:0}
+.aed-nearby-map[hidden]{display:none!important}
+.aed-nearby-results{display:grid;gap:8px;margin:12px 0;padding-left:25px}
+.aed-nearby-results li{font-size:.83rem;line-height:1.5;overflow-wrap:anywhere}
+#aedNearbyStatus[data-error="true"]{color:#b84d3e}
+#aedFindNearby:disabled{cursor:wait;opacity:.65}
+.aed-nearby-map .leaflet-popup-content p{margin:6px 0}
+html[data-theme="dark"] .aed-nearby-map{border-color:#5d7688}
