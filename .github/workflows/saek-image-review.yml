@@ -7,6 +7,8 @@ on:
       - 'scripts/check-saek-images.mjs'
       - 'scripts/verify-saek-image-integration.mjs'
       - 'saek-course-*.html'
+      - '*.html'
+      - '*.css'
       - 'saek-reviewed-image-ui.js'
       - 'saek-visual-ui.js'
       - 'saek-visual-ui.css'
