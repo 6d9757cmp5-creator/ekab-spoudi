@@ -2,7 +2,7 @@
  * Actual headless Chromium smoke for Mentor Foundation.
  * Does not require any Appwrite or AI credentials, nor modify legacy app files.
  */
-import {chromium} from 'playwright';
+import {chromium,webkit} from 'playwright';
 import {createServer} from 'node:http';
 import {readFile,mkdir} from 'node:fs/promises';
 import {resolve,sep} from 'node:path';
@@ -24,7 +24,9 @@ await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
 const port=server.address().port;
 let browser;
 try{
-  browser=await chromium.launch({headless:true});
+  const requested=process.env.MENTOR_TEST_BROWSER||'chromium';
+  if(!['chromium','webkit'].includes(requested))throw new Error('Unsupported browser '+requested);
+  browser=await (requested==='webkit'?webkit:chromium).launch({headless:true});
   const context=await browser.newContext({acceptDownloads:true,viewport:{width:390,height:844}});
   const page=await context.newPage();
   const errors=[];
@@ -138,7 +140,7 @@ try{
   assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(errors,[],'No browser JS errors');
-  console.log('PASS: mobile Chromium EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
+  console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
   if(browser)await browser.close();
   await new Promise(ok=>server.close(ok));
