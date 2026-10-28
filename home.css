@@ -192,3 +192,10 @@ body:has(.home-main) .home-card-eoppep .home-card-head{width:100%;min-height:82p
 .home-mini-progress-track span{display:block;height:100%;width:0;background:var(--blue);border-radius:inherit;transition:width .35s ease}
 .home-mini-progress-message{font-size:.75rem!important;color:var(--muted);margin:6px 0 0!important}
 @media(prefers-reduced-motion:reduce){.home-mini-progress-track span{transition:none}}
+
+/* Compact multi-section tracker: deliberately no heading or explanatory copy. */
+.home-mini-progress.compact-tracker{margin:5px 0 9px;max-width:440px}
+.compact-tracker .home-mini-progress-label{font-size:.72rem;margin-bottom:3px;gap:8px}
+.compact-tracker .home-mini-progress-label strong{font-size:.74rem}
+.compact-tracker .home-mini-progress-track{height:4px}
+.compact-tracker .home-mini-progress-message{display:none}
