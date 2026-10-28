@@ -370,34 +370,28 @@ function bind(){
  $('seminarPrevOral').addEventListener('click',()=>{oral=Math.max(0,oral-1);renderOral();});
  $('seminarNextOral').addEventListener('click',()=>{oral=Math.min(11,oral+1);renderOral();});
  $('seminarOralNotes').addEventListener('input',e=>{
-  const p=current();
-  p.oralNotes[oral]=e.target.value.slice(0,3500);
-  // A previously graded answer must never appear to verify newly edited steps.
-  if(p.scenarioGrades[oral]){delete p.scenarioGrades[oral];updateCourseProgress();}
-  save();
-  $('seminarScenarioResult').hidden=true;
-  $('seminarScenarioStatus').textContent='Αποθηκεύτηκε η νέα περιγραφή. Η προηγούμενη βαθμολογία δεν ισχύει πλέον· πάτησε «Υποβολή» για επανέλεγχο AI.';
+  const p=current();if(p.scenarioGrades[oral])return;
+  p.oralNotes[oral]=e.target.value.slice(0,3500);save();
+  $('seminarScenarioStatus').textContent='Η απάντηση αποθηκεύτηκε. Πάτησε «Υποβολή αξιολόγησης» όταν είσαι έτοιμος.';
  });
  $('seminarOralReveal').addEventListener('click',()=>{
   $('seminarOralHelp').hidden=false;$('seminarOralReveal').hidden=true;
-  $('seminarScenarioStatus').textContent='Εμφανίστηκε η ενδεικτική προτεραιότητα. Η προβολή αυτή δεν αποτελεί αξιολόγηση.';
+  $('seminarScenarioStatus').textContent='Εμφανίστηκε η ενδεικτική προτεραιότητα. Δεν καταχωρίστηκε βαθμολογία.';
  });
  $('seminarScenarioSubmit').addEventListener('click',async()=>{
-  if(!selected||view!=='oral')return;
+  if(!selected||view!=='oral'||current().scenarioGrades[oral])return;
   const ai=window.EkabAIGrade,answer=$('seminarOralNotes').value.trim(),
         status=$('seminarScenarioResult'),info=$('seminarScenarioStatus');
   if(answer.length<20){
    info.textContent='Περιέγραψε αναλυτικά τις ενέργειές σου (τουλάχιστον 20 χαρακτήρες).';return;
   }
   if(!ai||!ai.available()){
-   info.textContent='Η πραγματική υπηρεσία AI δεν έχει ενεργοποιηθεί. Δεν δόθηκε βαθμός.';
+   info.textContent='Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη. Δεν δόθηκε βαθμός.';
    status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';
    status.textContent='Δεν είναι διαθέσιμη η αυτόματη αξιολόγηση. Η απάντησή σου παραμένει στη συσκευή.';
    return;
   }
-  if(!$('seminarOralHelp').hidden){
-   info.textContent='Είδες την ενδεικτική προτεραιότητα. Συνέχισε για εξάσκηση, αλλά μην εκλάβεις το αποτέλεσμα ως αδιάβλητη εξέταση.';
-  }
+  if(!$('seminarOralHelp').hidden){info.textContent='Έχεις ήδη δει την εκπαιδευτική προτεραιότητα. Συνέχισε χωρίς βαθμολογία.';return;}
   const courseId=selected.id,caseId=oral,button=$('seminarScenarioSubmit');
   button.disabled=true;button.textContent='Ελέγχονται διαδικασίες και προτεραιότητες…';
   status.hidden=false;status.className='ai-grading-result';status.textContent='Γίνεται έλεγχος ασφάλειας, σειράς ενεργειών, παραλείψεων και κρίσιμων λαθών…';
@@ -406,13 +400,19 @@ function bind(){
    if(!selected||selected.id!==courseId||view!=='oral'||oral!==caseId)return;
    ai.render(status,result);
    current().scenarioGrades[caseId]={verdict:result.verdict,criticalError:!!result.criticalError};
+   current().scenarioFeedback[caseId]={
+    verdict:result.verdict,criticalError:!!result.criticalError,
+    explanation:typeof result.explanation==='string'?result.explanation.slice(0,1100):'',
+    takeaway:typeof result.takeaway==='string'?result.takeaway.slice(0,350):'',
+    modelAnswer:typeof result.modelAnswer==='string'?result.modelAnswer.slice(0,700):''
+   };
+   $('seminarOralNotes').readOnly=true;
+   button.disabled=true;button.hidden=true;
+   $('seminarOralReveal').hidden=true;
    save();updateCourseProgress();
-   info.textContent=result.criticalError?
-    'Προσοχή: το AI εντόπισε πιθανό επικίνδυνο λάθος. Διάβασε την ανατροφοδότηση και επανάλαβε την άσκηση.':
-    result.verdict==='correct'?'✓ AI: οι κύριες εκπαιδευτικές ενέργειες κρίθηκαν σωστές.':
-    result.verdict==='partial'?'AI: μερικώς σωστό. Δες ποια βήματα λείπουν.':
-    result.verdict==='incorrect'?'AI: λανθασμένη προσέγγιση. Δες τη σειρά ενεργειών.':
-    'Το AI δεν μπορεί να αποφανθεί με ασφάλεια. Απαιτείται επανέλεγχος.';
+   info.textContent=result.verdict==='uncertain'?
+    'Η προσπάθεια ολοκληρώθηκε χωρίς βαθμολογία. Συνέχισε στο επόμενο σενάριο.':
+    'Η προσπάθεια ολοκληρώθηκε και κλειδώθηκε. Συνέχισε στο επόμενο σενάριο.';
   }catch(err){
    if(!selected||selected.id!==courseId||view!=='oral'||oral!==caseId)return;
    status.hidden=false;status.className='ai-grading-result ai-grading-unavailable';
@@ -420,7 +420,7 @@ function bind(){
    info.textContent='Δεν αποδόθηκε νέα βαθμολογία. Έλεγξε τη σύνδεση και ξαναπροσπάθησε.';
   }finally{
    if(selected?.id===courseId&&view==='oral'&&oral===caseId){
-    button.disabled=false;button.textContent='Υποβολή · Αυτόματη αξιολόγηση AI';
+    button.disabled=Boolean(current().scenarioGrades[caseId]);button.hidden=Boolean(current().scenarioGrades[caseId]);button.textContent='Υποβολή αξιολόγησης';
    }
   }
  });
