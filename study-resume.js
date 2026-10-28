@@ -14,19 +14,22 @@ function destination(item){
   const id=String(item.course||''),chapter=Number(item.chapter);
   if(!/^(0[1-9]|1[0-9]|20)$/.test(id)||!Number.isInteger(chapter)||chapter<1||chapter>50)return null;
   return {href:'saek-course-'+id+'.html#lesson-'+chapter,
-   label:(typeof item.title==='string'&&item.title.trim()?item.title.trim().slice(0,125):'ΣΑΕΚ · Μάθημα '+Number(id)+' · Κεφάλαιο '+chapter)};
+   label:(typeof item.title==='string'&&item.title.trim()?item.title.trim().slice(0,125):'ΣΑΕΚ · Μάθημα '+Number(id)+' · Κεφάλαιο '+chapter),
+   compact:'ΣΑΕΚ '+Number(id)+' · Κεφ. '+chapter};
  }
  if(item.kind==='eoppep'&&item.mode==='reader'&&QUESTION.test(item.question||'')){
   const id=item.question;
-  return {href:'theory.html?question='+encodeURIComponent(id),label:'ΕΟΠΠΕΠ · Ομάδα '+id[4]+' · Ερώτηση '+Number(id.slice(6))};
+  return {href:'theory.html?question='+encodeURIComponent(id),label:'ΕΟΠΠΕΠ · Ομάδα '+id[4]+' · Ερώτηση '+Number(id.slice(6)),
+   compact:'ΕΟΠΠΕΠ '+(id[4]==='A'?'Α':'Β')+' · Ερ. '+Number(id.slice(6))};
  }
  if(item.kind==='eoppep'&&item.mode==='exam'&&['A','B','all'].includes(item.group)){
   // Existing exam run is not persisted. Resume its setup, not a made-up exam state.
   return {href:'theory.html?mode=exam&group='+encodeURIComponent(item.group),
-   label:item.group==='all'?'ΕΟΠΠΕΠ · Εξάσκηση':'ΕΟΠΠΕΠ · Εξάσκηση Ομάδας '+item.group};
+   label:item.group==='all'?'ΕΟΠΠΕΠ · Εξάσκηση':'ΕΟΠΠΕΠ · Εξάσκηση Ομάδας '+item.group,
+   compact:item.group==='all'?'ΕΟΠΠΕΠ · Εξάσκηση':'Εξάσκηση · Ομάδα '+(item.group==='A'?'Α':'Β')};
  }
  if(item.kind==='eoppep'&&item.mode==='catalog')
-  return {href:'theory.html?view=catalog',label:'ΕΟΠΠΕΠ · Θεωρία'};
+  return {href:'theory.html?view=catalog',label:'ΕΟΠΠΕΠ · Θεωρία',compact:'ΕΟΠΠΕΠ · Θεωρία'};
  return null;
 }
 function legacy(){
@@ -52,7 +55,11 @@ function home(){
  if(!box||!link||!name)return;
  const target=destination(read())||destination(legacy());
  if(!target){box.style.display='none';link.removeAttribute('href');return}
- name.textContent=target.label;link.href=target.href;box.style.display='block';
+ name.textContent=target.compact||target.label;
+ link.href=target.href;
+ link.title='Συνέχισε από εκεί που έμεινες: '+target.label;
+ link.setAttribute('aria-label','Συνέχισε από εκεί που έμεινες: '+target.label);
+ box.style.display='block';
 }
 function saek(){
  const match=COURSE.exec(page);if(!match)return;
