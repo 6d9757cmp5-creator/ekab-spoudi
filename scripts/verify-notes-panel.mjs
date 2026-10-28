@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {readNotes,writeNotes,validNote,readNotes as load,NOTES_KEY} from '../notes-store.js';
 import {readLocalValues,applyValues,QKEY} from '../sync-local.js';
+import {canDeletePersonalEntry,deletePersonalEntry,SEM_NOTES_KEY} from '../notes-delete.js';
 import {validValue,captureEdits,mergeEntries,visibleEntries,DRAFT_SEPARATOR} from '../sync-model.js';
 
 class Storage{
@@ -77,6 +78,52 @@ assert.equal(store.getItem(NOTES_KEY),null);
 assert.deepEqual(load(),{});
 assert.throws(()=>readNotes({getItem:()=>'{ broken json'}),/invalid-personal-notes/);
 
+
+/* Regression: users can delete from the note card without opening its editor.
+   Other question results, seminar progress and unrelated notes survive. */
+writeNotes({[id]:note,[b]:{...note,title:'Δεύτερη σημείωση'}});
+assert(canDeletePersonalEntry({kind:'mine',editId:id,title:'Ανατομία'}));
+assert.equal(deletePersonalEntry({kind:'mine',editId:id},store),true);
+assert.equal(readNotes()[id],undefined);
+assert.equal(readNotes()[b].title,'Δεύτερη σημείωση');
+assert.equal(deletePersonalEntry({kind:'mine',editId:id},store),false);
+assert.equal(deletePersonalEntry({kind:'sos',id:'saek-sos:01:1'},store),false);
+const quizRecord={'EOP-A-001':{seen:7,selfCorrect:4,sosNotes:'Σημαντικό SOS',readerNotes:'Άλλη προσωπική σημείωση',draft:'Κείμενο απάντησης'}};
+store.setItem(QKEY,JSON.stringify(quizRecord));
+assert.equal(deletePersonalEntry({kind:'source',id:'q:EOP-A-001:sosNotes'},store),true);
+const afterQuestion=JSON.parse(store.getItem(QKEY))['EOP-A-001'];
+assert.equal(afterQuestion.sosNotes,'');
+assert.equal(afterQuestion.readerNotes,'Άλλη προσωπική σημείωση');
+assert.equal(afterQuestion.draft,'Κείμενο απάντησης');
+assert.equal(afterQuestion.seen,7);
+assert.equal(afterQuestion.selfCorrect,4);
+assert.equal(readLocalValues()['q:EOP-A-001:sosNotes'],'','empty field must reach cloud as edit');
+assert.equal(deletePersonalEntry({kind:'source',id:'q:EOP-A-001:draft'},store),true);
+assert.equal(JSON.parse(store.getItem(QKEY))['EOP-A-001'].draft,'');
+const oldEop=captureEdits({}, {},{'q:EOP-A-001:sosNotes':'Σημαντικό SOS'},a,10);
+const deletedEop=captureEdits(oldEop,{'q:EOP-A-001:sosNotes':'Σημαντικό SOS'},{'q:EOP-A-001:sosNotes':''},a,30);
+assert.equal(mergeEntries(oldEop,deletedEop)['q:EOP-A-001:sosNotes'].v,'');
+store.setItem(SEM_NOTES_KEY,JSON.stringify({
+ bls:{studied:[1],qNotes:{2:'Απάντηση που έσβησα',3:'Άλλη απάντηση'},
+ oralNotes:{1:'Σημείωση προφορικού'},right:[2]}
+}));
+assert.equal(deletePersonalEntry({kind:'source',id:'s:bls:qNotes:2'},store),true);
+const seminarAfter=JSON.parse(store.getItem(SEM_NOTES_KEY)).bls;
+assert.equal(seminarAfter.qNotes[2],'');
+assert.equal(seminarAfter.qNotes[3],'Άλλη απάντηση');
+assert.equal(seminarAfter.oralNotes[1],'Σημείωση προφορικού');
+assert.deepEqual(seminarAfter.studied,[1]);
+assert.deepEqual(seminarAfter.right,[2]);
+assert.equal(readLocalValues()['s:bls'].qNotes[2],'','seminar empty field is a syncable edit');
+assert.equal(deletePersonalEntry({kind:'source',id:'s:bls:qNotes:2'},store),false);
+assert.equal(deletePersonalEntry({kind:'source',id:'s:bls:qNotes:99'},store),false);
+assert.equal(deletePersonalEntry({kind:'source',id:'s:bls:qNotes:../../x'},store),false);
+// Unknown/malformed storage must fail closed rather than destroy valid notes.
+const snapshot=store.getItem(SEM_NOTES_KEY);
+store.setItem(SEM_NOTES_KEY,'not-json');
+assert.throws(()=>deletePersonalEntry({kind:'source',id:'s:bls:oralNotes:1'},store),/invalid-notes-source/);
+store.setItem(SEM_NOTES_KEY,snapshot);
+
 const src=fs.readFileSync('notes-panel.js','utf8');
 assert(src.includes("import { readNotes, writeNotes"));
 assert(src.includes("data-ekab-notes-tab=\"mine\"")&&src.includes("data-ekab-notes-tab=\"sos\""));
@@ -84,6 +131,11 @@ assert(src.includes("data-ekab-notes-tab=\"all\""));
 assert(src.includes("SOS ·")&&src.includes("eoppep-sos.json"));
 assert(src.includes("saek-search-A.json")&&src.includes("saek-search-D.json"));
 assert(src.includes("ekab-notes-chapter"));
+assert(src.includes("button('Διαγραφή',()=>removeVisibleNote(item)"));
+assert(src.includes("deletePersonalEntry(item)"));
+assert(src.includes("canDeletePersonalEntry(item)"));
+assert(src.includes("Η σημείωση διαγράφηκε."));
+assert(src.includes("ekabNotesActionStatus"));
 assert(src.includes("'draft','Γραπτή απάντηση εξάσκησης'"));
 assert(!src.includes("id=\"ekabGlobalSearch\""));
 const indices=['A','B','C','D'].map(x=>JSON.parse(fs.readFileSync('saek-search-'+x+'.json','utf8')));
@@ -99,4 +151,4 @@ assert(upd.includes('notes-panel.js?v='+release));
 assert(upd.includes('notes-panel.css?v='+release));
 const sw=fs.readFileSync('sw.js','utf8');
 for(const name of ['notes-store.js','notes-panel.js','notes-panel.css'])assert(sw.includes('"./'+name+'"'));
-console.log('PASS: 247 SAEK SOS + 314 EOPPEP SOS, independent notebook search, note validation, migration, cloud round-trip, dual-device conflicts, explicit deletion, legacy backup preservation and offline assets.');
+console.log('PASS: 247 SAEK SOS + 314 EOPPEP SOS, independent notebook search, note validation, migration, cloud round-trip, dual-device conflicts, direct note/source deletion, safe sync tombstones, legacy backup preservation and offline assets.');
