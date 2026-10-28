@@ -1,14 +1,14 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.96', $=id=>document.getElementById(id);
-let registration=null,remoteVersion=null,applying=false;
+const CURRENT='27.1.97', $=id=>document.getElementById(id);
+let registration=null,remoteVersion=null,applying=false;\nconst CHECK_INTERVAL_MS=60000;let lastNotice='';
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
  const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.86';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.81';script.dataset.ekabGlobalTools='';document.head.append(script);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.97';script.dataset.ekabGlobalTools='';document.head.append(script);
 }
 
 /* Ensure progress export/restore is available from Account on every page. */
@@ -19,11 +19,11 @@ if(!window.EkabProgress && !Array.from(document.scripts).some(node=>node.src.inc
  document.head.append(progressScript);
 }
 
-function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;}
+function show(message,actionable){const b=$('updateBanner'),d=$('updateDescription'),a=$('applyUpdate');if(!b||!d||!a)return;b.hidden=false;d.textContent=message;a.hidden=!actionable;a.disabled=false;if(actionable&&lastNotice!==message){lastNotice=message;b.scrollIntoView?.({block:'nearest',behavior:'smooth'});}}
 function report(message){const e=$('updateCheckStatus');if(e)e.textContent=message;}
 async function remote(){const response=await fetch('./version.json?nocache='+Date.now(),{cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(!/^\d+\.\d+\.\d+$/.test(data.version||''))throw Error('invalid version');return data.version;}
 function newer(a,b){const x=a.split('.').map(Number),y=b.split('.').map(Number);return x.some((v,i)=>v>y[i]&&x.slice(0,i).every((z,j)=>z===y[j]));}
-async function check(){try{if(registration)await Promise.race([registration.update(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),10000))]);remoteVersion=await remote();report('Τρέχουσα έκδοση: v'+CURRENT+' · Διαθέσιμη: v'+remoteVersion);if(newer(remoteVersion,CURRENT))show('Διαθέσιμη ενημέρωση v'+remoteVersion+'. Πάτησε «Ενημέρωση τώρα».',true);else{$('updateBanner')?.setAttribute('hidden','');report('Έχεις την τελευταία έκδοση: v'+CURRENT+'.')}}catch(e){report('Έκδοση v'+CURRENT+' · Ο έλεγχος απέτυχε. Δοκίμασε ξανά με internet.');}}
+async function check(){try{if(registration)await Promise.race([registration.update(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),10000))]);remoteVersion=await remote();report('Τρέχουσα έκδοση: v'+CURRENT+' · Διαθέσιμη: v'+remoteVersion);if(newer(remoteVersion,CURRENT))show('Νέα έκδοση v'+remoteVersion+' διαθέσιμη για λήψη. Πάτησε «Ενημέρωση τώρα».',true);else{$('updateBanner')?.setAttribute('hidden','');report('Έχεις την τελευταία έκδοση: v'+CURRENT+'.')}}catch(e){report('Έκδοση v'+CURRENT+' · Ο έλεγχος απέτυχε. Δοκίμασε ξανά με internet.');}}
 async function apply(){if(applying)return;applying=true;const b=$('applyUpdate'),d=$('updateDescription');b.disabled=true;d.textContent='Προετοιμασία ενημέρωσης…';try{
 if(!registration&&'serviceWorker'in navigator)registration=await navigator.serviceWorker.getRegistration('./');
 if(registration){await Promise.race([registration.update(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),10000))]);}
@@ -52,7 +52,7 @@ document.addEventListener('click',event=>{
   if(event.target.closest('#checkAppUpdates'))check();
 });$('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
 if(!('serviceWorker'in navigator)||location.protocol==='file:'){report('Έκδοση v'+CURRENT+' · Ο offline μηχανισμός δεν υποστηρίζεται εδώ.');return}
-try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying)return;location.reload()});registration.addEventListener('updatefound',()=>{const worker=registration.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)check()})});await check();window.addEventListener('online',check);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()})}catch(e){report('Έκδοση v'+CURRENT+' · Αδυναμία εγγραφής ενημερώσεων.');}}
+try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying)return;location.reload()});registration.addEventListener('updatefound',()=>{const worker=registration.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)check()})});await check();window.addEventListener('online',check);setInterval(()=>{if(document.visibilityState==='visible')check()},CHECK_INTERVAL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()})}catch(e){report('Έκδοση v'+CURRENT+' · Αδυναμία εγγραφής ενημερώσεων.');}}
 window.EkabUpdates={check,version:CURRENT};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
