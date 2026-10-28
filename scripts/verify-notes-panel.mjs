@@ -48,10 +48,10 @@ assert.equal(readNotes()[id].body,note.body);
 assert(events.includes('ekab:notes-changed'));
 // Legacy notes without a cloud key remain intact during the first migration.
 store.setItem(QKEY,JSON.stringify({'EOP-A-001':{sosNotes:'παλιά αλλά πολύτιμη σημείωση'}}));
-applyValues({'q:EOP-A-001:seen':1,'n:'+id:note});
+applyValues({'q:EOP-A-001:seen':1,['n:'+id]:note});
 assert.equal(JSON.parse(store.getItem(QKEY))['EOP-A-001'].sosNotes,'παλιά αλλά πολύτιμη σημείωση');
 // An explicit empty note from cloud must override the outdated local text.
-applyValues({'q:EOP-A-001:sosNotes':'','n:'+id:note});
+applyValues({'q:EOP-A-001:sosNotes':'',['n:'+id]:note});
 assert.equal(JSON.parse(store.getItem(QKEY))['EOP-A-001'].sosNotes,'');
 
 const sosKey='q:EOP-A-001:sosNotes';
@@ -63,13 +63,13 @@ assert(merged[sosKey].v.includes('σημείωση κινητού'));
 assert(merged[sosKey].v.includes('σημείωση υπολογιστή'));
 assert(merged[sosKey].v.includes(DRAFT_SEPARATOR));
 assert.equal(merged[sosKey].v,mergeEntries(right,left)[sosKey].v);
-const first=captureEdits({}, {},{'n:'+id:note},a,10);
-const noteLeft=captureEdits(first,{'n:'+id:note},{'n:'+id:{...note,body:'από κινητό'}},a,20);
-const noteRight=captureEdits(first,{'n:'+id:note},{'n:'+id:{...note,body:'από υπολογιστή'}},b,21);
+const first=captureEdits({}, {},{['n:'+id]:note},a,10);
+const noteLeft=captureEdits(first,{['n:'+id]:note},{['n:'+id]:{...note,body:'από κινητό'}},a,20);
+const noteRight=captureEdits(first,{['n:'+id]:note},{['n:'+id]:{...note,body:'από υπολογιστή'}},b,21);
 const both=mergeEntries(noteLeft,noteRight)['n:'+id].v;
 assert(both.body.includes('από κινητό')&&both.body.includes('από υπολογιστή'));
 assert(validValue('n:'+id,both));
-const deleted=captureEdits(first,{'n:'+id:note},{},a,22);
+const deleted=captureEdits(first,{['n:'+id]:note},{},a,22);
 assert.equal(visibleEntries(mergeEntries(first,deleted))['n:'+id],undefined);
 applyValues({});
 assert.equal(store.getItem(NOTES_KEY),null);
