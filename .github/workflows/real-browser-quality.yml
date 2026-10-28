@@ -1,0 +1,39 @@
+name: Full application browser QA
+on:
+  pull_request:
+    paths:
+      - 'scripts/verify-anatomy-browser.mjs'
+      - '.github/workflows/real-browser-quality.yml'
+      - 'ui-tools/anatomy-3d/**'
+      - 'index.html'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile-browser:
+    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Playwright and browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Exercise real UI and anatomy assets in mobile viewport
+        env:
+          ANATOMY_ENGINE: ${{ matrix.engine }}
+        run: node scripts/verify-anatomy-browser.mjs
+      - name: Archive screenshots and errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: anatomy-browser-${{ matrix.engine }}
+          path: browser-qa-results/
+          if-no-files-found: warn
