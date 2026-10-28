@@ -100,32 +100,41 @@ function render(){
  const rows=stats();
  root.replaceChildren();
  const compact=$('section','progress-panel-compact');
- compact.setAttribute('aria-label','Σύνοψη προόδου ΣΑΕΚ και ΕΟΠΠΕΠ');
+ compact.setAttribute('aria-label','Γενική καταγεγραμμένη πρόοδος ΣΑΕΚ, ΕΟΠΠΕΠ και ενεργών σεμιναρίων');
  const heading=$('div','progress-panel-compact-heading');
  heading.append($('h2','','Η πρόοδός μου'));
  const toggle=action('Αναλυτικά ›',openDetails,'progress-panel-compact-toggle');
  toggle.setAttribute('aria-haspopup','dialog');
  toggle.setAttribute('aria-controls','progressDetailDialog');
  heading.append(toggle);compact.append(heading);
+ // Weighted by actual saved completed items, not by averaging each section's percent.
+ // Only sections with a reliable item count participate (SAEK, EOPPEP, started seminars).
+ // Pharmacology currently has study-time only, not persisted per-card completion.
+ const aggregate=(numerator,denominator)=>{
+  const done=rows.reduce((total,item)=>total+item[numerator],0);
+  const available=rows.reduce((total,item)=>total+item[denominator],0);
+  if(!available||!done)return 0;
+  const percentage=100*done/available;
+  return percentage<1?Math.round(percentage*10)/10:Math.round(percentage);
+ };
  const summary=$('div','progress-panel-compact-summary');
- for(const item of rows.filter(x=>x.id==='saek'||x.id==='eoppep')){
-  const part=$('div','progress-panel-compact-course');
-  part.append($('strong','progress-panel-compact-course-title',item.label));
-  const primary=$('div','progress-panel-mini-primary');
-  primary.append($('strong','progress-panel-mini-value',item.studyPct+'%'),$('span','progress-panel-mini-label','Μελέτη'));
-  part.append(primary);
-  const bar=$('div','progress-panel-mini-dual');
-  bar.setAttribute('role','img');
-  bar.setAttribute('aria-label',item.label+': Μελέτη '+item.studyPct+'%, Εξάσκηση '+item.examPct+'%');
-  for(const [type,value] of [['study',item.studyPct],['exam',item.examPct]]){
-   const half=$('span','progress-panel-mini-half '+type);
-   const fill=$('span','progress-panel-mini-fill');
-   fill.style.width=value+'%';half.append(fill);bar.append(half);
-  }
-  part.append(bar);
-  const practice=$('div','progress-panel-mini-practice');
-  practice.append($('span','','Εξάσκηση'),$('strong','',item.examPct+'%'));
-  part.append(practice);summary.append(part);
+ for(const [type,label,value] of [
+  ['study','Μελέτη',aggregate('read','readTotal')],
+  ['exam','Εξάσκηση',aggregate('exam','examTotal')]
+ ]){
+  const metric=$('div','progress-panel-total-metric '+type);
+  const text=$('div','progress-panel-total-label');
+  text.append($('span','',label),$('strong','',String(value).replace('.',',')+'%'));
+  metric.append(text);
+  const track=$('div','progress-panel-total-track');
+  track.setAttribute('role','progressbar');
+  track.setAttribute('aria-label','Συνολική '+(type==='study'?'μελέτη':'εξάσκηση'));
+  track.setAttribute('aria-valuemin','0');
+  track.setAttribute('aria-valuemax','100');
+  track.setAttribute('aria-valuenow',String(value));
+  const fill=$('span','progress-panel-total-fill');
+  fill.style.width=value+'%';track.append(fill);metric.append(track);
+  summary.append(metric);
  }
  compact.append(summary);root.append(compact);
  if(!panelOpen)return;
