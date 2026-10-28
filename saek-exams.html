@@ -37,8 +37,8 @@
  <div class="saek-exam-topic"><span id="examScopeLabel"></span><span id="examDifficultyLabel"></span></div>
  <h3 id="examQuestion" class="saek-exam-question"></h3>
  <label for="examDraft">Η απάντησή σου</label><textarea id="examDraft" rows="5" maxlength="3500" placeholder="Γράψε με δικά σου λόγια τι γνωρίζεις…"></textarea>
- <p class="saek-exam-note">Απάντησε πριν δεις τη λύση. Η AI αξιολόγηση καταλαβαίνει διαφορετική διατύπωση, όταν ενεργοποιηθεί η ασφαλής υπηρεσία.</p>
- <div class="saek-exam-actions"><button type="button" id="examCheckAI" class="btn">Αξιολόγηση με AI</button><button type="button" id="examReveal" class="btn secondary">Ενδεικτική λύση · Αυτοαξιολόγηση</button></div>
+ <p class="saek-exam-note">Απάντησε πριν δεις τη λύση. Η αξιολόγηση εξετάζει το νόημα της απάντησης. Μετά την υποβολή δεν μπορείς να την αλλάξεις.</p>
+ <div class="saek-exam-actions"><button type="button" id="examCheckAI" class="btn">Υποβολή αξιολόγησης</button><button type="button" id="examReveal" class="btn secondary">Ενδεικτική λύση · Αυτοαξιολόγηση</button></div>
  <div id="examAIResult" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
  <div id="examReference" class="saek-exam-reference" hidden><strong>Ενδεικτική απάντηση</strong><p id="examReferenceText"></p><a id="examSourceLink" href="saek.html">Άνοιγμα σχετικού κεφαλαίου</a></div>
  <div id="examManual" class="saek-exam-manual" hidden><p>Αξιολόγησε τί θυμόσουν πριν δεις τη λύση:</p><div class="saek-exam-actions"><button type="button" class="btn compact" id="examMarkCorrect">Το ήξερα σωστά</button><button type="button" class="btn compact secondary" id="examMarkPartial">Μερικώς σωστό</button><button type="button" class="btn compact secondary" id="examMarkWrong">Χρειάζομαι επανάληψη</button></div></div>
@@ -48,7 +48,7 @@
 
 <section id="examResults" class="panel" hidden>
  <p class="eyebrow">Αποτέλεσμα εξάσκησης</p><h3>Η εξέτασή σου ολοκληρώθηκε</h3><div id="examResultsStats" class="saek-exams-stats"></div>
- <p class="saek-exam-note">Το αποτέλεσμα περιλαμβάνει εκπαιδευτικές εκτιμήσεις AI ή προσωπική αυτοαξιολόγηση. Δεν είναι επίσημη εξέταση, βαθμός ή πιστοποίηση.</p>
+ <p class="saek-exam-note">Το αποτέλεσμα είναι εκπαιδευτικό και δεν αποτελεί επίσημη εξέταση ή πιστοποίηση.</p>
  <h4>Τι αξίζει να επαναλάβεις</h4><div id="examWeakChapters"></div>
  <button type="button" class="btn" id="examAgain">Νέα εξέταση</button>
 </section>
