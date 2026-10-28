@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.104', $=id=>document.getElementById(id);
+const CURRENT='27.1.105', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
@@ -10,6 +10,12 @@ if(!document.querySelector('link[data-ekab-global-tools]')){
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
  const script=document.createElement('script');script.src='global-tools.js?v=27.1.97';script.dataset.ekabGlobalTools='';document.head.append(script);
+}
+
+/* Focus-aware time recording runs only on educational pages. */
+if(!document.querySelector('script[data-ekab-activity-time]')){
+ const s=document.createElement('script');s.src='activity-time.js?v=27.1.105';
+ s.defer=true;s.dataset.ekabActivityTime='1';document.head.append(s);
 }
 
 /* Ensure progress export/restore is available from Account on every page. */
