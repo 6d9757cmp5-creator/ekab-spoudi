@@ -1,37 +1,42 @@
-/* Απινιδωτής / χάρτης Κρήτης — περιορισμένο στην contacts.html */
-.aed-help-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:15px 0}
-.aed-help-row .btn{white-space:normal;text-align:center;min-height:44px}
-.aed-poster{margin:16px 0 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg)}
-.aed-poster-head{background:#24653f;color:#fff;display:flex;align-items:center;gap:15px;padding:20px clamp(15px,3vw,27px)}
-.aed-poster-icon{flex:none;width:64px;height:64px;display:grid;place-items:center;border:2px solid #fff;border-radius:15px;font-size:27px;line-height:1}
-.aed-poster-head h3{color:#fff;margin:0 0 4px;font-size:clamp(1.25rem,2.2vw,1.8rem)}
-.aed-poster-head p{color:#fff;margin:0;font-size:.86rem;line-height:1.5}
-.aed-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:13px;background:#e7eaeb;color:#1e2c35}
-.aed-step{background:#fff;border:1px solid #d3dcdb;border-radius:11px;padding:14px;min-width:0}
-.aed-step-num{display:inline-grid;place-items:center;background:#b32f39;color:#fff;width:28px;height:28px;border-radius:50%;font-size:.8rem;font-weight:800;margin-bottom:7px}
-.aed-step h4{font-size:.94rem;margin:3px 0 7px;color:#24313a;line-height:1.4}
-.aed-step p{font-size:.8rem;line-height:1.55;color:#415360;margin:0}
-.aed-poster figcaption{font-size:.75rem;line-height:1.5;color:var(--muted);padding:11px 14px;border-top:1px solid var(--line)}
-.aed-map-frame{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--bg);margin:15px 0}
-.aed-map-frame iframe{display:block;width:100%;height:clamp(410px,62vh,680px);border:0;background:#f3f6f8}
-.aed-caution{font-size:.83rem;line-height:1.55;margin-top:13px}
-.aed-map-attribution{font-size:.78rem;margin-top:11px}
-html[data-theme="dark"] .aed-poster figcaption{background:#1c3544;color:#cee0e9}
-@media(max-width:730px){.aed-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:430px){.aed-steps{grid-template-columns:1fr;gap:8px}.aed-poster-head{padding:16px}.aed-poster-icon{width:48px;height:48px;font-size:21px}.aed-map-frame iframe{height:470px}}
-
-/* Direct public Crete AED source: only the basemap uses OpenStreetMap */
-.aed-nearby-map{height:clamp(350px,53vh,540px);border:1px solid var(--line);border-radius:14px;background:#eaf1f2;z-index:0}
+/* v27.1.117 — two calm, mobile-first surfaces: poster + official AED map. */
+.aed-minimal-panel{padding:clamp(16px,2.5vw,25px);min-width:0}
+.aed-minimal-panel .aed-section-title{font-size:clamp(1.08rem,2.2vw,1.43rem);line-height:1.4;margin:0 0 15px;font-weight:800}
+.aed-minimal-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.aed-minimal-heading .aed-section-title{margin:0}
+.aed-map-source{display:grid;place-items:center;flex:none;width:36px;height:36px;text-decoration:none;border:1px solid var(--line);border-radius:11px;color:var(--blue);font-weight:800;font-size:1.3rem}
+.aed-compact-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.aed-locate-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;flex:1;background:#247da7;border:1px solid #3b91b3;border-radius:13px;color:#fff;font:inherit;font-size:.94rem;font-weight:750;cursor:pointer;padding:10px 16px}
+.aed-locate-button:hover{background:#17658b}
+.aed-locate-button:focus-visible,.aed-map-source:focus-visible,.aed-range-control select:focus-visible{outline:3px solid #6bbcf2;outline-offset:2px}
+.aed-locate-button:disabled{opacity:.65;cursor:wait}
+.aed-locate-button span{font-size:1.2rem;line-height:1}
+.aed-range-control{display:block;flex:0 0 auto}
+.aed-range-control select{font:inherit;font-size:.88rem;font-weight:700;min-height:46px;width:104px;max-width:33vw;padding:9px 9px;border-radius:13px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.aed-nearby-map{width:100%;height:clamp(380px,62vh,680px);overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#dcebf1;isolation:isolate;z-index:0}
 .aed-nearby-map[hidden]{display:none!important}
-.aed-nearby-results{display:grid;gap:8px;margin:12px 0;padding-left:25px}
-.aed-nearby-results li{font-size:.83rem;line-height:1.5;overflow-wrap:anywhere}
-#aedNearbyStatus[data-error="true"]{color:#b84d3e}
-#aedFindNearby:disabled{cursor:wait;opacity:.65}
-.aed-nearby-map .leaflet-popup-content p{margin:6px 0}
-html[data-theme="dark"] .aed-nearby-map{border-color:#5d7688}
+.aed-compact-status{font-size:.8rem;line-height:1.45;margin:12px 0 0;color:var(--muted)}
+.aed-compact-status[data-error="true"]{color:#f2a99e}
+.aed-compact-status[hidden]{display:none!important}
+.aed-nearby-map .leaflet-popup-content{max-width:250px;line-height:1.45;font-family:inherit}
+.aed-nearby-map .leaflet-popup-content p{margin:5px 0}
+.aed-nearby-map .leaflet-control-attribution{font-size:9px;line-height:1.2}
+.aed-minimal-panel .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0,0,0,0);overflow:hidden;white-space:nowrap}
+@media(max-width:520px){
+ .aed-minimal-panel{padding:15px}
+  .aed-nearby-map{height:clamp(390px,59dvh,580px);border-radius:14px}
+ .aed-minimal-panel .aed-section-title{font-size:1.11rem}
+ .aed-compact-toolbar{gap:8px}
+ .aed-range-control select{width:94px;padding-inline:8px}
+}
 
-.aed-radius-label{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.83rem;font-weight:700;color:var(--ink)}
-#aedSearchRadius{font:inherit;min-height:44px;max-width:150px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;color:var(--ink);background:var(--bg)}
-.aed-official-embedded{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
-.aed-official-embedded>summary{font-size:.88rem;font-weight:700;cursor:pointer;padding:12px 4px;min-height:44px}
-@media(max-width:560px){.aed-radius-label{width:100%;justify-content:space-between}.aed-help-row>a.btn,.aed-help-row>button.btn{flex:1 1 170px}.aed-nearby-map{height:440px}}
+/* On the contacts/first-aid screen, the global floating notebook overlaps vital map pins. Keep notes elsewhere and via the header. */
+body .ekab-notes-fab{display:none!important}
+
+/* Official training poster stays on its original publisher's website until republication rights are established. */
+.aed-official-poster-link{display:flex;align-items:center;gap:14px;min-height:88px;padding:18px;background:#1c5f43;border:1px solid #387a5a;border-radius:16px;color:#fff;text-decoration:none;transition:background .15s}
+.aed-official-poster-link:hover{background:#237754;color:#fff}
+.aed-official-poster-link:focus-visible{outline:3px solid #76d3b0;outline-offset:3px}
+.aed-official-poster-link strong{display:block;font-size:1.04rem;line-height:1.4;color:#fff}
+.aed-official-poster-link small{display:block;margin-top:6px;font-size:.79rem;line-height:1.45;color:#e0f3e7}
+.aed-official-symbol{display:grid;place-items:center;flex:none;width:54px;height:54px;background:#fff;border-radius:14px;color:#216948;font-weight:800;font-size:32px}
+@media(max-width:520px){.aed-official-poster-link{min-height:78px;padding:13px}.aed-official-symbol{width:46px;height:46px;font-size:26px}}
