@@ -20,7 +20,7 @@ html[data-theme="dark"] .aed-poster figcaption{background:#1c3544;color:#cee0e9}
 @media(max-width:730px){.aed-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.aed-steps{grid-template-columns:1fr;gap:8px}.aed-poster-head{padding:16px}.aed-poster-icon{width:48px;height:48px;font-size:21px}.aed-map-frame iframe{height:470px}}
 
-/* Optional geolocation: OSM points are intentionally separated from official records */
+/* Direct public Crete AED source: only the basemap uses OpenStreetMap */
 .aed-nearby-map{height:clamp(350px,53vh,540px);border:1px solid var(--line);border-radius:14px;background:#eaf1f2;z-index:0}
 .aed-nearby-map[hidden]{display:none!important}
 .aed-nearby-results{display:grid;gap:8px;margin:12px 0;padding-left:25px}
@@ -29,3 +29,9 @@ html[data-theme="dark"] .aed-poster figcaption{background:#1c3544;color:#cee0e9}
 #aedFindNearby:disabled{cursor:wait;opacity:.65}
 .aed-nearby-map .leaflet-popup-content p{margin:6px 0}
 html[data-theme="dark"] .aed-nearby-map{border-color:#5d7688}
+
+.aed-radius-label{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.83rem;font-weight:700;color:var(--ink)}
+#aedSearchRadius{font:inherit;min-height:44px;max-width:150px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;color:var(--ink);background:var(--bg)}
+.aed-official-embedded{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+.aed-official-embedded>summary{font-size:.88rem;font-weight:700;cursor:pointer;padding:12px 4px;min-height:44px}
+@media(max-width:560px){.aed-radius-label{width:100%;justify-content:space-between}.aed-help-row>a.btn,.aed-help-row>button.btn{flex:1 1 170px}.aed-nearby-map{height:440px}}
