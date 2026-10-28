@@ -17,6 +17,7 @@ async function evaluate(input){
  try{({client}=await import('./appwrite-client.js'));}catch{throw new Error('Δεν φορτώθηκε η υπηρεσία λογαριασμού. Δοκίμασε ενημέρωση.');}
  const workerUrl=window.EkabAIConfig.workerUrl;
  if(workerUrl){
+  try{
   let jwt;
   try{
    const {Account}=await import('./vendor/appwrite-29.1.0/account.js');
@@ -36,6 +37,10 @@ async function evaluate(input){
   }
   if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
   return {...result,studentAnswer:answer};
+  }catch(error){
+   // Keep the existing Appwrite grader available if the new Worker is temporarily unavailable.
+   if(error.message==='Συνδέσου στον λογαριασμό σου για ασφαλή αξιολόγηση AI.'||error.message===STUDENT_LIMIT_MESSAGE)throw error;
+  }
  }
  const functionId=window.EkabAIConfig.functionId;
  const url=new URL(client.config.endpoint+'/functions/'+encodeURIComponent(functionId)+'/executions');
