@@ -224,6 +224,40 @@ function filterCatalog(){
  }
  const count=$('#catalogResultInfo');if(count)count.textContent=total?`Εμφανίζονται ${visible} από ${total} αποτελέσματα · κύλισε τη σελίδα για τα υπόλοιπα.`:'Δεν βρέθηκε αντίστοιχη ερώτηση.';
  const more=$('#catalogMore');if(more){more.hidden=total<=catalogVisibleLimit;more.textContent=`Εμφάνιση ${Math.min(24,total-catalogVisibleLimit)} ακόμη ερωτήσεων`;}
+ updateCatalogReaderNavigation();
+}
+// Catalog navigation uses the same group/search filters as the visible question list.
+// Pagination only limits rendering; it must not block moving to later matches.
+function catalogNavigationSequence(){
+ const group=$('#catalogGroupFilter')?.value||'all';
+ const terms=normalizeCatalogText($('#catalogSearch')?.value||'').trim().split(/\s+/).filter(Boolean);
+ const buttons=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item'));
+ const matching=buttons.filter(btn=>(group==='all'||btn.dataset.group===group)&&terms.every(term=>normalizeCatalogText(btn.textContent).includes(term)));
+ const candidates=matching.map(btn=>btn.dataset.questionId);
+ if(catalogSelectedId&&candidates.includes(catalogSelectedId))return candidates;
+ // A direct link or changed filter must never trap the reader outside the catalog.
+ return buttons.map(btn=>btn.dataset.questionId);
+}
+function updateCatalogReaderNavigation(){
+ const prev=$('#catalogReaderPrevious'),next=$('#catalogReaderNext');
+ if(!prev||!next)return;
+ const sequence=catalogNavigationSequence();
+ const current=sequence.indexOf(catalogSelectedId);
+ prev.disabled=current<=0;
+ next.disabled=current<0||current>=sequence.length-1;
+}
+function moveCatalogQuestion(direction){
+ if(!catalogSelectedId)return;
+ const sequence=catalogNavigationSequence(),position=sequence.indexOf(catalogSelectedId);
+ const nextId=sequence[position+direction];
+ if(!nextId)return;
+ // Make a matching question visible in the catalog even beyond the first 24 results.
+ const nextIndex=sequence.indexOf(nextId);
+ if(nextIndex>=catalogVisibleLimit){
+  catalogVisibleLimit=Math.ceil((nextIndex+1)/24)*24;
+  filterCatalog();
+ }
+ openCatalogQuestion(nextId);
 }
 function renderCatalogReader(q){
  const reader=$('#catalogReader');if(!reader)return;
@@ -252,6 +286,7 @@ function renderCatalogReader(q){
   btn.classList.toggle('selected',active);
   btn.setAttribute('aria-pressed',String(active));
  }
+ updateCatalogReaderNavigation();
 }
 function openCatalogQuestion(questionId){
  const q=bank.find(item=>item.id===questionId);
@@ -262,12 +297,15 @@ function openCatalogQuestion(questionId){
  const reader=$('#catalogReader');
  reader.scrollIntoView({behavior:'smooth',block:'start'});
 }
+$('#catalogReaderPrevious').addEventListener('click',()=>moveCatalogQuestion(-1));
+$('#catalogReaderNext').addEventListener('click',()=>moveCatalogQuestion(1));
 $('#catalogReaderClose').addEventListener('click',()=>{
  $('#catalogReaderContent').hidden=true;
  $('#catalogReaderPlaceholder').hidden=false;
  if(!$('#homeView').classList.contains('catalog-open-desktop'))$('#catalogReader').classList.add('hidden');
  if(catalogSelectedId){const btn=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item')).find(x=>x.dataset.questionId===catalogSelectedId);if(btn){btn.classList.remove('selected');btn.setAttribute('aria-pressed','false');btn.focus()}}
  catalogSelectedId=null;
+ updateCatalogReaderNavigation();
 });
 $('#catalogReaderSourceInfo').addEventListener('click',()=>{const q=bank.find(item=>item.id===catalogSelectedId);if(q)sourceModal(q)});
 $('#catalogReaderMarkReview').addEventListener('click',()=>{

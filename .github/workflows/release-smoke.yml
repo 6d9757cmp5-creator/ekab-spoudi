@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js theme-init.js global-tools.js; do
+          for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js theme-init.js global-tools.js app.js navigation.js; do
             node --check "$file"
           done
           for file in account-ui.js appwrite-client.js; do
