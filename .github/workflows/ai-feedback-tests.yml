@@ -1,0 +1,39 @@
+name: AI teaching feedback tests
+
+on:
+  pull_request:
+    paths:
+      - "ai-grading-client.js"
+      - "ai-grading.css"
+      - "functions/answer-grader/**"
+      - "scripts/verify-ai-feedback.mjs"
+      - ".github/workflows/ai-feedback-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "ai-grading-client.js"
+      - "ai-grading.css"
+      - "functions/answer-grader/**"
+      - "scripts/verify-ai-feedback.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate syntax
+        run: |
+          node --check ai-grading-client.js
+          node --check functions/answer-grader/main.js
+          node --check scripts/verify-ai-feedback.mjs
+      - name: Check backend grading and safe free-provider fallbacks
+        run: node --test functions/answer-grader/test.mjs
+      - name: Check shared learner feedback
+        run: node scripts/verify-ai-feedback.mjs
