@@ -14,6 +14,8 @@ const cache={until:0,bank:null};
 const attempts=new Map();
 const MAX_USER_CHARS=3500;
 const LIMIT=15, WINDOW_MS=20*60*1000;
+const AI_LIMIT_MESSAGE='Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις AI έχουν φτάσει προσωρινά στο όριό τους. Κάνε μια μικρή επανάληψη στη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
+const STUDENT_LIMIT_MESSAGE='Ώρα για μια μικρή επανάληψη! 📚 Έχεις φτάσει προσωρινά στο όριο των αξιολογήσεων AI. Διάβασε λίγη θεωρία και δοκίμασε ξανά αργότερα. Η απάντησή σου δεν βαθμολογήθηκε.';
 const schema={
  type:'object',additionalProperties:false,
  properties:{
@@ -169,6 +171,7 @@ async function gradeAnswer(question,answer){
  // Isolated per authenticated user; cache never contains the original student text.
  // This is a bounded, short-lived per-process cache, not a durable cross-instance guarantee.
  let failure='free_unavailable';
+ let allLimitFailures=providers.length>0;
  for(const provider of providers){
   try{
    const graded=validateGrade(await requestFreeGrade(provider,messages));
@@ -176,8 +179,16 @@ async function gradeAnswer(question,answer){
    if(question.kind==='Ανεπίσημη άσκηση BLS/AED'&&!/σφυγμ|παλμ/i.test(question.reference+' '+question.context)&&
     /σφυγμ|παλμ/i.test(graded.missingPoints.join(' ')+' '+graded.explanation))throw new Error('unsupported_bls_pulse_requirement');
    console.log('AI grading provider:',provider.id);return {...graded,provider:provider.id,referenceAnswer:cleanText(question.reference,2100)};
-  }catch(err){if(/^provider_http_\d{3}$/.test(err.message))failure=err.message; /* No answers, keys or provider response bodies in logs. */}
+  }catch(err){
+   // Limits/credits (429/402) are distinct from bad configuration, network errors,
+   // or invalid model output. Never tell the student all AIs are exhausted unless
+   // every configured, attempted provider failed specifically with a limit status.
+   if(!/^provider_http_(?:429|402)$/.test(err.message))allLimitFailures=false;
+   if(/^provider_http_\d{3}$/.test(err.message))failure=err.message;
+   /* No answers, keys or provider response bodies in logs. */
+  }
  }
+ if(allLimitFailures)throw new Error('all_ai_limits');
  throw new Error(failure);
 }
 async function cachedGrade(user,question,answer){
@@ -201,13 +212,14 @@ export default async function ({req,res}){
  if(!freeProviders().length)return reject(res,'Δεν έχει συνδεθεί διαθέσιμο δωρεάν AI. Η απάντηση παραμένει χωρίς βαθμό.',503);
  const input=req.bodyJson;
  if(!input||typeof input!=='object'||Array.isArray(input)||typeof input.answer!=='string'||input.answer.trim().length<3||input.answer.length>MAX_USER_CHARS)return reject(res,'Γράψε απάντηση 3–3500 χαρακτήρων');
- if(limited(user))return reject(res,'Έφτασες το προσωρινό όριο αξιολογήσεων. Δοκίμασε αργότερα.',429);
+ if(limited(user))return res.json({error:STUDENT_LIMIT_MESSAGE,code:'student_ai_limit'},429);
  try{
   const ref=await findReference(input);
   const result=await cachedGrade(user,ref,input.answer.trim());
   return res.json({...result,educational:true},200);
  }catch(err){
   if(/Μη έγκυρ|Άγνωστη|Δεν βρέθηκε|δεν είναι διαθέσιμο για αυτόματη/i.test(err.message))return reject(res,err.message,400);
+  if(err.message==='all_ai_limits')return res.json({error:AI_LIMIT_MESSAGE,code:'all_ai_limits'},503);
   // Never log answers, question texts, keys or provider response bodies.
   return res.json({error:'Το δωρεάν AI δεν είναι διαθέσιμο ή έφτασε το όριό του. Δοκίμασε αργότερα. Η απάντηση παραμένει χωρίς βαθμό.',code:/^provider_http_\d{3}$/.test(err.message)?err.message:'free_unavailable'},503);
  }
