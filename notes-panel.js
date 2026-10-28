@@ -2,9 +2,8 @@
    Personal writing is never used as searchable public study material. */
 import { readNotes, writeNotes, NOTE_LIMIT } from './notes-store.js';
 import { canDeletePersonalEntry, deletePersonalEntry } from './notes-delete.js';
-import { NOTES_FAB_POSITION, NOTES_WINDOW_POSITION, clampFloating, ratiosForFloating, floatingFromRatios, readFloatingPosition, saveFloatingPosition } from './notes-position.js';
+import { NOTES_FAB_POSITION, NOTES_WINDOW_POSITION, clampFloating, ratiosForFloating, floatingFromRatios, readFloatingPosition, saveFloatingPosition, NOTES_FAB_HIDDEN_KEY, readFloatingVisibility, saveFloatingVisibility } from './notes-position.js';
 
-const NOTES_FAB_HIDDEN_KEY='ekab.notes.fab.hidden.v1';
 const EOP_KEY='ekab-eoppep-official-v15';
 const SEM_KEY='ekab.seminar-prep.local.v1';
 const SEM_NAMES={bls:'BLS/AED',pbls:'PBLS',ils:'ILS',phtls:'PHTLS',als:'ALS'};
@@ -187,7 +186,7 @@ function close(){
 /* The notebook visibility preference belongs to this device only.
    It never touches the personal-note store or learning/sync data. */
 function isFloatingHidden(){
- try{return localStorage.getItem(NOTES_FAB_HIDDEN_KEY)==='1'}catch{return false}
+ try{return readFloatingVisibility(localStorage)}catch{return false}
 }
 function setFloatingHidden(hidden,persist=false){
  if(!trigger)return;
@@ -203,12 +202,7 @@ function setFloatingHidden(hidden,persist=false){
   visibilityToggle.title=label;
   if(!visibilityToggle.closest('header'))visibilityToggle.textContent='📝 '+label;
  }
- if(persist){
-  try{
-   if(hidden)localStorage.setItem(NOTES_FAB_HIDDEN_KEY,'1');
-   else localStorage.removeItem(NOTES_FAB_HIDDEN_KEY);
-  }catch{}
- }
+ if(persist)try{saveFloatingVisibility(localStorage,hidden)}catch{}
  if(!hidden)requestAnimationFrame(()=>restorePosition(trigger,NOTES_FAB_POSITION));
 }
 function installVisibilityControl(){
