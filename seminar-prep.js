@@ -375,8 +375,10 @@ function bind(){
   $('seminarScenarioStatus').textContent='Η απάντηση αποθηκεύτηκε. Πάτησε «Υποβολή αξιολόγησης» όταν είσαι έτοιμος.';
  });
  $('seminarOralReveal').addEventListener('click',()=>{
-  $('seminarOralHelp').hidden=false;$('seminarOralReveal').hidden=true;
-  $('seminarScenarioStatus').textContent='Εμφανίστηκε η ενδεικτική προτεραιότητα. Δεν καταχωρίστηκε βαθμολογία.';
+  const p=current();if(p.scenarioGrades[oral])return;
+  p.scenarioGrades[oral]={verdict:'uncertain',criticalError:false};
+  p.scenarioFeedback[oral]={verdict:'uncertain',criticalError:false,explanation:'Εμφανίστηκε η ενδεικτική λύση χωρίς αξιολόγηση.',takeaway:'',modelAnswer:''};
+  save();updateCourseProgress();renderOral();
  });
  $('seminarScenarioSubmit').addEventListener('click',async()=>{
   if(!selected||view!=='oral'||current().scenarioGrades[oral])return;
