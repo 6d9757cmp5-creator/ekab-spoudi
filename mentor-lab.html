@@ -116,9 +116,23 @@
   </section>
   <section id="panel-route" role="tabpanel" aria-labelledby="tab-route" hidden>
     <div class="section-heading"><div><h2>Η εκπαιδευτική μου διαδρομή</h2><p>Μικρά, σαφή βήματα μελέτης από το ΣΑΕΚ προς την κλινική συλλογιστική.</p></div></div>
-    <div class="panel"><label for="study-duration">Χρόνος που διαθέτω για εξάσκηση</label>
-      <select id="study-duration"><option value="10">10 λεπτά</option><option value="20" selected>20 λεπτά</option><option value="30">30 λεπτά</option></select>
-      <h3>Πρόταση επόμενης εξάσκησης</h3><div id="plan-output" class="plan"></div>
+    <div class="panel">
+      <h3>Οι προσωπικοί μου στόχοι</h3>
+      <p class="muted small">Μόνο όσα επιλέξεις εσύ, χωρίς να αλλάζουν οι βαθμολογίες ή οι καταγραφές ΣΑΕΚ/ΕΟΠΠΕΠ. Οι προτιμήσεις αποθηκεύονται τοπικά στον browser.</p>
+      <div class="study-goal-choices" role="group" aria-label="Προσωπικοί στόχοι μελέτης">
+        <label><input type="checkbox" data-study-goal="saek"> ΣΑΕΚ</label>
+        <label><input type="checkbox" data-study-goal="eoppep"> ΕΟΠΠΕΠ</label>
+        <label><input type="checkbox" data-study-goal="seminars"> Σεμινάρια</label>
+      </div>
+    </div>
+    <div class="panel">
+      <label for="study-duration">Χρόνος που διαθέτω για εξάσκηση</label>
+      <select id="study-duration"><option value="10">10 λεπτά</option><option value="15">15 λεπτά</option><option value="25" selected>25 λεπτά</option><option value="30">30 λεπτά</option></select>
+      <label for="study-path-mode">Είδος μελέτης</label>
+      <select id="study-path-mode"><option value="guided">Με καθοδήγηση</option><option value="practice">Εξάσκηση</option><option value="exam">Δοκιμαστική αυτοαξιολόγηση</option></select>
+      <h3>Πρόταση επόμενης εξάσκησης Mentor</h3><div id="plan-output" class="plan"></div>
+      <h3>Το προσωπικό μου πλάνο</h3><div id="selected-goals-plan" class="study-goals-plan" aria-live="polite"></div>
+      <p class="small muted">Το πλάνο είναι ενδεικτικό. Η ανάγνωση δεν σημαίνει γνώση και η δοκιμαστική αυτοαξιολόγηση δεν αποτελεί επίσημη εξέταση.</p>
     </div>
     <div class="panel"><h3>Υπάρχουσα πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ</h3>
       <p>Ο Mentor δεν αντιγράφει παλαιούς βαθμούς. Μπορείς προαιρετικά να δεις μόνο έναν συνοπτικό αριθμό καταγραφών ανάγνωσης και προσπάθειας.</p>
