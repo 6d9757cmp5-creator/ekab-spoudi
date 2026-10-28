@@ -17,3 +17,22 @@ html[data-theme="dark"] .ai-grading-result small{color:#c5ddea}
 html[data-theme="dark"] .ai-grading-correct{border-left-color:#74d6ae}
 html[data-theme="dark"] .ai-grading-partial{border-left-color:#eac17c}
 html[data-theme="dark"] .ai-grading-incorrect{border-left-color:#f1a0a9}
+
+/* One coherent teaching sequence on mobile, desktop and classroom projectors. */
+.ai-grading-result{font-size:clamp(.94rem,1vw + .66rem,1.04rem);line-height:1.65;padding:clamp(14px,2.8vw,22px)}
+.ai-grading-title{font-size:clamp(1.02rem,1.1vw + .78rem,1.17rem);line-height:1.42;margin-bottom:14px}
+.ai-grading-section{padding:11px 0;border-top:1px solid var(--line,#d7e1ea)}
+.ai-grading-heading{display:block;font-size:.99rem;margin-bottom:5px}
+.ai-grading-section p{margin:4px 0 3px;white-space:pre-wrap;overflow-wrap:break-word}
+.ai-grading-section ul{margin:5px 0 1px;padding-left:22px}
+.ai-grading-reference{padding:12px 14px;border:1px solid #569980;border-radius:9px;background:rgba(35,116,83,.07)}
+.ai-grading-student{opacity:.9}
+.ai-grading-why{font-weight:400}
+.ai-grading-example{border-top-style:dashed}
+.ai-grading-takeaway{padding:10px 13px;border:1px solid #6f91a6;border-radius:9px;margin-top:9px;background:rgba(69,120,153,.07)}
+.ai-grading-warning{border-left:3px solid #ad4850;padding-left:10px;font-weight:600}
+.ai-grading-safety{font-size:.88em}
+html[data-theme="dark"] .ai-grading-section{border-top-color:#42637b}
+html[data-theme="dark"] .ai-grading-reference{background:rgba(73,159,128,.12);border-color:#75bba3}
+html[data-theme="dark"] .ai-grading-takeaway{background:rgba(99,163,207,.11);border-color:#7ca7c1}
+@media (min-width:900px){.ai-grading-result{max-width:1050px}.ai-grading-section{padding:14px 0}}
