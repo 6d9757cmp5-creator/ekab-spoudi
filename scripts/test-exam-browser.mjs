@@ -129,7 +129,7 @@ async function eoppep(){
  assert(el(d,'qtitle').textContent.length>6);
  answer(d,'draft','Εξετάζω την ασφάλεια σκηνής και ακολουθώ την ορθή διαδικασία.');
  b.setMode('incorrect');action(d,'eoppepGradeAI');
- await wait(()=>el(d,'draft').readOnly,'EOPPEP first lock');
+ await wait(()=>el(d,'draft').readOnly&&el(d,'eoppepGradeAI').hidden,'EOPPEP first grade complete');
  assert.equal(el(d,'eoppepGradeAI').hidden,true);
  assert.equal(el(d,'answerPanel').classList.contains('hidden'),false);
  const count=b.calls.length;el(d,'eoppepGradeAI').click();assert.equal(b.calls.length,count);
@@ -137,7 +137,7 @@ async function eoppep(){
  assert.equal(el(d,'draft').readOnly,false);
  answer(d,'draft','Δεν υπάρχουν αρκετά στοιχεία.');
  b.setMode('uncertain');action(d,'eoppepGradeAI');
- await wait(()=>el(d,'draft').readOnly,'EOPPEP uncertain lock');
+ await wait(()=>el(d,'draft').readOnly&&el(d,'eoppepGradeAI').hidden,'EOPPEP uncertain grade complete');
  assert.match(el(d,'eoppepAIResult').textContent,/Χωρίς βαθμολογία/);
  action(d,'prev');assert.equal(el(d,'draft').readOnly,true);
  b.dom.window.close();
