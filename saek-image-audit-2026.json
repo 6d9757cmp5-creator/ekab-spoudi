@@ -10976,17 +10976,36 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπη σχηματική εκπαιδευτική εικόνα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.ems.gov/what-is-ems.html",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
       "caption": "Κεφάλαιο 17-11: σχηματικό πρόσθιο περίγραμμα θώρακα με πλευρές, καρδιά ως σύμβολο και ηλεκτρονικό πιεσόμετρο με σωλήνα/περιχειρίδα (χωρίς κλινική μέτρηση). Τρία βέλη προς τα αντίστοιχα διακριτά αντικείμενα· δεν αποτελεί ανατομική τομή ή οδηγία χρήσης.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "General background context; independent confirmation of clinical details pending."
+        "Thoracic cage anatomy (ribs/sternum), heart location and recognition of an upper-arm blood pressure cuff device. Sources support recognition only; no diagnosis, measurement instructions or Greek clinical protocol."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "2026-10-28 source SVG geometry and label-to-object review: chest clock replaced by anterior thorax/ribs; ECG-like monitor replaced by blood-pressure monitor and cuff. Actual browser/mobile rendering and independent clinical review pending."
+        "date": "2026-10-29",
+        "scope": "Browser screenshot inspection: anterior rib-cage symbol, heart symbol and cuff monitor match their three Greek labels; arrows point to the corresponding panels. Not anatomical illustration or medical certification."
       },
-      "sha256": "9b1f41b0f2ebaf7d1827ed12780e045320b79f31fb797e3dfe68adaa9cc75535"
+      "sha256": "9b1f41b0f2ebaf7d1827ed12780e045320b79f31fb797e3dfe68adaa9cc75535",
+      "sources": [
+        {
+          "title": "OpenStax Anatomy & Physiology 2e, §7.4 The Thoracic Cage",
+          "url": "https://openstax.org/books/anatomy-and-physiology/pages/7-4-the-thoracic-cage",
+          "supports": "The thorax/rib cage consists of ribs and sternum; this is general anatomy, not a patient assessment protocol."
+        },
+        {
+          "title": "OpenStax Anatomy & Physiology 2e, §19.1 Heart Anatomy",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
+          "supports": "The heart is in the thoracic cavity/mediastinum; source supports the recognition symbol only, not diagnosis."
+        },
+        {
+          "title": "American Heart Association, Home Blood Pressure Monitoring",
+          "url": "https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home",
+          "supports": "Identifies an automatic upper-arm cuff monitor; no measurement technique or values are included in the SVG."
+        }
+      ],
+      "sourcePageReviewed": "2026-10-29"
     },
     "sem_d_17_11_points": {
       "filename": "semester-d-17-11-points-el.svg",
@@ -10995,17 +11014,31 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπη σχηματική εκπαιδευτική εικόνα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.ems.gov/what-is-ems.html",
+      "page": "https://www.nhs.uk/tests-and-treatments/electrocardiogram/",
       "caption": "Κεφάλαιο 17-11: ΗΚΓ, σχηματικό παλμικό οξύμετρο δακτύλου (χωρίς κλινικές μετρήσεις) και ρολόι. Ελληνικές ονομασίες και βέλη προς τα αντίστοιχα διακριτά αντικείμενα.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "General background context; independent confirmation of clinical details pending."
+        "ECG as recording of electrical activity; pulse oximeter as a fingertip clip device. Clock is an ordinary timekeeping symbol in the simulation, not a timing threshold. No results, thresholds or patient-care instructions are represented."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Έλεγχος SVG κώδικα 28/10/2026: αντικαταστάθηκε το παραπλανητικό ECG-like icon του οξυμέτρου από σχηματική συσκευή δακτύλου με οθόνη SpO₂, και το βέλος της ετικέτας μετακινήθηκε στο κάτω περίγραμμα της συσκευής. Εκκρεμεί browser/mobile rendering και ανεξάρτητη κλινική επαλήθευση."
+        "date": "2026-10-29",
+        "scope": "Browser screenshot inspection: ECG monitor, fingertip SpO₂ symbol and clock match Greek labels; arrows terminate at the corresponding symbols. SpO₂ letters are visible. Not a clinical monitor trace or diagnostic instruction."
       },
-      "sha256": "3eedd88f1a6b59668b5543440ff49a16434ac289383074a97ae36a869eb84208"
+      "sha256": "3eedd88f1a6b59668b5543440ff49a16434ac289383074a97ae36a869eb84208",
+      "sources": [
+        {
+          "title": "NHS, Electrocardiogram (ECG)",
+          "url": "https://www.nhs.uk/tests-and-treatments/electrocardiogram/",
+          "supports": "ECG records heart electrical activity; supports the ECG recognition icon, not interpretation."
+        },
+        {
+          "title": "FDA, Pulse Oximeter Basics",
+          "url": "https://www.fda.gov/consumers/consumer-updates/pulse-oximeter-basics",
+          "supports": "Describes the fingertip clip-on pulse oximeter and its estimated oxygen/pulse readings; the image deliberately shows no readings or use instructions."
+        }
+      ],
+      "sourcePageReviewed": "2026-10-29"
     },
     "sem_d_17_11_extra": {
       "filename": "semester-d-17-11-extra-el.svg",
