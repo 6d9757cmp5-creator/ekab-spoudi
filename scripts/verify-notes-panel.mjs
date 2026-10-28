@@ -94,7 +94,7 @@ const progress=fs.readFileSync('progress.js','utf8');
 assert(progress.includes("NOTES='ekab.personal-notes.v1'"));
 assert(progress.includes("k!==NOTES")); // Old backup restore cannot silently erase newer notes.
 const upd=fs.readFileSync('updates.js','utf8');
-assert(upd.includes("notes-panel.js?v=27.1.111"));
+assert(upd.includes("notes-panel.js?v=27.1.113"));
 const sw=fs.readFileSync('sw.js','utf8');
 for(const name of ['notes-store.js','notes-panel.js','notes-panel.css'])assert(sw.includes('"./'+name+'"'));
 console.log('PASS: 247 SAEK SOS + 314 EOPPEP SOS, independent notebook search, note validation, migration, cloud round-trip, dual-device conflicts, explicit deletion, legacy backup preservation and offline assets.');
