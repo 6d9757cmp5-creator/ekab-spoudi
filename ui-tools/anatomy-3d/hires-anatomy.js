@@ -175,17 +175,80 @@ function list(){
  el.append(doc);
  if(filtered.length>maxItems){const tip=document.createElement('p');tip.className='empty';tip.textContent='Εμφανίζονται οι πρώτες '+maxItems+' δομές. Αναζήτησε το συγκεκριμένο σημείο για περισσότερα.';el.append(tip);}
 }
-function setMode(mode){requestedFocus=null;ui.mode=mode;ui.system='all';ui.selected=null;ui.isolate=false;setControls();describeSelected();list();updateScene();if(ui.quiz)nextQuiz()}
-function setSystem(system){requestedFocus=null;ui.system=system;ui.selected=null;ui.isolate=false;setControls();describeSelected();list();updateScene();if(ui.quiz)nextQuiz()}
-function setTab(which){ui.tab=which;const isQuiz=which==='quiz';$('explorePanel').hidden=isQuiz;$('quizPanel').hidden=!isQuiz;$('exploreTab').setAttribute('aria-selected',String(!isQuiz));$('quizTab').setAttribute('aria-selected',String(isQuiz));list()}
+function setMode(mode){requestedFocus=null;if(ui.quiz)resetQuiz();ui.mode=mode;ui.system='all';ui.selected=null;ui.isolate=false;setControls();describeSelected();list();updateScene();if(ui.quiz)nextQuiz()}
+function setSystem(system){requestedFocus=null;if(ui.quiz)resetQuiz();ui.system=system;ui.selected=null;ui.isolate=false;setControls();describeSelected();list();updateScene();if(ui.quiz)nextQuiz()}
+function setTab(which){if(which==='explore'&&ui.quiz)resetQuiz();ui.tab=which;const isQuiz=which==='quiz';$('explorePanel').hidden=isQuiz;$('quizPanel').hidden=!isQuiz;$('exploreTab').setAttribute('aria-selected',String(!isQuiz));$('quizTab').setAttribute('aria-selected',String(isQuiz));list()}
 function choose(id){const p=partsById.get(id);if(!validPart(p))return;if(ui.quiz&&!ui.answered){answer(id);return}ui.selected=id;selectedPartIndex=p._index;describeSelected();list();updateScene();focusPart(p)}
 function chooseSex(sex){if(ui.sex===sex)return;ui.sex=sex;ui.system='all';ui.selected=null;ui.isolate=false;ui.quiz=false;ui.answered=false;resetQuiz();setControls();describeSelected();loadModel()}
 function updateScene(){if(!renderer)return;const filter=ui.system;for(const item of meshChunks){item.visible=systemVisible(item.userData.system)||ui.isolate&&(selectedPartIndex!==-1);const m=item.material;const isSkin=item.userData.system==='integumentary';m.transparent=isSkin||ui.mode==='both'&&item.userData.system==='skeletal';m.opacity=isSkin?ui.opacity:(ui.mode==='both'&&item.userData.system==='skeletal'?.62:1);m.depthWrite=!m.transparent;m.needsUpdate=true;if(m.userData.uniforms){m.userData.uniforms.selected.value=selectedPartIndex;m.userData.uniforms.isolate.value=ui.isolate?1:0}}$('isolateBtn').setAttribute('aria-pressed',String(ui.isolate));updateHotspot();requestPaint()}
-function resetQuiz(){ui.quiz=false;ui.answered=false;ui.target=null;ui.score=0;ui.attempts=0;ui.prev=null;$('quizScore').textContent='0';$('quizAttempts').textContent='0';$('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;$('quizFeedback').textContent='';$('quizQuestion').textContent='Βρες την ανατομική δομή';$('quizInstruction').textContent='Επίλεξε το σωστό σημείο στην τρισδιάστατη απεικόνιση ή στη λίστα.'}
-function nextQuiz(){const pool=(atlas?.parts||[]).filter(p=>validPart(p)&&p._loaded&&greekLabel(p.name).indexOf('μετάφραση προς έλεγχο')===-1&&p.id!==ui.prev);if(!pool.length){$('quizQuestion').textContent='Δεν υπάρχουν διαθέσιμες δομές για εξάσκηση';$('quizFeedback').textContent='Επίλεξε άλλο σύστημα ή περίμενε να φορτωθεί το μοντέλο.';ui.quiz=false;return}
-const p=pool[Math.floor(Math.random()*pool.length)];ui.quiz=true;ui.target=p.id;ui.prev=p.id;ui.answered=false;ui.selected=null;selectedPartIndex=-1;$('quizQuestion').textContent='Βρες: '+greekLabel(p.name);$('quizInstruction').textContent='Πάτησε τη δομή στο μοντέλο ή διάλεξε το σωστό όνομα.';$('quizFeedback').textContent='';$('quizFeedback').className='quiz-feedback';$('quizStart').hidden=true;$('quizStop').hidden=false;$('quizNext').hidden=true;updateScene();list()}
-function answer(id){if(!ui.quiz||ui.answered)return;ui.answered=true;ui.attempts++;const ok=id===ui.target;if(ok)ui.score++;$('quizAttempts').textContent=ui.attempts;$('quizScore').textContent=ui.score;const p=partsById.get(ui.target);$('quizFeedback').className='quiz-feedback '+(ok?'good':'bad');$('quizFeedback').textContent=ok?'Σωστά! '+greekLabel(p.name):'Λάθος. Σωστή απάντηση: '+greekLabel(p.name);$('quizNext').hidden=false;ui.selected=ui.target;selectedPartIndex=p._index;describeSelected();updateScene();focusPart(p)}
-function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{if(!ui.selected){$('detailName').textContent='Πρώτα επίλεξε μια δομή';return}ui.isolate=!ui.isolate;updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
+function resetQuiz(){
+ ui.quiz=false;ui.answered=false;ui.target=null;ui.score=0;ui.attempts=0;ui.prev=null;
+ selectedPartIndex=-1;
+ $('quizScore').textContent='0';$('quizAttempts').textContent='0';
+ $('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;
+ $('quizOptions').replaceChildren();$('quizOptions').hidden=true;$('quizSee3D').hidden=true;
+ $('quizFeedback').textContent='';$('quizFeedback').className='quiz-feedback';
+ $('quizQuestion').textContent='Αναγνώρισε ένα σημείο στο 3D';
+ $('quizInstruction').textContent='Απάντησε σε τέσσερις επιλογές με ελληνικές ονομασίες.';
+ updateScene();
+}
+function quizPool(){
+ const unique=new Map();
+ for(const p of atlas?.parts||[]){
+  if(!validPart(p)||!p._loaded||!eligibleQuizName(p.name,p.system))continue;
+  const name=anatomicalGreek(p.name);
+  if(!unique.has(name))unique.set(name,p);
+ }
+ return [...unique.values()];
+}
+function shuffled(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function nextQuiz(){
+ const pool=quizPool();
+ if(pool.length<4){
+  ui.quiz=false;
+  $('quizQuestion').textContent='Δεν υπάρχουν ακόμη τέσσερα κατάλληλα σημεία';
+  $('quizFeedback').textContent='Περίμενε να ολοκληρωθεί η φόρτωση ή επίλεξε σκελετό / όργανα με περισσότερες ελληνικές ονομασίες.';
+  $('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;
+  $('quizOptions').hidden=true;$('quizSee3D').hidden=true;return;
+ }
+ const available=pool.filter(p=>p.id!==ui.prev);
+ const p=available[Math.floor(Math.random()*available.length)]||pool[0];
+ const alternatives=shuffled(pool.filter(x=>x.id!==p.id)).slice(0,3);
+ const choices=shuffled([p,...alternatives]);
+ ui.quiz=true;ui.target=p.id;ui.prev=p.id;ui.answered=false;ui.selected=null;
+ selectedPartIndex=p._index;
+ $('quizQuestion').textContent='Ποια δομή φωτίζεται με πράσινο στο 3D;';
+ $('quizInstruction').textContent='Δες το φωτισμένο σημείο και διάλεξε τη σωστή ελληνική ονομασία.';
+ $('quizFeedback').textContent='';$('quizFeedback').className='quiz-feedback';
+ $('quizStart').hidden=true;$('quizStop').hidden=false;$('quizNext').hidden=true;
+ $('quizSee3D').hidden=false;
+ const box=$('quizOptions');box.replaceChildren();box.hidden=false;
+ for(const choice of choices){
+  const button=document.createElement('button');button.type='button';
+  button.className='quiz-choice';button.textContent=anatomicalGreek(choice.name);
+  button.dataset.partId=choice.id;
+  button.addEventListener('click',()=>answer(choice.id));box.append(button);
+ }
+ describeSelected();updateScene();focusPart(p);
+}
+function answer(id){
+ if(!ui.quiz||ui.answered)return;
+ ui.answered=true;ui.attempts++;
+ const ok=id===ui.target;if(ok)ui.score++;
+ $('quizAttempts').textContent=ui.attempts;$('quizScore').textContent=ui.score;
+ const correct=partsById.get(ui.target);
+ $('quizFeedback').className='quiz-feedback '+(ok?'good':'bad');
+ $('quizFeedback').textContent=ok?'Σωστά! '+anatomicalGreek(correct.name):'Η σωστή απάντηση είναι: '+anatomicalGreek(correct.name);
+ for(const button of $('quizOptions').querySelectorAll('button')){
+  button.disabled=true;
+  if(button.dataset.partId===ui.target)button.classList.add('correct');
+  else if(button.dataset.partId===id)button.classList.add('incorrect');
+ }
+ $('quizNext').hidden=false;
+ ui.selected=ui.target;selectedPartIndex=correct._index;
+ describeSelected();updateScene();
+}
+function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{if(!ui.selected){$('detailName').textContent='Πρώτα επίλεξε μια δομή';return}ui.isolate=!ui.isolate;updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)){e.preventDefault();$('anatomySearch').focus()}if(e.target===$('anatomyViewport')){const keys={ArrowLeft:[-.12,0],ArrowRight:[.12,0],ArrowUp:[0,-.12],ArrowDown:[0,.12]};const v=keys[e.key];if(v){e.preventDefault();orbit.az+=v[0];orbit.polar=Math.min(Math.PI-.05,Math.max(.05,orbit.polar+v[1]));cameraMove()}}});
 resetQuiz();setControls();describeSelected();list();configureLessonReturn()}
 function resetCamera(){orbit.az=0;orbit.polar=Math.PI/2;orbit.r=3.7;orbit.y=.85;cameraMove()}
