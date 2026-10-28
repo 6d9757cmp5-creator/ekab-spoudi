@@ -51,7 +51,8 @@ test('server controls reference; user cannot override it',async()=>setup(async()
   assert.equal(body.temperature,0);assert.match(body.messages[0].content,/ασαφής/);
   return response(grade);
  };
- assert.equal((await invoke({...answer,reference:'forged'},'reference')).body.verdict,'correct');
+ const result=await invoke({...answer,reference:'forged'},'reference');
+ assert.equal(result.body.verdict,'correct');assert.equal(result.body.provider,'openrouter');
 }));
 test('seminar_case uses controlled scenario reference',async()=>setup(async()=>{
  globalThis.fetch=async(url,opt)=>{const input=JSON.parse(JSON.parse(opt.body).messages[1].content);assert.match(input.section,/Κλινικό σενάριο/);return response(grade);};
@@ -63,7 +64,7 @@ test('429 switches once to free-only fallback with zero price constraint',async(
   assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');const request=JSON.parse(opt.body);
   assert.deepEqual(request.provider.max_price,{prompt:0,completion:0,request:0});assert.equal(request.provider.allow_fallbacks,false);return response(grade);
  };
- assert.equal((await invoke(answer,'fallback')).status,200);assert.equal(calls,2);
+ const result=await invoke(answer,'fallback');assert.equal(result.status,200);assert.equal(result.body.provider,'openrouter');assert.equal(calls,2);
 }));
 test('all unavailable never returns fabricated grade or calls paid OpenAI',async()=>setup(async()=>{
  let calls=0;globalThis.fetch=async url=>{assert.ok(!url.includes('api.openai.com'));calls++;return {ok:false,status:429};};
