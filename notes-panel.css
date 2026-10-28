@@ -1,0 +1,92 @@
+/* Floating notebook: independent from the global content search. */
+.ekab-notes-fab{position:fixed!important;right:18px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:1150;
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:48px;padding:11px 16px;
+ border:1px solid #a8d7ea;border-radius:999px;background:#165a7d;color:#fff;
+ box-shadow:0 8px 26px #0b324b48;font:700 .87rem/1.2 system-ui,-apple-system,Segoe UI,sans-serif;
+ cursor:pointer;touch-action:manipulation}
+.ekab-notes-fab:hover{background:#104760;box-shadow:0 10px 28px #0b324b55}
+.ekab-notes-fab:focus-visible,.ekab-notes-dialog button:focus-visible,.ekab-notes-dialog input:focus-visible,
+.ekab-notes-dialog textarea:focus-visible,.ekab-notes-dialog select:focus-visible,
+.ekab-notes-dialog a:focus-visible{outline:3px solid #efb74c;outline-offset:2px}
+.ekab-notes-dialog{position:fixed;inset:auto 18px calc(76px + env(safe-area-inset-bottom,0px)) auto;
+ margin:0;width:min(440px,calc(100vw - 30px));max-width:none;max-height:min(78dvh,720px);
+ padding:0;border:1px solid #afcbdc;border-radius:20px;overflow:hidden;
+ color:#1d3748;background:#fff;box-shadow:0 22px 70px #0a243d63;
+ font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.ekab-notes-dialog::backdrop{background:#0b26375e}
+.ekab-notes-shell{display:flex;flex-direction:column;max-height:min(78dvh,720px);min-height:200px}
+.ekab-notes-head{display:flex;justify-content:space-between;align-items:start;gap:14px;padding:16px 17px 12px;
+ background:#e9f5fb;border-bottom:1px solid #cadee8}
+.ekab-notes-head h2{font-size:1.12rem;line-height:1.25;margin:0;color:#123d55}
+.ekab-notes-head p{margin:5px 0 0;font-size:.76rem;color:#42657a;line-height:1.35}
+#ekabNotesClose{font:inherit;font-size:1rem;min-width:40px;min-height:40px;border:1px solid #bfd4e2;border-radius:12px;
+ background:#fff;color:#1d4962;cursor:pointer}
+#ekabNotesBrowse{padding:0 16px 15px;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.ekab-notes-controls{padding:14px 0 7px}
+.ekab-notes-controls label,.ekab-notes-editor label{display:block;font-size:.8rem;font-weight:700;margin-bottom:7px;color:#284b60}
+.ekab-notes-dialog input,.ekab-notes-dialog textarea,.ekab-notes-dialog select{
+ box-sizing:border-box;display:block;width:100%;min-height:44px;padding:10px 12px;
+ border:1px solid #bed5e0;border-radius:11px;background:#fff;color:#172d3a;
+ font:inherit;font-size:.92rem;line-height:1.4}
+.ekab-notes-dialog textarea{resize:vertical;min-height:146px}
+.ekab-notes-tabs{display:grid;grid-template-columns:1.2fr .8fr .55fr;gap:6px;margin:11px 0}
+.ekab-notes-tabs button{font:700 .78rem/1.25 inherit;min-height:42px;border-radius:10px;
+ background:#edf4f7;color:#204961;border:1px solid #cfe1ea;padding:8px 5px;cursor:pointer}
+.ekab-notes-tabs button[aria-pressed="true"]{background:#165a7d;border-color:#165a7d;color:#fff}
+.ekab-notes-new,.ekab-notes-more{font:700 .84rem/1.2 inherit;min-height:43px;padding:9px 12px;
+ border-radius:11px;border:1px solid #b5d9e9;background:#e9f5fa;color:#145b7d;cursor:pointer}
+.ekab-notes-new{width:100%}
+.ekab-notes-status{font-size:.78rem;color:#527083;margin:7px 0 9px}
+.ekab-notes-results{display:flex;flex-direction:column;gap:9px}
+.ekab-note-card{padding:12px 13px;border:1px solid #d7e4eb;border-radius:13px;background:#fafcfe;
+ display:flex;flex-direction:column;gap:6px}
+.ekab-note-meta{font-size:.72rem;font-weight:650;color:#497489}
+.ekab-note-title{font-size:.91rem;color:#153e57;line-height:1.3}
+.ekab-note-preview{margin:0;color:#334e5c;font-size:.84rem;line-height:1.55;white-space:pre-wrap;
+ overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+.ekab-note-actions{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
+.ekab-note-actions button,.ekab-note-actions a{
+ display:inline-flex;align-items:center;justify-content:center;min-height:36px;
+ padding:7px 10px;font:650 .76rem/1.2 inherit;cursor:pointer;text-decoration:none;
+ border:1px solid #b7d7e5;border-radius:9px;background:#eff7fb;color:#175270}
+.ekab-notes-more{width:100%;margin-top:12px}
+.ekab-note-empty{color:#577282;font-size:.88rem;padding:15px 6px}
+.ekab-notes-fine{font-size:.74rem;color:#647887;line-height:1.5;margin:14px 0 0}
+.ekab-notes-editor{padding:17px;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+.ekab-notes-editor h3{margin:0 0 14px;color:#173f58;font-size:1.04rem}
+.ekab-notes-editor input,.ekab-notes-editor select,.ekab-notes-editor textarea{margin-bottom:12px}
+#ekabNotesEditStatus{min-height:1em;font-size:.79rem;color:#a13b2c}
+.ekab-notes-editor-actions{display:flex;gap:9px;flex-wrap:wrap}
+.ekab-notes-editor-actions button{flex:1 1 auto;min-height:44px;padding:9px 13px;border-radius:11px;
+ border:1px solid #b7d7e5;background:#f0f7fb;color:#174e6c;font:700 .85rem/1.3 inherit;cursor:pointer}
+.ekab-notes-editor-actions .ekab-notes-save{background:#166487;border-color:#166487;color:#fff}
+#ekabNotesRemove{border-color:#e8bdb7;background:#fff5f3;color:#a13b2c}
+.ekab-notes-chapter{display:inline-flex;align-items:center;min-height:36px;margin:4px 0 8px;
+ padding:6px 11px;border:1px solid #c7dfea;border-radius:10px;background:#eef7fb;
+ color:#185876;font:650 .77rem/1.25 system-ui,-apple-system,Segoe UI,sans-serif;
+ cursor:pointer;touch-action:manipulation}
+.ekab-notes-chapter:hover{background:#e3f1f8}
+html[data-theme="dark"] .ekab-notes-dialog{background:#13283a;color:#e6f3fa;border-color:#365c74}
+html[data-theme="dark"] .ekab-notes-head{background:#1b3d53;border-color:#34566b}
+html[data-theme="dark"] .ekab-notes-head h2,html[data-theme="dark"] .ekab-note-title,
+html[data-theme="dark"] .ekab-notes-editor h3{color:#edf8ff}
+html[data-theme="dark"] .ekab-notes-head p,html[data-theme="dark"] .ekab-note-meta,
+html[data-theme="dark"] .ekab-notes-status{color:#b0d0e2}
+html[data-theme="dark"] .ekab-note-card{background:#1b364b;border-color:#33566b}
+html[data-theme="dark"] .ekab-note-preview,html[data-theme="dark"] .ekab-notes-fine{color:#c2dbe8}
+html[data-theme="dark"] .ekab-notes-controls label,html[data-theme="dark"] .ekab-notes-editor label{color:#d8eaf5}
+html[data-theme="dark"] .ekab-notes-dialog input,html[data-theme="dark"] .ekab-notes-dialog textarea,
+html[data-theme="dark"] .ekab-notes-dialog select{background:#1b3448;border-color:#44667a;color:#edf8ff}
+html[data-theme="dark"] .ekab-notes-tabs button:not([aria-pressed="true"]),
+html[data-theme="dark"] .ekab-note-actions a,html[data-theme="dark"] .ekab-note-actions button,
+html[data-theme="dark"] .ekab-notes-new,html[data-theme="dark"] .ekab-notes-more{background:#24485d;color:#e5f3fc;border-color:#456e84}
+html[data-theme="dark"] .ekab-notes-chapter{background:#214a61;color:#e0f1f8;border-color:#497389}
+@media(max-width:600px){
+ .ekab-notes-fab{right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:11px 14px;min-height:46px}
+ .ekab-notes-dialog{inset:auto 0 0 0;width:100%;max-width:none;max-height:88dvh;
+  border-radius:20px 20px 0 0;border-left:none;border-right:none;border-bottom:none}
+ .ekab-notes-shell{max-height:88dvh;padding-bottom:env(safe-area-inset-bottom,0px)}
+ .ekab-notes-tabs button{font-size:.73rem}
+ .ekab-notes-head{padding:13px 15px 11px}
+}
+@media(prefers-reduced-motion:reduce){.ekab-notes-fab{transition:none}}

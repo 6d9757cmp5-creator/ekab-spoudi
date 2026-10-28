@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.110', $=id=>document.getElementById(id);
+const CURRENT='27.1.111', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
@@ -10,6 +10,13 @@ if(!document.querySelector('link[data-ekab-global-tools]')){
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
  const script=document.createElement('script');script.src='global-tools.js?v=27.1.97';script.dataset.ekabGlobalTools='';document.head.append(script);
+}
+
+/* Independent floating notebook: private notes and SOS only, never global search. */
+if(!document.querySelector('script[data-ekab-notes-panel]')){
+ const css=document.createElement('link');css.rel='stylesheet';css.href='notes-panel.css?v=27.1.111';css.dataset.ekabNotesPanel='css';document.head.append(css);
+ const script=document.createElement('script');script.type='module';script.src='notes-panel.js?v=27.1.111';
+ script.dataset.ekabNotesPanel='js';document.head.append(script);
 }
 
 /* Focus-aware time recording runs only on educational pages. */
