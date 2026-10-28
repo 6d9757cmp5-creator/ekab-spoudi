@@ -1,1 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d"><title id="t">Αερισμός, διάχυση και μεταφορά αερίων — αναγνώριση σημείων</title><desc id="d">Τρεις ονομασμένες εικόνες με βέλος σε κάθε αντίστοιχο αντικείμενο: Κυψελίδα, Τριχοειδές, Οξυγόνο. Απλοποιημένο σχήμα αναγνώρισης.</desc><defs><marker id="arr" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker></defs><rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="113" fill="#347e75"/><text x="555" y="30" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#ffffff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 09</text><text x="555" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="23" fill="#ffffff" font-weight="720" text-anchor="middle">Αερισμός, διάχυση και μεταφορά αερίων</text><circle cx="197" cy="299" r="85" fill="#eef4f8" stroke="#347e75" stroke-width="2.4"/><g transform="translate(197 299)" fill="none" stroke="#347e75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="-57" y="-45" width="114" height="90" rx="18"/><circle r="19"/><path d="M-34-23h23m23 0h23m-69 46h23m23 0h23"/></g><path d="M197 478L197 361" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/><rect x="48" y="487" width="298" height="93" rx="17" fill="#ffffff" stroke="#347e75" stroke-width="2"/><text x="197" y="526" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#253f52" font-weight="700" text-anchor="middle">Κυψελίδα</text><circle cx="553" cy="303" r="85" fill="#eef4f8" stroke="#347e75" stroke-width="2.4"/><g transform="translate(553 303)" fill="none" stroke="#347e75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><rect x="-57" y="-45" width="114" height="90" rx="18"/><circle r="19"/><path d="M-34-23h23m23 0h23m-69 46h23m23 0h23"/></g><path d="M553 478L553 365" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/><rect x="404" y="487" width="298" height="93" rx="17" fill="#ffffff" stroke="#347e75" stroke-width="2"/><text x="553" y="526" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#253f52" font-weight="700" text-anchor="middle">Τριχοειδές</text><circle cx="909" cy="299" r="85" fill="#eef4f8" stroke="#347e75" stroke-width="2.4"/><g transform="translate(909 299)" fill="none" stroke="#347e75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle r="55"/><path d="M-35 11h17l10-27 17 48 10-20h19"/></g><path d="M909 478L909 361" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/><rect x="760" y="487" width="298" height="93" rx="17" fill="#ffffff" stroke="#347e75" stroke-width="2"/><text x="909" y="526" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" fill="#253f52" font-weight="700" text-anchor="middle">Οξυγόνο</text></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d">
+<title id="t">Αερισμός, κυψελιδική διάχυση και μεταφορά οξυγόνου</title>
+<desc id="d">Τρία διακριτά στάδια: ο αερισμός ανανεώνει τον αέρα στις κυψελίδες, το οξυγόνο περνά από την κυψελίδα στο τριχοειδές ενώ το διοξείδιο του άνθρακα κινείται αντίθετα, και η αιμοσφαιρίνη των ερυθρών αιμοσφαιρίων μεταφέρει το μεγαλύτερο μέρος του οξυγόνου.</desc>
+<defs>
+<marker id="teal" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker>
+<marker id="oxygen" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c94f46"/></marker>
+<marker id="carbon" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#467ca7"/></marker>
+</defs>
+<rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="108" fill="#347e75"/>
+<text x="555" y="30" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#fff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 09</text>
+<text x="555" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="23" fill="#fff" font-weight="720" text-anchor="middle">Από τον αερισμό στη μεταφορά οξυγόνου</text>
+<g fill="#fff" stroke="#cad8e0" stroke-width="2"><rect x="32" y="137" width="332" height="420" rx="18"/><rect x="389" y="137" width="332" height="420" rx="18"/><rect x="746" y="137" width="332" height="420" rx="18"/></g>
+<g font-family="DejaVu Sans,Arial,sans-serif" fill="#253f52" text-anchor="middle"><text x="198" y="177" font-size="18" font-weight="700">1 · Κυψελιδικός αερισμός</text><text x="555" y="177" font-size="18" font-weight="700">2 · Διάχυση αερίων</text><text x="912" y="177" font-size="18" font-weight="700">3 · Μεταφορά O₂ στο αίμα</text></g>
+<!-- panel 1: airway, alveolus, ventilation -->
+<path d="M198 208V257Q198 275 183 286" fill="none" stroke="#8ca7b4" stroke-width="22" stroke-linecap="round"/>
+<path d="M198 208V259" fill="none" stroke="#347e75" stroke-width="5" marker-end="url(#teal)"/>
+<path d="M183 286Q162 289 148 308M183 286Q172 312 170 331M183 286Q197 301 209 320" fill="none" stroke="#8ca7b4" stroke-width="5" stroke-linecap="round"/>
+<g fill="#e6f3f6" stroke="#5d9cad" stroke-width="3"><circle cx="145" cy="329" r="27"/><circle cx="190" cy="344" r="30"/><circle cx="232" cy="324" r="26"/></g>
+<path d="M253 269V222" fill="none" stroke="#467ca7" stroke-width="4" marker-end="url(#carbon)"/>
+<text x="198" y="399" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Ανανέωση αέρα στις κυψελίδες</text>
+<path d="M100 438H296" stroke="#d5e0e6" stroke-width="2"/>
+<text x="198" y="470" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Ο αέρας κινείται προς/από τις κυψελίδες.</text>
+<text x="198" y="496" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Η ροή του αέρα είναι ο αερισμός.</text>
+<!-- panel 2 alveolus-capillary membrane -->
+<path d="M453 247Q555 195 657 247V305Q555 350 453 305Z" fill="#e6f3f6" stroke="#5d9cad" stroke-width="3"/>
+<text x="555" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Κυψελίδα</text>
+<path d="M442 354Q478 329 514 354T586 354T658 354V390Q622 414 586 390T514 390T442 390Z" fill="#f4d9d7" stroke="#b95b55" stroke-width="3"/>
+<text x="555" y="438" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Πνευμονικό τριχοειδές</text>
+<path d="M515 302V347" fill="none" stroke="#c94f46" stroke-width="5" marker-end="url(#oxygen)"/>
+<text x="489" y="326" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#9d3e38" text-anchor="end">O₂</text>
+<path d="M594 349V307" fill="none" stroke="#467ca7" stroke-width="5" marker-end="url(#carbon)"/>
+<text x="618" y="332" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#356785">CO₂</text>
+<path d="M430 464H680" stroke="#d5e0e6" stroke-width="2"/>
+<text x="555" y="490" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Τα αέρια διαχέονται σε αντίθετες</text>
+<text x="555" y="514" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">κατευθύνσεις στη μεμβράνη.</text>
+<!-- panel 3 erythrocyte and hemoglobin oxygen transport -->
+<ellipse cx="845" cy="300" rx="49" ry="37" fill="#f2c7c3" stroke="#b95b55" stroke-width="4"/>
+<ellipse cx="845" cy="300" rx="23" ry="13" fill="#e6a7a2" stroke="#b95b55" stroke-width="2"/>
+<text x="845" y="355" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Ερυθρό αιμοσφαίριο</text>
+<g fill="#f6e3aa" stroke="#b38c36" stroke-width="2"><circle cx="941" cy="260" r="13"/><circle cx="980" cy="290" r="13"/><circle cx="941" cy="324" r="13"/><circle cx="1007" cy="350" r="13"/></g>
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="11" fill="#6f5525" text-anchor="middle"><text x="941" y="264">O₂</text><text x="980" y="294">O₂</text><text x="941" y="328">O₂</text><text x="1007" y="354">O₂</text></g>
+<path d="M954 300H899" fill="none" stroke="#c94f46" stroke-width="4" marker-end="url(#oxygen)"/>
+<text x="970" y="395" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Η αιμοσφαιρίνη</text>
+<text x="970" y="417" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">δεσμεύει O₂</text>
+<path d="M784 452H1040" stroke="#d5e0e6" stroke-width="2"/>
+<text x="912" y="481" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Μεταφέρει το μεγαλύτερο μέρος</text>
+<text x="912" y="505" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">του οξυγόνου στο αίμα.</text>
+<rect x="103" y="576" width="904" height="34" rx="11" fill="#eef4f8"/>
+<text x="555" y="598" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#435c6d" text-anchor="middle">Αερισμός ≠ διάχυση ≠ μεταφορά αερίων. Σχηματική εκπαιδευτική εικόνα, όχι υπό κλίμακα.</text>
+</svg>
