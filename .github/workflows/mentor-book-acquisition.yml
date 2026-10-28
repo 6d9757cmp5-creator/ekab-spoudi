@@ -1,0 +1,23 @@
+name: Mentor book acquisition (review artifact only)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download official WisTech Open XHTML export
+        run: node mentor/library/download-open-book.mjs mentor-book-artifact
+      - name: Archive downloaded book for human review (not website publication)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-wistech-emr-unreviewed
+          path: mentor-book-artifact/
+          retention-days: 30
+          if-no-files-found: error
