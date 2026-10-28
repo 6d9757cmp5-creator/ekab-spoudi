@@ -26,3 +26,7 @@ The text files preserve `source_id`, `source_url`, `section`, `id`, `review_stat
 The Mentor is an educational AI tutor with evidence-backed, source-linked clinical reasoning in emergency and prehospital medicine, not a qualified clinician. Future work: Greek terminology, medical source review, secure deployment and dedicated retrieval gateway; never silently alter existing grades or student progress. Exclude molecular/basic research unrelated to emergencies.
 
 **IMPORTANT**: This is a public review branch. Do not merge into `main` or deploy a user-facing AI that relies on unreviewed text. Keep edition, original publisher credit and license conditions in downstream use.
+
+## Έλεγχος ετοιμότητας δημοσίευσης — 29/10/2026
+
+Το `review-readiness.mjs` δημιουργεί ειλικρινή **τεχνική απογραφή** πηγών και εκκρεμοτήτων. Διακρίνει τις επτά πράγματι εξαγμένες πηγές από τις μη εισαγμένες και δεν παρουσιάζει ούτε τις επτά ούτε τα υπόλοιπα βιβλία ως κλινικά ελεγμένα. Ελέγχει ότι υπάρχουν χωριστές καταστάσεις ανθρώπινης επιστημονικής επιμέλειας, αδειών δημοσίευσης και παραγωγικής σύνδεσης. Η επιτυχία του CI σημαίνει ότι ο έλεγχος εκτελέστηκε, **όχι ότι ολοκληρώθηκε η επιστημονική έγκριση**. Οι τιμές μητρώου απαιτούν ανεξάρτητη εξακρίβωση· δεν υποκαθιστούν ανθρώπινο reviewer. Οι εξαγωγές παραμένουν αποκλειστικά σε review branch και δεν συνδέονται στην εφαρμογή παραγωγής.
