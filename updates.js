@@ -101,7 +101,7 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).h
   config.onload=()=>{
    if(document.querySelector('script[src*="saek-course-series.js"]'))return;
    const player=document.createElement('script');
-   player.src=new URL('./saek-course-series.js?v=27.1.90',document.baseURI).href;
+   player.src=new URL('./saek-course-series.js?v=27.1.96-ai-review',document.baseURI).href;
    player.dataset.saekSeriesAuto='player';
    document.body.append(player);
   };
