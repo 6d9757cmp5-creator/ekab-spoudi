@@ -1,6 +1,6 @@
 /* ΕΚΑΒ Σπουδή — original schematic 3D anatomy lab.
    The geometric models are simplified teaching aids, not diagnostic anatomy.
-   This module NEVER reads/writes learner progress, score or localStorage.
+   This module NEVER reads/writes learner progress, score or browser storage.
    three.js is MIT licensed; pinned module version for reproducibility. */
 const THREE_URL='https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
 const $=id=>document.getElementById(id);
