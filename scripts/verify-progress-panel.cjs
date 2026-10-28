@@ -32,6 +32,10 @@ const collect=node=>[node,...node.children.filter(x=>x instanceof Node).flatMap(
 const texts=()=>collect(root).map(n=>n.textContent).filter(Boolean);
 assert.ok(texts().includes('ΣΑΕΚ'));
 assert.ok(texts().includes('ΕΟΠΠΕΠ'));
+assert.ok(!texts().includes('BLS / AED')); // seminar details hidden by default
+const open=collect(root).find(n=>n.textContent==='Αναλυτική πρόοδος →');
+assert.ok(open);
+open.handlers.click();
 assert.ok(texts().includes('BLS / AED')); // seminar started by practice alone
 assert.ok(texts().includes('1%')||texts().includes('2%')); // independent exam coverage
 const btn=collect(root).find(n=>n.tag==='button'&&n.textContent.includes('Μηδενισμός'));
