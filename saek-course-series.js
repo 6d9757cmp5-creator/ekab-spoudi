@@ -1,13 +1,41 @@
 /* EKAB Spoudi: εκπαιδευτικό βίντεο ανά μάθημα με οριζόντια διαδοχικά μέρη. */
-(function(){
+(async function(){
   'use strict';
   const matched=window.location.pathname.match(/saek-course-(\d+)\.html$/);
   const courseId=matched?.[1]||'01';
   const course=window.EKAB_COURSE_VIDEO_SERIES?.[courseId];
   const intro=document.querySelector('main.reader-main > section.panel');
   if(!intro||!course||!Array.isArray(course.parts)||!course.parts.length)return;
-  const parts=course.parts.filter(p=>typeof p.url==='string'&&/^https:\/\/scrimba\.com\/explain\//.test(p.url));
-  if(!parts.length)return;
+  // An entry in the video catalogue is NOT an approval.
+  // Never construct playable iframes without an independent-AI report and human sign-off.
+  let registry;
+  try{
+    const response=await fetch('./saek-video-approvals.json',{cache:'no-store'});
+    if(!response.ok)throw Error('Approval registry unavailable');
+    registry=await response.json();
+    if(registry.schemaVersion!==1||!registry.approved)throw Error('Invalid registry');
+  }catch{registry={approved:{}}}
+  const matching=course.parts.filter(p=>typeof p.url==='string'&&/^https:\/\/scrimba\.com\/explain\//.test(p.url));
+  const parts=matching.filter(p=>{
+    const id=courseId+'-'+String(p.chapter).padStart(2,'0');
+    const approval=registry.approved[id];
+    return approval?.status==='approved'&&approval.url===p.url&&
+      typeof approval.videoSha256==='string'&&/^[a-f0-9]{64}$/.test(approval.videoSha256)&&
+      typeof approval.approvedBy==='string'&&typeof approval.clinicalReviewer==='string'&&Boolean(approval.reportPath);
+  });
+  if(!parts.length){
+    const message=document.createElement('section');
+    message.className='panel saek-series-review-pending';
+    message.setAttribute('role','status');
+    const heading=document.createElement('h2');
+    heading.textContent='Εκπαιδευτικά βίντεο — σε έλεγχο';
+    const detail=document.createElement('p');
+    detail.textContent='Τα βίντεο του μαθήματος δεν εμφανίζονται ακόμη επειδή δεν υπάρχει ολοκληρωμένη ανεξάρτητη AI αξιολόγηση και ανθρώπινη έγκριση. Η γραπτή θεωρία είναι διαθέσιμη.';
+    message.append(heading,detail);
+    intro.insertAdjacentElement('afterend',message);
+    return;
+  }
+
 
   const section=document.createElement('section');
   section.className='panel saek-series';
