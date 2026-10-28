@@ -74,7 +74,8 @@
  </section>
  <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικό σενάριο">
  <p class="eyebrow" id="seminarOralCounter"></p><button type="button" class="btn secondary" id="seminarRestartOral" hidden>Νέος κύκλος 12 σεναρίων</button><h3 id="seminarOralTitle"></h3><p id="seminarOralCase" class="seminar-feedback"></p>
- <label for="seminarOralNotes">Οι ενέργειές σου, βήμα προς βήμα</label><textarea id="seminarOralNotes" rows="6" maxlength="3500" placeholder="Περιέγραψε ασφάλεια σκηνής, αρχική εκτίμηση, σωστή σειρά ενεργειών, επανεκτίμηση και παράδοση — όπου απαιτούνται."></textarea>
+ <label for="seminarOralNotes">Οι ενέργειές σου, βήμα προς βήμα</label><textarea id="seminarOralNotes" rows="6" maxlength="3500" autocomplete="off" placeholder="Περιέγραψε ασφάλεια σκηνής, αρχική εκτίμηση, σωστή σειρά ενεργειών, επανεκτίμηση και παράδοση — όπου απαιτούνται."></textarea>
+ <button type="button" class="btn secondary compact" id="seminarRestoreOralDraft" hidden>Επαναφορά αποθηκευμένου πρόχειρου</button>
  <p class="seminar-fineprint">Η αξιολόγηση εξετάζει την ασφάλεια, τη σωστή σειρά ενεργειών και τα κρίσιμα λάθη. Μετά την υποβολή η απάντηση κλειδώνει. Απαιτούνται σύνδεση και Internet.</p>
  <button type="button" class="btn" id="seminarScenarioSubmit">Υποβολή αξιολόγησης</button>
  <p id="seminarScenarioStatus" class="seminar-state" role="status" aria-live="polite"></p>
@@ -91,5 +92,5 @@
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα · Δεν απονέμει πιστοποίηση · Οι εκπαιδευτικές ασκήσεις δεν αντικαθιστούν πρακτική εκπαίδευση ή τοπικά πρωτόκολλα.</footer>
 </main>
 <script src="ai-grading-config.js?v=27.1.82"></script><script src="ai-grading-client.js?v=grading-compact-lock-1"></script>
-<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=scenario-cycle-4"></script><script src="updates.js?v=27.1.82" defer></script>
+<script src="seminar-tracks.js?v=mcq-1"></script><script src="seminar-prep.js?v=scenario-empty-drafts-1"></script><script src="updates.js?v=27.1.82" defer></script>
 </body></html>
