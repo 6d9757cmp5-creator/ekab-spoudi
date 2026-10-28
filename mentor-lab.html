@@ -18,7 +18,7 @@
 </header>
 <main id="main" class="layout">
   <section class="hero" aria-labelledby="welcome">
-    <div><p class="eyebrow">Πρώτη δοκιμαστική υλοποίηση · Foundation v0.1</p>
+    <div><p class="eyebrow">Πρώτη δοκιμαστική υλοποίηση · Foundation v0.2</p>
       <h1 id="welcome">Ο προσωπικός σου εκπαιδευτής</h1>
       <p>Ξεκίνα μια ελεγχόμενη αποστολή, δες πού χρειάζεσαι επανάληψη και οργάνωσε τη δική σου εκπαιδευτική πορεία.</p>
     </div>
@@ -35,6 +35,15 @@
   </nav>
   <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
   <section id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
+<section class="module-select" aria-label="Επιλογή εργαστηρίου">
+      <p class="eyebrow">Εκπαιδευτικά εργαστήρια</p>
+      <div class="mode-buttons" role="group" aria-label="Τύπος αποστολής">
+        <button type="button" class="mode-choice" id="mode-ekab" data-mode="ekab" aria-pressed="true">🚑 ΕΚΑΒ Live</button>
+        <button type="button" class="mode-choice" id="mode-mci" data-mode="mci" aria-pressed="false">🚨 Πολλαπλοί εμπλεκόμενοι</button>
+        <button type="button" class="mode-choice" id="mode-equipment" data-mode="equipment" aria-pressed="false">🧰 Εργαστήριο εξοπλισμού</button>
+      </div>
+    </section>
+    <div id="module-ekab">
     <div class="section-heading"><div><h2>ΕΚΑΒ Live · Αποστολές</h2><p>Επιλογές με προβλέψιμη εξέλιξη, χωρίς τυχαίες ιατρικές αποφάσεις.</p></div></div>
     <div id="case-list" class="case-grid" aria-label="Δοκιμαστικά περιστατικά"></div>
     <article class="mission" id="mission-card" aria-live="polite">
@@ -56,10 +65,49 @@
         <button type="button" class="action secondary" id="restart">Ξεκίνα νέα αποστολή</button>
       </div>
     </article>
+    </div>
+    <div id="module-mci" hidden>
+      <div class="section-heading"><div><h2>Μαζικό συμβάν · Εργαστήριο καταγραφής</h2>
+        <p>Πολλαπλοί εμπλεκόμενοι, καταμέτρηση και συντονισμός. Δεν πρόκειται ακόμη για ιατρική διαλογή ή χρωματική ταξινόμηση.</p></div></div>
+      <div class="case-grid" id="mci-picker" aria-label="Εκπαιδευτικά μαζικά συμβάντα"></div>
+      <article class="mission" id="mci-board">
+        <div class="mission-head"><div><p class="eyebrow">Συνθετικό συμβάν · εκκρεμεί κλινικός έλεγχος</p>
+          <h3 id="mci-title">Επίλεξε συμβάν</h3></div><span class="step-counter" id="mci-count">0 / 4</span></div>
+        <p class="case-context" id="mci-description">Επίλεξε ένα συμβάν για να δεις όλους τους αναφερόμενους εμπλεκόμενους.</p>
+        <div id="mci-people" class="people-grid" aria-label="Συνθετικοί εμπλεκόμενοι"></div>
+        <div id="mci-stage" hidden><div class="divider"></div><p class="eyebrow" id="mci-stage-title"></p>
+          <h4 id="mci-question"></h4><div id="mci-actions" class="choices"></div></div>
+        <div id="mci-feedback" class="feedback" hidden role="status" aria-live="polite"></div>
+        <div id="mci-done" hidden class="activity-done"><h4>Ολοκληρώθηκε η καταγραφή</h4>
+          <p>Εξασκήθηκες στην αναγνώριση όλων των αναφερόμενων ατόμων και στη δομημένη επικοινωνία. Δεν αποδόθηκαν κλινικές προτεραιότητες.</p>
+          <button id="mci-restart" type="button" class="action secondary">Νέο συμβάν</button></div>
+      </article>
+    </div>
+    <div id="module-equipment" hidden>
+      <div class="section-heading"><div><h2>Equipment Lab · Αναγνώριση εξοπλισμού</h2>
+        <p>Τρεις διαδραστικές εκπαιδευτικές κάρτες. Δεν αποτελούν εγχειρίδιο χρήσης, πραγματική προσομοίωση συσκευής ή πιστοποίηση.</p></div></div>
+      <div class="case-grid" id="equipment-picker" aria-label="Εκπαιδευτικές κάρτες συσκευών"></div>
+      <article class="mission" id="equipment-board">
+        <div class="mission-head"><div><p class="eyebrow">Σχηματική κάρτα · όχι πραγματική συσκευή</p>
+          <h3 id="equipment-title">Επίλεξε συσκευή</h3></div><span class="step-counter" id="equipment-count">0 / 3</span></div>
+        <p class="case-context" id="equipment-description">Επίλεξε μια κάρτα για τη θεωρητική αναγνώριση του εξοπλισμού.</p>
+        <div id="equipment-visual" class="device-placeholder" hidden aria-label="Σχηματική εκπαιδευτική κάρτα"></div>
+        <div id="equipment-stage" hidden><div class="divider"></div><p class="eyebrow" id="equipment-stage-title"></p>
+          <h4 id="equipment-question"></h4><div id="equipment-actions" class="choices"></div></div>
+        <div id="equipment-feedback" class="feedback" hidden role="status" aria-live="polite"></div>
+        <div id="equipment-done" hidden class="activity-done"><h4>Ολοκλήρωσες την εκπαιδευτική κάρτα</h4>
+          <p>Αναγνώρισες τον σκοπό, την ανάγκη εκπαίδευσης και τις αρχές επικοινωνίας. Η πραγματική χρήση απαιτεί πιστοποιημένη πρακτική εκπαίδευση.</p>
+          <button id="equipment-restart" type="button" class="action secondary">Νέα προσπάθεια</button></div>
+      </article>
+    </div>
   </section>
   <section id="panel-memory" role="tabpanel" aria-labelledby="tab-memory" hidden>
     <div class="section-heading"><div><h2>Μνήμη μάθησης</h2><p>Μόνο οι δοκιμαστικές δραστηριότητες του Mentor. Καμία αλλαγή σε βαθμούς.</p></div></div>
     <div class="stats"><div><small>Συνεδρίες</small><strong id="sessions-count">0</strong></div><div><small>Ολοκληρωμένες αποστολές</small><strong id="completed-count">0</strong></div><div><small>Επιλογές για επανάληψη</small><strong id="review-count">0</strong></div></div>
+    <div class="stats stats-secondary"><div><small>Συμβάντα με πολλούς εμπλεκόμενους</small><strong id="mci-sessions">0</strong></div>
+    <div><small>Κάρτες εξοπλισμού</small><strong id="equipment-sessions">0</strong></div>
+    <div><small>Ολοκληρωμένες νέες ασκήσεις</small><strong id="extra-completed">0</strong></div></div>
+    <p class="muted small">Κάθε δραστηριότητα καταγράφεται μόνο ως εκπαιδευτική προσπάθεια Mentor. Όχι επίσημη βαθμολόγηση.</p>
     <div class="panel"><h3>Αξιολόγηση εξάσκησης ανά δεξιότητα</h3><div id="competency-list"></div><p class="muted small">Μια σωστή επιλογή σε δοκιμαστικό σενάριο δεν ισοδυναμεί με κατάκτηση ικανότητας.</p></div>
     <div class="panel"><h3>Ιδιωτικότητα και προσωπικά δεδομένα</h3><p id="privacy-text">Τα δεδομένα Mentor διατηρούνται μόνο σε αυτή τη συσκευή, σε ξεχωριστή αποθήκευση. Δεν συγχρονίζονται με τον λογαριασμό σου.</p>
       <div class="toolbar"><button type="button" class="action secondary" id="export-mentor">Εξαγωγή Mentor</button><button type="button" class="action danger" id="clear-mentor">Διαγραφή δοκιμών Mentor</button></div>
@@ -78,9 +126,9 @@
       <div id="legacy-result" class="legacy-result" aria-live="polite"></div>
     </div>
     <div class="panel"><h3>Επόμενα εργαστήρια</h3><div class="roadmap">
-      <span>3D Ανατομία</span><span>ECG Intelligence Lab</span><span>Ιατρική ομάδα AI</span><span>Πολλαπλοί τραυματίες</span><span>Εξοπλισμός</span><span>Προφορικές εξετάσεις</span>
-    </div><p class="muted small">Οι παραπάνω ενότητες είναι σχεδιασμένες για μελλοντικά στάδια· δεν είναι ακόμη ενεργές.</p></div>
+      <span>3D Ανατομία</span><span>ECG Intelligence Lab</span><span>Ιατρική ομάδα AI</span><span>Εγκεκριμένη κλινική διαλογή (εκκρεμεί)</span><span>Προχωρημένη προσομοίωση συσκευών (εκκρεμεί)</span><span>Προφορικές εξετάσεις</span>
+    </div><p class="muted small">Οι παραπάνω προηγμένες ενότητες δεν είναι ακόμη ενεργές. Οι νέες βασικές κάρτες πολλαπλών εμπλεκομένων και εξοπλισμού βρίσκονται στην «Αποστολή».</p></div>
   </section>
-  <footer>MENTOR OS · Δοκιμή προσομοίωσης v0.1 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
+  <footer>MENTOR OS · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
 </main>
 </body></html>
