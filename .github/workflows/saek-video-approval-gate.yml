@@ -30,3 +30,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/validate-saek-video-publication.mjs
+      - run: node scripts/test-saek-video-gate.mjs
