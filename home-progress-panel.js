@@ -9,7 +9,7 @@ const load=key=>{try{const item=JSON.parse(localStorage.getItem(key)||'{}');retu
 const validId=id=>/^EOP-([AB])-(\d{3})$/.test(id)&&Number(id.slice(6))>0&&Number(id.slice(6))<=(id[4]==='A'?105:209);
 const countOf=(values,max)=>new Set((Array.isArray(values)?values:[]).filter(n=>Number.isInteger(n)&&n>=0&&n<max)).size;
 const score=([a,b])=>b?Math.round(100*a/b):null;
-let expanded=null,reset=null,message='';
+let expanded=null,reset=null,message='',panelOpen=false;
 function clock(seconds){if(!seconds)return '—';const m=Math.floor(seconds/60),h=Math.floor(m/60);return h?h+'ω'+(m%60?' '+(m%60)+'λ':''):(m||1)+'λ';}
 function times(id){
  let theory=0,exam=0;try{
@@ -79,7 +79,22 @@ async function clearSection(id){
  }catch{reset=null;message='Ο μηδενισμός ή η αποθήκευσή του δεν ολοκληρώθηκε. Έλεγξε το αντίγραφο ασφαλείας.';render();}
 }
 function render(){
- const rows=stats();root.replaceChildren();const title=$('div','progress-panel-header');
+ const rows=stats();root.replaceChildren();
+ const compact=$('div','progress-panel-compact');
+ const heading=$('div','progress-panel-compact-heading');
+ heading.append($('strong','','Πρόοδος'));
+ const toggle=action(panelOpen?'Κλείσιμο ανάλυσης ↑':'Αναλυτική πρόοδος →',()=>{panelOpen=!panelOpen;reset=null;render();},'progress-panel-compact-toggle');
+ heading.append(toggle);compact.append(heading);
+ const summary=$('div','progress-panel-compact-summary');
+ for(const item of rows.filter(x=>x.id==='saek'||x.id==='eoppep')){
+  const part=$('div','progress-panel-compact-course');
+  part.append($('strong','',item.label));
+  const metrics=$('span','',item.studyPct+'% μελέτη · '+item.examPct+'% εξάσκηση');
+  part.append(metrics);summary.append(part);
+ }
+ compact.append(summary);root.append(compact);
+ if(!panelOpen)return;
+ const title=$('div','progress-panel-header');
  title.append($('h2','','Πρόοδος'),$('span','','Μελέτη / Εξάσκηση'));root.append(title);
  if(message)root.append($('p','progress-panel-notice',message));
  const main=$('div','progress-panel-list'),firstSem=rows.findIndex(x=>x.id!=='saek'&&x.id!=='eoppep');
