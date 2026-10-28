@@ -1,0 +1,21 @@
+/* Απινιδωτής / χάρτης Κρήτης — περιορισμένο στην contacts.html */
+.aed-help-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:15px 0}
+.aed-help-row .btn{white-space:normal;text-align:center;min-height:44px}
+.aed-poster{margin:16px 0 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg)}
+.aed-poster-head{background:#24653f;color:#fff;display:flex;align-items:center;gap:15px;padding:20px clamp(15px,3vw,27px)}
+.aed-poster-icon{flex:none;width:64px;height:64px;display:grid;place-items:center;border:2px solid #fff;border-radius:15px;font-size:27px;line-height:1}
+.aed-poster-head h3{color:#fff;margin:0 0 4px;font-size:clamp(1.25rem,2.2vw,1.8rem)}
+.aed-poster-head p{color:#fff;margin:0;font-size:.86rem;line-height:1.5}
+.aed-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:13px;background:#e7eaeb;color:#1e2c35}
+.aed-step{background:#fff;border:1px solid #d3dcdb;border-radius:11px;padding:14px;min-width:0}
+.aed-step-num{display:inline-grid;place-items:center;background:#b32f39;color:#fff;width:28px;height:28px;border-radius:50%;font-size:.8rem;font-weight:800;margin-bottom:7px}
+.aed-step h4{font-size:.94rem;margin:3px 0 7px;color:#24313a;line-height:1.4}
+.aed-step p{font-size:.8rem;line-height:1.55;color:#415360;margin:0}
+.aed-poster figcaption{font-size:.75rem;line-height:1.5;color:var(--muted);padding:11px 14px;border-top:1px solid var(--line)}
+.aed-map-frame{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--bg);margin:15px 0}
+.aed-map-frame iframe{display:block;width:100%;height:clamp(410px,62vh,680px);border:0;background:#f3f6f8}
+.aed-caution{font-size:.83rem;line-height:1.55;margin-top:13px}
+.aed-map-attribution{font-size:.78rem;margin-top:11px}
+html[data-theme="dark"] .aed-poster figcaption{background:#1c3544;color:#cee0e9}
+@media(max-width:730px){.aed-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.aed-steps{grid-template-columns:1fr;gap:8px}.aed-poster-head{padding:16px}.aed-poster-icon{width:48px;height:48px;font-size:21px}.aed-map-frame iframe{height:470px}}
