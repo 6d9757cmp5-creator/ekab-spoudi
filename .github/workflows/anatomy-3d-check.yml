@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: JavaScript syntax
         run: node --check ui-tools/anatomy-3d/anatomy.js
+          node --check ui-tools/anatomy-3d/hires-anatomy.js
       - name: Verify navigation, semantics, model coverage, and grade isolation
         run: |
           python3 - <<'PY'
@@ -30,7 +31,7 @@ jobs:
           assert all(('data-mode="'+m+'"') in html for m in ('skeleton','organs','both'))
           assert all(('data-sex="'+s+'"') in html for s in ('male','female'))
           assert all(('value="'+s+'"') in html for s in ('skeletal','nervous','respiratory','circulatory','digestive','urinary','reproductive'))
-          assert 'Εκπαιδευτικό σχηματικό 3D' in html
+          assert 'Ανατομικά πλέγματα από ερευνητικές πηγές' in html
           ids=set(re.findall(r'id="([^"]+)"',html))
           used=set(re.findall(r"\$\('([^']+)'\)",js))
           missing=used-ids
@@ -44,6 +45,15 @@ jobs:
           assert not re.search(r'\b(?:localStorage|sessionStorage)\s*(?:\.|\[)',js), 'Storage access not allowed'
           assert 'appwrite' not in js.lower() and 'cloud-sync' not in js
           assert 'three@0.180.0' in js and 'WebGLRenderer' in js
+          real=(root/'hires-anatomy.js').read_text()
+          assert 'src="hires-anatomy.js"' in html
+          assert 'src="anatomy.js"' not in html
+          assert 'expectedParts:2234' in real and 'expectedParts:3004' in real
+          assert 'slorksmo/Human-Atlas@' in real
+          assert 'HiMahendraBeniwal/female-atlas@' in real
+          assert 'function makeGroup' in real and 'function chunkBuffer' in real
+          assert 'function raypick' in real and 'function chooseSex' in real
+          assert 'localStorage.' not in real and 'appwrite.' not in real
           assert '.viewport' in css and '@media(max-width:560px)' in css
           print(f'PASS: {len(atlas)} unique atlas entries, 2 sex presets, 3 views, no grade/storage access')
           PY
