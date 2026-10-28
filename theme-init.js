@@ -13,3 +13,6 @@
  const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='global-tools.css?v=27.1.81';document.head.appendChild(sheet);
  const script=document.createElement('script');script.src='global-tools.js?v=27.1.81';script.async=true;document.head.appendChild(script);
 })();
+
+/* Study continuation works on every SAEK course without editing its lesson content. */
+(function(){const s=document.createElement('script');s.src='continue-study.js?v=1';s.async=true;document.head.appendChild(s)})();
