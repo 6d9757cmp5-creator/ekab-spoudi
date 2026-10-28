@@ -149,6 +149,8 @@ function showHome(){
 function openCourse(id,updateHash=true){
  const course=COURSES.find(c=>c.id===id);if(!course)return;
  stopAuto();selected=course;unit=0;
+ // Opening a course is a fresh visit: prior editable drafts require explicit restoration.
+ for(let i=0;i<12;i++)visibleOralDrafts.delete(oralDraftKey(id,i));
  // Resume at the first unassessed case; reviewing assessed cases keeps their answer read-only.
  oral=Array.from({length:12},(_,i)=>i).find(i=>!progress[id].scenarioGrades[i])??11;
  view='theory';
@@ -484,7 +486,7 @@ function bind(){
    const data=JSON.parse(await file.text());
    if(data?.type!=='ekab-seminar-prep'||data.version!==1||!data.progress||typeof data.progress!=='object')throw Error('Μη αναγνωρισμένο αντίγραφο σεμιναρίων.');
    if(!confirm('Να αντικατασταθεί ΜΟΝΟ η πρόοδος σεμιναρίων αυτής της συσκευής; ΕΟΠΠΕΠ και ΣΑΕΚ δεν επηρεάζονται.'))return;
-   stopAuto();progress=cleanRecord(data.progress);save();
+   stopAuto();visibleOralDrafts.clear();progress=cleanRecord(data.progress);save();
    if(selected)switchView(view);else showHome();
    $('seminarSaveStatus').textContent='Το αντίγραφο προετοιμασίας σεμιναρίων εισήχθη.';
   }catch(error){$('seminarSaveStatus').textContent=error.message||'Αποτυχία εισαγωγής.';}
