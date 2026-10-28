@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - index.html
+      - home.css
+      - saek-course-*.html
       - ui-tools/anatomy-3d/**
       - .github/workflows/anatomy-3d-check.yml
   workflow_dispatch:
@@ -14,8 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: JavaScript syntax
-        run: node --check ui-tools/anatomy-3d/anatomy.js
+        run: |
+          node --check ui-tools/anatomy-3d/anatomy.js
           node --check ui-tools/anatomy-3d/hires-anatomy.js
+          node --check ui-tools/anatomy-3d/saek-jumps.js
       - name: Verify pinned upstream anatomy dataset manifests and binary chunks
         run: python3 ui-tools/anatomy-3d/validate_remote_assets.py
       - name: Verify navigation, semantics, model coverage, and grade isolation
@@ -28,7 +32,11 @@ jobs:
           js=(root/'anatomy.js').read_text()
           css=(root/'anatomy.css').read_text()
           home=Path('index.html').read_text()
-          assert 'href="ui-tools/anatomy-3d/index.html"' in home
+          assert 'home-anatomy-pair' in home
+          assert 'href="ui-tools/anatomy-3d/index.html?mode=skeleton&amp;system=skeletal"' in home
+          assert 'href="ui-tools/anatomy-3d/index.html?mode=organs"' in home
+          assert home.count('home-anatomy-tile ') == 2
+          assert 'saek-skeleton.svg' in home and 'saek-organs.svg' in home
           assert 'Ανδρικό' in html and 'Γυναικείο' in html
           assert all(('data-mode="'+m+'"') in html for m in ('skeleton','organs','both'))
           assert all(('data-sex="'+s+'"') in html for s in ('male','female'))
@@ -56,7 +64,28 @@ jobs:
           assert 'function makeGroup' in real and 'function chunkBuffer' in real
           assert 'function raypick' in real and 'function chooseSex' in real
           assert (root/'validate_remote_assets.py').exists()
+          assert 'id="chapterReturn"' in html
+          assert 'function readDeepLink' in real and 'function focusRequestedStructure' in real
+          assert 'location.search' in real and "requestedFocus" in real
+          assert 'function configureLessonReturn' in real
+          jumps=(root/'saek-jumps.js').read_text()
+          assert "searchParams.set('mode',mode)" in jumps
+          assert "searchParams.set('focus',focus)" in jumps
+          assert "searchParams.set('from',course)" in jumps
+          assert "searchParams.set('chapter',String(chapter))" in jumps
+          assert "localStorage" not in jumps and "fetch(" not in jumps
+          ids=['01','02','05','10','14','17','18']
+          for cid in ids:
+            lesson=Path('saek-course-'+cid+'.html').read_text()
+            assert 'ui-tools/anatomy-3d/saek-jumps.js' in lesson
+            assert 'ui-tools/anatomy-3d/saek-jumps.css' in lesson
+            assert 'read-button' in lesson
+          for cid in ids:
+            assert "'"+cid+"':{" in jumps
+          assert '.saek-anatomy-jump' in (root/'saek-jumps.css').read_text()
           assert 'localStorage.' not in real and 'appwrite.' not in real
           assert '.viewport' in css and '@media(max-width:560px)' in css
+          home_css=Path('home.css').read_text()
+          assert '.home-anatomy-pair{display:grid;grid-template-columns:repeat(2' in home_css
           print(f'PASS: {len(atlas)} unique atlas entries, 2 sex presets, 3 views, no grade/storage access')
           PY
