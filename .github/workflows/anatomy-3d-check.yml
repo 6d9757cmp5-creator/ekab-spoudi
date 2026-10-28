@@ -16,6 +16,8 @@ jobs:
       - name: JavaScript syntax
         run: node --check ui-tools/anatomy-3d/anatomy.js
           node --check ui-tools/anatomy-3d/hires-anatomy.js
+      - name: Verify pinned upstream anatomy dataset manifests and binary chunks
+        run: python3 ui-tools/anatomy-3d/validate_remote_assets.py
       - name: Verify navigation, semantics, model coverage, and grade isolation
         run: |
           python3 - <<'PY'
@@ -53,6 +55,7 @@ jobs:
           assert 'HiMahendraBeniwal/female-atlas@' in real
           assert 'function makeGroup' in real and 'function chunkBuffer' in real
           assert 'function raypick' in real and 'function chooseSex' in real
+          assert (root/'validate_remote_assets.py').exists()
           assert 'localStorage.' not in real and 'appwrite.' not in real
           assert '.viewport' in css and '@media(max-width:560px)' in css
           print(f'PASS: {len(atlas)} unique atlas entries, 2 sex presets, 3 views, no grade/storage access')
