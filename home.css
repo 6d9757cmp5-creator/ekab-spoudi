@@ -210,3 +210,10 @@ html[data-theme="dark"] .study-resume-play{background:#27576f;color:#c7efff}
 @media(prefers-reduced-motion:reduce){.study-resume-link{transition:none}}
 
 /* UI-FASTLANE-SMOKE-20261028: harmless stylesheet-only deployment test. */
+
+/* Compact, two-bar tracker: replaces obsolete PR #24 and #26; no content or counters changed. */
+.home-mini-progress.compact-tracker{margin:4px 0 9px;max-width:440px}
+.compact-tracker #homeMultiTracker>div{margin:6px 0!important}
+.compact-tracker .home-mini-progress-label{font-size:.72rem;margin-bottom:3px;gap:8px}
+.compact-tracker .home-mini-progress-label strong{font-size:.74rem}
+.compact-tracker .home-mini-progress-track{width:min(100%,380px);height:5px}
