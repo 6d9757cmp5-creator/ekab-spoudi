@@ -1,31 +1,39 @@
-# ΕΚΑΒ Σπουδή — 3D Anatomy Lab (δοκιμαστικό PR)
+# ΕΚΑΒ Σπουδή — 3D Anatomy Lab (προσχέδιο PR #86)
 
-## Λειτουργίες
-- Πραγματική διαδραστική 3D σκηνή WebGL με Three.js. Περιστροφή με mouse/touch/πληκτρολόγιο, zoom, πρόσθια/οπίσθια όψη και reset.
-- Πρωτότυπα **σχηματικά** γεωμετρικά μοντέλα κατά την εκτέλεση του JavaScript. Δεν χρησιμοποιούνται κατεβασμένα εμπορικά 3D μοντέλα.
-- Επιλογή Σκελετός / Όργανα / Συνδυασμός, Ανδρικό / Γυναικείο πρότυπο, φιλτράρισμα συστημάτων, αναζήτηση ελληνικών ονομάτων, επιλογή με touch ή λίστα, απομόνωση και περίγραμμα.
-- Ανατομικές περιγραφές στα ελληνικά και αυτοέλεγχος αναγνώρισης **μόνο στην προσωρινή μνήμη της σελίδας**.
-- Δεν διαβάζεται ούτε γράφεται πρόοδος, βαθμολογία, σημειώσεις, cloud ή προσωπικά δεδομένα.
+## Τι υλοποιήθηκε
 
-## Επιστημονική ακρίβεια και περιορισμοί
-Τα δύο πρότυπα είναι ενδεικτικές αναπαραστάσεις της τυπικής ανδρικής / γυναικείας αναπαραγωγικής ανατομίας, όχι ταυτότητες φύλου, και δεν καλύπτουν όλη τη βιολογική ποικιλομορφία. Κοινά όργανα αποδίδονται και στα δύο πρότυπα. Η γυναικεία οστέινη λεκάνη αποδίδεται κατά κανόνα πλατύτερη, χωρίς να θεωρείται απόλυτο διαγνωστικό κριτήριο.
+- Ο νέος **ενεργός** viewer είναι το αρχείο `hires-anatomy.js`, που αντικαθιστά τη χρήση του πρώτου `anatomy.js` στο HTML. Το παλιό σχηματικό αρχείο διατηρείται **μόνο ως ιστορικό prototype**, δεν φορτώνεται.
+- Χρησιμοποιούνται πραγματικά λεπτομερή 3D πλέγματα, **όχι procedural spheres / cylinders** ως ανατομία.
+- Ανδρικός άτλας: **2.234 meshes, 15 συστήματα, BodyParts3D 4.0** με προσαρμογές από το ανοικτό Human-Atlas.
+- Γυναικείος σύνθετος άτλας: **3.004 meshes, 16 συστήματα**. Γυναικεία όργανα HuBMAP Visible Human Female v1.5, με συμπλήρωση ελλειπόντων οστών, μυών, αγγείων κ.ά. από **γεωμετρικά μετασχηματισμένο BodyParts3D ανδρικό**. Δίνει *κάλυψη όλων των συστημάτων*, όχι ανεξάρτητο ανατομικά ακριβές γυναικείο scan όλων των ιστών. Η κατανομή ανά δομή δεν έχει ακόμη επαληθευθεί ανεξάρτητα.
+- Πραγματικό zoom, 360° περιστροφή, front/back, επιλογή δομής με raycasting, απομόνωση (shader ανά vertex), συστήματα, διαφάνεια δέρματος, αναζήτηση και αυτοέλεγχος.
+- Προοδευτική λήψη gzip συμπιεσμένων chunks με pin στα Git commit hashes, συνέπεια πλήθους δομών και έλεγχο ακεραιότητας μήκους bytes, χωρίς ανάγνωση ή τροποποίηση επίδοσης.
+- Ελληνικά labels για βασικούς όρους. Οι άγνωστοι όροι διατηρούνται στα αγγλικά με ένδειξη **«μετάφραση προς έλεγχο»**. Δεν ισχυριζόμαστε ότι οι ~5.000 δομές έχουν ήδη επιστημονικά επικυρωμένη ελληνική απόδοση.
 
-**Απλοποιημένο εκπαιδευτικό σχήμα:** η γεωμετρία ΔΕΝ είναι ιατρικά επικυρωμένο πλέγμα. Δεν επιτρέπεται χρήση για θεραπεία, χειρουργείο, διάγνωση, ακριβείς μετρήσεις ή πλήρη ανατομική αναφορά. Απεικονίζονται επιλεγμένες δομές και οι θέσεις τους κατά προσέγγιση. Οι ουρογεννητικές δομές είναι ενδεικτικές και δεν είναι πλήρης τρισδιάστατη επιστημονική τομή.
+## Δεδομένα / άδειες / επίσημες πηγές
 
-**Πηγές αναφοράς** (δεν αποτελούν πιστοποίηση του μοντέλου):
-- NCBI Bookshelf — https://www.ncbi.nlm.nih.gov/books/NBK545204/
-- Cleveland Clinic — https://my.clevelandclinic.org/health/body/pelvis
-- Ύλη ΣΑΕΚ Ανατομία (στην υπάρχουσα εφαρμογή).
+**Ανδρικό dataset (fixed revision)**
+- Source: https://github.com/slorksmo/Human-Atlas/tree/5bb5713aab18d7fe9380c3339eb09f173491ea06
+- Mesh archive: BodyParts3D 4.0 © DBCLS; προσαρμογή του open-source Human-Atlas.
+- Δεδομένα: CC BY 4.0 σύμφωνα με την τρέχουσα επίσημη ιστοσελίδα DBCLS https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html και την αναφορά Human-Atlas.
+- Source README/credits: https://github.com/slorksmo/Human-Atlas/blob/main/public/ATTRIBUTION.md
 
-## Dependencies και offline
-Η εφαρμογή φορτώνει δυναμικά Three.js έκδοσης 0.180.0 από το CDN jsDelivr. Η Three.js έχει άδεια MIT (https://github.com/mrdoob/three.js/blob/master/LICENSE).
-Η πρώτη φόρτωση απαιτεί σύνδεση και WebGL. Δεν εγγυάται πλήρη λειτουργία offline. Αν αποτύχει η φόρτωση, εμφανίζεται σαφές μήνυμα και παραμένει η λίστα ελληνικών ονομάτων.
-Η εγκατάσταση τοπικού MIT bundle είναι επόμενο στάδιο μετά τον έλεγχο.
+**Γυναικείο σύνθετο dataset (fixed revision)**
+- Source: https://github.com/HiMahendraBeniwal/female-atlas/tree/b0a20fa3a009ca5f6bfa07b7479312e04c862af2
+- Source README/credits: https://github.com/HiMahendraBeniwal/female-atlas/blob/main/public/ATTRIBUTION.md
+- HuBMAP: *3D Reference Organ Set for Female v1.5*, Kristen Browne / Heidi Schlehlein, DOI https://doi.org/10.48539/HBM352.BTSQ.586
+- Skeleton/muscles/vessels filling gaps: BodyParts3D © DBCLS, male source geometries transformed by Mahendra Beniwal in scripts/build-perfect-female-atlas.mjs.
+- Mesh data CC BY 4.0, authorship as above. Viewer code is independent original code, using Three.js MIT.
 
-## Ασφάλεια και έλεγχος πριν από δημοσίευση
-- **Draft Pull Request:** απαραίτητη ανεξάρτητη επιστημονική και οπτική έγκριση, ειδικά για ανατομικές θέσεις, προσανατολισμό και αναπαραγωγικό σύστημα, πριν από οποιαδήποτε δημοσίευση σύμφωνα με AGENTS.md.
-- Η τροποποίηση της αρχικής σελίδας προσθέτει μόνο έναν σύνδεσμο. Δεν μεταβάλλει αποθήκευση, εξετάσεις, βαθμολογία.
-- Εκκρεμεί πραγματικό end-to-end browser QA σε iPhone, Android και desktop. Οι στατικοί έλεγχοι ΔΕΝ συνιστούν πραγματική επικύρωση WebGL.
+**Important:** BOTH datasets are fetched **from third-party pinned jsDelivr GitHub CDN endpoints**. CDN availability, CORS behaviour, and heavy mobile downloads must be tested. They are not hosted or available offline in this repo. Loading the first time costs ~30–60 MB per model, potentially more without supported gzip. Do not claim standalone offline mode.
 
-## Μελλοντικά
-Ανεξάρτητη κλινική επιθεώρηση, εγκεκριμένα λεπτομερή mesh δεδομένα με τεκμηριωμένη πηγή/άδεια, αποκοπή επιπέδων (clipping planes), offline bundle, πραγματικές δοκιμές συσκευών.
+## Pending before production
+
+1. Independent scientific anatomy audit: per-system coverage, provenance for each female mesh, shape / alignment / left-right correctness, actual feminine morphology versus transformed male donor. Use no "100% authentic female" claim.
+2. Live browser tests (iOS Safari, Android, desktop), performance memory and GPU profiling; validate remote CDN fetch and SHA-pinned availability.
+3. Explicit source-level CC BY credit text and full multilingual medical nomenclature review. English text is temporarily flagged.
+4. Basic accessibility keyboard, search and list controls completed; perform real VoiceOver/screen-reader test and device support check.
+5. Add reliable offline bundle only after rights and storage quota review.
+6. Source-appropriate teaching caveats: never present geometry as diagnostic, surgical, or individually representative. No cross-mapped 'same patient' assumptions.
+
+**Merge gate:** leave the PR in DRAFT until scientific and device checks are actually completed in line with AGENTS.md. Existing progress, notes, EOPPEP and scoring code were not modified.
