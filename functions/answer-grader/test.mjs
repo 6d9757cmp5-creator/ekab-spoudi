@@ -91,3 +91,31 @@ test('same user and same submission reuse result, different user does not',async
  const [a,b]=await Promise.all([invoke(answer,'cache'),invoke(answer,'cache')]);assert.deepEqual(a,b);assert.equal(calls,1);
  await invoke(answer,'cache');assert.equal(calls,1);await invoke(answer,'other-cache');assert.equal(calls,2);
 }));
+
+
+test('teaching feedback shows a grounded model answer and example without praising wrong answers',async()=>setup(async()=>{
+ globalThis.fetch=async()=>response({
+  ...grade,verdict:'incorrect',explanation:'Το «αγενής» είναι χαρακτηρισμός.',
+  correctPoints:['Δεν υπήρχε κανένα σωστό στοιχείο'],missingPoints:['Περιέγραψε τι συνέβη.'],
+  modelAnswer:'Αντικειμενικά παρατηρήσιμη συμπεριφορά.',
+  example:'Όχι «αγενής». Γράψε συγκεκριμένα τι έκανε.',takeaway:'Καταγράφουμε γεγονότα.'
+ });
+ const output=await invoke({section:'seminar',courseId:'bls',questionIndex:1,answer:'Ο ασθενής είναι αγενής.'},'teaching');
+ assert.equal(output.status,200);
+ assert.equal(output.body.verdict,'incorrect');
+ assert.deepEqual(output.body.correctPoints,[]);
+ assert.deepEqual(output.body.missingPoints,['Περιέγραψε τι συνέβη.']);
+ assert.equal(output.body.modelAnswer,'Αντικειμενικά παρατηρήσιμη συμπεριφορά.');
+ assert.match(output.body.referenceAnswer,/ασφάλεια/);
+ assert.match(output.body.example,/Όχι/);
+ assert.match(output.body.takeaway,/γεγονότα/);
+}));
+test('correct feedback cannot contain contradictory missing steps; old models still work',async()=>setup(async()=>{
+ globalThis.fetch=async()=>response({...grade,missingPoints:['Λάθος υπόδειξη']});
+ const output=await invoke(answer,'teaching-legacy');
+ assert.equal(output.status,200);
+ assert.equal(output.body.verdict,'correct');
+ assert.deepEqual(output.body.missingPoints,[]);
+ assert.equal(output.body.modelAnswer,'');
+ assert.ok(output.body.referenceAnswer.length>0);
+}));
