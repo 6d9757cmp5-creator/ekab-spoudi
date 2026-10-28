@@ -66,7 +66,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 // Optional cloud setup never blocks the local app or update controls.
 import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=richer-sync-27.1.104', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=richer-sync-27.1.105', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {
