@@ -78,25 +78,65 @@ async function clearSection(id){
   render();
  }catch{reset=null;message='Ο μηδενισμός ή η αποθήκευσή του δεν ολοκληρώθηκε. Έλεγξε το αντίγραφο ασφαλείας.';render();}
 }
+// Keep the home screen short; all existing detail controls live in a separate dialog.
+const detailDialog=$('dialog','progress-detail-dialog');
+detailDialog.id='progressDetailDialog';
+detailDialog.setAttribute('aria-labelledby','progressDetailHeading');
+const detailRoot=$('div','progress-detail-body');
+detailDialog.append(detailRoot);
+document.body.append(detailDialog);
+detailDialog.addEventListener('close',()=>{panelOpen=false;reset=null;expanded=null;render();});
+detailDialog.addEventListener('click',event=>{if(event.target===detailDialog)detailDialog.close();});
+function openDetails(){
+ panelOpen=true;render();
+ if(typeof detailDialog.showModal==='function'&&!detailDialog.open)detailDialog.showModal();
+ else detailDialog.setAttribute('open','');
+}
+function closeDetails(){
+ if(typeof detailDialog.close==='function'&&detailDialog.open)detailDialog.close();
+ else{detailDialog.removeAttribute('open');panelOpen=false;reset=null;expanded=null;render();}
+}
 function render(){
- const rows=stats();root.replaceChildren();
- const compact=$('div','progress-panel-compact');
+ const rows=stats();
+ root.replaceChildren();
+ const compact=$('section','progress-panel-compact');
+ compact.setAttribute('aria-label','Σύνοψη προόδου ΣΑΕΚ και ΕΟΠΠΕΠ');
  const heading=$('div','progress-panel-compact-heading');
- heading.append($('strong','','Πρόοδος'));
- const toggle=action(panelOpen?'Κλείσιμο ανάλυσης ↑':'Αναλυτική πρόοδος →',()=>{panelOpen=!panelOpen;reset=null;render();},'progress-panel-compact-toggle');
+ heading.append($('h2','','Η πρόοδός μου'));
+ const toggle=action('Αναλυτικά ›',openDetails,'progress-panel-compact-toggle');
+ toggle.setAttribute('aria-haspopup','dialog');
+ toggle.setAttribute('aria-controls','progressDetailDialog');
  heading.append(toggle);compact.append(heading);
  const summary=$('div','progress-panel-compact-summary');
  for(const item of rows.filter(x=>x.id==='saek'||x.id==='eoppep')){
   const part=$('div','progress-panel-compact-course');
-  part.append($('strong','',item.label));
-  const metrics=$('span','',item.studyPct+'% μελέτη · '+item.examPct+'% εξάσκηση');
-  part.append(metrics);summary.append(part);
+  part.append($('strong','progress-panel-compact-course-title',item.label));
+  const primary=$('div','progress-panel-mini-primary');
+  primary.append($('strong','progress-panel-mini-value',item.studyPct+'%'),$('span','progress-panel-mini-label','Μελέτη'));
+  part.append(primary);
+  const bar=$('div','progress-panel-mini-dual');
+  bar.setAttribute('role','img');
+  bar.setAttribute('aria-label',item.label+': Μελέτη '+item.studyPct+'%, Εξάσκηση '+item.examPct+'%');
+  for(const [type,value] of [['study',item.studyPct],['exam',item.examPct]]){
+   const half=$('span','progress-panel-mini-half '+type);
+   const fill=$('span','progress-panel-mini-fill');
+   fill.style.width=value+'%';half.append(fill);bar.append(half);
+  }
+  part.append(bar);
+  const practice=$('div','progress-panel-mini-practice');
+  practice.append($('span','','Εξάσκηση'),$('strong','',item.examPct+'%'));
+  part.append(practice);summary.append(part);
  }
  compact.append(summary);root.append(compact);
  if(!panelOpen)return;
- const title=$('div','progress-panel-header');
- title.append($('h2','','Πρόοδος'),$('span','','Μελέτη / Εξάσκηση'));root.append(title);
- if(message)root.append($('p','progress-panel-notice',message));
+ detailRoot.replaceChildren();
+ const title=$('div','progress-panel-dialog-heading');
+ const h2=$('h2','','Αναλυτική πρόοδος');h2.id='progressDetailHeading';
+ const closeButton=action('✕',closeDetails,'progress-panel-dialog-close');
+ closeButton.setAttribute('aria-label','Κλείσιμο αναλυτικής προόδου');
+ title.append(h2,closeButton);
+ detailRoot.append(title);
+ if(message)detailRoot.append($('p','progress-panel-notice',message));
  const main=$('div','progress-panel-list'),firstSem=rows.findIndex(x=>x.id!=='saek'&&x.id!=='eoppep');
  rows.forEach((item,index)=>{
   if(index===firstSem)main.append($('div','progress-panel-group','ΣΕΜΙΝΑΡΙΑ'));
@@ -130,8 +170,8 @@ function render(){
   if(reset?.id===item.id)wrap.append(resetPrompt(item));
   main.append(wrap);
  });
- root.append(main);
- if(!rows.some(x=>Object.hasOwn(seminars,x.id)))root.append($('p','progress-panel-empty','Τα σεμινάρια εμφανίζονται εδώ μόλις ξεκινήσεις θεωρία ή τεστ.'));
+ detailRoot.append(main);
+ if(!rows.some(x=>Object.hasOwn(seminars,x.id)))detailRoot.append($('p','progress-panel-empty','Τα σεμινάρια εμφανίζονται εδώ μόλις ξεκινήσεις θεωρία ή τεστ.'));
 }
 window.addEventListener('pageshow',render);
 window.addEventListener('focus',render);
