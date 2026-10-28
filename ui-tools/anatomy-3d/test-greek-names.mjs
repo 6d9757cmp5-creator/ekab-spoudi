@@ -18,6 +18,16 @@ for(const [en,el] of Object.entries(samples))assert.equal(anatomicalGreek(en),el
 assert.equal(anatomicalGreek('Left sixth rib cartilage'),null,'Never drop anatomical qualifiers');
 assert.equal(anatomicalGreek('Left lower first secondary molar tooth (test suffix)'),samples['Left lower first secondary molar tooth']);
 assert.equal(anatomicalGreek('Unexpected highly specific structure'),null,'Unknown terms must not be invented');
+assert.equal(anatomicalGreek('Right internal iliac vein'),'Δεξιά έσω λαγόνια φλέβα');
+assert.equal(anatomicalGreek('Left lacrimal gland'),'Αριστερός δακρυϊκός αδένας');
+assert.equal(anatomicalGreek('Left cornea'),'Αριστερός κερατοειδής χιτώνας');
+assert.equal(anatomicalGreek('Right iris'),'Δεξιά ίριδα');
+assert.equal(anatomicalGreek('Left renal papilla'),'Αριστερή νεφρική θηλή');
+assert.equal(anatomicalGreek('Left nipple'),'Αριστερή θηλή μαστού');
+assert.equal(anatomicalGreek('Anterior interventricular vein'),'Πρόσθια μεσοκοιλιακή φλέβα');
+assert.equal(anatomicalGreek('Middle part of jejunum'),'Μέσο τμήμα της νήστιδας');
+assert.equal(anatomicalGreek('Minor calyx'),'Ελάσσων νεφρικός κάλυκας');
+
 assert.deepEqual(anatomyName('Untranslated source mesh','skeletal',{skeletal:'Σκελετικό'}),{
  el:null,english:'Untranslated source mesh',label:'Μη μεταφρασμένη δομή',systemName:'Σκελετικό'
 });
