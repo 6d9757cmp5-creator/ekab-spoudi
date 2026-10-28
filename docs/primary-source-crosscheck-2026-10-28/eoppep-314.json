@@ -504,7 +504,24 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "targeted_full_stored_educational_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "comparedClaims": [
+          "Συμπαθητική διέγερση αυξάνει τη συχνότητα με ενεργοποίηση β1-αδρενεργικών υποδοχέων και ενισχύει τη συσταλτικότητα.",
+          "Παρασυμπαθητική διέγερση μέσω πνευμονογαστρικού μειώνει την καρδιακή συχνότητα και την κολποκοιλιακή αγωγή.",
+          "Η αποθηκευμένη εκπαιδευτική απάντηση είναι σύντομη και δεν αποτελεί επίσημο λυσάρι ΕΟΠΠΕΠ."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology"
+        ],
+        "finding": "Αναγνώστηκε η ολόκληρη αποθηκευμένη απάντηση A-011 από το αυθεντικό JSON του project μέσω fetch_blob. Τα αναφερόμενα φυσιολογικά στοιχεία συμφωνούν με OpenStax A&P 2e §19.4, ειδικά υποενότητες Cardiovascular Centers και Contractility.",
+        "limits": "Δεν έγινε επιβεβαίωση έναντι της νεότερης επίσημης τράπεζας ΕΟΠΠΕΠ/επίσημου κλειδιού απαντήσεων. Δεν έγινε δεύτερος ανεξάρτητος επιστημονικός έλεγχος. Όχι τελική πιστοποίηση.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-012",
