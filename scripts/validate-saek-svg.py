@@ -23,7 +23,7 @@ for key, asset in registry.get("assets", {}).items():
         continue
     raw = path.read_bytes()
     # Git stores these text SVGs with LF; normalize Windows CRLF before checking the blob hash.
-    canonical = raw.replace(b"\\r\\n", b"\\n")
+    canonical = raw.replace(bytes((13, 10)), bytes((10,)))
     if hashlib.sha256(canonical).hexdigest() != asset.get("sha256"):
         errors.append(f"{key}: SHA-256 mismatch")
     try:
