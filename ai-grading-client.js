@@ -6,7 +6,8 @@ const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect
 const allowed=new Set(Object.keys(labels));
 const AI_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
 const STUDENT_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
-function available(){return /^[a-zA-Z0-9._-]{3,64}$/.test(window.EkabAIConfig?.functionId||'')}
+function available(){return /^[a-zA-Z0-9._-]{3,64}$/.test(window.EkabAIConfig?.functionId||'')||
+ /^https:\/\/[a-z0-9-]+\.[a-z0-9.-]+\.workers\.dev\/?$/.test(window.EkabAIConfig?.workerUrl||'')}
 async function evaluate(input){
  if(!available())throw new Error('Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη αυτή τη στιγμή. Η απάντηση παραμένει χωρίς βαθμό.');
  if(navigator.onLine===false)throw new Error('Χρειάζεται σύνδεση στο διαδίκτυο για αξιολόγηση AI.');
@@ -14,6 +15,28 @@ async function evaluate(input){
  if(answer.length<3||answer.length>3500)throw new Error('Γράψε μια απάντηση από 3 έως 3500 χαρακτήρες.');
  let client;
  try{({client}=await import('./appwrite-client.js'));}catch{throw new Error('Δεν φορτώθηκε η υπηρεσία λογαριασμού. Δοκίμασε ενημέρωση.');}
+ const workerUrl=window.EkabAIConfig.workerUrl;
+ if(workerUrl){
+  let jwt;
+  try{
+   const {Account}=await import('./vendor/appwrite-29.1.0/account.js');
+   jwt=(await new Account(client).createJWT()).jwt;
+  }catch{throw new Error('Συνδέσου στον λογαριασμό σου για ασφαλή αξιολόγηση AI.');}
+  let response;
+  try{response=await fetch(workerUrl,{method:'POST',headers:{'Content-Type':'application/json','X-Appwrite-JWT':jwt},
+   body:JSON.stringify({...input,answer}),cache:'no-store'});}
+  catch{throw new Error('Δεν ήταν δυνατή η σύνδεση με την υπηρεσία αξιολόγησης. Η απάντησή σου παραμένει στη συσκευή.');}
+  let result;
+  try{result=await response.json();}catch{throw new Error('Η υπηρεσία επέστρεψε μη αναγνωρίσιμη απάντηση.');}
+  if(!response.ok||!allowed.has(result.verdict)){
+   if(result.code==='all_ai_limits')throw new Error(AI_LIMIT_MESSAGE);
+   if(result.code==='student_ai_limit'||response.status===429)throw new Error(STUDENT_LIMIT_MESSAGE);
+   if(response.status===401||response.status===403)throw new Error('Συνδέσου στον λογαριασμό σου για ασφαλή αξιολόγηση AI.');
+   throw new Error(result.error||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντηση παραμένει χωρίς βαθμολογία.');
+  }
+  if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
+  return {...result,studentAnswer:answer};
+ }
  const functionId=window.EkabAIConfig.functionId;
  const url=new URL(client.config.endpoint+'/functions/'+encodeURIComponent(functionId)+'/executions');
  const payload={body:JSON.stringify({...input,answer}),async:false,path:'/',method:'POST',headers:{'content-type':'application/json'}};
@@ -78,3 +101,4 @@ function render(container,result){
 }
 window.EkabAIGrade=Object.freeze({available,evaluate,render,labels});
 })();
+
