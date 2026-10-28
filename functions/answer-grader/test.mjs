@@ -12,9 +12,11 @@ async function setup(run){
  try{await run();}finally{globalThis.fetch=fetch;for(const key of Object.keys(process.env))if(!(key in env))delete process.env[key];Object.assign(process.env,env);}
 }
 const response=data=>({ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify(data)}}]})});
-test('no implicit paid provider; Groq is disabled',()=>{
+test('no implicit paid provider; new free providers require explicit verification',()=>{
  assert.deepEqual(freeProviders({OPENAI_API_KEY:'paid',GROQ_API_KEY:'key'}),[]);
- assert.deepEqual(freeProviders({GROQ_API_KEY:'key',GROQ_FREE_PLAN_CONFIRMED:'true'}),[]);
+ assert.equal(freeProviders({GROQ_API_KEY:'key',GROQ_FREE_PLAN_CONFIRMED:'true'})[0].model,'qwen/qwen3.8-27b');
+ assert.deepEqual(freeProviders({MISTRAL_API_KEY:'key',CEREBRAS_API_KEY:'key'}),[]);
+ assert.deepEqual(freeProviders({GROQ_API_KEY:'key',GROQ_FREE_PLAN_CONFIRMED:'false'}),[]);
 });
 test('OpenRouter rejects paid models and implicit models',()=>{
  for(const model of ['', 'openai/gpt-4o','openai/gpt-oss-20b:free','foo:free:nitro','vendor/model:free'])assert.deepEqual(freeProviders({OPENROUTER_API_KEY:'key',OPENROUTER_FREE_MODEL:model}),[]);
@@ -167,3 +169,4 @@ test('student request limit uses study-theory message and no invented score',asy
  assert.match(final.body.error,/θεωρία/);
  assert.equal(final.body.verdict,undefined);
 }));
+
