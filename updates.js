@@ -1,7 +1,8 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.98', $=id=>document.getElementById(id);
-let registration=null,remoteVersion=null,applying=false;\nconst CHECK_INTERVAL_MS=60000;let lastNotice='';
+const CURRENT='27.1.99', $=id=>document.getElementById(id);
+let registration=null,remoteVersion=null,applying=false;
+const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
