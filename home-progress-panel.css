@@ -175,3 +175,62 @@ html[data-theme="dark"] body:has(.home-main) .study-resume-play{background:#2247
  body:has(.home-main) .study-resume{margin-bottom:9px}
  body:has(.home-main) .study-resume-link{min-height:61px;padding:9px 12px;border-radius:15px}
 }
+
+
+/* Compact "Continue studying" square aligned with the home heading.
+   Presentation only: the resume link and its storage/event logic are unchanged. */
+body:has(.home-main) .home-hero-row{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:clamp(10px,2.5vw,26px);margin:0 0 12px;
+}
+body:has(.home-main) .home-hero-row .home-intro{
+ flex:1 1 auto;min-width:0;margin:0;
+}
+body:has(.home-main) .home-hero-row .study-resume{
+ flex:0 0 148px;width:148px;max-width:148px;margin:0;
+}
+body:has(.home-main) .home-hero-row .study-resume-link{
+ box-sizing:border-box;width:100%;height:148px;min-height:0;
+ padding:11px 12px;border-radius:17px;
+ display:flex;flex-direction:column;align-items:flex-start;
+ justify-content:flex-start;gap:7px;overflow:hidden;
+}
+body:has(.home-main) .home-hero-row .study-resume-play{
+ width:30px;height:30px;min-height:30px;border-radius:9px;font-size:.8rem;
+}
+body:has(.home-main) .home-hero-row .study-resume-copy{
+ flex:1;min-height:0;width:100%;gap:4px;line-height:1.22;
+}
+body:has(.home-main) .home-hero-row .study-resume-caption{
+ font-size:.68rem;line-height:1.2;max-width:100%;overflow:hidden;
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+}
+body:has(.home-main) .home-hero-row .study-resume-copy strong{
+ font-size:.77rem;line-height:1.23;white-space:normal;
+ overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+}
+body:has(.home-main) .home-hero-row .study-resume-arrow{display:none}
+@media(max-width:620px){
+ body:has(.home-main) .home-hero-row{gap:10px;margin-bottom:10px}
+ body:has(.home-main) .home-hero-row .study-resume{flex-basis:130px;width:130px;max-width:130px;margin:0}
+ body:has(.home-main) .home-hero-row .study-resume-link{
+  height:130px;min-height:0;padding:9px 10px;border-radius:15px;gap:6px;
+ }
+ body:has(.home-main) .home-hero-row .study-resume-play{
+  width:27px;height:27px;min-height:27px;
+ }
+ body:has(.home-main) .home-hero-row .study-resume-caption{font-size:.65rem}
+ body:has(.home-main) .home-hero-row .study-resume-copy strong{font-size:.72rem}
+}
+@media(max-width:380px){
+ body:has(.home-main) .home-hero-row .study-resume{flex-basis:116px;width:116px;max-width:116px}
+ body:has(.home-main) .home-hero-row .study-resume-link{
+  height:116px;min-height:0;padding:8px;border-radius:14px;gap:4px;
+ }
+ body:has(.home-main) .home-hero-row .study-resume-play{
+  width:24px;height:24px;min-height:24px;font-size:.68rem;
+ }
+ body:has(.home-main) .home-hero-row .study-resume-copy{gap:3px}
+ body:has(.home-main) .home-hero-row .study-resume-caption{font-size:.61rem}
+ body:has(.home-main) .home-hero-row .study-resume-copy strong{font-size:.68rem}
+}
