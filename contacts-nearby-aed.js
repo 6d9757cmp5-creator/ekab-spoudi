@@ -1,153 +1,204 @@
-/* Optional OpenStreetMap nearby AED discovery. The authoritative map remains apinidotes.crete.gov.gr. */
+/* Official Crete AED positions from Πρόγραμμα ΖΩΗ, not OpenStreetMap AED data. */
 (() => {
   'use strict';
+  const API = 'https://apinidotes-api.crete.gov.gr/apinidotesApi/api/Defibrillators';
   const button = document.getElementById('aedFindNearby');
   const status = document.getElementById('aedNearbyStatus');
-  const mapNode = document.getElementById('aedNearbyMap');
+  const mapElement = document.getElementById('aedNearbyMap');
   const results = document.getElementById('aedNearbyResults');
-  const counter = document.getElementById('aedNearbyCount');
-  if (!button || !status || !mapNode || !results || !counter) return;
-
-  const kmBetween = (a, b, c, d) => {
-    const rad = Math.PI / 180, deltaLat = (c - a) * rad, deltaLon = (d - b) * rad;
-    const h = Math.sin(deltaLat / 2) ** 2 + Math.cos(a * rad) * Math.cos(c * rad) * Math.sin(deltaLon / 2) ** 2;
+  const count = document.getElementById('aedNearbyCount');
+  const radiusSelect = document.getElementById('aedSearchRadius');
+  if (!button || !status || !mapElement || !results || !count) return;
+  const CRETE = { lat: 35.2, lon: 24.9 };
+  const RADIUS = () => Math.max(1, Math.min(50, Number(radiusSelect?.value) || 10));
+  const inCrete = (lat, lon) => lat >= 34.65 && lat <= 36.05 && lon >= 23.1 && lon <= 26.7;
+  const kilometers = (a, b, c, d) => {
+    const radians = Math.PI / 180;
+    const x = (c - a) * radians, y = (d - b) * radians;
+    const h = Math.sin(x / 2) ** 2 +
+      Math.cos(a * radians) * Math.cos(c * radians) * Math.sin(y / 2) ** 2;
     return 12742 * Math.asin(Math.min(1, Math.sqrt(h)));
   };
-  const withinCrete = (lat, lon) => lat >= 34.65 && lat <= 36.05 && lon >= 23.1 && lon <= 26.7;
-  let map, markers, userMarker, lastCoords;
-  const update = (value, danger = false) => {
-    status.textContent = value;
-    status.dataset.error = String(danger);
+  const msg = (s, error = false) => { status.textContent = s; status.dataset.error = String(error); };
+  let map, markerLayer, locationMarker, currentLocation, positions = [];
+  let loaded = false, loading = false;
+
+  const labelFor = item => {
+    for (const raw of [item.position, item.address]) {
+      if (typeof raw === 'string' && raw.trim()) return raw.trim().slice(0, 160);
+    }
+    return 'Σημείο απινιδωτή';
   };
-  const mapReady = () => {
+  const availabilityText = item => {
+    if (item.twentyFourSeven === true) return '24ωρη πρόσβαση σύμφωνα με την καταχώριση';
+    const hours = Array.isArray(item.workingHours) ? item.workingHours : [];
+    const text = hours.filter(x => x && typeof x.day === 'string' &&
+      typeof x.startHour === 'string' && typeof x.endHour === 'string')
+      .slice(0, 7).map(x => x.day.slice(0, 24) + ' ' +
+        x.startHour.slice(0, 5) + '–' + x.endHour.slice(0, 5)).join(' · ');
+    return text || 'Δεν έχει καταχωριστεί συγκεκριμένο ωράριο πρόσβασης';
+  };
+  const directionsURL = (lat, lon) =>
+    'https://www.google.com/maps/dir/?api=1&destination=' +
+    encodeURIComponent(lat + ',' + lon);
+
+  const initMap = () => {
     if (!window.L) {
-      update('Ο χάρτης OpenStreetMap δεν φορτώθηκε. Χρησιμοποίησε τον επίσημο χάρτη πιο πάνω.', true);
+      msg('Δεν φορτώθηκε το υπόβαθρο χάρτη. Χρησιμοποίησε τον επίσημο σύνδεσμο παραπάνω.', true);
       return false;
     }
     if (!map) {
-      map = L.map(mapNode, { zoomControl: true, scrollWheelZoom: false });
+      mapElement.hidden = false;
+      map = L.map(mapElement, { scrollWheelZoom: false, zoomControl: true })
+        .setView([CRETE.lat, CRETE.lon], 9);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+        maxZoom: 19, attribution: '&copy; OpenStreetMap contributors · Θέσεις ΑΕΑ: Περιφέρεια Κρήτης'
       }).addTo(map);
-      markers = L.layerGroup().addTo(map);
+      markerLayer = L.layerGroup().addTo(map);
     }
-    mapNode.hidden = false;
     return true;
   };
-  const render = (lat, lon, aeds) => {
-    if (!mapReady()) return;
-    map.setView([lat, lon], 15);
-    if (userMarker) map.removeLayer(userMarker);
-    userMarker = L.circleMarker([lat, lon], {
-      radius: 10, color: '#ffffff', weight: 3, fillColor: '#167bc4', fillOpacity: 1
-    }).bindPopup('Η θέση σου (κατά προσέγγιση)').addTo(map);
-    markers.clearLayers();
+  function addMarker(item) {
+    const dot = L.circleMarker([item.lat, item.lon], {
+      radius: 7, color: '#fff', weight: 2, fillColor: '#20824e', fillOpacity: 1
+    }).addTo(markerLayer);
+    const wrapper = document.createElement('div');
+    const title = document.createElement('strong');
+    title.textContent = item.label;
+    const address = document.createElement('p');
+    address.textContent = item.address || 'Δεν υπάρχει λεπτομερής διεύθυνση';
+    const hours = document.createElement('p');
+    hours.textContent = item.hours;
+    const link = document.createElement('a');
+    link.textContent = 'Οδηγίες διαδρομής ↗';
+    link.href = directionsURL(item.lat, item.lon);
+    link.rel = 'noopener noreferrer';
+    link.target = '_blank';
+    wrapper.append(title, address, hours, link);
+    dot.bindPopup(wrapper);
+    return dot;
+  }
+  const render = () => {
+    if (!initMap()) return;
+    markerLayer.clearLayers();
     results.replaceChildren();
-    counter.textContent = aeds.length + ' πιθανές καταχωρίσεις σε ακτίνα 5 χλμ. (OpenStreetMap)';
-    for (const aed of aeds.slice(0, 100)) {
-      const dot = L.circleMarker([aed.lat, aed.lon], {
-        radius: 8, color: '#ffffff', weight: 2, fillColor: '#d52e4a', fillOpacity: 1
-      }).addTo(markers);
-      const popup = document.createElement('div');
-      const title = document.createElement('strong');
-      title.textContent = aed.name;
-      const desc = document.createElement('p');
-      desc.textContent = aed.distance.toFixed(2).replace('.', ',') + ' χλμ. σε ευθεία γραμμή · Μη επαληθευμένη διαθεσιμότητα';
-      const directions = document.createElement('a');
-      directions.textContent = 'Οδηγίες διαδρομής ↗';
-      directions.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(aed.lat + ',' + aed.lon);
-      directions.target = '_blank';
-      directions.rel = 'noopener noreferrer';
-      popup.append(title, desc, directions);
-      dot.bindPopup(popup);
+    if (locationMarker) { map.removeLayer(locationMarker); locationMarker = null; }
+    const nearby = currentLocation ? positions.map(item => ({
+      ...item, distance: kilometers(currentLocation.lat, currentLocation.lon, item.lat, item.lon)
+    })).sort((a, b) => a.distance - b.distance) : [];
+    const radius = RADIUS();
+    const chosen = currentLocation
+      ? nearby.filter(item => item.distance <= radius)
+      : positions;
+    for (const item of chosen) addMarker(item);
+    if (currentLocation) {
+      const { lat, lon } = currentLocation;
+      locationMarker = L.circleMarker([lat, lon], {
+        radius: 10, color: '#fff', weight: 3, fillColor: '#147cc6', fillOpacity: 1
+      }).bindPopup('Η θέση σου (κατά προσέγγιση)').addTo(map);
+      map.setView([lat, lon], 14);
+      count.textContent = chosen.length + ' επίσημοι καταχωρισμένοι ΑΕΑ σε ακτίνα ' +
+        radius + ' χλμ. · ' + positions.length + ' διαθέσιμοι και δημόσια προσβάσιμοι στη βάση της Κρήτης.';
+      for (const item of chosen.slice(0, 15)) {
+        const li = document.createElement('li');
+        const title = document.createElement('strong');
+        title.textContent = item.label;
+        const distance = document.createElement('span');
+        distance.textContent = ' · ' + item.distance.toFixed(2).replace('.', ',') +
+          ' χλμ. σε ευθεία · ' + item.hours;
+        const link = document.createElement('a');
+        link.href = directionsURL(item.lat, item.lon);
+        link.textContent = 'Διαδρομή ↗';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        li.append(title, distance, document.createTextNode(' '), link);
+        results.appendChild(li);
+      }
+      msg(chosen.length ?
+        'Βρέθηκαν καταχωρίσεις ΑΕΑ κοντά σου, από το επίσημο Πρόγραμμα ΖΩΗ. Έλεγξε πρόσβαση/ωράριο πριν μετακινηθείς.' :
+        'Δεν βρέθηκε επίσημη διαθέσιμη καταχώριση εντός αυτής της ακτίνας. Αύξησε την απόσταση ή άνοιξε τον επίσημο χάρτη.');
+    } else {
+      map.setView([CRETE.lat, CRETE.lon], 9);
+      count.textContent = positions.length + ' διαθέσιμοι και δημόσια προσβάσιμοι απινιδωτές στην Κρήτη (σύμφωνα με την τελευταία ανάκτηση).';
+      msg('Ο επίσημος χάρτης φορτώθηκε. Επίτρεψε την τοποθεσία για να γίνει ζουμ κοντά σου.');
     }
-    for (const aed of aeds.slice(0, 10)) {
-      const item = document.createElement('li'), strong = document.createElement('strong');
-      strong.textContent = aed.name;
-      const detail = document.createElement('span');
-      detail.textContent = ' · ' + aed.distance.toFixed(2).replace('.', ',') + ' χλμ. ευθεία';
-      const link = document.createElement('a');
-      link.textContent = 'Διαδρομή ↗';
-      link.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(aed.lat + ',' + aed.lon);
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      item.append(strong, detail, document.createTextNode(' '), link);
-      results.appendChild(item);
-    }
-    if (!aeds.length) update('Δεν εντοπίστηκαν καταχωρίσεις OpenStreetMap εντός 5 χλμ. Αυτό ΔΕΝ σημαίνει ότι δεν υπάρχουν επίσημοι ΑΕΑ. Έλεγξε τον χάρτη της Περιφέρειας Κρήτης.');
-    else update('Εντοπίστηκε η θέση σου. Κόκκινα σημεία: πιθανές καταχωρίσεις OpenStreetMap, όχι ο επίσημος κατάλογος του Προγράμματος ΖΩΗ.');
     requestAnimationFrame(() => map.invalidateSize());
   };
 
-  const findNearby = () => {
-    if (!navigator.geolocation) { update('Αυτή η συσκευή δεν προσφέρει εντοπισμό τοποθεσίας. Άνοιξε τον επίσημο χάρτη.', true); return; }
+  const loadPositions = async () => {
+    if (loading) return;
+    loading = true;
+    msg('Ανάκτηση επίσημων σημείων από το Πρόγραμμα ΖΩΗ…');
+    const abort = new AbortController();
+    const timer = setTimeout(() => abort.abort(), 18000);
+    try {
+      const response = await fetch(API, {
+        method: 'GET', mode: 'cors', credentials: 'omit',
+        cache: 'no-store', referrerPolicy: 'no-referrer',
+        signal: abort.signal
+      });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const rows = await response.json();
+      if (!Array.isArray(rows)) throw new Error('Invalid official AED list');
+      const unique = new Map();
+      for (const item of rows) {
+        if (!item || item.availability !== true || item.public !== true) continue;
+        // The provider sets functional=false even for records that it marks as
+        // available. Match its own public list rather than misreading this field.
+        const lat = Number(String(item.latitude ?? '').trim());
+        const lon = Number(String(item.longtitude ?? '').trim());
+        if (!Number.isFinite(lat) || !Number.isFinite(lon) || !inCrete(lat, lon)) continue;
+        const id = String(item.defibrillatorsId ?? lat + ',' + lon);
+        if (unique.has(id)) continue;
+        unique.set(id, {
+          lat, lon, label: labelFor(item),
+          address: typeof item.address === 'string' ? item.address.trim().slice(0, 220) : '',
+          hours: availabilityText(item)
+        });
+      }
+      positions = [...unique.values()];
+      loaded = true;
+      render();
+    } catch (_e) {
+      loaded = false;
+      count.textContent = '';
+      results.replaceChildren();
+      msg('Αδυναμία σύνδεσης με την επίσημη βάση απινιδωτών. Άνοιξε τον χάρτη της Περιφέρειας Κρήτης.', true);
+    } finally {
+      clearTimeout(timer);
+      loading = false;
+    }
+  };
+
+  const locate = () => {
+    if (!navigator.geolocation) {
+      msg('Η συσκευή δεν υποστηρίζει γεωεντοπισμό. Άνοιξε τον επίσημο χάρτη.', true);
+      return;
+    }
     button.disabled = true;
-    update('Εντοπισμός τοποθεσίας…');
-    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
-      const { latitude: lat, longitude: lon } = coords;
-      lastCoords = { lat, lon };
-      if (!withinCrete(lat, lon)) {
-        update('Η θέση φαίνεται εκτός Κρήτης. Για επίσημους απινιδωτές χρησιμοποίησε τον σύνδεσμο της Περιφέρειας.', true);
-        button.disabled = false;
+    msg('Εντοπισμός της θέσης σου…');
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      button.disabled = false;
+      const lat = coords.latitude, lon = coords.longitude;
+      if (!inCrete(lat, lon)) {
+        msg('Η θέση σου φαίνεται εκτός Κρήτης. Εμφανίζονται μόνο τα επίσημα σημεία της Κρήτης.', true);
         return;
       }
-      if (mapReady()) {
-        map.setView([lat, lon], 15);
-        if (userMarker) map.removeLayer(userMarker);
-        userMarker = L.circleMarker([lat, lon], {
-          radius: 10, color: '#ffffff', weight: 3, fillColor: '#167bc4', fillOpacity: 1
-        }).addTo(map);
-        requestAnimationFrame(() => map.invalidateSize());
-      }
-      update('Η θέση σου βρέθηκε. Αναζήτηση σε ανοιχτές, μη επαληθευμένες καταχωρίσεις…');
-      try {
-        const query = '[out:json][timeout:20];(node["emergency"="defibrillator"](around:5000,' + lat + ',' + lon +
-          ');way["emergency"="defibrillator"](around:5000,' + lat + ',' + lon +
-          ');relation["emergency"="defibrillator"](around:5000,' + lat + ',' + lon + '););out center;';
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 20000);
-        let response;
-        try {
-          response = await fetch('https://overpass-api.de/api/interpreter', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-            body: new URLSearchParams({ data: query }),
-            signal: controller.signal,
-            cache: 'no-store'
-          });
-        } finally { clearTimeout(timeout); }
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const data = await response.json();
-        const unique = new Map();
-        for (const element of Array.isArray(data.elements) ? data.elements : []) {
-          const y = Number(element.lat ?? element.center?.lat);
-          const x = Number(element.lon ?? element.center?.lon);
-          if (!Number.isFinite(y) || !Number.isFinite(x) || !withinCrete(y, x)) continue;
-          const distance = kmBetween(lat, lon, y, x);
-          if (distance > 5) continue;
-          const key = y.toFixed(5) + ',' + x.toFixed(5);
-          if (unique.has(key)) continue;
-          const name = (typeof element.tags?.name === 'string' && element.tags.name.trim()) ||
-            (typeof element.tags?.['addr:street'] === 'string' && element.tags['addr:street'].trim()) ||
-            'Απινιδωτής (καταχώριση OpenStreetMap)';
-          unique.set(key, { lat: y, lon: x, distance, name: name.slice(0, 120) });
-        }
-        render(lat, lon, [...unique.values()].sort((a, b) => a.distance - b.distance));
-      } catch (_error) {
-        if (mapReady()) map.setView([lat, lon], 15);
-        results.replaceChildren();
-        counter.textContent = '';
-        update('Η θέση σου εντοπίστηκε, αλλά δεν ήταν δυνατή η ανάκτηση μη επίσημων σημείων. Χρησιμοποίησε τον χάρτη της Περιφέρειας Κρήτης.', true);
-      } finally { button.disabled = false; }
+      currentLocation = { lat, lon };
+      if (loaded) render();
+      else if (!loading) loadPositions();
     }, () => {
       button.disabled = false;
-      update('Δεν δόθηκε άδεια τοποθεσίας ή ο εντοπισμός απέτυχε. Μπορείς πάντα να χρησιμοποιήσεις τον επίσημο χάρτη.', true);
+      msg('Δεν δόθηκε άδεια τοποθεσίας ή ο εντοπισμός απέτυχε. Ο χάρτης παραμένει διαθέσιμος χωρίς GPS.', true);
     }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 120000 });
   };
-  button.addEventListener('click', findNearby);
+  button.addEventListener('click', locate);
+  radiusSelect?.addEventListener('change', () => { if (loaded) render(); });
+  // Only auto-locate with a previously GRANTED permission; never prompt silently.
   if (navigator.permissions?.query) {
     navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-      if (permission.state === 'granted') findNearby();
+      if (permission.state === 'granted') locate();
     }).catch(() => {});
   }
+  loadPositions();
 })();
