@@ -113,7 +113,9 @@ function render(){
  const aggregate=(numerator,denominator)=>{
   const done=rows.reduce((total,item)=>total+item[numerator],0);
   const available=rows.reduce((total,item)=>total+item[denominator],0);
-  return available?Math.round(100*done/available):0;
+  if(!available||!done)return 0;
+  const percentage=100*done/available;
+  return percentage<1?Math.round(percentage*10)/10:Math.round(percentage);
  };
  const summary=$('div','progress-panel-compact-summary');
  for(const [type,label,value] of [
@@ -122,7 +124,7 @@ function render(){
  ]){
   const metric=$('div','progress-panel-total-metric '+type);
   const text=$('div','progress-panel-total-label');
-  text.append($('span','',label),$('strong','',value+'%'));
+  text.append($('span','',label),$('strong','',String(value).replace('.',',')+'%'));
   metric.append(text);
   const track=$('div','progress-panel-total-track');
   track.setAttribute('role','progressbar');
