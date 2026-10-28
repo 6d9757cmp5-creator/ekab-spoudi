@@ -289,12 +289,20 @@ function repeatMixed(){
  if(!selected)return;
  const p=current(),run=p.mixedRun;
  if(run&&run.pos<TOTAL&&completedCount(run)<TOTAL){
-  if(!confirm('Νέο τεστ; Η τρέχουσα προσπάθεια θα αντικατασταθεί. Η προηγούμενη πρόοδός σου θα παραμείνει.'))return;
+  if(!confirm('Νέο τεστ; Η τρέχουσα προσπάθεια θα αντικατασταθεί. Η πρόοδος της τρέχουσας προσπάθειας θα μηδενιστεί. Το ιστορικό άλλων ενοτήτων δεν επηρεάζεται.'))return;
  }
  p.mixedRun=createRun();save();updateCourseProgress();renderMixed();
 }
+function restartOralCycle(){
+ if(!selected)return;
+ if(!confirm('Νέος κύκλος 12 κλινικών σεναρίων για '+selected.name+'; Οι απαντήσεις και η πρόοδος του προηγούμενου κύκλου θα μηδενιστούν. Η θεωρία και τα τεστ δεν επηρεάζονται.'))return;
+ const p=current();
+ p.scenarioGrades={};p.scenarioFeedback={};p.oralNotes={};p.oral=[];
+ oral=0;save();updateCourseProgress();renderOral();
+}
 function renderOral(){
  const p=current(),u=selected.units[oral],prior=p.scenarioGrades[oral];
+ const restart=$('seminarRestartOral');if(restart)restart.hidden=Object.keys(p.scenarioGrades).length<12;
  $('seminarOralCounter').textContent='Κλινικό σενάριο '+(oral+1)+' / 12';
  $('seminarOralTitle').textContent='Περιέγραψε τις ενέργειές σου, με σωστή σειρά: '+u[0];
  $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
@@ -321,6 +329,7 @@ function bind(){
  $('seminarBack').addEventListener('click',()=>{history.replaceState(null,'',location.pathname);showHome();});
  document.querySelectorAll('[data-seminar-tab]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.seminarTab)));
  $('seminarRestartQuiz').addEventListener('click',repeatMixed);
+ $('seminarRestartOral').addEventListener('click',restartOralCycle);
  $('seminarRepeatQuiz').addEventListener('click',repeatMixed);
  $('seminarMarkStudied').addEventListener('click',()=>{toggleIn(current().studied,unit);save();switchView('theory');});
  $('seminarPrevUnit').addEventListener('click',()=>{unit=Math.max(0,unit-1);renderTheory();});
