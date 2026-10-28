@@ -28,7 +28,11 @@ function open(page,scripts,data={}){
     explanation:verdict==='uncertain'?'Δεν προκύπτει ασφαλές συμπέρασμα.':'Οι ενέργειες αξιολογούνται σε σωστή σειρά.',
     takeaway:'Πρώτα ασφάλεια και αρχική εκτίμηση.',criticalError:false,correctPoints:[],missingPoints:[]};
  }});
- for(const path of scripts)w.eval(read(path));
+ for(const path of scripts){
+  const source=read(path);
+  w.eval(path==='app.js'?source+
+    '\nwindow.__examDebug = () => ({bank:bank.length, scoped:scoped().length, status:document.querySelector("#statusFilter").value, group:document.querySelector("#group").value, topic:document.querySelector("#topic").value, search:document.querySelector("#search").value, firstStatus:bank[0]?.answerStatus, firstMatch:bank[0]?((document.querySelector("#group").value==="all"||bank[0].group===document.querySelector("#group").value)&&(document.querySelector("#topic").value==="all"||bank[0].studyTopic===document.querySelector("#topic").value)&&(document.querySelector("#statusFilter").value==="all"||bank[0].answerStatus===document.querySelector("#statusFilter").value)):false});':source);
+ }
  return{dom,w,d,calls,setMode:value=>{verdict=value}};
 }
 const el=(d,k)=>{const node=d.getElementById(k);assert(node,'Missing '+k);return node};
@@ -119,7 +123,7 @@ async function eoppep(){
  el(d,'statusFilter').value='reviewed_educational';
  el(d,'statusFilter').dispatchEvent(new b.w.Event('input',{bubbles:true}));
  console.log('EOPPEP matching questions:',el(d,'matches').textContent,'selected status:',el(d,'statusFilter').value,'group:',el(d,'group').value,'topic:',el(d,'topic').value,'search:',el(d,'search').value,'bank:',rawBank.length,'first status:',rawBank[0].answerStatus);
- console.log('EOPPEP internal pool count:',b.w.eval('scoped().length'),'internal bank count:',b.w.eval('bank.length'),'first answer status:',b.w.eval('bank[0].answerStatus'));
+ console.log('EOPPEP internal state:',JSON.stringify(b.w.__examDebug()));
  action(d,'begin');
  console.log('EOPPEP after begin:',el(d,'qtitle').textContent.slice(0,100),'study hidden:',el(d,'study').classList.contains('hidden'));
  assert(el(d,'qtitle').textContent.length>6);
