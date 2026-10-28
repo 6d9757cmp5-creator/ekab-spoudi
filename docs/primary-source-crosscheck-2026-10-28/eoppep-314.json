@@ -30,6 +30,29 @@
         "finding": "Τα δύο εξαγμένα highlights συμφωνούν με §22.1.",
         "limits": "Δεν αναγνώστηκε εκ νέου το πλήρες official_questions.json: το εργαλείο επιστρέφει κενό περιεχόμενο για το μεγάλο αρχείο. Εκκρεμεί σύγκριση πλήρους απάντησης και γραμμή-προς-γραμμή επίσημου PDF ΕΟΠΠΕΠ. Καμία πλήρης έγκριση.",
         "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Ρινική βλέννη και κροσσοί παγιδεύουν/απομακρύνουν σωματίδια.",
+          "Ο αέρας θερμαίνεται/υγραίνεται, ενώ η οσφρητική περιοχή επιτρέπει όσφρηση."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
       }
     },
     {
@@ -44,7 +67,15 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": "general_chapter_review_lacks_specific_inspired_expired_gas_percentages",
-      "status": "specific_issue_documented"
+      "status": "specific_issue_documented",
+      "officialQuestionMirrorCheck": {
+        "reviewedAt": "2026-10-28",
+        "mirrorUrl": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "printedPage": 4,
+        "archivedQuestionWordingMatched": true,
+        "currentVersionConfirmed": false,
+        "answerStillFlaggedForIssue": true
+      }
     },
     {
       "id": "EOP-A-003",
@@ -71,6 +102,29 @@
         "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange",
         "finding": "Τα δύο εξαγμένα highlights συμφωνούν με §22.4.",
         "limits": "Δεν αναγνώστηκε εκ νέου το πλήρες official_questions.json: το εργαλείο επιστρέφει κενό περιεχόμενο για το μεγάλο αρχείο. Εκκρεμεί σύγκριση πλήρους απάντησης και γραμμή-προς-γραμμή επίσημου PDF ΕΟΠΠΕΠ. Καμία πλήρης έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "O₂ διαχέεται από κυψελίδες προς πνευμονικά τριχοειδή, CO₂ αντίστροφα.",
+          "Διάχυση μέσω αναπνευστικής μεμβράνης λόγω διαφορών μερικών πιέσεων."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
         "fullScientificApproval": false
       }
     },
@@ -104,6 +158,30 @@
         "finding": "Τα συγκεκριμένα αναφερόμενα αποσπάσματα συμφωνούν με τις στοχευμένες ανατομικές και φυσιολογικές βιβλιογραφικές παραπομπές. Δεν αποδίδεται πλήρης έγκριση.",
         "limits": "Ελέγχθηκαν μόνο αποσπάσματα του eoppep-sos.json· όχι η πλήρης πρωτότυπη αποθηκευμένη απάντηση του official_questions.json ούτε αντιστοιχία εκφώνησης με το επίσημο PDF ΕΟΠΠΕΠ.",
         "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Αερισμός, εξωτερική και εσωτερική ανταλλαγή αερίων και μεταφορά τους με την κυκλοφορία.",
+          "Κυτταρική αναπνοή καταναλώνει O₂ για παραγωγή ενέργειας."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
       }
     },
     {
@@ -136,6 +214,30 @@
         "finding": "Τα συγκεκριμένα αναφερόμενα αποσπάσματα συμφωνούν με τις στοχευμένες ανατομικές και φυσιολογικές βιβλιογραφικές παραπομπές. Δεν αποδίδεται πλήρης έγκριση.",
         "limits": "Ελέγχθηκαν μόνο αποσπάσματα του eoppep-sos.json· όχι η πλήρης πρωτότυπη απάντηση ή ολόκληρο το επίσημο ερωτηματολόγιο ΕΟΠΠΕΠ.",
         "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Σπλαχνικός υπεζωκότας καλύπτει τον πνεύμονα, τοιχωματικός επενδύει θωρακική κοιλότητα.",
+          "Υπεζωκοτικό υγρό μειώνει την τριβή και η αρνητική ενδοϋπεζωκοτική πίεση βοηθά την έκπτυξη."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
       }
     },
     {
@@ -166,6 +268,29 @@
         ],
         "finding": "Τα δύο συγκεκριμένα SOS αποσπάσματα συμφωνούν με την περιγραφή της ανταλλαγής αερίων και της μεταφοράς τους στην ακαδημαϊκή πηγή.",
         "limits": "Δεν ελέγχθηκε η πλήρης αποθηκευμένη πρωτότυπη απάντηση ή η επίσημη πηγή/σελίδα εκφώνησης ΕΟΠΠΕΠ. Δεν αποτελεί πλήρη επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Θεμελιώδης λειτουργία: πρόσληψη O₂ και αποβολή CO₂ μέσω ανταλλαγής αερίων.",
+          "Κυκλοφορία μεταφέρει αέρια μεταξύ πνευμόνων και ιστών."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
         "fullScientificApproval": false
       }
     },
@@ -199,6 +324,30 @@
         "finding": "Τα δύο αποσπάσματα είναι συμβατά με τη φυσιολογία μόνο με την ήδη υπάρχουσα φράση «κατά προσέγγιση» και την πρόσθετη διευκρίνιση ότι ο γενικός τύπος χρησιμοποιεί φυσιολογικό/συνολικό νεκρό χώρο. Χρειάζεται έλεγχος αν το πλήρες εκπαιδευτικό κείμενο δίνει κατάλληλη προειδοποίηση για παθολογικές καταστάσεις.",
         "limits": "Δεν αναγνώστηκε η πλήρης αρχική απάντηση από official_questions.json ούτε συγκρίθηκε η πλήρης εκφώνηση γραμμή-προς-γραμμή με το επίσημο PDF ΕΟΠΠΕΠ· δεν αποτελεί επιστημονική έγκριση.",
         "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Κυψελιδικός αερισμός = όγκος φρέσκου αέρα ανά λεπτό που φτάνει στις κυψελίδες και συμμετέχει στην ανταλλαγή.",
+          "Ο αποθηκευμένος τύπος αφαιρεί τον ανατομικό νεκρό χώρο και ρητά λέει «κατά προσέγγιση»· γενικά ο φυσιολογικός νεκρός χώρος περιλαμβάνει και τον κυψελιδικό, σημαντικό σε παθολογία."
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK482502/",
+          "https://www.ncbi.nlm.nih.gov/books/NBK482501/"
+        ],
+        "verdict": "full_stored_answer_reviewed_qualification_needed",
+        "recommendation": "Πριν την τελική έγκριση, πρόσθεσε σαφή διευκρίνιση: στον γενικό τύπο αφαιρείται ο φυσιολογικός/συνολικός νεκρός χώρος, ενώ ο ανατομικός είναι προσέγγιση για υγιή άτομα. Απαιτείται ανεξάρτητος έλεγχος της διατύπωσης.",
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
       }
     },
     {
@@ -213,7 +362,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Ο προμήκης καθορίζει βασικό ρυθμό και η γέφυρα τροποποιεί τον αερισμό.",
+          "Κεντρικοί χημειοϋποδοχείς ανταποκρίνονται κυρίως σε μεταβολές CO₂ μέσω pH, περιφερικοί σε O₂/CO₂/pH.",
+          "Ο φλοιός επιτρέπει εκούσιο έλεγχο της αναπνοής."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "complete_stored_answer_passage_compared_pending_independent_signoff",
+        "derivedFrom": "official_questions.json (complete stored answer)",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "comparedClaims": [
+          "Ο προμήκης καθορίζει βασικό ρυθμό και η γέφυρα τροποποιεί τον αερισμό.",
+          "Κεντρικοί χημειοϋποδοχείς ανταποκρίνονται κυρίως σε μεταβολές CO₂ μέσω pH, περιφερικοί σε O₂/CO₂/pH.",
+          "Ο φλοιός επιτρέπει εκούσιο έλεγχο της αναπνοής."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing"
+        ],
+        "finding": "Συμφωνία ολόκληρης της αποθηκευμένης σύντομης εκπαιδευτικής απάντησης με τις στοχευμένες βιβλιογραφικές ενότητες· αντιπαραβολή εκφώνησης με ιστορικό PDF ΕΟΠΠΕΠ.",
+        "limits": "Δεν υπάρχει επίσημο λυσάρι, επιβεβαίωση τελευταίας έκδοσης ή ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-009",
@@ -227,7 +417,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-28",
+        "scope": "complete_stored_educational_answer_and_archived_official_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "officialQuestionMirror": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
+        "officialQuestionMirrorDescription": "ΕΟΠΠΕΠ-branded historical questions PDF mirrored by ΣΑΕΚ Έδεσσας (2018 path), page 4 printed / PDF page index 3",
+        "archivedQuestionWordingMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Στην ήρεμη εισπνοή το διάφραγμα συσπάται/κατέρχεται και οι έξω μεσοπλεύριοι διευρύνουν τον θώρακα.",
+          "Η αύξηση θωρακικού όγκου μειώνει την ενδοκυψελιδική πίεση κάτω από την ατμοσφαιρική και οδηγεί σε είσοδο αέρα."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing"
+        ],
+        "verdict": "full_stored_answer_passage_consistent",
+        "recommendation": null,
+        "limits": "Ο έλεγχος αφορά όλη την αποθηκευμένη σύντομη εκπαιδευτική απάντηση και ιστορικό αντίγραφο επίσημης εκφώνησης, όχι τρέχον πιστοποιημένο λυσάρι ΕΟΠΠΕΠ. Δεν έγινε ανεξάρτητη αξιολόγηση αρμόδιου επαγγελματία ούτε επιβεβαίωση ότι η ιστορική έκδοση είναι η τελευταία.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-28",
+        "level": "complete_stored_answer_passage_compared_pending_independent_signoff",
+        "derivedFrom": "official_questions.json (complete stored answer)",
+        "sourceBlobSha": "37dd3be8536b64d1a77ff26f4838d545c6025689",
+        "comparedClaims": [
+          "Στην ήρεμη εισπνοή το διάφραγμα συσπάται/κατέρχεται και οι έξω μεσοπλεύριοι διευρύνουν τον θώρακα.",
+          "Η αύξηση θωρακικού όγκου μειώνει την ενδοκυψελιδική πίεση κάτω από την ατμοσφαιρική και οδηγεί σε είσοδο αέρα."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing"
+        ],
+        "finding": "Συμφωνία ολόκληρης της αποθηκευμένης σύντομης εκπαιδευτικής απάντησης με τις στοχευμένες βιβλιογραφικές ενότητες· αντιπαραβολή εκφώνησης με ιστορικό PDF ΕΟΠΠΕΠ.",
+        "limits": "Δεν υπάρχει επίσημο λυσάρι, επιβεβαίωση τελευταίας έκδοσης ή ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-010",
