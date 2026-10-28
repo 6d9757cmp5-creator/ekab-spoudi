@@ -119,3 +119,45 @@ test('correct feedback cannot contain contradictory missing steps; old models st
  assert.equal(output.body.modelAnswer,'');
  assert.ok(output.body.referenceAnswer.length>0);
 }));
+
+test('all configured free AIs exhausted: friendly theory suggestion, explicit code, no invented grade',async()=>setup(async()=>{
+ process.env.CLOUDFLARE_API_TOKEN='test-key';
+ process.env.CLOUDFLARE_ACCOUNT_ID='a'.repeat(32);
+ process.env.CLOUDFLARE_FREE_PLAN_CONFIRMED='true';
+ let calls=0;
+ globalThis.fetch=async()=>{calls++;return {ok:false,status:429};};
+ const r=await invoke(answer,'all-limit-429');
+ assert.equal(calls,2);
+ assert.equal(r.status,503);
+ assert.equal(r.body.code,'all_ai_limits');
+ assert.match(r.body.error,/θεωρία/);
+ assert.match(r.body.error,/αργότερα/);
+ assert.equal(r.body.verdict,undefined);
+}));
+test('all free AIs out of credits (402): show the same reassuring study message',async()=>setup(async()=>{
+ globalThis.fetch=async()=>({ok:false,status:402});
+ const r=await invoke(answer,'credit-limit-402');
+ assert.equal(r.body.code,'all_ai_limits');
+ assert.match(r.body.error,/θεωρία/);
+ assert.equal(r.body.verdict,undefined);
+}));
+test('do not mislabel a mixed quota and service error as all AIs exhausted',async()=>setup(async()=>{
+ process.env.CLOUDFLARE_API_TOKEN='test-key';
+ process.env.CLOUDFLARE_ACCOUNT_ID='a'.repeat(32);
+ process.env.CLOUDFLARE_FREE_PLAN_CONFIRMED='true';
+ let attempts=0;
+ globalThis.fetch=async()=>{attempts++;return {ok:false,status:attempts===1?429:503};};
+ const r=await invoke(answer,'mixed-limit-error');
+ assert.equal(r.status,503);
+ assert.notEqual(r.body.code,'all_ai_limits');
+ assert.equal(r.body.verdict,undefined);
+}));
+test('student request limit uses study-theory message and no invented score',async()=>setup(async()=>{
+ globalThis.fetch=async()=>response(grade);
+ let final;
+ for(let i=0;i<16;i++)final=await invoke(answer,'student-limit-test');
+ assert.equal(final.status,429);
+ assert.equal(final.body.code,'student_ai_limit');
+ assert.match(final.body.error,/θεωρία/);
+ assert.equal(final.body.verdict,undefined);
+}));
