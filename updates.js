@@ -59,7 +59,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 // Optional cloud setup never blocks the local app or update controls.
 import(new URL('./appwrite-client.js?app=27.1.73', document.currentScript.src).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=27.1.83', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=scoped-reset-1', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {

@@ -52,7 +52,9 @@ export function initAccountUI() {
 <section class="backup-card"><h3>Επαναφορά από αντίγραφο</h3><p>Επίλεξε το αρχείο JSON που είχες εξαγάγει. Θα ζητηθεί επιβεβαίωση πριν αντικατασταθεί η πρόοδος.</p><div class="file-select"><input id="importEverything" data-restore-all type="file" accept=".json,application/json" aria-label="Επιλογή αντιγράφου προόδου JSON"><label class="btn compact secondary" for="importEverything">Επιλογή αρχείου JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div></section>
 </div>
 <div class="app-version-row"><div><strong>Έκδοση <span id="currentAppVersion">v27.1.73</span></strong><p id="updateCheckStatus" role="status" aria-live="polite">Έλεγχος διαθέσιμης έκδοσης…</p></div><button class="btn compact secondary" id="checkAppUpdates" type="button">Έλεγχος ενημέρωσης</button></div>
-<details class="storage-advanced"><summary>Προχωρημένες επιλογές</summary><div class="advanced-content"><h3>Παλαιό αντίγραφο ΕΟΠΠΕΠ</h3><p class="small muted">Μόνο για παλαιότερα αρχεία προόδου v15–v19.</p><div class="file-select"><input id="restore" type="file" accept=".json,application/json" aria-label="Επιλογή παλαιού αντιγράφου ΕΟΠΠΕΠ"><label class="btn compact secondary" for="restore">Επιλογή παλαιού JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div><p class="small muted" id="restoreNotice" role="status" aria-live="polite"></p><div class="reset-progress"><h3>Μηδενισμός ΕΟΠΠΕΠ</h3><p>Διαγράφει μόνο την πρόοδο των ερωτήσεων ΕΟΠΠΕΠ. Η ΣΑΕΚ και τα PDF διατηρούνται. Απαιτούνται δύο επιβεβαιώσεις.</p><button class="btn compact danger-button" id="reset" type="button">Μηδενισμός προόδου ΕΟΠΠΕΠ</button></div></div></details>
+<details class="storage-advanced"><summary>Προχωρημένες επιλογές</summary><div class="advanced-content"><h3>Παλαιό αντίγραφο ΕΟΠΠΕΠ</h3><p class="small muted">Μόνο για παλαιότερα αρχεία προόδου v15–v19.</p><div class="file-select"><input id="restore" type="file" accept=".json,application/json" aria-label="Επιλογή παλαιού αντιγράφου ΕΟΠΠΕΠ"><label class="btn compact secondary" for="restore">Επιλογή παλαιού JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div><p class="small muted" id="restoreNotice" role="status" aria-live="polite"></p><div class="reset-progress"><h3>Επαναφορά προόδου ανά ενότητα</h3><p>Διάλεξε τι θέλεις να μηδενίσεις. Τα προσωπικά PDF, ο λογαριασμός και οι ρυθμίσεις σύνδεσης δεν διαγράφονται.</p>
+<div class="actions"><button class="btn compact danger-button" data-reset-scope="eoppep" type="button">Μηδενισμός ΕΟΠΠΕΠ</button><button class="btn compact danger-button" data-reset-scope="saek" type="button">Μηδενισμός ΣΑΕΚ</button><button class="btn compact danger-button" data-reset-scope="seminars" type="button">Μηδενισμός σεμιναρίων</button></div>
+<h3>Ολική επαναφορά προόδου</h3><p>Μηδενίζει ΕΟΠΠΕΠ, ΣΑΕΚ και σεμινάρια μαζί, χωρίς να διαγράφει PDF ή λογαριασμό. Δεν αναιρείται χωρίς αντίγραφο ασφαλείας.</p><button class="btn compact danger-button" data-reset-scope="all" type="button">Ολική επαναφορά προόδου</button><p class="small muted" data-reset-notice role="status" aria-live="polite"></p></div></div></details>
 </div></details>
     <p class="account-local-note">Η τοπική αποθήκευση παραμένει ενεργή. Ο συγχρονισμός ενεργοποιείται ξεχωριστά σε κάθε συσκευή και συνεχίζει όταν επιστρέψει το internet.</p>
     <p class="small muted" data-appwrite-status role="status" aria-live="polite"></p>
@@ -103,15 +105,34 @@ export function initAccountUI() {
   });
 
   const legacyInput=dialog.querySelector('#restore');
-  dialog.querySelector('#reset').addEventListener('click',()=>{
-    if(!confirm('Πρώτη επιβεβαίωση: να μηδενιστεί η πρόοδος στις 314 ερωτήσεις ΕΟΠΠΕΠ;'))return;
-    if(!confirm('Τελική επιβεβαίωση: η πρόοδος ΕΟΠΠΕΠ θα διαγραφεί. Τα κεφάλαια ΣΑΕΚ και τα PDF δεν θα επηρεαστούν. Συνέχεια;'))return;
+  const resetLabels={eoppep:'ΕΟΠΠΕΠ',saek:'ΣΑΕΚ',seminars:'σεμιναρίων',all:'ΟΛΩΝ των ενοτήτων'};
+  function scopedKeys(scope){
+    const result=[];
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      const eoppep=k==='ekab-eoppep-official-v15';
+      const saek=k.startsWith('ekab.saek.read.v1.')||k==='ekab.saek.exams.v1';
+      const seminars=k==='ekab.seminar-prep.local.v1';
+      if((scope==='all'&&(eoppep||saek||seminars))||(scope==='eoppep'&&eoppep)||(scope==='saek'&&saek)||(scope==='seminars'&&seminars))result.push(k);
+    }
+    return result;
+  }
+  dialog.querySelectorAll('[data-reset-scope]').forEach(button=>button.addEventListener('click',async()=>{
+    const scope=button.dataset.resetScope,label=resetLabels[scope];
+    if(!label)return;
+    const keys=scopedKeys(scope),notice=dialog.querySelector('[data-reset-notice]');
+    if(!keys.length){notice.textContent='Δεν βρέθηκε αποθηκευμένη πρόοδος για '+label+'.';return}
+    if(!confirm('1/2 — Να μηδενιστεί η πρόοδος '+label+'; Τα προσωπικά PDF διατηρούνται.'))return;
+    if(!confirm('2/2 — ΟΡΙΣΤΙΚΗ ΕΠΙΒΕΒΑΙΩΣΗ: Θα διαγραφεί η αποθηκευμένη πρόοδος '+label+'. Έχεις κρατήσει αντίγραφο ασφαλείας;'))return;
+    button.disabled=true;
     try{
-      localStorage.removeItem('ekab-eoppep-official-v15');
+      for(const key of keys)localStorage.removeItem(key);
       window.dispatchEvent(new Event('ekab:progress-changed'));
-      window.EkabProgress?.checkpoint().finally(()=>location.reload())||location.reload();
-    }catch(error){alert('Η πρόοδος δεν μηδενίστηκε: '+error.message)}
-  });
+      await window.EkabProgress?.checkpoint?.();
+      notice.textContent='Ο μηδενισμός ολοκληρώθηκε. Ενημέρωση σελίδας…';
+      location.reload();
+    }catch(error){notice.textContent='Ο μηδενισμός δεν ολοκληρώθηκε: '+error.message;button.disabled=false}
+  }));
   legacyInput.addEventListener('change',async event=>{
     const file=event.target.files?.[0];
     if(!file)return;
