@@ -44,4 +44,3 @@ User constraint: no OpenAI models, no personal ChatGPT integration. OpenAI-brand
 ## Live verification 2026-10-27
 
 OpenRouter secret saved in Appwrite and never displayed. Google Gemma free returned HTTP 429. The current configured model is `nvidia/nemotron-3.5-super-vl:free`, also on the explicit allowlist, with zero-price constraints. Real console seminar request returned 200. Authenticated application tests passed for seminar_case, ambiguous seminar answer (uncertain and no grade), and its corrected seminar answer (correct). Function re-enabled with non-OpenAI code. These are integration checks, not broad medical/linguistic model calibration. Cloudflare token and other provider accounts remain pending user completion. No OpenAI API or personal ChatGPT subscription used.
-
