@@ -32,7 +32,7 @@ jobs:
             'id="aedNearbyResults"',
             'contacts-nearby-aed.js',
             'OpenStreetMap',
-            'μη επαληθευ',
+            'δεν έχουν επιβεβαιωθεί',
           ]
           for token in required:
             assert token in html, token
