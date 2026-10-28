@@ -30,9 +30,9 @@ try{
  await check('Real 3D atlas loads with WebGL canvas and chapter return',async()=>{
    const r=await page.goto(base+'ui-tools/anatomy-3d/index.html?mode=skeleton&system=skeletal&focus=skull&from=01&chapter=8',{waitUntil:'domcontentloaded'});
    ensure(r?.ok(),'3D page HTTP '+r?.status());
-   await page.waitForFunction(()=>document.querySelector('#renderMount canvas')||!document.querySelector('#errorBox').hidden,{timeout:90000});
+   await page.waitForFunction(()=>document.querySelector('#renderMount canvas')||!document.querySelector('#errorBox').hidden,undefined,{timeout:90000});
    ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
-   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,{timeout:170000});
+   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,undefined,{timeout:170000});
    ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
    ensure(await page.locator('#loading').isHidden(),'infinite model loading');
    ensure(await page.locator('#chapterReturn').isVisible(),'back-to-chapter hidden');
@@ -57,7 +57,7 @@ try{
  });
  await check('Female anatomy loads after switching',async()=>{
    await page.locator('[data-sex="female"]').click();
-   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,{timeout:170000});
+   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,undefined,{timeout:170000});
    ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
    ensure((await page.locator('#modelTag').innerText()).includes('ΓΥΝΑΙΚΕΙΟ'),'female not active');
  });
