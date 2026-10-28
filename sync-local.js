@@ -19,7 +19,7 @@ export function readLocalValues() {
   const values={};
   const raw=localStorage.getItem(QKEY);const questions=raw?JSON.parse(raw):{};
   if(!questions||typeof questions!=='object'||Array.isArray(questions))throw new Error('invalid-local-data');
-  for(const [id,q]of Object.entries(questions))for(const field of ['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt'])if(q&&q[field]!==undefined)values['q:'+id+':'+field]=q[field];
+  for(const [id,q]of Object.entries(questions))for(const field of ['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt','readCompletedAt'])if(q&&q[field]!==undefined)values['q:'+id+':'+field]=q[field];
   for(let i=0;i<localStorage.length;i++){
     const k=localStorage.key(i);let m;
     if((m=/^ekab\.saek\.read\.v1\.(\d{2})\.(\d{1,2})$/.exec(k))&&localStorage.getItem(k)==='1')values[`r:${m[1]}:${m[2]}`]='1';
@@ -39,6 +39,16 @@ export async function latestRecovery(userId) {
 export function applyValues(values) {
   const q={};
   for(const [key,v]of Object.entries(values))if(key.startsWith('q:')){const [,id,f]=key.split(':');(q[id]||={seen:0,weak:0,selfCorrect:0,selfAttempts:0,streak:0,draft:''})[f]=v;}
+  // Do not discard local reader notes when cloud progress is applied.
+  let old={};try{old=JSON.parse(localStorage.getItem(QKEY)||'{}')||{}}catch{}
+  for(const [id,record] of Object.entries(old)){
+    if(!/^EOP-[AB]-\d{3}$/.test(id)||!record||typeof record!=='object')continue;
+    for(const field of ['sosNotes','readerNotes']){
+      if(typeof record[field]==='string'){
+        (q[id]||={seen:0,weak:0,selfCorrect:0,selfAttempts:0,streak:0,draft:''})[field]=record[field];
+      }
+    }
+  }
   localStorage.setItem(QKEY,JSON.stringify(q));
   const remove=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^ekab\.saek\.(?:read\.v1\.\d{2}\.\d{1,2}|lastchapter\.\d{2})$/.test(k))remove.push(k);}
   for(const k of remove)localStorage.removeItem(k);
