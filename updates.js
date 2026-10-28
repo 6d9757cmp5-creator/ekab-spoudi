@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.103', $=id=>document.getElementById(id);
+const CURRENT='27.1.104', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
@@ -60,7 +60,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 // Optional cloud setup never blocks the local app or update controls.
 import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=seminar-sync-27.1.102', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=richer-sync-27.1.104', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {
