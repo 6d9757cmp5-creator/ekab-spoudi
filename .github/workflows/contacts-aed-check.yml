@@ -1,0 +1,47 @@
+name: AED contacts integration checks
+on:
+  pull_request:
+    paths:
+      - contacts.html
+      - contacts-aed.css
+      - contacts-nearby-aed.js
+      - .github/workflows/contacts-aed-check.yml
+permissions:
+  contents: read
+jobs:
+  validate-aed-contacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate optional geolocation JavaScript syntax
+        run: node --check contacts-nearby-aed.js
+      - name: Verify official links, labels, and privacy assertions
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path("contacts.html").read_text(encoding="utf-8")
+          js=Path("contacts-nearby-aed.js").read_text(encoding="utf-8")
+          css=Path("contacts-aed.css").read_text(encoding="utf-8")
+          required=[
+            'href="tel:112"', 'href="tel:166"',
+            'src="https://apinidotes.crete.gov.gr/Map"',
+            'allow="geolocation"',
+            'id="aedFindNearby"',
+            'id="aedNearbyMap"',
+            'id="aedNearbyStatus"',
+            'id="aedNearbyResults"',
+            'contacts-nearby-aed.js',
+            'OpenStreetMap',
+            'μη επαληθευ',
+          ]
+          for token in required:
+            assert token in html, token
+          assert 'navigator.geolocation.getCurrentPosition' in js
+          assert 'permission.state === \'granted\'' in js
+          assert 'https://overpass-api.de/api/interpreter' in js
+          assert "cache: 'no-store'" in js
+          assert 'localStorage' not in js and 'sessionStorage' not in js
+          assert 'aed-nearby-map[hidden]' in css
+          assert 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=' in html
+          print("AED contacts static integration checks passed")
+          PY
