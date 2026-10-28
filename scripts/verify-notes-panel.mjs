@@ -68,6 +68,7 @@ const noteLeft=captureEdits(first,{['n:'+id]:note},{['n:'+id]:{...note,body:'α�
 const noteRight=captureEdits(first,{['n:'+id]:note},{['n:'+id]:{...note,body:'από υπολογιστή'}},b,21);
 const both=mergeEntries(noteLeft,noteRight)['n:'+id].v;
 assert(both.body.includes('από κινητό')&&both.body.includes('από υπολογιστή'));
+assert.equal(both.body,mergeEntries(noteRight,noteLeft)['n:'+id].v.body);
 assert(validValue('n:'+id,both));
 const deleted=captureEdits(first,{['n:'+id]:note},{},a,22);
 assert.equal(visibleEntries(mergeEntries(first,deleted))['n:'+id],undefined);
@@ -83,6 +84,7 @@ assert(src.includes("data-ekab-notes-tab=\"all\""));
 assert(src.includes("SOS ·")&&src.includes("eoppep-sos.json"));
 assert(src.includes("saek-search-A.json")&&src.includes("saek-search-D.json"));
 assert(src.includes("ekab-notes-chapter"));
+assert(src.includes("'draft','Γραπτή απάντηση εξάσκησης'"));
 assert(!src.includes("id=\"ekabGlobalSearch\""));
 const indices=['A','B','C','D'].map(x=>JSON.parse(fs.readFileSync('saek-search-'+x+'.json','utf8')));
 assert.equal(indices.reduce((n,x)=>n+x.items.filter(i=>i.searchText.includes('SOS ·')).length,0),247);
