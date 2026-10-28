@@ -157,3 +157,41 @@
 **ΝΕΟ: EOP-A-013 «Να αναφέρετε τις λειτουργίες του σπλήνα»**: ανακτήθηκε μέσω `fetch_blob` η **πλήρης** αποθηκευμένη εκπαιδευτική απάντηση του `official_questions.json` (blob `37dd3be8536b64d1a77ff26f4838d545c6025689`). Τα σημεία διήθησης αίματος, γηρασμένων ερυθροκυττάρων, μικροοργανισμών, ανοσολογικής λειτουργίας και αποθήκευσης αιμοπεταλίων συμφωνούν με [OpenStax §21.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/21-1-anatomy-of-the-lymphatic-and-immune-systems) και [NCBI Physiology, Spleen](https://www.ncbi.nlm.nih.gov/books/NBK537307/). Η εκφώνηση συμφωνεί ακριβώς με το **επίσημο PDF παλαιού τύπου του ΕΟΠΠΕΠ**, Ομάδα Α, #13, τυπωμένη σελ. 4 ([πηγή ΕΟΠΠΕΠ](https://www.eoppep.gr/index.php/el/pistopoiiseis-eksetaseis/apofoitoi-saek/themata-exetaseon-saek/%CE%B8%CE%AD%CE%BC%CE%B1%CF%84%CE%B1-%CE%B5%CE%BE%CE%B5%CF%84%CE%AC%CF%83%CE%B5%CF%89%CE%BD-%CF%80%CE%B9%CF%83%CF%84%CE%BF%CF%80%CE%BF%CE%AF%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%81%CF%87%CE%B9%CE%BA%CE%AE%CF%82-%CE%B5%CF%80%CE%B1%CE%B3%CE%B3%CE%B5%CE%BB%CE%BC%CE%B1%CF%84%CE%B9%CE%BA%CE%AE%CF%82-%CE%BD-2009-1992-%CE%BA%CE%B1%CF%84%CE%AC%CE%BB%CE%BF%CE%B3%CE%BF%CF%82-%CE%B5%CF%81%CF%89%CF%84%CE%AE%CF%83%CE%B5%CF%89%CE%BD-%CF%80%CE%B1%CE%BB%CE%B1%CE%B9%CE%BF%CF%8D-%CF%84%CF%8D%CF%80%CE%BF%CF%85?download=207%3Adiasostis-pliroma-asthenoforoy)). **Κρίσιμο όριο:** η επίσημη πηγή επιγράφεται παλαιού τύπου, **δεν** έχει επιβεβαιωθεί ως τρέχουσα τράπεζα ΕΟΠΠΕΠ ή επίσημο λυσάρι.
 
 **Αθροιστική κατάσταση μετά τις δύο νέες καταχωρίσεις:** ΣΑΕΚ 17/247 με στοχευμένο έλεγχο, ΕΟΠΠΕΠ 12/314 με στοχευμένο έλεγχο, σύνολο 29/561. Πλήρως επιστημονικά εγκεκριμένα **0/247 και 0/314**. Πέντε προϋπάρχοντα ειδικά ζητήματα ΕΟΠΠΕΠ παραμένουν. Ο δεύτερος γύρος δεν ξεκίνησε, δεν έγιναν merge ή deployment.
+
+## Επιταχυμένη παρτίδα πρώτου γύρου — 29/10/2026
+
+**Μέθοδος:** ομαδική ανάγνωση πραγματικού περιεχομένου, σύγκριση συγκεκριμένων ισχυρισμών με τις αντίστοιχες ενότητες OpenStax Anatomy & Physiology 2e, και δυο ανεξάρτητες ενημερώσεις μητρώων χωρίς ένα commit ανά εγγραφή. **Όχι** αυτόματη ή πλήρης ιατρική πιστοποίηση και **όχι** ταυτοποίηση με νεότερη επίσημη τράπεζα θεμάτων ΕΟΠΠΕΠ.
+
+### 7 νέα κεφάλαια ΣΑΕΚ (στοχευμένος πρώτος γύρος)
+Πρωτογενές αρχείο εφαρμογής: `saek-course-02.html` στο `main`, blob `0442b049cb7ea9cb7d514ddaef92412e868f7953`. Αναγνώστηκαν όλα τα κείμενα και οι απαντήσεις αυτοελέγχου των αναφερόμενων κεφαλαίων, αλλά επαληθεύτηκαν **μόνο τα παρακάτω συγκεκριμένα φυσιολογικά σημεία**:
+
+| Κωδικός | Αντιπαραβολή επιλεγμένων στοιχείων | Ειδική πηγή |
+|---|---|---|
+| SAEK-02-04 | Αυτόνομο νευρικό σύστημα, συμπαθητικό/παρασυμπαθητικό, ινσουλίνη/γλυκαγόνη και αυτοέλεγχος | [OpenStax §15.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/15-1-divisions-of-the-autonomic-nervous-system), [§17.9](https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas) |
+| SAEK-02-05 | Διάχυση, ώσμωση, ενεργός μεταφορά, αντλία Na/K και αυτοέλεγχος | [OpenStax §3.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/3-1-the-cell-membrane) |
+| SAEK-02-06 | Δυναμικό ενέργειας, χημικές συνάψεις, αντανακλαστικό τόξο και αυτοέλεγχος | [OpenStax §§12.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/12-4-the-action-potential), [12.5](https://openstax.org/books/anatomy-and-physiology-2e/pages/12-5-communication-between-neurons), [14.3](https://openstax.org/books/anatomy-and-physiology-2e/pages/14-3-motor-responses) |
+| SAEK-02-07 | Καρδιακή συστολή/διαστολή, φλεβόκομβος, ερεθισματαγωγό σύστημα, παροχή και αυτοέλεγχος | [OpenStax §§19.2](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-2-cardiac-muscle-and-electrical-activity), [19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+| SAEK-02-08 | Αρτηριακή πίεση, αντίσταση αρτηριδίων, ανταλλαγή στα τριχοειδή και αυτοέλεγχος | [OpenStax §§20.2](https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance), [20.3](https://openstax.org/books/anatomy-and-physiology-2e/pages/20-3-capillary-exchange) |
+| SAEK-02-09 | Αερισμός, ανταλλαγή O₂/CO₂, μεταφορά O₂ με αιμοσφαιρίνη και αυτοέλεγχος | [OpenStax §§22.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange), [22.5](https://openstax.org/books/anatomy-and-physiology-2e/pages/22-5-transport-of-gases) |
+| SAEK-02-10 | Αναπνευστική/νεφρική οξεοβασική ρύθμιση, ρυθμιστικά διαλύματα και αυτοέλεγχος | [OpenStax §26.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/26-4-acid-base-balance) |
+
+**Εξαιρέσεις που παραμένουν:** κλινικά πρωτόκολλα σε διαταραχές συνείδησης, αερισμού, shock, ΗΚΓ και οξεοβασικής διαταραχής, καθώς και όλοι οι υπόλοιποι διδακτικοί στόχοι, δεν έλαβαν ανεξάρτητη έγκριση.
+
+### 9 νέες ερωτήσεις ΕΟΠΠΕΠ (στοχευμένος πρώτος γύρος)
+Πρωτογενές αρχείο του project: `official_questions.json`, blob `37dd3be8536b64d1a77ff26f4838d545c6025689`, ανακτημένο μέσω `fetch_blob`. Αναγνώστηκαν **ολόκληρες οι εννέα αποθηκευμένες εκπαιδευτικές απαντήσεις** και συγκρίθηκαν συγκεκριμένα σημεία, **όχι** ως επίσημο λυσάρι.
+
+| Κωδικός | Ελεγμένο εκπαιδευτικό θέμα | Πηγή |
+|---|---|---|
+| EOP-A-014 | Απώλεια νερού με ούρα, δέρμα, εκπνοή, κόπρανα | [OpenStax §26.2](https://openstax.org/books/anatomy-and-physiology-2e/pages/26-2-water-balance) |
+| EOP-A-015 | Ινσουλίνη: β-κύτταρα νησιδίων και γλυκαιμική δράση | [OpenStax §17.9](https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas) |
+| EOP-A-016 | Νεφροί: ομοιόσταση, ρενίνη, EPO, βιταμίνη D | [OpenStax §25.10](https://openstax.org/books/anatomy-and-physiology-2e/pages/25-10-the-urinary-system-and-homeostasis) |
+| EOP-A-017 | ADH: υποθάλαμος, οπίσθια υπόφυση, νεφρική κατακράτηση νερού | [OpenStax §§17.3](https://openstax.org/books/anatomy-and-physiology-2e/pages/17-3-the-pituitary-gland-and-hypothalamus), [25.6](https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption) |
+| EOP-A-018 | Πνευμονική αρτηρία: αίμα από δεξιά κοιλία προς πνεύμονες | [OpenStax §19.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy) |
+| EOP-A-019 | Παράγοντες καρδιακού ρυθμού (νεύρωση, ορμόνες, ηλεκτρολύτες κ.ά.) | [OpenStax §19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+| EOP-A-020 | Προφόρτιο, μεταφόρτιο και συσταλτικότητα για όγκο παλμού | [OpenStax §19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+| EOP-A-021 | SV = EDV − ESV και ενδεικτικά 70 mL στην ηρεμία | [OpenStax §19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+| EOP-A-022 | Κατά λεπτό όγκος αίματος CO = HR × SV, ενδεικτικά 5 L/min | [OpenStax §19.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/19-4-cardiac-physiology) |
+
+**Πρόοδος πρώτου γύρου (κατόπιν καταχώρισης):** **24/247** κεφάλαια ΣΑΕΚ και **21/314** ερωτήσεις ΕΟΠΠΕΠ με ατομικό `targetedReview` — **45/561** εγγραφές με ΜΕΡΙΚΟ έλεγχο. **Πλήρως εγκεκριμένα 0/247 και 0/314.** Παραμένουν 5 ειδικά προβλήματα ΕΟΠΠΕΠ (A-002, B-047, B-094, B-181, B-204), επαλήθευση νεότερης επίσημης εκδοχής ερωτήσεων, έλεγχος όλων των ισχυρισμών/πρωτοκόλλων και δεύτερος ανεξάρτητος επιστημονικός γύρος. Δεν πραγματοποιήθηκε merge ή deployment.
+
+**Commits μητρώων:** [ΣΑΕΚ bc822e3](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/bc822e308bd3c62f6bc1a93cd768f2cdebca3c1f) και [ΕΟΠΠΕΠ a4c3482](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/a4c348246f6c22e438de611f41e31ce84c37a072).
