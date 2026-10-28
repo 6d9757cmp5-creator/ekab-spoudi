@@ -14,23 +14,29 @@ permissions:
 jobs:
   chromium:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install pinned Playwright and Chromium (CI only)
+      - name: Install pinned Playwright and selected browser (CI only)
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
-          npx playwright install --with-deps chromium
-      - name: Execute real browser scenario, persistent memory and no legacy writes
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Execute mobile browser scenarios, persistent memory and no legacy writes
+        env:
+          MENTOR_TEST_BROWSER: ${{ matrix.engine }}
         run: node scripts/verify-mentor-browser.mjs
       - name: Keep screenshot for review
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mentor-foundation-mobile-chromium
+          name: mentor-foundation-mobile-${{ matrix.engine }}
           path: mentor-foundation-mobile*.png
           if-no-files-found: ignore
           retention-days: 7
