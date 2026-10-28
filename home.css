@@ -192,3 +192,17 @@ body:has(.home-main) .home-card-eoppep .home-card-head{width:100%;min-height:82p
 .home-mini-progress-track span{display:block;height:100%;width:0;background:var(--blue);border-radius:inherit;transition:width .35s ease}
 .home-mini-progress-message{font-size:.75rem!important;color:var(--muted);margin:6px 0 0!important}
 @media(prefers-reduced-motion:reduce){.home-mini-progress-track span{transition:none}}
+
+/* Τοπικό, ελαφρύ widget συνέχειας μελέτης. */
+.home-resume{margin:-3px 0 13px;max-width:970px}
+.home-resume-link{display:flex;align-items:center;gap:12px;min-width:0;min-height:66px;padding:12px 15px;border:1px solid #396a87;border-radius:15px;background:linear-gradient(115deg,#173e56,#102b40);color:#eaf6fc;text-decoration:none;box-shadow:0 4px 16px #041c2c1c;transition:border-color .15s ease,transform .15s ease}
+.home-resume-link:hover{border-color:#7bc2ea;transform:translateY(-1px)}
+.home-resume-link:focus-visible{outline:3px solid #83cfff;outline-offset:3px}
+.home-resume-play{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:10px;background:#3d87ac44;color:#a9e2fb;font-size:.9rem}
+.home-resume-text{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px;font-size:.87rem;line-height:1.35}
+.home-resume-text strong{font-size:.88rem;line-height:1.25;font-weight:750}
+.home-resume-text>span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;overflow-wrap:anywhere;color:#c3dbe9;font-size:.81rem}
+.home-resume-arrow{font-size:1.6rem;color:#a9e2fb;font-weight:400;flex:none;margin-left:3px}
+html[data-theme="dark"] .home-resume-link{border-color:#3e7897;background:linear-gradient(115deg,#193f55,#0e2637)}
+@media(max-width:620px){.home-resume{margin:0 0 10px}.home-resume-link{gap:10px;padding:10px 12px;min-height:61px;border-radius:13px}.home-resume-play{width:31px;height:31px}.home-resume-text strong{font-size:.83rem}.home-resume-text>span{font-size:.78rem}}
+@media(prefers-reduced-motion:reduce){.home-resume-link{transition:none}.home-resume-link:hover{transform:none}}
