@@ -21,6 +21,8 @@ jobs:
           for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js theme-init.js global-tools.js app.js navigation.js; do
             node --check "$file"
           done
-          for file in account-ui.js appwrite-client.js; do
+          for file in account-ui.js appwrite-client.js cloud-sync.js sync-local.js sync-model.js seminar-sync.js; do
             node --input-type=module --check < "$file"
           done
+      - name: Verify cross-device seminar progress merge and deletion safety
+        run: node scripts/test-seminar-sync.cjs

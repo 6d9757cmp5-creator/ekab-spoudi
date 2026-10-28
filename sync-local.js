@@ -1,3 +1,4 @@
+import { readSeminarValues, applySeminarValues } from './seminar-sync.js';
 export const QKEY='ekab-eoppep-official-v15';
 let syncDb, pdfDb;
 function open(name, stores) {
@@ -25,6 +26,7 @@ export function readLocalValues() {
     if((m=/^ekab\.saek\.lastchapter\.(\d{2})$/.exec(k)))values['c:'+m[1]]=localStorage.getItem(k);
   }
   const theme=localStorage.getItem('ekab.theme.v1');if(theme)values.theme=theme;
+  Object.assign(values,readSeminarValues());
   return values;
 }
 export async function checkpoint(userId) {
@@ -45,6 +47,7 @@ export function applyValues(values) {
     if(key.startsWith('c:'))localStorage.setItem('ekab.saek.lastchapter.'+key.slice(2),v);
   }
   if(values.theme){localStorage.setItem('ekab.theme.v1',values.theme);document.documentElement.dataset.theme=values.theme;}else {localStorage.removeItem('ekab.theme.v1');document.documentElement.dataset.theme='light';}
+  applySeminarValues(values);
   window.dispatchEvent(new Event('ekab:cloud-applied'));
 }
 export async function applyPdfs(values, blobs) {

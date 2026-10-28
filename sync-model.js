@@ -1,3 +1,4 @@
+import { validSeminarCourse, mergeSeminarCourse, SEMINAR_COURSES } from './seminar-sync.js';
 export const SCHEMA = 'ekab-sync-v1';
 export const DRAFT_SEPARATOR = '\n\n—— Σημείωση από άλλη συσκευή ——\n\n';
 const fields = new Set(['seen','weak','selfCorrect','selfAttempts','streak','draft','reviewHistory','nextReviewAt']);
@@ -20,6 +21,7 @@ export function validValue(key, value) {
   if (/^r:(0[1-9]|1\d|20):([1-9]|1\d|20)$/.test(key)) return value===null || value==='1';
   if (/^c:(0[1-9]|1\d|20)$/.test(key)) return value===null || typeof value==='string' && /^([1-9]|[12]\d|3[0-2])$/.test(value);
   if (key==='theme') return value===null || value==='dark' || value==='light';
+  if (/^s:(bls|pbls|ils|phtls|als)$/.test(key)) return value===null || validSeminarCourse(value);
   if (/^p:[A-Za-z0-9_-]{1,80}$/.test(key)) {
     return value===null || value && typeof value==='object' && !Array.isArray(value) &&
       typeof value.name==='string' && value.name.length<=255 && /\.pdf$/i.test(value.name) &&
@@ -39,6 +41,10 @@ export function mergeEntry(key,a,b) {
   const winner=a.at>b.at || a.at===b.at&&(a.writer>b.writer||a.writer===b.writer&&stable(a.v)>stable(b.v))?a:b;
   let v=winner.v;
   if(stable(a.v)===stable(b.v))v=a.v;
+  else if(key.startsWith('s:')) {
+    if(a.v===null||b.v===null)v=winner.v;
+    else v=mergeSeminarCourse(a.v,b.v,winner.v);
+  }
   else if(key.endsWith(':draft')) {
     const parts=[...new Set([a.v,b.v].filter(x=>x!==null&&x!=='').flatMap(x=>x.split(DRAFT_SEPARATOR)))].sort();
     v=parts.join(DRAFT_SEPARATOR);
