@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28",
+  "updated": "2026-10-29",
   "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
   "note": "Α΄ 71/71, Β΄ 73/73, Γ΄ 51/51, Δ΄ 52/52: και τα 247 κεφάλαια διαθέτουν ≥2 μη επαναλαμβανόμενες εικόνες. Δ΄ πρακτικές ενότητες διαθέτουν ≥3. Η νέα απεικόνιση Α, Β, Δ είναι σύντομα σύμβολα και βέλη, όχι φωτογραφίες ή ιατρικά ακριβή σχέδια. Επιστημονικός και χειροκίνητος οπτικός έλεγχος εκκρεμούν.",
   "legend": {
@@ -10939,21 +10939,35 @@
     "sem_d_17_10_extra": {
       "filename": "semester-d-17-10-extra-el.svg",
       "localPath": "assets/education/semester-d-17-10-extra-el.svg",
-      "title": "Συνεργασία για υποστήριξη αερισμού — συμπληρωματική αναγνώριση (17-10)",
+      "title": "Συνεργασία για υποστήριξη αερισμού — εξοπλισμός και διακριτοί ρόλοι (17-10)",
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπη σχηματική εκπαιδευτική εικόνα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.ems.gov/what-is-ems.html",
-      "caption": "Κεφάλαιο 17-10: Φιάλη οξυγόνου · Εκπαιδευτής · Ασθενής. Σύντομες ελληνικές ονομασίες με βέλη προς τα αντίστοιχα εκπαιδευτικά σύμβολα.",
+      "page": "https://www.resus.org.uk/library/quality-standards-cpr/acute-care-equipment-and-drug-lists",
+      "caption": "Κεφάλαιο 17-10: φιάλη οξυγόνου · εκπαιδευτής · ασθενής. Σχηματικά σύμβολα αναγνώρισης, χωρίς οδηγίες σύνδεσης ή τεχνικής αερισμού.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "General background context; independent confirmation of clinical details pending."
+        "Η επίσημη λίστα RCUK περιλαμβάνει φιάλη οξυγόνου και αυτοδιατεινόμενο ασκό με ρεζερβουάρ στο πλαίσιο airway/breathing εξοπλισμού· δεν επαληθεύει τη γεωμετρία της φιάλης, τους ρόλους εκπαιδευτή/ασθενούς ή ελληνικό πρωτόκολλο."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Three point-specific arrow labels; automated structural, duplicate and SHA checks. Actual mobile/browser visual review pending."
+        "date": "2026-10-29",
+        "scope": "Έλεγχος SVG: η παλιά εικόνα χρησιμοποιούσε ίδιο όρθιο εικονίδιο για εκπαιδευτή και ασθενή. Νέο διακριτό σύμβολο εκπαιδευτή δίπλα σε πίνακα και ασθενούς σε ύπτια επιφάνεια· φιάλη με μετρητή· τρία βέλη προς τις αντίστοιχες λεζάντες. Browser/mobile visual QA remains pending."
       },
-      "sha256": "6e9a494314078b2920fc8b2dd579e8c770286ed93ebaf245c30d9bed27157afa"
+      "sha256": "ae99d723309bde3d6eb80b412b5d77807a180e63eb707f51875d29cb447ce0f9",
+      "sources": [
+        {
+          "title": "Resuscitation Council UK, Acute care equipment and drug lists",
+          "url": "https://www.resus.org.uk/library/quality-standards-cpr/acute-care-equipment-and-drug-lists",
+          "supports": "Το πλαίσιο αεραγωγού/αναπνοής περιλαμβάνει φιάλη οξυγόνου και αυτοδιατεινόμενο ασκό με ρεζερβουάρ· η λίστα δεν καθορίζει την εμφάνιση του εικονογραφήματος ή τοπική τεχνική."
+        },
+        {
+          "title": "SAEK chapter 17-10",
+          "url": "https://www.ekab.gr/",
+          "supports": "Πηγή προγράμματος για συνεργασία στην υποστήριξη αερισμού· δεν αποτελεί πιστοποίηση κλινικής τεχνικής."
+        }
+      ],
+      "sourcePageReviewed": "2026-10-29"
     },
     "sem_d_17_11_objects": {
       "filename": "semester-d-17-11-objects-el.svg",
