@@ -84,6 +84,15 @@ function cleanRecord(raw){
    oral:indices(p.oral,12),
    qNotes:strings(p.qNotes,48),
    oralNotes:strings(p.oralNotes,12),
+   scenarioFeedback:Object.fromEntries(Object.entries(p.scenarioFeedback&&typeof p.scenarioFeedback==='object'&&!Array.isArray(p.scenarioFeedback)?p.scenarioFeedback:{}).filter(([key,val])=>
+    Number.isInteger(Number(key))&&Number(key)>=0&&Number(key)<12&&val&&typeof val==='object'
+   ).map(([key,val])=>[key,{
+    verdict:['correct','partial','incorrect','uncertain'].includes(val.verdict)?val.verdict:'uncertain',
+    criticalError:!!val.criticalError,
+    explanation:typeof val.explanation==='string'?val.explanation.slice(0,1100):'',
+    takeaway:typeof val.takeaway==='string'?val.takeaway.slice(0,350):'',
+    modelAnswer:typeof val.modelAnswer==='string'?val.modelAnswer.slice(0,700):''
+   }])),
    scenarioGrades:Object.fromEntries(Object.entries(p.scenarioGrades&&typeof p.scenarioGrades==='object'&&!Array.isArray(p.scenarioGrades)?p.scenarioGrades:{}).filter(([key,val])=>
     Number.isInteger(Number(key))&&Number(key)>=0&&Number(key)<12&&val&&['correct','partial','incorrect','uncertain'].includes(val.verdict)
    ).map(([key,val])=>[key,{verdict:val.verdict,criticalError:!!val.criticalError}])),
@@ -284,18 +293,27 @@ function repeatMixed(){
  p.mixedRun=createRun();save();updateCourseProgress();renderMixed();
 }
 function renderOral(){
- const p=current(),u=selected.units[oral];
+ const p=current(),u=selected.units[oral],prior=p.scenarioGrades[oral];
  $('seminarOralCounter').textContent='Κλινικό σενάριο '+(oral+1)+' / 12';
  $('seminarOralTitle').textContent='Περιέγραψε τις ενέργειές σου, με σωστή σειρά: '+u[0];
  $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
+ $('seminarOralNotes').readOnly=!!prior;
  $('seminarOralHelp').textContent=u[2];$('seminarOralHelp').hidden=true;
- $('seminarOralReveal').hidden=false;
- const prior=p.scenarioGrades[oral];
- $('seminarScenarioStatus').textContent=prior?'Προηγούμενη αξιολόγηση AI: '+({correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Λανθασμένη',uncertain:'Απαιτεί επανέλεγχο'}[prior.verdict]||'Άγνωστη')+'. Μπορείς να υποβάλεις βελτιωμένη απάντηση.':
-  (window.EkabAIGrade?.available()?'Περιέγραψε το περιστατικό βήμα προς βήμα και υπέβαλε την απάντηση.':'Η υπηρεσία AI δεν έχει ενεργοποιηθεί. Δεν μπορεί να δοθεί βαθμός.');
- $('seminarScenarioResult').hidden=true;
- $('seminarScenarioSubmit').disabled=false;
- $('seminarScenarioSubmit').textContent='Υποβολή · Αυτόματη αξιολόγηση AI';
+ $('seminarOralReveal').hidden=!!prior;
+ $('seminarScenarioSubmit').hidden=!!prior;
+ $('seminarScenarioSubmit').disabled=!!prior;
+ $('seminarScenarioSubmit').textContent='Υποβολή αξιολόγησης';
+ const result=$('seminarScenarioResult');result.hidden=true;result.replaceChildren();
+ if(prior){
+  $('seminarScenarioStatus').textContent=prior.verdict==='uncertain'?
+   'Η προσπάθεια ολοκληρώθηκε χωρίς βαθμολογία. Συνέχισε στο επόμενο σενάριο.':
+   'Η προσπάθεια ολοκληρώθηκε και κλειδώθηκε. Συνέχισε στο επόμενο σενάριο.';
+  if(p.scenarioFeedback?.[oral]&&window.EkabAIGrade)
+   window.EkabAIGrade.render(result,{...p.scenarioFeedback[oral],studentAnswer:p.oralNotes[oral]||'',referenceAnswer:u[2]});
+  else{result.hidden=false;result.textContent='Σωστή εκπαιδευτική προτεραιότητα: '+u[2];}
+ }else $('seminarScenarioStatus').textContent=window.EkabAIGrade?.available()?
+  'Γράψε τις ενέργειες με σωστή σειρά και πάτησε «Υποβολή αξιολόγησης».':
+  'Η υπηρεσία αξιολόγησης δεν είναι διαθέσιμη. Η απάντησή σου διατηρείται.';
  $('seminarPrevOral').disabled=oral===0;$('seminarNextOral').disabled=oral===11;
 }
 function bind(){
