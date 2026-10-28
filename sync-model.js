@@ -90,7 +90,7 @@ export function mergeEntry(key,a,b) {
   else if(key.startsWith('n:')&&a.v&&b.v) {
     // Distinct offline edits to the same personal note retain both texts,
     // rather than silently discarding someone's work.
-    const pieces=[...new Set([a.v.body,b.v.body].filter(Boolean).flatMap(x=>x.split(DRAFT_SEPARATOR)))];
+    const pieces=[...new Set([a.v.body,b.v.body].filter(Boolean).flatMap(x=>x.split(DRAFT_SEPARATOR)))].sort();
     const combined=pieces.join(DRAFT_SEPARATOR);
     v={...winner.v,body:combined.length<=8000?combined:winner.v.body};
   }
