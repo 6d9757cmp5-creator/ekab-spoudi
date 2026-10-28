@@ -18,14 +18,21 @@
 <text x="200" y="460" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Παθητική· χωρίς ATP</text>
 <text x="200" y="493" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Κίνηση σωματιδίων</text>
 <!-- sodium potassium pump -->
-<text x="555" y="220" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Ενεργός μεταφορά με ενέργεια</text>
-<g fill="#f3d6a1" stroke="#9a7543"><circle cx="435" cy="270" r="9"/><circle cx="466" cy="304" r="9"/><circle cx="430" cy="356" r="9"/><circle cx="683" cy="275" r="9"/><circle cx="677" cy="340" r="9"/></g>
-<text x="451" y="248" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" fill="#765727">3 Na⁺</text><text x="675" y="244" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" fill="#765727">2 K⁺</text>
-<rect x="515" y="256" width="80" height="125" rx="31" fill="#e6f1f5" stroke="#347e75" stroke-width="5"/><path d="M540 271q-22 35 0 64t0 35m29-98q22 35 0 64t0 35" fill="none" stroke="#347e75" stroke-width="5"/>
-<path d="M478 291H510" stroke="#b25548" stroke-width="4" marker-end="url(#ion)"/><path d="M511 342H477" stroke="#3177a0" stroke-width="4" marker-end="url(#ar)"/>
-<text x="555" y="417" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">3 Na⁺ έξω · 2 K⁺ μέσα</text>
-<rect x="503" y="449" width="104" height="38" rx="12" fill="#fff0c9" stroke="#d4a848"/><text x="555" y="474" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#684b1c" text-anchor="middle">ATP → ADP</text>
-<text x="555" y="520" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Κόντρα στις βαθμίδες</text>
+<text x="555" y="220" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Ενεργός μεταφορά · αντίθετα στις βαθμίδες</text>
+<text x="555" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" fill="#536878" text-anchor="middle">Εξωκυττάριο υγρό</text>
+<!-- bilayer and transmembrane pump -->
+<rect x="423" y="291" width="264" height="56" rx="15" fill="#f4dcba" stroke="#927958" stroke-width="2"/>
+<path d="M423 304H687M423 334H687" stroke="#927958" stroke-width="3"/>
+<rect x="522" y="276" width="66" height="86" rx="24" fill="#d9edf0" stroke="#347e75" stroke-width="4"/>
+<path d="M544 284q-20 20 0 36t0 30m22-66q20 20 0 36t0 30" fill="none" stroke="#347e75" stroke-width="4"/>
+<!-- Na+ exits upward; K+ enters downward -->
+<path d="M478 405V277" stroke="#b25548" stroke-width="4" marker-end="url(#ion)"/>
+<path d="M636 277V405" stroke="#3177a0" stroke-width="4" marker-end="url(#ar)"/>
+<text x="478" y="427" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#8f3e35" text-anchor="middle">3 Na⁺ έξω</text>
+<text x="636" y="427" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#285f80" text-anchor="middle">2 K⁺ μέσα</text>
+<text x="555" y="385" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" fill="#536878" text-anchor="middle">Κυτταρόπλασμα</text>
+<rect x="509" y="454" width="92" height="36" rx="11" fill="#fff0c9" stroke="#d4a848"/><text x="555" y="477" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#684b1c" text-anchor="middle">ATP → ADP</text>
+<text x="555" y="520" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Αντλία Na⁺/K⁺</text>
 <!-- glucose carrier -->
 <text x="910" y="220" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Διευκολυνόμενη διάχυση</text>
 <rect x="770" y="266" width="280" height="118" rx="10" fill="#f3f7f9" stroke="#c7d5dc"/>
