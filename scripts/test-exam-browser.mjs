@@ -58,7 +58,7 @@ async function seminar(){
    wr++;b.setMode(wr===2?'uncertain':'correct');
    answer(d,'seminarQuestionNotes','Ελέγχω τη σκηνή, ζητώ βοήθεια και εκτιμώ την αναπνοή.');
    action(d,'seminarGradeAI');
-   await wait(()=>el(d,'seminarQuestionNotes').readOnly,'written lock');
+   await wait(()=>el(d,'seminarQuestionNotes').readOnly&&!el(d,'seminarNextQuestion').hidden&&!el(d,'seminarNextQuestion').disabled,'written grading complete');
    assert.equal(el(d,'seminarGradeAI').disabled,true);
    assert.equal(el(d,'seminarNextQuestion').hidden,false);
    action(d,'seminarNextQuestion');
