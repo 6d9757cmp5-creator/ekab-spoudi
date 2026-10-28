@@ -1,0 +1,33 @@
+name: SAEK — Block unapproved video publication
+on:
+  push:
+    paths:
+      - 'saek-videos.js'
+      - 'saek-video-approvals.json'
+      - 'saek-course-series.js'
+      - 'saek-video-player.js'
+      - 'scripts/validate-saek-video-publication.mjs'
+      - 'video-reviews/reports/**'
+      - '.github/workflows/saek-video-approval-gate.yml'
+  pull_request:
+    paths:
+      - 'saek-videos.js'
+      - 'saek-video-approvals.json'
+      - 'saek-course-series.js'
+      - 'saek-video-player.js'
+      - 'scripts/validate-saek-video-publication.mjs'
+      - 'video-reviews/reports/**'
+      - '.github/workflows/saek-video-approval-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  video-publication-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/validate-saek-video-publication.mjs
+      - run: node scripts/test-saek-video-gate.mjs
