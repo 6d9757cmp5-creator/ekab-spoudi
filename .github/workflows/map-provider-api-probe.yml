@@ -1,0 +1,43 @@
+name: Official Crete AED API compatibility check
+on:
+  pull_request:
+    paths:
+      - .github/workflows/map-provider-api-probe.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect published API CORS, response structure and count
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          import json
+          url='https://apinidotes-api.crete.gov.gr/apinidotesApi/api/Defibrillators'
+          origin='https://6d9757cmp5-creator.github.io'
+          for method in ('GET','OPTIONS'):
+              req=Request(url,method=method,headers={
+                'User-Agent':'EKAB-Spoudi-Interoperability-Check/1.0',
+                'Origin':origin,
+                **({'Access-Control-Request-Method':'GET'} if method=='OPTIONS' else {})
+              })
+              try:
+                  with urlopen(req,timeout=22) as r:
+                      payload=r.read(4000000) if method=='GET' else b''
+                      print(method,'HTTP',r.status,'BYTES',len(payload))
+                      for key,val in r.headers.items():
+                          if key.lower() in ('access-control-allow-origin','access-control-allow-methods','access-control-allow-headers','content-type','vary','x-frame-options','content-security-policy','cache-control'):
+                              print('HEADER',key,val[:250])
+                      if method=='GET':
+                          data=json.loads(payload.decode('utf-8'))
+                          print('TYPE',type(data).__name__)
+                          print('ITEM_COUNT',len(data) if hasattr(data,'__len__') else '?')
+                          if isinstance(data,list) and data:
+                              print('SAMPLE_KEYS',sorted(data[0].keys()))
+                              for key in ('latitude','longtitude','longitude','availability','isActive','status','name','city','description','accessHours','hours','openingHours'):
+                                  if key in data[0]:
+                                      v=data[0][key]
+                                      print('FIELD',key,'TYPE',type(v).__name__,'EXAMPLE',str(v)[:90] if key not in ('name','description') else '[redacted]')
+              except Exception as exc:print(method,'ERROR',repr(exc))
+          PY
