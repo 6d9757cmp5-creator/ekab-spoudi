@@ -243,7 +243,8 @@ function renderWritten(item){
  $('seminarQuestionNotes').readOnly=false;
  $('seminarQuestionSolution').textContent=u[item.prompt+1];
  $('seminarQuestionSolution').hidden=true;
- $('seminarQuizReveal').hidden=false;
+ $('seminarQuizReveal').hidden=false;$('seminarQuizReveal').disabled=false;
+ $('seminarNextQuestion').disabled=false;
  $('seminarAIResult').hidden=true;
  $('seminarAIResult').className='ai-grading-result';
  $('seminarGradeAI').disabled=false;
@@ -299,7 +300,7 @@ function renderOral(){
  $('seminarOralCase').textContent=u[4];$('seminarOralNotes').value=p.oralNotes[oral]||'';
  $('seminarOralNotes').readOnly=!!prior;
  $('seminarOralHelp').textContent=u[2];$('seminarOralHelp').hidden=true;
- $('seminarOralReveal').hidden=!!prior;
+ $('seminarOralReveal').hidden=!!prior;$('seminarOralReveal').disabled=!!prior;
  $('seminarScenarioSubmit').hidden=!!prior;
  $('seminarScenarioSubmit').disabled=!!prior;
  $('seminarScenarioSubmit').textContent='Υποβολή αξιολόγησης';
