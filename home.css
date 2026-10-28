@@ -233,3 +233,50 @@ html[data-theme="dark"] .study-resume-play{background:#27576f;color:#c7efff}
 .tracker-mini-reset:hover{color:var(--ink)}
 .tracker-mini-reset:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 @media(max-width:390px){.compact-tracker #homeMultiTracker{gap:6px}.compact-tracker #homeMultiTracker .tracker-mini-item{padding:6px}}
+
+
+/* 3D anatomy entry cards: parallel skeleton and organs, even on narrow phones. */
+.home-anatomy{margin-top:17px}
+.home-anatomy-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px}
+.home-anatomy-kicker{margin:0 0 3px;color:var(--blue,#18729b);font-size:.64rem;font-weight:850;letter-spacing:.11em}
+.home-anatomy-heading h3{font-size:clamp(.97rem,2.6vw,1.18rem);margin:0;font-weight:850;line-height:1.28;color:var(--ink,#173d51)}
+.home-anatomy-tech{color:var(--muted,#658396);font-size:.7rem;font-weight:750;white-space:nowrap}
+.home-anatomy-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.home-anatomy-tile{display:flex;gap:13px;align-items:center;position:relative;isolation:isolate;padding:12px 14px;border-radius:16px;border:1px solid #b9d9e8;min-height:135px;min-width:0;background:linear-gradient(125deg,#f1faff,#fff);box-shadow:0 4px 14px #0626390b;transition:transform .14s ease,border-color .14s ease}
+.home-anatomy-organs{background:linear-gradient(125deg,#f0faf9,#fff);border-color:#a8ded6}
+.home-anatomy-tile:hover{transform:translateY(-2px);border-color:#238ab9}
+.home-anatomy-illustration{flex:0 0 90px;width:90px;height:102px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:#dcecf3}
+.home-anatomy-organs .home-anatomy-illustration{background:#d6f2ed}
+.home-anatomy-illustration img{height:100%;width:100%;object-fit:cover;object-position:center}
+.home-anatomy-copy{min-width:0;flex:1}
+.home-anatomy-type{font-size:.61rem;font-weight:850;letter-spacing:.09em;color:#357a97;display:block}
+.home-anatomy-tile h4{margin:4px 0 5px;font-size:1.11rem;line-height:1.2}
+.home-anatomy-tile h4 a{color:#173d54;text-decoration:none}
+.home-anatomy-tile h4 a::after{content:"";position:absolute;inset:0;z-index:1}
+.home-anatomy-tile h4 a:focus-visible{outline:3px solid #368fbe;outline-offset:5px;border-radius:3px}
+.home-anatomy-tile:focus-within{outline:3px solid #368fbe;outline-offset:2px}
+.home-anatomy-copy p{margin:0 0 7px;font-size:.75rem;line-height:1.35;color:#517187}
+.home-anatomy-open{font-size:.72rem;font-weight:850;color:#166b8e}
+.home-anatomy-organs .home-anatomy-open{color:#117969}
+.home-anatomy-footnote{margin:8px 2px 0;color:var(--muted,#658396);font-size:.69rem;line-height:1.4}
+html[data-theme="dark"] .home-anatomy-heading h3{color:#eff8ff}
+html[data-theme="dark"] .home-anatomy-tile{background:linear-gradient(125deg,#173447,#122b3c);border-color:#37637d;box-shadow:none}
+html[data-theme="dark"] .home-anatomy-organs{background:linear-gradient(125deg,#153c3c,#14313f);border-color:#397973}
+html[data-theme="dark"] .home-anatomy-tile h4 a{color:#f1fcff}
+html[data-theme="dark"] .home-anatomy-type,html[data-theme="dark"] .home-anatomy-open{color:#76cfe7}
+html[data-theme="dark"] .home-anatomy-copy p{color:#b9d0dc}
+@media(max-width:620px){
+ .home-anatomy{margin-top:14px}
+ .home-anatomy-tech{font-size:.61rem}
+ .home-anatomy-pair{gap:8px}
+ .home-anatomy-tile{flex-direction:column;text-align:center;justify-content:start;min-height:182px;padding:10px 6px;gap:7px}
+ .home-anatomy-illustration{height:69px;width:72px;flex:0 0 69px}
+ .home-anatomy-copy{width:100%}
+ .home-anatomy-type{font-size:.53rem}
+ .home-anatomy-tile h4{font-size:.97rem;margin:3px 0 4px}
+ .home-anatomy-copy p{font-size:.67rem;line-height:1.25;margin:0 0 5px}
+ .home-anatomy-open{font-size:.67rem}
+ .home-anatomy-footnote{font-size:.63rem}
+}
+@media(max-width:340px){.home-anatomy-heading{align-items:start;flex-direction:column;gap:2px}.home-anatomy-tile{min-height:187px}.home-anatomy-pair{gap:6px}}
+@media(prefers-reduced-motion:reduce){.home-anatomy-tile{transition:none}.home-anatomy-tile:hover{transform:none}}
