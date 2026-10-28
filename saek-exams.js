@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id);
 const state=(()=>{try{const saved=JSON.parse(localStorage.getItem(KEY)||'{}');return{history:saved.history&&typeof saved.history==='object'&&!Array.isArray(saved.history)?saved.history:{},runs:Array.isArray(saved.runs)?saved.runs.slice(-30):[],active:saved.active&&typeof saved.active==='object'?saved.active:null};}catch{return{history:{},runs:[],active:null}}})();
 let bank=[],byId=new Map(),requestPending=false;
 const help=$('examStorageStatus');
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));help.textContent='Η πρόοδος εξετάσεων αποθηκεύτηκε στη συγκεκριμένη συσκευή.';}catch{help.textContent='Δεν ήταν δυνατή η αποθήκευση προόδου στη συσκευή.';}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));help.textContent='Η πρόοδος εξετάσεων αποθηκεύτηκε.';}catch{help.textContent='Δεν ήταν δυνατή η αποθήκευση προόδου στη συσκευή.';}}
 function scope(semester,courseId){return E.scoped(bank,semester,courseId);}
 function coursesMenu(){
  const semester=$('examSemester').value,select=$('examCourse'),previous=select.value;
@@ -142,7 +142,7 @@ function finalize(){
  if(done.length<a.total&&!confirm('Έχεις αξιολογήσει '+done.length+' από '+a.total+' ερωτήσεις. Θέλεις να ολοκληρώσεις τώρα;'))return;
  const run={date:Date.now(),semester:a.semester,courseId:a.courseId,count:a.total,answered:done.length,correct:done.filter(s=>s.grade==='correct').length,partial:done.filter(s=>s.grade==='partial').length,incorrect:done.filter(s=>s.grade==='incorrect').length,items:a.steps.filter(s=>s.grade==='partial'||s.grade==='incorrect').map(s=>s.id).slice(0,30)};
  state.runs.push(run);state.runs=state.runs.slice(-30);
- state.active=null;save();
+ state.active=null;save();window.dispatchEvent(new Event('ekab:progress-changed'));
  $('examResultsStats').replaceChildren();
  const figures=[['Ερωτήσεις',run.count],['Αξιολογήθηκαν',run.answered],['Σωστές',run.correct],['Μερικώς σωστές',run.partial],['Για επανάληψη',run.incorrect]];
  for(const [name,value] of figures){const node=document.createElement('div');const strong=document.createElement('strong');strong.textContent=String(value);const label=document.createElement('span');label.textContent=name;node.append(strong,label);$('examResultsStats').append(node)}
@@ -151,6 +151,15 @@ function finalize(){
  else for(const id of run.items.slice(0,12)){const q=byId.get(id);if(!q)continue;const link=document.createElement('a');link.href=q.href;link.textContent=q.course+' · '+q.chapterTitle;host.append(link)}
  updateSetup();openView('examResults');
 }
+window.addEventListener('ekab:cloud-applied',()=>{
+  try{
+    const stored=JSON.parse(localStorage.getItem(KEY)||'{}');
+    if(stored.history&&typeof stored.history==='object'&&!Array.isArray(stored.history)){
+      state.history=stored.history;
+      updateSetup();
+    }
+  }catch{}
+});
 function bind(){
  $('examSemester').addEventListener('change',coursesMenu);
  $('examCourse').addEventListener('change',updateSetup);
