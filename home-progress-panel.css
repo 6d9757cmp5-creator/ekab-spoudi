@@ -60,3 +60,23 @@ html[data-theme="dark"] .progress-panel-half{background:#333e49}
  .progress-panel-stat{font-size:.74rem}
 }
 @media(prefers-reduced-motion:reduce){.progress-panel-half>span{transition:none}}
+
+/* Compact home summary: full analysis stays hidden until explicitly requested. */
+.home-mini-progress.progress-dashboard{max-width:740px;margin:7px 0 12px}
+.progress-panel-compact{padding:11px 14px;border:1px solid var(--line);border-radius:13px;background:var(--card,transparent)}
+.progress-panel-compact-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.progress-panel-compact-heading>strong{font-size:.93rem;font-weight:750}
+.progress-panel-compact-toggle{border:0;background:transparent;color:var(--blue,#5389ea);font:inherit;font-size:.78rem;font-weight:650;cursor:pointer;padding:5px 0}
+.progress-panel-compact-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:7px}
+.progress-panel-compact-course{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 9px;font-size:.8rem}
+.progress-panel-compact-course>strong{font-size:.81rem}
+.progress-panel-compact-course>span{color:var(--muted);font-variant-numeric:tabular-nums}
+.progress-panel-compact+.progress-panel-header{margin-top:14px}
+@media(max-width:620px){
+ .progress-panel-compact{padding:10px 12px}
+ .progress-panel-compact-summary{gap:5px 10px}
+ .progress-panel-compact-course{display:block}
+ .progress-panel-compact-course>strong{display:block;margin-bottom:3px}
+ .progress-panel-compact-course>span{font-size:.73rem}
+}
+@media(max-width:360px){.progress-panel-compact-summary{grid-template-columns:1fr}}
