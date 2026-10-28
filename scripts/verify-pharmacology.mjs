@@ -43,23 +43,53 @@ else{
  const txa=meds.find(m=>m.name==='Τρανεξαμικό οξύ (TXA)');
  if(txa&&!/2 ωρών/.test(txa.clinical.adultDose))fail('Missing special head injury 2 hour pathway');
 }
-/* Level 4 is a separate educational exercise, NOT a fourth permission scope. */
+/* Adaptive pharmacology bank is educational: 76 unique cards and 76
+   contextualised questions from 19 distinct guideline-linked pairs. */
+try { vm.runInContext(read('farmaka-adaptive-bank.js'),context,{filename:'farmaka-adaptive-bank.js',timeout:3000}) }
+catch(e){fail('Adaptive bank runtime: '+e.message)}
 try { vm.runInContext(read('farmaka-cases.js'),context,{filename:'farmaka-cases.js',timeout:3000}) }
-catch(e){ fail('Level 4 scenarios: runtime '+e.message) }
-const cases=win.EKAB_PHARMA_CASES;
-if(!Array.isArray(cases)||cases.length!==7)fail('Level 4: expected seven short cases');
-else {
- const unique=new Set();
- for(const item of cases){
-  if(!item.id||unique.has(item.id))fail('Level 4: duplicate/missing case ID '+item.id);
-  unique.add(item.id);
-  if(!item.topic||!item.question||!item.why)fail('Level 4: missing educational explanation '+item.id);
-  if(!Array.isArray(item.options)||item.options.length!==3||item.options.some(x=>!x?.trim()))fail('Level 4: three choices required '+item.id);
-  if(!Number.isInteger(item.correct)||item.correct<0||item.correct>=item.options.length)fail('Level 4: invalid correct index '+item.id);
-  if(!/^https:\/\//.test(item.sourceUrl||'')||!item.sourceTitle)fail('Level 4: verifiable source required '+item.id);
- }
+catch(e){fail('Adaptive engine runtime: '+e.message)}
+for(const f of ['farmaka-adaptive-bank.js','farmaka-cases.js']){
+ try{new vm.Script(read(f),{filename:f})}catch(e){fail('Adaptive JS syntax '+f+': '+e.message)}
 }
-try{new vm.Script(read('farmaka-cases.js'),{filename:'farmaka-cases.js'})}catch(e){fail('Level 4 JS syntax: '+e.message)}
+const adaptive=win.EKAB_PHARMA_ADAPTIVE_BANK;
+if(!adaptive||adaptive.singles?.length!==76||adaptive.combos?.length!==76||adaptive.all?.length!==152)
+ fail('Adaptive bank must contain 76 individual + 76 combined cases');
+else {
+ const ids=new Set(),pairs=new Set(),singleMedicineIds=new Set();
+ for(const item of adaptive.all){
+  if(ids.has(item.id))fail('Duplicate adaptive case '+item.id);
+  ids.add(item.id);
+  if(!item.id||!item.topic||!item.question||!item.why||!item.scope||!item.sourceTitle)
+   fail('Missing educational case field '+item.id);
+  if(!Array.isArray(item.options)||item.options.length!==3||item.options.some(x=>!x?.trim()))
+   fail('Adaptive case requires 3 real choices '+item.id);
+  if(!Number.isInteger(item.correct)||item.correct<0||item.correct>=item.options.length)
+   fail('Invalid correct answer '+item.id);
+  if(!/^https:\/\//.test(item.sourceUrl||''))fail('Source missing '+item.id);
+  if(!Array.isArray(item.medicineIds)||!item.medicineIds.length)
+   fail('Case without medicine references '+item.id);
+  if(/\b\d+(?:[.,]\d+)?\s*(?:mg|μg|g|mL|IU)\b/i.test(item.question+' '+item.why+' '+item.options.join(' ')))
+   fail('Numeric dosing in case '+item.id);
+  if(item.kind==='combo'){
+   if(item.medicineIds.length!==2||!item.pairKey||!item.why.includes('Δεν συνιστά καθολικά'))
+    fail('Unsafe/unclear pair context '+item.id);
+   pairs.add(item.pairKey);
+  }else{
+   if(item.medicineIds.length!==1)fail('Single card mismatch '+item.id);
+   singleMedicineIds.add(item.medicineIds[0]);
+  }
+ }
+ if(ids.size!==152||singleMedicineIds.size!==76||pairs.size!==19)
+  fail('Inventory mismatch '+ids.size+' cases; '+singleMedicineIds.size+' cards; '+pairs.size+' pairs');
+ if(adaptive.all.some(x=>![1,2,3].includes(x.priority)||![1,2,3].includes(x.difficulty)))
+  fail('Invalid frequency/difficulty rank');
+ if(!adaptive.epidemiology?.caveat)fail('Epidemiological limitation not disclosed');
+}
+const engine=read('farmaka-cases.js');
+if(!engine.includes('ekab.pharma.adaptive.v1')||!engine.includes('selectFive(')||
+   !engine.includes('lastAt')||!engine.includes('Επόμενη πεντάδα'))
+ fail('Adaptive spaced-review/5-case engine missing');
 const page=read('farmaka.html');
 const order=['farmaka-catalog.js','farmaka-clinical-2026.js','farmaka-ui.js'].map(f=>page.indexOf(f));
 if(order.some(x=>x<0)||!(order[0]<order[1]&&order[1]<order[2]))fail('Script missing or wrong execution order');
@@ -78,9 +108,9 @@ const ui=read('farmaka-ui.js');
 if(!ui.includes('ph-extended-body'))fail('Expanded clinical cards are not shown');
 if(!ui.includes("var quiz = ["))fail('Self-assessment quiz not found');
 if(!page.includes('id="scopeLegend"')||!page.includes('Τι σημαίνουν τα 3 χρώματα;'))fail('Scope legend must be concise and discoverable');
-if(!page.includes('id="clinicalThinking"')||!page.includes('id="phCaseStage"'))fail('Level 4 learning panel missing');
-if(!page.includes('farmaka-cases.js?v='))fail('Level 4 module not loaded by page');
-if(!sw.includes('"./farmaka-cases.js"'))fail('Level 4 not cached for offline study');
+if(!page.includes('id="clinicalThinking"')||!page.includes('id="phCaseStage"'))fail('Clinical thinking quiz panel missing');
+if(!page.includes('farmaka-adaptive-bank.js?v=')||!page.includes('farmaka-cases.js?v='))fail('Adaptive scripts not loaded by page');
+if(!sw.includes('"./farmaka-cases.js"')||!sw.includes('"./farmaka-adaptive-bank.js"'))fail('Adaptive bank not cached offline');
 if(!page.includes('Η ανεξάρτητη κλινική έγκριση εκκρεμεί'))fail('Medical disclaimer removed');
 if(failures.length){console.error('❌ Pharmacology: '+failures.length+' problems\n'+failures.join('\n'));process.exitCode=1;}
-else console.log('✅ Pharmacology structure: '+lib.medicines.length+' cards, 11 categories, three permission scopes, seven Level 4 situations, source links, 12-question teaching module, navigation, offline and release consistency. NOTE: this does not mean independent clinical/SmPC approval.');
+else console.log('✅ Pharmacology structure: '+lib.medicines.length+' cards, 11 categories, three permission scopes, 152 adaptive 5-at-a-time scenarios, source links, 12-question teaching module, navigation, offline and release consistency. NOTE: this does not mean independent clinical/SmPC approval.');

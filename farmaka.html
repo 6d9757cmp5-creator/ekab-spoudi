@@ -185,13 +185,21 @@ html[data-theme="dark"] .ph-clinical-note{background:#193a4b;color:#e8f4fa}
 html[data-theme="dark"] .ph-case-option.correct{background:#204733;color:#d6f7e1;border-color:#44825b}
 html[data-theme="dark"] .ph-case-option.wrong{background:#4f292e;color:#ffdddd;border-color:#96545d}
 html[data-theme="dark"] .ph-case-feedback{background:#1b3c50}
+.ph-case-toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:12px 0 18px;flex-wrap:wrap}
+.ph-case-mode-label{display:grid;gap:5px;font-size:.78rem;font-weight:750;color:var(--muted)}
+.ph-case-mode{max-width:100%;min-height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel,#fff);color:var(--ink);font:inherit;font-size:.84rem;padding:8px 12px}
+.ph-case-mode:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ph-case-stat{margin:0;font-size:.73rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ph-case-return{font-size:.7rem;font-weight:650;color:var(--muted);margin:0 0 12px}
+.ph-case-summary-title{font-size:1.06rem!important}
 @media(max-width:480px){.ph-case-panel{padding:15px}.ph-case-heading strong{font-size:.98rem}.ph-case-option{font-size:.82rem;padding:11px 12px}}
 
 </style>
 <script src="farmaka-catalog.js?v=2026.10.26" defer></script>
 <script src="farmaka-clinical-2026.js?v=2026.10.26" defer></script>
 <script src="farmaka-ui.js?v=2026.10.26" defer></script>
-<script src="farmaka-cases.js?v=27.1.110" defer></script>
+<script src="farmaka-adaptive-bank.js?v=27.1.112" defer></script>
+<script src="farmaka-cases.js?v=27.1.112" defer></script>
 <link rel="stylesheet" href="sources-ui.css?v=27.1.73">
 <script src="sources-ui.js?v=27.1.73" defer></script>
 </head>
@@ -252,8 +260,8 @@ html[data-theme="dark"] .ph-case-feedback{background:#1b3c50}
 <p id="quizProgress" class="ph-small" aria-live="polite"></p><h3 id="quizQuestion">Φόρτωση…</h3><div id="quizOptions" class="ph-quiz-options"></div><div id="quizFeedback" class="ph-feedback" hidden role="status"></div><button type="button" id="quizNext" class="ph-button" hidden>Επόμενη ερώτηση</button><button type="button" id="quizRestart" class="ph-button secondary" hidden>Νέα προσπάθεια</button>
 </section>
 <details class="ph-panel ph-case-panel" id="clinicalThinking" aria-labelledby="clinicalThinkingTitle">
-<summary><span class="ph-case-heading"><strong id="clinicalThinkingTitle">Επίπεδο 4 · Κλινική σκέψη</strong><span>7 σύντομα περιστατικά · ένα κάθε φορά · χωρίς δοσολογικά τεστ</span></span></summary>
-<p class="ph-case-intro">Πρώτα αναγνώρισε τον κίνδυνο, σκέψου την προτεραιότητα και απόφυγε το φαρμακευτικό λάθος. Η άσκηση είναι εκπαιδευτική, όχι άδεια χορήγησης. Οι απαντήσεις δεν αποθηκεύονται.</p>
+<summary><span class="ph-case-heading"><strong id="clinicalThinkingTitle">Κλινική σκέψη · Έξυπνο τεστ</strong><span>152 περιστατικά · 5 ανά γύρο · ανάλογα με την επίδοσή σου</span></span></summary>
+<p class="ph-case-intro">Ξεκινά από συχνά περιστατικά που καταγράφονται σε ευρωπαϊκές μελέτες προνοσοκομειακής φροντίδας, επαναφέρει τα λάθη σου και ανεβάζει σταδιακά τη δυσκολία. 76 μεμονωμένες καρτέλες και 76 περιπτώσεις συνδυασμών/διαδοχικών επιλογών από 19 τεκμηριωμένα ζεύγη. Πέντε ερωτήσεις κάθε φορά, χωρίς δοσολογίες. Η πρόοδος αυτού του τεστ αποθηκεύεται μόνο στη συγκεκριμένη συσκευή. Δεν αποτελεί άδεια χορήγησης ή επικυρωμένο πρωτόκολλο ΕΚΑΒ.</p>
 <div id="phCaseStage" aria-label="Ασκήσεις κλινικής σκέψης"><p class="ph-small">Φόρτωση εκπαιδευτικών περιστατικών…</p></div>
 </details>
 <details class="ph-panel ph-basics ph-reference-details" id="references"><summary><h2 id="refsTitle">Πηγές και τεκμηρίωση</h2></summary><div class="ph-reference-content">
