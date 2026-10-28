@@ -58,6 +58,12 @@ test('seminar_case uses controlled scenario reference',async()=>setup(async()=>{
  globalThis.fetch=async(url,opt)=>{const input=JSON.parse(JSON.parse(opt.body).messages[1].content);assert.match(input.section,/Κλινικό σενάριο/);return response(grade);};
  assert.equal((await invoke({section:'seminar_case',courseId:'bls',caseIndex:0,answer:answer.answer},'case')).status,200);
 }));
+test('EOPPEP reference is bundled in the Function, never fetched from GitHub',async()=>setup(async()=>{
+ let calls=0;globalThis.fetch=async(url,opt)=>{calls++;assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');
+  const input=JSON.parse(JSON.parse(opt.body).messages[1].content);assert.match(input.question,/ρινικών κοιλοτήτων/);assert.ok(input.reference.length>50);return response(grade);};
+ const result=await invoke({section:'eoppep',questionId:'EOP-A-001',answer:'Ο αέρας θερμαίνεται και καθαρίζεται.'},'eop-local');
+ assert.equal(result.status,200);assert.equal(calls,1);
+}));
 test('429 switches once to free-only fallback with zero price constraint',async()=>setup(async()=>{
  process.env.CLOUDFLARE_API_TOKEN='test-key';process.env.CLOUDFLARE_ACCOUNT_ID='a'.repeat(32);process.env.CLOUDFLARE_FREE_PLAN_CONFIRMED='true';let calls=0;
  globalThis.fetch=async(url,opt)=>{calls++;if(calls===1){assert.equal(JSON.parse(opt.body).reasoning,undefined);return {ok:false,status:429};}
