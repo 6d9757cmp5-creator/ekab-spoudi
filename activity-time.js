@@ -7,7 +7,8 @@ if(window.EkabActivityTimer)return;
 const PREFIX='ekab.activity.v1.',DEVICE='ekab.sync.device.v1';
 const allowed=/^(saek|eoppep|bls|pbls|ils|phtls|als|pharma)$/;
 const MAX=315360000,IDLE_MS=120000,PERIOD=5000;
-let device,activity=Date.now(),last=performance.now(),lastSync=Date.now();
+let device,activity=Date.now(),last=performance.now(),lastPersist=Date.now();
+const pending=new Map();
 try{
  device=localStorage.getItem(DEVICE);
  if(!/^[a-f0-9]{32}$/.test(device||'')){
@@ -41,16 +42,27 @@ for(const event of ['pointerdown','keydown','touchstart','scroll'])document.addE
 window.addEventListener('focus',()=>{mark();last=performance.now()});
 document.addEventListener('visibilitychange',()=>{last=performance.now();if(document.visibilityState==='hidden')flush();else mark()});
 window.addEventListener('pagehide',flush);
-function flush(){if(Date.now()-lastSync<8000)return;lastSync=Date.now();window.dispatchEvent(new Event('ekab:progress-changed'))}
+function flush(){
+ if(!pending.size)return;
+ let changed=false;
+ for(const [key,seconds] of pending){
+  try{
+   const old=Number(localStorage.getItem(key)||0);
+   if(!Number.isSafeInteger(old)||old<0||old>MAX-seconds)continue;
+   localStorage.setItem(key,String(old+seconds));changed=true;
+  }catch{}
+ }
+ pending.clear();lastPersist=Date.now();
+ if(changed)window.dispatchEvent(new Event('ekab:progress-changed'));
+}
 function tick(){
  const now=performance.now(),elapsed=Math.min(PERIOD+1000,Math.max(0,now-last));last=now;
  if(document.visibilityState!=='visible'||!document.hasFocus()||Date.now()-activity>IDLE_MS)return;
  const scope=locationScope();if(!scope||!allowed.test(scope[0]))return;
  const seconds=Math.round(elapsed/1000);if(seconds<=0||seconds>6)return;
  const key=PREFIX+device+'.'+scope[0]+'.'+scope[1];
- try{const old=Number(localStorage.getItem(key)||0);if(!Number.isSafeInteger(old)||old<0||old>MAX-seconds)return;localStorage.setItem(key,String(old+seconds));}
- catch{return}
- if(Date.now()-lastSync>=60000)flush();
+ pending.set(key,(pending.get(key)||0)+seconds);
+ if(Date.now()-lastPersist>=30000)flush();
 }
 window.EkabActivityTimer={scope:locationScope};
 setInterval(tick,PERIOD);
