@@ -16,7 +16,7 @@ const samples={
 };
 for(const [en,el] of Object.entries(samples))assert.equal(anatomicalGreek(en),el,en);
 assert.equal(anatomicalGreek('Left sixth rib cartilage'),null,'Never drop anatomical qualifiers');
-assert.equal(anatomicalGreek('Left lower first secondary molar tooth (test suffix)'),samples['Left lower first secondary molar tooth']);
+assert.equal(anatomicalGreek('Left lower first secondary molar tooth (test suffix)'),null,'Never discard unknown parenthetical qualifiers');
 assert.equal(anatomicalGreek('Unexpected highly specific structure'),null,'Unknown terms must not be invented');
 assert.equal(anatomicalGreek('Right internal iliac vein'),'Δεξιά έσω λαγόνια φλέβα');
 assert.equal(anatomicalGreek('Left lacrimal gland'),'Αριστερός δακρυϊκός αδένας');
@@ -27,6 +27,39 @@ assert.equal(anatomicalGreek('Left nipple'),'Αριστερή θηλή μαστ�
 assert.equal(anatomicalGreek('Anterior interventricular vein'),'Πρόσθια μεσοκοιλιακή φλέβα');
 assert.equal(anatomicalGreek('Middle part of jejunum'),'Μέσο τμήμα της νήστιδας');
 assert.equal(anatomicalGreek('Minor calyx'),'Ελάσσων νεφρικός κάλυκας');
+
+
+// Exact audit-observed anatomy labels: editorial mappings awaiting independent medical review.
+const expandedSamples={
+  "Left lower central secondary incisor tooth": "Αριστερός κάτω κεντρικός μόνιμος τομέας",
+  "Right upper lateral secondary incisor tooth": "Δεξιός άνω πλάγιος μόνιμος τομέας",
+  "Left lower secondary canine tooth": "Αριστερός κάτω μόνιμος κυνόδοντας",
+  "Anterior chamber of left eyeball": "Πρόσθιος θάλαμος του αριστερού οφθαλμικού βολβού",
+  "Left optic nerve": "Αριστερό οπτικό νεύρο",
+  "Right optic nerve": "Δεξιό οπτικό νεύρο",
+  "Left levator palpebrae superioris": "Αριστερός ανελκτήρας του άνω βλεφάρου",
+  "Left lacrimal sac": "Αριστερός δακρυϊκός ασκός",
+  "Right bulbar conjunctiva": "Δεξιός βολβικός επιπεφυκότας",
+  "Palpebral conjunctiva of right upper eyelid": "Βλεφαρικός επιπεφυκότας του δεξιού άνω βλεφάρου",
+  "Suspensory ligament of left lens": "Κρεμαστήριος σύνδεσμος του αριστερού φακού",
+  "Interlobar adipose tissue of left mammary gland": "Μεσολόβιος λιπώδης ιστός του αριστερού μαστικού αδένα",
+  "Head of caudate (left)": "Αριστερή κεφαλή του κερκοφόρου πυρήνα",
+  "Body of caudate (right)": "Δεξιό σώμα του κερκοφόρου πυρήνα",
+  "Tail of caudate (left)": "Αριστερή ουρά του κερκοφόρου πυρήνα",
+  "Nucleus accumbens (left)": "Αριστερός επικλινής πυρήνας",
+  "External segment of globus pallidus (left)": "Αριστερή έξω μοίρα της ωχράς σφαίρας",
+  "Left posterior inferior cerebellar artery": "Αριστερή οπίσθια κάτω παρεγκεφαλιδική αρτηρία",
+  "Right superior segmental bronchial tree": "Δεξιό άνω τμηματικό βρογχικό δέντρο",
+  "Left posterior basal segmental vein": "Αριστερή οπίσθια βασική τμηματική φλέβα",
+  "Right lateral basal segmental artery": "Δεξιά έξω βασική τμηματική αρτηρία",
+  "Circumflex branch of left coronary artery": "Περισπώμενος κλάδος της αριστερής στεφανιαίας αρτηρίας",
+  "Anterior division of right renal artery": "Πρόσθια μοίρα της δεξιάς νεφρικής αρτηρίας",
+  "Artery of left precentral sulcus": "Αρτηρία της αριστερής προκεντρικής αύλακας",
+  "External anal sphincter": "Έξω σφιγκτήρας του πρωκτού"
+};
+for(const [en,el] of Object.entries(expandedSamples))assert.equal(anatomicalGreek(en),el,en);
+assert.equal(anatomicalGreek('Head of caudate (unknown)'),null,'Unrecognized parentheses must not be dropped');
+assert.equal(anatomicalGreek('Left head of caudate (right)'),null,'Conflicting sides must not be accepted');
 
 assert.deepEqual(anatomyName('Untranslated source mesh','skeletal',{skeletal:'Σκελετικό'}),{
  el:null,english:'Untranslated source mesh',label:'Μη μεταφρασμένη δομή',systemName:'Σκελετικό'
