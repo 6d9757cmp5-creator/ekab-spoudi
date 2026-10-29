@@ -2556,7 +2556,44 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Ρινική/στοματική είσοδος, φάρυγγας, λάρυγγας, τραχεία, βρόγχοι και βρογχιόλια ως πορεία αέρα",
+          "Διάκριση αγώγιμης από αναπνευστική ζώνη"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system"
+        ],
+        "finding": "Η ανατομική ακολουθία συμφωνεί σε επίπεδο σύντομης εκπαιδευτικής απάντησης.",
+        "limits": "Να διακριθεί ακριβέστερα η αγώγιμη ζώνη από αναπνευστικά βρογχιόλια/κυψελίδες· οι κυψελίδες είναι περιοχή ανταλλαγής αερίων, όχι απλώς αγώγιμος αεραγωγός.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "Ρινική/στοματική είσοδος, φάρυγγας, λάρυγγας, τραχεία, βρόγχοι και βρογχιόλια ως πορεία αέρα",
+          "Διάκριση αγώγιμης από αναπνευστική ζώνη"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system"
+        ],
+        "verdict": "targeted_stored_answer_claims_consistent_with_documented_limits",
+        "limits": "Να διακριθεί ακριβέστερα η αγώγιμη ζώνη από αναπνευστικά βρογχιόλια/κυψελίδες· οι κυψελίδες είναι περιοχή ανταλλαγής αερίων, όχι απλώς αγώγιμος αεραγωγός.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-062",
@@ -2570,7 +2607,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Θολωτό μυώδες διάφραγμα χωρίζει θωρακική και κοιλιακή κοιλότητα",
+          "Κύριος μυς ήρεμης εισπνοής και κινητική νεύρωση από φρενικά C3–C5"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+          "https://www.ncbi.nlm.nih.gov/books/NBK537353/"
+        ],
+        "finding": "Συμφωνεί η ανατομία/λειτουργία με OpenStax και η προέλευση φρενικού C3–C5 με NCBI StatPearls.",
+        "limits": "Δεν έγινε εξαντλητική ανατομική αντιπαραβολή προσφύσεων, τρημάτων και κλινικών παραλλαγών.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "Θολωτό μυώδες διάφραγμα χωρίζει θωρακική και κοιλιακή κοιλότητα",
+          "Κύριος μυς ήρεμης εισπνοής και κινητική νεύρωση από φρενικά C3–C5"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+          "https://www.ncbi.nlm.nih.gov/books/NBK537353/"
+        ],
+        "verdict": "targeted_stored_answer_claims_consistent_with_documented_limits",
+        "limits": "Δεν έγινε εξαντλητική ανατομική αντιπαραβολή προσφύσεων, τρημάτων και κλινικών παραλλαγών.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-063",
@@ -2584,7 +2660,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Κύριος βρόγχος, πνευμονική αρτηρία/φλέβες, βρογχικά αγγεία και λεμφικά στοιχεία στην πύλη/ρίζα",
+          "Νεύρα του πνευμονικού πλέγματος στην περιοχή της ρίζας"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs",
+          "https://www.ncbi.nlm.nih.gov/books/NBK537353/",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK470197/"
+        ],
+        "finding": "Συμβατή συνοπτική απαρίθμηση με τις πηγές ανατομίας πύλης/ρίζας.",
+        "limits": "Προσοχή στη διάκριση στοιχείων που διέρχονται από την πύλη από γειτονικά νεύρα: το φρενικό πορεύεται πρόσθια της ρίζας, δεν πρέπει να καταχωρίζεται αδιακρίτως ως ενδοπυλαίο.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "Κύριος βρόγχος, πνευμονική αρτηρία/φλέβες, βρογχικά αγγεία και λεμφικά στοιχεία στην πύλη/ρίζα",
+          "Νεύρα του πνευμονικού πλέγματος στην περιοχή της ρίζας"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs",
+          "https://www.ncbi.nlm.nih.gov/books/NBK537353/",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK470197/"
+        ],
+        "verdict": "targeted_stored_answer_claims_consistent_with_documented_limits",
+        "limits": "Προσοχή στη διάκριση στοιχείων που διέρχονται από την πύλη από γειτονικά νεύρα: το φρενικό πορεύεται πρόσθια της ρίζας, δεν πρέπει να καταχωρίζεται αδιακρίτως ως ενδοπυλαίο.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-064",
@@ -2598,7 +2715,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Μήνιγγες έξω προς μέσα: σκληρή, αραχνοειδής, χοριοειδής",
+          "Καρδιακό τοίχωμα μέσα προς έξω: ενδοκάρδιο, μυοκάρδιο, επικάρδιο"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-circulation-and-the-central-nervous-system",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+        ],
+        "finding": "Η ακολουθία και των δύο ομάδων στοιβάδων συμφωνεί με τις συγκεκριμένες ανατομικές ενότητες.",
+        "limits": "Να διαχωρίζεται το επικάρδιο (σπλαχνικό ορογόνο περικάρδιο) από το τοιχωματικό/ινώδες περικάρδιο. Δεν επαληθεύτηκε νεότερο επίσημο λυσάρι.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "Μήνιγγες έξω προς μέσα: σκληρή, αραχνοειδής, χοριοειδής",
+          "Καρδιακό τοίχωμα μέσα προς έξω: ενδοκάρδιο, μυοκάρδιο, επικάρδιο"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-circulation-and-the-central-nervous-system",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+        ],
+        "verdict": "targeted_stored_answer_claims_consistent_with_documented_limits",
+        "limits": "Να διαχωρίζεται το επικάρδιο (σπλαχνικό ορογόνο περικάρδιο) από το τοιχωματικό/ινώδες περικάρδιο. Δεν επαληθεύτηκε νεότερο επίσημο λυσάρι.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-065",
@@ -2612,7 +2768,46 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Mantoux: δερματική δοκιμασία φυματίνης για ανοσολογική ένδειξη λοίμωξης από M. tuberculosis",
+          "Θετικό αποτέλεσμα δεν αποδεικνύει ενεργό νόσο χωρίς επιπλέον εξετάσεις"
+        ],
+        "sources": [
+          "https://www.cdc.gov/tb/hcp/testing-diagnosis/tuberculin-skin-test.html",
+          "https://www.cdc.gov/tb/hcp/clinical-overview/latent-tuberculosis-infection.html"
+        ],
+        "finding": "Το κείμενο της αποθηκευμένης απάντησης είναι σύμφωνο με CDC. Η παλιά πηγή WHO BEC δεν αποτελεί κατάλληλη ειδική τεκμηρίωση Mantoux.",
+        "limits": "ΚΡΙΣΙΜΗ ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΣΑΦΕΙΑ: η εκφώνηση «ποια νόσος διαγιγνώσκεται» μπορεί να παρερμηνευθεί ως διάγνωση ενεργού φυματίωσης· η Mantoux ελέγχει λοίμωξη/ευαισθητοποίηση, δεν ξεχωρίζει ενεργό από λανθάνουσα νόσο. Απαιτείται ειδική βιβλιογραφική αντικατάσταση στην εφαρμογή.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "Mantoux: δερματική δοκιμασία φυματίνης για ανοσολογική ένδειξη λοίμωξης από M. tuberculosis",
+          "Θετικό αποτέλεσμα δεν αποδεικνύει ενεργό νόσο χωρίς επιπλέον εξετάσεις"
+        ],
+        "sources": [
+          "https://www.cdc.gov/tb/hcp/testing-diagnosis/tuberculin-skin-test.html",
+          "https://www.cdc.gov/tb/hcp/clinical-overview/latent-tuberculosis-infection.html"
+        ],
+        "verdict": "answer_consistent_but_question_wording_misleading_and_source_inadequate",
+        "limits": "ΚΡΙΣΙΜΗ ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΣΑΦΕΙΑ: η εκφώνηση «ποια νόσος διαγιγνώσκεται» μπορεί να παρερμηνευθεί ως διάγνωση ενεργού φυματίωσης· η Mantoux ελέγχει λοίμωξη/ευαισθητοποίηση, δεν ξεχωρίζει ενεργό από λανθάνουσα νόσο. Απαιτείται ειδική βιβλιογραφική αντικατάσταση στην εφαρμογή.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-066",
