@@ -46,6 +46,7 @@ mentor/
 Η αλλαγή δεν τροποποιεί:
 
 - `index.html`, τις δημόσιες διευθύνσεις ή τα υπάρχοντα `href` / `src` των σελίδων
+- Το `sw.js` αλλάζει **μόνο** για τη νέα έκδοση cache και την προφόρτωση των μεταφερμένων modules· δεν επηρεάζει περιεχόμενο, συγχρονισμό ή αποθηκευμένους βαθμούς.
 - `app.js`, `progress.js`, `sync-local.js`, `sync-model.js`, `cloud-sync.js`
 - `study-scheduler.js`, `saek-exam-engine.js`, `ai-grading-client.js`
 - τις υπάρχουσες εγγραφές προόδου / βαθμολόγησης ΣΑΕΚ και ΕΟΠΠΕΠ
