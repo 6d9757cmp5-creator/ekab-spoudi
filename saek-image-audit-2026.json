@@ -12978,17 +12978,25 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπη σχηματική εκπαιδευτική εικόνα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.ems.gov/what-is-ems.html",
-      "caption": "Κεφάλαιο 19-03: Δελτίο παράδοσης · Πιεσόμετρο · Ρολόι. Σύντομες ελληνικές ονομασίες με βέλη προς τα αντίστοιχα εκπαιδευτικά σύμβολα.",
+      "page": "https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home",
+      "caption": "Κεφάλαιο 19-03: Δελτίο παράδοσης · Αυτόματο πιεσόμετρο με περιχειρίδα · Ρολόι. Σύντομες ελληνικές ονομασίες με βέλη προς τα αντίστοιχα εκπαιδευτικά σύμβολα.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "General background context; independent confirmation of clinical details pending."
+        "American Heart Association: automatic upper-arm cuff-style blood-pressure monitor; consulted for device recognition only, not measurement guidance or Greek protocol."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Three point-specific arrow labels; automated structural, duplicate and SHA checks. Actual mobile/browser visual review pending."
+        "date": "2026-10-29",
+        "scope": "Exact SVG rendered individually in Microsoft Edge/Chromium at 1180×820 and inspected. Initial visual review found the middle ECG-monitor pictogram did not match its “Πιεσόμετρο” label. Replaced it with a distinct schematic digital BP unit plus cuff and tubing; display deliberately contains dashes, not a reading. Delivery-form, BP-device and clock symbols are distinct; arrows target the intended symbols, Greek labels fit, and no overlap/clipping was observed. Recognition only; no measurement instruction, clinical result, or Greek protocol is depicted. AHA source supports device identity only; independent Greek clinical/operational and mobile/offline review pending."
       },
-      "sha256": "6142dcf9db25df6aa91bc3206816fea9e9cf18a115ba75ac8b09b066509e99e4"
+      "sha256": "a692f77d4c61b7b21b53e640480c04b105abd6b37f6dcee42847aade70302578",
+      "sources": [
+        {
+          "title": "American Heart Association, Home Blood Pressure Monitoring",
+          "url": "https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home",
+          "supports": "Identifies an automatic upper-arm cuff-style monitor; used only to check the pictogram depicts the named device, not to validate measurement instructions or local protocol."
+        }
+      ]
     },
     "sem_d_19_4_objects": {
       "filename": "semester-d-19-04-objects-el.svg",
