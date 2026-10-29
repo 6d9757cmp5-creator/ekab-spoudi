@@ -283,7 +283,7 @@
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Unique image individually inspected in local 1280px render. Found Greek subscript glyphs in CO₂, H⁺ and HCO₃⁻ rendered as empty squares; plain-text CO2, H+ and HCO3- renders legibly as a temporary workaround, but scientific subscripts require proper typographic verification. Arrows converge on the central balance concept. Exact pushed render, mobile review, and independent physiology validation pending."
+        "scope": "Unique image individually inspected in exact pushed browser render at 1280px on 2026-10-29. Original Greek subscript glyphs in CO₂, H⁺ and HCO₃⁻ rendered as empty squares in raster output; changed to clearly visible plain-text CO2, H+ and HCO3-. Arrows converge on the central balance concept. Scientifically standard subscript typography remains a specific open defect; mobile review and independent physiology validation pending."
       },
       "sha256": "a7c95b5e55af1fbc8fa8d00e0898b4db0dc9d507f71d5686a7b18297ebd5b0db"
     },
@@ -798,11 +798,11 @@
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "date": "2026-10-26",
-        "scope": "Source visual SVG markup generated with Greek labels and leader lines; independent raster/browser review not yet performed"
+        "date": "2026-10-29",
+        "scope": "Unique image inspected in local 1280px raster. Found the brakes/fluids callout connected to a lamp, the defect-report callout connected to the wheel, and the securement caption pointed to an empty compartment. Corrected callout targets, added schematic cot/securement straps and cylinder, and rerouted leader lines. Exact pushed review and mobile rendering pending. OSHA pages returned HTTP 403 during source recheck; CDC/NIOSH crash-testing guidance is context for cot/floor/restraint safety, not validation of a service pre-trip checklist."
       },
       "subjectCompleteness": "partial",
-      "sha256": "66756ef6b176803f334a2f65867a7e5922a283edd6d6d9359fdc8a3bbfe28102"
+      "sha256": "4bbe80c1cadcfd8029583a71aff589ff3a3350efe5750dd9c009bec51c70b495"
     },
     "scene_safety_assessment": {
       "filename": "scene-safety-assessment-el.svg",
