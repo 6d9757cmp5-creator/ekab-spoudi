@@ -25,7 +25,7 @@ export function interpretQuestion(question){
  const words=fold(question).slice(0,300);
  const topic=Object.entries(TOPICS).find(([,v])=>v.phrases.some(p=>words.includes(p)))?.[0]||null;
  let intent='unknown';
- if(/(?:προοδο|πως τα παω|αποτελεσμα|ποσεσ|μετρησ)/.test(words))intent='progress';
+ if(/(?:προοδο|πωσ τα παω|αποτελεσμα|ποσεσ|μετρησ)/.test(words))intent='progress';
  else if(/(?:ασκηση|παραδειγμα|δοκιμασ|σεναριο|εξασκησ)/.test(words))intent='exercise';
  else if(/(?:τι σημαινει|γιατι|εξηγησ|τι ειναι)/.test(words))intent='explain';
  else if(/(?:μελετ|ξεκινησ|προτειν|επομεν|αδυναμ|βοηθ)/.test(words))intent='focus';
