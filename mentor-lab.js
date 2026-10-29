@@ -11,6 +11,7 @@ import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-
 import {mountActivities} from './mentor/activities-ui.mjs';
 import {mountReviewSearch} from './mentor/review/review-ui.mjs';
 import {mountKnowledgeLibrary} from './mentor/knowledge/knowledge-ui.mjs';
+import {mountClinicalDesk} from './mentor/clinical-desk/clinical-ui.mjs';
 
 const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{
@@ -19,7 +20,7 @@ const make=(tag,className,text)=>{
   if(text!==undefined)node.textContent=text;
   return node;
 };
-const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false,reviewSearch:null,knowledge:null};
+const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false,reviewSearch:null,knowledge:null,clinical:null};
 function notify(text,error=false){
   const status=$('status');status.textContent=text;status.classList.toggle('is-error',error);
 }
@@ -220,6 +221,29 @@ function addCoachMessage(role,message){
 }
 async function coachAsk(intent,topic,userText){
   addCoachMessage('user',userText);
+  // Routing to a pre-authored review-pending clinical reference, NOT diagnosis.
+  // General study commands retain the original deterministic study coach.
+  if(!topic && ['unknown','explain'].includes(intent) && state.clinical?.ready &&
+     String(userText??'').trim().split(/\s+/).length>3){
+    const reference=state.clinical.lookup(userText);
+    if(reference){
+      lastCoachReply='Ιατρική βιβλιογραφική αναφορά — υπό έλεγχο: '+reference.question+
+        ' Εκπαιδευτικό πλαίσιο: '+reference.framework+
+        ' Στοιχεία προς αξιολόγηση: '+reference.verify+
+        ' Περιορισμός: '+reference.caution+
+        ' Οι παραπομπές είναι θεματικές, όχι ανεξάρτητη επιστημονική επιβεβαίωση. Δεν παρέχω κλινική απόφαση.';
+      addCoachMessage('assistant',lastCoachReply);
+      const current=$('coach-dialogue').lastElementChild;
+      const refs=make('div','coach-reference-links');
+      for(const source of reference.references){
+        const link=make('a',null,source.title+' ('+source.year+')');
+        link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';
+        refs.append(link);
+      }
+      current.append(refs);
+      return;
+    }
+  }
   // A strictly deterministic reading of a pre-authored teaching card.
   // No AI synthesis, patient case assessment, or freeform clinical advice.
   const shortTopic=String(userText??'').trim().split(/\s+/).length<=3;
@@ -245,6 +269,11 @@ async function coachAsk(intent,topic,userText){
 }
 function wireCoach(){
   const prompt=$('coach-question');
+  $('coach-to-clinical').addEventListener('click',()=>{
+    const q=prompt.value.trim().slice(0,260);
+    switchTab('clinical',true);
+    if(state.clinical?.ready)state.clinical.search(q);
+  });
   $('coach-to-knowledge').addEventListener('click',()=>{
     const q=prompt.value.trim().slice(0,150);
     switchTab('knowledge',true);
@@ -350,6 +379,7 @@ async function boot(){
   wireCoach();
   state.reviewSearch=await mountReviewSearch();
   state.knowledge=await mountKnowledgeLibrary();
+  state.clinical=await mountClinicalDesk();
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
