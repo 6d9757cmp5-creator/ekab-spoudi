@@ -283,9 +283,9 @@
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Unique image individually inspected in local 1280px render. Found Greek subscript glyphs in CO₂, H⁺ and HCO₃⁻ rendered as empty squares; changed labels to clear plain-text CO2, H+ and HCO3-. Local render verified. Exact pushed render and mobile review pending; scientific physiology validation pending."
+        "scope": "Unique image individually inspected in local 1280px render. Found Greek subscript glyphs in CO₂, H⁺ and HCO₃⁻ rendered as empty squares; plain-text CO2, H+ and HCO3- renders legibly as a temporary workaround, but scientific subscripts require proper typographic verification. Arrows converge on the central balance concept. Exact pushed render, mobile review, and independent physiology validation pending."
       },
-      "sha256": "9076719e09461fa4707491421d461efaa2187958a7a95168da6d593d93759711"
+      "sha256": "a7c95b5e55af1fbc8fa8d00e0898b4db0dc9d507f71d5686a7b18297ebd5b0db"
     },
     "cardiac_conduction": {
       "filename": "cardiac-conduction-el.svg",
@@ -2044,9 +2044,9 @@
       "subjectCompleteness": "partial",
       "visualReview": {
         "date": "2026-10-27",
-        "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
+        "scope": "Unique image individually inspected in local 1280px render on 2026-10-29. Found the boat hull and wave line extending over the panel edge and the boat label crossing the hull; raised and relabeled the boat so all elements fit within the panel. Exact pushed render and mobile layout pending; source, subject-completeness, and safety review pending."
       },
-      "sha256": "4d3882955291d9471c216ed631b370432c5644e58789dee08f64923def1194f4"
+      "sha256": "623cf8cd8855de53a784ed001c5c257d8b8d021979ad6ed624069b83f3368669"
     },
     "muscle_tissue_types": {
       "filename": "muscle-tissue-types-el.svg",
