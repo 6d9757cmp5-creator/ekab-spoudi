@@ -2034,7 +2034,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Εξωτερική λαγόνια → μηριαία → ιγνυακή → πρόσθια/οπίσθια κνημιαία, περονιαία",
+          "Ραχιαία αρτηρία ποδός συνέχεια πρόσθιας κνημιαίας",
+          "Βαθιές φλέβες και μείζων/ελάσσων σαφηνής"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "finding": "OpenStax §20.5 «Major Arteries of the Lower Limb», figs 20.33–20.34, «Veins of the Lower Limbs» table 20.16 επιβεβαιώνει τη βασική καταγραφή.",
+        "limits": "Συνοπτική και όχι εξαντλητική αγγειοανατομία· υπάρχουν ανατομικές παραλλαγές. Δεν επαληθεύτηκε νεότερο επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Εξωτερική λαγόνια → μηριαία → ιγνυακή → πρόσθια/οπίσθια κνημιαία, περονιαία",
+          "Ραχιαία αρτηρία ποδός συνέχεια πρόσθιας κνημιαίας",
+          "Βαθιές φλέβες και μείζων/ελάσσων σαφηνής"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "verdict": "targeted_full_answer_comparison_with_documented_limits",
+        "limits": "Συνοπτική και όχι εξαντλητική αγγειοανατομία· υπάρχουν ανατομικές παραλλαγές. Δεν επαληθεύτηκε νεότερο επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-052",
@@ -2048,7 +2087,44 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Υποκλείδια → μασχαλιαία → βραχιόνια → κερκιδική/ωλένια → παλαμιαία τόξα",
+          "Βαθιές συνοδές φλέβες και επιπολής κεφαλική/βασιλική/μέση αγκώνα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "finding": "OpenStax §20.5 «Arteries Serving the Upper Limbs» table 20.9 και «Veins of the Upper Limbs» table 20.14 συμφωνεί με τις αναφερόμενες κύριες δομές.",
+        "limits": "Συνοπτική περιγραφή· ποικίλλουν τα επιπολής φλεβικά πρότυπα. Δεν αποτελεί πλήρη αγγειοανατομικό κατάλογο ή επίσημο λυσάρι.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Υποκλείδια → μασχαλιαία → βραχιόνια → κερκιδική/ωλένια → παλαμιαία τόξα",
+          "Βαθιές συνοδές φλέβες και επιπολής κεφαλική/βασιλική/μέση αγκώνα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "verdict": "targeted_full_answer_comparison_with_documented_limits",
+        "limits": "Συνοπτική περιγραφή· ποικίλλουν τα επιπολής φλεβικά πρότυπα. Δεν αποτελεί πλήρη αγγειοανατομικό κατάλογο ή επίσημο λυσάρι.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-053",
@@ -2062,7 +2138,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Στοματική κοιλότητα → φάρυγγας → οισοφάγος → στομάχι → λεπτό/παχύ έντερο → πρωκτός",
+          "Τμήματα λεπτού εντέρου: δωδεκαδάκτυλο, νήστιδα, ειλεός",
+          "Τμήματα παχέος: τυφλό, κόλον, ορθό"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+        ],
+        "finding": "OpenStax §23.1 «Alimentary Canal Organs» και §23.5 επιβεβαιώνουν τη σειρά και τις βασικές υποδιαιρέσεις του πεπτικού σωλήνα.",
+        "limits": "Η ερώτηση «Περιγράψτε την ανατομία» μπορεί να απαιτεί αναλυτικότερη περιγραφή τοιχωμάτων/οργάνων· η απάντηση είναι μόνο απαρίθμηση, όχι πλήρης ανατομική ανάπτυξη. Τα επικουρικά όργανα δεν ανήκουν στον αυλό του πεπτικού σωλήνα. Όχι επίσημο λυσάρι.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Στοματική κοιλότητα → φάρυγγας → οισοφάγος → στομάχι → λεπτό/παχύ έντερο → πρωκτός",
+          "Τμήματα λεπτού εντέρου: δωδεκαδάκτυλο, νήστιδα, ειλεός",
+          "Τμήματα παχέος: τυφλό, κόλον, ορθό"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+        ],
+        "verdict": "targeted_full_answer_comparison_with_documented_limits",
+        "limits": "Η ερώτηση «Περιγράψτε την ανατομία» μπορεί να απαιτεί αναλυτικότερη περιγραφή τοιχωμάτων/οργάνων· η απάντηση είναι μόνο απαρίθμηση, όχι πλήρης ανατομική ανάπτυξη. Τα επικουρικά όργανα δεν ανήκουν στον αυλό του πεπτικού σωλήνα. Όχι επίσημο λυσάρι.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-054",
@@ -2076,7 +2193,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Τυφλό και σκωληκοειδής απόφυση",
+          "Ανιόν/εγκάρσιο/κατιόν/σιγμοειδές κόλον",
+          "Ορθό και πρωκτικός σωλήνας"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+        ],
+        "finding": "OpenStax §23.5 «The Large Intestine» και «Subdivisions» τεκμηριώνει τα τμήματα, την απόφυση στο τυφλό και τον πρωκτικό σωλήνα.",
+        "limits": "Ανατομικά το «πρωκτός» είναι το εξωτερικό στόμιο και όχι ταυτόσημο με τον πρωκτικό σωλήνα· η αποθηκευμένη απάντηση διακρίνει σωστά τον σωλήνα. Δεν ελέγχθηκε επίσημο λυσάρι.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Τυφλό και σκωληκοειδής απόφυση",
+          "Ανιόν/εγκάρσιο/κατιόν/σιγμοειδές κόλον",
+          "Ορθό και πρωκτικός σωλήνας"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+        ],
+        "verdict": "targeted_full_answer_comparison_with_documented_limits",
+        "limits": "Ανατομικά το «πρωκτός» είναι το εξωτερικό στόμιο και όχι ταυτόσημο με τον πρωκτικό σωλήνα· η αποθηκευμένη απάντηση διακρίνει σωστά τον σωλήνα. Δεν ελέγχθηκε επίσημο λυσάρι.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-055",
@@ -2090,7 +2246,42 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Δωδεκαδάκτυλο, νήστιδα, ειλεός ως τρία διαδοχικά τμήματα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+        ],
+        "finding": "OpenStax §23.5 «Small Intestine — Structure», fig 23.18 επιβεβαιώνει ακριβώς την τριμερή υποδιαίρεση.",
+        "limits": "Αφορά μόνο ονομασία τμημάτων· όχι εξαντλητική περιγραφή, ούτε επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Δωδεκαδάκτυλο, νήστιδα, ειλεός ως τρία διαδοχικά τμήματα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-5-the-small-and-large-intestines"
+        ],
+        "verdict": "targeted_full_answer_comparison_with_documented_limits",
+        "limits": "Αφορά μόνο ονομασία τμημάτων· όχι εξαντλητική περιγραφή, ούτε επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-056",
