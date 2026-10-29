@@ -1,11 +1,13 @@
 /* Home MENTOR: entirely opt-in device speech, no mic activation, storage or AI calls. */
 import {supportsSpeech,listGreekVoices,speakGreek,stopGreek} from "./mentor-voice.mjs";
+import {createMentorAvatar} from "./mentor-avatar-live.mjs";
 const button=document.getElementById("mentor-home-listen");
 const stopper=document.getElementById("mentor-home-stop");
 const status=document.getElementById("mentor-home-speech-status");
 const select=document.getElementById("mentor-home-voice");
 const stage=document.querySelector(".mentor-cinema");
 const avatar=document.getElementById("mentor-home-avatar");
+const performer=createMentorAvatar(avatar);
 const greeting="Καλώς ήρθες στην ΕΚΑΒ Σπουδή. Είμαι ο Μέντορ, ο προσωπικός σου εκπαιδευτικός οδηγός. Τι θα ήθελες να μελετήσουμε σήμερα; Μπορείς να ξεκινήσεις με μια ερώτηση, μια αποστολή ή μια επανάληψη.";
 let speaking=false;
 let generation=0;
@@ -32,7 +34,7 @@ function setSpeaking(value){
  button.setAttribute("aria-pressed",String(value));
 }
 function stop(){
- generation++;stopGreek(window);
+ generation++;stopGreek(window);performer.stop();
  setSpeaking(false);
  status.textContent="Η ανάγνωση σταμάτησε.";
 }
@@ -47,9 +49,10 @@ if(!supportsSpeech(window)){
    setSpeaking(false);
    const worked=speakGreek(greeting,{
      env:window,voiceName:select.value,rate:.95,pitch:1.01,
-     onStart:()=>{if(token!==generation)return;setSpeaking(true);status.textContent="Ο MENTOR διαβάζει με τη διαθέσιμη φωνή του browser.";},
-     onFinish:()=>{if(token!==generation)return;setSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
-     onError:event=>{if(token!==generation)return;setSpeaking(false);status.textContent=event?.error==="not-allowed"?"Επίτρεψε την αναπαραγωγή φωνής από τη συσκευή.":"Η φωνή δεν μπόρεσε να αναπαραχθεί στον browser.";}
+     onStart:()=>{if(token!==generation)return;performer.start(greeting,{speed:.95});setSpeaking(true);status.textContent="Ο MENTOR διαβάζει με τη διαθέσιμη φωνή του browser.";},
+     onFinish:()=>{if(token!==generation)return;performer.stop();setSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
+     onError:event=>{if(token!==generation)return;performer.stop();setSpeaking(false);status.textContent=event?.error==="not-allowed"?"Επίτρεψε την αναπαραγωγή φωνής από τη συσκευή.":"Η φωνή δεν μπόρεσε να αναπαραχθεί στον browser.";},
+     onBoundary:event=>{if(token===generation)performer.boundary(event);}
    });
    if(!worked)status.textContent="Η αναπαραγωγή δεν ξεκίνησε.";
  });
