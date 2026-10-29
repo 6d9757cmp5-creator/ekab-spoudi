@@ -31,7 +31,7 @@ try{
  page.on("pageerror",e=>errors.push(String(e)));
  const url="http://127.0.0.1:"+port+"/mentor-lab.html";
  await page.goto(url,{waitUntil:"domcontentloaded"});
- await page.waitForFunction(()=>["ready","photo"].includes(document.getElementById("mentor-cinematic-stage")?.dataset.real3d),{timeout:45000});
+ await page.waitForFunction(()=>["ready","photo"].includes(document.getElementById("mentor-cinematic-stage")?.dataset.real3d),null,{timeout:60000});
  const ready=await page.locator("#mentor-cinematic-stage").getAttribute("data-real3d");
  assert.equal(ready,"ready","Authentic rigged GLB must load in "+engine);
  assert.equal(await page.locator("#mentor-real3d-canvas").isVisible(),true);
