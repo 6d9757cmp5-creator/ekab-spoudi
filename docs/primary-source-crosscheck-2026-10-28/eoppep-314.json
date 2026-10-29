@@ -4202,7 +4202,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ορισμός αρτηριακής πίεσης",
+          "συστολική μέγιστη κατά κοιλιακή συστολή",
+          "διαστολική ελάχιστη κατά κοιλιακή διαστολή"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance"
+        ],
+        "limits": "Δεν επιβεβαιώθηκε νεότερη τράπεζα/επίσημο λυσάρι ή κλινικά θεραπευτικά όρια.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "OpenStax §20.2 τεκμηριώνει και τους τρεις ορισμούς· συνοπτικά συμβατή απάντηση."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ορισμός αρτηριακής πίεσης",
+          "συστολική μέγιστη κατά κοιλιακή συστολή",
+          "διαστολική ελάχιστη κατά κοιλιακή διαστολή"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance"
+        ],
+        "limits": "Δεν επιβεβαιώθηκε νεότερη τράπεζα/επίσημο λυσάρι ή κλινικά θεραπευτικά όρια.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "findings": "OpenStax §20.2 τεκμηριώνει και τους τρεις ορισμούς· συνοπτικά συμβατή απάντηση.",
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-092",
@@ -4216,7 +4257,50 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ερυθρά και λευκά αιμοσφαίρια",
+          "αιμοπετάλια ως κυτταρικά θραύσματα",
+          "πέντε τύποι λευκοκυττάρων"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-1-an-overview-of-blood",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-4-leukocytes-and-platelets"
+        ],
+        "limits": "Εκκρεμεί επίσημη ελληνική ορολογία/λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "ΣΗΜΑΝΤΙΚΟ: τα αιμοπετάλια είναι κυτταρικά θραύσματα, όχι ακέραια κύτταρα. Η απάντηση τα αναφέρει ως έμμορφα στοιχεία, αλλά η εκφώνηση «είδη κυττάρων» απαιτεί διευκρίνιση."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ερυθρά και λευκά αιμοσφαίρια",
+          "αιμοπετάλια ως κυτταρικά θραύσματα",
+          "πέντε τύποι λευκοκυττάρων"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-1-an-overview-of-blood",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-4-leukocytes-and-platelets"
+        ],
+        "limits": "Εκκρεμεί επίσημη ελληνική ορολογία/λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "findings": "ΣΗΜΑΝΤΙΚΟ: τα αιμοπετάλια είναι κυτταρικά θραύσματα, όχι ακέραια κύτταρα. Η απάντηση τα αναφέρει ως έμμορφα στοιχεία, αλλά η εκφώνηση «είδη κυττάρων» απαιτεί διευκρίνιση.",
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-093",
@@ -4230,7 +4314,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "μεταφορά αερίων, θρεπτικών, ορμονών, αποβλήτων",
+          "άμυνα και αιμόσταση",
+          "θερμοκρασία, pH και υγρά"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-1-an-overview-of-blood"
+        ],
+        "limits": "Εκκρεμεί νεότερο επίσημο λυσάρι ΕΟΠΠΕΠ και ανεξάρτητη υπογραφή.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "OpenStax §18.1 τεκμηριώνει τις κύριες λειτουργίες· η αποθηκευμένη απάντηση είναι συνοπτικά συμβατή."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "μεταφορά αερίων, θρεπτικών, ορμονών, αποβλήτων",
+          "άμυνα και αιμόσταση",
+          "θερμοκρασία, pH και υγρά"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-1-an-overview-of-blood"
+        ],
+        "limits": "Εκκρεμεί νεότερο επίσημο λυσάρι ΕΟΠΠΕΠ και ανεξάρτητη υπογραφή.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "findings": "OpenStax §18.1 τεκμηριώνει τις κύριες λειτουργίες· η αποθηκευμένη απάντηση είναι συνοπτικά συμβατή.",
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-094",
@@ -4244,7 +4369,50 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ήπαρ, χοληδόχος, στομάχι, σπλήνας, πάγκρεας, έντερα",
+          "οπισθοπεριτοναϊκή θέση νεφρών/επινεφριδίων",
+          "διάκριση κοιλιακής περιοχής/περιτοναϊκής κοιλότητας"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-3-gross-anatomy-of-the-kidney"
+        ],
+        "limits": "Εκκρεμεί λεπτομερής ανατομική κατάταξη και επίσημο ελληνικό λυσάρι.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Η αρχική πηγή «§23 Introduction» είναι ανεπαρκώς ειδική. OpenStax §1.6/§25.3 επιβεβαιώνει ανατομική κοιλιακή περιοχή και οπισθοπεριτοναϊκούς νεφρούς· απαιτείται ακριβέστερη διάκριση ενδο/οπισθοπεριτοναϊκών οργάνων."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ήπαρ, χοληδόχος, στομάχι, σπλήνας, πάγκρεας, έντερα",
+          "οπισθοπεριτοναϊκή θέση νεφρών/επινεφριδίων",
+          "διάκριση κοιλιακής περιοχής/περιτοναϊκής κοιλότητας"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-3-gross-anatomy-of-the-kidney"
+        ],
+        "limits": "Εκκρεμεί λεπτομερής ανατομική κατάταξη και επίσημο ελληνικό λυσάρι.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "findings": "Η αρχική πηγή «§23 Introduction» είναι ανεπαρκώς ειδική. OpenStax §1.6/§25.3 επιβεβαιώνει ανατομική κοιλιακή περιοχή και οπισθοπεριτοναϊκούς νεφρούς· απαιτείται ακριβέστερη διάκριση ενδο/οπισθοπεριτοναϊκών οργάνων.",
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-095",
@@ -4258,7 +4426,50 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ED50 αποτέλεσμα στο 50%",
+          "TD50 τοξικότητα στο 50%",
+          "LD100 θνητότητα 100% σε καθορισμένο πειραματικό δείγμα"
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK538269/",
+          "https://goldbook.iupac.org/terms/view/A00025"
+        ],
+        "limits": "ΚΡΙΣΙΜΟ: LD100 δεν αποτελεί ασφαλή κλινική δόση ανθρώπου· εκκρεμεί επίσημο λυσάρι και ανθρώπινη επιστημονική έγκριση.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "NCBI επιβεβαιώνει ED50/TD50. IUPAC ορίζει LD100 ως ΕΛΑΧΙΣΤΗ ποσότητα που θανατώνει 100% πειραματόζωων υπό καθορισμένες συνθήκες· η αποθηκευμένη απάντηση παραλείπει «ελάχιστη» και δεν εξειδικεύει πειραματόζωα."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ED50 αποτέλεσμα στο 50%",
+          "TD50 τοξικότητα στο 50%",
+          "LD100 θνητότητα 100% σε καθορισμένο πειραματικό δείγμα"
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK538269/",
+          "https://goldbook.iupac.org/terms/view/A00025"
+        ],
+        "limits": "ΚΡΙΣΙΜΟ: LD100 δεν αποτελεί ασφαλή κλινική δόση ανθρώπου· εκκρεμεί επίσημο λυσάρι και ανθρώπινη επιστημονική έγκριση.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "findings": "NCBI επιβεβαιώνει ED50/TD50. IUPAC ορίζει LD100 ως ΕΛΑΧΙΣΤΗ ποσότητα που θανατώνει 100% πειραματόζωων υπό καθορισμένες συνθήκες· η αποθηκευμένη απάντηση παραλείπει «ελάχιστη» και δεν εξειδικεύει πειραματόζωα.",
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-096",
