@@ -164,6 +164,90 @@ try{
   assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'0');
   assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // The MENTOR "knowledge boost" is a working source-linked non-AI helper.
+  await page.goto(url,{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.getElementById('knowledge-count').textContent.includes('59 ελληνικές κάρτες'));
+  assert.match(await page.locator('#knowledge-count').textContent(),/8 τεκμηριωμένες βιβλιογραφικές πηγές/);
+  assert.match(await page.locator('#knowledge-count').textContent(),/0 ιατρικά εγκεκριμένες/);
+  await page.locator('#tab-knowledge').click();
+  await page.locator('#knowledge-query').fill('QRS');
+  await page.waitForFunction(()=>document.getElementById('knowledge-status').textContent.startsWith('Εμφανίζονται'));
+  assert.ok(await page.locator('.knowledge-card').count()>0,'QRS knowledge search should have an actual card');
+  assert.match(await page.locator('.knowledge-card').first().textContent(),/QRS/i);
+  await page.locator('.knowledge-card').first().locator('button.knowledge-reveal').click();
+  assert.equal(await page.locator('.knowledge-card').first().locator('.knowledge-answer').isVisible(),true);
+  assert.match(await page.locator('.knowledge-card').first().locator('.knowledge-answer').textContent(),/εκπόλωση|κοιλ/i);
+  assert.match(await page.locator('.knowledge-card').first().locator('a.knowledge-reference').first().getAttribute('href'),/^https:\/\//);
+  await page.locator('#knowledge-query').fill('');
+  await page.locator('#knowledge-topic').selectOption('pediatrics');
+  await page.waitForFunction(()=>document.getElementById('knowledge-status').textContent.includes('4 από 59'));
+  assert.equal(await page.locator('.knowledge-card').count(),4);
+  await page.locator('#knowledge-next').click();
+  assert.ok((await page.locator('#knowledge-practice h3').textContent()).length>14);
+  await page.screenshot({path:'mentor-knowledge-mobile.png',fullPage:true});
+  await page.locator('#tab-route').click();
+  await page.locator('#coach-question').fill('καρδιά');
+  await page.locator('#coach-to-knowledge').click();
+  await page.waitForFunction(()=>document.getElementById('knowledge-query').value==='καρδιά');
+  assert.ok(await page.locator('.knowledge-card').count()>0,'Mentor coach lookup opens actual knowledge');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,
+    'Knowledge cards and self-test must not affect official EOPPEP progress');
+  assert.ok(!(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.includes('knowledge')))),
+    'Knowledge does not store the questions or ratings in legacy localStorage');
+  // MENTOR book bridge: actual copied book text, hash-verified lazy lookup (never clinical synthesis).
+  await page.goto(url,{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.getElementById('mentor-book-count').textContent.includes('7 εισαγμένα'));
+  assert.match(await page.locator('#mentor-book-count').textContent(),/0 εγκεκριμένα/);
+  assert.match(await page.locator('#mentor-book-count').textContent(),/7 διαθέσιμα/);
+  assert.equal(await page.locator('#mentor-book-select option').count(),7,'All seven books are review-preview-only under publisher terms/owner attestations');
+  const previewChoices=await page.locator('#mentor-book-select option').evaluateAll(options=>options.map(o=>o.value));
+  assert.ok(previewChoices.includes('medical-surgical-nursing'));
+  assert.ok(previewChoices.includes('who-bec'));
+  assert.match(await page.locator('#panel-books .disclaimer').textContent(),/εκκρεμ|έλεγχο/i);
+
+  await page.locator('#tab-books').click();
+  await page.locator('#mentor-book-query').fill('αεραγωγός');
+  await page.locator('#mentor-book-submit').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'));
+  assert.ok(await page.locator('#mentor-book-results .review-result').count()>0,'Actual EMR source is searchable in Greek');
+  assert.match(await page.locator('#mentor-book-results .review-watermark').first().textContent(),/ΑΝΕΛΕΓΚΤΟ/);
+  assert.match(await page.locator('#mentor-book-results .review-excerpt').first().textContent(),/airway/i);
+  assert.match(await page.locator('#mentor-book-results .review-result a').first().getAttribute('href'),/^https:\/\/wtcs.pressbooks.pub\/emergencymedtech\//);
+  const snippet=await page.locator('#mentor-book-results .review-excerpt').first().textContent();
+  assert.ok(snippet.length<275,'No full unreviewed chapter is displayed');
+  // Explicitly exercise EACH imported book, including the two with user-attested licenses.
+  // They remain unapproved for clinical AI even when editorial search works.
+  const extraBooks=[
+    ['openrn-health','airway'],['openrn-skills','airway'],
+    ['openrn-pharm','dose'],['openrn-advanced','airway'],
+    ['who-bec','airway'],['medical-surgical-nursing','shock']
+  ];
+  for(const [sourceId,term] of extraBooks){
+    await page.locator('#mentor-book-select').selectOption(sourceId);
+    await page.locator('#mentor-book-query').fill(term);
+    await page.locator('#mentor-book-submit').click();
+    await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'),{timeout:30000});
+    const matches=await page.locator('#mentor-book-results .review-result').count();
+    assert.ok(matches>0,'Source lookup has real excerpts: '+sourceId);
+    assert.match(await page.locator('#mentor-book-results .review-watermark').first().textContent(),/ΑΝΕΛΕΓΚΤΟ/);
+    const excerpt=await page.locator('#mentor-book-results .review-excerpt').first().textContent();
+    assert.ok(excerpt.length<=275,'Source preview is bounded: '+sourceId);
+    assert.match(await page.locator('#mentor-book-results .review-result a').first().getAttribute('href'),/^https:\/\//);
+  }
+  await page.locator('#mentor-book-select').selectOption('wistech-emr-2025');
+  await page.locator('#mentor-book-query').fill('αεραγωγός');
+  await page.locator('#mentor-book-submit').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'));
+  await page.screenshot({path:'mentor-foundation-mobile-books.png',fullPage:true});
+  await page.locator('#tab-route').click();
+  await page.locator('#coach-question').fill('shock');
+  await page.locator('#coach-to-books').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-book-query').value==='shock');
+  await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'));
+  assert.ok(await page.locator('#mentor-book-results .review-result').count()>0,'Mentor lookup button searches source');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,'Book lookup must not alter EOPPEP');
+  assert.ok(!(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.includes('review-corpus')))),'Queries are not stored');
+
   // Public Mentor bibliography: mobile Chromium/WebKit search and fail-closed review state.
   await page.goto('http://127.0.0.1:'+port+'/mentor-library.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('library-status').textContent.includes('μόνο στοιχεία πηγών'));

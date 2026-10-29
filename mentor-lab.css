@@ -126,3 +126,58 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .coach-quick:focus-visible,.coach-question-line input:focus-visible,.coach-question-line button:focus-visible,.coach-speech-actions button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 @media(max-width:620px){.coach-question-line{flex-wrap:wrap}.coach-question-line button{width:100%}.coach-message{max-width:100%}}
 @media(prefers-color-scheme:dark){.coach-message-user{background:#1b4856}}
+
+
+/* MENTOR OS: editorial-only source search (draft branch, no clinical clearance). */
+.tabs{max-width:800px;flex-wrap:wrap}
+.review-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 12px;align-items:end;margin:14px 0}
+.review-form label{grid-column:1 / -1;font-size:.85rem;font-weight:750;margin-bottom:-8px}
+.review-form input,.review-form select{width:100%;min-height:46px;padding:10px 13px;border:1px solid var(--border);
+ border-radius:10px;background:var(--surface2);color:var(--ink);font:inherit}
+.review-form input{grid-column:1}.review-form select{grid-column:1 / -1}
+.review-form button{grid-column:2;white-space:nowrap;min-height:46px}
+.review-results{display:grid;gap:13px;margin-top:18px}
+.review-result{padding:17px;border:1px solid var(--border);border-radius:13px;background:var(--surface2);
+ overflow-wrap:anywhere}
+.review-result h3{margin:5px 0 8px;font-size:1rem}
+.review-watermark{font-size:.72rem;font-weight:800;letter-spacing:.04em;color:var(--caution);margin:0 0 8px}
+.review-excerpt{font-size:.92rem;line-height:1.65;padding:11px 15px;margin:12px 0;border-left:3px solid var(--brand2);
+ background:var(--surface);border-radius:3px;white-space:pre-wrap}
+.review-result a{display:inline-block;font-weight:750;margin-bottom:7px}
+#mentor-book-status[data-error="true"]{color:var(--danger)}
+@media(max-width:650px){
+ .tabs{max-width:none}.tabs button{flex:1 1 calc(50% - 5px);min-width:130px}
+ .review-form{grid-template-columns:minmax(0,1fr)}
+ .review-form input,.review-form button,.review-form select{grid-column:1}
+ .review-result{padding:13px}
+}
+
+
+/* Independent MENTOR source-linked Greek knowledge companion */
+.knowledge-controls{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(210px,1fr);gap:12px;margin:16px 0}
+.knowledge-controls label{display:block;font-size:.85rem;font-weight:750;margin:0 0 7px}
+.knowledge-controls input,.knowledge-controls select{width:100%;border:1px solid var(--border);border-radius:10px;
+ background:var(--surface2);color:var(--ink);padding:11px 12px;font:inherit;min-height:46px}
+.knowledge-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:16px 0}
+.knowledge-card{border:1px solid var(--border);border-radius:13px;padding:18px;min-width:0;background:var(--surface2)}
+.knowledge-card h3{font-size:1.04rem;line-height:1.35;margin:5px 0 11px}
+.knowledge-card p{font-size:.9rem;line-height:1.6;margin:10px 0}
+.knowledge-card .eyebrow{font-size:.68rem;margin:0}
+.knowledge-card .knowledge-lesson{white-space:pre-wrap}
+.knowledge-card .knowledge-question{font-weight:700;margin:15px 0 11px}
+.knowledge-answer{margin:13px 0!important;padding:11px 14px;border-radius:9px;background:var(--surface);
+ border-left:3px solid var(--brand2);line-height:1.6;white-space:pre-wrap}
+.knowledge-references{margin-top:17px;border-top:1px solid var(--border);padding-top:12px;display:flex;gap:7px 10px;flex-wrap:wrap}
+.knowledge-references small{display:block;width:100%;color:var(--muted)}
+.knowledge-reference{font-size:.79rem;font-weight:650;text-underline-offset:3px}
+.knowledge-practice{padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);margin:10px 0 14px}
+.knowledge-practice h3{margin:5px 0 17px}
+.knowledge-source-row{padding:10px 0;border-bottom:1px solid var(--border);display:grid;gap:3px}
+.knowledge-source-row:last-child{border-bottom:0}
+.knowledge-source-row a{font-size:.93rem;font-weight:750;text-underline-offset:3px;overflow-wrap:anywhere}
+.knowledge-source-row small{font-size:.77rem;overflow-wrap:anywhere}
+#knowledge-status[data-error="true"]{color:var(--danger)}
+@media(max-width:780px){
+ .knowledge-results{grid-template-columns:1fr}
+ .knowledge-controls{grid-template-columns:1fr}
+}

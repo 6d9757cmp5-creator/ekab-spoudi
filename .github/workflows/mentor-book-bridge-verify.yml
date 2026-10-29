@@ -1,0 +1,77 @@
+name: MENTOR seven-book review bridge
+on:
+  pull_request:
+    paths:
+      - 'mentor/review/**'
+      - 'mentor/knowledge/**'
+      - 'mentor/review-corpus/**'
+      - 'mentor-lab.html'
+      - 'mentor-lab.js'
+      - 'mentor-lab.css'
+      - 'scripts/verify-mentor-browser.mjs'
+      - '.github/workflows/mentor-book-bridge-verify.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-verification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate syntax and all seven imported source file hashes
+        run: |
+          for f in mentor/review/*.mjs; do node --check "$f"; done
+          node --check mentor-lab.js
+          node --test mentor/review/*.test.mjs
+          for f in mentor/knowledge/*.mjs; do node --check "$f"; done
+          node --test mentor/knowledge/*.test.mjs
+      - name: Run full source quality audit and create clinician review queue
+        run: |
+          node mentor/review/audit-corpus.mjs --out=mentor-audit-artifact
+          test -s mentor-audit-artifact/mentor-clinical-review-audit.json
+          test -s mentor-audit-artifact/mentor-clinical-review-audit.md
+      - name: Attach inspectable audit report and review queue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-seven-books-integrity-and-review-queue
+          path: mentor-audit-artifact/
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Verify clinical retrieval remains fail-closed
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          import assert from 'node:assert/strict';
+          const catalog=JSON.parse(await readFile('mentor/library/source-index.json','utf8'));
+          assert.equal(catalog.counts.clinically_approved,0);
+          assert.equal(catalog.sources.filter(s=>s.extracted_for_review).length,7);
+          for(const s of catalog.sources){
+            assert.equal(s.clinical_retrieval_enabled,false);
+            assert.equal(s.independent_clinical_review,'not_verified');
+            assert.equal(s.publication_rights_review,'not_verified');
+          }
+          import {SOURCE_POLICY,assertNoClinicalApproval} from './mentor/review/rights-policy.mjs';
+          const manifest=JSON.parse(await readFile('mentor/review-corpus/manifest.json','utf8'));
+          assert.equal(assertNoClinicalApproval(manifest,catalog.sources),true);
+          assert.equal(Object.values(SOURCE_POLICY).filter(x=>x.preview_allowed).length,7);
+          assert.equal(SOURCE_POLICY['medical-surgical-nursing'].preview_allowed,true);
+          assert.equal(SOURCE_POLICY['medical-surgical-nursing'].rights_signoff,'user-attested-unverified');
+          assert.equal(SOURCE_POLICY['who-bec'].preview_allowed,true);
+          assert.equal(SOURCE_POLICY['who-bec'].rights_signoff,'user-attested-unverified');
+          console.log('Safe preview state: 7 imported; 7 owner-attested editorial candidates; 0 medically approved; AI retrieval disabled.');
+          NODE
+      - name: Verify no grading, account or legacy progress source was touched
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          git diff --name-only origin/main...HEAD
+          if git diff --name-only origin/main...HEAD | grep -E '^(ai-grading-client\.js|ai-grading-config\.js|functions/answer-grader/|workers/answer-grader/|sync-local\.js|sync-model\.js|sync-codec\.js|cloud-sync\.js|progress\.js|saek-exam-engine\.js|study-scheduler\.js|notes-store\.js|app\.js|official_questions\.json|index\.html|sw\.js)$'; then
+            echo "Refusing legacy system mutation"
+            exit 1
+          fi
