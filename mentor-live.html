@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a39">
+<title>MENTOR OS · ΕΚΑΒ Live · Δύο τραυματίες (προσομοίωση)</title>
+<link rel="stylesheet" href="mentor-lab.css">
+<style>
+.live-shell{max-width:1080px;margin:0 auto;padding:18px 16px 50px}
+.live-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.live-top a{color:var(--brand);font-weight:750}
+.live-hero{margin:19px 0 12px;padding:26px;border-radius:20px;background:linear-gradient(130deg,#143b55,#16616c);color:#fff}
+.live-hero h1{color:#fff;font-size:clamp(1.65rem,4vw,2.4rem);margin:5px 0}
+.live-hero p{color:#d8edf1;max-width:740px;line-height:1.55}
+.live-kicker{font-size:.76rem;letter-spacing:.11em;text-transform:uppercase;font-weight:800;color:#b8ebdf}
+.live-disclaimer{background:var(--surface);border:1px solid var(--border);border-left:4px solid #ac7d34;border-radius:12px;padding:14px 17px;line-height:1.5;margin-bottom:19px}
+.live-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:18px;align-items:start}
+.live-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:19px;box-shadow:0 4px 15px #142c3610}
+.live-panel h2{font-size:1.16rem;margin:2px 0 12px}
+.live-stage-kicker{font-weight:800;color:var(--brand);font-size:.83rem}
+.live-choices{display:grid;gap:9px;margin:18px 0}
+.live-choice{display:block;width:100%;text-align:left;border:1px solid var(--border);background:var(--surface2);color:var(--ink);border-radius:11px;padding:15px;font:inherit;font-weight:650;line-height:1.45;min-height:65px;cursor:pointer}
+.live-choice:hover{border-color:var(--brand2)}
+.live-choice:focus-visible,.live-reset:focus-visible,.live-top a:focus-visible{outline:3px solid var(--brand2);outline-offset:3px}
+.live-choice:disabled{opacity:.65;cursor:progress}
+.live-note{margin:15px 0 3px;border-radius:10px;padding:13px;line-height:1.45}
+.live-note[data-kind="review"]{background:#fdf0da;color:#794d17}
+.live-note[data-kind="practice"]{background:#e0f4ea;color:#125a41}
+.live-note:empty{display:none}
+.live-kpis{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}
+.live-kpis span{padding:7px 9px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:.81rem;font-weight:700}
+.live-people{display:grid;gap:13px}
+.live-patient{background:var(--surface2);border:1px solid var(--border);border-radius:13px;padding:15px}
+.live-patient h3{font-size:1rem;margin:0 0 5px}
+.live-patient p{font-size:.82rem;line-height:1.4;color:var(--muted);margin:0 0 12px}
+.live-vitals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.live-vitals div{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:9px 6px;text-align:center;min-width:0}
+.live-vitals strong{font-size:1.25rem;display:block;font-variant-numeric:tabular-nums}
+.live-vitals small{font-size:.68rem;color:var(--muted)}
+.live-trend{font-size:.76rem!important;margin:11px 0 0!important}
+.live-legend{margin:11px 0 0;color:var(--muted);font-size:.79rem;line-height:1.45}
+.live-timeline{margin:10px 0 0;padding-left:21px}
+.live-timeline li{margin:10px 0;padding:11px 12px;border-left:3px solid var(--border);background:var(--surface2);border-radius:7px}
+.live-timeline li[data-kind="practice"]{border-left-color:#288b6b}
+.live-timeline li[data-kind="review"]{border-left-color:#ad843a}
+.live-timeline strong{display:block;font-size:.83rem}
+.live-timeline p{font-size:.83rem;line-height:1.5;margin:5px 0 0}
+.live-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.live-reset{font:inherit;border:1px solid var(--border);color:var(--ink);border-radius:10px;background:var(--surface2);padding:11px 14px;cursor:pointer;min-height:44px}
+.live-complete{padding:14px;background:#e1f3e9;border-radius:11px;color:#165943}
+.live-complete[hidden]{display:none}
+.live-footer{padding:18px 4px;color:var(--muted);font-size:.82rem;line-height:1.5}
+@media(max-width:820px){.live-grid{grid-template-columns:1fr}.live-panel{padding:15px}}
+@media(prefers-color-scheme:dark){
+.live-note[data-kind="review"]{background:#4b391d;color:#fff1d0}
+.live-note[data-kind="practice"],.live-complete{background:#1e4c3b;color:#d9f8e9}
+}
+</style>
+<script type="module" src="mentor-live.js" defer></script>
+</head>
+<body>
+<main class="live-shell">
+ <div class="live-top">
+  <a href="mentor-lab.html">← Επιστροφή στο MENTOR OS</a>
+  <span class="live-kicker">Foundation · χωρίς σύνδεση AI</span>
+ </div>
+ <section class="live-hero" aria-labelledby="live-heading">
+  <span class="live-kicker">ΕΚΑΒ Live · νέα εκπαιδευτική αποστολή</span>
+  <h1 id="live-heading">Τροχαίο με δύο τραυματίες</h1>
+  <p>Συνθετικό περιβάλλον Κρήτης · δύο ξεχωριστές καρτέλες παρατηρήσεων · μεταβολές ζωτικών ανά εκπαιδευτικό βήμα · αποφάσεις και ανατροφοδότηση.</p>
+ </section>
+ <div class="live-disclaimer" role="note">
+  <strong>Σημαντικό: εκπαιδευτικό πρωτότυπο, όχι ιατρικό εργαλείο.</strong>
+  Οι τιμές είναι τεχνητές, προκαθορισμένες και δεν προκύπτουν από τις ενέργειές σου. Δεν εκτιμώνται διάγνωση, ιατρικές προτεραιότητες, διαλογή ή θεραπεία. Απαιτείται ανεξάρτητη κλινική αξιολόγηση πριν από πιο ρεαλιστική έκδοση.
+ </div>
+ <div class="live-grid">
+  <section class="live-panel" aria-labelledby="live-mission-head">
+   <p class="live-stage-kicker" id="live-step">Στάδιο 1/4</p>
+   <h2 id="live-mission-head">Προετοιμασία αποστολής</h2>
+   <p id="live-context">Φόρτωση εκπαιδευτικής αποστολής…</p>
+   <div class="live-kpis" aria-label="Στατιστικά αποστολής">
+    <span id="live-time">00΄ · συνθετικός χρόνος</span>
+    <span id="live-positive">0 βήματα εξάσκησης</span>
+    <span id="live-review">0 για επανάληψη</span>
+   </div>
+   <div id="live-choices" class="live-choices" aria-label="Διαθέσιμες εκπαιδευτικές ενέργειες"></div>
+   <p id="live-feedback" class="live-note" role="status" aria-live="polite"></p>
+   <div id="live-complete" class="live-complete" hidden role="status">
+    <strong>Ολοκλήρωσες τη συνθετική αποστολή.</strong>
+    <p>Ανασκόπησε το ιστορικό αποφάσεων. Η δραστηριότητα δεν αποτελεί βαθμό ούτε επιβεβαίωση κλινικής ικανότητας.</p>
+   </div>
+   <div class="live-actions">
+    <button type="button" id="live-reset" class="live-reset">Νέα εκτέλεση αποστολής</button>
+   </div>
+   <p id="live-storage" class="live-legend" role="status"></p>
+  </section>
+  <aside class="live-panel" aria-labelledby="live-patients-head">
+   <h2 id="live-patients-head">Παρατηρήσεις δύο ατόμων</h2>
+   <div id="live-patients" class="live-people" aria-live="polite"></div>
+   <p class="live-legend">HR: συνθετικοί παλμοί/λεπτό · RR: συνθετικές αναπνοές/λεπτό · SpO₂: συνθετικός κορεσμός %. Δεν αποτελούν πραγματικές μετρήσεις.</p>
+  </aside>
+ </div>
+ <section class="live-panel" style="margin-top:18px" aria-labelledby="live-history-head">
+  <h2 id="live-history-head">Η πορεία των αποφάσεών σου</h2>
+  <ol id="live-timeline" class="live-timeline" aria-live="polite"></ol>
+ </section>
+ <footer class="live-footer">Αποθήκευση μόνο σε ξεχωριστό κλειδί MENTOR OS σε αυτή τη συσκευή. Δεν μεταβάλλεται η βαθμολόγηση ή η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ. Το AI θα συνδεθεί μόνο μετά από δική σου έγκριση του τελικού σχεδιασμού.</footer>
+</main>
+</body>
+</html>

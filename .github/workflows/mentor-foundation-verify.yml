@@ -6,6 +6,8 @@ on:
       - 'mentor-lab.html'
       - 'mentor-lab.js'
       - 'mentor-lab.css'
+      - 'mentor-live.html'
+      - 'mentor-live.js'
       - '.github/workflows/mentor-foundation-verify.yml'
   workflow_dispatch:
 permissions:
@@ -24,6 +26,7 @@ jobs:
       - name: Syntax and deterministic Mentor tests
         run: |
           node --check mentor-lab.js
+          node --check mentor-live.js
           for f in mentor/core/*.mjs; do node --check "$f"; done
           node --test mentor/core/*.test.mjs
       - name: Verify no grading, legacy progress or cloud sync code was modified

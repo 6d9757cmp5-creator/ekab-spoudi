@@ -181,6 +181,35 @@ try{
   await page.locator('#source-search').fill('');
   assert.equal(await page.locator('#sources-list .source-card').count(),15);
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
+  assert.match(await page.title(),/Δύο τραυματίες/);
+  assert.equal(await page.locator('#live-patients .live-patient').count(),2);
+  assert.equal((await page.locator('#live-step').textContent()).trim(),'Στάδιο 1 / 4');
+  assert.equal(await page.locator('#live-patients .live-patient').first().locator('.live-vitals strong').first().textContent(),'106');
+  await page.getByRole('button',{name:/Μπαίνω αμέσως στον χώρο/}).click();
+  await page.waitForFunction(()=>document.querySelector('#live-review').textContent.includes('1 για επανάληψη'));
+  assert.match(await page.locator('#live-step').textContent(),/Στάδιο 1/);
+  await page.getByRole('button',{name:/Αναγνωρίζω κινδύνους/}).click();
+  await page.waitForFunction(()=>document.getElementById('live-step').textContent.includes('Στάδιο 2'));
+  await page.getByRole('button',{name:/Ενημερώνω με σαφήνεια/}).click();
+  await page.getByRole('button',{name:/Καταγράφω ξεχωριστά/}).click();
+  await page.getByRole('button',{name:/Το συμβάν, τον αριθμό ατόμων/}).click();
+  await page.waitForFunction(()=>document.getElementById('live-complete').hidden===false);
+  assert.equal(await page.locator('#live-timeline li').count(),5);
+  assert.equal(await page.locator('#live-patients .live-patient').count(),2);
+  assert.match(await page.locator('#live-time').textContent(),/10΄/);
+  await page.reload({waitUntil:'networkidle'});
+  assert.equal(await page.locator('#live-complete').isVisible(),true,'live-session history persisted locally');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  const liveKey=await page.evaluate(()=>localStorage.getItem('ekab.mentor.live-two-patients.v1'));
+  assert.ok(liveKey&&JSON.parse(liveKey).events.length===5,'isolated Mentor incident log');
+  page.once('dialog',d=>d.accept());
+  await page.locator('#live-reset').click();
+  await page.waitForFunction(()=>document.getElementById('live-step').textContent.includes('Στάδιο 1'));
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab.mentor.live-two-patients.v1')),null);
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,'legacy EOPPEP history untouched');
+  await page.screenshot({path:'mentor-live-two-person-mobile.png',fullPage:true});
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
