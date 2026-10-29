@@ -193,3 +193,30 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .mentor-presence-actions #mentor-intro-mic[aria-pressed="true"]{color:#8cffbe;background:#154c4f;border-color:#70dcb5}
 @media(max-width:550px){.mentor-voice-preferences{grid-template-columns:1fr;gap:4px}.mentor-voice-preferences label{margin-top:4px}.mentor-voice-preferences select{font-size:.8rem}}
 @media(prefers-reduced-motion:reduce){.mentor-intro-hero.is-speaking .mentor-speech-wave i,.mentor-intro-hero.is-listening .mentor-speech-wave i{animation:none!important}}
+
+/* The single MENTOR: Greek-first personalized route, no persona picker. */
+.mentor-personal{font-family:"Avenir Next","Trebuchet MS","Segoe UI",system-ui,sans-serif;border-color:#3a7996}
+.mentor-personal-header{display:flex;align-items:center;gap:16px}
+.mentor-personal-icon{width:58px;height:58px;display:grid;place-items:center;font-size:32px;flex-shrink:0;color:white;background:radial-gradient(circle at 35% 24%,#6ddff5,#137da0 65%,#123e52);border-radius:19px}
+.mentor-personal h2{font-size:1.75rem;letter-spacing:.07em;margin:4px 0}
+.mentor-personal-header p{color:var(--muted);margin:5px 0}
+.mentor-personal-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+.mentor-personal-metrics>div{border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--surface2)}
+.mentor-personal-metrics strong{display:block;font-size:1.7rem;line-height:1.3;color:var(--brand)}
+.mentor-personal-metrics small{color:var(--muted)}
+.mentor-personal form label{display:block;font-weight:800;margin-bottom:8px}
+.mentor-personal-entry{display:flex;align-items:stretch;gap:9px}
+.mentor-personal-entry input{min-width:0;flex:1;font:inherit;border:1px solid var(--border);color:var(--ink);background:var(--surface);border-radius:10px;padding:12px;min-height:46px}
+.mentor-personal-suggestion,.mentor-personal-guidance{border:1px solid var(--border);border-radius:15px;background:var(--surface2);padding:16px;margin:15px 0}
+.mentor-personal-suggestion h3{font-size:1.15rem;margin:7px 0}
+.mentor-personal-suggestion p,.mentor-personal-guidance p{color:var(--muted);font-size:.93rem}
+.mentor-personal-guidance>a.action{display:inline-block;text-decoration:none;margin:8px 0}
+.mentor-personal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mentor-personal-actions button{border:1px solid var(--border);background:var(--surface);color:var(--ink);border-radius:10px;padding:11px 13px;min-height:44px;font:inherit}
+.mentor-personal-settings{border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0}
+.mentor-personal-settings summary{cursor:pointer;font-weight:750}
+.mentor-personal-settings label{display:block;margin:13px 0 7px;font-weight:700}
+.mentor-personal-settings select{width:100%;min-height:44px;border-radius:9px;padding:10px;border:1px solid var(--border);background:var(--surface2);color:var(--ink)}
+.mentor-personal-settings button{margin-top:16px}
+.mentor-personal button:focus-visible,.mentor-personal input:focus-visible,.mentor-personal select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media(max-width:570px){.mentor-personal-header{align-items:flex-start}.mentor-personal-entry{flex-direction:column}.mentor-personal-entry button{width:100%}.mentor-personal-actions button{width:100%}}
