@@ -3080,7 +3080,29 @@
         "https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf"
       ],
       "officialGuide2024Label": true,
-      "status": "content_extracted_primary_source_comparison_pending"
+      "status": "content_extracted_primary_source_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_round_targeted_full_chapter_and_selfcheck_review",
+        "sourceFile": "saek-course-08.html#lesson-8",
+        "sourceBlobSha": "cd5f509cfe4d37f91be06fc0d26729dc3926e6c4",
+        "fullChapterAndSelfcheckRead": true,
+        "comparedClaims": [
+          "τηλεϊατρική ως απομακρυσμένη υποστήριξη και όχι επέκταση επαγγελματικών αρμοδιοτήτων",
+          "επαλήθευση παραλήπτη/ασθενούς, αποφυγή άτυπης κοινοποίησης δεδομένων",
+          "χρονική σήμανση καθυστερημένης εικόνας και εφεδρική επικοινωνία"
+        ],
+        "sources": [
+          "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/telehealth-privacy-security/index.html",
+          "https://eur-lex.europa.eu/eli/reg/2016/679/oj/ell",
+          "https://csrc.nist.gov/topics/security-and-privacy/security-programs-and-operations/contingency-planning"
+        ],
+        "finding": "Η προστασία τηλεϋγείας και οι αρχές ασφαλούς επικοινωνίας υποστηρίζονται από HHS/GDPR. Η τηλεματική και η χρήση καθυστερημένης εικόνας είναι λογικές προφυλάξεις, αλλά δεν πιστοποιήθηκε συγκεκριμένο επιχειρησιακό σύστημα ή ροή τηλεϊατρικής ΕΚΑΒ.",
+        "limits": "Απαιτούνται επίσημο ελληνικό SOP, εξουσιοδότηση επαγγελματία, διαδικασία συγκατάθεσης/νομικής βάσης, διατήρηση αρχείων και ταυτοποίηση/χρονοσήμανση.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "SAEK-08-09",
@@ -3095,7 +3117,29 @@
         "https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf"
       ],
       "officialGuide2024Label": true,
-      "status": "content_extracted_primary_source_comparison_pending"
+      "status": "content_extracted_primary_source_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_round_targeted_full_chapter_and_selfcheck_review",
+        "sourceFile": "saek-course-08.html#lesson-9",
+        "sourceBlobSha": "cd5f509cfe4d37f91be06fc0d26729dc3926e6c4",
+        "fullChapterAndSelfcheckRead": true,
+        "comparedClaims": [
+          "υλικό ως φυσικά στοιχεία και λογισμικό ως προγράμματα/λειτουργικό",
+          "διαφορά λογαριασμού χρήστη από διαχειριστικά δικαιώματα",
+          "αναφορά βλάβης χωρίς μη εξουσιοδοτημένες αλλαγές ή κοινοποίηση κωδικών"
+        ],
+        "sources": [
+          "https://csrc.nist.gov/glossary/term/hardware",
+          "https://csrc.nist.gov/glossary/term/software",
+          "https://csrc.nist.gov/topics/security-and-privacy/security-programs-and-operations/contingency-planning"
+        ],
+        "finding": "Οι ορισμοί υλικού/λογισμικού και η απάντηση αυτοελέγχου συμφωνούν με το NIST. Οι διαδικασίες πρόσβασης και διαχείρισης βλαβών είναι γενικές καλές πρακτικές, όχι επαληθευμένο εσωτερικό SOP.",
+        "limits": "Απαιτούνται επίσημες πολιτικές IT/κυβερνοασφάλειας ΕΚΑΒ και αποσαφήνιση ότι μια συσκευή δεν απαιτεί κατ' ανάγκη όλα τα είδη εφαρμογών.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "SAEK-08-10",
@@ -3110,7 +3154,28 @@
         "https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf"
       ],
       "officialGuide2024Label": true,
-      "status": "content_extracted_primary_source_comparison_pending"
+      "status": "content_extracted_primary_source_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_round_targeted_full_chapter_and_selfcheck_review",
+        "sourceFile": "saek-course-08.html#lesson-10",
+        "sourceBlobSha": "cd5f509cfe4d37f91be06fc0d26729dc3926e6c4",
+        "fullChapterAndSelfcheckRead": true,
+        "comparedClaims": [
+          "σχεδιασμένη εφεδρική επικοινωνία πριν από τη διακοπή",
+          "εναλλακτικός εγκεκριμένος δίαυλος και διατήρηση κρίσιμων πληροφοριών",
+          "εκ των υστέρων συμφωνία/τεκμηρίωση συμβάντος"
+        ],
+        "sources": [
+          "https://csrc.nist.gov/topics/security-and-privacy/security-programs-and-operations/contingency-planning",
+          "https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf"
+        ],
+        "finding": "Το NIST SP800-34 Rev1 υποστηρίζει προετοιμασία εναλλακτικών μέσων/διαδικασιών, ανάκαμψη και τεκμηρίωση. Η απάντηση αυτοελέγχου είναι συμβατή ως γενική αρχή.",
+        "limits": "Δεν επαληθεύτηκαν πραγματικές εφεδρικές συχνότητες, ιεραρχία κλιμάκωσης ή εγκεκριμένο σχέδιο επιχειρησιακής συνέχειας ΕΚΑΒ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "SAEK-08-11",
@@ -3125,7 +3190,29 @@
         "https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf"
       ],
       "officialGuide2024Label": true,
-      "status": "content_extracted_primary_source_comparison_pending"
+      "status": "content_extracted_primary_source_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_round_targeted_full_chapter_and_selfcheck_review",
+        "sourceFile": "saek-course-08.html#lesson-11",
+        "sourceBlobSha": "cd5f509cfe4d37f91be06fc0d26729dc3926e6c4",
+        "fullChapterAndSelfcheckRead": true,
+        "comparedClaims": [
+          "αντικειμενική χρονοσημασμένη καταγραφή και διαχωρισμός μαρτυρίας από μέτρηση",
+          "διόρθωση χωρίς σιωπηρή διαγραφή προηγούμενης εγγραφής",
+          "απάντηση αυτοελέγχου: πραγματική χρονική σήμανση νέου δεδομένου"
+        ],
+        "sources": [
+          "https://www.england.nhs.uk/long-read/high-quality-patient-records/",
+          "https://www.england.nhs.uk/long-read/records-management-policy/",
+          "https://eur-lex.europa.eu/eli/reg/2016/679/oj/ell"
+        ],
+        "finding": "Η NHS England τεκμηριώνει διορθώσεις με audit trail, χρόνο/αιτία και ποιοτική καταγραφή. Η γενική αρχή της απάντησης είναι συμβατή.",
+        "limits": "Το NHS αφορά βρετανικό σύστημα· εκκρεμεί ελληνική πολιτική καταγραφής ΕΚΑΒ, δικαιώματα διορθώσεων και κανόνες τήρησης.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "SAEK-09-01",
@@ -3140,7 +3227,29 @@
         "https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf"
       ],
       "officialGuide2024Label": true,
-      "status": "content_extracted_primary_source_comparison_pending"
+      "status": "content_extracted_primary_source_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_round_targeted_full_chapter_and_selfcheck_review",
+        "sourceFile": "saek-course-09.html#lesson-1",
+        "sourceBlobSha": "eae9fd3ca2f8e935b265d07e3212905344205fc4",
+        "fullChapterAndSelfcheckRead": true,
+        "comparedClaims": [
+          "έλεγχος πριν από βάρδια σε ελαστικά, φώτα, φρένα και ασφαλίσεις",
+          "καταγραφή και αναφορά βλαβών",
+          "αυτοέλεγχος: φρένα και ελαστικά ως ενδεικτικά κρίσιμα στοιχεία"
+        ],
+        "sources": [
+          "https://www.secamb.nhs.uk/what-we-do/about-us/make-ready/",
+          "https://www.hse.gov.uk/workplacetransport/vehicles/inspection.htm",
+          "https://www.gov.uk/guidance/carry-out-daily-heavy-goods-vehicle-hgv-walkaround-checks.el"
+        ],
+        "finding": "Το NHS Make Ready επιβεβαιώνει έλεγχο εξοπλισμού ασθενοφόρων πριν/μετά βάρδια και το HSE προτείνει έλεγχο ελαστικών/φώτων στην έναρξη. Η αυτοελεγκτική απάντηση είναι ενδεικτικά σωστή.",
+        "limits": "Οι πηγές ΗΒ δεν πιστοποιούν ελληνικό υποχρεωτικό checklist ΕΚΑΒ· εκκρεμεί αρμόδιο υπηρεσιακό πρωτόκολλο και όρια ακινητοποίησης οχήματος.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "SAEK-09-02",
@@ -3156,7 +3265,29 @@
         "https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf"
       ],
       "officialGuide2024Label": true,
-      "status": "content_extracted_primary_source_comparison_pending"
+      "status": "content_extracted_primary_source_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_round_targeted_full_chapter_and_selfcheck_review",
+        "sourceFile": "saek-course-09.html#lesson-2",
+        "sourceBlobSha": "eae9fd3ca2f8e935b265d07e3212905344205fc4",
+        "fullChapterAndSelfcheckRead": true,
+        "comparedClaims": [
+          "προτεραιότητα ασφαλούς διαδρομής έναντι μέγιστης ταχύτητας",
+          "προϋποθέσεις ειδικών προειδοποιητικών σημάτων και αποφυγή κινδύνου",
+          "απαγόρευση αντίθετης κίνησης σε μονόδρομο και υποχρέωση συμμόρφωσης σε τροχονόμο",
+          "αναφορά του Ν.5209/2025 άρθρο 49 στο κείμενο"
+        ],
+        "sources": [
+          "https://www.taxheaven.gr/law/5209/2025/arthro/48",
+          "https://www.taxheaven.gr/law/5209/2025/arthro/49"
+        ],
+        "finding": "ΚΡΙΣΙΜΟ ΝΟΜΙΚΟ ΣΦΑΛΜΑ ΠΑΡΑΠΟΜΠΗΣ: το κεφάλαιο αποδίδει εξαιρέσεις οχημάτων άμεσης ανάγκης στο άρθρο 49 του Ν.5209/2025, ενώ η σχετική διάταξη είναι το άρθρο 48 §2 (και §4 για χρήση ειδικών σημάτων). Το άρθρο 49 αφορά υποχρεώσεις προς αστυνομικά όργανα/σχολικούς τροχονόμους. Το ουσιαστικό σημείο περί μονόδρομου/τροχονόμου συμφωνεί με άρθρο 48 §2.",
+        "limits": "Να διορθωθεί επειγόντως ο αριθμός άρθρου/σύνδεσμος στο εκπαιδευτικό HTML μετά από έλεγχο του ισχύοντος ΦΕΚ/τροποποιήσεων. Η καταχώριση αυτή δεν αλλάζει την παραγωγική εφαρμογή και δεν αποτελεί νομική γνωμοδότηση.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "SAEK-09-03",

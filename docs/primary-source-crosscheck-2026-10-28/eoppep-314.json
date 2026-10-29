@@ -4483,7 +4483,48 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "απορρόφηση ως μετάβαση φαρμάκου από σημείο χορήγησης στη συστηματική κυκλοφορία",
+          "επιρροές οδού, αιμάτωσης, μορφής/διαλυτότητας, pH, επιφάνειας και γαστρικής κένωσης"
+        ],
+        "sources": [
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-absorption",
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "finding": "Η πλήρης σύντομη απάντηση συμφωνεί με Merck Drug Absorption (αναθεώρηση Αύγουστος 2026) ως προς παράγοντες. Χρειάζεται διευκρίνιση ότι η ενδοφλέβια χορήγηση εισέρχεται άμεσα στην κυκλοφορία χωρίς φάση απορρόφησης.",
+        "limits": "Η αρχική γενική πηγή Pharmacokinetics πρέπει να γίνει ειδικότερη. Εκκρεμεί επιβεβαίωση τελευταίας επίσημης εκφώνησης/απάντησης ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison"
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "απορρόφηση ως μετάβαση φαρμάκου από σημείο χορήγησης στη συστηματική κυκλοφορία",
+          "επιρροές οδού, αιμάτωσης, μορφής/διαλυτότητας, pH, επιφάνειας και γαστρικής κένωσης"
+        ],
+        "sources": [
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-absorption",
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "finding": "Η πλήρης σύντομη απάντηση συμφωνεί με Merck Drug Absorption (αναθεώρηση Αύγουστος 2026) ως προς παράγοντες. Χρειάζεται διευκρίνιση ότι η ενδοφλέβια χορήγηση εισέρχεται άμεσα στην κυκλοφορία χωρίς φάση απορρόφησης.",
+        "limits": "Η αρχική γενική πηγή Pharmacokinetics πρέπει να γίνει ειδικότερη. Εκκρεμεί επιβεβαίωση τελευταίας επίσημης εκφώνησης/απάντησης ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-097",
@@ -4497,7 +4538,54 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "αδρεναλίνη ως α/β αγωνιστής",
+          "αναφυλαξία: ενδομυϊκή οδός",
+          "ανακοπή: ενδοφλέβια/ενδοοστική οδός στο ALS",
+          "ταχυκαρδία, τρόμος, υπέρταση και αρρυθμίες"
+        ],
+        "sources": [
+          "https://www.medicines.org.uk/emc/product/3673/smpc",
+          "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+        ],
+        "finding": "RCUK και SmPC (επικαιροποίηση 11/08/2026) στηρίζουν διακριτές ενδείξεις/οδούς και ανεπιθύμητες ενέργειες. ΚΡΙΣΙΜΗ ΔΙΕΥΚΡΙΝΙΣΗ ΠΗΓΗΣ: το συγκεκριμένο SmPC αφορά αδρεναλίνη 1 mg/mL (1:1000) για IM αναφυλαξία και ρητά δεν είναι κατάλληλο για άμεση IV χρήση· η IV/IO ανακοπής χρειάζεται χωριστό ALS πρωτόκολλο/κατάλληλο σκεύασμα.",
+        "limits": "Δεν προστίθεται δοσολογία. Εκκρεμεί ελληνικό πρωτόκολλο, αρμοδιότητα πληρώματος και κατάλληλη διατύπωση/διάκριση σκευασμάτων πριν κλινική χρήση.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison"
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "αδρεναλίνη ως α/β αγωνιστής",
+          "αναφυλαξία: ενδομυϊκή οδός",
+          "ανακοπή: ενδοφλέβια/ενδοοστική οδός στο ALS",
+          "ταχυκαρδία, τρόμος, υπέρταση και αρρυθμίες"
+        ],
+        "sources": [
+          "https://www.medicines.org.uk/emc/product/3673/smpc",
+          "https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+        ],
+        "finding": "RCUK και SmPC (επικαιροποίηση 11/08/2026) στηρίζουν διακριτές ενδείξεις/οδούς και ανεπιθύμητες ενέργειες. ΚΡΙΣΙΜΗ ΔΙΕΥΚΡΙΝΙΣΗ ΠΗΓΗΣ: το συγκεκριμένο SmPC αφορά αδρεναλίνη 1 mg/mL (1:1000) για IM αναφυλαξία και ρητά δεν είναι κατάλληλο για άμεση IV χρήση· η IV/IO ανακοπής χρειάζεται χωριστό ALS πρωτόκολλο/κατάλληλο σκεύασμα.",
+        "limits": "Δεν προστίθεται δοσολογία. Εκκρεμεί ελληνικό πρωτόκολλο, αρμοδιότητα πληρώματος και κατάλληλη διατύπωση/διάκριση σκευασμάτων πριν κλινική χρήση.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-098",
@@ -4511,7 +4599,52 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ελεγχόμενη αναστρέψιμη απώλεια συνείδησης με αμνησία/αναλγησία/μυοχάλαση ανά συνδυασμό",
+          "κλινικές φάσεις εισαγωγή, διατήρηση, αφύπνιση",
+          "ιστορικά τέσσερα στάδια Guedel δεν ταυτίζονται με σύγχρονες φάσεις"
+        ],
+        "sources": [
+          "https://www.clinicalguidelines.scot.nhs.uk/ggc-paediatric-guidelines/ggc-paediatric-guidelines/anaesthetics/total-intravenous-anaesthesia-tiva-a-guide-to-using-propofol-and-remifentanil-mixed-in-the-same-syringe/",
+          "https://www.openanesthesia.org/keywords/stages-of-anesthesia/",
+          "https://www.ncbi.nlm.nih.gov/books/NBK557596/?report=reader"
+        ],
+        "finding": "Η NHS οδηγία TIVA έχει χωριστές ενότητες induction/maintenance/emergence. OpenAnesthesia τεκμηριώνει τα τέσσερα ιστορικά στάδια Guedel και περιορισμούς τους στη σύγχρονη balanced αναισθησία. Η σύντομη απάντηση είναι συμβατή, αλλά χρειάζεται ρητή διάκριση 'φάσεις διαδικασίας' από 'στάδια βάθους'.",
+        "limits": "Αναφορά μόνο για εκπαιδευτική θεωρία, όχι πρακτικό αναισθησιολογικό πρωτόκολλο. Δεν υπάρχει επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison"
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ελεγχόμενη αναστρέψιμη απώλεια συνείδησης με αμνησία/αναλγησία/μυοχάλαση ανά συνδυασμό",
+          "κλινικές φάσεις εισαγωγή, διατήρηση, αφύπνιση",
+          "ιστορικά τέσσερα στάδια Guedel δεν ταυτίζονται με σύγχρονες φάσεις"
+        ],
+        "sources": [
+          "https://www.clinicalguidelines.scot.nhs.uk/ggc-paediatric-guidelines/ggc-paediatric-guidelines/anaesthetics/total-intravenous-anaesthesia-tiva-a-guide-to-using-propofol-and-remifentanil-mixed-in-the-same-syringe/",
+          "https://www.openanesthesia.org/keywords/stages-of-anesthesia/",
+          "https://www.ncbi.nlm.nih.gov/books/NBK557596/?report=reader"
+        ],
+        "finding": "Η NHS οδηγία TIVA έχει χωριστές ενότητες induction/maintenance/emergence. OpenAnesthesia τεκμηριώνει τα τέσσερα ιστορικά στάδια Guedel και περιορισμούς τους στη σύγχρονη balanced αναισθησία. Η σύντομη απάντηση είναι συμβατή, αλλά χρειάζεται ρητή διάκριση 'φάσεις διαδικασίας' από 'στάδια βάθους'.",
+        "limits": "Αναφορά μόνο για εκπαιδευτική θεωρία, όχι πρακτικό αναισθησιολογικό πρωτόκολλο. Δεν υπάρχει επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-099",
@@ -4525,7 +4658,52 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "τρεις οδοί: από στόμα, ενδοφλέβια, ενδοοστική",
+          "η από στόμα χορήγηση προϋποθέτει ασφάλεια κατάποσης",
+          "IO ως εξειδικευμένη επείγουσα πρόσβαση"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "finding": "RCUK 2025 τεκμηριώνει IV και IO ως επείγουσες οδούς για φάρμακα/υγρά ανά πλαίσιο. Η πλήρης απάντηση αναφέρει τρεις υπαρκτές οδούς, αλλά ο γενικός σύνδεσμος Merck Pharmacokinetics δεν τεκμηριώνει ειδικά IO χορήγηση υγρών και απαιτείται σαφέστερη πηγή.",
+        "limits": "Δεν επαληθεύτηκε ότι η ιστορική εκφώνηση ζητά συγκεκριμένη τριάδα οδών (ενδέχεται να υπάρχει διαφορετικό εξεταστικό πλαίσιο). Δεν παρέχεται οδηγία ενδοοστικής πράξης χωρίς εκπαίδευση/πρωτόκολλο.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison"
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "τρεις οδοί: από στόμα, ενδοφλέβια, ενδοοστική",
+          "η από στόμα χορήγηση προϋποθέτει ασφάλεια κατάποσης",
+          "IO ως εξειδικευμένη επείγουσα πρόσβαση"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "finding": "RCUK 2025 τεκμηριώνει IV και IO ως επείγουσες οδούς για φάρμακα/υγρά ανά πλαίσιο. Η πλήρης απάντηση αναφέρει τρεις υπαρκτές οδούς, αλλά ο γενικός σύνδεσμος Merck Pharmacokinetics δεν τεκμηριώνει ειδικά IO χορήγηση υγρών και απαιτείται σαφέστερη πηγή.",
+        "limits": "Δεν επαληθεύτηκε ότι η ιστορική εκφώνηση ζητά συγκεκριμένη τριάδα οδών (ενδέχεται να υπάρχει διαφορετικό εξεταστικό πλαίσιο). Δεν παρέχεται οδηγία ενδοοστικής πράξης χωρίς εκπαίδευση/πρωτόκολλο.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-100",
@@ -4539,7 +4717,52 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ταχείας/βραχείας/ενδιάμεσης/μακράς/υπερμακράς δράσης και προμείγματα",
+          "υποδόρια με σύριγγα, πένα ή αντλία",
+          "εισπνεόμενη μορφή σε ορισμένες αγορές",
+          "ενδοφλέβια χρήση μόνο σε ειδικό περιβάλλον"
+        ],
+        "sources": [
+          "https://diabetes.org/health-wellness/medication/insulin-basics",
+          "https://consumerguide.diabetes.org/products/insulin"
+        ],
+        "finding": "ADA επιβεβαιώνει κατηγορίες χρόνου δράσης, υποδόρια/αντλία και εισπνεόμενη μορφή. Η δήλωση περί IV χορήγησης απαιτεί χωριστή ειδική κλινική πηγή/πρωτόκολλο, δεν τεκμηριώνεται από την τρέχουσα γενική παραπομπή ADA. Η διαθεσιμότητα εισπνεόμενης μορφής στην Ελλάδα δεν επαληθεύτηκε.",
+        "limits": "Απαιτούνται ελληνικά εγκεκριμένα σκευάσματα/SmPC, ειδικό πρωτόκολλο IV ινσουλίνης και επίσημη εξεταστική αντιστοίχιση. Καμία κλινική οδηγία δοσολογίας.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison"
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ταχείας/βραχείας/ενδιάμεσης/μακράς/υπερμακράς δράσης και προμείγματα",
+          "υποδόρια με σύριγγα, πένα ή αντλία",
+          "εισπνεόμενη μορφή σε ορισμένες αγορές",
+          "ενδοφλέβια χρήση μόνο σε ειδικό περιβάλλον"
+        ],
+        "sources": [
+          "https://diabetes.org/health-wellness/medication/insulin-basics",
+          "https://consumerguide.diabetes.org/products/insulin"
+        ],
+        "finding": "ADA επιβεβαιώνει κατηγορίες χρόνου δράσης, υποδόρια/αντλία και εισπνεόμενη μορφή. Η δήλωση περί IV χορήγησης απαιτεί χωριστή ειδική κλινική πηγή/πρωτόκολλο, δεν τεκμηριώνεται από την τρέχουσα γενική παραπομπή ADA. Η διαθεσιμότητα εισπνεόμενης μορφής στην Ελλάδα δεν επαληθεύτηκε.",
+        "limits": "Απαιτούνται ελληνικά εγκεκριμένα σκευάσματα/SmPC, ειδικό πρωτόκολλο IV ινσουλίνης και επίσημη εξεταστική αντιστοίχιση. Καμία κλινική οδηγία δοσολογίας.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-101",

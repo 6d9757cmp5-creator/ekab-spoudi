@@ -462,3 +462,24 @@ Official sources: [ERC/RCUK 2025 PLS](https://www.resus.org.uk/professional-libr
 **Εκκρεμότητες:** νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, εγκεκριμένα ελληνικά SOP ΕΚΑΒ και παλαιότερα ζητήματα A-028/A-038/A-040/A-065/A-079/A-080/A-081/A-083. Καμία αλλαγή σε δημοσιευμένη ύλη, βαθμολόγηση ή πρόοδο μαθητών. Καμία απογραφή δεν μετρήθηκε ως επαλήθευση.
 
 **Μετρημένος πρώτος γύρος:** ΣΑΕΚ **89/247**, ΕΟΠΠΕΠ **99/314**, σύνολο **188/561** (33,5%), εκκρεμούν **373**. Πλήρεις ανεξάρτητες εγκρίσεις **0/561**. Δεύτερος γύρος **δεν** ξεκίνησε. PR #39 Draft / unmerged.
+
+## 29/10/2026, 15:12 Ελλάδας — πρώτος στοχευμένος γύρος (+11): SAEK 08-08..08-11, 09-01..09-02 / EOP-A-096..100
+
+Αναγνώστηκαν **πλήρη κεφάλαια, επεξηγήσεις, σενάρια και ερωτήσεις/απαντήσεις αυτοελέγχου** από `saek-course-08.html` (blob `cd5f509cfe4d37f91be06fc0d26729dc3926e6c4`) και `saek-course-09.html` (blob `eae9fd3ca2f8e935b265d07e3212905344205fc4`). Αναγνώστηκαν **ολόκληρες οι πέντε αποθηκευμένες εκπαιδευτικές απαντήσεις** από `official_questions.json` (blob `1d356fa2aa8bc43b4690373dfacb30314cefcfed`), με ακριβή ταύτιση εκφωνήσεων στο μητρώο. Οι 11 εγγραφές έχουν ατομικά συγκεκριμένους ισχυρισμούς, πηγές, ευρήματα και όρια. Δεν έγινε ανεξάρτητος δεύτερος γύρος.
+
+**ΣΑΕΚ +6:**
+- **08-08 τηλεϊατρική:** συμβατή η απομακρυσμένη υποστήριξη/προστασία δεδομένων με [HHS telehealth](https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/telehealth-privacy-security/index.html) και GDPR. Εκκρεμεί SOP τηλεϊατρικής/συναίνεσης/καθυστέρησης δεδομένων ΕΚΑΒ.
+- **08-09 υλικό/λογισμικό:** σωστοί ορισμοί και αυτοέλεγχος κατά [NIST hardware](https://csrc.nist.gov/glossary/term/hardware) / [software](https://csrc.nist.gov/glossary/term/software). Εκκρεμεί εσωτερική πολιτική IT.
+- **08-10 εφεδρική επικοινωνία:** γενική συμβατότητα με [NIST SP800-34 Rev1](https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-34r1.pdf), χωρίς πιστοποίηση πραγματικού σχεδίου ΕΚΑΒ.
+- **08-11 τεκμηρίωση:** [NHS England high quality patient records](https://www.england.nhs.uk/long-read/high-quality-patient-records/) υποστηρίζει audit trail διορθώσεων, ακριβή καταγραφή και αυτοέλεγχο. Εκκρεμεί ελληνικό SOP.
+- **09-01 έλεγχος πριν βάρδια:** [NHS ambulance Make Ready](https://www.secamb.nhs.uk/what-we-do/about-us/make-ready/) και [HSE](https://www.hse.gov.uk/workplacetransport/vehicles/inspection.htm) στηρίζουν ελέγχους εξοπλισμού/ελαστικών/φώτων, όχι ειδικό ελληνικό checklist.
+- **09-02 ΚΡΙΣΙΜΗ ΝΟΜΙΚΗ ΠΑΡΑΠΟΜΠΗ:** το κεφάλαιο αναφέρει **άρθρο 49** ν. 5209/2025 για εξαιρέσεις οχημάτων άμεσης ανάγκης. Το σωστό είναι **[άρθρο 48 §2 και §4](https://www.taxheaven.gr/law/5209/2025/arthro/48)**· το [άρθρο 49](https://www.taxheaven.gr/law/5209/2025/arthro/49) αφορά τροχονόμους/αστυνομικά όργανα. **Απαιτείται διόρθωση στο παραγωγικό μάθημα μετά από έλεγχο ΦΕΚ.** Δεν άλλαξε το HTML.
+
+**ΕΟΠΠΕΠ +5:**
+- **A-096 απορρόφηση:** [Merck Drug Absorption, Aug 2026](https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-absorption) υποστηρίζει παράγοντες· να διευκρινιστεί εξαίρεση άμεσης IV εισόδου.
+- **A-097 αδρεναλίνη:** [SmPC 1mg/mL, ενημ. 11/08/2026](https://www.medicines.org.uk/emc/product/3673/smpc) και [RCUK ALS 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines). **Υψηλός κίνδυνος παρερμηνείας**: το συγκεκριμένο SmPC είναι για IM αναφυλαξία και ρητά όχι άμεση IV χρήση· IV/IO ανακοπής απαιτεί ξεχωριστό πρωτόκολλο/σκεύασμα.
+- **A-098 γενική αναισθησία:** [NHS TIVA](https://www.clinicalguidelines.scot.nhs.uk/ggc-paediatric-guidelines/ggc-paediatric-guidelines/anaesthetics/total-intravenous-anaesthesia-tiva-a-guide-to-using-propofol-and-remifentanil-mixed-in-the-same-syringe/) για εισαγωγή/διατήρηση/αφύπνιση και [OpenAnesthesia Guedel](https://www.openanesthesia.org/keywords/stages-of-anesthesia/) για τα ιστορικά στάδια· να μη συγχέονται.
+- **A-099 οδοί υγρών:** [RCUK ALS 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines) υποστηρίζει IV/IO επείγουσα πρόσβαση· η αρχική γενική πηγή Merck δεν τεκμηριώνει ειδικά IO υγρά.
+- **A-100 ινσουλίνη:** [ADA insulin basics](https://diabetes.org/health-wellness/medication/insulin-basics) τεκμηριώνει τύπους/υποδόρια/αντλία/εισπνεόμενη μορφή· **IV χρήση** και ελληνική διαθεσιμότητα χρειάζονται χωριστές επίσημες πηγές.
+
+**Μετρημένη καταχώριση πρώτου γύρου:** ΣΑΕΚ **95/247**, ΕΟΠΠΕΠ **104/314**, σύνολο **199/561** (35,5%), εκκρεμούν **362**. **0/561** πλήρεις ανεξάρτητες επιστημονικές εγκρίσεις· δεύτερος γύρος **δεν ξεκίνησε**. Η νεότερη επίσημη τράπεζα ΕΟΠΠΕΠ και ελληνικά πρωτόκολλα παραμένουν μη επιβεβαιωμένα. Η καταχώριση αφορά μόνο τα μητρώα και REPORT, όχι παραγωγικό περιεχόμενο, βαθμολόγηση ή πρόοδο μαθητών.
