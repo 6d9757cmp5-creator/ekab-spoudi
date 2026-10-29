@@ -9,11 +9,13 @@
 <link rel="stylesheet" href="mentor-avatar-live.css">
 <link rel="stylesheet" href="mentor-3d.css">
 <link rel="stylesheet" href="mentor-cinematic.css">
+<link rel="stylesheet" href="mentor-real3d.css">
 <script src="mentor-adaptive.js" defer></script>
 <script src="mentor-personal-v1.js" defer></script>
 <script type="module" src="mentor-lab.js" defer></script>
 <script type="module" src="mentor-3d.mjs" defer></script>
 <script type="module" src="mentor-cinematic.mjs" defer></script>
+<script type="module" src="mentor-real3d.bundle.mjs" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
@@ -64,6 +66,8 @@
         <span class="cinematic-grid" aria-hidden="true"></span>
         <span class="cinematic-light cinematic-light-left" aria-hidden="true"></span>
         <span class="cinematic-light cinematic-light-right" aria-hidden="true"></span>
+        <canvas id="mentor-real3d-canvas" class="mentor-real3d-canvas" hidden aria-label="Πραγματικός τρισδιάστατος φωτορεαλιστικός εκπαιδευτής με σκελετό, εκφράσεις προσώπου και περιστροφή" role="img" width="320" height="760"></canvas>
+        <div class="mentor-real3d-choices" role="group" aria-label="Επιλογή ρεαλιστικού εκπαιδευτή"><button type="button" id="mentor-real3d-toggle" aria-pressed="false" disabled>Ζωντανό 3D</button><button type="button" id="mentor-real3d-photo" aria-pressed="true">Φωτορεαλιστική εικόνα</button></div><div class="mentor-real3d-options"><label>Περιστροφή <input id="mentor-real3d-rotation" type="range" min="-110" max="110" value="0" disabled></label><label><input id="mentor-real3d-motion" type="checkbox" checked> Κινήσεις</label></div><p class="mentor-real3d-status" id="mentor-real3d-status" role="status">Γίνεται έλεγχος του πραγματικού τρισδιάστατου μοντέλου· μέχρι τότε εμφανίζεται η εγκεκριμένη εικόνα.</p>
         <img class="cinematic-character" src="assets/mentor-cinematic.webp" alt="Συνθετική φωτορεαλιστική απεικόνιση εκπαιδευτή διασώστη με στολή και γαλάζια ολογραφική λάμψη" width="320" height="763" decoding="async" fetchpriority="high">
         <span class="cinematic-stage-label">MENTOR <span>·</span> ΟΛΟΓΡΑΦΙΚΗ ΠΡΟΒΟΛΗ</span>
         <span class="cinematic-stage-base" aria-hidden="true"></span>
