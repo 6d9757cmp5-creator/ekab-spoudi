@@ -120,10 +120,17 @@ export function searchClinical(library,{query='',specialty='all',limit=6}={}){
   .filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.r.id.localeCompare(b.r.id))
   .slice(0,count).map(x=>x.r);
 }
+export function isDirectTreatmentRequest(question){
+ const q=normalize(String(question??'').slice(0,260));
+ const act=/(?:να δωσω|να χορηγησω|να παρει|να παρει ο|να συνταγογραφησω|να κανω θεραπε)/.test(q);
+ const medication=/(?:θεραπ|φαρμακ|αντιβιοτ|αντιπηκτ|δοσολογ|δοση|mg|συμπληρωμ)/.test(q);
+ return Boolean((act&&medication) ||
+  /(?:ποση δοση|ποσα mg|ποιο φαρμακο να|τι φαρμακο να)/.test(q));
+}
 export function lookupClinical({sources,library,question}){
  if(!sources?.sources||!library?.records)throw Error('missing-desk');
  const q=String(question??'').trim().slice(0,260);
- if(q.length<4)return null;
+ if(q.length<4||isDirectTreatmentRequest(q))return null;
  const rec=searchClinical(library,{query:q,limit:1})[0];
  if(!rec)return null;
  const refs=rec.source_ids.map(id=>sources.sources.find(s=>s.id===id))
