@@ -1,0 +1,54 @@
+name: Mentor Greek knowledge pack — sources and safety
+on:
+  pull_request:
+    paths:
+      - 'mentor/knowledge/**'
+      - 'mentor-lab.js'
+      - 'mentor-lab.html'
+      - 'mentor-lab.css'
+      - 'scripts/verify-mentor-browser.mjs'
+      - '.github/workflows/mentor-knowledge-verify.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  knowledge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate non-AI knowledge module syntax
+        run: |
+          for f in mentor/knowledge/*.mjs; do node --check "$f"; done
+          node --check mentor-lab.js
+      - name: Test Greek cards, source links, topic recall, unsafe-query refusal
+        run: node --test mentor/knowledge/*.test.mjs
+      - name: Ensure card index is strictly educational and cannot authorize clinical publication
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {KNOWLEDGE_PACK,KNOWLEDGE_CARDS,KNOWLEDGE_SOURCES} from './mentor/knowledge/foundation-pack.mjs';
+          import {assertKnowledgePack} from './mentor/knowledge/search.mjs';
+          assert.equal(assertKnowledgePack(),true);
+          assert.equal(KNOWLEDGE_CARDS.length,29);
+          assert.equal(Object.keys(KNOWLEDGE_SOURCES).length,9);
+          assert.equal(KNOWLEDGE_PACK.production_clinical_approval,false);
+          assert.equal(KNOWLEDGE_PACK.model_training,false);
+          console.log('Original Greek educational cards only, source-linked; human clinical review pending.');
+          NODE
+      - name: Verify legacy grades and syncing code untouched
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          CHANGED="$(git diff --name-only origin/main...HEAD)"
+          echo "$CHANGED"
+          if echo "$CHANGED" | grep -E '^(ai-grading-client\.js|ai-grading-config\.js|functions/answer-grader/|workers/answer-grader/|sync-local\.js|sync-model\.js|sync-codec\.js|cloud-sync\.js|progress\.js|saek-exam-engine\.js|study-scheduler\.js|notes-store\.js|app\.js|official_questions\.json|index\.html|sw\.js)$'; then
+            echo 'Protected legacy data code modified'; exit 1
+          fi
+          echo 'No legacy grader, progress, notes or sync mutation'
+      - name: Existing release smoke
+        run: python3 scripts/release_smoke.py
