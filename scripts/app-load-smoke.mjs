@@ -18,6 +18,19 @@ try {
     const loaded=await page.locator('body').evaluate(el=>Boolean(el.textContent?.trim())&&getComputedStyle(el).display!=='none');
     if(!loaded)throw Error(device+': page body did not render');
     console.log('PASS '+device+': application loads');
+    await page.waitForFunction(()=>document.querySelector('#mentor-home-presence-frame')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',null,{timeout:90000});
+    if(!await page.locator('#mentor-home-visual-shell').isVisible())throw Error(device+': no permanent MENTOR 3D on home');
+    const embedded=page.frameLocator('#mentor-home-presence-frame');
+    if(!await embedded.locator('#mentor-real3d-canvas').isVisible())throw Error(device+': embedded 3D character not visible');
+    await page.locator('#mentor-home-visual-toggle').click();
+    if(await page.locator('#mentor-home-visual-shell').isVisible())throw Error(device+': hide 3D character failed');
+    await page.locator('#mentor-home-visual-toggle').click();
+    if(!await page.locator('#mentor-home-visual-shell').isVisible())throw Error(device+': show 3D character failed');
+    await page.locator('#mentor-home-question').fill('Τι είναι ΚΑΡΠΑ;');
+    await page.locator('#mentor-home-question-form button[type=submit]').click();
+    await page.waitForFunction(()=>document.getElementById('mentor-home-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
+    console.log('PASS '+device+': visible MENTOR 3D, user hide/show and local Greek Q&A');
+
     const mentorPage=await page.goto('http://127.0.0.1:8765/mentor-lab.html',{waitUntil:'domcontentloaded',timeout:30000});
     if(!mentorPage?.ok())throw Error(device+': MENTOR page does not load');
     await page.waitForFunction(()=>document.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',
