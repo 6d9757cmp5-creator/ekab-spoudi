@@ -6,6 +6,8 @@ on:
       - 'saek-image-audit-2026.json'
       - 'scripts/check-saek-images.mjs'
       - 'scripts/verify-saek-image-integration.mjs'
+      - 'saek-images.js'
+      - 'scripts/check-saek-image-gallery.mjs'
       - 'saek-course-*.html'
       - '*.html'
       - '*.css'
@@ -44,6 +46,10 @@ jobs:
         run: node scripts/check-saek-images.mjs --remote
       - name: Check 247 actual lesson DOM insertion points and offline image precache
         run: node scripts/verify-saek-image-integration.mjs
+      - name: Verify image gallery integration and JavaScript syntax
+        run: |
+          node --check saek-images.js
+          node scripts/check-saek-image-gallery.mjs
       - name: Validate local SVG XML, accessibility, Greek labels and SHA-256
         run: python3 scripts/validate-saek-svg.py
       - name: Verify 649 byte hashes and classify per-version visual review evidence
