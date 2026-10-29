@@ -52,12 +52,22 @@ test('Catalog refuses sources enabled for clinical retrieval without review',asy
  cryptoApi:webcrypto,base:'./mentor/review-corpus/',index:'./mentor/library/source-index.json'});
  await assert.rejects(loader.load(id),/Unverified|unsafe/);
 });
-test('Restricted OpenStax and WHO sources are refused before their text is fetched',async()=>{
+test('User-attested OpenStax and WHO sources are allowed in review loader but never in clinical AI',async()=>{
  const {request,urls}=mocks();
  const loader=createReviewBookLoader({request,cryptoApi:webcrypto,base:'./mentor/review-corpus/',index:'./mentor/library/source-index.json'});
- await assert.rejects(loader.load('medical-surgical-nursing'),/δικαιωμάτων/);
- await assert.rejects(loader.load('who-bec'),/δικαιωμάτων/);
- assert.ok(!urls.some(s=>s.endsWith('medical-surgical-nursing.json')||s.endsWith('who-bec.json')));
+ for(const source of ['medical-surgical-nursing','who-bec']){
+   // Mock extract intentionally uses the EMR identifier, so source validation refuses it.
+   // Crucially this proves the restriction is lifted only to reach content verification.
+   await assert.rejects(loader.load(source),/SHA-256|source mismatch|Invalid/i);
+   assert.ok(urls.some(x=>x.endsWith(source+'.json')),'Source made it to review-only integrity stage');
+ }
+ const {SOURCE_POLICY}=await import('./rights-policy.mjs');
+ for(const source of ['medical-surgical-nursing','who-bec']){
+   assert.equal(SOURCE_POLICY[source].preview_allowed,true);
+   assert.equal(SOURCE_POLICY[source].ai_retrieval_allowed,false);
+   assert.equal(SOURCE_POLICY[source].production_publication_allowed,false);
+   assert.equal(SOURCE_POLICY[source].rights_signoff,'user-attested-unverified');
+ }
 });
 test('Manifest must remain exactly seven unapproved source texts',()=>{
  assert.equal(validateReviewManifest(manifest).books.length,7);
