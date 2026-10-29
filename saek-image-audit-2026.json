@@ -1187,7 +1187,7 @@
       "subjectCompleteness": "partial",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact pushed SVG rendered in browser at 1280×720 (commit b252c73); label/pointer alignment for peripheral pulse and visible bleeding, Greek text, legend and flow checked. The diagram is a simplified observation aid, not a diagnosis or treatment instruction. Clinical approval and mobile/offline E2E remain pending."
+        "scope": "Final 1200x700 Edge raster visually inspected: torso/heart/vessels, peripheral pulse and visible bleeding callouts, legend and Greek text are legible and correctly aligned. This is a simplified observation aid, not diagnosis or treatment guidance; independent clinical and mobile/offline review remain pending."
       },
       "sha256": "210ff3c2521d82ec17b08c5239814e4610045253d997a572c2cf30f5db7b32d8"
     },
@@ -4244,17 +4244,21 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο κεφαλαιοκεντρικό εκπαιδευτικό σχήμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.who.int/publications/i/item/9789241513081",
-      "caption": "Εικόνα αναγνώρισης: Περιφερικός σφυγμός · Δέρμα · Εξωτερική αιμορραγία. Κάθε σύντομη ονομασία δείχνει με βέλος το αντίστοιχο σχεδιασμένο στοιχείο.",
+      "page": "https://www.resus.org.uk/library/abcde-approach",
+      "caption": "Εικόνα αναγνώρισης: Περιφερικός σφυγμός · Δέρμα · Εξωτερική αιμορραγία. Κάθε σύντομη ονομασία δείχνει με βέλος το αντίστοιχο σχεδιασμένο στοιχείο. Σχηματικά μνημονικά εικονίδια· όχι διάγνωση ή θεραπευτικό πρωτόκολλο.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "Independent clinical verification against linked reference still required; based on chapter-specific project theory"
+        "Resuscitation Council UK ABCDE Approach, updated July 2024: circulation assessment includes pulse, skin colour/temperature, capillary refill, blood pressure and perfusion; WHO–ICRC Basic Emergency Care workbook: circulation and external bleeding assessment. Sources support the depicted categories, not diagnosis or clinical thresholds."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Three concise labeled objects; each arrow ends at a distinct subject pictogram. Automated label/metadata/CI testing, not independent human optical review."
+        "date": "2026-10-29",
+        "scope": "Rendered final SVG at 1110x630 and inspected raster in browser for each icon-caption match, Greek text, contrast, spacing and arrow targets. Schematic cues only; no diagnostic claims or thresholds. Human visual review is not independent clinical approval."
       },
-      "sha256": "8152d64e7be864ab6fff81c93e7da1e3e7cdcd005416d76b4657b9c168ca9648"
+      "sha256": "f05ef52f2caba30046e92e30933a898d68d070b54f1cb22783cc70fc168b273e",
+      "additionalSources": [
+        "https://hlh.who.int/docs/librariesprovider4/clinical-care/who-icrc-basic-emergency-care.pdf"
+      ]
     },
     "sem_a_5_9_details": {
       "filename": "semester-a-05-09-details-el.svg",
@@ -4263,17 +4267,21 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο κεφαλαιοκεντρικό εκπαιδευτικό σχήμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.who.int/publications/i/item/9789241513081",
-      "caption": "Εικόνα αναγνώρισης: Αρτηριακή πίεση · Τριχοειδική επαναπλήρωση · Αιμάτωση. Κάθε σύντομη ονομασία δείχνει με βέλος το αντίστοιχο σχεδιασμένο στοιχείο.",
+      "page": "https://www.resus.org.uk/library/abcde-approach",
+      "caption": "Εικόνα αναγνώρισης: Αρτηριακή πίεση · Τριχοειδική επαναπλήρωση · Αιμάτωση. Κάθε σύντομη ονομασία δείχνει με βέλος το αντίστοιχο σχεδιασμένο στοιχείο. Σχηματικά μνημονικά εικονίδια· όχι διάγνωση ή θεραπευτικό πρωτόκολλο.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "Independent clinical verification against linked reference still required; based on chapter-specific project theory"
+        "Resuscitation Council UK ABCDE Approach, updated July 2024: circulation assessment includes pulse, skin colour/temperature, capillary refill, blood pressure and perfusion; WHO–ICRC Basic Emergency Care workbook: circulation and external bleeding assessment. Sources support the depicted categories, not diagnosis or clinical thresholds."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Three concise labeled objects; each arrow ends at a distinct subject pictogram. Automated label/metadata/CI testing, not independent human optical review."
+        "date": "2026-10-29",
+        "scope": "Rendered final SVG at 1110x630 and inspected raster in browser for each icon-caption match, Greek text, contrast, spacing and arrow targets. Schematic cues only; no diagnostic claims or thresholds. Human visual review is not independent clinical approval."
       },
-      "sha256": "2c170ad0f7066be2355910edd7851292c963acb716d90f141c911ec6cf96659e"
+      "sha256": "faeba14520d12d9ff918ec310a050b4ba87b1947ded9191fdfa69fd4e67f662f",
+      "additionalSources": [
+        "https://hlh.who.int/docs/librariesprovider4/clinical-care/who-icrc-basic-emergency-care.pdf"
+      ]
     },
     "sem_a_5_10_concept": {
       "filename": "semester-a-05-10-concept-el.svg",
