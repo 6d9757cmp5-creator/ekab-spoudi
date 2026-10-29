@@ -220,3 +220,16 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .mentor-personal-settings button{margin-top:16px}
 .mentor-personal button:focus-visible,.mentor-personal input:focus-visible,.mentor-personal select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 @media(max-width:570px){.mentor-personal-header{align-items:flex-start}.mentor-personal-entry{flex-direction:column}.mentor-personal-entry button{width:100%}.mentor-personal-actions button{width:100%}}
+
+/* Mentor voice troubleshooting: separate device-audio probe, never auto female fallback. */
+.mentor-voice-diagnostics{display:flex;flex-wrap:wrap;gap:9px;grid-column:1/-1;margin:4px 0}
+.mentor-voice-diagnostics button{font:inherit;font-size:.77rem;font-weight:750;
+ background:#edfaff;color:#14516a;border:1px solid #8bd3e4;border-radius:9px;
+ padding:9px 12px;min-height:43px;max-width:100%;line-height:1.35}
+.mentor-voice-diagnostics button:disabled{opacity:.5;cursor:not-allowed}
+#mentor-voice-inventory{grid-column:1/-1}
+.mentor-voice-help{grid-column:1/-1;border:1px solid #5e9cbb;border-radius:10px;
+ padding:11px 12px;margin:4px 0;color:#e3faff;background:#07334b8c;font-size:.77rem;line-height:1.55}
+.mentor-voice-help summary{font-weight:800;cursor:pointer}
+.mentor-voice-help p{margin:9px 0 2px!important;font-size:.78rem!important;color:#d6f6ff!important}
+@media(max-width:550px){.mentor-voice-diagnostics{flex-direction:column}.mentor-voice-diagnostics button{width:100%}}
