@@ -164,6 +164,30 @@ try{
   assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'0');
   assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // MENTOR book bridge: actual copied book text, hash-verified lazy lookup (never clinical synthesis).
+  await page.goto(url,{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.getElementById('mentor-book-count').textContent.includes('7 εισαγμένα'));
+  assert.match(await page.locator('#mentor-book-count').textContent(),/0 εγκεκριμένα/);
+  await page.locator('#tab-books').click();
+  await page.locator('#mentor-book-query').fill('αεραγωγός');
+  await page.locator('#mentor-book-submit').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'));
+  assert.ok(await page.locator('#mentor-book-results .review-result').count()>0,'Actual EMR source is searchable in Greek');
+  assert.match(await page.locator('#mentor-book-results .review-watermark').first().textContent(),/ΑΝΕΛΕΓΚΤΟ/);
+  assert.match(await page.locator('#mentor-book-results .review-excerpt').first().textContent(),/airway/i);
+  assert.match(await page.locator('#mentor-book-results .review-result a').first().getAttribute('href'),/^https:\/\/wtcs.pressbooks.pub\/emergencymedtech\//);
+  const snippet=await page.locator('#mentor-book-results .review-excerpt').first().textContent();
+  assert.ok(snippet.length<275,'No full unreviewed chapter is displayed');
+  await page.screenshot({path:'mentor-foundation-mobile-books.png',fullPage:true});
+  await page.locator('#tab-route').click();
+  await page.locator('#coach-question').fill('shock');
+  await page.locator('#coach-to-books').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-book-query').value==='shock');
+  await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'));
+  assert.ok(await page.locator('#mentor-book-results .review-result').count()>0,'Mentor lookup button searches source');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,'Book lookup must not alter EOPPEP');
+  assert.ok(!(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.includes('review-corpus')))),'Queries are not stored');
+
   // Public Mentor bibliography: mobile Chromium/WebKit search and fail-closed review state.
   await page.goto('http://127.0.0.1:'+port+'/mentor-library.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('library-status').textContent.includes('μόνο στοιχεία πηγών'));
