@@ -12,6 +12,8 @@ on:
       - 'mentor-oral.js'
       - 'mentor-ecg.html'
       - 'mentor-ecg.js'
+      - 'mentor-scenarios.html'
+      - 'mentor-scenarios.js'
       - 'mentor-readonly.html'
       - 'mentor-readonly.js'
       - '.github/workflows/mentor-foundation-verify.yml'
@@ -36,6 +38,9 @@ jobs:
           node --check mentor-oral.js
           node --check mentor-ecg.js
           node --check mentor-readonly.js
+          node --check mentor-scenarios.js
+          for f in mentor/scenario-atlas/*.mjs; do node --check "$f"; done
+          node --test mentor/scenario-atlas/*.test.mjs
           for f in mentor/core/*.mjs; do node --check "$f"; done
           node --test mentor/core/*.test.mjs
       - name: Verify no grading, legacy progress or cloud sync code was modified
