@@ -7,7 +7,7 @@ import {createServer} from 'node:http';
 import {readFile,mkdir} from 'node:fs/promises';
 import {resolve,sep} from 'node:path';
 import assert from 'node:assert/strict';
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'};
+const types={'.webp':'image/webp','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'};
 const root=resolve('.');
 const server=createServer(async(req,res)=>{
   try{
@@ -322,6 +322,30 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
   const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
   assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
+  // Lifelike portrait regression: actual pixels, two entry points and lip-cycle cleanup.
+  await page.goto('http://127.0.0.1:'+port+'/index.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-home-avatar .mentor-photo-img').isVisible(),true);
+  assert.equal(await page.locator('#mentor-home-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220&&x.naturalHeight===228),true,'Home portrait loads actual WebP pixels');
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220&&x.naturalHeight===228),true,'Classroom portrait loads actual WebP');
+  const motion=await page.evaluate(async()=>{
+    const {createMentorAvatar}=await import('/mentor-avatar-live.mjs');
+    const element=document.getElementById('mentor-avatar');
+    const live=createMentorAvatar(element);
+    live.start('Άλφα ωμέγα');
+    const started=element.classList.contains('mentor-photo-speaking');
+    live.boundary({charIndex:0});
+    const open=element.dataset.viseme;
+    live.boundary({charIndex:5});
+    const round=element.dataset.viseme;
+    live.stop();
+    const ended=!element.classList.contains('mentor-photo-speaking')&&element.dataset.viseme==='rest';
+    return {started,open,round,ended};
+  });
+  assert.equal(motion.started,true);
+  const reduced=await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if(!reduced){assert.equal(motion.open,'open');assert.equal(motion.round,'round');}
+  assert.equal(motion.ended,true,'Stopping speech removes the live mouth state');
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
