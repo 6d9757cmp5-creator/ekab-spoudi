@@ -107,3 +107,21 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .study-goal-card h4{margin:0 0 12px}.study-task{margin:7px 0;font-size:.9rem;color:var(--muted)}
 .study-goal-link{display:inline-block;margin-top:9px;color:var(--brand);font-weight:750}
 .study-goal-choices input:focus-visible,.study-goal-link:focus-visible,#study-path-mode:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
+
+/* MENTOR identity: Greek-capable local font stack, no network font dependencies. */
+:root{font-family:"Trebuchet MS","Avenir Next","Segoe UI",system-ui,sans-serif}
+.brand strong,.hero h1,.section-heading h2,.panel h2,.panel h3{font-family:"Avenir Next","Trebuchet MS","Segoe UI",system-ui,sans-serif;letter-spacing:-.035em}
+.brand strong{font-size:1.35rem;letter-spacing:.16em;font-weight:900}
+.hero{background:linear-gradient(128deg,#102938 0%,#15546b 60%,#236f82 100%)}
+.hero h1{font-weight:850}
+.tutor-conversation{display:flex;flex-direction:column;gap:12px;min-height:190px;max-height:480px;overflow-y:auto;padding:14px;background:var(--surface2);border-radius:16px;border:1px solid var(--border);margin:15px 0}
+.tutor-turn{max-width:88%;border-radius:16px;padding:12px 15px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.tutor-turn.student{align-self:flex-end;background:#155a77;color:white;border-bottom-right-radius:4px}
+.tutor-turn.tutor{align-self:flex-start;background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:4px}
+#tutor-input{display:block;width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px;resize:vertical}
+#topic,#level{font:inherit;padding:9px;background:var(--surface2);color:var(--ink);border:1px solid var(--border);border-radius:9px;max-width:100%;margin:6px 12px 6px 0}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;margin:18px 0}
+.skills-card{padding:17px;border-radius:14px;background:var(--surface2);border:1px solid var(--border)}
+.skills-card h3{margin:0 0 8px}.skills-card p{font-size:.9rem;color:var(--muted)}
+.skills-card button{margin-top:8px}
+@media(prefers-color-scheme:dark){.tutor-turn.student{background:#176c8b}}
