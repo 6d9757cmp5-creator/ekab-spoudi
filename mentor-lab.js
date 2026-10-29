@@ -12,6 +12,7 @@ import {mountActivities} from './mentor/activities-ui.mjs';
 import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,resolveMentorGreekVoice,voiceDiagnostics,speakGreek,stopGreek} from './mentor-voice.mjs';
 import {chooseMentorDelivery,deliverySpeechSettings,publicDeliveryCue} from './mentor/core/presence-director.mjs';
 import {createMentorAvatar} from './mentor-avatar-live.mjs';
+import {answerStudyQuestion,loadMentorTermLibrary} from './mentor/core/quick-answer.mjs';
 
 const $=id=>document.getElementById(id);
 let mentorDelivery=chooseMentorDelivery();
@@ -253,9 +254,15 @@ async function coachAsk(intent,topic,userText){
   let overview=null;
   try{
     overview=state.store&&state.scope?await state.store.overview(state.scope):null;
-    lastCoachReply=coachResponse({intent,topic,overview});
+    const terms=await loadMentorTermLibrary();
+    const response=answerStudyQuestion(userText,{items:terms,overview});
+    lastCoachReply=response.text;
+    const box=$('mentor-hero-answer'),link=$('mentor-hero-answer-source');
+    if(box){box.hidden=false;box.textContent=lastCoachReply;}
+    if(link){link.hidden=!response.source;if(response.source)link.href=response.source;}
   }catch{
-    lastCoachReply='Δεν μπόρεσα να διαβάσω τις δοκιμαστικές καταγραφές Mentor. Η υπάρχουσα πρόοδος δεν άλλαξε.';
+    lastCoachReply=answerStudyQuestion(userText).text;
+    const box=$('mentor-hero-answer');if(box){box.hidden=false;box.textContent=lastCoachReply;}
   }
   // Adapts DELIVERY only; the medically reviewed answer and grading do not change.
   setMentorDelivery(chooseMentorDelivery({intent,topic:topic||'scene',overview}));
@@ -312,9 +319,10 @@ function wireMentorPresence(){
       const choice=make('option',null,voice.name+(voice.localService?' · Συσκευή':' · Browser'));
       choice.value=voice.name;voiceSelect.append(choice);
     }
+    const other=make('option',null,'Εναλλακτική ελληνική φωνή συσκευής (όχι εγγυημένα ανδρική)');
+    other.value='__device__';voiceSelect.append(other);
     if([...voiceSelect.options].some(x=>x.value===previous))voiceSelect.value=previous;
-    if(maleVoiceStatus)maleVoiceStatus.textContent=resolveMentorGreekVoice(
-      window.speechSynthesis.getVoices(),voiceSelect.value).label;
+    if(maleVoiceStatus)maleVoiceStatus.textContent=voiceSelect.value==='__device__'?'Χρησιμοποιείται ρητά η ελληνική φωνή της συσκευής· δεν εγγυάται ανδρικό ομιλητή.':resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
     if(voiceInventory){
       voiceInventory.textContent='Διαθέσιμες ελληνικές φωνές: '+device.greekCount+
         ' · αναγνωρισμένες ανδρικές: '+device.maleCount+
@@ -398,8 +406,9 @@ function wireMentorPresence(){
     const current=++speakingGeneration;
     const speechStyle=deliverySpeechSettings(mentorDelivery,Number(speed.value));
     paintSpeaking(false);
-    const started=speakGreek(text,{env:window,voiceName:voiceSelect.value,
-      rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,requireMale:true,
+    const started=speakGreek(text,{env:window,voiceName:voiceSelect.value==='__device__'?'':voiceSelect.value,
+      rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,
+      requireMale:voiceSelect.value!=='__device__',
       onVoiceResolved:result=>{
         if(maleVoiceStatus)maleVoiceStatus.textContent=result.label;
       },
@@ -432,7 +441,7 @@ function wireMentorPresence(){
     if(!started){
       paintSpeaking(false);
       updateVoices();
-      voiceStatus.textContent='Δεν ξεκίνησε ανδρική ελληνική ομιλία. Το Safari πρέπει να αναγνωρίζει εγκατεστημένη ανδρική φωνή (π.χ. «Νίκος»). Άνοιξε τις οδηγίες iPhone κάτω από τις ρυθμίσεις φωνής.';
+      voiceStatus.textContent='Δεν ξεκίνησε η εκφώνηση. Πάτησε «Έλεγξε ξανά», ή διάλεξε ρητά την εναλλακτική ελληνική φωνή συσκευής. Η επιλογή αυτή δεν εγγυάται ανδρική χροιά.';
     }
   }
   function stop(){
