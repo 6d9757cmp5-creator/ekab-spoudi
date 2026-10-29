@@ -154,6 +154,10 @@ async function start(){
    const assets=chapter.images
      .filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key))
      .map(key=>registry.assets[key]).filter(Boolean);
+   // Reuse existing, source-attributed anatomical plates in related topics.
+   // This is an additional visual placement, not a newly approved asset.
+   if(match[1]==='01'&&id==='lesson-2'&&registry.assets.spine)assets.push(registry.assets.spine);
+   if(match[1]==='01'&&id==='lesson-8'&&registry.assets.brain_medial)assets.push(registry.assets.brain_medial);
    if(!assets.length){
     if(match[1]==='01'&&!details.querySelector('.saek-anatomy-image-pending')){
      const pending=el('p','small muted saek-anatomy-image-pending','Ανατομική εικόνα με επαρκή λεπτομέρεια: εκκρεμεί επιλογή και επιστημονικός έλεγχος. Δεν προβάλλονται τα παλαιά εικονίδια ως ανατομικές πλάκες.');
