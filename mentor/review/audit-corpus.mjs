@@ -62,6 +62,8 @@ export async function auditReviewCorpus({directory=DIR,root=ROOT}={}){
      'owner-attested-review-preview-without-publisher-paperwork':
      (policy.preview_allowed?'CC-BY-editorial-preview-only':'rights-restricted'),
    rights_signoff:policy.rights_signoff,
+   permission_basis:policy.permission_attestation||null,
+   permission_documentary_verified:false,
    ai_retrieval_enabled:false,clinical_approval:false,
    whole_book_unanchored:wholeBook,pdf_page_locators:pages,
    no_section:missing,distinct_source_links:new Set(passages.map(p=>p.source_url)).size,
