@@ -276,7 +276,7 @@ function wireCoach(){
   $('coach-stop').addEventListener('click',()=>{
     if(available)speechSynthesis.cancel();
   });
-  addCoachMessage('assistant','Καλώς ήρθες! Μπορώ να εξηγήσω έννοιες από 29 ελληνικές εκπαιδευτικές κάρτες με παραπομπές, να προτείνω άσκηση ή να δω τις δοκιμές σου. Δεν είμαι AI ή ιατρός και δεν δίνω θεραπευτικές οδηγίες.');
+  addCoachMessage('assistant','Καλώς ήρθες! Μπορώ να εξηγήσω έννοιες από 30 ελληνικές εκπαιδευτικές κάρτες με παραπομπές, να προτείνω άσκηση ή να δω τις δοκιμές σου. Δεν είμαι AI ή ιατρός και δεν δίνω θεραπευτικές οδηγίες.');
 }
 async function renderPlan(){
   renderPersonalPlan();
