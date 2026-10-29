@@ -58,7 +58,7 @@ export function selectGreekVoice(voices,name){
   return resolveMentorGreekVoice(voices,name).voice;
 }
 export function speakGreek(text,{
-  env=globalThis,voiceName="",rate=0.94,pitch=1,volume=1,
+  env=globalThis,voiceName="",rate=0.94,pitch=1,volume=1,requireMale=false,
   onVoiceResolved=()=>{},onStart=()=>{},onFinish=()=>{},onError=()=>{},onBoundary=()=>{}
 }={}){
   if(!supportsSpeech(env))return false;
@@ -69,8 +69,10 @@ export function speakGreek(text,{
   utterance.pitch=Math.max(.85,Math.min(1.15,Number(pitch)||1));
   utterance.volume=Math.max(.75,Math.min(1,Number(volume)||1));
   const chosen=resolveMentorGreekVoice(env.speechSynthesis.getVoices(),voiceName);
-  if(chosen.voice)utterance.voice=chosen.voice;
   onVoiceResolved(chosen);
+  // Strict mode: never silently substitute an unknown/female Greek voice.
+  if(requireMale&&!chosen.maleVerified)return false;
+  if(chosen.voice)utterance.voice=chosen.voice;
   utterance.onstart=()=>onStart();
   utterance.onend=()=>onFinish();
   utterance.onboundary=event=>onBoundary(event);
