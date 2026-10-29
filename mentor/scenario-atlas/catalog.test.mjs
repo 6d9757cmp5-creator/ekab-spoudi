@@ -52,7 +52,7 @@ test('NO automatic triage, doses, clinical decisions, patient physiology, grade 
   assert.ok(s.reference_ids.every(id=>Object.hasOwn(REFERENCE_INDEX,id)));
  }
 });
-test('source references are broad verified-origin guidance only, never fictitious clinical signoff',()=>{
+test('source references are broad verified-origin guidance only, never fictitious clinical signoff',async()=>{
  for(const source of Object.values(REFERENCE_INDEX)){
   assert.match(source.url,/^https:\/\/(?:www\.erc\.edu|cpr\.heart\.org|qualityhealthservices\.who\.int|www\.who\.int|www\.ekab\.gr)\//);
  }
