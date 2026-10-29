@@ -9,7 +9,7 @@ import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
-import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,resolveMentorGreekVoice,speakGreek,stopGreek} from './mentor-voice.mjs';
+import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,resolveMentorGreekVoice,voiceDiagnostics,speakGreek,stopGreek} from './mentor-voice.mjs';
 import {chooseMentorDelivery,deliverySpeechSettings,publicDeliveryCue} from './mentor/core/presence-director.mjs';
 import {createMentorAvatar} from './mentor-avatar-live.mjs';
 
@@ -277,6 +277,9 @@ function wireMentorPresence(){
   const mic=$('mentor-intro-mic');
   const voiceSelect=$('mentor-voice-select');
   const maleVoiceStatus=$('mentor-male-voice-status');
+  const voiceInventory=$('mentor-voice-inventory');
+  const voiceRefresh=$('mentor-voice-refresh');
+  const voiceProbe=$('mentor-voice-probe');
   const speed=$('mentor-voice-speed');
   const speedLabel=$('mentor-voice-speed-label');
   const supported=supportsSpeech(window);
@@ -284,6 +287,8 @@ function wireMentorPresence(){
   let recognition=null;
   let speakingGeneration=0;
   speaker.disabled=!supported;
+  voiceRefresh.disabled=!supported;
+  voiceProbe.disabled=!supported;
   mic.disabled=typeof SpeechRecognizer!=='function';
   stopper.disabled=!supported&&mic.disabled;
   if(mic.disabled)mic.title='Η αναγνώριση ελληνικής ομιλίας δεν είναι διαθέσιμη σε αυτόν τον browser.';
@@ -299,6 +304,7 @@ function wireMentorPresence(){
   function updateVoices(){
     if(!supported)return;
     const previous=voiceSelect.value;
+    const device=voiceDiagnostics(window);
     voiceSelect.replaceChildren();
     const option=make('option',null,'Αυτόματη ανδρική ελληνική φωνή');
     option.value='';voiceSelect.append(option);
@@ -307,18 +313,70 @@ function wireMentorPresence(){
       choice.value=voice.name;voiceSelect.append(choice);
     }
     if([...voiceSelect.options].some(x=>x.value===previous))voiceSelect.value=previous;
-    if(maleVoiceStatus)maleVoiceStatus.textContent=resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
+    if(maleVoiceStatus)maleVoiceStatus.textContent=resolveMentorGreekVoice(
+      window.speechSynthesis.getVoices(),voiceSelect.value).label;
+    if(voiceInventory){
+      voiceInventory.textContent='Διαθέσιμες ελληνικές φωνές: '+device.greekCount+
+        ' · αναγνωρισμένες ανδρικές: '+device.maleCount+
+        (device.maleNames.length?' ('+device.maleNames.join(', ')+')':'')+'. '+
+        (!device.canSpeakMale?
+          'Η ομιλία του MENTOR παραμένει απενεργοποιημένη μέχρι να εμφανιστεί ανδρική φωνή.':
+          'Πάτησε «Άκουσε» για να δοκιμάσεις.');
+    }
+    voiceProbe.disabled=!device.canTestGreek;
+    if(!device.canSpeakMale&&voiceStatus){
+      voiceStatus.textContent=device.greekCount===0?
+        'Το Safari δεν αναφέρει ακόμη ελληνική φωνή. Έλεγξε τη λήψη φωνών στις ρυθμίσεις iPhone και πάτησε «Έλεγξε ξανά».':
+        'Υπάρχει ελληνική φωνή αλλά όχι αναγνωρισμένη ανδρική. Δοκίμασε τον ήχο της συσκευής ή εγκατέστησε την ανδρική φωνή «Νίκος» αν προσφέρεται.';
+    }
   }
   if(supported){
     updateVoices();
     window.speechSynthesis.addEventListener?.('voiceschanged',updateVoices);
-    voiceSelect.addEventListener('change',()=>{
-      if(maleVoiceStatus)maleVoiceStatus.textContent=resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
-    });
+    window.addEventListener('pageshow',updateVoices);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateVoices();});
+    voiceRefresh.addEventListener('click',updateVoices);
+    voiceSelect.addEventListener('change',updateVoices);
   }else{
     voiceSelect.disabled=true;
+    voiceProbe.disabled=true;
+    voiceRefresh.disabled=true;
     speed.disabled=true;
   }
+  voiceProbe.addEventListener('click',()=>{
+    if(!supported)return;
+    const info=voiceDiagnostics(window);
+    if(!info.canTestGreek){
+      voiceStatus.textContent='Δεν βρέθηκε φωνή για ελληνικά. Δεν ξεκίνησε η δοκιμή ήχου.';
+      return;
+    }
+    const current=++speakingGeneration;
+    paintSpeaking(false);
+    const sample='Δοκιμή ήχου. Αυτή είναι μια διαθέσιμη ελληνική φωνή της συσκευής.';
+    const started=speakGreek(sample,{
+      env:window,requireMale:false,requireGreek:true,
+      rate:0.95,pitch:1,volume:1,
+      onVoiceResolved:result=>{
+        if(current===speakingGeneration){
+          voiceStatus.textContent='Δοκιμή ηχείου με '+(result.voice?.name||'ελληνική φωνή')+
+            '. Αυτή η φωνή δεν επιλέγεται αυτόματα για τον MENTOR.';
+        }
+      },
+      onStart:()=>{
+        if(current!==speakingGeneration)return;
+        voiceStatus.textContent='Παίζει δοκιμαστικά ελληνική φωνή της συσκευής (όχι απαραίτητα ανδρική).';
+      },
+      onFinish:()=>{
+        if(current===speakingGeneration)voiceStatus.textContent=
+          'Η δοκιμή ήχου ολοκληρώθηκε. Αν δεν άκουσες τίποτα, έλεγξε ένταση και έξοδο ήχου του iPhone.';
+      },
+      onError:event=>{
+        if(current===speakingGeneration)voiceStatus.textContent=
+          'Η δοκιμή ήχου απέτυχε ('+(event?.error||'άγνωστο σφάλμα')+'). Έλεγξε τις άδειες του Safari και την έξοδο ήχου.';
+      }
+    });
+    if(!started)voiceStatus.textContent='Η δοκιμή δεν ξεκίνησε. Πάτησε ξανά μετά την ανανέωση της σελίδας.';
+  });
   speed.addEventListener('input',()=>{speedLabel.textContent=Number(speed.value).toFixed(2).replace('.',',')+'×';});
   heroForm.addEventListener('submit',event=>{
     event.preventDefault();
@@ -361,14 +419,21 @@ function wireMentorPresence(){
         paintSpeaking(false);
         voiceStatus.textContent='Η ανάγνωση ολοκληρώθηκε.';
       },
-      onError:()=>{
+      onError:event=>{
         if(current!==speakingGeneration)return;
         paintSpeaking(false);
-        voiceStatus.textContent='Η φωνή δεν μπόρεσε να αναπαραχθεί στον browser.';
+        const code=String(event?.error||'άγνωστο σφάλμα');
+        voiceStatus.textContent=code==='not-allowed'?
+          'Το Safari δεν επέτρεψε την αναπαραγωγή. Πάτησε απευθείας «Άκουσε» και έλεγξε την έξοδο ήχου.':
+          'Η εκφώνηση απέτυχε ('+code+'). Πάτησε «Έλεγξε ξανά τις φωνές» και δοκίμασε τον ήχο συσκευής.';
       },
       onBoundary:event=>{if(current===speakingGeneration)performer.boundary(event);}
     });
-    if(!started)voiceStatus.textContent='Δεν υπάρχει επιβεβαιωμένη ανδρική ελληνική φωνή σε αυτή τη συσκευή. Η γραπτή καθοδήγηση παραμένει διαθέσιμη.';
+    if(!started){
+      paintSpeaking(false);
+      updateVoices();
+      voiceStatus.textContent='Δεν ξεκίνησε ανδρική ελληνική ομιλία. Το Safari πρέπει να αναγνωρίζει εγκατεστημένη ανδρική φωνή (π.χ. «Νίκος»). Άνοιξε τις οδηγίες iPhone κάτω από τις ρυθμίσεις φωνής.';
+    }
   }
   function stop(){
     speakingGeneration++;
