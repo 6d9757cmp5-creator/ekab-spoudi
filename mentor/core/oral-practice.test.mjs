@@ -15,3 +15,15 @@ test('checklist reports manual inspection only, no official or clinical grade',(
  assert.throws(()=>checklistSummary(0,[4]),/invalid-oral-checklist/);
  assert.equal(QUESTIONS.every(q=>!('answer' in q)&&!('grade' in q)&&!('diagnosis' in q)),true);
 });
+
+test('oral page cannot silently capture voice, send data or mutate grades',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const js=await readFile(new URL('../../mentor-oral.js',import.meta.url),'utf8');
+ const html=await readFile(new URL('../../mentor-oral.html',import.meta.url),'utf8');
+ const hub=await readFile(new URL('../../mentor-lab.html',import.meta.url),'utf8');
+ assert.ok(html.includes('δεν λειτουργεί μικρόφωνο'));
+ assert.ok(hub.includes('href="mentor-oral.html"'));
+ assert.ok(hub.includes('href="ui-tools/anatomy-3d/index.html"'));
+ assert.doesNotMatch(js,/SpeechRecognition|webkitSpeechRecognition|mediaDevices|localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|innerHTML|grading|appwrite/i);
+ assert.ok(js.includes('speechSynthesis'),'only optional device text-to-speech is supported');
+});
