@@ -779,28 +779,30 @@
     "emergency_call_location": {
       "filename": "emergency-call-location-el.svg",
       "localPath": "assets/education/emergency-call-location-el.svg",
-      "title": "Κλήση 166: χάρτης θέσης συμβάντος και στοιχεία επανάκλησης",
+      "title": "Κλήση 166: στοιχεία θέσης, συμβάντος και επανάκλησης",
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπη ελληνόφωνη διανυσματική εικονογράφηση",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.moh.gov.gr/articles/citizen/xrhsima-thlefwna-amp-dieythynseis/196-166-ekab",
+      "page": "https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/",
       "additionalSources": [
         "https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/",
-        "https://www.ekab.gr/contact/"
+        "https://www.ekab.gr/contact/",
+        "https://www.ekab.gr/files/2019/12/%CE%94%CE%B5%CE%BB%CF%84%CE%AF%CE%BF-%CE%A4%CF%8D%CF%80%CE%BF%CF%85-23-12-2019-pdf.pdf"
       ],
-      "caption": "Πρωτότυπο ελληνικό σχέδιο με χάρτη, είσοδο, αριθμό επανάκλησης, περιγραφή συμβάντος και αριθμό ασθενών. Η σειρά των ερωτήσεων αποτελεί εκπαιδευτικό παράδειγμα, όχι υποχρεωτικό πρωτόκολλο διαλογής.",
+      "caption": "Πρωτότυπο ελληνικό εκπαιδευτικό σχέδιο με χάρτη και στοιχεία για κλήση στο 166: τηλέφωνο επανάκλησης, περιοχή και ακριβής διεύθυνση/χαρακτηριστικό σημείο, περιστατικό και αριθμός ανθρώπων, κατά προσέγγιση ηλικία και φύλο όπου είναι γνωστά. Δεν επιβάλλεται σειρά ερωτήσεων· ακολουθήστε τον τηλεφωνητή του ΕΚΑΒ.",
       "originalArtwork": true,
-      "sourcePageReviewed": "2026-10-26",
+      "sourcePageReviewed": "2026-10-29",
       "sourcePageCheckedFor": [
-        "Public official online guidance checked for the depicted non-clinical concepts; no claim of legal/clinical sign-off"
+        "ΕΚΑΒ, Οδηγίες σωστής χρήσης του ΕΚΑΒ: αναφέρει αριθμό καλούντος, περιοχή, ακριβή διεύθυνση και χαρακτηριστικό σημείο, αριθμό θυμάτων και οδηγία να μην κλείσει πρώτος ο καλών. Δεν υπαγορεύει την αριθμημένη σειρά που υπήρχε στο σχέδιο.",
+        "ΕΚΑΒ, Δελτίο Τύπου 23-12-2019: προσθέτει πρόβλημα, αριθμό ατόμων, κατά προσέγγιση ηλικία και φύλο· ζητά να μη λήξει η κλήση πριν δοθούν όλα τα στοιχεία. Οι πηγές ελέγχουν μόνο τη συνάφεια των στοιχείων κλήσης, όχι την εικόνα ως επίσημο δεσμευτικό πρωτόκολλο."
       ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-26",
-        "scope": "Source visual SVG markup generated with Greek labels and leader lines; independent raster/browser review not yet performed"
+        "scope": "Exact SVG rendered with CairoSVG at native 1100×680 and visually inspected. Removed unsupported numbered question sequence and claim of a coordination-center protocol; replaced it with unnumbered information cards based on EKAB guidance: callback phone, area/address/landmark, event and number of people, approximate age/sex if known. Footer advises not to hang up first. Text fits; map entrance label points to the pin; no clipping or overlap observed. Educational summary only, not an official call script; independent operational review pending."
       },
       "subjectCompleteness": "partial",
-      "sha256": "42edf339fa63ff972de26eb09ac8bea6955513a3d44f9a34e52414e007efe854"
+      "sha256": "e3a4c65311463230916a9e7807ae6a4cbcd882ed3dca843c1b92ad5262fb5d73"
     },
     "ambulance_pretrip_points": {
       "filename": "ambulance-pretrip-points-el.svg",
