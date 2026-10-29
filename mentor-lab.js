@@ -176,9 +176,11 @@ function renderPersonalPlan(){
     output.append(make('p','muted','Επίλεξε τουλάχιστον έναν στόχο για να δημιουργήσεις το προσωπικό σου πλάνο.'));
     return;
   }
+  const allocated=plans.reduce((n,g)=>n+g.total_minutes,0);
+  output.append(make('p','muted small','Συνολικά '+allocated+' λεπτά, μοιρασμένα σε '+plans.length+' στόχους. Δεν προστίθεται χρόνος για κάθε στόχο.'));
   for(const goal of plans){
     const card=make('section','study-goal-card');
-    card.append(make('h4',null,goal.label));
+    card.append(make('h4',null,goal.label+' · '+goal.total_minutes+' λεπτά'));
     for(const task of goal.tasks){
       card.append(make('p','study-task',task.name+' · '+task.minutes+' λεπτά'));
     }

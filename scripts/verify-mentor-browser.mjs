@@ -104,6 +104,13 @@ try{
   await page.waitForFunction(()=>document.getElementById('selected-goals-plan').textContent.includes('Δοκιμαστική αυτοαξιολόγηση'));
   assert.equal(await page.locator('.study-goal-card').count(),3);
   assert.equal(await page.locator('.study-goal-card .study-goal-link').count(),3);
+  const studyMinutes=await page.locator('.study-goal-card .study-task').allTextContents();
+  assert.equal(studyMinutes.length,9);
+  assert.equal(studyMinutes.reduce((n,text)=>{
+    const match=text.match(/(\d+) λεπτά/);
+    assert.ok(match,'each practice step must show a duration');
+    return n+Number(match[1]);
+  },0),15,'selected time budget must be shared across all goals');
   const prefs=JSON.parse(await page.evaluate(()=>localStorage.getItem('ekab.mentor.preferences.v1')));
   assert.deepEqual(prefs,{goals:['saek','eoppep','seminars'],minutes:15,mode:'exam'});
   await page.reload({waitUntil:'networkidle'});
