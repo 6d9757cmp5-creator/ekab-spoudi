@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 105 1200 555" role="img" aria-labelledby="title desc">
 <title id="title">Ανατομική επισκόπηση της πρωτογενούς εκτίμησης ABCDE</title>
 <desc id="desc">Σχηματική ανθρώπινη μορφή με οπτικούς δείκτες στον αεραγωγό, τους πνεύμονες, την κυκλοφορία, τον εγκέφαλο και την εξωτερική εξέταση. Οι πέντε ετικέτες A B C D E εξηγούν τις κατηγορίες αξιολόγησης, ενώ υπενθυμίζεται η προτεραιότητα της ασφάλειας, της σοβαρής εξωτερικής αιμορραγίας και της επανεκτίμησης.</desc>
 <rect width="1200" height="740" rx="18" fill="#f3f8fc"/>
 <style>text[fill='#fff']{fill:#fff}text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#173c51}.heading{font-size:34px;font-weight:700}.sub{font-size:19px}.label{font-size:24px;font-weight:700}.detail{font-size:18px}.panel{fill:#fff;stroke:#b5ccda;stroke-width:2.5}.lead{stroke:#4a819a;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
-<text x="600" y="49" class="heading" text-anchor="middle">Πρωτογενής εκτίμηση ABCDE</text>
-<text x="600" y="82" class="sub" text-anchor="middle">Πρώτα ασφάλεια σκηνής · παρατήρηση απειλών ζωής · έγκαιρη κλήση βοήθειας</text>
+
+
 <!-- Body outline with head and limbs -->
 <g fill="#e1eef5" stroke="#5b8da8" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
  <circle cx="600" cy="199" r="66"/>
@@ -26,26 +26,25 @@
 <!-- Left panels and direct pointers -->
 <rect x="25" y="137" width="348" height="99" rx="16" class="panel"/>
 <circle cx="65" cy="181" r="28" fill="#d58b49"/><text x="65" y="191" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">A</text>
-<text x="107" y="177" class="label">Αεραγωγός</text><text x="107" y="211" class="detail">Βατότητα, ήχοι απόφραξης</text>
+<text x="107" y="177" class="label">Αεραγωγός</text>
 <path d="M375 186H482L580 235" class="lead"/><circle cx="580" cy="235" r="6" fill="#db8c51"/>
 <rect x="25" y="280" width="348" height="99" rx="16" class="panel"/>
 <circle cx="65" cy="323" r="28" fill="#3997b4"/><text x="65" y="334" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">B</text>
-<text x="107" y="321" class="label">Αναπνοή</text><text x="107" y="355" class="detail">Ρυθμός, έργο, συμμετρία</text>
+<text x="107" y="321" class="label">Αναπνοή</text>
 <path d="M375 329H479L548 360" class="lead"/><circle cx="548" cy="360" r="6" fill="#247d9b"/>
 <rect x="25" y="432" width="348" height="100" rx="16" class="panel"/>
 <circle cx="65" cy="474" r="28" fill="#bf5964"/><text x="65" y="485" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">C</text>
-<text x="107" y="472" class="label">Κυκλοφορία</text><text x="107" y="506" class="detail">Αιμορραγία, σφυγμός</text>
+<text x="107" y="472" class="label">Κυκλοφορία</text>
 <path d="M375 482H472L585 427" class="lead"/><circle cx="585" cy="427" r="6" fill="#b24d58"/>
 <!-- Right panels -->
 <rect x="820" y="173" width="348" height="110" rx="16" class="panel"/>
 <circle cx="859" cy="217" r="28" fill="#9074b5"/><text x="859" y="227" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">D</text>
-<text x="901" y="213" class="label">Νευρολογική εικόνα</text><text x="901" y="247" class="detail">Συνείδηση, ανταπόκριση</text>
+<text x="901" y="213" class="label">Νευρολογική εικόνα</text>
 <path d="M820 229L720 229L629 181" class="lead"/><circle cx="629" cy="181" r="6" fill="#9074b5"/>
 <rect x="820" y="404" width="348" height="134" rx="16" class="panel"/>
 <circle cx="859" cy="450" r="28" fill="#4c9581"/><text x="859" y="460" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">E</text>
-<text x="901" y="446" class="label">Έκθεση / περιβάλλον</text><text x="901" y="482" class="detail">Στοχευμένη επισκόπηση</text><text x="901" y="511" class="detail">Προστασία από υποθερμία</text>
+<text x="901" y="446" class="label">Έκθεση / περιβάλλον</text>
 <path d="M820 481H765L736 521" class="lead"/><circle cx="736" cy="521" r="6" fill="#4c9581"/>
-<rect x="30" y="655" width="1140" height="62" rx="14" fill="#fff0e7" stroke="#c78052" stroke-width="2"/>
-<text x="600" y="680" text-anchor="middle" class="sub">Σε σοβαρό τραύμα, καταστροφική εξωτερική αιμορραγία μπορεί να προηγείται (X).</text>
-<text x="600" y="702" text-anchor="middle" class="sub">Αν εντοπιστεί άμεση απειλή: ενέργεια εντός αρμοδιοτήτων, βοήθεια και επανεκτίμηση.</text>
+
+
 </svg>
