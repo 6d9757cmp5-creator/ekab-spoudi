@@ -13,7 +13,7 @@ const terms=s=>normalizeGreek(s).split(' ').filter(w=>w.length>2&&!STOPWORDS.has
 export function assertKnowledgePack(pack=KNOWLEDGE_PACK){
  if(!pack||pack.production_clinical_approval!==false||pack.model_training!==false||
   pack.clinical_review!=='pending'||pack.publisher_book_text_imported!==false)throw Error('knowledge-pack-approval-gate');
- if(!Array.isArray(pack.knowledge_cards)||pack.knowledge_cards.length!==29)throw Error('knowledge-card-count');
+ if(!Array.isArray(pack.knowledge_cards)||pack.knowledge_cards.length!==30)throw Error('knowledge-card-count');
  const ids=new Set();
  for(const card of pack.knowledge_cards){
   if(!/^[a-z][a-z0-9-]{3,70}$/.test(card.id)||ids.has(card.id)||
