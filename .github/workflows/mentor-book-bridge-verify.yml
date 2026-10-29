@@ -28,6 +28,19 @@ jobs:
           for f in mentor/review/*.mjs; do node --check "$f"; done
           node --check mentor-lab.js
           node --test mentor/review/*.test.mjs
+      - name: Run full source quality audit and create clinician review queue
+        run: |
+          node mentor/review/audit-corpus.mjs --out=mentor-audit-artifact
+          test -s mentor-audit-artifact/mentor-clinical-review-audit.json
+          test -s mentor-audit-artifact/mentor-clinical-review-audit.md
+      - name: Attach inspectable audit report and review queue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-seven-books-integrity-and-review-queue
+          path: mentor-audit-artifact/
+          if-no-files-found: ignore
+          retention-days: 30
       - name: Verify clinical retrieval remains fail-closed
         run: |
           node --input-type=module <<'NODE'
@@ -41,7 +54,13 @@ jobs:
             assert.equal(s.independent_clinical_review,'not_verified');
             assert.equal(s.publication_rights_review,'not_verified');
           }
-          console.log('Safe preview state: 7 source texts; 0 medically approved; clinical lookup disabled.');
+          import {SOURCE_POLICY,assertNoClinicalApproval} from './mentor/review/rights-policy.mjs';
+          const manifest=JSON.parse(await readFile('mentor/review-corpus/manifest.json','utf8'));
+          assert.equal(assertNoClinicalApproval(manifest,catalog.sources),true);
+          assert.equal(Object.values(SOURCE_POLICY).filter(x=>x.preview_allowed).length,5);
+          assert.equal(SOURCE_POLICY['medical-surgical-nursing'].preview_allowed,false);
+          assert.equal(SOURCE_POLICY['who-bec'].preview_allowed,false);
+          console.log('Safe preview state: 7 imported; 5 editorial candidates; 2 restricted; 0 medically approved; AI retrieval disabled.');
           NODE
       - name: Verify no grading, account or legacy progress source was touched
         run: |
