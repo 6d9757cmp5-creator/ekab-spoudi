@@ -168,7 +168,7 @@ async function start(){
    const wrap=el('details','saek-source-section');
    const summary=el('summary','saek-source-summary','Εικόνες κεφαλαίου ('+assets.length+')');
    wrap.append(summary);
-   const note=el('p','saek-source-note','Ανατομικές εικόνες και εκπαιδευτικά σχήματα με αναφορά πηγών. Η επιλογή δεν αποτελεί ανεξάρτητη επιστημονική έγκριση ή πλήρη κάλυψη του κεφαλαίου.');
+   const note=el('p','saek-source-note','Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ή ανεξάρτητη επιστημονική έγκριση. Οι εικόνες δεν υποκαθιστούν επίσημες οδηγίες. Στην Ανατομία τα πρόχειρα εικονίδια δεν εμφανίζονται ως ανατομικές πλάκες.');
    wrap.append(note);
    const gallery=assets.map(asset=>({url:sourceUrl(asset),alt:asset.title+'. '+asset.caption}));
    assets.forEach((asset,i)=>wrap.append(render(asset,id.replace('lesson-',''),gallery,i)));
