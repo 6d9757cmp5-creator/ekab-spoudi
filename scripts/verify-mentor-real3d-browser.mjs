@@ -49,7 +49,11 @@ try{
  assert.equal(await page.locator(".cinematic-character").isVisible(),true);
  await page.locator("#mentor-real3d-toggle").click();
  assert.equal(await page.locator("#mentor-cinematic-stage").getAttribute("data-real3d"),"ready");
+ await page.locator("#mentor-real3d-rotation").evaluate(el=>{el.value="0";el.dispatchEvent(new Event("input",{bubbles:true}));});
  await page.screenshot({path:"mentor-real3d-mobile-"+engine+".png",fullPage:false});
+ await page.setViewportSize({width:1440,height:900});
+ await page.waitForTimeout(400);
+ await page.screenshot({path:"mentor-real3d-desktop-"+engine+".png",fullPage:false});
  assert.equal(errors.length,0,"No browser JS exceptions");
  console.log("PASS",engine,"rigged male human, GPU stage, visemes, photo fallback, rotation");
 }finally{if(browser)await browser.close();await new Promise(ok=>server.close(ok));}
