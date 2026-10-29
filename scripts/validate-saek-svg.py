@@ -63,10 +63,10 @@ for key, asset in registry.get("assets", {}).items():
         # Embedded CSS can fetch remote resources even when SVG attributes look safe.
         if el.tag == svg_ns + "style":
             css = "".join(el.itertext())
-            if re.search(r"@import\\b", css, re.I):
+            if re.search(r"@import\b", css, re.I):
                 errors.append(f"{key}: CSS import in SVG")
-            for raw_ref in re.findall(r"url\\(\\s*([^)]+?)\\s*\\)", css, re.I):
-                ref = raw_ref.strip().strip("\\\"'")
+            for raw_ref in re.findall(r"url\(\s*([^)]+?)\s*\)", css, re.I):
+                ref = raw_ref.strip().strip("\"'")
                 if not ref.startswith("#") or ref[1:] not in ids:
                     errors.append(f"{key}: unsafe or missing CSS url reference")
         for attr, value in el.attrib.items():
@@ -88,8 +88,8 @@ for key, asset in registry.get("assets", {}).items():
                         errors.append(f"{key}: missing local href id {href}")
                 else:
                     errors.append(f"{key}: disallowed non-local href {href[:60]}")
-            for raw_ref in re.findall(r"url\\(\\s*([^)]+?)\\s*\\)", value, re.I):
-                ref = raw_ref.strip().strip("\\\"'")
+            for raw_ref in re.findall(r"url\(\s*([^)]+?)\s*\)", value, re.I):
+                ref = raw_ref.strip().strip("\"'")
                 if not ref.startswith("#") or ref[1:] not in ids:
                     errors.append(f"{key}: unsafe or missing url() reference")
 
