@@ -60,7 +60,7 @@ test("legacy progress snapshot needs only getItem/key/length and never writes",(
 });
 
 test("reader code has no legacy writes or API operations",()=>{
- const reader=readFileSync(new URL("../../mentor-readonly.js",import.meta.url),"utf8");
+ const reader=readFileSync(new URL("../modules/readonly.js",import.meta.url),"utf8");
  assert.doesNotMatch(reader,/\b(?:setItem|removeItem|indexedDB\.open|fetch\s*\(\s*["']https?:\/\/|POST|PUT|PATCH|DELETE|cloudSync|saveProgress|gradeAnswer)\b/);
  assert.doesNotMatch(reader,/\b(?:localStorage|sessionStorage)\s*\.\s*(?:clear|setItem|removeItem)\s*\(/);
  assert.match(reader,/method:"GET"/);
