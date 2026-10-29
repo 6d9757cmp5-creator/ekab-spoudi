@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {initialTutor,tutorReply} from './tutor-core.mjs';
+test('basic dialogue and adaptive difficulty',()=>{let a=tutorReply(initialTutor(),'Εξήγησέ μου απλά την κυκλοφορία');assert.equal(a.state.topic,'circulation');assert.equal(a.state.level,'basic');assert.equal(a.state.turns.length,2);a=tutorReply(a.state,'Θέλω προχωρημένο επίπεδο ΕΟΠΠΕΠ');assert.equal(a.state.level,'advanced');});
+test('tracks local review without legacy progress fields',()=>{const a=tutorReply(initialTutor(),'Δεν θυμάμαι');const b=tutorReply(a.state,'κάτι άλλο');assert.equal(b.state.reviews.anatomy.needsReview,true);assert.equal('grades' in b.state,false);});
+test('blank message does not change state',()=>{const state=initialTutor();assert.equal(tutorReply(state,'  ').state,state);});
