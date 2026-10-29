@@ -20,7 +20,7 @@ function sourceCard(item){
   return li;
 }
 try{
-  const response=await fetch('../library/source-index.json',{cache:'no-store'});
+  const response=await fetch('./mentor/library/source-index.json',{cache:'no-store'});
   if(!response.ok)throw new Error('Ο κατάλογος δεν είναι διαθέσιμος.');
   const data=await response.json();
   const sources=assertPublicCatalog(data);
