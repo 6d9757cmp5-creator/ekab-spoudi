@@ -17,12 +17,33 @@
   </div>
 </header>
 <main id="main" class="layout">
-  <section class="hero" aria-labelledby="welcome">
-    <div><p class="eyebrow">Πρώτη δοκιμαστική υλοποίηση · Foundation v0.2</p>
-      <h1 id="welcome">Ο προσωπικός σου εκπαιδευτής</h1>
-      <p>Ξεκίνα μια ελεγχόμενη αποστολή, δες πού χρειάζεσαι επανάληψη και οργάνωσε τη δική σου εκπαιδευτική πορεία.</p>
+  <section class="hero mentor-intro-hero" id="mentor-presence" aria-labelledby="welcome">
+    <div class="mentor-intro-copy">
+      <p class="eyebrow">MENTOR · Ο προσωπικός σου εκπαιδευτής</p>
+      <h1 id="welcome">MENTOR</h1>
+      <p id="mentor-presence-line" class="mentor-intro-message" role="status" aria-live="polite">«Καλώς ήρθες. Πες μου τι θέλεις να μελετήσουμε ή διάλεξε μια αποστολή.»</p>
+      <form class="mentor-intro-form" id="mentor-hero-form">
+        <label for="mentor-hero-question">Ρώτησε τον MENTOR</label>
+        <input id="mentor-hero-question" type="text" maxlength="300" autocomplete="off" placeholder="Π.χ. Τι να διαβάσω σήμερα;">
+        <button type="submit">Ρώτησε</button>
+      </form>
+      <div class="mentor-presence-actions">
+        <button id="mentor-intro-speak" type="button">🔊 Άκουσε</button>
+        <button id="mentor-intro-stop" type="button">◼ Σταμάτα</button>
+        <button id="mentor-intro-chat" type="button">💬 Άνοιξε συνομιλία</button>
+      </div>
+      <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός στα ελληνικά · χωρίς μικρόφωνο ή πλήρες AI.</p>
     </div>
-    <div class="hero-mark" aria-hidden="true"><span>✚</span><small>MENTOR</small></div>
+    <div class="mentor-intro-visual"><div class="mentor-figure" id="mentor-avatar" aria-hidden="true">
+  <div class="mentor-halo"></div><div class="mentor-shoulders"></div><div class="mentor-neck"></div>
+  <div class="mentor-ears"></div><div class="mentor-face"></div><div class="mentor-hair"></div>
+  <div class="mentor-brow mentor-brow-left"></div><div class="mentor-brow mentor-brow-right"></div>
+  <div class="mentor-eye mentor-eye-left"></div><div class="mentor-eye mentor-eye-right"></div>
+  <div class="mentor-nose"></div><div class="mentor-mouth"></div>
+  <div class="mentor-jacket"></div><div class="mentor-collar"></div><div class="mentor-headset"></div>
+</div>
+      <small>Ψηφιακός χαρακτήρας · δοκιμαστική παρουσία</small>
+    </div>
   </section>
   <section class="panel" aria-labelledby="mentor-reader-title">
     <h2 id="mentor-reader-title">📖 Αναγνωστήριο ΕΚΑΒ Σπουδή · μόνο ανάγνωση</h2>
