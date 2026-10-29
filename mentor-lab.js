@@ -9,6 +9,7 @@ import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
+import {supportsSpeech,listGreekVoices,speakGreek,stopGreek} from './mentor-voice.mjs';
 
 const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{
@@ -235,11 +236,49 @@ function wireMentorPresence(){
   const heroQuestion=$('mentor-hero-question');
   const voiceStatus=$('mentor-voice-status');
   const avatar=$('mentor-avatar');
+  const section=$('mentor-presence');
   const speaker=$('mentor-intro-speak');
   const stopper=$('mentor-intro-stop');
-  const supported=typeof window.speechSynthesis!=='undefined'&&typeof window.SpeechSynthesisUtterance!=='undefined';
+  const mic=$('mentor-intro-mic');
+  const voiceSelect=$('mentor-voice-select');
+  const speed=$('mentor-voice-speed');
+  const speedLabel=$('mentor-voice-speed-label');
+  const supported=supportsSpeech(window);
+  const SpeechRecognizer=window.SpeechRecognition||window.webkitSpeechRecognition;
+  let recognition=null;
+  let speakingGeneration=0;
   speaker.disabled=!supported;
-  stopper.disabled=!supported;
+  mic.disabled=typeof SpeechRecognizer!=='function';
+  stopper.disabled=!supported&&mic.disabled;
+  if(mic.disabled)mic.title='Η αναγνώριση ελληνικής ομιλίας δεν είναι διαθέσιμη σε αυτόν τον browser.';
+  function paintSpeaking(value){
+    avatar.classList.toggle('is-speaking',value);
+    section.classList.toggle('is-speaking',value);
+  }
+  function paintListening(value){
+    section.classList.toggle('is-listening',value);
+    mic.setAttribute('aria-pressed',String(value));
+  }
+  function updateVoices(){
+    if(!supported)return;
+    const previous=voiceSelect.value;
+    voiceSelect.replaceChildren();
+    const option=make('option',null,'Αυτόματη ελληνική φωνή');
+    option.value='';voiceSelect.append(option);
+    for(const voice of listGreekVoices(window)){
+      const choice=make('option',null,voice.name+(voice.localService?' · Συσκευή':' · Browser'));
+      choice.value=voice.name;voiceSelect.append(choice);
+    }
+    if([...voiceSelect.options].some(x=>x.value===previous))voiceSelect.value=previous;
+  }
+  if(supported){
+    updateVoices();
+    window.speechSynthesis.addEventListener?.('voiceschanged',updateVoices);
+  }else{
+    voiceSelect.disabled=true;
+    speed.disabled=true;
+  }
+  speed.addEventListener('input',()=>{speedLabel.textContent=Number(speed.value).toFixed(2).replace('.',',')+'×';});
   heroForm.addEventListener('submit',event=>{
     event.preventDefault();
     const question=heroQuestion.value.trim().slice(0,300);
@@ -255,24 +294,80 @@ function wireMentorPresence(){
     field.scrollIntoView({block:'center',behavior:'auto'});
     field.focus();
   });
-  speaker.addEventListener('click',()=>{
-    if(!supported)return;
-    window.speechSynthesis.cancel();
-    const message=lastCoachReply||$('mentor-presence-line').textContent;
-    const utterance=new SpeechSynthesisUtterance(message.slice(0,2200));
-    utterance.lang='el-GR';
-    utterance.rate=.94;
-    utterance.onstart=()=>{avatar.classList.add('is-speaking');voiceStatus.textContent='Ο MENTOR διαβάζει την εκπαιδευτική απάντηση στη φωνή της συσκευής.';};
-    utterance.onend=()=>{avatar.classList.remove('is-speaking');voiceStatus.textContent='Η ανάγνωση ολοκληρώθηκε · χωρίς μικρόφωνο ή καταγραφή.';};
-    utterance.onerror=()=>{avatar.classList.remove('is-speaking');voiceStatus.textContent='Δεν ήταν δυνατή η αναπαραγωγή φωνής σε αυτή τη συσκευή.';};
-    window.speechSynthesis.speak(utterance);
+  function play(text){
+    if(!supported||!text)return;
+    const current=++speakingGeneration;
+    paintSpeaking(false);
+    const started=speakGreek(text,{env:window,voiceName:voiceSelect.value,rate:Number(speed.value),pitch:1,
+      onStart:()=>{
+        if(current!==speakingGeneration)return;
+        paintSpeaking(true);
+        voiceStatus.textContent='Ο MENTOR μιλά με την επιλεγμένη ελληνική φωνή της συσκευής.';
+      },
+      onFinish:()=>{
+        if(current!==speakingGeneration)return;
+        paintSpeaking(false);
+        voiceStatus.textContent='Η ανάγνωση ολοκληρώθηκε.';
+      },
+      onError:()=>{
+        if(current!==speakingGeneration)return;
+        paintSpeaking(false);
+        voiceStatus.textContent='Η φωνή δεν μπόρεσε να αναπαραχθεί στον browser.';
+      }
+    });
+    if(!started)voiceStatus.textContent='Η φωνητική ανάγνωση δεν είναι διαθέσιμη.';
+  }
+  function stop(){
+    speakingGeneration++;
+    stopGreek(window);
+    paintSpeaking(false);
+    if(recognition){recognition.abort();recognition=null;}
+    paintListening(false);
+    voiceStatus.textContent='Η ακρόαση και η ομιλία σταμάτησαν.';
+  }
+  speaker.addEventListener('click',()=>play(lastCoachReply||$('mentor-presence-line').textContent));
+  stopper.addEventListener('click',stop);
+  mic.addEventListener('click',()=>{
+    if(mic.disabled)return;
+    if(recognition){recognition.abort();recognition=null;paintListening(false);voiceStatus.textContent='Το μικρόφωνο σταμάτησε.';return;}
+    stopGreek(window);speakingGeneration++;paintSpeaking(false);
+    const listener=new SpeechRecognizer();
+    recognition=listener;
+    listener.lang='el-GR';
+    listener.continuous=false;
+    listener.interimResults=false;
+    listener.maxAlternatives=1;
+    listener.onstart=()=>{
+      if(recognition!==listener)return;
+      paintListening(true);
+      voiceStatus.textContent='Ακούω μία ερώτηση. Ο browser μπορεί να χρησιμοποιεί υπηρεσία αναγνώρισης ομιλίας.';
+    };
+    listener.onresult=event=>{
+      if(recognition!==listener)return;
+      const transcript=String(event.results?.[0]?.[0]?.transcript||'').trim().slice(0,300);
+      if(transcript){
+        heroQuestion.value=transcript;
+        voiceStatus.textContent='Αναγνωρίστηκε η ερώτηση. Έλεγξέ την και πάτησε «Ρώτησε».';
+        heroQuestion.focus();
+      }
+    };
+    listener.onerror=event=>{
+      if(recognition!==listener)return;
+      voiceStatus.textContent=event.error==='not-allowed'?'Δεν δόθηκε άδεια μικροφώνου. Μπορείς να γράψεις την ερώτησή σου.':'Η αναγνώριση φωνής δεν ολοκληρώθηκε. Μπορείς να γράψεις την ερώτηση.';
+    };
+    listener.onend=()=>{
+      if(recognition!==listener)return;
+      recognition=null;
+      paintListening(false);
+    };
+    try{listener.start();}catch{
+      recognition=null;paintListening(false);
+      voiceStatus.textContent='Δεν ήταν δυνατή η εκκίνηση μικροφώνου σε αυτή τη συσκευή.';
+    }
   });
-  stopper.addEventListener('click',()=>{
-    if(!supported)return;
-    window.speechSynthesis.cancel();
-    avatar.classList.remove('is-speaking');
-    voiceStatus.textContent='Η ανάγνωση σταμάτησε.';
-  });
+  $('coach-speak').addEventListener('click',()=>play(lastCoachReply));
+  $('coach-stop').addEventListener('click',stop);
+  window.addEventListener('pagehide',stop);
   if(!supported)voiceStatus.textContent='Η φωνή δεν υποστηρίζεται εδώ. Η συνομιλία γραπτώς παραμένει διαθέσιμη.';
 }
 function wireCoach(){
@@ -292,19 +387,9 @@ function wireCoach(){
     const parsed=interpretQuestion(question);
     void coachAsk(parsed.intent,parsed.topic,question);
   });
-  const available=typeof speechSynthesis!=='undefined'&&typeof SpeechSynthesisUtterance!=='undefined';
+  const available=supportsSpeech(window);
   $('coach-speak').disabled=!available;
   $('coach-stop').disabled=!available;
-  $('coach-speak').addEventListener('click',()=>{
-    if(!available||!lastCoachReply)return;
-    speechSynthesis.cancel();
-    const utterance=new SpeechSynthesisUtterance(lastCoachReply);
-    utterance.lang='el-GR';utterance.rate=.93;
-    speechSynthesis.speak(utterance);
-  });
-  $('coach-stop').addEventListener('click',()=>{
-    if(available)speechSynthesis.cancel();
-  });
   addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές Mentor ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
 }
 async function renderPlan(){

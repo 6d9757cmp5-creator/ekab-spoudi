@@ -304,9 +304,24 @@ try{
   assert.equal(await page.locator('#tab-route').getAttribute('aria-selected'),'true','Conversation button opens working tutor');
   assert.equal(await page.locator('#coach-question').evaluate(x=>document.activeElement===x),true,'Tutor input focused');
   const home=await readFile(resolve(root,'index.html'),'utf8');
-  assert.match(home,/class="home-mentor-presence"/);
+  assert.match(home,/class="home-mentor-presence(?:\s|\")/);
   assert.match(home,/href="mentor-readonly.html"/);
   assert.match(home,/href="mentor-live.html"/);
+  // Natural-device voice: explicit voice controls, rate selection and permission-safe mic.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-voice-select').count(),1,'installed Greek voice picker is present');
+  assert.equal(await page.locator('#mentor-intro-mic').count(),1,'explicit mic control is present');
+  assert.equal(await page.locator('#mentor-speech-wave').count(),1,'voice waveform exists');
+  await page.locator('#mentor-voice-speed').evaluate(el=>{el.value='1.05';el.dispatchEvent(new Event('input',{bubbles:true}));});
+  assert.match(await page.locator('#mentor-voice-speed-label').textContent(),/1,05/);
+  assert.match(await page.locator('#mentor-microphone-privacy').textContent(),/υπηρεσία του παρόχου του browser/);
+  const privacyBefore=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
+  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω;');
+  await page.locator('#mentor-hero-form button[type=submit]').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-presence-line').textContent.includes('Προτείνω'));
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
+  const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
+  assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{

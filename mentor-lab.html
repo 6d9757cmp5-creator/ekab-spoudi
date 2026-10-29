@@ -30,9 +30,18 @@
       <div class="mentor-presence-actions">
         <button id="mentor-intro-speak" type="button">🔊 Άκουσε</button>
         <button id="mentor-intro-stop" type="button">◼ Σταμάτα</button>
+        <button id="mentor-intro-mic" type="button">🎙 Μίλα μου</button>
         <button id="mentor-intro-chat" type="button">💬 Άνοιξε συνομιλία</button>
       </div>
-      <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός στα ελληνικά · χωρίς μικρόφωνο ή πλήρες AI.</p>
+      <div class="mentor-speech-wave" id="mentor-speech-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="mentor-voice-preferences" aria-label="Ρυθμίσεις φωνής του MENTOR">
+        <label for="mentor-voice-select">Ελληνική φωνή</label>
+        <select id="mentor-voice-select"><option value="">Αυτόματη φωνή της συσκευής</option></select>
+        <label for="mentor-voice-speed">Ρυθμός ομιλίας <output id="mentor-voice-speed-label" for="mentor-voice-speed">0,95×</output></label>
+        <input id="mentor-voice-speed" type="range" min="0.8" max="1.1" step="0.05" value="0.95">
+      </div>
+      <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός · ελληνική φωνή της συσκευής · όχι πλήρες AI.</p>
+      <p id="mentor-microphone-privacy" class="mentor-voice-privacy">Το μικρόφωνο ενεργοποιείται μόνο όταν πατήσεις «Μίλα μου», εφόσον το υποστηρίζει ο browser. Η αναγνώριση μπορεί να πραγματοποιείται από υπηρεσία του παρόχου του browser. Η αναγνωρισμένη ερώτηση δεν υποβάλλεται αυτόματα και δεν αποθηκεύεται από τον MENTOR.</p>
     </div>
     <div class="mentor-intro-visual"><div class="mentor-figure" id="mentor-avatar" aria-hidden="true">
   <div class="mentor-halo"></div><div class="mentor-shoulders"></div><div class="mentor-neck"></div>
