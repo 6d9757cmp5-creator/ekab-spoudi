@@ -60,7 +60,10 @@ function refreshVoices(){
  for(const v of voices){
    const opt=document.createElement("option");opt.value=v.name;opt.textContent=v.name+(v.localService?" · Συσκευή":" · Browser");select.append(opt);
  }
- if(voices.some(x=>x.name===prev))select.value=prev;
+ const other=document.createElement("option");other.value="__device__";
+ other.textContent="Εναλλακτική: ελληνική φωνή συσκευής (δεν εγγυάται ανδρική)";
+ select.append(other);
+ if([...select.options].some(x=>x.value===prev))select.value=prev;
  if(!voices.length)select.title="Δεν αναγνωρίστηκε ανδρική ελληνική φωνή στη συσκευή.";
 }
 function stop(){
@@ -77,7 +80,7 @@ function play(text){
  const voiceStyle=deliverySpeechSettings(delivery,.95);
  paintSpeaking(false);
  const ok=speakGreek(text,{
-   env:window,voiceName:select.value,requireMale:true,
+   env:window,voiceName:select.value==="__device__"?"":select.value,requireMale:select.value!=="__device__",
    rate:voiceStyle.rate,pitch:voiceStyle.pitch,volume:voiceStyle.volume,
    onStart:()=>{
      if(ticket!==generation)return;
@@ -92,7 +95,7 @@ function play(text){
    onFinish:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
    onError:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η φωνή δεν αναπαράχθηκε. Μπορείς να χρησιμοποιήσεις την απάντηση ως κείμενο.";}
  });
- if(!ok)status.textContent="Δεν υπάρχει αναγνωρισμένη ανδρική ελληνική φωνή στο iPhone/browser. Η απάντηση εμφανίζεται κανονικά ως κείμενο.";
+ if(!ok)status.textContent="Δεν αναγνωρίστηκε ανδρική ελληνική φωνή. Επίλεξε ρητά την εναλλακτική φωνή συσκευής ή διάβασε την απάντηση.";
  return ok;
 }
 async function ask(text){
