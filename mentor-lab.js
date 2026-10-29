@@ -340,7 +340,7 @@ function wireMentorPresence(){
     const speechStyle=deliverySpeechSettings(mentorDelivery,Number(speed.value));
     paintSpeaking(false);
     const started=speakGreek(text,{env:window,voiceName:voiceSelect.value,
-      rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,
+      rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,requireMale:true,
       onVoiceResolved:result=>{
         if(maleVoiceStatus)maleVoiceStatus.textContent=result.label;
       },
@@ -367,7 +367,7 @@ function wireMentorPresence(){
       },
       onBoundary:event=>{if(current===speakingGeneration)performer.boundary(event);}
     });
-    if(!started)voiceStatus.textContent='Η φωνητική ανάγνωση δεν είναι διαθέσιμη.';
+    if(!started)voiceStatus.textContent='Δεν υπάρχει επιβεβαιωμένη ανδρική ελληνική φωνή σε αυτή τη συσκευή. Η γραπτή καθοδήγηση παραμένει διαθέσιμη.';
   }
   function stop(){
     speakingGeneration++;
