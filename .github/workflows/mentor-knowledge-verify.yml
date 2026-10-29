@@ -1,5 +1,7 @@
 name: Mentor Greek knowledge pack — sources and safety
 on:
+  push:
+    branches: [feature/mentor-verified-knowledge-pack]
   pull_request:
     paths:
       - 'mentor/knowledge/**'
