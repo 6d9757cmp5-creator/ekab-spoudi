@@ -93,6 +93,7 @@ async function startCase(caseId){
   try{
     const session=newSession(caseId,{id:crypto.randomUUID(),at:new Date().toISOString()});
     state.session=await state.store.save(state.scope,session);
+    setMentorDelivery(chooseMentorDelivery({intent:'exercise',assessment:true}));
     notify(state.store.persistent?'Νέα δοκιμαστική αποστολή αποθηκεύτηκε τοπικά.':'Η λειτουργία αποθήκευσης δεν είναι διαθέσιμη. Η αποστολή υπάρχει μόνο προσωρινά.');
     renderMission();
     void renderMemory();
@@ -146,6 +147,22 @@ async function choose(id){
     const next=perform(state.session,id,{at:new Date().toISOString()});
     state.session=await state.store.save(state.scope,next);
     renderMission();
+    const feedback=feedbackFor(next);
+    if(feedback){
+      const topic=next.events.at(-1)?.competency_id||'scene';
+      const overview=await state.store.overview(state.scope);
+      const warning=feedback.result==='review';
+      setMentorDelivery(chooseMentorDelivery({
+        intent:warning?'focus':'progress',
+        topic,overview,
+        corrected:warning,
+        safety:warning&&topic==='scene'
+      }));
+      // The original clinical feedback is unchanged; the delivery adapts.
+      lastCoachReply=feedback.text;
+      const greeting=$('mentor-presence-line');
+      if(greeting)greeting.textContent=feedback.text;
+    }
     if(next.finished)notify('Ολοκληρώθηκε μία εκπαιδευτική αποστολή. Οι επίσημοι βαθμοί δεν άλλαξαν.');
     void renderMemory();
   }catch(e){
