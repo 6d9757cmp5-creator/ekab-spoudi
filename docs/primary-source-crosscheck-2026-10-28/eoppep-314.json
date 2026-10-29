@@ -1498,7 +1498,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "14 προσωπικά οστά: 6 ζεύγη και 2 μονήρη",
+          "Ζεύγη: άνω γνάθοι, ζυγωματικά, ρινικά, δακρυϊκά, υπερώια, κάτω ρινικές κόγχες",
+          "Μονήρη: ύνιδα και κάτω γνάθος"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull"
+        ],
+        "finding": "Συμφωνεί με OpenStax A&P 2e §7.2 Facial Bones of the Skull: 14 οστά (6 ζεύγη + 2 μονήρη).",
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση συγκρίθηκε πλήρως με τη συγκεκριμένη ενότητα· δεν επανελέγχθηκε στην παρούσα εκτέλεση η τελευταία επίσημη έκδοση τράπεζας ΕΟΠΠΕΠ.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "14 προσωπικά οστά: 6 ζεύγη και 2 μονήρη",
+          "Ζεύγη: άνω γνάθοι, ζυγωματικά, ρινικά, δακρυϊκά, υπερώια, κάτω ρινικές κόγχες",
+          "Μονήρη: ύνιδα και κάτω γνάθος"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull"
+        ],
+        "verdict": "targeted_full_answer_consistent_with_cited_anatomy_sources",
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση συγκρίθηκε πλήρως με τη συγκεκριμένη ενότητα· δεν επανελέγχθηκε στην παρούσα εκτέλεση η τελευταία επίσημη έκδοση τράπεζας ΕΟΠΠΕΠ.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-042",
@@ -1512,7 +1551,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "8 οστά εγκεφαλικού κρανίου",
+          "2 βρεγματικά και 2 κροταφικά",
+          "Μονήρη μετωπιαίο, ινιακό, σφηνοειδές, ηθμοειδές"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull"
+        ],
+        "finding": "Συμφωνεί με OpenStax A&P 2e §7.2 Bones of the Brain Case.",
+        "limits": "Εκπαιδευτική ανατομική αντιπαραβολή, όχι επίσημο λυσάρι· δεν επανελέγχθηκε η τελευταία τράπεζα ΕΟΠΠΕΠ.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "8 οστά εγκεφαλικού κρανίου",
+          "2 βρεγματικά και 2 κροταφικά",
+          "Μονήρη μετωπιαίο, ινιακό, σφηνοειδές, ηθμοειδές"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull"
+        ],
+        "verdict": "targeted_full_answer_consistent_with_cited_anatomy_sources",
+        "limits": "Εκπαιδευτική ανατομική αντιπαραβολή, όχι επίσημο λυσάρι· δεν επανελέγχθηκε η τελευταία τράπεζα ΕΟΠΠΕΠ.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-043",
@@ -1526,7 +1604,50 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Μήνιγγες: σκληρή, αραχνοειδής, χοριοειδής",
+          "Υπαραχνοειδής χώρος με ΕΝΥ",
+          "Υποσκληρίδιος δυνητικός, επισκληρίδιος δυνητικός ενδοκράνια αλλά πραγματικός στη σπονδυλική περιοχή"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-circulation-and-the-central-nervous-system",
+          "https://www.ncbi.nlm.nih.gov/books/NBK557521/",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK539882/"
+        ],
+        "finding": "Η απάντηση συμφωνεί με OpenStax §13.3 και NCBI NBK557521/NBK539882. Σημείωση ορολογίας: ο επισκληρίδιος χώρος βρίσκεται έξω από τη σκληρή μήνιγγα, δεν είναι «μεταξύ μηνίγγων»· η αναφορά του ως πρόσθετου χώρου είναι αποδεκτή εφόσον διευκρινίζεται.",
+        "limits": "Δεν εξετάστηκαν όλες οι νευροχειρουργικές/ανατομικές λεπτομέρειες ούτε επίσημη τελευταία εξεταστική έκδοση.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Μήνιγγες: σκληρή, αραχνοειδής, χοριοειδής",
+          "Υπαραχνοειδής χώρος με ΕΝΥ",
+          "Υποσκληρίδιος δυνητικός, επισκληρίδιος δυνητικός ενδοκράνια αλλά πραγματικός στη σπονδυλική περιοχή"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-circulation-and-the-central-nervous-system",
+          "https://www.ncbi.nlm.nih.gov/books/NBK557521/",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK539882/"
+        ],
+        "verdict": "targeted_full_answer_consistent_with_cited_anatomy_sources",
+        "limits": "Δεν εξετάστηκαν όλες οι νευροχειρουργικές/ανατομικές λεπτομέρειες ούτε επίσημη τελευταία εξεταστική έκδοση.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-044",
@@ -1540,7 +1661,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Δύο κόλποι και δύο κοιλίες",
+          "Δεξιά τριγλώχινα και αριστερή μιτροειδής κολποκοιλιακή βαλβίδα",
+          "Πνευμονική και αορτική μηνοειδής, μεσοκολπικό και μεσοκοιλιακό διάφραγμα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+        ],
+        "finding": "Συμφωνεί με OpenStax A&P 2e §19.1 Chambers and Circulation through the Heart· οι τέσσερις βαλβίδες και τα διαφράγματα περιγράφονται ορθά.",
+        "limits": "Σύντομη εκπαιδευτική απάντηση· δεν επαληθεύτηκε επίσημο λυσάρι/τελευταία έκδοση ΕΟΠΠΕΠ ούτε έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Δύο κόλποι και δύο κοιλίες",
+          "Δεξιά τριγλώχινα και αριστερή μιτροειδής κολποκοιλιακή βαλβίδα",
+          "Πνευμονική και αορτική μηνοειδής, μεσοκολπικό και μεσοκοιλιακό διάφραγμα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+        ],
+        "verdict": "targeted_full_answer_consistent_with_cited_anatomy_sources",
+        "limits": "Σύντομη εκπαιδευτική απάντηση· δεν επαληθεύτηκε επίσημο λυσάρι/τελευταία έκδοση ΕΟΠΠΕΠ ούτε έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-045",
@@ -1554,7 +1714,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Καρδιά στο μέσο μεσοθωράκιο ανάμεσα στους πνεύμονες",
+          "Οπισθοστερνική θέση και επαφή με διάφραγμα",
+          "Οισοφάγος και κατιούσα θωρακική αορτή στο οπίσθιο μεσοθωράκιο· μεγάλα αγγεία στη βάση"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK539819/"
+        ],
+        "finding": "Συμφωνεί με OpenStax §19.1 Location of Heart και NCBI NBK539819 (μεσαίο/οπίσθιο μεσοθωράκιο). Προσοχή: η περιγραφή οπίσθιων σχέσεων είναι σχηματική, όχι πλήρης τρισδιάστατη ανατομική απεικόνιση.",
+        "limits": "Δεν τεκμηριώθηκαν όλες οι ανατομικές παραλλαγές, ούτε επαληθεύτηκε η τελευταία επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ.",
+        "currentEoppepVersionConfirmed": false,
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_compared_with_named_anatomy_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "comparedClaims": [
+          "Καρδιά στο μέσο μεσοθωράκιο ανάμεσα στους πνεύμονες",
+          "Οπισθοστερνική θέση και επαφή με διάφραγμα",
+          "Οισοφάγος και κατιούσα θωρακική αορτή στο οπίσθιο μεσοθωράκιο· μεγάλα αγγεία στη βάση"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK539819/"
+        ],
+        "verdict": "targeted_full_answer_consistent_with_cited_anatomy_sources",
+        "limits": "Δεν τεκμηριώθηκαν όλες οι ανατομικές παραλλαγές, ούτε επαληθεύτηκε η τελευταία επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ.",
+        "officialQuestionLatestVersionConfirmed": false,
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-046",
