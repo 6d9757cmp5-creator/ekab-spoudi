@@ -38,6 +38,7 @@
     <button type="button" id="tab-mission" role="tab" aria-controls="panel-mission" aria-selected="true" data-tab="mission">Αποστολή</button>
     <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
     <button type="button" id="tab-route" role="tab" aria-controls="panel-route" aria-selected="false" tabindex="-1" data-tab="route">Διαδρομή</button>
+    <button type="button" id="tab-knowledge" role="tab" aria-controls="panel-knowledge" aria-selected="false" tabindex="-1" data-tab="knowledge">Γνώσεις · 59 κάρτες</button>
     <button type="button" id="tab-books" role="tab" aria-controls="panel-books" aria-selected="false" tabindex="-1" data-tab="books">Βιβλία · Έλεγχος</button>
   </nav>
   <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
@@ -159,6 +160,7 @@
         </div>
       </form>
       <div class="coach-speech-actions">
+        <button type="button" class="action secondary" id="coach-to-knowledge">🧠 Βρες γνώση και κάρτα αυτοελέγχου</button>
         <button type="button" class="action secondary" id="coach-to-books">📖 Αναζήτησε τον όρο στα βιβλία (προεπισκόπηση)</button>
       </div>
       <div class="coach-speech-actions">
@@ -175,6 +177,39 @@
     <div class="panel"><h3>Επόμενα εργαστήρια</h3><div class="roadmap">
       <span>3D Ανατομία</span><span>ECG Intelligence Lab</span><span>Ιατρική ομάδα AI</span><span>Εγκεκριμένη κλινική διαλογή (εκκρεμεί)</span><span>Προχωρημένη προσομοίωση συσκευών (εκκρεμεί)</span><span>Προφορικές εξετάσεις</span>
     </div><p class="muted small">Οι παραπάνω προηγμένες ενότητες δεν είναι ακόμη ενεργές. Οι νέες βασικές κάρτες πολλαπλών εμπλεκομένων και εξοπλισμού βρίσκονται στην «Αποστολή».</p></div>
+  </section>
+  <section id="panel-knowledge" role="tabpanel" aria-labelledby="tab-knowledge" hidden>
+    <div class="section-heading"><div><h2>Βιβλιοθήκη γνώσεων του Mentor</h2>
+      <p>Ελληνικές μικροδιδασκαλίες, αναζήτηση, ερωτήσεις ανάκλησης και σύνδεσμοι στις πρωτότυπες πηγές.</p></div></div>
+    <div class="disclaimer" role="note">
+      <strong>Προσχέδιο εκπαιδευτικού περιεχομένου — όχι διαγνωστικός ή κλινικός βοηθός.</strong>
+      Οι κάρτες συντάχθηκαν για θεωρητική εξάσκηση και δεν έχουν ακόμη λάβει ανεξάρτητη
+      επιστημονική έγκριση. Δεν περιέχουν θεραπευτικούς αλγόριθμους, δεν χρησιμοποιούν AI,
+      δεν βαθμολογούν επίσημες εξετάσεις και δεν μεταβάλλουν την αποθηκευμένη πρόοδο.
+    </div>
+    <div class="panel">
+      <p id="knowledge-count" class="muted small">Φόρτωση εκπαιδευτικών καρτών…</p>
+      <div class="knowledge-controls">
+        <div><label for="knowledge-query">Τι θέλεις να μάθεις;</label>
+          <input id="knowledge-query" type="search" maxlength="150" autocomplete="off"
+            placeholder="π.χ. καρδιά, QRS, ανακοπή, αεραγωγός" /></div>
+        <div><label for="knowledge-topic">Θεματική ενότητα</label>
+          <select id="knowledge-topic" aria-label="Επιλογή θεματικής"></select></div>
+      </div>
+      <p id="knowledge-status" role="status" aria-live="polite" class="muted small">Προετοιμασία…</p>
+      <div id="knowledge-results" class="knowledge-results"></div>
+    </div>
+    <div class="panel">
+      <h3>Ενεργητική ανάκληση — δοκίμασε τον εαυτό σου</h3>
+      <p class="muted small">Σκέψου την απάντηση πριν τη δεις. Δεν κρατιέται βαθμός και δεν αποθηκεύεται αποτέλεσμα.</p>
+      <div id="knowledge-practice" class="knowledge-practice"></div>
+      <button type="button" class="action secondary" id="knowledge-next">Επόμενη ερώτηση</button>
+    </div>
+    <div class="panel">
+      <h3>Πηγές του νέου πακέτου γνώσεων</h3>
+      <p class="muted small">Οι σύνδεσμοι οδηγούν στο υλικό των εκδοτών. Δεν ενσωματώθηκαν αυτούσια νέα βιβλία ή προστατευμένα διαγράμματα.</p>
+      <div id="knowledge-sources" class="knowledge-sources"></div>
+    </div>
   </section>
   <section id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden>
     <div class="section-heading"><div><h2>Ιατρική βιβλιοθήκη · Σύνδεση πηγών</h2>
