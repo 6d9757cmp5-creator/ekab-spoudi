@@ -126,3 +126,35 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .coach-quick:focus-visible,.coach-question-line input:focus-visible,.coach-question-line button:focus-visible,.coach-speech-actions button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 @media(max-width:620px){.coach-question-line{flex-wrap:wrap}.coach-question-line button{width:100%}.coach-message{max-width:100%}}
 @media(prefers-color-scheme:dark){.coach-message-user{background:#1b4856}}
+
+
+/* MENTOR OS | new source-grounded, non-AI Greek learning library. */
+.tabs{max-width:850px;flex-wrap:wrap}
+.tabs button{min-width:100px}
+.knowledge-filters{display:grid;grid-template-columns:minmax(220px,2fr) minmax(160px,1fr) auto auto;gap:12px;align-items:end}
+.knowledge-filters label{display:block;font-size:.85rem;font-weight:750;margin-bottom:6px}
+.knowledge-filters input,.knowledge-filters select{width:100%;min-height:44px;border:1px solid var(--border);border-radius:9px;padding:9px 11px;background:var(--surface2);color:var(--ink);font:inherit}
+.knowledge-results{display:grid;gap:11px;margin-top:16px}
+.knowledge-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:13px 16px}
+.knowledge-card summary{cursor:pointer;font-weight:750;line-height:1.5}
+.knowledge-category{display:block;font-size:.73rem;color:var(--muted);font-weight:750;margin-bottom:4px}
+.knowledge-card-body{padding:9px 4px 5px}
+.knowledge-card-body>p{font-size:.94rem}
+.knowledge-card-body>strong{font-size:.9rem}
+.knowledge-recall{margin:12px 0;border-left:3px solid var(--brand2);padding:10px;background:var(--surface);border-radius:7px;font-size:.9rem}
+.knowledge-recall>summary{font-size:.9rem}
+.knowledge-references{display:flex;flex-direction:column;align-items:start;gap:6px;margin:16px 0;font-size:.83rem}
+.knowledge-references strong{font-size:.85rem}
+.knowledge-references a,.coach-sources a{overflow-wrap:anywhere;text-underline-offset:3px}
+.coach-sources{display:flex;flex-direction:column;gap:5px;margin-top:10px;font-size:.82rem}
+.coach-sources strong{font-size:.82rem}
+@media(max-width:760px){
+ .knowledge-filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .knowledge-filters>div:first-child{grid-column:1/-1}
+}
+@media(max-width:500px){
+ .knowledge-filters{grid-template-columns:minmax(0,1fr)}
+ .knowledge-filters>div{grid-column:1}
+ .knowledge-filters button{grid-column:1}
+ .tabs button{flex:1 1 calc(50% - 6px);min-width:115px}
+}
