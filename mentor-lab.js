@@ -225,6 +225,55 @@ async function coachAsk(intent,topic,userText){
     lastCoachReply='Δεν μπόρεσα να διαβάσω τις δοκιμαστικές καταγραφές Mentor. Η υπάρχουσα πρόοδος δεν άλλαξε.';
   }
   addCoachMessage('assistant',lastCoachReply);
+  const greeting=$('mentor-presence-line');
+  if(greeting)greeting.textContent=lastCoachReply;
+  const visual=$('mentor-avatar');
+  if(visual)visual.classList.remove('is-speaking');
+}
+function wireMentorPresence(){
+  const heroForm=$('mentor-hero-form');
+  const heroQuestion=$('mentor-hero-question');
+  const voiceStatus=$('mentor-voice-status');
+  const avatar=$('mentor-avatar');
+  const speaker=$('mentor-intro-speak');
+  const stopper=$('mentor-intro-stop');
+  const supported=typeof window.speechSynthesis!=='undefined'&&typeof window.SpeechSynthesisUtterance!=='undefined';
+  speaker.disabled=!supported;
+  stopper.disabled=!supported;
+  heroForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    const question=heroQuestion.value.trim().slice(0,300);
+    if(!question)return;
+    heroQuestion.value='';
+    const parsed=interpretQuestion(question);
+    voiceStatus.textContent='Απάντηση από τον περιορισμένο εκπαιδευτικό οδηγό · χωρίς εξωτερικό AI.';
+    void coachAsk(parsed.intent,parsed.topic,question);
+  });
+  $('mentor-intro-chat').addEventListener('click',()=>{
+    switchTab('route');
+    const field=$('coach-question');
+    field.scrollIntoView({block:'center',behavior:'auto'});
+    field.focus();
+  });
+  speaker.addEventListener('click',()=>{
+    if(!supported)return;
+    window.speechSynthesis.cancel();
+    const message=lastCoachReply||$('mentor-presence-line').textContent;
+    const utterance=new SpeechSynthesisUtterance(message.slice(0,2200));
+    utterance.lang='el-GR';
+    utterance.rate=.94;
+    utterance.onstart=()=>{avatar.classList.add('is-speaking');voiceStatus.textContent='Ο MENTOR διαβάζει την εκπαιδευτική απάντηση στη φωνή της συσκευής.';};
+    utterance.onend=()=>{avatar.classList.remove('is-speaking');voiceStatus.textContent='Η ανάγνωση ολοκληρώθηκε · χωρίς μικρόφωνο ή καταγραφή.';};
+    utterance.onerror=()=>{avatar.classList.remove('is-speaking');voiceStatus.textContent='Δεν ήταν δυνατή η αναπαραγωγή φωνής σε αυτή τη συσκευή.';};
+    window.speechSynthesis.speak(utterance);
+  });
+  stopper.addEventListener('click',()=>{
+    if(!supported)return;
+    window.speechSynthesis.cancel();
+    avatar.classList.remove('is-speaking');
+    voiceStatus.textContent='Η ανάγνωση σταμάτησε.';
+  });
+  if(!supported)voiceStatus.textContent='Η φωνή δεν υποστηρίζεται εδώ. Η συνομιλία γραπτώς παραμένει διαθέσιμη.';
 }
 function wireCoach(){
   const prompt=$('coach-question');
@@ -321,6 +370,7 @@ async function boot(){
   wireModes();
   wireStudyPreferences();
   wireCoach();
+  wireMentorPresence();
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
