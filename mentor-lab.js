@@ -1,4 +1,4 @@
-/* Standalone MENTOR OS Foundation demo.
+/* Standalone MENTOR Foundation demo.
  * No calls to AI graders; no legacy writes; no medical intervention logic.
  */
 import {CASES,COMPETENCIES,getCase} from './mentor/core/scenarios.mjs';
