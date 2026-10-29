@@ -16,14 +16,13 @@ test('3D renderer is real, local, separate from learning state and honest about 
  assert.match(src,/MutationObserver/);
  assert.doesNotMatch(src,/localStorage|indexedDB|sessionStorage|fetch\(|XMLHttpRequest|SpeechRecognition\(/);
 });
-test('3D/portrait controls exist in classroom and are keyboard accessible',()=>{
+test('Published MENTOR classroom renders the current human rigged avatar rather than obsolete hologram controls',()=>{
  const html=read('mentor-lab.html');
- for(const id of ['mentor-3d-canvas','mentor-view-3d','mentor-view-photo','mentor-3d-rotation','mentor-3d-status'])
+ for(const id of ['mentor-real3d-canvas','mentor-real3d-rotation','mentor-real3d-status','mentor-cinematic-stage'])
   assert.ok(html.includes('id="'+id+'"'),id);
- assert.match(html,/src="mentor-3d\.mjs"/);
- assert.match(html,/href="mentor-3d\.css"/);
- assert.match(html,/type="range" min="-165" max="165"/);
- assert.match(html,/συνθετικ/);
+ assert.match(html,/src="mentor-real3d\.bundle\.mjs"/);
+ assert.match(html,/href="mentor\/styles\/mentor-real3d\.css"/);
+ assert.doesNotMatch(html,/id="mentor-3d-canvas"/);
 });
 test('Unsupported WebGL is a safe portrait fallback',()=>{
  const nodes={
@@ -46,8 +45,10 @@ test('Unsupported WebGL is a safe portrait fallback',()=>{
  assert.equal(visual.dataset.mentorView,'photo');
  assert.match(nodes['mentor-3d-status'].textContent,/φωτογραφίας/);
 });
-test('2.5D portrait remains present for unsupported browsers',()=>{
- assert.match(read('mentor-lab.html'),/assets\/mentor-photo\.webp/);
- assert.match(read('mentor-3d.css'),/data-mentor-view="3d"/);
- assert.match(read('mentor-3d.css'),/data-mentor-view="photo"/);
+test('Legacy hologram remains isolated as opt-in source but current classroom contains real 3D and safe status',()=>{
+ const html=read('mentor-lab.html');
+ assert.match(html,/id="mentor-real3d-canvas"/);
+ assert.match(html,/id="mentor-real3d-status"/);
+ assert.match(read('mentor/styles/mentor-real3d.css'),/mentor-real3d/);
+ assert.match(read('mentor/styles/mentor-3d.css'),/data-mentor-view="3d"/);
 });
