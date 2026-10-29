@@ -75,4 +75,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/mentor-real-3d.glb mentor-real3d.bundle.mjs
           git commit -m "MENTOR: generated CC0 realistic rigged GLB with facial visemes and offline renderer"
+          git fetch origin feature/mentor-rigged-photoreal-avatar-v2-20261029
+          git rebase origin/feature/mentor-rigged-photoreal-avatar-v2-20261029
           git push origin HEAD:feature/mentor-rigged-photoreal-avatar-v2-20261029
