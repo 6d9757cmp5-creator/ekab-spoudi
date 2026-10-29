@@ -960,14 +960,15 @@
       ],
       "caption": "Εικονική κονσόλα κλήσης, χάρτης θέσης και στοιχεία αποστολής, με διακριτή σήμανση αναφερόμενου από καλούντα γεγονότος αντί επιβεβαιωμένης διάγνωσης. Δεν αποτελεί τυποποιημένο πρωτόκολλο του ΕΚΑΒ.",
       "originalArtwork": true,
-      "sourcePageReviewed": "2026-10-26",
+      "sourcePageReviewed": "2026-10-29",
       "sourcePageCheckedFor": [
-        "Source guidance reviewed from public authoritative summaries; illustrative concepts only; no independent scientific/clinical review."
+        "European Commission DG MOVE Emergency Medical Dispatch overview: dispatch and communication context only; does not certify this schematic or any Greek workflow",
+        "The course text is a topical cross-check, not independent validation of this specific diagram"
       ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact pushed SVG rendered in browser at 1280×720 (commit d2f089a); caller/location panel, information categories and ambulance destination are visually distinct; solid and dashed arrows reach their intended next region; Greek labels and caveat that a report is not a diagnosis are readable. No dispatch protocol is specified; independent clinical/source approval and mobile/offline E2E remain pending."
+        "scope": "Final SVG rendered in Microsoft Edge as raster at 1280×720. Map/location, caller, dispatch-information card and ambulance are visually distinct; arrows and legend clearly distinguish reported caller information from diagnosis and dashed status updates from solid information flow. All Greek text including the caveat that changes follow the approved communications system is legible, without clipping/overlap. Compared against the course and European Commission DG MOVE general dispatch overview; this does not validate any specific Greek dispatch field, protocol, or workflow. Independent operational/scientific review and app mobile/zoom/offline E2E remain pending."
       },
       "subjectCompleteness": "partial",
       "sha256": "d974f5f61e89bf3177779a9fbb1a3abe8c5fb095ca8669cd85d5537e6be5307f"
@@ -5055,9 +5056,11 @@
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Πρωτότυπα σχήματα δείκτη/διαδρομής, δελτίου αναφοράς και προειδοποίησης κινδύνου. Έγινε έλεγχος αντιστοίχισης ετικετών στο SVG· browser οπτικός και ανεξάρτητος επιστημονικός έλεγχος pending."
+        "scope": "Final SVG rendered in Microsoft Edge as raster at 1280×720. Three distinct symbols (location/access, reported event sheet, hazard warning) match their captions; arrows terminate at the intended cards; text is legible with no observed overlap or clipping. Compared against lesson 07-03. Linked EKAB training guide is a curriculum source and could not be fetched in this check; no claim that it validates these diagram details. Independent operational/scientific review and app mobile/zoom/offline E2E remain pending.",
+        "date": "2026-10-29"
       },
-      "sha256": "145ac1df1a8c8008ce778c959c6fc628ddd8f01b3b70da775d87c22338ecb3bb"
+      "sha256": "145ac1df1a8c8008ce778c959c6fc628ddd8f01b3b70da775d87c22338ecb3bb",
+      "sourcePageReviewed": "2026-10-29"
     },
     "sem_b_7_3_relations": {
       "filename": "semester-b-07-03-relations-el.svg",
@@ -5075,9 +5078,11 @@
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Πρωτότυπα σχήματα ομάδας ανθρώπων, γραμμής μεταβολών και προστατευμένου δελτίου στοιχείων. Έγινε έλεγχος αντιστοίχισης ετικετών στο SVG· browser οπτικός και ανεξάρτητος επιστημονικός έλεγχος pending."
+        "scope": "Final SVG rendered in Microsoft Edge as raster at 1280×720. Three distinct symbols (number of people, changes over time, minimum personal data) match their captions; arrows point to the intended captions; text legible without observed overlap or clipping. Compared against lesson 07-03. Linked EKAB training guide is a curriculum source and could not be fetched in this check; no claim that it validates the specific data-minimisation statement. Independent privacy/operational/scientific review and app mobile/zoom/offline E2E remain pending.",
+        "date": "2026-10-29"
       },
-      "sha256": "475860bac3b12bf401fa49e510f7e46f75dbf1015e36d3b8b2e1eb60a7880a9e"
+      "sha256": "475860bac3b12bf401fa49e510f7e46f75dbf1015e36d3b8b2e1eb60a7880a9e",
+      "sourcePageReviewed": "2026-10-29"
     },
     "sem_b_7_4_topics": {
       "filename": "semester-b-07-04-topics-el.svg",
