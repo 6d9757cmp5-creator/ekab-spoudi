@@ -1,0 +1,77 @@
+name: Build licensed photoreal rigged MENTOR GLB
+on:
+  push:
+    branches: [feature/mentor-rigged-photoreal-avatar-v2-20261029]
+    paths:
+      - '.github/workflows/mentor-build-real-avatar.yml'
+      - 'mentor/real-avatar/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: mentor-real-avatar-build
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 42
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build from pinned upstream MIT code and CC0 MakeHuman assets
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 https://github.com/olatunde85/3d-gen.git /tmp/ara3d
+          cd /tmp/ara3d
+          git fetch --depth 1 origin 5c7741fbaaae2c18dff8298bad754f4a6b8abd00
+          git checkout --detach 5c7741fbaaae2c18dff8298bad754f4a6b8abd00
+          npm install --no-audit --no-fund
+          npm run setup-assets
+          npm run export -- --params "$GITHUB_WORKSPACE/mentor/real-avatar/mentor-params.json" --formats glb --detail medium --out "$GITHUB_WORKSPACE/mentor-generated"
+      - name: Install Three.js and bundle the renderer for offline use
+        run: |
+          set -euxo pipefail
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund --no-save --package-lock=false three@0.186.1 esbuild@0.25.12
+          ./node_modules/.bin/esbuild mentor/real-avatar/entry.mjs --bundle --format=esm --target=es2020 --minify --outfile=mentor-real3d.bundle.mjs
+      - name: Verify GLB body, skeleton, animation, facial morph targets, source and size
+        run: |
+          set -euxo pipefail
+          mkdir -p assets
+          model=$(find mentor-generated -type f -name '*.glb' -print -quit)
+          test -n "$model"
+          cp "$model" assets/mentor-real-3d.glb
+          python3 - <<'PY'
+          import os,struct,json,pathlib
+          p=pathlib.Path('assets/mentor-real-3d.glb')
+          b=p.read_bytes()
+          assert len(b)>200000,'Model is unexpectedly tiny'
+          assert len(b)<26000000,'Model exceeds 26 MB mobile maximum'
+          magic,version,total=struct.unpack_from('<4sII',b,0)
+          assert magic==b'glTF' and version==2 and total==len(b)
+          chunk_len,kind=struct.unpack_from('<I4s',b,12)
+          assert kind==b'JSON'
+          model=json.loads(b[20:20+chunk_len].decode('utf-8'))
+          assert model.get('skins'), 'No skeleton skin'
+          assert model.get('animations'), 'No motion clips'
+          assert model.get('textures'), 'No photographic textures'
+          meshes=model.get('meshes',[])
+          targets=sum(len(q.get('targets',[])) for m in meshes for q in m.get('primitives',[]))
+          assert targets>=14,f'Insufficient facial morph targets: {targets}'
+          print('GLB QUALITY PASS',len(b),'bytes;',len(model['skins']),'skins;',len(model['animations']),'animations;',targets,'morph targets')
+          PY
+          node --check mentor-real3d.bundle.mjs
+          node --test scripts/test-mentor-real3d.mjs
+      - name: Commit validated binary and offline renderer into the feature branch
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/mentor-real-3d.glb mentor-real3d.bundle.mjs
+          git commit -m "MENTOR: generated CC0 realistic rigged GLB with facial visemes and offline renderer"
+          git push origin HEAD:feature/mentor-rigged-photoreal-avatar-v2-20261029
