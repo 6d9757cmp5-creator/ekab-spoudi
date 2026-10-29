@@ -107,7 +107,7 @@ try{
   const studyMinutes=await page.locator('.study-goal-card .study-task').allTextContents();
   assert.equal(studyMinutes.length,9);
   assert.equal(studyMinutes.reduce((n,text)=>{
-    const match=text.match(/(\\d+) λεπτά/);
+    const match=text.match(/(\d+) λεπτά/);
     assert.ok(match,'each practice step must show a duration');
     return n+Number(match[1]);
   },0),15,'selected time budget must be shared across all goals');
