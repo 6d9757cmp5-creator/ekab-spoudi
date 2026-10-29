@@ -39,6 +39,7 @@
     <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
     <button type="button" id="tab-route" role="tab" aria-controls="panel-route" aria-selected="false" tabindex="-1" data-tab="route">Διαδρομή</button>
     <button type="button" id="tab-knowledge" role="tab" aria-controls="panel-knowledge" aria-selected="false" tabindex="-1" data-tab="knowledge">Γνώσεις · 59 κάρτες</button>
+    <button type="button" id="tab-clinical" role="tab" aria-controls="panel-clinical" aria-selected="false" tabindex="-1" data-tab="clinical">Ιατρικές ειδικότητες</button>
     <button type="button" id="tab-books" role="tab" aria-controls="panel-books" aria-selected="false" tabindex="-1" data-tab="books">Βιβλία · Έλεγχος</button>
   </nav>
   <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
@@ -161,6 +162,7 @@
       </form>
       <div class="coach-speech-actions">
         <button type="button" class="action secondary" id="coach-to-knowledge">🧠 Βρες γνώση και κάρτα αυτοελέγχου</button>
+        <button type="button" class="action secondary" id="coach-to-clinical">🩺 Ψάξε σε ιατρικές ειδικότητες</button>
         <button type="button" class="action secondary" id="coach-to-books">📖 Αναζήτησε τον όρο στα βιβλία (προεπισκόπηση)</button>
       </div>
       <div class="coach-speech-actions">
@@ -209,6 +211,36 @@
       <h3>Πηγές του νέου πακέτου γνώσεων</h3>
       <p class="muted small">Οι σύνδεσμοι οδηγούν στο υλικό των εκδοτών. Δεν ενσωματώθηκαν αυτούσια νέα βιβλία ή προστατευμένα διαγράμματα.</p>
       <div id="knowledge-sources" class="knowledge-sources"></div>
+    </div>
+  </section>
+  <section id="panel-clinical" role="tabpanel" aria-labelledby="tab-clinical" hidden>
+    <div class="section-heading"><div><h2>MENTOR OS · Ιατρική βιβλιοθήκη επαγγελματικού επιπέδου</h2>
+      <p>Ερωτήματα και εκπαιδευτικά πλαίσια σκέψης από διαφορετικές ειδικότητες, με συνδέσμους στις επίσημες οδηγίες.</p></div></div>
+    <div class="disclaimer" role="note">
+      <strong>Βιβλιογραφικός βοηθός για μελέτη — δεν είναι πραγματικός γιατρός ούτε διαγνωστική AI.</strong>
+      Οι καταχωρίσεις δεν έχουν περάσει ανεξάρτητο ιατρικό έλεγχο. Οι συνδέσεις αφορούν το γενικό θέμα,
+      όχι επιβεβαίωση κάθε ιατρικού ισχυρισμού. Δεν δίνονται εξατομικευμένες διαγνώσεις, θεραπευτικές εντολές,
+      φαρμακευτικές δόσεις ή πιστοποιημένη κλινική καθοδήγηση. Για πραγματικά περιστατικά απαιτείται ο θεράπων
+      και οι επικαιροποιημένες κατευθυντήριες οδηγίες.
+    </div>
+    <div class="panel">
+      <h3>Αναζήτησε ιατρικό ερώτημα</h3>
+      <p id="clinical-count" class="muted small">Φόρτωση εξειδικευμένης βιβλιοθήκης…</p>
+      <div class="knowledge-controls">
+        <div><label for="clinical-query">Ποια απορία θέλεις να διερευνήσεις;</label>
+          <input id="clinical-query" type="search" autocomplete="off" maxlength="260"
+           placeholder="π.χ. διαβήτης και νεφρική λειτουργία ή διαφορική διάγνωση δύσπνοιας"></div>
+        <div><label for="clinical-specialty">Ιατρική ειδικότητα</label>
+          <select id="clinical-specialty" aria-label="Επέλεξε ειδικότητα"></select></div>
+      </div>
+      <p id="clinical-status" role="status" aria-live="polite" class="muted small">Έλεγχος βιβλιογραφίας…</p>
+      <div id="clinical-results" class="clinical-results"></div>
+    </div>
+    <div class="panel">
+      <h3>Βασικές επαγγελματικές πηγές</h3>
+      <p class="muted small">Οι σύνδεσμοι πηγαίνουν σε επίσημους καταλόγους οργανισμών και επιστημονικών εταιρειών.
+      Δεν έχουν αντιγραφεί οι πλήρεις κλινικές οδηγίες ούτε εκπαιδεύτηκε μοντέλο.</p>
+      <div id="clinical-sources" class="clinical-sources"></div>
     </div>
   </section>
   <section id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden>
