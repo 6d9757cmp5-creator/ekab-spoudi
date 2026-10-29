@@ -700,25 +700,28 @@
     "prevention_levels": {
       "filename": "prevention-levels-el.svg",
       "localPath": "assets/education/prevention-levels-el.svg",
-      "title": "Πρωτογενής, δευτερογενής και τριτογενής πρόληψη — τρία στάδια",
+      "title": "Πρωτογενής, δευτερογενής και τριτογενής πρόληψη — τρία επίπεδα",
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο εκπαιδευτικό διανυσματικό σχέδιο",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "page": "https://www.who.int/health-topics/health-promotion",
       "additionalSources": [
-        "https://www.cdc.gov/chronic-disease/prevention/index.html"
+        "https://www.cdc.gov/chronic-disease/prevention/index.html",
+        "https://iris.who.int/bitstream/handle/10665/350161/9789240038349-eng.pdf"
       ],
-      "caption": "Χρονική αλληλουχία πρόληψης με παραδείγματα εμβολιασμού, προσυμπτωματικού ελέγχου και αποκατάστασης. Τα παραδείγματα είναι ενδεικτικά και όχι οδηγίες για συγκεκριμένο ασθενή.",
+      "caption": "Τρία επίπεδα πρόληψης με παραδείγματα εμβολιασμού, προσυμπτωματικού ελέγχου και αποκατάστασης. Δεν αποτελούν υποχρεωτική αλληλουχία για κάθε άτομο.",
       "originalArtwork": true,
-      "sourcePageReviewed": "pending independent live-source verification",
-      "sourcePageCheckedFor": [],
+      "sourcePageReviewed": "2026-10-29: WHO Health Promotion Glossary 2021 checked for prevention-level definitions; not local clinical approval",
+      "sourcePageCheckedFor": [
+        "WHO Health Promotion Glossary 2021: primary prevention before disease occurrence; secondary prevention early detection; tertiary prevention disease management/rehabilitation to reduce complications"
+      ],
       "clinicalReview": "pending",
       "visualReview": {
-        "date": "2026-10-26",
-        "scope": "SVG authored with Greek labels; XML parser, raster, browser and offline E2E not yet verified"
+        "date": "2026-10-29",
+        "scope": "Exact SVG rendered locally to 1100×650 raster and inspected individually. Initial magnifier handle and rehabilitation figure touched their caption areas; both icons reduced and repositioned. Final labels fit within cards. Description and footer clarify these are prevention levels, not a mandatory sequence for each person. Raster review only; independent Greek clinical review and browser/mobile/offline E2E pending."
       },
       "subjectCompleteness": "partial",
-      "sha256": "cfc8c24e03fa028f15263b51d2739312530864fb6287862320e3e710bf49878d"
+      "sha256": "3f57bfed3677d18c909c18e988bdb92b9e5b6997a8960480cae4c79c9b76a64d"
     },
     "public_health_cycle": {
       "filename": "public-health-cycle-el.svg",
@@ -729,16 +732,19 @@
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "page": "https://www.who.int/health-topics/social-determinants-of-health",
       "additionalSources": [
-        "https://www.cdc.gov/public-health-gateway/php/about/index.html"
+        "https://www.cdc.gov/public-health-gateway/php/about/index.html",
+        "https://stacks.cdc.gov/view/cdc/52709/cdc_52709_DS1.pdf"
       ],
       "caption": "Σχηματική ροή από συλλογή πληθυσμιακών δεδομένων στην αξιολόγηση οργανωμένης πρόληψης.",
       "originalArtwork": true,
-      "sourcePageReviewed": "pending live verification",
-      "sourcePageCheckedFor": [],
+      "sourcePageReviewed": "2026-10-29: CDC Local Implementation Guide v3.0 checked for Essential Public Health Services concepts; not a canonical four-step cycle or Greek operational approval",
+      "sourcePageCheckedFor": [
+        "CDC Local Implementation Guide v3.0: monitoring/diagnosis, policy/action, and evaluation appear among the Essential Public Health Services; the four-box loop here is a simplified original teaching schematic, not an official CDC sequence"
+      ],
       "clinicalReview": "pending",
       "visualReview": {
-        "date": "2026-10-26",
-        "scope": "SVG source labels and arrows inspected in text; raster, browser and offline E2E pending"
+        "date": "2026-10-29",
+        "scope": "Exact SVG rendered locally to 1120×650 raster and inspected individually. Four cards and arrowheads are legible and separated; loop depicts surveillance, assessment, intervention and evaluation as a simplified teaching model, not a canonical CDC sequence. Raster review only; independent Greek public-health review and browser/mobile/offline E2E pending."
       },
       "subjectCompleteness": "partial",
       "sha256": "8b71bfcabde65d4a0f6c6059f6c1bb12f448d93aead527ee4c3c7044541c6506"
