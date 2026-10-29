@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Structural SVG and checksum audit; NOT a visual or clinical certification."""
+import base64
 import hashlib
 import json
 import re
@@ -22,6 +23,14 @@ for key, asset in registry.get("assets", {}).items():
         errors.append(f"{key}: missing {path}")
         continue
     raw = path.read_bytes()
+    if path.suffix.lower() == ".png":
+        if len(raw) < 24 or raw[:8] != bytes((137, 80, 78, 71, 13, 10, 26, 10)) or raw[12:16] != b"IHDR":
+            errors.append(f"{key}: invalid PNG signature or header")
+        elif int.from_bytes(raw[16:20], "big") < 1 or int.from_bytes(raw[20:24], "big") < 1:
+            errors.append(f"{key}: invalid PNG dimensions")
+        if hashlib.sha256(raw).hexdigest() != asset.get("sha256"):
+            errors.append(f"{key}: SHA-256 mismatch")
+        continue
     # Git stores these text SVGs with LF; normalize Windows CRLF before checking the blob hash.
     canonical = raw.replace(bytes((13, 10)), bytes((10,)))
     if hashlib.sha256(canonical).hexdigest() != asset.get("sha256"):
@@ -54,13 +63,22 @@ for key, asset in registry.get("assets", {}).items():
         for attr, value in el.attrib.items():
             if attr.lower().startswith("on"):
                 errors.append(f"{key}: event handler {attr}")
-            if attr.endswith("href") and (value.startswith(("http:", "https:", "//", "data:"))):
-                errors.append(f"{key}: external or inline href")
+            if attr.endswith("href") and value.startswith("data:"):
+                prefix = "data:image/png;base64,"
+                try:
+                    payload = "".join(value[len(prefix):].split())
+                    embedded = base64.b64decode(payload, validate=True) if value.startswith(prefix) and el.tag == svg_ns + "image" else b""
+                except (ValueError, base64.binascii.Error):
+                    embedded = b""
+                if not embedded.startswith(bytes((137, 80, 78, 71, 13, 10, 26, 10))):
+                    errors.append(f"{key}: invalid embedded PNG")
+            elif attr.endswith("href") and value.startswith(("http:", "https:", "//")):
+                errors.append(f"{key}: external href")
             for ref in re.findall(r"url\(#([^)]*)\)", value):
                 if ref not in ids:
                     errors.append(f"{key}: missing referenced id {ref}")
 
-print(f"SVG structural audit: {checked} local assets, {len(errors)} errors")
+print(f"Local image structural audit: {checked} local assets, {len(errors)} errors")
 for error in errors:
     print("ERROR:", error, file=sys.stderr)
 sys.exit(1 if errors else 0)

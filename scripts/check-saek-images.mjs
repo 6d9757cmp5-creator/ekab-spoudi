@@ -47,8 +47,8 @@ for(const [key,a] of Object.entries(assets)){
  const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','www.resus.org.uk','www.erc.edu','www.ems.gov','www.moh.gov.gr','www.osha.gov','highways.dot.gov','www.edps.europa.eu','www.ncbi.nlm.nih.gov','www.nhs.uk','www.nhlbi.nih.gov','www.ahrq.gov','road-safety.transport.ec.europa.eu','www.usfa.fema.gov','www.ekab.gr','www2.dypa.gov.gr','www.inacsl.org','content.nremt.org','www.fda.gov','www.heart.org','cpr.heart.org']).has(originalHost);
  if(!originalAllowed&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
  if(a.localPath){
-  if(!/^assets\/education\/[a-z0-9-]+\.svg$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
-  else try{const bytes=await readFile(a.localPath);const canonical=Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'),'utf8');if(createHash('sha256').update(canonical).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
+  if(!/^assets\/education\/[a-z0-9-]+\.(svg|png)$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
+  else try{const bytes=await readFile(a.localPath);const isSvg=a.localPath.endsWith('.svg');const canonical=isSvg?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'),'utf8'):bytes;if(createHash('sha256').update(canonical).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(isSvg&&!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);if(!isSvg&&!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))addError('Μη έγκυρο PNG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
  }
  if(!allowedLicenses.has(a.license))addError('Άγνωστη άδεια εικόνας '+key+': '+a.license);
  if(![...chosen.values()].some(p=>p.includes(key)))warnings.push('Πηγή χωρίς χρήση '+key);

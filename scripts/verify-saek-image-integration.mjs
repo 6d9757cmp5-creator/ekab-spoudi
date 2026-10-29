@@ -82,9 +82,9 @@ for (const [key, asset] of Object.entries(assets)) {
   if (!asset.localPath) { external++; continue; }
   local++;
   try { if (!(await stat(asset.localPath)).isFile()) throw Error('not a file'); }
-  catch { missingLocal++; errors.push('Missing local SVG for ' + key + ': ' + asset.localPath); }
+  catch { missingLocal++; errors.push('Missing local image for ' + key + ': ' + asset.localPath); }
   if (!sw.includes('./' + asset.localPath))
-    errors.push('Offline precache missing local SVG for ' + key + ': ' + asset.localPath);
+    errors.push('Offline precache missing local image for ' + key + ': ' + asset.localPath);
   if (!/^[a-f0-9]{64}$/.test(asset.sha256 || ''))
     errors.push('Missing SHA-256 for ' + key);
   if (asset.clinicalReview === 'approved' && !asset.independentReviewer)
