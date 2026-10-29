@@ -25,7 +25,7 @@ export function selectGreekVoice(voices,name){
   const list=greekVoices(voices);
   return list.find(v=>v.name===name)||list[0]||null;
 }
-export function speakGreek(text,{env=globalThis,voiceName="",rate=0.94,pitch=1,onStart=()=>{},onFinish=()=>{},onError=()=>{}}={}){
+export function speakGreek(text,{env=globalThis,voiceName="",rate=0.94,pitch=1,onStart=()=>{},onFinish=()=>{},onError=()=>{},onBoundary=()=>{}}={}){
   if(!supportsSpeech(env))return false;
   const utterance=new env.SpeechSynthesisUtterance(String(text||"").trim().slice(0,2500));
   if(!utterance.text)return false;
@@ -36,6 +36,7 @@ export function speakGreek(text,{env=globalThis,voiceName="",rate=0.94,pitch=1,o
   if(voice)utterance.voice=voice;
   utterance.onstart=()=>onStart();
   utterance.onend=()=>onFinish();
+  utterance.onboundary=event=>onBoundary(event);
   utterance.onerror=event=>onError(event);
   env.speechSynthesis.cancel();
   env.speechSynthesis.speak(utterance);

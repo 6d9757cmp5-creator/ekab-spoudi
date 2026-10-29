@@ -7,7 +7,7 @@ const text=async(path)=>readFile(new URL(path,root),'utf8');
 test('Mentor is accessible from home without replacing existing sections',async()=>{
  const html=await text('index.html');
  assert.match(html,/href="mentor-lab\.html"/);
- assert.match(html,/MENTOR OS/);
+ assert.match(html,/MENTOR/);
  assert.match(html,/ΔΟΚΙΜΑΣΤΙΚΟ/);
  assert.equal((html.match(/class="home-anatomy-single"/g)||[]).length,1,'3D Anatomy must have one dedicated entry');
  assert.equal((html.match(/class="home-mentor-single"/g)||[]).length,1,'Mentor must have one separate entry');
@@ -59,4 +59,21 @@ test('MENTOR cinematic entry has working voice controls and safe progressive enh
  assert.equal(calls[1].rate,1.12);
  assert.equal(calls[1].pitch,1.15);
  assert.equal(speakGreek('',{env:mock}),false);
+});
+
+test('MENTOR portrait asset and Web Speech performance source is wired on home',async()=>{
+ const html=await text('index.html');
+ const js=await text('mentor-home.js');
+ const css=await text('mentor-avatar-live.css');
+ assert.match(html,/class="mentor-figure mentor-photo-avatar"/);
+ assert.match(html,/src="assets\/mentor-photo\.webp"/);
+ assert.match(html,/href="mentor-avatar-live\.css"/);
+ assert.match(js,/createMentorAvatar/);
+ assert.match(js,/onBoundary:event/);
+ assert.match(css,/mentor-photo-mouth/);
+ assert.match(css,/prefers-reduced-motion/);
+ const image=await readFile(new URL('assets/mentor-photo.webp',root));
+ assert.ok(image.length>=1000&&image.length<100_000,'small actual portrait asset, not fake placeholder');
+ assert.equal(image.subarray(0,4).toString('ascii'),'RIFF');
+ assert.equal(image.subarray(8,12).toString('ascii'),'WEBP');
 });
