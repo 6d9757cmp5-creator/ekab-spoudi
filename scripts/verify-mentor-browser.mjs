@@ -304,7 +304,7 @@ try{
   assert.equal(await page.locator('#tab-route').getAttribute('aria-selected'),'true','Conversation button opens working tutor');
   assert.equal(await page.locator('#coach-question').evaluate(x=>document.activeElement===x),true,'Tutor input focused');
   const home=await readFile(resolve(root,'index.html'),'utf8');
-  assert.match(home,/class="home-mentor-presence"/);
+  assert.match(home,/class="home-mentor-presence(?:\s|\")/);
   assert.match(home,/href="mentor-readonly.html"/);
   assert.match(home,/href="mentor-live.html"/);
   // Natural-device voice: explicit voice controls, rate selection and permission-safe mic.
