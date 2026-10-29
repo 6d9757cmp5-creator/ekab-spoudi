@@ -60,13 +60,18 @@ export function validateKnowledge({catalog,pack}){
 function textScore(card,terms,phrase){
  const title=foldGreek(card.title),body=foldGreek(card.lesson),
   question=foldGreek(card.question),answer=foldGreek(card.answer);
- let score=0;
+ let score=0,matched=0;
  for(const word of terms){
-  if(title.includes(word))score+=7;
-  if(question.includes(word))score+=4;
-  if(body.includes(word))score+=2;
-  if(answer.includes(word))score+=1;
+  const matches=[title.includes(word),question.includes(word),body.includes(word),answer.includes(word)];
+  if(matches.some(Boolean))matched++;
+  if(matches[0])score+=7;
+  if(matches[1])score+=4;
+  if(matches[2])score+=2;
+  if(matches[3])score+=1;
  }
+ // Do not return an irrelevant card merely because one generic word matches
+ // a multi-term question.
+ if(matched<Math.max(1,Math.ceil(terms.length*.6)))return 0;
  if(phrase.length>3&&(title.includes(phrase)||question.includes(phrase)))score+=6;
  return score;
 }
