@@ -1,0 +1,1210 @@
+{
+  "schema_version": 1,
+  "package": "mentor-clinical-desk-v1",
+  "status": "human-review-pending",
+  "authoring_note": "Original Greek general learning frameworks. The listed official publisher links are thematic references, not per-claim expert verified citations. No copyrighted guideline text is reproduced.",
+  "ai_model": false,
+  "medical_license": false,
+  "clinical_use_allowed": false,
+  "official_grade_effect": false,
+  "specialties": [
+    {
+      "id": "cardiology",
+      "label": "Καρδιολογία",
+      "icon": "heart-pulse"
+    },
+    {
+      "id": "pulmonology",
+      "label": "Πνευμονολογία",
+      "icon": "lungs"
+    },
+    {
+      "id": "neurology",
+      "label": "Νευρολογία",
+      "icon": "brain"
+    },
+    {
+      "id": "nephrology",
+      "label": "Νεφρολογία",
+      "icon": "droplets"
+    },
+    {
+      "id": "endocrinology",
+      "label": "Ενδοκρινολογία",
+      "icon": "activity"
+    },
+    {
+      "id": "infectious",
+      "label": "Λοιμωξιολογία",
+      "icon": "shield"
+    },
+    {
+      "id": "gastro",
+      "label": "Γαστρεντερολογία / Ηπατολογία",
+      "icon": "stethoscope"
+    },
+    {
+      "id": "hematology",
+      "label": "Αιματολογία",
+      "icon": "test-tube"
+    },
+    {
+      "id": "pediatrics",
+      "label": "Παιδιατρική",
+      "icon": "baby"
+    },
+    {
+      "id": "obgyn",
+      "label": "Μαιευτική / Γυναικολογία",
+      "icon": "heart"
+    },
+    {
+      "id": "emergency",
+      "label": "Επείγουσα Ιατρική",
+      "icon": "ambulance"
+    },
+    {
+      "id": "pharmacology",
+      "label": "Κλινική Φαρμακολογία",
+      "icon": "pill"
+    },
+    {
+      "id": "rheumatology",
+      "label": "Ρευματολογία",
+      "icon": "bone"
+    },
+    {
+      "id": "oncology",
+      "label": "Ογκολογία",
+      "icon": "microscope"
+    },
+    {
+      "id": "psychiatry",
+      "label": "Ψυχιατρική",
+      "icon": "brain-circuit"
+    },
+    {
+      "id": "derm",
+      "label": "Δερματολογία",
+      "icon": "scan-eye"
+    },
+    {
+      "id": "critical",
+      "label": "Εντατική Θεραπεία",
+      "icon": "monitor"
+    }
+  ],
+  "records": [
+    {
+      "id": "pr-001",
+      "specialty": "cardiology",
+      "question": "Πόνος στο θώρακα: ποιες εναλλακτικές κατηγορίες πρέπει να θυμόμαστε;",
+      "framework": "Η κλινική συλλογιστική διαχωρίζει ισχαιμικές, πνευμονικές, αγγειακές, γαστρεντερικές και μυοσκελετικές αιτίες. Η πιθανότητα κάθε αιτίας εξαρτάται από το ιστορικό, τον χρόνο έναρξης, τα συνοδά συμπτώματα, τα ευρήματα και τις επιλεγμένες εξετάσεις.",
+      "verify": "Σημαντικά στοιχεία είναι η αστάθεια, η συνολική κλινική εικόνα, τα χαρακτηριστικά του πόνου, το ΗΚΓ και όσα εξετάσματα θεωρεί κατάλληλα ο θεράπων.",
+      "caution": "Ο εντοπισμός ή ο χαρακτήρας του πόνου μόνος του δεν αποκλείει επικίνδυνη αιτία.",
+      "source_ids": [
+        "esc",
+        "msd"
+      ],
+      "keywords": [
+        "πόνος",
+        "θώρακας",
+        "στηθάγχη",
+        "acs",
+        "έμφραγμα"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-002",
+      "specialty": "cardiology",
+      "question": "Γιατί το κλάσμα εξώθησης δεν αρκεί για να περιγράψει την καρδιακή ανεπάρκεια;",
+      "framework": "Το κλάσμα εξώθησης περιγράφει μία παράμετρο της λειτουργίας της αριστερής κοιλίας. Συμπτώματα, συμφόρηση, συννοσηρότητες, δομή της καρδιάς και αντικειμενικά ευρήματα προσφέρουν πρόσθετο πλαίσιο.",
+      "verify": "Χρειάζεται συνδυασμός κλινικών και απεικονιστικών δεδομένων και σύγχρονη ταξινόμηση από την επίκαιρη έκδοση των ESC guidelines.",
+      "caution": "Δεν προκύπτει ατομική θεραπευτική επιλογή από έναν μόνο υπερηχογραφικό δείκτη.",
+      "source_ids": [
+        "esc"
+      ],
+      "keywords": [
+        "καρδιακή",
+        "ανεπάρκεια",
+        "lvef",
+        "hfpef",
+        "hfref"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-003",
+      "specialty": "cardiology",
+      "question": "Πώς διαχωρίζουμε ηλεκτρικό καρδιακό ρυθμό από αποτελεσματική αιμάτωση;",
+      "framework": "Η παρουσία οργανωμένης ηλεκτρικής δραστηριότητας και η ύπαρξη επαρκούς μηχανικής κυκλοφορίας δεν είναι ισοδύναμες. Ένα ηλεκτροκαρδιογράφημα δεν απεικονίζει απευθείας την παροχή αίματος στους ιστούς.",
+      "verify": "Σημασία έχουν η κλινική κατάσταση, η ποιότητα σήματος και οι υπόλοιπες διαθέσιμες ενδείξεις.",
+      "caution": "Η ερμηνεία επείγουσας αστάθειας απαιτεί εκπαίδευση και ισχύον πρωτόκολλο, όχι απλή ταξινόμηση κυματομορφής.",
+      "source_ids": [
+        "esc",
+        "erc"
+      ],
+      "keywords": [
+        "ηκγ",
+        "ecg",
+        "pea",
+        "παλμός",
+        "ρυθμός"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-004",
+      "specialty": "pulmonology",
+      "question": "Δύσπνοια: ποιες μεγάλες ομάδες αιτιών εξετάζονται;",
+      "framework": "Οι αιτίες περιλαμβάνουν παθήσεις αεραγωγών, πνευμονικού παρεγχύματος, αγγείων και καρδιάς, αλλά και αναιμία, μεταβολικές καταστάσεις ή εξωπνευμονικούς παράγοντες.",
+      "verify": "Η χρονική έναρξη, το επίπεδο συνείδησης, ο αερισμός, η οξυγόνωση και το σχετικό ιστορικό αλλάζουν την ερμηνεία.",
+      "caution": "Ο κορεσμός οξυγόνου δεν είναι συνολική μέτρηση του αερισμού ούτε αποκλείει κάθε σοβαρή αιτία.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "δύσπνοια",
+        "αναπνοή",
+        "dyspnea",
+        "spo2"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-005",
+      "specialty": "pulmonology",
+      "question": "Άσθμα και ΧΑΠ: γιατί δεν θεωρούνται η ίδια νόσος;",
+      "framework": "Η διάγνωση αξιοποιεί συμπτώματα, έκθεση σε παράγοντες, ιστορικό μεταβλητότητας και λειτουργικές αναπνευστικές μετρήσεις. Άσθμα και ΧΑΠ έχουν διαφορετικά τεκμηριωτικά πλαίσια, ενώ κάποια χαρακτηριστικά μπορεί να συνυπάρχουν.",
+      "verify": "Η επίκαιρη επιστημονική αντιπαραβολή γίνεται με GINA 2026 και GOLD 2026, όχι μόνο βάσει μιας ετικέτας στο ιστορικό.",
+      "caution": "Η διάκριση δεν γίνεται αξιόπιστα με μία μεμονωμένη ακρόαση ή ένδειξη οξύμετρου.",
+      "source_ids": [
+        "gina",
+        "gold"
+      ],
+      "keywords": [
+        "άσθμα",
+        "ασθμα",
+        "χαπ",
+        "copd",
+        "σπιρομέτρηση"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-006",
+      "specialty": "pulmonology",
+      "question": "Ποιες πληροφορίες χρειάζονται πριν τεθεί υπό διερεύνηση πνευμονική εμβολή;",
+      "framework": "Η κλινική εκτίμηση συνδυάζει συμπτώματα, παράγοντες κινδύνου, συνολική προδοκιμαστική πιθανότητα και καταλληλότητα εξετάσεων. Τα διαγνωστικά εργαλεία χρησιμοποιούνται στο αντίστοιχο πλαίσιο.",
+      "verify": "Αναζητούνται χρονική έναρξη, επιβαρυντικοί παράγοντες, αντικειμενικά ευρήματα και άλλες πιθανές επείγουσες αιτίες.",
+      "caution": "Ούτε ένα θετικό ούτε ένα αρνητικό μεμονωμένο σύμπτωμα αρκεί για αποκλεισμό ή επιβεβαίωση.",
+      "source_ids": [
+        "ash",
+        "msd"
+      ],
+      "keywords": [
+        "εμβολή",
+        "πνευμονική",
+        "pe",
+        "θρομβοεμβολή"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-007",
+      "specialty": "neurology",
+      "question": "Αιφνίδιο εστιακό νευρολογικό έλλειμμα: τι πρέπει να τεκμηριώνεται;",
+      "framework": "Η αιφνίδια διαταραχή λόγου, κίνησης ή αισθητικότητας χρειάζεται έγκαιρη αναγνώριση. Το ακριβές χρονικό σημείο τελευταίας γνωστής φυσιολογικής κατάστασης είναι διαφορετικό από την ώρα που παρατηρήθηκε το έλλειμμα.",
+      "verify": "Σημειώνουμε χρονισμό, προϋπάρχουσα λειτουργικότητα, φάρμακα, μεταβολικές μιμήσεις και κλινική εξέλιξη.",
+      "caution": "Ένα σύντομο ψηφιακό εργαλείο δεν διαγνώσκει ούτε καθορίζει θεραπευτικό παράθυρο σε πραγματικό ασθενή.",
+      "source_ids": [
+        "nice",
+        "msd"
+      ],
+      "keywords": [
+        "εγκεφαλικό",
+        "stroke",
+        "fast",
+        "αφασία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-008",
+      "specialty": "neurology",
+      "question": "Μεταβολή επιπέδου συνείδησης: γιατί είναι ευρύ πρόβλημα;",
+      "framework": "Οι πιθανές αιτίες καλύπτουν νευρολογικά, μεταβολικά, τοξικολογικά, λοιμώδη και κυκλοφορικά προβλήματα. Η εκτίμηση απαιτεί ταχεία αναγνώριση της συνολικής αστάθειας και κατάλληλη διερεύνηση.",
+      "verify": "Σημαντικά είναι οι φαρμακευτικές εκθέσεις, ο χρονισμός, η ανταπόκριση, οι συνοδές ενδείξεις και όσα πληροφορούν οι μάρτυρες.",
+      "caution": "Η «σύγχυση» δεν πρέπει να χαρακτηρίζεται αυτομάτως ψυχιατρική.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "συνείδηση",
+        "σύγχυση",
+        "delirium",
+        "κώμα"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-009",
+      "specialty": "neurology",
+      "question": "Κεφαλαλγία: πώς αποφεύγουμε την πρόωρη ταξινόμηση ως καλοήθη;",
+      "framework": "Η κλινική προσέγγιση δίνει σημασία σε νέα χαρακτηριστικά, αιφνίδια έναρξη, νευρολογικά συμπτώματα, συστηματικά στοιχεία και αλλαγή στο συνήθη τύπο του πόνου.",
+      "verify": "Χρειάζονται ιστορικό, νευρολογική εξέταση και εκτίμηση ενδείξεων για περαιτέρω επείγοντα έλεγχο.",
+      "caution": "Η γνώση συχνών πρωτοπαθών κεφαλαλγιών δεν αποκλείει δευτεροπαθείς αιτίες.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "κεφαλαλγία",
+        "πονοκέφαλος",
+        "migraine",
+        "μηνιγγίτιδα"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-010",
+      "specialty": "nephrology",
+      "question": "Πώς διακρίνεται μια μεμονωμένη χαμηλή eGFR από χρόνια νεφρική νόσο;",
+      "framework": "Η χρόνια νεφρική νόσος απαιτεί τεκμηρίωση διάρκειας ή επιπλέον δεικτών νεφρικής βλάβης. Μία μόνο μέτρηση νεφρικής λειτουργίας μπορεί να αντανακλά παροδική κατάσταση.",
+      "verify": "Χρειάζονται προηγούμενες μετρήσεις, λευκωματουρία, συννοσηρότητες και σχετικό κλινικό πλαίσιο.",
+      "caution": "Δεν αποδίδεται αυτόματα χρόνια διάγνωση από μία μόνο παθολογική τιμή.",
+      "source_ids": [
+        "kdigo"
+      ],
+      "keywords": [
+        "egfr",
+        "κρεατινίνη",
+        "ckd",
+        "νεφρική",
+        "χρόνια"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-011",
+      "specialty": "nephrology",
+      "question": "Τι διαφορετικό πληροφορούν η eGFR και η λευκωματουρία;",
+      "framework": "Η εκτιμώμενη σπειραματική διήθηση και η απέκκριση λευκωματίνης παρέχουν συμπληρωματικά στοιχεία για τη νεφρική κατάσταση και την εκτίμηση κινδύνου.",
+      "verify": "Ο θεράπων συνδυάζει τις δύο παραμέτρους, την ιστορία, τις μονάδες και τις επαναληπτικές μετρήσεις.",
+      "caution": "Η παρουσία ή απουσία λευκωματουρίας δεν καταργεί την ανάγκη συνολικής αξιολόγησης.",
+      "source_ids": [
+        "kdigo"
+      ],
+      "keywords": [
+        "acr",
+        "αλβουμίνη",
+        "λευκωματουρία",
+        "gfr",
+        "νεφρά"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-012",
+      "specialty": "nephrology",
+      "question": "Οξεία νεφρική βλάβη: γιατί το βασικό επίπεδο κρεατινίνης έχει σημασία;",
+      "framework": "Η ερμηνεία μεταβολής κρεατινίνης εξαρτάται από προηγούμενες τιμές, χρονικό διάστημα, διούρηση και συνολικό κλινικό πλαίσιο.",
+      "verify": "Ιδιαίτερη σημασία έχουν οι τάσεις, ενδεχόμενη αφυδάτωση, έκθεση σε νεφροτοξικούς παράγοντες και συνυπάρχοντα νοσήματα.",
+      "caution": "Δεν επιτρέπεται συμπέρασμα για αιτιολογία μόνο από μία τιμή κρεατινίνης.",
+      "source_ids": [
+        "kdigo",
+        "nice"
+      ],
+      "keywords": [
+        "aki",
+        "οξεία",
+        "νεφρική",
+        "κρεατινίνη"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-013",
+      "specialty": "endocrinology",
+      "question": "Υπογλυκαιμία: τι πρέπει να ξεχωρίζει ο κλινικός;",
+      "framework": "Τα συμπτώματα, η αντικειμενική μέτρηση και η σχέση με φάρμακα, διατροφή και συνοδά νοσήματα είναι διαφορετικά στοιχεία της εκτίμησης.",
+      "verify": "Ο κλινικός επιβεβαιώνει τη μέτρηση και το πλαίσιο χωρίς να βασίζεται αποκλειστικά σε μια αίσθηση αδυναμίας.",
+      "caution": "Η ψηφιακή κάρτα δεν παρέχει ατομική φαρμακευτική ή επείγουσα οδηγία.",
+      "source_ids": [
+        "ada",
+        "msd"
+      ],
+      "keywords": [
+        "υπογλυκαιμία",
+        "glucose",
+        "σάκχαρο",
+        "διαβήτης"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-014",
+      "specialty": "endocrinology",
+      "question": "Διαβήτης τύπου 2: γιατί η αξιολόγηση κινδύνου δεν περιορίζεται στην HbA1c;",
+      "framework": "Οι σύγχρονες επιστημονικές προσεγγίσεις συνεκτιμούν καρδιαγγειακό και νεφρικό κίνδυνο, βάρος, συννοσηρότητες, υπογλυκαιμίες και προτιμήσεις του ατόμου.",
+      "verify": "Οι επιλογές εξαρτώνται από τις ενημερωμένες ADA 2026 συστάσεις και τον πραγματικό κλινικό έλεγχο.",
+      "caution": "Η ίδια τιμή HbA1c δεν συνεπάγεται πάντα την ίδια θεραπεία για διαφορετικά πρόσωπα.",
+      "source_ids": [
+        "ada"
+      ],
+      "keywords": [
+        "hba1c",
+        "σακχαρώδης",
+        "διαβήτης",
+        "glycemic"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-015",
+      "specialty": "endocrinology",
+      "question": "Κρίση υπεργλυκαιμίας: γιατί είναι ουσιώδης η διάκριση κετοξέωσης από υπερωσμωτικότητα;",
+      "framework": "Τα διαφορετικά μεταβολικά πρότυπα έχουν διακριτά χαρακτηριστικά και δεν περιγράφονται μόνο από τη γλυκόζη. Η κλινική και εργαστηριακή αξιολόγηση εξαρτάται από οξεοβασικές και άλλες παραμέτρους.",
+      "verify": "Χρειάζονται κατάλληλα εργαστηριακά δεδομένα και εκτίμηση της κατάστασης από κατάλληλο επαγγελματία.",
+      "caution": "Η κάρτα δεν αποδίδει διάγνωση DKA/HHS ούτε οδηγίες υγρών ή ινσουλίνης.",
+      "source_ids": [
+        "ada",
+        "msd"
+      ],
+      "keywords": [
+        "dka",
+        "hhs",
+        "κετοξέωση",
+        "υπεργλυκαιμία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-016",
+      "specialty": "infectious",
+      "question": "Πυρετός: γιατί η απουσία του δεν αποκλείει σοβαρή λοίμωξη;",
+      "framework": "Η κλινική παρουσίαση επηρεάζεται από ηλικία, ανοσολογική κατάσταση, φαρμακευτική αγωγή και χρόνο της νόσου. Η συνολική εικόνα μπορεί να έχει μεγαλύτερη σημασία από ένα μεμονωμένο θερμόμετρο.",
+      "verify": "Η αξιολόγηση εξετάζει ζωτικά σημεία, ιστορικό, εστία, συννοσηρότητες και δυναμική εξέλιξη.",
+      "caution": "Ο πυρετός από μόνος του δεν τεκμηριώνει βακτηριακή αιτία ή ανάγκη αντιβιοτικού.",
+      "source_ids": [
+        "idsa",
+        "msd"
+      ],
+      "keywords": [
+        "πυρετός",
+        "sepsis",
+        "σήψη",
+        "λοίμωξη"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-017",
+      "specialty": "infectious",
+      "question": "Αντιβιοτικό και αντιμικροβιακή αντοχή: τι πρέπει να προηγείται της επιλογής;",
+      "framework": "Η ορθολογική χρήση αντιμικροβιακών λαμβάνει υπόψη πιθανό παθογόνο, σύνδρομο, καλλιέργειες, τοπική αντοχή, αλλεργίες, συννοσηρότητες και κατάλληλες οδηγίες.",
+      "verify": "Η επιλογή απαιτεί ενημερωμένες κατευθυντήριες οδηγίες, επιβεβαίωση ενδείξεων και τοπικές πολιτικές.",
+      "caution": "Δεν επιλέγεται αντιβιοτικό, δόση ή διάρκεια από γενική απάντηση βιβλιοθήκης.",
+      "source_ids": [
+        "idsa",
+        "cdc"
+      ],
+      "keywords": [
+        "αντιβιοτικά",
+        "αντίσταση",
+        "antibiotic",
+        "στελέχη"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-018",
+      "specialty": "infectious",
+      "question": "Σήψη: ποια είναι η διαφορά ανάμεσα σε λοίμωξη και οργανική δυσλειτουργία;",
+      "framework": "Η λοίμωξη και η σχετιζόμενη δυσλειτουργία οργάνων αποτελούν διακριτές έννοιες. Η ταυτόχρονη εκτίμηση κλινικής επιδείνωσης είναι σημαντικότερη από την τυφλή εξίσωση κάθε πυρετού με σήψη.",
+      "verify": "Χρειάζονται συνολική κλινική εικόνα, παράγοντες κινδύνου και εργαστηριακή αξιολόγηση εντός κατάλληλου πλαισίου.",
+      "caution": "Μία ένδειξη ζωτικού σημείου ή εργαστηριακού δείκτη δεν καθιστά αυτόματη τη διάγνωση.",
+      "source_ids": [
+        "idsa",
+        "msd"
+      ],
+      "keywords": [
+        "σήψη",
+        "sepsis",
+        "λοίμωξη",
+        "οργανική"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-019",
+      "specialty": "gastro",
+      "question": "Οξύ κοιλιακό άλγος: γιατί η εντόπιση δεν επαρκεί για διαφορική διάγνωση;",
+      "framework": "Οι αιτίες μπορεί να είναι γαστρεντερικές, ουρολογικές, αγγειακές, γυναικολογικές ή εξωκοιλιακές. Ο χρονισμός, το ιστορικό, η γενική κατάσταση και η εξέταση καθορίζουν την προτεραιοποίηση.",
+      "verify": "Η εκτίμηση συνδυάζει εντόπιση, συνοδά συμπτώματα, προηγούμενες επεμβάσεις και κατάλληλο διαγνωστικό σχεδιασμό.",
+      "caution": "Το «στομάχι» ή η θέση του πόνου δεν αρκεί για βεβαιότητα.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "κοιλιά",
+        "πόνος",
+        "abdominal",
+        "σκωληκοειδίτιδα"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-020",
+      "specialty": "gastro",
+      "question": "Γαστρεντερική αιμορραγία: ποια στοιχεία της αναφοράς προσφέρουν πλαίσιο;",
+      "framework": "Το ιστορικό, η αιμοδυναμική εικόνα, οι εκδηλώσεις, η φαρμακευτική αγωγή και η χρονική εξέλιξη συμβάλλουν στη συνολική αξιολόγηση.",
+      "verify": "Μια μεμονωμένη εργαστηριακή εξέταση δεν πρέπει να αντικαθιστά την κλινική εκτίμηση του κινδύνου.",
+      "caution": "Η περιγραφή της αιμορραγίας δεν ισοδυναμεί από μόνη της με εντοπισμό συγκεκριμένης πηγής.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "μέλαινα",
+        "αιματέμεση",
+        "γαστρεντερική",
+        "αιμορραγία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-021",
+      "specialty": "gastro",
+      "question": "Ηπατικά ένζυμα: γιατί η αυξημένη τιμή δεν αποτελεί αυτομάτως διάγνωση;",
+      "framework": "Διαφορετικά βιοχημικά πρότυπα σχετίζονται με διαφορετικές ομάδες αιτιών και η ερμηνεία βασίζεται σε συμπτώματα, φάρμακα, παράγοντες κινδύνου και επιπλέον εξετάσεις.",
+      "verify": "Χρειάζονται είδος ενζύμων, μονάδες, κλίμακα μεταβολής, παλαιότερες τιμές και συνολικό ιστορικό.",
+      "caution": "Δεν αποδίδεται μία μοναδική νόσος από απομονωμένο ALT ή AST.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "ast",
+        "alt",
+        "ήπαρ",
+        "τρανσαμινάσες"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-022",
+      "specialty": "hematology",
+      "question": "Αναιμία: γιατί το MCV αποτελεί μόνο ένα αρχικό στοιχείο;",
+      "framework": "Η αναιμία περιγράφει εύρημα, όχι ενιαία αιτία. Το MCV βοηθά σε κατηγοριοποίηση, αλλά χρειάζονται ιστορικό, συνοδά εργαστηριακά και ενδεχόμενες απώλειες ή καταστροφή αίματος.",
+      "verify": "Σημαντικά είναι οι τάσεις, η κλινική εικόνα, οι συνοδές κυτταρικές σειρές και η υποκείμενη αιτία.",
+      "caution": "Το μέγεθος των ερυθρών δεν αποκλείει μικτές διαταραχές.",
+      "source_ids": [
+        "ash",
+        "msd"
+      ],
+      "keywords": [
+        "αναιμία",
+        "mcv",
+        "αιμοσφαιρίνη",
+        "σίδηρος"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-023",
+      "specialty": "hematology",
+      "question": "Φλεβική θρομβοεμβολή: πώς συνδέεται η πιθανότητα με τη διερεύνηση;",
+      "framework": "Η αξιολόγηση πιθανότητας και η επιλογή εξετάσεων αποτελούν συνδεδεμένα βήματα της τεκμηριωμένης διάγνωσης. Ορισμένα εργαλεία είναι χρήσιμα μόνο στον πληθυσμό για τον οποίο σχεδιάστηκαν.",
+      "verify": "Χρειάζεται προδοκιμαστική πιθανότητα, κατάλληλη χρήση εξετάσεων και επανέλεγχος της δυναμικής του κινδύνου.",
+      "caution": "Καμία μεμονωμένη εξέταση δεν λειτουργεί πάντα ανεξάρτητα από το κλινικό πλαίσιο.",
+      "source_ids": [
+        "ash"
+      ],
+      "keywords": [
+        "dvt",
+        "pe",
+        "θρόμβωση",
+        "θρομβοεμβολή"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-024",
+      "specialty": "hematology",
+      "question": "Θρομβοπενία: τι πρέπει να επιβεβαιώνεται πριν την αιτιολογική ταξινόμηση;",
+      "framework": "Η χαμηλή μέτρηση αιμοπεταλίων χρειάζεται αξιολόγηση του πραγματικού ευρήματος, της εξέλιξης, άλλων κυτταρικών σειρών και ενδεχόμενων εκθέσεων σε φάρμακα.",
+      "verify": "Σημασία έχουν η ποιότητα δείγματος, η κλινική αιμορραγία, η πρόσφατη αγωγή και τα εργαστηριακά συμφραζόμενα.",
+      "caution": "Δεν ταυτίζουμε αυτόματα κάθε εργαστηριακή θρομβοπενία με ένα συγκεκριμένο νόσημα.",
+      "source_ids": [
+        "ash",
+        "msd"
+      ],
+      "keywords": [
+        "αιμοπετάλια",
+        "thrombocytopenia",
+        "θρομβοπενία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-025",
+      "specialty": "pediatrics",
+      "question": "Παιδί με πυρετό: γιατί πρέπει να γνωρίζουμε ηλικία και συμπεριφορά;",
+      "framework": "Η σημασία των συμπτωμάτων και των ζωτικών σημείων μεταβάλλεται με την ηλικία, ενώ η σίτιση, η εγρήγορση και η γενική εικόνα προσφέρουν κρίσιμη πληροφορία.",
+      "verify": "Η κλινική εξέταση και η διαστρωμάτωση κινδύνου ακολουθούν ενημερωμένες παιδιατρικές οδηγίες.",
+      "caution": "Δεν εφαρμόζονται αυτούσια κριτήρια ενήλικα σε βρέφος.",
+      "source_ids": [
+        "nice",
+        "msd"
+      ],
+      "keywords": [
+        "παιδί",
+        "πυρετός",
+        "βρέφος",
+        "infant"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-026",
+      "specialty": "pediatrics",
+      "question": "Παιδιατρική αφυδάτωση: τι προσφέρει το ιστορικό πέρα από μία ζυγαριά;",
+      "framework": "Πρόσληψη υγρών, απώλειες, συμπεριφορά και οι τάσεις των κλινικών ευρημάτων δίνουν πληροφορίες πέρα από μία τυχαία μέτρηση βάρους.",
+      "verify": "Η εκτίμηση πρέπει να είναι ηλικιακά κατάλληλη και να αναζητά συνοδές παθήσεις και μεταβολές.",
+      "caution": "Το μικρό βάρος δεν αποτελεί από μόνο του απόδειξη αφυδάτωσης.",
+      "source_ids": [
+        "nice",
+        "msd"
+      ],
+      "keywords": [
+        "αφυδάτωση",
+        "διάρροια",
+        "παιδιατρική"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-027",
+      "specialty": "pediatrics",
+      "question": "Ερμηνεία παιδιατρικών ζωτικών σημείων: γιατί έχει σημασία το ηλικιακό εύρος;",
+      "framework": "Η φυσιολογία αλλάζει από το νεογνό έως τον έφηβο. Μία συχνότητα που χρειάζεται διερεύνηση σε μία ηλικία μπορεί να έχει άλλη σημασία σε άλλη.",
+      "verify": "Πρέπει να επιβεβαιώνεται η ακριβής ηλικία, η μέθοδος μέτρησης, η κατάσταση του παιδιού και οι επικυρωμένες τιμές αναφοράς.",
+      "caution": "Δεν χρησιμοποιούμε αδιακρίτως «φυσιολογικά όρια ενηλίκων» ως παιδιατρικό κανόνα.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "νεογνό",
+        "παιδιατρικά",
+        "ζωτικά",
+        "σφύξεις"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-028",
+      "specialty": "obgyn",
+      "question": "Αιμορραγία στην κύηση: ποια πληροφορία είναι πρωταρχικής σημασίας;",
+      "framework": "Η ηλικία κύησης, τα συνοδά συμπτώματα, η γενική κλινική κατάσταση και το μαιευτικό ιστορικό αλλάζουν τις ομάδες πιθανών αιτιών.",
+      "verify": "Η κατάσταση απαιτεί κατάλληλη κλινική αξιολόγηση και ειδική εφαρμογή επίκαιρων μαιευτικών οδηγιών.",
+      "caution": "Δεν υποθέτουμε μία συγκεκριμένη αιτία από την ποσότητα αιμορραγίας που περιγράφεται μόνο προφορικά.",
+      "source_ids": [
+        "acog",
+        "nice"
+      ],
+      "keywords": [
+        "κύηση",
+        "εγκυμοσύνη",
+        "αιμορραγία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-029",
+      "specialty": "obgyn",
+      "question": "Μετεγχειρητικός ή μεταγεννητικός πυρετός: γιατί δεν αρκεί η ημερομηνία;",
+      "framework": "Το χρονικό διάστημα είναι μόνο ένα μέρος της αξιολόγησης. Συμπτώματα, κλινική κατάσταση, το είδος του τοκετού ή της επέμβασης και το ιστορικό προσφέρουν επιπλέον στοιχεία.",
+      "verify": "Απαιτούνται κατάλληλες μαιευτικές ή χειρουργικές οδηγίες και έλεγχος για μη μαιευτικές αιτίες.",
+      "caution": "Αυτή η κάρτα δεν υποκαθιστά διάγνωση ή απόφαση για αντιβιοτικά.",
+      "source_ids": [
+        "acog",
+        "nice"
+      ],
+      "keywords": [
+        "λοχεία",
+        "μετά τοκετό",
+        "πυρετός"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-030",
+      "specialty": "obgyn",
+      "question": "Κοιλιακό άλγος πρώιμης κύησης: γιατί η εντόπιση δεν αποκλείει επικίνδυνη αιτία;",
+      "framework": "Οι αιτίες πρώιμης κύησης διαφέρουν και δεν ταξινομούνται μόνο από το σημείο που εντοπίζει τον πόνο η έγκυος. Η συνολική εικόνα και η κατάλληλη διερεύνηση έχουν κεντρική σημασία.",
+      "verify": "Προστίθενται η ηλικία κύησης, η κλινική σταθερότητα, τα συνοδά συμπτώματα και η εργαστηριακή/απεικονιστική αξιολόγηση.",
+      "caution": "Η εφαρμογή δεν επιβεβαιώνει ούτε αποκλείει εξωμήτριο κύηση.",
+      "source_ids": [
+        "acog",
+        "nice"
+      ],
+      "keywords": [
+        "εξωμήτριος",
+        "κύηση",
+        "πόνος"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-031",
+      "specialty": "emergency",
+      "question": "Ασταθής ασθενής: γιατί πρέπει να διαχωρίζουμε παρατήρηση από αιτιολογία;",
+      "framework": "Η επείγουσα εκτίμηση αναγνωρίζει αστάθεια και αλλαγές χωρίς να χρειάζεται άμεση βεβαιότητα για την τελική αιτία. Η διάγνωση εξελίσσεται παράλληλα με τη φροντίδα εντός ρόλου.",
+      "verify": "Συλλέγονται η χρονική εξέλιξη, η συνολική κατάσταση και αξιόπιστες μετρήσεις σύμφωνα με την εκπαίδευση.",
+      "caution": "Η εφαρμογή δεν έχει άδεια να προτείνει ατομικά επείγουσα παρέμβαση.",
+      "source_ids": [
+        "who",
+        "msd"
+      ],
+      "keywords": [
+        "αστάθεια",
+        "shock",
+        "επείγον",
+        "οξεία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-032",
+      "specialty": "emergency",
+      "question": "Πολλαπλοί τραυματίες: γιατί δεν υπάρχει αυτόματη «διαλογή» από μια φωτογραφία;",
+      "framework": "Η κατηγοριοποίηση εξαρτάται από πραγματική εκτίμηση και συγκεκριμένο εγκεκριμένο σύστημα διαλογής. Η καταμέτρηση των ατόμων και η διαχείριση πόρων προηγούνται της αυθαίρετης απόδοσης χρωμάτων.",
+      "verify": "Ο οργανωτικός συντονισμός και η σαφής επικοινωνία χρειάζονται ακόμη κι όταν τα δεδομένα είναι ελλιπή.",
+      "caution": "Δεν εφαρμόζουμε ξένο αλγόριθμο ως επίσημο πρωτόκολλο ΕΚΑΒ χωρίς έγκριση.",
+      "source_ids": [
+        "who"
+      ],
+      "keywords": [
+        "μαζικό",
+        "mci",
+        "διαλογή",
+        "τραυματίες"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-033",
+      "specialty": "emergency",
+      "question": "Παράδοση περιστατικού: ποια είναι η διαφορά ανάμεσα σε γεγονός και συμπέρασμα;",
+      "framework": "Η αναφορά πρέπει να δείχνει ποια πληροφορία παρατηρήθηκε, ποια προήλθε από τρίτο και ποια αποτελεί ερμηνεία. Έτσι ο παραλήπτης μπορεί να εκτιμήσει την ποιότητα της πληροφορίας.",
+      "verify": "Η χρονική εξέλιξη, οι επαναμετρήσεις και οι ενέργειες που όντως έγιναν έχουν σαφώς σημειωμένη προέλευση.",
+      "caution": "Οι λανθασμένα βέβαιες διαγνώσεις στην παράδοση μπορούν να προκαλέσουν γνωστική προκατάληψη.",
+      "source_ids": [
+        "who",
+        "nice"
+      ],
+      "keywords": [
+        "sbar",
+        "handover",
+        "παράδοση",
+        "επικοινωνία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-034",
+      "specialty": "pharmacology",
+      "question": "Φαρμακευτική συμφωνία: γιατί η λίστα των συνταγών δεν αρκεί;",
+      "framework": "Οι πραγματικές λήψεις μπορεί να διαφέρουν από τις γραπτές συνταγές. Σημασία έχουν δοσολογική μορφή, μη συνταγογραφούμενα, συμπληρώματα, πρόσφατες αλλαγές και αλλεργίες.",
+      "verify": "Ο επαγγελματίας πρέπει να επιβεβαιώνει πηγή και χρόνο της λίστας και να ελέγχει διασταυρώσεις.",
+      "caution": "Η βιβλιοθήκη δεν παρέχει προσωπική αλλαγή φαρμάκου.",
+      "source_ids": [
+        "ema",
+        "msd"
+      ],
+      "keywords": [
+        "φαρμακευτική",
+        "λήψη",
+        "medication reconciliation",
+        "αλληλεπιδράσεις"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-035",
+      "specialty": "pharmacology",
+      "question": "Νεφρική λειτουργία και φάρμακα: ποια πληροφορία μπορεί να είναι κρίσιμη;",
+      "framework": "Ορισμένα φάρμακα και οι μεταβολίτες τους επηρεάζονται από τη νεφρική λειτουργία. Η σημασία της εκτιμάται σε σχέση με συγκεκριμένο φάρμακο, ένδειξη και επίσημη περίληψη χαρακτηριστικών προϊόντος.",
+      "verify": "Χρειάζονται ταυτοποίηση δραστικής ουσίας, επίκαιρο SmPC, νεφρική λειτουργία και συννοσηρότητες.",
+      "caution": "Η εφαρμογή δεν υπολογίζει ατομική δόση ούτε προτείνει τροποποίηση.",
+      "source_ids": [
+        "ema",
+        "kdigo"
+      ],
+      "keywords": [
+        "δοσολογία",
+        "νεφρά",
+        "egfr",
+        "φαρμακολογία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-036",
+      "specialty": "pharmacology",
+      "question": "Αλληλεπιδράσεις: γιατί ο μηχανισμός δεν αρκεί για κλινική απόφαση;",
+      "framework": "Η θεωρητική φαρμακολογική αλληλεπίδραση αποκτά κλινική σημασία ανάλογα με την έκθεση, τη διάρκεια, τον ασθενή και άλλα φάρμακα.",
+      "verify": "Χρειάζονται έγκυρες βάσεις αλληλεπιδράσεων, καταχώριση πραγματικής αγωγής και εξατομικευμένη απόφαση ειδικού.",
+      "caution": "Δεν αποδίδουμε απόλυτη ασφάλεια ή αντένδειξη με μη ελεγμένο μονοπάτι αναζήτησης.",
+      "source_ids": [
+        "ema",
+        "msd"
+      ],
+      "keywords": [
+        "αντενδείξεις",
+        "qt",
+        "drug interaction",
+        "φάρμακα"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-037",
+      "specialty": "rheumatology",
+      "question": "Φλεγμονώδης και μηχανικός πόνος αρθρώσεων: ποια χαρακτηριστικά συγκρίνουμε;",
+      "framework": "Η σχέση με κίνηση, ακινησία, πρωινή δυσκαμψία, κατανομή, διάρκεια και συνοδά συστηματικά σημεία δίνει ενδείξεις για διαφορετικές ομάδες αιτιών.",
+      "verify": "Απαιτείται πλήρες ιστορικό, κλινική εξέταση και επιλεγμένες εξετάσεις όπου ενδείκνυται.",
+      "caution": "Καμία μεμονωμένη περιγραφή δυσκαμψίας δεν επιβεβαιώνει συγκεκριμένο ρευματικό νόσημα.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "αρθρίτιδα",
+        "αρθρώσεις",
+        "ρευματολογία",
+        "δυσκαμψία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-038",
+      "specialty": "rheumatology",
+      "question": "Θετικοί αυτοαντισώματα: γιατί δεν είναι από μόνα τους διάγνωση;",
+      "framework": "Οι ανοσολογικοί δείκτες έχουν διαφορετική ευαισθησία και ειδικότητα και χρειάζεται ερμηνεία με βάση την προδοκιμαστική πιθανότητα και το κλινικό φάσμα.",
+      "verify": "Συνεκτιμώνται συμπτώματα, εξέταση, παραλλαγές εργαστηριακής μεθόδου και άλλες αιτίες.",
+      "caution": "Η απλή παρουσία αντισώματος δεν θεμελιώνει αυτοάνοση διάγνωση.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "ana",
+        "rf",
+        "αυτοαντισώματα",
+        "autoimmune"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-039",
+      "specialty": "rheumatology",
+      "question": "Ανοσοκαταστολή: τι αλλάζει στην ερμηνεία πυρετού και λοίμωξης;",
+      "framework": "Φαρμακευτική ή νοσηματική ανοσοκαταστολή μπορεί να αλλάξει τον τρόπο παρουσίασης λοιμώξεων και τα συνήθη σημεία κινδύνου.",
+      "verify": "Απαραίτητο είναι το ακριβές ιστορικό, τα σκευάσματα και η συχνότητα παρακολούθησης από την ομάδα φροντίδας.",
+      "caution": "Δεν ισχύουν πάντα τα ίδια συμπτώματα για όλα τα ανοσοκατασταλμένα άτομα.",
+      "source_ids": [
+        "msd",
+        "idsa"
+      ],
+      "keywords": [
+        "ανοσοκαταστολή",
+        "βιολογικά",
+        "infection"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-040",
+      "specialty": "oncology",
+      "question": "Καρκινοπαθής με νέο σύμπτωμα: γιατί δεν αποδίδεται κάθε πρόβλημα στην κακοήθεια;",
+      "framework": "Η νόσος, οι επιπλοκές της, οι θεραπευτικές επιδράσεις και οι συνηθισμένες παθήσεις συνυπάρχουν. Η εξήγηση απαιτεί ευρύ κλινικό πλαίσιο.",
+      "verify": "Η ομάδα χρειάζεται τον τύπο θεραπείας, τον χρονισμό, τις συννοσηρότητες και τη συνολική ογκολογική εικόνα.",
+      "caution": "Η βιβλιοθήκη δεν υποδεικνύει εξατομικευμένη ογκολογική αγωγή.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "καρκίνος",
+        "ογκολογία",
+        "χημειοθεραπεία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-041",
+      "specialty": "oncology",
+      "question": "Ουδετεροπενία και πυρετός: γιατί χρειάζεται εξειδικευμένο πλαίσιο;",
+      "framework": "Η ανοσολογική κατάσταση και η ογκολογική θεραπεία μπορούν να αλλάξουν την παρουσίαση λοίμωξης και την εκτίμηση κινδύνου.",
+      "verify": "Χρειάζονται αξιόπιστα πρόσφατα εργαστηριακά στοιχεία, ακριβής θεραπευτικός χρόνος και εφαρμογή εγκεκριμένων τοπικών πρωτοκόλλων.",
+      "caution": "Η ψηφιακή κάρτα δεν αποτελεί εργαλείο εξατομικευμένης αντιμικροβιακής επιλογής.",
+      "source_ids": [
+        "idsa",
+        "msd"
+      ],
+      "keywords": [
+        "ουδετεροπενία",
+        "πυρετός",
+        "neutropenia"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-042",
+      "specialty": "oncology",
+      "question": "Διαχείριση τεκμηρίων: γιατί οι ογκολογικές οδηγίες χρειάζονται ημερομηνία;",
+      "framework": "Τα θεραπευτικά δεδομένα στην ογκολογία αλλάζουν ταχύτατα και εξαρτώνται από ιστολογικά/μοριακά χαρακτηριστικά που δεν είναι ισοδύναμα σε όλους τους όγκους.",
+      "verify": "Χρειάζονται ταυτοποίηση νόσου, επιβεβαίωση έκδοσης οδηγίας και έλεγχος διαθέσιμων εγκρίσεων φαρμάκων.",
+      "caution": "Ένα παλιό γενικό βιβλίο δεν αρκεί για φαρμακευτική απόφαση σε συγκεκριμένο νεόπλασμα.",
+      "source_ids": [
+        "nice",
+        "ema"
+      ],
+      "keywords": [
+        "μοριακό",
+        "όγκοι",
+        "νεόπλασμα",
+        "clinical trials"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-043",
+      "specialty": "psychiatry",
+      "question": "Σύγχυση και ψυχιατρικό ιστορικό: πώς αποφεύγεται η διαγνωστική επισκίαση;",
+      "framework": "Νέα αλλαγή γνωστικής κατάστασης μπορεί να σχετίζεται με οργανικούς, τοξικολογικούς ή νευρολογικούς παράγοντες ακόμη και σε άτομο με γνωστή ψυχιατρική νόσο.",
+      "verify": "Η αξιολόγηση περιλαμβάνει την αρχική λειτουργικότητα, χρονική έναρξη, σωματικά συμπτώματα και πρόσφατη αγωγή.",
+      "caution": "Η «παράξενη συμπεριφορά» δεν επιτρέπει ασφαλές συμπέρασμα ότι η αιτία είναι ψυχιατρική.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "σύγχυση",
+        "delirium",
+        "ψύχωση",
+        "ψυχιατρική"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-044",
+      "specialty": "psychiatry",
+      "question": "Αυτοκτονικός κίνδυνος: γιατί μία μόνο κλειστή ερώτηση δεν αρκεί;",
+      "framework": "Η εκτίμηση κινδύνου απαιτεί κατάλληλο επαγγελματικό πλαίσιο και συνεκτίμηση πολλών παραγόντων, όχι απλή αυτόματη αριθμητική βαθμολογία.",
+      "verify": "Σημασία έχουν τρέχουσα κατάσταση, ιστορικό, υποστήριξη, περιβάλλον και επαγγελματική αξιολόγηση.",
+      "caution": "Ο Mentor δεν κάνει ατομική εκτίμηση αυτοκτονικού κινδύνου ή αυτοματοποιημένη διαλογή.",
+      "source_ids": [
+        "nice",
+        "msd"
+      ],
+      "keywords": [
+        "αυτοκτονία",
+        "κίνδυνος",
+        "ψυχική",
+        "depression"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-045",
+      "specialty": "psychiatry",
+      "question": "Παράγοντες που επηρεάζουν τη συνέντευξη: γιατί η επικοινωνία είναι κλινικό εργαλείο;",
+      "framework": "Συνθήκες ιδιωτικότητας, γλωσσικά εμπόδια, φόβος, πόνος και πολιτισμικοί παράγοντες επηρεάζουν την ποιότητα των πληροφοριών που λαμβάνονται.",
+      "verify": "Το περιβάλλον και ο ρυθμός επικοινωνίας προσαρμόζονται με επαγγελματικό σεβασμό και καταγραφή αβεβαιότητας.",
+      "caution": "Η έλλειψη επικοινωνίας δεν αποτελεί από μόνη της συγκεκριμένη ψυχιατρική διάγνωση.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "ψυχιατρική",
+        "συνέντευξη",
+        "επικοινωνία"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-046",
+      "specialty": "derm",
+      "question": "Εξάνθημα: τι πληροφορεί η μορφολογία πριν από τη διάγνωση;",
+      "framework": "Ο τύπος βλάβης, η κατανομή, ο χρονισμός, οι συνοδοί παράγοντες και η συστηματική εικόνα οργανώνουν τις πιθανότητες. Η ονοματολογία βοηθά, αλλά δεν αντικαθιστά την εξέταση.",
+      "verify": "Χρειάζεται διάκριση πρωτοπαθών και δευτεροπαθών βλαβών, ιστορικό φαρμάκων και συσχετισμός συμπτωμάτων.",
+      "caution": "Μία φωτογραφία με αμφίβολη πιστότητα δεν επιτρέπει πάντα βέβαιη διάγνωση.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "εξάνθημα",
+        "δέρμα",
+        "rash",
+        "βλάβες"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-047",
+      "specialty": "derm",
+      "question": "Πορφύρα και πετέχειες: γιατί η μορφή απαιτεί κλινική συσχέτιση;",
+      "framework": "Μικρές αιμορραγικές βλάβες μπορεί να έχουν διαφορετικές αιτίες, από τοπικές έως συστηματικές, και η ερμηνεία απαιτεί το ευρύτερο κλινικό πλαίσιο.",
+      "verify": "Η εκτίμηση περιλαμβάνει γενική κατάσταση, ιστορικό, φαρμακευτικές εκθέσεις και άλλα ευρήματα.",
+      "caution": "Η αναγνώριση χρωματισμού σε φωτογραφία δεν διαγιγνώσκει αιτία.",
+      "source_ids": [
+        "msd"
+      ],
+      "keywords": [
+        "πορφύρα",
+        "πετέχειες",
+        "purpura"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-048",
+      "specialty": "derm",
+      "question": "Νέο εξάνθημα μετά από φάρμακο: γιατί είναι σημαντικό το χρονολόγιο;",
+      "framework": "Η χρονική σχέση, τα σκευάσματα, πιθανές συνυπάρχουσες λοιμώξεις και η συνολική κλινική εικόνα είναι ουσιώδη για τη διαγνωστική σκέψη.",
+      "verify": "Αναγράφονται ονόματα δραστικών ουσιών, ημερομηνίες έκθεσης και συνοδά ευρήματα.",
+      "caution": "Το χρονικό μοτίβο μόνο του δεν αποδεικνύει αλλεργία σε συγκεκριμένη ουσία.",
+      "source_ids": [
+        "msd",
+        "ema"
+      ],
+      "keywords": [
+        "δερματική",
+        "φαρμακευτικό",
+        "αλλεργία",
+        "rash"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-049",
+      "specialty": "critical",
+      "question": "Οξεοβασική διαταραχή: γιατί χρειάζεται ολόκληρο το πλαίσιο και όχι ένα pH;",
+      "framework": "Το pH δείχνει το τελικό αποτέλεσμα ισορροπίας αλλά δεν αρκεί για να περιγράψει τις επιμέρους αναπνευστικές και μεταβολικές διαδικασίες.",
+      "verify": "Η ερμηνεία απαιτεί ακριβή μονάδα μέτρησης, κατάλληλα εργαστηριακά δεδομένα, χρονισμό και την κλινική κατάσταση.",
+      "caution": "Δεν παράγεται προσωπική εντολή ρύθμισης αερισμού ή υγρών από αυτή την κάρτα.",
+      "source_ids": [
+        "msd",
+        "nice"
+      ],
+      "keywords": [
+        "ph",
+        "οξέωση",
+        "αλκάλωση",
+        "blood gas"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-050",
+      "specialty": "critical",
+      "question": "Γαλακτικό: γιατί ένας αριθμός δεν είναι συνώνυμος της σήψης;",
+      "framework": "Το γαλακτικό μπορεί να αυξηθεί σε περισσότερες από μία καταστάσεις. Η σημασία του εξαρτάται από τον χρονισμό, το πλαίσιο, τις τάσεις και τα υπόλοιπα ευρήματα.",
+      "verify": "Η ερμηνεία συνδυάζει αιμάτωση, συννοσηρότητες, φάρμακα και τεχνικούς παράγοντες.",
+      "caution": "Η μεμονωμένη τιμή δεν πιστοποιεί συγκεκριμένο μηχανισμό ή διάγνωση.",
+      "source_ids": [
+        "msd",
+        "idsa"
+      ],
+      "keywords": [
+        "γαλακτικό",
+        "lactate",
+        "σήψη",
+        "shock"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    },
+    {
+      "id": "pr-051",
+      "specialty": "critical",
+      "question": "Οξυγόνωση και αερισμός: ποια είναι η εννοιολογική διαφορά;",
+      "framework": "Η οξυγόνωση αφορά την παροχή οξυγόνου στο αίμα, ενώ ο αερισμός σχετίζεται με μεταφορά αέρα και αποβολή διοξειδίου του άνθρακα. Οι μετρήσεις τους δεν είναι εναλλάξιμες.",
+      "verify": "Ο κλινικός πρέπει να ελέγχει τι μετρά η κάθε συσκευή, αν το σήμα είναι αξιόπιστο και ποια δεδομένα λείπουν.",
+      "caution": "Κανονικός κορεσμός δεν εγγυάται επαρκή αερισμό.",
+      "source_ids": [
+        "msd",
+        "who"
+      ],
+      "keywords": [
+        "αερισμός",
+        "οξυγόνωση",
+        "co2",
+        "spo2"
+      ],
+      "review_status": "human-review-pending",
+      "clinical_use_allowed": false,
+      "citation_granularity": "topical-guideline-index-not-claim-level",
+      "audience": "education-and-reference-routing-only"
+    }
+  ]
+}
