@@ -148,6 +148,31 @@ try{
   await page.reload({waitUntil:'networkidle'});
   await page.locator('#tab-route').click();
   assert.equal(await page.locator('#coach-dialogue .coach-message').count(),1,'tutor chat is not persisted');
+  // New non-AI source-linked Greek knowledge responses and safety boundaries.
+  await page.locator('#coach-question').fill('Τι σημαίνει ABCDE;');
+  await page.locator('#coach-send').click();
+  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===3);
+  assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().textContent(),/Αεραγωγός|αεραγωγός/);
+  assert.ok(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').count()>=1);
+  assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').first().getAttribute('href'),/^https:\/\//);
+  await page.locator('#coach-question').fill('πόσα mg να δώσω σε ασθενή μου τώρα;');
+  await page.locator('#coach-send').click();
+  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===5);
+  assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().textContent(),/112|166/);
+  assert.equal(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').count(),0);
+  await page.locator('#tab-knowledge').click();
+  await page.waitForFunction(()=>document.getElementById('knowledge-count').textContent.includes('29 εκπαιδευτικές κάρτες'));
+  assert.equal(await page.locator('#knowledge-results .knowledge-card').count(),29);
+  await page.locator('#knowledge-search').fill('ανατομική ορολογία');
+  await page.waitForFunction(()=>document.querySelectorAll('#knowledge-results .knowledge-card').length>=1 &&
+    document.querySelectorAll('#knowledge-results .knowledge-card').length<29);
+  await page.locator('#knowledge-results .knowledge-card summary').first().click();
+  assert.ok(await page.locator('#knowledge-results .knowledge-card .knowledge-references a').count()>=1);
+  await page.locator('#knowledge-clear').click();
+  await page.locator('#knowledge-domain').selectOption('resuscitation');
+  assert.equal(await page.locator('#knowledge-results .knowledge-card').count(),3);
+  await page.screenshot({path:'mentor-foundation-mobile-knowledge.png',fullPage:true});
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   await page.locator('#tab-memory').click();
   const download=page.waitForEvent('download');
   await page.locator('#export-mentor').click();
