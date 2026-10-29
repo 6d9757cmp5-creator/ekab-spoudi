@@ -13,7 +13,7 @@
     resuscitation:{label:'Αναζωογόνηση',route:'mentor-ecg',keywords:['καρπα','bls','als','aed','αναζωογον','απινιδ','ανακοπ']},
     trauma:{label:'Τραύμα',route:'mentor-missions',keywords:['τραυμα','πολυτραυματ','καταγμα','αιμορραγ','phtls','ακινητοποι','εγκαυμα']},
     pharmacology:{label:'Φαρμακολογία',route:'goto-pharma',keywords:['φαρμακ','δοσολογ','χορηγησ','αντενδειξ','αδρεναλιν','drug','iv','io','im','in']},
-    certification:{label:'Προετοιμασία ΕΟΠΠΕΠ',route:'goto-eoppep',keywords:['εοπεπ','πιστοποιησ','εξετασ','ερωτησ','τεστ','quiz']},
+    certification:{label:'Προετοιμασία ΕΟΠΠΕΠ',route:'goto-eoppep',keywords:['εοππεπ','εοπεπ','πιστοποιησ','εξετασ','ερωτησ','τεστ','quiz']},
     triage:{label:'Πολλαπλοί τραυματίες',route:'mentor-triage',keywords:['mci','triage','διαλογ','μαζικ','πολλαπλ']},
     equipment:{label:'Εξοπλισμός',route:'mentor-equipment',keywords:['εξοπλισμ','φορει','ambu','bvm','monitor','συσκευ']},
     missions:{label:'Προνοσοκομειακή εξάσκηση',route:'mentor-missions',keywords:['εκab live','εκαβ live','αποστολ','ασθενοφορ','περιστατικ','διασωστ','scene']},
