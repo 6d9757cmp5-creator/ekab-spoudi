@@ -18,7 +18,7 @@ test('spreadsheet injection and quotes safely escaped in CSV',()=>{
  assert.equal(csvField('+1'),'"\'+1"');
  assert.equal(csvField('test"quote'),'"test""quote"');
  const line=toCsv([{passage_id:'abc'}]);
- assert.match(line,/pending/); // header includes field; no claim of approval
+ assert.match(line,/review_status/); // review status is explicitly a column, not an automatic approval
 });
 test('entire existing review corpus receives exactly one pending record per passage',async()=>{
  const result=await generate();
