@@ -334,7 +334,8 @@ export function mountMentorHologram(doc=globalThis.document){
     render3d.dispose();
   };
   globalThis.addEventListener("pagehide",dispose,{once:true});
-  setView("3d");
+  // A real-time 3D prototype remains optional; the approved cinematic visual is the default.
+  setView("photo");
   return {supported:true,setView,rotate,dispose};
 }
 if(typeof document!=="undefined")mountMentorHologram(document);
