@@ -12244,25 +12244,27 @@
       },
       "sha256": "35a59934b48766621f0be481663aa2c62842529b316e40283dd89d9ef1f3563b"
     },
-    "sem_d_18_1_extra": {
-      "filename": "semester-d-18-01-extra-el.svg",
-      "localPath": "assets/education/semester-d-18-01-extra-el.svg",
-      "title": "Σενάριο τροχαίου — συμπληρωματική αναγνώριση (18-1)",
-      "author": "ΕΚΑΒ Σπουδή · πρωτότυπη σχηματική εκπαιδευτική εικόνα",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.ems.gov/what-is-ems.html",
-      "caption": "Κεφάλαιο 18-01: Γάντια προστασίας · Φορείο · Ασφαλής περιοχή. Σύντομες ελληνικές ονομασίες με βέλη προς τα αντίστοιχα εκπαιδευτικά σύμβολα.",
-      "originalArtwork": true,
-      "sourcePageCheckedFor": [
-        "General background context; independent confirmation of clinical details pending."
-      ],
-      "clinicalReview": "pending",
-      "visualReview": {
-        "scope": "Browser-rendered after commit 13c9ed9: verified scene vehicle, cone, ambulance, fuel hazard, fire engine, casualty, gloves, stretcher and safety-zone labels; no XML parse errors. Independent clinical review remains pending."
-      },
-      "sha256": "3d31603b017258041e1d792299985de9e50058ba7c0d02ec87b1cc9aff9a200a"
+    "sem_d_18_1_extra":   {
+    "filename": "semester-d-18-01-extra-el.svg",
+    "localPath": "assets/education/semester-d-18-01-extra-el.svg",
+    "title": "Σενάριο τροχαίου — συμπληρωματική αναγνώριση (18-1)",
+    "author": "ΕΚΑΒ Σπουδή · πρωτότυπη σχηματική εκπαιδευτική εικόνα",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "page": "https://road-safety.transport.ec.europa.eu/document/download/2976be95-90f3-4a5c-8045-d9893b5f75a2_en?filename=Road_Safety_Thematic_Report_Post_impact_care_2023.pdf",
+    "caption": "Κεφάλαιο 18-01: ζεύγος γαντιών προστασίας · φορείο · οριοθετημένη ασφαλής περιοχή με ένδειξη ελέγχου. Ενδεικτικά σύμβολα· δεν αποτελούν οδηγία ΜΑΠ ή διαχείρισης σκηνής.",
+    "originalArtwork": true,
+    "sourcePageCheckedFor": [
+      "European Road Safety Observatory, Road Safety Thematic Report — Post-impact care (2023), section 3.4: broad context for establishing a safe working area after a road crash. Not Greek scene-management guidance and not pictogram validation.",
+      "OSHA, PPE for Emergency Response and Recovery Workers: general PPE context only; not a glove-selection standard for Greek ambulance practice."
+    ],
+    "clinicalReview": "pending",
+    "visualReview": {
+      "date": "2026-10-29",
+      "scope": "Current SVG rendered locally with CairoSVG at 1110×656 and inspected as a raster. Replaced the hand with a heart under “protective gloves” by a pair of glove pictograms, and the warning triangle/cross under “safe area” by a bounded area with a check mark; retained the appropriate stretcher. Checked arrow endpoints, label fit, margins and visible overlap. No PPE selection or scene-securing procedure is implied. Independent operational review remains pending."
     },
+    "sha256": "5f54d3769ca8e6e8a9f6fde368a6c0f3cb9dd98fdfb3e8672a7c5bc3da5486ee"
+  },
     "sem_d_18_2_objects": {
       "filename": "semester-d-18-02-objects-el.svg",
       "localPath": "assets/education/semester-d-18-02-objects-el.svg",
