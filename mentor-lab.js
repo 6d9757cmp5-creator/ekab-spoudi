@@ -300,7 +300,7 @@ function wireMentorPresence(){
     if(!supported)return;
     const previous=voiceSelect.value;
     voiceSelect.replaceChildren();
-    const option=make('option',null,'Αυτόματη ελληνική φωνή');
+    const option=make('option',null,'Αυτόματη ανδρική ελληνική φωνή');
     option.value='';voiceSelect.append(option);
     for(const voice of listGreekVoices(window).filter(isKnownMaleGreekVoice)){
       const choice=make('option',null,voice.name+(voice.localService?' · Συσκευή':' · Browser'));
