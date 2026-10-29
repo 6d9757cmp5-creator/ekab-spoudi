@@ -34,6 +34,28 @@ function zoom(imgUrl,alt){
  document.body.append(dialog);
  if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
 }
+// A registry fetch failure must not silently remove every lesson image.
+// Offer a local retry without reloading the page or resetting study progress.
+function showRegistryFailure(error){
+ let notice=document.getElementById('saek-image-registry-error');
+ if(!notice){
+  notice=el('div','saek-source-fallback');
+  notice.id='saek-image-registry-error';
+  notice.setAttribute('role','alert');
+  const message=el('p','','Οι εκπαιδευτικές εικόνες δεν φορτώθηκαν. Τα μαθήματα και η πρόοδός σας παραμένουν διαθέσιμα.');
+  const retry=el('button','saek-source-action','Επανάληψη φόρτωσης εικόνων');
+  retry.type='button';
+  retry.addEventListener('click',async()=>{
+   retry.disabled=true;
+   try{await start();}finally{retry.disabled=false;}
+  });
+  notice.append(message,retry);
+  const target=document.querySelector('.saek-lesson-heading')||document.querySelector('.reader-title');
+  if(target)target.insertAdjacentElement('afterend',notice);
+  else document.body.prepend(notice);
+ }
+ console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',error);
+}
 function render(asset,lessonId){
  const fig=el('figure','saek-source-figure');
  const label=el('h4','saek-source-title',asset.title);
@@ -97,7 +119,7 @@ async function start(){
   if(!response.ok)throw new Error('image audit unavailable');
   const registry=await response.json();
   const course=registry.courses.find(c=>String(c.course).padStart(2,'0')===match[1]);
-  if(!course)return;
+  if(!course)throw new Error('image audit course not found');
   for(const chapter of course.chapters){
    if(!chapter.images||!chapter.images.length)continue;
    const id=chapter.anchor.replace('#','');
@@ -118,7 +140,8 @@ async function start(){
    if(paragraph)paragraph.insertAdjacentElement('afterend',wrap);
    else body.insertBefore(wrap,body.firstChild);
   }
- }catch(err){console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',err);}
+  document.getElementById('saek-image-registry-error')?.remove();
+ }catch(err){showRegistryFailure(err);}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
 else start();
