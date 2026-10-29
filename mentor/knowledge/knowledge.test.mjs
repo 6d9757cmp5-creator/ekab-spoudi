@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {KNOWLEDGE_CARDS,KNOWLEDGE_PACK,KNOWLEDGE_DOMAINS,KNOWLEDGE_SOURCES} from './foundation-pack.mjs';
 import {assertKnowledgePack,normalizeGreek,searchKnowledge,isHighRiskRequest,knowledgeResponse} from './search.mjs';
 
-test('29 original Greek educator-authored cards, nine real source links, zero clinical approval',()=>{
+test('30 original Greek educator-authored cards, nine real source links, zero clinical approval',()=>{
  assert.equal(assertKnowledgePack(),true);
- assert.equal(KNOWLEDGE_CARDS.length,29);
+ assert.equal(KNOWLEDGE_CARDS.length,30);
  assert.equal(Object.keys(KNOWLEDGE_SOURCES).length,9);
  assert.equal(Object.keys(KNOWLEDGE_DOMAINS).length,8);
  assert.equal(KNOWLEDGE_PACK.model_training,false);
@@ -19,7 +19,7 @@ test('Does not allow forged clinical signoff, duplicate cards or missing source 
  assert.throws(()=>assertKnowledgePack({...KNOWLEDGE_PACK,production_clinical_approval:true}),/approval/);
  assert.throws(()=>assertKnowledgePack({...KNOWLEDGE_PACK,model_training:true}),/approval/);
  assert.throws(()=>assertKnowledgePack({...KNOWLEDGE_PACK,knowledge_cards:[...KNOWLEDGE_CARDS.slice(0,-1),KNOWLEDGE_CARDS[0]]}),/duplicate|invalid-knowledge/);
- assert.throws(()=>assertKnowledgePack({...KNOWLEDGE_PACK,knowledge_cards:KNOWLEDGE_CARDS.slice(0,28)}),/count/);
+ assert.throws(()=>assertKnowledgePack({...KNOWLEDGE_PACK,knowledge_cards:KNOWLEDGE_CARDS.slice(0,29)}),/count/);
 });
 test('Search understands Greek accents, exact terminology and common acronyms',()=>{
  assert.equal(normalizeGreek('Αεραγωγός'),'αεραγωγοσ');
