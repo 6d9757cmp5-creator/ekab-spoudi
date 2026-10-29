@@ -14,6 +14,8 @@ const fs = require('node:fs');
     const registry = JSON.parse(fs.readFileSync('saek-image-audit-2026.json', 'utf8'));
     for (const [id, asset] of Object.entries(registry.assets)) {
       if (!asset.localPath) continue;
+      // PNG assets have no SVG text tree; they are covered by raster/image checks.
+      if (asset.localPath.toLowerCase().endsWith('.png')) continue;
       await page.setContent(fs.readFileSync(asset.localPath, 'utf8'));
       await page.evaluate(() => document.fonts.ready);
       const overflow = await page.evaluate(() => {
@@ -21,7 +23,13 @@ const fs = require('node:fs');
         if (!svg) throw new Error('Missing SVG');
         const v = svg.viewBox.baseVal;
         return [...svg.querySelectorAll('text')].map(text => {
+          // Imported SVGs can retain hidden translation/alternate-label layers.
+          // getBBox() may return a zero rectangle for non-rendered text; exclude it.
+          if (getComputedStyle(text).display === 'none' ||
+              getComputedStyle(text).visibility === 'hidden' ||
+              Number(getComputedStyle(text).opacity) === 0) return null;
           const box = text.getBBox();
+          if (!box.width || !box.height) return null;
           // Include nested transforms, but remove CSS viewport scaling.
           const matrix = svg.getScreenCTM().inverse().multiply(text.getScreenCTM());
           const corners = [[box.x, box.y], [box.x + box.width, box.y],
@@ -32,8 +40,8 @@ const fs = require('node:fs');
           const right = Math.max(...corners.map(p => p.x));
           const bottom = Math.max(...corners.map(p => p.y));
           return { text: text.textContent, left, top, right, bottom };
-        }).filter(box => box.left < v.x - 0.5 || box.top < v.y - 0.5 ||
-          box.right > v.x + v.width + 0.5 || box.bottom > v.y + v.height + 0.5);
+        }).filter(box => box && (box.left < v.x - 0.5 || box.top < v.y - 0.5 ||
+          box.right > v.x + v.width + 0.5 || box.bottom > v.y + v.height + 0.5));
       });
       records.push({ id, path: asset.localPath, overflow });
     }
