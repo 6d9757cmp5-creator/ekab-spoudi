@@ -2821,7 +2821,46 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Ημιζωή: χρόνος μείωσης ποσότητας/συγκέντρωσης κατά 50% υπό συγκεκριμένη κινητική",
+          "Ημερήσια δόση: συνολική χορήγηση ανά 24 ώρες",
+          "Επαναληπτική δόση: επόμενη δόση σε προγραμματισμένο διάστημα"
+        ],
+        "sources": [
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "limits": "ΠΡΟΣΟΧΗ: Η σχέση t½=0.693/k ισχύει για απομάκρυνση πρώτης τάξης. Οι όροι ημερήσια/επαναληπτική δόση δεν ορίζουν ασφαλές δοσολογικό σχήμα· δεν επιτρέπεται εξαγωγή κλινικής δόσης από την απάντηση.",
+        "fullScientificApproval": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Ο ορισμός της ημιζωής συμφωνεί με Merck. Ημερήσια/επαναληπτική δόση έχουν λογική εκπαιδευτική απόδοση αλλά δεν επαληθεύτηκαν από την ίδια ειδική πηγή."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Ημιζωή: χρόνος μείωσης ποσότητας/συγκέντρωσης κατά 50% υπό συγκεκριμένη κινητική",
+          "Ημερήσια δόση: συνολική χορήγηση ανά 24 ώρες",
+          "Επαναληπτική δόση: επόμενη δόση σε προγραμματισμένο διάστημα"
+        ],
+        "sources": [
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "limits": "ΠΡΟΣΟΧΗ: Η σχέση t½=0.693/k ισχύει για απομάκρυνση πρώτης τάξης. Οι όροι ημερήσια/επαναληπτική δόση δεν ορίζουν ασφαλές δοσολογικό σχήμα· δεν επιτρέπεται εξαγωγή κλινικής δόσης από την απάντηση.",
+        "fullScientificApproval": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "partial_agreement_with_unverified_dosing_terms",
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-067",
@@ -2835,7 +2874,44 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Επιγλωττίδα: ελαστικός χόνδρος στην είσοδο λάρυγγα",
+          "Κατά την κατάποση συμβάλλει στη σύγκλειση λαρυγγικής εισόδου και αποτροπή εισόδου τροφής στον αεραγωγό"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system"
+        ],
+        "limits": "Δεν επιβεβαιώθηκε η νεότερη επίσημη διατύπωση ΕΟΠΠΕΠ. Η προστασία κατάποσης είναι πολυπαραγοντική, όχι αποκλειστική δράση της επιγλωττίδας.",
+        "fullScientificApproval": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Τα δύο σημεία της πλήρους αποθηκευμένης απάντησης συμφωνούν με OpenStax §22.1."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Επιγλωττίδα: ελαστικός χόνδρος στην είσοδο λάρυγγα",
+          "Κατά την κατάποση συμβάλλει στη σύγκλειση λαρυγγικής εισόδου και αποτροπή εισόδου τροφής στον αεραγωγό"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system"
+        ],
+        "limits": "Δεν επιβεβαιώθηκε η νεότερη επίσημη διατύπωση ΕΟΠΠΕΠ. Η προστασία κατάποσης είναι πολυπαραγοντική, όχι αποκλειστική δράση της επιγλωττίδας.",
+        "fullScientificApproval": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_consistent",
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-068",
@@ -2849,7 +2925,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Δέρμα, βλεννογόνοι, κροσσωτή κάθαρση, γαστρικό οξύ, φυσιολογική χλωρίδα ως φραγμοί",
+          "Φαγοκύτταρα και συμπλήρωμα ως μηχανισμοί έμφυτης ανοσίας",
+          "Β/Τ λεμφοκύτταρα ως επίκτητη ανοσία"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-2-barrier-defenses-and-the-innate-immune-response",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-3-the-adaptive-immune-response-t-lymphocytes-and-their-functional-types"
+        ],
+        "limits": "ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΣΑΦΕΙΑ: στην εκφώνηση «φραγμοί» απαιτείται διαχωρισμός φυσικών/χημικών/βιολογικών φραγμών από ανοσολογικές αποκρίσεις· δεν επαληθεύτηκε επίσημο λυσάρι.",
+        "fullScientificApproval": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Οι επιμέρους μηχανισμοί είναι γενικά συμβατοί με OpenStax, αλλά η απάντηση αναμιγνύει τους εξωτερικούς αμυντικούς φραγμούς με την κυτταρική έμφυτη και την επίκτητη ανοσία."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Δέρμα, βλεννογόνοι, κροσσωτή κάθαρση, γαστρικό οξύ, φυσιολογική χλωρίδα ως φραγμοί",
+          "Φαγοκύτταρα και συμπλήρωμα ως μηχανισμοί έμφυτης ανοσίας",
+          "Β/Τ λεμφοκύτταρα ως επίκτητη ανοσία"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-2-barrier-defenses-and-the-innate-immune-response",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-3-the-adaptive-immune-response-t-lymphocytes-and-their-functional-types"
+        ],
+        "limits": "ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΣΑΦΕΙΑ: στην εκφώνηση «φραγμοί» απαιτείται διαχωρισμός φυσικών/χημικών/βιολογικών φραγμών από ανοσολογικές αποκρίσεις· δεν επαληθεύτηκε επίσημο λυσάρι.",
+        "fullScientificApproval": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "scope_category_conflation_requires_clarification",
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-069",
@@ -2863,7 +2980,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Θέση ήπατος κάτω από διάφραγμα, κυρίως δεξιό υποχόνδριο/επιγάστριο",
+          "Κλασική τριμερής περιγραφή άνω/κάτω/οπίσθια έναντι σύγχρονης διαφραγματικής/σπλαχνικής",
+          "Σύνδεσμοι/περιτοναϊκές ανακάμψεις και ηπατικές φλέβες ως στοιχεία στήριξης"
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK500014/",
+          "https://olympias.lib.uoi.gr/jspui/bitstream/teiep/6821/1/NURS.pdf"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ έλεγχος συγκεκριμένης σελίδας του ελληνικού PDF για τρεις επιφάνειες, βάρος και σχήμα. Η μάζα εξαρτάται από φύλο/σωματομετρία· η σύγχρονη ανατομική ορολογία δεν ταυτίζεται με την τριμερή ιστορική ταξινόμηση.",
+        "fullScientificApproval": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Η θέση και οι ανατομικές περιοχές/περιτοναϊκές ανακάμψεις συμφωνούν με NCBI NBK500014. Η τριμερής ορολογία και εύρος 1400–1800 g αναφέρονται στην αποθηκευμένη πηγή ΤΕΙ αλλά το πρωτογενές PDF δεν επαληθεύτηκε εκ νέου σε αυτή την εκτέλεση."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Θέση ήπατος κάτω από διάφραγμα, κυρίως δεξιό υποχόνδριο/επιγάστριο",
+          "Κλασική τριμερής περιγραφή άνω/κάτω/οπίσθια έναντι σύγχρονης διαφραγματικής/σπλαχνικής",
+          "Σύνδεσμοι/περιτοναϊκές ανακάμψεις και ηπατικές φλέβες ως στοιχεία στήριξης"
+        ],
+        "sources": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK500014/",
+          "https://olympias.lib.uoi.gr/jspui/bitstream/teiep/6821/1/NURS.pdf"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ έλεγχος συγκεκριμένης σελίδας του ελληνικού PDF για τρεις επιφάνειες, βάρος και σχήμα. Η μάζα εξαρτάται από φύλο/σωματομετρία· η σύγχρονη ανατομική ορολογία δεν ταυτίζεται με την τριμερή ιστορική ταξινόμηση.",
+        "fullScientificApproval": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "partial_agreement_with_unverified_primary_pdf",
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-070",
@@ -2877,7 +3035,46 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "P = κολπική εκπόλωση, QRS = κοιλιακή εκπόλωση, T = κοιλιακή επαναπόλωση",
+          "Κολπική επαναπόλωση καλύπτεται συνήθως από QRS",
+          "PR interval: αρχή P έως αρχή QRS, QT interval: αρχή QRS έως τέλος T"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-2-cardiac-muscle-and-electrical-activity"
+        ],
+        "limits": "ΣΗΜΑΝΤΙΚΗ ΟΡΟΛΟΓΙΚΗ ΔΙΟΡΘΩΣΗ: το PR interval μετρά από αρχή P έως αρχή QRS και το QT από αρχή QRS έως τέλος T (εκπόλωση και επαναπόλωση κοιλιών). «Συνολική ηλεκτρική κοιλιακή δραστηριότητα» είναι αόριστη απόδοση. Χρειάζεται διόρθωση στην εφαρμογή, όχι κλινική διάγνωση από αυτό.",
+        "fullScientificApproval": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Οι κυματομορφές P/QRS/T συμφωνούν με OpenStax §19.2. Η αρχική απάντηση ονομάζει ασαφώς «PR» και «QT» χωρίς να δηλώνει ρητά ότι είναι διαστήματα και τα όριά τους."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "P = κολπική εκπόλωση, QRS = κοιλιακή εκπόλωση, T = κοιλιακή επαναπόλωση",
+          "Κολπική επαναπόλωση καλύπτεται συνήθως από QRS",
+          "PR interval: αρχή P έως αρχή QRS, QT interval: αρχή QRS έως τέλος T"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-2-cardiac-muscle-and-electrical-activity"
+        ],
+        "limits": "ΣΗΜΑΝΤΙΚΗ ΟΡΟΛΟΓΙΚΗ ΔΙΟΡΘΩΣΗ: το PR interval μετρά από αρχή P έως αρχή QRS και το QT από αρχή QRS έως τέλος T (εκπόλωση και επαναπόλωση κοιλιών). «Συνολική ηλεκτρική κοιλιακή δραστηριότητα» είναι αόριστη απόδοση. Χρειάζεται διόρθωση στην εφαρμογή, όχι κλινική διάγνωση από αυτό.",
+        "fullScientificApproval": false,
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "waveforms_consistent_intervals_need_precision",
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-071",
