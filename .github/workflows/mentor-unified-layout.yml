@@ -1,0 +1,60 @@
+name: Mentor unified module tree verification
+on:
+  push:
+    branches:
+      - refactor/mentor-unified-module-tree
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  module-layout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify all relocated Mentor sources and public compatibility paths
+        run: |
+          node --test scripts/test-mentor-unified-structure.mjs
+          for file in mentor/app/*.mjs mentor/avatar/*.mjs mentor/voice/*.mjs mentor/modules/*.js; do
+            node --check "$file"
+          done
+          for file in mentor-lab.js mentor-home.js mentor-voice.mjs mentor-avatar-live.mjs mentor-3d.mjs mentor-cinematic.mjs mentor-ecg.js mentor-live.js mentor-oral.js mentor-library.js mentor-readonly.js mentor-scenarios.js; do
+            node --check "$file"
+          done
+      - name: Voice, legacy avatar, WebGL and cinematic regression
+        run: |
+          node --test scripts/test-mentor-voice.mjs
+          node --test mentor-avatar-live.test.mjs
+          node --test scripts/test-mentor-3d.mjs
+          node --test scripts/test-mentor-cinematic.mjs
+          node --test scripts/test-mentor-quick-answer.mjs
+      - name: Run isolated Mentor core tests (no legacy grade writes)
+        run: |
+          node --test mentor/core/*.test.mjs
+          node --test mentor/scenario-atlas/catalog.test.mjs
+      - name: Install Playwright (Chromium and WebKit)
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Verify home and Mentor 3D on desktop and mobile
+        run: node scripts/app-load-smoke.mjs
+      - name: Verify Mentor scenarios and persistence on mobile Chromium
+        run: node scripts/verify-mentor-browser.mjs
+        env:
+          MENTOR_TEST_BROWSER: chromium
+      - name: Verify Mentor scenarios and persistence on mobile WebKit
+        run: node scripts/verify-mentor-browser.mjs
+        env:
+          MENTOR_TEST_BROWSER: webkit
+      - name: Keep legacy grading/progress/sync and public pages untouched
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          CHANGED="$(git diff --name-only origin/main...HEAD)"
+          printf '%s\n' "$CHANGED"
+          if printf '%s\n' "$CHANGED" | grep -Eq '^(index\.html|sw\.js|app\.js|progress\.js|sync-local\.js|sync-model\.js|cloud-sync\.js|study-scheduler\.js|notes-store\.js|saek-exam-engine\.js|ai-grading-client\.js|functions/answer-grader/|workers/answer-grader/|official_questions\.json)$'; then
+            echo "Protected existing learner data or application code changed"
+            exit 1
+          fi
