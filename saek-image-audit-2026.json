@@ -578,7 +578,7 @@
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact pushed SVG at d3ceb0f visually checked in browser at 1366×768: all labels and leader lines legible; bladder above prostate; urethra passes through prostate and penis; vas deferens route from epididymis around bladder to seminal vesicle is shown. Mobile rendering and independent clinical/anatomic review remain pending."
+        "scope": "Exact current local SVG rendered at 1200 px wide and individually inspected. Bladder/prostate/urethra/penis and testis/epididymis/vas deferens/seminal vesicle labels and leaders correspond; no visible clipping or label overlap. Schematic lateral view, not to scale. Independent anatomical review remains pending."
       },
       "subjectCompleteness": "partial",
       "sha256": "5d57047b8caec1a3b90f7721467510924c7c55bd2deccb8fde2349c5bb97496c"
@@ -815,8 +815,8 @@
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "date": "2026-10-26",
-        "scope": "Exact SVG rendered with CairoSVG at native 1100×680 and visually inspected. Removed unsupported numbered question sequence and claim of a coordination-center protocol; replaced it with unnumbered information cards based on EKAB guidance: callback phone, area/address/landmark, event and number of people, approximate age/sex if known. Footer advises not to hang up first. Text fits; map entrance label points to the pin; no clipping or overlap observed. Educational summary only, not an official call script; independent operational review pending."
+        "date": "2026-10-29",
+        "scope": "Exact current local SVG rendered at native 1100×680 and individually inspected after the 166-call correction. Unnumbered cards show callback phone, area/address/landmark, incident/number of people, and approximate age/sex when known; no fixed sequence is asserted. Map pin/entrance, labels and footer fit without visible overlap or clipping. Follows EKAB public guidance but is not an official script/protocol; independent operational review remains pending."
       },
       "subjectCompleteness": "partial",
       "sha256": "e3a4c65311463230916a9e7807ae6a4cbcd882ed3dca843c1b92ad5262fb5d73"
@@ -1506,7 +1506,7 @@
       "subjectCompleteness": "partial",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact rendered SVG at 1280×720 (commit e7aa4c0): ambulance, relay/network station, Coordination Center and bidirectional message/confirmation arrows are visually distinct; bottom note is readable. Found the ARIA description claimed weak-signal zones and interference-source labels that were not drawn; corrected it to describe the visible network and footer only. No frequencies or actual network architecture are claimed."
+        "scope": "Exact current local SVG rendered at 1200 px wide and individually inspected. Ambulance crew, relay station and Coordination Center are distinct; outbound message and return confirmation arrows are visible and correctly directed, and the fallback-communications note is legible. Diagram does not define radio range or operational protocol. Independent communications/operational review remains pending."
       },
       "sha256": "8d7ad3cfe8766fee10585e0b6200ae1304752fa3d51e495b2610fff0752e9655"
     },
@@ -2118,8 +2118,8 @@
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Rendered in browser at 1280x720. The original fracture leader line ended on the dressing and the wound target was unclear. Corrected the bleeding, wound, fracture and bandage targets; reordered the two left labels so the wound/bleeding leaders reach their respective drawn mark without crossing. The diagram remains illustrative and is not clinically approved."
+        "date": "2026-10-29",
+        "scope": "Exact current local SVG rendered at 1200 px wide and individually inspected. Greek/English labels and four leaders target the wound, bleeding mark, fracture mark and dressing; lines remain visually distinct, with no visible clipping or overlap. Illustrative terminology only, not diagnosis or treatment. Independent clinical review remains pending."
       },
       "sha256": "805d5c3f1d22291c802d18b40165ecbc829a70674a1a6ac3a0b418539f406397"
     },
@@ -2158,8 +2158,8 @@
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Unique image individually inspected in exact pushed browser render at 1280px on 2026-10-29. Found the boat hull and wave line extending over the panel edge and the boat label crossing the hull; raised and relabeled the boat so all elements fit within the panel. The pushed render confirms the helicopter and boat remain legible within separate panels. Mobile layout, source, subject-completeness, and safety review pending."
+        "date": "2026-10-29",
+        "scope": "Exact current local SVG rendered at 1200 px wide and individually inspected. Helicopter and watercraft symbols are distinct and match the labels; hull, waves and callouts remain within their panels, without visible clipping or label crossover. Coordination and access caveats are legible. Schematic only, not an approach/landing/departure procedure; independent operational review remains pending."
       },
       "sha256": "623cf8cd8855de53a784ed001c5c257d8b8d021979ad6ed624069b83f3368669"
     },
