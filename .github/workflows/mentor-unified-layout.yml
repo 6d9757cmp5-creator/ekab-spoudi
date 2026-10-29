@@ -1,5 +1,7 @@
 name: MENTOR unified directory validation
 on:
+  push:
+    branches: ['refactor/mentor-unified-folder-20261030']
   pull_request:
     paths:
       - 'mentor/**'
