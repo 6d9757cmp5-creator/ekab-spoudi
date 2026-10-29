@@ -35,13 +35,17 @@ for key, item in sorted(data["assets"].items()):
     if local:
         try:
             path = Path(local)
-            root = ET.fromstring(path.read_bytes())
-            strings = [" ".join("".join(e.itertext()).split())
-                       for e in root.iter()
-                       if e.tag == "{http://www.w3.org/2000/svg}text"]
-            entry["text_candidates"] = [s for s in strings if len(s) > 82 or
-                re.search("δεν αποτελεί|εκπαιδευτική απεικόνιση|συμβουλεύσου", s, re.I)]
-            raster = cairosvg.svg2png(url=str(path), output_width=380)
+            source = path.read_bytes()
+            if source.startswith(b"\x89PNG\r\n\x1a\n"):
+                raster = source
+            else:
+                root = ET.fromstring(source)
+                strings = [" ".join("".join(e.itertext()).split())
+                           for e in root.iter()
+                           if e.tag == "{http://www.w3.org/2000/svg}text"]
+                entry["text_candidates"] = [s for s in strings if len(s) > 82 or
+                    re.search("δεν αποτελεί|εκπαιδευτική απεικόνιση|συμβουλεύσου", s, re.I)]
+                raster = cairosvg.svg2png(bytestring=source, output_width=380)
             with Image.open(io.BytesIO(raster)) as rendered:
                 rendered.thumbnail((382, 225))
                 converted = rendered.convert("RGBA")
@@ -75,7 +79,7 @@ report = {"total": len(records), "rendered_local": sum(r["rendered"] for r in re
           "scope": "render and overlay-triage only; not visual or medical certification"}
 (output/"review-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2),
                                          encoding="utf-8")
-print("SVG contact sheets:", len(pages), "; entries:", len(records),
+print("Image contact sheets:", len(pages), "; entries:", len(records),
       "; rendered:", report["rendered_local"], "; external:", report["external_not_verified"],
       "; errors:", len(errors), "; text candidates:", report["possible_text_overlays"])
 sys.exit(1 if errors or len(records) != 649 else 0)
