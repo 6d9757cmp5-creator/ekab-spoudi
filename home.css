@@ -388,3 +388,31 @@ html[data-theme="dark"] .home-mentor-presence{background:radial-gradient(circle 
  .mentor-cinema-controls{gap:4px}
 }
 @media(prefers-reduced-motion:reduce){.mentor-cinema.is-speaking .mentor-cinema-wave i{animation:none!important}}
+
+/* Always-visible true-3D MENTOR on home. User can hide the character, not the lesson tools. */
+.mentor-home-visual-shell{min-height:335px;display:flex;flex-direction:column;align-items:stretch;gap:7px}
+.mentor-home-visual-shell[hidden]{display:none!important}
+.mentor-home-presence-frame{display:block;width:100%;height:315px;min-height:315px;border:1px solid #3dc8f8aa;border-radius:21px;box-shadow:0 0 25px #14b6eb40;background:radial-gradient(ellipse,#125181,#041427)}
+#mentor-home-3d-status{color:#b9e6f9;font-size:.7rem;text-align:center;line-height:1.35}
+.mentor-home-visibility{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap}
+.mentor-home-visibility .home-mentor-kicker{margin:0}
+#mentor-home-visual-toggle{font:inherit;font-size:.69rem;font-weight:760;padding:7px 10px;border:1px solid #6bc9edaa;border-radius:10px;background:#0b4761;color:#e1f7fe;cursor:pointer}
+.mentor-home-question-form{display:grid;gap:8px;margin:13px 0 9px;color:#e3f8ff}
+.mentor-home-question-form label{font-size:.8rem;font-weight:800}
+.mentor-home-question-controls{display:flex;gap:8px;min-width:0}
+.mentor-home-question-controls input{flex:1;min-width:0;min-height:43px;background:#071f34;color:#ecfaff;border:1px solid #6ab9e8;border-radius:11px;padding:9px 12px;font:inherit;font-size:.85rem}
+.mentor-home-question-controls button{font:inherit;border:1px solid #88ddfb;border-radius:10px;padding:8px 14px;background:#1379aa;color:#fff;font-weight:800;cursor:pointer}
+.mentor-home-answer{margin:8px 0!important;padding:13px!important;border:1px solid #599ed19c;border-radius:12px;background:#082d47;color:#f2faff!important;font-size:.85rem;line-height:1.55}
+.mentor-home-answer[hidden],.mentor-home-answer-source[hidden]{display:none!important}
+.mentor-home-answer-source{font-size:.76rem;color:#9deaff;text-decoration:underline}
+.mentor-home-answer-speak{margin:4px 0 6px;font:inherit;font-size:.73rem;border:1px solid #6bd3e9;border-radius:10px;background:#0d5a79;color:#eafaff;padding:8px 11px}
+.mentor-home-answer-speak:disabled{opacity:.6}
+#mentor-home-visual-toggle:focus-visible,.mentor-home-question-controls button:focus-visible,.mentor-home-answer-speak:focus-visible{outline:3px solid #ffda80;outline-offset:2px}
+.home-mentor-presence.mentor-cinema:has(.mentor-home-visual-shell[hidden]){grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "voice"}
+@media(min-width:651px){.home-mentor-presence.mentor-cinema{grid-template-columns:minmax(230px,36%) minmax(0,1fr)}}
+@media(max-width:650px){
+ .home-mentor-presence.mentor-cinema{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"portrait" "copy" "voice";gap:11px;padding:15px 14px}
+ .mentor-home-visual-shell{min-height:305px}
+ .mentor-home-presence-frame{height:290px;min-height:290px}
+ .home-mentor-presence.mentor-cinema:has(.mentor-home-visual-shell[hidden]){grid-template-areas:"copy" "voice"}
+}
