@@ -12,17 +12,21 @@ test('preferences accept only known goals, modes and minute options',()=>{
   assert.deepEqual(normalizeStudyPreferences(null),{goals:['saek'],minutes:25,mode:'guided'});
 });
 
-test('all goal plans retain the selected total minutes',()=>{
+test('all selected goals SHARE exactly one 10/15/25/30-minute budget',()=>{
   for(const mode of ['guided','practice','exam'])
-    for(const minutes of [10,15,25,30]){
-      const plan=planForGoals({goals:['saek','eoppep','seminars'],mode,minutes});
-      assert.equal(plan.length,3);
-      for(const goal of plan){
-        assert.equal(goal.tasks.reduce((n,x)=>n+x.minutes,0),minutes);
-        assert.ok(goal.tasks.every(x=>x.minutes>=0));
-        assert.ok(/\.html$/.test(goal.href));
+    for(const minutes of [10,15,25,30])
+      for(const goals of [['saek'],['saek','eoppep'],['saek','eoppep','seminars']]){
+        const plan=planForGoals({goals,mode,minutes});
+        assert.equal(plan.length,goals.length);
+        assert.equal(plan.reduce((n,g)=>n+g.total_minutes,0),minutes,'total across goals');
+        for(const goal of plan){
+          assert.equal(goal.tasks.reduce((n,x)=>n+x.minutes,0),goal.total_minutes,'time per goal');
+          assert.ok(goal.tasks.every(x=>x.minutes>=1));
+          assert.ok(/\.html$/.test(goal.href));
+        }
       }
-    }
+  assert.equal(planForGoals({goals:['saek','eoppep','seminars'],minutes:15,mode:'exam'}).reduce((n,g)=>n+g.total_minutes,0),15);
+  assert.deepEqual(planForGoals({goals:[],minutes:30,mode:'guided'}),[]);
 });
 
 test('preferences are isolated from every educational progress key',()=>{
