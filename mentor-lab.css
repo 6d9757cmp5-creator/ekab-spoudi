@@ -181,3 +181,30 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
  .knowledge-results{grid-template-columns:1fr}
  .knowledge-controls{grid-template-columns:1fr}
 }
+
+
+/* MENTOR OS physician-oriented source directory: review-pending learning content */
+.clinical-results{display:grid;gap:13px;margin:17px 0}
+.clinical-entry{background:var(--surface2);border:1px solid var(--border);border-radius:14px;
+ padding:18px;overflow-wrap:anywhere}
+.clinical-entry h3{font-size:1.08rem;line-height:1.4;margin:5px 0 14px}
+.clinical-entry-body{display:grid;gap:6px}
+.clinical-entry-body strong{font-size:.88rem}
+.clinical-entry-body>p{line-height:1.55;margin:0 0 12px}
+.clinical-caution{border-radius:9px;padding:11px 14px;margin:2px 0 13px;
+ background:var(--surface);border-left:3px solid #b08a41}
+.clinical-caution p{margin:5px 0 0;font-size:.88rem}
+.clinical-citations{display:flex;flex-wrap:wrap;gap:9px 14px;
+ padding-top:11px;border-top:1px solid var(--border)}
+.clinical-citations small{display:block;flex-basis:100%;color:var(--muted)}
+.clinical-citations a{font-size:.85rem;font-weight:700;text-underline-offset:3px}
+.clinical-entry>.muted{margin:15px 0 0;font-size:.79rem}
+.clinical-empty{padding:18px;background:var(--surface2);border:1px dashed var(--border);border-radius:12px}
+.clinical-empty a{display:block;margin:9px 0}
+.clinical-source-row{padding:10px 0;border-bottom:1px solid var(--border);display:grid;gap:4px}
+.clinical-source-row:last-child{border:0}
+.clinical-source-row a{font-weight:700;overflow-wrap:anywhere}
+.clinical-source-row small{font-size:.79rem}
+.coach-reference-links{display:flex;flex-wrap:wrap;gap:8px 13px;margin-top:8px}
+.coach-reference-links a{font-size:.81rem;font-weight:700}
+#clinical-status[data-error="true"]{color:var(--danger)}
