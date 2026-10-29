@@ -225,7 +225,12 @@ async function coachAsk(intent,topic,userText){
     lastCoachReply='Δεν μπόρεσα να διαβάσω τις δοκιμαστικές καταγραφές Mentor. Η υπάρχουσα πρόοδος δεν άλλαξε.';
   }
   addCoachMessage('assistant',lastCoachReply);
-  function wireMentorPresence(){
+  const greeting=$('mentor-presence-line');
+  if(greeting)greeting.textContent=lastCoachReply;
+  const visual=$('mentor-avatar');
+  if(visual)visual.classList.remove('is-speaking');
+}
+function wireMentorPresence(){
   const heroForm=$('mentor-hero-form');
   const heroQuestion=$('mentor-hero-question');
   const voiceStatus=$('mentor-voice-status');
@@ -269,11 +274,6 @@ async function coachAsk(intent,topic,userText){
     voiceStatus.textContent='Η ανάγνωση σταμάτησε.';
   });
   if(!supported)voiceStatus.textContent='Η φωνή δεν υποστηρίζεται εδώ. Η συνομιλία γραπτώς παραμένει διαθέσιμη.';
-}
-const greeting=$('mentor-presence-line');
-  if(greeting)greeting.textContent=lastCoachReply;
-  const visual=$('mentor-avatar');
-  if(visual)visual.classList.remove('is-speaking');
 }
 function wireCoach(){
   const prompt=$('coach-question');
