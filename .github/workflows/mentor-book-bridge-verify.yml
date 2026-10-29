@@ -1,5 +1,15 @@
 name: MENTOR seven-book review bridge
 on:
+  push:
+    paths:
+      - 'mentor/review/**'
+      - 'mentor/knowledge/**'
+      - 'mentor/review-corpus/**'
+      - 'mentor-lab.html'
+      - 'mentor-lab.js'
+      - 'mentor-lab.css'
+      - 'scripts/verify-mentor-browser.mjs'
+      - '.github/workflows/mentor-book-bridge-verify.yml'
   pull_request:
     paths:
       - 'mentor/review/**'
