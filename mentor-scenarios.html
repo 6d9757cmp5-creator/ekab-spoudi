@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="el"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a39">
+<title>MENTOR OS · Άτλας προνοσοκομειακών σεναρίων</title>
+<style>
+:root{--bg:#ecf3f7;--card:#fff;--ink:#17313e;--muted:#55707b;--line:#d6e3e9;--blue:#155e74;--teal:#087b77}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.54 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--blue)}a:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #13a9c7;outline-offset:3px}
+.shell{width:min(1180px,100%);margin:auto;padding:19px 17px 62px}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:750;margin-bottom:16px}
+.hero{padding:26px;border-radius:22px;background:linear-gradient(120deg,#0c3549,#135a6e);color:white}
+.hero small{text-transform:uppercase;letter-spacing:.1em;font-weight:850;color:#b9e3ec}
+.hero h1{font-size:clamp(1.7rem,4.8vw,2.5rem);margin:9px 0;line-height:1.2}
+.hero p{max-width:890px;color:#e3f4f5;line-height:1.65}
+.notice{background:var(--card);border-left:5px solid #d09b3c;border-radius:12px;padding:14px 17px;margin:17px 0}
+.notice strong{display:block;margin-bottom:5px}.notice p{margin:0;line-height:1.5}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}
+.metrics div{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:15px}
+.metrics strong{display:block;font-size:1.9rem;font-variant-numeric:tabular-nums}
+.metrics span{font-size:.78rem;color:var(--muted)}
+.panel{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:18px;margin:16px 0}
+.panel h2{font-size:1.14rem;margin:0 0 10px}
+.filters{display:grid;grid-template-columns:minmax(170px,2fr) repeat(3,minmax(130px,1fr));gap:10px}
+.filter label{display:block;font-size:.81rem;font-weight:800;margin-bottom:6px}
+.filter input,.filter select{width:100%;padding:11px 10px;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.filter-report{color:var(--muted);font-size:.9rem;font-weight:750;margin:14px 0 0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.case{border:1px solid var(--line);background:var(--card);border-radius:13px;min-width:0;overflow:hidden}
+.case summary{cursor:pointer;padding:16px;min-height:103px;list-style:none}
+.case summary::-webkit-details-marker{display:none}
+.case-head{display:flex;align-items:flex-start;gap:11px}
+.case-id{display:inline-block;background:#e5f2f5;color:#155e74;font:750 .7rem/1.6 ui-monospace,SFMono-Regular,monospace;padding:3px 6px;border-radius:8px;white-space:nowrap}
+.case-title{font-weight:850;line-height:1.42}
+.case-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;font-size:.73rem}
+.case-tags span{border-radius:20px;padding:4px 8px;background:#edf3f5;color:#45616c}
+.case-body{border-top:1px solid var(--line);padding:4px 16px 18px}
+.case-body h3{font-size:.95rem;margin:17px 0 9px}
+.case-body ol{padding-left:22px;margin:6px 0 13px}.case-body li{margin-bottom:8px}
+.case-body p{line-height:1.5;font-size:.9rem}
+.case-body a{overflow-wrap:anywhere}
+.case-warning{color:#9a651e;font-weight:800}
+.case-roles{font-size:.85rem;color:var(--muted)}
+.more{width:100%;margin:15px auto;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.more[hidden]{display:none}
+.refs{display:grid;gap:10px}.refs article{border-top:1px solid var(--line);padding-top:8px}
+.refs p{color:var(--muted);font-size:.87rem;margin:4px 0}
+.footer{color:var(--muted);font-size:.8rem;margin-top:23px;line-height:1.5}
+@media(max-width:780px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filter:first-child{grid-column:1/-1}.cards{grid-template-columns:1fr}}
+@media(max-width:480px){.hero{padding:18px}.panel{padding:14px}.filters{grid-template-columns:1fr}.filter:first-child{grid-column:auto}.metrics div{padding:11px}.metrics strong{font-size:1.5rem}}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1d28;--card:#15303d;--ink:#e5f3f6;--muted:#abc3cd;--line:#3c5864;--blue:#9cdeed}.case-id{background:#214a5b;color:#d6f2fb}.case-tags span{background:#264653;color:#d5e8ee}.case-warning{color:#f6cc87}}
+</style>
+<script type="module" src="mentor-scenarios.js" defer></script>
+</head><body>
+<main class="shell">
+<nav class="top"><a href="mentor-lab.html">← MENTOR OS</a><a href="ui-tools/mentor-roadmap.html">Χάρτης λειτουργιών</a></nav>
+<header class="hero">
+<small>MENTOR · προσωπική ιατρική ακαδημία · χωρίς AI</small>
+<h1>Άτλας προνοσοκομειακών σεναρίων</h1>
+<p>Ελληνικός κατάλογος περιστατικών για μελέτη, σχεδιασμό προσομοιώσεων και οργάνωση δεξιοτήτων. Από την καθημερινή κλήση έως σύνθετες διακομιδές, παιδιατρικά και μαζικές καταστροφές.</p>
+</header>
+<section class="notice" role="note">
+<strong>Σενάρια καταγεγραμμένα, όχι ιατρικά εγκεκριμένα ή πλήρως διαδραστικά.</strong>
+<p>Κάθε εγγραφή είναι προς σχεδιασμό και ανεξάρτητο επιστημονικό έλεγχο. Δεν δίνει δόσεις, επεμβατικές οδηγίες, διαγνώσεις, κλινική διαλογή ή πρόβλεψη ζωτικών. Οι ευρείες πηγές παρακάτω δεν πιστοποιούν κάθε σενάριο. Δεν χρησιμοποιείται AI, πραγματικά δεδομένα ασθενών ή επίσημη βαθμολόγηση.</p>
+</section>
+<section class="metrics" aria-label="Σύνοψη άτλαντα">
+<div><strong id="atlas-categories">—</strong><span>Θεματικές οικογένειες</span></div>
+<div><strong id="atlas-scenarios">—</strong><span>Καταχωρισμένα σενάρια προς σχεδιασμό</span></div>
+<div><strong id="atlas-reviewed">0</strong><span>Ανεξάρτητα εγκεκριμένα κλινικά σενάρια</span></div>
+</section>
+<section class="panel">
+<h2>Αναζήτησε περιστατικό</h2>
+<form class="filters" id="atlas-form" role="search">
+<div class="filter"><label for="atlas-search">Λέξη ή θέμα</label><input type="search" id="atlas-search" maxlength="120" autocomplete="off" placeholder="π.χ. τροχαίο, ανακοπή, τοκετός"></div>
+<div class="filter"><label for="atlas-category">Κατηγορία</label><select id="atlas-category"><option value="all">Όλες</option></select></div>
+<div class="filter"><label for="atlas-level">Δυσκολία σχεδιασμού</label><select id="atlas-level"><option value="all">Όλα τα επίπεδα</option><option value="foundation">Βασικό</option><option value="intermediate">Μεσαίο</option><option value="advanced">Προχωρημένο</option></select></div>
+<div class="filter"><label for="atlas-population">Πληθυσμός καταλόγου</label><select id="atlas-population"><option value="all">Όλοι</option><option value="adult">Ενήλικες</option><option value="child">Παιδιά</option><option value="infant">Βρέφη</option><option value="pregnant">Κύηση</option><option value="multi">Πολλαπλοί</option><option value="older">Ηλικιωμένοι</option><option value="neonate">Νεογνά</option></select></div>
+</form>
+<p class="filter-report" id="atlas-report" role="status" aria-live="polite">Φόρτωση καταλόγου…</p>
+</section>
+<section aria-label="Εγγραφές εκπαιδευτικών σεναρίων"><div id="atlas-results" class="cards"></div><button id="atlas-more" class="more" type="button" hidden>Περισσότερα σενάρια</button></section>
+<section class="panel">
+<h2>Διακριτοί ρόλοι — όχι αυθαίρετες ισοδυναμίες</h2>
+<p><strong>Διασώστης ΕΚΑΒ:</strong> εκπαιδευτικό αντικείμενο και αρμοδιότητες σύμφωνα με το ελληνικό πλαίσιο που χρειάζεται ειδική νομική επαλήθευση.</p>
+<p><strong>Paramedic άλλης χώρας:</strong> ποικίλει ανά χώρα, επαγγελματική άδεια και τοπικά πρωτόκολλα.</p>
+<p><strong>Ιατρός:</strong> επιπλέον κλινικές γνώσεις και πράξεις απαιτούν έλεγχο από ειδικούς. Ο άτλας δεν εκχωρεί δικαιώματα και δεν παρέχει εντολές αντιμετώπισης.</p>
+</section>
+<section class="panel"><h2>Επίσημες πηγές για έλεγχο — όχι εγκεκριμένες παραπομπές ανά περιστατικό</h2><div class="refs" id="atlas-refs"></div></section>
+<footer class="footer">Τα στοιχεία προβάλλονται χωρίς αποθήκευση. Δεν αλλάζει η υπάρχουσα βαθμολόγηση, η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ ή το cloud sync. Το AI θα συνδεθεί μόνο μετά την ολοκλήρωση, τις δοκιμές και τη δική σου ρητή έγκριση.</footer>
+</main></body></html>
