@@ -107,3 +107,22 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .study-goal-card h4{margin:0 0 12px}.study-task{margin:7px 0;font-size:.9rem;color:var(--muted)}
 .study-goal-link{display:inline-block;margin-top:9px;color:var(--brand);font-weight:750}
 .study-goal-choices input:focus-visible,.study-goal-link:focus-visible,#study-path-mode:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
+
+/* Guided Mentor tutor: intentionally separated from clinical judgment or grades. */
+.coach-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}
+.coach-quick{min-height:44px;border:1px solid var(--border);background:var(--surface2);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit;font-weight:700;cursor:pointer}
+.coach-quick:hover{border-color:var(--brand2)}
+.coach-dialogue{display:flex;flex-direction:column;gap:10px;max-height:470px;overflow-y:auto;padding:13px;border-radius:12px;border:1px solid var(--border);background:var(--surface2)}
+.coach-message{border:1px solid var(--border);background:var(--surface);border-radius:11px;padding:11px 13px;width:fit-content;max-width:94%}
+.coach-message-user{align-self:flex-end;background:#e1f4f7}
+.coach-message-assistant{align-self:flex-start}
+.coach-message strong{display:block;font-size:.77rem;margin-bottom:5px}
+.coach-message p{margin:0;font-size:.91rem;line-height:1.55}
+.coach-form{margin-top:14px}
+.coach-form label{display:block;font-weight:750;margin-bottom:7px}
+.coach-question-line{display:flex;gap:9px;align-items:stretch}
+.coach-question-line input{flex:1;min-width:0;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font:inherit;padding:11px;min-height:46px}
+.coach-speech-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.coach-quick:focus-visible,.coach-question-line input:focus-visible,.coach-question-line button:focus-visible,.coach-speech-actions button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
+@media(max-width:620px){.coach-question-line{flex-wrap:wrap}.coach-question-line button{width:100%}.coach-message{max-width:100%}}
+@media(prefers-color-scheme:dark){.coach-message-user{background:#1b4856}}

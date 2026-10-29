@@ -135,6 +135,29 @@
       <h3>Το προσωπικό μου πλάνο</h3><div id="selected-goals-plan" class="study-goals-plan" aria-live="polite"></div>
       <p class="small muted">Το πλάνο είναι ενδεικτικό. Η ανάγνωση δεν σημαίνει γνώση και η δοκιμαστική αυτοαξιολόγηση δεν αποτελεί επίσημη εξέταση.</p>
     </div>
+    <section class="panel" aria-labelledby="coach-title">
+      <h3 id="coach-title">Συζήτησε με τον Mentor · εκπαιδευτική καθοδήγηση</h3>
+      <p class="muted small">Ο Mentor προσαρμόζει τις προτάσεις του μόνο στις δικές σου δοκιμαστικές ασκήσεις. Πρόκειται για περιορισμένο διάλογο με έτοιμες εκπαιδευτικές απαντήσεις, όχι για ζωντανό γιατρό ή πλήρες AI. Δεν αξιολογεί ελεύθερες ιατρικές απαντήσεις.</p>
+      <div class="coach-shortcuts" role="group" aria-label="Γρήγορες ερωτήσεις προς τον Mentor">
+        <button type="button" class="coach-quick" data-coach-intent="focus">Τι να μελετήσω;</button>
+        <button type="button" class="coach-quick" data-coach-intent="progress">Πώς τα πηγαίνω;</button>
+        <button type="button" class="coach-quick" data-coach-intent="explain">Εξήγησέ μου μια δεξιότητα</button>
+        <button type="button" class="coach-quick" data-coach-intent="exercise">Δώσε μου άσκηση</button>
+      </div>
+      <div id="coach-dialogue" class="coach-dialogue" role="log" aria-live="polite" aria-label="Εκπαιδευτική συνομιλία Mentor"></div>
+      <form id="coach-form" class="coach-form">
+        <label for="coach-question">Η ερώτησή μου</label>
+        <div class="coach-question-line">
+          <input id="coach-question" type="text" autocomplete="off" maxlength="300" placeholder="π.χ. Τι να μελετήσω στην ασφάλεια σκηνής;">
+          <button type="submit" class="action" id="coach-send">Ρώτησε</button>
+        </div>
+      </form>
+      <div class="coach-speech-actions">
+        <button type="button" class="action secondary" id="coach-speak">🔊 Άκουσε την απάντηση</button>
+        <button type="button" class="action secondary" id="coach-stop">Διακοπή ομιλίας</button>
+      </div>
+      <p class="small muted">Η συνομιλία αυτής της καρτέλας δεν αποθηκεύεται και δεν πηγαίνει στο cloud. Η προφορική ανάγνωση είναι προαιρετική και εξαρτάται από τις φωνές της συσκευής.</p>
+    </section>
     <div class="panel"><h3>Υπάρχουσα πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ</h3>
       <p>Ο Mentor δεν αντιγράφει παλαιούς βαθμούς. Μπορείς προαιρετικά να δεις μόνο έναν συνοπτικό αριθμό καταγραφών ανάγνωσης και προσπάθειας.</p>
       <button type="button" class="action secondary" id="read-legacy">Προβολή υπάρχουσας προόδου · μόνο ανάγνωση</button>
