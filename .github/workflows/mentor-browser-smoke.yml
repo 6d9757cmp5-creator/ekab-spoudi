@@ -1,5 +1,7 @@
 name: Mentor browser simulation
 on:
+  push:
+    branches: [feature/mentor-verified-knowledge-pack]
   pull_request:
     paths:
       - 'mentor-lab.html'
