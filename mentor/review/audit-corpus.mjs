@@ -69,10 +69,10 @@ export async function auditReviewCorpus({directory=DIR,root=ROOT}={}){
      pages===passages.length?'PDF-extraction-page-not-manually-verified':'mixed-needs-review',
    high_risk_topic_passages:samples,
    flags:[
-    'rights-signoff-pending','clinical-review-pending',
+    'owner-attests-permission-documentary-scope-not-verified','clinical-review-pending',
     ...(wholeBook>0?['chapter-locator-missing']:[]),
     ...(item.source_id==='who-bec'?['WHO-2018-needs-current-2025-crosscheck']:[]),
-    ...(item.source_id==='medical-surgical-nursing'?['OpenStax-prior-written-AI-permission-required']:[])
+    ...(item.source_id==='medical-surgical-nursing'?['OpenStax-prior-written-AI-permission-requires-documentary-check']:[])
    ]
   });
  }
@@ -109,7 +109,7 @@ export function auditMarkdown(r){
   '## Εκκρεμεί υποχρεωτικά',
   '1. Κλινικός έλεγχος ανά κείμενο με ισχύοντα ελληνικά προνοσοκομειακά πρωτόκολλα.',
   '2. Νέοι δείκτες κεφαλαίων για τα πέντε Pressbooks, και έλεγχος σελίδων των δύο PDF.',
-  '3. Έγκριση δικαιωμάτων ανά έκδοση/εικόνα. OpenStax χρειάζεται προηγούμενη γραπτή άδεια για AI. WHO έχει περιορισμό μη εμπορικής χρήσης.',
+  '3. Ο κάτοχος του έργου δήλωσε ότι διαθέτει άδεια για όλες τις πηγές, συμπεριλαμβανομένων OpenStax και WHO. Η δήλωση δεν είναι ανεξάρτητα ελεγμένο αποδεικτικό και απαιτείται τεκμηρίωση εύρους/όρων πριν από παραγωγή.',
   '4. Έλεγχος της έκδοσης WHO 2018 σε σχέση με τις ενημερώσεις WHO 2025.',
   '5. Καμία πραγματική ενεργοποίηση RAG ή παραγωγή ιατρικών απαντήσεων πριν από τα παραπάνω.',
   '',
