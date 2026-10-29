@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-29",
+  "state": "human-review-pending",
+  "assets": [
+    {
+      "path": "mentor/knowledge/sources.json",
+      "kind": "source-metadata",
+      "git_blob_sha": "13bead942ecbf48d757e12fdcf31d1411f6337fa",
+      "publisher_origin": "Verified publisher URLs in each catalog record",
+      "author": "OpenAI-assisted bibliography compilation",
+      "license": "Metadata/link references; individual external sources retain their own terms",
+      "medical_review": "not-performed",
+      "license_review": "external-publisher-links-only",
+      "qa": [
+        "schema",
+        "source-url-host-policy"
+      ],
+      "approver": null
+    },
+    {
+      "path": "mentor/knowledge/greek-cards.json",
+      "kind": "original-educational-text",
+      "git_blob_sha": "49cc99a00bade9f392315353bf21aa9aa2e8fbdf",
+      "publisher_origin": "Synthesis of high-level anatomy, EMS systems and education concepts, with topical publisher references per card",
+      "author": "OpenAI-assisted original Greek educational prompts",
+      "license": "Original authored educational summaries; not excerpts from the referenced sources",
+      "medical_review": "human-review-pending",
+      "license_review": "external-source-text-not-copied",
+      "qa": [
+        "schema",
+        "Greek search",
+        "source IDs",
+        "no protocols/doses",
+        "read-only UI pending browser QA"
+      ],
+      "approver": null
+    }
+  ],
+  "note": "Automatic structural, link and search checks are not scientific approval. No new book PDF, images or external guideline algorithms were uploaded. The knowledge tab is isolated in a draft PR and has no permission to write official grades."
+}
