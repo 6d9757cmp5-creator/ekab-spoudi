@@ -152,7 +152,7 @@ async function start(){
    const wrap=el('details','saek-source-section');
    const summary=el('summary','saek-source-summary','Εικόνες κεφαλαίου ('+chapter.images.length+')');
    wrap.append(summary);
-   const note=el('p','saek-source-note','Εκπαιδευτικές εικόνες για μελέτη. Δεν υποκαθιστούν επίσημες οδηγίες ή κλινικά πρωτόκολλα.');
+   const note=el('p','saek-source-note','Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ή ανεξάρτητη επιστημονική έγκριση. Οι εικόνες δεν υποκαθιστούν επίσημες οδηγίες.');
    wrap.append(note);
    const assets=chapter.images.map(key=>registry.assets[key]).filter(Boolean);
    const gallery=assets.map(asset=>({url:sourceUrl(asset),alt:asset.title+'. '+asset.caption}));
