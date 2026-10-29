@@ -176,6 +176,30 @@ async function start(){
    if(mobile.addEventListener)mobile.addEventListener('change',positionVisuals);
    else if(mobile.addListener)mobile.addListener(positionVisuals);
   }
+  // Make the images discoverable from the course header without changing
+  // any clinical-review flag or the user's stored reading progress.
+  const firstImageChapter=course.chapters.find(ch=>Array.isArray(ch.images)&&ch.images.length);
+  const imageCount=course.chapters.reduce((sum,ch)=>sum+(Array.isArray(ch.images)?ch.images.length:0),0);
+  const heading=document.querySelector('.saek-lesson-heading')||document.querySelector('h2.reader-title');
+  if(firstImageChapter&&heading&&!document.getElementById('saek-course-images-shortcut')){
+   const bar=el('div','saek-source-actions');
+   bar.id='saek-course-images-shortcut';
+   const shortcut=el('a','saek-source-action','Δες εικόνες μαθήματος ('+imageCount+')');
+   shortcut.href=firstImageChapter.anchor;
+   shortcut.setAttribute('aria-label','Μετάβαση στις εκπαιδευτικές εικόνες του μαθήματος');
+   shortcut.addEventListener('click',event=>{
+    const tocLink=document.querySelector('.chapter-toc a[href="'+firstImageChapter.anchor+'"]');
+    const chapterNode=document.getElementById(firstImageChapter.anchor.replace('#',''));
+    if(tocLink){
+     event.preventDefault();
+     tocLink.click();
+     if(chapterNode)chapterNode.open=true;
+    }else if(chapterNode){chapterNode.open=true;}
+   });
+   const pending=el('span','small muted','Εικόνες σε επιστημονικό έλεγχο — όχι πιστοποιημένες οδηγίες.');
+   bar.append(shortcut,pending);
+   heading.insertAdjacentElement('afterend',bar);
+  }
   document.getElementById('saek-image-registry-error')?.remove();
  }catch(err){showRegistryFailure(err);}
 }
