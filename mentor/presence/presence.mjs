@@ -10,6 +10,9 @@ import {
  STORAGE_KEY,CORNERS,layoutOf,clampSize,clampPosition,snapToEdges,cornerPosition,
  nearestCorner,dockedBox,normalizePrefs,parsePrefs,serializePrefs
 } from "./presence-state.mjs";
+import {
+ CONTEXT_KEY,examMode,sanitizeAnnouncement,readPageContext,describeContext,composeQuestion,EXAM_REFUSAL
+} from "../context/bridge.mjs";
 
 const FRAME_SRC="mentor-presence.html";
 const STYLE_HREF=new URL("./presence.css",import.meta.url).href;
@@ -48,13 +51,24 @@ function boot(){
  const live=el("div",{class:"emp-live",role:"status","aria-live":"polite"});
 
  const grip=el("button",{type:"button",class:"emp-grip",
-  "aria-label":"MENTOR. Μετακίνηση: σύρε ή χρησιμοποίησε τα βέλη"},[el("span",{text:"MENTOR"})]);
+  "aria-label":"MENTOR. Μετακίνηση: σύρε ή χρησιμοποίησε τα βέλη"},[el("span",{"aria-hidden":"true",text:"⠿"}),el("span",{class:"emp-grip-text",text:"MENTOR"})]);
+ const askBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Ρώτα τον MENTOR","aria-expanded":"false","aria-controls":"ekab-mentor-ask",text:"💬"});
  const menuBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Επιλογές θέσης MENTOR","aria-haspopup":"true","aria-expanded":"false",text:"⋯"});
  const minBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Ελαχιστοποίηση MENTOR",text:"–"});
  const hideBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Απόκρυψη MENTOR",text:"✕"});
- const bar=el("div",{class:"emp-bar"},[grip,menuBtn,minBtn,hideBtn]);
+ const bar=el("div",{class:"emp-bar"},[grip,askBtn,menuBtn,minBtn,hideBtn]);
  const status=el("p",{class:"emp-status",role:"status",text:"Φόρτωση 3D εκπαιδευτή…"});
- const stage=el("div",{class:"emp-stage"},[status]);
+ const ctxLine=el("p",{class:"emp-ctx"});
+ const ctxToggle=el("button",{type:"button",class:"emp-link","aria-pressed":"true",text:"Απενεργοποίηση"});
+ const askInput=el("input",{type:"text",class:"emp-input",maxlength:"300",autocomplete:"off","aria-label":"Ερώτηση προς τον MENTOR",placeholder:"Π.χ. Τι είναι η ΚΑΡΠΑ;"});
+ const askSend=el("button",{type:"submit",class:"emp-send",text:"Ρώτα"});
+ const askForm=el("form",{class:"emp-form"},[askInput,askSend]);
+ const selBtn=el("button",{type:"button",class:"emp-link",text:"Εξήγησε την επιλογή μου"});
+ const askAnswer=el("p",{class:"emp-answer",role:"status","aria-live":"polite"});
+ const askSource=el("a",{class:"emp-link",target:"_blank",rel:"noopener noreferrer",hidden:true,text:"Πηγή ορισμού"});
+ const askPanel=el("div",{class:"emp-ask",id:"ekab-mentor-ask",hidden:true},
+  [el("div",{class:"emp-ctxrow"},[ctxLine,ctxToggle]),askForm,selBtn,askAnswer,askSource]);
+ const stage=el("div",{class:"emp-stage"},[status,askPanel]);
  const resize=el("button",{type:"button",class:"emp-resize","aria-label":"Αλλαγή μεγέθους MENTOR (βέλη ή + και −)"});
  const menu=el("div",{class:"emp-menu",role:"group","aria-label":"Θέση MENTOR",hidden:true});
  const root=el("aside",{class:"ekab-mentor-presence","aria-label":"MENTOR — ψηφιακός εκπαιδευτής",hidden:true},[bar,stage,resize,menu]);
@@ -200,6 +214,61 @@ function boot(){
  document.addEventListener("pointerdown",event=>{
   if(menuOpen&&!menu.contains(event.target)&&event.target!==menuBtn)closeMenu();
  },true);
+
+ // ---------- ask + page context ----------
+ let contextOn=true,announced=null,askOpen=false;
+ try{contextOn=JSON.parse(localStorage.getItem(CONTEXT_KEY)||"{}").enabled!==false;}catch{}
+ const isExam=()=>examMode(location.pathname,announced);
+ const contextState=()=>({enabled:contextOn,exam:isExam(),announced,page:readPageContext(document,location)});
+
+ function refreshContext(){
+  ctxLine.textContent=describeContext(contextState());
+  ctxToggle.textContent=contextOn?"Απενεργοποίηση":"Ενεργοποίηση";
+  ctxToggle.setAttribute("aria-pressed",String(contextOn));
+  ctxToggle.setAttribute("aria-label",contextOn?"Απενεργοποίηση χρήσης πλαισίου σελίδας":"Ενεργοποίηση χρήσης πλαισίου σελίδας");
+ }
+ function setAsk(open){
+  askOpen=open;
+  askPanel.hidden=!open;
+  askBtn.setAttribute("aria-expanded",String(open));
+  if(open){refreshContext();askInput.focus({preventScroll:true});}
+ }
+ function showAnswer(text,source){
+  askAnswer.textContent=text;
+  askSource.hidden=!source;
+  if(source)askSource.href=source;
+ }
+ async function ask(selection){
+  const context=contextState();
+  if(context.exam){showAnswer(EXAM_REFUSAL,null);return;}
+  const {text}=composeQuestion({question:askInput.value,selection,context});
+  if(!text){showAnswer("Γράψε μια ερώτηση ή επίλεξε κείμενο στη σελίδα.",null);return;}
+  askSend.disabled=selBtn.disabled=true;
+  try{
+   const qa=await import("../core/quick-answer.mjs");
+   const items=await qa.loadMentorTermLibrary();
+   const r=qa.answerStudyQuestion(text,{items});
+   showAnswer(r.text,r.source);
+  }catch{showAnswer("Δεν μπόρεσα να φορτώσω τη βιβλιοθήκη όρων. Δοκίμασε ξανά.",null);}
+  finally{askSend.disabled=selBtn.disabled=false;}
+ }
+ askBtn.addEventListener("click",()=>setAsk(!askOpen));
+ askForm.addEventListener("submit",event=>{event.preventDefault();ask("");});
+ // Keeps the learner's text selection alive when the button is pressed.
+ selBtn.addEventListener("pointerdown",event=>event.preventDefault());
+ selBtn.addEventListener("click",()=>{
+  const picked=String(window.getSelection?.()?.toString()||"").trim();
+  if(!picked){showAnswer("Επίλεξε πρώτα κείμενο στη σελίδα και μετά πάτησε το κουμπί.",null);return;}
+  ask(picked);
+ });
+ ctxToggle.addEventListener("click",()=>{
+  contextOn=!contextOn;
+  try{localStorage.setItem(CONTEXT_KEY,JSON.stringify({enabled:contextOn}));}catch{}
+  refreshContext();
+  announce(contextOn?"Το πλαίσιο σελίδας ενεργοποιήθηκε":"Το πλαίσιο σελίδας απενεργοποιήθηκε");
+ });
+ window.addEventListener("mentor:context",event=>{announced=sanitizeAnnouncement(event.detail);refreshContext();});
+ refreshContext();
 
  // ---------- drag ----------
  function floatingStart(){

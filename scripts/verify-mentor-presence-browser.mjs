@@ -126,6 +126,44 @@ try{
    check(tag('Alt+Shift+M restores a hidden MENTOR'),await page.locator('.ekab-mentor-presence').isVisible());
   }
 
+  // ----- Ask + Context Bridge -----
+  await page.evaluate(()=>window.EkabMentorPresence.float());
+  const barBtns=await page.locator('.emp-bar button').evaluateAll(bs=>bs.map(b=>{const r=b.getBoundingClientRect();return {l:r.left,r:r.right,w:r.width};}));
+  const barBox=await box('.emp-bar');
+  check(tag('title-bar buttons fit inside the widget'),barBtns.every(b=>b.w>=28&&b.l>=barBox.x-1&&b.r<=barBox.x+barBox.width+1));
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  check(tag('ask panel opens and shows the page context in use'),await page.locator('.emp-ask').isVisible()&&/Πλαίσιο σελίδας: .+/.test(await page.locator('.emp-ctx').textContent()),await page.locator('.emp-ctx').textContent());
+  await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
+  await page.locator('.emp-send').click();
+  await page.waitForFunction(()=>document.querySelector('.emp-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
+  check(tag('local source-backed Greek answer appears'),true);
+  await page.evaluate(()=>{const p=document.querySelector('h1,h2,p');const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);});
+  await page.locator('.emp-ask .emp-link',{hasText:'Εξήγησε την επιλογή'}).click();
+  await page.waitForFunction(()=>document.querySelector('.emp-answer')?.textContent?.length>10,null,{timeout:15000});
+  check(tag('explain-selection answers from the selected text only'),true);
+  await page.evaluate(()=>getSelection().removeAllRanges());
+  await page.locator('.emp-ask .emp-link',{hasText:'Εξήγησε την επιλογή'}).click();
+  check(tag('explain-selection without a selection asks for one'),/Επίλεξε πρώτα/.test(await page.locator('.emp-answer').textContent()));
+  await page.locator('.emp-ctxrow .emp-link').click();
+  check(tag('learner can switch page context off'),/απενεργοποιημένο/.test(await page.locator('.emp-ctx').textContent()));
+  await page.reload({waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  check(tag('context-off choice persists after refresh'),/απενεργοποιημένο/.test(await page.locator('.emp-ctx').textContent()));
+  await page.locator('.emp-ctxrow .emp-link').click();
+  await page.evaluate(()=>window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'anatomy-object',label:'Καρδιά'}})));
+  check(tag('page can announce a whitelisted study object'),/Καρδιά/.test(await page.locator('.emp-ctx').textContent()));
+  await page.evaluate(()=>window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'password',label:'hunter2'}})));
+  check(tag('unknown announcements are ignored'),!/hunter2/.test(await page.locator('.emp-ctx').textContent()));
+  await page.goto(base+'/written_exam.html',{waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
+  await page.locator('.emp-send').click();
+  check(tag('exam page: MENTOR refuses to answer'),/δεν μπορώ να δώσω απαντήσεις/.test(await page.locator('.emp-answer').textContent())&&/εξέταση/.test(await page.locator('.emp-ctx').textContent()));
+  await page.goto(base+page2,{waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+
   await page.evaluate(()=>window.EkabMentorPresence.dock());
   const dock=await box('.ekab-mentor-presence');
   check(tag('docked mode fills a side panel / bottom sheet'),isMobile?(Math.abs(dock.width-width)<2&&dock.y>height*0.4):(dock.x>width*0.6&&Math.abs(dock.height-height)<2),`${Math.round(dock.x)},${Math.round(dock.y)} ${Math.round(dock.width)}x${Math.round(dock.height)}`);
