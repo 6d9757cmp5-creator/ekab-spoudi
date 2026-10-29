@@ -45,7 +45,7 @@ for key, asset in registry.get("assets", {}).items():
         errors.append(f"{key}: missing SVG title")
     if desc is None or not "".join(desc.itertext()).strip():
         errors.append(f"{key}: missing SVG description")
-    labels = " ".join((el.text or "") for el in root.iter() if el.tag == svg_ns + "text")
+    labels = " ".join("".join(el.itertext()) for el in root.iter() if el.tag == svg_ns + "text")
     if not re.search(r"[Α-Ωα-ωάέήίόύώϊϋΐΰ]", labels):
         errors.append(f"{key}: missing visible Greek text")
     for el in root.iter():
