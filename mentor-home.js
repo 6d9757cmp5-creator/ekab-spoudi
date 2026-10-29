@@ -13,7 +13,7 @@ let speaking=false;
 let generation=0;
 function updateVoices(){
  const previous=select.value;
- const voices=listGreekVoices(window);
+ const voices=listGreekVoices(window).filter(v=>/nestoras|νέστορας|stefanos|στέφανος|nikos|νίκος|giorgos|γιώργος|male|ανδρικ/i.test(v.name||""));
  select.replaceChildren();
  const option=document.createElement("option");
  option.value="";option.textContent="Αυτόματη ελληνική φωνή";select.append(option);
@@ -29,7 +29,7 @@ function updateVoices(){
 function setSpeaking(value){
  speaking=value;
  stage.classList.toggle("is-speaking",value);
- avatar.classList.toggle("is-speaking",value);
+ avatar?.classList.toggle("is-speaking",value);
  stopper.disabled=!value;
  button.setAttribute("aria-pressed",String(value));
 }
@@ -48,13 +48,13 @@ if(!supportsSpeech(window)){
    const token=++generation;
    setSpeaking(false);
    const worked=speakGreek(greeting,{
-     env:window,voiceName:select.value,rate:.95,pitch:1.01,
+     env:window,voiceName:select.value,rate:.95,pitch:1.01,requireMale:true,
      onStart:()=>{if(token!==generation)return;performer.start(greeting,{speed:.95});setSpeaking(true);status.textContent="Ο MENTOR διαβάζει με τη διαθέσιμη φωνή του browser.";},
      onFinish:()=>{if(token!==generation)return;performer.stop();setSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
      onError:event=>{if(token!==generation)return;performer.stop();setSpeaking(false);status.textContent=event?.error==="not-allowed"?"Επίτρεψε την αναπαραγωγή φωνής από τη συσκευή.":"Η φωνή δεν μπόρεσε να αναπαραχθεί στον browser.";},
      onBoundary:event=>{if(token===generation)performer.boundary(event);}
    });
-   if(!worked)status.textContent="Η αναπαραγωγή δεν ξεκίνησε.";
+   if(!worked)status.textContent="Η συσκευή δεν διαθέτει επαληθευμένη ανδρική ελληνική φωνή. Χρησιμοποίησε τον MENTOR γραπτώς.";
  });
  stopper.addEventListener("click",stop);
  document.addEventListener("visibilitychange",()=>{if(document.hidden&&speaking)stop();});

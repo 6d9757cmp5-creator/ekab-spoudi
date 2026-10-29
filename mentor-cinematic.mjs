@@ -14,8 +14,8 @@ if(root){
   const caption=$('cinematic-mode-description');
   const buttons=[...root.querySelectorAll('[data-cinematic-mode]')];
   const messages={
-    hologram:'Φωτορεαλιστική συνθετική προβολή με ολογραφικό φωτισμό. Η εικόνα δεν είναι ακόμη πλήρες 3D μοντέλο.',
-    voice:'Ελληνική φωνή της συσκευής, μόνο όταν τη ζητήσεις. Το στόμα της στατικής εικόνας δεν συγχρονίζεται με φωνήματα.',
+    hologram:'Πραγματικό αρθρωμένο 3D μοντέλο με φωτισμό, εκφράσεις και περιστροφή.',
+    voice:'Ανδρική ελληνική φωνή εφόσον υπάρχει στη συσκευή. Η κίνηση στόματος παραμένει προσεγγιστική.',
     text:'Γράψε την ερώτησή σου και πάτησε «Ρώτησε». Οι απαντήσεις προέρχονται από τον υπάρχοντα εκπαιδευτικό οδηγό, χωρίς AI.'
   };
   function mode(next){
@@ -54,7 +54,7 @@ if(root){
   }
   photo?.addEventListener('error',()=>{
     root.classList.add('cinematic-photo-fallback');
-    if(caption)caption.textContent='Η υψηλής ανάλυσης εικόνα δεν φορτώθηκε. Εμφανίζεται το εφεδρικό πορτρέτο.';
+    if(caption)caption.textContent='Το πραγματικό 3D δεν φορτώθηκε. Κανένα παλιό μοντέλο δεν εμφανίζεται.';
   },{once:true});
   mode('hologram');
 }

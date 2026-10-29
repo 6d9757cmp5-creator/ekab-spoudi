@@ -9,10 +9,22 @@ import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
-import {supportsSpeech,listGreekVoices,speakGreek,stopGreek} from './mentor-voice.mjs';
+import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,resolveMentorGreekVoice,speakGreek,stopGreek} from './mentor-voice.mjs';
+import {chooseMentorDelivery,deliverySpeechSettings,publicDeliveryCue} from './mentor/core/presence-director.mjs';
 import {createMentorAvatar} from './mentor-avatar-live.mjs';
 
 const $=id=>document.getElementById(id);
+let mentorDelivery=chooseMentorDelivery();
+function setMentorDelivery(delivery){
+  mentorDelivery=delivery;
+  const node=$('mentor-delivery-status');
+  if(node)node.textContent='Τρόπος διδασκαλίας: '+delivery.label+' · ανάλογα με την άσκηση και την πρόοδο.';
+  const section=$('mentor-presence');
+  if(section){
+    section.dataset.mentorDelivery=delivery.id;
+    section.dispatchEvent(new CustomEvent('mentor:presence',{bubbles:true,detail:publicDeliveryCue(delivery)}));
+  }
+}
 const make=(tag,className,text)=>{
   const node=document.createElement(tag);
   if(className)node.className=className;
@@ -81,6 +93,7 @@ async function startCase(caseId){
   try{
     const session=newSession(caseId,{id:crypto.randomUUID(),at:new Date().toISOString()});
     state.session=await state.store.save(state.scope,session);
+    setMentorDelivery(chooseMentorDelivery({intent:'exercise',assessment:true}));
     notify(state.store.persistent?'Νέα δοκιμαστική αποστολή αποθηκεύτηκε τοπικά.':'Η λειτουργία αποθήκευσης δεν είναι διαθέσιμη. Η αποστολή υπάρχει μόνο προσωρινά.');
     renderMission();
     void renderMemory();
@@ -134,6 +147,23 @@ async function choose(id){
     const next=perform(state.session,id,{at:new Date().toISOString()});
     state.session=await state.store.save(state.scope,next);
     renderMission();
+    const feedback=feedbackFor(next);
+    if(feedback){
+      const topic=next.events.at(-1)?.competency_id||'scene';
+      let overview=null;
+      try{overview=await state.store.overview(state.scope);}catch{}
+      const warning=feedback.result==='review';
+      setMentorDelivery(chooseMentorDelivery({
+        intent:warning?'focus':'progress',
+        topic,overview,
+        corrected:warning,
+        safety:warning&&topic==='scene'
+      }));
+      // The original clinical feedback is unchanged; the delivery adapts.
+      lastCoachReply=feedback.text;
+      const greeting=$('mentor-presence-line');
+      if(greeting)greeting.textContent=feedback.text;
+    }
     if(next.finished)notify('Ολοκληρώθηκε μία εκπαιδευτική αποστολή. Οι επίσημοι βαθμοί δεν άλλαξαν.');
     void renderMemory();
   }catch(e){
@@ -220,12 +250,15 @@ function addCoachMessage(role,message){
 }
 async function coachAsk(intent,topic,userText){
   addCoachMessage('user',userText);
+  let overview=null;
   try{
-    const overview=state.store&&state.scope?await state.store.overview(state.scope):null;
+    overview=state.store&&state.scope?await state.store.overview(state.scope):null;
     lastCoachReply=coachResponse({intent,topic,overview});
   }catch{
     lastCoachReply='Δεν μπόρεσα να διαβάσω τις δοκιμαστικές καταγραφές Mentor. Η υπάρχουσα πρόοδος δεν άλλαξε.';
   }
+  // Adapts DELIVERY only; the medically reviewed answer and grading do not change.
+  setMentorDelivery(chooseMentorDelivery({intent,topic:topic||'scene',overview}));
   addCoachMessage('assistant',lastCoachReply);
   const greeting=$('mentor-presence-line');
   if(greeting)greeting.textContent=lastCoachReply;
@@ -243,6 +276,7 @@ function wireMentorPresence(){
   const stopper=$('mentor-intro-stop');
   const mic=$('mentor-intro-mic');
   const voiceSelect=$('mentor-voice-select');
+  const maleVoiceStatus=$('mentor-male-voice-status');
   const speed=$('mentor-voice-speed');
   const speedLabel=$('mentor-voice-speed-label');
   const supported=supportsSpeech(window);
@@ -266,17 +300,21 @@ function wireMentorPresence(){
     if(!supported)return;
     const previous=voiceSelect.value;
     voiceSelect.replaceChildren();
-    const option=make('option',null,'Αυτόματη ελληνική φωνή');
+    const option=make('option',null,'Αυτόματη ανδρική ελληνική φωνή');
     option.value='';voiceSelect.append(option);
-    for(const voice of listGreekVoices(window)){
+    for(const voice of listGreekVoices(window).filter(isKnownMaleGreekVoice)){
       const choice=make('option',null,voice.name+(voice.localService?' · Συσκευή':' · Browser'));
       choice.value=voice.name;voiceSelect.append(choice);
     }
     if([...voiceSelect.options].some(x=>x.value===previous))voiceSelect.value=previous;
+    if(maleVoiceStatus)maleVoiceStatus.textContent=resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
   }
   if(supported){
     updateVoices();
     window.speechSynthesis.addEventListener?.('voiceschanged',updateVoices);
+    voiceSelect.addEventListener('change',()=>{
+      if(maleVoiceStatus)maleVoiceStatus.textContent=resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
+    });
   }else{
     voiceSelect.disabled=true;
     speed.disabled=true;
@@ -300,13 +338,23 @@ function wireMentorPresence(){
   function play(text){
     if(!supported||!text)return;
     const current=++speakingGeneration;
+    const speechStyle=deliverySpeechSettings(mentorDelivery,Number(speed.value));
     paintSpeaking(false);
-    const started=speakGreek(text,{env:window,voiceName:voiceSelect.value,rate:Number(speed.value),pitch:1,
+    const started=speakGreek(text,{env:window,voiceName:voiceSelect.value,
+      rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,requireMale:true,
+      onVoiceResolved:result=>{
+        if(maleVoiceStatus)maleVoiceStatus.textContent=result.label;
+      },
       onStart:()=>{
         if(current!==speakingGeneration)return;
-        performer.start(text,{speed:Number(speed.value)});
+        performer.start(text,{speed:speechStyle.rate});
         paintSpeaking(true);
-        voiceStatus.textContent='Ο MENTOR μιλά με την επιλεγμένη ελληνική φωνή της συσκευής.';
+        // Pose, vocal dynamics and brow/smile are driven by the same delivery cue.
+        const section=$('mentor-presence');
+        section?.dispatchEvent(new CustomEvent('mentor:presence',{
+          bubbles:true,detail:publicDeliveryCue(mentorDelivery)
+        }));
+        voiceStatus.textContent='Ο MENTOR μιλά στα ελληνικά με '+mentorDelivery.label.toLocaleLowerCase('el')+' ύφος. '+resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
       },
       onFinish:()=>{
         if(current!==speakingGeneration)return;
@@ -320,7 +368,7 @@ function wireMentorPresence(){
       },
       onBoundary:event=>{if(current===speakingGeneration)performer.boundary(event);}
     });
-    if(!started)voiceStatus.textContent='Η φωνητική ανάγνωση δεν είναι διαθέσιμη.';
+    if(!started)voiceStatus.textContent='Δεν υπάρχει επιβεβαιωμένη ανδρική ελληνική φωνή σε αυτή τη συσκευή. Η γραπτή καθοδήγηση παραμένει διαθέσιμη.';
   }
   function stop(){
     speakingGeneration++;
@@ -373,7 +421,11 @@ function wireMentorPresence(){
   $('coach-speak').addEventListener('click',()=>play(lastCoachReply));
   $('coach-stop').addEventListener('click',stop);
   window.addEventListener('pagehide',stop);
-  if(!supported)voiceStatus.textContent='Η φωνή δεν υποστηρίζεται εδώ. Η συνομιλία γραπτώς παραμένει διαθέσιμη.';
+  setMentorDelivery(mentorDelivery);
+  if(!supported){
+    voiceStatus.textContent='Η φωνή δεν υποστηρίζεται εδώ. Η συνομιλία γραπτώς παραμένει διαθέσιμη.';
+    if(maleVoiceStatus)maleVoiceStatus.textContent='Ανδρική ελληνική φωνή: μη διαθέσιμη σε αυτή τη συσκευή.';
+  }
 }
 function wireCoach(){
   const prompt=$('coach-question');
