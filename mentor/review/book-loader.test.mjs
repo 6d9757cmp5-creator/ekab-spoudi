@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import {webcrypto,createHash} from 'node:crypto';
 import {createReviewBookLoader,validateReviewManifest} from './book-loader.mjs';
 const id='wistech-emr-2025',sourceUrl='https://wtcs.pressbooks.pub/emergencymedtech/';
-const example={schema_version:1,source_id:id,title:'Example book',passages:[
- {id:'wistech-emr-2025-0001',source_id:id,source_url:sourceUrl,title:'Airway',
- text:'A short classroom example mentions an airway and source provenance only, without specific clinical instructions.',
- review_status:'draft',section:'whole-book'}]};
+const example={schema_version:1,source_id:id,title:'Example book',passages:Array.from({length:10},(_,i)=>({
+ id:'wistech-emr-2025-'+String(i).padStart(4,'0'),source_id:id,source_url:sourceUrl,title:'Airway',
+ text:'A short classroom example mentions an airway and source provenance only, without specific clinical instructions. '.repeat(3),
+ review_status:'draft',section:'whole-book'}))};
 const raw=Buffer.from(JSON.stringify(example));
 const hash=createHash('sha256').update(raw).digest('hex');
 const other=Array.from({length:6},(_,i)=>({source_id:'other-source-'+i,sha256:hash,passage_count:10,scientific_review:'pending'}));
-const manifest={schema_version:1,errors:[],books:[{source_id:id,sha256:hash,passage_count:1,scientific_review:'pending'},...other]};
+const manifest={schema_version:1,errors:[],books:[{source_id:id,sha256:hash,passage_count:10,scientific_review:'pending'},...other]};
 const catalog={schema_version:1,purpose:'bibliography-only',counts:{identified:1,extracted_in_isolated_review_branch:1,clinically_approved:0},
  sources:[{id,title:'Example book',publisher:'Publisher',source_url:sourceUrl,license_summary:'Review pending',
  extracted_for_review:true,independent_clinical_review:'not_verified',
