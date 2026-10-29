@@ -61,7 +61,7 @@ test('source references are broad verified-origin guidance only, never fictitiou
   readFile(path,'utf8'),
   readFile(new URL('../../mentor-scenarios.html',import.meta.url),'utf8')
  ]);
- assert.ok(html.includes('δεν δίνει δόσεις')===false||html.includes('δίνει δόσεις')===false);
+ assert.match(html,/δεν δίνει δόσεις/i);
  assert.match(html,/Δεν χρησιμοποιείται AI/);
  assert.match(browser,/replaceChildren/);
  assert.doesNotMatch(browser,/\b(fetch|XMLHttpRequest|indexedDB|localStorage|sessionStorage|SpeechRecognition|innerHTML|setItem|removeItem|cloudSync|gradeAnswer)\b/);
