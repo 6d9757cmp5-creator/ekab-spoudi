@@ -1,6 +1,6 @@
 {
   "generated": "2026-10-26",
-  "method": "Verbatim highlights automatically derived from the currently saved 314 educational answers; no independent medical validation.",
+  "method": "Highlights derived from currently saved 314 educational answers; five entries manually synchronized to corrected source-checked answers on 2026-10-29; no independent clinical certification.",
   "count": 314,
   "items": [
     {
@@ -17,14 +17,15 @@
     {
       "id": "EOP-A-002",
       "points": [
-        "Ο ατμοσφαιρικός εισπνεόμενος αέρας περιέχει περίπου 21% O₂ και 0,04% CO₂.",
-        "Ο τυπικός μικτός εκπνεόμενος αέρας περιέχει περίπου 16% O₂ και 4% CO₂.",
-        "Οι τιμές του εκπνεόμενου αέρα είναι προσεγγιστικές και μεταβάλλονται ανάλογα με τον αερισμό και τον μεταβολισμό."
+        "Σε συνήθη ατμοσφαιρικό αέρα ο εισπνεόμενος αέρας περιέχει περίπου 21% O₂ και 0,04% CO₂.",
+        "Ο μικτός εκπνεόμενος αέρας περιέχει ενδεικτικά περίπου 16% O₂ και 4% CO₂.",
+        "Δεν πρέπει να συγχέεται ο μικτός εκπνεόμενος αέρας με τον αμιγώς κυψελιδικό."
       ],
       "provenance": "extracts_from_existing_educational_answer",
       "medicalCertification": false,
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review",
-      "auditStatus": "citation_indexed_pending_passage_check"
+      "sourceUrl": "https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801",
+      "auditStatus": "educational_content_corrected_source_checked_2026_10_29",
+      "lastSynchronizedAt": "2026-10-29"
     },
     {
       "id": "EOP-A-003",
@@ -1685,14 +1686,14 @@
     {
       "id": "EOP-B-047",
       "points": [
-        "Σοβαρό παιδιατρικό shock απαιτεί άμεση ABCDE εκτίμηση και διακομιδή.",
-        "Η ποσότητα υγρών εξαρτάται από αιτία, πόρους και πρωτόκολλο: συχνά χρησιμοποιούνται διαδοχικές ισότονες bolus δόσεις 10 mL/kg με συχνή επανεκτίμηση, ενώ η αιμορραγική καταπληξία μπορεί να χρειάζεται έγκαιρα αίμα αντί υπερβολικών κρυσταλλοειδών.",
-        "Μία «σταθερή» δόση για όλα τα shock είναι επισφαλής."
+        "Σύμφωνα με το ERC/RCUK Paediatric Life Support 2025, σε υποογκαιμικό, αποφρακτικό ή διανεμητικό shock μπορεί να χορηγηθεί αρχικό bolus 10 mL/kg ισότονου κρυσταλλοειδούς από κατάλληλα εκπαιδευμένο προσωπικό, με επανεκτίμηση μετά από κάθε δόση για ανταπόκριση και υπερφόρτωση.",
+        "Στο καρδιογενές shock απαιτείται ιδιαίτερη προσοχή· σε αιμορραγικό shock περιορίζονται τα κρυσταλλοειδή και προέχουν η αιμόσταση και τα προϊόντα αίματος."
       ],
       "provenance": "extracts_from_existing_educational_answer",
       "medicalCertification": false,
       "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "auditStatus": "historical_targeted_review"
+      "auditStatus": "educational_content_corrected_source_checked_2026_10_29",
+      "lastSynchronizedAt": "2026-10-29"
     },
     {
       "id": "EOP-B-048",
@@ -2216,13 +2217,14 @@
     {
       "id": "EOP-B-094",
       "points": [
-        "Χρονομετρούμε την κρίση, αξιολογούμε ABC, οξυγόνωση, επίπεδο συνείδησης και γλυκόζη όταν υπάρχει εξοπλισμός/αρμοδιότητα.",
-        "Κρίση διάρκειας **5 λεπτών ή περισσότερο** θεωρείται επείγουσα (σπασμωδικό status epilepticus) και απαιτεί άμεση κλιμάκωση."
+        "Γενικευμένη σπασμωδική κρίση διάρκειας ≥5 λεπτών ή επαναλαμβανόμενες κρίσεις χωρίς ανάκτηση συνείδησης απαιτούν επείγουσα αντιμετώπιση ως πιθανό σπασμωδικό status epilepticus.",
+        "Η πρώτη φαρμακευτική επιλογή είναι βενζοδιαζεπίνη κατά το εξατομικευμένο σχέδιο ή το εγκεκριμένο πρωτόκολλο (π.χ. παρειακή μιδαζολάμη ή ορθική διαζεπάμη στην κοινότητα), μόνο από εξουσιοδοτημένο/εκπαιδευμένο πρόσωπο."
       ],
       "provenance": "extracts_from_existing_educational_answer",
       "medicalCertification": false,
-      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "auditStatus": "documented_source_check"
+      "sourceUrl": "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures",
+      "auditStatus": "educational_content_corrected_source_checked_2026_10_29",
+      "lastSynchronizedAt": "2026-10-29"
     },
     {
       "id": "EOP-B-095",
@@ -3189,13 +3191,14 @@
     {
       "id": "EOP-B-181",
       "points": [
-        "Νεογνική ανάνηψη ERC 2025: θερμική προστασία/διέγερση, εκτίμηση αναπνοής και καρδιακής συχνότητας, σωστή θέση αεραγωγού, 5 αρχικές εμφυσήσεις όταν ανεπαρκής αναπνοή, επανεκτίμηση κίνησης θώρακα/HR, αποτελεσματικός αερισμός, και συμπιέσεις 3:1 μόνο εάν HR παραμένει <60/min μετά από αποτελεσματικό αερισμό.",
-        "Εξειδικευμένες παρεμβάσεις μόνο από εκπαιδευμένη ομάδα."
+        "ΜΟΝΟ αν ο HR παραμένει <60/min ΜΕΤΑ ΑΠΟ ΤΟΥΛΑΧΙΣΤΟΝ 30 ΔΕΥΤΕΡΟΛΕΠΤΑ ΑΠΟΤΕΛΕΣΜΑΤΙΚΟΥ ΑΕΡΙΣΜΟΥ αρχίζουν συγχρονισμένες θωρακικές συμπιέσεις 3:1, με αύξηση του O₂ στο 100% κατά τις συμπιέσεις και επανεκτίμηση κάθε 30 δευτερόλεπτα.",
+        "Δεν αρχίζουμε συμπιέσεις πριν εξασφαλίσουμε αποτελεσματικό αερισμό."
       ],
       "provenance": "extracts_from_existing_educational_answer",
       "medicalCertification": false,
       "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
-      "auditStatus": "citation_indexed_pending_passage_check"
+      "auditStatus": "educational_content_corrected_source_checked_2026_10_29",
+      "lastSynchronizedAt": "2026-10-29"
     },
     {
       "id": "EOP-B-182",
@@ -3451,14 +3454,14 @@
     {
       "id": "EOP-B-204",
       "points": [
-        "Παιδιατρικό υποογκαιμικό shock: αρχικός όγκος ισότονου bolus εξαρτάται από αιτία και κατευθυντήριες οδηγίες, συχνά 10 mL/kg με επανεκτίμηση.",
-        "Σε αιμορραγία η έγκαιρη αιμοστατική παρέμβαση/προϊόντα αίματος υπερισχύουν της άσκοπης χορήγησης μεγάλων κρυσταλλοειδών.",
-        "Ο συγκεκριμένος αλγόριθμος απαιτεί πρωτόκολλο εξειδικευμένης ομάδας."
+        "Σε παιδί με υποογκαιμικό shock, αρχικό bolus κατά τις οδηγίες ERC/RCUK Paediatric Life Support 2025: 10 mL/kg ισότονου κρυσταλλοειδούς σε κατάλληλη ένδειξη, με επανεκτίμηση μετά από ΚΑΘΕ bolus για αιμάτωση και σημεία υπερφόρτωσης.",
+        "Εάν πρόκειται για αιμορραγικό shock, προέχουν άμεση αιμόσταση, ενεργοποίηση πρωτοκόλλου μαζικής αιμορραγίας και έγκαιρα προϊόντα αίματος· τα ενδοφλέβια κρυσταλλοειδή ελαχιστοποιούνται (μέγιστο συνολικά 20 mL/kg κατά τις οδηγίες PLS 2025)."
       ],
       "provenance": "extracts_from_existing_educational_answer",
       "medicalCertification": false,
       "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "auditStatus": "historical_targeted_review"
+      "auditStatus": "educational_content_corrected_source_checked_2026_10_29",
+      "lastSynchronizedAt": "2026-10-29"
     },
     {
       "id": "EOP-B-205",
@@ -3515,5 +3518,6 @@
       "sourceUrl": "https://www.aarc.org/resource/clinical-practice-guidelines/",
       "auditStatus": "historical_targeted_review"
     }
-  ]
+  ],
+  "lastSynchronizedAt": "2026-10-29"
 }
