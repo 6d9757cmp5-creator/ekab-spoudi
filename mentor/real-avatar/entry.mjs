@@ -57,8 +57,19 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
   if(!host||!canvas||!photo||!avatar||!toggle||!restore)return {ready:false,reason:"missing-ui"};
   const reduced=!!globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
   let renderer,scene,camera,mixer,character,animationId=0,last=0,turn=0;
-  let face=[],boneHead=null,boneArm=null,boneHeadBase=null,boneArmBase=null;
+  let face=[],boneHead=null,boneArm=null,boneSpine=null,boneHeadBase=null,boneArmBase=null;
   let disposed=false,active=false,inView=true,speaking=false,viseme="rest",gesture=0;
+  let presence={id:"welcoming",gesture:"greet",expression:"warm",posture:"open"};
+  const expressions={
+    welcoming:{smile:.26,brow:.06,head:0,arm:.05},
+    supportive:{smile:.32,brow:.10,head:.055,arm:.09},
+    caring:{smile:.22,brow:.17,head:.085,arm:.045},
+    patient:{smile:.13,brow:.13,head:.09,arm:.05},
+    explanatory:{smile:.15,brow:.19,head:.04,arm:.18},
+    examiner:{smile:.025,brow:.14,head:0,arm:.04},
+    demanding:{smile:.02,brow:.21,head:0,arm:.09},
+    strict:{smile:0,brow:.28,head:-.02,arm:.03}
+  };
   let alignedCues=null,alignedAudio=null;
   const clock=new THREE.Clock();
   const eye=new THREE.Vector3(0,1.85,7.2);
@@ -98,6 +109,7 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
       if(obj.isBone){
         if(!boneHead&&nameMatches(obj.name,/head$/))boneHead=obj;
         if(!boneArm&&nameMatches(obj.name,/right(upper)?arm$/))boneArm=obj;
+        if(!boneSpine&&nameMatches(obj.name,/spine2$/))boneSpine=obj;
       }
     });
     if(figures.length===0)throw Error("missing real humanoid skeleton");
@@ -177,6 +189,16 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
     const watch=new MutationObserver(stageSpeech);
     watch.observe(avatar,{attributes:true,attributeFilter:["class","data-viseme"]});
     stageSpeech();
+    // Synchronize vocal delivery with rigged face, posture and gesture.
+    const onPresence=e=>{
+      const cue=e.detail||{};
+      if(!Object.hasOwn(expressions,cue.id))return;
+      const validGesture=/^(greet|encourage|reassure|explain|question|challenge|caution)$/.test(cue.gesture||"");
+      presence={id:cue.id,gesture:validGesture?cue.gesture:"explain",expression:String(cue.expression||""),posture:String(cue.posture||"")};
+      gesture=1;
+      host.dataset.mentorMood=presence.id;
+    };
+    doc.addEventListener("mentor:presence",onPresence);
     doc.addEventListener("click",e=>{if(e.target?.closest?.(".cinematic-prompts button,.choice,.case-option,[data-mode],#mentor-hero-form button"))gesture=1;});
     doc.addEventListener("mentor:aligned-speech",e=>{
       if(validAudioAlignedCues(e.detail?.cues)&&e.detail?.audio instanceof HTMLAudioElement){
@@ -198,7 +220,8 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
       const open=alignedCues&&alignedAudio&&!alignedAudio.paused;
       const isVoiceOn=open||speaking;
       if(!reduced&&motion.checked){
-        transition(gesture>.45&&!isVoiceOn?(waveAction||idleAction):isVoiceOn?(talkAction||idleAction):idleAction);
+        const positive=presence.gesture==="greet"||presence.gesture==="encourage";
+        transition(gesture>.45&&positive&&!isVoiceOn?(waveAction||idleAction):isVoiceOn?(talkAction||idleAction):idleAction);
         mixer.update(elapsed);
       }
       const now=performance.now()/1000;
@@ -209,6 +232,7 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
         shape=c?.viseme||"";
       }
       const speakingNow=open||speaking;
+      const mood=expressions[presence.id]||expressions.welcoming;
       const blink=!reduced&&motion.checked&&Math.sin(now*1.34)>.996?1:0;
       for(const {obj,targets} of face){
         morph(obj,targets.blinkLeft,blink,.4);
@@ -218,15 +242,20 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
           morph(obj,key,speakingNow&&shape===k?.8:0,.25);
         }
         morph(obj,targets.jaw,speakingNow&&shape==="aa"?.19:0,.20);
-        morph(obj,targets.smile,gesture>.2?.24:.045,.10);
-        morph(obj,targets.brow,gesture>.25?.15:.03,.12);
+        morph(obj,targets.smile,mood.smile+(gesture>.2&&presence.gesture==="encourage"?.12:0),.11);
+        morph(obj,targets.brow,mood.brow+(gesture>.25&&presence.gesture==="question"?.13:0),.12);
       }
       if(boneHead&&boneHeadBase&&motion.checked&&!reduced){
         boneHead.rotation.y+=Math.sin(now*.55)*.028;
-        boneHead.rotation.z+=gesture*.045;
+        boneHead.rotation.x+=mood.head*gesture;
+        boneHead.rotation.z+=gesture*(presence.gesture==="caution"?-.013:.036);
       }
       if(boneArm&&boneArmBase&&motion.checked&&!reduced){
-        boneArm.rotation.z-=gesture*.13;
+        boneArm.rotation.z-=gesture*mood.arm;
+      }
+      if(boneSpine&&motion.checked&&!reduced){
+        const lean=presence.posture==="lean"?-.027:presence.posture==="upright"?.008:0;
+        boneSpine.rotation.x+=lean;
       }
       gesture=Math.max(0,gesture-elapsed*.32);
       character.rotation.y+=(turn-character.rotation.y)*.09;
@@ -236,7 +265,7 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
     animate();
     const lose=e=>{e.preventDefault();setVisible(false);status.textContent="Η συσκευή διέκοψε το 3D. Παραμένει η φωτορεαλιστική εικόνα.";};
     canvas.addEventListener("webglcontextlost",lose);
-    addEventListener("pagehide",()=>{disposed=true;cancelAnimationFrame(animationId);watch.disconnect();ro?.disconnect();io?.disconnect();renderer.dispose();},{once:true});
+    addEventListener("pagehide",()=>{disposed=true;cancelAnimationFrame(animationId);watch.disconnect();doc.removeEventListener("mentor:presence",onPresence);ro?.disconnect();io?.disconnect();renderer.dispose();},{once:true});
     return {ready:true,rigged:figures.length,faces:face.length,clips:clips.length,dispose:()=>{disposed=true;cancelAnimationFrame(animationId);watch.disconnect();ro?.disconnect();io?.disconnect();renderer.dispose();}};
   }catch(error){
     if(renderer)renderer.dispose();
