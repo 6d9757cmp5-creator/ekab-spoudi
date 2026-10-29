@@ -160,7 +160,7 @@ const CORE={
  "posterior basal segmental vein":"Οπίσθια βασική τμηματική φλέβα",
  "medial segmental bronchial tree":"Έσω τμηματικό βρογχικό δέντρο",
  "lateral segmental bronchial tree":"Έξω τμηματικό βρογχικό δέντρο",
- "superior lingular artery":"Άνω γλωσσίδια αρτηρία",
+ "superior lingular artery":"Άνω γλωσσιδική αρτηρία",
  "superior lingular bronchial tree":"Άνω γλωσσιδικό βρογχικό δέντρο",
  "inferior pulmonary vein":"Κάτω πνευμονική φλέβα",
  "colic vein":"Κολική φλέβα",
