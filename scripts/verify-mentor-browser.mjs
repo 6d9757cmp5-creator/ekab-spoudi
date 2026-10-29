@@ -322,70 +322,33 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
   const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
   assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
-  // Lifelike portrait regression: actual pixels, two entry points and lip-cycle cleanup.
-  // Home portrait already verified by separate home browser QA.
+  // Active release uses ONE articulated 3D character, never the retired photo/hologram.
   await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
-  assert.equal(await page.locator('#mentor-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220&&x.naturalHeight===228),true,'Classroom portrait loads actual WebP');
-  const motion=await page.evaluate(async()=>{
-    const {createMentorAvatar}=await import('/mentor-avatar-live.mjs');
-    const element=document.getElementById('mentor-avatar');
-    const live=createMentorAvatar(element);
-    live.start('Άλφα ωμέγα');
-    const started=element.classList.contains('mentor-photo-speaking');
-    live.boundary({charIndex:0});
-    const open=element.dataset.viseme;
-    live.boundary({charIndex:5});
-    const round=element.dataset.viseme;
-    live.stop();
-    const ended=!element.classList.contains('mentor-photo-speaking')&&element.dataset.viseme==='rest';
-    return {started,open,round,ended};
-  });
-  assert.equal(motion.started,true);
-  const reduced=await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
-  if(!reduced){assert.equal(motion.open,'open');assert.equal(motion.round,'round');}
-  assert.equal(motion.ended,true,'Stopping speech removes the live mouth state');
-  // Actual GPU-backed MENTOR hologram or explicit portrait fallback in WebKit.
-  assert.equal(await page.locator('#mentor-3d-canvas').count(),1,'WebGL hologram canvas exists');
-  const hologram=await page.evaluate(()=>{
-    const canvas=document.getElementById('mentor-3d-canvas');
-    const mode=document.getElementById('mentor-view-3d');
-    const surface=document.querySelector('.mentor-intro-visual');
-    const gl=canvas.getContext('webgl');
-    return {supported:!mode.disabled,view:surface.dataset.mentorView,
-      gpu:!!(gl&&gl.getParameter(gl.CURRENT_PROGRAM)),
-      width:canvas.width,height:canvas.height};
-  });
-  const cinematic=await page.evaluate(()=>{
-    const pic=document.querySelector('.cinematic-character');
+  await page.waitForFunction(()=>document.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',null,{timeout:90000});
+  assert.equal(await page.locator('#mentor-real3d-canvas').isVisible(),true,'Actual GLB canvas is visible');
+  assert.equal(await page.locator('#mentor-3d-canvas,.mentor-photo-img,img.cinematic-character').count(),0,
+    'Retired portrait or procedural hologram cannot replace the active 3D Mentor');
+  const active3d=await page.evaluate(()=>{
+    const canvas=document.getElementById('mentor-real3d-canvas');
     const stage=document.getElementById('mentor-cinematic-stage');
-    return {image:!!pic&&pic.complete&&pic.naturalWidth===320&&pic.naturalHeight===763,
-      visible:!!stage&&getComputedStyle(stage).display!=='none',
-      hiddenCartoon:getComputedStyle(document.getElementById('mentor-3d-panel')).display==='none'};
+    const gl=canvas?.getContext('webgl2')||canvas?.getContext('webgl');
+    return {ready:stage?.dataset.real3d,shown:!!canvas&&!canvas.hidden,
+      gl:!!gl,width:canvas?.width||0,height:canvas?.height||0};
   });
-  assert.deepEqual(cinematic,{image:true,visible:true,hiddenCartoon:true},'Approved full-body image loads while low-fidelity character is hidden');
-  assert.equal(await page.locator('[data-cinematic-mode]').count(),3,'Three real interactive mode buttons');
+  assert.equal(active3d.ready,'ready');
+  assert.equal(active3d.shown,true);
+  assert.equal(active3d.gl,true,'3D renderer must have a WebGL context');
+  assert.ok(active3d.width>=100&&active3d.height>=100);
+  assert.equal(await page.locator('[data-cinematic-mode]').count(),3);
   await page.locator('[data-cinematic-mode="text"]').click();
   assert.equal(await page.locator('[data-cinematic-mode="text"]').getAttribute('aria-pressed'),'true');
   await page.locator('[data-cinematic-mode="hologram"]').click();
   assert.equal(await page.locator('#mentor-cinematic-stage').getAttribute('class').then(x=>x.includes('is-glowing')),true);
-  if(hologram.supported){
-    assert.equal(hologram.view,'photo','Photoreal approved MENTOR is default, not procedural 3D');
-    assert.equal(hologram.gpu,true,'Real GLSL program is active on GPU');
-    assert.ok(hologram.width>100&&hologram.height>100,'Canvas has drawable resolution');
-    await page.locator('#mentor-3d-rotation').evaluate(el=>{
-      el.value='74';el.dispatchEvent(new Event('input',{bubbles:true}));
-    });
-    assert.equal(await page.locator('#mentor-3d-rotation').inputValue(),'74');
-    await page.locator('#mentor-view-photo').evaluate(el=>el.click());
-    assert.equal(await page.locator('.mentor-intro-visual').getAttribute('data-mentor-view'),'photo');
-    await page.locator('#mentor-view-3d').evaluate(el=>el.click());
-    assert.equal(await page.locator('.mentor-intro-visual').getAttribute('data-mentor-view'),'3d');
-    await page.locator('#mentor-view-photo').evaluate(el=>el.click());
-    assert.match(await page.locator('#mentor-3d-status').textContent(),/προσεγγιστικό/);
-  }else{
-    assert.equal(hologram.view,'photo','Portrait remains functional if WebGL is unavailable');
-    assert.match(await page.locator('#mentor-3d-status').textContent(),/δεν είναι διαθέσιμη/);
-  }
+  assert.equal(await page.locator('#mentor-real3d-rotation').isDisabled(),false);
+  await page.locator('#mentor-real3d-rotation').evaluate(el=>{
+    el.value='74';el.dispatchEvent(new Event('input',{bubbles:true}));
+  });
+  assert.equal(await page.locator('#mentor-real3d-rotation').inputValue(),'74');
   // Safari WebKit sometimes reports a malformed optional update-check URL from legacy code.
   // This is unrelated to the avatar and must not mask other browser exceptions.
   const actionableErrors=errors.filter(e=>!e.includes('Fetch API cannot load http: /127.0.0.1:')||!e.includes('/version.json?nocache='));
