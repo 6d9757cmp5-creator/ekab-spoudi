@@ -85,6 +85,108 @@ const CORE={
  'proximal part of ileum':'Εγγύς τμήμα του ειλεού',
  'middle part of ileum':'Μέσο τμήμα του ειλεού',
  'distal part of ileum':'Άπω τμήμα του ειλεού',
+
+ // Curated full source phrases observed in the pinned male/female atlas audit.
+ // Editorial translations: HUMAN MEDICAL REVIEW PENDING (AGENTS.md); no automated suggestions promoted.
+ "lower central secondary incisor tooth":"Κάτω κεντρικός μόνιμος τομέας",
+ "lower lateral secondary incisor tooth":"Κάτω πλάγιος μόνιμος τομέας",
+ "lower secondary canine tooth":"Κάτω μόνιμος κυνόδοντας",
+ "upper central secondary incisor tooth":"Άνω κεντρικός μόνιμος τομέας",
+ "upper lateral secondary incisor tooth":"Άνω πλάγιος μόνιμος τομέας",
+ "upper secondary canine tooth":"Άνω μόνιμος κυνόδοντας",
+ "anterior chamber of left eyeball":"Πρόσθιος θάλαμος του αριστερού οφθαλμικού βολβού",
+ "anterior ethmoidal nerve":"Πρόσθιο ηθμοειδές νεύρο",
+ "posterior ethmoidal nerve":"Οπίσθιο ηθμοειδές νεύρο",
+ "corona ciliaris":"Ακτινωτή στεφάνη",
+ "inferior branch of left oculomotor nerve":"Κάτω κλάδος του αριστερού κοινού κινητικού νεύρου",
+ "superior branch of left oculomotor nerve":"Άνω κλάδος του αριστερού κοινού κινητικού νεύρου",
+ "levator palpebrae superioris":"Ανελκτήρας του άνω βλεφάρου",
+ "lacrimal sac":"Δακρυϊκός ασκός",
+ "nasociliary nerve":"Ρινοακτινωτό νεύρο",
+ "ophthalmic nerve":"Οφθαλμικό νεύρο",
+ "optic nerve":"Οπτικό νεύρο",
+ "optic part of left retina":"Οπτική μοίρα του αριστερού αμφιβληστροειδούς",
+ "long ciliary nerve":"Μακρό ακτινωτό νεύρο",
+ "short ciliary nerve":"Βραχύ ακτινωτό νεύρο",
+ "suspensory ligament of left lens":"Κρεμαστήριος σύνδεσμος του αριστερού φακού",
+ "suspensory ligament of right lens":"Κρεμαστήριος σύνδεσμος του δεξιού φακού",
+ "tarsal plate of left upper eyelid":"Ταρσικό πέταλο του αριστερού άνω βλεφάρου",
+ "tarsal plate of left lower eyelid":"Ταρσικό πέταλο του αριστερού κάτω βλεφάρου",
+ "supra-orbital nerve":"Υπερκόγχιο νεύρο",
+ "supratrochlear nerve":"Υπερτροχίλιο νεύρο",
+ "trochlea of left superior oblique":"Τροχιλία του αριστερού άνω λοξού μυός",
+ "palpebral conjunctiva of right upper eyelid":"Βλεφαρικός επιπεφυκότας του δεξιού άνω βλεφάρου",
+ "palpebral conjunctiva of right lower eyelid":"Βλεφαρικός επιπεφυκότας του δεξιού κάτω βλεφάρου",
+ "palpebral conjunctiva of left upper eyelid":"Βλεφαρικός επιπεφυκότας του αριστερού άνω βλεφάρου",
+ "palpebral conjunctiva of left lower eyelid":"Βλεφαρικός επιπεφυκότας του αριστερού κάτω βλεφάρου",
+ "right scleral venous sinus":"Δεξιός φλεβώδης κόλπος του σκληρού χιτώνα",
+ "left scleral venous sinus":"Αριστερός φλεβώδης κόλπος του σκληρού χιτώνα",
+ "aqueous humor of right eyeball":"Υδατοειδές υγρό του δεξιού οφθαλμικού βολβού",
+ "aqueous humor of left eyeball":"Υδατοειδές υγρό του αριστερού οφθαλμικού βολβού",
+ "bulbar conjunctiva":"Βολβικός επιπεφυκότας",
+ "interlobar adipose tissue of left mammary gland":"Μεσολόβιος λιπώδης ιστός του αριστερού μαστικού αδένα",
+ "interlobar adipose tissue of right mammary gland":"Μεσολόβιος λιπώδης ιστός του δεξιού μαστικού αδένα",
+ "suspensory ligament of left breast":"Κρεμαστήριος σύνδεσμος του αριστερού μαστού",
+ "suspensory ligament of right breast":"Κρεμαστήριος σύνδεσμος του δεξιού μαστού",
+ "dura mater":"Σκληρά μήνιγγα",
+ "optic chiasma":"Οπτικό χίασμα",
+ "olfactory bulb":"Οσφρητικός βολβός",
+ "anterior olfactory nucleus":"Πρόσθιος οσφρητικός πυρήνας",
+ "piriform cortex":"Απιοειδής φλοιός",
+ "head of caudate":"Κεφαλή του κερκοφόρου πυρήνα",
+ "body of caudate":"Σώμα του κερκοφόρου πυρήνα",
+ "tail of caudate":"Ουρά του κερκοφόρου πυρήνα",
+ "putamen":"Κέλυφος",
+ "nucleus accumbens":"Επικλινής πυρήνας",
+ "external segment of globus pallidus":"Έξω μοίρα της ωχράς σφαίρας",
+ "internal segment of globus pallidus":"Έσω μοίρα της ωχράς σφαίρας",
+ "posterior inferior cerebellar artery":"Οπίσθια κάτω παρεγκεφαλιδική αρτηρία",
+ "posterior segmental vein":"Οπίσθια τμηματική φλέβα",
+ "superior segmental bronchial tree":"Άνω τμηματικό βρογχικό δέντρο",
+ "anterior segmental artery":"Πρόσθια τμηματική αρτηρία",
+ "anterior segmental bronchial tree":"Πρόσθιο τμηματικό βρογχικό δέντρο",
+ "apical segmental vein":"Κορυφαία τμηματική φλέβα",
+ "superior segmental artery":"Άνω τμηματική αρτηρία",
+ "apical segmental bronchial tree":"Κορυφαίο τμηματικό βρογχικό δέντρο",
+ "posterior basal segmental artery":"Οπίσθια βασική τμηματική αρτηρία",
+ "posterior basal segmental bronchial tree":"Οπίσθιο βασικό τμηματικό βρογχικό δέντρο",
+ "posterior segmental bronchial tree":"Οπίσθιο τμηματικό βρογχικό δέντρο",
+ "superior segmental vein":"Άνω τμηματική φλέβα",
+ "lateral basal segmental artery":"Έξω βασική τμηματική αρτηρία",
+ "lateral basal segmental bronchial tree":"Έξω βασικό τμηματικό βρογχικό δέντρο",
+ "lateral basal segmental vein":"Έξω βασική τμηματική φλέβα",
+ "anterior basal segmental vein":"Πρόσθια βασική τμηματική φλέβα",
+ "apical segmental artery":"Κορυφαία τμηματική αρτηρία",
+ "posterior basal segmental vein":"Οπίσθια βασική τμηματική φλέβα",
+ "medial segmental bronchial tree":"Έσω τμηματικό βρογχικό δέντρο",
+ "lateral segmental bronchial tree":"Έξω τμηματικό βρογχικό δέντρο",
+ "superior lingular artery":"Άνω γλωσσίδια αρτηρία",
+ "superior lingular bronchial tree":"Άνω γλωσσιδικό βρογχικό δέντρο",
+ "inferior pulmonary vein":"Κάτω πνευμονική φλέβα",
+ "colic vein":"Κολική φλέβα",
+ "marginal vein":"Επιχείλια φλέβα",
+ "posterior vein of left ventricle":"Οπίσθια φλέβα της αριστερής κοιλίας",
+ "diagonal branch of anterior descending branch of left coronary artery":"Διαγώνιος κλάδος του πρόσθιου κατιόντος κλάδου της αριστερής στεφανιαίας αρτηρίας",
+ "first posterior ventricular branch of right coronary artery":"Πρώτος οπίσθιος κοιλιακός κλάδος της δεξιάς στεφανιαίας αρτηρίας",
+ "first anterior ventricular branch of right coronary artery":"Πρώτος πρόσθιος κοιλιακός κλάδος της δεξιάς στεφανιαίας αρτηρίας",
+ "posterior interventricular branch of right coronary artery":"Οπίσθιος μεσοκοιλιακός κλάδος της δεξιάς στεφανιαίας αρτηρίας",
+ "circumflex branch of left coronary artery":"Περισπώμενος κλάδος της αριστερής στεφανιαίας αρτηρίας",
+ "anterior division of left renal artery":"Πρόσθια μοίρα της αριστερής νεφρικής αρτηρίας",
+ "anterior division of right renal artery":"Πρόσθια μοίρα της δεξιάς νεφρικής αρτηρίας",
+ "marginal branch of right coronary artery":"Επιχείλιος κλάδος της δεξιάς στεφανιαίας αρτηρίας",
+ "anterior branch of right anterior segmental artery":"Πρόσθιος κλάδος της δεξιάς πρόσθιας τμηματικής αρτηρίας",
+ "anterior part of right apical segmental artery":"Πρόσθιο τμήμα της δεξιάς κορυφαίας τμηματικής αρτηρίας",
+ "apical part of right apical segmental artery":"Κορυφαίο τμήμα της δεξιάς κορυφαίας τμηματικής αρτηρίας",
+ "artery of central sulcus":"Αρτηρία της κεντρικής αύλακας",
+ "lateral branch of right lateral basal segmental artery":"Έξω κλάδος της δεξιάς έξω βασικής τμηματικής αρτηρίας",
+ "tendinous arch of levator ani":"Τενόντιο τόξο του ανελκτήρα του πρωκτού",
+ "anterior part of lateral segmental vein":"Πρόσθιο τμήμα της έξω τμηματικής φλέβας",
+ "apical part of right apical segmental vein":"Κορυφαίο τμήμα της δεξιάς κορυφαίας τμηματικής φλέβας",
+ "apical part of right posterior segmental artery":"Κορυφαίο τμήμα της δεξιάς οπίσθιας τμηματικής αρτηρίας",
+ "artery of left precentral sulcus":"Αρτηρία της αριστερής προκεντρικής αύλακας",
+ "artery of right precentral sulcus":"Αρτηρία της δεξιάς προκεντρικής αύλακας",
+ "compact bone tissue":"Συμπαγής οστίτης ιστός",
+ "external anal sphincter":"Έξω σφιγκτήρας του πρωκτού",
  // Standard cardiovascular and skeletal terms.
  'middle cardiac vein':'Μέση καρδιακή φλέβα',
  'anterior interventricular vein':'Πρόσθια μεσοκοιλιακή φλέβα',
@@ -111,15 +213,21 @@ function prefix(side,word){
  const l=side==='left';
  // Infer grammatical gender from the head noun, including multi-word
  // anatomical labels. Never infer from adjectives alone.
- const feminine=FEMININE.test(word)||/^(θηλή|νεφρική θηλή|νεφρική πυραμίδα|θηλαία άλως|ωχρά κηλίδα|νεφρική κάψα|πριονωτή περιφέρεια|δακρυϊκή λίμνη|ίριδα)/i.test(word)||/(αρτηρία|φλέβα|γνάθος|θηλή|πυραμίδα|κάψα|κόρη|ίριδα|κηλίδα|περιφέρεια|λίμνη|άλως|περόνη|κνήμη|φάλαγγα|σάλπιγγα|τραχεία|ωοθήκη)$/i.test(word);
- const masculine=MASCULINE.test(word)||/^(φλοιός|μυελός|πρόσθιος θάλαμος|δακρυϊκός αδένας|κρεμαστήριος σύνδεσμος)/i.test(word)||/(χιτώνας|φακός|πόρος|μυς|αδένας|λοβός|κόλπος|κάλυκας|κορμός|δακτύλιος|σύνδεσμος|νεφρός|πνεύμονας|βρόγχος|φλοιός|μυελός)$/i.test(word);
+ const feminine=FEMININE.test(word)||/^(Ακτινωτή στεφάνη|Κεφαλή|Ουρά|Έξω μοίρα|Έσω μοίρα|Σκληρά μήνιγγα)/.test(word)||/^(θηλή|νεφρική θηλή|νεφρική πυραμίδα|θηλαία άλως|ωχρά κηλίδα|νεφρική κάψα|πριονωτή περιφέρεια|δακρυϊκή λίμνη|ίριδα)/i.test(word)||/(αρτηρία|φλέβα|γνάθος|θηλή|πυραμίδα|κάψα|κόρη|ίριδα|κηλίδα|περιφέρεια|λίμνη|άλως|περόνη|κνήμη|φάλαγγα|σάλπιγγα|τραχεία|ωοθήκη)$/i.test(word);
+ const masculine=MASCULINE.test(word)||/^(Ανελκτήρας|Επικλινής πυρήνας)/.test(word)||/^(φλοιός|μυελός|πρόσθιος θάλαμος|δακρυϊκός αδένας|κρεμαστήριος σύνδεσμος)/i.test(word)||/(χιτώνας|φακός|πόρος|μυς|αδένας|λοβός|κόλπος|κάλυκας|κορμός|δακτύλιος|σύνδεσμος|νεφρός|πνεύμονας|βρόγχος|φλοιός|μυελός|επιπεφυκότας|ασκός|τομέας|κυνόδοντας)$/i.test(word);
  const form=feminine?(l?'Αριστερή':'Δεξιά'):masculine?(l?'Αριστερός':'Δεξιός'):(l?'Αριστερό':'Δεξιό');
  return form+' '+word.toLocaleLowerCase('el');
 }
-function simplify(raw){return String(raw||'').trim().replace(/\s+/g,' ').replace(/\s*\([^)]*\)\s*/g,' ').trim().toLowerCase()}
+function simplify(raw){return String(raw||'').trim().replace(/\s+/g,' ').toLowerCase()}
+// A parenthesized side is anatomical information, never an ignorable suffix.
 export function anatomicalGreek(name){
  const raw=String(name||'').trim();if(!raw)return null;
  let base=simplify(raw);
+ const trailingSide=base.match(/^(.+?) \((left|right)\)$/);
+ if(trailingSide){
+  if(/^(left|right)\s/.test(trailingSide[1]))return null; // conflicting or duplicate laterality
+  base=trailingSide[2]+' '+trailingSide[1];
+ }
  // Sided rib numbering must be complete. Do not render a bare "πλευρά"
  // for the anatomically different sixth, eighth etc.
  let m=base.match(/^(left|right)\s+(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|\d+(?:st|nd|rd|th)?)\s+rib$/);
@@ -128,6 +236,7 @@ export function anatomicalGreek(name){
  if(m){const n=NUMS[m[3]]||parseInt(m[3],10),kind=WORDS[m[5]];if(n>=1&&n<=8)return (m[1]==='left'?'Αριστερός':'Δεξιός')+' '+(m[2]==='upper'?'άνω':'κάτω')+' '+n+'ος '+(m[4]==='primary'||m[4]==='deciduous'?'νεογιλός':'μόνιμος')+' '+kind;}
  m=base.match(/^(left|right)\s+(upper|lower)\s+(first|second|third|fourth|fifth|sixth|seventh|eighth|\d+(?:st|nd|rd|th)?)\s+(incisor|canine|premolar|molar)\s+tooth$/);
  if(m){const n=NUMS[m[3]]||parseInt(m[3],10);if(n>=1&&n<=8)return (m[1]==='left'?'Αριστερός':'Δεξιός')+' '+(m[2]==='upper'?'άνω':'κάτω')+' '+n+'ος '+WORDS[m[4]];}
+ if(CORE[base])return CORE[base]; // full phrase may contain internal laterality
  let side=null;
  m=base.match(/^(left|right)\s+(.+)$/);
  if(m){side=m[1];base=m[2];}
