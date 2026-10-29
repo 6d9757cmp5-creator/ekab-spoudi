@@ -12,7 +12,7 @@ for(const c of courses)for(let n=0;n<c.chapters.length;n++){
  const captions=new Set();
  for(const id of assets){
   const a=registry.assets[id];if(!a?.localPath){errors.push('asset missing '+id);continue;}
-  const svg=fs.readFileSync(a.localPath,'utf8');count++;
+  const svg=fs.readFileSync(a.localPath,'utf8').replace(/\r\n/g,'\n');count++;
   if(svg.includes('…')||svg.includes('...')||a.caption?.includes('…'))errors.push('cut off text '+id);
   if(/Σε εκπαιδευτικό σενάριο σχετικό|Σενάριο κεφαλαίου:|Ο εκπαιδευόμενος κατανοεί/.test(svg))errors.push('generic placeholder '+id);
   if(!svg.includes('Γ΄ ΕΞΑΜΗΝΟ')||!svg.includes('role="img"'))errors.push('no sem C/ARIA label '+id);
