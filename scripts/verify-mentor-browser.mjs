@@ -232,6 +232,20 @@ try{
   await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
   assert.equal(await page.locator('a[href="ui-tools/anatomy-3d/index.html"]').count(),1);
   assert.equal(await page.locator('a[href="mentor-oral.html"]').count(),2);
+  // ECG Lab: synthetic signal only, local control without personal clinical inference.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-ecg.html',{waitUntil:'networkidle'});
+  assert.match(await page.title(),/ECG Lab/);
+  const ecgBefore=await page.locator('#ecg-curve').getAttribute('points');
+  assert.ok(ecgBefore.split(' ').length>=400);
+  await page.locator('[data-ecg-rate="115"]').click();
+  assert.match(await page.locator('#ecg-rate-out').textContent(),/115/);
+  const ecgAfter=await page.locator('#ecg-curve').getAttribute('points');
+  assert.notEqual(ecgBefore,ecgAfter,'synthetic waveform changes with illustrative rate');
+  assert.match(await page.locator('#ecg-caption').textContent(),/Καμία κλινική μέτρηση/);
+  await page.locator('#ecg-toggle-key').click();
+  assert.equal(await page.locator('#ecg-key').isVisible(),true);
+  assert.equal(await page.locator('#ecg-toggle-key').getAttribute('aria-expanded'),'true');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
