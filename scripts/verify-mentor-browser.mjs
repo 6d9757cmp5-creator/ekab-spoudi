@@ -161,11 +161,11 @@ try{
   assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().textContent(),/112|166/);
   assert.equal(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').count(),0);
   await page.locator('#tab-knowledge').click();
-  await page.waitForFunction(()=>document.getElementById('knowledge-count').textContent.includes('29 εκπαιδευτικές κάρτες'));
-  assert.equal(await page.locator('#knowledge-results .knowledge-card').count(),29);
+  await page.waitForFunction(()=>document.getElementById('knowledge-count').textContent.includes('30 εκπαιδευτικές κάρτες'));
+  assert.equal(await page.locator('#knowledge-results .knowledge-card').count(),30);
   await page.locator('#knowledge-search').fill('ανατομική ορολογία');
   await page.waitForFunction(()=>document.querySelectorAll('#knowledge-results .knowledge-card').length>=1 &&
-    document.querySelectorAll('#knowledge-results .knowledge-card').length<29);
+    document.querySelectorAll('#knowledge-results .knowledge-card').length<30);
   await page.locator('#knowledge-results .knowledge-card summary').first().click();
   assert.ok(await page.locator('#knowledge-results .knowledge-card .knowledge-references a').count()>=1);
   await page.locator('#knowledge-clear').click();
