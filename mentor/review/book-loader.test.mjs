@@ -21,7 +21,7 @@ function mocks(tamper=false){
   urls.push(url);
   if(url.endsWith('manifest.json'))return {ok:true,json:async()=>manifest};
   if(url.endsWith('source-index.json'))return {ok:true,json:async()=>catalog};
-  return {ok:true,arrayBuffer:async()=>(tamper?Buffer.from('tampered source'):raw)};
+  return {ok:true,arrayBuffer:async()=>{const data=Buffer.from(raw);if(tamper)data[data.length-20]^=1;return data;}};
  };
  return {request,urls};
 }
