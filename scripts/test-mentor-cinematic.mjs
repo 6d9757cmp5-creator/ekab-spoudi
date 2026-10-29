@@ -13,7 +13,7 @@ test('Cinematic user-approved full-body asset and 3 training images are actual W
 });
 test('Cinematic MENTOR page has visible character, modes, answers and actual study links',()=>{
   const html=read('mentor-lab.html');
-  for(const file of ['mentor-cinematic.mjs','mentor-cinematic.css','assets/mentor-cinematic.webp'])
+  for(const file of ['mentor-cinematic.mjs','mentor-cinematic.css','mentor-real3d.bundle.mjs'])
     assert.ok(html.includes(file),file);
   for(const id of ['mentor-cinematic-stage','mentor-hero-form','mentor-presence-line','mentor-hero-question','mentor-avatar'])
     assert.ok(html.includes('id="'+id+'"'),id);
@@ -24,7 +24,8 @@ test('Cinematic MENTOR page has visible character, modes, answers and actual stu
 });
 test('No fake 3D claims or unconsented AI and no legacy student state writes',()=>{
   const js=read('mentor/avatar/cinematic.mjs'),css=read('mentor-cinematic.css'),hologram=read('mentor-3d.mjs');
-  assert.match(js,/δεν είναι ακόμη πλήρες 3D/);
+  assert.match(js,/No new AI/);
+  assert.match(read('mentor-presence.html'),/mentor-real3d\.bundle\.mjs/);
   assert.match(hologram,/setView\("photo"\)/);
   assert.match(css,/mentor-intro-visual>.mentor-3d-panel/);
   assert.doesNotMatch(js,/indexedDB|localStorage|sessionStorage|fetch\(|XMLHttpRequest|geolocation|SpeechRecognition|openai/i);
