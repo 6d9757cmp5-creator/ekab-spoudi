@@ -220,6 +220,21 @@ function addCoachMessage(role,message){
 }
 async function coachAsk(intent,topic,userText){
   addCoachMessage('user',userText);
+  // A strictly deterministic reading of a pre-authored teaching card.
+  // No AI synthesis, patient case assessment, or freeform clinical advice.
+  const shortTopic=String(userText??'').trim().split(/\s+/).length<=3;
+  if(!topic && (intent==='explain'||(intent==='unknown'&&shortTopic)) && state.knowledge?.ready){
+    const fact=state.knowledge.lookup(userText);
+    if(fact){
+      const refs=fact.sources.map(s=>s.title+' — '+s.url).join('; ');
+      lastCoachReply='Κάρτα γνώσης (προσχέδιο): '+fact.title+'. '+fact.lesson+
+        ' Βιβλιογραφία για μελέτη: '+refs+
+        '. Η αντιστοίχιση της πηγής είναι θεματική και εκκρεμεί επιστημονικός έλεγχος. '+
+        'Δεν αποτελεί οδηγία για πραγματικό ασθενή ή επίσημη βαθμολόγηση.';
+      addCoachMessage('assistant',lastCoachReply);
+      return;
+    }
+  }
   try{
     const overview=state.store&&state.scope?await state.store.overview(state.scope):null;
     lastCoachReply=coachResponse({intent,topic,overview});
@@ -268,7 +283,7 @@ function wireCoach(){
   $('coach-stop').addEventListener('click',()=>{
     if(available)speechSynthesis.cancel();
   });
-  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές Mentor ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
+  addCoachMessage('assistant','Καλώς ήρθες! Μπορώ να σε βοηθήσω με την πρόοδό σου, να σου δώσω άσκηση ή να βρω θεωρητική γνώση μέσα σε 59 ελληνικές εκπαιδευτικές κάρτες με πηγές. Δεν είμαι ακόμη AI και οι ιατρικές κάρτες εκκρεμούν για επιστημονικό έλεγχο.');
 }
 async function renderPlan(){
   renderPersonalPlan();
