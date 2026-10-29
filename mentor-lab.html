@@ -8,10 +8,12 @@
 <link rel="stylesheet" href="mentor-lab.css">
 <link rel="stylesheet" href="mentor-avatar-live.css">
 <link rel="stylesheet" href="mentor-3d.css">
+<link rel="stylesheet" href="mentor-cinematic.css">
 <script src="mentor-adaptive.js" defer></script>
 <script src="mentor-personal-v1.js" defer></script>
 <script type="module" src="mentor-lab.js" defer></script>
 <script type="module" src="mentor-3d.mjs" defer></script>
+<script type="module" src="mentor-cinematic.mjs" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
@@ -22,10 +24,10 @@
   </div>
 </header>
 <main id="main" class="layout">
-  <section class="hero mentor-intro-hero" id="mentor-presence" aria-labelledby="welcome">
-    <div class="mentor-intro-copy">
-      <p class="eyebrow">MENTOR · Ο προσωπικός σου εκπαιδευτής</p>
-      <h1 id="welcome">MENTOR</h1>
+  <section class="hero mentor-intro-hero cinematic-mentor-hero" id="mentor-presence" aria-labelledby="welcome">
+<div class="mentor-intro-copy">
+      <p class="eyebrow cinematic-eyebrow">✦ ΔΙΑΔΡΑΣΤΙΚΗ ΕΚΠΑΙΔΕΥΣΗ ΕΚΑΒ</p>
+      <h1 id="welcome">Ο εκπαιδευτικός σου <span>MENTOR</span> σε κάθε περιστατικό</h1><p class="cinematic-lead">Μάθε, εξασκήσου και προετοιμάσου για το ΕΚΑΒ με εκπαιδευτικά σενάρια, ελληνική φωνή και προσωπική καθοδήγηση.</p><div class="cinematic-lead-actions"><a class="cinematic-btn cinematic-primary" href="mentor-live.html">▶ Ξεκίνα αποστολή</a><a class="cinematic-btn cinematic-secondary" href="mentor-scenarios.html">Εξερεύνησε σενάρια</a></div>
       <p id="mentor-presence-line" class="mentor-intro-message" role="status" aria-live="polite">«Καλώς ήρθες. Πες μου τι θέλεις να μελετήσουμε ή διάλεξε μια αποστολή.»</p>
       <form class="mentor-intro-form" id="mentor-hero-form">
         <label for="mentor-hero-question">Ρώτησε τον MENTOR</label>
@@ -46,9 +48,26 @@
         <input id="mentor-voice-speed" type="range" min="0.8" max="1.1" step="0.05" value="0.95">
       </div>
       <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός · ελληνική φωνή της συσκευής · όχι πλήρες AI.</p>
+      <section class="cinematic-scenarios" aria-label="Δημοφιλή εκπαιδευτικά σενάρια">
+        <div class="cinematic-section-caption">ΔΗΜΟΦΙΛΗ ΕΚΠΑΙΔΕΥΤΙΚΑ ΣΕΝΑΡΙΑ</div>
+        <div class="cinematic-scenario-list">
+          <a href="seminar-prep.html" class="cinematic-scenario scenario-cpr"><span class="scenario-thumbnail"></span><b>Καρδιοαναπνευστική αναζωογόνηση</b><small>BLS / AED · Μελέτη</small></a>
+          <a href="mentor-live.html" class="cinematic-scenario scenario-trauma"><span class="scenario-thumbnail"></span><b>Τραύμα</b><small>Συνθετική αποστολή</small></a>
+          <a href="mentor-scenarios.html" class="cinematic-scenario scenario-airway"><span class="scenario-thumbnail"></span><b>Αεραγωγός</b><small>Εκπαιδευτικά σενάρια</small></a>
+        </div>
+      </section>
       <p id="mentor-microphone-privacy" class="mentor-voice-privacy">Το μικρόφωνο ενεργοποιείται μόνο όταν πατήσεις «Μίλα μου», εφόσον το υποστηρίζει ο browser. Η αναγνώριση μπορεί να πραγματοποιείται από υπηρεσία του παρόχου του browser. Η αναγνωρισμένη ερώτηση δεν υποβάλλεται αυτόματα και δεν αποθηκεύεται από τον MENTOR.</p>
     </div>
-    <div class="mentor-intro-visual"><div class="mentor-figure mentor-photo-avatar" id="mentor-avatar" data-viseme="rest" aria-hidden="true">
+    
+<div class="mentor-intro-visual">
+      <div class="mentor-cinematic-stage" id="mentor-cinematic-stage">
+        <span class="cinematic-grid" aria-hidden="true"></span>
+        <span class="cinematic-light cinematic-light-left" aria-hidden="true"></span>
+        <span class="cinematic-light cinematic-light-right" aria-hidden="true"></span>
+        <img class="cinematic-character" src="assets/mentor-cinematic.webp" alt="Συνθετική φωτορεαλιστική απεικόνιση εκπαιδευτή διασώστη με στολή και γαλάζια ολογραφική λάμψη" width="320" height="763" decoding="async" fetchpriority="high">
+        <span class="cinematic-stage-label">MENTOR <span>·</span> ΟΛΟΓΡΑΦΙΚΗ ΠΡΟΒΟΛΗ</span>
+        <span class="cinematic-stage-base" aria-hidden="true"></span>
+      </div><div class="mentor-figure mentor-photo-avatar" id="mentor-avatar" data-viseme="rest" aria-hidden="true">
   <div class="mentor-halo"></div><div class="mentor-shoulders"></div><div class="mentor-neck"></div>
   <div class="mentor-ears"></div><div class="mentor-face"></div><div class="mentor-hair"></div>
   <div class="mentor-brow mentor-brow-left"></div><div class="mentor-brow mentor-brow-right"></div>
@@ -77,6 +96,39 @@
       </div>
       <small>Εκπαιδευτικός συνθετικός χαρακτήρας · μη επίσημη στολή τύπου διασώστη · χωρίς ακριβή χρονοσήματα φωνημάτων</small>
     </div>
+  
+<aside class="mentor-cinematic-side" aria-label="Βοηθός εκπαιδευτή και ενότητες">
+      <section class="cinematic-panel cinematic-mode-panel">
+        <h2>ΛΕΙΤΟΥΡΓΙΑ ΒΟΗΘΟΥ MENTOR</h2>
+        <div class="cinematic-mode-list" role="group" aria-label="Τρόπος αλληλεπίδρασης">
+          <button type="button" class="cinematic-mode is-current" data-cinematic-mode="hologram" aria-pressed="true"><span aria-hidden="true">⬡</span>Ολόγραμμα</button>
+          <button type="button" class="cinematic-mode" data-cinematic-mode="voice" aria-pressed="false"><span aria-hidden="true">◉</span>Φωνή</button>
+          <button type="button" class="cinematic-mode" data-cinematic-mode="text" aria-pressed="false"><span aria-hidden="true">▤</span>Κείμενο</button>
+        </div>
+        <p id="cinematic-mode-description">Φωτορεαλιστική συνθετική προβολή με ολογραφικά εφέ. Δεν είναι ακόμη πλήρες 3D μοντέλο.</p>
+      </section>
+      <section class="cinematic-panel cinematic-questions">
+        <h2>ΡΩΤΗΣΕ ΤΟΝ MENTOR</h2>
+        <div class="cinematic-greeting"><span aria-hidden="true">✚</span><p><strong>Γεια σου!</strong> Είμαι ο MENTOR, ο προσωπικός σου εκπαιδευτικός οδηγός. Τι θέλεις να μελετήσουμε;</p></div>
+        <div class="cinematic-prompts">
+          <button type="button" data-cinematic-question="Πες μου τα βήματα για ΚΑΡΠΑ" >♡ Πες μου τα βήματα για ΚΑΡΠΑ <span aria-hidden="true">›</span></button>
+          <button type="button" data-cinematic-question="Πώς διαχειριζόμαστε τον αεραγωγό;" >♧ Πώς διαχειριζόμαστε τον αεραγωγό; <span aria-hidden="true">›</span></button>
+          <button type="button" data-cinematic-question="Τι να μελετήσω για το τραύμα;" >◇ Μελέτη εκτίμησης τραύματος <span aria-hidden="true">›</span></button>
+          <button type="button" data-cinematic-question="Ποια είναι τα φυσιολογικά ζωτικά σημεία;" >⌁ Ποια είναι τα φυσιολογικά ζωτικά σημεία; <span aria-hidden="true">›</span></button>
+        </div>
+      </section>
+      <section class="cinematic-panel cinematic-vitals">
+        <h2>ΠΑΡΑΔΕΙΓΜΑ ΖΩΤΙΚΩΝ ΣΗΜΕΙΩΝ</h2>
+        <div class="cinematic-vitals-grid">
+          <div><small>HR</small><strong>78</strong><span>bpm</span></div>
+          <div><small>SpO₂</small><strong>98</strong><span>%</span></div>
+          <div><small>RR</small><strong>16</strong><span>/min</span></div>
+          <div><small>ΑΠ</small><strong>118/76</strong><span>mmHg</span></div>
+          <div><small>Θερμ.</small><strong>36,6</strong><span>°C</span></div>
+        </div>
+        <p>Αποκλειστικά συνθετικές τιμές εκπαιδευτικής απεικόνισης — όχι μετρήσεις ασθενούς.</p>
+      </section>
+    </aside>
   </section>
   <section class="panel mentor-personal" id="mentor-personal" aria-labelledby="mentor-personal-heading">
   <div class="mentor-personal-header"><span class="mentor-personal-icon" aria-hidden="true">✺</span><div><p class="eyebrow">Μία ταυτότητα · Όλες οι γνώσεις</p><h2 id="mentor-personal-heading">MENTOR</h2><p>Ο προσωπικός σου καθηγητής προσαρμόζει τη διαδρομή στις ανάγκες σου. Δεν υπάρχουν ξεχωριστοί εκπαιδευτές.</p></div></div>
