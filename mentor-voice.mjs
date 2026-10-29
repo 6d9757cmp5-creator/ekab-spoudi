@@ -10,8 +10,8 @@ export function supportsSpeech(env=globalThis){
   return !!(env?.speechSynthesis&&typeof env.SpeechSynthesisUtterance==="function");
 }
 const normalizeLang=lang=>String(lang||"").toLowerCase().replace(/_/g,"-");
-const MALE_GREEK_VOICES=/\b(?:nestoras|νέστορας|stefanos|στέφανος|nikos|νίκος|giorgos|γιώργος|george|male|ανδρικ)\b/i;
-const FEMALE_GREEK_VOICES=/\b(?:athina|αθηνά|eleni|ελένη|despina|δέσποινα|female|γυναικ|afroditi|αφροδίτη)\b/i;
+const MALE_GREEK_VOICES=/(?:nestoras|νέστορας|stefanos|στέφανος|nikos|νίκος|giorgos|γιώργος|george|male|ανδρικ)/i;
+const FEMALE_GREEK_VOICES=/(?:athina|αθηνά|eleni|ελένη|despina|δέσποινα|female|γυναικ|afroditi|αφροδίτη)/i;
 export function isKnownMaleGreekVoice(voice){
   if(!normalizeLang(voice?.lang).startsWith("el"))return false;
   const name=String(voice.name||"")+" "+String(voice.voiceURI||"");
