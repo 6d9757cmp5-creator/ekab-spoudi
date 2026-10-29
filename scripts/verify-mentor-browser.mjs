@@ -344,6 +344,34 @@ try{
   const reduced=await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
   if(!reduced){assert.equal(motion.open,'open');assert.equal(motion.round,'round');}
   assert.equal(motion.ended,true,'Stopping speech removes the live mouth state');
+  // Actual GPU-backed MENTOR hologram or explicit portrait fallback in WebKit.
+  assert.equal(await page.locator('#mentor-3d-canvas').count(),1,'WebGL hologram canvas exists');
+  const hologram=await page.evaluate(()=>{
+    const canvas=document.getElementById('mentor-3d-canvas');
+    const mode=document.getElementById('mentor-view-3d');
+    const surface=document.querySelector('.mentor-intro-visual');
+    const gl=canvas.getContext('webgl');
+    return {supported:!mode.disabled,view:surface.dataset.mentorView,
+      gpu:!!(gl&&gl.getParameter(gl.CURRENT_PROGRAM)),
+      width:canvas.width,height:canvas.height};
+  });
+  if(hologram.supported){
+    assert.equal(hologram.view,'3d','GPU mode is active on WebGL devices');
+    assert.equal(hologram.gpu,true,'Real GLSL program is active on GPU');
+    assert.ok(hologram.width>100&&hologram.height>100,'Canvas has drawable resolution');
+    await page.locator('#mentor-3d-rotation').evaluate(el=>{
+      el.value='74';el.dispatchEvent(new Event('input',{bubbles:true}));
+    });
+    assert.equal(await page.locator('#mentor-3d-rotation').inputValue(),'74');
+    await page.locator('#mentor-view-photo').click();
+    assert.equal(await page.locator('.mentor-intro-visual').getAttribute('data-mentor-view'),'photo');
+    await page.locator('#mentor-view-3d').click();
+    assert.equal(await page.locator('.mentor-intro-visual').getAttribute('data-mentor-view'),'3d');
+    assert.match(await page.locator('#mentor-3d-status').textContent(),/προσεγγιστικό/);
+  }else{
+    assert.equal(hologram.view,'photo','Portrait remains functional if WebGL is unavailable');
+    assert.match(await page.locator('#mentor-3d-status').textContent(),/δεν είναι διαθέσιμη/);
+  }
   // Safari WebKit sometimes reports a malformed optional update-check URL from legacy code.
   // This is unrelated to the avatar and must not mask other browser exceptions.
   const actionableErrors=errors.filter(e=>!e.includes('Fetch API cannot load http: /127.0.0.1:')||!e.includes('/version.json?nocache='));
