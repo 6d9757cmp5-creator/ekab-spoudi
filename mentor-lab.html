@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#102a39">
 <title>MENTOR OS · Εργαστήριο αποστολών (δοκιμή)</title>
 <link rel="stylesheet" href="mentor-lab.css">
+<link rel="stylesheet" href="mentor-avatar-live.css">
 <script type="module" src="mentor-lab.js" defer></script>
 </head>
 <body>
@@ -43,15 +44,21 @@
       <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός · ελληνική φωνή της συσκευής · όχι πλήρες AI.</p>
       <p id="mentor-microphone-privacy" class="mentor-voice-privacy">Το μικρόφωνο ενεργοποιείται μόνο όταν πατήσεις «Μίλα μου», εφόσον το υποστηρίζει ο browser. Η αναγνώριση μπορεί να πραγματοποιείται από υπηρεσία του παρόχου του browser. Η αναγνωρισμένη ερώτηση δεν υποβάλλεται αυτόματα και δεν αποθηκεύεται από τον MENTOR.</p>
     </div>
-    <div class="mentor-intro-visual"><div class="mentor-figure" id="mentor-avatar" aria-hidden="true">
+    <div class="mentor-intro-visual"><div class="mentor-figure mentor-photo-avatar" id="mentor-avatar" data-viseme="rest" aria-hidden="true">
   <div class="mentor-halo"></div><div class="mentor-shoulders"></div><div class="mentor-neck"></div>
   <div class="mentor-ears"></div><div class="mentor-face"></div><div class="mentor-hair"></div>
   <div class="mentor-brow mentor-brow-left"></div><div class="mentor-brow mentor-brow-right"></div>
   <div class="mentor-eye mentor-eye-left"></div><div class="mentor-eye mentor-eye-right"></div>
   <div class="mentor-nose"></div><div class="mentor-mouth"></div>
   <div class="mentor-jacket"></div><div class="mentor-collar"></div><div class="mentor-headset"></div>
+ <img class="mentor-photo-img" src="assets/mentor-photo.webp" alt="" width="220" height="228" loading="eager" decoding="async">
+ <span class="mentor-photo-mouth" aria-hidden="true"><span class="mentor-photo-mouth-inner"></span></span>
+ <span class="mentor-photo-vignette" aria-hidden="true"></span>
+ <span class="mentor-photo-aura" aria-hidden="true"></span>
+ <span class="mentor-photo-blink left" aria-hidden="true"></span>
+ <span class="mentor-photo-blink right" aria-hidden="true"></span>
 </div>
-      <small>Ψηφιακός χαρακτήρας · δοκιμαστική παρουσία</small>
+      <small>Φωτορεαλιστικός ψηφιακός καθηγητής ΕΚΑΒ · προσεγγιστικό lip-sync</small>
     </div>
   </section>
   <section class="panel" aria-labelledby="mentor-reader-title">
