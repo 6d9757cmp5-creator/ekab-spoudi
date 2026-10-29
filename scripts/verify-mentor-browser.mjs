@@ -312,7 +312,7 @@ try{
   assert.equal(await page.locator('#mentor-voice-select').count(),1,'installed Greek voice picker is present');
   assert.equal(await page.locator('#mentor-intro-mic').count(),1,'explicit mic control is present');
   assert.equal(await page.locator('#mentor-speech-wave').count(),1,'voice waveform exists');
-  await page.locator('#mentor-voice-speed').fill('1.05');
+  await page.locator('#mentor-voice-speed').evaluate(el=>{el.value='1.05';el.dispatchEvent(new Event('input',{bubbles:true}));});
   assert.match(await page.locator('#mentor-voice-speed-label').textContent(),/1,05/);
   assert.match(await page.locator('#mentor-microphone-privacy').textContent(),/υπηρεσία του παρόχου του browser/);
   const privacyBefore=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
