@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'mentor/review/**'
+      - 'mentor/knowledge/**'
       - 'mentor/review-corpus/**'
       - 'mentor-lab.html'
       - 'mentor-lab.js'
@@ -28,6 +29,8 @@ jobs:
           for f in mentor/review/*.mjs; do node --check "$f"; done
           node --check mentor-lab.js
           node --test mentor/review/*.test.mjs
+          for f in mentor/knowledge/*.mjs; do node --check "$f"; done
+          node --test mentor/knowledge/*.test.mjs
       - name: Run full source quality audit and create clinician review queue
         run: |
           node mentor/review/audit-corpus.mjs --out=mentor-audit-artifact
