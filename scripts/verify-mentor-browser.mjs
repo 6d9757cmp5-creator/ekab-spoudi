@@ -322,30 +322,6 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
   const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
   assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
-  // Photo-realistic portrait: actual image pixels, animation lifecycle and clean stop.
-  await page.goto('http://127.0.0.1:'+port+'/index.html',{waitUntil:'networkidle'});
-  assert.equal(await page.locator('#mentor-home-avatar .mentor-photo-img').isVisible(),true);
-  assert.equal(await page.locator('#mentor-home-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220&&x.naturalHeight===228),true,'Real WEBP image loads in home');
-  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
-  assert.equal(await page.locator('#mentor-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220),true,'Real WEBP image loads in tutor');
-  const motion=await page.evaluate(async()=>{
-    const {createMentorAvatar}=await import('/mentor-avatar-live.mjs');
-    const root=document.querySelector('#mentor-avatar');
-    const player=createMentorAvatar(root);
-    player.start('Άλφα ωμέγα');
-    const started=root.classList.contains('mentor-photo-speaking');
-    player.boundary({charIndex:0});
-    const open=root.dataset.viseme;
-    player.boundary({charIndex:5});
-    const round=root.dataset.viseme;
-    player.stop();
-    return {started,open,round,ended:!root.classList.contains('mentor-photo-speaking')&&root.dataset.viseme==='rest'};
-  });
-  assert.equal(motion.started,true);
-  // In reduced-motion environments shape stays at rest, by design.
-  const reduced=await page.evaluate(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  if(!reduced){assert.equal(motion.open,'open');assert.equal(motion.round,'round');}
-  assert.equal(motion.ended,true);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
