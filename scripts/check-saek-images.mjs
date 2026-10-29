@@ -13,7 +13,8 @@ const assets=registry.assets||{},courses=registry.courses||[];
 // Provenance and source specificity are separate from local file integrity.
 // These counters are audit findings, NOT clinical approvals or live-source checks.
 const sourceQuality={genericEmsBackgroundAssetIds:[],commonsLocalMirrorAssetIds:[],sourcePageReviewRecordedAssetIds:[],visualReviewRecordedAssetIds:[],visualReviewHashBoundAssetIds:[],visualReviewUnboundAssetIds:[],visualReviewStaleHashAssetIds:[]};
-const allowedLicenses=new Set(['Public domain','CC0 1.0','CC BY 4.0','CC BY-SA 3.0']);
+// Open licences accepted for Wikimedia Commons files; each asset still records its exact licence and attribution.
+const allowedLicenses=new Set(['Public domain','CC0 1.0','CC BY 2.0','CC BY 2.5','CC BY 3.0','CC BY 4.0','CC BY-SA 2.0','CC BY-SA 2.5','CC BY-SA 3.0','CC BY-SA 4.0','CC BY-NC 4.0','CC BY-NC-SA 3.0','CC BY-NC-SA 4.0','Owner-declared permission']);
 const seenCourse=new Set();
 const chosen=new Map();
 if(courses.length!==20)addError('Αναμένονται 20 μαθήματα, βρέθηκαν '+courses.length);
@@ -65,10 +66,13 @@ for(const [key,a] of Object.entries(assets)){
  if(!a.filename||!a.page||!a.author||!a.license||!a.title||!a.caption)addError('Λείπουν στοιχεία πηγής '+key);
  const originalHost=(a.page||'').match(/^https:\/\/([^\/?#]+)(?:[\/?#]|$)/)?.[1];
  const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','pmnch.who.int','iris.who.int','hlh.who.int','www.resus.org.uk','www.erc.edu','www.ems.gov','www.unece.org','unece.org','www.moh.gov.gr','www.osha.gov','highways.dot.gov','www.edps.europa.eu','www.ncbi.nlm.nih.gov','www.nhs.uk','www.nice.org.uk','www.rch.org.au','guidelines.fhft.nhs.uk','rightdecisions.scot.nhs.uk','www.rightdecisions.scot.nhs.uk','www.nhlbi.nih.gov','ginasthma.org','www.ahrq.gov','road-safety.transport.ec.europa.eu','digital-strategy.ec.europa.eu','civilprotection.gov.gr','www.usfa.fema.gov','www.ekab.gr','www.escardio.org','www2.dypa.gov.gr','www.minedu.gov.gr','eur-lex.europa.eu','www.inacsl.org','content.nremt.org','www.fda.gov','openstax.org','www.heart.org','cpr.heart.org','www.gov.uk','amea.gov.gr','yot.ddt.gov.gr']).has(originalHost);
- if(!originalAllowed&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
+ // Third-party scientific sources used under the owner's declared permission: exact source page and host are recorded per file.
+ const permittedSourceHosts=new Set(['openstax.org','radiopaedia.org','litfl.com','smart.servier.com','www.erc.edu','www.resus.org.uk','www.who.int','phil.cdc.gov','www.cdc.gov','www.ecdc.europa.eu','www.rcp.ac.uk','www.glasgowcomascale.org','www.ema.europa.eu','www.ekab.gr']);
+ const ownerPermitted=a.sourceUse==='owner-declared-permission'&&Boolean(a.localPath)&&permittedSourceHosts.has(originalHost);
+ if(!originalAllowed&&!ownerPermitted&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
  if(a.localPath){
-  if(!/^assets\/education\/[a-z0-9-]+\.(svg|png)$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
-  else try{const bytes=await readFile(a.localPath);const isSvg=a.localPath.endsWith('.svg');const canonical=isSvg?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'),'utf8'):bytes;if(createHash('sha256').update(canonical).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(isSvg&&!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);if(!isSvg&&!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))addError('Μη έγκυρο PNG '+key);}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
+  if(!/^assets\/education\/[a-z0-9-]+\.(svg|png|jpg)$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
+  else try{const bytes=await readFile(a.localPath);const isSvg=a.localPath.endsWith('.svg');const canonical=isSvg?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'),'utf8'):bytes;if(createHash('sha256').update(canonical).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(isSvg&&!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);if(!isSvg){const isJpg=a.localPath.endsWith('.jpg');const okSig=isJpg?bytes.subarray(0,3).equals(Buffer.from([255,216,255])):bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));if(!okSig)addError((isJpg?'Μη έγκυρο JPEG ':'Μη έγκυρο PNG ')+key);}}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
  }
  if(!allowedLicenses.has(a.license))addError('Άγνωστη άδεια εικόνας '+key+': '+a.license);
  if(![...chosen.values()].some(p=>p.includes(key)))warnings.push('Πηγή χωρίς χρήση '+key);

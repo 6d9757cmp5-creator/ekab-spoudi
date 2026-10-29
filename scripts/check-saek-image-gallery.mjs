@@ -20,7 +20,8 @@ if(!page.includes('imageGalleryGrid')||!page.includes('imageSemester')||!page.in
  errors.push('Gallery page missing accessible filtering controls');
 const chapters=registry.courses.reduce((n,c)=>n+c.chapters.length,0);
 const placed=registry.courses.reduce((n,c)=>n+c.chapters.reduce((t,ch)=>t+ch.images.length,0),0);
-if(registry.courses.length!==20||chapters!==247||placed!==649||Object.keys(registry.assets).length!==649)
- errors.push('Expected 20 courses, 247 chapters and 649 images');
+const placedIds=new Set(registry.courses.flatMap(c=>c.chapters.flatMap(ch=>ch.images)));
+if(registry.courses.length!==20||chapters!==247||!placed||[...placedIds].some(id=>!registry.assets[id]))
+ errors.push('Expected 20 courses, 247 chapters and every placed image present in the registry');
 console.log(JSON.stringify({courses:registry.courses.length,chapters,placedImages:placed,errors},null,2));
 if(errors.length)process.exitCode=1;

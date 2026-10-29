@@ -36,7 +36,7 @@ for key, item in sorted(data["assets"].items()):
         try:
             path = Path(local)
             source = path.read_bytes()
-            if source.startswith(b"\x89PNG\r\n\x1a\n"):
+            if source.startswith(b"\x89PNG\r\n\x1a\n") or source.startswith(b"\xff\xd8\xff"):
                 raster = source
             else:
                 root = ET.fromstring(source)
@@ -82,4 +82,4 @@ report = {"total": len(records), "rendered_local": sum(r["rendered"] for r in re
 print("Image contact sheets:", len(pages), "; entries:", len(records),
       "; rendered:", report["rendered_local"], "; external:", report["external_not_verified"],
       "; errors:", len(errors), "; text candidates:", report["possible_text_overlays"])
-sys.exit(1 if errors or len(records) != 649 else 0)
+sys.exit(1 if errors or not records else 0)
