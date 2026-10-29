@@ -60,23 +60,38 @@ for key, asset in registry.get("assets", {}).items():
     for el in root.iter():
         if el.tag in (svg_ns + "script", svg_ns + "foreignObject"):
             errors.append(f"{key}: unsafe embedded element")
+        # Embedded CSS can fetch remote resources even when SVG attributes look safe.
+        if el.tag == svg_ns + "style":
+            css = "".join(el.itertext())
+            if re.search(r"@import\\b", css, re.I):
+                errors.append(f"{key}: CSS import in SVG")
+            for raw_ref in re.findall(r"url\\(\\s*([^)]+?)\\s*\\)", css, re.I):
+                ref = raw_ref.strip().strip("\\\"'")
+                if not ref.startswith("#") or ref[1:] not in ids:
+                    errors.append(f"{key}: unsafe or missing CSS url reference")
         for attr, value in el.attrib.items():
             if attr.lower().startswith("on"):
                 errors.append(f"{key}: event handler {attr}")
-            if attr.endswith("href") and value.startswith("data:"):
-                prefix = "data:image/png;base64,"
-                try:
-                    payload = "".join(value[len(prefix):].split())
-                    embedded = base64.b64decode(payload, validate=True) if value.startswith(prefix) and el.tag == svg_ns + "image" else b""
-                except (ValueError, base64.binascii.Error):
-                    embedded = b""
-                if not embedded.startswith(bytes((137, 80, 78, 71, 13, 10, 26, 10))):
-                    errors.append(f"{key}: invalid embedded PNG")
-            elif attr.endswith("href") and value.startswith(("http:", "https:", "//")):
-                errors.append(f"{key}: external href")
-            for ref in re.findall(r"url\(#([^)]*)\)", value):
-                if ref not in ids:
-                    errors.append(f"{key}: missing referenced id {ref}")
+            if attr.endswith("href"):
+                href = value.strip()
+                if href.startswith("data:"):
+                    prefix = "data:image/png;base64,"
+                    try:
+                        payload = "".join(href[len(prefix):].split())
+                        embedded = base64.b64decode(payload, validate=True) if href.startswith(prefix) and el.tag == svg_ns + "image" else b""
+                    except (ValueError, base64.binascii.Error):
+                        embedded = b""
+                    if not embedded.startswith(bytes((137, 80, 78, 71, 13, 10, 26, 10))):
+                        errors.append(f"{key}: invalid embedded PNG")
+                elif href.startswith("#"):
+                    if href[1:] not in ids:
+                        errors.append(f"{key}: missing local href id {href}")
+                else:
+                    errors.append(f"{key}: disallowed non-local href {href[:60]}")
+            for raw_ref in re.findall(r"url\\(\\s*([^)]+?)\\s*\\)", value, re.I):
+                ref = raw_ref.strip().strip("\\\"'")
+                if not ref.startswith("#") or ref[1:] not in ids:
+                    errors.append(f"{key}: unsafe or missing url() reference")
 
 print(f"Local image structural audit: {checked} local assets, {len(errors)} errors")
 for error in errors:
