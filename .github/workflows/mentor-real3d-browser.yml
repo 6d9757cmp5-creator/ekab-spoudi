@@ -1,0 +1,43 @@
+name: MENTOR real photoreal 3D mobile browsers
+on:
+  pull_request:
+    paths:
+      - 'mentor-real3d.bundle.mjs'
+      - 'assets/mentor-real-3d.glb'
+      - 'mentor-real3d.css'
+      - 'mentor-lab.html'
+      - 'scripts/verify-mentor-real3d-browser.mjs'
+      - '.github/workflows/mentor-real3d-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile:
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned mobile browsers
+        run: |
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Verify genuine rigged 3D model and iPhone controls
+        env:
+          MENTOR_REAL3D_BROWSER: ${{ matrix.engine }}
+        run: node scripts/verify-mentor-real3d-browser.mjs
+      - name: Preserve real 3D screenshot for design review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-real3d-mobile-${{ matrix.engine }}
+          path: mentor-real3d-mobile-*.png
+          if-no-files-found: ignore
+          retention-days: 7
