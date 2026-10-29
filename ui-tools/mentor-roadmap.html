@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a39">
+<title>MENTOR OS · Όλες οι λειτουργίες και κατάστασή τους</title>
+<style>
+:root{color-scheme:light dark;--bg:#f1f6f8;--card:#fff;--ink:#172e3a;--muted:#526c78;--line:#d6e3e8;--accent:#0e7494}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+a{color:var(--accent)}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #25aee6;outline-offset:3px}
+.shell{width:min(1100px,100%);margin:auto;padding:20px 16px 55px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:16px}
+.hero{border-radius:22px;padding:27px;background:linear-gradient(125deg,#10394e,#145e73);color:#fff}
+.eyebrow{font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:#addfed}
+.hero h1{font-size:clamp(1.55rem,5vw,2.3rem);line-height:1.25;margin:8px 0}
+.hero p{max-width:820px;color:#e1f3f8;margin:8px 0 0}
+.info{margin:18px 0;border-left:4px solid #b68c43;background:var(--card);padding:14px 18px;border-radius:12px}
+.summary-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.summary-counts>div{padding:15px;border-radius:14px;border:1px solid var(--line);background:var(--card)}
+.summary-counts strong{display:block;font-size:1.65rem;font-variant-numeric:tabular-nums}.summary-counts span{color:var(--muted);font-size:.8rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.filters button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:25px;font:inherit;font-weight:700;padding:9px 13px;min-height:44px;cursor:pointer}
+.filters button[aria-pressed=true]{background:#125872;color:white;border-color:#125872}
+#filter-report{color:var(--muted);font-size:.88rem}
+.capability-phase{margin:22px 0 30px}.capability-phase h2{font-size:1.2rem;margin:0 0 14px}
+.capability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.capability-card{border:1px solid var(--line);background:var(--card);border-radius:14px;min-width:0;overflow:hidden}
+.capability-card[hidden],.capability-phase[hidden]{display:none}
+.capability-card details{height:100%}.capability-card summary{list-style:none;cursor:pointer;padding:17px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:9px;min-height:84px}
+.capability-card summary::-webkit-details-marker{display:none}
+.capability-heading{display:flex;gap:8px;flex:1;min-width:190px;align-items:flex-start}
+.capability-heading strong{font-size:.95rem;line-height:1.4}.capability-number{font-size:.75rem;font-weight:800;color:var(--muted);padding-top:2px}
+.capability-status{border-radius:20px;padding:4px 9px;font-size:.71rem;font-weight:800;white-space:nowrap}
+.status-available{background:#def3e8;color:#12583a}.status-pending{background:#fff0d1;color:#795414}.status-unavailable{background:#f9e0e0;color:#8d2f2e}
+.capability-card[open]{border-color:var(--accent)}.capability-body{border-top:1px solid var(--line);padding:0 17px 17px;font-size:.9rem}
+.capability-body p{margin:12px 0}.capability-next{font-weight:650}.capability-evidence{color:var(--muted);font-size:.8rem}
+.capability-action{display:inline-block;background:#12647e;color:#fff;text-decoration:none;font-weight:800;border-radius:9px;padding:9px 12px;margin-top:3px}
+.capability-disabled{color:var(--muted);font-style:italic}
+.principles{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px;margin-top:28px}.principles h2{margin:0 0 9px;font-size:1.15rem}.principles p{margin:7px 0}
+footer{margin-top:25px;color:var(--muted);font-size:.82rem}
+@media(max-width:650px){.capability-grid{grid-template-columns:1fr}.summary-counts>div{padding:11px}.summary-counts strong{font-size:1.4rem}.hero{padding:20px}.capability-card summary{min-height:70px}}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1b25;--card:#142b38;--ink:#e7f3f8;--muted:#abc1cc;--line:#355260;--accent:#9ce2fa}.status-available{background:#1d493b;color:#c8f5df}.status-pending{background:#473a22;color:#ffe3a3}.status-unavailable{background:#4b2b30;color:#ffc1c1}}
+</style>
+<script type="module" src="mentor-roadmap.js" defer></script>
+</head>
+<body>
+<main class="shell">
+<nav class="nav" aria-label="Πλοήγηση"><a href="../mentor-lab.html">← MENTOR OS</a><a href="../index.html">Αρχική ΕΚΑΒ Σπουδή</a></nav>
+<header class="hero">
+<p class="eyebrow">Ενιαίος χάρτης υλοποίησης · Οκτώβριος 2026</p>
+<h1>MENTOR OS — Λειτουργίες και κατάσταση</h1>
+<p>Όλες οι δυνατότητες συγκεντρωμένες, με σαφή σήμανση. Άνοιξε κάθε γραμμή για να δεις τι υπάρχει, τι λείπει και ποιο είναι το επόμενο βήμα.</p>
+</header>
+<div class="info" role="note"><strong>Τι σημαίνει «Διαθέσιμο»;</strong> Η περιορισμένη δοκιμαστική λειτουργία υπάρχει στην εφαρμογή — όχι ότι έχει εγκριθεί για κλινική χρήση. Οι βαθμολογίες, η πρόοδος και ο συγχρονισμός ΣΑΕΚ/ΕΟΠΠΕΠ δεν επηρεάζονται από αυτόν τον πίνακα. «Μη διαθέσιμο» σημαίνει ότι δεν μπορεί να χρησιμοποιηθεί στην παρούσα έκδοση.</div>
+<section class="summary-counts" aria-label="Σύνοψη καταστάσεων">
+<div><strong data-count="available">—</strong><span>Διαθέσιμα πρωτότυπα</span></div>
+<div><strong data-count="pending">—</strong><span>Εκκρεμούν</span></div>
+<div><strong data-count="unavailable">—</strong><span>Μη διαθέσιμα</span></div>
+</section>
+<div class="filters" role="group" aria-label="Φίλτρο κατάστασης">
+<button type="button" data-filter="all" aria-pressed="true">Όλα</button>
+<button type="button" data-filter="available" aria-pressed="false">Διαθέσιμα</button>
+<button type="button" data-filter="pending" aria-pressed="false">Εκκρεμή</button>
+<button type="button" data-filter="unavailable" aria-pressed="false">Μη διαθέσιμα</button>
+</div>
+<p id="filter-report" role="status" aria-live="polite">Φόρτωση καταλόγου…</p>
+<div id="capability-groups"></div>
+<section class="principles" aria-labelledby="principles-title">
+<h2 id="principles-title">Σειρά υλοποίησης</h2>
+<p><strong>Πρώτο επόμενο έργο:</strong> Αποστολή 01 — πλήρης διαδραστικότητα με ελεγχόμενη λογική αποφάσεων, εκτός μη εγκεκριμένων κλινικών εκβάσεων.</p>
+<p>Έπειτα: ενσωματωμένος εξοπλισμός, προσωποποιημένο debrief, κοινές δεξιότητες, σύνδεση της υπάρχουσας 3D Ανατομίας, βιβλιοθήκη, ECG και AI.</p>
+<p>Κάθε χαρακτηριστικό αλλάζει κατάσταση μόνο αφού υπάρχουν λειτουργικός έλεγχος και, όπου απαιτείται, ανεξάρτητη επιστημονική έγκριση. Η σύνδεση πλήρους AI μένει κλειστή μέχρι να εγκριθεί ρητά.</p>
+</section>
+<footer>Εκπαιδευτικό σύστημα · όχι πραγματική ιατρική καθοδήγηση · μητρώο δυνατοτήτων (όχι επίσημοι βαθμοί)</footer>
+</main>
+</body>
+</html>
