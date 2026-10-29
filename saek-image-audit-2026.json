@@ -1879,22 +1879,24 @@
     "head_injury_skull_anatomy": {
       "filename": "head-injury-skull-anatomy-el.svg",
       "localPath": "assets/education/head-injury-skull-anatomy-el.svg",
-      "title": "Σχηματική τομή δέρματος, κρανίου και εγκεφάλου μετά από μηχανισμό κάκωσης",
+      "title": "Κρανιοεγκεφαλική κάκωση — σχηματική στρωμάτωση κεφαλής",
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο ελληνικό εκπαιδευτικό σχέδιο",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "originalArtwork": true,
-      "page": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
-      "caption": "Πλάγια τομή κεφαλής με διακριτά στοιχεία δέρματος, οστού και εγκεφαλικού ιστού και συμβολικό σημείο πρόσκρουσης. Δεν απεικονίζεται ειδική κάκωση ή τεχνική αντιμετώπισης.",
-      "sourcePageReviewed": "pending independent full-page verification",
-      "sourcePageCheckedFor": [],
+      "page": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations",
+      "caption": "Αφαιρετικό διάγραμμα στρώσεων δέρματος, κρανιακού οστού και εγκεφαλικού ιστού. Όχι ανατομική τομή, όχι υπό κλίμακα και όχι απεικόνιση συγκεκριμένης κάκωσης.",
+      "sourcePageReviewed": "NICE NG232 checked for head-injury context only; no anatomical validation of the conceptual layer graphic.",
+      "sourcePageCheckedFor": [
+        "NICE NG232 recommendations checked 2026-10-29 for general topic relevance: loss of consciousness/neurological signs, vomiting or seizure, reassessment after deterioration and hospital communication. The layer schematic is conceptual and not anatomically validated by NICE. UK guidance, not Greek EMS protocol; independent Greek clinical/anatomical review pending."
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
+        "date": "2026-10-29",
+        "scope": "Rendered in Edge at 1366×900 and individually inspected. Replaced falsely described concentric “anatomical cross-section” with a clearly labeled non-scale layer schematic (skin / cranial bone / brain tissue); impact marker is illustrative only. It does not depict a fracture, hemorrhage or diagnosis. Independent anatomical review and mobile/zoom/offline review pending."
       },
-      "sha256": "d0ad21ab0951672dee52298aa08363f94363c5f7b9a14f5cf77ee90c6893887f"
+      "sha256": "47799a28e9fcb7b82e92cb388ee1a7905694971bae5c7b72fbadb1df2c8569ec"
     },
     "skin_burn_cross_section": {
       "filename": "skin-burn-cross-section-el.svg",
@@ -9198,17 +9200,18 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διδακτικό διάγραμμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.who.int/publications/i/item/9789241513081",
+      "page": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations",
       "caption": "Κεφάλαιο 14-09: Κάκωση κεφαλής · Εκτίμηση AVPU και GCS · Κόρες και έμετοι. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "Background source only; independent clinical comparison not yet complete."
+        "NICE NG232 recommendations checked 2026-10-29 for general topic relevance: loss of consciousness/neurological signs, vomiting or seizure, reassessment after deterioration and hospital communication. The layer schematic is conceptual and not anatomically validated by NICE. UK guidance, not Greek EMS protocol; independent Greek clinical/anatomical review pending."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "2–3 editorial passes: specifically curated complete labels, unique content, XML/ARIA/SHA validated by CI; actual manual mobile rendering pending"
+        "date": "2026-10-29",
+        "scope": "Rendered in Edge at 1366×900 and individually inspected. Removed one head hotspot and convergent leaders that falsely linked head injury, AVPU/GCS and pupils/vomiting. Separate cards now depict head injury, an AVPU/GCS label card (no scores), and eyes/droplet pictogram for pupils/vomiting. Clinical interpretation pending Greek independent review."
       },
-      "sha256": "5adc763b7bd7329e6698b7a682efaacea6bcca2a684ec7b7931480470564bb86"
+      "sha256": "0c88c7fa453f72bee7bb1a28564938a307add59bdcc0b8fc918cc6ba70e3da09"
     },
     "sem_c_14_9_relations": {
       "filename": "semester-c-14-09-relations-el.svg",
@@ -9217,17 +9220,18 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διδακτικό διάγραμμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.who.int/publications/i/item/9789241513081",
+      "page": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations",
       "caption": "Κεφάλαιο 14-09: Παρατήρηση επιληπτικής κρίσης · Αναπνοή και συνείδηση · Καταγραφή αλλαγών. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "Background source only; independent clinical comparison not yet complete."
+        "NICE NG232 recommendations checked 2026-10-29 for general topic relevance: loss of consciousness/neurological signs, vomiting or seizure, reassessment after deterioration and hospital communication. The layer schematic is conceptual and not anatomically validated by NICE. UK guidance, not Greek EMS protocol; independent Greek clinical/anatomical review pending."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "2–3 editorial passes: specifically curated complete labels, unique content, XML/ARIA/SHA validated by CI; actual manual mobile rendering pending"
+        "date": "2026-10-29",
+        "scope": "Rendered in Edge at 1366×900 and individually inspected after redesign. Replaced obscured 1–2–3 flow with three separate, unnumbered thematic cards for seizure observation, breathing/consciousness, and recording changes; this avoids asserting an unverified clinical order. No clipping or overlap observed."
       },
-      "sha256": "84b000665deab6154a563f297295a8cff5493f562ddc7ab0ff1bbb09ff767027"
+      "sha256": "0cfe1af7f250d077baf0c6ed2c96a5cb6894d5485c0c55a732d632b40e092997"
     },
     "sem_c_14_9_review": {
       "filename": "semester-c-14-09-review-el.svg",
@@ -9236,17 +9240,18 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διδακτικό διάγραμμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://www.who.int/publications/i/item/9789241513081",
+      "page": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations",
       "caption": "Κεφάλαιο 14-09: Κίνδυνος ταχείας επιδείνωσης · Σειριακή νευρολογική εικόνα · Επικοινωνία με ΤΕΠ. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "Background source only; independent clinical comparison not yet complete."
+        "NICE NG232 recommendations checked 2026-10-29 for general topic relevance: loss of consciousness/neurological signs, vomiting or seizure, reassessment after deterioration and hospital communication. The layer schematic is conceptual and not anatomically validated by NICE. UK guidance, not Greek EMS protocol; independent Greek clinical/anatomical review pending."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "2–3 editorial passes: specifically curated complete labels, unique content, XML/ARIA/SHA validated by CI; actual manual mobile rendering pending"
+        "date": "2026-10-29",
+        "scope": "Rendered in Edge at 1366×900 and individually inspected after correction. Repeated exclamation marks replaced by a descending trend arrow, three observation markers and a hospital/receiving-facility symbol. Labels/captions fit and remain separate; this does not prescribe thresholds or treatment."
       },
-      "sha256": "6714e6f5171cfd3d2bb6d2a903e7a8af633f428f4e6426f2bcd37b7f344f3ee6"
+      "sha256": "3a6b509952b5da8fec54d2a98e99cf403f0788f81de679d37dcd547691e72a1f"
     },
     "sem_c_14_10_core": {
       "filename": "semester-c-14-10-core-el.svg",
