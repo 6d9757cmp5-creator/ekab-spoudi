@@ -58,7 +58,10 @@ export async function auditReviewCorpus({directory=DIR,root=ROOT}={}){
   books.push({
    source_id:item.source_id,title:item.title,declared_words:item.word_count,
    passages:passages.length,sha256:digest,
-   rights:policy.preview_allowed?'editorial-preview-only':'rights-restricted',
+   rights:policy.rights_signoff==='user-attested-unverified'?
+     'owner-attested-review-preview-without-publisher-paperwork':
+     (policy.preview_allowed?'CC-BY-editorial-preview-only':'rights-restricted'),
+   rights_signoff:policy.rights_signoff,
    ai_retrieval_enabled:false,clinical_approval:false,
    whole_book_unanchored:wholeBook,pdf_page_locators:pages,
    no_section:missing,distinct_source_links:new Set(passages.map(p=>p.source_url)).size,
@@ -78,13 +81,15 @@ export async function auditReviewCorpus({directory=DIR,root=ROOT}={}){
   schema_version:1,kind:'automated-technical-source-check-not-medical-approval',
   ready_for_ai:false,approved_sources:0,rights_approved_sources:0,
   books_total:books.length,passages_total:books.reduce((n,b)=>n+b.passages,0),
-  review_previews:books.filter(b=>b.rights==='editorial-preview-only').length,
-  restricted:books.filter(b=>b.rights==='rights-restricted').length,
+  review_previews:Object.values(SOURCE_POLICY).filter(s=>s.preview_allowed).length,
+  restricted:Object.values(SOURCE_POLICY).filter(s=>!s.preview_allowed).length,
+  publisher_permissions_attested_not_verified:Object.values(SOURCE_POLICY).filter(s=>s.rights_signoff==='user-attested-unverified').length,
   no_chapter_book_count:books.filter(b=>b.citation_quality==='whole-book-no-chapter').length,
   human_review_queue_count:queue.length,books,review_queue:queue
  };
- if(report.books_total!==7||report.review_previews!==5||report.restricted!==2||
-   report.no_chapter_book_count!==5)throw Error('Expected seven-book safety inventory changed');
+ if(report.books_total!==7||report.review_previews+report.restricted!==7||
+   report.publisher_permissions_attested_not_verified!==2||report.no_chapter_book_count!==5)
+   throw Error('Expected seven-book rights/clinical inventory changed');
  return report;
 }
 export function auditMarkdown(r){
@@ -123,6 +128,7 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   }
   console.log(JSON.stringify({books:report.books_total,passages:report.passages_total,
    preview:report.review_previews,restricted:report.restricted,
+   ownerAttestedButUnverified:report.publisher_permissions_attested_not_verified,
    noChapterLocator:report.no_chapter_book_count,reviewTasks:report.human_review_queue_count,
    clinicalApproved:report.approved_sources}));
  }catch(e){console.error('AUDIT FAILED:',e.message);process.exitCode=1;}
