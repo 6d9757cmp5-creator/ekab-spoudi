@@ -117,7 +117,9 @@ test('Live MENTOR interface connects status, refresh and explicit voice diagnost
   assert.ok(html.includes('id="'+id+'"'),id);
  }
  assert.match(app,/voiceDiagnostics\(window\)/);
- assert.match(app,/requireMale:true/);
+ assert.match(app,/requireMale:voiceSelect\.value!=='__device__'/);
+ assert.match(app,/other\.value='__device__'/);
+ // The default uses a verified male voice. Only explicit user choice enables device fallback.
  assert.match(app,/requireMale:false,requireGreek:true/);
  assert.match(css,/mentor-voice-diagnostics/);
  assert.doesNotMatch(app,/localStorage\.setItem|official_grade\s*=/);
