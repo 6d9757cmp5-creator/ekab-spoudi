@@ -9120,7 +9120,7 @@
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Browser screenshot review on prior revision exposed actual overlap between symbols and headings despite earlier description. Rebuilt equal cards with separate icon, heading and explanatory-text zones; final screenshot review of this revision pending. Clinical protocol validation not inferred."
+        "scope": "Rendered the exact pushed SVG at 1180×820 with CairoSVG and visually inspected the result. Three equal cards now keep symbols above headings and descriptions; no text overlaps or clipping were visible. A previous browser screenshot had exposed overlap that the earlier review missed. This is a visual review only; independent clinical approval remains pending."
       },
       "sha256": "c11941f50933e944651323be7b337984ccb1ef12f06dfb4fd846e3e75e72837b"
     },
@@ -9147,22 +9147,23 @@
     "sem_c_14_7_relations": {
       "filename": "semester-c-14-07-relations-el.svg",
       "localPath": "assets/education/semester-c-14-07-relations-el.svg",
-      "title": "Θωρακικό τραύμα και αναπνευστική δυσχέρεια — συσχετισμός (14-7)",
+      "title": "Θωρακικό τραύμα και αναπνευστική δυσχέρεια — πεδία επανεκτίμησης (14-7)",
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διδακτικό διάγραμμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "page": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
-      "caption": "Κεφάλαιο 14-07: Έλεγχος οξυγόνωσης · Εκτίμηση αιμοδυναμικής εικόνας · Ταχεία επανεκτίμηση ABCDE. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
+      "caption": "Κεφάλαιο 14-07: Οξυγόνωση · Αιμοδυναμική εικόνα · Δομημένη επανεκτίμηση ABCDE. Παράλληλα πεδία, όχι αλληλουχία ή αυτόνομο κλινικό πρωτόκολλο.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "NICE NG39 Recommendations checked 2026-10-29 for broad contextual relevance of chest trauma assessment and structured reassessment/handover; the diagrams do not express the guideline’s treatment instructions. UK guideline published 2016; not Greek EMS protocol. Independent Greek clinical/operational review pending."
+        "NICE NG39 Recommendations 1.3–1.4 and 1.8.1–1.8.2 checked 2026-10-29 for broad contextual relevance of chest-trauma assessment, recording ABCDE findings and recording change; UK guidance (published 2016), not Greek EMS protocol. The graphic does not reproduce treatment instructions.",
+        "Resuscitation Council UK 2025 First Aid Guidelines checked 2026-10-29: structured ABCDE assessment, scene safety/responsiveness/life-threatening bleeding context. UK guidance, not Greek EMS protocol; no clinical approval inferred."
       ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Edge browser raster 1366×900 individually inspected. Steps 1–2–3 are visible and unobstructed; the cards separately identify oxygenation check, hemodynamic assessment and rapid ABCDE reassessment. Labels fit without clipping. Sequence/clinical interpretation requires independent Greek review."
+        "scope": "Replaced the numbered 1–2–3 line, which implied an unsupported clinical sequence, with three parallel cards using lung, heart/pulse and ABCDE reassessment symbols. Final pushed raster inspection pending. Independent Greek clinical/operational review remains pending."
       },
-      "sha256": "b445def227e4fe5d78c98e3ad9c1903ebce2262b77c5e362caf92eb47d4e0a25"
+      "sha256": "d58d4edb97e374c5b4c074f6e5c1fda7274e43f41bb5ebde20f1e3193fd0ec13"
     },
     "sem_c_14_7_review": {
       "filename": "semester-c-14-07-review-el.svg",
