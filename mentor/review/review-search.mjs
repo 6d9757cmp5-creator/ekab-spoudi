@@ -48,7 +48,8 @@ export function queryTerms(value){
  const tokens=q.split(/\s+/).filter(v=>v.length>2);
  const expansions=[];
  for(const [key,values] of Object.entries(SYNONYMS)){
-  if(q.includes(key) || tokens.some(t=>t===key)){
+  const normalizedKey=fold(key);
+  if(q.includes(normalizedKey) || tokens.some(t=>t===normalizedKey)){
    expansions.push(...values);
   }
  }
