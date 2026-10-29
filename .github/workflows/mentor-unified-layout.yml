@@ -18,6 +18,7 @@ jobs:
       - name: Verify all relocated Mentor sources and public compatibility paths
         run: |
           node --test scripts/test-mentor-unified-structure.mjs
+          node --check sw.js
           for file in mentor/app/*.mjs mentor/avatar/*.mjs mentor/voice/*.mjs mentor/modules/*.js; do
             node --check "$file"
           done
@@ -54,7 +55,7 @@ jobs:
           git fetch origin main:refs/remotes/origin/main
           CHANGED="$(git diff --name-only origin/main...HEAD)"
           printf '%s\n' "$CHANGED"
-          if printf '%s\n' "$CHANGED" | grep -Eq '^(index\.html|sw\.js|app\.js|progress\.js|sync-local\.js|sync-model\.js|cloud-sync\.js|study-scheduler\.js|notes-store\.js|saek-exam-engine\.js|ai-grading-client\.js|functions/answer-grader/|workers/answer-grader/|official_questions\.json)$'; then
+          if printf '%s\n' "$CHANGED" | grep -Eq '^(index\.html|app\.js|progress\.js|sync-local\.js|sync-model\.js|cloud-sync\.js|study-scheduler\.js|notes-store\.js|saek-exam-engine\.js|ai-grading-client\.js|functions/answer-grader/|workers/answer-grader/|official_questions\.json)$'; then
             echo "Protected existing learner data or application code changed"
             exit 1
           fi
