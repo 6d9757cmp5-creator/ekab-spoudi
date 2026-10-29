@@ -6,6 +6,7 @@ function render(){
  const signal=createSyntheticEcg({bpm,seconds:4,samples:720});
  $('ecg-curve').setAttribute('points',toSvgPoints(signal));
  $('ecg-rate-out').textContent=bpm+' /λεπτό';
+ $('ecg-rate').setAttribute('aria-valuetext','Σχηματικός ρυθμός '+bpm+' επαναλήψεις ανά λεπτό, όχι πραγματική μέτρηση');
  $('ecg-caption').textContent='Συνθετικό παράδειγμα τεσσάρων δευτερολέπτων με περίπου '+signal.beatsEstimated+' επαναλήψεις της τεχνητής καμπύλης. Καμία κλινική μέτρηση ή διάγνωση.';
 }
 $('ecg-rate').addEventListener('input',render);
