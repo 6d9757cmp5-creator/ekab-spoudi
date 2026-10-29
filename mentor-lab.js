@@ -10,6 +10,7 @@ import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/c
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
 import {supportsSpeech,listGreekVoices,speakGreek,stopGreek} from './mentor-voice.mjs';
+import {createMentorAvatar} from './mentor-avatar-live.mjs';
 
 const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{
@@ -236,6 +237,7 @@ function wireMentorPresence(){
   const heroQuestion=$('mentor-hero-question');
   const voiceStatus=$('mentor-voice-status');
   const avatar=$('mentor-avatar');
+  const performer=createMentorAvatar(avatar);
   const section=$('mentor-presence');
   const speaker=$('mentor-intro-speak');
   const stopper=$('mentor-intro-stop');
@@ -252,6 +254,7 @@ function wireMentorPresence(){
   stopper.disabled=!supported&&mic.disabled;
   if(mic.disabled)mic.title='Η αναγνώριση ελληνικής ομιλίας δεν είναι διαθέσιμη σε αυτόν τον browser.';
   function paintSpeaking(value){
+    if(!value)performer.stop();
     avatar.classList.toggle('is-speaking',value);
     section.classList.toggle('is-speaking',value);
   }
@@ -301,6 +304,7 @@ function wireMentorPresence(){
     const started=speakGreek(text,{env:window,voiceName:voiceSelect.value,rate:Number(speed.value),pitch:1,
       onStart:()=>{
         if(current!==speakingGeneration)return;
+        performer.start(text,{speed:Number(speed.value)});
         paintSpeaking(true);
         voiceStatus.textContent='Ο MENTOR μιλά με την επιλεγμένη ελληνική φωνή της συσκευής.';
       },
@@ -313,7 +317,8 @@ function wireMentorPresence(){
         if(current!==speakingGeneration)return;
         paintSpeaking(false);
         voiceStatus.textContent='Η φωνή δεν μπόρεσε να αναπαραχθεί στον browser.';
-      }
+      },
+      onBoundary:event=>{if(current===speakingGeneration)performer.boundary(event);}
     });
     if(!started)voiceStatus.textContent='Η φωνητική ανάγνωση δεν είναι διαθέσιμη.';
   }
