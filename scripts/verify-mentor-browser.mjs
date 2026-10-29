@@ -168,11 +168,12 @@ try{
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('mentor-book-count').textContent.includes('7 εισαγμένα'));
   assert.match(await page.locator('#mentor-book-count').textContent(),/0 εγκεκριμένα/);
-  assert.match(await page.locator('#mentor-book-count').textContent(),/5 διαθέσιμα/);
-  assert.equal(await page.locator('#mentor-book-select option').count(),5,'Only five rights-eligible editorial previews are in the selector');
-  const restrictedChoices=await page.locator('#mentor-book-select option').evaluateAll(options=>options.map(o=>o.value));
-  assert.ok(!restrictedChoices.includes('medical-surgical-nursing'));
-  assert.ok(!restrictedChoices.includes('who-bec'));
+  assert.match(await page.locator('#mentor-book-count').textContent(),/7 διαθέσιμα/);
+  assert.equal(await page.locator('#mentor-book-select option').count(),7,'All seven books are review-preview-only under publisher terms/owner attestations');
+  const previewChoices=await page.locator('#mentor-book-select option').evaluateAll(options=>options.map(o=>o.value));
+  assert.ok(previewChoices.includes('medical-surgical-nursing'));
+  assert.ok(previewChoices.includes('who-bec'));
+  assert.match(await page.locator('#panel-books .disclaimer').textContent(),/εκκρεμ|έλεγχο/i);
 
   await page.locator('#tab-books').click();
   await page.locator('#mentor-book-query').fill('αεραγωγός');
