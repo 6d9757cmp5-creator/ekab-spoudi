@@ -20,14 +20,14 @@ function walk(dir){
   // Literal image strings in JS include service-worker precache and direct DOM src values.
   // Computed URLs, registry-driven runtime image loading, and template interpolation remain out of scope.
   if(isJS){
-   const jsPattern=/(['"`])((?:\\.{1,2}\\/|\\/)?[^'"`\\s<>\\\\]*?\\.(?:svg|png|jpe?g|webp|gif|avif)(?:[?#][^'"`\\s<>\\\\]*)?)\\1/gi;
+   const jsPattern=/(['"`])((?:\.{1,2}\/|\/)?[^'"`\s<>\\]*?\.(?:svg|png|jpe?g|webp|gif|avif)(?:[?#][^'"`\s<>\\]*)?)\1/gi;
    for(const match of source.matchAll(jsPattern)){
     let link=match[2].trim();
-    if(/^(https?:|\\/\\/|data:|blob:|#)/i.test(link)||/[{}]/.test(link))continue;
+    if(/^(https?:|\/\/|data:|blob:|#)/i.test(link)||/[{}]/.test(link))continue;
     const pathname=link.split(/[?#]/,1)[0];
     let decoded=pathname;
     try{decoded=decodeURIComponent(pathname)}catch{}
-    const file=path.resolve(pathname.startsWith('/')?root:path.dirname(absolute),decoded.replace(/^\\/+/,''));
+    const file=path.resolve(pathname.startsWith('/')?root:path.dirname(absolute),decoded.replace(/^\/+/,''));
     const found=file.startsWith(root+path.sep)&&fs.existsSync(file)&&fs.statSync(file).isFile();
     const detail={page:rel,url:link};jsReferences.push(detail);
     if(!found)jsMissing.push(detail);
