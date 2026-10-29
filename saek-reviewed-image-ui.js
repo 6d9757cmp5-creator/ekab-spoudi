@@ -194,7 +194,8 @@ async function start(){
   // Make the images discoverable from the course header without changing
   // any clinical-review flag or the user's stored reading progress.
   const firstImageChapter=course.chapters.find(ch=>Array.isArray(ch.images)&&ch.images.length);
-  const imageCount=course.chapters.reduce((sum,ch)=>sum+(Array.isArray(ch.images)?ch.images.filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key)).length:0),0);
+  const imageCount=course.chapters.reduce((sum,ch)=>sum+(Array.isArray(ch.images)?ch.images.filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key)).length:0),0)+
+    (match[1]==='01'?Number(Boolean(registry.assets.spine))+Number(Boolean(registry.assets.brain_medial)):0);
   const heading=document.querySelector('.saek-lesson-heading')||document.querySelector('h2.reader-title');
   if(firstImageChapter&&heading&&!document.getElementById('saek-course-images-shortcut')){
    const bar=el('div','saek-source-actions');
