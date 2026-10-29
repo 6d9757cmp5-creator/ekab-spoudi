@@ -126,3 +126,28 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .coach-quick:focus-visible,.coach-question-line input:focus-visible,.coach-question-line button:focus-visible,.coach-speech-actions button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 @media(max-width:620px){.coach-question-line{flex-wrap:wrap}.coach-question-line button{width:100%}.coach-message{max-width:100%}}
 @media(prefers-color-scheme:dark){.coach-message-user{background:#1b4856}}
+
+
+/* MENTOR OS: editorial-only source search (draft branch, no clinical clearance). */
+.tabs{max-width:800px;flex-wrap:wrap}
+.review-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 12px;align-items:end;margin:14px 0}
+.review-form label{grid-column:1 / -1;font-size:.85rem;font-weight:750;margin-bottom:-8px}
+.review-form input,.review-form select{width:100%;min-height:46px;padding:10px 13px;border:1px solid var(--border);
+ border-radius:10px;background:var(--surface2);color:var(--ink);font:inherit}
+.review-form input{grid-column:1}.review-form select{grid-column:1 / -1}
+.review-form button{grid-column:2;white-space:nowrap;min-height:46px}
+.review-results{display:grid;gap:13px;margin-top:18px}
+.review-result{padding:17px;border:1px solid var(--border);border-radius:13px;background:var(--surface2);
+ overflow-wrap:anywhere}
+.review-result h3{margin:5px 0 8px;font-size:1rem}
+.review-watermark{font-size:.72rem;font-weight:800;letter-spacing:.04em;color:var(--caution);margin:0 0 8px}
+.review-excerpt{font-size:.92rem;line-height:1.65;padding:11px 15px;margin:12px 0;border-left:3px solid var(--brand2);
+ background:var(--surface);border-radius:3px;white-space:pre-wrap}
+.review-result a{display:inline-block;font-weight:750;margin-bottom:7px}
+#mentor-book-status[data-error="true"]{color:var(--danger)}
+@media(max-width:650px){
+ .tabs{max-width:none}.tabs button{flex:1 1 calc(50% - 5px);min-width:130px}
+ .review-form{grid-template-columns:minmax(0,1fr)}
+ .review-form input,.review-form button,.review-form select{grid-column:1}
+ .review-result{padding:13px}
+}
