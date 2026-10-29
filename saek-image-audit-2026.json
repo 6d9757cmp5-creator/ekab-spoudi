@@ -9500,17 +9500,20 @@
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "page": "https://www.who.int/publications/i/item/9789241513081",
-      "caption": "Κεφάλαιο 14-13: Έκθεση τραυματία στο περιβάλλον · Υγρά ρούχα και απώλεια θερμότητας · Υποθερμία και σε ήπιο καιρό. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
+      "caption": "Κεφάλαιο 14-13: Έκθεση τραυματία στο περιβάλλον · Υγρά ρούχα και απώλεια θερμότητας · Υποθερμία και παρακολούθηση θερμοκρασίας. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
-      "sourcePageCheckedFor": [
-        "WHO-ICRC Basic Emergency Care (2018) used only as broad background; no independent chapter-specific Greek clinical/protocol comparison completed."
-      ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Individually inspected Edge raster (1366×900) after redesign. Removed shared torso point and converging leaders; separate cards show environmental exposure, wet clothing/heat loss, and hypothermia in mild weather. No clinical/local protocol approval; mobile/offline app E2E not performed."
+        "scope": "Raster review at 1180×820 after correction: replaced generic/ambiguous icons with environmental rain, wet clothing, and thermometer symbols. Removed the unsupported mild-weather qualifier and aligned accessible description/caption with the visible temperature-monitoring label. Independent Greek protocol review remains pending."
       },
-      "sha256": "9df7fd4ba532090df44ee71c488e0a29af7d3ac46aaf4042518eec96c75ab909"
+      "sha256": "06bc959ccf512c67f532f38f695507e0c72ac7fce8a98450662a272d5b23e7e3",
+      "sourcePageCheckedFor": [
+        "WHO-ICRC Basic Emergency Care ECT Pocket Guide p. 6: wet clothing, drying, prevent hypothermia; educational background only.",
+        "NICE NG39 warming: reduce cold exposure, remove wet clothing, insulate; UK guidance, not Greek EMS protocol.",
+        "Independent Greek clinical/protocol review remains pending."
+      ],
+      "sourcePage": "https://hlh.who.int/docs/librariesprovider4/hlh-documents/who-icrc-basic-emergency-care.pdf?sfvrsn=4460e22e_3"
     },
     "sem_c_14_13_relations": {
       "filename": "semester-c-14-13-relations-el.svg",
@@ -9522,15 +9525,18 @@
       "page": "https://www.who.int/publications/i/item/9789241513081",
       "caption": "Κεφάλαιο 14-13: Περιορισμός περιττής έκθεσης · Στεγνή κάλυψη και μόνωση · Μέτρηση θερμοκρασίας όπου εφικτό. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
-      "sourcePageCheckedFor": [
-        "WHO-ICRC Basic Emergency Care (2018) used only as broad background; no independent chapter-specific Greek clinical/protocol comparison completed."
-      ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Individually inspected Edge raster (1366×900) after redesign. Removed hidden numbered middle node and misaligned card; three visible thematic cards cover limiting exposure, dry covering/insulation, and temperature measurement where feasible. Not an endorsed Greek clinical sequence; mobile/offline E2E not performed."
+        "scope": "Raster review at 1180×820: all three parallel cards and boundaries are visible; changed temperature-drop icon to thermometer for clearer correspondence to temperature measurement. Text fits without overlap. This is not a Greek protocol endorsement; mobile/offline E2E and independent Greek review pending."
       },
-      "sha256": "82e6b3fea0a9e55d92a5247c0661a9b39d1a3ec49cb7be78fb6ecc4cf8dd9406"
+      "sha256": "7600ad2fe9dbaeaa890d15183d67224ea30750f7bc7ea523d2e911b6744ce365",
+      "sourcePageCheckedFor": [
+        "WHO-ICRC Basic Emergency Care ECT Pocket Guide p. 6: remove wet clothing, dry, cover to prevent hypothermia.",
+        "NICE NG39 warming: limit cold exposure, remove wet clothing, provide insulation; UK guidance, not Greek EMS protocol.",
+        "Independent Greek clinical/protocol review remains pending."
+      ],
+      "sourcePage": "https://hlh.who.int/docs/librariesprovider4/hlh-documents/who-icrc-basic-emergency-care.pdf?sfvrsn=4460e22e_3"
     },
     "sem_c_14_13_review": {
       "filename": "semester-c-14-13-review-el.svg",
@@ -9542,15 +9548,18 @@
       "page": "https://www.who.int/publications/i/item/9789241513081",
       "caption": "Κεφάλαιο 14-13: Επανέλεγχος ζωτικών · Θερμική προστασία στη μεταφορά · Καταγραφή μεταβολών. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
-      "sourcePageCheckedFor": [
-        "WHO-ICRC Basic Emergency Care (2018) used only as broad background; no independent chapter-specific Greek clinical/protocol comparison completed."
-      ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Individually inspected Edge raster (1366×900) after redesign. Removed repeated exclamation icons and unsubstantiated CHECK 1/2/3 ordering; separate symbols/cards for vital-sign reassessment, thermal protection during transport, and recording changes/time. Greek labels verified in final render; no clinical approval or mobile/offline E2E."
+        "scope": "Raster review at 1180×820 found only the middle card had an outer frame. Added matching left/right frames; replaced plus, equals and television-like symbols with pulse, insulating blanket and document symbols. Re-render confirms three consistent framed cards, thematic icons and readable labels. No Greek clinical approval; mobile/offline E2E not performed."
       },
-      "sha256": "5ef60623006f4f2cd2fe42f5be68b69587304d25e006d461d46dd1286657d6e9"
+      "sha256": "994335119f096e2dbe2d79f65c550b6e2505cf28b0a4d955bade51c279ff7161",
+      "sourcePageCheckedFor": [
+        "WHO-ICRC Basic Emergency Care ECT Pocket Guide p. 6: remove wet clothes, dry patient, cover to prevent hypothermia, repeat ABC and document.",
+        "NICE NG39 warming and RCUK 2025 first aid hypothermia prevention checked for insulating and reassessment concepts; UK guidance only.",
+        "Independent Greek clinical/operational review remains pending."
+      ],
+      "sourcePage": "https://hlh.who.int/docs/librariesprovider4/hlh-documents/who-icrc-basic-emergency-care.pdf?sfvrsn=4460e22e_3"
     },
     "sem_c_14_14_core": {
       "filename": "semester-c-14-14-core-el.svg",
