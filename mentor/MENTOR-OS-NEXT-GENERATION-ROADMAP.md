@@ -33,3 +33,15 @@ Build a coherent paramedic training environment, not a list of static quizzes. E
 - Distinguish prototype, automated-check-passed, human-review-pending and approved-for-publication states.
 - No claim of real patient simulation, live dispatch, validated clinical decisions or approved protocols unless demonstrated.
 - Keep PR #97 and other ongoing PRs isolated. Existing Mentor draft PR #85 is not to be merged until all required gates pass.
+
+## Confirmed integration and adaptive tutor requirements (2026-10-29)
+
+- **Reuse existing home-screen 3D anatomy** at `ui-tools/anatomy-3d/index.html` rather than creating a second model. Mentor should offer contextual deep-link/navigation to that tool, preserve its independent home-screen entry, and later integrate selection callbacks only through a documented, tested interface. Greek terminology coverage remains separately reviewed in PR #97.
+- **Conversational professor**: Greek-first two-way text dialogue, follow-up questions, learner explanations, Socratic prompts and a user-controlled voice conversation option when an approved speech service is available. Do not label static scripted responses as live AI or pretend voice is operational without tested microphone/audio permissions.
+- **Adaptive pedagogy**: initial knowledge calibration; track Mentor-only demonstrated skills, mistakes, confidence, hints requested, and spaced recall; adjust explanation depth, pace, difficulty, examples and revision schedule. Allow student to override difficulty and request simpler or more advanced explanations. Avoid inferring clinical competence from quiz scores.
+- **Professor behaviors**: teach before testing, ask learner to explain reasoning, detect misconceptions, explain why alternatives fail, cite reviewed sources, show uncertainty, and resume from prior Mentor-only learning events. Personalize to SAΕΚ/EOPPEP goals without touching official scores.
+- **Multimodal teaching**: use existing anatomy tool for structure location; connect reviewed ECG traces and equipment assets as they become available. Never claim model manipulation inside chat before the bridge is implemented.
+- **Safety and privacy**: clear distinction between education and real patient care; no real patient data; explicit consent for microphone/cloud AI; accessible text fallback; deletion/export and source provenance.
+- **Acceptance tests**: confirm home anatomy link still works; Mentor anatomy launch opens the exact existing tool; no duplicate assets; conversation turn persistence and deletion only within Mentor scope; adaptive difficulty changes on controlled fixtures; no changes to legacy grading or progress.
+
+These are requirements, not completed features.
