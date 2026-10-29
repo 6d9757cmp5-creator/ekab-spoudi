@@ -1354,20 +1354,20 @@
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "originalArtwork": true,
-      "page": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit",
+      "page": "https://www.who.int/publications/9789240114067",
       "additionalSources": [],
       "caption": "Σχηματική κάτοψη με κλίνη ασθενούς, μόνιτορ, απινιδωτή/AED, παροχή οξυγόνου και χώρους αναλωσίμων. Δεν απεικονίζει αλγόριθμο ανάνηψης ή υποχρεωτική διάταξη χώρου.",
       "sourcePageReviewed": "2026-10-27",
       "sourcePageCheckedFor": [
-        "Source concept supports the educational illustration; the image is an original drawing, not a copied source asset"
+        "WHO prehospital operational resources list an oxygen cylinder with regulator among ambulance equipment. This supports the equipment category only, not exact cylinder design, local inventory or room layout; independent operational/clinical review pending."
       ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact current local SVG rendered with CairoSVG at 1100 px wide and individually inspected for Greek text, icon-to-caption correspondence, arrow targets, clipping and overlap. No additional visual defect was found in this pass. Clinical/operational validity and real-app mobile/offline behavior remain pending."
+        "scope": "Exact current SVG rendered at 1200px and re-inspected after finding that the oxygen icon resembled a medicine bottle with a medical cross. Replaced it with a narrow cylinder silhouette, valve/regulator and legible O2 marking; confirmed separation from the caption and preserved other equipment labels/arrows. This remains a schematic, not a specific cylinder model or clinical protocol; independent review and live-app mobile/offline QA pending."
       },
-      "sha256": "418156d4a3c2de08ae1b54a37d90ece0ec76c72fca040ff51509f7078d46af17"
+      "sha256": "29e658eb9811c456e2b18eeeeca48ad6ecdd27b27161d0ac7f726d9e2ee573fe"
     },
     "bed_stretcher_safe_transfer": {
       "filename": "bed-stretcher-safe-transfer-el.svg",
