@@ -149,12 +149,23 @@ async function start(){
    if(!details||details.querySelector('.saek-source-section'))continue;
    const body=details.querySelector('.reader-main')||details.querySelector('.body');
    if(!body)continue;
+   // In Anatomy, do not display the 29 three-icon concept cartoons as
+   // anatomical plates. Retain their audit entries unchanged for replacement.
+   const assets=chapter.images
+     .filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key))
+     .map(key=>registry.assets[key]).filter(Boolean);
+   if(!assets.length){
+    if(match[1]==='01'&&!details.querySelector('.saek-anatomy-image-pending')){
+     const pending=el('p','small muted saek-anatomy-image-pending','Ανατομική εικόνα με επαρκή λεπτομέρεια: εκκρεμεί επιλογή και επιστημονικός έλεγχος. Δεν προβάλλονται τα παλαιά εικονίδια ως ανατομικές πλάκες.');
+     (body.querySelector('p.reader-paragraph')||body).insertAdjacentElement('afterend',pending);
+    }
+    continue;
+   }
    const wrap=el('details','saek-source-section');
-   const summary=el('summary','saek-source-summary','Εικόνες κεφαλαίου ('+chapter.images.length+')');
+   const summary=el('summary','saek-source-summary','Εικόνες κεφαλαίου ('+assets.length+')');
    wrap.append(summary);
-   const note=el('p','saek-source-note','Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ή ανεξάρτητη επιστημονική έγκριση. Οι εικόνες δεν υποκαθιστούν επίσημες οδηγίες.');
+   const note=el('p','saek-source-note','Ανατομικές εικόνες και εκπαιδευτικά σχήματα με αναφορά πηγών. Η επιλογή δεν αποτελεί ανεξάρτητη επιστημονική έγκριση ή πλήρη κάλυψη του κεφαλαίου.');
    wrap.append(note);
-   const assets=chapter.images.map(key=>registry.assets[key]).filter(Boolean);
    const gallery=assets.map(asset=>({url:sourceUrl(asset),alt:asset.title+'. '+asset.caption}));
    assets.forEach((asset,i)=>wrap.append(render(asset,id.replace('lesson-',''),gallery,i)));
    const paragraph=body.querySelector('p.reader-paragraph');
@@ -179,7 +190,7 @@ async function start(){
   // Make the images discoverable from the course header without changing
   // any clinical-review flag or the user's stored reading progress.
   const firstImageChapter=course.chapters.find(ch=>Array.isArray(ch.images)&&ch.images.length);
-  const imageCount=course.chapters.reduce((sum,ch)=>sum+(Array.isArray(ch.images)?ch.images.length:0),0);
+  const imageCount=course.chapters.reduce((sum,ch)=>sum+(Array.isArray(ch.images)?ch.images.filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key)).length:0),0);
   const heading=document.querySelector('.saek-lesson-heading')||document.querySelector('h2.reader-title');
   if(firstImageChapter&&heading&&!document.getElementById('saek-course-images-shortcut')){
    const bar=el('div','saek-source-actions');
