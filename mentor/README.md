@@ -44,3 +44,12 @@ mentor/
 - Οι απαιτήσεις `AGENTS.md` και η επιστημονική έγκριση **δεν** αίρονται από αυτό το καθαρά δομικό refactor.
 
 **Στάδιο:** έτοιμη δομική αλλαγή σε απομονωμένο PR για browser QA, **όχι ακόμη στο main**. Η μετάβαση σε παραγωγή θα γίνει μόνο αφού ολοκληρωθούν οι προβλεπόμενοι έλεγχοι.
+
+## MENTOR Live Companion (V3 · P1)
+
+`mentor/presence/` φορτώνει **έναν** κοινό, κινητό MENTOR σε όλες τις σελίδες μελέτης (μία γραμμή `<script type="module" src="mentor/presence/presence.mjs">` ανά σελίδα). Η αρχική και το εργαστήριο έχουν ήδη δικό τους MENTOR και παραλείπονται, ώστε να μην υπάρχουν δύο WebGL instances.
+
+- Αρχικά εμφανίζεται μόνο ένα μικρό κουμπί MENTOR· το 3D φορτώνει όταν το ανοίξει ο χρήστης και αποδεσμεύεται όταν ελαχιστοποιηθεί ή κρυφτεί.
+- Μετακίνηση (ποντίκι, αφή, βέλη), αλλαγή μεγέθους, καρφίτσωμα σε γωνία, προσάρτηση σε πάνελ/bottom sheet, ελαχιστοποίηση, απόκρυψη. `Alt+Shift+M` ή `window.EkabMentorPresence.show()` επαναφέρουν.
+- Προτιμήσεις σε `localStorage` `ekab.mentor.presence.v1`, ξεχωριστά για desktop και κινητό. Δεν αγγίζονται βαθμολογίες, σημειώσεις, πρόοδος ή sync.
+- Έλεγχοι: `node --test mentor/presence/presence-state.test.mjs` και `node scripts/verify-mentor-presence-browser.mjs` (Chromium, desktop + κινητό). Δεν έχει δοκιμαστεί σε πραγματικό iPhone/Safari.

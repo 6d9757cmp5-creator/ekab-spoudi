@@ -1,0 +1,36 @@
+.ekab-mentor-presence,.ekab-mentor-launcher{box-sizing:border-box;font:13px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;color:#d6f5ff;-webkit-tap-highlight-color:transparent}
+.ekab-mentor-presence *,.ekab-mentor-launcher *{box-sizing:border-box}
+.ekab-mentor-presence{position:fixed;left:0;top:0;z-index:2147483000;display:flex;flex-direction:column;overflow:hidden;
+ border:1px solid #2f87b8;border-radius:14px;background:#041326;box-shadow:0 10px 34px #000a,0 0 0 1px #0fd1ff22;
+ transition:box-shadow .15s}
+.ekab-mentor-presence[hidden],.ekab-mentor-launcher[hidden]{display:none}
+.ekab-mentor-presence[data-dragging="true"]{box-shadow:0 16px 44px #000c,0 0 0 2px #0fd1ff88;transition:none;user-select:none}
+.ekab-mentor-presence[data-mode="docked"]{border-radius:0;border-width:0 0 0 1px}
+.ekab-mentor-presence[data-mode="docked"][data-edge="bottom"]{border-width:1px 0 0}
+.emp-bar{display:flex;align-items:center;gap:2px;padding:4px;background:#0a2a47;border-bottom:1px solid #1d5f8c;flex:0 0 auto}
+.emp-grip{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:6px;padding:6px 8px;min-height:36px;border:0;border-radius:8px;
+ background:transparent;color:#adeaf9;font:inherit;font-size:.7rem;letter-spacing:.14em;text-align:left;cursor:grab;touch-action:none}
+.ekab-mentor-presence[data-mode="pinned"] .emp-grip,.ekab-mentor-presence[data-mode="docked"] .emp-grip{cursor:default}
+.emp-btn{flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:8px;background:transparent;color:#d6f5ff;font:inherit;font-size:1rem;cursor:pointer}
+.emp-btn:hover,.emp-grip:hover{background:#12426a}
+.emp-btn:focus-visible,.emp-grip:focus-visible,.emp-resize:focus-visible,.ekab-mentor-launcher:focus-visible,.emp-menu button:focus-visible{outline:2px solid #6fe3ff;outline-offset:-2px}
+.emp-stage{position:relative;flex:1 1 auto;min-height:0;background:radial-gradient(ellipse at 50% 40%,#11528a,#041326 70%)}
+.emp-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.emp-status{position:absolute;inset:auto 8px 8px;padding:6px 8px;border-radius:8px;background:#021a31c0;color:#bce5ff;font-size:.72rem;text-align:center;pointer-events:none}
+.emp-status[hidden]{display:none}
+.emp-resize{position:absolute;right:0;bottom:0;width:30px;height:30px;border:0;background:linear-gradient(135deg,transparent 55%,#6fe3ffcc 56%,#6fe3ffcc 62%,transparent 63%,transparent 72%,#6fe3ffcc 73%,#6fe3ffcc 79%,transparent 80%);cursor:nwse-resize;touch-action:none;border-radius:0 0 14px 0}
+.ekab-mentor-presence[data-mode="pinned"] .emp-resize,.ekab-mentor-presence[data-mode="docked"] .emp-resize{display:none}
+.emp-menu{position:absolute;top:46px;right:6px;z-index:2;min-width:190px;padding:6px;border:1px solid #2f87b8;border-radius:10px;background:#07213a;box-shadow:0 8px 24px #000b}
+.emp-menu[hidden]{display:none}
+.emp-menu h2{margin:4px 6px 6px;font-size:.66rem;font-weight:600;letter-spacing:.12em;color:#8fd3ec}
+.emp-menu button{display:flex;width:100%;min-height:40px;align-items:center;gap:8px;padding:8px;border:0;border-radius:7px;background:transparent;color:#d6f5ff;font:inherit;text-align:left;cursor:pointer}
+.emp-menu button:hover{background:#12426a}
+.emp-menu button[aria-pressed="true"]{background:#0f4f7d}
+.emp-menu hr{border:0;border-top:1px solid #1d5f8c;margin:4px 0}
+.ekab-mentor-launcher{position:fixed;z-index:2147483000;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 14px;border:1px solid #2f87b8;border-radius:999px;
+ background:#07213a;color:#d6f5ff;font-size:.8rem;font-weight:600;letter-spacing:.08em;box-shadow:0 6px 20px #0009;cursor:pointer}
+.ekab-mentor-launcher:hover{background:#0f4f7d}
+.ekab-mentor-launcher .emp-dot{width:8px;height:8px;border-radius:50%;background:#2be3a4;box-shadow:0 0 8px #2be3a4}
+.emp-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.ekab-mentor-presence{transition:none}}
+@media print{.ekab-mentor-presence,.ekab-mentor-launcher{display:none!important}}
