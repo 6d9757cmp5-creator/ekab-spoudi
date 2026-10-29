@@ -40,7 +40,7 @@ footer{text-align:center;color:#3f5a6c;padding:22px;line-height:1.5}
 </style>
 </head>
 <body>
-<header><h1>🚑 ΕΚΑΒ Σπουδή — Εικόνες μαθημάτων</h1><p>Προεπισκόπηση PR #6 · 20 μαθήματα · 247 κεφάλαια · 649 επιλεγμένες εικόνες</p></header>
+<header><h1>🚑 ΕΚΑΒ Σπουδή — Ανατομικές εικόνες και έλεγχος ποιότητας</h1><p>Προεπισκόπηση PR #6 · Πρώτα οι εικόνες ανατομικών πηγών · Τα πρόχειρα εικονίδια παραμένουν εκτός αρχικής προβολής.</p></header>
 <main>
 <div class="info"><strong>Ποιοτικός έλεγχος εικόνων — όχι παραγωγική έκδοση.</strong> Ο προηγούμενος κατάλογος εμφάνιζε πρόχειρα εικονίδια σαν να ήταν επιστημονικές ανατομικές πλάκες. Η αρχική προβολή περιορίζεται πλέον σε <strong>6 εικόνες από τεκμηριωμένα αρχεία Wikimedia Commons</strong>, με ελληνικές επισημάνσεις και ορατή απόδοση δημιουργού. Δεν σημαίνει ότι έχουν πλήρως επιθεωρηθεί ανατομικά ή εγκριθεί κλινικά. Τα υπόλοιπα πρωτότυπα σχήματα παραμένουν διαθέσιμα <strong>μόνο με ρητή επιλογή</strong> για έλεγχο/ανασχεδιασμό. Συνολικά 649 εγγραφές, 0 ανεξάρτητα κλινικά εγκεκριμένες.</div>
 <div class="controls">
@@ -71,7 +71,7 @@ const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLo
 function buildCourses(){
  const selected=course.value;course.replaceChildren(new Option("Όλα τα μαθήματα",""));
  const uniq=new Map();
- items.filter(x=>!semester.value||x.semester===semester.value).forEach(x=>uniq.set(x.course,x));
+ items.filter(x=>(!semester.value||x.semester===semester.value)&&(quality.value==="all"||(quality.value==="commons"&&x.page.includes("commons.wikimedia.org"))||(quality.value==="anatomy"&&x.course==="01"&&!/^sem_a_1_/.test(x.id)))).forEach(x=>uniq.set(x.course,x));
  for(const x of uniq.values())course.add(new Option(x.course+" · "+x.courseTitle,x.course));
  if([...course.options].some(x=>x.value===selected))course.value=selected;
 }
@@ -110,7 +110,7 @@ function openAt(i){
  if(!viewer.open)viewer.showModal();
 }
 search.addEventListener("input",filter);
-quality.addEventListener("change",filter);
+quality.addEventListener("change",()=>{buildCourses();filter();});
 semester.addEventListener("change",()=>{buildCourses();filter()});
 course.addEventListener("change",filter);
 load.addEventListener("click",appendBatch);
