@@ -9,7 +9,7 @@ import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
-import {supportsSpeech,listGreekVoices,resolveMentorGreekVoice,speakGreek,stopGreek} from './mentor-voice.mjs';
+import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,resolveMentorGreekVoice,speakGreek,stopGreek} from './mentor-voice.mjs';
 import {chooseMentorDelivery,deliverySpeechSettings,publicDeliveryCue} from './mentor/core/presence-director.mjs';
 import {createMentorAvatar} from './mentor-avatar-live.mjs';
 
@@ -150,7 +150,8 @@ async function choose(id){
     const feedback=feedbackFor(next);
     if(feedback){
       const topic=next.events.at(-1)?.competency_id||'scene';
-      const overview=await state.store.overview(state.scope);
+      let overview=null;
+      try{overview=await state.store.overview(state.scope);}catch{}
       const warning=feedback.result==='review';
       setMentorDelivery(chooseMentorDelivery({
         intent:warning?'focus':'progress',
@@ -301,7 +302,7 @@ function wireMentorPresence(){
     voiceSelect.replaceChildren();
     const option=make('option',null,'Αυτόματη ελληνική φωνή');
     option.value='';voiceSelect.append(option);
-    for(const voice of listGreekVoices(window)){
+    for(const voice of listGreekVoices(window).filter(isKnownMaleGreekVoice)){
       const choice=make('option',null,voice.name+(voice.localService?' · Συσκευή':' · Browser'));
       choice.value=voice.name;voiceSelect.append(choice);
     }
