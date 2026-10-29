@@ -35,7 +35,7 @@ jobs:
           import {KNOWLEDGE_PACK,KNOWLEDGE_CARDS,KNOWLEDGE_SOURCES} from './mentor/knowledge/foundation-pack.mjs';
           import {assertKnowledgePack} from './mentor/knowledge/search.mjs';
           assert.equal(assertKnowledgePack(),true);
-          assert.equal(KNOWLEDGE_CARDS.length,29);
+          assert.equal(KNOWLEDGE_CARDS.length,30);
           assert.equal(Object.keys(KNOWLEDGE_SOURCES).length,9);
           assert.equal(KNOWLEDGE_PACK.production_clinical_approval,false);
           assert.equal(KNOWLEDGE_PACK.model_training,false);
