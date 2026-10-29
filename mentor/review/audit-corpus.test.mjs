@@ -8,8 +8,8 @@ test('Full seven-book automated audit enumerates all actual extracts and clinici
  assert.equal(report.approved_sources,0);
  assert.equal(report.rights_approved_sources,0);
  assert.equal(report.ready_for_ai,false);
- assert.equal(report.review_previews,5);
- assert.equal(report.restricted,2);
+ assert.equal(report.review_previews,7);
+ assert.equal(report.restricted,0);
  assert.equal(report.no_chapter_book_count,5);
  assert.ok(report.passages_total>2000);
  assert.ok(report.human_review_queue_count>=25);
@@ -17,14 +17,16 @@ test('Full seven-book automated audit enumerates all actual extracts and clinici
  assert.ok(report.review_queue.every(x=>/^[a-z0-9-]+$/.test(x.passage_id)));
  assert.ok(report.review_queue.every(x=>x.review_status==='human-clinical-review-pending'));
 });
-test('OpenStax and WHO are explicitly rejected and all five Pressbooks have weak chapter locators',async()=>{
+test('OpenStax and WHO are previewable under user attestation; all five Pressbooks need chapter locators',async()=>{
  const report=await auditReviewCorpus();
  const restricted=report.books.filter(x=>x.rights==='rights-restricted').map(x=>x.source_id).sort();
- assert.deepEqual(restricted,['medical-surgical-nursing','who-bec']);
+ assert.deepEqual(restricted,[]);
  const unanchored=report.books.filter(x=>x.citation_quality==='whole-book-no-chapter');
  assert.equal(unanchored.length,5);
  const openstax=report.books.find(x=>x.source_id==='medical-surgical-nursing');
- assert.ok(openstax.flags.includes('OpenStax-prior-written-AI-permission-required'));
+ assert.ok(openstax.flags.includes('OpenStax-prior-written-AI-permission-requires-documentary-check'));
+ assert.equal(openstax.permission_basis,'user-asserted-2026-10-29');
+ assert.equal(openstax.permission_documentary_verified,false);
  const who=report.books.find(x=>x.source_id==='who-bec');
  assert.ok(who.flags.includes('WHO-2018-needs-current-2025-crosscheck'));
  const md=auditMarkdown(report);
