@@ -9,6 +9,7 @@ import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
+import {mountReviewSearch} from './mentor/review/review-ui.mjs';
 
 const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{
@@ -17,7 +18,7 @@ const make=(tag,className,text)=>{
   if(text!==undefined)node.textContent=text;
   return node;
 };
-const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false};
+const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false,reviewSearch:null};
 function notify(text,error=false){
   const status=$('status');status.textContent=text;status.classList.toggle('is-error',error);
 }
@@ -228,6 +229,11 @@ async function coachAsk(intent,topic,userText){
 }
 function wireCoach(){
   const prompt=$('coach-question');
+  $('coach-to-books').addEventListener('click',()=>{
+    const q=prompt.value.trim().slice(0,100)||'airway';
+    switchTab('books',true);
+    if(state.reviewSearch)void state.reviewSearch.search(q);
+  });
   for(const btn of document.querySelectorAll('[data-coach-intent]')){
     btn.addEventListener('click',()=>{
       const intent=btn.dataset.coachIntent;
@@ -321,6 +327,7 @@ async function boot(){
   wireModes();
   wireStudyPreferences();
   wireCoach();
+  state.reviewSearch=await mountReviewSearch();
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
