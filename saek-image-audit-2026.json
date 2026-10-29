@@ -9479,15 +9479,18 @@
       "page": "https://www.who.int/publications/i/item/9789241513081",
       "caption": "Κεφάλαιο 14-12: Πρόληψη γενικευμένης ψύξης · Αποφυγή υποθερμίας · Επείγουσα υποστήριξη όπου χρειάζεται. Πρωτότυπη σχηματική εικόνα, όχι αυτόνομο πρωτόκολλο.",
       "originalArtwork": true,
-      "sourcePageCheckedFor": [
-        "WHO-ICRC Basic Emergency Care (2018) used as broad educational background only; no independent chapter-specific Greek clinical/protocol comparison completed."
-      ],
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Individually inspected Edge raster (1366×900) after redesign. Replaced repeated exclamation icons and unsubstantiated 1/2/3 sequence with distinct burn-cover/cold-protection, hypothermia monitoring, and respiratory support cards. Caption boxes fit viewBox; no Greek clinical approval or app mobile/offline E2E."
+        "scope": "Raster inspection at 1180×820 found that the third respiratory-support card lacked its outer frame. Added the matching frame and re-inspected the corrected raster: all three cards now have matching boundaries and their labels fit. NHS Burns and scalds / British Burn Association sources checked for the general cooling and patient-warming concepts; this is not Greek clinical approval. Mobile/offline app E2E not performed."
       },
-      "sha256": "f65ff196fe0da5348c403c97fe3d1f694c988162b94eca5a6df9b1a31c1e7e7a"
+      "sha256": "e5cbef11e3976edbd0ee42609b3d6971ed79c1f021b0f0d5b34f5f40f5125221",
+      "sourcePage": "https://www.nhs.uk/conditions/Burns-and-scalds/",
+      "sourcePageCheckedFor": [
+        "NHS Burns and scalds: cool running water first aid; source supports general cooling concept, not Greek EMS protocol.",
+        "British Burn Association EMSB Manual 2024, chapter 7: cool running water and keep patient warm; supports burn cooling and hypothermia prevention concepts.",
+        "Independent Greek clinical/protocol review remains pending."
+      ]
     },
     "sem_c_14_13_core": {
       "filename": "semester-c-14-13-core-el.svg",
