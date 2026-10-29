@@ -7,6 +7,7 @@ const glb=await readFile(resolve(process.cwd(),"assets/mentor-real-3d.glb"));con
 const gltf=JSON.parse(glb.subarray(20,20+jlen).toString("utf8"));
 console.log("MENTOR_REAL3D_ANIMATION_CLIPS",gltf.animations?.map(x=>x.name).slice(0,75));
 console.log("MENTOR_REAL3D_BONES",gltf.nodes?.filter(x=>/arm|shoulder|head|neck|spine|hips/i.test(x.name||"")).map(x=>x.name).slice(0,70));
+for(const expected of ["Idle","Talk","Wave"])assert.ok(gltf.animations?.some(x=>x.name===expected),"Required full-body animation "+expected);
 const engine=process.env.MENTOR_REAL3D_BROWSER||"chromium";
 const browserType={chromium,webkit}[engine];
 if(!browserType)throw Error("Unknown engine");
