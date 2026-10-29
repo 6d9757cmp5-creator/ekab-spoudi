@@ -1,0 +1,30 @@
+name: MENTOR Greek male voice and adaptive delivery
+on:
+  pull_request:
+    paths:
+      - 'mentor-voice.mjs'
+      - 'mentor-lab.js'
+      - 'mentor-lab.html'
+      - 'mentor/core/presence-director.mjs'
+      - 'mentor/real-avatar/entry.mjs'
+      - 'scripts/test-mentor-delivery.mjs'
+      - '.github/workflows/mentor-adaptive-voice.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  voice-delivery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate Greek speech, teaching styles, and synchronized animation cues
+        run: |
+          node --check mentor-voice.mjs
+          node --check mentor-lab.js
+          node --check mentor/core/presence-director.mjs
+          node --check mentor/real-avatar/entry.mjs
+          node --test scripts/test-mentor-delivery.mjs
