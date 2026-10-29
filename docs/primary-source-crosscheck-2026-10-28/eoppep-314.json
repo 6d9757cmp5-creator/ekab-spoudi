@@ -4776,7 +4776,51 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Οπιοειδή και χολινεργική διέγερση μπορούν να προκαλέσουν μύση.",
+          "Αντιχολινεργικά και συμπαθητικομιμητικά μπορούν να προκαλέσουν μυδρίαση, με εξάρτηση από οδό/δόση."
+        ],
+        "sources": [
+          "https://www.medlineplus.gov/opioidoverdose.html",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK546589/",
+          "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/206289s014lbl.pdf",
+          "https://pubmed.ncbi.nlm.nih.gov/484693/"
+        ],
+        "finding": "ΚΡΙΣΙΜΟ ΒΙΒΛΙΟΓΡΑΦΙΚΟ ΕΥΡΗΜΑ: ο δηλωμένος σύνδεσμος NCBI NBK603732 αφορά «The Effect of Pupil Size on Visual Resolution», όχι ειδικό κατάλογο φαρμάκων. Η κατεύθυνση των επιδράσεων τεκμηριώνεται καλύτερα από MedlinePlus/StatPearls/FDA. Η ατροπίνη ως οφθαλμικό διάλυμα προκαλεί μυδρίαση, όμως συνήθεις IM/IV δόσεις δεν προκαλούν κατ' ανάγκη μυδρίαση (PubMed 484693).",
+        "limits": "Πρώτος στοχευμένος γύρος μόνο· δεν επιβεβαιώθηκε η νεότερη επίσημη τράπεζα ΕΟΠΠΕΠ, ούτε υπάρχει ανεξάρτητη επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Οπιοειδή και χολινεργική διέγερση μπορούν να προκαλέσουν μύση.",
+          "Αντιχολινεργικά και συμπαθητικομιμητικά μπορούν να προκαλέσουν μυδρίαση, με εξάρτηση από οδό/δόση."
+        ],
+        "sources": [
+          "https://www.medlineplus.gov/opioidoverdose.html",
+          "https://www.ncbi.nlm.nih.gov/sites/books/NBK546589/",
+          "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/206289s014lbl.pdf",
+          "https://pubmed.ncbi.nlm.nih.gov/484693/"
+        ],
+        "verdict": "targeted_consistent_with_important_source_and_route_caveat",
+        "finding": "ΚΡΙΣΙΜΟ ΒΙΒΛΙΟΓΡΑΦΙΚΟ ΕΥΡΗΜΑ: ο δηλωμένος σύνδεσμος NCBI NBK603732 αφορά «The Effect of Pupil Size on Visual Resolution», όχι ειδικό κατάλογο φαρμάκων. Η κατεύθυνση των επιδράσεων τεκμηριώνεται καλύτερα από MedlinePlus/StatPearls/FDA. Η ατροπίνη ως οφθαλμικό διάλυμα προκαλεί μυδρίαση, όμως συνήθεις IM/IV δόσεις δεν προκαλούν κατ' ανάγκη μυδρίαση (PubMed 484693).",
+        "recommendation": "Αντικατάσταση ακατάλληλης πηγής· σαφής διάκριση φαρμάκου, οδού, δόσης, και ότι οι κόρες μόνες τους δεν θέτουν διάγνωση.",
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση δεν είναι επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν επαληθεύτηκε εκ νέου η εκφώνηση έναντι του επίσημου PDF. Δεν έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-102",
@@ -4790,7 +4834,45 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Φαρμακοκινητική: απορρόφηση, κατανομή, μεταβολισμός, απέκκριση (ADME).",
+          "Βιοδιαθεσιμότητα, κάθαρση και χρόνος ημιζωής είναι συναφείς παράμετροι."
+        ],
+        "sources": [
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "finding": "Η πλήρης αποθηκευμένη απάντηση συμφωνεί με Merck Manual «Overview of Pharmacokinetics». Ο παλαιός αποθηκευμένος σύνδεσμος /pharmacokinetics/pharmacokinetics δεν κατέστη προσβάσιμος στον τρέχοντα έλεγχο· η ενεργή ειδική σελίδα είναι /overview-of-pharmacokinetics.",
+        "limits": "Πρώτος στοχευμένος γύρος μόνο· δεν επιβεβαιώθηκε η νεότερη επίσημη τράπεζα ΕΟΠΠΕΠ, ούτε υπάρχει ανεξάρτητη επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Φαρμακοκινητική: απορρόφηση, κατανομή, μεταβολισμός, απέκκριση (ADME).",
+          "Βιοδιαθεσιμότητα, κάθαρση και χρόνος ημιζωής είναι συναφείς παράμετροι."
+        ],
+        "sources": [
+          "https://www.merckmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics"
+        ],
+        "verdict": "targeted_consistent_source_link_needs_update",
+        "finding": "Η πλήρης αποθηκευμένη απάντηση συμφωνεί με Merck Manual «Overview of Pharmacokinetics». Ο παλαιός αποθηκευμένος σύνδεσμος /pharmacokinetics/pharmacokinetics δεν κατέστη προσβάσιμος στον τρέχοντα έλεγχο· η ενεργή ειδική σελίδα είναι /overview-of-pharmacokinetics.",
+        "recommendation": "Αλλαγή συνδέσμου στο παραγωγικό περιεχόμενο μετά από έλεγχο, χωρίς μεταβολή βαθμολόγησης.",
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση δεν είναι επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν επαληθεύτηκε εκ νέου η εκφώνηση έναντι του επίσημου PDF. Δεν έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-103",
@@ -4804,7 +4886,47 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Πεπτικός σωλήνας: στόμα, φάρυγγας, οισοφάγος, στομάχι, λεπτό/παχύ έντερο, ορθό, πρωκτός.",
+          "Επικουρικά: σιελογόνοι αδένες, ήπαρ, πάγκρεας και χοληδόχος κύστη ως αποθήκη χολής."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder"
+        ],
+        "finding": "Η ανατομική ακολουθία και τα επικουρικά όργανα συμφωνούν με OpenStax §23.1/23.6. Η χοληδόχος κύστη είναι επικουρικό όργανο, ΟΧΙ μεγάλος εκκριτικός αδένας· παράγει/εκκρίνει χολή το ήπαρ, η χοληδόχος την αποθηκεύει/συμπυκνώνει.",
+        "limits": "Πρώτος στοχευμένος γύρος μόνο· δεν επιβεβαιώθηκε η νεότερη επίσημη τράπεζα ΕΟΠΠΕΠ, ούτε υπάρχει ανεξάρτητη επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Πεπτικός σωλήνας: στόμα, φάρυγγας, οισοφάγος, στομάχι, λεπτό/παχύ έντερο, ορθό, πρωκτός.",
+          "Επικουρικά: σιελογόνοι αδένες, ήπαρ, πάγκρεας και χοληδόχος κύστη ως αποθήκη χολής."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder"
+        ],
+        "verdict": "targeted_consistent_with_terminology_caveat",
+        "finding": "Η ανατομική ακολουθία και τα επικουρικά όργανα συμφωνούν με OpenStax §23.1/23.6. Η χοληδόχος κύστη είναι επικουρικό όργανο, ΟΧΙ μεγάλος εκκριτικός αδένας· παράγει/εκκρίνει χολή το ήπαρ, η χοληδόχος την αποθηκεύει/συμπυκνώνει.",
+        "recommendation": "Για εκφώνηση «μεγάλους αδένες», διαχωρισμός αδένων από άλλα επικουρικά όργανα· προσθήκη δοντιών/γλώσσας αν ζητείται πλήρης κατάλογος επικουρικών δομών.",
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση δεν είναι επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν επαληθεύτηκε εκ νέου η εκφώνηση έναντι του επίσημου PDF. Δεν έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-104",
@@ -4818,7 +4940,43 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Η άνω κοίλη φλέβα σχηματίζεται από συμβολή δεξιάς και αριστερής βραχιονοκεφαλικής φλέβας."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "finding": "OpenStax §20.5, The Superior Vena Cava / Table 20.11, υποστηρίζει τη βασική απάντηση. Η άζυγος φλέβα εκβάλλει στην άνω κοίλη, αλλά δεν είναι η ζητούμενη ζεύξη σχηματισμού.",
+        "limits": "Πρώτος στοχευμένος γύρος μόνο· δεν επιβεβαιώθηκε η νεότερη επίσημη τράπεζα ΕΟΠΠΕΠ, ούτε υπάρχει ανεξάρτητη επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Η άνω κοίλη φλέβα σχηματίζεται από συμβολή δεξιάς και αριστερής βραχιονοκεφαλικής φλέβας."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "verdict": "targeted_consistent",
+        "finding": "OpenStax §20.5, The Superior Vena Cava / Table 20.11, υποστηρίζει τη βασική απάντηση. Η άζυγος φλέβα εκβάλλει στην άνω κοίλη, αλλά δεν είναι η ζητούμενη ζεύξη σχηματισμού.",
+        "recommendation": null,
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση δεν είναι επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν επαληθεύτηκε εκ νέου η εκφώνηση έναντι του επίσημου PDF. Δεν έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-105",
@@ -4832,7 +4990,45 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Η άνω κοίλη φλέβα επιστρέφει φλεβικό αίμα από κεφαλή, τράχηλο, άνω άκρα και μεγάλο μέρος θώρακα προς δεξιό κόλπο.",
+          "Η πνευμονική κυκλοφορία και το μεγαλύτερο μέρος στεφανιαίας φλεβικής επιστροφής αποτελούν εξαιρέσεις."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "finding": "OpenStax §20.5 επιβεβαιώνει επιστροφή από τα περισσότερα τμήματα άνωθεν διαφράγματος στον δεξιό κόλπο, ενώ οι στεφανιαίες φλέβες αποχετεύονται κυρίως στον στεφανιαίο κόλπο και οι πνευμονικές φλέβες στον αριστερό κόλπο.",
+        "limits": "Πρώτος στοχευμένος γύρος μόνο· δεν επιβεβαιώθηκε η νεότερη επίσημη τράπεζα ΕΟΠΠΕΠ, ούτε υπάρχει ανεξάρτητη επιστημονική έγκριση.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Η άνω κοίλη φλέβα επιστρέφει φλεβικό αίμα από κεφαλή, τράχηλο, άνω άκρα και μεγάλο μέρος θώρακα προς δεξιό κόλπο.",
+          "Η πνευμονική κυκλοφορία και το μεγαλύτερο μέρος στεφανιαίας φλεβικής επιστροφής αποτελούν εξαιρέσεις."
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-5-circulatory-pathways"
+        ],
+        "verdict": "targeted_consistent_with_qualified_exceptions",
+        "finding": "OpenStax §20.5 επιβεβαιώνει επιστροφή από τα περισσότερα τμήματα άνωθεν διαφράγματος στον δεξιό κόλπο, ενώ οι στεφανιαίες φλέβες αποχετεύονται κυρίως στον στεφανιαίο κόλπο και οι πνευμονικές φλέβες στον αριστερό κόλπο.",
+        "recommendation": "Διατήρηση της διατύπωσης «μεγάλο μέρος/τα περισσότερα», όχι «όλο» το αίμα άνωθεν διαφράγματος.",
+        "limits": "Η αποθηκευμένη εκπαιδευτική απάντηση δεν είναι επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν επαληθεύτηκε εκ νέου η εκφώνηση έναντι του επίσημου PDF. Δεν έγινε ανεξάρτητη κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-001",
