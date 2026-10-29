@@ -26,6 +26,12 @@ if (!imageUI.includes('ανεξάρτητη επιστημονική έγκρι�
 // Generic EMS background links must never be presented as scientific validation.
 if (!imageUI.includes('όχι τεκμηρίωση σχήματος') || imageUI.includes("'Επιστημονική τεκμηρίωση'"))
   errors.push('The image UI must distinguish generic background links from scientific evidence.');
+// Offline/lazy-load failures must allow a user-triggered retry without resetting study progress.
+if (!imageUI.includes("image.addEventListener('load'") ||
+    !imageUI.includes("image.addEventListener('error'") ||
+    !imageUI.includes("image.removeAttribute('src')") ||
+    !imageUI.includes('Επανάληψη φόρτωσης εικόνας'))
+  errors.push('The sourced-image UI must recover from failed image loads without a page reload.');
 for (const path of ['saek-image-audit-2026.json', 'saek-visual-ui.js',
                     'saek-reviewed-image-ui.js', 'saek-visual-ui.css']) {
   if (!sw.includes('./' + path)) errors.push('Offline precache is missing ' + path);
