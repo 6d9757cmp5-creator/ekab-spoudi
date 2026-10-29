@@ -108,6 +108,14 @@ export async function mountKnowledgeLibrary(){
    search(query){
     terms.value=String(query??'').slice(0,150);
     topic.value='all';offset=0;show();practice();
+   },
+   lookup(query){
+    const match=searchKnowledge(pack,{query,topic:'all',limit:1})[0];
+    if(!match||!String(query??'').trim())return null;
+    const sources=match.source_ids.map(id=>catalog.sources.find(s=>s.id===id))
+      .filter(Boolean).map(s=>({title:s.title,url:s.url}));
+    return {id:match.id,title:match.title,lesson:match.lesson,question:match.question,sources,
+      medical_approval:false,status:'human-review-pending'};
    }
   });
  }catch(e){
