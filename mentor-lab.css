@@ -126,3 +126,49 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .coach-quick:focus-visible,.coach-question-line input:focus-visible,.coach-question-line button:focus-visible,.coach-speech-actions button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 @media(max-width:620px){.coach-question-line{flex-wrap:wrap}.coach-question-line button{width:100%}.coach-message{max-width:100%}}
 @media(prefers-color-scheme:dark){.coach-message-user{background:#1b4856}}
+
+/* Interactive MENTOR presence at entry, voice and messages without a hosted AI. */
+.mentor-intro-hero{align-items:stretch;min-height:290px;gap:16px}
+.mentor-intro-copy{min-width:0;flex:1;max-width:730px}
+.mentor-intro-hero .mentor-figure{--mentor-size:184px}
+.mentor-intro-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:195px;gap:8px}
+.mentor-intro-visual small{font-size:.71rem;color:#d0e9f2;letter-spacing:.05em;text-align:center}
+.mentor-intro-copy h1{font-size:clamp(1.85rem,4.2vw,2.65rem);letter-spacing:.06em}
+.mentor-intro-message{display:block!important;color:#e9fbff!important;margin:10px 0!important;max-width:590px!important;font-size:1.02rem}
+.mentor-presence-caption{font-size:.74rem;color:#afd5e2!important;margin:9px 0 0!important}
+.mentor-intro-form{display:flex;align-items:stretch;gap:8px;margin-top:17px;max-width:640px}
+.mentor-intro-form label{position:absolute;width:1px;height:1px;clip:rect(0 0 0 0);overflow:hidden}
+.mentor-intro-form input{width:100%;min-width:0;border-radius:10px;border:1px solid #a8dce8;min-height:47px;padding:11px 13px;font:inherit;background:#f7fdff;color:#133b52}
+.mentor-intro-form button,.mentor-presence-actions button{font:inherit;min-height:44px;padding:9px 12px;border-radius:10px;border:1px solid #abdde7;background:#def9ff;color:#143b4b;font-weight:750;white-space:nowrap}
+.mentor-presence-actions{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:10px}
+.mentor-presence-actions button{background:transparent;border-color:#74a5b6;color:#e9faff}
+.mentor-presence-actions button:hover{background:#ffffff1c}
+.mentor-intro-form button:hover{background:#fff}
+.mentor-intro-form input:focus-visible,.mentor-intro-form button:focus-visible,.mentor-presence-actions button:focus-visible{outline:3px solid #edc06e;outline-offset:3px}
+.mentor-intro-visual .mentor-figure.is-speaking{box-shadow:0 0 0 4px #5fd4f14a,0 0 36px #66d8f184}
+@media(max-width:750px){.mentor-intro-hero{padding:20px;align-items:center}.mentor-intro-visual{min-width:120px}.mentor-intro-hero .mentor-figure{--mentor-size:125px}.mentor-intro-copy h1{font-size:1.65rem}}
+@media(max-width:540px){.mentor-intro-hero{flex-direction:column-reverse;gap:5px;align-items:stretch}.mentor-intro-visual{flex-direction:row;justify-content:flex-start;gap:14px}.mentor-intro-hero .mentor-figure{--mentor-size:105px}.mentor-intro-visual small{text-align:left}.mentor-intro-copy h1{font-size:1.66rem;margin-top:4px}.mentor-intro-form{flex-wrap:wrap}.mentor-intro-form input{min-width:100%}.mentor-intro-form button{width:100%}.mentor-intro-message{font-size:.91rem}}
+
+/* MENTOR: native CSS character (no media, no portrait or external assets).
+   Reduced-motion safe, decorative only; not a claim of live AI. */
+.mentor-figure{--mentor-size:156px;position:relative;width:var(--mentor-size);height:calc(var(--mentor-size)*1.09);flex-shrink:0;overflow:hidden;isolation:isolate;border-radius:27px;border:1px solid #8cdff24d;background:radial-gradient(circle at 50% 42%,#4896ab5e 0%,transparent 61%),linear-gradient(145deg,#193f56,#102b43 79%);box-shadow:inset 0 0 32px #0d202a55,0 13px 25px #091e3040}
+.mentor-figure>div{position:absolute}
+.mentor-halo{inset:7% 5%;z-index:0;border:1px solid #9de3f360;border-radius:50%;box-shadow:0 0 30px #44ccef38,0 0 0 13px #66bacc12}
+.mentor-shoulders{width:74%;height:46%;bottom:-18%;left:13%;border-radius:49% 49% 5% 5%;background:linear-gradient(100deg,#21465d 2%,#456d86 50%,#173e53);z-index:2}
+.mentor-neck{width:17%;height:26%;left:41.5%;top:60%;border-radius:0 0 30% 30%;background:linear-gradient(95deg,#ad7660,#dbab91 48%,#b77d68);z-index:3}
+.mentor-ears{width:49%;height:15%;left:25.5%;top:45%;border-radius:40%;background:linear-gradient(95deg,#b47c69,#e8bd9f 22%,#dfad91 78%,#b47c69);z-index:3}
+.mentor-face{width:43%;height:47%;left:28.5%;top:25%;border-radius:46% 46% 43% 43% / 36% 36% 57% 57%;background:linear-gradient(110deg,#b88068,#efc4a7 34%,#e7b396 64%,#bc826b);box-shadow:inset -7px -4px 12px #a46c5b49,0 4px 12px #081f3438;z-index:4}
+.mentor-hair{width:48%;height:24%;left:26%;top:20%;border-radius:47% 55% 24% 15%;background:linear-gradient(140deg,#131f2b 20%,#384756 49%,#1a2936 78%);box-shadow:inset 4px 3px 3px #67758037;z-index:5;clip-path:polygon(0 42%,12% 15%,38% 5%,67% 0%,92% 20%,100% 56%,92% 100%,78% 56%,52% 51%,30% 68%,10% 92%)}
+.mentor-brow{width:12%;height:2.5%;top:46%;border-radius:100%;background:#4a332e;z-index:6;transform:rotate(-7deg)}
+.mentor-brow-left{left:36%}.mentor-brow-right{left:53%;transform:rotate(7deg)}
+.mentor-eye{width:8%;height:4.7%;top:50%;border-radius:45% 45% 52% 52%;background:radial-gradient(circle at 58% 43%,#f0f7fb 0 10%,#2b3c4e 15% 48%,#f6e4d9 53%);z-index:6;animation:mentor-blink 8s infinite;transform-origin:center center}
+.mentor-eye-left{left:38%}.mentor-eye-right{left:54%}
+.mentor-nose{width:4.4%;height:10%;top:53.5%;left:47.8%;z-index:6;border-right:2px solid #a56c5c80;border-bottom:2px solid #b67c6870;border-radius:0 0 45% 45%}
+.mentor-mouth{width:13%;height:3.2%;top:66%;left:43.5%;z-index:6;border-bottom:3px solid #995b57;border-radius:0 0 80% 80%;transition:transform .2s}
+.mentor-jacket{width:66%;height:36%;bottom:-15%;left:17%;z-index:7;background:linear-gradient(110deg,#d8e8ee 0%,#f8fcfe 51%,#b9d3df 100%);clip-path:polygon(0 24%,32% 0,50% 38%,68% 0,100% 24%,100% 100%,0 100%)}
+.mentor-collar{width:27%;height:22%;bottom:0;left:36.5%;z-index:8;background:linear-gradient(130deg,#28536d,#17374d);clip-path:polygon(0 0,50% 45%,100% 0,73% 100%,27% 100%)}
+.mentor-headset{width:58%;height:43%;left:21%;top:26%;border:3px solid #99c9d3;border-bottom:0;border-radius:50% 50% 0 0;z-index:8;clip-path:polygon(0 0,100% 0,100% 86%,74% 86%,74% 63%,18% 63%,18% 93%,0 93%);opacity:.8}
+.mentor-figure.is-speaking .mentor-mouth{transform:scaleY(2);border-bottom-width:5px;animation:mentor-mouth-talk .24s infinite alternate}
+@keyframes mentor-blink{0%,43%,46%,100%{transform:scaleY(1)}44%,45%{transform:scaleY(.12)}}
+@keyframes mentor-mouth-talk{from{transform:scaleY(.5)}to{transform:scaleY(2.1)}}
+@media(prefers-reduced-motion:reduce){.mentor-eye,.mentor-figure.is-speaking .mentor-mouth{animation:none!important}}
