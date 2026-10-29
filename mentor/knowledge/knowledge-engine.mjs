@@ -4,6 +4,8 @@
  */
 export const KNOWLEDGE_STATUS='human-review-pending';
 const VALID_ID=/^[a-z][a-z0-9-]{2,80}$/;
+const STOP_WORDS=new Set(['τι','ειναι','γιατι','πωσ','ποιο','ποια','ποιοσ','αυτο','αυτη','αυτοσ','θελω',
+ 'να','μου','τον','τησ','την','του','και','με','για','μαθε','μαθω','στο','στη','στην','απο','μια','ενα','τουσ','μιασ','πες','δωσε','παρακαλω','εξηγησε','πεσ']);
 const LICENSE_PUBLISHERS=['who.int','erc.edu','wtcs.pressbooks.pub'];
 function urlAllowed(value){
  try{
@@ -78,7 +80,7 @@ function textScore(card,terms,phrase){
 export function searchKnowledge(pack,{query='',topic='all',limit=12}={}){
  if(!pack||!Array.isArray(pack.cards))throw Error('missing-knowledge');
  const q=foldGreek(String(query).slice(0,150));
- const terms=q.split(' ').filter(s=>s.length>=3).slice(0,15);
+ const terms=q.split(' ').filter(s=>s.length>=3&&!STOP_WORDS.has(s)).slice(0,15);
  const eligible=pack.cards.filter(x=>topic==='all'||x.topic===topic);
  if(!terms.length)return eligible.slice(0,Math.max(1,Math.min(20,limit|0)));
  return eligible.map(card=>({card,score:textScore(card,terms,q)}))
