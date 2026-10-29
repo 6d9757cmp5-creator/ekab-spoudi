@@ -79,3 +79,10 @@ test('Offline service worker precaches every moved canonical module and retains 
   assert.ok(sw.includes('"./'+url+'"'),url+' public cache entry missing');
  assert.match(sw,/mentor-unified-folders/);
 });
+
+test('Moving a browser module must not rewrite document-relative fetch URLs',()=>{
+ const library=read('mentor/modules/library.js');
+ assert.match(library,/from ['"]\.\.\/library\/catalog-search\.mjs['"]/);
+ assert.match(library,/fetch\(['"]\.\/mentor\/library\/source-index\.json['"]/);
+ assert.doesNotMatch(library,/fetch\(['"]\.\.\/library\/source-index\.json['"]/);
+});
