@@ -16,14 +16,13 @@ test('3D renderer is real, local, separate from learning state and honest about 
  assert.match(src,/MutationObserver/);
  assert.doesNotMatch(src,/localStorage|indexedDB|sessionStorage|fetch\(|XMLHttpRequest|SpeechRecognition\(/);
 });
-test('3D/portrait controls exist in classroom and are keyboard accessible',()=>{
- const html=read('mentor-lab.html');
- for(const id of ['mentor-3d-canvas','mentor-view-3d','mentor-view-photo','mentor-3d-rotation','mentor-3d-status'])
+test('Current classroom mounts the real 3D avatar using public-compatible bundle URL',()=>{
+ const html=read('mentor-lab.html'),presence=read('mentor-presence.html');
+ for(const id of ['mentor-cinematic-stage','mentor-real3d-canvas','mentor-real3d-status','mentor-avatar'])
   assert.ok(html.includes('id="'+id+'"'),id);
- assert.match(html,/src="mentor-3d\.mjs"/);
- assert.match(html,/href="mentor-3d\.css"/);
- assert.match(html,/type="range" min="-165" max="165"/);
- assert.match(html,/συνθετικ/);
+ assert.match(html,/src="mentor-real3d\\.bundle\\.mjs"/);
+ assert.match(presence,/src="mentor-real3d\\.bundle\\.mjs"/);
+ assert.match(presence,/mentor-real3d-canvas/);
 });
 test('Unsupported WebGL is a safe portrait fallback',()=>{
  const nodes={
@@ -46,8 +45,11 @@ test('Unsupported WebGL is a safe portrait fallback',()=>{
  assert.equal(visual.dataset.mentorView,'photo');
  assert.match(nodes['mentor-3d-status'].textContent,/φωτογραφίας/);
 });
-test('2.5D portrait remains present for unsupported browsers',()=>{
- assert.match(read('mentor-lab.html'),/assets\/mentor-photo\.webp/);
+test('Legacy hologram renderer remains isolated while final avatar is used in the UI',()=>{
+ const html=read('mentor-lab.html');
+ const legacy=read('mentor/avatar/hologram.mjs');
+ assert.match(html,/mentor-real3d\\.bundle\\.mjs/);
+ assert.doesNotMatch(html,/id="mentor-3d-canvas"/);
+ assert.match(legacy,/setView\\("photo"\\)/);
  assert.match(read('mentor-3d.css'),/data-mentor-view="3d"/);
- assert.match(read('mentor-3d.css'),/data-mentor-view="photo"/);
 });
