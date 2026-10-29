@@ -57,10 +57,12 @@ jobs:
           import {SOURCE_POLICY,assertNoClinicalApproval} from './mentor/review/rights-policy.mjs';
           const manifest=JSON.parse(await readFile('mentor/review-corpus/manifest.json','utf8'));
           assert.equal(assertNoClinicalApproval(manifest,catalog.sources),true);
-          assert.equal(Object.values(SOURCE_POLICY).filter(x=>x.preview_allowed).length,5);
-          assert.equal(SOURCE_POLICY['medical-surgical-nursing'].preview_allowed,false);
-          assert.equal(SOURCE_POLICY['who-bec'].preview_allowed,false);
-          console.log('Safe preview state: 7 imported; 5 editorial candidates; 2 restricted; 0 medically approved; AI retrieval disabled.');
+          assert.equal(Object.values(SOURCE_POLICY).filter(x=>x.preview_allowed).length,7);
+          assert.equal(SOURCE_POLICY['medical-surgical-nursing'].preview_allowed,true);
+          assert.equal(SOURCE_POLICY['medical-surgical-nursing'].rights_signoff,'user-attested-unverified');
+          assert.equal(SOURCE_POLICY['who-bec'].preview_allowed,true);
+          assert.equal(SOURCE_POLICY['who-bec'].rights_signoff,'user-attested-unverified');
+          console.log('Safe preview state: 7 imported; 7 owner-attested editorial candidates; 0 medically approved; AI retrieval disabled.');
           NODE
       - name: Verify no grading, account or legacy progress source was touched
         run: |
