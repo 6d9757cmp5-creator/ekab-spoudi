@@ -150,7 +150,7 @@ async function start(){
    const body=details.querySelector('.reader-main')||details.querySelector('.body');
    if(!body)continue;
    const wrap=el('details','saek-source-section');
-   const summary=el('summary','saek-source-summary','Εκπαιδευτικές εικόνες με τεκμηρίωση ('+chapter.images.length+')');
+   const summary=el('summary','saek-source-summary','Εικόνες κεφαλαίου ('+chapter.images.length+')');
    wrap.append(summary);
    const note=el('p','saek-source-note','Εκπαιδευτικές εικόνες με καταγεγραμμένες πηγές και άδεια χρήσης. Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ούτε ανεξάρτητη επιστημονική έγκριση· τα σχήματα δεν υποκαθιστούν τις ισχύουσες κλινικές ή υπηρεσιακές οδηγίες.');
    wrap.append(note);
