@@ -1,0 +1,33 @@
+name: Mentor library verify
+on:
+  pull_request:
+    paths:
+      - 'mentor/library/**'
+      - '.github/workflows/mentor-library-verify.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test mentor/library/retrieval.test.mjs
+      - run: node --test mentor/library/corpus.test.mjs
+      - run: node mentor/library/validate-corpus.mjs
+      - name: Verify release-readiness rules and report outstanding approvals
+        run: |
+          node --test mentor/library/review-readiness.test.mjs
+          node mentor/library/review-readiness.mjs
+      - name: Generate passage-by-passage review checklist (no approvals)
+        run: |
+          node --test mentor/library/create-review-checklist.test.mjs
+          node mentor/library/create-review-checklist.mjs /tmp/mentor-review-checklist.csv
+      - name: Save reviewer assignment checklist without book texts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-clinical-passages-review-checklist
+          path: /tmp/mentor-review-checklist.csv
+          if-no-files-found: error
+          retention-days: 30

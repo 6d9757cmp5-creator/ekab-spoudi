@@ -1,0 +1,47 @@
+name: Mentor full open-book import
+on:
+  push:
+    branches: [feature/mentor-clinical-library]
+    paths:
+      - 'mentor/library/import_full_books.py'
+      - '.github/workflows/mentor-full-books.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/mentor-clinical-library
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download and extract five official CC-BY textbooks
+        run: python mentor/library/import_full_books.py
+      - name: Validate imported text and page counts
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('mentor/library/corpus/manifest.json')
+          m=json.loads(p.read_text())
+          assert len(m['books'])==5 and not m['errors'],m
+          for b in m['books']:
+              assert b['passage_count']>10 and b['word_count']>3000,b
+              d=json.loads((p.parent/(b['source_id']+'.json')).read_text())
+              assert len(d['passages'])==b['passage_count']
+              assert all(x['review_status']=='draft' and x['source_url'].startswith('https://') for x in d['passages'])
+          print('PASS: five actual full-text book exports were extracted')
+          PY
+      - name: Commit extracted books to the feature branch (not main)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mentor/library/corpus
+          if ! git diff --cached --quiet; then
+            git commit -m "Mentor: import five full open textbook text corpora for clinical review"
+            git push origin HEAD:feature/mentor-clinical-library
+          fi

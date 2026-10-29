@@ -1,0 +1,285 @@
+{
+  "schema_version": 2,
+  "purpose": "MENTOR OS Clinical Intelligence Library — evidence source catalog and extracted-text status",
+  "record_type": "bibliographic source registry, not training corpus",
+  "sources": [
+    {
+      "id": "wistech-emr-2025",
+      "title": "Emergency Medical Responder",
+      "publisher": "WisTech Open",
+      "year": 2025,
+      "license": "CC BY 4.0 except where otherwise noted",
+      "url": "https://wtcs.pressbooks.pub/emergencymedtech/",
+      "coverage": [
+        "prehospital",
+        "assessment",
+        "airway",
+        "trauma",
+        "shock",
+        "pharmacology",
+        "special-populations",
+        "operations"
+      ],
+      "level": "EMR/EMT foundation",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/wistech-emr-2025.json",
+      "passages": 162,
+      "word_count": 162391,
+      "corpus_sha256": "f302aac7b367ed54738ca0cd5e3f50743403e54d108d0d22bf75c7996cbb2188",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    },
+    {
+      "id": "who-bec",
+      "title": "Basic Emergency Care",
+      "publisher": "WHO / ICRC",
+      "url": "https://www.who.int/publications/i/item/9789241513081",
+      "coverage": [
+        "emergency",
+        "ABCDE",
+        "trauma",
+        "shock"
+      ],
+      "level": "Emergency care core",
+      "license": "CC BY-NC-SA 3.0 IGO: non-commercial reuse; no WHO/ICRC endorsement, preserve attribution and share-alike",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/who-bec.json",
+      "passages": 234,
+      "word_count": 62592,
+      "corpus_sha256": "41fd51a359ca5e27cf293ce23559591e12c8b73bd41703797f315f0bb6b2104e",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    },
+    {
+      "id": "openrn-health",
+      "title": "Open RN Health Alterations",
+      "publisher": "Open RN / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK613078/",
+      "coverage": [
+        "clinical-reasoning",
+        "medical-emergencies"
+      ],
+      "level": "Clinical foundations",
+      "license": "Check edition/chapter third-party notices",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/openrn-health.json",
+      "passages": 354,
+      "word_count": 353938,
+      "corpus_sha256": "6824d33a7a8c79227dde745d58b4d701a304ed9b22899dd5b17beb5a8eaf4771",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    },
+    {
+      "id": "openrn-skills",
+      "title": "Open RN Nursing Skills",
+      "publisher": "Open RN / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK596735/",
+      "coverage": [
+        "clinical-assessment",
+        "monitoring",
+        "procedures"
+      ],
+      "level": "Clinical foundations",
+      "license": "Check edition/chapter third-party notices",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/openrn-skills.json",
+      "passages": 227,
+      "word_count": 238830,
+      "corpus_sha256": "3e943b7994e035115fa7d30c4d96baa4a5d42ba7fc3295bca6a70a6a49c1da2c",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    },
+    {
+      "id": "openrn-pharm",
+      "title": "Open RN Nursing Pharmacology",
+      "publisher": "Open RN / NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK595000/",
+      "coverage": [
+        "pharmacology",
+        "medication-safety"
+      ],
+      "level": "Clinical foundations",
+      "license": "Check edition/chapter third-party notices",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/openrn-pharm.json",
+      "passages": 181,
+      "word_count": 181184,
+      "corpus_sha256": "4a9b8c64be78c41c3c83dc4a5f4158b058f214c39d214b781f06ee94b3cc7c8b",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    },
+    {
+      "id": "iem-project",
+      "title": "International Emergency Medicine Education Project",
+      "publisher": "iEM",
+      "url": "https://iem-student.org/how-to-use-this-website/",
+      "coverage": [
+        "emergency-medicine",
+        "clinical-reasoning",
+        "imaging",
+        "procedures"
+      ],
+      "level": "Medical student / emergency physician",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "saem-cdem",
+      "title": "CDEM Curriculum",
+      "publisher": "SAEM",
+      "url": "https://www.saem.org/about-saem/academies-interest-groups-affiliates2/cdem/for-students/online-education",
+      "coverage": [
+        "emergency-medicine",
+        "clinical-reasoning",
+        "pediatrics"
+      ],
+      "level": "Medical student / emergency physician",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "open-acute-care",
+      "title": "Open Acute Care",
+      "publisher": "Open Acute Care",
+      "url": "https://openacutecare.org/",
+      "coverage": [
+        "emergency",
+        "critical-care"
+      ],
+      "level": "Emergency & critical care",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "who-triage",
+      "title": "Integrated Triage Tool",
+      "publisher": "WHO",
+      "url": "https://www.who.int/tools/triage",
+      "coverage": [
+        "triage",
+        "ED"
+      ],
+      "level": "Emergency department",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "who-toolkit",
+      "title": "Emergency Care Toolkit",
+      "publisher": "WHO",
+      "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit",
+      "coverage": [
+        "ED",
+        "resuscitation",
+        "handover"
+      ],
+      "level": "Emergency department",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "erc-2025",
+      "title": "Guidelines 2025",
+      "publisher": "European Resuscitation Council",
+      "url": "https://www.erc.edu/science-research/guidelines/guidelines-2025",
+      "coverage": [
+        "resuscitation",
+        "ALS",
+        "BLS",
+        "pediatric"
+      ],
+      "level": "Guideline",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "ems-education",
+      "title": "National EMS Education Standards",
+      "publisher": "US EMS.gov",
+      "url": "https://www.ems.gov/projects/ems-education-standards.html",
+      "coverage": [
+        "EMS-competencies"
+      ],
+      "level": "Curriculum",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "ekab-saek",
+      "title": "EKAB SAEK Study Guides",
+      "publisher": "EKAB",
+      "url": "https://www.ekab.gr/ekpedefsi/iek-ekav/",
+      "coverage": [
+        "Greek-EMS",
+        "SAEK"
+      ],
+      "level": "Greek curriculum",
+      "license": "Per-resource review required",
+      "status": "source-identified",
+      "fulltext_ingested": false
+    },
+    {
+      "id": "openrn-advanced",
+      "title": "Nursing Advanced Skills",
+      "publisher": "WisTech Open / Open RN",
+      "year": 2023,
+      "license": "CC BY 4.0 except where otherwise noted",
+      "url": "https://wtcs.pressbooks.pub/nursingadvancedskills/",
+      "coverage": [
+        "ECG",
+        "intravenous-therapy",
+        "chest-drains",
+        "clinical-skills"
+      ],
+      "level": "Advanced nursing/clinical procedures",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/openrn-advanced.json",
+      "passages": 87,
+      "word_count": 90247,
+      "corpus_sha256": "09b9b5c083e30f00878c3ad5fc7d2a114ff18a40d27b4a34fd29fc4a5f483b53",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    },
+    {
+      "id": "medical-surgical-nursing",
+      "title": "Medical-Surgical Nursing",
+      "publisher": "OpenStax / UOTI listing",
+      "year": 2024,
+      "license": "Book PDF states CC BY 4.0; current AI-specific rights to recheck prior deployment",
+      "url": "https://uotinitiative.org/en-medical-surgical-nursing-5ui64",
+      "coverage": [
+        "medical-surgical",
+        "emergency",
+        "clinical-reasoning",
+        "ED"
+      ],
+      "level": "Advanced nursing / medical-surgical clinical foundations",
+      "status": "full-text-extracted-review-pending",
+      "fulltext_ingested": true,
+      "text_path": "mentor/library/corpus/medical-surgical-nursing.json",
+      "passages": 1554,
+      "word_count": 721857,
+      "corpus_sha256": "218d9f2643fabc06318866f739464b8861a215ee16677c187c86b350a1f696e1",
+      "clinical_review": "pending",
+      "model_training": "not performed"
+    }
+  ],
+  "statistics": {
+    "text_imported_books": 7,
+    "source_entries": 15,
+    "total_imported_words": 1811039
+  }
+}
