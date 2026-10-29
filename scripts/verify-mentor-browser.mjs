@@ -190,6 +190,16 @@ try{
   await page.locator('#coach-to-knowledge').click();
   await page.waitForFunction(()=>document.getElementById('knowledge-query').value==='καρδιά');
   assert.ok(await page.locator('.knowledge-card').count()>0,'Mentor coach lookup opens actual knowledge');
+  // Deterministic mentor coach answers conceptual questions from authored source cards.
+  await page.locator('#tab-route').click();
+  await page.locator('#coach-question').fill('Τι είναι το QRS;');
+  await page.locator('#coach-send').click();
+  await page.waitForFunction(()=>document.querySelector('#coach-dialogue .coach-message-assistant:last-child')?.textContent.includes('Κάρτα γνώσης'));
+  const groundedReply=await page.locator('#coach-dialogue .coach-message-assistant').last().textContent();
+  assert.match(groundedReply,/QRS/);
+  assert.match(groundedReply,/wtcs\.pressbooks\.pub\/anatphys/);
+  assert.match(groundedReply,/εκκρεμεί επιστημονικός έλεγχος/);
+  assert.match(groundedReply,/Δεν αποτελεί οδηγία για πραγματικό ασθενή/);
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,
     'Knowledge cards and self-test must not affect official EOPPEP progress');
   assert.ok(!(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.includes('knowledge')))),
