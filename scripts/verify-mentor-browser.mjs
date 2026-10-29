@@ -246,6 +246,18 @@ try{
   assert.equal(await page.locator('#ecg-key').isVisible(),true);
   assert.equal(await page.locator('#ecg-toggle-key').getAttribute('aria-expanded'),'true');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // MENTOR master roadmap must truthfully represent ECG, oral and live prototypes.
+  await page.goto('http://127.0.0.1:'+port+'/ui-tools/mentor-roadmap.html',{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.querySelectorAll('.capability-card').length===25);
+  assert.equal(await page.locator('.capability-card').count(),25);
+  assert.equal(await page.getByRole('link',{name:'Άνοιγμα συνθετικού ECG Lab'}).count(),1);
+  assert.equal(await page.getByRole('link',{name:'Άνοιγμα προφορικής εξάσκησης'}).count(),1);
+  assert.match(await page.locator('.capability-card').filter({hasText:'Πλήρης AI καθηγητής'}).textContent(),/Μη διαθέσιμο/);
+  await page.locator('[data-filter="available"]').click();
+  assert.ok((await page.locator('.capability-card:visible').count())>8);
+  await page.locator('[data-filter="all"]').click();
+  assert.equal(await page.locator('.capability-card:visible').count(),25);
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
