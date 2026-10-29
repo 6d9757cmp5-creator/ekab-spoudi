@@ -185,6 +185,29 @@ try{
   assert.match(await page.locator('#mentor-book-results .review-result a').first().getAttribute('href'),/^https:\/\/wtcs.pressbooks.pub\/emergencymedtech\//);
   const snippet=await page.locator('#mentor-book-results .review-excerpt').first().textContent();
   assert.ok(snippet.length<275,'No full unreviewed chapter is displayed');
+  // Explicitly exercise EACH imported book, including the two with user-attested licenses.
+  // They remain unapproved for clinical AI even when editorial search works.
+  const extraBooks=[
+    ['openrn-health','airway'],['openrn-skills','airway'],
+    ['openrn-pharm','dose'],['openrn-advanced','airway'],
+    ['who-bec','airway'],['medical-surgical-nursing','shock']
+  ];
+  for(const [sourceId,term] of extraBooks){
+    await page.locator('#mentor-book-select').selectOption(sourceId);
+    await page.locator('#mentor-book-query').fill(term);
+    await page.locator('#mentor-book-submit').click();
+    await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'),{timeout:30000});
+    const matches=await page.locator('#mentor-book-results .review-result').count();
+    assert.ok(matches>0,'Source lookup has real excerpts: '+sourceId);
+    assert.match(await page.locator('#mentor-book-results .review-watermark').first().textContent(),/ΑΝΕΛΕΓΚΤΟ/);
+    const excerpt=await page.locator('#mentor-book-results .review-excerpt').first().textContent();
+    assert.ok(excerpt.length<=275,'Source preview is bounded: '+sourceId);
+    assert.match(await page.locator('#mentor-book-results .review-result a').first().getAttribute('href'),/^https:\/\//);
+  }
+  await page.locator('#mentor-book-select').selectOption('wistech-emr-2025');
+  await page.locator('#mentor-book-query').fill('αεραγωγός');
+  await page.locator('#mentor-book-submit').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-book-status').textContent.startsWith('Βρέθηκαν'));
   await page.screenshot({path:'mentor-foundation-mobile-books.png',fullPage:true});
   await page.locator('#tab-route').click();
   await page.locator('#coach-question').fill('shock');
