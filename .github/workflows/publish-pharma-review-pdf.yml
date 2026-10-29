@@ -1,6 +1,7 @@
 name: Publish four academic educational review PDFs
 on:
   push:
+    branches: [main]
     paths:
       - 'scripts/generate-pharma-review-note.py'
       - '.github/workflows/publish-pharma-review-pdf.yml'
@@ -48,6 +49,8 @@ jobs:
               print(f"Validated no-links one-page academic memorandum: {name}")
           PY
       - name: Commit updated four PDFs into published site
+        # Never push to main from a PR branch or manually dispatched branch.
+        if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
