@@ -1,5 +1,13 @@
 name: Mentor browser simulation
 on:
+  push:
+    paths:
+      - 'mentor/**'
+      - 'mentor-lab.html'
+      - 'mentor-lab.js'
+      - 'mentor-lab.css'
+      - 'scripts/verify-mentor-browser.mjs'
+      - '.github/workflows/mentor-browser-smoke.yml'
   pull_request:
     paths:
       - 'mentor-lab.html'
