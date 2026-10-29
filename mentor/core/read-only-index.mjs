@@ -13,6 +13,8 @@ export const SOURCES=Object.freeze([
   {file:"eoppep-sos.json",kind:"sos",label:"ΕΟΠΠΕΠ · Έτοιμα SOS"},
   {file:"saek-exams-bank.json",kind:"saekExam",label:"ΣΑΕΚ · Ερωτήσεις αυτοελέγχου"},
   {file:"extra-exercises-search.json",kind:"practice",label:"Συμπληρωματικές ασκήσεις"},
+  {file:"farmaka-catalog.js",kind:"pharma",label:"Φαρμακολογία · κάρτες"},
+  {file:"seminar-tracks.js",kind:"seminar",label:"Σεμινάρια · ενότητες"},
   {file:"app-pages-search-1.json",kind:"pages",label:"Εκπαιδευτικές σελίδες"},
   {file:"app-pages-search-2.json",kind:"pages",label:"Εκπαιδευτικές σελίδες"},
   {file:"app-pages-search-3.json",kind:"pages",label:"Εκπαιδευτικές σελίδες"}
@@ -24,6 +26,8 @@ export const KINDS=Object.freeze([
   {value:"sos",label:"SOS ΕΟΠΠΕΠ"},
   {value:"saekExam",label:"Αυτοέλεγχος ΣΑΕΚ"},
   {value:"practice",label:"Ασκήσεις"},
+  {value:"pharma",label:"Φαρμακολογία"},
+  {value:"seminar",label:"Σεμινάρια"},
   {value:"pages",label:"Άλλες ενότητες"}
 ]);
 const clean=value=>String(value??"").replace(/\s+/g," ").trim();
@@ -39,6 +43,21 @@ const entry=(id,kind,title,body,source,href,subtitle,meta="")=>Object.freeze({
  id:clean(id),kind,title:clean(title),body:clean(body),source,href:safeAppHref(href),
  subtitle:clean(subtitle),meta:clean(meta)
 });
+export function parsePublishedSource(source,text){
+ if(!SOURCES.some(x=>x.file===source.file&&x.kind===source.kind))throw Error("source-not-allowlisted");
+ if(source.kind==="pharma"){
+  const match=String(text).match(/^\s*\/\*[\s\S]*?\*\/\s*window\.EKAB_PHARMA\s*=\s*(\{[\s\S]*\});\s*$/);
+  if(!match)throw Error("pharma-format");
+  const parsed=JSON.parse(match[1]);
+  return {items:Array.isArray(parsed.medicines)?parsed.medicines:[]};
+ }
+ if(source.kind==="seminar"){
+  const match=String(text).match(/window\.EkabSeminarTracks\s*=\s*(\[[\s\S]*?\n\]);/);
+  if(!match)throw Error("seminar-format");
+  return {items:JSON.parse(match[1])};
+ }
+ return JSON.parse(text);
+}
 export function transformSource(source,payload){
  if(!SOURCES.some(x=>x.file===source.file&&x.kind===source.kind))throw Error("source-not-allowlisted");
  const raw=Array.isArray(payload)?payload:(payload&&Array.isArray(payload.items)?payload.items:null);
@@ -62,6 +81,18 @@ export function transformSource(source,payload){
    case "saekExam":
     rows.push(entry(p.id||"self-"+i,"saekExam",p.question||"Ερώτηση αυτοελέγχου",
       p.answer||"",source.label,p.href,(p.course||"")+" · "+(p.chapterTitle||""),source.file));break;
+   case "pharma":
+    rows.push(entry("med-"+clean(p.id),"pharma",p.name||"Φαρμακευτική κάρτα",
+      ["Μηχανισμός: "+(p.mechanism||""),"Καταχωρισμένη ένδειξη: "+(p.indication||""),"Προφυλάξεις: "+(p.caution||""),"Σημειώσεις: "+(p.notes||"")].join("\n\n"),
+      source.label,"farmaka.html",p.category||"",source.file+" · εκπαιδευτικό, όχι οδηγία χορήγησης"));break;
+   case "seminar":
+    for(let n=0;n<(Array.isArray(p.units)?p.units.length:0);n++){
+      const unit=p.units[n];
+      if(!Array.isArray(unit))continue;
+      rows.push(entry("seminar-"+clean(p.id)+"-"+n,"seminar",
+        (p.name||"Σεμινάριο")+" · "+(unit[0]||"Ενότητα"),unit.slice(1).join("\n\n"),source.label,
+        "seminar-prep.html",p.subtitle||"",source.file));
+    }break;
    case "practice":
    case "pages":
     rows.push(entry(p.id||source.file+"-"+i,source.kind,p.title||"Εκπαιδευτικό υλικό",
