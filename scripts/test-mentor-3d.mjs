@@ -20,8 +20,8 @@ test('Current classroom mounts the real 3D avatar using public-compatible bundle
  const html=read('mentor-lab.html'),presence=read('mentor-presence.html');
  for(const id of ['mentor-cinematic-stage','mentor-real3d-canvas','mentor-real3d-status','mentor-avatar'])
   assert.ok(html.includes('id="'+id+'"'),id);
- assert.match(html,/src="mentor-real3d\\.bundle\\.mjs"/);
- assert.match(presence,/src="mentor-real3d\\.bundle\\.mjs"/);
+ assert.match(html,/src="mentor-real3d\.bundle\.mjs"/);
+ assert.match(presence,/src="mentor-real3d\.bundle\.mjs"/);
  assert.match(presence,/mentor-real3d-canvas/);
 });
 test('Unsupported WebGL is a safe portrait fallback',()=>{
@@ -48,8 +48,8 @@ test('Unsupported WebGL is a safe portrait fallback',()=>{
 test('Legacy hologram renderer remains isolated while final avatar is used in the UI',()=>{
  const html=read('mentor-lab.html');
  const legacy=read('mentor/avatar/hologram.mjs');
- assert.match(html,/mentor-real3d\\.bundle\\.mjs/);
+ assert.match(html,/mentor-real3d\.bundle\.mjs/);
  assert.doesNotMatch(html,/id="mentor-3d-canvas"/);
- assert.match(legacy,/setView\\("photo"\\)/);
+ assert.match(legacy,/setView\("photo"\)/);
  assert.match(read('mentor-3d.css'),/data-mentor-view="3d"/);
 });
