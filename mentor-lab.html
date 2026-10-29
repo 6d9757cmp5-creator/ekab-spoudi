@@ -38,6 +38,7 @@
     <button type="button" id="tab-mission" role="tab" aria-controls="panel-mission" aria-selected="true" data-tab="mission">Αποστολή</button>
     <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
     <button type="button" id="tab-route" role="tab" aria-controls="panel-route" aria-selected="false" tabindex="-1" data-tab="route">Διαδρομή</button>
+    <button type="button" id="tab-books" role="tab" aria-controls="panel-books" aria-selected="false" tabindex="-1" data-tab="books">Βιβλία · Έλεγχος</button>
   </nav>
   <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
   <section id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
@@ -158,6 +159,9 @@
         </div>
       </form>
       <div class="coach-speech-actions">
+        <button type="button" class="action secondary" id="coach-to-books">📖 Αναζήτησε τον όρο στα βιβλία (προεπισκόπηση)</button>
+      </div>
+      <div class="coach-speech-actions">
         <button type="button" class="action secondary" id="coach-speak">🔊 Άκουσε την απάντηση</button>
         <button type="button" class="action secondary" id="coach-stop">Διακοπή ομιλίας</button>
       </div>
@@ -171,6 +175,31 @@
     <div class="panel"><h3>Επόμενα εργαστήρια</h3><div class="roadmap">
       <span>3D Ανατομία</span><span>ECG Intelligence Lab</span><span>Ιατρική ομάδα AI</span><span>Εγκεκριμένη κλινική διαλογή (εκκρεμεί)</span><span>Προχωρημένη προσομοίωση συσκευών (εκκρεμεί)</span><span>Προφορικές εξετάσεις</span>
     </div><p class="muted small">Οι παραπάνω προηγμένες ενότητες δεν είναι ακόμη ενεργές. Οι νέες βασικές κάρτες πολλαπλών εμπλεκομένων και εξοπλισμού βρίσκονται στην «Αποστολή».</p></div>
+  </section>
+  <section id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden>
+    <div class="section-heading"><div><h2>Ιατρική βιβλιοθήκη · Σύνδεση πηγών</h2>
+      <p>Πραγματικά εισαγμένα βιβλία, αναζήτηση μέσα στο κείμενο και σύνδεσμοι πρωτότυπης πηγής.</p></div></div>
+    <div class="disclaimer" role="note">
+      <strong>Λειτουργία προεπισκόπησης — μη εγκεκριμένη κλινική γνώση.</strong>
+      Οι πηγές δεν έχουν περάσει ανεξάρτητο επιστημονικό ή πλήρη έλεγχο δικαιωμάτων. Τα αποτελέσματα είναι σύντομα αποσπάσματα,
+      όχι απαντήσεις γιατρού, διάγνωση ή οδηγίες θεραπείας. Δεν αποστέλλεται ερώτηση σε AI.
+    </div>
+    <div class="panel">
+      <h3>Αναζήτηση στα 7 εξαγμένα συγγράμματα</h3>
+      <p id="mentor-book-count" class="muted small">Έλεγχος βιβλιογραφικής σύνδεσης…</p>
+      <form id="mentor-book-form" class="review-form" role="search" aria-label="Αναζήτηση αποσπάσματος για βιβλιογραφική επιμέλεια">
+        <label for="mentor-book-select">Βιβλίο</label>
+        <select id="mentor-book-select" required aria-label="Επιλογή ενός εισαγμένου βιβλίου"></select>
+        <label for="mentor-book-query">Όρος αναζήτησης</label>
+        <input id="mentor-book-query" type="search" maxlength="100" required autocomplete="off"
+          placeholder="π.χ. airway, shock ή αεραγωγός" />
+        <button id="mentor-book-submit" type="submit" class="action">Αναζήτηση αποσπασμάτων</button>
+      </form>
+      <p class="muted small">Φορτώνεται μόνο το επιλεγμένο βιβλίο. Για ελληνικούς όρους εφαρμόζεται μικρό, ενδεικτικό λεξικό αντιστοίχισης.
+        Η αναζήτηση δεν αποτελεί ιατρική ερμηνεία. Τα βιβλία είναι κυρίως στα αγγλικά.</p>
+      <p id="mentor-book-status" role="status" aria-live="polite">Προετοιμασία…</p>
+      <div id="mentor-book-results" class="review-results" aria-live="polite"></div>
+    </div>
   </section>
   <footer>MENTOR OS · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
 </main>
