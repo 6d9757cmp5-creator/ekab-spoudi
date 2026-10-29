@@ -5,6 +5,7 @@
  */
 import {assertPublicCatalog} from '../library/catalog-search.mjs';
 import {assertReviewBook} from './review-search.mjs';
+import {assertEditorialSource,assertNoClinicalApproval} from './rights-policy.mjs';
 
 const MAX_BYTES=7_000_000;
 const BASE='./mentor/review-corpus/';
@@ -46,6 +47,9 @@ export function createReviewBookLoader({request=globalThis.fetch.bind(globalThis
  }
  async function load(id){
   const [m,c]=await Promise.all([manifest(),sources()]);
+  assertNoClinicalApproval(m,c);
+  // Reject restricted publishers *before* requesting their text.
+  assertEditorialSource(id);
   const entry=c.find(s=>s.id===id&&s.extracted_for_review&&
    s.clinical_retrieval_enabled===false&&s.independent_clinical_review==='not_verified');
   const b=m.books.find(x=>x.source_id===id);
