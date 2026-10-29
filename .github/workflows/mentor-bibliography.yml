@@ -5,6 +5,7 @@ on:
       - mentor-library.html
       - mentor-library.js
       - mentor/library/source-index.json
+      - mentor/library/catalog-search.mjs
       - scripts/test-mentor-source-index.mjs
       - .github/workflows/mentor-bibliography.yml
   push:
@@ -19,5 +20,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check mentor-library.js
+      - run: node --check mentor-library.js && node --check mentor/library/catalog-search.mjs
       - run: node --test scripts/test-mentor-source-index.mjs

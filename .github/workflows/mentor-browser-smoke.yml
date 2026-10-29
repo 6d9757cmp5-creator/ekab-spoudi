@@ -5,8 +5,11 @@ on:
       - 'mentor-lab.html'
       - 'mentor-lab.js'
       - 'mentor-lab.css'
+      - 'mentor-library.html'
+      - 'mentor-library.js'
       - 'mentor/**'
       - 'scripts/verify-mentor-browser.mjs'
+      - 'scripts/test-mentor-source-index.mjs'
       - '.github/workflows/mentor-browser-smoke.yml'
   workflow_dispatch:
 permissions:
