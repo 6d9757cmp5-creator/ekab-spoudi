@@ -426,3 +426,26 @@ Official sources: [ERC/RCUK 2025 PLS](https://www.resus.org.uk/professional-libr
 **Νέα ευρήματα υψηλής προτεραιότητας:** A-081 και A-083 έχουν αποθηκευμένη παραπομπή σε **HBV testing** αντί της απαιτούμενης πηγής HAV/σύγκρισης HAV–HBV. A-082 χρειάζεται ειδική πηγή πρόληψης αντί γενικής διάγνωσης. A-085 έχει γενική μη επαρκή πηγή A&P αντί ειδικής μικροβιολογικής ενότητας. Δεν διορθώθηκε το δημοσιευμένο εκπαιδευτικό περιεχόμενο. Ανοιχτά επίσης A-028/A-038/A-040/A-065/A-079/A-080 και οι εκκρεμότητες προηγούμενων παρτίδων, επίσημο τρέχον PDF/λυσάρι ΕΟΠΠΕΠ, ελληνικά SOP. Ο στοχευμένος έλεγχος **δεν είναι** αποδοχή της επίσημης τράπεζας.
 
 **Σύνολο καταχωρισμένου πρώτου γύρου:** ΣΑΕΚ **79/247**, ΕΟΠΠΕΠ **89/314**, συνολικά **168/561**· **393** εκκρεμούν. **0/561** πλήρεις ανεξάρτητες εγκρίσεις. Δεύτερος γύρος δεν ξεκίνησε. PR #39 Draft / unmerged, χωρίς deployment.
+
+
+## 29/10/2026, 13:39 Ελλάδας — πρώτος στοχευμένος γύρος: SAEK 07-09..07-11, 08-01..08-02 και EOP-A-086..090 (+10)
+
+Διαβάστηκαν **ολόκληρα** τα πέντε κεφάλαια HTML (κύριο κείμενο, επεξήγηση, SOS, ερώτηση/απάντηση αυτοελέγχου) και οι **πλήρεις αρχικές αποθηκευμένες απαντήσεις** από `official_questions.json` (blob `1d356fa2aa8bc43b4690373dfacb30314cefcfed`). Οι πηγές, οι συγκεκριμένοι ισχυρισμοί, τα ευρήματα και τα όρια βρίσκονται **ανά εγγραφή** στα δύο μητρώα. Η σύγκριση αφορά συγκεκριμένους ισχυρισμούς, **όχι** ολική πιστοποίηση ούτε έγκριση ελληνικών SOP.
+
+**ΣΑΕΚ +5:**
+- `07-09` κλειστός κύκλος, read-back και διόρθωση διεύθυνσης — [AHRQ TeamSTEPPS](https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/checkback.html); εκκρεμεί ελληνικό SOP dispatch.
+- `07-10` ακριβής/εκτιμώμενη ώρα και καταγραφή μεταβολών — [EDPB GDPR](https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en), [AHRQ handoff](https://www.ahrq.gov/teamstepps-program/curriculum/communication/overview/index.html); εκκρεμεί εγκεκριμένο audit log/χρονοσήμανση ΕΚΑΒ.
+- `07-11` τηλεφωνικές οδηγίες/όρια ρόλου — [RCUK BLS 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines); **κρίσιμο:** η τηλεφωνικά καθοδηγούμενη ΚΑΡΠΑ πρέπει να παρέχεται κατά το εγκεκριμένο πρωτόκολλο, όχι να αποτρέπεται από υπερβολικά περιοριστική διατύπωση. Δεν ελέγχθηκε το ελληνικό τηλεφωνικό SOP.
+- `08-01` ψηφιακή τεκμηρίωση — [EDPB](https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en), [AHRQ](https://www.ahrq.gov/teamstepps-program/curriculum/communication/overview/index.html); εκκρεμεί ελληνικό ePCR, δικαιώματα και έλεγχος διορθώσεων.
+- `08-02` ασύρματος/read-back, ασφαλής οδήγηση — [AHRQ](https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/checkback.html), [NHTSA](https://www.nhtsa.gov/risky-driving/distracted-driving); εκκρεμεί εγκεκριμένο εφεδρικό κανάλι και κωδικοποίηση ΕΚΑΒ.
+
+**ΕΟΠΠΕΠ +5:**
+- `A-086` ABO/Rh — [OpenStax §18.6](https://openstax.org/books/anatomy-and-physiology-2e/pages/18-6-blood-typing); οι βασικοί ορισμοί συμφωνούν, όχι πρωτόκολλο μετάγγισης.
+- `A-087` ενδοσπόρια/αντισώματα/άνοσοι οροί — [OpenStax Microbiology §3.3](https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells), [A&P §21.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies); **ακατάλληλα γενική αρχική παραπομπή** για βακτηριακά σπόρια.
+- `A-088` πύλες εισόδου μικροβίων — [OpenStax Microbiology §15.2](https://openstax.org/books/microbiology/pages/15-2-how-pathogens-cause-disease); **ακατάλληλα γενική αρχική παραπομπή** A&P §21.
+- `A-089` απολύμανση/αποστείρωση/αντισηψία — [CDC ειδικοί ορισμοί](https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/introduction-methods-definition-of-terms.html); **ακατάλληλα γενική αρχική παραπομπή** A&P §21· χρειάζεται διάκριση καθαρισμού.
+- `A-090` χολή — [OpenStax A&P §23.6](https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder); ελεγμένα σημεία συμφωνούν, να διευκρινιστεί ήπαρ έναντι χοληδόχου κύστης.
+
+**Ανοιχτοί κίνδυνοι:** A-028/A-038/A-040/A-065/A-079/A-080/A-081/A-083 και άλλα ευρήματα προηγούμενων παρτίδων· μη επαληθευμένη νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, μη διαθέσιμα εγκεκριμένα ελληνικά επιχειρησιακά SOP. Δεν αλλάχθηκε το δημοσιευμένο εκπαιδευτικό περιεχόμενο, η βαθμολόγηση ή η πρόοδος.
+
+**Μετρημένη καταχώριση πρώτου γύρου:** ΣΑΕΚ **84/247**, ΕΟΠΠΕΠ **94/314**, σύνολο **178/561** (31,7%), εκκρεμούν **383**. **0/561** πλήρεις ανεξάρτητες επιστημονικές εγκρίσεις. Ο δεύτερος γύρος **δεν ξεκίνησε**. PR #39 παραμένει Draft και μη συγχωνευμένο.

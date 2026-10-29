@@ -3927,7 +3927,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ABO: αντιγόνα A/B στα ερυθρά καθορίζουν A, B, AB, O",
+          "Rh(D) θετικό/αρνητικό βάσει αντιγόνου D",
+          "απαιτείται έλεγχος συμβατότητας πριν μετάγγιση"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-6-blood-typing"
+        ],
+        "finding": "Το OpenStax §18.6 επιβεβαιώνει τους βασικούς ορισμούς ABO/Rh και τον κίνδυνο ασύμβατης μετάγγισης. Η πλήρης αποθηκευμένη απάντηση είναι συνοπτική και συμφωνεί σε αυτά τα σημεία.",
+        "limits": "ΕΚΚΡΕΜΕΙ: δεν αποτελεί διαδικαστική οδηγία μετάγγισης· δεν επαληθεύτηκαν τοπικά εργαστηριακά SOP, διασταύρωση, σπάνια αντιγόνα ή τρέχουσα επίσημη απάντηση ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "ABO: αντιγόνα A/B στα ερυθρά καθορίζουν A, B, AB, O",
+          "Rh(D) θετικό/αρνητικό βάσει αντιγόνου D",
+          "απαιτείται έλεγχος συμβατότητας πριν μετάγγιση"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/18-6-blood-typing"
+        ],
+        "findings": "Το OpenStax §18.6 επιβεβαιώνει τους βασικούς ορισμούς ABO/Rh και τον κίνδυνο ασύμβατης μετάγγισης. Η πλήρης αποθηκευμένη απάντηση είναι συνοπτική και συμφωνεί σε αυτά τα σημεία.",
+        "limits": "ΕΚΚΡΕΜΕΙ: δεν αποτελεί διαδικαστική οδηγία μετάγγισης· δεν επαληθεύτηκαν τοπικά εργαστηριακά SOP, διασταύρωση, σπάνια αντιγόνα ή τρέχουσα επίσημη απάντηση ΕΟΠΠΕΠ.",
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-087",
@@ -3941,7 +3982,50 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ενδοσπόρια: ανθεκτικές λανθάνουσες δομές ορισμένων βακτηρίων",
+          "αντισώματα: ανοσοσφαιρίνες με ειδικότητα αντιγόνου",
+          "άνοσος ορός/ανοσοσφαιρίνες: παθητική μεταφορά έτοιμων αντισωμάτων"
+        ],
+        "sources": [
+          "https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies"
+        ],
+        "finding": "Τα OpenStax Microbiology §3.3 και A&P §21.4 τεκμηριώνουν και τους τρεις ορισμούς. ΣΗΜΑΝΤΙΚΟ: η αποθηκευμένη γενική πηγή A&P §21 δεν επαρκεί για τα βακτηριακά ενδοσπόρια· χρειάζεται εξειδικευμένη πηγή.",
+        "limits": "ΕΚΚΡΕΜΕΙ: επίσημη ελληνική ορολογία για 'μικροβιακοί σπόροι' έναντι μυκητιακών σπορίων, είδη ανοσοσφαιρινών/οροθεραπείας και νεότερο επίσημο λυσάρι.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "ενδοσπόρια: ανθεκτικές λανθάνουσες δομές ορισμένων βακτηρίων",
+          "αντισώματα: ανοσοσφαιρίνες με ειδικότητα αντιγόνου",
+          "άνοσος ορός/ανοσοσφαιρίνες: παθητική μεταφορά έτοιμων αντισωμάτων"
+        ],
+        "sources": [
+          "https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies"
+        ],
+        "findings": "Τα OpenStax Microbiology §3.3 και A&P §21.4 τεκμηριώνουν και τους τρεις ορισμούς. ΣΗΜΑΝΤΙΚΟ: η αποθηκευμένη γενική πηγή A&P §21 δεν επαρκεί για τα βακτηριακά ενδοσπόρια· χρειάζεται εξειδικευμένη πηγή.",
+        "limits": "ΕΚΚΡΕΜΕΙ: επίσημη ελληνική ορολογία για 'μικροβιακοί σπόροι' έναντι μυκητιακών σπορίων, είδη ανοσοσφαιρινών/οροθεραπείας και νεότερο επίσημο λυσάρι.",
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-088",
@@ -3955,7 +4039,46 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "βλεννογόνοι αναπνευστικού, πεπτικού και ουρογεννητικού ως πύλες εισόδου",
+          "τραύμα/παρεντερική οδός, οφθαλμικός βλεννογόνος και σε ορισμένες λοιμώξεις πλακούντας"
+        ],
+        "sources": [
+          "https://openstax.org/books/microbiology/pages/15-2-how-pathogens-cause-disease"
+        ],
+        "finding": "OpenStax Microbiology §15.2 επιβεβαιώνει τις βασικές πύλες εισόδου και την ειδική εξαίρεση του πλακούντα. Η αποθηκευμένη απάντηση ταιριάζει, αλλά η γενική πηγή A&P §21 δεν είναι η κατάλληλη ειδική παραπομπή.",
+        "limits": "ΕΚΚΡΕΜΕΙ: εξειδικευμένη μικροβιολογική παραπομπή στην εφαρμογή και επιβεβαίωση ακριβούς ελληνικής ορολογίας/επίσημου λυσαριού.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "βλεννογόνοι αναπνευστικού, πεπτικού και ουρογεννητικού ως πύλες εισόδου",
+          "τραύμα/παρεντερική οδός, οφθαλμικός βλεννογόνος και σε ορισμένες λοιμώξεις πλακούντας"
+        ],
+        "sources": [
+          "https://openstax.org/books/microbiology/pages/15-2-how-pathogens-cause-disease"
+        ],
+        "findings": "OpenStax Microbiology §15.2 επιβεβαιώνει τις βασικές πύλες εισόδου και την ειδική εξαίρεση του πλακούντα. Η αποθηκευμένη απάντηση ταιριάζει, αλλά η γενική πηγή A&P §21 δεν είναι η κατάλληλη ειδική παραπομπή.",
+        "limits": "ΕΚΚΡΕΜΕΙ: εξειδικευμένη μικροβιολογική παραπομπή στην εφαρμογή και επιβεβαίωση ακριβούς ελληνικής ορολογίας/επίσημου λυσαριού.",
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-089",
@@ -3969,7 +4092,48 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "απολύμανση: καταστροφή πολλών/σχεδόν όλων των παθογόνων σε άψυχες επιφάνειες, συνήθως όχι ενδοσπορίων",
+          "αποστείρωση: εξάλειψη όλων των μορφών μικροβιακής ζωής",
+          "αντισηψία: εφαρμογή αντιμικροβιακών σε ζωντανό ιστό"
+        ],
+        "sources": [
+          "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/introduction-methods-definition-of-terms.html"
+        ],
+        "finding": "Το CDC ορίζει με σαφήνεια απολύμανση, αποστείρωση, αντισηψία. Η αποθηκευμένη απάντηση είναι ουσιαστικά συμβατή, αλλά η παραπομπή στην εισαγωγή A&P §21 είναι άσχετα γενική· χρειάζεται αντικατάσταση με CDC ειδική ενότητα.",
+        "limits": "ΕΚΚΡΕΜΕΙ: ρητή διάκριση καθαρισμού πριν από απολύμανση/αποστείρωση, επίπεδα απολύμανσης, τεχνικά πρωτόκολλα και ελληνικές εγκεκριμένες οδηγίες.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "απολύμανση: καταστροφή πολλών/σχεδόν όλων των παθογόνων σε άψυχες επιφάνειες, συνήθως όχι ενδοσπορίων",
+          "αποστείρωση: εξάλειψη όλων των μορφών μικροβιακής ζωής",
+          "αντισηψία: εφαρμογή αντιμικροβιακών σε ζωντανό ιστό"
+        ],
+        "sources": [
+          "https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/introduction-methods-definition-of-terms.html"
+        ],
+        "findings": "Το CDC ορίζει με σαφήνεια απολύμανση, αποστείρωση, αντισηψία. Η αποθηκευμένη απάντηση είναι ουσιαστικά συμβατή, αλλά η παραπομπή στην εισαγωγή A&P §21 είναι άσχετα γενική· χρειάζεται αντικατάσταση με CDC ειδική ενότητα.",
+        "limits": "ΕΚΚΡΕΜΕΙ: ρητή διάκριση καθαρισμού πριν από απολύμανση/αποστείρωση, επίπεδα απολύμανσης, τεχνικά πρωτόκολλα και ελληνικές εγκεκριμένες οδηγίες.",
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-090",
@@ -3983,7 +4147,48 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "χολικά άλατα γαλακτωματοποιούν λίπη αυξάνοντας επιφάνεια δράσης λιπασών",
+          "βοηθούν απορρόφηση λιπιδίων και λιποδιαλυτών βιταμινών",
+          "χολή συμμετέχει στην αποβολή χολερυθρίνης και χοληστερόλης"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder"
+        ],
+        "finding": "Το OpenStax A&P §23.6 επιβεβαιώνει γαλακτωματοποίηση και απέκκριση χολερυθρίνης. Η αποθηκευμένη απάντηση είναι συνοπτική και επιστημονικά συνεπής στα ελεγμένα σημεία.",
+        "limits": "ΕΚΚΡΕΜΕΙ: διάκριση παραγωγής χολής από ήπαρ και αποθήκευσης/συμπύκνωσης από χοληδόχο κύστη· επίσημη τρέχουσα απάντηση ΕΟΠΠΕΠ μη επιβεβαιωμένη.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "comparedClaims": [
+          "χολικά άλατα γαλακτωματοποιούν λίπη αυξάνοντας επιφάνεια δράσης λιπασών",
+          "βοηθούν απορρόφηση λιπιδίων και λιποδιαλυτών βιταμινών",
+          "χολή συμμετέχει στην αποβολή χολερυθρίνης και χοληστερόλης"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-6-accessory-organs-in-digestion-the-liver-pancreas-and-gallbladder"
+        ],
+        "findings": "Το OpenStax A&P §23.6 επιβεβαιώνει γαλακτωματοποίηση και απέκκριση χολερυθρίνης. Η αποθηκευμένη απάντηση είναι συνοπτική και επιστημονικά συνεπής στα ελεγμένα σημεία.",
+        "limits": "ΕΚΚΡΕΜΕΙ: διάκριση παραγωγής χολής από ήπαρ και αποθήκευσης/συμπύκνωσης από χοληδόχο κύστη· επίσημη τρέχουσα απάντηση ΕΟΠΠΕΠ μη επιβεβαιωμένη.",
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-091",
