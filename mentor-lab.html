@@ -54,6 +54,7 @@
     <button type="button" id="tab-mission" role="tab" aria-controls="panel-mission" aria-selected="true" data-tab="mission">Αποστολή</button>
     <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
     <button type="button" id="tab-route" role="tab" aria-controls="panel-route" aria-selected="false" tabindex="-1" data-tab="route">Διαδρομή</button>
+    <button type="button" id="tab-knowledge" role="tab" aria-controls="panel-knowledge" aria-selected="false" tabindex="-1" data-tab="knowledge">Γνώσεις</button>
   </nav>
   <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
   <section id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
@@ -158,7 +159,7 @@
     </div>
     <section class="panel" aria-labelledby="coach-title">
       <h3 id="coach-title">Συζήτησε με τον Mentor · εκπαιδευτική καθοδήγηση</h3>
-      <p class="muted small">Ο Mentor προσαρμόζει τις προτάσεις του μόνο στις δικές σου δοκιμαστικές ασκήσεις. Πρόκειται για περιορισμένο διάλογο με έτοιμες εκπαιδευτικές απαντήσεις, όχι για ζωντανό γιατρό ή πλήρες AI. Δεν αξιολογεί ελεύθερες ιατρικές απαντήσεις.</p>
+      <p class="muted small">Ο Mentor συνδυάζει τις δοκιμαστικές σου ασκήσεις με ελληνικές εκπαιδευτικές κάρτες και πραγματικές παραπομπές. Είναι βοηθητικός καθηγητής με προκαθορισμένες απαντήσεις, <strong>όχι AI ή πραγματικός γιατρός</strong>. Τα νέα κείμενα χρειάζονται ανεξάρτητο κλινικό έλεγχο και δεν αξιολογεί ελεύθερες ιατρικές απαντήσεις.</p>
       <div class="coach-shortcuts" role="group" aria-label="Γρήγορες ερωτήσεις προς τον Mentor">
         <button type="button" class="coach-quick" data-coach-intent="focus">Τι να μελετήσω;</button>
         <button type="button" class="coach-quick" data-coach-intent="progress">Πώς τα πηγαίνω;</button>
@@ -169,7 +170,7 @@
       <form id="coach-form" class="coach-form">
         <label for="coach-question">Η ερώτησή μου</label>
         <div class="coach-question-line">
-          <input id="coach-question" type="text" autocomplete="off" maxlength="300" placeholder="π.χ. Τι να μελετήσω στην ασφάλεια σκηνής;">
+          <input id="coach-question" type="text" autocomplete="off" maxlength="300" placeholder="π.χ. Τι σημαίνει ABCDE ή τι είναι η διαλογή;">
           <button type="submit" class="action" id="coach-send">Ρώτησε</button>
         </div>
       </form>
@@ -187,6 +188,30 @@
     <div class="panel"><h3>Επόμενα εργαστήρια</h3><div class="roadmap">
       <a href="ui-tools/anatomy-3d/index.html">3D Ανατομία · διαθέσιμη</a><a href="mentor-ecg.html">ECG Lab · εκπαιδευτικό σχήμα διαθέσιμο</a><span>Ιατρική ομάδα AI · μετά τη δική σου έγκριση</span><span>Κλινική διαλογή · απαιτείται επιστημονική έγκριση</span><span>Προχωρημένες συσκευές · σχεδιάζεται</span><a href="mentor-oral.html">Προφορική εξάσκηση · διαθέσιμη</a>
     </div><p class="muted small">Η 3D Ανατομία, η προφορική εξάσκηση και το συνθετικό ECG Lab είναι διαθέσιμα. Η πραγματική κλινική ερμηνεία ΗΚΓ, η διαλογή και η ιατρική ομάδα AI δεν είναι ενεργές. Η σύνδεση AI θα γίνει μόνο με τη δική σου τελική έγκριση.</p></div>
+  </section>
+  <section id="panel-knowledge" role="tabpanel" aria-labelledby="tab-knowledge" hidden>
+    <div class="section-heading"><div>
+      <h2>Γνώσεις Mentor · βιβλιοθήκη χωρίς AI</h2>
+      <p>Αναζήτησε ελληνικές εκπαιδευτικές έννοιες, δες τις πηγές και δοκίμασε να απαντήσεις σε μία ερώτηση ανάκλησης.</p>
+    </div></div>
+    <div class="disclaimer" role="note">
+      <strong>Εκπαιδευτική γνώση — όχι πιστοποιημένο ιατρικό πρωτόκολλο.</strong>
+      Οι περιλήψεις γράφτηκαν ως πρωτότυπο ελληνικό εκπαιδευτικό υλικό και παραπέμπουν στις πρωτότυπες πηγές.
+      Εκκρεμεί ανεξάρτητη κλινική επιμέλεια. Δεν αποτελούν εξατομικευμένη ιατρική καθοδήγηση
+      ή άδεια εκτέλεσης πράξεων από πλήρωμα ασθενοφόρου. Καμία ερώτηση δεν αποστέλλεται στο διαδίκτυο.
+    </div>
+    <div class="panel">
+      <form id="knowledge-form" class="knowledge-filters" role="search" aria-label="Αναζήτηση στην εκπαιδευτική γνώση Mentor">
+        <div><label for="knowledge-search">Αναζήτηση έννοιας</label>
+          <input id="knowledge-search" type="search" maxlength="300" autocomplete="off" placeholder="ABCDE, αεραγωγός, ΗΚΓ, διαλογή, ΚΑΡΠΑ…"></div>
+        <div><label for="knowledge-domain">Ενότητα</label>
+          <select id="knowledge-domain"><option value="all">Όλες οι ενότητες</option></select></div>
+        <button type="button" class="action secondary" id="knowledge-clear">Καθαρισμός</button>
+        <button type="submit" class="action" id="knowledge-submit">Αναζήτηση</button>
+      </form>
+      <p id="knowledge-count" class="muted small" role="status" aria-live="polite">Φόρτωση εκπαιδευτικών καρτών…</p>
+      <div id="knowledge-results" class="knowledge-results"></div>
+    </div>
   </section>
   <footer>MENTOR OS · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
 </main>
