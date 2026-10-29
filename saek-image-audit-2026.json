@@ -1957,16 +1957,22 @@
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "originalArtwork": true,
       "page": "https://www.who.int/publications/9789240114067",
-      "caption": "Μεγεθυμένο εκπαιδευτικό σχήμα με μέρη του εξοπλισμού ασκού-μάσκας. Δεν παρουσιάζει τεχνική αερισμού, πίεση, ρυθμό ή μέγεθος μάσκας.",
-      "sourcePageReviewed": "pending independent full-page verification",
-      "sourcePageCheckedFor": [],
+      "caption": "Μεγεθυμένο εκπαιδευτικό σχήμα με ασκό, βαλβίδα και προσωπίδα BVM. Δεν παρουσιάζει πλήρη διάταξη εξοπλισμού ούτε τεχνική αερισμού, πίεση, ρυθμό ή μέγεθος μάσκας.",
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "WHO 2025 prehospital operational guidance overview includes ambulance equipment lists but does not validate this device drawing or technique.",
+        "WHO 2020 medical-device specifications identify a self-inflating ventilation bag, one-way valve, patient connector, oxygen inlet and reservoir; this image intentionally shows only a schematic bag/valve/mask subset and does not claim completeness."
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
+        "date": "2026-10-29",
+        "scope": "Exact pushed SVG at d332381 visually inspected in browser at 1366×768; mask, valve/connector, self-inflating bag and connection tail are distinct, and their callout lines land on the corresponding parts. Corrected ARIA description and footer locally after identifying a false claim about two rescuers. Mobile and independent clinical/device review remain pending."
       },
-      "sha256": "aa55fb52cedd99547a4f14454ca262c11c4312953463297a5f1157f6c603b8c5"
+      "sha256": "970010583fdf682d2f0716ff1b275de0b4c0779e60bc7265cd8ba2b365301993",
+      "additionalSources": [
+        "https://www.who.int/publications/i/item/WHO-2019-nCoV-MedDev-TS-O2T.V2"
+      ]
     },
     "suspected_toxic_exposure": {
       "filename": "suspected-toxic-exposure-el.svg",
