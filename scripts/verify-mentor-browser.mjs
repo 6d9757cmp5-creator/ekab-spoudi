@@ -307,6 +307,21 @@ try{
   assert.match(home,/class="home-mentor-presence"/);
   assert.match(home,/href="mentor-readonly.html"/);
   assert.match(home,/href="mentor-live.html"/);
+  // Natural-device voice: explicit voice controls, rate selection and permission-safe mic.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-voice-select').count(),1,'installed Greek voice picker is present');
+  assert.equal(await page.locator('#mentor-intro-mic').count(),1,'explicit mic control is present');
+  assert.equal(await page.locator('#mentor-speech-wave').count(),1,'voice waveform exists');
+  await page.locator('#mentor-voice-speed').fill('1.05');
+  assert.match(await page.locator('#mentor-voice-speed-label').textContent(),/1,05/);
+  assert.match(await page.locator('#mentor-microphone-privacy').textContent(),/υπηρεσία του παρόχου του browser/);
+  const privacyBefore=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
+  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω;');
+  await page.locator('#mentor-hero-form button[type=submit]').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-presence-line').textContent.includes('Προτείνω'));
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
+  const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
+  assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
