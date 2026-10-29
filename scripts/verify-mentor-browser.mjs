@@ -210,6 +210,28 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab.mentor.live-two-patients.v1')),null);
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,'legacy EOPPEP history untouched');
   await page.screenshot({path:'mentor-live-two-person-mobile.png',fullPage:true});
+  // Non-AI oral examination: explicit self-review, no microphone, grades or transcript persistence.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-oral.html',{waitUntil:'networkidle'});
+  assert.match(await page.title(),/Προφορική εξάσκηση/);
+  assert.match(await page.locator('#oral-position').textContent(),/Ερώτηση 1 \/ 6/);
+  await page.locator('#oral-answer').fill('Δοκιμαστικές προσωρινές σημειώσεις');
+  await page.locator('#oral-reveal').click();
+  assert.equal(await page.locator('#oral-checks input[type="checkbox"]').count(),3);
+  await page.locator('#oral-checks input[type="checkbox"]').nth(0).check();
+  await page.locator('#oral-checks input[type="checkbox"]').nth(2).check();
+  assert.match(await page.locator('#oral-review-note').textContent(),/2 από 3/);
+  await page.locator('#oral-next').click();
+  assert.match(await page.locator('#oral-position').textContent(),/Ερώτηση 2 \/ 6/);
+  await page.locator('#oral-prev').click();
+  assert.equal(await page.locator('#oral-answer').inputValue(),'Δοκιμαστικές προσωρινές σημειώσεις');
+  assert.equal(await page.locator('#oral-checks input:checked').count(),2);
+  await page.reload({waitUntil:'networkidle'});
+  assert.equal(await page.locator('#oral-answer').inputValue(),'','oral transcript is not persisted');
+  assert.equal(await page.locator('#oral-review').isVisible(),false);
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('a[href="ui-tools/anatomy-3d/index.html"]').count(),1);
+  assert.equal(await page.locator('a[href="mentor-oral.html"]').count(),2);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
