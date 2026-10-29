@@ -321,3 +321,70 @@ html[data-theme="dark"] .home-mentor-presence{background:radial-gradient(circle 
 @keyframes mentor-blink{0%,43%,46%,100%{transform:scaleY(1)}44%,45%{transform:scaleY(.12)}}
 @keyframes mentor-mouth-talk{from{transform:scaleY(.5)}to{transform:scaleY(2.1)}}
 @media(prefers-reduced-motion:reduce){.mentor-eye,.mentor-figure.is-speaking .mentor-mouth{animation:none!important}}
+
+
+/* MENTOR Cinematic Studio · progressive enhancement of existing card. */
+.home-mentor-wrap{border-radius:25px;overflow:hidden;border:1px solid #2d8299;box-shadow:0 12px 34px #03192538}
+.home-mentor-presence.mentor-cinema{display:grid;grid-template-columns:minmax(190px,35%) minmax(0,1fr);grid-template-areas:"portrait copy" "voice voice";align-items:center;column-gap:19px;row-gap:10px;position:relative;overflow:hidden;padding:19px 23px 22px;border-radius:23px 23px 0 0;isolation:isolate;background:radial-gradient(ellipse at 0% 35%,#0a8fc459,transparent 37%),radial-gradient(ellipse at 90% 0%,#17a9aa43,transparent 45%),linear-gradient(130deg,#09253b,#0c364b 52%,#105162);box-shadow:inset 0 1px 0 #8dcce260,inset 0 0 70px #1587bb19;color:#f1faff}
+.mentor-cinema:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.42;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 47px,#73d8f108 48px 49px),repeating-linear-gradient(0deg,transparent 0 47px,#73d8f108 48px 49px);mask-image:linear-gradient(90deg,#000 0,transparent 60%)}
+.mentor-cinema-portrait{grid-area:portrait;position:relative;min-height:260px;display:flex;align-items:center;justify-content:center}
+.mentor-cinema-stage{width:min(100%,225px);height:244px;position:relative;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 9px 20px #061f42)}
+.mentor-cinema-stage .mentor-figure{--mentor-size:198px;z-index:2;border-radius:38px;transform:translateY(9px) rotate(-2deg);box-shadow:0 0 0 1px #56dfff4e,0 0 32px #28a8dd62,0 15px 35px #081d33a6}
+.mentor-cinema-rim{position:absolute;inset:4% -1% 2%;z-index:1;border:2px solid #45c2f7a6;border-radius:50%;box-shadow:0 0 28px #2abde186,0 0 0 11px #63ccef12,inset 0 0 20px #3db6da25;transform:rotate(-17deg)}
+.mentor-cinema-grid{position:absolute;inset:19% 8%;z-index:2;pointer-events:none;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 17px,#6ac6eb21 18px 19px),repeating-linear-gradient(90deg,transparent 0 17px,#6ac6eb19 18px 19px);mask-image:radial-gradient(circle at center,transparent 55%,#000 90%)}
+.mentor-cinema-status{position:absolute;top:0;left:0;z-index:5;display:inline-flex;align-items:center;gap:7px;border:1px solid #48deb39f;background:#083a3de8;border-radius:30px;padding:6px 10px;color:#7dffcf;font-size:.68rem;font-weight:850;letter-spacing:.05em;white-space:nowrap;box-shadow:0 0 20px #26c9a223}
+.mentor-status-beacon{width:8px;height:8px;background:#4af4b0;box-shadow:0 0 0 4px #21d99e27,0 0 12px #59f4d5;border-radius:50%}
+.mentor-cinema-copy{grid-area:copy;align-self:center}
+.mentor-cinema-copy .home-mentor-kicker{font-size:.72rem;letter-spacing:.12em;color:#85daf9}
+.mentor-cinema-copy h2{font-size:clamp(2rem,4.3vw,3.05rem);letter-spacing:.04em;line-height:1.13;margin:7px 0 15px;text-shadow:0 3px 12px #07273f9c}
+.mentor-cinema-copy .home-mentor-intro{font-size:clamp(.94rem,1.8vw,1.16rem);line-height:1.65;margin:8px 0 12px;font-weight:600}
+.mentor-cinema-copy .home-mentor-note{font-size:.77rem;line-height:1.65;color:#bcdce7}
+.mentor-voice-identity{display:flex;align-items:center;gap:7px;flex-wrap:wrap;border:1px solid #69dded66;background:linear-gradient(115deg,#0c4664ad,#0d324888);border-radius:12px;padding:10px 12px;color:#d2f6ff;font-weight:700;font-size:.77rem;margin-top:12px}
+.mentor-voice-identity-bars{margin-left:auto;letter-spacing:2px;color:#62dfff;font-size:.98rem}
+.mentor-cinema-live{color:#8ef0cb!important;font-size:.75rem!important;margin:9px 0!important;min-height:1.3em}
+.mentor-cinema-voice{grid-area:voice;display:grid;grid-template-columns:minmax(0,1fr) minmax(165px,210px);column-gap:10px;row-gap:10px;align-items:center;padding-top:5px}
+.mentor-cinema-wave{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:4px;height:56px;overflow:hidden;background:linear-gradient(90deg,transparent,#0f597044 35%,#0e78902b 65%,transparent);border-bottom:1px solid #6ac6ea38}
+.mentor-cinema-wave i{display:block;flex:0 1 5px;width:5px;min-width:2px;height:calc(5px + (var(--bar, 4) * 3px));border-radius:10px;background:linear-gradient(#b6f7ff,#15b9ec,#0063ad);box-shadow:0 0 10px #21c5f5a6;opacity:.65;transform-origin:center}
+.mentor-cinema-wave i:nth-child(5n+1){--bar:3}.mentor-cinema-wave i:nth-child(5n+2){--bar:8}.mentor-cinema-wave i:nth-child(5n+3){--bar:12}.mentor-cinema-wave i:nth-child(5n+4){--bar:5}.mentor-cinema-wave i:nth-child(5n){--bar:9}
+.mentor-cinema.is-speaking .mentor-cinema-wave i{animation:mentor-visualizer .48s ease-in-out infinite alternate;opacity:1}
+.mentor-cinema.is-speaking .mentor-cinema-wave i:nth-child(3n){animation-delay:.1s}.mentor-cinema.is-speaking .mentor-cinema-wave i:nth-child(4n){animation-delay:.23s}
+@keyframes mentor-visualizer{from{transform:scaleY(.3)}to{transform:scaleY(1.25)}}
+.mentor-cinema-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;grid-column:1/-1}
+.mentor-cinema-controls button,.mentor-cinema-controls a{display:flex;align-items:center;justify-content:center;gap:4px;min-height:49px;border-radius:13px;border:1px solid #65c6e49a;font:inherit;font-size:.86rem;font-weight:760;color:#e8f7ff;text-decoration:none;background:linear-gradient(135deg,#145b73,#133c57);padding:9px 6px;text-align:center;box-shadow:inset 0 1px 0 #c0f7ff2d}
+.mentor-cinema-controls #mentor-home-listen{background:linear-gradient(115deg,#1476bb,#0bafdc);border-color:#5deaff;box-shadow:0 0 19px #0ebed75b;color:white}
+.mentor-cinema-controls #mentor-home-stop{color:#ffb8b8;border-color:#a35e7180}
+.mentor-cinema-controls button:disabled{opacity:.5;cursor:not-allowed}
+.mentor-cinema-select-label{color:#d0e7ef;font-size:.73rem;font-weight:700;grid-column:1}
+#mentor-home-voice{min-height:42px;max-width:100%;padding:9px 12px;border:1px solid #5c9cb1;background:#0a344a;color:#e6faff;border-radius:10px;font:inherit;font-size:.77rem;grid-column:2}
+.mentor-cinema-voice .home-mentor-single{grid-column:1/-1;width:100%;min-height:55px;background:linear-gradient(110deg,#0b98ae,#19d0cf);color:white;border-color:#5bf4f8;font-size:1.02rem;box-shadow:inset 0 1px 0 #d2ffff5c,0 0 22px #11d0d057}
+.mentor-cinema-voice .home-mentor-single:hover{background:linear-gradient(110deg,#14bcd0,#2ae6d9);color:#062d3b}
+.mentor-cinema-voice a:focus-visible,.mentor-cinema-voice button:focus-visible,.mentor-cinema-voice select:focus-visible{outline:3px solid #ffda80;outline-offset:3px}
+.home-mentor-shortcuts{background:#10354c;padding:9px;gap:8px}
+.home-mentor-shortcuts a{border:1px solid #60bfe080;border-radius:13px;justify-content:space-between;min-height:51px;padding:10px 14px;background:linear-gradient(125deg,#133c57,#194e63);font-weight:750}
+.home-mentor-shortcuts a span{font-size:1.4em;color:#8de0ff}
+@media(max-width:650px){
+ .home-mentor-presence.mentor-cinema{grid-template-columns:115px minmax(0,1fr);column-gap:13px;padding:14px 13px 16px}
+ .mentor-cinema-portrait{min-height:174px;align-self:center}
+ .mentor-cinema-stage{height:164px}
+ .mentor-cinema-stage .mentor-figure{--mentor-size:110px;border-radius:23px}
+ .mentor-cinema-status{top:-4px;left:-3px;font-size:.53rem;padding:5px}
+ .mentor-cinema-copy h2{font-size:1.72rem;margin:4px 0 9px}
+ .mentor-cinema-copy .home-mentor-kicker{font-size:.57rem}
+ .mentor-cinema-copy .home-mentor-intro{font-size:.85rem;line-height:1.5}
+ .mentor-cinema-copy .home-mentor-note{font-size:.71rem}
+ .mentor-voice-identity{font-size:.67rem;padding:7px 8px}
+ .mentor-cinema-voice{grid-template-columns:minmax(0,1fr) minmax(135px,50%)}
+ .mentor-cinema-controls button,.mentor-cinema-controls a{font-size:.76rem;padding:8px 5px}
+ .home-mentor-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-mentor-shortcuts a{padding:9px 10px;font-size:.76rem}
+}
+@media(max-width:375px){
+ .home-mentor-presence.mentor-cinema{grid-template-columns:88px minmax(0,1fr);gap:7px}
+ .mentor-cinema-stage .mentor-figure{--mentor-size:90px}
+ .mentor-cinema-portrait{min-height:140px}
+ .mentor-cinema-stage{height:135px}
+ .mentor-cinema-status{font-size:.45rem}
+ .mentor-cinema-copy h2{font-size:1.49rem}
+ .mentor-cinema-controls{gap:4px}
+}
+@media(prefers-reduced-motion:reduce){.mentor-cinema.is-speaking .mentor-cinema-wave i{animation:none!important}}

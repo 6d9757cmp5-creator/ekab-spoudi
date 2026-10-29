@@ -31,3 +31,32 @@ test('No protected student scoring/sync or new media files',async()=>{
  const html=await text('index.html');
  assert.ok(!html.includes('onclick='));
 });
+
+
+test('MENTOR cinematic entry has working voice controls and safe progressive enhancement',async()=>{
+ const html=await text('index.html'),css=await text('home.css'),js=await text('mentor-home.js');
+ for(const marker of ['id="mentor-home-listen"','id="mentor-home-stop"','id="mentor-home-voice"','class="mentor-cinema-wave"','src="mentor-home.js"'])
+  assert.ok(html.includes(marker),marker);
+ assert.match(css,/mentor-cinema/);
+ assert.match(css,/prefers-reduced-motion/);
+ assert.match(js,/speakGreek/);
+ assert.doesNotMatch(js,/(?:localStorage|sessionStorage)\s*\.\s*(?:setItem|removeItem|clear)\s*\(/);
+ assert.doesNotMatch(js,/(?:navigator\.mediaDevices\.getUserMedia|SpeechRecognition)\s*\(/);
+ const {greekVoices,selectGreekVoice,speakGreek,supportsSpeech}=await import('../mentor-voice.mjs');
+ const el={lang:'el-GR',name:'Melina',localService:true};
+ const enhanced={lang:'el-GR',name:'Greek Enhanced',localService:true};
+ const other={lang:'en-US',name:'English Premium',localService:true};
+ assert.deepEqual(greekVoices([other,el,enhanced]),[enhanced,el]);
+ assert.equal(selectGreekVoice([other,el,enhanced],'Melina'),el);
+ const calls=[];
+ const mock={speechSynthesis:{getVoices:()=>[other,enhanced],cancel:()=>calls.push('cancel'),speak:x=>calls.push(x)},
+  SpeechSynthesisUtterance:class{constructor(value){this.text=value;}}};
+ assert.equal(supportsSpeech(mock),true);
+ assert.equal(speakGreek('Γεια σου',{env:mock,rate:1.9,pitch:1.8}),true);
+ assert.equal(calls[0],'cancel');
+ assert.equal(calls[1].lang,'el-GR');
+ assert.equal(calls[1].voice,enhanced);
+ assert.equal(calls[1].rate,1.12);
+ assert.equal(calls[1].pitch,1.15);
+ assert.equal(speakGreek('',{env:mock}),false);
+});
