@@ -5,12 +5,13 @@ on:
     paths:
       - '.github/workflows/mentor-build-real-avatar.yml'
       - 'mentor/real-avatar/**'
+      - 'scripts/test-mentor-real3d.mjs'
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
   group: mentor-real-avatar-build
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   generate:
     runs-on: ubuntu-24.04
