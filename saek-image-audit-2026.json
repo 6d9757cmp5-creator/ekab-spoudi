@@ -432,8 +432,8 @@
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "date": "2026-10-26",
-        "scope": "Greek text, SVG source geometry and labelled leader endpoints checked; rendered-browser visual test and independent scientific review pending"
+        "date": "2026-10-29",
+        "scope": "Exact pushed SVG rendered in browser at 1280×720 (commit b252c73); anterior orientation, patient-right/viewer-left convention, organ callouts and Greek labels checked. It is explicitly a simplified overview without depth, peritoneum, scale or every abdominal organ; independent scientific approval remains pending."
       },
       "subjectCompleteness": "partial",
       "sha256": "f2c8cc0f9c73207a0e4681c043add2f87c1aa4f3ecdd476dade9a68247b343f5"
@@ -993,7 +993,8 @@
       "originalArtwork": true,
       "page": "https://www.resus.org.uk/library/abcde-approach",
       "additionalSources": [
-        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
+        "https://www.msdmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
       ],
       "caption": "Πρωτότυπη σχηματική απεικόνιση βασικών σημείων εκτίμησης: θώρακας για αναπνοές, καρπός για περιφερικό σφυγμό, βραχίονας για περιχειρίδα πίεσης και δάκτυλο για αισθητήρα οξυμετρίας. Δεν δίνονται υποθετικές τιμές.",
       "sourcePageReviewed": "2026-10-27",
@@ -1164,13 +1165,14 @@
       "caption": "Σχηματική πρόσθια όψη κορμού με καρδιά, αγγεία και σημεία παρατήρησης για περιφερικό σφυγμό και ορατή αιμορραγία. Συσχετίζονται τα χαρακτηριστικά του δέρματος και η συνείδηση με τη συνολική αξιολόγηση. Δεν αποτελεί διάγνωση καταπληξίας ή οδηγία ελέγχου αιμορραγίας.",
       "sourcePageReviewed": "2026-10-27",
       "sourcePageCheckedFor": [
-        "Source concept supports the educational illustration; the image is an original drawing, not a copied source asset"
+        "Source concept supports the educational illustration; the image is an original drawing, not a copied source asset",
+        "MSD Manual Professional Edition (reviewed 2026-10-29): hypotension may be absent in shock; peripheral pulse, skin findings and altered mental status are among clinical signs. This supports only the general framing, not approval of the diagram as clinical guidance."
       ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Basic XML tag stack, Greek text, ARIA title/desc and source composition inspected. Real-browser rendering, mobile zoom and offline end-to-end remain unverified."
+        "date": "2026-10-29",
+        "scope": "Exact pushed SVG rendered in browser at 1280×720 (commit b252c73); label/pointer alignment for peripheral pulse and visible bleeding, Greek text, legend and flow checked. The diagram is a simplified observation aid, not a diagnosis or treatment instruction. Clinical approval and mobile/offline E2E remain pending."
       },
       "sha256": "210ff3c2521d82ec17b08c5239814e4610045253d997a572c2cf30f5db7b32d8"
     },
@@ -1756,8 +1758,8 @@
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
+        "date": "2026-10-29",
+        "scope": "Exact pushed SVG rendered in browser at 1280×720 (commit b252c73); left-to-right arrows, four corresponding symbols/labels and Greek text checked. Corrected ‘Μόνο επιτρεπόμενες’ to ‘Μόνο εγκεκριμένα’. This is organizational, not a clinical algorithm; independent clinical approval and mobile/offline E2E remain pending."
       },
       "sha256": "fd5bffb49ea8a785d5f940e9bb8b0e5290f166018221c53cb326405631c4f64f"
     },
@@ -1919,7 +1921,7 @@
         "date": "2026-10-27",
         "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
       },
-      "sha256": "1ecf75629baf41c8d951619d0269ca75e214ac5be8b3ea98dac74813a4992be7"
+      "sha256": "1a73d9fd943d5367e3ac09c6b121a813d9d92027a480c18cacdefc99352110bd"
     },
     "bls_aed_training_scene": {
       "filename": "bls-aed-training-scene-el.svg",
