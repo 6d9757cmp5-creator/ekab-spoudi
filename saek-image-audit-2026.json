@@ -389,7 +389,7 @@
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Browser-rendered SVG individually inspected at 1366×768. Initial audit found the left/right kidney labels reversed for an anterior view, and the longer correction overlapped the leader line; labels were shortened, patient-to-viewer orientation note added, leader routing adjusted, and footer moved below the urethra. All text bounding boxes fit inside the viewBox and leaders point to the kidney, ureters, bladder and urethra. Independent anatomical review and mobile/offline checks remain pending."
+        "scope": "Exact pushed SVG at commit 3627f0f4278e32bd0439287989d3f9919f603fe6 was individually inspected in browser at 1366×768. Initial review found the kidney labels reversed for an anterior view; labels and leader routing were corrected and a patient-to-viewer orientation note added. The exact pushed render shows non-overlapping text and arrows pointing to both kidneys, ureters, bladder and urethra; all text bounding boxes fit the 1100×820 viewBox. Independent anatomical review and mobile/offline checks remain pending."
       },
       "subjectCompleteness": "partial",
       "sha256": "9c8504ce1a21ed3f1fcae5a1bb2094c47949c07974e613632b9ef36e63282f8f"
