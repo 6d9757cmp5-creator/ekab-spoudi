@@ -51,7 +51,7 @@ h4{font-size:1.1rem;margin:0 0 17px}.choices{display:grid;gap:10px}
 .small{font-size:.8rem}.muted{color:var(--muted)}.plan{border:1px solid var(--border);border-radius:12px;padding:17px;margin-top:10px;background:var(--surface2)}
 #study-duration{display:block;margin:8px 0 24px;padding:10px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);color:var(--ink);min-width:155px}
 .legacy-result:not(:empty){border-left:3px solid var(--brand2);margin-top:15px;padding:8px 14px;background:var(--surface2)}
-.roadmap{display:flex;gap:8px;flex-wrap:wrap}.roadmap span{background:var(--surface2);border:1px solid var(--border);padding:8px 12px;border-radius:30px;color:var(--muted);font-size:.84rem}
+.roadmap{display:flex;gap:8px;flex-wrap:wrap}.roadmap span,.roadmap a{background:var(--surface2);border:1px solid var(--border);padding:8px 12px;border-radius:30px;color:var(--muted);font-size:.84rem}.roadmap a{color:var(--brand);font-weight:800;text-decoration:none}.roadmap a:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 [hidden]{display:none!important}
 @media(max-width:680px){.layout{padding:16px 14px 30px}.header-inner{padding:13px 14px}.hero{padding:22px}.hero-mark{display:none}.case-grid{grid-template-columns:1fr}.mission,.panel{padding:17px}.stats>div{padding:14px}.stats strong{font-size:1.5rem}.skill{align-items:start;flex-direction:column}.skill-count{text-align:left}}
