@@ -10,6 +10,8 @@ on:
       - 'mentor-live.js'
       - 'mentor-oral.html'
       - 'mentor-oral.js'
+      - 'mentor-ecg.html'
+      - 'mentor-ecg.js'
       - '.github/workflows/mentor-foundation-verify.yml'
   workflow_dispatch:
 permissions:
@@ -30,6 +32,7 @@ jobs:
           node --check mentor-lab.js
           node --check mentor-live.js
           node --check mentor-oral.js
+          node --check mentor-ecg.js
           for f in mentor/core/*.mjs; do node --check "$f"; done
           node --test mentor/core/*.test.mjs
       - name: Verify no grading, legacy progress or cloud sync code was modified
