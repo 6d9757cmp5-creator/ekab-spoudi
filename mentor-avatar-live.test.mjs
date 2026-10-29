@@ -31,7 +31,7 @@ test("avatar starts, consumes browser word boundaries and stops without persiste
  assert.equal(element.dataset.viseme,"wide");
  avatar.boundary({charIndex:0});
  assert.equal(element.dataset.viseme,"open");
- avatar.boundary({charIndex:6});
+ avatar.boundary({charIndex:5});
  assert.equal(element.dataset.viseme,"round");
  avatar.stop();
  assert.equal(classes.has("mentor-photo-speaking"),false);
