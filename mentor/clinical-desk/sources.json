@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "package": "mentor-clinical-desk-v1",
+  "verification_date": "2026-10-29",
+  "state": "source-verified-metadata-not-medical-approval",
+  "clinical_retrieval_enabled": false,
+  "model_training_enabled": false,
+  "disclaimer": "Only official URLs and independently authored prompt frameworks. No licensed guideline text or diagrams reproduced. Not a clinician, diagnostic assistant or protocol.",
+  "sources": [
+    {
+      "id": "msd",
+      "title": "MSD Manual — Professional Edition",
+      "publisher": "MSD Manuals",
+      "year": 2026,
+      "url": "https://www.msdmanuals.com/professional/health-topics",
+      "specialties": [
+        "general",
+        "cardiology",
+        "neurology",
+        "gastro",
+        "derm",
+        "rheumatology",
+        "oncology",
+        "psychiatry",
+        "critical"
+      ],
+      "rights": "Professional encyclopedia with broad specialty index; link-only; copyrighted.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "esc",
+      "title": "ESC Clinical Practice Guidelines",
+      "publisher": "European Society of Cardiology",
+      "year": 2026,
+      "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines",
+      "specialties": [
+        "cardiology",
+        "critical"
+      ],
+      "rights": "2026 guideline index, source links only; no copied recommendations.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "gina",
+      "title": "GINA Strategy Report 2026",
+      "publisher": "Global Initiative for Asthma",
+      "year": 2026,
+      "url": "https://ginasthma.org/2026-gina-strategy-report/",
+      "specialties": [
+        "pulmonology",
+        "pediatrics"
+      ],
+      "rights": "2026 strategy copyrighted; no reproduction without authorization.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "gold",
+      "title": "GOLD 2026 Report and Pocket Guide",
+      "publisher": "Global Initiative for Chronic Obstructive Lung Disease",
+      "year": 2026,
+      "url": "https://goldcopd.org/2026-gold-report-and-pocket-guide/",
+      "specialties": [
+        "pulmonology"
+      ],
+      "rights": "Copyrighted clinical reference; only URL.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "kdigo",
+      "title": "KDIGO Guidelines",
+      "publisher": "Kidney Disease: Improving Global Outcomes",
+      "year": 2026,
+      "url": "https://kdigo.org/guidelines/",
+      "specialties": [
+        "nephrology",
+        "endocrinology"
+      ],
+      "rights": "Guideline directory; source link only. Individual document version must be checked.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "ada",
+      "title": "ADA Standards of Care in Diabetes 2026",
+      "publisher": "American Diabetes Association",
+      "year": 2026,
+      "url": "https://professional.diabetes.org/standards-of-care",
+      "specialties": [
+        "endocrinology",
+        "cardiology"
+      ],
+      "rights": "2026 annual standards; copyright of ADA, link only.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "idsa",
+      "title": "IDSA Clinical Practice Guidelines",
+      "publisher": "Infectious Diseases Society of America",
+      "year": 2026,
+      "url": "https://www.idsociety.org/PracticeGuidelines/",
+      "specialties": [
+        "infectious",
+        "critical"
+      ],
+      "rights": "Expert panel directory; local resistance patterns require separate evaluation.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "ash",
+      "title": "ASH Clinical Practice Guidelines",
+      "publisher": "American Society of Hematology",
+      "year": 2026,
+      "url": "https://www.hematology.org/education/clinicians/guidelines-and-quality-care/clinical-practice-guidelines",
+      "specialties": [
+        "hematology",
+        "oncology"
+      ],
+      "rights": "Clinical guideline directory; recommendations and updates vary by document.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "acog",
+      "title": "ACOG Clinical Guidance",
+      "publisher": "American College of Obstetricians and Gynecologists",
+      "year": 2026,
+      "url": "https://www.acog.org/clinical",
+      "specialties": [
+        "obgyn",
+        "pediatrics"
+      ],
+      "rights": "Professional guidance and consensus, URL only; copyright applies.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "nice",
+      "title": "NICE Published Clinical Guidance",
+      "publisher": "National Institute for Health and Care Excellence",
+      "year": 2026,
+      "url": "https://www.nice.org.uk/guidance/published?ngt=NICE+guidelines&ps=50",
+      "specialties": [
+        "general",
+        "emergency",
+        "neurology",
+        "gastro",
+        "derm",
+        "rheumatology",
+        "psychiatry",
+        "oncology"
+      ],
+      "rights": "Evidence-based guidance directory; verify per-guideline revision before use.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "ema",
+      "title": "EMA Medicines Finder",
+      "publisher": "European Medicines Agency",
+      "year": 2026,
+      "url": "https://www.ema.europa.eu/en/medicines",
+      "specialties": [
+        "pharmacology",
+        "oncology",
+        "endocrinology"
+      ],
+      "rights": "Centrally authorized product information only; national authorizations require national sources.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "who",
+      "title": "WHO Prehospital Emergency Care Toolkit",
+      "publisher": "World Health Organization",
+      "year": 2026,
+      "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit",
+      "specialties": [
+        "emergency",
+        "critical",
+        "pediatrics"
+      ],
+      "rights": "System-level resources; WHO licensing varies by document.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "cdc",
+      "title": "CDC Outpatient Antibiotic Stewardship",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "year": 2024,
+      "url": "https://www.cdc.gov/antibiotic-use/hcp/clinical-care/index.html",
+      "specialties": [
+        "infectious",
+        "pediatrics",
+        "pharmacology"
+      ],
+      "rights": "American outpatient prescribing resources, not automatic Greek standard.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    },
+    {
+      "id": "erc",
+      "title": "European Resuscitation Council Guidelines 2025",
+      "publisher": "European Resuscitation Council",
+      "year": 2025,
+      "url": "https://www.erc.edu/science-research/guidelines/guidelines-2025",
+      "specialties": [
+        "emergency",
+        "critical",
+        "cardiology",
+        "pediatrics"
+      ],
+      "rights": "Guideline index linked only; clinical content requires current approved protocols.",
+      "content_ingested": false,
+      "medical_review": "pending",
+      "link_verified": true
+    }
+  ]
+}
