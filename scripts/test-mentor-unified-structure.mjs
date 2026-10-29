@@ -70,3 +70,12 @@ test('Source restructuring never gains direct writes to legacy grades, sync, not
   assert.ok(existsSync(resolve(root,p)),p);
  }
 });
+
+test('Offline service worker precaches every moved canonical module and retains public shell URLs',()=>{
+ const sw=read('sw.js');
+ for(const source of Object.values(MOVES))
+  assert.ok(sw.includes('"./'+source+'"'),source+' must be cached for offline use');
+ for(const url of ['mentor-lab.html','mentor-lab.js','mentor-home.js','mentor-voice.mjs','mentor-presence.html'])
+  assert.ok(sw.includes('"./'+url+'"'),url+' public cache entry missing');
+ assert.match(sw,/mentor-unified-folders/);
+});
