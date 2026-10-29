@@ -246,6 +246,33 @@ try{
   assert.equal(await page.locator('#ecg-key').isVisible(),true);
   assert.equal(await page.locator('#ecg-toggle-key').getAttribute('aria-expanded'),'true');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Read-only access: all published app sources, live content search, no legacy writes.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('a[href="mentor-readonly.html"]').count(),1);
+  const beforeReader=await page.evaluate(()=>Object.fromEntries(
+    Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
+  ));
+  await page.goto('http://127.0.0.1:'+port+'/mentor-readonly.html',{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.getElementById('loaded-summary').textContent.includes('καταχωρίσεις από'),{timeout:20000});
+  const loadedText=await page.locator('#loaded-summary').textContent();
+  assert.match(loadedText,/13\/13 πηγές/,'read-only reader ingests all 13 published source files');
+  const recordsCount=Number(loadedText.match(/^\d+/)?.[0]||0);
+  assert.ok(recordsCount>=800,'read-only catalog includes all major published course and question records');
+  await page.locator('#reader-kind').selectOption('eoppep');
+  assert.match(await page.locator('#reader-status').textContent(),/314 αποτελέσματα/);
+  await page.locator('#reader-input').fill('ρινικών κοιλοτήτων');
+  await page.getByRole('button',{name:'Αναζήτηση'}).click();
+  assert.match(await page.locator('#reader-status').textContent(),/[1-9]\d* αποτελέσματα/);
+  const firstResult=page.locator('.reader-result').first();
+  await firstResult.locator('summary').click();
+  assert.match(await firstResult.locator('.reader-text').textContent(),/αέρα|αναπνοή/);
+  await page.locator('#reader-progress').click();
+  assert.match(await page.locator('#progress-preview').textContent(),/Καταχωρίσεις ανάγνωσης ΣΑΕΚ/);
+  const afterReader=await page.evaluate(()=>Object.fromEntries(
+    Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
+  ));
+  assert.deepEqual(afterReader,beforeReader,'Read-only MENTOR reader did not write any local data');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
