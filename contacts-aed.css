@@ -40,3 +40,15 @@ body .ekab-notes-fab{display:none!important}
 .aed-official-poster-link small{display:block;margin-top:6px;font-size:.79rem;line-height:1.45;color:#e0f3e7}
 .aed-official-symbol{display:grid;place-items:center;flex:none;width:54px;height:54px;background:#fff;border-radius:14px;color:#216948;font-weight:800;font-size:32px}
 @media(max-width:520px){.aed-official-poster-link{min-height:78px;padding:13px}.aed-official-symbol{width:46px;height:46px;font-size:26px}}
+
+/* Preview publisher-hosted 2021 poster; newer ERC 2025 guidance is linked alongside. */
+.aed-poster-preview{margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.aed-poster-preview summary{cursor:pointer;padding:13px 15px;font-weight:750;min-height:46px}
+.aed-poster-preview summary:focus-visible{outline:3px solid #399bbc;outline-offset:-3px}
+.aed-poster-preview[open] summary{border-bottom:1px solid var(--line)}
+.aed-poster-frame{width:100%;height:clamp(420px,75vw,850px);background:var(--bg);overflow:hidden}
+.aed-poster-frame iframe{width:100%;height:100%;display:block;border:0}
+.aed-poster-preview p{padding:0 14px}
+.aed-guideline-update{margin:12px 0 0;font-size:.85rem;line-height:1.5}
+.aed-guideline-update a{overflow-wrap:anywhere}
+@media(max-width:620px){.aed-poster-frame{height:490px}}

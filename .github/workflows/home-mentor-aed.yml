@@ -1,0 +1,25 @@
+name: Mentor entry and official AED reference checks
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'home.css'
+      - 'contacts.html'
+      - 'contacts-aed.css'
+      - 'scripts/verify-home-mentor-aed.mjs'
+      - '.github/workflows/home-mentor-aed.yml'
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  home-mentor-aed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test scripts/verify-home-mentor-aed.mjs
+      - run: python3 scripts/release_smoke.py

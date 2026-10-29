@@ -265,3 +265,14 @@ html[data-theme="dark"] .home-anatomy-single-arrow{color:#91d9f3}
  .home-anatomy-single-copy small{font-size:.63rem}
 }
 @media(prefers-reduced-motion:reduce){.home-anatomy-single{transition:none}}
+
+/* Standalone Mentor lab: accessible alongside the 3D anatomy tool. */
+.home-mentor-wrap{margin-top:10px}
+.home-mentor-single{display:flex;align-items:center;gap:14px;min-height:90px;padding:13px 17px;border:1px solid #a6cfdc;border-radius:16px;background:linear-gradient(120deg,#f1f8fb,#e9f5f5);box-shadow:0 4px 14px #0626390b;text-decoration:none;color:#173d54;transition:background .14s ease,border-color .14s ease}
+.home-mentor-single:hover{border-color:#3a9dba;background:#e5f6fb}
+.home-mentor-single:focus-visible{outline:3px solid #399bbc;outline-offset:3px}
+.home-mentor-single .home-anatomy-single-symbol{font-size:2.1rem;font-weight:900}
+.home-mentor-label{display:inline-block;font-size:.59rem;vertical-align:middle;letter-spacing:.03em;padding:4px 6px;border:1px solid currentColor;border-radius:6px;margin-left:6px}
+html[data-theme="dark"] .home-mentor-single{background:linear-gradient(115deg,#183c48,#133f43);border-color:#497985;color:#e8f8f9}
+@media(max-width:620px){.home-mentor-single{gap:10px;min-height:84px;padding:10px 12px}.home-mentor-single .home-anatomy-single-symbol{font-size:1.6rem}.home-mentor-label{font-size:.53rem}}
+@media(prefers-reduced-motion:reduce){.home-mentor-single{transition:none}}
