@@ -136,7 +136,9 @@ const TOPIC_LINKS={skeletal:2,muscular:9,connective:9,respiratory:3,digestive:12
 const INTRO={skeletal:'Οστό που συμμετέχει στη στήριξη, στην προστασία ή στην κίνηση του σώματος.',cardiac:'Η καρδιά προωθεί το αίμα στην πνευμονική και στη συστηματική κυκλοφορία.',respiratory:'Δομή που συμμετέχει στη μεταφορά αέρα ή στην αναπνοή.',digestive:'Δομή που συμμετέχει στην πέψη, στην απορρόφηση ή στη μεταφορά τροφής.',nervous:'Δομή του συστήματος που μεταφέρει και επεξεργάζεται νευρικά σήματα.',urinary:'Δομή που συμμετέχει στη δημιουργία, στη μεταφορά ή στην αποβολή ούρων.',reproductive:'Δομή που ανήκει στο αναπαραγωγικό σύστημα.'};
 function describeSelected(){
  const p=partsById.get(ui.selected),card=$('detailCard');card.hidden=!p;
+ const banner=$('selectedBanner');banner.hidden=!p||ui.quiz;
  if(!p)return;
+ $('selectedName').textContent=anatomyName(p.name,p.system,sysNames).label;
  const n=anatomyName(p.name,p.system,sysNames);
  $('detailIcon').textContent=p.system==='skeletal'?'🦴':p.system==='cardiac'?'❤️':'◈';
  $('detailName').textContent=n.label;
@@ -188,9 +190,24 @@ function setSystem(system){
  setControls();describeSelected();list();updateScene();
 }
 function setTab(which){if(which==='explore'&&ui.quiz)resetQuiz();ui.tab=which;const isQuiz=which==='quiz';$('explorePanel').hidden=isQuiz;$('quizPanel').hidden=!isQuiz;$('exploreTab').setAttribute('aria-selected',String(!isQuiz));$('quizTab').setAttribute('aria-selected',String(isQuiz));list()}
-function choose(id){const p=partsById.get(id);if(!validPart(p))return;if(ui.quiz&&!ui.answered){answer(id);return}ui.selected=id;selectedPartIndex=p._index;describeSelected();list();updateScene();focusPart(p)}
+function choose(id){const p=partsById.get(id);if(!validPart(p))return;if(ui.quiz&&!ui.answered){answer(id);return}ui.selected=id;selectedPartIndex=p._index;describeSelected();list();updateScene()}
 function chooseSex(sex){if(ui.sex===sex)return;ui.sex=sex;ui.system='all';ui.selected=null;ui.isolate=false;ui.quiz=false;ui.answered=false;resetQuiz();setControls();describeSelected();loadModel()}
-function updateScene(){const iso=$('isolateBtn');iso.disabled=!(ui.selected&&partsById.has(ui.selected));iso.title=iso.disabled?'Επίλεξε πρώτα οστό ή όργανο':'Εμφάνισε μόνο τη δομή που επέλεξες';iso.setAttribute('aria-pressed',String(ui.isolate));if(!renderer)return;const filter=ui.system;for(const item of meshChunks){item.visible=systemVisible(item.userData.system)||ui.isolate&&(selectedPartIndex!==-1);const m=item.material;const isSkin=item.userData.system==='integumentary';m.transparent=isSkin||ui.mode==='both'&&item.userData.system==='skeletal';m.opacity=isSkin?ui.opacity:(ui.mode==='both'&&item.userData.system==='skeletal'?.62:1);m.depthWrite=!m.transparent;m.needsUpdate=true;if(m.userData.uniforms){m.userData.uniforms.selected.value=selectedPartIndex;m.userData.uniforms.isolate.value=ui.isolate?1:0}}updateHotspot();requestPaint()}
+// The selection is always emphasized; surrounding structures are never isolated or hidden.
+function updateScene(){
+ const focus=$('isolateBtn'),part=partsById.get(ui.selected);
+ focus.disabled=!part;focus.title=part?'Μετακίνησε την κάμερα κοντά στην επιλογή':'Επίλεξε πρώτα ένα οστό ή όργανο';
+ if(!renderer)return;
+ for(const item of meshChunks){
+  item.visible=systemVisible(item.userData.system);
+  const m=item.material,isSkin=item.userData.system==='integumentary';
+  const transparent=isSkin||(ui.mode==='both'&&item.userData.system==='skeletal');
+  if(m.transparent!==transparent){m.transparent=transparent;m.needsUpdate=true}
+  m.opacity=isSkin?ui.opacity:(ui.mode==='both'&&item.userData.system==='skeletal'?.62:1);
+  m.depthWrite=!transparent;
+  if(m.userData.uniforms)m.userData.uniforms.selected.value=selectedPartIndex;
+ }
+ updateHotspot();requestPaint();
+}
 function resetQuiz(){
  ui.quiz=false;ui.answered=false;ui.target=null;ui.score=0;ui.attempts=0;ui.prev=null;
  selectedPartIndex=-1;ui.selected=null;ui.isolate=false;describeSelected();
@@ -258,28 +275,34 @@ function answer(id){
  ui.selected=ui.target;selectedPartIndex=correct._index;
  describeSelected();updateScene();
 }
-function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{if(!ui.selected)return;ui.isolate=!ui.isolate;updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizBackToAnswers').addEventListener('click',()=>document.getElementById('quizOptions').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
+function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{const p=partsById.get(ui.selected);if(p)focusPart(p)});$('clearSelection').addEventListener('click',()=>{ui.selected=null;selectedPartIndex=-1;describeSelected();list();updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizBackToAnswers').addEventListener('click',()=>document.getElementById('quizOptions').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)){e.preventDefault();$('anatomySearch').focus()}if(e.target===$('anatomyViewport')){const keys={ArrowLeft:[-.12,0],ArrowRight:[.12,0],ArrowUp:[0,-.12],ArrowDown:[0,.12]};const v=keys[e.key];if(v){e.preventDefault();orbit.az+=v[0];orbit.polar=Math.min(Math.PI-.05,Math.max(.05,orbit.polar+v[1]));cameraMove()}}});
 resetQuiz();setControls();describeSelected();list();configureLessonReturn()}
-function resetCamera(){orbit.az=0;orbit.polar=Math.PI/2;orbit.r=3.7;orbit.y=.85;cameraMove()}
+function resetCamera(){orbit.az=0;orbit.polar=Math.PI/2;orbit.r=innerWidth<=560?3:3.7;orbit.y=.85;cameraMove()}
 function cameraMove(){if(!camera)return;const d=orbit.r,a=orbit.az,p=orbit.polar;camera.position.set(d*Math.sin(p)*Math.sin(a),orbit.y+d*Math.cos(p),d*Math.sin(p)*Math.cos(a));camera.lookAt(0,orbit.y,0);requestPaint();updateHotspot()}
 let dirty=true;
 function requestPaint(){dirty=true}
 function animate(){anim=requestAnimationFrame(animate);if(dirty&&renderer&&scene&&!document.hidden){renderer.render(scene,camera);dirty=false;updateHotspot()}}
 function updateHotspot(){const h=$('hotspot');if(!THREE||!ui.selected||!atlas||!camera){h.hidden=true;return}const p=partsById.get(ui.selected);if(!p?.bounds){h.hidden=true;return}const a=p.bounds[0],b=p.bounds[1],center=new THREE.Vector3((a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2).project(camera);if(center.z<-1||center.z>1){h.hidden=true;return}const rect=$('renderMount').getBoundingClientRect();h.hidden=false;h.textContent=greekLabel(p.name);h.style.left=Math.min(rect.width-55,Math.max(55,(center.x+1)/2*rect.width))+'px';h.style.top=Math.min(rect.height-35,Math.max(45,(1-center.y)/2*rect.height))+'px'}
-function focusPart(p){const a=p.bounds[0],b=p.bounds[1];const w=Math.max(b[0]-a[0],b[1]-a[1],b[2]-a[2]);orbit.y=(a[1]+b[1])/2;orbit.r=Math.max(.22,Math.min(3.7,w*3.3+.18));cameraMove()}
+function focusPart(p){const a=p.bounds[0],b=p.bounds[1];const w=Math.max(b[0]-a[0],b[1]-a[1],b[2]-a[2]);orbit.y=(a[1]+b[1])/2;orbit.r=Math.max(.75,Math.min(3.7,w*2.6+.65));cameraMove()}
 function pointerControls(){const c=renderer.domElement;const pointers=orbit.active;c.style.touchAction='none';c.addEventListener('pointerdown',e=>{c.setPointerCapture(e.pointerId);pointers.set(e.pointerId,[e.clientX,e.clientY]);orbit.lastX=e.clientX;orbit.lastY=e.clientY;orbit.moved=false;orbit.pinch=0});c.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,[e.clientX,e.clientY]);if(pointers.size===2){const v=[...pointers.values()],d=Math.hypot(v[0][0]-v[1][0],v[0][1]-v[1][1]);if(orbit.pinch)orbit.r=Math.max(.1,Math.min(40,orbit.r*orbit.pinch/d));orbit.pinch=d;orbit.moved=true;cameraMove();return}const dx=e.clientX-orbit.lastX,dy=e.clientY-orbit.lastY;orbit.lastX=e.clientX;orbit.lastY=e.clientY;if(Math.abs(dx)+Math.abs(dy)>2)orbit.moved=true;orbit.az-=dx*.007;orbit.polar=Math.min(Math.PI-.04,Math.max(.04,orbit.polar-dy*.006));cameraMove()});c.addEventListener('pointerup',e=>{if(!orbit.moved&&pointers.size===1)raypick(e);pointers.delete(e.pointerId);orbit.pinch=0});c.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);orbit.pinch=0});c.addEventListener('wheel',e=>{e.preventDefault();orbit.r=Math.max(.1,Math.min(40,orbit.r*Math.exp(e.deltaY*.001)));cameraMove()},{passive:false})}
 function raypick(e){if(!THREE||!camera)return;const rect=renderer.domElement.getBoundingClientRect();const m=new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);const ray=new THREE.Raycaster();ray.setFromCamera(m,camera);
 for(const hit of ray.intersectObjects(allMeshes.filter(x=>x.visible&&x.userData.system!=='integumentary'),false)){if(!hit.face)continue;const i=hit.object.geometry.getAttribute('partIndex').getX(hit.face.a);const part=atlas.parts[Math.round(i)];if(part&&partVisible(part)){choose(part.id);break}}}
 function freeModel(){for(const mesh of meshChunks){scene.remove(mesh);mesh.geometry.dispose()}for(const m of materials)m.dispose();meshChunks=[];materials=[];allMeshes=[];atlas=null;partsById.clear();selectedPartIndex=-1;ui.selected=null;ui.isolate=false;describeSelected();list();$('hotspot').hidden=true;requestPaint()}
-function newMaterial(system){const m=new THREE.MeshStandardMaterial({color:colors[system]||0xa9b4bc,roughness:.6,metalness:.02,side:THREE.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.14:1});
-const uniforms={selected:{value:-1},isolate:{value:0}};m.userData.uniforms=uniforms;
-m.onBeforeCompile=shader=>{shader.uniforms.anatomySelected=uniforms.selected;shader.uniforms.anatomyIsolate=uniforms.isolate;
-shader.vertexShader='attribute float partIndex; varying float anatomyPartIndex;\n'+shader.vertexShader;
-shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;');
-shader.fragmentShader='varying float anatomyPartIndex; uniform float anatomySelected; uniform float anatomyIsolate;\n'+shader.fragmentShader;
-shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif(anatomyIsolate > 0.5 && abs(anatomyPartIndex-anatomySelected) > 0.5) discard;');
-shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5) diffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.33,0.96,0.82),0.78);')};materials.push(m);return m}
+// Orange high-contrast selection in the same shader: no hiding other meshes.
+function newMaterial(system){
+ const m=new THREE.MeshStandardMaterial({color:colors[system]||0xa9b4bc,roughness:.6,metalness:.02,side:THREE.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.14:1});
+ const uniforms={selected:{value:-1}};m.userData.uniforms=uniforms;
+ m.onBeforeCompile=shader=>{
+  shader.uniforms.anatomySelected=uniforms.selected;
+  shader.vertexShader='attribute float partIndex; varying float anatomyPartIndex;\n'+shader.vertexShader;
+  shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;');
+  shader.fragmentShader='varying float anatomyPartIndex; uniform float anatomySelected;\n'+shader.fragmentShader;
+  shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5) diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0,0.60,0.17),0.88);');
+  shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5) totalEmissiveRadiance += vec3(0.32,0.15,0.025);');
+ };
+ materials.push(m);return m;
+}
 function makeGroup(system,parts,buffer){let vertices=0,indices=0;for(const p of parts){vertices+=p.vertexCount;indices+=p.indexCount}const pos=new Float32Array(vertices*3),norm=new Int16Array(vertices*3),partIndex=new Float32Array(vertices),index=new Uint32Array(indices);
 let vi=0,ii=0;for(const p of parts){pos.set(new Float32Array(buffer,p.positions,p.vertexCount*3),vi*3);norm.set(new Int16Array(buffer,p.normals,p.vertexCount*3),vi*3);partIndex.fill(p._index,vi,vi+p.vertexCount);const input=new Uint32Array(buffer,p.indices,p.indexCount);for(let k=0;k<input.length;k++)index[ii+k]=input[k]+vi;vi+=p.vertexCount;ii+=p.indexCount;p._loaded=true}
 const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('normal',new THREE.BufferAttribute(norm,3,true));g.setAttribute('partIndex',new THREE.BufferAttribute(partIndex,1));g.setIndex(new THREE.BufferAttribute(index,1));g.computeBoundingSphere();

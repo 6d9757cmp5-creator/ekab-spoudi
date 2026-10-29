@@ -8,7 +8,8 @@
 <title>3D Ανατομία | ΕΚΑΒ Σπουδή</title>
 <link rel="icon" href="../../icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="anatomy.css?v=greek-quiz-20261029">
-<script type="module" src="hires-anatomy.js?v=greek-quiz-20261029"></script>
+<link rel="stylesheet" href="anatomy-responsive.css?v=responsive-20261029-1">
+<script type="module" src="hires-anatomy.js?v=responsive-20261029-1"></script>
 </head>
 <body>
 <a href="#main" class="skip">Μετάβαση στο περιεχόμενο</a>
@@ -56,6 +57,7 @@
               <button type="button" id="resetView" title="Επαναφορά προβολής" aria-label="Επαναφορά προβολής">⟲</button>
             </div>
             <div id="hotspot" class="hotspot" hidden></div>
+            <div id="selectedBanner" class="selected-banner" role="status" aria-live="polite" hidden><span>Επιλογή: <strong id="selectedName"></strong></span><button id="clearSelection" type="button" aria-label="Καθαρισμός επιλογής">×</button></div>
           </div>
         </div>
         <div class="viewer-footer">
@@ -70,21 +72,23 @@
             <option value="reproductive">Αναπαραγωγικό</option><option value="lymphatic">Λεμφικό</option><option value="endocrine">Ενδοκρινικό</option><option value="integumentary">Δέρμα</option><option value="sensory">Αισθητήρια όργανα</option><option value="connective">Συνδετικός ιστός</option><option value="pregnancy">Κύηση (ξεχωριστή αναφορά)</option>
           </select></div>
           <label class="opacity-control">Περίγραμμα σώματος <input id="outline" type="range" min="0" max="65" value="14" step="1"><output id="outlineValue" for="outline">14%</output></label>
-          <button type="button" id="isolateBtn" aria-pressed="false" disabled title="Επίλεξε πρώτα οστό ή όργανο">◎ Απομόνωση σημείου</button>
+          <button type="button" id="isolateBtn" disabled title="Εστίαση στην επιλεγμένη δομή">⌖ Εστίαση στο σημείο</button>
         </div>
-        <div class="notice"><span aria-hidden="true">ⓘ</span><p><strong>Ανατομικά πλέγματα από ερευνητικές πηγές.</strong> Ανδρικό: BodyParts3D. Γυναικείο: πραγματικά γυναικεία όργανα HuBMAP με συμπληρωματικό σκελετό, μυς και αγγεία προσαρμοσμένα από ανδρικά δεδομένα BodyParts3D. Δεν αποτελεί ενιαία σάρωση γυναίκας, διαγνωστικό εργαλείο ή πλήρη κάλυψη της ανατομικής ποικιλομορφίας. Απαιτεί σύνδεση για την πρώτη φόρτωση.</p></div>
+        <details class="notice"><summary>Πηγές και περιορισμοί των 3D μοντέλων</summary><p><strong>Ανατομικά πλέγματα από ερευνητικές πηγές.</strong> Ανδρικό: BodyParts3D. Γυναικείο: πραγματικά γυναικεία όργανα HuBMAP με συμπληρωματικό σκελετό, μυς και αγγεία προσαρμοσμένα από ανδρικά δεδομένα BodyParts3D. Δεν αποτελεί ενιαία σάρωση γυναίκας, διαγνωστικό εργαλείο ή πλήρη κάλυψη της ανατομικής ποικιλομορφίας. Απαιτεί σύνδεση για την πρώτη φόρτωση.</p></details>
       </section>
       <aside class="inspector" aria-label="Εξερεύνηση και πληροφορίες ανατομίας">
-        <div class="inspector-head"><span class="eyebrow">ΕΞΕΡΕΥΝΗΣΗ</span><h2>Ανατομικός άτλας</h2><p>Πάτησε ένα σημείο στο μοντέλο ή επίλεξέ το από τη λίστα.</p></div>
+        <div class="inspector-head"><span class="eyebrow">ΕΞΕΡΕΥΝΗΣΗ</span><h2>Ανατομικός άτλας</h2><p>Πάτησε το μοντέλο ή αναζήτησε από τη λίστα. Το σημείο φωτίζεται χωρίς να κρύβονται τα υπόλοιπα.</p></div>
         <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="anatomySearch" type="search" placeholder="Αναζήτηση οστού ή οργάνου…" aria-label="Αναζήτηση ανατομικού σημείου" autocomplete="off"><kbd>/</kbd></div><label class="greek-only-control"><input type="checkbox" id="greekOnly" checked><span>Πρώτα οι ελληνικές ονομασίες</span></label><p class="translation-help">Οι αμετάφραστες δομές εμφανίζονται μόνο αν απενεργοποιήσεις το φίλτρο. Δεν μεταφράζουμε αυθαίρετα ιατρικούς όρους.</p>
+        <details class="controls-help"><summary>Πώς χρησιμοποιώ το εργαστήριο;</summary><p>Πάτησε μία δομή για φωτεινή επισήμανση. Με ένα δάχτυλο περιστρέφεις, με δύο μεγεθύνεις. Χρησιμοποίησε την «Εστίαση» μόνο όταν θέλεις να πλησιάσεις ένα σημείο. Τα υπόλοιπα όργανα και οστά παραμένουν ορατά στο επιλεγμένο σύστημα.</p></details>
         <div class="inspector-tabs" role="tablist" aria-label="Πληροφορίες και εξέταση">
           <button type="button" role="tab" aria-selected="true" aria-controls="explorePanel" id="exploreTab">Εξερεύνηση</button>
           <button type="button" role="tab" aria-selected="false" aria-controls="quizPanel" id="quizTab">Αυτοέλεγχος</button>
         </div>
         <div id="explorePanel" role="tabpanel" aria-labelledby="exploreTab">
+          <article class="detail-card" id="detailCard" aria-live="polite" hidden><span class="detail-label">ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ</span><div class="detail-title"><span id="detailIcon" class="detail-icon">✚</span><div><h3 id="detailName"></h3><span id="detailSystem"></span></div></div><p id="detailDescription"></p><small id="detailOriginal" class="detail-original"></small><a id="detailStudy" class="detail-study" href="../../saek-course-01.html" hidden>Άνοιγμα σχετικού κεφαλαίου ΣΑΕΚ <span aria-hidden="true">↗</span></a></article>
           <div class="list-header"><span>ΑΝΑΤΟΜΙΚΑ ΣΗΜΕΙΑ</span><span id="itemCount">—</span></div>
           <div id="anatomyList" class="anatomy-list" aria-label="Λίστα ανατομικών σημείων"></div>
-          <article class="detail-card" id="detailCard" aria-live="polite" hidden><span class="detail-label">ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ</span><div class="detail-title"><span id="detailIcon" class="detail-icon">✚</span><div><h3 id="detailName"></h3><span id="detailSystem"></span></div></div><p id="detailDescription"></p><small id="detailOriginal" class="detail-original"></small><a id="detailStudy" class="detail-study" href="../../saek-course-01.html" hidden>Άνοιγμα σχετικού κεφαλαίου ΣΑΕΚ <span aria-hidden="true">↗</span></a></article>
+          
         </div>
         <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab" hidden>
           <div class="quiz-card">
