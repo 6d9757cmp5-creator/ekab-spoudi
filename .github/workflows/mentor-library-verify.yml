@@ -20,3 +20,14 @@ jobs:
         run: |
           node --test mentor/library/review-readiness.test.mjs
           node mentor/library/review-readiness.mjs
+      - name: Generate passage-by-passage review checklist (no approvals)
+        run: |
+          node --test mentor/library/create-review-checklist.test.mjs
+          node mentor/library/create-review-checklist.mjs /tmp/mentor-review-checklist.csv
+      - name: Save reviewer assignment checklist without book texts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-clinical-passages-review-checklist
+          path: /tmp/mentor-review-checklist.csv
+          if-no-files-found: error
+          retention-days: 30
