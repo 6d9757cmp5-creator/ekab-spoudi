@@ -1,0 +1,1036 @@
+{
+  "schema_version": 1,
+  "package_id": "mentor-greek-knowledge-2026-10",
+  "package_status": "human-review-pending",
+  "authoring_note": "Original educational Greek micro-lessons. References indicate thematic relevance, not line-by-line medical validation. No reproduction of source text or clinical algorithms.",
+  "clinical_use_allowed": false,
+  "grade_effect": false,
+  "topics": [
+    {
+      "id": "anatomy",
+      "label": "Ανατομία και φυσιολογία",
+      "emoji": "🫀"
+    },
+    {
+      "id": "assessment",
+      "label": "Αρχική εκτίμηση",
+      "emoji": "🩺"
+    },
+    {
+      "id": "trauma",
+      "label": "Τραύμα και αιμορραγία",
+      "emoji": "🩹"
+    },
+    {
+      "id": "resuscitation",
+      "label": "Αναζωογόνηση",
+      "emoji": "⚡"
+    },
+    {
+      "id": "ecg",
+      "label": "Κατανόηση ΗΚΓ",
+      "emoji": "📈"
+    },
+    {
+      "id": "equipment",
+      "label": "Εκπαιδευτικός εξοπλισμός",
+      "emoji": "🧰"
+    },
+    {
+      "id": "operations",
+      "label": "Λειτουργία ΕΚΑΒ και επικοινωνία",
+      "emoji": "🚑"
+    },
+    {
+      "id": "triage",
+      "label": "Πολλαπλοί εμπλεκόμενοι",
+      "emoji": "👥"
+    },
+    {
+      "id": "pediatrics",
+      "label": "Παιδιατρική προσέγγιση",
+      "emoji": "🧒"
+    },
+    {
+      "id": "learning",
+      "label": "Εκπαίδευση και κριτική σκέψη",
+      "emoji": "🎓"
+    }
+  ],
+  "cards": [
+    {
+      "id": "mk-001",
+      "topic": "anatomy",
+      "title": "Ανατομική θέση",
+      "lesson": "Η ανατομική θέση είναι κοινό σημείο αναφοράς για περιγραφή των δομών του σώματος. Οι όροι δεξιά και αριστερά αναφέρονται στον ίδιο τον εξεταζόμενο, όχι στον παρατηρητή.",
+      "question": "Από ποια πλευρά ορίζεται το «δεξιό» όργανο;",
+      "answer": "Από τη δεξιά πλευρά του ανθρώπου στον οποίο αναφερόμαστε.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-002",
+      "topic": "anatomy",
+      "title": "Επίπεδα του σώματος",
+      "lesson": "Το οβελιαίο επίπεδο χωρίζει το σώμα σε δεξιά και αριστερά μέρη, το μετωπιαίο σε πρόσθια και οπίσθια, και το εγκάρσιο σε άνω και κάτω.",
+      "question": "Ποιο επίπεδο χωρίζει το σώμα σε άνω και κάτω τμήμα;",
+      "answer": "Το εγκάρσιο ή οριζόντιο επίπεδο.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-003",
+      "topic": "anatomy",
+      "title": "Τέσσερις κοιλότητες της καρδιάς",
+      "lesson": "Η καρδιά περιλαμβάνει δύο κόλπους και δύο κοιλίες. Οι κόλποι δέχονται αίμα και οι κοιλίες το προωθούν προς την πνευμονική και τη συστηματική κυκλοφορία.",
+      "question": "Ποια κοιλότητα προωθεί το αίμα στη συστηματική κυκλοφορία;",
+      "answer": "Η αριστερή κοιλία.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-004",
+      "topic": "anatomy",
+      "title": "Πνευμονική και συστηματική κυκλοφορία",
+      "lesson": "Η δεξιά κοιλία προωθεί το αίμα προς τους πνεύμονες. Η αριστερή κοιλία το προωθεί στην αορτή και από εκεί στους ιστούς του σώματος.",
+      "question": "Ποια κοιλία συνδέεται λειτουργικά με την πνευμονική κυκλοφορία;",
+      "answer": "Η δεξιά κοιλία.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-005",
+      "topic": "anatomy",
+      "title": "Ηλεκτρικό σύστημα καρδιάς",
+      "lesson": "Η καρδιακή αγωγιμότητα συντονίζει τη διέγερση των κόλπων και των κοιλιών. Η ηλεκτρική δραστηριότητα δεν αποτελεί από μόνη της απόδειξη αποτελεσματικής κυκλοφορίας.",
+      "question": "Η ύπαρξη ηλεκτρικού ρυθμού αποδεικνύει πάντοτε αποτελεσματική κυκλοφορία;",
+      "answer": "Όχι. Η ηλεκτρική δραστηριότητα και η μηχανική λειτουργία αξιολογούνται ως διαφορετικές έννοιες.",
+      "source_ids": [
+        "anatomy-2026",
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-006",
+      "topic": "anatomy",
+      "title": "Κυψελίδες",
+      "lesson": "Οι πνευμονικές κυψελίδες αποτελούν βασική θέση ανταλλαγής οξυγόνου και διοξειδίου του άνθρακα μεταξύ αέρα και αίματος.",
+      "question": "Πού γίνεται κυρίως η ανταλλαγή αερίων στους πνεύμονες;",
+      "answer": "Στις κυψελίδες.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-007",
+      "topic": "anatomy",
+      "title": "Διάφραγμα",
+      "lesson": "Το διάφραγμα είναι κύριος αναπνευστικός μυς. Η σύσπασή του αυξάνει τον διαθέσιμο χώρο στον θώρακα και συμβάλλει στην εισπνοή.",
+      "question": "Ποιος μυς είναι βασικός για την ήρεμη εισπνοή;",
+      "answer": "Το διάφραγμα.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-008",
+      "topic": "anatomy",
+      "title": "Κεντρικό και περιφερικό νευρικό σύστημα",
+      "lesson": "Το κεντρικό νευρικό σύστημα περιλαμβάνει εγκέφαλο και νωτιαίο μυελό. Το περιφερικό περιλαμβάνει νεύρα που συνδέουν τον κεντρικό άξονα με το υπόλοιπο σώμα.",
+      "question": "Ο νωτιαίος μυελός ανήκει στο κεντρικό ή στο περιφερικό νευρικό σύστημα;",
+      "answer": "Στο κεντρικό νευρικό σύστημα.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-009",
+      "topic": "assessment",
+      "title": "Ασφάλεια πριν από την προσέγγιση",
+      "lesson": "Η ασφάλεια της σκηνής αποτελεί προϋπόθεση οργανωμένης βοήθειας. Σε μια εκπαιδευτική αποστολή καταγράφουμε πρώτα τους εμφανείς κινδύνους και τους διαθέσιμους πόρους.",
+      "question": "Γιατί προηγείται η εκτίμηση της σκηνής;",
+      "answer": "Για να μην προστεθούν νέοι τραυματισμοί ή κίνδυνοι για ασθενείς και διασώστες.",
+      "source_ids": [
+        "emr-2025",
+        "who-ops-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-010",
+      "topic": "assessment",
+      "title": "Το ABCDE ως νοητικό πλαίσιο",
+      "lesson": "Η δομημένη αρχική εκτίμηση οργανώνει τις παρατηρήσεις σε αεραγωγό, αναπνοή, κυκλοφορία, νευρολογική κατάσταση και έκθεση. Δεν αντικαθιστά την εκπαίδευση ή τα ισχύοντα πρωτόκολλα.",
+      "question": "Τι κερδίζουμε όταν χρησιμοποιούμε σταθερό πλαίσιο αρχικής εκτίμησης;",
+      "answer": "Μειώνουμε τον κίνδυνο να παραλείψουμε σημαντικά στοιχεία και οργανώνουμε την επικοινωνία.",
+      "source_ids": [
+        "who-pocket-2026",
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-011",
+      "topic": "assessment",
+      "title": "Αεραγωγός και αναπνοή",
+      "lesson": "Ο αεραγωγός αφορά τη βατότητα της οδού μεταφοράς αέρα, ενώ η αναπνοή περιλαμβάνει τον αερισμό και την ανταλλαγή αερίων. Συνδέονται, αλλά δεν είναι ταυτόσημοι όροι.",
+      "question": "Η ύπαρξη ανοικτού αεραγωγού σημαίνει απαραίτητα επαρκή αναπνοή;",
+      "answer": "Όχι. Η βατότητα και η λειτουργική αναπνοή είναι διαφορετικές παράμετροι.",
+      "source_ids": [
+        "who-pocket-2026",
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-012",
+      "topic": "assessment",
+      "title": "Η κυκλοφορία ως συνεχής διαδικασία",
+      "lesson": "Η επάρκεια της κυκλοφορίας αφορά τη μεταφορά αίματος και οξυγόνου στους ιστούς. Ένα μόνο αριθμητικό εύρημα δεν περιγράφει πλήρως την κλινική κατάσταση.",
+      "question": "Αρκεί ένας μόνο αριθμός ζωτικού σημείου για συμπέρασμα για όλη την κυκλοφορία;",
+      "answer": "Όχι. Χρειάζονται συνεκτίμηση παρατηρήσεων και μεταβολών.",
+      "source_ids": [
+        "who-pocket-2026",
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-013",
+      "topic": "assessment",
+      "title": "Νευρολογική εικόνα και μεταβολή",
+      "lesson": "Η καταγραφή της νευρολογικής εικόνας έχει ιδιαίτερη σημασία όταν αλλάζει με τον χρόνο. Μια αρχική εντύπωση δεν ισοδυναμεί με πλήρη εκτίμηση.",
+      "question": "Γιατί είναι χρήσιμη η χρονική μεταβολή της ανταπόκρισης ενός ασθενούς;",
+      "answer": "Επειδή η σύγκριση διαδοχικών παρατηρήσεων μπορεί να φανερώσει αλλαγές που χρειάζονται αξιολόγηση.",
+      "source_ids": [
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-014",
+      "topic": "assessment",
+      "title": "Επανεκτίμηση",
+      "lesson": "Η κατάσταση ενός ασθενούς μπορεί να αλλάζει κατά την παρακολούθηση και μεταφορά. Η επανεκτίμηση σημαίνει σύγκριση με τα προηγούμενα καταγεγραμμένα ευρήματα.",
+      "question": "Τι προσφέρει η επανεκτίμηση εκτός από μια νέα μέτρηση;",
+      "answer": "Επιτρέπει να αναγνωρίσουμε τάση ή αλλαγή σε σχέση με την αρχική εικόνα.",
+      "source_ids": [
+        "who-pocket-2026",
+        "who-checklists-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-015",
+      "topic": "assessment",
+      "title": "Αντικειμενική περιγραφή",
+      "lesson": "Η φράση «ο ασθενής ανέφερε δυσκολία στην αναπνοή» είναι παρατήρηση/ιστορικό, ενώ μια συγκεκριμένη διάγνωση είναι ερμηνεία που μπορεί να απαιτεί περισσότερα δεδομένα.",
+      "question": "Τι πρέπει να ξεχωρίζουμε στην αναφορά;",
+      "answer": "Όσα παρατηρήθηκαν ή αναφέρθηκαν από όσα υποθέτουμε ότι συμβαίνουν.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-checklists-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-016",
+      "topic": "trauma",
+      "title": "Μηχανισμός κάκωσης",
+      "lesson": "Ο τρόπος με τον οποίο έγινε ένα συμβάν δίνει πλαίσιο για πιθανές κακώσεις, αλλά δεν αποτελεί από μόνος του διάγνωση.",
+      "question": "Το ότι ένα όχημα συγκρούστηκε αρκεί για να καθορίσουμε συγκεκριμένη κάκωση;",
+      "answer": "Όχι. Ο μηχανισμός καθοδηγεί την προσοχή, αλλά χρειάζεται αξιολόγηση.",
+      "source_ids": [
+        "emr-2025",
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-017",
+      "topic": "trauma",
+      "title": "Εξωτερική και εσωτερική αιμορραγία",
+      "lesson": "Η αιμορραγία μπορεί να είναι ορατή ή μη ορατή. Η απουσία ορατού αίματος δεν αποκλείει πάντοτε σοβαρή απώλεια αίματος.",
+      "question": "Μπορούμε να αποκλείσουμε αιμορραγία μόνο επειδή δεν φαίνεται αίμα;",
+      "answer": "Όχι. Η εσωτερική αιμορραγία δεν είναι κατ' ανάγκη εμφανής.",
+      "source_ids": [
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-018",
+      "topic": "trauma",
+      "title": "Τι σημαίνει καταπληξία (shock)",
+      "lesson": "Η καταπληξία σχετίζεται με ανεπαρκή αιμάτωση των ιστών και έχει διαφορετικές πιθανές αιτίες. Δεν ταυτίζεται με τη συναισθηματική ταραχή.",
+      "question": "Η λέξη «σοκ» στην επείγουσα ιατρική σημαίνει απλώς φόβο;",
+      "answer": "Όχι. Στην κλινική ορολογία η καταπληξία αφορά κυκλοφορική/ιστική ανεπάρκεια.",
+      "source_ids": [
+        "emr-2025",
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-019",
+      "topic": "trauma",
+      "title": "Τραύμα και τεκμηρίωση",
+      "lesson": "Χρήσιμη αναφορά περιλαμβάνει το πλαίσιο του συμβάντος, όσα διαπιστώθηκαν, την ακολουθία των παρατηρήσεων και την επικοινωνία με τον συντονισμό.",
+      "question": "Γιατί δεν αρκεί η περιγραφή «τροχαίο ατύχημα»;",
+      "answer": "Δεν εξηγεί ποιοι εμπλέκονται, τι έχει παρατηρηθεί ή πώς εξελίχθηκε η κατάσταση.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-checklists-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-020",
+      "topic": "trauma",
+      "title": "Συνεχής σύγκριση εικόνας",
+      "lesson": "Η εικόνα ενός τραυματία μπορεί να μεταβάλλεται με τον χρόνο. Η εκπαιδευτική παρατήρηση δεν είναι στατική φωτογραφία μιας στιγμής.",
+      "question": "Τι έχει μεγαλύτερη πληροφοριακή αξία: μία καταγραφή ή διαδοχικές συγκρίσιμες παρατηρήσεις;",
+      "answer": "Οι διαδοχικές καταγραφές δίνουν επιπλέον πληροφορία για αλλαγές και τάσεις.",
+      "source_ids": [
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-021",
+      "topic": "trauma",
+      "title": "Προβλήματα από πρόωρα συμπεράσματα",
+      "lesson": "Μια αρχική πιθανή εξήγηση δεν πρέπει να οδηγεί σε παράβλεψη άλλων σημαντικών ενδείξεων. Η οργανωμένη εκτίμηση προστατεύει από τη γνωστική προσκόλληση.",
+      "question": "Γιατί είναι επικίνδυνη η πρόωρη βεβαιότητα σε μία διάγνωση;",
+      "answer": "Επειδή μπορεί να αποκλείσει άδικα άλλες πιθανότητες ή νέες παρατηρήσεις.",
+      "source_ids": [
+        "emr-2025",
+        "who-checklists-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-022",
+      "topic": "resuscitation",
+      "title": "Αναγνώριση της ανακοπής",
+      "lesson": "Η καρδιακή ανακοπή είναι απειλητικό για τη ζωή συμβάν που απαιτεί άμεση αναγνώριση και οργανωμένη ανταπόκριση σύμφωνα με την εκπαίδευση και τις σύγχρονες οδηγίες.",
+      "question": "Γιατί είναι τόσο σημαντική η έγκαιρη αναγνώριση μιας ανακοπής;",
+      "answer": "Επειδή η καθυστέρηση στην ενεργοποίηση της κατάλληλης αλυσίδας ανταπόκρισης επηρεάζει την έκβαση.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-023",
+      "topic": "resuscitation",
+      "title": "Αλυσίδα επιβίωσης",
+      "lesson": "Η έννοια της αλυσίδας επιβίωσης υπενθυμίζει ότι η επιβίωση εξαρτάται από διαδοχικά, συντονισμένα βήματα του συστήματος και όχι από μία μόνο συσκευή.",
+      "question": "Γιατί μιλάμε για «αλυσίδα» αντί για μία μεμονωμένη ενέργεια;",
+      "answer": "Επειδή χρειάζεται συνεργασία πολλών έγκαιρων κρίκων, από την αναγνώριση έως τη μετέπειτα φροντίδα.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-024",
+      "topic": "resuscitation",
+      "title": "Τι κάνει ένας AED",
+      "lesson": "Ο αυτόματος εξωτερικός απινιδωτής είναι εκπαιδευτικά σημαντική συσκευή που αναλύει συγκεκριμένα στοιχεία του καρδιακού ρυθμού και καθοδηγεί σύμφωνα με τον σχεδιασμό της.",
+      "question": "Ένας AED απινιδώνει κάθε καρδιακό ρυθμό;",
+      "answer": "Όχι. Η συσκευή αναλύει τον ρυθμό και δεν ενδείκνυται απινίδωση για κάθε ρυθμό.",
+      "source_ids": [
+        "erc-2025",
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-025",
+      "topic": "resuscitation",
+      "title": "Ομάδα αναζωογόνησης",
+      "lesson": "Στην ομαδική ανταπόκριση, οι σαφώς ανατεθειμένοι ρόλοι και η επανάληψη μιας οδηγίας για επιβεβαίωση μειώνουν ασάφειες.",
+      "question": "Γιατί έχει σημασία η σαφής ανάθεση ρόλων;",
+      "answer": "Για να γνωρίζει κάθε συμμετέχων τι του αναλογεί και να αποφεύγονται παραλείψεις ή διπλές ενέργειες.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-026",
+      "topic": "resuscitation",
+      "title": "Αναζωογόνηση και πρακτική εξάσκηση",
+      "lesson": "Οι δεξιότητες αναζωογόνησης απαιτούν επαναληπτική πρακτική και αξιολόγηση, πέρα από ανάγνωση βιβλίων ή επιτυχία σε ερώτηση πολλαπλής επιλογής.",
+      "question": "Αρκεί να γνωρίζω θεωρητικά το κείμενο για να θεωρούμαι έτοιμος πρακτικά;",
+      "answer": "Όχι. Η κλινική δεξιότητα απαιτεί πρακτική επίδειξη και εκπαίδευση.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-027",
+      "topic": "resuscitation",
+      "title": "Διαφορές ηλικιακών ομάδων",
+      "lesson": "Οι οδηγίες αναζωογόνησης διαχωρίζουν ηλικιακές ομάδες και περιστάσεις. Δεν είναι ασφαλές να υποθέτουμε ότι κάθε οδηγία για ενήλικα μεταφέρεται αυτόματα στο παιδί.",
+      "question": "Μπορούν οι οδηγίες για ενήλικες να εφαρμόζονται αυτούσιες σε όλες τις ηλικίες;",
+      "answer": "Όχι. Υπάρχουν ειδικές παιδιατρικές και νεογνικές ενότητες.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-028",
+      "topic": "ecg",
+      "title": "Τι καταγράφει το ΗΚΓ",
+      "lesson": "Το ηλεκτροκαρδιογράφημα απεικονίζει ηλεκτρική δραστηριότητα της καρδιάς από συγκεκριμένες απαγωγές. Δεν είναι απευθείας μέτρηση της αρτηριακής πίεσης.",
+      "question": "Το ΗΚΓ καταγράφει απευθείας την αρτηριακή πίεση;",
+      "answer": "Όχι. Είναι καταγραφή ηλεκτρικών δυναμικών.",
+      "source_ids": [
+        "anatomy-2026",
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-029",
+      "topic": "ecg",
+      "title": "Απαγωγές του ΗΚΓ",
+      "lesson": "Οι διαφορετικές απαγωγές παρατηρούν την ίδια ηλεκτρική δραστηριότητα από διαφορετικές κατευθύνσεις, γι' αυτό οι κυματομορφές διαφέρουν.",
+      "question": "Γιατί μία καρδιακή διέγερση έχει διαφορετική μορφή σε διαφορετικές απαγωγές;",
+      "answer": "Επειδή οι απαγωγές καταγράφουν διαφορετικές προβολές της ηλεκτρικής δραστηριότητας.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-030",
+      "topic": "ecg",
+      "title": "Κύμα P και σύμπλεγμα QRS",
+      "lesson": "Στη βασική κατανόηση του ΗΚΓ, το κύμα P συνδέεται με την κολπική εκπόλωση και το σύμπλεγμα QRS με την κοιλιακή εκπόλωση.",
+      "question": "Με ποιο ηλεκτρικό γεγονός συνδέεται κυρίως το QRS;",
+      "answer": "Με την εκπόλωση των κοιλιών.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-031",
+      "topic": "ecg",
+      "title": "Κύμα T",
+      "lesson": "Το κύμα T συνδέεται με την επαναπόλωση των κοιλιών. Η αναγνώριση των βασικών κυμάτων είναι αφετηρία και δεν αποτελεί πλήρη κλινική ερμηνεία.",
+      "question": "Με ποιο γεγονός συνδέεται κυρίως το κύμα T;",
+      "answer": "Με την κοιλιακή επαναπόλωση.",
+      "source_ids": [
+        "anatomy-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-032",
+      "topic": "ecg",
+      "title": "Ηλεκτρικός ρυθμός και κλινική εικόνα",
+      "lesson": "Μια κυματομορφή πρέπει να ερμηνεύεται μαζί με την κλινική κατάσταση και την ποιότητα του σήματος. Η λανθασμένη σύνδεση μιας ένδειξης με διάγνωση μπορεί να παραπλανήσει.",
+      "question": "Γιατί δεν βασιζόμαστε μόνο στην οθόνη ενός monitor;",
+      "answer": "Επειδή η ένδειξη είναι ένα μέρος των δεδομένων και μπορεί να επηρεάζεται από τεχνικούς παράγοντες.",
+      "source_ids": [
+        "erc-2025",
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-033",
+      "topic": "equipment",
+      "title": "AED — αναγνώριση",
+      "lesson": "Ο AED είναι συσκευή που σχετίζεται με τον έλεγχο ηλεκτρικού ρυθμού και την καθοδήγηση για απινίδωση όπου ενδείκνυται. Η αναγνώριση του σκοπού του δεν υποκαθιστά πρακτική εκπαίδευση.",
+      "question": "Μπορεί η απλή γνώση της ονομασίας AED να υποκαταστήσει εκπαίδευση;",
+      "answer": "Όχι. Χρειάζεται η κατάλληλη πρακτική εκπαίδευση.",
+      "source_ids": [
+        "erc-2025",
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-034",
+      "topic": "equipment",
+      "title": "BVM — ασκός, βαλβίδα και μάσκα",
+      "lesson": "Ο ασκός-βαλβίδα-μάσκα (BVM) χρησιμοποιείται στην υποστήριξη αερισμού από κατάλληλα εκπαιδευμένο προσωπικό. Η σωστή πρακτική χρήση απαιτεί ιδιαίτερη εξάσκηση.",
+      "question": "Το BVM είναι συσκευή μέτρησης οξυγόνου ή υποστήριξης αερισμού;",
+      "answer": "Υποστήριξης αερισμού.",
+      "source_ids": [
+        "emr-2025",
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-035",
+      "topic": "equipment",
+      "title": "Παλμικό οξύμετρο",
+      "lesson": "Η παλμική οξυμετρία εκτιμά μη επεμβατικά τον περιφερικό κορεσμό αιμοσφαιρίνης με οξυγόνο. Μια ένδειξη δεν είναι πλήρης εκτίμηση της αναπνοής.",
+      "question": "Η SpO₂ περιγράφει από μόνη της όλους τους παράγοντες της αναπνοής;",
+      "answer": "Όχι. Είναι μία εκτίμηση και χρειάζεται συνεκτίμηση κλινικών στοιχείων.",
+      "source_ids": [
+        "emr-2025",
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-036",
+      "topic": "equipment",
+      "title": "Monitor και προέλευση τιμών",
+      "lesson": "Μια ένδειξη στην οθόνη έχει αξία όταν γνωρίζουμε τι μετρά, πότε καταγράφηκε και αν είναι τεχνικά αξιόπιστη.",
+      "question": "Τι χρειάζεται να συνοδεύει μια καταγεγραμμένη ένδειξη monitor;",
+      "answer": "Το είδος μέτρησης, ο χρόνος και η αξιοπιστία της παρατήρησης.",
+      "source_ids": [
+        "who-ops-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-037",
+      "topic": "equipment",
+      "title": "Εξοπλισμός ασθενοφόρου",
+      "lesson": "Ο εξοπλισμός του ασθενοφόρου συνδέεται με το επίπεδο παροχής φροντίδας και τους οργανωτικούς κανόνες του φορέα. Ένας διεθνής κατάλογος δεν αποτελεί αυτομάτως ελληνική υποχρέωση.",
+      "question": "Μπορούμε να θεωρήσουμε μία διεθνή λίστα εξοπλισμού ως επίσημη ελληνική προδιαγραφή;",
+      "answer": "Όχι, απαιτείται αντιπαραβολή με τους ισχύοντες τοπικούς κανόνες.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-toolkit"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-038",
+      "topic": "equipment",
+      "title": "Εγχειρίδια συγκεκριμένου μοντέλου",
+      "lesson": "Η εξοικείωση με μια κατηγορία συσκευής δεν σημαίνει ότι γνωρίζουμε αυτόματα το interface, τις προειδοποιήσεις ή τα όρια κάθε κατασκευαστή.",
+      "question": "Γιατί πρέπει να ξέρουμε το συγκεκριμένο μοντέλο συσκευής;",
+      "answer": "Επειδή ο τρόπος λειτουργίας και οι προειδοποιήσεις μπορεί να διαφέρουν.",
+      "source_ids": [
+        "who-toolkit"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-039",
+      "topic": "operations",
+      "title": "Ρόλος του προνοσοκομειακού συστήματος",
+      "lesson": "Η προνοσοκομειακή φροντίδα συνδέει την κλήση για βοήθεια με την εκτίμηση, την αντιμετώπιση εντός αρμοδιοτήτων και τη μεταφορά σε κατάλληλη δομή.",
+      "question": "Γιατί το ασθενοφόρο αποτελεί μέρος ενός συστήματος και όχι απλώς μέσο μεταφοράς;",
+      "answer": "Επειδή συνδέεται με επικοινωνία, εκτίμηση, συντονισμό, τεκμηρίωση και συνέχεια φροντίδας.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-toolkit"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-040",
+      "topic": "operations",
+      "title": "Κέντρο επικοινωνίας και διαβιβάσεις",
+      "lesson": "Η διαχείριση κλήσεων περιλαμβάνει τη συγκέντρωση κρίσιμων πληροφοριών και την οργανωμένη αποστολή των κατάλληλων πόρων.",
+      "question": "Γιατί μια αναφορά με σαφή τοποθεσία και βασικά δεδομένα είναι σημαντική;",
+      "answer": "Επιτρέπει καλύτερο συντονισμό και αποτρέπει ασάφειες.",
+      "source_ids": [
+        "who-ops-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-041",
+      "topic": "operations",
+      "title": "Ιατρική καθοδήγηση",
+      "lesson": "Οι δομές προνοσοκομειακής φροντίδας προβλέπουν διακριτούς ρόλους και δυνατότητα ιατρικής εποπτείας. Η ύπαρξη βιβλιογραφίας δεν επεκτείνει μόνη της τις αρμοδιότητες του εκπαιδευόμενου.",
+      "question": "Τα πολλά βιβλία αυξάνουν αυτόματα όσα επιτρέπεται να εκτελεί ένας διασώστης;",
+      "answer": "Όχι. Τα επιτρεπόμενα καθήκοντα ορίζονται από το ισχύον πλαίσιο, την εκπαίδευση και τα πρωτόκολλα.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-bap-syllabus-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-042",
+      "topic": "operations",
+      "title": "Ολοκληρωμένη παράδοση",
+      "lesson": "Μια δομημένη παράδοση συνδυάζει περίληψη συμβάντος, αντικειμενικές παρατηρήσεις, χρονική εξέλιξη, όσα ενέργησε η ομάδα και ανοιχτά ερωτήματα.",
+      "question": "Γιατί πρέπει να αναφέρουμε και την εξέλιξη του περιστατικού;",
+      "answer": "Επειδή η ομάδα παραλαβής χρειάζεται να γνωρίζει τι άλλαξε με τον χρόνο.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-checklists-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-043",
+      "topic": "operations",
+      "title": "Κλειστός κύκλος επικοινωνίας",
+      "lesson": "Στην επικοινωνία κλειστού κύκλου, ο παραλήπτης επιβεβαιώνει ότι κατανόησε το μήνυμα. Πρόκειται για οργανωτική δεξιότητα που περιορίζει τις παρερμηνείες.",
+      "question": "Γιατί επαναλαμβάνουμε ή επιβεβαιώνουμε μία κρίσιμη πληροφορία;",
+      "answer": "Για να εξακριβώσουμε ότι μεταδόθηκε και κατανοήθηκε σωστά.",
+      "source_ids": [
+        "who-ops-2025",
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-044",
+      "topic": "operations",
+      "title": "Καταγραφή χωρίς υποθέσεις",
+      "lesson": "Ένα καλό εκπαιδευτικό αρχείο ξεχωρίζει το «είδα», το «μου αναφέρθηκε» και το «υποθέτω». Αυτή η διάκριση στηρίζει την αξιόπιστη παράδοση.",
+      "question": "Είναι ισοδύναμα ένα γεγονός που είδαμε και μια πληροφορία τρίτου;",
+      "answer": "Όχι. Καταγράφουμε την πηγή κάθε πληροφορίας.",
+      "source_ids": [
+        "who-checklists-2025",
+        "who-ops-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-045",
+      "topic": "operations",
+      "title": "Λοιμώξεις και οργάνωση",
+      "lesson": "Ο προνοσοκομειακός σχεδιασμός περιλαμβάνει πρόληψη λοιμώξεων, σαφείς ρόλους, εξοπλισμό και διαδικασίες. Δεν αρκεί ένας κατάλογος αναλωσίμων.",
+      "question": "Πέρα από τον εξοπλισμό, τι άλλο χρειάζεται ένα οργανωμένο σύστημα φροντίδας;",
+      "answer": "Κατάλληλη εκπαίδευση, διαδικασίες, επικοινωνία και έλεγχος ποιότητας.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-toolkit"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-046",
+      "topic": "triage",
+      "title": "Διαλογή ως διαδικασία",
+      "lesson": "Η διαλογή σε μαζικά συμβάντα είναι οργανωμένη διαδικασία προτεραιοποίησης με βάση συγκεκριμένο εγκεκριμένο σύστημα και τις συνθήκες. Δεν είναι μια μόνιμη ταμπέλα χωρίς επανεκτίμηση.",
+      "question": "Μπορεί μια αρχική ταξινόμηση να μην χρειάζεται ποτέ επανεξέταση;",
+      "answer": "Όχι. Οι συνθήκες και οι παρατηρήσεις μπορούν να αλλάζουν.",
+      "source_ids": [
+        "who-toolkit",
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-047",
+      "topic": "triage",
+      "title": "Καταμέτρηση εμπλεκομένων",
+      "lesson": "Πριν από την ουσιαστική διαχείριση ενός συμβάντος, η ομάδα χρειάζεται όσο γίνεται αξιόπιστη εικόνα για τον αριθμό εμπλεκομένων και τους διαθέσιμους πόρους.",
+      "question": "Γιατί καταγράφουμε κάθε εμπλεκόμενο ξεχωριστά;",
+      "answer": "Για να μειώσουμε τον κίνδυνο να παραλειφθεί άτομο και να υπάρχει κοινή εικόνα του συμβάντος.",
+      "source_ids": [
+        "who-ops-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-048",
+      "topic": "triage",
+      "title": "Πόροι και αποφάσεις",
+      "lesson": "Η διαχείριση πολλών περιστατικών εξαρτάται όχι μόνο από τους ασθενείς αλλά και από προσωπικό, μεταφορικά μέσα, επικοινωνία και οργάνωση του συμβάντος.",
+      "question": "Γιατί η διαλογή σχετίζεται με τους διαθέσιμους πόρους;",
+      "answer": "Επειδή το σύστημα χρειάζεται να οργανώσει τη βοήθεια σε περισσότερα άτομα με πραγματικούς περιορισμούς.",
+      "source_ids": [
+        "who-ops-2025",
+        "who-toolkit"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-049",
+      "topic": "triage",
+      "title": "Πρωτόκολλο και τόπος",
+      "lesson": "Τα διεθνή εκπαιδευτικά σχήματα διαλογής δεν ταυτίζονται αυτομάτως με το εκάστοτε επίσημο τοπικό πρωτόκολλο.",
+      "question": "Μπορεί ο Mentor να εφαρμόζει οποιοδήποτε ξένο σύστημα ως επίσημο του ΕΚΑΒ;",
+      "answer": "Όχι. Απαιτείται σαφής τεκμηρίωση του ισχύοντος ελληνικού πρωτοκόλλου.",
+      "source_ids": [
+        "who-toolkit"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-050",
+      "topic": "triage",
+      "title": "Επικοινωνία σε μαζικό συμβάν",
+      "lesson": "Μια ενημέρωση πρέπει να ξεχωρίζει τον επιβεβαιωμένο αριθμό ατόμων από πιθανές ή ανεπιβεβαίωτες αναφορές. Οι μη επιβεβαιωμένες πληροφορίες δεν πρέπει να παρουσιάζονται ως βέβαιες.",
+      "question": "Πώς περιγράφουμε άτομο που αναφέρεται μόνο από μάρτυρα;",
+      "answer": "Ως ανεπιβεβαίωτη αναφορά, ώσπου να υπάρχει δική μας αξιόπιστη επιβεβαίωση.",
+      "source_ids": [
+        "who-ops-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-051",
+      "topic": "pediatrics",
+      "title": "Το παιδί δεν είναι μικρός ενήλικας",
+      "lesson": "Ανατομία, φυσιολογία, επικοινωνία και ανάγκες αξιολόγησης αλλάζουν με την ηλικία. Για τον λόγο αυτό υπάρχουν ιδιαίτερες παιδιατρικές ενότητες στις διεθνείς οδηγίες.",
+      "question": "Είναι ασφαλές να μεταφέρουμε άκριτα όλες τις ενήλικες αρχές στα παιδιά;",
+      "answer": "Όχι. Η ηλικία επηρεάζει τις εκπαιδευτικές και κλινικές παραμέτρους.",
+      "source_ids": [
+        "erc-2025",
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-052",
+      "topic": "pediatrics",
+      "title": "Ηλικία και επικοινωνία",
+      "lesson": "Στην εκπαίδευση παιδιατρικών περιστατικών έχει σημασία ο τρόπος επικοινωνίας με το παιδί και τους φροντιστές, με σεβασμό στο αναπτυξιακό επίπεδο.",
+      "question": "Γιατί αλλάζουμε τον τρόπο επικοινωνίας ανάλογα με την ηλικία;",
+      "answer": "Επειδή η δυνατότητα κατανόησης και έκφρασης διαφέρει.",
+      "source_ids": [
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-053",
+      "topic": "pediatrics",
+      "title": "Νεογνική και παιδιατρική φροντίδα",
+      "lesson": "Οι κατευθυντήριες οδηγίες ξεχωρίζουν τη νεογνική από την παιδιατρική και την ενήλικη αναζωογόνηση. Πρόκειται για ξεχωριστά εκπαιδευτικά αντικείμενα.",
+      "question": "Η νεογνική αναζωογόνηση αποτελεί απλώς την ενήλικη σε μικρότερη κλίμακα;",
+      "answer": "Όχι. Έχει ειδική φυσιολογία και ξεχωριστές οδηγίες.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-054",
+      "topic": "pediatrics",
+      "title": "Ιστορικό από πολλαπλές πηγές",
+      "lesson": "Όταν ένας ασθενής δεν μπορεί να περιγράψει μόνος του όλες τις πληροφορίες, οι φροντιστές μπορούν να δώσουν χρήσιμα στοιχεία. Είναι σημαντικό να καταγράφεται ποιος τα ανέφερε.",
+      "question": "Τι σημειώνουμε όταν μια πληροφορία προέρχεται από γονέα;",
+      "answer": "Καταγράφουμε ότι πρόκειται για πληροφορία του γονέα/φροντιστή.",
+      "source_ids": [
+        "emr-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-055",
+      "topic": "learning",
+      "title": "Ενεργητική ανάκληση",
+      "lesson": "Η προσπάθεια να απαντήσεις πριν δεις τη λύση βοηθά να εντοπίσεις τι πραγματικά θυμάσαι και τι χρειάζεται επανάληψη.",
+      "question": "Τι είναι πιο χρήσιμο από το να διαβάζουμε μόνο παθητικά μια παράγραφο;",
+      "answer": "Να ανακαλούμε ενεργά τη γνώση απαντώντας σε ερωτήσεις και επανελέγχοντας.",
+      "source_ids": [
+        "erc-2025",
+        "who-bap-syllabus-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-056",
+      "topic": "learning",
+      "title": "Επαναλήψεις σε απόσταση",
+      "lesson": "Οι επαναλήψεις σε διαφορετικά χρονικά σημεία βοηθούν στη μακρόχρονη διατήρηση γνώσεων και δεξιοτήτων. Ο Mentor μπορεί να επαναφέρει υλικό χωρίς να αλλάζει επίσημους βαθμούς.",
+      "question": "Γιατί είναι προτιμότερο να επανερχόμαστε σε μια δεξιότητα από το να τη δούμε μία φορά;",
+      "answer": "Επειδή η επαναλαμβανόμενη εξάσκηση ενισχύει τη συγκράτηση και δείχνει τα κενά.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-057",
+      "topic": "learning",
+      "title": "Σφάλμα ως αφορμή μάθησης",
+      "lesson": "Μια λανθασμένη απάντηση στην προσομοίωση δεν είναι από μόνη της πιστοποιημένος δείκτης επάρκειας. Δείχνει θέμα για επανεξήγηση, εξάσκηση και νέα προσπάθεια.",
+      "question": "Πώς πρέπει να αξιοποιεί ο Mentor μια λάθος απάντηση;",
+      "answer": "Ως ένδειξη για στοχευμένη μάθηση και επανάληψη, όχι ως οριστική κρίση ικανότητας.",
+      "source_ids": [
+        "erc-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-058",
+      "topic": "learning",
+      "title": "Πηγή και ημερομηνία",
+      "lesson": "Η κλινική εκπαίδευση αλλάζει όταν ενημερώνονται οι οδηγίες. Κάθε εκπαιδευτικός ισχυρισμός πρέπει να έχει σαφή προέλευση, έκδοση και όρια χρήσης.",
+      "question": "Γιατί δεν αρκεί να γνωρίζουμε μόνο τον τίτλο ενός βιβλίου;",
+      "answer": "Επειδή χρειάζονται η έκδοση, η χρονολογία και η αντιπαραβολή με τις σύγχρονες οδηγίες.",
+      "source_ids": [
+        "erc-2025",
+        "who-pocket-2026"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    },
+    {
+      "id": "mk-059",
+      "topic": "learning",
+      "title": "Θεωρία και πράξη",
+      "lesson": "Η αναγνώριση μιας συσκευής ή η απάντηση σε μια κάρτα είναι εκπαιδευτική πρόοδος, αλλά όχι υποκατάστατο της εποπτευόμενης πρακτικής εξάσκησης.",
+      "question": "Μπορεί ένα ψηφιακό κουίζ να αποδείξει πλήρη πρακτική ετοιμότητα;",
+      "answer": "Όχι. Χρειάζεται κατάλληλη πρακτική αξιολόγηση.",
+      "source_ids": [
+        "erc-2025",
+        "who-bap-syllabus-2025"
+      ],
+      "language": "el",
+      "status": "human-review-pending",
+      "scope": "educational-theory-only",
+      "medical_approval": false,
+      "official_grade_effect": false
+    }
+  ]
+}
