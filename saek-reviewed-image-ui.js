@@ -38,7 +38,7 @@ function render(asset,lessonId){
  const fig=el('figure','saek-source-figure');
  const label=el('h4','saek-source-title',asset.title);
  const image=el('img','saek-source-image');
- image.src=sourceUrl(asset);image.alt=asset.title+'. '+asset.caption;
+ image.alt=asset.title+'. '+asset.caption;
  image.loading='lazy';image.decoding='async';
  image.referrerPolicy='no-referrer';
  const figureActions=el('div','saek-source-actions');
@@ -66,9 +66,26 @@ function render(asset,lessonId){
  lic.href=asset.licenseUrl||licenseLinks[asset.license]||asset.page;
  lic.target='_blank';lic.rel='noopener noreferrer';
  attribution.append(src,space,lic);
- const problem=el('p','saek-source-fallback','Η εικόνα δεν φορτώθηκε. Δείτε την αρχική σελίδα της πηγής.');
+ // A failed lazy/offline image must be recoverable without losing lesson state.
+ const problem=el('div','saek-source-fallback');
  problem.hidden=true;
- image.addEventListener('error',()=>{image.hidden=true;bigger.hidden=true;problem.hidden=false;});
+ const explanation=el('p','','Η εικόνα δεν φορτώθηκε. Δοκιμάστε ξανά ή ανοίξτε την παραπομπή της πηγής.');
+ const retry=el('button','saek-source-action','Επανάληψη φόρτωσης εικόνας');
+ retry.type='button';
+ retry.addEventListener('click',()=>{
+  retry.disabled=true;
+  image.removeAttribute('src');
+  image.src=sourceUrl(asset);
+ });
+ problem.append(explanation,retry);
+ image.addEventListener('load',()=>{
+  image.hidden=false;bigger.hidden=false;problem.hidden=true;retry.disabled=false;
+ });
+ image.addEventListener('error',()=>{
+  image.hidden=true;bigger.hidden=true;problem.hidden=false;retry.disabled=false;
+ });
+ // Attach handlers before setting src, including for locally cached images.
+ image.src=sourceUrl(asset);
  fig.append(label,image,figureActions,caption,attribution,problem);
  return fig;
 }
