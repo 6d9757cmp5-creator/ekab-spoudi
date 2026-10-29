@@ -16,7 +16,7 @@
       "caption": "Απεικόνιση βασικών οστών σε πρόσθια όψη. Δεν παρουσιάζει κάκωση.",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact Commons SVG browser-rendered at 1366×768 and separately inspected enlarged. Frontal whole-skeleton composition and major Greek labels/leaders are visible; text boxes remain within the SVG viewBox. At full-image fit, dense labels are small; detailed landmark validation and a functional in-app zoom/mobile review remain pending. No scientific approval inferred."
+        "scope": "Exact local Commons SVG rasterized at native 435.7x841.9 and re-inspected. Several labels/leader lines are crowded and some right-edge text is clipped by the source drawing bounds; expanding the viewport did not improve the source artwork and was reverted. Detailed landmark validation and safe label-layout correction pending."
       },
       "localPath": "assets/education/commons-human-skeleton-front-el.svg",
       "sha256": "657c210a65aa8916a06527b32eb1400987e71c2218d2e3b24c27a41879f8fc71",
@@ -30,10 +30,11 @@
       "page": "https://commons.wikimedia.org/wiki/File:Spinal_column_curvature-el.svg",
       "caption": "Πλάγια ανατομική όψη της σπονδυλικής στήλης και των φυσιολογικών κυρτωμάτων. Δεν παρουσιάζει κάκωση.",
       "visualReview": {
-        "scope": "Commons source rendered in browser and screenshot-inspected at 1280×720; lateral spinal column and regional labels are visible. Fine label/curvature review and scientific approval remain pending."
+        "date": "2026-10-29",
+        "scope": "Exact local Commons SVG rendered at 858x1418 and inspected individually. The coccygeal label crossed the lower green region boundary; moved it upward into the unobstructed lower label area and verified full visibility with clearance from the boundary. Curvature-region anatomical validation, mobile/app-scale legibility and independent clinical review remain pending."
       },
       "localPath": "assets/education/commons-spinal-column-curvature-el.svg",
-      "sha256": "ad188d877ccf9aec7e1b270d9b27acd0262495c73373a34a9b474c4b891f6884",
+      "sha256": "bba68257cf4873a26ecc24d86516b42ac521a65fbb7b8043a834fc009048a2dd",
       "clinicalReview": "pending"
     },
     "heart": {
@@ -47,7 +48,7 @@
       "sha256": "a8ac5e574b93b57ee60ff5acf4c94cfb5c4ab9098eebb7c61326ae1b2a0edc2c",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact SVG rasterized at 1113×1066 (120 dpi) and inspected after correction. The visible vector-path label “Δεξιός κόλπος” was shifted within its chamber, clearing the downward blood-flow arrow; the rendered result confirms the label remains inside the right atrium. The “Αριστερός κόλπος” label still visually intersects a flow arrow; tested placements either overlap the pulmonary artery or remain crowded, so that correction is pending. Detailed valve/structure review and independent scientific, app-browser, mobile and offline review remain pending."
+        "scope": "Exact local SVG rasterized at 1113x1066 and re-inspected. The label “Αριστερός κόλπος” still intersects a downward flow arrow; no safe label position was verified without covering adjacent anatomy. Detailed valve/structure validation and independent scientific review remain pending."
       },
       "sourcePageCheckedFor": [
         "Commons source title, creator, Greek labels and CC BY-SA 3.0 provenance",
@@ -64,7 +65,8 @@
       "page": "https://commons.wikimedia.org/wiki/File:Ανατομία-_ανώτερο_αναπνευστικό_σύστημα.png",
       "caption": "Ανατομία ανώτερου αναπνευστικού. Δεν αποτελεί οδηγία χειρισμού αεραγωγού.",
       "visualReview": {
-        "scope": "Commons PNG rendered in browser and screenshot-inspected at intrinsic 634×470; upper airway structures and Greek labels are visible. Fine anatomical label review remains pending."
+        "date": "2026-10-29",
+        "scope": "Exact local Commons PNG inspected at intrinsic 634x470. Greek labels for nasal/oral cavity, pharynx, larynx and trachea are legible and point toward the upper airway; partial lungs are visible at the lower crop edge. No airway procedure is shown. Independent anatomical review pending."
       },
       "localPath": "assets/education/commons-upper-respiratory-anatomy.png",
       "sha256": "a0ef31a7c131cb585119b6de71b98b4a697222626a4eef605f33e74cccd29fa0",
@@ -79,7 +81,8 @@
       "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs",
       "caption": "Πρόσθιο σχηματικό διάγραμμα τραχείας, κύριων βρόγχων, πνευμόνων και διαφράγματος. Η μεγεθυμένη τομή δείχνει τα δύο πέταλα και τον χώρο της υπεζωκοτικής κοιλότητας. Δεν είναι υπό κλίμακα και δεν απεικονίζει θεραπεία.",
       "visualReview": {
-        "scope": "Το πρωτότυπο SVG αποδόθηκε σε raster στα 1100×760 και επιθεωρήθηκε: ελέγχθηκαν οι λοβοί, η δεξιά/αριστερή φορά, οι απολήξεις βελών προς καρδιά/καρδιακή εντομή, οι τρεις ενδείξεις της υπεζωκοτικής τομής και η ορατότητα ελληνικών λεζαντών. Δεν έγινε browser ή mobile E2E· επιστημονική αντιστοίχιση παραμένει pending."
+        "date": "2026-10-29",
+        "scope": "Current audited lower asset is the original local SVG, raster inspected at 1100x760; lobe/lung/pleural captions and leaders were reviewed. The separate legacy Commons PNG is precached but is not the current lower manifest path; its raster is legible, but active placement status needs inventory reconciliation. Independent anatomical review pending."
       },
       "localPath": "assets/education/lower-respiratory-anatomy-el.svg",
       "sha256": "6d0eb4b4ae6be282e8951c92782a7c4f513ee1ae8e64af74f3947914cd2714e3",
@@ -100,10 +103,11 @@
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Exact pushed SVG at commit cfe9894d4318e8116f645f3847d5376debb2e36c individually reviewed in a full browser render at 1264×1347. Fine inspection covered the nasal/oral passages, larynx/trachea, bronchial tree, right 3-lobe and left 2-lobe labels, diaphragm, alveoli and vessel labels. Labels align with the visible anatomical regions; the dense crossing leader lines and small original text remain a legibility risk when further scaled down. The red/blue pulmonary vessel colors have no legend and could imply oxygenation; accessible description and chapter caption now state they are symbolic and do not encode oxygenation. Independent respiratory anatomy review and mobile-fit test remain pending."
+        "date": "2026-10-29",
+        "scope": "Exact local Commons SVG re-inspected at 970x1025 after expanding the viewBox. The side lung labels and lower lobe/bronchus captions that were clipped at the original canvas edge are now visible. Dense crossing leaders and fine anatomic interpretation still require review."
       },
       "localPath": "assets/education/commons-respiratory-system-complete-el.svg",
-      "sha256": "d2f6b2c72672d0ba0ab5d1f2d8efb3b9726b39899fb9b97e4b454b2b21327d1a",
+      "sha256": "ab72add0fd8db7499330bcbc01a4d1bb25b2ff50af1da03ba46da3b4ccb330d9",
       "additionalSources": [
         "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs"
       ]
@@ -125,7 +129,7 @@
       "clinicalReview": "pending",
       "visualReview": {
         "date": "2026-10-29",
-        "scope": "Exact local Commons SVG browser-rendered at 1366×768. Medial brain illustration and Greek labels are present, but several labels are crowded close to sulci/leader strokes and are difficult to read at fit-to-window scale. No label repositioning attempted without neuroanatomical anchor verification. Detailed label-to-structure validation, mobile/zoom usability and independent neuroanatomical review remain pending."
+        "scope": "Exact local Commons SVG rasterized at 1025x598 and re-inspected. Several labels are crowded against sulci and leader strokes at fit-to-image scale; no label repositioning attempted without neuroanatomical anchor verification. Landmark validation, zoom/mobile usability and independent review pending."
       },
       "localPath": "assets/education/commons-brain-medial-el.svg",
       "sha256": "d4799c69f7b8b952804823cd198064f7674681c961a6e41a4e0d65391b6a875e"
