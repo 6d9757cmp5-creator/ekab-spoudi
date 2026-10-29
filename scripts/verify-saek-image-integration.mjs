@@ -32,6 +32,12 @@ if (!imageUI.includes("image.addEventListener('load'") ||
     !imageUI.includes("image.removeAttribute('src')") ||
     !imageUI.includes('Επανάληψη φόρτωσης εικόνας'))
   errors.push('The sourced-image UI must recover from failed image loads without a page reload.');
+// A missing/offline registry must not fail silently: users need a retry without a page reload.
+if (!imageUI.includes('showRegistryFailure(err)') ||
+    !imageUI.includes('saek-image-registry-error') ||
+    !imageUI.includes('Επανάληψη φόρτωσης εικόνων') ||
+    !imageUI.includes("document.getElementById('saek-image-registry-error')?.remove()"))
+  errors.push('The registry fetch failure must be visible and recoverable without resetting progress.');
 for (const path of ['saek-image-audit-2026.json', 'saek-visual-ui.js',
                     'saek-reviewed-image-ui.js', 'saek-visual-ui.css']) {
   if (!sw.includes('./' + path)) errors.push('Offline precache is missing ' + path);
