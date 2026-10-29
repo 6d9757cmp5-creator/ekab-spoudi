@@ -4,15 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
-<title>MENTOR OS · Εργαστήριο αποστολών (δοκιμή)</title>
+<title>MENTOR · Εργαστήριο αποστολών (δοκιμή)</title>
 <link rel="stylesheet" href="mentor-lab.css">
+<script src="mentor-adaptive.js" defer></script>
+<script src="mentor-personal-v1.js" defer></script>
 <script type="module" src="mentor-lab.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
 <header class="header">
   <div class="header-inner">
-    <div class="brand"><div class="brand-icon" aria-hidden="true">✚</div><div><strong>MENTOR OS</strong><span>ΕΚΑΒ Σπουδή · Εκπαιδευτικό εργαστήριο</span></div></div>
+    <div class="brand"><div class="brand-icon" aria-hidden="true">✚</div><div><strong>MENTOR</strong><span>ΕΚΑΒ Σπουδή · Εκπαιδευτικό εργαστήριο</span></div></div>
     <a class="back-link" href="index.html">← Επιστροφή στην ΕΚΑΒ Σπουδή</a>
   </div>
 </header>
@@ -54,18 +56,31 @@
       <small>Ψηφιακός χαρακτήρας · δοκιμαστική παρουσία</small>
     </div>
   </section>
+  <section class="panel mentor-personal" id="mentor-personal" aria-labelledby="mentor-personal-heading">
+  <div class="mentor-personal-header"><span class="mentor-personal-icon" aria-hidden="true">✺</span><div><p class="eyebrow">Μία ταυτότητα · Όλες οι γνώσεις</p><h2 id="mentor-personal-heading">MENTOR</h2><p>Ο προσωπικός σου καθηγητής προσαρμόζει τη διαδρομή στις ανάγκες σου. Δεν υπάρχουν ξεχωριστοί εκπαιδευτές.</p></div></div>
+  <div class="mentor-personal-metrics"><div><strong id="mentor-personal-studied">0</strong><small>Θεματικές που μελέτησες</small></div><div><strong id="mentor-personal-due">0</strong><small>Επαναλήψεις που εκκρεμούν</small></div></div>
+  <form id="mentor-personal-form"><label for="mentor-personal-query">Τι θέλεις να μάθεις σήμερα;</label><div class="mentor-personal-entry"><input id="mentor-personal-query" maxlength="180" type="text" placeholder="Π.χ. ανατομία, ΚΑΡΠΑ, τραύμα, ΕΟΠΠΕΠ" autocomplete="off"><button type="submit" class="action">Πάμε</button></div></form>
+  <div class="mentor-personal-suggestion"><span class="eyebrow">Προτείνω για σένα</span><h3 id="mentor-personal-suggestion"></h3><p id="mentor-personal-reason"></p><button type="button" class="action secondary" id="mentor-personal-recommend">Έναρξη πρότασης</button></div>
+  <div class="mentor-personal-guidance"><h3 id="mentor-personal-active"></h3><p id="mentor-personal-text"></p><a class="action" id="mentor-personal-open" href="saek.html">Άνοιγμα εργαλείου</a>
+    <p><strong>Πώς σου φάνηκε η εξάσκηση;</strong></p>
+    <div class="mentor-personal-actions"><button type="button" data-mentor-self-review="repeat">Θέλω επανάληψη</button><button type="button" data-mentor-self-review="ok">Το κατάλαβα</button><button type="button" data-mentor-self-review="easy">Ήταν εύκολο</button></div>
+  </div>
+  <details class="mentor-personal-settings"><summary>Ύφος και στόχος διδασκαλίας</summary><label for="mentor-personal-style">Ύφος</label><select id="mentor-personal-style"><option value="auto">Αυτόματη προσαρμογή</option><option value="simple">Απλά</option><option value="detailed">Αναλυτικά</option><option value="exam">Εξέταση</option></select><label for="mentor-personal-goal">Προτεραιότητα</label><select id="mentor-personal-goal"><option value="learning">ΣΑΕΚ</option><option value="certification">ΕΟΠΠΕΠ</option><option value="trauma">Τραύμα</option><option value="pharmacology">Φαρμακολογία</option></select><button type="button" class="action secondary" id="mentor-personal-forget">Διαγραφή μόνο της μνήμης MENTOR</button></details>
+  <p id="mentor-personal-status" role="status" aria-live="polite" class="muted small"></p>
+  <p class="muted small">Τοπική μαθησιακή μνήμη βάσει δικής σου εκτίμησης, χωρίς συνδεδεμένο AI ή αξιολόγηση ιατρικής επάρκειας. Δεν αποθηκεύεται το ελεύθερο κείμενο της ερώτησης· δεν αλλάζουν βαθμοί ή συγχρονισμός.</p>
+</section>
   <section class="panel" aria-labelledby="mentor-reader-title">
     <h2 id="mentor-reader-title">📖 Αναγνωστήριο ΕΚΑΒ Σπουδή · μόνο ανάγνωση</h2>
     <p>Αναζήτησε την ήδη δημοσιευμένη ύλη των τεσσάρων εξαμήνων ΣΑΕΚ, τις 314 καταχωρισμένες ερωτήσεις/απαντήσεις ΕΟΠΠΕΠ, SOS, ασκήσεις, φαρμακολογία και σεμινάρια. Η προβολή δεν αλλάζει βαθμολογίες, πρόοδο ή cloud και δεν συνδέεται με AI.</p>
     <a class="action secondary" href="mentor-readonly.html">Άνοιξε το αναγνωστήριο ΕΚΑΒ Σπουδή</a>
   </section>
-  <p><a href="mentor-library.html">📚 Βιβλιογραφία MENTOR OS — 15 πηγές (υπό επιστημονικό έλεγχο)</a></p>
-  <p><a href="ui-tools/mentor-roadmap.html" style="display:inline-block;padding:10px 13px;border:1px solid currentColor;border-radius:10px;font-weight:750">🧭 Όλες οι δυνατότητες MENTOR OS · Διαθέσιμο / Εκκρεμεί / Μη διαθέσιμο</a></p>
+  <p><a href="mentor-library.html">📚 Βιβλιογραφία MENTOR — 15 πηγές (υπό επιστημονικό έλεγχο)</a></p>
+  <p><a href="ui-tools/mentor-roadmap.html" style="display:inline-block;padding:10px 13px;border:1px solid currentColor;border-radius:10px;font-weight:750">🧭 Όλες οι δυνατότητες MENTOR · Διαθέσιμο / Εκκρεμεί / Μη διαθέσιμο</a></p>
   <div class="disclaimer" role="note">
     <strong>Δοκιμαστική προσομοίωση — όχι ιατρική οδηγία.</strong>
     Τα περιστατικά είναι συνθετικά και εκκρεμεί ανεξάρτητος κλινικός έλεγχος. Δεν προσομοιώνουν πραγματικά ζωτικά σημεία, θεραπεία ή AI γιατρό. Οι βαθμοί ΣΑΕΚ/ΕΟΠΠΕΠ δεν αλλάζουν.
   </div>
-  <section class="panel" aria-label="Νέα αποστολή MENTOR OS">
+  <section class="panel" aria-label="Νέα αποστολή MENTOR">
     <h2>🚑 ΕΚΑΒ Live · Νέα εκπαιδευτική αποστολή</h2>
     <p>Τροχαίο με δύο τραυματίες στην Κρήτη, παρατηρήσεις με συνθετικά μεταβαλλόμενα ζωτικά, αποφάσεις ανά στάδιο και ανατροφοδότηση. Χωρίς AI ή κλινική πιστοποίηση.</p>
     <a class="action" href="mentor-live.html">Άνοιξε την αποστολή δύο τραυματιών</a>
@@ -218,6 +233,6 @@
       <a href="ui-tools/anatomy-3d/index.html">3D Ανατομία · διαθέσιμη</a><a href="mentor-ecg.html">ECG Lab · εκπαιδευτικό σχήμα διαθέσιμο</a><span>Ιατρική ομάδα AI · μετά τη δική σου έγκριση</span><span>Κλινική διαλογή · απαιτείται επιστημονική έγκριση</span><span>Προχωρημένες συσκευές · σχεδιάζεται</span><a href="mentor-oral.html">Προφορική εξάσκηση · διαθέσιμη</a>
     </div><p class="muted small">Η 3D Ανατομία, η προφορική εξάσκηση και το συνθετικό ECG Lab είναι διαθέσιμα. Η πραγματική κλινική ερμηνεία ΗΚΓ, η διαλογή και η ιατρική ομάδα AI δεν είναι ενεργές. Η σύνδεση AI θα γίνει μόνο με τη δική σου τελική έγκριση.</p></div>
   </section>
-  <footer>MENTOR OS · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
+  <footer>MENTOR · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
 </main>
 </body></html>
