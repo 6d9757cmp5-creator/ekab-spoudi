@@ -3648,7 +3648,46 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ηπατίτιδα Α: κοπρανοστοματική μετάδοση",
+          "μολυσμένο νερό/τρόφιμα και στενή επαφή"
+        ],
+        "sources": [
+          "https://www.cdc.gov/hepatitis-a/hcp/clinical-overview/index.html"
+        ],
+        "limits": "ΚΡΙΣΙΜΗ ΠΑΡΑΠΟΜΠΗ: η υπάρχουσα sourceUrl οδηγεί σε διάγνωση ηπατίτιδας Β, άσχετη με την ερώτηση Α. Να αντικατασταθεί με ειδική CDC HAV πηγή.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Οι βασικοί μηχανισμοί της πλήρους αποθηκευμένης απάντησης συμφωνούν με CDC. Η αναφορά σε ανεπαρκή υγιεινή δεν πρέπει να εκληφθεί ως αποκλειστική προϋπόθεση."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "ηπατίτιδα Α: κοπρανοστοματική μετάδοση",
+          "μολυσμένο νερό/τρόφιμα και στενή επαφή"
+        ],
+        "sources": [
+          "https://www.cdc.gov/hepatitis-a/hcp/clinical-overview/index.html"
+        ],
+        "limits": "ΚΡΙΣΙΜΗ ΠΑΡΑΠΟΜΠΗ: η υπάρχουσα sourceUrl οδηγεί σε διάγνωση ηπατίτιδας Β, άσχετη με την ερώτηση Α. Να αντικατασταθεί με ειδική CDC HAV πηγή.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "findings": "Οι βασικοί μηχανισμοί της πλήρους αποθηκευμένης απάντησης συμφωνούν με CDC. Η αναφορά σε ανεπαρκή υγιεινή δεν πρέπει να εκληφθεί ως αποκλειστική προϋπόθεση.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-082",
@@ -3662,7 +3701,50 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "εμβολιασμός κατά HBV",
+          "προφυλάξεις για αίμα/σωματικά υγρά και ασφαλείς βελόνες",
+          "ασφαλέστερες σεξουαλικές πρακτικές και μεταεκθεσιακή εκτίμηση"
+        ],
+        "sources": [
+          "https://www.cdc.gov/hepatitis-b/prevention/index.html",
+          "https://www.cdc.gov/hepatitis-b/hcp/infection-control/index.html"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: η δηλωμένη αρχική σελίδα διάγνωσης δεν στηρίζει επαρκώς την πρόληψη· να αντικατασταθεί με ειδική CDC πρόληψη/PEP. Όχι αυτόνομη οδηγία χορήγησης.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Τα στοιχεία της πλήρους εκπαιδευτικής απάντησης συμφωνούν με CDC. Η μεταεκθεσιακή αντιμετώπιση εξαρτάται από εμβολιασμό, ανοσία, πηγή και πρωτόκολλο."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "εμβολιασμός κατά HBV",
+          "προφυλάξεις για αίμα/σωματικά υγρά και ασφαλείς βελόνες",
+          "ασφαλέστερες σεξουαλικές πρακτικές και μεταεκθεσιακή εκτίμηση"
+        ],
+        "sources": [
+          "https://www.cdc.gov/hepatitis-b/prevention/index.html",
+          "https://www.cdc.gov/hepatitis-b/hcp/infection-control/index.html"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: η δηλωμένη αρχική σελίδα διάγνωσης δεν στηρίζει επαρκώς την πρόληψη· να αντικατασταθεί με ειδική CDC πρόληψη/PEP. Όχι αυτόνομη οδηγία χορήγησης.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "findings": "Τα στοιχεία της πλήρους εκπαιδευτικής απάντησης συμφωνούν με CDC. Η μεταεκθεσιακή αντιμετώπιση εξαρτάται από εμβολιασμό, ανοσία, πηγή και πρωτόκολλο.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-083",
@@ -3676,7 +3758,50 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "HAV κυρίως κοπρανοστοματική μετάδοση",
+          "HBV κυρίως μέσω αίματος/σεξουαλικής επαφής/περιγεννητικά",
+          "οι κύριοι μηχανισμοί διαφέρουν"
+        ],
+        "sources": [
+          "https://www.cdc.gov/hepatitis/hcp/clinical-overview/index.html",
+          "https://www.cdc.gov/hepatitis-b/prevention/index.html"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: η αρχική παραπομπή σε HBV testing δεν καλύπτει τη συγκριτική ερώτηση· ειδικές CDC πηγές και επίσημο λυσάρι.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Η αντιπαραβολή της πλήρους απάντησης με CDC επιβεβαιώνει τη βασική διάκριση HAV/HBV."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "HAV κυρίως κοπρανοστοματική μετάδοση",
+          "HBV κυρίως μέσω αίματος/σεξουαλικής επαφής/περιγεννητικά",
+          "οι κύριοι μηχανισμοί διαφέρουν"
+        ],
+        "sources": [
+          "https://www.cdc.gov/hepatitis/hcp/clinical-overview/index.html",
+          "https://www.cdc.gov/hepatitis-b/prevention/index.html"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: η αρχική παραπομπή σε HBV testing δεν καλύπτει τη συγκριτική ερώτηση· ειδικές CDC πηγές και επίσημο λυσάρι.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "findings": "Η αντιπαραβολή της πλήρους απάντησης με CDC επιβεβαιώνει τη βασική διάκριση HAV/HBV.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-084",
@@ -3690,7 +3815,50 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "έμφυτη και επίκτητη ανοσία",
+          "επίκτητη ενεργητική μετά λοίμωξη/εμβολιασμό",
+          "παθητική ανοσία μέσω έτοιμων αντισωμάτων"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-2-barrier-defenses-and-the-innate-immune-response",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: επίσημο ελληνικό λυσάρι/ορολογία· η προηγούμενη ιστορική sourceChecked εγγραφή δεν ισοδυναμούσε με τον τρέχοντα πρώτο γύρο.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Η πλήρης σύντομη απάντηση συμφωνεί με τις ειδικές ενότητες OpenStax για έμφυτη/επίκτητη και ενεργητική/παθητική ανοσία."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "έμφυτη και επίκτητη ανοσία",
+          "επίκτητη ενεργητική μετά λοίμωξη/εμβολιασμό",
+          "παθητική ανοσία μέσω έτοιμων αντισωμάτων"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-2-barrier-defenses-and-the-innate-immune-response",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: επίσημο ελληνικό λυσάρι/ορολογία· η προηγούμενη ιστορική sourceChecked εγγραφή δεν ισοδυναμούσε με τον τρέχοντα πρώτο γύρο.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "findings": "Η πλήρης σύντομη απάντηση συμφωνεί με τις ειδικές ενότητες OpenStax για έμφυτη/επίκτητη και ενεργητική/παθητική ανοσία.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-085",
@@ -3704,7 +3872,48 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "πρωτοπαθώς παθογόνοι μπορούν να προκαλέσουν νόσο σε υγιείς ξενιστές",
+          "ευκαιριακά παθογόνοι προκαλούν λοίμωξη όταν μειωθούν άμυνες/φραγμοί",
+          "φυσιολογική μικροχλωρίδα μπορεί υπό συνθήκες να γίνει ευκαιριακά παθογόνος"
+        ],
+        "sources": [
+          "https://openstax.org/books/microbiology/pages/15-2-how-pathogens-cause-disease"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: η υπάρχουσα γενική εισαγωγή A&P §21 δεν αποτελεί κατάλληλη ειδική πηγή· αντικατάσταση με Microbiology §15.2 και επίσημο ελληνικό ορισμό.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "finding": "Η διάκριση παθογόνων/ευκαιριακών υποστηρίζεται από OpenStax Microbiology §15.2. Η απάντηση «μη παθογόνοι συνήθως δεν προκαλούν νόσο» είναι γενική και χρειάζεται προσεκτική ορολογία ανά ξενιστή/συνθήκη."
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "πρωτοπαθώς παθογόνοι μπορούν να προκαλέσουν νόσο σε υγιείς ξενιστές",
+          "ευκαιριακά παθογόνοι προκαλούν λοίμωξη όταν μειωθούν άμυνες/φραγμοί",
+          "φυσιολογική μικροχλωρίδα μπορεί υπό συνθήκες να γίνει ευκαιριακά παθογόνος"
+        ],
+        "sources": [
+          "https://openstax.org/books/microbiology/pages/15-2-how-pathogens-cause-disease"
+        ],
+        "limits": "ΕΚΚΡΕΜΕΙ: η υπάρχουσα γενική εισαγωγή A&P §21 δεν αποτελεί κατάλληλη ειδική πηγή· αντικατάσταση με Microbiology §15.2 και επίσημο ελληνικό ορισμό.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false,
+        "findings": "Η διάκριση παθογόνων/ευκαιριακών υποστηρίζεται από OpenStax Microbiology §15.2. Η απάντηση «μη παθογόνοι συνήθως δεν προκαλούν νόσο» είναι γενική και χρειάζεται προσεκτική ορολογία ανά ξενιστή/συνθήκη.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits"
+      }
     },
     {
       "id": "EOP-A-086",
