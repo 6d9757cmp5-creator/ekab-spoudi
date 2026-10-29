@@ -12,7 +12,7 @@ const addError=(detail)=>errors.push(detail);
 const assets=registry.assets||{},courses=registry.courses||[];
 // Provenance and source specificity are separate from local file integrity.
 // These counters are audit findings, NOT clinical approvals or live-source checks.
-const sourceQuality={genericEmsBackgroundAssetIds:[],commonsLocalMirrorAssetIds:[]};
+const sourceQuality={genericEmsBackgroundAssetIds:[],commonsLocalMirrorAssetIds:[],sourcePageReviewRecordedAssetIds:[],visualReviewRecordedAssetIds:[],visualReviewHashBoundAssetIds:[]};
 const allowedLicenses=new Set(['Public domain','CC0 1.0','CC BY 4.0','CC BY-SA 3.0']);
 const seenCourse=new Set();
 const chosen=new Map();
@@ -49,6 +49,14 @@ for(const [key,a] of Object.entries(assets)){
   sourceQuality.genericEmsBackgroundAssetIds.push(key);
  if(a.localPath&&/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/i.test(a.page||''))
   sourceQuality.commonsLocalMirrorAssetIds.push(key);
+ // Review metadata records prior work; it is not proof of a live URL check or certification.
+ if(typeof a.sourcePageReviewed==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(a.sourcePageReviewed))
+  sourceQuality.sourcePageReviewRecordedAssetIds.push(key);
+ if(a.visualReview&&typeof a.visualReview.date==='string'&&typeof a.visualReview.scope==='string'&&a.visualReview.scope.trim())
+  sourceQuality.visualReviewRecordedAssetIds.push(key);
+ // An explicit hash is necessary to automatically bind an old review to the current artwork.
+ if(a.visualReview?.sha256&&a.visualReview.sha256===a.sha256)
+  sourceQuality.visualReviewHashBoundAssetIds.push(key);
  // A record of artwork or a background citation cannot grant independent approval.
  if(!['pending','approved'].includes(a.clinicalReview))addError('Μη έγκυρη κατάσταση κλινικού ελέγχου '+key);
  if(a.clinicalReview==='approved'&&(!a.independentReviewer||!a.independentReviewDate))
@@ -92,13 +100,17 @@ const report={
   genericEmsBackgroundAssetIds:sourceQuality.genericEmsBackgroundAssetIds,
   commonsLocalMirrorCount:sourceQuality.commonsLocalMirrorAssetIds.length,
   commonsLocalMirrorAssetIds:sourceQuality.commonsLocalMirrorAssetIds,
+  sourcePageReviewRecordedCount:sourceQuality.sourcePageReviewRecordedAssetIds.length,
+  visualReviewRecordedCount:sourceQuality.visualReviewRecordedAssetIds.length,
+  visualReviewHashBoundCount:sourceQuality.visualReviewHashBoundAssetIds.length,
+  unrecordedSourcePageReviewCount:Object.keys(assets).length-sourceQuality.sourcePageReviewRecordedAssetIds.length,
   liveSourcePagesVerified:0,
-  note:'Local hashes and optional image-URL HEAD requests do not validate source-page claims, clinical content, or offline/browser rendering.'
+  note:'Review dates/scopes are historical metadata, not current-hash-bound visual proof unless explicitly linked to SHA-256. Local hashes and optional image-URL HEAD requests do not validate source-page claims, clinical content, or offline/browser rendering.'
  },
  medicalCertification:'NOT CERTIFIED: separate expert review required',
  liveDeployment:'NOT VERIFIED by this registry check'
 };
 await writeFile('saek-image-report.json',JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({semesters:bySemester,selected:assigned,total,assets:report.imageSources,warnings:warnings.length,errors:errors.length,remote:remote.length,genericEmsBackground:report.sourceQuality.genericEmsBackgroundCount,commonsLocalMirrors:report.sourceQuality.commonsLocalMirrorCount,liveSourcePagesVerified:0},null,2));
+console.log(JSON.stringify({semesters:bySemester,selected:assigned,total,assets:report.imageSources,warnings:warnings.length,errors:errors.length,remote:remote.length,genericEmsBackground:report.sourceQuality.genericEmsBackgroundCount,commonsLocalMirrors:report.sourceQuality.commonsLocalMirrorCount,sourcePageReviewsRecorded:report.sourceQuality.sourcePageReviewRecordedCount,visualReviewsRecorded:report.sourceQuality.visualReviewRecordedCount,visualReviewsHashBound:report.sourceQuality.visualReviewHashBoundCount,liveSourcePagesVerified:0},null,2));
 if(warnings.length)console.warn('Image audit warnings:\n'+warnings.join('\n'));
 if(errors.length){console.error(errors.join('\n'));process.exitCode=1;}
