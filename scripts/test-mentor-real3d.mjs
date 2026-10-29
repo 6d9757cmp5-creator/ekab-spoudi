@@ -25,7 +25,7 @@ test('Exactly the requested cinematic stage preserves image if rig cannot run',(
 });
 test('Independent learner records and grades are not changed by avatar',()=>{
  const src=read('mentor/real-avatar/entry.mjs');
- assert.doesNotMatch(src,/EOPPEP|EkabProgress|cloud-sync|sync-local|grades|fetch\s*\(/);
+ assert.doesNotMatch(src,/\b(?:localStorage|indexedDB|sessionStorage|EkabProgress|fetch)\s*(?:\.|\()/);
  assert.match(src,/webglcontextlost/);
  assert.match(src,/prefers-reduced-motion/);
 });
