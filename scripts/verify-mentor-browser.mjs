@@ -35,7 +35,7 @@ try{
   await page.goto(url,{waitUntil:'networkidle'});
   await page.locator('#status').waitFor();
   await page.waitForFunction(()=>document.getElementById('status').textContent.includes('έτοιμο'));
-  assert.equal(await page.title(),'MENTOR OS · Εργαστήριο αποστολών (δοκιμή)');
+  assert.equal(await page.title(),'MENTOR · Εργαστήριο αποστολών (δοκιμή)');
   assert.equal(await page.locator('#phase').isVisible(),false);
   await page.getByRole('button',{name:/Δύσπνοια σε οικία/}).click();
   await page.waitForFunction(()=>document.getElementById('case-title').textContent==='Δύσπνοια σε οικία');
