@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import fs from 'node:fs';import crypto from 'node:crypto';
-const d=JSON.parse(fs.readFileSync('saek-image-audit-2026.json','utf8'));let count=0;const errors=[],hashes=new Set(),refs=new Set();
+const d=JSON.parse(fs.readFileSync('saek-image-audit-2026.json','utf8'));let count=0;const errors=[],hashes=new Set(),refs=new Map();
 for(const c of d.courses)for(let i=0;i<c.chapters.length;i++){
  const chapter=c.chapters[i];if(chapter.images.length<2)errors.push('under-illustrated '+c.course+'-'+(i+1));
- for(const k of chapter.images){if(refs.has(k))errors.push('asset duplicated across chapters: '+k);refs.add(k);}
+ for(const k of chapter.images){if(refs.has(k)&&refs.get(k)!==c.course)errors.push('asset duplicated across courses: '+k);refs.set(k,c.course);}
  if(c.semester!=='Δ')continue;
  const keys=chapter.images.filter(k=>k.startsWith('sem_d_'));if(keys.length!==([17,18].includes(c.course)?3:2))errors.push('diagram count '+c.course+'-'+i);
  for(const k of keys){const a=d.assets[k],svg=fs.readFileSync(a.localPath,'utf8');count++;

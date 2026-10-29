@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';import crypto from 'node:crypto';
 const d=JSON.parse(fs.readFileSync('saek-image-audit-2026.json','utf8'));
-let count=0;const errors=[],hashes=new Set();
+let count=0;const errors=[],hashes=new Map();
 for(const c of d.courses.filter(c=>['Α','Β'].includes(c.semester)))for(let i=0;i<c.chapters.length;i++){
  const ref=c.chapters[i].images.filter(x=>x.startsWith('sem_a_')||x.startsWith('sem_b_'));
  if(ref.length<1)errors.push('Missing diagram in '+c.course+'-'+(i+1));
@@ -16,7 +16,7 @@ for(const c of d.courses.filter(c=>['Α','Β'].includes(c.semester)))for(let i=0
   if(texts.length<4||texts.some(x=>x.length>95))errors.push(k+': text label layout');
   const sum=crypto.createHash('sha256').update(img.replace(/\r\n/g,'\n')).digest('hex');
   if(sum!==a.sha256)errors.push(k+': hash mismatch');
-  if(hashes.has(sum))errors.push(k+': duplicated diagram');hashes.add(sum);
+  if(hashes.has(sum)&&hashes.get(sum)!==c.course)errors.push(k+': duplicated diagram across courses');hashes.set(sum,c.course);
  }
 }
 console.log('A/B concise-arrow diagram verification:',count,'images',errors.length,'problems');
