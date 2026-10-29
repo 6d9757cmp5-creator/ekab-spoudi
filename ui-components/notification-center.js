@@ -21,6 +21,7 @@ function item(id,kind,title,body){
  const old=entries.find(x=>x.id===id);
  if(old){
   const wasResolved=old.resolved;
+  if(!wasResolved&&old.title===title&&old.body===body)return;
   old.title=title;old.body=body;old.resolved=false;
   if(wasResolved){old.read=false;old.at=Date.now();}
  }else entries.unshift({id,kind,title,body,at:Date.now(),read:false,resolved:false});
@@ -136,7 +137,7 @@ async function checkUpdates(){
   if(!/^\d+\.\d+\.\d+$/.test(version||''))return;
   if(semverNewer(version,current)){
    item('update:'+version,'update','Διαθέσιμη νέα έκδοση','Έκδοση v'+version+' · Μπορείς να την εγκαταστήσεις όταν είσαι έτοιμος.');
-  }else for(const x of entries.filter(x=>x.kind==='update'&&!x.resolved))resolve(x.id);
+  }else for(const x of entries.filter(x=>/^update:\d+\.\d+\.\d+$/.test(x.id)&&!x.resolved))resolve(x.id);
  }catch{/* no network: retain local alerts without inventing a successful check */}
 }
 function monitorUpdateBanner(){
@@ -174,6 +175,7 @@ function dueCount(){
 function checkDue(){
  const n=dueCount();if(n===null)return;
  const id='review:'+today();
+ for(const old of entries.filter(x=>x.kind==='review'&&x.id!==id&&!x.resolved))resolve(old.id);
  if(n>0)item(id,'review','Επαναλήψεις ΕΟΠΠΕΠ για σήμερα',n+' ερωτήσεις είναι προγραμματισμένες για επανάληψη.');
  else resolve(id);
 }
