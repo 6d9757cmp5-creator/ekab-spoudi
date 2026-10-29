@@ -232,3 +232,13 @@
 
 **Commits μητρώων:** [ΣΑΕΚ `95d4be8`](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/95d4be83b7fef74aab3bd1ae1286ac0651d58a21), [ΕΟΠΠΕΠ `f3c2672`](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/f3c2672a99f0925bbb51f49ba0f935d51862cc5e). **Δεν έγινε merge ή deployment.**
 
+## Five EOPPEP fixes merged via PR #105 — 2026-10-29
+
+The five originally flagged educational issues EOP-A-002, EOP-B-047, EOP-B-094, EOP-B-181 and EOP-B-204 have been corrected in `official_questions.json` and synchronized with `eoppep-sos.json`. Their registry records have documented first-pass checks and correction status. The source inventory has been synchronized as well.
+
+The separate [PR #105](https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/105) passed all four CI workflows and was **merged into main** ([commit a99a9d0](https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/a99a9d0e6a61e4b8cf86df959acfbb21d2da5436)). PR #39 stays Draft and unmerged.
+
+Verified first-pass registry snapshot: SAEK **27/247**, EOPPEP **34/314**, total **61/561**. A new unrelated issue **EOP-A-028** remains open. Zero complete independent scientific approvals; owner approval remains distinct. A live deployment and device cache refresh were not separately verified.
+
+Official sources: [ERC/RCUK 2025 PLS](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines), [ERC/RCUK 2025 newborn](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth), [NICE NG217](https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures), [Open University respiration](https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801).
+
