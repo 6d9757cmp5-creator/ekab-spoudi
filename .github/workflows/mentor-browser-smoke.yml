@@ -11,6 +11,9 @@ on:
       - 'mentor-oral.js'
       - 'mentor-ecg.html'
       - 'mentor-ecg.js'
+      - 'ui-tools/mentor-roadmap.html'
+      - 'ui-tools/mentor-roadmap.js'
+      - 'scripts/verify-mentor-roadmap.test.mjs'
       - 'mentor-library.html'
       - 'mentor-library.js'
       - 'mentor/**'
@@ -37,6 +40,8 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Verify truthful Mentor capability index
+        run: node --test scripts/verify-mentor-roadmap.test.mjs
       - name: Execute mobile browser scenarios, persistent memory and no legacy writes
         env:
           MENTOR_TEST_BROWSER: ${{ matrix.engine }}
