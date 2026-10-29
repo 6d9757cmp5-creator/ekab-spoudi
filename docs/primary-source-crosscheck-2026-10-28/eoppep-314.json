@@ -5042,7 +5042,47 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Αλκοόλ μειώνει κρίση, προσοχή, συντονισμό και αυξάνει κίνδυνο τροχαίου.",
+          "Δεν υπάρχει εγγυημένα ακίνδυνη ποσότητα για οδήγηση."
+        ],
+        "sources": [
+          "https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries/",
+          "https://www.who.int/initiatives/SAFER/drink-driving"
+        ],
+        "finding": "WHO τεκμηριώνει αύξηση κινδύνου ήδη σε χαμηλά BAC και επιδείνωση με μεγαλύτερη συγκέντρωση. Η ειδική αναφορά σε «περιφερική όραση» δεν τεκμηριώνεται από μόνη της με τη γενική σελίδα WHO· χρειάζεται στοχευμένη πηγή.",
+        "limits": "Εκκρεμούν πιστή αντιπαραβολή με νεότερη επίσημη εκφώνηση/τράπεζα ΕΟΠΠΕΠ, ελληνικά πρωτόκολλα όπου εφαρμόζονται και δεύτερος ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Αλκοόλ μειώνει κρίση, προσοχή, συντονισμό και αυξάνει κίνδυνο τροχαίου.",
+          "Δεν υπάρχει εγγυημένα ακίνδυνη ποσότητα για οδήγηση."
+        ],
+        "sources": [
+          "https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries/",
+          "https://www.who.int/initiatives/SAFER/drink-driving"
+        ],
+        "verdict": "targeted_review_with_documented_limits",
+        "finding": "WHO τεκμηριώνει αύξηση κινδύνου ήδη σε χαμηλά BAC και επιδείνωση με μεγαλύτερη συγκέντρωση. Η ειδική αναφορά σε «περιφερική όραση» δεν τεκμηριώνεται από μόνη της με τη γενική σελίδα WHO· χρειάζεται στοχευμένη πηγή.",
+        "recommendation": "Διατήρηση βασικού μηνύματος αποφυγής οδήγησης μετά από αλκοόλ· προσθήκη ειδικής πηγής για περιφερική όραση ή αφαίρεση της εξειδίκευσης.",
+        "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-002",
@@ -5056,7 +5096,45 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Ελάττωση ταχύτητας πριν από στροφή, προσαρμογή στην ορατότητα/οδόστρωμα και τήρηση λωρίδας.",
+          "Αποφυγή απότομων χειρισμών ως γενική αρχή, χωρίς να αποκλείεται αναγκαίο φρενάρισμα για αποφυγή σύγκρουσης."
+        ],
+        "sources": [
+          "https://www.gov.uk/guidance/the-highway-code/general-rules-techniques-and-advice-for-all-drivers-and-riders-103-to-158"
+        ],
+        "finding": "UK Highway Code §154 υποστηρίζει μείωση ταχύτητας πριν από στροφές, §146 προσαρμογή σε ορατότητα/συνθήκες. Ο σύνδεσμος ελληνικού κοινοβουλίου της αποθηκευμένης απάντησης είναι γενική αναζήτηση και δεν αποτελεί ακριβή τεκμηρίωση.",
+        "limits": "Εκκρεμούν πιστή αντιπαραβολή με νεότερη επίσημη εκφώνηση/τράπεζα ΕΟΠΠΕΠ, ελληνικά πρωτόκολλα όπου εφαρμόζονται και δεύτερος ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Ελάττωση ταχύτητας πριν από στροφή, προσαρμογή στην ορατότητα/οδόστρωμα και τήρηση λωρίδας.",
+          "Αποφυγή απότομων χειρισμών ως γενική αρχή, χωρίς να αποκλείεται αναγκαίο φρενάρισμα για αποφυγή σύγκρουσης."
+        ],
+        "sources": [
+          "https://www.gov.uk/guidance/the-highway-code/general-rules-techniques-and-advice-for-all-drivers-and-riders-103-to-158"
+        ],
+        "verdict": "targeted_review_with_documented_limits",
+        "finding": "UK Highway Code §154 υποστηρίζει μείωση ταχύτητας πριν από στροφές, §146 προσαρμογή σε ορατότητα/συνθήκες. Ο σύνδεσμος ελληνικού κοινοβουλίου της αποθηκευμένης απάντησης είναι γενική αναζήτηση και δεν αποτελεί ακριβή τεκμηρίωση.",
+        "recommendation": "Αντικατάσταση γενικής παραπομπής με συγκεκριμένο άρθρο ισχύοντος ελληνικού ΚΟΚ/ΦΕΚ και διευκρίνιση ότι επείγον φρενάρισμα μπορεί να είναι αναγκαίο.",
+        "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-003",
@@ -5070,7 +5148,47 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Τηλεματική υγείας: ψηφιακά πιεσόμετρα, οξύμετρα, μετρητές γλυκόζης, συσκευές καρδιακού ρυθμού.",
+          "Ηλεκτροκαρδιογράφος/monitor και βίντεο μπορεί να συμμετέχουν σε τηλεϊατρική, αλλά απαιτούν κατάλληλη διασύνδεση και προστασία δεδομένων."
+        ],
+        "sources": [
+          "https://telehealth.hhs.gov/providers/getting-started",
+          "https://telehealth.hhs.gov/providers/best-practice-guides/telehealth-and-remote-patient-monitoring/getting-started"
+        ],
+        "finding": "HHS υποστηρίζει ειδικά πιεσόμετρα, γλυκομετρητές, οξύμετρα και παρακολούθηση καρδιακού ρυθμού. Δεν αποδεικνύει ότι κάθε γενικό ΗΚΓ ή κάθε σύστημα βίντεο είναι πιστοποιημένο/κατάλληλο ιατροτεχνολογικό προϊόν για συγκεκριμένη χρήση.",
+        "limits": "Εκκρεμούν πιστή αντιπαραβολή με νεότερη επίσημη εκφώνηση/τράπεζα ΕΟΠΠΕΠ, ελληνικά πρωτόκολλα όπου εφαρμόζονται και δεύτερος ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Τηλεματική υγείας: ψηφιακά πιεσόμετρα, οξύμετρα, μετρητές γλυκόζης, συσκευές καρδιακού ρυθμού.",
+          "Ηλεκτροκαρδιογράφος/monitor και βίντεο μπορεί να συμμετέχουν σε τηλεϊατρική, αλλά απαιτούν κατάλληλη διασύνδεση και προστασία δεδομένων."
+        ],
+        "sources": [
+          "https://telehealth.hhs.gov/providers/getting-started",
+          "https://telehealth.hhs.gov/providers/best-practice-guides/telehealth-and-remote-patient-monitoring/getting-started"
+        ],
+        "verdict": "targeted_review_with_documented_limits",
+        "finding": "HHS υποστηρίζει ειδικά πιεσόμετρα, γλυκομετρητές, οξύμετρα και παρακολούθηση καρδιακού ρυθμού. Δεν αποδεικνύει ότι κάθε γενικό ΗΚΓ ή κάθε σύστημα βίντεο είναι πιστοποιημένο/κατάλληλο ιατροτεχνολογικό προϊόν για συγκεκριμένη χρήση.",
+        "recommendation": "Χρειάζεται ευρωπαϊκή MDR/CE, GDPR και εξειδικευμένη πηγή για τηλεμετάδοση ΗΚΓ/διαλειτουργικότητα· διαχωρισμός τηλεϊατρίας από απλή τηλεδιάσκεψη.",
+        "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-004",
@@ -5084,7 +5202,47 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Στην VF/άσφυγμη VT η ΚΑΡΠΑ αρχίζει άμεσα, ακολουθεί γρήγορη ανάλυση ρυθμού και απινίδωση.",
+          "Μετά τον παλμό συνεχίζεται αμέσως ΚΑΡΠΑ για περίπου 2 λεπτά, φάρμακα κατά τον αλγόριθμο μετά τον τρίτο παλμό σε shockable ρυθμό."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf"
+        ],
+        "finding": "Η αποθηκευμένη απάντηση ορθώς εξηγεί ότι ο αλγόριθμος είναι κυκλικός και η εκφώνηση ζητά παραπλανητικά μία εφάπαξ σειρά τεσσάρων ενεργειών. Η 2025 RCUK απαιτεί ελάχιστη διακοπή συμπιέσεων και άμεση απινίδωση για shockable ρυθμό.",
+        "limits": "Εκκρεμούν πιστή αντιπαραβολή με νεότερη επίσημη εκφώνηση/τράπεζα ΕΟΠΠΕΠ, ελληνικά πρωτόκολλα όπου εφαρμόζονται και δεύτερος ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Στην VF/άσφυγμη VT η ΚΑΡΠΑ αρχίζει άμεσα, ακολουθεί γρήγορη ανάλυση ρυθμού και απινίδωση.",
+          "Μετά τον παλμό συνεχίζεται αμέσως ΚΑΡΠΑ για περίπου 2 λεπτά, φάρμακα κατά τον αλγόριθμο μετά τον τρίτο παλμό σε shockable ρυθμό."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf"
+        ],
+        "verdict": "targeted_review_with_documented_limits",
+        "finding": "Η αποθηκευμένη απάντηση ορθώς εξηγεί ότι ο αλγόριθμος είναι κυκλικός και η εκφώνηση ζητά παραπλανητικά μία εφάπαξ σειρά τεσσάρων ενεργειών. Η 2025 RCUK απαιτεί ελάχιστη διακοπή συμπιέσεων και άμεση απινίδωση για shockable ρυθμό.",
+        "recommendation": "Σήμανση ιστορικής/αμφίσημης εξεταστικής διατύπωσης. Σαφής διάκριση εξέτασης από πραγματικό ALS, με εφαρμογή μόνο από εκπαιδευμένο/εξουσιοδοτημένο προσωπικό.",
+        "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-005",
@@ -5098,7 +5256,47 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Ενήλικας: αρχική διφασική απινίδωση τουλάχιστον 150 J για συνήθεις κυματομορφές, pulsed biphasic 130–150 J, ανά συσκευή.",
+          "Παιδί: αρχικά 4 J/kg κατά RCUK 2025, με ειδικά όρια και κλιμάκωση για ανθεκτικό VF/pVT."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/cy/node/36439"
+        ],
+        "finding": "Οι βασικές τιμές της απάντησης συμφωνούν με RCUK 2025. Η φράση «ανώτατο όριο ανά ηλικία/μηχάνημα» είναι ασαφής: η παιδιατρική οδηγία αναφέρει να μην υπερβαίνονται οι συνιστώμενες δόσεις ενηλίκων στις αρχικές απινιδώσεις και κλιμάκωση μέχρι 8 J/kg (μέγιστο 360 J) σε ανθεκτικό VF/pVT.",
+        "limits": "Εκκρεμούν πιστή αντιπαραβολή με νεότερη επίσημη εκφώνηση/τράπεζα ΕΟΠΠΕΠ, ελληνικά πρωτόκολλα όπου εφαρμόζονται και δεύτερος ανεξάρτητος επιστημονικός έλεγχος.",
+        "fullScientificApproval": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "scope": "complete_stored_educational_answer_and_targeted_external_passages",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionWordingMatched": null,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Ενήλικας: αρχική διφασική απινίδωση τουλάχιστον 150 J για συνήθεις κυματομορφές, pulsed biphasic 130–150 J, ανά συσκευή.",
+          "Παιδί: αρχικά 4 J/kg κατά RCUK 2025, με ειδικά όρια και κλιμάκωση για ανθεκτικό VF/pVT."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/cy/node/36439"
+        ],
+        "verdict": "targeted_review_with_documented_limits",
+        "finding": "Οι βασικές τιμές της απάντησης συμφωνούν με RCUK 2025. Η φράση «ανώτατο όριο ανά ηλικία/μηχάνημα» είναι ασαφής: η παιδιατρική οδηγία αναφέρει να μην υπερβαίνονται οι συνιστώμενες δόσεις ενηλίκων στις αρχικές απινιδώσεις και κλιμάκωση μέχρι 8 J/kg (μέγιστο 360 J) σε ανθεκτικό VF/pVT.",
+        "recommendation": "Εξειδίκευση ανώτατων ορίων, κυματομορφής, ρυθμίσεων κατασκευαστή και εφαρμοστέου ελληνικού ALS/PALS· όχι γενική σταθερή δόση για όλες τις ηλικίες.",
+        "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
+        "independentScientificSignoff": false,
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-006",
