@@ -242,3 +242,28 @@ Verified first-pass registry snapshot: SAEK **27/247**, EOPPEP **34/314**, total
 
 Official sources: [ERC/RCUK 2025 PLS](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines), [ERC/RCUK 2025 newborn](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth), [NICE NG217](https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures), [Open University respiration](https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801).
 
+
+
+## Στοχευμένη παρτίδα πρώτου γύρου — 29/10/2026, 02:17+ (Ελλάδα)
+
+Αναγνώστηκε **ολόκληρο** το περιεχόμενο και οι απαντήσεις αυτοελέγχου των `saek-course-03.html#lesson-1..5` (blob `2de0d1d8f83dd761f80d11b883f654222c35879f`), καθώς και οι **πλήρεις αρχικές αποθηκευμένες απαντήσεις** `EOP-A-031..035` στο `official_questions.json` (blob `1d356fa2aa8bc43b4690373dfacb30314cefcfed`). Ελέγχθηκαν συγκεκριμένοι ισχυρισμοί με τις παρακάτω εξειδικευμένες πηγές, όχι με γενική απογραφή.
+
+### ΣΑΕΚ — 5 νέα ατομικά targetedReview
+
+- **SAEK-03-01:** γενικός ρόλος διασώστη/συντονισμός και επαγγελματικά όρια. Πηγές: [ΕΚΑΒ σκοπός](https://www.ekab.gr/), [ΣΑΕΚ ΕΚΑΒ](https://www.ekab.gr/ekpedefsi/iek-ekav/), [Οδηγός 2024](https://www.ekab.gr/files/2024/10/%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%9A%CE%B1%CF%84%CE%AC%CF%81%CF%84%CE%B9%CF%83%CE%B7%CF%82_%CE%94%CE%B9%CE%B1%CF%83%CF%8E%CF%83%CF%84%CE%B7%CF%82-%CE%A0%CE%BB%CE%AE%CF%81%CF%89%CE%BC%CE%B1_%CE%91%CF%83%CE%B8%CE%B5%CE%BD%CE%BF%CF%86%CF%8C%CF%81%CE%BF%CF%85-%CE%A4%CE%B5%CE%BB%CE%B9%CE%BA%CF%8C%CF%82-7.10.2024.pdf). **Κρίσιμη εκκρεμότητα:** καμία από αυτές δεν ορίζει επακριβώς επιτρεπόμενες πράξεις/φάρμακα διασώστη.
+- **SAEK-03-02:** αξιοπρέπεια, εμπιστευτικότητα, αντικειμενική καταγραφή. Πηγές: [WHO Patient safety rights charter 2024](https://www.who.int/publications/i/item/9789240093249), [ΓΚΠΔ 2016/679, ιδίως άρθρο 9](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679). **Όριο:** η κλινική συναίνεση δεν είναι αυτομάτως η νομική βάση επεξεργασίας δεδομένων.
+- **SAEK-03-03:** ασφάλεια πληρώματος, ΜΑΠ, βιολογικοί/οδικοί/εργονομικοί/ψυχοκοινωνικοί κίνδυνοι. Πηγές: [WHO Occupational hazards](https://www.who.int/tools/occupational-hazards-in-health-sector), [WHO Health Worker Safety Charter](https://www.who.int/news/item/17-09-2020-keep-health-workers-safe-to-keep-patients-safe-who). **Όριο:** δεν επαληθεύτηκε ειδικό επιχειρησιακό πρωτόκολλο ΕΚΑΒ.
+- **SAEK-03-04:** αλυσίδα κλήσης–διαλογής–ανταπόκρισης–διακομιδής–παράδοσης. Πηγές: [ΕΚΑΒ](https://www.ekab.gr/), [WHO Triage](https://www.who.int/tools/triage). **Όριο:** ο WHO IITT δεν είναι κανονισμός αποστολής ασθενοφόρων.
+- **SAEK-03-05:** ενημέρωση, συναίνεση, ικανότητα απόφασης, εξαιρέσεις. Πηγές: [ΦΕΚ ν. 3418/2005 άρθρα 11–12](https://eu-healthcare.eopyy.gov.gr/wp-content/uploads/2021/05/%CE%BD.-3418-2005.pdf), [ΕΛΙΝΥΑΕ](https://www.elinyae.gr/ethniki-nomothesia/n-34182005-fek-287a-28112005). **Κρίσιμη εκκρεμότητα:** ο νόμος αφορά άμεσα ιατρούς· απαιτείται χωριστός έλεγχος εφαρμογής σε διασώστες και άρνηση διακομιδής.
+
+### ΕΟΠΠΕΠ — 5 νέες πλήρεις αποθηκευμένες απαντήσεις
+
+- **EOP-A-031:** τέσσερις ιστοί και κύριος ιστός νωτιαίου μυελού/οστού/μυός/ήπατος. [OpenStax §4.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/4-1-types-of-tissues), [NCBI Liver development](https://www.ncbi.nlm.nih.gov/books/NBK27068/). Συμβατό ως εκπαιδευτική συντόμευση, το ήπαρ περιλαμβάνει πολλούς ιστούς.
+- **EOP-A-032:** υπερκαπνία, υποξαιμία, υποξία. [NCBI Nursing Fundamentals — Oxygenation](https://www.ncbi.nlm.nih.gov/books/NBK610832/), [NCBI Health Alterations](https://www.ncbi.nlm.nih.gov/books/NBK613070/). Ορθές βασικές διακρίσεις, ακριβέστερη υποξαιμία = χαμηλή αρτηριακή οξυγόνωση/PaO₂.
+- **EOP-A-033:** ωμική ζώνη = κλείδα και ωμοπλάτη. [OpenStax §8.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/8-1-the-pectoral-girdle). Συμβατό.
+- **EOP-A-034:** γόνατο: μηροκνημιαία/μηροεπιγονατιδική, μηνίσκοι, χιαστοί, πλάγιοι σύνδεσμοι. [OpenStax §9.6](https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints). Συμβατό ως βασική απάντηση, όχι εξαντλητική ανατομία.
+- **EOP-A-035:** πηχεοκαρπική, κερκίδα/δίσκος, σκαφοειδές/μηνοειδές/πυραμοειδές, όχι άμεση άρθρωση ωλένης. [OpenStax §8.2](https://openstax.org/books/anatomy-and-physiology-2e/pages/8-2-bones-of-the-upper-limb). Συμβατό.
+
+**Επανακαταμέτρηση μητρώων:** πριν την παρτίδα υπήρχαν **27 ΣΑΕΚ** και **34 ΕΟΠΠΕΠ** εγγραφές με `targetedReview` (30 Α και 4 Β). Η προηγούμενη αναφορά **29 ΕΟΠΠΕΠ** δεν συμφωνούσε με τα πραγματικά πεδία μητρώου και δεν πρέπει να επαναληφθεί ως καταμέτρηση. Μετά την προσθήκη: **32/247 ΣΑΕΚ**, **39/314 ΕΟΠΠΕΠ**, **71/561 εγγραφές με καταχωρισμένο στοχευμένο έλεγχο**, από τις οποίες **10 νέες στην παρούσα παρτίδα**. Οι 5 επιπλέον προϋπάρχουσες εγγραφές ΕΟΠΠΕΠ δεν είναι νέοι έλεγχοι αυτής της εκτέλεσης. **0/561 πλήρεις ανεξάρτητες επιστημονικές εγκρίσεις.**
+
+**Όρια:** Δεν έγινε νέα αντιπαραβολή των 5 εκφωνήσεων με την τελευταία επίσημη έκδοση θεμάτων ή επίσημο λυσάρι ΕΟΠΠΕΠ. Η ιστορική τράπεζα μπορεί να διαφέρει. Οι πηγές OpenStax/NCBI είναι επιστημονικές εκπαιδευτικές, όχι επίσημη πιστοποίηση. Υπάρχουν προηγούμενα εκκρεμή ειδικά ζητήματα (EOP-A-028 και οι κωδικοί B), τα οποία **δεν κλείνουν** με αυτή την παρτίδα. Η σειρά παραμένει αυστηρά **πρώτος γύρος 561/561 → μετά δεύτερος ανεξάρτητος πλήρης γύρος**. Δεν έγινε αλλαγή στην παραγωγική εφαρμογή.
