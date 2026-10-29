@@ -3,6 +3,19 @@
 'use strict';
 if(window.__ekabGlobalToolsLoaded)return;
 window.__ekabGlobalToolsLoaded=true;
+/* Shared notification UI on every page already loading the common utilities. */
+const ekabToolRoot=new URL('./',document.currentScript?.src||document.baseURI);
+if(!document.querySelector('[data-ekab-notice-css]')){
+ const css=document.createElement('link');css.rel='stylesheet';
+ css.href=new URL('ui-components/notification-center.css?v=1',ekabToolRoot).href;
+ css.dataset.ekabNoticeCss='1';document.head.append(css);
+}
+if(!document.querySelector('[data-ekab-notice-js]')){
+ const script=document.createElement('script');
+ script.src=new URL('ui-components/notification-center.js?v=1',ekabToolRoot).href;
+ script.dataset.ekabNoticeJs='1';script.defer=true;document.head.append(script);
+}
+
 const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3').replace(/₄/g,'4').replace(/µ/g,'μ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ').trim();
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
