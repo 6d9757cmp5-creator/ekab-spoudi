@@ -576,3 +576,16 @@ Official sources: [ERC/RCUK 2025 PLS](https://www.resus.org.uk/professional-libr
 - **SAEK-11-05**: σωστό blood pressure = αρτηριακή πίεση. [NICE CG50](https://www.nice.org.uk/guidance/CG50/chapter/recommendations) τεκμηριώνει HR, RR, systolic BP, SpO₂, temperature **και level of consciousness**, που αξίζει να προστεθεί στο λεξιλόγιο.
 
 **Όρια:** UK/WHO πηγές δεν πιστοποιούν ελληνικά πρωτόκολλα, ούτε υπάρχει ανθρώπινη ανεξάρτητη επιστημονική υπογραφή. Τα συγκεκριμένα findings δεν είναι τελική έγκριση. Το `official_questions.json` δεν αναγνώστηκε πλήρως σε αυτή την παρτίδα· **0 νέες ΕΟΠΠΕΠ**. Καταμέτρηση μετά την καταχώριση: **125/247 ΣΑΕΚ**, **114/314 ΕΟΠΠΕΠ**, **239/561 (42,6%)**, **322** εκκρεμείς αρχικοί στοχευμένοι έλεγχοι. ΕΟΠΠΕΠ με `fullAnswerReview.fullStoredAnswerRead`: **78/314**. **0/561** ανεξάρτητες επιστημονικές εγκρίσεις· δεύτερος γύρος δεν ξεκίνησε. PR Draft/unmerged.
+
+
+## Στοχευμένη παρτίδα 29/10/2026, 22:12 Ελλάδας — SAEK-11-06 έως SAEK-11-10
+
+Διαβάστηκαν ολόκληρα τα πέντε κεφάλαια από το `saek-course-11.html` (main blob `a699671d8a8c56c051bd09fb4b286f4c14765f7c`) και οι ενδεικτικές απαντήσεις αυτοελέγχου. Πραγματοποιήθηκε στοχευμένη σύγκριση με RCUK 2025, WHO, AHRQ, NHS England 2025 και GOV.UK. Πηγές, ευρήματα και όρια αποθηκεύτηκαν ανά ID στο `saek-11-20.json`.
+
+- **SAEK-11-06**: ventilation = αερισμός (ορθό)· να μην εξισώνεται με oxygenation, ούτε να δηλώνεται «low oxygen» χωρίς μέτρηση ([RCUK First Aid 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines)).
+- **SAEK-11-07**: splint = νάρθηκας (ορθό)· tourniquet δεν αποτελεί γενική ένδειξη για κάθε αιμορραγία ([RCUK First Aid 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines)).
+- **SAEK-11-08**: handover = κλινική παράδοση ασθενούς (ορθό)· SBAR ως πρόταση δομημένης επικοινωνίας, όχι αποδεδειγμένο μοναδικό SOP ΕΚΑΒ ([WHO](https://tdr.who.int/home/our-work/global-engagement/patient-safety-solution-communication-during-patient-handovers)).
+- **SAEK-11-09**: I feel dizzy = νιώθω ζάλη (ορθό), αλλά απαιτείται διευκρίνιση νοήματος· επαλήθευση κατανόησης ([AHRQ Teach-Back](https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/teachback.html)).
+- **SAEK-11-10**: interpreter = διερμηνέας (ορθό)· επαγγελματική διερμηνεία όπου εφικτή, χωρίς εξίσωση γλωσσικού εμποδίου με έλλειψη ικανότητας αποφάσεων ([NHS England 2025](https://www.england.nhs.uk/long-read/improvement-framework-community-language-translation-and-interpreting-services/)).
+
+**Μετρικές μετά την παρτίδα:** ΣΑΕΚ **130/247**, ΕΟΠΠΕΠ **114/314**, σύνολο **244/561 (43,5%)**, απομένουν **317** αρχικοί στοχευμένοι έλεγχοι. ΕΟΠΠΕΠ με καταχωρισμένη πλήρη ανάγνωση αρχικής αποθηκευμένης απάντησης: **78/314**. **0/561 πλήρεις ανεξάρτητες επιστημονικές εγκρίσεις**· δεύτερος γύρος δεν ξεκίνησε. **Δεν τροποποιήθηκε παραγωγικό μάθημα, απάντηση, βαθμολόγηση ή πρόοδος**· μόνο μητρώο και REPORT. Εκκρεμούν ελληνικά SOP, επικύρωση τράπεζας ΕΟΠΠΕΠ και ανθρώπινη κλινική αξιολόγηση.
