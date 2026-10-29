@@ -3088,7 +3088,50 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Το αποθηκευμένο κείμενο αναφέρει ανάσπαση ST στις V1–V4 για πρόσθιο STEMI",
+          "Η βιβλιογραφία διακρίνει πρόσθιες V3–V4, διαφραγματικές V1–V2 και προσθιοδιαφραγματικό V1–V4",
+          "Αμοιβαίες κατασπάσεις μπορεί να απουσιάζουν· το ΗΚΓ δεν ερμηνεύεται απομονωμένα"
+        ],
+        "sources": [
+          "https://litfl.com/anterior-myocardial-infarction-ecg-library/",
+          "https://www.ecgbook.com/stemi/"
+        ],
+        "finding": "Βασική κατεύθυνση σωστή, αλλά V1–V4 περιγράφει ειδικότερα προσθιοδιαφραγματικό μοτίβο και όχι όλα τα πρόσθια εμφράγματα.",
+        "limits": "ΚΛΙΝΙΚΑ ΣΗΜΑΝΤΙΚΟ: η ερώτηση λέει «έμφραγμα», ενώ η απάντηση περιγράφει μόνο STEMI· NSTEMI/ισοδύναμα απόφραξης δεν καλύπτονται. Δεν έγινε πλήρης αντιπαραβολή με σύγχρονο επίσημο ACS guideline ούτε επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Το αποθηκευμένο κείμενο αναφέρει ανάσπαση ST στις V1–V4 για πρόσθιο STEMI",
+          "Η βιβλιογραφία διακρίνει πρόσθιες V3–V4, διαφραγματικές V1–V2 και προσθιοδιαφραγματικό V1–V4",
+          "Αμοιβαίες κατασπάσεις μπορεί να απουσιάζουν· το ΗΚΓ δεν ερμηνεύεται απομονωμένα"
+        ],
+        "sources": [
+          "https://litfl.com/anterior-myocardial-infarction-ecg-library/",
+          "https://www.ecgbook.com/stemi/"
+        ],
+        "findings": "Βασική κατεύθυνση σωστή, αλλά V1–V4 περιγράφει ειδικότερα προσθιοδιαφραγματικό μοτίβο και όχι όλα τα πρόσθια εμφράγματα.",
+        "limits": "ΚΛΙΝΙΚΑ ΣΗΜΑΝΤΙΚΟ: η ερώτηση λέει «έμφραγμα», ενώ η απάντηση περιγράφει μόνο STEMI· NSTEMI/ισοδύναμα απόφραξης δεν καλύπτονται. Δεν έγινε πλήρης αντιπαραβολή με σύγχρονο επίσημο ACS guideline ούτε επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-072",
@@ -3102,7 +3145,50 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Κατώτερο STEMI: ανάσπαση ST σε II, III, aVF",
+          "Αμοιβαία κατάσπαση κυρίως aVL, ενίοτε I, όχι υποχρεωτικά",
+          "Δεξιά κοιλιακή συμμετοχή μπορεί να απαιτεί δεξιές απαγωγές"
+        ],
+        "sources": [
+          "https://litfl.com/inferior-stemi-ecg-library/",
+          "https://www.ecgbook.com/stemi/"
+        ],
+        "finding": "Το τυπικό πρότυπο II/III/aVF και η ανάγκη διερεύνησης δεξιάς κοιλίας συμφωνούν με τις ειδικές εκπαιδευτικές πηγές.",
+        "limits": "Η εκφώνηση «έμφραγμα» είναι ευρύτερη του STEMI. Δεν τεκμηριώθηκαν επίσημα κριτήρια ανάσπασης ST, διαφορική διάγνωση ή τοπικό πρωτόκολλο ΕΚΑΒ.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Κατώτερο STEMI: ανάσπαση ST σε II, III, aVF",
+          "Αμοιβαία κατάσπαση κυρίως aVL, ενίοτε I, όχι υποχρεωτικά",
+          "Δεξιά κοιλιακή συμμετοχή μπορεί να απαιτεί δεξιές απαγωγές"
+        ],
+        "sources": [
+          "https://litfl.com/inferior-stemi-ecg-library/",
+          "https://www.ecgbook.com/stemi/"
+        ],
+        "findings": "Το τυπικό πρότυπο II/III/aVF και η ανάγκη διερεύνησης δεξιάς κοιλίας συμφωνούν με τις ειδικές εκπαιδευτικές πηγές.",
+        "limits": "Η εκφώνηση «έμφραγμα» είναι ευρύτερη του STEMI. Δεν τεκμηριώθηκαν επίσημα κριτήρια ανάσπασης ST, διαφορική διάγνωση ή τοπικό πρωτόκολλο ΕΚΑΒ.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-073",
@@ -3116,7 +3202,50 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Πλάγιο STEMI: ανάσπαση ST σε I, aVL, V5–V6 ανάλογα με την έκταση",
+          "Υψηλό πλάγιο πρότυπο κυρίως I/aVL, χαμηλό πλάγιο V5–V6",
+          "Η περιοχή ΗΚΓ δεν αντιστοιχεί απόλυτα σε μία στεφανιαία αρτηρία"
+        ],
+        "sources": [
+          "https://litfl.com/lateral-stemi-ecg-library/",
+          "https://www.ecgbook.com/stemi/"
+        ],
+        "finding": "Η βασική τοπογραφία συμφωνεί, αλλά η τωρινή παραπομπή σε γενικό PDF δεν είναι η πιο συγκεκριμένη· η σελίδα LITFL Lateral STEMI είναι ακριβέστερη.",
+        "limits": "Η διατύπωση «και/ή» δεν εξηγεί τα κριτήρια συνεχόμενων απαγωγών ή ελάχιστης ανάσπασης· η εκφώνηση καλύπτει έμφραγμα γενικά, όχι μόνο STEMI. Χρειάζεται επίσημη ACS guideline και λυσάρι.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Πλάγιο STEMI: ανάσπαση ST σε I, aVL, V5–V6 ανάλογα με την έκταση",
+          "Υψηλό πλάγιο πρότυπο κυρίως I/aVL, χαμηλό πλάγιο V5–V6",
+          "Η περιοχή ΗΚΓ δεν αντιστοιχεί απόλυτα σε μία στεφανιαία αρτηρία"
+        ],
+        "sources": [
+          "https://litfl.com/lateral-stemi-ecg-library/",
+          "https://www.ecgbook.com/stemi/"
+        ],
+        "findings": "Η βασική τοπογραφία συμφωνεί, αλλά η τωρινή παραπομπή σε γενικό PDF δεν είναι η πιο συγκεκριμένη· η σελίδα LITFL Lateral STEMI είναι ακριβέστερη.",
+        "limits": "Η διατύπωση «και/ή» δεν εξηγεί τα κριτήρια συνεχόμενων απαγωγών ή ελάχιστης ανάσπασης· η εκφώνηση καλύπτει έμφραγμα γενικά, όχι μόνο STEMI. Χρειάζεται επίσημη ACS guideline και λυσάρι.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-074",
@@ -3130,7 +3259,50 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "VF = χαοτική/ακανόνιστη δραστηριότητα χωρίς οργανωμένα QRS",
+          "VF είναι απινιδώσιμος ρυθμός καρδιακής ανακοπής",
+          "Πρέπει να διακρίνεται από artefact καταγραφής και από άλλους ρυθμούς"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf"
+        ],
+        "finding": "Η περιγραφή VF και η ταξινόμηση ως απινιδώσιμου ρυθμού συμφωνούν με τον επίσημο αλγόριθμο RCUK 2025.",
+        "limits": "Η αρχική γενική παραπομπή LITFL ECG Library δεν τεκμηριώνει επαρκώς την επιμέρους εγγραφή. Δεν ελέγχθηκαν όλα τα ECG mimics ούτε αρμοδιότητες/ελληνικό πρωτόκολλο απινίδωσης.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "VF = χαοτική/ακανόνιστη δραστηριότητα χωρίς οργανωμένα QRS",
+          "VF είναι απινιδώσιμος ρυθμός καρδιακής ανακοπής",
+          "Πρέπει να διακρίνεται από artefact καταγραφής και από άλλους ρυθμούς"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf"
+        ],
+        "findings": "Η περιγραφή VF και η ταξινόμηση ως απινιδώσιμου ρυθμού συμφωνούν με τον επίσημο αλγόριθμο RCUK 2025.",
+        "limits": "Η αρχική γενική παραπομπή LITFL ECG Library δεν τεκμηριώνει επαρκώς την επιμέρους εγγραφή. Δεν ελέγχθηκαν όλα τα ECG mimics ούτε αρμοδιότητες/ελληνικό πρωτόκολλο απινίδωσης.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-075",
@@ -3144,7 +3316,50 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_round_targeted_complete_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Asystole = απουσία οργανωμένης κοιλιακής ηλεκτρικής δραστηριότητας",
+          "Ο αλγόριθμος RCUK 2025 ταξινομεί την ασυστολία στους μη απινιδώσιμους ρυθμούς",
+          "Η αποθηκευμένη απάντηση ζητά έλεγχο καλωδίων/δεύτερης απαγωγής και διάκριση από λεπτή VF"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf"
+        ],
+        "finding": "Η βασική περιγραφή και μη απινιδώσιμη ταξινόμηση συμφωνούν με το RCUK 2025.",
+        "limits": "ΑΝΟΙΧΤΟ: ο ειδικός κανόνας «δεύτερη απαγωγή/καλώδια» δεν τεκμηριώθηκε επαρκώς από το συγκεκριμένο κείμενο του αλγορίθμου και χρειάζεται στοχευμένη πρωτογενής παραπομπή. Να μην εκληφθεί η λεπτή VF ως βεβαιωμένη ασυστολία.",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      },
+      "fullAnswerReview": {
+        "reviewedAt": "2026-10-29",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "comparedClaims": [
+          "Asystole = απουσία οργανωμένης κοιλιακής ηλεκτρικής δραστηριότητας",
+          "Ο αλγόριθμος RCUK 2025 ταξινομεί την ασυστολία στους μη απινιδώσιμους ρυθμούς",
+          "Η αποθηκευμένη απάντηση ζητά έλεγχο καλωδίων/δεύτερης απαγωγής και διάκριση από λεπτή VF"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf"
+        ],
+        "findings": "Η βασική περιγραφή και μη απινιδώσιμη ταξινόμηση συμφωνούν με το RCUK 2025.",
+        "limits": "ΑΝΟΙΧΤΟ: ο ειδικός κανόνας «δεύτερη απαγωγή/καλώδια» δεν τεκμηριώθηκε επαρκώς από το συγκεκριμένο κείμενο του αλγορίθμου και χρειάζεται στοχευμένη πρωτογενής παραπομπή. Να μην εκληφθεί η λεπτή VF ως βεβαιωμένη ασυστολία.",
+        "scope": "complete_stored_educational_answer_and_question_text",
+        "fullStoredAnswerRead": true,
+        "questionMatchedRegistry": true,
+        "currentEoppepVersionConfirmed": false,
+        "officialAnswerKeyConfirmed": false,
+        "verdict": "targeted_claims_checked_with_documented_limits",
+        "fullScientificApproval": false,
+        "independentScientificSignoff": false
+      }
     },
     {
       "id": "EOP-A-076",
