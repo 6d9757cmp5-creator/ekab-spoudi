@@ -1,5 +1,1888 @@
-Get-Content: 
-Line |
-   2 |  Get-Content -Raw saek-image-audit-2026.json
-     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | Cannot find path 'C:\Users\Ppdks\Documents\Codex\2026-10-28\referenced-chatgpt-conversation-this-is-an\saek-image-audit-2026.json' because it does not exist.
+Warning: truncated output (original token count: 315264)
+... 212479 bytes omitted ...
+
+{
+  "updated": "2026-10-29",
+  "scope": "20 μαθήματα · 4 εξάμηνα · 247 κεφάλαια",
+  "note": "Α΄ 71/71, Β΄ 73/73, Γ΄ 51/51, Δ΄ 52/52: και τα 247 κεφάλαια διαθέτουν ≥2 μη επαναλαμβανόμενες εικόνες. Δ΄ πρακτικές ενότητες διαθέτουν ≥3. Η νέα απεικόνιση Α, Β, Δ είναι σύντομα σύμβολα και βέλη, όχι φωτογραφίες ή ιατρικά ακριβή σχέδια. Επιστημονικός και χειροκίνητος οπτικός έλεγχος εκκρεμούν.",
+  "legend": {
+    "source-selected-pending-independent-scientific-review": "επιλεγμένη εικόνα με διαθέσιμη άδεια, δεν έχει ολοκληρωθεί ανεξάρτητος επιστημονικός έλεγχος",
+    "no-image-approved": "εκκρεμεί κατάλληλη εικόνα και άδεια"
+  },
+  "assets": {
+    "skeleton": {
+      "filename": "Human_skeleton_front_el.svg",
+      "title": "Ανθρώπινος σκελετός με ελληνικές επισημάνσεις",
+      "author": "Αντιγόνη, βασικό σχέδιο LadyofHats",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Human_skeleton_front_el.svg",
+      "caption": "Απεικόνιση βασικών οστών σε πρόσθια όψη. Δεν παρουσιάζει κάκωση.",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact local Commons SVG rasterized at native 435.7x841.9 and re-inspected. Several labels/leader lines are crowded and some right-edge text is clipped by the source drawing bounds; expanding the viewport did not improve the source artwork and was reverted. Detailed landmark validation and safe label-layout correction pending."
+      },
+      "localPath": "assets/education/commons-human-skeleton-front-el.svg",
+      "sha256": "657c210a65aa8916a06527b32eb1400987e71c2218d2e3b24c27a41879f8fc71",
+      "clinicalReview": "pending"
+    },
+    "spine": {
+      "filename": "Spinal_column_curvature-el.svg",
+      "title": "Μοίρες της σπονδυλικής στήλης",
+      "author": "Jmarchn",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Spinal_column_curvature-el.svg",
+      "caption": "Πλάγια ανατομική όψη της σπονδυλικής στήλης και των φυσιολογικών κυρτωμάτων. Δεν παρουσιάζει κάκωση.",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact local Commons SVG rendered at 858x1418 and inspected individually. The coccygeal label crossed the lower green region boundary; moved it upward into the unobstructed lower label area and verified full visibility with clearance from the boundary. Curvature-region anatomical validation, mobile/app-scale legibility and independent clinical review remain pending."
+      },
+      "localPath": "assets/education/commons-spinal-column-curvature-el.svg",
+      "sha256": "bba68257cf4873a26ecc24d86516b42ac521a65fbb7b8043a834fc009048a2dd",
+      "clinicalReview": "pending"
+    },
+    "heart": {
+      "filename": "heart-chambers-and-valves-el.svg",
+      "title": "Κοιλότητες και βαλβίδες καρδιάς",
+      "author": "Jmarchn",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Diagram_of_the_human_heart_el.svg",
+      "caption": "Ανατομική τομή καρδιάς με ελληνικούς όρους. Δεν απεικονίζει συγκεκριμένη καρδιακή νόσο.",
+      "localPath": "assets/education/heart-chambers-and-valves-el.svg",
+      "sha256": "a8ac5e574b93b57ee60ff5acf4c94cfb5c4ab9098eebb7c61326ae1b2a0edc2c",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact local SVG rasterized at 1113x1066 and re-inspected. The label “Αριστερός κόλπος” still intersects a downward flow arrow; no safe label position was verified without covering adjacent anatomy. Detailed valve/structure validation and independent scientific review remain pending."
+      },
+      "sourcePageCheckedFor": [
+        "Commons source title, creator, Greek labels and CC BY-SA 3.0 provenance",
+        "OpenStax §19.1 anatomy source for valve terminology"
+      ],
+      "sourcePage": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy",
+      "clinicalReview": "pending"
+    },
+    "upper": {
+      "filename": "Ανατομία-_ανώτερο_αναπνευστικό_σύστημα.png",
+      "title": "Ανώτερος αεραγωγός",
+      "author": "Open courses TEI Athinas",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Ανατομία-_ανώτερο_αναπνευστικό_σύστημα.png",
+      "caption": "Ανατομία ανώτερου αναπνευστικού. Δεν αποτελεί οδηγία χειρισμού αεραγωγού.",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact local Commons PNG inspected at intrinsic 634x470. Greek labels for nasal/oral cavity, pharynx, larynx and trachea are legible and point toward the upper airway; partial lungs are visible at the lower crop edge. No airway procedure is shown. Independent anatomical review pending."
+      },
+      "localPath": "assets/education/commons-upper-respiratory-anatomy.png",
+      "sha256": "a0ef31a7c131cb585119b6de71b98b4a697222626a4eef605f33e74cccd29fa0",
+      "clinicalReview": "pending"
+    },
+    "lower": {
+      "filename": "lower-respiratory-anatomy-el.svg",
+      "title": "Κατώτερο αναπνευστικό σύστημα",
+      "author": "ΕΚΑΒ Σπουδή — πρωτότυπο σχηματικό εκπαιδευτικό SVG",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs",
+      "caption": "Πρόσθιο σχηματικό διάγραμμα τραχείας, κύριων βρόγχων, πνευμόνων και διαφράγματος. Η μεγεθυμένη τομή δείχνει τα δύο πέταλα και τον χώρο της υπεζωκοτικής κοιλότητας. Δεν είναι υπό κλίμακα και δεν απεικονίζει θεραπεία.",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Current lower manifest path is the original local SVG; raster inspected at 1100x760. The separate legacy Commons PNG has no active source references outside the service-worker cache and was removed from the precache; the authored SVG remains precached. Lobe/lung/pleural captions and leaders checked. Independent anatomical review pending."
+      },
+      "localPath": "assets/education/lower-respiratory-anatomy-el.svg",
+      "sha256": "6d0eb4b4ae6be282e8951c92782a7c4f513ee1ae8e64af74f3947914cd2714e3",
+      "clinicalReview": "pending",
+      "originalArtwork": true,
+      "sourcePageCheckedFor": "OpenStax A&P 2e §22.2: lungs, lobes, pleura; used for concepts only, not copied artwork"
+    },
+    "respiratory": {
+      "filename": "Respiratory_system_complete_el.svg",
+      "title": "Αναπνευστικό σύστημα και πνευμονικές κυψελίδες",
+      "author": "Aris berd (μετάφραση), βασικό διάγραμμα LadyofHats",
+      "license": "CC0 1.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Respiratory_system_complete_el.svg",
+      "caption": "Συνολική ανατομική απεικόνιση ανώτερου και κατώτερου αναπνευστικού, πνευμόνων και κυψελίδων. Τα χρώματα των πνευμονικών αγγείων είναι συμβολικά και δεν κωδικοποιούν οξυγόνωση. Δεν αποτελεί διάγραμμα επείγουσας θεραπείας.",
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "Wikimedia Commons source page confirms Greek file, author Aris berd and CC0 1.0; preview/source content reviewed. OpenStax §22.2 supports airway/lung/alveolar structures, right/left lung lobes, diaphragm, and pulmonary artery/vein roles. It does not validate each line attachment or map colors in this artwork to oxygenation; added a note to avoid that inference."
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact local Commons SVG re-inspected at 970x1025 after expanding the viewBox. The side lung labels and lower lobe/bronchus captions that were clipped at the original canvas edge are now visible. Dense crossing leaders and fine anatomic interpretation still require review."
+      },
+      "localPath": "assets/education/commons-respiratory-system-complete-el.svg",
+      "sha256": "ab72add0fd8db7499330bcbc01a4d1bb25b2ff50af1da03ba46da3b4ccb330d9",
+      "additionalSources": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-2-the-lungs"
+      ]
+    },
+    "brain_medial": {
+      "filename": "Gray727_el.svg",
+      "title": "Έσω επιφάνεια αριστερού εγκεφαλικού ημισφαιρίου",
+      "author": "Henry Vandyke Carter · διανυσματική μετατροπή Mysid · ελληνική μετάφραση Badseed",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Gray727_el.svg",
+      "caption": "Έσω επιφάνεια του αριστερού εγκεφαλικού ημισφαιρίου με ελληνική ορολογία. Ιστορικός ανατομικός πίνακας Gray· δεν απεικονίζει μήνιγγες, εγκεφαλικό επεισόδιο ή θεραπευτική πράξη.",
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "file name",
+        "creator",
+        "Greek language",
+        "public-domain status"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact local Commons SVG rasterized at 1025x598 and re-inspected. Several labels are crowded against sulci and leader strokes at fit-to-image scale; no label repositioning attempted without neuroanatomical anchor verification. Landmark validation, zoom/mobile usability and independent review pending."
+      },
+      "localPath": "assets/education/commons-brain-medial-el.svg",
+      "sha256": "d4799c69f7b8b952804823cd198064f7674681c961a6e41a4e0d65391b6a875e"
+    },
+    "feedback": {
+      "filename": "temperature-feedback-el.svg",
+      "localPath": "assets/education/temperature-feedback-el.svg",
+      "title": "Θερμορρύθμιση και αρνητική ανατροφοδότηση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-5-homeostasis",
+      "caption": "Πρωτότυπο διάγραμμα του μηχανισμού αποβολής θερμότητας. Δεν αποτελεί οδηγία αντιμετώπισης υπερθερμίας.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "7aa9ad963f33cd0e5b4c33565ad82e5b6c2a235869d9ee59bbcf2aa8bf0f51de"
+    },
+    "membrane": {
+      "filename": "membrane-bilayer-el.svg",
+      "localPath": "assets/education/membrane-bilayer-el.svg",
+      "title": "Φωσφολιπιδική διπλοστιβάδα",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/3-1-the-cell-membrane",
+      "caption": "Σχηματική τομή φωσφολιπιδικής διπλοστιβάδας: δύο φύλλα, υδρόφιλες κεφαλές προς τα ενδοκυττάρια και εξωκυττάρια υγρά, υδρόφοβες ουρές αντικριστά στον πυρήνα. Πρωτεΐνες και χοληστερόλη παραλείπονται· όχι υπό κλίμακα.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "OpenStax §3.1 phospholipid bilayer orientation and hydrophilic/hydrophobic regions",
+        "Omitted membrane proteins and cholesterol explicitly noted",
+        "Browser render inspected at 1100×680 for layer direction and label overlap",
+        "Independent anatomy/physiology review still required"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Browser-reviewed at 1100×680. Redrew as two explicit phospholipid sheets with heads facing extracellular fluid/cytoplasm, opposing tails and labeled hydrophobic core. Labels and leader arrows checked for overlap; proteins and cholesterol intentionally omitted. Not independent scientific certification."
+      },
+      "sha256": "abae9482dade2a4468d8f19cf506c7b3661347653fcbabb4e47a88b0a3d68b93"
+    },
+    "gas_diffusion": {
+      "filename": "alveolar-diffusion-el.svg",
+      "localPath": "assets/education/alveolar-diffusion-el.svg",
+      "title": "Πνευμονική ανταλλαγή αερίων",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange",
+      "caption": "Σχηματική απόδοση της φυσιολογικής κατεύθυνσης διάχυσης O₂ και CO₂. Δεν είναι ανατομική τομή ούτε διάγραμμα οξυγονοθεραπείας.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "fd8c40b4c8b782372c055a74af1cf776d973c724f75e4370840d08a2feed6ffb"
+    },
+    "quadrants": {
+      "filename": "abdominal-quadrants-el.svg",
+      "localPath": "assets/education/abdominal-quadrants-el.svg",
+      "title": "Τεταρτημόρια κοιλιάς σε πρόσθια όψη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+      "caption": "Οι πλευρές αναφέρονται στον ασθενή. Σχηματικός χάρτης τεσσάρων τεταρτημορίων, όχι απεικόνιση οργάνων ή των εννέα περιοχών.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "scientific description; independently drawn, not copied from a source illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "SVG rendered and inspected for Greek text, layout and arrow direction; not independent scientific certification"
+      },
+      "sha256": "0cdc3db17a5e138fe7a6142106b96871263101c68e89d4e96b2cde1f55e2bfdb"
+    },
+    "digestive_passage": {
+      "filename": "digestive-passage-el.svg",
+      "localPath": "assets/education/digestive-passage-el.svg",
+      "title": "Πεπτικός σωλήνας και βοηθητικοί αδένες",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "caption": "Διάγραμμα συνδέσεων· όχι ανατομικές θέσεις ή πλήρης πέψη και απορρόφηση.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
+      },
+      "sha256": "63469e597e1ca259842f01e07819eb1aeefebf7cdd36b0a3442970c1ac42c84d"
+    },
+    "glucose_control": {
+      "filename": "glucose-control-el.svg",
+      "localPath": "assets/education/glucose-control-el.svg",
+      "title": "Αντίρροπη ρύθμιση της γλυκόζης",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-9-the-endocrine-pancreas",
+      "caption": "Φυσιολογική ρύθμιση· δεν είναι αλγόριθμος διαβητικού επείγοντος.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
+      },
+      "sha256": "7295eb323a295a2a9512b77c9026381a3155c8e06bbd0694c96f35a0c89f1013"
+    },
+    "renal_processes": {
+      "filename": "renal-processes-el.svg",
+      "localPath": "assets/education/renal-processes-el.svg",
+      "title": "Οι τρεις βασικές νεφρικές διεργασίες",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-5-physiology-of-urine-formation",
+      "caption": "Σχηματική ανταλλαγή αίματος–σωληναρίου· όχι ανατομικός χάρτης νεφρώνα.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
+      },
+      "sha256": "1083224796e2447cb0b51e55454830b33393684b9282e1371a938e6d4b3e659c"
+    },
+    "acid_base": {
+      "filename": "acid-base-el.svg",
+      "localPath": "assets/education/acid-base-el.svg",
+      "title": "Ρύθμιση της οξεοβασικής ισορροπίας",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/26-4-acid-base-balance",
+      "caption": "Εννοιολογικό σχήμα φυσιολογίας· δεν ερμηνεύει αέρια αίματος ασθενούς.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Unique image individually inspected in exact pushed browser render at 1280px on 2026-10-29. Original Greek subscript glyphs in CO₂, H⁺ and HCO₃⁻ rendered as empty squares in raster output; changed to clearly visible plain-text CO2, H+ and HCO3-. Arrows converge on the central balance concept. Scientifically standard subscript typography remains a specific open defect; mobile review and independent physiology validation pending."
+      },
+      "sha256": "a7c95b5e55af1fbc8fa8d00e0898b4db0dc9d507f71d5686a7b18297ebd5b0db"
+    },
+    "cardiac_conduction": {
+      "filename": "cardiac-conduction-el.svg",
+      "localPath": "assets/education/cardiac-conduction-el.svg",
+      "title": "Ηλεκτρική αγωγή της καρδιάς",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-2-cardiac-muscle-and-electrical-activity",
+      "caption": "Σχηματική σειρά αγωγής· παραλείπονται ενδοκολπικές οδοί και ανατομική θέση.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
+      },
+      "sha256": "dddb6d6d0dd170bbc0ab0d26bfc01c1f335cbf6e35a549e17f1dee0677b452a2"
+    },
+    "vascular_resistance": {
+      "filename": "vascular-resistance-el.svg",
+      "localPath": "assets/education/vascular-resistance-el.svg",
+      "title": "Αυλός αγγείου και αντίσταση",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance",
+      "caption": "Ποιοτική σύγκριση υπό ίδιες άλλες συνθήκες· όχι μέτρηση ροής ή πίεσης.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
+      },
+      "sha256": "63584cfb90e3cd0eed8d3b8cf98f2934ce1da5a7054a8344bc8ebb9226dd3800"
+    },
+    "reflex_arc": {
+      "filename": "reflex-arc-el.svg",
+      "localPath": "assets/education/reflex-arc-el.svg",
+      "title": "Βασική οργάνωση αντανακλαστικού τόξου",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-3-motor-responses",
+      "caption": "Σχηματική νευρωνική σύνδεση· δεν απεικονίζει συγκεκριμένο αντανακλαστικό.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "physiological relationships and direction of connections; artwork independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "All seven SVGs rendered to PNG and inspected for Greek text, layout and arrow direction; corrected label and spacing on renal/acid-base figures. Not independent scientific certification."
+      },
+      "sha256": "4895c65f6cc440595e296739e713f43de134462d518c7e781ae9712237d9fe7f"
+    },
+    "anatomical_position": {
+      "filename": "anatomical-position-el.svg",
+      "localPath": "assets/education/anatomical-position-el.svg",
+      "title": "Ανατομική θέση σε πρόσθια όψη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+      "caption": "Πρωτότυπο σχέδιο της ανατομικής θέσης, με ελληνικές επισημάνσεις για δεξιά/αριστερά ασθενούς, μέση γραμμή και άνω/κάτω. Δεν καλύπτει τα ανατομικά επίπεδα, κοιλότητες ή όλους τους όρους προσανατολισμού.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "OpenStax 2e §1.6 describes anatomical position as upright with palms facing forward; directional right/left are from the person's perspective, not the viewer. Original drawing, not copied."
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Unique image visually inspected in exact pushed browser render at 1280px on 2026-10-29. Found the patient-perspective note overlapping the head; moved the note below the figure and extended the background/viewBox to contain the footer. Left/right labels correctly map to patient perspective, midline leader meets the centerline, and superior/inferior arrows point headward/footward. Mobile layout and full anatomical/scientific validation pending."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "0b233b1b9cbd99a80404012c0f1bbb215ce4f5a0009d3c339062553396463996"
+    },
+    "urinary_system": {
+      "filename": "urinary-system-el.svg",
+      "localPath": "assets/education/urinary-system-el.svg",
+      "title": "Ουροποιητικό σύστημα σε πρόσθια σχηματική όψη",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-2-gross-anatomy-of-urine-transport",
+      "caption": "Απεικονίζει δύο νεφρούς, δύο ουρητήρες, ουροδόχο κύστη και ουρήθρα. Δεν περιλαμβάνει το αναπαραγωγικό σύστημα, φυλετικές διαφορές ουρήθρας ή λεπτομερή ανατομία νεφρού.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "OpenStax §25.2 supports the ureters, bladder, urethra and male/female urethral difference; the page describes two ureters collecting into the bladder. OpenStax §25.1 describes filtration by two kidneys. These sources support the labels and basic urine-transport concept, not kidney silhouette accuracy, exact geometry, or the drawn scale."
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact pushed SVG at commit 3627f0f4278e32bd0439287989d3f9919f603fe6 was individually inspected in browser at 1366×768. Initial review found the kidney labels reversed for an anterior view; labels and leader routing were corrected and a patient-to-viewer orientation note added. The exact pushed render shows non-overlapping text and arrows pointing to both kidneys, ureters, bladder and urethra; all text bounding boxes fit the 1100×820 viewBox. Independent anatomical review and mobile/offline checks remain pending."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "9c8504ce1a21ed3f1fcae5a1bb2094c47949c07974e613632b9ef36e63282f8f"
+    },
+    "synovial_joint": {
+      "filename": "synovial-joint-el.svg",
+      "localPath": "assets/education/synovial-joint-el.svg",
+      "title": "Βασική δομή υμενώδους άρθρωσης",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-4-synovial-joints",
+      "caption": "Σχηματική τομή με αρθρικούς χόνδρους, κοιλότητα, θύλακο, υμένα, σύνδεσμο (οστό–οστό) και τένοντα (μυς–οστό). Δεν απεικονίζει συγκεκριμένη άρθρωση ούτε όλες τις κατηγορίες αρθρώσεων ή τους μυς.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "OpenStax Anatomy & Physiology 2e §9.1 describes synovial joints as adjacent bone surfaces separated by a fluid-filled joint cavity; supports broad diagram concept, not validation of every histologic layer or drawing detail."
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Final SVG rendered in Microsoft Edge at 1100×760 and inspected as raster. Bone ends, articular cartilage, joint cavity, capsule, ligament, tendon and muscle labels are visible; leaders do not obscure labels and no text is clipped. Schematic is explicitly not a specific joint. Independent scientific/clinical review and in-app zoom/mobile checks pending."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "39a12730b23e3ff3fef2f4df76864587ae074bff3caf3241a5c2b6ed9076ff02"
+    },
+    "abdominal_organs": {
+      "filename": "abdominal-organs-el.svg",
+      "localPath": "assets/education/abdominal-organs-el.svg",
+      "title": "Βασικά κοιλιακά όργανα σε πρόσθια προβολή",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-1-overview-of-the-digestive-system",
+      "caption": "Απλουστευμένη πρόσθια προβολή ήπατος, χοληδόχου κύστης, στομάχου, σπλήνα, παγκρέατος, λεπτού και παχέος εντέρου. Δεν αποδίδει βάθος, φυσική κλίμακα, περιτόναιο ή όλα τα κοιλιακά όργανα.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "OpenStax A&P 2e §23.1 identifies stomach and small/large intestine as alimentary canal structures and liver, gallbladder, pancreas as accessory digestive organs; source used for subject selection, not as a tracing or validation of exact diagram geometry."
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Exact SVG browser-rendered and visually inspected at 1366×768. Liver/gallbladder on patient-right (viewer-left), stomach/spleen on patient-left, pancreas, small intestine and ascending/descending colon labels and leader endpoints checked. Simplified projection note is legible. Image does not include cecum/appendix or kidneys and explicitly claims only selected basic abdominal organs; mobile and independent anatomical review remain pending."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "f2c8cc0f9c73207a0e4681c043add2f87c1aa4f3ecdd476dade9a68247b343f5"
+    },
+    "anatomical_planes": {
+      "filename": "anatomical-planes-el.svg",
+      "localPath": "assets/education/anatomical-planes-el.svg",
+      "title": "Τρία ανατομικά επίπεδα: οβελιαίο, μετωπιαίο, εγκάρσιο",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+      "caption": "Τρεις εννοιολογικές τομές με ελληνικές επισημάνσεις. Η προοπτική και το πάχος είναι συμβολικά· δεν παρουσιάζει κοιλότητες, λοξό επίπεδο ή ιατρική απεικόνιση ασθενούς.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "official OpenStax 2e definition of sagittal, frontal/coronal and transverse planes; illustration independently drawn, not copied"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-29",
+        "scope": "Unique image visually inspected in exact pushed browser render at 1280px. The sagittal, frontal and transverse planes align with their Greek labels for right/left, front/back, and upper/lower divisions; the symbolic-scale note remains visible. OpenStax §1.6 supports the definitions. Mobile and independent anatomical/scientific validation pending."
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "d51da43fa735d5a8200a216b0230bcf212fc4e7eec712ec06696e4258e620c05"
+    },
+    "infection_chain": {
+      "filename": "chain-of-infection-el.svg",
+      "localPath": "assets/education/chain-of-infection-el.svg",
+      "title": "Οι έξι κρίκοι της αλυσίδας μετάδοσης λοιμώξεων",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/niosh/learning/safetyculturehc/module-2/3.html",
+      "caption": "Έξι κρίκοι από παθογόνο έως ευπαθή ξενιστή, με βέλη κατεύθυνσης και ενδεικτικές πύλες/τρόπους μετάδοσης. Τα παραδείγματα δεν αφορούν ενιαίο συγκεκριμένο νόσημα και δεν αποτελούν κλινικό πρωτόκολλο.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "CDC/NIOSH six infection-chain components and examples; original diagram independently drawn"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Local SVG XML parse and PNG rendering inspected; corrected arrows and top label spacing; real-browser zoom/offline and independent review pending"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "0fb31dc9fd094ab6d197294c72b16539d8d6eed28e4bf5028880f23d1b38fc42"
+    },
+    "incidence_prevalence": {
+      "filename": "incidence-prevalence-el.svg",
+      "localPath": "assets/education/incidence-prevalence-el.svg",
+      "title": "Επίπτωση και σημειακός επιπολασμός: υποθετικός πληθυσμός 20 ατόμων",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://www.cdc.gov/field-epi-manual/php/chapters/describing-epi-data.html",
+      "caption": "Πρωτότυπη απεικόνιση ίδιου υποθετικού πληθυσμού πριν και μετά την περίοδο: 2 προϋπάρχοντα και 3 νέα περιστατικά, χωρίς ανάρρωση ή αποχωρήσεις. Επίπτωση περιόδου 3/18 αρχικά σε κίνδυνο· σημειακός επιπολασμός τέλους 5/20. Όχι πραγματικά δεδομένα, όχι γενίκευση σε ρυθμό ανά ανθρωποχρόνο.",
+      "originalArtwork": true,
+      "sourcePageReviewed": "2026-10-26",
+      "sourcePageCheckedFor": [
+        "CDC definition of incident versus prevalent cases, time window and denominators; original independent illustration"
+      ],
+      "clinicalReview": "pending",
+      "visualReview": {
+        "date": "2026-10-26",
+        "scope": "Exact SVG source reproduced locally, parsed and rasterized to PNG; Greek text, circle counts, arrows, arithmetic and layout inspected; real-browser zoom and offline end-to-end not verified"
+      },
+      "subjectCompleteness": "partial",
+      "sha256": "cafc8c66c26ed6000944c7ed8e065ba8d18c3973c922049fd506edfdb5b06b71"
+    },
+    "female_reproductive": {
+      "filename": "female-reproductive-system-el.svg",
+      "localPath": "assets/education/female-reproductive-system-el.svg",
+      "title": "Γυναικείο αναπαραγωγικό σύστημα: εσωτερικά όργανα",
+      "author": "ΕΚΑΒ Σπουδή · πρωτότυπο διανυσματικό εκπαιδευτικό σχέδιο",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/27-2-anatomy-and-physiology-of-the-ovarian-reproductive-system",
+      "caption": "Σχηματική πρόσθια όψη μήτρας, σαλπίγγων, ωοθηκών, τραχήλου και κόλπου. Οι σάλπιγγες καταλήγουν κοντά στις ωοθήκες χωρίς άμεση συνέχεια. Δεν περιλαμβάνει αιμάτωση, εξωτερικ…242152 tokens truncated…          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 10,
+      "semester": "Β",
+      "title": "Επείγουσες Παθολογικές Καταστάσεις Προνοσοκομειακά",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_b_10_1_topics",
+            "sem_b_10_1_relations",
+            "sem_b_10_1_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_b_10_2_topics",
+            "sem_b_10_2_relations",
+            "sem_b_10_2_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_b_10_3_topics",
+            "sem_b_10_3_relations",
+            "sem_b_10_3_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_b_10_4_topics",
+            "sem_b_10_4_relations",
+            "sem_b_10_4_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "special_populations_transfer",
+            "sem_b_10_5_topics",
+            "sem_b_10_5_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_b_10_6_topics",
+            "sem_b_10_6_relations",
+            "sem_b_10_6_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_b_10_7_topics",
+            "sem_b_10_7_relations",
+            "sem_b_10_7_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "cardiac_failure_lung_fluid",
+            "sem_b_10_8_topics",
+            "sem_b_10_8_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_b_10_9_topics",
+            "sem_b_10_9_relations",
+            "sem_b_10_9_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "pulmonary_embolism_vessel",
+            "sem_b_10_10_topics",
+            "sem_b_10_10_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_b_10_11_topics",
+            "sem_b_10_11_relations",
+            "sem_b_10_11_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "anaphylaxis_multisystem",
+            "sem_b_10_12_topics",
+            "sem_b_10_12_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "sem_b_10_13_topics",
+            "sem_b_10_13_relations",
+            "sem_b_10_13_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-14",
+          "images": [
+            "seizure_postictal_brain",
+            "sem_b_10_14_topics",
+            "sem_b_10_14_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-15",
+          "images": [
+            "suspected_toxic_exposure",
+            "sem_b_10_15_topics",
+            "sem_b_10_15_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-16",
+          "images": [
+            "sem_b_10_16_topics",
+            "sem_b_10_16_relations",
+            "sem_b_10_16_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-17",
+          "images": [
+            "sem_b_10_17_topics",
+            "sem_b_10_17_relations",
+            "sem_b_10_17_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 11,
+      "semester": "Β",
+      "title": "Αγγλική Ορολογία Προνοσοκομειακών Πρακτικών",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_b_11_1_topics",
+            "sem_b_11_1_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_b_11_2_topics",
+            "sem_b_11_2_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_b_11_3_topics",
+            "sem_b_11_3_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_b_11_4_topics",
+            "sem_b_11_4_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_b_11_5_topics",
+            "sem_b_11_5_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_b_11_6_topics",
+            "sem_b_11_6_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "bilingual_trauma_injury",
+            "sem_b_11_7_topics",
+            "sem_b_11_7_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_b_11_8_topics",
+            "sem_b_11_8_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_b_11_9_topics",
+            "sem_b_11_9_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_b_11_10_topics",
+            "sem_b_11_10_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_b_11_11_topics",
+            "sem_b_11_11_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 12,
+      "semester": "Β",
+      "title": "Προνοσοκομειακή Χρήση Φαρμάκων",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "medication_identification_safety",
+            "sem_b_12_1_topics",
+            "sem_b_12_1_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_b_12_2_topics",
+            "sem_b_12_2_relations",
+            "sem_b_12_2_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_b_12_3_topics",
+            "sem_b_12_3_relations",
+            "sem_b_12_3_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_b_12_4_topics",
+            "sem_b_12_4_relations",
+            "sem_b_12_4_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "pharmacokinetics_adme_anatomy",
+            "sem_b_12_5_topics",
+            "sem_b_12_5_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_b_12_6_topics",
+            "sem_b_12_6_relations",
+            "sem_b_12_6_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_b_12_7_topics",
+            "sem_b_12_7_relations",
+            "sem_b_12_7_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_b_12_8_topics",
+            "sem_b_12_8_relations",
+            "sem_b_12_8_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_b_12_9_topics",
+            "sem_b_12_9_relations",
+            "sem_b_12_9_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "oxygen_equipment_overview",
+            "sem_b_12_10_topics",
+            "sem_b_12_10_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_b_12_11_topics",
+            "sem_b_12_11_relations",
+            "sem_b_12_11_focus"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "medication_unit_volume",
+            "sem_b_12_12_topics",
+            "sem_b_12_12_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 13,
+      "semester": "Γ",
+      "title": "Τεχνικές Λήψης Επείγουσας Κλήσης",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_c_13_1_core",
+            "sem_c_13_1_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_c_13_2_core",
+            "sem_c_13_2_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "duplicate_incident_calls",
+            "sem_c_13_3_core",
+            "sem_c_13_3_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_c_13_4_core",
+            "sem_c_13_4_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_c_13_5_core",
+            "sem_c_13_5_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "mass_casualty_scene_layout",
+            "sem_c_13_6_core",
+            "sem_c_13_6_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_c_13_7_core",
+            "sem_c_13_7_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_c_13_8_core",
+            "sem_c_13_8_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_c_13_9_core",
+            "sem_c_13_9_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_c_13_10_core",
+            "sem_c_13_10_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_c_13_11_core",
+            "sem_c_13_11_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 14,
+      "semester": "Γ",
+      "title": "Προνοσοκομειακή Αντιμετώπιση Τραύματος",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_c_14_1_core",
+            "sem_c_14_1_relations",
+            "sem_c_14_1_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_c_14_2_core",
+            "sem_c_14_2_relations",
+            "sem_c_14_2_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_c_14_3_core",
+            "sem_c_14_3_relations",
+            "sem_c_14_3_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_c_14_4_core",
+            "sem_c_14_4_relations",
+            "sem_c_14_4_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_c_14_5_core",
+            "sem_c_14_5_relations",
+            "sem_c_14_5_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_c_14_6_core",
+            "sem_c_14_6_relations",
+            "sem_c_14_6_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_c_14_7_core",
+            "sem_c_14_7_relations",
+            "sem_c_14_7_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_c_14_8_core",
+            "sem_c_14_8_relations",
+            "sem_c_14_8_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "head_injury_skull_anatomy",
+            "sem_c_14_9_core",
+            "sem_c_14_9_relations",
+            "sem_c_14_9_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_c_14_10_core",
+            "sem_c_14_10_relations",
+            "sem_c_14_10_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_c_14_11_core",
+            "sem_c_14_11_relations",
+            "sem_c_14_11_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "skin_burn_cross_section",
+            "sem_c_14_12_core",
+            "sem_c_14_12_relations",
+            "sem_c_14_12_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "hypothermia_trauma_protection",
+            "sem_c_14_13_core",
+            "sem_c_14_13_relations",
+            "sem_c_14_13_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-14",
+          "images": [
+            "sem_c_14_14_core",
+            "sem_c_14_14_relations",
+            "sem_c_14_14_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 15,
+      "semester": "Γ",
+      "title": "Διαχείριση Μαζικού Συμβάντος",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_c_15_1_core",
+            "sem_c_15_1_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_c_15_2_core",
+            "sem_c_15_2_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_c_15_3_core",
+            "sem_c_15_3_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_c_15_4_core",
+            "sem_c_15_4_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_c_15_5_core",
+            "sem_c_15_5_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_c_15_6_core",
+            "sem_c_15_6_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_c_15_7_core",
+            "sem_c_15_7_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_c_15_8_core",
+            "sem_c_15_8_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_c_15_9_core",
+            "sem_c_15_9_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_c_15_10_core",
+            "sem_c_15_10_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "hazmat_cbrn_scene",
+            "sem_c_15_11_core",
+            "sem_c_15_11_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "sem_c_15_12_core",
+            "sem_c_15_12_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "anonymous_case_debrief",
+            "sem_c_15_13_core",
+            "sem_c_15_13_relations"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 16,
+      "semester": "Γ",
+      "title": "Πρωτόκολλα Διαχείρισης στα Συνήθη Επείγοντα Προνοσοκομειακά Περιστατικά",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "clinical_protocol_reassessment",
+            "sem_c_16_1_core",
+            "sem_c_16_1_relations",
+            "sem_c_16_1_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_c_16_2_core",
+            "sem_c_16_2_relations",
+            "sem_c_16_2_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_c_16_3_core",
+            "sem_c_16_3_relations",
+            "sem_c_16_3_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_c_16_4_core",
+            "sem_c_16_4_relations",
+            "sem_c_16_4_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_c_16_5_core",
+            "sem_c_16_5_relations",
+            "sem_c_16_5_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "stroke_warning_neurology",
+            "sem_c_16_6_core",
+            "sem_c_16_6_relations",
+            "sem_c_16_6_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "bls_aed_training_scene",
+            "sem_c_16_7_core",
+            "sem_c_16_7_relations",
+            "sem_c_16_7_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_c_16_8_core",
+            "sem_c_16_8_relations",
+            "sem_c_16_8_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_c_16_9_core",
+            "sem_c_16_9_relations",
+            "sem_c_16_9_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_c_16_10_core",
+            "sem_c_16_10_relations",
+            "sem_c_16_10_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_c_16_11_core",
+            "sem_c_16_11_relations",
+            "sem_c_16_11_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "sem_c_16_12_core",
+            "sem_c_16_12_relations",
+            "sem_c_16_12_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "sem_c_16_13_core",
+            "sem_c_16_13_relations",
+            "sem_c_16_13_review"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 17,
+      "semester": "Δ",
+      "title": "Πρακτική Εφαρμογή σε Τεχνικές και Δεξιότητες Επειγόντων Παθολογικών",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_d_17_1_objects",
+            "sem_d_17_1_points",
+            "sem_d_17_1_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_d_17_2_objects",
+            "sem_d_17_2_points",
+            "sem_d_17_2_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_d_17_3_objects",
+            "sem_d_17_3_points",
+            "sem_d_17_3_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_d_17_4_objects",
+            "sem_d_17_4_points",
+            "sem_d_17_4_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_d_17_5_objects",
+            "sem_d_17_5_points",
+            "sem_d_17_5_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_d_17_6_objects",
+            "sem_d_17_6_points",
+            "sem_d_17_6_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_d_17_7_objects",
+            "sem_d_17_7_points",
+            "sem_d_17_7_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_d_17_8_objects",
+            "sem_d_17_8_points",
+            "sem_d_17_8_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_d_17_9_objects",
+            "sem_d_17_9_points",
+            "sem_d_17_9_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "bag_mask_parts",
+            "sem_d_17_10_objects",
+            "sem_d_17_10_points",
+            "sem_d_17_10_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_d_17_11_objects",
+            "sem_d_17_11_points",
+            "sem_d_17_11_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "sem_d_17_12_objects",
+            "sem_d_17_12_points",
+            "sem_d_17_12_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "sem_d_17_13_objects",
+            "sem_d_17_13_points",
+            "sem_d_17_13_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 18,
+      "semester": "Δ",
+      "title": "Πρακτική Εφαρμογή σε Τεχνικές και Δεξιότητες Αντιμετώπισης Τραύματος",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_d_18_1_objects",
+            "sem_d_18_1_points",
+            "sem_d_18_1_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_d_18_2_objects",
+            "sem_d_18_2_points",
+            "sem_d_18_2_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "bed_stretcher_safe_transfer",
+            "sem_d_18_3_objects",
+            "sem_d_18_3_points",
+            "sem_d_18_3_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "sem_d_18_4_objects",
+            "sem_d_18_4_points",
+            "sem_d_18_4_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_d_18_5_objects",
+            "sem_d_18_5_points",
+            "sem_d_18_5_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_d_18_6_objects",
+            "sem_d_18_6_points",
+            "sem_d_18_6_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_d_18_7_objects",
+            "sem_d_18_7_points",
+            "sem_d_18_7_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_d_18_8_objects",
+            "sem_d_18_8_points",
+            "sem_d_18_8_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_d_18_9_objects",
+            "sem_d_18_9_points",
+            "sem_d_18_9_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_d_18_10_objects",
+            "sem_d_18_10_points",
+            "sem_d_18_10_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_d_18_11_objects",
+            "sem_d_18_11_points",
+            "sem_d_18_11_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "sem_d_18_12_objects",
+            "sem_d_18_12_points",
+            "sem_d_18_12_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "sem_d_18_13_objects",
+            "sem_d_18_13_points",
+            "sem_d_18_13_extra"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 19,
+      "semester": "Δ",
+      "title": "Διακομιδές Ασθενών",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "sem_d_19_1_objects",
+            "sem_d_19_1_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_d_19_2_objects",
+            "sem_d_19_2_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_d_19_3_objects",
+            "sem_d_19_3_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "transfer_types",
+            "sem_d_19_4_objects",
+            "sem_d_19_4_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_d_19_5_objects",
+            "sem_d_19_5_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_d_19_6_objects",
+            "sem_d_19_6_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_d_19_7_objects",
+            "sem_d_19_7_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_d_19_8_objects",
+            "sem_d_19_8_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "intubated_patient_transfer",
+            "sem_d_19_9_objects",
+            "sem_d_19_9_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "air_sea_medical_transport",
+            "sem_d_19_10_objects",
+            "sem_d_19_10_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_d_19_11_objects",
+            "sem_d_19_11_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "sem_d_19_12_objects",
+            "sem_d_19_12_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "sem_d_19_13_objects",
+            "sem_d_19_13_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    },
+    {
+      "course": 20,
+      "semester": "Δ",
+      "title": "Ο Διασώστης/ρια στα ΤΕΠ",
+      "chapters": [
+        {
+          "anchor": "#lesson-1",
+          "images": [
+            "emergency_department_triage_flow",
+            "sem_d_20_1_objects",
+            "sem_d_20_1_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-2",
+          "images": [
+            "sem_d_20_2_objects",
+            "sem_d_20_2_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-3",
+          "images": [
+            "sem_d_20_3_objects",
+            "sem_d_20_3_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-4",
+          "images": [
+            "emergency_bay_equipment",
+            "sem_d_20_4_objects",
+            "sem_d_20_4_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-5",
+          "images": [
+            "sem_d_20_5_objects",
+            "sem_d_20_5_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-6",
+          "images": [
+            "sem_d_20_6_objects",
+            "sem_d_20_6_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-7",
+          "images": [
+            "sem_d_20_7_objects",
+            "sem_d_20_7_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-8",
+          "images": [
+            "sem_d_20_8_objects",
+            "sem_d_20_8_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-9",
+          "images": [
+            "sem_d_20_9_objects",
+            "sem_d_20_9_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-10",
+          "images": [
+            "sem_d_20_10_objects",
+            "sem_d_20_10_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-11",
+          "images": [
+            "sem_d_20_11_objects",
+            "sem_d_20_11_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-12",
+          "images": [
+            "sem_d_20_12_objects",
+            "sem_d_20_12_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        },
+        {
+          "anchor": "#lesson-13",
+          "images": [
+            "sem_d_20_13_objects",
+            "sem_d_20_13_points"
+          ],
+          "status": "source-selected-pending-independent-scientific-review"
+        }
+      ]
+    }
+  ],
+  "sourcePriority": {
+    "policyDocument": "docs/SAEK-SOURCE-HIERARCHY-2026.md",
+    "rule": "Ευρωπαϊκές και αμερικανικές επιστημονικές πηγές πρώτα για γενική ιατρική. Ελληνικές επίσημες πηγές υπερισχύουν για νομοθεσία, αρμοδιότητες και ειδικά εθνικά πρωτόκολλα.",
+    "groups": {
+      "clinicalEuropean": [
+        "ERC Guidelines 2025",
+        "ECDC",
+        "EMA SmPC",
+        "NICE"
+      ],
+      "clinicalAmerican": [
+        "AHA Guidelines 2025",
+        "NIH/NLM MedlinePlus",
+        "CDC"
+      ],
+      "greekSpecific": [
+        "ΦΕΚ / Εθνικό Τυπογραφείο",
+        "ΕΚΑΒ",
+        "Υπουργείο Υγείας",
+        "ΕΟΦ"
+      ]
+    },
+    "important": "Επιστημονική αξιοπιστία πηγής ≠ άδεια χρήσης εικόνας. Έλεγχος δημιουργού, άδειας και κλινικού περιεχομένου γίνεται ανά συγκεκριμένη εικόνα."
+  }
+}
+
