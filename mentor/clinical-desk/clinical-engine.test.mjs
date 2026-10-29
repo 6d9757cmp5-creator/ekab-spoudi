@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {dirname,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {validateClinicalDesk,searchClinical,lookupClinical,fallbackSources,normalize,terms,CLINICAL_STATUS} from './clinical-engine.mjs';
+import {validateClinicalDesk,searchClinical,lookupClinical,fallbackSources,normalize,terms,isDirectTreatmentRequest,CLINICAL_STATUS} from './clinical-engine.mjs';
 
 const dir=dirname(fileURLToPath(import.meta.url));
 const sources=JSON.parse(await readFile(join(dir,'sources.json'),'utf8'));
@@ -89,4 +89,13 @@ test('Reference lookup is deterministic and does not modify clinical data or off
  assert.equal(before,JSON.stringify({sources,library}));
  assert.equal(library.records.some(x=>Object.hasOwn(x,'official_grade')),false);
  assert.equal(library.records.some(x=>/((\d+(?:[.,]\d+)?)\s*(?:mg|mcg|mL))\b/i.test(x.framework)),false);
+});
+
+test('Individual treatment requests are never redirected to unrelated specialist teaching cards',()=>{
+ assert.equal(isDirectTreatmentRequest('Ποια θεραπεία να δώσω;'),true);
+ assert.equal(isDirectTreatmentRequest('τι φάρμακο να χορηγήσω;'),true);
+ assert.equal(isDirectTreatmentRequest('Πόση δόση να δώσω;'),true);
+ assert.equal(lookupClinical({sources,library,question:'Ποια θεραπεία να δώσω;'}),null);
+ assert.equal(isDirectTreatmentRequest('Τι σημαίνει η καρδιακή ανεπάρκεια;'),false);
+ assert.equal(isDirectTreatmentRequest('Διαφορική διάγνωση δύσπνοιας'),false);
 });
