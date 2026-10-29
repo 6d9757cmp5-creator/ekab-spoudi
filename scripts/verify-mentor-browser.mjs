@@ -139,6 +139,23 @@ try{
   assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'0');
   assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Public Mentor bibliography: mobile Chromium/WebKit search and fail-closed review state.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-library.html',{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.getElementById('library-status').textContent.includes('μόνο στοιχεία πηγών'));
+  assert.equal(await page.locator('#sources-list .source-card').count(),15);
+  assert.match(await page.locator('#source-counts').textContent(),/0 κλινικά εγκεκριμένες/);
+  await page.locator('#source-stage').selectOption('identified');
+  assert.equal(await page.locator('#sources-list .source-card').count(),8);
+  await page.locator('#source-search').fill('ERC');
+  assert.equal(await page.locator('#sources-list .source-card').count(),1);
+  assert.match(await page.locator('#sources-list .source-card h2').textContent(),/Guidelines 2025/);
+  await page.locator('#source-stage').selectOption('all');
+  await page.locator('#source-search').fill('πηγη-που-δεν-υπαρχει');
+  assert.equal(await page.locator('#sources-list .source-card').count(),0);
+  assert.match(await page.locator('#sources-visible').textContent(),/0 από 15/);
+  await page.locator('#source-search').fill('');
+  assert.equal(await page.locator('#sources-list .source-card').count(),15);
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
