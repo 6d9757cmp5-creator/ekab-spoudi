@@ -1,4 +1,4 @@
-# MENTOR OS — Next-generation training roadmap
+# MENTOR — Next-generation training roadmap
 
 Status: design specification, NOT implemented or medically approved. Scope: Mentor only; no changes to legacy grades, lessons, progress, or other PRs.
 
