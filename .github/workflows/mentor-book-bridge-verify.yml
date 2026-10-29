@@ -5,6 +5,7 @@ on:
       - 'mentor/review/**'
       - 'mentor/knowledge/**'
       - 'mentor/clinical-desk/**'
+      - 'mentor/governance/**'
       - 'mentor/review-corpus/**'
       - 'mentor-lab.html'
       - 'mentor-lab.js'
@@ -16,6 +17,7 @@ on:
       - 'mentor/review/**'
       - 'mentor/knowledge/**'
       - 'mentor/clinical-desk/**'
+      - 'mentor/governance/**'
       - 'mentor/review-corpus/**'
       - 'mentor-lab.html'
       - 'mentor-lab.js'
@@ -45,6 +47,8 @@ jobs:
           node --test mentor/knowledge/*.test.mjs
           for f in mentor/clinical-desk/*.mjs; do node --check "$f"; done
           node --test mentor/clinical-desk/*.test.mjs
+          for f in mentor/governance/*.mjs; do node --check "$f"; done
+          node --test mentor/governance/*.test.mjs
       - name: Run full source quality audit and create clinician review queue
         run: |
           node mentor/review/audit-corpus.mjs --out=mentor-audit-artifact
