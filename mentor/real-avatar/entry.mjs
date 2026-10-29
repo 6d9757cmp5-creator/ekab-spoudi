@@ -118,9 +118,22 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
     boneArmBase=boneArm?.rotation.clone()||null;
     mixer=new THREE.AnimationMixer(character);
     const clips=data.animations||[];
-    const idle=clips.find(c=>/^(idle|breath|stand)/i.test(c.name))||clips.find(c=>/idle/i.test(c.name))||clips[0];
-    if(idle){
-      const action=mixer.clipAction(idle);action.play();action.setEffectiveWeight(.75);
+    const clip=n=>clips.find(c=>c.name.toLowerCase()===n);
+    const idle=clip("idle")||clips.find(c=>/idle/i.test(c.name))||clips[0];
+    const talking=clip("talk");
+    const waving=clip("wave");
+    const idleAction=idle?mixer.clipAction(idle):null;
+    const talkAction=talking?mixer.clipAction(talking):null;
+    const waveAction=waving?mixer.clipAction(waving):null;
+    waveAction?.setLoop(THREE.LoopOnce,1);
+    if(waveAction)waveAction.clampWhenFinished=true;
+    let activeAction=idleAction;
+    idleAction?.setEffectiveWeight(1).play();
+    function transition(next){
+      if(!next||next===activeAction)return;
+      next.reset().setEffectiveWeight(1).play();
+      if(activeAction)activeAction.crossFadeTo(next,.33,false);
+      activeAction=next;
     }
     function updateView(){
       const box=host.getBoundingClientRect();
@@ -182,9 +195,13 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
       animationId=requestAnimationFrame(animate);
       const elapsed=Math.min(.06,clock.getDelta());
       if(doc.hidden||!inView||!active)return;
-      if(!reduced&&motion.checked)mixer.update(elapsed);
-      const now=performance.now()/1000;
       const open=alignedCues&&alignedAudio&&!alignedAudio.paused;
+      const isVoiceOn=open||speaking;
+      if(!reduced&&motion.checked){
+        transition(gesture>.45&&!isVoiceOn?(waveAction||idleAction):isVoiceOn?(talkAction||idleAction):idleAction);
+        mixer.update(elapsed);
+      }
+      const now=performance.now()/1000;
       let shape=shapeForGreekApproximate(viseme);
       if(open){
         const t=alignedAudio.currentTime;
@@ -205,11 +222,11 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
         morph(obj,targets.brow,gesture>.25?.15:.03,.12);
       }
       if(boneHead&&boneHeadBase&&motion.checked&&!reduced){
-        boneHead.rotation.y=boneHeadBase.y+Math.sin(now*.55)*.032;
-        boneHead.rotation.z=boneHeadBase.z+gesture*.055;
+        boneHead.rotation.y+=Math.sin(now*.55)*.028;
+        boneHead.rotation.z+=gesture*.045;
       }
       if(boneArm&&boneArmBase&&motion.checked&&!reduced){
-        boneArm.rotation.z=boneArmBase.z-gesture*.21;
+        boneArm.rotation.z-=gesture*.13;
       }
       gesture=Math.max(0,gesture-elapsed*.32);
       character.rotation.y+=(turn-character.rotation.y)*.09;
