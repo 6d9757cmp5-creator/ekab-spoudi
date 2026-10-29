@@ -84,7 +84,7 @@ test("corrupt or hostile stored values fall back safely",()=>{
  assert.deepEqual(parsePrefs("{not json"),defaultPrefs());
  assert.deepEqual(parsePrefs(null),defaultPrefs());
  const n=normalizePrefs({visibility:"exploding",mode:"x",corner:"zz",desktop:{w:"big",x:NaN},mobile:5});
- assert.equal(n.visibility,"minimized");assert.equal(n.mode,"floating");assert.equal(n.corner,"br");
+ assert.equal(n.visibility,"minimized");assert.equal(n.mode,"floating");assert.equal(n.corner,"bl");
  assert.equal(n.desktop.w,LIMITS.desktop.w);assert.equal(n.desktop.x,null);
  assert.equal(n.mobile.h,LIMITS.mobile.h);
 });

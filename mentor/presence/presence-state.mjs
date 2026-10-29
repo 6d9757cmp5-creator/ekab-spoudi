@@ -89,7 +89,8 @@ export function defaultPrefs(){
   // The 3D scene (and its WebGL context) loads only when the learner opens it.
   visibility:"minimized",
   mode:"floating",
-  corner:"br",
+  // Bottom-left: the existing notes button already occupies the bottom-right.
+  corner:"bl",
   snap:true,
   desktop:layoutDefault("desktop"),
   mobile:layoutDefault("mobile")

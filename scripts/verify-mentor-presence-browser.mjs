@@ -73,7 +73,7 @@ try{
   check(tag('3D scene reaches ready/photo state inside widget'),ready==='ready'||ready==='photo','state='+ready);
 
   const before=await box('.ekab-mentor-presence');
-  await dragGrip(-Math.round(width*0.4),-Math.round(height*0.3));
+  await dragGrip(Math.round(width*0.4),-Math.round(height*0.3));
   const after=await box('.ekab-mentor-presence');
   check(tag('drag moves widget and keeps it on screen'),Math.abs(after.x-before.x)>40&&Math.abs(after.y-before.y)>40&&inView(after),`dx=${Math.round(after.x-before.x)} dy=${Math.round(after.y-before.y)}`);
   await dragGrip(-5000,-5000);

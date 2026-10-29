@@ -39,7 +39,7 @@ function boot(){
  if(alreadyPresent())return;
 
  let prefs=parsePrefs(readStorage());
- let frame=null,dragging=null,menuOpen=false;
+ let frame=null,dragging=null,menuOpen=false,askOpen=false;
  const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)");
 
  if(!document.querySelector('link[data-ekab-mentor-presence]')){
@@ -92,6 +92,14 @@ function boot(){
   return {top:px(s.paddingTop),right:px(s.paddingRight),bottom:px(s.paddingBottom),left:px(s.paddingLeft)};
  }
 
+ // While the Ask panel is open the widget grows so the avatar stays visible above it.
+ function sizeNow(lay,vp){
+  const base=clampSize(prefs[lay],vp,lay);
+  if(!askOpen)return base;
+  const want=lay==="mobile"?{w:330,h:460}:{w:310,h:540};
+  return {w:Math.round(Math.min(vp.w-16,Math.max(base.w,want.w))),h:Math.round(Math.min(vp.h-16,Math.max(base.h,want.h)))};
+ }
+
  function currentBox(){
   const vp=viewport(),lay=layout(),sf=safe();
   if(prefs.mode==="docked"){
@@ -99,8 +107,9 @@ function boot(){
    return {x:d.x,y:d.y,w:d.w,h:d.h,edge:d.edge};
   }
   const stored=prefs[lay];
-  const size=clampSize(stored,vp,lay);
-  const pos=prefs.mode==="pinned"
+  const size=sizeNow(lay,vp);
+  const placed=stored.x!=null&&stored.y!=null;
+  const pos=prefs.mode==="pinned"||!placed
    ?cornerPosition(prefs.corner,size,vp,sf)
    :clampPosition(stored,size,vp,sf);
   return {x:pos.x,y:pos.y,w:size.w,h:size.h,edge:null};
@@ -216,7 +225,7 @@ function boot(){
  },true);
 
  // ---------- ask + page context ----------
- let contextOn=true,announced=null,askOpen=false;
+ let contextOn=true,announced=null;
  try{contextOn=JSON.parse(localStorage.getItem(CONTEXT_KEY)||"{}").enabled!==false;}catch{}
  const isExam=()=>examMode(location.pathname,announced);
  const contextState=()=>({enabled:contextOn,exam:isExam(),announced,page:readPageContext(document,location)});
@@ -230,6 +239,7 @@ function boot(){
  function setAsk(open){
   askOpen=open;
   askPanel.hidden=!open;
+  render();
   askBtn.setAttribute("aria-expanded",String(open));
   if(open){refreshContext();askInput.focus({preventScroll:true});}
  }
@@ -294,7 +304,7 @@ function boot(){
    if(dragging.pinnedStart)floatingStart();
    root.dataset.dragging="true";
   }
-  const lay=layout(),vp=viewport(),size=clampSize(prefs[lay],vp,lay);
+  const lay=layout(),vp=viewport(),size=sizeNow(lay,vp);
   const pos=clampPosition({x:dragging.ox+dx,y:dragging.oy+dy},size,vp,safe());
   root.style.transform="translate("+pos.x+"px,"+pos.y+"px)";
   dragging.pos=pos;
@@ -304,7 +314,7 @@ function boot(){
   const d=dragging;dragging=null;
   delete root.dataset.dragging;
   if(!d.moved||!d.pos)return;
-  const lay=layout(),vp=viewport(),size=clampSize(prefs[lay],vp,lay);
+  const lay=layout(),vp=viewport(),size=sizeNow(lay,vp);
   const final=prefs.snap?snapToEdges(d.pos,size,vp,safe()):d.pos;
   prefs=normalizePrefs({...prefs,corner:nearestCorner(final,size,vp),[lay]:{...prefs[lay],x:final.x,y:final.y}});
   save();render();
@@ -319,7 +329,7 @@ function boot(){
   event.preventDefault();
   floatingStart();
   const lay=layout(),vp=viewport(),box=currentBox();
-  const size=clampSize(prefs[lay],vp,lay);
+  const size=sizeNow(lay,vp);
   const pos=clampPosition({x:box.x+move[0],y:box.y+move[1]},size,vp,safe());
   prefs=normalizePrefs({...prefs,corner:nearestCorner(pos,size,vp),[lay]:{...prefs[lay],x:pos.x,y:pos.y}});
   save();render();
