@@ -1,0 +1,25 @@
+name: MENTOR hologram 3D integrity
+on:
+  pull_request:
+    paths:
+      - 'mentor-3d.mjs'
+      - 'mentor-3d.css'
+      - 'mentor-lab.html'
+      - 'scripts/test-mentor-3d.mjs'
+      - '.github/workflows/mentor-3d-hologram.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hologram:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate renderer syntax
+        run: node --check mentor-3d.mjs
+      - name: Test WebGL integrity, privacy, accessibility and fallback
+        run: node --test scripts/test-mentor-3d.mjs
