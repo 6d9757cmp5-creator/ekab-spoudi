@@ -111,6 +111,7 @@ function score(r,q,words,focus){
 }
 export function searchClinical(library,{query='',specialty='all',limit=6}={}){
  if(!library?.records)throw Error('missing-clinical-library');
+ if(isDirectTreatmentRequest(query))return [];
  const filtered=library.records.filter(r=>specialty==='all'||r.specialty===specialty);
  const q=normalize(String(query??'').slice(0,260));
  const words=terms(q);
