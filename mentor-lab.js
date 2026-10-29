@@ -7,6 +7,7 @@ import {openMentorDb,createMentorStore,createVolatileMentorStore} from './mentor
 import {resolveMentorScope} from './mentor/core/identity.mjs';
 import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
+import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
 
 const $=id=>document.getElementById(id);
@@ -205,6 +206,58 @@ function wireStudyPreferences(){
   $('study-duration').addEventListener('change',changed);
   $('study-path-mode').addEventListener('change',changed);
 }
+// Mentor-only scripted tutor: generated from test-session aggregates, never grades user text.
+let lastCoachReply='';
+function addCoachMessage(role,message){
+  const row=make('div','coach-message coach-message-'+role);
+  row.append(make('strong',null,role==='assistant'?'MENTOR · Εκπαιδευτική απάντηση':'Ερώτησή μου'));
+  row.append(make('p',null,message));
+  $('coach-dialogue').append(row);
+  // Keep the current-page dialogue bounded; no persistence or network transmission.
+  while($('coach-dialogue').childElementCount>12)$('coach-dialogue').firstElementChild.remove();
+}
+async function coachAsk(intent,topic,userText){
+  addCoachMessage('user',userText);
+  try{
+    const overview=state.store&&state.scope?await state.store.overview(state.scope):null;
+    lastCoachReply=coachResponse({intent,topic,overview});
+  }catch{
+    lastCoachReply='Δεν μπόρεσα να διαβάσω τις δοκιμαστικές καταγραφές Mentor. Η υπάρχουσα πρόοδος δεν άλλαξε.';
+  }
+  addCoachMessage('assistant',lastCoachReply);
+}
+function wireCoach(){
+  const prompt=$('coach-question');
+  for(const btn of document.querySelectorAll('[data-coach-intent]')){
+    btn.addEventListener('click',()=>{
+      const intent=btn.dataset.coachIntent;
+      const labels={focus:'Τι να μελετήσω;',progress:'Πώς τα πηγαίνω;',explain:'Εξήγησέ μου μια δεξιότητα',exercise:'Δώσε μου μια μικρή άσκηση'};
+      void coachAsk(intent,null,labels[intent]);
+    });
+  }
+  $('coach-form').addEventListener('submit',event=>{
+    event.preventDefault();
+    const question=prompt.value.trim().slice(0,300);
+    if(!question)return;
+    prompt.value='';
+    const parsed=interpretQuestion(question);
+    void coachAsk(parsed.intent,parsed.topic,question);
+  });
+  const available=typeof speechSynthesis!=='undefined'&&typeof SpeechSynthesisUtterance!=='undefined';
+  $('coach-speak').disabled=!available;
+  $('coach-stop').disabled=!available;
+  $('coach-speak').addEventListener('click',()=>{
+    if(!available||!lastCoachReply)return;
+    speechSynthesis.cancel();
+    const utterance=new SpeechSynthesisUtterance(lastCoachReply);
+    utterance.lang='el-GR';utterance.rate=.93;
+    speechSynthesis.speak(utterance);
+  });
+  $('coach-stop').addEventListener('click',()=>{
+    if(available)speechSynthesis.cancel();
+  });
+  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές Mentor ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
+}
 async function renderPlan(){
   renderPersonalPlan();
   if(!state.store)return;
@@ -267,6 +320,7 @@ async function boot(){
   wireTabs();
   wireModes();
   wireStudyPreferences();
+  wireCoach();
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
