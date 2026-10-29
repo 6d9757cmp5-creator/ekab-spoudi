@@ -1,0 +1,30 @@
+name: MENTOR photoreal cinematic acceptance
+on:
+  pull_request:
+    paths:
+      - 'mentor-lab.html'
+      - 'mentor-cinematic.css'
+      - 'mentor-cinematic.mjs'
+      - 'mentor-3d.mjs'
+      - 'assets/mentor-cinematic.webp'
+      - 'assets/mentor-scenario-thumbs.webp'
+      - 'scripts/test-mentor-cinematic.mjs'
+      - '.github/workflows/mentor-cinematic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual-acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check behavior syntax
+        run: |
+          node --check mentor-cinematic.mjs
+          node --check mentor-3d.mjs
+      - name: Verify faithful, safe, non-invasive cinematic MENTOR
+        run: node --test scripts/test-mentor-cinematic.mjs
