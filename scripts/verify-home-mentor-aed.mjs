@@ -9,6 +9,8 @@ test('Mentor is accessible from home without replacing existing sections',async(
  assert.match(html,/href="mentor-lab\.html"/);
  assert.match(html,/MENTOR OS/);
  assert.match(html,/ΔΟΚΙΜΑΣΤΙΚΟ/);
+ assert.equal((html.match(/class="home-anatomy-single"/g)||[]).length,1,'3D Anatomy must have one dedicated entry');
+ assert.equal((html.match(/class="home-mentor-single"/g)||[]).length,1,'Mentor must have one separate entry');
  for(const href of ['saek.html','eoppep.html','seminar-prep.html','ui-tools/anatomy-3d/index.html'])assert.ok(html.includes('href="'+href+'"'),href);
  assert.ok(html.indexOf('MENTOR OS')<html.indexOf('home-bottom-row'));
 });
