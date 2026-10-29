@@ -347,6 +347,41 @@ try{
   // Safari WebKit sometimes reports a malformed optional update-check URL from legacy code.
   // This is unrelated to the avatar and must not mask other browser exceptions.
   const actionableErrors=errors.filter(e=>!e.includes('Fetch API cannot load http: /127.0.0.1:')||!e.includes('/version.json?nocache='));
+  // Whole prehospital atlas: 360 outline entries only. No AI, medical actions or legacy writes.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('a[href="mentor-scenarios.html"]').count(),1);
+  const atlasStorageBefore=await page.evaluate(()=>Object.fromEntries(
+    Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
+  ));
+  await page.goto('http://127.0.0.1:'+port+'/mentor-scenarios.html',{waitUntil:'networkidle'});
+  assert.match(await page.title(),/Άτλας προνοσοκομειακών/);
+  assert.equal((await page.locator('#atlas-categories').textContent()).trim(),'32');
+  assert.equal((await page.locator('#atlas-scenarios').textContent()).trim(),'360');
+  assert.equal((await page.locator('#atlas-reviewed').textContent()).trim(),'0');
+  assert.equal(await page.locator('.case').count(),40);
+  await page.locator('#atlas-search').fill('τροχαίο');
+  await page.waitForFunction(()=>document.querySelector('#atlas-report').textContent.includes('από'));
+  assert.ok((await page.locator('.case').count())>=4);
+  await page.locator('#atlas-search').fill('');
+  await page.locator('#atlas-category').selectOption('PED');
+  assert.match(await page.locator('#atlas-report').textContent(),/14 περιγράμματα|από 14/);
+  await page.locator('#atlas-population').selectOption('child');
+  assert.equal(await page.locator('.case').count(),14);
+  await page.locator('#atlas-level').selectOption('foundation');
+  assert.equal(await page.locator('.case').count(),3);
+  await page.locator('.case').first().locator('summary').click();
+  assert.match(await page.locator('.case').first().textContent(),/Κλινικές ενέργειες και δοσολογίες: ανενεργές/);
+  await page.locator('#atlas-category').selectOption('all');
+  await page.locator('#atlas-level').selectOption('all');
+  await page.locator('#atlas-population').selectOption('all');
+  assert.equal(await page.locator('.case').count(),40);
+  await page.locator('#atlas-more').click();
+  assert.equal(await page.locator('.case').count(),80);
+  const atlasStorageAfter=await page.evaluate(()=>Object.fromEntries(
+    Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
+  ));
+  assert.deepEqual(atlasStorageAfter,atlasStorageBefore,'Scenario atlas cannot change student progress or storage');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   assert.deepEqual(actionableErrors,[],'No actionable browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
