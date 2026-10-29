@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a39">
+<title>MENTOR OS · Ανάγνωση ΕΚΑΒ Σπουδή</title>
+<style>
+:root{--page:#eef5f8;--panel:#fff;--ink:#122f40;--muted:#506b79;--line:#cedfe6;--brand:#137496}
+*{box-sizing:border-box}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--page);color:var(--ink);margin:0;line-height:1.5}
+main{max-width:1080px;margin:auto;padding:18px 15px 45px}
+a{color:var(--brand)}a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #35b1db;outline-offset:3px}
+.topnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;font-weight:750}
+.hero{background:linear-gradient(120deg,#103b50,#196478);border-radius:21px;color:#fff;padding:25px}
+.hero h1{font-size:clamp(1.5rem,5vw,2.25rem);margin:7px 0}
+.hero p{max-width:830px;color:#d6ebf2;margin:6px 0}
+.eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.09em;color:#b8e5f1;font-weight:800}
+.notice,.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px;margin:16px 0}
+.notice{border-left:4px solid #bd8743}
+.panel h2{font-size:1.1rem;margin:0 0 10px}
+.search{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,240px) auto auto;gap:9px;margin:15px 0}
+input,select,button{font:inherit;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--panel);color:var(--ink)}
+button{cursor:pointer;font-weight:700}
+button.primary{background:#11607e;color:#fff;border-color:#11607e}
+#reader-status{font-size:.87rem;color:var(--muted);min-height:27px}
+#reader-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.reader-result{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.reader-result summary{display:flex;align-items:flex-start;gap:8px;justify-content:space-between;padding:13px;cursor:pointer;min-height:78px}
+.reader-result-head{display:grid;gap:4px}.reader-result-head strong{font-size:.93rem}.reader-result-head small{color:var(--muted);font-size:.75rem}
+.reader-tag{font-size:.7rem;font-weight:750;background:#e7f4f8;color:#135b70;padding:4px 7px;border-radius:20px;white-space:nowrap}
+.reader-fulltext{border-top:1px solid var(--line);padding:15px;font-size:.9rem}
+.reader-text{white-space:pre-wrap;overflow-wrap:anywhere;max-height:55vh;overflow:auto;line-height:1.65}
+.source-detail{font-size:.78rem;color:var(--muted)}
+.reader-result-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.reader-result-actions .source-link{font-weight:700}
+.reader-caution{width:100%;color:var(--muted);font-size:.75rem}
+.reader-empty{grid-column:1/-1}
+#reader-more{display:block;width:100%;margin:16px 0}
+#reader-more[hidden]{display:none}
+#load-errors:empty{display:none}
+#load-errors{color:#94621b;font-size:.82rem}
+#progress-preview p{margin:4px 0}
+@media(max-width:760px){#reader-results{grid-template-columns:1fr}.search{grid-template-columns:1fr 1fr}.search input{grid-column:1/-1}.reader-result summary{min-height:65px}}
+@media(max-width:420px){.search{grid-template-columns:1fr}.search input{grid-column:auto}}
+@media(prefers-color-scheme:dark){:root{--page:#0a1b25;--panel:#142c39;--ink:#e5f2f6;--muted:#aec2cc;--line:#355462;--brand:#8cdaef}.reader-tag{background:#234d5e;color:#ddf6fd}#load-errors{color:#edc68d}}
+</style>
+<script type="module" src="mentor-readonly.js"></script>
+</head>
+<body>
+<main>
+<nav class="topnav" aria-label="Πλοήγηση"><a href="mentor-lab.html">← MENTOR OS</a><a href="index.html">Αρχική ΕΚΑΒ Σπουδή</a></nav>
+<header class="hero"><p class="eyebrow">ΕΚΑΒ Σπουδή · Πρόσβαση μόνο ανάγνωσης</p>
+<h1>Η γνώση της ΕΚΑΒ Σπουδή, μέσα στον MENTOR</h1>
+<p>Αναζήτησε και διάβασε τα υπάρχοντα κεφάλαια ΣΑΕΚ, τις 314 ερωτήσεις ΕΟΠΠΕΠ, εκπαιδευτικές απαντήσεις, SOS, ασκήσεις, καρτέλες φαρμακολογίας, σεμινάρια και σελίδες.</p></header>
+<div class="notice" role="note"><strong>Ο MENTOR μόνο διαβάζει και προβάλλει.</strong> Δεν αποθηκεύει αναζητήσεις, δεν βαθμολογεί, δεν τροποποιεί απαντήσεις/σημειώσεις/πρόοδο και δεν καλεί υπηρεσίες cloud. Τα κείμενα προέρχονται από δημοσιευμένα αρχεία της εφαρμογής και δεν αποτελούν αυτομάτως ανεξάρτητα εγκεκριμένες ιατρικές οδηγίες. Η αρχική σελίδα κάθε ενότητας ανήκει στην κανονική εφαρμογή.</div>
+<section class="panel">
+<h2>Αναζήτηση σε όλες τις ενότητες</h2>
+<form id="reader-search" class="search">
+<input id="reader-input" type="search" maxlength="150" placeholder="π.χ. τραύμα θώρακα, αεραγωγός, ανατομία" aria-label="Αναζήτηση εκπαιδευτικού περιεχομένου">
+<select id="reader-kind" aria-label="Επιλογή ενότητας"></select>
+<button class="primary" type="submit">Αναζήτηση</button>
+<button id="reader-clear" type="button">Καθαρισμός</button>
+</form>
+<p id="loaded-summary" aria-live="polite">Ανάγνωση πηγών…</p>
+<div id="load-errors" aria-live="polite"></div>
+<p id="reader-status" aria-live="polite"></p>
+</section>
+<section aria-label="Αποτελέσματα ανάγνωσης"><div id="reader-results"></div><button id="reader-more" type="button" hidden>Περισσότερα αποτελέσματα</button></section>
+<section class="panel">
+<h2>Προσωπική πρόοδος — μόνο προβολή</h2>
+<p>Προαιρετική ανάγνωση μόνο των τοπικών μετρητών ΣΑΕΚ/ΕΟΠΠΕΠ σε αυτή τη συσκευή. Δεν γίνεται καμία μεταφορά σε AI, ούτε αλλαγή ή συγχρονισμός.</p>
+<button id="reader-progress" type="button">Δες τους τοπικούς μετρητές</button>
+<div id="progress-preview" role="status" aria-live="polite"></div>
+</section>
+<p style="font-size:.83rem;color:var(--muted)">Τα προσωπικά αρχεία cloud, τα μη δημοσιευμένα βιβλία του PR #83 και οι ιδιωτικές σημειώσεις δεν ανοίγονται από αυτή τη δυνατότητα. Για πραγματική ιατρική χρήση ισχύουν τα εγκεκριμένα πρωτόκολλα και η πρακτική εκπαίδευση.</p>
+</main>
+</body>
+</html>
