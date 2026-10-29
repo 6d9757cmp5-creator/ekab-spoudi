@@ -54,6 +54,21 @@ try{
  assert.equal(await page.locator(".cinematic-character").isVisible(),true);
  await page.locator("#mentor-real3d-toggle").click();
  assert.equal(await page.locator("#mentor-cinematic-stage").getAttribute("data-real3d"),"ready");
+ assert.equal(await page.locator("#mentor-male-voice-status").count(),1);
+ assert.equal(await page.locator("#mentor-delivery-status").count(),1);
+ await page.locator("#mentor-presence").evaluate(el=>{
+   el.dispatchEvent(new CustomEvent("mentor:presence",{bubbles:true,
+     detail:{id:"strict",gesture:"caution",expression:"serious",posture:"upright"}}));
+ });
+ assert.equal(await page.locator("#mentor-cinematic-stage").getAttribute("data-mentor-mood"),"strict",
+   "Rigged facial expression, gaze and posture follow strict educator delivery");
+ await page.locator("#mentor-presence").evaluate(el=>{
+   el.dispatchEvent(new CustomEvent("mentor:presence",{bubbles:true,
+     detail:{id:"caring",gesture:"reassure",expression:"gentle",posture:"lean"}}));
+ });
+ assert.equal(await page.locator("#mentor-cinematic-stage").getAttribute("data-mentor-mood"),"caring",
+   "Rigged stage adopts caring gesture and expression");
+
  await page.locator("#mentor-real3d-rotation").evaluate(el=>{el.value="0";el.dispatchEvent(new Event("input",{bubbles:true}));});
  await page.screenshot({path:"mentor-real3d-mobile-"+engine+".png",fullPage:false});
  await page.setViewportSize({width:1440,height:900});
