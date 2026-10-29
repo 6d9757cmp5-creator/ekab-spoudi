@@ -23,6 +23,9 @@ if (!imageUI.includes('Η επιλογή εικόνας δεν σημαίνει 
   errors.push('The UI must disclose that selected imagery is not complete lesson coverage.');
 if (!imageUI.includes('ανεξάρτητη επιστημονική έγκριση'))
   errors.push('The UI must disclose the absence of independent scientific approval.');
+// Generic EMS background links must never be presented as scientific validation.
+if (!imageUI.includes('όχι τεκμηρίωση σχήματος') || imageUI.includes("'Επιστημονική τεκμηρίωση'"))
+  errors.push('The image UI must distinguish generic background links from scientific evidence.');
 for (const path of ['saek-image-audit-2026.json', 'saek-visual-ui.js',
                     'saek-reviewed-image-ui.js', 'saek-visual-ui.css']) {
   if (!sw.includes('./' + path)) errors.push('Offline precache is missing ' + path);
