@@ -1712,14 +1712,19 @@
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "originalArtwork": true,
       "page": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
+      "additionalSources": [
+        "https://www.resus.org.uk/sites/default/files/2021-05/Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf"
+      ],
       "caption": "Ενδεικτική ανθρώπινη μορφή με πιθανή συμμετοχή αναπνοής, αεραγωγού, δέρματος και κυκλοφορίας σε αναφυλαξία. Δεν παρουσιάζονται όλες οι πιθανές εκδηλώσεις ούτε οδηγίες δόσης/αγωγής.",
       "sourcePageReviewed": "2026-10-27",
-      "sourcePageCheckedFor": [],
+      "sourcePageCheckedFor": [
+        "RCUK Emergency Treatment of Anaphylaxis 2021: airway, breathing and circulation findings; patients may not show every listed feature. Used only to corroborate the image's multisystem framing and ‘not always’ skin note, not as an independent clinical approval."
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Basic Greek labels, ARIA title/description, XML-like tag balance; no clinical/browser/mobile/offline acceptance test"
+        "date": "2026-10-29",
+        "scope": "Exact pushed SVG rendered in browser at 1280×720 (commit 5e988dc); callout endpoints align with airway, chest, skin marks and circulation area; Greek labels remain readable. RCUK 2021 source corroborates that findings span airway/breathing/circulation and that not every feature is present. No treatment or diagnosis is depicted; independent clinical approval and mobile/offline E2E remain pending."
       },
       "sha256": "b8e29568cfa2f45d06479549e5aa451204ca6c9187f65dfe11972d1b660324b7"
     },
