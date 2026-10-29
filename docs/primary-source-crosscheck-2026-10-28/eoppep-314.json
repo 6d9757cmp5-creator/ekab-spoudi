@@ -61,20 +61,48 @@
       "number": 2,
       "officialPdfPage": 4,
       "question": "α) Πόσο οξυγόνο (επί %) περιέχει ο εισπνεόμενος και πόσο ο εκπνεόμενος αέρας; β) Πόσο διοξείδιο του άνθρακα (επί %) περιέχει ο εισπνεόμενος και πόσο ο εκπνεόμενος αέρας;",
-      "answerCharacters": 257,
-      "existingSource": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review",
-      "existingSourceLocation": "OpenStax A&P 2e, Κεφ. 22: αναπνευστικό σύστημα",
+      "answerCharacters": 331,
+      "existingSource": "https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801",
+      "existingSourceLocation": "The Open University – OpenLearn Create, «B2: Respiration», πίνακας εισπνεόμενων/εκπνεόμενων αερίων· NOAA JetStream, «The Atmosphere», ξηρός ατμοσφαιρικός αέρας.",
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": "general_chapter_review_lacks_specific_inspired_expired_gas_percentages",
-      "status": "specific_issue_documented",
+      "status": "specific_issue_educational_content_resolved",
       "officialQuestionMirrorCheck": {
         "reviewedAt": "2026-10-28",
         "mirrorUrl": "https://saekedessas.gr/wp-content/uploads/2018/11/PLIROMA-ASTHENOFOROU-DIASOSTIS.pdf",
         "printedPage": 4,
         "archivedQuestionWordingMatched": true,
         "currentVersionConfirmed": false,
-        "answerStillFlaggedForIssue": true
+        "answerStillFlaggedForIssue": false,
+        "educationalAnswerResolvedAt": "2026-10-29"
+      },
+      "resolution": {
+        "resolvedAt": "2026-10-29",
+        "kind": "source_grounded_educational_content_correction",
+        "originalIssue": "general_chapter_review_lacks_specific_inspired_expired_gas_percentages",
+        "correctedAnswerFile": "official_questions.json",
+        "correctedAnswerBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "scope": "verified_correction_only_not_independent_clinical_certification",
+        "severity": "citation_fix",
+        "notes": "Αντικαταστάθηκε η ανεπαρκής γενική παραπομπή με ειδικό πίνακα Open University και NOAA· διακρίνεται ο μικτός εκπνεόμενος από τον κυψελιδικό."
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "comparedClaims": [
+          "Εισπνεόμενος ατμοσφαιρικός αέρας ~21% O₂ και ~0,04% CO₂",
+          "Μικτός εκπνεόμενος αέρας ~16% O₂ και ~4% CO₂ (προσεγγιστικά)"
+        ],
+        "sources": [
+          "https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801",
+          "https://www.noaa.gov/jetstream/atmosphere"
+        ],
+        "finding": "Αντικαταστάθηκε η ανεπαρκής γενική παραπομπή με ειδικό πίνακα Open University και NOAA· διακρίνεται ο μικτός εκπνεόμενος από τον κυψελιδικό.",
+        "limits": "Αφορά τις συγκεκριμένες εκπαιδευτικές διορθώσεις· δεν επαληθεύτηκε η νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, ούτε τοπικό επιχειρησιακό πρωτόκολλο ΕΚΑΒ ή εξωτερική κλινική πιστοποίηση. Δεν αποτελεί δεύτερο πλήρη γύρο.",
+        "fullScientificApproval": false
       }
     },
     {
@@ -2805,13 +2833,40 @@
       "number": 47,
       "officialPdfPage": 9,
       "question": "Ποια είναι η αρχική ποσότητα χορήγησης υγρών στην αντιμετώπιση του shock στα παιδιά;",
-      "answerCharacters": 366,
+      "answerCharacters": 674,
       "existingSource": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "existingSourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
+      "existingSourceLocation": "Resuscitation Council UK / ERC Guidelines 2025, «Paediatric Life Support (basic and advanced)», ενότητες Circulation (10 mL/kg ανά bolus, επανεκτίμηση) και Shock (haemorrhagic shock).",
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": "paediatric_BLS_source_mismatch_fluid_bolus_use_2025_paediatric_life_support",
-      "status": "specific_issue_documented"
+      "status": "specific_issue_educational_content_resolved",
+      "resolution": {
+        "resolvedAt": "2026-10-29",
+        "kind": "source_grounded_educational_content_correction",
+        "originalIssue": "paediatric_BLS_source_mismatch_fluid_bolus_use_2025_paediatric_life_support",
+        "correctedAnswerFile": "official_questions.json",
+        "correctedAnswerBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "scope": "verified_correction_only_not_independent_clinical_certification",
+        "severity": "source_and_clinical_scope_fix",
+        "notes": "Η αποθηκευμένη απάντηση είχε ήδη 10 mL/kg· αποσαφηνίστηκαν το είδος shock και η συγκεκριμένη ενότητα PLS αντί αόριστης BLS."
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "comparedClaims": [
+          "ERC/RCUK Paediatric Life Support 2025: bolus 10 mL/kg ισότονου σε υποογκαιμικό/αποφρακτικό/διανεμητικό shock",
+          "Επανεκτίμηση ανά bolus· καρδιογενές και αιμορραγικό shock χρειάζονται ξεχωριστή διαχείριση"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+          "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
+        ],
+        "finding": "Η αποθηκευμένη απάντηση είχε ήδη 10 mL/kg· αποσαφηνίστηκαν το είδος shock και η συγκεκριμένη ενότητα PLS αντί αόριστης BLS.",
+        "limits": "Αφορά τις συγκεκριμένες εκπαιδευτικές διορθώσεις· δεν επαληθεύτηκε η νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, ούτε τοπικό επιχειρησιακό πρωτόκολλο ΕΚΑΒ ή εξωτερική κλινική πιστοποίηση. Δεν αποτελεί δεύτερο πλήρη γύρο.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-048",
@@ -3463,13 +3518,41 @@
       "number": 94,
       "officialPdfPage": 11,
       "question": "Ποια είναι η προνοσοκομειακή αντιμετώπιση της επιληψίας στα παιδιά;",
-      "answerCharacters": 627,
-      "existingSource": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "existingSourceLocation": "RCUK Guidelines 2025, Paediatric Life Support, Seizures; NICE NG217 §7, generalized convulsive status epilepticus and individualized emergency management.",
+      "answerCharacters": 853,
+      "existingSource": "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures",
+      "existingSourceLocation": "NICE NG217, §7.1.1–7.1.3 (επείγουσα αντιμετώπιση ≥5 λεπτών και φάρμακα κοινότητας)· RCUK / ERC 2025 Paediatric Life Support, ενότητα «Seizures».",
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": "paediatric_BLS_source_mismatch_seizure_use_2025_convulsive_status_epilepticus",
-      "status": "specific_issue_documented"
+      "status": "specific_issue_educational_content_resolved",
+      "resolution": {
+        "resolvedAt": "2026-10-29",
+        "kind": "source_grounded_educational_content_correction",
+        "originalIssue": "paediatric_BLS_source_mismatch_seizure_use_2025_convulsive_status_epilepticus",
+        "correctedAnswerFile": "official_questions.json",
+        "correctedAnswerBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "scope": "verified_correction_only_not_independent_clinical_certification",
+        "severity": "source_and_educational_clarification",
+        "notes": "Η παλιά απάντηση είχε ήδη το όριο 5 λεπτών· προστέθηκε σαφήνεια για επαναλαμβανόμενες κρίσεις, πρωτόκολλα και συγκεκριμένη ειδική πηγή."
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "comparedClaims": [
+          "Σπασμωδικό status epilepticus: ≥5 λεπτά ή υποτροπιάζουσες κρίσεις χωρίς ανάκτηση συνείδησης",
+          "NICE NG217 και ERC/RCUK PLS: φαρμακευτική αντιμετώπιση με βενζοδιαζεπίνες από αρμόδιο προσωπικό"
+        ],
+        "sources": [
+          "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+          "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
+        ],
+        "finding": "Η παλιά απάντηση είχε ήδη το όριο 5 λεπτών· προστέθηκε σαφήνεια για επαναλαμβανόμενες κρίσεις, πρωτόκολλα και συγκεκριμένη ειδική πηγή.",
+        "limits": "Αφορά τις συγκεκριμένες εκπαιδευτικές διορθώσεις· δεν επαληθεύτηκε η νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, ούτε τοπικό επιχειρησιακό πρωτόκολλο ΕΚΑΒ ή εξωτερική κλινική πιστοποίηση. Δεν αποτελεί δεύτερο πλήρη γύρο.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-095",
@@ -4681,13 +4764,41 @@
       "number": 181,
       "officialPdfPage": 15,
       "question": "Ποιες είναι οι ενέργειες ανάνηψης του νεογνού, σύμφωνα με τις τελευταίες οδηγίες του Ευρωπαϊκού Συμβουλίου Αναζωογόνησης;",
-      "answerCharacters": 361,
+      "answerCharacters": 844,
       "existingSource": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
-      "existingSourceLocation": "ERC/RCUK Guidelines 2025 – Newborn Life Support",
+      "existingSourceLocation": "Resuscitation Council UK / ERC Guidelines 2025, Newborn resuscitation and support of transition at birth, ενότητες Breathing / Circulation / Chest compressions: ≥30 s effective ventilation πριν HR <60/min οδηγεί σε 3:1.",
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": "neonatal_2025_answer_omits_30_seconds_effective_ventilation_before_compressions",
-      "status": "specific_issue_documented"
+      "status": "specific_issue_educational_content_resolved",
+      "resolution": {
+        "resolvedAt": "2026-10-29",
+        "kind": "source_grounded_educational_content_correction",
+        "originalIssue": "neonatal_2025_answer_omits_30_seconds_effective_ventilation_before_compressions",
+        "correctedAnswerFile": "official_questions.json",
+        "correctedAnswerBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "scope": "verified_correction_only_not_independent_clinical_certification",
+        "severity": "critical_content_fix",
+        "notes": "Ενσωματώθηκε η κλινικά σημαντική προϋπόθεση ≥30 s αποτελεσματικού αερισμού πριν τις συμπιέσεις, σύμφωνα με ERC/RCUK 2025."
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "comparedClaims": [
+          "5 αρχικές εμφυσήσεις και επαλήθευση έκπτυξης θώρακα",
+          "Προϋπόθεση ≥30 δευτερολέπτων αποτελεσματικού αερισμού πριν συμπιέσεις σε νεογνό με HR <60/min",
+          "3:1 συγχρονισμένες συμπιέσεις/αερισμοί και 100% Ο₂ κατά συμπιέσεις"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
+          "https://www.erc.edu/media/rgrn0faa/gl2025-08-nls-e.pdf"
+        ],
+        "finding": "Ενσωματώθηκε η κλινικά σημαντική προϋπόθεση ≥30 s αποτελεσματικού αερισμού πριν τις συμπιέσεις, σύμφωνα με ERC/RCUK 2025.",
+        "limits": "Αφορά τις συγκεκριμένες εκπαιδευτικές διορθώσεις· δεν επαληθεύτηκε η νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, ούτε τοπικό επιχειρησιακό πρωτόκολλο ΕΚΑΒ ή εξωτερική κλινική πιστοποίηση. Δεν αποτελεί δεύτερο πλήρη γύρο.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-182",
@@ -5003,13 +5114,40 @@
       "number": 204,
       "officialPdfPage": 16,
       "question": "Ποια είναι η δόση εφόδου υγρών σε παιδί, κατά την αναζωογόνηση από Υπογκαιμικό shock;",
-      "answerCharacters": 330,
+      "answerCharacters": 638,
       "existingSource": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "existingSourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
+      "existingSourceLocation": "Resuscitation Council UK / ERC Guidelines 2025, «Paediatric Life Support (basic and advanced)», Circulation (bolus 10 mL/kg), Shock → Haemorrhagic shock (ελαχιστοποίηση IV κρυσταλλοειδών, max 20 mL/kg, άμεσα προϊόντα αίματος).",
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": "paediatric_BLS_source_mismatch_fluid_bolus_use_2025_paediatric_life_support",
-      "status": "specific_issue_documented"
+      "status": "specific_issue_educational_content_resolved",
+      "resolution": {
+        "resolvedAt": "2026-10-29",
+        "kind": "source_grounded_educational_content_correction",
+        "originalIssue": "paediatric_BLS_source_mismatch_fluid_bolus_use_2025_paediatric_life_support",
+        "correctedAnswerFile": "official_questions.json",
+        "correctedAnswerBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "scope": "verified_correction_only_not_independent_clinical_certification",
+        "severity": "clinical_scope_fix",
+        "notes": "Η απάντηση είχε ήδη 10 mL/kg· προστέθηκε αναγκαίος διαχωρισμός αιμορραγικού shock και όριο κρυσταλλοειδών από την ειδική ενότητα PLS."
+      },
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "a6d601a4e4d81cbfb6ba5c7b8a28b9c8d00a2a0e",
+        "comparedClaims": [
+          "Υποογκαιμικό shock: αρχικό bolus 10 mL/kg ισότονου και επανεκτίμηση κάθε φορά",
+          "Αιμορραγικό shock: αιμόσταση, άμεσα προϊόντα αίματος και περιορισμός IV κρυσταλλοειδών σε ≤20 mL/kg συνολικά κατά PLS 2025"
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+          "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
+        ],
+        "finding": "Η απάντηση είχε ήδη 10 mL/kg· προστέθηκε αναγκαίος διαχωρισμός αιμορραγικού shock και όριο κρυσταλλοειδών από την ειδική ενότητα PLS.",
+        "limits": "Αφορά τις συγκεκριμένες εκπαιδευτικές διορθώσεις· δεν επαληθεύτηκε η νεότερη επίσημη τράπεζα/λυσάρι ΕΟΠΠΕΠ, ούτε τοπικό επιχειρησιακό πρωτόκολλο ΕΚΑΒ ή εξωτερική κλινική πιστοποίηση. Δεν αποτελεί δεύτερο πλήρη γύρο.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-B-205",
