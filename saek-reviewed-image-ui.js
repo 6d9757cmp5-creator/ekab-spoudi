@@ -54,7 +54,12 @@ function render(asset,lessonId){
  const caption=el('figcaption','saek-source-caption',asset.caption);
  const attribution=el('p','saek-source-credit');
  attribution.append(document.createTextNode('Πηγή: '+asset.author+' · '));
- const src=el('a','',asset.originalArtwork?'Επιστημονική τεκμηρίωση':'Wikimedia Commons');
+ // A source link is not independent medical validation of an original diagram.
+ const genericEms=/^https:\/\/www\.ems\.gov\/what-is-ems\.html(?:[?#].*)?$/i.test(asset.page||'');
+ const sourceLabel=asset.originalArtwork
+  ?(genericEms?'Γενική πηγή πλαισίου — όχι τεκμηρίωση σχήματος':'Πηγή θεματικής αναφοράς')
+  :'Wikimedia Commons';
+ const src=el('a','',sourceLabel);
  src.href=asset.page;src.target='_blank';src.rel='noopener noreferrer';
  const space=document.createTextNode(' · Άδεια: ');
  const lic=el('a','',asset.license);
