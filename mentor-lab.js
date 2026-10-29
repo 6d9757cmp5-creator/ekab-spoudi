@@ -10,6 +10,7 @@ import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/c
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
 import {mountReviewSearch} from './mentor/review/review-ui.mjs';
+import {mountKnowledgeLibrary} from './mentor/knowledge/knowledge-ui.mjs';
 
 const $=id=>document.getElementById(id);
 const make=(tag,className,text)=>{
@@ -18,7 +19,7 @@ const make=(tag,className,text)=>{
   if(text!==undefined)node.textContent=text;
   return node;
 };
-const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false,reviewSearch:null};
+const state={scope:null,store:null,activities:null,session:null,busy:false,initialized:false,reviewSearch:null,knowledge:null};
 function notify(text,error=false){
   const status=$('status');status.textContent=text;status.classList.toggle('is-error',error);
 }
@@ -229,6 +230,11 @@ async function coachAsk(intent,topic,userText){
 }
 function wireCoach(){
   const prompt=$('coach-question');
+  $('coach-to-knowledge').addEventListener('click',()=>{
+    const q=prompt.value.trim().slice(0,150);
+    switchTab('knowledge',true);
+    if(state.knowledge?.ready)state.knowledge.search(q);
+  });
   $('coach-to-books').addEventListener('click',()=>{
     const q=prompt.value.trim().slice(0,100)||'airway';
     switchTab('books',true);
@@ -328,6 +334,7 @@ async function boot(){
   wireStudyPreferences();
   wireCoach();
   state.reviewSearch=await mountReviewSearch();
+  state.knowledge=await mountKnowledgeLibrary();
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
