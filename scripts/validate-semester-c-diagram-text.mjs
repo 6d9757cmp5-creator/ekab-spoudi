@@ -15,7 +15,7 @@ for(const c of courses)for(let n=0;n<c.chapters.length;n++){
   const svg=fs.readFileSync(a.localPath,'utf8').replace(/\r\n/g,'\n');count++;
   if(svg.includes('…')||svg.includes('...')||a.caption?.includes('…'))errors.push('cut off text '+id);
   if(/Σε εκπαιδευτικό σενάριο σχετικό|Σενάριο κεφαλαίου:|Ο εκπαιδευόμενος κατανοεί/.test(svg))errors.push('generic placeholder '+id);
-  if(!svg.includes('Γ΄ ΕΞΑΜΗΝΟ')||!svg.includes('role="img"'))errors.push('no sem C/ARIA label '+id);
+  if(!svg.includes('role="img"')||!/<title\b[^>]*>[^<]+<\/title>/.test(svg)||!/<desc\b[^>]*>[^<]+<\/desc>/.test(svg))errors.push('no SVG accessibility title/description '+id);
   if(crypto.createHash('sha256').update(svg).digest('hex')!==a.sha256)errors.push('invalid checksum '+id);
   if(shaSeen.has(a.sha256))errors.push('duplicate graphic '+id);shaSeen.add(a.sha256);
   if(captions.has(a.caption))errors.push('repeated caption within lesson '+id);captions.add(a.caption);
