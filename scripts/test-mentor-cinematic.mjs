@@ -24,9 +24,9 @@ test('Cinematic MENTOR page has visible character, modes, answers and actual stu
 });
 test('No fake 3D claims or unconsented AI and no legacy student state writes',()=>{
   const js=read('mentor/avatar/cinematic.mjs'),css=read('mentor/styles/mentor-cinematic.css'),hologram=read('mentor/avatar/hologram.mjs');
-  assert.match(js,/δεν είναι ακόμη πλήρες 3D/);
+  assert.match(js,/Πραγματικό αρθρωμένο 3D μοντέλο/);
   assert.match(hologram,/setView\("photo"\)/);
-  assert.match(css,/mentor-intro-visual>.mentor-3d-panel/);
+  assert.match(css,/mentor-cinematic-stage/);
   assert.doesNotMatch(js,/indexedDB|localStorage|sessionStorage|fetch\(|XMLHttpRequest|geolocation|SpeechRecognition|openai/i);
   assert.doesNotMatch(css,/@import|url\(['"]?https?:/i);
 });
