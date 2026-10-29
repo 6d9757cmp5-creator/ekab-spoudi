@@ -42,8 +42,9 @@ footer{text-align:center;color:#3f5a6c;padding:22px;line-height:1.5}
 <body>
 <header><h1>🚑 ΕΚΑΒ Σπουδή — Εικόνες μαθημάτων</h1><p>Προεπισκόπηση PR #6 · 20 μαθήματα · 247 κεφάλαια · 649 επιλεγμένες εικόνες</p></header>
 <main>
-<div class="info"><strong>Δοκιμαστική προεπισκόπηση — όχι παραγωγική έκδοση.</strong> Τα ελληνικά σχήματα είναι διαθέσιμα για οπτική επιθεώρηση και σχόλια. Οι 649 εικόνες <strong>δεν έχουν ανεξάρτητη κλινική έγκριση</strong>. Μη χρησιμοποιείτε τη συλλογή ως κλινικό πρωτόκολλο. Δεν απαιτείται σύνδεση ή προσωπικός λογαριασμός.</div>
+<div class="info"><strong>Ποιοτικός έλεγχος εικόνων — όχι παραγωγική έκδοση.</strong> Ο προηγούμενος κατάλογος εμφάνιζε πρόχειρα εικονίδια σαν να ήταν επιστημονικές ανατομικές πλάκες. Η αρχική προβολή περιορίζεται πλέον σε <strong>6 εικόνες από τεκμηριωμένα αρχεία Wikimedia Commons</strong>, με ελληνικές επισημάνσεις και ορατή απόδοση δημιουργού. Δεν σημαίνει ότι έχουν πλήρως επιθεωρηθεί ανατομικά ή εγκριθεί κλινικά. Τα υπόλοιπα πρωτότυπα σχήματα παραμένουν διαθέσιμα <strong>μόνο με ρητή επιλογή</strong> για έλεγχο/ανασχεδιασμό. Συνολικά 649 εγγραφές, 0 ανεξάρτητα κλινικά εγκεκριμένες.</div>
 <div class="controls">
+<label>Τύπος προεπισκόπησης<select id="quality"><option value="commons">Εικόνες βιβλιογραφικών πηγών (6)</option><option value="anatomy">Ανατομία χωρίς εικονίδια (18)</option><option value="all">Όλα τα 649 (περιλαμβάνει πρόχειρα σχήματα)</option></select></label>
 <label>Αναζήτηση εικόνας<input id="q" type="search" placeholder="π.χ. καρδιά, οστά, αεραγωγός" autocomplete="off"></label>
 <label>Εξάμηνο<select id="semester"><option value="">Όλα τα εξάμηνα</option><option>Α</option><option>Β</option><option>Γ</option><option>Δ</option></select></label>
 <label>Μάθημα<select id="course"><option value="">Όλα τα μαθήματα</option></select></label>
@@ -65,7 +66,7 @@ const grid=document.getElementById("grid"),search=document.getElementById("q"),
  stats=document.getElementById("stats"),shown=document.getElementById("shown"),load=document.getElementById("load");
 const viewer=document.getElementById("viewer"),largeImg=document.getElementById("largeImg");
 const modalTitle=document.getElementById("modalTitle"),modalCaption=document.getElementById("modalCaption");
-let filtered=items.slice(),displayed=0,active=0;
+let filtered=[],displayed=0,active=0;const quality=document.getElementById("quality");
 const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 function buildCourses(){
  const selected=course.value;course.replaceChildren(new Option("Όλα τα μαθήματα",""));
@@ -75,8 +76,8 @@ function buildCourses(){
  if([...course.options].some(x=>x.value===selected))course.value=selected;
 }
 function filter(){
- const q=norm(search.value.trim()),sem=semester.value,crs=course.value;
- filtered=items.filter(x=>(!sem||x.semester===sem)&&(!crs||x.course===crs)&&(!q||norm(x.title+" "+x.caption+" "+x.courseTitle+" "+x.id).includes(q)));
+ const q=norm(search.value.trim()),sem=semester.value,crs=course.value,mode=quality.value;
+ filtered=items.filter(x=>(mode==="all"||(mode==="commons"&&x.page.includes("commons.wikimedia.org"))||(mode==="anatomy"&&x.course==="01"&&!/^sem_a_1_/.test(x.id)))&&(!sem||x.semester===sem)&&(!crs||x.course===crs)&&(!q||norm(x.title+" "+x.caption+" "+x.courseTitle+" "+x.id).includes(q)));
  displayed=0;grid.replaceChildren();stats.textContent=filtered.length+" εικόνες από 649";appendBatch();
 }
 function appendBatch(){
@@ -109,6 +110,7 @@ function openAt(i){
  if(!viewer.open)viewer.showModal();
 }
 search.addEventListener("input",filter);
+quality.addEventListener("change",filter);
 semester.addEventListener("change",()=>{buildCourses();filter()});
 course.addEventListener("change",filter);
 load.addEventListener("click",appendBatch);
