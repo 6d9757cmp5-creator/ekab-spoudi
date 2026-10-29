@@ -40,8 +40,8 @@ jobs:
       - name: Protect legacy grades, notes and sync source
         run: |
           git fetch --depth=1 origin main:refs/remotes/origin/main
-          git diff --name-only origin/main...HEAD
-          if git diff --name-only origin/main...HEAD | grep -E '^(app\.js|progress\.js|sync-local\.js|sync-model\.js|cloud-sync\.js|saek-exam-engine\.js|notes-store\.js|ai-grading-client\.js|functions/answer-grader/|workers/answer-grader/)'; then
+          git diff --name-only origin/main HEAD
+          if git diff --name-only origin/main HEAD | grep -E '^(app\.js|progress\.js|sync-local\.js|sync-model\.js|cloud-sync\.js|saek-exam-engine\.js|notes-store\.js|ai-grading-client\.js|functions/answer-grader/|workers/answer-grader/)'; then
             echo "Protected learner-progress files were modified"
             exit 1
           fi
