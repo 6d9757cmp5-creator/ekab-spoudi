@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "project": "ΕΚΑΒ Σπουδή — MENTOR OS",
+  "last_updated": "2026-10-29",
+  "user_instruction": {
+    "text": "Στάδιο 2 είμαστε οκ πέρασε το. Εντολή!",
+    "received_on": "2026-10-29",
+    "interpretation": "The project owner accepts the existing automated source review as sufficient to begin Stage 3 technical development. This is NOT an independent clinician review or verified legal permission.",
+    "acceptance": "owner-accepted-for-next-stage",
+    "authority": "project-owner-for-roadmap-only",
+    "independent_medical_attestation": false,
+    "publisher_rights_document_verified": false
+  },
+  "stage_1": {
+    "name": "Source import and preview",
+    "implementation_status": "implemented-in-review-branch",
+    "evidence": "mentor/review-corpus/manifest.json",
+    "imported_books": 7,
+    "extracted_passages": 2799,
+    "published_to_main": false
+  },
+  "stage_2": {
+    "name": "Evidence quality and rights review",
+    "owner_gate": "accepted-to-proceed",
+    "automated_checks": "completed",
+    "automated_audit_evidence": "mentor/review/BOOST-AUDIT-2026-10-29.md",
+    "clinician_review": "pending-independent-clinician",
+    "publisher_rights_verification": "pending",
+    "publication_clearance": false,
+    "source_texts_clinically_approved": 0,
+    "total_source_texts": 7,
+    "high_risk_samples_queued": 106,
+    "needs_chapter_granularity": 5,
+    "result": "Operational milestone accepted by owner; regulatory/medical/legal gates remain open"
+  },
+  "stage_3": {
+    "name": "Source-grounded educational retrieval and personalized Mentor",
+    "development_authorized": true,
+    "development_status": "ready-to-proceed-in-draft",
+    "allowed_now": [
+      "Build and test citation indexes with original source IDs and locators",
+      "Implement non-clinical preview and offline educational study workflows",
+      "Prepare optional AI architecture behind disabled feature flags",
+      "Preserve SAΕΚ/EΟΠΠΕΠ grades, progress and sync",
+      "Develop clinical reviewer approval queues and independent review workflow"
+    ],
+    "prohibited_until_signoff": [
+      "Classify draft excerpts as human-reviewed or medically approved",
+      "Turn on clinical or AI retrieval from unreviewed books",
+      "Present Mentor as a qualified physician or diagnose/treat a real person",
+      "Publish third-party copyrighted source text to production without confirmed rights",
+      "Merge clinical learning content solely because automated tests succeeded"
+    ]
+  },
+  "controls": {
+    "clinical_retrieval_enabled": false,
+    "model_training_enabled": false,
+    "medical_decision_support_enabled": false,
+    "approved_for_publication": false,
+    "can_start_stage_3_development": true,
+    "safe_rollback": "No legacy grading, progress or cloud-sync modifications",
+    "linked_prs": [
+      83,
+      115
+    ],
+    "legacy_progress_protected": true
+  },
+  "next_required_review": {
+    "type": "independent-human-review-plus-evidence",
+    "by": "qualified clinician and appropriate rights reviewer",
+    "fields": [
+      "reviewer_identity",
+      "credential",
+      "source_version",
+      "exact_chapter_or_page",
+      "assessment_date",
+      "evidence_links",
+      "review_decision"
+    ],
+    "clinical_review_outcome": "not-yet-documented",
+    "publisher_rights_outcome": "not-yet-verified"
+  }
+}
