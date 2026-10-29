@@ -8,7 +8,7 @@ test('3D renderer is real, local, separate from learning state and honest about 
  assert.equal(HOLOGRAM_CAPABILITIES.ai,false);
  assert.equal(HOLOGRAM_CAPABILITIES.externalAssets,false);
  assert.match(HOLOGRAM_CAPABILITIES.mouth,/approximate/);
- const src=read('mentor-3d.mjs');
+ const src=read('mentor/avatar/hologram.mjs');
  assert.match(src,/getContext\("webgl"/);
  assert.match(src,/gl\.drawElements/);
  assert.match(src,/uMvp/);
