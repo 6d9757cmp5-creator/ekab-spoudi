@@ -56,7 +56,7 @@ test('source references are broad verified-origin guidance only, never fictitiou
  for(const source of Object.values(REFERENCE_INDEX)){
   assert.match(source.url,/^https:\/\/(?:www\.erc\.edu|cpr\.heart\.org|qualityhealthservices\.who\.int|www\.who\.int|www\.ekab\.gr)\//);
  }
- const path=new URL('../../mentor-scenarios.js',import.meta.url);
+ const path=new URL('../modules/scenarios.js',import.meta.url);
  const [browser,html]=await Promise.all([
   readFile(path,'utf8'),
   readFile(new URL('../../mentor-scenarios.html',import.meta.url),'utf8')
