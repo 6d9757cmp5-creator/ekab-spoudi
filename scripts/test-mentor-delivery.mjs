@@ -78,6 +78,15 @@ test('Web Speech receives exact chosen voice and adaptive parameters without rec
  assert.equal(calls[1].rate,.86);
  stopGreek(env);
  assert.equal(calls.at(-1),'cancel');
+ const rejected=[];
+ const athina={lang:'el-GR',name:'Athina',voiceURI:'el-GR-AthinaNeural'};
+ const onlyFemale={SpeechSynthesisUtterance,speechSynthesis:{
+   getVoices:()=>[athina],cancel:()=>rejected.push('cancel'),
+   speak:()=>rejected.push('unexpected-audio')
+ }};
+ const maleOnly=speakGreek('Μέντορας',{env:onlyFemale,requireMale:true});
+ assert.equal(maleOnly,false);
+ assert.deepEqual(rejected,[],'No unapproved voice is synthesized');
 });
 test('Classroom events and rig consume the same delivery; no manual mood chooser',()=>{
  const classroom=read('mentor-lab.js');
