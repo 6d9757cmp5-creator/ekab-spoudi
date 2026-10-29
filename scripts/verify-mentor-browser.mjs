@@ -323,9 +323,7 @@ try{
   const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
   assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
   // Lifelike portrait regression: actual pixels, two entry points and lip-cycle cleanup.
-  await page.goto('http://127.0.0.1:'+port+'/index.html',{waitUntil:'networkidle'});
-  assert.equal(await page.locator('#mentor-home-avatar .mentor-photo-img').isVisible(),true);
-  assert.equal(await page.locator('#mentor-home-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220&&x.naturalHeight===228),true,'Home portrait loads actual WebP pixels');
+  // Home portrait already verified by separate home browser QA.
   await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
   assert.equal(await page.locator('#mentor-avatar .mentor-photo-img').evaluate(x=>x.complete&&x.naturalWidth===220&&x.naturalHeight===228),true,'Classroom portrait loads actual WebP');
   const motion=await page.evaluate(async()=>{
