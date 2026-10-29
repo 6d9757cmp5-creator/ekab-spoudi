@@ -51,7 +51,7 @@ export function resolveMentorGreekVoice(voices,voiceName=""){
     hasGreek:!!selected,
     label:!selected?"Δεν βρέθηκε εγκατεστημένη ελληνική φωνή.":
       isKnownMaleGreekVoice(selected)?"Ανδρική ελληνική φωνή: "+selected.name:
-      "Διαθέσιμη ελληνική φωνή (το φύλο δεν είναι επιβεβαιωμένο): "+selected.name
+      "Δεν βρέθηκε επαληθευμένη ανδρική ελληνική φωνή · η φωνή "+selected.name+" δεν θα αναπαραχθεί αυτόματα."
   });
 }
 export function selectGreekVoice(voices,name){
