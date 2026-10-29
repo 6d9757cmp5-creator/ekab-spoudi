@@ -50,7 +50,7 @@ for(const [key,a] of Object.entries(assets)){
  if(a.localPath&&/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/i.test(a.page||''))
   sourceQuality.commonsLocalMirrorAssetIds.push(key);
  // Review metadata records prior work; it is not proof of a live URL check or certification.
- if(typeof a.sourcePageReviewed==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(a.sourcePageReviewed))
+ if(typeof a.sourcePageReviewed==='string'&&/^\d{4}-\d{2}-\d{2}(?::|$)/.test(a.sourcePageReviewed))
   sourceQuality.sourcePageReviewRecordedAssetIds.push(key);
  if(a.visualReview&&typeof a.visualReview.date==='string'&&typeof a.visualReview.scope==='string'&&a.visualReview.scope.trim())
   sourceQuality.visualReviewRecordedAssetIds.push(key);
@@ -104,6 +104,8 @@ const report={
   visualReviewRecordedCount:sourceQuality.visualReviewRecordedAssetIds.length,
   visualReviewHashBoundCount:sourceQuality.visualReviewHashBoundAssetIds.length,
   unrecordedSourcePageReviewCount:Object.keys(assets).length-sourceQuality.sourcePageReviewRecordedAssetIds.length,
+  sourcePageReviewFieldMissingCount:Object.values(assets).filter(a=>!a.sourcePageReviewed).length,
+  sourcePageReviewUndatedCount:Object.values(assets).filter(a=>a.sourcePageReviewed&&!/^\d{4}-\d{2}-\d{2}(?::|$)/.test(a.sourcePageReviewed)).length,
   liveSourcePagesVerified:0,
   note:'Review dates/scopes are historical metadata, not current-hash-bound visual proof unless explicitly linked to SHA-256. Local hashes and optional image-URL HEAD requests do not validate source-page claims, clinical content, or offline/browser rendering.'
  },
