@@ -288,6 +288,25 @@ try{
   ));
   assert.deepEqual(afterReadOnly,beforeReadOnly,'Mentor reader must not mutate any local progress or grade');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Presence experience: actual interaction, no new AI, no writes to legacy progress.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-avatar').count(),1,'One visible mentor character');
+  assert.equal(await page.locator('#mentor-presence-line').isVisible(),true);
+  assert.equal(await page.locator('#mentor-hero-question').isVisible(),true);
+  const legacyBeforePresence=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
+  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω σήμερα;');
+  await page.locator('#mentor-hero-form button[type="submit"]').click();
+  await page.waitForFunction(()=>document.querySelector('#mentor-presence-line').textContent.includes('Προτείνω'));
+  assert.match(await page.locator('#mentor-voice-status').textContent(),/περιορισμένο εκπαιδευτικό/);
+  assert.equal(await page.locator('#coach-dialogue .coach-message').count(),3,'Hero question also appears in Tutor conversation');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),legacyBeforePresence);
+  await page.locator('#mentor-intro-chat').click();
+  assert.equal(await page.locator('#tab-route').getAttribute('aria-selected'),'true','Conversation button opens working tutor');
+  assert.equal(await page.locator('#coach-question').evaluate(x=>document.activeElement===x),true,'Tutor input focused');
+  const home=await readFile(resolve(root,'index.html'),'utf8');
+  assert.match(home,/class="home-mentor-presence"/);
+  assert.match(home,/href="mentor-readonly.html"/);
+  assert.match(home,/href="mentor-live.html"/);
   assert.deepEqual(errors,[],'No browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
