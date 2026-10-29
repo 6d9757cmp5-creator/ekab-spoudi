@@ -82,5 +82,5 @@ export async function mountReviewSearch(){
   }finally{busy=false;run.disabled=false;select.disabled=false;}
  }
  form.addEventListener('submit',event=>{event.preventDefault();void search();});
- return Object.freeze({search,ready:sourceIds.length===5});
+ return Object.freeze({search,ready:sourceIds.length===7});
 }
