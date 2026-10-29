@@ -1322,7 +1322,27 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionTextFromRegistryMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Ορισμός άρθρωσης ως σύνδεσης γειτονικών οστών ή οστού-χόνδρου",
+          "Δομική ταξινόμηση σε ινώδεις, χόνδρινες, συνοβιακές"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-1-classification-of-joints"
+        ],
+        "finding": "Το OpenStax §9.1 ορίζει άρθρωση και τρεις δομικές κατηγορίες ακριβώς όπως στην πλήρη αποθηκευμένη απάντηση. Η παλιά πηγή chapter review είναι γενικότερη· προτείνεται §9.1.",
+        "limits": "Δεν επιβεβαιώθηκε η πιο πρόσφατη επίσημη τράπεζα ή επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-037",
@@ -1336,7 +1356,28 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionTextFromRegistryMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "7 αυχενικοί, 12 θωρακικοί, 5 οσφυϊκοί",
+          "5 συνοστεωμένοι ιεροί και συνήθως 4 κοκκυγικοί",
+          "24 διακριτοί σπόνδυλοι στον ενήλικο, συν ιερό/κόκκυγα"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/7-3-the-vertebral-column"
+        ],
+        "finding": "Το OpenStax §7.3 «Regions of the Vertebral Column» τεκμηριώνει την κατανομή 7/12/5/5/4 και τους 24 σπονδύλους συν ιερό/κόκκυγα. Η διατύπωση «κινητοί» είναι εκπαιδευτική συντομογραφία, όχι ισχυρισμός ότι κάθε σπόνδυλος κινείται ανεξάρτητα.",
+        "limits": "Ατομικές παραλλαγές αριθμού κοκκυγικών σπονδύλων δεν εξετάστηκαν· δεν ελέγχθηκε επίσημο λυσάρι.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-038",
@@ -1350,7 +1391,29 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionTextFromRegistryMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Έξω/έσω μεσοπλεύριοι και διάφραγμα ως αναπνευστικοί μύες",
+          "Μείζων/ελάσσων θωρακικός και πρόσθιος οδοντωτός ως μύες της θωρακικής περιοχής",
+          "Αναφορά ενδότατων μεσοπλευρίων, σκαληνών και στερνοκλειδομαστοειδούς"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs"
+        ],
+        "finding": "Οι έξω/έσω μεσοπλεύριοι και το διάφραγμα τεκμηριώνονται στο OpenStax §11.4· οι θωρακικοί/οδοντωτός στην §11.5. ΕΚΚΡΕΜΟΤΗΤΑ: δεν τεκμηριώθηκαν ατομικά με τα αναγνωσμένα χωρία οι ενδότατοι μεσοπλεύριοι και οι επικουρικοί σκαληνοί/στερνοκλειδομαστοειδής. Απαιτείται συμπληρωματική πηγή πριν πλήρη συμφωνία.",
+        "limits": "Μερική αντιπαραβολή πλήρους απάντησης: οι επιπλέον αναφερόμενοι μύες δεν πιστοποιούνται από τις συγκεκριμένες πηγές εδώ. Δεν ελέγχθηκε επίσημο λυσάρι.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-039",
@@ -1364,7 +1427,29 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionTextFromRegistryMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Ορθός κοιλιακός, έξω/έσω λοξός και εγκάρσιος κοιλιακός",
+          "Πυραμοειδής ως ανατομική παραλλαγή, όχι σταθερά παρών",
+          "Στήριξη σπλάχνων, κινήσεις κορμού και ενεργός εκπνοή"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/11-4-axial-muscles-of-the-abdominal-wall-and-thorax",
+          "https://www.ncbi.nlm.nih.gov/books/NBK551649/"
+        ],
+        "finding": "Το OpenStax §11.4 τεκμηριώνει τους τέσσερις βασικούς μύες και τη λειτουργία τους. NCBI StatPearls «Abdominal Wall» τεκμηριώνει τον πυραμοειδή και την πιθανή απουσία του. Συμβατό στα ελεγχθέντα σημεία.",
+        "limits": "Δεν επιβεβαιώθηκε επίσημο εξεταστικό λυσάρι ΕΟΠΠΕΠ· το NCBI είναι βιβλιοθήκη επιστημονικών δημοσιεύσεων, όχι επίσημη κρατική έγκριση.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-040",
@@ -1378,7 +1463,28 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-29",
+        "recordedAt": "2026-10-29",
+        "level": "first_pass_targeted_full_stored_answer_comparison",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "fullStoredAnswerRead": true,
+        "archivedQuestionTextFromRegistryMatched": true,
+        "currentEoppepVersionConfirmed": false,
+        "comparedClaims": [
+          "Πνεύμονες στις υπεζωκοτικές κοιλότητες",
+          "Μεσοθωράκιο: καρδιά/περικάρδιο, μεγάλα αγγεία, τραχεία, οισοφάγος, θύμος, νεύρα και λεμφαγγεία"
+        ],
+        "sources": [
+          "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+          "https://www.ncbi.nlm.nih.gov/books/NBK539819/"
+        ],
+        "finding": "Το OpenStax §1.6 τεκμηριώνει θωρακικές/υπεζωκοτικές κοιλότητες, το NCBI StatPearls «Thorax, Mediastinum» τα όργανα και τις δομές του μεσοθωρακίου. Η αποθηκευμένη απάντηση είναι βασικά συμβατή. ΠΡΟΒΛΗΜΑ ΠΑΡΑΠΟΜΠΗΣ: ο υπάρχων γενικός WHO Basic Emergency Care δεν είναι ειδική πηγή για την πλήρη ανατομική απαρίθμηση· χρειάζεται αντικατάσταση με τις ανωτέρω.",
+        "limits": "Δεν έγινε αλλαγή στο official_questions.json· η λανθασμένα γενική παραπομπή παραμένει στην εφαρμογή. Δεν ελέγχθηκε επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "fullScientificApproval": false
+      }
     },
     {
       "id": "EOP-A-041",
