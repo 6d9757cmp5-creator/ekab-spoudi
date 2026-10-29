@@ -8,6 +8,8 @@ import {resolveMentorScope} from './mentor/core/identity.mjs';
 import {readLegacySnapshot} from './mentor/core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from './mentor/core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from './mentor/core/guided-coach.mjs';
+import {knowledgeResponse,assertKnowledgePack} from './mentor/knowledge/search.mjs';
+import {mountKnowledgePanel} from './mentor/knowledge/knowledge-ui.mjs';
 import {mountActivities} from './mentor/activities-ui.mjs';
 
 const $=id=>document.getElementById(id);
@@ -208,10 +210,22 @@ function wireStudyPreferences(){
 }
 // Mentor-only scripted tutor: generated from test-session aggregates, never grades user text.
 let lastCoachReply='';
-function addCoachMessage(role,message){
+function addCoachMessage(role,message,sources=[],note=''){
   const row=make('div','coach-message coach-message-'+role);
   row.append(make('strong',null,role==='assistant'?'MENTOR · Εκπαιδευτική απάντηση':'Ερώτησή μου'));
   row.append(make('p',null,message));
+  if(note)row.append(make('p','muted small',note));
+  if(role==='assistant'&&sources.length){
+    const refs=make('div','coach-sources');
+    refs.append(make('strong',null,'Πηγές για διασταύρωση'));
+    for(const source of sources){
+      if(!/^https:\/\//.test(source.url))continue;
+      const link=make('a',null,source.title);
+      link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';
+      refs.append(link);
+    }
+    row.append(refs);
+  }
   $('coach-dialogue').append(row);
   // Keep the current-page dialogue bounded; no persistence or network transmission.
   while($('coach-dialogue').childElementCount>12)$('coach-dialogue').firstElementChild.remove();
@@ -220,6 +234,12 @@ async function coachAsk(intent,topic,userText){
   addCoachMessage('user',userText);
   try{
     const overview=state.store&&state.scope?await state.store.overview(state.scope):null;
+    const knowledge=knowledgeResponse(userText,{intent});
+    if(knowledge){
+      lastCoachReply=knowledge.text;
+      addCoachMessage('assistant',lastCoachReply,knowledge.sources,knowledge.disclaimer||'');
+      return;
+    }
     lastCoachReply=coachResponse({intent,topic,overview});
   }catch{
     lastCoachReply='Δεν μπόρεσα να διαβάσω τις δοκιμαστικές καταγραφές Mentor. Η υπάρχουσα πρόοδος δεν άλλαξε.';
@@ -256,7 +276,7 @@ function wireCoach(){
   $('coach-stop').addEventListener('click',()=>{
     if(available)speechSynthesis.cancel();
   });
-  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές Mentor ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
+  addCoachMessage('assistant','Καλώς ήρθες! Μπορώ να εξηγήσω έννοιες από 29 ελληνικές εκπαιδευτικές κάρτες με παραπομπές, να προτείνω άσκηση ή να δω τις δοκιμές σου. Δεν είμαι AI ή ιατρός και δεν δίνω θεραπευτικές οδηγίες.');
 }
 async function renderPlan(){
   renderPersonalPlan();
@@ -321,6 +341,8 @@ async function boot(){
   wireModes();
   wireStudyPreferences();
   wireCoach();
+  try{assertKnowledgePack();mountKnowledgePanel();}
+  catch(e){$('knowledge-count').textContent='Η βιβλιοθήκη δεν φορτώθηκε: '+String(e.message||e);}
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
