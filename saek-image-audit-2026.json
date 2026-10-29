@@ -891,17 +891,17 @@
       ],
       "caption": "Αναλογικό σχέδιο 30 και 60 km/h: με σταθερό χρόνο αντίδρασης η απόσταση αντίδρασης διπλασιάζεται, με ίδια σταθερή επιβράδυνση η απόσταση πέδησης τετραπλασιάζεται. Δεν δίνει πραγματικά μέτρα ασθενοφόρου.",
       "originalArtwork": true,
-      "sourcePageReviewed": "2026-10-26",
+      "sourcePageReviewed": "2026-10-29: FHWA stopping-sight-distance guidance checked for component model; not an ambulance measurement or Greek driving rule",
       "sourcePageCheckedFor": [
-        "Online primary road safety or official EMS crash testing guidance; no independent clinical review"
+        "FHWA stopping-sight-distance guidance: total distance is reaction distance plus braking distance; reaction distance depends on reaction time, while braking distance varies with speed, deceleration and roadway conditions. Under fixed reaction time and deceleration, the schematic 2× / 4× ratios are consistent; not a real vehicle or ambulance distance."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "date": "2026-10-26",
-        "scope": "Source SVG structural review in progress; raster/browser/zoom/offline E2E pending"
+        "date": "2026-10-29",
+        "scope": "Exact SVG rendered locally to 1100×640 raster and inspected individually. Component bars visibly scale reaction distance ×2 and braking distance ×4 from 30 to 60 km/h under the stated fixed-condition model; the 30 km/h labels were aligned. No real distances are shown and variable grip, load and reaction are noted. Road-safety visual review only; browser/mobile/zoom/offline E2E pending."
       },
       "subjectCompleteness": "partial",
-      "sha256": "041042adea9462ddba2e7d2b24ecf872a6425ece06c842c902663c037d8eda2a"
+      "sha256": "0734a8ea1e6e880de528359c2f7064cc0a3dd9ced0b2feec5e85745ab16e010d"
     },
     "ambulance_restraint_zones": {
       "filename": "ambulance-restraint-zones-el.svg",
@@ -1852,8 +1852,15 @@
       "originalArtwork": true,
       "page": "https://www.who.int/publications/9789240114067",
       "caption": "Δύο κινητά τηλέφωνα συνδέονται με χάρτη κοινής θέσης και καταγραφή που ελέγχεται από συντονιστικό. Δεν καθορίζει κανόνες διαγραφής ή συγχώνευσης επιχειρησιακών δελτίων.",
-      "sourcePageReviewed": "pending independent full-page verification",
-      "sourcePageCheckedFor": [],
+      "sourcePageReviewed": "2026-10-29: NHS skin-layer and burn-depth references checked for schematic anatomy only; no burn classification or treatment approval",
+      "additionalSources": [
+        "https://www.dbth.nhs.uk/wp-content/uploads/2026/04/Best-Practice-Statement-Managing-ageing-skin-and-skin-integrity.pdf",
+        "https://www.elft.nhs.uk/sites/default/files/2024-01/Management%20of%20Scalds%20and%20Burns%20Procedural%20Document%201.0.pdf"
+      ],
+      "sourcePageCheckedFor": [
+        "NHS skin-layer reference: epidermis outermost, dermis below, hypodermis deepest",
+        "NHS burn-depth guidance: superficial dermal injury involves epidermis and upper dermis; drawing remains illustrative and is not a clinical grade"
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
@@ -1913,16 +1920,23 @@
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "originalArtwork": true,
       "page": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
+      "additionalSources": [
+        "https://www.dbth.nhs.uk/wp-content/uploads/2026/04/Best-Practice-Statement-Managing-ageing-skin-and-skin-integrity.pdf",
+        "https://www.elft.nhs.uk/sites/default/files/2024-01/Management%20of%20Scalds%20and%20Burns%20Procedural%20Document%201.0.pdf"
+      ],
       "caption": "Δύο πρωτότυπες τομές δέρματος με επιδερμίδα, χόριο και υποδόριο, μία ενδεικτικά με θερμική αλλοίωση. Δεν πρόκειται για κλινική σταδιοποίηση, οδηγίες ψύξης ή έκταση εγκαύματος.",
-      "sourcePageReviewed": "pending independent full-page verification",
-      "sourcePageCheckedFor": [],
+      "sourcePageReviewed": "2026-10-29: NHS skin-layer and burn-depth references checked for schematic anatomy only; no burn classification or treatment approval",
+      "sourcePageCheckedFor": [
+        "NHS skin-layer reference: epidermis outermost, dermis below, hypodermis deepest",
+        "NHS burn-depth guidance: superficial dermal injury involves epidermis and upper dermis; drawing remains illustrative and is not a clinical grade"
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
+        "date": "2026-10-29",
+        "scope": "Exact SVG rendered locally to 1200×690 raster and inspected individually. Two side-by-side cross-sections clearly show top epidermis, middle dermis and lower subcutaneous layer. Burn patch reaches the surface and upper dermis; it is explicitly not a severity grade. Added color-matched legend chips because the original text-only labels could be read as a left-to-right anatomy order. Independent Greek clinical review and browser/mobile/zoom/offline E2E pending."
       },
-      "sha256": "5d5d171439c454452ef17e9b52b9e33e3702e6b104c7fd18ed4026c6522e8216"
+      "sha256": "d1d5d62d9161374dbd55c279174a85a370e2c6e29cfb45204f49fff53acd5451"
     },
     "hypothermia_trauma_protection": {
       "filename": "hypothermia-trauma-protection-el.svg",
@@ -1934,13 +1948,15 @@
       "originalArtwork": true,
       "page": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
       "caption": "Σχηματικός ασθενής σε φορείο με προστατευτική κάλυψη, έδαφος, αέρα και υγρασία. Δεν προδιαγράφει πρωτόκολλο επαναθέρμανσης.",
-      "sourcePageReviewed": "pending independent full-page verification",
-      "sourcePageCheckedFor": [],
+      "sourcePageReviewed": "2026-10-29: Resuscitation Council UK 2025 first-aid guidance checked for general hypothermia-prevention concepts; not Greek protocol approval",
+      "sourcePageCheckedFor": [
+        "RCUK 2025 first aid: dry covering/insulation, wind protection, wet clothing replacement, and insulation from cold ground are prevention concepts; no rewarming procedure or temperature threshold depicted"
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Structural SVG nesting and Greek/ARIA text reviewed; full XML parser, raster/browser/mobile layout, zoom and offline E2E still pending."
+        "date": "2026-10-29",
+        "scope": "Exact SVG rendered locally to 1200×690 raster and inspected individually. Covered patient, stretcher, cold ground, ambient air and moisture symbols are distinct; headings and caveats fit. Graphic shows environmental protection only and does not prescribe rewarming. Independent Greek clinical review and browser/mobile/zoom/offline E2E pending."
       },
       "sha256": "99578c7fdfc852f8b89a33fc5c3e903537544296ff7baf99f7bc8eda7d086119"
     },
