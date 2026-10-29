@@ -1392,16 +1392,22 @@
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "originalArtwork": true,
       "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
-      "caption": "Σχηματική πρόσθια όψη με αεραγωγό, πνεύμονες, βρόγχους, καρδιά, αγγεία και διάφραγμα, με δίγλωσσες επισημάνσεις. Δεν αποτελεί οδηγία κλινικής πράξης.",
-      "sourcePageReviewed": "pending independent source verification",
-      "sourcePageCheckedFor": [],
+      "caption": "Σχηματική πρόσθια όψη με αεραγωγό, πνεύμονες, βρόγχους, καρδιά, αγγεία και διάφραγμα, με ελληνικές/αγγλικές ετικέτες. Δείκτης Airway καταλήγει στην τραχεία. Δεν αποτελεί οδηγία κλινικής πράξης.",
+      "sourcePageReviewed": "2026-10-29",
+      "sourcePageCheckedFor": [
+        "OpenStax Anatomy & Physiology 2e §22.1 supports larynx, trachea and airway structures; §20.2 supports pulse as arterial expansion/recoil. These sources support topic mapping, not diagnostic use or independent clinical approval."
+      ],
       "clinicalReview": "pending",
       "subjectCompleteness": "partial",
       "visualReview": {
-        "date": "2026-10-27",
-        "scope": "Greek text, SVG XML-like tag balance and semantic tags checked; rendered/browser/offline visual end-to-end pending"
+        "date": "2026-10-29",
+        "scope": "Final SVG rendered in Edge at 1200x730 and raster inspected for Greek/English label fit, leader endpoints, overlap and clipping. Found Airway leader ending at the heart; rerouted it to the upper airway/trachea and re-rendered. Partial anatomical schematic, not clinical guidance or independent validation."
       },
-      "sha256": "c71518d29cf055851c17b9fb5fd5c308f5acdc2aceaa2c0c637296e55f9ec80b"
+      "sha256": "db5932c483936b199f90c5f5d86e9f9e8c3265a408a953bf2ee25de9cf1fedce",
+      "additionalSources": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance"
+      ]
     },
     "bilingual_ambulance_equipment": {
       "filename": "bilingual-ambulance-equipment-el.svg",
@@ -4583,17 +4589,23 @@
       "author": "ΕΚΑΒ Σπουδή · πρωτότυπο κεφαλαιοκεντρικό εκπαιδευτικό σχήμα",
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
-      "caption": "Εικόνα αναγνώρισης: Vital signs — ζωτικά · Pulse — σφυγμός · Airway — αεραγωγός. Κάθε σύντομη ονομασία δείχνει με βέλος το αντίστοιχο σχεδιασμένο στοιχείο.",
+      "page": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
+      "caption": "Εικόνα αναγνώρισης: Vital signs — ζωτικά · Pulse — σφυγμός · Airway — αεραγωγός. Η κυματομορφή σφυγμού και το σχήμα λάρυγγα/τραχείας δείχνουν αντίστοιχα τις δύο έννοιες.",
       "originalArtwork": true,
       "sourcePageCheckedFor": [
-        "Independent clinical verification against linked reference still required; based on chapter-specific project theory"
+        "OpenStax Anatomy & Physiology 2e §22.1 supports larynx, trachea and airway structures; §20.2 supports pulse as arterial expansion/recoil. These sources support topic mapping, not diagnostic use or independent clinical approval."
       ],
       "clinicalReview": "pending",
       "visualReview": {
-        "scope": "Three concise labeled objects; each arrow ends at a distinct subject pictogram. Automated label/metadata/CI testing, not independent human optical review."
+        "date": "2026-10-29",
+        "scope": "Final SVG rendered in Edge at 1110x630 and raster inspected. Replaced a generic monitor, an unrelated blood-drop icon under Pulse, and lungs incorrectly labeled Airway with a vital-sign waveform monitor, pulse waveform, and larynx/trachea. Labels/arrows clear and no overlap. Not independent clinical approval."
       },
-      "sha256": "92da6c1db19a87facff1fff27a59dec7a966081a9e74d8d5ffd7f5fdc8b88968"
+      "sha256": "df7286c1d0edf5704af44509d96094161d5360880b3c7c091baf2e82a6b4891b",
+      "additionalSources": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-1-organs-and-structures-of-the-respiratory-system",
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance"
+      ],
+      "sourcePageReviewed": "2026-10-29"
     },
     "sem_a_6_2_concept": {
       "filename": "semester-a-06-02-concept-el.svg",
