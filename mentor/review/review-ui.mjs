@@ -4,6 +4,7 @@
  */
 import {createReviewBookLoader} from './book-loader.mjs';
 import {findForEditorialPreview} from './review-search.mjs';
+import {canPreviewSource,assertNoClinicalApproval} from './rights-policy.mjs';
 
 const $=id=>document.getElementById(id);
 function node(tag,cls,value){
@@ -23,8 +24,9 @@ export async function mountReviewSearch(){
  };
  try{
   const [sources,manifest]=await Promise.all([loader.sources(),loader.manifest()]);
-  const approved=0; // All sources in public index explicitly have clinical_retrieval_enabled=false.
-  const candidates=sources.filter(s=>s.extracted_for_review &&
+  assertNoClinicalApproval(manifest,sources);
+  const approved=0; // Rights/clinical approval gates never permit clinical retrieval.
+  const candidates=sources.filter(s=>s.extracted_for_review && canPreviewSource(s.id) &&
     manifest.books.some(b=>b.source_id===s.id));
   sourceIds=candidates.map(s=>s.id);
   select.replaceChildren();
@@ -32,7 +34,8 @@ export async function mountReviewSearch(){
    const option=node('option',null,item.title);option.value=item.id;select.append(option);
   }
   if(sourceIds.includes('wistech-emr-2025'))select.value='wistech-emr-2025';
-  count.textContent=candidates.length+' εισαγμένα βιβλία · '+approved+' εγκεκριμένα για κλινική ανάκτηση';
+  count.textContent=manifest.books.length+' εισαγμένα βιβλία · '+candidates.length+
+    ' διαθέσιμα για δοκιμαστική βιβλιογραφική προεπισκόπηση · '+approved+' εγκεκριμένα για κλινική ανάκτηση';
   writeStatus('Επίλεξε βιβλίο και αναζήτησε όρο. Θα φορτωθεί μόνο το συγκεκριμένο βιβλίο.');
  }catch(e){
   select.disabled=true;run.disabled=true;
@@ -79,5 +82,5 @@ export async function mountReviewSearch(){
   }finally{busy=false;run.disabled=false;select.disabled=false;}
  }
  form.addEventListener('submit',event=>{event.preventDefault();void search();});
- return Object.freeze({search,ready:sourceIds.length===7});
+ return Object.freeze({search,ready:sourceIds.length===5});
 }
