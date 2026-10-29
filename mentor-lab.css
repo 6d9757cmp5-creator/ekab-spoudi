@@ -233,3 +233,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .mentor-voice-help summary{font-weight:800;cursor:pointer}
 .mentor-voice-help p{margin:9px 0 2px!important;font-size:.78rem!important;color:#d6f6ff!important}
 @media(max-width:550px){.mentor-voice-diagnostics{flex-direction:column}.mentor-voice-diagnostics button{width:100%}}
+
+.mentor-hero-answer{margin:12px 0;padding:14px;border:1px solid #4bc3eb75;border-radius:12px;background:#0b3550;color:#f1fbff;line-height:1.55}
+.mentor-hero-answer[hidden],#mentor-hero-answer-source[hidden]{display:none!important}
+#mentor-hero-answer-source{display:inline-block;margin:5px 0 12px;font-size:.82rem;color:#8bdefe;text-decoration:underline}
