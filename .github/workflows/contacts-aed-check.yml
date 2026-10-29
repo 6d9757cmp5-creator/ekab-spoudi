@@ -1,0 +1,48 @@
+name: AED contacts minimalist UI smoke check
+on:
+  pull_request:
+    paths:
+      - contacts.html
+      - contacts-aed.css
+      - contacts-nearby-aed.js
+      - .github/workflows/contacts-aed-check.yml
+permissions:
+  contents: read
+jobs:
+  validate-aed-contacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check official AED map script syntax
+        run: node --check contacts-nearby-aed.js
+      - name: Verify compact layout and original-publisher poster link
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path('contacts.html').read_text(encoding='utf-8')
+          js=Path('contacts-nearby-aed.js').read_text(encoding='utf-8')
+          css=Path('contacts-aed.css').read_text(encoding='utf-8')
+          assert html.count('id="aedNearbyMap"') == 1
+          assert html.count('id="aedSearchRadius"') == 1
+          assert 'id="aedFindNearby"' in html
+          assert 'href="tel:112"' in html and 'href="tel:166"' in html
+          assert 'https://apinidotes.crete.gov.gr/files/afisaBLS.pdf' in html
+          assert 'assets/aed-first-aid-poster.webp' not in html
+          assert 'aed-step' not in html
+          # Exactly one explicit publisher-hosted 2021 BLS PDF preview, not a second map.
+          assert html.count('<iframe') == 1
+          assert 'src="https://apinidotes.crete.gov.gr/files/afisaBLS.pdf#toolbar=0"' in html
+          assert 'loading="lazy"' in html
+          assert 'href="https://www.erc.edu/science-research/guidelines/guidelines-2025"' in html
+          assert '2021' in html and '2025' in html
+          assert 'www.google.com/maps/embed' not in html
+          assert 'aedNearbyResults' not in html and 'aedNearbyCount' not in html
+          assert 'https://apinidotes-api.crete.gov.gr/apinidotesApi/api/Defibrillators' in js
+          assert 'item.availability !== true || item.public !== true' in js
+          assert 'navigator.geolocation.getCurrentPosition' in js
+          assert "permission.state === 'granted'" in js
+          assert "cache: 'no-store'" in js
+          assert 'localStorage' not in js and 'sessionStorage' not in js
+          assert 'aed-nearby-map[hidden]' in css
+          print('Minimal AED UI smoke check passed')
+          PY

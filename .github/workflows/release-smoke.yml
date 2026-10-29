@@ -1,0 +1,34 @@
+name: Release quality smoke checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  release-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate required pages, Greek metadata and review registry
+        run: python3 scripts/release_smoke.py
+      - name: Verify SAEK reading safety, storage and all 247 chapters
+        run: node scripts/verify-saek-reader-safety.cjs
+      - name: Check JavaScript syntax when Node.js is available
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in sw.js saek-reader-safe.js saek-hub.js progress.js updates.js home-tracker-v2.js home-progress-panel.js activity-time.js saek-exams.js theme-init.js global-tools.js app.js navigation.js; do
+            node --check "$file"
+          done
+          for file in account-ui.js appwrite-client.js cloud-sync.js sync-local.js sync-model.js seminar-sync.js notes-store.js notes-delete.js notes-position.js notes-panel.js; do
+            node --input-type=module --check < "$file"
+          done
+      - name: Verify cross-device seminar progress merge and deletion safety
+        run: node scripts/test-seminar-sync.cjs
+      - name: Verify searchable private notes, SOS source coverage and safe cloud merges
+        run: node scripts/verify-notes-panel.mjs
+      - name: Verify draggable notes position persistence and dark UI
+        run: node scripts/verify-notes-position.mjs
+      - name: Verify minimal dual progress, practice-only seminars and reset isolation
+        run: node scripts/verify-progress-panel.cjs

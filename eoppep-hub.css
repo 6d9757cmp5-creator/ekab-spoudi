@@ -1,0 +1,15 @@
+/* Certification hub follows SAEK's two-route, grouped study layout. */
+.eoppep-hub .eop-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+.eoppep-hub .eop-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 8px}
+.eoppep-hub .eop-shortcuts>a{display:flex;align-items:center;gap:9px;min-width:0;padding:12px;background:var(--light);border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none}
+.eoppep-hub .eop-shortcuts>a:hover,.eoppep-hub .eop-shortcuts>a:focus-visible{border-color:var(--blue);outline-offset:2px}
+.eoppep-hub .eop-shortcuts>a span{flex:1;min-width:0}
+.eoppep-hub .eop-shortcuts strong{display:block;font-size:.82rem;line-height:1.35}
+.eoppep-hub .eop-shortcuts small{display:block;font-size:.7rem;line-height:1.3;margin-top:4px;color:var(--muted)}
+.eoppep-hub .eop-practical{display:flex;margin:0 0 11px}
+.eoppep-hub .eop-explain{font-size:.74rem;line-height:1.5;margin-top:10px}
+html[data-theme="dark"] .eoppep-hub .eop-shortcuts>a{background:#1b394e;color:#eaf5fb;border-color:#406075}
+html[data-theme="dark"] .eoppep-hub .eop-shortcuts small{color:#c2dbe7}
+html[data-theme="dark"] .eoppep-hub .eop-practical{background:#132639;color:#eaf5fb;border-color:#3a5366}
+@media(max-width:570px){.eoppep-hub .eop-shortcuts{gap:7px}.eoppep-hub .eop-shortcuts>a{padding:10px 7px;gap:5px;font-size:.78rem}.eoppep-hub .eop-shortcuts strong{font-size:.74rem}.eoppep-hub .eop-shortcuts small{font-size:.64rem}.eoppep-hub .eop-practical{min-height:70px;padding:13px}.eoppep-hub .eop-practical .hub-action-icon{margin:0}.eoppep-hub .eop-practical .hub-action-arrow{position:static;margin-left:auto}}
+@media(max-width:345px){.eoppep-hub .eop-shortcuts{grid-template-columns:1fr}}

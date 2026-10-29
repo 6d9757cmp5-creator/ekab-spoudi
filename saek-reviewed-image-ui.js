@@ -20,19 +20,39 @@ function sourceUrl(asset){
  if(asset.localPath)return asset.localPath;
  return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(asset.filename);
 }
-function zoom(imgUrl,alt){
- const dialog=el('dialog','saek-source-dialog');
- const top=el('div','saek-source-dialog-bar');
- const close=el('button','saek-source-close','Κλείσιμο εικόνας ✕');
- close.type='button';close.addEventListener('click',()=>dialog.close());
- top.append(close);
- const frame=el('div','saek-source-zoom-frame');
- const img=el('img','saek-source-full');
- img.src=imgUrl;img.alt=alt;frame.append(img);dialog.append(top,frame);
+function zoom(items,initial){
+ let index=initial,scale=1,pinch=0,pinchBase=1,x=null,y=null;
+ const dialog=el('dialog','saek-clean-lightbox');
+ const close=el('button','saek-clean-close','✕');
+ const prev=el('button','saek-clean-prev','‹');
+ const next=el('button','saek-clean-next','›');
+ const image=el('img','saek-clean-image');
+ const stage=el('div','saek-clean-stage');
+ close.type=prev.type=next.type='button';
+ close.setAttribute('aria-label','Κλείσιμο εικόνας');
+ prev.setAttribute('aria-label','Προηγούμενη εικόνα');
+ next.setAttribute('aria-label','Επόμενη εικόνα');
+ function show(n){index=(n+items.length)%items.length;scale=1;image.style.transform='scale(1)';image.src=items[index].url;image.alt=items[index].alt;prev.hidden=next.hidden=items.length<2;}
+ function resize(n){scale=Math.max(1,Math.min(5,n));image.style.transform='scale('+scale+')';}
+ close.onclick=()=>dialog.close();
+ prev.onclick=()=>show(index-1);next.onclick=()=>show(index+1);
+ image.addEventListener('dblclick',()=>resize(scale>1?1:2));
+ stage.addEventListener('touchstart',e=>{
+  if(e.touches.length===2){pinch=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);pinchBase=scale;x=null;}
+  else if(e.touches.length===1){x=e.touches[0].clientX;y=e.touches[0].clientY;}
+ },{passive:true});
+ stage.addEventListener('touchmove',e=>{if(e.touches.length===2&&pinch){e.preventDefault();resize(pinchBase*Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)/pinch);}},{passive:false});
+ stage.addEventListener('touchend',e=>{
+  if(pinch){if(e.touches.length<2)pinch=0;x=null;return;}
+  if(x===null||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;x=null;
+  if(scale===1&&Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4&&items.length>1)show(index+(dx<0?1:-1));
+ },{passive:true});
+ dialog.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(index-1);if(e.key==='ArrowRight')show(index+1);});
  dialog.addEventListener('close',()=>dialog.remove());
  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
- document.body.append(dialog);
- if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
+ stage.append(image);dialog.append(stage,close,prev,next);
+ document.body.append(dialog);show(index);dialog.showModal();
 }
 // A registry fetch failure must not silently remove every lesson image.
 // Offer a local retry without reloading the page or resetting study progress.
@@ -56,7 +76,7 @@ function showRegistryFailure(error){
  }
  console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',error);
 }
-function render(asset,lessonId){
+function render(asset,lessonId,items,position){
  const fig=el('figure','saek-source-figure');
  const label=el('h4','saek-source-title',asset.title);
  const image=el('img','saek-source-image');
@@ -65,7 +85,9 @@ function render(asset,lessonId){
  image.referrerPolicy='no-referrer';
  const figureActions=el('div','saek-source-actions');
  const bigger=el('button','saek-source-action','Μεγέθυνση εικόνας');
- bigger.type='button';bigger.addEventListener('click',()=>zoom(image.src,image.alt));
+ bigger.type='button';bigger.addEventListener('click',e=>{e.stopPropagation();zoom(items,position);});
+ image.addEventListener('click',e=>{e.stopPropagation();zoom(items,position);});
+ image.style.cursor='zoom-in';
  const chapter=el('a','saek-source-action','Άνοιγμα κεφαλαίου');
  chapter.href='#lesson-'+lessonId;
  chapter.addEventListener('click',()=>{
@@ -132,13 +154,27 @@ async function start(){
    wrap.append(summary);
    const note=el('p','saek-source-note','Εκπαιδευτικές εικόνες με καταγεγραμμένες πηγές και άδεια χρήσης. Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ούτε ανεξάρτητη επιστημονική έγκριση· τα σχήματα δεν υποκαθιστούν τις ισχύουσες κλινικές ή υπηρεσιακές οδηγίες.');
    wrap.append(note);
-   for(const key of chapter.images){
-    const asset=registry.assets[key];
-    if(asset)wrap.append(render(asset,id.replace('lesson-','')));
-   }
+   const assets=chapter.images.map(key=>registry.assets[key]).filter(Boolean);
+   const gallery=assets.map(asset=>({url:sourceUrl(asset),alt:asset.title+'. '+asset.caption}));
+   assets.forEach((asset,i)=>wrap.append(render(asset,id.replace('lesson-',''),gallery,i)));
    const paragraph=body.querySelector('p.reader-paragraph');
    if(paragraph)paragraph.insertAdjacentElement('afterend',wrap);
    else body.insertBefore(wrap,body.firstChild);
+   const layout=el('div','saek-study-split'),reading=el('div','saek-study-text'),visuals=el('aside','saek-study-images');
+   visuals.setAttribute('aria-label','Εικόνες αναφοράς κεφαλαίου');
+   while(body.firstChild){const node=body.firstChild;if(node===wrap)visuals.append(node);else reading.append(node);}
+   layout.append(reading,visuals);body.append(layout);wrap.open=true;
+   // On phones, place the collapsible illustration immediately after the opening text.
+   // On wider screens, restore the sticky right-hand reference panel.
+   const mobile=window.matchMedia('(max-width:760px)');
+   const mobileAnchor=reading.querySelector('p.reader-paragraph');
+   function positionVisuals(){
+    if(mobile.matches&&mobileAnchor){mobileAnchor.insertAdjacentElement('afterend',visuals);}
+    else if(visuals.parentElement!==layout){layout.append(visuals);}
+   }
+   positionVisuals();
+   if(mobile.addEventListener)mobile.addEventListener('change',positionVisuals);
+   else if(mobile.addListener)mobile.addListener(positionVisuals);
   }
   document.getElementById('saek-image-registry-error')?.remove();
  }catch(err){showRegistryFailure(err);}

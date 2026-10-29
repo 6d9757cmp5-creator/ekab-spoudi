@@ -43,7 +43,8 @@ for(let i=1;i<=20;i++){
   assert.ok(html.includes('id="lesson-'+ch.chapter+'"'),'bad chapter search link '+ch.href);
  }
 }
-const index=read('index.html'),app=read('app.js'),styles=read('styles.css'),theme=read('theme-init.js');
+const index=read('theory.html'),landing=read('index.html'),app=read('app.js'),styles=read('styles.css'),theme=read('theme-init.js');
+assert.ok(landing.includes("location.replace('theory.html'"),'legacy EOPPEP links must redirect from the landing page');
 assert.ok(index.includes('id="catalogReaderPlaceholder"')&&index.includes('id="catalogReaderReadySos"'));
 assert.ok(index.includes('id="catalogMore"')&&index.includes('id="catalogGroupFilter"'));
 const catalog=app.slice(app.indexOf('function openCatalogQuestion('),app.indexOf("$('#catalogReaderClose')"));
@@ -54,7 +55,7 @@ assert.ok(theme.includes('global-tools.js')&&theme.includes('global-tools.css'))
 const globalTools=read('global-tools.js');
 assert.ok(globalTools.includes('saek-search-')&&globalTools.includes('official_questions.json')&&globalTools.includes('app-pages-search-1.json'),'unified search should cover SAEK, EOPPEP and app pages');
 assert.ok(globalTools.includes('extra-exercises-search.json')&&globalTools.includes('medical-terms.json'));
-assert.ok(globalTools.includes('index.html?question=')&&globalTools.includes('search.html?q='));
+assert.ok(globalTools.includes('theory.html?question=')&&globalTools.includes('search.html?q='),'EOPPEP results must open the separate theory reader');
 const termData=JSON.parse(read('medical-terms.json'));
 assert.ok(termData.items.length>=17,'general bilingual medical glossary should have 17+ starter terms');
 const termCategories=termData.categories||[...new Set(termData.items.map(item=>item.category))];

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a39">
+<title>MENTOR · Εργαστήριο αποστολών (δοκιμή)</title>
+<link rel="stylesheet" href="mentor-lab.css">
+<link rel="stylesheet" href="mentor-avatar-live.css">
+<script src="mentor-adaptive.js" defer></script>
+<script src="mentor-personal-v1.js" defer></script>
+<script type="module" src="mentor-lab.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand"><div class="brand-icon" aria-hidden="true">✚</div><div><strong>MENTOR</strong><span>ΕΚΑΒ Σπουδή · Εκπαιδευτικό εργαστήριο</span></div></div>
+    <a class="back-link" href="index.html">← Επιστροφή στην ΕΚΑΒ Σπουδή</a>
+  </div>
+</header>
+<main id="main" class="layout">
+  <section class="hero mentor-intro-hero" id="mentor-presence" aria-labelledby="welcome">
+    <div class="mentor-intro-copy">
+      <p class="eyebrow">MENTOR · Ο προσωπικός σου εκπαιδευτής</p>
+      <h1 id="welcome">MENTOR</h1>
+      <p id="mentor-presence-line" class="mentor-intro-message" role="status" aria-live="polite">«Καλώς ήρθες. Πες μου τι θέλεις να μελετήσουμε ή διάλεξε μια αποστολή.»</p>
+      <form class="mentor-intro-form" id="mentor-hero-form">
+        <label for="mentor-hero-question">Ρώτησε τον MENTOR</label>
+        <input id="mentor-hero-question" type="text" maxlength="300" autocomplete="off" placeholder="Π.χ. Τι να διαβάσω σήμερα;">
+        <button type="submit">Ρώτησε</button>
+      </form>
+      <div class="mentor-presence-actions">
+        <button id="mentor-intro-speak" type="button">🔊 Άκουσε</button>
+        <button id="mentor-intro-stop" type="button">◼ Σταμάτα</button>
+        <button id="mentor-intro-mic" type="button">🎙 Μίλα μου</button>
+        <button id="mentor-intro-chat" type="button">💬 Άνοιξε συνομιλία</button>
+      </div>
+      <div class="mentor-speech-wave" id="mentor-speech-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="mentor-voice-preferences" aria-label="Ρυθμίσεις φωνής του MENTOR">
+        <label for="mentor-voice-select">Ελληνική φωνή</label>
+        <select id="mentor-voice-select"><option value="">Αυτόματη φωνή της συσκευής</option></select>
+        <label for="mentor-voice-speed">Ρυθμός ομιλίας <output id="mentor-voice-speed-label" for="mentor-voice-speed">0,95×</output></label>
+        <input id="mentor-voice-speed" type="range" min="0.8" max="1.1" step="0.05" value="0.95">
+      </div>
+      <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός · ελληνική φωνή της συσκευής · όχι πλήρες AI.</p>
+      <p id="mentor-microphone-privacy" class="mentor-voice-privacy">Το μικρόφωνο ενεργοποιείται μόνο όταν πατήσεις «Μίλα μου», εφόσον το υποστηρίζει ο browser. Η αναγνώριση μπορεί να πραγματοποιείται από υπηρεσία του παρόχου του browser. Η αναγνωρισμένη ερώτηση δεν υποβάλλεται αυτόματα και δεν αποθηκεύεται από τον MENTOR.</p>
+    </div>
+    <div class="mentor-intro-visual"><div class="mentor-figure mentor-photo-avatar" id="mentor-avatar" data-viseme="rest" aria-hidden="true">
+  <div class="mentor-halo"></div><div class="mentor-shoulders"></div><div class="mentor-neck"></div>
+  <div class="mentor-ears"></div><div class="mentor-face"></div><div class="mentor-hair"></div>
+  <div class="mentor-brow mentor-brow-left"></div><div class="mentor-brow mentor-brow-right"></div>
+  <div class="mentor-eye mentor-eye-left"></div><div class="mentor-eye mentor-eye-right"></div>
+  <div class="mentor-nose"></div><div class="mentor-mouth"></div>
+  <div class="mentor-jacket"></div><div class="mentor-collar"></div><div class="mentor-headset"></div>
+  <img class="mentor-photo-img" src="assets/mentor-photo.webp" alt="" width="220" height="228" loading="eager" decoding="async">
+  <span class="mentor-photo-mouth" aria-hidden="true"><span class="mentor-photo-mouth-inner"></span></span>
+  <span class="mentor-photo-vignette" aria-hidden="true"></span>
+  <span class="mentor-photo-aura" aria-hidden="true"></span>
+  <span class="mentor-photo-blink left" aria-hidden="true"></span>
+  <span class="mentor-photo-blink right" aria-hidden="true"></span>
+</div>
+      <small>Φωτορεαλιστική συνθετική απεικόνιση εκπαιδευτή · προσεγγιστικό lip-sync</small>
+    </div>
+  </section>
+  <section class="panel mentor-personal" id="mentor-personal" aria-labelledby="mentor-personal-heading">
+  <div class="mentor-personal-header"><span class="mentor-personal-icon" aria-hidden="true">✺</span><div><p class="eyebrow">Μία ταυτότητα · Όλες οι γνώσεις</p><h2 id="mentor-personal-heading">MENTOR</h2><p>Ο προσωπικός σου καθηγητής προσαρμόζει τη διαδρομή στις ανάγκες σου. Δεν υπάρχουν ξεχωριστοί εκπαιδευτές.</p></div></div>
+  <div class="mentor-personal-metrics"><div><strong id="mentor-personal-studied">0</strong><small>Θεματικές που μελέτησες</small></div><div><strong id="mentor-personal-due">0</strong><small>Επαναλήψεις που εκκρεμούν</small></div></div>
+  <form id="mentor-personal-form"><label for="mentor-personal-query">Τι θέλεις να μάθεις σήμερα;</label><div class="mentor-personal-entry"><input id="mentor-personal-query" maxlength="180" type="text" placeholder="Π.χ. ανατομία, ΚΑΡΠΑ, τραύμα, ΕΟΠΠΕΠ" autocomplete="off"><button type="submit" class="action">Πάμε</button></div></form>
+  <div class="mentor-personal-suggestion"><span class="eyebrow">Προτείνω για σένα</span><h3 id="mentor-personal-suggestion"></h3><p id="mentor-personal-reason"></p><button type="button" class="action secondary" id="mentor-personal-recommend">Έναρξη πρότασης</button></div>
+  <div class="mentor-personal-guidance"><h3 id="mentor-personal-active"></h3><p id="mentor-personal-text"></p><a class="action" id="mentor-personal-open" href="saek.html">Άνοιγμα εργαλείου</a>
+    <p><strong>Πώς σου φάνηκε η εξάσκηση;</strong></p>
+    <div class="mentor-personal-actions"><button type="button" data-mentor-self-review="repeat">Θέλω επανάληψη</button><button type="button" data-mentor-self-review="ok">Το κατάλαβα</button><button type="button" data-mentor-self-review="easy">Ήταν εύκολο</button></div>
+  </div>
+  <details class="mentor-personal-settings"><summary>Ύφος και στόχος διδασκαλίας</summary><label for="mentor-personal-style">Ύφος</label><select id="mentor-personal-style"><option value="auto">Αυτόματη προσαρμογή</option><option value="simple">Απλά</option><option value="detailed">Αναλυτικά</option><option value="exam">Εξέταση</option></select><label for="mentor-personal-goal">Προτεραιότητα</label><select id="mentor-personal-goal"><option value="learning">ΣΑΕΚ</option><option value="certification">ΕΟΠΠΕΠ</option><option value="trauma">Τραύμα</option><option value="pharmacology">Φαρμακολογία</option></select><button type="button" class="action secondary" id="mentor-personal-forget">Διαγραφή μόνο της μνήμης MENTOR</button></details>
+  <p id="mentor-personal-status" role="status" aria-live="polite" class="muted small"></p>
+  <p class="muted small">Τοπική μαθησιακή μνήμη βάσει δικής σου εκτίμησης, χωρίς συνδεδεμένο AI ή αξιολόγηση ιατρικής επάρκειας. Δεν αποθηκεύεται το ελεύθερο κείμενο της ερώτησης· δεν αλλάζουν βαθμοί ή συγχρονισμός.</p>
+</section>
+  <section class="panel" aria-labelledby="mentor-reader-title">
+    <h2 id="mentor-reader-title">📖 Αναγνωστήριο ΕΚΑΒ Σπουδή · μόνο ανάγνωση</h2>
+    <p>Αναζήτησε την ήδη δημοσιευμένη ύλη των τεσσάρων εξαμήνων ΣΑΕΚ, τις 314 καταχωρισμένες ερωτήσεις/απαντήσεις ΕΟΠΠΕΠ, SOS, ασκήσεις, φαρμακολογία και σεμινάρια. Η προβολή δεν αλλάζει βαθμολογίες, πρόοδο ή cloud και δεν συνδέεται με AI.</p>
+    <a class="action secondary" href="mentor-readonly.html">Άνοιξε το αναγνωστήριο ΕΚΑΒ Σπουδή</a>
+  </section>
+  <p><a href="mentor-library.html">📚 Βιβλιογραφία MENTOR — 15 πηγές (υπό επιστημονικό έλεγχο)</a></p>
+  <p><a href="ui-tools/mentor-roadmap.html" style="display:inline-block;padding:10px 13px;border:1px solid currentColor;border-radius:10px;font-weight:750">🧭 Όλες οι δυνατότητες MENTOR · Διαθέσιμο / Εκκρεμεί / Μη διαθέσιμο</a></p>
+  <div class="disclaimer" role="note">
+    <strong>Δοκιμαστική προσομοίωση — όχι ιατρική οδηγία.</strong>
+    Τα περιστατικά είναι συνθετικά και εκκρεμεί ανεξάρτητος κλινικός έλεγχος. Δεν προσομοιώνουν πραγματικά ζωτικά σημεία, θεραπεία ή AI γιατρό. Οι βαθμοί ΣΑΕΚ/ΕΟΠΠΕΠ δεν αλλάζουν.
+  </div>
+  <section class="panel" aria-label="Νέα αποστολή MENTOR">
+    <h2>🚑 ΕΚΑΒ Live · Νέα εκπαιδευτική αποστολή</h2>
+    <p>Τροχαίο με δύο τραυματίες στην Κρήτη, παρατηρήσεις με συνθετικά μεταβαλλόμενα ζωτικά, αποφάσεις ανά στάδιο και ανατροφοδότηση. Χωρίς AI ή κλινική πιστοποίηση.</p>
+    <a class="action" href="mentor-live.html">Άνοιξε την αποστολή δύο τραυματιών</a>
+  </section>
+  <section class="panel" aria-label="Εκπαιδευτική προφορική εξάσκηση">
+    <h2>🎙️ Προφορική εξάσκηση · χωρίς AI</h2>
+    <p>Έξι ελληνικές εκπαιδευτικές ερωτήσεις. Μίλα μόνος σου, δες σημεία αυτοελέγχου και άκουσε την ερώτηση από τη συσκευή. Δεν υπάρχει μικρόφωνο, αυτόματη βαθμολόγηση ή αποθήκευση απαντήσεων.</p>
+    <a class="action secondary" href="mentor-oral.html">Άνοιξε την προφορική εξάσκηση</a>
+  </section>
+  <section class="panel" aria-label="ECG εκπαιδευτικό εργαστήριο">
+    <h2>📈 ECG Lab · συνθετικό εκπαιδευτικό σήμα</h2>
+    <p>Πειραματίσου με τη συχνότητα επανάληψης μιας σχεδιασμένης καμπύλης P–QRS–T. Δεν είναι πραγματικό ΗΚΓ, αναγνώριση αρρυθμίας ή κλινική ερμηνεία. Χωρίς AI.</p>
+    <a class="action secondary" href="mentor-ecg.html">Άνοιξε το ECG Lab</a>
+  </section>
+  <nav class="tabs" role="tablist" aria-label="Ενότητες Mentor OS">
+    <button type="button" id="tab-mission" role="tab" aria-controls="panel-mission" aria-selected="true" data-tab="mission">Αποστολή</button>
+    <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
+    <button type="button" id="tab-route" role="tab" aria-controls="panel-route" aria-selected="false" tabindex="-1" data-tab="route">Διαδρομή</button>
+  </nav>
+  <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
+  <section id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
+<section class="module-select" aria-label="Επιλογή εργαστηρίου">
+      <p class="eyebrow">Εκπαιδευτικά εργαστήρια</p>
+      <div class="mode-buttons" role="group" aria-label="Τύπος αποστολής">
+        <button type="button" class="mode-choice" id="mode-ekab" data-mode="ekab" aria-pressed="true">🚑 ΕΚΑΒ Live</button>
+        <button type="button" class="mode-choice" id="mode-mci" data-mode="mci" aria-pressed="false">🚨 Πολλαπλοί εμπλεκόμενοι</button>
+        <button type="button" class="mode-choice" id="mode-equipment" data-mode="equipment" aria-pressed="false">🧰 Εργαστήριο εξοπλισμού</button>
+      </div>
+    </section>
+    <div id="module-ekab">
+    <div class="section-heading"><div><h2>ΕΚΑΒ Live · Αποστολές</h2><p>Επιλογές με προβλέψιμη εξέλιξη, χωρίς τυχαίες ιατρικές αποφάσεις.</p></div></div>
+    <div id="case-list" class="case-grid" aria-label="Δοκιμαστικά περιστατικά"></div>
+    <article class="mission" id="mission-card" aria-live="polite">
+      <div class="mission-head">
+        <div><p class="eyebrow" id="case-kicker">Επέλεξε ένα περιστατικό</p><h3 id="case-title">Έτοιμος για αποστολή;</h3></div>
+        <span id="step-count" class="step-counter">0 / 4</span>
+      </div>
+      <p id="case-context" class="case-context">Τα περιστατικά είναι εκπαιδευτικές ασκήσεις διαχείρισης και επικοινωνίας.</p>
+      <div id="phase" hidden>
+        <div class="divider"></div>
+        <p class="eyebrow" id="phase-name"></p>
+        <h4 id="phase-question"></h4>
+        <div id="phase-actions" class="choices"></div>
+      </div>
+      <div id="feedback" class="feedback" hidden role="status" aria-live="polite"></div>
+      <div id="case-finish" hidden>
+        <h4>Η αποστολή ολοκληρώθηκε</h4>
+        <p>Έφτασες στην παράδοση του περιστατικού. Δες τη μνήμη για τα σημεία που χρειάζονται επανάληψη. Αυτό δεν είναι βαθμός ή πιστοποίηση.</p>
+        <button type="button" class="action secondary" id="restart">Ξεκίνα νέα αποστολή</button>
+      </div>
+    </article>
+    </div>
+    <div id="module-mci" hidden>
+      <div class="section-heading"><div><h2>Μαζικό συμβάν · Εργαστήριο καταγραφής</h2>
+        <p>Πολλαπλοί εμπλεκόμενοι, καταμέτρηση και συντονισμός. Δεν πρόκειται ακόμη για ιατρική διαλογή ή χρωματική ταξινόμηση.</p></div></div>
+      <div class="case-grid" id="mci-picker" aria-label="Εκπαιδευτικά μαζικά συμβάντα"></div>
+      <article class="mission" id="mci-board">
+        <div class="mission-head"><div><p class="eyebrow">Συνθετικό συμβάν · εκκρεμεί κλινικός έλεγχος</p>
+          <h3 id="mci-title">Επίλεξε συμβάν</h3></div><span class="step-counter" id="mci-count">0 / 4</span></div>
+        <p class="case-context" id="mci-description">Επίλεξε ένα συμβάν για να δεις όλους τους αναφερόμενους εμπλεκόμενους.</p>
+        <div id="mci-people" class="people-grid" aria-label="Συνθετικοί εμπλεκόμενοι"></div>
+        <div id="mci-stage" hidden><div class="divider"></div><p class="eyebrow" id="mci-stage-title"></p>
+          <h4 id="mci-question"></h4><div id="mci-actions" class="choices"></div></div>
+        <div id="mci-feedback" class="feedback" hidden role="status" aria-live="polite"></div>
+        <div id="mci-done" hidden class="activity-done"><h4>Ολοκληρώθηκε η καταγραφή</h4>
+          <p>Εξασκήθηκες στην αναγνώριση όλων των αναφερόμενων ατόμων και στη δομημένη επικοινωνία. Δεν αποδόθηκαν κλινικές προτεραιότητες.</p>
+          <button id="mci-restart" type="button" class="action secondary">Νέο συμβάν</button></div>
+      </article>
+    </div>
+    <div id="module-equipment" hidden>
+      <div class="section-heading"><div><h2>Equipment Lab · Αναγνώριση εξοπλισμού</h2>
+        <p>Τρεις διαδραστικές εκπαιδευτικές κάρτες. Δεν αποτελούν εγχειρίδιο χρήσης, πραγματική προσομοίωση συσκευής ή πιστοποίηση.</p></div></div>
+      <div class="case-grid" id="equipment-picker" aria-label="Εκπαιδευτικές κάρτες συσκευών"></div>
+      <article class="mission" id="equipment-board">
+        <div class="mission-head"><div><p class="eyebrow">Σχηματική κάρτα · όχι πραγματική συσκευή</p>
+          <h3 id="equipment-title">Επίλεξε συσκευή</h3></div><span class="step-counter" id="equipment-count">0 / 3</span></div>
+        <p class="case-context" id="equipment-description">Επίλεξε μια κάρτα για τη θεωρητική αναγνώριση του εξοπλισμού.</p>
+        <div id="equipment-visual" class="device-placeholder" hidden aria-label="Σχηματική εκπαιδευτική κάρτα"></div>
+        <div id="equipment-stage" hidden><div class="divider"></div><p class="eyebrow" id="equipment-stage-title"></p>
+          <h4 id="equipment-question"></h4><div id="equipment-actions" class="choices"></div></div>
+        <div id="equipment-feedback" class="feedback" hidden role="status" aria-live="polite"></div>
+        <div id="equipment-done" hidden class="activity-done"><h4>Ολοκλήρωσες την εκπαιδευτική κάρτα</h4>
+          <p>Αναγνώρισες τον σκοπό, την ανάγκη εκπαίδευσης και τις αρχές επικοινωνίας. Η πραγματική χρήση απαιτεί πιστοποιημένη πρακτική εκπαίδευση.</p>
+          <button id="equipment-restart" type="button" class="action secondary">Νέα προσπάθεια</button></div>
+      </article>
+    </div>
+  </section>
+  <section id="panel-memory" role="tabpanel" aria-labelledby="tab-memory" hidden>
+    <div class="section-heading"><div><h2>Μνήμη μάθησης</h2><p>Μόνο οι δοκιμαστικές δραστηριότητες του Mentor. Καμία αλλαγή σε βαθμούς.</p></div></div>
+    <div class="stats"><div><small>Συνεδρίες</small><strong id="sessions-count">0</strong></div><div><small>Ολοκληρωμένες αποστολές</small><strong id="completed-count">0</strong></div><div><small>Επιλογές για επανάληψη</small><strong id="review-count">0</strong></div></div>
+    <div class="stats stats-secondary"><div><small>Συμβάντα με πολλούς εμπλεκόμενους</small><strong id="mci-sessions">0</strong></div>
+    <div><small>Κάρτες εξοπλισμού</small><strong id="equipment-sessions">0</strong></div>
+    <div><small>Ολοκληρωμένες νέες ασκήσεις</small><strong id="extra-completed">0</strong></div></div>
+    <p class="muted small">Κάθε δραστηριότητα καταγράφεται μόνο ως εκπαιδευτική προσπάθεια Mentor. Όχι επίσημη βαθμολόγηση.</p>
+    <div class="panel"><h3>Αξιολόγηση εξάσκησης ανά δεξιότητα</h3><div id="competency-list"></div><p class="muted small">Μια σωστή επιλογή σε δοκιμαστικό σενάριο δεν ισοδυναμεί με κατάκτηση ικανότητας.</p></div>
+    <div class="panel"><h3>Ιδιωτικότητα και προσωπικά δεδομένα</h3><p id="privacy-text">Τα δεδομένα Mentor διατηρούνται μόνο σε αυτή τη συσκευή, σε ξεχωριστή αποθήκευση. Δεν συγχρονίζονται με τον λογαριασμό σου.</p>
+      <div class="toolbar"><button type="button" class="action secondary" id="export-mentor">Εξαγωγή Mentor</button><button type="button" class="action danger" id="clear-mentor">Διαγραφή δοκιμών Mentor</button></div>
+      <p class="muted small">Η διαγραφή αφορά αποκλειστικά τη δοκιμαστική μνήμη Mentor, όχι τη μελέτη, τα PDF, τις σημειώσεις ή τη βαθμολόγηση ΕΚΑΒ Σπουδή.</p>
+    </div>
+  </section>
+  <section id="panel-route" role="tabpanel" aria-labelledby="tab-route" hidden>
+    <div class="section-heading"><div><h2>Η εκπαιδευτική μου διαδρομή</h2><p>Μικρά, σαφή βήματα μελέτης από το ΣΑΕΚ προς την κλινική συλλογιστική.</p></div></div>
+    <div class="panel">
+      <h3>Οι προσωπικοί μου στόχοι</h3>
+      <p class="muted small">Μόνο όσα επιλέξεις εσύ, χωρίς να αλλάζουν οι βαθμολογίες ή οι καταγραφές ΣΑΕΚ/ΕΟΠΠΕΠ. Οι προτιμήσεις αποθηκεύονται τοπικά στον browser.</p>
+      <div class="study-goal-choices" role="group" aria-label="Προσωπικοί στόχοι μελέτης">
+        <label><input type="checkbox" data-study-goal="saek"> ΣΑΕΚ</label>
+        <label><input type="checkbox" data-study-goal="eoppep"> ΕΟΠΠΕΠ</label>
+        <label><input type="checkbox" data-study-goal="seminars"> Σεμινάρια</label>
+      </div>
+    </div>
+    <div class="panel">
+      <label for="study-duration">Χρόνος που διαθέτω για εξάσκηση</label>
+      <select id="study-duration"><option value="10">10 λεπτά</option><option value="15">15 λεπτά</option><option value="25" selected>25 λεπτά</option><option value="30">30 λεπτά</option></select>
+      <label for="study-path-mode">Είδος μελέτης</label>
+      <select id="study-path-mode"><option value="guided">Με καθοδήγηση</option><option value="practice">Εξάσκηση</option><option value="exam">Δοκιμαστική αυτοαξιολόγηση</option></select>
+      <h3>Πρόταση επόμενης εξάσκησης Mentor</h3><div id="plan-output" class="plan"></div>
+      <h3>Το προσωπικό μου πλάνο</h3><div id="selected-goals-plan" class="study-goals-plan" aria-live="polite"></div>
+      <p class="small muted">Το πλάνο είναι ενδεικτικό. Η ανάγνωση δεν σημαίνει γνώση και η δοκιμαστική αυτοαξιολόγηση δεν αποτελεί επίσημη εξέταση.</p>
+    </div>
+    <section class="panel" aria-labelledby="coach-title">
+      <h3 id="coach-title">Συζήτησε με τον Mentor · εκπαιδευτική καθοδήγηση</h3>
+      <p class="muted small">Ο Mentor προσαρμόζει τις προτάσεις του μόνο στις δικές σου δοκιμαστικές ασκήσεις. Πρόκειται για περιορισμένο διάλογο με έτοιμες εκπαιδευτικές απαντήσεις, όχι για ζωντανό γιατρό ή πλήρες AI. Δεν αξιολογεί ελεύθερες ιατρικές απαντήσεις.</p>
+      <div class="coach-shortcuts" role="group" aria-label="Γρήγορες ερωτήσεις προς τον Mentor">
+        <button type="button" class="coach-quick" data-coach-intent="focus">Τι να μελετήσω;</button>
+        <button type="button" class="coach-quick" data-coach-intent="progress">Πώς τα πηγαίνω;</button>
+        <button type="button" class="coach-quick" data-coach-intent="explain">Εξήγησέ μου μια δεξιότητα</button>
+        <button type="button" class="coach-quick" data-coach-intent="exercise">Δώσε μου άσκηση</button>
+      </div>
+      <div id="coach-dialogue" class="coach-dialogue" role="log" aria-live="polite" aria-label="Εκπαιδευτική συνομιλία Mentor"></div>
+      <form id="coach-form" class="coach-form">
+        <label for="coach-question">Η ερώτησή μου</label>
+        <div class="coach-question-line">
+          <input id="coach-question" type="text" autocomplete="off" maxlength="300" placeholder="π.χ. Τι να μελετήσω στην ασφάλεια σκηνής;">
+          <button type="submit" class="action" id="coach-send">Ρώτησε</button>
+        </div>
+      </form>
+      <div class="coach-speech-actions">
+        <button type="button" class="action secondary" id="coach-speak">🔊 Άκουσε την απάντηση</button>
+        <button type="button" class="action secondary" id="coach-stop">Διακοπή ομιλίας</button>
+      </div>
+      <p class="small muted">Η συνομιλία αυτής της καρτέλας δεν αποθηκεύεται και δεν πηγαίνει στο cloud. Η προφορική ανάγνωση είναι προαιρετική και εξαρτάται από τις φωνές της συσκευής.</p>
+    </section>
+    <div class="panel"><h3>Υπάρχουσα πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ</h3>
+      <p>Ο Mentor δεν αντιγράφει παλαιούς βαθμούς. Μπορείς προαιρετικά να δεις μόνο έναν συνοπτικό αριθμό καταγραφών ανάγνωσης και προσπάθειας.</p>
+      <button type="button" class="action secondary" id="read-legacy">Προβολή υπάρχουσας προόδου · μόνο ανάγνωση</button>
+      <div id="legacy-result" class="legacy-result" aria-live="polite"></div>
+    </div>
+    <div class="panel"><h3>Επόμενα εργαστήρια</h3><div class="roadmap">
+      <a href="ui-tools/anatomy-3d/index.html">3D Ανατομία · διαθέσιμη</a><a href="mentor-ecg.html">ECG Lab · εκπαιδευτικό σχήμα διαθέσιμο</a><span>Ιατρική ομάδα AI · μετά τη δική σου έγκριση</span><span>Κλινική διαλογή · απαιτείται επιστημονική έγκριση</span><span>Προχωρημένες συσκευές · σχεδιάζεται</span><a href="mentor-oral.html">Προφορική εξάσκηση · διαθέσιμη</a>
+    </div><p class="muted small">Η 3D Ανατομία, η προφορική εξάσκηση και το συνθετικό ECG Lab είναι διαθέσιμα. Η πραγματική κλινική ερμηνεία ΗΚΓ, η διαλογή και η ιατρική ομάδα AI δεν είναι ενεργές. Η σύνδεση AI θα γίνει μόνο με τη δική σου τελική έγκριση.</p></div>
+  </section>
+  <footer>MENTOR · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
+</main>
+</body></html>

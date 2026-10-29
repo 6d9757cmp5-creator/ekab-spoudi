@@ -1,6 +1,8 @@
 /* EKAB Spoudi: one bilingual predictive search for the whole public app, plus expandable general medical lexicon. */
 (function(){
 'use strict';
+if(window.__ekabGlobalToolsLoaded)return;
+window.__ekabGlobalToolsLoaded=true;
 const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3').replace(/₄/g,'4').replace(/µ/g,'μ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ').trim();
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
@@ -18,7 +20,7 @@ function entries(parts){
   }
  }
  for(const q of Array.isArray(parts[4])?parts[4]:[]){
-  results.push({kind:'eoppep',title:q.question,subtitle:'ΕΟΠΠΕΠ · Ομάδα '+q.group+' · '+q.number,preview:'Ενδεικτική απάντηση διαθέσιμη στο αναγνωστήριο',href:'index.html?question='+encodeURIComponent(q.id),searchText:(q.answer||'').slice(0,3300),keywords:[q.id,q.number,q.group,q.studyTopic].join(' ')});
+  results.push({kind:'eoppep',title:q.question,subtitle:'ΕΟΠΠΕΠ · Ομάδα '+q.group+' · '+q.number,preview:'Ενδεικτική απάντηση διαθέσιμη στο αναγνωστήριο',href:'theory.html?question='+encodeURIComponent(q.id),searchText:(q.answer||'').slice(0,3300),keywords:[q.id,q.number,q.group,q.studyTopic].join(' ')});
  }
  for(let i=5;i<=8;i++)for(const p of parts[i]?.items||[]){
   if(!/^(?:[a-z0-9][a-z0-9_-]*\.html)(?:[?#][\w%=&#.-]+)?$/i.test(p.href))continue;
@@ -84,56 +86,87 @@ function resultLink(item){
  if(item.preview)link.append(el('span','saek-result-preview',item.preview));
  return link;
 }
+function installSectionNav(){
+ const nav=document.querySelector('header.top .nav');if(!nav||nav.classList.contains('ekab-breadcrumb'))return;
+ const file=location.pathname.split('/').pop()||'index.html';
+ if(file==='index.html'){nav.remove();return}
+ const names={'theory.html':'Θεωρία ΕΟΠΠΕΠ','practical_exam.html':'Πρακτικό ΕΟΠΠΕΠ','saek.html':'Κατάρτιση ΣΑΕΚ','farmaka.html':'Φαρμακολογία','search.html':'Αποτελέσματα αναζήτησης'};
+ const existing=nav.querySelector('a.active')?.textContent?.trim();
+ const current=names[file]||(file.startsWith('saek-course-')?'Μάθημα ΣΑΕΚ':existing||'Εκπαιδευτικό υλικό');
+ const home=el('a','ekab-home-back','← Πίσω');home.href=file==='saek.html'?'index.html':'index.html';home.addEventListener('click',event=>{try{if(history.length>1&&document.referrer&&new URL(document.referrer).origin===location.origin){event.preventDefault();history.back()}}catch{}});
+ nav.className='nav ekab-breadcrumb';nav.replaceChildren(home,el('span','ekab-section-name',current));
+}
 function installSearch(){
- const nav=document.querySelector('header.top .nav'),saek=nav?.querySelector('a[href="saek.html"]');
- if(!saek||document.getElementById('ekabGlobalSearch'))return;
- const wrap=el('div','saek-global-search');
- const label=el('label','saek-search-label','Αναζήτηση ΕΚΑΒ Σπουδή');
- const input=el('input','saek-search-field');
- input.id='ekabGlobalSearch';input.type='search';input.autocomplete='off';
- input.placeholder='Αναζήτηση σε όλη την εφαρμογή…';
- input.setAttribute('aria-label','Αναζήτηση στην ΕΚΑΒ Σπουδή: ΕΟΠΠΕΠ, ΣΑΕΚ, πρακτικό μέρος και ασκήσεις');
+ const utility=document.querySelector('header.top .utility');
+ if(!utility||document.getElementById('ekabGlobalSearch'))return;
+ const wrap=el('div','ekab-search-box');
+ const toggle=el('button','utility-button ekab-search-toggle');
+ toggle.type='button';toggle.title='Αναζήτηση σε όλη την ΕΚΑΒ Σπουδή';
+ toggle.setAttribute('aria-label','Άνοιγμα γενικής αναζήτησης');
+ toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','ekabSearchPopover');
+ toggle.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.8 4.8"/></svg>';
+ const popup=el('section','ekab-search-popover');
+ popup.id='ekabSearchPopover';popup.hidden=true;popup.setAttribute('role','search');
+ const bar=el('div','ekab-search-head');
+ bar.append(el('strong',null,'Αναζήτηση ΕΚΑΒ Σπουδή'));
+ const closeBtn=el('button','ekab-search-close','×');closeBtn.type='button';closeBtn.setAttribute('aria-label','Κλείσιμο αναζήτησης');bar.append(closeBtn);
+ const hint=el('p','ekab-search-hint','Πλήρης αναζήτηση σε θεωρία ΕΟΠΠΕΠ, πρακτικό, μαθήματα ΣΑΕΚ και ασκήσεις.');
+ const input=el('input','ekab-search-field');
+ input.id='ekabGlobalSearch';input.type='search';input.autocomplete='off';input.placeholder='π.χ. ΚΑΡΠΑ, αεραγωγός, Glasgow…';
+ input.setAttribute('aria-label','Αναζήτηση σε όλη την εφαρμογή');
  input.setAttribute('aria-controls','ekabGlobalResults');input.setAttribute('aria-expanded','false');
- label.htmlFor=input.id;
- const dropdown=el('div','saek-global-results');
- dropdown.id='ekabGlobalResults';dropdown.hidden=true;dropdown.setAttribute('role','region');dropdown.setAttribute('aria-label','Προτάσεις αναζήτησης');
- wrap.append(label,input,dropdown);saek.after(wrap);
+ const examples=el('div','ekab-search-examples');
+ examples.append(el('span',null,'Δοκίμασε:'));
+ for(const term of ['ΚΑΡΠΑ','αεραγωγός','Γλασκώβη']){
+  const chip=el('button','ekab-search-chip',term);chip.type='button';
+  chip.addEventListener('click',()=>{input.value=term;render();input.focus()});examples.append(chip);
+ }
+ const results=el('div','saek-global-results');
+ results.id='ekabGlobalResults';results.hidden=true;results.setAttribute('aria-live','polite');
+ const all=el('a','saek-show-all','Πλήρης αναζήτηση · Όλα τα αποτελέσματα');
+ all.href='search.html';
+ const glossaryAction=el('button','ekab-search-glossary','Ιατρικό λεξικό · Ελληνικά / English / Σύμβολα');
+ glossaryAction.type='button';
+ glossaryAction.setAttribute('aria-haspopup','dialog');
+ glossaryAction.setAttribute('aria-controls','medicalGlossaryDialog');
+ glossaryAction.addEventListener('click',()=>{close();window.EkabOpenMedicalGlossary?.()});
+ popup.append(bar,hint,input,examples,results,all,glossaryAction);wrap.append(toggle,popup);utility.prepend(wrap);
  let pending=0,links=[],selected=-1;
- const close=()=>{dropdown.hidden=true;input.setAttribute('aria-expanded','false');links=[];selected=-1};
- const pageLink=q=>{const a=el('a','saek-show-all','Προβολή όλων των αποτελεσμάτων');a.href='search.html?q='+encodeURIComponent(q);return a};
+ const pageLink=q=>{all.href='search.html'+(q?'?q='+encodeURIComponent(q):'')};
+ const close=()=>{popup.hidden=true;toggle.setAttribute('aria-expanded','false');input.setAttribute('aria-expanded','false');results.hidden=true;links=[];selected=-1};
+ const open=()=>{popup.hidden=false;toggle.setAttribute('aria-expanded','true');input.focus();if(input.value.trim())render()};
+ toggle.addEventListener('click',()=>popup.hidden?open():close());
+ closeBtn.addEventListener('click',()=>{close();toggle.focus()});
  function draw(found,q){
-  dropdown.replaceChildren();links=[];selected=-1;
-  if(!q.trim()){close();return}
-  if(!found.length){dropdown.append(el('p','saek-result-empty','Δεν βρέθηκε κάτι. Δοκίμασε άλλη λέξη ή αγγλικό όρο.'));dropdown.hidden=false;input.setAttribute('aria-expanded','true');return}
-  dropdown.append(el('p','saek-result-count',found.length+' σχετικά αποτελέσματα σε όλη την εφαρμογή'));
-  for(const item of pickDiverse(found,12)){const link=resultLink(item);dropdown.append(link);links.push(link)}
-  dropdown.append(pageLink(q));
-  dropdown.hidden=false;input.setAttribute('aria-expanded','true');
+  results.replaceChildren();links=[];selected=-1;
+  if(!q.trim()){results.hidden=true;input.setAttribute('aria-expanded','false');return}
+  if(!found.length)results.append(el('p','saek-result-empty','Δεν βρέθηκαν αποτελέσματα. Δοκίμασε άλλη λέξη ή αγγλικό όρο.'));
+  else{
+   results.append(el('p','saek-result-count',found.length+' αποτελέσματα · Πρόβλεψη από τα μαθήματα'));
+   for(const item of pickDiverse(found,6)){const link=resultLink(item);results.append(link);links.push(link)}
+  }
+  results.hidden=false;input.setAttribute('aria-expanded','true');
  }
  function render(){
-  const token=++pending,q=input.value;
-  if(!q.trim()){close();return}
-  dropdown.replaceChildren(el('p','saek-result-empty','Αναζήτηση σε ΕΟΠΠΕΠ, ΣΑΕΚ, πρακτικό και ασκήσεις…'));dropdown.hidden=false;
-  loadSearch().then(data=>{if(token!==pending)return;draw(find(q,data),q)})
-   .catch(()=>{if(token!==pending)return;dropdown.replaceChildren(el('p','saek-result-empty','Η αναζήτηση δεν φορτώθηκε πλήρως. Έλεγξε τη σύνδεση και πάτησε «Ενημέρωση».'));dropdown.hidden=false});
+  const q=input.value,token=++pending;pageLink(q.trim());
+  if(!q.trim()){results.replaceChildren();results.hidden=true;input.setAttribute('aria-expanded','false');return}
+  results.replaceChildren(el('p','saek-result-empty','Αναζήτηση…'));results.hidden=false;
+  loadSearch().then(data=>{if(token===pending)draw(find(q,data),q)}).catch(()=>{if(token===pending){results.replaceChildren(el('p','saek-result-empty','Δεν φορτώθηκε η αναζήτηση. Έλεγξε τη σύνδεση ή ενημέρωσε την εφαρμογή.'));results.hidden=false}});
  }
  input.addEventListener('input',render);
- input.addEventListener('focus',()=>{if(input.value.trim())render()});
  input.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){close();input.blur();return}
-  if(e.key==='ArrowDown'&&links.length){e.preventDefault();selected=(selected+1)%links.length;links[selected].focus();return}
+  if(e.key==='Escape'){e.preventDefault();close();toggle.focus()}
   if(e.key==='Enter'&&input.value.trim()){e.preventDefault();location.href='search.html?q='+encodeURIComponent(input.value.trim())}
+  if(e.key==='ArrowDown'&&links.length){e.preventDefault();links[0].focus()}
  });
- dropdown.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){close();input.focus()}
-  if(e.key==='ArrowDown'&&links.length){e.preventDefault();selected=(selected+1)%links.length;links[selected].focus()}
-  if(e.key==='ArrowUp'&&links.length){e.preventDefault();selected=(selected-1+links.length)%links.length;links[selected].focus()}
+ results.addEventListener('keydown',e=>{
+  const idx=links.indexOf(document.activeElement);
+  if(e.key==='Escape'){e.preventDefault();close();toggle.focus()}
+  if(e.key==='ArrowDown'&&links.length){e.preventDefault();links[(idx+1)%links.length].focus()}
+  if(e.key==='ArrowUp'&&links.length){e.preventDefault();links[(idx-1+links.length)%links.length].focus()}
  });
  document.addEventListener('pointerdown',e=>{if(!wrap.contains(e.target))close()});
- if(location.pathname.endsWith('/search.html')){
-  const q=new URLSearchParams(location.search).get('q')||'';
-  if(q)input.value=q;
- }
+ if(location.pathname.endsWith('/search.html')){const q=new URLSearchParams(location.search).get('q');if(q){input.value=q;pageLink(q)}}
 }
 function medNormal(value){return normalize(String(value??'').replace(/[₂]/g,'2').replace(/[₃]/g,'3').replace(/[₄]/g,'4').replace(/µ/g,'μ'))}
 function findGlossary(q,terms,category){
@@ -168,7 +201,7 @@ function installGlossary(){
  draw('path',{d:'M13.3 7.4v14M5.7 9.1c2.2-.1 4 .1 5.6.9M5.7 12c2.2-.1 4 .1 5.6.9'});
  draw('circle',{cx:'20.7',cy:'18.6',r:'3.3'});
  draw('path',{d:'m23.1 21 2.8 2.8'});
- btn.append(svg);util.prepend(btn);
+ btn.append(svg);btn.hidden=true;btn.style.display='none';util.append(btn);
  const dialog=el('dialog','medical-glossary-dialog');dialog.id='medicalGlossaryDialog';
  const inner=el('div','medical-glossary-inner'),head=el('div','medical-glossary-head');
  const heading=el('div');heading.append(el('p','medical-eyebrow','Ελληνικά · English · Σύμβολα'),el('h2',null,'Ιατρικό λεξικό'));
@@ -180,7 +213,7 @@ function installGlossary(){
  const results=el('div','medical-glossary-results');
  const more=el('button','medical-glossary-more','Περισσότεροι όροι');more.type='button';more.hidden=true;
  inner.append(head,help,search,choice,count,results,more);dialog.append(inner);document.body.append(dialog);
- let terms=[],openId=null,limit=40;
+ let terms=[],openId=null,limit=40,returnFocus=null;
  function render(){
   const matched=findGlossary(search.value,terms,choice.value);results.replaceChildren();
   count.textContent=matched.length+' αποτελέσματα · '+terms.length+' λήμματα';
@@ -219,6 +252,7 @@ function installGlossary(){
   more.textContent='Περισσότεροι όροι ('+Math.min(40,matched.length-limit)+')';
  }
  function open(value){
+  returnFocus=document.activeElement;
   if(typeof dialog.showModal==='function'){if(!dialog.open)dialog.showModal()}else dialog.setAttribute('open','');
   if(value)search.value=value;
   results.replaceChildren(el('p',null,'Φόρτωση ιατρικών όρων…'));
@@ -230,8 +264,10 @@ function installGlossary(){
   }).catch(()=>results.replaceChildren(el('p',null,'Το λεξικό δεν φορτώθηκε. Δοκίμασε ενημέρωση της εφαρμογής.')));
   search.focus();
  }
+ window.EkabOpenMedicalGlossary=open;
+ document.getElementById('homeGlossaryOpen')?.addEventListener('click',()=>open());
  btn.addEventListener('click',()=>open());
- closeBtn.addEventListener('click',()=>{if(typeof dialog.close==='function')dialog.close();else dialog.removeAttribute('open');btn.focus()});
+ closeBtn.addEventListener('click',()=>{if(typeof dialog.close==='function')dialog.close();else dialog.removeAttribute('open');if(returnFocus&&document.contains(returnFocus))returnFocus.focus()});
  dialog.addEventListener('click',e=>{if(e.target===dialog&&dialog.close)dialog.close()});
  search.addEventListener('input',()=>{openId=null;limit=40;render()});
  choice.addEventListener('change',()=>{openId=null;limit=40;render()});
@@ -244,7 +280,7 @@ function showSearchPage(){
  const query=new URLSearchParams(location.search).get('q')||'';
  const heading=document.getElementById('globalSearchQuery');
  if(heading)heading.textContent=query?'Αποτελέσματα για: '+query:'Αναζήτηση στην ΕΚΑΒ Σπουδή';
- if(!query){results.replaceChildren(el('p',null,'Πληκτρολόγησε κάτι στην αναζήτηση δίπλα από την Κατάρτιση ΣΑΕΚ.'));return}
+ if(!query){results.replaceChildren(el('p',null,'Πληκτρολόγησε κάτι στην αναζήτηση από το εικονίδιο αναζήτησης στην κορυφή.'));return}
  results.replaceChildren(el('p',null,'Φόρτωση αποτελεσμάτων…'));
  loadSearch().then(data=>{
   const found=find(query,data);results.replaceChildren();
@@ -288,6 +324,6 @@ function openCurrentChapterHash(){
  const a=document.querySelector('.chapter-toc a[href="'+hash+'"]');
  if(a){a.click();document.querySelector(hash)?.scrollIntoView({block:'start'})}
 }
-function init(){installSearch();installGlossary();showSearchPage();showExtraExercise();window.addEventListener('hashchange',openCurrentChapterHash)}
+function init(){installSectionNav();installSearch();installGlossary();showSearchPage();showExtraExercise();window.addEventListener('hashchange',openCurrentChapterHash)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

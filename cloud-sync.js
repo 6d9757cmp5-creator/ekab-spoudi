@@ -112,7 +112,7 @@ export async function initCloudSync({user,status,enableButton,nowButton,pauseBut
     // Changes during upload remain a durable pending outbox; never label them uploaded.
     const current=readLocalValues();const expected=Object.fromEntries(Object.entries(visible).filter(([k])=>!k.startsWith('p:')));
     if(stable(current)!==stable(expected)){say('Οι νέες αλλαγές περιμένουν αποστολή.');schedule();return;}
-    say('Συγχρονίστηκε: πρόοδος, σημειώσεις, PDF και ρυθμίσεις · '+new Date().toLocaleTimeString('el-GR',{hour:'2-digit',minute:'2-digit'}),'synced');
+    say('Συγχρονίστηκε: ΣΑΕΚ, ΕΟΠΠΕΠ, σεμινάρια, σημειώσεις, PDF και ρυθμίσεις · '+new Date().toLocaleTimeString('el-GR',{hour:'2-digit',minute:'2-digit'}),'synced');
   }
   async function run(){
     if(busy||!active())return;busy=true;nowButton.disabled=true;
@@ -143,6 +143,6 @@ export async function initCloudSync({user,status,enableButton,nowButton,pauseBut
   });
   const changed=()=>schedule();window.addEventListener('ekab:progress-changed',changed);window.addEventListener('ekab:pdf-changed',changed);window.addEventListener('storage',changed);window.addEventListener('online',changed);document.addEventListener('focusout',changed);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')schedule(0)});
   poll=setInterval(()=>{if(document.visibilityState==='visible')schedule(0)},60000);
-  controls();if(active())schedule(0);else say(owner()&&owner()!==userId?'Αυτός είναι άλλος λογαριασμός. Δεν ανεβαίνουν αυτόματα τα τοπικά δεδομένα.':'Ενεργοποίησε σε αυτή τη συσκευή για συγχώνευση προόδου ΕΟΠΠΕΠ/ΣΑΕΚ, σημειώσεων, PDF και ρυθμίσεων στον δικό σου λογαριασμό.');
+  controls();if(active())schedule(0);else say(owner()&&owner()!==userId?'Αυτός είναι άλλος λογαριασμός. Δεν ανεβαίνουν αυτόματα τα τοπικά δεδομένα.':'Ενεργοποίησε σε αυτή τη συσκευή για συγχώνευση προόδου ΕΟΠΠΕΠ/ΣΑΕΚ/σεμιναρίων, σημειώσεων, PDF και ρυθμίσεων στον δικό σου λογαριασμό.');
   return {enable,run,stop(){stopped=true;clearTimeout(timer);clearInterval(poll);window.removeEventListener('ekab:progress-changed',changed);window.removeEventListener('ekab:pdf-changed',changed);window.removeEventListener('storage',changed);window.removeEventListener('online',changed);document.removeEventListener('focusout',changed);say('Χωρίς ενεργή σύνδεση. Τα δεδομένα παραμένουν στη συσκευή.');}};
 }

@@ -1,0 +1,20 @@
+/* Classroom image viewer: full-screen, pan, zoom, captions, keyboard. */
+(()=>{'use strict';let images=[],index=0,zoom=1,dx=0,dy=0,overlay,photo,caption,stage,mode='fit';
+const eligible=img=>img instanceof HTMLImageElement&&!img.closest('header,nav,button,a,[role="button"],.ekab-image-viewer,[data-no-image-viewer]')&&img.naturalWidth>0&&img.naturalHeight>0&&img.getBoundingClientRect().width>=70;
+function button(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);return b}
+function apply(){photo.style.transform='translate('+dx+'px,'+dy+'px) scale('+zoom+')';photo.style.maxWidth=mode==='fit'?'100%':'none';photo.style.maxHeight=mode==='fit'?'100%':'none';overlay.querySelector('[data-zoom]').textContent=Math.round(zoom*100)+'%'}
+function setZoom(n){zoom=Math.max(.25,Math.min(5,n));apply()}
+function show(i){index=(i+images.length)%images.length;const source=images[index];photo.src=source.currentSrc||source.src;photo.alt=source.alt||'Εκπαιδευτική εικόνα';caption.textContent=source.alt||'Εκπαιδευτική εικόνα';zoom=1;dx=0;dy=0;mode='fit';apply()}
+function close(){overlay.hidden=true;document.body.style.overflow='';document.removeEventListener('keydown',keys);if(document.fullscreenElement===overlay)document.exitFullscreen().catch(()=>{});}
+function keys(e){if(overlay.hidden)return;if(e.key==='Escape')close();else if(e.key==='+'||e.key==='='){e.preventDefault();setZoom(zoom+.25)}else if(e.key==='-'){e.preventDefault();setZoom(zoom-.25)}else if(e.key==='0'){e.preventDefault();zoom=1;dx=dy=0;mode='fit';apply()}else if(e.key==='ArrowRight'){e.preventDefault();show(index+1)}else if(e.key==='ArrowLeft'){e.preventDefault();show(index-1)}}
+function init(){if(/\/saek-course-\d{2}\.html$/.test(location.pathname))return;overlay=document.createElement('div');overlay.className='ekab-image-viewer';overlay.hidden=true;overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Προβολή εκπαιδευτικής εικόνας');
+const bar=document.createElement('div');bar.className='ekab-image-toolbar';
+bar.append(button('✕ Κλείσιμο',close),button('←',()=>show(index-1)),button('→',()=>show(index+1)),button('−',()=>setZoom(zoom-.25)),button('+',()=>setZoom(zoom+.25)),button('Προσαρμογή',()=>{zoom=1;dx=dy=0;mode='fit';apply()}),button('100%',()=>{zoom=1;dx=dy=0;mode='natural';apply()}),button('Πλήρης οθόνη',()=>{if(!document.fullscreenElement)overlay.requestFullscreen?.().catch(()=>{});else document.exitFullscreen?.().catch(()=>{})}),button('Λεζάντα',()=>{caption.hidden=!caption.hidden}));
+const percent=document.createElement('span');percent.dataset.zoom='';bar.append(percent);
+stage=document.createElement('div');stage.className='ekab-image-stage';photo=document.createElement('img');photo.draggable=false;stage.append(photo);caption=document.createElement('p');caption.className='ekab-image-caption';overlay.append(bar,stage,caption);document.body.append(overlay);
+let drag=null;stage.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY,dx,dy};stage.setPointerCapture(e.pointerId)});stage.addEventListener('pointermove',e=>{if(!drag)return;dx=drag.dx+e.clientX-drag.x;dy=drag.dy+e.clientY-drag.y;apply()});const stop=()=>drag=null;stage.addEventListener('pointerup',stop);stage.addEventListener('pointercancel',stop);
+stage.addEventListener('wheel',e=>{e.preventDefault();setZoom(zoom+(e.deltaY<0?.2:-.2))},{passive:false});
+document.addEventListener('click',e=>{const img=e.target.closest?.('img');if(!eligible(img))return;images=[...document.querySelectorAll('main img,article img,section img')].filter(eligible);index=images.indexOf(img);if(index<0)return;e.preventDefault();overlay.hidden=false;document.body.style.overflow='hidden';caption.hidden=false;show(index);document.addEventListener('keydown',keys);bar.querySelector('button').focus()});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

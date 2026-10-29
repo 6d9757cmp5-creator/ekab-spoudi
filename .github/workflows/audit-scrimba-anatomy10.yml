@@ -1,0 +1,34 @@
+name: Audit Scrimba Anatomy 10 visual frames
+
+on:
+  push:
+    paths:
+      - '.github/workflows/audit-scrimba-anatomy10.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture-video-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated screenshot browser
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts 'playwright@1.55.0'
+          npx playwright install --with-deps chromium
+      - name: Capture actual Scrimba player frames and on-page transcript
+        run: node scripts/capture-scrimba-anatomy10.mjs
+      - name: Keep evidence private to GitHub Actions (no public screenshots)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saek-anatomy-10-video-audit
+          path: qa-scrimba-anatomy-10/
+          if-no-files-found: warn
+          retention-days: 2

@@ -1,0 +1,36 @@
+name: Έλεγχος Φαρμακολογίας Προνοσοκομειακής Φροντίδας
+
+on:
+  push:
+    paths:
+      - 'farmaka*.js'
+      - 'farmaka.html'
+      - 'sw.js'
+      - 'index.html'
+      - 'saek.html'
+      - 'practical_exam.html'
+      - 'version.json'
+      - 'updates.js'
+      - 'scripts/verify-pharmacology.mjs'
+      - '.github/workflows/pharmacology-verify.yml'
+  pull_request:
+    paths:
+      - 'farmaka*.js'
+      - 'farmaka.html'
+      - 'sw.js'
+      - 'index.html'
+      - 'saek.html'
+      - 'practical_exam.html'
+      - 'version.json'
+      - 'updates.js'
+      - 'scripts/verify-pharmacology.mjs'
+      - '.github/workflows/pharmacology-verify.yml'
+permissions:
+  contents: read
+jobs:
+  structural-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate educational pharmacology data, warnings, critical pathways and navigation
+        run: node scripts/verify-pharmacology.mjs

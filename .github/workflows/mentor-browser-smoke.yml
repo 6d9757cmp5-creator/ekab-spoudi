@@ -1,0 +1,58 @@
+name: Mentor browser simulation
+on:
+  pull_request:
+    paths:
+      - 'mentor-lab.html'
+      - 'mentor-lab.js'
+      - 'mentor-lab.css'
+      - 'mentor-live.html'
+      - 'mentor-live.js'
+      - 'mentor-oral.html'
+      - 'mentor-oral.js'
+      - 'mentor-ecg.html'
+      - 'mentor-ecg.js'
+      - 'mentor-readonly.html'
+      - 'mentor-readonly.js'
+      - 'ui-tools/mentor-roadmap.html'
+      - 'ui-tools/mentor-roadmap.js'
+      - 'scripts/verify-mentor-roadmap.test.mjs'
+      - 'mentor-library.html'
+      - 'mentor-library.js'
+      - 'mentor/**'
+      - 'scripts/verify-mentor-browser.mjs'
+      - 'scripts/test-mentor-source-index.mjs'
+      - '.github/workflows/mentor-browser-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Playwright and selected browser (CI only)
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Verify truthful Mentor capability index
+        run: node --test scripts/verify-mentor-roadmap.test.mjs
+      - name: Execute mobile browser scenarios, persistent memory and no legacy writes
+        env:
+          MENTOR_TEST_BROWSER: ${{ matrix.engine }}
+        run: node scripts/verify-mentor-browser.mjs
+      - name: Keep screenshot for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mentor-foundation-mobile-${{ matrix.engine }}
+          path: mentor-foundation-mobile*.png
+          if-no-files-found: ignore
+          retention-days: 7

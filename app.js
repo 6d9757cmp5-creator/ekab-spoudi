@@ -2,6 +2,8 @@
 const BANK_URL='official_questions.json', STORAGE='ekab-eoppep-official-v15';
 const $=selector=>document.querySelector(selector);
 let bank=[], state={}, pool=[], index=-1, shownAnswer=false;
+const lockedThisRun=new Set(), gradedFeedback=new Map();
+let gradingPending=false;
 const scheduler=window.EkabStudyScheduler;
 if(!scheduler)throw new Error('Δεν φορτώθηκε ο προγραμματισμός επαναλήψεων. Ενημέρωσε την εφαρμογή.');
 let catalogSelectedId=null;
@@ -43,6 +45,7 @@ function labelStatus(q){const status=q.sourceReview?.status;if(status==='documen
 // A question is learned only after successful recalls on separate dates.
 function learning(q){return scheduler.evaluate(state[q.id])}
 function isStudied(q){return learning(q).studied}
+function isRead(q){return typeof state[q.id]?.readCompletedAt==='string'&&Number.isFinite(Date.parse(state[q.id].readCompletedAt))}
 function isMastered(q){return learning(q).mastered}
 function needsReview(q){const s=state[q.id];return Boolean(s&&scheduler.isDue(s))}
 function renderDueToday(){
@@ -66,6 +69,7 @@ function renderDueToday(){
 }
 function updateMetrics(){
  $('#seenCount').textContent=bank.filter(isStudied).length;
+  $('#readCount').textContent=String(bank.filter(isRead).length);
  $('#allCount').textContent=bank.length;
  $('#verifiedCount').textContent=bank.filter(q=>q.answerStatus==='reviewed_educational').length;
  const old=bank.filter(q=>{const s=state[q.id];return s&&(s.selfCorrect||0)>0&&!(Array.isArray(s.reviewHistory)&&s.reviewHistory.length)}).length;
@@ -132,10 +136,11 @@ function sourceModal(q){
  $('#sourceDialog').showModal();
 }
 function showHome(){if(pool[index]&&$('#draft'))st(pool[index]).draft=$('#draft').value;save();$('#homeView').classList.remove('hidden');$('#examView').classList.add('hidden');updateMetrics();window.scrollTo({top:0,behavior:'smooth'})}
-function showExam(){$('#homeView').classList.add('hidden');$('#examView').classList.remove('hidden');$('#setup').classList.remove('hidden');$('#study').classList.add('hidden');updateMatches();window.scrollTo({top:0,behavior:'smooth'})}
+function showExam(){lockedThisRun.clear();gradedFeedback.clear();$('#homeView').classList.add('hidden');$('#examView').classList.remove('hidden');$('#setup').classList.remove('hidden');$('#study').classList.add('hidden');updateMatches();window.scrollTo({top:0,behavior:'smooth'})}
 function present(){
  if(!pool.length){$('#study').classList.add('hidden');$('#setup').classList.remove('hidden');return}
  const q=pool[index],s=st(q);s.seen=(s.seen||0)+1;save();updateMetrics();shownAnswer=false;
+ $('#eoppepAIResult').hidden=true;$('#eoppepGradeAI').disabled=false;$('#eoppepGradeAI').hidden=false;$('#showAnswer').hidden=false;$('#showAnswer').disabled=false;$('#eoppepGradeAI').textContent='Υποβολή αξιολόγησης';
  $('#qmeta').textContent=`Ομάδα ${q.group} · Θέμα ${q.number}`;
  $('#qOriginal').href=qSourceLink(q);
  $('#qcount').textContent=`${index+1} / ${pool.length}`;
@@ -143,9 +148,20 @@ function present(){
  $('#qstatus').classList.toggle('review',q.answerStatus==='editorial_review_needed');
  $('#qtitle').textContent=q.question;
  $('#qtopic').textContent=q.studyTopic+' · βοηθητική θεματική';
- $('#draft').value=s.draft||'';
+ $('#draft').value=s.draft||'';$('#draft').readOnly=lockedThisRun.has(q.id);
  $('#answerPanel').classList.add('hidden');$('#assessment').classList.add('hidden');$('#prev').disabled=index===0;
+ if(lockedThisRun.has(q.id)){
+  showAnswer();lockExamAnswer();
+  const previous=gradedFeedback.get(q.id);
+  if(previous&&window.EkabAIGrade)window.EkabAIGrade.render($('#eoppepAIResult'),previous);
+ }
  $('#study').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function lockExamAnswer(){
+ $('#draft').readOnly=true;
+ $('#eoppepGradeAI').disabled=true;$('#eoppepGradeAI').hidden=true;
+ $('#showAnswer').disabled=true;$('#showAnswer').hidden=true;
+ $('#assessment').classList.add('hidden');
 }
 function showAnswer(){const q=pool[index];shownAnswer=true;$('#answerPanel').classList.remove('hidden');const known=q.answerStatus==='reviewed_educational',draft=q.answerStatus==='editorial_review_needed';$('#solution').classList.toggle('hidden',!(known||draft));$('#solution').classList.toggle('review',!known);$('#nosolution').classList.toggle('hidden',known||draft);$('#assessment').classList.toggle('hidden',!known);$('#solution').textContent=(known?'Ενδεικτική εκπαιδευτική απάντηση — όχι επίσημο λυσάρι:\n\n':'ΠΡΟΣΧΕΔΙΟ — σε ειδικό έλεγχο, χωρίς βαθμολογία:\n\n')+(q.answer||'');const p=$('#sourceLine');p.replaceChildren();addLink(p,qSourceLink(q),'ΕΟΠΠΕΠ — πρωτότυπο θέμα');p.append(document.createTextNode(' · '));if(!addLink(p,q.sourceUrl,'Βιβλιογραφική πηγή'))p.append(document.createTextNode('Πηγή μη διαθέσιμη'));let b=document.createElement('button');b.type='button';b.className='pill-button';b.style.marginLeft='8px';b.textContent='Λεπτομέρειες πηγής ⓘ';b.onclick=()=>sourceModal(q);p.append(b)}
 function assess(result){
@@ -210,6 +226,40 @@ function filterCatalog(){
  }
  const count=$('#catalogResultInfo');if(count)count.textContent=total?`Εμφανίζονται ${visible} από ${total} αποτελέσματα · κύλισε τη σελίδα για τα υπόλοιπα.`:'Δεν βρέθηκε αντίστοιχη ερώτηση.';
  const more=$('#catalogMore');if(more){more.hidden=total<=catalogVisibleLimit;more.textContent=`Εμφάνιση ${Math.min(24,total-catalogVisibleLimit)} ακόμη ερωτήσεων`;}
+ updateCatalogReaderNavigation();
+}
+// Catalog navigation uses the same group/search filters as the visible question list.
+// Pagination only limits rendering; it must not block moving to later matches.
+function catalogNavigationSequence(){
+ const group=$('#catalogGroupFilter')?.value||'all';
+ const terms=normalizeCatalogText($('#catalogSearch')?.value||'').trim().split(/\s+/).filter(Boolean);
+ const buttons=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item'));
+ const matching=buttons.filter(btn=>(group==='all'||btn.dataset.group===group)&&terms.every(term=>normalizeCatalogText(btn.textContent).includes(term)));
+ const candidates=matching.map(btn=>btn.dataset.questionId);
+ if(catalogSelectedId&&candidates.includes(catalogSelectedId))return candidates;
+ // A direct link or changed filter must never trap the reader outside the catalog.
+ return buttons.map(btn=>btn.dataset.questionId);
+}
+function updateCatalogReaderNavigation(){
+ const prev=$('#catalogReaderPrevious'),next=$('#catalogReaderNext');
+ if(!prev||!next)return;
+ const sequence=catalogNavigationSequence();
+ const current=sequence.indexOf(catalogSelectedId);
+ prev.disabled=current<=0;
+ next.disabled=current<0||current>=sequence.length-1;
+}
+function moveCatalogQuestion(direction){
+ if(!catalogSelectedId)return;
+ const sequence=catalogNavigationSequence(),position=sequence.indexOf(catalogSelectedId);
+ const nextId=sequence[position+direction];
+ if(!nextId)return;
+ // Make a matching question visible in the catalog even beyond the first 24 results.
+ const nextIndex=sequence.indexOf(nextId);
+ if(nextIndex>=catalogVisibleLimit){
+  catalogVisibleLimit=Math.ceil((nextIndex+1)/24)*24;
+  filterCatalog();
+ }
+ openCatalogQuestion(nextId);
 }
 function renderCatalogReader(q){
  const reader=$('#catalogReader');if(!reader)return;
@@ -231,6 +281,10 @@ function renderCatalogReader(q){
  if(q.reviewNote){const p4=document.createElement('p');p4.textContent='Σημείωση ελέγχου: '+q.reviewNote;sources.append(p4)}
  $('#catalogReaderSosNotes').value=st(q).sosNotes||'';
  $('#catalogReaderPersonalNotes').value=st(q).readerNotes||'';
+  const read=isRead(q),markRead=$('#catalogReaderMarkRead');
+  markRead.textContent=read?'✓ Διαβάστηκε · Αναίρεση':'✓ Σημείωσε ως διαβασμένη';
+  markRead.setAttribute('aria-pressed',String(read));
+  markRead.classList.toggle('is-read',read);
  const previous=$('#catalogReaderReviewState');
  previous.textContent=needsReview(q)?'Είναι ήδη στη λίστα επανάληψης.':'Οι σημειώσεις SOS είναι προσωπικές· δεν αποτελούν επιβεβαιωμένη ιατρική οδηγία.';
  for(const btn of document.querySelectorAll('#allQuestionsList .all-question-item')){
@@ -238,6 +292,7 @@ function renderCatalogReader(q){
   btn.classList.toggle('selected',active);
   btn.setAttribute('aria-pressed',String(active));
  }
+ updateCatalogReaderNavigation();
 }
 function openCatalogQuestion(questionId){
  const q=bank.find(item=>item.id===questionId);
@@ -248,12 +303,22 @@ function openCatalogQuestion(questionId){
  const reader=$('#catalogReader');
  reader.scrollIntoView({behavior:'smooth',block:'start'});
 }
+$('#catalogReaderPrevious').addEventListener('click',()=>moveCatalogQuestion(-1));
+$('#catalogReaderNext').addEventListener('click',()=>moveCatalogQuestion(1));
+$('#catalogReaderMarkRead').addEventListener('click',()=>{
+  const q=bank.find(item=>item.id===catalogSelectedId);if(!q)return;
+  const progress=st(q);
+  if(isRead(q))delete progress.readCompletedAt;
+  else progress.readCompletedAt=new Date().toISOString();
+  save();renderCatalogReader(q);updateMetrics();
+});
 $('#catalogReaderClose').addEventListener('click',()=>{
  $('#catalogReaderContent').hidden=true;
  $('#catalogReaderPlaceholder').hidden=false;
  if(!$('#homeView').classList.contains('catalog-open-desktop'))$('#catalogReader').classList.add('hidden');
  if(catalogSelectedId){const btn=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item')).find(x=>x.dataset.questionId===catalogSelectedId);if(btn){btn.classList.remove('selected');btn.setAttribute('aria-pressed','false');btn.focus()}}
  catalogSelectedId=null;
+ updateCatalogReaderNavigation();
 });
 $('#catalogReaderSourceInfo').addEventListener('click',()=>{const q=bank.find(item=>item.id===catalogSelectedId);if(q)sourceModal(q)});
 $('#catalogReaderMarkReview').addEventListener('click',()=>{
@@ -310,13 +375,49 @@ for(const el of ['#group','#topic','#order','#statusFilter','#search'])$(el).add
 $('#draft').oninput=e=>{if(pool[index]){st(pool[index]).draft=e.target.value;save()}};
 $('#qstatus').onclick=()=>{if(pool[index])sourceModal(pool[index])};
 $('#closeDialog').onclick=()=>$('#sourceDialog').close();$('#sourceDialog').onclick=e=>{if(e.target===$('#sourceDialog'))$('#sourceDialog').close()};
-$('#showAnswer').onclick=showAnswer;$('#markReview').onclick=()=>{const q=pool[index];if(!q)return;const s=st(q);scheduler.markReview(s);save();updateMetrics();$('#qstatus').textContent='Σημειώθηκε για επανάληψη · πηγή ⓘ'};
-$('#selfCorrect').onclick=()=>assess('correct');$('#selfAssisted').onclick=()=>assess('assisted');$('#selfIncorrect').onclick=()=>assess('incorrect');
+$('#eoppepGradeAI').onclick=async ()=>{
+ const q=pool[index],service=window.EkabAIGrade,button=$('#eoppepGradeAI'),output=$('#eoppepAIResult');
+ if(!q||!service||gradingPending||lockedThisRun.has(q.id))return;
+ if(q.answerStatus!=='reviewed_educational'){output.hidden=false;output.textContent='Η εκπαιδευτική λύση δεν έχει επαληθευτεί. Δεν μπορεί να καταχωριστεί βαθμός.';return}
+ const answer=$('#draft').value.trim();
+ if(answer.length<3){output.hidden=false;output.textContent='Γράψε πρώτα τη δική σου απάντηση.';return}
+ if(shownAnswer){output.hidden=false;output.textContent='Η ενδεικτική λύση έχει ήδη εμφανιστεί. Συνέχισε στην επόμενη ερώτηση.';return}
+ const qid=q.id,started=index;
+ gradingPending=true;button.disabled=true;button.textContent='Γίνεται αξιολόγηση…';
+ $('#draft').readOnly=true;$('#showAnswer').disabled=true;
+ output.hidden=false;output.textContent='Ελέγχεται η απάντησή σου…';
+ try{
+  const result=await service.evaluate({section:'eoppep',questionId:qid,answer});
+  if(pool[index]?.id!==qid||index!==started)return;
+  showAnswer();
+  if(result.verdict==='correct')assess('correct');
+  else if(result.verdict==='partial')assess('assisted');
+  else if(result.verdict==='incorrect')assess('incorrect');
+  // Even an uncertain response ends this attempt without a grade.
+  lockedThisRun.add(qid);gradedFeedback.set(qid,result);
+  service.render(output,result);
+  lockExamAnswer();
+ }catch(err){
+  if(pool[index]?.id!==qid||index!==started)return;
+  output.hidden=false;output.className='ai-grading-result ai-grading-unavailable';
+  output.textContent=err.message||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντησή σου διατηρείται.';
+ }finally{
+  gradingPending=false;
+  if(pool[index]?.id===qid&&index===started){
+   const locked=lockedThisRun.has(qid);
+   button.disabled=locked;button.hidden=locked;button.textContent='Υποβολή αξιολόγησης';
+   $('#draft').readOnly=locked;$('#showAnswer').disabled=locked;
+  }
+ }
+};
+$('#showAnswer').onclick=()=>{
+ const q=pool[index];if(!q||gradingPending||lockedThisRun.has(q.id))return;
+ showAnswer();lockedThisRun.add(q.id);lockExamAnswer();
+};$('#markReview').onclick=()=>{const q=pool[index];if(!q)return;const s=st(q);scheduler.markReview(s);save();updateMetrics();$('#qstatus').textContent='Σημειώθηκε για επανάληψη · πηγή ⓘ'};
+$('#selfCorrect').onclick=()=>{};$('#selfAssisted').onclick=()=>{};$('#selfIncorrect').onclick=()=>{};
 $('#next').onclick=()=>advance(1);$('#prev').onclick=()=>advance(-1);
 // Older pages may still have the legacy single-section export button.
 if ($('#export')) $('#export').onclick=()=>{let blob=new Blob([JSON.stringify({schema:'ekab-official-progress-v19',date:new Date().toISOString(),progress:state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ekab-eoppep-progress-v19.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
-$('#reset').onclick=()=>{if(confirm('Πρώτη επιβεβαίωση: να μηδενιστεί η πρόοδος στις 314 ερωτήσεις ΕΟΠΠΕΠ;')&&confirm('Τελική επιβεβαίωση: η πρόοδος ΕΟΠΠΕΠ θα διαγραφεί από τη συσκευή. Τα κεφάλαια ΣΑΕΚ και τα PDF δεν θα επηρεαστούν. Συνέχεια;')){state={};save();updateMetrics()}};
-$('#restore').onchange=async e=>{try{let f=e.target.files?.[0];if(!f)return;if(f.size>2000000)throw Error('Το αρχείο είναι πολύ μεγάλο.');const data=JSON.parse(await f.text());if(!['ekab-official-progress-v15','ekab-official-progress-v16','ekab-official-progress-v17','ekab-official-progress-v18','ekab-official-progress-v19'].includes(data.schema)||!data.progress||typeof data.progress!=='object'||Array.isArray(data.progress))throw Error('Δεν αναγνωρίστηκε αρχείο προόδου v15–v19.');const allowed=new Set(bank.map(q=>q.id)),clean={};for(const [id,v] of Object.entries(data.progress)){if(!allowed.has(id))continue;if(!v||!Number.isInteger(v.seen)||v.seen<0||!Number.isInteger(v.weak)||v.weak<0||!Number.isInteger(v.streak)||v.streak<0||typeof v.draft!=='string'||v.draft.length>25000)throw Error('Μη έγκυρα δεδομένα προόδου.');clean[id]={seen:v.seen,weak:v.weak,streak:v.streak,selfCorrect:Number(v.selfCorrect)||0,selfAttempts:Number(v.selfAttempts)||0,draft:v.draft}}if(!confirm('Να αντικατασταθεί η τωρινή πρόοδος;'))return;state=clean;save();updateMetrics();$('#restoreNotice').textContent='Η πρόοδος επαναφέρθηκε.'}catch(err){$('#restoreNotice').textContent='Σφάλμα: '+err.message}e.target.value=''};
 async function init(){state=saved();try{const response=await fetch(BANK_URL);if(!response.ok)throw Error('HTTP '+response.status);bank=await response.json();if(bank.length!==314||bank.filter(q=>q.group==='A').length!==105||bank.filter(q=>q.group==='B').length!==209)throw Error('Ασυμφωνία πλήθους επίσημων θεμάτων.')}catch(err){console.error(err);$('.intro-note').textContent='Δεν φορτώθηκε η επίσημη τράπεζα. Ανέβασε όλα τα αρχεία αποσυμπιεσμένα στον ίδιο φάκελο GitHub Pages.';return}for(const topic of [...new Set(bank.map(q=>q.studyTopic))].sort((a,b)=>a.localeCompare(b,'el'))){let option=document.createElement('option');option.value=topic;option.textContent=topic;$('#topic').append(option)}const documentedOption=$('#statusFilter option[value="documented_review"]');if(documentedOption)documentedOption.textContent=`Ιστορικό στοχευμένης ανασκόπησης (${bank.filter(hasDocumentedReview).length})`;const directOption=$('#statusFilter option[value="directly_checked"]');if(directOption)directOption.textContent=`Καταγεγραμμένος έλεγχος πηγής / sourceChecked (${bank.filter(q=>Boolean(q.sourceChecked)).length})`;const pendingOption=$('#statusFilter option[value="passage_check_pending"]');if(pendingOption)pendingOption.textContent=`Περιμένουν αντιπαραβολή χωρίου (${bank.filter(q=>q.sourceReview?.status==='citation_indexed_pending_passage_check').length})`;updateMetrics();updateMatches();if($('#allQuestionsPanel')?.open)renderAllQuestions();
  // Global search opens the selected question in the READER, never in exam mode.
  const requested=new URLSearchParams(location.search).get('question');
@@ -324,8 +425,22 @@ async function init(){state=saved();try{const response=await fetch(BANK_URL);if(
   const catalog=$('#allQuestionsPanel');
   if(catalog){catalog.open=true;renderAllQuestions();requestAnimationFrame(()=>openCatalogQuestion(requested));}
  }
+
+ // Shortcuts from the new EOPPEP hub: select reading or active recall.
+ if(!requested){
+  const route=new URLSearchParams(location.search);
+  const group=['A','B'].includes(route.get('group'))?route.get('group'):'all';
+  if(route.get('mode')==='exam'){
+   showExam();$('#group').value=group;updateMatches();
+  }else if(route.get('view')==='catalog'){
+   $('#catalogGroupFilter').value=group;
+   const button=$('#allQuestionsToggle');
+   if(button&&!$('#allQuestionsPanel').open)button.click();
+   else {renderAllQuestions();filterCatalog()}
+  }
+ }
 }
 init(); // Service worker registration is managed by updates.js on every page.
 
 // Cloud changes refresh the existing in-memory study state without restarting a question.
-window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});
+window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(catalogSelectedId){const q=bank.find(item=>item.id===catalogSelectedId);if(q)renderCatalogReader(q)}if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});

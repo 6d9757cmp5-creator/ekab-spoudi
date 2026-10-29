@@ -1,0 +1,390 @@
+/* Compact landing page for EKAB Spoudi. All learning modules stay on their existing pages. */
+.home-main{max-width:970px;padding-top:24px}
+.home-intro{text-align:left;margin:0 0 23px}
+.home-kicker{font-size:.72rem;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 8px}
+.home-intro h2{font-size:clamp(1.45rem,4vw,2.05rem);line-height:1.18;letter-spacing:-.025em;margin:0 0 10px}
+.home-intro p:last-child{color:var(--muted);font-size:.9rem;margin:0}
+.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.home-card{display:block;min-width:0;overflow:hidden;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;text-decoration:none;box-shadow:0 5px 16px #051e300b;transition:transform .15s ease,border-color .15s ease;cursor:pointer}
+.home-card:hover{border-color:#94c5dd;transform:translateY(-1px)}
+.home-card:focus-visible,.home-card:focus-within{outline:3px solid #63bce7;outline-offset:2px}
+.home-card-head,.home-card-summary{display:flex;gap:14px;align-items:center;padding:21px 18px;min-height:126px}
+.home-card-summary{list-style:none}
+.home-card-summary::-webkit-details-marker{display:none}
+.home-card-summary::marker{content:''}
+.home-card-icon{width:53px;height:53px;min-width:53px;border-radius:15px;display:grid;place-items:center;background:#e6f4fa;color:#176385}
+.home-card-icon svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.home-card-text{min-width:0;flex:1}
+.home-card-title{font-size:1.11rem;line-height:1.3;font-weight:800;display:block;margin-bottom:5px}
+.home-card-subtitle{font-size:.8rem;line-height:1.4;color:var(--muted);display:block}
+.home-card-chevron{color:var(--blue);font-size:1.45rem;flex:none;line-height:1}
+.home-card-eoppep[open] .home-card-chevron{transform:rotate(90deg)}
+.home-card-button{width:100%;border:0;text-align:left;font:inherit;cursor:pointer}
+.home-suboptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 17px 18px}
+.home-suboptions a{padding:13px 11px;display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;border:1px solid #b6d9e9;border-radius:10px;background:#eaf6fc;color:#145b7d;text-decoration:none;font-size:.87rem;font-weight:800;min-height:51px}
+.home-suboptions a:hover,.home-suboptions a:focus-visible{background:#dceff9;outline:2px solid #5baecc}
+.home-main footer{margin-top:25px}
+.home-app-note{font-size:.76rem;text-align:center;color:var(--muted);max-width:680px;margin:22px auto 0;line-height:1.55}
+html[data-theme="dark"] .home-card{background:#152c3f;border-color:#324f63;box-shadow:none}
+html[data-theme="dark"] .home-card-icon{background:#22475c;color:#b9e9ff}
+html[data-theme="dark"] .home-suboptions a{background:#22465c;border-color:#476d81;color:#e7f6ff}
+html[data-theme="dark"] .home-suboptions a:hover{background:#30586f}
+@media(max-width:620px){
+ .home-main{padding-top:19px}
+ .home-intro{margin-bottom:17px}
+ .home-tiles{grid-template-columns:1fr;gap:11px}
+ .home-card-head,.home-card-summary{padding:15px 16px;min-height:94px}
+ .home-card-icon{width:46px;height:46px;min-width:46px;border-radius:13px}
+ .home-card-icon svg{width:24px;height:24px}
+ .home-card-title{font-size:1.03rem}
+ .home-card-subtitle{font-size:.77rem}
+ .home-suboptions{padding:0 15px 15px}
+}
+@media(max-width:360px){
+ .home-card-head,.home-card-summary{gap:10px;padding:13px}
+ .home-card-icon{width:41px;height:41px;min-width:41px}
+ .home-suboptions{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.home-card{transition:none}.home-card:hover{transform:none}}
+
+/* Learning path: SAEK, EOPPEP, pharmacology, seminars. */
+.home-tiles>.home-card-saek,.home-tiles>.home-card-eoppep{grid-column:1/-1}
+.home-card-saek{border-color:#a5cfe2}
+.home-card-eoppep .home-card-summary{min-height:96px;padding-bottom:10px}
+.home-card-eoppep .home-suboptions{padding:0 18px 18px}
+html[data-theme="dark"] .home-card-saek{border-color:#4a7590}
+@media(max-width:620px){.home-card-eoppep .home-card-summary{min-height:83px;padding-bottom:9px}.home-card-eoppep .home-suboptions{padding:0 15px 15px}}
+
+
+/* Landing viewport fit v27.1.83: never truncate or disable scrolling. */
+body:has(.home-main){min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+body:has(.home-main) .top{flex:none}
+body:has(.home-main) .home-main{flex:1 0 auto;width:100%;max-width:1120px;display:flex;flex-direction:column;justify-content:center;padding:12px clamp(14px,3vw,26px) max(8px,env(safe-area-inset-bottom))}
+body:has(.home-main) .home-intro{margin:0 0 12px}
+body:has(.home-main) .home-kicker{margin-bottom:4px}
+body:has(.home-main) .home-intro h2{margin-bottom:5px}
+body:has(.home-main) .home-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+body:has(.home-main) .home-tiles>.home-card-saek,body:has(.home-main) .home-tiles>.home-card-eoppep{grid-column:auto}
+body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:82px;padding:12px 15px;gap:12px}
+body:has(.home-main) .home-card-icon{width:45px;height:45px;min-width:45px;border-radius:13px}
+body:has(.home-main) .home-card-icon svg{width:24px;height:24px}
+body:has(.home-main) .home-card-title{font-size:1.04rem;margin-bottom:3px}
+body:has(.home-main) .home-card-subtitle{font-size:.79rem;line-height:1.32}
+body:has(.home-main) .home-card-eoppep .home-card-summary{min-height:75px;padding-bottom:3px}
+body:has(.home-main) .home-card-eoppep .home-suboptions{padding:0 14px 11px;gap:8px}
+body:has(.home-main) .home-suboptions a{min-height:42px;padding:8px 10px}
+body:has(.home-main) .home-card-saek{display:flex;align-items:center}
+body:has(.home-main) .home-card-saek .home-card-head{width:100%}
+body:has(.home-main) .home-app-note{font-size:.7rem;line-height:1.35;margin:11px auto 0;max-width:80ch}
+body:has(.home-main) .home-main footer{margin-top:5px;padding:3px 0 5px;font-size:.67rem}
+@media(max-width:620px){
+ body:has(.home-main) .top{padding-top:8px}
+ body:has(.home-main) .top>.container{padding-inline:14px}
+ body:has(.home-main) .header-row{gap:5px}
+ body:has(.home-main) .header-row .brand{gap:8px}
+ body:has(.home-main) .header-row .logo{width:33px;height:33px;min-width:33px}
+ body:has(.home-main) .header-row .brand h1{font-size:1.05rem}
+ body:has(.home-main) .header-row .brand p{font-size:.65rem;line-height:1.24}
+ body:has(.home-main) .top .header-row .utility{margin-top:5px;gap:6px}
+ body:has(.home-main) .utility-button,body:has(.home-main) .top .utility .glossary-open{width:36px;height:36px;min-width:36px;min-height:36px}
+ body:has(.home-main) .account-button{min-height:36px;padding:6px 12px;font-size:.8rem}
+ body:has(.home-main) .home-main{padding:10px 14px max(7px,env(safe-area-inset-bottom))}
+ body:has(.home-main) .home-intro{margin-bottom:9px}
+ body:has(.home-main) .home-kicker{font-size:.64rem;letter-spacing:.075em;margin-bottom:3px}
+ body:has(.home-main) .home-intro h2{font-size:clamp(1.26rem,5.3vw,1.6rem);line-height:1.16;margin-bottom:3px}
+ body:has(.home-main) .home-intro p:last-child{font-size:.78rem;line-height:1.3}
+ body:has(.home-main) .home-tiles{grid-template-columns:1fr;gap:8px}
+ body:has(.home-main) .home-card{border-radius:15px}
+ body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:clamp(67px,9.5dvh,82px);padding:8px 12px;gap:11px}
+ body:has(.home-main) .home-card-icon{width:40px;height:40px;min-width:40px;border-radius:12px}
+ body:has(.home-main) .home-card-icon svg{width:22px;height:22px}
+ body:has(.home-main) .home-card-title{font-size:.96rem;line-height:1.24;margin-bottom:2px}
+ body:has(.home-main) .home-card-subtitle{font-size:.73rem;line-height:1.28}
+ body:has(.home-main) .home-card-chevron{font-size:1.25rem}
+ body:has(.home-main) .home-card-eoppep .home-card-summary{min-height:58px;padding-bottom:2px}
+ body:has(.home-main) .home-card-eoppep .home-suboptions{padding:0 11px 9px;gap:7px}
+ body:has(.home-main) .home-suboptions a{min-height:41px;padding:7px 9px;font-size:.79rem}
+ body:has(.home-main) .home-app-note{margin:9px auto 0;font-size:.66rem;line-height:1.32}
+ body:has(.home-main) .home-main footer{margin-top:4px;padding:2px 0 5px;font-size:.65rem}
+}
+@media(max-width:360px){
+ body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{gap:8px;padding-inline:10px}
+ body:has(.home-main) .home-card-title{font-size:.91rem}
+ body:has(.home-main) .home-suboptions{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-height:620px) and (max-width:620px){
+ body:has(.home-main) .home-intro{margin-bottom:7px}
+ body:has(.home-main) .home-tiles{gap:6px}
+ body:has(.home-main) .home-card-head,body:has(.home-main) .home-card-summary{min-height:62px;padding-block:6px}
+ body:has(.home-main) .home-app-note{margin-top:7px}
+}
+
+/* v27.1.85 — remove vertically centered landing gap */
+/* The landing begins below the header, not in the centre of an empty viewport.
+   Cards, text sizes, responsive columns and scrolling remain unchanged. */
+body:has(.home-main) .home-main {
+  flex:0 0 auto;
+  justify-content:flex-start;
+  padding-top:23px;
+}
+@media(max-width:620px){
+  body:has(.home-main) .home-main{padding-top:23px}
+}
+
+/* Hotfix: remove inherited .main vertical auto-margins on the landing */
+/* .main in styles.css uses margin:auto; within a flex-column body that
+   vertically centers the whole landing even with justify-content:flex-start. */
+.home-main { margin:0 auto; }
+
+/* Balanced viewport layout v27.1.88: the landing cards fill the unused
+   vertical space, while compact windows can still scroll normally. */
+body:has(.home-main) .home-main {
+  flex:1 1 auto;
+  min-height:0;
+  margin:0 auto;
+  justify-content:flex-start;
+}
+body:has(.home-main) .home-tiles {
+  flex:1 1 auto;
+  min-height:min-content;
+  grid-template-rows:repeat(2,minmax(max-content,1fr));
+  max-height:min(55dvh,490px);
+}
+body:has(.home-main) .home-card:not(.home-card-eoppep) {
+  display:flex;
+  align-items:center;
+}
+body:has(.home-main) .home-card:not(.home-card-eoppep) .home-card-head {width:100%;}
+body:has(.home-main) .home-card-eoppep {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+@media(max-width:620px) {
+  body:has(.home-main) .home-tiles {
+    grid-template-rows:repeat(4,minmax(max-content,1fr));
+    max-height:min(64dvh,620px);
+  }
+}
+@media(max-height:650px) {
+  body:has(.home-main) .home-main {flex:0 0 auto;}
+  body:has(.home-main) .home-tiles {flex:0 0 auto;max-height:none;}
+}
+
+/* Full-card navigation: Theory and Practical are descriptive text, not buttons. */
+.home-tiles .home-card{position:relative}
+.home-card-title-line{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:9px;row-gap:2px;margin-bottom:4px}
+.home-card-title-line .home-card-title{display:inline;margin:0}
+.home-card-primary-link{color:inherit;text-decoration:none}
+.home-card-primary-link::after{content:"";position:absolute;inset:0;z-index:1}
+.home-card-primary-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+body:has(.home-main) .home-card-eoppep{display:flex;align-items:center;justify-content:flex-start}
+body:has(.home-main) .home-card-eoppep .home-card-head{width:100%;min-height:82px;padding:12px 15px}
+@media(max-width:620px){
+ body:has(.home-main) .home-card-eoppep .home-card-head{min-height:clamp(67px,9.5dvh,82px);padding:8px 12px}
+}
+
+/* Compact, factual progress indicator on the landing page. */
+.home-mini-progress{margin:10px 0 19px;max-width:570px;text-align:left}
+.home-mini-progress-label{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:.82rem;color:var(--muted);margin-bottom:7px}
+.home-mini-progress-label strong{font-variant-numeric:tabular-nums;color:var(--ink);font-size:.88rem}
+.home-mini-progress-track{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.home-mini-progress-track span{display:block;height:100%;width:0;background:var(--blue);border-radius:inherit;transition:width .35s ease}
+.home-mini-progress-message{font-size:.75rem!important;color:var(--muted);margin:6px 0 0!important}
+@media(prefers-reduced-motion:reduce){.home-mini-progress-track span{transition:none}}
+
+/* Last opened learning activity · unobtrusive, mobile-first. */
+.study-resume{margin:0 0 13px;max-width:970px;text-align:left}
+.study-resume-link{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 13px;border:1px solid #a1d5ec;border-radius:14px;background:#edf8ff;color:#164a64;text-decoration:none;box-shadow:0 2px 9px #082c4010;transition:border-color .15s ease,background .15s ease}
+.study-resume-link:hover{background:#e1f3fd;border-color:#72b8d7}
+.study-resume-link:focus-visible{outline:3px solid #50bbed;outline-offset:3px}
+.study-resume-play{flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#caecfa;color:#17668b;font-size:.92rem}
+.study-resume-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px;line-height:1.3}
+.study-resume-caption{font-size:.72rem;font-weight:650;opacity:.83}
+.study-resume-copy strong{display:block;font-size:.86rem;font-weight:800;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.study-resume-arrow{flex:none;font-size:1.55rem;line-height:1;color:inherit}
+html[data-theme="dark"] .study-resume-link{background:#183749;border-color:#356882;color:#e7f7ff;box-shadow:none}
+html[data-theme="dark"] .study-resume-link:hover{background:#20455c;border-color:#65a6c6}
+html[data-theme="dark"] .study-resume-play{background:#27576f;color:#c7efff}
+@media(min-width:700px){.study-resume{max-width:570px}.study-resume-link{padding:11px 15px}}
+@media(prefers-reduced-motion:reduce){.study-resume-link{transition:none}}
+
+/* UI-FASTLANE-SMOKE-20261028: harmless stylesheet-only deployment test. */
+
+/* Compact, two-bar tracker: replaces obsolete PR #24 and #26; no content or counters changed. */
+.home-mini-progress.compact-tracker{margin:4px 0 9px;max-width:440px}
+.compact-tracker #homeMultiTracker>div{margin:6px 0!important}
+.compact-tracker .home-mini-progress-label{font-size:.72rem;margin-bottom:3px;gap:8px}
+.compact-tracker .home-mini-progress-label strong{font-size:.74rem}
+.compact-tracker .home-mini-progress-track{width:min(100%,380px);height:5px}
+
+/* UX-only: shorten tracker bars without changing labels or layout. */
+#homeMultiTracker .home-mini-progress-track{width:min(100%,380px);height:5px}
+
+/* Compact, wrapping progress chips: only active categories are rendered. */
+.compact-tracker{max-width:540px!important;margin:3px 0 9px!important}
+.compact-tracker #homeMultiTracker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 10px;align-items:start}
+.compact-tracker #homeMultiTracker .tracker-mini-item{position:relative;min-width:0;margin:0!important;padding:7px 9px 6px;border:1px solid var(--line);border-radius:10px}
+.compact-tracker #homeMultiTracker .home-mini-progress-label{margin:0 0 5px;gap:5px;font-size:.71rem;align-items:center}
+.compact-tracker #homeMultiTracker .home-mini-progress-label span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.compact-tracker #homeMultiTracker .home-mini-progress-label strong{white-space:nowrap;font-size:.69rem}
+.compact-tracker #homeMultiTracker .home-mini-progress-track{width:100%;height:4px}
+.tracker-mini-reset{display:block;margin:5px 0 0 auto;padding:1px 0;border:0;background:none;color:var(--muted);font:inherit;font-size:.64rem;text-decoration:underline;cursor:pointer}
+.tracker-mini-reset:hover{color:var(--ink)}
+.tracker-mini-reset:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(max-width:390px){.compact-tracker #homeMultiTracker{gap:6px}.compact-tracker #homeMultiTracker .tracker-mini-item{padding:6px}}
+
+
+/* One clear 3D Anatomy entry: all skeleton/organ options live inside the atlas. */
+.home-anatomy-single-wrap{margin:14px 0 0}
+.home-anatomy-single-eyebrow{font-size:.65rem;font-weight:850;letter-spacing:.09em;color:var(--blue,#186c91);margin:0 0 7px}
+.home-anatomy-single{display:flex;align-items:center;gap:14px;min-height:90px;padding:13px 17px;border:1px solid #a6cfdc;border-radius:16px;background:linear-gradient(110deg,#eef9fc,#f6fcfd);box-shadow:0 4px 14px #0626390b;text-decoration:none;color:#173d54;transition:background .14s ease,border-color .14s ease}
+.home-anatomy-single:hover{border-color:#3a9dba;background:#e5f6fb}
+.home-anatomy-single:focus-visible{outline:3px solid #399bbc;outline-offset:3px}
+.home-anatomy-single-symbol{display:grid;place-items:center;flex:0 0 57px;width:57px;height:57px;border-radius:13px;background:#d5ecf3;color:#1c728b}
+.home-anatomy-single-symbol svg{width:43px;height:43px}
+.home-anatomy-single-copy{display:flex;flex-direction:column;min-width:0;flex:1;gap:2px}
+.home-anatomy-single-copy strong{color:inherit;font-size:1.04rem;line-height:1.28}
+.home-anatomy-single-copy span{font-size:.78rem;color:#315e74;line-height:1.35;font-weight:700}
+.home-anatomy-single-copy small{font-size:.68rem;color:#587b8b;line-height:1.3}
+.home-anatomy-single-arrow{font-size:1.7rem;line-height:1;color:#1f7da1}
+html[data-theme="dark"] .home-anatomy-single-eyebrow{color:#74cde7}
+html[data-theme="dark"] .home-anatomy-single{background:linear-gradient(110deg,#183f50,#122f40);border-color:#42778c;color:#eefaff;box-shadow:none}
+html[data-theme="dark"] .home-anatomy-single:hover{background:#234e62}
+html[data-theme="dark"] .home-anatomy-single-symbol{background:#26536b;color:#a3e8ea}
+html[data-theme="dark"] .home-anatomy-single-copy span{color:#cee7ef}
+html[data-theme="dark"] .home-anatomy-single-copy small{color:#a9cad8}
+html[data-theme="dark"] .home-anatomy-single-arrow{color:#91d9f3}
+@media(max-width:620px){
+ .home-anatomy-single-wrap{margin-top:11px}
+ .home-anatomy-single{gap:10px;min-height:84px;padding:10px 12px}
+ .home-anatomy-single-symbol{width:49px;height:49px;flex-basis:49px}
+ .home-anatomy-single-symbol svg{width:36px;height:36px}
+ .home-anatomy-single-copy strong{font-size:.97rem}
+ .home-anatomy-single-copy span{font-size:.71rem}
+ .home-anatomy-single-copy small{font-size:.63rem}
+}
+@media(prefers-reduced-motion:reduce){.home-anatomy-single{transition:none}}
+
+/* Standalone Mentor lab: accessible alongside the 3D anatomy tool. */
+.home-mentor-wrap{margin-top:10px}
+.home-mentor-single{display:flex;align-items:center;gap:14px;min-height:90px;padding:13px 17px;border:1px solid #a6cfdc;border-radius:16px;background:linear-gradient(120deg,#f1f8fb,#e9f5f5);box-shadow:0 4px 14px #0626390b;text-decoration:none;color:#173d54;transition:background .14s ease,border-color .14s ease}
+.home-mentor-single:hover{border-color:#3a9dba;background:#e5f6fb}
+.home-mentor-single:focus-visible{outline:3px solid #399bbc;outline-offset:3px}
+.home-mentor-single .home-anatomy-single-symbol{font-size:2.1rem;font-weight:900}
+.home-mentor-label{display:inline-block;font-size:.59rem;vertical-align:middle;letter-spacing:.03em;padding:4px 6px;border:1px solid currentColor;border-radius:6px;margin-left:6px}
+html[data-theme="dark"] .home-mentor-single{background:linear-gradient(115deg,#183c48,#133f43);border-color:#497985;color:#e8f8f9}
+@media(max-width:620px){.home-mentor-single{gap:10px;min-height:84px;padding:10px 12px}.home-mentor-single .home-anatomy-single-symbol{font-size:1.6rem}.home-mentor-label{font-size:.53rem}}
+@media(prefers-reduced-motion:reduce){.home-mentor-single{transition:none}}
+
+/* MENTOR presence — replaces the former single tappable strip. */
+.home-mentor-wrap{margin:13px 0 15px;padding:0!important}
+.home-mentor-presence{display:grid;grid-template-columns:minmax(160px,210px) minmax(0,1fr);gap:18px;align-items:center;padding:22px 24px 12px;border-radius:21px 21px 0 0;background:radial-gradient(circle at 8% 4%,#3b87a249,transparent 45%),linear-gradient(123deg,#0b293d,#164b5b 76%,#174f59);color:#e9f8fc;box-shadow:0 10px 25px #0926352c}
+.home-mentor-visual{display:flex;align-items:center;justify-content:center;min-height:185px;position:relative}
+.home-mentor-visual .mentor-figure{--mentor-size:165px;transform:rotate(-2deg)}
+.home-mentor-kicker{margin:0 0 6px;font-weight:750;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#a6e1ee}
+.home-mentor-beacon{display:inline-block;width:8px;height:8px;border-radius:100%;background:#9de0e6;box-shadow:0 0 0 4px #9de0e622;margin-right:5px}
+.home-mentor-content h2{color:#fff;font-size:clamp(1.6rem,4vw,2.35rem);letter-spacing:.035em;margin:0 0 5px;line-height:1.1}
+.home-mentor-intro{font-size:clamp(.94rem,1.7vw,1.09rem);font-weight:550;color:#f4fdff;max-width:600px;margin:7px 0}
+.home-mentor-note{font-size:.76rem;color:#bbdce4;margin:7px 0 14px}
+.home-mentor-label{display:inline-block;color:#bfe7eb;border:1px solid #87b7c99a;vertical-align:middle;font-size:.55rem;letter-spacing:.04em;padding:5px 8px;border-radius:30px;line-height:1}
+.home-mentor-single{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:45px;padding:10px 17px;border:1px solid #87e2ef;border-radius:12px;background:#d9f7f9;color:#103448;text-decoration:none;font-weight:800;box-shadow:0 4px 14px #031f302d}
+.home-mentor-single:hover{background:#fff;border-color:#fff;color:#103448}
+.home-mentor-single:focus-visible,.home-mentor-shortcuts a:focus-visible{outline:3px solid #e2b04d;outline-offset:3px}
+.home-mentor-shortcuts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#1c5060;border:1px solid #3b6774;border-top:0;border-radius:0 0 18px 18px;overflow:hidden}
+.home-mentor-shortcuts a{display:flex;min-height:48px;align-items:center;justify-content:center;text-align:center;padding:9px 6px;background:#174253;text-decoration:none;color:#e4f7fb;font-weight:700;font-size:.81rem}
+.home-mentor-shortcuts a:hover{background:#206579}
+html[data-theme="dark"] .home-mentor-presence{background:radial-gradient(circle at 8% 4%,#3b87a249,transparent 45%),linear-gradient(123deg,#0b293d,#164b5b 76%,#174f59);color:#e9f8fc}
+@media(max-width:650px){.home-mentor-presence{grid-template-columns:105px minmax(0,1fr);gap:10px;padding:15px 13px 13px}.home-mentor-visual{min-height:133px;align-items:center}.home-mentor-visual .mentor-figure{--mentor-size:105px}.home-mentor-content h2{font-size:1.45rem}.home-mentor-kicker{font-size:.57rem}.home-mentor-intro{font-size:.85rem}.home-mentor-note{font-size:.7rem}.home-mentor-label{font-size:.48rem}.home-mentor-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}.home-mentor-single{min-height:42px;padding:8px 10px;font-size:.84rem}.home-mentor-shortcuts a{font-size:.76rem}}
+@media(max-width:360px){.home-mentor-presence{grid-template-columns:85px minmax(0,1fr)}.home-mentor-visual .mentor-figure{--mentor-size:84px}}
+
+/* MENTOR: native CSS character (no media, no portrait or external assets).
+   Reduced-motion safe, decorative only; not a claim of live AI. */
+.mentor-figure{--mentor-size:156px;position:relative;width:var(--mentor-size);height:calc(var(--mentor-size)*1.09);flex-shrink:0;overflow:hidden;isolation:isolate;border-radius:27px;border:1px solid #8cdff24d;background:radial-gradient(circle at 50% 42%,#4896ab5e 0%,transparent 61%),linear-gradient(145deg,#193f56,#102b43 79%);box-shadow:inset 0 0 32px #0d202a55,0 13px 25px #091e3040}
+.mentor-figure>div{position:absolute}
+.mentor-halo{inset:7% 5%;z-index:0;border:1px solid #9de3f360;border-radius:50%;box-shadow:0 0 30px #44ccef38,0 0 0 13px #66bacc12}
+.mentor-shoulders{width:74%;height:46%;bottom:-18%;left:13%;border-radius:49% 49% 5% 5%;background:linear-gradient(100deg,#21465d 2%,#456d86 50%,#173e53);z-index:2}
+.mentor-neck{width:17%;height:26%;left:41.5%;top:60%;border-radius:0 0 30% 30%;background:linear-gradient(95deg,#ad7660,#dbab91 48%,#b77d68);z-index:3}
+.mentor-ears{width:49%;height:15%;left:25.5%;top:45%;border-radius:40%;background:linear-gradient(95deg,#b47c69,#e8bd9f 22%,#dfad91 78%,#b47c69);z-index:3}
+.mentor-face{width:43%;height:47%;left:28.5%;top:25%;border-radius:46% 46% 43% 43% / 36% 36% 57% 57%;background:linear-gradient(110deg,#b88068,#efc4a7 34%,#e7b396 64%,#bc826b);box-shadow:inset -7px -4px 12px #a46c5b49,0 4px 12px #081f3438;z-index:4}
+.mentor-hair{width:48%;height:24%;left:26%;top:20%;border-radius:47% 55% 24% 15%;background:linear-gradient(140deg,#131f2b 20%,#384756 49%,#1a2936 78%);box-shadow:inset 4px 3px 3px #67758037;z-index:5;clip-path:polygon(0 42%,12% 15%,38% 5%,67% 0%,92% 20%,100% 56%,92% 100%,78% 56%,52% 51%,30% 68%,10% 92%)}
+.mentor-brow{width:12%;height:2.5%;top:46%;border-radius:100%;background:#4a332e;z-index:6;transform:rotate(-7deg)}
+.mentor-brow-left{left:36%}.mentor-brow-right{left:53%;transform:rotate(7deg)}
+.mentor-eye{width:8%;height:4.7%;top:50%;border-radius:45% 45% 52% 52%;background:radial-gradient(circle at 58% 43%,#f0f7fb 0 10%,#2b3c4e 15% 48%,#f6e4d9 53%);z-index:6;animation:mentor-blink 8s infinite;transform-origin:center center}
+.mentor-eye-left{left:38%}.mentor-eye-right{left:54%}
+.mentor-nose{width:4.4%;height:10%;top:53.5%;left:47.8%;z-index:6;border-right:2px solid #a56c5c80;border-bottom:2px solid #b67c6870;border-radius:0 0 45% 45%}
+.mentor-mouth{width:13%;height:3.2%;top:66%;left:43.5%;z-index:6;border-bottom:3px solid #995b57;border-radius:0 0 80% 80%;transition:transform .2s}
+.mentor-jacket{width:66%;height:36%;bottom:-15%;left:17%;z-index:7;background:linear-gradient(110deg,#d8e8ee 0%,#f8fcfe 51%,#b9d3df 100%);clip-path:polygon(0 24%,32% 0,50% 38%,68% 0,100% 24%,100% 100%,0 100%)}
+.mentor-collar{width:27%;height:22%;bottom:0;left:36.5%;z-index:8;background:linear-gradient(130deg,#28536d,#17374d);clip-path:polygon(0 0,50% 45%,100% 0,73% 100%,27% 100%)}
+.mentor-headset{width:58%;height:43%;left:21%;top:26%;border:3px solid #99c9d3;border-bottom:0;border-radius:50% 50% 0 0;z-index:8;clip-path:polygon(0 0,100% 0,100% 86%,74% 86%,74% 63%,18% 63%,18% 93%,0 93%);opacity:.8}
+.mentor-figure.is-speaking .mentor-mouth{transform:scaleY(2);border-bottom-width:5px;animation:mentor-mouth-talk .24s infinite alternate}
+@keyframes mentor-blink{0%,43%,46%,100%{transform:scaleY(1)}44%,45%{transform:scaleY(.12)}}
+@keyframes mentor-mouth-talk{from{transform:scaleY(.5)}to{transform:scaleY(2.1)}}
+@media(prefers-reduced-motion:reduce){.mentor-eye,.mentor-figure.is-speaking .mentor-mouth{animation:none!important}}
+
+
+/* MENTOR Cinematic Studio · progressive enhancement of existing card. */
+.home-mentor-wrap{border-radius:25px;overflow:hidden;border:1px solid #2d8299;box-shadow:0 12px 34px #03192538}
+.home-mentor-presence.mentor-cinema{display:grid;grid-template-columns:minmax(190px,35%) minmax(0,1fr);grid-template-areas:"portrait copy" "voice voice";align-items:center;column-gap:19px;row-gap:10px;position:relative;overflow:hidden;padding:19px 23px 22px;border-radius:23px 23px 0 0;isolation:isolate;background:radial-gradient(ellipse at 0% 35%,#0a8fc459,transparent 37%),radial-gradient(ellipse at 90% 0%,#17a9aa43,transparent 45%),linear-gradient(130deg,#09253b,#0c364b 52%,#105162);box-shadow:inset 0 1px 0 #8dcce260,inset 0 0 70px #1587bb19;color:#f1faff}
+.mentor-cinema:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.42;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 47px,#73d8f108 48px 49px),repeating-linear-gradient(0deg,transparent 0 47px,#73d8f108 48px 49px);mask-image:linear-gradient(90deg,#000 0,transparent 60%)}
+.mentor-cinema-portrait{grid-area:portrait;position:relative;min-height:260px;display:flex;align-items:center;justify-content:center}
+.mentor-cinema-stage{width:min(100%,225px);height:244px;position:relative;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 9px 20px #061f42)}
+.mentor-cinema-stage .mentor-figure{--mentor-size:198px;z-index:2;border-radius:38px;transform:translateY(9px) rotate(-2deg);box-shadow:0 0 0 1px #56dfff4e,0 0 32px #28a8dd62,0 15px 35px #081d33a6}
+.mentor-cinema-rim{position:absolute;inset:4% -1% 2%;z-index:1;border:2px solid #45c2f7a6;border-radius:50%;box-shadow:0 0 28px #2abde186,0 0 0 11px #63ccef12,inset 0 0 20px #3db6da25;transform:rotate(-17deg)}
+.mentor-cinema-grid{position:absolute;inset:19% 8%;z-index:2;pointer-events:none;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 17px,#6ac6eb21 18px 19px),repeating-linear-gradient(90deg,transparent 0 17px,#6ac6eb19 18px 19px);mask-image:radial-gradient(circle at center,transparent 55%,#000 90%)}
+.mentor-cinema-status{position:absolute;top:0;left:0;z-index:5;display:inline-flex;align-items:center;gap:7px;border:1px solid #48deb39f;background:#083a3de8;border-radius:30px;padding:6px 10px;color:#7dffcf;font-size:.68rem;font-weight:850;letter-spacing:.05em;white-space:nowrap;box-shadow:0 0 20px #26c9a223}
+.mentor-status-beacon{width:8px;height:8px;background:#4af4b0;box-shadow:0 0 0 4px #21d99e27,0 0 12px #59f4d5;border-radius:50%}
+.mentor-cinema-copy{grid-area:copy;align-self:center}
+.mentor-cinema-copy .home-mentor-kicker{font-size:.72rem;letter-spacing:.12em;color:#85daf9}
+.mentor-cinema-copy h2{font-size:clamp(2rem,4.3vw,3.05rem);letter-spacing:.04em;line-height:1.13;margin:7px 0 15px;text-shadow:0 3px 12px #07273f9c}
+.mentor-cinema-copy .home-mentor-intro{font-size:clamp(.94rem,1.8vw,1.16rem);line-height:1.65;margin:8px 0 12px;font-weight:600}
+.mentor-cinema-copy .home-mentor-note{font-size:.77rem;line-height:1.65;color:#bcdce7}
+.mentor-voice-identity{display:flex;align-items:center;gap:7px;flex-wrap:wrap;border:1px solid #69dded66;background:linear-gradient(115deg,#0c4664ad,#0d324888);border-radius:12px;padding:10px 12px;color:#d2f6ff;font-weight:700;font-size:.77rem;margin-top:12px}
+.mentor-voice-identity-bars{margin-left:auto;letter-spacing:2px;color:#62dfff;font-size:.98rem}
+.mentor-cinema-live{color:#8ef0cb!important;font-size:.75rem!important;margin:9px 0!important;min-height:1.3em}
+.mentor-cinema-voice{grid-area:voice;display:grid;grid-template-columns:minmax(0,1fr) minmax(165px,210px);column-gap:10px;row-gap:10px;align-items:center;padding-top:5px}
+.mentor-cinema-wave{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:4px;height:56px;overflow:hidden;background:linear-gradient(90deg,transparent,#0f597044 35%,#0e78902b 65%,transparent);border-bottom:1px solid #6ac6ea38}
+.mentor-cinema-wave i{display:block;flex:0 1 5px;width:5px;min-width:2px;height:calc(5px + (var(--bar, 4) * 3px));border-radius:10px;background:linear-gradient(#b6f7ff,#15b9ec,#0063ad);box-shadow:0 0 10px #21c5f5a6;opacity:.65;transform-origin:center}
+.mentor-cinema-wave i:nth-child(5n+1){--bar:3}.mentor-cinema-wave i:nth-child(5n+2){--bar:8}.mentor-cinema-wave i:nth-child(5n+3){--bar:12}.mentor-cinema-wave i:nth-child(5n+4){--bar:5}.mentor-cinema-wave i:nth-child(5n){--bar:9}
+.mentor-cinema.is-speaking .mentor-cinema-wave i{animation:mentor-visualizer .48s ease-in-out infinite alternate;opacity:1}
+.mentor-cinema.is-speaking .mentor-cinema-wave i:nth-child(3n){animation-delay:.1s}.mentor-cinema.is-speaking .mentor-cinema-wave i:nth-child(4n){animation-delay:.23s}
+@keyframes mentor-visualizer{from{transform:scaleY(.3)}to{transform:scaleY(1.25)}}
+.mentor-cinema-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;grid-column:1/-1}
+.mentor-cinema-controls button,.mentor-cinema-controls a{display:flex;align-items:center;justify-content:center;gap:4px;min-height:49px;border-radius:13px;border:1px solid #65c6e49a;font:inherit;font-size:.86rem;font-weight:760;color:#e8f7ff;text-decoration:none;background:linear-gradient(135deg,#145b73,#133c57);padding:9px 6px;text-align:center;box-shadow:inset 0 1px 0 #c0f7ff2d}
+.mentor-cinema-controls #mentor-home-listen{background:linear-gradient(115deg,#1476bb,#0bafdc);border-color:#5deaff;box-shadow:0 0 19px #0ebed75b;color:white}
+.mentor-cinema-controls #mentor-home-stop{color:#ffb8b8;border-color:#a35e7180}
+.mentor-cinema-controls button:disabled{opacity:.5;cursor:not-allowed}
+.mentor-cinema-select-label{color:#d0e7ef;font-size:.73rem;font-weight:700;grid-column:1}
+#mentor-home-voice{min-height:42px;max-width:100%;padding:9px 12px;border:1px solid #5c9cb1;background:#0a344a;color:#e6faff;border-radius:10px;font:inherit;font-size:.77rem;grid-column:2}
+.mentor-cinema-voice .home-mentor-single{grid-column:1/-1;width:100%;min-height:55px;background:linear-gradient(110deg,#0b98ae,#19d0cf);color:white;border-color:#5bf4f8;font-size:1.02rem;box-shadow:inset 0 1px 0 #d2ffff5c,0 0 22px #11d0d057}
+.mentor-cinema-voice .home-mentor-single:hover{background:linear-gradient(110deg,#14bcd0,#2ae6d9);color:#062d3b}
+.mentor-cinema-voice a:focus-visible,.mentor-cinema-voice button:focus-visible,.mentor-cinema-voice select:focus-visible{outline:3px solid #ffda80;outline-offset:3px}
+.home-mentor-shortcuts{background:#10354c;padding:9px;gap:8px}
+.home-mentor-shortcuts a{border:1px solid #60bfe080;border-radius:13px;justify-content:space-between;min-height:51px;padding:10px 14px;background:linear-gradient(125deg,#133c57,#194e63);font-weight:750}
+.home-mentor-shortcuts a span{font-size:1.4em;color:#8de0ff}
+@media(max-width:650px){
+ .home-mentor-presence.mentor-cinema{grid-template-columns:115px minmax(0,1fr);column-gap:13px;padding:14px 13px 16px}
+ .mentor-cinema-portrait{min-height:174px;align-self:center}
+ .mentor-cinema-stage{height:164px}
+ .mentor-cinema-stage .mentor-figure{--mentor-size:110px;border-radius:23px}
+ .mentor-cinema-status{top:-4px;left:-3px;font-size:.53rem;padding:5px}
+ .mentor-cinema-copy h2{font-size:1.72rem;margin:4px 0 9px}
+ .mentor-cinema-copy .home-mentor-kicker{font-size:.57rem}
+ .mentor-cinema-copy .home-mentor-intro{font-size:.85rem;line-height:1.5}
+ .mentor-cinema-copy .home-mentor-note{font-size:.71rem}
+ .mentor-voice-identity{font-size:.67rem;padding:7px 8px}
+ .mentor-cinema-voice{grid-template-columns:minmax(0,1fr) minmax(135px,50%)}
+ .mentor-cinema-controls button,.mentor-cinema-controls a{font-size:.76rem;padding:8px 5px}
+ .home-mentor-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-mentor-shortcuts a{padding:9px 10px;font-size:.76rem}
+}
+@media(max-width:375px){
+ .home-mentor-presence.mentor-cinema{grid-template-columns:88px minmax(0,1fr);gap:7px}
+ .mentor-cinema-stage .mentor-figure{--mentor-size:90px}
+ .mentor-cinema-portrait{min-height:140px}
+ .mentor-cinema-stage{height:135px}
+ .mentor-cinema-status{font-size:.45rem}
+ .mentor-cinema-copy h2{font-size:1.49rem}
+ .mentor-cinema-controls{gap:4px}
+}
+@media(prefers-reduced-motion:reduce){.mentor-cinema.is-speaking .mentor-cinema-wave i{animation:none!important}}

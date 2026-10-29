@@ -1,0 +1,103 @@
+/* v27.1.86 — SAEK hub: only two primary routes, one semester switcher and calm resources. */
+.saek-hub{max-width:900px;padding-top:20px}
+.saek-hub [hidden]{display:none!important}
+.saek-hub .hub-top{margin:0 0 15px}
+.saek-hub .hub-top .eyebrow{margin:0 0 5px}
+.saek-hub .hub-top h2{font-size:clamp(1.52rem,4vw,1.95rem);line-height:1.17;letter-spacing:-.035em;margin:0 0 5px}
+.saek-hub .hub-top>p:not(.eyebrow){margin:0;color:var(--muted);font-size:.91rem}
+.saek-hub .hub-progress{margin-top:12px;max-width:480px}
+.saek-hub .hub-progress-label{display:flex;gap:10px;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--muted);margin-bottom:5px}
+.saek-hub .hub-progress-label strong{font-size:.82rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.saek-hub .hub-progress-track{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.saek-hub .hub-progress-track>span{display:block;height:100%;background:var(--blue);border-radius:99px;width:0%;transition:width .18s}
+.saek-hub .hub-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.saek-hub .hub-action{display:flex;gap:11px;align-items:center;min-width:0;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);text-decoration:none;box-shadow:0 3px 15px #0a283408;transition:border-color .15s,background .15s,transform .15s}
+.saek-hub .hub-action:hover{background:var(--light);border-color:var(--blue);transform:translateY(-1px)}
+.saek-hub .hub-action:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.saek-hub .hub-action-icon{width:40px;height:40px;flex:0 0 40px;border-radius:11px;display:grid;place-items:center;font-size:1.27rem;background:#e9f3f9}
+.saek-hub .hub-action-exam .hub-action-icon{background:#f3effd}
+.saek-hub .hub-action-copy{min-width:0;flex:1}
+.saek-hub .hub-action-copy strong{display:block;font-size:.97rem;line-height:1.25;letter-spacing:-.015em}
+.saek-hub .hub-action-copy small{display:block;margin-top:4px;line-height:1.32;font-size:.73rem;color:var(--muted)}
+.saek-hub .hub-action-arrow{font-size:1.55rem;line-height:1;color:var(--blue);align-self:center}
+.saek-hub .hub-study{scroll-margin-top:16px;padding:18px;margin-bottom:12px}
+.saek-hub .hub-study-title{display:flex;align-items:flex-start;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;margin-bottom:13px}
+.saek-hub .hub-study-title h3{font-size:1.15rem;line-height:1.25;margin:0}
+.saek-hub .hub-study-title p{font-size:.79rem;color:var(--muted);margin:3px 0 0}
+.saek-hub .hub-course-count{font:inherit;font-size:.72rem;color:var(--muted);white-space:nowrap;border:1px solid var(--line);padding:5px 8px;border-radius:999px;background:transparent;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.saek-hub .hub-course-count:hover:not([aria-pressed="true"]){border-color:var(--blue);background:var(--light);color:var(--blue)}
+.saek-hub .hub-course-count:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.saek-hub .hub-course-count[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.saek-hub .hub-semester-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:15px}
+.saek-hub .hub-semester-tabs button{min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;justify-content:center;background:var(--light);color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 5px;cursor:pointer}
+.saek-hub .hub-semester-tabs button strong{font-size:1rem;line-height:1.2}
+.saek-hub .hub-semester-tabs button small{font-size:.67rem;line-height:1.25;color:var(--muted)}
+.saek-hub .hub-semester-tabs button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 2px 8px #153c542b}
+.saek-hub .hub-semester-tabs button[aria-pressed="true"] small{color:#dbedf6}
+.saek-hub .hub-semester-tabs button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.saek-hub .course-section{padding:0!important;margin:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.saek-hub .hub-course-lists[data-view="all"] .hub-semester + .hub-semester{margin-top:24px!important}
+.saek-hub .hub-list-head{display:flex;align-items:baseline;flex-wrap:wrap;justify-content:space-between;gap:5px 12px;border-bottom:1px solid var(--line);padding:0 0 9px}
+.saek-hub .hub-list-head h4{font-size:.89rem;margin:0}
+.saek-hub .hub-list-head span{color:var(--muted);font-size:.75rem}
+.saek-hub .course-list{margin:0}
+.saek-hub .course-tile{padding:12px 7px;gap:11px;border-bottom:1px solid var(--line);border-radius:0;transition:background .14s}
+.saek-hub .course-tile:last-child{border-bottom:0}
+.saek-hub .course-tile:hover{background:var(--light)}
+.saek-hub .course-tile-main strong{font-size:.89rem;line-height:1.35;overflow-wrap:anywhere}
+.saek-hub .course-tile-main small{font-size:.73rem}
+.saek-hub .course-icon{background:var(--light);color:var(--blue)}
+.saek-hub .tile-arrow{flex:0 0 auto}
+.saek-hub .hub-resources{padding:0;margin-top:13px;overflow:hidden}
+.saek-hub .hub-resources>summary{list-style:none;display:flex;align-items:center;gap:11px;padding:15px 18px;cursor:pointer}
+.saek-hub .hub-resources>summary::-webkit-details-marker{display:none}
+.saek-hub .hub-resources-icon{display:grid;place-items:center;width:35px;height:35px;border-radius:10px;background:var(--light);flex:0 0 35px}
+.saek-hub .hub-resources>summary>span:nth-child(2){flex:1;min-width:0}
+.saek-hub .hub-resources>summary strong{display:block;font-size:.88rem}
+.saek-hub .hub-resources>summary small{display:block;margin-top:2px;font-size:.72rem;line-height:1.4;color:var(--muted)}
+.saek-hub .hub-resources-chevron{color:var(--blue);font-size:1.2rem}
+.saek-hub .hub-resources[open] .hub-resources-chevron{transform:rotate(180deg)}
+.saek-hub .hub-resources-content{padding:0 18px 17px;border-top:1px solid var(--line)}
+.saek-hub .hub-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}
+.saek-hub .hub-links a{display:block;min-width:0;padding:13px;border:1px solid var(--line);border-radius:11px;text-decoration:none;color:var(--ink);background:var(--light)}
+.saek-hub .hub-links a strong{display:block;font-size:.87rem}
+.saek-hub .hub-links a small{display:block;margin-top:3px;font-size:.72rem;color:var(--muted);line-height:1.35}
+.saek-hub .hub-links a:hover{border-color:var(--blue)}
+.saek-hub .hub-subdetail{border-top:1px solid var(--line);padding:10px 0;font-size:.82rem}
+.saek-hub .hub-subdetail>summary{cursor:pointer;font-weight:650}
+.saek-hub .hub-subdetail ol{padding-left:21px;line-height:1.7}
+.saek-hub .hub-subdetail p{line-height:1.55;color:var(--muted)}
+.saek-hub .hub-subdetail a{overflow-wrap:anywhere}
+.saek-hub .hub-backup{border-top:1px solid var(--line);padding:14px 0}
+.saek-hub .hub-backup>strong{font-size:.87rem}
+.saek-hub .hub-backup>p{font-size:.77rem;color:var(--muted);line-height:1.45;margin:6px 0 10px}
+.saek-hub footer{font-size:.7rem;line-height:1.5;margin-top:17px;color:var(--muted)}
+html[data-theme="dark"] .saek-hub .hub-action{background:#132639;color:#eef7ff;border-color:#3a5366}
+html[data-theme="dark"] .saek-hub .hub-action:hover{background:#204258;border-color:#82c6ee}
+html[data-theme="dark"] .saek-hub .hub-action-icon{background:#24475c}
+html[data-theme="dark"] .saek-hub .hub-action-exam .hub-action-icon{background:#38445f}
+html[data-theme="dark"] .saek-hub .hub-action-copy small,html[data-theme="dark"] .saek-hub .hub-study-title p,html[data-theme="dark"] .saek-hub .hub-course-count,html[data-theme="dark"] .saek-hub .hub-list-head span,html[data-theme="dark"] .saek-hub .hub-resources>summary small,html[data-theme="dark"] .saek-hub .hub-links a small{color:#bfd5e4}
+html[data-theme="dark"] .saek-hub .hub-course-count[aria-pressed="true"]{background:#287b9e;border-color:#65badc;color:#fff}
+html[data-theme="dark"] .saek-hub .hub-semester-tabs button{background:#1d3b50;border-color:#3d5a6d;color:#e9f5fc}
+html[data-theme="dark"] .saek-hub .hub-semester-tabs button[aria-pressed="true"]{background:#287b9e;border-color:#65badc}
+html[data-theme="dark"] .saek-hub .hub-semester-tabs button small{color:#bfd5e4}
+html[data-theme="dark"] .saek-hub .hub-semester-tabs button[aria-pressed="true"] small{color:#fff}
+html[data-theme="dark"] .saek-hub .course-icon,html[data-theme="dark"] .saek-hub .hub-links a,html[data-theme="dark"] .saek-hub .hub-resources-icon{background:#1c3a50;border-color:#3d5b70;color:#c6ebff}
+html[data-theme="dark"] .saek-hub .course-tile:hover{background:#1c3a50}
+@media(max-width:570px){
+ .saek-hub{padding-top:13px}
+ .saek-hub .hub-actions{gap:8px;margin:12px 0}
+ .saek-hub .hub-action{position:relative;display:block;padding:13px;min-height:117px}
+ .saek-hub .hub-action-icon{width:34px;height:34px;font-size:1.09rem;margin-bottom:7px}
+ .saek-hub .hub-action-copy strong{font-size:.87rem;padding-right:7px}
+ .saek-hub .hub-action-copy small{font-size:.68rem}
+ .saek-hub .hub-action-arrow{position:absolute;right:11px;top:13px}
+ .saek-hub .hub-study{padding:15px 12px}
+ .saek-hub .hub-semester-tabs{gap:5px}
+ .saek-hub .hub-semester-tabs button{padding:10px 2px}
+ .saek-hub .hub-semester-tabs button small{font-size:.62rem}
+ .saek-hub .hub-resources>summary{padding:13px}
+ .saek-hub .hub-resources-content{padding:0 13px 13px}
+}
+@media(max-width:360px){.saek-hub .hub-action{padding:10px;min-height:124px}.saek-hub .hub-action-copy strong{font-size:.79rem}.saek-hub .hub-semester-tabs button small{font-size:.56rem}.saek-hub .hub-links{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.saek-hub .hub-action,.saek-hub .hub-progress-track>span{transition:none}}

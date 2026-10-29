@@ -1,0 +1,62 @@
+name: Publish four academic educational review PDFs
+on:
+  push:
+    paths:
+      - 'scripts/generate-pharma-review-note.py'
+      - '.github/workflows/publish-pharma-review-pdf.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish-academic-memoranda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate and validate all four review memos
+        run: |
+          python -m pip install reportlab==4.4.9 pypdf==5.9.0 pymupdf==1.26.4
+          python scripts/generate-pharma-review-note.py
+          python - <<'PY'
+          import fitz
+          from pathlib import Path
+          from pypdf import PdfReader
+          files=[
+              "saek-academic-review.pdf",
+              "eoppep-academic-review.pdf",
+              "pharmacology-review-status-2026-10-26.pdf",
+              "seminars-academic-review.pdf",
+          ]
+          for name in files:
+              p=Path("docs") / name
+              assert p.is_file() and p.stat().st_size>5000, f"Missing generated PDF: {name}"
+              r=PdfReader(p)
+              assert len(r.pages)==1, f"{name}: expected exactly one page"
+              assert not r.pages[0].get("/Annots"), f"{name}: embedded annotations or clickable links are not allowed"
+              assert b"/URI" not in p.read_bytes(), f"{name}: embedded URL action not allowed"
+              d=fitz.open(p)
+              assert not d[0].get_links(), f"{name}: embedded hyperlinks are forbidden"
+              t=d[0].get_text()
+              assert "EKAB SPOUDI" in t and "ACADEMIC REVIEW MEMORANDUM" in t, f"{name}: title or scope missing"
+              assert "EKAB Spoudi" in t and "Educational content preparation" in t
+              assert "http://" not in t and "https://" not in t and "www." not in t, f"{name}: visible URLs forbidden"
+              assert "v27." not in t and "2026-10-" not in t, f"{name}: app version or date printed"
+              print(f"Validated no-links one-page academic memorandum: {name}")
+          PY
+      - name: Commit updated four PDFs into published site
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/saek-academic-review.pdf docs/eoppep-academic-review.pdf docs/pharmacology-review-status-2026-10-26.pdf docs/seminars-academic-review.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: publish four academic review PDFs without links [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo "All four report PDFs already match the generator"
+          fi

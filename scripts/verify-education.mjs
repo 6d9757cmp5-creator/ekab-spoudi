@@ -60,9 +60,7 @@ for(let i=0;i<20;i++){
 if(chapterCount!==247)fail('SAEK chapters: '+chapterCount+'/247');
 if(genericExercises)fail('SAEK reused generic exercises: '+genericExercises);
 if(sourceImages+missingIllustrations!==247)fail('Incomplete SAEK illustration registry: '+sourceImages+' documented placements + '+missingIllustrations+' pending != 247');
-const visual=read('saek-chapter-visuals.js');
-if(!visual.includes('saek-recap-map')||!visual.includes('lesson-sos')||!visual.includes('check-question'))fail('Visual recap module is incomplete');
-if(!read('saek-visual-ui.js').includes('saek-chapter-visuals.js'))fail('Missing visual map loader');
+if(read('saek-visual-ui.js').includes('saek-chapter-visuals.js'))fail('Removed recap module must not be loaded');
 const courseShort={
  '01':{12:60},'04':{6:60},'06':{5:60,8:60},'11':{11:60}
 };
@@ -76,15 +74,33 @@ for(const [file,targets] of Object.entries(courseShort)){
 }
 const version=JSON.parse(read('version.json')).version;
 if(!read('sw.js').includes('ekab-spoudi-v'+version))fail('SW version mismatch');
-if(!read('sw.js').includes('"./saek-chapter-visuals.js"'))fail('New maps are not offline cached');
+if(read('sw.js').includes('"./saek-chapter-visuals.js"'))fail('Removed recap module must not be precached');
 if(!read('updates.js').includes("CURRENT='"+version+"'"))fail('Updates version mismatch');
 if(!read('README.md').includes('Έκδοση v'+version))fail('README version mismatch');
 const index=read('index.html');
-if(!index.includes('app.js?v='+version)||!index.includes('updates.js?v='+version))fail('Home script versions mismatch');
+const theory=read('theory.html');
+if(!index.includes('updates.js?v='+version))fail('Home update script version mismatch');
+if(!theory.includes('app.js?v=')||!theory.includes('updates.js?v='))fail('EOPPEP theory reader scripts missing');
+if(!index.includes("location.replace('theory.html'"))fail('Old EOPPEP reader links do not redirect');
+
+// Prevent future changes from adding misleading direct Theory/Practical buttons
+// to the homepage when the EOPPEP certification hub already provides both.
+const certHomeCard=index.match(/<section class="home-card home-card-eoppep">([\s\S]*?)<\/section>/)?.[1]||'';
+if(!certHomeCard.includes('href="eoppep.html"'))fail('Homepage certification card must open the EOPPEP hub');
+if(certHomeCard.includes('home-suboptions')||/href="(?:theory|practical_exam)\.html"/.test(certHomeCard))
+ fail('Homepage must describe Theory/Practical without separate clickable links');
+const eopHub=read('eoppep.html'),eopHubJs=read('eoppep-hub.js');
+if(!eopHub.includes('data-eop-group="A"')||!eopHub.includes('data-eop-group="B"')||
+ !eopHub.includes('theory.html?view=catalog')||!eopHub.includes('theory.html?mode=exam')||
+ !eopHub.includes('href="practical_exam.html"'))
+ fail('EOPPEP certification hub missing group selector, reading, practice or practical route');
+if(!eopHubJs.includes("ekab-eoppep-official-v15")||!eopHubJs.includes('scheduler.evaluate(s).studied'))
+ fail('EOPPEP hub progress must reflect existing saved recall history without changing it');
+
 if(errors.length){
  console.error('❌ Education quality gate: '+errors.length+' errors\n'+errors.join('\n'));
  process.exitCode=1;
 }else{
- console.log('✅ Education quality gate: 314/314 EOPPEP, 247/247 SAEK chapters, 103 old generic exercises removed, 5 answers expanded, 247 text-grounded visual recaps configured, '+sourceImages+' documented source-illustration placements, '+missingIllustrations+' awaiting sourced illustration, version '+version+'.');
+ console.log('✅ Education quality gate: 314/314 EOPPEP, 247/247 SAEK chapters, 103 old generic exercises removed, 5 answers expanded, redundant recap section removed from all chapters, '+sourceImages+' documented source-illustration placements, '+missingIllustrations+' awaiting sourced illustration, version '+version+'.');
  console.log('Scope is structural and bibliographic traceability; independent medical validation is NOT certified.');
 }

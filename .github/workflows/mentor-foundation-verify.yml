@@ -1,0 +1,53 @@
+name: Mentor scenario foundation
+on:
+  pull_request:
+    paths:
+      - 'mentor/**'
+      - 'mentor-lab.html'
+      - 'mentor-lab.js'
+      - 'mentor-lab.css'
+      - 'mentor-live.html'
+      - 'mentor-live.js'
+      - 'mentor-oral.html'
+      - 'mentor-oral.js'
+      - 'mentor-ecg.html'
+      - 'mentor-ecg.js'
+      - 'mentor-readonly.html'
+      - 'mentor-readonly.js'
+      - '.github/workflows/mentor-foundation-verify.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax and deterministic Mentor tests
+        run: |
+          node --check mentor-lab.js
+          node --check mentor-live.js
+          node --check mentor-oral.js
+          node --check mentor-ecg.js
+          node --check mentor-readonly.js
+          for f in mentor/core/*.mjs; do node --check "$f"; done
+          node --test mentor/core/*.test.mjs
+      - name: Verify no grading, legacy progress or cloud sync code was modified
+        shell: bash
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          CHANGED="$(git diff --name-only origin/main...HEAD)"
+          echo "$CHANGED"
+          if echo "$CHANGED" | grep -E '^(ai-grading-client\.js|ai-grading-config\.js|functions/answer-grader/|workers/answer-grader/|sync-local\.js|sync-model\.js|sync-codec\.js|cloud-sync\.js|progress\.js|saek-exam-engine\.js|study-scheduler\.js|notes-store\.js|app\.js|official_questions\.json|index\.html|sw\.js)$'; then
+            echo "Protected legacy file changed"
+            exit 1
+          fi
+          echo "Protected grader and sync files untouched"
+      - name: Existing app smoke test
+        run: python3 scripts/release_smoke.py

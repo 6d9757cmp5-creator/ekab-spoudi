@@ -1,0 +1,103 @@
+name: 3D anatomy lab — static integrity (prototype only)
+on:
+  pull_request:
+    paths:
+      - index.html
+      - home.css
+      - saek-course-*.html
+      - ui-tools/anatomy-3d/**
+      - .github/workflows/anatomy-3d-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-3d-anatomy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check ui-tools/anatomy-3d/anatomy.js
+          node --check ui-tools/anatomy-3d/hires-anatomy.js
+          node --check ui-tools/anatomy-3d/greek-names.js
+          node --test ui-tools/anatomy-3d/test-greek-names.mjs
+          node --check ui-tools/anatomy-3d/saek-jumps.js
+      - name: Verify pinned upstream anatomy dataset manifests and binary chunks
+        run: python3 ui-tools/anatomy-3d/validate_remote_assets.py
+      - name: Verify navigation, semantics, model coverage, and grade isolation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('ui-tools/anatomy-3d')
+          html=(root/'index.html').read_text()
+          js=(root/'anatomy.js').read_text()
+          css=(root/'anatomy.css').read_text()
+          home=Path('index.html').read_text()
+          assert 'home-anatomy-single-wrap' in home
+          assert 'href="ui-tools/anatomy-3d/index.html"' in home
+          assert home.count('class="home-anatomy-single"') == 1
+          assert 'home-anatomy-pair' not in home
+          assert 'Σκελετός · Όργανα · Συνδυασμός' in home
+          assert 'Ανδρικό' in html and 'Γυναικείο' in html
+          assert all(('data-mode="'+m+'"') in html for m in ('skeleton','organs','both'))
+          assert all(('data-sex="'+s+'"') in html for s in ('male','female'))
+          assert all(('value="'+s+'"') in html for s in ('skeletal','nervous','respiratory','circulatory','digestive','urinary','reproductive'))
+          assert 'Ανατομικά πλέγματα από ερευνητικές πηγές' in html
+          ids=set(re.findall(r'id="([^"]+)"',html))
+          real=(root/'hires-anatomy.js').read_text()
+          used=set(re.findall(r"\$\('([^']+)'\)",real))
+          missing=used-ids
+          assert not missing, f'Missing DOM IDs: {sorted(missing)}'
+          records=re.findall(r"\['([^']+)','[^']+','([^']+)'",js)
+          atlas=[(key,sys) for key,sys in records if sys in ('skeletal','nervous','respiratory','circulatory','digestive','urinary','reproductive')]
+          assert len(atlas)>=35, len(atlas)
+          assert len({i for i,_ in atlas})==len(atlas), 'Duplicate atlas IDs'
+          assert all(x in js for x in ('function buildSkeleton','function buildOrgans','function buildSkin','function pointerControls','function raypick','function nextQuestion','function changeSex','function changeMode'))
+          assert "ui.sex==='female'" in js
+          assert not re.search(r'\b(?:localStorage|sessionStorage)\s*(?:\.|\[)',js), 'Storage access not allowed'
+          assert 'appwrite' not in js.lower() and 'cloud-sync' not in js
+          assert 'three@0.180.0' in js and 'WebGLRenderer' in js
+          real=(root/'hires-anatomy.js').read_text()
+          assert 'src="hires-anatomy.js' in html
+          assert 'src="anatomy.js"' not in html
+          assert 'expectedParts:2234' in real and 'expectedParts:3004' in real
+          assert 'slorksmo/Human-Atlas@' in real
+          assert 'HiMahendraBeniwal/female-atlas@' in real
+          assert 'function makeGroup' in real and 'function chunkBuffer' in real
+          assert 'function raypick' in real and 'function chooseSex' in real
+          assert (root/'validate_remote_assets.py').exists()
+          assert 'id="chapterReturn"' in html
+          assert 'function readDeepLink' in real and 'function focusRequestedStructure' in real
+          assert 'location.search' in real and "requestedFocus" in real
+          assert 'function configureLessonReturn' in real
+          assert "from './greek-names.js'" in real
+          assert 'function quizPool' in real and 'function nextQuiz' in real
+          assert 'eligibleQuizName' in real
+          assert 'quizAnatomyList' not in real and 'detailSexNote' not in real
+          assert 'id="quizOptions"' in html and 'id="quizSee3D"' in html
+          assert 'id="greekOnly"' in html and 'id="detailCard"' in html
+          assert 'quizAnatomyList' not in html
+          assert '.quiz-options' in css and '.greek-only-control' in css
+          jumps=(root/'saek-jumps.js').read_text()
+          assert "searchParams.set('mode',mode)" in jumps
+          assert "searchParams.set('focus',focus)" in jumps
+          assert "searchParams.set('from',course)" in jumps
+          assert "searchParams.set('chapter',String(chapter))" in jumps
+          assert "localStorage" not in jumps and "fetch(" not in jumps
+          ids=['01','02','05','10','14','17','18']
+          for cid in ids:
+            lesson=Path('saek-course-'+cid+'.html').read_text()
+            assert 'ui-tools/anatomy-3d/saek-jumps.js' in lesson
+            assert 'ui-tools/anatomy-3d/saek-jumps.css' in lesson
+            assert 'read-button' in lesson
+          for cid in ids:
+            assert "'"+cid+"':{" in jumps
+          assert '.saek-anatomy-jump' in (root/'saek-jumps.css').read_text()
+          assert 'localStorage.' not in real and 'appwrite.' not in real
+          assert '.viewport' in css and '@media(max-width:560px)' in css
+          home_css=Path('home.css').read_text()
+          assert '.home-anatomy-single{' in home_css
+          assert '.home-anatomy-pair' not in home_css
+          print(f'PASS: {len(atlas)} unique atlas entries, 2 sex presets, 3 views, no grade/storage access')
+          PY

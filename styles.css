@@ -267,6 +267,13 @@ html[data-theme="dark"] .account-dialog{background:var(--bg)}html[data-theme="da
 .catalog-reader{background:var(--bg);border:1px solid var(--line);padding:17px;border-radius:13px;margin:13px 0 17px;min-width:0}
 .catalog-reader-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .catalog-reader-head .eyebrow{margin-bottom:8px}
+.catalog-reader-navigation{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:13px 0 8px}
+.catalog-reader-navigation .btn{min-height:42px;min-width:0;white-space:normal;text-align:center}
+.catalog-reader-navigation .btn:disabled{opacity:.48;cursor:not-allowed}
+.catalog-reader-navigation #catalogReaderMarkRead.is-read{border-color:var(--green);background:var(--light);color:var(--ink)}
+html[data-theme="dark"] .catalog-reader-navigation #catalogReaderMarkRead.is-read{background:#193849;color:#d4f8de;border-color:#5fbd8d}
+@media(max-width:480px){.catalog-reader-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-reader-navigation .btn{padding:10px 8px;font-size:.78rem}.catalog-reader-navigation #catalogReaderMarkRead{grid-column:1/-1}}
+
 .catalog-reader-question{font-size:1.12rem;line-height:1.5;margin:18px 0 13px;overflow-wrap:anywhere}
 .catalog-reader h4{font-size:.98rem;margin:19px 0 9px}
 .catalog-reader-caution{font-size:.81rem;color:var(--muted);line-height:1.55}
@@ -403,3 +410,49 @@ dialog{border-radius:26px}
  #eoppepHomeSummary .stat-question-link{padding:10px 5px}
  #eoppepHomeSummary .stat span{overflow-wrap:anywhere}
 }
+
+/* Pharmacology as fourth first-class main area; responsive nav + readable dark study cards. */
+.nav:has(a[href="farmaka.html"]){grid-template-columns:repeat(4,minmax(0,1fr))}
+.nav:has(a[href="farmaka.html"]) a{min-width:0;overflow-wrap:anywhere}
+@media(max-width:580px){.nav:has(a[href="farmaka.html"]) a{font-size:.71rem;padding:10px 2px}}
+.ph-main{--panel:#fff}
+html[data-theme="dark"] .ph-main{--panel:#132639}
+html[data-theme="dark"] .ph-main .ph-button:not(.secondary){background:#247fa9;color:#fff}
+html[data-theme="dark"] .ph-main .ph-button.secondary{background:#234459;color:#e4f6ff}
+
+
+/* Account settings: locally stored progress, backups and update controls. */
+#accountDialog{width:min(96vw,800px);max-height:90dvh;max-height:90vh;overflow-y:auto;overscroll-behavior:contain}
+#accountDialog .account-dialog{min-width:0;padding:clamp(15px,3vw,24px)}
+#accountDialog .account-dialog-heading{position:sticky;top:0;z-index:5;padding:7px 0 10px;background:var(--bg);border-bottom:1px solid var(--line)}
+#accountDialog .account-storage-panel{margin:15px 0;box-shadow:none}
+#accountDialog .account-storage-panel>.body{padding:0 16px 16px}
+#accountDialog .backup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#accountDialog .storage-summary-note{font-size:.72rem}
+#accountDialog .app-version-row{gap:12px}
+#accountDialog .storage-panel .sync-summary{line-height:1.5}
+@media(max-width:630px){
+ #accountDialog{width:min(96vw,560px);max-height:90dvh}
+ #accountDialog .backup-grid{grid-template-columns:1fr;gap:11px}
+ #accountDialog .account-storage-panel>.body{padding:0 12px 13px}
+ #accountDialog .account-storage-panel>summary{padding:13px}
+ #accountDialog .app-version-row{align-items:flex-start}
+}
+html[data-theme="dark"] #accountDialog .account-dialog-heading{background:#162c3c}
+
+
+/* Subtle, clearly attributed PDF review references beside educational titles. */
+.academic-review-link{
+ display:inline-block;vertical-align:middle;margin-inline-start:.65rem;
+ padding:.18rem 0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ font-size:.76rem;font-weight:650;letter-spacing:0;text-transform:none;line-height:1.25;
+ color:var(--blue);opacity:1;text-decoration:none;border-bottom:1px solid currentColor;
+ white-space:nowrap
+}
+.academic-review-link:hover,.academic-review-link:focus-visible{
+ opacity:1;text-decoration:none;border-bottom-style:solid
+}
+.academic-review-link:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:520px){.academic-review-link{font-size:.68rem;margin-inline-start:.35rem;white-space:normal}}
+
+html[data-theme="dark"] .academic-review-link{color:#9ddcf9}

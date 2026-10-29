@@ -1,0 +1,48 @@
+/* Isolated SAEK adaptive exam UI; does not affect course reader pages. */
+.saek-exams-main{max-width:940px}
+.saek-exams-main [hidden]{display:none!important}
+.saek-exams-head{padding:5px 0 16px}
+.saek-exams-head h2{font-size:clamp(1.5rem,4vw,2rem);line-height:1.2;margin:5px 0 6px;letter-spacing:-.03em}
+.saek-exams-head>p:last-child{color:var(--muted);margin:0;max-width:720px}
+.saek-exams-main .panel{padding:clamp(14px,3vw,22px)}
+.saek-exams-main h3{margin:0;font-size:1.14rem}
+.saek-exam-topline{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 18px}
+.saek-exam-topline p{margin:5px 0 0}
+.saek-exam-estimate{font-size:.78rem;font-weight:700;color:var(--blue);background:var(--light);padding:9px 11px;border-radius:10px;max-width:100%}
+.saek-exam-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.saek-exam-fields>div{min-width:0}
+.saek-exam-fields label,.saek-exams-main label[for=examDraft]{display:block;font-size:.83rem;font-weight:750;margin:0 0 6px}
+.saek-exam-fields select,.saek-exams-main textarea{width:100%;min-width:0;max-width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;color:var(--ink);background:#fff;font-size:.9rem}
+.saek-exams-main textarea{resize:vertical;min-height:115px}
+.saek-exam-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:13px 0}
+.saek-exam-actions>.btn{min-width:0;max-width:100%;white-space:normal}
+.saek-exam-note{font-size:.79rem;color:var(--muted);line-height:1.55;margin:11px 0}
+.saek-exam-progress{width:100%;height:8px;background:var(--light);border-radius:999px;overflow:hidden;margin:17px 0 12px}
+.saek-exam-progress>span{height:100%;display:block;background:var(--blue);transition:width .2s}
+.saek-exam-topic{display:flex;gap:6px 15px;flex-wrap:wrap;font-size:.74rem;color:var(--muted);margin:4px 0 12px}
+.saek-exam-question{font-size:1.21rem!important;line-height:1.4;margin:12px 0 20px!important}
+.saek-exam-reference{padding:14px;border:1px solid var(--line);background:var(--light);border-radius:10px;margin:13px 0}
+.saek-exam-reference p{line-height:1.5;margin:9px 0}
+.saek-exam-reference a{display:inline-block;font-size:.82rem;font-weight:750}
+.saek-exam-manual{margin:12px 0;border:1px solid var(--line);border-radius:10px;padding:12px}
+.saek-exam-manual>p{margin:0 0 10px;font-size:.85rem}
+.saek-exam-manual .saek-exam-actions{margin:0}
+.saek-exam-grade-state{color:var(--green);font-size:.82rem;font-weight:700}
+.saek-exam-footer{display:flex;flex-wrap:wrap;gap:9px;justify-content:space-between;align-items:center;margin-top:22px;padding-top:13px;border-top:1px solid var(--line)}
+.saek-exam-footer .btn{flex:0 1 auto}
+.saek-exams-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:9px;margin:16px 0}
+.saek-exams-stats>div{border:1px solid var(--line);border-radius:10px;background:var(--light);padding:12px 8px;text-align:center}
+.saek-exams-stats strong{display:block;font-size:1.33rem;color:var(--ink)}
+.saek-exams-stats span{display:block;color:var(--muted);font-size:.73rem}
+#examWeakChapters{display:grid;gap:8px;margin:10px 0 22px}
+#examWeakChapters a{display:block;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--light);font-size:.86rem}
+#examWeakChapters p{color:var(--muted);font-size:.84rem}
+.saek-exams-main footer{font-size:.72rem;color:var(--muted);line-height:1.5}
+.saek-exams-main button:focus-visible,.saek-exams-main select:focus-visible,.saek-exams-main textarea:focus-visible,.saek-exams-main a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+html[data-theme=dark] .saek-exam-estimate,html[data-theme=dark] .saek-exam-reference,html[data-theme=dark] .saek-exams-stats>div,html[data-theme=dark] #examWeakChapters a{background:#1a364a;border-color:#416179;color:#ecf9ff}
+html[data-theme=dark] .saek-exam-fields select,html[data-theme=dark] .saek-exams-main textarea{background:#132a3d;border-color:#42627a;color:#eef7fc}
+html[data-theme=dark] .saek-exam-note,html[data-theme=dark] .saek-exam-topic,html[data-theme=dark] .saek-exams-head>p:last-child,html[data-theme=dark] .saek-exams-stats span{color:#bfd5e4}
+html[data-theme=dark] .saek-exam-estimate,html[data-theme=dark] .saek-exam-grade-state{color:#83d5ff}
+html[data-theme=dark] .saek-exams-stats strong{color:#f3faff}
+html[data-theme=dark] .saek-exam-manual{border-color:#42627a}
+@media(max-width:560px){.saek-exam-fields{grid-template-columns:minmax(0,1fr);gap:12px}.saek-exam-topline{gap:10px}.saek-exam-footer{justify-content:space-between}.saek-exam-footer .btn{font-size:.78rem;padding:10px 8px}.saek-exam-actions>.btn{flex:1 1 160px;font-size:.84rem}}

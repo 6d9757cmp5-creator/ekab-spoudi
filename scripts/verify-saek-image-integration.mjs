@@ -48,9 +48,9 @@ for (const course of registry.courses || []) {
   const filename = 'saek-course-' + id + '.html';
   const html = await read(filename).catch(() => '');
   if (!html) { errors.push('Missing course page ' + filename); continue; }
-  if (!html.includes('src="saek-visual-ui.js"'))
+  if (!/src="saek-visual-ui\.js(?:\?[^\"]*)?"/.test(html))
     errors.push(filename + ' does not load the sourced-image integration.');
-  if (!html.includes('href="saek-visual-ui.css"'))
+  if (!/href="saek-visual-ui\.css(?:\?[^\"]*)?"/.test(html))
     errors.push(filename + ' does not load the image layout stylesheet.');
   if (!sw.includes('./' + filename))
     errors.push(filename + ' is absent from offline precache.');
