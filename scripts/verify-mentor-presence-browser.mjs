@@ -242,6 +242,22 @@ try{
   await page.locator('#oral-exam-mode').uncheck();
   await page.waitForFunction(()=>/Προφορική εξάσκηση/.test(document.querySelector('.emp-ctx')?.textContent||''),null,{polling:150,timeout:10000});
   check(tag('oral practice again: guided context restored'),true);
+  // ECG guided exercise: start, actions, consequences, completion, debrief, progress kept, MENTOR knows the step.
+  await page.goto(base+'/mentor-ecg.html',{waitUntil:'load'});
+  await page.evaluate(()=>localStorage.removeItem('ekab.mentor.ecg-practice.v1'));
+  await page.reload({waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  await page.waitForFunction(()=>/λωρίδα 1 από 5/.test(document.querySelector('.emp-ctx')?.textContent||''),null,{polling:150,timeout:10000});
+  check(tag('ecg practice: MENTOR shows the open step'),true);
+  await page.locator('#ecg-practice-choices button',{hasText:/^4$/}).click();
+  check(tag('ecg practice: a wrong count shows the consequence (marked QRS and the rate formula)'),/Όχι ακριβώς/.test(await page.locator('#ecg-practice-feedback').textContent())&&(await page.locator('#ecg-practice-marks circle').count())===7&&/× 10 = 70/.test(await page.locator('#ecg-practice-feedback').textContent()));
+  await page.reload({waitUntil:'load'});
+  check(tag('ecg practice: progress survives a refresh'),/λωρίδα 2 από 5|Λωρίδα 2 από 5/.test(await page.locator('#ecg-practice-step').textContent()));
+  for(const n of [10,6,9,12]){await page.locator('#ecg-practice-choices button',{hasText:new RegExp('^'+n+'$')}).click();if(n!==12)await page.locator('#ecg-practice-next').click();}
+  await page.locator('#ecg-practice-next').click();
+  check(tag('ecg practice: debrief appears with score and a concrete hint'),await page.locator('#ecg-practice-debrief').isVisible()&&/Σωστά 4 από 5/.test(await page.locator('#ecg-debrief-text').textContent()),await page.locator('#ecg-debrief-text').textContent());
+  await page.evaluate(()=>localStorage.removeItem('ekab.mentor.ecg-practice.v1'));
   await page.goto(base+page2,{waitUntil:'load'});
   await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
 
