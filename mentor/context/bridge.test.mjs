@@ -19,7 +19,10 @@ test("announcements accept only whitelisted kinds and bounded text",()=>{
 });
 
 test("page context reads only title, first heading and path",()=>{
- const doc={title:"  Κυκλοφορικό  ",querySelector:()=>({textContent:"Η καρδιά\n και τα αγγεία"})};
+ const brand={textContent:"ΕΚΑΒ Σπουδή v27",closest:()=>({})};
+ const nav={textContent:"Μενού",closest:sel=>sel.includes("nav")?{}:null};
+ const lesson={textContent:"Η καρδιά\n και τα αγγεία",closest:()=>null};
+ const doc={title:"  Κυκλοφορικό  ",querySelectorAll:()=>[brand,nav,lesson]};
  const ctx=readPageContext(doc,{pathname:"/saek-course-05.html",search:"?secret=1",hash:"#x"});
  assert.deepEqual(ctx,{path:"/saek-course-05.html",title:"Κυκλοφορικό",heading:"Η καρδιά και τα αγγεία"});
  assert.equal(Object.keys(ctx).length,3);

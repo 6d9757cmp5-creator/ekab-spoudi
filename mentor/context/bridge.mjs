@@ -32,7 +32,9 @@ export function sanitizeAnnouncement(detail){
 
 /** Title, first heading and path from the live document: nothing else is read. */
 export function readPageContext(doc,loc){
- const heading=doc.querySelector("main h1, h1, main h2, h2");
+ // Skip the app header: its headline is the product name, not the lesson.
+ const candidates=[...(doc.querySelectorAll?.("main h1, main h2, article h1, article h2, h1, h2")||[])];
+ const heading=candidates.find(h=>!h.closest?.("header, nav, .top, .nav")&&!/^ΕΚΑΒ Σπουδή/.test(clean(h.textContent)))||null;
  return {
   path:clean(loc.pathname,120),
   title:clean(doc.title),

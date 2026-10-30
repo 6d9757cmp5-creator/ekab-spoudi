@@ -63,3 +63,7 @@ mentor/
 Η σύνδεση AI **δεν** έχει ενεργοποιηθεί. Ο προηγούμενος κανόνας «χωρίς νέα σύνδεση AI» ισχύει έως ότου ο ιδιοκτήτης αναπτύξει τον Worker, επιβεβαιώσει δωρεάν πλάνο και ορίσει το `endpoint`.
 
 Έλεγχοι: `node --test mentor/presence/*.test.mjs mentor/context/*.test.mjs mentor/knowledge/*.test.mjs mentor/ai/*.test.mjs workers/mentor-chat/*.test.mjs` και `node scripts/verify-mentor-presence-browser.mjs`. Δεν έχει δοκιμαστεί σε πραγματικό iPhone/Safari.
+
+## Βελτιστοποίηση 3D μοντέλου
+
+Το mentor-real-3d.glb (δύο πανομοιότυπα αντίγραφα: mentor/assets/ και ssets/) ξαναγράφηκε με scripts/optimize-mentor-glb.mjs ώστε κάθε τμήμα υλικού να κρατά μόνο τα δικά του vertices (από 1.368.276 σε 65.156 εγγραφές). Γεωμετρία, σκελετός, animations, ονόματα morph targets και υφές δεν άλλαξαν. Μέτρηση σε Edge headless με software WebGL: JS heap ≈795 MB → ≈121 MB, φόρτωση ready ≈11,4 s → ≈3,6 s. Δεν έχει μετρηθεί σε πραγματική GPU ή iPhone.
