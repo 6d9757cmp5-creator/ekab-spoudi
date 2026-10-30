@@ -83,3 +83,45 @@
 - Επανάληψη: `node --test` στα αρχεία της ενότητας Η, και `PLAYWRIGHT_MODULE=<path> BROWSER_CHANNEL=msedge node scripts/verify-mentor-presence-browser.mjs` (ή `npm i playwright@1.56.1` και χωρίς μεταβλητές). Audit: `AXE_PATH=<axe.min.js> node scripts/audit-mentor-presence.mjs out.json`.
 - **Έλεγξε με προτεραιότητα:** (α) το `EXAM_PAGES` regex στο `mentor/context/bridge.mjs` — λείπουν πιθανώς σελίδες αξιολόγησης (seminar-prep, σενάρια με βαθμολόγηση)· (β) τα regex του `riskGuard` για false negatives· (γ) ότι η μείωση vertices στο GLB δεν επηρεάζει morph targets/visemes σε όλες τις εκφράσεις (έγινε οπτικός έλεγχος μόνο στη στάση idle και ένα mouth message)· (δ) z-index `2147483000` έναντι modals· (ε) padding του `body` στο docked mode· (στ) ότι το Worker δεν εκθέτει αποτελέσματα AI χωρίς παραθέματα.
 - **Μην θεωρήσεις ολοκληρωμένα:** P2, ενεργό AI, phoneme lip-sync, κλινική τεκμηρίωση, δοκιμές iPhone, benchmark με μετρήσεις.
+
+## L. Πρόσθετη απαίτηση: AI Digital Human (desk research, 30/10/2026 — δεν υλοποιήθηκε)
+**Κατάσταση:** μελέτη μόνο. Δεν έγινε ενσωμάτωση, δεν εκτελέστηκε καμία τεχνολογία και δεν υπάρχουν μετρήσεις. Οι άδειες προέρχονται από αποτελέσματα αναζήτησης και **πρέπει να επαληθευτούν στις επίσημες πηγές** πριν από οποιαδήποτε απόφαση. Δεν ανατρέπει καμία προηγούμενη ενότητα (A–K).
+
+### L1. Τι υπάρχει ήδη στο μοντέλο
+Το σημερινό GLB (`mentor/assets/mentor-real-3d.glb`) έχει 34 morph targets: υποσύνολο ARKit (eyeBlink, eyeWide, eyeSquint, brow*, jawOpen, mouthSmile/Frown/Pucker/Press/Stretch, noseSneer, mouthUpperUp) και 14 visemes τύπου Oculus (`viseme_PP … viseme_U`). Άρα ένα νευρωνικό μοντέλο που βγάζει ARKit blendshapes μπορεί κατ' αρχήν να οδηγήσει **μέρος** των στόχων, αλλά τα 52 ARKit δεν υπάρχουν όλα (π.χ. tongue*, cheek*, mouthRoll*) — απαιτείται χαρτογράφηση και έλεγχος.
+
+### L2. Οι τρεις τεχνολογίες
+| Τεχνολογία | Τι προσφέρει | Εφαρμοσιμότητα στο MENTOR (GitHub Pages, κινητά, χωρίς χρέωση) | Ανοιχτά σημεία |
+| --- | --- | --- | --- |
+| **Unreal MetaHuman** | Φωτορεαλιστικός ψηφιακός άνθρωπος, rig προσώπου | Η σελίδα MetaHuman αναφέρει χρήση «σε οποιαδήποτε μηχανή»· περιεχόμενο εκτός Unreal θεωρείται Non-Engine Product, με όριο εσόδων $1M και seat license πάνω από αυτό (FAQ όπως παρατίθεται από τρίτους). Το πραγματικό μοντέλο είναι βαρύ για browser/κινητό· απαιτεί αναδόμηση (LOD, texture, compression) σε GLB | Επαλήθευση EULA/FAQ της Epic για **web/mobile runtime**· ασυμφωνία πηγών για MetaHuman Animator (φόρουμ Reallusion: μόνο render μέσα στο Unreal)· κόστος ποιότητας/μεγέθους σε κινητό δεν μετρήθηκε |
+| **NVIDIA ACE / Audio2Face-3D** | Ομιλία→εκφράσεις προσώπου υψηλής ποιότητας | Τα μοντέλα είναι υπό NVIDIA Open Model License· το NIM container υπό ξεχωριστούς όρους NVIDIA· η τοπική εκτέλεση χρειάζεται NVIDIA GPU (Ampere+ , ~2,9–4,4 GiB VRAM). **Δεν τρέχει σε browser/κινητό.** Θα απαιτούσε server με GPU ή φιλοξενούμενο NIM (build.nvidia.com) | Όροι/όρια δωρεάν χρήσης του φιλοξενούμενου API δεν επαληθεύτηκαν· μια επιπλέον πηγή αναφέρει ότι το v3.0 είναι πειραματικό· ο SDK σε MIT προέρχεται από δευτερεύουσες πηγές |
+| **Real-time neural facial animation (browser)** | Ομιλία→ARKit blendshapes στον browser | Υποψήφιο: **LAM A2E** (Hugging Face `adolon-ai/lam-a2e`): Wav2Vec2, 52 ARKit weights σε 30 fps, ONNX με WebGPU/WASM παραλλαγή, αναφέρεται Apache 2.0. Εναλλακτικά **HeadAudio** (MFCC→Oculus visemes, χωρίς ONNX). Το NeuroSync έχει αντικρουόμενη άδεια (MIT <$1M ή CC BY-NC) και στοχεύει Unreal | Η άδεια του @omote/core SDK, η λειτουργία σε πραγματικό browser, η καθυστέρηση και η ποιότητα σε **ελληνικά** (τα μοντέλα είναι συνήθως εκπαιδευμένα σε αγγλικά/πολύγλωσσα δεδομένα) δεν επαληθεύτηκαν |
+
+### L3. Συνδυασμός που φαίνεται εφαρμόσιμος (πρόταση, όχι υλοποίηση)
+1. **Εμφάνιση:** φωτορεαλιστικό rigged πρόσωπο με ARKit/Oculus blendshapes, με αδειοδοτημένο asset (MetaHuman αν η άδεια επιβεβαιωθεί για web, αλλιώς άλλο αδειοδοτημένο μοντέλο)· μείωση βάρους με το ίδιο pipeline `scripts/optimize-mentor-glb.mjs` + συμπίεση textures.
+2. **Κίνηση προσώπου:** ένα **client-side** μοντέλο ήχου→blendshapes (LAM A2E ή παρόμοιο) πάνω στον ήχο φωνής· **fallback** στο σημερινό σύστημα word-boundary που ήδη υπάρχει (εκτίμηση, όχι phoneme-accurate).
+3. **Φωνή:** το νευρωνικό μοντέλο χρειάζεται **ροή ήχου**. Η Web Speech API δεν δίνει πρόσβαση στον ήχο της συσκευής, άρα απαιτείται TTS που επιστρέφει ήχο (P3 — εκκρεμεί επιλογή δωρεάν ελληνικής νευρωνικής φωνής και έλεγχος αδείας).
+4. **Μικρο-συμπεριφορά:** τυχαίο ανοιγόκλεισμα/βλέμμα/αναπνοή ως procedural στρώμα, ανεξάρτητο από το ΑΙ.
+5. **Νοημοσύνη:** ως έχει (P4/P6, απενεργοποιημένο έως επιβεβαίωση δωρεάν πλάνου).
+Το NVIDIA ACE μπορεί να εξεταστεί **μόνο** ως προαιρετικό server-side βήμα αν υπάρξει δωρεάν πρόσβαση GPU — δεν προτείνεται ως βάση.
+
+### L4. Δεν έγιναν / δεν ισχύουν
+- Καμία **υπέρβαση** των εμπορικών digital humans δεν αποδείχθηκε ή μετρήθηκε. Ο στόχος «ξεπέρασμα» παραμένει φιλοδοξία· ρεαλιστικά, η ποιότητα σε κινητό περιορίζεται από GPU/μνήμη.
+- Δεν δοκιμάστηκε κανένα από τα μοντέλα, ούτε η ποιότητά τους σε ελληνικά.
+- Δεν έγινε λήψη, αγορά ή ενεργοποίηση υπηρεσίας· κανένα κόστος.
+
+### L5. Επόμενα βήματα (χρειάζονται τον χρήστη ή αδειοδότηση)
+1. Επιλογή και άδεια για asset προσώπου (P2) — ανάγνωση EULA/FAQ της Epic αν επιλεγεί MetaHuman.
+2. Δοκιμαστικό prototype του LAM A2E σε `mentor-lab` με το υπάρχον GLB (χαρτογράφηση 52→34 targets), μέτρηση fps/μνήμης/καθυστέρησης σε πραγματικό τηλέφωνο.
+3. Επιλογή δωρεάν TTS με πρόσβαση στον ήχο, με έλεγχο ελληνικών και όρων.
+4. Σύγκριση πριν/μετά με πραγματικές μετρήσεις και κριτές (βλ. `mentor/BENCHMARK.md`).
+
+### L6. Πηγές
+- MetaHuman license: https://www.metahuman.com/license και https://www.unrealengine.com/eula/mhc
+- MetaHumans σε Unity/Godot (DigitalProduction): https://digitalproduction.com/2025/06/05/metahumans-graduate-ready-for-unity-godot-and-the-fab-cash-register/
+- Audio2Face-3D v3.0 (HF): https://huggingface.co/nvidia/Audio2Face-3D-v3.0
+- ACE Unreal plugin / Audio2Face: https://docs.nvidia.com/ace/ace-unreal-plugin/2.5/ace-unreal-plugin-audio2face.html
+- Audio2Face-3D NIM (NGC): https://catalog.ngc.nvidia.com/orgs/nim/nvidia/containers/audio2face-3d/2
+- LAM A2E: https://huggingface.co/adolon-ai/lam-a2e
+- HeadAudio: https://github.com/kyr0/HeadAudio
+- NeuroSync: https://huggingface.co/convaitech/NEUROSYNC
