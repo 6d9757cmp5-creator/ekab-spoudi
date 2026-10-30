@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {examMode,sanitizeAnnouncement,readPageContext,describeContext,composeQuestion,MAX_LABEL} from "./bridge.mjs";
+import {kindOfPath,examMode,sanitizeAnnouncement,readPageContext,describeContext,composeQuestion,MAX_LABEL} from "./bridge.mjs";
 
 test("exam pages and announced active exams switch MENTOR to no-answer mode",()=>{
  for(const p of ["/written_exam.html","/practical_exam.html","/exam_focus.html","/saek-exams.html","/app/saek-exams.html"])assert.equal(examMode(p),true,p);
@@ -24,8 +24,8 @@ test("page context reads only title, first heading and path",()=>{
  const lesson={textContent:"Η καρδιά\n και τα αγγεία",closest:()=>null};
  const doc={title:"  Κυκλοφορικό  ",querySelectorAll:()=>[brand,nav,lesson]};
  const ctx=readPageContext(doc,{pathname:"/saek-course-05.html",search:"?secret=1",hash:"#x"});
- assert.deepEqual(ctx,{path:"/saek-course-05.html",title:"Κυκλοφορικό",heading:"Η καρδιά και τα αγγεία"});
- assert.equal(Object.keys(ctx).length,3);
+ assert.deepEqual(ctx,{path:"/saek-course-05.html",kind:"course",title:"Κυκλοφορικό",heading:"Η καρδιά και τα αγγεία"});
+ assert.equal(Object.keys(ctx).length,4);
 });
 
 test("the learner always sees what context is used, and can turn it off",()=>{
@@ -53,4 +53,15 @@ test("a vague question borrows the page subject only when context is on",()=>{
 test("empty input produces no question and long input is bounded",()=>{
  assert.equal(composeQuestion({question:"   "}).used,"none");
  assert.equal(composeQuestion({question:"α".repeat(900)}).text.length,300);
+});
+
+test("learning pages are recognised from their address only; oral practice counts as an exam",()=>{
+ assert.equal(kindOfPath("/ekab-spoudi/saek-course-07.html"),"course");
+ assert.equal(kindOfPath("/anatomia.html"),"anatomy-object");
+ assert.equal(kindOfPath("/ui-tools/anatomy-3d/index.html"),"anatomy-object");
+ assert.equal(kindOfPath("/mentor-scenarios.html"),"scenario");
+ assert.equal(kindOfPath("/contacts.html"),"");
+ assert.equal(examMode("/mentor-oral.html"),true);
+ const text=describeContext({page:{kind:"course",heading:"Καρδιά"},announced:null,enabled:true,exam:false});
+ assert.match(text,/μάθημα.*Καρδιά/);
 });

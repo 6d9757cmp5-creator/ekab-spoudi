@@ -144,7 +144,7 @@ try{
   const barBox=await box('.emp-bar');
   check(tag('title-bar buttons fit inside the widget'),barBtns.every(b=>b.w>=28&&b.l>=barBox.x-1&&b.r<=barBox.x+barBox.width+1));
   await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
-  check(tag('ask panel opens and shows the page context in use'),await page.locator('.emp-ask').isVisible()&&/Πλαίσιο σελίδας: .+/.test(await page.locator('.emp-ctx').textContent()),await page.locator('.emp-ctx').textContent());
+  check(tag('ask panel opens and shows the page context in use'),await page.locator('.emp-ask').isVisible()&&/Πλαίσιο σελίδας( \([^)]+\))?: .+/.test(await page.locator('.emp-ctx').textContent()),await page.locator('.emp-ctx').textContent());
   await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
   await page.locator('.emp-send').click();
   await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{polling:150,timeout:20000});

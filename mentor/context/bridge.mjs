@@ -13,7 +13,7 @@ export const MAX_LABEL=120;
 export const MAX_SELECTION=300;
 
 // Pages where answers would defeat the assessment.
-const EXAM_PAGES=/(^|\/)(written_exam|practical_exam|exam_focus|saek-exams)\.html$/i;
+const EXAM_PAGES=/(^|\/)(written_exam|practical_exam|exam_focus|saek-exams|mentor-oral)\.html$/i;
 
 const clean=(value,max=MAX_LABEL)=>String(value??"").replace(/\s+/g," ").trim().slice(0,max);
 
@@ -31,22 +31,39 @@ export function sanitizeAnnouncement(detail){
 }
 
 /** Title, first heading and path from the live document: nothing else is read. */
+const KIND_BY_PATH=[
+ [/(^|\/)saek-course-\d+\.html$/i,"course"],
+ [/(^|\/)(anatomia\.html|anatomy-3d\/)/i,"anatomy-object"],
+ [/(^|\/)(mentor-scenarios|mentor-live)\.html$/i,"scenario"],
+ [/(^|\/)(mentor-readonly|theory|fysiologia|study_map)\.html$/i,"study-mode"]
+];
+
+/** The kind of learning page, from its address alone (no page content is read). */
+export function kindOfPath(pathname){
+ const hit=KIND_BY_PATH.find(([re])=>re.test(String(pathname||"")));
+ return hit?hit[1]:"";
+}
+
 export function readPageContext(doc,loc){
  // Skip the app header: its headline is the product name, not the lesson.
  const candidates=[...(doc.querySelectorAll?.("main h1, main h2, article h1, article h2, h1, h2")||[])];
  const heading=candidates.find(h=>!h.closest?.("header, nav, .top, .nav")&&!/^ΕΚΑΒ Σπουδή/.test(clean(h.textContent)))||null;
  return {
   path:clean(loc.pathname,120),
+  kind:kindOfPath(loc.pathname),
   title:clean(doc.title),
   heading:clean(heading?.textContent)
  };
 }
 
+const KIND_LABELS={course:"μάθημα",chapter:"κεφάλαιο","anatomy-object":"ανατομία",scenario:"σενάριο","study-mode":"μελέτη"};
+
 export function describeContext({page,announced,enabled,exam}){
  if(exam)return "Πλαίσιο σελίδας: εξέταση σε εξέλιξη — ο MENTOR δεν δίνει απαντήσεις";
  if(!enabled)return "Πλαίσιο σελίδας: απενεργοποιημένο";
  const subject=announced?.label||page?.heading||page?.title;
- return subject?"Πλαίσιο σελίδας: "+subject:"Πλαίσιο σελίδας: δεν υπάρχει";
+ const kindLabel=KIND_LABELS[announced?.kind||page?.kind];
+ return subject?"Πλαίσιο σελίδας"+(kindLabel?" ("+kindLabel+")":"")+": "+subject:"Πλαίσιο σελίδας: δεν υπάρχει";
 }
 
 const DEICTIC=/(αυτ[οόηήεέ]|εδώ|τούτο|αυτά|εξήγησ[εέ]\s*μου|τι\s+σημαίνει\s+αυτό)/i;
