@@ -23,6 +23,7 @@ jobs:
           node --check mentor-home.js
           node --check protocols-data.mjs
           node --check protocols-page.mjs
+          node --check mentor-scenario-paths.mjs
           node --check mentor-protocol-suite.mjs
           node --check mentor-study-bridge.mjs
           node --check mentor-study-context.mjs
