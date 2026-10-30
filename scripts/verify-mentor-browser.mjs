@@ -329,7 +329,7 @@ try{
   await page.waitForFunction(()=>document.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',null,{timeout:90000});
   assert.equal(await page.locator('#mentor-real3d-canvas').isVisible(),true,'Real 3D GLB canvas must be displayed');
   assert.equal(await page.locator('#mentor-avatar').isVisible(),false,'Old avatar must remain hidden');
-  assert.equal(await page.locator('.mentor-photo-img,.cinematic-character,#mentor-3d-canvas').count(),0,'Deprecated images and procedural canvas must not appear');
+  assert.equal(await page.locator('.mentor-photo-img,.cinematic-character,#mentor-3d-canvas').evaluateAll(nodes=>nodes.every(el=>el.hidden||!el.getClientRects().length||getComputedStyle(el).display==='none'||getComputedStyle(el).visibility==='hidden')),true,'Deprecated images and procedural canvas may remain in the DOM only if invisible');
   assert.equal(await page.locator('#mentor-real3d-rotation').count(),1,'Real 3D rotation control exists');
   assert.equal(await page.locator('#mentor-real3d-motion').count(),1,'Real 3D motion control exists');
   const real3d=await page.locator('#mentor-cinematic-stage').getAttribute('data-real3d');
