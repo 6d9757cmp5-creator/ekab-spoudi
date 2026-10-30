@@ -21,6 +21,9 @@ jobs:
           node --test scripts/test-mentor-voice.mjs
           node --check mentor/core/quick-answer.mjs
           node --check mentor-home.js
+          node --check saek-course-series.js
+          node --check scripts/app-load-smoke.mjs
+          node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
           node --check protocols-data.mjs
           node --check protocols-page.mjs
           node --check mentor-scenario-paths.mjs
