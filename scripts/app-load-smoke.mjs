@@ -38,6 +38,20 @@ try {
     if(await page.locator('#mentor-3d-canvas,.mentor-photo-img,img.cinematic-character').count())throw Error(device+': legacy character still visible');
     if(!await page.locator('#mentor-real3d-canvas').isVisible())throw Error(device+': actual GLB canvas not visible');
     console.log('PASS '+device+': 3D MENTOR loads without old avatar');
+    const protocolPage=await page.goto('http://127.0.0.1:8765/protocols.html',{waitUntil:'load',timeout:30000});
+    if(!protocolPage?.ok())throw Error(device+': protocols page did not load');
+    await page.waitForFunction(()=>document.querySelectorAll('#protocol-list .topic').length>=10);
+    if(!await page.getByRole('link',{name:'Ελληνικά Πρωτόκολλα'}).count())throw Error(device+': missing protocols navigation');
+    await page.locator('#protocol-list .topic .btn').first().click();
+    if(!page.url().includes('mentor-protocol-suite.html'))throw Error(device+': lab link failed');
+    await page.locator('#lab-choices .choice').first().click();
+    if(!await page.locator('#lab-feedback').isVisible())throw Error(device+': lab did not capture a decision');
+    await page.locator('#suite-debrief-link').click();
+    if(!await page.locator('#debrief-history li').count())throw Error(device+': debrief missing decision history');
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+4);
+    if(overflow)throw Error(device+': protocol lab overflows viewport width');
+    console.log('PASS '+device+': Greek protocols, contextual LAB and DEBRIEF');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}
