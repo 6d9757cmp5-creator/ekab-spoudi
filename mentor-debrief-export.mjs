@@ -28,7 +28,7 @@ function download(filename, text) {
 }
 
 const status = "ΑΠΟΚΛΕΙΣΤΙΚΑ ΕΚΠΑΙΔΕΥΤΙΚΟ — Συνθετικό σενάριο, όχι πραγματικός ασθενής, ούτε ιατρικό αρχείο ή πιστοποίηση.";
-export function buildDebriefReport({topic, role, session, stages}) {
+export function buildDebriefReport({topic, role, session, stages, interviewTurns=[]}) {
   if (!topic || !role || !Array.isArray(stages) || !Array.isArray(session?.answers)) throw Error("invalid-study-report");
   const entries = session.answers.slice(0, stages.length).map(answer => {
     if (!Number.isInteger(answer?.stage) || answer.stage < 0 || answer.stage >= stages.length) return null;
@@ -37,7 +37,12 @@ export function buildDebriefReport({topic, role, session, stages}) {
     if (!choice) return null;
     return {stage:answer.stage+1, dimension:stage.dimension, choice:choice[1],feedback:choice[3],pass:choice[2]};
   }).filter(Boolean);
-  if (!entries.length) throw Error("empty-study-report");
+  const interview = Array.isArray(interviewTurns) ? interviewTurns.slice(0,40).filter(turn =>
+    turn && Number.isInteger(turn.stage) && turn.stage>=0 && turn.stage<4 &&
+    typeof turn.reply==='string' && typeof turn.feedback==='string' &&
+    turn.reply.length<=1500 && turn.feedback.length<=1500 && typeof turn.ok==='boolean'
+  ) : [];
+  if (!entries.length && !interview.length) throw Error("empty-study-report");
   const lines = [
     "ΕΚΑΒ ΣΠΟΥΔΗ — MENTOR DEBRIEF",
     status,
@@ -59,6 +64,14 @@ export function buildDebriefReport({topic, role, session, stages}) {
       "Επεξήγηση: " + wrap(entry.feedback, 78, "  ")
     );
   }
+  lines.push("", "ΣΥΝΘΕΤΙΚΗ ΕΚΠΑΙΔΕΥΤΙΚΗ ΣΥΝΟΜΙΛΙΑ");
+  if (interview.length) {
+    for (const turn of interview) {
+      lines.push("", (turn.stage+1)+". "+(turn.ok?"Στόχος επικοινωνίας":"Για επανάληψη"),
+        "Απάντηση: "+wrap(turn.reply,78,"  "),
+        "MENTOR: "+wrap(turn.feedback,78,"  "));
+    }
+  } else lines.push("Δεν υπάρχει αποθηκευμένη συνομιλία για το θέμα και τον ρόλο.");
   lines.push(
     "",
     "ΕΠΟΜΕΝΗ ΜΕΛΕΤΗ",
