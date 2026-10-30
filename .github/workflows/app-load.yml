@@ -23,6 +23,7 @@ jobs:
           node --check mentor-home.js
           node --check saek-course-series.js
           node --check scripts/app-load-smoke.mjs
+          node scripts/verify-static-pages.mjs
           node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
           node --check protocols-data.mjs
           node --check protocols-page.mjs
