@@ -13,6 +13,14 @@ import {
 import {
  CONTEXT_KEY,examMode,sanitizeAnnouncement,readPageContext,describeContext,composeQuestion,EXAM_REFUSAL
 } from "../context/bridge.mjs";
+import {
+ appendTurn,loadTurns,clearTurns,historyForAi,loadLearning,saveLearning,LEVEL_LABELS
+} from "./memory.mjs";
+import {matchNavigation} from "./navigate.mjs";
+import {createVoice} from "./voice.mjs";
+import {retrieve,riskGuard,RISK_MESSAGE} from "../knowledge/retrieve.mjs";
+import {buildPayload,askAi} from "../ai/client.mjs";
+import {MENTOR_AI} from "../ai/config.mjs";
 
 const FRAME_SRC="mentor-presence.html";
 const STYLE_HREF=new URL("./presence.css",import.meta.url).href;
@@ -39,7 +47,7 @@ function boot(){
  if(alreadyPresent())return;
 
  let prefs=parsePrefs(readStorage());
- let frame=null,dragging=null,menuOpen=false,askOpen=false;
+ let frame=null,dragging=null,menuOpen=false,askOpen=false,voice=null;
  const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)");
 
  if(!document.querySelector('link[data-ekab-mentor-presence]')){
@@ -61,13 +69,29 @@ function boot(){
  const ctxLine=el("p",{class:"emp-ctx"});
  const ctxToggle=el("button",{type:"button",class:"emp-link","aria-pressed":"true",text:"Απενεργοποίηση"});
  const askInput=el("input",{type:"text",class:"emp-input",maxlength:"300",autocomplete:"off","aria-label":"Ερώτηση προς τον MENTOR",placeholder:"Π.χ. Τι είναι η ΚΑΡΠΑ;"});
+ const micBtn=el("button",{type:"button",class:"emp-mic","aria-pressed":"false","aria-label":"Μίλησε στον MENTOR (ενεργοποιεί το μικρόφωνο)",text:"🎙"});
  const askSend=el("button",{type:"submit",class:"emp-send",text:"Ρώτα"});
- const askForm=el("form",{class:"emp-form"},[askInput,askSend]);
+ const askForm=el("form",{class:"emp-form"},[askInput,micBtn,askSend]);
  const selBtn=el("button",{type:"button",class:"emp-link",text:"Εξήγησε την επιλογή μου"});
- const askAnswer=el("p",{class:"emp-answer",role:"status","aria-live":"polite"});
- const askSource=el("a",{class:"emp-link",target:"_blank",rel:"noopener noreferrer",hidden:true,text:"Πηγή ορισμού"});
+ const stopVoiceBtn=el("button",{type:"button",class:"emp-link",text:"■ Σίγαση",hidden:true});
+ const clearBtn=el("button",{type:"button",class:"emp-link",text:"Διαγραφή συνομιλίας"});
+ const micState=el("p",{class:"emp-mic-state",role:"status","aria-live":"polite",hidden:true});
+ const logEl=el("div",{class:"emp-log",role:"log","aria-live":"polite","aria-label":"Συνομιλία με τον MENTOR"});
+ const navBox=el("div",{class:"emp-nav",hidden:true});
+ const levelSel=el("select",{class:"emp-select","aria-label":"Επίπεδο εξήγησης"},
+  Object.entries(LEVEL_LABELS).map(([v,l])=>el("option",{value:v,text:l})));
+ const autoSpeakBox=el("input",{type:"checkbox",id:"emp-autospeak"});
+ const focusBox=el("input",{type:"checkbox",id:"emp-focus"});
+ const settings=el("details",{class:"emp-settings"},[
+  el("summary",{text:"Ρυθμίσεις MENTOR"}),
+  el("label",{},[el("span",{text:"Επίπεδο: "}),levelSel]),
+  el("label",{class:"emp-check"},[autoSpeakBox,el("span",{text:"Ανάγνωση απαντήσεων με φωνή"})]),
+  el("label",{class:"emp-check"},[focusBox,el("span",{text:"Ελαχιστοποίηση σε σελίδες εξέτασης"})]),
+  el("p",{class:"emp-note",text:"Οι απαντήσεις προέρχονται από την τοπική βιβλιοθήκη. Η συνομιλία μένει μόνο σε αυτή την καρτέλα."})
+ ]);
  const askPanel=el("div",{class:"emp-ask",id:"ekab-mentor-ask",hidden:true},
-  [el("div",{class:"emp-ctxrow"},[ctxLine,ctxToggle]),askForm,selBtn,askAnswer,askSource]);
+  [el("div",{class:"emp-ctxrow"},[ctxLine,ctxToggle]),logEl,navBox,askForm,micState,
+   el("div",{class:"emp-actions"},[selBtn,stopVoiceBtn,clearBtn]),settings]);
  const stage=el("div",{class:"emp-stage"},[status,askPanel]);
  const resize=el("button",{type:"button",class:"emp-resize","aria-label":"Αλλαγή μεγέθους MENTOR (βέλη ή + και −)"});
  const menu=el("div",{class:"emp-menu",role:"group","aria-label":"Θέση MENTOR",hidden:true});
@@ -187,8 +211,8 @@ function boot(){
 
  const api={
   show(){set({visibility:"shown"},"Ο MENTOR εμφανίστηκε");grip.focus({preventScroll:true});},
-  minimize(){set({visibility:"minimized"},"Ο MENTOR ελαχιστοποιήθηκε");launcher.focus({preventScroll:true});},
-  hide(){set({visibility:"hidden"},"Ο MENTOR κρύφτηκε. Alt+Shift+M για επαναφορά");},
+  minimize(){voice?.stopAll();set({visibility:"minimized"},"Ο MENTOR ελαχιστοποιήθηκε");launcher.focus({preventScroll:true});},
+  hide(){voice?.stopAll();set({visibility:"hidden"},"Ο MENTOR κρύφτηκε. Alt+Shift+M για επαναφορά");},
   restore(){api.show();},
   toggle(){prefs.visibility==="shown"?api.minimize():api.show();},
   pin(corner){
@@ -243,34 +267,117 @@ function boot(){
   askBtn.setAttribute("aria-expanded",String(open));
   if(open){refreshContext();askInput.focus({preventScroll:true});}
  }
- function showAnswer(text,source){
-  askAnswer.textContent=text;
-  askSource.hidden=!source;
-  if(source)askSource.href=source;
+ // ----- conversation (kept for this tab only) -----
+ let learning=loadLearning(localStorage);
+ let turns=[];
+ try{turns=loadTurns(sessionStorage);}catch{}
+ const storeSession=()=>{try{return sessionStorage;}catch{return {getItem:()=>null,setItem(){},removeItem(){}};}};
+
+ voice=createVoice({
+  win:window,
+  onMouth:m=>{try{frame?.contentWindow?.postMessage({type:"mentor:speech",...m},location.origin);}catch{}},
+  onState:s=>{
+   stopVoiceBtn.hidden=!s.speaking;
+   micBtn.setAttribute("aria-pressed",String(s.listening));
+   micBtn.classList.toggle("is-on",s.listening);
+   micState.hidden=!s.listening;
+   if(s.listening)micState.textContent="🎙 Το μικρόφωνο είναι ενεργό — μίλα τώρα.";
+  }
+ });
+
+ function paintTurns(){
+  logEl.replaceChildren(...turns.map(t=>{
+   const row=el("div",{class:"emp-turn emp-"+t.role+(t.mode==="refusal"?" is-refusal":"")});
+   row.append(el("span",{class:"emp-who",text:t.role==="user"?"Εσύ":"MENTOR"+(t.mode==="ai"?" · AI":"")}),el("p",{text:t.text}));
+   for(const s of t.sources||[]){
+    row.append(s.url?el("a",{class:"emp-link",href:s.url,target:"_blank",rel:"noopener noreferrer",text:"Πηγή: "+s.term}):el("span",{class:"emp-src",text:"Βιβλιοθήκη: "+s.term}));
+   }
+   return row;
+  }));
+  logEl.scrollTop=logEl.scrollHeight;
  }
+ function pushTurn(turn){
+  turns=appendTurn(storeSession(),turn);
+  paintTurns();
+ }
+ function showNav(route){
+  navBox.replaceChildren();
+  navBox.hidden=!route;
+  if(!route)return;
+  navBox.append(el("a",{class:"emp-navlink",href:route.href,text:"Άνοιγμα: "+route.label+" →"}));
+ }
+ function sayMaybe(text){
+  if(!learning.autoSpeak)return;
+  const r=voice.speak(text);
+  if(!r.ok)announce("Η φωνή δεν είναι διαθέσιμη σε αυτή τη συσκευή.");
+ }
+ function finish(turn){
+  pushTurn(turn);
+  if(turn.mode!=="refusal")sayMaybe(turn.text);
+ }
+
  async function ask(selection){
+  voice.stopSpeaking(); // barge-in
   const context=contextState();
-  if(context.exam){showAnswer(EXAM_REFUSAL,null);return;}
-  const {text}=composeQuestion({question:askInput.value,selection,context});
-  if(!text){showAnswer("Γράψε μια ερώτηση ή επίλεξε κείμενο στη σελίδα.",null);return;}
+  const typed=askInput.value;
+  const {text}=composeQuestion({question:typed,selection,context});
+  if(!text){pushTurn({role:"mentor",mode:"info",text:"Γράψε μια ερώτηση ή επίλεξε κείμενο στη σελίδα."});return;}
+  pushTurn({role:"user",text:selection?"Εξήγησε: «"+selection+"»":typed.trim()});
+  askInput.value="";
+  showNav(null);
+  if(context.exam){pushTurn({role:"mentor",mode:"refusal",text:EXAM_REFUSAL});return;}
+  const route=matchNavigation(typed);
+  if(route&&!selection){showNav(route);pushTurn({role:"mentor",mode:"info",text:"Μπορώ να σε οδηγήσω στη σελίδα «"+route.label+"». Πάτησε τον σύνδεσμο για να ανοίξει."});return;}
+  if(riskGuard(text).blocked){finish({role:"mentor",mode:"refusal",text:RISK_MESSAGE});return;}
   askSend.disabled=selBtn.disabled=true;
   try{
    const qa=await import("../core/quick-answer.mjs");
    const items=await qa.loadMentorTermLibrary();
-   const r=qa.answerStudyQuestion(text,{items});
-   showAnswer(r.text,r.source);
-  }catch{showAnswer("Δεν μπόρεσα να φορτώσω τη βιβλιοθήκη όρων. Δοκίμασε ξανά.",null);}
+   const local=qa.answerStudyQuestion(text,{items});
+   if(local.type!=="unavailable"){
+    finish({role:"mentor",mode:"local",text:local.text,sources:local.source?[{term:local.term||"Ορισμός",url:local.source}]:[]});
+    return;
+   }
+   const passages=retrieve(text,items);
+   const ai=await askAi({
+    endpoint:MENTOR_AI.endpoint,timeoutMs:MENTOR_AI.timeoutMs,
+    payload:buildPayload({question:text,passages,level:learning.level,history:historyForAi(turns.slice(0,-1))})
+   });
+   if(ai.ok){
+    finish({role:"mentor",mode:"ai",text:ai.text,sources:passages.map(p=>({term:p.term,url:p.source}))});
+   }else{
+    const known=passages.length?" Σχετικοί όροι της βιβλιοθήκης: "+passages.map(p=>p.term).join(", ")+".":"";
+    finish({role:"mentor",mode:"local",text:(ai.message||local.text)+(ai.reason==="disabled"?"":known),sources:passages.map(p=>({term:p.term,url:p.source}))});
+   }
+  }catch{pushTurn({role:"mentor",mode:"info",text:"Δεν μπόρεσα να φορτώσω τη βιβλιοθήκη όρων. Δοκίμασε ξανά."});}
   finally{askSend.disabled=selBtn.disabled=false;}
  }
  askBtn.addEventListener("click",()=>setAsk(!askOpen));
  askForm.addEventListener("submit",event=>{event.preventDefault();ask("");});
+ askInput.addEventListener("input",()=>voice.stopSpeaking());
  // Keeps the learner's text selection alive when the button is pressed.
  selBtn.addEventListener("pointerdown",event=>event.preventDefault());
  selBtn.addEventListener("click",()=>{
   const picked=String(window.getSelection?.()?.toString()||"").trim();
-  if(!picked){showAnswer("Επίλεξε πρώτα κείμενο στη σελίδα και μετά πάτησε το κουμπί.",null);return;}
+  if(!picked){pushTurn({role:"mentor",mode:"info",text:"Επίλεξε πρώτα κείμενο στη σελίδα και μετά πάτησε το κουμπί."});return;}
   ask(picked);
  });
+ micBtn.addEventListener("click",async()=>{
+  const st=voice.state();
+  if(!st.stt){pushTurn({role:"mentor",mode:"info",text:"Η αναγνώριση ελληνικής ομιλίας δεν υποστηρίζεται σε αυτό το πρόγραμμα περιήγησης. Γράψε την ερώτησή σου."});return;}
+  const r=await voice.listen();
+  if(r.ok){askInput.value=r.text;askInput.focus({preventScroll:true});announce("Αναγνωρίστηκε: "+r.text+". Πάτησε Ρώτα.");}
+  else if(r.reason&&!["cancelled","empty","aborted","no-speech"].includes(r.reason))
+   pushTurn({role:"mentor",mode:"info",text:"Το μικρόφωνο δεν λειτούργησε ("+r.reason+"). Γράψε την ερώτησή σου."});
+ });
+ stopVoiceBtn.addEventListener("click",()=>voice.stopSpeaking());
+ clearBtn.addEventListener("click",()=>{turns=clearTurns(storeSession());paintTurns();showNav(null);announce("Η συνομιλία διαγράφηκε");});
+ levelSel.value=learning.level;autoSpeakBox.checked=learning.autoSpeak;focusBox.checked=learning.minimizeOnExam;
+ const saveSettings=()=>{learning=saveLearning(localStorage,{level:levelSel.value,autoSpeak:autoSpeakBox.checked,minimizeOnExam:focusBox.checked});};
+ levelSel.addEventListener("change",saveSettings);autoSpeakBox.addEventListener("change",()=>{saveSettings();if(!learning.autoSpeak)voice.stopSpeaking();});focusBox.addEventListener("change",saveSettings);
+ paintTurns();
+ // Focus mode: only when the learner asked for it, quietly step aside on exam pages.
+ if(learning.minimizeOnExam&&examMode(location.pathname,null)&&prefs.visibility==="shown")prefs=normalizePrefs({...prefs,visibility:"minimized"});
  ctxToggle.addEventListener("click",()=>{
   contextOn=!contextOn;
   try{localStorage.setItem(CONTEXT_KEY,JSON.stringify({enabled:contextOn}));}catch{}

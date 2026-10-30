@@ -45,11 +45,21 @@ mentor/
 
 **Στάδιο:** έτοιμη δομική αλλαγή σε απομονωμένο PR για browser QA, **όχι ακόμη στο main**. Η μετάβαση σε παραγωγή θα γίνει μόνο αφού ολοκληρωθούν οι προβλεπόμενοι έλεγχοι.
 
-## MENTOR Live Companion (V3 · P1)
+## MENTOR Live Companion (V3)
 
-`mentor/presence/` φορτώνει **έναν** κοινό, κινητό MENTOR σε όλες τις σελίδες μελέτης (μία γραμμή `<script type="module" src="mentor/presence/presence.mjs">` ανά σελίδα). Η αρχική και το εργαστήριο έχουν ήδη δικό τους MENTOR και παραλείπονται, ώστε να μην υπάρχουν δύο WebGL instances.
+Ένας κοινός, κινητός MENTOR σε όλες τις σελίδες μελέτης (μία γραμμή `<script type="module" src="mentor/presence/presence.mjs">` ανά σελίδα). Η αρχική και το εργαστήριο έχουν δικό τους MENTOR και παραλείπονται.
 
-- Αρχικά εμφανίζεται μόνο ένα μικρό κουμπί MENTOR· το 3D φορτώνει όταν το ανοίξει ο χρήστης και αποδεσμεύεται όταν ελαχιστοποιηθεί ή κρυφτεί.
-- Μετακίνηση (ποντίκι, αφή, βέλη), αλλαγή μεγέθους, καρφίτσωμα σε γωνία, προσάρτηση σε πάνελ/bottom sheet, ελαχιστοποίηση, απόκρυψη. `Alt+Shift+M` ή `window.EkabMentorPresence.show()` επαναφέρουν.
-- Προτιμήσεις σε `localStorage` `ekab.mentor.presence.v1`, ξεχωριστά για desktop και κινητό. Δεν αγγίζονται βαθμολογίες, σημειώσεις, πρόοδος ή sync.
-- Έλεγχοι: `node --test mentor/presence/presence-state.test.mjs` και `node scripts/verify-mentor-presence-browser.mjs` (Chromium, desktop + κινητό). Δεν έχει δοκιμαστεί σε πραγματικό iPhone/Safari.
+| Μονάδα | Ρόλος |
+| --- | --- |
+| `presence/presence-state.mjs`, `presence.mjs`, `presence.css` | Μετακίνηση, resize, καρφίτσωμα, προσάρτηση, ελαχιστοποίηση, απόκρυψη, αποθήκευση ανά desktop/κινητό |
+| `presence/voice.mjs` | Ελληνική φωνή (ανδρική όπου υπάρχει), μικρόφωνο **μόνο μετά από πάτημα**, barge-in· το σχήμα στόματος είναι εκτίμηση, **όχι** phoneme lip-sync |
+| `presence/memory.mjs` | Συνομιλία στο `sessionStorage` (μόνο αυτή η καρτέλα, διαγράφεται), προτιμήσεις επιπέδου/φωνής στο `localStorage` |
+| `presence/navigate.mjs` | Πρόταση συνδέσμου από σταθερή λίστα σελίδων· ο MENTOR δεν πλοηγεί μόνος του |
+| `context/bridge.mjs` | Μόνο τίτλος, πρώτη επικεφαλίδα, path και ρητά επιλεγμένο κείμενο· σιγή σε σελίδες εξέτασης |
+| `knowledge/retrieve.mjs` | Ανάκτηση παραθεμάτων από `medical-terms.json` + φραγή δοσολογιών/διαγνώσεων/πραγματικού περιστατικού |
+| `ai/client.mjs`, `ai/config.mjs` | Προσαρμογέας AI. **Απενεργοποιημένος**: `endpoint` κενό, καμία αποστολή δεδομένων |
+| `workers/mentor-chat/` | Cloudflare Worker (Workers AI) με allowlist, όρια, μόνο τεκμηριωμένες απαντήσεις· ανενεργός μέχρι ανθρώπινη ενεργοποίηση (βλ. README του) |
+
+Η σύνδεση AI **δεν** έχει ενεργοποιηθεί. Ο προηγούμενος κανόνας «χωρίς νέα σύνδεση AI» ισχύει έως ότου ο ιδιοκτήτης αναπτύξει τον Worker, επιβεβαιώσει δωρεάν πλάνο και ορίσει το `endpoint`.
+
+Έλεγχοι: `node --test mentor/presence/*.test.mjs mentor/context/*.test.mjs mentor/knowledge/*.test.mjs mentor/ai/*.test.mjs workers/mentor-chat/*.test.mjs` και `node scripts/verify-mentor-presence-browser.mjs`. Δεν έχει δοκιμαστεί σε πραγματικό iPhone/Safari.

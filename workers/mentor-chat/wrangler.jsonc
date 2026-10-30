@@ -1,0 +1,12 @@
+{
+  "name": "ekab-spoudi-mentor-chat",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-28",
+  "workers_dev": true,
+  "ai": { "binding": "AI" },
+  "observability": { "enabled": true },
+  "vars": {
+    "MENTOR_FREE_PLAN_CONFIRMED": "false",
+    "DAILY_CAP": "300"
+  }
+}

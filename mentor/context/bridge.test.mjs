@@ -30,6 +30,7 @@ test("the learner always sees what context is used, and can turn it off",()=>{
  assert.match(describeContext({page,enabled:true,exam:false}),/Η καρδιά/);
  assert.match(describeContext({page,enabled:false,exam:false}),/απενεργοποιημένο/);
  assert.match(describeContext({page,enabled:true,exam:true}),/εξέταση/);
+ assert.match(describeContext({page,enabled:false,exam:true}),/εξέταση/);
  assert.match(describeContext({page:{title:"",heading:""},enabled:true,exam:false}),/δεν υπάρχει/);
 });
 

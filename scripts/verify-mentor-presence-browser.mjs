@@ -31,6 +31,18 @@ try{
  browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||undefined,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
  for(const [device,width,height,isMobile] of [['desktop',1440,900,false],['mobile',390,844,true]]){
   const context=await browser.newContext({viewport:{width,height},isMobile,hasTouch:isMobile,serviceWorkers:'block'});
+  // Deterministic speech stubs: count microphone starts and capture utterances.
+  await context.addInitScript(()=>{
+   window.__micStarts=0;window.__spoken=[];
+   const Fake=class{start(){window.__micStarts++;setTimeout(()=>{this.onresult?.({results:[[{transcript:'Τι είναι ΚΑΡΠΑ;'}]]});this.onend?.();},1200);}abort(){this.onend?.();}};
+   window.SpeechRecognition=Fake;window.webkitSpeechRecognition=Fake;
+   window.SpeechSynthesisUtterance=class{constructor(t){this.text=t;}};
+   const voices=[{name:'Microsoft Stefanos - Greek (Greece)',lang:'el-GR',localService:true,voiceURI:'stefanos'}];
+   Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{
+    getVoices:()=>voices,addEventListener(){},cancel(){},
+    speak(u){window.__spoken.push({text:u.text,lang:u.lang});setTimeout(()=>{u.onstart?.();u.onboundary?.({charIndex:3});},50);setTimeout(()=>u.onend?.(),700);}
+   }});
+  });
   const page=await context.newPage();
   const errors=[];
   page.on('pageerror',e=>errors.push(String(e)));
@@ -67,7 +79,7 @@ try{
   check(tag('open shows 3D frame in view'),inView(await box('.ekab-mentor-presence'))&&await page.locator('.ekab-mentor-presence iframe').count()===1);
   let ready='n/a';
   try{
-   await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.real3d?.match(/^(ready|photo)$/),null,{timeout:90000});
+   await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.real3d?.match(/^(ready|photo)$/),null,{polling:150,timeout:90000});
    ready=await page.evaluate(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-cinematic-stage').dataset.real3d);
   }catch{}
   check(tag('3D scene reaches ready/photo state inside widget'),ready==='ready'||ready==='photo','state='+ready);
@@ -135,15 +147,15 @@ try{
   check(tag('ask panel opens and shows the page context in use'),await page.locator('.emp-ask').isVisible()&&/Πλαίσιο σελίδας: .+/.test(await page.locator('.emp-ctx').textContent()),await page.locator('.emp-ctx').textContent());
   await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
   await page.locator('.emp-send').click();
-  await page.waitForFunction(()=>document.querySelector('.emp-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
+  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{polling:150,timeout:20000});
   check(tag('local source-backed Greek answer appears'),true);
   await page.evaluate(()=>{const p=document.querySelector('h1,h2,p');const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);});
   await page.locator('.emp-ask .emp-link',{hasText:'Εξήγησε την επιλογή'}).click();
-  await page.waitForFunction(()=>document.querySelector('.emp-answer')?.textContent?.length>10,null,{timeout:15000});
+  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.length>10,null,{polling:150,timeout:15000});
   check(tag('explain-selection answers from the selected text only'),true);
   await page.evaluate(()=>getSelection().removeAllRanges());
   await page.locator('.emp-ask .emp-link',{hasText:'Εξήγησε την επιλογή'}).click();
-  check(tag('explain-selection without a selection asks for one'),/Επίλεξε πρώτα/.test(await page.locator('.emp-answer').textContent()));
+  check(tag('explain-selection without a selection asks for one'),/Επίλεξε πρώτα/.test(await page.locator('.emp-log').textContent()));
   await page.locator('.emp-ctxrow .emp-link').click();
   check(tag('learner can switch page context off'),/απενεργοποιημένο/.test(await page.locator('.emp-ctx').textContent()));
   await page.reload({waitUntil:'load'});
@@ -155,12 +167,63 @@ try{
   check(tag('page can announce a whitelisted study object'),/Καρδιά/.test(await page.locator('.emp-ctx').textContent()));
   await page.evaluate(()=>window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'password',label:'hunter2'}})));
   check(tag('unknown announcements are ignored'),!/hunter2/.test(await page.locator('.emp-ctx').textContent()));
+  // ----- conversation, safety, navigation, voice -----
+  await page.goto(base+page1,{waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  const ask=async q=>{await page.locator('.emp-input').fill(q);await page.locator('.emp-send').click();};
+  await ask('Τι είναι ΚΑΡΠΑ;');
+  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{polling:150,timeout:15000});
+  await page.goto(base+page2,{waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  check(tag('conversation survives page navigation (this tab only)'),/Θωρακικές συμπιέσεις/.test(await page.locator('.emp-log').textContent()));
+  await ask('Πόσα mg αδρεναλίνης να δώσω;');
+  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('166'),null,{polling:150,timeout:10000});
+  check(tag('dosing question is refused with the safety message'),/δεν δίνει δοσολογίες/.test(await page.locator('.emp-log').textContent()));
+  const external=[];
+  page.on('request',r=>{const u=new URL(r.url());if(u.hostname!=='127.0.0.1')external.push(r.url());});
+  await ask('Τι είναι το κβαντικό πεδίο του Higgs;');
+  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('δεν είναι ενεργή'),null,{polling:150,timeout:10000});
+  check(tag('AI is disabled by default: unknown question stays local, no external request'),external.length===0,external.join(','));
+  const hrefBefore=page.url();
+  await ask('Άνοιξε την ανατομία');
+  await page.waitForSelector('.emp-navlink');
+  check(tag('navigation is only offered as a link; MENTOR does not navigate by itself'),page.url()===hrefBefore&&(await page.locator('.emp-navlink').getAttribute('href'))==='anatomia.html');
+  await page.locator('.emp-actions .emp-link',{hasText:'Διαγραφή συνομιλίας'}).click();
+  check(tag('learner can delete the conversation'),(await page.locator('.emp-log').textContent()).trim()==='');
+  await page.reload({waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
+  check(tag('deleted conversation stays deleted after refresh'),(await page.locator('.emp-log').textContent()).trim()==='');
+
+  const micCalls=await page.evaluate(()=>window.__micStarts||0);
+  check(tag('microphone never starts on its own'),micCalls===0);
+  await page.locator('.emp-mic').click();
+  await page.waitForFunction(()=>(window.__micStarts||0)>=1,null,{polling:150,timeout:5000});
+  check(tag('microphone starts only after the learner presses it, with a visible state'),await page.locator('.emp-mic-state').isVisible()&&(await page.locator('.emp-mic').getAttribute('aria-pressed'))==='true');
+  let heard=true;
+  try{await page.waitForFunction(()=>document.querySelector('.emp-input').value.includes('ΚΑΡΠΑ'),null,{polling:150,timeout:25000});}catch{heard=false;}
+  check(tag('recognised Greek speech fills the question box for review'),heard,
+   heard?'':JSON.stringify(await page.evaluate(()=>({value:document.querySelector('.emp-input').value,starts:window.__micStarts,log:document.querySelector('.emp-log').textContent.slice(-160)}))));
+
+  await page.locator('.emp-settings summary').click();
+  await page.locator('#emp-autospeak').check();
+  await ask('Τι είναι ΚΑΡΠΑ;');
+  await page.waitForFunction(()=>window.__spoken?.length>=1,null,{polling:150,timeout:10000});
+  await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme!=='rest',null,{polling:150,timeout:8000});
+  const mouth=await page.evaluate(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme);
+  check(tag('speech plays with a Greek voice and a non-rest mouth shape reaches the avatar'),(await page.evaluate(()=>window.__spoken[0].lang))==='el-GR','viseme='+mouth);
+  await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme==='rest',null,{polling:150,timeout:8000});
+  check(tag('mouth returns to rest when speech ends'),true);
+  await page.locator('#emp-autospeak').uncheck();
+
   await page.goto(base+'/written_exam.html',{waitUntil:'load'});
   await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
   await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
   await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
   await page.locator('.emp-send').click();
-  check(tag('exam page: MENTOR refuses to answer'),/δεν μπορώ να δώσω απαντήσεις/.test(await page.locator('.emp-answer').textContent())&&/εξέταση/.test(await page.locator('.emp-ctx').textContent()));
+  check(tag('exam page: MENTOR refuses to answer'),/δεν μπορώ να δώσω απαντήσεις/.test(await page.locator('.emp-log').textContent())&&/εξέταση/.test(await page.locator('.emp-ctx').textContent()));
   await page.goto(base+page2,{waitUntil:'load'});
   await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
 

@@ -41,8 +41,8 @@ export function readPageContext(doc,loc){
 }
 
 export function describeContext({page,announced,enabled,exam}){
- if(!enabled)return "Πλαίσιο σελίδας: απενεργοποιημένο";
  if(exam)return "Πλαίσιο σελίδας: εξέταση σε εξέλιξη — ο MENTOR δεν δίνει απαντήσεις";
+ if(!enabled)return "Πλαίσιο σελίδας: απενεργοποιημένο";
  const subject=announced?.label||page?.heading||page?.title;
  return subject?"Πλαίσιο σελίδας: "+subject:"Πλαίσιο σελίδας: δεν υπάρχει";
 }
