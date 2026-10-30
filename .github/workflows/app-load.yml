@@ -21,6 +21,11 @@ jobs:
           node --test scripts/test-mentor-voice.mjs
           node --check mentor/core/quick-answer.mjs
           node --check mentor-home.js
+          node --check protocols-data.mjs
+          node --check protocols-page.mjs
+          node --check mentor-protocol-suite.mjs
+          node --check mentor-study-bridge.mjs
+          node --check mentor-study-context.mjs
           node --test scripts/test-mentor-quick-answer.mjs
       - run: npm install --no-save --no-package-lock playwright@1.56.1
       - run: npx playwright install --with-deps chromium
