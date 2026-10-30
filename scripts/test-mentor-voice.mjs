@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {
-  supportsSpeech,greekVoices,isKnownMaleGreekVoice,voiceDiagnostics,
+  supportsSpeech,greekVoices,isKnownMaleGreekVoice,isKnownFemaleGreekVoice,voiceDiagnostics,
   resolveMentorGreekVoice,splitGreekSpeech,speakGreek,stopGreek
 } from '../mentor-voice.mjs';
 
@@ -23,28 +23,30 @@ function mockSpeech(available=[]){
  const env={SpeechSynthesisUtterance,speechSynthesis:synth};
  return {env,synth,calls,setVoices(value){voices=value;},get utterance(){return synth.current;}};
 }
-test('iOS Greek voice discovery requires explicit male identity and includes known Nikos',()=>{
+test('iOS Greek voice discovery requires explicit female identity and includes known Melina',()=>{
  assert.equal(supportsSpeech(mockSpeech().env),true);
+ assert.equal(isKnownFemaleGreekVoice(greekFemale),true);
+ assert.equal(isKnownFemaleGreekVoice(greekMale),false);
+ assert.equal(isKnownFemaleGreekVoice(greekUnknown),false);
+ assert.equal(isKnownFemaleGreekVoice(english),false);
  assert.equal(isKnownMaleGreekVoice(greekMale),true);
- assert.equal(isKnownMaleGreekVoice(greekFemale),false);
- assert.equal(isKnownMaleGreekVoice(greekUnknown),false);
- assert.equal(isKnownMaleGreekVoice(english),false);
- assert.deepEqual(greekVoices([greekFemale,english,greekUnknown,greekMale]).map(x=>x.name),
-   ['Nikos','Unknown Greek','Melina']);
- assert.equal(resolveMentorGreekVoice([greekFemale,greekMale]).maleVerified,true);
+ assert.deepEqual(greekVoices([greekMale,english,greekUnknown,greekFemale]).map(x=>x.name),
+   ['Melina','Unknown Greek','Nikos']);
+ assert.equal(resolveMentorGreekVoice([greekMale,greekFemale]).femaleVerified,true);
+ assert.equal(resolveMentorGreekVoice([greekMale,greekFemale]).voice.name,'Melina');
 });
-test('Strict male Mentor does not silently play Greek Melina even when browser supports speech',()=>{
- const device=mockSpeech([greekFemale]);
+test('Female Mentor does not silently play a male Greek voice even when browser supports speech',()=>{
+ const device=mockSpeech([greekMale]);
  const selection=[];
  const started=speakGreek('Γεια σου, είμαι ο Μέντορας.',{
-  env:device.env,requireMale:true,onVoiceResolved:x=>selection.push(x)
+  env:device.env,requireFemale:true,onVoiceResolved:x=>selection.push(x)
  });
  assert.equal(started,false);
  assert.equal(selection[0].hasGreek,true);
- assert.equal(selection[0].maleVerified,false);
- assert.equal(device.calls.length,0,'No accidental female voice playback');
+ assert.equal(selection[0].femaleVerified,false);
+ assert.equal(device.calls.length,0,'No accidental male voice playback');
 });
-test('Audio troubleshooting explicitly permits a Greek voice but never changes Mentor male preference',()=>{
+test('Audio troubleshooting explicitly permits a Greek voice but never changes the Mentor female preference',()=>{
  const device=mockSpeech([greekFemale]);
  const sample=speakGreek('Δοκιμή ελληνικού ήχου.',{env:device.env,requireGreek:true});
  assert.equal(sample,true);
@@ -57,23 +59,23 @@ test('Audio troubleshooting explicitly permits a Greek voice but never changes M
 });
 test('Manual re-check detects delayed Greek voice list on Safari',()=>{
  const device=mockSpeech([]);
- assert.deepEqual(voiceDiagnostics(device.env).maleNames,[]);
- assert.equal(voiceDiagnostics(device.env).canSpeakMale,false);
- device.setVoices([greekMale]);
+ assert.deepEqual(voiceDiagnostics(device.env).femaleNames,[]);
+ assert.equal(voiceDiagnostics(device.env).canSpeakFemale,false);
+ device.setVoices([greekFemale]);
  const later=voiceDiagnostics(device.env);
  assert.equal(later.greekCount,1);
- assert.equal(later.maleCount,1);
- assert.equal(later.canSpeakMale,true);
+ assert.equal(later.femaleCount,1);
+ assert.equal(later.canSpeakFemale,true);
 });
 test('Long Greek text is split for mobile; start, boundaries, completion match the entire speech',()=>{
- const device=mockSpeech([greekMale]);
+ const device=mockSpeech([greekFemale]);
  const long='Σήμερα θα εξασκηθούμε στην εκτίμηση περιστατικού με σταθερή σειρά. '.repeat(14);
  const chunks=splitGreekSpeech(long);
  assert.ok(chunks.length>3);
  assert.ok(chunks.every(s=>s.length<=180));
  let started=0,ended=0,errors=0;
  const boundary=[];
- const ok=speakGreek(long,{env:device.env,requireMale:true,rate:0.9,pitch:0.96,volume:0.9,
+ const ok=speakGreek(long,{env:device.env,requireFemale:true,rate:0.9,pitch:0.96,volume:0.9,
   onStart:()=>started++,onFinish:()=>ended++,onError:()=>errors++,
   onBoundary:e=>boundary.push(e.charIndex)});
  assert.equal(ok,true);
@@ -81,7 +83,7 @@ test('Long Greek text is split for mobile; start, boundaries, completion match t
  for(let i=0;i<chunks.length;i++){
   const utterance=device.utterance;
   assert.equal(utterance.text,chunks[i]);
-  assert.equal(utterance.voice,greekMale);
+  assert.equal(utterance.voice,greekFemale);
   assert.equal(utterance.rate,0.9);
   utterance.onstart();
   utterance.onboundary({charIndex:4});
@@ -94,9 +96,9 @@ test('Long Greek text is split for mobile; start, boundaries, completion match t
  assert.equal(errors,0);
 });
 test('Stop and speech errors do not trigger fake completion or continued animation',()=>{
- const device=mockSpeech([greekMale]);
+ const device=mockSpeech([greekFemale]);
  let complete=0,errors=[];
- const ok=speakGreek('Ελληνική δοκιμή.',{env:device.env,requireMale:true,
+ const ok=speakGreek('Ελληνική δοκιμή.',{env:device.env,requireFemale:true,
   onFinish:()=>complete++,onError:e=>errors.push(e?.error)});
  assert.equal(ok,true);
  const first=device.utterance;
@@ -104,7 +106,7 @@ test('Stop and speech errors do not trigger fake completion or continued animati
  first.onend();first.onerror({error:'interrupted'});
  assert.equal(complete,0);
  assert.deepEqual(errors,[]);
- speakGreek('Άλλη δοκιμή.',{env:device.env,requireMale:true,
+ speakGreek('Άλλη δοκιμή.',{env:device.env,requireFemale:true,
   onError:e=>errors.push(e?.error)});
  device.utterance.onerror({error:'not-allowed'});
  assert.deepEqual(errors,['not-allowed']);
@@ -117,10 +119,10 @@ test('Live MENTOR interface connects status, refresh and explicit voice diagnost
   assert.ok(html.includes('id="'+id+'"'),id);
  }
  assert.match(app,/voiceDiagnostics\(window\)/);
- assert.match(app,/requireMale:voiceSelect\.value!=='__device__'/);
+ assert.match(app,/requireFemale:voiceSelect\.value!=='__device__'/);
  assert.match(app,/other\.value='__device__'/);
- // The default uses a verified male voice. Only explicit user choice enables device fallback.
- assert.match(app,/requireMale:false,requireGreek:true/);
+ // The default uses a verified female voice. Only explicit user choice enables device fallback.
+ assert.match(app,/requireMale:false,requireFemale:false,requireGreek:true/);
  assert.match(css,/mentor-voice-diagnostics/);
  assert.doesNotMatch(app,/localStorage\.setItem|official_grade\s*=/);
 });

@@ -3,7 +3,7 @@
  * explicit opt-in voice and persistent user-only visibility preference.
  * Does not write to learner grades, notes, exam status or sync.
  */
-import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,speakGreek,stopGreek} from "../voice/speech.mjs";
+import {supportsSpeech,listGreekVoices,isKnownFemaleGreekVoice,speakGreek,stopGreek} from "../voice/speech.mjs";
 import {chooseMouthShape} from "../avatar/live.mjs";
 import {answerStudyQuestion,loadMentorTermLibrary} from "../core/quick-answer.mjs";
 import {interpretQuestion} from "../core/guided-coach.mjs";
@@ -55,16 +55,16 @@ function refreshVoices(){
  if(!supportsSpeech(window))return;
  const prev=select.value;
  select.replaceChildren();
- const opt=document.createElement("option");opt.value="";opt.textContent="Αυτόματη ανδρική ελληνική φωνή";select.append(opt);
- const voices=listGreekVoices(window).filter(isKnownMaleGreekVoice);
+ const opt=document.createElement("option");opt.value="";opt.textContent="Αυτόματη γυναικεία ελληνική φωνή";select.append(opt);
+ const voices=listGreekVoices(window).filter(isKnownFemaleGreekVoice);
  for(const v of voices){
    const opt=document.createElement("option");opt.value=v.name;opt.textContent=v.name+(v.localService?" · Συσκευή":" · Browser");select.append(opt);
  }
  const other=document.createElement("option");other.value="__device__";
- other.textContent="Εναλλακτική: ελληνική φωνή συσκευής (δεν εγγυάται ανδρική)";
+ other.textContent="Εναλλακτική: ελληνική φωνή συσκευής (δεν εγγυάται γυναικεία)";
  select.append(other);
  if([...select.options].some(x=>x.value===prev))select.value=prev;
- if(!voices.length)select.title="Δεν αναγνωρίστηκε ανδρική ελληνική φωνή στη συσκευή.";
+ if(!voices.length)select.title="Δεν αναγνωρίστηκε γυναικεία ελληνική φωνή στη συσκευή.";
 }
 function stop(){
  generation++;stopGreek(window);paintSpeaking(false);
@@ -80,11 +80,11 @@ function play(text){
  const voiceStyle=deliverySpeechSettings(delivery,.95);
  paintSpeaking(false);
  const ok=speakGreek(text,{
-   env:window,voiceName:select.value==="__device__"?"":select.value,requireMale:select.value!=="__device__",
+   env:window,voiceName:select.value==="__device__"?"":select.value,requireFemale:select.value!=="__device__",
    rate:voiceStyle.rate,pitch:voiceStyle.pitch,volume:voiceStyle.volume,
    onStart:()=>{
      if(ticket!==generation)return;
-     paintSpeaking(true);status.textContent="Ο MENTOR μιλά με ανδρική ελληνική φωνή.";
+     paintSpeaking(true);status.textContent="Ο MENTOR μιλά με γυναικεία ελληνική φωνή.";
      send({type:"mentor:presence",detail:publicDeliveryCue(delivery)});
      send({type:"mentor:speech",speaking:true,viseme:"open"});
    },
@@ -95,7 +95,7 @@ function play(text){
    onFinish:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
    onError:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η φωνή δεν αναπαράχθηκε. Μπορείς να χρησιμοποιήσεις την απάντηση ως κείμενο.";}
  });
- if(!ok)status.textContent="Δεν αναγνωρίστηκε ανδρική ελληνική φωνή. Επίλεξε ρητά την εναλλακτική φωνή συσκευής ή διάβασε την απάντηση.";
+ if(!ok)status.textContent="Δεν αναγνωρίστηκε γυναικεία ελληνική φωνή. Επίλεξε ρητά την εναλλακτική φωνή συσκευής ή διάβασε την απάντηση.";
  return ok;
 }
 async function ask(text){

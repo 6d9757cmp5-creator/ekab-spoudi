@@ -9,7 +9,7 @@ import {readLegacySnapshot} from '../core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from '../core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from '../core/guided-coach.mjs';
 import {mountActivities} from '../activities-ui.mjs';
-import {supportsSpeech,listGreekVoices,isKnownMaleGreekVoice,resolveMentorGreekVoice,voiceDiagnostics,speakGreek,stopGreek} from '../voice/speech.mjs';
+import {supportsSpeech,listGreekVoices,isKnownFemaleGreekVoice,resolveMentorGreekVoice,voiceDiagnostics,speakGreek,stopGreek} from '../voice/speech.mjs';
 import {chooseMentorDelivery,deliverySpeechSettings,publicDeliveryCue} from '../core/presence-director.mjs';
 import {createMentorAvatar} from '../avatar/live.mjs';
 import {answerStudyQuestion,loadMentorTermLibrary} from '../core/quick-answer.mjs';
@@ -313,29 +313,29 @@ function wireMentorPresence(){
     const previous=voiceSelect.value;
     const device=voiceDiagnostics(window);
     voiceSelect.replaceChildren();
-    const option=make('option',null,'Αυτόματη ανδρική ελληνική φωνή');
+    const option=make('option',null,'Αυτόματη γυναικεία ελληνική φωνή');
     option.value='';voiceSelect.append(option);
-    for(const voice of listGreekVoices(window).filter(isKnownMaleGreekVoice)){
+    for(const voice of listGreekVoices(window).filter(isKnownFemaleGreekVoice)){
       const choice=make('option',null,voice.name+(voice.localService?' · Συσκευή':' · Browser'));
       choice.value=voice.name;voiceSelect.append(choice);
     }
-    const other=make('option',null,'Εναλλακτική ελληνική φωνή συσκευής (όχι εγγυημένα ανδρική)');
+    const other=make('option',null,'Εναλλακτική ελληνική φωνή συσκευής (όχι εγγυημένα γυναικεία)');
     other.value='__device__';voiceSelect.append(other);
     if([...voiceSelect.options].some(x=>x.value===previous))voiceSelect.value=previous;
-    if(maleVoiceStatus)maleVoiceStatus.textContent=voiceSelect.value==='__device__'?'Χρησιμοποιείται ρητά η ελληνική φωνή της συσκευής· δεν εγγυάται ανδρικό ομιλητή.':resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
+    if(maleVoiceStatus)maleVoiceStatus.textContent=voiceSelect.value==='__device__'?'Χρησιμοποιείται ρητά η ελληνική φωνή της συσκευής· δεν εγγυάται γυναικεία φωνή.':resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
     if(voiceInventory){
       voiceInventory.textContent='Διαθέσιμες ελληνικές φωνές: '+device.greekCount+
-        ' · αναγνωρισμένες ανδρικές: '+device.maleCount+
-        (device.maleNames.length?' ('+device.maleNames.join(', ')+')':'')+'. '+
-        (!device.canSpeakMale?
-          'Η ομιλία του MENTOR παραμένει απενεργοποιημένη μέχρι να εμφανιστεί ανδρική φωνή.':
+        ' · αναγνωρισμένες γυναικείες: '+device.femaleCount+
+        (device.femaleNames.length?' ('+device.femaleNames.join(', ')+')':'')+'. '+
+        (!device.canSpeakFemale?
+          'Δεν βρέθηκε αναγνωρισμένη γυναικεία φωνή· ο MENTOR θα χρησιμοποιήσει μια ελληνική φωνή της συσκευής, αν υπάρχει.':
           'Πάτησε «Άκουσε» για να δοκιμάσεις.');
     }
     voiceProbe.disabled=!device.canTestGreek;
-    if(!device.canSpeakMale&&voiceStatus){
+    if(!device.canSpeakFemale&&voiceStatus){
       voiceStatus.textContent=device.greekCount===0?
         'Το Safari δεν αναφέρει ακόμη ελληνική φωνή. Έλεγξε τη λήψη φωνών στις ρυθμίσεις iPhone και πάτησε «Έλεγξε ξανά».':
-        'Υπάρχει ελληνική φωνή αλλά όχι αναγνωρισμένη ανδρική. Δοκίμασε τον ήχο της συσκευής ή εγκατέστησε την ανδρική φωνή «Νίκος» αν προσφέρεται.';
+        'Υπάρχει ελληνική φωνή αλλά όχι αναγνωρισμένη γυναικεία. Δοκίμασε τον ήχο της συσκευής ή εγκατέστησε τη γυναικεία φωνή «Μελίνα» (Apple) ή «Αθηνά» (Microsoft) αν προσφέρεται.';
     }
   }
   if(supported){
@@ -362,7 +362,7 @@ function wireMentorPresence(){
     paintSpeaking(false);
     const sample='Δοκιμή ήχου. Αυτή είναι μια διαθέσιμη ελληνική φωνή της συσκευής.';
     const started=speakGreek(sample,{
-      env:window,requireMale:false,requireGreek:true,
+      env:window,requireMale:false,requireFemale:false,requireGreek:true,
       rate:0.95,pitch:1,volume:1,
       onVoiceResolved:result=>{
         if(current===speakingGeneration){
@@ -372,7 +372,7 @@ function wireMentorPresence(){
       },
       onStart:()=>{
         if(current!==speakingGeneration)return;
-        voiceStatus.textContent='Παίζει δοκιμαστικά ελληνική φωνή της συσκευής (όχι απαραίτητα ανδρική).';
+        voiceStatus.textContent='Παίζει δοκιμαστικά ελληνική φωνή της συσκευής (όχι απαραίτητα γυναικεία).';
       },
       onFinish:()=>{
         if(current===speakingGeneration)voiceStatus.textContent=
@@ -408,7 +408,7 @@ function wireMentorPresence(){
     paintSpeaking(false);
     const started=speakGreek(text,{env:window,voiceName:voiceSelect.value==='__device__'?'':voiceSelect.value,
       rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,
-      requireMale:voiceSelect.value!=='__device__',
+      requireFemale:voiceSelect.value!=='__device__',
       onVoiceResolved:result=>{
         if(maleVoiceStatus)maleVoiceStatus.textContent=result.label;
       },
@@ -441,7 +441,7 @@ function wireMentorPresence(){
     if(!started){
       paintSpeaking(false);
       updateVoices();
-      voiceStatus.textContent='Δεν ξεκίνησε η εκφώνηση. Πάτησε «Έλεγξε ξανά», ή διάλεξε ρητά την εναλλακτική ελληνική φωνή συσκευής. Η επιλογή αυτή δεν εγγυάται ανδρική χροιά.';
+      voiceStatus.textContent='Δεν ξεκίνησε η εκφώνηση. Πάτησε «Έλεγξε ξανά», ή διάλεξε ρητά την εναλλακτική ελληνική φωνή συσκευής. Η επιλογή αυτή δεν εγγυάται γυναικεία χροιά.';
     }
   }
   function stop(){
@@ -498,7 +498,7 @@ function wireMentorPresence(){
   setMentorDelivery(mentorDelivery);
   if(!supported){
     voiceStatus.textContent='Η φωνή δεν υποστηρίζεται εδώ. Η συνομιλία γραπτώς παραμένει διαθέσιμη.';
-    if(maleVoiceStatus)maleVoiceStatus.textContent='Ανδρική ελληνική φωνή: μη διαθέσιμη σε αυτή τη συσκευή.';
+    if(maleVoiceStatus)maleVoiceStatus.textContent='Γυναικεία ελληνική φωνή: μη διαθέσιμη σε αυτή τη συσκευή.';
   }
 }
 function wireCoach(){

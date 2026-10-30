@@ -1,7 +1,7 @@
 /**
  * MENTOR OS: Greek device text-to-speech, without cloud AI or microphone.
- * User-initiated only. The ordinary Mentor remains strictly male Greek.
- * A separately labeled diagnostic test may use another Greek system voice
+ * User-initiated only. The MENTOR (a woman) prefers a known FEMALE Greek voice.
+ * A separately labeled diagnostic test may use any Greek system voice
  * after a direct user click; it never changes the Mentor voice preference.
  *
  * Voice gender is not standardized in Web Speech. Named known voices are
@@ -12,13 +12,13 @@ export function supportsSpeech(env=globalThis){
 }
 const normalizeLang=lang=>String(lang||"").toLowerCase().replace(/_/g,"-");
 const MALE_GREEK_VOICES=/(?:nestoras|νέστορας|stefanos|στέφανος|nikos|νίκος|nikolaos|νικόλαος|alexandros|αλέξανδρος|giorgos|γιώργος|george|male|ανδρικ)/i;
-const FEMALE_GREEK_VOICES=/(?:athina|αθηνά|eleni|ελένη|despina|δέσποινα|female|γυναικ|afroditi|αφροδίτη|melina|μελίνα)/i;
+const FEMALE_GREEK_VOICES=/(?:athina|αθηνά|eleni|ελένη|despina|δέσποινα|female|γυναικ|afroditi|αφροδίτη|melina|μελίνα|google ελληνικά|google greek)/i;
 export function isKnownMaleGreekVoice(voice){
   if(!/^el(?:-|$)/.test(normalizeLang(voice?.lang)))return false;
   const name=String(voice.name||"")+" "+String(voice.voiceURI||"");
   return MALE_GREEK_VOICES.test(name)&&!FEMALE_GREEK_VOICES.test(name);
 }
-function isKnownFemaleGreekVoice(voice){
+export function isKnownFemaleGreekVoice(voice){
   return /^el(?:-|$)/.test(normalizeLang(voice?.lang)) &&
     FEMALE_GREEK_VOICES.test(String(voice.name||"")+" "+String(voice.voiceURI||""));
 }
@@ -28,8 +28,8 @@ export function greekVoices(voices){
     .sort((a,b)=>{
       const rank=v=>{
         const name=String(v.name||"");
-        return (isKnownMaleGreekVoice(v)?100:0)
-          +(isKnownFemaleGreekVoice(v)?-30:0)
+        return (isKnownFemaleGreekVoice(v)?100:0)
+          +(isKnownMaleGreekVoice(v)?-30:0)
           +(/(premium|enhanced|natural|neural|υψηλ)/i.test(name)?10:0)
           +(v.localService?2:0);
       };
@@ -44,10 +44,11 @@ export function voiceDiagnostics(env=globalThis){
   const supported=supportsSpeech(env);
   const voices=listGreekVoices(env);
   const male=voices.filter(isKnownMaleGreekVoice);
+  const female=voices.filter(isKnownFemaleGreekVoice);
   return Object.freeze({
-    supported,greekCount:voices.length,maleCount:male.length,
-    maleNames:male.map(v=>v.name),greekNames:voices.map(v=>v.name),
-    canSpeakMale:supported&&male.length>0,
+    supported,greekCount:voices.length,maleCount:male.length,femaleCount:female.length,
+    maleNames:male.map(v=>v.name),femaleNames:female.map(v=>v.name),greekNames:voices.map(v=>v.name),
+    canSpeakMale:supported&&male.length>0,canSpeakFemale:supported&&female.length>0,
     canTestGreek:supported&&voices.length>0
   });
 }
@@ -57,14 +58,15 @@ export function voiceDiagnostics(env=globalThis){
  */
 export function resolveMentorGreekVoice(voices,voiceName=""){
   const list=greekVoices(voices);
-  const selected=list.find(v=>v.name===voiceName)||list.find(isKnownMaleGreekVoice)||list[0]||null;
+  const selected=list.find(v=>v.name===voiceName)||list.find(isKnownFemaleGreekVoice)||list[0]||null;
   return Object.freeze({
     voice:selected,
+    femaleVerified:!!selected&&isKnownFemaleGreekVoice(selected),
     maleVerified:!!selected&&isKnownMaleGreekVoice(selected),
     hasGreek:!!selected,
     label:!selected?"Δεν εμφανίζεται εγκατεστημένη ελληνική φωνή στη λίστα του browser.":
-      isKnownMaleGreekVoice(selected)?"Διαθέσιμη ανδρική ελληνική φωνή: "+selected.name:
-      "Δεν εμφανίζεται αναγνωρισμένη ανδρική ελληνική φωνή. Διαθέσιμη για ρητή δοκιμή συσκευής: "+selected.name+"."
+      isKnownFemaleGreekVoice(selected)?"Διαθέσιμη γυναικεία ελληνική φωνή: "+selected.name:
+      "Δεν εμφανίζεται αναγνωρισμένη γυναικεία ελληνική φωνή. Διαθέσιμη φωνή συσκευής (φύλο άγνωστο): "+selected.name+"."
   });
 }
 export function selectGreekVoice(voices,name){
@@ -95,7 +97,7 @@ export function splitGreekSpeech(text,maxLength=180){
 let activeSpeech=null;
 export function speakGreek(text,{
   env=globalThis,voiceName="",rate=0.94,pitch=1,volume=1,
-  requireMale=false,requireGreek=false,
+  requireMale=false,requireFemale=false,requireGreek=false,
   onVoiceResolved=()=>{},onStart=()=>{},onFinish=()=>{},onError=()=>{},onBoundary=()=>{}
 }={}){
   if(!supportsSpeech(env))return false;
@@ -106,6 +108,7 @@ export function speakGreek(text,{
   catch{chosen=resolveMentorGreekVoice([]);}
   onVoiceResolved(chosen);
   if(requireMale&&!chosen.maleVerified)return false;
+  if(requireFemale&&!chosen.femaleVerified)return false;
   if(requireGreek&&!chosen.hasGreek)return false;
   const synth=env.speechSynthesis;
   const speechRate=Math.max(.8,Math.min(1.12,Number(rate)||.94));

@@ -1,6 +1,6 @@
 /**
  * Voice for the MENTOR Live Companion.
- * - Speech output: Greek Web Speech voice (male when the device has one, otherwise the device Greek voice).
+ * - Speech output: Greek Web Speech voice (a known female voice when the device has one, otherwise any device Greek voice).
  * - Speech input: only after the learner presses the microphone button; never automatic.
  * - Barge-in: starting the microphone or typing stops MENTOR immediately.
  * Mouth shapes come from the letters of each word (mouth.mjs), timed by the device voice's word boundaries.
@@ -45,7 +45,7 @@ export function createVoice({win=window,onMouth=()=>{},onState=()=>{}}={}){
    onError:()=>{if(mine!==ticket)return;clearMouth();speaking=false;onMouth({speaking:false,viseme:"rest"});emit();}
   });
   let usedDeviceVoice=false;
-  let ok=run({requireMale:true});
+  let ok=run({requireFemale:true});
   if(!ok){ok=run({requireGreek:true});usedDeviceVoice=ok;}
   return ok?{ok:true,deviceVoice:usedDeviceVoice}:{ok:false,reason:"no-greek-voice"};
  }

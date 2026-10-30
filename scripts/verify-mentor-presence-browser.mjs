@@ -37,10 +37,10 @@ try{
    const Fake=class{start(){window.__micStarts++;setTimeout(()=>{this.onresult?.({results:[[{transcript:'Τι είναι ΚΑΡΠΑ;'}]]});this.onend?.();},5000);}abort(){this.onend?.();}};
    window.SpeechRecognition=Fake;window.webkitSpeechRecognition=Fake;
    window.SpeechSynthesisUtterance=class{constructor(t){this.text=t;}};
-   const voices=[{name:'Microsoft Stefanos - Greek (Greece)',lang:'el-GR',localService:true,voiceURI:'stefanos'}];
+   const voices=[{name:'Microsoft Stefanos - Greek (Greece)',lang:'el-GR',localService:true,voiceURI:'stefanos'},{name:'Microsoft Athina - Greek (Greece)',lang:'el-GR',localService:true,voiceURI:'athina'}];
    Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{
     getVoices:()=>voices,addEventListener(){},cancel(){},
-    speak(u){window.__spoken.push({text:u.text,lang:u.lang});setTimeout(()=>{u.onstart?.();u.onboundary?.({charIndex:3});},50);setTimeout(()=>u.onend?.(),700);}
+    speak(u){window.__spoken.push({text:u.text,lang:u.lang,voice:u.voice&&u.voice.name});setTimeout(()=>{u.onstart?.();u.onboundary?.({charIndex:3});},50);setTimeout(()=>u.onend?.(),700);}
    }});
   });
   const page=await context.newPage();
@@ -216,6 +216,7 @@ try{
   await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme!=='rest',null,{polling:150,timeout:8000});
   const mouth=await page.evaluate(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme);
   check(tag('speech plays with a Greek voice and a non-rest mouth shape reaches the avatar'),(await page.evaluate(()=>window.__spoken[0].lang))==='el-GR','viseme='+mouth);
+  check(tag('MENTOR speaks with the female Greek voice when the device has both'),/Athina/.test(await page.evaluate(()=>window.__spoken[0].voice||'')),await page.evaluate(()=>window.__spoken[0].voice));
   await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme==='rest',null,{polling:150,timeout:8000});
   check(tag('mouth returns to rest when speech ends'),true);
   await page.locator('#emp-autospeak').uncheck();
