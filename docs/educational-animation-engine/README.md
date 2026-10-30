@@ -12,13 +12,13 @@ Each video has `id`, `sourceId`, `sourceHash`, `status`, `videoUrl`, `clinicalAp
 1. Content adapters extract structured learning objectives and complete theory from SAEK now; support future lesson/document content types through adapters, not SAEK-specific engine code.
 2. Source registry records stable IDs, content hashes, citations, rights and versions; cross-check PR #39 is not automatically production-approved.
 3. AI pedagogy generates Greek teaching scripts, complete concept-to-scene coverage maps, storyboard and scene specifications; reviewers check all required concepts.
-4. Asset registry tracks BioDigital source IDs, provenance, attribution and hashes. The project owner confirms existing usage permissions; do not introduce a repeated administrative license-approval gate into the rendering workflow.
-5. Remotion render worker runs separately from static GitHub Pages; no secret API keys in browser. Dynamic anatomy animation, Greek voice, subtitles and synchronized scenes. Static slide shows alone fail acceptance.
+4. Anatomy source policy: BioDigital Human is the preferred provider **only** after verified API access and rights to create/distribute the intended educational videos. Without both, select from the combined BodyParts3D + HuBMAP Human Reference Atlas + NIH 3D asset registry. Assets are chosen per anatomical structure, not mixed blindly: verify license/version, provenance, attribution, derivatives/video rights, file format, anatomical correspondence and clinical accuracy. NIH 3D licenses are per asset; BodyParts3D release-specific license and share-alike requirements must be verified against the actual downloaded files. Never treat credit alone as sufficient where other restrictions apply. Source-selection policy is implemented in `educational-animation-sources.js`; no external connector is yet implemented. The project owner confirms existing permissions; no repetitive administrative approval gate per render.
+5. Rendering architecture: Blender/Python may prepare and animate medically reviewed 3D meshes; a separately deployed rendering/orchestration worker (potentially Remotion for video assembly) runs outside static GitHub Pages, with no secret API keys in browser. Animate anatomy and physiology only with validated rigs/motion specifications; a static mesh is not evidence of physiological motion. Greek voice, subtitles and synchronized scenes are required. Static slide shows alone fail acceptance.
 6. Automated tests validate source hashes, coverage, Greek terminology, media integrity, accessibility and render output; humans review clinical safety and actual teaching quality.
 7. Publisher releases immutable approved assets, preserves previous version privately for rollback, and updates only affected videos after a source change. Visible overlay: **Educational Animation ENGINE**, plain text, **no link**.
 
 ## Current status
-Core client-side publication guard added as `educational-animation-engine.js`. Legacy Scrimba course-series runtime retired. **No video production, Remotion worker, BioDigital integration, clinical approval workflow or publisher is implemented yet.** Never claim the engine is fully operational or show placeholder videos. Begin render jobs only after SAEK/EOPPEP cross-check and corresponding approved source corrections, plus human clinical review for high-risk medical instructions. Existing PR #39 remains separate and unmerged.
+Core client-side publication guard added as `educational-animation-engine.js`. Legacy Scrimba course-series runtime retired. **No video production, Blender/Remotion worker, BioDigital integration, fallback asset ingestion, clinical approval workflow or publisher is implemented yet.** Never claim the engine is fully operational or show placeholder videos. Begin render jobs only after SAEK/EOPPEP cross-check and corresponding approved source corrections, plus human clinical review for high-risk medical instructions. Existing PR #39 remains separate and unmerged.
 
 ## Acceptance gates
 - Static checks: source/version mismatch => invisible; missing clinical/coverage check => invisible; failed/scheduled/review => invisible; published and all approvals => eligible.
@@ -27,3 +27,11 @@ Core client-side publication guard added as `educational-animation-engine.js`. L
 
 ## Permission policy
 The owner states that permissions for all planned assets and services are already secured. Do not require new permission requests or manual license approvals at each render. Retain asset attribution/provenance and source tracking. Clinical content review is a separate patient-safety requirement, not a license-approval request.
+
+## Provider fallback acceptance
+- BioDigital first only when API and **video derivative/distribution rights** are explicitly confirmed; otherwise use approved fallback assets without blocking the curriculum.
+- BodyParts3D, HuBMAP and NIH 3D are complementary sources, not a promise of complete coverage or interchangeable coordinate systems.
+- Keep per-mesh license/attribution and source/version manifest; check share-alike, noncommercial and model-specific terms before redistribution.
+- Reject unsupported formats, missing anatomy, unreviewed models and assets with unverified rights. Do not invent substitute anatomy.
+- Validate end-to-end import, Blender motion, render, clinical review, Greek narration and publication gate before announcing readiness.
+- Preserve existing lessons, student progress, Mentor OS and the published-only video guard; no placeholder media.
