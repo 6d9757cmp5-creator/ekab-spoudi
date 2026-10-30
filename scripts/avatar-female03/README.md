@@ -5,7 +5,7 @@
 1. `node export.mjs out.glb 1024 2048 1024` — φορτώνει το `Medical_Female_03_facial.fbx` και τα TGA, κρατά 15 visemes + 52 ARKit morph targets, μικραίνει τα textures (σώμα/κεφάλι/normal), τα αναποδογυρίζει κατακόρυφα και εξάγει GLB.
 2. `node scripts/optimize-mentor-glb.mjs out.glb out2.glb` — `compactPrimitive` (κάθε primitive κρατά μόνο τα vertices του).
 3. `gltf-transform sparse out2.glb mentor-female03.glb` — sparse morph targets (22 MB → 4,9 MB).
-4. `esbuild mentor/candidates/female03/candidate.mjs --bundle --format=esm --minify --outfile=mentor/candidates/female03/candidate.bundle.mjs`
+4. Αντιγραφή του αποτελέσματος στα `mentor/assets/mentor-real-3d.glb` και `assets/mentor-real-3d.glb` (ίδια bytes) και `esbuild mentor/real-avatar/entry.mjs --bundle --format=esm --minify --outfile=mentor/avatar/real3d.bundle.mjs`.
 
 Δεν εκτελέστηκαν εξωτερικά εκτελέσιμα (το FBX2glTF δεν χρησιμοποιήθηκε).
 

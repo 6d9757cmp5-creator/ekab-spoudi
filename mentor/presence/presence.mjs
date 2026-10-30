@@ -23,7 +23,7 @@ import {retrieve,riskGuard,RISK_MESSAGE} from "../knowledge/retrieve.mjs";
 import {buildPayload,askAi} from "../ai/client.mjs";
 import {MENTOR_AI} from "../ai/config.mjs";
 
-const FRAME_SRC="mentor-presence.html";
+const FRAME_SRC="mentor-presence.html?view=bust";
 const STYLE_HREF=new URL("./presence.css",import.meta.url).href;
 const CORNER_LABELS={tl:"Πάνω αριστερά",tr:"Πάνω δεξιά",bl:"Κάτω αριστερά",br:"Κάτω δεξιά"};
 const DRAG_THRESHOLD=4;

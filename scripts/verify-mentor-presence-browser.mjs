@@ -34,7 +34,7 @@ try{
   // Deterministic speech stubs: count microphone starts and capture utterances.
   await context.addInitScript(()=>{
    window.__micStarts=0;window.__spoken=[];
-   const Fake=class{start(){window.__micStarts++;setTimeout(()=>{this.onresult?.({results:[[{transcript:'Τι είναι ΚΑΡΠΑ;'}]]});this.onend?.();},1200);}abort(){this.onend?.();}};
+   const Fake=class{start(){window.__micStarts++;setTimeout(()=>{this.onresult?.({results:[[{transcript:'Τι είναι ΚΑΡΠΑ;'}]]});this.onend?.();},5000);}abort(){this.onend?.();}};
    window.SpeechRecognition=Fake;window.webkitSpeechRecognition=Fake;
    window.SpeechSynthesisUtterance=class{constructor(t){this.text=t;}};
    const voices=[{name:'Microsoft Stefanos - Greek (Greece)',lang:'el-GR',localService:true,voiceURI:'stefanos'}];

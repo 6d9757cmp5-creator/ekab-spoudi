@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {shapesForWord,wordAt,scheduleWord} from "./mouth.mjs";
+import {shapesForWord,visemesForWord,wordAt,scheduleWord} from "./mouth.mjs";
 import {CUES,cueForTurn} from "./expression.mjs";
 
 test("Greek words become letter-level mouth shapes, digraphs and accents handled",()=>{
@@ -24,4 +24,13 @@ test("activity decides the expression: explaining, refusing on exam, reassuring 
  assert.equal(cueForTurn({role:"user",text:"x"}),null);
  const known=["welcoming","supportive","caring","patient","explanatory","examiner","demanding","strict"];
  assert.ok(Object.values(CUES).every(c=>known.includes(c.id)),"ids the avatar understands");
+});
+
+test("each Greek letter group maps to one of the 14 face visemes and the schedule uses them",()=>{
+ assert.deepEqual(visemesForWord("μάμα"),["pp","aa","pp","aa"]);
+ assert.deepEqual(visemesForWord("ουρά"),["u","rr","aa"]);
+ assert.deepEqual(visemesForWord("καρδιά"),["kk","aa","rr","th","i","aa"]);
+ assert.deepEqual(visemesForWord("τσάι"),["ch","e"]);
+ const keys=new Set(["aa","e","i","o","u","pp","ff","th","dd","kk","ch","ss","nn","rr","rest"]);
+ assert.ok(scheduleWord("αναζωογόνηση",500).every(s=>keys.has(s.shape)));
 });

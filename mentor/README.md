@@ -64,6 +64,10 @@ mentor/
 
 Έλεγχοι: `node --test mentor/presence/*.test.mjs mentor/context/*.test.mjs mentor/knowledge/*.test.mjs mentor/ai/*.test.mjs workers/mentor-chat/*.test.mjs` και `node scripts/verify-mentor-presence-browser.mjs`. Δεν έχει δοκιμαστεί σε πραγματικό iPhone/Safari.
 
-## Βελτιστοποίηση 3D μοντέλου
+## 3D μοντέλο (MENTOR)
 
-Το mentor-real-3d.glb (δύο πανομοιότυπα αντίγραφα: mentor/assets/ και ssets/) ξαναγράφηκε με scripts/optimize-mentor-glb.mjs ώστε κάθε τμήμα υλικού να κρατά μόνο τα δικά του vertices (από 1.368.276 σε 65.156 εγγραφές). Γεωμετρία, σκελετός, animations, ονόματα morph targets και υφές δεν άλλαξαν. Μέτρηση σε Edge headless με software WebGL: JS heap ≈795 MB → ≈121 MB, φόρτωση ready ≈11,4 s → ≈3,6 s. Δεν έχει μετρηθεί σε πραγματική GPU ή iPhone.
+Το `mentor-real-3d.glb` (δύο πανομοιότυπα αντίγραφα: `mentor/assets/` και `assets/`) είναι το **Medical_Female_03** της Microsoft Rocketbox (άδεια MIT) — προέλευση, άδεια και βήματα μετατροπής στα `mentor/assets/AVATAR-PROVENANCE.md`, `mentor/assets/LICENSE-Microsoft-Rocketbox.md` και `scripts/avatar-female03/`. Έχει 80 οστά και 67 morph targets (15 visemes + 52 ARKit), δεν έχει animation clips: η στάση, η αναπνοή, οι εκφράσεις και οι χειρονομίες των χεριών οδηγούνται από το `mentor/real-avatar/entry.mjs`. Το bundle `mentor/avatar/real3d.bundle.mjs` ξαναχτίζεται με `esbuild mentor/real-avatar/entry.mjs --bundle --format=esm --minify --outfile=mentor/avatar/real3d.bundle.mjs`. Το widget φορτώνει την προβολή «bust» (`mentor-presence.html?view=bust`).
+
+Η μπλε στολή **δεν** είναι επίσημη στολή ΕΚΑΒ και ο MENTOR δεν είναι επίσημος εκπρόσωπος του ΕΚΑΒ ούτε αδειούχος ιατρός. Το στόμα οδηγείται από τα γράμματα του κειμένου και τα word boundaries της φωνής συσκευής — **όχι** από τον ήχο· δεν είναι ακριβές lip-sync.
+
+Μέτρηση (Edge, πραγματική GPU Intel Iris 540, desktop): ≈60 fps, JS heap ≈57 MB, έτοιμο ≈2 s. Δεν έχει μετρηθεί σε τηλέφωνο, iPhone ή Safari.

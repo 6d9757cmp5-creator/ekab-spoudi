@@ -1,10 +1,10 @@
-# Μοντέλο υποψήφιο: Medical_Female_03
+# Μοντέλο MENTOR: Medical_Female_03 (`mentor/assets/mentor-real-3d.glb`)
 
 - Πηγή: Microsoft Rocketbox Avatar Library — https://github.com/microsoft/Microsoft-Rocketbox (Assets/Avatars/Professions/Medical_Female_03)
-- Άδεια: MIT (βλ. `LICENSE-Microsoft-Rocketbox.md`, Copyright (c) 2020 Microsoft). Η ειδοποίηση πνευματικών δικαιωμάτων πρέπει να παραμένει.
+- Άδεια: MIT (βλ. `LICENSE-Microsoft-Rocketbox.md` (ίδιος φάκελος), Copyright (c) 2020 Microsoft). Η ειδοποίηση πνευματικών δικαιωμάτων πρέπει να παραμένει.
 - Μετατροπή (μόνο τεχνική, δεν άλλαξε η εμφάνιση): FBX με πρόσωπο → GLB με three.js (FBXLoader/GLTFExporter), κρατήθηκαν 15 visemes + 52 ARKit blendshapes (αφαιρέθηκαν τα 108 FACS AU), textures TGA → JPEG (σώμα 1024, κεφάλι 2048, normals 1024, flip στον άξονα V), sparse morph targets (gltf-transform).
 - **Δεν είναι επίσημη στολή ΕΚΑΒ.** Η μπλε στολή είναι γενική στολή διασώστη της βιβλιοθήκης. Ο MENTOR δεν πρέπει να παρουσιάζεται ως επίσημος εκπρόσωπος του ΕΚΑΒ ή ως αδειούχος ιατρός.
-- Κατάσταση: ΥΠΟΨΗΦΙΟ για έλεγχο. Δεν έχει αντικαταστήσει το παραγωγικό μοντέλο `mentor/assets/mentor-real-3d.glb`.
+- Κατάσταση: **ενεργό μοντέλο του MENTOR** (εγκρίθηκε από τον ιδιοκτήτη). Αντικατέστησε το προηγούμενο μοντέλο (Ara 3D Gen) στα `mentor/assets/mentor-real-3d.glb` και `assets/mentor-real-3d.glb` (ίδια bytes). Το προηγούμενο μοντέλο δεν προσφέρεται πλέον ως εναλλακτική στην εφαρμογή (παραμένει μόνο στο ιστορικό git).
 
 - Έμβλημα: τα δύο αρχικά σήματα (στήθος, μανίκι) αντικαταστάθηκαν με το **δικό μας έμβλημα της εφαρμογής** (σταυρός σε σκούρο κύκλο), όχι με το επίσημο έμβλημα ΕΚΑΒ, ώστε ο MENTOR να μην εμφανίζεται ως επίσημος εκπρόσωπος του ΕΚΑΒ. Το επίσημο σήμα (π.χ. από allaboutarmy.gr) δεν χρησιμοποιήθηκε: δεν έχει επιβεβαιωθεί άδεια χρήσης της φωτογραφίας/του εμβλήματος.
 
