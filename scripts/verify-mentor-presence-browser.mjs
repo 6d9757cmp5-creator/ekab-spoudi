@@ -191,7 +191,7 @@ try{
   const hrefBefore=page.url();
   await ask('Άνοιξε την ανατομία');
   await page.waitForSelector('.emp-navlink');
-  check(tag('navigation is only offered as a link; MENTOR does not navigate by itself'),page.url()===hrefBefore&&(await page.locator('.emp-navlink').getAttribute('href'))==='anatomia.html');
+  check(tag('navigation is only offered as a link; MENTOR does not navigate by itself'),page.url()===hrefBefore&&(await page.locator('.emp-navlink').getAttribute('href'))===new URL('/anatomia.html',page.url()).href);
   await page.locator('.emp-actions .emp-link',{hasText:'Διαγραφή συνομιλίας'}).click();
   check(tag('learner can delete the conversation'),(await page.locator('.emp-log').textContent()).trim()==='');
   await page.reload({waitUntil:'load'});

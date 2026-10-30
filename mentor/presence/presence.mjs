@@ -23,7 +23,9 @@ import {retrieve,riskGuard,RISK_MESSAGE} from "../knowledge/retrieve.mjs";
 import {buildPayload,askAi} from "../ai/client.mjs";
 import {MENTOR_AI} from "../ai/config.mjs";
 
-const FRAME_SRC="mentor-presence.html?view=bust";
+// Addresses are resolved from this module, so the widget also works on pages in sub-folders (e.g. ui-tools/anatomy-3d/).
+const SITE_ROOT=new URL("../../",import.meta.url);
+const FRAME_SRC=new URL("mentor-presence.html?view=bust",SITE_ROOT).href;
 const STYLE_HREF=new URL("./presence.css",import.meta.url).href;
 const CORNER_LABELS={tl:"Πάνω αριστερά",tr:"Πάνω δεξιά",bl:"Κάτω αριστερά",br:"Κάτω δεξιά"};
 const DRAG_THRESHOLD=4;
@@ -315,7 +317,7 @@ function boot(){
   navBox.replaceChildren();
   navBox.hidden=!route;
   if(!route)return;
-  navBox.append(el("a",{class:"emp-navlink",href:route.href,text:"Άνοιγμα: "+route.label+" →"}));
+  navBox.append(el("a",{class:"emp-navlink",href:new URL(route.href,SITE_ROOT).href,text:"Άνοιγμα: "+route.label+" →"}));
  }
  function sayMaybe(text){
   if(!learning.autoSpeak)return;
