@@ -26,7 +26,7 @@
  </header>
  <aside class="note" role="note">
   <strong>Δοκιμαστικό εκπαιδευτικό εργαστήριο — όχι κλινική προσομοίωση πιστοποιημένη για πράξη</strong>
-  <p>Οι ασκήσεις ελέγχουν τεκμηρίωση, επικοινωνία, ασφάλεια και όρια ρόλου. Δεν υπολογίζουν διάγνωση, θεραπεία, φαρμακευτική δόση ή έκβαση ασθενούς. Τα θεματικά περιστατικά είναι συνθετικά και τα ειδικά κλινικά βήματα απαιτούν ανεξάρτητη επιστημονική έγκριση.</p>
+  <p>Οι πρωτότυπες εκπαιδευτικές ασκήσεις διαφέρουν ανά περιστατικό και ανά επίπεδο μαθητή. Ελέγχουν τεκμηρίωση, επικοινωνία, ασφάλεια και όρια ρόλου. Δεν υπολογίζουν διάγνωση, θεραπεία, φαρμακευτική δόση ή έκβαση ασθενούς. Τα θεματικά περιστατικά είναι συνθετικά και τα ειδικά κλινικά βήματα απαιτούν ανεξάρτητη επιστημονική έγκριση.</p>
  </aside>
  <section class="panel">
   <h2 id="suite-topic">Εκπαιδευτικό θέμα</h2>
@@ -41,9 +41,12 @@
   <section class="panel" id="lab-screen" aria-labelledby="lab-header">
    <div class="step" id="lab-stage">Στάδιο 1 / 4</div>
    <h2 id="lab-header">MENTOR | PROTOCOL LAB</h2>
+   <p id="lab-role-note" class="small muted" aria-live="polite"></p>
    <p id="lab-prompt">Επιλογή εκπαιδευτικής διαδρομής…</p>
    <div class="progress-line" aria-hidden="true"><span id="lab-progress" style="width:0"></span></div>
    <div class="actions" id="lab-settings">
+    <label for="lab-role" class="small"><b>Επίπεδο μαθητή:</b></label>
+    <select id="lab-role" aria-label="Εκπαιδευτικός ρόλος"><option value="firstaid">Πρώτες βοήθειες</option><option value="responder">Διασώστης / πλήρωμα ασθενοφόρου</option><option value="doctor">Ιατρός προνοσοκομειακής</option></select>
     <label for="lab-mode" class="small"><b>Τρόπος:</b></label>
     <select id="lab-mode" aria-label="Τρόπος μελέτης"><option value="guided">Με καθοδήγηση</option><option value="assessment">Αυτοαξιολόγηση</option></select>
    </div>
@@ -57,7 +60,7 @@
   </section>
   <section class="panel" id="debrief-screen" hidden aria-labelledby="debrief-header">
    <h2 id="debrief-header">MENTOR DEBRIEF</h2>
-   <p class="muted">Ανασκόπηση της τελευταίας τοπικά αποθηκευμένης προσπάθειας για αυτό το θέμα.</p>
+   <p class="muted">Ανασκόπηση της τελευταίας τοπικά αποθηκευμένης προσπάθειας για αυτό το θέμα και τον επιλεγμένο εκπαιδευτικό ρόλο.</p>
    <div class="summary" id="debrief-summary"></div>
    <h3 style="margin-top:20px">Ιστορικό αποφάσεων</h3>
    <ol class="history" id="debrief-history"></ol>
