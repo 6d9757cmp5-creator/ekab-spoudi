@@ -57,6 +57,18 @@
     <button type="button" class="btn alt" id="lab-restart">Νέα εκπαιδευτική προσπάθεια</button>
    </div>
    <p id="lab-storage" class="small muted" aria-live="polite"></p>
+   <details id="interview-panel" class="mentor-interview">
+     <summary>🎙 Εικονική συνομιλία — εξάσκηση επικοινωνίας με συνθετικό περιστατικό</summary>
+     <p class="small muted">Προαιρετική προσομοίωση ερωτήσεων και αναφορών από τον ίδιο MENTOR. Δεν αποτελεί πραγματικό ιατρικό ιστορικό, διάγνωση, αναγνώριση φωνής ή AI συνομιλία.</p>
+     <div id="mentor-interview-root">
+       <p class="step" id="interview-stage"></p>
+       <p id="interview-prompt"></p>
+       <div class="choices" id="interview-choices"></div>
+       <p class="small muted" id="interview-result" role="status" aria-live="polite"></p>
+       <details><summary>Ιστορικό εκπαιδευτικής επικοινωνίας</summary><ol class="history" id="interview-history"></ol></details>
+       <button type="button" class="btn alt" id="interview-reset">Ξεκίνα ξανά τη συνομιλία</button>
+     </div>
+   </details>
   </section>
   <section class="panel" id="debrief-screen" hidden aria-labelledby="debrief-header">
    <h2 id="debrief-header">MENTOR DEBRIEF</h2>
