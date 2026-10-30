@@ -75,7 +75,7 @@ export function buildDebriefReport({topic, role, session, stages, interviewTurns
   lines.push(
     "",
     "ΕΠΟΜΕΝΗ ΜΕΛΕΤΗ",
-    entries.some(e => !e.pass)
+    (entries.some(e => !e.pass) || interview.some(t => !t.ok))
       ? "Επανέλαβε τα σημειωμένα βήματα και αντιπαράβαλε τις εξηγήσεις με επαληθευμένες εκπαιδευτικές πηγές."
       : "Επανάλαβε το θέμα σε διαφορετική εκπαιδευτική συνθήκη, χωρίς να θεωρήσεις το αποτέλεσμα πιστοποίηση.",
     "",
