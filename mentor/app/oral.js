@@ -62,3 +62,17 @@ $('oral-listen').addEventListener('click',()=>{
 });
 $('oral-stop').addEventListener('click',()=>{if(speechAvailable)speechSynthesis.cancel();});
 render();
+// Practice (guided) versus active exam: the floating MENTOR is told which one is on and stays silent during an exam.
+const examBox=$('oral-exam-mode');
+function announceMode(){
+ const exam=examBox.checked;
+ $('oral-reveal').disabled=exam;
+ if(exam){$('oral-review').hidden=true;}
+ else{$('oral-review').hidden=!answers[index].revealed;}
+ window.dispatchEvent(new CustomEvent('mentor:context',{detail:exam
+  ?{kind:'exam',id:'oral-exam',label:'Προφορική εξέταση',active:true}
+  :{kind:'study-mode',id:'oral-practice',label:'Προφορική εξάσκηση με καθοδήγηση'}}));
+}
+examBox.addEventListener('change',announceMode);
+window.addEventListener('load',announceMode);
+announceMode();

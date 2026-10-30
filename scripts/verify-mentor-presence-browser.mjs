@@ -149,6 +149,8 @@ try{
   await page.locator('.emp-send').click();
   await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{polling:150,timeout:20000});
   check(tag('local source-backed Greek answer appears'),true);
+  await page.waitForFunction(m=>document.querySelector('.ekab-mentor-presence iframe')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.mentorMood===m,'explanatory',{polling:150,timeout:20000});
+  check(tag('avatar shows the explaining expression after an answer'),true);
   await page.evaluate(()=>{const p=document.querySelector('h1,h2,p');const r=document.createRange();r.selectNodeContents(p);const s=getSelection();s.removeAllRanges();s.addRange(r);});
   await page.locator('.emp-ask .emp-link',{hasText:'Εξήγησε την επιλογή'}).click();
   await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.length>10,null,{polling:150,timeout:15000});
@@ -224,6 +226,21 @@ try{
   await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
   await page.locator('.emp-send').click();
   check(tag('exam page: MENTOR refuses to answer'),/δεν μπορώ να δώσω απαντήσεις/.test(await page.locator('.emp-log').textContent())&&/εξέταση/.test(await page.locator('.emp-ctx').textContent()));
+  await page.waitForFunction(m=>document.querySelector('.ekab-mentor-presence iframe')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.mentorMood===m,'examiner',{polling:150,timeout:20000});
+  check(tag('avatar shows the examiner expression when refusing on an exam page'),true);
+  // Oral rehearsal: guided practice answers; the learner's own switch to active exam silences MENTOR.
+  await page.goto(base+'/mentor-oral.html',{waitUntil:'load'});
+  await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
+  await page.locator('.emp-bar button[aria-controls=\"ekab-mentor-ask\"]').click();
+  check(tag('oral practice: context says guided practice, not exam'),/Προφορική εξάσκηση/.test(await page.locator('.emp-ctx').textContent()),await page.locator('.emp-ctx').textContent());
+  await page.locator('#oral-exam-mode').check();
+  await page.waitForFunction(()=>/εξέταση σε εξέλιξη/.test(document.querySelector('.emp-ctx')?.textContent||''),null,{polling:150,timeout:10000});
+  await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
+  await page.locator('.emp-send').click();
+  check(tag('oral active exam: MENTOR refuses and the self-check button is disabled'),/δεν μπορώ να δώσω απαντήσεις/.test(await page.locator('.emp-log').textContent())&&await page.locator('#oral-reveal').isDisabled());
+  await page.locator('#oral-exam-mode').uncheck();
+  await page.waitForFunction(()=>/Προφορική εξάσκηση/.test(document.querySelector('.emp-ctx')?.textContent||''),null,{polling:150,timeout:10000});
+  check(tag('oral practice again: guided context restored'),true);
   await page.goto(base+page2,{waitUntil:'load'});
   await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
 

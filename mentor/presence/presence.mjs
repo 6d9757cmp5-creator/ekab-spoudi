@@ -18,6 +18,7 @@ import {
 } from "./memory.mjs";
 import {matchNavigation} from "./navigate.mjs";
 import {createVoice} from "./voice.mjs";
+import {CUES,cueForTurn} from "./expression.mjs";
 import {retrieve,riskGuard,RISK_MESSAGE} from "../knowledge/retrieve.mjs";
 import {buildPayload,askAi} from "../ai/client.mjs";
 import {MENTOR_AI} from "../ai/config.mjs";
@@ -195,7 +196,7 @@ function boot(){
  window.addEventListener("message",event=>{
   if(event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
   if(event.data?.type==="mentor:stage"){
-   if(event.data.state==="ready"){status.hidden=true;}
+   if(event.data.state==="ready"){status.hidden=true;sendCue(pendingCue||CUES.open);}
    else{status.hidden=false;status.textContent="Η μορφή 3D δεν φορτώθηκε σε αυτή τη συσκευή.";}
   }
  });
@@ -300,6 +301,15 @@ function boot(){
  function pushTurn(turn){
   turns=appendTurn(storeSession(),turn);
   paintTurns();
+  sendCue(cueForTurn(turn));
+ }
+ // Expression and gesture for the current activity. The avatar page listens for "mentor:presence" in its own document;
+ // a cue sent before the 3D page is ready is replayed when it reports ready.
+ let pendingCue=null;
+ function sendCue(cue){
+  if(!cue)return;
+  pendingCue=cue;
+  try{frame?.contentDocument?.dispatchEvent(new frame.contentWindow.CustomEvent("mentor:presence",{detail:{id:cue.id,gesture:cue.gesture,expression:"",posture:""}}));}catch{}
  }
  function showNav(route){
   navBox.replaceChildren();
@@ -326,7 +336,7 @@ function boot(){
   pushTurn({role:"user",text:selection?"Εξήγησε: «"+selection+"»":typed.trim()});
   askInput.value="";
   showNav(null);
-  if(context.exam){pushTurn({role:"mentor",mode:"refusal",text:EXAM_REFUSAL});return;}
+  if(context.exam){pushTurn({role:"mentor",mode:"refusal",reason:"exam",text:EXAM_REFUSAL});return;}
   const route=matchNavigation(typed);
   if(route&&!selection){showNav(route);pushTurn({role:"mentor",mode:"info",text:"Μπορώ να σε οδηγήσω στη σελίδα «"+route.label+"». Πάτησε τον σύνδεσμο για να ανοίξει."});return;}
   if(riskGuard(text).blocked){finish({role:"mentor",mode:"refusal",text:RISK_MESSAGE});return;}
@@ -366,6 +376,7 @@ function boot(){
  micBtn.addEventListener("click",async()=>{
   const st=voice.state();
   if(!st.stt){pushTurn({role:"mentor",mode:"info",text:"Η αναγνώριση ελληνικής ομιλίας δεν υποστηρίζεται σε αυτό το πρόγραμμα περιήγησης. Γράψε την ερώτησή σου."});return;}
+  sendCue(CUES.listen);
   const r=await voice.listen();
   if(r.ok){askInput.value=r.text;askInput.focus({preventScroll:true});announce("Αναγνωρίστηκε: "+r.text+". Πάτησε Ρώτα.");}
   else if(r.reason&&!["cancelled","empty","aborted","no-speech"].includes(r.reason))

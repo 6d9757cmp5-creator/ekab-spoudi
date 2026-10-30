@@ -13,7 +13,7 @@ export const MAX_LABEL=120;
 export const MAX_SELECTION=300;
 
 // Pages where answers would defeat the assessment.
-const EXAM_PAGES=/(^|\/)(written_exam|practical_exam|exam_focus|saek-exams|mentor-oral)\.html$/i;
+const EXAM_PAGES=/(^|\/)(written_exam|practical_exam|exam_focus|saek-exams)\.html$/i;
 
 const clean=(value,max=MAX_LABEL)=>String(value??"").replace(/\s+/g," ").trim().slice(0,max);
 

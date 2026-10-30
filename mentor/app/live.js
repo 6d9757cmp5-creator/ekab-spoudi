@@ -19,7 +19,8 @@ function patientCard(person){
  }
  card.append(group);
  const initial=person.initial;
- card.append(create('p','Αρχή: HR '+initial.hr+' · RR '+initial.rr+' · SpO₂ '+initial.spo2+'%. Οι μεταβολές είναι προκαθορισμένες.','live-trend'));
+ card.append(create('p','Αρχή: HR '+initial.hr+' · RR '+initial.rr+' · SpO₂ '+initial.spo2+'%. Συνθετική εξέλιξη· επηρεάζεται από τις αποφάσεις σου.','live-trend'));
+ if(person.extraSteps)card.append(create('p','Συνέπεια αποφάσεων: '+person.extraSteps+' επιπλέον βήμα(τα) εξέλιξης λόγω καθυστέρησης.','live-consequence'));
  return card;
 }
 function render(){
@@ -43,13 +44,14 @@ function render(){
   }
  }else{
   $('live-mission-head').textContent='Εκπαιδευτική ανασκόπηση';
-  $('live-context').textContent='Δες τις αποφάσεις και τις συνθετικές παρατηρήσεις. Δεν έγινε υπολογισμός κλινικής έκβασης.';
+  $('live-context').textContent='Δες τις αποφάσεις, τις συνέπειές τους και τις συνθετικές παρατηρήσεις. Δεν έγινε υπολογισμός κλινικής έκβασης.'+(snapshot.unreliableHandover?' Η παράδοσή σου περιείχε ανεπιβεβαίωτες πληροφορίες, άρα δεν θεωρείται αξιόπιστη.':'');
  }
  $('live-timeline').replaceChildren(...snapshot.timeline.map(event=>{
   const li=create('li');
   li.dataset.kind=event.outcome;
   li.append(create('strong','Λεπτό '+event.minute+' · '+event.title+' · '+(event.outcome==='practice'?'Ολοκληρώθηκε βήμα':'Επανάληψη')),
    create('p',event.feedback));
+  if(event.consequence)li.append(create('p','Συνέπεια: '+event.consequence,'live-consequence'));
   return li;
  }));
  // Tell the floating MENTOR which step is open (title only, never the choices or feedback).

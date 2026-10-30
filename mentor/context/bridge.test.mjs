@@ -55,13 +55,15 @@ test("empty input produces no question and long input is bounded",()=>{
  assert.equal(composeQuestion({question:"α".repeat(900)}).text.length,300);
 });
 
-test("learning pages are recognised from their address only; oral practice counts as an exam",()=>{
+test("learning pages are recognised from their address only; oral practice is guided unless the learner starts an active exam",()=>{
  assert.equal(kindOfPath("/ekab-spoudi/saek-course-07.html"),"course");
  assert.equal(kindOfPath("/anatomia.html"),"anatomy-object");
  assert.equal(kindOfPath("/ui-tools/anatomy-3d/index.html"),"anatomy-object");
  assert.equal(kindOfPath("/mentor-scenarios.html"),"scenario");
  assert.equal(kindOfPath("/contacts.html"),"");
- assert.equal(examMode("/mentor-oral.html"),true);
+ assert.equal(examMode("/mentor-oral.html"),false);
+ assert.equal(examMode("/mentor-oral.html",sanitizeAnnouncement({kind:"exam",active:true})),true);
+ assert.equal(examMode("/mentor-oral.html",sanitizeAnnouncement({kind:"exam",active:false})),false);
  const text=describeContext({page:{kind:"course",heading:"Καρδιά"},announced:null,enabled:true,exam:false});
  assert.match(text,/μάθημα.*Καρδιά/);
 });

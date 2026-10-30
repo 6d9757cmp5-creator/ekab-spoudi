@@ -23,7 +23,7 @@ jobs:
           node --check mentor-home.js
           node --test scripts/test-mentor-quick-answer.mjs
           node --check mentor/presence/presence.mjs
-          node --test mentor/presence/presence-state.test.mjs mentor/presence/memory-navigate.test.mjs mentor/context/bridge.test.mjs mentor/knowledge/retrieve.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/worker.test.mjs
+          node --test mentor/presence/presence-state.test.mjs mentor/presence/memory-navigate.test.mjs mentor/context/bridge.test.mjs mentor/knowledge/retrieve.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/worker.test.mjs mentor/presence/mouth-expression.test.mjs mentor/core/live-sim.test.mjs
       - run: npm install --no-save --no-package-lock playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - run: node scripts/app-load-smoke.mjs

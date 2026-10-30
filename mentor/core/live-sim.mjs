@@ -17,22 +17,22 @@ export const STAGES=Object.freeze([
  {id:'safety',title:'1. Εκτίμηση σκηνής',question:'Πριν προσεγγίσεις το συνθετικό συμβάν, ποια οργανωτική ενέργεια προηγείται;',
   choices:[
    {id:'check-safety',label:'Αναγνωρίζω κινδύνους και εξασφαλίζω ασφαλή προσέγγιση στο πλαίσιο της εκπαίδευσής μου.',outcome:'practice',feedback:'Σωστή οργανωτική κατεύθυνση: προηγείται η αναγνώριση κινδύνων. Δεν αποτελεί πλήρη πραγματική διαδικασία.'},
-   {id:'rush',label:'Μπαίνω αμέσως στον χώρο χωρίς να εξετάσω κινδύνους.',outcome:'review',feedback:'Επανάλαβε το βήμα: η ασφάλεια της σκηνής δεν πρέπει να παρακάμπτεται.'}
+   {id:'rush',label:'Μπαίνω αμέσως στον χώρο χωρίς να εξετάσω κινδύνους.',outcome:'review',feedback:'Επανάλαβε το βήμα: η ασφάλεια της σκηνής δεν πρέπει να παρακάμπτεται.',consequence:{people:['a'],text:'Χάθηκε χρόνος: οι συνθετικές τιμές του Ατόμου Α εξελίχθηκαν ένα βήμα επιπλέον χωρίς παρακολούθηση.'}}
   ]},
  {id:'coordination',title:'2. Συντονισμός',question:'Αναφέρονται δύο εμπλεκόμενοι. Τι περιλαμβάνει η αρχική οργανωτική ενημέρωση;',
   choices:[
    {id:'report-two',label:'Ενημερώνω με σαφήνεια τον συντονισμό για δύο αναφερόμενους εμπλεκόμενους και τις γνωστές συνθήκες.',outcome:'practice',feedback:'Η καταγραφή του αριθμού ατόμων και των επιβεβαιωμένων πληροφοριών υποστηρίζει τον συντονισμό.'},
-   {id:'omit-second',label:'Αναφέρω μόνο το ένα άτομο, χωρίς να καταγράψω την ύπαρξη του δεύτερου.',outcome:'review',feedback:'Επανεξέτασε την πληρότητα της οργανωτικής αναφοράς.'}
+   {id:'omit-second',label:'Αναφέρω μόνο το ένα άτομο, χωρίς να καταγράψω την ύπαρξη του δεύτερου.',outcome:'review',feedback:'Επανεξέτασε την πληρότητα της οργανωτικής αναφοράς.',consequence:{people:['b'],text:'Το Άτομο Β δεν καταγράφηκε: οι συνθετικές τιμές του εξελίχθηκαν ένα βήμα επιπλέον χωρίς παρακολούθηση.'}}
   ]},
  {id:'observations',title:'3. Παρακολούθηση δύο ατόμων',question:'Οι συνθετικές τιμές μεταβάλλονται με τον χρόνο. Πώς περιγράφεις όσα βλέπεις;',
   choices:[
    {id:'record-both',label:'Καταγράφω ξεχωριστά τις παρατηρήσεις και τις χρονικές μεταβολές και για τα δύο άτομα.',outcome:'practice',feedback:'Η τεκμηρίωση των διαθέσιμων παρατηρήσεων χωρίς υποθέσεις είναι ο εκπαιδευτικός στόχος.'},
-   {id:'guess-diagnosis',label:'Αποδίδω βέβαιη διάγνωση από τις επινοημένες τιμές, χωρίς επιπλέον δεδομένα.',outcome:'review',feedback:'Δεν συνάγεται πραγματική διάγνωση από αυτό το μοντέλο. Επανέλαβε την αντικειμενική καταγραφή.'}
+   {id:'guess-diagnosis',label:'Αποδίδω βέβαιη διάγνωση από τις επινοημένες τιμές, χωρίς επιπλέον δεδομένα.',outcome:'review',feedback:'Δεν συνάγεται πραγματική διάγνωση από αυτό το μοντέλο. Επανέλαβε την αντικειμενική καταγραφή.',consequence:{people:['a','b'],text:'Η πρόωρη υπόθεση καθυστέρησε τη συστηματική καταγραφή: οι τιμές και των δύο εξελίχθηκαν ένα βήμα επιπλέον.'}}
   ]},
  {id:'handover',title:'4. Παράδοση',question:'Τι παραδίδεις στην επόμενη ομάδα ως εκπαιδευτική αναφορά;',
   choices:[
    {id:'verified-handover',label:'Το συμβάν, τον αριθμό ατόμων, τις καταγεγραμμένες παρατηρήσεις, τις μεταβολές και τις επικοινωνίες.',outcome:'practice',feedback:'Ολοκληρώθηκε η οργανωτική άσκηση με αναφορά των διαθέσιμων στοιχείων.'},
-   {id:'invent',label:'Δίνω επινοημένες ενέργειες και διαγνώσεις σαν να είχαν παρατηρηθεί.',outcome:'review',feedback:'Η παράδοση πρέπει να διαχωρίζει πραγματικά καταγεγραμμένα δεδομένα από υποθέσεις.'}
+   {id:'invent',label:'Δίνω επινοημένες ενέργειες και διαγνώσεις σαν να είχαν παρατηρηθεί.',outcome:'review',feedback:'Η παράδοση πρέπει να διαχωρίζει πραγματικά καταγεγραμμένα δεδομένα από υποθέσεις.',consequence:{people:[],text:'Η επόμενη ομάδα θα βασιζόταν σε ανεπιβεβαίωτες πληροφορίες. Δεν αλλάζουν οι τιμές, αλλά η αναφορά δεν θεωρείται αξιόπιστη.'}}
   ]}
 ]);
 const MAX_EVENTS=16;
@@ -68,12 +68,17 @@ export function replayLive(raw){
 }
 export function liveSnapshot(session){
  const state=replayLive(session),elapsed=state.events.length*2;
- const index=Math.min(state.events.length,4);
+ // Consequences are deterministic functions of the recorded choices: each flawed choice lets the named
+ // synthetic person progress one extra step (clamped to the last trend point). Nothing else is simulated.
+ const delay={a:0,b:0};
+ const choiceOf=e=>STAGES.find(s=>s.id===e.stage_id)?.choices.find(c=>c.id===e.choice_id);
+ for(const e of state.events)for(const id of choiceOf(e)?.consequence?.people||[])delay[id]+=1;
  return {minute:elapsed,completed:state.completed,stage:state.stage,
   people:CASE.people.map(p=>({id:p.id,name:p.name,description:p.description,
-   ...p.trend[index],initial:p.trend[0]})),
+   ...p.trend[Math.min(state.events.length+delay[p.id],4)],initial:p.trend[0],extraSteps:delay[p.id]})),
+  unreliableHandover:state.events.some(e=>e.choice_id==='invent'),
   timeline:state.events.map(e=>({minute:e.seq*2,title:STAGES.find(s=>s.id===e.stage_id)?.title,
-   outcome:e.outcome,feedback:STAGES.find(s=>s.id===e.stage_id)?.choices.find(c=>c.id===e.choice_id)?.feedback})),
+   outcome:e.outcome,feedback:choiceOf(e)?.feedback,consequence:choiceOf(e)?.consequence?.text||''})),
   practice:state.events.filter(x=>x.outcome==='practice').length,
   review:state.events.filter(x=>x.outcome==='review').length
  };
