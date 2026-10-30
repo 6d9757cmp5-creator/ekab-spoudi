@@ -143,7 +143,9 @@ try{
   await page.locator('#coach-question').fill('Ποια θεραπεία να δώσω;');
   await page.locator('#coach-send').click();
   await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===7);
-  assert.match(await page.locator('#coach-dialogue').textContent(),/Δεν αξιολογώ ελεύθερο ιατρικό κείμενο/);
+  const refusal=await page.locator('#coach-dialogue .coach-message').last().textContent();
+  assert.match(refusal,/Δεν έχω ακόμη τεκμηριωμένη απάντηση|Δεν αξιολογώ ελεύθερο ιατρικό κείμενο/,'Mentor must refuse unsupported treatment questions');
+  assert.match(refusal,/δεν είναι ενεργή|δεν είναι διαθέσιμ/,'Mentor must clearly state that unverified clinical AI is unavailable');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   await page.reload({waitUntil:'networkidle'});
   await page.locator('#tab-route').click();
