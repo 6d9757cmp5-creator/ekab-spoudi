@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102e42">
+<title>MENTOR | PROTOCOL LAB & DEBRIEF · ΕΚΑΒ Σπουδή</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="mentor-protocols.css">
+<script type="module" src="mentor-protocol-suite.mjs" defer></script>
+</head>
+<body>
+<main class="shell">
+ <nav class="nav">
+  <a href="index.html">← ΕΚΑΒ Σπουδή</a>
+  <a href="protocols.html">Ελληνικά Πρωτόκολλα</a>
+  <a href="mentor-lab.html">MENTOR OS ↗</a>
+ </nav>
+ <header class="hero">
+  <span class="eyebrow">MENTOR OS · ΕΝΙΑΙΑ ΕΚΠΑΙΔΕΥΤΙΚΗ ΔΙΑΔΡΟΜΗ</span>
+  <h1 id="suite-title">MENTOR | PROTOCOL LAB</h1>
+  <p id="suite-subtitle">Μάθε, επίλεξε, αιτιολόγησε και ανασκόπησε τις αποφάσεις σου. Ο ίδιος MENTOR συνδέεται με όλες τις ενότητες.</p>
+  <nav class="segment" aria-label="Εναλλαγή εργαστηρίου και ανασκόπησης">
+   <a id="suite-lab-link" aria-current="page" href="?view=lab">PROTOCOL LAB</a>
+   <a id="suite-debrief-link" href="?view=debrief">MENTOR DEBRIEF</a>
+  </nav>
+ </header>
+ <aside class="note" role="note">
+  <strong>Δοκιμαστικό εκπαιδευτικό εργαστήριο — όχι κλινική προσομοίωση πιστοποιημένη για πράξη</strong>
+  <p>Οι πρωτότυπες εκπαιδευτικές ασκήσεις διαφέρουν ανά περιστατικό και ανά επίπεδο μαθητή. Ελέγχουν τεκμηρίωση, επικοινωνία, ασφάλεια και όρια ρόλου. Δεν υπολογίζουν διάγνωση, θεραπεία, φαρμακευτική δόση ή έκβαση ασθενούς. Τα θεματικά περιστατικά είναι συνθετικά και τα ειδικά κλινικά βήματα απαιτούν ανεξάρτητη επιστημονική έγκριση.</p>
+ </aside>
+ <section class="panel">
+  <h2 id="suite-topic">Εκπαιδευτικό θέμα</h2>
+  <p id="suite-context" class="muted"></p>
+  <div class="actions">
+   <a id="suite-mentor-link" class="btn soft" href="mentor-lab.html">Συζήτησε με τον MENTOR</a>
+   <a id="suite-source-link" class="btn alt" target="_blank" rel="noopener noreferrer" href="https://www.ekab.gr/ekpedefsi/iek-ekav/">Οδηγοί ΣΑΕΚ ΕΚΑΒ ↗</a>
+   <a class="btn soft" href="mentor-scenarios.html">Άτλας σεναρίων ↗</a>
+  </div>
+ </section>
+ <div class="lab-layout">
+  <section class="panel" id="lab-screen" aria-labelledby="lab-header">
+   <div class="step" id="lab-stage">Στάδιο 1 / 4</div>
+   <h2 id="lab-header">MENTOR | PROTOCOL LAB</h2>
+   <p id="lab-role-note" class="small muted" aria-live="polite"></p>
+   <p id="lab-prompt">Επιλογή εκπαιδευτικής διαδρομής…</p>
+   <div class="progress-line" aria-hidden="true"><span id="lab-progress" style="width:0"></span></div>
+   <div class="actions" id="lab-settings">
+    <label for="lab-role" class="small"><b>Επίπεδο μαθητή:</b></label>
+    <select id="lab-role" aria-label="Εκπαιδευτικός ρόλος"><option value="firstaid">Πρώτες βοήθειες</option><option value="responder">Διασώστης / πλήρωμα ασθενοφόρου</option><option value="doctor">Ιατρός προνοσοκομειακής</option></select>
+    <label for="lab-mode" class="small"><b>Τρόπος:</b></label>
+    <select id="lab-mode" aria-label="Τρόπος μελέτης"><option value="guided">Με καθοδήγηση</option><option value="assessment">Αυτοαξιολόγηση</option></select>
+   </div>
+   <div id="lab-choices" class="choices" aria-label="Επιλογές εκπαιδευτικής απόφασης"></div>
+   <div id="lab-feedback" class="feedback" aria-live="polite" hidden></div>
+   <div class="actions">
+    <button type="button" class="btn" id="lab-next" hidden>Συνέχεια →</button>
+    <button type="button" class="btn alt" id="lab-restart">Νέα εκπαιδευτική προσπάθεια</button>
+   </div>
+   <p id="lab-storage" class="small muted" aria-live="polite"></p>
+   <details id="interview-panel" class="mentor-interview">
+     <summary>🎙 Εικονική συνομιλία — εξάσκηση επικοινωνίας με συνθετικό περιστατικό</summary>
+     <p class="small muted">Προαιρετική προσομοίωση ερωτήσεων και αναφορών από τον ίδιο MENTOR. Δεν αποτελεί πραγματικό ιατρικό ιστορικό, διάγνωση, αναγνώριση φωνής ή AI συνομιλία.</p>
+     <div id="mentor-interview-root">
+       <p class="step" id="interview-stage"></p>
+       <p id="interview-prompt"></p>
+       <div class="choices" id="interview-choices"></div>
+       <p class="small muted" id="interview-result" role="status" aria-live="polite"></p>
+       <details><summary>Ιστορικό εκπαιδευτικής επικοινωνίας</summary><ol class="history" id="interview-history"></ol></details>
+       <button type="button" class="btn alt" id="interview-reset">Ξεκίνα ξανά τη συνομιλία</button>
+     </div>
+   </details>
+  </section>
+  <section class="panel" id="debrief-screen" hidden aria-labelledby="debrief-header">
+   <h2 id="debrief-header">MENTOR DEBRIEF</h2>
+   <p class="muted">Ανασκόπηση της τελευταίας τοπικά αποθηκευμένης προσπάθειας για αυτό το θέμα και τον επιλεγμένο εκπαιδευτικό ρόλο.</p>
+   <div class="summary" id="debrief-summary"></div>
+   <h3 style="margin-top:20px">Ιστορικό αποφάσεων</h3>
+   <ol class="history" id="debrief-history"></ol>
+   <h3>Ανασκόπηση συνθετικής συνομιλίας</h3>
+   <ol class="history" id="debrief-interview-history"></ol>
+   <p class="feedback" id="debrief-advice" role="status"></p>
+   <div class="actions">
+    <a class="btn" id="debrief-repeat" href="?view=lab">Επανάληψη με τον MENTOR</a>
+    <a class="btn alt" id="debrief-other" href="protocols.html">Άλλο εκπαιδευτικό θέμα</a>
+    <button type="button" class="btn soft" id="debrief-export" disabled>↓ Εξαγωγή εκπαιδευτικής ανασκόπησης (.txt)</button>
+   </div>
+   <p id="debrief-export-status" class="small muted" role="status" aria-live="polite">Το αρχείο περιέχει μόνο συνθετικές εκπαιδευτικές αποφάσεις, όχι στοιχεία πραγματικού ασθενούς.</p>
+  </section>
+  <aside class="panel" aria-label="MENTOR">
+   <h2>Ο MENTOR δίπλα σου</h2>
+   <div class="mentor-mini">
+    <iframe src="mentor-presence.html" title="Η τρισδιάστατη μορφή του υπάρχοντος MENTOR" loading="lazy"></iframe>
+    <p>Η μορφή είναι η ίδια με τον MENTOR OS. Η υποστήριξη φωνής εξαρτάται από τη συσκευή.</p>
+   </div>
+   <p id="mentor-comment" aria-live="polite">Επίλεξε μία εκπαιδευτική ενέργεια. Στο τέλος θα δούμε μαζί τις αποφάσεις σου.</p>
+   <div class="actions">
+    <button type="button" class="btn alt" id="mentor-speak">🔊 Άκουσε το σχόλιο</button>
+    <button type="button" class="btn soft" id="mentor-stop">■ Σταμάτα</button>
+   </div>
+   <p class="small muted" id="mentor-voice-status" aria-live="polite">Η φωνητική ανάγνωση ξεκινά μόνο κατόπιν επιλογής σου.</p>
+  </aside>
+ </div>
+ <footer class="footer">Προσωπικές δοκιμαστικές καταγραφές ανά θέμα, μόνο σε αυτή τη συσκευή. Δεν επηρεάζονται οι βαθμολογίες και η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ.</footer>
+</main>
+</body></html>

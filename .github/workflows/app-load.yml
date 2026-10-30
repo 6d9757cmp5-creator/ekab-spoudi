@@ -21,6 +21,20 @@ jobs:
           node --test scripts/test-mentor-voice.mjs
           node --check mentor/core/quick-answer.mjs
           node --check mentor-home.js
+          node --check saek-course-series.js
+          node --check scripts/app-load-smoke.mjs
+          node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
+          node --check protocols-data.mjs
+          node --check protocols-page.mjs
+          node --check mentor-scenario-paths.mjs
+          node --check mentor-debrief-export.mjs
+          node --check mentor-patient-interview.mjs
+          node --check mentor-protocol-suite.mjs
+          node --check mentor-study-bridge.mjs
+          node --check mentor-study-context.mjs
+          node --test scripts/test-mentor-protocols.mjs
+          node --test scripts/test-mentor-debrief-export.mjs
+          node --test scripts/test-mentor-patient-interview.mjs
           node --test scripts/test-mentor-quick-answer.mjs
           node --check mentor/presence/presence.mjs
           node --test mentor/presence/presence-state.test.mjs mentor/presence/memory-navigate.test.mjs mentor/context/bridge.test.mjs mentor/knowledge/retrieve.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/worker.test.mjs mentor/presence/mouth-expression.test.mjs mentor/core/live-sim.test.mjs mentor/core/ecg-practice.test.mjs mentor/context/anatomy-announce.test.mjs
