@@ -8,3 +8,7 @@
 4. `esbuild mentor/candidates/female03/candidate.mjs --bundle --format=esm --minify --outfile=mentor/candidates/female03/candidate.bundle.mjs`
 
 Δεν εκτελέστηκαν εξωτερικά εκτελέσιμα (το FBX2glTF δεν χρησιμοποιήθηκε).
+
+Έμβλημα: 
+ode export.mjs out.glb 1024 2048 1024 neutral (προεπιλογή) βάζει το έμβλημα της εφαρμογής στις θέσεις (592,497) και (872,468) της υφής σώματος 1024×1024· 
+one αφήνει τα αρχικά σήματα.

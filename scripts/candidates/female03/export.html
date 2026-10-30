@@ -41,9 +41,22 @@ window.build=async(opts)=>{
  // textures
  const [bodyC,bodyN,headC,headN,opac]=await Promise.all(["f154_body_color_blue.tga","f154_body_normal.tga","f154_head_color.tga","f154_head_normal.tga","f154_opacity_color.tga"].map(loadTex));
  const mk=(tex,size,srgb,mime,alpha)=>{const t=new THREE.CanvasTexture(toCanvas(tex,size,{alpha}));t.flipY=false;t.colorSpace=srgb?THREE.SRGBColorSpace:THREE.NoColorSpace;t.userData.mimeType=mime;return t;};
- const flip=opts.flip;
+ const mkc=(canvas,srgb,mime)=>{const t=new THREE.CanvasTexture(canvas);t.flipY=false;t.colorSpace=srgb?THREE.SRGBColorSpace:THREE.NoColorSpace;t.userData.mimeType=mime;return t;};
+ // Chest and sleeve patches (positions measured on the 1024 px body texture): cover the old star badge with the surrounding jacket colour, then draw the app emblem.
+ const patchBody=cv=>{
+  if(opts.emblem==="none")return cv;
+  const k=cv.width/1024,ctx=cv.getContext("2d");ctx.setTransform(1,0,0,1,0,0);
+  for(const [cx,cy] of [[592,497],[872,468]]){
+   const x=cx*k,y=cy*k,r=31*k,px=ctx.getImageData(Math.round(x+r+10*k),Math.round(y),1,1).data;
+   ctx.fillStyle=`rgb(${px[0]},${px[1]},${px[2]})`;ctx.beginPath();ctx.arc(x,y,r+3*k,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle="#14384d";ctx.beginPath();ctx.arc(x,y,r-2*k,0,Math.PI*2);ctx.fill();
+   ctx.strokeStyle="#e8eef2";ctx.lineWidth=2.5*k;ctx.stroke();
+   ctx.fillStyle="#fff";const a=14*k,b=5*k;ctx.fillRect(x-b,y-a,2*b,2*a);ctx.fillRect(x-a,y-b,2*a,2*b);
+  }
+  return cv;
+ };
  const mats=[
-  new THREE.MeshStandardMaterial({name:"body",map:mk(bodyC,opts.body,true,"image/jpeg"),normalMap:mk(bodyN,opts.body,false,"image/jpeg"),roughness:.72,metalness:0}),
+  new THREE.MeshStandardMaterial({name:"body",map:mkc(patchBody(toCanvas(bodyC,opts.body)),true,"image/jpeg"),normalMap:mk(bodyN,opts.body,false,"image/jpeg"),roughness:.72,metalness:0}),
   new THREE.MeshStandardMaterial({name:"head",map:mk(headC,opts.head,true,"image/jpeg"),normalMap:mk(headN,opts.headNormal,false,"image/jpeg"),roughness:.55,metalness:0}),
   new THREE.MeshStandardMaterial({name:"hair_lashes",map:mk(opac,opts.body,true,"image/png",true),alphaTest:.4,transparent:false,side:THREE.DoubleSide,roughness:.8,metalness:0})
  ];
