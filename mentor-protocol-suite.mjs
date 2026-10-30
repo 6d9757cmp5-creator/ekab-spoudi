@@ -5,6 +5,7 @@
 import {getTopic} from './protocols-data.mjs';
 import {createStages,roleFor} from './mentor-scenario-paths.mjs';
 import {speakGreek,stopGreek} from './mentor-voice.mjs';
+import {downloadDebriefReport} from './mentor-debrief-export.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const topic=getTopic(params.get('topic'));
@@ -86,6 +87,7 @@ function choose(choiceId){
  $('lab-next').hidden=false;
 }
 function renderDebrief(){
+ $('debrief-export').disabled=!session.answers.length;
  const summary=$('debrief-summary'),history=$('debrief-history');summary.replaceChildren();history.replaceChildren();
  if(!session.answers.length){
   const p=document.createElement('p');p.textContent='Δεν έχεις ακόμη καταχωρισμένη προσπάθεια για αυτό το θέμα. Μπορείς να ξεκινήσεις από το PROTOCOL LAB.';history.append(p);
@@ -129,6 +131,14 @@ $('lab-next').addEventListener('click',()=>{if(session.completed)location.href=h
 $('lab-restart').addEventListener('click',()=>{
  if(session.answers.length&&!confirm('Να ξεκινήσεις ξανά; Θα αντικατασταθεί μόνο η τοπική δοκιμή αυτού του θέματος MENTOR.'))return;
  const mode=session.mode;session=emptySession();session.mode=mode;save();showLab();
+});
+$('debrief-export').addEventListener('click',()=>{
+ try{
+  const filename=downloadDebriefReport({topic,role:roleFor(role),session,stages});
+  $('debrief-export-status').textContent='Δημιουργήθηκε στη συσκευή σου το αρχείο '+filename+'. Δεν περιλαμβάνει δεδομένα ασθενών.';
+ }catch{
+  $('debrief-export-status').textContent='Δεν υπάρχουν έγκυρες εκπαιδευτικές επιλογές για εξαγωγή.';
+ }
 });
 $('mentor-speak').addEventListener('click',()=>{
  const text=$('mentor-comment').textContent;
