@@ -28,6 +28,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .topic p{margin:0;color:var(--muted);font-size:.86rem}
 .tag{display:inline-block;font-size:.72rem;font-weight:800;color:#8a6019;background:var(--warn);border-radius:999px;padding:3px 9px;align-self:flex-start}
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.actions select{min-height:44px;max-width:100%;min-width:0;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-align:center;min-height:44px;padding:9px 13px;background:var(--brand);border:1px solid var(--brand);border-radius:10px;color:#fff;text-decoration:none;font-size:.87rem;font-weight:800;cursor:pointer}
 .btn.alt{background:var(--panel);color:var(--brand)}.btn.soft{background:var(--soft);color:var(--ink);border-color:var(--line)}
 .sources{display:grid;gap:9px}.sources a{overflow-wrap:anywhere}
