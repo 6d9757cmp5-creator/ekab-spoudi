@@ -46,6 +46,25 @@
     requestAnimationFrame(()=>target.scrollIntoView({behavior:'smooth',block:'start'}));
   }
   parts.forEach((part,i)=>{
+    // Contextual link next to the matching written chapter; no duplicated video uploads.
+    const chapter=document.getElementById('lesson-'+part.chapter);
+    if(chapter&&!chapter.querySelector('[data-saek-video-source]')&&!chapter.querySelector('.saek-lesson-video')){
+      const resource=document.createElement('p');
+      resource.dataset.saekVideoSource='1';
+      resource.style.cssText='margin:14px 0;padding:12px;border:1px solid var(--line,#d3e1e7);border-radius:11px;background:var(--light,#edf4f7);line-height:1.55';
+      const label=document.createElement('strong');
+      label.textContent='🎬 Βίντεο για το κεφάλαιο '+part.chapter+': ';
+      const link=document.createElement('a');
+      link.href=part.url;
+      link.target='_blank';
+      link.rel='noopener noreferrer';
+      link.textContent=part.title;
+      const note=document.createElement('small');
+      note.style.display='block';
+      note.textContent='Εξωτερική εκπαιδευτική πηγή· δεν υποκαθιστά την επίσημη ύλη ή την κλινική επαλήθευση.';
+      resource.append(label,link,note);
+      chapter.append(resource);
+    }
     const slide=document.createElement('article');
     slide.className='saek-series-slide';
     slide.setAttribute('aria-label','Μέρος '+(i+1)+': '+part.title);
