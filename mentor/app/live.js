@@ -52,6 +52,8 @@ function render(){
    create('p',event.feedback));
   return li;
  }));
+ // Tell the floating MENTOR which step is open (title only, never the choices or feedback).
+ window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:CASE.id,label:snapshot.completed?'Ανασκόπηση αποστολής: '+CASE.title:CASE.title+' — '+STAGES[snapshot.stage].title}}));
  if(!snapshot.timeline.length)$('live-timeline').append(create('li','Καμία απόφαση ακόμη. Ξεκίνα από την εκτίμηση σκηνής.'));
 }
 function selectChoice(choice){
@@ -83,4 +85,6 @@ $('live-reset').addEventListener('click',()=>{
  render();
 });
 render();
+// The floating MENTOR module loads after this one: announce the open step again once everything is ready.
+window.addEventListener('load',render);
 $('live-storage').textContent=state.events.length?'Φορτώθηκε η προηγούμενη δοκιμή αυτής της αποστολής.':'Η αποστολή είναι έτοιμη. Μόνο η νέα τοπική μνήμη Mentor θα αλλάξει.';

@@ -1,5 +1,5 @@
 // Accessibility (axe-core) and rough performance audit of the MENTOR Live Companion.
-// Usage: AXE_PATH=<axe.min.js> PLAYWRIGHT_MODULE=<...> BROWSER_CHANNEL=msedge node scripts/audit-mentor-presence.mjs [out.json]
+// Usage: AXE_PATH=<axe.min.js> PLAYWRIGHT_MODULE=<...> BROWSER_CHANNEL=msedge node scripts/audit-mentor-presence.mjs [out.json]   (GPU=hardware uses the real GPU; default is software WebGL)
 // Software WebGL (SwiftShader) is used when no GPU exists, so FPS numbers are a LOWER BOUND, not device results.
 import {createServer} from 'node:http';
 import {readFile,writeFile} from 'node:fs/promises';
@@ -13,8 +13,8 @@ const types={'.html':'text/html; charset=utf-8','.js':'text/javascript','.mjs':'
 const server=createServer(async(req,res)=>{try{const p=decodeURIComponent(new URL(req.url,'http://x').pathname);const b=await readFile(normalize(join(root,p)));res.writeHead(200,{'content-type':types[extname(p)]||'application/octet-stream'});res.end(b);}catch{if(!res.headersSent)res.writeHead(404);res.end();}}).listen(0,'127.0.0.1');
 await new Promise(r=>server.once('listening',r));
 const base='http://127.0.0.1:'+server.address().port;
-const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||undefined,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist','--enable-precise-memory-info']});
-const report={generated:new Date().toISOString(),note:'SwiftShader software rendering; numbers are not representative of real devices.',devices:{}};
+const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||undefined,args:process.env.GPU==='hardware'?['--ignore-gpu-blocklist','--enable-gpu-rasterization','--enable-precise-memory-info']:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist','--enable-precise-memory-info']});
+const report={generated:new Date().toISOString(),commit:(await import('node:child_process')).execSync('git rev-parse --short HEAD').toString().trim(),gpuMode:process.env.GPU==='hardware'?'hardware':'software',note:process.env.GPU==='hardware'?'Real GPU of the test PC (desktop-class Edge). Not a phone: mobile numbers use an emulated viewport only.':'SwiftShader software rendering; numbers are not representative of real devices.',devices:{}};
 
 for(const [name,w,h,mobile] of [['desktop',1440,900,false],['mobile',390,844,true]]){
  const ctx=await browser.newContext({viewport:{width:w,height:h},isMobile:mobile,hasTouch:mobile,serviceWorkers:'block'});

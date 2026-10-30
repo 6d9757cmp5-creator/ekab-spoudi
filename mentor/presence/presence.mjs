@@ -292,6 +292,7 @@ function boot(){
    for(const s of t.sources||[]){
     row.append(s.url?el("a",{class:"emp-link",href:s.url,target:"_blank",rel:"noopener noreferrer",text:"Πηγή: "+s.term}):el("span",{class:"emp-src",text:"Βιβλιοθήκη: "+s.term}));
    }
+   if(t.role==="mentor"&&(t.sources||[]).length)row.append(el("small",{class:"emp-prov",text:"Εκπαιδευτικός ορισμός από γενική πηγή· χωρίς κλινική επιμέλεια. Δεν αποτελεί ιατρική οδηγία ή επίσημο πρωτόκολλο."}));
    return row;
   }));
   logEl.scrollTop=logEl.scrollHeight;
