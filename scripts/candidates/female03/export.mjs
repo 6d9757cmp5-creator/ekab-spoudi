@@ -4,7 +4,7 @@ import {extname,join,normalize} from 'node:path';
 const {chromium}=await import('file:///C:/Users/Ppdks/ekab-tools/node_modules/playwright/index.mjs');
 const tools='C:/Users/Ppdks/ekab-tools',av='C:/Users/Ppdks/ekab-avatar-candidates/rocketbox/Assets/Avatars/Professions/Medical_Female_03';
 const out=process.argv[2];
-const opts={body:+process.argv[3]||1024,head:+process.argv[4]||2048,headNormal:+process.argv[5]||1024,emblem:process.argv[6]||"neutral"};
+const opts={body:+process.argv[3]||1024,head:+process.argv[4]||2048,headNormal:+process.argv[5]||1024,emblem:process.argv[6]||"neutral",outfit:process.argv[7]||"jacket"};
 const server=createServer(async(q,s)=>{try{const p=decodeURIComponent(new URL(q.url,'http://x').pathname);
  const file=p.startsWith('/avatar/')?join(av,p.slice(8)):p==='/'?join(tools,'conv/export.html'):join(tools,p);
  const b=await readFile(normalize(file));s.writeHead(200,{'content-type':extname(file)==='.html'?'text/html':extname(file)==='.js'||extname(file)==='.mjs'?'text/javascript':'application/octet-stream'});s.end(b);}catch{if(!s.headersSent)s.writeHead(404);s.end();}}).listen(0,'127.0.0.1');
