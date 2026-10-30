@@ -26,7 +26,7 @@ test('higher rate produces more repeating illustrated cycles, without diagnosis'
 
 test('no clinical interpretation, external APIs, voice capture, grading or legacy writes',async()=>{
  const {readFile}=await import('node:fs/promises');
- const js=await readFile(new URL('../../mentor-ecg.js',import.meta.url),'utf8');
+ const js=await readFile(new URL('../app/ecg.js',import.meta.url),'utf8');
  const html=await readFile(new URL('../../mentor-ecg.html',import.meta.url),'utf8');
  const mentor=await readFile(new URL('../../mentor-lab.html',import.meta.url),'utf8');
  assert.ok(mentor.includes('href="mentor-ecg.html"'));

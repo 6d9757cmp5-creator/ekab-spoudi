@@ -25,7 +25,7 @@
 - Dependencies στο repo: καμία. Εργαλεία εκτός repo: Playwright 1.56.1, axe-core 4.10.2, @gltf-transform 4.5.1 (στο `C:\Users\Ppdks\ekab-tools`).
 
 ## D. Platform-Wide Mentor (P1) + Context (P5)
-- **Παρουσία:** drag (ποντίκι/αφή/βέλη), resize, καρφίτσωμα σε 4 γωνίες, προσάρτηση (πάνελ/bottom sheet), ελαχιστοποίηση, απόκρυψη, επαναφορά (`Alt+Shift+M` ή `window.EkabMentorPresence`). Προτιμήσεις `ekab.mentor.presence.v1` χωριστά desktop/κινητό (όριο 720 px). Προεπιλογή: ελαχιστοποιημένο, κάτω αριστερά (το κάτω δεξιά το πιάνει το κουμπί σημειώσεων). Το 3D φορτώνει μόνο όταν ανοίξει και αποδεσμεύεται όταν κλείσει.
+- **Παρουσία:** drag (ποντίκι/αφή/βέλη), resize, καρφίτσωμα σε 4 γωνίες, προσάρτηση (πάνελ/bottom sheet), ελαχιστοποίηση, απόκρυψη, επαναφορά (`Alt+Shift+M`, `window.EkabMentorPresence`, ή κουμπί «Εμφάνιση πλωτού MENTOR» στη σελίδα `mentor-lab.html`). Προτιμήσεις `ekab.mentor.presence.v1` χωριστά desktop/κινητό (όριο 720 px). Προεπιλογή: ελαχιστοποιημένο, κάτω αριστερά (το κάτω δεξιά το πιάνει το κουμπί σημειώσεων). Το 3D φορτώνει μόνο όταν ανοίξει και αποδεσμεύεται όταν κλείσει.
 - **Πλοήγηση:** νέο έγγραφο σε κάθε σελίδα· ο WebGL renderer **δεν** επιβιώνει — αποκαθίσταται η κατάσταση και το 3D ξαναφορτώνει. Η συνομιλία διατηρείται στο `sessionStorage` (μόνο η καρτέλα, διαγράφεται με κουμπί).
 - **Context Bridge:** μόνο τίτλος, πρώτη επικεφαλίδα που **δεν** είναι το όνομα της εφαρμογής, path, και ρητά επιλεγμένο κείμενο (μόνο με κλικ). Ανακοινώσεις `mentor:context` με whitelist. Ο χρήστης βλέπει και απενεργοποιεί το πλαίσιο. Σελίδες εξέτασης (`written_exam, practical_exam, exam_focus, saek-exams`) ή ανακοινωμένη ενεργή εξέταση ⇒ ο MENTOR **αρνείται** να απαντήσει.
 - **Smart navigation:** πρόταση συνδέσμου από σταθερή λίστα 16 σελίδων· ο χρήστης πατά τον σύνδεσμο· ο MENTOR δεν πλοηγεί μόνος του. Test ελέγχει ότι κάθε route υπάρχει.
@@ -53,7 +53,7 @@
 
 ## H. Test Results
 Περιβάλλον: Windows 11, Node 26.13.0, Microsoft Edge headless (`msedge`), SwiftShader WebGL. Το Playwright Chromium δεν κατέβηκε (η λήψη κόλλησε).
-- **Unit/Worker:** `node --test mentor/presence/*.test.mjs mentor/context/*.test.mjs mentor/knowledge/*.test.mjs mentor/ai/*.test.mjs workers/mentor-chat/*.test.mjs` ⇒ **52/52** (presence-state 11, memory+navigate 7, bridge 7, retrieve 7, ai client 9, worker 11).
+- **Unit/Worker:** `node --test mentor/presence/*.test.mjs mentor/context/*.test.mjs mentor/knowledge/*.test.mjs mentor/ai/*.test.mjs workers/mentor-chat/*.test.mjs` ⇒ **53/53** (presence-state 11, memory+navigate 7, bridge 8, retrieve 7, ai client 9, worker 11).
 - **Browser:** `scripts/verify-mentor-presence-browser.mjs` ⇒ **85/85** (desktop 1440×900 + κινητό 390×844 touch/CDP): drag/clamp, persistence μετά από refresh και πλοήγηση, pin/unpin, resize, minimize/hide/restore, docked, Ask, explain-selection, context on/off, ανακοινώσεις, σιωπή σε σελίδα εξέτασης, συνομιλία μεταξύ σελίδων, διαγραφή, φραγή δοσολογίας, AI-off χωρίς εξωτερικά requests, πλοήγηση ως σύνδεσμος, μικρόφωνο μόνο με πάτημα, ομιλία el-GR με σχήμα στόματος, 0 uncaught errors.
 - **Προϋπάρχοντα τεστ που περνούν:** layout 5, 3d 4, cinematic 4, voice 7, quick-answer 4 (και με το νέο GLB).
 - **Προϋπάρχουσες αποτυχίες (επιβεβαιώθηκαν με `git stash` στο καθαρό branch):** 3 στο `mentor/core/*.test.mjs` (`ecg`, `oral`, `readonly`) και 2 στο `scripts/test-mentor-source-index.mjs` — διαβάζουν παλιά root αρχεία που πλέον είναι shims. Δεν διορθώθηκαν.
@@ -75,7 +75,7 @@
 5. **P6:** κλινική επιμέλεια, εκδόσεις πηγών, RAG σε εγκεκριμένα βιβλία, αναθεώρηση risk guard.
 6. **P7:** δεν υλοποιήθηκε νέα προσομοίωση/ECG/ανατομία/adaptive/exam coach — υπάρχουν από πριν τα `mentor-live`, `mentor-ecg`, `mentor-oral`, `mentor-scenarios`, `anatomia`, adaptive· δεν συνδέθηκαν με τον MENTOR-companion πέρα από τους συνδέσμους πλοήγησης.
 7. **P8:** πραγματικό iPhone/Safari, screen reader, GPU μετρήσεις, χειροκίνητος έλεγχος αντίθεσης, user testing.
-8. Διόρθωση των 5 προϋπάρχοντων αποτυχημένων tests· απόφαση για merge στο main.
+8. Οι 5 προϋπάρχοντες αποτυχημένοι έλεγχοι (`mentor/core/*`, `scripts/test-mentor-source-index.mjs`) **διορθώθηκαν**: διάβαζαν τα μονογραμμικά root shims αντί για τα πραγματικά `mentor/app/*.js`· τώρα `node --test mentor/core scripts/test-mentor-source-index.mjs` ⇒ 45/45. Εκκρεμεί: απόφαση για merge στο main (μόνο μετά από τον έλεγχο του GPT).
 
 ## K. Οδηγίες για GPT-6
 - `git clone https://github.com/6d9757cmp5-creator/ekab-spoudi.git && git checkout refactor/mentor-unified-folder-20261030`
@@ -125,3 +125,9 @@
 - LAM A2E: https://huggingface.co/adolon-ai/lam-a2e
 - HeadAudio: https://github.com/kyr0/HeadAudio
 - NeuroSync: https://huggingface.co/convaitech/NEUROSYNC
+
+## M. Ενημερώσεις μετά το αρχικό handoff
+- 5039372: κουμπί επαναφοράς κρυμμένου MENTOR (mentor/presence/restore.mjs).
+- Context kind: kindOfPath (mentor/context/bridge.mjs) αναγνωρίζει μάθημα / ανατομία / σενάριο / μελέτη μόνο από τη διεύθυνση σελίδας (χωρίς ανάγνωση περιεχομένου)· εμφανίζεται στο πλαίσιο που βλέπει ο μαθητής. Δεν προστέθηκαν εκπομπές mentor:context μέσα στις ίδιες τις σελίδες. Το mentor-oral.html προστέθηκε στις σελίδες εξέτασης (σιωπή).
+- Οι 5 προϋπάρχοντες αποτυχημένοι έλεγχοι διορθώθηκαν (βλ. J.8).
+- Η λίστα σελίδων εξέτασης παραμένει **εικασία**· ζητείται έλεγχος από GPT/άνθρωπο.

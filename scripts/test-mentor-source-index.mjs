@@ -20,7 +20,7 @@ test('bibliography index contains exactly 15 metadata-only sources and 7 draft i
 });
 test('public source viewer does not modify student data or load raw books',async()=>{
  const html=await readFile(new URL('../mentor-library.html',import.meta.url),'utf8');
- const js=await readFile(new URL('../mentor-library.js',import.meta.url),'utf8');
+ const js=await readFile(new URL('../mentor/app/library.js',import.meta.url),'utf8');
  assert.match(html,/Δεν αποτελεί εγκεκριμένη κλινική βιβλιοθήκη/);
  assert.match(js,/source-index\.json/);
  assert.doesNotMatch(js,/localStorage|sessionStorage|indexedDB|innerHTML|cloud-sync|official_questions/);
@@ -51,7 +51,7 @@ test('fail closed on fake clinical approval, source duplication, unsafe text fie
 });
 test('search UI has accessible controls and no unsafe clinical or legacy writes',async()=>{
  const html=await readFile(new URL('../mentor-library.html',import.meta.url),'utf8');
- const js=await readFile(new URL('../mentor-library.js',import.meta.url),'utf8');
+ const js=await readFile(new URL('../mentor/app/library.js',import.meta.url),'utf8');
  for(const id of ['source-search','source-stage','sources-visible']) assert.ok(html.includes('id="'+id+'"'));
  assert.match(js,/filterCatalog/);
  assert.match(js,/replaceChildren/);

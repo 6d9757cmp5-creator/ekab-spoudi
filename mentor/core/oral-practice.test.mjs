@@ -18,7 +18,7 @@ test('checklist reports manual inspection only, no official or clinical grade',(
 
 test('oral page cannot silently capture voice, send data or mutate grades',async()=>{
  const {readFile}=await import('node:fs/promises');
- const js=await readFile(new URL('../../mentor-oral.js',import.meta.url),'utf8');
+ const js=await readFile(new URL('../app/oral.js',import.meta.url),'utf8');
  const html=await readFile(new URL('../../mentor-oral.html',import.meta.url),'utf8');
  const hub=await readFile(new URL('../../mentor-lab.html',import.meta.url),'utf8');
  assert.ok(html.includes('δεν λειτουργεί μικρόφωνο'));
