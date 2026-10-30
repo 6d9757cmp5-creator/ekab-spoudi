@@ -41,7 +41,7 @@ try {
     const protocolPage=await page.goto('http://127.0.0.1:8765/protocols.html',{waitUntil:'load',timeout:30000});
     if(!protocolPage?.ok())throw Error(device+': protocols page did not load');
     await page.waitForFunction(()=>document.querySelectorAll('#protocol-list .topic').length>=10);
-    if(!await page.getByRole('link',{name:'Ελληνικά Πρωτόκολλα'}).count())throw Error(device+': missing protocols navigation');
+    if(!await page.getByRole('heading',{name:'Ελληνικά Πρωτόκολλα'}).count())throw Error(device+': missing protocols navigation');
     await page.locator('#protocol-list .topic .btn').first().click();
     if(!page.url().includes('mentor-protocol-suite.html'))throw Error(device+': lab link failed');
     await page.locator('#lab-choices .choice').first().click();
