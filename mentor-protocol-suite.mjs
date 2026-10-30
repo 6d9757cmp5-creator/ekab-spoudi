@@ -6,6 +6,7 @@ import {getTopic} from './protocols-data.mjs';
 import {createStages,roleFor} from './mentor-scenario-paths.mjs';
 import {speakGreek,stopGreek} from './mentor-voice.mjs';
 import {downloadDebriefReport} from './mentor-debrief-export.mjs';
+import {mountInterview} from './mentor-patient-interview.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const topic=getTopic(params.get('topic'));
@@ -147,4 +148,7 @@ $('mentor-speak').addEventListener('click',()=>{
 });
 $('mentor-stop').addEventListener('click',()=>{stopGreek(window);$('mentor-voice-status').textContent='Η ομιλία σταμάτησε.';});
 window.addEventListener('pagehide',()=>stopGreek(window));
-if(view==='lab')showLab();else renderDebrief();
+if(view==='lab'){
+ showLab();
+ mountInterview(document.getElementById('mentor-interview-root'),{topic,role});
+}else renderDebrief();
