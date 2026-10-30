@@ -29,3 +29,11 @@ test('empty or corrupted attempts are not exported',()=>{
  assert.throws(()=>buildDebriefReport({topic,role:roleFor('firstaid'),session:{answers:[]},stages}),/empty-study-report/);
  assert.throws(()=>buildDebriefReport({topic,role:roleFor('firstaid'),session:{answers:[{stage:0,choice:'fake'}]},stages}),/empty-study-report/);
 });
+
+test('single Mentor debrief includes scripted conversation, even without other lab attempts',()=>{
+ const interviewTurns=[{stage:0,ok:true,reply:'Συνθετικός συνομιλητής: ενημερώθηκε η ομάδα.',feedback:'Εκπαιδευτική παρατήρηση χωρίς κλινική θεραπεία.'}];
+ const report=buildDebriefReport({topic,role:roleFor('firstaid'),session:{answers:[],completed:false},stages,interviewTurns});
+ assert.match(report,/ΣΥΝΘΕΤΙΚΗ ΕΚΠΑΙΔΕΥΤΙΚΗ ΣΥΝΟΜΙΛΙΑ/);
+ assert.match(report,/Συνθετικός συνομιλητής/);
+ assert.match(report,/δεν είναι επίσημο πρωτόκολλο ΕΚΑΒ/);
+});
