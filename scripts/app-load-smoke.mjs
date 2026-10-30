@@ -46,9 +46,17 @@ try {
     if(!page.url().includes('mentor-protocol-suite.html'))throw Error(device+': lab link failed');
     await page.locator('#lab-choices .choice').first().click();
     if(!await page.locator('#lab-feedback').isVisible())throw Error(device+': lab did not capture a decision');
+    await page.locator('#interview-panel > summary').click();
+    await page.locator('#interview-choices button.choice').first().click();
+    if(!await page.locator('#interview-history li').count())throw Error(device+': educational interview has no turn');
     await page.locator('#suite-debrief-link').click();
     await page.waitForFunction(()=>document.querySelectorAll('#debrief-history li').length>0,null,{timeout:10000});
     if(!await page.locator('#debrief-history li').count())throw Error(device+': debrief missing decision history');
+    if(!await page.locator('#debrief-interview-history li').count())throw Error(device+': unified debrief missing interview');
+    if(await page.locator('#debrief-export').isDisabled())throw Error(device+': debrief download is disabled');
+    const [reportDownload]=await Promise.all([page.waitForEvent('download',{timeout:10000}),page.locator('#debrief-export').click()]);
+    if(!reportDownload.suggestedFilename().endsWith('.txt'))throw Error(device+': invalid debrief report filename');
+    console.log('PASS '+device+': MIT report export and scripted role-based patient interview');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+4);
     if(overflow)throw Error(device+': protocol lab overflows viewport width');
     console.log('PASS '+device+': Greek protocols, contextual LAB and DEBRIEF');
