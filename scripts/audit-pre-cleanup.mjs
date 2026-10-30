@@ -33,13 +33,13 @@ const testCases=[
   ['MENTOR debrief export','scripts/test-mentor-debrief-export.mjs'],
   ['MENTOR patient interview','scripts/test-mentor-patient-interview.mjs'],
   ['MENTOR roadmap','scripts/verify-mentor-roadmap.test.mjs'],
+  ['Home progress panel','scripts/verify-progress-panel.cjs'],
+  ['Release manifest','scripts/release_smoke.py','python3'],
 ];
 const legacy=[
   ['Old home/Mentor snapshot','scripts/verify-home-mentor-aed.mjs'],
   ['Old procedural 3D snapshot','scripts/test-mentor-3d.mjs'],
-  ['Old cinematic snapshot','scripts/test-mentor-cinematic.mjs'],
-  ['Old progress layout snapshot','scripts/verify-progress-panel.cjs'],
-  ['Old release manifest','scripts/release_smoke.py','python3']
+  ['Old cinematic snapshot','scripts/test-mentor-cinematic.mjs']
 ];
 const logs=[], errors=[];
 function run(cmd,args,label,category){
@@ -70,7 +70,7 @@ for(const file of jsons){try{JSON.parse(readFileSync(file,'utf8'));}catch(e){con
 logs.push({label:'All JavaScript syntax',category:'required',ok:syntaxFailure===0,files:scripts.length,failures:syntaxFailure});
 logs.push({label:'All JSON parses',category:'required',ok:jsonFailure===0,files:jsons.length,failures:jsonFailure});
 if(syntaxFailure)errors.push('JavaScript syntax');if(jsonFailure)errors.push('JSON');
-for(const [name,path,flag] of testCases)run('node',[...(flag?[flag]:[]),path],name,'required');
+for(const [name,path,flag] of testCases)run(flag==='python3'?'python3':'node',flag==='python3'?[path]:[...(flag?[flag]:[]),path],name,'required');
 for(const [name,path,command] of legacy)run(command||'node',[path],name,'legacy-review');
 mkdirSync('audit-results',{recursive:true});
 writeFileSync('audit-results/pre-cleanup-tests.json',JSON.stringify({timestamp:new Date().toISOString(),scripts:scripts.length,jsonFiles:jsons.length,results:logs,requiredFailures:errors},null,2));

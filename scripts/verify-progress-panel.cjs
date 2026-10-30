@@ -8,7 +8,7 @@ const html=read('index.html'),css=read('home-progress-panel.css');
 assert.match(html,/home-progress-panel\.js/);
 assert.match(html,/home-progress-panel\.css/);
 const cardsStart=html.indexOf('<section class="home-tiles"');
-const cardsEnd=html.indexOf('</section>\n<div class="home-bottom-row"',cardsStart);
+const cardsEnd=html.indexOf('<div class="home-bottom-row"',cardsStart);
 const progressStart=html.indexOf('<div class="home-mini-progress progress-dashboard"');
 const footerNote=html.indexOf('<p class="home-app-note">');
 const resumeStart=html.indexOf('<section id="studyResume"',progressStart);
