@@ -6,7 +6,7 @@ import {getTopic} from './protocols-data.mjs';
 import {createStages,roleFor} from './mentor-scenario-paths.mjs';
 import {speakGreek,stopGreek} from './mentor-voice.mjs';
 import {downloadDebriefReport} from './mentor-debrief-export.mjs';
-import {mountInterview} from './mentor-patient-interview.mjs';
+import {mountInterview,restoreInterview} from './mentor-patient-interview.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const topic=getTopic(params.get('topic'));
@@ -87,8 +87,26 @@ function choose(choiceId){
  $('lab-next').textContent=session.completed?'Δες το MENTOR DEBRIEF':'Επόμενο εκπαιδευτικό βήμα →';
  $('lab-next').hidden=false;
 }
+function readStoredInterview(){
+ try{
+  const key='ekab:mentor:interview:v1:'+topic.id+':'+role;
+  return restoreInterview(JSON.parse(localStorage.getItem(key)||'null'),topic,role);
+ }catch{return restoreInterview(null,topic,role);}
+}
+function renderInterviewReview(interview){
+ const list=$('debrief-interview-history');list.replaceChildren();
+ if(!interview.turns.length){const li=document.createElement('li');li.textContent='Δεν έχει καταγραφεί συνθετική συνομιλία για αυτό το επίπεδο μαθητή.';list.append(li);return;}
+ for(const turn of interview.turns){
+  const li=document.createElement('li'),heading=document.createElement('strong'),body=document.createElement('p');
+  heading.textContent=(turn.stage+1)+'. '+(turn.ok?'Εκπαιδευτικός στόχος':'Για επανάληψη');
+  body.textContent=turn.reply+' '+turn.feedback;
+  li.append(heading,body);list.append(li);
+ }
+}
 function renderDebrief(){
- $('debrief-export').disabled=!session.answers.length;
+ const interview=readStoredInterview();
+ renderInterviewReview(interview);
+ $('debrief-export').disabled=!(session.answers.length||interview.turns.length);
  const summary=$('debrief-summary'),history=$('debrief-history');summary.replaceChildren();history.replaceChildren();
  if(!session.answers.length){
   const p=document.createElement('p');p.textContent='Δεν έχεις ακόμη καταχωρισμένη προσπάθεια για αυτό το θέμα. Μπορείς να ξεκινήσεις από το PROTOCOL LAB.';history.append(p);
@@ -135,7 +153,7 @@ $('lab-restart').addEventListener('click',()=>{
 });
 $('debrief-export').addEventListener('click',()=>{
  try{
-  const filename=downloadDebriefReport({topic,role:roleFor(role),session,stages});
+  const filename=downloadDebriefReport({topic,role:roleFor(role),session,stages,interviewTurns:readStoredInterview().turns});
   $('debrief-export-status').textContent='Δημιουργήθηκε στη συσκευή σου το αρχείο '+filename+'. Δεν περιλαμβάνει δεδομένα ασθενών.';
  }catch{
   $('debrief-export-status').textContent='Δεν υπάρχουν έγκυρες εκπαιδευτικές επιλογές για εξαγωγή.';
