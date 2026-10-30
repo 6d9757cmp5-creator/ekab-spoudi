@@ -26,6 +26,7 @@ jobs:
           node --check mentor-protocol-suite.mjs
           node --check mentor-study-bridge.mjs
           node --check mentor-study-context.mjs
+          node --test scripts/test-mentor-protocols.mjs
           node --test scripts/test-mentor-quick-answer.mjs
       - run: npm install --no-save --no-package-lock playwright@1.56.1
       - run: npx playwright install --with-deps chromium
