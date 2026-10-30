@@ -3,39 +3,21 @@
  * No backend, AI chat, diagnosis, treatment, or changes to SAEK/EOPPEP marks.
  */
 import {getTopic} from './protocols-data.mjs';
+import {createStages,roleFor} from './mentor-scenario-paths.mjs';
 import {speakGreek,stopGreek} from './mentor-voice.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const topic=getTopic(params.get('topic'));
 const view=params.get('view')==='debrief'?'debrief':'lab';
-const storeKey='ekab:mentor:protocol-foundation:v1:'+topic.id;
-const stages=[
- {title:'Πηγή και εγκυρότητα',prompt:'Πριν από τη μελέτη του θέματος, τι χρειάζεται να εξακριβώσεις;',dimension:'Τεκμηρίωση',choices:[
-  ['source','Πρωτογενής πηγή, ισχύουσα έκδοση και φορέας έγκρισης.',true,'Σωστή πρακτική τεκμηρίωσης: η εκπαιδευτική ύλη δεν αποδεικνύει αυτόματα επιχειρησιακή έγκριση.'],
-  ['social','Μια ανάρτηση χωρίς ημερομηνία και συγγραφέα.',false,'Η ανώνυμη ανάρτηση δεν αρκεί για επίσημη κλινική τεκμηρίωση.'],
-  ['memory','Ό,τι θυμάμαι από προηγούμενο μάθημα, χωρίς επαλήθευση.',false,'Η μνήμη βοηθά τη μελέτη, αλλά όχι την επιβεβαίωση της ισχύουσας έκδοσης.']
- ]},
- {title:'Οργάνωση πληροφοριών',prompt:'Εκπαιδευτικό πλαίσιο: '+topic.scenario+'. Ποια αναφορά βοηθά περισσότερο την ομάδα;',dimension:'Επικοινωνία',choices:[
-  ['report','Σαφείς παρατηρήσεις, χρονική ακολουθία και ό,τι γνωρίζουμε ή δεν γνωρίζουμε.',true,'Η δομημένη, ακριβής παράδοση μειώνει τις παρανοήσεις. Δεν προκύπτει διάγνωση από την άσκηση.'],
-  ['guess','Μια βέβαιη διάγνωση χωρίς επαρκή δεδομένα.',false,'Δεν αποδίδουμε βεβαιότητα που δεν τεκμηριώνεται από την εκπαιδευτική αναφορά.'],
-  ['omit','Παραλείπω τις αβεβαιότητες για να τελειώσω γρήγορα.',false,'Οι αβεβαιότητες αποτελούν κρίσιμο στοιχείο διαφανούς επικοινωνίας.']
- ]},
- {title:'Όρια ρόλου και ασφάλεια',prompt:'Στο πλαίσιο της άσκησης προκύπτει ερώτηση για ιατρική ενέργεια εκτός των επαληθευμένων αρμοδιοτήτων σου. Τι κάνεις;',dimension:'Ασφάλεια',choices:[
-  ['scope','Ελέγχω αρμοδιότητα, εκπαίδευση και ισχύουσες οδηγίες· αναζητώ την αρμόδια καθοδήγηση.',true,'Ο ρόλος και οι εξουσιοδοτήσεις πρέπει να επιβεβαιώνονται πριν από οποιαδήποτε πραγματική κλινική εφαρμογή.'],
-  ['invent','Αυτοσχεδιάζω δοσολογία ή επεμβατική ενέργεια.',false,'Η εκπαιδευτική εφαρμογή δεν εγκρίνει αυτοσχεδιασμό σε φάρμακα ή επεμβατικές πράξεις.'],
-  ['copy','Αντιγράφω μη ελεγμένη διαδικασία από μια τυχαία ιστοσελίδα.',false,'Μη επαληθευμένο υλικό δεν υποκαθιστά επίσημο πρωτόκολλο και επαγγελματική εκπαίδευση.']
- ]},
- {title:'Κριτικός αναστοχασμός',prompt:'Στο τέλος της μελέτης ποια είναι η χρησιμότερη επόμενη κίνηση;',dimension:'Αναστοχασμός',choices:[
-  ['reflect','Ελέγχω όσα δεν κατάλαβα, συγκρίνω με την πηγή και επαναλαμβάνω τα δύσκολα βήματα.',true,'Η στοχευμένη επανάληψη βοηθά να εδραιώσεις την εκπαιδευτική γνώση.'],
-  ['badge','Θεωρώ τη δοκιμή πιστοποίηση κλινικής επάρκειας.',false,'Η βαθμολογία αυτής της άσκησης δεν αποτελεί πιστοποίηση ή άδεια άσκησης επαγγέλματος.'],
-  ['skip','Δεν ανατρέχω ποτέ ξανά στις πηγές επειδή ολοκλήρωσα μία δοκιμή.',false,'Οι πηγές και η εκπαίδευση χρειάζονται επανέλεγχο και επανάληψη.']
- ]}
-];
-function emptySession(){return{version:1,topic:topic.id,mode:'guided',index:0,answers:[],completed:false,updated:new Date().toISOString()};}
+// v2 attempts are independent per role; old v1 attempts remain untouched.
+const role=roleFor(params.get('role')).id;
+const storeKey='ekab:mentor:protocol-foundation:v2:'+topic.id+':'+role;
+const stages=createStages(topic,role);
+function emptySession(){return{version:2,topic:topic.id,role,mode:'guided',index:0,answers:[],completed:false,updated:new Date().toISOString()};}
 function read(){
  try{
   const obj=JSON.parse(localStorage.getItem(storeKey)||'null');
-  if(!obj||obj.version!==1||obj.topic!==topic.id||!Array.isArray(obj.answers))return emptySession();
+  if(!obj||obj.version!==2||obj.topic!==topic.id||obj.role!==role||!Array.isArray(obj.answers))return emptySession();
   const answers=obj.answers.slice(0,stages.length).filter((a,i)=>a&&a.stage===i&&stages[i].choices.some(c=>c[0]===a.choice));
   return{...emptySession(),mode:obj.mode==='assessment'?'assessment':'guided',answers,index:Math.min(stages.length,answers.length),completed:answers.length===stages.length};
  }catch{return emptySession();}
@@ -46,7 +28,7 @@ function save(){
  try{localStorage.setItem(storeKey,JSON.stringify(session));$('lab-storage').textContent='Αποθήκευση σε αυτή τη συσκευή · ξεχωριστά από ΣΑΕΚ/ΕΟΠΠΕΠ.';}
  catch{$('lab-storage').textContent='Η αποθήκευση δεν είναι διαθέσιμη στον browser. Η προσπάθεια ισχύει μόνο όσο μένει ανοιχτή η σελίδα.';}
 }
-const href=(kind)=>'mentor-protocol-suite.html?topic='+encodeURIComponent(topic.id)+'&view='+kind;
+const href=(kind)=>'mentor-protocol-suite.html?topic='+encodeURIComponent(topic.id)+'&view='+kind+'&role='+encodeURIComponent(role);
 $('suite-title').textContent=view==='lab'?'MENTOR | PROTOCOL LAB':'MENTOR DEBRIEF';
 $('suite-topic').textContent=topic.name;
 $('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.';
@@ -63,6 +45,8 @@ function showLab(){
  $('lab-stage').textContent=completed?'Ολοκληρώθηκε':'Στάδιο '+(session.index+1)+' / '+stages.length;
  $('lab-progress').style.width=Math.round(100*session.index/stages.length)+'%';
  $('lab-mode').value=session.mode;
+ $('lab-role').value=role;
+ $('lab-role-note').textContent=roleFor(role).description+' Πρόκειται για εκπαιδευτική οπτική, όχι πιστοποίηση αρμοδιοτήτων.';
  $('lab-mode').disabled=session.answers.length>0;
  $('lab-choices').replaceChildren();
  $('lab-feedback').hidden=true;
@@ -136,6 +120,10 @@ function renderDebrief(){
   $('debrief-repeat').insertAdjacentElement('afterend',button);
  }
 }
+$('lab-role').addEventListener('change',e=>{
+ const selected=roleFor(e.target.value).id;
+ if(selected!==role)location.href='mentor-protocol-suite.html?topic='+encodeURIComponent(topic.id)+'&view='+view+'&role='+encodeURIComponent(selected);
+});
 $('lab-mode').addEventListener('change',e=>{if(!session.answers.length){session.mode=e.target.value;save();showLab();}});
 $('lab-next').addEventListener('click',()=>{if(session.completed)location.href=href('debrief');else showLab();});
 $('lab-restart').addEventListener('click',()=>{
