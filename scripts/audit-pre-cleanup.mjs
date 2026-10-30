@@ -1,7 +1,7 @@
 /**
  * Pre-cleanup review — executes existing tests without mutating application state.
- * Explicit legacy tests are reported separately, never silently ignored.
- * Output: docs/audit-runtime/ci-results.json (generated artifact, not committed).
+ * Obsolete UI snapshot tests are preserved under docs/archive/legacy-tests.
+ * Output: audit-results/pre-cleanup-tests.json (CI artifact, not committed).
  * This is a technical test, not a clinical/medical certification.
  */
 import {spawnSync} from 'node:child_process';
@@ -36,11 +36,6 @@ const testCases=[
   ['Home progress panel','scripts/verify-progress-panel.cjs'],
   ['Release manifest','scripts/release_smoke.py','python3'],
 ];
-const legacy=[
-  ['Old home/Mentor snapshot','scripts/verify-home-mentor-aed.mjs'],
-  ['Old procedural 3D snapshot','scripts/test-mentor-3d.mjs'],
-  ['Old cinematic snapshot','scripts/test-mentor-cinematic.mjs']
-];
 const logs=[], errors=[];
 function run(cmd,args,label,category){
   const output=spawnSync(cmd,args,{encoding:'utf8',timeout:45_000,maxBuffer:3_000_000});
@@ -71,8 +66,8 @@ logs.push({label:'All JavaScript syntax',category:'required',ok:syntaxFailure===
 logs.push({label:'All JSON parses',category:'required',ok:jsonFailure===0,files:jsons.length,failures:jsonFailure});
 if(syntaxFailure)errors.push('JavaScript syntax');if(jsonFailure)errors.push('JSON');
 for(const [name,path,flag] of testCases)run(flag==='python3'?'python3':'node',flag==='python3'?[path]:[...(flag?[flag]:[]),path],name,'required');
-for(const [name,path,command] of legacy)run(command||'node',[path],name,'legacy-review');
+
 mkdirSync('audit-results',{recursive:true});
 writeFileSync('audit-results/pre-cleanup-tests.json',JSON.stringify({timestamp:new Date().toISOString(),scripts:scripts.length,jsonFiles:jsons.length,results:logs,requiredFailures:errors},null,2));
-console.log('SUMMARY: '+logs.filter(x=>x.category==='required'&&x.ok).length+'/'+logs.filter(x=>x.category==='required').length+' required checks; '+logs.filter(x=>x.category==='legacy-review'&&x.ok).length+'/'+logs.filter(x=>x.category==='legacy-review').length+' legacy snapshots; legacy failures must be reviewed before deletion.');
+console.log('SUMMARY: '+logs.filter(x=>x.category==='required'&&x.ok).length+'/'+logs.filter(x=>x.category==='required').length+' required checks. Historical UI snapshots retained in docs/archive/legacy-tests; not applicable to current 3D.');
 if(errors.length){console.error('REQUIRED FAILURES: '+errors.join(', '));process.exitCode=1;}
