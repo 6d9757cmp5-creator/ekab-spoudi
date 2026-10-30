@@ -2,9 +2,6 @@ name: Deep pre-cleanup audit
 on:
   push:
     branches: [main]
-    paths:
-      - 'scripts/audit-pre-cleanup.mjs'
-      - '.github/workflows/deep-pre-cleanup.yml'
   workflow_dispatch:
 permissions:
   contents: read

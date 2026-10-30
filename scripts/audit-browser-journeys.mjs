@@ -4,6 +4,7 @@
  */
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
+import {get as nodeHttpGet} from 'node:http';
 import {readdirSync,mkdirSync,writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import assert from 'node:assert/strict';
@@ -11,6 +12,12 @@ import assert from 'node:assert/strict';
 const port=8766,base='http://127.0.0.1:'+port+'/';
 const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});
 const outcomes=[],errors=[];
+function httpStatus(path){
+ return new Promise((resolve,reject)=>{
+  const req=nodeHttpGet(base+path,response=>{response.resume();response.once('end',()=>resolve(response.statusCode));response.once('error',reject);});
+  req.once('error',reject);
+ });
+}
 function allHtml(dir='.',prefix=''){
  const found=[];
  for(const ent of readdirSync(dir,{withFileTypes:true})){
@@ -32,7 +39,7 @@ const devices=[
 ];
 try{
  let ready=false;
- for(let i=0;i<80;i++){try{if((await fetch(base)).ok){ready=true;break}}catch{}await new Promise(ok=>setTimeout(ok,150));}
+ for(let i=0;i<80;i++){try{if((await httpStatus('index.html'))===200){ready=true;break}}catch{}await new Promise(ok=>setTimeout(ok,150));}
  assert(ready,'Local test server failed');
  browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader']});
  const pages=allHtml();
@@ -40,8 +47,8 @@ try{
    assert.equal(pages.length,60,'HTML page count unexpectedly changed; inspect before cleanup');
    for(let i=0;i<pages.length;i+=12){
      const batch=await Promise.all(pages.slice(i,i+12).map(async path=>{
-       const resp=await fetch(base+path);
-       return {path,status:resp.status,ok:resp.ok};
+       const status=await httpStatus(path);
+       return {path,status,ok:status===200};
      }));
      for(const r of batch)assert(r.ok,r.path+' returns '+r.status);
    }
