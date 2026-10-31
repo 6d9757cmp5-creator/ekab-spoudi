@@ -5310,7 +5310,30 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-31",
+        "recordedAt": "2026-10-31",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "fullStoredAnswerRead": true,
+        "fullScientificApproval": false,
+        "reviewerType": "AI-assisted documentary review, not independent clinical approval",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "id": "EOP-B-006",
+        "comparedClaims": [
+          "Πλήρης εκπαιδευτική απάντηση: συνεχίζουμε BLS έως ανάληψη/οδηγία επαγγελματιών, σαφή σημεία ζωής ή αδυναμία ασφαλούς συνέχισης από εξάντληση.",
+          "Η παύση για ανάλυση/εκφόρτιση AED δεν αποτελεί οριστική διακοπή ΚΑΡΠΑ."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/ethics-guidelines"
+        ],
+        "finding": "RCUK First Aid 2025 αναφέρει ρητά συνέχιση ΚΑΡΠΑ έως ανάληψη από επαγγελματική βοήθεια/οδηγία διακοπής, επάνοδο σαφών σημείων ζωής ή εξάντληση διασώστη. BLS 2025 απαιτεί άμεση επανέναρξη συμπιέσεων μετά ανάλυση/εκφόρτιση AED. Η αποθηκευμένη απάντηση είναι συμβατή με BLS/πρώτες βοήθειες.",
+        "limits": "Η διακοπή επαγγελματικής αναζωογόνησης (TOR) είναι χωριστή ιατρική/ομαδική απόφαση με τοπικά νομικά και υπηρεσιακά κριτήρια· η απάντηση δεν πρέπει να χρησιμοποιηθεί ως αυτόνομο επαγγελματικό TOR. Δεν ελέγχθηκε ελληνικό SOP ούτε επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "risk": "ΚΡΙΣΙΜΟ: σύγχυση προσωρινής παύσης AED ή εξάντλησης εθελοντή με απόφαση τερματισμού επαγγελματικής αναζωογόνησης."
+      }
     },
     {
       "id": "EOP-B-007",
@@ -5324,7 +5347,31 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-31",
+        "recordedAt": "2026-10-31",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "fullStoredAnswerRead": true,
+        "fullScientificApproval": false,
+        "reviewerType": "AI-assisted documentary review, not independent clinical approval",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "id": "EOP-B-007",
+        "comparedClaims": [
+          "Η αποθηκευμένη απάντηση αναφέρει VF, άσφυγμη VT, ασυστολία και PEA.",
+          "VF/pVT είναι απινιδώσιμοι, ασυστολία/PEA μη απινιδώσιμοι ρυθμοί.",
+          "Η PEA είναι ηλεκτρική δραστηριότητα χωρίς αποτελεσματική κυκλοφορία και δεν είναι ένα μοναδικό μορφολογικό ΗΚΓ."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines",
+          "https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+        ],
+        "finding": "Ο επίσημος αλγόριθμος ALS 2025 διακρίνει απινιδώσιμους VF/pVT από μη απινιδώσιμους PEA/ασυστολία. Η αποθηκευμένη εκπαιδευτική απάντηση είναι ορθή ως ταξινόμηση ALS. Η αναγνώριση ανακοπής στην κοινότητα γίνεται κλινικά (μη ανταπόκριση, μη φυσιολογική αναπνοή) και δεν αναμένει ΗΚΓ.",
+        "limits": "Η ερώτηση 'ρυθμοί που δίνουν ένδειξη' είναι δυνητικά παραπλανητική: η ηλεκτρική δραστηριότητα μόνη της δεν αποδεικνύει κυκλοφορία, η VT με σφυγμό δεν είναι pVT και ο έλεγχος ρυθμού απαιτεί κατάλληλη εκπαίδευση/εξοπλισμό. Ελληνικά ALS SOP και επίσημο λυσάρι ΕΟΠΠΕΠ δεν επαληθεύτηκαν.",
+        "risk": "ΚΡΙΣΙΜΟ: καθυστέρηση ΚΑΡΠΑ εν αναμονή ΗΚΓ ή λανθασμένη απινίδωση μη απινιδώσιμου ρυθμού."
+      }
     },
     {
       "id": "EOP-B-008",
@@ -5338,7 +5385,31 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "targetedReview": {
+        "reviewedAt": "2026-10-31",
+        "recordedAt": "2026-10-31",
+        "level": "first_pass_targeted_full_stored_answer_and_source_passages",
+        "fullStoredAnswerRead": true,
+        "fullScientificApproval": false,
+        "reviewerType": "AI-assisted documentary review, not independent clinical approval",
+        "sourceFile": "official_questions.json",
+        "sourceBlobSha": "1d356fa2aa8bc43b4690373dfacb30314cefcfed",
+        "id": "EOP-B-008",
+        "comparedClaims": [
+          "Πλήρης εκπαιδευτική απάντηση: ασφάλεια, έλεγχος ανταπόκρισης, άμεση κλήση 112/166, εκτίμηση φυσιολογικής αναπνοής, ΚΑΡΠΑ/AED.",
+          "Μη ανταπόκριση με απούσα/μη φυσιολογική αναπνοή ή αγωνιώδεις αναπνοές αντιμετωπίζεται ως ανακοπή.",
+          "Στην αναθεώρηση RCUK 2025 η κλήση γίνεται αμέσως μόλις διαπιστωθεί μη ανταπόκριση, πριν την ολοκλήρωση ελέγχου αναπνοής."
+        ],
+        "sources": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines",
+          "https://civilprotection.gov.gr/112",
+          "https://civilprotection.gov.gr/deltia-tupou/eyropaiki-imera-112-0"
+        ],
+        "finding": "RCUK/ERC BLS 2025 ορίζει Check–Call–CPR: κλήση αμέσως σε μη ανταπόκριση, έλεγχος αναπνοής κατά την κλήση, αγωνιώδεις/μη φυσιολογικές αναπνοές ως πιθανή ανακοπή και πρώιμη ΚΑΡΠΑ/AED. Ελληνική Πολιτική Προστασία τεκμηριώνει 112 και παράλληλη λειτουργία του 166. Η αποθηκευμένη απάντηση είναι συμβατή. Σημαντική λεπτομέρεια: σπασμοειδείς κινήσεις μπορεί να προηγούνται ανακοπής.",
+        "limits": "Αφορά αναγνώριση και BLS ενηλίκου· δεν επαληθεύτηκαν ελληνικά επαγγελματικά SOP, ειδικές παιδιατρικές/τραυματικές συνθήκες, τοπικές τηλεφωνικές οδηγίες ή επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν αποτελεί εξουσιοδότηση ALS.",
+        "risk": "ΚΡΙΣΙΜΟ: αναμονή πλήρους αξιολόγησης αναπνοής πριν την κλήση, εσφαλμένη ερμηνεία agonal gasps ως φυσιολογικής αναπνοής ή καθυστέρηση έναρξης ΚΑΡΠΑ."
+      }
     },
     {
       "id": "EOP-B-009",
