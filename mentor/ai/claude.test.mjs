@@ -22,6 +22,7 @@ test.beforeEach(()=>_resetLimits());
 test("request is built for the cheapest allowlisted model with hard token ceilings",()=>{
  const r=buildClaudeRequest({messages:buildMessages({...body,history:[]}),model:"claude-opus-9",maxTokens:99999});
  assert.equal(r.model,"claude-haiku-5-5");assert.equal(r.max_tokens,HARD_MAX_TOKENS);assert.equal(r.stream,true);
+ assert.equal("temperature" in r,false,"Haiku 5.5 adaptive thinking request must omit temperature");
  assert.equal(pickModel("x"),"claude-haiku-5-5");assert.equal(clampMaxTokens("abc"),300);assert.equal(clampMaxTokens(50),50);
  assert.ok(r.messages.every(m=>m.role==="user"||m.role==="assistant")&&r.messages[0].role==="user");
  assert.throws(()=>buildClaudeRequest({messages:[{role:"user",content:"α".repeat(5000)}]}),/input-out-of-bounds/);
