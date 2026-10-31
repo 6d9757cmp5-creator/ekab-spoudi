@@ -142,16 +142,15 @@
   {
    "id": "EOP-B-009",
    "question": "Εκδηλώσεις καρδιακής ανεπάρκειας.",
-   "verdict": "source_unreachable",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια-υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE CG95 δεν άνοιξε (client_error) και, ούτως ή άλλως, το CG95 αφορά θωρακικό άλγος· δεν έγινε σύγκριση με πηγή. Το περιεχόμενο είναι κλινικά εύλογο αλλά αναπόδεικτο εδώ.",
-   "suggestedChange": "Αντικατάσταση/προσθήκη προσβάσιμης πηγής (ESC/ERC, StatPearls, ελληνικό πρωτόκολλο).",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: δύσπνοια προσπάθειας ή ηρεμίας, ορθόπνοια, οιδήματα, κόπωση· σημεία: διάταση σφαγίτιδων, εισπνευστικοί βασικοί ρόγχοι, S3. Συμφωνεί. Η παροξυσμική νυχτερινή δύσπνοια και η αύξηση βάρους δεν αναφέρονται στο απόσπασμα· η διάταση σφαγίτιδων και ο S3 λείπουν από την απάντηση.",
    "sources": [
     {
-     "title": "NICE (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+     "title": "Merck — Acute heart failure",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/acute-heart-failure"
     }
    ],
    "clinicalReview": false
@@ -1707,54 +1706,53 @@
   },
   {
    "id": "EOP-B-101",
-   "question": "Τι πληροφορίες δίνει το παλμικό οξύμετρο;",
-   "verdict": "source_unreachable",
+   "question": "Παλμικό οξύμετρο.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια-υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Oxygen therapy: το παλμικό οξύμετρο δεν διακρίνει την αιμοσφαιρίνη δεσμευμένη με CO ή μεθαιμοσφαιρίνη από την οξυγονωμένη. Συμφωνεί για το CO· οι υπόλοιποι περιορισμοί (κίνηση, κακή αιμάτωση, βερνίκι) δεν αναφέρονται στο απόσπασμα.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/qs10/resources/chronic-obstructive-pulmonary-disease-in-adults-pdf-2098478592709"
+     "title": "StatPearls — Oxygen therapy",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK551617/"
     }
    ],
    "clinicalReview": false
   },
   {
    "id": "EOP-B-102",
-   "question": "Με ποιους τρόπους μπορούμε να χορηγήσουμε οξυγόνο και σε ποιες περιεκτικότητες;",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Τρόποι χορήγησης Ο2 και περιεκτικότητες.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή δεν άνοιξε σε αυτό το πέρασμα (client/server error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ρινική κάνουλα 1–6 L/min, FiO2 ~24–40%· απλή μάσκα 5–10 L/min, FiO2 ~40–60%· μάσκα μη επανεισπνοής 10–15 L/min, FiO2 ~0,6–0,8· Venturi υψηλής ροής. Η απάντηση σωστά λέει ότι η πραγματική FiO2 εξαρτάται από ροή/αναπνοή/εφαρμογή, αλλά η ερώτηση ζητά περιεκτικότητες και δεν δίνονται τα εύρη.",
    "sources": [
     {
-     "title": "doi.org",
-     "url": "https://doi.org/10.1136/THORAXJNL-2016-209729"
+     "title": "StatPearls — Oxygen therapy",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK551617/"
     }
    ],
-   "clinicalReview": false
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη των ενδεικτικών ευρών ροής/FiO2 ανά συσκευή.",
+   "clinicalNote": "Ροές/FiO2 κατά πρωτόκολλο."
   },
   {
    "id": "EOP-B-103",
    "question": "Μάσκα μη επανεισπνοής.",
-   "verdict": "consistent_with_gaps",
+   "verdict": "consistent",
    "risk": "μέτριος",
-   "certainty": "χαμηλή-μέτρια",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η σελίδα BTS που ανοίχτηκε ΔΕΝ δίνει ροή για μάσκα μη επανεισπνοής· το «10–15 L/min» δεν επαληθεύτηκε. Η παραπομπή της ερώτησης είναι άλλο URL (έγγραφο οδηγίας) που δεν διαβάστηκε.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Oxygen therapy: ροή 10–15 L/min, FiO2 ~0,6–0,8, ασκός αποθήκευσης και μονόδρομες βαλβίδες. Συμφωνεί με την απάντηση (10–15 L/min, υψηλή αλλά μεταβλητή FiO2).",
    "sources": [
     {
-     "title": "BTS Emergency oxygen",
-     "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+     "title": "StatPearls — Oxygen therapy",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK551617/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Επιβεβαίωση ροής από το έγγραφο BTS/πρωτόκολλο ΕΚΑΒ."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-104",
@@ -1840,17 +1838,16 @@
   },
   {
    "id": "EOP-B-109",
-   "question": "Περιγράψτε τον πόνο στην πνευμονική εμβολή.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Πόνος στην πνευμονική εμβολή.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: οξεία δύσπνοια· πλευριτικός θωρακικός πόνος «όταν υπάρχει πνευμονικό έμφραγμα»· λιγότερο συχνά βήχας/αιμόπτυση· μαζική ΠΕ: υπόταση, ταχυκαρδία, συγκοπή. Συμφωνεί (η απάντηση σωστά αναφέρει ότι μπορεί να λείπει ο χαρακτηριστικός πόνος).",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+     "title": "Merck — Pulmonary embolism",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism/pulmonary-embolism-pe"
     }
    ],
    "clinicalReview": false
@@ -1944,21 +1941,19 @@
   },
   {
    "id": "EOP-B-115",
-   "question": "Ποιες είναι οι γενικές αρχές προνοσοκομειακής αντιμετώπισης μιας πιθανής πνευμονικής εμβολής;",
-   "verdict": "source_unreachable",
+   "question": "Προνοσοκομειακή αντιμετώπιση πιθανής ΠΕ.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: «In patients with hypoxemia, oxygen should be given»· αντιπηκτική αγωγή είναι ο κορμός της θεραπείας (νοσοκομειακά)· σε υπόταση προσεκτικά υγρά/αγγειοσυσπαστικά. Συμφωνεί: η απάντηση σωστά δεν θεωρεί την αντιπηκτική/θρομβολυτική αγωγή πράξη πληρώματος.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+     "title": "Merck — Pulmonary embolism",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism/pulmonary-embolism-pe"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-116",
@@ -2056,24 +2051,20 @@
   {
    "id": "EOP-B-121",
    "question": "Αποσυμπίεση με βελόνα πνευμοθώρακα υπό τάση.",
-   "verdict": "needs_clinical_review",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός (επεμβατική πράξη)",
-   "certainty": "χαμηλή για τεχνική",
+   "certainty": "μέτρια-υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Merck επιβεβαιώνει την ένδειξη (ανάγκη βελονικής/δακτυλικής θωρακοστομίας σε αναπνευστική δυσχέρεια με πιθανό υπό τάση πνευμοθώρακα) αλλά ΔΕΝ δίνει σημείο ή τεχνική. Οι θέσεις της απάντησης (2ο μεσοπλεύριο μεσοκλειδική, 5ο μεσοπλεύριο πρόσθια μασχαλιαία) προέρχονται από τον ελληνικό οδηγό κατάρτισης (minedu), που δεν ανοίχτηκε σε αυτό το πέρασμα.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls EMS Pneumothorax: το 2ο μεσοπλεύριο στη μεσοκλειδική γραμμή «was traditionally taught», αλλά οι νεότερες συστάσεις προτιμούν πλάγια προσπέλαση στο 4ο ή 5ο μεσοπλεύριο στη μέση μασχαλιαία· βελόνες/καθετήρες 14G μήκους 8 cm· τοποθέτηση ακριβώς πάνω από το πλευρό· η βελτίωση ζωτικών είναι ο πιο αξιόπιστος δείκτης επιτυχίας· εναλλακτικά δακτυλική θωρακοστομία. Τα σημεία της απάντησης (2ο μεσοκλ. και 5ο προσθ. μασχαλιαία) είναι συμβατά. Λείπουν το μέγεθος βελόνας, η θέση πάνω από το πλευρό και ο έλεγχος επιτυχίας.",
    "sources": [
     {
-     "title": "Merck — Overview of thoracic trauma",
-     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/overview-of-thoracic-trauma"
-    },
-    {
-     "title": "Ελληνικός Οδηγός Κατάρτισης (minedu) — δεν ανοίχτηκε",
-     "url": "https://minedu.gov.gr/publications/docs2024/epag_ekpaideusi/"
+     "title": "StatPearls — EMS Pneumothorax",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK482161/"
     }
    ],
    "clinicalReview": true,
-   "suggestedChange": "Επιβεβαίωση σημείου/τεχνικής από τον οδηγό και κλινικό.",
-   "clinicalNote": "Επεμβατική πράξη υψηλού κινδύνου — απαιτείται κλινική επιβεβαίωση της τεχνικής και των σημείων."
+   "suggestedChange": "Προσθήκη 14G/8 cm, πάνω από το πλευρό και ελέγχου επιτυχίας.",
+   "clinicalNote": "Επεμβατική πράξη — απαιτείται κλινική επιβεβαίωση και εκπαίδευση."
   },
   {
    "id": "EOP-B-122",
@@ -2710,56 +2701,57 @@
   },
   {
    "id": "EOP-B-159",
-   "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με υπό τάση πνευμοθώρακα;",
-   "verdict": "source_unreachable",
+   "question": "Αντιμετώπιση πνευμοθώρακα υπό τάση.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls EMS Pneumothorax: αναγνώριση κλινικά, επείγουσα αποσυμπίεση με βελόνη (ή δακτυλική θωρακοστομία), βελτίωση ζωτικών ως ένδειξη επιτυχίας. Η απάντηση (κλινική διάγνωση χωρίς ακτινογραφία, οξυγόνωση, αποσυμπίεση από εξουσιοδοτημένο) συμφωνεί.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
-    }
-   ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
-  },
-  {
-   "id": "EOP-B-160",
-   "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης μιας ασθενούς με εκλαμψία;",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
-   "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
-   "sources": [
-    {
-     "title": "www.who.int",
-     "url": "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia"
-    }
-   ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
-  },
-  {
-   "id": "EOP-B-161",
-   "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με ανοιχτό πνευμοθώρακα.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
-   "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
-   "sources": [
-    {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+     "title": "StatPearls — EMS Pneumothorax",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK482161/"
     }
    ],
    "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-160",
+   "question": "Αντιμετώπιση εκλαμψίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Eclampsia: διατήρηση βατού αεραγωγού και αναρρόφηση εκκρίσεων, οξυγόνο 8–10 L/min με μάσκα, πλάγια κατακεκλιμένη θέση, θειικό μαγνήσιο (προτιμώμενο, αντίδοτο ασβέστιο γλυκονικό), αντιϋπερτασικά (στόχος ΣΑΠ 140–160), η εκλαμψία είναι ένδειξη τοκετού. Συμφωνεί· λείπουν η ροή οξυγόνου, η αναρρόφηση και ο κίνδυνος τοξικότητας Mg.",
+   "sources": [
+    {
+     "title": "StatPearls — Eclampsia",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK554392/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Φάρμακα εκλαμψίας: κλινικός/ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-161",
+   "question": "Αντιμετώπιση ανοιχτού πνευμοθώρακα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: προτιμώνται αεριζόμενες (vented) ή βαλβιδωτές αποφρακτικές επιθέσεις θώρακα· παραδοσιακά επίθεμα με ταινία σε 3 πλευρές· η πλήρης σφράγιση χωρίς εξαερισμό μπορεί να προκαλέσει πνευμοθώρακα υπό τάση (έτοιμη αποσυμπίεση). MSD: επίθεμα κλεισμένο με ταινία σε 3 μόνο πλευρές, θωρακοστομία όταν σταθεροποιηθεί ο ασθενής. Η απάντηση συμφωνεί (παρακολούθηση για υπό τάση, εξειδικευμένα επιθέματα κατά πρωτόκολλο). Ο ισχυρισμός για το NICE NG39 δεν επαληθεύτηκε.",
+   "sources": [
+    {
+     "title": "StatPearls — EMS Pneumothorax",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK482161/"
+    },
+    {
+     "title": "MSD — Open pneumothorax",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/thoracic-trauma/pneumothorax-open"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επίθεμα θώρακα (3 ή 4 πλευρές/vented): κατά πρωτόκολλο ΕΚΑΒ."
   },
   {
    "id": "EOP-B-162",
@@ -2884,17 +2876,16 @@
   },
   {
    "id": "EOP-B-169",
-   "question": "Τι γνωρίζετε για τον κωλικό του νεφρού ή του ουρητήρα;",
-   "verdict": "source_unreachable",
+   "question": "Κωλικός νεφρού/ουρητήρα.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: πόνος από τη γωνία πλευροσπονδυλίου προς τη βουβωνική/όρχι, κωλικοειδής, ανησυχία, ναυτία/έμετος, αιματουρία (~85%)· πρώτης γραμμής NSAIDs. Συμφωνεί. Πυρετός/σήψη/ανουρία ως σημεία κινδύνου είναι κλινικά ορθά αλλά δεν αναφέρονται στο απόσπασμα.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Acute renal colic",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK431091/"
     }
    ],
    "clinicalReview": false
@@ -3070,17 +3061,16 @@
   },
   {
    "id": "EOP-B-180",
-   "question": "Τι είναι ο κωλικός του νεφρού, που εντοπίζεται και ποια είναι η κλινική εικόνα του ασθενούς;",
-   "verdict": "source_unreachable",
+   "question": "Νεφρικός κωλικός — εντόπιση, κλινική εικόνα.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ξεκινά στη γωνία πλευροσπονδυλίου και ακτινοβολεί προς τη βουβωνική/όρχι, ναυτία/έμετος, αιματουρία σε ~85%. Συμφωνεί· πυρετός/ανουρία ως υψηλού κινδύνου δεν αναφέρονται.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Acute renal colic",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK431091/"
     }
    ],
    "clinicalReview": false
