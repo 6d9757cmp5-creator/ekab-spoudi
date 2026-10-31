@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   check:
-    if: github.event.head_commit.message == 'Owner-approved one-time backend credential preflight'
+    if: github.event.head_commit.message == 'Check Cloudflare credentials added for MENTOR'
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -32,7 +32,7 @@ jobs:
             if [ "${#MENTOR_TEST_TOKEN}" -ge 16 ]; then echo "- MENTOR_TEST_TOKEN: configured"; else echo "- MENTOR_TEST_TOKEN: missing (or under 16 characters)"; fi
             echo "- Claude public access: disabled by default"
             echo "- Worker deployment: not initiated by this check"
-          } >> "$GITHUB_STEP_SUMMARY"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
           if [ -z "$CF_TOKEN" ] || [ -z "$CF_ACCOUNT" ]; then
             echo "::notice title=Cloudflare not ready::Cloudflare deployment requires a scoped API token and account ID."
           fi
