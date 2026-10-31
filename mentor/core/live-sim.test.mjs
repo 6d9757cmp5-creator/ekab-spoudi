@@ -81,3 +81,21 @@ test('flawed choices have deterministic consequences for the named synthetic per
  assert.equal(liveSnapshot(newLiveSession()).unreliableHandover,false);
  assert.deepEqual(replayLive(after(['rush','check-safety'])),after(['rush','check-safety']),'saved sessions keep working');
 });
+
+test('scripted cockpit inspections persist in existing Mentor session without advancing the scenario or grades',async()=>{
+ const {inspectLive}=await import('./live-sim.mjs');
+ const start=newLiveSession(),recorded=inspectLive(start,'dialogue','a','chief');
+ assert.equal(recorded.stage,0);
+ assert.equal(recorded.events.length,0);
+ assert.equal(recorded.inspections.length,1);
+ assert.equal(liveSnapshot(recorded).minute,0);
+ assert.equal(liveSnapshot(recorded).inspections[0].patient_id,'a');
+ const next=stepLive(recorded,'check-safety');
+ assert.equal(next.inspections.length,1);
+ assert.equal(replayLive(next).inspections.length,1);
+ const legacy={...newLiveSession()};delete legacy.inspections;
+ assert.deepEqual(replayLive(legacy),newLiveSession(),'older saved sessions migrate without losing progress');
+ assert.throws(()=>inspectLive(start,'meds','a','dose'),/invalid-live-inspection/);
+ assert.throws(()=>inspectLive(start,'dialogue','other','chief'),/invalid-live-inspection/);
+ assert.throws(()=>replayLive({...recorded,inspections:[{...recorded.inspections[0],action_id:'invented'}]}),/tampered-live-inspection/);
+});

@@ -1,0 +1,39 @@
+/* Original MENTOR prehospital cockpit: distinct look, not Body Interact CSS/assets. */
+.sim-cockpit{margin:18px 0 20px;color:#e7f4f8;background:linear-gradient(145deg,#081c2b,#0c2e40 72%,#123a48);border:1px solid #31586b;border-radius:22px;box-shadow:0 18px 45px #031e2940;overflow:hidden}
+.sim-head{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #47718266;flex-wrap:wrap}
+.sim-head strong{display:block;letter-spacing:.08em;font-size:.77rem;color:#8ed8e5}.sim-head small{display:block;color:#bdd4dd;font-size:.77rem}
+.sim-top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.sim-top-actions button{background:#174455;color:#ecffff;border:1px solid #72a9b077;border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit;font-weight:700;min-height:42px}
+.sim-top-actions button:focus-visible,.sim-cockpit button:focus-visible{outline:3px solid #a6f2e6;outline-offset:3px}.sim-top-time{font-size:.82rem;font-variant-numeric:tabular-nums;color:#c4eced}
+.sim-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(265px,.6fr);min-height:270px}
+.sim-scene{position:relative;isolation:isolate;min-height:300px;overflow:hidden;background:radial-gradient(ellipse at 50% 20%,#306275,#123f52 48%,#0c293a 80%);border-right:1px solid #456e7b}
+.sim-scene:before{content:'';position:absolute;inset:48% -15% -20%;transform:perspective(370px) rotateX(50deg);background:repeating-linear-gradient(0deg,#3c5b65 0 36px,#59717a 37px 39px);opacity:.38;z-index:-1}
+.sim-scene:after{content:'';position:absolute;left:25%;right:25%;bottom:33%;border:2px dashed #9cbdc3;opacity:.25}
+.sim-scene-tag{position:absolute;top:14px;left:18px;padding:6px 9px;border-radius:8px;background:#0c273aa8;font-size:.72rem;letter-spacing:.05em;color:#d7edf3}
+.sim-figures{display:flex;align-items:flex-end;justify-content:center;gap:clamp(22px,9vw,120px);padding:52px 12px 44px;min-height:260px}
+.sim-person{display:grid;justify-items:center;gap:8px;background:transparent;border:0;color:white;cursor:pointer;min-width:102px;padding:8px;border-radius:16px;font:inherit}
+.sim-person[aria-pressed="true"]{background:#5fbac522;outline:2px solid #83d7e5}
+.sim-silhouette{position:relative;display:block;width:62px;height:126px;filter:drop-shadow(0 10px 12px #07141f88)}
+.sim-silhouette:before{content:'';position:absolute;left:21px;top:0;width:22px;height:23px;border-radius:50%;background:#bad4dc}
+.sim-silhouette:after{content:'';position:absolute;left:12px;top:26px;width:40px;height:76px;border-radius:14px 14px 8px 8px;background:linear-gradient(110deg,#a9c9cf,#578996);box-shadow:-13px 10px 0 -5px #81aab5,13px 10px 0 -5px #81aab5,-9px 35px 0 -5px #79a6b2,9px 35px 0 -5px #79a6b2}
+.sim-person b{font-size:.89rem}.sim-person small{font-size:.73rem;color:#c5e6e9}
+.sim-monitor{padding:17px 16px 12px;background:#081b28}
+.sim-monitor h3{margin:0;font-size:1.06rem;color:#eefbff}.sim-monitor p{font-size:.78rem;color:#a9cad0;margin:6px 0 12px;line-height:1.4}
+.sim-vital-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sim-vital-tiles article{padding:12px;border:1px solid #34566b;background:#102c3a;border-radius:11px}
+.sim-vital-tiles span{display:block;font-size:.75rem;color:#d0e1e8}.sim-vital-tiles b{display:block;font-size:clamp(1.35rem,3vw,1.9rem);line-height:1.45;font-variant-numeric:tabular-nums;color:#86ead1}.sim-vital-tiles article:nth-child(2) b{color:#9bdcfe}.sim-vital-tiles article:nth-child(3) b{color:#f4d890}.sim-vital-tiles article:nth-child(4) b{color:#c1cad4}
+.sim-monitor .sim-mon-note{margin-top:12px;color:#a9cad0}
+.sim-toolbar{display:flex;gap:8px;padding:13px 14px 14px;overflow:auto;border-top:1px solid #4b758277;scrollbar-width:thin}
+.sim-tool{display:flex;flex-direction:column;align-items:center;gap:5px;flex:0 0 95px;padding:11px 7px;border-radius:12px;background:#13394a;color:#eaf7fc;border:1px solid #3b6576;cursor:pointer;font:inherit;font-size:.78rem;min-height:76px}
+.sim-tool .sim-tool-ico{font-size:1.25rem}.sim-tool[aria-pressed="true"]{background:#286277;border-color:#89e3dc}.sim-tool small{font-size:.65rem;color:#bcd9df}
+.sim-drawer{background:#f0f7fa;color:#193b4b;padding:18px 20px 20px;border-top:1px solid #95bcc8}
+.sim-drawer-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sim-drawer h3{margin:0 0 5px;font-size:1.05rem;color:#143849}.sim-drawer p{margin:4px 0 12px;line-height:1.45;font-size:.87rem;color:#425c67}
+.sim-drawer-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
+.sim-drawer-choices button{background:white;border:1px solid #b7cfd7;padding:12px;text-align:left;border-radius:11px;color:#193d4b;cursor:pointer;font:inherit;font-weight:650;min-height:50px}
+.sim-drawer-choices button:hover{border-color:#137c92}
+.sim-result{font-size:.86rem;line-height:1.45;padding:12px;border:1px solid #c6dde4;background:#fff;border-radius:10px;margin:12px 0 0!important;color:#214653!important}
+.sim-result:empty{display:none}.sim-records{margin:8px 0;padding-left:20px;max-height:210px;overflow:auto}.sim-records li{margin:8px 0;font-size:.84rem}
+.sim-cockpit .sim-caution{color:#a95224;font-weight:700}.sim-footer{font-size:.74rem;color:#c8dce2;padding:0 18px 13px}
+@media(max-width:800px){.sim-body{grid-template-columns:1fr}.sim-scene{border-right:0;border-bottom:1px solid #456e7b;min-height:230px}.sim-figures{min-height:216px;padding:48px 12px 26px}.sim-monitor{padding:14px}.sim-vital-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.sim-vital-tiles article{padding:8px}.sim-vital-tiles b{font-size:1.2rem}}
+@media(max-width:500px){.sim-head{padding:13px}.sim-vital-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.sim-drawer{padding:15px}.sim-tool{flex-basis:88px}.sim-top-actions{width:100%;justify-content:space-between}}
+@media(prefers-color-scheme:dark){.sim-drawer{background:#153443;color:#e6f3f8}.sim-drawer h3{color:#e6f3f8}.sim-drawer p{color:#c1dce4}.sim-drawer-choices button,.sim-result{background:#1b4151;color:#effaff!important;border-color:#477282}}
+@media(prefers-reduced-motion:reduce){.sim-cockpit *{scroll-behavior:auto!important;animation:none!important}}

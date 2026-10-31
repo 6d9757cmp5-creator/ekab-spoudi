@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
-<title>MENTOR · ΕΚΑΒ Live · Δύο τραυματίες (προσομοίωση)</title>
+<title>MENTOR · Clinical Simulation Cockpit · ΕΚΑΒ Live</title>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
+<link rel="stylesheet" href="mentor/styles/live-cockpit.css">
 <style>
 .live-shell{max-width:1080px;margin:0 auto;padding:18px 16px 50px}
 .live-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -72,8 +73,35 @@
  </section>
  <div class="live-disclaimer" role="note">
   <strong>Σημαντικό: εκπαιδευτικό πρωτότυπο, όχι ιατρικό εργαλείο.</strong>
-  Οι τιμές είναι τεχνητές, προκαθορισμένες και δεν προκύπτουν από τις ενέργειές σου. Δεν εκτιμώνται διάγνωση, ιατρικές προτεραιότητες, διαλογή ή θεραπεία. Απαιτείται ανεξάρτητη κλινική αξιολόγηση πριν από πιο ρεαλιστική έκδοση.
+  Οι τιμές είναι συνθετικές και ακολουθούν προκαθορισμένα βήματα· ορισμένες λανθασμένες εκπαιδευτικές επιλογές προσθέτουν βήματα καθυστέρησης. Δεν υπάρχει επικυρωμένο φυσιολογικό μοντέλο, διάγνωση, ιατρική διαλογή ή θεραπεία. Απαιτείται ανεξάρτητη κλινική αξιολόγηση.
  </div>
+ <section class="sim-cockpit" id="sim-cockpit" aria-label="Πίνακας εικονικού προνοσοκομειακού περιστατικού">
+  <header class="sim-head">
+    <div><strong>MENTOR OS · SIMULATION COCKPIT</strong><small>Συνθετικό περιστατικό · ίδιος MENTOR, ίδια αποστολή</small></div>
+    <div class="sim-top-actions"><span id="sim-head-time" class="sim-top-time">00΄ χρόνου σεναρίου</span><button type="button" id="sim-pause" aria-pressed="false">⏸ Παύση</button></div>
+  </header>
+  <div class="sim-body">
+    <div class="sim-scene" aria-label="Διαδραστική σχηματική σκηνή τροχαίου">
+      <span class="sim-scene-tag">ΣΧΗΜΑΤΙΚΗ ΣΚΗΝΗ · ΟΧΙ 3D ΑΣΘΕΝΗΣ</span>
+      <div class="sim-figures">
+        <button type="button" class="sim-person" data-sim-person="a" aria-pressed="true"><span class="sim-silhouette" aria-hidden="true"></span><b>Άτομο Α</b><small>Εστίαση / παρατήρηση</small></button>
+        <button type="button" class="sim-person" data-sim-person="b" aria-pressed="false"><span class="sim-silhouette" aria-hidden="true"></span><b>Άτομο Β</b><small>Εστίαση / παρατήρηση</small></button>
+      </div>
+    </div>
+    <section class="sim-monitor" aria-label="Συνθετικό monitor">
+      <h3 id="sim-person-name">Άτομο Α</h3><p id="sim-person-description">Επιλογή ατόμου για παρατήρηση.</p>
+      <div class="sim-vital-tiles" id="sim-vitals"></div>
+      <p class="sim-mon-note">Τεχνητές τιμές · ΑΠ/ΗΚΓ μη διαθέσιμα · καμία ιατρική πρόβλεψη.</p>
+    </section>
+  </div>
+  <nav class="sim-toolbar" id="sim-toolbar" aria-label="Εργαλεία εκπαιδευτικής προσομοίωσης"></nav>
+  <section class="sim-drawer" aria-labelledby="sim-tool-heading">
+    <div class="sim-drawer-header"><div><h3 id="sim-tool-heading">Συνομιλία</h3><p id="sim-tool-detail"></p></div></div>
+    <div id="sim-tool-actions" class="sim-drawer-choices"></div>
+    <p class="sim-result" id="sim-tool-result" role="status" aria-live="polite"></p>
+  </section>
+  <p class="sim-footer">Οι συνομιλίες είναι προκαθορισμένες, όχι AI. Οι ενέργειες καταγραφής δεν είναι παρεμβάσεις. Η παύση εμποδίζει εκπαιδευτικές επιλογές, δεν σταματά φυσιολογικό μοντέλο.</p>
+ </section>
  <div class="live-grid">
   <section class="live-panel" aria-labelledby="live-mission-head">
    <p class="live-stage-kicker" id="live-step">Στάδιο 1/4</p>
