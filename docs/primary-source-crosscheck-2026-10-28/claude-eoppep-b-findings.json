@@ -1134,6 +1134,22 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-086",
+   "question": "Ταχύπνοια/βραδύπνοια.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Οι ορισμοί (>20/min και <12/min ενηλίκου) και τα αίτια είναι συνήθεις αλλά αναπόδεικτοι εδώ.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-091",
    "question": "Χημικό έγκαυμα οφθαλμού.",
    "verdict": "consistent_with_gaps",
@@ -1149,6 +1165,109 @@
    ],
    "clinicalReview": false,
    "suggestedChange": "Προσθήκη ελάχιστης διάρκειας 20′ και μεταφοράς του δοχείου."
+  },
+  {
+   "id": "EOP-B-092",
+   "question": "Πυρετικός σπασμός.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (παιδιατρικό)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: δεν υπάρχει ενότητα για πυρετικό σπασμό· η ενότητα Seizures ορίζει ότι κάθε κρίση ≥5′ (status epilepticus) θέλει βενζοδιαζεπίνη πρώτης γραμμής. Η απάντηση («παρατεταμένο επεισόδιο επείγουσα αντιμετώπιση») είναι συμβατή αλλά δεν δίνει το όριο των 5′.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη ορίου 5 λεπτών για θεραπεία.",
+   "clinicalNote": "Φαρμακευτική αντιμετώπιση παιδιατρικού σπασμού: κλινικός."
+  },
+  {
+   "id": "EOP-B-093",
+   "question": "Επιληπτική κρίση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025 (Seizures): κρίση ≥5 λεπτά απαιτεί βενζοδιαζεπίνη πρώτης γραμμής· δεύτερης γραμμής π.χ. levetiracetam. Η απάντηση καλύπτει προστασία/αεραγωγό/γλυκόζη αλλά όχι το κριτήριο θεραπείας (5′) ούτε αντιεπιληπτική αγωγή.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη κριτηρίου 5′ και αναφοράς σε βενζοδιαζεπίνη κατά πρωτόκολλο.",
+   "clinicalNote": "Έλεγχος με ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-095",
+   "question": "Αναπνευστικά προβλήματα παιδιών — αντιμετώπιση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (παιδιατρικό)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: «Initially give 100% oxygen for all children with respiratory, circulatory, or neurological failure»· η απάντηση λέει «στοχευμένο O2» χωρίς να αναφέρει την αρχική 100% χορήγηση. Η εκτίμηση work of breathing, stridor, SpO2 συμφωνεί.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Διευκρίνιση: αρχικά 100% O2 σε αναπνευστική ανεπάρκεια, μετά τιτλοποίηση.",
+   "clinicalNote": "Στόχος οξυγόνου σε παιδιά: κλινικός."
+  },
+  {
+   "id": "EOP-B-096",
+   "question": "Κλινική εικόνα αναπνευστικής δυσχέρειας παιδιών.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: work of breathing (ρυθμός, εισολκές, γογγυσμός, ρινικό πτερύγισμα, tracheal tug, θέση), stridor/snoring ως μερική απόφραξη, SpO2 <90% ως σοβαρή υποξαιμία, κυάνωση/ωχρότητα. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-097",
+   "question": "Αίτια δύσπνοιας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (πίνακας οξείας δύσπνοιας): άσθμα/βρογχόσπασμος, ξένο σώμα, πνευμοθώρακας, πνευμονική εμβολή, τοξική βλάβη αεραγωγού, οξεία ισχαιμία/έμφραγμα, ρήξη θηλοειδούς μυός, αγχώδης υπεραερισμός. Πνευμονία, πνευμονικό οίδημα, αναιμία και οξέωση δεν υπάρχουν στον πίνακα οξείας δύσπνοιας (είναι σωστά αίτια γενικά). Η απάντηση δεν αναφέρει αγχώδη υπεραερισμό.",
+   "sources": [
+    {
+     "title": "Merck — Dyspnea",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/symptoms-of-pulmonary-disorders/dyspnea"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-099",
+   "question": "Πέντε παράγοντες ασφυξίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Οι αιτίες της απάντησης (ξένο σώμα, πνιγμός, συμπίεση λαιμού, τοξικά αέρια/καπνός, βαρύ άσθμα, οπιοειδή) είναι κλινικά ορθές αλλά αναπόδεικτες από την παραπομπή.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αντικατάσταση παραπομπής."
   },
   {
    "id": "EOP-B-100",
@@ -1315,6 +1434,70 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-150",
+   "question": "Αναλογία/ρυθμός ΚΑΡΠΑ ενηλίκων και παιδιών.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Ενήλικες: 30:2 και 100–120/min (επιβεβαιωμένο στο B-015). Παιδιά: RCUK Paediatric 2025 — 15:2 αν εκπαιδευμένος στην παιδιατρική BLS, αλλιώς 30:2· «five initial breaths»· ρυθμός 100–120/min. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-151",
+   "question": "Αίτια ανακοπής ενηλίκων/παιδιών.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή για παιδιά",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: στα παιδιά η ανακοπή είναι «most often secondary to progressive respiratory or circulatory failure, or neurological emergencies»· η σελίδα επισημαίνει ότι οι αλγόριθμοι διαφέρουν λόγω διαφορετικών αιτίων. Τα καρδιακά αίτια ενηλίκων δεν αναφέρονται στη σελίδα (κοινή γνώση).",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-152",
+   "question": "Επίδραση πυρετού/οπιοειδών στην αναπνευστική συχνότητα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Η αύξηση συχνότητας με πυρετό και η καταστολή από οπιοειδή είναι καθιερωμένη φυσιολογία/φαρμακολογία αλλά αναπόδεικτη εδώ· η σελίδα επιβεβαιώνει μόνο ότι η πτώση του O2 διεγείρει συχνότητα/βάθος αναπνοής.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-153",
+   "question": "Αναπνοή Kussmaul.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: βαθιές, γρήγορες αναπνοές για αντιρρόπηση οξυαιμίας (Kussmaul) στη διαβητική κετοξέωση. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "Merck — Acute complications of diabetes",
+     "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-154",
    "question": "Φάρμακα στην αναφυλαξία.",
    "verdict": "consistent_with_gaps",
@@ -1472,6 +1655,56 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-184",
+   "question": "Πρωτόκολλο ασθματικής κρίσης.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα GINA 2026 περιέχει μόνο σύνδεσμο προς PDF· το κείμενο της θεραπείας δεν διαβάστηκε. Το περιεχόμενο (ABCDE, ταχεία βρογχοδιαστολή, οξυγόνο κατά ένδειξη) είναι εύλογο αλλά δεν συγκρίθηκε.",
+   "sources": [
+    {
+     "title": "GINA 2026 Summary Guide",
+     "url": "https://ginasthma.org/2026-gina-summary-guide/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Φάρμακα ασθματικής κρίσης κατά πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-191",
+   "question": "Χειρισμοί σε ασθματική κρίση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: βοήθεια για χρήση του δικού τους reliever inhaler με spacer αν υπάρχει· ειδική θέση δεν περιγράφεται. Η απάντηση δεν αναφέρει ρητά τον reliever inhaler του ασθενούς.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: υποστήριξη χρήσης του reliever inhaler (με spacer)."
+  },
+  {
+   "id": "EOP-B-192",
+   "question": "Αίτια μη καρδιογενούς πνευμονικού οιδήματος.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Η λίστα (ARDS, εισπνοή τοξικών, τραύμα, εισρόφηση, νευρογενές, αρνητική πίεση) είναι ορθή κλινική γνώση αλλά αναπόδεικτη εδώ.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-199",
    "question": "Φυσιολογική αναπνευστική συχνότητα παιδιού 1–2 ετών.",
    "verdict": "consistent",
@@ -1502,6 +1735,23 @@
     }
    ],
    "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-204",
+   "question": "Δόση εφόδου υγρών σε υποογκαιμικό shock παιδιού.",
+   "verdict": "consistent",
+   "risk": "υψηλός (παιδιατρικό, υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: 10 mL/kg και επανεκτίμηση μετά από κάθε bolus· αιμορραγικό shock: ελαχιστοποίηση κρυσταλλοειδών (μέγιστο 20 mL/kg). Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Δόσεις υγρών σε παιδιά: τελική έγκριση από κλινικό."
   }
  ]
 }
