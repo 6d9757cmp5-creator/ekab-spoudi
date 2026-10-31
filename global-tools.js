@@ -245,7 +245,7 @@ function installGlossary(){
     const detail=el('div','medical-glossary-detail');detail.append(el('p','medical-glossary-definition',t.definition));
     if(t.category)detail.append(el('p','medical-glossary-category',t.category));
     if(t.aliases?.length)detail.append(el('p','medical-glossary-aliases','Συνώνυμα / σχετικοί όροι: '+t.aliases.join(' · ')));
-    if(t.image&&/^https:\/\/commons\.wikimedia\.org\/wiki\/Special:FilePath\//.test(t.image.url||'')){
+    if(t.image&&(/^(?:https:\/\/commons\.wikimedia\.org\/wiki\/Special:FilePath\/|\.\/assets\/education\/[A-Za-z0-9._-]+\.svg$)/.test(t.image.url||''))){
      const figure=el('figure','medical-glossary-figure'),img=el('img');img.src=t.image.url;img.alt=t.image.caption||('Ιατρική απεικόνιση: '+t.term);img.loading='lazy';img.decoding='async';
      img.addEventListener('error',()=>figure.replaceChildren(el('p','medical-glossary-help','Η εικόνα δεν είναι διαθέσιμη αυτή τη στιγμή.')));
      const caption=el('figcaption',null,(t.image.caption||'Εικόνα')+' · ');

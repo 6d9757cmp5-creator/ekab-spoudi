@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="title desc">
+<title id="title">Οι τέσσερις κοιλότητες της καρδιάς</title>
+<desc id="desc">Πρόσθιο σχηματικό διάγραμμα με τέσσερις διακριτές κοιλότητες: δεξιός κόλπος και δεξιά κοιλία αριστερά στην εικόνα, αριστερός κόλπος και αριστερή κοιλία δεξιά στην εικόνα, όπως φαίνονται από εμπρός. Τα βέλη είναι δείκτες ετικετών και όχι ροή αίματος. Δεν είναι υπό κλίμακα.</desc>
+<defs>
+  <marker id="label-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#315e79"/></marker>
+</defs>
+<style>
+  text{font-family:DejaVu Sans,Arial,sans-serif;fill:#183b52}
+  .title{font-size:28px;font-weight:700}.subtitle{font-size:16px;fill:#48677a}
+  .label{font-size:19px;font-weight:700}.note{font-size:14px;fill:#48677a}
+  .card{fill:#fff;stroke:#9bb9c8;stroke-width:2.5}
+  .leader{fill:none;stroke:#315e79;stroke-width:3;marker-end:url(#label-arrow)}
+</style>
+<rect width="1110" height="630" fill="#f7fbfd"/>
+<text x="555" y="43" text-anchor="middle" class="title">Οι τέσσερις κοιλότητες της καρδιάς</text>
+<text x="555" y="72" text-anchor="middle" class="subtitle">Πρόσθια σχηματική όψη · δεξιά και αριστερά ως προς τον ασθενή</text>
+<!-- Simplified anterior heart silhouette. Patient-right chambers appear on the viewer's left. -->
+<path d="M555 555C507 523 395 451 371 356C345 253 414 174 493 187C528 193 548 216 558 240C580 195 623 177 671 190C752 212 781 299 740 383C700 467 610 529 555 555Z" fill="#fff" stroke="#8d5d68" stroke-width="8" stroke-linejoin="round"/>
+<!-- Right atrium -->
+<path d="M395 288C400 232 443 205 493 211C519 215 535 229 544 249L541 326C502 339 453 337 419 322C402 314 395 302 395 288Z" fill="#b9dfeb" stroke="#4c879c" stroke-width="3"/>
+<!-- Left atrium -->
+<path d="M570 249C583 221 612 207 647 211C700 216 735 250 733 293C731 319 713 331 682 336C643 342 601 337 568 326Z" fill="#f3c4c0" stroke="#b86d6a" stroke-width="3"/>
+<!-- Right ventricle -->
+<path d="M419 337C455 345 500 345 541 333L549 513C504 486 455 448 429 400C419 382 415 358 419 337Z" fill="#a8d3e2" stroke="#4c879c" stroke-width="3"/>
+<!-- Left ventricle -->
+<path d="M568 333C604 344 646 345 682 337C687 373 665 417 635 451C609 479 577 502 558 514Z" fill="#efb2ae" stroke="#b86d6a" stroke-width="3"/>
+<!-- Interatrial and interventricular septa, plus atrioventricular boundary -->
+<path d="M555 248L555 327M555 333L553 512M405 329Q555 350 724 329" fill="none" stroke="#6d7f89" stroke-width="5" stroke-linecap="round"/>
+<!-- Labels -->
+<rect x="36" y="225" width="286" height="84" rx="16" class="card"/>
+<text x="179" y="276" text-anchor="middle" class="label">Δεξιός κόλπος</text>
+<path d="M322 267L431 274" class="leader" marker-end="url(#label-arrow)"/>
+<rect x="36" y="386" width="286" height="84" rx="16" class="card"/>
+<text x="179" y="437" text-anchor="middle" class="label">Δεξιά κοιλία</text>
+<path d="M322 428L452 402" class="leader" marker-end="url(#label-arrow)"/>
+<rect x="788" y="225" width="286" height="84" rx="16" class="card"/>
+<text x="931" y="276" text-anchor="middle" class="label">Αριστερός κόλπος</text>
+<path d="M788 267L690 274" class="leader" marker-end="url(#label-arrow)"/>
+<rect x="788" y="386" width="286" height="84" rx="16" class="card"/>
+<text x="931" y="437" text-anchor="middle" class="label">Αριστερή κοιλία</text>
+<path d="M788 428L650 402" class="leader" marker-end="url(#label-arrow)"/>
+
+</svg>
