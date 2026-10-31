@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {mkdtemp,mkdir,writeFile,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {isEducationPath,choosePaths,validateReview,runReview,MAX_FILES} from './educational-scientific-review.mjs';
 
 test('all core educational and clinical areas trigger review',()=>{
@@ -61,4 +64,22 @@ test('new multimedia content is flagged instead of treated as verified text',()=
  assert.deepEqual(choosePaths(['future/assets/new-medical-image.webp','future/assets/new-lesson.mp4']),[
   'future/assets/new-lesson.mp4','future/assets/new-medical-image.webp'
  ]);
+});
+
+test('actual future binary module stays pending, not falsely screened',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'ekab-future-review-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await mkdir(join(root,'future','new-section'),{recursive:true});
+  await writeFile(join(root,'docs','INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'Audit rules');
+  await writeFile(join(root,'future','new-section','image.png'),Buffer.from([137,80,78,71]));
+  const result=await runReview({
+   manual:'future/new-section/image.png',root,dryRun:true,
+   fetchImpl:()=>{throw Error('unexpected network')}
+  });
+  assert.equal(result.status,'incomplete');
+  assert.equal(result.reviewed_count,0);
+  assert.ok(result.pending.some(x=>x.reason==='visual_or_media_review_required'));
+  assert.equal(result.files[0].mode,'binary_media');
+ }finally{await rm(root,{recursive:true,force:true});}
 });
