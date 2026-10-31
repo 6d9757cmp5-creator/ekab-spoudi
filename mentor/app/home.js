@@ -116,7 +116,7 @@ async function ask(text){
  delivery=chooseMentorDelivery({intent:intent.intent==="unknown"?"explain":intent.intent,topic:intent.topic||"scene"});
  send({type:"mentor:presence",detail:publicDeliveryCue(delivery)});
  sayAnswer.disabled=false;
- status.textContent="Ο MENTOR απάντησε γραπτώς. Για ακρόαση πάτησε «Άκου απάντηση».";
+ status.textContent=result.type==="term"?"Απάντηση από τοπική βιβλιοθήκη · 0 AI credits. Για ακρόαση πάτησε «Άκου απάντηση».":result.type==="study"?"Τοπική εκπαιδευτική καθοδήγηση · 0 AI credits.":"Δεν χρεώθηκε AI. Για αναλυτική απάντηση απαιτείται επαληθευμένη γνώση.";
 }
 form.addEventListener("submit",e=>{
  e.preventDefault();const text=question.value.trim();if(!text)return;void ask(text);

@@ -3,6 +3,7 @@
  * Synthetic observations, NOT a validated physiological model or triage tool.
  * No drug/treatment decisions, automatic patient prioritization, AI, scores or legacy writes.
  */
+import {findLiveTool,findLiveAction} from './live-interactions.mjs';
 export const KEY='ekab.mentor.live-two-patients.v1';
 export const CASE=Object.freeze({
   id:'crete-road-two',version:1,
@@ -37,11 +38,11 @@ export const STAGES=Object.freeze([
 ]);
 const MAX_EVENTS=16;
 export function newLiveSession(){
- return {schema_version:1,case_id:CASE.id,case_version:CASE.version,stage:0,events:[],completed:false};
+ return {schema_version:1,case_id:CASE.id,case_version:CASE.version,stage:0,events:[],inspections:[],completed:false};
 }
 export function stepLive(session,choiceId){
  if(!session||session.schema_version!==1||session.case_id!==CASE.id||session.case_version!==CASE.version||
-  !Array.isArray(session.events)||!Number.isInteger(session.stage)||session.stage<0||session.stage>STAGES.length||
+  !Array.isArray(session.events)||!Array.isArray(session.inspections||[])||!Number.isInteger(session.stage)||session.stage<0||session.stage>STAGES.length||
   typeof choiceId!=='string'||session.completed||session.events.length>=MAX_EVENTS)throw Error('invalid-live-session');
  const stage=STAGES[session.stage];
  if(!stage)throw Error('invalid-live-stage');
@@ -50,7 +51,7 @@ export function stepLive(session,choiceId){
  const event={seq:session.events.length+1,stage_id:stage.id,choice_id:choice.id,outcome:choice.outcome};
  const nextStage=session.stage+(choice.outcome==='practice'?1:0);
  return {schema_version:1,case_id:CASE.id,case_version:CASE.version,stage:nextStage,
-   events:[...session.events,event],completed:nextStage===STAGES.length};
+   events:[...session.events,event],inspections:session.inspections||[],completed:nextStage===STAGES.length};
 }
 export function replayLive(raw){
  if(!raw||raw.case_id!==CASE.id||raw.case_version!==CASE.version||
@@ -62,9 +63,25 @@ export function replayLive(raw){
   const created=state.events.at(-1);
   if(['seq','stage_id','choice_id','outcome'].some(key=>created[key]!==given[key]))throw Error('tampered-live-event');
  }
+ const inspections=raw.inspections??[];
+ if(!Array.isArray(inspections)||inspections.length>60)throw Error('invalid-saved-live-inspections');
+ for(let i=0;i<inspections.length;i++){
+  const e=inspections[i];
+  if(!e||e.seq!==i+1||!['a','b'].includes(e.patient_id)||!findLiveTool(e.tool_id)||
+   !findLiveAction(e.tool_id,e.action_id)||!Number.isInteger(e.at_stage)||e.at_stage<0||e.at_stage>state.stage)
+   throw Error('tampered-live-inspection');
+ }
+ state={...state,inspections:inspections.map(e=>({seq:e.seq,patient_id:e.patient_id,tool_id:e.tool_id,action_id:e.action_id,at_stage:e.at_stage}))};
  if(state.stage!==raw.stage||state.completed!==raw.completed||
   raw.schema_version!==1)throw Error('tampered-live-session');
  return state;
+}
+/** Add a documented educational observation, not a diagnosis or treatment. */
+export function inspectLive(session,toolId,patientId,actionId){
+ const clean=replayLive(session);
+ if(!['a','b'].includes(patientId)||!findLiveAction(toolId,actionId)||clean.inspections.length>=60)
+  throw Error('invalid-live-inspection');
+ return {...clean,inspections:[...clean.inspections,{seq:clean.inspections.length+1,patient_id:patientId,tool_id:toolId,action_id:actionId,at_stage:clean.stage}]};
 }
 export function liveSnapshot(session){
  const state=replayLive(session),elapsed=state.events.length*2;
@@ -79,6 +96,7 @@ export function liveSnapshot(session){
   unreliableHandover:state.events.some(e=>e.choice_id==='invent'),
   timeline:state.events.map(e=>({minute:e.seq*2,title:STAGES.find(s=>s.id===e.stage_id)?.title,
    outcome:e.outcome,feedback:choiceOf(e)?.feedback,consequence:choiceOf(e)?.consequence?.text||''})),
+  inspections:state.inspections,
   practice:state.events.filter(x=>x.outcome==='practice').length,
   review:state.events.filter(x=>x.outcome==='review').length
  };
