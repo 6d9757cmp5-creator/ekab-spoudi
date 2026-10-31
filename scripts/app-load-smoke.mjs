@@ -29,6 +29,12 @@ try {
     await page.locator('#mentor-home-question').fill('Τι είναι ΚΑΡΠΑ;');
     await page.locator('#mentor-home-question-form button[type=submit]').click();
     await page.waitForFunction(()=>document.getElementById('mentor-home-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
+    await page.locator('#mentor-home-question').fill('ΚΑΡΠΑ');
+    await page.locator('#mentor-home-question-form button[type=submit]').click();
+    await page.waitForFunction(()=>document.getElementById('mentor-home-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
+    const costLabel=await page.locator('#mentor-home-speech-status').textContent();
+    if(!costLabel.includes('0 AI credits'))throw Error(device+': basic MENTOR answer was not labelled free/local');
+    console.log('PASS '+device+': bare ΚΑΡΠΑ answered locally with zero AI usage');
     console.log('PASS '+device+': visible MENTOR 3D, user hide/show and local Greek Q&A');
 
     const mentorPage=await page.goto('http://127.0.0.1:8765/mentor-lab.html',{waitUntil:'domcontentloaded',timeout:30000});
