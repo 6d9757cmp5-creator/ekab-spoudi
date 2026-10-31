@@ -5242,7 +5242,37 @@
         "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
         "independentScientificSignoff": false,
         "fullScientificApproval": false
-      }
+      },
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-004",
+            "question": "Σωστή σειρά ενεργειών σε VF/pVT κατά την ALS.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (ΚΑΡΠΑ)",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "RCUK/ERC 2025 ALS: μεμονωμένες απινιδώσεις και μετά ΚΑΡΠΑ 2 λεπτών, κυκλικός αλγόριθμος· VF/pVT ως απινιδώσιμοι ρυθμοί. Η αλληλουχία της απάντησης (ΚΑΡΠΑ → monitor/ρυθμός → απινίδωση → ΚΑΡΠΑ 2′ → επανέλεγχος) συμφωνεί. Η χρονική θέση των φαρμάκων (μετά τον 3ο παλμό) είχε επαληθευτεί στην B-018. Η σελίδα ALS που διαβάστηκε δεν παρέθετε ρητά το βήμα «σύνδεση monitor» ως ξεχωριστό. Η παραπομπή (resus.org.uk/cy/node/36438) είναι γενική και δεν στηρίζει άμεσα τη σειρά.",
+            "suggestedChange": "Παραπομπή στη σελίδα ALS 2025 αντί του node/36438.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-005",
@@ -5296,7 +5326,41 @@
         "limits": "Πλήρης ανάγνωση αρχικής αποθηκευμένης απάντησης, όχι επίσημη λύση ή επιβεβαιωμένη νεότερη εκφώνηση ΕΟΠΠΕΠ. Εξωτερικές πηγές ελέγχθηκαν στα συγκεκριμένα χωρία, όχι εξαντλητική κλινική πιστοποίηση.",
         "independentScientificSignoff": false,
         "fullScientificApproval": false
-      }
+      },
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-005",
+            "question": "Αρχική ενέργεια απινίδωσης σε ενήλικα και παιδί.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (απινίδωση)",
+            "certainty": "υψηλή για ενήλικες, χαμηλή για παιδιά",
+            "checkedAt": "2026-10-31",
+            "findings": "Ενήλικες επιβεβαιώθηκαν: RCUK 2025 «first shock at least 150 J» (rectilinear/truncated exponential) και 130–150 J για pulsed biphasic· συμφωνεί με την απάντηση. Παιδιά: η σελίδα PALS 2025 δεν άνοιξε (client_error), άρα το «4 J/kg» ΔΕΝ επαληθεύτηκε σε αυτό το πέρασμα (ισχύει στις γνωστές οδηγίες ERC αλλά χωρίς πηγή εδώ). Η φράση «ανώτατο όριο ανά ηλικία/μηχάνημα» δεν στηρίχθηκε.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+              },
+              {
+                "title": "RCUK PALS 2025 (μη προσβάσιμη)",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-advanced-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Παιδιατρική ενέργεια χωρίς επαληθευμένη πηγή· έλεγχος από κλινικό/ERC 2025 PALS."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-006",
@@ -5333,7 +5397,38 @@
         "finding": "RCUK First Aid 2025 αναφέρει ρητά συνέχιση ΚΑΡΠΑ έως ανάληψη από επαγγελματική βοήθεια/οδηγία διακοπής, επάνοδο σαφών σημείων ζωής ή εξάντληση διασώστη. BLS 2025 απαιτεί άμεση επανέναρξη συμπιέσεων μετά ανάλυση/εκφόρτιση AED. Η αποθηκευμένη απάντηση είναι συμβατή με BLS/πρώτες βοήθειες.",
         "limits": "Η διακοπή επαγγελματικής αναζωογόνησης (TOR) είναι χωριστή ιατρική/ομαδική απόφαση με τοπικά νομικά και υπηρεσιακά κριτήρια· η απάντηση δεν πρέπει να χρησιμοποιηθεί ως αυτόνομο επαγγελματικό TOR. Δεν ελέγχθηκε ελληνικό SOP ούτε επίσημο λυσάρι ΕΟΠΠΕΠ.",
         "risk": "ΚΡΙΣΙΜΟ: σύγχυση προσωρινής παύσης AED ή εξάντλησης εθελοντή με απόφαση τερματισμού επαγγελματικής αναζωογόνησης."
-      }
+      },
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-006",
+            "question": "Μέχρι πότε συνεχίζεται η ΒLS ΚΑΡΠΑ.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός",
+            "certainty": "χαμηλή-μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Η σελίδα RCUK Adult BLS 2025 δεν δίνει κριτήρια διακοπής ΚΑΡΠΑ ούτε χρονικό όριο (μόνο: επανέναρξη συμπιέσεων μετά από παλμό/οδηγίες ΑΕΑ). Η ALS σελίδα επίσης δεν ορίζει σημείο διακοπής. Άρα οι τρεις προϋποθέσεις της απάντησης (παράδοση σε εξειδικευμένη βοήθεια, σημεία ζωής, εξάντληση) είναι κοινή πρακτική αλλά δεν στηρίζονται από τις συγκεκριμένες σελίδες.",
+            "suggestedChange": "Παραπομπή σε ERC/RCUK κείμενο για διακοπή ΚΑΡΠΑ ή ελληνικό πρωτόκολλο.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult BLS",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Κριτήρια διακοπής ΚΑΡΠΑ: κλινική/νομική κρίση, όχι αποκλειστικά οδηγία."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-007",
@@ -5371,7 +5466,36 @@
         "finding": "Ο επίσημος αλγόριθμος ALS 2025 διακρίνει απινιδώσιμους VF/pVT από μη απινιδώσιμους PEA/ασυστολία. Η αποθηκευμένη εκπαιδευτική απάντηση είναι ορθή ως ταξινόμηση ALS. Η αναγνώριση ανακοπής στην κοινότητα γίνεται κλινικά (μη ανταπόκριση, μη φυσιολογική αναπνοή) και δεν αναμένει ΗΚΓ.",
         "limits": "Η ερώτηση 'ρυθμοί που δίνουν ένδειξη' είναι δυνητικά παραπλανητική: η ηλεκτρική δραστηριότητα μόνη της δεν αποδεικνύει κυκλοφορία, η VT με σφυγμό δεν είναι pVT και ο έλεγχος ρυθμού απαιτεί κατάλληλη εκπαίδευση/εξοπλισμό. Ελληνικά ALS SOP και επίσημο λυσάρι ΕΟΠΠΕΠ δεν επαληθεύτηκαν.",
         "risk": "ΚΡΙΣΙΜΟ: καθυστέρηση ΚΑΡΠΑ εν αναμονή ΗΚΓ ή λανθασμένη απινίδωση μη απινιδώσιμου ρυθμού."
-      }
+      },
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-007",
+            "question": "Ρυθμοί καρδιακής ανακοπής.",
+            "verdict": "consistent",
+            "risk": "μέτριος",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "VF/pVT ως απινιδώσιμοι επιβεβαιώνονται στη σελίδα ALS 2025. Η ασυστολία/PEA ως μη απινιδώσιμοι είναι καθιερωμένη ταξινόμηση, αλλά η σελίδα δεν την ορίζει ρητά (δεν αναφέρει PEA). Η απάντηση είναι ορθή και συμβατή με το ERC.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-008",
@@ -5409,7 +5533,36 @@
         "finding": "RCUK/ERC BLS 2025 ορίζει Check–Call–CPR: κλήση αμέσως σε μη ανταπόκριση, έλεγχος αναπνοής κατά την κλήση, αγωνιώδεις/μη φυσιολογικές αναπνοές ως πιθανή ανακοπή και πρώιμη ΚΑΡΠΑ/AED. Ελληνική Πολιτική Προστασία τεκμηριώνει 112 και παράλληλη λειτουργία του 166. Η αποθηκευμένη απάντηση είναι συμβατή. Σημαντική λεπτομέρεια: σπασμοειδείς κινήσεις μπορεί να προηγούνται ανακοπής.",
         "limits": "Αφορά αναγνώριση και BLS ενηλίκου· δεν επαληθεύτηκαν ελληνικά επαγγελματικά SOP, ειδικές παιδιατρικές/τραυματικές συνθήκες, τοπικές τηλεφωνικές οδηγίες ή επίσημο λυσάρι ΕΟΠΠΕΠ. Δεν αποτελεί εξουσιοδότηση ALS.",
         "risk": "ΚΡΙΣΙΜΟ: αναμονή πλήρους αξιολόγησης αναπνοής πριν την κλήση, εσφαλμένη ερμηνεία agonal gasps ως φυσιολογικής αναπνοής ή καθυστέρηση έναρξης ΚΑΡΠΑ."
-      }
+      },
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-008",
+            "question": "Πώς διαπιστώνεται καρδιακή ανακοπή σε άτομο που έπεσε αναίσθητο.",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "RCUK 2025 BLS: «Suspect cardiac arrest in any person who is unresponsive»· αγωνιώδεις αναπνοές/παθολογικό πρότυπο αναγνωρίζονται ως ανακοπή· κλήση βοήθειας χωρίς καθυστέρηση, ΑΕΑ το ταχύτερο. Συμφωνεί. Οι αριθμοί 112/166 είναι ελληνικοί (εκτός των πηγών) — να επιβεβαιωθούν από ΕΚΑΒ.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult BLS",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-009",
@@ -5493,7 +5646,36 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": true,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-014",
+            "question": "Δώστε τον ορισμό της καρδιοαναπνευστικής ανακοπής.",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Η αποθηκευμένη απάντηση (παύση αποτελεσματικής κυκλοφορίας, απουσία φυσιολογικής αναπνοής, άμεση ΚΑΡΠΑ/ΑΕΑ) συμφωνεί με το RCUK/ERC 2025 BLS: «If any person is unresponsive with abnormal breathing, cardiac arrest should be assumed». Ο ορισμός «παύση αποτελεσματικής κυκλοφορίας» είναι γενικός κλινικός ορισμός· η σελίδα δεν δίνει τυπικό ορισμό, μόνο κριτήριο αναγνώρισης.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult Basic Life Support (δημ. 27/10/2025)",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-015",
@@ -5507,7 +5689,37 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": true,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-015",
+            "question": "Να αναφέρετε το πρωτόκολλο της Βασικής Καρδιοπνευμονικής Αναζωογόνησης.",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμπιέσεις 100–120/min, βάθος 5–6 cm (RCUK: «at least 5 cm, but not more than 6 cm»), 30:2 για εκπαιδευμένους, συνεχείς συμπιέσεις για μη εκπαιδευμένους, ΑΕΑ το συντομότερο ακολουθώντας τις οδηγίες, άμεση επανέναρξη συμπιέσεων μετά το σοκ ή όταν δεν ενδείκνυται σοκ. Όλα συμφωνούν με την αποθηκευμένη απάντηση. Η απάντηση δεν αναφέρει ρητά τη συνέχιση συμπιέσεων από μη εκπαιδευμένους χωρίς εμφυσήσεις.",
+            "suggestedChange": "Προαιρετικά: προσθήκη «οι μη εκπαιδευμένοι δίνουν συνεχείς συμπιέσεις χωρίς διακοπή».",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult Basic Life Support",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-016",
@@ -5521,7 +5733,37 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": true,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-016",
+            "question": "Να αναφέρετε το πρωτόκολλο της Εξειδικευμένης Καρδιοπνευμονικής Αναζωογόνησης.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Η δομή (υψηλής ποιότητας ΚΑΡΠΑ, απινιδώσιμος/μη απινιδώσιμος ρυθμός, μονές απινιδώσεις με κύκλους 2 λεπτών, αναστρέψιμα αίτια) συμφωνεί με το κείμενο ALS του RCUK 2025 που διαβάστηκε (μονές απινιδώσεις και κύκλος συμπιέσεων 2 λεπτών). Η αναφορά στα «4H/4T» και στον εξειδικευμένο αεραγωγό/αγγειακή πρόσβαση δεν επιβεβαιώθηκε από το απόσπασμα της σελίδας που ανοίχτηκε.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult Advanced Life Support",
+                "url": "https://www.resus.org.uk/print/pdf/node/36438"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Έλεγχος του ακριβούς αλγορίθμου ALS και του ελληνικού επιχειρησιακού πρωτοκόλλου από κλινικό."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-017",
@@ -5535,7 +5777,42 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": true,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-017",
+            "question": "Σε ποια περίπτωση προβαίνουμε σε προκάρδια πλήξη στον ασθενή μας;",
+            "verdict": "needs_clinical_review",
+            "risk": "υψηλός",
+            "certainty": "χαμηλή-μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Η αποθηκευμένη απάντηση λέει ότι η προκάρδια πλήξη δεν είναι ρουτίνα, δεν καθυστερεί ΚΑΡΠΑ/απινιδωτή και μπορεί να εξεταστεί μόνο σε μαρτυρημένη, παρακολουθούμενη ανακοπή με απινιδώσιμο ρυθμό χωρίς άμεσο απινιδωτή. Οι σελίδες BLS και ALS RCUK 2025 που διαβάστηκαν δεν αναφέρουν προκάρδια πλήξη, άρα η συγκεκριμένη συνθήκη δεν επιβεβαιώθηκε από πρωτογενή πηγή 2025 εδώ. Η παραπομπή της εγγραφής (node/36438) είναι η σελίδα ALS, που δεν τη στηρίζει ρητά.",
+            "suggestedChange": "Είτε προσθήκη ακριβούς παραπομπής στο σχετικό απόσπασμα των ERC 2025 είτε σαφής επισήμανση ότι η συνθήκη προέρχεται από παλαιότερες οδηγίες και χρειάζεται επιβεβαίωση.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult BLS",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+              },
+              {
+                "title": "RCUK/ERC 2025 Adult ALS",
+                "url": "https://www.resus.org.uk/print/pdf/node/36438"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Απαιτείται κλινική κρίση και επιβεβαίωση από το πλήρες κείμενο ERC 2025 αν και πότε επιτρέπεται η πλήξη."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-018",
@@ -5549,7 +5826,38 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-018",
+            "question": "Κατά τη διαδικασία Εξειδικευμένης ΚΑΡΠΑ ποια φάρμακα πρώτης γραμμής χρησιμοποιούμε, σε ποιες ποσότητες και σε ποια χρονικά διαστήματα;",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (φάρμακα)",
+            "certainty": "υψηλή για τις δόσεις",
+            "checkedAt": "2026-10-31",
+            "findings": "Δόσεις επιβεβαιωμένες: αδρεναλίνη 1 mg ανά 3–5 λεπτά, αμιοδαρόνη 300 mg μετά το τρίτο σοκ και 150 mg μετά το πέμπτο (RCUK 2025). Έλλειψη ακρίβειας στον χρονισμό: για απινιδώσιμο ρυθμό η αδρεναλίνη δίνεται μετά το ΤΡΙΤΟ σοκ, για μη απινιδώσιμο το συντομότερο δυνατό. Η αποθηκευμένη απάντηση λέει μόνο «με χρονισμό ανάλογα». Η λιδοκαΐνη 100 mg ως εναλλακτική στην αμιοδαρόνη δεν αναφέρεται.",
+            "suggestedChange": "Προσθήκη: «απινιδώσιμος ρυθμός: αδρεναλίνη μετά το 3ο σοκ· μη απινιδώσιμος: το συντομότερο· λιδοκαΐνη 100 mg εναλλακτικά αν δεν υπάρχει αμιοδαρόνη».",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS",
+                "url": "https://www.resus.org.uk/print/pdf/node/36438"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Οι δόσεις φαρμάκων και ο ελληνικός επιχειρησιακός ρόλος του διασώστη (όχι αυτόνομη χορήγηση) θέλουν έλεγχο από κλινικό."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-019",
@@ -5563,7 +5871,37 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "SOURCE_UNVERIFIED",
+          "canonicalQuestionExactMatch": true,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-019",
+            "question": "Να αναφέρετε τους τρόπους ελέγχου βατότητας των αεραγωγών.",
+            "verdict": "source_unreachable",
+            "risk": "υψηλός (αεραγωγός)",
+            "certainty": "χαμηλή ως προς την παραπομπή",
+            "checkedAt": "2026-10-31",
+            "findings": "Το WHO Basic Emergency Care κατέβηκε (PDF 4,1 MB) αλλά το κείμενό του δεν εξάγεται (εικόνες/διαφάνειες, 129 γραμμές)· δεν επιβεβαιώθηκε το συγκεκριμένο χωρίο. Το περιεχόμενο της απάντησης (ομιλία, ήχοι αεραγωγού, εκκρίσεις/ξένο σώμα, κίνηση θώρακα, χειρισμοί σε μειωμένη συνείδηση) είναι η κοινή προσέγγιση εκτίμησης αεραγωγού, αλλά δεν τεκμηριώθηκε από το κείμενο της πηγής.",
+            "suggestedChange": "Προσθήκη ακριβούς σελίδας/κεφαλαίου του WHO BEC ή άλλης πηγής με εξαγώγιμο κείμενο (π.χ. RCUK ALS/ABCDE).",
+            "sources": [
+              {
+                "title": "WHO Basic Emergency Care (PDF)",
+                "url": "https://iris.who.int/server/api/core/bitstreams/63432b9f-8808-44c5-9692-cea717c0cbda/content"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-020",
@@ -5577,7 +5915,37 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "SOURCE_UNVERIFIED",
+          "canonicalQuestionExactMatch": true,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-020",
+            "question": "Να αναφέρετε τα συχνότερα αίτια απόφραξης του αεραγωγού.",
+            "verdict": "source_unreachable",
+            "risk": "υψηλός (αεραγωγός)",
+            "certainty": "χαμηλή ως προς την παραπομπή",
+            "checkedAt": "2026-10-31",
+            "findings": "Ίδιος περιορισμός με B-019: η παραπομπή WHO BEC δεν επαληθεύτηκε σε κείμενο. Τα αίτια που αναφέρονται (γλώσσα, ξένο σώμα, έμετος/αίμα, οίδημα, τραύμα, εγκαύματα εισπνοής) είναι κλασικά και δεν εμφανίζονται λανθασμένα, αλλά δεν συγκρίθηκαν με το πρωτογενές κείμενο.",
+            "suggestedChange": "Ακριβής παραπομπή σε ενότητα εκτίμησης αεραγωγού με εξαγώγιμο κείμενο.",
+            "sources": [
+              {
+                "title": "WHO Basic Emergency Care (PDF)",
+                "url": "https://iris.who.int/server/api/core/bitstreams/63432b9f-8808-44c5-9692-cea717c0cbda/content"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-021",
@@ -5591,7 +5959,37 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-021",
+            "question": "Ορισμός κυάνωσης, είδη και παθολογικές καταστάσεις με κυάνωση.",
+            "verdict": "consistent_with_gaps",
+            "risk": "μέτριος",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί: κυάνωση = κυανή χροιά δέρματος/βλεννογόνων από αύξηση της αποξυγονωμένης Hb (StatPearls: ≥5,0 g/dL)· κεντρική (βλεννογόνοι, ανεπαρκής οξυγόνωση) έναντι περιφερικής (άκρα, αγγειοσύσπαση/χαμηλή παροχή). Η πηγή δηλώνει ότι η κυάνωση «δεν είναι ευαίσθητος ούτε ειδικός δείκτης υποξαιμίας» — συμβατό με το «η απουσία κυάνωσης δεν αποκλείει υποξία». Ελλείψεις: η ερώτηση ζητά ρητά παθολογικές καταστάσεις· η απάντηση δίνει λίγα παραδείγματα. Λείπουν π.χ. πνευμονικά (άσθμα, πνευμονία, ΧΑΠ, πνευμονική εμβολή), καρδιακά (καρδιακή ανεπάρκεια, δεξιοαριστερά shunt), μεθαιμοσφαιριναιμία, υποθερμία (κεντρική)· περιφερική: shock, κρύο, φλεβική στάση.",
+            "suggestedChange": "Συμπλήρωση λίστας καταστάσεων όπως παραπάνω. Σημείωση για αναιμία: χρειάζεται μεγαλύτερη αποκορεσμός ώστε να εμφανιστεί κυάνωση.",
+            "sources": [
+              {
+                "title": "StatPearls — Cyanosis (NBK559167)",
+                "url": "https://www.ncbi.nlm.nih.gov/books/NBK559167/"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-022",
@@ -5605,7 +6003,37 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-022",
+            "question": "Τρόποι επιβεβαίωσης ορθής τοποθέτησης του τραχειοσωλήνα.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (αεραγωγός)",
+            "certainty": "μέτρια-υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Το κύριο τεκμήριο (συνεχής κυματομορφική καπνογραφία) επιβεβαιώνεται: RCUK/ERC 2025 ALS «Use waveform capnography to confirm correct tracheal tube placement during CPR» και «A sustained ETCO2 trace… must be used to exclude oesophageal placement». ΛΑΘΟΣ ΠΑΡΑΠΟΜΠΗ: η εγγραφή παραπέμπει στη σελίδα Post-resuscitation care, ενώ το χωρίο βρίσκεται στη σελίδα Adult ALS. Τα υπόλοιπα (οπτική παρατήρηση διόδου, συμμετρική ανύψωση/ακρόαση) δεν αναφέρονται στη σελίδα που διαβάστηκε και δεν εμφανίζονται ως ισοδύναμα με την καπνογραφία.",
+            "suggestedChange": "Διόρθωση παραπομπής στη σελίδα Adult ALS.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS (airway/capnography)",
+                "url": "https://www.resus.org.uk/print/pdf/node/36438"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-023",
@@ -5619,7 +6047,38 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-023",
+            "question": "Οριστική αποκατάσταση αεραγωγού και τρεις περιπτώσεις που χρειάζονται οριστικό αεραγωγό.",
+            "verdict": "needs_clinical_review",
+            "risk": "υψηλός (αεραγωγός)",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Η αποθηκευμένη απάντηση (τραχειοσωλήνας με cuff από εξειδικευμένο επαγγελματία· ενδείξεις: αδυναμία προστασίας αεραγωγού, αποτυχία οξυγόνωσης/αερισμού, αναμενόμενη απόφραξη/τραύμα) είναι κλινικά εύλογη αλλά η παραπομπή (Post-resuscitation care) δεν περιλαμβάνει ενδείξεις οριστικού αεραγωγού. Το ALS 2025 περιορίζει τη διασωλήνωση σε διασώστες με υψηλό ποσοστό επιτυχίας (>95% σε 2 προσπάθειες, συναίνεση ειδικών) με συνεχή καπνογραφία — δεν αντικατοπτρίζεται. Επιχειρησιακά (ποιος διασωλήνωνει στην Ελλάδα) δεν ελέγχθηκε.",
+            "suggestedChange": "Σωστή παραπομπή και μνεία των περιορισμών εμπειρίας/καπνογραφίας.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS",
+                "url": "https://www.resus.org.uk/print/pdf/node/36438"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Οι ενδείξεις οριστικού αεραγωγού και ο ρόλος του διασώστη ΕΚΑΒ χρειάζονται κλινική/επιχειρησιακή κρίση."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-024",
@@ -5633,7 +6092,36 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-024",
+            "question": "Αποφραγμένος αεραγωγός από ξένο σώμα σε παιδί.",
+            "verdict": "consistent",
+            "risk": "υψηλός (παιδί)",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί με RCUK/ERC 2025 Paediatric BLS: έως 5 χτυπήματα ανάμεσα στις ωμοπλάτες, βρέφος: έως 5 θωρακικές ωθήσεις (τεχνική δύο αντίχειρων), παιδί/έφηβος: έως 5 κοιλιακές ωθήσεις, 5 αρχικές αναπνοές στην απώλεια συνείδησης, όχι τυφλή σάρωση. Λεπτομέρεια: η πηγή λέει «children and adolescents» (όχι ρητά «>1 έτος»), η αποθηκευμένη απάντηση χρησιμοποιεί το όριο του ενός έτους (συμβατό με την κλασική πρακτική). Η απάντηση δεν λέει «μία ματιά για ορατό αντικείμενο» (single sweep) — προαιρετική συμπλήρωση.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Paediatric Basic Life Support",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-025",
@@ -5647,7 +6135,36 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-025",
+            "question": "Αποφραγμένος αεραγωγός από ξένο σώμα σε ενήλικα.",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί με RCUK First Aid 2025: ενθάρρυνση βήχα, έως 5 χτυπήματα στην πλάτη, έως 5 κοιλιακές ωθήσεις και εναλλαγή, ΚΑΡΠΑ όταν γίνει αναντίδραστος, όχι τυφλή αναζήτηση με δάκτυλα. Η παραπομπή είναι οδηγός πρώτων βοηθειών (όχι ALS) — κατάλληλη για την ερώτηση.",
+            "sources": [
+              {
+                "title": "RCUK First Aid Guidelines 2025",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-026",
@@ -5661,7 +6178,38 @@
       "priorReviewStatus": "citation_indexed_pending_passage_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-026",
+            "question": "Βαθιά προώθηση του τραχειοσωλήνα — επίπτωση στον αερισμό.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Η απάντηση (δεξιά κύρια βρογχική διασωλήνωση, αερισμός κυρίως του δεξιού πνεύμονα, κίνδυνος υποξαιμίας/ατελεκτασίας) αντιστοιχεί σε κλασική γνώση, αλλά η παραπομπή (σελίδα ALS) δεν περιέχει αυτό το σημείο. Η μνεία της καπνογραφίας ως επιβεβαίωσης είναι ορθή αλλά η καπνογραφία μόνη δεν ανιχνεύει πάντα ενδοβρογχική θέση· χρειάζεται ακρόαση/απεικόνιση.",
+            "suggestedChange": "Αλλαγή παραπομπής σε πηγή που αναφέρει ρητά την ενδοβρογχική διασωλήνωση.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Adult ALS (δεν στηρίζει το σημείο)",
+                "url": "https://www.resus.org.uk/print/pdf/node/36438"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Έλεγχος ότι ο συνδυασμός μεθόδων επιβεβαίωσης είναι σωστός."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-027",
@@ -5675,7 +6223,36 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-027",
+            "question": "Ενδείξεις – αντενδείξεις στοματοφαρυγγικού αεραγωγού.",
+            "verdict": "consistent",
+            "risk": "υψηλός (αεραγωγός)",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί με Merck Manual (professional): ενδείξεις = αναίσθητος ασθενής που χρειάζεται αερισμό με ασκό-βαλβίδα-μάσκα, ή βαθιά μειωμένη συνείδηση χωρίς αντανακλαστικό εμέτου με απόφραξη μαλακών μορίων· απόλυτη αντένδειξη = ασθενής με συνείδηση ή με αντανακλαστικό εμέτου· σχετική = στοματικό τραύμα/τρισμός. Έλλειψη: δεν αναφέρεται ο τρόπος μέτρησης μεγέθους (άκρο στη γωνία της κάτω γνάθου, πτερύγιο στη γωνία του στόματος) και η εναλλακτική του ρινοφαρυγγικού αεραγωγού.",
+            "sources": [
+              {
+                "title": "Merck Manual Professional — How to insert an oropharyngeal airway",
+                "url": "https://www.merckmanuals.com/professional/critical-care-medicine/how-to-do-basic-airway-procedures/how-to-insert-an-oropharyngeal-airway"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-028",
@@ -5801,7 +6378,38 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "SOURCE_UNVERIFIED",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-036",
+            "question": "Ενδείξεις – αντενδείξεις χορήγησης ασπιρίνης.",
+            "verdict": "source_unreachable",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "χαμηλή ως προς την παραπομπή",
+            "checkedAt": "2026-10-31",
+            "findings": "Η σελίδα NICE CG95 δεν άνοιξε (client_error από το site), άρα η απάντηση δεν συγκρίθηκε με την πηγή. Η αποθηκευμένη απάντηση δεν περιέχει δόση ούτε διατύπωση «εκτός αν υπάρχει σαφής υπερευαισθησία»· αναφέρει αντενδείξεις (σοβαρή αλλεργία, ενεργός σημαντική αιμορραγία) που είναι εύλογες αλλά αναπόδεικτες εδώ.",
+            "suggestedChange": "Επαλήθευση με ανοιγόμενη πηγή (ERC/RCUK ACS 2025, NICE NG185/CG95 ή SmPC ασπιρίνης) και προσθήκη δόσης αν το πρωτόκολλο την ορίζει.",
+            "sources": [
+              {
+                "title": "NICE CG95 (μη προσβάσιμη)",
+                "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Φάρμακο υψηλού κινδύνου χωρίς επαληθευμένη πηγή."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-037",
@@ -5815,7 +6423,42 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-037",
+            "question": "Πίνακας αντιδότων: οπιούχα, οργανοφωσφορικά, βενζοδιαζεπίνες, κυανιούχα.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Η παραπομπή (CDC MMG, malathion) στηρίζει ΜΟΝΟ τα οργανοφωσφορικά: ατροπίνη, πραλιδοξίμη, διαζεπάμη/λοραζεπάμη για σπασμούς, «do not induce emesis». Δεν στηρίζει τα άλλα τρία. Ναλοξόνη (οπιοειδή) και υδροξοκοβαλαμίνη (κυανιούχα) είναι τα καθιερωμένα αντίδοτα· η φλουμαζενίλη στηρίζεται στο StatPearls (δες B-038). Η φράση «δεν είναι οδηγία αυτόνομης χορήγησης» είναι σωστή.",
+            "suggestedChange": "Προσθήκη ξεχωριστής παραπομπής ανά ουσία (οπιοειδή, κυανιούχα, βενζοδιαζεπίνες).",
+            "sources": [
+              {
+                "title": "CDC MMG — malathion",
+                "url": "https://wwwn.cdc.gov/TSP/MMG/MMGDetails.aspx?mmgid=517&toxid=92"
+              },
+              {
+                "title": "StatPearls — Flumazenil",
+                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482238/"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Έλεγχος αντιδότων και ορίων χορήγησης από κλινικό."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-038",
@@ -5829,7 +6472,37 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-038",
+            "question": "Φάρμακο εκλογής σε αναπνευστική καταστολή από βενζοδιαζεπίνη.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί με StatPearls: η φλουμαζενίλη είναι ανταγωνιστής βενζοδιαζεπινικών υποδοχέων, αλλά «in most cases, the risks … usually outweigh the benefits in acute toxicity»· κίνδυνοι: σπασμοί και αρρυθμίες (ιδίως PSVT), οξύ στερητικό σε χρόνια εξάρτηση. Η απάντηση σωστά δίνει προτεραιότητα στην υποστήριξη αεραγωγού/αερισμού. Η αναφορά σε «μικτή δηλητηρίαση» ως κίνδυνο δεν υπάρχει στο συγκεκριμένο άρθρο (είναι κοινή κλινική γνώση). Δεν δίνεται δόση — σωστά για εκπαιδευτικό κείμενο.",
+            "sources": [
+              {
+                "title": "StatPearls — Flumazenil (NBK482238)",
+                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482238/"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Η ανταπόκριση «φάρμακο εκλογής» στις εξετάσεις και ο ρόλος του διασώστη θέλουν κλινική επιβεβαίωση."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-039",
@@ -5843,7 +6516,36 @@
       "priorReviewStatus": "documented_source_check",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-039",
+            "question": "Ενδείξεις χορήγησης αδρεναλίνης.",
+            "verdict": "consistent",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί με RCUK/ERC 2025 Special circumstances: αναφυλαξία — «Immediately inject intramuscular adrenaline 500 mcg (1 mg/mL) at first suspicion», επανάληψη αν δεν υπάρξει βελτίωση σε 5 λεπτά· επίσης ανακοπή (ALS). Οι παιδιατρικές δόσεις ανά ηλικία δεν υπάρχουν στη σελίδα· η απάντηση σωστά δεν δίνει δόσεις και τονίζει ότι οι ενδείξεις δεν είναι εναλλάξιμες.",
+            "sources": [
+              {
+                "title": "RCUK/ERC 2025 Special circumstances",
+                "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-040",
@@ -5857,7 +6559,38 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-040",
+            "question": "Αντενδείξεις χορήγησης αδρεναλίνης.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Το SmPC (Martindale 1 mg/mL, αναθ. 07/07/2026) αναφέρει ότι οι αντενδείξεις είναι σχετικές σε απειλητικές καταστάσεις — συμβατό με την απάντηση. Αντενδείξεις: υπερευαισθησία στη δραστική ουσία/έκδοχα και ΜΗ χρήση σε δάκτυλα, αυτιά, μύτη, γεννητικά όργανα, γλουτούς (κίνδυνος ισχαιμικής νέκρωσης) — τα τελευταία ΔΕΝ αναφέρονται στην αποθηκευμένη απάντηση.",
+            "suggestedChange": "Προσθήκη: δεν ενίεται σε δάκτυλα, αυτιά, μύτη, γεννητικά όργανα ή γλουτούς· μόνο αν δεν αλλοιώθηκε το διάλυμα.",
+            "sources": [
+              {
+                "title": "emc SmPC — Adrenaline 1 mg/mL (Martindale)",
+                "url": "https://www.medicines.org.uk/emc/product/3673/smpc"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Έλεγχος σχέσης σχετικών αντενδείξεων με επείγουσα χρήση."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-041",
@@ -5871,7 +6604,36 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-041",
+            "question": "Ενδείξεις χορήγησης ατροπίνης.",
+            "verdict": "consistent",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "μέτρια-υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "SmPC ατροπίνης (Aguettant 1 mg/5 mL): επείγουσα βραδυκαρδία/κολποκοιλιακός αποκλεισμός από αυξημένο τόνο πνευμονογαστρικού, ΚΑΡΠΑ για συμπτωματική βραδυκαρδία, αντίδοτο σε δηλητηρίαση από αναστολείς ακετυλοχολινεστεράσης (οργανοφωσφορικά, καρβαμιδικά). Συμφωνεί με την απάντηση. ΠΡΟΣΟΧΗ: το SmPC έχει αναθεώρηση 13/05/2016 (παλιό)· το «όχι ρουτίνα στην ασυστολία» δεν αναφέρεται στο SmPC και δεν επαληθεύτηκε σε κείμενο 2025.",
+            "sources": [
+              {
+                "title": "emc SmPC — Atropine 1 mg/5 mL",
+                "url": "https://www.medicines.org.uk/emc/product/5361/smpc"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-042",
@@ -5885,7 +6647,36 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-042",
+            "question": "Αντενδείξεις χορήγησης ατροπίνης.",
+            "verdict": "consistent",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "Συμφωνεί: SmPC — υπερευαισθησία, γλαύκωμα κλειστής γωνίας, κατακράτηση ούρων από προστατική/ουρηθρική νόσο, αχαλασία, παραλυτικός ειλεός, τοξικό μεγάκολο· δυνατότητα να μην ισχύουν σε απειλητική βραδυαρρυθμία/δηλητηρίαση (το γράφει η ετικέτα). Η απάντηση περιλαμβάνει την ουσία. Προσοχή σε ταχυαρρυθμίες/καρδιακή ανεπάρκεια/στεφανιαία νόσο επίσης στο SmPC (2016).",
+            "sources": [
+              {
+                "title": "emc SmPC — Atropine 1 mg/5 mL",
+                "url": "https://www.medicines.org.uk/emc/product/5361/smpc"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-043",
@@ -5899,7 +6690,38 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-043",
+            "question": "Ενδείξεις χορήγησης νιτρωδών.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "Το SmPC του GTN spray (400 μg/δόση, αναθ. 05/06/2023) δίνει ως ένδειξη την οξεία στηθάγχη και την πρόληψη προκλητής στηθάγχης. Η αποθηκευμένη απάντηση προσθέτει «επιλεγμένο πνευμονικό οίδημα με κατάλληλη αιμοδυναμική κατάσταση», που ΔΕΝ υπάρχει στο SmPC (προέρχεται από κατευθυντήριες/πρωτόκολλα). Επίσης αναφέρει «ισχαιμικό θωρακικό άλγος» ενώ η ένδειξη είναι στηθάγχη.",
+            "suggestedChange": "Διευκρίνιση ότι η χρήση σε πνευμονικό οίδημα βασίζεται σε πρωτόκολλο και όχι στο SmPC· σαφής παραπομπή.",
+            "sources": [
+              {
+                "title": "emc SmPC — GTN spray 400 μg",
+                "url": "https://www.medicines.org.uk/emc/product/674/smpc"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Έλεγχος σύμφωνα με το ελληνικό πρωτόκολλο ΕΚΑΒ."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-044",
@@ -5913,7 +6735,38 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": true,
+          "evidence": {
+            "id": "EOP-B-044",
+            "question": "Αντενδείξεις χορήγησης νιτρωδών.",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός (φάρμακο)",
+            "certainty": "μέτρια-υψηλή",
+            "checkedAt": "2026-10-31",
+            "findings": "SmPC: σοβαρή υπόταση (ΣΑΠ <90 mmHg) και υποτασικό shock, ταυτόχρονη χρήση PDE5 (σιλδεναφίλη, ταδαλαφίλη, βαρδεναφίλη) και ριοσιγουάτη, στηθάγχη από υπερτροφική αποφρακτική μυοκαρδιοπάθεια, στένωση αορτικής/μιτροειδούς, εγκεφαλική αιμορραγία και κρανιοεγκεφαλική κάκωση. Στην απάντηση ΕΛΛΕΙΠΟΥΝ: ριοσιγουάτη και εγκεφαλική αιμορραγία/κρανιοεγκεφαλική κάκωση (σημαντικό σε τραύμα). Η αναφορά σε δεξιά κοιλία είναι κλινική πρακτική και δεν υπάρχει στο SmPC.",
+            "suggestedChange": "Προσθήκη ΣΑΠ <90, ριοσιγουάτης και εγκεφαλικής αιμορραγίας/ΚΕΚ.",
+            "sources": [
+              {
+                "title": "emc SmPC — GTN spray 400 μg",
+                "url": "https://www.medicines.org.uk/emc/product/674/smpc"
+              }
+            ],
+            "clinicalReview": true,
+            "clinicalNote": "Έλεγχος αντενδείξεων νιτρωδών σε προνοσοκομειακό πλαίσιο."
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-045",
@@ -5927,7 +6780,37 @@
       "priorReviewStatus": "historical_targeted_review",
       "questionMatchesStoredReviewQuestion": true,
       "identifiedIssue": null,
-      "status": "full_primary_source_passage_comparison_pending"
+      "status": "full_primary_source_passage_comparison_pending",
+      "externalReviews": [
+        {
+          "origin": "claude-pr140",
+          "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
+          "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
+          "canonicalQuestionUnmodified": true,
+          "fullScientificApproval": false,
+          "humanClinicalSignoff": false,
+          "requiresClinicalReview": false,
+          "evidence": {
+            "id": "EOP-B-045",
+            "question": "Οδοί χορήγησης φαρμάκων και ταξινόμηση κατά ταχύτητα δράσης.",
+            "verdict": "consistent_with_gaps",
+            "risk": "μέτριος",
+            "certainty": "μέτρια",
+            "checkedAt": "2026-10-31",
+            "findings": "StatPearls αναφέρει τις οδούς (στοματική, υπογλώσσια, παρειακή, ορθική, ενδοφλέβια, ενδομυϊκή, υποδόρια, ενδοαρτηριακή, ενδορρινική, εισπνεόμενη, κολπική, διαδερμική, ενδοοστική) αλλά ΔΕΝ ταξινομεί κατά ταχύτητα. Η αποθηκευμένη απάντηση το δηλώνει ρητά: δεν υπάρχει καθολική σειρά· η ενδοφλέβια είναι γενικά ταχύτερη. Είναι ειλικρινής αλλά η ερώτηση ζητά ταξινόμηση.",
+            "suggestedChange": "Αν θέλουμε ενδεικτική σειρά για μελέτη (ΕΦ > εισπνοή/υπογλώσσια > ΕΜ > ΥΔ > από στόματος > ορθική > διαδερμική), να σημειώνεται ότι είναι γενίκευση και όχι από την πηγή.",
+            "sources": [
+              {
+                "title": "StatPearls — Routes of drug administration (NBK568677)",
+                "url": "https://www.ncbi.nlm.nih.gov/books/NBK568677/"
+              }
+            ],
+            "clinicalReview": false
+          }
+        }
+      ]
     },
     {
       "id": "EOP-B-046",
