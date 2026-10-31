@@ -16,13 +16,15 @@ const tidy=(value,max)=>String(value??'').replace(/[\x00-\x1f\x7f<>]/g,' ').repl
 export function validTopic(id){return TOPICS.has(id)?id:'';}
 export function validSource(path){return SOURCES.has(path)||COURSE.test(String(path))?path:'';}
 export function safeFocus(value){return tidy(value,90);}
+export function safeChapter(value){return /^lesson-(?:[1-9]|[1-9][0-9]|100)$/.test(String(value||''))?value:'';}
 export function contextFromQuery(query){
   const q=query instanceof URLSearchParams?query:new URLSearchParams(String(query||'').replace(/^\?/,''));
   const topic=validTopic(q.get('topic'));
   if(!topic)return null;
-  return {topic,from:validSource(q.get('from')),focus:safeFocus(q.get('focus'))};
+  const chapter=safeChapter(q.get('chapter'));
+  return {topic,from:validSource(q.get('from')),focus:safeFocus(q.get('focus')),...(chapter?{chapter}:{})};
 }
-export function makeJourneyUrl(page,{topic,from='',focus=''},view=''){
+export function makeJourneyUrl(page,{topic,from='',focus='',chapter=''},view=''){
   if(!['mentor-lab.html','mentor-protocol-suite.html'].includes(page))return '';
   const id=validTopic(topic);
   if(!id)return '';
@@ -31,6 +33,7 @@ export function makeJourneyUrl(page,{topic,from='',focus=''},view=''){
   if(source)params.set('from',source);
   const caption=safeFocus(focus);
   if(caption)params.set('focus',caption);
+  if(source&&COURSE.test(source)&&safeChapter(chapter))params.set('chapter',chapter);
   if(page==='mentor-protocol-suite.html')params.set('view',view==='debrief'?'debrief':'lab');
   return page+'?'+params.toString()+(page==='mentor-lab.html'?'#mentor-presence':'');
 }
@@ -49,8 +52,12 @@ export function sourceFromPath(path){
   if(raw.endsWith('/ui-tools/anatomy-3d/index.html'))return 'ui-tools/anatomy-3d/index.html';
   return validSource(raw.split('/').pop());
 }
-export function journeyFromPage(path,focus=''){
+export function journeyFromPage(path,focus='',chapter=''){
   const from=sourceFromPath(path),topic=topicForSource(from);
-  return topic?{topic,from,focus:safeFocus(focus)}:null;
+  const ch=COURSE.test(from)?safeChapter(chapter):'';
+  return topic?{topic,from,focus:safeFocus(focus),...(ch?{chapter:ch}:{})}:null;
 }
-export function returnPage(context){return context?validSource(context.from):'';}
+export function returnPage(context){
+ const from=context?validSource(context.from):'';
+ return from&&COURSE.test(from)&&safeChapter(context.chapter)?from+'#'+context.chapter:from;
+}
