@@ -206,17 +206,17 @@
   },
   {
    "id": "EOP-B-013",
-   "question": "Αίτια βραδυκαρδίας.",
-   "verdict": "source_unreachable",
+   "question": "Συνηθέστερες αιτίες βραδυκαρδίας.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE CG95 δεν άνοιξε (client_error) και, ούτως ή άλλως, το CG95 αφορά θωρακικό άλγος· δεν έγινε σύγκριση με πηγή. Το περιεχόμενο είναι κλινικά εύλογο αλλά αναπόδεικτο εδώ.",
-   "suggestedChange": "Αντικατάσταση/προσθήκη προσβάσιμης πηγής (ESC/ERC, StatPearls, ελληνικό πρωτόκολλο).",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Sinus Bradycardia: φυσιολογική στους αθλητές (αυξημένος παρασυμπαθητικός τόνος), β-αποκλειστές, ανταγωνιστές ασβεστίου, διγοξίνη, υποξία, ισχαιμική καρδιοπάθεια/έμφραγμα, υπερκαλιαιμία, ενδοκράνια υπέρταση. Η υποθερμία δεν περιλαμβάνεται στους καταλόγους αιτιών του άρθρου (αναφέρεται μόνο ότι πρέπει να θερμανθεί ο ασθενής πριν από οριστικές αποφάσεις)· η αύξηση ΕΚΠ λείπει από την απάντηση.",
+   "suggestedChange": "Προαιρετικά να προστεθεί η αυξημένη ενδοκράνια πίεση.",
    "sources": [
     {
-     "title": "NICE (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+     "title": "StatPearls — Sinus Bradycardia",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK493201/"
     }
    ],
    "clinicalReview": false
@@ -499,15 +499,15 @@
   {
    "id": "EOP-B-030",
    "question": "Συμπτώματα εσωτερικής αιμορραγίας.",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός (τραύμα)",
-   "certainty": "χαμηλή",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή (WHO Basic Emergency Care) είναι PDF χωρίς εξαγώγιμο κείμενο· δεν έγινε σύγκριση με την πηγή. Το περιεχόμενο είναι κλινικά εύλογο (ταχυκαρδία, ωχρότητα, ψυχρός ιδρώτας, όψιμη υπόταση) αλλά αναπόδεικτο εδώ.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Hemorrhagic Shock: η ταχυκαρδία είναι συνήθως το πρώτο παθολογικό ζωτικό σημείο, ακολουθούν ταχύπνοια και στένωση σφυγμικής πίεσης· ψυχρά άκρα και καθυστερημένη τριχοειδική επαναπλήρωση· η πίεση μπορεί να παραμείνει φυσιολογική αρχικά, με σημαντική πτώση και αλλοίωση συνείδησης στην κλάση 3–4. Συμφωνεί με την ουσία της απάντησης (φυσιολογική αρχική πίεση δεν αποκλείει). Ωχρότητα, ψυχρός ιδρώτας, δίψα και τοπικά ευρήματα (διάταση, εκχύμωση) δεν επιβεβαιώθηκαν από αυτή την πηγή.",
    "sources": [
     {
-     "title": "WHO Basic Emergency Care (PDF μη αναγνώσιμο)",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Hemorrhagic Shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470382/"
     }
    ],
    "clinicalReview": false
@@ -547,38 +547,35 @@
   },
   {
    "id": "EOP-B-033",
-   "question": "Δώστε τον ορισμό της αιμόπτυσης και αναφέρατε τα αίτια που την προκαλούν.",
-   "verdict": "source_unreachable",
+   "question": "Ορισμός και αίτια αιμόπτυσης.",
+   "verdict": "consistent",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: αιμόπτυση είναι η απόχρεμψη αίματος από το αναπνευστικό· αίτια βρογχίτιδα, βρογχεκτασίες, φυματίωση, καρκίνος, πνευμονική εμβολή, πνευμονία. Διαφοροποίηση από αιματέμεση (πηγή ανώτερο ΓΕΣ) και ψευδοαιμόπτυση. Συμφωνεί.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "MSD — Hemoptysis",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/symptoms-of-pulmonary-disorders/hemoptysis"
     }
    ],
    "clinicalReview": false
   },
   {
    "id": "EOP-B-034",
-   "question": "Να αναφέρετε τα συμπτώματα - κλινική εικόνα ασθενούς που πάσχει από καρδιακό επιπωματισμό.",
-   "verdict": "source_unreachable",
+   "question": "Συμπτώματα/κλινική εικόνα καρδιακού επιπωματισμού.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD Cardiac Tamponade: τριάδα Beck (υπόταση, υποφωνητικοί/βύθιοι καρδιακοί τόνοι, αύξηση φλεβικής πίεσης/διάταση σφαγίτιδων) «διαγνωστική αλλά όχι πάντα παρούσα»· στο τραύμα είναι αναξιόπιστη (διάταση σφαγίτιδων μπορεί να λείπει σε υποογκαιμία)· παράδοξος σφυγμός ως ενδεικτικό αλλά δύσκολο εύρημα. Συμφωνεί με την απάντηση. Η ταχυκαρδία δεν αναφέρεται στο απόσπασμα που διαβάστηκε (δεν επιβεβαιώθηκε από αυτή την πηγή).",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "MSD — Cardiac Tamponade",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/cardiac-tamponade"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-035",
@@ -1497,21 +1494,20 @@
   },
   {
    "id": "EOP-B-089",
-   "question": "Να αναφέρετε τα συμπτώματα και τα κλινικά σημεία που υποδηλώνουν βλάβη του ανωτέρου αναπνευστικού σε εγκαυματία.",
-   "verdict": "source_unreachable",
+   "question": "Συμπτώματα/σημεία βλάβης ανώτερου αναπνευστικού σε εγκαυματία.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή.) PMC4624587 (Diagnosis and management of inhalation injury): εγκαύματα προσώπου, καμένες τρίχες προσώπου/μύτης, αιθάλη στο πρόσωπο ή τα πτύελα, στριδορώδης αναπνοή/οίδημα/βλάβη βλεννογόνου, ταχέως εξελισσόμενο οίδημα φάρυγγα. Επιβεβαιώνονται αιθάλη, εγκαύματα προσώπου/στοματοφάρυγγα, οίδημα, stridor. Βράγχος φωνής και δυσκαταποσία δεν αναφέρονται στο άρθρο (δεν επιβεβαιώθηκαν εδώ)· οι καμένες τρίχες και τα αιθαλώδη πτύελα λείπουν από την απάντηση.",
+   "suggestedChange": "Προαιρετική προσθήκη: καμένες τρίχες προσώπου/ρινός, αιθαλώδη πτύελα.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "PMC — Diagnosis and management of inhalation injury: an updated review",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4624587/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-090",
