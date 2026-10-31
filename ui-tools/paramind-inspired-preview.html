@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#092633">
+<title>ΕΚΑΒ Σπουδή — Νέα σχεδιαστική πρόταση</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light;--bg:#f3f7f8;--surface:#fff;--ink:#112a35;--muted:#647b85;--line:#dae6e8;--aqua:#007d87;--soft:#e8f6f4;--night:#0b2d3a;--highlight:#9de2ce}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #1aa5ab;outline-offset:3px}
+.skip{position:absolute;left:-10000px;top:10px;background:#fff;padding:9px;z-index:12}.skip:focus{left:10px}
+.topbar{background:#fff;border-bottom:1px solid var(--line)}
+.topinner{max-width:1280px;margin:auto;padding:15px 26px;display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;min-width:205px}
+.mark{display:grid;place-items:center;width:45px;height:45px;border-radius:13px;background:var(--night);color:#adf9dc;font-size:26px;font-weight:800}
+.brand strong{display:block;font-size:17px;letter-spacing:-.04em;line-height:1.15}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.searchwrap{display:flex;align-items:center;gap:9px;background:#f3f7f8;border:1px solid #e1eaeb;border-radius:12px;padding:9px 14px;flex:1;max-width:460px;color:#6d848d}
+.searchwrap input{min-width:0;flex:1;border:0;background:transparent;outline:none;color:var(--ink);font-size:14px}
+.searchwrap input:focus-visible{outline:none}
+.iconbtn{border:1px solid var(--line);background:#fff;border-radius:12px;min-height:41px;padding:0 12px;font-size:19px;color:var(--ink)}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:9px}
+.home-link{font-weight:750;color:var(--aqua);font-size:13px}
+.layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:30px;padding:30px 26px 90px}
+.sidebar{position:sticky;top:18px;align-self:start}
+.side-title{font-size:11px;font-weight:850;letter-spacing:.12em;color:#8b9da4;margin:16px 0 10px;padding-left:14px}
+.side-link{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:13px;font-size:14px;font-weight:720;color:#4d6974;margin:4px 0}
+.side-link.active,.side-link:hover{background:#e3f1f0;color:#08646c}
+.side-link .symbol{font-size:19px;line-height:1}
+.side-note{margin-top:27px;padding:16px;border-radius:16px;background:#e8f1f2;color:#42636a;font-size:12px}
+.content{min-width:0}
+.eyebrow{color:#16888a;font-size:11px;font-weight:850;letter-spacing:.16em}
+.hero{background:linear-gradient(114deg,#0a2938,#104956 69%,#135a61);border-radius:24px;color:#fff;display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,310px);gap:20px;padding:36px;overflow:hidden;position:relative;box-shadow:0 16px 38px #0a374114}
+.hero::before{content:"";position:absolute;right:-60px;top:-90px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,#70e6c332,transparent 65%);pointer-events:none}
+.hero .eyebrow{color:#98e9d3}
+.hero h1{font-size:clamp(29px,4vw,48px);line-height:1.09;margin:14px 0 14px;letter-spacing:-.05em;max-width:620px}
+.hero p{font-size:15px;color:#c8e1e4;max-width:510px;margin:0 0 25px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.primary,.outline{display:inline-flex;gap:8px;align-items:center;justify-content:center;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:820;min-height:45px}
+.primary{background:#a4f0d8;color:#093740}
+.outline{border:1px solid #a5d4d999;background:#ffffff14;color:#fff}
+.mentor-panel{border:1px solid #a2d7df3c;border-radius:18px;min-height:256px;background:#ffffff0e;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;padding:18px}
+.mentor-status{font-size:11px;color:#c5f5e6;font-weight:800}
+.dot{display:inline-block;width:7px;height:7px;background:#b0f2db;border-radius:50%;margin-right:5px}
+.orbit{width:158px;height:158px;margin:6px auto 0;border:1px solid #9febd34f;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 14px #ffffff07,0 0 42px #69ebbb12}
+.avatar{width:95px;height:95px;border-radius:30px;background:linear-gradient(150deg,#246c76,#70b4aa);display:grid;place-items:center;font-size:50px;color:white}
+.mentor-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:#d3eeea}
+.mentor-foot a{font-weight:850;color:#a7f4d9}
+.highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:18px 0 35px}
+.highlight{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:16px 17px;display:flex;align-items:center;gap:13px;min-width:0}
+.highlight-icon{width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;background:#e8f6f4;border-radius:10px;font-size:19px}
+.highlight strong{display:block;font-size:13px}.highlight small{display:block;font-size:11px;color:var(--muted)}
+.section{scroll-margin-top:22px;margin:35px 0}
+.section-heading{display:flex;gap:12px;align-items:end;justify-content:space-between;margin-bottom:16px}
+.section-heading h2{font-size:25px;letter-spacing:-.04em;margin:5px 0 3px}
+.section-heading p{font-size:13px;color:var(--muted);margin:0}
+.count{color:#65818b;font-size:12px;font-weight:780;white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{display:flex;flex-direction:column;min-height:180px;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:21px 19px;box-shadow:0 3px 14px #0b303807;transition:transform .16s,box-shadow .16s,border-color .16s}
+.card:hover{transform:translateY(-3px);box-shadow:0 9px 25px #0a394211;border-color:#a5cbd0}
+.card-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#e9f6f5;font-size:23px}
+.card h3{font-size:15px;line-height:1.3;margin:0;letter-spacing:-.02em}
+.card p{color:var(--muted);font-size:12px;margin:0;flex:1}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:3px;color:#087e83;font-size:11px;font-weight:800}
+.card-bottom span:last-child{font-size:19px}
+.card[hidden],.section[hidden]{display:none}
+.no-results{border:1px dashed var(--line);padding:24px;border-radius:15px;color:var(--muted);text-align:center}
+.bottom-note{border:1px solid var(--line);background:#edf5f5;border-radius:14px;padding:14px 18px;font-size:12px;color:#58717a;margin-top:36px}
+footer{font-size:11px;color:#80959d;padding:22px 0}
+.mobile-nav{display:none}
+html[data-theme="dark"]{color-scheme:dark;--bg:#071b25;--surface:#102d3a;--ink:#e6f7f6;--muted:#aac4cb;--line:#284c56;--aqua:#6fd8cf;--soft:#173c43}
+html[data-theme="dark"] .topbar,html[data-theme="dark"] .iconbtn{background:#102d3a}
+html[data-theme="dark"] .searchwrap{background:#0a2530;border-color:#28515c}
+html[data-theme="dark"] .side-link.active,html[data-theme="dark"] .side-link:hover,html[data-theme="dark"] .side-note,html[data-theme="dark"] .highlight-icon,html[data-theme="dark"] .card-icon,html[data-theme="dark"] .bottom-note{background:#163e47}
+html[data-theme="dark"] .side-link{color:#bad6da}
+html[data-theme="dark"] .side-link.active{color:#9cefe1}
+@media(max-width:1000px){.layout{grid-template-columns:175px minmax(0,1fr);gap:20px;padding:24px 18px}.hero{grid-template-columns:1fr 230px;padding:25px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.highlights{gap:9px}.highlight{padding:11px}}
+@media(max-width:720px){.topinner{padding:13px 15px;gap:12px;flex-wrap:wrap}.brand{min-width:0}.brand small{display:none}.searchwrap{order:3;max-width:none;flex-basis:100%}.top-actions{margin-left:auto}.home-link{display:none}.layout{display:block;padding:14px 14px 65px}.sidebar{display:none}.mobile-nav{display:flex;gap:8px;overflow-x:auto;margin:3px 0 17px;padding-bottom:5px;scrollbar-width:none}.mobile-nav a{font-size:12px;font-weight:800;border-radius:99px;padding:10px 14px;background:#dfedee;color:#315d66;white-space:nowrap}.hero{grid-template-columns:1fr;border-radius:20px;padding:26px 21px;gap:20px}.hero h1{font-size:31px}.hero p{font-size:13px}.mentor-panel{min-height:185px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}.orbit{width:115px;height:115px;grid-row:1 / span 2;grid-column:2;margin:0}.avatar{width:70px;height:70px;border-radius:21px;font-size:38px}.mentor-foot{grid-column:1;display:block}.mentor-foot a{display:block;margin-top:6px}.highlights{grid-template-columns:1fr 1fr;margin-bottom:26px}.highlight:last-child{grid-column:1 / -1}.section{margin:28px 0}.section-heading h2{font-size:23px}}
+@media(max-width:400px){.cards{grid-template-columns:1fr}.card{min-height:150px}.highlights{grid-template-columns:1fr}.highlight:last-child{grid-column:auto}.mentor-panel{padding:12px}.hero-actions a{flex:1}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Μετάβαση στο περιεχόμενο</a>
+<header class="topbar"><div class="topinner">
+ <a class="brand" href="../index.html" aria-label="ΕΚΑΒ Σπουδή — αρχική"><span class="mark" aria-hidden="true">✚</span><span><strong>ΕΚΑΒ Σπουδή</strong><small>Εκπαίδευση Διασωστών</small></span></a>
+ <label class="searchwrap"><span aria-hidden="true">⌕</span><input id="filter" type="search" placeholder="Αναζήτηση εκπαιδευτικού εργαλείου…" aria-label="Αναζήτηση εργαλείων"></label>
+ <div class="top-actions"><a class="home-link" href="../index.html">Τρέχουσα αρχική ↗</a><button id="theme" class="iconbtn" type="button" aria-label="Εναλλαγή φωτεινού και σκοτεινού θέματος">◐</button></div>
+</div></header>
+<div class="layout">
+<aside class="sidebar" aria-label="Πλοήγηση πρότασης">
+ <div class="side-title">ΕΚΠΑΙΔΕΥΣΗ</div>
+ <a class="side-link active" href="#content"><span class="symbol">⌂</span>Επισκόπηση</a>
+ <a class="side-link" href="#learn"><span class="symbol">◫</span>Μάθηση</a>
+ <a class="side-link" href="#practise"><span class="symbol">✚</span>Εξάσκηση</a>
+ <a class="side-link" href="#reflect"><span class="symbol">▤</span>Ανασκόπηση</a>
+ <div class="side-title">MENTOR OS</div>
+ <a class="side-link" href="../mentor-lab.html"><span class="symbol">◎</span>MENTOR Lab</a>
+ <a class="side-link" href="../mentor-live.html"><span class="symbol">✳</span>Σενάρια</a>
+ <div class="side-note"><strong>Σχεδιαστική προεπισκόπηση</strong><p>Ανεξάρτητο interface βασισμένο σε σύγχρονες αρχές εκπαιδευτικών dashboards. Δεν αλλάζει την τρέχουσα εφαρμογή.</p></div>
+</aside>
+<main id="content" class="content">
+<nav class="mobile-nav" aria-label="Ενότητες"><a href="#learn">📖 Μάθηση</a><a href="#practise">🚑 Εξάσκηση</a><a href="#reflect">📊 Ανασκόπηση</a><a href="../index.html">Αρχική ↗</a></nav>
+<section class="hero" aria-label="Καλώς ήρθες">
+ <div>
+  <div class="eyebrow">Η ΔΙΚΗ ΣΟΥ ΕΚΠΑΙΔΕΥΤΙΚΗ ΔΙΑΔΡΟΜΗ</div>
+  <h1>Μάθε. Εξασκήσου.<br>Γίνε καλύτερος.</h1>
+  <p>Η θεωρία της ΣΑΕΚ, η προετοιμασία ΕΟΠΠΕΠ, τα κλινικά σενάρια και ο MENTOR σε ένα οργανωμένο περιβάλλον.</p>
+  <div class="hero-actions"><a class="primary" href="../saek.html">Ξεκίνα μάθημα <span aria-hidden="true">↗</span></a><a class="outline" href="../mentor-lab.html">MENTOR Lab <span aria-hidden="true">→</span></a></div>
+ </div>
+ <div class="mentor-panel" aria-label="MENTOR OS — πρόσβαση στον υπάρχοντα εκπαιδευτή">
+  <span class="mentor-status"><span class="dot"></span>MENTOR OS · ΕΚΠΑΙΔΕΥΤΗΣ</span>
+  <div class="orbit"><div class="avatar" aria-hidden="true">✚</div></div>
+  <div class="mentor-foot"><span>Ένας MENTOR για όλα τα μαθήματα</span><a href="../mentor-lab.html">Άνοιγμα ↗</a></div>
+ </div>
+</section>
+<div class="highlights" aria-label="Γρήγορες διαδρομές">
+ <a class="highlight" href="../saek.html"><span class="highlight-icon">📚</span><span><strong>ΣΑΕΚ ΕΚΑΒ</strong><small>Θεωρία & κεφάλαια</small></span></a>
+ <a class="highlight" href="../eoppep.html"><span class="highlight-icon">🎯</span><span><strong>ΕΟΠΠΕΠ</strong><small>Προετοιμασία εξετάσεων</small></span></a>
+ <a class="highlight" href="../mentor-live.html"><span class="highlight-icon">🚑</span><span><strong>Κλινική εξάσκηση</strong><small>Εκπαιδευτικά σενάρια</small></span></a>
+</div>
+<section id="learn" class="section" data-group>
+<div class="section-heading"><div><div class="eyebrow">01 · LEARN</div><h2>Μάθηση</h2><p>Θεωρία και εκπαιδευτικά εργαλεία σε μία θέση.</p></div><span class="count">6 εργαλεία</span></div>
+<div class="cards">
+ <a class="card" href="../saek.html" data-keywords="μαθήματα σαεκ εκπαίδευση βιβλίο"><span class="card-icon">📖</span><h3>Μαθήματα ΣΑΕΚ</h3><p>Εξάμηνα, μαθήματα, κεφάλαια και οργανωμένη ύλη.</p><span class="card-bottom"><span>Θεωρία</span><span>↗</span></span></a>
+ <a class="card" href="anatomy-3d/index.html" data-keywords="ανατομία 3d ανθρώπινο σώμα οστά"><span class="card-icon">🦴</span><h3>3D Ανατομία</h3><p>Εξερεύνησε δομές και συστήματα του ανθρώπινου σώματος.</p><span class="card-bottom"><span>Διαδραστικό</span><span>↗</span></span></a>
+ <a class="card" href="../farmaka.html" data-keywords="φάρμακα φαρμακολογία"><span class="card-icon">💊</span><h3>Φαρμακολογία</h3><p>Εκπαιδευτικές καρτέλες και βασικές φαρμακολογικές έννοιες.</p><span class="card-bottom"><span>Μελέτη</span><span>↗</span></span></a>
+ <a class="card" href="../protocols.html" data-keywords="ελληνικά πρωτόκολλα πηγές"><span class="card-icon">📑</span><h3>Ελληνικά Πρωτόκολλα</h3><p>Θέματα, παραπομπές και σύνδεση με το υπάρχον MENTOR OS.</p><span class="card-bottom"><span>Πηγές</span><span>↗</span></span></a>
+ <a class="card" href="../mentor-ecg.html" data-keywords="ηκγ ecg καρδιά ηλεκτροκαρδιογράφημα"><span class="card-icon">💓</span><h3>ECG Lab</h3><p>Εκπαίδευση στην αναγνώριση καρδιακών ρυθμών.</p><span class="card-bottom"><span>Εκπαίδευση</span><span>↗</span></span></a>
+ <a class="card" href="../mentor-readonly.html" data-keywords="mentor μελέτη καθηγητής ύλη"><span class="card-icon">🧠</span><h3>MENTOR · Μελέτη</h3><p>Μετάβαση στον υπάρχοντα εκπαιδευτή και το υλικό του.</p><span class="card-bottom"><span>MENTOR OS</span><span>↗</span></span></a>
+</div></section>
+<section id="practise" class="section" data-group>
+<div class="section-heading"><div><div class="eyebrow">02 · PRACTISE</div><h2>Εξάσκηση</h2><p>Εφάρμοσε όσα μαθαίνεις σε ασκήσεις και περιστατικά.</p></div><span class="count">5 εργαλεία</span></div>
+<div class="cards">
+ <a class="card" href="../eoppep.html" data-keywords="εοπεπ εξετάσεις πιστοποίηση ερωτήσεις"><span class="card-icon">🎯</span><h3>Εξετάσεις ΕΟΠΠΕΠ</h3><p>Θεωρητική και πρακτική προετοιμασία πιστοποίησης.</p><span class="card-bottom"><span>Ερωτήσεις</span><span>↗</span></span></a>
+ <a class="card" href="../mentor-live.html" data-keywords="σενάρια περιστατικά διασώστης"><span class="card-icon">🚑</span><h3>Κλινικά σενάρια</h3><p>Εκπαιδευτική διαδρομή αντιμετώπισης περιστατικών.</p><span class="card-bottom"><span>Προσομοίωση</span><span>↗</span></span></a>
+ <a class="card" href="../seminar-prep.html" data-keywords="bls aed phtls als σεμινάρια"><span class="card-icon">⚡</span><h3>Προετοιμασία σεμιναρίων</h3><p>Εξάσκηση πάνω σε BLS/AED, PBLS, ILS, PHTLS και ALS.</p><span class="card-bottom"><span>Ασκήσεις</span><span>↗</span></span></a>
+ <a class="card" href="../practical_exam.html" data-keywords="πρακτικές εξετάσεις δεξιότητες"><span class="card-icon">🩺</span><h3>Πρακτική εξέταση</h3><p>Μελέτη πρακτικών δεξιοτήτων και διαδικασιών.</p><span class="card-bottom"><span>Δεξιότητες</span><span>↗</span></span></a>
+ <a class="card" href="../mentor-lab.html" data-keywords="mentor lab εκπαιδευτής προσομοίωση"><span class="card-icon">◎</span><h3>MENTOR Lab</h3><p>Ενιαίος χώρος του υπάρχοντος MENTOR, χωρίς νέο σύστημα συνομιλίας.</p><span class="card-bottom"><span>MENTOR OS</span><span>↗</span></span></a>
+</div></section>
+<section id="reflect" class="section" data-group>
+<div class="section-heading"><div><div class="eyebrow">03 · REFLECT</div><h2>Ανασκόπηση</h2><p>Επέστρεψε στην πρόοδό σου και στις εκπαιδευτικές αξιολογήσεις.</p></div><span class="count">3 εργαλεία</span></div>
+<div class="cards">
+ <a class="card" href="../index.html#homeMultiTracker" data-keywords="πρόοδος επιδόσεις στατιστικά"><span class="card-icon">📊</span><h3>Η πρόοδός μου</h3><p>Προβολή των ήδη υπαρχόντων δεικτών μελέτης.</p><span class="card-bottom"><span>Πρόοδος</span><span>↗</span></span></a>
+ <a class="card" href="../index.html#studyResume" data-keywords="συνέχεια μελέτης επανάληψη"><span class="card-icon">🔖</span><h3>Συνέχεια μελέτης</h3><p>Συνέχισε από το σημείο που σταμάτησες.</p><span class="card-bottom"><span>Συνέχεια</span><span>↗</span></span></a>
+ <a class="card" href="../mentor-oral.html" data-keywords="προφορική εξέταση αξιολόγηση mentor"><span class="card-icon">🎙️</span><h3>Αξιολόγηση MENTOR</h3><p>Άνοιγμα της υπάρχουσας εκπαιδευτικής ενότητας αξιολόγησης.</p><span class="card-bottom"><span>MENTOR OS</span><span>↗</span></span></a>
+</div></section>
+<p id="no-results" class="no-results" hidden>Δεν βρέθηκε εργαλείο με αυτόν τον όρο.</p>
+<div class="bottom-note">Προεπισκόπηση νέου interface — δημιουργήθηκε ανεξάρτητα για το ΕΚΑΒ Σπουδή. Καμία αλλαγή σε δεδομένα μελέτης, MENTOR OS ή υφιστάμενες λειτουργίες. Το περιεχόμενο χρησιμοποιείται αποκλειστικά για εκπαίδευση.</div>
+<footer>ΕΚΑΒ Σπουδή · UI concept · Δεν αποτελεί αντίγραφο του κώδικα του Paramind.</footer>
+</main></div>
+<script>
+(function(){
+ "use strict";
+ var filter=document.getElementById("filter");
+ var groups=Array.prototype.slice.call(document.querySelectorAll("[data-group]"));
+ var empty=document.getElementById("no-results");
+ function normalize(s){return (s||"").toLocaleLowerCase("el").normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+ filter.addEventListener("input",function(){
+  var q=normalize(filter.value.trim()),shown=0;
+  groups.forEach(function(group){
+   var count=0;
+   group.querySelectorAll(".card").forEach(function(card){
+    var match=!q||normalize(card.textContent+" "+(card.getAttribute("data-keywords")||"")).indexOf(q)!==-1;
+    card.hidden=!match;if(match){shown++;count++;}
+   });
+   group.hidden=count===0;
+  });
+  empty.hidden=shown!==0;
+ });
+ var theme=document.getElementById("theme");
+ theme.addEventListener("click",function(){
+  var dark=document.documentElement.getAttribute("data-theme")==="dark";
+  if(dark){document.documentElement.removeAttribute("data-theme");}else{document.documentElement.setAttribute("data-theme","dark");}
+  theme.setAttribute("aria-pressed",String(!dark));
+ });
+})();
+</script>
+</body></html>
