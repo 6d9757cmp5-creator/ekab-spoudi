@@ -158,16 +158,15 @@
   {
    "id": "EOP-B-010",
    "question": "Πέντε επιπλοκές οξέος εμφράγματος.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE CG95 δεν άνοιξε (client_error) και, ούτως ή άλλως, το CG95 αφορά θωρακικό άλγος· δεν έγινε σύγκριση με πηγή. Το περιεχόμενο είναι κλινικά εύλογο αλλά αναπόδεικτο εδώ. Το CG95 δεν καλύπτει επιπλοκές εμφράγματος.",
-   "suggestedChange": "Αντικατάσταση/προσθήκη προσβάσιμης πηγής (ESC/ERC, StatPearls, ελληνικό πρωτόκολλο).",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: αρρυθμίες (έως 90%, VF στις πρώτες 24 ώρες, κολπική μαρμαρυγή, αποκλεισμός), καρδιακή ανεπάρκεια (14–36%), καρδιογενές shock (5–10%), μηχανικές επιπλοκές (ρήξη μεσοκοιλιακού διαφράγματος, ρήξη θηλοειδούς μυός, ρήξη ελεύθερου τοιχώματος), ανεύρυσμα/θρόμβωση, περικαρδίτιδα/σύνδρομο Dressler. Συμφωνεί πλήρως.",
    "sources": [
     {
-     "title": "NICE (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+     "title": "MSD — Complications of ACS",
+     "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/complications-of-acute-coronary-syndromes"
     }
    ],
    "clinicalReview": false
@@ -810,16 +809,16 @@
   },
   {
    "id": "EOP-B-048",
-   "question": "Ορισμός και είδη καταπληξίας.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς παραπομπή",
+   "question": "Ορισμός και είδη shock.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO BEC δεν είναι αναγνώσιμη. Η ταξινόμηση (υποογκαιμικό, καρδιογενές, αποφρακτικό, διανεμητικό) είναι καθιερωμένη και συμφωνεί με την RCUK Paediatric που χρησιμοποιεί τους όρους hypovolaemic/obstructive/distributive/cardiogenic.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: «Shock is tissue hypoperfusion caused by acute circulatory failure»· είδη: υποογκαιμικό, διανεμητικό (αναφυλαξία, σηπτικό, νευρογενές), καρδιογενές, αποφρακτικό (υπό τάση πνευμοθώρακας, επιπωματισμός, μαζική ΠΕ). Συμφωνεί πλήρως.",
    "sources": [
     {
-     "title": "WHO BEC (μη αναγνώσιμο)",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "Merck — Shock",
+     "url": "https://www.merckmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
     }
    ],
    "clinicalReview": false
@@ -1466,17 +1465,16 @@
   },
   {
    "id": "EOP-B-087",
-   "question": "Να αναφέρετε τα σημεία του σώματος που είναι δυνατή η λήψη σφυγμού.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Σημεία λήψης σφυγμού.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: κερκιδική, βραχιόνια, μηριαία, ιγνυακή, οπίσθια κνημιαία, ραχιαία ποδός. Η απάντηση τα περιλαμβάνει και προσθέτει καρωτιδική και κροταφική (κλασικές θέσεις, όχι στο απόσπασμα).",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Peripheral pulse",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK542175/"
     }
    ],
    "clinicalReview": false
@@ -1902,17 +1900,16 @@
   },
   {
    "id": "EOP-B-113",
-   "question": "Να αναφέρετε έξι (6) αίτια θωρακικού πόνου.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Έξι αίτια θωρακικού πόνου.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: ισχαιμία μυοκαρδίου και διαχωρισμός αορτής, πνευμονική εμβολή, υπό τάση πνευμοθώρακας (άμεσες απειλές)· περικαρδίτιδα, μυοκαρδίτιδα, πνευμονία, πνευμοθώρακας, παγκρεατίτιδα, ρήξη οισοφάγου· μυοσκελετικός πόνος, ΓΟΠΝ, έρπης ζωστήρας κ.ά. Η λίστα της απάντησης (ΟΣΣ, ΠΕ, πνευμοθώρακας, αορτικός διαχωρισμός, περικαρδίτιδα, μυοσκελετικός, παλινδρόμηση, πνευμονία) συμφωνεί.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+     "title": "Merck — Chest pain",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/symptoms-of-cardiovascular-disorders/chest-pain"
     }
    ],
    "clinicalReview": false
@@ -1957,19 +1954,21 @@
   },
   {
    "id": "EOP-B-116",
-   "question": "Βασικές αρχές (IFRC 2025).",
-   "verdict": "source_unreachable",
+   "question": "Κρυοπαγήματα.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή",
+   "certainty": "μέτρια-υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Το PDF IFRC άνοιξε μόνο μερικώς (μόνο ευρετήριο θεμάτων)· τα σχετικά κεφάλαια δεν διαβάστηκαν. Δεν έγινε σύγκριση.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck Frostbite: εμβάπτιση σε ζεστό (όχι ξηρή θερμότητα) νερό· σε νοσοκομείο 37–39°C, 15–30′· αποφυγή απόψυξης–επαναπαγώματος· αποφυγή τριψίματος· αναλγησία. Η απάντηση συμφωνεί στην αποφυγή τριψίματος και επαναπαγώματος αλλά λέει «αποφυγή απόψυξης» και «αποφυγή άμεσης ξηρής θερμότητας»: η σελίδα προτείνει επαναθέρμανση σε νερό όταν δεν υπάρχει κίνδυνος επαναπαγώματος. Λείπουν η αναλγησία και το θερμό νερό.",
    "sources": [
     {
-     "title": "IFRC International First Aid Guidelines 2025 (μερική πρόσβαση)",
-     "url": "https://www.ifrc.org/sites/default/files/2026-03/IFRC%20International%20First%20Aid%2C%20Resuscitation%20and%20Education%20Guidelines%202025.pdf"
+     "title": "Merck — Frostbite",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/cold-injury/frostbite"
     }
    ],
-   "clinicalReview": false
+   "clinicalReview": true,
+   "suggestedChange": "Διευκρίνιση: επαναθέρμανση σε ζεστό νερό μόνο αν δεν υπάρχει κίνδυνος επαναπαγώματος.",
+   "clinicalNote": "Επαναθέρμανση προνοσοκομειακά: πρωτόκολλο."
   },
   {
    "id": "EOP-B-117",
@@ -1994,21 +1993,19 @@
   },
   {
    "id": "EOP-B-118",
-   "question": "Από τι κινδυνεύει ασθενής με δηλητηρίαση από αλκοόλ κατά την μεταφορά του;",
-   "verdict": "source_unreachable",
+   "question": "Κίνδυνοι δηλητηρίασης από αλκοόλ κατά τη μεταφορά.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: εμετός και κίνδυνος εισρόφησης, υπογλυκαιμία, υπόταση, αναπνευστική καταστολή· BAC ≥400 mg/dL μπορεί να είναι θανατηφόρο. Συμφωνεί (η υποθερμία δεν αναφέρεται στη σελίδα).",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "Merck — Alcohol toxicity and withdrawal",
+     "url": "https://www.merckmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-119",
@@ -2533,17 +2530,16 @@
   },
   {
    "id": "EOP-B-149",
-   "question": "Ποια είναι η κλινική εικόνα της μηνιγγίτιδας στους ενήλικες;",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Κλινική εικόνα μηνιγγίτιδας ενηλίκων.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: πυρετός, αυχενική δυσκαμψία, αλλοιωμένη νοητική κατάσταση — η τριάδα υπάρχει μόνο στο 41%· κεφαλαλγία, σύγχυση, νυσταγμός Kernig/Brudzinski· ταχέως εξαπλούμενο πετεχειώδες εξάνθημα (purpura fulminans) → μηνιγγιτιδόκοκκος. Συμφωνεί (η φωτοφοβία δεν αναφέρεται στη σελίδα).",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Bacterial meningitis",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470351/"
     }
    ],
    "clinicalReview": false
@@ -2650,35 +2646,32 @@
   },
   {
    "id": "EOP-B-156",
-   "question": "Να αναφέρετε τις ζωτικές παραμέτρους που παρακολουθούμε στην ΚΙΜ σ' έναν ασθενή σε shock κατά την διάρκεια της αναζωογόνησης.",
-   "verdict": "source_unreachable",
+   "question": "Ζωτικές παράμετροι σε shock κατά τη μεταφορά.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: ΑΠ (ΣΑΠ <90 ή ΜΑΠ <65 mm Hg), καρδιακή συχνότητα (>100/min), διούρηση (<0,5 mL/kg/ώρα), γαλακτικό (>2 mmol/L), SpO2· καμία παράμετρος μόνη της διαγνωστική. Συμφωνεί με την απάντηση (GCS, αναπνευστική συχνότητα, SpO2, καρδιακή συχνότητα, ΑΠ, τριχοειδική επαναπλήρωση/δέρμα, ETCO2/διούρηση).",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+     "title": "Merck — Shock",
+     "url": "https://www.merckmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-157",
-   "question": "Σε ποια σημεία του σώματος είναι δυνατή η ανίχνευση σφυγμού;",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Ανίχνευση σφυγμού.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: κερκιδική, βραχιόνια, μηριαία, ιγνυακή, οπίσθια κνημιαία, ραχιαία ποδός. Συμφωνεί (καρωτιδική/κροταφική επιπλέον).",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Peripheral pulse",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK542175/"
     }
    ],
    "clinicalReview": false
@@ -3283,57 +3276,51 @@
   },
   {
    "id": "EOP-B-193",
-   "question": "Τι είναι η έκτοπος κύηση, ποια είναι τα σημεία, τα συμπτώματα και πως αντιμετωπίζεται προνοσοκομειακά;",
-   "verdict": "source_unreachable",
+   "question": "Έκτοπος κύηση.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: εμφύτευση εκτός ενδομητρίου, συχνότερα στη σάλπιγγα· πυελικό άλγος και/ή κολπική αιμορραγία· ρήξη με ξαφνικό έντονο πόνο, συγκοπή, αιμορραγικό shock· υποψία σε κάθε γυναίκα αναπαραγωγικής ηλικίας με πόνο/αιμορραγία/συγκοπή· ασταθής ασθενής → άμεση χειρουργική αντιμετώπιση. Συμφωνεί. Η αμηνόρροια δεν αναφέρεται (η σελίδα λέει ότι ασθενείς με ακανόνιστους κύκλους μπορεί να μην γνωρίζουν ότι είναι έγκυες)· η απάντηση δεν αναφέρει ρητά τη συγκοπή ή την προσοχή στην ψηλάφηση.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "Merck — Ectopic pregnancy",
+     "url": "https://www.merckmanuals.com/professional/gynecology-and-obstetrics/early-pregnancy-disorders/ectopic-pregnancy"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-194",
-   "question": "Να αναφέρετε, πως ορίζεται το κατώτερο πεπτικό σύστημα και ποια είναι τα αίτια πρόκλησης παθολογικής αιμορραγίας από αυτό;",
-   "verdict": "source_unreachable",
+   "question": "Κατώτερο πεπτικό και αίτια αιμορραγίας.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: η αιματοχεσία «συνήθως αντανακλά κατώτερη αιμορραγία» αλλά μπορεί να είναι από ταχεία ανώτερη· η σελίδα δεν ορίζει ούτε εξηγεί τα αίτια της κατώτερης. Οι αιτίες της απάντησης (εκκολπωματική νόσος, αγγειοδυσπλασίες, ΙΦΝΕ, νεοπλάσματα, αιμορροΐδες, ισχαιμική κολίτιδα) είναι κλασικές αλλά αναπόδεικτες εδώ.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Upper GI bleeding",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470300/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-195",
-   "question": "Να αναφέρετε, πως ορίζεται το ανώτερο πεπτικό σύστημα και ποια είναι τα αίτια πρόκλησης παθολογικής αιμορραγίας από αυτό;",
-   "verdict": "source_unreachable",
+   "question": "Ανώτερο πεπτικό και αίτια αιμορραγίας.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ΑΠΕ = αιμορραγία από οισοφάγο, στομάχι ή δωδεκαδάκτυλο, «ιστορικά πάνω από τον σύνδεσμο του Treitz»· συχνότερα: πεπτικό έλκος, οισοφαγίτιδα, γαστροδωδεκαδακτυλίτιδα, κιρσοί· επίσης Mallory–Weiss· αιματέμεση, μέλαινα. Συμφωνεί.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Upper GI bleeding",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470300/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-196",
@@ -3535,21 +3522,19 @@
   },
   {
    "id": "EOP-B-208",
-   "question": "Ποιοι είναι οι παράγοντες που προκαλούν απώλεια θερμότητας από το σώμα;",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Παράγοντες απώλειας θερμότητας.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ακτινοβολία (~60%), εξάτμιση (~22%), αγωγή και συναγωγή (~15%)· το νερό άγει θερμότητα 100 φορές πιο γρήγορα από τον αέρα. Συμφωνεί. Η αναπνευστική απώλεια θερμότητας είναι μέρος της εξάτμισης.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Physiology, heat loss",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK541107/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-209",
