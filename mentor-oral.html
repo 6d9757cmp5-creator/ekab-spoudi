@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
 <title>MENTOR · Προφορική εξάσκηση (χωρίς AI)</title>
-<link rel="stylesheet" href="mentor-lab.css">
+<link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
 .oral-shell{max-width:940px;margin:0 auto;padding:18px 16px 50px}
 .oral-head{background:linear-gradient(135deg,#10344a,#186b67);color:#fff;border-radius:19px;padding:26px 23px;margin:15px 0}
@@ -39,6 +39,7 @@
  <header class="oral-head">
   <span>ΠΡΟΣΩΠΙΚΗ ΑΚΑΔΗΜΙΑ</span>
   <h1>Προφορική εξάσκηση · χωρίς AI</h1>
+  <label class="oral-mode"><input type="checkbox" id="oral-exam-mode"> <span><strong>Ενεργή εξέταση</strong> — ο MENTOR δεν δίνει απαντήσεις ή υποδείξεις και τα σημεία αυτοελέγχου κρύβονται μέχρι να την κλείσεις. Αν δεν είναι τσεκαρισμένο, είναι <strong>εξάσκηση με καθοδήγηση</strong>: ο MENTOR μπορεί να εξηγεί.</span></label>
   <p>Έξι εκπαιδευτικά θέματα, ερωτήσεις στα ελληνικά και σημεία αυτοελέγχου. Πες την απάντηση φωναχτά, κράτησε προαιρετικά σημειώσεις και εξέτασε μόνος σου αν κάλυψες κάθε σημείο.</p>
  </header>
  <div class="disclaimer" role="note">
@@ -72,5 +73,5 @@
  </section>
  <footer class="oral-muted" style="margin-top:18px">Η σύνδεση με AI, αξιολόγηση πραγματικής προφορικής απάντησης ή ζωντανή επικοινωνία θα εξεταστεί μόνο όταν οι λειτουργίες είναι έτοιμες και έχεις εγκρίνει τον τελικό Mentor.</footer>
 </main>
-</body>
+<script type="module" src="mentor/presence/presence.mjs"></script></body>
 </html>

@@ -1,0 +1,42 @@
+name: Educational Animation preparation checks (no generation)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/educational-animation/**'
+      - '.github/workflows/animation-preparation.yml'
+permissions:
+  contents: read
+concurrency:
+  group: animation-preparation-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  VIDEO_GENERATION_ENABLED: 'false'
+  NODE_OPTIONS: '--max-old-space-size=2048'
+jobs:
+  validate-preparation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: workers/educational-animation
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: workers/educational-animation/package-lock.json
+      - run: npm ci --ignore-scripts --no-fund --no-audit
+      - run: npm run check
+      - run: npm test
+      - name: Confirm production command is blocked
+        run: |
+          if node worker.mjs render; then
+            echo 'ERROR: generation lock failed'
+            exit 1
+          fi
+      # No render, schedule, pull_request trigger, artifact upload or remote dispatch.

@@ -1,0 +1,25 @@
+name: Deep pre-cleanup audit
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  existing-regression-suite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Full JS/JSON syntax and regression suite
+        run: node scripts/audit-pre-cleanup.mjs
+      - name: Upload inspectable test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ekab-pre-cleanup-tests
+          path: audit-results/pre-cleanup-tests.json
+          if-no-files-found: warn

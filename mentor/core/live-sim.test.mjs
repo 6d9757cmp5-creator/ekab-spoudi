@@ -63,3 +63,39 @@ test('storage is isolated to one Mentor namespace and works if storage is blocke
  assert.equal(saveLive(blocked,session),false);
  assert.equal(clearLive(blocked),false);
 });
+
+test('flawed choices have deterministic consequences for the named synthetic person; good choices do not',()=>{
+ const after=(ids)=>ids.reduce((s,id)=>stepLive(s,id),newLiveSession());
+ const clean=liveSnapshot(after(['check-safety']));
+ const rushed=liveSnapshot(after(['rush','check-safety']));
+ assert.equal(clean.people[0].extraSteps,0);
+ assert.equal(rushed.people[0].extraSteps,1);
+ assert.equal(rushed.people[1].extraSteps,0);
+ assert.equal(rushed.people[0].hr,118,'A is one step further along the trend (index 3 instead of 2)');
+ assert.equal(rushed.people[1].hr,93,'B follows the normal trend (index 2)');
+ const omitted=liveSnapshot(after(['check-safety','omit-second','report-two']));
+ assert.equal(omitted.people[1].extraSteps,1);
+ assert.match(omitted.timeline[1].consequence,/Άτομο Β/);
+ const invented=liveSnapshot(after(['check-safety','report-two','record-both','invent']));
+ assert.equal(invented.unreliableHandover,true);
+ assert.equal(liveSnapshot(newLiveSession()).unreliableHandover,false);
+ assert.deepEqual(replayLive(after(['rush','check-safety'])),after(['rush','check-safety']),'saved sessions keep working');
+});
+
+test('scripted cockpit inspections persist in existing Mentor session without advancing the scenario or grades',async()=>{
+ const {inspectLive}=await import('./live-sim.mjs');
+ const start=newLiveSession(),recorded=inspectLive(start,'dialogue','a','chief');
+ assert.equal(recorded.stage,0);
+ assert.equal(recorded.events.length,0);
+ assert.equal(recorded.inspections.length,1);
+ assert.equal(liveSnapshot(recorded).minute,0);
+ assert.equal(liveSnapshot(recorded).inspections[0].patient_id,'a');
+ const next=stepLive(recorded,'check-safety');
+ assert.equal(next.inspections.length,1);
+ assert.equal(replayLive(next).inspections.length,1);
+ const legacy={...newLiveSession()};delete legacy.inspections;
+ assert.deepEqual(replayLive(legacy),newLiveSession(),'older saved sessions migrate without losing progress');
+ assert.throws(()=>inspectLive(start,'meds','a','dose'),/invalid-live-inspection/);
+ assert.throws(()=>inspectLive(start,'dialogue','other','chief'),/invalid-live-inspection/);
+ assert.throws(()=>replayLive({...recorded,inspections:[{...recorded.inspections[0],action_id:'invented'}]}),/tampered-live-inspection/);
+});

@@ -1,0 +1,99 @@
+<!doctype html><meta charset=utf-8><body>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import {FBXLoader} from "three/addons/loaders/FBXLoader.js";
+import {TGALoader} from "three/addons/loaders/TGALoader.js";
+import {GLTFExporter} from "three/addons/exporters/GLTFExporter.js";
+const mgr=new THREE.LoadingManager();
+mgr.addHandler(/\.tga$/i,new TGALoader(mgr));
+mgr.setURLModifier(u=>/\.(tga|png|jpg)$/i.test(u)&&!u.startsWith("data:")?"/avatar/Textures/"+u.split(/[\\/]/).pop():u);
+const loadTex=file=>new Promise((res,rej)=>new TGALoader(mgr).load("/avatar/Textures/"+file,t=>res(t),undefined,rej));
+function toCanvas(tex,size,{alpha=false}={}){
+ const src=tex.image,full=document.createElement("canvas");full.width=src.width;full.height=src.height;
+ const fctx=full.getContext("2d");
+ const id=new ImageData(new Uint8ClampedArray(src.data.buffer,src.data.byteOffset,src.data.length),src.width,src.height);
+ fctx.putImageData(id,0,0);
+ const c=document.createElement("canvas");c.width=c.height=size;
+ const ctx=c.getContext("2d");ctx.imageSmoothingQuality="high";
+ if(!alpha){ctx.fillStyle="#fff";ctx.fillRect(0,0,size,size);}
+ ctx.translate(0,size);ctx.scale(1,-1);ctx.drawImage(full,0,0,size,size);return c;
+}
+const RENAME={
+ "AA_VI_00_Sil":"viseme_sil","AA_VI_01_PP":"viseme_PP","AA_VI_02_FF":"viseme_FF","AA_VI_03_TH":"viseme_TH","AA_VI_04_DD":"viseme_DD","AA_VI_05_KK":"viseme_kk",
+ "AA_VI_06_CH":"viseme_CH","AA_VI_07_SS":"viseme_SS","AA_VI_08_nn":"viseme_nn","AA_VI_09_RR":"viseme_RR","AA_VI_10_aa":"viseme_aa","AA_VI_11_E":"viseme_E",
+ "AA_VI_12_I":"viseme_I","AA_VI_13_O":"viseme_O","AA_VI_14_U":"viseme_U"
+};
+const arkit=n=>{const m=/^AK_\d+_(.+)$/.exec(n);return m?m[1][0].toLowerCase()+m[1].slice(1):null;};
+window.build=async(opts)=>{
+ const o=await new Promise((res,rej)=>new FBXLoader(mgr).load("/avatar/Export/Medical_Female_03_facial.fbx",res,undefined,rej));
+ const mesh=[];o.traverse(n=>{if(n.isSkinnedMesh)mesh.push(n);});const m=mesh[0];
+ // morph targets: keep 15 visemes + 52 ARKit, with clean names
+ const dict=m.morphTargetDictionary,keep=[];
+ for(const [full,idx] of Object.entries(dict)){const short=full.replace(/^blendShape1\./,"");const name=RENAME[short]||arkit(short);if(name)keep.push([name,idx]);}
+ const g=m.geometry;
+ const pos=keep.map(([,i])=>g.morphAttributes.position[i]);
+ let nz=0,tot=0;for(const a of pos){const d=a.array;for(let i=0;i<d.length;i+=3){tot++;if(Math.abs(d[i])+Math.abs(d[i+1])+Math.abs(d[i+2])<0.01){d[i]=d[i+1]=d[i+2]=0;}else nz++;}}window.__sparse=[nz,tot];
+ g.morphAttributes.position=pos;
+ if(g.morphAttributes.normal)g.morphAttributes.normal=keep.map(([,i])=>g.morphAttributes.normal[i]);
+ const nd={};keep.forEach(([n],i)=>nd[n]=i);
+ m.morphTargetDictionary=nd;m.morphTargetInfluences=new Array(keep.length).fill(0);
+ // textures
+ const [bodyC,bodyN,headC,headN,opac]=await Promise.all(["f154_body_color_blue.tga","f154_body_normal.tga","f154_head_color.tga","f154_head_normal.tga","f154_opacity_color.tga"].map(loadTex));
+ const mk=(tex,size,srgb,mime,alpha)=>{const t=new THREE.CanvasTexture(toCanvas(tex,size,{alpha}));t.flipY=false;t.colorSpace=srgb?THREE.SRGBColorSpace:THREE.NoColorSpace;t.userData.mimeType=mime;return t;};
+ const mkc=(canvas,srgb,mime)=>{const t=new THREE.CanvasTexture(canvas);t.flipY=false;t.colorSpace=srgb?THREE.SRGBColorSpace:THREE.NoColorSpace;t.userData.mimeType=mime;return t;};
+ // Plain long-sleeve shirt: recolour every clothing pixel to one navy keeping the fabric shading, remove stripes/panels, flatten the pocket relief.
+ const shirtify=cv=>{
+  const k=cv.width/1024,ctx=cv.getContext("2d");ctx.setTransform(1,0,0,1,0,0);
+  const img=ctx.getImageData(0,0,cv.width,cv.height),d=img.data,W=cv.width;
+  const protectedZone=(x,y)=>y<172*k||(y<135*k&&((x>215*k&&x<322*k)||(x>700*k&&x<805*k)))||(y<290*k&&((x>250*k&&x<322*k)||(x>728*k&&x<778*k)));
+  const [R,G,B]=opts.shirtColor||[34,58,102];
+  let sum=0,n=0;
+  for(let i=0;i<d.length;i+=4){const x=(i/4)%W,y=Math.floor(i/4/W);if(protectedZone(x,y))continue;const r=d[i],g=d[i+1],b=d[i+2];if(b>r*1.4&&b>g*1.2){sum+=.3*r+.59*g+.11*b;n++;}}
+  const ref=n?sum/n:90;
+  // low-frequency fold shading: blue luminance only, everything else = reference, then box-blurred so pockets/seams/stripe edges disappear
+  const H=cv.height,L=new Float32Array(W*H);
+  for(let p=0;p<W*H;p++){const i=p*4,r=d[i],g=d[i+1],b=d[i+2],lum=.3*r+.59*g+.11*b;L[p]=(b>r*1.4&&b>g*1.2&&lum<=105)?lum:ref;}
+  const rad=Math.max(3,Math.round(9*k)),tmp=new Float32Array(W*H);
+  for(let y=0;y<H;y++){let s=0;const row=y*W;for(let x=-rad;x<=rad;x++)s+=L[row+Math.min(W-1,Math.max(0,x))];for(let x=0;x<W;x++){tmp[row+x]=s/(2*rad+1);s+=L[row+Math.min(W-1,x+rad+1)]-L[row+Math.max(0,x-rad)];}}
+  const sm=new Float32Array(W*H);
+  for(let x=0;x<W;x++){let s=0;for(let y=-rad;y<=rad;y++)s+=tmp[Math.min(H-1,Math.max(0,y))*W+x];for(let y=0;y<H;y++){sm[y*W+x]=s/(2*rad+1);s+=tmp[Math.min(H-1,y+rad+1)*W+x]-tmp[Math.max(0,y-rad)*W+x];}}
+  for(let i=0;i<d.length;i+=4){
+   const x=(i/4)%W,y=Math.floor(i/4/W);if(protectedZone(x,y))continue;
+   const r=d[i],g=d[i+1],b=d[i+2],lum=.3*r+.59*g+.11*b,a=d[i+3];
+   if(a<10)continue;
+   // Only mid-tone jacket blue keeps its fold shading; stripes, their anti-aliased edges, black panels and grey bits become plain fabric.
+   const shade=Math.max(.82,Math.min(1.1,sm[i/4]/ref))*(1+((Math.sin(x*1.7)+Math.sin(y*1.3))*.02));
+   d[i]=Math.min(255,R*shade);d[i+1]=Math.min(255,G*shade);d[i+2]=Math.min(255,B*shade);
+  }
+  ctx.putImageData(img,0,0);return cv;
+ };
+ const flatNormal=size=>{const c=document.createElement("canvas");c.width=c.height=size;const x=c.getContext("2d");x.fillStyle="rgb(128,128,255)";x.fillRect(0,0,size,size);return c;}; // Chest and sleeve patches (positions measured on the 1024 px body texture): cover the old star badge with the surrounding jacket colour, then draw the app emblem.
+ const patchBody=cv=>{
+  if(opts.emblem==="none")return cv;
+  const k=cv.width/1024,ctx=cv.getContext("2d");ctx.setTransform(1,0,0,1,0,0);
+  for(const [cx,cy] of [[592,497],[872,468]]){
+   const x=cx*k,y=cy*k,r=31*k,px=ctx.getImageData(Math.round(x+r+10*k),Math.round(y),1,1).data;
+   ctx.fillStyle=`rgb(${px[0]},${px[1]},${px[2]})`;ctx.beginPath();ctx.arc(x,y,r+3*k,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle="#14384d";ctx.beginPath();ctx.arc(x,y,r-2*k,0,Math.PI*2);ctx.fill();
+   ctx.strokeStyle="#e8eef2";ctx.lineWidth=2.5*k;ctx.stroke();
+   ctx.fillStyle="#fff";const a=14*k,b=5*k;ctx.fillRect(x-b,y-a,2*b,2*a);ctx.fillRect(x-a,y-b,2*a,2*b);
+  }
+  return cv;
+ };
+ const mats=[
+  new THREE.MeshStandardMaterial({name:"body",map:mkc(patchBody(opts.outfit==="shirt"?shirtify(toCanvas(bodyC,opts.body)):toCanvas(bodyC,opts.body)),true,"image/jpeg"),normalMap:opts.outfit==="shirt"?mkc(flatNormal(opts.body),false,"image/jpeg"):mk(bodyN,opts.body,false,"image/jpeg"),roughness:.72,metalness:0}),
+  new THREE.MeshStandardMaterial({name:"head",map:mk(headC,opts.head,true,"image/jpeg"),normalMap:mk(headN,opts.headNormal,false,"image/jpeg"),roughness:.55,metalness:0}),
+  new THREE.MeshStandardMaterial({name:"hair_lashes",map:mk(opac,opts.body,true,"image/png",true),alphaTest:.4,transparent:false,side:THREE.DoubleSide,roughness:.8,metalness:0})
+ ];
+ if(Array.isArray(m.material)&&m.material.length===3)m.material=mats;
+ const box=new THREE.Box3().setFromObject(o);const size=box.getSize(new THREE.Vector3());
+ return {o,m,size:[size.x,size.y,size.z],morphs:keep.length,mats,sparse:window.__sparse};
+};
+window.exportGlb=async(scale)=>{
+ const root=new THREE.Group();root.name="MentorAvatar";
+ const o=window.__o;o.scale.setScalar(scale);root.add(o);
+ return new Promise((res,rej)=>new GLTFExporter().parse(root,r=>{const b=new Uint8Array(r);let s="";for(let i=0;i<b.length;i+=0x8000)s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));res(btoa(s));},rej,{binary:true,onlyVisible:false}));
+};
+window.THREE=THREE;window.ready=true;
+</script>

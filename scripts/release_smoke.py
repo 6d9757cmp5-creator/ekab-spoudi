@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = ["index.html", "theory.html", "eoppep.html", "saek-course-01.html",
             "saek-course-02.html", "saek-course-03.html", "saek-course-04.html",
             "manifest.webmanifest", "sw.js", "AGENTS.md",
-            "docs/QUALITY-RULES-2026-10-28.md"]
+            "docs/SECURITY-AND-CLINICAL-VERIFICATION.md"]
 errors = []
 for name in REQUIRED:
     path = ROOT / name

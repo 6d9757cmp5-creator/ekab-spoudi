@@ -20,8 +20,8 @@ test('independent local review memory and adaptive tone',()=>{
 test('V1 has one visible tutor and no faculty picker',()=>{
  const html=read('mentor-lab.html'),js=read('mentor-personal-v1.js');
  assert.match(html,/id="mentor-personal"/);
- assert.match(html,/src="mentor-adaptive\.js"/);
- assert.match(html,/src="mentor-personal-v1\.js"/);
+ assert.ok(html.includes('src="mentor/app/adaptive.js"'));
+ assert.ok(html.includes('src="mentor/app/personal-v1.js"'));
  assert.doesNotMatch(html,/MENTOR OS/);
  assert.doesNotMatch(html,/choose-faculty|Η ομάδα των 5/);
  assert.match(js,/ekab\.mentor\.unified\.v1/);

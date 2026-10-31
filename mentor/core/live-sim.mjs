@@ -3,6 +3,7 @@
  * Synthetic observations, NOT a validated physiological model or triage tool.
  * No drug/treatment decisions, automatic patient prioritization, AI, scores or legacy writes.
  */
+import {findLiveTool,findLiveAction} from './live-interactions.mjs';
 export const KEY='ekab.mentor.live-two-patients.v1';
 export const CASE=Object.freeze({
   id:'crete-road-two',version:1,
@@ -17,31 +18,31 @@ export const STAGES=Object.freeze([
  {id:'safety',title:'1. Εκτίμηση σκηνής',question:'Πριν προσεγγίσεις το συνθετικό συμβάν, ποια οργανωτική ενέργεια προηγείται;',
   choices:[
    {id:'check-safety',label:'Αναγνωρίζω κινδύνους και εξασφαλίζω ασφαλή προσέγγιση στο πλαίσιο της εκπαίδευσής μου.',outcome:'practice',feedback:'Σωστή οργανωτική κατεύθυνση: προηγείται η αναγνώριση κινδύνων. Δεν αποτελεί πλήρη πραγματική διαδικασία.'},
-   {id:'rush',label:'Μπαίνω αμέσως στον χώρο χωρίς να εξετάσω κινδύνους.',outcome:'review',feedback:'Επανάλαβε το βήμα: η ασφάλεια της σκηνής δεν πρέπει να παρακάμπτεται.'}
+   {id:'rush',label:'Μπαίνω αμέσως στον χώρο χωρίς να εξετάσω κινδύνους.',outcome:'review',feedback:'Επανάλαβε το βήμα: η ασφάλεια της σκηνής δεν πρέπει να παρακάμπτεται.',consequence:{people:['a'],text:'Χάθηκε χρόνος: οι συνθετικές τιμές του Ατόμου Α εξελίχθηκαν ένα βήμα επιπλέον χωρίς παρακολούθηση.'}}
   ]},
  {id:'coordination',title:'2. Συντονισμός',question:'Αναφέρονται δύο εμπλεκόμενοι. Τι περιλαμβάνει η αρχική οργανωτική ενημέρωση;',
   choices:[
    {id:'report-two',label:'Ενημερώνω με σαφήνεια τον συντονισμό για δύο αναφερόμενους εμπλεκόμενους και τις γνωστές συνθήκες.',outcome:'practice',feedback:'Η καταγραφή του αριθμού ατόμων και των επιβεβαιωμένων πληροφοριών υποστηρίζει τον συντονισμό.'},
-   {id:'omit-second',label:'Αναφέρω μόνο το ένα άτομο, χωρίς να καταγράψω την ύπαρξη του δεύτερου.',outcome:'review',feedback:'Επανεξέτασε την πληρότητα της οργανωτικής αναφοράς.'}
+   {id:'omit-second',label:'Αναφέρω μόνο το ένα άτομο, χωρίς να καταγράψω την ύπαρξη του δεύτερου.',outcome:'review',feedback:'Επανεξέτασε την πληρότητα της οργανωτικής αναφοράς.',consequence:{people:['b'],text:'Το Άτομο Β δεν καταγράφηκε: οι συνθετικές τιμές του εξελίχθηκαν ένα βήμα επιπλέον χωρίς παρακολούθηση.'}}
   ]},
  {id:'observations',title:'3. Παρακολούθηση δύο ατόμων',question:'Οι συνθετικές τιμές μεταβάλλονται με τον χρόνο. Πώς περιγράφεις όσα βλέπεις;',
   choices:[
    {id:'record-both',label:'Καταγράφω ξεχωριστά τις παρατηρήσεις και τις χρονικές μεταβολές και για τα δύο άτομα.',outcome:'practice',feedback:'Η τεκμηρίωση των διαθέσιμων παρατηρήσεων χωρίς υποθέσεις είναι ο εκπαιδευτικός στόχος.'},
-   {id:'guess-diagnosis',label:'Αποδίδω βέβαιη διάγνωση από τις επινοημένες τιμές, χωρίς επιπλέον δεδομένα.',outcome:'review',feedback:'Δεν συνάγεται πραγματική διάγνωση από αυτό το μοντέλο. Επανέλαβε την αντικειμενική καταγραφή.'}
+   {id:'guess-diagnosis',label:'Αποδίδω βέβαιη διάγνωση από τις επινοημένες τιμές, χωρίς επιπλέον δεδομένα.',outcome:'review',feedback:'Δεν συνάγεται πραγματική διάγνωση από αυτό το μοντέλο. Επανέλαβε την αντικειμενική καταγραφή.',consequence:{people:['a','b'],text:'Η πρόωρη υπόθεση καθυστέρησε τη συστηματική καταγραφή: οι τιμές και των δύο εξελίχθηκαν ένα βήμα επιπλέον.'}}
   ]},
  {id:'handover',title:'4. Παράδοση',question:'Τι παραδίδεις στην επόμενη ομάδα ως εκπαιδευτική αναφορά;',
   choices:[
    {id:'verified-handover',label:'Το συμβάν, τον αριθμό ατόμων, τις καταγεγραμμένες παρατηρήσεις, τις μεταβολές και τις επικοινωνίες.',outcome:'practice',feedback:'Ολοκληρώθηκε η οργανωτική άσκηση με αναφορά των διαθέσιμων στοιχείων.'},
-   {id:'invent',label:'Δίνω επινοημένες ενέργειες και διαγνώσεις σαν να είχαν παρατηρηθεί.',outcome:'review',feedback:'Η παράδοση πρέπει να διαχωρίζει πραγματικά καταγεγραμμένα δεδομένα από υποθέσεις.'}
+   {id:'invent',label:'Δίνω επινοημένες ενέργειες και διαγνώσεις σαν να είχαν παρατηρηθεί.',outcome:'review',feedback:'Η παράδοση πρέπει να διαχωρίζει πραγματικά καταγεγραμμένα δεδομένα από υποθέσεις.',consequence:{people:[],text:'Η επόμενη ομάδα θα βασιζόταν σε ανεπιβεβαίωτες πληροφορίες. Δεν αλλάζουν οι τιμές, αλλά η αναφορά δεν θεωρείται αξιόπιστη.'}}
   ]}
 ]);
 const MAX_EVENTS=16;
 export function newLiveSession(){
- return {schema_version:1,case_id:CASE.id,case_version:CASE.version,stage:0,events:[],completed:false};
+ return {schema_version:1,case_id:CASE.id,case_version:CASE.version,stage:0,events:[],inspections:[],completed:false};
 }
 export function stepLive(session,choiceId){
  if(!session||session.schema_version!==1||session.case_id!==CASE.id||session.case_version!==CASE.version||
-  !Array.isArray(session.events)||!Number.isInteger(session.stage)||session.stage<0||session.stage>STAGES.length||
+  !Array.isArray(session.events)||!Array.isArray(session.inspections||[])||!Number.isInteger(session.stage)||session.stage<0||session.stage>STAGES.length||
   typeof choiceId!=='string'||session.completed||session.events.length>=MAX_EVENTS)throw Error('invalid-live-session');
  const stage=STAGES[session.stage];
  if(!stage)throw Error('invalid-live-stage');
@@ -50,7 +51,7 @@ export function stepLive(session,choiceId){
  const event={seq:session.events.length+1,stage_id:stage.id,choice_id:choice.id,outcome:choice.outcome};
  const nextStage=session.stage+(choice.outcome==='practice'?1:0);
  return {schema_version:1,case_id:CASE.id,case_version:CASE.version,stage:nextStage,
-   events:[...session.events,event],completed:nextStage===STAGES.length};
+   events:[...session.events,event],inspections:session.inspections||[],completed:nextStage===STAGES.length};
 }
 export function replayLive(raw){
  if(!raw||raw.case_id!==CASE.id||raw.case_version!==CASE.version||
@@ -62,18 +63,40 @@ export function replayLive(raw){
   const created=state.events.at(-1);
   if(['seq','stage_id','choice_id','outcome'].some(key=>created[key]!==given[key]))throw Error('tampered-live-event');
  }
+ const inspections=raw.inspections??[];
+ if(!Array.isArray(inspections)||inspections.length>60)throw Error('invalid-saved-live-inspections');
+ for(let i=0;i<inspections.length;i++){
+  const e=inspections[i];
+  if(!e||e.seq!==i+1||!['a','b'].includes(e.patient_id)||!findLiveTool(e.tool_id)||
+   !findLiveAction(e.tool_id,e.action_id)||!Number.isInteger(e.at_stage)||e.at_stage<0||e.at_stage>state.stage)
+   throw Error('tampered-live-inspection');
+ }
+ state={...state,inspections:inspections.map(e=>({seq:e.seq,patient_id:e.patient_id,tool_id:e.tool_id,action_id:e.action_id,at_stage:e.at_stage}))};
  if(state.stage!==raw.stage||state.completed!==raw.completed||
   raw.schema_version!==1)throw Error('tampered-live-session');
  return state;
 }
+/** Add a documented educational observation, not a diagnosis or treatment. */
+export function inspectLive(session,toolId,patientId,actionId){
+ const clean=replayLive(session);
+ if(!['a','b'].includes(patientId)||!findLiveAction(toolId,actionId)||clean.inspections.length>=60)
+  throw Error('invalid-live-inspection');
+ return {...clean,inspections:[...clean.inspections,{seq:clean.inspections.length+1,patient_id:patientId,tool_id:toolId,action_id:actionId,at_stage:clean.stage}]};
+}
 export function liveSnapshot(session){
  const state=replayLive(session),elapsed=state.events.length*2;
- const index=Math.min(state.events.length,4);
+ // Consequences are deterministic functions of the recorded choices: each flawed choice lets the named
+ // synthetic person progress one extra step (clamped to the last trend point). Nothing else is simulated.
+ const delay={a:0,b:0};
+ const choiceOf=e=>STAGES.find(s=>s.id===e.stage_id)?.choices.find(c=>c.id===e.choice_id);
+ for(const e of state.events)for(const id of choiceOf(e)?.consequence?.people||[])delay[id]+=1;
  return {minute:elapsed,completed:state.completed,stage:state.stage,
   people:CASE.people.map(p=>({id:p.id,name:p.name,description:p.description,
-   ...p.trend[index],initial:p.trend[0]})),
+   ...p.trend[Math.min(state.events.length+delay[p.id],4)],initial:p.trend[0],extraSteps:delay[p.id]})),
+  unreliableHandover:state.events.some(e=>e.choice_id==='invent'),
   timeline:state.events.map(e=>({minute:e.seq*2,title:STAGES.find(s=>s.id===e.stage_id)?.title,
-   outcome:e.outcome,feedback:STAGES.find(s=>s.id===e.stage_id)?.choices.find(c=>c.id===e.choice_id)?.feedback})),
+   outcome:e.outcome,feedback:choiceOf(e)?.feedback,consequence:choiceOf(e)?.consequence?.text||''})),
+  inspections:state.inspections,
   practice:state.events.filter(x=>x.outcome==='practice').length,
   review:state.events.filter(x=>x.outcome==='review').length
  };
