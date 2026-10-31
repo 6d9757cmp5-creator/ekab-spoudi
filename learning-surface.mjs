@@ -78,8 +78,12 @@ if(isHome||isSaek||isEop){
    const links=e('div','en-actions');
    const primaryLink=makeLink(primary.href,primary.label+' ↗','en-primary');
    links.append(primaryLink);
-   const from=eop?'eoppep.html':'saek.html';
-   const mentorHref=makeJourneyUrl('mentor-protocol-suite.html',{topic,from,focus:eop?'Προετοιμασία ΕΟΠΠΕΠ':'Κατάρτιση ΣΑΕΚ'},'lab');
+   const exactChapter=!eop?/^(saek-course-(?:0[1-9]|1\d|20)\.html)#(lesson-(?:[1-9]|[1-9]\d))$/.exec(primary.href):null;
+   const from=exactChapter?exactChapter[1]:(eop?'eoppep.html':'saek.html');
+   const focus=exactChapter?'ΣΑΕΚ · Κεφάλαιο '+exactChapter[2].slice(7):
+    (eop&&stats.firstDue?'ΕΟΠΠΕΠ · Ερώτηση '+stats.firstDue.replace('EOP-',''):
+    (eop?'Προετοιμασία ΕΟΠΠΕΠ':'Κατάρτιση ΣΑΕΚ'));
+   const mentorHref=makeJourneyUrl('mentor-protocol-suite.html',{topic,from,focus,...(exactChapter?{chapter:exactChapter[2]}:{})},'lab');
    links.append(makeLink(mentorHref,'Σχετικό MENTOR Lab →','en-secondary'));
    heading.append(links);
    const indicators=e('div','en-indicators');
