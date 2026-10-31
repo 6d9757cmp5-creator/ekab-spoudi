@@ -93,7 +93,7 @@ function play(text){
      if(ticket!==generation)return;
      send({type:"mentor:speech",speaking:true,viseme:chooseMouthShape(text,event.charIndex||0)});
    },
-   onFinish:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
+   onFinish:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent=deviceVoice?"Η ανάγνωση ολοκληρώθηκε με την ελληνική φωνή της συσκευής.":"Η ανάγνωση ολοκληρώθηκε με γυναικεία ελληνική φωνή.";},
    onError:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η φωνή δεν αναπαράχθηκε. Μπορείς να χρησιμοποιήσεις την απάντηση ως κείμενο.";}
  });
  // Prefer a known female Greek voice; otherwise fall back to any Greek device voice instead of staying silent.
