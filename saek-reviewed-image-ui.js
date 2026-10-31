@@ -100,9 +100,11 @@ function render(asset,lessonId,items,position){
  attribution.append(document.createTextNode('Πηγή: '+asset.author+' · '));
  // A source link is not independent medical validation of an original diagram.
  const genericEms=/^https:\/\/www\.ems\.gov\/what-is-ems\.html(?:[?#].*)?$/i.test(asset.page||'');
+ const pageHost=(String(asset.page||'').match(/^https:\/\/([^\/?#]+)/)||[])[1]||'';
+ const hostLabels={'openstax.org':'OpenStax','www.cdc.gov':'CDC','www.who.int':'WHO','www.ekab.gr':'ΕΚΑΒ — πηγή θεματικής αναφοράς','commons.wikimedia.org':'Wikimedia Commons'};
  const sourceLabel=asset.originalArtwork
   ?(genericEms?'Γενική πηγή πλαισίου — όχι τεκμηρίωση σχήματος':'Πηγή θεματικής αναφοράς')
-  :'Wikimedia Commons';
+  :(hostLabels[pageHost]||'Πηγή');
  const src=el('a','',sourceLabel);
  src.href=asset.page;src.target='_blank';src.rel='noopener noreferrer';
  const space=document.createTextNode(' · Άδεια: ');

@@ -1,4 +1,4 @@
-/* EΚΑΒ Σπουδή — local 649-image gallery. Read-only; no publication/clinical approvals. */
+/* EΚΑΒ Σπουδή — local chapter-image gallery. Read-only; no publication/clinical approvals. */
 (function(){
  'use strict';
  const $=id=>document.getElementById(id);
@@ -7,7 +7,7 @@
  const dialog=$('imageLightbox'),large=$('imageLarge');
  const BATCH=24;
  let entries=[],matched=[],loaded=0,courses=[];
- const safePath=path=>typeof path==='string'&&/^assets\/education\/[a-z0-9-]+\.(?:svg|png)$/.test(path);
+ const safePath=path=>typeof path==='string'&&/^assets\/education\/[a-z0-9-]+\.(?:svg|png|jpg)$/.test(path);
  const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el');
  function el(tag,text,className){
   const node=document.createElement(tag);
@@ -65,7 +65,7 @@
   for(const entry of slice)fragment.append(card(entry));
   grid.append(fragment);loaded+=slice.length;
   more.hidden=loaded>=matched.length;
-  status.textContent=matched.length?loaded+' από '+matched.length+' εικόνες · 649 συνολικά':'Δεν βρέθηκαν εικόνες με αυτά τα φίλτρα.';
+  status.textContent=matched.length?loaded+' από '+matched.length+' εικόνες · '+entries.length+' συνολικά':'Δεν βρέθηκαν εικόνες με αυτά τα φίλτρα.';
  }
  function updateCourses(){
   const before=course.value;course.replaceChildren(new Option('Όλα τα μαθήματα','all'));
@@ -105,7 +105,7 @@
      }
     }
    }
-   if(result.length!==649||Object.keys(data.assets).length!==649||chapterCount!==247||data.courses.length!==20)
+   if(!result.length||chapterCount!==247||data.courses.length!==20)
     throw new Error('Η αντιστοίχιση εικόνων/κεφαλαίων δεν είναι πλήρης.');
    courses=data.courses;entries=result;
    updateCourses();filter();
