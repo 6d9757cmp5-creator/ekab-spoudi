@@ -132,7 +132,8 @@ function render(asset,lessonId,items,position){
  });
  // Attach handlers before setting src, including for locally cached images.
  image.src=sourceUrl(asset);
- fig.append(label,image,figureActions,caption,attribution,problem);
+ // The source credit is embedded in the image itself; full attribution stays in saek-image-audit-2026.json.
+ fig.append(label,image,figureActions,caption,problem);
  return fig;
 }
 async function start(){

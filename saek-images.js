@@ -35,7 +35,6 @@
   large.alt=entry.asset.title||'Εκπαιδευτική εικόνα';
   $('imageLargeTitle').textContent=entry.asset.title||entry.assetId;
   $('imageLargeCaption').textContent=entry.asset.caption||'';
-  const credit=$('imageLargeCredit');credit.replaceChildren();sourceLink(credit,entry);
   $('imageChapterLink').href='saek-course-'+entry.courseNo+'.html#lesson-'+entry.chapter;
   if(typeof dialog.showModal==='function')dialog.showModal();
   else window.location.href=large.src;
@@ -53,9 +52,6 @@
   const chapter=el('a','Άνοιγμα κεφαλαίου');
   chapter.href='saek-course-'+entry.courseNo+'.html#lesson-'+entry.chapter;
   body.append(chapter);
-  if(entry.asset.originalArtwork!==true){
-   const credit=el('p',null,'saek-gallery-credit');sourceLink(credit,entry);body.append(credit);
-  }
   item.append(imageButton,body);
   return item;
  }

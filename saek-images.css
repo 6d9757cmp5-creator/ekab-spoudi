@@ -33,6 +33,3 @@
 @media(max-width:720px){.saek-gallery-filters{grid-template-columns:1fr 1fr}.saek-gallery-filters label:last-child{grid-column:1/-1}}
 @media(max-width:460px){.saek-gallery-filters{grid-template-columns:1fr}.saek-gallery-filters label:last-child{grid-column:auto}.saek-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.saek-gallery-card-body{padding:9px}.saek-gallery-image-button img{height:145px}.saek-gallery-card h2{font-size:.89rem}}
 @media(prefers-reduced-motion:reduce){.saek-gallery-main *{scroll-behavior:auto}}
-.saek-gallery-card .saek-gallery-credit{font-size:.58rem;opacity:.3;line-height:1.3}
-.saek-gallery-card .saek-gallery-credit a{color:inherit;text-decoration:none}
-.saek-gallery-card:hover .saek-gallery-credit,.saek-gallery-card:focus-within .saek-gallery-credit{opacity:.85}

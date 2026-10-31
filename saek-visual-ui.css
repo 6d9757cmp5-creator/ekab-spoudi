@@ -152,10 +152,3 @@ html[data-theme="dark"] .saek-source-section,html[data-theme="dark"] .saek-sourc
 .saek-clean-image{background:#fff;box-shadow:0 3px 22px rgba(23,47,64,.08)}
 .saek-clean-close,.saek-clean-prev,.saek-clean-next{background:rgba(17,47,68,.86);color:#fff}
 @media(max-width:760px){.saek-clean-lightbox{max-height:100dvh}.saek-clean-close{top:max(12px,env(safe-area-inset-top))}}
-
-/* Source credit: kept in the page but as small and low-contrast as possible so it blends
-   with the figure background; full attribution stays in the registry and appears on hover/focus. */
-.saek-source-figure .saek-source-credit,
-.saek-study-images .saek-source-figure>.saek-source-credit{font-size:.58rem;line-height:1.3;margin:3px 0 0;opacity:.3;color:inherit;transition:opacity .15s}
-.saek-source-figure .saek-source-credit a{color:inherit;text-decoration:none;font-size:inherit}
-.saek-source-figure:hover .saek-source-credit,.saek-source-figure:focus-within .saek-source-credit,.saek-source-figure .saek-source-credit:focus-within{opacity:.85}
