@@ -89,7 +89,7 @@ export async function loadMentorTermLibrary({fetcher=globalThis.fetch}={}){
    if(!response?.ok)return OFFLINE_CORE_TERMS;
    const data=await response.json();
    const items=Array.isArray(data?.items)?data.items.filter(x=>x&&valid(x.term)&&valid(x.definition)):[];
-   if(items.length>=OFFLINE_CORE_TERMS.length){cached=items;return cached;}
+   if(items.length){cached=items;return cached;}
    return OFFLINE_CORE_TERMS;
   }catch{return OFFLINE_CORE_TERMS;}
  })();
