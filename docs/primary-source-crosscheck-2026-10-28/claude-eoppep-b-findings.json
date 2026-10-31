@@ -2004,21 +2004,20 @@
   },
   {
    "id": "EOP-B-119",
-   "question": "Ποιες είναι οι βασικές αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή σε κώμα;",
-   "verdict": "source_unreachable",
+   "question": "Βασικές αρχές προνοσοκομειακής αντιμετώπισης ασθενούς σε κώμα.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή.) MSD Coma: άμεση εξασφάλιση αεραγωγού, αναπνοής, κυκλοφορίας· διασωλήνωση σε αναπνευστική δυσχέρεια, υποξία, ↑ΕΚΠ, σπασμούς, έμετο, αστάθεια· διόρθωση υπότασης· έλεγχος και διόρθωση γλυκόζης· ακινητοποίηση αυχένα σε υποψία τραύματος· θεραπεία υποκείμενης αιτίας. Συμφωνεί με την απάντηση. Στο MSD η γλυκόζη χορηγείται ΜΕΤΑ από θειαμίνη και ναλοξόνη για υποψία οπιοειδών (νοσοκομειακή/ALS πρακτική)· το «τίποτα από το στόμα» δεν αναφέρεται στην πηγή (λογικό για μη προστατευμένο αεραγωγό αλλά δεν επαληθεύτηκε).",
+   "suggestedChange": "Προαιρετικά: αναφορά ναλοξόνης/θειαμίνης ως ενέργειες εξειδικευμένης ομάδας.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "MSD — Overview of Coma and Impaired Consciousness",
+     "url": "https://www.msdmanuals.com/professional/neurologic-disorders/coma-and-impaired-consciousness/overview-of-coma-and-impaired-consciousness"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-120",
@@ -2442,17 +2441,17 @@
   },
   {
    "id": "EOP-B-144",
-   "question": "Να περιγράψετε τη δράση του παρασυμπαθητικού στην καρδιά, στα αγγεία, στους βρόγχους, στο έντερο και στους αδένες.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Δράση του παρασυμπαθητικού σε καρδιά, αγγεία, βρόγχους, έντερο, αδένες.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Parasympathetic NS: καρδιά — μείωση συχνότητας και ταχύτητας αγωγής στον κολποκοιλιακό κόμβο· βρόγχοι — βρογχοσύσπαση και αυξημένη βλέννα· έντερο — αυξημένη κινητικότητα, εκκρίσεις, χάλαση σφιγκτήρων· σιελογόνοι αδένες — αυξημένη έκκριση. Συμφωνούν με την απάντηση. Για τα αγγεία το άρθρο αναφέρει αγγειοδιαστολή (M3), ενώ η απάντηση λέει «ήπια επίδραση στα περισσότερα αγγεία»· η διατύπωση δεν επαληθεύτηκε ακριβώς.",
+   "suggestedChange": "Προαιρετικά: διευκρίνιση ότι η παρασυμπαθητική αγγειοδιαστολή είναι εντοπισμένη, με βάση το εγκεκριμένο σύγγραμμα.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Neuroanatomy, Parasympathetic Nervous System",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK553141/"
     }
    ],
    "clinicalReview": false
@@ -3350,17 +3349,16 @@
   },
   {
    "id": "EOP-B-198",
-   "question": "Ποια είναι τα σημεία και τα συμπτώματα της οξείας φλεγμονής;",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Σημεία και συμπτώματα οξείας φλεγμονής.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Acute Inflammatory Response: πέντε κύρια σημεία — ερυθρότητα, θερμότητα, οίδημα, πόνος, απώλεια λειτουργίας (rubor, calor, tumor, dolor, functio laesa). Συμφωνεί. Ο πυρετός/η κακουχία που αναφέρει η απάντηση ως πιθανά συνοδά δεν αναφέρονται στη συγκεκριμένη σελίδα (κοινή κλινική γνώση, δεν επαληθεύτηκε εδώ).",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Acute Inflammatory Response",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK556083/"
     }
    ],
    "clinicalReview": false
