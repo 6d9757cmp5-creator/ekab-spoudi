@@ -278,7 +278,7 @@ function boot(){
   ctxToggle.setAttribute("aria-pressed",String(contextOn));
   ctxToggle.setAttribute("aria-label",contextOn?"Απενεργοποίηση χρήσης πλαισίου σελίδας":"Ενεργοποίηση χρήσης πλαισίου σελίδας");
   const ctx=contextState();
-  const route=ctx.enabled&&!ctx.exam?journeyFromPage(location.pathname,ctx.announced?.label||ctx.page.heading||ctx.page.title):null;
+  const route=ctx.enabled&&!ctx.exam?journeyFromPage(location.pathname,ctx.announced?.label||ctx.page.heading||ctx.page.title,ctx.announced?.id):null;
   journeyLink.hidden=!route;
   if(route)journeyLink.href=new URL(makeJourneyUrl("mentor-protocol-suite.html",route,"lab"),SITE_ROOT).href;
  }
