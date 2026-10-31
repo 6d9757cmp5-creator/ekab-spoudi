@@ -10,12 +10,12 @@ const assets = registry.assets ?? {};
 const hasDocumentedHumanReview = a =>
   a.clinicalReview === 'approved' &&
   typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
-  typeof a.independentReviewDate === 'string' && /^\\d{4}-\\d{2}-\\d{2}/.test(a.independentReviewDate) &&
+  typeof a.independentReviewDate === 'string' && /^\d{4}-\d{2}-\d{2}/.test(a.independentReviewDate) &&
   typeof a.independentReviewEvidence?.documentUrl === 'string' &&
-  /^https:\\/\\//.test(a.independentReviewEvidence.documentUrl) &&
+  /^https:\/\//.test(a.independentReviewEvidence.documentUrl) &&
   typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
   !!a.independentReviewEvidence.reviewerQualification.trim() &&
-  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\\bAI\\b)/i.test(a.independentReviewer);
+  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\bAI\b)/i.test(a.independentReviewer);
 const byAsset = new Map();
 for (const course of registry.courses ?? []) {
   for (let i = 0; i < (course.chapters ?? []).length; i++) {

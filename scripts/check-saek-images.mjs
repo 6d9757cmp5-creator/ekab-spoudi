@@ -13,12 +13,12 @@ const assets=registry.assets||{},courses=registry.courses||[];
 const hasDocumentedHumanReview = a =>
   a.clinicalReview === 'approved' &&
   typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
-  typeof a.independentReviewDate === 'string' && /^\\d{4}-\\d{2}-\\d{2}/.test(a.independentReviewDate) &&
+  typeof a.independentReviewDate === 'string' && /^\d{4}-\d{2}-\d{2}/.test(a.independentReviewDate) &&
   typeof a.independentReviewEvidence?.documentUrl === 'string' &&
-  /^https:\\/\\//.test(a.independentReviewEvidence.documentUrl) &&
+  /^https:\/\//.test(a.independentReviewEvidence.documentUrl) &&
   typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
   !!a.independentReviewEvidence.reviewerQualification.trim() &&
-  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\\bAI\\b)/i.test(a.independentReviewer);
+  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\bAI\b)/i.test(a.independentReviewer);
 // Provenance and source specificity are separate from local file integrity.
 // These counters are audit findings, NOT clinical approvals or live-source checks.
 const sourceQuality={genericEmsBackgroundAssetIds:[],commonsLocalMirrorAssetIds:[],sourcePageReviewRecordedAssetIds:[],visualReviewRecordedAssetIds:[],visualReviewHashBoundAssetIds:[],visualReviewUnboundAssetIds:[],visualReviewStaleHashAssetIds:[]};
