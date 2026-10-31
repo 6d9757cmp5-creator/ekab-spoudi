@@ -11,9 +11,18 @@ const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT='audit-results/educational-scientific-review.json';
 const RULES='docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md';
 export const MAX_FILES=6,MAX_CHARS=10500;
+// File-type based discovery: new courses, subjects, names and directories are covered
+// automatically. Never depend on a fixed list of today's feature names.
 export function isEducationPath(p){
- return typeof p==='string'&&!p.includes('..')&&!p.startsWith('/')&&!p.includes('\\')&&
- /^(?:official_questions\.json|old_type_written\.json|eoppep-sos\.json|saek-course-\d{2}\.html|saek-exams\.js|saek-image-audit-2026\.json|saek-lesson-fit-review\.json|farmaka[^/]*\.(?:js|json)|seminar-[^/]*\.(?:js|json)|protocols-[^/]*\.(?:js|mjs|json)|mentor-(?:scenario-paths|patient-interview|protocol-suite)\.mjs|educational-animation-sources\.js|mentor\/(?:knowledge|scenario-atlas|clinical-desk)\/[^/]+\.(?:js|mjs|json|md)|docs\/(?:SAEK|EOPPEP|saek|eoppep)[^/]*\.(?:json|md))$/.test(p);
+ if(typeof p!=='string'||!p.trim()||p.startsWith('/')||p.includes('\\')||
+   p.split('/').some(x=>!x||x==='.'||x==='..'))return false;
+ if(/(^|\/)(?:\.git|\.github|node_modules|vendor|dist|build|coverage|__tests__|tests|scripts|archive)(\/|$)/i.test(p))return false;
+ if(/(^|\/)(?:README|AGENTS|LICENSE|CHANGELOG)(?:\.[^/]*)?$/i.test(p)||
+   /(^|\/)(?:package(?:-lock)?|tsconfig|vite\.config|eslint\.config)\.[^/]+$/i.test(p)||
+   /\.(?:test|spec)\.(?:[cm]?js|tsx?|py)$/i.test(p))return false;
+ // Future lesson pages, medical figures, courses, question banks, modules,
+ // guides and multimedia are all discovered regardless of their names.
+ return /\.(?:html?|md|mdx|txt|csv|json|ya?ml|[cm]?js|jsx|tsx?|py|svg|pdf|png|jpe?g|webp|gif|mp4|webm)$/i.test(p);
 }
 export function choosePaths(changed,manual=''){
  return [...new Set((manual?manual.split(','):changed).map(x=>x.trim()).filter(isEducationPath))].sort();
@@ -63,6 +72,13 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  catch{report.status='error_missing_review_rules';return report;}
  for(const path of paths.slice(0,MAX_FILES)){
   if(!existsSync(resolve(root,path))){report.pending.push({path,reason:'missing_or_deleted_file'});continue;}
+  // Binary education assets require visual/media review; do not decode as text
+  // or claim a scientific assessment based on corrupted bytes.
+  if(/\.(?:pdf|png|jpe?g|webp|gif|mp4|webm)$/i.test(path)){
+   report.files.push({path,status:'pending',mode:'binary_media'});
+   report.pending.push({path,reason:'visual_or_media_review_required'});
+   continue;
+  }
   const patch=manual?'':git(['diff','--unified=6',...baseArgs(),'--',path]);
   const mode=patch?'changed_lines_context':'file_excerpt';
   const source=patch||await readFile(resolve(root,path),'utf8');
