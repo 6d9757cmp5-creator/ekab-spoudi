@@ -87,15 +87,16 @@
    if(!response.ok)throw new Error('Δεν είναι διαθέσιμο το τοπικό μητρώο.');
    const data=await response.json();
    if(!Array.isArray(data.courses)||!data.assets||typeof data.assets!=='object')throw new Error('Μη έγκυρο μητρώο.');
-   const result=[],keys=new Set();let chapterCount=0;
+   const result=[];let chapterCount=0;
    for(const c of data.courses){
     const courseNo=String(c.course).padStart(2,'0');
     for(let i=0;i<c.chapters.length;i++){
      chapterCount++;
+     const chapterKeys=new Set();
      for(const id of c.chapters[i].images||[]){
       const a=data.assets[id];
-      if(!a||!safePath(a.localPath)||keys.has(id))throw new Error('Μη έγκυρη ή διπλή εικόνα: '+id);
-      keys.add(id);
+      if(!a||!safePath(a.localPath)||chapterKeys.has(id))throw new Error('Μη έγκυρη ή διπλή εικόνα στο κεφάλαιο: '+id);
+      chapterKeys.add(id);
       result.push({assetId:id,asset:a,course:c.course,courseNo,courseName:c.title,semester:c.semester,chapter:i+1,
        searchText:norm(id+' '+a.title+' '+a.caption+' '+c.title)});
      }
