@@ -10,11 +10,19 @@ if len(sys.argv)>1:
         data['entries']=[x for x in data['entries'] if x['id']!=e['id']]+[e]
 data['entries'].sort(key=lambda x:x['id']); json.dump(data,open(F,'w',encoding='utf-8'),ensure_ascii=False,indent=1)
 V={'consistent':'Συμφωνεί','consistent_with_gaps':'Συμφωνεί με ελλείψεις','needs_correction':'Χρειάζεται διόρθωση','needs_clinical_review':'Χρειάζεται κλινική αξιολόγηση','source_unreachable':'Πηγή μη προσβάσιμη'}
+_reg=json.load(open(os.path.join(D,'eoppep-314.json'),encoding='utf-8')); _reg=_reg if isinstance(_reg,list) else _reg.get('entries',_reg.get('questions',[]))
+_pend={r['id'] for r in _reg if r.get('group')=='B' and not r.get('targetedReview')}
+_ids={e['id'] for e in data['entries']}
+npend=len(_ids&_pend); ncomp=sum(1 for e in data['entries'] if e['id'] in _pend and e['verdict']!='source_unreachable'); extra=_ids-_pend; missing=sorted(_pend-_ids)
 n=len(data['entries']); from collections import Counter; c=Counter(e['verdict'] for e in data['entries'])
 L=['# CLAUDE — Επιστημονική αντιπαραβολή ΕΟΠΠΕΠ ομάδας Β (ερωτήσεις χωρίς προηγούμενο στοχευμένο έλεγχο)','',
 '**Κατάσταση: ΣΕ ΕΞΕΛΙΞΗ — ΟΧΙ ΑΝΕΞΑΡΤΗΤΗ ΠΙΣΤΟΠΟΙΗΣΗ.** Στοχευμένη αντιπαραβολή αποθηκευμένης απάντησης με πρωτογενείς πηγές. Δεν άλλαξε εκπαιδευτικό περιεχόμενο, κοινά μητρώα ή το `REPORT.md`. Η ανθρώπινη κλινική αξιολόγηση παραμένει υποχρεωτική στις κρίσιμες αμφιβολίες.','',
-f'**Ολοκληρώθηκαν:** {n}/197 · '+' · '.join(f'{V[k]}: {v}' for k,v in c.items()),'',
-'Σύνολο εκκρεμών (χωρίς προηγούμενο targetedReview): 197 — B-009…B-046, B-048…B-093, B-095…B-180, B-182…B-203, B-205…B-209.','']
+f'**Καταγράφηκαν:** {npend}/197 εκκρεμείς ερωτήσεις, από τις οποίες ΜΟΝΟ {ncomp} αντιπαραβλήθηκαν πραγματικά με προσβάσιμη πηγή· οι υπόλοιπες μένουν «δεν επαληθεύτηκε». · '+' · '.join(f'{V[k]}: {v}' for k,v in c.items())+(f' · Επιπλέον {len(extra)} ερωτήσεις που είχαν ήδη στοχευμένο έλεγχο από άλλον ({", ".join(sorted(extra))}): παρατίθενται για διασταύρωση.' if extra else ''),'',
+'Σύνολο εκκρεμών (χωρίς προηγούμενο targetedReview): 197 — B-009…B-046, B-048…B-093, B-095…B-180, B-182…B-203, B-205…B-209.','',
+'**Εκκρεμότητες για άνθρωπο:**',
+'- Απαιτείται κλινική αξιολόγηση: '+', '.join(e['id'][6:] for e in data['entries'] if e.get('clinicalReview')),
+'- Πηγή μη προσβάσιμη (δεν επαληθεύτηκαν): '+', '.join(e['id'][6:] for e in data['entries'] if e['verdict']=='source_unreachable'),
+'- Έλλειψη/λάθος παραπομπής ή κενά: δείτε τις επιμέρους ενότητες (προτεινόμενες αλλαγές για έγκριση, δεν εφαρμόστηκαν).','']
 for e in data['entries']:
     L+=[f"## {e['id']} — {V[e['verdict']]} · κίνδυνος: {e['risk']} · βεβαιότητα: {e['certainty']}",f"*{e['question']}*",'',e['findings'],'']
     L+=['Πηγές ('+e['checkedAt']+'): '+'; '.join(f"[{s['title']}]({s['url']})" for s in e['sources'])]
