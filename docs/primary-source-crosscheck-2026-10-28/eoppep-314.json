@@ -6112,25 +6112,24 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-019",
-            "question": "Να αναφέρετε τους τρόπους ελέγχου βατότητας των αεραγωγών.",
-            "verdict": "source_unreachable",
-            "risk": "υψηλός (αεραγωγός)",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Έλεγχος βατότητας αεραγωγών",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Το WHO Basic Emergency Care κατέβηκε (PDF 4,1 MB) αλλά το κείμενό του δεν εξάγεται (εικόνες/διαφάνειες, 129 γραμμές)· δεν επιβεβαιώθηκε το συγκεκριμένο χωρίο. Το περιεχόμενο της απάντησης (ομιλία, ήχοι αεραγωγού, εκκρίσεις/ξένο σώμα, κίνηση θώρακα, χειρισμοί σε μειωμένη συνείδηση) είναι η κοινή προσέγγιση εκτίμησης αεραγωγού, αλλά δεν τεκμηριώθηκε από το κείμενο της πηγής.",
-            "suggestedChange": "Προσθήκη ακριβούς σελίδας/κεφαλαίου του WHO BEC ή άλλης πηγής με εξαγώγιμο κείμενο (π.χ. RCUK ALS/ABCDE).",
+            "findings": "Η πηγή περιγράφει «look–listen–feel»: ομιλία (καθαρή φωνή = πιθανώς βατός αεραγωγός), ροχαλητό (πτώση γλώσσας), στριδόρ, γουργουρητό (υγρά), σιωπή (πλήρης απόφραξη), αίσθηση ροής αέρα, ορατές εκκρίσεις/ξένα σώματα. Η αποθηκευμένη απάντηση καλύπτει τα ίδια στοιχεία. Δευτερογενής πηγή εκπαιδευτικού εγχειριδίου.",
             "sources": [
               {
-                "title": "WHO Basic Emergency Care (PDF)",
-                "url": "https://iris.who.int/server/api/core/bitstreams/63432b9f-8808-44c5-9692-cea717c0cbda/content"
+                "title": "Sheffield Hallam SMART manual 2020 — Part 3 Airway and breathing",
+                "url": "https://sites.google.com/my.shu.ac.uk/smart-manual-2020/part-3-airway-and-breathing"
               }
             ],
             "clinicalReview": false
@@ -6156,25 +6155,24 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-020",
-            "question": "Να αναφέρετε τα συχνότερα αίτια απόφραξης του αεραγωγού.",
-            "verdict": "source_unreachable",
-            "risk": "υψηλός (αεραγωγός)",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Συχνότερα αίτια απόφραξης αεραγωγού",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Ίδιος περιορισμός με B-019: η παραπομπή WHO BEC δεν επαληθεύτηκε σε κείμενο. Τα αίτια που αναφέρονται (γλώσσα, ξένο σώμα, έμετος/αίμα, οίδημα, τραύμα, εγκαύματα εισπνοής) είναι κλασικά και δεν εμφανίζονται λανθασμένα, αλλά δεν συγκρίθηκαν με το πρωτογενές κείμενο.",
-            "suggestedChange": "Ακριβής παραπομπή σε ενότητα εκτίμησης αεραγωγού με εξαγώγιμο κείμενο.",
+            "findings": "Πηγή: μειωμένη συνείδηση, ξένα σώματα/έμετος/αίμα/εκκρίσεις, βρογχόσπασμος, λοίμωξη με οίδημα, αναφυλαξία. Η αποθηκευμένη απάντηση τα καλύπτει (και προσθέτει τραύμα/έγκαυμα εισπνοής, που είναι αποδεκτά αίτια).",
             "sources": [
               {
-                "title": "WHO Basic Emergency Care (PDF)",
-                "url": "https://iris.who.int/server/api/core/bitstreams/63432b9f-8808-44c5-9692-cea717c0cbda/content"
+                "title": "Sheffield Hallam SMART manual 2020 — Part 3 Airway and breathing",
+                "url": "https://sites.google.com/my.shu.ac.uk/smart-manual-2020/part-3-airway-and-breathing"
               }
             ],
             "clinicalReview": false
@@ -7594,7 +7592,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -7602,20 +7600,20 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-052",
-            "question": "Διαιρούμενο φορείο.",
-            "verdict": "source_unreachable",
+            "question": "Πότε χρησιμοποιείται το διαιρούμενο φορείο",
+            "verdict": "consistent_with_gaps",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "FPHC (2013): το scoop συνιστάται για μεταφορά και σπονδυλική ακινητοποίηση με ελάχιστο χειρισμό (μικρή κλίση, λίγο προσωπικό), αλλά είναι λιγότερο κατάλληλο για μακρινή μεταφορά και δεν έχει ειδική ακινητοποίηση κεφαλής/αυχένα· η μακρά σανίδα δεν πρέπει πια να χρησιμοποιείται για ακινητοποίηση/μεταφορά. Η αποθηκευμένη απάντηση είναι συμβατή· λείπει ο συσχετισμός με την αρχή του ελάχιστου χειρισμού και ο περιορισμός χρόνου.",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "Faculty of Pre-hospital Care (RCSEd) — Minimal patient handling consensus (Moss, Porter, Greaves, Emerg Med J 2013)",
+                "url": "https://fphc.rcsed.ac.uk/media/3605/minimal-patient-handling.pdf"
               }
             ],
-            "clinicalReview": false
+            "clinicalReview": false,
+            "suggestedChange": "Προσθήκη: χρήση με ελάχιστο χειρισμό (scoop-to-skin), όχι για παρατεταμένη παραμονή· σκέψη στρώματος κενού αν αναμένεται παραμονή >~45 λεπτά (ενδεικτικό όριο, όχι ισχυρή τεκμηρίωση)."
           }
         }
       ]
@@ -7638,7 +7636,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -7646,17 +7644,16 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-053",
-            "question": "Στρώμα κενού.",
-            "verdict": "source_unreachable",
+            "question": "Πότε χρησιμοποιείται το στρώμα κενού",
+            "verdict": "consistent_with_gaps",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "FPHC (2013): στρώμα κενού όταν αναμένεται μεγάλος χρόνος στο scoop (ενδεικτικά >45 λεπτά)· πιο άνετο, χαμηλότερη συχνότητα πιεστικών βλαβών, αλλά ακριβό και θέλει συντήρηση. Η αποθηκευμένη απάντηση (ακινητοποίηση, κατανομή πιέσεων, επανέλεγχος) είναι συμβατή. Το ελληνικό εκπαιδευτικό υλικό ΙΕΚ το αναφέρει ως «στρώμα πολυτραυματία με τρόμπα» (εξοπλισμός).",
             "sources": [
               {
-                "title": "NICE NG41",
-                "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+                "title": "Faculty of Pre-hospital Care (RCSEd) — Minimal patient handling consensus (Moss, Porter, Greaves, Emerg Med J 2013)",
+                "url": "https://fphc.rcsed.ac.uk/media/3605/minimal-patient-handling.pdf"
               }
             ],
             "clinicalReview": false
@@ -7818,7 +7815,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -7826,19 +7823,24 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-057",
-            "question": "Μέτρηση μεγέθους κολάρου και είδη.",
-            "verdict": "source_unreachable",
+            "question": "Μέτρηση μεγέθους αυχενικού κολάρου και είδη",
+            "verdict": "consistent_with_gaps",
             "risk": "μέτριος",
-            "certainty": "χαμηλή",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή είναι σελίδα κατασκευαστή (Ambu Perfit ACE)· δεν ανακτήθηκε σε αυτό το πέρασμα. Η απάντηση σωστά λέει ότι η τεχνική διαφέρει ανά κατασκευαστή.",
+            "findings": "Δύο διαφορετικές τεκμηριωμένες τεχνικές: RCH — απόσταση από την κορυφή του ώμου έως τη γωνία της γνάθου, που αντιστοιχίζεται στο «measuring post» του κολάρου· QAS (μαλακό κολάρο) — από τη βάση του πηγουνιού έως το σφαγιτιδικό εντύπωμα. Άρα η τεχνική ΔΙΑΦΕΡΕΙ ανά τύπο/κατασκευαστή, όπως λέει η αποθηκευμένη απάντηση. Η συγκεκριμένη οδηγία για Ambu Perfit ACE δεν επαληθεύτηκε από πηγή κατασκευαστή. Το QAS σημειώνει ότι κανένα κολάρο δεν ακινητοποιεί πλήρως και ότι τα άκαμπτα έχουν επιπλοκές.",
             "sources": [
               {
-                "title": "Ambu Perfit ACE (δεν ανακτήθηκε)",
-                "url": "https://www.ambuusa.com/emergency-care-and-training/extrication-collars/product/ambu-perfit-ace"
+                "title": "Royal Children's Hospital Melbourne — Sizing a one-piece hard collar",
+                "url": "https://www.rch.org.au/clinicalguide/guideline_index/Sizing_a_one-piece_hard_collar/"
+              },
+              {
+                "title": "Queensland Ambulance Service — Cervical collar CPP (Feb 2021)",
+                "url": "https://ambulance.qld.gov.au/__data/assets/pdf_file/0030/219279/cpp_cervical-collar.pdf"
               }
             ],
-            "clinicalReview": false
+            "clinicalReview": false,
+            "suggestedChange": "Η γενική διατύπωση «ακολουθούμε τις οδηγίες του κατασκευαστή του συγκεκριμένου κολάρου» είναι ασφαλής· αν διατηρηθεί το παράδειγμα Ambu, να επιβεβαιωθεί από το φυλλάδιο του κατασκευαστή."
           }
         }
       ]
@@ -7904,7 +7906,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -7912,17 +7914,20 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-059",
-            "question": "Οπίσθια σύγκρουση — πορεία επιβάτη.",
-            "verdict": "source_unreachable",
+            "question": "Οπίσθια σύγκρουση: πορεία επιβάτη και κακώσεις",
+            "verdict": "consistent_with_gaps",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "StatPearls (2023): η οπίσθια σύγκρουση αυξάνει τον κίνδυνο κακώσεων κάμψης/έκτασης αυχένα και πιθανών καταγμάτων σπονδύλων. Quebec Task Force: ο ακριβής μηχανισμός whiplash δεν είναι πλήρως κατανοητός· στις χαμηλές ταχύτητες δεν παρατηρείται πάντα η κλασική υπερέκταση-υπερκάμψη, παίζουν ρόλο η θέση προσκέφαλου και η ζώνη. Η αποθηκευμένη απάντηση (έκταση και κάμψη, whiplash, εξάρτηση από προσκέφαλο/ζώνη/ταχύτητα) είναι συμβατή ως εκπαιδευτική απλοποίηση.",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+                "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
+              },
+              {
+                "title": "Quebec Task Force — Whiplash mechanism",
+                "url": "https://chiro.org/Whiplash/FULL/Quebec_Task_Force/mechanism.htm"
               }
             ],
             "clinicalReview": false
@@ -7948,7 +7953,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -7956,17 +7961,16 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-060",
-            "question": "Μετωπική σύγκρουση — πορεία επιβάτη.",
-            "verdict": "source_unreachable",
+            "question": "Μετωπική σύγκρουση: πορεία και κακώσεις",
+            "verdict": "consistent",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "StatPearls: σε μετωπική/εγγύς πλευρά πρόσκρουση ο επιβάτης χτυπά τιμόνι/ταμπλό — κακώσεις κεφαλής, αυχένα, θώρακα (θλάσεις πνευμόνων, κατάγματα πλευρών) και κοιλίας· μη σωστή χρήση ζώνης αυξάνει κακώσεις κάτω άκρων/πυέλου/κοιλίας. Συμφωνεί με την αποθηκευμένη απάντηση. Η «τριπλή σύγκρουση» (όχημα, σώμα, όργανα) περιγράφεται επίσης.",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+                "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
               }
             ],
             "clinicalReview": false
@@ -7992,7 +7996,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -8000,17 +8004,16 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-061",
-            "question": "Πλάγια σύγκρουση — πορεία επιβάτη.",
-            "verdict": "source_unreachable",
+            "question": "Πλάγια σύγκρουση: πορεία και κακώσεις",
+            "verdict": "consistent",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "StatPearls: στην πλάγια (T-bone) πρόσκρουση ο επιβάτης στην πλευρά πρόσκρουσης υφίσταται εισβολή/σύνθλιψη· συσχετίζονται κακώσεις αορτής/οργάνων και κατάγματα πυέλου, αυχένα, κλείδας, κρανίου. Συμφωνεί με την αποθηκευμένη απάντηση (πλευρές, πνεύμονας, κοιλιακά όργανα, λεκάνη, ώμος, κεφαλή, αυχένας).",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+                "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
               }
             ],
             "clinicalReview": false
@@ -8036,7 +8039,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -8044,17 +8047,16 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-062",
-            "question": "Παράγοντες βαρύτητας πτώσης.",
-            "verdict": "source_unreachable",
+            "question": "Παράγοντες βαρύτητας σε πτώση από ύψος",
+            "verdict": "consistent_with_gaps",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "Fujii 2021 (179 ασθενείς, 1 κέντρο): ύψος ≥5 m και θέση σώματος κατά την πρόσκρουση (κεφαλή, πλάγια, ραχιαία) συνδέονται με υψηλότερη βαρύτητα/χαμηλότερη επιβίωση· η επιφάνεια αναφέρεται αλλά η εργασία είναι εσωτερικά αντιφατική· η ηλικία ΔΕΝ βρέθηκε σημαντική σε αυτή τη μελέτη. Η αποθηκευμένη απάντηση (ύψος, επιφάνεια, θέση σώματος, ηλικία/ευθραυστότητα) συμφωνεί στα τρία πρώτα· η ηλικία είναι κλινικά παραδεκτός παράγοντας αλλά δεν στηρίχθηκε από αυτή την πηγή.",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "Fujii et al., Sci Rep 2021 — Factors influencing ISS in falls from height",
+                "url": "https://link.springer.com/10.1038/s41598-021-95226-w"
               }
             ],
             "clinicalReview": false
@@ -8124,7 +8126,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -8132,17 +8134,16 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-064",
-            "question": "Τύποι συγκρούσεων αυτοκινήτων.",
-            "verdict": "source_unreachable",
-            "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Τύποι συγκρούσεων σε σύγκρουση αυτοκινήτων",
+            "verdict": "consistent",
+            "risk": "χαμηλός",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "StatPearls: τρεις διαδοχικές συγκρούσεις (όχημα με εμπόδιο, σώμα με το εσωτερικό, εσωτερικά όργανα με τις κοιλότητες) και τύποι μετωπική/πλάγια/οπίσθια/ανατροπή. Συμφωνεί πλήρως με την αποθηκευμένη απάντηση.",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+                "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
               }
             ],
             "clinicalReview": false
@@ -8168,7 +8169,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -8176,20 +8177,20 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-065",
-            "question": "Παράγοντες βαρύτητας διατιτραίνοντος τραύματος.",
-            "verdict": "source_unreachable",
-            "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Παράγοντες βαρύτητας διατιτραίνοντος τραύματος",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE (major trauma/spinal) δεν άνοιξε (client_error). Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "StatPearls: η ταχύτητα/ενέργεια του βλήματος (κινητική ενέργεια ανάλογη του τετραγώνου της ταχύτητας), πυκνότητα ιστού, τροχιά, όργανα/αγγεία που εμπλέκονται (αγγειακή βλάβη = μεγαλύτερη θνητότητα), τύπος όπλου (πυροβόλο > μαχαίρι), καθυστέρηση/shock. Η αποθηκευμένη απάντηση καλύπτει ενέργεια/βλήμα, όργανα, αιμορραγία, καθυστέρηση· λείπει η πυκνότητα ιστού και η σπηλαιοποίηση.",
             "sources": [
               {
-                "title": "NICE NG39",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "StatPearls point-of-care — Penetrating trauma",
+                "url": "https://statpearls.com/point-of-care/17023"
               }
             ],
-            "clinicalReview": false
+            "clinicalReview": false,
+            "suggestedChange": "Προσθήκη: πυκνότητα ιστού, προσωρινή σπηλαίωση και δευτερογενή βλήματα (θραύσματα οστών)."
           }
         }
       ]
@@ -8212,7 +8213,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -8220,20 +8221,20 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-066",
-            "question": "Είσοδος/έξοδος τραύματος πυροβόλου.",
-            "verdict": "source_unreachable",
+            "question": "Διάκριση πύλης εισόδου/εξόδου πυροβολισμού",
+            "verdict": "consistent_with_gaps",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η σελίδα NCBI επέστρεψε έλεγχο reCAPTCHA· δεν επιχειρήθηκε παράκαμψη. Η απάντηση σωστά επισημαίνει ότι η διάκριση μόνο από την όψη δεν είναι πάντα αξιόπιστη. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
-            "suggestedChange": "Προσθήκη προσβάσιμης πηγής (π.χ. PHTLS/ATLS, ERC, ελληνικό πρωτόκολλο).",
+            "findings": "ACEP Now: η είσοδος μπορεί να έχει δακτύλιο εκδοράς, tattooing/stippling, αιθάλη κ.ά., ανάλογα με την απόσταση· το μέγεθος ΔΕΝ είναι αξιόπιστο κριτήριο (τραύματα επαφής φαίνονται μεγάλα και μπερδεύονται με έξοδο)· μη εξειδικευμένοι κλινικοί δεν πρέπει να χαρακτηρίζουν «είσοδο/έξοδο», αλλά να περιγράφουν θέση, μέγεθος, μορφή. Η αποθηκευμένη απάντηση το λέει ήδη, με ανάλογες επιφυλάξεις. Η πηγή δεν περιγράφει την πύλη εξόδου.",
             "sources": [
               {
-                "title": "StatPearls NBK556119",
-                "url": "https://www.ncbi.nlm.nih.gov/books/NBK556119/"
+                "title": "ACEP Now — Clinical forensic evaluation of gunshot wounds in the ED",
+                "url": "https://www.acepnow.com/article/the-clinical-forensic-evaluation-of-gunshot-wounds-in-the-ed/"
               }
             ],
-            "clinicalReview": false
+            "clinicalReview": false,
+            "suggestedChange": "Προσθήκη φράσης: «ο χαρακτηρισμός είσοδος/έξοδος δεν γίνεται προνοσοκομειακά· καταγράφεται περιγραφικά (θέση, μέγεθος, μορφή)»."
           }
         }
       ]
@@ -8996,25 +8997,24 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-084",
-            "question": "Δώστε τον ορισμό του διαγνωστικού σημείου και του συμπτώματος.",
-            "verdict": "source_unreachable",
-            "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Ορισμός διαγνωστικού σημείου και συμπτώματος",
+            "verdict": "consistent",
+            "risk": "χαμηλός",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "Σύμπτωμα: υποκειμενική εμπειρία που αναφέρει μόνο ο ασθενής (π.χ. ναυτία, πονοκέφαλος)· σημείο: αντικειμενική ένδειξη που παρατηρεί/μετρά ο εξεταστής (πυρετός, εξάνθημα, ψηλή πίεση). Συμφωνεί με την αποθηκευμένη απάντηση.",
             "sources": [
               {
-                "title": "www.who.int",
-                "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+                "title": "EBSCO Research Starters — Understanding disease signs and symptoms",
+                "url": "https://www.ebsco.com/research-starters/health-and-medicine/understanding-disease-signs-and-symptoms"
               }
             ],
             "clinicalReview": false
@@ -9040,25 +9040,24 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-085",
-            "question": "Δώστε τον ορισμό της ωχρότητας και αναφέρατε τα αίτια που την προκαλούν.",
-            "verdict": "source_unreachable",
+            "question": "Ορισμός ωχρότητας και αίτια",
+            "verdict": "consistent",
             "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "Η ωχρότητα ορίζεται ως ωχρό χρώμα δέρματος (μειωμένη οξυαιμοσφαιρίνη) και ορατή κυρίως στο πρόσωπο, στις παλάμες και στους επιπεφυκότες· αίτια: αναιμία/απώλεια αίματος, κυκλοφορική (shock, υποογκαιμία), συναισθηματικά, ενδοκρινικά, λοιμώξεις. Η αποθηκευμένη απάντηση (αγγειοσύσπαση, υποάρδευση, αναιμία, απώλεια αίματος) είναι συμβατή. Δευτερογενής πηγή.",
             "sources": [
               {
-                "title": "www.who.int",
-                "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+                "title": "Wikipedia — Pallor (δευτερογενής πηγή)",
+                "url": "https://en.wikipedia.org/wiki/Pallor"
               }
             ],
             "clinicalReview": false
@@ -9468,29 +9467,28 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-094",
-            "question": "Ποια είναι η προνοσοκομειακή αντιμετώπιση της επιληψίας στα παιδιά;",
-            "verdict": "source_unreachable",
+            "question": "Προνοσοκομειακή αντιμετώπιση επιληψίας στα παιδιά",
+            "verdict": "consistent_with_gaps",
             "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "EMRS CG004 v2 (2024): κρίση >5 λεπτά → βενζοδιαζεπίνη (πρώτη επιλογή midazolam bucc./ρινικά/IM· παιδιά 0,3 mg/kg ή ανά ηλικία· lorazepam ή diazepam ως εναλλακτικά)· υψηλής ροής Ο₂ και στόχος SpO₂ 94–98%, έλεγχος γλυκόζης (θεραπεία αν <4 mmol/L), επανάληψη μία φορά μετά 5–10 λεπτά. Η αποθηκευμένη απάντηση (προστασία, χρονομέτρηση, ABC, γλυκόζη, βενζοδιαζεπίνη ≥5 λεπτά) είναι συμβατή και δεν δίνει δόσεις. Οι δόσεις και η διαδρομή εξαρτώνται από το ισχύον ελληνικό πρωτόκολλο/εξουσιοδότηση.",
             "sources": [
               {
-                "title": "www.nice.org.uk",
-                "url": "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures"
+                "title": "EMRS Scotland CG004 Status Epilepticus v2 (18/3/2024)",
+                "url": "https://www.emrsscotland.org/s/CG004-Status-Epilepticus-v2.pdf"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false,
+            "suggestedChange": "Αν προστεθούν δόσεις: midazolam 0,3 mg/kg (ή ανά ηλικία) buccal/ρινικά ή IM, μία επανάληψη μετά 5–10 λεπτά — μόνο μετά έγκριση κλινικού."
           }
         }
       ]
@@ -9644,25 +9642,24 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-098",
-            "question": "Να αναφέρετε τρεις (3) παθολογικές καταστάσεις του κυκλοφορικού συστήματος που εκδηλώνουν δύσπνοια προσπάθειας.",
-            "verdict": "source_unreachable",
-            "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Τρεις παθήσεις κυκλοφορικού με δύσπνοια προσπάθειας",
+            "verdict": "consistent",
+            "risk": "χαμηλός",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "StatPearls: καρδιακή ανεπάρκεια (συχνότερη αιτία), στεφανιαία νόσος/οξύ στεφανιαίο σύνδρομο, βαλβιδοπάθειες. Συμφωνεί πλήρως.",
             "sources": [
               {
-                "title": "www.nice.org.uk",
-                "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+                "title": "StatPearls — Dyspnea on exertion",
+                "url": "https://www.statpearls.com/sp/md/90/20809/"
               }
             ],
             "clinicalReview": false
@@ -10702,29 +10699,27 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-122",
-            "question": "Ποιες είναι οι βασικές αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με ιστορικό επιληψίας που βρίσκετε σε status epilepticus;",
-            "verdict": "source_unreachable",
+            "question": "Αρχές προνοσοκομειακής αντιμετώπισης status epilepticus",
+            "verdict": "consistent_with_gaps",
             "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "EMRS CG004 v2: ορισμός >5 λεπτά κρίσης, Ο₂, monitor, i.v./i.o. γραμμή, γλυκόζη, βενζοδιαζεπίνη (midazolam ενήλικες 10 mg, 5 mg αν ηλικιωμένος/<50 kg), επανάληψη μία φορά, πρόσκληση για δεύτερης γραμμής αντιεπιληπτικό >30 λεπτά. Η αποθηκευμένη απάντηση καλύπτει τις αρχές χωρίς δόσεις· ορίζει «παρατεταμένη ή επαναλαμβανόμενη κρίση χωρίς ανάκτηση συνείδησης» (συμβατό).",
             "sources": [
               {
-                "title": "www.who.int",
-                "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+                "title": "EMRS Scotland CG004 Status Epilepticus v2 (18/3/2024)",
+                "url": "https://www.emrsscotland.org/s/CG004-Status-Epilepticus-v2.pdf"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false
           }
         }
       ]
@@ -10972,23 +10967,22 @@
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-128",
             "question": "Σύστημα των 3 ζωνών σε μαζικό ατύχημα.",
-            "verdict": "needs_correction",
+            "verdict": "consistent_with_gaps",
             "risk": "υψηλός",
             "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "(Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Σχέδιο μαζικού ατυχήματος (σελ. 66–67): το Τοπικό Συντονιστικό Όργανο ορίζει Περιοχή Κινδύνου (Danger Area, ελέγχεται από Πυροσβεστική), Περιοχή Ελέγχου (Control Area: ιατρική υπηρεσία, χώρος διαλογής/triage και άμεσης αντιμετώπισης, κόκκινα σταθεροποιούνται εδώ) και Περιοχή Πρόσβασης (Holding Area: ασθενοφόρα/οχήματα, χώρος συγκέντρωσης κίτρινων-πράσινων). Η αποθηκευμένη απάντηση περιγράφει το μοντέλο επικίνδυνων υλικών θερμή/ενδιάμεση/ψυχρή (hot/warm/cold) και ΔΕΝ αντιστοιχεί στις τρεις ζώνες του ελληνικού σχεδίου μαζικού ατυχήματος που προφανώς ζητά η ερώτηση.",
+            "findings": "[ΔΙΟΡΘΩΘΗΚΕ 31/10/2026 στην εφαρμογή] (Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Σχέδιο μαζικού ατυχήματος (σελ. 66–67): το Τοπικό Συντονιστικό Όργανο ορίζει Περιοχή Κινδύνου (Danger Area, ελέγχεται από Πυροσβεστική), Περιοχή Ελέγχου (Control Area: ιατρική υπηρεσία, χώρος διαλογής/triage και άμεσης αντιμετώπισης, κόκκινα σταθεροποιούνται εδώ) και Περιοχή Πρόσβασης (Holding Area: ασθενοφόρα/οχήματα, χώρος συγκέντρωσης κίτρινων-πράσινων). Η αποθηκευμένη απάντηση περιγράφει το μοντέλο επικίνδυνων υλικών θερμή/ενδιάμεση/ψυχρή (hot/warm/cold) και δεν αντιστοιχούσε στις τρεις ζώνες του ελληνικού σχεδίου μαζικού ατυχήματος που προφανώς ζητά η ερώτηση. Η απάντηση αντικαταστάθηκε με τις τρεις ζώνες του σχεδίου μαζικού ατυχήματος ΙΕΚ ΕΚΑΒ 2017 (Danger/Control/Holding Area) και το hot/warm/cold μένει ως ξεχωριστό μοντέλο ΧΒΡΠ. Πηγή: έντυπο 2017 που παρείχε ο χρήστης· ανθρώπινη επιβεβαίωση ότι το ισχύον σχέδιο δεν έχει αλλάξει.",
             "sources": [
               {
                 "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), Να αντικατασταθεί/συμπληρωθεί η απάντηση με Danger Area / Control Area / Holding Area, κρατώντας το hot-warm-cold ως ξεχωριστό μοντέλο για ΧΒΡΠ. — αρχείο που παρείχε ο χρήστης",
                 "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
               }
             ],
-            "clinicalReview": true,
-            "suggestedChange": "σελ. 66–67",
+            "clinicalReview": false,
             "clinicalNote": "Επιβεβαίωση από τον εγκεκριμένο οδηγό ΕΚΑΒ ποιο μοντέλο ζωνών ισχύει στην εξέταση."
           }
         }
@@ -11055,29 +11049,27 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-130",
-            "question": "Ως πλήρωμα ασθενοφόρου – διασώστης καλείστε σε bar για νεαρό που έκοψε το χέρι με ποτήρι. Παρατηρείτε αιμορραγία από το δεξιό αντιβράχιο και αδυναμία ανύψωσης τ",
-            "verdict": "source_unreachable",
+            "question": "Κοπή αντιβραχίου με ποτήρι: ενέργειες, αιτία αδυναμίας",
+            "verdict": "consistent_with_gaps",
             "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "Πρωτόκολλο EMS (Santa Cruz 2020): άμεση πίεση με γάζα/επίδεσμο πίεσης· τουρνικέ μόνο σε μη ελεγχόμενη αιμορραγία άκρου, τοποθέτηση 2–3 ίντσες πάνω από το τραύμα, σημείωση ώρας, έλεγχος περιφερικής κυκλοφορίας. Η αποθηκευμένη απάντηση (ΑΜΠ, ABCDE, πίεση, τουρνικέ αν απειλητική, έλεγχος αισθητικότητας/κίνησης/σφύξεων, ακινητοποίηση, διακομιδή) είναι συμβατή. Για το (β) δεν βρέθηκε πηγή· η απάντηση δεν δίνει οριστική αιτία (τένοντας/μυς/νεύρο) — ασφαλές. Πηγή: τοπικό αμερικανικό πρωτόκολλο, όχι ελληνικό.",
             "sources": [
               {
-                "title": "www.nice.org.uk",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "Santa Cruz County EMS — Protocol 700-T4 Hemorrhage Control (2020)",
+                "url": "https://www.santacruzhealth.org/Portals/7/Pdfs/PublicHealth/Emergency%20Medical%20Services/Policies/Section700/700-T4_Hemorrhage_Control.pdf"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false
           }
         }
       ]
@@ -11195,12 +11187,11 @@
           "evidence": {
             "id": "EOP-B-133",
             "question": "Παιδί με τσίμπημα μέλισσας/γνωστή αλλεργία, εξάνθημα και δύσπνοια (αναφυλαξία).",
-            "verdict": "needs_clinical_review",
+            "verdict": "consistent_with_gaps",
             "risk": "υψηλός",
             "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο αναφυλαξίας (σελ. 7): απομάκρυνση αιτίου, αεραγωγός, Ο₂ σε μεγάλη συγκέντρωση, SpO₂, i.v. γραμμή, ΑΠ, monitoring, αδρεναλίνη «10 μg/kg (0,01 ml/kg από την αραίωση 1:10.000) βαθιά ενδομυϊκά ή ενδοφλέβια αργά», υδροκορτιζόνη 4 mg/kg, διμεθινδένη 1 mg/10 kg. ΠΡΟΣΟΧΗ ΑΡΙΘΜΗΤΙΚΗ ΑΣΥΜΦΩΝΙΑ: το 1:10.000 περιέχει 100 μg/mL, άρα 0,01 mL/kg = 1 μg/kg και ΟΧΙ 10 μg/kg (10 μg/kg = 0,1 mL/kg του 1:10.000 ή 0,01 mL/kg του 1:1.000). Η RCUK 2021 δίνει ενδομυϊκά σταθερές δόσεις 1:1.000 (6–12 ετών 300 μg, 6 μήνες–6 ετών 150 μg), και δεν συστήνει αντιισταμινικά/στεροειδή ως αρχική θεραπεία. Η αποθηκευμένη απάντηση (ύποπτη αναφυλαξία, ΙΜ αδρεναλίνη κατά πρωτόκολλο, τα αντιισταμινικά δεν την υποκαθιστούν) είναι συμβατή με τη διεθνή πρακτική και δεν δίνει δόση· όμως το ελληνικό κείμενο διαφέρει στη δοσολογία και στον ρόλο υδροκορτιζόνης/αντιισταμινικού.",
-            "suggestedChange": "Να μη χρησιμοποιηθεί η δοσολογία του PDF χωρίς διόρθωση. Να ζητηθεί από ΕΚΑΒ/κλινικό η ισχύουσα δοσολογία αδρεναλίνης και να γίνει σαφής διάκριση 2017-ελληνικό / RCUK 2021.",
+            "findings": "[ΔΙΟΡΘΩΘΗΚΕ 31/10/2026 στην εφαρμογή] (Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο αναφυλαξίας (σελ. 7): απομάκρυνση αιτίου, αεραγωγός, Ο₂ σε μεγάλη συγκέντρωση, SpO₂, i.v. γραμμή, ΑΠ, monitoring, αδρεναλίνη «10 μg/kg (0,01 ml/kg από την αραίωση 1:10.000) βαθιά ενδομυϊκά ή ενδοφλέβια αργά», υδροκορτιζόνη 4 mg/kg, διμεθινδένη 1 mg/10 kg. ΠΡΟΣΟΧΗ ΑΡΙΘΜΗΤΙΚΗ ΑΣΥΜΦΩΝΙΑ: το 1:10.000 περιέχει 100 μg/mL, άρα 0,01 mL/kg = 1 μg/kg και ΟΧΙ 10 μg/kg (10 μg/kg = 0,1 mL/kg του 1:10.000 ή 0,01 mL/kg του 1:1.000). Η RCUK 2021 δίνει ενδομυϊκά σταθερές δόσεις 1:1.000 (6–12 ετών 300 μg, 6 μήνες–6 ετών 150 μg), και δεν συστήνει αντιισταμινικά/στεροειδή ως αρχική θεραπεία. Η αποθηκευμένη απάντηση (ύποπτη αναφυλαξία, ΙΜ αδρεναλίνη κατά πρωτόκολλο, τα αντιισταμινικά δεν την υποκαθιστούν) είναι συμβατή με τη διεθνή πρακτική και δεν δίνει δόση· όμως το ελληνικό κείμενο διαφέρει στη δοσολογία και στον ρόλο υδροκορτιζόνης/αντιισταμινικού. Η απάντηση συμπληρώθηκε με συγκεκριμένη δόση: IM αδρεναλίνη 1 mg/mL (1:1000) 0,01 mg/kg, μέγιστο 0,5 mg (RCUK: 6 μηνών–6 ετών 150 μg, 6–12 ετών 300 μg, >12 ετών 500 μg· επανάληψη μετά 5 λεπτά· Australian Prescriber/ASCIA: 0,01 mg/kg, μέγ. 0,5 mg). Η αριθμητική ασυμφωνία του εντύπου ΙΕΚ 2017 (0,01 ml/kg του 1:10.000) σημειώνεται στην απάντηση.",
             "sources": [
               {
                 "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 7 — αρχείο που παρείχε ο χρήστης",
@@ -11209,10 +11200,18 @@
               {
                 "title": "RCUK — Emergency treatment of anaphylaxis (May 2021)",
                 "url": "https://www.resus.org.uk/sites/default/files/2021-05/Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf"
+              },
+              {
+                "title": "Resuscitation Council UK — Emergency treatment of anaphylaxis (2021)",
+                "url": "https://resus.org.uk/media/333/download"
+              },
+              {
+                "title": "Australian Prescriber — Updated anaphylaxis guidelines: infants and children",
+                "url": "https://www.nps.org.au/australian-prescriber/articles/updated-anaphylaxis-guidelines-management-in-infants-and-children"
               }
             ],
             "clinicalReview": true,
-            "clinicalNote": "Δοσολογία αδρεναλίνης: ασυμφωνία 1:10.000 / μg/kg στο PDF του 2017· επιβεβαίωση από ισχύον υπηρεσιακό πρωτόκολλο ΕΚΑΒ και κλινικό."
+            "clinicalNote": "Επιβεβαίωση δόσης αδρεναλίνης από κλινικό/εκπαιδευτή και ευθυγράμμιση με το ισχύον πρωτόκολλο ΕΚΑΒ."
           }
         }
       ]
@@ -11235,7 +11234,7 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
@@ -11243,17 +11242,20 @@
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-134",
-            "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν ασθενή ο οποίος αναφέρει εύκολη κόπωση, χαμηλό πυρετό, νυχτερινή εφίδρωση και απώλεια βάρους",
-            "verdict": "source_unreachable",
-            "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Ασθενής με κόπωση, χαμηλό πυρετό, νυχτερινή εφίδρωση, απώλεια βάρους",
+            "verdict": "consistent",
+            "risk": "υψηλός",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "WHO/CDC: τα συμπτώματα ενεργού φυματίωσης είναι παρατεταμένος βήχας (≥3 εβδομάδες), πυρετός, νυχτερινή εφίδρωση, απώλεια βάρους, κόπωση· αερογενής μετάδοση· στα ιδρύματα απαιτούνται αναπνευστήρες/αερισμός και μάσκα στον ασθενή. Η αποθηκευμένη απάντηση (υποψία φυματίωσης, μέτρα προφύλαξης, ABCDE, ενημέρωση υποδοχής) συμφωνεί.",
             "sources": [
               {
-                "title": "www.who.int",
-                "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+                "title": "WHO — Tuberculosis fact sheet",
+                "url": "https://www.who.int/news-room/fact-sheets/detail/tuberculosis"
+              },
+              {
+                "title": "CDC — Signs and symptoms of TB",
+                "url": "https://www.cdc.gov/tb/signs-symptoms/index.html"
               }
             ],
             "clinicalReview": false
@@ -11322,29 +11324,27 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-136",
-            "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν ασθενή 67 ετών ο οποίος παρουσιάζει αδυναμία της αριστερής μεριάς του σώματος, αλλά επικοινω",
-            "verdict": "source_unreachable",
+            "question": "Άνδρας 67 ετών με ημιπάρεση αριστερά, κεφαλαλγία, ναυτία",
+            "verdict": "consistent",
             "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "NICE NG128: χρήση έγκυρου εργαλείου (FAST) εκτός νοσοκομείου, έλεγχος υπογλυκαιμίας, ασπιρίνη μόνο αφού αποκλειστεί αιμορραγία με απεικόνιση, μείωση πίεσης στην ενδοεγκεφαλική αιμορραγία μόνο σε νοσοκομείο με στόχο συστολική ≤140 mmHg. Η αποθηκευμένη απάντηση (ύποπτο ΑΕΕ, χρόνος έναρξης, FAST, γλυκόζη, ειδοποίηση μονάδας ΑΕΕ, όχι ασπιρίνη, όχι αυθαίρετη μείωση πίεσης) συμφωνεί.",
             "sources": [
               {
-                "title": "www.nice.org.uk",
-                "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+                "title": "NICE NG128 — Stroke and TIA recommendations",
+                "url": "https://www.nice.org.uk/guidance/ng128/chapter/Recommendations"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false
           }
         }
       ]
@@ -11455,29 +11455,31 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-139",
-            "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε σε μετωπική σύγκρουση δύο ΙΧΕ όπου ένα άτομο έχει τραυματιστεί στο κάτω άκρο. Υπάρχει : 1) κάμψη του ισχίου, 2) προ",
-            "verdict": "source_unreachable",
+            "question": "Μετωπική σύγκρουση: κάμψη, προσαγωγή, έσω στροφή, βράχυνση σκέλους",
+            "verdict": "consistent",
             "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "Northwestern: το κλασικό εύρημα οπίσθιου εξαρθρήματος ισχίου είναι βραχυμένο, ελαφρά κεκαμμένο, έσω στρεφόμενο και σε προσαγωγή σκέλος, με πιθανή βλάβη ισχιακού νεύρου (δυσκολία ραχιαίας/πελματιαίας κάμψης, ελάττωση αισθητικότητας). Το ελληνικό υλικό ΙΕΚ λέει να ελέγχεται η αγγείωση/νεύρωση πριν και μετά την ακινητοποίηση. Η αποθηκευμένη απάντηση συμφωνεί· το «όχι επιτόπια ανάταξη» δεν αναφέρεται ρητά στις πηγές αλλά είναι αποδεκτή πρακτική.",
             "sources": [
               {
-                "title": "www.nice.org.uk",
-                "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+                "title": "Northwestern Feinberg Orthopaedics — Posterior hip dislocation, history and exam",
+                "url": "https://www.ortho-teaching.feinberg.northwestern.edu/cases/pelvis-hip/case3/case3historyphysicalexam.html"
+              },
+              {
+                "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (2017) — αρχείο που παρείχε ο χρήστης",
+                "url": "https://www.ekab.gr/eclass/"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false
           }
         }
       ]
@@ -11632,29 +11634,27 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-143",
-            "question": "Τι πρέπει να περιλαμβάνει ένα σύντομο ιστορικό που παίρνετε από έναν τραυματία (όταν υπάρχει δυνατότητα);",
-            "verdict": "source_unreachable",
-            "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Σύντομο ιστορικό τραυματία",
+            "verdict": "consistent",
+            "risk": "χαμηλός",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "SAMPLE: σημεία/συμπτώματα, αλλεργίες, φάρμακα, ιστορικό, τελευταία λήψη τροφής/υγρών, γεγονότα που προηγήθηκαν. Συμφωνεί με την αποθηκευμένη απάντηση (SAMPLE/AMPLE). Δευτερογενής πηγή.",
             "sources": [
               {
-                "title": "www.who.int",
-                "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+                "title": "Wikipedia — SAMPLE history (δευτερογενής πηγή)",
+                "url": "https://en.wikipedia.org/wiki/SAMPLE_history"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false
           }
         }
       ]
@@ -12859,25 +12859,24 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
           "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-171",
-            "question": "Πως προσεγγίζει το ασθενοφόρο ένα πτητικό μέσο για την παραλαβή- παράδοση ασθενούς;",
-            "verdict": "source_unreachable",
-            "risk": "μέτριος",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Προσέγγιση ασθενοφόρου σε πτητικό μέσο",
+            "verdict": "consistent_with_gaps",
+            "risk": "υψηλός",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή δεν άνοιξε σε αυτό το πέρασμα (client/server error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "EMRS SG004 v2 (2021): προσέγγιση μόνο μετά από ένδειξη (thumbs-up) πιλότου, από μπροστά (τόξο 10–2), ποτέ από πίσω/ουρά, ασφάλιση χαλαρών αντικειμένων, προσοχή στους ρότορες. Άλλη πηγή (Metro Life Flight) λέει προσέγγιση από το πλάι σε ορθή γωνία — άρα η κατεύθυνση ορίζεται από το πλήρωμα/πιλότο. Η αποθηκευμένη απάντηση συμφωνεί στα βασικά (άδεια, όχι ουρά). Δεν εξετάστηκε ελληνικό (ΕΚΑΒ/ΠΑ) πρωτόκολλο.",
             "sources": [
               {
-                "title": "www.faa.gov",
-                "url": "https://www.faa.gov/air_traffic/publications/aim_html/chap10_section_2.html"
+                "title": "EMRS Scotland SG004 — Approaching and working around helicopters v2 (1/6/2021)",
+                "url": "https://www.emrsscotland.org/s/SG004-y7m9.pdf"
               }
             ],
             "clinicalReview": false
@@ -13455,28 +13454,32 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
           "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-184",
-            "question": "Πρωτόκολλο ασθματικής κρίσης.",
-            "verdict": "source_unreachable",
+            "question": "Πρωτόκολλο ασθματικής κρίσης",
+            "verdict": "consistent_with_gaps",
             "risk": "υψηλός",
-            "certainty": "χαμηλή",
+            "certainty": "υψηλή",
             "checkedAt": "2026-10-31",
-            "findings": "Η σελίδα GINA 2026 περιέχει μόνο σύνδεσμο προς PDF· το κείμενο της θεραπείας δεν διαβάστηκε. Το περιεχόμενο (ABCDE, ταχεία βρογχοδιαστολή, οξυγόνο κατά ένδειξη) είναι εύλογο αλλά δεν συγκρίθηκε.",
+            "findings": "BTS/SIGN 2019: οξεία βαριά = αδυναμία ολοκλήρωσης πρότασης, RR ≥25, σφύξεις ≥110· απειλητική για τη ζωή = σιωπηλός θώρακας, SpO₂ <92%, κυάνωση, κόπωση/διαταραχή συνείδησης· Ο₂ με στόχο SpO₂ 94–98%, νεφελοποιημένη σαλβουταμόλη 5 mg + ιπρατρόπιο 0,5 mg, πρεδνιζολόνη 40–50 mg, χωρίς ηρεμιστικά. Το ελληνικό πρωτόκολλο ΙΕΚ (2017) είναι γενικό (ABCDE, Ο₂ με μάσκα, οξύμετρο, i.v., monitor, διακομιδή) χωρίς δόσεις. Η αποθηκευμένη απάντηση (σοβαρά σημεία, ανεκτή θέση, SpO₂, ταχεία εισπνεόμενη βρογχοδιαστολή) συμβαδίζει.",
             "sources": [
               {
-                "title": "GINA 2026 Summary Guide",
-                "url": "https://ginasthma.org/2026-gina-summary-guide/"
+                "title": "BTS/SIGN 158 asthma (2019) — Management of acute asthma in adults (Right Decisions Scotland)",
+                "url": "https://rightdecisions.scot.nhs.uk/asthma-pathway-bts-nice-sign-sign-244/managing-acute-asthma/management-of-acute-asthma-in-adults/asthma-management-algorithms-for-adults/management-of-acute-asthma-in-adults-in-hospital"
+              },
+              {
+                "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (2017) — αρχείο που παρείχε ο χρήστης",
+                "url": "https://www.ekab.gr/eclass/"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Φάρμακα ασθματικής κρίσης κατά πρωτόκολλο."
+            "clinicalReview": false,
+            "suggestedChange": "Προαιρετική προσθήκη: στόχος SpO₂ 94–98%, νεφελοποιημένη σαλβουταμόλη (δόση κατά ισχύον πρωτόκολλο)."
           }
         }
       ]
@@ -13981,29 +13984,27 @@
           "origin": "claude-pr140",
           "originUrl": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",
           "sourcePath": "docs/primary-source-crosscheck-2026-10-28/claude-eoppep-b-findings.json",
-          "status": "SOURCE_UNVERIFIED",
-          "canonicalQuestionExactMatch": true,
+          "status": "AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",
+          "canonicalQuestionExactMatch": false,
           "canonicalQuestionUnmodified": true,
           "fullScientificApproval": false,
           "humanClinicalSignoff": false,
-          "requiresClinicalReview": true,
+          "requiresClinicalReview": false,
           "evidence": {
             "id": "EOP-B-196",
-            "question": "Ποιες βλάβες του ΚΝΣ προκαλούν μύση;",
-            "verdict": "source_unreachable",
-            "risk": "υψηλός",
-            "certainty": "χαμηλή ως προς την παραπομπή",
+            "question": "Βλάβες ΚΝΣ που προκαλούν μύση",
+            "verdict": "consistent",
+            "risk": "μέτριος",
+            "certainty": "μέτρια",
             "checkedAt": "2026-10-31",
-            "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-            "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+            "findings": "GPnotebook: αίτια μύσης — οπιοειδή, σύνδρομο Horner, Argyll Robertson, ραγοειδίτιδα, βλάβες γέφυρας (pontine). Η αποθηκευμένη απάντηση (συμπαθητική οδός/Horner, γεφυρική βλάβη, οπιοειδή) συμφωνεί· η πηγή αναφέρει «pontine lesions» και όχι ειδικά αιμορραγία.",
             "sources": [
               {
-                "title": "www.who.int",
-                "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+                "title": "GPnotebook — Miosis",
+                "url": "https://gpnotebook.com/en-GB/pages/ophthalmology/miosis"
               }
             ],
-            "clinicalReview": true,
-            "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+            "clinicalReview": false
           }
         }
       ]
