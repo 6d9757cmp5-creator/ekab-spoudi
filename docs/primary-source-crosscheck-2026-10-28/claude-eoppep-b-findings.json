@@ -709,6 +709,23 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-046",
+   "question": "Εξέλιξη μετά από λήψη παρακουάτ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τοξικολογία)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "CDC: κύρια προσβολή πνεύμονες, ήπαρ, νεφροί· ουλώδης βλάβη πνεύμονα, νεφρική/ηπατική/καρδιακή ανεπάρκεια, βλάβη οισοφάγου· «Too much oxygen may worsen the poisoning»· δεν υπάρχει αντίδοτο· μεγάλη κατάποση: «not likely to survive». Συμφωνεί (και η προσοχή στο οξυγόνο). Κενά: δεν αναφέρονται η απουσία αντιδότου, η πολύ κακή πρόγνωση και ο απολύμανση/ενεργός άνθρακας ή γη Fuller.",
+   "sources": [
+    {
+     "title": "CDC — Paraquat",
+     "url": "https://www.cdc.gov/chemical-emergencies/chemical-fact-sheets/paraquat.html"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: δεν υπάρχει ειδικό αντίδοτο· κακή πρόγνωση σε μεγάλη κατάποση."
+  },
+  {
    "id": "EOP-B-047",
    "question": "Αρχική ποσότητα υγρών στο shock παιδιών.",
    "verdict": "consistent_with_gaps",
@@ -1117,6 +1134,56 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-091",
+   "question": "Χημικό έγκαυμα οφθαλμού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "NHS: έκπλυση με δροσερό νερό ΤΟΥΛΑΧΙΣΤΟΝ 20 λεπτά, ήπια ροή, συνέχιση της έκπλυσης μέχρι την άφιξη βοήθειας, ΜΗ τρίψιμο, μεταφορά με το δοχείο του προϊόντος, επείγουσα αξιολόγηση. Η απάντηση δεν αναφέρει διάρκεια. Η αφαίρεση φακών και το «φυσιολογικός ορός» δεν περιγράφονται στη σελίδα NHS (το CDC για παρακουάτ αναφέρει 10–15′ και αφαίρεση φακών).",
+   "sources": [
+    {
+     "title": "NHS — Eye injuries",
+     "url": "https://www.nhs.uk/conditions/eye-injuries/"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη ελάχιστης διάρκειας 20′ και μεταφοράς του δοχείου."
+  },
+  {
+   "id": "EOP-B-100",
+   "question": "Αρχές οξυγονοθεραπείας.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "BTS: στόχος SpO2 94–98% για οξέως πάσχοντες χωρίς κίνδυνο υπερκαπνίας, 88–92% για κίνδυνο υπερκαπνικής αναπνευστικής ανεπάρκειας· «controlling oxygen to a target saturation is paramount». Συμφωνεί.",
+   "sources": [
+    {
+     "title": "BTS Emergency oxygen",
+     "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-103",
+   "question": "Μάσκα μη επανεισπνοής.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή-μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα BTS που ανοίχτηκε ΔΕΝ δίνει ροή για μάσκα μη επανεισπνοής· το «10–15 L/min» δεν επαληθεύτηκε. Η παραπομπή της ερώτησης είναι άλλο URL (έγγραφο οδηγίας) που δεν διαβάστηκε.",
+   "sources": [
+    {
+     "title": "BTS Emergency oxygen",
+     "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επιβεβαίωση ροής από το έγγραφο BTS/πρωτόκολλο ΕΚΑΒ."
+  },
+  {
    "id": "EOP-B-114",
    "question": "Αρχές προνοσοκομειακής αντιμετώπισης υποθερμίας.",
    "verdict": "consistent_with_gaps",
@@ -1139,6 +1206,99 @@
    "clinicalNote": "Υποθερμική ανακοπή και θέρμανση: κλινική επιβεβαίωση."
   },
   {
+   "id": "EOP-B-117",
+   "question": "Ηλεκτροπληξία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα RCUK First Aid 2025 δεν έχει ενότητα για ηλεκτρικό τραυματισμό· η σελίδα Special circumstances δεν ελέγχθηκε για ηλεκτροπληξία σε αυτό το πέρασμα. Η αλληλουχία (απομόνωση πηγής, ασφάλεια, ABCDE, αρρυθμίες) είναι καθιερωμένη αλλά αναπόδεικτη εδώ.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος με πηγή ηλεκτροπληξίας."
+  },
+  {
+   "id": "EOP-B-120",
+   "question": "Διάσωση από νερό/πνιγμός.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK 2025: όσοι δεν είναι εκπαιδευμένοι δεν μπαίνουν στο νερό· προσφορά πλωτού και απομάκρυνση· στον πνιγμό 5 εμφυσήσεις με 100% O2 και μετά κανονική ΚΑΡΠΑ· η ακινητοποίηση σπονδυλικής στο νερό δεν καθυστερεί την έξοδο. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-123",
+   "question": "Διακομιδή με ενσφηνωμένο αντικείμενο.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το θέμα ΔΕΝ υπάρχει στη σελίδα RCUK First Aid 2025 που παραπέμπεται· δεν αφαιρείται το αντικείμενο και σταθεροποιείται με ογκώδη επιθέματα είναι καθιερωμένη πρακτική αλλά αναπόδεικτη εδώ.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αντικατάσταση παραπομπής με πηγή που καλύπτει ενσφηνωμένα αντικείμενα."
+  },
+  {
+   "id": "EOP-B-124",
+   "question": "Διακομιδή με εκσπλάχνωση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το θέμα ΔΕΝ υπάρχει στη σελίδα RCUK First Aid 2025 που παραπέμπεται. Η πρακτική (δεν επανατοποθετούνται τα όργανα, κάλυψη, αποφυγή από το στόμα) είναι καθιερωμένη· το είδος επιθέματος (υγρό/στεγνό) διαφέρει ανά πρωτόκολλο.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Είδος επιθέματος κατά πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-125",
+   "question": "Θερμοπληξία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: χρυσό πρότυπο εμβάπτιση σε κρύο νερό (λαιμός προς τα κάτω) και «cool first, transfer second» — δηλαδή ψύξη ΠΡΙΝ τη μεταφορά. Η απάντηση βάζει πρώτη την «άμεση μεταφορά σε δροσερό χώρο» και μετά την ψύξη· διαφορά στη σειρά προτεραιότητας.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Διόρθωση: ψύξη πρώτα, μεταφορά δεύτερη (cool first, transfer second).",
+   "clinicalNote": "Σειρά ψύξης/μεταφοράς: κλινική επιβεβαίωση."
+  },
+  {
    "id": "EOP-B-141",
    "question": "GCS πολυτραυματία: άναρθρες κραυγές, εντοπίζει, μάτια στον πόνο.",
    "verdict": "consistent",
@@ -1150,6 +1310,58 @@
     {
      "title": "Glasgow Coma Scale — what is GCS",
      "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-154",
+   "question": "Φάρμακα στην αναφυλαξία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: IM αδρεναλίνη και δεύτερη δόση αν δεν υπάρξει βελτίωση· η σελίδα δεν αναφέρει αντιισταμινικά. Η δήλωση ότι αντιισταμινικά/κορτικοστεροειδή δεν αντικαθιστούν την αδρεναλίνη είναι ορθή αλλά δεν στηρίζεται από αυτή τη σελίδα· συμφωνεί με Special circumstances (B-039).",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-155",
+   "question": "Δηλητηρίαση από CO.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "CDC: διαταράσσει τη χρήση οξυγόνου σε κυτταρικό επίπεδο· συμπτώματα: κεφαλαλγία, ζάλη, αδυναμία, ναυτία, έμετος, θωρακικό άλγος, αλλοίωση συνείδησης· ισχαιμία μυοκαρδίου, αρρυθμίες· «conventional pulse oximeter is not accurate when COHgb is present». Συμφωνεί. Θεραπεία: 100% οξυγόνο έως υποχώρηση συμπτωμάτων (συνήθως 4–5 ώρες)· υπερβαρικό σε βαριές περιπτώσεις.",
+   "sources": [
+    {
+     "title": "CDC — CO clinical guidance",
+     "url": "https://www.cdc.gov/carbon-monoxide/hcp/clinical-guidance/index.html"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-158",
+   "question": "Επιφανειακό έγκαυμα.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "NHS: τρεχούμενο δροσερό νερό 20 λεπτά (εντός 3 ωρών), αφαίρεση κοσμημάτων που δεν κολλούν, χαλαρή κάλυψη με πλαστική μεμβράνη, όχι κρέμες/λάδια/βούτυρο, όχι σκάσιμο φουσκαλών. Συμφωνεί. Ο πάγος δεν αναφέρεται στη σελίδα· η φράση «όχι πάγο» είναι συμβατή πρακτική.",
+   "sources": [
+    {
+     "title": "NHS — Burns and scalds",
+     "url": "https://www.nhs.uk/conditions/burns-and-scalds/"
     }
    ],
    "clinicalReview": false
@@ -1221,6 +1433,40 @@
     {
      "title": "Glasgow Coma Scale — what is GCS",
      "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-181",
+   "question": "Αναζωογόνηση νεογνού ERC/RCUK 2025.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK 2025 newborn: 5 εμφυσήσεις (2–3 s), αρχή συμπιέσεων μόνο αν HR <60 μετά ≥30 s αποτελεσματικού αερισμού, 3:1 (90+30/min), 100% O2 στις συμπιέσεις, επανεκτίμηση ανά 30 s, θερμοκρασία 36,5–37,5°C. Κενά: αρχική συγκέντρωση O2 (21% ≥32 εβδ., ≥30% <32 εβδ.), πίεση εμφύσησης 30/25 cmH2O, ξήρανση/μεμβράνη για πρόωρα. Το «~30 αναπνοές/min» κατά τον αερισμό δεν επαληθεύτηκε στη σελίδα.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Newborn",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη αρχικού O2 21%/≥30% και ξήρανσης/πλαστικής μεμβράνης.",
+   "clinicalNote": "Νεογνική ΚΑΡΠΑ: ελληνικό πρωτόκολλο και ρυθμός αερισμού."
+  },
+  {
+   "id": "EOP-B-183",
+   "question": "APGAR.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα RCUK 2025 αναφέρει μόνο «Record APGAR scores, including individual score components» και δεν περιγράφει τη βαθμολόγηση. Η απάντηση (5 παράμετροι, 0–2 η καθεμία, 0–10, 1ο και 5ο λεπτό) είναι η καθιερωμένη κλίμακα αλλά δεν στηρίζεται από τη σελίδα· σωστά τονίζει ότι δεν καθυστερεί την αναζωογόνηση.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Newborn",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth"
     }
    ],
    "clinicalReview": false
