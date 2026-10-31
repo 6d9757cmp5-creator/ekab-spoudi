@@ -25,7 +25,8 @@ function patientCard(person){
  return card;
 }
 function render(){
- const snapshot=liveSnapshot(state);\n renderCockpit(snapshot);
+ const snapshot=liveSnapshot(state);
+ renderCockpit(snapshot);
  $('live-patients').replaceChildren(...snapshot.people.map(patientCard));
  $('live-time').textContent=String(snapshot.minute).padStart(2,'0')+'΄ · συνθετικός χρόνος';
  $('live-positive').textContent=snapshot.practice+' βήματα εξάσκησης';
@@ -40,6 +41,7 @@ function render(){
   for(const action of def.choices){
    const button=create('button',action.label,'live-choice');
    button.type='button';
+   button.disabled=paused;
    button.addEventListener('click',()=>selectChoice(action.id));
    $('live-choices').append(button);
   }
@@ -60,7 +62,7 @@ function render(){
  if(!snapshot.timeline.length)$('live-timeline').append(create('li','Καμία απόφαση ακόμη. Ξεκίνα από την εκτίμηση σκηνής.'));
 }
 function selectChoice(choice){
- if(busy)return;
+ if(busy||paused)return;
  busy=true;
  try{
   const next=stepLive(state,choice);
