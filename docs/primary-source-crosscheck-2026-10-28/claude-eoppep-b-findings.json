@@ -1156,6 +1156,23 @@
    "clinicalNote": "Σύσταση για στεροειδή σε κάκωση νωτιαίου μυελού: επαλήθευση από κλινικό."
   },
   {
+   "id": "EOP-B-075",
+   "question": "Κλινική εικόνα αγγειακού εγκεφαλικού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή για την κλινική εικόνα",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: αιφνίδια έναρξη, μούδιασμα/αδυναμία άκρων ή προσώπου, αφασία/σύγχυση, οπτικές διαταραχές, ζάλη/απώλεια ισορροπίας, κεφαλαλγία (αιφνίδια έντονη → υπαραχνοειδής). Συμφωνεί. Η σελίδα ΔΕΝ αναφέρει FAST (περιγράφει NIHSS) ούτε γλυκόζη/χρόνο τελευταίας φυσιολογικής κατάστασης· αυτά είναι κοινή πρακτική (η παραπομπή NICE NG128 δεν άνοιξε).",
+   "sources": [
+    {
+     "title": "Merck — Overview of stroke",
+     "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/overview-of-stroke"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Παραπομπή σε πηγή που περιγράφει FAST και καταγραφή χρόνου έναρξης."
+  },
+  {
    "id": "EOP-B-077",
    "question": "GCS: μάτια σε εντολή, συγχυσμένη ομιλία, εντοπίζει.",
    "verdict": "consistent",
@@ -1764,6 +1781,40 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-165",
+   "question": "Κοιλιακή ταχυκαρδία με σφυγμό.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: κοιλιακή ταχυκαρδία = ευρύ QRS· «Assume a regular, wide-complex tachyarrhythmia is VT until proven otherwise». Η σελίδα που ανοίχτηκε δεν περιγράφει θεραπεία. Η σελίδα Merck για VT και το NICE CG95 δεν άνοιξαν. Η απάντηση (ΗΚΓ/monitor, συγχρονισμένη καρδιοανάταξη σε αστάθεια, όχι ως άσφυγμη) είναι συμβατή με την καθιερωμένη πρακτική αλλά δεν επαληθεύτηκε από πηγή.",
+   "sources": [
+    {
+     "title": "Merck — Overview of arrhythmias",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/overview-of-arrhythmias"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Αντιμετώπιση VT με σφυγμό (ηλεκτρική ανάταξη, φάρμακα): κλινικός έλεγχος."
+  },
+  {
+   "id": "EOP-B-166",
+   "question": "Ορισμός και τύποι ταχυκαρδίας.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (εναλλακτική πηγή· η παραπομπή NICE CG95 δεν άνοιξε και δεν αφορά αρρυθμίες): ταχυαρρυθμία >100/min σε ενήλικο σε ηρεμία· φλεβοκομβική, κολπική μαρμαρυγή, κολπικός πτερυγισμός, υπερκοιλιακή (AVNRT/AVRT), κοιλιακή. Συμφωνεί με την απάντηση.",
+   "sources": [
+    {
+     "title": "Merck — Overview of arrhythmias",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/overview-of-arrhythmias"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αντικατάσταση παραπομπής NICE CG95 με πηγή αρρυθμιών."
+  },
+  {
    "id": "EOP-B-175",
    "question": "Τι εκτιμά η GCS και ποιες οι παράμετροι.",
    "verdict": "consistent",
@@ -1962,6 +2013,39 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Δόσεις υγρών σε παιδιά: τελική έγκριση από κλινικό."
+  },
+  {
+   "id": "EOP-B-206",
+   "question": "Κλινική εικόνα υπεργλυκαιμίας.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (εναλλακτική πηγή· η παραπομπή WHO BEC δεν είναι αναγνώσιμη): DKA — υπεργλυκαιμία, κετόνες, οξέωση· ναυτία, έμετος, κοιλιακό άλγος, λήθαργος/υπνηλία, υπόταση, ταχυκαρδία, Kussmaul, οσμή ακετόνης. Συμφωνεί. Πολυουρία/πολυδιψία/θολή όραση της απάντησης είναι τα κλασικά συμπτώματα υπεργλυκαιμίας (ο ορισμός «symptoms of hyperglycemia» αναφέρεται, χωρίς λίστα).",
+   "sources": [
+    {
+     "title": "Merck — Acute complications of diabetes (DKA)",
+     "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-207",
+   "question": "Προνοσοκομειακή αντιμετώπιση υπεργλυκαιμίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (νοσοκομειακή αντιμετώπιση DKA): ταχεία ενδοφλέβια χορήγηση 1–1,5 L NaCl 0,9% την 1η ώρα, ινσουλίνη 0,1 U/kg/ώρα ΜΟΝΟ μετά έλεγχο καλίου (≥3,3 mmol/L), αντικατάσταση καλίου. Η απάντηση σωστά λέει ότι υγρά/ινσουλίνη δεν χορηγούνται αυθαίρετα από πλήρωμα και θέλουν έλεγχο ηλεκτρολυτών/κετονών, αλλά δεν αναφέρει ρητά τον κίνδυνο υποκαλιαιμίας με ινσουλίνη.",
+   "sources": [
+    {
+     "title": "Merck — Acute complications of diabetes (DKA)",
+     "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Προνοσοκομειακά υγρά σε DKA: ρόλος διασώστη."
   }
  ]
 }
