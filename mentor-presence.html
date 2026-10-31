@@ -30,6 +30,8 @@ html.holo .cinematic-stage-label{display:none}
 @keyframes holo-scan{to{background-position:0 40px}}
 @media (prefers-reduced-motion:reduce){html.holo #mentor-cinematic-stage::after{animation:none}}
 #mentor-real3d-status{display:none}
+#mentor-cinematic-stage[data-real3d="loading"] #mentor-real3d-status,
+#mentor-cinematic-stage[data-real3d="photo"] #mentor-real3d-status{display:block}
 </style>
 <script type="module" src="mentor-real3d.bundle.mjs" defer></script>
 </head><body>
