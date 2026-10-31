@@ -19,6 +19,23 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-002",
+   "question": "Πώς συμπεριφέρεστε κατά την κίνηση σε στροφή;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.hellenicparliament.gr",
+     "url": "https://www.hellenicparliament.gr/nomothetiko-ergo/anazitisi-nomothetikou-ergou?law_id=7377b0f9-4ac6-404a-9f2d-b2ee000f5b7f"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-003",
    "question": "Εξοπλισμός τηλεματικής υγείας.",
    "verdict": "consistent_with_gaps",
@@ -531,6 +548,41 @@
     }
    ],
    "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-033",
+   "question": "Δώστε τον ορισμό της αιμόπτυσης και αναφέρατε τα αίτια που την προκαλούν.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-034",
+   "question": "Να αναφέρετε τα συμπτώματα - κλινική εικόνα ασθενούς που πάσχει από καρδιακό επιπωματισμό.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-035",
@@ -1117,6 +1169,41 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-069",
+   "question": "Να αναφέρετε τα αίτια κάκωσης σπονδυλικής στήλης σε: α) ενήλικες β) παιδιά",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-070",
+   "question": "Να αναφέρετε τα γενικά βήματα αντιμετώπισης ασθενούς με υποψία κάκωσης της σπονδυλικής στήλης.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
    "id": "EOP-B-071",
    "question": "Πιο επικίνδυνος τύπος παιδικών καταγμάτων.",
    "verdict": "consistent_with_gaps",
@@ -1205,6 +1292,23 @@
    "suggestedChange": "Παραπομπή σε πηγή που περιγράφει FAST και καταγραφή χρόνου έναρξης."
   },
   {
+   "id": "EOP-B-076",
+   "question": "Να αναφέρετε τα κλινικά σημεία και συμπτώματα ασθενούς που πάσχει από υποσκληρίδιο αιμάτωμα.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-077",
    "question": "GCS: μάτια σε εντολή, συγχυσμένη ομιλία, εντοπίζει.",
    "verdict": "consistent",
@@ -1253,6 +1357,112 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-080",
+   "question": "Ποια είναι η συνηθέστερη αιτία διέγερσης σε πολυτραυματία με κρανιοεγκεφαλική κάκωση;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "minedu.gov.gr",
+     "url": "https://minedu.gov.gr/publications/docs2024/epag_ekpaideusi/%CE%94%CE%99%CE%91%CE%A3%CE%A9%CE%A3%CE%A4%CE%97%CE%A3_-_%CE%A0%CE%9B%CE%97%CE%A1%CE%A9%CE%9C%CE%91_%CE%91%CE%A3%CE%98%CE%95%CE%9D%CE%9F%CE%A6%CE%9F%CE%A1%CE%9F%CE%A5.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-081",
+   "question": "Να αναφέρετε : α) Τι είδους ορό χορηγούμε σε κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ) κατά προτίμηση ενδοφλέβια; β) Ποια υγρά αποφεύγονται στην κρανιοεγκεφαλική κάκωση (",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-082",
+   "question": "Γιατί σε τραυματίες με κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ) πρέπει να αποφεύγεται η υπερκαπνία;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-083",
+   "question": "Σε τι οφείλεται η επιδείνωση του επιπέδου συνείδησης σε ένα τραυματία με κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ);",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-084",
+   "question": "Δώστε τον ορισμό του διαγνωστικού σημείου και του συμπτώματος.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-085",
+   "question": "Δώστε τον ορισμό της ωχρότητας και αναφέρατε τα αίτια που την προκαλούν.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-086",
    "question": "Ταχύπνοια/βραδύπνοια.",
    "verdict": "consistent_with_gaps",
@@ -1267,6 +1477,58 @@
     }
    ],
    "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-087",
+   "question": "Να αναφέρετε τα σημεία του σώματος που είναι δυνατή η λήψη σφυγμού.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-088",
+   "question": "Δώστε τον ορισμό της αρτηριακής υπέρτασης και αναφέρατε τις κυριότερες επιπλοκές της.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng136/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-089",
+   "question": "Να αναφέρετε τα συμπτώματα και τα κλινικά σημεία που υποδηλώνουν βλάβη του ανωτέρου αναπνευστικού σε εγκαυματία.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-090",
@@ -1339,6 +1601,24 @@
    "clinicalNote": "Έλεγχος με ελληνικό πρωτόκολλο."
   },
   {
+   "id": "EOP-B-094",
+   "question": "Ποια είναι η προνοσοκομειακή αντιμετώπιση της επιληψίας στα παιδιά;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
    "id": "EOP-B-095",
    "question": "Αναπνευστικά προβλήματα παιδιών — αντιμετώπιση.",
    "verdict": "consistent_with_gaps",
@@ -1389,6 +1669,23 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-098",
+   "question": "Να αναφέρετε τρεις (3) παθολογικές καταστάσεις του κυκλοφορικού συστήματος που εκδηλώνουν δύσπνοια προσπάθειας.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-099",
    "question": "Πέντε παράγοντες ασφυξίας.",
    "verdict": "consistent_with_gaps",
@@ -1417,6 +1714,40 @@
     {
      "title": "BTS Emergency oxygen",
      "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-101",
+   "question": "Τι πληροφορίες δίνει το παλμικό οξύμετρο;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/qs10/resources/chronic-obstructive-pulmonary-disease-in-adults-pdf-2098478592709"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-102",
+   "question": "Με ποιους τρόπους μπορούμε να χορηγήσουμε οξυγόνο και σε ποιες περιεκτικότητες;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν άνοιξε σε αυτό το πέρασμα (client/server error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "doi.org",
+     "url": "https://doi.org/10.1136/THORAXJNL-2016-209729"
     }
    ],
    "clinicalReview": false
@@ -1472,6 +1803,41 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-106",
+   "question": "Ποια είναι τα συνηθέστερα αίτια πνευμονικού οιδήματος;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-107",
+   "question": "Ποιοι είναι οι προδιαθεσικοί παράγοντες του πνευμονικού οιδήματος;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
    "id": "EOP-B-108",
    "question": "Χειρισμοί στο οξύ πνευμονικό οίδημα.",
    "verdict": "source_unreachable",
@@ -1488,6 +1854,23 @@
    "clinicalReview": true,
    "suggestedChange": "Προσθήκη προσβάσιμης πηγής.",
    "clinicalNote": "Κριτήρια CPAP/NIV και φάρμακα: κλινικός έλεγχος."
+  },
+  {
+   "id": "EOP-B-109",
+   "question": "Περιγράψτε τον πόνο στην πνευμονική εμβολή.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-110",
@@ -1522,6 +1905,41 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-112",
+   "question": "Ποια είναι τα συμπτώματα του πνευμονικού οιδήματος;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-113",
+   "question": "Να αναφέρετε έξι (6) αίτια θωρακικού πόνου.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-114",
    "question": "Αρχές προνοσοκομειακής αντιμετώπισης υποθερμίας.",
    "verdict": "consistent_with_gaps",
@@ -1542,6 +1960,24 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Υποθερμική ανακοπή και θέρμανση: κλινική επιβεβαίωση."
+  },
+  {
+   "id": "EOP-B-115",
+   "question": "Ποιες είναι οι γενικές αρχές προνοσοκομειακής αντιμετώπισης μιας πιθανής πνευμονικής εμβολής;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-116",
@@ -1579,6 +2015,42 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Έλεγχος με πηγή ηλεκτροπληξίας."
+  },
+  {
+   "id": "EOP-B-118",
+   "question": "Από τι κινδυνεύει ασθενής με δηλητηρίαση από αλκοόλ κατά την μεταφορά του;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-119",
+   "question": "Ποιες είναι οι βασικές αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή σε κώμα;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-120",
@@ -1621,6 +2093,24 @@
    "clinicalReview": true,
    "suggestedChange": "Επιβεβαίωση σημείου/τεχνικής από τον οδηγό και κλινικό.",
    "clinicalNote": "Επεμβατική πράξη υψηλού κινδύνου — απαιτείται κλινική επιβεβαίωση της τεχνικής και των σημείων."
+  },
+  {
+   "id": "EOP-B-122",
+   "question": "Ποιες είναι οι βασικές αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με ιστορικό επιληψίας που βρίσκετε σε status epilepticus;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-123",
@@ -1675,6 +2165,23 @@
    "clinicalNote": "Σειρά ψύξης/μεταφοράς: κλινική επιβεβαίωση."
   },
   {
+   "id": "EOP-B-126",
+   "question": "Ποιος είναι ο υπεύθυνος για την είσοδο στην ζώνη της «περιοχής κινδύνου» (DANGER AREA);",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν άνοιξε σε αυτό το πέρασμα (client/server error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.elinyae.gr",
+     "url": "https://www.elinyae.gr/ethniki-nomothesia/ya-12992003-fek-423b-1042003"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-127",
    "question": "Triage ασθενούς με 35 αναπνοές/λεπτό και σφύξεις >120.",
    "verdict": "source_unreachable",
@@ -1690,6 +2197,23 @@
    ],
    "clinicalReview": false,
    "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
+  },
+  {
+   "id": "EOP-B-128",
+   "question": "Περιγράψτε με απλά λόγια το σύστημα των 3 ζωνών (περιοχών) σε ένα μαζικό ατύχημα.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OSHA επέστρεψε 403 σε προηγούμενη προσπάθεια· δεν έγινε παράκαμψη. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.osha.gov",
+     "url": "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf"
+    }
+   ],
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-129",
@@ -1709,6 +2233,200 @@
    "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
   },
   {
+   "id": "EOP-B-130",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης καλείστε σε bar για νεαρό που έκοψε το χέρι με ποτήρι. Παρατηρείτε αιμορραγία από το δεξιό αντιβράχιο και αδυναμία ανύψωσης τ",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-131",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν πολυτραυματία με αναπνευστική συχνότητα > 35 / min, καρδιακή συχνότητα 130/min και αρτηριακή",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-132",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε εργάτη της Δ.Ε.Η. που, προσπαθώντας να επισκευάσει καλώδιο υψηλής τάσης κομμένο από τη χιονόπτωση",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OSHA επέστρεψε 403 σε προηγούμενη προσπάθεια· δεν έγινε παράκαμψη. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.osha.gov",
+     "url": "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-133",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε ένα παιδί το οποίο έχει τσιμπηθεί από έντομο και οι γονείς του αναφέρουν ότι το παιδί έχει γνωστή",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-134",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν ασθενή ο οποίος αναφέρει εύκολη κόπωση, χαμηλό πυρετό, νυχτερινή εφίδρωση και απώλεια βάρους",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-135",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν ασθενή με ιστορικό σακχαρώδους διαβήτη ο οποίος παρουσιάζει απόπνοια οξόνης και βαθιά και γρ",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-136",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν ασθενή 67 ετών ο οποίος παρουσιάζει αδυναμία της αριστερής μεριάς του σώματος, αλλά επικοινω",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-137",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν ασθενή 12 ετών, που παρουσιάζει πυρετό, σύγχυση, υπνηλία, εμετούς. Στην εξέταση πονά στην πλ",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-138",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε σ’ ένα παλιό κτίριο, όπου βρίσκεται άνδρας ηλικίας περίπου 20 ετών σε κωματώδη κατάσταση, μαζί με άλλους. Ο σφυγμός",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-139",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε σε μετωπική σύγκρουση δύο ΙΧΕ όπου ένα άτομο έχει τραυματιστεί στο κάτω άκρο. Υπάρχει : 1) κάμψη του ισχίου, 2) προ",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-140",
+   "question": "Ως πλήρωμα ασθενοφόρου – διασώστης, καλείστε να αντιμετωπίσετε έναν άνδρας 45 ετών παραπονείται για πόνο στο στήθος. Να περιγράψετε τις ενέργειές σας στα πλαίσι",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη. Πρόκειται για ερώτηση σεναρίου· η ορθότητα εξαρτάται από το εγκεκριμένο ελληνικό επιχειρησιακό πρωτόκολλο του ΕΚΑΒ, όχι από τη γενική παραπομπή.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-141",
    "question": "GCS πολυτραυματία: άναρθρες κραυγές, εντοπίζει, μάτια στον πόνο.",
    "verdict": "consistent",
@@ -1725,6 +2443,59 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-142",
+   "question": "Ποιες θα πρέπει να είναι οι πρώτες ερωτήσεις σε κάποιον που καλεί για τροχαίο ατύχημα;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-143",
+   "question": "Τι πρέπει να περιλαμβάνει ένα σύντομο ιστορικό που παίρνετε από έναν τραυματία (όταν υπάρχει δυνατότητα);",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-144",
+   "question": "Να περιγράψετε τη δράση του παρασυμπαθητικού στην καρδιά, στα αγγεία, στους βρόγχους, στο έντερο και στους αδένες.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-145",
    "question": "Δράση συμπαθητικού.",
    "verdict": "consistent_with_gaps",
@@ -1736,6 +2507,75 @@
     {
      "title": "OpenStax — Autonomic reflexes",
      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-2-autonomic-reflexes-and-homeostasis"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-146",
+   "question": "Ποια είναι η αντίδραση του οργανισμού σε μια αιμορραγία;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-147",
+   "question": "Να περιγράψετε την επίδραση του χαμηλού διοξειδίου του άνθρακα στο αίμα στα αγγεία του εγκεφάλου και της περιφέρειας.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα NCBI επέστρεψε έλεγχο reCAPTCHA· δεν επιχειρήθηκε παράκαμψη. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.ncbi.nlm.nih.gov",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK53082/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-148",
+   "question": "Να περιγράψετε την επίδραση του αυξημένου διοξειδίου του άνθρακα στο αίμα στα αγγεία του εγκεφάλου και της περιφέρειας.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα NCBI επέστρεψε έλεγχο reCAPTCHA· δεν επιχειρήθηκε παράκαμψη. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.ncbi.nlm.nih.gov",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK53082/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-149",
+   "question": "Ποια είναι η κλινική εικόνα της μηνιγγίτιδας στους ενήλικες;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
     }
    ],
    "clinicalReview": false
@@ -1841,6 +2681,41 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-156",
+   "question": "Να αναφέρετε τις ζωτικές παραμέτρους που παρακολουθούμε στην ΚΙΜ σ' έναν ασθενή σε shock κατά την διάρκεια της αναζωογόνησης.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-157",
+   "question": "Σε ποια σημεία του σώματος είναι δυνατή η ανίχνευση σφυγμού;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-158",
    "question": "Επιφανειακό έγκαυμα.",
    "verdict": "consistent",
@@ -1852,6 +2727,59 @@
     {
      "title": "NHS — Burns and scalds",
      "url": "https://www.nhs.uk/conditions/burns-and-scalds/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-159",
+   "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με υπό τάση πνευμοθώρακα;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-160",
+   "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης μιας ασθενούς με εκλαμψία;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-161",
+   "question": "Ποιες είναι οι αρχές προνοσοκομειακής αντιμετώπισης ενός ασθενή με ανοιχτό πνευμοθώρακα.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
     }
    ],
    "clinicalReview": false
@@ -1877,6 +2805,24 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Επιλογή μέσου ακινητοποίησης σε τραύμα: πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-163",
+   "question": "Ποια είναι τα κλινικά σημεία ασθενούς με υποογκαιμική καταπληξία (shock);",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-164",
@@ -1929,6 +2875,143 @@
    "suggestedChange": "Αντικατάσταση παραπομπής NICE CG95 με πηγή αρρυθμιών."
   },
   {
+   "id": "EOP-B-167",
+   "question": "Περιγράψτε την αντιμετώπιση σε σύνδρομο στέρησης από αλκοόλ.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.resus.org.uk",
+     "url": "https://www.resus.org.uk/cy/node/36438"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-168",
+   "question": "Περιγράψτε την κλινική εικόνα ασθενή με σύνδρομο στέρησης από αλκοόλ.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-169",
+   "question": "Τι γνωρίζετε για τον κωλικό του νεφρού ή του ουρητήρα;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-170",
+   "question": "Που και πως τοποθετείτε το ασθενοφόρο στην σκηνή ενός τροχαίου ατυχήματος;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-171",
+   "question": "Πως προσεγγίζει το ασθενοφόρο ένα πτητικό μέσο για την παραλαβή- παράδοση ασθενούς;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν άνοιξε σε αυτό το πέρασμα (client/server error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.faa.gov",
+     "url": "https://www.faa.gov/air_traffic/publications/aim_html/chap10_section_2.html"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-172",
+   "question": "Ποιος είναι ο απαραίτητος εξοπλισμός για μια αεροδιακομιδή;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα EASA που ανοίχτηκε δεν περιέχει τον εξοπλισμό (μόνο μενού). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.easa.europa.eu",
+     "url": "https://www.easa.europa.eu/en/the-agency/faqs/part-spa"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-173",
+   "question": "Υπολογισμός Ο2 για διακομιδή 3 ωρών με αναπνευστήρα (600 mL × 15/min).",
+   "verdict": "consistent",
+   "risk": "υψηλός (διακομιδή)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Αριθμητικός έλεγχος: 0,6 L × 15 = 9 L/min· × 180 min = 1.620 L — συμφωνεί με την απάντηση. Hamilton Medical: κατανάλωση O2 = (ExpMinVol + base flow + MVleak) × (FiO2% − 20,9)/79,1· παράδειγμα 5,93 L/min, 712 L για 120 min, «actual consumption may be higher». Η απάντηση σωστά προειδοποιεί ότι το 1.620 L δεν είναι ασφαλής υπολογισμός (bias flow, διαρροές, FiO2, εφεδρεία). Σε FiO2 100% ο τύπος δίνει MV + base flow.",
+   "sources": [
+    {
+     "title": "Hamilton Medical — Calculating oxygen consumption",
+     "url": "https://www.hamilton-medical.com/Resource-center/Article-page~knowledge-base~c1b09f7f-3224-45b9-aa12-4cfd37e6d5ff~Calculating-oxygen-consumption-for-Hamilton-Medical-ventilators~.html"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-174",
+   "question": "Ποιος είναι ο απαραίτητος εξοπλισμός για μια διακομιδή;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
    "id": "EOP-B-175",
    "question": "Τι εκτιμά η GCS και ποιες οι παράμετροι.",
    "verdict": "consistent",
@@ -1962,6 +3045,75 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-177",
+   "question": "Ποια αίτια προκαλούν ανισοκορία;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-178",
+   "question": "Περιγράψτε τι προκαλεί η δηλητηρίαση από κυανίδια (CΝ).",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.resus.org.uk",
+     "url": "https://www.resus.org.uk/cy/node/36438"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-179",
+   "question": "Ελάχιστο O2 για διακομιδή 3 ωρών με 15 L/min.",
+   "verdict": "consistent",
+   "risk": "υψηλός (διακομιδή)",
+   "certainty": "υψηλή (αριθμητικός έλεγχος)",
+   "checkedAt": "2026-10-31",
+   "findings": "Αριθμητικός έλεγχος: 15 L/min × 180 min = 2.700 L — συμφωνεί. Η απάντηση σωστά δεν αποφαίνεται για αριθμό φιαλών χωρίς πίεση πλήρωσης/εφεδρεία. Η παραπομπή (BTS doi) δεν άνοιξε και δεν χρειάζεται για τον υπολογισμό.",
+   "sources": [
+    {
+     "title": "Αριθμητικός υπολογισμός (όχι εξωτερική πηγή)",
+     "url": "https://doi.org/10.1136/THORAXJNL-2016-209729"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-180",
+   "question": "Τι είναι ο κωλικός του νεφρού, που εντοπίζεται και ποια είναι η κλινική εικόνα του ασθενούς;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-181",
    "question": "Αναζωογόνηση νεογνού ERC/RCUK 2025.",
    "verdict": "consistent_with_gaps",
@@ -1978,6 +3130,24 @@
    "clinicalReview": true,
    "suggestedChange": "Προσθήκη αρχικού O2 21%/≥30% και ξήρανσης/πλαστικής μεμβράνης.",
    "clinicalNote": "Νεογνική ΚΑΡΠΑ: ελληνικό πρωτόκολλο και ρυθμός αερισμού."
+  },
+  {
+   "id": "EOP-B-182",
+   "question": "Περιγράψτε τις ανατομικές διαφορές ανάμεσα σε έναν ενήλικα και σε ένα παιδί όταν είναι σε ύπτια «ουδέτερη» θέση .",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-183",
@@ -2011,6 +3181,75 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Φάρμακα ασθματικής κρίσης κατά πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-185",
+   "question": "Ποιες είναι οι συνέπειες διατομής του νωτιαίου μυελού πάνω από το «δερμοτόμιο» Θ4 για τον ασθενή.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-186",
+   "question": "Ποιους άλλους τραυματισμούς και βλάβες προκαλούν τα παρακάτω κατάγματα: α)1-3 πλευράς, β)4-9 πλευράς, γ)10-12 πλευράς, δ) του στέρνου.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-187",
+   "question": "Ποιες είναι οι αρχές ακινητοποίησης μιας εξάρθρωσης για την διακομιδή του ασθενούς;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-188",
+   "question": "Ποια αίτια προκαλούν μυδρίαση;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.nice.org.uk",
+     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-189",
@@ -2079,6 +3318,78 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-193",
+   "question": "Τι είναι η έκτοπος κύηση, ποια είναι τα σημεία, τα συμπτώματα και πως αντιμετωπίζεται προνοσοκομειακά;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-194",
+   "question": "Να αναφέρετε, πως ορίζεται το κατώτερο πεπτικό σύστημα και ποια είναι τα αίτια πρόκλησης παθολογικής αιμορραγίας από αυτό;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-195",
+   "question": "Να αναφέρετε, πως ορίζεται το ανώτερο πεπτικό σύστημα και ποια είναι τα αίτια πρόκλησης παθολογικής αιμορραγίας από αυτό;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
+   "id": "EOP-B-196",
+   "question": "Ποιες βλάβες του ΚΝΣ προκαλούν μύση;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+  },
+  {
    "id": "EOP-B-197",
    "question": "Τριάδα Cushing.",
    "verdict": "source_unreachable",
@@ -2094,6 +3405,23 @@
    ],
    "clinicalReview": false,
    "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
+  },
+  {
+   "id": "EOP-B-198",
+   "question": "Ποια είναι τα σημεία και τα συμπτώματα της οξείας φλεγμονής;",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-199",
@@ -2242,6 +3570,24 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Προνοσοκομειακά υγρά σε DKA: ρόλος διασώστη."
+  },
+  {
+   "id": "EOP-B-208",
+   "question": "Ποιοι είναι οι παράγοντες που προκαλούν απώλεια θερμότητας από το σώμα;",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή ως προς την παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "www.who.int",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
   },
   {
    "id": "EOP-B-209",
