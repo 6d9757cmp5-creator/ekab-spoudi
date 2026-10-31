@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#081d2a">
+<title>MENTOR NEXT · Εικονικό περιστατικό · ΕΚΑΒ Σπουδή</title>
+<link rel="stylesheet" href="mentor/styles/next-sim.css">
+<script type="module" src="mentor/app/next-sim.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#next-stage">Μετάβαση στην προσομοίωση</a>
+<div class="next-shell" id="next-root">
+<header class="next-header">
+ <div class="next-brand"><span class="next-symbol">✚</span><div><strong>MENTOR <em>NEXT</em></strong><small>ΕΚΑΒ Σπουδή · Πρωτότυπη δοκιμαστική προσομοίωση</small></div></div>
+ <nav class="next-links"><a href="mentor-live.html">← Κλασική αποστολή</a><a href="mentor-lab.html">MENTOR OS</a></nav>
+</header>
+<section class="next-top">
+ <div><p class="next-eyebrow">PREHOSPITAL SIMULATION · CRETE</p><h1>Τροχαίο · Δύο εμπλεκόμενοι</h1>
+ <p>Διαδραστική τρισδιάστατη εκπαιδευτική σκηνή, πολλαπλά εργαλεία, παρατηρήσεις και ομαδική ανασκόπηση.</p></div>
+ <div class="next-time"><span>Χρόνος περιστατικού</span><strong id="next-minute">00:00</strong><small id="next-status">Έτοιμο</small></div>
+</section>
+<p class="next-warning" role="note"><strong>Συνθετικό εκπαιδευτικό πρωτότυπο.</strong> Οι ασθενείς, οι ενδείξεις και οι μεταβολές είναι επινοημένες, όχι επιστημονικά επικυρωμένη φυσιολογία. Δεν πραγματοποιούνται ιατρικές πράξεις, χορηγήσεις ή διαλογή. Το αποτέλεσμα δεν αποτελεί κλινική βαθμολογία.</p>
+<main id="next-stage">
+<section class="next-stage-layout" aria-label="Διαδραστικό περιβάλλον προσομοίωσης">
+ <div class="next-scene">
+  <div class="next-scene-top">
+   <span class="next-scene-label">ORIGINAL WEBGL PATIENTS · LOW POLY</span>
+   <div class="next-view-tabs" role="group" aria-label="Γωνία προβολής">
+    <button type="button" data-next-view="scene" aria-pressed="true">Σκηνή</button>
+    <button type="button" data-next-view="full" aria-pressed="false">Σώμα</button>
+    <button type="button" data-next-view="head" aria-pressed="false">Κεφάλι</button>
+    <button type="button" data-next-view="torso" aria-pressed="false">Θώρακας</button>
+    <button type="button" data-next-view="legs" aria-pressed="false">Πόδια</button>
+   </div>
+  </div>
+  <div class="next-canvas-wrap">
+   <canvas id="next-canvas" aria-label="Δύο απλουστευμένα τρισδιάστατα μοντέλα εικονικών ασθενών κοντά σε όχημα. Χρησιμοποίησε τα κουμπιά επιλογής ατόμου για χειρισμό."></canvas>
+   <div class="next-fallback" hidden>Η 3D απεικόνιση δεν υποστηρίζεται σε αυτή τη συσκευή. Τα εργαλεία και το σενάριο λειτουργούν κανονικά.</div>
+   <div class="next-canvas-caption">Σύρε για περιστροφή · ή χρησιμοποίησε τα βελάκια</div>
+   <div class="next-rotate"><button type="button" id="next-rotate-left" aria-label="Περιστροφή αριστερά">↶</button><button type="button" id="next-rotate-right" aria-label="Περιστροφή δεξιά">↷</button></div>
+  </div>
+  <div class="next-patient-switch" role="group" aria-label="Επιλογή εικονικού ασθενούς"><button type="button" data-next-patient="a" aria-pressed="true">Άτομο Α <small>Δίπλα στο όχημα</small></button><button type="button" data-next-patient="b" aria-pressed="false">Άτομο Β <small>Λίγο πιο πέρα</small></button></div>
+ </div>
+ <aside class="next-monitor" aria-label="Εικονικό monitor">
+  <div class="next-monitor-head"><span class="next-live-dot"></span><div><h2 id="next-person-name">Άτομο Α</h2><p id="next-person-description">Εικονικός ασθενής</p></div></div>
+  <div class="next-vitals">
+   <div class="next-vital"><span>HR <small>παλμοί/λ</small></span><strong id="next-hr">—</strong><svg viewBox="0 0 120 28" aria-hidden="true"><polyline points="0,21 15,21 21,11 29,26 37,4 44,21 61,21 67,11 75,25 83,5 91,21 120,21"></polyline></svg></div>
+   <div class="next-vital"><span>SpO₂ <small>%</small></span><strong id="next-spo2">—</strong><div class="next-bars" aria-hidden="true">▁ ▃ ▅ ▇ ▆ ▄ ▂ ▅ ▇</div></div>
+   <div class="next-vital"><span>RR <small>αναπνοές/λ</small></span><strong id="next-rr">—</strong><span class="next-vital-caption">Συνθετική αναπνοή</span></div>
+   <div class="next-vital next-off"><span>ΑΠ / ΗΚΓ</span><strong>—</strong><span class="next-vital-caption">Δεν προσομοιώνεται</span></div>
+  </div>
+  <div class="next-monitor-foot"><strong>Μοντέλο:</strong> ενδεικτική πορεία με τον χρόνο, χωρίς φαρμακολογική/φυσιολογική απόκριση.</div>
+  <div class="next-clock-controls"><button type="button" id="next-play" aria-pressed="false">▶ Έναρξη χρόνου</button><button type="button" id="next-step">+1′</button><button type="button" id="next-reset" class="next-quiet">↺ Επανεκκίνηση</button></div>
+ </aside>
+</section>
+<section class="next-workspace" aria-label="Εργαλεία και ενέργειες">
+ <nav id="next-tools" class="next-tools" aria-label="Εργαλεία προσομοίωσης"></nav>
+ <div class="next-workspace-main">
+  <div><p class="next-eyebrow">MENTOR OS · ΕΚΠΑΙΔΕΥΤΙΚΑ ΕΡΓΑΛΕΙΑ</p><h2 id="next-tool-title">Συνομιλία</h2><p id="next-tool-subtitle">Επέλεξε ένα εργαλείο.</p></div>
+  <div id="next-actions" class="next-actions"></div>
+  <form id="next-ask-form" class="next-ask-form" hidden><label for="next-question">Ερώτηση στον εικονικό ασθενή (ελληνικά)</label><div><input id="next-question" maxlength="200" autocomplete="off" placeholder="Π.χ. Τι αισθάνεστε;"><button type="submit">Ρώτησε</button></div><small>Τοπική αναγνώριση θεμάτων, χωρίς AI. Οι απαντήσεις είναι προκαθορισμένες.</small></form>
+  <p id="next-result" class="next-result" role="status" aria-live="polite">Επίλεξε τον ασθενή και ένα εργαλείο για να ξεκινήσεις.</p>
+ </div>
+</section>
+<div class="next-bottom">
+ <section class="next-log"><div class="next-section-title"><h2>Χρονολόγιο αποστολής</h2><button type="button" id="next-download">↓ Αναφορά TXT</button></div><ol id="next-events"><li>Καμία καταγραφή ακόμη.</li></ol></section>
+ <aside class="next-review"><h2>MENTOR DEBRIEF</h2><p>Έλεγχος εκπαιδευτικών βημάτων, όχι κλινική βαθμολογία.</p><div id="next-review-body"></div><button type="button" id="next-finish">Ολοκλήρωση / Ανασκόπηση</button><p id="next-save-note" role="status" class="next-save-note"></p></aside>
+</div>
+</main>
+<footer class="next-footer">MENTOR NEXT v0.1 · Πρωτότυπος κώδικας ΕΚΑΒ Σπουδή · Χωρίς στοιχεία πραγματικών ασθενών, ιατρικό AI ή πιστοποίηση. <a href="mentor-live.html">Προηγούμενη εκπαιδευτική αποστολή</a></footer>
+</div>
+<script type="module" src="mentor/presence/presence.mjs"></script>
+</body></html>

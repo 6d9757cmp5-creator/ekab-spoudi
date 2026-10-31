@@ -127,6 +127,28 @@ try {
     console.log('PASS '+device+': live case-linked DEBRIEF, view focus, tool reset and report export');
 
 
+    const nextResponse=await page.goto('http://127.0.0.1:8765/mentor-next.html',{waitUntil:'load',timeout:30000});
+    if(!nextResponse?.ok())throw Error(device+': MENTOR NEXT HTTP '+nextResponse?.status());
+    await page.locator('#next-hr').waitFor();
+    const nextInitial=await page.locator('#next-hr').textContent();
+    if(!/^\d+$/.test(nextInitial))throw Error(device+': MENTOR NEXT vitals absent');
+    await page.locator('#next-step').click();
+    if(await page.locator('#next-hr').textContent()===nextInitial)throw Error(device+': MENTOR NEXT synthetic time trend did not change');
+    await page.locator('[data-next-patient="b"]').click();
+    if(await page.locator('#next-person-name').textContent()!=='Άτομο Β')throw Error(device+': MENTOR NEXT patient selector');
+    await page.locator('#next-tools button').filter({hasText:'Εξέταση'}).click();
+    await page.locator('#next-actions button').filter({hasText:'Έλεγχος ασφάλειας σκηνής'}).click();
+    if(!await page.locator('#next-review-body').textContent().then(s=>s.includes('Ασφάλεια σκηνής')))throw Error(device+': MENTOR NEXT debrief evidence');
+    await page.locator('#next-tools button').filter({hasText:'Συνομιλία'}).click();
+    await page.locator('#next-question').fill('Τι αισθάνεστε;');
+    await page.locator('#next-ask-form button').click();
+    if(!await page.locator('#next-result').textContent().then(s=>s.includes('αναστατωμένος')))throw Error(device+': MENTOR NEXT patient dialogue');
+    await page.locator('#next-tools button').filter({hasText:'Φάρμακα'}).click();
+    if(!await page.locator('#next-actions').textContent().then(s=>s.includes('Κλειδωμένο')))throw Error(device+': MENTOR NEXT safety lock');
+    const [nextReport]=await Promise.all([page.waitForEvent('download',{timeout:10000}),page.locator('#next-download').click()]);
+    if(!nextReport.suggestedFilename().endsWith('.txt'))throw Error(device+': MENTOR NEXT report');
+    console.log('PASS '+device+': MENTOR NEXT synthetic WebGL scene, two patients, scenario, actions and debrief');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}
