@@ -20,20 +20,28 @@
   },
   {
    "id": "EOP-B-002",
-   "question": "Πώς συμπεριφέρεστε κατά την κίνηση σε στροφή;",
-   "verdict": "source_unreachable",
+   "question": "Συμπεριφορά κατά την κίνηση σε στροφή",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
-   "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. ΚΟΚ ν. 2696/1999 άρθρο 19 παρ. 2–3, 7 και ν. 5209/2025 άρθρο 23: ο οδηγός μειώνει την ταχύτητα σε στροφές/περιορισμένη ορατότητα, λαμβάνει υπόψη οδόστρωμα και συνθήκες και τηρεί αποστάσεις ασφαλείας· για οχήματα άμεσης ανάγκης (άρθρο 48) η εξαίρεση ισχύει μόνο όταν δεν δημιουργείται κίνδυνος. Η αποθηκευμένη απάντηση συμφωνεί νομικά. Τα «ομαλό τιμόνι/επιτάχυνση» και «αποφυγή απότομου φρεναρίσματος εντός στροφής» δεν βρέθηκαν αυτολεξεί, αντιστοιχούν όμως στο αντικείμενο των ασκήσεων EVOC (NHTSA).",
    "sources": [
     {
-     "title": "www.hellenicparliament.gr",
-     "url": "https://www.hellenicparliament.gr/nomothetiko-ergo/anazitisi-nomothetikou-ergou?law_id=7377b0f9-4ac6-404a-9f2d-b2ee000f5b7f"
+     "title": "ΚΟΚ άρθρο 19 (lawspot)",
+     "url": "https://www.lawspot.gr/nomothesia/k-odikis-kykloforias/arthro-19-kodikas-odikis-kykloforias-tahytita/"
+    },
+    {
+     "title": "ν. 5209/2025 — ΕΛΙΝΥΑΕ",
+     "url": "https://www.elinyae.gr/ethniki-nomothesia/n-52092025-fek-100a-1362025"
+    },
+    {
+     "title": "NHTSA — Characterizing Ambulance Driver Training (2019)",
+     "url": "https://www.ems.gov/assets/NHTSA_Characterizing_Ambulance_Driver_Training_in__EMS_Systems_Dec__2019.pdf"
     }
    ],
-   "clinicalReview": false
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: το άρθρο 48 ΚΟΚ δεν καλύπτει οδήγηση που δημιουργεί κίνδυνο· άνεση ασθενούς (υψηλό κέντρο βάρους)."
   },
   {
    "id": "EOP-B-003",
@@ -2413,21 +2421,28 @@
   },
   {
    "id": "EOP-B-142",
-   "question": "Ποιες θα πρέπει να είναι οι πρώτες ερωτήσεις σε κάποιον που καλεί για τροχαίο ατύχημα;",
-   "verdict": "source_unreachable",
+   "question": "Πρώτες ερωτήσεις σε κλήση για τροχαίο",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
-   "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. Υπουργείο Υγείας/ΕΚΑΒ (οδηγίες 166): τηλέφωνο καλούντος, ακριβής διεύθυνση/χιλιομετρική θέση και κατεύθυνση, αριθμός θυμάτων, να μην κλείσει πρώτος το τηλέφωνο. MPDS (IAED) Protocol 29: διεύθυνση, τηλέφωνο, «τι ακριβώς συνέβη», εγρήγορση ασθενών, παγίδευση, επικίνδυνα υλικά, κίνδυνοι σκηνής. Η αποθηκευμένη απάντηση συμφωνεί. Δεν βρέθηκε δημόσιο εσωτερικό πρωτόκολλο διαλογής ΕΚΑΒ.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "Υπουργείο Υγείας — 166 ΕΚΑΒ",
+     "url": "https://www.moh.gov.gr/articles/citizen/xrhsima-thlefwna-amp-dieythynseis/196-166-ekab"
+    },
+    {
+     "title": "ΕΚΑΒ — Οδηγίες σωστής χρήσης",
+     "url": "https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/"
+    },
+    {
+     "title": "IAED Journal — Mechanism of Injury (MPDS Protocol 29)",
+     "url": "https://www.iaedjournal.org/mechanism-of-injury"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalNote": "Σύγκριση με το εσωτερικό πρωτόκολλο διαλογής κλήσεων του ΕΚΑΒ (αν χρησιμοποιεί MPDS ή δικό του)."
   },
   {
    "id": "EOP-B-143",
@@ -2916,21 +2931,33 @@
   },
   {
    "id": "EOP-B-172",
-   "question": "Ποιος είναι ο απαραίτητος εξοπλισμός για μια αεροδιακομιδή;",
-   "verdict": "source_unreachable",
+   "question": "Απαραίτητος εξοπλισμός αεροδιακομιδής",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
-   "checkedAt": "2026-10-31",
-   "findings": "Η σελίδα EASA που ανοίχτηκε δεν περιέχει τον εξοπλισμό (μόνο μενού). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. AoA/NACCS 2019 και ICS/FICM 2019: φορητός αναπνευστήρας με συναγερμό, μόνιτορ (ΗΚΓ, ΑΠ, SpO₂, EtCO₂), ΑΒΜ, υλικά αεραγωγού, απινιδωτής, αναρρόφηση, αντλίες, εφεδρικές μπαταρίες· οξυγόνο: εφεδρεία ≥1 ώρα ή διπλάσιος του αναμενόμενου χρόνου. EN 13718-1/-2 και EASA SPA.HEMS.110: ο εξοπλισμός πρέπει να είναι αεροπορικά εγκεκριμένος και η εγκατάστασή του πιστοποιημένη. Η αποθηκευμένη απάντηση συμφωνεί αλλά δεν αναφέρει αεροπορική πιστοποίηση, κανόνα εφεδρείας Ο₂, επιπτώσεις υψομέτρου (πνευμοθώρακας, αεροθάλαμος τραχειοσωλήνα) και προστασία ακοής. Η ΚΥΑ ΦΕΚ Β' 2982/2025 δεν έχει αναλυτική λίστα· παραπέμπει σε Εθνικό Σχέδιο που δεν ανακτήθηκε.",
    "sources": [
     {
-     "title": "www.easa.europa.eu",
-     "url": "https://www.easa.europa.eu/en/the-agency/faqs/part-spa"
+     "title": "ICS/FICM — Transfer of the critically ill adult (2019)",
+     "url": "https://www.ficm.ac.uk/sites/ficm/files/documents/2021-10/Transfer_of_Critically_Ill_Adult.pdf"
+    },
+    {
+     "title": "AoA/NACCS — Safe transfer of the brain-injured patient (2019)",
+     "url": "https://www.wyccn.org/uploads/6/5/1/9/65199375/aa_safe_transfer_of_teh_brain_injured_patient_trauma___stroke_2019.pdf"
+    },
+    {
+     "title": "EN 13718-2 (πεδίο εφαρμογής)",
+     "url": "https://standards.iteh.ai/catalog/standards/cen/e9157260-0a3b-4d70-82b2-1c419a096275/en-13718-2-2015a1-2020"
+    },
+    {
+     "title": "ΚΥΑ ΦΕΚ Β' 2982/2025",
+     "url": "https://dailypharmanews.gr/wp-content/uploads/2025/06/fek_b_2982_2025-1.pdf"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "suggestedChange": "Προσθήκη: αεροπορικά εγκεκριμένος εξοπλισμός, εφεδρεία Ο₂ (≥1 ώρα ή διπλάσιος χρόνος), μέτρα υψομέτρου, προστασία ακοής, εκπαιδευμένο προσωπικό.",
+   "clinicalNote": "Επιβεβαίωση με τη λίστα του Εθνικού Σχεδίου Αεροδιακομιδών/ΕΚΑΒ."
   },
   {
    "id": "EOP-B-173",
@@ -2950,21 +2977,29 @@
   },
   {
    "id": "EOP-B-174",
-   "question": "Ποιος είναι ο απαραίτητος εξοπλισμός για μια διακομιδή;",
-   "verdict": "source_unreachable",
+   "question": "Απαραίτητος εξοπλισμός διακομιδής",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
-   "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. EN 1789:2020+A1:2023 ορίζει τύπους ασθενοφόρου (A1/A2, B, C) και λίστα εξοπλισμού (το πλήρες κείμενο είναι επί πληρωμή, ελέγχθηκε μόνο το πεδίο εφαρμογής)· οι τεχνικές προδιαγραφές ΕΚΑΒ παραπέμπουν σε EN 1789 τύπου B και EN 1865 (φορεία). ICS/FICM 2019: ασφαλής στερέωση όλου του φορητού εξοπλισμού, έλεγχος πριν την αναχώρηση. Η αποθηκευμένη απάντηση συμφωνεί· λείπει η σύνδεση με τον τύπο ασθενοφόρου και η στερέωση εξοπλισμού.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+     "title": "EN 1789:2020 (iTeh)",
+     "url": "https://standards.iteh.ai/catalog/standards/cen/667cd080-7755-45fc-a462-7305ecc7a2eb/en-1789-2020"
+    },
+    {
+     "title": "ΕΚΑΒ — Τεχνικές προδιαγραφές ασθενοφόρων",
+     "url": "https://www.ekab.gr/files/2017/06/asth_tech_pro_BC.pdf"
+    },
+    {
+     "title": "ICS/FICM — Transfer of the critically ill adult (2019)",
+     "url": "https://www.ficm.ac.uk/sites/ficm/files/documents/2021-10/Transfer_of_Critically_Ill_Adult.pdf"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "suggestedChange": "Προσθήκη: ο ελάχιστος εξοπλισμός εξαρτάται από τον τύπο ασθενοφόρου (EN 1789 B/C)· ασφαλής στερέωση όλου του εξοπλισμού.",
+   "clinicalNote": "Επιβεβαίωση με την ισχύουσα λίστα εξοπλισμού ΕΚΑΒ ανά τύπο ασθενοφόρου."
   },
   {
    "id": "EOP-B-175",
