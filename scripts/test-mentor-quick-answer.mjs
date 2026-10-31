@@ -49,7 +49,8 @@ test("does not misinterpret advanced medical questions as simple glossary reques
 
 test("offline core definitions work if the glossary request is unavailable",async()=>{
  assert.ok(OFFLINE_CORE_TERMS.length>=5);
- const terms=await loadMentorTermLibrary({fetcher:async()=>{throw Error("offline")}});
+ const {loadMentorTermLibrary:freshLoader}=await import("../mentor/core/quick-answer.mjs?offline-regression=1");
+ const terms=await freshLoader({fetcher:async()=>{throw Error("offline")}});
  assert.deepEqual(terms,OFFLINE_CORE_TERMS);
  assert.equal(answerStudyQuestion("ΚΑΡΠΑ",{items:terms}).type,"term");
 });
