@@ -186,7 +186,7 @@ try{
   const external=[];
   page.on('request',r=>{const u=new URL(r.url());if(u.hostname!=='127.0.0.1')external.push(r.url());});
   await ask('Τι είναι το κβαντικό πεδίο του Higgs;');
-  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('δεν είναι ενεργή'),null,{polling:150,timeout:10000});
+  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Το AI χρησιμοποιείται μόνο όταν είναι διαθέσιμο'),null,{polling:150,timeout:10000});
   check(tag('AI is disabled by default: unknown question stays local, no external request'),external.length===0,external.join(','));
   const hrefBefore=page.url();
   await ask('Άνοιξε την ανατομία');
