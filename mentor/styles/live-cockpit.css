@@ -37,3 +37,22 @@
 @media(max-width:500px){.sim-head{padding:13px}.sim-vital-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.sim-drawer{padding:15px}.sim-tool{flex-basis:88px}.sim-top-actions{width:100%;justify-content:space-between}}
 @media(prefers-color-scheme:dark){.sim-drawer{background:#153443;color:#e6f3f8}.sim-drawer h3{color:#e6f3f8}.sim-drawer p{color:#c1dce4}.sim-drawer-choices button,.sim-result{background:#1b4151;color:#effaff!important;border-color:#477282}}
 @media(prefers-reduced-motion:reduce){.sim-cockpit *{scroll-behavior:auto!important;animation:none!important}}
+
+/* Scenario briefing, focus controls, trace and connected live debrief */
+.live-briefing{margin:17px 0 0}.live-briefing summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}.live-briefing p{font-size:.9rem;line-height:1.6;color:var(--muted)}
+.sim-views{position:absolute;top:47px;left:14px;display:flex;gap:5px;flex-wrap:wrap;z-index:2}
+.sim-views button{font:650 .72rem system-ui,sans-serif;color:#f2fdff;padding:7px 9px;background:#092639d6;border:1px solid #7da2b47a;border-radius:8px;min-height:38px;cursor:pointer}
+.sim-views button[aria-pressed="true"]{background:#25738a;border-color:#c2fffd}
+.sim-scene[data-view="a"] .sim-person[data-sim-person="b"],.sim-scene[data-view="b"] .sim-person[data-sim-person="a"]{opacity:.22;filter:grayscale(.75)}
+.sim-scene[data-view="a"] .sim-person[data-sim-person="a"],.sim-scene[data-view="b"] .sim-person[data-sim-person="b"]{transform:scale(1.17);transform-origin:center bottom}
+.sim-history{margin:10px 0 0;padding:9px;border:1px solid #355a6b;border-radius:11px}
+.sim-history strong{display:block;color:#d2e6ec;font-size:.72rem}.sim-history svg{display:block;width:100%;height:58px;margin-top:8px;border-bottom:1px dashed #376677}
+.sim-quicklinks{padding:12px 18px 0;display:flex;gap:11px;flex-wrap:wrap}.sim-quicklinks a{color:#b0e9f6;font-size:.8rem;text-decoration:underline;text-underline-offset:3px}
+.sim-drawer-choices>a{min-height:42px;display:flex;align-items:center;color:#17657c;text-decoration:underline}
+.live-debrief{margin-top:18px;scroll-margin-top:18px}.live-debrief-top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.live-debrief h3{font-size:1rem;margin:20px 0 6px}.live-debrief-summary{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0}
+.live-debrief-summary span{border:1px solid var(--border);border-radius:9px;padding:9px 11px;background:var(--surface2);font-weight:700;font-size:.84rem}
+.live-debrief #live-review-observations li{border-left-color:#4a91a6}
+.live-debrief .live-timeline p{overflow-wrap:anywhere}
+@media(max-width:540px){.sim-views{top:43px;left:9px}.sim-views button{font-size:.68rem;padding:6px}.sim-scene-tag{left:12px}.sim-figures{padding-top:90px;min-height:244px}.sim-scene[data-view="a"] .sim-person[data-sim-person="a"],.sim-scene[data-view="b"] .sim-person[data-sim-person="b"]{transform:scale(1.08)}}
+@media(prefers-reduced-motion:no-preference){.sim-person{transition:transform .17s ease,opacity .17s ease}}

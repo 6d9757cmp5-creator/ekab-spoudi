@@ -1,6 +1,7 @@
 /** MENTOR OS live teaching cockpit. No backend calls, legacy progress or AI. */
 import {CASE,STAGES,newLiveSession,stepLive,inspectLive,liveSnapshot,loadLive,saveLive,clearLive} from '../core/live-sim.mjs';
 import {LIVE_TOOLS,LIVE_ACTIONS,findLiveTool,findLiveAction,liveResponse} from '../core/live-interactions.mjs';
+import {buildLiveDebrief,exportLiveDebrief} from '../core/live-debrief.mjs';
 const $=id=>document.getElementById(id);
 const create=(tag,text,cls)=>{
  const el=document.createElement(tag);
@@ -8,7 +9,7 @@ const create=(tag,text,cls)=>{
  if(cls)el.className=cls;
  return el;
 };
-let state=loadLive(localStorage),busy=false,paused=false,selectedPerson='a',selectedTool='dialogue';
+let state=loadLive(localStorage),busy=false,paused=false,selectedPerson='a',selectedTool='dialogue',selectedView='all';
 function patientCard(person){
  const card=create('article',undefined,'live-patient');
  card.append(create('h3',person.name),create('p',person.description));
@@ -27,6 +28,7 @@ function patientCard(person){
 function render(){
  const snapshot=liveSnapshot(state);
  renderCockpit(snapshot);
+ renderLiveDebrief();
  $('live-patients').replaceChildren(...snapshot.people.map(patientCard));
  $('live-time').textContent=String(snapshot.minute).padStart(2,'0')+'΄ · συνθετικός χρόνος';
  $('live-positive').textContent=snapshot.practice+' βήματα εξάσκησης';
@@ -83,6 +85,9 @@ function selectChoice(choice){
 
 function renderCockpit(snapshot){
  const person=snapshot.people.find(p=>p.id===selectedPerson)||snapshot.people[0];
+ const stage=$('sim-cockpit');stage.dataset.finished=String(snapshot.completed);
+ const scene=stage.querySelector('.sim-scene');scene.dataset.view=selectedView;
+ for(const button of document.querySelectorAll('[data-sim-view]'))button.setAttribute('aria-pressed',String(button.dataset.simView===selectedView));
  $('sim-head-time').textContent=String(snapshot.minute).padStart(2,'0')+'΄ χρόνου σεναρίου';
  $('sim-person-name').textContent=person.name;
  $('sim-person-description').textContent=person.description;
@@ -94,6 +99,10 @@ function renderCockpit(snapshot){
   tile.append(create('span',name),create('b',String(value)),create('span',unit));
   monitor.append(tile);
  }
+ const trajectory=CASE.people.find(p=>p.id===person.id).trend.map(p=>p.hr);
+ const min=Math.min(...trajectory)-4,max=Math.max(...trajectory)+4,range=max-min||1;
+ $('sim-trend-line').setAttribute('points',trajectory.map((v,i)=>(8+i*56)+','+(56-(v-min)/range*44).toFixed(1)).join(' '));
+ $('sim-trend').setAttribute('aria-label',person.name+': απεικόνιση προκαθορισμένης πορείας παλμών από '+trajectory[0]+' έως '+trajectory.at(-1)+' ανά λεπτό. Δεν είναι ΗΚΓ.');
  const toolbar=$('sim-toolbar');toolbar.replaceChildren();
  for(const tool of LIVE_TOOLS){
   const button=create('button',undefined,'sim-tool');
@@ -117,7 +126,7 @@ function renderCockpit(snapshot){
   if(!snapshot.inspections.length)list.append(create('li','Καμία καταγραφή εργαλείου ακόμη.'));
   target.append(intro,list);
   const link=create('a','MENTOR DEBRIEF — εκπαιδευτική διαδρομή');
-  link.href='mentor-protocol-suite.html?topic=trauma&view=debrief';
+  link.href='#live-debrief';
   target.append(link);
  }else if(LIVE_ACTIONS[selectedTool]){
   for(const action of LIVE_ACTIONS[selectedTool]){
@@ -132,6 +141,62 @@ function renderCockpit(snapshot){
  $('sim-pause').textContent=paused?'▶ Συνέχεια':'⏸ Παύση';
  $('sim-pause').setAttribute('aria-pressed',String(paused));
 }
+
+function renderLiveDebrief(){
+ const report=buildLiveDebrief(state);
+ const summary=$('live-review-summary');summary.replaceChildren();
+ for(const label of [
+  report.completed?'Ολοκληρωμένη εκπαιδευτική αποστολή':'Σε εξέλιξη',
+  report.minute+'΄ συνθετικός χρόνος',
+  report.practice+' οργανωτικά βήματα',
+  report.review+' για επανάληψη',
+  report.observations.length+' καταγραφές'
+ ])summary.append(create('span',label));
+ const decisions=$('live-review-decisions');decisions.replaceChildren();
+ for(const entry of report.timeline){
+  const li=create('li');li.dataset.kind=entry.outcome;
+  li.append(create('strong',entry.title+' · '+entry.minute+'΄ · '+(entry.outcome==='review'?'Για επανάληψη':'Ολοκληρώθηκε βήμα')),
+   create('p','Επιλογή: '+entry.action),create('p',entry.feedback));
+  if(entry.consequence)li.append(create('p','Συνθετική συνέπεια: '+entry.consequence));
+  decisions.append(li);
+ }
+ if(!report.timeline.length)decisions.append(create('li','Δεν έχουν γίνει ακόμη επιλογές.'));
+ const notes=$('live-review-observations');notes.replaceChildren();
+ for(const entry of report.observations){
+  const li=create('li');
+  li.append(create('strong',entry.person+' · '+entry.tool+' · Στάδιο '+entry.stage),
+    create('p',entry.action),create('p',entry.response));
+  notes.append(li);
+ }
+ if(!report.observations.length)notes.append(create('li','Δεν υπάρχουν καταγεγραμμένες παρατηρήσεις.'));
+ $('live-review-advice').textContent=report.advice+
+  (report.unreliableHandover?' Προσοχή: η παράδοση περιείχε ανεπιβεβαίωτες πληροφορίες.':'');
+}
+function downloadLiveReport(){
+ const content=exportLiveDebrief(state);
+ const blob=new Blob([content],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob);
+ try{
+  const link=document.createElement('a');
+  link.href=url;link.download='ekab-mentor-live-debrief.txt';
+  document.body.append(link);link.click();link.remove();
+  $('live-export-status').textContent='Δημιουργήθηκε η εκπαιδευτική αναφορά αυτής της αποστολής (.txt).';
+ }finally{setTimeout(()=>URL.revokeObjectURL(url),30000);}
+}
+$('live-export').addEventListener('click',downloadLiveReport);
+for(const button of document.querySelectorAll('[data-sim-view]')){
+ button.addEventListener('click',()=>{
+  selectedView=button.dataset.simView;
+  if(selectedView!=='all')selectedPerson=selectedView;
+  renderCockpit(liveSnapshot(state));
+ });
+}
+$('sim-clear').addEventListener('click',()=>{
+ selectedTool='dialogue';
+ $('sim-tool-result').textContent='';
+ renderCockpit(liveSnapshot(state));
+});
+
 function selectInspection(tool,person,action){
  if(busy||paused)return;
  try{
@@ -161,6 +226,9 @@ $('live-reset').addEventListener('click',()=>{
  if((state.events.length||state.inspections?.length)&&!confirm('Να ξεκινήσει νέα συνθετική αποστολή; Θα επαναφερθεί μόνο η μνήμη αυτής της νέας αποστολής Mentor.'))return;
  clearLive(localStorage);
  state=newLiveSession();
+ selectedPerson='a';selectedTool='dialogue';selectedView='all';paused=false;
+ $('sim-tool-result').textContent='';
+ $('live-export-status').textContent='Η νέα αποστολή δεν περιέχει προηγούμενες καταγραφές.';
  $('live-feedback').textContent='';
  $('live-storage').textContent='Ξεκινάς νέα προσπάθεια. Οι υπόλοιπες καταγραφές Mentor και ΣΑΕΚ/ΕΟΠΠΕΠ μένουν ανέπαφες.';
  render();

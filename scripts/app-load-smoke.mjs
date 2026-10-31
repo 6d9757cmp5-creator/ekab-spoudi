@@ -104,6 +104,27 @@ try {
     if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+4))
       throw Error(device+': simulation cockpit overflows '+device+' viewport');
     console.log('PASS '+device+': single Mentor simulation cockpit, scripted tools, paused controls and reload');
+    await page.locator('#sim-toolbar button').filter({hasText:'Φάκελος'}).click();
+    await page.locator('.sim-drawer-choices a[href="#live-debrief"]').click();
+    if(!await page.locator('#live-debrief').isVisible())throw Error(device+': live debrief not visible');
+    if(await page.locator('#live-review-observations li').count()!==1)
+      throw Error(device+': same mission observations missing from debrief');
+    if(await page.locator('#live-review-decisions li').count()!==1)
+      throw Error(device+': same mission decisions missing from debrief');
+    await page.locator('[data-sim-view="b"]').click();
+    if(!await page.locator('#sim-person-name').textContent().then(x=>x==='Άτομο Β'))
+      throw Error(device+': view focus did not select patient');
+    await page.locator('#sim-clear').click();
+    if(!await page.locator('#sim-tool-heading').textContent().then(x=>x.includes('Συνομιλία')))
+      throw Error(device+': close tool did not restore primary panel');
+    const [reportFile]=await Promise.all([
+      page.waitForEvent('download',{timeout:10000}),
+      page.locator('#live-export').click()
+    ]);
+    if(!reportFile.suggestedFilename().endsWith('.txt'))
+      throw Error(device+': MENTOR Live debrief export invalid');
+    console.log('PASS '+device+': live case-linked DEBRIEF, view focus, tool reset and report export');
+
 
     await context.close();
   }
