@@ -38,7 +38,8 @@ export function matchMedicalTerm(question,items=[]){
   for(const {value,kind} of namesFor(item)){
    if(!valid(value)||!exactPhrase(text,value))continue;
    const score=normalize(value).length+
-    (kind==="term"?100:kind==="symbol"?75:kind==="alias"?50:20);
+    (kind==="term"?100:kind==="symbol"?75:kind==="alias"?50:20)+
+    (normalize(item.term).includes(normalize(value))?5:0);
    found.push({item,score});
   }
  }
