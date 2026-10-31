@@ -14,8 +14,9 @@ const fs = require('node:fs');
     const registry = JSON.parse(fs.readFileSync('saek-image-audit-2026.json', 'utf8'));
     for (const [id, asset] of Object.entries(registry.assets)) {
       if (!asset.localPath) continue;
-      // PNG assets have no SVG text tree; they are covered by raster/image checks.
-      if (asset.localPath.toLowerCase().endsWith('.png')) continue;
+      // Only SVG files contain an SVG text tree. PNG/JPEG raster imagery is
+      // validated by structural/checksum audits and visual contact sheets.
+      if (!asset.localPath.toLowerCase().endsWith('.svg')) continue;
       await page.setContent(fs.readFileSync(asset.localPath, 'utf8'));
       await page.evaluate(() => document.fonts.ready);
       const overflow = await page.evaluate(() => {
