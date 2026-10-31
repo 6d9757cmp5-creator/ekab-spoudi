@@ -67,6 +67,44 @@ try {
     if(overflow)throw Error(device+': protocol lab overflows viewport width');
     console.log('PASS '+device+': Greek protocols, contextual LAB and DEBRIEF');
 
+
+    // Existing single MENTOR Live session, with the original synthetic teaching cockpit.
+    const simulator=await page.goto('http://127.0.0.1:8765/mentor-live.html',{waitUntil:'domcontentloaded',timeout:30000});
+    if(!simulator?.ok())throw Error(device+': simulation cockpit page failed to load');
+    await page.waitForFunction(()=>document.querySelectorAll('#sim-toolbar button').length===8,null,{timeout:15000});
+    if(!await page.locator('#sim-person-name').isVisible())throw Error(device+': no patient monitor');
+    if((await page.locator('#sim-vitals b').allTextContents()).join(',')!=='106,22,96,—')
+      throw Error(device+': synthetic vital indicators wrong');
+    await page.locator('#sim-tool-actions button').first().click();
+    if(!await page.locator('#sim-tool-result').textContent().then(x=>x.includes('Άτομο Α')))
+      throw Error(device+': scripted dialogue not recorded');
+    await page.locator('[data-sim-person="b"]').click();
+    if(!await page.locator('#sim-person-name').textContent().then(x=>x==='Άτομο Β'))
+      throw Error(device+': patient selection failed');
+    await page.locator('#sim-toolbar button').filter({hasText:'Φάκελος'}).click();
+    if(await page.locator('.sim-records li').count()!==1)
+      throw Error(device+': history not unified in session');
+    await page.locator('#sim-pause').click();
+    if(!await page.locator('#live-choices button').first().isDisabled())
+      throw Error(device+': pause did not block actions');
+    await page.locator('#sim-pause').click();
+    await page.locator('#live-choices button').first().click();
+    if(!await page.locator('#live-step').textContent().then(x=>x.includes('2 / 4')))
+      throw Error(device+': original decision engine not connected');
+    await page.reload({waitUntil:'domcontentloaded'});
+    await page.waitForFunction(()=>document.querySelectorAll('#sim-toolbar button').length===8,null,{timeout:15000});
+    await page.locator('#sim-toolbar button').filter({hasText:'Φάκελος'}).click();
+    if(await page.locator('.sim-records li').count()!==1)
+      throw Error(device+': observation not preserved after refresh');
+    if(!await page.locator('#live-step').textContent().then(x=>x.includes('2 / 4')))
+      throw Error(device+': stage progress not preserved after refresh');
+    await page.locator('#sim-toolbar button').filter({hasText:'Φάρμακα'}).click();
+    if(await page.locator('#sim-tool-actions button').count()!==0)
+      throw Error(device+': unreviewed medication actions must remain locked');
+    if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+4))
+      throw Error(device+': simulation cockpit overflows '+device+' viewport');
+    console.log('PASS '+device+': single Mentor simulation cockpit, scripted tools, paused controls and reload');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}

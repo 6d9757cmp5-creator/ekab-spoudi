@@ -156,7 +156,7 @@ $('sim-pause').addEventListener('click',()=>{
 
 $('live-reset').addEventListener('click',()=>{
  if(busy)return;
- if(state.events.length&&!confirm('Να ξεκινήσει νέα συνθετική αποστολή; Θα επαναφερθεί μόνο η μνήμη αυτής της νέας αποστολής Mentor.'))return;
+ if((state.events.length||state.inspections?.length)&&!confirm('Να ξεκινήσει νέα συνθετική αποστολή; Θα επαναφερθεί μόνο η μνήμη αυτής της νέας αποστολής Mentor.'))return;
  clearLive(localStorage);
  state=newLiveSession();
  $('live-feedback').textContent='';
