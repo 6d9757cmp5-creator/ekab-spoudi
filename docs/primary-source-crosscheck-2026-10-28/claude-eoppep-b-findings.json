@@ -175,38 +175,36 @@
   },
   {
    "id": "EOP-B-011",
-   "question": "Χαρακτηριστικά πόνου εμφράγματος.",
-   "verdict": "source_unreachable",
+   "question": "Πόνος εμφράγματος.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE CG95 δεν άνοιξε (client_error) και, ούτως ή άλλως, το CG95 αφορά θωρακικό άλγος· δεν έγινε σύγκριση με πηγή. Το περιεχόμενο είναι κλινικά εύλογο αλλά αναπόδεικτο εδώ.",
-   "suggestedChange": "Αντικατάσταση/προσθήκη προσβάσιμης πηγής (ESC/ERC, StatPearls, ελληνικό πρωτόκολλο).",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: «deep, substernal, visceral pain, aching or pressure»· ακτινοβολία σε πλάτη, γνάθο, αριστερό/δεξί βραχίονα, ώμους· συνοδά δύσπνοια, εφίδρωση, ναυτία/έμετος· σιωπηλά εμφράγματα ~20% (έως 30% σε διαβητικούς). Συμφωνεί.",
    "sources": [
     {
-     "title": "NICE (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+     "title": "Merck — Acute myocardial infarction",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
     }
    ],
    "clinicalReview": false
   },
   {
    "id": "EOP-B-012",
-   "question": "Προνοσοκομειακή αντιμετώπιση οξέος εμφράγματος.",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Προνοσοκομειακή αντιμετώπιση εμφράγματος.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE CG95 δεν άνοιξε (client_error) και, ούτως ή άλλως, το CG95 αφορά θωρακικό άλγος· δεν έγινε σύγκριση με πηγή. Το περιεχόμενο είναι κλινικά εύλογο αλλά αναπόδεικτο εδώ. Η απάντηση σωστά αναφέρει φάρμακα μόνο κατά πρωτόκολλο, αλλά οι οδηγίες για οξυγόνο/ασπιρίνη δεν επαληθεύτηκαν.",
-   "suggestedChange": "Αντικατάσταση/προσθήκη προσβάσιμης πηγής (ESC/ERC, StatPearls, ελληνικό πρωτόκολλο).",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: προνοσοκομειακά οξυγόνο (τυπικά 2 L με ρινικό καθετήρα), ασπιρίνη, νιτρώδη, μεταφορά σε κατάλληλο κέντρο, IV γραμμή, συνεχής ΗΚΓ. Η απάντηση λέει οξυγόνο μόνο σε υποξαιμία· η εμφανής σελίδα δεν αναφέρει αυτόν τον περιορισμό (υποσημείωση κομμένη). Δεν προσδιορίζεται δόση ασπιρίνης στην απάντηση.",
    "sources": [
     {
-     "title": "NICE (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+     "title": "Merck — Acute myocardial infarction",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Φάρμακα/οξυγόνο στο οξύ έμφραγμα κατά ελληνικό πρωτόκολλο· ανεπιβεβαίωτο εδώ."
+   "clinicalNote": "Οξυγόνο/ασπιρίνη/νιτρώδη στο έμφραγμα: κατά ελληνικό πρωτόκολλο."
   },
   {
    "id": "EOP-B-013",
@@ -602,21 +600,21 @@
   },
   {
    "id": "EOP-B-036",
-   "question": "Ενδείξεις – αντενδείξεις χορήγησης ασπιρίνης.",
-   "verdict": "source_unreachable",
+   "question": "Ενδείξεις – αντενδείξεις ασπιρίνης.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός (φάρμακο)",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η σελίδα NICE CG95 δεν άνοιξε (client_error από το site), άρα η απάντηση δεν συγκρίθηκε με την πηγή. Η αποθηκευμένη απάντηση δεν περιέχει δόση ούτε διατύπωση «εκτός αν υπάρχει σαφής υπερευαισθησία»· αναφέρει αντενδείξεις (σοβαρή αλλεργία, ενεργός σημαντική αιμορραγία) που είναι εύλογες αλλά αναπόδεικτες εδώ.",
-   "suggestedChange": "Επαλήθευση με ανοιγόμενη πηγή (ERC/RCUK ACS 2025, NICE NG185/CG95 ή SmPC ασπιρίνης) και προσθήκη δόσης αν το πρωτόκολλο την ορίζει.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck (οξύ έμφραγμα): «All patients are given aspirin 160 to 325 mg (not enteric-coated), if not contraindicated»· το πρώτο δισκίο μασιέται. Η αποθηκευμένη απάντηση δεν αναφέρει δόση ούτε τρόπο χορήγησης. Οι αντενδείξεις (υπερευαισθησία, ενεργός αιμορραγία) είναι εύλογες αλλά δεν αναφέρονται στο απόσπασμα.",
    "sources": [
     {
-     "title": "NICE CG95 (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/cg95/chapter/recommendations"
+     "title": "Merck — Acute myocardial infarction",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Φάρμακο υψηλού κινδύνου χωρίς επαληθευμένη πηγή."
+   "suggestedChange": "Προσθήκη δόσης και τρόπου (μάσημα) κατά πρωτόκολλο.",
+   "clinicalNote": "Δόση ασπιρίνης κατά ελληνικό πρωτόκολλο."
   },
   {
    "id": "EOP-B-037",
@@ -1170,38 +1168,35 @@
   },
   {
    "id": "EOP-B-069",
-   "question": "Να αναφέρετε τα αίτια κάκωσης σπονδυλικής στήλης σε: α) ενήλικες β) παιδιά",
-   "verdict": "source_unreachable",
+   "question": "Αίτια κάκωσης σπονδυλικής στήλης.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ενήλικες — τροχαία (~38%), πτώσεις (~30%), βία (~13%), αθλήματα (~9%)· ηλικιωμένοι σε αυξημένο κίνδυνο· δεν καλύπτει παιδιά. Η απάντηση αναφέρει τροχαία, πτώσεις, καταδύσεις, τραύματα· λείπουν βία (τραύμα από πυροβολισμό/μαχαίρι) και αθλήματα για ενήλικες. Τα στοιχεία για παιδιά δεν επαληθεύτηκαν.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
     }
    ],
    "clinicalReview": false
   },
   {
    "id": "EOP-B-070",
-   "question": "Να αναφέρετε τα γενικά βήματα αντιμετώπισης ασθενούς με υποψία κάκωσης της σπονδυλικής στήλης.",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Γενικά βήματα σε υποψία κάκωσης σπονδυλικής.",
+   "verdict": "consistent",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: προτιμάται ο όρος «spinal motion restriction» αντί ακινητοποίησης· ενδείξεις: διαταραχή συνείδησης, πόνος μέσης γραμμής, εστιακά νευρολογικά, παραμόρφωση, αποσπαστικοί τραυματισμοί· πρωτογενής εκτίμηση ABCDE και άμεση αναζωογόνηση. Συμφωνεί πλήρως.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-071",
@@ -1241,17 +1236,16 @@
   },
   {
    "id": "EOP-B-073",
-   "question": "Παθοφυσιολογία και ζωτικά νευρογενούς shock.",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός (τραύμα)",
-   "certainty": "χαμηλή",
+   "question": "Παθοφυσιολογία νευρογενούς shock.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE NG41 δεν άνοιξε και, ούτως ή άλλως, αφορά κακώσεις σπονδυλικής στήλης, όχι παθοφυσιολογία shock. Δεν έγινε σύγκριση. Η απάντηση (απώλεια συμπαθητικού τόνου, αγγειοδιαστολή, βραδυκαρδία, υπόταση, πρώτα αποκλεισμός αιμορραγίας) είναι κλασική αλλά αναπόδεικτη εδώ.",
-   "suggestedChange": "Αντικατάσταση παραπομπής με πηγή για νευρογενές shock (π.χ. StatPearls).",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: διακοπή κάθοδων συμπαθητικών οδών → διαστολή αγγείων, αδιάλειπτος πνευμονογαστρικός τόνος → βραδυκαρδία· χαρακτηριστικά: υπόταση με βραδυκαρδία, δέρμα ζεστό και ροδαλό. Συμφωνεί (το «ξηρό» δεν αναφέρεται). Σωστά προτάσσεται ο αποκλεισμός αιμορραγίας.",
    "sources": [
     {
-     "title": "NICE NG41 (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+     "title": "StatPearls — Neurogenic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459361/"
     }
    ],
    "clinicalReview": false
@@ -1259,20 +1253,20 @@
   {
    "id": "EOP-B-074",
    "question": "Φάρμακο στην 1η ώρα σε κάκωση σπονδυλικής στήλης.",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός (φάρμακο)",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός (φάρμακο, αμφισβητούμενο)",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η αποθηκευμένη απάντηση επικαλείται το NICE NG41 (1.7.3: όχι μεθυλπρεδνιζολόνη/νιμοδιπίνη/ναλοξόνη). Το NG41 δεν άνοιξε και η Merck σελίδα για κάκωση νωτιαίου μυελού επίσης απέτυχε· η σύσταση δεν επαληθεύτηκε σε αυτό το πέρασμα. Η απάντηση σωστά ΔΕΝ προτείνει στεροειδή. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Spinal cord injuries: η χρήση στεροειδών είναι αμφισβητούμενη· οι οδηγίες που παραθέτει (2017) αναφέρουν ότι «μπορεί να εξεταστεί» υψηλή δόση μεθυλπρεδνιζολόνης 24 ωρών σε ενήλικες εντός 8 ωρών. Η αποθηκευμένη απάντηση παρουσιάζει το NICE NG41 ως ρητή οδηγία ΜΗ χρήσης· το NG41 δεν επαληθεύτηκε, και οι διεθνείς οδηγίες διαφέρουν. Η απάντηση δεν προτείνει στεροειδή (ασφαλής προς την πλευρά της αποφυγής), αλλά η διατύπωση «ρητά όχι» είναι υπεραπλούστευση.",
    "sources": [
     {
-     "title": "NICE NG41 (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
     }
    ],
    "clinicalReview": true,
-   "suggestedChange": "Προσθήκη προσβάσιμης πηγής.",
-   "clinicalNote": "Σύσταση για στεροειδή σε κάκωση νωτιαίου μυελού: επαλήθευση από κλινικό."
+   "suggestedChange": "Διατύπωση ότι οι οδηγίες διαφωνούν· η προνοσοκομειακή χορήγηση δεν είναι ρόλος διασώστη.",
+   "clinicalNote": "Αμφισβητούμενη θεραπεία — απαιτείται κλινική απόφαση."
   },
   {
    "id": "EOP-B-075",
@@ -1293,17 +1287,16 @@
   },
   {
    "id": "EOP-B-076",
-   "question": "Να αναφέρετε τα κλινικά σημεία και συμπτώματα ασθενούς που πάσχει από υποσκληρίδιο αιμάτωμα.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Υποσκληρίδιο αιμάτωμα.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: οξύ — διαταραχή προσανατολισμού/εγρήγορσης/γνώσης, κεφαλαλγία, σπασμοί, ημιπάρεση, σημεία αυξημένης ΕΚΠ, ασυμμετρία κορών· χρόνιο — αυξανόμενη καθημερινή κεφαλαλγία, υπνηλία/σύγχυση, εστιακά ελλείμματα, σπασμοί. Συμφωνεί (οι έμετοι δεν αναφέρονται ρητά).",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
    "clinicalReview": false
@@ -1358,75 +1351,69 @@
   },
   {
    "id": "EOP-B-080",
-   "question": "Ποια είναι η συνηθέστερη αιτία διέγερσης σε πολυτραυματία με κρανιοεγκεφαλική κάκωση;",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Συνηθέστερη αιτία διέγερσης σε ΚΕΚ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή-μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD αναφέρει την υποξία/υπόταση ως δευτερογενείς εγκεφαλικές βλάβες και την ανάγκη αγωγής της υποξίας και υπερκαπνίας, αλλά ΔΕΝ ορίζει την υποξία ως «συνηθέστερη αιτία διέγερσης». Η απάντηση βασίζεται σε ερώτηση του ελληνικού οδηγού κατάρτισης (minedu) που δεν ανοίχτηκε εδώ.",
    "sources": [
     {
-     "title": "minedu.gov.gr",
-     "url": "https://minedu.gov.gr/publications/docs2024/epag_ekpaideusi/%CE%94%CE%99%CE%91%CE%A3%CE%A9%CE%A3%CE%A4%CE%97%CE%A3_-_%CE%A0%CE%9B%CE%97%CE%A1%CE%A9%CE%9C%CE%91_%CE%91%CE%A3%CE%98%CE%95%CE%9D%CE%9F%CE%A6%CE%9F%CE%A1%CE%9F%CE%A5.pdf"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalNote": "Αναμενόμενη απάντηση εξέτασης: επιβεβαίωση από τον οδηγό."
   },
   {
    "id": "EOP-B-081",
-   "question": "Να αναφέρετε : α) Τι είδους ορό χορηγούμε σε κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ) κατά προτίμηση ενδοφλέβια; β) Ποια υγρά αποφεύγονται στην κρανιοεγκεφαλική κάκωση (",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Ορός/υγρά σε ΚΕΚ.",
+   "verdict": "consistent",
+   "risk": "υψηλός (υγρά)",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: στόχος ορρού ισοωσμωτικός ή ελαφρά υπερωσμωτικός· «Hypotonic fluids (especially 5% D/W) are contraindicated» επειδή επιδεινώνουν το εγκεφαλικό οίδημα. Συμφωνεί (η σελίδα δεν κατονομάζει ρητά «ισότονο»).",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
    "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalNote": "Επιλογή υγρού σε ΚΕΚ: κλινική απόφαση/πρωτόκολλο."
   },
   {
    "id": "EOP-B-082",
-   "question": "Γιατί σε τραυματίες με κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ) πρέπει να αποφεύγεται η υπερκαπνία;",
-   "verdict": "source_unreachable",
+   "question": "Αποφυγή υπερκαπνίας σε ΚΕΚ.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: «Aggressive early management of hypoxia, hypercapnia, hypotension, and increased ICP»· στόχος PaCO2 38–42 mm Hg· προφυλακτικός υπεραερισμός (PaCO2 25–35) δεν συνιστάται. Συμφωνεί με την απάντηση (νορμοκαπνία). Ο μηχανισμός (αγγειοδιαστολή) είναι καθιερωμένη φυσιολογία, δεν αναφέρεται στη σελίδα.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-083",
-   "question": "Σε τι οφείλεται η επιδείνωση του επιπέδου συνείδησης σε ένα τραυματία με κρανιοεγκεφαλική κάκωση (Κ.Ε.Κ);",
-   "verdict": "source_unreachable",
+   "question": "Επιδείνωση συνείδησης σε ΚΕΚ.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: δευτερογενείς βλάβες (υπόταση, υποξία) και αυξημένη ΕΚΠ/εγκολεασμός· οξύ υποσκληρίδιο με κώμα από συμπίεση στελέχους. Συμφωνεί.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-084",
@@ -1804,56 +1791,52 @@
   },
   {
    "id": "EOP-B-106",
-   "question": "Ποια είναι τα συνηθέστερα αίτια πνευμονικού οιδήματος;",
-   "verdict": "source_unreachable",
+   "question": "Αίτια πνευμονικού οιδήματος.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια-υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: οξεία στεφανιαία ισχαιμία ~30–40%, αντιρροπούμενη καρδιακή ανεπάρκεια, αρρυθμία, οξεία βαλβιδοπάθεια, υπερφόρτωση υγρών (IV). Τα μη καρδιογενή αίτια (λοίμωξη, εισπνευστική βλάβη, ARDS) της απάντησης δεν περιγράφονται στη σελίδα.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
     }
    ],
    "clinicalReview": false
   },
   {
    "id": "EOP-B-107",
-   "question": "Ποιοι είναι οι προδιαθεσικοί παράγοντες του πνευμονικού οιδήματος;",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Προδιαθεσικοί παράγοντες πνευμονικού οιδήματος.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: HFpEF από υπέρταση, ισχαιμία, αρρυθμία, βαλβιδοπάθεια, υπερφόρτωση υγρών, μη συμμόρφωση σε φάρμακα/δίαιτα. Συμφωνεί.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-108",
    "question": "Χειρισμοί στο οξύ πνευμονικό οίδημα.",
-   "verdict": "source_unreachable",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η σελίδα ESC 2026 Heart Failure άνοιξε μερικώς: υπάρχουν τίτλοι «Acute pulmonary oedema», «Oxygen therapy», «Ventilation support», «Vasodilators» αλλά το κείμενο των συστάσεων δεν ήταν προσβάσιμο· τα αριθμητικά κριτήρια της απάντησης (RR>25/min, SpO2<90%) δεν επαληθεύτηκαν. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: οξυγόνο πρώτο βήμα, BiPAP σε σημαντική υποξία, ενδοφλέβια διουρητικά, νιτρώδη (μερικές φορές), μορφίνη όλο και λιγότερο. Η απάντηση συμφωνεί (οξυγόνο σε υποξαιμία, NIV/CPAP, φάρμακα κατά πρωτόκολλο). Τα αριθμητικά κριτήρια (RR>25, SpO2<90%) από το ESC 2026 δεν επαληθεύτηκαν.",
    "sources": [
     {
-     "title": "ESC 2026 Heart Failure Guidelines (μερική πρόσβαση)",
-     "url": "https://academic.oup.com/eurheartj/article/47/38/5346/8766302"
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
     }
    ],
    "clinicalReview": true,
-   "suggestedChange": "Προσθήκη προσβάσιμης πηγής.",
-   "clinicalNote": "Κριτήρια CPAP/NIV και φάρμακα: κλινικός έλεγχος."
+   "clinicalNote": "Κριτήρια CPAP/NIV."
   },
   {
    "id": "EOP-B-109",
@@ -1906,21 +1889,19 @@
   },
   {
    "id": "EOP-B-112",
-   "question": "Ποια είναι τα συμπτώματα του πνευμονικού οιδήματος;",
-   "verdict": "source_unreachable",
+   "question": "Συμπτώματα πνευμονικού οιδήματος.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: έντονη δύσπνοια με ανησυχία και αίσθημα πνιγμού, βήχας με αιματηρά πτύελα, ωχρότητα, κυάνωση, ιδρώτας, λεπτοί εισπνευστικοί ρόγχοι, συριγμός. Συμφωνεί (ορθόπνοια/αφρώδη πτύελα της απάντησης είναι κλασικά).",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/CG95/chapter/recommendations"
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-113",
@@ -2183,20 +2164,19 @@
   },
   {
    "id": "EOP-B-127",
-   "question": "Triage ασθενούς με 35 αναπνοές/λεπτό και σφύξεις >120.",
-   "verdict": "source_unreachable",
+   "question": "Triage: 35 αναπνοές/λεπτό.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Το PDF του ΠΟΥ (iris.who.int) δεν άνοιξε. Το START κατατάσσει ΡΣ >30/min ως άμεση προτεραιότητα (κόκκινο) — καθιερωμένο, αλλά δεν επαληθεύτηκε από την πηγή. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls START: κόκκινο αν αναπνευστική συχνότητα >30, ή απόν κερκιδικός σφυγμός/επαναπλήρωση >2 s, ή αδυναμία εκτέλεσης απλών εντολών. Η απάντηση (>30/min αρκεί για κόκκινο) συμφωνεί.",
    "sources": [
     {
-     "title": "WHO IRIS (μη προσβάσιμο)",
-     "url": "https://iris.who.int/bitstream/handle/10665/379543/9789240100237-eng.pdf"
+     "title": "StatPearls — EMS mass casualty triage",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459369/"
     }
    ],
-   "clinicalReview": false,
-   "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-128",
@@ -2218,19 +2198,18 @@
   {
    "id": "EOP-B-129",
    "question": "Χρώματα triage.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Το PDF του ΠΟΥ δεν άνοιξε. Η απάντηση σωστά τονίζει ότι τα χρώματα διαφέρουν ανά σύστημα. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls START: μαύρο — δεν αναπνέει ακόμη και μετά από διάνοιξη αεραγωγού· κόκκινο — άμεση· κίτρινο — σοβαρή αλλά όχι άμεσα απειλητική· πράσινο — ελαφρά (βαδίζοντες). Συμφωνεί με την απάντηση, που σωστά σημειώνει ότι τα χρώματα διαφέρουν ανά σύστημα.",
    "sources": [
     {
-     "title": "WHO IRIS (μη προσβάσιμο)",
-     "url": "https://iris.who.int/bitstream/handle/10665/379543/9789240100237-eng.pdf"
+     "title": "StatPearls — EMS mass casualty triage",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459369/"
     }
    ],
-   "clinicalReview": false,
-   "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-130",
@@ -2513,21 +2492,19 @@
   },
   {
    "id": "EOP-B-146",
-   "question": "Ποια είναι η αντίδραση του οργανισμού σε μια αιμορραγία;",
-   "verdict": "source_unreachable",
+   "question": "Αντίδραση οργανισμού σε αιμορραγία.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: αύξηση συχνότητας και συσταλτικότητας, συμπαθητική ενεργοποίηση με βαροϋποδοχείς, περιφερική αγγειοσύσπαση, αναδιανομή αίματος σε καρδιά/εγκέφαλο, αναερόβιος μεταβολισμός/οξέωση. Συμφωνεί. Η μετακίνηση υγρού από το διάμεσο και η κατακράτηση Na/νερού δεν αναφέρονται στη σελίδα.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Hemorrhagic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470382/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-147",
@@ -2808,21 +2785,19 @@
   },
   {
    "id": "EOP-B-163",
-   "question": "Ποια είναι τα κλινικά σημεία ασθενούς με υποογκαιμική καταπληξία (shock);",
-   "verdict": "source_unreachable",
+   "question": "Σημεία υποογκαιμικού shock.",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls (ATLS): ταχυκαρδία, ταχύπνοια, αλλοίωση συνείδησης, μειωμένη διούρηση, καθυστερημένη τριχοειδική επαναπλήρωση, ψυχρά άκρα· υπόταση όψιμη (κλάση 3–4)· η ΑΠ/καρδιακή συχνότητα «cannot be relied upon as the sole means of diagnosis». Συμφωνεί.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Hemorrhagic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470382/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-164",
@@ -2876,34 +2851,33 @@
   },
   {
    "id": "EOP-B-167",
-   "question": "Περιγράψτε την αντιμετώπιση σε σύνδρομο στέρησης από αλκοόλ.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Αντιμετώπιση στέρησης αλκοόλ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια-υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή δεν ανακτήθηκε σε αυτό το πέρασμα. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: βενζοδιαζεπίνες «mainstay of therapy»· διαζεπάμη/λοραζεπάμη· θειαμίνη 100 mg IV για πρόληψη Wernicke· σοβαρή στέρηση/DT σε ΜΕΘ. Η απάντηση συμφωνεί στη βενζοδιαζεπίνη αλλά δεν αναφέρει θειαμίνη.",
    "sources": [
     {
-     "title": "www.resus.org.uk",
-     "url": "https://www.resus.org.uk/cy/node/36438"
+     "title": "Merck — Alcohol toxicity and withdrawal",
+     "url": "https://www.merckmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal"
     }
    ],
-   "clinicalReview": false
+   "clinicalReview": true,
+   "clinicalNote": "Φαρμακευτική αγωγή στέρησης: κλινικός."
   },
   {
    "id": "EOP-B-168",
-   "question": "Περιγράψτε την κλινική εικόνα ασθενή με σύνδρομο στέρησης από αλκοόλ.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Κλινική εικόνα στέρησης αλκοόλ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: τρόμος, εφίδρωση, κεφαλαλγία, γαστρεντερικά (6 ώρες)· σπασμοί 6–48 ώρες· ψευδαισθήσεις 12–24 ώρες· DT 48–72 ώρες με σύγχυση και αυτόνομη υπερδραστηριότητα. Συμφωνεί.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "Merck — Alcohol toxicity and withdrawal",
+     "url": "https://www.merckmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal"
     }
    ],
    "clinicalReview": false
@@ -3046,21 +3020,19 @@
   },
   {
    "id": "EOP-B-177",
-   "question": "Ποια αίτια προκαλούν ανισοκορία;",
-   "verdict": "source_unreachable",
+   "question": "Αίτια ανισοκορίας.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "χαμηλή-μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: ασυμμετρία κορών στο οξύ υποσκληρίδιο και διαστολή με απώλεια αντίδρασης στον εγκολεασμό. Τα υπόλοιπα αίτια της απάντησης (φυσιολογική, Horner, III συζυγία, φάρμακα) είναι κλασικά αλλά δεν υπάρχουν στη σελίδα.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-178",
@@ -3184,17 +3156,20 @@
   },
   {
    "id": "EOP-B-185",
-   "question": "Ποιες είναι οι συνέπειες διατομής του νωτιαίου μυελού πάνω από το «δερμοτόμιο» Θ4 για τον ασθενή.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "question": "Συνέπειες διατομής νωτιαίου πάνω από Θ4.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: πάνω από C5 απώλεια νεύρωσης διαφράγματος· πάνω από μέσο θωρακικό επίπεδο απώλεια συμπαθητικού τόνου → νευρογενές shock· διαταραχή θερμορρύθμισης· αυτόνομη δυσαντανακλαστικότητα κυρίως σε βλάβες ≥Θ6. Η σελίδα δεν αναφέρει ειδικά το Θ4. Η απάντηση συμφωνεί στην ουσία· λείπει η αυτόνομη δυσαντανακλαστικότητα.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
+    },
+    {
+     "title": "StatPearls — Neurogenic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459361/"
     }
    ],
    "clinicalReview": false
@@ -3236,17 +3211,16 @@
   },
   {
    "id": "EOP-B-188",
-   "question": "Ποια αίτια προκαλούν μυδρίαση;",
-   "verdict": "source_unreachable",
+   "question": "Αίτια μυδρίασης.",
+   "verdict": "consistent_with_gaps",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "χαμηλή-μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE δεν άνοιξε (client_error). Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: διαστολή με απώλεια αντίδρασης στο φως υποδηλώνει εγκολεασμό. Τα φαρμακολογικά/οφθαλμικά αίτια της απάντησης δεν επαληθεύτηκαν εδώ.",
    "sources": [
     {
-     "title": "www.nice.org.uk",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
    "clinicalReview": false
@@ -3392,19 +3366,18 @@
   {
    "id": "EOP-B-197",
    "question": "Τριάδα Cushing.",
-   "verdict": "source_unreachable",
+   "verdict": "consistent",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE NG232 δεν άνοιξε και η Merck σελίδα ΚΕΚ απέτυχε. Ο ορισμός (υπέρταση με διευρυμένη πίεση παλμού, βραδυκαρδία, ανώμαλη αναπνοή) είναι κλασικός. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: ΕΚΠ >25 mm Hg εκδηλώνεται με υπέρταση με διευρυμένη πίεση παλμού, βραδυκαρδία και αναπνευστική καταστολή (Cushing triad). Συμφωνεί (η απάντηση λέει «ανώμαλος αναπνευστικός ρυθμός»).",
    "sources": [
     {
-     "title": "NICE NG232 (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
-   "clinicalReview": false,
-   "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-198",
@@ -3491,19 +3464,18 @@
   {
    "id": "EOP-B-203",
    "question": "Φωτεινό διάστημα.",
-   "verdict": "source_unreachable",
+   "verdict": "consistent",
    "risk": "μέτριος",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή NICE NG232 δεν άνοιξε και η Merck σελίδα ΚΕΚ απέτυχε. Δεν έγινε σύγκριση με πηγή· δεν κρίνεται σωστή/λάθος.",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: «the period without symptoms is the so-called lucid interval» (επισκληρίδιο αιμάτωμα). Συμφωνεί.",
    "sources": [
     {
-     "title": "NICE NG232 (μη προσβάσιμη)",
-     "url": "https://www.nice.org.uk/guidance/ng232/chapter/Recommendations"
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
     }
    ],
-   "clinicalReview": false,
-   "suggestedChange": "Προσθήκη προσβάσιμης πηγής."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-204",
