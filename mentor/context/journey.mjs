@@ -34,4 +34,23 @@ export function makeJourneyUrl(page,{topic,from='',focus=''},view=''){
   if(page==='mentor-protocol-suite.html')params.set('view',view==='debrief'?'debrief':'lab');
   return page+'?'+params.toString()+(page==='mentor-lab.html'?'#mentor-presence':'');
 }
+export function topicForSource(from){
+  const source=validSource(from);
+  if(COURSE.test(source)||source==='saek.html')return 'saek';
+  return {
+    'eoppep.html':'eoppep','farmaka.html':'pharmacy',
+    'seminar-prep.html':'seminars','mentor-ecg.html':'ecg',
+    'protocols.html':'trauma','mentor-live.html':'trauma',
+    'ui-tools/anatomy-3d/index.html':'anatomy'
+  }[source]||'';
+}
+export function sourceFromPath(path){
+  const raw=String(path||'');
+  if(raw.endsWith('/ui-tools/anatomy-3d/index.html'))return 'ui-tools/anatomy-3d/index.html';
+  return validSource(raw.split('/').pop());
+}
+export function journeyFromPage(path,focus=''){
+  const from=sourceFromPath(path),topic=topicForSource(from);
+  return topic?{topic,from,focus:safeFocus(focus)}:null;
+}
 export function returnPage(context){return context?validSource(context.from):'';}
