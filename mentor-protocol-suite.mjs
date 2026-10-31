@@ -3,6 +3,7 @@
  * No backend, AI chat, diagnosis, treatment, or changes to SAEK/EOPPEP marks.
  */
 import {getTopic} from './protocols-data.mjs';
+import {contextFromQuery,makeJourneyUrl,returnPage} from './mentor/context/journey.mjs';
 import {createStages,roleFor} from './mentor-scenario-paths.mjs';
 import {speakGreek,stopGreek} from './mentor-voice.mjs';
 import {downloadDebriefReport} from './mentor-debrief-export.mjs';
@@ -11,6 +12,7 @@ const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const topic=getTopic(params.get('topic'));
 const view=params.get('view')==='debrief'?'debrief':'lab';
+const journeyContext=contextFromQuery(params)||{topic:topic.id,from:'',focus:''};
 // v2 attempts are independent per role; old v1 attempts remain untouched.
 const role=roleFor(params.get('role')).id;
 const storeKey='ekab:mentor:protocol-foundation:v2:'+topic.id+':'+role;
@@ -30,14 +32,23 @@ function save(){
  try{localStorage.setItem(storeKey,JSON.stringify(session));$('lab-storage').textContent='Αποθήκευση σε αυτή τη συσκευή · ξεχωριστά από ΣΑΕΚ/ΕΟΠΠΕΠ.';}
  catch{$('lab-storage').textContent='Η αποθήκευση δεν είναι διαθέσιμη στον browser. Η προσπάθεια ισχύει μόνο όσο μένει ανοιχτή η σελίδα.';}
 }
-const href=(kind)=>'mentor-protocol-suite.html?topic='+encodeURIComponent(topic.id)+'&view='+kind+'&role='+encodeURIComponent(role);
+const href=(kind)=>makeJourneyUrl('mentor-protocol-suite.html',journeyContext,kind)+'&role='+encodeURIComponent(role);
 $('suite-title').textContent=view==='lab'?'MENTOR | PROTOCOL LAB':'MENTOR DEBRIEF';
 $('suite-topic').textContent=topic.name;
-$('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.';
+$('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.'+
+ (journeyContext.focus?' Συνδεδεμένη ενότητα: '+journeyContext.focus+'.':'');
+const returnHref=returnPage(journeyContext);
+if(returnHref){
+ const back=document.createElement('a');
+ back.href=new URL(returnHref,location.href).href;
+ back.textContent='← Πίσω στην αρχική εκπαιδευτική ενότητα';
+ back.style.cssText='display:inline-block;margin:7px 12px 10px 0;padding:9px 12px;border-radius:10px;background:#e3f1ef;color:#135868;font-weight:800;text-decoration:none;';
+ $('suite-context').insertAdjacentElement('afterend',back);
+}
 $('suite-lab-link').href=href('lab');$('suite-debrief-link').href=href('debrief');
 $('suite-lab-link').removeAttribute('aria-current');$('suite-debrief-link').removeAttribute('aria-current');
 $(view==='lab'?'suite-lab-link':'suite-debrief-link').setAttribute('aria-current','page');
-$('suite-mentor-link').href='mentor-lab.html?topic='+encodeURIComponent(topic.id)+'#mentor-presence';
+$('suite-mentor-link').href=makeJourneyUrl('mentor-lab.html',journeyContext);
 $('lab-screen').hidden=view!=='lab';$('debrief-screen').hidden=view!=='debrief';
 $('debrief-repeat').href=href('lab');
 function mentorSay(msg){$('mentor-comment').textContent=msg;}
