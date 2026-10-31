@@ -333,6 +333,39 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-030",
+   "question": "Συμπτώματα εσωτερικής αιμορραγίας.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή (WHO Basic Emergency Care) είναι PDF χωρίς εξαγώγιμο κείμενο· δεν έγινε σύγκριση με την πηγή. Το περιεχόμενο είναι κλινικά εύλογο (ταχυκαρδία, ωχρότητα, ψυχρός ιδρώτας, όψιμη υπόταση) αλλά αναπόδεικτο εδώ.",
+   "sources": [
+    {
+     "title": "WHO Basic Emergency Care (PDF μη αναγνώσιμο)",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-032",
+   "question": "Μέθοδοι αντιμετώπισης εξωτερικής αιμορραγίας.",
+   "verdict": "consistent",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK First Aid 2025: ισχυρή άμεση πίεση, κοινός ή (προτιμότερα) αιμοστατικός επίδεσμος στο τραύμα, τουρνικέ ΑΜΕΣΑ σε απειλητική αιμορραγία άκρου όταν αποτύχει η πίεση. Προσθήκη που λείπει: το τουρνικέ δεν χαλαρώνεται από μη επαγγελματία υγείας. Η αναφορά σε υποθερμία/καταπληξία δεν υπάρχει στην ενότητα αιμορραγίας.",
+   "suggestedChange": "Προσθήκη «το τουρνικέ δεν λύνεται — μόνο από επαγγελματία υγείας».",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-036",
    "question": "Ενδείξεις – αντενδείξεις χορήγησης ασπιρίνης.",
    "verdict": "source_unreachable",
@@ -507,6 +540,148 @@
     }
    ],
    "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-047",
+   "question": "Αρχική ποσότητα υγρών στο shock παιδιών.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (παιδιατρικό, υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK/ERC 2025 Paediatric (σελίδα PBLS, ευρύτερη σελίδα): «one or more fluid boluses of 10 mL/kg in hypovolaemic, obstructive or distributive shock»· συμφωνεί. Κενά: στο αιμορραγικό shock ελαχιστοποιούνται οι κρυσταλλοειδείς (max 20 mL/kg), στο καρδιογενές ~5 mL/kg· ολικός όγκος 40–60 mL/kg την 1η ώρα σε υποογκαιμικό/διανεμητικό. Τελευταίοι ~9.600 χαρακτήρες της σελίδας δεν διαβάστηκαν.",
+   "suggestedChange": "Προσθήκη εξαιρέσεων (αιμορραγικό, καρδιογενές).",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric guidelines",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Δόσεις υγρών σε παιδιά: επιβεβαίωση από κλινικό και ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-048",
+   "question": "Ορισμός και είδη καταπληξίας.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή ως προς παραπομπή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή WHO BEC δεν είναι αναγνώσιμη. Η ταξινόμηση (υποογκαιμικό, καρδιογενές, αποφρακτικό, διανεμητικό) είναι καθιερωμένη και συμφωνεί με την RCUK Paediatric που χρησιμοποιεί τους όρους hypovolaemic/obstructive/distributive/cardiogenic.",
+   "sources": [
+    {
+     "title": "WHO BEC (μη αναγνώσιμο)",
+     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-055",
+   "question": "Πότε χρησιμοποιείται ο ΑΕΑ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK BLS 2025: «Anyone can use an AED», «use an AED as soon as it is available», μετά το σοκ ή χωρίς ένδειξη σοκ επανεκκίνηση συμπιέσεων και ακολουθία οδηγιών συσκευής. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult BLS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-056",
+   "question": "Τεχνική τοποθέτησης αυχενικού κολάρου.",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE NG41 δεν άνοιξε. RCUK First Aid 2025 περιορίζει τη χρήση κολάρων σε εξειδικευμένους («selective use of spinal motion restriction devices and collars using their existing protocols») και συστήνει ελαχιστοποίηση κίνησης του αυχένα, όχι εξαναγκασμό σε θέση. Η απάντηση συμφωνεί στο πνεύμα αλλά η τεχνική δεν επαληθεύτηκε.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "NICE NG41 (μη προσβάσιμη)",
+     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος με ελληνικό πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-057",
+   "question": "Μέτρηση μεγέθους κολάρου και είδη.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή είναι σελίδα κατασκευαστή (Ambu Perfit ACE)· δεν ανακτήθηκε σε αυτό το πέρασμα. Η απάντηση σωστά λέει ότι η τεχνική διαφέρει ανά κατασκευαστή.",
+   "sources": [
+    {
+     "title": "Ambu Perfit ACE (δεν ανακτήθηκε)",
+     "url": "https://www.ambuusa.com/emergency-care-and-training/extrication-collars/product/ambu-perfit-ace"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-058",
+   "question": "Πότε χρησιμοποιούνται αερονάρθηκες.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls «Joint Immobilization» (ενημ. 15/02/2026): ένδειξη όταν υπάρχουν σημεία κάκωσης οστού/συνδέσμου/άρθρωσης· ο αερονάρθηκας φουσκώνει προσεκτικά ώστε να μη καλύπτει τον νευραγγειακό έλεγχο· νευραγγειακός έλεγχος πριν και μετά, χαλάρωση σε επιδείνωση, αποφυγή υπερβολικής πίεσης. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "StatPearls — Joint Immobilization (NBK557703)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK557703/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-073",
+   "question": "Παθοφυσιολογία και ζωτικά νευρογενούς shock.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE NG41 δεν άνοιξε και, ούτως ή άλλως, αφορά κακώσεις σπονδυλικής στήλης, όχι παθοφυσιολογία shock. Δεν έγινε σύγκριση. Η απάντηση (απώλεια συμπαθητικού τόνου, αγγειοδιαστολή, βραδυκαρδία, υπόταση, πρώτα αποκλεισμός αιμορραγίας) είναι κλασική αλλά αναπόδεικτη εδώ.",
+   "suggestedChange": "Αντικατάσταση παραπομπής με πηγή για νευρογενές shock (π.χ. StatPearls).",
+   "sources": [
+    {
+     "title": "NICE NG41 (μη προσβάσιμη)",
+     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-114",
+   "question": "Αρχές προνοσοκομειακής αντιμετώπισης υποθερμίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Special circumstances 2025 καλύπτει υποθερμική ανακοπή (έλεγχος ζωτικών έως 1′, καθυστέρηση/διακοπτόμενη ΚΑΡΠΑ <28°C, καθυστέρηση περαιτέρω απινιδώσεων μετά 3 σοκ, αδρεναλίνη όταν ≥30°C, VA-ECMO) αλλά ΔΕΝ περιέχει χειρισμό, αφαίρεση βρεγμένων ρούχων ή μόνωση. First Aid 2025: μόνο πρόληψη (στεγνά καλύμματα, αφαίρεση βρεγμένων). Άρα τα βήματα θέρμανσης/χειρισμού της απάντησης δεν στηρίζονται από την παραπομπή.",
+   "suggestedChange": "Προσθήκη δεύτερης πηγής για τη θέρμανση, και αναφορά ορίων 28°C/30°C στην ανακοπή.",
+   "sources": [
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    },
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υποθερμική ανακοπή και θέρμανση: κλινική επιβεβαίωση."
   }
  ]
 }
