@@ -1,0 +1,85 @@
+name: Educational and scientific review
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'official_questions.json'
+      - 'old_type_written.json'
+      - 'eoppep-sos.json'
+      - 'saek-course-*.html'
+      - 'saek-exams.js'
+      - 'saek-image-audit-2026.json'
+      - 'saek-lesson-fit-review.json'
+      - 'farmaka*.js'
+      - 'seminar-*.js'
+      - 'protocols-*.mjs'
+      - 'mentor-scenario-paths.mjs'
+      - 'mentor-patient-interview.mjs'
+      - 'mentor-protocol-suite.mjs'
+      - 'educational-animation-sources.js'
+      - 'mentor/knowledge/**'
+      - 'mentor/scenario-atlas/**'
+      - 'mentor/clinical-desk/**'
+      - 'docs/SAEK*'
+      - 'docs/EOPPEP*'
+      - 'docs/saek*'
+      - 'docs/eoppep*'
+      - 'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'
+      - 'scripts/educational-scientific-review.mjs'
+      - 'scripts/test-educational-scientific-review.mjs'
+      - '.github/workflows/educational-scientific-review.yml'
+  pull_request:
+    paths:
+      - 'official_questions.json'
+      - 'old_type_written.json'
+      - 'eoppep-sos.json'
+      - 'saek-course-*.html'
+      - 'saek-exams.js'
+      - 'farmaka*.js'
+      - 'seminar-*.js'
+      - 'protocols-*.mjs'
+      - 'mentor/knowledge/**'
+      - 'mentor/scenario-atlas/**'
+      - 'mentor/clinical-desk/**'
+      - 'docs/SAEK*'
+      - 'docs/EOPPEP*'
+      - 'scripts/educational-scientific-review.mjs'
+      - '.github/workflows/educational-scientific-review.yml'
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: 'Comma-separated educational files to examine'
+        required: true
+        default: 'official_questions.json'
+permissions:
+  contents: read
+jobs:
+  independent-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+      AUDIT_PATHS: ${{ inputs.paths || '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate review engine and boundaries
+        run: |
+          node --check scripts/educational-scientific-review.mjs
+          node --test scripts/test-educational-scientific-review.mjs
+      - name: Evaluate changed educational and scientific material
+        run: node scripts/educational-scientific-review.mjs
+      - name: Preserve inspectable review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: educational-scientific-review
+          path: audit-results/educational-scientific-review.json
+          if-no-files-found: warn
+          retention-days: 30
