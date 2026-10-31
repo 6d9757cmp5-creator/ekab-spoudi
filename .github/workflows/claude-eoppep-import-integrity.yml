@@ -1,0 +1,37 @@
+name: Claude Evidence Import Integrity
+on:
+  pull_request:
+    branches:
+      - audit/saek-eoppep-primary-source-crosscheck-20261028
+    paths:
+      - 'docs/primary-source-crosscheck-2026-10-28/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  safety-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Exercise importer guardrails
+        run: node --test docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.test.cjs
+      - name: Verify complete synchronization, no new promotions
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const { mergeFindings } = require('./docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.cjs');
+          const root = './docs/primary-source-crosscheck-2026-10-28/';
+          const registry = JSON.parse(fs.readFileSync(root + 'eoppep-314.json', 'utf8'));
+          const findings = JSON.parse(fs.readFileSync(root + 'claude-eoppep-b-findings.json', 'utf8'));
+          const {stats} = mergeFindings(registry, findings);
+          console.log(JSON.stringify(stats, null, 2));
+          if (stats.added !== 0 || stats.canonicalTargetedAfter !== stats.canonicalTargetedBefore) {
+            console.error('Evidence not synchronized, or canonical targeted counts changed');
+            process.exit(1);
+          }
+          NODE
