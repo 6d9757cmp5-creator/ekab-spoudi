@@ -115,8 +115,9 @@ try {
     if(!await page.locator('#sim-person-name').textContent().then(x=>x==='Άτομο Β'))
       throw Error(device+': view focus did not select patient');
     await page.locator('#sim-clear').click();
-    if(!await page.locator('#sim-tool-heading').textContent().then(x=>x.includes('Συνομιλία')))
-      throw Error(device+': close tool did not restore primary panel');
+    if(await page.locator('.sim-drawer').isVisible())throw Error(device+': close tool did not hide the panel');
+    await page.locator('#sim-toolbar button').filter({hasText:'Συνομιλία'}).click();
+    if(!await page.locator('.sim-drawer').isVisible())throw Error(device+': tool did not reopen the panel');
     const [reportFile]=await Promise.all([
       page.waitForEvent('download',{timeout:10000}),
       page.locator('#live-export').click()

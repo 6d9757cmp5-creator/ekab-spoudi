@@ -9,7 +9,7 @@ const create=(tag,text,cls)=>{
  if(cls)el.className=cls;
  return el;
 };
-let state=loadLive(localStorage),busy=false,paused=false,selectedPerson='a',selectedTool='dialogue',selectedView='all';
+let state=loadLive(localStorage),busy=false,paused=false,selectedPerson='a',selectedTool='dialogue',selectedView='all',drawerOpen=true;
 function patientCard(person){
  const card=create('article',undefined,'live-patient');
  card.append(create('h3',person.name),create('p',person.description));
@@ -86,6 +86,7 @@ function selectChoice(choice){
 function renderCockpit(snapshot){
  const person=snapshot.people.find(p=>p.id===selectedPerson)||snapshot.people[0];
  const stage=$('sim-cockpit');stage.dataset.finished=String(snapshot.completed);
+ stage.querySelector('.sim-drawer').hidden=!drawerOpen;
  const scene=stage.querySelector('.sim-scene');scene.dataset.view=selectedView;
  for(const button of document.querySelectorAll('[data-sim-view]'))button.setAttribute('aria-pressed',String(button.dataset.simView===selectedView));
  $('sim-head-time').textContent=String(snapshot.minute).padStart(2,'0')+'΄ χρόνου σεναρίου';
@@ -109,7 +110,7 @@ function renderCockpit(snapshot){
   button.type='button';button.setAttribute('aria-pressed',String(selectedTool===tool.id));button.title=tool.detail;
   button.append(create('span',tool.icon,'sim-tool-ico'),create('span',tool.label));
   if(!LIVE_ACTIONS[tool.id])button.append(create('small','πληροφορίες'));
-  button.addEventListener('click',()=>{selectedTool=tool.id;$('sim-tool-result').textContent='';renderCockpit(liveSnapshot(state));});
+  button.addEventListener('click',()=>{selectedTool=tool.id;drawerOpen=true;$('sim-tool-result').textContent='';renderCockpit(liveSnapshot(state));});
   toolbar.append(button);
  }
  const active=findLiveTool(selectedTool);
@@ -192,7 +193,7 @@ for(const button of document.querySelectorAll('[data-sim-view]')){
  });
 }
 $('sim-clear').addEventListener('click',()=>{
- selectedTool='dialogue';
+ drawerOpen=false;
  $('sim-tool-result').textContent='';
  renderCockpit(liveSnapshot(state));
 });
@@ -226,7 +227,7 @@ $('live-reset').addEventListener('click',()=>{
  if((state.events.length||state.inspections?.length)&&!confirm('Να ξεκινήσει νέα συνθετική αποστολή; Θα επαναφερθεί μόνο η μνήμη αυτής της νέας αποστολής Mentor.'))return;
  clearLive(localStorage);
  state=newLiveSession();
- selectedPerson='a';selectedTool='dialogue';selectedView='all';paused=false;
+ selectedPerson='a';selectedTool='dialogue';selectedView='all';paused=false;drawerOpen=true;
  $('sim-tool-result').textContent='';
  $('live-export-status').textContent='Η νέα αποστολή δεν περιέχει προηγούμενες καταγραφές.';
  $('live-feedback').textContent='';
