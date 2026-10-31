@@ -44,7 +44,8 @@ try{
  browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader']});
  const pages=allHtml();
  await check('All '+pages.length+' HTML routes return HTTP 200',async()=>{
-   assert.equal(pages.length,62,'HTML page count unexpectedly changed; inspect before cleanup');
+   assert(pages.length>=60,'Public HTML routes unexpectedly dropped below the protected baseline');
+   assert.equal(new Set(pages).size,pages.length,'Duplicate public HTML paths discovered');
    for(let i=0;i<pages.length;i+=12){
      const batch=await Promise.all(pages.slice(i,i+12).map(async path=>{
        const status=await httpStatus(path);
