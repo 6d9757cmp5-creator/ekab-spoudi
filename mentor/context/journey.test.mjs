@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validTopic,validSource,safeFocus,contextFromQuery,makeJourneyUrl,returnPage} from './journey.mjs';
+import {validTopic,validSource,safeFocus,contextFromQuery,makeJourneyUrl,returnPage,topicForSource,sourceFromPath,journeyFromPage} from './journey.mjs';
 
 test('valid topic IDs are taken from existing educational taxonomy',()=>{
  assert.equal(validTopic('saek'),'saek');
@@ -35,4 +35,13 @@ test('unsafe URL data cannot create malicious return links or long labels',()=>{
  assert.equal(contextFromQuery('?topic=not-a-topic'),null);
  assert.equal(makeJourneyUrl('https://evil.example/',{topic:'saek'}),'');
  assert.equal(safeFocus('  Ανατομία \n 01 '),'Ανατομία 01');
+});
+
+test('source-to-mentor route handles root and nested course pages without personal data',()=>{
+ assert.equal(topicForSource('saek.html'),'saek');
+ assert.equal(topicForSource('eoppep.html'),'eoppep');
+ assert.equal(topicForSource('saek-course-11.html'),'saek');
+ assert.equal(sourceFromPath('/ekab-spoudi/ui-tools/anatomy-3d/index.html'),'ui-tools/anatomy-3d/index.html');
+ assert.deepEqual(journeyFromPage('/ekab-spoudi/saek-course-11.html','Αεραγωγός'),{topic:'saek',from:'saek-course-11.html',focus:'Αεραγωγός'});
+ assert.equal(journeyFromPage('/ekab-spoudi/written_exam.html','Ερωτήσεις και απαντήσεις'),null);
 });
