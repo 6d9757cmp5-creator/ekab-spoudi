@@ -172,6 +172,7 @@ function boot(){
    root.style.height=box.h+"px";
    root.style.transform="translate("+box.x+"px,"+box.y+"px)";
    applyDockPadding(box);
+   root.classList.toggle("is-holo",holo);
    mountFrame();
   }else{
    applyDockPadding({});
@@ -198,11 +199,23 @@ function boot(){
  window.addEventListener("message",event=>{
   if(event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
   if(event.data?.type==="mentor:stage"){
-   if(event.data.state==="ready"){status.hidden=true;sendCue(pendingCue||CUES.open);}
+   if(event.data.state==="ready"){status.hidden=true;sendHolo();sendCue(pendingCue||CUES.open);}
    else{status.hidden=false;status.textContent="Η μορφή 3D δεν φορτώθηκε σε αυτή τη συσκευή.";}
   }
  });
 
+ // Hologram look: a per-viewer choice kept on this device; the figure floats without a frame and can be dragged anywhere.
+ const HOLO_KEY="ekab.mentor.holo.v1";
+ let holo=false;
+ try{holo=localStorage.getItem(HOLO_KEY)==="1";}catch{}
+ function sendHolo(){try{frame?.contentWindow?.postMessage({type:"mentor:holo",on:holo},location.origin);}catch{}}
+ function setHolo(on){
+  holo=!!on;
+  try{localStorage.setItem(HOLO_KEY,holo?"1":"0");}catch{}
+  root.classList.toggle("is-holo",holo);
+  sendHolo();buildMenu();
+  announce(holo?"Λειτουργία ολογράμματος. Σύρε τη μορφή όπου θέλεις στην οθόνη.":"Κανονική εμφάνιση");
+ }
  function announce(text){live.textContent="";setTimeout(()=>{live.textContent=text;},30);}
 
  function set(patch,note){
@@ -237,7 +250,7 @@ function boot(){
    el("hr")
   );
   const snap=menuItem("Μαγνητική προσκόλληση στις άκρες",()=>set({snap:!prefs.snap}),prefs.snap);
-  menu.append(snap);
+  menu.append(snap,menuItem("Ολόγραμμα (διάφανη μορφή, σύρε την παντού)",()=>setHolo(!holo),holo));
  }
 
  function openMenu(){menuOpen=true;menu.hidden=false;menuBtn.setAttribute("aria-expanded","true");menu.querySelector("button")?.focus();}
@@ -415,13 +428,13 @@ function boot(){
   prefs=normalizePrefs({...prefs,mode:"floating",[lay]:{...prefs[lay],x:box.x,y:box.y,w:box.w,h:box.h}});
  }
 
- grip.addEventListener("pointerdown",event=>{
+ const onDown=event=>{
   if(event.button!==0||prefs.mode==="docked")return;
   const box=currentBox();
   dragging={id:event.pointerId,sx:event.clientX,sy:event.clientY,ox:box.x,oy:box.y,moved:false,pinnedStart:prefs.mode==="pinned"};
-  grip.setPointerCapture(event.pointerId);
- });
- grip.addEventListener("pointermove",event=>{
+  event.currentTarget.setPointerCapture(event.pointerId);
+ };
+ const onMove=event=>{
   if(!dragging||event.pointerId!==dragging.id)return;
   const dx=event.clientX-dragging.sx,dy=event.clientY-dragging.sy;
   if(!dragging.moved){
@@ -434,7 +447,13 @@ function boot(){
   const pos=clampPosition({x:dragging.ox+dx,y:dragging.oy+dy},size,vp,safe());
   root.style.transform="translate("+pos.x+"px,"+pos.y+"px)";
   dragging.pos=pos;
- });
+ };
+ grip.addEventListener("pointerdown",onDown);grip.addEventListener("pointermove",onMove);
+ // In hologram mode the figure itself is the handle (the frame ignores the pointer).
+ stage.addEventListener("pointerdown",event=>{if(holo&&!event.target.closest(".emp-ask"))onDown(event);});
+ stage.addEventListener("pointermove",event=>{if(holo)onMove(event);});
+ stage.addEventListener("pointerup",event=>endDrag(event));
+ stage.addEventListener("pointercancel",event=>endDrag(event));
  function endDrag(event){
   if(!dragging||event.pointerId!==dragging.id)return;
   const d=dragging;dragging=null;

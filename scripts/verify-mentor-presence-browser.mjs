@@ -301,6 +301,39 @@ try{
  check('male-only laptop: the screen says a device voice is used',notice,await pg.locator('#mentor-home-speech-status').textContent());
  await ctx.close();await b2.close();
 }
+// Hologram mode: the viewer's choice; transparent, and the figure itself drags anywhere on the screen.
+{
+ const b3=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||undefined,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
+ const ctx=await b3.newContext({viewport:{width:1280,height:800},serviceWorkers:'block'});
+ const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(String(e)));
+ await pg.goto(base+page1,{waitUntil:'load'});
+ await pg.locator('.ekab-mentor-launcher').click();
+ await pg.waitForSelector('.ekab-mentor-presence:not([hidden])');
+ await pg.waitForFunction(()=>document.querySelector('.emp-status')?.hidden===true,null,{polling:200,timeout:60000}).catch(()=>{});
+ const boxOf=()=>pg.locator('.ekab-mentor-presence').boundingBox();
+ check('hologram: off by default (normal framed look)',!(await pg.locator('.ekab-mentor-presence.is-holo').count()));
+ await pg.locator('.emp-bar button[aria-haspopup="true"]').click();
+ await pg.locator('.emp-menu button',{hasText:'Ολόγραμμα'}).click();
+ check('hologram: menu choice turns it on',await pg.locator('.ekab-mentor-presence.is-holo').count()===1);
+ const bg=await pg.evaluate(()=>getComputedStyle(document.querySelector('.ekab-mentor-presence')).backgroundColor);
+ check('hologram: the frame has no background',bg==='rgba(0, 0, 0, 0)',bg);
+ await pg.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.documentElement.classList.contains('holo'),null,{timeout:8000}).then(()=>check('hologram: the avatar page switches to transparent holo rendering',true)).catch(()=>check('hologram: the avatar page switches to transparent holo rendering',false));
+ await pg.evaluate(()=>window.__ekabMentorPresence?.float?.());
+ const before=await boxOf();
+ const cx=before.x+before.width/2,cy=before.y+before.height/2;
+ await pg.mouse.move(cx,cy);await pg.mouse.down();
+ const dir=cx<640?1:-1;
+ for(let i=1;i<=10;i++)await pg.mouse.move(cx+dir*40*i,cy-10*i);
+ await pg.mouse.up();
+ const after=await boxOf();
+ check('hologram: dragging the figure itself moves it across the screen',Math.abs(after.x-before.x)>150&&after.x>=0&&after.y+after.height<=800.5,JSON.stringify({bx:before.x,ax:after.x}));
+ await pg.screenshot({path:process.env.HOLO_SHOT||'holo.png'});
+ await pg.reload({waitUntil:'load'});
+ await pg.waitForSelector('.ekab-mentor-presence.is-holo');
+ check('hologram: the choice is remembered after reload',true);
+ check('hologram: no page errors',errs.length===0,errs.join(' | ').slice(0,200));
+ await ctx.close();await b3.close();
+}
 const failed=results.filter(r=>!r.ok);
 console.log(`\n${results.length-failed.length}/${results.length} passed`);
 server.close();

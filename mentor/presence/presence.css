@@ -73,3 +73,14 @@
 @media (prefers-reduced-motion:reduce){.ekab-mentor-presence{transition:none}}
 @media print{.ekab-mentor-presence,.ekab-mentor-launcher{display:none!important}}
 .emp-prov{display:block;margin-top:4px;font-size:11px;line-height:1.35;opacity:.8}
+
+/* Hologram mode (viewer's choice): no frame or backdrop, cyan glow; the figure itself is the drag handle. */
+.ekab-mentor-presence.is-holo{background:transparent;border-color:transparent;box-shadow:none;overflow:visible}
+.is-holo .emp-stage{background:none;cursor:grab;touch-action:none}
+.is-holo[data-dragging="true"] .emp-stage{cursor:grabbing}
+.is-holo .emp-stage iframe{pointer-events:none;filter:drop-shadow(0 0 10px #2fd8ffcc) drop-shadow(0 0 28px #0fd1ff66)}
+.is-holo .emp-bar{background:#041326b0;border:1px solid #2f87b855;border-radius:10px;opacity:.55;transition:opacity .2s}
+.is-holo .emp-bar:hover,.is-holo .emp-bar:focus-within{opacity:1}
+.is-holo .emp-resize{display:block}
+.is-holo .emp-ask{background:#041326e6;border:1px solid #2f87b8;border-radius:10px}
+@media (prefers-reduced-motion:reduce){.is-holo .emp-stage iframe{filter:drop-shadow(0 0 8px #2fd8ffcc)}}
