@@ -31,6 +31,12 @@ for key, asset in registry.get("assets", {}).items():
         if hashlib.sha256(raw).hexdigest() != asset.get("sha256"):
             errors.append(f"{key}: SHA-256 mismatch")
         continue
+    if path.suffix.lower() in (".jpg", ".jpeg"):
+        if len(raw) < 4 or raw[:3] != bytes((255, 216, 255)) or raw[-2:] != bytes((255, 217)):
+            errors.append(f"{key}: invalid JPEG signature or end marker")
+        if hashlib.sha256(raw).hexdigest() != asset.get("sha256"):
+            errors.append(f"{key}: SHA-256 mismatch")
+        continue
     # Git stores these text SVGs with LF; normalize Windows CRLF before checking the blob hash.
     canonical = raw.replace(bytes((13, 10)), bytes((10,)))
     if hashlib.sha256(canonical).hexdigest() != asset.get("sha256"):
