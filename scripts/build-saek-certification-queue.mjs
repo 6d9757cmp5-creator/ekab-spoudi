@@ -7,6 +7,15 @@
 import fs from 'node:fs';
 const registry = JSON.parse(fs.readFileSync('saek-image-audit-2026.json', 'utf8'));
 const assets = registry.assets ?? {};
+const hasDocumentedHumanReview = a =>
+  a.clinicalReview === 'approved' &&
+  typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
+  typeof a.independentReviewDate === 'string' && /^\\d{4}-\\d{2}-\\d{2}/.test(a.independentReviewDate) &&
+  typeof a.independentReviewEvidence?.documentUrl === 'string' &&
+  /^https:\\/\\//.test(a.independentReviewEvidence.documentUrl) &&
+  typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
+  !!a.independentReviewEvidence.reviewerQualification.trim() &&
+  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\\bAI\\b)/i.test(a.independentReviewer);
 const byAsset = new Map();
 for (const course of registry.courses ?? []) {
   for (let i = 0; i < (course.chapters ?? []).length; i++) {
@@ -31,8 +40,7 @@ const records = Object.entries(assets).sort(([a], [b]) => a.localeCompare(b)).ma
   const sourcePageReviewed = typeof a.sourcePageReviewed === 'string' &&
     /^\d{4}-\d{2}-\d{2}/.test(a.sourcePageReviewed);
   if (!sourcePageReviewed) reasons.push('source-page-review-not-dated');
-  const clinicalReviewRecorded = a.clinicalReview === 'approved' &&
-    typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim();
+  const clinicalReviewRecorded = hasDocumentedHumanReview(a);
   if (!clinicalReviewRecorded) reasons.push('independent-clinical-review-not-recorded');
   return {
     assetId: id,

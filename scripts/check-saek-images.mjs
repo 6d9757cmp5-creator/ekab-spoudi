@@ -10,6 +10,15 @@ const registry=JSON.parse(await readFile('saek-image-audit-2026.json','utf8'));
 const errors=[],warnings=[],remote=[];
 const addError=(detail)=>errors.push(detail);
 const assets=registry.assets||{},courses=registry.courses||[];
+const hasDocumentedHumanReview = a =>
+  a.clinicalReview === 'approved' &&
+  typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
+  typeof a.independentReviewDate === 'string' && /^\\d{4}-\\d{2}-\\d{2}/.test(a.independentReviewDate) &&
+  typeof a.independentReviewEvidence?.documentUrl === 'string' &&
+  /^https:\\/\\//.test(a.independentReviewEvidence.documentUrl) &&
+  typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
+  !!a.independentReviewEvidence.reviewerQualification.trim() &&
+  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\\bAI\\b)/i.test(a.independentReviewer);
 // Provenance and source specificity are separate from local file integrity.
 // These counters are audit findings, NOT clinical approvals or live-source checks.
 const sourceQuality={genericEmsBackgroundAssetIds:[],commonsLocalMirrorAssetIds:[],sourcePageReviewRecordedAssetIds:[],visualReviewRecordedAssetIds:[],visualReviewHashBoundAssetIds:[],visualReviewUnboundAssetIds:[],visualReviewStaleHashAssetIds:[]};
@@ -61,8 +70,8 @@ for(const [key,a] of Object.entries(assets)){
  if(hasRecordedVisualReview&&a.visualReview.sha256===a.sha256)sourceQuality.visualReviewHashBoundAssetIds.push(key);
  // A record of artwork or a background citation cannot grant independent approval.
  if(!['pending','approved'].includes(a.clinicalReview))addError('Μη έγκυρη κατάσταση κλινικού ελέγχου '+key);
- if(a.clinicalReview==='approved'&&(!a.independentReviewer||!a.independentReviewDate))
-  addError('Ανεπαρκώς τεκμηριωμένη ανεξάρτητη έγκριση '+key);
+ if(a.clinicalReview==='approved'&&!hasDocumentedHumanReview(a))
+  addError('Approval requires a documented independent human clinical reviewer and evidence: '+key);
  if(!a.filename||!a.page||!a.author||!a.license||!a.title||!a.caption)addError('Λείπουν στοιχεία πηγής '+key);
  const originalHost=(a.page||'').match(/^https:\/\/([^\/?#]+)(?:[\/?#]|$)/)?.[1];
  const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','pmnch.who.int','iris.who.int','hlh.who.int','www.resus.org.uk','www.erc.edu','www.ems.gov','www.unece.org','unece.org','www.moh.gov.gr','www.osha.gov','highways.dot.gov','www.edps.europa.eu','www.ncbi.nlm.nih.gov','www.nhs.uk','www.nice.org.uk','www.rch.org.au','guidelines.fhft.nhs.uk','rightdecisions.scot.nhs.uk','www.rightdecisions.scot.nhs.uk','www.nhlbi.nih.gov','ginasthma.org','www.ahrq.gov','road-safety.transport.ec.europa.eu','digital-strategy.ec.europa.eu','civilprotection.gov.gr','www.usfa.fema.gov','www.ekab.gr','www.escardio.org','www2.dypa.gov.gr','www.minedu.gov.gr','eur-lex.europa.eu','www.inacsl.org','content.nremt.org','www.fda.gov','openstax.org','www.heart.org','cpr.heart.org','www.gov.uk','amea.gov.gr','yot.ddt.gov.gr']).has(originalHost);

@@ -10,6 +10,15 @@ const sw = await read('sw.js');
 const loader = await read('saek-visual-ui.js');
 const imageUI = await read('saek-reviewed-image-ui.js');
 const errors = [], warnings = [];
+const hasDocumentedHumanReview = a =>
+  a.clinicalReview === 'approved' &&
+  typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
+  typeof a.independentReviewDate === 'string' && /^\\d{4}-\\d{2}-\\d{2}/.test(a.independentReviewDate) &&
+  typeof a.independentReviewEvidence?.documentUrl === 'string' &&
+  /^https:\\/\\//.test(a.independentReviewEvidence.documentUrl) &&
+  typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
+  !!a.independentReviewEvidence.reviewerQualification.trim() &&
+  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\\bAI\\b)/i.test(a.independentReviewer);
 const expected = { 'Α': 71, 'Β': 73, 'Γ': 51, 'Δ': 52 };
 const bySemester = Object.fromEntries(Object.keys(expected).map(s => [s, { chapters: 0, selected: 0 }]));
 const assets = registry.assets || {};
@@ -102,8 +111,8 @@ for (const [key, asset] of Object.entries(assets)) {
     errors.push('Offline precache missing local image for ' + key + ': ' + asset.localPath);
   if (!/^[a-f0-9]{64}$/.test(asset.sha256 || ''))
     errors.push('Missing SHA-256 for ' + key);
-  if (asset.clinicalReview === 'approved' && !asset.independentReviewer)
-    errors.push('Approval claimed without reviewer identity for ' + key);
+  if (asset.clinicalReview === 'approved' && !hasDocumentedHumanReview(asset))
+    errors.push('Approval claimed without qualified human review evidence for ' + key);
 }
 if (chapters !== 247) errors.push('Expected 247 chapters, found ' + chapters);
 if (selected !== 247) errors.push('Expected selected imagery for 247 chapters, found ' + selected);
@@ -113,7 +122,7 @@ const report = {
   scope: 'static source wiring only',
   chapters, selected, imagePlacements, bySemester,
   assets: Object.keys(assets).length, local, external, missingLocal,
-  independentlyScientificallyApproved: Object.values(assets).filter(a => a.clinicalReview === 'approved' && a.independentReviewer).length,
+  independentlyScientificallyApproved: Object.values(assets).filter(hasDocumentedHumanReview).length,
   fullyCoveredVerified: 0,
   publicationVerified: false,
   browserZoomOfflineE2EVerified: false,
