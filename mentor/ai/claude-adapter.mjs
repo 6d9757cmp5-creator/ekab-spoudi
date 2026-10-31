@@ -42,7 +42,8 @@ export function buildClaudeRequest({messages,model,maxTokens}){
  const {system,messages:turns}=toAnthropicMessages(messages);
  const chars=system.length+turns.reduce((n,m)=>n+m.content.length,0);
  if(!turns.length||chars>HARD_MAX_INPUT_CHARS)throw Error("input-out-of-bounds");
- return {model:pickModel(model),max_tokens:clampMaxTokens(maxTokens),temperature:0.2,stream:true,system,messages:turns};
+ // Claude Haiku 5.5 uses adaptive thinking by default and does not accept temperature with thinking enabled.
+ return {model:pickModel(model),max_tokens:clampMaxTokens(maxTokens),stream:true,system,messages:turns};
 }
 
 /** Removes any occurrence of the secret from text that might be logged or returned. */
