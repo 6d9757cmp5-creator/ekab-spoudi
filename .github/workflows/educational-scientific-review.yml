@@ -1,56 +1,16 @@
 name: Educational and scientific review
+# Runs on every change so newly created modules are never omitted by path filters.
+# The reviewer itself selects educational/content-capable files from the commit diff.
 on:
   push:
     branches: [main]
-    paths:
-      - 'official_questions.json'
-      - 'old_type_written.json'
-      - 'eoppep-sos.json'
-      - 'saek-course-*.html'
-      - 'saek-exams.js'
-      - 'saek-image-audit-2026.json'
-      - 'saek-lesson-fit-review.json'
-      - 'farmaka*.js'
-      - 'seminar-*.js'
-      - 'protocols-*.mjs'
-      - 'mentor-scenario-paths.mjs'
-      - 'mentor-patient-interview.mjs'
-      - 'mentor-protocol-suite.mjs'
-      - 'educational-animation-sources.js'
-      - 'mentor/knowledge/**'
-      - 'mentor/scenario-atlas/**'
-      - 'mentor/clinical-desk/**'
-      - 'docs/SAEK*'
-      - 'docs/EOPPEP*'
-      - 'docs/saek*'
-      - 'docs/eoppep*'
-      - 'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'
-      - 'scripts/educational-scientific-review.mjs'
-      - 'scripts/test-educational-scientific-review.mjs'
-      - '.github/workflows/educational-scientific-review.yml'
   pull_request:
-    paths:
-      - 'official_questions.json'
-      - 'old_type_written.json'
-      - 'eoppep-sos.json'
-      - 'saek-course-*.html'
-      - 'saek-exams.js'
-      - 'farmaka*.js'
-      - 'seminar-*.js'
-      - 'protocols-*.mjs'
-      - 'mentor/knowledge/**'
-      - 'mentor/scenario-atlas/**'
-      - 'mentor/clinical-desk/**'
-      - 'docs/SAEK*'
-      - 'docs/EOPPEP*'
-      - 'scripts/educational-scientific-review.mjs'
-      - '.github/workflows/educational-scientific-review.yml'
   workflow_dispatch:
     inputs:
       paths:
-        description: 'Comma-separated educational files to examine'
-        required: true
-        default: 'official_questions.json'
+        description: 'Optional comma-separated paths for targeted evaluation (new sections allowed)'
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
