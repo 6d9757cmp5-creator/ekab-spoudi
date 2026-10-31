@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {matchMedicalTerm,answerStudyQuestion,loadMentorTermLibrary} from "../mentor/core/quick-answer.mjs";
+import {matchMedicalTerm,isSimpleTermQuestion,answerStudyQuestion,loadMentorTermLibrary,OFFLINE_CORE_TERMS} from "../mentor/core/quick-answer.mjs";
 const items=[
  {term:"Καρδιοπνευμονική αναζωογόνηση",symbols:["ΚΑΡΠΑ","CPR"],definition:"Θωρακικές συμπιέσεις και όπου ενδείκνυται αερισμοί.",source:"https://example.org/erc"},
  {term:"Πρωτογενής εκτίμηση ABCDE",symbols:["ABCDE"],definition:"Δομημένη αρχική εκτίμηση.",source:"https://example.org/guideline"}
@@ -22,8 +22,34 @@ test("supports existing study planner",()=>{
 });
 test("loads the local dictionary",async()=>{
  const terms=await loadMentorTermLibrary({fetcher:async path=>{
-  assert.equal(path,"./medical-terms.json");
+  assert.ok(path.endsWith("/medical-terms.json"),"dictionary resolves relative to Mentor module root");
   return {ok:true,json:async()=>({items})};
  }});
  assert.equal(terms.length,2);
+});
+
+test("bare Greek acronym never requires paid AI",()=>{
+ for(const q of ["ΚΑΡΠΑ","καρπα","Τι είναι η ΚΑΡΠΑ;","Τι σημαίνει ΚΑΡΠΑ;","CPR"]){
+  const response=answerStudyQuestion(q,{items});
+  assert.equal(response.type,"term",q);
+  assert.match(response.text,/Θωρακικές συμπιέσεις/);
+ }
+ const aed=answerStudyQuestion("AED",{items:OFFLINE_CORE_TERMS});
+ assert.equal(aed.type,"term");
+ assert.match(aed.text,/Συσκευή/);
+ assert.match(answerStudyQuestion("ABCDE",{items:OFFLINE_CORE_TERMS}).text,/αεραγωγού/);
+});
+
+test("does not misinterpret advanced medical questions as simple glossary requests",()=>{
+ const q="Πώς κάνουμε ΚΑΡΠΑ σε παιδί με πραγματικό περιστατικό;";
+ assert.equal(isSimpleTermQuestion(q,items[0]),false);
+ assert.equal(answerStudyQuestion(q,{items}).type,"unavailable");
+ assert.equal(answerStudyQuestion("Τι είναι η ΚΑΡΠΑ και πότε δίνουμε αδρεναλίνη;",{items}).type,"unavailable");
+});
+
+test("offline core definitions work if the glossary request is unavailable",async()=>{
+ assert.ok(OFFLINE_CORE_TERMS.length>=5);
+ const terms=await loadMentorTermLibrary({fetcher:async()=>{throw Error("offline")}});
+ assert.deepEqual(terms,OFFLINE_CORE_TERMS);
+ assert.equal(answerStudyQuestion("ΚΑΡΠΑ",{items:terms}).type,"term");
 });
