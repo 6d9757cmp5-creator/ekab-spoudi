@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validTopic,validSource,safeFocus,contextFromQuery,makeJourneyUrl,returnPage,topicForSource,sourceFromPath,journeyFromPage} from './journey.mjs';
+import {validTopic,validSource,safeFocus,contextFromQuery,makeJourneyUrl,returnPage,topicForSource,sourceFromPath,journeyFromPage,safeChapter} from './journey.mjs';
 
 test('valid topic IDs are taken from existing educational taxonomy',()=>{
  assert.equal(validTopic('saek'),'saek');
@@ -44,4 +44,17 @@ test('source-to-mentor route handles root and nested course pages without person
  assert.equal(sourceFromPath('/ekab-spoudi/ui-tools/anatomy-3d/index.html'),'ui-tools/anatomy-3d/index.html');
  assert.deepEqual(journeyFromPage('/ekab-spoudi/saek-course-11.html','Αεραγωγός'),{topic:'saek',from:'saek-course-11.html',focus:'Αεραγωγός'});
  assert.equal(journeyFromPage('/ekab-spoudi/written_exam.html','Ερωτήσεις και απαντήσεις'),null);
+});
+
+test('active SAEK chapter anchor survives Lab, Debrief and return navigation',()=>{
+ const origin=journeyFromPage('/ekab-spoudi/saek-course-01.html','Αεραγωγός','lesson-11');
+ assert.equal(origin.chapter,'lesson-11');
+ const href=makeJourneyUrl('mentor-protocol-suite.html',origin,'debrief');
+ const result=contextFromQuery(new URL(href,'https://example.test').search);
+ assert.equal(result.chapter,'lesson-11');
+ assert.equal(returnPage(result),'saek-course-01.html#lesson-11');
+ assert.equal(safeChapter('../evil'),'');
+ assert.equal(safeChapter('lesson-200'),'');
+ const malformed=contextFromQuery('?topic=saek&from=saek-course-01.html&chapter=javascript:alert(1)');
+ assert.equal(returnPage(malformed),'saek-course-01.html');
 });
