@@ -3081,21 +3081,20 @@
   },
   {
    "id": "EOP-B-182",
-   "question": "Περιγράψτε τις ανατομικές διαφορές ανάμεσα σε έναν ενήλικα και σε ένα παιδί όταν είναι σε ύπτια «ουδέτερη» θέση .",
-   "verdict": "source_unreachable",
+   "question": "Ανατομικές διαφορές ενήλικα–παιδιού σε ύπτια ουδέτερη θέση.",
+   "verdict": "consistent_with_gaps",
    "risk": "υψηλός",
-   "certainty": "χαμηλή ως προς την παραπομπή",
+   "certainty": "μέτρια",
    "checkedAt": "2026-10-31",
-   "findings": "Η παραπομπή WHO (Basic Emergency Care) είναι PDF/σελίδα χωρίς αναγνώσιμο κείμενο. Δεν έγινε σύγκριση της αποθηκευμένης απάντησης με πηγή· δεν κρίνεται σωστή ή λάθος και δεν θεωρείται εγκεκριμένη.",
-   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Airway Management: το μεγάλο ινίο προκαλεί κάμψη της κεφαλής και απόφραξη από τη βάση της γλώσσας· ο λάρυγγας είναι πιο ροστρικά/πρόσθια τοποθετημένος· για ουδέτερη θέση χρειάζεται διπλωμένη πετσέτα ή ρολό στους ώμους. Συμφωνεί με την απάντηση. Δεν αναφέρεται στην απάντηση ότι ο παιδιατρικός αεραγωγός είναι στενότερος στην υπογλωττιδική περιοχή (ενήλικας: γλωττίδα)· «μικρότερη γνάθος» δεν επιβεβαιώθηκε.",
+   "suggestedChange": "Προαιρετικά: προσθήκη στενότερης περιοχής υπογλωττιδικά και διπλωμένης πετσέτας/ρολού στους ώμους.",
    "sources": [
     {
-     "title": "www.who.int",
-     "url": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+     "title": "StatPearls — Airway Management",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470403/"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Υψηλού κινδύνου θέμα χωρίς επαληθευμένη πηγή."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-183",
@@ -3400,20 +3399,19 @@
   },
   {
    "id": "EOP-B-201",
-   "question": "Αντενδείξεις έλξης μηρού.",
-   "verdict": "source_unreachable",
-   "risk": "υψηλός (τραύμα)",
-   "certainty": "χαμηλή",
+   "question": "Αντενδείξεις νάρθηκα έλξης μηρού.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Το PDF πρωτοκόλλων (EMS Consultant Group) άνοιξε μερικώς· η ενότητα Sager Traction Splint δεν ήταν στο κομμάτι που διαβάστηκε (8.837 χαρ. στο τέλος δεν διαβάστηκαν). Οι αντενδείξεις της απάντησης δεν επαληθεύτηκαν.",
+   "findings": "(Εναλλακτική πηγή.) MSD Femoral Traction Splint: ένδειξη κάταγμα διάφυσης μηριαίου· αντενδείξεις κάταγμα πυέλου, ομόπλευρο κάταγμα αστραγάλου/άκρου ποδός/κνήμης και ομόπλευρη κάκωση γόνατος. Συμφωνεί με την απάντηση (πύελος, γόνατο, κνήμη, ποδοκνημική). Το ισχίο δεν αναφέρεται ρητά στο MSD· η απάντηση σωστά παραπέμπει στις οδηγίες (IFU) της κάθε συσκευής.",
    "sources": [
     {
-     "title": "EMS protocols PDF (μερική ανάγνωση)",
-     "url": "https://emsconsultantgroup.com/wp-content/uploads/2016/12/COMBINED_PROTOCOLS1_FINAL-copy.pdf"
+     "title": "MSD — How to Apply a Femoral Traction Splint",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/how-to-splint-or-immobilize-a-lower-limb/how-to-apply-a-femoral-traction-splint"
     }
    ],
-   "clinicalReview": true,
-   "clinicalNote": "Αντενδείξεις νάρθηκα έλξης: IFU συσκευής/πρωτόκολλο ΕΚΑΒ."
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-202",
@@ -3532,15 +3530,15 @@
   {
    "id": "EOP-B-209",
    "question": "Σκοποί τραχειοβρογχικής αναρρόφησης.",
-   "verdict": "source_unreachable",
-   "risk": "μέτριος",
-   "certainty": "χαμηλή",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
    "checkedAt": "2026-10-31",
-   "findings": "Η σελίδα AARC περιέχει μόνο τίτλους/συνδέσμους προς PDF (Artificial Airway Suctioning 2022)· το κείμενο των σκοπών δεν ήταν προσβάσιμο.",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Airway Suctioning: σκοπός η διατήρηση βατότητας και η απομάκρυνση εκκρίσεων/ορατής εισρόφησης που δεν αποβάλλονται· ενδείκνυται σε τεχνητούς αεραγωγούς, μειωμένη συνείδηση, νευρομυϊκή νόσο, υπερέκκριση. Επιπλοκές: υποξαιμία, αρρυθμία/βραδυκαρδία, τραυματισμός βλεννογόνου, βρογχόσπασμος, λοίμωξη. Συμφωνεί με την απάντηση (κίνδυνοι υποξαιμίας, τραυματισμού, αρρυθμίας).",
    "sources": [
     {
-     "title": "AARC Clinical Practice Guidelines",
-     "url": "https://www.aarc.org/resource/clinical-practice-guidelines/"
+     "title": "StatPearls — Surgical Airway Suctioning",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK448077/"
     }
    ],
    "clinicalReview": false
