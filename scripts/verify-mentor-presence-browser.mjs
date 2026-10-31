@@ -220,6 +220,11 @@ try{
   await page.waitForFunction(()=>document.querySelector('.ekab-mentor-presence iframe').contentDocument.getElementById('mentor-avatar').dataset.viseme==='rest',null,{polling:150,timeout:8000});
   check(tag('mouth returns to rest when speech ends'),true);
   await page.locator('#emp-autospeak').uncheck();
+  await page.evaluate(()=>{window.__spoken=[];});
+  await page.locator('.emp-listen').last().click();
+  let listened=true;
+  try{await page.waitForFunction(()=>window.__spoken.length>=1,null,{polling:150,timeout:8000});}catch{listened=false;}
+  check(tag('the Listen button on a reply speaks it even with automatic reading off'),listened&&/Athina/.test(await page.evaluate(()=>window.__spoken[0]?.voice||'')));
 
   await page.goto(base+'/written_exam.html',{waitUntil:'load'});
   await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
@@ -274,7 +279,29 @@ try{
   check(tag('no uncaught page errors'),errors.length===0,errors.join(' | ').slice(0,200));
   await context.close();
  }
-}finally{await browser?.close();server.close();}
+}finally{await browser?.close();}
+// Regression: a laptop with ONLY a male Greek voice (this owner's PC) must still speak, not stay silent.
+{
+ const b2=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL||undefined});
+ const ctx=await b2.newContext({viewport:{width:1280,height:800},serviceWorkers:'block'});
+ await ctx.addInitScript(()=>{
+  window.__spoken=[];
+  window.SpeechSynthesisUtterance=class{constructor(t){this.text=t;}};
+  const voices=[{name:'Microsoft Stefanos - Greek (Greece)',lang:'el-GR',localService:true,voiceURI:'stefanos'}];
+  Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>voices,addEventListener(){},cancel(){},
+   speak(u){window.__spoken.push({voice:u.voice&&u.voice.name,lang:u.lang});setTimeout(()=>{u.onstart?.();},30);setTimeout(()=>u.onend?.(),300);}}});
+ });
+ const pg=await ctx.newPage();
+ await pg.goto(base+'/index.html',{waitUntil:'load'});
+ await pg.locator('#mentor-home-listen').click();
+ let notice=true;try{await pg.waitForFunction(()=>/συσκευής/.test(document.getElementById('mentor-home-speech-status').textContent),null,{polling:10,timeout:8000});}catch{notice=false;}
+ await pg.waitForTimeout(500);
+ const said=await pg.evaluate(()=>window.__spoken);
+ check('male-only laptop: home MENTOR speaks with the device Greek voice',said.length===1&&/Stefanos/.test(said[0].voice||''),JSON.stringify(said));
+ check('male-only laptop: the screen says a device voice is used',notice,await pg.locator('#mentor-home-speech-status').textContent());
+ await ctx.close();await b2.close();
+}
 const failed=results.filter(r=>!r.ok);
 console.log(`\n${results.length-failed.length}/${results.length} passed`);
+server.close();
 process.exit(failed.length?1:0);

@@ -292,6 +292,11 @@ function boot(){
   logEl.replaceChildren(...turns.map(t=>{
    const row=el("div",{class:"emp-turn emp-"+t.role+(t.mode==="refusal"?" is-refusal":"")});
    row.append(el("span",{class:"emp-who",text:t.role==="user"?"Εσύ":"MENTOR"+(t.mode==="ai"?" · AI":"")}),el("p",{text:t.text}));
+   if(t.role==="mentor"&&t.reason!=="exam"){
+    const listen=el("button",{type:"button",class:"emp-link emp-listen","aria-label":"Άκουσε αυτή την απάντηση",text:"🔊 Άκουσε"});
+    listen.addEventListener("click",()=>{const r=voice.speak(t.text);if(!r.ok)announce("Δεν βρέθηκε ελληνική φωνή σε αυτή τη συσκευή.");});
+    row.append(listen);
+   }
    for(const s of t.sources||[]){
     row.append(s.url?el("a",{class:"emp-link",href:s.url,target:"_blank",rel:"noopener noreferrer",text:"Πηγή: "+s.term}):el("span",{class:"emp-src",text:"Βιβλιοθήκη: "+s.term}));
    }

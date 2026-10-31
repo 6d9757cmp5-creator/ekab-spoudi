@@ -79,12 +79,13 @@ function play(text){
  const ticket=++generation;
  const voiceStyle=deliverySpeechSettings(delivery,.95);
  paintSpeaking(false);
- const ok=speakGreek(text,{
-   env:window,voiceName:select.value==="__device__"?"":select.value,requireFemale:select.value!=="__device__",
+ let deviceVoice=select.value==="__device__";
+ const run=female=>speakGreek(text,{
+   env:window,voiceName:female&&select.value!=="__device__"?select.value:"",requireFemale:female,requireGreek:!female,
    rate:voiceStyle.rate,pitch:voiceStyle.pitch,volume:voiceStyle.volume,
    onStart:()=>{
      if(ticket!==generation)return;
-     paintSpeaking(true);status.textContent="Ο MENTOR μιλά με γυναικεία ελληνική φωνή.";
+     paintSpeaking(true);status.textContent=deviceVoice?"Ο MENTOR μιλά με την ελληνική φωνή της συσκευής (δεν βρέθηκε γυναικεία).":"Ο MENTOR μιλά με γυναικεία ελληνική φωνή.";
      send({type:"mentor:presence",detail:publicDeliveryCue(delivery)});
      send({type:"mentor:speech",speaking:true,viseme:"open"});
    },
@@ -95,7 +96,10 @@ function play(text){
    onFinish:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η ανάγνωση ολοκληρώθηκε.";},
    onError:()=>{if(ticket!==generation)return;paintSpeaking(false);status.textContent="Η φωνή δεν αναπαράχθηκε. Μπορείς να χρησιμοποιήσεις την απάντηση ως κείμενο.";}
  });
- if(!ok)status.textContent="Δεν αναγνωρίστηκε γυναικεία ελληνική φωνή. Επίλεξε ρητά την εναλλακτική φωνή συσκευής ή διάβασε την απάντηση.";
+ // Prefer a known female Greek voice; otherwise fall back to any Greek device voice instead of staying silent.
+ let ok=deviceVoice?run(false):run(true);
+ if(!ok&&!deviceVoice){deviceVoice=true;ok=run(false);}
+ if(!ok)status.textContent="Δεν βρέθηκε ελληνική φωνή στη συσκευή. Διάβασε την απάντηση ως κείμενο ή εγκατέστησε ελληνική φωνή από τις ρυθμίσεις του λειτουργικού.";
  return ok;
 }
 async function ask(text){

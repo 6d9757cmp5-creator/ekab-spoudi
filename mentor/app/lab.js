@@ -406,9 +406,10 @@ function wireMentorPresence(){
     const current=++speakingGeneration;
     const speechStyle=deliverySpeechSettings(mentorDelivery,Number(speed.value));
     paintSpeaking(false);
-    const started=speakGreek(text,{env:window,voiceName:voiceSelect.value==='__device__'?'':voiceSelect.value,
+    let deviceVoice=voiceSelect.value==='__device__';
+    const attempt=female=>speakGreek(text,{env:window,voiceName:female&&!deviceVoice?voiceSelect.value:'',
       rate:speechStyle.rate,pitch:speechStyle.pitch,volume:speechStyle.volume,
-      requireFemale:voiceSelect.value!=='__device__',
+      requireFemale:female,requireGreek:!female,
       onVoiceResolved:result=>{
         if(maleVoiceStatus)maleVoiceStatus.textContent=result.label;
       },
@@ -438,6 +439,8 @@ function wireMentorPresence(){
       },
       onBoundary:event=>{if(current===speakingGeneration)performer.boundary(event);}
     });
+    let started=deviceVoice?attempt(false):attempt(true);
+    if(!started&&!deviceVoice){deviceVoice=true;started=attempt(false);}
     if(!started){
       paintSpeaking(false);
       updateVoices();
