@@ -13,6 +13,7 @@ import {
 import {
  CONTEXT_KEY,examMode,sanitizeAnnouncement,readPageContext,describeContext,composeQuestion,EXAM_REFUSAL
 } from "../context/bridge.mjs";
+import {journeyFromPage,makeJourneyUrl} from "../context/journey.mjs";
 import {
  appendTurn,loadTurns,clearTurns,historyForAi,loadLearning,saveLearning,LEVEL_LABELS
 } from "./memory.mjs";
@@ -71,6 +72,7 @@ function boot(){
  const status=el("p",{class:"emp-status",role:"status",text:"Φόρτωση 3D εκπαιδευτή…"});
  const ctxLine=el("p",{class:"emp-ctx"});
  const ctxToggle=el("button",{type:"button",class:"emp-link","aria-pressed":"true",text:"Απενεργοποίηση"});
+ const journeyLink=el("a",{class:"emp-link",hidden:true,text:"↗ Συνέχισε αυτό το θέμα στο MENTOR | LAB"});
  const askInput=el("input",{type:"text",class:"emp-input",maxlength:"300",autocomplete:"off","aria-label":"Ερώτηση προς τον MENTOR",placeholder:"Π.χ. Τι είναι η ΚΑΡΠΑ;"});
  const micBtn=el("button",{type:"button",class:"emp-mic","aria-pressed":"false","aria-label":"Μίλησε στον MENTOR (ενεργοποιεί το μικρόφωνο)",text:"🎙"});
  const askSend=el("button",{type:"submit",class:"emp-send",text:"Ρώτα"});
@@ -93,7 +95,7 @@ function boot(){
   el("p",{class:"emp-note",text:"Οι απαντήσεις προέρχονται από την τοπική βιβλιοθήκη. Η συνομιλία μένει μόνο σε αυτή την καρτέλα."})
  ]);
  const askPanel=el("div",{class:"emp-ask",id:"ekab-mentor-ask",hidden:true},
-  [el("div",{class:"emp-ctxrow"},[ctxLine,ctxToggle]),logEl,navBox,askForm,micState,
+  [el("div",{class:"emp-ctxrow"},[ctxLine,ctxToggle]),journeyLink,logEl,navBox,askForm,micState,
    el("div",{class:"emp-actions"},[selBtn,stopVoiceBtn,clearBtn]),settings]);
  const stage=el("div",{class:"emp-stage"},[status,askPanel]);
  const resize=el("button",{type:"button",class:"emp-resize","aria-label":"Αλλαγή μεγέθους MENTOR (βέλη ή + και −)"});
@@ -275,6 +277,10 @@ function boot(){
   ctxToggle.textContent=contextOn?"Απενεργοποίηση":"Ενεργοποίηση";
   ctxToggle.setAttribute("aria-pressed",String(contextOn));
   ctxToggle.setAttribute("aria-label",contextOn?"Απενεργοποίηση χρήσης πλαισίου σελίδας":"Ενεργοποίηση χρήσης πλαισίου σελίδας");
+  const ctx=contextState();
+  const route=ctx.enabled&&!ctx.exam?journeyFromPage(location.pathname,ctx.announced?.label||ctx.page.heading||ctx.page.title):null;
+  journeyLink.hidden=!route;
+  if(route)journeyLink.href=new URL(makeJourneyUrl("mentor-protocol-suite.html",route,"lab"),SITE_ROOT).href;
  }
  function setAsk(open){
   askOpen=open;
