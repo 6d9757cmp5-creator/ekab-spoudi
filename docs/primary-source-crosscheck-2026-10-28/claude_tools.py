@@ -19,6 +19,6 @@ for e in data['entries']:
     L+=[f"## {e['id']} — {V[e['verdict']]} · κίνδυνος: {e['risk']} · βεβαιότητα: {e['certainty']}",f"*{e['question']}*",'',e['findings'],'']
     L+=['Πηγές ('+e['checkedAt']+'): '+'; '.join(f"[{s['title']}]({s['url']})" for s in e['sources'])]
     if e.get('suggestedChange'): L+=['','**Προτεινόμενη αλλαγή (για έγκριση):** '+e['suggestedChange']]
-    L+=['**Απαιτείται κλινική αξιολόγηση:** '+('ΝΑΙ — '+e['clinicalNote'] if e.get('clinicalReview') else 'όχι για αυτό το εύρημα'),'']
+    L+=['**Απαιτείται κλινική αξιολόγηση:** '+('ΝΑΙ — '+e.get('clinicalNote','κλινική επιβεβαίωση') if e.get('clinicalReview') else 'όχι για αυτό το εύρημα'),'']
 open(M,'w',encoding='utf-8').write('\n'.join(L))
 print(n,dict(c))
