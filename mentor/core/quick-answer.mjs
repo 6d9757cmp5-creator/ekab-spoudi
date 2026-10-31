@@ -64,7 +64,7 @@ export function answerStudyQuestion(question,{items=[],overview=null}={}){
  if(!q)return {text:"Γράψε μία ερώτηση για να ξεκινήσουμε.",source:null,type:"empty"};
  const intent=interpretQuestion(q),n=normalize(q);
  const progress=/προοδο|πωσ τα παω|αποτελεσμα|τι να διαβασ|τι να μελετησ/.test(n);
- const pool=Array.isArray(items)&&items.length?items:OFFLINE_CORE_TERMS;
+ const pool=Array.isArray(items)&&items.length?[...items,...OFFLINE_CORE_TERMS]:OFFLINE_CORE_TERMS;
  const matched=matchMedicalTerm(q,pool);
  if(matched&&!progress&&isSimpleTermQuestion(q,matched)){
   return {text:matched.term+": "+matched.definition+" Σύντομος εκπαιδευτικός ορισμός, όχι οδηγία αντιμετώπισης πραγματικού περιστατικού.",
