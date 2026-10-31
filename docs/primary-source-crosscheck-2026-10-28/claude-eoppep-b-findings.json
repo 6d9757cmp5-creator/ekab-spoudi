@@ -19,6 +19,22 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-003",
+   "question": "Εξοπλισμός τηλεματικής υγείας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "HHS Telehealth: αναφέρονται ως παραδείγματα απομακρυσμένης παρακολούθησης πιεσόμετρα, μετρητές γλυκόζης, οξύμετρα· συνιστώνται ιδιωτικοί χώροι, πλατφόρμες συμβατές με HIPAA και ενημερωμένη συναίνεση. Η σελίδα ΔΕΝ ορίζει προδιαγραφές εξοπλισμού ούτε αναφέρει ΗΚΓ/monitor· η απάντηση σωστά τονίζει ασφάλεια και διαλειτουργικότητα.",
+   "sources": [
+    {
+     "title": "HHS — Telehealth getting started",
+     "url": "https://telehealth.hhs.gov/providers/getting-started"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-004",
    "question": "Σωστή σειρά ενεργειών σε VF/pVT κατά την ALS.",
    "verdict": "consistent_with_gaps",
@@ -2014,6 +2030,22 @@
    "suggestedChange": "Προσθήκη των παιδιατρικών ποσοστών (κεφαλή 18%, κάτω άκρα 14%)."
   },
   {
+   "id": "EOP-B-190",
+   "question": "Αναπνοή Cheyne–Stokes.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: «cyclical episodes of apnea and hyperventilation», πρότυπο crescendo–decrescendo μεταξύ κεντρικών αποπνοιών· συσχέτιση με καρδιακή ανεπάρκεια και εγκεφαλικό. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "StatPearls — Cheyne-Stokes respiration",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK448165/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-191",
    "question": "Χειρισμοί σε ασθματική κρίση.",
    "verdict": "consistent_with_gaps",
@@ -2096,6 +2128,23 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-201",
+   "question": "Αντενδείξεις έλξης μηρού.",
+   "verdict": "source_unreachable",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το PDF πρωτοκόλλων (EMS Consultant Group) άνοιξε μερικώς· η ενότητα Sager Traction Splint δεν ήταν στο κομμάτι που διαβάστηκε (8.837 χαρ. στο τέλος δεν διαβάστηκαν). Οι αντενδείξεις της απάντησης δεν επαληθεύτηκαν.",
+   "sources": [
+    {
+     "title": "EMS protocols PDF (μερική ανάγνωση)",
+     "url": "https://emsconsultantgroup.com/wp-content/uploads/2016/12/COMBINED_PROTOCOLS1_FINAL-copy.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Αντενδείξεις νάρθηκα έλξης: IFU συσκευής/πρωτόκολλο ΕΚΑΒ."
+  },
+  {
    "id": "EOP-B-202",
    "question": "Εσωτερική απώλεια αίματος ανά κάταγμα.",
    "verdict": "consistent",
@@ -2146,6 +2195,22 @@
    "clinicalNote": "Δόσεις υγρών σε παιδιά: τελική έγκριση από κλινικό."
   },
   {
+   "id": "EOP-B-205",
+   "question": "Πολύ βαθιά προώθηση τραχειοσωλήνα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (αεραγωγός)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: «right mainstem intubation is common when an endotracheal tube is inserted blindly beyond the carina»· αερισμός ενός πνεύμονα → υποξαιμία λόγω shunt (ενδεικτικά έως 50% θεωρητικά). Η σελίδα δεν εξετάζει ρητά τον απλό τραχειοσωλήνα· ο σύνδεσμος με υποξία είναι συμπέρασμα. Η απάντηση (δεξιός κύριος βρόγχος, υποαερισμός/ατελεκτασία αριστερά, έλεγχος θέσης/ETCO2) είναι συμβατή.",
+   "sources": [
+    {
+     "title": "StatPearls (NBK555933)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK555933/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-206",
    "question": "Κλινική εικόνα υπεργλυκαιμίας.",
    "verdict": "consistent",
@@ -2177,6 +2242,22 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Προνοσοκομειακά υγρά σε DKA: ρόλος διασώστη."
+  },
+  {
+   "id": "EOP-B-209",
+   "question": "Σκοποί τραχειοβρογχικής αναρρόφησης.",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα AARC περιέχει μόνο τίτλους/συνδέσμους προς PDF (Artificial Airway Suctioning 2022)· το κείμενο των σκοπών δεν ήταν προσβάσιμο.",
+   "sources": [
+    {
+     "title": "AARC Clinical Practice Guidelines",
+     "url": "https://www.aarc.org/resource/clinical-practice-guidelines/"
+    }
+   ],
+   "clinicalReview": false
   }
  ]
 }
