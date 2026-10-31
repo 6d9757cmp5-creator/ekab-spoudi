@@ -8,7 +8,16 @@ test('all core educational and clinical areas trigger review',()=>{
   'seminar-tracks.js','protocols-data.mjs','mentor/scenario-atlas/catalog.mjs',
   'mentor/knowledge/retrieve.mjs','docs/SAEK-REVIEW-SUMMARY-2026-10-25.md'
  ]) assert.equal(isEducationPath(path),true,path);
- for(const path of ['app.js','sync-local.js','../secret','/tmp/file','README.md','mentor/avatar/hologram.mjs'])
+ // Unexpected names and directories are still automatically discovered.
+ for(const path of [
+  'future-2035/unknown-subject/lesson.html','new-area/curriculum.yml',
+  'a-completely-new-topic/data.json','future-module/clinical-content.tsx',
+  'media/generated-figure.svg','assets/new-teaching-image.png',
+  'learning-2030/guidance.md','brand-new/lecture.pdf'
+ ]) assert.equal(isEducationPath(path),true,path);
+ for(const path of ['../secret','/tmp/file','README.md','AGENTS.md',
+  '.github/workflows/review.yml','scripts/build-content.mjs','new-topic/example.test.mjs',
+  'node_modules/third-party/lesson.js','docs/archive/old-medical-notes.md'])
   assert.equal(isEducationPath(path),false,path);
 });
 test('deduplicated and bounded input selection',()=>{
@@ -40,4 +49,16 @@ test('dry-run prepares report without external calls or changing lessons',async(
  }finally{
   if(old===undefined)delete process.env.ANTHROPIC_API_KEY;else process.env.ANTHROPIC_API_KEY=old;
  }
+});
+
+test('an arbitrary future module remains discoverable after creation',()=>{
+ const first=choosePaths(['unplanned-2029/brand-new-title.html']);
+ const subsequent=choosePaths(['unplanned-2029/brand-new-title.html']);
+ assert.deepEqual(first,subsequent);
+ assert.equal(first.length,1);
+});
+test('new multimedia content is flagged instead of treated as verified text',()=>{
+ assert.deepEqual(choosePaths(['future/assets/new-medical-image.webp','future/assets/new-lesson.mp4']),[
+  'future/assets/new-lesson.mp4','future/assets/new-medical-image.webp'
+ ]);
 });
