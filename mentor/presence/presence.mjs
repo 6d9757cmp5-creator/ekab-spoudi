@@ -423,6 +423,21 @@ function boot(){
   announce(contextOn?"Το πλαίσιο σελίδας ενεργοποιήθηκε":"Το πλαίσιο σελίδας απενεργοποιήθηκε");
  });
  window.addEventListener("mentor:context",event=>{announced=sanitizeAnnouncement(event.detail);refreshContext();});
+ // A SAEK chapter can become the active topic without reading the chapter body,
+ // answers, progress or learner notes. The heading is visible and bounded.
+ document.addEventListener("toggle",event=>{
+  const details=event.target;
+  if(!details?.matches?.("details.reader-fold")||!/(^|\/)saek-course-\d+\.html$/i.test(location.pathname))return;
+  if(details.open){
+   const heading=details.querySelector(".chapter-heading");
+   const label=heading?.firstChild?.textContent?.trim()||heading?.textContent?.trim();
+   announced=sanitizeAnnouncement({kind:"chapter",label,id:details.id});
+  }else if(announced?.id===details.id){
+   announced=null;
+  }
+  refreshContext();
+ },true);
+
  refreshContext();
 
  // ---------- drag ----------
