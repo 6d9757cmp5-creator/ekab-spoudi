@@ -19,6 +19,7 @@ on:
       - 'scripts/build-saek-certification-queue.mjs'
       - 'scripts/validate-saek-svg.py'
       - 'scripts/check-saek-browser-text.cjs'
+      - 'scripts/verify-saek-gallery-browser.mjs'
       - 'scripts/check-site-media-links.mjs'
       - 'scripts/render-saek-contact-sheets.py'
       - '.github/workflows/saek-image-evidence.yml'
@@ -40,6 +41,7 @@ on:
       - 'scripts/build-saek-certification-queue.mjs'
       - 'scripts/validate-saek-svg.py'
       - 'scripts/check-saek-browser-text.cjs'
+      - 'scripts/verify-saek-gallery-browser.mjs'
       - 'scripts/check-site-media-links.mjs'
       - 'scripts/render-saek-contact-sheets.py'
       - '.github/workflows/saek-image-evidence.yml'
@@ -104,6 +106,7 @@ jobs:
         run: |
           python3 scripts/render-saek-contact-sheets.py
           node scripts/check-saek-browser-text.cjs
+          node scripts/verify-saek-gallery-browser.mjs
       - name: Save screenshots/contact sheets for actual human review
         if: always()
         uses: actions/upload-artifact@v4
@@ -112,5 +115,6 @@ jobs:
           path: |
             image-contact-sheets/
             image-browser-text-report.json
+            audit-results/saek-gallery-browser.json
           if-no-files-found: warn
           retention-days: 30

@@ -61,7 +61,7 @@
   for(const entry of slice)fragment.append(card(entry));
   grid.append(fragment);loaded+=slice.length;
   more.hidden=loaded>=matched.length;
-  status.textContent=matched.length?loaded+' από '+matched.length+' εικόνες · '+entries.length+' συνολικά':'Δεν βρέθηκαν εικόνες με αυτά τα φίλτρα.';
+  status.textContent=matched.length?loaded+' από '+matched.length+' τοποθετήσεις · '+new Set(entries.map(e=>e.assetId)).size+' διαφορετικές εικόνες στα μαθήματα':'Δεν βρέθηκαν εικόνες με αυτά τα φίλτρα.';
  }
  function updateCourses(){
   const before=course.value;course.replaceChildren(new Option('Όλα τα μαθήματα','all'));
