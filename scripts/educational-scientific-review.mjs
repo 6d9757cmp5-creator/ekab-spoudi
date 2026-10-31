@@ -22,7 +22,7 @@ export function isEducationPath(p){
    /\.(?:test|spec)\.(?:[cm]?js|tsx?|py)$/i.test(p))return false;
  // Future lesson pages, medical figures, courses, question banks, modules,
  // guides and multimedia are all discovered regardless of their names.
- return /\.(?:html?|md|mdx|txt|csv|json|ya?ml|[cm]?js|jsx|tsx?|py|svg|pdf|png|jpe?g|webp|gif|mp4|webm)$/i.test(p);
+ return /\.(?:html?|md|mdx|txt|rst|csv|json|jsonl|ipynb|xml|ya?ml|[cm]?js|jsx|tsx?|py|vue|svelte|astro|svg|pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm)$/i.test(p);
 }
 export function choosePaths(changed,manual=''){
  return [...new Set((manual?manual.split(','):changed).map(x=>x.trim()).filter(isEducationPath))].sort();
@@ -74,7 +74,7 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
   if(!existsSync(resolve(root,path))){report.pending.push({path,reason:'missing_or_deleted_file'});continue;}
   // Binary education assets require visual/media review; do not decode as text
   // or claim a scientific assessment based on corrupted bytes.
-  if(/\.(?:pdf|png|jpe?g|webp|gif|mp4|webm)$/i.test(path)){
+  if(/\.(?:pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm)$/i.test(path)){
    report.files.push({path,status:'pending',mode:'binary_media'});
    report.pending.push({path,reason:'visual_or_media_review_required'});
    continue;
