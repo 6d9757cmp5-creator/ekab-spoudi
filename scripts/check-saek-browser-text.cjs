@@ -53,6 +53,11 @@ const fs = require('node:fs');
     };
     fs.writeFileSync('image-browser-text-report.json', JSON.stringify(report, null, 2) + '\n');
     console.log(JSON.stringify({ checked: report.checked, assetsWithOverflow: report.assetsWithOverflow }));
+    if (report.assetsWithOverflow) {
+      for (const record of report.records.filter(r => r.overflow.length)) {
+        console.error('SVG TEXT OUTSIDE VIEWBOX:', JSON.stringify(record));
+      }
+    }
     if (!records.length || report.assetsWithOverflow) process.exitCode = 1;
   } finally {
     await browser.close();
