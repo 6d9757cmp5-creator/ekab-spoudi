@@ -1101,6 +1101,22 @@
    "clinicalReview": false
   },
   {
+   "id": "EOP-B-071",
+   "question": "Πιο επικίνδυνος τύπος παιδικών καταγμάτων.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "OrthoInfo: τα κατάγματα αυξητικής πλάκας (Salter–Harris I–V) μπορεί να προκαλέσουν οστική γέφυρα, καθυστέρηση ανάπτυξης ή καμπυλότητα· κίνδυνος εξαρτάται από ηλικία, οστό, μοτίβο, μετατόπιση· περιοχή γόνατος = περισσότερα προβλήματα. Η σελίδα ΔΕΝ ιεραρχεί τους τύπους ως προς επικινδυνότητα· ο ισχυρισμός «τύποι III–V» δεν στηρίζεται από αυτή. Η απάντηση σωστά παραδέχεται ότι η επιλογή δεν είναι μοναδική.",
+   "sources": [
+    {
+     "title": "OrthoInfo — Growth plate fractures",
+     "url": "https://www.orthoinfo.org/diseases--conditions/growth-plate-fractures/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-072",
    "question": "Προσοχή στην ακινητοποίηση κατάγματος/πολυκαταγματία.",
    "verdict": "consistent",
@@ -1235,6 +1251,23 @@
     }
    ],
    "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-090",
+   "question": "Οδηγός επαρκούς χορήγησης υγρών σε εγκαυματία.",
+   "verdict": "consistent",
+   "risk": "υψηλός (υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "ACI NSW: διούρηση ενηλίκων 0,5 mL/kg/ώρα, παιδιών 1 mL/kg/ώρα· «Infusion rate is guided by urine output, not by formula». Συμφωνεί πλήρως. Συμπλήρωμα: ο τροποποιημένος Parkland δίνει 3 mL Hartmann × kg × %TBSA (το ήμισυ τις πρώτες 8 ώρες) και αναζωογόνηση χρειάζεται για έγκαυμα >20% TBSA (ενήλικες), >10% (παιδιά).",
+   "sources": [
+    {
+     "title": "ACI NSW — Burn fluid resuscitation",
+     "url": "https://aci.health.nsw.gov.au/networks/burn-injury/resources/patient-management/fluid-resuscitation"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υγρά εγκαύματος: ρόλος διασώστη/πρωτόκολλο."
   },
   {
    "id": "EOP-B-091",
@@ -1390,6 +1423,39 @@
    "clinicalNote": "Επιβεβαίωση ροής από το έγγραφο BTS/πρωτόκολλο ΕΚΑΒ."
   },
   {
+   "id": "EOP-B-104",
+   "question": "Σύστημα ασκός–αποθήκευσης–παροχή οξυγόνου (BVM).",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "MSD: αυτοδιατεινόμενος ασκός, μονόδρομη βαλβίδα, μάσκα, δοχείο αποθήκευσης, πηγή 100% O2 στα 15 L/min· δόση 6–8 mL/kg (≈500 mL) σε 1 s· ΚΑΡΠΑ: όχι >8–10 αναπνοές/min. Συμφωνεί με την απάντηση· λείπουν οι ποσοτικές παράμετροι (15 L/min, 6–8 mL/kg, 8–10/min).",
+   "sources": [
+    {
+     "title": "MSD — BVM ventilation",
+     "url": "https://www.msdmanuals.com/professional/critical-care-medicine/how-to-do-basic-airway-procedures/how-to-do-bag-valve-mask-bvm-ventilation"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη 15 L/min, 6–8 mL/kg και ορίου αναπνοών."
+  },
+  {
+   "id": "EOP-B-105",
+   "question": "Οξυγόνωση, αερισμός και διαφορά.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "OpenStax: αερισμός = κίνηση αέρα προς και από τους πνεύμονες· ανταλλαγή αερίων = διάχυση O2 στο αίμα και CO2 προς τα έξω. Συμφωνεί. Η δήλωση ότι κάποιος μπορεί να έχει καλό SpO2 με ανεπαρκή αερισμό (υπερκαπνία) είναι κλινικά ορθή αλλά δεν περιλαμβάνεται στη σελίδα.",
+   "sources": [
+    {
+     "title": "OpenStax — Gas exchange",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
    "id": "EOP-B-108",
    "question": "Χειρισμοί στο οξύ πνευμονικό οίδημα.",
    "verdict": "source_unreachable",
@@ -1460,6 +1526,22 @@
    ],
    "clinicalReview": true,
    "clinicalNote": "Υποθερμική ανακοπή και θέρμανση: κλινική επιβεβαίωση."
+  },
+  {
+   "id": "EOP-B-116",
+   "question": "Βασικές αρχές (IFRC 2025).",
+   "verdict": "source_unreachable",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το PDF IFRC άνοιξε μόνο μερικώς (μόνο ευρετήριο θεμάτων)· τα σχετικά κεφάλαια δεν διαβάστηκαν. Δεν έγινε σύγκριση.",
+   "sources": [
+    {
+     "title": "IFRC International First Aid Guidelines 2025 (μερική πρόσβαση)",
+     "url": "https://www.ifrc.org/sites/default/files/2026-03/IFRC%20International%20First%20Aid%2C%20Resuscitation%20and%20Education%20Guidelines%202025.pdf"
+    }
+   ],
+   "clinicalReview": false
   },
   {
    "id": "EOP-B-117",
@@ -1622,6 +1704,22 @@
     {
      "title": "Glasgow Coma Scale — what is GCS",
      "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-145",
+   "question": "Δράση συμπαθητικού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "OpenStax 15.2: καρδιά — αύξηση συχνότητας· αγγεία — σύσπαση και αύξηση πίεσης (με διαστολή στους σκελετικούς μυς). Η σελίδα ΔΕΝ περιγράφει βρόγχους ή έντερο για το συμπαθητικό· η βρογχοδιαστολή και η μείωση κινητικότητας της απάντησης είναι σωστά αλλά αναπόδεικτα εδώ. Τα υποδοχεία β1/α1/β2 δεν αναφέρονται.",
+   "sources": [
+    {
+     "title": "OpenStax — Autonomic reflexes",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-2-autonomic-reflexes-and-homeostasis"
     }
    ],
    "clinicalReview": false
@@ -1899,6 +1997,23 @@
    "clinicalNote": "Φάρμακα ασθματικής κρίσης κατά πρωτόκολλο."
   },
   {
+   "id": "EOP-B-189",
+   "question": "Κανόνας των εννέα σε ενήλικα και παιδί.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "ACI NSW ενήλικες: κεφαλή 9%, κάθε άνω άκρο 9%, πρόσθιος και οπίσθιος κορμός 18%, κάθε κάτω άκρο 18%, περίνεο/χέρι 1% — συμφωνεί. Παιδιά <9 ετών (ACI): κεφαλή 18%, κάθε κάτω άκρο 14%, με μείωση 1% στην κεφαλή και αύξηση 0,5% σε κάθε κάτω άκρο ανά έτος ζωής· κανόνας παλάμης ≈1%. Η απάντηση δεν δίνει αριθμούς για παιδιά και προτείνει Lund–Browder, που δεν αναφέρεται στη σελίδα.",
+   "sources": [
+    {
+     "title": "ACI NSW — Paediatric burn assessment",
+     "url": "https://aci.health.nsw.gov.au/ecat/paediatric/assessment/burn"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη των παιδιατρικών ποσοστών (κεφαλή 18%, κάτω άκρα 14%)."
+  },
+  {
    "id": "EOP-B-191",
    "question": "Χειρισμοί σε ασθματική κρίση.",
    "verdict": "consistent_with_gaps",
@@ -1976,6 +2091,22 @@
     {
      "title": "CDC Stacks 157259 (πίνακας ζωτικών)",
      "url": "https://stacks.cdc.gov/view/cdc/157259/cdc_157259_DS1.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-202",
+   "question": "Εσωτερική απώλεια αίματος ανά κάταγμα.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Clinician.com (Damage Control Resuscitation): πλευρό 125 mL, κερκίδα/ωλένη 250–500, βραχιόνιο 500–750, κνήμη/περόνη 500–1000, μηριαίο 1000–2000, πύελος 1000+. Συμφωνούν ακριβώς με τις τιμές της απάντησης, που σωστά δηλώνει ότι είναι τάξεις μεγέθους.",
+   "sources": [
+    {
+     "title": "Clinician.com — Damage control resuscitation",
+     "url": "https://www.clinician.com/articles/135668-damage-control-resuscitation"
     }
    ],
    "clinicalReview": false
