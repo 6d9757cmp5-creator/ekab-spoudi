@@ -14,7 +14,7 @@ const manifest=JSON.parse(await read('saek-lesson-fit-review.json'));
 const allAssets=registry.assets||{}, courses=registry.courses||[];
 const errors=[],pending=[],checked=[],selected=new Set(),totalCourses=20,totalChapters=247;
 if(courses.length!==totalCourses)errors.push('Expected 20 courses');
-if(Object.keys(manifest.chapterChecks||{}).length!==38)errors.push('Expected 38 documented editorial repairs');
+if(Object.keys(manifest.chapterChecks||{}).length!==49)errors.push('Expected 49 documented editorial repairs');
 const escapeHTML=text=>String(text||'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
 for(const course of courses){
  const courseNo=String(course.course).padStart(2,'0');

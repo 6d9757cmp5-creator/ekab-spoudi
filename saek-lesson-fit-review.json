@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-10-31",
-  "scope": "Machine-checkable history of 38 editorial topic-alignment corrections; never proof of scientific or educational certification",
+  "scope": "Machine-checkable history of 49 AI-assisted editorial topic-alignment corrections; NOT independent clinical or educational approval",
   "chapterChecks": {
     "03-05": {
       "expectedImageIds": [
@@ -365,6 +365,116 @@
       ],
       "reason": "Σχήμα χώρου αναζωογόνησης αντί μεμονωμένης καπνογραφικής κυματομορφής.",
       "reviewScope": "AI-assisted comparison of actual chapter heading with image title/caption; not clinical or independent human approval",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "07-05": {
+      "expectedImageIds": [
+        "breathing_effort_observation",
+        "real_07_05_n_18_4"
+      ],
+      "reason": "Παρατήρηση αναπνευστικής προσπάθειας και εισπνοής/εκπνοής αντί εκπαιδευτικής εικόνας χειρισμού αεραγωγού προς τηλεφωνικό καλούντα.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "09-10": {
+      "expectedImageIds": [
+        "ambulance_restraint_zones",
+        "patient_transfer_route"
+      ],
+      "reason": "Η ασφάλεια μεταφοράς με ασθενοφόρο αφορά συγκράτηση φορείου και μεθοδική διαδρομή, όχι βάδιση με ζώνη.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "10-07": {
+      "expectedImageIds": [
+        "real_10_01_m_12_22",
+        "real_10_01_m_12_24"
+      ],
+      "reason": "Στεφανιαία ανατομία και παράδειγμα STEMI αντί μεταγενέστερης καρδιοχειρουργικής παράκαμψης. Το STEMI είναι υποσύνολο του ACS.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "12-04": {
+      "expectedImageIds": [
+        "medication_identification_safety",
+        "real_12_04_n_15_24"
+      ],
+      "reason": "Έλεγχος φαρμάκου και παρακολούθηση αντί γενικών εκδηλώσεων διαβήτη.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "13-09": {
+      "expectedImageIds": [
+        "real_13_09_m_23_5",
+        "emergency_dispatch_console"
+      ],
+      "reason": "Ανίχνευση επιδείνωσης και αναβάθμιση επιχειρησιακής ανάθεσης, όχι συγκεκριμένη αρρυθμία.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "14-07": {
+      "expectedImageIds": [
+        "real_14_07_m_11_22",
+        "real_18_09_m_11_21"
+      ],
+      "reason": "Παθοφυσιολογία και υπεζωκοτική ανατομία αντί πιθανώς παρερμηνεύσιμης εικόνας επεμβατικής παροχέτευσης.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "16-02": {
+      "expectedImageIds": [
+        "reassessment_timeline",
+        "real_16_02_m_12_6"
+      ],
+      "reason": "Καταγραφή μεταβολών μέσω χρονικής επανεκτίμησης και ενδεικτικού μετρήσιμου ΗΚΓ.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "16-05": {
+      "expectedImageIds": [
+        "primary_survey_abcde",
+        "vital_signs_assessment"
+      ],
+      "reason": "Προσέγγιση αδιάγνωστου ασταθούς ασθενούς με ABCDE και ζωτικά, όχι υπόθεση ενός καρδιακού ρυθμού.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "16-08": {
+      "expectedImageIds": [
+        "breathing_effort_observation",
+        "real_10_03_n_18_5"
+      ],
+      "reason": "Αναπνευστική προσπάθεια και ανταλλαγή αερίων αντί σπιρομέτρου κινήτρου που αφορά άσκηση.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "17-01": {
+      "expectedImageIds": [
+        "prehospital_care_pathway",
+        "bls_aed_training_scene"
+      ],
+      "reason": "Οργάνωση πρακτικής άσκησης και εκπαίδευση σε βασικές δεξιότητες αντί εξειδικευμένης δειγματοληψίας.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
+      "educationalReviewerVerified": false,
+      "clinicalReviewerVerified": false
+    },
+    "18-09": {
+      "expectedImageIds": [
+        "real_18_09_m_11_21",
+        "real_14_07_m_11_22"
+      ],
+      "reason": "Ασφαλής αναγνώριση θωρακικής βλάβης και υπεζωκοτική ανατομία αντί ατεκμηρίωτου σε τρέχουσα υπηρεσία επιθέματος τριών πλευρών.",
+      "reviewScope": "AI-assisted chapter topic comparison with image title/caption, not independent clinical/pedagogical certification",
       "educationalReviewerVerified": false,
       "clinicalReviewerVerified": false
     }
