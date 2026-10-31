@@ -35,7 +35,7 @@ export function parseSseLine(line){
 /**
  * @returns {Promise<{ok:true,text:string}|{ok:false,reason:"disabled"|"limit"|"unavailable",message:string}>}
  */
-export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken=()=>{},timeoutMs=20000,signal}){
+export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken=()=>{},timeoutMs=20000,signal,headers={}}){
  if(!endpoint||typeof fetchImpl!=="function")return {ok:false,reason:"disabled",message:""};
  if(!payload?.passages?.length)return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
  const ctl=new AbortController();
@@ -43,7 +43,7 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
  signal?.addEventListener?.("abort",()=>ctl.abort(),{once:true});
  try{
   const res=await fetchImpl(endpoint,{
-   method:"POST",headers:{"content-type":"application/json",accept:"text/event-stream, application/json"},
+   method:"POST",headers:{...headers,"content-type":"application/json",accept:"text/event-stream, application/json"},
    body:JSON.stringify(payload),credentials:"omit",referrerPolicy:"no-referrer",signal:ctl.signal
   });
   if(res.status===429)return {ok:false,reason:"limit",message:LIMIT_MESSAGE};

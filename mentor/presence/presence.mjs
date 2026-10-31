@@ -21,7 +21,7 @@ import {createVoice} from "./voice.mjs";
 import {CUES,cueForTurn} from "./expression.mjs";
 import {retrieve,riskGuard,RISK_MESSAGE} from "../knowledge/retrieve.mjs";
 import {buildPayload,askAi} from "../ai/client.mjs";
-import {MENTOR_AI} from "../ai/config.mjs";
+import {MENTOR_AI,mentorAiHeaders} from "../ai/config.mjs";
 
 // Addresses are resolved from this module, so the widget also works on pages in sub-folders (e.g. ui-tools/anatomy-3d/).
 const SITE_ROOT=new URL("../../",import.meta.url);
@@ -353,7 +353,7 @@ function boot(){
    }
    const passages=retrieve(text,items);
    const ai=await askAi({
-    endpoint:MENTOR_AI.endpoint,timeoutMs:MENTOR_AI.timeoutMs,
+    endpoint:MENTOR_AI.endpoint,timeoutMs:MENTOR_AI.timeoutMs,headers:mentorAiHeaders(),
     payload:buildPayload({question:text,passages,level:learning.level,history:historyForAi(turns.slice(0,-1))})
    });
    if(ai.ok){

@@ -183,3 +183,9 @@
 - **Widget σε σελίδες υποφακέλων:** οι διευθύνσεις iframe/συνδέσμων υπολογίζονται από το module (`SITE_ROOT`), ώστε να δουλεύει και στο `ui-tools/anatomy-3d/`.
 - **Συνεργασία με το `main`:** ο ιδιοκτήτης (ίδιο GitHub account) προχωρά παράλληλα στο `main` (v27.1.126: LAB/DEBRIEF πρωτοκόλλων, `mentor-study-bridge.mjs`, animation engine). Η ύπαρξη του bridge **και** του πλωτού widget σε ορισμένες σελίδες συνυπάρχει χωρίς σύγκρουση (βλ. merge `53e0b9b6`)· η ενοποίηση των δύο εμπειριών (π.χ. ανακοίνωση βήματος από το protocol suite) **δεν** έγινε.
 - **Σημείωση εργασίας:** επειδή το φάκελο `C:\Users\Ppdks\ekab-spoudi` χρησιμοποιεί άλλη συνεδρία στο `main`, η εργασία μου έγινε σε ξεχωριστό worktree `C:\Users\Ppdks\ekab-mentor-work` (αυτό το αρχείο βρίσκεται εκεί).
+
+
+## P. Claude AI integration (private test mode, OFF)
+- Added: `mentor/ai/claude-adapter.mjs`, `mentor/ai/guard.mjs`, Claude path in `workers/mentor-chat`, workflows `claude-connection-test.yml` and `deploy-mentor-worker.yml` (both manual), `scripts/claude-connection-test.mjs`, 14 new tests (`mentor/ai/claude.test.mjs`). The key exists only as a Worker secret; page code, config and logs never contain it (scanned by a test).
+- Real result: unit/worker tests 121/121, browser 105/105. **No call to the Claude API was made** (no billable call without the owner's explicit `YES`); the Worker was **not deployed** and the Durable Object budget was tested with an in-memory fake, not on Cloudflare.
+- Still needs the owner: Anthropic spend limit, Cloudflare account + two repo secrets, running the two manual workflows, enabling the switches, Greek answer-quality review.

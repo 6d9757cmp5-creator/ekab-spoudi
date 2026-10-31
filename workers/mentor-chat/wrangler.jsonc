@@ -5,8 +5,18 @@
   "workers_dev": true,
   "ai": { "binding": "AI" },
   "observability": { "enabled": true },
+  "durable_objects": { "bindings": [ { "name": "BUDGET", "class_name": "MentorBudget" } ] },
+  "migrations": [ { "tag": "v1", "new_sqlite_classes": ["MentorBudget"] } ],
   "vars": {
     "MENTOR_FREE_PLAN_CONFIRMED": "false",
-    "DAILY_CAP": "300"
+    "DAILY_CAP": "300",
+    "MENTOR_PROVIDER": "workers-ai",
+    "MENTOR_CLAUDE_ENABLED": "false",
+    "MENTOR_SPEND_LIMIT_CONFIRMED": "false",
+    "MENTOR_PUBLIC": "false",
+    "CLAUDE_MAX_TOKENS": "300",
+    "CLAUDE_IP_HOURLY": "10",
+    "CLAUDE_DAILY_CAP": "50",
+    "CLAUDE_DAILY_TOKENS": "60000"
   }
 }
