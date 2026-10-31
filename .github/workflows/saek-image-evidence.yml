@@ -5,6 +5,7 @@ on:
     paths:
       - 'assets/education/**'
       - 'saek-image-audit-2026.json'
+      - 'saek-lesson-fit-review.json'
       - 'saek-visual-ui.js'
       - 'saek-reviewed-image-ui.js'
       - 'saek-images.js'
@@ -12,6 +13,7 @@ on:
       - 'saek-course-*.html'
       - 'sw.js'
       - 'scripts/check-saek-images.mjs'
+      - 'scripts/check-saek-lesson-image-fit.mjs'
       - 'scripts/verify-saek-image-integration.mjs'
       - 'scripts/verify-saek-review-hashes.py'
       - 'scripts/build-saek-certification-queue.mjs'
@@ -24,6 +26,7 @@ on:
     paths:
       - 'assets/education/**'
       - 'saek-image-audit-2026.json'
+      - 'saek-lesson-fit-review.json'
       - 'saek-visual-ui.js'
       - 'saek-reviewed-image-ui.js'
       - 'saek-images.js'
@@ -31,6 +34,7 @@ on:
       - 'saek-course-*.html'
       - 'sw.js'
       - 'scripts/check-saek-images.mjs'
+      - 'scripts/check-saek-lesson-image-fit.mjs'
       - 'scripts/verify-saek-image-integration.mjs'
       - 'scripts/verify-saek-review-hashes.py'
       - 'scripts/build-saek-certification-queue.mjs'
@@ -58,6 +62,7 @@ jobs:
         run: |
           node --check saek-images.js
           node scripts/check-saek-images.mjs
+          node scripts/check-saek-lesson-image-fit.mjs
           node scripts/verify-saek-image-integration.mjs
           node scripts/check-site-media-links.mjs
       - name: Audit asset structure, current bytes, and visual-review evidence
@@ -73,6 +78,7 @@ jobs:
           path: |
             saek-image-report.json
             saek-image-integration-report.json
+            saek-lesson-fit-report.json
             saek-sha-visual-evidence-report.json
             saek-image-certification-queue.json
             site-media-static-report.json
