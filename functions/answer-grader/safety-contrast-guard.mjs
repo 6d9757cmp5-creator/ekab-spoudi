@@ -51,7 +51,7 @@ function locallyNegated(answer,index,window){
 }
 
 export function guardHighRiskFullCredit(question,answer,raw){
- if(raw?.verdict!=='correct')return raw;
+ if(raw?.verdict!=='correct'||raw?.criticalError===true)return raw;
  const rules=checks[question?.id];
  if(!rules)return raw;
  const normalized=normalizedGreek(answer);
