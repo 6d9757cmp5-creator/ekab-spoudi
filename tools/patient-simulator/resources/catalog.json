@@ -21,14 +21,23 @@
       "url": "https://github.com/makehumancommunity/makehuman",
       "license": "CC0 core exported mesh; AGPL software; third-party plugins/assets vary",
       "path": "tools/patient-simulator/resources/makehuman/",
-      "status": "needs-export-and-license-check"
+      "status": "imported-CC0-core-OBJ-and-proxy; not rigged patient; see makehuman/imported-manifest.json",
+      "files": [
+        "makehuman/base.obj",
+        "makehuman/base.mhclo"
+      ]
     },
     {
       "source": "Quaternius Universal Base Characters",
       "url": "https://quaternius.com/packs/universalbasecharacters.html",
       "license": "CC0 free pack",
       "path": "tools/patient-simulator/resources/quaternius/",
-      "status": "needs-download-free-pack-and-validation"
+      "status": "imported-CC0-processed-research-GLBs; not enabled; see quaternius/imported-manifest.json",
+      "files": [
+        "quaternius/night-striker.glb",
+        "quaternius/universal-animation-library.glb"
+      ]
     }
-  ]
+  ],
+  "updatedAt": "2026-11-01"
 }
