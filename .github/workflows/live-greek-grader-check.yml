@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - scripts/live-greek-grader-check.mjs
+      - scripts/cloudflare-free-plan-preflight.mjs
       - .github/workflows/live-greek-grader-check.yml
   workflow_dispatch:
 
@@ -29,6 +30,8 @@ jobs:
           node --check scripts/live-greek-grader-check.mjs
           node --check workers/answer-grader/src/index.js
           node --test functions/answer-grader/test.mjs
+      - name: Read-only verification of Workers Free subscription
+        run: node scripts/cloudflare-free-plan-preflight.mjs
       - name: Run limited live model test only on confirmed Workers Free account
         run: node scripts/live-greek-grader-check.mjs
       - name: Upload exact real-model results or documented blocker
