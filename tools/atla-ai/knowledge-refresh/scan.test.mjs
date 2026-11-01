@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,main} from './scan.mjs';
 import {classifySource,screenPubMedArticle} from './source-policy.mjs';
+import {readFileSync} from 'node:fs';
 
 function response(json){
  return {ok:true,status:200,headers:new Headers({'etag':'"example-v1"','last-modified':'Sun, 01 Nov 2026 12:00:00 GMT'}),
@@ -102,4 +103,19 @@ test('article screening blocks retraction, preprint, case report, editorial and 
  assert.equal(screenPubMedArticle({...base,journal:''}).accepted,false);
  assert.equal(screenPubMedArticle({...base,publication_types:['Randomized Controlled Trial']}).accepted,false,'RCT needs separate evaluator in future');
  assert.equal(mergeCandidates([], [{...base,title:'RETRACTED: Review',topic_id:'trauma'}],'2026-11-02').items.length,0);
+});
+
+test('the five curated worldwide evidence hubs use only approved publisher origins',()=>{
+ const data=JSON.parse(readFileSync(new URL('./global-official-sources.json',import.meta.url),'utf8'));
+ assert.equal(data.sources.length,5);
+ assert.equal(new Set(data.sources.map(s=>s.id)).size,5);
+ const authorities=data.sources.map(s=>s.origin);
+ for(const source of data.sources){
+  const result=classifySource(source.source_url);
+  assert.equal(result.accepted,true,source.origin);
+  assert.equal(result.category,'official-health-guidelines');
+  assert.equal(result.clinical_use_approved,false);
+ }
+ assert.ok(authorities.includes('Cochrane'));
+ assert.ok(authorities.includes('World Health Organization'));
 });
