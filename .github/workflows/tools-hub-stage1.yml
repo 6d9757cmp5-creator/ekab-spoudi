@@ -6,6 +6,7 @@ on:
       - 'tools.html'
       - 'scripts/test-tools-hub-stage1.mjs'
       - 'scripts/verify-tools-hub-browser.mjs'
+      - 'scripts/tools-hub-source-evidence.mjs'
       - '.github/workflows/tools-hub-stage1.yml'
   workflow_dispatch:
 permissions:
@@ -20,6 +21,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --test scripts/test-tools-hub-stage1.mjs
+      - run: node scripts/tools-hub-source-evidence.mjs
       - run: node scripts/verify-saek-reader-safety.cjs
       - run: node scripts/verify-tool-boundaries.mjs
       - name: Browser smoke for iPhone and desktop
@@ -28,3 +30,11 @@ jobs:
           npx playwright install --with-deps chromium
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/ekab-stage1-http.log 2>&1 &
           node scripts/verify-tools-hub-browser.mjs
+      - name: Preserve source inventory for independent inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tools-hub-source-evidence
+          path: audit-results/tools-hub-source-evidence.json
+          if-no-files-found: warn
+          retention-days: 30

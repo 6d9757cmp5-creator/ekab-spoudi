@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {dirname,resolve} from 'node:path';
 import {ANTHROPIC_URL,ANTHROPIC_VERSION,CLAUDE_MODELS} from '../mentor/ai/claude-adapter.mjs';
+import {collectToolsHubEvidence} from './tools-hub-source-evidence.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT='audit-results/educational-scientific-review.json';
 const RULES='docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md';
@@ -84,6 +85,20 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
   const mode=patch?'changed_lines_context':'file_excerpt';
   const source=patch||await readFile(resolve(root,path),'utf8');
   const text=source.slice(0,MAX_CHARS);
+  // Include read-only, hash-bound, independently reproducible source evidence for
+  // changed navigation pages. Never use this as proof of clinical correctness.
+  let reviewMaterial=text;
+  if(path==='index.html'||path==='tools.html'){
+    try{
+      const evidence=collectToolsHubEvidence(root);
+      reviewMaterial+='\n\nREPOSITORY SOURCE EVIDENCE (verify scope, not clinical content):\n'+
+        JSON.stringify(evidence).slice(0,9000);
+    }catch(err){
+      report.pending.push({path,reason:'source_evidence_failed'});
+      // Even if Claude responds, this source check remains blocking.
+      report.source_evidence_error=String(err.message||err).slice(0,120);
+    }
+  }
   const entry={path,mode,sha256:createHash('sha256').update(source).digest('hex'),
    inspected_characters:text.length,total_characters:source.length,status:'pending'};
   if(text.length<source.length)report.pending.push({path,reason:'excerpt_truncated'});
@@ -91,7 +106,7 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
    report.pending.push({path,reason:dryRun?'dry_run':'review_key_missing'});
   }else{
    try{
-    const review=await askClaude(key,rules,path,mode,text,fetchImpl);
+    const review=await askClaude(key,rules,path,mode,reviewMaterial,fetchImpl);
     entry.status='screened';entry.checked_scope=review.checked_scope;
     entry.unverified=review.unverified;entry.not_checked=review.not_checked;entry.findings=review.findings;
     report.reviewed_count++;report.findings.push(...review.findings.map(x=>({...x,path})));

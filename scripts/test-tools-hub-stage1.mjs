@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
+import {collectToolsHubEvidence} from './tools-hub-source-evidence.mjs';
 const r=f=>readFileSync(f,'utf8');
 const home=r('index.html'),tools=r('tools.html');
 test('stage 1 keeps existing home study, MENTOR and progress entrypoints',()=>{
@@ -32,4 +33,11 @@ test('legacy services, study grades, and storage files were not edited in phase 
   for(const f of ['notes-store.js','progress.js','sync-local.js','sync-model.js','saek-exam-engine.js']){
     assert.ok(existsSync(f),'legacy service entrypoint missing '+f);
   }
+});
+test('evidence records exact local sources without claiming clinical certification',()=>{
+ const report=collectToolsHubEvidence();
+ assert.ok(report.linked_targets.length>=14,'every linked target is inventoried');
+ assert.equal(report.source_checks.every(c=>c.verified),true,'each source claim inspected');
+ assert.ok(report.unverified_domains.length>=4,'clinical and formal approval remain out of scope');
+ assert.ok(report.linked_targets.every(e=>e.sha256.length===64));
 });
