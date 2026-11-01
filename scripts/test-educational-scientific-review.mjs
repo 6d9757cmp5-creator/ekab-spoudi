@@ -128,3 +128,20 @@ test('large files are split into bounded chunks and every chunk is reviewed',asy
   assert.equal(report.files[0].chunks,chunks.length);
  }finally{delete process.env.ANTHROPIC_API_KEY;await rm(root,{recursive:true,force:true});}
 });
+
+test('rate limit is retried and a truncated answer is split in halves',async()=>{
+ const {askChunk}=await import('./educational-scientific-review.mjs');
+ const good=()=>({stop_reason:'end_turn',content:[{type:'text',text:JSON.stringify({checked_scope:'s',findings:[],unverified:[],not_checked:[]})}]});
+ let n=0;const waits=[];
+ const limited=async()=>{n++;return n<3?{ok:false,status:429,headers:new Headers({'retry-after':'2'}),json:async()=>({})}:{ok:true,json:async()=>good()};};
+ const r=await askChunk('k','r','p.md','m','text',limited,async ms=>waits.push(ms));
+ assert.equal(r.checked_scope,'s');assert.equal(n,3);assert.ok(waits.length===2&&waits.every(w=>w>=2000));
+ const lines=Array.from({length:400},(_,i)=>'line '+i+' '+'x'.repeat(20)).join('\n');
+ const seen=[];
+ const trunc=async(_u,o)=>{const t=JSON.parse(o.body).messages[0].content;seen.push(t.length);
+  return {ok:true,json:async()=>t.length>6000?{stop_reason:'max_tokens',content:[]}:good()};};
+ const s=await askChunk('k','r','p.md','m',lines,trunc,async()=>{});
+ assert.equal(s.findings.length,0);assert.ok(seen.length>=3);
+ const dead=async()=>({ok:false,status:429,headers:new Headers(),json:async()=>({})});
+ await assert.rejects(askChunk('k','r','p.md','m','t',dead,async()=>{}),/http_429/);
+});

@@ -10,7 +10,7 @@ import {ANTHROPIC_URL,ANTHROPIC_VERSION,CLAUDE_MODELS} from '../mentor/ai/claude
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT='audit-results/educational-scientific-review.json';
 const RULES='docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md';
-export const MAX_FILES=25,MAX_CHARS=10500,CONCURRENCY=8,MAX_CHUNKS=80;
+export const MAX_FILES=25,MAX_CHARS=10500,CONCURRENCY=4,MAX_CHUNKS=200,MIN_SPLIT=1200;
 // File-type based discovery: new courses, subjects, names and directories are covered
 // automatically. Never depend on a fixed list of today's feature names.
 export function isEducationPath(p){
@@ -61,12 +61,13 @@ async function askClaude(key,system,path,mode,text,fetchImpl){
   method:'POST',signal:AbortSignal.timeout(90000),
   headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':ANTHROPIC_VERSION},
   body:JSON.stringify({
-   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:8000,
-   system:system+'\nExternal webpages cannot be accessed during this request. Mark unsupported external claims ΜΗ ΕΠΑΛΗΘΕΥΜΕΝΟ. Return ONLY the required JSON.',
+   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:4000,
+   system:system+'\nExternal webpages cannot be accessed during this request. Mark unsupported external claims ΜΗ ΕΠΑΛΗΘΕΥΜΕΝΟ. Report at most 8 findings, most severe first, quotes under 200 characters. Return ONLY the required JSON.',
    messages:[{role:'user',content:'FILE: '+path+'\nMODE: '+mode+'\nMATERIAL:\n'+text}]
   })
  });
  if(!result.ok){
+  if(result.status===429||result.status===529){const e=Error('review_service_http_'+result.status);e.retryAfter=Number(result.headers?.get?.('retry-after'))||0;throw e;}
   let detail='';try{detail=String((await result.json())?.error?.message||'').replace(/\s+/g,' ').slice(0,60);}catch{}
   throw Error('review_service_http_'+result.status+(detail?': '+detail:''));
  }
@@ -77,6 +78,24 @@ async function askClaude(key,system,path,mode,text,fetchImpl){
  let parsed;try{parsed=JSON.parse(body);}catch{throw Error('invalid_review_json');}
  if(!validateReview(parsed))throw Error('invalid_review_schema');
  return parsed;
+}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+export async function askChunk(key,system,path,mode,text,fetchImpl,wait=sleep){
+ for(let attempt=0;;attempt++){
+  try{return await askClaude(key,system,path,mode,text,fetchImpl);}
+  catch(err){
+   const m=String(err.message);
+   if(/http_(429|529)/.test(m)&&attempt<8){await wait(Math.max(err.retryAfter*1000||0,Math.min(60000,10000*(attempt+1))));continue;}
+   if(m==='review_response_truncated'&&text.length>MIN_SPLIT){
+    const lines=text.split('\n'),mid=Math.max(1,Math.floor(lines.length/2));
+    const halves=lines.length>1?[lines.slice(0,mid).join('\n'),lines.slice(mid).join('\n')]:[text.slice(0,text.length>>1),text.slice(text.length>>1)];
+    const parts=[];for(const h of halves)parts.push(await askChunk(key,system,path,mode+' (split)',h,fetchImpl,wait));
+    return {checked_scope:parts.map(x=>x.checked_scope).join(' | '),findings:parts.flatMap(x=>x.findings),
+     unverified:parts.flatMap(x=>x.unverified),not_checked:parts.flatMap(x=>x.not_checked)};
+   }
+   throw err;
+  }
+ }
 }
 export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=globalThis.fetch}={}){
  const paths=choosePaths(changed(),manual),key=process.env.ANTHROPIC_API_KEY||'';
@@ -111,7 +130,7 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
    report.pending.push({path,reason:dryRun?'dry_run':'review_key_missing'});
   }else{
    try{
-    const parts=await Promise.all(used.map((text,i)=>slot(()=>askClaude(key,rules,path,mode+(used.length>1?' part '+(i+1)+'/'+used.length:''),text,fetchImpl))));
+    const parts=await Promise.all(used.map((text,i)=>slot(()=>askChunk(key,rules,path,mode+(used.length>1?' part '+(i+1)+'/'+used.length:''),text,fetchImpl,sleep))));
     entry.status='screened';entry.checked_scope=parts.map(r=>r.checked_scope).join(' | ').slice(0,600);
     entry.unverified=parts.flatMap(r=>r.unverified);entry.not_checked=parts.flatMap(r=>r.not_checked);entry.findings=parts.flatMap(r=>r.findings);
     report.reviewed_count++;report.findings.push(...entry.findings.map(x=>({...x,path})));

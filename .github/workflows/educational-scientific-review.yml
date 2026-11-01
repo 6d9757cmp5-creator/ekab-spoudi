@@ -15,7 +15,7 @@ permissions:
 jobs:
   independent-review:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 120
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
