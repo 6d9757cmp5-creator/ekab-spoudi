@@ -42,7 +42,7 @@ export function initAccountUI() {
     <section class="cloud-controls" data-cloud-controls hidden><h3>Συγχρονισμός συσκευών</h3>
       <p data-cloud-status role="status" aria-live="polite">Έλεγχος συγχρονισμού…</p>
       <div class="actions"><button class="btn compact" data-sync-enable type="button">Ενεργοποίηση σε αυτή τη συσκευή</button><button class="btn compact" data-sync-now type="button" hidden>Συγχρονισμός τώρα</button><button class="btn compact secondary" data-sync-pause type="button" hidden>Παύση</button></div>
-      <p class="small muted">Πρόοδος ΕΟΠΠΕΠ/ΣΑΕΚ, σημειώσεις, PDF και ρυθμίσεις. Ιδιωτικά στον λογαριασμό σου. Δωρεάν όριο: 50 MB ανά PDF.</p>
+      <p class="small muted">Πρόοδος ΕΟΠΠΕΠ/ΣΑΕΚ/σεμιναρίων, σημειώσεις, PDF και ρυθμίσεις. Ιδιωτικά στον λογαριασμό σου. Δωρεάν όριο: 50 MB ανά PDF.</p>
       <button class="btn compact ghost" data-sync-recover type="button">Ανάκτηση τοπικού αντιγράφου</button>
     </section>
     <details class="fold storage-panel"><summary>Αποθήκευση, αντίγραφα &amp; ενημερώσεις <span class="storage-summary-note">Στη συσκευή σου</span></summary><div class="body">
@@ -53,8 +53,7 @@ export function initAccountUI() {
 </div>
 <div class="app-version-row"><div><strong>Έκδοση <span id="currentAppVersion">v27.1.73</span></strong><p id="updateCheckStatus" role="status" aria-live="polite">Έλεγχος διαθέσιμης έκδοσης…</p></div><button class="btn compact secondary" id="checkAppUpdates" type="button">Έλεγχος ενημέρωσης</button></div>
 <details class="storage-advanced"><summary>Προχωρημένες επιλογές</summary><div class="advanced-content"><h3>Παλαιό αντίγραφο ΕΟΠΠΕΠ</h3><p class="small muted">Μόνο για παλαιότερα αρχεία προόδου v15–v19.</p><div class="file-select"><input id="restore" type="file" accept=".json,application/json" aria-label="Επιλογή παλαιού αντιγράφου ΕΟΠΠΕΠ"><label class="btn compact secondary" for="restore">Επιλογή παλαιού JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div><p class="small muted" id="restoreNotice" role="status" aria-live="polite"></p><div class="reset-progress"><h3>Επαναφορά προόδου ανά ενότητα</h3><p>Διάλεξε τι θέλεις να μηδενίσεις. Τα προσωπικά PDF, ο λογαριασμός και οι ρυθμίσεις σύνδεσης δεν διαγράφονται.</p>
-<div class="actions"><button class="btn compact danger-button" data-reset-scope="eoppep" type="button">Μηδενισμός ΕΟΠΠΕΠ</button><button class="btn compact danger-button" data-reset-scope="saek" type="button">Μηδενισμός ΣΑΕΚ</button><button class="btn compact danger-button" data-reset-scope="seminars" type="button">Μηδενισμός σεμιναρίων</button></div>
-<h3>Ολική επαναφορά προόδου</h3><p>Μηδενίζει ΕΟΠΠΕΠ, ΣΑΕΚ και σεμινάρια μαζί, χωρίς να διαγράφει PDF ή λογαριασμό. Δεν αναιρείται χωρίς αντίγραφο ασφαλείας.</p><button class="btn compact danger-button" data-reset-scope="all" type="button">Ολική επαναφορά προόδου</button><p class="small muted" data-reset-notice role="status" aria-live="polite"></p></div></div></details>
+<div class="actions"><button class="btn compact danger-button" data-reset-scope="eoppep" type="button">Μηδενισμός ΕΟΠΠΕΠ</button><button class="btn compact danger-button" data-reset-scope="saek" type="button">Μηδενισμός ΣΑΕΚ</button><button class="btn compact danger-button" data-reset-scope="seminar:bls" type="button">Μηδενισμός BLS/AED</button><button class="btn compact danger-button" data-reset-scope="seminar:pbls" type="button">Μηδενισμός PBLS</button><button class="btn compact danger-button" data-reset-scope="seminar:ils" type="button">Μηδενισμός ILS</button><button class="btn compact danger-button" data-reset-scope="seminar:phtls" type="button">Μηδενισμός PHTLS</button><button class="btn compact danger-button" data-reset-scope="seminar:als" type="button">Μηδενισμός ALS</button></div><p class="small muted" data-reset-notice role="status" aria-live="polite"></p></div></div></details>
 </div></details>
     <p class="account-local-note">Η τοπική αποθήκευση παραμένει ενεργή. Ο συγχρονισμός ενεργοποιείται ξεχωριστά σε κάθε συσκευή και συνεχίζει όταν επιστρέψει το internet.</p>
     <p class="small muted" data-appwrite-status role="status" aria-live="polite"></p>
@@ -67,7 +66,7 @@ export function initAccountUI() {
     if(!user||!cloudFeatures.sync||syncManager)return;
     const panel=dialog.querySelector('[data-cloud-controls]');panel.hidden=false;
     try {
-      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.68');
+      const { initCloudSync }=await import('./cloud-sync.js?app=27.1.105');
       syncManager=await initCloudSync({user,status:panel.querySelector('[data-cloud-status]'),enableButton:panel.querySelector('[data-sync-enable]'),nowButton:panel.querySelector('[data-sync-now]'),pauseButton:panel.querySelector('[data-sync-pause]'),recoverButton:panel.querySelector('[data-sync-recover]')});
     }catch { panel.querySelector('[data-cloud-status]').textContent='Ο συγχρονισμός δεν είναι διαθέσιμος. Η τοπική αποθήκευση συνεχίζεται.'; }
   }
@@ -105,15 +104,20 @@ export function initAccountUI() {
   });
 
   const legacyInput=dialog.querySelector('#restore');
-  const resetLabels={eoppep:'ΕΟΠΠΕΠ',saek:'ΣΑΕΚ',seminars:'σεμιναρίων',all:'ΟΛΩΝ των ενοτήτων'};
+  const resetLabels={eoppep:'ΕΟΠΠΕΠ',saek:'ΣΑΕΚ','seminar:bls':'BLS/AED','seminar:pbls':'PBLS','seminar:ils':'ILS','seminar:phtls':'PHTLS','seminar:als':'ALS'};
   function scopedKeys(scope){
+    if(scope.startsWith('seminar:')){
+      try{
+        const saved=JSON.parse(localStorage.getItem('ekab.seminar-prep.local.v1')||'{}');
+        return saved&&saved[scope.slice(8)]?[scope]:[];
+      }catch{return []}
+    }
     const result=[];
     for(let i=0;i<localStorage.length;i++){
       const k=localStorage.key(i);
       const eoppep=k==='ekab-eoppep-official-v15';
       const saek=k.startsWith('ekab.saek.read.v1.')||k==='ekab.saek.exams.v1';
-      const seminars=k==='ekab.seminar-prep.local.v1';
-      if((scope==='all'&&(eoppep||saek||seminars))||(scope==='eoppep'&&eoppep)||(scope==='saek'&&saek)||(scope==='seminars'&&seminars))result.push(k);
+      if((scope==='eoppep'&&eoppep)||(scope==='saek'&&saek))result.push(k);
     }
     return result;
   }
@@ -126,7 +130,13 @@ export function initAccountUI() {
     if(!confirm('2/2 — ΟΡΙΣΤΙΚΗ ΕΠΙΒΕΒΑΙΩΣΗ: Θα διαγραφεί η αποθηκευμένη πρόοδος '+label+'. Έχεις κρατήσει αντίγραφο ασφαλείας;'))return;
     button.disabled=true;
     try{
-      for(const key of keys)localStorage.removeItem(key);
+      for(const key of keys){
+        if(key.startsWith('seminar:')){
+          const stored=JSON.parse(localStorage.getItem('ekab.seminar-prep.local.v1')||'{}');
+          delete stored[key.slice(8)];
+          localStorage.setItem('ekab.seminar-prep.local.v1',JSON.stringify(stored));
+        }else localStorage.removeItem(key);
+      }
       window.dispatchEvent(new Event('ekab:progress-changed'));
       await window.EkabProgress?.checkpoint?.();
       notice.textContent='Ο μηδενισμός ολοκληρώθηκε. Ενημέρωση σελίδας…';

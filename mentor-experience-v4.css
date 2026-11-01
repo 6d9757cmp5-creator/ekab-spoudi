@@ -1,0 +1,75 @@
+/* MENTOR OS Experience V4 — a legible working room, not a taller landing page.
+ * Never changes GLB canvas, rendering lifecycle, scene events or simulation logic.
+ */
+body:has(.cinematic-mentor-hero){background:#071927;color:#e7f6f4}
+body:has(.cinematic-mentor-hero) .header{background:linear-gradient(115deg,#09212f,#104046);border-bottom:1px solid #285f65}
+body:has(.cinematic-mentor-hero) .header-inner{padding:11px clamp(15px,2.5vw,29px)}
+body:has(.cinematic-mentor-hero) .brand-icon{background:#b1f2d8;color:#0d484a;box-shadow:none}
+body:has(.cinematic-mentor-hero) .brand strong{letter-spacing:-.03em}
+body:has(.cinematic-mentor-hero) .back-link{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:9px 13px;border-radius:10px;background:#ffffff10;border:1px solid #8dc5c84d;color:#dcf7ef;text-decoration:none;font-size:.86rem}
+body:has(.cinematic-mentor-hero) .layout{max-width:1440px;padding:0 19px 58px}
+body:has(.cinematic-mentor-hero) .cinematic-mentor-hero.hero{
+ min-height:570px;margin:0 -19px 20px;padding:clamp(17px,2.4vw,29px) clamp(18px,2.4vw,32px);
+ grid-template-columns:minmax(0,1.05fr) minmax(290px,1fr) minmax(235px,.92fr);
+ gap:clamp(11px,1.6vw,21px);
+ background:radial-gradient(ellipse 36% 60% at 54% 50%,#0a756e40,transparent 74%),
+ linear-gradient(125deg,#0b2735,#092133 54%,#0c3036);
+ border-color:#26797b5e;
+}
+body:has(.cinematic-mentor-hero) .cinematic-mentor-hero #welcome span{color:#8be9c7;text-shadow:none}
+body:has(.cinematic-mentor-hero) .cinematic-mentor-hero .cinematic-eyebrow{color:#98ecd0}
+body:has(.cinematic-mentor-hero) .cinematic-primary{background:#aaf1d2;border-color:#aaf1d2;color:#083f3d!important;box-shadow:none}
+body:has(.cinematic-mentor-hero) .cinematic-primary:hover{background:#d7ffe9}
+body:has(.cinematic-mentor-hero) .cinematic-secondary{background:#ffffff13;border-color:#6ca5a4;color:#e2f8ef!important}
+body:has(.cinematic-mentor-hero) .cinematic-panel{border-radius:15px;border-color:#326369;background:#102f3d}
+body:has(.cinematic-mentor-hero) .cinematic-panel .cinematic-prompts button{border-radius:11px;min-height:42px}
+body:has(.cinematic-mentor-hero) .cinematic-vitals-grid>div{background:#09202e;border:1px solid #24505a;border-radius:11px}
+body:has(.cinematic-mentor-hero) .cinematic-vitals-grid strong{color:#a2f6d6}
+body:has(.cinematic-mentor-hero) .cinematic-scenario{border-radius:12px}
+body:has(.cinematic-mentor-hero) .mentor-cinematic-stage{
+ height:565px;min-height:470px;border:1px solid #3e858a;border-radius:19px;
+ box-shadow:0 15px 39px #011e2455;
+}
+body:has(.cinematic-mentor-hero) .mentor-real3d-choices button{background:#073643e8;border-color:#407f87}
+body:has(.cinematic-mentor-hero) .mentor-real3d-choices button[aria-pressed="true"]{background:#137a79e8;border-color:#91e9c8;box-shadow:0 0 13px #52d8b557}
+body:has(.cinematic-mentor-hero) :is(.mission,.panel){border-radius:18px}
+body:has(.cinematic-mentor-hero) .tabs{max-width:100%;width:max-content;flex-wrap:wrap;background:#11333f;border-color:#37636b}
+body:has(.cinematic-mentor-hero) .tabs button{min-height:44px;border-radius:10px;color:#c1d9dd}
+body:has(.cinematic-mentor-hero) .tabs button[aria-selected="true"]{background:#0f817d;color:white}
+body:has(.cinematic-mentor-hero) .case-option{border-radius:14px}
+body:has(.cinematic-mentor-hero) .case-option[data-active="true"]{border-color:#48bca7;box-shadow:0 0 0 2px #48bca72b}
+body:has(.cinematic-mentor-hero) :is(a,button,input,select):focus-visible{outline:3px solid #b0f6d7;outline-offset:3px}
+/* Protocol catalog and related LAB/DEBRIEF share the visual language. */
+body:has(#suite-title),body:has(#protocol-list-title){--bg:#f1f6f6;--panel:#fff;--line:#d7e4e6;--brand:#096e73;--accent:#088b7c;--soft:#e9f7f1}
+body:has(#suite-title) .hero,body:has(#protocol-list-title) .hero{background:linear-gradient(118deg,#102f3d,#145461);border-radius:19px}
+body:has(#suite-title) .panel,body:has(#protocol-list-title) .panel{border-radius:17px;box-shadow:0 7px 25px #103d450d}
+body:has(#suite-title) .nav,body:has(#protocol-list-title) .nav{gap:9px}
+body:has(#suite-title) .nav a,body:has(#protocol-list-title) .nav a{padding:9px 12px;border-radius:10px;background:#e8f5f0;color:#0e6966}
+body:has(#suite-title) .segment a{border-radius:11px;min-height:44px;display:inline-flex;align-items:center}
+body:has(#suite-title) .mentor-mini{border:1px solid #2a5b68}
+body:has(#suite-title) .choice{min-height:60px;font-size:.92rem;border-radius:12px}
+body:has(#suite-title) .btn,body:has(#protocol-list-title) .btn{border-radius:11px;min-height:44px}
+body:has(#suite-title) .category[aria-pressed="true"],body:has(#protocol-list-title) .category[aria-pressed="true"]{background:#e3f4eb;border-color:#459e91}
+@media(max-width:1180px){
+ body:has(.cinematic-mentor-hero) .cinematic-mentor-hero.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:unset}
+ body:has(.cinematic-mentor-hero) .cinematic-mentor-hero .mentor-intro-visual{grid-column:2;grid-row:1}
+ body:has(.cinematic-mentor-hero) .mentor-cinematic-side{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+ body:has(.cinematic-mentor-hero) .layout{padding:0 12px 42px}
+ body:has(.cinematic-mentor-hero) .cinematic-mentor-hero.hero{grid-template-columns:minmax(0,1fr);gap:13px;padding:16px;margin:0 -12px 16px}
+ body:has(.cinematic-mentor-hero) .cinematic-mentor-hero .mentor-intro-visual{grid-column:1;grid-row:1}
+ body:has(.cinematic-mentor-hero) .mentor-cinematic-side{grid-column:1;grid-row:3;display:flex}
+ body:has(.cinematic-mentor-hero) .mentor-cinematic-stage{height:min(55vh,470px)!important;min-height:340px;max-width:440px;margin:auto}
+ body:has(.cinematic-mentor-hero) .cinematic-mentor-hero #welcome{font-size:clamp(1.6rem,6.3vw,2.2rem)}
+ body:has(.cinematic-mentor-hero) .cinematic-mode{min-height:52px}
+ body:has(.cinematic-mentor-hero) .cinematic-vitals-grid>div{padding:8px 2px}
+ body:has(.cinematic-mentor-hero) .tabs{width:100%;gap:5px}
+ body:has(.cinematic-mentor-hero) .tabs button{min-width:0;flex:1;padding:9px 6px;font-size:.82rem}
+}
+@media(prefers-color-scheme:dark){
+ body:has(#suite-title),body:has(#protocol-list-title){--bg:#0b202b;--panel:#143440;--line:#365861;--brand:#9de5dd;--accent:#74ccbd;--soft:#1b4a48}
+ body:has(#suite-title) .nav a,body:has(#protocol-list-title) .nav a{background:#1e5151;color:#d1f9e9}
+ body:has(#suite-title) .category[aria-pressed="true"],body:has(#protocol-list-title) .category[aria-pressed="true"]{background:#215149;color:#d2faea}
+}
+@media(prefers-reduced-motion:reduce){body:has(.cinematic-mentor-hero) .cinematic-primary{transition:none}}

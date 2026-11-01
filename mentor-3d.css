@@ -1,0 +1,43 @@
+/* MENTOR OS: standalone WebGL hologram presentation, local-only and portrait-safe. */
+.mentor-intro-visual{position:relative}
+.mentor-3d-panel{position:relative;isolation:isolate;overflow:hidden;width:min(100%,320px);height:450px;border-radius:25px;
+ border:1px solid #88eaf35e;background:radial-gradient(ellipse at 50% 65%,#12456d 0%,#0b2b48 43%,#061927 90%);
+ box-shadow:inset 0 0 56px #28e7fe17,0 10px 32px #020f1c50}
+.mentor-3d-panel::after{content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;
+ background:repeating-linear-gradient(to bottom,transparent 0 5px,#a6eefa0d 6px 7px);
+ mix-blend-mode:screen}
+.mentor-3d-panel::before{content:"";pointer-events:none;position:absolute;inset:6px;
+ border:1px solid #a4efff24;border-radius:19px;box-shadow:inset 0 0 24px #4be5fd23}
+#mentor-3d-canvas{display:block;touch-action:pan-y;width:100%;height:100%;cursor:grab;outline-offset:-4px}
+#mentor-3d-canvas:active{cursor:grabbing}
+.mentor-3d-hud{pointer-events:none;position:absolute;inset:13px 16px auto;display:flex;justify-content:space-between;
+ gap:4px;color:#b3eeff;font-size:.58rem;letter-spacing:.13em;font-weight:800;text-shadow:0 0 11px #00bbef99}
+.mentor-3d-hud span:last-child{color:#d8fff0}
+.mentor-3d-controls{width:min(100%,320px);display:grid;gap:7px;text-align:left;font-size:.75rem;color:#d7f4ff}
+.mentor-3d-modes{display:flex;gap:6px;width:100%}
+.mentor-3d-controls button{flex:1;min-height:37px;padding:6px 8px;background:#103a4e;border:1px solid #49839c;
+ color:#d6f4fc;border-radius:9px;font-size:.72rem;font-weight:750}
+.mentor-3d-controls button[aria-pressed="true"]{background:#156583;border-color:#8ce7fb;box-shadow:0 0 11px #4ddfff36}
+.mentor-3d-controls button:disabled{opacity:.5;cursor:not-allowed}
+.mentor-3d-rotate-label,.mentor-3d-motion-label{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.mentor-3d-rotate-label input{width:65%;accent-color:#5cddf7}
+.mentor-3d-motion-label{justify-content:flex-start;cursor:pointer}
+.mentor-3d-motion-label input{accent-color:#4fd8f5}
+.mentor-3d-status{font-size:.67rem;color:#c5e2ec!important;line-height:1.35;margin:0!important;min-height:2.1em;max-width:320px}
+.mentor-intro-visual[data-mentor-view="3d"]>.mentor-figure{display:none!important}
+.mentor-intro-visual[data-mentor-view="photo"]>.mentor-3d-panel{display:none!important}
+.mentor-intro-visual[data-mentor-view="3d"]{min-width:min(320px,40%)}
+.mentor-intro-visual>.mentor-figure{flex:0 0 auto}
+@media(max-width:800px){
+ .mentor-intro-hero{flex-wrap:wrap}
+ .mentor-intro-visual[data-mentor-view="3d"]{min-width:0;width:100%;flex-direction:column!important;justify-content:center!important}
+ .mentor-intro-visual[data-mentor-view="3d"] .mentor-3d-panel{width:min(100%,300px);height:380px}
+ .mentor-3d-controls{max-width:300px}
+}
+@media(max-width:540px){
+ .mentor-intro-visual{flex-direction:column!important;align-items:center!important;text-align:center}
+ .mentor-3d-panel{height:355px!important;max-width:270px}
+ .mentor-3d-hud{font-size:.53rem}
+ .mentor-intro-visual[data-mentor-view="photo"]>.mentor-figure{--mentor-size:125px}
+}
+@media(prefers-reduced-motion:reduce){.mentor-3d-panel::after{opacity:.35}}

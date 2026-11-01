@@ -1,0 +1,30 @@
+# One-time owner-authorized live Claude API connectivity check.
+# Fires only on this workflow's creation/update AND the exact one-time commit message.
+# Changing or deleting this file later will not repeat the billable request.
+name: One-time MENTOR Claude live API smoke test
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mentor-claude-once.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  claude-live-check:
+    if: github.event.head_commit.message == 'Owner-approved one-time Claude API smoke test'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run isolated Claude adapter regression tests
+        run: node --test mentor/ai/claude.test.mjs
+      - name: One low-cost API request, key from GitHub Secret only
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CONFIRM_BILLABLE: 'YES'
+        run: node scripts/claude-connection-test.mjs

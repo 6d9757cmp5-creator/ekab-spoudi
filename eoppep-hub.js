@@ -8,16 +8,17 @@ const el=id=>document.getElementById(id),tabs=[...document.querySelectorAll('[da
 function getSaved(){try{return ['A','B'].includes(localStorage.getItem(KEY))?localStorage.getItem(KEY):'all'}catch{return'all'}}
 function metrics(){
  let state={};try{state=JSON.parse(localStorage.getItem(STORAGE)||'{}')||{}}catch{}
- const result={all:0,A:0,B:0},scheduler=window.EkabStudyScheduler;
- if(!scheduler)return result;
+ const result={all:0,A:0,B:0},read={all:0,A:0,B:0},scheduler=window.EkabStudyScheduler;
+ if(!scheduler)return {studied:result,read};
  for(const [id,s] of Object.entries(state)){
   const m=/^EOP-([AB])-(\d{3})$/.exec(id);if(!m)continue;
   const group=m[1],num=Number(m[2]);if(num<1||num>limits[group])continue;
   if(scheduler.evaluate(s).studied){result[group]++;result.all++}
+  if(typeof s?.readCompletedAt==='string'&&Number.isFinite(Date.parse(s.readCompletedAt))){read[group]++;read.all++}
  }
- return result;
+ return {studied:result,read};
 }
-function paint(){const counts=metrics();el('eopHubCount').textContent=counts.all+'/314';el('eopHubBar').style.width=(counts.all/314*100)+'%';el('eopGroupCount').textContent=counts[chosen]+'/'+limits[chosen]+' μελετημένες'}
+function paint(){const progress=metrics(),counts=progress.studied;el('eopHubCount').textContent=counts.all+'/314';el('eopHubReadCount').textContent=progress.read.all+'/314';el('eopHubBar').style.width=(counts.all/314*100)+'%';el('eopGroupCount').textContent=counts[chosen]+'/'+limits[chosen]+' μελετημένες'}
 function choose(group,save=true){
  if(!(group in limits))return;chosen=group;
  tabs.forEach(t=>t.setAttribute('aria-pressed',String(t.dataset.eopGroup===group)));

@@ -1,0 +1,50 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {newSession,perform} from './engine.mjs';
+import {createVolatileMentorStore,assertScope,MENTOR_DB} from './store.mjs';
+import {resolveMentorScope} from './identity.mjs';
+import {webcrypto} from 'node:crypto';
+const A='guest:11111111-1111-4111-8111-111111111111';
+const B='guest:22222222-2222-4222-8222-222222222222';
+const T='2026-10-28T20:00:00.000Z';
+test('Mentor store has a separate dedicated database name',()=>{
+  assert.equal(MENTOR_DB,'ekab-mentor-v1');
+  assert.throws(()=>assertScope('ekab-eoppep-official-v15'),/invalid-mentor-scope/);
+  assert.doesNotThrow(()=>assertScope(A));
+});
+test('store isolates two user scopes and deletes only the selected scope',async()=>{
+  const store=createVolatileMentorStore();
+  const one=newSession('breathing-home',{id:'s1',at:T});
+  const two=newSession('collision-road',{id:'s2',at:T});
+  await store.save(A,one);
+  await store.save(B,two);
+  assert.equal((await store.list(A)).length,1);
+  assert.equal((await store.list(B)).length,1);
+  assert.equal((await store.active(A)).id,'s1');
+  await store.erase(A);
+  assert.equal((await store.list(A)).length,0);
+  assert.equal((await store.list(B)).length,1);
+  assert.equal(store.persistent,false);
+});
+test('append-only session history prevents losing prior practice attempts',async()=>{
+  const store=createVolatileMentorStore();
+  let first=newSession('breathing-home',{id:'session-01',at:T});
+  await store.save(A,first);
+  first=perform(first,'scene-skip',{at:'2026-10-28T20:01:00Z'});
+  await store.save(A,first);
+  const overwrite=newSession('breathing-home',{id:'session-01',at:T});
+  await assert.rejects(store.save(A,overwrite),/mentor-history-conflict/);
+  assert.equal((await store.active(A)).events.length,1);
+});
+test('guest identity is session-scoped; authenticated identity is hashed',async()=>{
+  const map=new Map();
+  const storage={getItem:k=>map.get(k)||null,setItem:(k,v)=>map.set(k,v)};
+  const guest=await resolveMentorScope({account:null,storage,cryptoApi:webcrypto});
+  assert.match(guest.scope,/^guest:/);assert.equal(guest.authenticated,false);
+  assert.deepEqual(await resolveMentorScope({account:null,storage,cryptoApi:webcrypto}),guest);
+  const account={get:async()=>({$id:'test-user-reference'})};
+  const user=await resolveMentorScope({account,storage,cryptoApi:webcrypto});
+  assert.match(user.scope,/^user:[a-f0-9]{64}$/);
+  assert.equal(user.authenticated,true);
+  assert.ok(!user.scope.includes('test-user-reference'));
+});

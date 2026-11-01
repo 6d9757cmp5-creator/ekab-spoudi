@@ -20,7 +20,8 @@ for(let i=1;i<=20;i++){
   for(const marker of ['class="lesson-sos"','class="lesson-more"','class="knowledge-check"','class="check-question"','class="check-answer"','class="small muted chapter-source-note"','data-lesson="'+(j+1)+'"']){
    if(!section.includes(marker))fail(file+', κεφάλαιο '+(j+1)+': λείπει '+marker);
   }
-  if(!section.includes('https://www.ekab.gr/files/2024/10/'))fail(file+', κεφάλαιο '+(j+1)+': χωρίς επιβεβαιωμένο σύνδεσμο Οδηγού');
+  const guideUrl=i>=17?'https://www.ekab.gr/files/2019/09/77234.pdf':'https://www.ekab.gr/files/2024/10/';
+  if(!section.includes(guideUrl))fail(file+', κεφάλαιο '+(j+1)+': χωρίς σύνδεσμο στον εφαρμοστέο επίσημο Οδηγό');
   // έλεγχος ενιαίας σειράς: θεωρία → αυτοέλεγχος → ολοκλήρωση
   if(section.indexOf('<details class="lesson-more"')>section.indexOf('<details class="knowledge-check"'))fail(file+', κεφάλαιο '+(j+1)+': η θεωρία εμφανίζεται μετά τον αυτοέλεγχο');
   const plain=section.replace(/<p class="small muted chapter-source-note">[\s\S]*?<\/p>/g,'').replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|amp|quot|lt|gt);/g,' ').trim().replace(/\s+/g,' ');

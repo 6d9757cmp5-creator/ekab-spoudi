@@ -1,0 +1,101 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {CASE,STAGES,KEY,newLiveSession,stepLive,replayLive,liveSnapshot,saveLive,loadLive,clearLive} from './live-sim.mjs';
+
+const good=['check-safety','report-two','record-both','verified-handover'];
+const wrong=['rush','omit-second','guess-diagnosis','invent'];
+test('two people, four educational phases, independent bounded synthetic vital trajectories',()=>{
+ const s=newLiveSession(),initial=liveSnapshot(s);
+ assert.equal(CASE.people.length,2);
+ assert.equal(STAGES.length,4);
+ assert.equal(initial.minute,0);
+ assert.equal(initial.people.length,2);
+ assert.deepEqual(initial.people.map(p=>p.hr),[106,88]);
+ let current=s;
+ for(let i=0;i<4;i++){
+   current=stepLive(current,good[i]);
+   assert.equal(current.stage,i+1);
+   assert.equal(liveSnapshot(current).minute,2*(i+1));
+ }
+ assert.equal(current.completed,true);
+ assert.deepEqual(liveSnapshot(current).people.map(p=>p.hr),[122,97]);
+ assert.equal(liveSnapshot(current).review,0);
+ assert.equal(liveSnapshot(current).practice,4);
+ assert.throws(()=>stepLive(current,good[0]),/invalid-live-session/);
+});
+test('wrong choices are recorded without advancing and use a predefined time sequence',()=>{
+ let s=newLiveSession();
+ for(let i=0;i<4;i++){
+  s=stepLive(s,wrong[i]);
+  assert.equal(s.stage,i);
+  assert.equal(s.events.at(-1).outcome,'review');
+  s=stepLive(s,good[i]);
+ }
+ const info=liveSnapshot(s);
+ assert.equal(info.review,4);
+ assert.equal(info.practice,4);
+ assert.equal(info.minute,16);
+ assert.deepEqual(info.people.map(p=>p.spo2),[92,96]);
+ assert.equal(info.timeline.length,8);
+ assert.ok(!('priority' in info.people[0]),'no triage or diagnosis is generated');
+});
+test('replay rejects tampered observations, invented stage and invalid choices',()=>{
+ let s=newLiveSession();s=stepLive(s,'check-safety');
+ assert.deepEqual(replayLive(s),s);
+ assert.throws(()=>replayLive({...s,stage:3}),/tampered-live-session/);
+ assert.throws(()=>replayLive({...s,events:[{...s.events[0],outcome:'review'}]}),/tampered-live-event/);
+ assert.throws(()=>stepLive(s,'administer-drug'),/invalid-live-choice/);
+});
+test('storage is isolated to one Mentor namespace and works if storage is blocked',()=>{
+ const map=new Map([['ekab-eoppep-official-v15','{"examHistory":[1,2,3]}'],['ekab.saek.exams.v1','{"score":8}']]);
+ const writes=[];
+ const store={getItem:k=>map.get(k)||null,setItem:(k,v)=>{writes.push(k);map.set(k,v);},removeItem:k=>{writes.push(k);map.delete(k);}};
+ const session=stepLive(newLiveSession(),'check-safety');
+ assert.equal(saveLive(store,session),true);
+ assert.deepEqual(loadLive(store),session);
+ assert.equal(clearLive(store),true);
+ assert.deepEqual(loadLive(store),newLiveSession());
+ assert.ok(writes.every(k=>k===KEY));
+ assert.equal(map.get('ekab.saek.exams.v1'),'{"score":8}');
+ assert.equal(map.get('ekab-eoppep-official-v15'),'{"examHistory":[1,2,3]}');
+ const blocked={getItem:()=>{throw Error('unavailable')},setItem:()=>{throw Error('unavailable')},removeItem:()=>{throw Error('unavailable')}};
+ assert.deepEqual(loadLive(blocked),newLiveSession());
+ assert.equal(saveLive(blocked,session),false);
+ assert.equal(clearLive(blocked),false);
+});
+
+test('flawed choices have deterministic consequences for the named synthetic person; good choices do not',()=>{
+ const after=(ids)=>ids.reduce((s,id)=>stepLive(s,id),newLiveSession());
+ const clean=liveSnapshot(after(['check-safety']));
+ const rushed=liveSnapshot(after(['rush','check-safety']));
+ assert.equal(clean.people[0].extraSteps,0);
+ assert.equal(rushed.people[0].extraSteps,1);
+ assert.equal(rushed.people[1].extraSteps,0);
+ assert.equal(rushed.people[0].hr,118,'A is one step further along the trend (index 3 instead of 2)');
+ assert.equal(rushed.people[1].hr,93,'B follows the normal trend (index 2)');
+ const omitted=liveSnapshot(after(['check-safety','omit-second','report-two']));
+ assert.equal(omitted.people[1].extraSteps,1);
+ assert.match(omitted.timeline[1].consequence,/Άτομο Β/);
+ const invented=liveSnapshot(after(['check-safety','report-two','record-both','invent']));
+ assert.equal(invented.unreliableHandover,true);
+ assert.equal(liveSnapshot(newLiveSession()).unreliableHandover,false);
+ assert.deepEqual(replayLive(after(['rush','check-safety'])),after(['rush','check-safety']),'saved sessions keep working');
+});
+
+test('scripted cockpit inspections persist in existing Mentor session without advancing the scenario or grades',async()=>{
+ const {inspectLive}=await import('./live-sim.mjs');
+ const start=newLiveSession(),recorded=inspectLive(start,'dialogue','a','chief');
+ assert.equal(recorded.stage,0);
+ assert.equal(recorded.events.length,0);
+ assert.equal(recorded.inspections.length,1);
+ assert.equal(liveSnapshot(recorded).minute,0);
+ assert.equal(liveSnapshot(recorded).inspections[0].patient_id,'a');
+ const next=stepLive(recorded,'check-safety');
+ assert.equal(next.inspections.length,1);
+ assert.equal(replayLive(next).inspections.length,1);
+ const legacy={...newLiveSession()};delete legacy.inspections;
+ assert.deepEqual(replayLive(legacy),newLiveSession(),'older saved sessions migrate without losing progress');
+ assert.throws(()=>inspectLive(start,'meds','a','dose'),/invalid-live-inspection/);
+ assert.throws(()=>inspectLive(start,'dialogue','other','chief'),/invalid-live-inspection/);
+ assert.throws(()=>replayLive({...recorded,inspections:[{...recorded.inspections[0],action_id:'invented'}]}),/tampered-live-inspection/);
+});

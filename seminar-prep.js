@@ -118,6 +118,7 @@ const current=()=>selected?progress[selected.id]:null;
 function save(){
  try{
   localStorage.setItem(STORE,JSON.stringify(progress));
+  window.dispatchEvent(new Event('ekab:progress-changed'));
   $('seminarSaveStatus').textContent='Αποθηκεύτηκε στη συσκευή.';
  }catch{
   $('seminarSaveStatus').textContent='Αδυναμία αποθήκευσης στη συσκευή· χρησιμοποίησε αντίγραφο.';
@@ -593,6 +594,20 @@ function bind(){
   else if(!next&&selected)showHome();
  });
 }
+// Refresh the displayed seminar course after a cloud merge.
+window.addEventListener('ekab:cloud-applied',()=>{
+ if(scenarioSubmitting)return;
+ try{
+  progress=cleanRecord(JSON.parse(localStorage.getItem(STORE)||'{}'));
+  if(!selected){showHome();return;}
+  updateCourseProgress();
+  if(view==='theory')renderTheory();
+  else if(view==='quiz')renderMixed();
+  else renderOral();
+ }catch{
+  $('seminarSaveStatus').textContent='Η πρόοδος δεν ανανεώθηκε στην οθόνη. Ανανέωσε τη σελίδα πριν συνεχίσεις.';
+ }
+});
 if(COURSES.length!==5||COURSES.some(c=>c.units?.length!==12||c.units.some(u=>u.length!==5)||MCQ[c.id]?.length!==12||MCQ[c.id].some(q=>q.length!==6||new Set(q.slice(1,5)).size!==4))){
  $('seminarCards').textContent='Το εκπαιδευτικό υλικό δεν φορτώθηκε πλήρως.';
 }else{bind();showHome();}

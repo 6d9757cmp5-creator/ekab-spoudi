@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+<title id="title">Οργανωτική επισκόπηση σκηνής μαζικού συμβάντος</title>
+<desc id="desc">Σχηματική κάτοψη με τροχαίο πολλών εμπλεκομένων, περιορισμένη περιοχή κινδύνου, σημείο διοίκησης και συντονισμού, χώρο αρχικής εκτίμησης και συγκέντρωσης ασθενών, προετοιμασία μεταφορών με δύο ασθενοφόρα και δρομολόγηση προς κατάλληλα νοσοκομεία. Δεν δείχνει επίσημη χωροθέτηση, ασφαλείς αποστάσεις, χρωματικές κατηγορίες ή θεραπευτικό αλγόριθμο.</desc>
+<rect width="1200" height="750" fill="#f3f8fc"/>
+<style>text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#163b53}.h{font-size:33px;font-weight:700}.t{font-size:22px;font-weight:700}.s{font-size:18px}.panel{fill:#fff;stroke:#aec9d7;stroke-width:3}.road{fill:#e4ecf2;stroke:#abc2d0;stroke-width:4}.line{fill:none;stroke:#56839a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}</style>
+<text x="600" y="51" text-anchor="middle" class="h">Μαζικό συμβάν · κατόψεις χώρων και συντονισμού</text>
+<text x="600" y="84" text-anchor="middle" class="s">Εννοιολογικό σχέδιο — η πραγματική χωροθέτηση ορίζεται από διοίκηση συμβάντος</text>
+<!-- Roads -->
+<path d="M48 505H1148" stroke="#bfceda" stroke-width="117" stroke-linecap="round"/>
+<path d="M48 505H1148" stroke="#f9fcfd" stroke-width="5" stroke-dasharray="49 24"/>
+<!-- incident area -->
+<rect x="45" y="121" width="388" height="313" rx="28" fill="#fff1ea" stroke="#c28167" stroke-width="4" stroke-dasharray="11 10"/>
+<text x="239" y="161" text-anchor="middle" class="t">Περιοχή συμβάντος</text>
+<g transform="translate(103 208) rotate(-13 90 60)">
+<rect x="0" y="25" width="205" height="82" rx="19" fill="#c4d7e4" stroke="#557f9c" stroke-width="5"/>
+<path d="M48 25L72 -5H149L176 25" fill="#e4eef6" stroke="#557f9c" stroke-width="5"/>
+<circle cx="43" cy="109" r="24" fill="#466176"/><circle cx="161" cy="109" r="24" fill="#466176"/>
+<path d="M0 40L-18 15L-8 83" fill="#f7c6b8" stroke="#c17a65" stroke-width="5"/>
+</g>
+<g transform="translate(245 319) rotate(17 70 20)">
+<rect width="142" height="63" rx="15" fill="#d9e6f0" stroke="#557f9c" stroke-width="5"/>
+<circle cx="36" cy="64" r="17" fill="#466176"/><circle cx="110" cy="64" r="17" fill="#466176"/>
+</g>
+<text x="238" y="416" text-anchor="middle" class="s">Κίνδυνοι · έλεγχος πρόσβασης</text>
+<!-- command -->
+<rect x="485" y="122" width="269" height="212" rx="19" class="panel"/>
+<text x="619" y="161" text-anchor="middle" class="t">Σημείο διοίκησης</text>
+<path d="M541 244L618 183L695 244Z" fill="#daecf4" stroke="#5a8da6" stroke-width="5"/>
+<rect x="554" y="244" width="128" height="52" rx="8" fill="#e5f1f7" stroke="#5a8da6" stroke-width="5"/>
+<circle cx="617" cy="262" r="13" fill="#7ca4b8"/>
+<text x="621" y="322" text-anchor="middle" class="s">Ρόλοι · ασφάλεια · επικοινωνία</text>
+<!-- triage -->
+<rect x="811" y="122" width="348" height="315" rx="20" class="panel"/>
+<text x="985" y="161" text-anchor="middle" class="t">Σημείο αρχικής εκτίμησης</text>
+<text x="985" y="188" text-anchor="middle" class="s">και συγκέντρωσης</text>
+<g transform="translate(866 241)"><circle cx="18" cy="14" r="15" fill="#dceaf2" stroke="#5c879c" stroke-width="3"/><path d="M18 29V80M-2 51H38" stroke="#5c879c" stroke-width="7" stroke-linecap="round"/><path d="M18 80L-3 108M18 80L37 108" stroke="#5c879c" stroke-width="6"/></g><g transform="translate(959 241)"><circle cx="18" cy="14" r="15" fill="#dceaf2" stroke="#5c879c" stroke-width="3"/><path d="M18 29V80M-2 51H38" stroke="#5c879c" stroke-width="7" stroke-linecap="round"/><path d="M18 80L-3 108M18 80L37 108" stroke="#5c879c" stroke-width="6"/></g><g transform="translate(1052 241)"><circle cx="18" cy="14" r="15" fill="#dceaf2" stroke="#5c879c" stroke-width="3"/><path d="M18 29V80M-2 51H38" stroke="#5c879c" stroke-width="7" stroke-linecap="round"/><path d="M18 80L-3 108M18 80L37 108" stroke="#5c879c" stroke-width="6"/></g>
+<path d="M868 385H1096" stroke="#5c879c" stroke-width="6" stroke-dasharray="12 10"/>
+<text x="985" y="416" text-anchor="middle" class="s">Κλινική διαλογή με πρωτόκολλο</text>
+<path d="M437 215H480M750 215H806M795 203L810 215L795 228" class="line"/>
+<!-- ambulances at lower strip -->
+<g transform="translate(265 488)"><rect width="181" height="81" rx="14" fill="#d8ebf7" stroke="#56849f" stroke-width="5"/><path d="M117 0V-16H158L197 25V81H180" fill="#d8ebf7" stroke="#56849f" stroke-width="5"/><path d="M130 -8H153L177 25H130" fill="#f8fcfd" stroke="#56849f" stroke-width="3"/><path d="M60 13V56M39 34H80" stroke="#c5616c" stroke-width="11"/><circle cx="43" cy="82" r="20" fill="#415c70"/><circle cx="160" cy="82" r="20" fill="#415c70"/></g><g transform="translate(550 488)"><rect width="181" height="81" rx="14" fill="#d8ebf7" stroke="#56849f" stroke-width="5"/><path d="M117 0V-16H158L197 25V81H180" fill="#d8ebf7" stroke="#56849f" stroke-width="5"/><path d="M130 -8H153L177 25H130" fill="#f8fcfd" stroke="#56849f" stroke-width="3"/><path d="M60 13V56M39 34H80" stroke="#c5616c" stroke-width="11"/><circle cx="43" cy="82" r="20" fill="#415c70"/><circle cx="160" cy="82" r="20" fill="#415c70"/></g>
+<path d="M789 517H1010M999 505L1016 517L999 529" class="line"/>
+<rect x="837" y="598" width="324" height="119" rx="17" class="panel"/>
+<text x="999" y="637" text-anchor="middle" class="t">Υγειονομικές μονάδες</text>
+<path d="M895 665H1109" class="line"/>
+<path d="M923 681V654M912 667H934M1041 681V654M1029 667H1053" stroke="#bf606d" stroke-width="7"/>
+<text x="428" y="662" text-anchor="middle" class="s">Ανάθεση διαθέσιμων μέσων και συντονισμός διακομιδών</text>
+<text x="428" y="693" text-anchor="middle" class="s">Όχι τυχαία επιλογή προορισμού</text>
+</svg>

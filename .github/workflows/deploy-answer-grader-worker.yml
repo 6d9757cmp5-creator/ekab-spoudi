@@ -1,0 +1,44 @@
+name: Deploy EΚΑΒ educational answer grader (manual, Free only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      free_plan_confirmed:
+        description: 'I verified Cloudflare Workers AI free tier and current daily quota; no paid overage'
+        type: boolean
+        required: true
+        default: false
+      reference_review_confirmed:
+        description: 'I reviewed grading examples and unresolved clinical/educational audit findings'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: ${{ inputs.free_plan_confirmed && inputs.reference_review_confirmed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify syntax and non-live assessment tests
+        run: |
+          node --check workers/answer-grader/src/index.js
+          node --check functions/answer-grader/main.js
+          node --test functions/answer-grader/test.mjs
+      - name: Require secret deployment credentials
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::Missing CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::Missing CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+      - name: Deploy only the existing free-model answer grader
+        working-directory: workers/answer-grader
+        run: npx --yes wrangler@4 deploy --config wrangler.jsonc

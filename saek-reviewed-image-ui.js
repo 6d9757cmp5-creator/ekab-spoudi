@@ -6,6 +6,8 @@
 'use strict';
 const licenseLinks={
  'CC BY-SA 3.0':'https://creativecommons.org/licenses/by-sa/3.0/',
+ 'CC0 1.0':'https://creativecommons.org/publicdomain/zero/1.0/',
+ 'CC BY 4.0':'https://creativecommons.org/licenses/by/4.0/',
  'Public domain':'https://creativecommons.org/publicdomain/mark/1.0/'
 };
 function el(tag,cls,txt){
@@ -15,6 +17,7 @@ function el(tag,cls,txt){
  return node;
 }
 function sourceUrl(asset){
+ if(asset.localPath)return asset.localPath;
  return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(asset.filename);
 }
 function zoom(items,initial){
@@ -51,11 +54,33 @@ function zoom(items,initial){
  stage.append(image);dialog.append(stage,close,prev,next);
  document.body.append(dialog);show(index);dialog.showModal();
 }
+// A registry fetch failure must not silently remove every lesson image.
+// Offer a local retry without reloading the page or resetting study progress.
+function showRegistryFailure(error){
+ let notice=document.getElementById('saek-image-registry-error');
+ if(!notice){
+  notice=el('div','saek-source-fallback');
+  notice.id='saek-image-registry-error';
+  notice.setAttribute('role','alert');
+  const message=el('p','','Οι εκπαιδευτικές εικόνες δεν φορτώθηκαν. Τα μαθήματα και η πρόοδός σας παραμένουν διαθέσιμα.');
+  const retry=el('button','saek-source-action','Επανάληψη φόρτωσης εικόνων');
+  retry.type='button';
+  retry.addEventListener('click',async()=>{
+   retry.disabled=true;
+   try{await start();}finally{retry.disabled=false;}
+  });
+  notice.append(message,retry);
+  const target=document.querySelector('.saek-lesson-heading')||document.querySelector('.reader-title');
+  if(target)target.insertAdjacentElement('afterend',notice);
+  else document.body.prepend(notice);
+ }
+ console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',error);
+}
 function render(asset,lessonId,items,position){
  const fig=el('figure','saek-source-figure');
  const label=el('h4','saek-source-title',asset.title);
  const image=el('img','saek-source-image');
- image.src=sourceUrl(asset);image.alt=asset.title+'. '+asset.caption;
+ image.alt=asset.title+'. '+asset.caption;
  image.loading='lazy';image.decoding='async';
  image.referrerPolicy='no-referrer';
  const figureActions=el('div','saek-source-actions');
@@ -73,17 +98,42 @@ function render(asset,lessonId,items,position){
  const caption=el('figcaption','saek-source-caption',asset.caption);
  const attribution=el('p','saek-source-credit');
  attribution.append(document.createTextNode('Πηγή: '+asset.author+' · '));
- const src=el('a','','Wikimedia Commons');
+ // A source link is not independent medical validation of an original diagram.
+ const genericEms=/^https:\/\/www\.ems\.gov\/what-is-ems\.html(?:[?#].*)?$/i.test(asset.page||'');
+ const pageHost=(String(asset.page||'').match(/^https:\/\/([^\/?#]+)/)||[])[1]||'';
+ const hostLabels={'openstax.org':'OpenStax','www.cdc.gov':'CDC','www.who.int':'WHO','www.ekab.gr':'ΕΚΑΒ — πηγή θεματικής αναφοράς','commons.wikimedia.org':'Wikimedia Commons'};
+ const sourceLabel=asset.originalArtwork
+  ?(genericEms?'Γενική πηγή πλαισίου — όχι τεκμηρίωση σχήματος':'Πηγή θεματικής αναφοράς')
+  :(hostLabels[pageHost]||'Πηγή');
+ const src=el('a','',sourceLabel);
  src.href=asset.page;src.target='_blank';src.rel='noopener noreferrer';
  const space=document.createTextNode(' · Άδεια: ');
  const lic=el('a','',asset.license);
- lic.href=licenseLinks[asset.license]||asset.page;
+ lic.href=asset.licenseUrl||licenseLinks[asset.license]||asset.page;
  lic.target='_blank';lic.rel='noopener noreferrer';
  attribution.append(src,space,lic);
- const problem=el('p','saek-source-fallback','Η εικόνα δεν φορτώθηκε. Δείτε την αρχική σελίδα της πηγής.');
+ // A failed lazy/offline image must be recoverable without losing lesson state.
+ const problem=el('div','saek-source-fallback');
  problem.hidden=true;
- image.addEventListener('error',()=>{image.hidden=true;bigger.hidden=true;problem.hidden=false;});
- fig.append(label,image,figureActions,caption,attribution,problem);
+ const explanation=el('p','','Η εικόνα δεν φορτώθηκε. Δοκιμάστε ξανά ή ανοίξτε την παραπομπή της πηγής.');
+ const retry=el('button','saek-source-action','Επανάληψη φόρτωσης εικόνας');
+ retry.type='button';
+ retry.addEventListener('click',()=>{
+  retry.disabled=true;
+  image.removeAttribute('src');
+  image.src=sourceUrl(asset);
+ });
+ problem.append(explanation,retry);
+ image.addEventListener('load',()=>{
+  image.hidden=false;bigger.hidden=false;problem.hidden=true;retry.disabled=false;
+ });
+ image.addEventListener('error',()=>{
+  image.hidden=true;bigger.hidden=true;problem.hidden=false;retry.disabled=false;
+ });
+ // Attach handlers before setting src, including for locally cached images.
+ image.src=sourceUrl(asset);
+ // The source credit is embedded in the image itself; full attribution stays in saek-image-audit-2026.json.
+ fig.append(label,image,figureActions,caption,problem);
  return fig;
 }
 async function start(){
@@ -94,7 +144,7 @@ async function start(){
   if(!response.ok)throw new Error('image audit unavailable');
   const registry=await response.json();
   const course=registry.courses.find(c=>String(c.course).padStart(2,'0')===match[1]);
-  if(!course)return;
+  if(!course)throw new Error('image audit course not found');
   for(const chapter of course.chapters){
    if(!chapter.images||!chapter.images.length)continue;
    const id=chapter.anchor.replace('#','');
@@ -102,12 +152,27 @@ async function start(){
    if(!details||details.querySelector('.saek-source-section'))continue;
    const body=details.querySelector('.reader-main')||details.querySelector('.body');
    if(!body)continue;
+   // In Anatomy, do not display the 29 three-icon concept cartoons as
+   // anatomical plates. Retain their audit entries unchanged for replacement.
+   const assets=chapter.images
+     .filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key))
+     .map(key=>registry.assets[key]).filter(Boolean);
+   // Reuse existing, source-attributed anatomical plates in related topics.
+   // This is an additional visual placement, not a newly approved asset.
+   if(match[1]==='01'&&id==='lesson-2'&&registry.assets.spine)assets.push(registry.assets.spine);
+   if(match[1]==='01'&&id==='lesson-8'&&registry.assets.brain_medial)assets.push(registry.assets.brain_medial);
+   if(!assets.length){
+    if(match[1]==='01'&&!details.querySelector('.saek-anatomy-image-pending')){
+     const pending=el('p','small muted saek-anatomy-image-pending','Ανατομική εικόνα με επαρκή λεπτομέρεια: εκκρεμεί επιλογή και επιστημονικός έλεγχος. Δεν προβάλλονται τα παλαιά εικονίδια ως ανατομικές πλάκες.');
+     (body.querySelector('p.reader-paragraph')||body).insertAdjacentElement('afterend',pending);
+    }
+    continue;
+   }
    const wrap=el('details','saek-source-section');
-   const summary=el('summary','saek-source-summary','Εικόνες ανατομίας από τεκμηριωμένες πηγές ('+chapter.images.length+')');
+   const summary=el('summary','saek-source-summary','Εικόνες κεφαλαίου ('+assets.length+')');
    wrap.append(summary);
-   const note=el('p','saek-source-note','Οι εικόνες είναι ανατομικές αναφορές με καταγεγραμμένη πηγή και άδεια. Εκκρεμεί ανεξάρτητος επιστημονικός έλεγχος της τελικής επιλογής· δεν υποκαθιστούν τις τρέχουσες κλινικές οδηγίες.');
+   const note=el('p','saek-source-note','Η επιλογή εικόνας δεν σημαίνει πλήρη κάλυψη του κεφαλαίου ή ανεξάρτητη επιστημονική έγκριση. Οι εικόνες δεν υποκαθιστούν επίσημες οδηγίες. Στην Ανατομία τα πρόχειρα εικονίδια δεν εμφανίζονται ως ανατομικές πλάκες.');
    wrap.append(note);
-   const assets=chapter.images.map(key=>registry.assets[key]).filter(Boolean);
    const gallery=assets.map(asset=>({url:sourceUrl(asset),alt:asset.title+'. '+asset.caption}));
    assets.forEach((asset,i)=>wrap.append(render(asset,id.replace('lesson-',''),gallery,i)));
    const paragraph=body.querySelector('p.reader-paragraph');
@@ -129,7 +194,33 @@ async function start(){
    if(mobile.addEventListener)mobile.addEventListener('change',positionVisuals);
    else if(mobile.addListener)mobile.addListener(positionVisuals);
   }
- }catch(err){console.warn('Εικόνες εκπαιδευτικών πηγών: δεν ήταν διαθέσιμο το μητρώο.',err);}
+  // Make the images discoverable from the course header without changing
+  // any clinical-review flag or the user's stored reading progress.
+  const firstImageChapter=course.chapters.find(ch=>Array.isArray(ch.images)&&ch.images.length);
+  const imageCount=course.chapters.reduce((sum,ch)=>sum+(Array.isArray(ch.images)?ch.images.filter(key=>match[1]!=='01'||!/^sem_a_1_/.test(key)).length:0),0)+
+    (match[1]==='01'?Number(Boolean(registry.assets.spine))+Number(Boolean(registry.assets.brain_medial)):0);
+  const heading=document.querySelector('.saek-lesson-heading')||document.querySelector('h2.reader-title');
+  if(firstImageChapter&&heading&&!document.getElementById('saek-course-images-shortcut')){
+   const bar=el('div','saek-source-actions');
+   bar.id='saek-course-images-shortcut';
+   const shortcut=el('a','saek-source-action','Δες εικόνες μαθήματος ('+imageCount+')');
+   shortcut.href=firstImageChapter.anchor;
+   shortcut.setAttribute('aria-label','Μετάβαση στις εκπαιδευτικές εικόνες του μαθήματος');
+   shortcut.addEventListener('click',event=>{
+    const tocLink=document.querySelector('.chapter-toc a[href="'+firstImageChapter.anchor+'"]');
+    const chapterNode=document.getElementById(firstImageChapter.anchor.replace('#',''));
+    if(tocLink){
+     event.preventDefault();
+     tocLink.click();
+     if(chapterNode)chapterNode.open=true;
+    }else if(chapterNode){chapterNode.open=true;}
+   });
+   const pending=el('span','small muted','Εικόνες σε επιστημονικό έλεγχο — όχι πιστοποιημένες οδηγίες.');
+   bar.append(shortcut,pending);
+   heading.insertAdjacentElement('afterend',bar);
+  }
+  document.getElementById('saek-image-registry-error')?.remove();
+ }catch(err){showRegistryFailure(err);}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
 else start();

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" role="img" aria-labelledby="title desc">
+<title id="title">Κατώτερο αναπνευστικό: τραχεία, βρόγχοι, πνεύμονες και υπεζωκότας</title>
+<desc id="desc">Πρόσθιο σχηματικό διάγραμμα. Η τραχεία διχάζεται σε δεξιό και αριστερό κύριο βρόγχο. Ο δεξιός πνεύμονας έχει τρεις λοβούς και ο αριστερός δύο, με καρδιακή εντομή. Κάτω βρίσκεται το διάφραγμα. Σε μεγεθυμένη τομή φαίνονται το τοιχωματικό πέταλο του υπεζωκότα, η υπεζωκοτική κοιλότητα και το σπλαχνικό πέταλο. Η απόσταση στην τομή είναι υπερβολική για διδακτική σαφήνεια· το σχήμα δεν είναι υπό κλίμακα.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#315e79"/></marker></defs>
+<rect width="1100" height="760" fill="#f7fbfd"/>
+<style>
+text{font-family:DejaVu Sans,Arial,sans-serif;fill:#183b52}.title{font-size:29px;font-weight:700}.sub{font-size:16px;fill:#48677a}.label{font-size:17px;font-weight:650}.small{font-size:14px}.leader{fill:none;stroke:#315e79;stroke-width:2.5;marker-end:url(#arrow)}
+</style>
+<text x="550" y="42" text-anchor="middle" class="title">Κατώτερο αναπνευστικό σύστημα</text>
+<text x="550" y="70" text-anchor="middle" class="sub">Πρόσθια προβολή · δεξιά/αριστερά ως προς τον ασθενή · σχηματικό, όχι υπό κλίμακα</text>
+<!-- thorax frame -->
+<path d="M293 126Q500 91 707 126L730 555Q501 626 270 555Z" fill="#eef5f8" stroke="#bbd0db" stroke-width="3"/>
+<!-- right lung, three lobes (viewer left) -->
+<path d="M478 194Q423 161 365 190Q313 220 315 315Q311 380 345 415Q314 451 337 508Q363 557 431 548Q477 543 493 509L493 231Z" fill="#f4b4ae" stroke="#bd6868" stroke-width="4"/>
+<!-- left lung, two lobes and cardiac notch (viewer right) -->
+<path d="M522 194Q574 161 634 190Q686 221 687 313Q686 365 655 391Q680 418 672 480Q664 535 615 549Q574 560 548 526Q532 507 537 480Q542 453 514 430Q497 413 510 386Q520 364 520 332Z" fill="#f4b4ae" stroke="#bd6868" stroke-width="4"/>
+<!-- fissures -->
+<path d="M323 334Q395 350 486 332M344 424Q407 407 486 424M516 354Q590 375 680 350" fill="none" stroke="#a85e61" stroke-width="3"/>
+<!-- trachea and bronchi -->
+<path d="M487 112L487 251Q487 269 470 282L421 320M513 112L513 251Q513 269 530 282L579 320" fill="none" stroke="#4f91a5" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M487 112L487 251Q487 269 470 282L421 320M513 112L513 251Q513 269 530 282L579 320" fill="none" stroke="#d7eef1" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+<g stroke="#4f91a5" stroke-width="3"><path d="M475 132h50M475 151h50M475 170h50M475 189h50M475 208h50M475 227h50"/></g>
+<!-- bronchi simplified branches -->
+<g fill="none" stroke="#4f91a5" stroke-width="7" stroke-linecap="round"><path d="M421 320L394 354M421 320L449 359M394 354L372 390M449 359L463 397M579 320L555 354M579 320L611 357M555 354L547 390M611 357L644 394"/></g>
+<!-- lobe labels -->
+<text x="398" y="260" text-anchor="middle" class="small">Άνω λοβός</text><text x="397" y="385" text-anchor="middle" class="small">Μέσος λοβός</text><text x="406" y="490" text-anchor="middle" class="small">Κάτω λοβός</text>
+<text x="605" y="270" text-anchor="middle" class="small">Άνω λοβός</text><text x="612" y="475" text-anchor="middle" class="small">Κάτω λοβός</text>
+<!-- heart silhouette for orientation -->
+<path d="M489 436C467 407 433 426 438 458C442 483 474 505 500 525C526 503 556 480 560 456C565 425 532 409 511 436L500 449Z" fill="#cb7774" stroke="#a34e52" stroke-width="3"/>
+<!-- diaphragm -->
+<path d="M297 554Q392 502 500 554Q608 502 704 554" fill="none" stroke="#d89a52" stroke-width="12" stroke-linecap="round"/>
+<!-- left labels -->
+<text x="42" y="144" class="label">Τραχεία</text><path d="M126 140L480 168" class="leader"/>
+<text x="42" y="215" class="label">Δεξιός πνεύμονας</text><path d="M222 211L325 240" class="leader"/>
+<text x="42" y="286" class="label">Δεξιός κύριος βρόγχος</text><path d="M248 282L412 315" class="leader"/>
+<text x="42" y="592" class="label">Διάφραγμα</text><path d="M147 588L346 548" class="leader"/>
+<!-- right labels -->
+<text x="752" y="215" class="label">Αριστερός πνεύμονας</text><path d="M745 221L679 242" class="leader"/>
+<text x="752" y="285" class="label">Αριστερός κύριος βρόγχος</text><path d="M745 291L588 315" class="leader"/>
+<text x="752" y="370" class="label">Καρδιά (για προσανατολισμό)</text><path d="M745 374L560 455" class="leader"/>
+<text x="752" y="440" class="label">Καρδιακή εντομή</text><path d="M745 444L552 428" class="leader"/>
+<!-- pleura inset -->
+<rect x="680" y="480" width="390" height="220" rx="18" fill="#ffffff" stroke="#9bb9c8" stroke-width="2.5"/>
+<text x="875" y="508" text-anchor="middle" class="label">Μεγεθυμένη τομή υπεζωκότα</text>
+<path d="M900 542Q980 531 1040 542L1040 560Q980 550 900 560Z" fill="#d8e9ef" stroke="#628ba0" stroke-width="3"/>
+<path d="M900 618Q980 628 1040 618L1040 636Q980 646 900 636Z" fill="#f4b4ae" stroke="#bd6868" stroke-width="3"/>
+<text x="700" y="552" class="small">Τοιχωματικό πέταλο</text><path d="M862 547L897 551" class="leader"/>
+<text x="700" y="590" class="small">Υπεζωκοτική κοιλότητα</text><path d="M875 586L910 586" class="leader"/>
+<text x="700" y="630" class="small">Σπλαχνικό πέταλο</text><path d="M858 626L897 628" class="leader"/>
+<text x="875" y="675" text-anchor="middle" class="small">Το διάστημα ανοίγεται σχηματικά</text>
+
+</svg>

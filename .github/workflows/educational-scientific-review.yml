@@ -1,0 +1,44 @@
+name: Educational and scientific review
+# Runs on every change so newly created modules are never omitted by path filters.
+# The reviewer itself selects educational/content-capable files from the commit diff.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: 'Optional comma-separated paths for targeted evaluation (new sections allowed)'
+        required: false
+        default: ''
+permissions:
+  contents: read
+jobs:
+  independent-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+      AUDIT_PATHS: ${{ inputs.paths || '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate review engine and boundaries
+        run: |
+          node --check scripts/educational-scientific-review.mjs
+          node --test scripts/test-educational-scientific-review.mjs
+      - name: Evaluate changed educational and scientific material
+        run: node scripts/educational-scientific-review.mjs
+      - name: Preserve inspectable review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: educational-scientific-review
+          path: audit-results/educational-scientific-review.json
+          if-no-files-found: warn
+          retention-days: 30

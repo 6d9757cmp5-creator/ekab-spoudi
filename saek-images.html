@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#153c54">
+<title>Εκπαιδευτικές εικόνες ΣΑΕΚ — ΕΚΑΒ Σπουδή</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="saek-images.css">
+<script src="theme-init.js"></script>
+<script src="saek-images.js" defer></script>
+</head>
+<body>
+<header class="saek-gallery-header"><div class="saek-gallery-shell">
+<a href="saek.html" class="saek-gallery-back">← Κατάρτιση ΣΑΕΚ</a>
+<a href="index.html" class="saek-gallery-home">ΕΚΑΒ Σπουδή</a>
+</div></header>
+<main class="saek-gallery-main">
+<p class="saek-gallery-eyebrow">ΣΑΕΚ · 4 εξάμηνα · 20 μαθήματα</p>
+<h1>Εικόνες μαθημάτων</h1>
+<p class="saek-gallery-intro">Εδώ εμφανίζονται μόνο οι επιλεγμένες τοποθετήσεις εικόνων στα 247 κεφάλαια. Η ίδια εικόνα μπορεί να εξυπηρετεί περισσότερα κεφάλαια· οι μη επιλεγμένες παραμένουν στο μητρώο για αξιολόγηση, όχι ως πιστοποιημένο υλικό. Οι εικόνες δεν αποτελούν κλινικές οδηγίες ή πλήρη κάλυψη της ύλης.</p>
+<section class="saek-gallery-filters" aria-label="Φίλτρα εικόνων">
+<label for="imageSemester">Εξάμηνο
+<select id="imageSemester">
+<option value="all">Όλα τα εξάμηνα</option>
+<option value="Α">Α΄ εξάμηνο</option><option value="Β">Β΄ εξάμηνο</option>
+<option value="Γ">Γ΄ εξάμηνο</option><option value="Δ">Δ΄ εξάμηνο</option>
+</select></label>
+<label for="imageCourse">Μάθημα
+<select id="imageCourse"><option value="all">Όλα τα μαθήματα</option></select></label>
+<label for="imageSearch">Αναζήτηση εικόνας
+<input id="imageSearch" type="search" autocomplete="off" placeholder="Π.χ. καρδιά, ανατομία, οξυγόνο">
+</label>
+</section>
+<div class="saek-gallery-status" id="imageStatus" role="status" aria-live="polite">Φόρτωση εικόνων…</div>
+<div id="imageGalleryGrid" class="saek-gallery-grid"></div>
+<div class="saek-gallery-more"><button id="imageMore" type="button" hidden>Περισσότερες εικόνες</button></div>
+<p id="imageRetry" hidden>Δεν φορτώθηκε το μητρώο εικόνων. <button type="button" id="imageRetryButton">Επανάληψη</button></p>
+<dialog id="imageLightbox" class="saek-gallery-dialog" aria-label="Μεγέθυνση εκπαιδευτικής εικόνας">
+<div class="saek-gallery-dialog-header"><button type="button" id="imageClose" aria-label="Κλείσιμο εικόνας">Κλείσιμο ✕</button></div>
+<img id="imageLarge" alt="">
+<h2 id="imageLargeTitle"></h2>
+<p id="imageLargeCaption"></p>
+<a id="imageChapterLink" href="saek.html">Άνοιγμα κεφαλαίου</a>
+</dialog>
+</main>
+</body>
+</html>

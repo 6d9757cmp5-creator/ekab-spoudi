@@ -45,6 +45,7 @@ function labelStatus(q){const status=q.sourceReview?.status;if(status==='documen
 // A question is learned only after successful recalls on separate dates.
 function learning(q){return scheduler.evaluate(state[q.id])}
 function isStudied(q){return learning(q).studied}
+function isRead(q){return typeof state[q.id]?.readCompletedAt==='string'&&Number.isFinite(Date.parse(state[q.id].readCompletedAt))}
 function isMastered(q){return learning(q).mastered}
 function needsReview(q){const s=state[q.id];return Boolean(s&&scheduler.isDue(s))}
 function renderDueToday(){
@@ -68,6 +69,7 @@ function renderDueToday(){
 }
 function updateMetrics(){
  $('#seenCount').textContent=bank.filter(isStudied).length;
+  $('#readCount').textContent=String(bank.filter(isRead).length);
  $('#allCount').textContent=bank.length;
  $('#verifiedCount').textContent=bank.filter(q=>q.answerStatus==='reviewed_educational').length;
  const old=bank.filter(q=>{const s=state[q.id];return s&&(s.selfCorrect||0)>0&&!(Array.isArray(s.reviewHistory)&&s.reviewHistory.length)}).length;
@@ -224,6 +226,40 @@ function filterCatalog(){
  }
  const count=$('#catalogResultInfo');if(count)count.textContent=total?`Εμφανίζονται ${visible} από ${total} αποτελέσματα · κύλισε τη σελίδα για τα υπόλοιπα.`:'Δεν βρέθηκε αντίστοιχη ερώτηση.';
  const more=$('#catalogMore');if(more){more.hidden=total<=catalogVisibleLimit;more.textContent=`Εμφάνιση ${Math.min(24,total-catalogVisibleLimit)} ακόμη ερωτήσεων`;}
+ updateCatalogReaderNavigation();
+}
+// Catalog navigation uses the same group/search filters as the visible question list.
+// Pagination only limits rendering; it must not block moving to later matches.
+function catalogNavigationSequence(){
+ const group=$('#catalogGroupFilter')?.value||'all';
+ const terms=normalizeCatalogText($('#catalogSearch')?.value||'').trim().split(/\s+/).filter(Boolean);
+ const buttons=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item'));
+ const matching=buttons.filter(btn=>(group==='all'||btn.dataset.group===group)&&terms.every(term=>normalizeCatalogText(btn.textContent).includes(term)));
+ const candidates=matching.map(btn=>btn.dataset.questionId);
+ if(catalogSelectedId&&candidates.includes(catalogSelectedId))return candidates;
+ // A direct link or changed filter must never trap the reader outside the catalog.
+ return buttons.map(btn=>btn.dataset.questionId);
+}
+function updateCatalogReaderNavigation(){
+ const prev=$('#catalogReaderPrevious'),next=$('#catalogReaderNext');
+ if(!prev||!next)return;
+ const sequence=catalogNavigationSequence();
+ const current=sequence.indexOf(catalogSelectedId);
+ prev.disabled=current<=0;
+ next.disabled=current<0||current>=sequence.length-1;
+}
+function moveCatalogQuestion(direction){
+ if(!catalogSelectedId)return;
+ const sequence=catalogNavigationSequence(),position=sequence.indexOf(catalogSelectedId);
+ const nextId=sequence[position+direction];
+ if(!nextId)return;
+ // Make a matching question visible in the catalog even beyond the first 24 results.
+ const nextIndex=sequence.indexOf(nextId);
+ if(nextIndex>=catalogVisibleLimit){
+  catalogVisibleLimit=Math.ceil((nextIndex+1)/24)*24;
+  filterCatalog();
+ }
+ openCatalogQuestion(nextId);
 }
 function renderCatalogReader(q){
  const reader=$('#catalogReader');if(!reader)return;
@@ -245,6 +281,10 @@ function renderCatalogReader(q){
  if(q.reviewNote){const p4=document.createElement('p');p4.textContent='Σημείωση ελέγχου: '+q.reviewNote;sources.append(p4)}
  $('#catalogReaderSosNotes').value=st(q).sosNotes||'';
  $('#catalogReaderPersonalNotes').value=st(q).readerNotes||'';
+  const read=isRead(q),markRead=$('#catalogReaderMarkRead');
+  markRead.textContent=read?'✓ Διαβάστηκε · Αναίρεση':'✓ Σημείωσε ως διαβασμένη';
+  markRead.setAttribute('aria-pressed',String(read));
+  markRead.classList.toggle('is-read',read);
  const previous=$('#catalogReaderReviewState');
  previous.textContent=needsReview(q)?'Είναι ήδη στη λίστα επανάληψης.':'Οι σημειώσεις SOS είναι προσωπικές· δεν αποτελούν επιβεβαιωμένη ιατρική οδηγία.';
  for(const btn of document.querySelectorAll('#allQuestionsList .all-question-item')){
@@ -252,6 +292,7 @@ function renderCatalogReader(q){
   btn.classList.toggle('selected',active);
   btn.setAttribute('aria-pressed',String(active));
  }
+ updateCatalogReaderNavigation();
 }
 function openCatalogQuestion(questionId){
  const q=bank.find(item=>item.id===questionId);
@@ -262,12 +303,22 @@ function openCatalogQuestion(questionId){
  const reader=$('#catalogReader');
  reader.scrollIntoView({behavior:'smooth',block:'start'});
 }
+$('#catalogReaderPrevious').addEventListener('click',()=>moveCatalogQuestion(-1));
+$('#catalogReaderNext').addEventListener('click',()=>moveCatalogQuestion(1));
+$('#catalogReaderMarkRead').addEventListener('click',()=>{
+  const q=bank.find(item=>item.id===catalogSelectedId);if(!q)return;
+  const progress=st(q);
+  if(isRead(q))delete progress.readCompletedAt;
+  else progress.readCompletedAt=new Date().toISOString();
+  save();renderCatalogReader(q);updateMetrics();
+});
 $('#catalogReaderClose').addEventListener('click',()=>{
  $('#catalogReaderContent').hidden=true;
  $('#catalogReaderPlaceholder').hidden=false;
  if(!$('#homeView').classList.contains('catalog-open-desktop'))$('#catalogReader').classList.add('hidden');
  if(catalogSelectedId){const btn=Array.from(document.querySelectorAll('#allQuestionsList .all-question-item')).find(x=>x.dataset.questionId===catalogSelectedId);if(btn){btn.classList.remove('selected');btn.setAttribute('aria-pressed','false');btn.focus()}}
  catalogSelectedId=null;
+ updateCatalogReaderNavigation();
 });
 $('#catalogReaderSourceInfo').addEventListener('click',()=>{const q=bank.find(item=>item.id===catalogSelectedId);if(q)sourceModal(q)});
 $('#catalogReaderMarkReview').addEventListener('click',()=>{
@@ -392,4 +443,4 @@ async function init(){state=saved();try{const response=await fetch(BANK_URL);if(
 init(); // Service worker registration is managed by updates.js on every page.
 
 // Cloud changes refresh the existing in-memory study state without restarting a question.
-window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});
+window.addEventListener('ekab:cloud-applied',()=>{state=saved();updateMetrics();if(catalogSelectedId){const q=bank.find(item=>item.id===catalogSelectedId);if(q)renderCatalogReader(q)}if(pool[index])$('#draft').value=state[pool[index].id]?.draft||'';});

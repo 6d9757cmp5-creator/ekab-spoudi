@@ -1,0 +1,243 @@
+{
+  "schema": 1,
+  "updated": "2026-11-01",
+  "description": "Source-backed ownership registry. owner-mapped means existing implementation remains at a historical path; it is NOT a completed move or verification of clinical correctness.",
+  "entries": [
+    {
+      "id": "patient-simulator",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/patient-simulator",
+      "implementation": [
+        "mentor-next.html",
+        "tools/patient-simulator/core/next-sim.mjs"
+      ]
+    },
+    {
+      "id": "anatomy-3d",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/anatomy-3d",
+      "implementation": [
+        "ui-tools/anatomy-3d/index.html",
+        "tools/anatomy-3d/hires-anatomy.js"
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/pharmacology",
+      "implementation": [
+        "farmaka.html",
+        "tools/pharmacology/farmaka-catalog.js"
+      ]
+    },
+    {
+      "id": "seminars",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/seminars",
+      "implementation": [
+        "seminar-prep.html",
+        "tools/seminars/seminar-prep.js"
+      ]
+    },
+    {
+      "id": "ecg-lab",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/ecg-lab",
+      "implementation": [
+        "mentor-ecg.html",
+        "tools/ecg-lab/core/ecg-synthetic.mjs"
+      ]
+    },
+    {
+      "id": "mentor-os",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/mentor-os",
+      "implementation": [
+        "mentor-lab.html",
+        "mentor/presence/presence.mjs"
+      ]
+    },
+    {
+      "id": "protocol-lab",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/protocol-lab",
+      "implementation": [
+        "protocols.html",
+        "protocols-data.mjs"
+      ]
+    },
+    {
+      "id": "saek-study",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/saek-study",
+      "implementation": [
+        "saek.html",
+        "saek-exam-engine.js"
+      ]
+    },
+    {
+      "id": "eoppep-exams",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/eoppep-exams",
+      "implementation": [
+        "eoppep.html",
+        "old_type_written.js"
+      ]
+    },
+    {
+      "id": "pdf-library",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/pdf-library",
+      "implementation": [
+        "pdf-library.html",
+        "tools/pdf-library/app/pdf-library.js",
+        "pdf-library.js"
+      ]
+    },
+    {
+      "id": "emergency-directory",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/emergency-directory",
+      "implementation": [
+        "contacts.html",
+        "contacts-nearby-aed.js"
+      ]
+    },
+    {
+      "id": "profession-law",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/profession-law",
+      "implementation": [
+        "profession-law.html",
+        "profession-acts.js"
+      ]
+    },
+    {
+      "id": "study-planner",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/study-planner",
+      "implementation": [
+        "study-scheduler.js",
+        "study-resume.js"
+      ]
+    },
+    {
+      "id": "oral-practice",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/oral-practice",
+      "implementation": [
+        "mentor-oral.html",
+        "mentor-oral.js"
+      ]
+    },
+    {
+      "id": "scenario-library",
+      "kind": "tool",
+      "status": "owner-mapped",
+      "owner": "tools/scenario-library",
+      "implementation": [
+        "mentor-scenarios.html",
+        "mentor-scenarios.js"
+      ]
+    },
+    {
+      "id": "notes",
+      "kind": "service",
+      "status": "canonical",
+      "owner": "services/notes",
+      "implementation": [
+        "notes-panel.js",
+        "services/notes/notes-store.js",
+        "services/notes/notes-position.js"
+      ]
+    },
+    {
+      "id": "sync",
+      "kind": "service",
+      "status": "canonical",
+      "owner": "services/sync",
+      "implementation": [
+        "cloud-sync.js",
+        "services/sync/sync-model.js",
+        "services/sync/sync-codec.js"
+      ]
+    },
+    {
+      "id": "ai-grading",
+      "kind": "service",
+      "status": "owner-mapped",
+      "owner": "services/ai-grading",
+      "implementation": [
+        "ai-grading-client.js",
+        "functions/answer-grader/main.js",
+        "workers/answer-grader/src/index.js"
+      ]
+    },
+    {
+      "id": "progress",
+      "kind": "service",
+      "status": "owner-mapped",
+      "owner": "services/progress",
+      "implementation": [
+        "progress.js",
+        "home-progress-panel.js",
+        "activity-time.js"
+      ]
+    },
+    {
+      "id": "notifications",
+      "kind": "service",
+      "status": "owner-mapped",
+      "owner": "services/notifications",
+      "implementation": [
+        "ui-components/notification-center.js",
+        "ui-components/notification-center.css"
+      ]
+    },
+    {
+      "id": "search",
+      "kind": "service",
+      "status": "owner-mapped",
+      "owner": "services/search",
+      "implementation": [
+        "global-tools.js",
+        "medical-terms.json"
+      ]
+    },
+    {
+      "id": "educational-media",
+      "kind": "service",
+      "status": "owner-mapped",
+      "owner": "services/educational-media",
+      "implementation": [
+        "educational-animation-engine.js",
+        "workers/educational-animation/worker.mjs"
+      ]
+    },
+    {
+      "id": "study-content",
+      "kind": "content",
+      "status": "owner-mapped",
+      "owner": "content/library",
+      "implementation": [
+        "official_questions.json",
+        "eoppep-source.pdf",
+        "ECLASS_INVENTORY.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {Script} from 'node:vm';
+const read=p=>readFileSync(p,'utf8');
+const canonical='tools/pdf-library/app/pdf-library.js';
+for(const path of [canonical,'pdf-library.js','pdf-library.html','sw.js','services/registry.json'])
+ assert(existsSync(path),'missing file: '+path);
+const app=read(canonical),legacy=read('pdf-library.js'),html=read('pdf-library.html'),sw=read('sw.js');
+new Script(app,{filename:canonical});
+new Script(legacy,{filename:'pdf-library.js'});
+assert(html.includes('defer src="'+canonical+'"'),'PDF root page must load canonical code');
+assert(!html.includes('pdf.js/3.11.174/'),'legacy vulnerable parser still in HTML');
+assert(!app.includes('pdf.js/3.11.174/'),'legacy vulnerable parser still in canonical app');
+assert(!app.includes('window.pdfjsLib'),'PDF reader must use modern ESM, not old UMD global');
+assert(app.includes("PDFJS_VERSION='6.4.299'"),'PDF.js pinned version changed');
+assert(app.includes("pdf.min.mjs")&&app.includes("pdf.worker.min.mjs"),'ESM parser/worker version missing');
+assert(app.includes('isEvalSupported:false'),'untrusted PDFs must not enable evaluator');
+assert(app.includes("DB='ekab-personal-pdf-v1',STORE='documents'"),'PDF IndexedDB data migration unexpectedly changed');
+assert(app.includes("await f.slice(0,5).arrayBuffer()"),'PDF signature verification missing');
+assert(app.includes("if(f.size>50*1024*1024)"),'PDF size limit missing');
+assert(app.includes("URL.revokeObjectURL(activeUrl)"),'blob URL release missing');
+assert(legacy.length<900&&legacy.includes("tools/pdf-library/app/pdf-library.js"),'old import should only forward to canonical');
+assert(sw.includes('"./'+canonical+'"'),'offline PWA must cache app code');
+assert(html.includes('Για την προβολή τους απαιτείται σύνδεση internet'),'offline status must be accurately disclosed');
+const entry=JSON.parse(read('services/registry.json')).entries.find(e=>e.id==='pdf-library');
+assert(entry?.status==='canonical'&&entry.implementation.includes(canonical),'registry not updated');
+console.log('PASS: PDF library canonical app and legacy URL, 2026 PDF.js 6.4.299, eval disabled, unchanged private IndexedDB and clear offline limitation');
