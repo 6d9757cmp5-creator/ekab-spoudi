@@ -183,23 +183,21 @@ const clock=setInterval(()=>{
  elapsed++;if(elapsed<7)return;elapsed=0;
  try{commit(nextMinute(state,1),'Ενημερώθηκαν οι συνθετικές ενδείξεις λόγω παρέλευσης εικονικού χρόνου.');}catch{}
 },1000);
+function setPanelsOpen(open){
+ for(const id of ['next-workspace-main','next-insights']){
+  const node=$(id);node.hidden=!open;
+  if(open)node.style.removeProperty('display');
+  else node.style.setProperty('display','none','important');
+ }
+ $('next-clean-panels').hidden=!open;
+ $('next-show-panels').hidden=open;
+}
 $('next-clean-panels').addEventListener('click',()=>{
- $('next-workspace-main').hidden=true;
- $('next-insights').hidden=true;
- $('next-clean-panels').hidden=true;
- $('next-show-panels').hidden=false;
+ setPanelsOpen(false);
  $('next-result').textContent='Τα εκπαιδευτικά παράθυρα έκλεισαν. Επίλεξε «Εμφάνιση εργαλείων» για συνέχεια.';
 });
-$('next-show-panels').addEventListener('click',()=>{
- $('next-workspace-main').hidden=false;
- $('next-insights').hidden=false;
- $('next-show-panels').hidden=true;
- $('next-clean-panels').hidden=false;
- render();
-});
-$('next-tools').addEventListener('click',()=>{
- if($('next-workspace-main').hidden){$('next-workspace-main').hidden=false;$('next-show-panels').hidden=true;$('next-clean-panels').hidden=false;}
-});
+$('next-show-panels').addEventListener('click',()=>{setPanelsOpen(true);render();});
+$('next-tools').addEventListener('click',()=>{if($('next-workspace-main').hidden)setPanelsOpen(true);});
 $('next-nextstep').addEventListener('click',()=>{
  const r=missionEvidence(state),a=r.people.find(p=>p.id===state.person);
  if(!r.shared[0].done)tool='exam';
@@ -209,7 +207,7 @@ $('next-nextstep').addEventListener('click',()=>{
  }else if(!r.shared[1].done)tool='call';
  else if(!r.shared[2].done)tool='interventions';
  else tool='debrief';
- $('next-workspace-main').hidden=false;$('next-show-panels').hidden=true;$('next-clean-panels').hidden=false;
+ setPanelsOpen(true);
  renderMenu();renderTool();$('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
 });
 window.addEventListener('pagehide',()=>{clearInterval(clock);renderer.dispose();},{once:true});
