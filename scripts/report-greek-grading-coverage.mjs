@@ -49,8 +49,8 @@ const report={
  ]
 };
 if(report.totalSyntheticExamples!==report.pendingExpertReviewExamples+report.independentlyReviewedExamples)throw Error('Unknown review status in synthetic dataset');
-if(report.independentlyReviewedExamples!==0)throw Error('Reviewed examples must be independently verified before removing this safeguard');
-if(items.length!==100)throw Error('Expected 100 synthetic examples at this milestone');
+if(reviewed.some(x=>!x.reviewEvidence?.source||!x.reviewEvidence?.date))throw Error('A reviewed case needs traceable independent educator evidence');
+if(items.length<100)throw Error('Fewer than 100 synthetic cases in the active milestone');
 mkdirSync('audit-results',{recursive:true});
 writeFileSync('audit-results/greek-grading-coverage.json',JSON.stringify(report,null,2)+'\n');
 console.log('Greek grading coverage (offline):',JSON.stringify({
