@@ -57,11 +57,11 @@ function answerFromLibrary(q){
  const hits=retrieve(q,terms,{k:4,minScore:3});
  if(hits.length)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
- const cleaned=normalize(q).split(/[^\\p{L}\\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
+ const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
  if(chapters.length){
   const passages=chapters.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:c.body.slice(0,400)}));
-  return {text:chapters.map(c=>c.title+'\\n'+c.body.slice(0,950)).join('\\n\\n')+'\\n\\nΜπορείς να συνεχίσεις στο αντίστοιχο κεφάλαιο ΣΑΕΚ.',passages,href:chapters[0].href};
+  return {text:chapters.map(c=>c.title+'\n'+c.body.slice(0,950)).join('\n\n')+'\n\nΜπορείς να συνεχίσεις στο αντίστοιχο κεφάλαιο ΣΑΕΚ.',passages,href:chapters[0].href};
  }
  return {text:'Δεν βρήκα επαρκή αντιστοιχία στη διαθέσιμη τοπική βιβλιοθήκη. Μπορείς να δοκιμάσεις συγκεκριμένο ιατρικό όρο ή κωδικό ΕΟΠΠΕΠ (π.χ. EOP-A-001).',passages:[],href:null};
 }
