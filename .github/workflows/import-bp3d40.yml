@@ -32,6 +32,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add tools/anatomy-3d/resources/bp3d40/
+          git add -f tools/anatomy-3d/resources/bp3d40/atlases/bp3d40/build/index.json tools/anatomy-3d/resources/bp3d40/atlases/bp3d40/build/meshes.bin
           if git diff --cached --quiet; then
             echo "Already present"
           else
