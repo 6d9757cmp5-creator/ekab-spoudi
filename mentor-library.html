@@ -21,6 +21,12 @@
 .source-card details{margin-top:12px}
 .source-card summary{cursor:pointer;line-height:1.5}
 @media(max-width:610px){.sources-filters{grid-template-columns:1fr}}
+.study-paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px;margin:12px 0 20px}
+.study-path{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px}
+.study-path h3{font-size:1rem;margin:0 0 6px}
+.study-path p,.study-path li{font-size:.87rem;line-height:1.5}
+.study-path ul{padding-left:20px;margin:9px 0 0}
+.study-path li{margin:5px 0}
 </style>
 <script type="module" src="mentor-library.js" defer></script>
 </head>
@@ -52,6 +58,11 @@
       <option value="identified">Χωρίς εισαγμένο κείμενο</option>
     </select>
   </div>
+</section>
+<section aria-labelledby="study-paths-heading">
+  <h2 id="study-paths-heading">Θεματικές διαδρομές μελέτης ATLA</h2>
+  <p class="muted small">Εκπαιδευτικός χάρτης: επίλεξε Paramedic ή Ιατρική για να δεις τις προτεινόμενες πηγές ανά θέμα. Οι συνδέσεις είναι θεματικές και δεν υποκαθιστούν συγκεκριμένη παραπομπή σε κεφάλαιο.</p>
+  <div id="study-paths" class="study-paths"></div>
 </section>
 <p id="sources-visible" role="status" aria-live="polite">Προετοιμασία αναζήτησης…</p>
 <p role="status" id="library-status">Φόρτωση καταλόγου…</p>
