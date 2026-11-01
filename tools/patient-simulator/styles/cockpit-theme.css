@@ -149,3 +149,33 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,su
  html{scroll-behavior:auto}
  .next-case-card,.next-tool,.next-actions button{transition:none!important;transform:none!important}
 }
+
+
+/* Real-browser visual audit fix A.1:
+ * Keep the patient head unobstructed in the phone-size model viewer.
+ * The compact MENTOR launcher is intentionally absent on this page in mobile:
+ * the always-visible MENTOR OS navigation link remains in the header.
+ */
+@media(max-width:600px){
+ .next-ready-overlay{overflow:hidden}
+ .next-ready-overlay model-viewer{
+   position:absolute;
+   inset:102px 0 54px;
+   width:100%;
+   height:calc(100% - 156px);
+   min-height:0;
+   margin:0;
+ }
+ .next-ready-overlay .next-ready-controls{top:8px;left:8px;right:8px;max-width:calc(100% - 16px)}
+ .next-ready-overlay .next-ready-status{
+   top:62px;left:8px;right:8px;
+   max-width:calc(100% - 16px);
+   font-size:.66rem;
+   padding:6px 9px;
+ }
+ .next-ready-overlay .next-ready-legal{
+   bottom:7px;left:8px;right:8px;
+   margin:0 auto;
+ }
+ .ekab-mentor-launcher,.ekab-mentor-presence{display:none!important}
+}
