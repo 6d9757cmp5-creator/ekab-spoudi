@@ -9,8 +9,8 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=27.1.93">
-<link rel="stylesheet" href="home.css?v=mentor-3d-home-271122">
-<link rel="stylesheet" href="mentor/styles/mentor-avatar-live.css">
+<link rel="stylesheet" href="home.css?v=atla-20261101">
+
 <link rel="stylesheet" href="home-progress-panel.css?v=half-half-20261028">
 <script src="theme-init.js?v=27.1.109"></script>
 <script>
@@ -22,7 +22,7 @@
 })();
 </script>
 <title>ΕΚΑΒ Σπουδή — Αρχική σελίδα</title>
-<script type="module" src="mentor-home.js" defer></script>
+<script type="module" src="atla/assistant.mjs" defer></script>
 <link rel="stylesheet" href="learning-surface.css?v=mentor-guidance-20261101">
 <script type="module" src="learning-surface.mjs"></script>
 </head>
@@ -49,7 +49,7 @@
 <span class="home-card-head"><span class="home-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6M17 15l2 2 3-3"/></svg></span><span class="home-card-text"><span class="home-card-title-line"><span class="home-card-title"><a class="home-card-primary-link" href="seminar-prep.html">Προετοιμασία σεμιναρίων</a></span></span><span class="home-card-subtitle">BLS/AED · PBLS · ILS · PHTLS · ALS</span></span><span class="home-card-chevron" aria-hidden="true">›</span></span>
 </section>
 <section class="home-card home-card-protocols">
-<span class="home-card-head"><span class="home-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h12a3 3 0 0 1 3 3V20H7a3 3 0 0 1-3-3zM7 7h9M7 11h9M7 15h5M19 8h2"/></svg></span><span class="home-card-text"><span class="home-card-title-line"><span class="home-card-title"><a class="home-card-primary-link" href="protocols.html">Ελληνικά Πρωτόκολλα</a></span></span><span class="home-card-subtitle">Θέματα · Πηγές · MENTOR PROTOCOL LAB & DEBRIEF</span></span><span class="home-card-chevron" aria-hidden="true">›</span></span>
+<span class="home-card-head"><span class="home-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h12a3 3 0 0 1 3 3V20H7a3 3 0 0 1-3-3zM7 7h9M7 11h9M7 15h5M19 8h2"/></svg></span><span class="home-card-text"><span class="home-card-title-line"><span class="home-card-title"><a class="home-card-primary-link" href="protocols.html">Ελληνικά Πρωτόκολλα</a></span></span><span class="home-card-subtitle">Θέματα · Πρωτόκολλα · Εκπαιδευτική εξάσκηση</span></span><span class="home-card-chevron" aria-hidden="true">›</span></span>
 </section>
 </section>
 <section class="home-anatomy-single-wrap" aria-labelledby="anatomyHomeHeading">
@@ -60,48 +60,10 @@
     <span class="home-anatomy-single-arrow" aria-hidden="true">›</span>
   </a>
 </section>
-<section class="home-mentor-wrap" aria-label="MENTOR — ψηφιακός εκπαιδευτής">
- <div class="home-mentor-presence mentor-cinema">
-  <div id="mentor-home-visual-shell" class="mentor-cinema-portrait mentor-home-visual-shell">
-  <span class="mentor-cinema-status"><span class="mentor-status-beacon" aria-hidden="true"></span> MENTOR · ΖΩΝΤΑΝΟ 3D</span>
-  <iframe id="mentor-home-presence-frame" class="mentor-home-presence-frame" src="mentor-presence.html" title="Ζωντανή τρισδιάστατη μορφή του εκπαιδευτή MENTOR" loading="eager"></iframe>
-  <small id="mentor-home-3d-status" role="status" aria-live="polite">Φόρτωση 3D MENTOR…</small>
-</div>
-<div class="home-mentor-content mentor-cinema-copy">
-    <div class="mentor-home-visibility"><p class="home-mentor-kicker">ΕΚΑΒ Σπουδή · Ο προσωπικός σου εκπαιδευτής</p><button id="mentor-home-visual-toggle" type="button" aria-expanded="true">Απόκρυψη μορφής</button></div>
-    <h2>MENTOR <small class="home-mentor-label">3D LIVE</small></h2>
-    <p class="home-mentor-intro">«Έτοιμος για μάθημα; Μπορούμε να ξεκινήσουμε με μια ερώτηση, μια αποστολή ή επανάληψη.»</p>
-    <p class="home-mentor-note">Ο ψηφιακός σου εκπαιδευτικός οδηγός. Βασικοί ιατρικοί όροι και συντομογραφίες απαντώνται τοπικά, χωρίς κατανάλωση AI credits. Δεν είναι πλήρης AI συνομιλία.</p>
-    <form id="mentor-home-question-form" class="mentor-home-question-form">
-  <label for="mentor-home-question">Ρώτησε τον MENTOR από την αρχική</label>
-  <div class="mentor-home-question-controls"><input id="mentor-home-question" name="question" maxlength="300" required autocomplete="off" placeholder="Π.χ. Τι είναι η ΚΑΡΠΑ;"><button type="submit">Ρώτησε</button></div>
-</form>
-<p id="mentor-home-answer" class="mentor-home-answer" role="status" aria-live="polite" hidden></p>
-<a id="mentor-home-answer-source" class="mentor-home-answer-source" target="_blank" rel="noopener noreferrer" href="#" hidden>Σχετική εκπαιδευτική βιβλιογραφία</a>
-<button type="button" id="mentor-home-answer-speak" class="mentor-home-answer-speak" disabled>🔊 Άκου απάντηση</button>
-<div class="mentor-voice-identity"><span aria-hidden="true">◉</span><span>Ελληνική φωνή · γυναικεία όπου διατίθεται</span><span class="mentor-voice-identity-bars" aria-hidden="true">▂▅▃▇▃</span></div>
-    <p id="mentor-home-speech-status" class="mentor-cinema-live" role="status" aria-live="polite">Έτοιμος να διαβάσει τον χαιρετισμό.</p>
-  </div>
-  <div class="mentor-cinema-voice">
-    <div class="mentor-cinema-wave" aria-hidden="true">
-       <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
-    <div class="mentor-cinema-controls">
-      <button type="button" id="mentor-home-mic" class="mentor-cinema-mic">🎙 Μίλα μου</button>
-      <button type="button" id="mentor-home-listen">▶ Άκου</button>
-      <button type="button" id="mentor-home-stop" disabled>■ Σταμάτα</button>
-    </div>
-    <label class="mentor-cinema-select-label" for="mentor-home-voice">Φωνή ανάγνωσης</label>
-    <select id="mentor-home-voice" aria-label="Επιλογή ελληνικής φωνής"><option value="">Αυτόματη γυναικεία ελληνική φωνή</option></select>
-    <a class="home-mentor-single" href="mentor-lab.html">Μπες στον MENTOR <span aria-hidden="true">↗</span></a>
-  </div>
- </div>
- <nav class="home-mentor-shortcuts" aria-label="Γρήγορες διαδρομές MENTOR">
-   <a href="mentor-lab.html#mentor-presence">💬 Συζήτηση <span aria-hidden="true">›</span></a>
-   <a href="mentor-readonly.html">📚 Διάβασε ύλη <span aria-hidden="true">›</span></a>
-   <a href="mentor-live.html">🚑 Αποστολή <span aria-hidden="true">›</span></a>
-   <a href="ui-tools/mentor-roadmap.html">🧭 Κατάσταση λειτουργιών <span aria-hidden="true">›</span></a>
- </nav>
+<section class="atla-home-callout" aria-labelledby="atla-home-title">
+<div><h2 id="atla-home-title">ATLA · Ο AI καθηγητής και βοηθός σου</h2>
+<p>Ένας εκπαιδευτικός συνοδοιπόρος σε όλη τη ΣΑΕΚ, τον ΕΟΠΠΕΠ και τα εργαλεία. Μάθε, αναζήτησε, εξασκήσου και συνέχισε από το τελευταίο σου βήμα.</p></div>
+<button type="button" data-atla-open>Ρώτησε την ATLA</button>
 </section>
 <div class="home-bottom-row" aria-label="Πρόοδος και συνέχεια μελέτης">
 <div class="home-mini-progress progress-dashboard" aria-label="Πρόοδος μελέτης και εξάσκησης ΣΑΕΚ, ΕΟΠΠΕΠ και σεμιναρίων"><div id="homeMultiTracker" aria-live="polite"><p>Φόρτωση προόδου…</p></div></div>
