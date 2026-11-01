@@ -83,3 +83,25 @@ test('actual future binary module stays pending, not falsely screened',async()=>
   assert.equal(result.files[0].mode,'binary_media');
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('reviews many files concurrently, sends no temperature, surfaces API error detail',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'rev-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'rules');
+  const names=Array.from({length:10},(_,i)=>'lesson-'+i+'.md');
+  for(const n of names)await writeFile(join(root,n),'text '+n);
+  const bodies=[];
+  const ok=async(_u,o)=>{bodies.push(JSON.parse(o.body));return {ok:true,json:async()=>({stop_reason:'end_turn',
+   content:[{type:'text',text:JSON.stringify({checked_scope:'x',findings:[],unverified:[],not_checked:[]})}]})};};
+  process.env.ANTHROPIC_API_KEY='test';
+  const report=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(report.reviewed_count,10);
+  assert.equal(report.status,'screened');
+  assert.ok(bodies.every(b=>!('temperature' in b)));
+  const bad=async()=>({ok:false,status:400,json:async()=>({error:{message:'bad param'}})});
+  const failed=await runReview({manual:'lesson-0.md',root,fetchImpl:bad});
+  assert.match(failed.files[0].error,/400: bad param/);
+  assert.equal(failed.status,'incomplete');
+ }finally{delete process.env.ANTHROPIC_API_KEY;await rm(root,{recursive:true,force:true});}
+});

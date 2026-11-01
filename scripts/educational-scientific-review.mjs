@@ -10,7 +10,7 @@ import {ANTHROPIC_URL,ANTHROPIC_VERSION,CLAUDE_MODELS} from '../mentor/ai/claude
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT='audit-results/educational-scientific-review.json';
 const RULES='docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md';
-export const MAX_FILES=6,MAX_CHARS=10500;
+export const MAX_FILES=25,MAX_CHARS=10500,CONCURRENCY=4;
 // File-type based discovery: new courses, subjects, names and directories are covered
 // automatically. Never depend on a fixed list of today's feature names.
 export function isEducationPath(p){
@@ -49,12 +49,15 @@ async function askClaude(key,system,path,mode,text,fetchImpl){
   method:'POST',signal:AbortSignal.timeout(90000),
   headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':ANTHROPIC_VERSION},
   body:JSON.stringify({
-   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],temperature:0,max_tokens:2400,
+   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:2400,
    system:system+'\nExternal webpages cannot be accessed during this request. Mark unsupported external claims ΜΗ ΕΠΑΛΗΘΕΥΜΕΝΟ. Return ONLY the required JSON.',
    messages:[{role:'user',content:'FILE: '+path+'\nMODE: '+mode+'\nMATERIAL:\n'+text}]
   })
  });
- if(!result.ok)throw Error('review_service_http_'+result.status);
+ if(!result.ok){
+  let detail='';try{detail=String((await result.json())?.error?.message||'').replace(/\s+/g,' ').slice(0,60);}catch{}
+  throw Error('review_service_http_'+result.status+(detail?': '+detail:''));
+ }
  const data=await result.json();
  if(data.stop_reason==='max_tokens')throw Error('review_response_truncated');
  let body=(data.content||[]).filter(x=>x.type==='text').map(x=>x.text||'').join('').trim();
@@ -70,14 +73,14 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  if(!paths.length)return report;
  let rules;try{rules=await readFile(resolve(root,RULES),'utf8');}
  catch{report.status='error_missing_review_rules';return report;}
- for(const path of paths.slice(0,MAX_FILES)){
-  if(!existsSync(resolve(root,path))){report.pending.push({path,reason:'missing_or_deleted_file'});continue;}
+ const reviewOne=async path=>{
+  if(!existsSync(resolve(root,path))){report.pending.push({path,reason:'missing_or_deleted_file'});return;}
   // Binary education assets require visual/media review; do not decode as text
   // or claim a scientific assessment based on corrupted bytes.
   if(/\.(?:pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm)$/i.test(path)){
    report.files.push({path,status:'pending',mode:'binary_media'});
    report.pending.push({path,reason:'visual_or_media_review_required'});
-   continue;
+   return;
   }
   const patch=manual?'':git(['diff','--unified=6',...baseArgs(),'--',path]);
   const mode=patch?'changed_lines_context':'file_excerpt';
@@ -96,12 +99,17 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
     report.reviewed_count++;report.findings.push(...review.findings.map(x=>({...x,path})));
     if(review.unverified.length||review.not_checked.length)report.pending.push({path,reason:'requires_source_or_scope_verification'});
    }catch(err){
-    entry.status='error';entry.error=String(err.message||'review_error').slice(0,80);
+    entry.status='error';entry.error=String(err.message||'review_error').slice(0,140);
     report.pending.push({path,reason:'review_failed'});
    }
   }
   report.files.push(entry);
- }
+ };
+ const queue=paths.slice(0,MAX_FILES);
+ await Promise.all(Array.from({length:Math.min(CONCURRENCY,queue.length)},async()=>{
+  while(queue.length)await reviewOne(queue.shift());
+ }));
+ report.files.sort((a,b)=>a.path<b.path?-1:1);
  report.status=report.pending.length?'incomplete':report.findings.some(f=>['CRITICAL','HIGH'].includes(f.severity))?
   'requires_correction':report.findings.length?'findings_to_review':'screened';
  return report;
