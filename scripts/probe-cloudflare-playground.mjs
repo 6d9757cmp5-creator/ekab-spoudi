@@ -28,6 +28,22 @@ try{
    buttons:await page.locator('button').evaluateAll(els=>els.slice(0,80).map(x=>({text:x.innerText?.trim().slice(0,100),aria:x.getAttribute('aria-label'),title:x.getAttribute('title')}))),
    inputs:await page.locator('input,textarea,[role="textbox"],[contenteditable="true"],select').evaluateAll(els=>els.slice(0,45).map(x=>({tag:x.tagName,placeholder:x.getAttribute('placeholder'),aria:x.getAttribute('aria-label'),outer:x.outerHTML.slice(0,250)})))};
   console.log('PLAYGROUND_MODEL_MODE',JSON.stringify(report.modelMode).slice(0,10500));
+  // Live, unauthenticated model evaluation through the official public UI.
+  await page.goto('https://playground.ai.cloudflare.com/models?model='+encodeURIComponent('@cf/google/gemma-4-26b-a4b-it'),{waitUntil:'domcontentloaded',timeout:35000});
+  await page.waitForTimeout(4500);
+  report.gemmaPageUrl=page.url();
+  const hiddenValues=await page.locator('input[aria-hidden="true"]').evaluateAll(els=>els.map(e=>e.value));
+  report.gemmaSelected=hiddenValues.some(v=>/gemma-4-26b-a4b-it/.test(v));
+  console.log('PLAYGROUND_GEMMA_SELECTED',report.gemmaSelected,JSON.stringify(hiddenValues));
+  if(report.gemmaSelected){
+   const prompt='Εκπαιδευτική αξιολόγηση στα ελληνικά. Σύγκρινε ΟΛΑ τα ζητούμενα και όχι μόνο κοινές λέξεις. Μην αξιολογείς ορθογραφία ή σύνταξη.\\nΕρώτηση: Ποιες είναι οι λειτουργίες των ρινικών κοιλοτήτων κατά τη δίοδο του αέρα από τη μύτη;\\nΕκπαιδευτική αναφορά: Ο εισπνεόμενος αέρας καθαρίζεται από σωματίδια με βλέννη και κροσσούς, θερμαίνεται, υγραίνεται και η ρινική περιοχή συμμετέχει στην όσφρηση.\\nΑπάντηση μαθητή: η μυτη ζεστενει το αερα κ τον καθαριζει και τον υγραινει\\nΑπάντησε αποκλειστικά με σύντομο JSON { "verdict": "correct|partial|incorrect|uncertain", "reason": "ελληνική αιτιολόγηση", "missing": ["ελλείψεις"] }.';
+   await page.locator('textarea[data-testid="chat-input"]').fill(prompt);
+   await page.getByRole('button',{name:'Send message'}).click({timeout:8000});
+   await page.waitForTimeout(18000);
+   report.liveSample={model:'@cf/google/gemma-4-26b-a4b-it',question:'EOP-A-001',expected:'partial',body:(await page.locator('body').innerText()).slice(-9000),url:page.url()};
+   console.log('PLAYGROUND_GEMMA_LIVE_SAMPLE',JSON.stringify(report.liveSample).slice(0,10500));
+  }
+
  }catch(e){report.modelModeError=String(e?.message||e).slice(0,250);console.log('PLAYGROUND_MODEL_MODE_ERROR',report.modelModeError);}
 
  console.log('PLAYGROUND_PROBE',JSON.stringify({status:report.status,statusCode:report.statusCode,finalUrl:report.finalUrl,title:report.title,body:report.bodyText.slice(0,2100),buttons:report.buttons,inputs:report.inputs,errors:report.pageErrors}).slice(0,9000));
