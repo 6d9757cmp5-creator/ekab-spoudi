@@ -45,3 +45,14 @@ Sources:
 - [Pilot Actions run](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41357774397)
 - [Master catalog scan](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41355252898)
 - [NIH 3D discovery](https://3d.nih.gov/discover)
+
+## Νεότερος επιβεβαιωμένος έλεγχος — 02/11/2026
+
+Μετά την αλλαγή **Settings → Actions → Workflow permissions** από τον ιδιοκτήτη, το `GITHUB_TOKEN` απέκτησε δικαίωμα εγγραφής GitHub Releases:
+- **Επιβεβαιώθηκε** δοκιμή δημιουργίας Release + αρχείου: [run 41363335304](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41363335304).
+- **Επιβεβαιώθηκε** πραγματική μόνιμη μεταφορά των ήδη ληφθέντων NIH 3D αρχείων από το προηγούμενο artifact: [run 41363455707](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41363455707) με ελέγχους μεγέθους των 9 `tar.zst` και του `RESULT.json`. Η αναφορά καταγράφει 113 πρωτότυπα αρχεία από 10 δημοσιευμένα NIH IDs.
+- Μόνιμη αποθήκη: [Release atla-nih3d-master-2026](https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/atla-nih3d-master-2026), **9 lossless archives ~2,48 GB**.
+- Ο πλήρης importer `.github/workflows/atla-nih3d-model-archive.yml` ενημερώθηκε ώστε να χρησιμοποιεί **GitHub Releases ως μόνιμο κύριο αποθηκευτικό χώρο**. Δεν απαιτεί πλέον σύνδεση S3.
+- Η σάρωση του πλήρους NIH καταλόγου και η μαζική μεταφορά παραμένουν **σε εξέλιξη / μη πλήρως επαληθευμένες**. Η προηγούμενη απαίτηση S3 λόγω 403 έχει ξεπεραστεί για τα Releases, αλλά η τωρινή επιτυχία δεν πιστοποιεί μεταφορά του συνόλου.
+
+Αυτή η ενότητα υπερισχύει της παλαιότερης σημείωσης για μη διαθέσιμη μόνιμη αποθήκευση GitHub.
