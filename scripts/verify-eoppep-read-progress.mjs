@@ -2,9 +2,10 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=file=>readFileSync(new URL('../'+file,import.meta.url),'utf8');
-const modelCode=read('sync-model.js').replace(/^import .+\n/gm,'');
+// Canonical model source; root sync-model.js now re-exports the implementation.
+const modelCode=read('services/sync/sync-model.js').replace(/^import .+\n/gm,'');
 const {validValue,captureEdits,mergeEntry,visibleEntries}=await import('data:text/javascript;charset=utf-8,'+encodeURIComponent(modelCode));
-const html=read('theory.html'),hub=read('eoppep.html'),app=read('app.js'),hubJs=read('eoppep-hub.js'),local=read('sync-local.js'),model=read('sync-model.js'),styles=read('styles.css');
+const html=read('theory.html'),hub=read('eoppep.html'),app=read('app.js'),hubJs=read('eoppep-hub.js'),local=read('services/sync/sync-local.js'),model=read('services/sync/sync-model.js'),styles=read('styles.css');
 assert.match(html,/id="catalogReaderMarkRead"/,'Mark as read button missing');
 assert.match(html,/id="catalogReaderNext"[\s\S]*?id="catalogReaderMarkRead"/,'Reader completion must be beside next question');
 assert.match(html,/id="readCount"/);
