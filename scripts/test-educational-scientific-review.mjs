@@ -170,8 +170,8 @@ test('identical text is cached and a run never exceeds its paid-call budget',asy
  }finally{for(const k of ['ANTHROPIC_API_KEY','AUDIT_CACHE_FILE','AUDIT_MAX_CALLS'])delete process.env[k];await rm(root,{recursive:true,force:true});}
 });
 
-test('generated audit registries are excluded from paid review but lessons and questions are not',()=>{
+test('audit records are excluded from paid review but lessons and questions are not',()=>{
  for(const p of ['docs/primary-source-crosscheck-2026-10-28/eoppep-314.json','docs/primary-source-crosscheck-2026-10-28/claude_tools.py',
-  'docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.cjs','docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'])assert.equal(isEducationPath(p),false,p);
- for(const p of ['official_questions.json','eoppep-sos.json','docs/primary-source-crosscheck-2026-10-28/REPORT.md'])assert.equal(isEducationPath(p),true,p);
+  'docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.cjs','docs/primary-source-crosscheck-2026-10-28/CLAUDE_SAEK_REPORT.md','docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'])assert.equal(isEducationPath(p),false,p);
+ for(const p of ['official_questions.json','eoppep-sos.json','saek-course-05.html','docs/SAEK-REVIEW-SUMMARY-2026-10-25.md'])assert.equal(isEducationPath(p),true,p);
 });

@@ -20,8 +20,8 @@ export function isEducationPath(p){
  if(/(^|\/)(?:README|AGENTS|LICENSE|CHANGELOG)(?:\.[^/]*)?$/i.test(p)||
    /(^|\/)(?:package(?:-lock)?|tsconfig|vite\.config|eslint\.config)\.[^/]+$/i.test(p)||
    /\.(?:test|spec)\.(?:[cm]?js|tsx?|py)$/i.test(p)||
-   // Machine-generated audit registries/tools are checked deterministically (scripts/validate-registries.py), not by paid LLM calls.
-   /^docs\/primary-source-crosscheck-[^/]+\/[^/]+\.(?:json|py|cjs)$/i.test(p)||/^docs\/EOPPEP-SOURCE-INVENTORY[^/]*\.json$/i.test(p))return false;
+   // Audit records (registries, tools, reports) are checked deterministically (scripts/validate-registries.py), not by paid LLM calls.
+   /^docs\/primary-source-crosscheck-[^/]+\//i.test(p)||/^docs\/EOPPEP-SOURCE-INVENTORY[^/]*\.json$/i.test(p))return false;
  // Future lesson pages, medical figures, courses, question banks, modules,
  // guides and multimedia are all discovered regardless of their names.
  return /\.(?:html?|md|mdx|txt|rst|csv|json|jsonl|ipynb|xml|ya?ml|[cm]?js|jsx|tsx?|py|vue|svelte|astro|svg|pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm)$/i.test(p);
