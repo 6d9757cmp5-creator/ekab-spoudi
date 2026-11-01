@@ -4,6 +4,10 @@ on:
     branches: [main]
     paths:
       - 'tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json'
+  workflow_run:
+    workflows:
+      - 'ATLA Master Plan 2026 - NIH 3D complete resource references'
+    types: [completed]
   workflow_dispatch:
 permissions:
   contents: write
