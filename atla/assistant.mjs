@@ -104,6 +104,16 @@ function boot(){
  const note=$('p','atla-note','Εκπαιδευτικό εργαλείο, όχι ιατρική οδηγία. Δεν διαβάζει αυτόματα βαθμούς ή προσωπικές σημειώσεις.');
  panel.append(head,state,demoRow,context,stream,form,footer,note);
  document.body.append(panel,launcher);
+ const currentPage=location.pathname.split('/').pop()||'';
+ const addAddonCss=path=>{const node=$('link');node.rel='stylesheet';node.href=new URL(path,import.meta.url).href;document.head.append(node);};
+ if(/^saek-course-(?:0[1-9]|1[0-9]|20)\\.html$/.test(currentPage)){
+  addAddonCss('./practice/saek-practice.css');
+  void import('./practice/saek-practice.mjs').catch(()=>{});
+ }
+ if(currentPage==='mentor-next.html'){
+  addAddonCss('./practice/cockpit-entry.css');
+  void import('./practice/cockpit-entry.mjs').catch(()=>{});
+ }
  const history=()=>{try{return loadTurns(storage);}catch{return [];}};
  function showHistory(){
   stream.replaceChildren();
@@ -126,6 +136,17 @@ function boot(){
  launcher.addEventListener('click',()=>setOpen(true));close.addEventListener('click',()=>setOpen(false));
  document.addEventListener('click',e=>{if(e.target?.closest?.('[data-atla-open]')){e.preventDefault();setOpen(true);}});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&visible)setOpen(false);});
+ window.addEventListener('ekab:atlas-context',e=>{
+  const detail=e.detail||{};
+  const source=String(detail.source||'');
+  const chapter=String(detail.chapter||'');
+  if(!/^saek-course-(?:0[1-9]|1[0-9]|20)\\.html$/.test(source)||!/^lesson-(?:[1-9]|[1-9][0-9]|100)$/.test(chapter))return;
+  const heading=String(detail.focus||'').replace(/[<>]/g,'').trim().slice(0,90);
+  setOpen(true);
+  context.textContent='Από κεφάλαιο ΣΑΕΚ: '+(heading||chapter);
+  field.value='Βοήθησέ με να κατανοήσω το κεφάλαιο «'+(heading||chapter)+'».';
+  field.focus();
+ });
  clear.addEventListener('click',()=>{try{clearTurns(storage);}catch{}showHistory();});
  speak.addEventListener('click',()=>{if(!('speechSynthesis'in window))return;window.speechSynthesis.cancel();const last=[...stream.querySelectorAll('.atla-reply')].at(-1)?.textContent;if(last){const u=new SpeechSynthesisUtterance(last.slice(0,700));u.lang='el-GR';window.speechSynthesis.speak(u);}});
  selected.addEventListener('click',()=>{const t=String(window.getSelection?.()||'').trim().slice(0,300);if(t){field.value='Εξήγησέ μου: '+t;field.focus();}else{state.textContent='Επίλεξε πρώτα ένα μικρό απόσπασμα της σελίδας.';}});
