@@ -164,9 +164,10 @@ try {
       throw Error(device+': MENTOR NEXT visual posture not recorded');
     await page.locator('#next-tool-panels > summary').click();
     if(await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel collapse failed');
-    await page.locator('#next-tool-panels > summary').click();
-    if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel restore failed');
-    if(!await page.locator('#next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT native disclosure workspace did not reopen');
+    await page.locator('#next-nextstep').click();
+    if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT next step did not restore evidence panels');
+    if(!await page.locator('.next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT workspace did not reopen');
+    if(!await page.locator('#next-tool-title').textContent().then(s=>s.includes('Εξέταση')))throw Error(device+': MENTOR NEXT recommended step not opened');
     console.log('PASS '+device+': MENTOR NEXT v0.2 independent evidence, metric trend, visual posture and panels');
 
     await context.close();

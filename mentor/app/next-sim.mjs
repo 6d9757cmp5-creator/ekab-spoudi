@@ -184,5 +184,19 @@ const clock=setInterval(()=>{
  try{commit(nextMinute(state,1),'Ενημερώθηκαν οι συνθετικές ενδείξεις λόγω παρέλευσης εικονικού χρόνου.');}catch{}
 },1000);
 // The native <details> element owns close/reopen, independent of JavaScript and the floating MENTOR.
+// Guided next process step, never clinical advice.
+$('next-nextstep').addEventListener('click',()=>{
+ const r=missionEvidence(state),p=r.people.find(x=>x.id===state.person);
+ if(!r.shared[0].done)tool='exam';
+ else if(p.steps.some(x=>!x.done)){
+  const first=p.steps.find(x=>!x.done);
+  tool=first.id==='dialogue'?'dialogue':first.id==='exam'?'exam':first.id==='monitor'?'monitor':'exam';
+ }else if(!r.shared[1].done)tool='call';
+ else if(!r.shared[2].done)tool='interventions';
+ else tool='debrief';
+ $('next-tool-panels').open=true;
+ renderMenu();renderTool();
+ $('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
+});
 window.addEventListener('pagehide',()=>{clearInterval(clock);renderer.dispose();},{once:true});
 render();
