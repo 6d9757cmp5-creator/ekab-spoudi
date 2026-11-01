@@ -28,7 +28,8 @@ test('home removes heavyweight avatar and keeps core learning navigation',()=>{
 });
 test('ATLA reuses one existing AI path, retains no-write behavior and exam guard',()=>{
  const app=read('atla/assistant.mjs');
- assert.match(app,/import \{askAi,buildPayload\} from '\.\.\/mentor\/ai\/client\.mjs'/);
+ assert.ok(app.includes("from './ai/client.mjs'"));
+ assert.ok(read('mentor/ai/client.mjs').includes("export * from '../../atla/ai/client.mjs'"));
  assert.match(app,/examMode\(location\.pathname\)/);
  assert.match(app,/riskGuard\(q\)/);
  assert.match(app,/transformSource\(x,await fetchJSON\(x\.file\)\)/);
