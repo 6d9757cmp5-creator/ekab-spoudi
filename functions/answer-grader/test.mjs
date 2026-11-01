@@ -4,6 +4,7 @@ import handler from './main.js';
 import {freeProviders} from './free-providers.js';
 import {EXTRA_GRADING_REFERENCES} from './extra-grading-references.mjs';
 import {SEMANTIC_GRADING_POLICY,cautiouslyCheckGrade} from './semantic-grading-policy.mjs';
+import {SOURCE_COMPLETENESS,protectCompleteness} from './source-completeness.mjs';
 import {QUESTIONS as ORAL_QUESTIONS} from '../../mentor/core/oral-practice.mjs';
 import {readFileSync} from 'node:fs';
 
@@ -235,4 +236,53 @@ test('all optional written assessment surfaces invoke the same safe client',()=>
  assert.match(oral,/ai-grading-client\.js/);assert.match(oral,/id="oral-grade-ai"/);
  assert.match(script,/section:'old_written'/);assert.match(oralScript,/section:'mentor_oral'/);
  assert.match(oralScript,/examBox\.checked/);
+});
+
+test('EOP-A-001: Greek answer with three true functions is NOT a complete answer',async()=>setup(async()=>{
+ const seen=[];
+ globalThis.fetch=async(url,options)=>{
+  const request=JSON.parse(options.body);
+  seen.push(JSON.parse(request.messages[1].content));
+  return response({...grade,verdict:'correct',correctPoints:['Μύτη'],missingPoints:[],explanation:'Αυθαίρετα σωστό'});
+ };
+ const result=await invoke({section:'eoppep',questionId:'EOP-A-001',
+  answer:'η μυτη το αερα ζεστενει καθαριζει και υγρενει'},'nasal-too-short');
+ assert.equal(result.status,200);
+ assert.equal(result.body.verdict,'partial');
+ assert.match(result.body.explanation,/δεν καλύπτει όλα/);
+ assert.ok(result.body.missingPoints.some(x=>x.includes('όσφρηση')));
+ assert.ok(result.body.missingPoints.some(x=>x.includes('κροσσοί')));
+ assert.equal(seen.length,1);
+ assert.equal(seen[0].essentialCriteria.length,5);
+ assert.ok(seen[0].essentialCriteria.some(x=>x.includes('όσφρηση')));
+}));
+test('source rubric safeguard: accepts complete paraphrase, holds negation or unknown synonyms',()=>{
+ const q={id:'EOP-A-001'};
+ const valid={...grade,verdict:'correct'};
+ assert.equal(SOURCE_COMPLETENESS[q.id].essential.length,5);
+ const cases=[
+  ['καθαρίζει με βλέννη και κροσσούς, θερμαίνει, υγραίνει τον αέρα και βοηθά στην όσφρηση','correct'],
+  ['Η μυτη καθαριζη τον αερα, τον ζεσταινει και τον υγραινει.','partial'],
+  ['Καθαρίζει, θερμαίνει, υγραίνει τον αέρα','partial'],
+  ['Ο αέρας φιλτράρεται με βλέννη, θερμαίνεται, υγραίνεται και βοηθά να μυρίζουμε','correct'],
+  ['Καθαρίζει με βλέννη και κροσσούς, θερμαίνει, δεν υγραίνει και βοηθά στην όσφρηση','uncertain'],
+  ['Εξισορροπεί το περιβάλλον εισπνοής μέσω προστατευτικών ρινικών δομών','uncertain']
+ ];
+ for(const [answer,expected] of cases){
+  const result=protectCompleteness(q,answer,valid);
+  assert.equal(result.verdict,expected,answer);
+ }
+ // Only a source guard: it cannot upgrade an incorrect answer to correct.
+ assert.equal(protectCompleteness(q,'ζεσταίνει', {...valid,verdict:'incorrect'}).verdict,'incorrect');
+});
+test('grammar is not confused with completeness in the same reference item',()=>{
+ const q={id:'EOP-A-001'};
+ const output=protectCompleteness(q,'η μυτη το αερα ζεστενει καθαριζει και υγρενει',
+   {...grade,verdict:'correct'});
+ assert.equal(output.verdict,'partial');
+ assert.deepEqual(output.correctPoints,[
+ 'Καθαρισμός του εισπνεόμενου αέρα',
+ 'Θέρμανση του εισπνεόμενου αέρα',
+ 'Ύγρανση του εισπνεόμενου αέρα']);
+ assert.ok(output.missingPoints.length===2);
 });
