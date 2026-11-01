@@ -13,3 +13,20 @@ Canonical location: tools/patient-simulator/. Ο simulator δεν αποτελε
 Οι παλιές mentor/app/next-* και mentor/core/next-* διαδρομές είναι ελάχιστες γέφυρες. Οι τιμές localStorage και οι μαθητικές επιδόσεις δεν μετακινούνται. Τα περιστατικά παραμένουν συνθετικά, όχι κλινικά επικυρωμένα.
 
 Δοκιμές: node scripts/verify-tool-boundaries.mjs · node --test tools/patient-simulator/core/*.test.mjs tools/patient-simulator/app/next-patient-mesh.test.mjs · node scripts/app-load-smoke.mjs.
+
+## Visual Baseline A — στόχος Body Interact ή παραπάνω
+Ο [αναλυτικός σχεδιασμός](../../docs/SIMULATION_COCKPIT_VISUAL_SPEC_2026.md) περιγράφει τη μελλοντική σκηνή, monitor, εργαλεία, κλινική αξιολόγηση και πλήρη quality gates. Το [cockpit-theme.css](styles/cockpit-theme.css) είναι η **πρώτη** εφαρμοσμένη φάση κοινής οπτικής γλώσσας, πάνω από το λειτουργικό `next-sim.css`. Τα `scripts/verify-cockpit-visual.mjs` tests παίρνουν πραγματικά screenshots desktop/tablet/mobile στο GitHub Actions και ελέγχουν overflow, panel layout, touch target και renderer ready/fallback. Αυτά **δεν αποδεικνύουν** σημερινή οπτική ισοδυναμία με το Body Interact.
+
+
+## v0.6 — συγχρονισμός ορατής GLB κάμερας
+Ο προσομοιωτής συνδέει τα υπάρχοντα πλήκτρα προβολής με την πραγματική κάμερα του static GLB μέσω `app/patient-camera.mjs` και `app/next-sim.mjs`. Ο υπολογισμός εστιάζει μόνο προσεγγιστικά σε περιοχές όρθιων μοντέλων, με σαφή ένδειξη ότι **δεν** είναι κλινική εξέταση· για τα ξαπλωμένα assets δεν προβάλλονται ατεκμηρίωτα anatomical landmarks.
+
+Δοκιμές: `node --test tools/patient-simulator/app/patient-camera.test.mjs` και `scripts/app-load-smoke.mjs` στον πραγματικό browser. Κριτήριο μέλλοντος: ενοποίηση 3D σκηνής και ιατρικά επικυρωμένα μοντέλα/αποτελέσματα — δεν επιτεύχθηκε ακόμη.
+
+## v0.7 — πραγματικά ενιαία 3D σκηνή
+Η κύρια λειτουργία χρησιμοποιεί πλέον μία πρωτότυπη **Three.js r187** WebGL σκηνή με **δύο ταυτόχρονα πραγματικά CC0 GLB μοντέλα**, αντί για ξεχωριστό 3D overlay ενός ασθενούς. Η κοινή σκηνή συνδυάζει επιλεγόμενο ασθενή Α/Β, τρία πρωτότυπα συνθετικά περιβάλλοντα (δρόμος / κατοικία / πλατεία), στατικό 3D φορείο, μη λειτουργικό monitor και πρωτότυπο όχημα. Παρέχονται κίνηση κάμερας, φωτισμός και ελεγχόμενη αναβάθμιση αποδοτικότητας κινητού.
+
+- Source: `app/unified-stage.mjs` (original authored code) → pinned offline-first bundle `vendor/unified-stage.bundle.mjs` με Three.js 0.187.0 και upstream MIT LICENSE στο `vendor/THREE-LICENSE.txt`.
+- Rebuild: `.github/workflows/build-cockpit-stage.yml`. Μη χειρογράφετε αλλαγές στο compiled vendor bundle. Τα παλιά procedural canvas και CC0 model-viewer παραμένουν διαθέσιμα ως fallback.
+- Η προσομοίωση ασθενών **παραμένει στατική**: δεν υλοποιήθηκαν rigged κινήσεις, αναπνοή, τραύμα, φαρμακευτικές επιδράσεις ή κλινικά επικυρωμένα σενάρια. Τα props είναι **οπτικά εκπαιδευτικά**, όχι πραγματικές ιατρικές πράξεις.
+- QA: `scripts/verify-unified-scene.mjs`, `scripts/app-load-smoke.mjs`, `scripts/verify-cockpit-visual.mjs` για ενεργό renderer, 2 ασθενείς, αλλαγή περιβάλλοντος και mobile/desktop screenshots. Ο στόχος Body Interact ή ανώτερο παραμένει **ανεκπλήρωτος**.

@@ -218,42 +218,49 @@ try {
     console.log('PASS '+device+': MENTOR NEXT v0.4 native CC0 human asset, WebGL render status '+visualStatus+' and immersive controls');
 
 
-    // v0.5: real textured Innerscene CC0 patients and locally hosted model-viewer.
+    // v0.7: one real Three.js scene renders two actual CC0 patients and original equipment.
     for(const name of ['alex-standing.glb','daniel-lying.glb','amara-sitting.glb']){
       const response=await page.request.get('http://127.0.0.1:8765/tools/patient-simulator/assets/patients/'+name);
-      if(!response.ok()||(await response.body()).length<3000000)throw Error(device+': ready-made GLB absent '+name);
+      if(!response.ok()||(await response.body()).length<3000000)throw Error(device+': real GLB missing '+name);
     }
+    const bundle=await page.request.get('http://127.0.0.1:8765/tools/patient-simulator/vendor/unified-stage.bundle.mjs');
+    if(!bundle.ok()||(await bundle.body()).length<100000)throw Error(device+': pinned local Three.js renderer missing');
     try{
       await page.waitForFunction(()=>{
-        const overlay=document.querySelector('#next-ready-overlay');
-        const viewer=document.querySelector('#next-ready-model');
-        return overlay&&!overlay.hidden&&viewer?.getAttribute('src')?.endsWith('.glb')&&viewer.dataset.assetReady==='true';
-      },null,{timeout:15000});
-    }catch(error){
+        const overlay=document.querySelector('#next-unified-overlay');
+        const stage=document.querySelector('#next-unified-host .next-unified-canvas');
+        return overlay&&!overlay.hidden&&stage?.dataset.stageStatus==='ready';
+      },null,{timeout:45000});
+    }catch{
       const info=await page.evaluate(()=>({
-        readyState:document.readyState,connection:navigator.connection?.saveData,
+        overlayHidden:document.querySelector('#next-unified-overlay')?.hidden,
+        stage:document.querySelector('.next-unified-canvas')?.dataset.stageStatus,
         button:document.querySelector('#next-ready-toggle')?.textContent,
-        hidden:document.querySelector('#next-ready-overlay')?.hidden,
-        src:document.querySelector('#next-ready-model')?.getAttribute('src'),
-        status:document.querySelector('#next-ready-status')?.textContent,
-        result:document.querySelector('#next-result')?.textContent,
-        customElement:!!customElements.get('model-viewer')
+        oldViewerHidden:document.querySelector('#next-ready-overlay')?.hidden,
+        status:document.querySelector('#next-unified-status')?.textContent,
+        result:document.querySelector('#next-result')?.textContent
       }));
-      throw Error(device+': real patient viewer did not start '+JSON.stringify(info));
+      throw Error(device+': unified two-patient GLB scene not ready '+JSON.stringify(info));
     }
     if(!await page.locator('#next-ready-toggle').getAttribute('aria-pressed').then(x=>x==='true'))
-      throw Error(device+': realistic GLB mode was not enabled');
-    await page.locator('#next-ready-pose').selectOption('daniel');
-    if(!await page.locator('#next-ready-model').getAttribute('src').then(x=>x.includes('daniel-lying.glb')))
-      throw Error(device+': real Daniel 3D model was not selected');
-    await page.locator('#next-ready-pose').selectOption('amara');
-    if(!await page.locator('#next-ready-model').getAttribute('src').then(x=>x.includes('amara-sitting.glb')))
-      throw Error(device+': real Amara 3D model was not selected');
+      throw Error(device+': unified scene is not the primary default view');
+    if(!await page.locator('#next-unified-host canvas').isVisible())
+      throw Error(device+': actual two-patient WebGL canvas not visible');
+    await page.locator('[data-next-patient="b"]').click();
+    if(!await page.locator('#next-person-name').textContent())throw Error(device+': selecting patient B failed');
+    await page.locator('[data-next-view="head"]').click();
+    await page.locator('[data-next-view="full"]').click();
+    await page.locator('[data-case-id="public-square-next-v1"]').click();
+    await page.waitForFunction(()=>document.querySelector('.next-unified-canvas')?.dataset.stageStatus==='ready',null,{timeout:25000});
+    if(!await page.locator('#next-unified-host canvas').isVisible())
+      throw Error(device+': scene failed after case switch');
     await page.locator('#next-ready-toggle').click();
-    if(await page.locator('#next-ready-overlay').isVisible())
-      throw Error(device+': 3D viewer fallback switch failed');
-    console.log('PASS '+device+': MENTOR v0.5 real textured ready-made GLB patients, pose choices and procedural fallback');
-
+    if(await page.locator('#next-unified-overlay').isVisible())
+      throw Error(device+': unified scene fallback switch failed');
+    if(!await page.locator('#next-canvas').isVisible())
+      throw Error(device+': original procedural fallback not visible');
+    console.log('PASS '+device+': unified WebGL stage, two textured CC0 patients, scene focus, scenario changes and fallback');
+    
     // Repeated architecture pass: PDF library root URL still resolves its independent app script.
     await page.goto('http://127.0.0.1:8765/pdf-library.html',{waitUntil:'domcontentloaded'});
     const pdfAsset=await page.request.get('http://127.0.0.1:8765/tools/pdf-library/app/pdf-library.js');

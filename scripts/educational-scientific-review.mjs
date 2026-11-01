@@ -63,8 +63,8 @@ async function askClaude(key,system,path,mode,text,fetchImpl){
   method:'POST',signal:AbortSignal.timeout(90000),
   headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':ANTHROPIC_VERSION},
   body:JSON.stringify({
-   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:4000,
-   system:system+'\nExternal webpages cannot be accessed during this request. Mark unsupported external claims ΜΗ ΕΠΑΛΗΘΕΥΜΕΝΟ. Report at most 8 findings, most severe first, quotes under 200 characters. Return ONLY the required JSON.',
+   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:6000,
+   system:system+'\nExternal webpages cannot be accessed during this request. Mark unsupported external claims ΜΗ ΕΠΑΛΗΘΕΥΜΕΝΟ. Report at most 4 findings, most severe first. Keep every JSON string under 160 characters (quote only the shortest decisive phrase); unverified and not_checked: at most 3 short items each. Never repeat the input. Return ONLY the required JSON.',
    messages:[{role:'user',content:'FILE: '+path+'\nMODE: '+mode+'\nMATERIAL:\n'+text}]
   })
  });
