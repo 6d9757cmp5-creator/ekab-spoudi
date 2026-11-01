@@ -1,0 +1,32 @@
+name: ATLA staged migration validation
+
+on:
+  pull_request:
+    paths:
+      - "atla/**"
+      - "index.html"
+      - "saek.html"
+      - "eoppep.html"
+      - "saek-course-*.html"
+      - "learning-surface.mjs"
+      - ".github/workflows/atla-migration.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  atla-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax and integration-contract tests
+        run: |
+          node --check atla/assistant.mjs
+          node --check learning-surface.mjs
+          node --test atla/assistant.contract.test.mjs
+          node --test mentor/knowledge/retrieve.test.mjs mentor/context/bridge.test.mjs mentor/ai/client.test.mjs
