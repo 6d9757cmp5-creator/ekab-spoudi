@@ -34,3 +34,11 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;curs
 .next-case-brief p{margin:10px 0}
 @media(max-width:1070px){.next-insights{grid-template-columns:1fr}}
 @media(max-width:580px){.next-brief-panel,.next-chart-panel{padding:13px}.next-evidence-grid{grid-template-columns:1fr}.next-command-bar button{flex:1}.next-command-bar span{width:100%}}
+
+/* Native browser-owned disclosure: reliable touch and keyboard support without custom click listeners */
+.next-panel-section{min-width:0}
+.next-panel-section>summary{cursor:pointer;display:block;margin:15px 0 0;padding:14px 17px;background:#163b4e;border:1px solid #588396;border-radius:12px;font-weight:800;font-size:.86rem;color:#e5f9fa;min-height:48px;list-style:none}
+.next-panel-section>summary::-webkit-details-marker{display:none}
+.next-panel-section>summary:focus-visible{outline:3px solid #80ffe1;outline-offset:3px}
+.next-panel-section[open]>summary{border-color:#7dd3ce}
+.next-panel-section:not([open])>.next-workspace,.next-panel-section:not([open])>.next-insights{display:none!important}

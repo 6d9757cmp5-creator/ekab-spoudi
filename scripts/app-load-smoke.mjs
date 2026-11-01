@@ -162,10 +162,10 @@ try {
     await page.locator('#next-actions button').filter({hasText:'Οπτική στάση: καθιστός'}).click();
     if(!await page.locator('#next-events').textContent().then(s=>s.includes('Οπτική στάση: καθιστός')))
       throw Error(device+': MENTOR NEXT visual posture not recorded');
-    await page.locator('#next-clean-panels').click();
-    if(await page.locator('#next-insights').isVisible()){const status=await page.locator('#next-insights').evaluate(el=>({hidden:el.hidden,style:el.style.display,computed:getComputedStyle(el).display,command:document.querySelector('#next-root')?.dataset.panels,buttonHidden:document.querySelector('#next-clean-panels')?.hidden}));throw Error(device+': MENTOR NEXT tool broom did not dismiss panels '+JSON.stringify(status));}
-    await page.locator('#next-show-panels').click();
-    if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT panel restore failed');
+    await page.locator('#next-tool-panels summary').click();
+    if(await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel collapse failed');
+    await page.locator('#next-tool-panels summary').click();
+    if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel restore failed');
     await page.locator('#next-nextstep').click();
     if(!await page.locator('#next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT next-step panel did not open');
     console.log('PASS '+device+': MENTOR NEXT v0.2 independent evidence, metric trend, visual posture and panels');
