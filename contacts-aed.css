@@ -1,9 +1,6 @@
 /* v27.1.117 — two calm, mobile-first surfaces: poster + official AED map. */
 .aed-minimal-panel{padding:clamp(16px,2.5vw,25px);min-width:0}
 .aed-minimal-panel .aed-section-title{font-size:clamp(1.08rem,2.2vw,1.43rem);line-height:1.4;margin:0 0 15px;font-weight:800}
-.aed-poster-only{display:block;max-width:1100px;margin-inline:auto;overflow:hidden;border-radius:16px;background:#246440;box-shadow:0 2px 11px #0a223322;outline-offset:3px}
-.aed-poster-only img{display:block;width:100%;height:auto;aspect-ratio:1159/986;object-fit:contain}
-.aed-poster-only:focus-visible{outline:3px solid #58baf1}
 .aed-minimal-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
 .aed-minimal-heading .aed-section-title{margin:0}
 .aed-map-source{display:grid;place-items:center;flex:none;width:36px;height:36px;text-decoration:none;border:1px solid var(--line);border-radius:11px;color:var(--blue);font-weight:800;font-size:1.3rem}
@@ -26,8 +23,7 @@
 .aed-minimal-panel .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0,0,0,0);overflow:hidden;white-space:nowrap}
 @media(max-width:520px){
  .aed-minimal-panel{padding:15px}
- .aed-poster-only{border-radius:13px}
- .aed-nearby-map{height:clamp(390px,59dvh,580px);border-radius:14px}
+  .aed-nearby-map{height:clamp(390px,59dvh,580px);border-radius:14px}
  .aed-minimal-panel .aed-section-title{font-size:1.11rem}
  .aed-compact-toolbar{gap:8px}
  .aed-range-control select{width:94px;padding-inline:8px}
@@ -35,3 +31,24 @@
 
 /* On the contacts/first-aid screen, the global floating notebook overlaps vital map pins. Keep notes elsewhere and via the header. */
 body .ekab-notes-fab{display:none!important}
+
+/* Official training poster stays on its original publisher's website until republication rights are established. */
+.aed-official-poster-link{display:flex;align-items:center;gap:14px;min-height:88px;padding:18px;background:#1c5f43;border:1px solid #387a5a;border-radius:16px;color:#fff;text-decoration:none;transition:background .15s}
+.aed-official-poster-link:hover{background:#237754;color:#fff}
+.aed-official-poster-link:focus-visible{outline:3px solid #76d3b0;outline-offset:3px}
+.aed-official-poster-link strong{display:block;font-size:1.04rem;line-height:1.4;color:#fff}
+.aed-official-poster-link small{display:block;margin-top:6px;font-size:.79rem;line-height:1.45;color:#e0f3e7}
+.aed-official-symbol{display:grid;place-items:center;flex:none;width:54px;height:54px;background:#fff;border-radius:14px;color:#216948;font-weight:800;font-size:32px}
+@media(max-width:520px){.aed-official-poster-link{min-height:78px;padding:13px}.aed-official-symbol{width:46px;height:46px;font-size:26px}}
+
+/* Preview publisher-hosted 2021 poster; newer ERC 2025 guidance is linked alongside. */
+.aed-poster-preview{margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.aed-poster-preview summary{cursor:pointer;padding:13px 15px;font-weight:750;min-height:46px}
+.aed-poster-preview summary:focus-visible{outline:3px solid #399bbc;outline-offset:-3px}
+.aed-poster-preview[open] summary{border-bottom:1px solid var(--line)}
+.aed-poster-frame{width:100%;height:clamp(420px,75vw,850px);background:var(--bg);overflow:hidden}
+.aed-poster-frame iframe{width:100%;height:100%;display:block;border:0}
+.aed-poster-preview p{padding:0 14px}
+.aed-guideline-update{margin:12px 0 0;font-size:.85rem;line-height:1.5}
+.aed-guideline-update a{overflow-wrap:anywhere}
+@media(max-width:620px){.aed-poster-frame{height:490px}}

@@ -1,0 +1,68 @@
+name: Educational and scientific review
+# Runs on pull requests only (a push to a PR branch used to trigger it twice).
+# The reviewer itself selects educational/content-capable files from the diff, so new
+# modules are never omitted by path filters. Cost is bounded: unchanged text is served from
+# a cache and each run spends at most AUDIT_MAX_CALLS paid calls.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: 'Optional comma-separated paths for targeted evaluation (new sections allowed)'
+        required: false
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: educational-scientific-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  independent-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+      AUDIT_PATHS: ${{ inputs.paths || '' }}
+      AUDIT_CACHE_FILE: audit-results/review-cache.json
+      AUDIT_MAX_CALLS: ${{ vars.AUDIT_MAX_CALLS || '40' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate review engine and boundaries
+        run: |
+          node --check scripts/educational-scientific-review.mjs
+          node --test scripts/test-educational-scientific-review.mjs
+      - name: Deterministic registry and official-wording check (free, no API)
+        run: python3 scripts/validate-registries.py
+      - name: Restore review cache (unchanged text is never re-sent)
+        uses: actions/cache/restore@v4
+        with:
+          path: audit-results/review-cache.json
+          key: review-cache-${{ hashFiles('docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md') }}-${{ github.run_id }}
+          restore-keys: |
+            review-cache-${{ hashFiles('docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md') }}-
+      - name: Evaluate changed educational and scientific material
+        run: node scripts/educational-scientific-review.mjs
+      - name: Save review cache (also when the review is incomplete, so the next run continues)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: audit-results/review-cache.json
+          key: review-cache-${{ hashFiles('docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md') }}-${{ github.run_id }}
+      - name: Preserve inspectable review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: educational-scientific-review
+          path: audit-results/educational-scientific-review.json
+          if-no-files-found: warn
+          retention-days: 30

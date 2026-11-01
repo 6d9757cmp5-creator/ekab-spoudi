@@ -1,0 +1,44 @@
+name: Import supplementary official MakeHuman CC0 rig and face assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-makehuman-supplemental.yml'
+      - 'scripts/import-makehuman-supplemental.mjs'
+      - 'tools/patient-simulator/resources/makehuman/supplemental-catalog.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  official-cc0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify official source listing
+        run: |
+          node --check scripts/import-makehuman-supplemental.mjs
+          node scripts/import-makehuman-supplemental.mjs --dry-run
+      - name: Download official rig and skin resources
+        run: node scripts/import-makehuman-supplemental.mjs --import
+      - name: Preserve imported research resources
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-makehuman-cc0-rig-eye-motion-assets
+          path: tools/patient-simulator/resources/makehuman/
+          retention-days: 30
+      - name: Commit source assets to dedicated Cockpit folder
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/patient-simulator/resources/makehuman/
+          if git diff --cached --quiet; then
+            echo "No changes to source assets"
+          else
+            git commit -m "assets(cockpit): store licensed MakeHuman rig and motion research"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

@@ -1,0 +1,49 @@
+name: Deploy MENTOR chat Worker (manual)
+
+# Manual only. Needs the repository secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID
+# (a Cloudflare account on the Workers Free plan). Copies ANTHROPIC_API_KEY (and optionally
+# MENTOR_TEST_TOKEN) into the Worker's own encrypted secrets. The browser never receives them.
+# Claude stays OFF until the Worker variables in wrangler.jsonc are changed deliberately.
+on:
+  workflow_dispatch:
+    inputs:
+      push_secrets:
+        description: 'Copy ANTHROPIC_API_KEY / MENTOR_TEST_TOKEN into the Worker secrets'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: workers/mentor-chat
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tests
+        working-directory: .
+        run: node --test workers/mentor-chat/*.test.mjs mentor/ai/*.test.mjs
+      - name: Check Cloudflare secrets exist
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing secret CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing secret CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+      - name: Deploy Worker
+        run: npx --yes wrangler@4 deploy
+      - name: Set Worker secrets
+        if: ${{ inputs.push_secrets }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MENTOR_TEST_TOKEN: ${{ secrets.MENTOR_TEST_TOKEN }}
+        run: |
+          printf '%s' "$ANTHROPIC_API_KEY" | npx --yes wrangler@4 secret put ANTHROPIC_API_KEY > /dev/null
+          if [ -n "$MENTOR_TEST_TOKEN" ]; then printf '%s' "$MENTOR_TEST_TOKEN" | npx --yes wrangler@4 secret put MENTOR_TEST_TOKEN > /dev/null; fi

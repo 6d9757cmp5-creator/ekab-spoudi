@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "source": "makehumancommunity/makehuman",
+  "pinnedCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+  "license": "CC0-1.0, official MakeHuman assets only",
+  "purpose": "Cockpit standalone human-source rig/skin/eye/motion data; NOT a finished patient GLB",
+  "files": [
+    {
+      "name": "default.mhskel",
+      "sha": "b02cbecae00143856410d7561adf006d83bf9b3e",
+      "bytes": 117790,
+      "sourcePath": "makehuman/data/rigs/default.mhskel",
+      "output": "tools/patient-simulator/resources/makehuman/rigs/default.mhskel",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "default_weights.mhw",
+      "sha": "66185806afacf87749be8e5cf6dbf66496b2a6b0",
+      "bytes": 897521,
+      "sourcePath": "makehuman/data/rigs/default_weights.mhw",
+      "output": "tools/patient-simulator/resources/makehuman/rigs/default_weights.mhw",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "walk1.bvh",
+      "sha": "2eb82ed386190e51a4a48ccec04730514ccaf02d",
+      "bytes": 42516,
+      "sourcePath": "makehuman/data/animations/walks/walk1.bvh",
+      "output": "tools/patient-simulator/resources/makehuman/animations/walks/walk1.bvh",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "high-poly.mhclo",
+      "sha": "22bc5f77f398c59088804f7f4c9bb0e39d38661d",
+      "bytes": 72490,
+      "sourcePath": "makehuman/data/eyes/high-poly/high-poly.mhclo",
+      "output": "tools/patient-simulator/resources/makehuman/eyes/high-poly/high-poly.mhclo",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "high-poly.obj",
+      "sha": "01562a9caf4dca9ebb1fd5c24db083c17e724330",
+      "bytes": 100882,
+      "sourcePath": "makehuman/data/eyes/high-poly/high-poly.obj",
+      "output": "tools/patient-simulator/resources/makehuman/eyes/high-poly/high-poly.obj",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "brown_eye.png",
+      "sha": "bda1b4b0d94f4b7b34ca4f58063eab04f05cd2e7",
+      "bytes": 610817,
+      "sourcePath": "makehuman/data/eyes/materials/brown_eye.png",
+      "output": "tools/patient-simulator/resources/makehuman/eyes/materials/brown_eye.png",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "brown.mhmat",
+      "sha": "4935d95e41a628307ed01278908c0fe48220b031",
+      "bytes": 1247,
+      "sourcePath": "makehuman/data/eyes/materials/brown.mhmat",
+      "output": "tools/patient-simulator/resources/makehuman/eyes/materials/brown.mhmat",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "default.mhmat",
+      "sha": "2ff22cbdcc47c4933544a8c68f52e5e0a3a78fdc",
+      "bytes": 1139,
+      "sourcePath": "makehuman/data/skins/default.mhmat",
+      "output": "tools/patient-simulator/resources/makehuman/skins/default.mhmat",
+      "license": "CC0-1.0"
+    }
+  ]
+}

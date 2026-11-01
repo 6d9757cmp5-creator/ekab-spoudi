@@ -1,0 +1,34 @@
+name: ATLA NIH 3D pilot - verify lossless binary archive
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-nih3d-mirror-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate and install lossless compressor
+        run: |
+          node --check scripts/mirror-nih3d-model-files.mjs
+          sudo apt-get update -qq && sudo apt-get install -qq -y zstd
+      - name: Mirror actual NIH 3D geometry, preserving original bytes and SHA256
+        run: node scripts/mirror-nih3d-model-files.mjs --start=160 --end=175 --out=tmp/nih3d-pilot
+      - name: Upload binary packages and verified manifests to ATLA pilot resource release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: atla-nih3d-pilot-2026
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA NIH 3D lossless binary source pilot" --notes "Trial of original model transfer and compression with SHA-256 provenance. Not a declaration of full NIH catalog import."
+          shopt -s nullglob
+          for f in tmp/nih3d-pilot/*.tar.zst* tmp/nih3d-pilot/*-RESULT.json; do
+            gh release upload "$TAG" "$f" --clobber
+          done

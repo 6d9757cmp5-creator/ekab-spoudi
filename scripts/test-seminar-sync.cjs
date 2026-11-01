@@ -9,7 +9,8 @@ const localStorage={
 };
 const helperCode=fs.readFileSync('seminar-sync.js','utf8').replace(/^export /gm,'');
 const sem=new Function('localStorage',helperCode+';return {SEMINAR_KEY,SEMINAR_COURSES,validSeminarCourse,readSeminarValues,applySeminarValues,mergeSeminarCourse};')(localStorage);
-const modelCode=fs.readFileSync('sync-model.js','utf8').replace(/^import .+\n/gm,'').replace(/^export /gm,'');
+// Load canonical source: the root sync-model.js is now an ES module compatibility re-export.
+const modelCode=fs.readFileSync('services/sync/sync-model.js','utf8').replace(/^import .+\n/gm,'').replace(/^export /gm,'');
 const model=new Function('validSeminarCourse','mergeSeminarCourse','SEMINAR_COURSES',modelCode+';return {validValue,captureEdits,mergeEntries,visibleEntries,validateManifest};')(sem.validSeminarCourse,sem.mergeSeminarCourse,sem.SEMINAR_COURSES);
 const mk=(studied=[],other={})=>({
  studied,right:[],needs:[],oral:[],qNotes:{},oralNotes:{},scenarioFeedback:{},scenarioGrades:{},

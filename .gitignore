@@ -1,0 +1,18 @@
+# Local dependency installations, caches and generated QA outputs
+node_modules/
+**/node_modules/
+audit-results/
+browser-qa-results/
+playwright-report/
+test-results/
+coverage/
+dist/
+build/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+!**/.env.example

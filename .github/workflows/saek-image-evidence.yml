@@ -1,0 +1,124 @@
+name: SAEK image evidence (technical, not clinical certification)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/education/**'
+      - 'saek-image-audit-2026.json'
+      - 'saek-lesson-fit-review.json'
+      - 'saek-visual-ui.js'
+      - 'saek-reviewed-image-ui.js'
+      - 'saek-images.js'
+      - 'saek-images.html'
+      - 'saek-course-*.html'
+      - 'sw.js'
+      - 'scripts/check-saek-images.mjs'
+      - 'scripts/check-saek-lesson-image-fit.mjs'
+      - 'scripts/verify-saek-image-integration.mjs'
+      - 'scripts/verify-saek-review-hashes.py'
+      - 'scripts/build-saek-certification-queue.mjs'
+      - 'scripts/validate-saek-svg.py'
+      - 'scripts/check-saek-browser-text.cjs'
+      - 'scripts/verify-saek-gallery-browser.mjs'
+      - 'scripts/verify-saek-course-image-browser.mjs'
+      - 'scripts/check-site-media-links.mjs'
+      - 'scripts/render-saek-contact-sheets.py'
+      - '.github/workflows/saek-image-evidence.yml'
+  pull_request:
+    paths:
+      - 'assets/education/**'
+      - 'saek-image-audit-2026.json'
+      - 'saek-lesson-fit-review.json'
+      - 'saek-visual-ui.js'
+      - 'saek-reviewed-image-ui.js'
+      - 'saek-images.js'
+      - 'saek-images.html'
+      - 'saek-course-*.html'
+      - 'sw.js'
+      - 'scripts/check-saek-images.mjs'
+      - 'scripts/check-saek-lesson-image-fit.mjs'
+      - 'scripts/verify-saek-image-integration.mjs'
+      - 'scripts/verify-saek-review-hashes.py'
+      - 'scripts/build-saek-certification-queue.mjs'
+      - 'scripts/validate-saek-svg.py'
+      - 'scripts/check-saek-browser-text.cjs'
+      - 'scripts/verify-saek-gallery-browser.mjs'
+      - 'scripts/verify-saek-course-image-browser.mjs'
+      - 'scripts/check-site-media-links.mjs'
+      - 'scripts/render-saek-contact-sheets.py'
+      - '.github/workflows/saek-image-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integrity:
+    name: image-integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit registry, source provenance, and lesson placements
+        run: |
+          node --check saek-images.js
+          node scripts/check-saek-images.mjs
+          node scripts/check-saek-lesson-image-fit.mjs
+          node scripts/verify-saek-image-integration.mjs
+          node scripts/check-site-media-links.mjs
+      - name: Audit asset structure, current bytes, and visual-review evidence
+        run: |
+          python3 scripts/validate-saek-svg.py
+          python3 scripts/verify-saek-review-hashes.py
+          node scripts/build-saek-certification-queue.mjs
+      - name: Preserve technical reports (pending reviews are not approvals)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saek-image-integrity-evidence
+          path: |
+            saek-image-report.json
+            saek-image-integration-report.json
+            saek-lesson-fit-report.json
+            saek-sha-visual-evidence-report.json
+            saek-image-certification-queue.json
+            site-media-static-report.json
+          if-no-files-found: warn
+          retention-days: 30
+  visual-triage:
+    name: image-render-and-text-bounds
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install visual render dependencies
+        run: |
+          python3 -m pip install --break-system-packages --disable-pip-version-check 'CairoSVG==2.7.1' 'Pillow==11.1.0'
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Render review contact sheets and check visible SVG text bounds
+        run: |
+          python3 scripts/render-saek-contact-sheets.py
+          node scripts/check-saek-browser-text.cjs
+          node scripts/verify-saek-gallery-browser.mjs
+          node scripts/verify-saek-course-image-browser.mjs
+      - name: Save screenshots/contact sheets for actual human review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saek-image-visual-triage
+          path: |
+            image-contact-sheets/
+            image-browser-text-report.json
+            audit-results/saek-gallery-browser.json
+            audit-results/saek-lesson-image-browser.json
+          if-no-files-found: warn
+          retention-days: 30

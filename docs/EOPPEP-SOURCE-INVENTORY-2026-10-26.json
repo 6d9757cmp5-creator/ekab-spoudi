@@ -6,16 +6,16 @@
     "total": 314,
     "withRecord": 314,
     "withHttps": 314,
-    "documentedSourceCheck": 128,
+    "documentedSourceCheck": 129,
     "historicalTargetedReview": 60,
-    "pendingSpecificPassageCheck": 126,
+    "pendingSpecificPassageCheck": 125,
     "needsMoreSpecificLocation": 12,
-    "withRecordedSpecificReview": 128,
-    "withoutRecordedSpecificReview": 186,
-    "withDocumentedTargetedReview": 188,
-    "withoutDocumentedTargetedReview": 126,
-    "withRecordedSourceCheckedField": 128,
-    "withoutRecordedSourceCheckedField": 186,
+    "withRecordedSpecificReview": 129,
+    "withoutRecordedSpecificReview": 185,
+    "withDocumentedTargetedReview": 189,
+    "withoutDocumentedTargetedReview": 125,
+    "withRecordedSourceCheckedField": 129,
+    "withoutRecordedSourceCheckedField": 185,
     "withNonSpecificIntroSources": 12,
     "newlyVerifiedFromLiveWeb20261026": 18
   },
@@ -58,8 +58,8 @@
     {
       "id": "EOP-A-002",
       "group": "A",
-      "sourceUrl": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review",
-      "sourceLocation": "OpenStax A&P 2e, Κεφ. 22: αναπνευστικό σύστημα",
+      "sourceUrl": "https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801",
+      "sourceLocation": "The Open University – OpenLearn Create, «B2: Respiration», πίνακας εισπνεόμενων/εκπνεόμενων αερίων· NOAA JetStream, «The Atmosphere», ξηρός ατμοσφαιρικός αέρας.",
       "recordedPassageReview": false,
       "flaggedForFollowUp": [
         "specific_source_passage_check_required",
@@ -71,7 +71,9 @@
       "documentedReviewFields": [],
       "directSourceCheckedField": false,
       "priorEvidenceLinks": [
-        "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review",
+        "https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801",
+        "https://www.noaa.gov/jetstream/atmosphere"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
@@ -83,7 +85,17 @@
       "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
       "sourceCheckEvidence": null,
       "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
+      "latestScientificCorrection20261029": {
+        "status": "educational_correction_source_checked",
+        "finding": "Σωστά τα αρχικά ενδεικτικά ποσοστά, αλλά η προηγούμενη γενική παραπομπή δεν τα τεκμηρίωνε. Αποσαφήνιση μικτού εκπνεόμενου αέρα και ακριβής εκπαιδευτική πηγή.",
+        "sourceUrls": [
+          "https://www.open.edu/openlearncreate/mod/resource/view.php?id=109801",
+          "https://www.noaa.gov/jetstream/atmosphere"
+        ],
+        "original20261026InventoryCountsNotReinterpreted": true,
+        "independentClinicalApproval": false
+      }
     },
     {
       "id": "EOP-A-003",
@@ -5107,7 +5119,7 @@
       "id": "EOP-B-047",
       "group": "B",
       "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
+      "sourceLocation": "Resuscitation Council UK / ERC Guidelines 2025, «Paediatric Life Support (basic and advanced)», ενότητες Circulation (10 mL/kg ανά bolus, επανεκτίμηση) και Shock (haemorrhagic shock).",
       "recordedPassageReview": false,
       "flaggedForFollowUp": [
         "no_recorded_specific_passage_review"
@@ -5121,7 +5133,8 @@
       "directSourceCheckedField": false,
       "priorEvidenceLinks": [
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
+        "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
       ],
       "reviewFinding": "Παιδιατρικό shock: εξατομικευμένα bolus με επανεκτίμηση, διάκριση αιμορραγίας.",
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
@@ -5133,7 +5146,17 @@
       "recordNote": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε.",
       "sourceCheckEvidence": null,
       "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε."
+      "sourceReviewStatusDescription": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε.",
+      "latestScientificCorrection20261029": {
+        "status": "educational_correction_source_checked",
+        "finding": "Η προηγούμενη απάντηση ήδη ανέφερε 10 mL/kg (όχι 20). Εξειδικεύτηκε σε υποογκαιμικό/αποφρακτικό/διανεμητικό, με επανεκτίμηση, καρδιογενή και αιμορραγική εξαίρεση, και ακριβή ενότητα οδηγίας.",
+        "sourceUrls": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+          "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
+        ],
+        "original20261026InventoryCountsNotReinterpreted": true,
+        "independentClinicalApproval": false
+      }
     },
     {
       "id": "EOP-B-048",
@@ -6566,8 +6589,8 @@
     {
       "id": "EOP-B-094",
       "group": "B",
-      "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "sourceLocation": "RCUK Guidelines 2025, Paediatric Life Support, Seizures; NICE NG217 §7, generalized convulsive status epilepticus and individualized emergency management.",
+      "sourceUrl": "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures",
+      "sourceLocation": "NICE NG217, §7.1.1–7.1.3 (επείγουσα αντιμετώπιση ≥5 λεπτών και φάρμακα κοινότητας)· RCUK / ERC 2025 Paediatric Life Support, ενότητα «Seizures».",
       "recordedPassageReview": true,
       "flaggedForFollowUp": [],
       "validationScope": "checked_main_claim_current_guideline_2025_2026_not_independent_clinical_certification",
@@ -6578,7 +6601,9 @@
       "directSourceCheckedField": true,
       "priorEvidenceLinks": [
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-        "https://www.resus.org.uk/cy/node/36439"
+        "https://www.resus.org.uk/cy/node/36439",
+        "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures",
+        "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
@@ -6592,7 +6617,18 @@
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
       ],
       "recordedSourceCheck": "26/10/2026: στοχευμένη σύγκριση κεντρικής απάντησης με συγκεκριμένη ενότητα της αναγραφόμενης πηγής. Όχι επίσημο λυσάρι ή πιστοποίηση ελληνικού SOP.",
-      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής."
+      "sourceReviewStatusDescription": "Σύγχρονη κλινική καθοδήγηση 2025/2026, με επιφύλαξη ως προς ισχύ στην Ελλάδα, νόμιμες αρμοδιότητες και κλινικό εύρος πηγής.",
+      "latestScientificCorrection20261029": {
+        "status": "educational_correction_source_checked",
+        "finding": "Η προηγούμενη απάντηση ήδη όριζε ≥5 λεπτά. Διευκρινίστηκαν οι επανειλημμένες κρίσεις χωρίς ανάνηψη, η κατάλληλη κατευθυντήρια οδηγία NG217 και οι περιορισμοί αρμοδιοτήτων.",
+        "sourceUrls": [
+          "https://www.nice.org.uk/guidance/ng217/chapter/7-Treating-status-epilepticus-repeated-or-cluster-seizures-and-prolonged-seizures",
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+          "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
+        ],
+        "original20261026InventoryCountsNotReinterpreted": true,
+        "independentClinicalApproval": false
+      }
     },
     {
       "id": "EOP-B-095",
@@ -7635,7 +7671,7 @@
     {
       "id": "EOP-B-128",
       "group": "B",
-      "sourceUrl": "https://www.osha.gov/sites/default/files/publications/OSHA3370-protecting-EMS-respondersSM.pdf",
+      "sourceUrl": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf",
       "sourceLocation": "Εκπαιδευτικός έλεγχος 26/10/2026, λεπτομέρειες reviewAudit20261026 · όχι επίσημη λύση ΕΟΠΠΕΠ",
       "recordedPassageReview": false,
       "flaggedForFollowUp": [
@@ -7790,31 +7826,37 @@
     {
       "id": "EOP-B-133",
       "group": "B",
-      "sourceUrl": "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured",
-      "sourceLocation": "WHO/ICRC Basic Emergency Care: ABCDE, Trauma, Breathing, Shock, Altered Mental Status, Transfer",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceUrl": "https://www.resus.org.uk/sites/default/files/2022-03/RCUK%20Paediatric%20emergency%20algorithms%20and%20resources%20Mar%2022%20V1.pdf",
+      "sourceLocation": "RCUK, «Paediatric emergency algorithms and resources» (Mar 2022, δόσεις βάσει οδηγιών RCUK 2021), αλγόριθμος αναφυλαξίας: IM αδρεναλίνη 1 mg/mL ανά ηλικία, επανάληψη μετά από 5 λεπτά · όχι επίσημη λύση ΕΟΠΠΕΠ",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+        "https://www.resus.org.uk/sites/default/files/2022-03/RCUK%20Paediatric%20emergency%20algorithms%20and%20resources%20Mar%2022%20V1.pdf"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Υπάρχει πεδίο sourceChecked (01/11/2026) για τις ηλικιακές δόσεις αδρεναλίνης· ξένη οδηγία, όχι κλινική πιστοποίηση.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-11-01",
+        "checkedTopic": "RCUK anaphylaxis algorithm: IM adrenaline 1 mg/mL doses by age",
+        "sourceUrl": "https://www.resus.org.uk/sites/default/files/2022-03/RCUK%20Paediatric%20emergency%20algorithms%20and%20resources%20Mar%2022%20V1.pdf",
+        "scope": "targeted_educational_check",
+        "notes": "01/11/2026: ανακτήθηκε και διαβάστηκε το PDF της RCUK. Επαληθεύτηκαν οι ηλικιακές δόσεις IM αδρεναλίνης 1 mg/mL (<6 μηνών 100–150 μg, 6 μηνών–6 ετών 150 μg, 6–12 ετών 300 μg, >12 ετών 500 μg) και η επανάληψη μετά από 5 λεπτά. Η δόση κατά βάρος (ASCIA) ΔΕΝ επαληθεύτηκε και αφαιρέθηκε από την απάντηση. Ξένη οδηγία, όχι ελληνικό επιχειρησιακό πρωτόκολλο· εκπαιδευτική τεκμηρίωση, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "01/11/2026: ανακτήθηκε και διαβάστηκε το PDF της RCUK. Επαληθεύτηκαν οι ηλικιακές δόσεις IM αδρεναλίνης 1 mg/mL (<6 μηνών 100–150 μg, 6 μηνών–6 ετών 150 μg, 6–12 ετών 300 μg, >12 ετών 500 μg) και η επανάληψη μετά από 5 λεπτά. Η δόση κατά βάρος (ASCIA) ΔΕΝ επαληθεύτηκε και αφαιρέθηκε από την απάντηση. Ξένη οδηγία, όχι ελληνικό επιχειρησιακό πρωτόκολλο· εκπαιδευτική τεκμηρίωση, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
+      "sourceReviewStatusDescription": "Υπάρχει πεδίο sourceChecked με τη σχετική ανασκόπηση (01/11/2026)."
     },
     {
       "id": "EOP-B-134",
@@ -9269,7 +9311,7 @@
       "id": "EOP-B-181",
       "group": "B",
       "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
-      "sourceLocation": "ERC/RCUK Guidelines 2025 – Newborn Life Support",
+      "sourceLocation": "Resuscitation Council UK / ERC Guidelines 2025, Newborn resuscitation and support of transition at birth, ενότητες Breathing / Circulation / Chest compressions: ≥30 s effective ventilation πριν HR <60/min οδηγεί σε 3:1.",
       "recordedPassageReview": false,
       "flaggedForFollowUp": [
         "specific_source_passage_check_required",
@@ -9280,7 +9322,8 @@
       "documentedReviewFields": [],
       "directSourceCheckedField": false,
       "priorEvidenceLinks": [
-        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth"
+        "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
+        "https://www.erc.edu/media/rgrn0faa/gl2025-08-nls-e.pdf"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
@@ -9292,7 +9335,17 @@
       "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
       "sourceCheckEvidence": null,
       "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
+      "latestScientificCorrection20261029": {
+        "status": "educational_correction_source_checked",
+        "finding": "Προστέθηκε το κρίσιμο όριο τουλάχιστον 30 δευτερολέπτων αποδεδειγμένα αποτελεσματικού αερισμού πριν από έναρξη συμπιέσεων για HR <60/min.",
+        "sourceUrls": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth",
+          "https://www.erc.edu/media/rgrn0faa/gl2025-08-nls-e.pdf"
+        ],
+        "original20261026InventoryCountsNotReinterpreted": true,
+        "independentClinicalApproval": false
+      }
     },
     {
       "id": "EOP-B-182",
@@ -9965,7 +10018,7 @@
       "id": "EOP-B-204",
       "group": "B",
       "sourceUrl": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-      "sourceLocation": "Εκπαιδευτική αντιπαραβολή 26/10/2026. Αναλυτικές πηγές στο reviewAudit20261026Followup. Όχι επίσημη απάντηση ΕΟΠΠΕΠ.",
+      "sourceLocation": "Resuscitation Council UK / ERC Guidelines 2025, «Paediatric Life Support (basic and advanced)», Circulation (bolus 10 mL/kg), Shock → Haemorrhagic shock (ελαχιστοποίηση IV κρυσταλλοειδών, max 20 mL/kg, άμεσα προϊόντα αίματος).",
       "recordedPassageReview": false,
       "flaggedForFollowUp": [
         "no_recorded_specific_passage_review"
@@ -9979,7 +10032,8 @@
       "directSourceCheckedField": false,
       "priorEvidenceLinks": [
         "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
-        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+        "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations",
+        "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
       ],
       "reviewFinding": "Παιδιατρικό υπογκαιμικό shock: bolus κατά ένδειξη, διαφορετική διαχείριση αιμορραγίας.",
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
@@ -9991,7 +10045,17 @@
       "recordNote": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε.",
       "sourceCheckEvidence": null,
       "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε."
+      "sourceReviewStatusDescription": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε.",
+      "latestScientificCorrection20261029": {
+        "status": "educational_correction_source_checked",
+        "finding": "Η παλιά απάντηση ήδη ανέφερε 10 mL/kg. Προστέθηκε σαφής διάκριση αιμορραγικού shock (έως 20 mL/kg κρυσταλλοειδών συνολικά και πρώιμα προϊόντα αίματος) έναντι άλλων υποογκαιμικών αιτιών, με εξατομικευμένη επανεκτίμηση.",
+        "sourceUrls": [
+          "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines",
+          "https://www.erc.edu/media/03xnpjmj/gl2025-09-pls-e.pdf"
+        ],
+        "original20261026InventoryCountsNotReinterpreted": true,
+        "independentClinicalApproval": false
+      }
     },
     {
       "id": "EOP-B-205",
@@ -10151,5 +10215,6 @@
       "recordedSourceCheck": null,
       "sourceReviewStatusDescription": "Υπάρχει ιστορική στοχευμένη ανασκόπηση στα πεδία reviewAudit20261026 / reviewAudit20261026Followup / finalAudit20261026 / webResearch20261026. Η ύπαρξή της δεν εγγυάται ότι κάθε χωρίο της πηγής επαληθεύθηκε."
     }
-  ]
+  ],
+  "lastSourceMetadataSync": "2026-10-29"
 }

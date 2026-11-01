@@ -1,0 +1,105 @@
+name: App loads on mobile and desktop
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Mentor speech and JavaScript syntax
+        run: |
+          node --check mentor-voice.mjs
+          node --check mentor-lab.js
+          node --test scripts/test-mentor-voice.mjs
+          node --check functions/answer-grader/main.js
+          node --check workers/answer-grader/src/index.js
+          node --check functions/answer-grader/semantic-grading-policy.mjs
+          node --check old_type_written.js
+          node --check mentor/app/oral.js
+          node --check ai-grading-client.js
+          node --test functions/answer-grader/test.mjs
+          node --check mentor/core/quick-answer.mjs
+          node --check mentor-home.js
+          node --check saek-course-series.js
+          node --check scripts/app-load-smoke.mjs
+          node scripts/verify-static-pages.mjs
+          node --check scripts/verify-cockpit-visual.mjs
+          node scripts/verify-pdf-library-boundaries.mjs
+          node scripts/verify-tool-boundaries.mjs
+          node scripts/verify-service-boundaries.mjs
+          node --check services/notes/notes-store.js
+          node --check services/notes/notes-delete.js
+          node --check services/notes/notes-position.js
+          node --check services/sync/sync-codec.js
+          node --check services/sync/sync-model.js
+          node --check services/sync/sync-local.js
+          node scripts/verify-sync.mjs
+          node scripts/verify-sync-codec.mjs
+          node scripts/verify-notes-panel.mjs
+          node scripts/verify-notes-position.mjs
+          node scripts/verify-study-scheduler.mjs
+          node scripts/verify-specialized-tools.mjs
+          node scripts/verify-pharmacology.mjs
+          node scripts/test-seminar-sync.cjs
+          node tools/anatomy-3d/test-greek-names.mjs
+          node --test tools/anatomy-3d/cage-focus.test.mjs tools/anatomy-3d/focus-groups.test.mjs
+          node --check tools/anatomy-3d/cage-focus.mjs
+          node --check tools/anatomy-3d/hires-anatomy.js
+          node --check tools/pharmacology/farmaka-ui.js
+          node --check tools/seminars/seminar-prep.js
+          node --check tools/ecg-lab/app/ecg.js
+          node --check tools/ecg-lab/app/ecg-practice.js
+          node --test tools/ecg-lab/core/ecg-practice.test.mjs tools/ecg-lab/core/ecg-synthetic.test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
+          node --check protocols-data.mjs
+          node --check protocols-page.mjs
+          node --check tools/patient-simulator/core/next-cases.mjs
+          node --check tools/patient-simulator/core/next-sim.mjs
+          node --check tools/patient-simulator/app/next-sim.mjs
+          node --check tools/patient-simulator/app/unified-stage.mjs
+          node --check tools/patient-simulator/vendor/unified-stage.bundle.mjs
+          node scripts/verify-unified-scene.mjs
+          node --check tools/patient-simulator/app/patient-camera.mjs
+          node --test tools/patient-simulator/app/patient-camera.test.mjs
+          node --check tools/patient-simulator/app/next-scene.mjs
+          node --check tools/patient-simulator/app/next-patient-mesh.mjs
+          node --test tools/patient-simulator/app/next-patient-mesh.test.mjs
+          node --check tools/patient-simulator/core/next-review.mjs
+          node --test tools/patient-simulator/core/next-sim.test.mjs tools/patient-simulator/core/next-review.test.mjs tools/patient-simulator/core/next-cases.test.mjs
+          node --check mentor/core/live-debrief.mjs
+          node --check mentor/core/live-interactions.mjs
+          node --check mentor/app/live.js
+          node --check mentor-scenario-paths.mjs
+          node --check mentor-debrief-export.mjs
+          node --check mentor-patient-interview.mjs
+          node --check mentor-protocol-suite.mjs
+          node --check mentor-study-bridge.mjs
+          node --check mentor-study-context.mjs
+          node --test scripts/test-mentor-protocols.mjs
+          node --test scripts/test-mentor-debrief-export.mjs
+          node --test scripts/test-mentor-patient-interview.mjs
+          node --test scripts/test-mentor-quick-answer.mjs
+          node --check mentor/presence/presence.mjs
+          node --test mentor/presence/presence-state.test.mjs mentor/presence/memory-navigate.test.mjs mentor/context/bridge.test.mjs mentor/knowledge/retrieve.test.mjs mentor/ai/client.test.mjs mentor/ai/claude.test.mjs workers/mentor-chat/worker.test.mjs mentor/presence/mouth-expression.test.mjs mentor/core/live-debrief.test.mjs mentor/core/live-sim.test.mjs mentor/core/ecg-practice.test.mjs mentor/context/anatomy-announce.test.mjs
+      - run: npm install --no-save --no-package-lock playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/app-load-smoke.mjs
+      - run: node scripts/verify-cockpit-visual.mjs
+      - name: Archive real Cockpit screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: patient-simulator-visual-baseline
+          path: |
+            audit-results/cockpit-*.png
+            audit-results/cockpit-visual-report.json
+          if-no-files-found: warn
+      - run: node scripts/verify-mentor-presence-browser.mjs

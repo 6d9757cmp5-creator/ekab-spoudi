@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createVolatileActivityStore,ACTIVITY_DB} from './activity-store.mjs';
+import {newActivitySession,performActivity} from './activity-engine.mjs';
+const A='guest:11111111-1111-4111-8111-111111111111',B='guest:22222222-2222-4222-8222-222222222222';
+const T='2026-10-28T22:00:00.000Z';
+test('new training store does not reuse existing app or first mentor database',()=>assert.equal(ACTIVITY_DB,'ekab-mentor-activities-v1'));
+test('multi-person and equipment sessions are stored independently and owner isolated',async()=>{
+ const store=createVolatileActivityStore();
+ const s1=newActivitySession('mci-road',{sessionId:'s1',at:T});
+ const s2=newActivitySession('device-aed',{sessionId:'s2',at:T});
+ const s3=newActivitySession('mci-event',{sessionId:'s3',at:T});
+ await store.save(A,s1);await store.save(A,s2);await store.save(B,s3);
+ assert.equal((await store.list(A)).length,2);
+ assert.equal((await store.list(A,'mci')).length,1);
+ assert.equal((await store.list(A,'equipment')).length,1);
+ assert.equal((await store.active(A,'mci')).id,'s1');
+ assert.equal((await store.active(A,'equipment')).id,'s2');
+ assert.equal((await store.active(B,'mci')).id,'s3');
+ await store.erase(A);
+ assert.equal((await store.list(A)).length,0);
+ assert.equal((await store.list(B)).length,1);
+});
+test('append-only event log rejects silent history resets',async()=>{
+ const store=createVolatileActivityStore();
+ const old=newActivitySession('device-bvm',{sessionId:'device-ex',at:T});
+ await store.save(A,old);
+ const advanced=performActivity(old,'device-identify',{at:'2026-10-28T22:01:00Z'});
+ await store.save(A,advanced);
+ await assert.rejects(store.save(A,old),/activity-history-conflict/);
+ assert.equal((await store.active(A,'equipment')).events.length,1);
+});

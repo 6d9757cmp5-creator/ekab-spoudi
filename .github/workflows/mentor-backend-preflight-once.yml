@@ -1,0 +1,56 @@
+# One-time non-billable check of required backend deployment credentials.
+# No secret value is printed, no Cloudflare call is made, and no deployment occurs here.
+name: One-time MENTOR backend deployment prerequisites
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mentor-backend-preflight-once.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    if: github.event.head_commit.message == 'Verify Cloudflare authorization for MENTOR'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check required Cloudflare deployment secrets without printing values
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MENTOR_TEST_TOKEN: ${{ secrets.MENTOR_TEST_TOKEN }}
+        shell: bash
+        run: |
+          {
+            echo "### MENTOR backend deployment prerequisites"
+            if [ -n "$CF_TOKEN" ]; then echo "- CLOUDFLARE_API_TOKEN: configured"; else echo "- CLOUDFLARE_API_TOKEN: missing"; fi
+            if [ -n "$CF_ACCOUNT" ]; then echo "- CLOUDFLARE_ACCOUNT_ID: configured"; else echo "- CLOUDFLARE_ACCOUNT_ID: missing"; fi
+            if [ -n "$ANTHROPIC_KEY" ]; then echo "- ANTHROPIC_API_KEY: configured"; else echo "- ANTHROPIC_API_KEY: missing"; fi
+            if [ "${#MENTOR_TEST_TOKEN}" -ge 16 ]; then echo "- MENTOR_TEST_TOKEN: configured"; else echo "- MENTOR_TEST_TOKEN: missing (or under 16 characters)"; fi
+            echo "- Claude public access: disabled by default"
+            echo "- Worker deployment: not initiated by this check"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ -z "$CF_TOKEN" ] || [ -z "$CF_ACCOUNT" ]; then
+            echo "::notice title=Cloudflare not ready::Cloudflare deployment requires a scoped API token and account ID."
+          fi
+      - name: Verify Cloudflare API token and account access (read only)
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CF_TOKEN" && test -n "$CF_ACCOUNT"
+          curl --fail-with-body --silent --show-error --max-time 20 \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            https://api.cloudflare.com/client/v4/user/tokens/verify \
+            -o /tmp/mentor-cf-token.json
+          node -e 'const r=require("/tmp/mentor-cf-token.json"); if(!r.success || r.result?.status!=="active") process.exit(1); console.log("Cloudflare API token: valid and active");'
+          curl --fail-with-body --silent --show-error --max-time 20 \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT" \
+            -o /tmp/mentor-cf-account.json
+          node -e 'const r=require("/tmp/mentor-cf-account.json"); if(!r.success || !r.result?.id) process.exit(1); console.log("Cloudflare account access: confirmed");'

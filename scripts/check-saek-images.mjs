@@ -5,11 +5,25 @@
  * Medical/anatomical interpretation still requires separate expert review.
  */
 import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 const registry=JSON.parse(await readFile('saek-image-audit-2026.json','utf8'));
 const errors=[],warnings=[],remote=[];
 const addError=(detail)=>errors.push(detail);
 const assets=registry.assets||{},courses=registry.courses||[];
-const allowedLicenses=new Set(['Public domain','CC0 1.0','CC BY 4.0','CC BY-SA 3.0']);
+const hasDocumentedHumanReview = a =>
+  a.clinicalReview === 'approved' &&
+  typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
+  typeof a.independentReviewDate === 'string' && /^\d{4}-\d{2}-\d{2}/.test(a.independentReviewDate) &&
+  typeof a.independentReviewEvidence?.documentUrl === 'string' &&
+  /^https:\/\//.test(a.independentReviewEvidence.documentUrl) &&
+  typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
+  !!a.independentReviewEvidence.reviewerQualification.trim() &&
+  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\bAI\b)/i.test(a.independentReviewer);
+// Provenance and source specificity are separate from local file integrity.
+// These counters are audit findings, NOT clinical approvals or live-source checks.
+const sourceQuality={genericEmsBackgroundAssetIds:[],commonsLocalMirrorAssetIds:[],sourcePageReviewRecordedAssetIds:[],visualReviewRecordedAssetIds:[],visualReviewHashBoundAssetIds:[],visualReviewUnboundAssetIds:[],visualReviewStaleHashAssetIds:[]};
+// Open licences accepted for Wikimedia Commons files; each asset still records its exact licence and attribution.
+const allowedLicenses=new Set(['Public domain','CC0 1.0','CC BY 2.0','CC BY 2.5','CC BY 3.0','CC BY 4.0','CC BY-SA 2.0','CC BY-SA 2.5','CC BY-SA 3.0','CC BY-SA 4.0','CC BY-NC 4.0','CC BY-NC-SA 3.0','CC BY-NC-SA 4.0','Owner-declared permission']);
 const seenCourse=new Set();
 const chosen=new Map();
 if(courses.length!==20)addError('Αναμένονται 20 μαθήματα, βρέθηκαν '+courses.length);
@@ -41,14 +55,41 @@ for(const [key,pics] of chosen){
  if(pics.length&&(!registry.placements||!registry.placements[key]))addError('Λείπει αντιστοίχιση '+key);
 }
 for(const [key,a] of Object.entries(assets)){
+ if(/^https:\/\/www\.ems\.gov\/what-is-ems\.html(?:[?#].*)?$/i.test(a.page||''))
+  sourceQuality.genericEmsBackgroundAssetIds.push(key);
+ if(a.localPath&&/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/i.test(a.page||''))
+  sourceQuality.commonsLocalMirrorAssetIds.push(key);
+ // Review metadata records prior work; it is not proof of a live URL check or certification.
+ if(typeof a.sourcePageReviewed==='string'&&/^\d{4}-\d{2}-\d{2}(?::|$)/.test(a.sourcePageReviewed))
+  sourceQuality.sourcePageReviewRecordedAssetIds.push(key);
+ const hasRecordedVisualReview=Boolean(a.visualReview&&typeof a.visualReview.date==='string'&&typeof a.visualReview.scope==='string'&&a.visualReview.scope.trim());
+ if(hasRecordedVisualReview)sourceQuality.visualReviewRecordedAssetIds.push(key);
+ // An explicit matching SHA-256 AND a dated/scoped review are required for current-artwork evidence.
+ if(hasRecordedVisualReview&&!a.visualReview.sha256)sourceQuality.visualReviewUnboundAssetIds.push(key);
+ if(a.visualReview?.sha256&&a.visualReview.sha256!==a.sha256)sourceQuality.visualReviewStaleHashAssetIds.push(key);
+ if(hasRecordedVisualReview&&a.visualReview.sha256===a.sha256)sourceQuality.visualReviewHashBoundAssetIds.push(key);
+ // A record of artwork or a background citation cannot grant independent approval.
+ if(!['pending','approved'].includes(a.clinicalReview))addError('Μη έγκυρη κατάσταση κλινικού ελέγχου '+key);
+ if(a.clinicalReview==='approved'&&!hasDocumentedHumanReview(a))
+  addError('Approval requires a documented independent human clinical reviewer and evidence: '+key);
  if(!a.filename||!a.page||!a.author||!a.license||!a.title||!a.caption)addError('Λείπουν στοιχεία πηγής '+key);
- if(!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
+ const originalHost=(a.page||'').match(/^https:\/\/([^\/?#]+)(?:[\/?#]|$)/)?.[1];
+ const originalAllowed=a.originalArtwork===true&&Boolean(a.localPath)&&new Set(['openstax.org','www.cdc.gov','www.who.int','pmnch.who.int','iris.who.int','hlh.who.int','www.resus.org.uk','www.erc.edu','www.ems.gov','www.unece.org','unece.org','www.moh.gov.gr','www.osha.gov','highways.dot.gov','www.edps.europa.eu','www.ncbi.nlm.nih.gov','www.nhs.uk','www.nice.org.uk','www.rch.org.au','guidelines.fhft.nhs.uk','rightdecisions.scot.nhs.uk','www.rightdecisions.scot.nhs.uk','www.nhlbi.nih.gov','ginasthma.org','www.ahrq.gov','road-safety.transport.ec.europa.eu','digital-strategy.ec.europa.eu','civilprotection.gov.gr','www.usfa.fema.gov','www.ekab.gr','www.escardio.org','www2.dypa.gov.gr','www.minedu.gov.gr','eur-lex.europa.eu','www.inacsl.org','content.nremt.org','www.fda.gov','openstax.org','www.heart.org','cpr.heart.org','www.gov.uk','amea.gov.gr','yot.ddt.gov.gr']).has(originalHost);
+ // Third-party scientific sources used under the owner's declared permission: exact source page and host are recorded per file.
+ const permittedSourceHosts=new Set(['openstax.org','radiopaedia.org','litfl.com','smart.servier.com','www.erc.edu','www.resus.org.uk','www.who.int','phil.cdc.gov','www.cdc.gov','www.ecdc.europa.eu','www.rcp.ac.uk','www.glasgowcomascale.org','www.ema.europa.eu','www.ekab.gr']);
+ const ownerPermitted=a.sourceUse==='owner-declared-permission'&&Boolean(a.localPath)&&permittedSourceHosts.has(originalHost);
+ if(!originalAllowed&&!ownerPermitted&&!a.page?.startsWith('https://commons.wikimedia.org/wiki/File:'))addError('Μη ελεγμένος τύπος URL '+key);
+ if(a.localPath){
+  if(!/^assets\/education\/[a-z0-9-]+\.(svg|png|jpg)$/.test(a.localPath))addError('Μη έγκυρη τοπική διαδρομή '+key);
+  else try{const bytes=await readFile(a.localPath);const isSvg=a.localPath.endsWith('.svg');const canonical=isSvg?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'),'utf8'):bytes;if(createHash('sha256').update(canonical).digest('hex')!==a.sha256)addError('Ασυμφωνία checksum '+key);if(isSvg&&!bytes.toString().includes('<svg'))addError('Μη έγκυρο SVG '+key);if(!isSvg){const isJpg=a.localPath.endsWith('.jpg');const okSig=isJpg?bytes.subarray(0,3).equals(Buffer.from([255,216,255])):bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));if(!okSig)addError((isJpg?'Μη έγκυρο JPEG ':'Μη έγκυρο PNG ')+key);}}catch(e){addError('Απουσία τοπικής εικόνας '+key);}
+ }
  if(!allowedLicenses.has(a.license))addError('Άγνωστη άδεια εικόνας '+key+': '+a.license);
  if(![...chosen.values()].some(p=>p.includes(key)))warnings.push('Πηγή χωρίς χρήση '+key);
 }
 const remoteCheck=process.argv.includes('--remote');
 if(remoteCheck){
  await Promise.all(Object.entries(assets).map(async ([key,a])=>{
+  if(a.localPath){remote.push({key,local:true,sourcePageHttpChecked:false,available:!errors.some(e=>e.includes(key))});return;}
   const url='https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(a.filename);
   let controller=new AbortController(),timer=setTimeout(()=>controller.abort(),13000);
   try{
@@ -68,9 +109,28 @@ const report={
  totalChapters:total,withSelectedSources:assigned,withoutSelectedSources:total-assigned,
  imageSources:Object.keys(assets).length,percentage:Math.round((assigned/total)*1000)/10,
  warnings,errors,remoteChecks:remote,
+ sourceQuality:{
+  genericEmsBackgroundCount:sourceQuality.genericEmsBackgroundAssetIds.length,
+  genericEmsBackgroundAssetIds:sourceQuality.genericEmsBackgroundAssetIds,
+  commonsLocalMirrorCount:sourceQuality.commonsLocalMirrorAssetIds.length,
+  commonsLocalMirrorAssetIds:sourceQuality.commonsLocalMirrorAssetIds,
+  sourcePageReviewRecordedCount:sourceQuality.sourcePageReviewRecordedAssetIds.length,
+  visualReviewRecordedCount:sourceQuality.visualReviewRecordedAssetIds.length,
+  visualReviewHashBoundCount:sourceQuality.visualReviewHashBoundAssetIds.length,
+  visualReviewUnboundCount:sourceQuality.visualReviewUnboundAssetIds.length,
+  visualReviewStaleHashCount:sourceQuality.visualReviewStaleHashAssetIds.length,
+  visualReviewStaleHashAssetIds:sourceQuality.visualReviewStaleHashAssetIds,
+  visualReviewCurrentHashUnverifiedCount:Object.keys(assets).length-sourceQuality.visualReviewHashBoundAssetIds.length,
+  unrecordedSourcePageReviewCount:Object.keys(assets).length-sourceQuality.sourcePageReviewRecordedAssetIds.length,
+  sourcePageReviewFieldMissingCount:Object.values(assets).filter(a=>!a.sourcePageReviewed).length,
+  sourcePageReviewUndatedCount:Object.values(assets).filter(a=>a.sourcePageReviewed&&!/^\d{4}-\d{2}-\d{2}(?::|$)/.test(a.sourcePageReviewed)).length,
+  liveSourcePagesVerified:0,
+  note:'Review dates/scopes are historical metadata, not current-hash-bound visual proof unless explicitly linked to SHA-256. Local hashes and optional image-URL HEAD requests do not validate source-page claims, clinical content, or offline/browser rendering.'
+ },
  medicalCertification:'NOT CERTIFIED: separate expert review required',
  liveDeployment:'NOT VERIFIED by this registry check'
 };
 await writeFile('saek-image-report.json',JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({semesters:bySemester,selected:assigned,total,assets:report.imageSources,warnings:warnings.length,errors:errors.length,remote:remote.length},null,2));
+console.log(JSON.stringify({semesters:bySemester,selected:assigned,total,assets:report.imageSources,warnings:warnings.length,errors:errors.length,remote:remote.length,genericEmsBackground:report.sourceQuality.genericEmsBackgroundCount,commonsLocalMirrors:report.sourceQuality.commonsLocalMirrorCount,sourcePageReviewsRecorded:report.sourceQuality.sourcePageReviewRecordedCount,visualReviewsRecorded:report.sourceQuality.visualReviewRecordedCount,visualReviewsHashBound:report.sourceQuality.visualReviewHashBoundCount,visualReviewsUnbound:report.sourceQuality.visualReviewUnboundCount,visualReviewsStaleHash:report.sourceQuality.visualReviewStaleHashCount,visualReviewsCurrentHashUnverified:report.sourceQuality.visualReviewCurrentHashUnverifiedCount,liveSourcePagesVerified:0},null,2));
+if(warnings.length)console.warn('Image audit warnings:\n'+warnings.join('\n'));
 if(errors.length){console.error(errors.join('\n'));process.exitCode=1;}

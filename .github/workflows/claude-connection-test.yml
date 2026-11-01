@@ -1,0 +1,30 @@
+name: Claude API connection test (manual)
+
+# Manual only. Makes ONE tiny billable call (max_tokens 16) using the repository secret
+# ANTHROPIC_API_KEY. The key is read only by this step's environment and is never printed.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type YES to allow one tiny billable Claude API call (leave empty for a no-network dry run)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Claude connection test
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CONFIRM_BILLABLE: ${{ inputs.confirm }}
+          DRY: ${{ inputs.confirm != 'YES' && '--dry-run' || '' }}
+        run: node scripts/claude-connection-test.mjs $DRY

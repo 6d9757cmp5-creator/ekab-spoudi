@@ -1,0 +1,44 @@
+name: Live Gemma Greek answer grading — Free-only evidence
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/live-greek-grader-check.mjs
+      - scripts/cloudflare-free-plan-preflight.mjs
+      - .github/workflows/live-greek-grader-check.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  online-graded-examples:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_FREE_PLAN_CONFIRMED: ${{ vars.CLOUDFLARE_FREE_PLAN_CONFIRMED }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate runtime before online model
+        run: |
+          node --check scripts/live-greek-grader-check.mjs
+          node --check workers/answer-grader/src/index.js
+          node --test functions/answer-grader/test.mjs
+      - name: Read-only verification of Workers Free subscription
+        run: node scripts/cloudflare-free-plan-preflight.mjs
+      - name: Run limited live model test only on confirmed Workers Free account
+        run: node scripts/live-greek-grader-check.mjs
+      - name: Upload exact real-model results or documented blocker
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-greek-grader-check
+          path: audit-results/live-greek-grader-check.json
+          if-no-files-found: warn
+          retention-days: 30

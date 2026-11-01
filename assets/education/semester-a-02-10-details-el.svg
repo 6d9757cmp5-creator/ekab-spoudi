@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="title desc">
+<title id="title">Οξεοβασική ισορροπία: διοξείδιο του άνθρακα, διττανθρακικό και pH</title>
+<desc id="desc">Τρία διακριτά σχήματα: γραμμικό μόριο διοξειδίου του άνθρακα O=C=O, χημικός τύπος διττανθρακικού HCO3 με αρνητικό φορτίο και κλίμακα pH από 0 έως 14 με ουδέτερο σημείο 7. Τα βέλη είναι δείκτες ετικετών. Δεν απεικονίζεται θεραπευτικό όριο ή κλινικό πρωτόκολλο.</desc>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" markerWidth="9" markerHeight="9" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker>
+  <linearGradient id="ph-gradient" x1="0" x2="1"><stop offset="0" stop-color="#ce6b63"/><stop offset=".5" stop-color="#b8c7d1"/><stop offset="1" stop-color="#537eaa"/></linearGradient>
+</defs>
+<style>
+  text{font-family:DejaVu Sans,Arial,sans-serif;fill:#203e50}
+  .title{font-size:28px;font-weight:700;fill:#fff}.subtitle{font-size:16px;fill:#e9f4f2}
+  .card-title{font-size:19px;font-weight:700}.small{font-size:14px}.atom{font-size:21px;font-weight:700;fill:#fff}
+  .outline{fill:#eef4f8;stroke:#347e75;stroke-width:2.4}
+  .label-card{fill:#fff;stroke:#347e75;stroke-width:2}
+</style>
+<rect width="1110" height="630" fill="#f9fbfd"/>
+<rect width="1110" height="113" fill="#347e75"/>
+<text x="555" y="39" text-anchor="middle" class="title" fill="#fff">Οξεοβασική ισορροπία</text>
+<text x="555" y="76" text-anchor="middle" class="subtitle">Διοξείδιο του άνθρακα · διττανθρακικό ιόν · pH</text>
+<!-- Carbon dioxide molecule: linear O=C=O -->
+<circle cx="197" cy="299" r="85" class="outline"/>
+<g stroke="#405e70" stroke-width="5" stroke-linecap="round">
+  <path d="M169 293H225M169 305H225"/>
+</g>
+<circle cx="158" cy="299" r="24" fill="#b85e57"/><circle cx="197" cy="299" r="22" fill="#526d7b"/><circle cx="236" cy="299" r="24" fill="#b85e57"/>
+<text x="158" y="306" text-anchor="middle" class="atom">O</text><text x="197" y="306" text-anchor="middle" class="atom">C</text><text x="236" y="306" text-anchor="middle" class="atom">O</text>
+<text x="197" y="365" text-anchor="middle" class="small">O=C=O</text>
+<path d="M197 478V375" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/>
+<rect x="48" y="487" width="298" height="72" rx="17" class="label-card"/>
+<text x="197" y="531" text-anchor="middle" class="card-title">Διοξείδιο του άνθρακα · CO₂</text>
+<!-- Bicarbonate ion, identified by its chemical formula rather than a generic icon -->
+<circle cx="553" cy="303" r="85" class="outline"/>
+<text x="553" y="296" text-anchor="middle" font-size="39" font-weight="700" fill="#347e75">HCO₃⁻</text>
+<text x="553" y="333" text-anchor="middle" class="small">διττανθρακικό ιόν</text>
+<path d="M553 478V365" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/>
+<rect x="404" y="487" width="298" height="72" rx="17" class="label-card"/>
+<text x="553" y="531" text-anchor="middle" class="card-title">Διττανθρακικό ιόν · HCO₃⁻</text>
+<!-- General pH scale; no blood reference range or treatment target is implied. -->
+<circle cx="909" cy="299" r="85" class="outline"/>
+<rect x="858" y="270" width="102" height="24" rx="12" fill="url(#ph-gradient)" stroke="#668092" stroke-width="1.5"/>
+<path d="M909 260V305" stroke="#203e50" stroke-width="3"/>
+<circle cx="909" cy="282" r="7" fill="#fff" stroke="#203e50" stroke-width="2"/>
+<text x="858" y="323" text-anchor="middle" class="small">0</text><text x="909" y="323" text-anchor="middle" class="small" font-weight="700">7</text><text x="960" y="323" text-anchor="middle" class="small">14</text>
+<text x="862" y="350" text-anchor="middle" font-size="11">όξινο</text><text x="909" y="350" text-anchor="middle" font-size="11">ουδέτερο</text><text x="956" y="350" text-anchor="middle" font-size="11">βασικό</text>
+<path d="M909 478V375" stroke="#347e75" stroke-width="3.5" marker-end="url(#arr)"/>
+<rect x="760" y="487" width="298" height="72" rx="17" class="label-card"/>
+<text x="909" y="531" text-anchor="middle" class="card-title">Κλίμακα pH</text>
+<text x="555" y="586" text-anchor="middle" class="small" fill="#48677a">Οι πνεύμονες ρυθμίζουν το CO₂ και οι νεφροί το HCO₃⁻.</text>
+<text x="555" y="608" text-anchor="middle" class="small" fill="#48677a">Η κλίμακα είναι γενική, όχι θεραπευτικός στόχος.</text>
+</svg>
