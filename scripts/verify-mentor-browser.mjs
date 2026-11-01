@@ -242,10 +242,19 @@ try{
   await page.waitForFunction(()=>document.getElementById('mentor-book-count').textContent.includes('7 εισαγμένα'));
   assert.match(await page.locator('#mentor-book-count').textContent(),/0 εγκεκριμένα/);
   assert.match(await page.locator('#mentor-book-count').textContent(),/7 διαθέσιμα/);
-  assert.equal(await page.locator('#mentor-book-select option').count(),7,'All seven books are review-preview-only under publisher terms/owner attestations');
-  const previewChoices=await page.locator('#mentor-book-select option').evaluateAll(options=>options.map(o=>o.value));
-  assert.ok(previewChoices.includes('medical-surgical-nursing'));
+  assert.equal(await page.locator('#mentor-book-track').inputValue(),'paramedic');
+  assert.equal(await page.locator('#mentor-book-select option').count(),5,'Paramedic route includes only applicable preview books');
+  let previewChoices=await page.locator('#mentor-book-select option').evaluateAll(options=>options.map(o=>o.value));
+  assert.ok(previewChoices.includes('wistech-emr-2025'));
   assert.ok(previewChoices.includes('who-bec'));
+  assert.ok(!previewChoices.includes('medical-surgical-nursing'));
+  await page.locator('#mentor-book-track').selectOption('medicine');
+  assert.equal(await page.locator('#mentor-book-select option').count(),5,'Medicine route includes advanced medical references');
+  previewChoices=await page.locator('#mentor-book-select option').evaluateAll(options=>options.map(o=>o.value));
+  assert.ok(previewChoices.includes('medical-surgical-nursing'));
+  assert.ok(previewChoices.includes('who-bec'),'Shared book is visible in both study routes');
+  assert.ok(!previewChoices.includes('wistech-emr-2025'));
+  await page.locator('#mentor-book-track').selectOption('paramedic');
   assert.match(await page.locator('#panel-books .disclaimer').textContent(),/εκκρεμ|έλεγχο/i);
 
   await page.locator('#tab-books').click();
@@ -266,6 +275,8 @@ try{
     ['who-bec','airway'],['medical-surgical-nursing','shock']
   ];
   for(const [sourceId,term] of extraBooks){
+    await page.locator('#mentor-book-track').selectOption(
+      ['openrn-advanced','medical-surgical-nursing'].includes(sourceId)?'medicine':'paramedic');
     await page.locator('#mentor-book-select').selectOption(sourceId);
     await page.locator('#mentor-book-query').fill(term);
     await page.locator('#mentor-book-submit').click();
@@ -277,6 +288,7 @@ try{
     assert.ok(excerpt.length<=275,'Source preview is bounded: '+sourceId);
     assert.match(await page.locator('#mentor-book-results .review-result a').first().getAttribute('href'),/^https:\/\//);
   }
+  await page.locator('#mentor-book-track').selectOption('paramedic');
   await page.locator('#mentor-book-select').selectOption('wistech-emr-2025');
   await page.locator('#mentor-book-query').fill('αεραγωγός');
   await page.locator('#mentor-book-submit').click();
@@ -296,6 +308,13 @@ try{
   await page.waitForFunction(()=>document.getElementById('library-status').textContent.includes('μόνο στοιχεία πηγών'));
   assert.equal(await page.locator('#sources-list .source-card').count(),15);
   assert.match(await page.locator('#source-counts').textContent(),/0 κλινικά εγκεκριμένες/);
+  assert.match(await page.locator('#source-counts').textContent(),/10 για Paramedic/);
+  assert.match(await page.locator('#source-counts').textContent(),/11 για Ιατρική/);
+  await page.locator('#source-track').selectOption('paramedic');
+  assert.equal(await page.locator('#sources-list .source-card').count(),10);
+  await page.locator('#source-track').selectOption('medicine');
+  assert.equal(await page.locator('#sources-list .source-card').count(),11);
+  await page.locator('#source-track').selectOption('all');
   await page.locator('#source-stage').selectOption('identified');
   assert.equal(await page.locator('#sources-list .source-card').count(),8);
   await page.locator('#source-search').fill('ERC');
