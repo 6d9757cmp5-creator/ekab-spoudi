@@ -359,7 +359,7 @@ function makeGroup(system,parts,buffer){
  g.setAttribute('normal',new THREE.BufferAttribute(norm,3,true));
  g.setAttribute('partIndex',new THREE.BufferAttribute(partIndex,1));
  g.setAttribute('anatomyGroupKind',new THREE.Uint8BufferAttribute(groupKind,1,false));
- g.setIndex(index);g.computeBoundingSphere();
+ g.setIndex(new THREE.BufferAttribute(index,1));g.computeBoundingSphere();
  const mesh=new THREE.Mesh(g,newMaterial(system));
  mesh.userData.system=system;mesh.frustumCulled=false;mesh.visible=systemVisible(system);
  scene.add(mesh);meshChunks.push(mesh);allMeshes.push(mesh);
