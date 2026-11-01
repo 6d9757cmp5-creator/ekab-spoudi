@@ -36,13 +36,11 @@ export function installSaekPractice(root=document){
   const reference=$('p','atlas-practice-reference');
   reference.hidden=true;reference.textContent=chapter.querySelector('.lesson-sos')?.textContent?.trim()||'Δεν υπάρχει συνοπτικό SOS γι’ αυτό το κεφάλαιο.';
   compare.addEventListener('click',()=>{reference.hidden=!reference.hidden;compare.textContent=reference.hidden?'Σύγκριση με SOS':'Απόκρυψη SOS';});
-  const cockpit=$('a','atlas-practice-cockpit','Προσομοιωτής · γενική άσκηση');
-  cockpit.href=practiceHref(file,chapter.id,title);
-  cockpit.title='Ο σημερινός Προσομοιωτής διαθέτει γενικά συνθετικά περιστατικά, όχι απαραίτητα ειδικό περιστατικό αυτού του κεφαλαίου.';
+  // No automatic simulator link: a case must be mapped and clinically checked for this chapter.
   const atlas=$('button','atlas-practice-atlas','Ρώτησε το ATLAS');atlas.type='button';atlas.dataset.atlaOpen='true';
   atlas.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('ekab:atlas-context',{detail:{source:file,chapter:chapter.id,focus:title}}));});
-  controls.append(compare,cockpit,atlas);
-  const note=$('p','atlas-practice-disclaimer','Αυτό είναι αυτοέλεγχος ανάκλησης, όχι βαθμολογούμενη εξέταση. Ο Προσομοιωτής παραμένει συνθετικός και ανεξάρτητος.');
+  controls.append(compare,atlas);
+  const note=$('p','atlas-practice-disclaimer','Αυτό είναι αυτοέλεγχος ανάκλησης, όχι βαθμολογούμενη εξέταση. Τα κλινικά περιστατικά θα συνδέονται μόνο μετά από έλεγχο συνάφειας.');
   inner.append(description,label,answer,controls,reference,note);
   practice.append(summary,inner);
   // Put in the actual lesson, never a separate destination or duplicated textbook.
