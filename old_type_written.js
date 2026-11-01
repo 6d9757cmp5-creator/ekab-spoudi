@@ -35,6 +35,7 @@ function next(){
  $('#asource').href=current.answerUrl;
  $('#asource').textContent=current.answerReference;
  $('#solution').hidden=true;
+ $('#reveal').disabled=false;
  $('#ai-evaluation').hidden=true;
  $('#ai-evaluation').replaceChildren();
  $('#ai-grade').disabled=false;
@@ -64,7 +65,7 @@ $('#ai-grade').addEventListener('click',async()=>{
  if(answer.length<3||answer.length>3500){resultBox.textContent='Γράψε μια απάντηση από 3 έως 3500 χαρακτήρες.';return;}
  if(!window.EkabAIGrade){resultBox.textContent='Ο βαθμολογητής AI δεν έχει φορτωθεί. Χρησιμοποίησε την αυτοαξιολόγηση.';return;}
  const id=current.id,epoch=attemptEpoch;
- aiBusy=true;$('#ai-grade').disabled=true;$('#myanswer').disabled=true;
+ aiBusy=true;$('#ai-grade').disabled=true;$('#reveal').disabled=true;$('#myanswer').disabled=true;
  resultBox.textContent='Ελέγχεται το νόημα της απάντησης…';
  try{
   const grade=await window.EkabAIGrade.evaluate({section:'old_written',questionId:id,answer});
@@ -78,7 +79,7 @@ $('#ai-grade').addEventListener('click',async()=>{
   resultBox.textContent=e.message||'Η αξιολόγηση δεν ολοκληρώθηκε. Μπορείς να κάνεις αυτοαξιολόγηση.';
  }finally{
   aiBusy=false;
-  if(epoch===attemptEpoch){$('#myanswer').disabled=false;$('#ai-grade').disabled=!$('#solution').hidden;}
+  if(epoch===attemptEpoch){$('#myanswer').disabled=false;$('#reveal').disabled=!$('#solution').hidden;$('#ai-grade').disabled=!$('#solution').hidden;}
  }
 });
 fetch('old_type_written.json').then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).then(data=>{
