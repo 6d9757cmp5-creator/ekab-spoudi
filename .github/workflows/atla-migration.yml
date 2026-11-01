@@ -28,5 +28,5 @@ jobs:
         run: |
           node --check atla/assistant.mjs
           node --check learning-surface.mjs
-          node --test atla/assistant.contract.test.mjs
+          node --test atla/assistant.contract.test.mjs atla/atlas-boundaries.test.mjs
           node --test mentor/knowledge/retrieve.test.mjs mentor/context/bridge.test.mjs mentor/ai/client.test.mjs
