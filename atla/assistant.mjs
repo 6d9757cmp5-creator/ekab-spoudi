@@ -28,7 +28,13 @@ const routes=[
  ['Βιβλιοθήκη και αναζήτηση','search.html',['λεξικο','βιβλιοθηκ','αναζητ']]
 ];
 const officialId=/\bEOP-([AB])-(\d{3})\b/i;
-const exam=()=>examMode(location.pathname)||new URLSearchParams(location.search).get('mode')==='exam';
+const exam=()=>{
+ const mode=new URLSearchParams(location.search).get('mode');
+ if(mode==='exam'||document.querySelector('[data-atla-active-exam="true"]'))return true;
+ // Historical practical EOPPEP material is not automatically an active examination.
+ if(location.pathname.endsWith('/practical_exam.html'))return false;
+ return examMode(location.pathname);
+};
 let terms=null,questions=null,records=null,visible=false,requestId=0;
 const fetchJSON=async name=>{try{const response=await fetch(new URL(name,ROOT),{credentials:'omit'});if(!response.ok)return null;return await response.json();}catch{return null;}};
 async function library(){
