@@ -12,6 +12,11 @@ on:
       - scripts/evaluate-greek-educator-review.mjs
       - scripts/test-greek-educator-review.mjs
       - functions/answer-grader/source-completeness.mjs
+      - functions/answer-grader/safety-contrast-guard.mjs
+      - functions/answer-grader/safety-contrast-guard.test.mjs
+      - functions/answer-grader/test.mjs
+      - functions/answer-grader/main.js
+      - workers/answer-grader/src/index.js
       - functions/answer-grader/semantic-grading-policy.mjs
       - .github/workflows/offline-greek-grading.yml
   workflow_dispatch:
@@ -30,6 +35,8 @@ jobs:
         run: |
           node --test functions/answer-grader/offline-fixtures.test.mjs
           node --test functions/answer-grader/test.mjs
+          node --test functions/answer-grader/safety-contrast-guard.test.mjs
+          node --check workers/answer-grader/src/index.js
           node scripts/report-greek-grading-coverage.mjs
           node --test scripts/test-greek-educator-review.mjs
           node scripts/prepare-greek-educator-review.mjs
