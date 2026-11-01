@@ -19,6 +19,13 @@ jobs:
           node --check mentor-voice.mjs
           node --check mentor-lab.js
           node --test scripts/test-mentor-voice.mjs
+          node --check functions/answer-grader/main.js
+          node --check workers/answer-grader/src/index.js
+          node --check functions/answer-grader/semantic-grading-policy.mjs
+          node --check old_type_written.js
+          node --check mentor/app/oral.js
+          node --check ai-grading-client.js
+          node --test functions/answer-grader/test.mjs
           node --check mentor/core/quick-answer.mjs
           node --check mentor-home.js
           node --check saek-course-series.js
