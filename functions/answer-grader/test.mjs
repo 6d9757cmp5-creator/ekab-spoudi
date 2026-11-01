@@ -316,3 +316,10 @@ test('source-aware guard catches unsupported full-credit on a wrong pulmonary ar
  assert.equal(result.body.verdict,'uncertain');
  assert.match(result.body.safetyNote,/πνευμονικ/);
 }));
+
+test('nasal completeness guard never suppresses a model-reported critical clinical error',()=>{
+ const original={...grade,verdict:'correct',criticalError:true,safetyNote:'Εντοπίστηκε σοβαρό λάθος'};
+ const result=protectCompleteness({id:'EOP-A-001'},'Η μυτη καθαριζει ζεσταινει και υγραινει',original);
+ assert.equal(result,original);
+ assert.equal(result.criticalError,true);
+});
