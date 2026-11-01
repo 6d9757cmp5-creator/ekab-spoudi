@@ -10,7 +10,7 @@ import {ANTHROPIC_URL,ANTHROPIC_VERSION,CLAUDE_MODELS} from '../mentor/ai/claude
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT='audit-results/educational-scientific-review.json';
 const RULES='docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md';
-export const MAX_FILES=25,MAX_CHARS=10500,CONCURRENCY=4;
+export const MAX_FILES=25,MAX_CHARS=10500,CONCURRENCY=8,MAX_CHUNKS=80;
 // File-type based discovery: new courses, subjects, names and directories are covered
 // automatically. Never depend on a fixed list of today's feature names.
 export function isEducationPath(p){
@@ -26,6 +26,18 @@ export function isEducationPath(p){
 }
 export function choosePaths(changed,manual=''){
  return [...new Set((manual?manual.split(','):changed).map(x=>x.trim()).filter(isEducationPath))].sort();
+}
+// Split on line boundaries so no clinical statement is cut mid-line; a single
+// over-long line is hard-split. Every chunk stays within MAX_CHARS.
+export function splitChunks(text,max=MAX_CHARS){
+ const out=[];let cur='';
+ for(let line of text.split('\n')){
+  while(line.length>max){if(cur){out.push(cur);cur='';}out.push(line.slice(0,max));line=line.slice(max);}
+  if(cur&&cur.length+line.length+1>max){out.push(cur);cur='';}
+  cur+=(cur?'\n':'')+line;
+ }
+ if(cur)out.push(cur);
+ return out;
 }
 export function validateReview(r){
  return Boolean(r&&typeof r.checked_scope==='string'&&Array.isArray(r.findings)&&Array.isArray(r.unverified)&&Array.isArray(r.not_checked)&&
@@ -73,6 +85,12 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  if(!paths.length)return report;
  let rules;try{rules=await readFile(resolve(root,RULES),'utf8');}
  catch{report.status='error_missing_review_rules';return report;}
+ let active=0;const waiting=[];
+ const slot=async fn=>{
+  if(active>=CONCURRENCY)await new Promise(r=>waiting.push(r));
+  active++;
+  try{return await fn();}finally{active--;waiting.shift()?.();}
+ };
  const reviewOne=async path=>{
   if(!existsSync(resolve(root,path))){report.pending.push({path,reason:'missing_or_deleted_file'});return;}
   // Binary education assets require visual/media review; do not decode as text
@@ -85,19 +103,19 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
   const patch=manual?'':git(['diff','--unified=6',...baseArgs(),'--',path]);
   const mode=patch?'changed_lines_context':'file_excerpt';
   const source=patch||await readFile(resolve(root,path),'utf8');
-  const text=source.slice(0,MAX_CHARS);
+  const chunks=splitChunks(source),used=chunks.slice(0,MAX_CHUNKS);
   const entry={path,mode,sha256:createHash('sha256').update(source).digest('hex'),
-   inspected_characters:text.length,total_characters:source.length,status:'pending'};
-  if(text.length<source.length)report.pending.push({path,reason:'excerpt_truncated'});
+   inspected_characters:used.reduce((n,c)=>n+c.length,0),total_characters:source.length,chunks:used.length,status:'pending'};
+  if(used.length<chunks.length)report.pending.push({path,reason:'excerpt_truncated'});
   if(dryRun||!key){
    report.pending.push({path,reason:dryRun?'dry_run':'review_key_missing'});
   }else{
    try{
-    const review=await askClaude(key,rules,path,mode,text,fetchImpl);
-    entry.status='screened';entry.checked_scope=review.checked_scope;
-    entry.unverified=review.unverified;entry.not_checked=review.not_checked;entry.findings=review.findings;
-    report.reviewed_count++;report.findings.push(...review.findings.map(x=>({...x,path})));
-    if(review.unverified.length||review.not_checked.length)report.pending.push({path,reason:'requires_source_or_scope_verification'});
+    const parts=await Promise.all(used.map((text,i)=>slot(()=>askClaude(key,rules,path,mode+(used.length>1?' part '+(i+1)+'/'+used.length:''),text,fetchImpl))));
+    entry.status='screened';entry.checked_scope=parts.map(r=>r.checked_scope).join(' | ').slice(0,600);
+    entry.unverified=parts.flatMap(r=>r.unverified);entry.not_checked=parts.flatMap(r=>r.not_checked);entry.findings=parts.flatMap(r=>r.findings);
+    report.reviewed_count++;report.findings.push(...entry.findings.map(x=>({...x,path})));
+    if(entry.unverified.length||entry.not_checked.length)report.pending.push({path,reason:'requires_source_or_scope_verification'});
    }catch(err){
     entry.status='error';entry.error=String(err.message||'review_error').slice(0,140);
     report.pending.push({path,reason:'review_failed'});
@@ -106,9 +124,7 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
   report.files.push(entry);
  };
  const queue=paths.slice(0,MAX_FILES);
- await Promise.all(Array.from({length:Math.min(CONCURRENCY,queue.length)},async()=>{
-  while(queue.length)await reviewOne(queue.shift());
- }));
+ await Promise.all(queue.map(reviewOne));
  report.files.sort((a,b)=>a.path<b.path?-1:1);
  report.status=report.pending.length?'incomplete':report.findings.some(f=>['CRITICAL','HIGH'].includes(f.severity))?
   'requires_correction':report.findings.length?'findings_to_review':'screened';

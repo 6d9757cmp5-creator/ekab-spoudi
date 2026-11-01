@@ -105,3 +105,26 @@ test('reviews many files concurrently, sends no temperature, surfaces API error 
   assert.equal(failed.status,'incomplete');
  }finally{delete process.env.ANTHROPIC_API_KEY;await rm(root,{recursive:true,force:true});}
 });
+
+test('large files are split into bounded chunks and every chunk is reviewed',async()=>{
+ const {splitChunks,MAX_CHARS}=await import('./educational-scientific-review.mjs');
+ const big=Array.from({length:3000},(_,i)=>'γραμμή '+i+' '+'α'.repeat(40)).join('\n');
+ const chunks=splitChunks(big);
+ assert.ok(chunks.length>5&&chunks.every(c=>c.length<=MAX_CHARS));
+ assert.equal(chunks.join('\n'),big);
+ assert.equal(splitChunks('x'.repeat(MAX_CHARS*2+5)).length,3);
+ const root=await mkdtemp(join(tmpdir(),'rev-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'rules');
+  await writeFile(join(root,'big.md'),big);
+  let calls=0;
+  const ok=async()=>{calls++;return {ok:true,json:async()=>({stop_reason:'end_turn',content:[{type:'text',
+   text:JSON.stringify({checked_scope:'x',findings:[],unverified:[],not_checked:[]})}]})};};
+  process.env.ANTHROPIC_API_KEY='test';
+  const report=await runReview({manual:'big.md',root,fetchImpl:ok});
+  assert.equal(calls,chunks.length);
+  assert.equal(report.status,'screened');
+  assert.equal(report.files[0].chunks,chunks.length);
+ }finally{delete process.env.ANTHROPIC_API_KEY;await rm(root,{recursive:true,force:true});}
+});
