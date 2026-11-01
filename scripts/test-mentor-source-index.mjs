@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {normalizeSearch,assertPublicCatalog,filterCatalog} from '../mentor/library/catalog-search.mjs';
+import {normalizeSearch,assertPublicCatalog,filterCatalog,matchesLearningTrack} from '../mentor/library/catalog-search.mjs';
 const source=new URL('../mentor/library/source-index.json',import.meta.url);
 test('bibliography index contains exactly 15 metadata-only sources and 7 draft imports',async()=>{
  const data=JSON.parse(await readFile(source,'utf8'));
@@ -9,12 +9,17 @@ test('bibliography index contains exactly 15 metadata-only sources and 7 draft i
  assert.equal(data.sources.length,15);
  assert.equal(data.sources.filter(x=>x.extracted_for_review).length,7);
  assert.equal(data.counts.clinically_approved,0);
+ assert.equal(data.sources.filter(s=>s.learning_tracks.includes('paramedic')).length,10);
+ assert.equal(data.sources.filter(s=>s.learning_tracks.includes('medicine')).length,11);
+ assert.equal(data.sources.filter(s=>s.learning_tracks.length===2).length,6);
  assert.equal(new Set(data.sources.map(x=>x.id)).size,15);
  for(const x of data.sources){
    assert.match(x.source_url,/^https:\/\//);
    assert.equal(x.independent_clinical_review,'not_verified');
    assert.equal(x.publication_rights_review,'not_verified');
    assert.equal(x.clinical_retrieval_enabled,false);
+   assert.ok(x.learning_tracks.length>=1);
+   assert.ok(x.learning_tracks.every(t=>['paramedic','medicine'].includes(t)));
    for(const forbidden of ['text','passages','content','text_path','html','model_training'])assert.equal(Object.hasOwn(x,forbidden),false);
  }
 });
@@ -34,6 +39,15 @@ test('Greek accents and Latin queries filter catalog without accessing content',
  assert.equal(filterCatalog(items,{stage:'all'}).length,15);
  assert.equal(filterCatalog(items,{stage:'extracted'}).length,7);
  assert.equal(filterCatalog(items,{stage:'identified'}).length,8);
+ assert.equal(filterCatalog(items,{track:'paramedic'}).length,10);
+ assert.equal(filterCatalog(items,{track:'medicine'}).length,11);
+ assert.equal(filterCatalog(items,{track:'paramedic',stage:'extracted'}).length,5);
+ assert.equal(filterCatalog(items,{track:'medicine',stage:'extracted'}).length,5);
+ assert.ok(matchesLearningTrack(items.find(x=>x.id==='who-bec'),'paramedic'));
+ assert.ok(matchesLearningTrack(items.find(x=>x.id==='who-bec'),'medicine'));
+ assert.deepEqual(filterCatalog(items,{track:'paramedic',query:'Medical-Surgical Nursing'}),[]);
+ assert.equal(filterCatalog(items,{track:'medicine',query:'Medical-Surgical Nursing'}).length,1);
+ assert.throws(()=>filterCatalog(items,{track:'surgeon'}),/Invalid learning track/);
  assert.ok(filterCatalog(items,{query:'WHO'}).length>=2);
  assert.ok(filterCatalog(items,{query:'erc',stage:'identified'}).some(x=>x.id==='erc-2025'));
  assert.deepEqual(filterCatalog(items,{query:'εκδοτησ-δεν-υπαρχει'}),[]);
@@ -48,11 +62,15 @@ test('fail closed on fake clinical approval, source duplication, unsafe text fie
  tamper(x=>x.sources[0].source_url='javascript:alert(1)');
  tamper(x=>x.sources[1].id=x.sources[0].id);
  tamper(x=>x.counts.extracted_in_isolated_review_branch=15);
+ tamper(x=>x.sources[0].learning_tracks=['doctor']);
+ tamper(x=>x.sources[0].learning_tracks=['paramedic','paramedic']);
+ tamper(x=>x.sources[0].learning_tracks=[]);
+ tamper(x=>delete x.sources[0].learning_tracks);
 });
 test('search UI has accessible controls and no unsafe clinical or legacy writes',async()=>{
  const html=await readFile(new URL('../mentor-library.html',import.meta.url),'utf8');
  const js=await readFile(new URL('../mentor-library.js',import.meta.url),'utf8');
- for(const id of ['source-search','source-stage','sources-visible']) assert.ok(html.includes('id="'+id+'"'));
+ for(const id of ['source-search','source-stage','source-track','sources-visible']) assert.ok(html.includes('id="'+id+'"'));
  assert.match(js,/filterCatalog/);
  assert.match(js,/replaceChildren/);
  assert.doesNotMatch(js,/localStorage|sessionStorage|indexedDB|innerHTML|cloud-sync|official_questions/);
