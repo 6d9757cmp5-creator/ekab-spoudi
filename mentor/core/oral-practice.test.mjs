@@ -24,6 +24,12 @@ test('oral page cannot silently capture voice, send data or mutate grades',async
  assert.ok(html.includes('δεν λειτουργεί μικρόφωνο'));
  assert.ok(hub.includes('href="mentor-oral.html"'));
  assert.ok(hub.includes('href="ui-tools/anatomy-3d/index.html"'));
- assert.doesNotMatch(js,/SpeechRecognition|webkitSpeechRecognition|mediaDevices|localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|innerHTML|grading|appwrite/i);
+ assert.doesNotMatch(js,/SpeechRecognition|webkitSpeechRecognition|mediaDevices|localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|innerHTML|appwrite/i);
+ // Optional written AI review: only through the shared EkabAIGrade service,
+ // only after an explicit click, never in active-exam mode, never writing grades.
+ assert.match(js,/\$\('oral-grade-ai'\)\.addEventListener\('click'/,'AI review must be user-initiated');
+ assert.match(js,/if\(busy\|\|examBox\.checked\|\|answers\[index\]\.revealed\)return;/,'AI review must be blocked in exam mode');
+ assert.match(js,/window\.EkabAIGrade/,'AI review must use the shared grading service');
+ assert.doesNotMatch(js,/ai\.(save|submit|record|sync)|setItem|\.grade\s*=/i,'oral page must not persist or mutate grades');
  assert.ok(js.includes('speechSynthesis'),'only optional device text-to-speech is supported');
 });
