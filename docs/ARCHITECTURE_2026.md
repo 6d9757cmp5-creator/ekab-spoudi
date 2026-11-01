@@ -37,3 +37,6 @@
 - Κοινός `notes-panel.js` controller χρησιμοποιεί URLs δεδομένων σχετικών με τη θέση script — δεν μετακινείται χωρίς refactor και offline validation.
 - Παλιά classic scripts για progress/scheduler/notifications παραμένουν στις ιστορικές θέσεις.
 - Ανεξάρτητη κλινική, ασφάλειας, προσβασιμότητας και πραγματικής συσκευής αξιολόγηση **εκκρεμεί**.
+
+## Επαναληπτικός έλεγχος — Βιβλιοθήκη PDF, Νοέμβριος 2026
+Το ενεργό script της Βιβλιοθήκης PDF μεταφέρθηκε από `/pdf-library.js` στο `/tools/pdf-library/app/pdf-library.js`, με σταθερή root HTML και fallback loader. Η IndexedDB `ekab-personal-pdf-v1/documents` δεν άλλαξε. Η προηγούμενη PDF.js 3.11.174 είναι επηρεαζόμενη από CVE-2024-4367 σύμφωνα με το Mozilla advisory. Πλέον χρησιμοποιείται pinned PDF.js 6.4.299 ESM με `isEvalSupported:false`; ο worker είναι της ίδιας έκδοσης. Η ιστορική υπόσχεση offline προβολής διορθώθηκε: χωρίς vendored parser, ο αναγνώστης μπορεί να χρειαστεί δίκτυο. Για παραγωγική πιστοποίηση χρειάζεται δοκιμή πραγματικής προβολής, Safari/Chromium, επιπλέον CSP/SRI και ανεξάρτητο security audit.
