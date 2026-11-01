@@ -144,6 +144,7 @@ for(let id=first;id<=last;id++){
    console.log('MIRRORED',id,name,result.bytes);
    if(currentBytes>=maxPack)await flush();
   }catch(e){
+   await rm(path,{force:true}).catch(()=>{});
    failed.push({entryId:id,source:f.url,error:String(e.message).slice(0,220)});
    console.error('FAILED MODEL',id,String(e.message).slice(0,180));
   }

@@ -4,6 +4,10 @@ on:
     branches: [main]
     paths:
       - 'tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json'
+  workflow_run:
+    workflows:
+      - 'ATLA Master Plan 2026 - NIH 3D complete resource references'
+    types: [completed]
   workflow_dispatch:
 permissions:
   contents: write
@@ -19,12 +23,29 @@ jobs:
         run: |
           test -s tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json
           node --check scripts/mirror-nih3d-model-files.mjs
+      - name: Require authorized durable object storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ATLA_S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ATLA_S3_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.ATLA_S3_REGION }}
+          ATLA_BUCKET: ${{ secrets.ATLA_S3_BUCKET }}
+          ATLA_ENDPOINT: ${{ secrets.ATLA_S3_ENDPOINT }}
+        run: |
+          set -euo pipefail
+          if test -z "$AWS_ACCESS_KEY_ID" || test -z "$AWS_SECRET_ACCESS_KEY" || test -z "$ATLA_BUCKET"; then
+            echo "::error::Permanent storage not connected. Configure ATLA_S3_ACCESS_KEY_ID, ATLA_S3_SECRET_ACCESS_KEY, ATLA_S3_BUCKET and ATLA_S3_REGION in GitHub Actions secrets. Do not launch hundreds of temporary download jobs."
+            exit 1
+          fi
+          if test -z "$AWS_DEFAULT_REGION"; then export AWS_DEFAULT_REGION=us-east-1; fi
+          cmd=(aws s3api head-bucket --bucket "$ATLA_BUCKET")
+          if test -n "$ATLA_ENDPOINT"; then cmd+=(--endpoint-url "$ATLA_ENDPOINT"); fi
+          "${cmd[@]}" || { echo "::error::The configured object storage is not writable/readable."; exit 1; }
       - name: Create or reuse release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: atla-nih3d-master-2026
         run: |
-          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA Master Plan 2026 - NIH 3D original models" --notes "Original NIH 3D binary resources losslessly archived in tar.zst. Source SHA256, license and per-range failures are tracked in result manifests. Not automatically installed in the live Anatomy Lab or Clinical Cockpit."
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA Master Plan 2026 - NIH 3D original models" --notes "Original NIH 3D model files archived losslessly, including SHA256 and source provenance." || echo "Release creation restricted: source archives will still be saved as GitHub Actions artifacts."
   mirror:
     needs: prepare
     runs-on: ubuntu-latest
@@ -48,8 +69,52 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -qq -y zstd
           node --check scripts/mirror-nih3d-model-files.mjs
           node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$END" --out="tmp/nih3d-mirror-$RANGE_START"
-      - name: Upload real model archives and integrity manifests
+      - name: Upload validated archives permanently to ATLA object storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ATLA_S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ATLA_S3_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.ATLA_S3_REGION }}
+          ATLA_BUCKET: ${{ secrets.ATLA_S3_BUCKET }}
+          ATLA_ENDPOINT: ${{ secrets.ATLA_S3_ENDPOINT }}
+          RANGE_START: ${{ matrix.start }}
+        run: |
+          set -euo pipefail
+          if test -z "$AWS_DEFAULT_REGION"; then export AWS_DEFAULT_REGION=us-east-1; fi
+          dir="tmp/nih3d-mirror-$RANGE_START"
+          test -d "$dir"
+          shopt -s nullglob
+          files=("$dir"/*.tar.zst* "$dir"/*-RESULT.json)
+          test "${#files[@]}" -gt 0
+          extra=()
+          if test -n "$ATLA_ENDPOINT"; then extra=(--endpoint-url "$ATLA_ENDPOINT"); fi
+          for file in "${files[@]}"; do
+            name="$(basename "$file")"
+            digest="$(sha256sum "$file" | cut -d' ' -f1)"
+            bytes="$(stat -c%s "$file")"
+            remote="ATLA-Master-Plan-2026/NIH3D/$name"
+            aws s3 cp "$file" "s3://$ATLA_BUCKET/$remote" --only-show-errors --metadata "sha256=$digest" "${extra[@]}"
+            actual="$(aws s3api head-object --bucket "$ATLA_BUCKET" --key "$remote" --query '[ContentLength,Metadata.sha256]' --output text "${extra[@]}")"
+            read -r size checksum <<< "$actual"
+            if test "$size" != "$bytes" || test "$checksum" != "$digest"; then
+              echo "::error::Remote archive verification failed for $name"
+              exit 1
+            fi
+            echo "PERSISTED_VERIFIED $name $bytes"
+          done
+      - name: Preserve verified models as GitHub Actions artifacts
         if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-originals-${{ matrix.start }}
+          path: |
+            tmp/nih3d-mirror-${{ matrix.start }}/*.tar.zst*
+            tmp/nih3d-mirror-${{ matrix.start }}/*-RESULT.json
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 30
+      - name: Upload real model archives and integrity manifests to release when allowed
+        if: always()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: atla-nih3d-master-2026
@@ -69,6 +134,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Retrieve source integrity manifests from Github Actions artifacts
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: nih3d-originals-*
+          path: tmp/nih3d-reports
+          merge-multiple: true
       - name: Count actual uploaded resource packs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -88,7 +160,7 @@ jobs:
             for(const f of r.modelFiles||[])bytes+=(f.bytes||0);
           }
           const summary={shards:names.length,totalShards:250,originalFiles:files,sourceModels:modelIds,failed,missing,losslessPacks:packs,sourceBytes:bytes,complete:names.length===250&&failed===0};
-          writeFileSync('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md','# ATLA Master Plan 2026 - NIH 3D transferred originals\n\n'+JSON.stringify(summary,null,2)+'\n\nRelease: https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/atla-nih3d-master-2026\n\nAll packaging is lossless tar.zst, each pack carries model SHA-256 and source license metadata. Unavailable source models are explicitly recorded; this is not independent clinical validation.\n');
+          writeFileSync('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md','# ATLA Master Plan 2026 - NIH 3D transferred originals\n\n'+JSON.stringify(summary,null,2)+'\n\nArtifacts: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions\n\nAll packaging is lossless tar.zst, each pack carries model SHA-256 and source license metadata. Artifact storage is temporary; any long-term release requires repository authorization. Unavailable source models are explicitly recorded; this is not independent clinical validation.\n');
           console.log(JSON.stringify(summary));
           NODE
       - name: Record actual mirrored file count in Master Plan
