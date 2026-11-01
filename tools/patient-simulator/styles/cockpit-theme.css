@@ -209,3 +209,22 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,su
  .next-unified-legal{left:8px;right:8px;bottom:7px;font-size:.58rem;padding:5px 8px}
  .next-unified-host{top:18px;bottom:28px;height:calc(100% - 46px)}
 }
+
+
+/* v0.7 screenshot audit: actual Three.js canvas inherits legacy canvas min-height/z-index.
+ * Neutralize those inherited values so the status, Greek instructions and clinical
+ * limitations remain legible above the real 3D canvas at every viewport. */
+.next-unified-host .next-unified-canvas{
+ position:static!important;
+ min-height:0!important;
+ min-width:0!important;
+ z-index:auto!important;
+ filter:none!important;
+}
+.next-unified-labels,.next-unified-status,.next-unified-legal{z-index:3}
+body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
+@media(max-width:600px){
+ .next-unified-host{inset:0;height:100%;width:100%;bottom:0}
+ .next-unified-status{max-width:min(330px,calc(100% - 16px))}
+ .next-unified-legal{font-size:.6rem}
+}

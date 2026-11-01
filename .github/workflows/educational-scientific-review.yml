@@ -4,6 +4,8 @@ name: Educational and scientific review
 # modules are never omitted by path filters. Cost is bounded: unchanged text is served from
 # a cache and each run spends at most AUDIT_MAX_CALLS paid calls.
 on:
+  push:
+    branches: [main]
   pull_request:
     types: [opened, reopened, ready_for_review, synchronize]
   workflow_dispatch:

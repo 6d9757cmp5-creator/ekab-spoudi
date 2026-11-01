@@ -136,14 +136,14 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
  gl.domElement.className='next-unified-canvas';
  gl.domElement.setAttribute('aria-label','Κοινή τρισδιάστατη εκπαιδευτική σκηνή με δύο εικονικούς ασθενείς και εξοπλισμό.');
  host.append(gl.domElement);
- const scene=new THREE.Scene();scene.background=new THREE.Color('#9cb6c0');scene.fog=new THREE.FogExp2('#9cb6c0',.025);
- scene.add(new THREE.HemisphereLight('#e5f5ff','#4b6168',2.1));
- const sun=new THREE.DirectionalLight('#fff1df',3.1);
+ const scene=new THREE.Scene();scene.background=new THREE.Color('#7795a3');scene.fog=new THREE.FogExp2('#7795a3',.022);
+ scene.add(new THREE.HemisphereLight('#e5f5ff','#4b6168',1.75));
+ const sun=new THREE.DirectionalLight('#fff1df',2.8);
  sun.position.set(-4,8,4);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);
  sun.shadow.camera.left=-10;sun.shadow.camera.right=10;sun.shadow.camera.top=10;sun.shadow.camera.bottom=-10;
  sun.shadow.bias=-.00035;scene.add(sun);
- const rim=new THREE.DirectionalLight('#88dfed',1.25);rim.position.set(5,4,-3);scene.add(rim);
- const camera=new THREE.PerspectiveCamera(46,1,.08,160);camera.position.set(0,3.55,9.7);
+ const rim=new THREE.DirectionalLight('#88dfed',1.45);rim.position.set(5,4,-3);scene.add(rim);
+ const camera=new THREE.PerspectiveCamera(46,1,.08,160);camera.position.set(0,2.85,6.65);
  const controls=new OrbitControls(camera,gl.domElement);
  controls.enableDamping=true;controls.dampingFactor=.075;
  controls.minDistance=2.0;controls.maxDistance=16;
@@ -174,7 +174,7 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
   const object=people[person];
   let y=object?.userData?.height ? clamp(object.userData.height*.57,.5,1.3):.85;
   let distance=6.75;
-  if(current.view==='scene'){controls.target.set(0,.92,0);camera.position.set(0,3.55,9.7);controls.update();return;}
+  if(current.view==='scene'){controls.target.set(0,.94,0);camera.position.set(0,mobile?2.45:2.85,mobile?6.2:6.65);controls.update();return;}
   if(current.view==='full'){distance=4.35;}
   else if(current.view==='head'){distance=2.45;y=object?.userData?.standing?object.userData.height*.78:y;}
   else if(current.view==='torso'){distance=2.8;y=object?.userData?.standing?object.userData.height*.54:y;}
@@ -203,7 +203,7 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
   background=buildEnvironment(desired);scene.add(background);
   if(equipment)scene.remove(equipment);
   equipment=buildEquipment();scene.add(equipment);
-  scene.background=new THREE.Color(desired==='home'?'#77838a':desired==='square'?'#adc8cf':'#9eb9c9');
+  scene.background=new THREE.Color(desired==='home'?'#70828d':desired==='square'?'#9bb4ba':'#7795a3');
   scene.fog.color.copy(scene.background);
  }
  async function setState(next){
