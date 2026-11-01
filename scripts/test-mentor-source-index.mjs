@@ -93,6 +93,10 @@ test('ATLA topic navigation connects each of 16 pathways only to sources in its 
  assert.match(html,/id="study-paths"/);
  assert.match(js,/study-paths\.json/);
  assert.match(js,/renderPaths/);
+ assert.doesNotMatch(html,/<option value="medicine">/);
+ assert.doesNotMatch(html,/id="source-track"/);
+ assert.match(js,/m\.track==='paramedic'/);
+ assert.match(html,/Ιατρική παραμένει υποστηρικτική βιβλιογραφική γνώση/);
  assert.doesNotMatch(js,/localStorage|sessionStorage|indexedDB|innerHTML/);
 });
 test('fail closed on fake clinical approval, source duplication, unsafe text fields and mismatched counts',async()=>{
@@ -112,7 +116,7 @@ test('fail closed on fake clinical approval, source duplication, unsafe text fie
 test('search UI has accessible controls and no unsafe clinical or legacy writes',async()=>{
  const html=await readFile(new URL('../mentor-library.html',import.meta.url),'utf8');
  const js=await readFile(new URL('../mentor-library.js',import.meta.url),'utf8');
- for(const id of ['source-search','source-stage','source-track','sources-visible']) assert.ok(html.includes('id="'+id+'"'));
+ for(const id of ['source-search','source-stage','sources-visible']) assert.ok(html.includes('id="'+id+'"'));
  assert.match(js,/filterCatalog/);
  assert.match(js,/replaceChildren/);
  assert.doesNotMatch(js,/localStorage|sessionStorage|indexedDB|innerHTML|cloud-sync|official_questions/);
