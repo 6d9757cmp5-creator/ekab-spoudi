@@ -69,3 +69,10 @@ test('source-controlled exact references and 250 matching spelling variants neve
    'False alert on original reference or equivalent accent-less form: '+item.id);
  }
 });
+
+test('a model reporting a CRITICAL safety error cannot have its flag erased by the contradiction guard',()=>{
+ for(const [id,unsafe] of contradictions){
+  const source={...grade,criticalError:true,verdict:'correct',safetyNote:'Κρίσιμο κλινικό σφάλμα'};
+  assert.equal(guardHighRiskFullCredit({id},unsafe,source),source);
+ }
+});
