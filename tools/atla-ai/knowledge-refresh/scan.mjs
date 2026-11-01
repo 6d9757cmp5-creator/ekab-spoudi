@@ -17,7 +17,14 @@ const LIMIT_CANDIDATES=100;
 const TOPICS=Object.freeze([
  {id:'prehospital',name:'Προνοσοκομειακή φροντίδα',term:'("Emergency Medical Services"[MeSH Terms] OR prehospital[Title/Abstract]) AND (guideline[Title/Abstract] OR "Systematic Review"[Publication Type])'},
  {id:'resuscitation',name:'Αναζωογόνηση',term:'("Cardiopulmonary Resuscitation"[MeSH Terms] OR "basic life support"[Title/Abstract]) AND (guideline[Title/Abstract] OR "Systematic Review"[Publication Type])'},
- {id:'trauma',name:'Τραύμα',term:'("Wounds and Injuries"[MeSH Terms] OR "trauma care"[Title/Abstract]) AND ("Emergency Medical Services"[MeSH Terms] OR prehospital[Title/Abstract]) AND (guideline[Title/Abstract] OR "Systematic Review"[Publication Type])'}
+ {id:'trauma',name:'Τραύμα',term:'("Wounds and Injuries"[MeSH Terms] OR "trauma care"[Title/Abstract]) AND ("Emergency Medical Services"[MeSH Terms] OR prehospital[Title/Abstract]) AND (guideline[Title/Abstract] OR "Systematic Review"[Publication Type])'},
+ {id:'airway-respiratory',name:'Αεραγωγός και αναπνευστικά επείγοντα',term:'("Airway Management"[MeSH Terms] OR "Respiratory Insufficiency"[MeSH Terms]) AND (emergency[Title/Abstract] OR prehospital[Title/Abstract])'},
+ {id:'cardiac-emergency',name:'Καρδιαγγειακά επείγοντα',term:'("Acute Coronary Syndrome"[MeSH Terms] OR "Arrhythmias, Cardiac"[MeSH Terms]) AND (emergency[Title/Abstract] OR prehospital[Title/Abstract])'},
+ {id:'stroke-neurology',name:'Νευρολογικά επείγοντα',term:'("Stroke"[MeSH Terms] OR "Status Epilepticus"[MeSH Terms]) AND (emergency[Title/Abstract] OR prehospital[Title/Abstract])'},
+ {id:'pediatric-emergency',name:'Παιδιατρικά επείγοντα',term:'("Pediatrics"[MeSH Terms] OR pediatric[Title/Abstract]) AND ("Emergency Medical Services"[MeSH Terms] OR resuscitation[Title/Abstract])'},
+ {id:'sepsis-shock',name:'Σήψη και καταπληξία',term:'("Sepsis"[MeSH Terms] OR "Shock"[MeSH Terms]) AND (emergency[Title/Abstract] OR prehospital[Title/Abstract])'},
+ {id:'medication-safety',name:'Ασφάλεια φαρμάκων',term:'("Medication Errors"[MeSH Terms] OR "Drug-Related Side Effects and Adverse Reactions"[MeSH Terms]) AND ("Emergency Medical Services"[MeSH Terms] OR emergency[Title/Abstract])'},
+ {id:'simulation-training',name:'Ιατρική εκπαίδευση και προσομοίωση',term:'("Simulation Training"[MeSH Terms] OR "Education, Medical"[MeSH Terms]) AND (prehospital[Title/Abstract] OR paramedic[Title/Abstract] OR emergency[Title/Abstract])'}
 ]);
 const clean=(v,n=320)=>String(v??'').replace(/[\u0000-\u001f\u007f]+/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
 const canonical=(url)=>{
