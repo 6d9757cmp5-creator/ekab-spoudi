@@ -163,7 +163,7 @@ try {
     if(!await page.locator('#next-events').textContent().then(s=>s.includes('Οπτική στάση: καθιστός')))
       throw Error(device+': MENTOR NEXT visual posture not recorded');
     await page.locator('#next-clean-panels').click();
-    if(await page.locator('#next-insights').isVisible()){const status=await page.locator('#next-insights').evaluate(el=>({hidden:el.hidden,style:el.style.display,computed:getComputedStyle(el).display}));throw Error(device+': MENTOR NEXT tool broom did not dismiss panels '+JSON.stringify(status));}
+    if(await page.locator('#next-insights').isVisible()){const status=await page.locator('#next-insights').evaluate(el=>({hidden:el.hidden,style:el.style.display,computed:getComputedStyle(el).display,command:document.querySelector('#next-root')?.dataset.panels,buttonHidden:document.querySelector('#next-clean-panels')?.hidden}));throw Error(device+': MENTOR NEXT tool broom did not dismiss panels '+JSON.stringify(status));}
     await page.locator('#next-show-panels').click();
     if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT panel restore failed');
     await page.locator('#next-nextstep').click();

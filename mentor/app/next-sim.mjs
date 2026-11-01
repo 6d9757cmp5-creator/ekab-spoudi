@@ -191,12 +191,18 @@ function setPanelsOpen(open){
  }
  $('next-clean-panels').hidden=!open;
  $('next-show-panels').hidden=open;
+ $('next-root').dataset.panels=open?'open':'closed';
 }
-$('next-clean-panels').addEventListener('click',()=>{
- setPanelsOpen(false);
- $('next-result').textContent='Τα εκπαιδευτικά παράθυρα έκλεισαν. Επίλεξε «Εμφάνιση εργαλείων» για συνέχεια.';
-});
-$('next-show-panels').addEventListener('click',()=>{setPanelsOpen(true);render();});
+// Capture the command before floating MENTOR or any other UI can re-route a tap.
+document.addEventListener('click',event=>{
+ const btn=event.target.closest?.('#next-clean-panels, #next-show-panels');
+ if(!btn)return;
+ event.preventDefault();event.stopImmediatePropagation();
+ if(btn.id==='next-clean-panels'){
+  setPanelsOpen(false);
+  $('next-result').textContent='Τα εκπαιδευτικά παράθυρα έκλεισαν. Επίλεξε «Εμφάνιση εργαλείων» για συνέχεια.';
+ }else{setPanelsOpen(true);render();}
+},{capture:true});
 $('next-tools').addEventListener('click',()=>{if($('next-workspace-main').hidden)setPanelsOpen(true);});
 $('next-nextstep').addEventListener('click',()=>{
  const r=missionEvidence(state),a=r.people.find(p=>p.id===state.person);
