@@ -15,13 +15,13 @@ const eoppep=read('./eoppep-rubrics.json');
 const seminars=read('./seminar-rubrics.json');
 const verdicts=new Set(['correct','partial','incorrect','uncertain']);
 
-test('offline practice corpus contains 37 synthetic cases from multiple sections; no claims of verified grades',()=>{
- assert.equal(corpus.cases.length,37);
+test('offline practice corpus contains 100 synthetic cases across SAEK and EOPPEP; labels unverified',()=>{
+ assert.equal(corpus.cases.length,100);
  assert.equal(corpus.medicalValidation,'not_performed');
  assert.equal(corpus.modelExecution,'none');
  assert.match(corpus.labelProvenance,/provisional/);
  const found=new Set(corpus.cases.map(x=>x.section));
- assert.deepEqual([...found].sort(),['eoppep','mentor_oral','seminar']);
+ assert.deepEqual([...found].sort(),['eoppep','mentor_oral','saek','seminar']);
 });
 test('every offline case has unique identifiers, a source-controlled question and a provisional judgment',()=>{
  const seen=new Set();
@@ -35,6 +35,10 @@ test('every offline case has unique identifiers, a source-controlled question an
   if(c.section==='eoppep'){
    const q=eoppep.find(x=>x.id===c.questionId);
    assert.ok(q&&q.question&&q.answer&&q.answerStatus==='reviewed_educational',c.id);
+  }else if(c.section==='saek'){
+   const sae=read('./saek-exam-rubrics.json');
+   const q=sae.items.find(x=>x.id===c.questionId);
+   assert.ok(q&&q.question&&q.answer,c.id);
   }else if(c.section==='mentor_oral'){
    const q=mentor.find(x=>x.id===c.questionId);
    assert.ok(q&&q.checks.length===3,c.id);
@@ -76,4 +80,32 @@ test('explicit negation or unknown synonyms do not receive automatic full credit
  assert.equal(verdict.verdict,'uncertain');
  const vague=corpus.cases.find(x=>x.id==='nasal-too-vague');
  assert.equal(protectCompleteness({id:'EOP-A-001'},vague.answer,{verdict:'correct'}).verdict,'uncertain');
+});
+
+test('milestone 100: cover 20 distinct EOPPEP questions and seven SAEK exercises',()=>{
+ const counts=corpus.cases.reduce((out,x)=>(out[x.section]=(out[x.section]||0)+1,out),{});
+ assert.deepEqual(counts,{eoppep:67,mentor_oral:6,seminar:6,saek:21});
+ const eopIds=new Set(corpus.cases.filter(x=>x.section==='eoppep').map(x=>x.questionId));
+ const saekIds=new Set(corpus.cases.filter(x=>x.section==='saek').map(x=>x.questionId));
+ assert.equal(eopIds.size,20);
+ assert.equal(saekIds.size,7);
+ for(let n=1;n<=20;n++)assert.ok(eopIds.has('EOP-A-'+String(n).padStart(3,'0')));
+ for(const id of ['saek-01-9','saek-02-2','saek-03-3','saek-03-5','saek-04-2','saek-19-3','saek-20-8'])assert.ok(saekIds.has(id));
+});
+test('the 100 synthetic examples contain varied outcomes but zero independently verified educational labels',()=>{
+ const labels=corpus.cases.reduce((a,c)=>(a[c.expected]=(a[c.expected]||0)+1,a),{});
+ assert.ok(labels.correct>=30&&labels.partial>=25&&labels.incorrect>=25&&labels.uncertain>=5);
+ assert.ok(corpus.cases.every(c=>c.reviewStatus==='pending_independent_educator_review'));
+ assert.ok(corpus.cases.every(c=>c.provenance==='synthetic_written_for_regression'));
+ assert.ok(corpus.cases.some(c=>c.section==='saek'&&c.expected==='incorrect'&&/δεν/i.test(c.answer)));
+});
+test('provisional answers are distinguishable, not duplicate text that artificially inflates the milestone',()=>{
+ const identities=new Set(),textsByQuestion=new Set();
+ for(const c of corpus.cases){
+  const identity=[c.section,c.courseId||'',c.questionId||'',c.questionIndex??'',c.id].join(':');
+  assert.ok(!identities.has(identity),identity);identities.add(identity);
+  const text=[c.section,c.questionId||`${c.courseId}:${c.questionIndex}`,c.answer.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}]+/gu,' ').toLowerCase().trim()].join(':');
+  assert.ok(!textsByQuestion.has(text),c.id);
+  textsByQuestion.add(text);
+ }
 });
