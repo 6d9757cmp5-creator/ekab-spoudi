@@ -9,11 +9,15 @@ test('stage 1 keeps existing home study, MENTOR and progress entrypoints',()=>{
   }
   assert.ok(home.includes('href="tools.html"'),'missing new tools entry');
   assert.ok(!home.includes('MENTOR PROTOCOL LAB'),'protocols are independent of educator');
+  assert.ok(home.includes('<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3"'),'tools icon matches existing SVG design');
 });
 test('tools hub has existing links and clear ownership labels',()=>{
   for(const name of ['MENTOR OS','Προσομοιωτής Ασθενών','Εργαστήριο ΗΚΓ','Ελληνικά Πρωτόκολλα']){
     assert.ok(tools.includes(name),'missing tool label: '+name);
   }
+  assert.ok(tools.includes('όχι επίσημες επιχειρησιακές οδηγίες ΕΚΑΒ'));
+  assert.ok(tools.includes('όχι πιστοποίηση'));
+  assert.doesNotMatch(tools,/localStorage\.(?:setItem|removeItem|clear)\s*\(/);
   const links=[...tools.matchAll(/href="([^"]+)"/g)].map(x=>x[1]).filter(x=>!x.startsWith('#')&&!/^(?:https?:|mailto:)/.test(x));
   for(const link of links){
     const clean=link.split('?')[0].split('#')[0];
