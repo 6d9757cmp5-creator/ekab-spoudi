@@ -106,7 +106,7 @@ function boot(){
  document.body.append(panel,launcher);
  const currentPage=location.pathname.split('/').pop()||'';
  const addAddonCss=path=>{const node=$('link');node.rel='stylesheet';node.href=new URL(path,import.meta.url).href;document.head.append(node);};
- if(/^saek-course-(?:0[1-9]|1[0-9]|20)\\.html$/.test(currentPage)){
+ if(/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(currentPage)){
   addAddonCss('./practice/saek-practice.css');
   void import('./practice/saek-practice.mjs').catch(()=>{});
  }
@@ -140,7 +140,7 @@ function boot(){
   const detail=e.detail||{};
   const source=String(detail.source||'');
   const chapter=String(detail.chapter||'');
-  if(!/^saek-course-(?:0[1-9]|1[0-9]|20)\\.html$/.test(source)||!/^lesson-(?:[1-9]|[1-9][0-9]|100)$/.test(chapter))return;
+  if(!/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(source)||!/^lesson-(?:[1-9]|[1-9][0-9]|100)$/.test(chapter))return;
   const heading=String(detail.focus||'').replace(/[<>]/g,'').trim().slice(0,90);
   setOpen(true);
   context.textContent='Από κεφάλαιο ΣΑΕΚ: '+(heading||chapter);
