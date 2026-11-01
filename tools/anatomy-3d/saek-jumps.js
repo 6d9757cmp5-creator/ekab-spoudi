@@ -12,7 +12,7 @@ const R={
 '01':{
   1:[['Ανατομική θέση','skeleton','skeletal']],
   2:[['Οστά σώματος','skeleton','skeletal']],
-  3:[['Πνεύμονες','organs','respiratory','lung'],['Θωρακικός κλωβός','skeleton','skeletal','rib']],
+  3:[['Πνεύμονες','organs','respiratory','lung'],['Θωρακικός κλωβός','skeleton','skeletal','thorax']],
   4:[['Ήπαρ','organs','digestive','liver'],['Στομάχι','organs','digestive','stomach']],
   5:[['Εγκέφαλος','organs','nervous','brain'],['Καρδιά','organs','cardiac','heart']],
   7:[['Σπόνδυλοι','skeleton','skeletal','vertebra'],['Νωτιαίος μυελός','organs','nervous','spinalcord']],
@@ -53,9 +53,9 @@ const R={
   17:[['Νεφροί','organs','urinary','kidney']]
 },
 '14':{
-  3:[['Θωρακικός κλωβός','skeleton','skeletal','rib'],['Κρανίο','skeleton','skeletal','skull']],
+  3:[['Θωρακικός κλωβός','skeleton','skeletal','thorax'],['Κρανίο','skeleton','skeletal','skull']],
   4:[['Μηριαίο οστό','skeleton','skeletal','femur']],
-  7:[['Πλευρές','skeleton','skeletal','rib'],['Πνεύμονες','organs','respiratory','lung']],
+  7:[['Πλευρές','skeleton','skeletal','ribs'],['Πνεύμονες','organs','respiratory','lung']],
   8:[['Πύελος','skeleton','skeletal','pelvis'],['Όργανα κοιλίας','organs','digestive']],
   9:[['Κρανίο','skeleton','skeletal','skull'],['Εγκέφαλος','organs','nervous','brain']],
   10:[['Σπόνδυλοι','skeleton','skeletal','vertebra']],
@@ -74,7 +74,7 @@ const R={
   5:[['Αρτηρίες','organs','arterial']],
   6:[['Μηριαίο οστό','skeleton','skeletal','femur']],
   8:[['Σπονδυλική στήλη','skeleton','skeletal','vertebra']],
-  9:[['Πλευρές','skeleton','skeletal','rib'],['Πνεύμονες','organs','respiratory','lung']],
+  9:[['Πλευρές','skeleton','skeletal','ribs'],['Πνεύμονες','organs','respiratory','lung']],
   10:[['Πύελος','skeleton','skeletal','pelvis'],['Όργανα κοιλίας','organs','digestive']]
 }
 };
