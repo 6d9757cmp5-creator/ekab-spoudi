@@ -31,7 +31,7 @@ const mentions={
  * becomes ungraded instead of being falsely rejected. Never grade spelling.
  */
 export function protectCompleteness(question,answer,raw){
- if(question?.id!=='EOP-A-001'||raw?.verdict!=='correct')return raw;
+ if(question?.id!=='EOP-A-001'||raw?.verdict!=='correct'||raw?.criticalError===true)return raw;
  const normalized=normalizedGreek(answer);
  const found=Object.fromEntries(Object.entries(mentions).map(([key,regex])=>[key,regex.test(normalized)]));
  // Explicit negation may reverse the meaning. Never approve such an answer
