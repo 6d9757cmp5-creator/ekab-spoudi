@@ -27,8 +27,8 @@ jobs:
         run: |
           node --test scripts/test-mentor-layout.mjs
           node --test scripts/test-mentor-voice.mjs
-          node --test scripts/test-mentor-3d.mjs
-          node --test scripts/test-mentor-cinematic.mjs
+          # Legacy avatar test files were archived and do not exist in the current source tree.
+          node --test scripts/test-mentor-protocols.mjs
           node --test scripts/test-mentor-v1-unified.cjs
           for f in mentor/app/*.js mentor/voice/*.mjs mentor/avatar/*.mjs; do node --check "$f"; done
       - name: Install Playwright Chromium
