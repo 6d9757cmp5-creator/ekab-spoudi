@@ -32,6 +32,15 @@ export function cautiouslyCheckGrade(raw){
  if(!raw||typeof raw!=='object')return raw;
  const points=Array.isArray(raw.missingPoints)?raw.missingPoints.filter(x=>typeof x==='string'&&x.trim()):[];
  const found=Array.isArray(raw.correctPoints)?raw.correctPoints.filter(x=>typeof x==='string'&&x.trim()):[];
+ // Grammar/spelling must never be the sole basis for rejection.
+ const explanation=typeof raw.explanation==='string'?raw.explanation:'';
+ const reason=[explanation,...points].join(' ').toLocaleLowerCase('el-GR');
+ const solelyLanguageBased=/(?:λόγω|επειδή|γιατί|εξαιτίας|έχει|περιέχει).{0,65}(?:ορθογραφ|συντακτικ|γραμματικ|τονισμ|τόνου)/iu.test(reason) ||
+   /(?:ορθογραφ|συντακτικ|γραμματικ).{0,45}(?:λάθ|σφάλμ)/iu.test(reason);
+ if(!raw.criticalError&&['incorrect','partial'].includes(raw.verdict)&&solelyLanguageBased){
+  return {...raw,verdict:'uncertain',correctPoints:[],missingPoints:[],
+   explanation:'Δεν επιτρέπεται να απορριφθεί εκπαιδευτική απάντηση μόνο για ορθογραφικά ή συντακτικά λάθη. Απαιτείται εκ νέου αξιολόγηση των ουσιωδών εννοιών.'};
+ }
  if((raw.verdict==='incorrect'&&!raw.criticalError&&points.length===0)||
     (raw.verdict==='partial'&&(found.length===0||points.length===0))){
   return {...raw,verdict:'uncertain',criticalError:false,correctPoints:[],missingPoints:[],
