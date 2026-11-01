@@ -108,7 +108,12 @@ function boot(){
  const addAddonCss=path=>{const node=$('link');node.rel='stylesheet';node.href=new URL(path,import.meta.url).href;document.head.append(node);};
  if(/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(currentPage)){
   addAddonCss('./practice/saek-practice.css');
+  addAddonCss('./practice/contextual-tools.css');
   void import('./practice/saek-practice.mjs').catch(()=>{});
+ }
+ if(currentPage==='theory.html'){
+  addAddonCss('./practice/contextual-tools.css');
+  void import('./practice/eoppep-context.mjs').catch(()=>{});
  }
  if(currentPage==='mentor-next.html'){
   addAddonCss('./practice/cockpit-entry.css');
