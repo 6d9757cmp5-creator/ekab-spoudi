@@ -1,0 +1,96 @@
+name: ATLA Master Plan 2026 - NIH 3D complete resource references
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-nih3d-master-catalog.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atla-nih3d-master-catalog
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        start: [1, 501, 1001, 1501, 2001, 2501, 3001, 3501, 4001, 4501, 5001, 5501, 6001, 6501, 7001, 7501, 8001, 8501, 9001, 9501, 10001, 10501, 11001, 11501, 12001, 12501, 13001, 13501, 14001, 14501, 15001, 15501, 16001, 16501, 17001, 17501, 18001, 18501, 19001, 19501, 20001, 20501, 21001, 21501, 22001, 22501, 23001, 23501, 24001, 24501]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify existing NIH API importer
+        run: node --check scripts/import-nih3d-license-reviewed.mjs
+      - name: Collect published metadata, official URLs and per-item rights
+        env:
+          RANGE_START: ${{ matrix.start }}
+        run: |
+          set -eu
+          END=$((RANGE_START + 499))
+          node scripts/import-nih3d-license-reviewed.mjs --start="$RANGE_START" --end="$END" --audit-only
+          mkdir -p tmp/nih3d
+          cp "tools/atla-ai/resources/nih3d-catalog/entries-$RANGE_START-$END.json" "tmp/nih3d/entries-$RANGE_START-$END.json"
+      - name: Keep each verified metadata range, including partial ranges
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-source-registry-${{ matrix.start }}
+          path: tmp/nih3d/entries-*.json
+          if-no-files-found: warn
+          retention-days: 7
+  combine:
+    needs: scan
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve successfully scanned NIH source references
+        uses: actions/download-artifact@v4
+        with:
+          pattern: nih3d-source-registry-*
+          path: tmp/nih3d-combined/
+          merge-multiple: true
+      - name: Assemble sources with auditable coverage and partial status
+        run: |
+          mkdir -p tools/atla-ai/resources/nih3d-master-plan-2026/segments
+          cp tmp/nih3d-combined/entries-*.json tools/atla-ai/resources/nih3d-master-plan-2026/segments/
+          node --input-type=module <<'NODE'
+          import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
+          const dir='tools/atla-ai/resources/nih3d-master-plan-2026/';
+          const files=readdirSync(dir+'segments').filter(x=>/^entries-[0-9]+-[0-9]+\.json$/.test(x)).sort();
+          let scanned=0,published=0,eligible=0,missing=0,errors=0;
+          const sections={},segments=[],seen=new Set();
+          for(const filename of files){
+            const data=JSON.parse(readFileSync(dir+'segments/'+filename,'utf8'));
+            const r=data.range;
+            for(let id=r.start;id<=r.end;id++){if(seen.has(id))throw Error('duplicate catalog ID '+id);seen.add(id)}
+            scanned+=r.end-r.start+1;published+=data.items.length;eligible+=data.eligible;errors+=data.errors.length;
+            missing+=(r.end-r.start+1)-data.items.length-data.errors.length;
+            for(const item of data.items){const category=String(item.category||'').toLowerCase();const area=category.includes('anatomy')?'anatomy-lab':/devices|hardware|prosthetic/.test(category)?'clinical-cockpit-research':'atla-ai-knowledge-resources';sections[area]=(sections[area]||0)+1;}
+            segments.push({filename,range:r,published:data.items.length,eligible:data.eligible,errors:data.errors.length});
+          }
+          const complete=scanned===25000&&errors===0;
+          const index={title:'ATLA Master Plan 2026 - NIH 3D source registry',source:'https://3d.nih.gov/discover',terms:'https://3d.nih.gov/terms',targetEntryIdRange:[1,25000],verifiedScannedIds:scanned,publishedEntriesFound:published,eligibleLicenseCandidates:eligible,apiErrors:errors,status:complete?'TARGET_RANGE_SCANNED':'PARTIAL',metadataOnly:true,modelBinariesDownloadedByThisCatalog:0,sections,segments};
+          writeFileSync(dir+'catalog-index.json',JSON.stringify(index,null,2)+'\n');
+          const lines=['# ATLA Master Plan 2026 — NIH 3D full source registry','','This catalog contains official public metadata and external model references, not copies of every 3D model.','', '- IDs actually checked: '+scanned+'/25,000','- Published entries recorded: '+published,'- Per-item rights candidates: '+eligible,'- NIH API errors: '+errors,'- Status: '+index.status,'','Each segment includes source URLs, individual creator-selected license, formats and candidate ATLA section. Unlicensed or restricted model files remain external links only.','Medical/scientific validation and production 3D integration are separate.','','Official site: https://3d.nih.gov/discover','Terms: https://3d.nih.gov/terms'];
+          writeFileSync('docs/ATLA_NIH3D_MASTER_CATALOG_2026.md',lines.join('\n')+'\n');
+          console.log(JSON.stringify({scanned,published,eligible,errors,status:index.status,segments:files.length}));
+          NODE
+      - name: Save catalog references inside the ATLA Master Plan resources
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/resources/nih3d-master-plan-2026/ docs/ATLA_NIH3D_MASTER_CATALOG_2026.md
+          if git diff --cached --quiet; then
+            echo 'No catalog changes'
+          else
+            git commit -m 'assets(ATLA): preserve NIH 3D all-entry source catalog and rights records'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
