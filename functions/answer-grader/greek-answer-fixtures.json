@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "description": "Synthetic Greek written answers for offline test design, not student submissions nor a medically validated gold standard.",
+  "created": "2026-11-01",
+  "medicalValidation": "not_performed",
+  "modelExecution": "none",
+  "labelProvenance": "provisional_expected_from_project_reference_not_independent_teacher",
+  "cases": [
+    {
+      "id": "nasal-full-formal",
+      "section": "eoppep",
+      "questionId": "EOP-A-001",
+      "answer": "Η μύτη καθαρίζει τον εισπνεόμενο αέρα από σωματίδια με τη βλέννη και τους κροσσούς, τον θερμαίνει, τον υγραίνει και συμμετέχει στην όσφρηση.",
+      "expected": "correct",
+      "reason": "Όλες οι έννοιες της εκπαιδευτικής αναφοράς",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "nasal-full-colloquial",
+      "section": "eoppep",
+      "questionId": "EOP-A-001",
+      "answer": "Ο αερας που μπαινει απ τη μυτη καθαριζεται απ την βλεννα και τα μικρα τριχακια που κρατανε σκόνη, ζεσταίνεται, αποκτά υγρασία και μας βοηθάει να μυρίζουμε.",
+      "expected": "correct",
+      "reason": "Πλήρης παράφραση με άτυπη γραφή",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "nasal-three-words",
+      "section": "eoppep",
+      "questionId": "EOP-A-001",
+      "answer": "Η μυτη το αερα ζεσταινει καθαρίζει κ υγραινει.",
+      "expected": "partial",
+      "reason": "Λείπουν τρόπος καθαρισμού και όσφρηση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "nasal-no-olfaction",
+      "section": "eoppep",
+      "questionId": "EOP-A-001",
+      "answer": "Καθαρίζει με βλέννη και κροσσούς, θερμαίνει και υγραίνει τον αέρα.",
+      "expected": "partial",
+      "reason": "Λείπει όσφρηση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "nasal-negation",
+      "section": "eoppep",
+      "questionId": "EOP-A-001",
+      "answer": "Η μύτη δεν υγραίνει τον αέρα, μόνο τον ζεσταίνει και τον καθαρίζει με βλέννα και κροσσούς και μυρίζουμε.",
+      "expected": "incorrect",
+      "reason": "Αντίφαση για ύγρανση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "nasal-too-vague",
+      "section": "eoppep",
+      "questionId": "EOP-A-001",
+      "answer": "Το κάνει καλύτερο για τους πνεύμονες.",
+      "expected": "uncertain",
+      "reason": "Ασαφής γενική πρόταση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "air-percents-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-002",
+      "answer": "Ο αέρας που παίρνουμε έχει περίπου 21% οξυγόνο κ 0,04% διοξείδιο και αυτός που βγάζουμε περίπου 16% οξυγόνο κ 4% διοξείδιο.",
+      "expected": "correct",
+      "reason": "Και τα τέσσερα ποσοστά σωστά",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "air-percents-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-002",
+      "answer": "Ο εισπνεόμενος αέρας έχει 21% οξυγόνο κι ο εκπνεόμενος περίπου 16%.",
+      "expected": "partial",
+      "reason": "Παραλείφθηκαν αμφότερα ποσοστά CO2",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "air-percents-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-002",
+      "answer": "Ο εισπνεόμενος έχει 4% οξυγόνο και ο εκπνεόμενος 21%.",
+      "expected": "incorrect",
+      "reason": "Αντεστραμμένες λανθασμένες τιμές",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "air-percents-unclear",
+      "section": "eoppep",
+      "questionId": "EOP-A-002",
+      "answer": "Το οξυγόνο είναι γύρω στο είκοσι, το διοξείδιο αλλάζει.",
+      "expected": "uncertain",
+      "reason": "Δεν προσδιορίζει εισπνεόμενο ή εκπνεόμενο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveoli-full-formal",
+      "section": "eoppep",
+      "questionId": "EOP-A-003",
+      "answer": "Το οξυγόνο περνά με διάχυση από τις κυψελίδες στα πνευμονικά τριχοειδή και το διοξείδιο αντίστροφα, μέσω της αναπνευστικής μεμβράνης λόγω διαφοράς μερικών πιέσεων.",
+      "expected": "correct",
+      "reason": "Ορθή κατεύθυνση και μηχανισμός",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveoli-full-rough",
+      "section": "eoppep",
+      "questionId": "EOP-A-003",
+      "answer": "το οξυγονο φευγη απτης κυψελιδες παει στο αιμα περναει τη μεμβρανη, το διοξειδιο απτο αιμα προς τις κυψελιδες, επειδη εχουν διαφορετικες μερικες πιεσεις.",
+      "expected": "correct",
+      "reason": "Ολοκληρωμένη ουσία παρά τα λάθη",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveoli-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-003",
+      "answer": "Οξυγόνο από τις κυψελίδες προς το αίμα και CO2 από αίμα προς κυψελίδες.",
+      "expected": "partial",
+      "reason": "Δεν περιγράφεται διάχυση ή διαφορά πιέσεων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveoli-direction-reversed",
+      "section": "eoppep",
+      "questionId": "EOP-A-003",
+      "answer": "Το οξυγόνο διαχέεται από το αίμα προς τις κυψελίδες και το διοξείδιο από κυψελίδες προς αίμα.",
+      "expected": "incorrect",
+      "reason": "Αντίθετη κατεύθυνση και για τα δύο αέρια",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveoli-vague",
+      "section": "eoppep",
+      "questionId": "EOP-A-003",
+      "answer": "εκεί γίνεται ανταλλαγή αερίων.",
+      "expected": "uncertain",
+      "reason": "Χωρίς μηχανισμό ή κατευθύνσεις",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "respiration-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-004",
+      "answer": "Πρώτα μπαίνει και βγαίνει ο αέρας στους πνεύμονες, μετά γίνεται ανταλλαγή στις κυψελίδες με το αίμα, τα αέρια κυκλοφορούν στους ιστούς όπου γίνεται ξανά ανταλλαγή και τα κύτταρα χρησιμοποιούν οξυγόνο για ενέργεια.",
+      "expected": "correct",
+      "reason": "Περιγράφει τα διακριτά στάδια",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "respiration-incomplete",
+      "section": "eoppep",
+      "questionId": "EOP-A-004",
+      "answer": "Αναπνοή είναι που παίρνουμε αέρα και τον βγάζουμε από τους πνεύμονες.",
+      "expected": "partial",
+      "reason": "Μόνο αερισμός, όχι μεταφορά και ανταλλαγές",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "respiration-incorrect",
+      "section": "eoppep",
+      "questionId": "EOP-A-004",
+      "answer": "Η αναπνοή κάνει το διοξείδιο του άνθρακα να μπαίνει από τους πνεύμονες στο αίμα για να παράγουν ενέργεια τα κύτταρα.",
+      "expected": "incorrect",
+      "reason": "Λανθασμένος ρόλος αερίων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "pleura-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-005",
+      "answer": "Δυο μεμβράνες, η μια πάνω στον πνεύμονα κι η άλλη μέσα στο θωρακικό τοίχωμα, με λίγο υγρό ανάμεσά τους για να μην τρίβονται και αρνητική πίεση που βοηθά να μένει ο πνεύμονας ανοιχτός.",
+      "expected": "correct",
+      "reason": "Περιγράφει δύο πέταλα υγρό και πίεση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "pleura-short",
+      "section": "eoppep",
+      "questionId": "EOP-A-005",
+      "answer": "Είναι δύο μεμβράνες γύρω από τους πνεύμονες.",
+      "expected": "partial",
+      "reason": "Λείπει διάκριση πετάλων, υγρό και πίεση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "pleura-error",
+      "section": "eoppep",
+      "questionId": "EOP-A-005",
+      "answer": "Ο σπλαχνικός υπεζωκότας καλύπτει την εξωτερική πλευρά του θωρακικού τοιχώματος και ο τοιχωματικός είναι μέσα στον πνεύμονα.",
+      "expected": "incorrect",
+      "reason": "Σύγχυση των πετάλων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "resp-system-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-006",
+      "answer": "Το βασικό είναι να παίρνουμε οξυγόνο και να αποβάλλουμε διοξείδιο του άνθρακα, με το αίμα να τα μεταφέρει στους ιστούς.",
+      "expected": "correct",
+      "reason": "Κύριες λειτουργίες και συνεργασία με την κυκλοφορία",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "resp-system-short",
+      "section": "eoppep",
+      "questionId": "EOP-A-006",
+      "answer": "Ο οργανισμός παίρνει οξυγόνο.",
+      "expected": "partial",
+      "reason": "Παραλείπεται αποβολή CO2 και μεταφορά",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "resp-system-opposite",
+      "section": "eoppep",
+      "questionId": "EOP-A-006",
+      "answer": "Το αναπνευστικό απορροφά κυρίως διοξείδιο του άνθρακα και αποβάλλει το οξυγόνο.",
+      "expected": "incorrect",
+      "reason": "Αντίστροφη περιγραφή αερίων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "resp-system-ambig",
+      "section": "eoppep",
+      "questionId": "EOP-A-006",
+      "answer": "Βάζει και βγάζει αέρια.",
+      "expected": "uncertain",
+      "reason": "Δεν αναφέρει ποια αέρια και σε ποια κατεύθυνση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    }
+  ]
+}
