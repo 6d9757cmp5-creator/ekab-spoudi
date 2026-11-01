@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
-<title>MENTOR · Προφορική εξάσκηση (χωρίς AI)</title>
+<title>MENTOR · Εξάσκηση με προαιρετική γραπτή αξιολόγηση AI</title>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
+<link rel="stylesheet" href="ai-grading.css?v=semantic-2">
+<script src="ai-grading-config.js" defer></script>
+<script src="ai-grading-client.js?v=semantic-2" defer></script>
 <style>
 .oral-shell{max-width:940px;margin:0 auto;padding:18px 16px 50px}
 .oral-head{background:linear-gradient(135deg,#10344a,#186b67);color:#fff;border-radius:19px;padding:26px 23px;margin:15px 0}
@@ -38,12 +41,12 @@
  <a href="mentor-lab.html">← MENTOR</a>
  <header class="oral-head">
   <span>ΠΡΟΣΩΠΙΚΗ ΑΚΑΔΗΜΙΑ</span>
-  <h1>Προφορική εξάσκηση · χωρίς AI</h1>
+  <h1>Προφορική εξάσκηση · προαιρετική αξιολόγηση γραπτής απάντησης</h1>
   <label class="oral-mode"><input type="checkbox" id="oral-exam-mode"> <span><strong>Ενεργή εξέταση</strong> — ο MENTOR δεν δίνει απαντήσεις ή υποδείξεις και τα σημεία αυτοελέγχου κρύβονται μέχρι να την κλείσεις. Αν δεν είναι τσεκαρισμένο, είναι <strong>εξάσκηση με καθοδήγηση</strong>: ο MENTOR μπορεί να εξηγεί.</span></label>
   <p>Έξι εκπαιδευτικά θέματα, ερωτήσεις στα ελληνικά και σημεία αυτοελέγχου. Πες την απάντηση φωναχτά, κράτησε προαιρετικά σημειώσεις και εξέτασε μόνος σου αν κάλυψες κάθε σημείο.</p>
  </header>
  <div class="disclaimer" role="note">
-  <strong>Δεν είναι επίσημη προφορική εξέταση ή πιστοποίηση.</strong> Δεν αναλύεται η φωνή σου, δεν λειτουργεί μικρόφωνο και δεν υπάρχει αυτόματη βαθμολογία. Οι σημειώσεις παραμένουν προσωρινά στη σελίδα και δεν αποστέλλονται πουθενά. Τα θέματα αφορούν οργανωτική εκπαίδευση, όχι θεραπευτικές οδηγίες.
+  <strong>Δεν είναι επίσημη προφορική εξέταση ή πιστοποίηση.</strong> Δεν αναλύεται η φωνή σου και δεν λειτουργεί μικρόφωνο. Η γραπτή απάντηση αξιολογείται εκπαιδευτικά με AI μόνο αν πατήσεις «Αξιολόγηση» και είσαι συνδεδεμένος. Χωρίς υποβολή οι σημειώσεις παραμένουν προσωρινά στη σελίδα. Τα θέματα αφορούν οργανωτική εκπαίδευση, όχι θεραπευτικές οδηγίες.
  </div>
  <section class="oral-card" aria-labelledby="oral-title">
   <div class="oral-progress">
@@ -59,8 +62,9 @@
   </div>
   <label for="oral-answer">Προαιρετικές σημειώσεις της απάντησής μου</label>
   <textarea id="oral-answer" class="oral-answer" maxlength="1400" placeholder="Μπορείς απλώς να απαντήσεις φωναχτά, χωρίς να γράψεις τίποτα."></textarea>
-  <p class="oral-muted">Δεν γίνεται αυτόματη διόρθωση σημειώσεων ούτε καταγραφή φωνής. Η συσκευή μπορεί να διαβάσει την ερώτηση μόνο με δική σου ενέργεια.</p>
-  <div class="oral-actions"><button id="oral-reveal" class="oral-btn oral-btn-primary" type="button">Δείξε τα σημεία αυτοελέγχου</button></div>
+  <p class="oral-muted">Το AI αξιολογεί μόνο το κείμενο που γράφεις, όχι όσα λες προφορικά. Δέχεται σαφείς διατυπώσεις ακόμη και με συντακτικά ή ορθογραφικά λάθη. Καμία αξιολόγηση δεν είναι επίσημη πιστοποίηση.</p>
+  <div class="oral-actions"><button id="oral-grade-ai" class="oral-btn oral-btn-primary" type="button">Αξιολόγησε τη γραπτή απάντηση με AI</button><button id="oral-reveal" class="oral-btn" type="button">Δείξε τα σημεία αυτοελέγχου</button></div>
+  <div id="oral-ai-result" class="ai-grading-result" role="status" aria-live="polite" hidden></div>
   <section id="oral-review" class="oral-checklist" hidden aria-label="Σημεία αυτοελέγχου">
    <h3>Τι θα έπρεπε να έχω συμπεριλάβει;</h3>
    <div id="oral-checks"></div>
@@ -71,7 +75,7 @@
    <button id="oral-next" class="oral-btn oral-btn-primary" type="button">Επόμενη</button>
   </div>
  </section>
- <footer class="oral-muted" style="margin-top:18px">Η σύνδεση με AI, αξιολόγηση πραγματικής προφορικής απάντησης ή ζωντανή επικοινωνία θα εξεταστεί μόνο όταν οι λειτουργίες είναι έτοιμες και έχεις εγκρίνει τον τελικό Mentor.</footer>
+ <footer class="oral-muted" style="margin-top:18px">Η προφορική ομιλία δεν αναγνωρίζεται ή βαθμολογείται. Οι γραπτές απαντήσεις μπορούν προαιρετικά να ελεγχθούν με το ίδιο δωρεάν εκπαιδευτικό AI της εφαρμογής, εκτός της λειτουργίας εξέτασης.</footer>
 </main>
 <script type="module" src="mentor/presence/presence.mjs"></script></body>
 </html>
