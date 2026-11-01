@@ -2,7 +2,7 @@
  * Browser adapter for the MENTOR chat Worker. Sends only the question, up to four cited library
  * passages, the study level and a short text history. Never sends notes, grades, page text or ids.
  */
-import {LEVELS} from "../../mentor/presence/memory.mjs";
+import {LEVELS} from "../student/memory.mjs";
 
 export const LIMIT_MESSAGE="Η ATLA έφτασε προσωρινά το όριο δωρεάν χρήσης AI. Δοκίμασε ξανά αργότερα· οι τοπικές απαντήσεις από τη βιβλιοθήκη εξακολουθούν να λειτουργούν.";
 export const UNAVAILABLE_MESSAGE="Η απάντηση AI δεν είναι διαθέσιμη αυτή τη στιγμή. Χρησιμοποιώ μόνο την τοπική βιβλιοθήκη.";
