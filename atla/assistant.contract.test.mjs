@@ -34,6 +34,6 @@ test('ATLA reuses one existing AI path, retains no-write behavior and exam guard
  assert.match(app,/riskGuard\(q\)/);
  assert.match(app,/transformSource\(x,await fetchJSON\(x\.file\)\)/);
  assert.ok(!/\.setItem\('ekab\.saek|\.setItem\('ekab-eoppep/.test(app),'ATLA may not write existing grades');
- const config=read('mentor/ai/config.mjs');
+ const config=read('atla/ai/config.mjs');
  assert.ok(config.includes('endpoint:""'),'Migrated chat must not claim a deployed AI endpoint');
 });
