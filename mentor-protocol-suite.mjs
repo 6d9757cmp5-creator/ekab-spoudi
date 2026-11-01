@@ -1,4 +1,4 @@
-/** MENTOR shared foundation lab + debrief.
+/** Independent Protocol Lab + review with optional MENTOR guidance.
  * Scripted source-literacy and communication practice, NOT a clinical decision engine.
  * No backend, AI chat, diagnosis, treatment, or changes to SAEK/EOPPEP marks.
  */
@@ -33,7 +33,7 @@ function save(){
  catch{$('lab-storage').textContent='Η αποθήκευση δεν είναι διαθέσιμη στον browser. Η προσπάθεια ισχύει μόνο όσο μένει ανοιχτή η σελίδα.';}
 }
 const href=(kind)=>makeJourneyUrl('mentor-protocol-suite.html',journeyContext,kind)+'&role='+encodeURIComponent(role);
-$('suite-title').textContent=view==='lab'?'MENTOR | PROTOCOL LAB':'MENTOR DEBRIEF';
+$('suite-title').textContent=view==='lab'?'Εργαστήριο Πρωτοκόλλων':'Ανασκόπηση Πρωτοκόλλου';
 $('suite-topic').textContent=topic.name;
 $('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.'+
  (journeyContext.focus?' Συνδεδεμένη ενότητα: '+journeyContext.focus+'.':'');
@@ -66,8 +66,8 @@ function showLab(){
  $('lab-next').hidden=true;
  if(completed){
   $('lab-header').textContent='Η εξάσκηση ολοκληρώθηκε';
-  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στο MENTOR DEBRIEF.';
-  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα MENTOR DEBRIEF';
+  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στο Ανασκόπηση Πρωτοκόλλου.';
+  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα Ανασκόπηση Πρωτοκόλλου';
   $('lab-choices').append(a);
   mentorSay('Ολοκλήρωσες την άσκηση. Στο DEBRIEF θα εξετάσουμε τη λογική κάθε επιλογής.');
   return;
@@ -95,7 +95,7 @@ function choose(choiceId){
  mentorSay(feedback);
  $('lab-stage').textContent='Ολοκληρώθηκε το βήμα '+session.index+' / '+stages.length;
  $('lab-progress').style.width=Math.round(100*session.index/stages.length)+'%';
- $('lab-next').textContent=session.completed?'Δες το MENTOR DEBRIEF':'Επόμενο εκπαιδευτικό βήμα →';
+ $('lab-next').textContent=session.completed?'Δες το Ανασκόπηση Πρωτοκόλλου':'Επόμενο εκπαιδευτικό βήμα →';
  $('lab-next').hidden=false;
 }
 function readStoredInterview(){
@@ -159,7 +159,7 @@ $('lab-role').addEventListener('change',e=>{
 $('lab-mode').addEventListener('change',e=>{if(!session.answers.length){session.mode=e.target.value;save();showLab();}});
 $('lab-next').addEventListener('click',()=>{if(session.completed)location.href=href('debrief');else showLab();});
 $('lab-restart').addEventListener('click',()=>{
- if(session.answers.length&&!confirm('Να ξεκινήσεις ξανά; Θα αντικατασταθεί μόνο η τοπική δοκιμή αυτού του θέματος MENTOR.'))return;
+ if(session.answers.length&&!confirm('Να ξεκινήσεις ξανά; Θα αντικατασταθεί μόνο η τοπική δοκιμή αυτού του πρωτοκόλλου.'))return;
  const mode=session.mode;session=emptySession();session.mode=mode;save();showLab();
 });
 $('debrief-export').addEventListener('click',()=>{

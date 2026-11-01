@@ -31,9 +31,9 @@ function renderTopics(){
   const badge=document.createElement('span');badge.className='tag';badge.textContent='Όχι επαληθευμένο επιχειρησιακό πρωτόκολλο';
   const actions=document.createElement('div');actions.className='actions';
   const topic=encodeURIComponent(t.id);
-  appendLink(actions,'MENTOR | PROTOCOL LAB','mentor-protocol-suite.html?topic='+topic+'&view=lab','btn');
-  appendLink(actions,'MENTOR DEBRIEF','mentor-protocol-suite.html?topic='+topic+'&view=debrief','btn alt');
-  appendLink(actions,'Μελέτη με MENTOR','mentor-lab.html?topic='+topic+'#mentor-presence','btn soft');
+  appendLink(actions,'Εργαστήριο Πρωτοκόλλων','mentor-protocol-suite.html?topic='+topic+'&view=lab','btn');
+  appendLink(actions,'Ανασκόπηση Πρωτοκόλλου','mentor-protocol-suite.html?topic='+topic+'&view=debrief','btn alt');
+  appendLink(actions,'Βοήθεια από MENTOR OS','mentor-lab.html?topic='+topic+'#mentor-presence','btn soft');
   card.append(title,category,desc,badge,actions);list.append(card);
  }
 }
