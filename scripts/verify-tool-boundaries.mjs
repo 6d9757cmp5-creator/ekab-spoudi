@@ -24,7 +24,7 @@ for(const name of ['index.html','mentor-lab.html','mentor-live.html','mentor-nex
 const html=read('mentor-next.html');
 assert(html.includes('href="tools/patient-simulator/styles/next-sim.css"'));
 assert(html.includes('src="tools/patient-simulator/app/next-sim.mjs"'));
-assert(html.includes('src="mentor/presence/presence.mjs"'),'MENTOR optional companion should remain separate');
+assert(html.includes('src="atla/assistant.mjs"'),'ATLAS assistant must remain separate from the patient simulation engine');
 const app=read(dir+'/app/next-sim.mjs');
 assert(!/from ['"][^'"]*mentor\//.test(app));
 assert(app.includes("from '../core/next-sim.mjs'"));
