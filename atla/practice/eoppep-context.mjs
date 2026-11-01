@@ -38,11 +38,15 @@ export function installEoppepContext(root=document){
    a.href=selected.href;
    slot.replaceChildren(a);
  });
- window.addEventListener('ekab:eoppep-reader',event=>{
-   if(event.detail?.mode!=='reader')return;
-   sync(String(event.detail.id||''));
- });
- sync(reader.dataset.atlaReaderQuestionId||'');
+ // Observe the already-rendered question number. No changes to protected
+ // app.js, grading, progress, notes, or examination logic are needed.
+ const number=root.getElementById('catalogReaderNumber');
+ const currentId=()=>{
+   const match=/^Ομάδα ([AB]) · Ερώτηση (\\d+) \\/ (105|209)$/.exec(number?.textContent?.trim()||'');
+   return match?'EOP-'+match[1]+'-'+String(Number(match[2])).padStart(3,'0'):'';
+ };
+ if(number)new MutationObserver(()=>sync(currentId())).observe(number,{childList:true,characterData:true,subtree:true});
+ sync(currentId());
  return true;
 }
 if(typeof document!=='undefined'){
