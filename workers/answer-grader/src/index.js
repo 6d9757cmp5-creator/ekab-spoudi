@@ -7,6 +7,7 @@ import { freeProviders, requestFreeGrade } from '../../../functions/answer-grade
 import { EXTRA_GRADING_REFERENCES } from '../../../functions/answer-grader/extra-grading-references.mjs';
 import { SEMANTIC_GRADING_POLICY, cautiouslyCheckGrade } from '../../../functions/answer-grader/semantic-grading-policy.mjs';
 import { SOURCE_COMPLETENESS, protectCompleteness } from '../../../functions/answer-grader/source-completeness.mjs';
+import { guardHighRiskFullCredit } from '../../../functions/answer-grader/safety-contrast-guard.mjs';
 const verdicts=new Set(['correct','partial','incorrect','uncertain']);
 const attempts=new Map();
 const MAX_USER_CHARS=3500;
@@ -96,6 +97,7 @@ async function findReference(input){
    question:cleanText(q.question,1200),
    reference:cleanText(q.answer,4000),
    context:'Κεφάλαιο: '+cleanText(q.chapterTitle,250)+' · '+cleanText(q.course,250)+' · '+q.semester+' εξάμηνο. Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημη εξέταση.',
+   id:q.id,
    kind:'Εξετάσεις ΣΑΕΚ'
   };
  }
@@ -179,7 +181,7 @@ async function gradeAnswer(question,answer,env){
        chat_template_kwargs:{enable_thinking:false}})
     : await requestFreeGrade(provider,messages);
    const content=raw?.choices?.[0]?.message?.content??raw?.response??raw;
-   const graded=validateGrade(protectCompleteness(question,answer,cautiouslyCheckGrade(typeof content==='string'?JSON.parse(content):content)));
+   const graded=validateGrade(guardHighRiskFullCredit(question,answer,protectCompleteness(question,answer,cautiouslyCheckGrade(typeof content==='string'?JSON.parse(content):content))));
    // ERC 2025 BLS does not make a pulse check mandatory for this lay-rescuer reference.
    if(question.kind==='Ανεπίσημη άσκηση BLS/AED'&&!/σφυγμ|παλμ/i.test(question.reference+' '+question.context)&&
     /σφυγμ|παλμ/i.test(graded.missingPoints.join(' ')+' '+graded.explanation))throw new Error('unsupported_bls_pulse_requirement');
