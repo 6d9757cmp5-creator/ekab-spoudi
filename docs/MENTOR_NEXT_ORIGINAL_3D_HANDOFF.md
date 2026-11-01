@@ -45,3 +45,10 @@ Verification: \`node --test mentor/core/next-sim.test.mjs mentor/core/next-revie
 - WebGL scenery responds to each case; review, monitoring history, patient descriptions, dialogue, TXT and debrief use the active case.
 - New unit tests: mentor/core/next-cases.test.mjs; mobile+desktop browser smoke covers the three cases, cross-case isolation and reload.
 - No drug, medical intervention, treatment-response physiology, diagnostic or medical grading added. Independent clinical review required for medical education use.
+
+## v0.4 — 3D human scene & immersive UI
+- A genuine local CC0 glTF mesh (`mentor/assets/cc0-human-body.glb`), originally Quaternius and adapted by UMRAM-Bilkent, is now rendered by a standalone first-party minimal glTF mesh/WebGL shader without dependencies. See `mentor/assets/CC0-ASSET-NOTICE.md`.
+- Local procedural geometry remains as a deliberate fallback; WebGL canvas exposes `data-human-model=loading|ready|fallback`. The human figure is stylized, not anatomically accurate, and clinical body signs are not modeled.
+- The three environments, per-patient standing/seated/reclined display states and view zoom still use the prior simulation; new immersive composition and optional fullscreen.
+- Offline PWA cache includes the 160 KB glb and shader module. Tests enforce a valid GLB format and asset loading on browser.
+- The reference app's proprietary assets, graphics and source were not copied. This version is not clinically validated or equal to Body Interact.

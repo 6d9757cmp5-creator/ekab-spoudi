@@ -6,6 +6,30 @@ const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 let state=loadSession(localStorage),tool='dialogue',result='Επίλεξε τον ασθενή και ένα εργαλείο για να ξεκινήσεις.';
 let renderer=mountPatientScene($('next-canvas'));
+const meshText=$('next-mesh-status'),patientCanvas=$('next-canvas');
+function updatePatientAssetStatus(){
+ const status=patientCanvas.dataset.humanModel;
+ meshText.textContent=status==='ready'?'Ανθρώπινο 3D πλέγμα CC0 · διαδραστική εκπαιδευτική απεικόνιση':
+ status==='fallback'?'Εναλλακτική 3D απεικόνιση · χωρίς εξωτερικές υπηρεσίες':
+ status==='loading'?'Φόρτωση ανοικτού 3D μοντέλου ανθρώπου…':'Προβολή συνθετικών 3D ασθενών';
+}
+const meshObserver=new MutationObserver(updatePatientAssetStatus);
+meshObserver.observe(patientCanvas,{attributes:true,attributeFilter:['data-human-model']});
+updatePatientAssetStatus();
+const fullscreenButton=$('next-fullscreen');
+fullscreenButton.addEventListener('click',async()=>{
+ const stage=$('next-immersive-stage');
+ if(document.fullscreenElement){
+  if(document.fullscreenElement===stage)await document.exitFullscreen?.();
+ }else if(stage.requestFullscreen){
+  try{await stage.requestFullscreen();}catch{$('next-result').textContent='Η πλήρης οθόνη δεν υποστηρίζεται σε αυτόν τον browser.';}
+ }else{$('next-result').textContent='Η πλήρης οθόνη δεν υποστηρίζεται σε αυτή τη συσκευή.';}
+});
+document.addEventListener('fullscreenchange',()=>{
+ const on=document.fullscreenElement===$('next-immersive-stage');
+ fullscreenButton.textContent=on?'↙ Έξοδος πλήρους οθόνης':'⛶ Πλήρης οθόνη';
+ fullscreenButton.setAttribute('aria-pressed',String(on));
+});
 function commit(next,message){
  if(!validSession(next))throw Error('invalid-new-state');
  state=next;if(message!==undefined)result=message;
@@ -229,5 +253,5 @@ $('next-nextstep').addEventListener('click',()=>{
  renderMenu();renderTool();
  $('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
 });
-window.addEventListener('pagehide',()=>{clearInterval(clock);renderer.dispose();},{once:true});
+window.addEventListener('pagehide',()=>{clearInterval(clock);meshObserver.disconnect();renderer.dispose();},{once:true});
 render();

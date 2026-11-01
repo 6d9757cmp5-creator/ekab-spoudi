@@ -60,3 +60,89 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;curs
 .next-case-tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:#7be9cf}
 .next-case-goal{margin:11px 0 0!important;padding:10px 12px;border-left:3px solid #6edac9;background:#183d4b;border-radius:7px}
 @media(max-width:830px){.next-case-grid{grid-template-columns:1fr}.next-case-card{min-height:90px;gap:5px}}
+
+
+/* MENTOR NEXT v0.4 — original immersive cockpit (Body Interact workflow study, not copied UI). */
+:root{color-scheme:dark}
+body{background:radial-gradient(ellipse at 50% -18%,#1d5260 0%,#0b2532 36%,#06131f 80%);color:#e9f5f8}
+.next-shell{max-width:1680px}
+.next-header{background:linear-gradient(90deg,#0b2a37 0%,#0d3041 50%,#0b2634);padding:15px 20px;margin:0 -12px 8px;border-radius:0 0 18px 18px;border:1px solid #38627375}
+.next-top{padding:23px 0 19px}
+.next-top h1{font-weight:800;letter-spacing:-.028em;max-width:850px}
+.next-stage-layout{grid-template-columns:minmax(0,2.45fr) minmax(278px,.75fr);border-radius:22px;border:1px solid #5588a278;box-shadow:0 25px 55px #0009,0 1px 0 #9ddce442;min-height:555px}
+.next-scene{position:relative;background:radial-gradient(ellipse at 49% 23%,#6b96a4 0%,#3b6579 27%,#234658 52%,#0d2432 86%);display:flex;flex-direction:column;isolation:isolate}
+.next-scene::before{content:"";position:absolute;pointer-events:none;inset:52px 0 0;z-index:0;background:repeating-linear-gradient(0deg,#b1e7e50b 0 1px,transparent 1px 44px),linear-gradient(145deg,transparent 14%,#b8dff41b 45%,transparent 68%)}
+.next-scene-top{position:relative;z-index:2;padding:15px 18px;min-height:65px;border-bottom:1px solid #bed7df22;background:linear-gradient(90deg,#092938c9,#0e30437d)}
+.next-scene-label{font-size:.7rem;color:#c2e9ec;letter-spacing:.08em}
+.next-view-tabs button{background:#0a3144c9;border:1px solid #6497a7b8;min-height:40px;box-shadow:0 3px 10px #0015;border-radius:11px}
+.next-view-tabs button[aria-pressed=true]{background:#6cddcf;color:#072333;border-color:#b1fff2;font-weight:900}
+.next-fullscreen{min-height:40px;max-width:150px;border:1px solid #70adb9;border-radius:11px;background:#15374ac9;color:#e7fcff;padding:7px 13px;white-space:nowrap;font-size:.76rem;font-weight:800}
+.next-canvas-wrap{position:relative;flex:1;min-height:415px;overflow:hidden;background:radial-gradient(ellipse at 50% 58%,#aec8ca14,#001b290d 65%);isolation:isolate}
+.next-canvas-wrap::after{content:"";pointer-events:none;position:absolute;inset:0;border:1px solid #93d9dc12;box-shadow:inset 0 0 110px #051b2d80}
+.next-canvas-wrap canvas{height:460px;min-height:415px;position:relative;z-index:1;filter:contrast(1.035) saturate(1.11)}
+.next-cinema-hud{position:absolute;top:15px;left:18px;right:18px;z-index:2;display:flex;align-items:center;gap:9px;font-weight:850;letter-spacing:.12em;font-size:.65rem;color:#eafcff;text-shadow:0 2px 8px #001b26}
+.next-cinema-hud span:last-child{margin-left:auto;border:1px solid #b8efed66;background:#122c37b0;border-radius:8px;padding:6px 8px}
+.next-hud-dot{background:#7df4cb;border-radius:50%;width:8px;height:8px;box-shadow:0 0 0 4px #7df4cb30}
+.next-mesh-status{position:absolute;top:51px;left:18px;z-index:2;background:#092e3ec4;color:#d9f0f1;font-size:.68rem;border:1px solid #8fb8bf50;border-radius:20px;padding:6px 10px;max-width:70%}
+.next-canvas-caption{z-index:2;left:19px;bottom:18px;background:#092634bc;border-radius:20px;padding:7px 12px;color:#d7f0f4;font-size:.72rem}
+.next-rotate{z-index:3;right:16px;bottom:13px}
+.next-rotate button{background:#173b51e8;border:1px solid #91ced7;border-radius:50%;min-width:46px;min-height:46px}
+.next-patient-switch{position:relative;z-index:3;padding:15px 15px 17px;border-top:1px solid #9fc9cf30;background:linear-gradient(90deg,#062638dc,#133c4dcc);justify-content:flex-start;gap:12px}
+.next-patient-switch button{min-width:164px;text-align:left;font-size:.89rem;border:1px solid #6e9eaa;background:#123b4d;border-radius:12px;padding:11px 15px}
+.next-patient-switch button[aria-pressed=true]{background:#2b6c71;border-color:#9cf4e4;box-shadow:inset 0 0 0 1px #9cf4e470,0 0 18px #4dd8cf1c}
+.next-monitor{background:linear-gradient(180deg,#0b2532 0%,#071c28 100%);border-left:1px solid #477486;padding:20px 16px}
+.next-monitor-head{align-items:center}
+.next-monitor-head h2{font-size:1.25rem}
+.next-monitor-kicker{letter-spacing:.11em;color:#86bbc1;font-size:.66rem;font-weight:800;margin:19px 0 0}
+.next-vitals{grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}
+.next-vital{border:1px solid #2a5969;background:radial-gradient(ellipse at 75% 0%,#205367,#0a202c 72%);min-height:143px;padding:12px;border-radius:12px;box-shadow:inset 0 1px #a9e9ef16}
+.next-vital strong{font-size:clamp(2rem,3.2vw,3.0rem);font-weight:750;color:#8affcb;text-shadow:0 0 16px #5affc01b}
+.next-vital:nth-child(2) strong{color:#8fcaff}
+.next-vital:nth-child(3) strong{color:#f0d184}
+.next-vital svg{height:32px}
+.next-monitor-foot{color:#a5c2ca}
+.next-clock-controls{margin:16px 0 3px}
+.next-clock-controls button{border-radius:10px;min-height:47px}
+.next-clock-controls button:first-child{background:#1b777b;border-color:#9aefe7}
+.next-workspace{background:#0b2230;border-radius:18px;box-shadow:0 15px 35px #0005}
+.next-tools{display:flex;flex-wrap:wrap;justify-content:space-around;gap:4px;padding:16px 10px 13px;border-bottom:1px solid #3b6778}
+.next-tool{border:0;border-radius:13px;flex:1 1 77px;max-width:118px;min-height:84px;font-size:.73rem;font-weight:760;transition:background .15s ease}
+.next-tool .next-icon{display:grid;place-items:center;margin:0 auto;background:linear-gradient(145deg,#2c6678,#153c4f);width:49px;height:49px;border:1px solid #69aab5;border-radius:50%;font-size:1.55rem;box-shadow:0 4px 15px #001c2990}
+.next-tool[aria-pressed=true]{border-bottom:0;background:#194457}
+.next-tool[aria-pressed=true] .next-icon{background:#63dccb;color:#092837;border-color:#b5fff4;box-shadow:0 0 18px #54e7d73c}
+.next-actions button{transition:background .15s ease,border-color .15s ease}
+.next-actions button:hover{border-color:#9beada}
+.next-case-card{background:linear-gradient(125deg,#1b4355,#112f40);border-color:#527c8a;box-shadow:inset 0 1px #a0d7dc1c,0 6px 15px #00142233}
+#next-immersive-stage:fullscreen{height:100dvh;max-height:100dvh;width:100vw;border-radius:0;border:0;display:grid;grid-template-columns:minmax(0,2.8fr) minmax(260px,.7fr)}
+#next-immersive-stage:fullscreen .next-scene{min-height:0}
+#next-immersive-stage:fullscreen .next-canvas-wrap canvas{height:calc(100dvh - 162px);min-height:270px}
+#next-immersive-stage:fullscreen .next-monitor{overflow:auto}
+@media(max-width:1110px){.next-stage-layout{grid-template-columns:minmax(0,1.7fr) minmax(270px,.8fr)}.next-view-tabs{order:3;flex-basis:100%}.next-scene-top{flex-wrap:wrap}.next-fullscreen{margin-left:auto}.next-canvas-wrap canvas{height:420px}}
+@media(max-width:820px){
+ .next-stage-layout{grid-template-columns:1fr;min-height:auto}
+ .next-monitor{border-left:0;border-top:1px solid #477486}
+ .next-canvas-wrap{min-height:340px}.next-canvas-wrap canvas{height:380px;min-height:340px}
+ .next-vitals{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .next-vital{min-height:125px}
+ #next-immersive-stage:fullscreen{grid-template-columns:1fr;overflow:auto;height:100dvh}
+ #next-immersive-stage:fullscreen .next-canvas-wrap canvas{height:50dvh;min-height:260px}
+}
+@media(max-width:560px){
+ .next-shell{padding:0 10px 22px}
+ .next-stage-layout{border-radius:15px}
+ .next-scene-top{padding:11px}
+ .next-view-tabs button{padding:7px 9px;font-size:.72rem}
+ .next-canvas-wrap{height:330px;min-height:330px}
+ .next-canvas-wrap canvas{height:330px;min-height:330px}
+ .next-cinema-hud{left:12px;right:12px;font-size:.56rem}
+ .next-canvas-caption{font-size:.61rem;max-width:68%;left:10px}
+ .next-mesh-status{left:10px;font-size:.62rem}
+ .next-vitals{grid-template-columns:1fr 1fr}
+ .next-vital{min-height:113px}
+ .next-monitor{padding:15px}
+ .next-tools{justify-content:center;padding:8px 4px}
+ .next-tool{flex:1 1 59px;max-width:80px;min-height:73px;font-size:.61rem}
+ .next-tool .next-icon{width:40px;height:40px;font-size:1.2rem}
+ .next-patient-switch button{min-width:0;flex:1}
+}
+@media(prefers-reduced-motion:reduce){.next-tool,.next-case-card,.next-actions button{transition:none}}

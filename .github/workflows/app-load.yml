@@ -38,6 +38,8 @@ jobs:
           node --check mentor/core/next-sim.mjs
           node --check mentor/app/next-sim.mjs
           node --check mentor/app/next-scene.mjs
+          node --check mentor/app/next-patient-mesh.mjs
+          node --test mentor/app/next-patient-mesh.test.mjs
           node --check mentor/core/next-review.mjs
           node --test mentor/core/next-sim.test.mjs mentor/core/next-review.test.mjs mentor/core/next-cases.test.mjs
           node --check mentor/core/live-debrief.mjs

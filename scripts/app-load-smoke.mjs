@@ -202,6 +202,21 @@ try {
       throw Error(device+': MENTOR NEXT original road case history lost');
     console.log('PASS '+device+': MENTOR NEXT v0.3 three original scenarios, contextual dialogue and independent save/resume');
 
+
+    // v0.4 visual regression: browser loads a CC0 human mesh or explicitly reports fallback.
+    const humanAsset=await page.request.get('http://127.0.0.1:8765/mentor/assets/cc0-human-body.glb');
+    if(!humanAsset.ok()||(await humanAsset.body()).length<100000)throw Error(device+': missing real CC0 mesh GLB');
+    await page.waitForFunction(()=>{
+      const c=document.getElementById('next-canvas');
+      return c && ['ready','fallback'].includes(c.dataset.humanModel);
+    },null,{timeout:20000});
+    const visualStatus=await page.locator('#next-canvas').getAttribute('data-human-model');
+    if(!['ready','fallback'].includes(visualStatus))throw Error(device+': MENTOR NEXT CC0 model render not initialized');
+    if(!await page.locator('#next-mesh-status').textContent().then(t=>t.includes('3D')))
+      throw Error(device+': MENTOR NEXT did not announce patient graphics status');
+    if(!await page.locator('#next-fullscreen').isVisible())throw Error(device+': missing immersive mode control');
+    console.log('PASS '+device+': MENTOR NEXT v0.4 native CC0 human asset, WebGL render status '+visualStatus+' and immersive controls');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}

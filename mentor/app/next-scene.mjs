@@ -1,4 +1,5 @@
-/** Original low-poly WebGL patient scene; no imported models or Body Interact assets. */
+/** Original WebGL simulator scene: CC0 human geometry, environment & fallback models. */
+import {attachHumanMesh} from './next-patient-mesh.mjs';
 export function mountPatientScene(canvas,onSelect){
  const gl=canvas.getContext('webgl',{alpha:true,antialias:true,depth:true,preserveDrawingBuffer:false});
  const fallback=canvas.parentElement.querySelector('.next-fallback');
@@ -16,6 +17,7 @@ export function mountPatientScene(canvas,onSelect){
  const pb=buf(gl.ARRAY_BUFFER,new Float32Array(pts)),nb=buf(gl.ARRAY_BUFFER,new Float32Array(ns)),ib=buf(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx));
  const colors={skin:[0.78,0.59,0.44],skin2:[0.68,0.46,0.34],pants:[0.19,0.27,0.36],topA:[0.20,0.56,0.70],topB:[0.47,0.63,0.46],hair:[0.19,0.16,0.16],shoe:[0.14,0.17,0.20],car:[0.30,0.40,0.48],wheel:[0.11,0.13,0.16],road:[0.22,0.33,0.37],wall:[0.28,0.41,0.45],rug:[0.24,0.39,0.50],bench:[0.47,0.36,0.27],green:[0.16,0.43,0.32],lamp:[0.89,0.76,0.48]};
  let environment='road',focus='scene',view='scene',poseByPatient={a:'standing',b:'standing'},angle=0.18,paused=false,running=true,last=0,raf=0,clock=0,drag=null,acc=0;
+ const humans=attachHumanMesh(gl,canvas,()=>{if(running)draw();});
  function sphere(x,y,z,sx,sy,sz,color){
   gl.uniform3f(loc.off,x,y,z);gl.uniform3f(loc.scale,sx,sy,sz);gl.uniform3fv(loc.color,colors[color]||color);
   gl.drawElements(gl.TRIANGLES,idx.length,gl.UNSIGNED_SHORT,0);
@@ -66,7 +68,8 @@ export function mountPatientScene(canvas,onSelect){
    part(x-.16,-.69,.25,.14,.49,.17,'pants');part(x+.16,-.69,.25,.14,.49,.17,'pants');
    part(x-.16,-1.18,.39,.16,.12,.30,'shoe');part(x+.16,-1.18,.39,.16,.12,.30,'shoe');
   }
-  person(-1.1,'topA','skin',0,'a');person(1.05,'topB','skin2',1,'b');
+  if(!humans.ready){person(-1.1,'topA','skin',0,'a');person(1.05,'topB','skin2',1,'b');}
+  else humans.draw({focus,view,angle,poses:poseByPatient,width:w,height:h});
  }
  function frame(now){if(!running)return;raf=requestAnimationFrame(frame);if(document.hidden||!canvas.isConnected)return;if(now-last<45)return;last=now;if(!paused)clock+=0.045;draw();}
  try{draw();raf=requestAnimationFrame(frame);}catch{canvas.hidden=true;fallback.hidden=false;running=false;}
@@ -80,6 +83,6 @@ export function mountPatientScene(canvas,onSelect){
   setPoses(poses){poseByPatient={...poseByPatient,...poses};draw();},
   setEnvironment(value){if(!['road','home','square'].includes(value))return;environment=value;draw();},
   rotate(d){angle+=d;draw();},
-  dispose(){running=false;cancelAnimationFrame(raf);gl.deleteBuffer(pb);gl.deleteBuffer(nb);gl.deleteBuffer(ib);gl.deleteProgram(program);}
+  dispose(){running=false;cancelAnimationFrame(raf);humans.dispose();gl.deleteBuffer(pb);gl.deleteBuffer(nb);gl.deleteBuffer(ib);gl.deleteProgram(program);}
  };
 }
