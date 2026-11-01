@@ -1,9 +1,13 @@
 name: Educational and scientific review
-# Runs on every change so newly created modules are never omitted by path filters.
-# The reviewer itself selects educational/content-capable files from the commit diff.
+# Runs on pull requests only (a push to a PR branch used to trigger it twice).
+# The reviewer itself selects educational/content-capable files from the diff, so new
+# modules are never omitted by path filters. Cost is bounded: unchanged text is served from
+# a cache and each run spends at most AUDIT_MAX_CALLS paid calls.
 on:
   push:
+    branches: [main]
   pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
   workflow_dispatch:
     inputs:
       paths:
@@ -12,14 +16,19 @@ on:
         default: ''
 permissions:
   contents: read
+concurrency:
+  group: educational-scientific-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   independent-review:
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 45
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
       AUDIT_PATHS: ${{ inputs.paths || '' }}
+      AUDIT_CACHE_FILE: audit-results/review-cache.json
+      AUDIT_MAX_CALLS: ${{ vars.AUDIT_MAX_CALLS || '40' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,21 +41,23 @@ jobs:
         run: |
           node --check scripts/educational-scientific-review.mjs
           node --test scripts/test-educational-scientific-review.mjs
+      - name: Deterministic registry and official-wording check (free, no API)
+        run: python3 scripts/validate-registries.py
+      - name: Restore review cache (unchanged text is never re-sent)
+        uses: actions/cache/restore@v4
+        with:
+          path: audit-results/review-cache.json
+          key: review-cache-${{ hashFiles('docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md') }}-${{ github.run_id }}
+          restore-keys: |
+            review-cache-${{ hashFiles('docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md') }}-
       - name: Evaluate changed educational and scientific material
         run: node scripts/educational-scientific-review.mjs
-      - name: Print review coverage and pending reasons (no secrets)
+      - name: Save review cache (also when the review is incomplete, so the next run continues)
         if: always()
-        run: |
-          node --input-type=module - <<'NODE'
-          import {existsSync,readFileSync} from 'node:fs';
-          const file='audit-results/educational-scientific-review.json';
-          if(!existsSync(file)){console.log('No independent-review report produced');process.exit(0);}
-          const report=JSON.parse(readFileSync(file,'utf8'));
-          const summary={status:report.status,requested:report.requested_count,screened:report.reviewed_count,
-            pending:(report.pending||[]).map(x=>({path:x.path,reason:x.reason})),
-            file_errors:(report.files||[]).filter(x=>x.error).map(x=>({path:x.path,error:x.error}))};
-          console.log('Independent review coverage: '+JSON.stringify(summary));
-          NODE
+        uses: actions/cache/save@v4
+        with:
+          path: audit-results/review-cache.json
+          key: review-cache-${{ hashFiles('docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md') }}-${{ github.run_id }}
       - name: Preserve inspectable review evidence
         if: always()
         uses: actions/upload-artifact@v4

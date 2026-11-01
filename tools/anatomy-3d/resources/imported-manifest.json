@@ -1,0 +1,981 @@
+{
+  "generatedAt": "2026-11-01T20:41:33.098Z",
+  "sourceCommit": "b036a91aaf7234f462b1249d4a5f4fb0e982f412",
+  "sourceLicense": "CC-BY-4.0",
+  "licenseUrl": "https://docs.hubmapconsortium.org/faq.html",
+  "clinicalStatus": "NOT_VALIDATED",
+  "assets": [
+    {
+      "id": "hra-1.2-allen-f-brain",
+      "name": "Allen_F_Brain.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/Allen_F_Brain.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/Allen_F_Brain.glb",
+      "sourceGitBlob": "46be1ef8f30b42b1bda45efc909d09badc2c1013",
+      "bytes": 11977884,
+      "sha256": "c5711a1a8bc62ca930b8bcf076def15315c11f5ad9bc7901e51f698406d38dbc",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 283,
+        "nodes": 286,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-allen-m-brain",
+      "name": "Allen_M_Brain.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/Allen_M_Brain.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/Allen_M_Brain.glb",
+      "sourceGitBlob": "b87f9f5cae36ef916d526a0dc300c466980a84ff",
+      "bytes": 11977312,
+      "sha256": "2b9ad5b53e40e9f0936da74f7be38d2eed15604e26358c3870a0ea13499b9a35",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 283,
+        "nodes": 286,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-nih-f-lymph-node",
+      "name": "NIH_F_Lymph_Node.glb",
+      "region": "lymphatic",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/lymphatic/NIH_F_Lymph_Node.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/NIH_F_Lymph_Node.glb",
+      "sourceGitBlob": "fddecfec57b79db1c91faf65209129e2fb9f22cc",
+      "bytes": 4542832,
+      "sha256": "4c2bf104b7b6ec1aabaa68014411b3df383846480d040c5547c0a1a05a18c563",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 7,
+        "nodes": 8,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-nih-m-lymph-node",
+      "name": "NIH_M_Lymph_Node.glb",
+      "region": "lymphatic",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/lymphatic/NIH_M_Lymph_Node.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/NIH_M_Lymph_Node.glb",
+      "sourceGitBlob": "5c8fd0b2c61cf5e5f1434c7043d8bb92ec7d2a0a",
+      "bytes": 7413900,
+      "sha256": "7b047002cbb1dc06f37baa441783390d76cdb444b6144d6caa623923707953fd",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 7,
+        "nodes": 8,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-sbu-f-intestine-large",
+      "name": "SBU_F_Intestine_Large.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/SBU_F_Intestine_Large.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/SBU_F_Intestine_Large.glb",
+      "sourceGitBlob": "0eb339ecc96642d02c54e43717a78c8dcc87bd9e",
+      "bytes": 387184,
+      "sha256": "a14bca59d855546b8343e732c1bf0a146fbdb8ef4d73a3eac333fc298ecb5d1d",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 10,
+        "nodes": 11,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-sbu-m-intestine-large",
+      "name": "SBU_M_Intestine_Large.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/SBU_M_Intestine_Large.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/SBU_M_Intestine_Large.glb",
+      "sourceGitBlob": "a36ab258f8e3179d82da12b08c1f4a5149db0418",
+      "bytes": 686888,
+      "sha256": "84a66fb4e2dd07dffc284435da896284c3bddc5b6eb6f8e2f8c1b9130387b66b",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 10,
+        "nodes": 11,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-blood-vasculature",
+      "name": "VH_F_Blood_Vasculature.glb",
+      "region": "cardiovascular",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/cardiovascular/VH_F_Blood_Vasculature.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Blood_Vasculature.glb",
+      "sourceGitBlob": "e5ee60b7c3e58b913e00fb0d860a93667db166e3",
+      "bytes": 7262232,
+      "sha256": "4b034a65527938ccbeba4f3514c282bd399a4384fb23ba8095b01e2a3219486a",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 108,
+        "nodes": 155,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-eye-l",
+      "name": "VH_F_Eye_L.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_F_Eye_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Eye_L.glb",
+      "sourceGitBlob": "71e7bfef9b3fba1936d08d8c047c71cadff38d3f",
+      "bytes": 9610916,
+      "sha256": "b8468c1eabc6effbeb3f6dec990d57dff0c29717a5ec23029e08ec122cb35a00",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 23,
+        "nodes": 24,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-eye-r",
+      "name": "VH_F_Eye_R.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_F_Eye_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Eye_R.glb",
+      "sourceGitBlob": "6d07e686c58a8ce6104131829d98e2068ca7d44f",
+      "bytes": 9511360,
+      "sha256": "aade6c5f75f8ef48aa2a6062c8413fc9b8b08fc79b1bea45f93cae6c814f7e69",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 23,
+        "nodes": 24,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-fallopian-tube-l",
+      "name": "VH_F_Fallopian_Tube_L.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Fallopian_Tube_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Fallopian_Tube_L.glb",
+      "sourceGitBlob": "560433afd71368c354d97b8e40e80cb255db04f7",
+      "bytes": 336676,
+      "sha256": "5025453048a83c26393b866bc69859a255b4c38816f34ed3a196bfe7d4f33dd1",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 4,
+        "nodes": 5,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-fallopian-tube-r",
+      "name": "VH_F_Fallopian_Tube_R.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Fallopian_Tube_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Fallopian_Tube_R.glb",
+      "sourceGitBlob": "d653750c7bd1a112a6c9ed6f51be59cd2a6bc2a8",
+      "bytes": 327448,
+      "sha256": "17aef41a430e068705dc21ac8ccf746a74f14f47ffc1a31908198b0b026849df",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 4,
+        "nodes": 5,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-heart",
+      "name": "VH_F_Heart.glb",
+      "region": "thorax",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Heart.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Heart.glb",
+      "sourceGitBlob": "7e4709ac174f4f43bedb80ed488fdcb62d02aac3",
+      "bytes": 1745284,
+      "sha256": "9afdfb2ccf926869813582cfe150dce8cb28377417a968a4f29a5b8dc060428b",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 14,
+        "nodes": 18,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-kidney-l",
+      "name": "VH_F_Kidney_L.glb",
+      "region": "urinary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_F_Kidney_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Kidney_L.glb",
+      "sourceGitBlob": "03a86aa33b02608ede00b41d4dc68b0680a268f4",
+      "bytes": 1330900,
+      "sha256": "8ac1228e4db8c07cbf9f6c6dc7ca522c5b8d61f641927233a29ae6609b577403",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 15,
+        "nodes": 19,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-kidney-r",
+      "name": "VH_F_Kidney_R.glb",
+      "region": "urinary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_F_Kidney_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Kidney_R.glb",
+      "sourceGitBlob": "f2dc4787682c1b355f17674a6069dd21001f896a",
+      "bytes": 1356976,
+      "sha256": "a67508e6948723d34a29fea2bc8c96931a8fe2f8a08293fd1c3161cfcf13968e",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 14,
+        "nodes": 18,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-knee-l",
+      "name": "VH_F_Knee_L.glb",
+      "region": "limbs",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_F_Knee_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Knee_L.glb",
+      "sourceGitBlob": "93a0754dfc8888aeb1dd94eb78c0f186b1ff190c",
+      "bytes": 347952,
+      "sha256": "7cf9a73e1332ba674d92577b50ace274a774c3044d990463dc37338bc119125f",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 20,
+        "nodes": 22,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-knee-r",
+      "name": "VH_F_Knee_R.glb",
+      "region": "limbs",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_F_Knee_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Knee_R.glb",
+      "sourceGitBlob": "21c6783356b10448f2b53405fb9df3b0945f3c89",
+      "bytes": 347996,
+      "sha256": "f8b20c89a0bfa064d5ba0601f39e933d968fe6b34cb2dd9870b35017113118e6",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 20,
+        "nodes": 22,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-liver",
+      "name": "VH_F_Liver.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Liver.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Liver.glb",
+      "sourceGitBlob": "c24c6fbcd37162e26d43a6870afc238aa27f09c1",
+      "bytes": 1738032,
+      "sha256": "ad9b0be0ff253e7bfe31bfffc00017dafce226d4f3e7804a81cbb4c2e269d598",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 26,
+        "nodes": 33,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-lung",
+      "name": "VH_F_Lung.glb",
+      "region": "thorax",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Lung.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Lung.glb",
+      "sourceGitBlob": "68a100eda66459764a2cd6558bd575e3006df57b",
+      "bytes": 11240608,
+      "sha256": "a6a81718f4d0974bcbab47c6dc38efc941ad5c7f5f256bf7ff112c710a7fd932",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 65,
+        "nodes": 85,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-ovary-l",
+      "name": "VH_F_Ovary_L.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ovary_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ovary_L.glb",
+      "sourceGitBlob": "1f83e9ce3a58bc0de6c5a9cc1a5126867e43dfbc",
+      "bytes": 8984,
+      "sha256": "ed91414a667dec5e4e14aeaa2f8641731f06725dbc914bc0da3dd8b5d77f5062",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 1,
+        "nodes": 1,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-ovary-r",
+      "name": "VH_F_Ovary_R.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ovary_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ovary_R.glb",
+      "sourceGitBlob": "9af44606e833b9dd3a035e2a1d5698ae001302fd",
+      "bytes": 8744,
+      "sha256": "99cc2b91602feacaee08ec1771b993fc0f8b0e32a08bdd7fd6b990a6736aa53b",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 1,
+        "nodes": 1,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-pancreas",
+      "name": "VH_F_Pancreas.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Pancreas.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Pancreas.glb",
+      "sourceGitBlob": "e3e32b07cee1e1c84689c603f8b8373180dd9bd3",
+      "bytes": 216380,
+      "sha256": "7aed6a1c35d5bd8514a8b6c77a8b57f02ffd61ba555e83405d037b8ee4e3d2f3",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 5,
+        "nodes": 6,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-pelvis",
+      "name": "VH_F_Pelvis.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Pelvis.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Pelvis.glb",
+      "sourceGitBlob": "eb6e1ae3743c1d30250f2771e7185b4324b217e5",
+      "bytes": 1593336,
+      "sha256": "155603d0c44a8ed1e0ca307f1ec3037941304f29f4187631135a9a150fab048d",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 14,
+        "nodes": 24,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-placenta",
+      "name": "VH_F_Placenta.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Placenta.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Placenta.glb",
+      "sourceGitBlob": "22e0fa26bd50da263dd70e9d5abede007b543830",
+      "bytes": 4917240,
+      "sha256": "6cc1142de48906e4e42bb1cddce901588b256a41b9b3ac300c0a739cb478cbc6",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 8,
+        "nodes": 10,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-skin",
+      "name": "VH_F_Skin.glb",
+      "region": "integumentary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/integumentary/VH_F_Skin.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Skin.glb",
+      "sourceGitBlob": "cbbe2b63e739d2466f10227c047a478f6f878798",
+      "bytes": 22959832,
+      "sha256": "b658bd4ffd01e0b11ba225779c9a6dd40568917a9d559d5148ba231bdec1c270",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 1,
+        "nodes": 2,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-small-intestine",
+      "name": "VH_F_Small_Intestine.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Small_Intestine.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Small_Intestine.glb",
+      "sourceGitBlob": "6ca631189a55dcd5fe625be2f139048a36c11339",
+      "bytes": 856388,
+      "sha256": "34cc2d8aa0c782080cadc2e8474a727dce50f829bec3a4857202eba97e110efb",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 9,
+        "nodes": 11,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-spinal-cord",
+      "name": "VH_F_Spinal_Cord.glb",
+      "region": "neurology",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/neurology/VH_F_Spinal_Cord.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Spinal_Cord.glb",
+      "sourceGitBlob": "b7fe688162b02c9023f7de4ca2a78636282d404c",
+      "bytes": 7656588,
+      "sha256": "d9bfc840783a415068e34b8a1a9343fff40ad03d0025fafabf74f9d8664887f8",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 29,
+        "nodes": 30,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-spleen",
+      "name": "VH_F_Spleen.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Spleen.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Spleen.glb",
+      "sourceGitBlob": "acba45ef717cd8cca488fd17cbf8dd988df68420",
+      "bytes": 276712,
+      "sha256": "e9ce0e379f86747c2d12ff56ea71a8389d97b7e1135c4e9ad1f6b4c32cf369d4",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 5,
+        "nodes": 6,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-thymus",
+      "name": "VH_F_Thymus.glb",
+      "region": "thorax",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Thymus.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Thymus.glb",
+      "sourceGitBlob": "14eac0d3ceb4d007de52237763a0819d7e21a4dc",
+      "bytes": 71928,
+      "sha256": "fce2572d19c72282353730aaa30e2a25cef0b49c2e9fce3512e329f7dcc276a4",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 2,
+        "nodes": 3,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-ureter-l",
+      "name": "VH_F_Ureter_L.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ureter_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ureter_L.glb",
+      "sourceGitBlob": "6d1b5084eef08232a519e53cd244cf8f0f030483",
+      "bytes": 707996,
+      "sha256": "90bdf4d8076691290dc89c3f212419bfdfc15018f210d54f359b162156206f46",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 27,
+        "nodes": 32,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-ureter-r",
+      "name": "VH_F_Ureter_R.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ureter_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ureter_R.glb",
+      "sourceGitBlob": "e7cf8de3a1afbe4dc44bb736922a38079278398f",
+      "bytes": 637764,
+      "sha256": "35259f8afd8850ed90cb3051d1d4d94575634bd28f6fa1513c906bdd4710bbb1",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 25,
+        "nodes": 30,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-urinary-bladder",
+      "name": "VH_F_Urinary_Bladder.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Urinary_Bladder.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Urinary_Bladder.glb",
+      "sourceGitBlob": "fb121cf1c9c6b3a1deddb1640120cd0dd7929d7c",
+      "bytes": 765100,
+      "sha256": "9c5732fc9628cd192bb8c8f2b4bbf22b9822a0dff5378a0d366d2f3cb2205b6a",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 6,
+        "nodes": 8,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-f-uterus",
+      "name": "VH_F_Uterus.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Uterus.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Uterus.glb",
+      "sourceGitBlob": "05284300f02da90b7321a0dcf6a7d6d21e774770",
+      "bytes": 909772,
+      "sha256": "a484956788ecc2ab05ca7720d9b33d265677e238f144cc28481aad2f7a0c9a95",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 10,
+        "nodes": 11,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-blood-vasculature",
+      "name": "VH_M_Blood_Vasculature.glb",
+      "region": "cardiovascular",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/cardiovascular/VH_M_Blood_Vasculature.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Blood_Vasculature.glb",
+      "sourceGitBlob": "90016b0b5f8028ad0afa9d39672352ffce625498",
+      "bytes": 7436204,
+      "sha256": "a31ebed6d527b1cff31942e3e50d7c074c30b574337f68c4b89e9c88e4309d0d",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 104,
+        "nodes": 153,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-eye-l",
+      "name": "VH_M_Eye_L.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_M_Eye_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Eye_L.glb",
+      "sourceGitBlob": "c4cecec60f945508bc5a513caf4ddca34b07f44a",
+      "bytes": 9610816,
+      "sha256": "052114e9184af6e1f969e45cd39597cb453379472be835851722eaf009daaa52",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 23,
+        "nodes": 25,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-eye-r",
+      "name": "VH_M_Eye_R.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_M_Eye_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Eye_R.glb",
+      "sourceGitBlob": "1a6a40174cd3e55c03b1f8cc00ef0acf41578115",
+      "bytes": 9511464,
+      "sha256": "bea519c0ef230c98899830de74806941c8cf8de857839aee21d00f348783e4a3",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 23,
+        "nodes": 25,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-heart",
+      "name": "VH_M_Heart.glb",
+      "region": "thorax",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Heart.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Heart.glb",
+      "sourceGitBlob": "7efc2cf858b4434249a48c6f104842e1662c9043",
+      "bytes": 4071500,
+      "sha256": "b1237e7e765178e9357fd2ea7ccf19d55d0bf9ca55e187886635febe28244c70",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 14,
+        "nodes": 18,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-kidney-l",
+      "name": "VH_M_Kidney_L.glb",
+      "region": "urinary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_M_Kidney_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Kidney_L.glb",
+      "sourceGitBlob": "b243680fe62520242cabfa55a8d29a57dac5dcb7",
+      "bytes": 1536532,
+      "sha256": "733eef9ec169796196470e538dc248c4397bce0ff7ed679f7b7eb0bb9f185612",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 22,
+        "nodes": 27,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-kidney-r",
+      "name": "VH_M_Kidney_R.glb",
+      "region": "urinary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_M_Kidney_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Kidney_R.glb",
+      "sourceGitBlob": "5c3330722f238d480571aff608411c9404d33b83",
+      "bytes": 1546868,
+      "sha256": "ff9821e0b8fb7fa6174a07b9cafb9f98bb25feca34ddc0e802beeefb24cd3779",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 24,
+        "nodes": 29,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-knee-l",
+      "name": "VH_M_Knee_L.glb",
+      "region": "limbs",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_M_Knee_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Knee_L.glb",
+      "sourceGitBlob": "5bb27b98c6839a906681f128ef7ccf0adbc212ee",
+      "bytes": 439644,
+      "sha256": "5280a184ece7c68bbde26d5d72468e94b478511b9e370f81f0d8ffbca7c4957d",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 20,
+        "nodes": 22,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-knee-r",
+      "name": "VH_M_Knee_R.glb",
+      "region": "limbs",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_M_Knee_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Knee_R.glb",
+      "sourceGitBlob": "fc70ceeb3039cdc8b1e6c4d4face5b305784bf54",
+      "bytes": 439704,
+      "sha256": "fa894303d88ecc2337ed48cabd047604fa967d8be060aa57354a3dfe1274e1e5",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 20,
+        "nodes": 22,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-liver",
+      "name": "VH_M_Liver.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Liver.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Liver.glb",
+      "sourceGitBlob": "7a140a4d527b6364ee6486a540e9927dffacfe29",
+      "bytes": 1135892,
+      "sha256": "e94f18646d1b8f72cc45b92bdd67bbb4eb71d5bf954888bc8b8f8b52b3940b6a",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 26,
+        "nodes": 33,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-lung",
+      "name": "VH_M_Lung.glb",
+      "region": "thorax",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Lung.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Lung.glb",
+      "sourceGitBlob": "80262031f1f90abfd1287ce70aa1290657d68087",
+      "bytes": 6355840,
+      "sha256": "e64351b72b0bc5289a4dc32ba2b402b9c974f9ec0b1972bf06b436864f917913",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 67,
+        "nodes": 87,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-pancreas",
+      "name": "VH_M_Pancreas.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Pancreas.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Pancreas.glb",
+      "sourceGitBlob": "911cb272dc9e2ee781fa5af48fbb54730a9c94e0",
+      "bytes": 265276,
+      "sha256": "ff05d94c539ec8f6ea4620d2a0128ce9911a2c3674330c8eafdb0c96b9999ea3",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 5,
+        "nodes": 6,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-pelvis",
+      "name": "VH_M_Pelvis.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Pelvis.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Pelvis.glb",
+      "sourceGitBlob": "395bebeaa1313225704b1786aa433243b66e1652",
+      "bytes": 1348060,
+      "sha256": "06349b8c70a019b3fd36d4e059e02efed915bf305cf15f8e32547732c6865b09",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 14,
+        "nodes": 24,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-prostate",
+      "name": "VH_M_Prostate.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Prostate.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Prostate.glb",
+      "sourceGitBlob": "4b6b933ff2940e7f4008e57473a06e4f84358be1",
+      "bytes": 4086328,
+      "sha256": "ec1023e0a1b81f71865872bb720404abc7bb6378a54ac71fa9f24579b097f48a",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 18,
+        "nodes": 27,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-skin",
+      "name": "VH_M_Skin.glb",
+      "region": "integumentary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/integumentary/VH_M_Skin.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Skin.glb",
+      "sourceGitBlob": "57b4af235eb34e2dce104b619c55b09ec44dae63",
+      "bytes": 5931700,
+      "sha256": "8cab299d04323e6364938a271647df5671138a2177f412e741a0d6bd4536ee1c",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 1,
+        "nodes": 1,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-small-intestine",
+      "name": "VH_M_Small_Intestine.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Small_Intestine.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Small_Intestine.glb",
+      "sourceGitBlob": "aa882262ba5c25541bef6987acafe00182ec3266",
+      "bytes": 618560,
+      "sha256": "e9d05a22c0132d375f8c242ad491ea68365681904cb391e648187de5247b4570",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 10,
+        "nodes": 12,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-spinal-cord",
+      "name": "VH_M_Spinal_Cord.glb",
+      "region": "neurology",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/neurology/VH_M_Spinal_Cord.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Spinal_Cord.glb",
+      "sourceGitBlob": "70ae7aaff86cf529df3da67600acac42bd5e82a7",
+      "bytes": 489992,
+      "sha256": "a7858d88c2237aa7d559c4c1d638923d213d2a9f46c575dea03d6ba67a9975c0",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 30,
+        "nodes": 31,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-spleen",
+      "name": "VH_M_Spleen.glb",
+      "region": "abdomen",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Spleen.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Spleen.glb",
+      "sourceGitBlob": "096b1800255c56ce0fb06b2f2da97d9d8d868937",
+      "bytes": 540236,
+      "sha256": "572ca93068f6e7506d5653ca16292ec3048ad52957d34f389cb67c8961a7c8fb",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 5,
+        "nodes": 6,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-thymus",
+      "name": "VH_M_Thymus.glb",
+      "region": "thorax",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Thymus.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Thymus.glb",
+      "sourceGitBlob": "3cebb701e86e8bbe8ba90b801c77a29b3e70980c",
+      "bytes": 74876,
+      "sha256": "fd048515346fce788ade60c618743c875d26dd837815ab83f555c1ee2ff0a10d",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 2,
+        "nodes": 3,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-ureter-l",
+      "name": "VH_M_Ureter_L.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Ureter_L.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Ureter_L.glb",
+      "sourceGitBlob": "0c0e9585b5aacefa8bd52a5b1cc6ee8795499cd1",
+      "bytes": 682796,
+      "sha256": "b6e27766b5e5663fe31d96052caa49cd4fab782eed39367c26fec517b3ba0ebb",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 14,
+        "nodes": 18,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-ureter-r",
+      "name": "VH_M_Ureter_R.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Ureter_R.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Ureter_R.glb",
+      "sourceGitBlob": "2bbc2ffed77fc590568e60177b415d72fd1ee558",
+      "bytes": 540712,
+      "sha256": "be2d0331aed637f2f291a342ee760dda41d3418a9e2e9a4070e1e845e3b3e581",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 13,
+        "nodes": 17,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-urethra",
+      "name": "VH_M_Urethra.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Urethra.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Urethra.glb",
+      "sourceGitBlob": "a7ea134891dd3c09950fe4eb6c0e6d656f7aea42",
+      "bytes": 176688,
+      "sha256": "5cd26495cb6c674e04393ea3ed467c0ab29af870a591623f822b7e0adde4d62d",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 2,
+        "nodes": 3,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    },
+    {
+      "id": "hra-1.2-vh-m-urinary-bladder",
+      "name": "VH_M_Urinary_Bladder.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Urinary_Bladder.glb",
+      "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Urinary_Bladder.glb",
+      "sourceGitBlob": "e61c58959555f2c47755b46af64614aec7e031da",
+      "bytes": 198936,
+      "sha256": "43b7f17e3f498d5e494a7757ce86c183ae458f83724ceaf922f6bdd6a35ff339",
+      "license": "CC-BY-4.0",
+      "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
+      "glb": {
+        "meshes": 6,
+        "nodes": 9,
+        "version": "2.0"
+      },
+      "status": "staged-not-clinically-validated"
+    }
+  ]
+}

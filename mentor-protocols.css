@@ -56,8 +56,3 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .footer{color:var(--muted);font-size:.8rem;padding:12px}
 @media(max-width:780px){.catalog-layout,.lab-layout{grid-template-columns:1fr}.topic-grid{grid-template-columns:1fr}.shell{padding:12px 12px 64px}.hero{border-radius:18px}.mentor-mini iframe{height:220px}}
 @media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0b1d27;--panel:#16303d;--ink:#ebf5f7;--muted:#b1cad5;--line:#365665;--brand:#99dce8;--accent:#60bdb8;--soft:#204352;--warn:#403320}.category[aria-pressed="true"]{color:#dcf7f6}.btn{background:#226778;color:#fff;border-color:#4390a1}.btn.alt{color:var(--brand)}.btn.soft{color:var(--ink)}.tag{color:#f4d397}}
-
-/* Immediately visible, high-contrast safety disclosure for both lab and review. */
-.protocol-release-notice{display:block!important;padding:12px 15px;margin:12px 0 14px;border:2px solid #9b5c0f;border-radius:12px;background:#fff1cf;color:#392307;line-height:1.6}
-.protocol-release-notice strong{display:block;color:#392307;font-weight:850}
-.protocol-release-notice p{color:#392307;margin:6px 0 0}

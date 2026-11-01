@@ -1,0 +1,26 @@
+name: Verify separate Anatomy Lab and Cockpit imported resources
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-atla-resource-layout.yml'
+      - 'scripts/verify-atla-import-layout.mjs'
+      - 'tools/anatomy-3d/resources/**'
+      - 'tools/patient-simulator/resources/**'
+      - 'tools/anatomy-3d/vendor/open-anatomy-atlas/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  resource-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate 3D models, source references and module separation
+        run: node scripts/verify-atla-import-layout.mjs
+      - name: Run upstream open-source atlas data tests
+        run: node tools/anatomy-3d/vendor/open-anatomy-atlas/test/run-tests.js

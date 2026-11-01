@@ -1,0 +1,92 @@
+name: ATLA daily knowledge discovery (review-gated)
+on:
+  schedule:
+    - cron: '17 2 * * *' # UTC. Greece: ~04:17 winter / 05:17 summer.
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/atla-ai/knowledge-refresh/scan.mjs'
+      - 'tools/atla-ai/knowledge-refresh/scan.test.mjs'
+      - '.github/workflows/atla-daily-knowledge-refresh.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atla-daily-knowledge-refresh
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax and deterministic safety tests
+        run: |
+          node --check tools/atla-ai/knowledge-refresh/scan.mjs
+          node --test tools/atla-ai/knowledge-refresh/scan.test.mjs
+
+  discover:
+    needs: verify
+    # The scheduled/manual job is the only path that accesses external research sources.
+    if: github.event_name != 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Daily curated bibliography and PubMed discovery
+        run: node tools/atla-ai/knowledge-refresh/scan.mjs
+      - name: Confirm fail-closed data flags
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import assert from 'node:assert/strict';
+          const root='tools/atla-ai/knowledge-refresh/queue/';
+          const index=JSON.parse(readFileSync(root+'pending-pubmed.json','utf8'));
+          const status=JSON.parse(readFileSync(root+'last-scan.json','utf8'));
+          assert.equal(index.schema_version,1);
+          assert.ok(index.items.length<=100);
+          assert.ok(index.items.every(x=>x.status==='pending-review' &&
+            x.content_imported===false &&
+            x.clinical_approval===false &&
+            x.atla_ai_retrieval_enabled===false));
+          assert.equal(status.clinical_retrieval_updated,false);
+          assert.equal(status.model_training_performed,false);
+          assert.equal(status.full_texts_imported,0);
+          console.log('ATLA discovery gate passed; newly detected:',status.newly_discovered_papers,
+            'pending:',status.pending_papers,'network failures:',status.pubmed_failures.length);
+          NODE
+      - name: Store provenance and pending candidates only (never the clinical knowledge index)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/knowledge-refresh/queue/source-health.json \
+                  tools/atla-ai/knowledge-refresh/queue/pending-pubmed.json \
+                  tools/atla-ai/knowledge-refresh/queue/last-scan.json
+          if git diff --cached --quiet; then
+            echo "No change in research queue."
+          else
+            git commit -m "chore(atla): update pending research discovery (no medical approvals)"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Retain scan results for independent review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-daily-pending-research
+          path: tools/atla-ai/knowledge-refresh/queue/
+          if-no-files-found: ignore
+          retention-days: 14

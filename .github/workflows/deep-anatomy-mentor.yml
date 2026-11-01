@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/deep-anatomy-mentor.yml'
       - 'scripts/verify-anatomy-browser.mjs'
+      - 'tools/anatomy-3d/**'
+      - 'ui-tools/anatomy-3d/**'
       - 'scripts/verify-mentor-browser.mjs'
   workflow_dispatch:
 permissions:

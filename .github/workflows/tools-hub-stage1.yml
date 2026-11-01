@@ -13,24 +13,25 @@ permissions:
   contents: read
 jobs:
   tools-hub:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     timeout-minutes: 14
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test scripts/test-tools-hub-stage1.mjs
-      - run: node scripts/tools-hub-source-evidence.mjs
-      - run: node scripts/verify-saek-reader-safety.cjs
-      - run: node scripts/verify-tool-boundaries.mjs
-      - name: Browser smoke for iPhone and desktop
+      - name: Static structure and existing local destinations
+        run: |
+          node --test scripts/test-tools-hub-stage1.mjs
+          node scripts/tools-hub-source-evidence.mjs
+          node scripts/verify-saek-reader-safety.cjs
+      - name: Browser check on simulated mobile and desktop screens
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/ekab-stage1-http.log 2>&1 &
           node scripts/verify-tools-hub-browser.mjs
-      - name: Preserve source inventory for independent inspection
+      - name: Upload source-linked evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:

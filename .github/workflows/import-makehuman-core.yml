@@ -1,0 +1,46 @@
+name: Import official MakeHuman CC0 core into Clinical Cockpit resources
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-makehuman-core.yml'
+      - 'scripts/import-makehuman-core-assets.mjs'
+      - 'tools/patient-simulator/resources/makehuman/catalog.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  makehuman-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate MakeHuman source and core asset rights
+        run: |
+          node --check scripts/import-makehuman-core-assets.mjs
+          test -s tools/patient-simulator/resources/makehuman/LICENSE-CC0.ASSETS.md
+          node scripts/import-makehuman-core-assets.mjs --dry-run
+      - name: Verify and retrieve CC0 human base OBJ / source proxy
+        run: node scripts/import-makehuman-core-assets.mjs --import
+      - name: Archive CC0 source geometry for Clinical Cockpit
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-cockpit-makehuman-cc0-core
+          path: tools/patient-simulator/resources/makehuman/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Store approved CC0 files with Cockpit assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/patient-simulator/resources/makehuman/
+          if git diff --cached --quiet; then
+            echo "Core OBJ files already present"
+          else
+            git commit -m "assets(cockpit): add verified CC0 MakeHuman core source geometry"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

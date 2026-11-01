@@ -4,6 +4,8 @@ import {mkdtemp,mkdir,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {isEducationPath,choosePaths,validateReview,runReview,MAX_FILES} from './educational-scientific-review.mjs';
+// CI sets these for the real run; tests must not inherit a cache or a budget.
+for(const k of ['AUDIT_CACHE_FILE','AUDIT_MAX_CALLS','AUDIT_PATHS','AUDIT_BASE_SHA'])delete process.env[k];
 
 test('all core educational and clinical areas trigger review',()=>{
  for(const path of [
@@ -84,34 +86,92 @@ test('actual future binary module stays pending, not falsely screened',async()=>
  }finally{await rm(root,{recursive:true,force:true});}
 });
 
-test('independent-review API request omits unsupported temperature and preserves evidence gate',async()=>{
- const root=await mkdtemp(join(tmpdir(),'ekab-scientific-request-'));
- const previousKey=process.env.ANTHROPIC_API_KEY;
+test('reviews many files concurrently, sends no temperature, surfaces API error detail',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'rev-'));
  try{
   await mkdir(join(root,'docs'),{recursive:true});
-  await mkdir(join(root,'future'),{recursive:true});
-  await writeFile(join(root,'docs','INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'Verify claims and mark unverified');
-  await writeFile(join(root,'future','lesson.html'),'<h1>Demo anatomy</h1>');
-  process.env.ANTHROPIC_API_KEY='unit-test-key-do-not-use';
-  let called=0;
-  const result=await runReview({manual:'future/lesson.html',root,fetchImpl:async(url,options)=>{
-   called++;
-   const req=JSON.parse(options.body);
-   assert.equal(Object.hasOwn(req,'temperature'),false,'adaptive thinking must not include temperature');
-   assert.equal(req.max_tokens,12000,'ensure enough room for adaptive thinking and complete JSON review');
-   assert.equal(req.messages[0].role,'user');
-   assert.match(req.messages[0].content,/future\/lesson\.html/);
-   return {ok:true,json:async()=>({
-     stop_reason:'end_turn',
-     content:[{type:'text',text:JSON.stringify({checked_scope:'supplied demo only',findings:[],unverified:[],not_checked:[]})}]
-   })};
-  }});
-  assert.equal(called,1);
-  assert.equal(result.status,'screened');
-  assert.equal(result.reviewed_count,1);
- }finally{
-  if(previousKey===undefined)delete process.env.ANTHROPIC_API_KEY;
-  else process.env.ANTHROPIC_API_KEY=previousKey;
-  await rm(root,{recursive:true,force:true});
- }
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'rules');
+  const names=Array.from({length:10},(_,i)=>'lesson-'+i+'.md');
+  for(const n of names)await writeFile(join(root,n),'text '+n);
+  const bodies=[];
+  const ok=async(_u,o)=>{bodies.push(JSON.parse(o.body));return {ok:true,json:async()=>({stop_reason:'end_turn',
+   content:[{type:'text',text:JSON.stringify({checked_scope:'x',findings:[],unverified:[],not_checked:[]})}]})};};
+  process.env.ANTHROPIC_API_KEY='test';
+  const report=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(report.reviewed_count,10);
+  assert.equal(report.status,'screened');
+  assert.ok(bodies.every(b=>!('temperature' in b)));
+  const bad=async()=>({ok:false,status:400,json:async()=>({error:{message:'bad param'}})});
+  const failed=await runReview({manual:'lesson-0.md',root,fetchImpl:bad});
+  assert.match(failed.files[0].error,/400: bad param/);
+  assert.equal(failed.status,'incomplete');
+ }finally{delete process.env.ANTHROPIC_API_KEY;await rm(root,{recursive:true,force:true});}
+});
+
+test('large files are split into bounded chunks and every chunk is reviewed',async()=>{
+ const {splitChunks,MAX_CHARS}=await import('./educational-scientific-review.mjs');
+ const big=Array.from({length:3000},(_,i)=>'γραμμή '+i+' '+'α'.repeat(40)).join('\n');
+ const chunks=splitChunks(big);
+ assert.ok(chunks.length>5&&chunks.every(c=>c.length<=MAX_CHARS));
+ assert.equal(chunks.join('\n'),big);
+ assert.equal(splitChunks('x'.repeat(MAX_CHARS*2+5)).length,3);
+ const root=await mkdtemp(join(tmpdir(),'rev-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'rules');
+  await writeFile(join(root,'big.md'),big);
+  let calls=0;
+  const ok=async()=>{calls++;return {ok:true,json:async()=>({stop_reason:'end_turn',content:[{type:'text',
+   text:JSON.stringify({checked_scope:'x',findings:[],unverified:[],not_checked:[]})}]})};};
+  process.env.ANTHROPIC_API_KEY='test';
+  const report=await runReview({manual:'big.md',root,fetchImpl:ok});
+  assert.equal(calls,chunks.length);
+  assert.equal(report.status,'screened');
+  assert.equal(report.files[0].chunks,chunks.length);
+ }finally{delete process.env.ANTHROPIC_API_KEY;await rm(root,{recursive:true,force:true});}
+});
+
+test('rate limit is retried and a truncated answer is split in halves',async()=>{
+ const {askChunk}=await import('./educational-scientific-review.mjs');
+ const good=()=>({stop_reason:'end_turn',content:[{type:'text',text:JSON.stringify({checked_scope:'s',findings:[],unverified:[],not_checked:[]})}]});
+ let n=0;const waits=[];
+ const limited=async()=>{n++;return n<3?{ok:false,status:429,headers:new Headers({'retry-after':'2'}),json:async()=>({})}:{ok:true,json:async()=>good()};};
+ const r=await askChunk('k','r','p.md','m','text',limited,async ms=>waits.push(ms));
+ assert.equal(r.checked_scope,'s');assert.equal(n,3);assert.ok(waits.length===2&&waits.every(w=>w>=2000));
+ const lines=Array.from({length:400},(_,i)=>'line '+i+' '+'x'.repeat(20)).join('\n');
+ const seen=[];
+ const trunc=async(_u,o)=>{const t=JSON.parse(o.body).messages[0].content;seen.push(t.length);
+  return {ok:true,json:async()=>t.length>6000?{stop_reason:'max_tokens',content:[]}:good()};};
+ const s=await askChunk('k','r','p.md','m',lines,trunc,async()=>{});
+ assert.equal(s.findings.length,0);assert.ok(seen.length>=3);
+ const dead=async()=>({ok:false,status:429,headers:new Headers(),json:async()=>({})});
+ await assert.rejects(askChunk('k','r','p.md','m','t',dead,async()=>{}),/http_429/);
+});
+
+test('identical text is cached and a run never exceeds its paid-call budget',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'rev-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'rules');
+  const names=['a.md','b.md','c.md'];
+  for(const n of names)await writeFile(join(root,n),'unique '+n);
+  let calls=0;
+  const ok=async()=>{calls++;return {ok:true,json:async()=>({stop_reason:'end_turn',content:[{type:'text',
+   text:JSON.stringify({checked_scope:'x',findings:[],unverified:[],not_checked:[]})}]})};};
+  process.env.ANTHROPIC_API_KEY='test';process.env.AUDIT_CACHE_FILE='cache.json';process.env.AUDIT_MAX_CALLS='2';
+  const first=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(calls,2);assert.equal(first.paid_calls,2);
+  assert.ok(first.pending.some(p=>p.reason==='review_budget_exhausted'));
+  const second=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(calls,3,'only the one uncached file is sent');
+  assert.equal(second.status,'screened');
+  const third=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(calls,3);assert.equal(third.paid_calls,0);
+ }finally{for(const k of ['ANTHROPIC_API_KEY','AUDIT_CACHE_FILE','AUDIT_MAX_CALLS'])delete process.env[k];await rm(root,{recursive:true,force:true});}
+});
+
+test('audit records are excluded from paid review but lessons and questions are not',()=>{
+ for(const p of ['docs/primary-source-crosscheck-2026-10-28/eoppep-314.json','docs/primary-source-crosscheck-2026-10-28/claude_tools.py',
+  'docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.cjs','docs/primary-source-crosscheck-2026-10-28/CLAUDE_SAEK_REPORT.md','docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'])assert.equal(isEducationPath(p),false,p);
+ for(const p of ['official_questions.json','eoppep-sos.json','saek-course-05.html','docs/SAEK-REVIEW-SUMMARY-2026-10-25.md'])assert.equal(isEducationPath(p),true,p);
 });

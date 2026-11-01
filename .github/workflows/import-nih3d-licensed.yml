@@ -1,0 +1,48 @@
+name: NIH 3D per-entry licensed educational model intake
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-nih3d-licensed.yml'
+      - 'scripts/import-nih3d-license-reviewed.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  license-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check importer integrity
+        run: node --check scripts/import-nih3d-license-reviewed.mjs
+      - name: Audit NIH entries and download explicitly-licensed relevant educational models
+        run: node scripts/import-nih3d-license-reviewed.mjs --start=1 --end=250 --max-files=12 --max-mb=4
+      - name: Preserve provenance, license inventory and downloaded NIH models
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-nih-3d-licensed-audit-first-250
+          path: |
+            tools/atla-ai/resources/nih3d-catalog/
+            tools/anatomy-3d/resources/nih3d-approved/
+            tools/patient-simulator/resources/nih3d-approved/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Commit verified research-only assets to their matching tool directories
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/resources/nih3d-catalog/
+          for path in tools/anatomy-3d/resources/nih3d-approved tools/patient-simulator/resources/nih3d-approved; do
+            if test -d "$path"; then git add "$path"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No verified new NIH resources to commit"
+          else
+            git commit -m "assets(ATLA): catalog NIH 3D model licenses and stage allowed educational meshes"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

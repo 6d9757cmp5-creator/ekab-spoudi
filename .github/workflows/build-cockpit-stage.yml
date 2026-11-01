@@ -1,0 +1,62 @@
+name: Build original unified patient 3D renderer
+on:
+  push:
+    paths:
+      - tools/patient-simulator/app/unified-stage.mjs
+      - .github/workflows/build-cockpit-stage.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: build-cockpit-three-stage
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install reproducible pinned MIT-licensed renderer and bundler
+        run: |
+          npm install --no-save --no-package-lock --no-audit --no-fund three@0.187.0 esbuild@0.28.2
+          node -e "const p=require('./node_modules/three/package.json'); if(p.version!=='0.187.0')process.exit(1); console.log('three '+p.version)"
+          node -e "const p=require('./node_modules/esbuild/package.json'); if(p.version!=='0.28.2')process.exit(1); console.log('esbuild '+p.version)"
+      - name: Compile one offline-first real WebGL/GLTF scene
+        run: |
+          set -euo pipefail
+          node --check tools/patient-simulator/app/unified-stage.mjs
+          mkdir -p tools/patient-simulator/vendor
+          ./node_modules/.bin/esbuild tools/patient-simulator/app/unified-stage.mjs \
+            --bundle --platform=browser --format=esm --target=es2022 \
+            --minify --legal-comments=none \
+            --outfile=tools/patient-simulator/vendor/unified-stage.bundle.mjs
+          cp node_modules/three/LICENSE tools/patient-simulator/vendor/THREE-LICENSE.txt
+          node --check tools/patient-simulator/vendor/unified-stage.bundle.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("tools/patient-simulator/vendor/unified-stage.bundle.mjs")
+          b=p.read_bytes()
+          assert 100000 < len(b) < 5000000, len(b)
+          assert b"mountUnifiedStage" in b and b"WebGLRenderer" in b, "missing runtime exports"
+          assert b"three/addons/" not in b, "external addons not bundled"
+          assert Path("tools/patient-simulator/vendor/THREE-LICENSE.txt").stat().st_size>1000
+          print("PASS: self-contained Three.js unified patient scene:",len(b),"bytes")
+          PY
+      - name: Commit exact built bundle and upstream license
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/patient-simulator/vendor/unified-stage.bundle.mjs tools/patient-simulator/vendor/THREE-LICENSE.txt
+          if git diff --cached --quiet; then echo "Current bundle already committed"; exit 0; fi
+          git commit -m "build(simulator): vendor pinned Three.js r187 unified patient scene and MIT license"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Retry $attempt"
+            sleep 3
+          done
+          exit 1

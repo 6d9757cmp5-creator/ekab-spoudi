@@ -1,0 +1,47 @@
+name: Import Quaternius free CC0 research models to Clinical Cockpit
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-quaternius-cc0.yml'
+      - 'scripts/import-quaternius-cc0.mjs'
+      - 'tools/patient-simulator/resources/quaternius/catalog.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-cc0-characters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check Quaternius notices and free tier
+        run: |
+          node --check scripts/import-quaternius-cc0.mjs
+          test -s tools/patient-simulator/resources/quaternius/LICENSE-BASE-CHARACTERS.txt
+          test -s tools/patient-simulator/resources/quaternius/LICENSE-ANIMATIONS.txt
+          node scripts/import-quaternius-cc0.mjs --dry-run
+      - name: Acquire verified CC0 GLBs
+        run: node scripts/import-quaternius-cc0.mjs --import
+      - name: Preserve audited assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-cockpit-quaternius-cc0-research
+          path: tools/patient-simulator/resources/quaternius/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Commit isolated Cockpit resource inputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/patient-simulator/resources/quaternius/
+          if git diff --cached --quiet; then
+            echo "CC0 files already imported"
+          else
+            git commit -m "assets(cockpit): add verified Quaternius CC0 research input"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

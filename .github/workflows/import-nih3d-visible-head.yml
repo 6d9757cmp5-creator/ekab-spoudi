@@ -1,0 +1,41 @@
+name: NIH 3D Visible Human head - public domain atlas source
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-nih3d-visible-head.yml'
+      - 'scripts/import-nih3d-visible-head.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  head-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate NIH 3D individual public-domain entry
+        run: |
+          node --check scripts/import-nih3d-visible-head.mjs
+          node scripts/import-nih3d-visible-head.mjs
+      - name: Preserve high-detail human head GLB with exact source provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-visible-human-head-public-domain-glb
+          path: tools/anatomy-3d/resources/nih3d-approved/head-3dpx-000010/
+          retention-days: 30
+      - name: Persist verified research-only shards inside Anatomy Lab
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f tools/anatomy-3d/resources/nih3d-approved/head-3dpx-000010/
+          if git diff --cached --quiet; then
+            echo "Head model already present"
+          else
+            git commit -m "assets(anatomy): preserve NIH visible human head with verified 3D geometry"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

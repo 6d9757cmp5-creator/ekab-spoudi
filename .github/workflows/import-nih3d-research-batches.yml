@@ -1,0 +1,49 @@
+name: Import further per-license NIH 3D medical research models
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-nih3d-research-batches.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify importer code
+        run: node --check scripts/import-nih3d-license-reviewed.mjs
+      - name: Audit and retrieve open-licensed anatomical and relevant clinical models
+        run: |
+          node scripts/import-nih3d-license-reviewed.mjs --start=160 --end=175 --max-files=5 --max-mb=12
+          node scripts/import-nih3d-license-reviewed.mjs --start=251 --end=850 --max-files=10 --max-mb=12
+          node scripts/import-nih3d-license-reviewed.mjs --start=851 --end=1450 --max-files=10 --max-mb=12
+      - name: Archive provenance and validated research assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-nih3d-research-license-verified-up-to-1450
+          path: |
+            tools/atla-ai/resources/nih3d-catalog/
+            tools/anatomy-3d/resources/nih3d-approved/
+            tools/patient-simulator/resources/nih3d-approved/
+          retention-days: 30
+      - name: Commit only validated source resources and license records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/resources/nih3d-catalog/
+          for path in tools/anatomy-3d/resources/nih3d-approved tools/patient-simulator/resources/nih3d-approved; do
+            if test -d "$path"; then git add "$path"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "No new resources"
+          else
+            git commit -m "assets(ATLA): import approved NIH 3D model batches with individual rights"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
