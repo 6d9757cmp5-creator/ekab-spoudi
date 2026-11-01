@@ -333,7 +333,7 @@ try{
   assert.equal(await page.locator('#sources-list .source-card').count(),0);
   assert.match(await page.locator('#sources-visible').textContent(),/0 από 28/);
   await page.locator('#source-search').fill('');
-  assert.equal(await page.locator('#sources-list .source-card').count(),15);
+  assert.equal(await page.locator('#sources-list .source-card').count(),28);
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
