@@ -162,9 +162,9 @@ try {
     await page.locator('#next-actions button').filter({hasText:'Οπτική στάση: καθιστός'}).click();
     if(!await page.locator('#next-events').textContent().then(s=>s.includes('Οπτική στάση: καθιστός')))
       throw Error(device+': MENTOR NEXT visual posture not recorded');
-    await page.locator('#next-tool-panels > details > summary').first().click();
+    await page.locator('#next-tool-panels > summary').click();
     if(await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel collapse failed');
-    await page.locator('#next-tool-panels > details > summary').first().click();
+    await page.locator('#next-tool-panels > summary').click();
     if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel restore failed');
     await page.locator('#next-nextstep').click();
     if(!await page.locator('#next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT next-step panel did not open');
