@@ -21,7 +21,7 @@ export function collectToolsHubEvidence(root=process.cwd()){
    inventory.push({href,path,sha256:sha(value),bytes:Buffer.byteLength(value),title:(value.match(/<title[^>]*>([^<]+)/i)||[])[1]?.trim()||'not provided'});
  }
  const claims=[
-  {id:'home-tools-entry',path:'index.html',verified:home.includes('href="tools.html"')&&home.includes('3D Ανατομία · ΗΚΓ · Φαρμακολογία · Προσομοιωτής')},
+  {id:'home-tools-entry',path:'index.html',verified:home.includes('href="tools.html"')&&home.includes('3D Ανατομία · Συνθετικό ΗΚΓ · Φαρμακολογία · Εικονικοί ασθενείς')},
   {id:'tools-not-official-ekab-protocols',path:'tools.html',verified:tools.includes('όχι επίσημες επιχειρησιακές οδηγίες ΕΚΑΒ')},
   {id:'protocol-lab-route',path:'protocols.html',verified:read(root,'protocols.html').includes('mentor-protocol-suite.html?topic=trauma&amp;view=lab')},
   {id:'protocol-debrief-route',path:'protocols.html',verified:read(root,'protocols.html').includes('mentor-protocol-suite.html?topic=trauma&amp;view=debrief')},
