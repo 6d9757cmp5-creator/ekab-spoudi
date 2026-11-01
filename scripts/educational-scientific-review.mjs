@@ -105,7 +105,8 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
   requested_count:paths.length,reviewed_count:0,files:[],findings:[],pending:paths.slice(MAX_FILES).map(path=>({path,reason:'file_limit'})),status:'not_applicable'};
  if(!paths.length)return report;
  let rules;try{rules=await readFile(resolve(root,RULES),'utf8');
-  const completion=await readFile(resolve(root,'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md'),'utf8');
+  // Completion policy is repository-wide; test fixtures may supply only their own review rules.
+  const completion=await readFile(resolve(ROOT,'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md'),'utf8');
   rules+='\n\nBINDING EDUCATIONAL COMPLETION POLICY (2026-11-01):\n'+completion+'\nDo not demand universal physician signoff for individually source-verified educational entries. Distinguish educational verification from clinical protocol certification. Only flag a specific entry for human clinical review when concrete unresolved clinical uncertainty or safety risk exists. Do not treat clinicalReview labels alone as a failure. Report actionable, located, source-grounded findings; unsupported claims remain unverified. Never waive real safety concerns.';
  }
  catch{report.status='error_missing_review_rules';return report;}
