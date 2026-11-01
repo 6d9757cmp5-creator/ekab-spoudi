@@ -82,7 +82,7 @@ export function buildReviewPacket(cases){
   reviewRules:'Grade only what the question requires. Ignore spelling unless clinical meaning changes. Explicit negations/doses/safety errors matter. Unclear => uncertain, without a grade. Verify clinical source, do not assume reference is official.',
   students:'Synthetic examples ONLY; not actual learner records',
   containsProvisionalLabels:false,
-  items:cases.map(c=>({caseId:c.id,section:c.section,questionId:c.questionId||null,
+  items:cases.map(c=>({caseId:'R-'+hash(c.id).slice(0,18),section:c.section,questionId:c.questionId||null,
    courseId:c.courseId||null,caseIndex:c.caseIndex??null,
    ...questionDetails(c),studentAnswer:c.answer}))
  };
