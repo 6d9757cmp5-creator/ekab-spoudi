@@ -1,0 +1,26 @@
+name: Offline Greek answer benchmark — no AI usage
+on:
+  push:
+    branches: [main]
+    paths:
+      - functions/answer-grader/greek-answer-fixtures.json
+      - functions/answer-grader/offline-fixtures.test.mjs
+      - functions/answer-grader/source-completeness.mjs
+      - functions/answer-grader/semantic-grading-policy.mjs
+      - .github/workflows/offline-greek-grading.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify 37 Greek written-answer and clinical scenario fixtures without model calls
+        run: |
+          node --test functions/answer-grader/offline-fixtures.test.mjs
+          node --test functions/answer-grader/test.mjs
