@@ -38,6 +38,15 @@ try{
    ensure(await page.locator('#chapterReturn').isVisible(),'back-to-chapter hidden');
    ensure(await page.locator('#anatomyList button').count()>0,'no Greek anatomical names');
  });
+ await check('SAEK deep-link selects thoracic cage rather than tenth rib',async()=>{
+   const r=await page.goto(base+'ui-tools/anatomy-3d/index.html?mode=skeleton&system=skeletal&focus=thorax&from=01&chapter=3',{waitUntil:'domcontentloaded'});
+   ensure(r?.ok(),'thorax viewer HTTP '+r?.status());
+   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,undefined,{timeout:170000});
+   ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
+   ensure((await page.locator('#selectedName').innerText()).trim()==='Θωρακικός κλωβός','cage was not selected as a group');
+   ensure((await page.locator('#detailSystem').innerText()).includes('ομάδα'),'group details missing');
+   ensure(await page.locator('#isolateBtn').isDisabled(),'single rib accidentally selected');
+ });
  await check('Viewer: skeleton, organs and combined buttons',async()=>{
    for(const mode of ['organs','both','skeleton']){
      const b=page.locator('[data-mode="'+mode+'"]');await b.click();
