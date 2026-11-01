@@ -9,6 +9,9 @@ on:
       - 'eoppep.html'
       - 'mentor-ecg.html'
       - 'atla/practice/saek-practice.mjs'
+      - 'atla/ai/**'
+      - 'mentor/ai/client.test.mjs'
+      - 'workers/mentor-chat/**'
       - 'scripts/test-paramedic-hub.mjs'
       - '.github/workflows/atla-paramedic-hub.yml'
   workflow_dispatch:
@@ -23,4 +26,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --check atla/practice/saek-practice.mjs
-      - run: node --test scripts/test-paramedic-hub.mjs atla/contextual-practice.test.mjs
+      - run: node --check atla/ai/teaching-policy.mjs
+      - run: node --check atla/ai/client.mjs
+      - run: node --check workers/mentor-chat/src/index.js
+      - run: node --test scripts/test-paramedic-hub.mjs atla/contextual-practice.test.mjs atla/ai/teaching-policy.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/worker.test.mjs
