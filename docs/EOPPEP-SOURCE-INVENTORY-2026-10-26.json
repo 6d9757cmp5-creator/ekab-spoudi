@@ -6,16 +6,16 @@
     "total": 314,
     "withRecord": 314,
     "withHttps": 314,
-    "documentedSourceCheck": 128,
+    "documentedSourceCheck": 129,
     "historicalTargetedReview": 60,
-    "pendingSpecificPassageCheck": 126,
+    "pendingSpecificPassageCheck": 125,
     "needsMoreSpecificLocation": 12,
-    "withRecordedSpecificReview": 128,
-    "withoutRecordedSpecificReview": 186,
-    "withDocumentedTargetedReview": 188,
-    "withoutDocumentedTargetedReview": 126,
-    "withRecordedSourceCheckedField": 128,
-    "withoutRecordedSourceCheckedField": 186,
+    "withRecordedSpecificReview": 129,
+    "withoutRecordedSpecificReview": 185,
+    "withDocumentedTargetedReview": 189,
+    "withoutDocumentedTargetedReview": 125,
+    "withRecordedSourceCheckedField": 129,
+    "withoutRecordedSourceCheckedField": 185,
     "withNonSpecificIntroSources": 12,
     "newlyVerifiedFromLiveWeb20261026": 18
   },
@@ -7827,30 +7827,36 @@
       "id": "EOP-B-133",
       "group": "B",
       "sourceUrl": "https://www.resus.org.uk/sites/default/files/2022-03/RCUK%20Paediatric%20emergency%20algorithms%20and%20resources%20Mar%2022%20V1.pdf",
-      "sourceLocation": "WHO/ICRC Basic Emergency Care: ABCDE, Trauma, Breathing, Shock, Altered Mental Status, Transfer",
-      "recordedPassageReview": false,
-      "flaggedForFollowUp": [
-        "specific_source_passage_check_required",
-        "no_recorded_specific_passage_review"
+      "sourceLocation": "RCUK, «Paediatric emergency algorithms and resources» (Mar 2022, δόσεις βάσει οδηγιών RCUK 2021), αλγόριθμος αναφυλαξίας: IM αδρεναλίνη 1 mg/mL ανά ηλικία, επανάληψη μετά από 5 λεπτά · όχι επίσημη λύση ΕΟΠΠΕΠ",
+      "recordedPassageReview": true,
+      "flaggedForFollowUp": [],
+      "validationScope": "documented_source_review_not_official_key",
+      "documentedTargetedReview": true,
+      "documentedReviewFields": [
+        "sourceChecked"
       ],
-      "validationScope": "citation_indexed_passage_validation_pending",
-      "documentedTargetedReview": false,
-      "documentedReviewFields": [],
-      "directSourceCheckedField": false,
+      "directSourceCheckedField": true,
       "priorEvidenceLinks": [
-        "https://www.who.int/publications/i/item/basic-emergency-care-approach-to-the-acutely-ill-and-injured"
+        "https://www.resus.org.uk/sites/default/files/2022-03/RCUK%20Paediatric%20emergency%20algorithms%20and%20resources%20Mar%2022%20V1.pdf"
       ],
       "reviewFinding": null,
       "reviewLimit": "Οι προηγούμενες καταγραφές διαφέρουν σε βάθος, προέλευση και συμπέρασμα. Δεν αποτελούν επίσημη αποδοχή απάντησης ή κλινική πιστοποίηση.",
-      "sourceReviewStatus": "citation_indexed_pending_passage_check",
+      "sourceReviewStatus": "documented_source_check",
       "reviewRecordPresent": true,
-      "sourceCheckedField": false,
+      "sourceCheckedField": true,
       "reviewRecordCreated": "2026-10-26",
-      "passagesRecheckedInThisOperation": false,
-      "recordNote": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη.",
-      "sourceCheckEvidence": null,
-      "recordedSourceCheck": null,
-      "sourceReviewStatusDescription": "Καταγράφηκαν η εκφώνηση, η εκπαιδευτική απάντηση και ο δηλωμένος σύνδεσμος. Δεν έχει καταχωριστεί ανεξάρτητη αντιπαραβολή όλων των ισχυρισμών με συγκεκριμένο σημείο της πηγής. Απαιτείται τέτοιος έλεγχος πριν χαρακτηριστεί επαληθευμένη."
+      "passagesRecheckedInThisOperation": true,
+      "recordNote": "Υπάρχει πεδίο sourceChecked (01/11/2026) για τις ηλικιακές δόσεις αδρεναλίνης· ξένη οδηγία, όχι κλινική πιστοποίηση.",
+      "sourceCheckEvidence": {
+        "verifiedOn": "2026-11-01",
+        "checkedTopic": "RCUK anaphylaxis algorithm: IM adrenaline 1 mg/mL doses by age",
+        "sourceUrl": "https://www.resus.org.uk/sites/default/files/2022-03/RCUK%20Paediatric%20emergency%20algorithms%20and%20resources%20Mar%2022%20V1.pdf",
+        "scope": "targeted_educational_check",
+        "notes": "01/11/2026: ανακτήθηκε και διαβάστηκε το PDF της RCUK. Επαληθεύτηκαν οι ηλικιακές δόσεις IM αδρεναλίνης 1 mg/mL (<6 μηνών 100–150 μg, 6 μηνών–6 ετών 150 μg, 6–12 ετών 300 μg, >12 ετών 500 μg) και η επανάληψη μετά από 5 λεπτά. Η δόση κατά βάρος (ASCIA) ΔΕΝ επαληθεύτηκε και αφαιρέθηκε από την απάντηση. Ξένη οδηγία, όχι ελληνικό επιχειρησιακό πρωτόκολλο· εκπαιδευτική τεκμηρίωση, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
+        "independentClinicalSignOff": false
+      },
+      "recordedSourceCheck": "01/11/2026: ανακτήθηκε και διαβάστηκε το PDF της RCUK. Επαληθεύτηκαν οι ηλικιακές δόσεις IM αδρεναλίνης 1 mg/mL (<6 μηνών 100–150 μg, 6 μηνών–6 ετών 150 μg, 6–12 ετών 300 μg, >12 ετών 500 μg) και η επανάληψη μετά από 5 λεπτά. Η δόση κατά βάρος (ASCIA) ΔΕΝ επαληθεύτηκε και αφαιρέθηκε από την απάντηση. Ξένη οδηγία, όχι ελληνικό επιχειρησιακό πρωτόκολλο· εκπαιδευτική τεκμηρίωση, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.",
+      "sourceReviewStatusDescription": "Υπάρχει πεδίο sourceChecked με τη σχετική ανασκόπηση (01/11/2026)."
     },
     {
       "id": "EOP-B-134",
