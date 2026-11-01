@@ -1,0 +1,76 @@
+name: Import CC0 realistic patient models for MENTOR
+on:
+  push:
+    paths:
+      - .github/workflows/import-mentor-patients.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: import-mentor-patients
+  cancel-in-progress: false
+jobs:
+  import-assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download ready-made CC0 GLB models and pinned renderer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p mentor/assets/patients mentor/vendor
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
+            'https://www.innerscene.com/api/library/looking-upward-3d-person-standing-fbf49423/download' \
+            --output mentor/assets/patients/alex-standing.glb
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
+            'https://www.innerscene.com/api/library/daniel-3d-person-lying-flat-820f78f4/download' \
+            --output mentor/assets/patients/daniel-lying.glb
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
+            'https://www.innerscene.com/api/library/amara-3d-person-sitting-up-in-bed-3427c39e/download' \
+            --output mentor/assets/patients/amara-sitting.glb
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 120 \
+            'https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js' \
+            --output mentor/vendor/model-viewer.min.js
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 40 \
+            'https://raw.githubusercontent.com/google/model-viewer/v4.3.1/LICENSE' \
+            --output mentor/vendor/MODEL-VIEWER-LICENSE.txt
+      - name: Verify real binary GLB files and JavaScript
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct,json
+          for name in ['alex-standing','daniel-lying','amara-sitting']:
+              p=Path('mentor/assets/patients')/(name+'.glb')
+              b=p.read_bytes()
+              assert 1000000 < len(b) < 70000000, (name,len(b))
+              magic,version,total=struct.unpack_from('<III',b,0)
+              assert magic==0x46546c67 and version==2 and total==len(b), (name,'invalid GLB header')
+              jlen,jtype=struct.unpack_from('<II',b,12)
+              assert jtype==0x4e4f534a and jlen>10
+              model=json.loads(b[20:20+jlen])
+              assert model.get('meshes'),(name,'no meshes')
+              assert model.get('materials'),(name,'no materials')
+              print('PASS',name,'bytes',len(b),'meshes',len(model['meshes']),'materials',len(model['materials']))
+          assert Path('mentor/vendor/model-viewer.min.js').stat().st_size>100000
+          print('PASS pinned standalone model-viewer 4.3.1')
+          PY
+      - name: Commit verified models into the MENTOR repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mentor/assets/patients/*.glb mentor/vendor/model-viewer.min.js mentor/vendor/MODEL-VIEWER-LICENSE.txt
+          if git diff --staged --quiet; then echo "Assets already committed"; exit 0; fi
+          git commit -m "assets(mentor): install verified textured CC0 patient models and local renderer"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Concurrent main update; retry $attempt"
+            sleep 2
+          done
+          exit 1
