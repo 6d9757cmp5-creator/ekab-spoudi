@@ -3,6 +3,11 @@ on:
   push:
     paths:
       - 'mentor/**'
+      - 'saek.html'
+      - 'saek-adaptive-hub.mjs'
+      - 'saek-exam-engine.js'
+      - 'mentor-library.html'
+      - 'mentor-library.js'
       - 'mentor-lab.html'
       - 'mentor-lab.js'
       - 'mentor-lab.css'
@@ -10,6 +15,11 @@ on:
       - '.github/workflows/mentor-browser-smoke.yml'
   pull_request:
     paths:
+      - 'saek.html'
+      - 'saek-adaptive-hub.mjs'
+      - 'saek-exam-engine.js'
+      - 'mentor-library.html'
+      - 'mentor-library.js'
       - 'mentor-lab.html'
       - 'mentor-lab.js'
       - 'mentor-lab.css'
