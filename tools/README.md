@@ -12,3 +12,15 @@
 | Κοινή εφαρμογή | [shared](shared/) | index.html, navigation.js, app.js, sw.js |
 
 **Κανόνας ανάπτυξης:** Κάθε καινούργιος κώδικας/asset ανήκει σε ένα εργαλείο. Το MENTOR OS παρέχει καθοδήγηση, ο Προσομοιωτής Ασθενών διαχειρίζεται τους ασθενείς και τη σκηνή. Συνδέονται μέσω του event mentor:context, όχι αντιγράφοντας κώδικα. Οι άλλες root λειτουργίες δεν μετακινούνται χωρίς ξεχωριστή έγκυρη δοκιμή και wrappers. Δες τα README κάθε φακέλου.
+
+
+## Ενεργή μεταφορά ειδικών εργαλείων · 2026-11-01
+
+| Ανεξάρτητο εργαλείο | Canonical source | Δημόσια είσοδος | Κατάσταση |
+|---|---|---|---|
+| [3D Ανατομία](anatomy-3d/) | `tools/anatomy-3d/` | `ui-tools/anatomy-3d/index.html` | Viewer/CSS/ελληνική ορολογία/δοκιμές χρησιμοποιούνται από canonical κατάλογο, διατηρούνται παλιές διαδρομές |
+| [Φαρμακολογία](pharmacology/) | `tools/pharmacology/` | `farmaka.html` | 5 ενεργά classic scripts από canonical κατάλογο, τα root παλιά scripts δεν φορτώνονται αλλά διατηρούνται ιστορικά |
+| [Σεμινάρια](seminars/) | `tools/seminars/` | `seminar-prep.html` | Εκπαιδευτικό υλικό/engine/CSS από canonical κατάλογο, κοινό sync και AI παραμένουν στα shared |
+| [ECG Lab](ecg-lab/) | `tools/ecg-lab/` | `mentor-ecg.html` | Πλήρης μεταφορά engine, UI, unit tests· παλιά paths μικρές γέφυρες |
+
+Οι παραπάνω μεταφορές είναι **αρχιτεκτονικές**: δεν προσθέτουν κλινική επικύρωση ούτε αλλάζουν το αποθηκευμένο μαθητικό σκορ. Τα HTML URLs και η αρχική της ΕΚΑΒ Σπουδή παραμένουν στη ρίζα. Δοκιμή διαχωρισμού `scripts/verify-specialized-tools.mjs`.

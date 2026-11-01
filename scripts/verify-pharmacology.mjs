@@ -1,7 +1,7 @@
 // Static clinical-content gate. Does NOT certify medical/SmPC accuracy.
 import fs from 'node:fs';
 import vm from 'node:vm';
-const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const read=p=>fs.readFileSync(new URL('../'+(/^farmaka-[a-z0-9-]+\.js$/.test(p)?'tools/pharmacology/':'')+p,import.meta.url),'utf8');
 const failures=[];
 const fail=m=>failures.push(m);
 const win={};
@@ -97,7 +97,7 @@ for(const f of ['index.html','saek.html','practical_exam.html']){
  if(!read(f).includes('href="farmaka.html"'))fail('Pharmacology missing from menu: '+f);
 }
 const sw=read('sw.js');
-for(const f of ['farmaka.html','farmaka-catalog.js','farmaka-clinical-2026.js','farmaka-ui.js'])if(!sw.includes('"./'+f+'"'))fail('Offline cache missing '+f);
+for(const f of ['farmaka.html','farmaka-catalog.js','farmaka-clinical-2026.js','farmaka-ui.js'])if(!sw.includes('"./'+(f==='farmaka.html'?f:'tools/pharmacology/'+f)+'"'))fail('Offline cache missing '+f);
 const version=JSON.parse(read('version.json')).version;
 if(!sw.includes('ekab-spoudi-v'+version))fail('SW release mismatch');
 if(!read('updates.js').includes("CURRENT='"+version+"'"))fail('Update controller mismatch');
@@ -110,7 +110,7 @@ if(!ui.includes("var quiz = ["))fail('Self-assessment quiz not found');
 if(!page.includes('id="scopeLegend"')||!page.includes('Τι σημαίνουν τα 3 χρώματα;'))fail('Scope legend must be concise and discoverable');
 if(!page.includes('id="clinicalThinking"')||!page.includes('id="phCaseStage"'))fail('Clinical thinking quiz panel missing');
 if(!page.includes('farmaka-adaptive-bank.js?v=')||!page.includes('farmaka-cases.js?v='))fail('Adaptive scripts not loaded by page');
-if(!sw.includes('"./farmaka-cases.js"')||!sw.includes('"./farmaka-adaptive-bank.js"'))fail('Adaptive bank not cached offline');
+if(!sw.includes('"./tools/pharmacology/farmaka-cases.js"')||!sw.includes('"./tools/pharmacology/farmaka-adaptive-bank.js"'))fail('Adaptive bank not cached offline');
 if(!page.includes('Η ανεξάρτητη κλινική έγκριση εκκρεμεί'))fail('Medical disclaimer removed');
 if(failures.length){console.error('❌ Pharmacology: '+failures.length+' problems\n'+failures.join('\n'));process.exitCode=1;}
 else console.log('✅ Pharmacology structure: '+lib.medicines.length+' cards, 11 categories, three permission scopes, 152 adaptive 5-at-a-time scenarios, source links, 12-question teaching module, navigation, offline and release consistency. NOTE: this does not mean independent clinical/SmPC approval.');

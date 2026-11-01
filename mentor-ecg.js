@@ -1,2 +1,2 @@
-/** Stable public entrypoint — implementation: mentor/app/ecg.js. */
-import './mentor/app/ecg.js';
+/** Stable public ECG entrypoint — canonical owner tools/ecg-lab. */
+import './tools/ecg-lab/app/ecg.js';
