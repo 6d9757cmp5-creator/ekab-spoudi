@@ -8,7 +8,7 @@ on:
       - 'tools/anatomy-3d/resources/catalog.json'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   anatomy-resource-pack:
     runs-on: ubuntu-latest
@@ -35,3 +35,15 @@ jobs:
             tools/anatomy-3d/resources/imported-manifest.json
           retention-days: 30
           if-no-files-found: error
+      - name: Publish verified models to Anatomy Lab resource folders
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/anatomy-3d/resources/hra-v1.2 tools/anatomy-3d/resources/imported-manifest.json
+          if git diff --cached --quiet; then
+            echo "Verified models already present"
+          else
+            git commit -m "assets(anatomy): add validated CC-BY HRA models by region"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
