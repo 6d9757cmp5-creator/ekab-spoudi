@@ -1,0 +1,41 @@
+name: Import official BodyParts3D 4.0 regional set
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-bp3d40.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-bp3d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download official 4.0 source and convert anatomical mesh archives
+        run: node tools/anatomy-3d/vendor/open-anatomy-atlas/tools/fetch-data.js --source bp3d40 --core --dir "$PWD/tools/anatomy-3d/resources/bp3d40"
+      - name: Verify anatomy index is populated
+        run: node -e "const fs=require('fs');let p='tools/anatomy-3d/resources/bp3d40/atlases/bp3d40/build/';const x=JSON.parse(fs.readFileSync(p+'index.json','utf8'));if((x.counts?.elements||0)<10||fs.statSync(p+'meshes.bin').size<1024)process.exit(1);console.log(x.counts)"
+      - name: Upload original archive and built atlas
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-official-bp3d-4-0-regional
+          path: tools/anatomy-3d/resources/bp3d40/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Commit research anatomy models
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/anatomy-3d/resources/bp3d40/
+          if git diff --cached --quiet; then
+            echo "Already present"
+          else
+            git commit -m "assets(anatomy): import official BodyParts3D 4.0 regional meshes"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
