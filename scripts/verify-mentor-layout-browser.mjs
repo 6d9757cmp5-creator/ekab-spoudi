@@ -81,8 +81,9 @@ try{
  assert.equal(overflow,false,'Cockpit ATLAS entry must not cause horizontal overflow on mobile');
  // ATLA Paramedic contextual links: real DOM interactions (not just file-string assertions).
  await page.goto(base+'saek-course-01.html#lesson-10',{waitUntil:'domcontentloaded'});
- await page.locator('#lesson-10 .atlas-chapter-practice > summary').waitFor({timeout:20000});
+ await page.locator('#lesson-10').waitFor({state:'attached',timeout:20000});
  await page.locator('#lesson-10').evaluate(el=>{el.open=true;});
+ await page.locator('#lesson-10 .atlas-chapter-practice > summary').waitFor({timeout:20000});
  await page.locator('#lesson-10 .atlas-chapter-practice > summary').click();
  assert.equal(await page.locator('#lesson-10 .atlas-practice-link').count(),0,'No unwanted 3D CTA before learner consent');
  await page.locator('#lesson-10 .atlas-practice-actions button').filter({hasText:'Θέλω να εξασκηθώ'}).click();
@@ -90,8 +91,9 @@ try{
  assert.match(heartHref,/focus=heart&from=01&chapter=10/,'Heart lesson must target the real viewer');
  assert.equal(await page.locator('#lesson-1 .atlas-practice-link').count(),0,'Unrelated anatomy chapter has no 3D CTA');
  await page.goto(base+'saek-course-02.html#lesson-7',{waitUntil:'domcontentloaded'});
- await page.locator('#lesson-7 .atlas-chapter-practice > summary').waitFor({timeout:20000});
+ await page.locator('#lesson-7').waitFor({state:'attached',timeout:20000});
  await page.locator('#lesson-7').evaluate(el=>{el.open=true;});
+ await page.locator('#lesson-7 .atlas-chapter-practice > summary').waitFor({timeout:20000});
  await page.locator('#lesson-7 .atlas-chapter-practice > summary').click();
  await page.locator('#lesson-7 .atlas-practice-actions button').filter({hasText:'Θέλω να εξασκηθώ'}).click();
  const ecgHref=await page.locator('#lesson-7 .atlas-practice-link').getAttribute('href');
