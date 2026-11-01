@@ -29,4 +29,4 @@ jobs:
       - run: node --check atla/ai/teaching-policy.mjs
       - run: node --check atla/ai/client.mjs
       - run: node --check workers/mentor-chat/src/index.js
-      - run: node --test scripts/test-paramedic-hub.mjs atla/contextual-practice.test.mjs atla/ai/teaching-policy.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/worker.test.mjs
+      - run: node --test scripts/test-paramedic-hub.mjs atla/contextual-practice.test.mjs atla/ai/teaching-policy.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/*.test.mjs
