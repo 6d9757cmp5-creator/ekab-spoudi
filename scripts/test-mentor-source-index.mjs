@@ -61,6 +61,40 @@ test('Greek accents and Latin queries filter catalog without accessing content',
  assert.deepEqual(filterCatalog(items,{query:'εκδοτησ-δεν-υπαρχει'}),[]);
  assert.throws(()=>filterCatalog(items,{stage:'approved'}),/Invalid bibliography filter/);
 });
+test('ATLA topic navigation connects each of 16 pathways only to sources in its own study track',async()=>{
+ const data=JSON.parse(await readFile(source,'utf8'));
+ const roadmap=JSON.parse(await readFile(new URL('../mentor/library/study-paths.json',import.meta.url),'utf8'));
+ const queue=JSON.parse(await readFile(new URL('../mentor/library/enrichment-queue.json',import.meta.url),'utf8'));
+ assert.equal(roadmap.schema_version,1);
+ assert.equal(roadmap.sections.length,16);
+ assert.equal(roadmap.sections.filter(s=>s.track==='paramedic').length,8);
+ assert.equal(roadmap.sections.filter(s=>s.track==='medicine').length,8);
+ const map=new Map(data.sources.map(s=>[s.id,s]));
+ for(const section of roadmap.sections){
+   assert.ok(section.learning_goal && section.source_ids.length>=2);
+   assert.equal(section.review_status,'curriculum-map-draft');
+   assert.equal(section.chapter_level_verified,false);
+   for(const id of section.source_ids){
+     const source=map.get(id);
+     assert.ok(source,'Unknown source '+id);
+     assert.ok(source.learning_tracks.includes(section.track),'Wrong teaching track '+id);
+   }
+ }
+ assert.equal(queue.candidates.length,13);
+ for(const item of queue.candidates){
+   assert.equal(item.status,'source_verified');
+   assert.equal(item.added_to_source_index,true);
+   assert.equal(item.imported,false);
+   assert.equal(item.clinical_approval,false);
+   assert.equal(map.get(item.catalog_source_id)?.source_url,item.source_url);
+ }
+ const html=await readFile(new URL('../mentor-library.html',import.meta.url),'utf8');
+ const js=await readFile(new URL('../mentor-library.js',import.meta.url),'utf8');
+ assert.match(html,/id="study-paths"/);
+ assert.match(js,/study-paths\.json/);
+ assert.match(js,/renderPaths/);
+ assert.doesNotMatch(js,/localStorage|sessionStorage|indexedDB|innerHTML/);
+});
 test('fail closed on fake clinical approval, source duplication, unsafe text fields and mismatched counts',async()=>{
  const data=JSON.parse(await readFile(source,'utf8'));
  const tamper=mutate=>{const x=structuredClone(data);mutate(x);assert.throws(()=>assertPublicCatalog(x));};
