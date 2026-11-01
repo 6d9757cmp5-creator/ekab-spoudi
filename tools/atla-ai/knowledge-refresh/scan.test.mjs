@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,main} from './scan.mjs';
+import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 
 function response(json){
  return {ok:true,status:200,headers:new Headers({'etag':'"example-v1"','last-modified':'Sun, 01 Nov 2026 12:00:00 GMT'}),
@@ -11,8 +12,8 @@ function stub(url,options={}){
  const u=new URL(String(url));
  if(u.pathname.endsWith('/esearch.fcgi'))return Promise.resolve(response({esearchresult:{idlist:['12345678','12345679']}}));
  if(u.pathname.endsWith('/esummary.fcgi'))return Promise.resolve(response({
-  result:{uids:['12345678','12345679'],12345678:{title:'Evidence-based prehospital training review',pubdate:'2026 Nov 01',source:'Research Journal'},
-   12345679:{title:'Resuscitation training systematic review',pubdate:'2026 Nov 02',source:'Evidence Review'}}
+  result:{uids:['12345678','12345679'],12345678:{title:'Evidence-based prehospital training review',pubdate:'2026 Nov 01',source:'Research Journal',pubtype:['Systematic Review'],articleids:[{idtype:'doi',value:'10.1234/review'}]},
+   12345679:{title:'Resuscitation training systematic review',pubdate:'2026 Nov 02',source:'Evidence Review',pubtype:['Practice Guideline']}}
  }));
  throw Error('Unexpected endpoint '+u.pathname);
 }
@@ -28,7 +29,7 @@ test('source watchlist deduplicates registries and rejects outside domains',()=>
 });
 test('new papers remain pending; no approval or AI retrieval is possible from discovery',()=>{
  const now='2026-11-02T02:15:00.000Z';
- const x=mergeCandidates([], [{pmid:'12345678',title:'Research title',journal:'Journal',published_at:'2026-11-01',topic_id:'prehospital'}],now);
+ const x=mergeCandidates([], [{pmid:'12345678',title:'Research title',journal:'Journal',published_at:'2026-11-01',topic_id:'prehospital',publication_types:['Systematic Review']}],now);
  assert.equal(x.added,1);
  const p=x.items[0];
  assert.equal(p.status,'pending-review');
@@ -36,8 +37,8 @@ test('new papers remain pending; no approval or AI retrieval is possible from di
  assert.equal(p.clinical_approval,false);
  assert.equal(p.atla_ai_retrieval_enabled,false);
  assert.equal(p.first_detected,now);
- assert.equal(mergeCandidates(x.items,[{pmid:'12345678',title:'Same',topic_id:'trauma'}],'2026-11-03').added,0);
- assert.deepEqual(mergeCandidates(x.items,[{pmid:'12345678',title:'Same',topic_id:'trauma'}],'2026-11-03').items[0].topic_ids,['prehospital','trauma']);
+ assert.equal(mergeCandidates(x.items,[{pmid:'12345678',title:'Same',journal:'Journal',published_at:'2026-11-01',publication_types:['Systematic Review'],topic_id:'trauma'}],'2026-11-03').added,0);
+ assert.deepEqual(mergeCandidates(x.items,[{pmid:'12345678',title:'Same',journal:'Journal',published_at:'2026-11-01',publication_types:['Systematic Review'],topic_id:'trauma'}],'2026-11-03').items[0].topic_ids,['prehospital','trauma']);
 });
 test('changed HTTP validators signal only possible source update',()=>{
  assert.equal(signalFor(null,{ok:true,etag:'a'}),'baseline');
@@ -70,4 +71,35 @@ test('fail closed when PubMed is down',async()=>{
  assert.equal(r.metadata.pubmed_failures.length,3);
  assert.equal(r.metadata.newly_discovered_papers,0);
  assert.equal(r.metadata.clinical_retrieval_updated,false);
+});
+
+
+test('global source ownership verified by exact domain; GitHub and PubMed are not clinical endorsements',()=>{
+ const who=classifySource('https://www.who.int/publications/i/item/9781234');
+ assert.equal(who.accepted,true);
+ assert.equal(who.clinical_use_approved,false);
+ assert.equal(who.medical_knowledge_ingestion_allowed,false);
+ assert.equal(classifySource('https://www.who.int.evil.example/page').accepted,false);
+ assert.equal(classifySource('https://www.who.int@evil.example/page').accepted,false);
+ assert.equal(classifySource('http://www.who.int/guidelines').accepted,false);
+ assert.equal(classifySource('https://tiktok.com/medical-advice').accepted,false);
+ assert.equal(classifySource('https://reddit.com/r/medicine').accepted,false);
+ assert.equal(classifySource('https://github.com/arbitrary-user/medical-facts').accepted,false);
+ const repo=classifySource('https://github.com/Z-Anatomy/Models-of-human-anatomy');
+ assert.equal(repo.accepted,true);
+ assert.equal(repo.category,'technical-research-assets-not-clinical-guidance');
+ assert.equal(classifySource('https://www.ncbi.nlm.nih.gov/books/').category,'academic-repository-unendorsed');
+ assert.equal(classifySource('https://shop.elsevier.com/books/a').category,'official-textbook-publisher-metadata-only');
+});
+test('article screening blocks retraction, preprint, case report, editorial and uncertain indexing',()=>{
+ const base={pmid:'23456789',title:'Systematic review of training',published_at:'2026 Nov 01',journal:'Science',publication_types:['Systematic Review']};
+ assert.equal(screenPubMedArticle(base).accepted,true);
+ for(const type of ['Retracted Publication','Retraction of Publication','Preprint','Case Reports','Editorial','Published Erratum']){
+  assert.equal(screenPubMedArticle({...base,publication_types:['Systematic Review',type]}).accepted,false,type);
+ }
+ assert.equal(screenPubMedArticle({...base,title:'RETRACTED: Systematic review'}).accepted,false);
+ assert.equal(screenPubMedArticle({...base,publication_types:[]}).accepted,false);
+ assert.equal(screenPubMedArticle({...base,journal:''}).accepted,false);
+ assert.equal(screenPubMedArticle({...base,publication_types:['Randomized Controlled Trial']}).accepted,false,'RCT needs separate evaluator in future');
+ assert.equal(mergeCandidates([], [{...base,title:'RETRACTED: Review',topic_id:'trauma'}],'2026-11-02').items.length,0);
 });
