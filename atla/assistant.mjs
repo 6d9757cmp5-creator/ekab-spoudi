@@ -8,7 +8,7 @@ import {askAi,buildPayload} from '../mentor/ai/client.mjs';
 import {MENTOR_AI,mentorAiHeaders} from '../mentor/ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from '../mentor/presence/memory.mjs';
 import {examMode} from '../mentor/context/bridge.mjs';
-import {SOURCES,transformSource,searchRecords} from '../mentor/core/read-only-index.mjs';
+import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
