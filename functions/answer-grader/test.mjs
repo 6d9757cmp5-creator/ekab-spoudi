@@ -294,3 +294,25 @@ test('grammar-only AI rejection is left ungraded; genuine clinical omissions rem
  const partial={...grade,verdict:'partial',correctPoints:['Σωστό σημείο'],missingPoints:['Λείπει η βασική εκτίμηση αναπνοής'],explanation:'Λείπει βήμα'};
  assert.equal(cautiouslyCheckGrade(partial).verdict,'partial');
 });
+
+test('source-aware safety guard blocks a false full-credit SAEK verdict in the actual Appwrite HTTP handler',async()=>setup(async()=>{
+ globalThis.fetch=async()=>response({...grade,verdict:'correct',explanation:'Αυθαίρετα πλήρης βαθμολογία'});
+ const unsafe=await invoke({section:'saek',questionId:'saek-16-10',
+   answer:'Στην επιληπτική κρίση βάζουμε κουτάλι στο στόμα του ασθενούς.'},'danger-incorrectly-approved');
+ assert.equal(unsafe.status,200);
+ assert.equal(unsafe.body.verdict,'uncertain');
+ assert.match(unsafe.body.safetyNote,/αντικείμενο|Αντικείμενο/);
+ assert.equal(unsafe.body.criticalError,false);
+ const safe=await invoke({section:'saek',questionId:'saek-16-10',
+   answer:'Δεν βάζουμε κουτάλι στο στόμα ασθενούς με επιληπτική κρίση γιατί μπορεί να τον τραυματίσουμε.'},'danger-safe-answer');
+ assert.equal(safe.status,200);
+ assert.equal(safe.body.verdict,'correct');
+}));
+test('source-aware guard catches unsupported full-credit on a wrong pulmonary artery origin',async()=>setup(async()=>{
+ globalThis.fetch=async()=>response({...grade,verdict:'correct'});
+ const result=await invoke({section:'eoppep',questionId:'EOP-A-018',
+   answer:'Η πνευμονική αρτηρία ξεκινά από την αριστερή κοιλία.'},'reversed-anatomy');
+ assert.equal(result.status,200);
+ assert.equal(result.body.verdict,'uncertain');
+ assert.match(result.body.safetyNote,/πνευμονικ/);
+}));
