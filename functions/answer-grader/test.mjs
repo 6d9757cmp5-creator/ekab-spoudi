@@ -231,8 +231,8 @@ test('all optional written assessment surfaces invoke the same safe client',()=>
  const oral=readFileSync(new URL('../../mentor-oral.html',import.meta.url),'utf8');
  const script=readFileSync(new URL('../../old_type_written.js',import.meta.url),'utf8');
  const oralScript=readFileSync(new URL('../../mentor/app/oral.js',import.meta.url),'utf8');
- assert.match(html,/ai-grading-client\\.js/);assert.match(html,/id="ai-grade"/);
- assert.match(oral,/ai-grading-client\\.js/);assert.match(oral,/id="oral-grade-ai"/);
+ assert.match(html,/ai-grading-client\.js/);assert.match(html,/id="ai-grade"/);
+ assert.match(oral,/ai-grading-client\.js/);assert.match(oral,/id="oral-grade-ai"/);
  assert.match(script,/section:'old_written'/);assert.match(oralScript,/section:'mentor_oral'/);
- assert.match(oralScript,/examBox\\.checked/);
+ assert.match(oralScript,/examBox\.checked/);
 });
