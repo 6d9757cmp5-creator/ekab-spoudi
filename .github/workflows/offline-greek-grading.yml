@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify 300 Greek written-answer and clinical scenario fixtures without model calls
+      - name: Verify 800 Greek answer fixtures including 250 source-preserving spelling pairs
         run: |
           node --test functions/answer-grader/offline-fixtures.test.mjs
           node --test functions/answer-grader/test.mjs
