@@ -167,7 +167,8 @@ async function loadRegistries(){
   {id:'books',path:'mentor/library/source-index.json'},
   {id:'knowledge',path:'mentor/knowledge/sources.json'},
   {id:'clinical-ai',path:'mentor/clinical-desk/sources.json'},
-  {id:'past-project-sources',path:'tools/atla-ai/knowledge-refresh/watchlist.json'}
+  {id:'past-project-sources',path:'tools/atla-ai/knowledge-refresh/watchlist.json'},
+  {id:'global-official-evidence',path:'tools/atla-ai/knowledge-refresh/global-official-sources.json'}
  ];
  const registries=[];
  for(const item of paths){
