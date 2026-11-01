@@ -87,7 +87,7 @@ export function caseProgress(store){
 }
 export function saveSession(store,s){
  if(!validSession(s))throw Error('invalid-session');
- try{const candidate=JSON.parse(store.getItem(LIBRARY_KEY));const prior=candidate&&typeof candidate==='object'&&!Array.isArray(candidate)?candidate:{};
+ try{let prior={};try{const candidate=JSON.parse(store.getItem(LIBRARY_KEY)||'{}');if(candidate&&typeof candidate==='object'&&!Array.isArray(candidate))prior=candidate;}catch{}
   const sessions={};for(const c of CASES){if(validSession(prior[c.id]))sessions[c.id]=prior[c.id];}
   sessions[s.caseId]=s;
   store.setItem(LIBRARY_KEY,JSON.stringify(sessions));store.setItem(STORE_KEY,JSON.stringify(s));return true;
