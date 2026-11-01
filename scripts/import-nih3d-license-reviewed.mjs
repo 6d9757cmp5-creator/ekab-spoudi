@@ -35,6 +35,7 @@ async function query(url){
 }
 const found=[],errors=[];
 for(let id=start;id<=end;id++){
+ if(argv.includes('--audit-only'))await wait(350); // NIH 3D source metadata: low-rate, no binary download.
  try{
   const response=await query('https://3d.nih.gov/api/entries/'+id);
   if(!response.ok){if(response.status!==404)errors.push({id,status:response.status});continue;}
