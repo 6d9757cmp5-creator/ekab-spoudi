@@ -104,6 +104,20 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  if(!paths.length)return report;
  let rules;try{rules=await readFile(resolve(root,RULES),'utf8');}
  catch{report.status='error_missing_review_rules';return report;}
+ // Cost control: identical text (same rules + same chunk) is never sent twice, and a run
+ // spends at most MAX_CALLS paid calls; the rest stays honestly pending for the next run.
+ const cacheFile=process.env.AUDIT_CACHE_FILE||'',maxCalls=Number(process.env.AUDIT_MAX_CALLS||40);
+ let cache={},spent=0,cacheDirty=false;
+ if(cacheFile){try{cache=JSON.parse(await readFile(resolve(root,cacheFile),'utf8'));}catch{cache={};}}
+ const cached=async(path,mode,text)=>{
+  const id=createHash('sha256').update(rules+'|'+text).digest('hex');
+  if(cache[id])return cache[id];
+  if(spent>=maxCalls)throw Error('review_budget_exhausted');
+  spent++;
+  const r=await askChunk(key,rules,path,mode,text,fetchImpl,sleep);
+  if(cacheFile){cache[id]=r;cacheDirty=true;}
+  return r;
+ };
  let active=0;const waiting=[];
  const slot=async fn=>{
   if(active>=CONCURRENCY)await new Promise(r=>waiting.push(r));
@@ -130,14 +144,14 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
    report.pending.push({path,reason:dryRun?'dry_run':'review_key_missing'});
   }else{
    try{
-    const parts=await Promise.all(used.map((text,i)=>slot(()=>askChunk(key,rules,path,mode+(used.length>1?' part '+(i+1)+'/'+used.length:''),text,fetchImpl,sleep))));
+    const parts=await Promise.all(used.map((text,i)=>slot(()=>cached(path,mode+(used.length>1?' part '+(i+1)+'/'+used.length:''),text))));
     entry.status='screened';entry.checked_scope=parts.map(r=>r.checked_scope).join(' | ').slice(0,600);
     entry.unverified=parts.flatMap(r=>r.unverified);entry.not_checked=parts.flatMap(r=>r.not_checked);entry.findings=parts.flatMap(r=>r.findings);
     report.reviewed_count++;report.findings.push(...entry.findings.map(x=>({...x,path})));
     if(entry.unverified.length||entry.not_checked.length)report.pending.push({path,reason:'requires_source_or_scope_verification'});
    }catch(err){
     entry.status='error';entry.error=String(err.message||'review_error').slice(0,140);
-    report.pending.push({path,reason:'review_failed'});
+    report.pending.push({path,reason:entry.error==='review_budget_exhausted'?'review_budget_exhausted':'review_failed'});
    }
   }
   report.files.push(entry);
@@ -145,6 +159,8 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  const queue=paths.slice(0,MAX_FILES);
  await Promise.all(queue.map(reviewOne));
  report.files.sort((a,b)=>a.path<b.path?-1:1);
+ report.paid_calls=spent;
+ if(cacheFile&&cacheDirty){await mkdir(dirname(resolve(root,cacheFile)),{recursive:true});await writeFile(resolve(root,cacheFile),JSON.stringify(cache),'utf8');}
  report.status=report.pending.length?'incomplete':report.findings.some(f=>['CRITICAL','HIGH'].includes(f.severity))?
   'requires_correction':report.findings.length?'findings_to_review':'screened';
  return report;

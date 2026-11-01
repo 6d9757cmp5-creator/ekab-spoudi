@@ -145,3 +145,25 @@ test('rate limit is retried and a truncated answer is split in halves',async()=>
  const dead=async()=>({ok:false,status:429,headers:new Headers(),json:async()=>({})});
  await assert.rejects(askChunk('k','r','p.md','m','t',dead,async()=>{}),/http_429/);
 });
+
+test('identical text is cached and a run never exceeds its paid-call budget',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'rev-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'rules');
+  const names=['a.md','b.md','c.md'];
+  for(const n of names)await writeFile(join(root,n),'unique '+n);
+  let calls=0;
+  const ok=async()=>{calls++;return {ok:true,json:async()=>({stop_reason:'end_turn',content:[{type:'text',
+   text:JSON.stringify({checked_scope:'x',findings:[],unverified:[],not_checked:[]})}]})};};
+  process.env.ANTHROPIC_API_KEY='test';process.env.AUDIT_CACHE_FILE='cache.json';process.env.AUDIT_MAX_CALLS='2';
+  const first=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(calls,2);assert.equal(first.paid_calls,2);
+  assert.ok(first.pending.some(p=>p.reason==='review_budget_exhausted'));
+  const second=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(calls,3,'only the one uncached file is sent');
+  assert.equal(second.status,'screened');
+  const third=await runReview({manual:names.join(','),root,fetchImpl:ok});
+  assert.equal(calls,3);assert.equal(third.paid_calls,0);
+ }finally{for(const k of ['ANTHROPIC_API_KEY','AUDIT_CACHE_FILE','AUDIT_MAX_CALLS'])delete process.env[k];await rm(root,{recursive:true,force:true});}
+});
