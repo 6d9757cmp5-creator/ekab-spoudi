@@ -60,7 +60,7 @@ jobs:
           test -d "$dir" || exit 1
           test "$(find "$dir" -maxdepth 1 -name '*-RESULT.json' | wc -l)" -gt 0 || exit 1
           shopt -s nullglob
-          for file in "$dir"/*.tar.zst "$dir"/*-RESULT.json; do
+          for file in "$dir"/*.tar.zst* "$dir"/*-RESULT.json; do
             gh release upload "$TAG" "$file" --clobber
           done
   report:
