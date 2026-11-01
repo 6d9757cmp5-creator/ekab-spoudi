@@ -8,6 +8,9 @@ on:
       - functions/answer-grader/offline-fixtures.test.mjs
       - functions/answer-grader/saek-exam-rubrics.json
       - scripts/report-greek-grading-coverage.mjs
+      - scripts/prepare-greek-educator-review.mjs
+      - scripts/evaluate-greek-educator-review.mjs
+      - scripts/test-greek-educator-review.mjs
       - functions/answer-grader/source-completeness.mjs
       - functions/answer-grader/semantic-grading-policy.mjs
       - .github/workflows/offline-greek-grading.yml
@@ -28,11 +31,23 @@ jobs:
           node --test functions/answer-grader/offline-fixtures.test.mjs
           node --test functions/answer-grader/test.mjs
           node scripts/report-greek-grading-coverage.mjs
+          node --test scripts/test-greek-educator-review.mjs
+          node scripts/prepare-greek-educator-review.mjs
+          node scripts/evaluate-greek-educator-review.mjs
       - name: Save inspectable Greek grading coverage report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: greek-answer-coverage
           path: audit-results/greek-grading-coverage.json
+          
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Upload blinded 120-case review pack and empty review result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: greek-blind-educator-review
+          path: audit-results/educator-review/
           if-no-files-found: warn
           retention-days: 30
