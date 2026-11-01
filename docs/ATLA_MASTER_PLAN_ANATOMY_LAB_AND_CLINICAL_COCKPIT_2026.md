@@ -113,3 +113,9 @@
 - Εκτέλεση: `.github/workflows/atla-nih3d-model-archive.yml`, αυτόματα μετά τη συμπλήρωση της NIH 3D καταλογογράφησης, με πραγματική αναφορά αποτυχιών. Δοκιμή μικρής κλίμακας: `.github/workflows/atla-nih3d-mirror-pilot.yml`.
 - **Προσοχή στον αποθηκευτικό χώρο:** Το GitHub αρνήθηκε εγγραφή Release με HTTP 403 για το workflow token. Υπάρχει fallback σε GitHub Actions artifacts με περιορισμένη διατήρηση· **δεν ισοδυναμεί με μόνιμη αρχειοθέτηση όλων των binaries**. Για μόνιμη αποθήκευση μεγάλης κλίμακας χρειάζεται εξουσιοδοτημένο GitHub Release ή ανεξάρτητο object storage.
 - Η αναφορά `docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md` πρέπει να βασίζεται μόνο σε επιτυχώς μεταφερμένα πραγματικά assets και όχι σε scripts, προγραμματισμένα batches ή downloaded-but-not-preserved προσωρινά δεδομένα.
+
+### NIH 3D — Μόνιμη αποθήκευση και δικαιώματα GitHub
+
+Η καταλογογράφηση και η συμπίεση έχουν εκτελεστεί σε πιλοτική κλίμακα: 113 πρωτότυπα NIH output files σε τρία lossless tar.zst packs, εντός προσωρινού GitHub Actions artifact 2,48 GB. Η προσωρινή αποθήκευση **δεν** είναι ολοκληρωμένη μεταφορά όλων των πόρων.
+Οι εργασίες GitHub έλαβαν 403 σε Releases και `denied` σε GHCR. Δεν παρακάμπτουμε τον μηχανισμό πρόσβασης. Η παραγωγική διαδικασία υποστηρίζει **εξωτερικό S3-compatible object storage** με πιστοποιημένο PutObject/HeadObject και SHA-256. Πριν εκκινήσουν τα 250 archive shards απαιτείται ρυθμισμένος, εγκεκριμένος χώρος με επαρκή χωρητικότητα και δικαιώματα.
+Ακριβείς οδηγίες, secrets, όρια και κατάσταση: [ATLA_NIH3D_DURABLE_STORAGE_2026.md](ATLA_NIH3D_DURABLE_STORAGE_2026.md). Μέχρι τότε **η πλήρης μεταφορά είναι μπλοκαρισμένη, όχι ολοκληρωμένη**.
