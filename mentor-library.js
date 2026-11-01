@@ -7,6 +7,7 @@ const queryInput=document.getElementById('source-search');
 const stageSelect=document.getElementById('source-stage');
 const trackSelect=document.getElementById('source-track');
 const visible=document.getElementById('sources-visible');
+const studyPaths=document.getElementById('study-paths');
 const el=(tag,text)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;return x;};
 function sourceCard(item){
   const li=el('li');li.className='source-card';
@@ -41,11 +42,52 @@ try{
   const sources=assertPublicCatalog(data);
   const extracted=sources.filter(s=>s.extracted_for_review).length;
   counts.append(el('span',sources.length+' μοναδικές πηγές'),el('span',sources.filter(s=>s.learning_tracks.includes('paramedic')).length+' για Paramedic'),el('span',sources.filter(s=>s.learning_tracks.includes('medicine')).length+' για Ιατρική'),el('span',extracted+' κείμενα εξαγμένα για έλεγχο'),el('span','0 κλινικά εγκεκριμένες'));
+  // These original study routes are metadata links, never imported medical claims.
+  let modules=[];
+  try{
+    const answer=await fetch('./mentor/library/study-paths.json',{cache:'no-store'});
+    if(answer.ok){
+      const map=await answer.json();
+      const ids=new Map(sources.map(s=>[s.id,s]));
+      if(map.schema_version!==1||!Array.isArray(map.sections)||map.sections.length>100)throw Error('Invalid study map');
+      for(const part of map.sections){
+        if(!['paramedic','medicine'].includes(part.track)||!Array.isArray(part.source_ids)||!part.source_ids.length||
+           !part.source_ids.every(id=>ids.get(id)?.learning_tracks.includes(part.track)))throw Error('Unmapped study source');
+      }
+      modules=map.sections;
+    }
+  }catch(error){
+    studyPaths.append(el('p','Ο θεματικός οδηγός δεν είναι διαθέσιμος προς το παρόν.'));
+  }
+  const renderPaths=()=>{
+    if(!modules.length)return;
+    const isAll=trackSelect.value==='all';
+    const matching=modules.filter(m=>isAll||m.track===trackSelect.value);
+    const shown=isAll?[
+      ...matching.filter(x=>x.track==='paramedic').slice(0,2),
+      ...matching.filter(x=>x.track==='medicine').slice(0,2)
+    ]:matching;
+    studyPaths.replaceChildren();
+    for(const m of shown){
+      const section=el('article');section.className='study-path';
+      section.append(el('h3',m.title));
+      section.append(el('p','Διαδρομή: '+(m.track==='paramedic'?'Paramedic':'Ιατρική')));
+      section.append(el('p',m.learning_goal));
+      const ul=el('ul');
+      for(const id of m.source_ids){
+        const source=ids.get(id),li=el('li'),link=el('a',source.title);
+        link.href=source.source_url;link.target='_blank';link.rel='noopener noreferrer';
+        li.append(link);ul.append(li);
+      }
+      section.append(ul);studyPaths.append(section);
+    }
+  };
   const render=()=>{
     const matches=filterCatalog(sources,{query:queryInput.value,stage:stageSelect.value,track:trackSelect.value});
     list.replaceChildren(...matches.map(sourceCard));
     visible.textContent='Εμφανίζονται '+matches.length+' από '+sources.length+' πηγές.';
     if(!matches.length)list.append(el('li','Δεν βρέθηκαν πηγές με αυτά τα κριτήρια.'));
+    renderPaths();
   };
   queryInput.addEventListener('input',render);
   stageSelect.addEventListener('change',render);
