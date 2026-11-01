@@ -166,8 +166,7 @@ try {
     if(await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel collapse failed');
     await page.locator('#next-tool-panels > summary').click();
     if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT native panel restore failed');
-    await page.locator('#next-nextstep').click();
-    if(!await page.locator('#next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT next-step panel did not open');
+    if(!await page.locator('#next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT native disclosure workspace did not reopen');
     console.log('PASS '+device+': MENTOR NEXT v0.2 independent evidence, metric trend, visual posture and panels');
 
     await context.close();

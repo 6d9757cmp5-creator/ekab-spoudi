@@ -27,7 +27,7 @@ New in v0.2:
 - Patient-by-patient educational evidence checklist (communication, initial examination, synthetic monitoring, reassessment).
 - Separate shared workflow milestones: scene safety observation, coordination rehearsal and handover.
 - Time-series history chart for **synthetic** HR/RR/SpO₂ for both patients, with metric switch and no real ECG.
-- Briefing drawer, learning notes, process ordering cautions, next educational step button, close/reopen panels.
+- Briefing drawer, learning notes, process ordering cautions, native close/reopen panels. The automatic next-step shortcut is not shipped pending reliable interaction tests.
 - Expanded scripted observations by body regions. No diagnosis, physiologic response or treatment simulations.
 - Added regression tests and mobile/desktop smoke coverage.
 
