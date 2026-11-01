@@ -206,7 +206,7 @@ test('milestone 800 Greek fixtures reproduce references and preserve numerical v
   const answerNumbers=(item.answer.match(/\d+(?:[.,]\d+)*/g)||[]).join('|');
   assert.equal(answerNumbers,refNumbers,'numbers/doses must remain intact: '+item.id);
   const refNeg=(ref.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el-GR').match(/(?:^|\s)(?:δεν|μην|οχι|χωρις)(?=\s|[,.·;:])/g)||[]).length;
-  const answerNeg=(item.answer.match(/(?:^|\s)(?:δεν|μην|οχι|χωρις)(?=\s|[,.·;:])/g)||[]).length;
+  const answerNeg=(item.answer.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el-GR').match(/(?:^|\s)(?:δεν|μην|οχι|χωρις)(?=\s|[,.·;:])/g)||[]).length;
   assert.equal(answerNeg,refNeg,'negation must remain intact: '+item.id);
   const k=item.section+':'+item.questionId;
   if(!groups.has(k))groups.set(k,new Set());
