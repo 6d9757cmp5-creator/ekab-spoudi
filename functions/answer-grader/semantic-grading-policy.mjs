@@ -37,7 +37,11 @@ export function cautiouslyCheckGrade(raw){
  const reason=[explanation,...points].join(' ').toLocaleLowerCase('el-GR');
  const solelyLanguageBased=/(?:λόγω|επειδή|γιατί|εξαιτίας|έχει|περιέχει).{0,65}(?:ορθογραφ|συντακτικ|γραμματικ|τονισμ|τόνου)/iu.test(reason) ||
    /(?:ορθογραφ|συντακτικ|γραμματικ).{0,45}(?:λάθ|σφάλμ)/iu.test(reason);
- if(!raw.criticalError&&['incorrect','partial'].includes(raw.verdict)&&solelyLanguageBased){
+ // A clinical omission listed alongside an orthography note must NOT be erased.
+ // E.g. "η απάντηση έχει ορθογραφικά, λείπει όμως η όσφρηση" is a
+ // content-level partial assessment, not merely a spelling penalty.
+ const hasSubstantiveMissingPoint=points.some(point=>!/(?:ορθογραφ|συντακτικ|γραμματικ|τονισμ|σημει(?:ο|α) στιξ)/iu.test(point));
+ if(!raw.criticalError&&['incorrect','partial'].includes(raw.verdict)&&solelyLanguageBased&&!hasSubstantiveMissingPoint){
   return {...raw,verdict:'uncertain',correctPoints:[],missingPoints:[],
    explanation:'Δεν επιτρέπεται να απορριφθεί εκπαιδευτική απάντηση μόνο για ορθογραφικά ή συντακτικά λάθη. Απαιτείται εκ νέου αξιολόγηση των ουσιωδών εννοιών.'};
  }
