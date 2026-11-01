@@ -81,9 +81,47 @@ async function download(url,target,maxSize){
   }
  }
 }
+// Recheck every published NIH entry at transfer time: older source catalogs only stored
+// up to 15 output files per submission, and NIH workflows may reprocess old entries.
+const sourceRefreshFailures=[];
+async function currentPublishedOutputs(id,original){
+ for(let attempt=0;attempt<3;attempt++){
+  try{
+   await wait(450*(attempt+1));
+   const response=await fetch('https://3d.nih.gov/api/entries/'+id,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(25000)});
+   if(!response.ok){
+    if([429,500,502,503,504].includes(response.status)&&attempt<2){await wait(2000*(attempt+1));continue}
+    throw Error('NIH metadata HTTP '+response.status);
+   }
+   const entry=await response.json();
+   const pub=(entry.submissions||[]).filter(q=>String(q.submissionStatus||'').toLowerCase()==='published')
+    .sort((a,b)=>Number(b.version||0)-Number(a.version||0))[0];
+   if(!pub)throw Error('No currently published submission');
+   const output=[],dedupe=new Set();
+   for(const run of pub.workflowRuns||[])for(const o of run.outputFiles||[]){
+    const format=String(o.fileFormat||'').toUpperCase();
+    if(!allowed.has(format)||!o.fileId||!run.prefectRunId||!pub.submissionId)continue;
+    const url='https://3d.nih.gov/api/submissions/'+pub.submissionId+'/runs/'+run.prefectRunId+'/output-files/'+o.fileId;
+    if(dedupe.has(url))continue;
+    dedupe.add(url);
+    output.push({format,size:o.fileSize||0,name:String(o.name||'model').slice(0,160),url});
+   }
+   return {...original,files:output,licenseExact:String(pub.metadata?.license||original.licenseRaw||original.licenseExact||''),
+     creator:String(pub.modifiedByUser?.displayName||original.creator||''),title:String(pub.metadata?.title||original.title||''),
+     sourceVersion:pub.version};
+  }catch(e){
+   if(attempt===2){sourceRefreshFailures.push({entryId:id,error:String(e.message).slice(0,180)});
+    return original}
+   await wait(1400*(attempt+1));
+  }
+ }
+ return original;
+}
+
 for(let id=first;id<=last;id++){
- const item=all.get(id);
+ let item=all.get(id);
  if(!item){missing.push({entryId:id,reason:'No published metadata was stored for this source ID (may be unpublished or nonexistent)'});continue}
+ item=await currentPublishedOutputs(id,item);
  const files=(item.files||[]).filter(f=>allowed.has(String(f.format||'').toUpperCase())&&/^https:\/\/3d\.nih\.gov\/api\/submissions\//.test(f.url||''));
  if(!files.length){failed.push({entryId:id,reason:'No supported 3D output attached in source metadata'});continue}
  for(let i=0;i<files.length;i++){
@@ -114,9 +152,10 @@ for(let id=first;id<=last;id++){
 }
 await flush();
 const report={range:{start:first,end:last},downloadedOriginalFiles:done.length,uniqueEntryIds:new Set(done.map(v=>v.entryId)).size,
- missingOrUnpublishedIds:missing.length,failedOutputFiles:failed.length,losslessCompression:true,fullyMirrored:failed.length===0&&missing.length===0,
+ missingOrUnpublishedIds:missing.length,failedOutputFiles:failed.length,sourceMetadataErrors:sourceRefreshFailures.length,
+ losslessCompression:true,fullyMirrored:failed.length===0&&sourceRefreshFailures.length===0,
  source:'https://3d.nih.gov/',permissionNote:'User affirmed access rights; exact source license information retained for every binary.',
- packs,modelFiles:done,missing,failed};
+ packs,modelFiles:done,missing,failed,sourceRefreshFailures};
 await writeFile(join(out,prefix+'-RESULT.json'),JSON.stringify(report,null,2)+'\n');
 console.log('COMPLETE SHARD',JSON.stringify({range:report.range,files:done.length,models:report.uniqueEntryIds,
  archives:packs.length,failures:failed.length,missing:missing.length,fullyMirrored:report.fullyMirrored}));
