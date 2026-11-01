@@ -244,7 +244,7 @@
     </div>
   </section>
   <section id="panel-books" role="tabpanel" aria-labelledby="tab-books" hidden>
-    <div class="section-heading"><div><h2>Ιατρική βιβλιοθήκη · Σύνδεση πηγών</h2>
+    <div class="section-heading"><div><h2>ATLA · Βιβλιοθήκη Paramedic και Ιατρικής</h2>
       <p>Πραγματικά εισαγμένα βιβλία, αναζήτηση μέσα στο κείμενο και σύνδεσμοι πρωτότυπης πηγής.</p></div></div>
     <div class="disclaimer" role="note">
       <strong>Λειτουργία προεπισκόπησης — μη εγκεκριμένη κλινική γνώση.</strong>
@@ -254,10 +254,15 @@
       προορίζονται μόνο για επιστημονικό έλεγχο, όχι για διάγνωση, θεραπεία ή απαντήσεις AI.
     </div>
     <div class="panel">
-      <h3>Αναζήτηση στα 7 εξαγμένα συγγράμματα</h3>
+      <h3>Αναζήτηση στα 7 εξαγμένα συγγράμματα, ανά διαδρομή</h3>
       <p id="mentor-book-count" class="muted small">Έλεγχος βιβλιογραφικής σύνδεσης…</p>
       <form id="mentor-book-form" class="review-form" role="search" aria-label="Αναζήτηση αποσπάσματος για βιβλιογραφική επιμέλεια">
-        <label for="mentor-book-select">Βιβλίο</label>
+        <label for="mentor-book-track">Εκπαιδευτική διαδρομή</label>
+        <select id="mentor-book-track" aria-label="Εκπαιδευτική διαδρομή βιβλίων">
+          <option value="paramedic">Paramedic · Διασώστης</option>
+          <option value="medicine">Ιατρική · Γιατρός</option>
+        </select>
+        <label for="mentor-book-select">Βιβλίο αυτής της διαδρομής</label>
         <select id="mentor-book-select" required aria-label="Επιλογή ενός εισαγμένου βιβλίου"></select>
         <label for="mentor-book-query">Όρος αναζήτησης</label>
         <input id="mentor-book-query" type="search" maxlength="100" required autocomplete="off"
@@ -265,6 +270,7 @@
         <button id="mentor-book-submit" type="submit" class="action">Αναζήτηση αποσπασμάτων</button>
       </form>
       <p class="muted small">Φορτώνεται μόνο το επιλεγμένο βιβλίο. Για ελληνικούς όρους εφαρμόζεται μικρό, ενδεικτικό λεξικό αντιστοίχισης.
+        Τα κοινά βιβλία εμφανίζονται και στις δύο διαδρομές χωρίς διπλό περιεχόμενο. Η ταξινόμηση δεν παρέχει επαγγελματικά δικαιώματα.
         Η αναζήτηση δεν αποτελεί ιατρική ερμηνεία. Τα βιβλία είναι κυρίως στα αγγλικά.</p>
       <p id="mentor-book-status" role="status" aria-live="polite">Προετοιμασία…</p>
       <div id="mentor-book-results" class="review-results" aria-live="polite"></div>
