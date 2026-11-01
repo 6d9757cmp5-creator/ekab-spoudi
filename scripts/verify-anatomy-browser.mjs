@@ -12,7 +12,7 @@ try{
  browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,args:engine==='chromium'?['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist']:[]});
  const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,serviceWorkers:'block'});
  page=await context.newPage();
- page.on('pageerror',err=>{const event={url:page.url(),error:String(err)};if(event.error.includes('fra.cloud.appwrite.io/v1/ping')&&event.error.includes('access control'))expectedLocalOriginErrors.push(event);else errors.push(event);});
+ page.on('pageerror',err=>{const event={url:page.url(),error:String(err)};if(event.error.includes('fra.cloud.appwrite.io/v1/ping')&&event.error.includes('access control'))expectedLocalOriginErrors.push(event);else {if(errors.length<2)console.error('FULL PAGE ERROR STACK:',err.stack);errors.push(event);}});
  page.setDefaultTimeout(15000);
  await check('Homepage has one 3D entry and four main topics',async()=>{
    const r=await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
