@@ -16,16 +16,17 @@ test('demo replies always disclose that they are fake, not medical evidence',()=
 });
 test('fake chat turns can be displayed but are not sent to future real model history',()=>{
  const store=memory();
- appendTurn(store,{role:'user',text:'ΣΑΕΚ'});
+ appendTurn(store,{role:'user',text:'ΣΑΕΚ',mode:'mock'});
  appendTurn(store,{role:'mentor',text:mockAtlasReply({question:'ΣΑΕΚ'}),mode:'mock'});
  const turns=loadTurns(store);
  assert.equal(turns.at(-1).mode,'mock');
- assert.deepEqual(historyForAi(turns).map(t=>t.role),['user']);
+ assert.deepEqual(historyForAi(turns),[], 'No fake turn can enter the future live AI context');
 });
 test('ATLAS mock is local and does not share the AI-grading evaluator',()=>{
  const assistant=read('atla/assistant.mjs');
  assert.match(assistant,/demoToggle\.checked/);
  assert.match(assistant,/mockAtlasReply\(/);
+ assert.ok(assistant.includes("add('user',q,demoToggle.checked?'mock':'local')"));
  assert.match(assistant,/if\(exam\(\)\)/);
  assert.match(assistant,/riskGuard\(q\)/);
  assert.doesNotMatch(assistant,/fetchJSON\('functions\/answer-grader/);
