@@ -85,6 +85,19 @@ function render(container,result){
  const correct=result.referenceAnswer||result.modelAnswer;
  section('Σωστή απάντηση',correct,'ai-grading-reference');
  section('Γιατί',result.explanation,'ai-grading-why');
+ // Show the actual concepts recognised and the essential omissions, not grammar notes.
+ const points=(heading,items,css)=>{
+  if(!Array.isArray(items)||!items.length)return;
+  const clean=items.filter(item=>typeof item==='string'&&item.trim()).slice(0,5);
+  if(!clean.length)return;
+  const block=document.createElement('section');block.className='ai-grading-section '+css;
+  const name=document.createElement('strong');name.className='ai-grading-heading';name.textContent=heading;
+  const list=document.createElement('ul');
+  for(const item of clean){const li=document.createElement('li');li.textContent=item;list.append(li);}
+  block.append(name,list);container.append(block);
+ };
+ points('Τι είπες σωστά',result.correctPoints,'ai-grading-matched');
+ points('Τι χρειάζεται συμπλήρωση ή διόρθωση',result.missingPoints,'ai-grading-missing');
  const takeaway=typeof result.takeaway==='string'&&result.takeaway.trim()?result.takeaway:
    Array.isArray(result.missingPoints)&&result.missingPoints.length?result.missingPoints[0]:'';
  // The takeaway only appears if it adds information, avoiding repeated paragraphs.
