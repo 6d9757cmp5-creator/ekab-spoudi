@@ -25,6 +25,7 @@ function notify(text,error=false){
   const status=$('status');status.textContent=text;status.classList.toggle('is-error',error);
 }
 function switchTab(target,focus=false){
+  if(document.querySelector('[data-tab="'+target+'"]')?.hidden)return;
   for(const tab of document.querySelectorAll('[data-tab]')){
     const isCurrent=tab.dataset.tab===target;
     tab.setAttribute('aria-selected',String(isCurrent));
@@ -55,8 +56,12 @@ function wireTabs(){
     tab.addEventListener('keydown',ev=>{
       if(!['ArrowLeft','ArrowRight','Home','End'].includes(ev.key))return;
       ev.preventDefault();
-      const index=ev.key==='Home'?0:ev.key==='End'?tabs.length-1:(i+(ev.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
-      switchTab(tabs[index].dataset.tab,true);
+      const available=tabs.filter(t=>!t.hidden);
+      const current=available.indexOf(tab);
+      if(current<0||!available.length)return;
+      const index=ev.key==='Home'?0:ev.key==='End'?available.length-1:
+        (current+(ev.key==='ArrowRight'?1:-1)+available.length)%available.length;
+      switchTab(available[index].dataset.tab,true);
     });
   }
 }
