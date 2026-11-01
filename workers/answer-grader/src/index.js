@@ -4,6 +4,8 @@ import eoppepRubrics from '../../../functions/answer-grader/eoppep-rubrics.json'
 import saekRubrics from '../../../functions/answer-grader/saek-exam-rubrics.json' with { type: 'json' };
 import seminarRubrics from '../../../functions/answer-grader/seminar-rubrics.json' with { type: 'json' };
 import { freeProviders, requestFreeGrade } from '../../../functions/answer-grader/free-providers.js';
+import { EXTRA_GRADING_REFERENCES } from '../../../functions/answer-grader/extra-grading-references.mjs';
+import { SEMANTIC_GRADING_POLICY, cautiouslyCheckGrade } from '../../../functions/answer-grader/semantic-grading-policy.mjs';
 const verdicts=new Set(['correct','partial','incorrect','uncertain']);
 const attempts=new Map();
 const MAX_USER_CHARS=3500;
@@ -133,6 +135,14 @@ async function findReference(input){
   if(!q||q.answerStatus!=='reviewed_educational'||!cleanText(q.answer,12000))throw new Error('Το θέμα δεν είναι διαθέσιμο για αυτόματη αξιολόγηση');
   return {question:cleanText(q.question,1200),reference:cleanText(q.answer,8000),context:'Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημο λυσάρι.',kind:'ΕΟΠΠΕΠ θεωρία'};
  }
+ if(input.section==='old_written'||input.section==='mentor_oral'){
+  if(typeof input.questionId!=='string'||!/^(?:old-\\d{3}|scene|report|handover|equipment|observations|reflection)$/.test(input.questionId))
+   throw new Error('Μη έγκυρη ερώτηση ανάπτυξης');
+  const q=EXTRA_GRADING_REFERENCES.find(x=>x.section===input.section&&x.id===input.questionId);
+  if(!q)throw new Error('Δεν βρέθηκε ερώτηση ανάπτυξης');
+  return {question:cleanText(q.question,1200),reference:cleanText(q.reference,4000),
+   context:cleanText(q.context,700),kind:input.section==='mentor_oral'?'MENTOR — οργανωτική γραπτή εξάσκηση':'ΕΟΠΠΕΠ παλαιού τύπου'};
+ }
  throw new Error('Άγνωστη ενότητα');
 }
 function validateGrade(data){
@@ -155,7 +165,7 @@ function validateGrade(data){
 }
 async function gradeAnswer(question,answer,env){
  const providers=[...(env.AI?[{id:'cloudflare_binding',model:'@cf/google/gemma-4-26b-a4b-it'}]:[]),...freeProviders(env)];
- const system=(question.clinicalScenario?scenarioSys:sys)+'\nΕπέστρεψε αποκλειστικά JSON που τηρεί αυτό το schema: '+JSON.stringify(schema);
+ const system=(question.clinicalScenario?scenarioSys:sys)+'\n'+SEMANTIC_GRADING_POLICY+'\nΕπέστρεψε αποκλειστικά JSON που τηρεί αυτό το schema: '+JSON.stringify(schema);
  const messages=[{role:'system',content:system},{role:'user',content:JSON.stringify({section:question.kind,question:question.question,reference:question.reference,case:question.context,studentAnswer:answer})}];
  // Isolated per authenticated user; cache never contains the original student text.
  // This is a bounded, short-lived per-process cache, not a durable cross-instance guarantee.
@@ -168,7 +178,7 @@ async function gradeAnswer(question,answer,env){
        chat_template_kwargs:{enable_thinking:false}})
     : await requestFreeGrade(provider,messages);
    const content=raw?.choices?.[0]?.message?.content??raw?.response??raw;
-   const graded=validateGrade(typeof content==='string'?JSON.parse(content):content);
+   const graded=validateGrade(cautiouslyCheckGrade(typeof content==='string'?JSON.parse(content):content));
    // ERC 2025 BLS does not make a pulse check mandatory for this lay-rescuer reference.
    if(question.kind==='Ανεπίσημη άσκηση BLS/AED'&&!/σφυγμ|παλμ/i.test(question.reference+' '+question.context)&&
     /σφυγμ|παλμ/i.test(graded.missingPoints.join(' ')+' '+graded.explanation))throw new Error('unsupported_bls_pulse_requirement');
