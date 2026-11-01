@@ -15,12 +15,32 @@ export function mountPatientScene(canvas,onSelect){
  for(let y=0;y<lat;y++)for(let x=0;x<lon;x++){let a=y*(lon+1)+x,b=a+lon+1;idx.push(a,b,a+1,b,b+1,a+1);}
  function buf(target,data){const b=gl.createBuffer();gl.bindBuffer(target,b);gl.bufferData(target,data,gl.STATIC_DRAW);return b;}
  const pb=buf(gl.ARRAY_BUFFER,new Float32Array(pts)),nb=buf(gl.ARRAY_BUFFER,new Float32Array(ns)),ib=buf(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx));
- const colors={skin:[0.78,0.59,0.44],skin2:[0.68,0.46,0.34],pants:[0.19,0.27,0.36],topA:[0.20,0.56,0.70],topB:[0.47,0.63,0.46],hair:[0.19,0.16,0.16],shoe:[0.14,0.17,0.20],car:[0.30,0.40,0.48],wheel:[0.11,0.13,0.16],road:[0.22,0.33,0.37],wall:[0.28,0.41,0.45],rug:[0.24,0.39,0.50],bench:[0.47,0.36,0.27],green:[0.16,0.43,0.32],lamp:[0.89,0.76,0.48]};
+ const cubePoints=[],cubeNormals=[];
+ for(const face of [
+  {n:[0,0,1],p:[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]]},
+  {n:[0,0,-1],p:[[1,-1,-1],[-1,-1,-1],[-1,1,-1],[1,1,-1]]},
+  {n:[0,1,0],p:[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]]},
+  {n:[0,-1,0],p:[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]]},
+  {n:[1,0,0],p:[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]]},
+  {n:[-1,0,0],p:[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]]}
+ ])for(const i of [0,1,2,0,2,3]){cubePoints.push(...face.p[i]);cubeNormals.push(...face.n);}
+ const cubePB=buf(gl.ARRAY_BUFFER,new Float32Array(cubePoints)),cubeNB=buf(gl.ARRAY_BUFFER,new Float32Array(cubeNormals));
+ const colors={skin:[0.78,0.59,0.44],skin2:[0.68,0.46,0.34],pants:[0.19,0.27,0.36],topA:[0.20,0.56,0.70],topB:[0.47,0.63,0.46],hair:[0.19,0.16,0.16],shoe:[0.14,0.17,0.20],car:[0.30,0.40,0.48],wheel:[0.11,0.13,0.16],road:[0.22,0.33,0.37],wall:[0.28,0.41,0.45],rug:[0.24,0.39,0.50],bench:[0.47,0.36,0.27],green:[0.16,0.43,0.32],lamp:[0.89,0.76,0.48],window:[0.42,0.70,0.78],roadline:[0.67,0.80,0.76],metal:[0.16,0.34,0.43],floor:[0.31,0.51,0.52]};
  let environment='road',focus='scene',view='scene',poseByPatient={a:'standing',b:'standing'},angle=0.18,paused=false,running=true,last=0,raf=0,clock=0,drag=null,acc=0;
  const humans=attachHumanMesh(gl,canvas,()=>{if(running)draw();});
+ function bindShape(positions,normals){
+  gl.bindBuffer(gl.ARRAY_BUFFER,positions);gl.enableVertexAttribArray(loc.p);gl.vertexAttribPointer(loc.p,3,gl.FLOAT,false,0,0);
+  gl.bindBuffer(gl.ARRAY_BUFFER,normals);gl.enableVertexAttribArray(loc.n);gl.vertexAttribPointer(loc.n,3,gl.FLOAT,false,0,0);
+ }
  function sphere(x,y,z,sx,sy,sz,color){
+  bindShape(pb,nb);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);
   gl.uniform3f(loc.off,x,y,z);gl.uniform3f(loc.scale,sx,sy,sz);gl.uniform3fv(loc.color,colors[color]||color);
   gl.drawElements(gl.TRIANGLES,idx.length,gl.UNSIGNED_SHORT,0);
+ }
+ function box(x,y,z,sx,sy,sz,color){
+  bindShape(cubePB,cubeNB);
+  gl.uniform3f(loc.off,x,y,z);gl.uniform3f(loc.scale,sx,sy,sz);gl.uniform3fv(loc.color,colors[color]||color);
+  gl.drawArrays(gl.TRIANGLES,0,36);
  }
  function draw(){
   const w=Math.max(1,Math.round(canvas.clientWidth* Math.min(devicePixelRatio||1,1.6))),h=Math.max(1,Math.round(canvas.clientHeight* Math.min(devicePixelRatio||1,1.6)));
@@ -31,19 +51,38 @@ export function mountPatientScene(canvas,onSelect){
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);
   gl.uniform1f(loc.angle,angle);gl.uniform1f(loc.center,focus==='a'?-1.1:focus==='b'?1.05:0);gl.uniform1f(loc.zoom,focus==='scene'?0.94:view==='head'?2.35:view==='torso'?1.85:view==='legs'?1.8:1.15);gl.uniform1f(loc.vertical,view==='head'?0.95:view==='torso'?0.22:view==='legs'?-0.70:0);
   gl.uniform1f(loc.aspect,Math.max(0.85,w/h));
-  // Three original low-poly scenes. Their geometry has no diagnostic meaning.
-  sphere(0,-1.34,-1.1,4.5,.085,1.75,environment==='square'?'green':environment==='home'?'rug':'road');
+  // Distinct first-party 3D environments with actual cuboid props and ground, not spheres everywhere.
+  box(0,-1.41,-1.07,4.7,.055,1.85,environment==='square'?'green':environment==='home'?'floor':'road');
   if(environment==='road'){
-   sphere(0,-.42,-.95,.62,.52,.36,'car');sphere(0,-.17,-.95,.40,.28,.29,'car');
-   sphere(-.40,-.78,-.65,.20,.22,.15,'wheel');sphere(.40,-.78,-.65,.20,.22,.15,'wheel');
+   box(0,-.74,-1.39,.96,.34,.49,'car');
+   box(0,-.29,-1.49,.62,.22,.36,'car');
+   box(0,-.27,-1.11,.52,.19,.028,'window');
+   box(0,-1.06,-1.10,.79,.055,.015,'metal');
+   for(const side of [-1,1]){
+    sphere(side*.64,-1.03,-1.04,.19,.19,.14,'wheel');
+    sphere(side*.64,-1.03,-.91,.09,.09,.06,'metal');
+   }
+   box(-2.78,-1.35,-.35,.50,.008,.06,'roadline');
+   box(2.78,-1.35,-.35,.50,.008,.06,'roadline');
+   box(0,-1.28,-2.74,3.9,.07,.05,'wall');
   }else if(environment==='home'){
-   sphere(0,.15,-1.65,3.5,1.7,.11,'wall');
-   sphere(-.25,-.85,-1.03,.65,.24,.42,'bench');sphere(-.72,-.53,-1.11,.14,.60,.28,'bench');
-   sphere(2.2,-.49,-1.2,.13,.96,.13,'wheel');sphere(2.2,.45,-1.2,.27,.27,.22,'lamp');
+   box(0,.15,-2.10,4.4,1.58,.11,'wall');
+   box(-1.10,-.14,-1.94,.70,.68,.04,'window');
+   box(-.24,-.98,-1.18,.81,.17,.41,'bench');
+   box(-.91,-.65,-1.26,.16,.59,.36,'bench');
+   box(.47,-.65,-1.26,.16,.59,.36,'bench');
+   box(2.2,-.49,-1.58,.11,.90,.11,'metal');
+   sphere(2.2,.47,-1.58,.25,.28,.25,'lamp');
+   box(0,-1.31,-.55,1.62,.009,.53,'rug');
   }else{
-   sphere(.1,-.94,-1.21,.73,.13,.34,'bench');
-   sphere(-.44,-.63,-1.22,.09,.28,.13,'bench');sphere(.55,-.63,-1.22,.09,.28,.13,'bench');
-   sphere(2.7,-.49,-1.42,.19,.9,.19,'wheel');sphere(2.7,.30,-1.42,.46,.65,.42,'green');
+   box(.04,-1.08,-1.45,.85,.10,.33,'bench');
+   box(.04,-.60,-1.60,.85,.39,.085,'bench');
+   box(-.62,-1.23,-1.45,.09,.14,.10,'metal');
+   box(.62,-1.23,-1.45,.09,.14,.10,'metal');
+   box(2.60,-.48,-1.80,.14,.93,.14,'bench');
+   sphere(2.60,.33,-1.80,.65,.69,.60,'green');
+   box(-2.8,-.98,-2.12,.36,.38,.20,'bench');
+   box(0,-1.30,-.51,4.3,.022,.20,'roadline');
   }
   function person(x,top,skin,phase,id){
    let breath=paused?0:Math.sin(clock*1.7+phase)*.018;
@@ -83,6 +122,6 @@ export function mountPatientScene(canvas,onSelect){
   setPoses(poses){poseByPatient={...poseByPatient,...poses};draw();},
   setEnvironment(value){if(!['road','home','square'].includes(value))return;environment=value;draw();},
   rotate(d){angle+=d;draw();},
-  dispose(){running=false;cancelAnimationFrame(raf);humans.dispose();gl.deleteBuffer(pb);gl.deleteBuffer(nb);gl.deleteBuffer(ib);gl.deleteProgram(program);}
+  dispose(){running=false;cancelAnimationFrame(raf);humans.dispose();gl.deleteBuffer(cubePB);gl.deleteBuffer(cubeNB);gl.deleteBuffer(pb);gl.deleteBuffer(nb);gl.deleteBuffer(ib);gl.deleteProgram(program);}
  };
 }
