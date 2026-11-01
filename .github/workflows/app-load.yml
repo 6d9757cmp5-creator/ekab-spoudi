@@ -31,6 +31,7 @@ jobs:
           node --check saek-course-series.js
           node --check scripts/app-load-smoke.mjs
           node scripts/verify-static-pages.mjs
+          node --check scripts/verify-cockpit-visual.mjs
           node scripts/verify-pdf-library-boundaries.mjs
           node scripts/verify-tool-boundaries.mjs
           node scripts/verify-service-boundaries.mjs
@@ -84,4 +85,14 @@ jobs:
       - run: npm install --no-save --no-package-lock playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - run: node scripts/app-load-smoke.mjs
+      - run: node scripts/verify-cockpit-visual.mjs
+      - name: Archive real Cockpit screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: patient-simulator-visual-baseline
+          path: |
+            audit-results/cockpit-*.png
+            audit-results/cockpit-visual-report.json
+          if-no-files-found: warn
       - run: node scripts/verify-mentor-presence-browser.mjs

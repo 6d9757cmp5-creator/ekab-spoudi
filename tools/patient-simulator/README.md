@@ -13,3 +13,6 @@ Canonical location: tools/patient-simulator/. Ο simulator δεν αποτελε
 Οι παλιές mentor/app/next-* και mentor/core/next-* διαδρομές είναι ελάχιστες γέφυρες. Οι τιμές localStorage και οι μαθητικές επιδόσεις δεν μετακινούνται. Τα περιστατικά παραμένουν συνθετικά, όχι κλινικά επικυρωμένα.
 
 Δοκιμές: node scripts/verify-tool-boundaries.mjs · node --test tools/patient-simulator/core/*.test.mjs tools/patient-simulator/app/next-patient-mesh.test.mjs · node scripts/app-load-smoke.mjs.
+
+## Visual Baseline A — στόχος Body Interact ή παραπάνω
+Ο [αναλυτικός σχεδιασμός](../../docs/SIMULATION_COCKPIT_VISUAL_SPEC_2026.md) περιγράφει τη μελλοντική σκηνή, monitor, εργαλεία, κλινική αξιολόγηση και πλήρη quality gates. Το [cockpit-theme.css](styles/cockpit-theme.css) είναι η **πρώτη** εφαρμοσμένη φάση κοινής οπτικής γλώσσας, πάνω από το λειτουργικό `next-sim.css`. Τα `scripts/verify-cockpit-visual.mjs` tests παίρνουν πραγματικά screenshots desktop/tablet/mobile στο GitHub Actions και ελέγχουν overflow, panel layout, touch target και renderer ready/fallback. Αυτά **δεν αποδεικνύουν** σημερινή οπτική ισοδυναμία με το Body Interact.
