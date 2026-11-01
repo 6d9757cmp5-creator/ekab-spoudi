@@ -31,6 +31,7 @@ jobs:
           node --check saek-course-series.js
           node --check scripts/app-load-smoke.mjs
           node scripts/verify-static-pages.mjs
+          node scripts/verify-pdf-library-boundaries.mjs
           node scripts/verify-tool-boundaries.mjs
           node scripts/verify-service-boundaries.mjs
           node --check services/notes/notes-store.js

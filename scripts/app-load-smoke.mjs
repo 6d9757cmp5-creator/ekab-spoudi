@@ -254,6 +254,18 @@ try {
       throw Error(device+': 3D viewer fallback switch failed');
     console.log('PASS '+device+': MENTOR v0.5 real textured ready-made GLB patients, pose choices and procedural fallback');
 
+    // Repeated architecture pass: PDF library root URL still resolves its independent app script.
+    await page.goto('http://127.0.0.1:8765/pdf-library.html',{waitUntil:'domcontentloaded'});
+    const pdfAsset=await page.request.get('http://127.0.0.1:8765/tools/pdf-library/app/pdf-library.js');
+    if(!pdfAsset.ok())throw Error(device+': PDF canonical app missing');
+    await page.waitForFunction(()=>{
+      const l=document.getElementById('pdfList'),s=document.getElementById('pdfStatus');
+      return Boolean(l?.textContent?.trim()||s?.textContent?.includes('Η τοπική αποθήκευση'));
+    },null,{timeout:10000});
+    if(!await page.locator('#pdfFile').isVisible())throw Error(device+': PDF library upload control missing');
+    if(await page.locator('script[src*="3.11.174"]').count())throw Error(device+': vulnerable PDF.js legacy script still present');
+    console.log('PASS '+device+': PDF library stable root URL and canonical independent module');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}

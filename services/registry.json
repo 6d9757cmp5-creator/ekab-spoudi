@@ -96,10 +96,11 @@
     {
       "id": "pdf-library",
       "kind": "tool",
-      "status": "owner-mapped",
+      "status": "canonical",
       "owner": "tools/pdf-library",
       "implementation": [
         "pdf-library.html",
+        "tools/pdf-library/app/pdf-library.js",
         "pdf-library.js"
       ]
     },
