@@ -36,7 +36,7 @@ export function protectCompleteness(question,answer,raw){
  const found=Object.fromEntries(Object.entries(mentions).map(([key,regex])=>[key,regex.test(normalized)]));
  // Explicit negation may reverse the meaning. Never approve such an answer
  // based on the mere presence of the same medical keywords.
- if(/\\b(?:δεν|μην|ουτε|χωρις)\\b/.test(normalized))return {...raw,verdict:'uncertain',criticalError:false,correctPoints:[],missingPoints:[],explanation:'Η διατύπωση περιέχει άρνηση που μπορεί να αλλάζει την ιατρική έννοια. Απαιτείται έλεγχος προτού καταχωριστεί πλήρης βαθμολογία.'};
+ if(/(?:^|\s)(?:δεν|μην|ουτε|χωρις)(?=\s|$)/u.test(normalized))return {...raw,verdict:'uncertain',criticalError:false,correctPoints:[],missingPoints:[],explanation:'Η διατύπωση περιέχει άρνηση που μπορεί να αλλάζει την ιατρική έννοια. Απαιτείται έλεγχος προτού καταχωριστεί πλήρης βαθμολογία.'};
  if(Object.values(found).every(Boolean))return raw; // still only the model's judgment
  const core=found.clean&&found.warm&&found.moist;
  if(core&&!found.smell&&!found.mechanism){
