@@ -2,6 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import handler from './main.js';
 import {freeProviders} from './free-providers.js';
+import {EXTRA_GRADING_REFERENCES} from './extra-grading-references.mjs';
+import {SEMANTIC_GRADING_POLICY,cautiouslyCheckGrade} from './semantic-grading-policy.mjs';
+import {QUESTIONS as ORAL_QUESTIONS} from '../../mentor/core/oral-practice.mjs';
+import {readFileSync} from 'node:fs';
+
 const answer={section:'seminar',courseId:'bls',questionIndex:1,answer:'Ελέγχω την ασφάλεια του χώρου.'};
 const grade={verdict:'correct',explanation:'Σωστό νόημα',correctPoints:['Ασφάλεια'],missingPoints:[],criticalError:false,safetyNote:''};
 const invoke=(body,user='user',authenticated=true)=>handler({req:{method:'POST',headers:authenticated?{'x-appwrite-user-id':user,'x-appwrite-user-jwt':'test-jwt'}:{},bodyJson:body},res:{json:(body,status=200)=>({body,status})}});
@@ -170,3 +175,64 @@ test('student request limit uses study-theory message and no invented score',asy
  assert.equal(final.body.verdict,undefined);
 }));
 
+
+test('all old-style written and MENTOR oral question references are project-controlled and in sync',()=>{
+ const original=JSON.parse(readFileSync(new URL('../../old_type_written.json',import.meta.url),'utf8'));
+ const old=EXTRA_GRADING_REFERENCES.filter(q=>q.section==='old_written');
+ const oral=EXTRA_GRADING_REFERENCES.filter(q=>q.section==='mentor_oral');
+ assert.equal(old.length,7);assert.equal(oral.length,6);
+ for(const item of original){
+  const ref=old.find(x=>x.id===item.id);
+  assert.ok(ref);assert.equal(ref.question,item.question);assert.equal(ref.reference,item.modelAnswer);
+ }
+ for(const q of ORAL_QUESTIONS){
+  const ref=oral.find(x=>x.id===q.id);
+  assert.ok(ref);assert.equal(ref.question,q.prompt);
+  for(const check of q.checks)assert.ok(ref.reference.includes(check));
+ }
+});
+test('Greek spelling and syntax tolerance is explicit while clinical negatives/numbers stay distinct',()=>{
+ assert.match(SEMANTIC_GRADING_POLICY,/σύνταξη/);
+ assert.match(SEMANTIC_GRADING_POLICY,/τυπογραφικά/);
+ assert.match(SEMANTIC_GRADING_POLICY,/αρνήσεις/);
+ assert.match(SEMANTIC_GRADING_POLICY,/δόσεις/);
+ assert.match(SEMANTIC_GRADING_POLICY,/uncertain/);
+});
+test('old-style exam and oral rehearsal grade against trusted, non-user-editable reference',async()=>setup(async()=>{
+ const sent=[];
+ globalThis.fetch=async(url,options)=>{
+  const body=JSON.parse(options.body);
+  sent.push(JSON.parse(body.messages[1].content));
+  assert.match(body.messages[0].content,/ΜΗ βαθμολογείς την ορθογραφία/);
+  return response(grade);
+ };
+ const essay=await invoke({section:'old_written',questionId:'old-141',answer:'ε δυο βη δυο εμ πεντε',reference:'ένας αυθαίρετος βαθμός'},'new-old');
+ const practice=await invoke({section:'mentor_oral',questionId:'scene',answer:'βλεπω κινδυνους πριν παω',reference:'κατασκευασμένη πηγή'},'new-mentor');
+ assert.equal(essay.status,200);assert.equal(practice.status,200);assert.equal(sent.length,2);
+ assert.match(sent[0].question,/Γλασκώβης/);assert.match(sent[0].reference,/GCS/);
+ assert.match(sent[1].question,/συνθετικού τροχαίου/);
+ assert.ok(!sent[1].reference.includes('κατασκευασμένη'));
+ assert.match(sent[1].reference,/κίνδυν/);
+}));
+test('invalid or wrong-section reference cannot be injected',async()=>setup(async()=>{
+ globalThis.fetch=()=>assert.fail('No model request on invalid reference');
+ assert.equal((await invoke({section:'old_written',questionId:'scene',answer:'δοκιμαστικό'},'forged1')).status,400);
+ assert.equal((await invoke({section:'mentor_oral',questionId:'old-141',answer:'δοκιμαστικό'},'forged2')).status,400);
+}));
+test('uncorroborated partial or incorrect model verdict becomes ungraded rather than false rejection',()=>{
+ const uncertainPartial=cautiouslyCheckGrade({...grade,verdict:'partial',correctPoints:[],missingPoints:['λείπει ένα σημείο']});
+ assert.equal(uncertainPartial.verdict,'uncertain');
+ const uncertainWrong=cautiouslyCheckGrade({...grade,verdict:'incorrect',correctPoints:[],missingPoints:[]});
+ assert.equal(uncertainWrong.verdict,'uncertain');
+ assert.equal(cautiouslyCheckGrade({...grade,verdict:'incorrect',criticalError:true,missingPoints:[]}).verdict,'incorrect');
+});
+test('all optional written assessment surfaces invoke the same safe client',()=>{
+ const html=readFileSync(new URL('../../written_exam.html',import.meta.url),'utf8');
+ const oral=readFileSync(new URL('../../mentor-oral.html',import.meta.url),'utf8');
+ const script=readFileSync(new URL('../../old_type_written.js',import.meta.url),'utf8');
+ const oralScript=readFileSync(new URL('../../mentor/app/oral.js',import.meta.url),'utf8');
+ assert.match(html,/ai-grading-client\\.js/);assert.match(html,/id="ai-grade"/);
+ assert.match(oral,/ai-grading-client\\.js/);assert.match(oral,/id="oral-grade-ai"/);
+ assert.match(script,/section:'old_written'/);assert.match(oralScript,/section:'mentor_oral'/);
+ assert.match(oralScript,/examBox\\.checked/);
+});
