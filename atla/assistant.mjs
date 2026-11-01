@@ -9,7 +9,7 @@ import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
-import {mockAtlasReply,MOCK_LABEL} from './ai/mock.mjs';
+import {mockAtlasReply} from './ai/mock.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
@@ -80,7 +80,7 @@ function boot(){
  const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLAS — AI εκπαιδευτικός βοηθός');
  const head=$('header','atla-head');
  const brand=$('div','atla-brand');brand.append($('strong','', 'ATLAS'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
- const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLA');
+ const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLAS');
  head.append(brand,close);
  const state=$('p','atla-availability','');
  const demoRow=$('label','atla-demo-row');
@@ -93,7 +93,7 @@ function boot(){
  const context=$('p','atla-context');
  const stream=$('div','atla-stream');stream.setAttribute('role','log');stream.setAttribute('aria-live','polite');
  const form=$('form','atla-form');
- const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLAS για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στην ATLA');
+ const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLAS για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στο ATLAS');
  const send=$('button','atla-send','Αποστολή');send.type='submit';
  form.append(field,send);
  const footer=$('div','atla-footer');
@@ -133,13 +133,14 @@ function boot(){
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q);
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
   const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLAS'),'refusal');return;}
+  const link=navigation(q);
   if(demoToggle.checked){
    const level=loadLearning(localStorage).level;
    const pageName=(document.querySelector('main h1,main h2')?.textContent||document.title).trim();
    add('mentor',mockAtlasReply({question:q,page:pageName,level}),'mock');
+   if(link)offerLink(link[1],'Δοκίμασε τη μετάβαση: '+link[0]);
    return;
   }
-  const link=navigation(q);
   if(link){add('mentor','Βρήκα την ενότητα «'+link[0]+'». Μπορείς να την ανοίξεις χωρίς να χαθεί η τρέχουσα σελίδα από το ιστορικό.');offerLink(link[1],'Άνοιξε: '+link[0]);return;}
   send.disabled=true;state.textContent='Αναζήτηση στην εκπαιδευτική βιβλιοθήκη…';
   try{
