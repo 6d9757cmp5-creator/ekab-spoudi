@@ -35,6 +35,26 @@
         "finding": "Μεταφορά προϋπάρχοντος στοχευμένου ελέγχου από το PR στο μητρώο: τα συγκεκριμένα σημεία συμφωνούν με τη βιβλιογραφία, όχι πλήρης πιστοποίηση.",
         "limits": "Δεν έχει πραγματοποιηθεί εξαντλητικός έλεγχος όλων των ισχυρισμών και μαθησιακών στόχων ούτε ανεξάρτητος δεύτερος έλεγχος.",
         "fullScientificApproval": false
+      },
+      "independentSourceCrosscheck": {
+        "checkedAt": "2026-11-01",
+        "sourceFile": "saek-course-01.html#lesson-1",
+        "sourceFileBlobSha": "b6c83380a15a1f2ea460081250eb97890978bb28",
+        "scope": "Full rendered educational chapter text including SOS, detailed explanations, supplementary note and self-check answer; compared to cited anatomy reference",
+        "source": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology",
+        "sourceLocation": "OpenStax Anatomy & Physiology 2e (2022), §1.6 Anatomical Position, Directional Terms, Body Planes, Figure 1.13",
+        "checkedClaims": [
+          "Standing anatomical position, palms forward",
+          "Superior/inferior, anterior/posterior, medial/lateral",
+          "Proximal/distal and self-check answer",
+          "Patient-relative right and left",
+          "Sagittal/frontal/transverse planes"
+        ],
+        "finding": "No discrepancy identified in the checked anatomical terminology and self-check answer against §1.6.",
+        "limitations": "The official EKAB 2024 curriculum guide was not independently passage-compared in this step; course-to-curriculum alignment remains pending. This is educational source comparison, not clinical approval.",
+        "educationalSourceComparison": "anatomical_claims_consistent",
+        "officialCurriculumPassageCompared": false,
+        "final561Completion": false
       }
     },
     {
