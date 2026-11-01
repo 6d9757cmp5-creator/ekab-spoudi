@@ -310,6 +310,14 @@ try{
   assert.match(await page.locator('#source-counts').textContent(),/0 κλινικά εγκεκριμένες/);
   assert.match(await page.locator('#source-counts').textContent(),/18 για Paramedic/);
   assert.match(await page.locator('#source-counts').textContent(),/20 για Ιατρική/);
+  assert.equal(await page.locator('#study-paths .study-path').count(),4);
+  await page.locator('#source-track').selectOption('paramedic');
+  assert.equal(await page.locator('#study-paths .study-path').count(),8);
+  assert.ok((await page.locator('#study-paths').textContent()).includes('Εκτίμηση ασθενούς'));
+  await page.locator('#source-track').selectOption('medicine');
+  assert.equal(await page.locator('#study-paths .study-path').count(),8);
+  assert.ok((await page.locator('#study-paths').textContent()).includes('Παθολογία'));
+  await page.locator('#source-track').selectOption('all');
   await page.locator('#source-track').selectOption('paramedic');
   assert.equal(await page.locator('#sources-list .source-card').count(),18);
   await page.locator('#source-track').selectOption('medicine');
