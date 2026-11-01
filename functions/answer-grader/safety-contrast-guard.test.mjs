@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {guardHighRiskFullCredit,HIGH_RISK_REVIEW_IDS} from './safety-contrast-guard.mjs';
 import {cautiouslyCheckGrade} from './semantic-grading-policy.mjs';
 const grade={verdict:'correct',explanation:'Το μοντέλο επέστρεψε πλήρη βαθμολογία.',
@@ -57,4 +58,14 @@ test('a substantive missing point remains partial despite a side note about spel
  assert.equal(cautiouslyCheckGrade(withClinicalEvidence).verdict,'partial');
  const grammarOnly={...withClinicalEvidence,missingPoints:['Έχει λάθη ορθογραφίας']};
  assert.equal(cautiouslyCheckGrade(grammarOnly).verdict,'uncertain');
+});
+
+test('source-controlled exact references and 250 matching spelling variants never trigger an unsupported safety abstention',()=>{
+ const corpus=JSON.parse(readFileSync(new URL('./greek-answer-fixtures.json',import.meta.url),'utf8'));
+ const additions=corpus.cases.filter(x=>x.id.startsWith('milestone800-'));
+ assert.equal(additions.length,500);
+ for(const item of additions){
+  assert.equal(guardHighRiskFullCredit({id:item.questionId},item.answer,grade).verdict,'correct',
+   'False alert on original reference or equivalent accent-less form: '+item.id);
+ }
 });
