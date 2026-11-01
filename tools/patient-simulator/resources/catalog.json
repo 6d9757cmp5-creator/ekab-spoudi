@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "existing": [
+    {
+      "source": "UMRAM-Bilkent/supine-human-model",
+      "name": "human_posed.glb",
+      "license": "CC0-1.0",
+      "path": "tools/patient-simulator/assets/cc0-human-body.glb",
+      "status": "already-present"
+    },
+    {
+      "source": "EKAB patient assets",
+      "license": "check individual asset notices",
+      "path": "tools/patient-simulator/assets/patients/",
+      "status": "already-present"
+    }
+  ],
+  "candidates": [
+    {
+      "source": "makehumancommunity/makehuman",
+      "url": "https://github.com/makehumancommunity/makehuman",
+      "license": "CC0 core exported mesh; AGPL software; third-party plugins/assets vary",
+      "path": "tools/patient-simulator/resources/makehuman/",
+      "status": "needs-export-and-license-check"
+    },
+    {
+      "source": "Quaternius Universal Base Characters",
+      "url": "https://quaternius.com/packs/universalbasecharacters.html",
+      "license": "CC0 free pack",
+      "path": "tools/patient-simulator/resources/quaternius/",
+      "status": "needs-download-free-pack-and-validation"
+    }
+  ]
+}
