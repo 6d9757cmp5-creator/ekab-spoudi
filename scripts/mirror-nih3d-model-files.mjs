@@ -6,7 +6,7 @@
  * Preserves original file bytes, sha256, attribution, exact license text and failures.
  * Meant for GitHub Releases, not the Pages site or Git history.
  */
-import {mkdir,readdir,readFile,writeFile,rm,stat,rename} from 'node:fs/promises';
+import {mkdir,readdir,readFile,writeFile,rm,stat,rename,open} from 'node:fs/promises';
 import {createWriteStream} from 'node:fs';
 import {Readable,Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
@@ -46,8 +46,13 @@ async function flush(){
  await writeFile(join(work,'MANIFEST.json'),JSON.stringify(local,null,2)+'\n');
  execFileSync('tar',['-C',work,'--use-compress-program','zstd -3 -T2','-cf',archive,'.'],{stdio:'inherit',timeout:3600000});
  const size=(await stat(archive)).size;
- if(size>=1950*1024**2)throw Error('Archive too large for release asset: '+name);
- packs.push({name,bytes:size,models:memberFiles.length});
+ if(size>=1950*1024**2){
+  execFileSync('split',['-b','1750m','-d','-a','3',archive,archive+'.part-'],{stdio:'inherit',timeout:3600000});
+  const partNames=(await readdir(out)).filter(x=>x.startsWith(name+'.part-')).sort();
+  if(!partNames.length)throw Error('Split produced no archive segments');
+  await rm(archive,{force:true});
+  packs.push({name,bytes:size,models:memberFiles.length,split:partNames});
+ }else packs.push({name,bytes:size,models:memberFiles.length});
  await rm(work,{recursive:true,force:true});await mkdir(work,{recursive:true});
  currentBytes=0;memberFiles=[];
 }
@@ -89,6 +94,11 @@ for(let id=first;id<=last;id++){
   const path=join(work,name);
   try{
    const result=await download(f.url,path,maxIndividual);
+   const file=await open(path,'r');const header=Buffer.alloc(84);
+   await file.read(header,0,84,0);await file.close();
+   if(ext==='glb'&&(header.toString('ascii',0,4)!=='glTF'||header.readUInt32LE(4)!==2||header.readUInt32LE(8)!==result.bytes))throw Error('Invalid GLB header or file length');
+   if(ext==='stl'&&header.readUInt32LE(80)*50+84!==result.bytes&&!header.toString('ascii',0,5).toLowerCase().startsWith('solid'))throw Error('Invalid STL header / triangle length');
+   if(header.toString('utf8',0,80).toLowerCase().includes('<!doctype html'))throw Error('HTML returned, not original model');
    const metadata={entryId:id,accession:item.accession,title:item.title,creator:item.creator||'',originalLicense:item.licenseRaw||item.licenseExact||'',
     normalizedLicense:item.license||item.licenseNormalized||'',sourceEntry:item.url||item.officialUrl,sourceFile:f.url,
     originalFilename:f.name||'',archiveFilename:name,section:item.route||item.section||'',...result};
