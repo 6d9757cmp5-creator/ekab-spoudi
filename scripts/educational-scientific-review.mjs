@@ -49,7 +49,7 @@ async function askClaude(key,system,path,mode,text,fetchImpl){
   method:'POST',signal:AbortSignal.timeout(90000),
   headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':ANTHROPIC_VERSION},
   body:JSON.stringify({
-   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:2400,
+   model:process.env.AUDIT_CLAUDE_MODEL||CLAUDE_MODELS[0],max_tokens:8000,
    system:system+'\nExternal webpages cannot be accessed during this request. Mark unsupported external claims ΜΗ ΕΠΑΛΗΘΕΥΜΕΝΟ. Return ONLY the required JSON.',
    messages:[{role:'user',content:'FILE: '+path+'\nMODE: '+mode+'\nMATERIAL:\n'+text}]
   })
