@@ -3,6 +3,13 @@ on:
   push:
     paths:
       - 'mentor/review/**'
+      - 'mentor/core/**'
+      - 'mentor/library/**'
+      - 'saek.html'
+      - 'saek-adaptive-hub.mjs'
+      - 'AGENTS.md'
+      - 'docs/ATLA-ADAPTIVE-LEARNING-CONTRACT.md'
+      - 'scripts/test-mentor-source-index.mjs'
       - 'mentor/knowledge/**'
       - 'mentor/clinical-desk/**'
       - 'mentor/governance/**'
@@ -15,6 +22,13 @@ on:
   pull_request:
     paths:
       - 'mentor/review/**'
+      - 'mentor/core/**'
+      - 'mentor/library/**'
+      - 'saek.html'
+      - 'saek-adaptive-hub.mjs'
+      - 'AGENTS.md'
+      - 'docs/ATLA-ADAPTIVE-LEARNING-CONTRACT.md'
+      - 'scripts/test-mentor-source-index.mjs'
       - 'mentor/knowledge/**'
       - 'mentor/clinical-desk/**'
       - 'mentor/governance/**'
@@ -49,6 +63,9 @@ jobs:
           node --test mentor/clinical-desk/*.test.mjs
           for f in mentor/governance/*.mjs; do node --check "$f"; done
           node --test mentor/governance/*.test.mjs
+          node --check saek-adaptive-hub.mjs
+          node --check mentor/core/saek-readiness.mjs
+          node --test mentor/core/saek-readiness.test.mjs scripts/test-mentor-source-index.mjs
       - name: Run full source quality audit and create clinician review queue
         run: |
           node mentor/review/audit-corpus.mjs --out=mentor-audit-artifact
