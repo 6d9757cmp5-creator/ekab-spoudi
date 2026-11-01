@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-01",
+  "project": "ATLA / EKAB Spoudi",
+  "branch_scope": "draft-review-only",
+  "roadmap": "mentor/library/ENRICHMENT_ROADMAP.md",
+  "status_legend": {
+    "candidate": "Named lead awaiting primary-source verification",
+    "source_verified": "Primary source and format confirmed",
+    "imported_review_only": "File imported with provenance; not clinically approved"
+  },
+  "existing_registry": "mentor/library/source-index.json",
+  "existing_imported_book_count": 7,
+  "candidates": [
+    {
+      "id": "candidate-nancy-caroline",
+      "title": "Nancy Caroline's Emergency Care in the Streets",
+      "priority": 2,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "focus": "Comprehensive paramedic curriculum and patient assessment",
+      "source_url_hint": null,
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-phtls",
+      "title": "PHTLS — Prehospital Trauma Life Support",
+      "priority": 2,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "focus": "Prehospital trauma",
+      "source_url_hint": "https://www.naemt.org/education/phtls",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-amls",
+      "title": "AMLS — Advanced Medical Life Support",
+      "priority": 2,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "focus": "Prehospital medical emergencies",
+      "source_url_hint": "https://www.naemt.org/education/amls",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-who-prehospital-pocket",
+      "title": "WHO Prehospital Emergency Care — Pocket Reference",
+      "priority": 2,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "focus": "Field-oriented prehospital reference",
+      "source_url_hint": null,
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-who-ambulance-operations",
+      "title": "WHO Operational Guidance for Ambulance Systems",
+      "priority": 2,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "focus": "Ambulance systems, dispatch, safety and operations",
+      "source_url_hint": null,
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-guyton-hall",
+      "title": "Guyton and Hall Textbook of Medical Physiology",
+      "priority": 3,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "focus": "Physiology",
+      "source_url_hint": null,
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-robbins-pathology",
+      "title": "Robbins, Cotran & Kumar Pathologic Basis of Disease",
+      "priority": 3,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "focus": "Pathology and pathophysiology",
+      "source_url_hint": null,
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-bates-examination",
+      "title": "Bates' Guide to Physical Examination and History Taking",
+      "priority": 3,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "focus": "Physical examination and history taking",
+      "source_url_hint": null,
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-openstax-anatomy-physiology",
+      "title": "OpenStax Anatomy & Physiology 2e",
+      "priority": 3,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "focus": "Anatomy and physiology",
+      "source_url_hint": "https://openstax.org/details/books/anatomy-and-physiology-2e",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-openstax-microbiology",
+      "title": "OpenStax Microbiology",
+      "priority": 3,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "focus": "Microbiology",
+      "source_url_hint": "https://openstax.org/details/books/microbiology",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-msd-manual-professional",
+      "title": "MSD Manual Professional",
+      "priority": 3,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "focus": "Professional clinical reference",
+      "source_url_hint": "https://www.msdmanuals.com/professional",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-z-anatomy",
+      "title": "Z-Anatomy 3D anatomical models",
+      "priority": 4,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "focus": "Interactive anatomical models",
+      "source_url_hint": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    },
+    {
+      "id": "candidate-physionet-ptb-xl",
+      "title": "PhysioNet PTB-XL ECG Database",
+      "priority": 4,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "focus": "Educational 12-lead ECG dataset",
+      "source_url_hint": "https://physionet.org/content/ptb-xl/1.0.3/",
+      "source_url_verified": false,
+      "status": "candidate",
+      "imported": false,
+      "clinical_approval": false,
+      "notes": "Discover exact primary source, current edition, available formats and chapter-level mapping; check for duplicate before ingesting."
+    }
+  ]
+}
