@@ -40,7 +40,9 @@ test('blind packet reveals source questions and responses but never preliminary 
   assert.ok(!Object.hasOwn(item,'fixtureGeneration'));
   assert.ok(!Object.hasOwn(item,'independentSemanticParaphrase'));
  }
- assert.doesNotMatch(JSON.stringify(packet),/milestone800-/);
+ assert.doesNotMatch(JSON.stringify(packet),/milestone(?:300|800)-/);
+ assert.ok(packet.items.every(x=>/^R-[a-f0-9]{18}$/.test(x.caseId)));
+ assert.equal(new Set(packet.items.map(x=>x.caseId)).size,120);
 });
 test('packet generation deterministic across repeated runs and independent of fixture order',()=>{
  const next=selectReviewCases([...bank.cases].reverse());
@@ -97,7 +99,7 @@ test('same reviewer, duplicate case, false independent attestation or incomplete
  assert.throws(()=>evaluateBallots(packet,a,b),/attestation/);
  b.independentAttestation=true;b.entries[0].caseId=b.entries[1].caseId;
  assert.throws(()=>evaluateBallots(packet,a,b),/duplicate/);
- b.entries[0].caseId=selected[0].id;b.entries[0].rationale='';
+ b.entries[0].caseId=packet.items[0].caseId;b.entries[0].rationale='';
  assert.throws(()=>evaluateBallots(packet,a,b),/rationale/);
  b.entries[0].rationale='Κατάλληλη συγκεκριμένη αιτιολόγηση ελέγχου.';b.entries[0].sourceCitation='';
  assert.throws(()=>evaluateBallots(packet,a,b),/citation/);
