@@ -86,7 +86,7 @@ async function enableRealisticMode(){
   showResult('Το ρεαλιστικό 3D δεν φορτώθηκε. Η προηγούμενη σκηνή παραμένει διαθέσιμη: '+String(error?.message||error).slice(0,120));
  }finally{readyLoading=false;readyToggle.disabled=false;}
 }
-readyToggle.addEventListener('click',()=>readyEnabled?disableRealisticMode():enableRealisticMode());
+readyToggle.addEventListener('click',()=>{if(unifiedEnabled)disableUnified();else if(readyEnabled)disableRealisticMode();else void enableUnified();});
 readyPose.addEventListener('change',()=>{if(readyEnabled)updateReadyModel(readyPose.value);});
 readyModel.addEventListener('load',()=>{
  readyModel.dataset.assetReady='true';
@@ -97,6 +97,69 @@ readyModel.addEventListener('error',()=>{
  readyModel.dataset.assetReady='false';
  disableRealisticMode();
 });
+
+
+// Original unified 3D scene: both patients, equipment and environment share one WebGL renderer.
+// This remains a visual sandbox. No rig, medical finding, diagnosis or treatment response.
+const unifiedOverlay=$('next-unified-overlay'),unifiedHost=$('next-unified-host'),
+ unifiedStatus=$('next-unified-status');
+let unifiedStage=null,unifiedEnabled=false,unifiedLoading=false,lastUnifiedState='';
+const stageState=()=>({
+ scene:getCase(state.caseId)?.scene||'road',
+ person:state.person,view:state.view
+});
+const stageAssets=()=>Object.fromEntries(Object.keys(READY_ASSETS).map(k=>[k,readyURL(k)]));
+function updateUnifiedStatus(status){
+ unifiedStatus.textContent=({
+  loading:'Φορτώνονται δύο πραγματικά 3D μοντέλα, περιβάλλον και εξοπλισμός…',
+  ready:'Ενιαία 3D σκηνή · 2 ασθενείς · περιστροφή με αφή · επιλογή από τη σκηνή',
+  partial:'Δεν φορτώθηκαν όλα τα μοντέλα. Διαθέσιμη η εφεδρική 3D προβολή.'
+ })[status]||'Εναλλακτικό 3D περιβάλλον';
+}
+function disableUnified(){
+ unifiedEnabled=false;unifiedLoading=false;lastUnifiedState='';
+ unifiedOverlay.hidden=true;
+ unifiedStage?.dispose();unifiedStage=null;
+ patientCanvas.style.removeProperty('visibility');
+ readyToggle.disabled=false;
+ readyToggle.textContent='✦ Ενιαία 3D σκηνή';
+ readyToggle.setAttribute('aria-pressed','false');
+ renderer.setPaused?.(!state.playing);
+}
+async function enableUnified(){
+ if(unifiedEnabled||unifiedLoading)return;
+ unifiedLoading=true;readyToggle.disabled=true;
+ readyToggle.textContent='Φόρτωση ενιαίας 3D σκηνής…';
+ try{
+  const {mountUnifiedStage}=await import('../vendor/unified-stage.bundle.mjs');
+  const mounted=mountUnifiedStage(unifiedHost,{
+   assets:stageAssets(),
+   onStatus:(code)=>updateUnifiedStatus(code),
+   onSelect:(id)=>{
+    if(!unifiedEnabled||id===state.person)return;
+    try{commit(setFocus(state,id,state.view),'Επιλέχθηκε ο εικονικός ασθενής '+id.toUpperCase()+' στη 3D σκηνή.');}
+    catch{showResult('Δεν ήταν δυνατή η επιλογή ασθενούς.');}
+   }
+  });
+  unifiedStage=mounted;
+  await mounted.setState(stageState());
+  if(mounted.getStatus()!=='ready')throw Error('Δεν είναι διαθέσιμα και τα δύο 3D μοντέλα.');
+  if(readyEnabled)disableRealisticMode();
+  unifiedEnabled=true;unifiedOverlay.hidden=false;
+  patientCanvas.style.setProperty('visibility','hidden');
+  lastUnifiedState=JSON.stringify(stageState());
+  renderer.setPaused?.(true);
+  readyToggle.textContent='↶ Παλαιά 3D προβολή';
+  readyToggle.setAttribute('aria-pressed','true');
+ }catch(error){
+  disableUnified();
+  showResult('Η ενιαία σκηνή δεν φορτώθηκε. Διατηρείται η προηγούμενη 3D προβολή: '+String(error?.message||error).slice(0,125));
+  // The reliable legacy textured model-viewer is retained as a secondary fallback.
+  await enableRealisticMode();
+ }finally{
+  unifiedLoading=false;readyToggle.disabled=false;
+ }
+}
 
 const fullscreenButton=$('next-fullscreen');
 fullscreenButton.addEventListener('click',async()=>{
@@ -288,7 +351,23 @@ function render(){
  if(readyEnabled)applyReadyCamera();
  renderer.setEnvironment?.(currentCase.scene);
  renderer.setFocus(state.view==='scene'?'scene':state.person,state.view);
- renderer.setPaused(!state.playing);
+ if(unifiedEnabled&&unifiedStage){
+  const next=stageState(),key=JSON.stringify(next);
+  if(key!==lastUnifiedState){
+   lastUnifiedState=key;
+   void unifiedStage.setState(next).then(()=>{
+    if(unifiedStage?.getStatus()==='partial'){
+     disableUnified();
+     void enableRealisticMode();
+     showResult('Η σκηνή άλλαξε, αλλά κάποιο 3D μοντέλο δεν φορτώθηκε: ενεργή η εφεδρική προβολή.');
+    }
+   }).catch(error=>{
+    disableUnified();void enableRealisticMode();
+    showResult('Δεν ενημερώθηκε η ενιαία σκηνή: '+String(error).slice(0,90));
+   });
+  }
+ }
+ renderer.setPaused(unifiedEnabled||!state.playing);
  renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
  renderMenu();renderTool();renderReview();renderInsights();
  window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'MENTOR NEXT — '+currentCase.title}}));
@@ -340,11 +419,11 @@ $('next-nextstep').addEventListener('click',()=>{
  renderMenu();renderTool();
  $('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
 });
-window.addEventListener('pagehide',()=>{clearInterval(clock);meshObserver.disconnect();renderer.dispose();},{once:true});
+window.addEventListener('pagehide',()=>{clearInterval(clock);meshObserver.disconnect();unifiedStage?.dispose();renderer.dispose();},{once:true});
 render();
 // Heavy GLBs load after core controls are interactive; reduced-data users opt in manually.
 if(!navigator.connection?.saveData){
- if(document.readyState==='complete')void enableRealisticMode();
- else window.addEventListener('load',()=>{void enableRealisticMode();},{once:true});
+ if(document.readyState==='complete')void enableUnified();
+ else window.addEventListener('load',()=>{void enableUnified();},{once:true});
 }
 

@@ -179,3 +179,33 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,su
  }
  .ekab-mentor-launcher,.ekab-mentor-presence{display:none!important}
 }
+
+
+/* v0.7 — unified original Three.js scene, two actual CC0 patient GLBs in one WebGL renderer.
+ * Only one active 3D layer receives pointer input. The fallback remains behind it. */
+.next-unified-overlay{position:absolute;inset:0;z-index:5;overflow:hidden;
+ background:linear-gradient(165deg,#95b0ba,#4b6979 67%,#1c3b49)}
+.next-unified-overlay[hidden]{display:none!important}
+.next-unified-host{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+.next-unified-host .next-unified-canvas{width:100%;height:100%;display:block;touch-action:none;outline:none}
+.next-unified-labels{position:absolute;top:13px;left:16px;right:16px;pointer-events:none;
+ display:flex;justify-content:space-between;gap:12px;
+ color:#f5fdff;font-size:.66rem;font-weight:850;letter-spacing:.11em;text-shadow:0 2px 8px #001b25}
+.next-unified-labels span{padding:7px 11px;background:#0c2837bf;border:1px solid #c2f4ef70;border-radius:8px}
+.next-unified-status{position:absolute;top:57px;left:16px;right:16px;pointer-events:none;
+ max-width:460px;margin:0;padding:7px 11px;background:#102f41d9;color:#d2f5f4;
+ border-radius:9px;font-size:.73rem;font-weight:650;line-height:1.4}
+.next-unified-legal{position:absolute;bottom:12px;left:12px;right:12px;max-width:590px;margin:0 auto;
+ pointer-events:none;color:#e6f5f7;background:#102937de;border:1px solid #84bcc273;
+ border-radius:10px;padding:8px 11px;text-align:center;font-size:.69rem;line-height:1.4}
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-cinema-hud,
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-mesh-status,
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-canvas-caption,
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-rotate{display:none}
+@media(max-width:600px){
+ .next-unified-labels{left:8px;right:8px;top:7px;font-size:.56rem;gap:5px}
+ .next-unified-labels span{padding:5px 7px}
+ .next-unified-status{top:43px;left:8px;right:8px;font-size:.63rem;padding:6px 9px}
+ .next-unified-legal{left:8px;right:8px;bottom:7px;font-size:.58rem;padding:5px 8px}
+ .next-unified-host{top:18px;bottom:28px;height:calc(100% - 46px)}
+}

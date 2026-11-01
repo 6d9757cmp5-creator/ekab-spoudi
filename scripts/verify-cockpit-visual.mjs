@@ -27,6 +27,7 @@ try{
   if(!response?.ok())throw Error(device+': HTTP '+response?.status());
   await page.locator('#next-canvas').waitFor({state:'visible',timeout:20000});
   await page.waitForFunction(()=>['ready','fallback'].includes(document.querySelector('#next-canvas')?.dataset.humanModel),null,{timeout:25000});
+  await page.waitForFunction(()=>!document.querySelector('#next-unified-overlay')?.hidden&&document.querySelector('.next-unified-canvas')?.dataset.stageStatus==='ready',null,{timeout:45000});
   await page.locator('#next-stage').scrollIntoViewIfNeeded();
   await page.locator('#next-immersive-stage').scrollIntoViewIfNeeded();
   const state=await page.evaluate(()=>{
@@ -38,13 +39,15 @@ try{
     width:window.innerWidth,height:window.innerHeight,scrollWidth:root.scrollWidth,clientWidth:root.clientWidth,
     theme:getComputedStyle(root).getPropertyValue('--cockpit-accent').trim(),
     stage,scene,monitor,playSize:{width:sizes?.width,height:sizes?.height},
-    patientSource:$('#next-canvas')?.dataset.humanModel,
+    patientSource:document.querySelector('.next-unified-canvas')?.dataset.stageStatus,
+    unifiedVisible:!$('#next-unified-overlay')?.hidden,
     videoCount:document.querySelectorAll('video').length,
     sentinel:!!$('#next-vitals')||!!$('.next-vitals'),
     warningVisible:!!$('.next-warning')?.textContent?.includes('Συνθετικό')
    };
   });
   if(state.theme!=='#76e3d4')throw Error(device+': cockpit design theme missing: '+state.theme);
+  if(state.patientSource!=='ready'||!state.unifiedVisible)throw Error(device+': unified two-patient renderer missing during real screenshots');
   if(state.scrollWidth>state.clientWidth+2)throw Error(device+': horizontal page overflow '+JSON.stringify(state));
   if(!state.stage||!state.scene||!state.monitor||!state.sentinel||!state.warningVisible)throw Error(device+': missing UI section');
   if((state.playSize.height||0)<44)throw Error(device+': touch control below 44 CSS px');
