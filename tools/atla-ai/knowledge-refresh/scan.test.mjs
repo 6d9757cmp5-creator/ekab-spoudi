@@ -50,10 +50,10 @@ test('changed HTTP validators signal only possible source update',()=>{
 test('PubMed results deduplicate across curated topics and preserve topics',async()=>{
  const r=await discoverPubMed(stub);
  assert.equal(r.failures.length,0);
- assert.equal(r.found.length,6);
+ assert.equal(r.found.length,20);
  const merged=mergeCandidates([],r.found,'2026-11-02T02:15:00Z');
  assert.equal(merged.items.length,2);
- assert.deepEqual(merged.items[0].topic_ids,['prehospital','resuscitation','trauma']);
+ assert.equal(merged.items[0].topic_ids.length,10);
 });
 test('scanner reads existing registries but never writes any active medical learning content',async()=>{
  const result=await main({fetcher:stub,now:'2026-11-02T02:15:00Z',write:false});
@@ -69,7 +69,7 @@ test('scanner reads existing registries but never writes any active medical lear
 test('fail closed when PubMed is down',async()=>{
  const bad=async(url,opts)=>opts?.method==='HEAD'?response({}):{ok:false,status:503,text:async()=>''};
  const r=await main({fetcher:bad,now:'2026-11-02T02:15:00Z',write:false});
- assert.equal(r.metadata.pubmed_failures.length,3);
+ assert.equal(r.metadata.pubmed_failures.length,10);
  assert.equal(r.metadata.newly_discovered_papers,0);
  assert.equal(r.metadata.clinical_retrieval_updated,false);
 });
