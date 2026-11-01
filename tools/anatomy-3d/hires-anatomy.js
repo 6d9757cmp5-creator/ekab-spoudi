@@ -3,6 +3,7 @@
    anatomically fitted/transformed male-derived bones and other systems (not native female scans).
    Data CC BY 4.0, code original. No reads/writes to student progress or accounts. */
 import { anatomicalGreek, anatomyName, eligibleQuizName } from './greek-names.js';
+import {ANATOMY_GROUPS,cageKind,matchesCageGroup} from './cage-focus.mjs';
 const threeURL='https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
 const PROVIDERS={
   male:{
@@ -56,7 +57,7 @@ const GREEK={
  'prostate':'Προστάτης','testis':'Όρχις','penis':'Πέος',
  'thyroid gland':'Θυρεοειδής αδένας','adrenal gland':'Επινεφρίδιο'};
 const TRANSLATE=Object.entries(GREEK).sort((a,b)=>b[0].length-a[0].length);
-const ui={sex:'male',mode:'skeleton',system:'all',selected:null,isolate:false,opacity:.14,tab:'explore',quiz:false,answered:false,target:null,score:0,attempts:0,prev:null};
+const ui={sex:'male',mode:'skeleton',system:'all',selected:null,groupFocus:null,isolate:false,opacity:.14,tab:'explore',quiz:false,answered:false,target:null,score:0,attempts:0,prev:null};
 
 /* Safe, shareable chapter links. Values are allow-listed; no storage and no open redirect. */
 function readDeepLink(){
@@ -66,7 +67,7 @@ function readDeepLink(){
   mode:['skeleton','organs','both'].includes(mode)?mode:null,
   sex:['male','female'].includes(sex)?sex:null,
   system:validSystems.has(system)?system:null,
-  focus:/^(skull|vertebra|spinalcord|lung|rib|heart|aorta|brain|liver|stomach|trachea|kidney|uterus|thyroid|femur|humerus|pelvis)$/.test(focus||'')?focus:null,
+  focus:/^(skull|vertebra|spinalcord|lung|rib|ribs|thorax|heart|aorta|brain|liver|stomach|trachea|kidney|uterus|thyroid|femur|humerus|pelvis)$/.test(focus||'')?focus:null,
   from:/^(01|02|05|10|14|17|18)$/.test(from||'')?from:null,
   chapter:/^(?:[1-9]|1\d|2\d)$/.test(chapter||'')?Number(chapter):null
  }
@@ -103,7 +104,28 @@ function configureLessonReturn(){
  link.hidden=false
 }
 function focusRequestedStructure(){
- if(!requestedFocus||!atlas||!FOCUS_TERMS[requestedFocus])return;
+ if(!requestedFocus||!atlas)return;
+ // SAEK group labels cannot be represented by one arbitrarily chosen mesh.
+ if(ANATOMY_GROUPS[requestedFocus]){
+  const group=requestedFocus;
+  const items=atlas.parts.filter(p=>p._loaded&&partVisible(p)&&matchesCageGroup(p,group)&&Array.isArray(p.bounds)&&p.bounds.length===2);
+  if(items.length){
+   const lo=[Infinity,Infinity,Infinity],hi=[-Infinity,-Infinity,-Infinity];
+   for(const p of items)for(let i=0;i<3;i++){
+    lo[i]=Math.min(lo[i],p.bounds[0][i]);hi[i]=Math.max(hi[i],p.bounds[1][i]);
+   }
+   ui.selected=null;selectedPartIndex=-1;ui.groupFocus=group;
+   describeSelected();list();updateScene();focusPart({bounds:[lo,hi]});
+  }else{
+   $('detailCard').hidden=false;
+   $('detailName').textContent='Δεν βρέθηκε αντιστοίχιση 3D';
+   $('detailSystem').textContent='Δεν επιλέχθηκε αυθαίρετη πλευρά';
+   $('detailDescription').textContent='Το σχετικό σύστημα άνοιξε, αλλά δεν βρέθηκε η ομάδα δομών στον άτλαντα.';
+   $('detailOriginal').textContent='';$('detailStudy').hidden=true;
+  }
+  return;
+ }
+ if(!FOCUS_TERMS[requestedFocus])return;
  const regex=FOCUS_TERMS[requestedFocus];
  const matched=atlas.parts.filter(p=>partVisible(p)&&regex.test(p.name));
  const ranked=matched.sort((a,b)=>{
@@ -135,8 +157,21 @@ function setControls(){document.querySelectorAll('[data-sex]').forEach(b=>{const
 const TOPIC_LINKS={skeletal:2,muscular:9,connective:9,respiratory:3,digestive:12,cardiac:10,arterial:10,venous:10,nervous:8,brain:8,urinary:13,reproductive:13};
 const INTRO={skeletal:'Οστό που συμμετέχει στη στήριξη, στην προστασία ή στην κίνηση του σώματος.',cardiac:'Η καρδιά προωθεί το αίμα στην πνευμονική και στη συστηματική κυκλοφορία.',respiratory:'Δομή που συμμετέχει στη μεταφορά αέρα ή στην αναπνοή.',digestive:'Δομή που συμμετέχει στην πέψη, στην απορρόφηση ή στη μεταφορά τροφής.',nervous:'Δομή του συστήματος που μεταφέρει και επεξεργάζεται νευρικά σήματα.',urinary:'Δομή που συμμετέχει στη δημιουργία, στη μεταφορά ή στην αποβολή ούρων.',reproductive:'Δομή που ανήκει στο αναπαραγωγικό σύστημα.'};
 function describeSelected(){
- const p=partsById.get(ui.selected),card=$('detailCard');card.hidden=!p;
- const banner=$('selectedBanner');banner.hidden=!p||ui.quiz;
+ const p=partsById.get(ui.selected),card=$('detailCard'),group=ANATOMY_GROUPS[ui.groupFocus];
+ card.hidden=!p&&!group;
+ const banner=$('selectedBanner');banner.hidden=(!p&&!group)||ui.quiz;
+ card.querySelector('.detail-label').textContent=group?'ΕΠΙΛΕΓΜΕΝΗ ΟΜΑΔΑ ΔΟΜΩΝ':'ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ';
+ if(group){
+  $('selectedName').textContent=group.name;
+  $('detailIcon').textContent='🦴';$('detailName').textContent=group.name;
+  $('detailSystem').textContent='Σκελετικό · ομάδα ανατομικών δομών';
+  $('detailDescription').textContent=group.description;
+  $('detailOriginal').textContent='Πολλαπλές δομές — όχι μεμονωμένη πλευρά.';
+  const link=$('detailStudy');link.hidden=false;
+  link.href='../../saek-course-'+(deep.from||'01')+'.html#lesson-'+(deep.chapter||3);
+  link.textContent='Επιστροφή στο σχετικό κεφάλαιο ΣΑΕΚ ↗';
+  return;
+ }
  if(!p)return;
  $('selectedName').textContent=anatomyName(p.name,p.system,sysNames).label;
  const n=anatomyName(p.name,p.system,sysNames);
@@ -177,9 +212,9 @@ function list(){
  el.append(doc);
  if(filtered.length>maxItems){const tip=document.createElement('p');tip.className='empty';tip.textContent='Εμφανίζονται οι πρώτες '+maxItems+' δομές. Αναζήτησε το συγκεκριμένο σημείο για περισσότερα.';el.append(tip);}
 }
-function setMode(mode){requestedFocus=null;if(ui.quiz)resetQuiz();ui.mode=mode;ui.system='all';ui.selected=null;ui.isolate=false;selectedPartIndex=-1;setControls();describeSelected();list();updateScene()}
+function setMode(mode){requestedFocus=null;ui.groupFocus=null;if(ui.quiz)resetQuiz();ui.mode=mode;ui.system='all';ui.selected=null;ui.isolate=false;selectedPartIndex=-1;setControls();describeSelected();list();updateScene()}
 function setSystem(system){
- requestedFocus=null;
+ requestedFocus=null;ui.groupFocus=null;
  if(ui.quiz)resetQuiz();
  ui.system=system;
  // A focused system must not leave a contradictory "Skeleton" selection on organs.
@@ -190,8 +225,8 @@ function setSystem(system){
  setControls();describeSelected();list();updateScene();
 }
 function setTab(which){if(which==='explore'&&ui.quiz)resetQuiz();ui.tab=which;const isQuiz=which==='quiz';$('explorePanel').hidden=isQuiz;$('quizPanel').hidden=!isQuiz;$('exploreTab').setAttribute('aria-selected',String(!isQuiz));$('quizTab').setAttribute('aria-selected',String(isQuiz));list()}
-function choose(id){const p=partsById.get(id);if(!validPart(p))return;if(ui.quiz&&!ui.answered){answer(id);return}ui.selected=id;selectedPartIndex=p._index;describeSelected();list();updateScene()}
-function chooseSex(sex){if(ui.sex===sex)return;ui.sex=sex;ui.system='all';ui.selected=null;ui.isolate=false;ui.quiz=false;ui.answered=false;resetQuiz();setControls();describeSelected();loadModel()}
+function choose(id){const p=partsById.get(id);if(!validPart(p))return;if(ui.quiz&&!ui.answered){answer(id);return}ui.groupFocus=null;ui.selected=id;selectedPartIndex=p._index;describeSelected();list();updateScene()}
+function chooseSex(sex){if(ui.sex===sex)return;ui.groupFocus=null;ui.sex=sex;ui.system='all';ui.selected=null;ui.isolate=false;ui.quiz=false;ui.answered=false;resetQuiz();setControls();describeSelected();loadModel()}
 // The selection is always emphasized; surrounding structures are never isolated or hidden.
 function updateScene(){
  const focus=$('isolateBtn'),part=partsById.get(ui.selected);
@@ -204,13 +239,13 @@ function updateScene(){
   if(m.transparent!==transparent){m.transparent=transparent;m.needsUpdate=true}
   m.opacity=isSkin?ui.opacity:(ui.mode==='both'&&item.userData.system==='skeletal'?.62:1);
   m.depthWrite=!transparent;
-  if(m.userData.uniforms)m.userData.uniforms.selected.value=selectedPartIndex;
+  if(m.userData.uniforms){m.userData.uniforms.selected.value=selectedPartIndex;m.userData.uniforms.group.value=ui.groupFocus==='thorax'?2:ui.groupFocus==='ribs'?1:0;}
  }
  updateHotspot();requestPaint();
 }
 function resetQuiz(){
  ui.quiz=false;ui.answered=false;ui.target=null;ui.score=0;ui.attempts=0;ui.prev=null;
- selectedPartIndex=-1;ui.selected=null;ui.isolate=false;describeSelected();
+ selectedPartIndex=-1;ui.selected=null;ui.groupFocus=null;ui.isolate=false;describeSelected();
  $('quizScore').textContent='0';$('quizAttempts').textContent='0';
  $('quizStart').hidden=false;$('quizStop').hidden=true;$('quizNext').hidden=true;
  $('quizOptions').replaceChildren();$('quizOptions').hidden=true;$('quizSee3D').hidden=true;$('quizBackToAnswers').hidden=true;
@@ -275,7 +310,7 @@ function answer(id){
  ui.selected=ui.target;selectedPartIndex=correct._index;
  describeSelected();updateScene();
 }
-function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{const p=partsById.get(ui.selected);if(p)focusPart(p)});$('clearSelection').addEventListener('click',()=>{ui.selected=null;selectedPartIndex=-1;describeSelected();list();updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizBackToAnswers').addEventListener('click',()=>document.getElementById('quizOptions').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
+function initUI(){document.querySelectorAll('[data-sex]').forEach(b=>b.addEventListener('click',()=>chooseSex(b.dataset.sex)));document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));$('systemFilter').addEventListener('change',e=>setSystem(e.target.value));$('anatomySearch').addEventListener('input',list);$('greekOnly').addEventListener('change',list);$('exploreTab').addEventListener('click',()=>setTab('explore'));$('quizTab').addEventListener('click',()=>setTab('quiz'));$('outline').addEventListener('input',e=>{ui.opacity=+e.target.value/100;$('outlineValue').value=e.target.value+'%';updateScene()});$('isolateBtn').addEventListener('click',()=>{const p=partsById.get(ui.selected);if(p)focusPart(p)});$('clearSelection').addEventListener('click',()=>{ui.selected=null;ui.groupFocus=null;selectedPartIndex=-1;describeSelected();list();updateScene()});$('quizStart').addEventListener('click',()=>{ui.score=0;ui.attempts=0;$('quizAttempts').textContent='0';$('quizScore').textContent='0';nextQuiz()});$('quizNext').addEventListener('click',nextQuiz);$('quizSee3D').addEventListener('click',()=>document.getElementById('anatomyViewport').scrollIntoView({behavior:'smooth',block:'center'}));$('quizBackToAnswers').addEventListener('click',()=>document.getElementById('quizOptions').scrollIntoView({behavior:'smooth',block:'center'}));$('quizStop').addEventListener('click',resetQuiz);$('zoomIn').addEventListener('click',()=>{orbit.r=Math.max(.12,orbit.r*.75);cameraMove()});$('zoomOut').addEventListener('click',()=>{orbit.r=Math.min(40,orbit.r*1.35);cameraMove()});$('resetView').addEventListener('click',resetCamera);$('frontView').addEventListener('click',()=>{orbit.az=0;orbit.polar=Math.PI/2;cameraMove()});$('backView').addEventListener('click',()=>{orbit.az=Math.PI;orbit.polar=Math.PI/2;cameraMove()});$('retryBtn').addEventListener('click',loadModel);
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)){e.preventDefault();$('anatomySearch').focus()}if(e.target===$('anatomyViewport')){const keys={ArrowLeft:[-.12,0],ArrowRight:[.12,0],ArrowUp:[0,-.12],ArrowDown:[0,.12]};const v=keys[e.key];if(v){e.preventDefault();orbit.az+=v[0];orbit.polar=Math.min(Math.PI-.05,Math.max(.05,orbit.polar+v[1]));cameraMove()}}});
 resetQuiz();setControls();describeSelected();list();configureLessonReturn()}
 function resetCamera(){orbit.az=0;orbit.polar=Math.PI/2;orbit.r=innerWidth<=560?3:3.7;orbit.y=.85;cameraMove()}
@@ -292,21 +327,43 @@ function freeModel(){for(const mesh of meshChunks){scene.remove(mesh);mesh.geome
 // Orange high-contrast selection in the same shader: no hiding other meshes.
 function newMaterial(system){
  const m=new THREE.MeshStandardMaterial({color:colors[system]||0xa9b4bc,roughness:.6,metalness:.02,side:THREE.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.14:1});
- const uniforms={selected:{value:-1}};m.userData.uniforms=uniforms;
+ const uniforms={selected:{value:-1},group:{value:0}};m.userData.uniforms=uniforms;
  m.onBeforeCompile=shader=>{
   shader.uniforms.anatomySelected=uniforms.selected;
-  shader.vertexShader='attribute float partIndex; varying float anatomyPartIndex;\n'+shader.vertexShader;
-  shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;');
-  shader.fragmentShader='varying float anatomyPartIndex; uniform float anatomySelected;\n'+shader.fragmentShader;
-  shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5) diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0,0.60,0.17),0.88);');
-  shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5) totalEmissiveRadiance += vec3(0.32,0.15,0.025);');
+  shader.uniforms.anatomyGroup=uniforms.group;
+  shader.vertexShader='attribute float partIndex; attribute float anatomyGroupKind; varying float anatomyPartIndex; varying float anatomyGroupKindV;\n'+shader.vertexShader;
+  shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;\nanatomyGroupKindV=anatomyGroupKind;');
+  shader.fragmentShader='varying float anatomyPartIndex; varying float anatomyGroupKindV; uniform float anatomySelected; uniform float anatomyGroup;\n'+shader.fragmentShader;
+  const member='(anatomyGroup>1.5 && anatomyGroupKindV>0.5) || (anatomyGroup>0.5 && anatomyGroup<1.5 && abs(anatomyGroupKindV-1.0)<0.5)';
+  shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5 || '+member+') diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0,0.60,0.17),0.88);');
+  shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5 || '+member+') totalEmissiveRadiance += vec3(0.32,0.15,0.025);');
  };
  materials.push(m);return m;
 }
-function makeGroup(system,parts,buffer){let vertices=0,indices=0;for(const p of parts){vertices+=p.vertexCount;indices+=p.indexCount}const pos=new Float32Array(vertices*3),norm=new Int16Array(vertices*3),partIndex=new Float32Array(vertices),index=new Uint32Array(indices);
-let vi=0,ii=0;for(const p of parts){pos.set(new Float32Array(buffer,p.positions,p.vertexCount*3),vi*3);norm.set(new Int16Array(buffer,p.normals,p.vertexCount*3),vi*3);partIndex.fill(p._index,vi,vi+p.vertexCount);const input=new Uint32Array(buffer,p.indices,p.indexCount);for(let k=0;k<input.length;k++)index[ii+k]=input[k]+vi;vi+=p.vertexCount;ii+=p.indexCount;p._loaded=true}
-const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('normal',new THREE.BufferAttribute(norm,3,true));g.setAttribute('partIndex',new THREE.BufferAttribute(partIndex,1));g.setIndex(new THREE.BufferAttribute(index,1));g.computeBoundingSphere();
-const mesh=new THREE.Mesh(g,newMaterial(system));mesh.userData.system=system;mesh.frustumCulled=false;mesh.visible=systemVisible(system);scene.add(mesh);meshChunks.push(mesh);allMeshes.push(mesh)}
+function makeGroup(system,parts,buffer){
+ let vertices=0,indices=0;
+ for(const p of parts){vertices+=p.vertexCount;indices+=p.indexCount;}
+ const pos=new Float32Array(vertices*3),norm=new Int16Array(vertices*3),partIndex=new Float32Array(vertices),groupKind=new Uint8Array(vertices),index=new Uint32Array(indices);
+ let vi=0,ii=0;
+ for(const p of parts){
+  pos.set(new Float32Array(buffer,p.positions,p.vertexCount*3),vi*3);
+  norm.set(new Int16Array(buffer,p.normals,p.vertexCount*3),vi*3);
+  partIndex.fill(p._index,vi,vi+p.vertexCount);
+  groupKind.fill(cageKind(p),vi,vi+p.vertexCount);
+  const input=new Uint32Array(buffer,p.indices,p.indexCount);
+  for(let k=0;k<input.length;k++)index[ii+k]=input[k]+vi;
+  vi+=p.vertexCount;ii+=p.indexCount;p._loaded=true;
+ }
+ const g=new THREE.BufferGeometry();
+ g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+ g.setAttribute('normal',new THREE.BufferAttribute(norm,3,true));
+ g.setAttribute('partIndex',new THREE.BufferAttribute(partIndex,1));
+ g.setAttribute('anatomyGroupKind',new THREE.Uint8BufferAttribute(groupKind,1,false));
+ g.setIndex(index);g.computeBoundingSphere();
+ const mesh=new THREE.Mesh(g,newMaterial(system));
+ mesh.userData.system=system;mesh.frustumCulled=false;mesh.visible=systemVisible(system);
+ scene.add(mesh);meshChunks.push(mesh);allMeshes.push(mesh);
+}
 async function chunkBuffer(chunk,root,signal){const fname=String(chunk.gzip||chunk.url+'.gz').split('/').pop();const path=root+fname;
 let response=await fetch(path,{signal});if(!response.ok)throw Error('Αποτυχία λήψης 3D δεδομένων ('+response.status+').');
 let buf=await response.arrayBuffer();const bytes=new Uint8Array(buf);if(bytes[0]===0x1f&&bytes[1]===0x8b){if(typeof DecompressionStream==='undefined')throw Error('Η συσκευή δεν υποστηρίζει αποσυμπίεση gzip.');buf=await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()}
