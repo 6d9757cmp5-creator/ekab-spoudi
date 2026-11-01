@@ -1,0 +1,45 @@
+name: Cloudflare Workers Free — zero-charge readiness check
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/check-cloudflare-free-readiness.mjs
+      - scripts/cloudflare-free-plan-preflight.mjs
+      - workers/answer-grader/**
+      - functions/answer-grader/free-providers.js
+      - ai-grading-client.js
+      - .github/workflows/cloudflare-free-readiness.yml
+      - .github/workflows/deploy-answer-grader-worker.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-no-deployment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source, Free model binding and manual deployment gate
+        run: |
+          node scripts/check-cloudflare-free-readiness.mjs
+          node --check workers/answer-grader/src/index.js
+          node --test functions/answer-grader/safety-contrast-guard.test.mjs
+      - name: Bundle only — NEVER publish or run the model
+        working-directory: workers/answer-grader
+        run: npx --yes wrangler@4 deploy --dry-run --config wrangler.jsonc
+      - name: Read-only account subscription probe; missing permissions mean NOT VERIFIED
+        run: node scripts/cloudflare-free-plan-preflight.mjs
+      - name: Save evidence; account billing status still needs manual confirmation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-free-readiness
+          path: audit-results/cloudflare-free-readiness.json
+          if-no-files-found: warn
+          retention-days: 30
