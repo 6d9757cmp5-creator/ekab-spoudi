@@ -31,17 +31,18 @@ jobs:
           node --check saek-course-series.js
           node --check scripts/app-load-smoke.mjs
           node scripts/verify-static-pages.mjs
+          node scripts/verify-tool-boundaries.mjs
           node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
           node --check protocols-data.mjs
           node --check protocols-page.mjs
-          node --check mentor/core/next-cases.mjs
-          node --check mentor/core/next-sim.mjs
-          node --check mentor/app/next-sim.mjs
-          node --check mentor/app/next-scene.mjs
-          node --check mentor/app/next-patient-mesh.mjs
-          node --test mentor/app/next-patient-mesh.test.mjs
-          node --check mentor/core/next-review.mjs
-          node --test mentor/core/next-sim.test.mjs mentor/core/next-review.test.mjs mentor/core/next-cases.test.mjs
+          node --check tools/patient-simulator/core/next-cases.mjs
+          node --check tools/patient-simulator/core/next-sim.mjs
+          node --check tools/patient-simulator/app/next-sim.mjs
+          node --check tools/patient-simulator/app/next-scene.mjs
+          node --check tools/patient-simulator/app/next-patient-mesh.mjs
+          node --test tools/patient-simulator/app/next-patient-mesh.test.mjs
+          node --check tools/patient-simulator/core/next-review.mjs
+          node --test tools/patient-simulator/core/next-sim.test.mjs tools/patient-simulator/core/next-review.test.mjs tools/patient-simulator/core/next-cases.test.mjs
           node --check mentor/core/live-debrief.mjs
           node --check mentor/core/live-interactions.mjs
           node --check mentor/app/live.js

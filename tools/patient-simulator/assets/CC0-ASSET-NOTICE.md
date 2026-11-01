@@ -1,7 +1,7 @@
 # License for CC0 human patient mesh (MENTOR NEXT v0.4)
 
 Source: https://github.com/UMRAM-Bilkent/supine-human-model
-File: `assets/human_posed.glb`, stored as `mentor/assets/cc0-human-body.glb`.
+File: `assets/human_posed.glb`, stored as `tools/patient-simulator/assets/cc0-human-body.glb`.
 Source credit: UMRAM, Bilkent University; original CC0 Quaternius character.
 The source repository and model are distributed under CC0-1.0. This is not a validated anatomical model or a clinical asset.
 No Body Interact trademarks, meshes, screenshots, UI files, physiological algorithms or patient cases are included.

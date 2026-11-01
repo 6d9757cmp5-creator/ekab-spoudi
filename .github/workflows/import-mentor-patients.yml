@@ -1,8 +1,5 @@
-name: Import CC0 realistic patient models for MENTOR
+name: Import CC0 realistic patient models for Patient Simulator
 on:
-  push:
-    paths:
-      - .github/workflows/import-mentor-patients.yml
   workflow_dispatch:
 permissions:
   contents: write
@@ -21,22 +18,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p mentor/assets/patients mentor/vendor
+          mkdir -p tools/patient-simulator/assets/patients tools/patient-simulator/vendor
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
             'https://www.innerscene.com/api/library/looking-upward-3d-person-standing-fbf49423/download' \
-            --output mentor/assets/patients/alex-standing.glb
+            --output tools/patient-simulator/assets/patients/alex-standing.glb
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
             'https://www.innerscene.com/api/library/daniel-3d-person-lying-flat-820f78f4/download' \
-            --output mentor/assets/patients/daniel-lying.glb
+            --output tools/patient-simulator/assets/patients/daniel-lying.glb
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
             'https://www.innerscene.com/api/library/amara-3d-person-sitting-up-in-bed-3427c39e/download' \
-            --output mentor/assets/patients/amara-sitting.glb
+            --output tools/patient-simulator/assets/patients/amara-sitting.glb
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 120 \
             'https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js' \
-            --output mentor/vendor/model-viewer.min.js
+            --output tools/patient-simulator/vendor/model-viewer.min.js
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 40 \
             'https://raw.githubusercontent.com/google/model-viewer/v4.3.1/LICENSE' \
-            --output mentor/vendor/MODEL-VIEWER-LICENSE.txt
+            --output tools/patient-simulator/vendor/MODEL-VIEWER-LICENSE.txt
       - name: Verify real binary GLB files and JavaScript
         shell: bash
         run: |
@@ -44,7 +41,7 @@ jobs:
           from pathlib import Path
           import struct,json
           for name in ['alex-standing','daniel-lying','amara-sitting']:
-              p=Path('mentor/assets/patients')/(name+'.glb')
+              p=Path('tools/patient-simulator/assets/patients')/(name+'.glb')
               b=p.read_bytes()
               assert 1000000 < len(b) < 70000000, (name,len(b))
               magic,version,total=struct.unpack_from('<III',b,0)
@@ -55,7 +52,7 @@ jobs:
               assert model.get('meshes'),(name,'no meshes')
               assert model.get('materials'),(name,'no materials')
               print('PASS',name,'bytes',len(b),'meshes',len(model['meshes']),'materials',len(model['materials']))
-          assert Path('mentor/vendor/model-viewer.min.js').stat().st_size>100000
+          assert Path('tools/patient-simulator/vendor/model-viewer.min.js').stat().st_size>100000
           print('PASS pinned standalone model-viewer 4.3.1')
           PY
       - name: Commit verified models into the MENTOR repository
@@ -64,9 +61,9 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add mentor/assets/patients/*.glb mentor/vendor/model-viewer.min.js mentor/vendor/MODEL-VIEWER-LICENSE.txt
+          git add tools/patient-simulator/assets/patients/*.glb tools/patient-simulator/vendor/model-viewer.min.js tools/patient-simulator/vendor/MODEL-VIEWER-LICENSE.txt
           if git diff --staged --quiet; then echo "Assets already committed"; exit 0; fi
-          git commit -m "assets(mentor): install verified textured CC0 patient models and local renderer"
+          git commit -m "assets(patient-simulator): verify ready-made CC0 models"
           for attempt in 1 2 3 4; do
             git pull --rebase origin main
             if git push origin HEAD:main; then exit 0; fi

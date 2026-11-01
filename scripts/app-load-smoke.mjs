@@ -204,7 +204,7 @@ try {
 
 
     // v0.4 visual regression: browser loads a CC0 human mesh or explicitly reports fallback.
-    const humanAsset=await page.request.get('http://127.0.0.1:8765/mentor/assets/cc0-human-body.glb');
+    const humanAsset=await page.request.get('http://127.0.0.1:8765/tools/patient-simulator/assets/cc0-human-body.glb');
     if(!humanAsset.ok()||(await humanAsset.body()).length<100000)throw Error(device+': missing real CC0 mesh GLB');
     await page.waitForFunction(()=>{
       const c=document.getElementById('next-canvas');
@@ -220,7 +220,7 @@ try {
 
     // v0.5: real textured Innerscene CC0 patients and locally hosted model-viewer.
     for(const name of ['alex-standing.glb','daniel-lying.glb','amara-sitting.glb']){
-      const response=await page.request.get('http://127.0.0.1:8765/mentor/assets/patients/'+name);
+      const response=await page.request.get('http://127.0.0.1:8765/tools/patient-simulator/assets/patients/'+name);
       if(!response.ok()||(await response.body()).length<3000000)throw Error(device+': ready-made GLB absent '+name);
     }
     try{
