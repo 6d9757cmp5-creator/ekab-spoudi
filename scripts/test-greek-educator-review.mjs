@@ -12,7 +12,7 @@ const fixtureFor=id=>bank.cases.find(x=>x.id===id);
 const ballot=(who='teacher_A')=>({
  ...buildBlankBallot(selected),reviewerCode:who,qualification:'Εκπαιδευτής υπό έλεγχο προσόντων',
  independentAttestation:true,reviewedAt:'2026-11-01',
- entries: selected.map(c=>({caseId:c.id,verdict:'partial',rationale:'Εκπαιδευτική κρίση που θα ελεγχθεί από ανεξάρτητο αξιολογητή.',
+ entries: buildBlankBallot(selected).entries.map(c=>({caseId:c.caseId,verdict:'partial',rationale:'Εκπαιδευτική κρίση που θα ελεγχθεί από ανεξάρτητο αξιολογητή.',
   sourceCitation:'Εκπαιδευτική αναφορά της συγκεκριμένης ερώτησης',criticalSafetyError:false}))
 });
 
