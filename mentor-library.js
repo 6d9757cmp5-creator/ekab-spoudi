@@ -12,13 +12,26 @@ function sourceCard(item){
   const li=el('li');li.className='source-card';
   li.append(el('h2',item.title));
   li.append(el('p','Φορέας: '+item.publisher));
+  if(item.edition)li.append(el('p','Έκδοση: '+item.edition));
+  if(item.curriculum_topics?.length)li.append(el('p','Θεματικές: '+item.curriculum_topics.join(' · ')));
+  if(item.learning_priority)li.append(el('p','Στάδιο εμπλουτισμού ATLA: '+item.learning_priority+' / 6'));
   li.append(el('p','Διαδρομή μελέτης: '+item.learning_tracks.map(t=>t==='paramedic'?'Paramedic':'Ιατρική').join(' · ')));
-  li.append(el('p','Κατάσταση: '+(item.extracted_for_review?'Εξαγωγή για εσωτερικό έλεγχο':'Πηγή εντοπισμένη — χωρίς εξαγωγή κειμένου')));
+  li.append(el('p','Κατάσταση: '+(item.extracted_for_review?'Εξαγωγή για εσωτερικό έλεγχο':item.reference_only?'Νέα βιβλιογραφική πηγή — άνοιγμα στον εκδότη':'Πηγή εντοπισμένη — χωρίς εξαγωγή κειμένου')));
   const caution=el('p','Ανεξάρτητος επιστημονικός έλεγχος: εκκρεμεί');caution.className='pending';li.append(caution);
   const details=el('details'),summary=el('summary','Άδεια και περιορισμοί πηγής'),description=el('p',item.license_summary||'Απαιτείται έλεγχος δικαιωμάτων.');
   details.append(summary,description);li.append(details);
   const link=el('a','Άνοιγμα πηγής στον εκδότη');
   link.href=item.source_url;link.target='_blank';link.rel='noopener noreferrer';li.append(link);
+  if(item.section_urls?.length){
+    const chapters=el('details'),header=el('summary','Διαθέσιμες εξειδικευμένες ενότητες');
+    chapters.append(header);
+    for(const url of item.section_urls){
+      const chapter=el('a','Άνοιγμα ενότητας στην πηγή');
+      chapter.href=url;chapter.target='_blank';chapter.rel='noopener noreferrer';
+      chapters.append(chapter,el('span','  '));
+    }
+    li.append(chapters);
+  }
   return li;
 }
 try{
