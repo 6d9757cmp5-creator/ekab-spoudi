@@ -227,7 +227,7 @@ try {
       await page.waitForFunction(()=>{
         const overlay=document.querySelector('#next-ready-overlay');
         const viewer=document.querySelector('#next-ready-model');
-        return overlay&&!overlay.hidden&&viewer?.getAttribute('src')?.includes('alex-standing.glb');
+        return overlay&&!overlay.hidden&&viewer?.getAttribute('src')?.endsWith('.glb')&&viewer.dataset.assetReady==='true';
       },null,{timeout:15000});
     }catch(error){
       const info=await page.evaluate(()=>({
