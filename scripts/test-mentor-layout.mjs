@@ -14,7 +14,7 @@ const modules={
  'mentor-live.js':'mentor/app/live.js',
  'mentor-library.js':'mentor/app/library.js',
  'mentor-oral.js':'mentor/app/oral.js',
- 'mentor-ecg.js':'mentor/app/ecg.js',
+ 'mentor-ecg.js':'tools/ecg-lab/app/ecg.js',
  'mentor-scenarios.js':'mentor/app/scenarios.js',
  'mentor-readonly.js':'mentor/app/readonly.js',
  'mentor-voice.mjs':'mentor/voice/speech.mjs',

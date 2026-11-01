@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
-<title>MENTOR · Clinical Simulation Cockpit · ΕΚΑΒ Live</title>
+<title>Προσομοίωση Περιστατικών · ΕΚΑΒ Σπουδή</title>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <link rel="stylesheet" href="mentor/styles/live-cockpit.css">
 <style>
@@ -64,7 +64,7 @@
 <main class="live-shell">
  <div class="live-top">
   <a href="mentor-lab.html">← Επιστροφή στο MENTOR</a>
-  <span class="live-kicker">MENTOR OS · Εκπαιδευτική έκδοση · χωρίς AI</span>
+  <span class="live-kicker">ΠΡΟΣΟΜΟΙΩΣΗ · Εκπαιδευτική έκδοση · χωρίς AI</span>
  </div>
  <section class="live-hero" aria-labelledby="live-heading">
   <span class="live-kicker">ΕΚΑΒ Live · νέα εκπαιδευτική αποστολή</span>
@@ -75,7 +75,7 @@
   <strong>Εκπαιδευτικός προσομοιωτής, όχι ιατρικό εργαλείο.</strong>
   Οι τιμές είναι συνθετικές και ακολουθούν προκαθορισμένα βήματα· ορισμένες λανθασμένες εκπαιδευτικές επιλογές προσθέτουν βήματα καθυστέρησης. Δεν υπάρχει επικυρωμένο φυσιολογικό μοντέλο, διάγνωση, ιατρική διαλογή ή θεραπεία. Απαιτείται ανεξάρτητη κλινική αξιολόγηση.
  </div>
- <p class="live-disclaimer" style="border-left-color:#2a9a98"><strong>ΝΕΟ: MENTOR NEXT (πρωτότυπο WebGL).</strong> <a href="mentor-next.html">▶ Άνοιξε την αναβαθμισμένη διαδραστική αποστολή</a> · Συνθετικά περιστατικά, δύο 3D low-poly ασθενείς, παρατηρήσεις και ενιαίο debrief.</p>
+ <p class="live-disclaimer" style="border-left-color:#2a9a98"><strong>ΝΕΟ: ΠΡΟΣΟΜΟΙΩΤΗΣ ΑΣΘΕΝΩΝ (πρωτότυπο WebGL).</strong> <a href="mentor-next.html">▶ Άνοιξε την αναβαθμισμένη διαδραστική αποστολή</a> · Συνθετικά περιστατικά, δύο 3D low-poly ασθενείς, παρατηρήσεις και ενιαίο debrief.</p>
  <details id="live-briefing" class="live-panel live-briefing">
   <summary>Πληροφορίες αποστολής · στόχοι και περιορισμοί</summary>
   <p>Συνθετικό τροχαίο σε οδικό δίκτυο της Κρήτης. Δύο άτομα, περιορισμένα επιβεβαιωμένα δεδομένα. Εξασκείσαι στην ασφάλεια σκηνής, τον συντονισμό, την αντικειμενική καταγραφή και τη δομημένη παράδοση.</p>
@@ -83,7 +83,7 @@
  </details>
  <section class="sim-cockpit" id="sim-cockpit" aria-label="Πίνακας εικονικού προνοσοκομειακού περιστατικού">
   <header class="sim-head">
-    <div><strong>MENTOR OS · SIMULATION COCKPIT</strong><small>Συνθετικό περιστατικό · ίδιος MENTOR, ίδια αποστολή</small></div>
+    <div><strong>ΠΡΟΣΟΜΟΙΩΣΗ ΠΕΡΙΣΤΑΤΙΚΩΝ · COCKPIT</strong><small>Συνθετικό περιστατικό · ο MENTOR συνοδεύει προαιρετικά</small></div>
     <div class="sim-top-actions"><span id="sim-head-time" class="sim-top-time">00΄ χρόνου σεναρίου</span><button type="button" id="sim-clear" title="Κλείσιμο τρέχοντος εργαλείου">✕ Κλείσιμο εργαλείου</button><button type="button" id="sim-pause" aria-pressed="false">⏸ Παύση</button></div>
   </header>
   <div class="sim-body">
@@ -117,7 +117,7 @@
     <div id="sim-tool-actions" class="sim-drawer-choices"></div>
     <p class="sim-result" id="sim-tool-result" role="status" aria-live="polite"></p>
   </section>
-  <nav class="sim-quicklinks" aria-label="Πλοήγηση αποστολής"><a href="#live-briefing">Πληροφορίες αποστολής</a><a href="#live-debrief">MENTOR DEBRIEF</a><a href="#live-history-head">Ιστορικό αποφάσεων</a></nav>
+  <nav class="sim-quicklinks" aria-label="Πλοήγηση αποστολής"><a href="#live-briefing">Πληροφορίες αποστολής</a><a href="#live-debrief">ΑΝΑΣΚΟΠΗΣΗ ΑΠΟΣΤΟΛΗΣ</a><a href="#live-history-head">Ιστορικό αποφάσεων</a></nav>
   <p class="sim-footer">Οι συνομιλίες είναι προκαθορισμένες, όχι AI. Οι ενέργειες καταγραφής δεν είναι παρεμβάσεις. Η παύση εμποδίζει εκπαιδευτικές επιλογές, δεν σταματά φυσιολογικό μοντέλο.</p>
  </section>
  <div class="live-grid">
@@ -152,7 +152,7 @@
   <ol id="live-timeline" class="live-timeline" aria-live="polite"></ol>
  </section>
  <section class="live-panel live-debrief" id="live-debrief" aria-labelledby="live-debrief-heading">
-  <div class="live-debrief-top"><div><span class="live-stage-kicker">MENTOR OS · ΕΝΙΑΙΑ ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΝΑΣΚΟΠΗΣΗ</span><h2 id="live-debrief-heading">MENTOR DEBRIEF · αυτή η αποστολή</h2></div>
+  <div class="live-debrief-top"><div><span class="live-stage-kicker">ΠΡΟΣΟΜΟΙΩΣΗ · ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΝΑΣΚΟΠΗΣΗ</span><h2 id="live-debrief-heading">ΑΝΑΣΚΟΠΗΣΗ ΑΠΟΣΤΟΛΗΣ · αυτή η αποστολή</h2></div>
    <button type="button" class="live-reset" id="live-export">↓ Εξαγωγή αναφοράς (.txt)</button></div>
   <p id="live-export-status" class="live-legend" role="status" aria-live="polite">Η εξαγωγή περιλαμβάνει μόνο συνθετικές εκπαιδευτικές καταγραφές από αυτή τη συσκευή.</p>
   <div id="live-review-summary" class="live-debrief-summary" aria-live="polite"></div>
@@ -163,5 +163,5 @@
  </section>
  <footer class="live-footer">Αποθήκευση μόνο σε ξεχωριστό κλειδί MENTOR σε αυτή τη συσκευή. Δεν μεταβάλλεται η βαθμολόγηση ή η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ. Το AI θα συνδεθεί μόνο μετά από δική σου έγκριση του τελικού σχεδιασμού.</footer>
 </main>
-<script type="module" src="mentor/presence/presence.mjs"></script></body>
+<script type="module" src="mentor/presence/presence.mjs"></script><script src="navigation.js?v=4" defer></script></body>
 </html>

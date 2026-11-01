@@ -1,4 +1,4 @@
-/** MENTOR Next: first-party UI/controller for the original simulated case. */
+/** Patient Simulator: independent educational simulation UI/controller. */
 import {CASES,getCase,TOOLS,ACTIONS,newSession,loadSession,loadCaseSession,caseProgress,saveSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,validSession} from '../core/next-sim.mjs';
 import {mountPatientScene} from './next-scene.mjs';
 import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
@@ -175,7 +175,7 @@ function renderTool(){
  }else if(tool==='debrief'){
   const r=summarize(state);
   actions.append(el('p','Καταγράφηκαν: '+(r.covered.join(' · ')||'κανένα βήμα')+'. Για επανάληψη: '+(r.missing.join(' · ')||'κανένα')+'.'));
-  actions.append(actionButton('Μετάβαση στο MENTOR DEBRIEF',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
+  actions.append(actionButton('Μετάβαση στην Ανασκόπηση Προσομοίωσης',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
  }else for(const a of activeActions){
   actions.append(actionButton(a.label+' · '+a.min+'′',()=>{
    try{const updated=execute(state,tool,a.id);commit(updated,updated.events.at(-1).detail);}
@@ -272,7 +272,7 @@ function render(){
  renderer.setPaused(!state.playing);
  renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
  renderMenu();renderTool();renderReview();renderInsights();
- window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'MENTOR NEXT — '+currentCase.title}}));
+ window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'Προσομοιωτής Ασθενών — '+currentCase.title}}));
 }
 for(const button of document.querySelectorAll('[data-next-patient]'))button.addEventListener('click',()=>{
  try{commit(setFocus(state,button.dataset.nextPatient,state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+'.');}catch{}

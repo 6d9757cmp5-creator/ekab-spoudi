@@ -10,16 +10,16 @@ if(context&&main&&!document.querySelector('[data-mentor-connected-study]')){
  const panel=document.createElement('section');
  panel.className='mentor-connected-study';
  panel.dataset.mentorConnectedStudy='true';
- panel.setAttribute('aria-label','Κοινή εκπαιδευτική διαδρομή με τον MENTOR OS');
+ panel.setAttribute('aria-label','Σχετικές ασκήσεις πρωτοκόλλων και βοήθεια MENTOR');
  const label=document.createElement('h2');
- label.textContent='Συνέχισε με τον ίδιο MENTOR';
+ label.textContent='Συνέχισε τη σχετική εξάσκηση';
  const explanation=document.createElement('p');
  explanation.textContent='Εκπαιδευτικό θέμα: '+(context.focus||context.topic)+'. Η άσκηση και η ανασκόπηση θα χρησιμοποιούν το ίδιο θέμα, με δυνατότητα επιστροφής σε αυτή την ενότητα. Δεν μεταφέρονται βαθμοί, σημειώσεις ή προσωπικά δεδομένα.';
  const actions=document.createElement('div');
  actions.className='mentor-connected-actions';
  const links=[
-  ['MENTOR | LAB',makeJourneyUrl('mentor-protocol-suite.html',context,'lab')],
-  ['MENTOR DEBRIEF',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')],
+  ['Εργαστήριο Πρωτοκόλλων',makeJourneyUrl('mentor-protocol-suite.html',context,'lab')],
+  ['Ανασκόπηση Πρωτοκόλλου',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')],
   ['MENTOR OS',makeJourneyUrl('mentor-lab.html',context)]
  ];
  for(const [title,dest] of links){

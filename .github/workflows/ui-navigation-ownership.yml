@@ -1,0 +1,28 @@
+name: Shared navigation and tool ownership
+on:
+  pull_request:
+    paths:
+      - 'navigation.js'
+      - 'updates.js'
+      - 'index.html'
+      - 'tools.html'
+      - 'mentor-*.html'
+      - 'protocols*.html'
+      - 'tools/**'
+      - 'scripts/verify-global-navigation.mjs'
+      - 'sw.js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  navigation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/verify-global-navigation.mjs
+      - run: node scripts/verify-saek-reader-safety.cjs
+      - run: node scripts/verify-tool-boundaries.mjs

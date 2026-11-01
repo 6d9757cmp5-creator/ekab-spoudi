@@ -11,7 +11,7 @@ const session={version:2,topic:'stroke',role:'firstaid',completed:false,answers:
 ]};
 test('MIT-based export includes the student track, selected options and synthetic-study disclaimer',()=>{
  const text=buildDebriefReport({topic,role:roleFor('firstaid'),session,stages});
- assert.match(text,/MENTOR DEBRIEF/);
+ assert.match(text,/ΑΝΑΣΚΟΠΗΣΗ ΠΡΩΤΟΚΟΛΛΟΥ/);
  assert.match(text,/Πρώτες βοήθειες/);
  assert.match(text,/ΑΝΑΣΚΟΠΗΣΗ ΑΠΟΦΑΣΕΩΝ/);
  assert.match(text,/Για επανάληψη/);

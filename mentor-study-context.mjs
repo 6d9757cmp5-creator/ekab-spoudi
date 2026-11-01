@@ -14,7 +14,7 @@ if(topic){
   panel.style.cssText='margin:14px 0;padding:12px 14px;border-radius:11px;border:1px solid #84b9c3;background:#e7f3f6;color:#153a4a;line-height:1.55;';
   const info=document.createElement('p');info.setAttribute('role','status');
   info.style.cssText='margin:0 0 8px;font-weight:650;';
-  info.textContent='Κοινό εκπαιδευτικό πλαίσιο: '+focus+' · '+topic.name+'. Ο ίδιος MENTOR συνδέει μάθημα, LAB και DEBRIEF. Δεν μεταφέρονται προσωπικά δεδομένα ή βαθμοί.';
+  info.textContent='Κοινό εκπαιδευτικό πλαίσιο: '+focus+' · '+topic.name+'. Το Εργαστήριο Πρωτοκόλλων συνδέει μάθημα και ανασκόπηση. Ο MENTOR παρέχει προαιρετική καθοδήγηση. Δεν μεταφέρονται προσωπικά δεδομένα ή βαθμοί.';
   panel.append(info);
   const source=returnPage(context);
   if(source){
@@ -24,7 +24,7 @@ if(topic){
    panel.append(back);
   }
   const lab=document.createElement('a');lab.href=makeJourneyUrl('mentor-protocol-suite.html',context,'lab');
-  lab.textContent='MENTOR | PROTOCOL LAB →';lab.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
+  lab.textContent='Εργαστήριο Πρωτοκόλλων →';lab.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
   panel.append(lab);
   hero.insertBefore(panel,hero.firstChild);
  }
