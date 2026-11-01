@@ -17,6 +17,7 @@ const seminarQuestions=new Set(items.filter(x=>x.section==='seminar').map(x=>x.c
 const seminarScenarios=new Set(items.filter(x=>x.section==='seminar_case').map(x=>x.courseId+':'+x.caseIndex));
 const reviewed=items.filter(x=>x.reviewStatus==='reviewed_by_independent_educator');
 const pending=items.filter(x=>x.reviewStatus==='pending_independent_educator_review');
+const augmented=items.filter(x=>x.fixtureGeneration==='deterministic_source_preserving');
 const report={
  reportVersion:1,
  generatedAt:new Date().toISOString(),
@@ -24,6 +25,12 @@ const report={
  totalSyntheticExamples:items.length,
  independentlyReviewedExamples:reviewed.length,
  pendingExpertReviewExamples:pending.length,
+ modelFreeOrthographyAugmentations:augmented.length,
+ sourceReferenceAnchors:augmented.filter(x=>x.fixtureKind==='reference_anchor').length,
+ orthographyToleranceVariants:augmented.filter(x=>x.fixtureKind==='orthography_tolerance').length,
+ independentlyWrittenSemanticParaphrasesInAugmentedSet:augmented.filter(x=>x.independentSemanticParaphrase===true).length,
+ candidateGoldStandardCount:reviewed.length,
+ distinctQuestionsTotal:new Set(items.map(x=>x.section+':'+(x.questionId||x.courseId+':'+(x.caseIndex??x.questionIndex)))).size,
  bySection:countBy(items,'section'),
  provisionalOutcomes:countBy(items,'expected'),
  distinctQuestions:{
@@ -49,6 +56,8 @@ const report={
  reportDoesNotMeasure:['clinical correctness','live AI grading performance','model fine-tuning','expert-rated learner responses'],
  warnings:[
   'All current example labels are provisional pending independent educator review.',
+  '500 new examples are source-anchored and spelling variants, NOT 500 independent free-text learner responses.',
+  'Provisional correct labels are not evidence that a live model evaluated these examples.',
   'A correct verdict on a short factual question must NOT require irrelevant explanatory details present only in the reference.',
   'Synthetically written questions are not anonymized real student answers.',
   'CI tests verify corpus integrity and selected safeguards; they do not certify clinical decisions.'
@@ -56,11 +65,12 @@ const report={
 };
 if(report.totalSyntheticExamples!==report.pendingExpertReviewExamples+report.independentlyReviewedExamples)throw Error('Unknown review status in synthetic dataset');
 if(reviewed.some(x=>!x.reviewEvidence?.source||!x.reviewEvidence?.date))throw Error('A reviewed case needs traceable independent educator evidence');
-if(items.length<300)throw Error('Fewer than 300 synthetic cases in the active milestone');
+if(items.length!==800)throw Error('Active milestone must contain exactly 800 examples');
+if(augmented.length!==500||augmented.filter(x=>x.fixtureKind==='reference_anchor').length!==250||augmented.filter(x=>x.fixtureKind==='orthography_tolerance').length!==250)throw Error('Augmentation breakdown mismatch');
 mkdirSync('audit-results',{recursive:true});
 writeFileSync('audit-results/greek-grading-coverage.json',JSON.stringify(report,null,2)+'\n');
 console.log('Greek grading coverage (offline):',JSON.stringify({
- synthetic:report.totalSyntheticExamples,independentlyReviewed:report.independentlyReviewedExamples,
+ synthetic:report.totalSyntheticExamples,independentlyReviewed:report.independentlyReviewedExamples,orthographicAugmentations:report.modelFreeOrthographyAugmentations,distinctQuestions:report.distinctQuestionsTotal,
  bySection:report.bySection,byVerdict:report.provisionalOutcomes,
  distinctQuestions:report.distinctQuestions,coverage:report.coveragePercentOfBanks,
  nextMilestone:report.targetedNextMilestone
