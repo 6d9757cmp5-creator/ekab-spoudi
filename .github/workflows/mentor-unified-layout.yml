@@ -27,8 +27,8 @@ jobs:
         run: |
           node --test scripts/test-mentor-layout.mjs
           node --test scripts/test-mentor-voice.mjs
-          node --test scripts/test-mentor-3d.mjs
-          node --test scripts/test-mentor-cinematic.mjs
+          node --test mentor-avatar-live.test.mjs
+          node --test mentor/presence/presence-state.test.mjs
           node --test scripts/test-mentor-v1-unified.cjs
           for f in mentor/app/*.js mentor/voice/*.mjs mentor/avatar/*.mjs; do node --check "$f"; done
       - name: Install Playwright Chromium
