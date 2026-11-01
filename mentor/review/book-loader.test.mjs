@@ -13,7 +13,7 @@ const other=['openrn-health','openrn-skills','openrn-pharm','openrn-advanced','w
 const manifest={schema_version:1,errors:[],books:[{source_id:id,sha256:hash,passage_count:10,scientific_review:'pending'},...other]};
 const catalog={schema_version:1,purpose:'bibliography-only',counts:{identified:7,extracted_in_isolated_review_branch:7,clinically_approved:0},
  sources:[id,...other.map(s=>s.source_id)].map(sourceId=>({id:sourceId,title:'Example book',publisher:'Publisher',
- source_url:sourceUrl,license_summary:'Review pending',extracted_for_review:true,
+ source_url:sourceUrl,license_summary:'Review pending',extracted_for_review:true,learning_tracks:['paramedic','medicine'],
  independent_clinical_review:'not_verified',publication_rights_review:'not_verified',clinical_retrieval_enabled:false}))};
 function mocks(tamper=false){
  const urls=[];
