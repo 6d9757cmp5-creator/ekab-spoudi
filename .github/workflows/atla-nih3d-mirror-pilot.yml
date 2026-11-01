@@ -29,6 +29,6 @@ jobs:
         run: |
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA NIH 3D lossless binary source pilot" --notes "Trial of original model transfer and compression with SHA-256 provenance. Not a declaration of full NIH catalog import."
           shopt -s nullglob
-          for f in tmp/nih3d-pilot/*.tar.zst tmp/nih3d-pilot/*-RESULT.json; do
+          for f in tmp/nih3d-pilot/*.tar.zst* tmp/nih3d-pilot/*-RESULT.json; do
             gh release upload "$TAG" "$f" --clobber
           done
