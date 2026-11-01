@@ -98,7 +98,7 @@ test('independent-review API request omits unsupported temperature and preserves
    called++;
    const req=JSON.parse(options.body);
    assert.equal(Object.hasOwn(req,'temperature'),false,'adaptive thinking must not include temperature');
-   assert.equal(req.max_tokens,8192,'ensure enough room for adaptive thinking and complete JSON review');
+   assert.equal(req.max_tokens,12000,'ensure enough room for adaptive thinking and complete JSON review');
    assert.equal(req.messages[0].role,'user');
    assert.match(req.messages[0].content,/future\/lesson\.html/);
    return {ok:true,json:async()=>({
