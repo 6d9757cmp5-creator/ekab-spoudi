@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 const root=new URL('../',import.meta.url);
 const read=path=>readFile(new URL(path,root),'utf8');
-test('Mentor registry tracks 25 unique capabilities and truthful no-AI constraints',async()=>{
+test('Mentor registry tracks 26 unique capabilities and truthful no-AI constraints',async()=>{
  const src=await read('ui-tools/mentor-roadmap.js');
  const ids=[...src.matchAll(/\{id:"(\d+)",phase:(\d+),title:/g)].map(m=>m[1]);
- assert.equal(ids.length,25,'the registry has all 25 distinct items');
+ assert.equal(ids.length,26,'the registry has all 26 distinct items');
  assert.equal(new Set(ids).size,25,'no duplicate capability IDs');
- for(const id of ['24','25']){
+ for(const id of ['24','25','26']){
   assert.match(src,new RegExp('id:"'+id+'"[^\\n]+status:"available"'));
  }
  assert.match(src,/title:"ECG Intelligence Lab — πραγματική κλινική ερμηνεία",status:"pending"/);
@@ -16,6 +16,7 @@ test('Mentor registry tracks 25 unique capabilities and truthful no-AI constrain
  assert.match(src,/href:"..\/mentor-live.html"/);
  assert.match(src,/href:"..\/mentor-oral.html"/);
  assert.match(src,/href:"..\/mentor-ecg.html"/);
+ assert.match(src,/href:"..\/mentor-readonly.html"/);
 });
 test('all three educational labs and the master roadmap are present',async()=>{
  const html=await read('ui-tools/mentor-roadmap.html');

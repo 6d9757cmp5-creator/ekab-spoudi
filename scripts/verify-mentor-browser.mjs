@@ -250,19 +250,22 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // MENTOR master roadmap must truthfully represent ECG, oral and live prototypes.
   await page.goto('http://127.0.0.1:'+port+'/ui-tools/mentor-roadmap.html',{waitUntil:'networkidle'});
-  await page.waitForFunction(()=>document.querySelectorAll('.capability-card').length===25);
-  assert.equal(await page.locator('.capability-card').count(),25);
+  await page.waitForFunction(()=>document.querySelectorAll('.capability-card').length===26);
+  assert.equal(await page.locator('.capability-card').count(),26);
   const ecgCapability=page.locator('.capability-card').filter({hasText:'ECG Lab — διαδραστικό συνθετικό σχήμα'});
   const oralCapability=page.locator('.capability-card').filter({hasText:'Προφορική εξάσκηση — χωρίς AI'});
   await ecgCapability.locator('summary').click();
   assert.equal(await ecgCapability.getByRole('link',{name:'Άνοιγμα συνθετικού ECG Lab'}).count(),1);
   await oralCapability.locator('summary').click();
   assert.equal(await oralCapability.getByRole('link',{name:'Άνοιγμα προφορικής εξάσκησης'}).count(),1);
+  const readerCapability=page.locator('.capability-card').filter({hasText:'Αναγνωστήριο δημοσιευμένης ύλης ΣΑΕΚ'});
+  await readerCapability.locator('summary').click();
+  assert.equal(await readerCapability.getByRole('link',{name:'Άνοιγμα αναγνωστηρίου'}).count(),1);
   assert.match(await page.locator('.capability-card').filter({hasText:'Πλήρης AI καθηγητής'}).textContent(),/Μη διαθέσιμο/);
   await page.locator('[data-filter="available"]').click();
   assert.ok((await page.locator('.capability-card:visible').count())>8);
   await page.locator('[data-filter="all"]').click();
-  assert.equal(await page.locator('.capability-card:visible').count(),25);
+  assert.equal(await page.locator('.capability-card:visible').count(),26);
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Whole-app Mentor read-only source browser: all public assets and zero changes to legacy storage.
   await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
