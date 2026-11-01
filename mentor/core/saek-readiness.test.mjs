@@ -45,7 +45,7 @@ test('repository policy permanently reserves Medicine for the internal ATLA AI s
  const contract=readFileSync(new URL('../../docs/ATLA-ADAPTIVE-LEARNING-CONTRACT.md',import.meta.url),'utf8');
  const library=readFileSync(new URL('../../mentor-library.html',import.meta.url),'utf8');
  assert.match(ag,/ATLA-ADAPTIVE-LEARNING-CONTRACT.md/);
- assert.match(contract,/μία ίδια οθόνη μαθήματος/);
+ assert.match(contract,/μια ίδια οθόνη μαθήματος/);
  assert.match(contract,/Ιατρική ΔΕΝ είναι τώρα εκπαιδευτικός τομέας μαθητή/);
  assert.doesNotMatch(library,/<option value="medicine">/);
 });
