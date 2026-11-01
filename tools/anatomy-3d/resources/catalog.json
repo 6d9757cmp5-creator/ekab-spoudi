@@ -14,7 +14,9 @@
       "commit": "b036a91aaf7234f462b1249d4a5f4fb0e982f412",
       "license": "CC-BY-4.0",
       "credit": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
-      "licenseSource": "https://docs.hubmapconsortium.org/faq.html"
+      "licenseSource": "https://docs.hubmapconsortium.org/faq.html",
+      "status": "All 54 GLB model objects pinned, separately staged by clinical system/region; must pass GLB integrity before production use; CC BY attribution retained",
+      "referenceVersion": "CCF releases v1.2; pinned upstream commit"
     },
     "zanatomy": {
       "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
@@ -58,7 +60,7 @@
       "gitBlobSha": "46be1ef8f30b42b1bda45efc909d09badc2c1013",
       "bytes": 11977884,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-allen-m-brain",
@@ -70,31 +72,31 @@
       "gitBlobSha": "b87f9f5cae36ef916d526a0dc300c466980a84ff",
       "bytes": 11977312,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-nih-f-lymph-node",
       "source": "hra",
       "name": "NIH_F_Lymph_Node.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/NIH_F_Lymph_Node.glb",
+      "region": "lymphatic",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/lymphatic/NIH_F_Lymph_Node.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/NIH_F_Lymph_Node.glb",
       "gitBlobSha": "fddecfec57b79db1c91faf65209129e2fb9f22cc",
       "bytes": 4542832,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-nih-m-lymph-node",
       "source": "hra",
       "name": "NIH_M_Lymph_Node.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/NIH_M_Lymph_Node.glb",
+      "region": "lymphatic",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/lymphatic/NIH_M_Lymph_Node.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/NIH_M_Lymph_Node.glb",
       "gitBlobSha": "5c8fd0b2c61cf5e5f1434c7043d8bb92ec7d2a0a",
       "bytes": 7413900,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-sbu-f-intestine-large",
@@ -106,7 +108,7 @@
       "gitBlobSha": "0eb339ecc96642d02c54e43717a78c8dcc87bd9e",
       "bytes": 387184,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-sbu-m-intestine-large",
@@ -118,43 +120,43 @@
       "gitBlobSha": "a36ab258f8e3179d82da12b08c1f4a5149db0418",
       "bytes": 686888,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-blood-vasculature",
       "source": "hra",
       "name": "VH_F_Blood_Vasculature.glb",
-      "region": "thorax",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Blood_Vasculature.glb",
+      "region": "cardiovascular",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/cardiovascular/VH_F_Blood_Vasculature.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Blood_Vasculature.glb",
       "gitBlobSha": "e5ee60b7c3e58b913e00fb0d860a93667db166e3",
       "bytes": 7262232,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-eye-l",
       "source": "hra",
       "name": "VH_F_Eye_L.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_F_Eye_L.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_F_Eye_L.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Eye_L.glb",
       "gitBlobSha": "71e7bfef9b3fba1936d08d8c047c71cadff38d3f",
       "bytes": 9610916,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-eye-r",
       "source": "hra",
       "name": "VH_F_Eye_R.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_F_Eye_R.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_F_Eye_R.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Eye_R.glb",
       "gitBlobSha": "6d07e686c58a8ce6104131829d98e2068ca7d44f",
       "bytes": 9511360,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-fallopian-tube-l",
@@ -166,7 +168,7 @@
       "gitBlobSha": "560433afd71368c354d97b8e40e80cb255db04f7",
       "bytes": 336676,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-fallopian-tube-r",
@@ -178,7 +180,7 @@
       "gitBlobSha": "d653750c7bd1a112a6c9ed6f51be59cd2a6bc2a8",
       "bytes": 327448,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-heart",
@@ -226,7 +228,7 @@
       "gitBlobSha": "93a0754dfc8888aeb1dd94eb78c0f186b1ff190c",
       "bytes": 347952,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-knee-r",
@@ -238,7 +240,7 @@
       "gitBlobSha": "21c6783356b10448f2b53405fb9df3b0945f3c89",
       "bytes": 347996,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-liver",
@@ -274,7 +276,7 @@
       "gitBlobSha": "1f83e9ce3a58bc0de6c5a9cc1a5126867e43dfbc",
       "bytes": 8984,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-ovary-r",
@@ -286,7 +288,7 @@
       "gitBlobSha": "9af44606e833b9dd3a035e2a1d5698ae001302fd",
       "bytes": 8744,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-pancreas",
@@ -310,7 +312,7 @@
       "gitBlobSha": "eb6e1ae3743c1d30250f2771e7185b4324b217e5",
       "bytes": 1593336,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-placenta",
@@ -322,19 +324,19 @@
       "gitBlobSha": "22e0fa26bd50da263dd70e9d5abede007b543830",
       "bytes": 4917240,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-skin",
       "source": "hra",
       "name": "VH_F_Skin.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_F_Skin.glb",
+      "region": "integumentary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/integumentary/VH_F_Skin.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Skin.glb",
       "gitBlobSha": "cbbe2b63e739d2466f10227c047a478f6f878798",
       "bytes": 22959832,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-small-intestine",
@@ -346,7 +348,7 @@
       "gitBlobSha": "6ca631189a55dcd5fe625be2f139048a36c11339",
       "bytes": 856388,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-spinal-cord",
@@ -370,7 +372,7 @@
       "gitBlobSha": "acba45ef717cd8cca488fd17cbf8dd988df68420",
       "bytes": 276712,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-thymus",
@@ -382,7 +384,7 @@
       "gitBlobSha": "14eac0d3ceb4d007de52237763a0819d7e21a4dc",
       "bytes": 71928,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-ureter-l",
@@ -394,7 +396,7 @@
       "gitBlobSha": "6d1b5084eef08232a519e53cd244cf8f0f030483",
       "bytes": 707996,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-ureter-r",
@@ -406,7 +408,7 @@
       "gitBlobSha": "e7cf8de3a1afbe4dc44bb736922a38079278398f",
       "bytes": 637764,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-urinary-bladder",
@@ -418,7 +420,7 @@
       "gitBlobSha": "fb121cf1c9c6b3a1deddb1640120cd0dd7929d7c",
       "bytes": 765100,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-f-uterus",
@@ -436,37 +438,37 @@
       "id": "hra-1.2-vh-m-blood-vasculature",
       "source": "hra",
       "name": "VH_M_Blood_Vasculature.glb",
-      "region": "thorax",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Blood_Vasculature.glb",
+      "region": "cardiovascular",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/cardiovascular/VH_M_Blood_Vasculature.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Blood_Vasculature.glb",
       "gitBlobSha": "90016b0b5f8028ad0afa9d39672352ffce625498",
       "bytes": 7436204,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-eye-l",
       "source": "hra",
       "name": "VH_M_Eye_L.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_M_Eye_L.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_M_Eye_L.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Eye_L.glb",
       "gitBlobSha": "c4cecec60f945508bc5a513caf4ddca34b07f44a",
       "bytes": 9610816,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-eye-r",
       "source": "hra",
       "name": "VH_M_Eye_R.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_M_Eye_R.glb",
+      "region": "head-brain",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_M_Eye_R.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Eye_R.glb",
       "gitBlobSha": "1a6a40174cd3e55c03b1f8cc00ef0acf41578115",
       "bytes": 9511464,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-heart",
@@ -514,7 +516,7 @@
       "gitBlobSha": "5bb27b98c6839a906681f128ef7ccf0adbc212ee",
       "bytes": 439644,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-knee-r",
@@ -526,7 +528,7 @@
       "gitBlobSha": "fc70ceeb3039cdc8b1e6c4d4face5b305784bf54",
       "bytes": 439704,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-liver",
@@ -574,7 +576,7 @@
       "gitBlobSha": "395bebeaa1313225704b1786aa433243b66e1652",
       "bytes": 1348060,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-prostate",
@@ -586,19 +588,19 @@
       "gitBlobSha": "4b6b933ff2940e7f4008e57473a06e4f84358be1",
       "bytes": 4086328,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-skin",
       "source": "hra",
       "name": "VH_M_Skin.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_M_Skin.glb",
+      "region": "integumentary",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/integumentary/VH_M_Skin.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Skin.glb",
       "gitBlobSha": "57b4af235eb34e2dce104b619c55b09ec44dae63",
       "bytes": 5931700,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-small-intestine",
@@ -610,7 +612,7 @@
       "gitBlobSha": "aa882262ba5c25541bef6987acafe00182ec3266",
       "bytes": 618560,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-spinal-cord",
@@ -634,7 +636,7 @@
       "gitBlobSha": "096b1800255c56ce0fb06b2f2da97d9d8d868937",
       "bytes": 540236,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-thymus",
@@ -646,7 +648,7 @@
       "gitBlobSha": "3cebb701e86e8bbe8ba90b801c77a29b3e70980c",
       "bytes": 74876,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-ureter-l",
@@ -658,7 +660,7 @@
       "gitBlobSha": "0c0e9585b5aacefa8bd52a5b1cc6ee8795499cd1",
       "bytes": 682796,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-ureter-r",
@@ -670,19 +672,19 @@
       "gitBlobSha": "2bbc2ffed77fc590568e60177b415d72fd1ee558",
       "bytes": 540712,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-urethra",
       "source": "hra",
       "name": "VH_M_Urethra.glb",
-      "region": "other",
-      "output": "tools/anatomy-3d/resources/hra-v1.2/other/VH_M_Urethra.glb",
+      "region": "pelvis",
+      "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Urethra.glb",
       "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Urethra.glb",
       "gitBlobSha": "a7ea134891dd3c09950fe4eb6c0e6d656f7aea42",
       "bytes": 176688,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     },
     {
       "id": "hra-1.2-vh-m-urinary-bladder",
@@ -694,7 +696,7 @@
       "gitBlobSha": "e61c58959555f2c47755b46af64614aec7e031da",
       "bytes": 198936,
       "license": "CC-BY-4.0",
-      "approved": false
+      "approved": true
     }
   ],
   "cockpitAssets": [
