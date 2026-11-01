@@ -212,7 +212,7 @@ test('old-style exam and oral rehearsal grade against trusted, non-user-editable
  assert.match(sent[0].question,/Γλασκώβης/);assert.match(sent[0].reference,/GCS/);
  assert.match(sent[1].question,/συνθετικού τροχαίου/);
  assert.ok(!sent[1].reference.includes('κατασκευασμένη'));
- assert.match(sent[1].reference,/κίνδυν/);
+ assert.match(sent[1].reference,/πιθανούς κινδύνους/);
 }));
 test('invalid or wrong-section reference cannot be injected',async()=>setup(async()=>{
  globalThis.fetch=()=>assert.fail('No model request on invalid reference');
