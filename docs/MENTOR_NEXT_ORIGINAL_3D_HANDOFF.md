@@ -38,3 +38,10 @@ Status versus reference:
 - Not equivalent to Body Interact. This statement must remain until independent functional, content, scientific, device and licensing reviews support any other claim.
 
 Verification: \`node --test mentor/core/next-sim.test.mjs mentor/core/next-review.test.mjs\`; mobile/desktop Playwright smoke tests. Independent educational/scientific review workflow is the authoritative gate; a pending review is NOT a successful clinical validation.
+
+## v0.3 — Original case library (2026-11-01)
+- Three original non-clinically-validated scenes in mentor/core/next-cases.mjs: road, home, square, with six synthetic adult profiles and Greek dialogue.
+- Separate session records and resume via loadCaseSession() + caseProgress(); active v1 storage key retained for backwards compatibility, new per-case library key independent of student grades/sync.
+- WebGL scenery responds to each case; review, monitoring history, patient descriptions, dialogue, TXT and debrief use the active case.
+- New unit tests: mentor/core/next-cases.test.mjs; mobile+desktop browser smoke covers the three cases, cross-case isolation and reload.
+- No drug, medical intervention, treatment-response physiology, diagnostic or medical grading added. Independent clinical review required for medical education use.

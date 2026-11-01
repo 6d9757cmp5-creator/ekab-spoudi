@@ -38,3 +38,10 @@
 - Unit tests: \`mentor/core/next-sim.test.mjs\`, \`mentor/core/next-review.test.mjs\`
 - Browser tests: \`scripts/app-load-smoke.mjs\`
 - Source of feature list: [Official Body Interact Simulation Interface Overview](https://help.bodyinteract.com/body-interact-simulator-app/using-the-simulation/simulation-interface-overview/)
+
+## v0.3 — βάθος σύγκρισης (2026-11-01)
+Επίσημες πηγές: https://bodyinteract.com/virtual-patient-simulator/ · https://bodyinteract.com/ems/ · https://help.bodyinteract.com/body-interact-simulator-app/using-the-simulation/communicate-virtual-patient/ · https://help.bodyinteract.com/body-interact-simulator-app/using-the-simulation/understand-timeline/
+
+Προστέθηκε βιβλιοθήκη τριών πρωτότυπων συνθετικών ελληνικών εκπαιδευτικών αποστολών (τροχαίο, σπίτι, πλατεία), καθεμία με δική της WebGL σκηνή, δύο ενήλικες, διαφορετικό διάλογο και συνθετική πορεία HR/RR/SpO₂. Η πρόοδος κρατιέται χωριστά ανά αποστολή και οι προηγούμενες συνεδρίες v1 διαβάζονται χωρίς απώλεια. Η αξιολόγηση αφορά μόνον καταγραφές.
+
+Εκκρεμούν ακόμη: επιστημονικά εγκεκριμένες κλινικές περιπτώσεις, ρεαλιστικοί τρισδιάστατοι ασθενείς, προσαρμοσμένη φυσιολογία, διαγνωστικές εξετάσεις, πραγματική AI συνομιλία, ιατρικές παρεμβάσεις και τεκμηριωμένη κλινική αξιολόγηση. **ΔΕΝ ΕΙΝΑΙ ΙΣΑΞΙΟ ΜΕ ΤΟ BODY INTERACT**.

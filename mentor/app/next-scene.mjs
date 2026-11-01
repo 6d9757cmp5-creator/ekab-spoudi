@@ -14,8 +14,8 @@ export function mountPatientScene(canvas,onSelect){
  for(let y=0;y<lat;y++)for(let x=0;x<lon;x++){let a=y*(lon+1)+x,b=a+lon+1;idx.push(a,b,a+1,b,b+1,a+1);}
  function buf(target,data){const b=gl.createBuffer();gl.bindBuffer(target,b);gl.bufferData(target,data,gl.STATIC_DRAW);return b;}
  const pb=buf(gl.ARRAY_BUFFER,new Float32Array(pts)),nb=buf(gl.ARRAY_BUFFER,new Float32Array(ns)),ib=buf(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx));
- const colors={skin:[0.78,0.59,0.44],skin2:[0.68,0.46,0.34],pants:[0.19,0.27,0.36],topA:[0.20,0.56,0.70],topB:[0.47,0.63,0.46],hair:[0.19,0.16,0.16],shoe:[0.14,0.17,0.20],car:[0.30,0.40,0.48],wheel:[0.11,0.13,0.16],road:[0.22,0.33,0.37]};
- let focus='scene',view='scene',poseByPatient={a:'standing',b:'standing'},angle=0.18,paused=false,running=true,last=0,raf=0,clock=0,drag=null,acc=0;
+ const colors={skin:[0.78,0.59,0.44],skin2:[0.68,0.46,0.34],pants:[0.19,0.27,0.36],topA:[0.20,0.56,0.70],topB:[0.47,0.63,0.46],hair:[0.19,0.16,0.16],shoe:[0.14,0.17,0.20],car:[0.30,0.40,0.48],wheel:[0.11,0.13,0.16],road:[0.22,0.33,0.37],wall:[0.28,0.41,0.45],rug:[0.24,0.39,0.50],bench:[0.47,0.36,0.27],green:[0.16,0.43,0.32],lamp:[0.89,0.76,0.48]};
+ let environment='road',focus='scene',view='scene',poseByPatient={a:'standing',b:'standing'},angle=0.18,paused=false,running=true,last=0,raf=0,clock=0,drag=null,acc=0;
  function sphere(x,y,z,sx,sy,sz,color){
   gl.uniform3f(loc.off,x,y,z);gl.uniform3f(loc.scale,sx,sy,sz);gl.uniform3fv(loc.color,colors[color]||color);
   gl.drawElements(gl.TRIANGLES,idx.length,gl.UNSIGNED_SHORT,0);
@@ -29,10 +29,20 @@ export function mountPatientScene(canvas,onSelect){
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);
   gl.uniform1f(loc.angle,angle);gl.uniform1f(loc.center,focus==='a'?-1.1:focus==='b'?1.05:0);gl.uniform1f(loc.zoom,focus==='scene'?0.94:view==='head'?2.35:view==='torso'?1.85:view==='legs'?1.8:1.15);gl.uniform1f(loc.vertical,view==='head'?0.95:view==='torso'?0.22:view==='legs'?-0.70:0);
   gl.uniform1f(loc.aspect,Math.max(0.85,w/h));
-  // a stylized road, low-poly vehicle, and two procedurally modeled adults
-  sphere(0,-1.34,-1.1,4.5,.085,1.75,'road');
-  sphere(0,-.42,-.95,.62,.52,.36,'car');sphere(0,-.17,-.95,.40,.28,.29,'car');
-  sphere(-.40,-.78,-.65,.20,.22,.15,'wheel');sphere(.40,-.78,-.65,.20,.22,.15,'wheel');
+  // Three original low-poly scenes. Their geometry has no diagnostic meaning.
+  sphere(0,-1.34,-1.1,4.5,.085,1.75,environment==='square'?'green':environment==='home'?'rug':'road');
+  if(environment==='road'){
+   sphere(0,-.42,-.95,.62,.52,.36,'car');sphere(0,-.17,-.95,.40,.28,.29,'car');
+   sphere(-.40,-.78,-.65,.20,.22,.15,'wheel');sphere(.40,-.78,-.65,.20,.22,.15,'wheel');
+  }else if(environment==='home'){
+   sphere(0,.15,-1.65,3.5,1.7,.11,'wall');
+   sphere(-.25,-.85,-1.03,.65,.24,.42,'bench');sphere(-.72,-.53,-1.11,.14,.60,.28,'bench');
+   sphere(2.2,-.49,-1.2,.13,.96,.13,'wheel');sphere(2.2,.45,-1.2,.27,.27,.22,'lamp');
+  }else{
+   sphere(.1,-.94,-1.21,.73,.13,.34,'bench');
+   sphere(-.44,-.63,-1.22,.09,.28,.13,'bench');sphere(.55,-.63,-1.22,.09,.28,.13,'bench');
+   sphere(2.7,-.49,-1.42,.19,.9,.19,'wheel');sphere(2.7,.30,-1.42,.46,.65,.42,'green');
+  }
   function person(x,top,skin,phase,id){
    let breath=paused?0:Math.sin(clock*1.7+phase)*.018;
    const pose=poseByPatient[id]||'standing';
@@ -68,6 +78,7 @@ export function mountPatientScene(canvas,onSelect){
   setFocus(f,v='scene'){focus=f;view=v;draw();},
   setPaused(p){paused=p;},
   setPoses(poses){poseByPatient={...poseByPatient,...poses};draw();},
+  setEnvironment(value){if(!['road','home','square'].includes(value))return;environment=value;draw();},
   rotate(d){angle+=d;draw();},
   dispose(){running=false;cancelAnimationFrame(raf);gl.deleteBuffer(pb);gl.deleteBuffer(nb);gl.deleteBuffer(ib);gl.deleteProgram(program);}
  };

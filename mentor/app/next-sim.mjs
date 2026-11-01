@@ -1,5 +1,5 @@
 /** MENTOR Next: first-party UI/controller for the original simulated case. */
-import {CASE,TOOLS,ACTIONS,newSession,loadSession,saveSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,validSession} from '../core/next-sim.mjs';
+import {CASES,getCase,TOOLS,ACTIONS,newSession,loadSession,loadCaseSession,caseProgress,saveSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,validSession} from '../core/next-sim.mjs';
 import {mountPatientScene} from './next-scene.mjs';
 import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
 const $=id=>document.getElementById(id);
@@ -13,11 +13,40 @@ function commit(next,message){
  $('next-save-note').textContent=saved?'Η άσκηση αποθηκεύεται τοπικά σε αυτή τη συσκευή.':'Η αποθήκευση δεν επιτρέπεται σε αυτόν τον browser. Η άσκηση λειτουργεί μέχρι το κλείσιμο της σελίδας.';
  render();
 }
-function labelPerson(id){return CASE.patients.find(p=>p.id===id)?.name||'Εικονικός ασθενής';}
+function labelPerson(id){return getCase(state.caseId)?.patients.find(p=>p.id===id)?.name||'Εικονικός ασθενής';}
 function showResult(message){result=message;$('next-result').textContent=result;}
 function actionButton(text,onClick,disabled=false){
  const b=el('button',text);b.type='button';b.disabled=disabled;b.addEventListener('click',onClick);return b;
 }
+
+function renderCaseLibrary(){
+ const active=getCase(state.caseId),cases=$('next-case-list'),progress=caseProgress(localStorage);
+ $('next-case-title').textContent=active.title;
+ $('next-case-briefing').textContent=active.briefing;
+ $('next-case-goal').textContent=active.goal;
+ $('next-location').textContent=active.location+' · ΣΥΝΘΕΤΙΚΗ ΣΚΗΝΗ';
+ for(const btn of document.querySelectorAll('[data-next-patient]')){
+  const p=active.patients.find(x=>x.id===btn.dataset.nextPatient);
+  btn.replaceChildren(document.createTextNode(p.name+' '),el('small',p.setting));
+ }
+ cases.replaceChildren();
+ for(const c of CASES){
+  const stored=progress.find(p=>p.caseId===c.id);
+  const button=el('button',undefined,'next-case-card');
+  button.type='button';button.dataset.caseId=c.id;
+  button.setAttribute('aria-pressed',String(c.id===active.id));
+  button.append(el('span',c.tag+' · '+c.level,'next-case-tag'),el('strong',c.title),
+    el('small',c.location+' · '+(stored.events?stored.events+' καταγραφές · '+stored.minutes+'′':'Δεν έχει ξεκινήσει')));
+  button.addEventListener('click',()=>{
+   if(c.id===state.caseId)return;
+   tool='dialogue';result='Φορτώθηκε η αποστολή «'+c.title+'». Το προηγούμενο περιστατικό παραμένει αποθηκευμένο τοπικά.';
+   commit(loadCaseSession(localStorage,c.id),result);
+   $('next-stage').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  cases.append(button);
+ }
+}
+
 function renderMenu(){
  const nav=$('next-tools');nav.replaceChildren();
  for(const t of TOOLS){
@@ -133,23 +162,25 @@ function renderReview(){
  $('next-finish').textContent=state.finished?'Ολοκληρώθηκε — ανασκόπηση διαθέσιμη':'Ολοκλήρωση / Ανασκόπηση';
 }
 function render(){
+ renderCaseLibrary();
  $('next-minute').textContent=String(state.minute).padStart(2,'0')+':00';
  $('next-status').textContent=state.finished?'Ολοκληρώθηκε':state.playing?'Ο χρόνος προχωρά':'Σε παύση';
  $('next-play').disabled=state.finished;
  $('next-play').setAttribute('aria-pressed',String(state.playing));
  $('next-play').textContent=state.playing?'⏸ Παύση χρόνου':'▶ Έναρξη χρόνου';
  $('next-step').disabled=state.finished;
- const patient=CASE.patients.find(p=>p.id===state.person),v=patientVitals(state,state.person);
+ const currentCase=getCase(state.caseId),patient=currentCase.patients.find(p=>p.id===state.person),v=patientVitals(state,state.person);
  $('next-person-name').textContent=patient.name;
  $('next-person-description').textContent=patient.description;
  $('next-hr').textContent=String(v.hr);$('next-rr').textContent=String(v.rr);$('next-spo2').textContent=String(v.spo2);
  for(const button of document.querySelectorAll('[data-next-patient]'))button.setAttribute('aria-pressed',String(button.dataset.nextPatient===state.person));
  for(const button of document.querySelectorAll('[data-next-view]'))button.setAttribute('aria-pressed',String(button.dataset.nextView===state.view));
+ renderer.setEnvironment?.(currentCase.scene);
  renderer.setFocus(state.view==='scene'?'scene':state.person,state.view);
  renderer.setPaused(!state.playing);
  renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
  renderMenu();renderTool();renderReview();renderInsights();
- window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:CASE.id,label:'MENTOR NEXT — '+CASE.title}}));
+ window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'MENTOR NEXT — '+currentCase.title}}));
 }
 for(const button of document.querySelectorAll('[data-next-patient]'))button.addEventListener('click',()=>{
  try{commit(setFocus(state,button.dataset.nextPatient,state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+'.');}catch{}
@@ -162,7 +193,7 @@ $('next-rotate-left').addEventListener('click',()=>renderer.rotate?.(-0.23));
 $('next-rotate-right').addEventListener('click',()=>renderer.rotate?.(0.23));
 $('next-play').addEventListener('click',()=>{try{commit(setPlaying(state,!state.playing),state.playing?'Η παύση σταματά μόνο τον αυτόματο χρόνο.':'Η αυτόματη εξέλιξη του συνθετικού χρόνου ξεκίνησε.');}catch{}});
 $('next-step').addEventListener('click',()=>{try{commit(nextMinute(state,1),'Προχώρησε ένα εικονικό λεπτό. Οι ενδείξεις ακολουθούν προκαθορισμένη πορεία.');}catch{}});
-$('next-reset').addEventListener('click',()=>{if(!confirm('Νέα εκπαιδευτική προσπάθεια; Θα αντικατασταθεί μόνο αυτή η συνθετική αποστολή.'))return;tool='dialogue';commit(newSession(),'Ξεκίνησε νέα συνθετική αποστολή.');});
+$('next-reset').addEventListener('click',()=>{if(!confirm('Νέα εκπαιδευτική προσπάθεια; Θα αντικατασταθεί μόνο αυτή η συνθετική αποστολή.'))return;tool='dialogue';commit(newSession(state.caseId),'Ξεκίνησε νέα συνθετική αποστολή.');});
 $('next-ask-form').addEventListener('submit',e=>{
  e.preventDefault();const input=$('next-question'),value=input.value;
  try{const updated=askPatient(state,value);input.value='';commit(updated,updated.events.at(-1).detail);}

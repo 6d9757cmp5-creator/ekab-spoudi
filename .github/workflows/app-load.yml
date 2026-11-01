@@ -34,11 +34,12 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
           node --check protocols-data.mjs
           node --check protocols-page.mjs
+          node --check mentor/core/next-cases.mjs
           node --check mentor/core/next-sim.mjs
           node --check mentor/app/next-sim.mjs
           node --check mentor/app/next-scene.mjs
           node --check mentor/core/next-review.mjs
-          node --test mentor/core/next-sim.test.mjs mentor/core/next-review.test.mjs
+          node --test mentor/core/next-sim.test.mjs mentor/core/next-review.test.mjs mentor/core/next-cases.test.mjs
           node --check mentor/core/live-debrief.mjs
           node --check mentor/core/live-interactions.mjs
           node --check mentor/app/live.js

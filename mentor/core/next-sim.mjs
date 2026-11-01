@@ -4,14 +4,9 @@
  * All changes to indicators are simulated passage of time, not treatment effects.
  */
 export const STORE_KEY='ekab.mentor.next-v1';
-export const CASE={
- id:'crete-two-persons-next-v1',title:'Τροχαίο στην Κρήτη · Δύο εμπλεκόμενοι',
- briefing:'Δύο ενήλικες κοντά σε όχημα. Η κυκλοφορία συνεχίζεται. Δεν έχουν επιβεβαιωθεί τραύματα ή διαγνώσεις.',
- patients:[
-  {id:'a',name:'Άτομο Α',age:'Ενήλικας',setting:'Δίπλα στο όχημα',description:'Μιλά, αναφέρει ενόχληση. Άλλα στοιχεία απαιτούν παρατήρηση.',v:{hr:106,rr:23,spo2:97},slope:{hr:0.8,rr:0.23,spo2:-0.18},dialogue:{feeling:'«Έχω μια ενόχληση, αλλά μπορώ να μιλήσω.»',event:'«Έγινε σύγκρουση. Δεν θυμάμαι ακριβώς πώς.»'}},
-  {id:'b',name:'Άτομο Β',age:'Ενήλικας',setting:'Λίγο πιο πέρα',description:'Επικοινωνεί, δεν έχει δώσει σαφές ιστορικό.',v:{hr:92,rr:19,spo2:98},slope:{hr:0.45,rr:0.12,spo2:-0.08},dialogue:{feeling:'«Είμαι αναστατωμένος. Δεν ξέρω αν χτύπησα.»',event:'«Άκουσα τον θόρυβο και βρέθηκα εδώ.»'}}
- ]
-};
+import {CASE,CASES,getCase} from './next-cases.mjs';
+export {CASE,CASES,getCase} from './next-cases.mjs';
+export const LIBRARY_KEY='ekab.mentor.next-library-v1';
 export const TOOLS=[
  {id:'view',icon:'◉',label:'Προβολές'},
  {id:'position',icon:'♧',label:'Στάση'},
@@ -65,19 +60,42 @@ export const ACTIONS={
   {id:'review',label:'Επανέλεγχος διαθέσιμων ευρημάτων',min:2,flag:'reassessment',description:'Ανασκόπηση πληροφοριών, χωρίς θεραπεία.'}
  ]
 };
-export function newSession(){return {v:1,caseId:CASE.id,minute:0,playing:false,person:'a',view:'scene',events:[],flags:{},finished:false};}
+export function newSession(caseId=CASE.id){if(!getCase(caseId))throw Error('unknown-case');return {v:1,caseId,minute:0,playing:false,person:'a',view:'scene',events:[],flags:{},finished:false};}
 export function validSession(s){
- return !!s&&s.v===1&&s.caseId===CASE.id&&Number.isInteger(s.minute)&&s.minute>=0&&s.minute<=45&&
+ return !!s&&s.v===1&&!!getCase(s.caseId)&&Number.isInteger(s.minute)&&s.minute>=0&&s.minute<=45&&
  Array.isArray(s.events)&&s.events.length<=120&&['a','b'].includes(s.person)&&['scene','full','head','torso','legs'].includes(s.view)&&
  !!s.flags&&typeof s.flags==='object'&&typeof s.playing==='boolean'&&typeof s.finished==='boolean'&&
  s.events.every(e=>e&&Number.isInteger(e.minute)&&e.minute>=0&&e.minute<=45&&['a','b'].includes(e.person)&&
  typeof e.label==='string'&&e.label.length<=160&&typeof e.detail==='string'&&e.detail.length<=600&&typeof e.tool==='string'&&e.tool.length<=28);
 }
 export function loadSession(store){try{const s=JSON.parse(store.getItem(STORE_KEY));return validSession(s)?{...s,playing:false}:newSession();}catch{return newSession();}}
-export function saveSession(store,s){try{store.setItem(STORE_KEY,JSON.stringify(s));return true;}catch{return false;}}
+/** Each case resumes separately; the old active session key remains readable. */
+export function loadCaseSession(store,caseId){
+ if(!getCase(caseId))throw Error('unknown-case');
+ try{const sessions=JSON.parse(store.getItem(LIBRARY_KEY));const s=sessions?.[caseId];if(validSession(s))return {...s,playing:false};}
+ catch{}
+ try{const active=JSON.parse(store.getItem(STORE_KEY));if(validSession(active)&&active.caseId===caseId)return {...active,playing:false};}
+ catch{}
+ return newSession(caseId);
+}
+export function caseProgress(store){
+ let sessions={};try{sessions=JSON.parse(store.getItem(LIBRARY_KEY))||{};}catch{}
+ return CASES.map(c=>{let s=validSession(sessions[c.id])?sessions[c.id]:null;
+  if(!s){try{const active=JSON.parse(store.getItem(STORE_KEY));if(validSession(active)&&active.caseId===c.id)s=active;}catch{}}
+  return {caseId:c.id,minutes:s?.minute||0,events:s?.events?.length||0,finished:!!s?.finished};
+ });
+}
+export function saveSession(store,s){
+ if(!validSession(s))throw Error('invalid-session');
+ try{const prior=JSON.parse(store.getItem(LIBRARY_KEY))||{};
+  const sessions={};for(const c of CASES){if(validSession(prior[c.id]))sessions[c.id]=prior[c.id];}
+  sessions[s.caseId]=s;
+  store.setItem(LIBRARY_KEY,JSON.stringify(sessions));store.setItem(STORE_KEY,JSON.stringify(s));return true;
+ }catch{return false;}
+}
 export function clamp(n,lo,hi){return Math.max(lo,Math.min(hi,n));}
 export function patientVitals(s,id){
- const p=CASE.patients.find(x=>x.id===id);
+ const p=getCase(s.caseId)?.patients.find(x=>x.id===id);
  if(!p)throw Error('unknown-person');
  // Illustrative fixed time trend; never varies according to clinical intervention.
  const t=s.minute;
@@ -99,7 +117,7 @@ export function execute(s,tool,id){
  if(!validSession(s)||s.finished)throw Error('session-finished-or-invalid');
  const action=ACTIONS[tool]?.find(a=>a.id===id);
  if(!action)throw Error('invalid-action');
- const minute=clamp(s.minute+action.min,0,30),p=CASE.patients.find(x=>x.id===s.person);
+ const minute=clamp(s.minute+action.min,0,30),p=getCase(s.caseId).patients.find(x=>x.id===s.person);
  let detail=action.description;
  if(tool==='dialogue'){
   detail=id==='symptoms'?p.dialogue.feeling:id==='event'?p.dialogue.event:'«Δεν υπάρχουν επιβεβαιωμένα στοιχεία για το ιατρικό μου ιστορικό.»';
@@ -116,7 +134,7 @@ export function askPatient(s,text){
  if(!validSession(s)||s.finished)throw Error('session-finished-or-invalid');
  const q=String(text||'').trim().slice(0,200);
  if(!q)throw Error('empty-question');
- const p=CASE.patients.find(x=>x.id===s.person);
+ const p=getCase(s.caseId).patients.find(x=>x.id===s.person);
  const symptom=/πον|αισθ|νιώθ|ενοχλ|symptom|feel/i.test(q),event=/συνέβ|έγινε|τροχα|ατύχημ|accident/i.test(q),
  history=/ιστορ|αλλεργ|φάρμακ|παίρν|history|allerg/i.test(q);
  const detail=symptom?p.dialogue.feeling:event?p.dialogue.event:history?'«Δεν υπάρχει επιβεβαιωμένο ιστορικό στο σενάριο.»':'«Δεν έχω διαθέσιμη απάντηση σε αυτή την ερώτηση στο εκπαιδευτικό σενάριο.»';
@@ -132,7 +150,7 @@ export function summarize(s){
  disclaimer:'Έλεγχος ολοκλήρωσης εκπαιδευτικών βημάτων — όχι κλινική βαθμολογία ή πιστοποίηση.'};
 }
 export function reportText(s){
- const r=summarize(s);return ['MENTOR NEXT · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',CASE.title,r.disclaimer,
+ const r=summarize(s);return ['MENTOR NEXT · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',getCase(s.caseId).title,r.disclaimer,
  'Χρόνος: '+r.minute+' εικονικά λεπτά','Καταγραφές: '+r.events,
  'Βήματα που καταγράφηκαν: '+(r.covered.join(', ')||'Κανένα'),
  'Για επανάληψη: '+(r.missing.join(', ')||'Κανένα'),'',

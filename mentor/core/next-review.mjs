@@ -2,7 +2,7 @@
  * MENTOR NEXT · process & observation analysis — 100% synthetic.
  * This is NOT clinical assessment, ECG analysis, patient severity or decision support.
  */
-import {CASE,ACTIONS,validSession,patientVitals} from './next-sim.mjs';
+import {getCase,validSession,patientVitals} from './next-sim.mjs';
 const CHECKS=Object.freeze([
  {id:'safety',title:'Ασφάλεια σκηνής'},
  {id:'dialogue',title:'Συνομιλία'},
@@ -14,7 +14,7 @@ const CHECKS=Object.freeze([
 ]);
 function ensure(s){if(!validSession(s))throw Error('invalid-next-review-session');}
 export function patientPose(s,id){
- ensure(s);if(!CASE.patients.some(p=>p.id===id))throw Error('unknown-person');
+ ensure(s);if(!getCase(s.caseId).patients.some(p=>p.id===id))throw Error('unknown-person');
  const last=s.events.filter(e=>e.person===id&&e.tool==='position').at(-1);
  return ['standing','seated','reclined'].includes(last?.actionId)?last.actionId:'standing';
 }
@@ -22,7 +22,7 @@ function has(s,tool,person,ids=null){
  return s.events.some(e=>e.tool===tool&&(person===null||e.person===person)&&(!ids||ids.includes(e.actionId)));
 }
 export function patientEvidence(s,id){
- ensure(s);if(!CASE.patients.some(p=>p.id===id))throw Error('unknown-person');
+ ensure(s);if(!getCase(s.caseId).patients.some(p=>p.id===id))throw Error('unknown-person');
  const records=s.events.filter(e=>e.person===id);
  const steps=[
   {id:'dialogue',label:'Συνομιλία',done:has(s,'dialogue',id)},
@@ -36,7 +36,7 @@ export function patientEvidence(s,id){
 }
 export function missionEvidence(s){
  ensure(s);
- const people=CASE.patients.map(p=>patientEvidence(s,p.id));
+ const people=getCase(s.caseId).patients.map(p=>patientEvidence(s,p.id));
  const shared=[
   {id:'safety',label:'Έλεγχος κινδύνων σκηνής',done:has(s,'exam',null,['scene'])||has(s,'interventions',null,['safety'])},
   {id:'coordination',label:'Εικονική επικοινωνία συντονισμού',done:has(s,'call',null)},
@@ -50,7 +50,7 @@ export function missionEvidence(s){
  const handover=s.events.find(e=>e.tool==='interventions'&&e.actionId==='handover');
  if(handover){
   const before=s.events.slice(0,s.events.indexOf(handover));
-  if(!CASE.patients.every(p=>before.some(e=>e.person===p.id&&['dialogue','exam','monitor'].includes(e.tool))))
+  if(!getCase(s.caseId).patients.every(p=>before.some(e=>e.person===p.id&&['dialogue','exam','monitor'].includes(e.tool))))
    caution.push('Η δομημένη παράδοση καταγράφηκε πριν συλλεχθούν δεδομένα και για τα δύο άτομα.');
  }
  const missingShared=shared.filter(x=>!x.done).map(x=>x.label);
@@ -58,13 +58,13 @@ export function missionEvidence(s){
   disclaimer:'Μόνο εκπαιδευτική πληρότητα καταγραφών, όχι κλινική ορθότητα, διάγνωση ή βαθμολογία.'};
 }
 export function vitalTrend(s,id,metric){
- ensure(s);if(!CASE.patients.some(p=>p.id===id))throw Error('unknown-person');
+ ensure(s);if(!getCase(s.caseId).patients.some(p=>p.id===id))throw Error('unknown-person');
  if(!['hr','rr','spo2'].includes(metric))throw Error('unsupported-vital');
  const result=[];for(let minute=0;minute<=s.minute;minute++)result.push({minute,value:patientVitals({...s,minute},id)[metric]});
  return result;
 }
 export function buildEvidenceReport(s){
- const e=missionEvidence(s),out=['MENTOR NEXT · ΑΝΑΣΚΟΠΗΣΗ ΑΝΑ ΑΣΘΕΝΗ',e.disclaimer,
+ const e=missionEvidence(s),out=['MENTOR NEXT · ΑΝΑΣΚΟΠΗΣΗ ΑΝΑ ΑΣΘΕΝΗ',getCase(s.caseId).title,e.disclaimer,
  'Χρόνος: '+s.minute+' εκπαιδευτικά λεπτά','Καταγραφές: '+s.events.length,''];
  for(const p of e.people){
   out.push('ΑΣΘΕΝΗΣ '+p.id.toUpperCase(),...p.steps.map(x=>(x.done?'[x] ':'[ ] ')+x.label),

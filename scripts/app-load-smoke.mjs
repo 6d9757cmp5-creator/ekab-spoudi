@@ -170,6 +170,38 @@ try {
     if(!await page.locator('#next-tool-title').textContent().then(s=>s.includes('Εξέταση')))throw Error(device+': MENTOR NEXT recommended step not opened');
     console.log('PASS '+device+': MENTOR NEXT v0.2 independent evidence, metric trend, visual posture and panels');
 
+
+    // MENTOR NEXT v0.3: distinct cases, independent data, and resume.
+    if(await page.locator('#next-case-list .next-case-card').count()!==3)
+      throw Error(device+': MENTOR NEXT v0.3 missing three selectable scenarios');
+    const previousCount=await page.locator('#next-events li').count();
+    await page.locator('[data-case-id="home-welfare-next-v1"]').click();
+    if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('κατοικία')))
+      throw Error(device+': MENTOR NEXT did not switch to home case');
+    if(!await page.locator('#next-location').textContent().then(t=>t.includes('Κατοικία')))
+      throw Error(device+': MENTOR NEXT 3D environment not set to home');
+    await page.locator('#next-question').fill('Τι συνέβη;');
+    await page.locator('#next-ask-form button').click();
+    if(!await page.locator('#next-result').textContent().then(t=>t.includes('δωμάτιο')))
+      throw Error(device+': MENTOR NEXT home patient case-specific reply failed');
+    await page.locator('[data-case-id="public-square-next-v1"]').click();
+    if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('πλατεία')))
+      throw Error(device+': MENTOR NEXT square case not selected');
+    await page.locator('#next-question').fill('Τι συνέβη;');
+    await page.locator('#next-ask-form button').click();
+    if(!await page.locator('#next-result').textContent().then(t=>t.includes('παγκάκι')))
+      throw Error(device+': MENTOR NEXT square-specific dialogue missing');
+    await page.locator('[data-case-id="home-welfare-next-v1"]').click();
+    if(!await page.locator('#next-events').textContent().then(t=>t.includes('δωμάτιο')))
+      throw Error(device+': MENTOR NEXT per-case resume lost home history');
+    await page.reload({waitUntil:'load'});
+    if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('κατοικία')))
+      throw Error(device+': MENTOR NEXT active case not restored after reload');
+    await page.locator('[data-case-id="crete-two-persons-next-v1"]').click();
+    if(await page.locator('#next-events li').count()!==previousCount)
+      throw Error(device+': MENTOR NEXT original road case history lost');
+    console.log('PASS '+device+': MENTOR NEXT v0.3 three original scenarios, contextual dialogue and independent save/resume');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}

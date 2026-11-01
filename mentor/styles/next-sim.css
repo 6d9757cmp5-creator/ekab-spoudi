@@ -42,3 +42,21 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;curs
 .next-panel-section>summary:focus-visible{outline:3px solid #80ffe1;outline-offset:3px}
 .next-panel-section[open]>summary{border-color:#7dd3ce}
 .next-panel-section:not([open])>.next-workspace,.next-panel-section:not([open])>.next-insights{display:none!important}
+
+
+/* MENTOR NEXT v0.3 — original responsive case library. */
+.next-library{margin:0 0 18px;border:1px solid #42677b;border-radius:16px;padding:18px;background:linear-gradient(145deg,#123345,#0c2735)}
+.next-library-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.next-library-heading h2{margin:4px 0 8px;font-size:1.17rem}
+.next-library-heading>span{font-size:.76rem;color:#9fcbd0}
+.next-library>p{font-size:.83rem;line-height:1.5;color:#c3dbe0;max-width:920px}
+.next-case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.next-case-card{min-width:0;min-height:128px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:9px;text-align:left;border:1px solid #4d7185;background:#153c4f;color:#e8f7fa;border-radius:13px;padding:14px 16px;transition:background .16s ease,border-color .16s ease}
+.next-case-card:hover{background:#24576a}
+.next-case-card[aria-pressed=true]{border-color:#80f5da;background:linear-gradient(125deg,#235865,#153e4d);box-shadow:inset 0 0 0 1px #80f5da55}
+.next-case-card:focus-visible{outline:3px solid #9cffe3;outline-offset:2px}
+.next-case-card strong{display:block;font-size:.91rem;line-height:1.4}
+.next-case-card small{font-size:.73rem;color:#bad4dc;line-height:1.45}
+.next-case-tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:#7be9cf}
+.next-case-goal{margin:11px 0 0!important;padding:10px 12px;border-left:3px solid #6edac9;background:#183d4b;border-radius:7px}
+@media(max-width:830px){.next-case-grid{grid-template-columns:1fr}.next-case-card{min-height:90px;gap:5px}}
