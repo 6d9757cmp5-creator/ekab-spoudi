@@ -32,6 +32,18 @@ jobs:
           node --check scripts/app-load-smoke.mjs
           node scripts/verify-static-pages.mjs
           node scripts/verify-tool-boundaries.mjs
+          node scripts/verify-service-boundaries.mjs
+          node --check services/notes/notes-store.js
+          node --check services/notes/notes-delete.js
+          node --check services/notes/notes-position.js
+          node --check services/sync/sync-codec.js
+          node --check services/sync/sync-model.js
+          node --check services/sync/sync-local.js
+          node scripts/verify-sync.mjs
+          node scripts/verify-sync-codec.mjs
+          node scripts/verify-notes-panel.mjs
+          node scripts/verify-notes-position.mjs
+          node scripts/verify-study-scheduler.mjs
           node scripts/verify-specialized-tools.mjs
           node scripts/verify-pharmacology.mjs
           node scripts/test-seminar-sync.cjs
