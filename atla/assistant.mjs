@@ -3,11 +3,11 @@
  * Reuses the legacy MENTOR retrieval/AI contract for zero backend duplication.
  * No grade or note writes; old lesson/exam stores remain untouched.
  */
-import {retrieve,riskGuard,RISK_MESSAGE} from '../mentor/knowledge/retrieve.mjs';
+import {retrieve,riskGuard,RISK_MESSAGE} from './knowledge/retrieve.mjs';
 import {askAi,buildPayload} from './ai/client.mjs';
 import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
-import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from '../mentor/presence/memory.mjs';
-import {examMode} from '../mentor/context/bridge.mjs';
+import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
+import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 
 const ROOT=new URL('../',import.meta.url);
