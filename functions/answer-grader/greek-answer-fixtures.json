@@ -381,6 +381,636 @@
       "reason": "Μη ασφαλής, παρατεταμένη προσέγγιση",
       "provenance": "synthetic_written_for_regression",
       "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveolar-minute-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-007",
+      "answer": "Ο κυψελιδικος αερισμος ειναι ποσο φρεσκου αερα φτανει στις κυψελιδες καθε λεπτο για ανταλλαγη αεριων. Ειναι ογκος αναπνοης μειον νεκρος χωρος, επι ποσο συχνα αναπνεω.",
+      "expected": "correct",
+      "reason": "Περιλαμβάνει ορισμό και προσεγγιστικό υπολογισμό",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveolar-minute-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-007",
+      "answer": "Είναι ο αέρας που φτάνει στις κυψελίδες.",
+      "expected": "partial",
+      "reason": "Δεν προσδιορίζει ανά λεπτό, συμμετοχή στην ανταλλαγή ή σχέση με νεκρό χώρο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "alveolar-minute-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-007",
+      "answer": "Κυψελιδικός αερισμός είναι μόνο ο αέρας που μένει στον ανατομικό νεκρό χώρο.",
+      "expected": "incorrect",
+      "reason": "Συγχέει κυψελιδικό αερισμό με νεκρό χώρο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "breath-control-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-008",
+      "answer": "Ρυθμό δίνουν κυρίως προμήκης και γέφυρα. Το διοξείδιο και το pH επηρεάζουν κεντρικούς χημειοϋποδοχείς, το οξυγόνο και τα άλλα αέρια τους περιφερικούς και μπορούμε για λίγο να ελέγχουμε εκούσια την αναπνοή.",
+      "expected": "correct",
+      "reason": "Όλα τα επίπεδα ελέγχου",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "breath-control-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-008",
+      "answer": "την αναπνοή την ελέγχει ο εγκέφαλος κ το διοξείδιο",
+      "expected": "partial",
+      "reason": "Ασαφές ως προς κέντρα, περιφερικούς υποδοχείς, εκούσιο έλεγχο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "breath-control-opposite",
+      "section": "eoppep",
+      "questionId": "EOP-A-008",
+      "answer": "Το σώμα δεν έχει νευρικά κέντρα που ρυθμίζουν την αναπνοή, γίνεται πάντα αποκλειστικά με τη θέληση.",
+      "expected": "incorrect",
+      "reason": "Αντιστρέφει τον ακούσιο αναπνευστικό έλεγχο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "inspire-full-rough",
+      "section": "eoppep",
+      "questionId": "EOP-A-009",
+      "answer": "Στην εισπνοη σφιγγει το διαφραγμα και κατεβαινει, ανοίγει ο θωρακας με τους εξω μεσοπλευριους, αυξανει ο ογκος και πεφτει η πιεση μεσα, οποτε μπαινει αερας.",
+      "expected": "correct",
+      "reason": "Ακριβής μηχανισμός χωρίς απαίτηση σωστής γραμματικής",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "inspire-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-009",
+      "answer": "το διάφραγμα κατεβαίνει και μπαίνει αέρας",
+      "expected": "partial",
+      "reason": "Παραλείπει διεύρυνση θώρακα και μεταβολή πίεσης",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "inspire-inverted",
+      "section": "eoppep",
+      "questionId": "EOP-A-009",
+      "answer": "Κατά την εισπνοή το διάφραγμα χαλαρώνει, η πίεση ανεβαίνει και γι' αυτό μπαίνει αέρας.",
+      "expected": "incorrect",
+      "reason": "Αντίστροφη μηχανική εισπνοής",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "expire-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-010",
+      "answer": "Στην ήρεμη εκπνοή χαλαρώνει το διάφραγμα, θώρακας και πνεύμονες επανέρχονται, ο όγκος μικραίνει, η πίεση αυξάνεται και ο αέρας βγαίνει. Στη δυνατή εκπνοή βοηθούν κοιλιακοί και έσω μεσοπλεύριοι.",
+      "expected": "correct",
+      "reason": "Αναφέρει ήρεμη και έντονη εκπνοή",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "expire-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-010",
+      "answer": "Το διαφραγμα χαλαρωνει και βγαινει ο αερας.",
+      "expected": "partial",
+      "reason": "Παραλείπει σχέση όγκου/πίεσης και ενεργητική εκπνοή",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "expire-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-010",
+      "answer": "Στην ήρεμη εκπνοή το διάφραγμα συσπάται, μεγαλώνει ο θώρακας και μειώνεται η πίεση.",
+      "expected": "incorrect",
+      "reason": "Περιγράφει μηχανισμό εισπνοής αντί εκπνοής",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "autonomic-heart-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-011",
+      "answer": "Το συμπαθητικό ανεβάζει παλμούς, αγωγή και δύναμη καρδιάς, κυρίως με β1. Το παρασυμπαθητικό μέσω πνευμονογαστρικού ρίχνει παλμούς και αγωγή στον κολποκοιλιακό.",
+      "expected": "correct",
+      "reason": "Δύο αντίρροποι ρόλοι και βασικοί μηχανισμοί",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "autonomic-heart-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-011",
+      "answer": "Συμπαθητικο επιταχυνει καρδια, παρασυμπαθητικο την αργει.",
+      "expected": "partial",
+      "reason": "Λείπουν επίδραση στην αγωγή, συσταλτικότητα και νευρικός/υποδοχικός ρόλος",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "autonomic-heart-opposite",
+      "section": "eoppep",
+      "questionId": "EOP-A-011",
+      "answer": "Το συμπαθητικό μειώνει τον καρδιακό ρυθμό ενώ το παρασυμπαθητικό αυξάνει τους παλμούς.",
+      "expected": "incorrect",
+      "reason": "Αντιστρέφει βασικές δράσεις",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "brain-autoreg-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-012",
+      "answer": "Τα μικρά εγκεφαλικά αγγεία αλλάζουν αντίσταση για να κρατούν σχεδόν σταθερή τη ροή σε ένα εύρος πιέσεων. Παίζουν ρόλο CO2, pH και μεταβολισμός, και σε τραύμα μπορεί να χαλάσει ο μηχανισμός.",
+      "expected": "correct",
+      "reason": "Ορισμός αυτορρύθμισης και όρια",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "brain-autoreg-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-012",
+      "answer": "Ο εγκέφαλος προσπαθεί να κρατά ίδια την αιμάτωση όταν αλλάζει η πίεση.",
+      "expected": "partial",
+      "reason": "Λείπουν αγγειακή αντίσταση, εύρος και παράγοντες",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "brain-autoreg-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-012",
+      "answer": "Η εγκεφαλική ροή είναι απόλυτα σταθερή ανεξάρτητα από την πίεση και δεν επηρεάζεται από CO2 ή τραύμα.",
+      "expected": "incorrect",
+      "reason": "Αρνείται τα φυσιολογικά όρια του μηχανισμού",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "spleen-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-013",
+      "answer": "Ο σπληνας φιλτραρει το αιμα, απομακρυνει παλια ερυθρα κ μικροβια, βοηθα την αμυνα με λεμφοκυτταρα και κρατα μέρος των αιμοπεταλιων.",
+      "expected": "correct",
+      "reason": "Καλύπτει όλες τις βασικές λειτουργίες",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "spleen-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-013",
+      "answer": "Ο σπλήνας καθαρίζει το αίμα από παλιά ερυθρά.",
+      "expected": "partial",
+      "reason": "Παραλείπει ανοσολογική απόκριση και αποθήκευση αιμοπεταλίων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "spleen-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-013",
+      "answer": "Ο σπλήνας παράγει τη χολή και ρυθμίζει τη γλυκόζη με ινσουλίνη.",
+      "expected": "incorrect",
+      "reason": "Αποδίδει λειτουργίες άλλων οργάνων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "water-exit-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-014",
+      "answer": "Το νερό φεύγει με τα ουρα απ τους νεφρους, με ιδρωτα και αδηλη απωλεια από δέρμα, με υδρατμους απ την αναπνοη και με τα κοπρανα.",
+      "expected": "correct",
+      "reason": "Αναφέρει τέσσερις οδούς",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "water-exit-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-014",
+      "answer": "χάνουμε νερό από ουρα και ιδρώτα",
+      "expected": "partial",
+      "reason": "Λείπουν πνεύμονες και έντερο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "water-exit-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-014",
+      "answer": "Ο οργανισμός αποβάλλει νερό αποκλειστικά με τα ούρα και καθόλου με την αναπνοή ή το δέρμα.",
+      "expected": "incorrect",
+      "reason": "Αποκλείει υπαρκτές οδούς",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "insulin-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-015",
+      "answer": "Η ινσουλινη βγαινει απο β κυτταρα στα νησιδια παγκρεατος, βοηθα να μπει γλυκοζη στους ιστους και να αποθηκευτει και ετσι πεφτει το σακχαρο στο αιμα.",
+      "expected": "correct",
+      "reason": "Πηγή και μεταβολική επίδραση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "insulin-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-015",
+      "answer": "Η ινσουλίνη κατεβάζει το σάκχαρο.",
+      "expected": "partial",
+      "reason": "Δεν απαντά από πού εκκρίνεται ούτε τον μηχανισμό",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "insulin-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-015",
+      "answer": "Η ινσουλίνη παράγεται από τους νεφρούς και αυξάνει το σάκχαρο.",
+      "expected": "incorrect",
+      "reason": "Λανθασμένη προέλευση και δράση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "kidneys-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-016",
+      "answer": "Τα νεφρά φιλτράρουν αίμα και βγάζουν άχρηστες ουσίες στα ούρα, ρυθμίζουν νερό, άλατα και pH, βοηθούν σε πίεση με ρενίνη, ερυθρά με ερυθροποιητίνη και ενεργοποιούν βιταμίνη D.",
+      "expected": "correct",
+      "reason": "Καλύπτει αποβολή, ομοιόσταση και ορμονικές λειτουργίες",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "kidneys-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-016",
+      "answer": "οι νεφροι φτιάχνουν τα ουρα και διώχνουν άχρηστα",
+      "expected": "partial",
+      "reason": "Λείπουν ρύθμιση ηλεκτρολυτών και ενδοκρινικοί ρόλοι",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "kidneys-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-016",
+      "answer": "Οι νεφροί δεν ρυθμίζουν νερό ή ηλεκτρολύτες, λειτουργούν μόνο για πέψη.",
+      "expected": "incorrect",
+      "reason": "Άρνηση βασικών νεφρικών λειτουργιών",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "adh-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-017",
+      "answer": "Η ADH φτιάχνεται στον υποθάλαμο, ελευθερώνεται από πίσω υπόφυση και κάνει τους αθροιστικούς πόρους των νεφρών να κρατούν πιο πολύ νερό ώστε να βγαίνουν λιγότερα και πυκνότερα ούρα.",
+      "expected": "correct",
+      "reason": "Προέλευση και αποτέλεσμα",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "adh-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-017",
+      "answer": "Η αντιδιουρητικη κάνει να κρατάμε νερό και να κάνουμε λιγότερα ούρα.",
+      "expected": "partial",
+      "reason": "Λείπει παραγωγή/απελευθέρωση και θέση δράσης",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "adh-inverted",
+      "section": "eoppep",
+      "questionId": "EOP-A-017",
+      "answer": "Η ADH εκκρίνεται από το ήπαρ και προκαλεί περισσότερα αραιά ούρα.",
+      "expected": "incorrect",
+      "reason": "Λανθασμένη προέλευση και αντίθετη δράση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "pulmonary-artery-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-018",
+      "answer": "Η πνευμονική αρτηρία ξεκινά από τη δεξιά κοιλία και πηγαίνει αίμα φτωχό σε οξυγόνο στους πνεύμονες, όχι όπως οι συστηματικές αρτηρίες.",
+      "expected": "correct",
+      "reason": "Ορθή αφετηρία, κατεύθυνση και οξυγόνωση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "pulmonary-artery-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-018",
+      "answer": "Πηγαίνει αίμα στους πνεύμονες.",
+      "expected": "partial",
+      "reason": "Λείπει δεξιά κοιλία και χαμηλή οξυγόνωση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "pulmonary-artery-reversed",
+      "section": "eoppep",
+      "questionId": "EOP-A-018",
+      "answer": "Η πνευμονική αρτηρία ξεκινά από την αριστερή κοιλία και μεταφέρει πολύ οξυγονωμένο αίμα στο σώμα.",
+      "expected": "incorrect",
+      "reason": "Εσφαλμένη προέλευση, κατεύθυνση και χαρακτηριστικά αίματος",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "heart-rate-factors-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-019",
+      "answer": "Παλμούς επηρεάζουν ηλικία, άσκηση, πυρετός, πόνος, οξυγόνο, αυτόνομο νευρικό, ορμόνες, φάρμακα, ηλεκτρολύτες και η κατάσταση καρδιάς.",
+      "expected": "correct",
+      "reason": "Πολλαπλοί παράγοντες αναφοράς",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "heart-rate-factors-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-019",
+      "answer": "Η καρδιακή συχνότητα ανεβαίνει με άσκηση και πυρετό.",
+      "expected": "partial",
+      "reason": "Παραλείπονται οι άλλοι βασικοί παράγοντες της αναφοράς",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "heart-rate-factors-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-019",
+      "answer": "Ο καρδιακός ρυθμός δεν επηρεάζεται ποτέ από άσκηση, φάρμακα ή νευρικό σύστημα.",
+      "expected": "incorrect",
+      "reason": "Αρνείται βασικούς παράγοντες",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "stroke-volume-full",
+      "section": "eoppep",
+      "questionId": "EOP-A-020",
+      "answer": "Ο όγκος παλμού εξαρτάται από το ποσο γεμίζει η κοιλία πριν συσπαστεί, πόσο δυνατά συσπάται και πόση αντίσταση έχει για να στείλει το αίμα. Επηρεάζεται και από τον χρόνο πλήρωσης.",
+      "expected": "correct",
+      "reason": "Προφόρτιο, συσταλτικότητα, μεταφόρτιο και χρόνος",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "stroke-volume-partial",
+      "section": "eoppep",
+      "questionId": "EOP-A-020",
+      "answer": "παίζει ρόλο πόσο αίμα έχει μέσα η καρδιά πριν τη συστολή",
+      "expected": "partial",
+      "reason": "Μόνο προφόρτιο, όχι συσταλτικότητα/μεταφόρτιο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "stroke-volume-wrong",
+      "section": "eoppep",
+      "questionId": "EOP-A-020",
+      "answer": "Ο όγκος παλμού δεν επηρεάζεται από τη δύναμη συστολής ούτε από την αντίσταση στην εξώθηση.",
+      "expected": "incorrect",
+      "reason": "Αρνείται κρίσιμους παράγοντες",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-tendon-full",
+      "section": "saek",
+      "questionId": "saek-01-9",
+      "answer": "Τενοντας πάει απο μυ στο οστό ενω συνδεσμος ενώνει δυο οστά μεταξύ τους.",
+      "expected": "correct",
+      "reason": "Οι δύο διακριτές συνδέσεις",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-tendon-partial",
+      "section": "saek",
+      "questionId": "saek-01-9",
+      "answer": "Τένοντας συνδέει μυ με οστό.",
+      "expected": "partial",
+      "reason": "Παραλείπει τον σύνδεσμο",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-tendon-opposite",
+      "section": "saek",
+      "questionId": "saek-01-9",
+      "answer": "Ο τένοντας ενώνει οστό με οστό και ο σύνδεσμος μυ με οστό.",
+      "expected": "incorrect",
+      "reason": "Αντιστροφή σχέσεων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-vent-oxygen-full",
+      "section": "saek",
+      "questionId": "saek-02-2",
+      "answer": "Αερισμος ειναι να μπαινει και να βγαινει αερας ώστε να φευγει και CO2, οξυγονωση ειναι να μπαινει και να μεταφερεται O2 στο αιμα.",
+      "expected": "correct",
+      "reason": "Ορθή διάκριση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-vent-oxygen-partial",
+      "section": "saek",
+      "questionId": "saek-02-2",
+      "answer": "Ο αερισμός αφορά το να κινείται ο αέρας.",
+      "expected": "partial",
+      "reason": "Λείπει διάκριση οξυγόνωσης",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-vent-oxygen-inverted",
+      "section": "saek",
+      "questionId": "saek-02-2",
+      "answer": "Ο αερισμός είναι η μεταφορά οξυγόνου στο αίμα και η οξυγόνωση μόνο η αποβολή διοξειδίου.",
+      "expected": "incorrect",
+      "reason": "Σύγχυση ορισμών",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-resafety-full",
+      "section": "saek",
+      "questionId": "saek-03-3",
+      "answer": "Ελέγχουμε ξανά τον χώρο γιατί μπορεί να αλλάξει ο κίνδυνος όσο είμαστε ήδη μέσα.",
+      "expected": "correct",
+      "reason": "Αποτυπώνει αλλαγή συνθηκών",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-resafety-wrong",
+      "section": "saek",
+      "questionId": "saek-03-3",
+      "answer": "Αν κοιτάξουμε τον χώρο μια φορά δεν χρειάζεται ξανά, οι κίνδυνοι μένουν ίδιοι.",
+      "expected": "incorrect",
+      "reason": "Λανθασμένη απόλυτη δήλωση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-resafety-vague",
+      "section": "saek",
+      "questionId": "saek-03-3",
+      "answer": "Μερικές φορές ναι ανάλογα.",
+      "expected": "uncertain",
+      "reason": "Δεν εξηγεί γιατί γίνεται επανεκτίμηση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-consent-full",
+      "section": "saek",
+      "questionId": "saek-03-5",
+      "answer": "Πριν από μη επειγουσα παρεμβαση εξηγουμε στον ασθενη τι θα γινει και ζηταμε τη συναίνεσή του.",
+      "expected": "correct",
+      "reason": "Συνδυάζει ενημέρωση και συναίνεση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-consent-partial",
+      "section": "saek",
+      "questionId": "saek-03-5",
+      "answer": "Πρώτα του λέω τι θα κάνω.",
+      "expected": "partial",
+      "reason": "Δεν αναφέρει συναίνεση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-consent-wrong",
+      "section": "saek",
+      "questionId": "saek-03-5",
+      "answer": "Σε μη επείγουσα παρέμβαση δεν χρειάζεται να ενημερώσω ή να ζητήσω συναίνεση.",
+      "expected": "incorrect",
+      "reason": "Αρνείται δύο απαιτούμενα στοιχεία",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-gloves-full",
+      "section": "saek",
+      "questionId": "saek-04-2",
+      "answer": "Ναι πλενοντε η απολυμαίνονται τα χερια πριν και μετα τα γαντια ανάλογα με την πράξη.",
+      "expected": "correct",
+      "reason": "Σωστή αρχή υγιεινής",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-gloves-wrong",
+      "section": "saek",
+      "questionId": "saek-04-2",
+      "answer": "Αν βάλω γάντια δεν χρειάζεται ποτέ αντισηψία χεριών.",
+      "expected": "incorrect",
+      "reason": "Αντίθετο της αναφοράς",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-gloves-vague",
+      "section": "saek",
+      "questionId": "saek-04-2",
+      "answer": "Μόνο καμιά φορά ίσως.",
+      "expected": "uncertain",
+      "reason": "Δεν ξεκαθαρίζει την υποχρέωση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-handover-full",
+      "section": "saek",
+      "questionId": "saek-19-3",
+      "answer": "Στην παραδοση λέμε πως εξελιχθηκε το περιστατικο και πως αλλαζαν τα ζωτικα στην διαδρομη, οχι μόνο τη τελευταία μετρηση.",
+      "expected": "correct",
+      "reason": "Χρονολογική τάση και εξέλιξη",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-handover-partial",
+      "section": "saek",
+      "questionId": "saek-19-3",
+      "answer": "Αναφέρω τις τελευταίες μετρήσεις του ασθενούς.",
+      "expected": "partial",
+      "reason": "Λείπει εξέλιξη και τάσεις",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-handover-wrong",
+      "section": "saek",
+      "questionId": "saek-19-3",
+      "answer": "Αρκεί μόνο ο τελευταίος αριθμός και δεν έχει σημασία τι άλλαξε προηγουμένως.",
+      "expected": "incorrect",
+      "reason": "Αντίθεση με εκπαιδευτική αναφορά",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-stretcher-full",
+      "section": "saek",
+      "questionId": "saek-20-8",
+      "answer": "Πριν μετακινήσουμε φορείο τσεκάρουμε φρένα, ευθυγράμμιση, σωληνάκια και πόσοι βοηθάνε.",
+      "expected": "correct",
+      "reason": "Και τα τέσσερα σημεία",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-stretcher-partial",
+      "section": "saek",
+      "questionId": "saek-20-8",
+      "answer": "Ελέγχω τα φρένα και τους βοηθούς.",
+      "expected": "partial",
+      "reason": "Λείπουν ευθυγράμμιση και σωληνώσεις",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "id": "saek-stretcher-wrong",
+      "section": "saek",
+      "questionId": "saek-20-8",
+      "answer": "Μετακινούμε το φορείο χωρίς έλεγχο στα φρένα ή στις σωληνώσεις γιατί δεν έχει σημασία.",
+      "expected": "incorrect",
+      "reason": "Αρνείται κρίσιμους ελέγχους",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
     }
   ]
 }
