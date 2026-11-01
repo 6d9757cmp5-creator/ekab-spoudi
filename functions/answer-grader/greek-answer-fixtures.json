@@ -255,6 +255,132 @@
       "reason": "Δεν αναφέρει ποια αέρια και σε ποια κατεύθυνση",
       "provenance": "synthetic_written_for_regression",
       "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "mentor_oral",
+      "questionId": "scene",
+      "id": "mentor-scene-complete",
+      "expected": "correct",
+      "answer": "Πρώτα βλέπω τι κινδύνους έχει όπως κίνηση αυτοκινήτων ή φωτιά. Χωρίζω τι μου είπαν απ' όσα είδα πραγματικά, ελέγχω για να σιγουρευτώ και δεν πλησιάζω αν δεν είναι ασφαλές.",
+      "reason": "Περιγράφει κινδύνους, επιβεβαίωση και προτεραιότητα ασφάλειας",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "mentor_oral",
+      "questionId": "scene",
+      "id": "mentor-scene-partial",
+      "expected": "partial",
+      "answer": "κοιταω πρώτα αν υπαρχει κίνδυνος",
+      "reason": "Υπάρχει ασφάλεια αλλά όχι διάκριση επιβεβαιωμένων στοιχείων",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "mentor_oral",
+      "questionId": "scene",
+      "id": "mentor-scene-danger",
+      "expected": "incorrect",
+      "answer": "Πλησιάζω αμέσως το τροχαίο χωρίς να κοιτάξω κίνηση ή άλλους κινδύνους",
+      "reason": "Αντίθετο της προτεραιότητας ασφάλειας, χρειάζεται εκπαιδευτής για τελική επιβεβαίωση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "mentor_oral",
+      "questionId": "report",
+      "id": "mentor-report-complete",
+      "expected": "correct",
+      "answer": "Λέω τη θέση του συμβάντος όπως αναφέρθηκε, ότι έχουμε δύο εμπλεκόμενους, και ξεχωρίζω τι ξέρουμε σίγουρα από ό,τι δεν έχουμε επιβεβαιώσει.",
+      "reason": "Καλύπτει τα τρία στοιχεία του checklist",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "mentor_oral",
+      "questionId": "report",
+      "id": "mentor-report-partial",
+      "expected": "partial",
+      "answer": "λεω το μερος και ότι έχει δύο άτομα",
+      "reason": "Δεν διακρίνει επιβεβαιωμένα και ανεπιβεβαίωτα στοιχεία",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "mentor_oral",
+      "questionId": "report",
+      "id": "mentor-report-unverified",
+      "expected": "incorrect",
+      "answer": "Λέω ότι και οι δύο έχουν υποστεί κατάγματα, παρότι κανείς δεν μου είπε κάτι τέτοιο.",
+      "reason": "Επινοεί μη επιβεβαιωμένα στοιχεία",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "seminar",
+      "courseId": "bls",
+      "questionIndex": 3,
+      "id": "bls-scene-complete",
+      "expected": "correct",
+      "answer": "Αν υπάρχουν οχήματα που κινούνται ή ηλεκτρικό ρεύμα δεν μπαίνω στον κίνδυνο, κρατάω ασφαλή απόσταση και ζητώ εξειδικευμένη βοήθεια πριν προσεγγίσω.",
+      "reason": "Συνάδει με αναφορά για μη ασφαλή σκηνή",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "seminar",
+      "courseId": "bls",
+      "questionIndex": 3,
+      "id": "bls-scene-partial",
+      "expected": "partial",
+      "answer": "πρωτα κοιταω το χωρο",
+      "reason": "Δεν εξηγεί τι κάνει αν είναι επικίνδυνος",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "seminar",
+      "courseId": "bls",
+      "questionIndex": 3,
+      "id": "bls-scene-danger",
+      "expected": "incorrect",
+      "answer": "Περνάω ανάμεσα από τα κινούμενα αυτοκίνητα για να φτάσω αμέσως στον τραυματία, γιατί η ασφάλεια μου έρχεται μετά.",
+      "reason": "Αντίθετη προτεραιότητα ασφάλειας, απαιτεί κλινική επιμέλεια",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "seminar",
+      "courseId": "bls",
+      "questionIndex": 7,
+      "id": "bls-response-complete",
+      "expected": "correct",
+      "answer": "Μιλάω δυνατά στον άνθρωπο και ελέγχω προσεκτικά αν ανταποκρίνεται χωρίς να καθυστερώ.",
+      "reason": "Ασφαλής έλεγχος ανταπόκρισης όπως αναφορά",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "seminar",
+      "courseId": "bls",
+      "questionIndex": 7,
+      "id": "bls-response-vague",
+      "expected": "partial",
+      "answer": "τον ελέγχω",
+      "reason": "Δεν περιγράφει πώς ή αποφυγή καθυστέρησης",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
+    },
+    {
+      "section": "seminar",
+      "courseId": "bls",
+      "questionIndex": 7,
+      "id": "bls-response-wrong",
+      "expected": "incorrect",
+      "answer": "Τον χτυπώ δυνατά και τον ταρακουνάω επί πολλή ώρα ώσπου να μου απαντήσει.",
+      "reason": "Μη ασφαλής, παρατεταμένη προσέγγιση",
+      "provenance": "synthetic_written_for_regression",
+      "reviewStatus": "pending_independent_educator_review"
     }
   ]
 }
