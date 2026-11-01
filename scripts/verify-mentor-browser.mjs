@@ -164,9 +164,17 @@ try{
   assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'0');
   assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Medical desk stays hidden from learners. QA temporarily reveals the internal review controls.
+  await page.goto(url,{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#tab-clinical').isVisible(),false);
+  assert.equal(await page.locator('#coach-to-clinical').isVisible(),false);
   // MENTOR physician reference desk: verified source index, specialty routing, and honest fallback.
   await page.goto(url,{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('clinical-count').textContent.includes('17 ειδικότητες'));
+  await page.evaluate(()=>{
+    document.getElementById('tab-clinical').hidden=false;
+    document.getElementById('coach-to-clinical').hidden=false;
+  });
   assert.match(await page.locator('#clinical-count').textContent(),/51 ερωτήσεις αναφοράς/);
   assert.match(await page.locator('#clinical-count').textContent(),/14 επίσημοι επιστημονικοί κόμβοι/);
   assert.match(await page.locator('#clinical-count').textContent(),/0 κλινικά εγκεκριμένες/);
