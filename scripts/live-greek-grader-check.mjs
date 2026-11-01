@@ -20,10 +20,10 @@ const exit=async(code,status,detail)=>{
  console.log('LIVE_GRADING_STATUS:',status,detail);
  process.exitCode=code;
 };
-if(!FREE){
- await exit(2,'blocked_free_plan_unverified','CLOUDFLARE_FREE_PLAN_CONFIRMED not set to true; no chargeable calls made');
-}else if(!TOKEN||!ACCOUNT){
+if(!TOKEN||!ACCOUNT){
  await exit(2,'blocked_missing_credentials','Cloudflare account ID or API token not available in GitHub secrets; no model calls made');
+}else if(!FREE){
+ await exit(2,'blocked_free_plan_unverified','CLOUDFLARE_FREE_PLAN_CONFIRMED not set to true; no chargeable calls made');
 }else if(!/^[a-f0-9]{32}$/i.test(ACCOUNT)){
  await exit(2,'blocked_invalid_account_id','Configured account ID is invalid; no model calls made');
 }else{
