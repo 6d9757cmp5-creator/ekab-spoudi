@@ -10,7 +10,10 @@ assert(!home.includes('href="farmaka.html"')&&!home.includes('href="seminar-prep
 for(const p of ['farmaka.html','seminar-prep.html','saek-images.html','protocols.html','mentor-next.html','mentor-lab.html','ui-tools/anatomy-3d/index.html'])assert(existsSync(p),'missing linked tool '+p);
 assert(sim.includes('src="tools/patient-simulator/app/next-sim.mjs"'),'simulator remains independent');
 assert(sim.includes('src="mentor/presence/presence.mjs"'),'mentor is an optional companion');
-assert(catalog.includes('Προσομοιωτής Ασθενών')&&catalog.includes('MENTOR OS'));
+assert(catalog.includes('Προσομοιωτής Ασθενών')&&catalog.includes('MENTOR OS')&&catalog.includes('Εργαστήριο ΗΚΓ'));
+assert(read('mentor-ecg.js').includes('tools/ecg-lab/app/ecg.js'));
+assert(read('mentor-ecg.html').includes('Εργαστήριο ΗΚΓ'));
+
 assert(read('sw.js').includes('./tools.html'));
 
 const protocols=read('protocols.html'),review=read('mentor-protocol-suite.mjs'),homeText=read('index.html');

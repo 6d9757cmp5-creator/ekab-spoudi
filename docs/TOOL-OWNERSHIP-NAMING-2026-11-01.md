@@ -11,6 +11,7 @@
 | Ελληνικά Πρωτόκολλα | tools/protocol-lab/ | protocols.html |
 | Εργαστήριο Πρωτοκόλλων | tools/protocol-lab/, γέφυρα συμβατότητας | mentor-protocol-suite.html?view=lab |
 | Ανασκόπηση Πρωτοκόλλου | tools/protocol-lab/, γέφυρα συμβατότητας | mentor-protocol-suite.html?view=debrief |
+| Εργαστήριο ΗΚΓ | tools/ecg-lab/ | mentor-ecg.html |
 | Κατάρτιση ΣΑΕΚ | tools/saek-study/ | saek.html |
 | Πιστοποίηση ΕΟΠΠΕΠ | tools/eoppep-exams/ | eoppep.html |
 | Εργαλεία & Βιβλιοθήκη | tools/shared/, κοινή πλοήγηση | tools.html |
