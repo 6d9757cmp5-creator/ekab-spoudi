@@ -7,7 +7,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {dirname,resolve} from 'node:path';
-import {createHash} from 'node:crypto';
+import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 
 const HERE=dirname(fileURLToPath(import.meta.url));
 const ROOT=resolve(HERE,'../../..');
@@ -19,23 +19,11 @@ const TOPICS=Object.freeze([
  {id:'resuscitation',name:'Αναζωογόνηση',term:'("Cardiopulmonary Resuscitation"[MeSH Terms] OR "basic life support"[Title/Abstract]) AND (guideline[Title/Abstract] OR "Systematic Review"[Publication Type])'},
  {id:'trauma',name:'Τραύμα',term:'("Wounds and Injuries"[MeSH Terms] OR "trauma care"[Title/Abstract]) AND ("Emergency Medical Services"[MeSH Terms] OR prehospital[Title/Abstract]) AND (guideline[Title/Abstract] OR "Systematic Review"[Publication Type])'}
 ]);
-const APPROVED_MONITOR_HOSTS=new Set([
- 'www.who.int','who.int','www.ekab.gr','ekab.gr','www.ncbi.nlm.nih.gov',
- 'openstax.org','www.openstax.org','wtcs.pressbooks.pub','www.resus.org.uk',
- 'www.erc.edu','erc.edu','www.naemt.org','naemt.org','www.psglearning.com',
- 'psglearning.com','shop.elsevier.com','www.wolterskluwer.com',
- 'www.msdmanuals.com','www.cdc.gov','www.escardio.org','www.nice.org.uk',
- 'www.ema.europa.eu','humanatlas.io','physionet.org','github.com',
- 'www.idsociety.org','www.hematology.org','www.acog.org','www.ginasthma.org',
- 'cdn.who.int','professional.diabetes.org','www.saem.org','www.ems.gov',
- 'iem-student.org','openacutecare.org','uotinitiative.org',
- 'goldcopd.org','kdigo.org','diabetesjournals.org'
-]);
 const clean=(v,n=320)=>String(v??'').replace(/[\u0000-\u001f\u007f]+/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
 const canonical=(url)=>{
  try{
   const u=new URL(url);
-  if(u.protocol!=='https:'||u.username||u.password||u.port||!APPROVED_MONITOR_HOSTS.has(u.hostname.toLowerCase()))return null;
+  if(!classifySource(u.toString()).accepted)return null;
   u.hash='';u.search='';
   return u.toString().replace(/\/$/,'');
  }catch{return null;}
@@ -53,7 +41,10 @@ export function buildWatchlist(registries){
     if(!previous.registry_ids.includes(registry.id))previous.registry_ids.push(registry.id);
     continue;
    }
-   found.set(url,{url,title,registry_ids:[registry.id]});
+   const authority=classifySource(url);
+   found.set(url,{url,title,registry_ids:[registry.id],source_category:authority.category,
+    evidence_status:'source-identity-curated-content-not-reviewed',
+    clinical_approval:false,knowledge_ingestion_enabled:false});
   }
  }
  return [...found.values()].sort((a,b)=>a.url.localeCompare(b.url));
@@ -71,11 +62,13 @@ function safeDate(value){
 export function mergeCandidates(previous,found,now){
  const records=new Map();
  for(const c of Array.isArray(previous)?previous:[]){
-  if(!/^\d{1,10}$/.test(String(c.pmid||''))||c.status!=='pending-review')continue;
+  if(!screenPubMedArticle(c).accepted||c.status!=='pending-review')continue;
   records.set(String(c.pmid),c);
  }
  let added=0;
  for(const item of found){
+  const gate=screenPubMedArticle(item);
+  if(!gate.accepted)continue;
   const pmid=String(item.pmid);
   const old=records.get(pmid);
   if(!old)added++;
@@ -85,11 +78,17 @@ export function mergeCandidates(previous,found,now){
    title:clean(item.title,300),
    published_at:safeDate(item.published_at),
    journal:clean(item.journal,140),
+   doi:clean(item.doi,150),
+   publication_types:[...new Set(item.publication_types||[])].map(x=>clean(x,100)),
+   provenance:'NCBI-PubMed-summary-metadata-not-article-endorsement',
+   source_quality:'unassessed',
+   independent_review:'required',
    source_url:'https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/',
    topic_ids:[...new Set([...(old?.topic_ids||[]),item.topic_id])].sort(),
    first_detected:old?.first_detected||now,
    last_detected:now,
    status:'pending-review',
+   integrity_checked:'metadata-only-not-retraction-database-verified',
    content_imported:false,
    clinical_approval:false,
    atla_ai_retrieval_enabled:false,
@@ -108,11 +107,12 @@ async function requestJson(url,fetcher=fetch){
  return JSON.parse(body);
 }
 export async function discoverPubMed(fetcher=fetch){
- const articles=new Map(),failures=[];
+ const articles=new Map(),failures=[],excluded=[];
  for(const topic of TOPICS){
   try{
    const search=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi');
-   for(const [k,v] of Object.entries({db:'pubmed',term:topic.term,retmode:'json',retmax:'10',sort:'pub date',reldate:String(PERIOD_DAYS),datetype:'edat'}))search.searchParams.set(k,v);
+   const term='('+topic.term+') AND ("Guideline"[Publication Type] OR "Practice Guideline"[Publication Type] OR "Systematic Review"[Publication Type] OR "Meta-Analysis"[Publication Type]) NOT ("Retracted Publication"[Publication Type] OR "Retraction of Publication"[Publication Type] OR "Preprint"[Publication Type] OR "Published Erratum"[Publication Type])';
+   for(const [k,v] of Object.entries({db:'pubmed',term,retmode:'json',retmax:'10',sort:'pub date',reldate:String(PERIOD_DAYS),datetype:'edat'}))search.searchParams.set(k,v);
    const searchResult=await requestJson(search,fetcher);
    const ids=(searchResult.esearchresult?.idlist||[]).filter(v=>/^\d{1,10}$/.test(String(v))).slice(0,10);
    if(!ids.length)continue;
@@ -122,7 +122,12 @@ export async function discoverPubMed(fetcher=fetch){
    for(const pmid of ids){
     const a=result.result?.[pmid];
     if(!a?.title)continue;
-    const item={pmid:String(pmid),title:a.title,published_at:a.pubdate||a.epubdate||'',journal:a.fulljournalname||a.source||'',topic_id:topic.id};
+    const item={pmid:String(pmid),title:a.title,published_at:a.pubdate||a.epubdate||'',
+     journal:a.fulljournalname||a.source||'',topic_id:topic.id,
+     doi:(Array.isArray(a.articleids)?a.articleids.find(x=>x.idtype==='doi')?.value:'')||'',
+     publication_types:Array.isArray(a.pubtype)?a.pubtype:[]};
+    const assessment=screenPubMedArticle(item);
+    if(!assessment.accepted){excluded.push({pmid,topic_id:topic.id,reason:assessment.reason});continue;}
     if(!articles.has(pmid))articles.set(pmid,item);
     else{
      const old=articles.get(pmid);
@@ -132,7 +137,7 @@ export async function discoverPubMed(fetcher=fetch){
   }catch(e){failures.push({topic_id:topic.id,reason:clean(e.message,120)});}
  }
  const found=[...articles.values()].flatMap(item=>(item.topic_ids||[item.topic_id]).map(topic_id=>({...item,topic_id})));
- return {found,failures};
+ return {found,failures,excluded};
 }
 export function signalFor(previous,probe){
  if(!probe?.ok)return 'unverified';
@@ -191,8 +196,11 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
  const merged=mergeCandidates(lastCandidates.items,discovered.found,now);
  const metadata={schema_version:1,checked_at:now,registries:registries.map(r=>({id:r.id,entries:r.sources.length})),
   monitored_urls:watchlist.length,monitored_ok:sourceResults.filter(x=>x.ok).length,
+  rejected_uncurated_sources:registries.reduce((n,r)=>n+r.sources.filter(s=>!canonical(s.source_url||s.url)).length,0),
+  monitored_by_source_category:Object.fromEntries([...new Set(watchlist.map(x=>x.source_category))].map(category=>[category,watchlist.filter(x=>x.source_category===category).length])),
   possible_source_updates:sourceResults.filter(x=>x.signal==='possible-source-update').length,
   newly_discovered_papers:merged.added,pending_papers:merged.items.length,pubmed_failures:discovered.failures,
+  pubmed_excluded:discovered.excluded,source_quality_policy:'curated publishers plus per-paper evidence-type screening; no articles auto-approved',
   full_texts_imported:0,model_training_performed:false,clinical_retrieval_updated:false,
   summary:'Scans detect candidates only; no medical/learner knowledge is published automatically.'};
  const health={schema_version:1,checked_at:now,sources:sourceResults};
