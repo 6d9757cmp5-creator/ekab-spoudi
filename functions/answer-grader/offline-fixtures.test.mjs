@@ -15,8 +15,8 @@ const eoppep=read('./eoppep-rubrics.json');
 const seminars=read('./seminar-rubrics.json');
 const verdicts=new Set(['correct','partial','incorrect','uncertain']);
 
-test('offline practice corpus contains 300 synthetic cases across all written-answer sections; labels unverified',()=>{
- assert.equal(corpus.cases.length,300);
+test('offline practice corpus contains 800 synthetic cases across all written-answer sections; labels unverified',()=>{
+ assert.equal(corpus.cases.length,800);
  assert.equal(corpus.medicalValidation,'not_performed');
  assert.equal(corpus.modelExecution,'none');
  assert.match(corpus.labelProvenance,/provisional/);
@@ -87,18 +87,20 @@ test('explicit negation or unknown synonyms do not receive automatic full credit
 });
 
 test('milestone 300: extend the original coverage to 36 EOPPEP questions, 22 SAEK exercises and 5 clinical scenarios',()=>{
- const counts=corpus.cases.reduce((out,x)=>(out[x.section]=(out[x.section]||0)+1,out),{});
+ const first300=corpus.cases.filter(x=>!x.id.startsWith('milestone800-'));
+ assert.equal(first300.length,300);
+ const counts=first300.reduce((out,x)=>(out[x.section]=(out[x.section]||0)+1,out),{});
  assert.deepEqual(counts,{eoppep:147,mentor_oral:26,seminar:6,saek:96,seminar_case:25});
  const eopIds=new Set(corpus.cases.filter(x=>x.section==='eoppep').map(x=>x.questionId));
  const saekIds=new Set(corpus.cases.filter(x=>x.section==='saek').map(x=>x.questionId));
- assert.equal(eopIds.size,36);
- assert.equal(saekIds.size,22);
+ assert.equal(eopIds.size,161);
+ assert.equal(saekIds.size,147);
  for(let n=1;n<=36;n++)assert.ok(eopIds.has('EOP-A-'+String(n).padStart(3,'0')));
  for(const id of ['saek-01-9','saek-02-2','saek-03-3','saek-03-5','saek-04-2','saek-19-3','saek-20-8'])assert.ok(saekIds.has(id));
 });
-test('the 300 synthetic examples contain varied outcomes but zero independently verified educational labels',()=>{
+test('the 800 synthetic examples contain provisional labels and no independently verified educational labels',()=>{
  const labels=corpus.cases.reduce((a,c)=>(a[c.expected]=(a[c.expected]||0)+1,a),{});
- assert.ok(labels.correct>=120&&labels.partial>=50&&labels.incorrect>=65&&labels.uncertain>=45);
+ assert.deepEqual(labels,{correct:623,partial:59,incorrect:71,uncertain:47});
  assert.ok(corpus.cases.every(c=>c.reviewStatus==='pending_independent_educator_review'));
  assert.ok(corpus.cases.every(c=>c.provenance==='synthetic_written_for_regression'));
  assert.ok(corpus.cases.some(c=>c.section==='saek'&&c.expected==='incorrect'&&/δεν/i.test(c.answer)));
@@ -168,4 +170,56 @@ test('all five safety seminar tracks have an authored scenario plus mentor has a
  const mentorIds=new Set(corpus.cases.filter(c=>c.section==='mentor_oral').map(c=>c.questionId));
  assert.equal(mentorIds.size,6);
  for(const q of mentor)assert.ok(mentorIds.has(q.id),q.id);
+});
+
+test('milestone 800 has 250 new distinct questions and exactly 500 reference-preserving Greek fixtures',()=>{
+ const latest=corpus.cases.filter(x=>x.id.startsWith('milestone800-'));
+ assert.equal(latest.length,500);
+ assert.equal(latest.filter(x=>x.section==='eoppep').length,250);
+ assert.equal(latest.filter(x=>x.section==='saek').length,250);
+ const keys=new Set(latest.map(x=>x.section+':'+x.questionId));
+ assert.equal(keys.size,250);
+ const exact=latest.filter(x=>x.fixtureKind==='reference_anchor');
+ const colloquial=latest.filter(x=>x.fixtureKind==='orthography_tolerance');
+ assert.equal(exact.length,250);assert.equal(colloquial.length,250);
+ assert.ok(latest.every(x=>x.expected==='correct'&&x.fixtureGeneration==='deterministic_source_preserving'));
+ assert.ok(latest.every(x=>x.independentSemanticParaphrase===false&&x.referenceOrigin==='project_server_rubric'));
+ const allSections=corpus.cases.reduce((a,x)=>(a[x.section]=(a[x.section]||0)+1,a),{});
+ assert.deepEqual(allSections,{eoppep:397,mentor_oral:26,seminar:6,saek:346,seminar_case:25});
+ const saekCourses=new Set(latest.filter(x=>x.section==='saek').map(x=>x.questionId.split('-')[1]));
+ assert.equal(saekCourses.size,20,'new SAEK examples must cover all 20 courses');
+});
+test('milestone 800 Greek fixtures reproduce references and preserve numerical values and negations',()=>{
+ const sourceE=new Map(eoppep.map(x=>[x.id,x.answer]));
+ const sourceS=new Map(read('./saek-exam-rubrics.json').items.map(x=>[x.id,x.answer]));
+ const latest=corpus.cases.filter(x=>x.id.startsWith('milestone800-'));
+ function informal(answer){return 'Με απλα λογια: '+answer.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el-GR').replace(/(?:^|\s)και(?=\s|[,.·;:])/g,' κ').replace(/\s+·\s+/g,', ').replace(/\s+/g,' ').trim();}
+ const groups=new Map();
+ for(const item of latest){
+  const ref=item.section==='eoppep'?sourceE.get(item.questionId):sourceS.get(item.questionId);
+  assert.ok(ref,item.id);
+  const expected=item.fixtureKind==='reference_anchor'?ref.trim():informal(ref.trim());
+  assert.equal(item.answer,expected,item.id);
+  assert.equal(item.reviewStatus,'pending_independent_educator_review');
+  assert.equal(item.provenance,'synthetic_written_for_regression');
+  const refNumbers=(ref.match(/\d+(?:[.,]\d+)*/g)||[]).join('|');
+  const answerNumbers=(item.answer.match(/\d+(?:[.,]\d+)*/g)||[]).join('|');
+  assert.equal(answerNumbers,refNumbers,'numbers/doses must remain intact: '+item.id);
+  const refNeg=(ref.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el-GR').match(/(?:^|\s)(?:δεν|μην|οχι|χωρις)(?=\s|[,.·;:])/g)||[]).length;
+  const answerNeg=(item.answer.match(/(?:^|\s)(?:δεν|μην|οχι|χωρις)(?=\s|[,.·;:])/g)||[]).length;
+  assert.equal(answerNeg,refNeg,'negation must remain intact: '+item.id);
+  const k=item.section+':'+item.questionId;
+  if(!groups.has(k))groups.set(k,new Set());
+  groups.get(k).add(item.fixtureKind);
+ }
+ assert.equal(groups.size,250);
+ for(const types of groups.values())assert.deepEqual([...types].sort(),['orthography_tolerance','reference_anchor']);
+});
+test('milestone 800 positives are a targeted spelling robustness bank, not independent answers or balanced accuracy evidence',()=>{
+ const latest=corpus.cases.filter(x=>x.id.startsWith('milestone800-'));
+ assert.ok(latest.every(x=>x.expected==='correct'));
+ assert.ok(latest.every(x=>x.reason.includes('Προσωριν')||x.reason.includes('προσωριν')));
+ assert.ok(latest.every(x=>x.independentSemanticParaphrase===false));
+ assert.equal(corpus.medicalValidation,'not_performed');
+ assert.equal(corpus.modelExecution,'none');
 });
