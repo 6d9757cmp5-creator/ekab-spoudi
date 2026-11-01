@@ -10,7 +10,10 @@ const GROUPS=Object.freeze({
     'www.cdc.gov','www.nice.org.uk','www.ema.europa.eu','www.escardio.org',
     'www.idsociety.org','www.hematology.org','www.acog.org',
     'www.ginasthma.org','goldcopd.org','kdigo.org','professional.diabetes.org',
-    'diabetesjournals.org','www.ems.gov'
+    'diabetesjournals.org','www.ems.gov',
+    'cpr.heart.org','professional.heart.org',
+    'www.ilcor.org','ilcor.org','costr.ilcor.org',
+    'www.cochrane.org','www.ecdc.europa.eu'
   ]),
   'official-prehospital-education':Object.freeze([
     'www.ekab.gr','ekab.gr','www.naemt.org','naemt.org'
