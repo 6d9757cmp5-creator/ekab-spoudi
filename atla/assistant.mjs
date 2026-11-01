@@ -5,7 +5,7 @@
  */
 import {retrieve,riskGuard,RISK_MESSAGE} from '../mentor/knowledge/retrieve.mjs';
 import {askAi,buildPayload} from './ai/client.mjs';
-import {MENTOR_AI,mentorAiHeaders} from '../mentor/ai/config.mjs';
+import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from '../mentor/presence/memory.mjs';
 import {examMode} from '../mentor/context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
@@ -81,7 +81,7 @@ function boot(){
  const brand=$('div','atla-brand');brand.append($('strong','', 'ATLA'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
  const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLA');
  head.append(brand,close);
- const state=$('p','atla-availability',MENTOR_AI.endpoint?'Συνδεδεμένη υποδομή AI · αναμονή αιτήματος':'Τοπική γνώση · η εξωτερική συνομιλία AI δεν έχει ενεργοποιηθεί');
+ const state=$('p','atla-availability',ATLA_AI.endpoint?'Συνδεδεμένη υποδομή AI · αναμονή αιτήματος':'Τοπική γνώση · η εξωτερική συνομιλία AI δεν έχει ενεργοποιηθεί');
  const context=$('p','atla-context');
  const stream=$('div','atla-stream');stream.setAttribute('role','log');stream.setAttribute('aria-live','polite');
  const form=$('form','atla-form');
@@ -131,13 +131,13 @@ function boot(){
   try{
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
-   if(!MENTOR_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');return;}
+   if(!ATLA_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');return;}
    const prefs=loadLearning(localStorage);
    const payload=buildPayload({question:q,passages:found.passages,level:prefs.level,history:historyForAi(history(),4)});
-   const response=await askAi({endpoint:MENTOR_AI.endpoint,payload,headers:mentorAiHeaders(storage),timeoutMs:MENTOR_AI.timeoutMs});
+   const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
   }catch{add('mentor','Η τοπική βιβλιοθήκη δεν είναι διαθέσιμη αυτή τη στιγμή.');}
-  finally{send.disabled=false;state.textContent=MENTOR_AI.endpoint?'Σύνδεση AI διαθέσιμη όταν ανταποκρίνεται ο server':'Τοπική γνώση · το AI chat δεν είναι ακόμη ενεργοποιημένο';}
+  finally{send.disabled=false;state.textContent=ATLA_AI.endpoint?'Σύνδεση AI διαθέσιμη όταν ανταποκρίνεται ο server':'Τοπική γνώση · το AI chat δεν είναι ακόμη ενεργοποιημένο';}
  });
  showHistory();
 }
