@@ -1,0 +1,48 @@
+name: Import isolated Z-Anatomy research meshes
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-z-anatomy-research.yml'
+      - 'scripts/import-z-anatomy-research.mjs'
+      - 'tools/anatomy-3d/resources/z-anatomy-catalog.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  licensed-research-meshes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm specific allowlist and original rights
+        run: |
+          node --check scripts/import-z-anatomy-research.mjs
+          test -s tools/anatomy-3d/resources/z-anatomy-research/UPSTREAM-LICENSE.txt
+          test -s tools/anatomy-3d/resources/z-anatomy-research/UPSTREAM-NOTICE.txt
+          test -s tools/anatomy-3d/resources/z-anatomy-research/MODELS-LICENSE.txt
+          node scripts/import-z-anatomy-research.mjs --dry-run
+      - name: Retrieve and verify five NC-SA research GLBs
+        run: node scripts/import-z-anatomy-research.mjs --import
+      - name: Archive research-only resources and original notices
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-z-anatomy-research-nc-sa-meshes
+          path: tools/anatomy-3d/resources/z-anatomy-research/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Commit isolated research assets with notices (not live atlas)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/anatomy-3d/resources/z-anatomy-research/
+          if git diff --cached --quiet; then
+            echo "All research files present"
+          else
+            git commit -m "assets(anatomy): store screened Z-Anatomy meshes as NC-SA research"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
