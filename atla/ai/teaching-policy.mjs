@@ -40,7 +40,7 @@ export function auditAssistantReply(reply,passages=[]){
  const citations=[...text.matchAll(CITATION)].map(m=>'T'+m[2]);
  if(!citations.length||citations.some(id=>!allowed.has(id)))return {ok:false,reason:'missing-or-unknown-citation'};
  if(DOSE.test(text))return {ok:false,reason:'unsafe-dose-output'};
- if(/\b(?:ξερω|γνωριζω)\s+(?:οτι\s+)?(?:νιωθεισ|αισθανεσαι)/.test(norm(text)))return {ok:false,reason:'emotional-inference'};
+ if(/(?:ξερω|γνωριζω)\s+(?:οτι\s+)?(?:νιωθεισ|αισθανεσαι)/.test(norm(text)))return {ok:false,reason:'emotional-inference'};
  return {ok:true,reason:'surface-check-only'};
 }
 /** Only approved, published, chapter-mapped media may ever be offered; empty means no video. */
