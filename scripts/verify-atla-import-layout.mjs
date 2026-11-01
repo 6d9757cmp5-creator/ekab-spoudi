@@ -44,4 +44,24 @@ if(existsSync(join(root,bp+'index.json'))){
  assert((index.counts?.elements||0)>=1200,'insufficient BP3D source coverage');
  assert(statSync(join(root,bp+'meshes.bin')).size>1024,'missing named BP3D geometry');
 }
-console.log(JSON.stringify({verifiedAssets:all,mb:+(bytes/1048576).toFixed(2),isolated:true,containsMixedZRelease:false,vendorLicensePresent:true,bp3d40Built:existsSync(join(root,bp+'index.json'))}));
+const supplemental=read(cockpit+'makehuman/supplemental-imported-manifest.json');
+assert.equal(supplemental.files.length,8,'missing official MakeHuman rig/eyes/skin/motion');
+for(const a of supplemental.files){
+ assert(a.path.startsWith(cockpit+'makehuman/'));
+ assert.equal(statSync(join(root,a.path)).size,a.bytes);
+ assert.match(a.sha256,/^[0-9a-f]{64}$/);
+ all++;bytes+=a.bytes;
+}
+const bp43=anatomy+'bp3d43/compiled-shards/';
+const shards=read(bp43+'manifest.json');
+assert.equal(shards.anatomyElements,3210,'full-resolution BP3D 4.3 atlas missing meshes');
+assert.equal(shards.namedStructures,3954,'full-resolution BP3D named structures incomplete');
+assert.equal(shards.parts.length,shards.partCount);
+const numBytes=shards.parts.reduce((n,x)=>{
+ assert.match(x.sha256,/^[0-9a-f]{64}$/);
+ assert.equal(statSync(join(root,bp43+x.file)).size,x.bytes);
+ return n+x.bytes;
+},0);
+assert.equal(numBytes,shards.totalBytes);
+assert((read(bp43+'index.json').counts?.elements||0)>=3000);
+console.log(JSON.stringify({verifiedAssets:all,mb:+(bytes/1048576).toFixed(2),isolated:true,containsMixedZRelease:false,vendorLicensePresent:true,bp3d40Built:existsSync(join(root,bp+'index.json')),bp3d43Built:true,bp3d43Meshes:shards.anatomyElements}));
