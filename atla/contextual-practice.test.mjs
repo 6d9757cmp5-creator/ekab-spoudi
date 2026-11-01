@@ -26,10 +26,10 @@ test('practice is one shared opt-in module, not 247 copied simulators',()=>{
  const practice=read('atla/practice/saek-practice.mjs');
  assert.match(practice,/\.reader-chapters > details\.reader-fold/);
  assert.match(practice,/\.lesson-sos/);
- assert.match(practice,/data\.atlaOpen='true'/);
+ assert.match(practice,/dataset\.atlaOpen='true'/);
  assert.doesNotMatch(practice,/localStorage|sessionStorage|indexedDB|grader|score.*=/);
  const cockpit=read('atla/practice/cockpit-entry.mjs');
- assert.match(cockpit,/data\.atlaOpen='true'/);
+ assert.match(cockpit,/dataset\.atlaOpen='true'/);
  assert.match(cockpit,/returnHref/);
  assert.match(cockpit,/δεν ισχυρίζεται ότι αυτά αντιστοιχούν ιατρικά/);
 });
