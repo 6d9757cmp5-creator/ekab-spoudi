@@ -9,6 +9,7 @@ import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
+import {mockAtlasReply,MOCK_LABEL} from './ai/mock.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
@@ -19,8 +20,8 @@ const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
  ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
- ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
- ['ATLA Clinical Cockpit','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
+ ['ATLAS Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
+ ['ATLAS Clinical Cockpit','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
  ['ECG Lab','mentor-ecg.html',['ecg','ηκγ','ηλεκτροκαρδιογρ']],
  ['Σεμινάρια','seminar-prep.html',['σεμιναρ','bls','phtls']],
@@ -39,7 +40,7 @@ let terms=null,questions=null,records=null,visible=false,requestId=0;
 const fetchJSON=async name=>{try{const response=await fetch(new URL(name,ROOT),{credentials:'omit'});if(!response.ok)return null;return await response.json();}catch{return null;}};
 async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
- if(questions===null){const data=await fetchJSON('functions/answer-grader/eoppep-rubrics.json');questions=Array.isArray(data)?data:[];}
+ if(questions===null){const data=await fetchJSON('official_questions.json');questions=Array.isArray(data)?data:[];}
  if(records===null){
   const chapters=SOURCES.filter(x=>x.kind==='saek');
   const parts=await Promise.allSettled(chapters.map(async x=>transformSource(x,await fetchJSON(x.file))));
@@ -56,7 +57,7 @@ function answerFromLibrary(q){
  if(match){
   const id='EOP-'+match[1]+'-'+match[2];
   const item=questions.find(r=>r.id===id);
-  if(item&&item.answerStatus?.startsWith('reviewed')){
+  if(item&&typeof item.answer==='string'&&item.answer.trim()&&(!item.answerStatus||item.answerStatus.startsWith('reviewed'))){
    return {text:'ΕΟΠΠΕΠ '+id+': '+item.question+'\n\nΕκπαιδευτική απάντηση: '+item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id)};
   }
  }
@@ -75,17 +76,24 @@ function boot(){
  if(window.__ekabAtlaAssistant)return;
  window.__ekabAtlaAssistant=true;
  const css=$('link');css.rel='stylesheet';css.href=new URL('./assistant.css',import.meta.url);document.head.append(css);
- const launcher=$('button','atla-launcher','ATLA');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLA');
- const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLA — AI εκπαιδευτικός βοηθός');
+ const launcher=$('button','atla-launcher','ATLAS');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLAS');
+ const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLAS — AI εκπαιδευτικός βοηθός');
  const head=$('header','atla-head');
- const brand=$('div','atla-brand');brand.append($('strong','', 'ATLA'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
+ const brand=$('div','atla-brand');brand.append($('strong','', 'ATLAS'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
  const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLA');
  head.append(brand,close);
- const state=$('p','atla-availability',ATLA_AI.endpoint?'Συνδεδεμένη υποδομή AI · αναμονή αιτήματος':'Τοπική γνώση · η εξωτερική συνομιλία AI δεν έχει ενεργοποιηθεί');
+ const state=$('p','atla-availability','');
+ const demoRow=$('label','atla-demo-row');
+ const demoToggle=$('input','atla-demo-toggle');demoToggle.type='checkbox';demoToggle.checked=!ATLA_AI.endpoint;
+ const demoCopy=$('span','','Δοκιμαστικό AI · εικονικές απαντήσεις');
+ demoRow.append(demoToggle,demoCopy);
+ const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLAS AI · χρειάζεται έλεγχος πραγματικής υπηρεσίας':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
+ refreshState();
+ demoToggle.addEventListener('change',refreshState);
  const context=$('p','atla-context');
  const stream=$('div','atla-stream');stream.setAttribute('role','log');stream.setAttribute('aria-live','polite');
  const form=$('form','atla-form');
- const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε την ATLA για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στην ATLA');
+ const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLAS για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στην ATLA');
  const send=$('button','atla-send','Αποστολή');send.type='submit';
  form.append(field,send);
  const footer=$('div','atla-footer');
@@ -94,14 +102,14 @@ function boot(){
  const speak=$('button','','🔊 Ανάγνωση');speak.type='button';
  footer.append(selected,speak,clear);
  const note=$('p','atla-note','Εκπαιδευτικό εργαλείο, όχι ιατρική οδηγία. Δεν διαβάζει αυτόματα βαθμούς ή προσωπικές σημειώσεις.');
- panel.append(head,state,context,stream,form,footer,note);
+ panel.append(head,state,demoRow,context,stream,form,footer,note);
  document.body.append(panel,launcher);
  const history=()=>{try{return loadTurns(storage);}catch{return [];}};
  function showHistory(){
   stream.replaceChildren();
   const turns=history();
-  if(!turns.length){stream.append($('p','atla-welcome','Είμαι η ATLA. Μπορώ να σε βοηθήσω με εκπαιδευτική ορολογία, ΕΟΠΠΕΠ και τη μετακίνηση στις ενότητες.'));return;}
-  for(const t of turns){const b=$('p','atla-message '+(t.role==='user'?'atla-user':'atla-reply'),t.text);stream.append(b);}
+  if(!turns.length){stream.append($('p','atla-welcome','Είμαι το ATLAS. Μπορώ να σε βοηθήσω με εκπαιδευτική ορολογία, ΕΟΠΠΕΠ και τη μετακίνηση στις ενότητες.'));return;}
+  for(const t of turns){const b=$('p','atla-message '+(t.role==='user'?'atla-user':'atla-reply')+(t.mode==='mock'?' atla-mock':''),t.text);stream.append(b);}
   stream.scrollTop=stream.scrollHeight;
  }
  const add=(role,text,mode='local')=>{try{appendTurn(storage,{role:role==='user'?'user':'mentor',text,mode});}catch{}showHistory();};
@@ -124,7 +132,13 @@ function boot(){
  form.addEventListener('submit',async e=>{
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q);
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
-  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLA'),'refusal');return;}
+  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLAS'),'refusal');return;}
+  if(demoToggle.checked){
+   const level=loadLearning(localStorage).level;
+   const pageName=(document.querySelector('main h1,main h2')?.textContent||document.title).trim();
+   add('mentor',mockAtlasReply({question:q,page:pageName,level}),'mock');
+   return;
+  }
   const link=navigation(q);
   if(link){add('mentor','Βρήκα την ενότητα «'+link[0]+'». Μπορείς να την ανοίξεις χωρίς να χαθεί η τρέχουσα σελίδα από το ιστορικό.');offerLink(link[1],'Άνοιξε: '+link[0]);return;}
   send.disabled=true;state.textContent='Αναζήτηση στην εκπαιδευτική βιβλιοθήκη…';
@@ -137,7 +151,7 @@ function boot(){
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
   }catch{add('mentor','Η τοπική βιβλιοθήκη δεν είναι διαθέσιμη αυτή τη στιγμή.');}
-  finally{send.disabled=false;state.textContent=ATLA_AI.endpoint?'Σύνδεση AI διαθέσιμη όταν ανταποκρίνεται ο server':'Τοπική γνώση · το AI chat δεν είναι ακόμη ενεργοποιημένο';}
+  finally{send.disabled=false;refreshState();}
  });
  showHistory();
 }
