@@ -12,11 +12,15 @@ test('stage 1 keeps existing home study, MENTOR and progress entrypoints',()=>{
   assert.ok(home.includes('<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3"'),'tools icon matches existing SVG design');
 });
 test('tools hub has existing links and clear ownership labels',()=>{
-  for(const name of ['MENTOR OS','Προσομοιωτής Ασθενών','Εργαστήριο ΗΚΓ','Ελληνικά Πρωτόκολλα']){
+  for(const name of ['MENTOR OS','Προσομοιωτής Ασθενών','Εργαστήριο ΗΚΓ','Εκπαιδευτικές ασκήσεις πρωτοκόλλων']){
     assert.ok(tools.includes(name),'missing tool label: '+name);
   }
   assert.ok(tools.includes('όχι επίσημες επιχειρησιακές οδηγίες ΕΚΑΒ'));
   assert.ok(tools.includes('όχι πιστοποίηση'));
+  assert.equal((tools.match(/<h1(?:\s|>)/g)||[]).length,1,'one primary heading for accessibility');
+  const protocols=r('protocols.html');
+  assert.ok(protocols.includes('mentor-protocol-suite.html?topic=trauma&amp;view=lab'),'Protocol Lab link preserved');
+  assert.ok(protocols.includes('mentor-protocol-suite.html?topic=trauma&amp;view=debrief'),'Protocol Debrief link preserved');
   assert.doesNotMatch(tools,/localStorage\.(?:setItem|removeItem|clear)\s*\(/);
   const links=[...tools.matchAll(/href="([^"]+)"/g)].map(x=>x[1]).filter(x=>!x.startsWith('#')&&!/^(?:https?:|mailto:)/.test(x));
   for(const link of links){
