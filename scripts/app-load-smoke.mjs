@@ -217,6 +217,30 @@ try {
     if(!await page.locator('#next-fullscreen').isVisible())throw Error(device+': missing immersive mode control');
     console.log('PASS '+device+': MENTOR NEXT v0.4 native CC0 human asset, WebGL render status '+visualStatus+' and immersive controls');
 
+
+    // v0.5: real textured Innerscene CC0 patients and locally hosted model-viewer.
+    for(const name of ['alex-standing.glb','daniel-lying.glb','amara-sitting.glb']){
+      const response=await page.request.get('http://127.0.0.1:8765/mentor/assets/patients/'+name);
+      if(!response.ok()||(await response.body()).length<3000000)throw Error(device+': ready-made GLB absent '+name);
+    }
+    await page.waitForFunction(()=>{
+      const overlay=document.querySelector('#next-ready-overlay');
+      const viewer=document.querySelector('#next-ready-model');
+      return overlay&&!overlay.hidden&&viewer?.getAttribute('src')?.includes('alex-standing.glb');
+    },null,{timeout:60000});
+    if(!await page.locator('#next-ready-toggle').getAttribute('aria-pressed').then(x=>x==='true'))
+      throw Error(device+': realistic GLB mode was not enabled');
+    await page.locator('#next-ready-pose').selectOption('daniel');
+    if(!await page.locator('#next-ready-model').getAttribute('src').then(x=>x.includes('daniel-lying.glb')))
+      throw Error(device+': real Daniel 3D model was not selected');
+    await page.locator('#next-ready-pose').selectOption('amara');
+    if(!await page.locator('#next-ready-model').getAttribute('src').then(x=>x.includes('amara-sitting.glb')))
+      throw Error(device+': real Amara 3D model was not selected');
+    await page.locator('#next-ready-toggle').click();
+    if(await page.locator('#next-ready-overlay').isVisible())
+      throw Error(device+': 3D viewer fallback switch failed');
+    console.log('PASS '+device+': MENTOR v0.5 real textured ready-made GLB patients, pose choices and procedural fallback');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}

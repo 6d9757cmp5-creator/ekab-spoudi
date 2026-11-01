@@ -16,6 +16,70 @@ function updatePatientAssetStatus(){
 const meshObserver=new MutationObserver(updatePatientAssetStatus);
 meshObserver.observe(patientCanvas,{attributes:true,attributeFilter:['data-human-model']});
 updatePatientAssetStatus();
+
+// Real GLB patient preview — independent of the synthetic clinical engine.
+// These static mesh poses are purely visual and do not drive observations or treatment.
+const READY_ASSETS=Object.freeze({
+ alex:'../assets/patients/alex-standing.glb',
+ daniel:'../assets/patients/daniel-lying.glb',
+ amara:'../assets/patients/amara-sitting.glb'
+});
+const readyToggle=$('next-ready-toggle'),readyOverlay=$('next-ready-overlay'),
+ readyModel=$('next-ready-model'),readyPose=$('next-ready-pose'),
+ readyStatus=$('next-ready-status');
+let readyEnabled=false,readyLoading=false,lastReadyPerson=state.person;
+function readyURL(key){return new URL(READY_ASSETS[key],import.meta.url).href;}
+function updateReadyModel(pose){
+ if(!Object.hasOwn(READY_ASSETS,pose))return;
+ readyPose.value=pose;
+ const src=readyURL(pose);
+ if(readyModel.getAttribute('src')!==src){
+  readyStatus.textContent='Φόρτωση πραγματικού 3D μοντέλου…';
+  readyModel.setAttribute('src',src);
+ }
+ readyModel.setAttribute('alt','Στατικό τρισδιάστατο μοντέλο '+pose+', CC0. Δεν αποτελεί κλινικό εύρημα.');
+}
+function disableRealisticMode(){
+ readyEnabled=false;
+ readyOverlay.hidden=true;
+ readyModel.removeAttribute('src');
+ readyToggle.disabled=false;
+ readyToggle.textContent='✦ Έτοιμοι 3D ασθενείς';
+ readyToggle.setAttribute('aria-pressed','false');
+ patientCanvas.style.removeProperty('visibility');
+}
+async function enableRealisticMode(){
+ if(readyEnabled||readyLoading)return;
+ readyLoading=true;readyToggle.disabled=true;readyToggle.textContent='Φόρτωση έτοιμου 3D…';
+ try{
+  const response=await fetch(readyURL('alex'),{method:'HEAD',cache:'no-store'});
+  if(!response.ok)throw Error('Το αρχείο ανθρώπινου μοντέλου δεν έχει δημοσιευτεί ακόμη.');
+  await import('../vendor/model-viewer.min.js');
+  await customElements.whenDefined('model-viewer');
+  readyEnabled=true;
+  readyOverlay.hidden=false;
+  patientCanvas.style.setProperty('visibility','hidden');
+  lastReadyPerson=state.person;
+  updateReadyModel(state.person==='b'?'amara':'alex');
+  readyToggle.textContent='↶ Παλιά 3D σκηνή';
+  readyToggle.setAttribute('aria-pressed','true');
+ }catch(error){
+  disableRealisticMode();
+  showResult('Το ρεαλιστικό 3D δεν φορτώθηκε. Η προηγούμενη σκηνή παραμένει διαθέσιμη: '+String(error?.message||error).slice(0,120));
+ }finally{readyLoading=false;readyToggle.disabled=false;}
+}
+readyToggle.addEventListener('click',()=>readyEnabled?disableRealisticMode():enableRealisticMode());
+readyPose.addEventListener('change',()=>{if(readyEnabled)updateReadyModel(readyPose.value);});
+readyModel.addEventListener('load',()=>{
+ readyStatus.textContent='Έτοιμο 3D μοντέλο · περιστροφή και μεγέθυνση με αφή ή ποντίκι';
+ readyModel.dataset.assetReady='true';
+});
+readyModel.addEventListener('error',()=>{
+ readyStatus.textContent='Αδυναμία εμφάνισης μοντέλου. Ενεργή η παλιά σκηνή 3D.';
+ readyModel.dataset.assetReady='false';
+ disableRealisticMode();
+});
+
 const fullscreenButton=$('next-fullscreen');
 fullscreenButton.addEventListener('click',async()=>{
  const stage=$('next-immersive-stage');
@@ -199,6 +263,10 @@ function render(){
  $('next-hr').textContent=String(v.hr);$('next-rr').textContent=String(v.rr);$('next-spo2').textContent=String(v.spo2);
  for(const button of document.querySelectorAll('[data-next-patient]'))button.setAttribute('aria-pressed',String(button.dataset.nextPatient===state.person));
  for(const button of document.querySelectorAll('[data-next-view]'))button.setAttribute('aria-pressed',String(button.dataset.nextView===state.view));
+ if(readyEnabled&&lastReadyPerson!==state.person){
+  lastReadyPerson=state.person;
+  updateReadyModel(state.person==='b'?'amara':'alex');
+ }
  renderer.setEnvironment?.(currentCase.scene);
  renderer.setFocus(state.view==='scene'?'scene':state.person,state.view);
  renderer.setPaused(!state.playing);
@@ -255,3 +323,8 @@ $('next-nextstep').addEventListener('click',()=>{
 });
 window.addEventListener('pagehide',()=>{clearInterval(clock);meshObserver.disconnect();renderer.dispose();},{once:true});
 render();
+// Heavy GLBs load after core controls are interactive; reduced-data users opt in manually.
+if(!navigator.connection?.saveData){
+ window.addEventListener('load',()=>{void enableRealisticMode();},{once:true});
+}
+
