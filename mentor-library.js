@@ -44,11 +44,11 @@ try{
   counts.append(el('span',sources.length+' μοναδικές πηγές'),el('span',sources.filter(s=>s.learning_tracks.includes('paramedic')).length+' για Paramedic'),el('span',sources.filter(s=>s.learning_tracks.includes('medicine')).length+' για Ιατρική'),el('span',extracted+' κείμενα εξαγμένα για έλεγχο'),el('span','0 κλινικά εγκεκριμένες'));
   // These original study routes are metadata links, never imported medical claims.
   let modules=[];
+  const ids=new Map(sources.map(s=>[s.id,s]));
   try{
     const answer=await fetch('./mentor/library/study-paths.json',{cache:'no-store'});
     if(answer.ok){
       const map=await answer.json();
-      const ids=new Map(sources.map(s=>[s.id,s]));
       if(map.schema_version!==1||!Array.isArray(map.sections)||map.sections.length>100)throw Error('Invalid study map');
       for(const part of map.sections){
         if(!['paramedic','medicine'].includes(part.track)||!Array.isArray(part.source_ids)||!part.source_ids.length||
