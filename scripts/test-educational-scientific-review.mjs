@@ -4,6 +4,8 @@ import {mkdtemp,mkdir,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {isEducationPath,choosePaths,validateReview,runReview,MAX_FILES} from './educational-scientific-review.mjs';
+// CI sets these for the real run; tests must not inherit a cache or a budget.
+for(const k of ['AUDIT_CACHE_FILE','AUDIT_MAX_CALLS','AUDIT_PATHS','AUDIT_BASE_SHA'])delete process.env[k];
 
 test('all core educational and clinical areas trigger review',()=>{
  for(const path of [
