@@ -15,13 +15,13 @@ const eoppep=read('./eoppep-rubrics.json');
 const seminars=read('./seminar-rubrics.json');
 const verdicts=new Set(['correct','partial','incorrect','uncertain']);
 
-test('offline practice corpus contains 100 synthetic cases across SAEK and EOPPEP; labels unverified',()=>{
- assert.equal(corpus.cases.length,100);
+test('offline practice corpus contains 300 synthetic cases across all written-answer sections; labels unverified',()=>{
+ assert.equal(corpus.cases.length,300);
  assert.equal(corpus.medicalValidation,'not_performed');
  assert.equal(corpus.modelExecution,'none');
  assert.match(corpus.labelProvenance,/provisional/);
  const found=new Set(corpus.cases.map(x=>x.section));
- assert.deepEqual([...found].sort(),['eoppep','mentor_oral','saek','seminar']);
+ assert.deepEqual([...found].sort(),['eoppep','mentor_oral','saek','seminar','seminar_case']);
 });
 test('every offline case has unique identifiers, a source-controlled question and a provisional judgment',()=>{
  const seen=new Set();
@@ -42,6 +42,10 @@ test('every offline case has unique identifiers, a source-controlled question an
   }else if(c.section==='mentor_oral'){
    const q=mentor.find(x=>x.id===c.questionId);
    assert.ok(q&&q.checks.length===3,c.id);
+  }else if(c.section==='seminar_case'){
+   const track=seminars.find(x=>x.id===c.courseId);
+   assert.ok(track&&Number.isInteger(c.caseIndex)&&c.caseIndex>=0&&c.caseIndex<12,c.id);
+   const unit=track.units[c.caseIndex];assert.ok(unit?.length===5,c.id);
   }else if(c.section==='seminar'){
    const track=seminars.find(x=>x.id===c.courseId);
    assert.ok(track&&Number.isInteger(c.questionIndex)&&c.questionIndex>=0&&c.questionIndex<48,c.id);
@@ -82,19 +86,19 @@ test('explicit negation or unknown synonyms do not receive automatic full credit
  assert.equal(protectCompleteness({id:'EOP-A-001'},vague.answer,{verdict:'correct'}).verdict,'uncertain');
 });
 
-test('milestone 100: cover 20 distinct EOPPEP questions and seven SAEK exercises',()=>{
+test('milestone 300: extend the original coverage to 36 EOPPEP questions, 22 SAEK exercises and 5 clinical scenarios',()=>{
  const counts=corpus.cases.reduce((out,x)=>(out[x.section]=(out[x.section]||0)+1,out),{});
- assert.deepEqual(counts,{eoppep:67,mentor_oral:6,seminar:6,saek:21});
+ assert.deepEqual(counts,{eoppep:147,mentor_oral:26,seminar:6,saek:96,seminar_case:25});
  const eopIds=new Set(corpus.cases.filter(x=>x.section==='eoppep').map(x=>x.questionId));
  const saekIds=new Set(corpus.cases.filter(x=>x.section==='saek').map(x=>x.questionId));
- assert.equal(eopIds.size,20);
- assert.equal(saekIds.size,7);
- for(let n=1;n<=20;n++)assert.ok(eopIds.has('EOP-A-'+String(n).padStart(3,'0')));
+ assert.equal(eopIds.size,36);
+ assert.equal(saekIds.size,22);
+ for(let n=1;n<=36;n++)assert.ok(eopIds.has('EOP-A-'+String(n).padStart(3,'0')));
  for(const id of ['saek-01-9','saek-02-2','saek-03-3','saek-03-5','saek-04-2','saek-19-3','saek-20-8'])assert.ok(saekIds.has(id));
 });
-test('the 100 synthetic examples contain varied outcomes but zero independently verified educational labels',()=>{
+test('the 300 synthetic examples contain varied outcomes but zero independently verified educational labels',()=>{
  const labels=corpus.cases.reduce((a,c)=>(a[c.expected]=(a[c.expected]||0)+1,a),{});
- assert.ok(labels.correct>=30&&labels.partial>=25&&labels.incorrect>=25&&labels.uncertain>=5);
+ assert.ok(labels.correct>=120&&labels.partial>=50&&labels.incorrect>=65&&labels.uncertain>=45);
  assert.ok(corpus.cases.every(c=>c.reviewStatus==='pending_independent_educator_review'));
  assert.ok(corpus.cases.every(c=>c.provenance==='synthetic_written_for_regression'));
  assert.ok(corpus.cases.some(c=>c.section==='saek'&&c.expected==='incorrect'&&/δεν/i.test(c.answer)));
@@ -108,4 +112,60 @@ test('provisional answers are distinguishable, not duplicate text that artificia
   assert.ok(!textsByQuestion.has(text),c.id);
   textsByQuestion.add(text);
  }
+});
+
+test('300-case milestones are linked to 40 authored topic packs and not duplicated filler',()=>{
+ const packs=['eoppep','saek','scenarios'].flatMap(group=>read('./greek-answer-fixtures-300-seeds-'+group+'.json'));
+ assert.equal(packs.length,40);
+ assert.equal(packs.filter(x=>x.section==='eoppep').length,16);
+ assert.equal(packs.filter(x=>x.section==='saek').length,15);
+ assert.equal(packs.filter(x=>x.section==='seminar_case').length,5);
+ assert.equal(packs.filter(x=>x.section==='mentor_oral').length,4);
+ let sum=0;
+ const uniqueKeys=new Set();
+ for(const pack of packs){
+  assert.ok(pack.slug&&!uniqueKeys.has(pack.slug),pack.slug);uniqueKeys.add(pack.slug);
+  assert.equal(pack.answers.length,5,pack.slug);
+  assert.ok(pack.answers.every(x=>typeof x==='string'&&x.trim().length>=8),pack.slug);
+  for(const answer of pack.answers){
+   const row=corpus.cases.find(x=>x.id==='milestone300-'+pack.slug+'-'+['formal','conversational','incomplete','contradiction','ambiguous'][pack.answers.indexOf(answer)]);
+   assert.ok(row,pack.slug);
+   assert.equal(row.answer,answer,pack.slug);
+   assert.equal(row.section,pack.section,pack.slug);
+   if(pack.questionId)assert.equal(row.questionId,pack.questionId,pack.slug);
+   if(pack.courseId){assert.equal(row.courseId,pack.courseId);assert.equal(row.caseIndex,pack.caseIndex);}
+   sum++;
+  }
+ }
+ assert.equal(sum,200);
+ assert.equal(corpus.cases.filter(x=>x.id.startsWith('milestone300-')).length,200);
+});
+test('do not demand reference-only details from concise questions',()=>{
+ for(const id of [
+ 'milestone300-formula-incomplete',
+ 'milestone300-joints-incomplete',
+ 'milestone300-bile-incomplete',
+ 'milestone300-virus-incomplete',
+ 'milestone300-airflow-incomplete',
+ 'milestone300-dizziness-incomplete',
+ 'milestone300-stretcher-incomplete',
+ 'milestone300-contraindication-incomplete',
+ 'milestone300-trauma-bleeding-incomplete',
+ 'milestone300-student-autonomy-incomplete'
+ ]){
+  const row=corpus.cases.find(c=>c.id===id);
+  assert.equal(row?.expected,'correct',id);
+  assert.equal(row?.fixtureKind,'concise_complete',id);
+  assert.match(row.reason,/δεν απαιτούνται/);
+ }
+ const unverified=corpus.cases.find(c=>c.id==='milestone300-debrief-incomplete');
+ assert.equal(unverified.expected,'uncertain');
+});
+test('all five safety seminar tracks have an authored scenario plus mentor has all six oral questions',()=>{
+ const scenarios=corpus.cases.filter(c=>c.section==='seminar_case');
+ assert.equal(scenarios.length,25);
+ assert.deepEqual([...new Set(scenarios.map(x=>x.courseId))].sort(),['als','bls','ils','pbls','phtls']);
+ const mentorIds=new Set(corpus.cases.filter(c=>c.section==='mentor_oral').map(c=>c.questionId));
+ assert.equal(mentorIds.size,6);
+ for(const q of mentor)assert.ok(mentorIds.has(q.id),q.id);
 });
