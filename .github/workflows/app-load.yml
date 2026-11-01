@@ -50,7 +50,7 @@ jobs:
           node scripts/verify-pharmacology.mjs
           node scripts/test-seminar-sync.cjs
           node tools/anatomy-3d/test-greek-names.mjs
-          node --test tools/anatomy-3d/cage-focus.test.mjs
+          node --test tools/anatomy-3d/cage-focus.test.mjs tools/anatomy-3d/focus-groups.test.mjs
           node --check tools/anatomy-3d/cage-focus.mjs
           node --check tools/anatomy-3d/hires-anatomy.js
           node --check tools/pharmacology/farmaka-ui.js
