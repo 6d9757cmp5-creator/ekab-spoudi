@@ -303,45 +303,40 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original,'Book lookup must not alter EOPPEP');
   assert.ok(!(await page.evaluate(()=>Object.keys(localStorage).some(k=>k.includes('review-corpus')))),'Queries are not stored');
 
-  // Public Mentor bibliography: mobile Chromium/WebKit search and fail-closed review state.
+  // Learner-facing ATLA bibliography: Paramedic only. Medical stays internal for future ATLA AI.
   await page.goto('http://127.0.0.1:'+port+'/mentor-library.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('library-status').textContent.includes('μόνο στοιχεία πηγών'));
-  assert.equal(await page.locator('#sources-list .source-card').count(),28);
+  assert.equal(await page.locator('#sources-list .source-card').count(),18);
   assert.match(await page.locator('#source-counts').textContent(),/0 κλινικά εγκεκριμένες/);
   assert.match(await page.locator('#source-counts').textContent(),/18 για Paramedic/);
-  assert.match(await page.locator('#source-counts').textContent(),/20 για Ιατρική/);
-  assert.equal(await page.locator('#study-paths .study-path').count(),4);
-  await page.locator('#source-track').selectOption('paramedic');
+  assert.match(await page.locator('#source-counts').textContent(),/20 στη γνωσιακή βάση ATLA AI/);
   assert.equal(await page.locator('#study-paths .study-path').count(),8);
   assert.ok((await page.locator('#study-paths').textContent()).includes('Εκτίμηση ασθενούς'));
-  await page.locator('#source-track').selectOption('medicine');
-  assert.equal(await page.locator('#study-paths .study-path').count(),8);
-  assert.ok((await page.locator('#study-paths').textContent()).includes('Παθολογία'));
-  await page.locator('#source-track').selectOption('all');
-  await page.locator('#source-track').selectOption('paramedic');
-  assert.equal(await page.locator('#sources-list .source-card').count(),18);
-  await page.locator('#source-track').selectOption('medicine');
-  assert.equal(await page.locator('#sources-list .source-card').count(),20);
-  await page.locator('#source-track').selectOption('paramedic');
+  assert.equal(await page.locator('#source-track').count(),0,'No medicine study-track selector for learners');
   await page.locator('#source-search').fill('αιμορραγία');
   assert.ok(await page.locator('#sources-list .source-card').count()>0);
   assert.ok((await page.locator('#sources-list').textContent()).includes('PHTLS'));
-  await page.locator('#source-track').selectOption('medicine');
   await page.locator('#source-search').fill('Guyton');
-  assert.equal(await page.locator('#sources-list .source-card').count(),1);
+  assert.equal(await page.locator('#sources-list .source-card').count(),0,'Medicine-only source must not show as learner course');
   await page.locator('#source-search').fill('');
-  await page.locator('#source-track').selectOption('all');
   await page.locator('#source-stage').selectOption('identified');
-  assert.equal(await page.locator('#sources-list .source-card').count(),21);
+  assert.equal(await page.locator('#sources-list .source-card').count(),13);
   await page.locator('#source-search').fill('ERC');
   assert.equal(await page.locator('#sources-list .source-card').count(),1);
   assert.match(await page.locator('#sources-list .source-card h2').textContent(),/Guidelines 2025/);
   await page.locator('#source-stage').selectOption('all');
   await page.locator('#source-search').fill('πηγη-που-δεν-υπαρχει');
   assert.equal(await page.locator('#sources-list .source-card').count(),0);
-  assert.match(await page.locator('#sources-visible').textContent(),/0 από 28/);
+  assert.match(await page.locator('#sources-visible').textContent(),/0 από 18/);
   await page.locator('#source-search').fill('');
-  assert.equal(await page.locator('#sources-list .source-card').count(),28);
+  assert.equal(await page.locator('#sources-list .source-card').count(),18);
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Actual learner hub uses the existing exam grade heuristic to recommend course-by-course depth.
+  await page.goto('http://127.0.0.1:'+port+'/saek.html',{waitUntil:'networkidle'});
+  await page.waitForFunction(()=>document.querySelectorAll('.course-tile .atla-study-depth').length===20);
+  assert.equal(await page.locator('.course-tile .atla-study-depth').count(),20);
+  assert.match(await page.locator('#atla-learning-tip').textContent(),/ξεκινά απλά/);
+  assert.ok((await page.locator('.course-tile .atla-study-depth').first().textContent()).includes('ATLA'));
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
