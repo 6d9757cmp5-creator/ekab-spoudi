@@ -27,6 +27,8 @@ const APPROVED_MONITOR_HOSTS=new Set([
  'www.msdmanuals.com','www.cdc.gov','www.escardio.org','www.nice.org.uk',
  'www.ema.europa.eu','humanatlas.io','physionet.org','github.com',
  'www.idsociety.org','www.hematology.org','www.acog.org','www.ginasthma.org',
+ 'cdn.who.int','professional.diabetes.org','www.saem.org','www.ems.gov',
+ 'iem-student.org','openacutecare.org','uotinitiative.org',
  'goldcopd.org','kdigo.org','diabetesjournals.org'
 ]);
 const clean=(v,n=320)=>String(v??'').replace(/[\u0000-\u001f\u007f]+/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
@@ -97,6 +99,8 @@ export function mergeCandidates(previous,found,now){
  return {items:[...records.values()].sort((a,b)=>b.last_detected.localeCompare(a.last_detected)||b.pmid.localeCompare(a.pmid)).slice(0,LIMIT_CANDIDATES),added};
 }
 async function requestJson(url,fetcher=fetch){
+ // NCBI E-utilities unauthenticated policy: remain below 3 requests per second.
+ await new Promise(resolve=>setTimeout(resolve,420));
  const r=await fetcher(url,{headers:{accept:'application/json','user-agent':'ATLA-Source-Monitor/1.0 (research-only; GitHub Actions)'},signal:AbortSignal.timeout(15000)});
  if(!r.ok)throw Error('HTTP '+r.status);
  const body=await r.text();
@@ -157,7 +161,8 @@ async function loadRegistries(){
  const paths=[
   {id:'books',path:'mentor/library/source-index.json'},
   {id:'knowledge',path:'mentor/knowledge/sources.json'},
-  {id:'clinical-ai',path:'mentor/clinical-desk/sources.json'}
+  {id:'clinical-ai',path:'mentor/clinical-desk/sources.json'},
+  {id:'past-project-sources',path:'tools/atla-ai/knowledge-refresh/watchlist.json'}
  ];
  const registries=[];
  for(const item of paths){
