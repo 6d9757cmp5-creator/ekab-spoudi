@@ -37,7 +37,9 @@ test('3 EOPPEP: only sourced EOP-A-070 in the reader, never examination, offers 
  for(const id of ['EOP-A-069','EOP-A-071','EOP-B-070','EOP-A-999'])assert.equal(eoppepTool(id,{readerVisible:true}),null);
  const app=read('app.js');
  const reader=app.slice(app.indexOf('function renderCatalogReader(q)'),app.indexOf('function openCatalogQuestion'));
- assert.match(reader,/ekab:eoppep-reader/);
+ assert.match(reader,/catalogReaderNumber/);
+ assert.match(read('atla/practice/eoppep-context.mjs'),/MutationObserver/);
+ assert.doesNotMatch(app,/ekab:eoppep-reader/,'Protected exam code must remain unchanged');
  assert.match(read('atla/practice/eoppep-context.mjs'),/examView/);
 });
 
