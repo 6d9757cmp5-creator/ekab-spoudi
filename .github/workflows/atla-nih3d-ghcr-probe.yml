@@ -1,0 +1,26 @@
+name: ATLA NIH 3D permanent archive storage probe
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-nih3d-ghcr-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify archive can be permanently stored in GitHub Packages OCI registry
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          mkdir -p tmp/atla-probe
+          echo "ATLA Master Plan 2026 NIH 3D binary archive storage permission probe" > tmp/atla-probe/README.txt
+          printf 'FROM scratch\nCOPY README.txt /README.txt\n' > tmp/atla-probe/Dockerfile
+          docker build -t ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:permission-probe tmp/atla-probe
+          docker push ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:permission-probe
