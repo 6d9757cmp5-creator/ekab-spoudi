@@ -42,7 +42,7 @@ export function installEoppepContext(root=document){
  // app.js, grading, progress, notes, or examination logic are needed.
  const number=root.getElementById('catalogReaderNumber');
  const currentId=()=>{
-   const match=/^Ομάδα ([AB]) · Ερώτηση (\\d+) \\/ (105|209)$/.exec(number?.textContent?.trim()||'');
+   const match=/^Ομάδα ([AB]) · Ερώτηση (\d+) \/ (105|209)$/.exec(number?.textContent?.trim()||'');
    return match?'EOP-'+match[1]+'-'+String(Number(match[2])).padStart(3,'0'):'';
  };
  if(number)new MutationObserver(()=>sync(currentId())).observe(number,{childList:true,characterData:true,subtree:true});
