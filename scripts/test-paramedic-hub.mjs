@@ -14,7 +14,7 @@ test('Paramedic is the parent of SAEK and EOPPEP, not a third copy of them',()=>
  assert.doesNotMatch(tiles,/href="saek\.html"|href="eoppep\.html"/);
  const hub=read('paramedic.html');
  for(const href of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','practical_exam.html','seminar-prep.html','mentor-next.html','farmaka.html','protocols.html']){
-   assert.match(hub,new RegExp('href="'+href.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\$&')+'"'));
+   assert.ok(hub.includes('href="'+href+'"'),'Hub missing destination: '+href);
    assert.ok(existsSync(resolve(root,href)),'Missing existing destination: '+href);
  }
  assert.match(hub,/<section id="skills"/);
