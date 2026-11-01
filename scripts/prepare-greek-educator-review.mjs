@@ -89,7 +89,7 @@ export function buildReviewPacket(cases){
 }
 export function buildBlankBallot(cases){
  return {schemaVersion:1,reviewerCode:'',qualification:'',independentAttestation:false,
-  reviewedAt:'',entries:cases.map(c=>({caseId:c.id,verdict:null,rationale:'',sourceCitation:'',criticalSafetyError:false}))};
+  reviewedAt:'',entries:cases.map(c=>({caseId:'R-'+hash(c.id).slice(0,18),verdict:null,rationale:'',sourceCitation:'',criticalSafetyError:false}))};
 }
 if(process.argv[1] && new URL('file://'+process.argv[1]).pathname===new URL(import.meta.url).pathname){
  const selected=selectReviewCases(fixture.cases);
