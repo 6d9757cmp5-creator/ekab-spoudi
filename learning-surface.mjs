@@ -4,7 +4,7 @@
  * Reuses legacy engines and the SAME Mentor Protocol Lab. No AI/cloud calls.
  * This module NEVER writes existing learning/grade/notes keys.
  */
-import {analyseLearning,choosePrimary} from './mentor/intelligence/next-step.mjs';
+import {analyseLearning,choosePrimary} from './atla/learning/next-step.mjs';
 const page=location.pathname.split('/').pop()||'index.html';
 const isHome=page==='index.html',isSaek=page==='saek.html',isEop=page==='eoppep.html';
 if(isHome||isSaek||isEop){
