@@ -1,0 +1,37 @@
+name: Build verified anatomy GLB research pack
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-anatomy-resource-pack.yml'
+      - 'scripts/import-approved-3d-assets.mjs'
+      - 'tools/anatomy-3d/resources/catalog.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  anatomy-resource-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Source catalog and import validation
+        run: |
+          node --check scripts/import-approved-3d-assets.mjs
+          node scripts/import-approved-3d-assets.mjs --dry-run --max-total-mb=64
+      - name: Retrieve licensed GLB files into Anatomy Lab regional folders
+        run: node scripts/import-approved-3d-assets.mjs --approved --max-total-mb=64
+      - name: Verify asset integrity and GLB payloads
+        run: node scripts/import-approved-3d-assets.mjs --verify-local --max-total-mb=64
+      - name: Upload verified Anatomy Lab assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-anatomy-hra-licensed-glb-pack
+          path: |
+            tools/anatomy-3d/resources/hra-v1.2/
+            tools/anatomy-3d/resources/imported-manifest.json
+          retention-days: 30
+          if-no-files-found: error
