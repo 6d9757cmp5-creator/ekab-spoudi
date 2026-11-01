@@ -13,8 +13,8 @@
 .source-card{padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
 .source-card h2{font-size:1.03rem;margin:0 0 7px}.source-card p{font-size:.88rem;margin:7px 0;color:var(--muted);line-height:1.45}
 .source-card a{word-break:break-word}.source-card .pending{font-weight:700}
-.sources-filters{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:7px 13px;margin:18px 0}
-.sources-filters label{font-size:.84rem;font-weight:750}
+.sources-filters{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:12px;margin:18px 0}
+.sources-filters label{display:block;font-size:.84rem;font-weight:750;margin-bottom:7px}
 .sources-filters input,.sources-filters select{width:100%;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--ink);font:inherit;padding:12px;min-height:46px}
 .sources-filters input:focus-visible,.sources-filters select:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 #sources-visible{font-weight:750}
@@ -27,18 +27,31 @@
 <body>
 <main class="sources-wrap">
 <p><a href="mentor-lab.html">← Εργαστήριο MENTOR OS</a></p>
-<h1>Βιβλιογραφία MENTOR OS</h1>
+<h1>ATLA · Βιβλιοθήκη Paramedic και Ιατρικής</h1>
+<p>Δύο εκπαιδευτικές διαδρομές με κοινές πηγές όπου υπάρχει θεματική επικάλυψη. Η ταξινόμηση είναι για τη μελέτη, <strong>όχι πιστοποίηση επαγγελματικών πράξεων ή αρμοδιοτήτων.</strong></p>
 <p>Απογραφή εκπαιδευτικών πηγών. <strong>Δεν αποτελεί εγκεκριμένη κλινική βιβλιοθήκη.</strong> Οι σύνδεσμοι οδηγούν στον αρχικό εκδότη.</p>
 <div id="source-counts" class="sources-summary" aria-live="polite"></div>
-<section class="sources-filters" role="search" aria-label="Αναζήτηση βιβλιογραφίας">
-  <label for="source-search">Αναζήτηση πηγής ή φορέα</label>
-  <input id="source-search" type="search" autocomplete="off" placeholder="π.χ. WHO, Nursing, ERC" maxlength="120">
-  <label for="source-stage">Κατάσταση εισαγωγής</label>
-  <select id="source-stage">
-    <option value="all">Όλες οι πηγές</option>
-    <option value="extracted">Κείμενο διαθέσιμο για έλεγχο</option>
-    <option value="identified">Χωρίς εισαγμένο κείμενο</option>
-  </select>
+<section class="sources-filters" role="search" aria-label="Αναζήτηση βιβλιογραφίας ανά εκπαιδευτική διαδρομή">
+  <div>
+    <label for="source-search">Αναζήτηση πηγής ή φορέα</label>
+    <input id="source-search" type="search" autocomplete="off" placeholder="π.χ. WHO, Nursing, ERC" maxlength="120">
+  </div>
+  <div>
+    <label for="source-track">Διαδρομή ATLA</label>
+    <select id="source-track">
+      <option value="all">Όλες οι πηγές</option>
+      <option value="paramedic">Paramedic · Διασώστης</option>
+      <option value="medicine">Ιατρική · Γιατρός</option>
+    </select>
+  </div>
+  <div>
+    <label for="source-stage">Κατάσταση εισαγωγής</label>
+    <select id="source-stage">
+      <option value="all">Κάθε κατάσταση</option>
+      <option value="extracted">Κείμενο διαθέσιμο για έλεγχο</option>
+      <option value="identified">Χωρίς εισαγμένο κείμενο</option>
+    </select>
+  </div>
 </section>
 <p id="sources-visible" role="status" aria-live="polite">Προετοιμασία αναζήτησης…</p>
 <p role="status" id="library-status">Φόρτωση καταλόγου…</p>
