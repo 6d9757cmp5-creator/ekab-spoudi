@@ -1,0 +1,26 @@
+name: ATLA Paramedic learner navigation
+on:
+  pull_request:
+    paths:
+      - 'paramedic.html'
+      - 'paramedic.css'
+      - 'index.html'
+      - 'saek.html'
+      - 'eoppep.html'
+      - 'mentor-ecg.html'
+      - 'atla/practice/saek-practice.mjs'
+      - 'scripts/test-paramedic-hub.mjs'
+      - '.github/workflows/atla-paramedic-hub.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  navigation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check atla/practice/saek-practice.mjs
+      - run: node --test scripts/test-paramedic-hub.mjs atla/contextual-practice.test.mjs
