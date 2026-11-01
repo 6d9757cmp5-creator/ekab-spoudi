@@ -15,7 +15,7 @@ export function mountPatientScene(canvas,onSelect){
  function buf(target,data){const b=gl.createBuffer();gl.bindBuffer(target,b);gl.bufferData(target,data,gl.STATIC_DRAW);return b;}
  const pb=buf(gl.ARRAY_BUFFER,new Float32Array(pts)),nb=buf(gl.ARRAY_BUFFER,new Float32Array(ns)),ib=buf(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx));
  const colors={skin:[0.78,0.59,0.44],skin2:[0.68,0.46,0.34],pants:[0.19,0.27,0.36],topA:[0.20,0.56,0.70],topB:[0.47,0.63,0.46],hair:[0.19,0.16,0.16],shoe:[0.14,0.17,0.20],car:[0.30,0.40,0.48],wheel:[0.11,0.13,0.16],road:[0.22,0.33,0.37]};
- let focus='scene',view='scene',angle=0.18,paused=false,running=true,last=0,raf=0,clock=0,drag=null,acc=0;
+ let focus='scene',view='scene',poseByPatient={a:'standing',b:'standing'},angle=0.18,paused=false,running=true,last=0,raf=0,clock=0,drag=null,acc=0;
  function sphere(x,y,z,sx,sy,sz,color){
   gl.uniform3f(loc.off,x,y,z);gl.uniform3f(loc.scale,sx,sy,sz);gl.uniform3fv(loc.color,colors[color]||color);
   gl.drawElements(gl.TRIANGLES,idx.length,gl.UNSIGNED_SHORT,0);
@@ -33,19 +33,30 @@ export function mountPatientScene(canvas,onSelect){
   sphere(0,-1.34,-1.1,4.5,.085,1.75,'road');
   sphere(0,-.42,-.95,.62,.52,.36,'car');sphere(0,-.17,-.95,.40,.28,.29,'car');
   sphere(-.40,-.78,-.65,.20,.22,.15,'wheel');sphere(.40,-.78,-.65,.20,.22,.15,'wheel');
-  function person(x,top,skin,phase){
+  function person(x,top,skin,phase,id){
    let breath=paused?0:Math.sin(clock*1.7+phase)*.018;
-   sphere(x,1.04,.28,.22,.26,.23,skin); // head
-   sphere(x,1.29,.18,.25,.09,.21,'hair');
-   sphere(x-.083,1.08,.49,.022,.022,.018,'shoe');sphere(x+.083,1.08,.49,.022,.022,.018,'shoe');
-   sphere(x,.39,.25,.32+breath,.43+breath,.19+breath,top);
-   sphere(x,-.10,.26,.27,.25,.20,'pants');
-   sphere(x-.39,.42,.25,.13,.40,.12,skin);sphere(x+.39,.42,.25,.13,.40,.12,skin);
-   sphere(x-.41,-.07,.27,.13,.15,.13,skin);sphere(x+.41,-.07,.27,.13,.15,.13,skin);
-   sphere(x-.16,-.69,.25,.14,.49,.17,'pants');sphere(x+.16,-.69,.25,.14,.49,.17,'pants');
-   sphere(x-.16,-1.18,.39,.16,.12,.30,'shoe');sphere(x+.16,-1.18,.39,.16,.12,.30,'shoe');
+   const pose=poseByPatient[id]||'standing';
+   function part(px,py,pz,sx,sy,sz,color){
+    if(pose==='seated'){
+     if(py>-.08)py-=.32;
+     else {py=-.43+(py+.08)*.30;pz+=.34+(Math.abs(py)*.19);}
+    }else if(pose==='reclined'){
+     const old=py;py=-.92+old*.13;pz+=.28+(old+1.19)*.62;
+     const tmp=sy;sy=sz;sz=tmp;
+    }
+    sphere(px,py,pz,sx,sy,sz,color);
+   }
+   part(x,1.04,.28,.22,.26,.23,skin);
+   part(x,1.29,.18,.25,.09,.21,'hair');
+   part(x-.083,1.08,.49,.022,.022,.018,'shoe');part(x+.083,1.08,.49,.022,.022,.018,'shoe');
+   part(x,.39,.25,.32+breath,.43+breath,.19+breath,top);
+   part(x,-.10,.26,.27,.25,.20,'pants');
+   part(x-.39,.42,.25,.13,.40,.12,skin);part(x+.39,.42,.25,.13,.40,.12,skin);
+   part(x-.41,-.07,.27,.13,.15,.13,skin);part(x+.41,-.07,.27,.13,.15,.13,skin);
+   part(x-.16,-.69,.25,.14,.49,.17,'pants');part(x+.16,-.69,.25,.14,.49,.17,'pants');
+   part(x-.16,-1.18,.39,.16,.12,.30,'shoe');part(x+.16,-1.18,.39,.16,.12,.30,'shoe');
   }
-  person(-1.1,'topA','skin',0);person(1.05,'topB','skin2',1);
+  person(-1.1,'topA','skin',0,'a');person(1.05,'topB','skin2',1,'b');
  }
  function frame(now){if(!running)return;raf=requestAnimationFrame(frame);if(document.hidden||!canvas.isConnected)return;if(now-last<45)return;last=now;if(!paused)clock+=0.045;draw();}
  try{draw();raf=requestAnimationFrame(frame);}catch{canvas.hidden=true;fallback.hidden=false;running=false;}
@@ -56,6 +67,7 @@ export function mountPatientScene(canvas,onSelect){
  return {
   setFocus(f,v='scene'){focus=f;view=v;draw();},
   setPaused(p){paused=p;},
+  setPoses(poses){poseByPatient={...poseByPatient,...poses};draw();},
   rotate(d){angle+=d;draw();},
   dispose(){running=false;cancelAnimationFrame(raf);gl.deleteBuffer(pb);gl.deleteBuffer(nb);gl.deleteBuffer(ib);gl.deleteProgram(program);}
  };

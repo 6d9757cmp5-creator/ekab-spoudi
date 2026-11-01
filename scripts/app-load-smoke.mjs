@@ -149,6 +149,27 @@ try {
     if(!nextReport.suggestedFilename().endsWith('.txt'))throw Error(device+': MENTOR NEXT report');
     console.log('PASS '+device+': MENTOR NEXT synthetic WebGL scene, two patients, scenario, actions and debrief');
 
+
+    // Body Interact-inspired original v0.2 interface: per-patient evidence and visual posture.
+    if(!await page.locator('#next-evidence-grid .next-evidence-person').count().then(n=>n===2))
+      throw Error(device+': MENTOR NEXT missing independent patient evidence cards');
+    const chart=page.locator('#next-trend-svg');
+    if(!await chart.locator('circle').count().then(n=>n===2))throw Error(device+': MENTOR NEXT trend points missing');
+    await page.locator('#next-trend-metric').selectOption('rr');
+    if(!await page.locator('#next-trend-caption').textContent().then(s=>s.includes('αναπνοών')))
+      throw Error(device+': MENTOR NEXT metric switch');
+    await page.locator('#next-tools button').filter({hasText:'Στάση'}).click();
+    await page.locator('#next-actions button').filter({hasText:'Οπτική στάση: καθιστός'}).click();
+    if(!await page.locator('#next-events').textContent().then(s=>s.includes('Οπτική στάση: καθιστός')))
+      throw Error(device+': MENTOR NEXT visual posture not recorded');
+    await page.locator('#next-clean-panels').click();
+    if(await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT tool broom did not dismiss panels');
+    await page.locator('#next-show-panels').click();
+    if(!await page.locator('#next-insights').isVisible())throw Error(device+': MENTOR NEXT panel restore failed');
+    await page.locator('#next-nextstep').click();
+    if(!await page.locator('#next-workspace-main').isVisible())throw Error(device+': MENTOR NEXT next-step panel did not open');
+    console.log('PASS '+device+': MENTOR NEXT v0.2 independent evidence, metric trend, visual posture and panels');
+
     await context.close();
   }
 } finally {await browser?.close();server.kill();}

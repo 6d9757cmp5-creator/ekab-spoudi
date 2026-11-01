@@ -1,6 +1,7 @@
 /** MENTOR Next: first-party UI/controller for the original simulated case. */
 import {CASE,TOOLS,ACTIONS,newSession,loadSession,saveSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,validSession} from '../core/next-sim.mjs';
 import {mountPatientScene} from './next-scene.mjs';
+import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 let state=loadSession(localStorage),tool='dialogue',result='Επίλεξε τον ασθενή και ένα εργαλείο για να ξεκινήσεις.';
@@ -32,6 +33,7 @@ function renderTool(){
  $('next-tool-title').textContent=active.label+' · '+labelPerson(state.person);
  $('next-tool-subtitle').textContent={
   view:'Επιλογή οπτικής του τρισδιάστατου μοντέλου. Το μοντέλο είναι ενδεικτικό, όχι ανατομική εξέταση.',
+  position:'Απεικονιστικές στάσεις 3D ασθενούς. Η αλλαγή δεν είναι κλινική μετακίνηση, θεραπεία ή οδηγία πρώτων βοηθειών.',
   dialogue:'Ρώτησε ελεύθερα ή επίλεξε τυποποιημένες ερωτήσεις. Όλες οι απαντήσεις προέρχονται από το σενάριο.',
   exam:'Διαθέσιμες περιγραφικές παρατηρήσεις, όχι διάγνωση ή πραγματική εξέταση.',
   monitor:'Τα ζωτικά ακολουθούν συνθετική χρονική πορεία. Δεν επηρεάζονται από θεραπευτικές επιλογές.',
@@ -65,6 +67,56 @@ function renderTool(){
  }
  $('next-result').textContent=result;
 }
+
+function renderInsights(){
+ const review=missionEvidence(state),grid=$('next-evidence-grid');
+ grid.replaceChildren();
+ for(const p of review.people){
+  const card=el('article',undefined,'next-evidence-person');
+  const name=el('h3','Άτομο '+p.id.toUpperCase()+' · '+p.covered+'/4 εκπαιδευτικά βήματα');
+  card.append(name,el('p','Συνθετικό στιγμιότυπο: HR '+p.vitals.hr+' · RR '+p.vitals.rr+' · SpO₂ '+p.vitals.spo2+'%'));
+  const ul=el('ul');
+  for(const item of p.steps){
+   const li=el('li',item.label);
+   li.className=item.done?'next-done':'next-missing';
+   li.prepend(el('span',item.done?'✓ ':'○ '));ul.append(li);
+  }
+  card.append(ul);
+  card.append(actionButton('Επιλογή ατόμου '+p.id.toUpperCase(),()=>{
+   commit(setFocus(state,p.id,state.view),'Εστιάζεις στο Άτομο '+p.id.toUpperCase()+'.');
+  }));
+  grid.append(card);
+ }
+ const shared=$('next-evidence-shared');shared.replaceChildren();
+ for(const item of review.shared){
+  const li=el('li',(item.done?'✓ ':'○ ')+item.label);li.className=item.done?'next-done':'next-missing';shared.append(li);
+ }
+ const issues=$('next-evidence-issues');issues.replaceChildren();
+ if(!review.caution.length)issues.append(el('li','Δεν εντοπίστηκαν οργανωτικές ασυνέπειες στις μέχρι τώρα καταγραφές.'));
+ else for(const note of review.caution)issues.append(el('li',note));
+ const stateLine=$('next-evidence-state');
+ stateLine.textContent='Έως τώρα: '+state.events.length+' καταγραφές · '+state.minute+'′ συνθετικού χρόνου. Καμία αξιολόγηση κλινικής ορθότητας.';
+ drawChart();
+}
+function drawChart(){
+ const svg=$('next-trend-svg');const ns='http://www.w3.org/2000/svg',metric=$('next-trend-metric').value;
+ const values=['hr','rr','spo2'].includes(metric)?metric:'hr';
+ const a=vitalTrend(state,'a',values),b=vitalTrend(state,'b',values),all=[...a,...b].map(p=>p.value);
+ const mn=Math.min(...all)-2,mx=Math.max(...all)+2,span=mx-mn||1;
+ const W=540,H=205,L=43,R=15,T=21,B=34;
+ const xp=n=>L+(n/30)*(W-L-R),yp=v=>T+(1-(v-mn)/span)*(H-T-B);
+ function node(tag,attrs={},txt){const v=document.createElementNS(ns,tag);for(const [k,val] of Object.entries(attrs))v.setAttribute(k,String(val));if(txt!==undefined)v.textContent=txt;return v;}
+ svg.replaceChildren();svg.setAttribute('viewBox','0 0 '+W+' '+H);
+ for(let i=0;i<=3;i++){const y=T+i*(H-T-B)/3;svg.append(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'#32586e','stroke-dasharray':'4 5'}),node('text',{x:7,y:y+4,fill:'#bfd4db','font-size':11},String(Math.round(mx-i*span/3))));}
+ for(let i=0;i<=30;i+=10)svg.append(node('text',{x:xp(i),y:H-11,fill:'#bfd4db','font-size':11,'text-anchor':'middle'},i+'′'));
+ for(const [series,color,label] of [[a,'#78e3c3','Άτομο Α'],[b,'#91b8f7','Άτομο Β']]){
+  const pts=series.map(p=>xp(p.minute).toFixed(1)+','+yp(p.value).toFixed(1)).join(' ');
+  if(series.length>1)svg.append(node('polyline',{points:pts,fill:'none',stroke:color,'stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'}));
+  const last=series.at(-1);svg.append(node('circle',{cx:xp(last.minute),cy:yp(last.value),r:4.8,fill:color,stroke:'#061923','stroke-width':2}));
+ }
+ $('next-trend-caption').textContent='Εικονική πορεία '+({hr:'παλμών (HR)',rr:'αναπνοών (RR)',spo2:'κορεσμού (SpO₂)'}[values])+' · Άτομο Α '+a.at(-1).value+', Άτομο Β '+b.at(-1).value+'. Μόνο συνθετικές τιμές, όχι ΗΚΓ ή ανταπόκριση σε θεραπεία.';
+}
+
 function renderReview(){
  const r=summarize(state),target=$('next-review-body');
  target.replaceChildren();
@@ -95,7 +147,8 @@ function render(){
  for(const button of document.querySelectorAll('[data-next-view]'))button.setAttribute('aria-pressed',String(button.dataset.nextView===state.view));
  renderer.setFocus(state.view==='scene'?'scene':state.person,state.view);
  renderer.setPaused(!state.playing);
- renderMenu();renderTool();renderReview();
+ renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
+ renderMenu();renderTool();renderReview();renderInsights();
  window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:CASE.id,label:'MENTOR NEXT — '+CASE.title}}));
 }
 for(const button of document.querySelectorAll('[data-next-patient]'))button.addEventListener('click',()=>{
@@ -104,6 +157,7 @@ for(const button of document.querySelectorAll('[data-next-patient]'))button.addE
 for(const button of document.querySelectorAll('[data-next-view]'))button.addEventListener('click',()=>{
  try{commit(setFocus(state,state.person,button.dataset.nextView),'Άλλαξε η γωνία προβολής.');}catch{}
 });
+$('next-trend-metric').addEventListener('change',drawChart);
 $('next-rotate-left').addEventListener('click',()=>renderer.rotate?.(-0.23));
 $('next-rotate-right').addEventListener('click',()=>renderer.rotate?.(0.23));
 $('next-play').addEventListener('click',()=>{try{commit(setPlaying(state,!state.playing),state.playing?'Η παύση σταματά μόνο τον αυτόματο χρόνο.':'Η αυτόματη εξέλιξη του συνθετικού χρόνου ξεκίνησε.');}catch{}});
@@ -120,7 +174,7 @@ $('next-finish').addEventListener('click',()=>{
  $('next-review-body').scrollIntoView({behavior:'smooth'});
 });
 $('next-download').addEventListener('click',()=>{
- const blob=new Blob([reportText(state)],{type:'text/plain;charset=utf-8'});
+ const blob=new Blob([reportText(state)+'\n'+buildEvidenceReport(state)],{type:'text/plain;charset=utf-8'});
  const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='mentor-next-ekab-report.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 let elapsed=0;
@@ -129,5 +183,34 @@ const clock=setInterval(()=>{
  elapsed++;if(elapsed<7)return;elapsed=0;
  try{commit(nextMinute(state,1),'Ενημερώθηκαν οι συνθετικές ενδείξεις λόγω παρέλευσης εικονικού χρόνου.');}catch{}
 },1000);
+$('next-clean-panels').addEventListener('click',()=>{
+ $('next-workspace-main').hidden=true;
+ $('next-insights').hidden=true;
+ $('next-clean-panels').hidden=true;
+ $('next-show-panels').hidden=false;
+ $('next-result').textContent='Τα εκπαιδευτικά παράθυρα έκλεισαν. Επίλεξε «Εμφάνιση εργαλείων» για συνέχεια.';
+});
+$('next-show-panels').addEventListener('click',()=>{
+ $('next-workspace-main').hidden=false;
+ $('next-insights').hidden=false;
+ $('next-show-panels').hidden=true;
+ $('next-clean-panels').hidden=false;
+ render();
+});
+$('next-tools').addEventListener('click',()=>{
+ if($('next-workspace-main').hidden){$('next-workspace-main').hidden=false;$('next-show-panels').hidden=true;$('next-clean-panels').hidden=false;}
+});
+$('next-nextstep').addEventListener('click',()=>{
+ const r=missionEvidence(state),a=r.people.find(p=>p.id===state.person);
+ if(!r.shared[0].done)tool='exam';
+ else if(a.steps.some(x=>!x.done)){
+  const first=a.steps.find(x=>!x.done);
+  tool=first.id==='dialogue'?'dialogue':first.id==='exam'?'exam':first.id==='monitor'?'monitor':'exam';
+ }else if(!r.shared[1].done)tool='call';
+ else if(!r.shared[2].done)tool='interventions';
+ else tool='debrief';
+ $('next-workspace-main').hidden=false;$('next-show-panels').hidden=true;$('next-clean-panels').hidden=false;
+ renderMenu();renderTool();$('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
+});
 window.addEventListener('pagehide',()=>{clearInterval(clock);renderer.dispose();},{once:true});
 render();

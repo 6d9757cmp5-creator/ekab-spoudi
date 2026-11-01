@@ -14,6 +14,7 @@ export const CASE={
 };
 export const TOOLS=[
  {id:'view',icon:'◉',label:'Προβολές'},
+ {id:'position',icon:'♧',label:'Στάση'},
  {id:'dialogue',icon:'◌',label:'Συνομιλία'},
  {id:'exam',icon:'✚',label:'Εξέταση'},
  {id:'monitor',icon:'▤',label:'Monitoring'},
@@ -25,6 +26,11 @@ export const TOOLS=[
  {id:'debrief',icon:'◎',label:'Debrief'}
 ];
 export const ACTIONS={
+ position:[
+  {id:'standing',label:'Οπτική στάση: όρθιος',min:1,description:'Αλλαγή μοντέλου μόνο για προβολή. Δεν προσομοιώνει ιατρική μετακίνηση ασθενούς.'},
+  {id:'seated',label:'Οπτική στάση: καθιστός',min:1,description:'Εικονική αλλαγή θέσης για εκπαιδευτική προβολή, χωρίς κλινική συνέπεια.'},
+  {id:'reclined',label:'Οπτική στάση: ξαπλωμένος',min:1,description:'Εικονική αλλαγή θέσης για εκπαιδευτική προβολή, όχι υπόδειξη μετακίνησης τραυματία.'}
+ ],
  dialogue:[
   {id:'symptoms',label:'Τι αισθάνεστε;',min:1,flag:'communication',description:'Συμπτωματολογία από τον ίδιο τον εμπλεκόμενο.'},
   {id:'event',label:'Τι συνέβη;',min:1,flag:'communication',description:'Προφορική περιγραφή του γεγονότος.'},
@@ -35,7 +41,10 @@ export const ACTIONS={
   {id:'initial',label:'Αρχική οπτική εκτίμηση',min:1,flag:'assessment',description:'Απλή παρατήρηση· όχι κλινική διάγνωση.'},
   {id:'airway',label:'Παρατήρηση αεραγωγού / ομιλίας',min:1,flag:'assessment',description:'Η δυνατότητα ομιλίας είναι το μόνο διαθέσιμο συνθετικό εύρημα.'},
   {id:'breathing',label:'Παρατήρηση αναπνοής',min:1,flag:'assessment',description:'Συνθετική παρατήρηση αναπνευστικού ρυθμού, χωρίς ακρόαση.'},
-  {id:'reassess',label:'Επανεκτίμηση',min:2,flag:'reassessment',description:'Καταγράφηκε επανεκτίμηση. Δεν προκύπτει κλινική επιβεβαίωση από την άσκηση.'}
+  {id:'reassess',label:'Επανεκτίμηση',min:2,flag:'reassessment',description:'Καταγράφηκε επανεκτίμηση. Δεν προκύπτει κλινική επιβεβαίωση από την άσκηση.'},
+  {id:'head',label:'Οπτικός έλεγχος κεφαλής/αυχένα',min:1,flag:'assessment',description:'Δεν υπάρχει επαληθευμένο ειδικό εύρημα κεφαλής ή αυχένα στο συνθετικό σενάριο.'},
+  {id:'chest',label:'Οπτικός έλεγχος θώρακα',min:1,flag:'assessment',description:'Διαθέσιμος μόνο ο συνθετικός αναπνευστικός ρυθμός. Δεν έχει μοντελοποιηθεί ακρόαση.'},
+  {id:'limbs',label:'Οπτικός έλεγχος άκρων',min:1,flag:'assessment',description:'Δεν υπάρχουν επαληθευμένα ευρήματα άκρων στο σενάριο.'}
  ],
  monitor:[
   {id:'attach',label:'Ενεργοποίηση συνθετικού monitor',min:1,flag:'monitoring',description:'Εμφανίζονται μόνο συνθετικά HR, RR και SpO₂.'},
@@ -99,7 +108,7 @@ export function execute(s,tool,id){
  if(tool==='monitor'&&id==='record'){
   const v=patientVitals(s,s.person);detail='Συνθετική καταγραφή: HR '+v.hr+', RR '+v.rr+', SpO₂ '+v.spo2+'%.';
  }
- const events=[...s.events,{minute,person:s.person,tool,label:action.label,detail}];
+ const events=[...s.events,{minute,person:s.person,tool,actionId:id,label:action.label,detail}];
  const flags={...s.flags,...(action.flag?{[action.flag]:true}:{})};
  return {...s,minute,events,flags,finished:minute>=30,playing:minute>=30?false:s.playing};
 }

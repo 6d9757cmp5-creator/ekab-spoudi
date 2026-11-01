@@ -17,7 +17,7 @@
 </header>
 <section class="next-top">
  <div><p class="next-eyebrow">PREHOSPITAL SIMULATION · CRETE</p><h1>Τροχαίο · Δύο εμπλεκόμενοι</h1>
- <p>Διαδραστική τρισδιάστατη εκπαιδευτική σκηνή, πολλαπλά εργαλεία, παρατηρήσεις και ομαδική ανασκόπηση.</p></div>
+ <p>3D εκπαιδευτική σκηνή, αλλαγές οπτικής στάσης, εργαλεία εξέτασης και ξεχωριστή σύγκριση παρατηρήσεων των δύο εμπλεκομένων.</p></div>
  <div class="next-time"><span>Χρόνος περιστατικού</span><strong id="next-minute">00:00</strong><small id="next-status">Έτοιμο</small></div>
 </section>
 <p class="next-warning" role="note"><strong>Συνθετικό εκπαιδευτικό πρωτότυπο.</strong> Οι ασθενείς, οι ενδείξεις και οι μεταβολές είναι επινοημένες, όχι επιστημονικά επικυρωμένη φυσιολογία. Δεν πραγματοποιούνται ιατρικές πράξεις, χορηγήσεις ή διαλογή. Το αποτέλεσμα δεν αποτελεί κλινική βαθμολογία.</p>
@@ -25,7 +25,7 @@
 <section class="next-stage-layout" aria-label="Διαδραστικό περιβάλλον προσομοίωσης">
  <div class="next-scene">
   <div class="next-scene-top">
-   <span class="next-scene-label">ORIGINAL WEBGL PATIENTS · LOW POLY</span>
+   <span class="next-scene-label">MENTOR NEXT v0.2 · ΠΡΩΤΟΤΥΠΟ WEBGL</span>
    <div class="next-view-tabs" role="group" aria-label="Γωνία προβολής">
     <button type="button" data-next-view="scene" aria-pressed="true">Σκηνή</button>
     <button type="button" data-next-view="full" aria-pressed="false">Σώμα</button>
@@ -54,6 +54,12 @@
   <div class="next-clock-controls"><button type="button" id="next-play" aria-pressed="false">▶ Έναρξη χρόνου</button><button type="button" id="next-step">+1′</button><button type="button" id="next-reset" class="next-quiet">↺ Επανεκκίνηση</button></div>
  </aside>
 </section>
+<div class="next-command-bar" aria-label="Διαχείριση εργαλείων και επόμενων βημάτων">
+ <button type="button" id="next-nextstep">✦ Επόμενο οργανωτικό βήμα</button>
+ <button type="button" id="next-clean-panels">⌄ Κλείσιμο παραθύρων</button>
+ <button type="button" id="next-show-panels" hidden>▣ Εμφάνιση εργαλείων</button>
+ <span>Οι επιλογές αυτές οργανώνουν την εξάσκηση, όχι την κλινική φροντίδα.</span>
+</div>
 <section class="next-workspace" aria-label="Εργαλεία και ενέργειες">
  <nav id="next-tools" class="next-tools" aria-label="Εργαλεία προσομοίωσης"></nav>
  <div class="next-workspace-main">
@@ -63,12 +69,40 @@
   <p id="next-result" class="next-result" role="status" aria-live="polite">Επίλεξε τον ασθενή και ένα εργαλείο για να ξεκινήσεις.</p>
  </div>
 </section>
+<section id="next-insights" class="next-insights" aria-label="Στοιχεία αποστολής ανά ασθενή">
+ <div class="next-brief-panel">
+  <div class="next-insights-title">
+   <div><p class="next-eyebrow">ΣΥΝΘΕΤΙΚΟ ΜΟΝΤΕΛΟ · ΙΣΤΟΡΙΚΟ</p><h2>Παρατηρήσεις ανά ασθενή</h2></div>
+   <span>Δύο ανεξάρτητες καρτέλες</span>
+  </div>
+  <div id="next-evidence-grid" class="next-evidence-grid"></div>
+  <div class="next-group-evidence">
+   <h3>Κοινά οργανωτικά βήματα</h3>
+   <ul id="next-evidence-shared"></ul>
+   <h3>Σημεία για επανάληψη</h3>
+   <ul id="next-evidence-issues"></ul>
+   <p id="next-evidence-state" class="next-review-note"></p>
+  </div>
+ </div>
+ <div class="next-chart-panel">
+  <div class="next-insights-title"><div><p class="next-eyebrow">MONITORING HISTORY</p><h2>Πορεία ζωτικών</h2></div></div>
+  <label for="next-trend-metric">Προβολή συνθετικής ένδειξης</label>
+  <select id="next-trend-metric"><option value="hr">HR · Παλμοί</option><option value="rr">RR · Αναπνοές</option><option value="spo2">SpO₂ · Κορεσμός</option></select>
+  <div class="next-chart-legend"><span><i class="next-mark-a"></i> Άτομο Α</span><span><i class="next-mark-b"></i> Άτομο Β</span></div>
+  <svg id="next-trend-svg" viewBox="0 0 540 205" role="img" aria-label="Συνθετική χρονική πορεία της επιλεγμένης ένδειξης για τους δύο ασθενείς"></svg>
+  <p id="next-trend-caption" class="next-review-note">Αναμονή δεδομένων συνθετικού περιστατικού.</p>
+  <details class="next-case-brief"><summary>Πληροφορίες σκηνής και όρια</summary>
+   <p>Συνθετικό τροχαίο στην Κρήτη. Δύο ενήλικες, κυκλοφορία οχημάτων και περιορισμένες επιβεβαιωμένες πληροφορίες. Οι ενδείξεις προχωρούν με τον εικονικό χρόνο και δεν αποτελούν φυσιολογική αντίδραση ή πρόβλεψη.</p>
+   <p>Οι αλλαγές στάσης του 3D μοντέλου αφορούν αποκλειστικά την οπτική παρουσίαση και δεν συνιστούν οδηγίες μετακίνησης τραυματία.</p>
+  </details>
+ </div>
+</section>
 <div class="next-bottom">
  <section class="next-log"><div class="next-section-title"><h2>Χρονολόγιο αποστολής</h2><button type="button" id="next-download">↓ Αναφορά TXT</button></div><ol id="next-events"><li>Καμία καταγραφή ακόμη.</li></ol></section>
  <aside class="next-review"><h2>MENTOR DEBRIEF</h2><p>Έλεγχος εκπαιδευτικών βημάτων, όχι κλινική βαθμολογία.</p><div id="next-review-body"></div><button type="button" id="next-finish">Ολοκλήρωση / Ανασκόπηση</button><p id="next-save-note" role="status" class="next-save-note"></p></aside>
 </div>
 </main>
-<footer class="next-footer">MENTOR NEXT v0.1 · Πρωτότυπος κώδικας ΕΚΑΒ Σπουδή · Χωρίς στοιχεία πραγματικών ασθενών, ιατρικό AI ή πιστοποίηση. <a href="mentor-live.html">Προηγούμενη εκπαιδευτική αποστολή</a></footer>
+<footer class="next-footer">MENTOR NEXT v0.2 · Πρωτότυπος κώδικας ΕΚΑΒ Σπουδή · Χωρίς στοιχεία πραγματικών ασθενών, ιατρικό AI ή πιστοποίηση. <a href="mentor-live.html">Προηγούμενη εκπαιδευτική αποστολή</a></footer>
 </div>
 <script type="module" src="mentor/presence/presence.mjs"></script>
 </body></html>

@@ -30,7 +30,8 @@ jobs:
           node --check mentor/core/next-sim.mjs
           node --check mentor/app/next-sim.mjs
           node --check mentor/app/next-scene.mjs
-          node --test mentor/core/next-sim.test.mjs
+          node --check mentor/core/next-review.mjs
+          node --test mentor/core/next-sim.test.mjs mentor/core/next-review.test.mjs
           node --check mentor/core/live-debrief.mjs
           node --check mentor/core/live-interactions.mjs
           node --check mentor/app/live.js
