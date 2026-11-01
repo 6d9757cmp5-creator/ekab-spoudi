@@ -34,3 +34,10 @@
 @media(prefers-reduced-motion:reduce){.atla-panel,.atla-launcher{scroll-behavior:auto;transition:none!important}}
 
 .atla-route{display:block;background:#d5f1eb;color:#125a58;border-radius:10px;padding:10px 12px;text-decoration:none;font-weight:750;margin:-3px 0 12px;max-width:94%}.atla-route:focus-visible{outline:3px solid #0da5b4;outline-offset:2px}
+
+/* Atlas mock chat: conspicuous label and user-controlled demo switch. */
+.atla-demo-row{display:flex;gap:10px;align-items:center;padding:9px 17px;color:#624610;background:#fff7df;border-block:1px solid #edd296;font-weight:700;font-size:12px;cursor:pointer}
+.atla-demo-toggle{inline-size:18px;block-size:18px;accent-color:#94640b;flex-shrink:0}
+.atla-mock{background:#fff7db!important;color:#65440f!important;border:1px dashed #bb8d36;white-space:pre-wrap}
+.atla-mock::first-line{font-weight:850}
+@media(max-width:640px){.atla-demo-row{min-height:43px;box-sizing:border-box}}
