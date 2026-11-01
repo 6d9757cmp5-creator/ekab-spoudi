@@ -286,3 +286,11 @@ test('grammar is not confused with completeness in the same reference item',()=>
  'Ύγρανση του εισπνεόμενου αέρα']);
  assert.ok(output.missingPoints.length===2);
 });
+
+test('grammar-only AI rejection is left ungraded; genuine clinical omissions remain eligible for partial',()=>{
+ const invalid={...grade,verdict:'incorrect',correctPoints:[],missingPoints:['Έχει λάθη ορθογραφίας'],explanation:'Απάντηση με λάθη ορθογραφίας'};
+ const invalidResult=cautiouslyCheckGrade(invalid);
+ assert.equal(invalidResult.verdict,'uncertain');
+ const partial={...grade,verdict:'partial',correctPoints:['Σωστό σημείο'],missingPoints:['Λείπει η βασική εκτίμηση αναπνοής'],explanation:'Λείπει βήμα'};
+ assert.equal(cautiouslyCheckGrade(partial).verdict,'partial');
+});
