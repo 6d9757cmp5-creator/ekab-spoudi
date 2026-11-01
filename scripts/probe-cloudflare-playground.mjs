@@ -18,7 +18,11 @@ try{
  report.pageErrors=errors.slice(0,10);
  report.links=await page.locator('a').evaluateAll(els=>els.slice(0,30).map(x=>({text:x.innerText?.trim().slice(0,90),href:x.getAttribute('href')})));
  try{
-  await page.getByText('Model mode',{exact:true}).first().click({timeout:7000});
+  console.log('PLAYGROUND_LINKS',JSON.stringify(report.links).slice(0,5000));
+  const candidates=page.locator('a').filter({hasText:'Model mode'});
+  const count=await candidates.count();
+  if(count)await candidates.last().click({timeout:7000});
+  else await page.getByText('Model mode',{exact:true}).last().click({timeout:7000});
   await page.waitForTimeout(5000);
   report.modelMode={url:page.url(),body:(await page.locator('body').innerText()).slice(0,6000),
    buttons:await page.locator('button').evaluateAll(els=>els.slice(0,80).map(x=>({text:x.innerText?.trim().slice(0,100),aria:x.getAttribute('aria-label'),title:x.getAttribute('title')}))),
