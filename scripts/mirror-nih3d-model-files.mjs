@@ -17,20 +17,25 @@ import {join,basename} from 'node:path';
 const args=Object.fromEntries(process.argv.slice(2).filter(x=>x.startsWith('--')).map(x=>{let i=x.indexOf('=');return i<0?[x.slice(2),'true']:[x.slice(2,i),x.slice(i+1)];}));
 const first=Number(args.start||1),last=Number(args.end||100);
 if(!Number.isInteger(first)||!Number.isInteger(last)||first<1||last<first||last-first>=100||last>30000)throw Error('Use one 1–100 record range');
-const base='tools/atla-ai/resources/nih3d-master-plan-2026/segments';
+const sources=['tools/atla-ai/resources/nih3d-master-plan-2026/segments','tools/atla-ai/resources/nih3d-catalog'];
 const out=args.out||'tmp/atla-nih3d-packs',work=join(out,'work'),maxPack=1200*1024**2,maxIndividual=7500*1024**2;
 const wait=ms=>new Promise(r=>setTimeout(r,ms)),allowed=new Set(['GLB','GLTF','STL','OBJ','X3D','WRL','PLY','3MF']);
 const all=new Map(),missing=[],failed=[],done=[],packs=[];
 const safe=s=>String(s||'model').replace(/[^a-zA-Z0-9._-]/g,'_').slice(0,85);
 await mkdir(out,{recursive:true});await mkdir(work,{recursive:true});
-let filenames=[];try{filenames=await readdir(base)}catch(e){throw Error('NIH metadata shards not available: '+e.message)}
-for(const name of filenames.filter(n=>/^entries-\d+-\d+\.json$/.test(n)).sort()){
- const batch=JSON.parse(await readFile(join(base,name),'utf8'));
- for(const row of batch.items||batch.entries||[]){
-  const id=Number(row.entryId??row.id);
-  if(id>=first&&id<=last)all.set(id,row);
+let foundMetadata=false;
+for(const dir of sources){
+ let names=[];try{names=await readdir(dir)}catch{continue}
+ for(const name of names.filter(n=>/^entries-\d+-\d+\.json$/.test(n)).sort()){
+  const batch=JSON.parse(await readFile(join(dir,name),'utf8'));
+  for(const row of batch.items||batch.entries||[]){
+   const id=Number(row.entryId??row.id);
+   if(id>=first&&id<=last&&!all.has(id))all.set(id,row);
+  }
+  foundMetadata=true;
  }
 }
+if(!foundMetadata)throw Error('No NIH source metadata catalog has been archived yet');
 const prefix='atla-nih3d-'+String(first).padStart(5,'0')+'-'+String(last).padStart(5,'0');
 let currentBytes=0,memberFiles=[],packageNumber=0;
 async function flush(){
