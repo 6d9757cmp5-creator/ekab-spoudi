@@ -12,4 +12,13 @@ assert(sim.includes('src="tools/patient-simulator/app/next-sim.mjs"'),'simulator
 assert(sim.includes('src="mentor/presence/presence.mjs"'),'mentor is an optional companion');
 assert(catalog.includes('Προσομοιωτής Ασθενών')&&catalog.includes('MENTOR OS'));
 assert(read('sw.js').includes('./tools.html'));
+
+const protocols=read('protocols.html'),review=read('mentor-protocol-suite.mjs'),homeText=read('index.html');
+assert(!homeText.includes('MENTOR PROTOCOL LAB'),'protocol card must use its own name');
+assert(sim.includes('ΠΡΟΣΟΜΟΙΩΤΗΣ ΑΣΘΕΝΩΝ · WEBGL 3D'));
+assert(!sim.includes('MENTOR NEXT · WEBGL 3D'),'simulator must not be branded as MENTOR');
+assert(protocols.includes('Εργαστήριο Πρωτοκόλλων'));
+assert(review.includes('Ανασκόπηση Πρωτοκόλλου'));
+assert(read('mentor-lab.html').includes('Ψηφιακός εκπαιδευτής'));
+assert(read('tools/patient-simulator/core/next-sim.mjs').includes("ekab.mentor.next-v1"),'legacy progress key retained');
 console.log('PASS: unified navigation, tool ownership, stable URLs and links');

@@ -47,7 +47,7 @@ function mountGlobalNavigation(){
  ].join('');
  document.head.append(css);
  const header=document.querySelector('header');
- if(header)header.insertAdjacentElement('afterend',bar);else document.body.prepend(bar);
+ if(header&&header.parentElement===document.body)header.insertAdjacentElement('afterend',bar);else document.body.prepend(bar);
  if(group==='home'){
   const resume=document.getElementById('studyResume'),tiles=document.querySelector('.home-tiles');
   if(resume&&tiles)tiles.insertAdjacentElement('beforebegin',resume);
