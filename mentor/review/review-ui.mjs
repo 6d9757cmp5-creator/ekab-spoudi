@@ -15,30 +15,46 @@ function node(tag,cls,value){
 }
 export async function mountReviewSearch(){
  const loader=createReviewBookLoader();
- const form=$('mentor-book-form'),select=$('mentor-book-select'),input=$('mentor-book-query');
+ const form=$('mentor-book-form'),select=$('mentor-book-select'),track=$('mentor-book-track'),input=$('mentor-book-query');
  const results=$('mentor-book-results'),status=$('mentor-book-status');
  const run=$('mentor-book-submit'),count=$('mentor-book-count');
- let busy=false,sourceIds=[];
+ let busy=false,sourceIds=[],candidates=[];
  const writeStatus=(message,error=false)=>{
   status.textContent=message;status.dataset.error=error?'true':'false';
  };
+ function setTrackBooks(){
+  // Study-track membership is metadata only: no permission or approval is granted.
+  const matches=candidates.filter(s=>s.learning_tracks.includes(track.value));
+  const previous=select.value;
+  select.replaceChildren(...matches.map(item=>{
+   const option=node('option',null,item.title);option.value=item.id;return option;
+  }));
+  if(matches.some(s=>s.id===previous))select.value=previous;
+  else if(track.value==='paramedic'&&matches.some(s=>s.id==='wistech-emr-2025'))select.value='wistech-emr-2025';
+  else if(track.value==='medicine'&&matches.some(s=>s.id==='medical-surgical-nursing'))select.value='medical-surgical-nursing';
+  results.replaceChildren();
+  writeStatus('Επίλεξε βιβλίο από τη διαδρομή '+(track.value==='paramedic'?'Paramedic':'Ιατρική')+' και αναζήτησε όρο.');
+  return matches.length;
+ }
+ track.addEventListener('change',()=>{
+  if(!busy){
+   const n=setTrackBooks();
+   count.dataset.visibleTrackBooks=String(n);
+  }
+ });
  try{
   const [sources,manifest]=await Promise.all([loader.sources(),loader.manifest()]);
   assertNoClinicalApproval(manifest,sources);
   const approved=0; // Rights/clinical approval gates never permit clinical retrieval.
-  const candidates=sources.filter(s=>s.extracted_for_review && canPreviewSource(s.id) &&
+  candidates=sources.filter(s=>s.extracted_for_review && canPreviewSource(s.id) &&
     manifest.books.some(b=>b.source_id===s.id));
   sourceIds=candidates.map(s=>s.id);
-  select.replaceChildren();
-  for(const item of candidates){
-   const option=node('option',null,item.title);option.value=item.id;select.append(option);
-  }
-  if(sourceIds.includes('wistech-emr-2025'))select.value='wistech-emr-2025';
+  const n=setTrackBooks();
+  count.dataset.visibleTrackBooks=String(n);
   count.textContent=manifest.books.length+' εισαγμένα βιβλία · '+candidates.length+
     ' διαθέσιμα για δοκιμαστική βιβλιογραφική προεπισκόπηση · '+approved+' εγκεκριμένα για κλινική ανάκτηση';
-  writeStatus('Επίλεξε βιβλίο και αναζήτησε όρο. Θα φορτωθεί μόνο το συγκεκριμένο βιβλίο.');
  }catch(e){
-  select.disabled=true;run.disabled=true;
+  select.disabled=true;track.disabled=true;run.disabled=true;
   writeStatus('Η βιβλιοθήκη δεν είναι διαθέσιμη: '+String(e.message||e),true);
  }
  function show(items,book,source){
@@ -67,8 +83,8 @@ export async function mountReviewSearch(){
   const q=String(query??'').trim().slice(0,100);
   if(q.length<3){writeStatus('Γράψε τουλάχιστον 3 χαρακτήρες.',true);return;}
   const id=select.value;
-  if(!sourceIds.includes(id)){writeStatus('Μη διαθέσιμο βιβλίο.',true);return;}
-  busy=true;run.disabled=true;select.disabled=true;results.replaceChildren();
+  if(!sourceIds.includes(id)||!candidates.some(s=>s.id===id&&s.learning_tracks.includes(track.value))){writeStatus('Μη διαθέσιμο βιβλίο για αυτή τη διαδρομή.',true);return;}
+  busy=true;run.disabled=true;select.disabled=true;track.disabled=true;results.replaceChildren();
   input.value=q;
   writeStatus('Ελέγχεται το ψηφιακό αποτύπωμα και αναζητούνται πραγματικά αποσπάσματα…');
   try{
@@ -79,7 +95,7 @@ export async function mountReviewSearch(){
     ' τεκμήρια του βιβλίου «'+source.title+'». Όλα παραμένουν μη εγκεκριμένα.');
   }catch(e){
    writeStatus('Η αναζήτηση απέτυχε: '+String(e.message||e),true);
-  }finally{busy=false;run.disabled=false;select.disabled=false;}
+  }finally{busy=false;run.disabled=false;select.disabled=false;track.disabled=false;}
  }
  form.addEventListener('submit',event=>{event.preventDefault();void search();});
  return Object.freeze({search,ready:sourceIds.length===7});
