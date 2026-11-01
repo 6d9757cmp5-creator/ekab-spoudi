@@ -6,6 +6,7 @@ on:
       - functions/answer-grader/greek-answer-fixtures.json
       - functions/answer-grader/offline-fixtures.test.mjs
       - functions/answer-grader/saek-exam-rubrics.json
+      - scripts/report-greek-grading-coverage.mjs
       - functions/answer-grader/source-completeness.mjs
       - functions/answer-grader/semantic-grading-policy.mjs
       - .github/workflows/offline-greek-grading.yml
@@ -25,3 +26,12 @@ jobs:
         run: |
           node --test functions/answer-grader/offline-fixtures.test.mjs
           node --test functions/answer-grader/test.mjs
+          node scripts/report-greek-grading-coverage.mjs
+      - name: Save inspectable Greek grading coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: greek-answer-coverage
+          path: audit-results/greek-grading-coverage.json
+          if-no-files-found: warn
+          retention-days: 30
