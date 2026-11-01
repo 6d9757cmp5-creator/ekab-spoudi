@@ -37,7 +37,7 @@ export function filterCatalog(sources,{query='',stage='all',track='all'}={}){
     if(!matchesLearningTrack(s,track))return false;
     if(stage==='extracted'&&!s.extracted_for_review)return false;
     if(stage==='identified'&&s.extracted_for_review)return false;
-    const haystack=normalizeSearch([s.title,s.publisher,s.source_url,s.license_summary].join(' '));
+    const haystack=normalizeSearch([s.title,s.publisher,s.source_url,s.license_summary,s.edition,...(s.curriculum_topics||[])].join(' '));
     return !needle||haystack.includes(needle);
   });
 }
