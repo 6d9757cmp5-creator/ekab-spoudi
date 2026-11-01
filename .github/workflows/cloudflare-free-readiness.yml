@@ -5,6 +5,7 @@ on:
     paths:
       - scripts/check-cloudflare-free-readiness.mjs
       - scripts/cloudflare-free-plan-preflight.mjs
+      - scripts/probe-cloudflare-worker-public.mjs
       - workers/answer-grader/**
       - functions/answer-grader/free-providers.js
       - ai-grading-client.js
@@ -35,11 +36,15 @@ jobs:
         run: npx --yes wrangler@4 deploy --dry-run --config wrangler.jsonc
       - name: Read-only account subscription probe; missing permissions mean NOT VERIFIED
         run: node scripts/cloudflare-free-plan-preflight.mjs
+      - name: Check whether the configured public Worker responds, with GET only
+        run: node scripts/probe-cloudflare-worker-public.mjs
       - name: Save evidence; account billing status still needs manual confirmation
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cloudflare-free-readiness
-          path: audit-results/cloudflare-free-readiness.json
+          path: |
+            audit-results/cloudflare-free-readiness.json
+            audit-results/cloudflare-worker-public-probe.json
           if-no-files-found: warn
           retention-days: 30
