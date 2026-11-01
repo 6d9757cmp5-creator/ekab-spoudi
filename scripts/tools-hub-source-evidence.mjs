@@ -27,7 +27,7 @@ export function collectToolsHubEvidence(root=process.cwd()){
   {id:'protocol-not-certified',path:'protocols.html',verified:read(root,'protocols.html').includes('όχι δημοσιευμένα ή πιστοποιημένα επιχειρησιακά πρωτόκολλα ΕΚΑΒ')},
   {id:'ecg-synthetic-disclaimer',path:'mentor-ecg.html',verified:read(root,'mentor-ecg.html').includes('δεν είναι πιστό κλινικό ΗΚΓ')},
   {id:'patient-simulator-synthetic',path:'mentor-next.html',verified:read(root,'mentor-next.html').includes('Τα δεδομένα είναι συνθετικά')},
-  {id:'seminars-not-certification',path:'seminar-prep.html',verified:read(root,'seminar-prep.html').includes('δεν απονέμει πιστοποίηση')},
+  {id:'seminars-not-certification',path:'seminar-prep.html',verified:read(root,'seminar-prep.html').toLowerCase().includes('δεν απονέμει πιστοποίηση')},
   {id:'anatomy-3d-description',path:'ui-tools/anatomy-3d/index.html',verified:read(root,'ui-tools/anatomy-3d/index.html').includes('Περιστροφή 360°')},
   {id:'pharmacology-target',path:'farmaka.html',verified:read(root,'farmaka.html').includes('Φαρμακολογία προνοσοκομειακής φροντίδας')},
   {id:'mentor-has-own-entry',path:'tools.html',verified:tools.includes('href="mentor-lab.html"')},
