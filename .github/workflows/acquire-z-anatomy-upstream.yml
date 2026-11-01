@@ -1,0 +1,37 @@
+name: Archive pinned original Z-Anatomy scientific sources
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/acquire-z-anatomy-upstream.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify every original source file
+        run: |
+          dir="tools/anatomy-3d/resources/z-anatomy-source"
+          mkdir -p "$dir"
+          curl -fLsS --retry 3 --retry-all-errors "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/a47f592731dc4056e7b9396dcde58a3586849b37/Z-Anatomy.zip" -o "$dir/Z-Anatomy.zip"
+          test "$(git hash-object "$dir/Z-Anatomy.zip")" = "f43cabc6f366b2a6058dd2ed4a2b3c7b9b2492cb"
+          curl -fLsS --retry 3 --retry-all-errors "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/a47f592731dc4056e7b9396dcde58a3586849b37/Z-Biomechanics.7z" -o "$dir/Z-Biomechanics.7z"
+          test "$(git hash-object "$dir/Z-Biomechanics.7z")" = "0a59584deaf21773ffa3acb063f2cd06f3485a98"
+          curl -fLsS --retry 3 --retry-all-errors "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/a47f592731dc4056e7b9396dcde58a3586849b37/TA2.csv" -o "$dir/TA2.csv"
+          test "$(git hash-object "$dir/TA2.csv")" = "71bef934c23d207550ad1f318ec6edd8551cdba4"
+          curl -fLsS --retry 3 --retry-all-errors "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/a47f592731dc4056e7b9396dcde58a3586849b37/Anatomy-shortcuts.py" -o "$dir/Anatomy-shortcuts.py"
+          test "$(git hash-object "$dir/Anatomy-shortcuts.py")" = "96bb66852b753a10643159c190ac76c89790f7db"
+          curl -fLsS --retry 3 --retry-all-errors "https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/a47f592731dc4056e7b9396dcde58a3586849b37/License.txt" -o "$dir/License.txt"
+          test "$(git hash-object "$dir/License.txt")" = "4d48d7e83d2b79ba4510314c7612b2c3c0a90f67"
+          echo "Verified original Z-Anatomy archives and lexicon source against upstream Git blobs"
+      - name: Preserve original mixed-license archives as private workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-z-anatomy-upstream-research-only
+          path: tools/anatomy-3d/resources/z-anatomy-source/
+          retention-days: 30
+          if-no-files-found: error

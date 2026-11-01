@@ -12,7 +12,7 @@ try{
  browser=await (engine==='webkit'?webkit:chromium).launch({headless:true,args:engine==='chromium'?['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist']:[]});
  const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,serviceWorkers:'block'});
  page=await context.newPage();
- page.on('pageerror',err=>{const event={url:page.url(),error:String(err)};if(event.error.includes('fra.cloud.appwrite.io/v1/ping')&&event.error.includes('access control'))expectedLocalOriginErrors.push(event);else errors.push(event);});
+ page.on('pageerror',err=>{const event={url:page.url(),error:String(err)};if(event.error.includes('fra.cloud.appwrite.io/v1/ping')&&event.error.includes('access control'))expectedLocalOriginErrors.push(event);else {if(errors.length<2)console.error('FULL PAGE ERROR STACK:',err.stack);errors.push(event);}});
  page.setDefaultTimeout(15000);
  await check('Homepage has one 3D entry and four main topics',async()=>{
    const r=await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
@@ -37,6 +37,48 @@ try{
    ensure(await page.locator('#loading').isHidden(),'infinite model loading');
    ensure(await page.locator('#chapterReturn').isVisible(),'back-to-chapter hidden');
    ensure(await page.locator('#anatomyList button').count()>0,'no Greek anatomical names');
+ });
+ await check('SAEK deep-link selects thoracic cage rather than tenth rib',async()=>{
+   const r=await page.goto(base+'ui-tools/anatomy-3d/index.html?mode=skeleton&system=skeletal&focus=thorax&from=01&chapter=3',{waitUntil:'domcontentloaded'});
+   ensure(r?.ok(),'thorax viewer HTTP '+r?.status());
+   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,undefined,{timeout:170000});
+   ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
+   ensure((await page.locator('#selectedName').innerText()).trim()==='Θωρακικός κλωβός','cage was not selected as a group');
+   ensure((await page.locator('#detailSystem').innerText()).includes('ομάδα'),'group details missing');
+   ensure(await page.locator('#isolateBtn').isDisabled(),'single rib accidentally selected');
+ });
+ await check('SAEK links target real multi-part anatomy instead of arbitrary organs',async()=>{
+   await page.goto(base+'saek-course-02.html',{waitUntil:'domcontentloaded'});
+   const phys=page.locator('#lesson-12');await phys.evaluate(x=>{x.open=true});
+   const digestive=phys.locator('a.saek-anatomy-link',{hasText:'Πεπτικό σύστημα'});
+   ensure((await digestive.getAttribute('href')).includes('focus=digestive'),'digestive chapter still selects stomach alone');
+   const glucose=page.locator('#lesson-13');await glucose.evaluate(x=>{x.open=true});
+   const pancreas=glucose.locator('a.saek-anatomy-link',{hasText:'Πάγκρεας'});
+   ensure((await pancreas.getAttribute('href')).includes('focus=pancreas'),'glucose chapter targets wrong organ');
+   await page.goto(base+'saek-course-01.html',{waitUntil:'domcontentloaded'});
+   const chest=page.locator('#lesson-3');await chest.evaluate(x=>{x.open=true});
+   const lungs=chest.locator('a.saek-anatomy-link',{hasText:'Πνευμονικές δομές'});
+   ensure((await lungs.getAttribute('href')).includes('focus=lungs'),'lungs chapter targets only one arbitrary mesh');
+ });
+ await check('3D displays real grouped pulmonary and renal structures',async()=>{
+   for(const [query,title] of [
+     ['mode=organs&system=respiratory&focus=lungs&from=01&chapter=3','Πνευμονικές δομές'],
+     ['mode=organs&system=urinary&focus=kidneys&from=02&chapter=11','Νεφροί']]){
+     const r=await page.goto(base+'ui-tools/anatomy-3d/index.html?'+query,{waitUntil:'domcontentloaded'});
+     ensure(r?.ok(),'3D grouped page HTTP '+r?.status());
+     await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,undefined,{timeout:170000});
+     ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
+     ensure((await page.locator('#selectedName').innerText()).trim()===title,'wrong group selection '+title);
+     ensure(await page.locator('#isolateBtn').isDisabled(),'arbitrary single anatomy selected '+title);
+   }
+ });
+ await check('Unavailable male spinal cord is honestly disclosed',async()=>{
+   const r=await page.goto(base+'ui-tools/anatomy-3d/index.html?mode=organs&system=nervous&focus=cord&from=02&chapter=6',{waitUntil:'domcontentloaded'});
+   ensure(r?.ok(),'spinal cord page HTTP '+r?.status());
+   await page.waitForFunction(()=>document.querySelector('#loading').hidden||!document.querySelector('#errorBox').hidden,undefined,{timeout:170000});
+   ensure(await page.locator('#errorBox').isHidden(),await page.locator('#errorBox').innerText());
+   ensure((await page.locator('#detailName').innerText()).includes('Μη διαθέσιμη'),'unavailable cord was falsely shown as a complete model');
+   ensure(await page.locator('#isolateBtn').isDisabled(),'unexpected spinal cord selection');
  });
  await check('Viewer: skeleton, organs and combined buttons',async()=>{
    for(const mode of ['organs','both','skeleton']){
