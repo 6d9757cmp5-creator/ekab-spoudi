@@ -1,4 +1,4 @@
-/** MENTOR OS live teaching cockpit. No backend calls, legacy progress or AI. */
+/** Independent educational scenario UI with optional MENTOR companion. No backend calls, legacy progress or AI. */
 import {CASE,STAGES,newLiveSession,stepLive,inspectLive,liveSnapshot,loadLive,saveLive,clearLive} from '../core/live-sim.mjs';
 import {LIVE_TOOLS,LIVE_ACTIONS,findLiveTool,findLiveAction,liveResponse} from '../core/live-interactions.mjs';
 import {buildLiveDebrief,exportLiveDebrief} from '../core/live-debrief.mjs';
@@ -126,7 +126,7 @@ function renderCockpit(snapshot){
   }
   if(!snapshot.inspections.length)list.append(create('li','Καμία καταγραφή εργαλείου ακόμη.'));
   target.append(intro,list);
-  const link=create('a','MENTOR DEBRIEF — εκπαιδευτική διαδρομή');
+  const link=create('a','Ανασκόπηση Αποστολής — εκπαιδευτική διαδρομή');
   link.href='#live-debrief';
   target.append(link);
  }else if(LIVE_ACTIONS[selectedTool]){

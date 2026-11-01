@@ -1,7 +1,7 @@
 /**
  * Shared visual learning surface for EKAB Spoudi (home + SAEK/EOPPEP hubs).
  * Local read-only progress -> deterministic educational recommendation.
- * Reuses legacy engines and the SAME Mentor Protocol Lab. No AI/cloud calls.
+ * Reuses legacy engines and the independent Protocol Lab with optional MENTOR guidance. No AI/cloud calls.
  * This module NEVER writes existing learning/grade/notes keys.
  */
 import {analyseLearning,choosePrimary} from './mentor/intelligence/next-step.mjs';
@@ -61,7 +61,7 @@ if(isHome||isSaek||isEop){
      (stats.read?number(stats.read)+' από τα 247 εκπαιδευτικά κεφάλαια έχουν σημειωθεί ως αναγνωσμένα. Συνέχισε το επόμενο κεφάλαιο.':'Δεν υπάρχουν καταγεγραμμένα αναγνωσμένα κεφάλαια σε αυτή τη συσκευή. Επίλεξε μάθημα ΣΑΕΚ.'));
    const primary=chosen==='auto'?pick:choosePrimary(data,chosen);
    const heading=e('div','en-copy');
-   heading.append(e('span','en-overline',isHome?'MENTOR · ΠΡΟΣΩΠΙΚΗ ΔΙΑΔΡΟΜΗ':'MENTOR · ΣΥΝΔΕΔΕΜΕΝΗ ΕΚΠΑΙΔΕΥΣΗ'));
+   heading.append(e('span','en-overline',isHome?'ΠΡΟΣΩΠΙΚΗ ΕΚΠΑΙΔΕΥΤΙΚΗ ΔΙΑΔΡΟΜΗ':'ΣΥΝΔΕΔΕΜΕΝΗ ΕΚΠΑΙΔΕΥΣΗ'));
    heading.append(e('h2','en-title',eop?'Διάβασε ό,τι χρειάζεται επανάληψη.':'Συνέχισε χωρίς να χάνεις τη σειρά.'));
    heading.append(e('p','en-subtitle',eop?'Ο μηχανισμός εντοπίζει τις πραγματικά προγραμματισμένες επαναλήψεις ΕΟΠΠΕΠ.':'Η επόμενη κίνηση συνδέεται με την πρόοδο ΣΑΕΚ και την τελευταία ενότητα μελέτης.'));
    if(isHome){
@@ -84,7 +84,7 @@ if(isHome||isSaek||isEop){
     (eop&&stats.firstDue?'ΕΟΠΠΕΠ · Ερώτηση '+stats.firstDue.replace('EOP-',''):
     (eop?'Προετοιμασία ΕΟΠΠΕΠ':'Κατάρτιση ΣΑΕΚ'));
    const mentorHref=makeJourneyUrl('mentor-protocol-suite.html',{topic,from,focus,...(exactChapter?{chapter:exactChapter[2]}:{})},'lab');
-   links.append(makeLink(mentorHref,'Σχετικό MENTOR Lab →','en-secondary'));
+   links.append(makeLink(mentorHref,'Σχετικό Εργαστήριο Πρωτοκόλλων →','en-secondary'));
    heading.append(links);
    const indicators=e('div','en-indicators');
    if(eop){indicators.append(metric(number(stats.studied)+' / 314','Μελετημένες με τη μέθοδο επανάληψης'),metric(number(stats.due),'Προγραμματισμένες για επανάληψη'));}
