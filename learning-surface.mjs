@@ -5,7 +5,6 @@
  * This module NEVER writes existing learning/grade/notes keys.
  */
 import {analyseLearning,choosePrimary} from './mentor/intelligence/next-step.mjs';
-import {makeJourneyUrl} from './mentor/context/journey.mjs';
 const page=location.pathname.split('/').pop()||'index.html';
 const isHome=page==='index.html',isSaek=page==='saek.html',isEop=page==='eoppep.html';
 if(isHome||isSaek||isEop){
@@ -34,7 +33,7 @@ if(isHome||isSaek||isEop){
    });
   }
   const section=e('section','ekab-next'+(isHome?'':' en-compact'));
-  section.setAttribute('aria-label','Έξυπνη εκπαιδευτική διαδρομή MENTOR');
+  section.setAttribute('aria-label','Προσωπική εκπαιδευτική διαδρομή ATLA');
   section.setAttribute('data-learning-surface','1');
   main.insertBefore(section,anchor);
   let chosen=isHome?'auto':isSaek?'saek':'eoppep';
@@ -61,7 +60,7 @@ if(isHome||isSaek||isEop){
      (stats.read?number(stats.read)+' από τα 247 εκπαιδευτικά κεφάλαια έχουν σημειωθεί ως αναγνωσμένα. Συνέχισε το επόμενο κεφάλαιο.':'Δεν υπάρχουν καταγεγραμμένα αναγνωσμένα κεφάλαια σε αυτή τη συσκευή. Επίλεξε μάθημα ΣΑΕΚ.'));
    const primary=chosen==='auto'?pick:choosePrimary(data,chosen);
    const heading=e('div','en-copy');
-   heading.append(e('span','en-overline',isHome?'MENTOR · ΠΡΟΣΩΠΙΚΗ ΔΙΑΔΡΟΜΗ':'MENTOR · ΣΥΝΔΕΔΕΜΕΝΗ ΕΚΠΑΙΔΕΥΣΗ'));
+   heading.append(e('span','en-overline',isHome?'ATLA · ΠΡΟΣΩΠΙΚΗ ΔΙΑΔΡΟΜΗ':'ATLA · ΣΥΝΔΕΔΕΜΕΝΗ ΕΚΠΑΙΔΕΥΣΗ'));
    heading.append(e('h2','en-title',eop?'Διάβασε ό,τι χρειάζεται επανάληψη.':'Συνέχισε χωρίς να χάνεις τη σειρά.'));
    heading.append(e('p','en-subtitle',eop?'Ο μηχανισμός εντοπίζει τις πραγματικά προγραμματισμένες επαναλήψεις ΕΟΠΠΕΠ.':'Η επόμενη κίνηση συνδέεται με την πρόοδο ΣΑΕΚ και την τελευταία ενότητα μελέτης.'));
    if(isHome){
@@ -78,13 +77,9 @@ if(isHome||isSaek||isEop){
    const links=e('div','en-actions');
    const primaryLink=makeLink(primary.href,primary.label+' ↗','en-primary');
    links.append(primaryLink);
-   const exactChapter=!eop?/^(saek-course-(?:0[1-9]|1\d|20)\.html)#(lesson-(?:[1-9]|[1-9]\d))$/.exec(primary.href):null;
-   const from=exactChapter?exactChapter[1]:(eop?'eoppep.html':'saek.html');
-   const focus=exactChapter?'ΣΑΕΚ · Κεφάλαιο '+exactChapter[2].slice(7):
-    (eop&&stats.firstDue?'ΕΟΠΠΕΠ · Ερώτηση '+stats.firstDue.replace('EOP-',''):
-    (eop?'Προετοιμασία ΕΟΠΠΕΠ':'Κατάρτιση ΣΑΕΚ'));
-   const mentorHref=makeJourneyUrl('mentor-protocol-suite.html',{topic,from,focus,...(exactChapter?{chapter:exactChapter[2]}:{})},'lab');
-   links.append(makeLink(mentorHref,'Σχετικό MENTOR Lab →','en-secondary'));
+   const ask=e('button','en-secondary','Ρώτησε την ATLA →');
+   ask.type='button';ask.dataset.atlaOpen='true';
+   links.append(ask);
    heading.append(links);
    const indicators=e('div','en-indicators');
    if(eop){indicators.append(metric(number(stats.studied)+' / 314','Μελετημένες με τη μέθοδο επανάληψης'),metric(number(stats.due),'Προγραμματισμένες για επανάληψη'));}
@@ -93,7 +88,7 @@ if(isHome||isSaek||isEop){
    const bottom=e('div','en-bottom');
    const why=e('p','en-reason');why.append(e('strong','','Γιατί αυτή η πρόταση; '),document.createTextNode(reason));
    const steps=e('div','en-steps');
-   for(const [i,label] of ['01 · Μάθηση','02 · Εξάσκηση','03 · Debrief'].entries()){
+   for(const [i,label] of ['01 · Μάθηση','02 · Εξάσκηση','03 · Ανασκόπηση'].entries()){
     if(i)steps.append(e('span','en-step-arrow','›'));
     steps.append(e('span','en-step'+((i===0&&!stats.due||i===1&&stats.due)?' current':''),label));
    }
