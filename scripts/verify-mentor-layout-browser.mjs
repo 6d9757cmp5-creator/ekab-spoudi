@@ -1,6 +1,6 @@
 /**
  * Real Chromium smoke for grouped Mentor code. Checks old public URLs,
- * new centralized scripts and CSS, and the rendered training cockpit.
+ * new centralized scripts and CSS, and the rendered ATLA home plus legacy training cockpit.
  */
 import {chromium} from 'playwright';
 import {createServer} from 'node:http';
@@ -51,8 +51,11 @@ try{
  }
  await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
  await page.waitForTimeout(800);
- assert.ok(requests.includes('/mentor/app/home.js'));
- assert.ok(requests.includes('/mentor/styles/mentor-avatar-live.css'));
+ assert.ok(requests.includes('/atla/assistant.mjs'),'ATLA assistant must be loaded');
+ await page.locator('.atla-launcher').click();
+ assert.ok(await page.locator('.atla-panel').isVisible(),'ATLA assistant panel must open');
+ await page.locator('.atla-close').click();
+ assert.ok(!await page.locator('.atla-panel').isVisible(),'ATLA panel must close');
  assert.deepEqual(errors,[], 'Browser script errors: '+errors.join(' | '));
  assert.deepEqual(failures,[],'Missing centralized assets: '+failures.join(' | '));
  console.log('Mentor layout: Chromium public URLs, modules, styles and progress read-only smoke PASSED');
