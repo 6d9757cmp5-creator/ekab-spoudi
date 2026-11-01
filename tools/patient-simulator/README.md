@@ -16,3 +16,9 @@ Canonical location: tools/patient-simulator/. Ο simulator δεν αποτελε
 
 ## Visual Baseline A — στόχος Body Interact ή παραπάνω
 Ο [αναλυτικός σχεδιασμός](../../docs/SIMULATION_COCKPIT_VISUAL_SPEC_2026.md) περιγράφει τη μελλοντική σκηνή, monitor, εργαλεία, κλινική αξιολόγηση και πλήρη quality gates. Το [cockpit-theme.css](styles/cockpit-theme.css) είναι η **πρώτη** εφαρμοσμένη φάση κοινής οπτικής γλώσσας, πάνω από το λειτουργικό `next-sim.css`. Τα `scripts/verify-cockpit-visual.mjs` tests παίρνουν πραγματικά screenshots desktop/tablet/mobile στο GitHub Actions και ελέγχουν overflow, panel layout, touch target και renderer ready/fallback. Αυτά **δεν αποδεικνύουν** σημερινή οπτική ισοδυναμία με το Body Interact.
+
+
+## v0.6 — συγχρονισμός ορατής GLB κάμερας
+Ο προσομοιωτής συνδέει τα υπάρχοντα πλήκτρα προβολής με την πραγματική κάμερα του static GLB μέσω `app/patient-camera.mjs` και `app/next-sim.mjs`. Ο υπολογισμός εστιάζει μόνο προσεγγιστικά σε περιοχές όρθιων μοντέλων, με σαφή ένδειξη ότι **δεν** είναι κλινική εξέταση· για τα ξαπλωμένα assets δεν προβάλλονται ατεκμηρίωτα anatomical landmarks.
+
+Δοκιμές: `node --test tools/patient-simulator/app/patient-camera.test.mjs` και `scripts/app-load-smoke.mjs` στον πραγματικό browser. Κριτήριο μέλλοντος: ενοποίηση 3D σκηνής και ιατρικά επικυρωμένα μοντέλα/αποτελέσματα — δεν επιτεύχθηκε ακόμη.

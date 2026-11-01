@@ -1,6 +1,7 @@
-/** MENTOR Next: first-party UI/controller for the original simulated case. */
+/** ΕΚΑΒ Σπουδή: independent Patient Simulator controller; MENTOR OS is an optional companion. */
 import {CASES,getCase,TOOLS,ACTIONS,newSession,loadSession,loadCaseSession,caseProgress,saveSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,validSession} from '../core/next-sim.mjs';
 import {mountPatientScene} from './next-scene.mjs';
+import {patientCameraPreset} from './patient-camera.mjs';
 import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
@@ -27,14 +28,29 @@ const READY_ASSETS=Object.freeze({
 const readyToggle=$('next-ready-toggle'),readyOverlay=$('next-ready-overlay'),
  readyModel=$('next-ready-model'),readyPose=$('next-ready-pose'),
  readyStatus=$('next-ready-status');
-let readyEnabled=false,readyLoading=false,lastReadyPerson=state.person;
+let readyEnabled=false,readyLoading=false,lastReadyPerson=state.person,lastCameraKey='';
 function readyURL(key){return new URL(READY_ASSETS[key],import.meta.url).href;}
+function applyReadyCamera(force=false){
+ if(!readyEnabled||readyModel.dataset.assetReady!=='true')return;
+ const key=readyPose.value+':'+state.view;
+ if(!force&&key===lastCameraKey)return;
+ const geometry={dimensions:readyModel.getDimensions?.(),center:readyModel.getBoundingBoxCenter?.()};
+ const settings=patientCameraPreset(state.view,readyPose.value,geometry);
+ readyModel.setAttribute('camera-orbit',settings.orbit);
+ readyModel.setAttribute('camera-target',settings.target);
+ readyModel.setAttribute('field-of-view',settings.fieldOfView);
+ readyModel.dataset.focusView=settings.view;
+ readyStatus.textContent=settings.message;
+ lastCameraKey=key;
+}
 function updateReadyModel(pose){
  if(!Object.hasOwn(READY_ASSETS,pose))return;
  readyPose.value=pose;
  const src=readyURL(pose);
  if(readyModel.getAttribute('src')!==src){
   readyStatus.textContent='Φόρτωση πραγματικού 3D μοντέλου…';
+  readyModel.dataset.assetReady='loading';
+  lastCameraKey='';
   readyModel.setAttribute('src',src);
  }
  readyModel.setAttribute('alt','Στατικό τρισδιάστατο μοντέλο '+pose+', CC0. Δεν αποτελεί κλινικό εύρημα.');
@@ -43,6 +59,8 @@ function disableRealisticMode(){
  readyEnabled=false;
  readyOverlay.hidden=true;
  readyModel.removeAttribute('src');
+ readyModel.removeAttribute('data-focus-view');
+ lastCameraKey='';
  readyToggle.disabled=false;
  readyToggle.textContent='✦ Έτοιμοι 3D ασθενείς';
  readyToggle.setAttribute('aria-pressed','false');
@@ -71,8 +89,8 @@ async function enableRealisticMode(){
 readyToggle.addEventListener('click',()=>readyEnabled?disableRealisticMode():enableRealisticMode());
 readyPose.addEventListener('change',()=>{if(readyEnabled)updateReadyModel(readyPose.value);});
 readyModel.addEventListener('load',()=>{
- readyStatus.textContent='Έτοιμο 3D μοντέλο · περιστροφή και μεγέθυνση με αφή ή ποντίκι';
  readyModel.dataset.assetReady='true';
+ applyReadyCamera(true);
 });
 readyModel.addEventListener('error',()=>{
  readyStatus.textContent='Αδυναμία εμφάνισης μοντέλου. Ενεργή η παλιά σκηνή 3D.';
@@ -267,6 +285,7 @@ function render(){
   lastReadyPerson=state.person;
   updateReadyModel(state.person==='b'?'amara':'alex');
  }
+ if(readyEnabled)applyReadyCamera();
  renderer.setEnvironment?.(currentCase.scene);
  renderer.setFocus(state.view==='scene'?'scene':state.person,state.view);
  renderer.setPaused(!state.playing);

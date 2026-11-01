@@ -243,6 +243,18 @@ try {
     }
     if(!await page.locator('#next-ready-toggle').getAttribute('aria-pressed').then(x=>x==='true'))
       throw Error(device+': realistic GLB mode was not enabled');
+    // v0.6 camera linkage: real loaded GLB receives the same visual focus state as controls.
+    await page.locator('[data-next-view="head"]').click();
+    await page.waitForFunction(()=>document.querySelector('#next-ready-model')?.dataset.focusView==='head',null,{timeout:12000});
+    const headOrbit=await page.locator('#next-ready-model').getAttribute('camera-orbit');
+    if(!headOrbit?.includes('65%'))throw Error(device+': head focus did not adjust the real GLB camera');
+    const headStatus=await page.locator('#next-ready-status').textContent();
+    if(!headStatus?.includes('δεν αποτελεί εξέταση'))throw Error(device+': model-viewer preview lacked anatomical disclaimer');
+    await page.locator('[data-next-view="full"]').click();
+    await page.waitForFunction(()=>document.querySelector('#next-ready-model')?.dataset.focusView==='full',null,{timeout:12000});
+    if(!(await page.locator('#next-ready-model').getAttribute('camera-orbit'))?.includes('110%'))
+      throw Error(device+': full-body focus did not update real GLB');
+    console.log('PASS '+device+': native CC0 GLB camera follows real view toolbar with no clinical landmark claims');
     await page.locator('#next-ready-pose').selectOption('daniel');
     if(!await page.locator('#next-ready-model').getAttribute('src').then(x=>x.includes('daniel-lying.glb')))
       throw Error(device+': real Daniel 3D model was not selected');

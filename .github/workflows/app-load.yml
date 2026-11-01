@@ -62,6 +62,8 @@ jobs:
           node --check tools/patient-simulator/core/next-cases.mjs
           node --check tools/patient-simulator/core/next-sim.mjs
           node --check tools/patient-simulator/app/next-sim.mjs
+          node --check tools/patient-simulator/app/patient-camera.mjs
+          node --test tools/patient-simulator/app/patient-camera.test.mjs
           node --check tools/patient-simulator/app/next-scene.mjs
           node --check tools/patient-simulator/app/next-patient-mesh.mjs
           node --test tools/patient-simulator/app/next-patient-mesh.test.mjs
