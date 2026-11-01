@@ -49,7 +49,7 @@ export async function assessWithAi(article,abstract,{env={},fetcher=fetch}={}){
  try{
   const r=await fetcher('https://api.anthropic.com/v1/messages',{method:'POST',
    headers:{'content-type':'application/json','anthropic-version':'2023-06-01','x-api-key':env.ATLA_RESEARCH_ANTHROPIC_API_KEY},
-   body:JSON.stringify({model:'claude-haiku-5-5',max_tokens:420,temperature:0,system,
+   body:JSON.stringify({model:'claude-haiku-5-5',max_tokens:420,system,
      messages:[{role:'user',content:input}]}),signal:AbortSignal.timeout(25000)});
   if(!r.ok)return {status:'ai-request-failed',assessment:null};
   const answer=await r.json();
