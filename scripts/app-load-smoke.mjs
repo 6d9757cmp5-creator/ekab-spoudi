@@ -223,11 +223,24 @@ try {
       const response=await page.request.get('http://127.0.0.1:8765/mentor/assets/patients/'+name);
       if(!response.ok()||(await response.body()).length<3000000)throw Error(device+': ready-made GLB absent '+name);
     }
-    await page.waitForFunction(()=>{
-      const overlay=document.querySelector('#next-ready-overlay');
-      const viewer=document.querySelector('#next-ready-model');
-      return overlay&&!overlay.hidden&&viewer?.getAttribute('src')?.includes('alex-standing.glb');
-    },null,{timeout:60000});
+    try{
+      await page.waitForFunction(()=>{
+        const overlay=document.querySelector('#next-ready-overlay');
+        const viewer=document.querySelector('#next-ready-model');
+        return overlay&&!overlay.hidden&&viewer?.getAttribute('src')?.includes('alex-standing.glb');
+      },null,{timeout:15000});
+    }catch(error){
+      const info=await page.evaluate(()=>({
+        readyState:document.readyState,connection:navigator.connection?.saveData,
+        button:document.querySelector('#next-ready-toggle')?.textContent,
+        hidden:document.querySelector('#next-ready-overlay')?.hidden,
+        src:document.querySelector('#next-ready-model')?.getAttribute('src'),
+        status:document.querySelector('#next-ready-status')?.textContent,
+        result:document.querySelector('#next-result')?.textContent,
+        customElement:!!customElements.get('model-viewer')
+      }));
+      throw Error(device+': real patient viewer did not start '+JSON.stringify(info));
+    }
     if(!await page.locator('#next-ready-toggle').getAttribute('aria-pressed').then(x=>x==='true'))
       throw Error(device+': realistic GLB mode was not enabled');
     await page.locator('#next-ready-pose').selectOption('daniel');

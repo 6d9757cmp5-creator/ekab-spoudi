@@ -325,6 +325,7 @@ window.addEventListener('pagehide',()=>{clearInterval(clock);meshObserver.discon
 render();
 // Heavy GLBs load after core controls are interactive; reduced-data users opt in manually.
 if(!navigator.connection?.saveData){
- window.addEventListener('load',()=>{void enableRealisticMode();},{once:true});
+ if(document.readyState==='complete')void enableRealisticMode();
+ else window.addEventListener('load',()=>{void enableRealisticMode();},{once:true});
 }
 
