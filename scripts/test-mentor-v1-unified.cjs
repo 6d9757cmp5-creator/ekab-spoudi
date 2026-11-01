@@ -22,7 +22,8 @@ test('V1 has one visible tutor and no faculty picker',()=>{
  assert.match(html,/id="mentor-personal"/);
  assert.ok(html.includes('src="mentor/app/adaptive.js"'));
  assert.ok(html.includes('src="mentor/app/personal-v1.js"'));
- assert.doesNotMatch(html,/MENTOR OS/);
+ assert.match(html,/<title>MENTOR OS · Ψηφιακός εκπαιδευτής/);
+ assert.equal((html.match(/id="mentor-personal"/g)||[]).length,1,'single MENTOR tutor panel');
  assert.doesNotMatch(html,/choose-faculty|Η ομάδα των 5/);
  assert.match(js,/ekab\.mentor\.unified\.v1/);
  assert.doesNotMatch(js,/ekab-eoppep-official-v15|ekab\.saek\.exams\.v1|cloud-sync/);
