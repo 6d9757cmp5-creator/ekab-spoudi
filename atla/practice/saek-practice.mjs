@@ -43,6 +43,7 @@ export function installSaekPractice(root=document){
   controls.append(compare,atlas);
   const mapped=saekTool(file,chapter.id);
   // A lesson with no approved link remains a lesson; do not show irrelevant tools.
+  let contextualResult=null;
   if(mapped){
    const status=$('p','atlas-contextual-result');
    status.setAttribute('role','status');status.setAttribute('aria-live','polite');
@@ -63,7 +64,7 @@ export function installSaekPractice(root=document){
     status.replaceChildren(why,link);
    });
    controls.append(explain,ready);
-   inner.append(status);
+   contextualResult=status;
   }
   // Even a matching title is insufficient: no cases are enabled without all reviews.
   const verifiedScenario=scenarioForChapter(file,chapter.id);
@@ -73,6 +74,7 @@ export function installSaekPractice(root=document){
   }
   const note=$('p','atlas-practice-disclaimer','Αυτό είναι αυτοέλεγχος ανάκλησης, όχι βαθμολογούμενη εξέταση. Τα κλινικά περιστατικά θα συνδέονται μόνο μετά από έλεγχο συνάφειας.');
   inner.append(description,label,answer,controls,reference,note);
+  if(contextualResult)controls.after(contextualResult);
   practice.append(summary,inner);
   // Put in the actual lesson, never a separate destination or duplicated textbook.
   content.append(practice);
