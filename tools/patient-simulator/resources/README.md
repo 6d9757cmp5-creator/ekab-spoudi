@@ -15,3 +15,9 @@
 **Σύνδεση με το Anatomy Lab** γίνεται μόνο μέσω μελλοντικού ATLA context, χωρίς κοινό 3D engine.
 
 Πλήρης αναφορά: `docs/ATLA_FREE_3D_RESOURCE_IMPORT_RESULTS_2026-11-01.md`.
+
+## Επέκταση CC0 Cockpit πόρων (01/11/2026)
+
+Στο επίσημο MakeHuman core υπάρχουν πλέον **10 validated CC0 source files**: `base.obj`, `base.mhclo`, `rigs/default.mhskel`, `rigs/default_weights.mhw`, `animations/walks/walk1.bvh`, `eyes/high-poly/high-poly.obj`, `eyes/high-poly/high-poly.mhclo`, `eyes/materials/brown_eye.png`, `eyes/materials/brown.mhmat`, `skins/default.mhmat`. Διατηρούνται original license notice, source SHA και δύο manifests (core + supplemental). Αυτά είναι πηγές κατασκευής μοντέλου με skeleton/weights, **όχι ήδη στημένο, animation-retargeted 3D patient**.
+
+Τα δύο επαληθευμένα Quaternius CC0 GLBs διατηρούνται στον διαφορετικό υποφάκελο `resources/quaternius/`. Η 3D Ανατομία, ο πλήρης BP3D 4.3 άτλας και οι HRA 54 mesh models διατηρούνται **εκτός** του Cockpit: `tools/anatomy-3d/resources/`. Αναλυτική ακριβής απογραφή: `docs/ATLA_3D_ASSET_INTAKE_VERIFIED.md`.
