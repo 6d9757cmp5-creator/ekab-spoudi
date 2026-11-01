@@ -22,7 +22,7 @@ function route(entry){
  if(/devices|hardware|prosthetics/.test(category))return cockpit;
  return null;
 }
-const relevant=/heart|cardia|lung|brain|spine|spinal|skull|cran|nerve|arter|vein|chest|thorax|rib|kidney|pelvis|eye|ear|muscle|face|bone|larynx|trachea|liver|hip|femur|humerus|hand|foot|patella|skeleton|vascular|orthop|airway|oxygen|intubat|splint|cast|defibrill|paramedic|ambulance|medical|anatom/i;
+const relevant=/\b(?:heart|cardiac|lung|brain|spine|spinal|skull|cranial|nerve|artery|vein|chest|thorax|rib|kidney|pelvis|eye|ear|muscle|face|bone|larynx|trachea|liver|hip|femur|humerus|hand|foot|patella|skeleton|vascular|orthopedic|airway|oxygen|intubation|splint|cast|defibrillator|paramedic|ambulance|medical|anatomy)\b|(?:cardio|pulmon|vertebr|neuro|crani|orthop|anatom)/i;
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 async function query(url){
  for(let n=0;n<2;n++){
