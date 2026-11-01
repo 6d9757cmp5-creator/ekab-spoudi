@@ -1,3 +1,4 @@
+import {saekTool,nextContextualAction,scenarioForChapter} from '../learning/contextual-tools.mjs';
 /**
  * Chapter-local practice for the real SAEK reader.
  * Uses only the already-present chapter heading/SOS; no invented medical facts,
@@ -40,6 +41,36 @@ export function installSaekPractice(root=document){
   const atlas=$('button','atlas-practice-atlas','Ρώτησε το ATLAS');atlas.type='button';atlas.dataset.atlaOpen='true';
   atlas.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('ekab:atlas-context',{detail:{source:file,chapter:chapter.id,focus:title}}));});
   controls.append(compare,atlas);
+  const mapped=saekTool(file,chapter.id);
+  // A lesson with no approved link remains a lesson; do not show irrelevant tools.
+  if(mapped){
+   const status=$('p','atlas-contextual-result');
+   status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+   const explain=$('button','atlas-practice-btn','Δεν το κατάλαβα');
+   explain.type='button';
+   explain.addEventListener('click',()=>{
+    const choice=nextContextualAction({file,chapter:chapter.id,feedback:'need_explanation'});
+    reference.hidden=false;compare.textContent='Απόκρυψη SOS';
+    status.textContent=choice.title+'. Η επεξήγηση δεν σημαίνει αποτυχία ή βαθμολόγηση.';
+   });
+   const ready=$('button','atlas-practice-btn','Θέλω να εξασκηθώ');
+   ready.type='button';
+   ready.addEventListener('click',()=>{
+    const choice=nextContextualAction({file,chapter:chapter.id,feedback:'ready_to_practice'});
+    if(!choice)return;
+    const link=$('a','atlas-practice-link',choice.title);link.href=choice.href;
+    const why=$('p','atlas-contextual-why',choice.reason);
+    status.replaceChildren(why,link);
+   });
+   controls.append(explain,ready);
+   inner.append(status);
+  }
+  // Even a matching title is insufficient: no cases are enabled without all reviews.
+  const verifiedScenario=scenarioForChapter(file,chapter.id);
+  if(verifiedScenario){
+   const link=$('a','atlas-practice-cockpit','Σχετική αποστολή');
+   link.href=verifiedScenario.href;controls.append(link);
+  }
   const note=$('p','atlas-practice-disclaimer','Αυτό είναι αυτοέλεγχος ανάκλησης, όχι βαθμολογούμενη εξέταση. Τα κλινικά περιστατικά θα συνδέονται μόνο μετά από έλεγχο συνάφειας.');
   inner.append(description,label,answer,controls,reference,note);
   practice.append(summary,inner);
