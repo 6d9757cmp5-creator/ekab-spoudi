@@ -32,6 +32,16 @@ jobs:
           node --check scripts/app-load-smoke.mjs
           node scripts/verify-static-pages.mjs
           node scripts/verify-tool-boundaries.mjs
+          node scripts/verify-specialized-tools.mjs
+          node scripts/verify-pharmacology.mjs
+          node scripts/test-seminar-sync.cjs
+          node tools/anatomy-3d/test-greek-names.mjs
+          node --check tools/anatomy-3d/hires-anatomy.js
+          node --check tools/pharmacology/farmaka-ui.js
+          node --check tools/seminars/seminar-prep.js
+          node --check tools/ecg-lab/app/ecg.js
+          node --check tools/ecg-lab/app/ecg-practice.js
+          node --test tools/ecg-lab/core/ecg-practice.test.mjs tools/ecg-lab/core/ecg-synthetic.test.mjs
           node -e "JSON.parse(require('fs').readFileSync('version.json','utf8'))"
           node --check protocols-data.mjs
           node --check protocols-page.mjs
