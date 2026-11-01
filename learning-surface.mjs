@@ -33,7 +33,7 @@ if(isHome||isSaek||isEop){
    });
   }
   const section=e('section','ekab-next'+(isHome?'':' en-compact'));
-  section.setAttribute('aria-label','Προσωπική εκπαιδευτική διαδρομή ATLA');
+  section.setAttribute('aria-label','Προσωπική εκπαιδευτική διαδρομή ATLAS');
   section.setAttribute('data-learning-surface','1');
   main.insertBefore(section,anchor);
   let chosen=isHome?'auto':isSaek?'saek':'eoppep';
@@ -60,7 +60,7 @@ if(isHome||isSaek||isEop){
      (stats.read?number(stats.read)+' από τα 247 εκπαιδευτικά κεφάλαια έχουν σημειωθεί ως αναγνωσμένα. Συνέχισε το επόμενο κεφάλαιο.':'Δεν υπάρχουν καταγεγραμμένα αναγνωσμένα κεφάλαια σε αυτή τη συσκευή. Επίλεξε μάθημα ΣΑΕΚ.'));
    const primary=chosen==='auto'?pick:choosePrimary(data,chosen);
    const heading=e('div','en-copy');
-   heading.append(e('span','en-overline',isHome?'ATLA · ΠΡΟΣΩΠΙΚΗ ΔΙΑΔΡΟΜΗ':'ATLA · ΣΥΝΔΕΔΕΜΕΝΗ ΕΚΠΑΙΔΕΥΣΗ'));
+   heading.append(e('span','en-overline',isHome?'ATLAS · ΠΡΟΣΩΠΙΚΗ ΔΙΑΔΡΟΜΗ':'ATLAS · ΣΥΝΔΕΔΕΜΕΝΗ ΕΚΠΑΙΔΕΥΣΗ'));
    heading.append(e('h2','en-title',eop?'Διάβασε ό,τι χρειάζεται επανάληψη.':'Συνέχισε χωρίς να χάνεις τη σειρά.'));
    heading.append(e('p','en-subtitle',eop?'Ο μηχανισμός εντοπίζει τις πραγματικά προγραμματισμένες επαναλήψεις ΕΟΠΠΕΠ.':'Η επόμενη κίνηση συνδέεται με την πρόοδο ΣΑΕΚ και την τελευταία ενότητα μελέτης.'));
    if(isHome){
@@ -77,7 +77,7 @@ if(isHome||isSaek||isEop){
    const links=e('div','en-actions');
    const primaryLink=makeLink(primary.href,primary.label+' ↗','en-primary');
    links.append(primaryLink);
-   const ask=e('button','en-secondary','Ρώτησε την ATLA →');
+   const ask=e('button','en-secondary','Ρώτησε το ATLAS →');
    ask.type='button';ask.dataset.atlaOpen='true';
    links.append(ask);
    heading.append(links);
