@@ -104,7 +104,7 @@ try{
  assert.equal(await page.locator('#ecg-practice').count(),1,'Existing ECG engine remains the only practice page');
  await page.goto(base+'theory.html?question=EOP-A-070',{waitUntil:'domcontentloaded'});
  await page.locator('#atlas-eoppep-tool').waitFor({state:'visible',timeout:30000});
- assert.match(await page.locator('#catalogReaderNumber').innerText(),/Ομάδα A · Ερώτηση 70/);
+ assert.match(await page.locator('#catalogReaderNumber').textContent(),/Ομάδα A · Ερώτηση 70/);
  assert.equal(await page.locator('#atlas-eoppep-tool .atlas-contextual-link').count(),0);
  await page.locator('#atlas-eoppep-tool .atlas-contextual-action').click();
  const eopHref=await page.locator('#atlas-eoppep-tool .atlas-contextual-link').getAttribute('href');
