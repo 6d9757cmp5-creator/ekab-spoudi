@@ -101,10 +101,13 @@ export async function askChunk(key,system,path,mode,text,fetchImpl,wait=sleep){
 }
 export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=globalThis.fetch}={}){
  const paths=choosePaths(changed(),manual),key=process.env.ANTHROPIC_API_KEY||'';
- const report={schema_version:1,created_at:new Date().toISOString(),commit:process.env.GITHUB_SHA||git(['rev-parse','HEAD'])||null,
+ const report={schema_version:1,educational_rule:'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md',created_at:new Date().toISOString(),commit:process.env.GITHUB_SHA||git(['rev-parse','HEAD'])||null,
   requested_count:paths.length,reviewed_count:0,files:[],findings:[],pending:paths.slice(MAX_FILES).map(path=>({path,reason:'file_limit'})),status:'not_applicable'};
  if(!paths.length)return report;
- let rules;try{rules=await readFile(resolve(root,RULES),'utf8');}
+ let rules;try{rules=await readFile(resolve(root,RULES),'utf8');
+  const completion=await readFile(resolve(root,'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md'),'utf8');
+  rules+='\n\nBINDING EDUCATIONAL COMPLETION POLICY (2026-11-01):\n'+completion+'\nDo not demand universal physician signoff for individually source-verified educational entries. Distinguish educational verification from clinical protocol certification. Only flag a specific entry for human clinical review when concrete unresolved clinical uncertainty or safety risk exists. Do not treat clinicalReview labels alone as a failure. Report actionable, located, source-grounded findings; unsupported claims remain unverified. Never waive real safety concerns.';
+ }
  catch{report.status='error_missing_review_rules';return report;}
  // Cost control: identical text (same rules + same chunk) is never sent twice, and a run
  // spends at most MAX_CALLS paid calls; the rest stays honestly pending for the next run.
