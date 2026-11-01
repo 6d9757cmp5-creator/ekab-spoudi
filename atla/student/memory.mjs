@@ -10,7 +10,7 @@ export const MAX_TURNS=12;
 export const MAX_TURN_CHARS=700;
 export const LEVELS=["beginner","student","advanced","scientific"];
 export const LEVEL_LABELS={beginner:"Αρχάριος",student:"Σπουδαστής",advanced:"Προχωρημένος",scientific:"Επιστημονικά αναλυτικός"};
-const MODES=["local","ai","refusal","info"];
+const MODES=["local","ai","refusal","info","mock"];
 
 const clip=(v,n)=>String(v??"").slice(0,n);
 
@@ -44,7 +44,7 @@ export function clearTurns(storage){
 }
 /** Last few turns, text only, for the AI request (never sources or modes). */
 export function historyForAi(turns,max=4){
- return turns.filter(t=>t.mode!=="refusal"&&t.mode!=="info").slice(-max).map(t=>({role:t.role==="user"?"user":"assistant",text:clip(t.text,300)}));
+ return turns.filter(t=>t.mode!=="refusal"&&t.mode!=="info"&&t.mode!=="mock").slice(-max).map(t=>({role:t.role==="user"?"user":"assistant",text:clip(t.text,300)}));
 }
 
 export function defaultLearning(){
