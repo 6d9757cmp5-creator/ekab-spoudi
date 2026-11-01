@@ -3,7 +3,7 @@
    anatomically fitted/transformed male-derived bones and other systems (not native female scans).
    Data CC BY 4.0, code original. No reads/writes to student progress or accounts. */
 import { anatomicalGreek, anatomyName, eligibleQuizName } from './greek-names.js';
-import {ANATOMY_GROUPS,cageKind,matchesCageGroup} from './cage-focus.mjs';
+import {FOCUS_GROUPS,FOCUS_FLAGS,focusMasks,focusMembers} from './focus-groups.mjs';
 const threeURL='https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
 const PROVIDERS={
   male:{
@@ -62,12 +62,12 @@ const ui={sex:'male',mode:'skeleton',system:'all',selected:null,groupFocus:null,
 /* Safe, shareable chapter links. Values are allow-listed; no storage and no open redirect. */
 function readDeepLink(){
  const q=new URLSearchParams(location.search),mode=q.get('mode'),sex=q.get('sex'),system=q.get('system'),focus=q.get('focus'),from=q.get('from'),chapter=q.get('chapter');
- const validSystems=new Set(Object.keys(systems));
+ const validSystems=new Set(['all',...Object.keys(systems)]);
  return {
   mode:['skeleton','organs','both'].includes(mode)?mode:null,
   sex:['male','female'].includes(sex)?sex:null,
   system:validSystems.has(system)?system:null,
-  focus:/^(skull|vertebra|spinalcord|lung|rib|ribs|thorax|heart|aorta|brain|liver|stomach|trachea|kidney|uterus|thyroid|femur|humerus|pelvis)$/.test(focus||'')?focus:null,
+  focus:(FOCUS_GROUPS[focus]||/^(skull|vertebra|spinalcord|lung|rib|heart|aorta|brain|liver|stomach|trachea|kidney|uterus|thyroid|femur|humerus|pelvis)$/.test(focus||''))?focus:null,
   from:/^(01|02|05|10|14|17|18)$/.test(from||'')?from:null,
   chapter:/^(?:[1-9]|1\d|2\d)$/.test(chapter||'')?Number(chapter):null
  }
@@ -105,40 +105,44 @@ function configureLessonReturn(){
 }
 function focusRequestedStructure(){
  if(!requestedFocus||!atlas)return;
- // SAEK group labels cannot be represented by one arbitrarily chosen mesh.
- if(ANATOMY_GROUPS[requestedFocus]){
+ if(FOCUS_GROUPS[requestedFocus]){
   const group=requestedFocus;
-  const items=atlas.parts.filter(p=>p._loaded&&partVisible(p)&&matchesCageGroup(p,group)&&Array.isArray(p.bounds)&&p.bounds.length===2);
-  if(items.length){
+  const resolved=focusMembers(atlas.parts.filter(partVisible),group);
+  if(resolved.valid){
    const lo=[Infinity,Infinity,Infinity],hi=[-Infinity,-Infinity,-Infinity];
-   for(const p of items)for(let i=0;i<3;i++){
+   for(const p of resolved.items)for(let i=0;i<3;i++){
     lo[i]=Math.min(lo[i],p.bounds[0][i]);hi[i]=Math.max(hi[i],p.bounds[1][i]);
    }
    ui.selected=null;selectedPartIndex=-1;ui.groupFocus=group;
    describeSelected();list();updateScene();focusPart({bounds:[lo,hi]});
   }else{
+   ui.selected=null;ui.groupFocus=null;selectedPartIndex=-1;
+   describeSelected();updateScene();
    $('detailCard').hidden=false;
-   $('detailName').textContent='Δεν βρέθηκε αντιστοίχιση 3D';
-   $('detailSystem').textContent='Δεν επιλέχθηκε αυθαίρετη πλευρά';
-   $('detailDescription').textContent='Το σχετικό σύστημα άνοιξε, αλλά δεν βρέθηκε η ομάδα δομών στον άτλαντα.';
-   $('detailOriginal').textContent='';$('detailStudy').hidden=true;
+   $('detailName').textContent='Μη διαθέσιμη 3D δομή';
+   $('detailSystem').textContent=FOCUS_GROUPS[group].name;
+   $('detailDescription').textContent=resolved.reason+' Δεν εμφανίζεται άσχετο όργανο ως υποκατάστατο.';
+   $('detailOriginal').textContent='';
+   $('detailStudy').hidden=true;
   }
   return;
  }
  if(!FOCUS_TERMS[requestedFocus])return;
  const regex=FOCUS_TERMS[requestedFocus];
- const matched=atlas.parts.filter(p=>partVisible(p)&&regex.test(p.name));
+ const matched=atlas.parts.filter(p=>p._loaded&&partVisible(p)&&regex.test(p.name));
  const ranked=matched.sort((a,b)=>{
-  const aName=a.name.toLowerCase(),bName=b.name.toLowerCase();
-  const key=requestedFocus.toLowerCase();
+  const aName=a.name.toLowerCase(),bName=b.name.toLowerCase(),key=requestedFocus.toLowerCase();
   const exactA=aName===key?0:aName.startsWith(key)?1:2;
   const exactB=bName===key?0:bName.startsWith(key)?1:2;
-  return exactA-exactB||a.name.length-b.name.length
+  return exactA-exactB||a.name.length-b.name.length;
  });
  if(ranked.length){choose(ranked[0].id);return}
- // Keep the correct system visible; do not highlight the wrong anatomical structure.
- $('detailName').textContent='Σχετικό ανατομικό σύστημα';
- $('detailDescription').textContent='Το σύστημα του μαθήματος έχει ανοίξει, αλλά δεν βρέθηκε ασφαλής αντιστοίχιση ενός συγκεκριμένου 3D πλέγματος για αυτό το σημείο.';
+ $('detailCard').hidden=false;
+ $('detailName').textContent='Μη διαθέσιμη 3D δομή';
+ $('detailSystem').textContent='Καμία ασφαλής αντιστοίχιση';
+ $('detailDescription').textContent='Δεν βρέθηκε διαθέσιμο αναγνωρίσιμο πλέγμα για το ζητούμενο όργανο.';
+ $('detailOriginal').textContent='';
+ $('detailStudy').hidden=true;
 }
 
 let THREE,renderer,scene,camera,atlas,meshChunks=[],materials=[],meshData=[],partsById=new Map(),allMeshes=[],anim=0,token=0,abort=null,loading=false,selectedPartIndex=-1;
@@ -157,16 +161,16 @@ function setControls(){document.querySelectorAll('[data-sex]').forEach(b=>{const
 const TOPIC_LINKS={skeletal:2,muscular:9,connective:9,respiratory:3,digestive:12,cardiac:10,arterial:10,venous:10,nervous:8,brain:8,urinary:13,reproductive:13};
 const INTRO={skeletal:'Οστό που συμμετέχει στη στήριξη, στην προστασία ή στην κίνηση του σώματος.',cardiac:'Η καρδιά προωθεί το αίμα στην πνευμονική και στη συστηματική κυκλοφορία.',respiratory:'Δομή που συμμετέχει στη μεταφορά αέρα ή στην αναπνοή.',digestive:'Δομή που συμμετέχει στην πέψη, στην απορρόφηση ή στη μεταφορά τροφής.',nervous:'Δομή του συστήματος που μεταφέρει και επεξεργάζεται νευρικά σήματα.',urinary:'Δομή που συμμετέχει στη δημιουργία, στη μεταφορά ή στην αποβολή ούρων.',reproductive:'Δομή που ανήκει στο αναπαραγωγικό σύστημα.'};
 function describeSelected(){
- const p=partsById.get(ui.selected),card=$('detailCard'),group=ANATOMY_GROUPS[ui.groupFocus];
+ const p=partsById.get(ui.selected),card=$('detailCard'),group=FOCUS_GROUPS[ui.groupFocus];
  card.hidden=!p&&!group;
  const banner=$('selectedBanner');banner.hidden=(!p&&!group)||ui.quiz;
  card.querySelector('.detail-label').textContent=group?'ΕΠΙΛΕΓΜΕΝΗ ΟΜΑΔΑ ΔΟΜΩΝ':'ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ';
  if(group){
   $('selectedName').textContent=group.name;
-  $('detailIcon').textContent='🦴';$('detailName').textContent=group.name;
-  $('detailSystem').textContent='Σκελετικό · ομάδα ανατομικών δομών';
+  $('detailIcon').textContent=ui.mode==='skeleton'?'🦴':'◈';$('detailName').textContent=group.name;
+  $('detailSystem').textContent=(sysNames[ui.system]||'Ανατομία')+' · ομάδα δομών';
   $('detailDescription').textContent=group.description;
-  $('detailOriginal').textContent='Πολλαπλές δομές — όχι μεμονωμένη πλευρά.';
+  $('detailOriginal').textContent='Ομαδική απεικόνιση διαθέσιμων πλεγμάτων — όχι πλήρης πιστοποιημένος άτλας.';
   const link=$('detailStudy');link.hidden=false;
   link.href='../../saek-course-'+(deep.from||'01')+'.html#lesson-'+(deep.chapter||3);
   link.textContent='Επιστροφή στο σχετικό κεφάλαιο ΣΑΕΚ ↗';
@@ -239,7 +243,7 @@ function updateScene(){
   if(m.transparent!==transparent){m.transparent=transparent;m.needsUpdate=true}
   m.opacity=isSkin?ui.opacity:(ui.mode==='both'&&item.userData.system==='skeletal'?.62:1);
   m.depthWrite=!transparent;
-  if(m.userData.uniforms){m.userData.uniforms.selected.value=selectedPartIndex;m.userData.uniforms.group.value=ui.groupFocus==='thorax'?2:ui.groupFocus==='ribs'?1:0;}
+  if(m.userData.uniforms){const flags=FOCUS_FLAGS[ui.groupFocus]||{lo:0,hi:0};m.userData.uniforms.selected.value=selectedPartIndex;m.userData.uniforms.groupLow.value=flags.lo;m.userData.uniforms.groupHigh.value=flags.hi;}
  }
  updateHotspot();requestPaint();
 }
@@ -327,29 +331,33 @@ function freeModel(){for(const mesh of meshChunks){scene.remove(mesh);mesh.geome
 // Orange high-contrast selection in the same shader: no hiding other meshes.
 function newMaterial(system){
  const m=new THREE.MeshStandardMaterial({color:colors[system]||0xa9b4bc,roughness:.6,metalness:.02,side:THREE.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.14:1});
- const uniforms={selected:{value:-1},group:{value:0}};m.userData.uniforms=uniforms;
+ const uniforms={selected:{value:-1},groupLow:{value:0},groupHigh:{value:0}};
+ m.userData.uniforms=uniforms;
  m.onBeforeCompile=shader=>{
   shader.uniforms.anatomySelected=uniforms.selected;
-  shader.uniforms.anatomyGroup=uniforms.group;
-  shader.vertexShader='attribute float partIndex; attribute float anatomyGroupKind; varying float anatomyPartIndex; varying float anatomyGroupKindV;\n'+shader.vertexShader;
-  shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;\nanatomyGroupKindV=anatomyGroupKind;');
-  shader.fragmentShader='varying float anatomyPartIndex; varying float anatomyGroupKindV; uniform float anatomySelected; uniform float anatomyGroup;\n'+shader.fragmentShader;
-  const member='(anatomyGroup>1.5 && anatomyGroupKindV>0.5) || (anatomyGroup>0.5 && anatomyGroup<1.5 && abs(anatomyGroupKindV-1.0)<0.5)';
-  shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5 || '+member+') diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0,0.60,0.17),0.88);');
-  shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\nif(abs(anatomyPartIndex-anatomySelected)<0.5 || '+member+') totalEmissiveRadiance += vec3(0.32,0.15,0.025);');
+  shader.uniforms.anatomyGroupLow=uniforms.groupLow;
+  shader.uniforms.anatomyGroupHigh=uniforms.groupHigh;
+  shader.vertexShader='attribute float partIndex; attribute float anatomyGroupLowAttr; attribute float anatomyGroupHighAttr; varying float anatomyPartIndex; varying float anatomyGroupLowV; varying float anatomyGroupHighV;\n'+shader.vertexShader;
+  shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nanatomyPartIndex=partIndex;\nanatomyGroupLowV=anatomyGroupLowAttr;\nanatomyGroupHighV=anatomyGroupHighAttr;');
+  shader.fragmentShader='varying float anatomyPartIndex; varying float anatomyGroupLowV; varying float anatomyGroupHighV; uniform float anatomySelected; uniform float anatomyGroupLow; uniform float anatomyGroupHigh;\n'+shader.fragmentShader;
+  const selected='abs(anatomyPartIndex-anatomySelected)<0.5 || (anatomyGroupLow>0.5 && mod(floor(anatomyGroupLowV/anatomyGroupLow),2.0)>0.5) || (anatomyGroupHigh>0.5 && mod(floor(anatomyGroupHighV/anatomyGroupHigh),2.0)>0.5)';
+  shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\nif('+selected+') diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0,0.60,0.17),0.88);');
+  shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\nif('+selected+') totalEmissiveRadiance += vec3(0.32,0.15,0.025);');
  };
  materials.push(m);return m;
 }
 function makeGroup(system,parts,buffer){
  let vertices=0,indices=0;
  for(const p of parts){vertices+=p.vertexCount;indices+=p.indexCount;}
- const pos=new Float32Array(vertices*3),norm=new Int16Array(vertices*3),partIndex=new Float32Array(vertices),groupKind=new Uint8Array(vertices),index=new Uint32Array(indices);
+ const pos=new Float32Array(vertices*3),norm=new Int16Array(vertices*3),partIndex=new Float32Array(vertices),groupLow=new Uint16Array(vertices),groupHigh=new Uint16Array(vertices),index=new Uint32Array(indices);
  let vi=0,ii=0;
  for(const p of parts){
   pos.set(new Float32Array(buffer,p.positions,p.vertexCount*3),vi*3);
   norm.set(new Int16Array(buffer,p.normals,p.vertexCount*3),vi*3);
   partIndex.fill(p._index,vi,vi+p.vertexCount);
-  groupKind.fill(cageKind(p),vi,vi+p.vertexCount);
+  const [lo,hi]=focusMasks(p);
+  groupLow.fill(lo,vi,vi+p.vertexCount);
+  groupHigh.fill(hi,vi,vi+p.vertexCount);
   const input=new Uint32Array(buffer,p.indices,p.indexCount);
   for(let k=0;k<input.length;k++)index[ii+k]=input[k]+vi;
   vi+=p.vertexCount;ii+=p.indexCount;p._loaded=true;
@@ -358,7 +366,8 @@ function makeGroup(system,parts,buffer){
  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
  g.setAttribute('normal',new THREE.BufferAttribute(norm,3,true));
  g.setAttribute('partIndex',new THREE.BufferAttribute(partIndex,1));
- g.setAttribute('anatomyGroupKind',new THREE.Uint8BufferAttribute(groupKind,1,false));
+ g.setAttribute('anatomyGroupLowAttr',new THREE.Uint16BufferAttribute(groupLow,1,false));
+ g.setAttribute('anatomyGroupHighAttr',new THREE.Uint16BufferAttribute(groupHigh,1,false));
  g.setIndex(new THREE.BufferAttribute(index,1));g.computeBoundingSphere();
  const mesh=new THREE.Mesh(g,newMaterial(system));
  mesh.userData.system=system;mesh.frustumCulled=false;mesh.visible=systemVisible(system);
