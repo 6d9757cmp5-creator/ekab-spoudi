@@ -16,6 +16,16 @@ try{
  report.buttons=await page.locator('button').evaluateAll(els=>els.slice(0,60).map(x=>({text:x.innerText?.trim().slice(0,90),aria:x.getAttribute('aria-label'),title:x.getAttribute('title')})));
  report.inputs=await page.locator('input, textarea, [role="textbox"], [contenteditable="true"], select').evaluateAll(els=>els.slice(0,35).map(x=>({tag:x.tagName,role:x.getAttribute('role'),placeholder:x.getAttribute('placeholder'),aria:x.getAttribute('aria-label'),outer:x.outerHTML.slice(0,220)})));
  report.pageErrors=errors.slice(0,10);
+ report.links=await page.locator('a').evaluateAll(els=>els.slice(0,30).map(x=>({text:x.innerText?.trim().slice(0,90),href:x.getAttribute('href')})));
+ try{
+  await page.getByText('Model mode',{exact:true}).first().click({timeout:7000});
+  await page.waitForTimeout(5000);
+  report.modelMode={url:page.url(),body:(await page.locator('body').innerText()).slice(0,6000),
+   buttons:await page.locator('button').evaluateAll(els=>els.slice(0,80).map(x=>({text:x.innerText?.trim().slice(0,100),aria:x.getAttribute('aria-label'),title:x.getAttribute('title')}))),
+   inputs:await page.locator('input,textarea,[role="textbox"],[contenteditable="true"],select').evaluateAll(els=>els.slice(0,45).map(x=>({tag:x.tagName,placeholder:x.getAttribute('placeholder'),aria:x.getAttribute('aria-label'),outer:x.outerHTML.slice(0,250)})))};
+  console.log('PLAYGROUND_MODEL_MODE',JSON.stringify(report.modelMode).slice(0,10500));
+ }catch(e){report.modelModeError=String(e?.message||e).slice(0,250);console.log('PLAYGROUND_MODEL_MODE_ERROR',report.modelModeError);}
+
  console.log('PLAYGROUND_PROBE',JSON.stringify({status:report.status,statusCode:report.statusCode,finalUrl:report.finalUrl,title:report.title,body:report.bodyText.slice(0,2100),buttons:report.buttons,inputs:report.inputs,errors:report.pageErrors}).slice(0,9000));
 }catch(e){report.status='error';report.error=String(e?.message||e).slice(0,600);console.log('PLAYGROUND_PROBE_ERROR',report.error);}
 finally{
