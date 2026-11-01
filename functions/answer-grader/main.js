@@ -8,6 +8,7 @@ import { freeProviders, requestFreeGrade } from './free-providers.js';
 import { EXTRA_GRADING_REFERENCES } from './extra-grading-references.mjs';
 import { SEMANTIC_GRADING_POLICY, cautiouslyCheckGrade } from './semantic-grading-policy.mjs';
 import { SOURCE_COMPLETENESS, protectCompleteness } from './source-completeness.mjs';
+import { guardHighRiskFullCredit } from './safety-contrast-guard.mjs';
 const results = new Map();
 const pending = new Map();
 
@@ -100,6 +101,7 @@ async function findReference(input){
    question:cleanText(q.question,1200),
    reference:cleanText(q.answer,4000),
    context:'Κεφάλαιο: '+cleanText(q.chapterTitle,250)+' · '+cleanText(q.course,250)+' · '+q.semester+' εξάμηνο. Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημη εξέταση.',
+   id:q.id,
    kind:'Εξετάσεις ΣΑΕΚ'
   };
  }
@@ -179,7 +181,7 @@ async function gradeAnswer(question,answer){
  let allLimitFailures=providers.length>0;
  for(const provider of providers){
   try{
-   const graded=validateGrade(protectCompleteness(question,answer,cautiouslyCheckGrade(await requestFreeGrade(provider,messages))));
+   const graded=validateGrade(guardHighRiskFullCredit(question,answer,protectCompleteness(question,answer,cautiouslyCheckGrade(await requestFreeGrade(provider,messages)))));
    // ERC 2025 BLS does not make a pulse check mandatory for this lay-rescuer reference.
    if(question.kind==='Ανεπίσημη άσκηση BLS/AED'&&!/σφυγμ|παλμ/i.test(question.reference+' '+question.context)&&
     /σφυγμ|παλμ/i.test(graded.missingPoints.join(' ')+' '+graded.explanation))throw new Error('unsupported_bls_pulse_requirement');
