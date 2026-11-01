@@ -5,6 +5,7 @@ on:
     paths:
       - functions/answer-grader/greek-answer-fixtures.json
       - functions/answer-grader/offline-fixtures.test.mjs
+      - functions/answer-grader/saek-exam-rubrics.json
       - functions/answer-grader/source-completeness.mjs
       - functions/answer-grader/semantic-grading-policy.mjs
       - .github/workflows/offline-greek-grading.yml
@@ -20,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify 37 Greek written-answer and clinical scenario fixtures without model calls
+      - name: Verify 100 Greek written-answer and clinical scenario fixtures without model calls
         run: |
           node --test functions/answer-grader/offline-fixtures.test.mjs
           node --test functions/answer-grader/test.mjs
