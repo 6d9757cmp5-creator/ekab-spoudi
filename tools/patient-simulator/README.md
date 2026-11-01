@@ -30,3 +30,16 @@ Canonical location: tools/patient-simulator/. Ο simulator δεν αποτελε
 - Rebuild: `.github/workflows/build-cockpit-stage.yml`. Μη χειρογράφετε αλλαγές στο compiled vendor bundle. Τα παλιά procedural canvas και CC0 model-viewer παραμένουν διαθέσιμα ως fallback.
 - Η προσομοίωση ασθενών **παραμένει στατική**: δεν υλοποιήθηκαν rigged κινήσεις, αναπνοή, τραύμα, φαρμακευτικές επιδράσεις ή κλινικά επικυρωμένα σενάρια. Τα props είναι **οπτικά εκπαιδευτικά**, όχι πραγματικές ιατρικές πράξεις.
 - QA: `scripts/verify-unified-scene.mjs`, `scripts/app-load-smoke.mjs`, `scripts/verify-cockpit-visual.mjs` για ενεργό renderer, 2 ασθενείς, αλλαγή περιβάλλοντος και mobile/desktop screenshots. Ο στόχος Body Interact ή ανώτερο παραμένει **ανεκπλήρωτος**.
+
+## Ενοποίηση ειδικών εκπαιδευτικών αποστολών (ATLAS PR #147)
+
+Η ιδιοκτησία του **καταλόγου δύο δοκιμαστικών MCI ασκήσεων και τριών καρτών αναγνώρισης εξοπλισμού** ανήκει πλέον σε αυτό το εργαλείο:
+- `core/mission-activities.mjs` (σενάρια)
+- `core/mission-workflow.mjs` (βήματα)
+- `core/mission-activity-engine.mjs` (κατάσταση και ανασκόπηση)
+- `core/mission-migration.test.mjs` (ιστορικά IDs / replay)
+
+Τα ιστορικά imports `mentor/core/activities.mjs`, `mentor/core/workflow.mjs`, `mentor/core/activity-engine.mjs` είναι μόνο **re-export shims**. Δεν άλλαξε η μοναδική εκπαιδευτική κατάσταση, τα αποθηκευμένα session IDs ή η ειδική IndexedDB των δραστηριοτήτων. Η αποθήκη `mentor/core/activity-store.mjs` και η πλήρης UI μετεγκατάσταση αυτών των ασκήσεων εκκρεμούν και πρέπει να ελεγχθούν πριν την οριστική κατάργηση `mentor/`.
+
+Το ATLAS βοηθά στην εκμάθηση, αλλά **δεν αποφασίζει τα συνθετικά αποτελέσματα, δεν κάνει κλινική διαλογή και δεν βαθμολογεί** τις αποστολές. Οι ασκήσεις δεν είναι κλινικά εγκεκριμένες.
+

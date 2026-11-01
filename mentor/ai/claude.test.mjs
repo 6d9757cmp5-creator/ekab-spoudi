@@ -123,7 +123,7 @@ test("browser code never contains a key and the shipped endpoint stays empty (AI
  for(const f of files)assert.doesNotMatch(readFileSync(f,"utf8"),/sk-ant-[A-Za-z0-9_-]{20,}/,f);
  const page=files.filter(f=>f.startsWith("mentor")&&!f.endsWith(".test.mjs")&&!f.includes("claude-adapter")&&!f.includes("guard.mjs"));
  for(const f of page)assert.doesNotMatch(readFileSync(f,"utf8"),/api\.anthropic\.com|ANTHROPIC_API_KEY/,f);
- assert.match(readFileSync("mentor/ai/config.mjs","utf8"),/endpoint:""/);
+ assert.match(readFileSync("atla/ai/config.mjs","utf8"),/endpoint:""/);
  const wr=readFileSync("workers/mentor-chat/wrangler.jsonc","utf8");
  for(const v of ["MENTOR_CLAUDE_ENABLED","MENTOR_SPEND_LIMIT_CONFIRMED","MENTOR_PUBLIC"])assert.match(wr,new RegExp('"'+v+'": "false"'));
 });

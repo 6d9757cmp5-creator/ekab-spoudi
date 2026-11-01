@@ -1,6 +1,6 @@
 /**
  * Real Chromium smoke for grouped Mentor code. Checks old public URLs,
- * new centralized scripts and CSS, and the rendered training cockpit.
+ * new centralized scripts and CSS, and the rendered ATLA home plus legacy training cockpit.
  */
 import {chromium} from 'playwright';
 import {createServer} from 'node:http';
@@ -51,8 +51,34 @@ try{
  }
  await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
  await page.waitForTimeout(800);
- assert.ok(requests.includes('/mentor/app/home.js'));
- assert.ok(requests.includes('/mentor/styles/mentor-avatar-live.css'));
+ assert.ok(requests.includes('/atla/assistant.mjs'),'ATLA assistant must be loaded');
+ await page.locator('.atla-launcher').click();
+ assert.ok(await page.locator('.atla-panel').isVisible(),'ATLA assistant panel must open');
+ await page.locator('.atla-close').click();
+ assert.ok(!await page.locator('.atla-panel').isVisible(),'ATLA panel must close');
+ // Contextual SAEK micro-practice: no second simulator and no answer-grader writes.
+ await page.goto(base+'saek-course-01.html#lesson-1',{waitUntil:'domcontentloaded'});
+ await page.locator('#lesson-1.atlas-noop, #lesson-1').first().waitFor({timeout:20000});
+ await page.locator('#lesson-1').evaluate(el=>{el.open=true;});
+ await page.locator('#lesson-1 .atlas-chapter-practice summary').waitFor({timeout:20000});
+ await page.locator('#lesson-1 .atlas-chapter-practice summary').click();
+ await page.locator('#lesson-1 .atlas-practice-answer').fill('Η ανατομική θέση χρησιμοποιεί συγκεκριμένους όρους.');
+ await page.locator('#lesson-1 .atlas-practice-btn').click();
+ assert.ok(await page.locator('#lesson-1 .atlas-practice-reference').isVisible(),'SOS feedback is shown on demand');
+ await page.locator('#lesson-1 .atlas-practice-atlas').click();
+ assert.ok(await page.locator('.atla-panel').isVisible(),'ATLAS opt-in from SAEK');
+ assert.match(await page.locator('.atla-context').textContent(),/κεφάλαιο ΣΑΕΚ/);
+ await page.locator('.atla-close').click();
+ const url=await page.locator('#lesson-1 .atlas-practice-cockpit').getAttribute('href');
+ assert.match(url,/mentor-next\.html\?from=saek-course-01\.html/);
+ await page.goto(new URL(url,base).href,{waitUntil:'domcontentloaded'});
+ await page.locator('#atlas-cockpit-entry').waitFor({timeout:20000});
+ assert.ok(await page.locator('#atlas-cockpit-entry [href^="saek-course-01.html"]').count());
+ await page.locator('#atlas-cockpit-entry [data-atla-open]').click();
+ assert.ok(await page.locator('.atla-panel').isVisible(),'ATLAS opt-in from Cockpit');
+ await page.setViewportSize({width:390,height:844});
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
+ assert.equal(overflow,false,'Cockpit ATLAS entry must not cause horizontal overflow on mobile');
  assert.deepEqual(errors,[], 'Browser script errors: '+errors.join(' | '));
  assert.deepEqual(failures,[],'Missing centralized assets: '+failures.join(' | '));
  console.log('Mentor layout: Chromium public URLs, modules, styles and progress read-only smoke PASSED');
