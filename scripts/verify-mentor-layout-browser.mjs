@@ -89,6 +89,12 @@ try{
  await page.locator('#lesson-10 .atlas-practice-actions button').filter({hasText:'Θέλω να εξασκηθώ'}).click();
  const heartHref=await page.locator('#lesson-10 .atlas-practice-link').getAttribute('href');
  assert.match(heartHref,/focus=heart&from=01&chapter=10/,'Heart lesson must target the real viewer');
+ // The 3D viewer should parse the deep link and offer an exact chapter return.
+ // This deliberately does not claim that its external large mesh has loaded.
+ await page.goto(new URL(heartHref,base).href,{waitUntil:'domcontentloaded'});
+ await page.locator('#chapterReturn').waitFor({state:'visible',timeout:18000});
+ assert.equal(await page.locator('#chapterReturn').getAttribute('href'),'../../saek-course-01.html#lesson-10');
+
  assert.equal(await page.locator('#lesson-1 .atlas-practice-link').count(),0,'Unrelated anatomy chapter has no 3D CTA');
  await page.goto(base+'saek-course-02.html#lesson-7',{waitUntil:'domcontentloaded'});
  await page.locator('#lesson-7').waitFor({state:'attached',timeout:20000});
@@ -109,6 +115,9 @@ try{
  await page.locator('#atlas-eoppep-tool .atlas-contextual-action').click();
  const eopHref=await page.locator('#atlas-eoppep-tool .atlas-contextual-link').getAttribute('href');
  assert.match(eopHref,/^mentor-ecg\.html\?from=eoppep&question=EOP-A-070#ecg-practice$/);
+ await page.goto(new URL(eopHref,base).href,{waitUntil:'domcontentloaded'});
+ await page.waitForFunction(()=>document.querySelector('.ecg-wrap > a')?.getAttribute('href')==='theory.html?question=EOP-A-070',null,{timeout:15000});
+
  await page.goto(base+'theory.html?question=EOP-A-071',{waitUntil:'domcontentloaded'});
  await page.locator('#catalogReaderNumber').waitFor({state:'visible',timeout:30000});
  await page.waitForFunction(()=>document.querySelector('#catalogReaderNumber')?.textContent?.includes('Ερώτηση 71'),null,{timeout:30000});
