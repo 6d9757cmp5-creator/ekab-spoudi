@@ -42,7 +42,7 @@ async function library(){
 }
 function navigation(text){
  const n=normalize(text);
- if(!/\b(ανοιξε|πηγαινε|δειξε|μεταβαση|βρες|open)\b/.test(n))return null;
+ if(!/(ανοιξε|πηγαινε|δειξε|μεταβαση|βρες|open)/.test(n))return null;
  return routes.find(([, ,keys])=>keys.some(key=>n.includes(normalize(key))))||null;
 }
 function answerFromLibrary(q){
@@ -99,6 +99,15 @@ function boot(){
   stream.scrollTop=stream.scrollHeight;
  }
  const add=(role,text,mode='local')=>{try{appendTurn(storage,{role:role==='user'?'user':'mentor',text,mode});}catch{}showHistory();};
+ function offerLink(href,label){
+  if(!href||typeof href!=='string')return;
+  try{
+   const url=new URL(href,ROOT);
+   if(url.origin!==ROOT.origin||!url.pathname.startsWith(ROOT.pathname))return;
+   const a=$('a','atla-route',label);a.href=url.href;stream.append(a);
+   stream.scrollTop=stream.scrollHeight;
+  }catch{}
+ }
  const setOpen=(v)=>{visible=!!v;panel.hidden=!visible;launcher.hidden=visible;document.body.classList.toggle('atla-is-open',visible);if(visible){context.textContent='Τρέχουσα ενότητα: '+(document.querySelector('main h1,main h2')?.textContent||document.title).trim().slice(0,100);showHistory();field.focus();}else{window.speechSynthesis?.cancel?.();launcher.focus();}};
  launcher.addEventListener('click',()=>setOpen(true));close.addEventListener('click',()=>setOpen(false));
  document.addEventListener('click',e=>{if(e.target?.closest?.('[data-atla-open]')){e.preventDefault();setOpen(true);}});
@@ -111,12 +120,12 @@ function boot(){
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
   const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLA'),'refusal');return;}
   const link=navigation(q);
-  if(link){add('mentor','Η ενότητα «'+link[0]+'» είναι διαθέσιμη: '+new URL(link[1],ROOT).href);return;}
+  if(link){add('mentor','Βρήκα την ενότητα «'+link[0]+'». Μπορείς να την ανοίξεις χωρίς να χαθεί η τρέχουσα σελίδα από το ιστορικό.');offerLink(link[1],'Άνοιξε: '+link[0]);return;}
   send.disabled=true;state.textContent='Αναζήτηση στην εκπαιδευτική βιβλιοθήκη…';
   try{
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
-   if(!MENTOR_AI.endpoint||!found.passages.length){add('mentor',found.text);return;}
+   if(!MENTOR_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');return;}
    const prefs=loadLearning(localStorage);
    const payload=buildPayload({question:q,passages:found.passages,level:prefs.level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:MENTOR_AI.endpoint,payload,headers:mentorAiHeaders(storage),timeoutMs:MENTOR_AI.timeoutMs});
