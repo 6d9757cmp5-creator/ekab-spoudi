@@ -141,7 +141,7 @@ async function findReference(input){
   return {question:cleanText(q.question,1200),reference:cleanText(q.answer,8000),context:'Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημο λυσάρι.',kind:'ΕΟΠΠΕΠ θεωρία'};
  }
  if(input.section==='old_written'||input.section==='mentor_oral'){
-  if(typeof input.questionId!=='string'||!/^(?:old-\\d{3}|scene|report|handover|equipment|observations|reflection)$/.test(input.questionId))
+  if(typeof input.questionId!=='string'||!/^(?:old-\d{3}|scene|report|handover|equipment|observations|reflection)$/.test(input.questionId))
    throw new Error('Μη έγκυρη ερώτηση ανάπτυξης');
   const q=EXTRA_GRADING_REFERENCES.find(x=>x.section===input.section&&x.id===input.questionId);
   if(!q)throw new Error('Δεν βρέθηκε ερώτηση ανάπτυξης');
