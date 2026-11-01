@@ -83,3 +83,34 @@ test('actual future binary module stays pending, not falsely screened',async()=>
   assert.equal(result.files[0].mode,'binary_media');
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('independent-review API request omits unsupported temperature and preserves evidence gate',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'ekab-scientific-request-'));
+ const previousKey=process.env.ANTHROPIC_API_KEY;
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await mkdir(join(root,'future'),{recursive:true});
+  await writeFile(join(root,'docs','INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'Verify claims and mark unverified');
+  await writeFile(join(root,'future','lesson.html'),'<h1>Demo anatomy</h1>');
+  process.env.ANTHROPIC_API_KEY='unit-test-key-do-not-use';
+  let called=0;
+  const result=await runReview({manual:'future/lesson.html',root,fetchImpl:async(url,options)=>{
+   called++;
+   const req=JSON.parse(options.body);
+   assert.equal(Object.hasOwn(req,'temperature'),false,'adaptive thinking must not include temperature');
+   assert.equal(req.messages[0].role,'user');
+   assert.match(req.messages[0].content,/future\/lesson\.html/);
+   return {ok:true,json:async()=>({
+     stop_reason:'end_turn',
+     content:[{type:'text',text:JSON.stringify({checked_scope:'supplied demo only',findings:[],unverified:[],not_checked:[]})}]
+   })};
+  }});
+  assert.equal(called,1);
+  assert.equal(result.status,'screened');
+  assert.equal(result.reviewed_count,1);
+ }finally{
+  if(previousKey===undefined)delete process.env.ANTHROPIC_API_KEY;
+  else process.env.ANTHROPIC_API_KEY=previousKey;
+  await rm(root,{recursive:true,force:true});
+ }
+});
