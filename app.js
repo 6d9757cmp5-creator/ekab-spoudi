@@ -293,9 +293,6 @@ function renderCatalogReader(q){
   btn.setAttribute('aria-pressed',String(active));
  }
  updateCatalogReaderNavigation();
- // Reader-only signal; active examinations do not call renderCatalogReader.
- $('#catalogReaderContent').dataset.atlaReaderQuestionId=q.id;
- window.dispatchEvent(new CustomEvent('ekab:eoppep-reader',{detail:{id:q.id,mode:'reader'}}));
 }
 function openCatalogQuestion(questionId){
  const q=bank.find(item=>item.id===questionId);
