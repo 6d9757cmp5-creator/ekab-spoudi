@@ -8,6 +8,7 @@ import {askAi,buildPayload} from '../mentor/ai/client.mjs';
 import {MENTOR_AI,mentorAiHeaders} from '../mentor/ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from '../mentor/presence/memory.mjs';
 import {examMode} from '../mentor/context/bridge.mjs';
+import {SOURCES,transformSource,searchRecords} from '../mentor/core/read-only-index.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
@@ -28,11 +29,16 @@ const routes=[
 ];
 const officialId=/\bEOP-([AB])-(\d{3})\b/i;
 const exam=()=>examMode(location.pathname)||new URLSearchParams(location.search).get('mode')==='exam';
-let terms=null,questions=null,visible=false,requestId=0;
+let terms=null,questions=null,records=null,visible=false,requestId=0;
 const fetchJSON=async name=>{try{const response=await fetch(new URL(name,ROOT),{credentials:'omit'});if(!response.ok)return null;return await response.json();}catch{return null;}};
 async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
  if(questions===null){const data=await fetchJSON('functions/answer-grader/eoppep-rubrics.json');questions=Array.isArray(data)?data:[];}
+ if(records===null){
+  const chapters=SOURCES.filter(x=>x.kind==='saek');
+  const parts=await Promise.allSettled(chapters.map(async x=>transformSource(x,await fetchJSON(x.file))));
+  records=parts.flatMap(p=>p.status==='fulfilled'?p.value:[]);
+ }
 }
 function navigation(text){
  const n=normalize(text);
@@ -50,6 +56,13 @@ function answerFromLibrary(q){
  }
  const hits=retrieve(q,terms,{k:4,minScore:3});
  if(hits.length)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
+ const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
+ const cleaned=normalize(q).split(/[^\\p{L}\\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
+ const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
+ if(chapters.length){
+  const passages=chapters.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:c.body.slice(0,400)}));
+  return {text:chapters.map(c=>c.title+'\\n'+c.body.slice(0,950)).join('\\n\\n')+'\\n\\nΜπορείς να συνεχίσεις στο αντίστοιχο κεφάλαιο ΣΑΕΚ.',passages,href:chapters[0].href};
+ }
  return {text:'Δεν βρήκα επαρκή αντιστοιχία στη διαθέσιμη τοπική βιβλιοθήκη. Μπορείς να δοκιμάσεις συγκεκριμένο ιατρικό όρο ή κωδικό ΕΟΠΠΕΠ (π.χ. EOP-A-001).',passages:[],href:null};
 }
 function boot(){
@@ -96,7 +109,7 @@ function boot(){
  form.addEventListener('submit',async e=>{
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q);
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
-  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE,'refusal');return;}
+  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLA'),'refusal');return;}
   const link=navigation(q);
   if(link){add('mentor','Η ενότητα «'+link[0]+'» είναι διαθέσιμη: '+new URL(link[1],ROOT).href);return;}
   send.disabled=true;state.textContent='Αναζήτηση στην εκπαιδευτική βιβλιοθήκη…';
