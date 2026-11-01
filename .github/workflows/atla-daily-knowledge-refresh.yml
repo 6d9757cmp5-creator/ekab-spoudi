@@ -7,6 +7,9 @@ on:
     paths:
       - 'tools/atla-ai/knowledge-refresh/scan.mjs'
       - 'tools/atla-ai/knowledge-refresh/scan.test.mjs'
+      - 'tools/atla-ai/knowledge-refresh/source-policy.mjs'
+      - 'tools/atla-ai/knowledge-refresh/watchlist.json'
+      - 'tools/atla-ai/knowledge-refresh/global-official-sources.json'
       - '.github/workflows/atla-daily-knowledge-refresh.yml'
 
 permissions:
@@ -28,6 +31,7 @@ jobs:
       - name: Syntax and deterministic safety tests
         run: |
           node --check tools/atla-ai/knowledge-refresh/scan.mjs
+          node --check tools/atla-ai/knowledge-refresh/source-policy.mjs
           node --test tools/atla-ai/knowledge-refresh/scan.test.mjs
 
   discover:
@@ -56,6 +60,10 @@ jobs:
           const root='tools/atla-ai/knowledge-refresh/queue/';
           const index=JSON.parse(readFileSync(root+'pending-pubmed.json','utf8'));
           const status=JSON.parse(readFileSync(root+'last-scan.json','utf8'));
+          const {screenPubMedArticle,classifySource}=await import('./tools/atla-ai/knowledge-refresh/source-policy.mjs');
+          const health=JSON.parse(readFileSync(root+'source-health.json','utf8'));
+          assert.ok(health.sources.every(x=>classifySource(x.url).accepted));
+          assert.ok(index.items.every(x=>screenPubMedArticle(x).accepted));
           assert.equal(index.schema_version,1);
           assert.ok(index.items.length<=100);
           assert.ok(index.items.every(x=>x.status==='pending-review' &&
