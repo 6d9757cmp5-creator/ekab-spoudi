@@ -10,7 +10,8 @@ function must(condition,label){if(!condition)throw Error('Evidence not verified:
 export function collectToolsHubEvidence(root=process.cwd()){
  const home=read(root,'index.html'),tools=read(root,'tools.html');
  const pageLinks=[...tools.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
- const local=pageLinks.filter(v=>!v.startsWith('#')&&!/^(?:https?:|mailto:|tel:)/i.test(v));
+ const verifiedReferences=['tools.html','navigation.js','theme-init.js','styles.css','home.css','protocols.html','mentor-protocol-suite.html'];
+ const local=[...new Set([...pageLinks.filter(v=>!v.startsWith('#')&&!/^(?:https?:|mailto:|tel:)/i.test(v)),...verifiedReferences])];
  const inventory=[];
  for(const href of local){
    const path=href.split(/[?#]/)[0];
@@ -25,6 +26,9 @@ export function collectToolsHubEvidence(root=process.cwd()){
   {id:'protocol-lab-route',path:'protocols.html',verified:read(root,'protocols.html').includes('mentor-protocol-suite.html?topic=trauma&amp;view=lab')},
   {id:'protocol-debrief-route',path:'protocols.html',verified:read(root,'protocols.html').includes('mentor-protocol-suite.html?topic=trauma&amp;view=debrief')},
   {id:'protocol-not-certified',path:'protocols.html',verified:read(root,'protocols.html').includes('όχι δημοσιευμένα ή πιστοποιημένα επιχειρησιακά πρωτόκολλα ΕΚΑΒ')},
+  {id:'protocol-notice-above-hero',path:'protocols.html',verified:read(root,'protocols.html').indexOf('protocol-release-notice')<read(root,'protocols.html').indexOf('<header class="hero">')},
+  {id:'lab-notice-above-hero',path:'mentor-protocol-suite.html',verified:read(root,'mentor-protocol-suite.html').indexOf('protocol-release-notice')<read(root,'mentor-protocol-suite.html').indexOf('<header class="hero">')},
+  {id:'MENTOR-clearly-demo',path:'tools.html',verified:tools.includes('MENTOR OS · Δοκιμαστική έκδοση')},
   {id:'ecg-synthetic-disclaimer',path:'mentor-ecg.html',verified:read(root,'mentor-ecg.html').includes('δεν είναι πιστό κλινικό ΗΚΓ')},
   {id:'patient-simulator-synthetic',path:'mentor-next.html',verified:read(root,'mentor-next.html').includes('Τα δεδομένα είναι συνθετικά')},
   {id:'seminars-not-certification',path:'seminar-prep.html',verified:read(root,'seminar-prep.html').toLowerCase().includes('δεν απονέμει πιστοποίηση')},

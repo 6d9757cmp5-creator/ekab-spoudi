@@ -21,6 +21,15 @@ try{
    const response=await page.request.get(new URL(href,base).href,{timeout:30000});
    if(response.status()!==200)throw Error(name+': broken '+href+' HTTP '+response.status());
   }
+  // Independently verify the disclaimer is visible above the fold on both views.
+  for(const path of ['protocols.html','mentor-protocol-suite.html?topic=trauma&view=lab','mentor-protocol-suite.html?topic=trauma&view=debrief']){
+    await page.goto(base+path,{waitUntil:'domcontentloaded',timeout:30000});
+    const warning=page.locator('.protocol-release-notice');
+    await warning.waitFor({state:'visible',timeout:10000});
+    const bounds=await warning.boundingBox();
+    if(!bounds||bounds.y<0||bounds.y>viewport.height-30)throw Error(name+': safety disclaimer hidden outside initial viewport at '+path);
+    if(!(await warning.innerText()).includes('όχι επίσημο επιχειρησιακό πρωτόκολλο ΕΚΑΒ'))throw Error(name+': missing safety language '+path);
+  }
   console.log('PASS '+name+': home-to-tools navigation, responsive layout, labels and '+links.length+' live links');
   await page.close();
  }

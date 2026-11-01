@@ -19,6 +19,12 @@ test('tools hub has existing links and clear ownership labels',()=>{
   assert.ok(tools.includes('όχι επίσημες επιχειρησιακές οδηγίες ΕΚΑΒ'));
   assert.ok(tools.includes('όχι πιστοποίηση'));
   assert.equal((tools.match(/<h1(?:\s|>)/g)||[]).length,1,'one primary heading for accessibility');
+  for(const path of ['protocols.html','mentor-protocol-suite.html']){
+    const html=r(path),notice=html.indexOf('protocol-release-notice'),hero=html.indexOf('<header class="hero">');
+    assert.ok(notice>0&&notice<hero,path+' should show independent safety disclaimer before long hero');
+    assert.ok(html.includes('όχι επίσημο επιχειρησιακό πρωτόκολλο ΕΚΑΒ'));
+  }
+  assert.ok(tools.includes('MENTOR OS · Δοκιμαστική έκδοση'));
   const protocols=r('protocols.html');
   assert.ok(protocols.includes('mentor-protocol-suite.html?topic=trauma&amp;view=lab'),'Protocol Lab link preserved');
   assert.ok(protocols.includes('mentor-protocol-suite.html?topic=trauma&amp;view=debrief'),'Protocol Debrief link preserved');
