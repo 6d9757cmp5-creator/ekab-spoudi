@@ -24,7 +24,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: atla-nih3d-master-2026
         run: |
-          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA Master Plan 2026 - NIH 3D original models" --notes "Original NIH 3D binary resources losslessly archived in tar.zst. Source SHA256, license and per-range failures are tracked in result manifests. Not automatically installed in the live Anatomy Lab or Clinical Cockpit."
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA Master Plan 2026 - NIH 3D original models" --notes "Original NIH 3D model files archived losslessly, including SHA256 and source provenance." || echo "Release creation restricted: source archives will still be saved as GitHub Actions artifacts."
   mirror:
     needs: prepare
     runs-on: ubuntu-latest
@@ -48,8 +48,20 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -qq -y zstd
           node --check scripts/mirror-nih3d-model-files.mjs
           node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$END" --out="tmp/nih3d-mirror-$RANGE_START"
-      - name: Upload real model archives and integrity manifests
+      - name: Preserve verified models as GitHub Actions artifacts
         if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-originals-${{ matrix.start }}
+          path: |
+            tmp/nih3d-mirror-${{ matrix.start }}/*.tar.zst*
+            tmp/nih3d-mirror-${{ matrix.start }}/*-RESULT.json
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 30
+      - name: Upload real model archives and integrity manifests to release when allowed
+        if: always()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: atla-nih3d-master-2026
@@ -69,6 +81,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Retrieve source integrity manifests from Github Actions artifacts
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: nih3d-originals-*
+          path: tmp/nih3d-reports
+          merge-multiple: true
       - name: Count actual uploaded resource packs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -88,7 +107,7 @@ jobs:
             for(const f of r.modelFiles||[])bytes+=(f.bytes||0);
           }
           const summary={shards:names.length,totalShards:250,originalFiles:files,sourceModels:modelIds,failed,missing,losslessPacks:packs,sourceBytes:bytes,complete:names.length===250&&failed===0};
-          writeFileSync('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md','# ATLA Master Plan 2026 - NIH 3D transferred originals\n\n'+JSON.stringify(summary,null,2)+'\n\nRelease: https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/atla-nih3d-master-2026\n\nAll packaging is lossless tar.zst, each pack carries model SHA-256 and source license metadata. Unavailable source models are explicitly recorded; this is not independent clinical validation.\n');
+          writeFileSync('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md','# ATLA Master Plan 2026 - NIH 3D transferred originals\n\n'+JSON.stringify(summary,null,2)+'\n\nArtifacts: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions\n\nAll packaging is lossless tar.zst, each pack carries model SHA-256 and source license metadata. Artifact storage is temporary; any long-term release requires repository authorization. Unavailable source models are explicitly recorded; this is not independent clinical validation.\n');
           console.log(JSON.stringify(summary));
           NODE
       - name: Record actual mirrored file count in Master Plan
