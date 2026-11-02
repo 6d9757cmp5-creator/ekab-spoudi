@@ -24,7 +24,9 @@ try{
    ['desktop',{viewport:{width:1440,height:900}}],
    ['mobile',{viewport:{width:390,height:844},isMobile:true,hasTouch:true}]
  ]){
-  const context=await browser.newContext(opts);
+// These are image DOM checks, not PWA tests. Block service worker activation
+  // to avoid controllerchange triggering a navigation during the first course.
+  const context=await browser.newContext({...opts,serviceWorkers:'block'});
   for(const course of registry.courses){
    const courseNo=String(course.course).padStart(2,'0');
    const url=base+'saek-course-'+courseNo+'.html';
