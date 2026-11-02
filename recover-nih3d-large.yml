@@ -1,0 +1,68 @@
+name: EKAB - Restore large historical NIH3D artifact parts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/recover-nih3d-large.yml
+      - scripts/nih3d_stream_restore.py
+      - scripts/test_nih3d_stream_restore.py
+  schedule:
+    - cron: '17 */3 * * *'
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: ekab-nih3d-historical-streamed-rescue
+  cancel-in-progress: false
+jobs:
+  plan:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d_stream_restore.py
+            scripts/test_nih3d_stream_restore.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate range archive recovery with synthetic ZIP64 and simulated HTTP Range
+        run: |
+          python -m py_compile scripts/nih3d_stream_restore.py
+          python -m unittest discover -s scripts -p "test_nih3d_stream_restore.py" -v
+      - name: Select only missing and nonexpired canonical NIH artifacts
+        id: plan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/nih3d_stream_restore.py plan
+  restore:
+    needs: plan
+    if: needs.plan.result == 'success' && needs.plan.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d_stream_restore.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Stream ZIP entries individually and publish with SHA256 checks
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          python scripts/nih3d_stream_restore.py recover
+          --artifact ${{ matrix.id }}
+          --start ${{ matrix.start }}
