@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,main,probeSource} from './scan.mjs';
+import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,preserveProbeHistory,main,probeSource} from './scan.mjs';
 import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 import {readFileSync} from 'node:fs';
 
@@ -47,6 +47,26 @@ test('changed HTTP validators signal only possible source update',()=>{
  assert.equal(signalFor({ok:true,etag:'a'},{ok:false,reason:'403'}),'unverified');
  assert.equal(signalFor({ok:true,etag:'a'},{ok:true,etag:'a'}),'no-confirmed-change');
 });
+test('real source changes remain detectable after repeated 403/network failures',()=>{
+ const baseline={ok:true,etag:'"v1"',last_modified:'Sun, 01 Nov 2026 12:00:00 GMT'};
+ const denied={ok:false,http_status:403,reason:'HTTP 403'};
+ const after403={...denied,...preserveProbeHistory(baseline,denied)};
+ assert.equal(signalFor(baseline,denied),'unverified');
+ assert.equal(after403.ok,false);
+ assert.equal(after403.last_successful_etag,'"v1"');
+ const offline={ok:false,reason:'fetch failed'};
+ const afterOffline={...offline,...preserveProbeHistory(after403,offline)};
+ assert.equal(signalFor(after403,offline),'unverified');
+ assert.equal(afterOffline.last_successful_etag,'"v1"');
+ const unchanged={ok:true,etag:'"v1"',last_modified:baseline.last_modified};
+ const changed={ok:true,etag:'"v2"',last_modified:baseline.last_modified};
+ assert.equal(signalFor(afterOffline,unchanged),'no-confirmed-change');
+ assert.equal(signalFor(afterOffline,changed),'possible-source-update');
+ const recovered={...changed,...preserveProbeHistory(afterOffline,changed)};
+ assert.equal(recovered.last_successful_etag,'"v2"');
+ assert.equal(signalFor(recovered,{ok:true,etag:'"v2"'}),'no-confirmed-change');
+});
+
 test('PubMed results deduplicate across curated topics and preserve topics',async()=>{
  const r=await discoverPubMed(stub);
  assert.equal(r.failures.length,0);
