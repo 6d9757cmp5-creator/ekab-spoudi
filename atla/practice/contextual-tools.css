@@ -1,0 +1,12 @@
+/* Optional contextual educational tools: never global popups or grade UI. */
+.atlas-contextual-panel{margin:14px 0;border:1px solid #accdca;border-radius:13px;padding:13px 15px;background:#f1f8f7;color:#163c45}
+.atlas-contextual-panel[hidden]{display:none!important}
+.atlas-contextual-panel h4{font-size:.95rem;margin:0 0 7px}
+.atlas-contextual-panel p,.atlas-contextual-result p{margin:7px 0;line-height:1.5;font-size:.85rem}
+.atlas-contextual-action,.atlas-contextual-link,.atlas-practice-link{display:inline-flex;align-items:center;min-height:44px;padding:9px 12px;border:1px solid #347b82;border-radius:10px;background:#fff;color:#135567;font:700 .86rem/1.3 system-ui,sans-serif;cursor:pointer;text-decoration:none}
+.atlas-contextual-link,.atlas-practice-link{margin:8px 0;max-width:100%}
+.atlas-contextual-action:focus-visible,.atlas-contextual-link:focus-visible,.atlas-practice-link:focus-visible{outline:3px solid #0da5b4;outline-offset:3px}
+.atlas-contextual-result:empty{display:none}
+html[data-theme="dark"] .atlas-contextual-panel{background:#183744;color:#eaf9fa;border-color:#517982}
+html[data-theme="dark"] .atlas-contextual-action,html[data-theme="dark"] .atlas-contextual-link,html[data-theme="dark"] .atlas-practice-link{background:#19444d;color:#e2ffff}
+@media(max-width:480px){.atlas-contextual-action,.atlas-contextual-link,.atlas-practice-link{width:100%;justify-content:center}}

@@ -1,0 +1,24 @@
+name: ATLA contextual learning tools
+on:
+  pull_request:
+    paths:
+      - 'atla/learning/contextual-tools.mjs'
+      - 'atla/contextual-tools.test.mjs'
+      - 'atla/practice/**'
+      - 'atla/assistant.mjs'
+      - 'app.js'
+      - 'mentor-ecg.html'
+      - '.github/workflows/atla-contextual-tools.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contextual-learning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check atla/assistant.mjs && node --check atla/practice/eoppep-context.mjs && node --check atla/practice/saek-practice.mjs
+      - run: node --test atla/contextual-tools.test.mjs atla/contextual-practice.test.mjs scripts/test-paramedic-hub.mjs

@@ -101,14 +101,24 @@ for (const [semester, count] of Object.entries(expected))
   if (bySemester[semester].chapters !== count)
     errors.push('Semester ' + semester + ': expected ' + count + ', found ' + bySemester[semester].chapters);
 
-let local = 0, external = 0, missingLocal = 0;
+let local = 0, external = 0, missingLocal = 0, imagesCachedOnView = 0;
+const allowedOnDemand = path =>
+  /^assets\/education\/[^/]+\.(?:svg|png|webp|jpe?g)$/i.test(path) &&
+  sw.includes('const STUDY_IMAGE=') &&
+  sw.includes('const isStudyImage=url=>STUDY_IMAGE.test(url.pathname)') &&
+  sw.includes('if(!isStudyUrl(url))return;') &&
+  sw.includes('cache.put(req,resp.clone())');
 for (const [key, asset] of Object.entries(assets)) {
   if (!asset.localPath) { external++; continue; }
   local++;
   try { if (!(await stat(asset.localPath)).isFile()) throw Error('not a file'); }
   catch { missingLocal++; errors.push('Missing local image for ' + key + ': ' + asset.localPath); }
-  if (!sw.includes('./' + asset.localPath))
-    errors.push('Offline precache missing local image for ' + key + ': ' + asset.localPath);
+  // Images must remain genuine local files with SHA-256; they may be stored
+  // on first view rather than bulk-downloaded at install.
+  if (!sw.includes('./' + asset.localPath)) {
+    if (allowedOnDemand(asset.localPath)) imagesCachedOnView++;
+    else errors.push('Image missing from precache AND bounded on-demand cache: ' + key + ': ' + asset.localPath);
+  }
   if (!/^[a-f0-9]{64}$/.test(asset.sha256 || ''))
     errors.push('Missing SHA-256 for ' + key);
   if (asset.clinicalReview === 'approved' && !hasDocumentedHumanReview(asset))
@@ -117,11 +127,12 @@ for (const [key, asset] of Object.entries(assets)) {
 if (chapters !== 247) errors.push('Expected 247 chapters, found ' + chapters);
 if (selected !== 247) errors.push('Expected selected imagery for 247 chapters, found ' + selected);
 if (external) warnings.push(external + ' external Commons images are not guaranteed offline and can be rate-limited.');
+if (imagesCachedOnView) warnings.push(imagesCachedOnView + ' local images are available offline only after first successful view; no bulk precache.');
 const report = {
   generatedAt: new Date().toISOString(),
   scope: 'static source wiring only',
   chapters, selected, imagePlacements, bySemester,
-  assets: Object.keys(assets).length, local, external, missingLocal,
+  assets: Object.keys(assets).length, local, external, missingLocal, imagesCachedOnView,
   independentlyScientificallyApproved: Object.values(assets).filter(hasDocumentedHumanReview).length,
   fullyCoveredVerified: 0,
   publicationVerified: false,
