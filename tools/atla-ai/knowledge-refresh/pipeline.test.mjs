@@ -170,17 +170,18 @@ test('scheduled queue commit cannot rebase unverified changes onto a moving main
 
 
 test('replacement scheduler rejects unsafe source, bibliography and scan queue documents',()=>{
+ const scanTime='2026-11-02T02:15:00.000Z';
  const safe={
-  report:{schema_version:2,stage:'research-only-awaiting-independent-review',
+  report:{schema_version:2,generated_at:scanTime,stage:'research-only-awaiting-independent-review',
    source_discovery_completed:true,clinical_knowledge_imported:0,existing_curriculum_changed:false,
    source_discovery:{monitored_urls:1,monitored_ok:1,pubmed_topics_checked:10,
     pubmed_topics_failed:0,newly_discovered_papers:1},items:[]},
-  metadata:{schema_version:1,monitored_urls:1,monitored_ok:1,pending_papers:1,
+  metadata:{schema_version:1,checked_at:scanTime,monitored_urls:1,monitored_ok:1,pending_papers:1,
    newly_discovered_papers:1,pubmed_topics_checked:10,pubmed_failures:[],
    model_training_performed:false,clinical_retrieval_updated:false,full_texts_imported:0},
-  health:{schema_version:1,sources:[{url:'https://www.who.int/guidelines',ok:true,
+  health:{schema_version:1,checked_at:scanTime,sources:[{url:'https://www.who.int/guidelines',ok:true,
    clinical_approval:false,knowledge_ingestion_enabled:false}]},
-  pending:{schema_version:1,items:[{...paper,status:'pending-review',
+  pending:{schema_version:1,checked_at:scanTime,items:[{...paper,status:'pending-review',
    content_imported:false,clinical_approval:false,atla_ai_retrieval_enabled:false}]}
  };
  const change=(part,patch)=>({...safe,[part]:{...safe[part],...patch}});
@@ -210,18 +211,19 @@ test('scheduled workflow checks all four review-only files before staging',()=>{
 test('cross-file scan consistency rejects mixed or stale review-only evidence',()=>{
  const item={...paper,status:'pending-review',content_imported:false,
   clinical_approval:false,atla_ai_retrieval_enabled:false};
+ const scanTime='2026-11-02T02:15:00.000Z';
  const base={
-  report:{schema_version:2,stage:'research-only-awaiting-independent-review',
+  report:{schema_version:2,generated_at:scanTime,stage:'research-only-awaiting-independent-review',
    source_discovery_completed:true,clinical_knowledge_imported:0,
    existing_curriculum_changed:false,items:[],
    source_discovery:{monitored_urls:1,monitored_ok:1,pubmed_topics_checked:10,
     pubmed_topics_failed:0,newly_discovered_papers:1}},
-  metadata:{schema_version:1,monitored_urls:1,monitored_ok:1,pending_papers:1,
+  metadata:{schema_version:1,checked_at:scanTime,monitored_urls:1,monitored_ok:1,pending_papers:1,
    newly_discovered_papers:1,pubmed_topics_checked:10,pubmed_failures:[],
    model_training_performed:false,clinical_retrieval_updated:false,full_texts_imported:0},
-  health:{schema_version:1,sources:[{url:'https://www.who.int/guidelines',ok:true,
+  health:{schema_version:1,checked_at:scanTime,sources:[{url:'https://www.who.int/guidelines',ok:true,
    clinical_approval:false,knowledge_ingestion_enabled:false}]},
-  pending:{schema_version:1,items:[item]}
+  pending:{schema_version:1,checked_at:scanTime,items:[item]}
  };
  assert.equal(validateQueueFiles(base),true);
  const bad=[
@@ -232,7 +234,11 @@ test('cross-file scan consistency rejects mixed or stale review-only evidence',(
   {...base,report:{...base.report,items:[{id:'pubmed-99999999',pmid:'99999999',
    status:'pending-independent-scientific-review',full_text_stored:false,
    clinical_approval:false,atla_ai_retrieval_enabled:false,learner_visible:false,assessment:null}]}},
-  {...base,pending:{...base.pending,items:[item,item]},metadata:{...base.metadata,pending_papers:2}}
+  {...base,pending:{...base.pending,items:[item,item]},metadata:{...base.metadata,pending_papers:2}},
+  {...base,health:{...base.health,checked_at:'2026-11-01T02:15:00.000Z'}},
+  {...base,pending:{...base.pending,checked_at:'2026-11-01T02:15:00.000Z'}},
+  {...base,report:{...base.report,generated_at:'2026-11-01T02:15:00.000Z'}},
+  {...base,metadata:{...base.metadata,checked_at:'not-a-date'}}
  ];
  for(const candidate of bad)
   assert.throws(()=>validateQueueFiles(candidate),/inconsistent-research-queue/);
