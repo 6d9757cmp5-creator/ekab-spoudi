@@ -15,6 +15,11 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d-live-original-probe.mjs
+            tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
