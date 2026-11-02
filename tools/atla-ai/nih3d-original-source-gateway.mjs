@@ -3,7 +3,7 @@
  * Zero duplicate binary hosting: retrieve NIH originals only when the student requests them.
  * Source metadata !== validated clinical model, retrieved original !== permanent archive.
  */
-export const NIH_CATALOG_BASE = './tools/atla-ai/resources/nih3d-master-plan-2026/segments';
+export const NIH_CATALOG_BASE = new URL('./resources/nih3d-master-plan-2026/segments', import.meta.url).href;
 export const NIH_SITE = 'https://3d.nih.gov';
 export const FORMATS = new Set(['GLB','GLTF','STL','OBJ','X3D','WRL','PLY','3MF']);
 const FILE_URL_RE = /^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[^/]+\/output-files\/\d+$/;
