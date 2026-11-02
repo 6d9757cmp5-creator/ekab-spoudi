@@ -68,6 +68,8 @@ test('PubMed retraction and expression-of-concern XML trigger fail closed',()=>{
  const relation='<CommentsCorrectionsList><CommentsCorrections RefType="RetractionIn"><RefSource>Retraction notice</RefSource></CommentsCorrections></CommentsCorrectionsList>';
  assert.equal(extractMatchingAbstract(first+relation+last,'12345678'),'');
  assert.equal(extractMatchingAbstract(first+relation.replace('RetractionIn','ExpressionOfConcernIn')+last,'12345678'),'');
+ assert.equal(extractMatchingAbstract(first+relation.replace('RetractionIn','ExpressionOfConcernFor')+last,'12345678'),'');
+ assert.equal(extractMatchingAbstract(first+relation.replace('RefType="RetractionIn"','Version="1" RefType="ExpressionOfConcernFor"')+last,'12345678'),'');
  assert.equal(extractMatchingAbstract(first+'<PublicationType>Retracted Publication</PublicationType>'+last,'12345678'),'');
 });
 test('getAbstract checks live response PMID before using as evidence',async()=>{
