@@ -19,6 +19,11 @@ test('surface gate rejects uncited, fabricated citations and unsafe doses',()=>{
  assert.equal(auditAssistantReply('Έτσι είναι.',p).ok,false);
  assert.equal(auditAssistantReply('Απάντηση [Τ9]',p).ok,false);
  assert.equal(auditAssistantReply('Δώσε 12 mg [Τ1]',p).ok,false);
+ assert.equal(auditAssistantReply('Χορήγησε 10 IU [Τ1]',p).ok,false);
+ assert.equal(auditAssistantReply('Χορήγησε 0,5 mg/kg [Τ1]',p).ok,false);
+ assert.equal(auditAssistantReply('Δώσε 2 μονάδες [Τ1]',p).ok,false);
+ assert.equal(auditAssistantReply('Χορήγησε 12 μg [Τ1]',p).ok,false);
+ assert.equal(auditAssistantReply('Η κλίμακα GCS έχει 15 βαθμούς. [Τ1]',p).ok,true);
  assert.equal(auditAssistantReply('Ξέρω ότι νιώθεις θλίψη [Τ1]',p).ok,false);
 });
 test('video is future-gated on publication, review and chapter match',()=>{
