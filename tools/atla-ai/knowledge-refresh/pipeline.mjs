@@ -27,18 +27,18 @@ export function extractAbstract(xml){
  */
 export function extractMatchingAbstract(xml,pmid){
  const value=String(xml||'');
- const blocks=[...value.matchAll(/<PubmedArticle(?:\\s[^>]*)?>([\\s\\S]*?)<\\/PubmedArticle>/gi)];
+ const blocks=[...value.matchAll(/<PubmedArticle(?:\s[^>]*)?>([\s\S]*?)<\/PubmedArticle>/gi)];
  if(blocks.length!==1)return '';
  const article=blocks[0][1];
- const citation=article.match(/<MedlineCitation(?:\\s[^>]*)?>([\\s\\S]*?)<\\/MedlineCitation>/i)?.[1]||'';
- const id=citation.match(/<PMID(?:\\s[^>]*)?>(\\d{1,10})<\\/PMID>/i)?.[1]||'';
+ const citation=article.match(/<MedlineCitation(?:\s[^>]*)?>([\s\S]*?)<\/MedlineCitation>/i)?.[1]||'';
+ const id=citation.match(/<PMID(?:\s[^>]*)?>(\d{1,10})<\/PMID>/i)?.[1]||'';
  if(id!==String(pmid))return '';
- if(/<CommentsCorrections\\b[^>]*RefType\\s*=\\s*["'](?:RetractionIn|ExpressionOfConcernIn|RetractionOf)["']/i.test(article))return '';
- if(/<PublicationType(?:\\s[^>]*)?>\\s*(?:Retracted Publication|Retraction of Publication|Expression of Concern)\\s*<\\/PublicationType>/i.test(article))return '';
+ if(/<CommentsCorrections\b[^>]*RefType\s*=\s*["'](?:RetractionIn|ExpressionOfConcernIn|RetractionOf)["']/i.test(article))return '';
+ if(/<PublicationType(?:\s[^>]*)?>\s*(?:Retracted Publication|Retraction of Publication|Expression of Concern)\s*<\/PublicationType>/i.test(article))return '';
  return extractAbstract(citation);
 }
 export async function getAbstract(pmid,fetcher=fetch){
- if(!/^\\d{1,10}$/.test(String(pmid)))return '';
+ if(!/^\d{1,10}$/.test(String(pmid)))return '';
  const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi');
  for(const [k,v] of Object.entries({db:'pubmed',id:String(pmid),retmode:'xml'}))url.searchParams.set(k,v);
  try{
