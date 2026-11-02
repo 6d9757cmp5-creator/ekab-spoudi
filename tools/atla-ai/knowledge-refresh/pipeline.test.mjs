@@ -115,3 +115,20 @@ test('empty watchlist and malformed metadata refuse updates',async()=>{
  await assert.rejects(run({scanner:make({monitored_urls:4,pubmed_failures:[]}),
   write:false,env:{}}),/scanner-metadata-incomplete/);
 });
+
+test('nested AI research approval flags fail closed before publication',()=>{
+ const safe={clinical_approval:false,atla_ai_retrieval_enabled:false,learner_visible:false,
+  ai_assessment_unverified:true,independent_clinical_review:'required'};
+ const item={status:'pending-independent-scientific-review',full_text_stored:false,
+  clinical_approval:false,atla_ai_retrieval_enabled:false,learner_visible:false,assessment:safe};
+ const report=assessment=>({schema_version:2,items:[{...item,assessment}]});
+ assert.equal(validateOutput(report(safe)),true);
+ for(const patch of [
+  {learner_visible:true},{clinical_approval:'approved'},{atla_ai_retrieval_enabled:'yes'},
+  {ai_assessment_unverified:false},{independent_clinical_review:'approved'}
+ ]){
+  assert.throws(()=>validateOutput(report({...safe,...patch})),/unsafe-research-publication/);
+ }
+ const {learner_visible,...missing}=safe;
+ assert.throws(()=>validateOutput(report(missing)),/unsafe-research-publication/);
+});
