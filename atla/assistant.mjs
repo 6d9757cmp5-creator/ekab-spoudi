@@ -7,6 +7,7 @@ import {retrieve,riskGuard,RISK_MESSAGE} from './knowledge/retrieve.mjs';
 import {askAi,buildPayload} from './ai/client.mjs';
 import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
+import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './student/profile.mjs';
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
@@ -16,6 +17,8 @@ const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
 const $=(tag,className='',text='')=>{const n=document.createElement(tag);if(className)n.className=className;if(text)n.textContent=text;return n;};
 const safeStorage=()=>{try{return sessionStorage;}catch{return {getItem:()=>null,setItem:()=>{},removeItem:()=>{}};}};
 const storage=safeStorage();
+// Live read-only projection of existing progress; no second grade store or raw scores sent to AI.
+const learnerProfile=()=>{try{return canonicalLearnerProfile(localStorage,{scheduler:window.EkabStudyScheduler});}catch{return canonicalLearnerProfile(null);}};
 const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
@@ -154,9 +157,11 @@ function boot(){
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q,demoToggle.checked?'mock':'local');
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
   const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLAS'),'refusal');return;}
+  const studyInsight=localStudyInsight(q,learnerProfile());
+  if(studyInsight){add('mentor',studyInsight,'local');return;}
   const link=navigation(q);
   if(demoToggle.checked){
-   const level=loadLearning(localStorage).level;
+   const level=teachingLevelFor(learnerProfile(),q);
    const pageName=(document.querySelector('main h1,main h2')?.textContent||document.title).trim();
    add('mentor',mockAtlasReply({question:q,page:pageName,level}),'mock');
    if(link)offerLink(link[1],'Δοκίμασε τη μετάβαση: '+link[0]);
@@ -168,8 +173,8 @@ function boot(){
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
    if(!ATLA_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');return;}
-   const prefs=loadLearning(localStorage);
-   const payload=buildPayload({question:q,passages:found.passages,level:prefs.level,history:historyForAi(history(),4)});
+   const level=teachingLevelFor(learnerProfile(),q);
+   const payload=buildPayload({question:q,passages:found.passages,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
   }catch{add('mentor','Η τοπική βιβλιοθήκη δεν είναι διαθέσιμη αυτή τη στιγμή.');}
