@@ -24,6 +24,7 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             tools/atla-ai/knowledge-refresh
+            .github/workflows
             mentor/library
             mentor/knowledge
             mentor/clinical-desk
@@ -52,6 +53,7 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             tools/atla-ai/knowledge-refresh
+            .github/workflows
             mentor/library
             mentor/knowledge
             mentor/clinical-desk
@@ -76,6 +78,7 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             tools/atla-ai/knowledge-refresh
+            .github/workflows
             mentor/library
             mentor/knowledge
             mentor/clinical-desk
