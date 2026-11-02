@@ -1,0 +1,34 @@
+name: PR124 ATLAS contextual recall — no fixed card pack
+on:
+  pull_request:
+    paths:
+      - 'theme-init.js'
+      - 'mentor/presence/presence.mjs'
+      - 'services/recall/**'
+      - 'scripts/verify-atlas-contextual-recall-browser.mjs'
+      - '.github/workflows/pr124-contextual-recall.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contextual-recall:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Source syntax, policy and real progress selection
+        run: |
+          node --check theme-init.js
+          node --check mentor/presence/presence.mjs
+          node --check services/recall/selector.mjs
+          node --check services/recall/popup.mjs
+          node --test services/recall/selector.test.mjs
+          node scripts/verify-saek-reader-safety.cjs
+      - name: Mobile + desktop live lesson popup smoke
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node scripts/verify-atlas-contextual-recall-browser.mjs

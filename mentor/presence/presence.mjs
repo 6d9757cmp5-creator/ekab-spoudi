@@ -1,3 +1,5 @@
+/* Shared optional ATLAS recall launcher; reuses existing SAEK read progress. */
+import '../../services/recall/popup.mjs';
 /**
  * MENTOR Live Companion: one shared floating presence for every study page.
  * - A single instance per document; the 3D scene loads only while it is open.

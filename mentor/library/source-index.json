@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "purpose": "bibliography-only; no clinical content or source text published",
+  "purpose": "bibliography-only; no clinical content or source text published; medicine metadata internal to ATLA AI",
   "counts": {
-    "identified": 15,
+    "identified": 28,
     "extracted_in_isolated_review_branch": 7,
     "clinically_approved": 0
   },
@@ -16,7 +16,10 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ]
     },
     {
       "id": "who-bec",
@@ -27,7 +30,11 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ]
     },
     {
       "id": "openrn-health",
@@ -38,7 +45,11 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ]
     },
     {
       "id": "openrn-skills",
@@ -49,7 +60,10 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ]
     },
     {
       "id": "openrn-pharm",
@@ -60,7 +74,11 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ]
     },
     {
       "id": "iem-project",
@@ -71,7 +89,10 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ]
     },
     {
       "id": "saem-cdem",
@@ -82,7 +103,10 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ]
     },
     {
       "id": "open-acute-care",
@@ -93,7 +117,10 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ]
     },
     {
       "id": "who-triage",
@@ -104,7 +131,11 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ]
     },
     {
       "id": "who-toolkit",
@@ -115,7 +146,11 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ]
     },
     {
       "id": "erc-2025",
@@ -126,7 +161,11 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ]
     },
     {
       "id": "ems-education",
@@ -137,7 +176,10 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ]
     },
     {
       "id": "ekab-saek",
@@ -148,7 +190,10 @@
       "extracted_for_review": false,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ]
     },
     {
       "id": "openrn-advanced",
@@ -159,7 +204,10 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ]
     },
     {
       "id": "medical-surgical-nursing",
@@ -170,7 +218,389 @@
       "extracted_for_review": true,
       "independent_clinical_review": "not_verified",
       "publication_rights_review": "not_verified",
-      "clinical_retrieval_enabled": false
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ]
+    },
+    {
+      "id": "nancy-caroline-9",
+      "title": "Nancy Caroline’s Emergency Care in the Streets",
+      "publisher": "AAOS / Public Safety Group (Jones & Bartlett)",
+      "source_url": "https://www.psglearning.com/catalog/productdetails/9781284256789",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "learning_priority": 2,
+      "resource_kind": "textbook",
+      "edition": "9th edition (2023)",
+      "curriculum_topics": [
+        "προνοσοκομειακή εκτίμηση",
+        "τραύμα",
+        "αεραγωγός",
+        "επείγοντα περιστατικά"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "phtls-10",
+      "title": "PHTLS — Prehospital Trauma Life Support",
+      "publisher": "NAEMT / American College of Surgeons",
+      "source_url": "https://www.naemt.org/education/trauma-education/phtls",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "learning_priority": 2,
+      "resource_kind": "textbook-and-course",
+      "edition": "10th edition",
+      "curriculum_topics": [
+        "τραύμα",
+        "αιμορραγία",
+        "αεραγωγός",
+        "εκτίμηση σκηνής"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "amls-4",
+      "title": "AMLS — Advanced Medical Life Support",
+      "publisher": "NAEMT",
+      "source_url": "https://naemt.org/education/medical-education/amls",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "learning_priority": 2,
+      "resource_kind": "textbook-and-course",
+      "edition": "4th edition",
+      "curriculum_topics": [
+        "κλινική εκτίμηση",
+        "καρδιολογία",
+        "νευρολογία",
+        "επείγουσα παθολογία"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "who-prehospital-pocket-2026",
+      "title": "Prehospital Emergency Care: Pocket Reference",
+      "publisher": "World Health Organization",
+      "source_url": "https://www.who.int/publications/b/82620",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "learning_priority": 2,
+      "resource_kind": "clinical-reference",
+      "edition": "2026 · ISBN 9789240121560",
+      "curriculum_topics": [
+        "προνοσοκομειακή εκτίμηση",
+        "διακομιδή",
+        "επείγουσα φροντίδα"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "existing_knowledge_id": "who-pocket-2026",
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "who-ambulance-operations-2025",
+      "title": "Prehospital Emergency Care — Operational Guidance for Ambulance Systems",
+      "publisher": "World Health Organization",
+      "source_url": "https://www.who.int/publications/9789240114067",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic"
+      ],
+      "learning_priority": 2,
+      "resource_kind": "clinical-reference",
+      "edition": "2025 · ISBN 9789240114067",
+      "curriculum_topics": [
+        "διακομιδή",
+        "λειτουργία ασθενοφόρου",
+        "επικοινωνία",
+        "διαχείριση συμβάντος"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "existing_knowledge_id": "who-ops-2025",
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "guyton-hall-15",
+      "title": "Guyton and Hall Textbook of Medical Physiology",
+      "publisher": "Elsevier",
+      "source_url": "https://shop.elsevier.com/books/guyton-and-hall-textbook-of-medical-physiology/hall/978-0-443-11101-3",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "learning_priority": 3,
+      "resource_kind": "textbook",
+      "edition": "15th edition (2025)",
+      "curriculum_topics": [
+        "φυσιολογία",
+        "καρδιαγγειακό",
+        "αναπνευστικό",
+        "νεφρολογία"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "robbins-pathology-11",
+      "title": "Robbins, Cotran & Kumar Pathologic Basis of Disease",
+      "publisher": "Elsevier",
+      "source_url": "https://shop.elsevier.com/books/robbins-cotran-and-kumar-pathologic-basis-of-disease/kumar/978-0-443-26452-8",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "learning_priority": 3,
+      "resource_kind": "textbook",
+      "edition": "11th edition (2025)",
+      "curriculum_topics": [
+        "παθολογία",
+        "παθοφυσιολογία",
+        "φλεγμονή",
+        "κυτταρική βλάβη"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "bates-examination-14",
+      "title": "Bates’ Guide to Physical Examination and History Taking",
+      "publisher": "Wolters Kluwer / Lippincott",
+      "source_url": "https://www.wolterskluwer.com/en/solutions/lippincott-medicine/medical-education/lippincott-connect/bates-guide-to-physical-examination",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "learning_priority": 3,
+      "resource_kind": "textbook",
+      "edition": "14th edition (2025)",
+      "curriculum_topics": [
+        "κλινική εξέταση",
+        "λήψη ιστορικού",
+        "κλινική συλλογιστική"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "openstax-anatomy-physiology-2e",
+      "title": "Anatomy and Physiology 2e",
+      "publisher": "OpenStax / Rice University",
+      "source_url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "learning_priority": 3,
+      "resource_kind": "open-textbook",
+      "edition": "2e (2022)",
+      "curriculum_topics": [
+        "ανατομία",
+        "φυσιολογία",
+        "ομοιόσταση",
+        "νευρικό σύστημα"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "section_urls": [
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-1-overview-of-anatomy-and-physiology",
+        "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-2-structural-organization-of-the-human-body"
+      ],
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "openstax-microbiology",
+      "title": "Microbiology",
+      "publisher": "OpenStax / Rice University",
+      "source_url": "https://openstax.org/books/microbiology/pages/1-introduction",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "learning_priority": 3,
+      "resource_kind": "open-textbook",
+      "edition": "2016",
+      "curriculum_topics": [
+        "μικροβιολογία",
+        "λοιμώξεις",
+        "παθογόνα",
+        "ανοσολογία"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "section_urls": [
+        "https://openstax.org/books/microbiology/pages/1-summary"
+      ],
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "msd-professional",
+      "title": "MSD Manual — Professional Edition",
+      "publisher": "Merck / MSD Manuals",
+      "source_url": "https://www.msdmanuals.com/professional",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "medicine"
+      ],
+      "learning_priority": 3,
+      "resource_kind": "professional-reference",
+      "edition": "Online, continuously updated",
+      "curriculum_topics": [
+        "διαφορική διάγνωση",
+        "παθολογία",
+        "ειδικότητες",
+        "κλινική εξέταση"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "existing_knowledge_id": "msd",
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "z-anatomy-3d",
+      "title": "Z-Anatomy — Models of Human Anatomy",
+      "publisher": "Z-Anatomy",
+      "source_url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "learning_priority": 4,
+      "resource_kind": "3d-model",
+      "edition": "Versioned GitHub repository",
+      "curriculum_topics": [
+        "3D ανατομία",
+        "μύες",
+        "οστά",
+        "νεύρα",
+        "όργανα"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
+    },
+    {
+      "id": "physionet-ptb-xl-103",
+      "title": "PTB-XL — 12-Lead ECG Database",
+      "publisher": "PhysioNet",
+      "source_url": "https://physionet.org/content/ptb-xl/1.0.3/",
+      "license_summary": "Βιβλιογραφικός σύνδεσμος μόνο. Δεν έχει επιβεβαιωθεί δικαίωμα εξαγωγής, αναδημοσίευσης ή κλινικής χρήσης πλήρους περιεχομένου. Έλεγχος ανά έργο/έκδοση εκκρεμεί.",
+      "extracted_for_review": false,
+      "independent_clinical_review": "not_verified",
+      "publication_rights_review": "not_verified",
+      "clinical_retrieval_enabled": false,
+      "learning_tracks": [
+        "paramedic",
+        "medicine"
+      ],
+      "learning_priority": 4,
+      "resource_kind": "ecg-dataset",
+      "edition": "1.0.3 (2022)",
+      "curriculum_topics": [
+        "ΗΚΓ",
+        "καρδιολογία",
+        "εκπαίδευση κυματομορφών"
+      ],
+      "metadata_verified_on": "2026-11-01",
+      "reference_only": true,
+      "section_urls": [
+        "https://physionet.org/files/ptb-xl/1.0.3/scp_statements.csv"
+      ],
+      "permission_evidence_verified": false,
+      "full_text_imported": false,
+      "learning_track_note": "medicine tag is internal ATLA expertise, not a separate learner course"
     }
   ]
 }
