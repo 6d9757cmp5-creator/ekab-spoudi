@@ -25,13 +25,13 @@ try{
   const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(origin+'index.html',{waitUntil:'domcontentloaded'});
-  assert.equal(await page.locator('.atlas-recall-chip:visible').count(),0,'No pop-up for unread chapters');
+  assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No permanent recall launcher anywhere');
+  assert.equal(await page.locator('.atlas-recall-window:visible').count(),0,'No pop-up for unread chapters');
   await page.evaluate(()=>localStorage.setItem('ekab.saek.read.v1.01.1','1'));
   await page.reload({waitUntil:'domcontentloaded'});
-  await page.locator('.atlas-recall-chip').waitFor({state:'visible'});
+  assert.equal(await page.locator('.atlas-recall-chip').count(),0,'Read lessons must not create a persistent launcher');
   assert.equal(await page.locator('.atlas-recall-window:visible').count(),0,'Respect initial randomized delay');
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),true,'Automatic recall enabled by default');
-  assert.ok((await page.locator('.atlas-recall-chip').textContent()).includes('Επανάληψη'));
   // No activation click. Simulate a quiet learner after the persisted randomized deadline.
   await page.clock.install();
   await page.evaluate(()=>{
@@ -54,15 +54,22 @@ try{
   assert.equal(data.recall.answer,'again');
   assert.equal(await page.locator('.atlas-recall-window:visible').count(),0);
   await page.goto(origin+'saek-course-01.html',{waitUntil:'domcontentloaded'});
-  await page.locator('.atlas-recall-chip').waitFor({state:'visible'});
-  await page.locator('.atlas-recall-chip').click();
-  await page.locator('.atlas-recall-question').waitFor({state:'visible'});
+  assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No floating recall button on lesson page');
+  await page.clock.install();
+  await page.evaluate(()=>{
+   const key='ekab.atlas.recall.settings.v1',s=JSON.parse(localStorage.getItem(key));
+   s.nextAt=Date.now()+1000;localStorage.setItem(key,JSON.stringify(s));
+  });
+  await page.clock.fastForward(30000);
+  await page.evaluate(()=>window.dispatchEvent(new Event('ekab:recall-check')));
+  await page.locator('.atlas-recall-question').waitFor({state:'visible',timeout:15000});
   await page.getByRole('button',{name:'Παύση υπενθυμίσεων'}).click();
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),false);
   await page.goto(origin+'theory.html?mode=exam',{waitUntil:'domcontentloaded'});
-  assert.equal(await page.locator('.atlas-recall-chip').count(),0,'Never interrupt an examination');
+  assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No floating launcher on exam pages');
+  assert.equal(await page.locator('.atlas-recall-window').count(),0,'Never interrupt an examination');
   assert.deepEqual(errors,[],label+': '+errors.join(' | '));
-  console.log('PASS '+label+': automatic random-timed recall without activation, existing SAEK questions, pause, no exam interruption');
+  console.log('PASS '+label+': NO permanent recall control, automatic random-timed popups, self-check, pause, no exam interruption');
   await context.close();
  }
 }finally{
