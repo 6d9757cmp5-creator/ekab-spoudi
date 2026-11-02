@@ -27,6 +27,6 @@ A source reference is **not** a reviewed educational model. The source is linked
 - `scripts/nih3d-contextual-ui.test.mjs`: unit/static source evidence checks.
 - `scripts/nih3d-contextual-browser.test.mjs`: real Chromium desktop/mobile journeys, including no premature exam hints, no fictional diagnosis inference, and link removal on subject change.
 
-**Not done:** full scientific review of the medical catalog (4,078 automatic candidates and 10,304 manual-review entries), model-by-model teaching approvals, browser inline 3D rendering from NIH, complete integration of every medical source, and permanent binary replication of all file formats. The 15,688 NIH items and 204,346 source file references are **metadata coverage**, not stored binaries.
+**Not done:** full scientific review of the medical catalog (1,597 automatic candidates and 12,766 manual-review entries), model-by-model teaching approvals, browser inline 3D rendering from NIH, complete integration of every medical source, and permanent binary replication of all file formats. The 15,688 NIH items and 204,346 source file references are **metadata coverage**, not stored binaries.
 
 This pilot extends the four-stage architecture: NIH 3D Original Archive → Scientific Classification Engine → 3D Knowledge Graph → ATLA Contextual Selection → Lessons / Exams / Clinical Cockpit.
