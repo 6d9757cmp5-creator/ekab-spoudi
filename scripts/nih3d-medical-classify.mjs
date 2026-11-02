@@ -24,7 +24,7 @@ export function classifyEntry(e){
  const detail=[e.title,e.name,e.description,e.summary,e.tags,e.keywords].map(clean).join(' ');
  const topics=RULES.filter(([,re])=>re.test(detail)).map(([topic])=>topic);
  // 'human' and 'body' alone are not anatomy evidence: molecular structures also carry those words.
- const direct=cat==='anatomy'||topics.some(x=>STRONG.has(x));
+ const direct=cat==='anatomy'||(!BIO.has(cat)&&topics.some(x=>STRONG.has(x)));
  const bio=BIO.has(cat)||topics.includes('molecular-medicine')||topics.includes('microbiology');
  const decision=direct?'medical_candidate':bio?'manual_review':cat==='devices and hardware'?'non_medical_candidate':'manual_review';
  const originalLicense=e.license??e.licenseRaw??null;
