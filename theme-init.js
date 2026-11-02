@@ -32,3 +32,10 @@
  module.type='module';module.src='experience-v4.mjs?v=20261101';
  document.head.appendChild(module);
 })();
+
+/* Optional ATLAS study recall is lazy-loaded; no cards or lessons are bundled on each page. */
+(function(){
+ const module=document.createElement('script');module.type='module';
+ module.src=new URL('services/recall/popup.mjs',document.currentScript?.src||location.href).href;
+ document.head.appendChild(module);
+})();
