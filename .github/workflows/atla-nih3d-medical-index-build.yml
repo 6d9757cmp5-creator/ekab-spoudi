@@ -10,6 +10,8 @@ on:
       - scripts/nih3d-build-knowledge-graph.mjs
       - scripts/nih3d-contextual-selection.mjs
       - scripts/nih3d-graph-selection.test.mjs
+      - scripts/nih3d-plan-medical-transfer.mjs
+      - scripts/nih3d-plan-medical-transfer.test.mjs
       - .github/workflows/atla-nih3d-medical-index-build.yml
       - tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json
       - tools/atla-ai/resources/nih3d-master-plan-2026/segments/**
@@ -37,16 +39,19 @@ jobs:
           node --check scripts/nih3d-build-medical-index.mjs
           node scripts/nih3d-medical-classify.test.mjs
           node scripts/nih3d-graph-selection.test.mjs
+          node scripts/nih3d-plan-medical-transfer.test.mjs
       - name: Classify full available NIH metadata
         run: node scripts/nih3d-build-medical-index.mjs
       - name: Derive proposed topic-only knowledge graph
         run: node scripts/nih3d-build-knowledge-graph.mjs
-      - name: Save generated candidate catalog and graph to source branch
+      - name: Inventory medically relevant binary references without downloading
+        run: node scripts/nih3d-plan-medical-transfer.mjs
+      - name: Save generated candidate catalog, graph and storage feasibility inventory
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add tools/atla-ai/resources/nih3d-medical-index/ tools/atla-ai/resources/nih3d-knowledge-graph/
+          git add tools/atla-ai/resources/nih3d-medical-index/ tools/atla-ai/resources/nih3d-knowledge-graph/ tools/atla-ai/resources/nih3d-medical-transfer-plan.json
           if ! git diff --cached --quiet; then
             git commit -m "data(ATLA): regenerate NIH3D candidate medical index from source segments"
             git push origin "HEAD:${GITHUB_REF_NAME}"
@@ -55,4 +60,5 @@ jobs:
         run: |
           test -s tools/atla-ai/resources/nih3d-medical-index/summary.json
           test -s tools/atla-ai/resources/nih3d-knowledge-graph/summary.json
+          test -s tools/atla-ai/resources/nih3d-medical-transfer-plan.json
           node -e 'const s=require("./tools/atla-ai/resources/nih3d-medical-index/summary.json"); if(s.sourceRecords!==s.sourceCatalogEntries || s.uniqueRecords+s.duplicates!==s.sourceRecords)process.exit(1); const g=require("./tools/atla-ai/resources/nih3d-knowledge-graph/summary.json"); if(g.modelNodes!==s.uniqueRecords)process.exit(2); console.log("Coverage verified:",s.uniqueRecords,"NIH entries and",g.proposedEdges,"topic links");'
