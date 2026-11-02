@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildWatchlist,mergeCandidates,discoverPubMed,recheckPendingPubMed,signalFor,preserveProbeHistory,main,probeSource} from './scan.mjs';
+import {buildWatchlist,mergeCandidates,discoverPubMed,recheckPendingPubMed,screenPubMedLinkedCorrections,signalFor,preserveProbeHistory,main,probeSource} from './scan.mjs';
 import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 import {readFileSync} from 'node:fs';
 
@@ -12,6 +12,11 @@ function stub(url,options={}){
  if(options.method==='HEAD')return Promise.resolve(response({}));
  const u=new URL(String(url));
  if(u.pathname.endsWith('/esearch.fcgi'))return Promise.resolve(response({esearchresult:{idlist:['12345678','12345679']}}));
+ if(u.pathname.endsWith('/efetch.fcgi')){
+  const ids=(u.searchParams.get('id')||'').split(',').filter(Boolean);
+  const xml='<PubmedArticleSet>'+ids.map(id=>'<PubmedArticle><MedlineCitation><PMID>'+id+'</PMID><Article><ArticleTitle>Mock paper</ArticleTitle></Article></MedlineCitation></PubmedArticle>').join('')+'</PubmedArticleSet>';
+  return Promise.resolve({ok:true,status:200,text:async()=>xml});
+ }
  if(u.pathname.endsWith('/esummary.fcgi')){
   const ids=(u.searchParams.get('id')||'').split(',').filter(Boolean);
   const entries=Object.fromEntries(ids.map(id=>[id,{
@@ -201,9 +206,13 @@ test('previously queued PMID is rechecked and removed if PubMed now marks it ret
  const old=mergeCandidates([],[{pmid:'23456789',title:'Systematic review of training',
   published_at:'2026 Nov 01',journal:'Science',publication_types:['Systematic Review'],
   topic_id:'trauma'}],'2026-11-01T00:00:00Z').items[0];
- const retracted=async()=>response({result:{uids:['23456789'],
-  23456789:{title:'Systematic review of training',pubdate:'2026 Nov 01',
-   source:'Science',pubtype:['Systematic Review','Retracted Publication']}}});
+ const retracted=async url=>{
+  if(new URL(String(url)).pathname.endsWith('/efetch.fcgi'))
+   return {ok:true,status:200,text:async()=>'<PubmedArticle><MedlineCitation><PMID>23456789</PMID></MedlineCitation></PubmedArticle>'};
+  return response({result:{uids:['23456789'],
+   23456789:{title:'Systematic review of training',pubdate:'2026 Nov 01',
+    source:'Science',pubtype:['Systematic Review','Retracted Publication']}}});
+ };
  const checked=await recheckPendingPubMed([old],retracted);
  assert.equal(checked.checked,1);
  assert.equal(checked.found.length,0);
@@ -218,4 +227,38 @@ test('incomplete or unreachable PubMed recheck aborts instead of silently retain
   /recheck-incomplete/);
  await assert.rejects(()=>recheckPendingPubMed([old],async()=>({ok:false,status:503})),
   /HTTP 503/);
+});
+
+test('PubMed XML linked retraction blocks an older eligible PMID even if ESummary stays unchanged',async()=>{
+ const old=mergeCandidates([],[{pmid:'23456789',title:'Prehospital evidence review',
+  published_at:'2026 Nov 01',journal:'Science',publication_types:['Systematic Review'],
+  topic_id:'prehospital'}],'2026-11-01T00:00:00Z').items[0];
+ const summary={result:{uids:['23456789'],23456789:{title:old.title,pubdate:old.published_at,
+  source:old.journal,pubtype:['Systematic Review']}}};
+ const original='<PubmedArticle><MedlineCitation><PMID Version="1">23456789</PMID><Article><ArticleTitle>Review</ArticleTitle></Article>';
+ const close='</MedlineCitation></PubmedArticle>';
+ const linked='<CommentsCorrectionsList><CommentsCorrections Version="1" RefType="RetractionIn"><RefSource>Notice</RefSource></CommentsCorrections></CommentsCorrectionsList>';
+ const fetcher=async url=>new URL(String(url)).pathname.endsWith('/efetch.fcgi')
+  ?{ok:true,status:200,text:async()=>original+linked+close}:response(summary);
+ const r=await recheckPendingPubMed([old],fetcher);
+ assert.equal(r.checked,1);
+ assert.equal(r.found.length,0);
+ assert.equal(r.excluded[0].reason,'pubmed-xml-linked-retraction-or-expression-of-concern');
+ const concerned=screenPubMedLinkedCorrections(original+linked.replace('RetractionIn','ExpressionOfConcernIn')+close,['23456789']);
+ assert.equal(concerned[0].flagged,true);
+ const notFlagged=screenPubMedLinkedCorrections(original+linked.replace('RetractionIn','ErratumIn')+close,['23456789']);
+ assert.equal(notFlagged[0].flagged,false);
+});
+test('Missing, duplicate or mismatched PubMed XML identity fails closed without persistence',async()=>{
+ const article=id=>'<PubmedArticle><MedlineCitation><PMID>'+id+'</PMID></MedlineCitation></PubmedArticle>';
+ assert.throws(()=>screenPubMedLinkedCorrections('', ['23456789']),/incomplete/);
+ assert.throws(()=>screenPubMedLinkedCorrections(article('11111111'),['23456789']),/invalid-identity/);
+ assert.throws(()=>screenPubMedLinkedCorrections(article('23456789')+article('23456789'),['23456789']),/incomplete/);
+ const old=mergeCandidates([],[{pmid:'23456789',title:'Prehospital evidence review',published_at:'2026 Nov 01',
+  journal:'Science',publication_types:['Systematic Review'],topic_id:'prehospital'}],
+  '2026-11-01T00:00:00Z').items[0];
+ const fetcher=async url=>new URL(String(url)).pathname.endsWith('/efetch.fcgi')
+  ?{ok:true,status:200,text:async()=>''}:response({result:{uids:['23456789'],
+   23456789:{title:old.title,pubdate:old.published_at,source:old.journal,pubtype:['Systematic Review']}}});
+ await assert.rejects(()=>recheckPendingPubMed([old],fetcher),/linked-corrections-incomplete/);
 });

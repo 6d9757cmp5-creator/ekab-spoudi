@@ -117,6 +117,43 @@ async function requestJson(url,fetcher=fetch){
  if(body.length>1_500_000)throw Error('oversized-source-response');
  return JSON.parse(body);
 }
+/**
+ * Recheck PubMed's linked-correction XML for *every* previously queued PMID.
+ * ESummary publication types can lag behind an editor's linked notice.
+ * The XML is transient and is never persisted to the learner/library registry.
+ * See NLM linked citation guidance: https://www.nlm.nih.gov/bsd/policy/errata.html
+ */
+export function screenPubMedLinkedCorrections(xml,expectedIds){
+ const ids=new Set(expectedIds.map(String));
+ const seen=new Map();
+ const articles=[...String(xml).matchAll(/<PubmedArticle\b[^>]*>([\s\S]*?)<\/PubmedArticle>/gi)];
+ if(articles.length!==ids.size)throw Error('pubmed-linked-corrections-incomplete');
+ for(const [,article] of articles){
+  const citation=article.match(/<MedlineCitation\b[^>]*>([\s\S]*?)<\/MedlineCitation>/i)?.[1]||'';
+  const pmid=citation.match(/<PMID(?:\s[^>]*)?>(\d{1,10})<\/PMID>/i)?.[1]||'';
+  if(!ids.has(pmid)||seen.has(pmid))throw Error('pubmed-linked-corrections-invalid-identity');
+  const links=[...citation.matchAll(/<CommentsCorrections\b([^>]*)>/gi)]
+   .map(([,attrs])=>attrs.match(/\bRefType\s*=\s*["']([^"']+)["']/i)?.[1]||'');
+  const types=[...citation.matchAll(/<PublicationType(?:\s[^>]*)?>([\s\S]*?)<\/PublicationType>/gi)]
+   .map(([,value])=>value.replace(/<[^>]+>/g,' ').trim());
+  const flagged=links.some(x=>/^(RetractionIn|RetractionOf|ExpressionOfConcernIn|ExpressionOfConcernFor|RetractedandRepublishedIn)$/i.test(x))||
+   types.some(x=>/^(Retracted Publication|Retraction Notice|Retraction of Publication|Expression of Concern)$/i.test(x));
+  seen.set(pmid,{pmid,flagged});
+ }
+ if(seen.size!==ids.size)throw Error('pubmed-linked-corrections-incomplete');
+ return [...seen.values()];
+}
+async function fetchPubMedLinkedCorrections(ids,fetcher){
+ const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi');
+ for(const [k,v] of Object.entries({db:'pubmed',id:ids.join(','),retmode:'xml'}))url.searchParams.set(k,v);
+ await new Promise(resolve=>setTimeout(resolve,420));
+ const r=await fetcher(url,{headers:{accept:'application/xml','user-agent':'ATLA-Source-Monitor/1.0 (research-only)'},signal:AbortSignal.timeout(22000)});
+ if(!r.ok)throw Error('PubMed linked-corrections HTTP '+r.status);
+ const xml=await r.text();
+ if(xml.length>6_000_000)throw Error('pubmed-linked-corrections-oversized');
+ return screenPubMedLinkedCorrections(xml,ids);
+}
+
 export async function discoverPubMed(fetcher=fetch){
  const articles=new Map(),failures=[],excluded=[];
  for(const topic of TOPICS){
@@ -178,8 +215,17 @@ export async function recheckPendingPubMed(previous,fetcher=fetch){
  if(!result||!Array.isArray(result.uids)||
     ids.some(id=>!result.uids.map(String).includes(id)))
   throw Error('pubmed-existing-records-recheck-incomplete');
+ // Fail closed if any previously queued PMID lacks current linked-correction data.
+ // Do not silently retain retracted papers when ESummary still lists review types.
+ const linked=await fetchPubMedLinkedCorrections(ids,fetcher);
+ const linkedFlags=new Set(linked.filter(x=>x.flagged).map(x=>x.pmid));
  const found=[],excluded=[];
  for(const old of items){
+  if(linkedFlags.has(String(old.pmid))){
+   excluded.push({pmid:String(old.pmid),topic_id:old.topic_ids?.[0]||'prehospital',
+    reason:'pubmed-xml-linked-retraction-or-expression-of-concern'});
+   continue;
+  }
   const id=String(old.pmid),summary=result[id];
   if(!summary||!summary.title||!Array.isArray(summary.pubtype)||
      !(summary.fulljournalname||summary.source)||
@@ -284,7 +330,8 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
   monitored_by_source_category:Object.fromEntries([...new Set(watchlist.map(x=>x.source_category))].map(category=>[category,watchlist.filter(x=>x.source_category===category).length])),
   possible_source_updates:sourceResults.filter(x=>x.signal==='possible-source-update').length,
   newly_discovered_papers:merged.added,pending_papers:merged.items.length,pubmed_failures:discovered.failures,
-  pubmed_excluded:discovered.excluded,source_quality_policy:'curated publishers plus per-paper evidence-type screening; no articles auto-approved',
+  pubmed_excluded:discovered.excluded,pubmed_previously_queued_excluded:rechecked.excluded,
+  source_quality_policy:'curated publishers plus per-paper evidence-type screening; no articles auto-approved',
   full_texts_imported:0,model_training_performed:false,clinical_retrieval_updated:false,
   summary:'Scans detect candidates only; no medical/learner knowledge is published automatically.'};
  const health={schema_version:1,checked_at:now,sources:sourceResults};
