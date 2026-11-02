@@ -101,7 +101,9 @@ jobs:
           # per-shard Release. Never interpret a missing range as success.
           gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" --jq '.[] | select(.tag_name == "atla-nih3d-master-2026" or (.tag_name | startswith("atla-nih3d-master-2026-shard-"))) | .tag_name' |
             while IFS= read -r release_tag; do
-              gh release download "$release_tag" --pattern '*-RESULT.json' --dir tmp/nih3d-reports --clobber
+              if ! gh release download "$release_tag" --pattern '*-RESULT.json' --dir tmp/nih3d-reports --clobber; then
+                echo "::warning::No usable RESULT.json yet in $release_tag; final audit will mark missing canonical groups."
+              fi
             done
           node --input-type=module <<'NODE'
           import {readdirSync,readFileSync,writeFileSync} from 'node:fs';
