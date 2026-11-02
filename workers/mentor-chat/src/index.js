@@ -4,6 +4,7 @@
 import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '../../../mentor/ai/claude-adapter.mjs';
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
 import {ATLA_RUNTIME_RULES,teachingApproach} from '../../../atla/ai/teaching-policy.mjs';
+import {collectAndAuditAiStream,verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
 export {MentorBudget};
 const MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/meta/llama-3.1-8b-instruct-fp8-fast','@cf/google/gemma-4-26b-a4b-it'];
 const LEVELS=['beginner','student','advanced','scientific'];
@@ -65,6 +66,12 @@ function limited(ip,env,now=Date.now()){
 }
 export function _resetLimits(){hits.clear();day={key:'',count:0};}
 
+// Buffer the complete model output; never stream unvalidated medical text to callers.
+async function checkedModelResponse(stream,passages,headers){
+ const checked=await collectAndAuditAiStream(stream,passages);
+ return checked.ok?verifiedSseResponse(checked.text,headers):json({error:'unavailable'},503,headers);
+}
+
 async function answerWithClaude(request,env,body,headers){
  const messages=buildMessages(body),maxTokens=clampMaxTokens(env.CLAUDE_MAX_TOKENS);
  let req;try{req=buildClaudeRequest({messages,model:env.MENTOR_MODEL,maxTokens});}catch{return json({error:'bad_request'},400,headers);}
@@ -78,7 +85,7 @@ async function answerWithClaude(request,env,body,headers){
  if(!verdict?.ok)return json({error:'limit'},429,{...headers,'retry-after':'3600'});
  const out=await callClaude({apiKey:env.ANTHROPIC_API_KEY,request:req,signal:AbortSignal.timeout(25000)});
  if(!out.ok)return json({error:out.status===429?'limit':'unavailable'},out.status===429?429:503,headers);
- return new Response(out.stream,{status:200,headers:{...headers,'content-type':'text/event-stream; charset=utf-8','cache-control':'no-store'}});
+ return checkedModelResponse(out.stream,body.passages,headers);
 }
 export default {
  async fetch(request,env){
@@ -100,7 +107,7 @@ export default {
   const model=MODELS.includes(env.MENTOR_MODEL)?env.MENTOR_MODEL:MODELS[0];
   try{
    const stream=await env.AI.run(model,{messages:buildMessages(body),stream:true,max_tokens:350,temperature:0.2});
-   return new Response(stream,{status:200,headers:{...headers,'content-type':'text/event-stream; charset=utf-8','cache-control':'no-store'}});
+   return checkedModelResponse(stream,body.passages,headers);
   }catch{
    return json({error:'unavailable'},503,headers);
   }
