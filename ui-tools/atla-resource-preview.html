@@ -39,7 +39,7 @@ small{color:#b0c7d7}
 <main>
 <nav><a id="source-back" href="../tools/anatomy-3d/index.html">← Επιστροφή</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></nav>
 <h1 id="source-name">3D πόροι ATLA</h1>
-<p>Πρώτη ασφαλής ενσωμάτωση: πραγματική προεπισκόπηση ενός πηγαίου GLB κάθε φορά, χωριστά από το ενεργό εκπαιδευτικό μοντέλο.</p>
+<p>Πρώτη ασφαλής ενσωμάτωση: πραγματική προεπισκόπηση ενός πηγαίου 3D αρχείου (GLB ή OBJ) κάθε φορά, χωριστά από το ενεργό εκπαιδευτικό μοντέλο.</p>
 <div class="layout">
 <section class="card" aria-label="Πηγαία μοντέλα">
 <h2>Επιλογή μοντέλου</h2>
@@ -48,6 +48,7 @@ small{color:#b0c7d7}
 <select id="source-dataset" aria-describedby="source-warning">
   <option value="primary">Βασική επαληθευμένη συλλογή GLB</option>
   <option value="secondary">Πρόσθετα μοντέλα — περιορισμένη χρήση</option>
+  <option value="makehuman">MakeHuman — πρωτότυπα OBJ (χωρίς rig)</option>
 </select>
 <label for="source-model">Μοντέλο</label>
 <select id="source-model" aria-describedby="source-warning"></select>
@@ -61,7 +62,7 @@ small{color:#b0c7d7}
 </section>
 </div>
 <p id="source-warning" role="note">Οι πόροι δεν αποτελούν κλινικά επικυρωμένη προσομοίωση.</p>
-<p><small>Τα 5 Z-Anatomy παραμένουν σε απομονωμένη ερευνητική προβολή. Οι 3 ήδη υπάρχοντες στατικοί ασθενείς του Cockpit εμφανίζονται ως 3D assets και όχι ως νέοι rigged ασθενείς. Τα MakeHuman είναι πηγές γεωμετρίας/rig, όχι έτοιμα GLB. Οι πλήρεις BodyParts3D 4.0/4.3 άτλαντες διατηρούνται στο Anatomy Lab ως ξεχωριστά δεδομένα υψηλής ανάλυσης· δεν φορτώνονται εδώ ως GLB.</small></p>
+<p><small>Τα 5 Z-Anatomy παραμένουν σε απομονωμένη ερευνητική προβολή. Οι 3 ήδη υπάρχοντες στατικοί ασθενείς του Cockpit εμφανίζονται ως 3D assets και όχι ως νέοι rigged ασθενείς. Τα MakeHuman OBJ μπορούν να προβληθούν ως γεωμετρία, αλλά τα υπόλοιπα αρχεία skeleton/weights/BVH δεν αποτελούν έτοιμο rigged patient GLB. Οι πλήρεις BodyParts3D 4.0/4.3 άτλαντες διατηρούνται στο Anatomy Lab ως ξεχωριστά δεδομένα υψηλής ανάλυσης· δεν φορτώνονται εδώ ως GLB.</small></p>
 <p><small>Δεν τροποποιούνται η μαθησιακή πρόοδος, οι εξετάσεις, ο κανονικός 3D άτλας ή οι κλινικές σκηνές. Το NIH 3D χρειάζεται ξεχωριστή επαλήθευση και αντιστοίχιση πριν γίνει διαθέσιμο εδώ.</small></p>
 </main>
 </body></html>
