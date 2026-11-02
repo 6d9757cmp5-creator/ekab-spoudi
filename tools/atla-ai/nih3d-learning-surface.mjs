@@ -19,9 +19,9 @@ function lesson(){
  for(const chapter of document.querySelectorAll('details[id^="lesson-"]')){
   const number=chapter.id.slice(7);
   const target=chapter.querySelector('.saek-anatomy-jump-actions');
-  const paragraph=chapter.querySelector('.reader-main > .reader-paragraph');
-  if(!target||!paragraph||target.querySelector('.nih3d-research-reference'))continue;
-  const ref=selectNihResearchSource({surface:'lesson',courseId:course,chapterId:number,text:paragraph.textContent});
+  const chapterBody=chapter.querySelector('.body .reader-main')||chapter.querySelector('.body');
+  if(!target||!chapterBody||target.querySelector('.nih3d-research-reference'))continue;
+  const ref=selectNihResearchSource({surface:'lesson',courseId:course,chapterId:number,text:chapterBody.textContent});
   if(ref){const link=createLink(ref);if(link)target.append(link);}
  }
  return true;
