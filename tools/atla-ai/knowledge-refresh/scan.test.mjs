@@ -91,12 +91,9 @@ test('scanner reads existing registries but never writes any active medical lear
  assert.equal(result.pending.items.every(x=>x.status==='pending-review'),true);
  assert.equal(result.pending.items.every(x=>x.atla_ai_retrieval_enabled===false),true);
 });
-test('fail closed when PubMed is down',async()=>{
+test('fail closed when PubMed is down and previously queued evidence cannot be rechecked',async()=>{
  const bad=async(url,opts)=>opts?.method==='HEAD'?response({}):{ok:false,status:503,text:async()=>''};
- const r=await main({fetcher:bad,now:'2026-11-02T02:15:00Z',write:false});
- assert.equal(r.metadata.pubmed_failures.length,10);
- assert.equal(r.metadata.newly_discovered_papers,0);
- assert.equal(r.metadata.clinical_retrieval_updated,false);
+ await assert.rejects(()=>main({fetcher:bad,now:'2026-11-02T02:15:00Z',write:false}),/HTTP 503/);
 });
 
 
