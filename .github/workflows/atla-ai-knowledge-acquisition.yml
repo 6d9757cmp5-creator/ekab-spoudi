@@ -10,8 +10,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: atla-ai-knowledge-acquisition
-  cancel-in-progress: false
+  group: atla-ai-knowledge-acquisition-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   verify:
     runs-on: ubuntu-24.04
