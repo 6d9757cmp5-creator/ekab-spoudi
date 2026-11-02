@@ -151,8 +151,8 @@ test('top-level research report cannot claim clinical publication or curriculum 
 
 test('scheduled queue commit cannot rebase unverified changes onto a moving main',()=>{
  const workflow=readFileSync(new URL('../../../.github/workflows/atla-ai-knowledge-acquisition.yml',import.meta.url),'utf8');
- assert.match(workflow,/git add tools\\/atla-ai\\/knowledge-refresh\\/queue\\//);
- assert.match(workflow,/git push origin HEAD:main/);
+ assert.ok(workflow.includes('git add tools/atla-ai/knowledge-refresh/queue/'));
+ assert.ok(workflow.includes('git push origin HEAD:main'));
+ assert.ok(workflow.includes("github.event_name != 'pull_request' && github.ref == 'refs/heads/main'"));
  assert.doesNotMatch(workflow,/git pull --rebase/);
- assert.match(workflow,/github\.event_name != 'pull_request' && github\.ref == 'refs\\/heads\\/main'/);
 });
