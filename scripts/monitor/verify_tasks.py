@@ -39,6 +39,23 @@ def telegram(message):
     if not response.get("ok"):
         raise RuntimeError("Telegram did not accept notification")
 
+def safe_file_path(name):
+    """Resolve a manifest path only if no component is a symlink."""
+    relative = Path(name)
+    if relative.is_absolute() or not relative.parts or ".." in relative.parts:
+        return None
+    root = ROOT.resolve()
+    candidate = root / relative
+    # Checking only candidate.resolve().is_symlink() is ineffective: resolve()
+    # follows the symlink before the check. Inspect the original path chain.
+    if any(part.is_symlink() for part in (candidate, *candidate.parents)
+           if part != root and part.is_relative_to(root)):
+        return None
+    resolved = candidate.resolve()
+    if not resolved.is_relative_to(root) or not resolved.is_file():
+        return None
+    return resolved
+
 def verify(task):
     if task.get("status") != "ready_for_verification":
         return False, "not ready"
@@ -50,8 +67,8 @@ def verify(task):
         name, digest = entry.get("path"), entry.get("sha256")
         if not isinstance(name, str) or not isinstance(digest, str) or len(digest) != 64:
             return False, "invalid path or sha256"
-        path = (ROOT / name).resolve()
-        if not path.is_relative_to(ROOT.resolve()) or not path.is_file() or path.is_symlink():
+        path = safe_file_path(name)
+        if path is None:
             return False, f"missing/unsafe file: {name}"
         if name in seen:
             return False, "duplicate file"
@@ -65,7 +82,13 @@ def verify(task):
     pattern = inventory["glob"]
     if pattern.startswith("/") or ".." in Path(pattern).parts:
         return False, "unsafe inventory pattern"
-    actual = {p.relative_to(ROOT).as_posix() for p in ROOT.glob(pattern) if p.is_file()}
+    actual = set()
+    for candidate in ROOT.glob(pattern):
+        if candidate.is_file():
+            name = candidate.relative_to(ROOT).as_posix()
+            if safe_file_path(name) is None:
+                return False, f"unsafe inventory file: {name}"
+            actual.add(name)
     if len(actual) != inventory["expected_count"] or actual != seen:
         return False, f"inventory mismatch: expected {inventory['expected_count']}, got {len(actual)}"
     return True, "all exact files and hashes verified"
