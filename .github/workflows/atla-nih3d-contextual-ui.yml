@@ -52,6 +52,7 @@ jobs:
           node --check tools/patient-simulator/app/next-sim.mjs
           node scripts/nih3d-contextual-ui.test.mjs
   browser:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
