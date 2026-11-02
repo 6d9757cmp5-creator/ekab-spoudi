@@ -5,11 +5,17 @@ on:
       - 'scripts/nih3d-medical-classify.mjs'
       - 'scripts/nih3d-medical-classify.test.mjs'
       - '.github/workflows/atla-nih3d-medical-tests.yml'
+      - '.github/workflows/atla-nih3d-model-archive.yml'
+      - '.github/workflows/atla-nih3d-release-audit.yml'
+      - 'scripts/audit-atla-nih3d-release.mjs'
   pull_request:
     paths:
       - 'scripts/nih3d-medical-classify.mjs'
       - 'scripts/nih3d-medical-classify.test.mjs'
       - '.github/workflows/atla-nih3d-medical-tests.yml'
+      - '.github/workflows/atla-nih3d-model-archive.yml'
+      - '.github/workflows/atla-nih3d-release-audit.yml'
+      - 'scripts/audit-atla-nih3d-release.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,3 +29,9 @@ jobs:
           node-version: '22'
       - run: node --check scripts/nih3d-medical-classify.mjs
       - run: node scripts/nih3d-medical-classify.test.mjs
+      - name: Validate archive and audit YAML syntax
+        run: ruby -e "require 'yaml'; ARGV.each { |f| YAML.load_file(f) }" .github/workflows/atla-nih3d-model-archive.yml .github/workflows/atla-nih3d-release-audit.yml
+      - name: Validate fail-closed NIH release audit
+        run: |
+          node --check scripts/audit-atla-nih3d-release.mjs
+          node scripts/audit-atla-nih3d-release.mjs --self-test
