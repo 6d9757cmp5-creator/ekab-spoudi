@@ -141,3 +141,24 @@ test('HEAD redirects preserve canonical trailing slash without bypassing publish
  }));
  assert.equal(loop.reason,'redirect-loop');
 });
+
+test('malformed HTTP 200 PubMed search or summary is a failed topic, not a valid empty scan',async()=>{
+ const missingSearch=async()=>response({});
+ const search=await discoverPubMed(missingSearch);
+ assert.equal(search.found.length,0);
+ assert.equal(search.failures.length,10);
+ assert.ok(search.failures.every(x=>x.reason==='invalid-pubmed-search-response'));
+ const missingSummary=async url=>{
+  const u=new URL(String(url));
+  if(u.pathname.endsWith('/esearch.fcgi'))return response({esearchresult:{idlist:['12345678']}});
+  return response({result:{uids:['12345678'],12345678:{}}});
+ };
+ const summary=await discoverPubMed(missingSummary);
+ assert.equal(summary.found.length,0);
+ assert.equal(summary.failures.length,10);
+ assert.ok(summary.failures.every(x=>x.reason==='invalid-pubmed-summary-response'));
+ const validEmpty=async()=>response({esearchresult:{idlist:[]}});
+ const empty=await discoverPubMed(validEmpty);
+ assert.equal(empty.failures.length,0,'a genuinely empty NCBI result is not an outage');
+ assert.equal(empty.found.length,0);
+});
