@@ -151,6 +151,7 @@ function boot(){
  // Explicit event allows a chapter to trigger a safe eligibility recheck without waiting for polling.
  window.addEventListener('ekab:recall-check',check);
  window.addEventListener('ekab:cloud-applied',refresh);
+ window.addEventListener('ekab:recall-settings-changed',()=>{if(settings().enabled===false&&!panel.hidden)close();refresh();});
  window.addEventListener('storage',ev=>{if(ev.key===STUDY_KEY||ev.key===FEEDBACK_KEY||ev.key?.startsWith('ekab.saek.read.'))refresh()});
  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!panel.hidden)close()});
  refresh();
