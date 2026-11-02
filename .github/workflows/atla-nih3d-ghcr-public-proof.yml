@@ -1,0 +1,44 @@
+name: ATLA NIH3D GHCR authenticated and anonymous storage proof
+on:
+  push:
+    branches: [feat/nih3d-ghcr-zero-cost-verification-20261103]
+    paths: ['.github/workflows/atla-nih3d-ghcr-public-proof.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  prove-public-storage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Upload tiny permission-only probe (no NIH files)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTOR: ${{ github.actor }}
+          IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
+          TAG: permission-20261103
+        run: |
+          set -euo pipefail
+          mkdir -p "${RUNNER_TEMP}/atla-nih3d-probe"
+          echo 'ATLA-NIH3D GHCR permission check. No personal or NIH model data.' > "${RUNNER_TEMP}/atla-nih3d-probe/probe.txt"
+          printf 'FROM scratch\nCOPY probe.txt /probe.txt\nLABEL org.opencontainers.image.source="https://github.com/6d9757cmp5-creator/ekab-spoudi"\n' > "${RUNNER_TEMP}/atla-nih3d-probe/Dockerfile"
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$ACTOR" --password-stdin
+          docker build -t "$IMAGE:$TAG" "${RUNNER_TEMP}/atla-nih3d-probe"
+          docker push "$IMAGE:$TAG"
+          docker pull "$IMAGE:$TAG"
+          echo 'VERIFIED: GHCR authenticated upload and download of tiny content'
+      - name: Independently test anonymous read (required before bulk mirror)
+        env:
+          IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
+          TAG: permission-20261103
+        run: |
+          set -euo pipefail
+          docker logout ghcr.io || true
+          docker image rm "$IMAGE:$TAG" || true
+          if docker pull "$IMAGE:$TAG"; then
+            echo 'VERIFIED: Anonymous readers can restore GHCR source archive package'
+          else
+            echo 'BLOCKED: Package is not anonymously readable. Keep bulk source archive disabled.'
+            exit 2
+          fi
