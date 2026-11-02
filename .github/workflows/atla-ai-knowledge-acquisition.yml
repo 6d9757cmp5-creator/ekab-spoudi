@@ -18,6 +18,15 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The repository also contains large binary 3D archives; they are not needed
+          # for source discovery or test execution. Preserve main deployment checkout.
+          filter: blob:none
+          sparse-checkout: |
+            tools/atla-ai/knowledge-refresh
+            mentor/library
+            mentor/knowledge
+            mentor/clinical-desk
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -37,6 +46,15 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The repository also contains large binary 3D archives; they are not needed
+          # for source discovery or test execution. Preserve main deployment checkout.
+          filter: blob:none
+          sparse-checkout: |
+            tools/atla-ai/knowledge-refresh
+            mentor/library
+            mentor/knowledge
+            mentor/clinical-desk
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -52,6 +70,15 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The repository also contains large binary 3D archives; they are not needed
+          # for source discovery or test execution. Preserve main deployment checkout.
+          filter: blob:none
+          sparse-checkout: |
+            tools/atla-ai/knowledge-refresh
+            mentor/library
+            mentor/knowledge
+            mentor/clinical-desk
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
