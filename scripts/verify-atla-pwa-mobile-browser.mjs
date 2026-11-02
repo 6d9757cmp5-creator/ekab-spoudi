@@ -30,7 +30,7 @@ async function chromiumOffline(){
  const browser=await chromium.launch({headless:true});
  try{
   const context=await browser.newContext({viewport:{width:390,height:844}});
-  const page=await context.newPage();
+  let page=await context.newPage();
   await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
   const result=await page.evaluate(async()=>{
    if(!('serviceWorker' in navigator))return 'missing api';
@@ -42,6 +42,9 @@ async function chromiumOffline(){
    return reg.active?.state||'missing active worker';
   });
   assert.equal(result,'activated','real service worker must activate on local host');
+  // updates.js reloads its original tab on controllerchange; start with a fresh tab.
+  await page.close();
+  page=await context.newPage();
 
   // Read the actual 314-topic EOPPEP reader and a SAEK chapter before disconnecting.
   await page.goto(base+'theory.html?question=EOP-A-070',{waitUntil:'domcontentloaded'});
