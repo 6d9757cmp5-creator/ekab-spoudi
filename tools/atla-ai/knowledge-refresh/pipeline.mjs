@@ -38,9 +38,9 @@ export function extractMatchingAbstract(xml,pmid){
  // Only the article's own Abstract is eligible for research triage. PubMed XML
  // can also contain OtherAbstract (e.g. translated or plain-language material)
  // whose AbstractText must never be misidentified as the indexed article abstract.
- const articleBlocks=[...citation.matchAll(/<Article(?:\\s[^>]*)?>([\\s\\S]*?)<\\/Article>/gi)];
+ const articleBlocks=[...citation.matchAll(/<Article(?:\s[^>]*)?>([\s\S]*?)<\/Article>/gi)];
  if(articleBlocks.length!==1)return '';
- const abstractBlocks=[...articleBlocks[0][1].matchAll(/<Abstract(?:\\s[^>]*)?>([\\s\\S]*?)<\\/Abstract>/gi)];
+ const abstractBlocks=[...articleBlocks[0][1].matchAll(/<Abstract(?:\s[^>]*)?>([\s\S]*?)<\/Abstract>/gi)];
  if(abstractBlocks.length!==1)return '';
  return extractAbstract(abstractBlocks[0][1]);
 }
