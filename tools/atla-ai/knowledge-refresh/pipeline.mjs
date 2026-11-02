@@ -35,7 +35,14 @@ export function extractMatchingAbstract(xml,pmid){
  if(id!==String(pmid))return '';
  if(/<CommentsCorrections\b[^>]*RefType\s*=\s*["'](?:RetractionIn|RetractionOf|ExpressionOfConcernIn|ExpressionOfConcernFor)["']/i.test(article))return '';
  if(/<PublicationType(?:\s[^>]*)?>\s*(?:Retracted Publication|Retraction of Publication|Expression of Concern)\s*<\/PublicationType>/i.test(article))return '';
- return extractAbstract(citation);
+ // Only the article's own Abstract is eligible for research triage. PubMed XML
+ // can also contain OtherAbstract (e.g. translated or plain-language material)
+ // whose AbstractText must never be misidentified as the indexed article abstract.
+ const articleBlocks=[...citation.matchAll(/<Article(?:\\s[^>]*)?>([\\s\\S]*?)<\\/Article>/gi)];
+ if(articleBlocks.length!==1)return '';
+ const abstractBlocks=[...articleBlocks[0][1].matchAll(/<Abstract(?:\\s[^>]*)?>([\\s\\S]*?)<\\/Abstract>/gi)];
+ if(abstractBlocks.length!==1)return '';
+ return extractAbstract(abstractBlocks[0][1]);
 }
 export async function getAbstract(pmid,fetcher=fetch){
  if(!/^\d{1,10}$/.test(String(pmid)))return '';
