@@ -8,7 +8,7 @@ on:
       - '.github/workflows/atla-nih3d-live-original-probe.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
@@ -18,6 +18,7 @@ jobs:
         with:
           sparse-checkout: |
             scripts/nih3d-live-original-probe.mjs
+            docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
             tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
@@ -27,11 +28,11 @@ jobs:
         run: node --check scripts/nih3d-live-original-probe.mjs
       - name: Verify two public-domain originals against NIH source
         run: node scripts/nih3d-live-original-probe.mjs
-      - name: Publish small verification report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: atla-nih3d-original-probe
-          path: docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
-          retention-days: 1
-          if-no-files-found: warn
+      - name: Save small reproducible integrity evidence in Git history
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
+          git commit -m 'evidence(atla): preserve two NIH source SHA256 download checks'
+          git push origin HEAD:${GITHUB_REF_NAME}
