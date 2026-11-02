@@ -52,7 +52,7 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: Browser smoke: real GLB rendering, both independent tools
+      - name: "Browser smoke: real GLB rendering, both independent tools"
         run: node scripts/verify-atla-model-preview-browser.mjs
       - name: Save browser screenshots and model-loading evidence
         if: always()
