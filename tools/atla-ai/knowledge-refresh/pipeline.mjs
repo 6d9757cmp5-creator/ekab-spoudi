@@ -149,7 +149,24 @@ export function validateQueueFiles({report,metadata,health,pending}){
   throw Error('inconsistent-research-queue');
  const ids=xs=>xs.map(x=>String(x.pmid));
  const pendingIds=ids(pending.items),reportIds=ids(report.items);
- if(!stats||
+ // Cross-file consistency must cover article identity, not only PMID membership.
+ // A forged review-only report must not silently misattribute source, title or
+ // abstract digest to a different bibliography entry.
+ const pendingByPmid=new Map(pending.items.map(x=>[String(x.pmid),x]));
+ const reportIdentityValid=report.items.every(x=>{
+  const pmid=String(x.pmid),source=pendingByPmid.get(pmid);
+  return source&&x.id==='pubmed-'+pmid&&
+   x.source_url==='https://pubmed.ncbi.nlm.nih.gov/'+pmid+'/'&&
+   x.title===clean(source.title,300)&&
+   Array.isArray(x.topic_ids)&&Array.isArray(source.topic_ids)&&
+   JSON.stringify(x.topic_ids)===JSON.stringify(source.topic_ids)&&
+   JSON.stringify(x.publication_types)===JSON.stringify(source.publication_types)&&
+   typeof x.abstract_available==='boolean'&&
+   (x.abstract_sha256===null||
+    (typeof x.abstract_sha256==='string'&&/^[a-f0-9]{64}$/.test(x.abstract_sha256)))&&
+   (!x.abstract_available||x.abstract_sha256!==null);
+ });
+ if(!stats||!reportIdentityValid||
   !Number.isInteger(metadata.monitored_ok)||metadata.monitored_ok<0||
   metadata.monitored_ok>metadata.monitored_urls||
   !Number.isInteger(metadata.pending_papers)||metadata.pending_papers!==pending.items.length||
