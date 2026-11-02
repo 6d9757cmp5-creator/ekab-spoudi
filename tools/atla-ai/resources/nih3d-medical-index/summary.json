@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 1,
+  "classification": "AUTOMATED_TRIAGE_ONLY_NOT_MEDICAL_REVIEW",
+  "scope": "ALL_MEDICALLY_RELEVANT_NIH_3D_MODELS",
+  "sourceCatalogEntries": 15688,
+  "sourceSegments": 50,
+  "sourceRecords": 15688,
+  "uniqueRecords": 15688,
+  "duplicates": 0,
+  "counts": {
+    "medical_candidate": 4078,
+    "manual_review": 10304,
+    "non_medical_candidate": 1306
+  },
+  "categories": {
+    "Biomacromolecules": 8374,
+    "Cells and Organelles": 488,
+    "Viruses": 347,
+    "Anatomy": 691,
+    "Devices and Hardware": 1754,
+    "Prosthetics": 141,
+    "Small Molecules": 3893
+  },
+  "licensing": {
+    "catalog_license_allows_with_conditions": 14384,
+    "license_review_required": 1304
+  },
+  "byTopic": {
+    "molecular-medicine": 4365,
+    "microbiology": 1336,
+    "anatomy": 2060,
+    "pathology": 411,
+    "pharmacology": 972,
+    "neurology": 195,
+    "obstetrics-pediatrics": 40,
+    "cardiovascular": 407,
+    "clinical-tools": 322,
+    "respiratory": 177
+  },
+  "totalModelFileReferences": 204346,
+  "requirements": {
+    "originalArchive": true,
+    "classificationEngine": true,
+    "knowledgeGraph": true,
+    "contextualSelection": true
+  },
+  "notes": [
+    "Medical candidates are not a validated count of medically useful models.",
+    "Manual review entries must be retained to avoid false exclusions.",
+    "Nonmedical candidates are only suggested exclusions; original metadata is preserved.",
+    "Per-model license and attribution must be verified before redistribution.",
+    "This pipeline downloads or stores no NIH binary assets."
+  ],
+  "segments": [
+    {
+      "source": "entries-1-500.json",
+      "sourceEntries": 285,
+      "uniqueEntries": 285,
+      "counts": {
+        "medical_candidate": 135,
+        "manual_review": 118,
+        "non_medical_candidate": 32
+      }
+    },
+    {
+      "source": "entries-501-1000.json",
+      "sourceEntries": 405,
+      "uniqueEntries": 405,
+      "counts": {
+        "medical_candidate": 127,
+        "manual_review": 239,
+        "non_medical_candidate": 39
+      }
+    },
+    {
+      "source": "entries-1001-1500.json",
+      "sourceEntries": 355,
+      "uniqueEntries": 355,
+      "counts": {
+        "medical_candidate": 120,
+        "manual_review": 225,
+        "non_medical_candidate": 10
+      }
+    },
+    {
+      "source": "entries-1501-2000.json",
+      "sourceEntries": 346,
+      "uniqueEntries": 346,
+      "counts": {
+        "medical_candidate": 103,
+        "manual_review": 235,
+        "non_medical_candidate": 8
+      }
+    },
+    {
+      "source": "entries-2001-2500.json",
+      "sourceEntries": 404,
+      "uniqueEntries": 404,
+      "counts": {
+        "medical_candidate": 109,
+        "manual_review": 211,
+        "non_medical_candidate": 84
+      }
+    },
+    {
+      "source": "entries-2501-3000.json",
+      "sourceEntries": 368,
+      "uniqueEntries": 368,
+      "counts": {
+        "medical_candidate": 109,
+        "manual_review": 250,
+        "non_medical_candidate": 9
+      }
+    },
+    {
+      "source": "entries-3001-3500.json",
+      "sourceEntries": 386,
+      "uniqueEntries": 386,
+      "counts": {
+        "medical_candidate": 120,
+        "manual_review": 258,
+        "non_medical_candidate": 8
+      }
+    },
+    {
+      "source": "entries-3501-4000.json",
+      "sourceEntries": 420,
+      "uniqueEntries": 420,
+      "counts": {
+        "medical_candidate": 102,
+        "manual_review": 295,
+        "non_medical_candidate": 23
+      }
+    },
+    {
+      "source": "entries-4001-4500.json",
+      "sourceEntries": 326,
+      "uniqueEntries": 326,
+      "counts": {
+        "medical_candidate": 74,
+        "manual_review": 237,
+        "non_medical_candidate": 15
+      }
+    },
+    {
+      "source": "entries-4501-5000.json",
+      "sourceEntries": 347,
+      "uniqueEntries": 347,
+      "counts": {
+        "medical_candidate": 111,
+        "manual_review": 223,
+        "non_medical_candidate": 13
+      }
+    },
+    {
+      "source": "entries-5001-5500.json",
+      "sourceEntries": 415,
+      "uniqueEntries": 415,
+      "counts": {
+        "medical_candidate": 86,
+        "manual_review": 328,
+        "non_medical_candidate": 1
+      }
+    },
+    {
+      "source": "entries-5501-6000.json",
+      "sourceEntries": 2,
+      "uniqueEntries": 2,
+      "counts": {
+        "medical_candidate": 0,
+        "manual_review": 2,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-6001-6500.json",
+      "sourceEntries": 7,
+      "uniqueEntries": 7,
+      "counts": {
+        "medical_candidate": 1,
+        "manual_review": 6,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-6501-7000.json",
+      "sourceEntries": 2,
+      "uniqueEntries": 2,
+      "counts": {
+        "medical_candidate": 0,
+        "manual_review": 2,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-7001-7500.json",
+      "sourceEntries": 192,
+      "uniqueEntries": 192,
+      "counts": {
+        "medical_candidate": 44,
+        "manual_review": 147,
+        "non_medical_candidate": 1
+      }
+    },
+    {
+      "source": "entries-7501-8000.json",
+      "sourceEntries": 331,
+      "uniqueEntries": 331,
+      "counts": {
+        "medical_candidate": 111,
+        "manual_review": 212,
+        "non_medical_candidate": 8
+      }
+    },
+    {
+      "source": "entries-8001-8500.json",
+      "sourceEntries": 370,
+      "uniqueEntries": 370,
+      "counts": {
+        "medical_candidate": 49,
+        "manual_review": 298,
+        "non_medical_candidate": 23
+      }
+    },
+    {
+      "source": "entries-8501-9000.json",
+      "sourceEntries": 390,
+      "uniqueEntries": 390,
+      "counts": {
+        "medical_candidate": 58,
+        "manual_review": 322,
+        "non_medical_candidate": 10
+      }
+    },
+    {
+      "source": "entries-9001-9500.json",
+      "sourceEntries": 330,
+      "uniqueEntries": 330,
+      "counts": {
+        "medical_candidate": 50,
+        "manual_review": 264,
+        "non_medical_candidate": 16
+      }
+    },
+    {
+      "source": "entries-9501-10000.json",
+      "sourceEntries": 388,
+      "uniqueEntries": 388,
+      "counts": {
+        "medical_candidate": 66,
+        "manual_review": 313,
+        "non_medical_candidate": 9
+      }
+    },
+    {
+      "source": "entries-10001-10500.json",
+      "sourceEntries": 390,
+      "uniqueEntries": 390,
+      "counts": {
+        "medical_candidate": 58,
+        "manual_review": 300,
+        "non_medical_candidate": 32
+      }
+    },
+    {
+      "source": "entries-10501-11000.json",
+      "sourceEntries": 375,
+      "uniqueEntries": 375,
+      "counts": {
+        "medical_candidate": 68,
+        "manual_review": 271,
+        "non_medical_candidate": 36
+      }
+    },
+    {
+      "source": "entries-11001-11500.json",
+      "sourceEntries": 337,
+      "uniqueEntries": 337,
+      "counts": {
+        "medical_candidate": 49,
+        "manual_review": 277,
+        "non_medical_candidate": 11
+      }
+    },
+    {
+      "source": "entries-11501-12000.json",
+      "sourceEntries": 333,
+      "uniqueEntries": 333,
+      "counts": {
+        "medical_candidate": 48,
+        "manual_review": 277,
+        "non_medical_candidate": 8
+      }
+    },
+    {
+      "source": "entries-12001-12500.json",
+      "sourceEntries": 345,
+      "uniqueEntries": 345,
+      "counts": {
+        "medical_candidate": 103,
+        "manual_review": 154,
+        "non_medical_candidate": 88
+      }
+    },
+    {
+      "source": "entries-12501-13000.json",
+      "sourceEntries": 400,
+      "uniqueEntries": 400,
+      "counts": {
+        "medical_candidate": 73,
+        "manual_review": 301,
+        "non_medical_candidate": 26
+      }
+    },
+    {
+      "source": "entries-13001-13500.json",
+      "sourceEntries": 408,
+      "uniqueEntries": 408,
+      "counts": {
+        "medical_candidate": 159,
+        "manual_review": 166,
+        "non_medical_candidate": 83
+      }
+    },
+    {
+      "source": "entries-13501-14000.json",
+      "sourceEntries": 379,
+      "uniqueEntries": 379,
+      "counts": {
+        "medical_candidate": 126,
+        "manual_review": 48,
+        "non_medical_candidate": 205
+      }
+    },
+    {
+      "source": "entries-14001-14500.json",
+      "sourceEntries": 389,
+      "uniqueEntries": 389,
+      "counts": {
+        "medical_candidate": 109,
+        "manual_review": 152,
+        "non_medical_candidate": 128
+      }
+    },
+    {
+      "source": "entries-14501-15000.json",
+      "sourceEntries": 372,
+      "uniqueEntries": 372,
+      "counts": {
+        "medical_candidate": 104,
+        "manual_review": 225,
+        "non_medical_candidate": 43
+      }
+    },
+    {
+      "source": "entries-15001-15500.json",
+      "sourceEntries": 398,
+      "uniqueEntries": 398,
+      "counts": {
+        "medical_candidate": 89,
+        "manual_review": 280,
+        "non_medical_candidate": 29
+      }
+    },
+    {
+      "source": "entries-15501-16000.json",
+      "sourceEntries": 407,
+      "uniqueEntries": 407,
+      "counts": {
+        "medical_candidate": 112,
+        "manual_review": 279,
+        "non_medical_candidate": 16
+      }
+    },
+    {
+      "source": "entries-16001-16500.json",
+      "sourceEntries": 377,
+      "uniqueEntries": 377,
+      "counts": {
+        "medical_candidate": 115,
+        "manual_review": 247,
+        "non_medical_candidate": 15
+      }
+    },
+    {
+      "source": "entries-16501-17000.json",
+      "sourceEntries": 417,
+      "uniqueEntries": 417,
+      "counts": {
+        "medical_candidate": 118,
+        "manual_review": 280,
+        "non_medical_candidate": 19
+      }
+    },
+    {
+      "source": "entries-17001-17500.json",
+      "sourceEntries": 404,
+      "uniqueEntries": 404,
+      "counts": {
+        "medical_candidate": 126,
+        "manual_review": 267,
+        "non_medical_candidate": 11
+      }
+    },
+    {
+      "source": "entries-17501-18000.json",
+      "sourceEntries": 413,
+      "uniqueEntries": 413,
+      "counts": {
+        "medical_candidate": 55,
+        "manual_review": 347,
+        "non_medical_candidate": 11
+      }
+    },
+    {
+      "source": "entries-18001-18500.json",
+      "sourceEntries": 236,
+      "uniqueEntries": 236,
+      "counts": {
+        "medical_candidate": 47,
+        "manual_review": 175,
+        "non_medical_candidate": 14
+      }
+    },
+    {
+      "source": "entries-18501-19000.json",
+      "sourceEntries": 0,
+      "uniqueEntries": 0,
+      "counts": {
+        "medical_candidate": 0,
+        "manual_review": 0,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-19001-19500.json",
+      "sourceEntries": 0,
+      "uniqueEntries": 0,
+      "counts": {
+        "medical_candidate": 0,
+        "manual_review": 0,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-19501-20000.json",
+      "sourceEntries": 1,
+      "uniqueEntries": 1,
+      "counts": {
+        "medical_candidate": 1,
+        "manual_review": 0,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-20001-20500.json",
+      "sourceEntries": 412,
+      "uniqueEntries": 412,
+      "counts": {
+        "medical_candidate": 93,
+        "manual_review": 289,
+        "non_medical_candidate": 30
+      }
+    },
+    {
+      "source": "entries-20501-21000.json",
+      "sourceEntries": 412,
+      "uniqueEntries": 412,
+      "counts": {
+        "medical_candidate": 161,
+        "manual_review": 224,
+        "non_medical_candidate": 27
+      }
+    },
+    {
+      "source": "entries-21001-21500.json",
+      "sourceEntries": 438,
+      "uniqueEntries": 438,
+      "counts": {
+        "medical_candidate": 160,
+        "manual_review": 252,
+        "non_medical_candidate": 26
+      }
+    },
+    {
+      "source": "entries-21501-22000.json",
+      "sourceEntries": 430,
+      "uniqueEntries": 430,
+      "counts": {
+        "medical_candidate": 151,
+        "manual_review": 248,
+        "non_medical_candidate": 31
+      }
+    },
+    {
+      "source": "entries-22001-22500.json",
+      "sourceEntries": 493,
+      "uniqueEntries": 493,
+      "counts": {
+        "medical_candidate": 128,
+        "manual_review": 361,
+        "non_medical_candidate": 4
+      }
+    },
+    {
+      "source": "entries-22501-23000.json",
+      "sourceEntries": 473,
+      "uniqueEntries": 473,
+      "counts": {
+        "medical_candidate": 100,
+        "manual_review": 333,
+        "non_medical_candidate": 40
+      }
+    },
+    {
+      "source": "entries-23001-23500.json",
+      "sourceEntries": 315,
+      "uniqueEntries": 315,
+      "counts": {
+        "medical_candidate": 89,
+        "manual_review": 203,
+        "non_medical_candidate": 23
+      }
+    },
+    {
+      "source": "entries-23501-24000.json",
+      "sourceEntries": 265,
+      "uniqueEntries": 265,
+      "counts": {
+        "medical_candidate": 61,
+        "manual_review": 163,
+        "non_medical_candidate": 41
+      }
+    },
+    {
+      "source": "entries-24001-24500.json",
+      "sourceEntries": 0,
+      "uniqueEntries": 0,
+      "counts": {
+        "medical_candidate": 0,
+        "manual_review": 0,
+        "non_medical_candidate": 0
+      }
+    },
+    {
+      "source": "entries-24501-25000.json",
+      "sourceEntries": 0,
+      "uniqueEntries": 0,
+      "counts": {
+        "medical_candidate": 0,
+        "manual_review": 0,
+        "non_medical_candidate": 0
+      }
+    }
+  ]
+}
