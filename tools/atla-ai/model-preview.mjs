@@ -9,7 +9,7 @@ const back=$('source-back');
 back.href=tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html';
 $('source-name').textContent=tool==='anatomy'?'Anatomy Lab · HRA 3D':'Clinical Cockpit · 3D Assets';
 $('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
-let assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,THREE,clock,loadVersion=0;
+let assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
 function dispose(){
  mixer?.stopAllAction();mixer=null;
  if(live){
@@ -21,7 +21,11 @@ function dispose(){
 async function init3D(){
  if(renderer)return;
  THREE=await import('three');
- const [{GLTFLoader},{OrbitControls}]=await Promise.all([import('three/addons/loaders/GLTFLoader.js'),import('three/addons/controls/OrbitControls.js')]);
+ const [{GLTFLoader},{OrbitControls},{DRACOLoader}]=await Promise.all([
+  import('three/addons/loaders/GLTFLoader.js'),
+  import('three/addons/controls/OrbitControls.js'),
+  import('three/addons/loaders/DRACOLoader.js')
+ ]);
  const canvas=$('source-canvas');
  renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'low-power'});
  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));renderer.setClearColor(0x0a1c2d);
@@ -29,7 +33,11 @@ async function init3D(){
  const sun=new THREE.DirectionalLight(0xffffff,2);sun.position.set(3,6,4);scene.add(sun);
  camera=new THREE.PerspectiveCamera(42,1,0.01,100);camera.position.set(2.5,2,4);
  controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.enablePan=false;
- loader=new GLTFLoader();clock=new THREE.Clock();
+ loader=new GLTFLoader();
+ draco=new DRACOLoader();
+ draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/libs/draco/');
+ loader.setDRACOLoader(draco);
+ clock=new THREE.Clock();
  const resize=()=>{if(!renderer)return;const w=canvas.clientWidth||320,h=canvas.clientHeight||380;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};
  if(typeof ResizeObserver==='function')new ResizeObserver(resize).observe(canvas);
  resize();
@@ -93,4 +101,4 @@ async function loadDataset(){
 }
 dataset.addEventListener('change',loadDataset);
 loadDataset();
-window.addEventListener('pagehide',()=>{dispose();cancelAnimationFrame(raf);controls?.dispose();renderer?.dispose();renderer=null});
+window.addEventListener('pagehide',()=>{dispose();cancelAnimationFrame(raf);controls?.dispose();draco?.dispose();renderer?.dispose();renderer=null});
