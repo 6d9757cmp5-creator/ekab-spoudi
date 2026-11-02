@@ -16,6 +16,7 @@ const server=createServer(async(req,res)=>{
 });
 await new Promise(done=>server.listen(0,'127.0.0.1',done));
 const base='http://127.0.0.1:'+server.address().port+'/';
+const model=process.argv.includes('--female')?'female':'male';
 let browser;
 try{
  browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--enable-webgl']});
@@ -24,7 +25,7 @@ try{
  const problems=[];
  page.on('pageerror',e=>problems.push(e.message));
  page.on('requestfailed',req=>{if(req.url().startsWith('https://cdn.jsdelivr.net'))problems.push('Vendor request: '+req.url()+' '+req.failure()?.errorText)});
- await page.goto(base+'ui-tools/anatomy-3d/index.html?mode=organs&system=cardiac&focus=heart&from=01&chapter=10',{waitUntil:'domcontentloaded'});
+ await page.goto(base+'ui-tools/anatomy-3d/index.html?mode=organs&sex='+model+'&system=cardiac&focus=heart&from=01&chapter=10',{waitUntil:'domcontentloaded'});
  await page.locator('#chapterReturn').waitFor({state:'visible',timeout:20000});
  try{
   await page.waitForFunction(()=>{
@@ -42,8 +43,9 @@ try{
  assert.ok(await page.locator('#detailCard').isVisible(),'Loaded heart group must be explained to learner');
  const name=(await page.locator('#detailName').textContent()).trim();
  assert.match(name,/Καρδιακές/);
- await page.screenshot({path:'atlas-heart-webgl-smoke.png'});
- console.log('PASS: FULL vendor atlas loaded into WebGL, focused heart, chapter return; '+name);
+ assert.match(await page.locator('#modelTag').textContent(),model==='female'?/ΓΥΝΑΙΚΟ/:/ΑΝΔΡΙΚΟ/);
+ await page.screenshot({path:'atlas-heart-webgl-'+model+'.png'});
+ console.log('PASS: FULL '+model+' vendor atlas loaded into WebGL, focused heart, chapter return; '+name);
 }finally{
  await browser?.close();
  await new Promise(done=>server.close(done));
