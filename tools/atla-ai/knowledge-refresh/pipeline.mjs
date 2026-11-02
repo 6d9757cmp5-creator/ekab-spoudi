@@ -138,6 +138,15 @@ export function validateQueueFiles({report,metadata,health,pending}){
  // The four isolated files must describe one coherent scan. A safe flag on
  // each document alone does not prove that stale/mixed evidence belongs together.
  const stats=report.source_discovery;
+ // These files are a single evidence snapshot, not independently reusable data.
+ // A partial write or stale file must never be accepted as one current scan.
+ const scanTime=metadata.checked_at;
+ if(typeof scanTime!=='string'||!Number.isFinite(Date.parse(scanTime))||
+  new Date(scanTime).toISOString()!==scanTime||
+  report.generated_at!==scanTime||health.checked_at!==scanTime||
+  pending.checked_at!==scanTime||
+  report.items.some(x=>x.checked_at!==scanTime))
+  throw Error('inconsistent-research-queue');
  const ids=xs=>xs.map(x=>String(x.pmid));
  const pendingIds=ids(pending.items),reportIds=ids(report.items);
  if(!stats||
