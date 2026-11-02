@@ -70,7 +70,8 @@ function audit(catalog,segments,reports,assets){
    failedFiles,sourceErrors,missingOrUnpublishedNumericIds:missingNumericIds},
   overlappingPilotsExcluded:pilots,problemCount:problems.length,problems:problems.slice(0,260),
   verificationLimit:'Checks release presence and byte sizes plus download-time source hashes; independent extraction and remote original-file SHA256 verification remains separate.',
-  release:'https://github.com/'+repo+'/releases/tag/'+tag};
+  release:'https://github.com/'+repo+'/releases/tag/'+tag,
+  releaseFamily:'https://github.com/'+repo+'/releases?q='+encodeURIComponent(tag)};
 }
 if(process.argv.includes('--self-test')){
  const src={verifiedScannedIds:25000,apiErrors:0,status:'TARGET_RANGE_SCANNED',publishedEntriesFound:1};
@@ -89,10 +90,22 @@ async function gh(path){
  if(!req.ok)throw Error('GitHub API '+req.status+' '+path);
  return req.json();
 }
-const release=await gh('/repos/'+repo+'/releases/tags/'+tag),assets=[];
-for(let page=1;page<=100;page++){
- const arr=await gh('/repos/'+repo+'/releases/'+release.id+'/assets?per_page=100&page='+page);
- assets.push(...arr);if(arr.length<100)break;
+// GitHub caps each Release at 1000 assets. The original Release is preserved
+// and subsequent 100-ID canonical groups use isolated per-shard Releases.
+const releases=[];
+for(let page=1;page<=20;page++){
+ const arr=await gh('/repos/'+repo+'/releases?per_page=100&page='+page);
+ for(const release of arr)if(release.tag_name===tag||release.tag_name.startsWith(tag+'-shard-'))releases.push(release);
+ if(arr.length<100)break;
+}
+if(!releases.some(r=>r.tag_name===tag))throw Error('Legacy NIH3D Release is missing');
+const assets=[];
+for(const release of releases){
+ for(let page=1;page<=20;page++){
+  const arr=await gh('/repos/'+repo+'/releases/'+release.id+'/assets?per_page=100&page='+page);
+  assets.push(...arr);
+  if(arr.length<100)break;
+ }
 }
 const catalog=JSON.parse(await readFile(dir+'/catalog-index.json','utf8'));
 const names=(await readdir(dir+'/segments')).filter(n=>/^entries-\d+-\d+\.json$/.test(n));
@@ -120,7 +133,8 @@ const table=[
  'Pilot ranges overlapping canonical ranges are excluded from counts.','',
  'Limits: Remote pack presence/size and original-file download-time SHA256 are checked. No independent remote content rehash or scientific approval is claimed.','',
  '## Open issues','',...result.problems.map(v=>'- '+v),'',
- '[Archived lossless files]('+result.release+')',''
+ '[Archived lossless files — legacy Release]('+result.release+')',
+ '[Canonical per-shard Releases]('+result.releaseFamily+')',''
 ].join('\n');
 await writeFile('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md',table);
 console.log('ATLA_NIH3D_RELEASE_AUDIT '+JSON.stringify({status:result.status,shards:result.binary.canonicalShards,modelFiles:result.binary.originalFiles,errors:result.problemCount}));
