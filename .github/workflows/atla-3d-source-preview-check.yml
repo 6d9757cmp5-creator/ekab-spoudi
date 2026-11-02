@@ -1,0 +1,50 @@
+name: ATLA 3D Source Viewer Safe Preview
+on:
+  push:
+    branches:
+      - feature/atla-3d-model-preview-integration-20261103
+    paths:
+      - 'tools/atla-ai/model-preview*'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'tools/anatomy-3d/index.html'
+      - 'ui-tools/anatomy-3d/index.html'
+      - 'mentor-next.html'
+      - 'scripts/test-atla-model-preview.mjs'
+      - '.github/workflows/atla-3d-source-preview-check.yml'
+  pull_request:
+    paths:
+      - 'tools/atla-ai/model-preview*'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'scripts/test-atla-model-preview.mjs'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JS module syntax
+        run: |
+          node --check tools/atla-ai/model-preview-catalog.mjs
+          node --check tools/atla-ai/model-preview.mjs
+          node --check scripts/test-atla-model-preview.mjs
+      - name: Run source-routing and no-duplication tests
+        run: node --test scripts/test-atla-model-preview.mjs
+      - name: Verify linked opt-in views and safe import map
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          source=Path('ui-tools/atla-resource-preview.html').read_text()
+          assert 'three@0.180.0' in source
+          assert 'id="source-canvas"' in source
+          assert 'id="source-load"' in source
+          assert 'tools/atla-ai/model-preview.mjs' in source
+          assert 'atla-resource-preview.html?tool=anatomy' in Path('tools/anatomy-3d/index.html').read_text()
+          assert 'atla-resource-preview.html?tool=anatomy' in Path('ui-tools/anatomy-3d/index.html').read_text()
+          assert 'atla-resource-preview.html?tool=cockpit' in Path('mentor-next.html').read_text()
+          print('PASS: opt-in links, import map and independent tools')
+          PY
