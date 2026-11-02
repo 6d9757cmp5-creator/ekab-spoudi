@@ -90,3 +90,21 @@ jobs:
             tools/atla-ai/knowledge-base/full-books/catalog.json
           if-no-files-found: ignore
           retention-days: 30
+      - name: Report incomplete archive as failed CI rather than success
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import assert from 'node:assert/strict';
+          const dir='tools/atla-ai/knowledge-base/full-books/';
+          const report=JSON.parse(readFileSync(dir+'archive-manifest.json','utf8'));
+          const catalog=JSON.parse(readFileSync(dir+'catalog.json','utf8'));
+          assert.equal(report.catalog_count,catalog.book_count);
+          assert.equal(report.attempted,catalog.books.filter(x=>x.full_book_archival_requested).length);
+          if(report.complete_verified!==report.catalog_count){
+            console.error('ARCHIVE INCOMPLETE: '+report.complete_verified+'/'+report.catalog_count+
+              '. Missing: '+report.not_archived.join(', '));
+            process.exitCode=1;
+          }else{
+            console.log('ALL COMPLETE: '+report.complete_verified+'/'+report.catalog_count);
+          }
+          NODE
