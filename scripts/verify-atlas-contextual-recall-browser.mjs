@@ -64,6 +64,21 @@ try{
   });
   await page.clock.fastForward(30000);
   await page.evaluate(()=>window.dispatchEvent(new Event('ekab:recall-check')));
+  console.log('RECALL_SECOND_DIAGNOSTIC',label,JSON.stringify(await page.evaluate(()=>({
+    pathname:location.pathname,
+    now:Date.now(),ready:document.readyState,visibility:document.visibilityState,
+    completed:localStorage.getItem('ekab.saek.read.v1.01.1'),
+    settings:localStorage.getItem('ekab.atlas.recall.settings.v1'),
+    panel:!!document.getElementById('atlas-recall-window'),
+    hidden:document.getElementById('atlas-recall-window')?.hidden,
+    question:!!document.getElementById('lesson-1')?.querySelector('.knowledge-check .check-question'),
+    active:document.activeElement?.tagName,
+    activeInput:!!document.activeElement?.closest('input,textarea,select,[contenteditable="true"],[role="textbox"]'),
+    modal:!!document.querySelector('[aria-modal="true"]:not([hidden]),dialog[open]'),
+    studying:!!document.querySelector('#study:not(.hidden),[data-atla-active-exam="true"]'),
+    anyVideoPlaying:[...document.querySelectorAll('video')].some(v=>!v.paused&&!v.ended),
+    count:document.querySelectorAll('.atlas-recall-question').length
+  }))));
   await page.locator('.atlas-recall-question').waitFor({state:'visible',timeout:15000});
   await page.getByRole('button',{name:'Παύση υπενθυμίσεων'}).click();
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),false);
