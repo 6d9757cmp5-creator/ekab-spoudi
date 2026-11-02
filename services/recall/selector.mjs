@@ -13,7 +13,7 @@ export function completedChapters(entries){
  const all=new Map();
  for(const [key,value] of entries){
   const m=KEY.exec(String(key));
-  if(m&&value==='1')all.set(m[1]+':'+Number(m[2]),{course:m[1],chapter:Number(m[2]),id:m[1]+':'+Number(m[2])});
+  if(m&&value==='1'&&Number(m[2])<=50)all.set(m[1]+':'+Number(m[2]),{course:m[1],chapter:Number(m[2]),id:m[1]+':'+Number(m[2])});
  }
  return [...all.values()];
 }
