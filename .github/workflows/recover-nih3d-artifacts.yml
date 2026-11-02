@@ -3,9 +3,12 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '47 3,9,15,21 * * *'
-  workflow_run:
-    workflows: ['ATLA NIH 3D full original-binary archive']
-    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/recover-nih3d-artifacts.yml'
+      - 'scripts/nih3d-artifact-rescue.mjs'
+      - 'scripts/nih3d-artifact-rescue.test.mjs'
 permissions:
   actions: read
   contents: write
