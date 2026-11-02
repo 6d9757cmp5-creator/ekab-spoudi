@@ -1,6 +1,8 @@
 name: ATLA staged migration validation
 
 on:
+  push:
+    branches: ['plan/atla-unified-mentor-migration-2026-11-01']
   pull_request:
     paths:
       - "atla/**"
