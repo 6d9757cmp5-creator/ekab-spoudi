@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {isAllowedSource,validateSource} from './archive.mjs';
 
 const catalog=JSON.parse(await readFile(new URL('./catalog.json',import.meta.url),'utf8'));
-test('ten academically sourced full book candidates, not yet falsely archived',()=>{
+test('ten academically sourced full book candidates and byte-verified archived count',async()=>{
  assert.equal(catalog.schema_version,1);
  assert.equal(catalog.book_count,10);
  assert.equal(catalog.books.length,10);
