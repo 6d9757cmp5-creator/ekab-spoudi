@@ -4,7 +4,9 @@
  * Reads a few bibliographic candidates and verifies linked abstracts by PMID.
  * NEVER writes learner content, queues, secrets or persistent medical knowledge.
  */
-import {getAbstract} from './pipeline.mjs';
+import {getAbstract,run,validateOutput} from './pipeline.mjs';
+import {screenPubMedArticle} from './source-policy.mjs';
+import {createHash} from 'node:crypto';
 const search=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi');
 for(const [k,v] of Object.entries({
  db:'pubmed',retmode:'json',retmax:'4',
@@ -24,5 +26,34 @@ for(const id of ids){
  if(abstract.length>=100){success={pmid:id,abstract_chars:abstract.length};break;}
 }
 if(!success)fail('none of '+ids.length+' returned a verified nonempty matching abstract');
-console.log(JSON.stringify({status:'live-eutils-pmid-crosscheck-ok',...success,
- medical_claims_approved:0,student_content_changed:false}));
+// Retrieve the actual PubMed summary, not hand-crafted bibliographic evidence.
+await new Promise(resolve=>setTimeout(resolve,420));
+const summaryUrl=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi');
+for(const [k,v] of Object.entries({db:'pubmed',id:success.pmid,retmode:'json'}))
+ summaryUrl.searchParams.set(k,v);
+const summaryResponse=await fetch(summaryUrl,{headers:{accept:'application/json',
+ 'user-agent':'ATLA-ReadOnly-PubMed-Probe/1.0'},signal:AbortSignal.timeout(20000)});
+if(!summaryResponse.ok)fail('summary HTTP '+summaryResponse.status);
+const summary=(await summaryResponse.json())?.result?.[success.pmid];
+const paper={
+ pmid:success.pmid,title:summary?.title||'',journal:summary?.fulljournalname||summary?.source||'',
+ published_at:summary?.pubdate||summary?.epubdate||'',
+ publication_types:Array.isArray(summary?.pubtype)?summary.pubtype:[],
+ topic_ids:['resuscitation']
+};
+if(!screenPubMedArticle(paper).accepted)fail('live bibliographic evidence is ineligible');
+await new Promise(resolve=>setTimeout(resolve,420));
+// Execute the whole review pipeline with REAL external metadata and abstracts,
+// but without writing any files or enabling a paid AI model.
+const report=await run({scanner:async()=>({pending:{items:[paper]}}),fetcher:fetch,
+ env:{},write:false,now:new Date().toISOString()});
+validateOutput(report);
+const entry=report.items[0];
+if(report.items.length!==1||entry.pmid!==success.pmid||entry.ai_status!=='ai-disabled-awaiting-explicit-cost-approval'||
+ entry.abstract_available!==true||entry.abstract_sha256!==createHash('sha256').update(
+ await getAbstract(success.pmid)).digest('hex')||
+ entry.clinical_approval!==false||entry.learner_visible!==false||entry.atla_ai_retrieval_enabled!==false)
+ fail('end-to-end isolated research queue verification failed');
+console.log(JSON.stringify({status:'live-eutils-review-queue-verified',...success,
+ verified_summary:true,verified_abstract_digest:true,ai_enabled:false,
+ research_queue_items:report.items.length,medical_claims_approved:0,student_content_changed:false}));
