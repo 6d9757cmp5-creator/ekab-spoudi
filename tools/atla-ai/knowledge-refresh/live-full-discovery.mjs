@@ -23,6 +23,11 @@ assert.ok(stats.pubmed_topics_failed<stats.pubmed_topics_checked,'all PubMed top
 assert.equal(report.ai_configured,false);
 assert.equal(report.clinical_knowledge_imported,0);
 assert.equal(report.existing_curriculum_changed,false);
+// Real 403/network failures must stay unverified, never auto-approved or
+// mistaken for proof that a publisher changed its clinical guidance.
+assert.ok(discovery.health.sources.every(s=>
+ s.clinical_approval===false&&s.knowledge_ingestion_enabled===false));
+assert.ok(discovery.health.sources.filter(s=>!s.ok).every(s=>s.signal==='unverified'));
 assert.ok(report.items.every(x=>x.status==='pending-independent-scientific-review'&&
  x.atla_ai_retrieval_enabled===false&&x.clinical_approval===false&&x.learner_visible===false));
 console.log(JSON.stringify({
