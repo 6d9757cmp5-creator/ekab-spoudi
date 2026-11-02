@@ -4,7 +4,8 @@
  * Reuses legacy engines and the SAME Mentor Protocol Lab. No AI/cloud calls.
  * This module NEVER writes existing learning/grade/notes keys.
  */
-import {analyseLearning,choosePrimary} from './atla/learning/next-step.mjs';
+import {choosePrimary} from './atla/learning/next-step.mjs';
+import {canonicalLearnerProfile} from './atla/student/profile.mjs';
 const page=location.pathname.split('/').pop()||'index.html';
 const isHome=page==='index.html',isSaek=page==='saek.html',isEop=page==='eoppep.html';
 if(isHome||isSaek||isEop){
@@ -16,21 +17,10 @@ if(isHome||isSaek||isEop){
    if(label)node.textContent=label;return node;
   };
   const number=v=>String(Math.max(0,Math.trunc(v||0))).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
-  const validJSON=(key)=>{
-   try{const raw=localStorage.getItem(key);if(!raw||raw.length>2_000_000)return {};const parsed=JSON.parse(raw);
-    return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{};}catch{return {}}
-  };
+  // Same canonical, read-only evidence view used by the ATLA assistant.
   function snapshot(){
-   const keys=[];
-   try{for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key&&localStorage.getItem(key)==='1'&&key.startsWith('ekab.saek.read.v1.'))keys.push(key);}}catch{}
-   const sae=validJSON('ekab.saek.exams.v1');
-   return analyseLearning({
-    eopRecords:validJSON('ekab-eoppep-official-v15'),
-    saekReadKeys:keys,
-    saekHistory:sae.history||{},
-    resume:validJSON('ekab.study.resume.v1'),
-    scheduler:window.EkabStudyScheduler||null
-   });
+   try{return canonicalLearnerProfile(localStorage,{scheduler:window.EkabStudyScheduler}).stats;}
+   catch{return canonicalLearnerProfile(null).stats;}
   }
   const section=e('section','ekab-next'+(isHome?'':' en-compact'));
   section.setAttribute('aria-label','Προσωπική εκπαιδευτική διαδρομή ATLAS');
