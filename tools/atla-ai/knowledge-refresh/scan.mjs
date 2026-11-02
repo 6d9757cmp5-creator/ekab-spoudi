@@ -153,16 +153,22 @@ export function signalFor(previous,probe){
  if(previous.etag&&probe.etag&&previous.etag!==probe.etag)return 'possible-source-update';
  return 'no-confirmed-change';
 }
-async function probeSource(source,fetcher=fetch){
+export async function probeSource(source,fetcher=fetch){
  let url=source.url;
- for(let hops=0;hops<3;hops++){
+ const visited=new Set();
+ for(let hops=0;hops<5;hops++){
+  if(visited.has(url))return {ok:false,reason:'redirect-loop'};
+  visited.add(url);
   try{
    const r=await fetcher(url,{method:'HEAD',redirect:'manual',signal:AbortSignal.timeout(10000),
     headers:{'user-agent':'ATLA-Source-Monitor/1.0 (metadata-check only)'}});
    if([301,302,303,307,308].includes(r.status)){
-    const next=canonical(new URL(r.headers.get('location')||'',url).toString());
-    if(!next)return {ok:false,http_status:r.status,reason:'redirect-outside-allowlist'};
-    url=next;continue;
+    const target=new URL(r.headers.get('location')||'',url);
+    target.hash='';target.search='';
+    // canonical() normalizes registry keys by dropping trailing '/', but an HTTP
+    // redirect target must retain it or valid sites appear to loop forever.
+    if(!canonical(target.toString()))return {ok:false,http_status:r.status,reason:'redirect-outside-allowlist'};
+    url=target.toString();continue;
    }
    return {ok:r.ok,http_status:r.status,etag:clean(r.headers.get('etag'),100),last_modified:clean(r.headers.get('last-modified'),80),final_url:url,reason:r.ok?'':('HTTP '+r.status)};
   }catch(e){return {ok:false,reason:clean(e.message,120)}}

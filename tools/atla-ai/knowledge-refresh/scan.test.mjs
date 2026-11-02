@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,main} from './scan.mjs';
+import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,main,probeSource} from './scan.mjs';
 import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 import {readFileSync} from 'node:fs';
 
@@ -118,4 +118,26 @@ test('the five curated worldwide evidence hubs use only approved publisher origi
  }
  assert.ok(authorities.includes('Cochrane'));
  assert.ok(authorities.includes('World Health Organization'));
+});
+
+
+test('HEAD redirects preserve canonical trailing slash without bypassing publisher allowlist',async()=>{
+ const seen=[];
+ const fetcher=async(url,options)=>{
+  assert.equal(options.method,'HEAD');
+  seen.push(url);
+  if(seen.length===1)return {status:301,headers:new Headers({location:'https://goldcopd.org/'})};
+  return {ok:true,status:200,headers:new Headers({'etag':'"test"'})};
+ };
+ const result=await probeSource({url:'https://goldcopd.org'},fetcher);
+ assert.equal(result.ok,true);
+ assert.deepEqual(seen,['https://goldcopd.org','https://goldcopd.org/']);
+ const denied=await probeSource({url:'https://goldcopd.org'},async()=>({
+  status:302,headers:new Headers({location:'https://goldcopd.org.evil.example/'})
+ }));
+ assert.equal(denied.reason,'redirect-outside-allowlist');
+ const loop=await probeSource({url:'https://goldcopd.org'},async()=>({
+  status:301,headers:new Headers({location:'https://goldcopd.org/'})
+ }));
+ assert.equal(loop.reason,'redirect-loop');
 });
