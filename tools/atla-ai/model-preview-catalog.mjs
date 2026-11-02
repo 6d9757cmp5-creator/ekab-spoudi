@@ -1,51 +1,59 @@
 /**
- * Safe model selection for ATLA's two *independent* 3D study tools.
- * Only allow pinned, in-repository source files. Never accept arbitrary URLs.
- * NIH release archives must pass separately through asset-level QA and activation.
+ * ATLA source-model registry. Research files are never silently enabled in clinical simulations.
+ * Existing Anatomy Lab, Clinical Cockpit, BodyParts3D and NIH assets are kept separate.
  */
-const defs={
- anatomy:{prefix:'tools/anatomy-3d/resources/hra-v1.2/',label:'HRA/HuBMAP',units:'Ανατομία'},
- cockpit:{prefix:'tools/patient-simulator/resources/quaternius/',label:'Quaternius',units:'Ερευνητική προσομοίωση'}
-};
+const configurations=Object.freeze({
+ anatomy:Object.freeze({
+  primary:Object.freeze({prefix:'tools/anatomy-3d/resources/hra-v1.2/',label:'HRA/HuBMAP',pathKey:'output',hashKey:'sha256',status:'HRA source, not clinically validated'}),
+  research:Object.freeze({prefix:'tools/anatomy-3d/resources/z-anatomy-research/',label:'Z-Anatomy (research only)',pathKey:'path',hashKey:'sha256',status:'NC-SA research model, not cleared for live use'})
+ }),
+ cockpit:Object.freeze({
+  primary:Object.freeze({prefix:'tools/patient-simulator/resources/quaternius/',label:'Quaternius',pathKey:'path',hashKey:'sha256',status:'Character/animation research, not a clinical patient'}),
+  patients:Object.freeze({prefix:'tools/patient-simulator/assets/patients/',label:'Existing static patients',pathKey:'path',hashKey:'gitBlobSha',status:'Static CC0 patient pose, not a rig or clinical simulation'})
+ })
+});
 const cleanName=name=>String(name||'').replace(/\.glb$/i,'').replace(/_/g,' ').trim();
-export function buildModelList(tool,raw){
- const cfg=defs[tool];
- if(!cfg||!raw||!Array.isArray(raw.assets))throw Error('Μη έγκυρο μητρώο μοντέλων');
- const used=new Set();
- const items=[];
- for(const item of raw.assets){
-  const path=tool==='anatomy'?item.output:item.path;
-  if(typeof path!=='string'||!path.startsWith(cfg.prefix)||!path.endsWith('.glb')||
-     !/^[A-Za-z0-9/_.-]+$/.test(path)||path.includes('..')||path.includes('//'))continue;
-  if(!/^[a-f0-9]{64}$/i.test(item.sha256||''))continue;
-  const bytes=Number(item.bytes??item.size);
-  if(!Number.isSafeInteger(bytes)||bytes<1000||bytes>250*1024*1024)continue;
-  if(used.has(path))continue;
-  used.add(path);
-  items.push({
-   id:path,label:cleanName(item.name||path.split('/').pop()),path,bytes,
-   region:tool==='anatomy'?String(item.region||'').slice(0,40):'simulation',
-   status:tool==='anatomy'?'HRA — μη κλινικά επικυρωμένο':'Ερευνητικό μοντέλο — όχι πραγματικός ασθενής',
-   license:String(item.license||raw.sourceLicense||'').slice(0,100),
-   sha256:item.sha256
+const allowedPath=(path,prefix)=>typeof path==='string'&&path.startsWith(prefix)&&path.endsWith('.glb')&&
+ /^[A-Za-z0-9/_.-]+$/.test(path)&&!path.includes('..')&&!path.includes('//');
+export function buildModelList(tool,raw,sourceType='primary'){
+ const cfg=configurations[tool]?.[sourceType];
+ if(!cfg||!raw||!Array.isArray(raw.assets))throw Error('Invalid 3D resource registry');
+ const listed=[],seen=new Set();
+ for(const asset of raw.assets){
+  const path=asset[cfg.pathKey];
+  if(!allowedPath(path,cfg.prefix)||seen.has(path))continue;
+  const originalSHA=String(asset[cfg.hashKey]||'');
+  if(cfg.hashKey==='gitBlobSha'?!/^[a-f0-9]{40}$/i.test(originalSHA):!/^[a-f0-9]{64}$/i.test(originalSHA))continue;
+  const bytes=Number(asset.bytes??asset.size);
+  if(!Number.isSafeInteger(bytes)||bytes<1000||bytes>250*1048576)continue;
+  seen.add(path);
+  listed.push({
+   id:path,label:cleanName(asset.name||path.split('/').pop()),path,bytes,sourceType,
+   region:String(asset.region||'').slice(0,45),
+   status:cfg.status,license:String(asset.license||raw.license||raw.sourceLicense||'').slice(0,100),
+   integrity:{algorithm:cfg.hashKey,value:originalSHA.toLowerCase()},
+   clinicallyValidated:false
   });
  }
- return items.sort((a,b)=>a.label.localeCompare(b.label,'el'));
+ return listed.sort((a,b)=>a.label.localeCompare(b.label,'el'));
 }
 export function getResourceCatalogUrls(rootUrl){
  const root=new URL(rootUrl);
- if(!['https:','http:'].includes(root.protocol))throw Error('Invalid site base');
+ if(!['http:','https:'].includes(root.protocol))throw Error('Invalid site base');
  return {
   anatomy:new URL('tools/anatomy-3d/resources/imported-manifest.json',root),
-  cockpit:new URL('tools/patient-simulator/resources/quaternius/imported-manifest.json',root)
+  anatomyResearch:new URL('tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json',root),
+  cockpit:new URL('tools/patient-simulator/resources/quaternius/imported-manifest.json',root),
+  cockpitPatients:new URL('tools/patient-simulator/assets/patients/preview-manifest.json',root)
  };
 }
 export function safeAssetUrl(item,tool,rootUrl){
- const cfg=defs[tool];
- if(!cfg||!item||typeof item.path!=='string'||!item.path.startsWith(cfg.prefix)||
-    !/^[A-Za-z0-9/_.-]+$/.test(item.path)||item.path.includes('..')||!item.path.endsWith('.glb'))throw Error('Μη επιτρεπόμενο αρχείο');
- const root=new URL(rootUrl),out=new URL(item.path,root);
- if(out.origin!==root.origin||!out.pathname.startsWith(new URL(cfg.prefix,root).pathname))throw Error('Μη επιτρεπόμενη τοποθεσία');
+ const cfg=configurations[tool]?.[item?.sourceType||'primary'];
+ if(!cfg||!allowedPath(item?.path,cfg.prefix))throw Error('Disallowed model source');
+ const root=new URL(rootUrl);
+ if(!['https:','http:'].includes(root.protocol))throw Error('Invalid site URL');
+ const out=new URL(item.path,root);
+ if(out.origin!==root.origin||!out.pathname.startsWith(new URL(cfg.prefix,root).pathname))throw Error('Disallowed source location');
  return out;
 }
 export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Clinical Cockpit'});
