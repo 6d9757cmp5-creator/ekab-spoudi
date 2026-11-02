@@ -1,0 +1,43 @@
+name: ATLA Master resource index - Anatomy and Cockpit
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-master-resource-index.yml'
+      - 'scripts/build-atla-master-resource-index.mjs'
+      - 'tools/anatomy-3d/resources/**/imported-manifest.json'
+      - 'tools/patient-simulator/resources/**/imported-manifest.json'
+  workflow_run:
+    workflows: ['ATLA NIH 3D release evidence audit']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atla-master-resource-index
+  cancel-in-progress: false
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Count and de-duplicate actual independent tool assets
+        run: |
+          node --check scripts/build-atla-master-resource-index.mjs
+          node scripts/build-atla-master-resource-index.mjs
+      - name: Save index and auditable distribution without claiming model activation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/resources/master-resource-index.json docs/ATLA_MASTER_RESOURCE_INVENTORY_2026.md
+          if git diff --cached --quiet; then
+            echo 'No changes to resource inventory'
+          else
+            git commit -m "docs(ATLA): reconcile Anatomy Lab, Clinical Cockpit and NIH resource totals"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

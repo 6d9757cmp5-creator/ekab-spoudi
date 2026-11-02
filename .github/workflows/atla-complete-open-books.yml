@@ -1,0 +1,88 @@
+name: ATLA — Archive complete CC-BY medical and molecular books
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-complete-open-books.yml'
+      - 'tools/atla-ai/knowledge-base/full-books/catalog.json'
+      - 'tools/atla-ai/knowledge-base/full-books/archive.mjs'
+      - 'tools/atla-ai/knowledge-base/full-books/archive.test.mjs'
+      - 'tools/atla-ai/knowledge-base/full-books/rebuild.mjs'
+  workflow_dispatch:
+  schedule:
+    - cron: '31 3 * * 0' # UTC weekly re-verify and retry missing official books
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atla-complete-open-books
+  cancel-in-progress: false
+
+jobs:
+  full-book-archive:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Safety tests and syntax checks
+        run: |
+          node --check tools/atla-ai/knowledge-base/full-books/archive.mjs
+          node --check tools/atla-ai/knowledge-base/full-books/rebuild.mjs
+          node --test tools/atla-ai/knowledge-base/full-books/archive.test.mjs
+      - name: Ensure full PDF structural verification is available
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          command -v pdfinfo
+      - name: Download and verify complete official PDFs (no third-party LLM ingestion)
+        run: node tools/atla-ai/knowledge-base/full-books/archive.mjs
+      - name: Verify persisted archive metadata and no false clinical approval
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import {strict as assert} from 'node:assert';
+          const f='tools/atla-ai/knowledge-base/full-books/archive-manifest.json';
+          const report=JSON.parse(readFileSync(f,'utf8'));
+          assert.equal(report.schema_version,1);
+          assert.equal(report.catalog_count,10);
+          assert.equal(report.clinical_retrieval_enabled,false);
+          assert.equal(report.scientific_approval,false);
+          assert.equal(report.complete_verified,report.books.length);
+          assert.ok(report.books.every(b=>b.archival_status==='full-file-verified'&&
+            b.original_pdf_sha256.length===64&&b.original_pdf_bytes>30000&&b.pages>=20&&b.parts.length>=1));
+          console.log('Verified full books:',report.complete_verified,'Missing/deferred:',report.not_archived);
+          NODE
+      - name: Persist only complete, locally verified book bytes and manifests on main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/knowledge-base/full-books/complete/ \
+                  tools/atla-ai/knowledge-base/full-books/archive-manifest.json
+          if git diff --cached --quiet; then
+            echo "No new whole books to commit."
+          else
+            git commit -m "data(atla): archive losslessly verified CC-BY full textbooks, not approved for clinical RAG"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Preserve inspectable archive summary even on partial or failed download
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-verified-complete-open-books
+          path: |
+            tools/atla-ai/knowledge-base/full-books/archive-manifest.json
+            tools/atla-ai/knowledge-base/full-books/catalog.json
+          if-no-files-found: ignore
+          retention-days: 30

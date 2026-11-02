@@ -1,0 +1,27 @@
+name: ATLA NIH3D verify GitHub Release write permission
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-nih3d-release-access-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release-permission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create real ATLA NIH3D model-archive release after permission update
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: atla-nih3d-master-2026
+        run: |
+          set -euo pipefail
+          echo "Checking repository release permissions; not altering NIH model files."
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA Master Plan 2026 - NIH 3D source archives" --notes "Losslessly compressed NIH 3D model archives with source metadata, licenses, original bytes and SHA-256 manifests. This release is NOT evidence of a completed full NIH 3D collection import. See per-shard audit results."
+          fi
+          gh release upload "$TAG" docs/ATLA_NIH3D_DURABLE_STORAGE_2026.md#ATLA-NIH3D-STORAGE-STATUS.md --clobber
+          gh release view "$TAG" --json tagName,url,assets
