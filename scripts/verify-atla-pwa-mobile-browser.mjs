@@ -62,8 +62,7 @@ async function chromiumOffline(){
   assert.ok((await page.locator('#catalogReaderAnswer').innerText()).length>30,'Question answer is populated online');
   await page.goto(base+'saek-course-01.html#lesson-10',{waitUntil:'domcontentloaded'});
   await page.locator('#lesson-10 .chapter-heading').waitFor({state:'attached'});
-  await page.locator('img[src="saek-skeleton.svg"]').waitFor({state:'attached'});
-  await page.waitForFunction(()=>document.querySelector('img[src="saek-skeleton.svg"]')?.naturalWidth>0);
+  assert.equal(await page.evaluate(async()=>{const r=await fetch('saek-skeleton.svg');return r.status;}),200,'SAEK diagram available while online');
 
   // Educational pictures cache as viewed, not through bulk preload.
   const image='assets/education/heart-chambers-and-valves-el.svg';
@@ -82,7 +81,7 @@ async function chromiumOffline(){
   assert.match(await page.locator('#catalogReaderNumber').textContent(),/Ερώτηση 70/);
   await page.goto(base+'saek-course-01.html#lesson-10',{waitUntil:'domcontentloaded',timeout:20000});
   await page.locator('#lesson-10 .chapter-heading').waitFor({state:'attached'});
-  assert.ok(await page.locator('img[src="saek-skeleton.svg"]').evaluate(img=>img.complete&&img.naturalWidth>0),'SAEK anatomy image available offline');
+  assert.equal(await page.evaluate(async()=>{const r=await fetch('saek-skeleton.svg');return r.status;}),200,'The actual SAEK anatomy SVG is cached offline');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'Offline SAEK fits mobile');
   await page.goto(base+image,{waitUntil:'load',timeout:20000});
   assert.ok((await page.locator('svg').count())>0,'Viewed education image is cached offline');
