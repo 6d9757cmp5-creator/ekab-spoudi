@@ -8,6 +8,7 @@ on:
       - 'atla/practice/**'
       - 'atla/learning/contextual-tools.mjs'
       - 'scripts/test-atla-pwa.mjs'
+      - 'scripts/verify-atla-anatomy-remote.mjs'
       - 'scripts/verify-atla-pwa-mobile-browser.mjs'
       - '.github/workflows/atla-pwa-mobile.yml'
   workflow_dispatch:
@@ -27,3 +28,13 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium webkit
       - run: node scripts/verify-atla-pwa-mobile-browser.mjs
+  anatomy-vendor:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify true anatomical manifests and real compressed mesh chunks
+        run: node scripts/verify-atla-anatomy-remote.mjs
