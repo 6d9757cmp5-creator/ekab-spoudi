@@ -2,6 +2,13 @@ name: Deep pre-cleanup audit
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - 'atla/**'
+      - 'workers/mentor-chat/**'
+      - 'learning-surface.mjs'
+      - 'scripts/verify-reader-search.mjs'
+      - '.github/workflows/deep-pre-cleanup.yml'
   workflow_dispatch:
 permissions:
   contents: read
