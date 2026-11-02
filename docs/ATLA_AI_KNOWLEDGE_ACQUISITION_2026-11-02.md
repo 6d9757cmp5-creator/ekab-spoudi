@@ -29,3 +29,6 @@ node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledg
 - A complete PubMed outage or an empty source registry now fails closed instead of generating an apparently successful empty research queue. Partial failures are reported without inventing evidence.
 - Run locally, read-only and credit-free: `node tools/atla-ai/knowledge-refresh/pipeline.mjs --dry-run`.
 - AI response testing remains pending until cost and owner-approved activation. No change to clinical/learner publishing safeguards.
+
+## Owner decision — AI credits remain protected
+The owner confirmed that paid AI answer validation must remain OFF for now to preserve credits. This is explicitly **not a blocker** for deterministic tests, source integrity checks, real read-only NCBI tests or validating pending queues. The live paid-provider test remains an open acceptance item; never enable AI credentials or call the model for this PR without separate approval. `--dry-run` explicitly injects an empty AI environment.
