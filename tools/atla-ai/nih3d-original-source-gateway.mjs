@@ -89,6 +89,3 @@ export function selectOriginalFile(entry,{format='GLB',maxInlineBytes=50*1024*10
   const suitable=candidates.find(x=>x.sizeBytes!=null&&x.sizeBytes<=maxInlineBytes);
   return suitable?{...suitable,downloadOnDemand:true}:null;
 }
-export function approvedForLesson(entry) {
-  return {...entry,scientificReview:'APPROVED_FOR_EDUCATION'};
-}
