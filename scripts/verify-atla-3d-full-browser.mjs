@@ -43,7 +43,7 @@ try{
  assert.ok(await page.locator('#detailCard').isVisible(),'Loaded heart group must be explained to learner');
  const name=(await page.locator('#detailName').textContent()).trim();
  assert.match(name,/Καρδιακές/);
- assert.match(await page.locator('#modelTag').textContent(),model==='female'?/ΓΥΝΑΙΚΟ/:/ΑΝΔΡΙΚΟ/);
+ assert.match(await page.locator('#modelTag').textContent(),model==='female'?/ΓΥΝΑΙΚΕΙΟ/:/ΑΝΔΡΙΚΟ/);
  await page.screenshot({path:'atlas-heart-webgl-'+model+'.png'});
  console.log('PASS: FULL '+model+' vendor atlas loaded into WebGL, focused heart, chapter return; '+name);
 }finally{
