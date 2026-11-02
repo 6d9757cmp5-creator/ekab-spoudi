@@ -4,7 +4,7 @@
  * Absolutely no AI invocation, no GitHub writes and no student-facing changes.
  */
 import assert from 'node:assert/strict';
-import {run,validateOutput} from './pipeline.mjs';
+import {run,validateOutput,validateQueueFiles} from './pipeline.mjs';
 import {main as scan} from './scan.mjs';
 // Reuse the single read-only scan so failed source probes can be audited.
 const discovery=await scan({write:false});
@@ -13,6 +13,9 @@ const report=await run({scanner:async({write})=>{
  return discovery;
 },env:{},write:false});
 validateOutput(report);
+// Exercise the exact four-document production gate against real read-only
+// discovery results, not only the final AI triage report.
+validateQueueFiles({report,metadata:discovery.metadata,health:discovery.health,pending:discovery.pending});
 const stats=report.source_discovery;
 assert.ok(stats?.monitored_urls>0,'no curated sources registered');
 assert.ok(stats?.pubmed_topics_checked>0,'no PubMed topic queries');
