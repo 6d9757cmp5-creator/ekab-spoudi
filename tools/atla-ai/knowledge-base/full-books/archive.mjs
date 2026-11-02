@@ -168,6 +168,11 @@ export async function main(){
   clinical_retrieval_enabled:false,scientific_approval:false,
   books:results,failures};
  await writeFile(ARCHIVED,JSON.stringify(report,null,2)+'\n');
+ // Keep summary count synchronized with byte-verified persisted manifest.
+ // This is a metadata counter, NOT scientific or learner-content approval.
+ catalog.verified_full_books_persisted=report.complete_verified;
+ catalog.automatic_archival_candidates=eligible.length;
+ await writeFile(CATALOG,JSON.stringify(catalog,null,2)+'\n');
  console.log(JSON.stringify({catalog_count:report.catalog_count,attempted:report.attempted,
    verified:report.complete_verified,bytes:budget,failed:failures,scientific_approval:false},null,2));
 }
