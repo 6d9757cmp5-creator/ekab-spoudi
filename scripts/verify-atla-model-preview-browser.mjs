@@ -40,6 +40,31 @@ try{
   }catch(e){
    failures.push(test.tool+' render status: '+await page.locator('#source-status').textContent()+' ; '+String(e).slice(0,150));
   }
+  // Full viewer acceptance: anatomy/patient structure selection, isolation,
+  // restore all, opacity and camera views must operate on real loaded geometry.
+  if(!await page.locator('#view-front').isEnabled())failures.push(test.tool+' lacks active full-view camera');
+  const meshNames=await page.locator('#source-part option').count();
+  if(!meshNames)failures.push(test.tool+' has no selectable geometry');
+  else {
+   await page.locator('#part-isolate').click();
+   await page.locator('#part-show').click();
+   await page.locator('#view-front').click();
+   await page.locator('#view-side').click();
+   await page.locator('#view-reset').click();
+   await page.locator('#source-opacity').fill('50');
+   if(await page.locator('#opacity-value').textContent()!=='50%')failures.push(test.tool+' opacity 50% failed');
+   await page.locator('#source-opacity').fill('100');
+  }
+  const animations=await page.locator('#source-clip option').count();
+  if(test.tool==='cockpit'&&test.sourceType==='primary'&&opts[smallest].label.includes('universal-animation')){
+   if(animations<30)failures.push('Quaternius 43 animation list is incomplete: '+animations);
+   else{
+    await page.selectOption('#source-clip',String(Math.min(2,animations-1)));
+    await page.locator('#clip-pause').click();
+    await page.locator('#clip-play').click();
+   }
+  }
+  console.log('FULL VIEWER '+test.tool+' '+test.sourceType+' meshParts='+meshNames+' clips='+animations);
   if(requests.length)failures.push(test.tool+' made unexpected NIH download requests');
   if(errors.length)failures.push(test.tool+' page errors: '+errors.slice(0,3).join(' | '));
   await page.screenshot({path:'browser-qa-results/atla-resource-'+test.tool+'-'+test.sourceType+'.png',fullPage:true});
