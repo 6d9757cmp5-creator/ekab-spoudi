@@ -73,6 +73,14 @@ test('PubMed retraction and expression-of-concern XML trigger fail closed',()=>{
  assert.equal(extractMatchingAbstract(first+relation.replace('RefType="RetractionIn"','Version="1" RefType="ExpressionOfConcernFor"')+last,'12345678'),'');
  assert.equal(extractMatchingAbstract(first+'<PublicationType>Retracted Publication</PublicationType>'+last,'12345678'),'');
 });
+test('PubMed OtherAbstract cannot masquerade as the primary indexed article abstract',()=>{
+ const wrap=(body)=>'<PubmedArticle><MedlineCitation><PMID>12345678</PMID>'+body+'</MedlineCitation></PubmedArticle>';
+ const other='<OtherAbstract Type="PlainLanguageSummary"><AbstractText>'+abstract+'</AbstractText></OtherAbstract>';
+ assert.equal(extractMatchingAbstract(wrap('<Article><ArticleTitle>Study</ArticleTitle></Article>'+other),'12345678'),'');
+ const primary='<Article PubModel="Electronic"><Abstract><AbstractText>'+abstract+'</AbstractText></Abstract></Article>';
+ assert.equal(extractMatchingAbstract(wrap(primary+other),'12345678'),abstract.trim());
+});
+
 test('getAbstract checks live response PMID before using as evidence',async()=>{
  const wrong=async()=>({ok:true,text:async()=>'<PubmedArticle><MedlineCitation><PMID>99999999</PMID><Article><Abstract><AbstractText>'+abstract+'</AbstractText></Abstract></Article></MedlineCitation></PubmedArticle>'});
  assert.equal(await getAbstract('12345678',wrong),'');
