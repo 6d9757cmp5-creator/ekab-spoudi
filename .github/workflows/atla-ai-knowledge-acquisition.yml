@@ -94,7 +94,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tools/atla-ai/knowledge-refresh/queue/
+          git add tools/atla-ai/knowledge-refresh/queue/last-scan.json \
+                  tools/atla-ai/knowledge-refresh/queue/source-health.json \
+                  tools/atla-ai/knowledge-refresh/queue/pending-pubmed.json \
+                  tools/atla-ai/knowledge-refresh/queue/ai-research-review.json
           if git diff --cached --quiet; then
             echo "No changes to research review queue"
           else
