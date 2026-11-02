@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {extractAbstract,aiEnabled,normalizeAssessment,record,validateOutput,assessWithAi,run,getAbstract,extractMatchingAbstract} from './pipeline.mjs';
+import {extractAbstract,aiEnabled,normalizeAssessment,record,validateOutput,assessWithAi,run,getAbstract,extractMatchingAbstract,validateQueueFiles} from './pipeline.mjs';
 const paper={pmid:'12345678',title:'Prehospital systematic review',published_at:'2026 Nov 01',
  journal:'Reviewed Journal',publication_types:['Systematic Review'],topic_ids:['prehospital']};
 const abstract='Evidence gathered in several studies with important limitations. '.repeat(3);
@@ -163,4 +163,40 @@ test('scheduled queue commit cannot rebase unverified changes onto a moving main
  assert.ok(workflow.includes('git push origin HEAD:main'));
  assert.ok(workflow.includes("github.event_name != 'pull_request' && github.ref == 'refs/heads/main'"));
  assert.doesNotMatch(workflow,/git pull --rebase/);
+});
+
+
+test('replacement scheduler rejects unsafe source, bibliography and scan queue documents',()=>{
+ const safe={
+  report:{schema_version:2,stage:'research-only-awaiting-independent-review',
+   source_discovery_completed:true,clinical_knowledge_imported:0,existing_curriculum_changed:false,items:[]},
+  metadata:{schema_version:1,monitored_urls:1,pubmed_topics_checked:10,pubmed_failures:[],
+   model_training_performed:false,clinical_retrieval_updated:false,full_texts_imported:0},
+  health:{schema_version:1,sources:[{url:'https://www.who.int/guidelines',
+   clinical_approval:false,knowledge_ingestion_enabled:false}]},
+  pending:{schema_version:1,items:[{...paper,status:'pending-review',
+   content_imported:false,clinical_approval:false,atla_ai_retrieval_enabled:false}]}
+ };
+ const change=(part,patch)=>({...safe,[part]:{...safe[part],...patch}});
+ assert.equal(validateQueueFiles(safe),true);
+ for(const patch of [{clinical_retrieval_updated:true},{model_training_performed:true},
+  {full_texts_imported:1},{monitored_urls:0},{pubmed_failures:Array(10).fill({reason:'503'})}])
+  assert.throws(()=>validateQueueFiles(change('metadata',patch)),/unsafe-scan-metadata/);
+ assert.throws(()=>validateQueueFiles(change('health',{sources:[{url:'https://evil.example',
+  clinical_approval:false,knowledge_ingestion_enabled:false}]})),/unsafe-source-health/);
+ assert.throws(()=>validateQueueFiles(change('health',{sources:[{url:'https://www.who.int',
+  clinical_approval:true,knowledge_ingestion_enabled:false}]})),/unsafe-source-health/);
+ for(const patch of [{clinical_approval:true},{content_imported:true},
+  {atla_ai_retrieval_enabled:true},{status:'approved'}]){
+  assert.throws(()=>validateQueueFiles(change('pending',{items:[{...safe.pending.items[0],...patch}]})),/unsafe-pending-queue/);
+ }
+ assert.throws(()=>validateQueueFiles(change('pending',{items:[{...safe.pending.items[0],
+  publication_types:['Retracted Publication']}]})),/unsafe-pending-queue/);
+});
+
+test('scheduled workflow checks all four review-only files before staging',()=>{
+ const workflow=readFileSync(new URL('../../../.github/workflows/atla-ai-knowledge-acquisition.yml',import.meta.url),'utf8');
+ assert.match(workflow,/validateQueueFiles/);
+ for(const file of ['ai-research-review.json','last-scan.json','source-health.json','pending-pubmed.json'])
+  assert.ok(workflow.includes(file),file);
 });
