@@ -37,3 +37,12 @@ test('ATLA reuses one existing AI path, retains no-write behavior and exam guard
  const config=read('atla/ai/config.mjs');
  assert.ok(config.includes('endpoint:""'),'Migrated chat must not claim a deployed AI endpoint');
 });
+
+// Regression for the chapter-context overwrite observed in Chromium CI.
+// The real browser smoke also asserts the displayed SAEK chapter context.
+test('SAEK contextual ATLAS open survives delegated launcher click',()=>{
+ const app=read('atla/assistant.mjs');
+ assert.match(app,/window\.addEventListener\('ekab:atlas-context'/);
+ assert.match(app,/context\.textContent='Από κεφάλαιο ΣΑΕΚ: '/);
+ assert.match(app,/if\(!visible\)setOpen\(true\)/,'Delegated click must not reopen and overwrite a visible chapter context');
+});
