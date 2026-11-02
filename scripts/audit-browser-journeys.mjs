@@ -61,12 +61,14 @@ try{
   const open=async path=>{const r=await page.goto(base+path,{waitUntil:'domcontentloaded',timeout:45000});assert(r?.ok(),'Unable to load '+path);};
   await check(device.name+' home theme and primary navigation',async()=>{
    await open('index.html');
-   for(const path of ['saek.html','eoppep.html','farmaka.html','seminar-prep.html','protocols.html','mentor-lab.html'])assert(await page.locator('a[href="'+path+'"]').count()>0,'Missing home link '+path);
+   for(const path of ['paramedic.html','farmaka.html','seminar-prep.html','protocols.html'])assert(await page.locator('a[href="'+path+'"]').count()>0,'Missing home link '+path);
    const toggle=page.locator('#themeToggle');
    await toggle.click();
    assert.equal(await toggle.getAttribute('aria-pressed'),'true','Dark theme did not switch on');
    await toggle.click();
    assert.equal(await toggle.getAttribute('aria-pressed'),'false','Dark theme did not switch off');
+   await open('paramedic.html');
+   for(const path of ['saek.html','eoppep.html','mentor-ecg.html','seminar-prep.html'])assert(await page.locator('a[href="'+path+'"]').count()>0,'Missing Paramedic route '+path);
   });
   await check(device.name+' SAEK all-semesters and tabs',async()=>{
    await open('saek.html');
