@@ -38,6 +38,7 @@ export function previewCandidateCards({query='',domain='all',limit=30}={}){
 }
 /** Fail-closed publication interface. The unreviewed PR #124 cards MUST not appear here. */
 export function approvedCards(){
+ if(KNOWLEDGE_PACK.publishable!==true||KNOWLEDGE_PACK.clinical_review!=='approved'||KNOWLEDGE_PACK.automatic_ai_context!==true)return [];
  return KNOWLEDGE_CARDS.filter(c=>c.status==='approved-for-education'&&
   typeof c.reviewed_at==='string'&&c.reviewed_at.length>=10&&
   c.clinical_instructions===false&&c.medical_decision_support===false);
