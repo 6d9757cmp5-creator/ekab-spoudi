@@ -1,0 +1,61 @@
+name: EKAB - Recover temporary NIH3D original-binary fallback artifacts
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 3,9,15,21 * * *'
+  workflow_run:
+    workflows: ['ATLA NIH 3D full original-binary archive']
+    types: [completed]
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: ekab-nih3d-original-binary-recovery
+  cancel-in-progress: false
+jobs:
+  plan:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate recovery planner before contacting GitHub
+        run: |
+          node --check scripts/nih3d-artifact-rescue.mjs
+          node --test scripts/nih3d-artifact-rescue.test.mjs
+      - name: Select only missing canonical NIH originals, with expiration priority
+        id: plan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/nih3d-artifact-rescue.mjs plan
+  recover:
+    needs: plan
+    if: needs.plan.result == 'success' && needs.plan.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retrieve preserved NIH fallback from its original run
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ matrix.id }}
+          run-id: ${{ matrix.run_id }}
+          repository: ${{ github.repository }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: tmp/nih3d-recovery
+      - name: Verify all parts and publish to the existing durable Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/nih3d-artifact-rescue.mjs publish tmp/nih3d-recovery ${{ matrix.start }}
