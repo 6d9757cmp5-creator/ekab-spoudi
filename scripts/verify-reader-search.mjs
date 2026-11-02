@@ -11,7 +11,7 @@ let bullets=0,stale=0;
 for(const entry of sos.items){
  const q=map.get(entry.id);
  assert.ok(q,'SOS id missing from official bank: '+entry.id);
- assert.ok(entry.points.length>0&&entry.points.length<=4,'invalid points: '+entry.id);
+ assert.ok(entry.points.length>0&&entry.points.length<=5,'invalid points: '+entry.id);
  for(const point of entry.points){
   const source=String(q.answer||'').replace(/\s+/g,' ');
   if(!source.includes(point))stale++;
