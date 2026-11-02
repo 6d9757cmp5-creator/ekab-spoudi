@@ -25,6 +25,21 @@ jobs:
         run: |
           node --check tools/atla-ai/knowledge-refresh/pipeline.mjs
           node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs
+  live-pubmed-probe:
+    needs: verify
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify real NCBI PubMed search and matched PMID abstracts (read-only)
+        run: node tools/atla-ai/knowledge-refresh/live-pubmed-probe.mjs
+
   acquire:
     needs: verify
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
