@@ -36,19 +36,8 @@ jobs:
           node --check tools/atla-ai/knowledge-refresh/pipeline.mjs
           node --check tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
           node --check tools/atla-ai/knowledge-refresh/scientific-qa.mjs
-          node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs tools/atla-ai/knowledge-refresh/review-dossiers.test.mjs
+          node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs
           node tools/atla-ai/knowledge-refresh/scientific-qa.mjs
-          node --check tools/atla-ai/knowledge-refresh/review-dossiers.mjs
-          node tools/atla-ai/knowledge-refresh/review-dossiers.mjs > "$RUNNER_TEMP/atla-clinical-review-dossiers.json"
-          node --input-type=module -e 'import {readFileSync} from "node:fs"; const d=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/atla-clinical-review-dossiers.json","utf8")); if(d.dossier_count<1||d.clinical_publications!==0||d.clinical_approval!==false)process.exit(1); console.log("ATLA independent-review dossier records:",d.dossier_count)'
-      - name: Review packets for independent medical reviewers (never published to learners)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: atla-independent-clinical-review-dossiers
-          path: ${{ runner.temp }}/atla-clinical-review-dossiers.json
-          if-no-files-found: ignore
-          retention-days: 14
   live-pubmed-probe:
     # Both live jobs use unauthenticated NCBI E-utilities; run them serially
     # so the independent per-process request pacing does not overlap in CI.

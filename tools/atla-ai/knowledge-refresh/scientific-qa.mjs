@@ -6,6 +6,13 @@ import {fileURLToPath} from 'node:url';
 import {screenPubMedArticle} from './source-policy.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'queue');
 const isISO=s=>typeof s==='string'&&!Number.isNaN(Date.parse(s))&&new Date(s).toISOString()===s;
+const TOPICS=new Set([
+ 'prehospital','resuscitation','trauma','airway-respiratory','cardiac-emergency',
+ 'stroke-neurology','pediatric-emergency','sepsis-shock','medication-safety','simulation-training'
+]);
+// DOI strings are bibliographic identifiers, not endorsements. An absent DOI
+// remains unverified, while malformed or conflicting DOI metadata fails closed.
+const doiValid=v=>/^10\.\d{4,9}\/\S+$/i.test(String(v));
 export function titleScopeFlags(title){
  const t=String(title||'');
  return [
@@ -35,7 +42,7 @@ export function audit({pending,metadata,health,review=null}){
  if(pending?.checked_at!==metadata?.checked_at||health?.checked_at!==metadata?.checked_at)
   critical.push('mixed-evidence-snapshots');
  if(Array.isArray(items)){
-  const ids=new Set();
+  const ids=new Set(),dois=new Set();
   for(const p of items){
    const id=String(p?.pmid||'');
    if(ids.has(id))critical.push('duplicate-pmid:'+id);
@@ -47,9 +54,26 @@ export function audit({pending,metadata,health,review=null}){
      critical.push('unsafe-bibliography-record:'+id);
    if(p.source_quality!=='unassessed'||p.independent_review!=='required')
      critical.push('unassessed-evidence-marked-approved:'+id);
-   if(!Array.isArray(p.topic_ids)||!p.topic_ids.length)
-     critical.push('uncategorized-study:'+id);
+   if(!Array.isArray(p.topic_ids)||!p.topic_ids.length||
+      p.topic_ids.some(t=>!TOPICS.has(t)))
+     critical.push('invalid-educational-topic:'+id);
+   const doi=String(p.doi||'').trim().toLowerCase();
+   if(doi){
+    if(!doiValid(doi))critical.push('invalid-bibliographic-doi:'+id);
+    if(dois.has(doi))critical.push('duplicate-bibliographic-doi:'+id);
+    dois.add(doi);
+   }else warnings.push('doi-not-verified:'+id);
   }
+ }
+ if(metadata){
+  if(!Number.isInteger(metadata.pending_papers)||metadata.pending_papers!==items?.length)
+   critical.push('pending-paper-count-mismatch');
+  if(!Number.isInteger(metadata.pubmed_topics_checked)||metadata.pubmed_topics_checked<1||
+    !Array.isArray(metadata.pubmed_failures)||metadata.pubmed_failures.length>=metadata.pubmed_topics_checked)
+   critical.push('pubmed-scan-not-reliably-completed');
+  if(metadata.full_texts_imported!==0||
+    metadata.model_training_performed!==false||metadata.clinical_retrieval_updated!==false)
+   critical.push('unapproved-clinical-publishing-detected');
  }
  if(Array.isArray(health?.sources)){
   const reachable=health.sources.filter(x=>x.ok===true).length;
@@ -75,6 +99,9 @@ export function audit({pending,metadata,health,review=null}){
   clinical_publication_allowed:false,
   independent_accreditation:false,
   publication_count:Array.isArray(items)?items.length:0,
+  evidence_appraisal:'NOT_PERFORMED_FROM_BIBLIOGRAPHIC_METADATA',
+  confirmed_clinical_claims:0,
+  inspected_indexed_records:Array.isArray(items)?items.length:0,
   title_only_scope_hints:Array.isArray(items)?items.flatMap(x=>
    titleScopeFlags(x.title).length?[{pmid:String(x.pmid),flags:titleScopeFlags(x.title)}]:[]):[],
   mandatory_human_reviews_pending:MANUAL_GATES,

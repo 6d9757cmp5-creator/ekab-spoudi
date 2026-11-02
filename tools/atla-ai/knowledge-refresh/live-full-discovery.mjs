@@ -6,6 +6,7 @@
 import assert from 'node:assert/strict';
 import {run,validateOutput,validateQueueFiles} from './pipeline.mjs';
 import {main as scan} from './scan.mjs';
+import {audit,enforce} from './scientific-qa.mjs';
 // Reuse the single read-only scan so failed source probes can be audited.
 const discovery=await scan({write:false});
 const report=await run({scanner:async({write})=>{
@@ -16,6 +17,12 @@ validateOutput(report);
 // Exercise the exact four-document production gate against real read-only
 // discovery results, not only the final AI triage report.
 validateQueueFiles({report,metadata:discovery.metadata,health:discovery.health,pending:discovery.pending});
+// The ONE consolidated audit runs on the FRESH read-only full PubMed scan,
+// not merely an old committed research queue snapshot.
+const scientific=audit({pending:discovery.pending,metadata:discovery.metadata,health:discovery.health,review:report});
+enforce(scientific);
+assert.equal(scientific.confirmed_clinical_claims,0);
+assert.equal(scientific.clinical_publication_allowed,false);
 const stats=report.source_discovery;
 assert.ok(stats?.monitored_urls>0,'no curated sources registered');
 assert.ok(stats?.pubmed_topics_checked>0,'no PubMed topic queries');
@@ -38,6 +45,8 @@ console.log(JSON.stringify({
   host:new URL(s.url).hostname,category:s.source_category,
   http_status:s.http_status??null,reason:String(s.reason||'unknown').slice(0,100)
  })),
+ scientific_qa:scientific.technical_research_gate,scientific_appraisal:scientific.evidence_appraisal,
+ flagged_scope_articles:scientific.title_only_scope_hints.length,
  ai_enabled:false,paid_ai_calls:0,clinical_knowledge_imported:0,
  learner_content_changed:false,files_written:false
 }));

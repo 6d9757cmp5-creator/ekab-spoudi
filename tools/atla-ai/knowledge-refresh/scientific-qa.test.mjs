@@ -9,7 +9,7 @@ const paper={id:'pubmed-12345678',pmid:'12345678',title:'Prehospital trauma revi
  clinical_approval:false,atla_ai_retrieval_enabled:false,content_imported:false};
 const source={url:'https://www.who.int/a',ok:true,clinical_approval:false,knowledge_ingestion_enabled:false};
 const fixture=()=>({pending:{schema_version:1,checked_at:at,items:[{...paper}]},
- metadata:{schema_version:1,checked_at:at,monitored_urls:1,monitored_ok:1},
+ metadata:{schema_version:1,checked_at:at,monitored_urls:1,monitored_ok:1,pending_papers:1,pubmed_topics_checked:10,pubmed_failures:[],full_texts_imported:0,model_training_performed:false,clinical_retrieval_updated:false},
  health:{schema_version:1,checked_at:at,sources:[{...source}]}});
 test('systematic-review indexing NEVER yields clinical certification',()=>{
  const a=audit(fixture());
@@ -57,4 +57,36 @@ test('reject fake downstream clinical approval',()=>{
   items:[{status:'pending-independent-scientific-review',clinical_approval:true,
    learner_visible:false,atla_ai_retrieval_enabled:false}]};
  assert.throws(()=>enforce(audit(x)),/unsafe-ai-research-queue/);
+});
+
+test('a PMID DOI is an identifier, not proof; malformed/duplicate DOI metadata fails',()=>{
+ const input=fixture();
+ input.pending.items[0].doi='NOT-A-DOI';
+ assert.throws(()=>enforce(audit(input)),/invalid-bibliographic-doi/);
+ const another=fixture();
+ another.pending.items[0].doi='10.1007/example';
+ another.pending.items.push({...paper,id:'pubmed-87654321',pmid:'87654321',
+  source_url:'https://pubmed.ncbi.nlm.nih.gov/87654321/',doi:'10.1007/example'});
+ another.metadata.pending_papers=2;
+ assert.throws(()=>enforce(audit(another)),/duplicate-bibliographic-doi/);
+});
+test('scientific meta-audit never claims verified treatment evidence',()=>{
+ const input=fixture();input.pending.items[0].doi='10.1234/valid-identifier';
+ const result=audit(input);
+ assert.equal(result.technical_research_gate,'PASS');
+ assert.equal(result.evidence_appraisal,'NOT_PERFORMED_FROM_BIBLIOGRAPHIC_METADATA');
+ assert.equal(result.confirmed_clinical_claims,0);
+ assert.equal(result.inspected_indexed_records,1);
+ assert.equal(enforce(result),true);
+});
+test('incomplete PubMed scan, fake imported content or uncategorized topic is unsafe',()=>{
+ for(const change of [
+  s=>{s.metadata.pubmed_failures=Array.from({length:10},(_,i)=>({topic_id:String(i)}));},
+  s=>{s.metadata.full_texts_imported=1;},
+  s=>{s.metadata.pending_papers=20;},
+  s=>{s.pending.items[0].topic_ids=['made-up-topic'];}
+ ]){
+  const s=fixture();change(s);
+  assert.throws(()=>enforce(audit(s)),/research-safety-QA-failed/);
+ }
 });
