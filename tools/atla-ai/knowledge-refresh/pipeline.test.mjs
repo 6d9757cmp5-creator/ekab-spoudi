@@ -162,7 +162,7 @@ test('scheduled queue commit cannot rebase unverified changes onto a moving main
  assert.ok(workflow.includes('git add tools/atla-ai/knowledge-refresh/queue/last-scan.json'));
  for(const name of ['source-health.json','pending-pubmed.json','ai-research-review.json'])
   assert.ok(workflow.includes('tools/atla-ai/knowledge-refresh/queue/'+name));
- assert.doesNotMatch(workflow,/git add tools\\/atla-ai\\/knowledge-refresh\\/queue\\/\\s*(?:\\n|$)/);
+ assert.ok(!workflow.split('\n').some(line=>line.trim()==='git add tools/atla-ai/knowledge-refresh/queue/'));
  assert.ok(workflow.includes('git push origin HEAD:main'));
  assert.ok(workflow.includes("github.event_name != 'pull_request' && github.ref == 'refs/heads/main'"));
  assert.doesNotMatch(workflow,/git pull --rebase/);
