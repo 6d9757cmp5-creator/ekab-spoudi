@@ -158,6 +158,44 @@ export async function discoverPubMed(fetcher=fetch){
  const found=[...articles.values()].flatMap(item=>(item.topic_ids||[item.topic_id]).map(topic_id=>({...item,topic_id})));
  return {found,failures,excluded};
 }
+/**
+ * PubMed search deliberately excludes retracted papers, so a previously
+ * queued PMID can disappear from search results without ever being removed.
+ * Recheck all existing candidates against current ESummary metadata before
+ * carrying them forward. A failed/partial recheck aborts persistence.
+ */
+export async function recheckPendingPubMed(previous,fetcher=fetch){
+ const items=Array.isArray(previous)?previous:[];
+ if(!items.length)return {found:[],excluded:[],checked:0};
+ const ids=[...new Set(items.map(x=>String(x.pmid)))];
+ if(ids.length!==items.length||ids.length>LIMIT_CANDIDATES||
+    ids.some(id=>!/^\d{1,10}$/.test(id)))
+  throw Error('invalid-existing-pubmed-queue');
+ const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi');
+ for(const [key,value] of Object.entries({db:'pubmed',id:ids.join(','),retmode:'json'}))
+  url.searchParams.set(key,value);
+ const result=(await requestJson(url,fetcher))?.result;
+ if(!result||!Array.isArray(result.uids)||
+    ids.some(id=>!result.uids.map(String).includes(id)))
+  throw Error('pubmed-existing-records-recheck-incomplete');
+ const found=[],excluded=[];
+ for(const old of items){
+  const id=String(old.pmid),summary=result[id];
+  if(!summary||!summary.title||!Array.isArray(summary.pubtype)||
+     !(summary.fulljournalname||summary.source)||
+     !(summary.pubdate||summary.epubdate))
+   throw Error('pubmed-existing-records-recheck-invalid');
+  const refreshed={...old,pmid:id,title:summary.title,
+   published_at:summary.pubdate||summary.epubdate,
+   journal:summary.fulljournalname||summary.source,
+   publication_types:summary.pubtype,
+   topic_id:old.topic_ids?.[0]||'prehospital'};
+  const decision=screenPubMedArticle(refreshed);
+  if(decision.accepted)found.push(refreshed);
+  else excluded.push({pmid:id,topic_id:refreshed.topic_id,reason:decision.reason});
+ }
+ return {found,excluded,checked:items.length};
+}
 export function signalFor(previous,probe){
  if(!probe?.ok)return 'unverified';
  // Compare with the last successful HTTP validators even after a transient
@@ -234,7 +272,11 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
   sourceResults.push(...reports);
  }
  const discovered=await discoverPubMed(fetcher);
- const merged=mergeCandidates(lastCandidates.items,discovered.found,now,discovered.excluded);
+ // Existing PMIDs must be rechecked: search excludes retractions and cannot
+ // itself prove that yesterday's pending article is still eligible.
+ const rechecked=await recheckPendingPubMed(lastCandidates.items,fetcher);
+ const merged=mergeCandidates(lastCandidates.items,[...rechecked.found,...discovered.found],now,
+  [...rechecked.excluded,...discovered.excluded]);
  const metadata={schema_version:1,checked_at:now,registries:registries.map(r=>({id:r.id,entries:r.sources.length})),
   monitored_urls:watchlist.length,monitored_ok:sourceResults.filter(x=>x.ok).length,
   pubmed_topics_checked:TOPICS.length,
