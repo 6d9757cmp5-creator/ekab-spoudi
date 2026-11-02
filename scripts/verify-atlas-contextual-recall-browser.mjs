@@ -54,6 +54,8 @@ try{
   assert.equal(data.recall.answer,'again');
   assert.equal(await page.locator('.atlas-recall-window:visible').count(),0);
   await page.goto(origin+'saek-course-01.html',{waitUntil:'domcontentloaded'});
+  // Module scripts may initialize after DOMContentLoaded; wait for recall service before advancing the fake clock.
+  await page.locator('#atlas-recall-window').waitFor({state:'attached',timeout:15000});
   assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No floating recall button on lesson page');
   await page.clock.install();
   await page.evaluate(()=>{
