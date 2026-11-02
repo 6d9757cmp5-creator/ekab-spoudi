@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {extractAbstract,aiEnabled,normalizeAssessment,record,validateOutput,assessWithAi,run,getAbstract,extractMatchingAbstract} from './pipeline.mjs';
 const paper={pmid:'12345678',title:'Prehospital systematic review',published_at:'2026 Nov 01',
  journal:'Reviewed Journal',publication_types:['Systematic Review'],topic_ids:['prehospital']};
@@ -146,4 +147,12 @@ test('top-level research report cannot claim clinical publication or curriculum 
   {clinical_knowledge_imported:1},{clinical_knowledge_imported:undefined},
   {existing_curriculum_changed:true},{existing_curriculum_changed:undefined}
  ])assert.throws(()=>validateOutput({...safe,...patch}),/unsafe-research-publication/);
+});
+
+test('scheduled queue commit cannot rebase unverified changes onto a moving main',()=>{
+ const workflow=readFileSync(new URL('../../../.github/workflows/atla-ai-knowledge-acquisition.yml',import.meta.url),'utf8');
+ assert.match(workflow,/git add tools\\/atla-ai\\/knowledge-refresh\\/queue\\//);
+ assert.match(workflow,/git push origin HEAD:main/);
+ assert.doesNotMatch(workflow,/git pull --rebase/);
+ assert.match(workflow,/github\.event_name != 'pull_request' && github\.ref == 'refs\\/heads\\/main'/);
 });
