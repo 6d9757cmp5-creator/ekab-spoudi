@@ -162,3 +162,15 @@ test('malformed HTTP 200 PubMed search or summary is a failed topic, not a valid
  assert.equal(empty.failures.length,0,'a genuinely empty NCBI result is not an outage');
  assert.equal(empty.found.length,0);
 });
+
+test('a newly disqualified PMID is removed from pending review, but network silence is not treated as a retraction',()=>{
+ const item={pmid:'23456789',title:'Systematic review of training',published_at:'2026 Nov 01',
+  journal:'Science',publication_types:['Systematic Review'],topic_id:'trauma'};
+ const first=mergeCandidates([],[item],'2026-11-02T01:00:00Z');
+ assert.equal(first.items.length,1);
+ const later='2026-11-02T02:00:00Z';
+ const explicitlyExcluded=[{pmid:item.pmid,topic_id:'trauma',reason:'retracted-preprint-or-non-evidence-publication'}];
+ assert.equal(mergeCandidates(first.items,[],later,explicitlyExcluded).items.length,0);
+ assert.equal(mergeCandidates(first.items,[item],later,explicitlyExcluded).items.length,0);
+ assert.equal(mergeCandidates(first.items,[],later,[]).items.length,1);
+});
