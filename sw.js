@@ -26,7 +26,7 @@ self.addEventListener('fetch',event=>{
   const cache=await caches.open(CACHE);
   try{
    const resp=await fetch(req,{cache:'no-cache'});
-   if(resp.ok&&url.protocol==='https:'&&req.cache!=='no-store'){
+   if(resp.ok&&(url.protocol==='https:'||url.hostname==='localhost'||url.hostname==='127.0.0.1')&&req.cache!=='no-store'){
     cache.put(req,resp.clone()).then(async()=>{
      if(!isStudyImage(url))return;
      const images=(await cache.keys()).filter(r=>isStudyImage(new URL(r.url)));
