@@ -9,6 +9,13 @@ on:
       - 'tools/anatomy-3d/resources/**'
       - 'tools/patient-simulator/resources/**'
       - 'tools/anatomy-3d/vendor/open-anatomy-atlas/**'
+  pull_request:
+    paths:
+      - '.github/workflows/verify-atla-resource-layout.yml'
+      - 'scripts/verify-atla-import-layout.mjs'
+      - 'scripts/verify-atla-sha256.mjs'
+      - 'tools/anatomy-3d/resources/**'
+      - 'tools/patient-simulator/resources/**'
   workflow_dispatch:
 permissions:
   contents: read
