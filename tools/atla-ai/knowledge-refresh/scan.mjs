@@ -121,14 +121,22 @@ export async function discoverPubMed(fetcher=fetch){
    const term='('+topic.term+') AND ("Guideline"[Publication Type] OR "Practice Guideline"[Publication Type] OR "Systematic Review"[Publication Type] OR "Meta-Analysis"[Publication Type]) NOT ("Retracted Publication"[Publication Type] OR "Retraction of Publication"[Publication Type] OR "Preprint"[Publication Type] OR "Published Erratum"[Publication Type])';
    for(const [k,v] of Object.entries({db:'pubmed',term,retmode:'json',retmax:'10',sort:'pub date',reldate:String(PERIOD_DAYS),datetype:'edat'}))search.searchParams.set(k,v);
    const searchResult=await requestJson(search,fetcher);
-   const ids=(searchResult.esearchresult?.idlist||[]).filter(v=>/^\d{1,10}$/.test(String(v))).slice(0,10);
+   // HTTP 200 is not proof of valid NCBI data. Malformed payloads must count
+   // as failed topics, never as legitimate empty search results.
+   const rawIds=searchResult?.esearchresult?.idlist;
+   if(!Array.isArray(rawIds)||rawIds.some(v=>!/^\d{1,10}$/.test(String(v))))
+    throw Error('invalid-pubmed-search-response');
+   const ids=rawIds.slice(0,10).map(String);
    if(!ids.length)continue;
    const lookup=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi');
    for(const [k,v] of Object.entries({db:'pubmed',id:ids.join(','),retmode:'json'}))lookup.searchParams.set(k,v);
    const result=await requestJson(lookup,fetcher);
+   const summaries=result?.result;
+   if(!summaries||!Array.isArray(summaries.uids)||
+      ids.some(pmid=>!summaries.uids.map(String).includes(pmid)||!summaries[pmid]?.title))
+    throw Error('invalid-pubmed-summary-response');
    for(const pmid of ids){
-    const a=result.result?.[pmid];
-    if(!a?.title)continue;
+    const a=summaries[pmid];
     const item={pmid:String(pmid),title:a.title,published_at:a.pubdate||a.epubdate||'',
      journal:a.fulljournalname||a.source||'',topic_id:topic.id,
      doi:(Array.isArray(a.articleids)?a.articleids.find(x=>x.idtype==='doi')?.value:'')||'',
