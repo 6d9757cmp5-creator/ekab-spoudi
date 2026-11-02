@@ -1,0 +1,38 @@
+name: ATLA complete medical books - SHA-256 integrity
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-full-books-integrity.yml'
+      - 'scripts/verify-atla-full-books-sha256.mjs'
+      - 'tools/atla-ai/knowledge-base/full-books/complete/**'
+      - 'tools/atla-ai/knowledge-base/full-books/archive-manifest.json'
+  pull_request:
+    paths:
+      - '.github/workflows/atla-full-books-integrity.yml'
+      - 'scripts/verify-atla-full-books-sha256.mjs'
+      - 'tools/atla-ai/knowledge-base/full-books/complete/**'
+      - 'tools/atla-ai/knowledge-base/full-books/archive-manifest.json'
+  workflow_dispatch:
+  schedule:
+    - cron: '13 5 * * 1'
+permissions:
+  contents: read
+concurrency:
+  group: atla-full-books-sha-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verify-books:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check verifier syntax
+        run: node --check scripts/verify-atla-full-books-sha256.mjs
+      - name: Verify every persisted book shard and reconstructed PDF SHA-256
+        run: node scripts/verify-atla-full-books-sha256.mjs
