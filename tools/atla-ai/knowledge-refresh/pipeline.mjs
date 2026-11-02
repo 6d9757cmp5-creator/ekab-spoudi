@@ -135,6 +135,27 @@ export function validateQueueFiles({report,metadata,health,pending}){
    x.content_imported===false&&x.clinical_approval===false&&
    x.atla_ai_retrieval_enabled===false))
   throw Error('unsafe-pending-queue');
+ // The four isolated files must describe one coherent scan. A safe flag on
+ // each document alone does not prove that stale/mixed evidence belongs together.
+ const stats=report.source_discovery;
+ const ids=xs=>xs.map(x=>String(x.pmid));
+ const pendingIds=ids(pending.items),reportIds=ids(report.items);
+ if(!stats||
+  !Number.isInteger(metadata.monitored_ok)||metadata.monitored_ok<0||
+  metadata.monitored_ok>metadata.monitored_urls||
+  !Number.isInteger(metadata.pending_papers)||metadata.pending_papers!==pending.items.length||
+  !Number.isInteger(metadata.newly_discovered_papers)||metadata.newly_discovered_papers<0||
+  health.sources.filter(x=>x.ok===true).length!==metadata.monitored_ok||
+  new Set(health.sources.map(x=>x.url)).size!==health.sources.length||
+  new Set(pendingIds).size!==pendingIds.length||
+  new Set(reportIds).size!==reportIds.length||
+  !reportIds.every(id=>pendingIds.includes(id))||
+  stats.monitored_urls!==metadata.monitored_urls||
+  stats.monitored_ok!==metadata.monitored_ok||
+  stats.pubmed_topics_checked!==metadata.pubmed_topics_checked||
+  stats.pubmed_topics_failed!==metadata.pubmed_failures.length||
+  stats.newly_discovered_papers!==metadata.newly_discovered_papers)
+  throw Error('inconsistent-research-queue');
  return true;
 }
 
