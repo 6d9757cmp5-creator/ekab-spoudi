@@ -105,3 +105,28 @@ test("worker returns no unvalidated stream bytes for invented citations or dosin
   assert.doesNotMatch(await r.text(),/Αβάσιμη|Ισχυρισμός|12 mg/);
  }
 });
+
+
+test("Claude provider is also buffered, citation-checked and never leaks unsafe SSE",async()=>{
+ const oldFetch=globalThis.fetch;
+ const budget={idFromName:()=> "global",get:()=>({fetch:async()=>Response.json({ok:true})})};
+ const env={MENTOR_PROVIDER:"claude",MENTOR_CLAUDE_ENABLED:"true",MENTOR_SPEND_LIMIT_CONFIRMED:"true",
+  MENTOR_PUBLIC:"true",ANTHROPIC_API_KEY:"private-test-key-not-real",BUDGET:budget,MENTOR_MODEL:"claude-haiku-5-5"};
+ try{
+  for(const [message,status] of [["Εκπαιδευτικός ορισμός. [T1]",200],["Πάρε 20 mg [T1]",503]]){
+   globalThis.fetch=async(url,init)=>{
+    assert.match(url,/anthropic\.com\/v1\/messages/);
+    assert.equal(init.headers["x-api-key"],"private-test-key-not-real");
+    const raw="data: "+JSON.stringify({type:"content_block_delta",delta:{type:"text_delta",text:message}})+"\n\n"+
+     "data: "+JSON.stringify({type:"message_stop"})+"\n\n";
+    return new Response(raw,{status:200,headers:{"content-type":"text/event-stream"}});
+   };
+   const res=await worker.fetch(req(),env);
+   assert.equal(res.status,status,message);
+   const text=await res.text();
+   assert.doesNotMatch(text,/private-test-key-not-real|content_block_delta/);
+   if(status===503)assert.doesNotMatch(text,/20 mg/);
+   else assert.match(text,/Εκπαιδευτικός ορισμός/);
+  }
+ }finally{globalThis.fetch=oldFetch;}
+});
