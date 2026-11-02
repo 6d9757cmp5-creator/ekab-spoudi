@@ -5,7 +5,7 @@ import {writeFile,mkdir} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {main as scan} from './scan.mjs';
-import {screenPubMedArticle} from './source-policy.mjs';
+import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 const ROOT=dirname(fileURLToPath(import.meta.url));
 const OUT=resolve(ROOT,'queue','ai-research-review.json');
 const MAX=4;
@@ -111,6 +111,34 @@ export function validateOutput(report){
  return true;
 }
 /**
+ * The replacement scheduler must validate every persisted review-only document,
+ * not just the AI report. This preserves the old scanner's publication gate.
+ */
+export function validateQueueFiles({report,metadata,health,pending}){
+ validateOutput(report);
+ if(!metadata||metadata.schema_version!==1||
+  metadata.clinical_retrieval_updated!==false||metadata.model_training_performed!==false||
+  metadata.full_texts_imported!==0||
+  !Number.isInteger(metadata.monitored_urls)||metadata.monitored_urls<1||
+  !Number.isInteger(metadata.pubmed_topics_checked)||metadata.pubmed_topics_checked<1||
+  !Array.isArray(metadata.pubmed_failures)||
+  metadata.pubmed_failures.length>=metadata.pubmed_topics_checked)
+  throw Error('unsafe-scan-metadata');
+ if(!health||health.schema_version!==1||!Array.isArray(health.sources)||
+  health.sources.length!==metadata.monitored_urls||
+  !health.sources.every(x=>x&&classifySource(x.url).accepted&&
+   x.clinical_approval===false&&x.knowledge_ingestion_enabled===false))
+  throw Error('unsafe-source-health');
+ if(!pending||pending.schema_version!==1||!Array.isArray(pending.items)||
+  pending.items.length>100||
+  !pending.items.every(x=>screenPubMedArticle(x).accepted&&x.status==='pending-review'&&
+   x.content_imported===false&&x.clinical_approval===false&&
+   x.atla_ai_retrieval_enabled===false))
+  throw Error('unsafe-pending-queue');
+ return true;
+}
+
+/**
  * A complete PubMed outage must not be mistaken for a successful empty daily scan.
  * Review state is staged without filesystem writes until all publication gates pass.
  */
@@ -150,6 +178,7 @@ export async function run({scanner=scan,fetcher=fetch,env=process.env,now=new Da
  if(write){
   if(!discovery.metadata||!discovery.health||!discovery.pending)
    throw Error('incomplete-scanner-output-refuse-persistence');
+  validateQueueFiles({report,metadata:discovery.metadata,health:discovery.health,pending:discovery.pending});
   await mkdir(dirname(OUT),{recursive:true});
   // All four review-only documents are persisted only after validating the entire scan/report.
   const entries=[
