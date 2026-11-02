@@ -11,7 +11,8 @@ const manifests=[
   ['tools/patient-simulator/resources/makehuman/imported-manifest.json','assets'],
   ['tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json','files'],
   ['tools/patient-simulator/resources/quaternius/imported-manifest.json','assets'],
-  ['tools/anatomy-3d/resources/bp3d43/compiled-shards/manifest.json','parts']
+  ['tools/anatomy-3d/resources/bp3d43/compiled-shards/manifest.json','parts'],
+  ['tools/anatomy-3d/resources/nih3d-approved/head-3dpx-000010/manifest.json','chunks']
 ];
 const validHash=/^[0-9a-f]{64}$/;
 const report={manifestCount:0,fileCount:0,verified:0,failures:[],sources:[]};
@@ -45,7 +46,7 @@ for(const [manifest,listKey] of manifests){
     const seen=new Set(),parts=[];
     for(const item of items){
       report.fileCount++;
-      const path=item.output||item.path||(listKey==='parts'?'tools/anatomy-3d/resources/bp3d43/compiled-shards/'+item.file:null);
+      const path=item.output||item.path||(listKey==='parts'?'tools/anatomy-3d/resources/bp3d43/compiled-shards/'+item.file:listKey==='chunks'?'tools/anatomy-3d/resources/nih3d-approved/head-3dpx-000010/'+item.file:null);
       try{
         if(typeof path!=='string')throw Error('missing path');
         if(seen.has(path))throw Error('duplicate path');
@@ -56,13 +57,13 @@ for(const [manifest,listKey] of manifests){
         const actual=await digest(file);
         if(actual!==item.sha256)throw Error('SHA-256 mismatch');
         report.verified++;
-        if(listKey==='parts')parts.push(file);
+        if(listKey==='parts'||listKey==='chunks')parts.push(file);
       }catch(e){report.failures.push({path:path??'(missing)',reason:String(e.message||e)})}
     }
-    if(listKey==='parts'){
+    if(listKey==='parts'||listKey==='chunks'){
       try{
         if(parts.length!==items.length)throw Error('not all parts verified');
-        if(j.partCount!==items.length)throw Error('partCount mismatch');
+        if(listKey==='parts'&&j.partCount!==items.length)throw Error('partCount mismatch');
         const bytes=items.reduce((n,x)=>n+x.bytes,0);
         if(bytes!==j.totalBytes)throw Error('totalBytes mismatch');
         if(!validHash.test(j.sha256)||(await digestParts(parts))!==j.sha256)throw Error('combined SHA-256 mismatch');
