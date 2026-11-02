@@ -11,7 +11,7 @@ const discovery=await scan({write:false});
 const report=await run({scanner:async({write})=>{
  assert.equal(write,false,'PR validation must never persist source scans');
  return discovery;
-},env:{},write:false});
+},env:{},now:discovery.metadata.checked_at,write:false});
 validateOutput(report);
 // Exercise the exact four-document production gate against real read-only
 // discovery results, not only the final AI triage report.
