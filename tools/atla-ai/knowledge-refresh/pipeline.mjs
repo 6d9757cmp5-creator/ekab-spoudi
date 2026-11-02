@@ -96,8 +96,25 @@ export function validateOutput(report){
  }
  return true;
 }
+/**
+ * A complete PubMed outage must not be mistaken for a successful empty daily scan.
+ * Review state is staged without filesystem writes until all publication gates pass.
+ */
+export function validateDiscovery(discovery){
+ if(!Array.isArray(discovery?.pending?.items))throw Error('invalid-scanner-queue');
+ const metadata=discovery?.metadata;
+ if(!metadata)return true; // unit-test injected scanner may provide candidates only
+ const total=metadata.pubmed_topics_checked;
+ if(!Number.isInteger(total)||total<1||!Array.isArray(metadata.pubmed_failures))
+  throw Error('scanner-metadata-incomplete');
+ if(metadata.pubmed_failures.length>=total)throw Error('pubmed-total-outage-refuse-queue-update');
+ if(!Number.isInteger(metadata.monitored_urls)||metadata.monitored_urls<1)
+  throw Error('source-watchlist-empty-refuse-queue-update');
+ return true;
+}
 export async function run({scanner=scan,fetcher=fetch,env=process.env,now=new Date().toISOString(),write=true}={}){
- const discovery=await scanner({fetcher,now,write});
+ const discovery=await scanner({fetcher,now,write:false});
+ validateDiscovery(discovery);
  const candidates=(discovery.pending?.items||[]).filter(x=>screenPubMedArticle(x).accepted).slice(0,MAX);
  const items=[];
  for(const candidate of candidates){
@@ -107,12 +124,32 @@ export async function run({scanner=scan,fetcher=fetch,env=process.env,now=new Da
  }
  const report={schema_version:2,generated_at:now,stage:'research-only-awaiting-independent-review',
   source_discovery_completed:true,ai_configured:aiEnabled(env),items,
+  source_discovery:discovery.metadata?{
+   monitored_urls:discovery.metadata.monitored_urls,
+   monitored_ok:discovery.metadata.monitored_ok,
+   pubmed_topics_checked:discovery.metadata.pubmed_topics_checked,
+   pubmed_topics_failed:discovery.metadata.pubmed_failures.length,
+   newly_discovered_papers:discovery.metadata.newly_discovered_papers
+  }:null,
   clinical_knowledge_imported:0,existing_curriculum_changed:false};
  validateOutput(report);
- if(write){await mkdir(dirname(OUT),{recursive:true});await writeFile(OUT,JSON.stringify(report,null,2)+'\n');}
+ if(write){
+  if(!discovery.metadata||!discovery.health||!discovery.pending)
+   throw Error('incomplete-scanner-output-refuse-persistence');
+  await mkdir(dirname(OUT),{recursive:true});
+  // All four review-only documents are persisted only after validating the entire scan/report.
+  const entries=[
+   ['last-scan.json',discovery.metadata],
+   ['source-health.json',discovery.health],
+   ['pending-pubmed.json',discovery.pending],
+   ['ai-research-review.json',report]
+  ];
+  for(const [name,value] of entries)
+   await writeFile(resolve(dirname(OUT),name),JSON.stringify(value,null,2)+'\n');
+ }
  return report;
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- run().then(r=>console.log(JSON.stringify({candidates:r.items.length,ai_configured:r.ai_configured,
+ run(process.argv.includes('--dry-run')?{write:false,env:{}}:{}).then(r=>console.log(JSON.stringify({candidates:r.items.length,ai_configured:r.ai_configured,
   clinical_imports:0,stage:r.stage}))).catch(e=>{console.error('ATLA intake error:',e.message);process.exitCode=1;});
 }

@@ -22,3 +22,10 @@ The workflow is a draft replacement; old schedule remains active on main until a
 
 ## Tests
 node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs
+
+## Next validation (AI credits remain zero)
+- The scanner stages all metadata and candidates *read-only* first; only after the research-only gate can review files be written.
+- The new full-network PR smoke job exercises the actual curated-source registry and all PubMed topics using `write:false` and `env:{}`. Paid model requests are impossible in this test.
+- A complete PubMed outage or an empty source registry now fails closed instead of generating an apparently successful empty research queue. Partial failures are reported without inventing evidence.
+- Run locally, read-only and credit-free: `node tools/atla-ai/knowledge-refresh/pipeline.mjs --dry-run`.
+- AI response testing remains pending until cost and owner-approved activation. No change to clinical/learner publishing safeguards.

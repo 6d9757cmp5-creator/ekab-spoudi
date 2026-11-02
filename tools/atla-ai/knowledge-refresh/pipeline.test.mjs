@@ -75,3 +75,43 @@ test('getAbstract checks live response PMID before using as evidence',async()=>{
  assert.equal(await getAbstract('12345678',wrong),'');
  assert.equal(await getAbstract('not-a-pmid',wrong),'');
 });
+
+
+test('entire PubMed outage blocks the new review queue, even if source HEAD checks succeeded',async()=>{
+ const scanner=async ({write})=>{
+  assert.equal(write,false,'scanner must stage results without writing');
+  return {metadata:{monitored_urls:3,pubmed_topics_checked:10,
+   pubmed_failures:Array.from({length:10},(_,i)=>({topic_id:String(i),reason:'503'}))},
+   pending:{items:[paper]},health:{sources:[]}};
+ };
+ await assert.rejects(
+  run({scanner,env:{},fetcher:async()=>{throw Error('must not fetch');},write:false}),
+  /pubmed-total-outage-refuse-queue-update/
+ );
+});
+test('partial PubMed failures preserve pending research with no paid AI or write',async()=>{
+ let scanWriteValue=null,paidRequests=0;
+ const scanner=async ({write})=>{
+  scanWriteValue=write;
+  return {metadata:{monitored_urls:3,monitored_ok:1,pubmed_topics_checked:10,
+    pubmed_failures:[{topic_id:'trauma',reason:'503'}],newly_discovered_papers:1},
+   pending:{items:[paper]},health:{sources:[]}};
+ };
+ const fetcher=async url=>{
+  if(String(url).includes('api.anthropic.com'))paidRequests++;
+  return {ok:true,text:async()=>'<PubmedArticle><MedlineCitation><PMID>12345678</PMID><Article><Abstract><AbstractText>'+abstract+'</AbstractText></Abstract></Article></MedlineCitation></PubmedArticle>'};
+ };
+ const r=await run({scanner,fetcher,write:false,env:{ATLA_RESEARCH_AI_ENABLED:'true'}});
+ assert.equal(scanWriteValue,false);
+ assert.equal(paidRequests,0);
+ assert.equal(r.source_discovery.pubmed_topics_failed,1);
+ assert.equal(r.ai_configured,false);
+ assert.equal(r.items[0].learner_visible,false);
+});
+test('empty watchlist and malformed metadata refuse updates',async()=>{
+ const make=(metadata)=>async()=>({metadata,pending:{items:[]},health:{sources:[]}});
+ await assert.rejects(run({scanner:make({monitored_urls:0,pubmed_topics_checked:10,pubmed_failures:[]}),
+  write:false,env:{}}),/source-watchlist-empty/);
+ await assert.rejects(run({scanner:make({monitored_urls:4,pubmed_failures:[]}),
+  write:false,env:{}}),/scanner-metadata-incomplete/);
+});

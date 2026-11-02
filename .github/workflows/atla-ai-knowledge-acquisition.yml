@@ -24,6 +24,7 @@ jobs:
       - name: Deterministic discovery and AI research gate tests
         run: |
           node --check tools/atla-ai/knowledge-refresh/pipeline.mjs
+          node --check tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
           node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs
   live-pubmed-probe:
     needs: verify
@@ -39,6 +40,21 @@ jobs:
           node-version: '22'
       - name: Verify real NCBI PubMed search and matched PMID abstracts (read-only)
         run: node tools/atla-ai/knowledge-refresh/live-pubmed-probe.mjs
+
+  live-full-discovery:
+    needs: verify
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Full curated sources and PubMed discovery - no AI credits, no writes
+        run: node tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
 
   acquire:
     needs: verify

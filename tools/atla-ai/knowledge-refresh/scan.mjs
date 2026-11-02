@@ -204,6 +204,7 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
  const merged=mergeCandidates(lastCandidates.items,discovered.found,now);
  const metadata={schema_version:1,checked_at:now,registries:registries.map(r=>({id:r.id,entries:r.sources.length})),
   monitored_urls:watchlist.length,monitored_ok:sourceResults.filter(x=>x.ok).length,
+  pubmed_topics_checked:TOPICS.length,
   rejected_uncurated_sources:registries.reduce((n,r)=>n+r.sources.filter(s=>!canonical(s.source_url||s.url)).length,0),
   monitored_by_source_category:Object.fromEntries([...new Set(watchlist.map(x=>x.source_category))].map(category=>[category,watchlist.filter(x=>x.source_category===category).length])),
   possible_source_updates:sourceResults.filter(x=>x.signal==='possible-source-update').length,
