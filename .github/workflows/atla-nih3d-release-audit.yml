@@ -1,0 +1,53 @@
+name: ATLA NIH 3D release evidence audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-nih3d-release-audit.yml'
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['ATLA NIH 3D full original-binary archive']
+    types: [completed]
+  schedule:
+    - cron: '21 4,12,20 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: atla-nih3d-release-evidence
+  cancel-in-progress: false
+jobs:
+  verify-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify audit logic and fail-closed overlapping pilot handling
+        run: |
+          node --check scripts/audit-atla-nih3d-release.mjs
+          node scripts/audit-atla-nih3d-release.mjs --self-test
+      - name: Retrieve actual per-range manifests from the permanent GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: atla-nih3d-master-2026
+        run: |
+          mkdir -p tmp/nih3d-reports
+          gh release download "$TAG" --pattern '*-RESULT.json' --dir tmp/nih3d-reports
+      - name: Reconcile NIH public metadata with real released packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/audit-atla-nih3d-release.mjs --manifests=tmp/nih3d-reports
+      - name: Publish a verifiable partial-or-complete archive report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.json
+          if git diff --cached --quiet; then
+            echo 'No new NIH archive evidence'
+          else
+            git commit -m "docs(ATLA): reconcile NIH 3D archive coverage with release assets"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
