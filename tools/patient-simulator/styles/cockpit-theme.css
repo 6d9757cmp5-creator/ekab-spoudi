@@ -1,0 +1,230 @@
+/* Simulation Cockpit — Visual Baseline A.
+ * Original clinical UI system. Does not simulate physiology or claim Body Interact parity.
+ * Source of truth: docs/SIMULATION_COCKPIT_VISUAL_SPEC_2026.md
+ */
+:root{
+ color-scheme:dark;
+ --cockpit-canvas:#071823;
+ --cockpit-panel:#102938;
+ --cockpit-raised:#193849;
+ --cockpit-line:#40647a;
+ --cockpit-accent:#76e3d4;
+ --cockpit-text:#eef7fa;
+ --cockpit-muted:#abc5cd;
+ --cockpit-blue:#8abaf0;
+ --cockpit-r:16px;
+ --cockpit-shadow:0 18px 48px rgba(0,10,18,.33);
+}
+body{
+ color:var(--cockpit-text);
+ background:radial-gradient(ellipse 68% 43% at 52% -7%,#224151,#0b2230 68%,#071823 125%);
+}
+.next-shell{max-width:1660px;padding-left:clamp(12px,2.2vw,34px);padding-right:clamp(12px,2.2vw,34px)}
+.next-header{border-bottom:1px solid #51788b66}
+.next-top{gap:16px;padding-block:24px}
+.next-top h1{letter-spacing:-.032em;line-height:1.15}
+.next-time{background:linear-gradient(165deg,#17394a,#0c2534);box-shadow:inset 0 1px #a4d8de19}
+.next-warning{font-size:.82rem;border-color:#a67d4b8c;max-width:100%;line-height:1.55}
+.next-library{background:linear-gradient(160deg,#132f40,#0c2533);border:1px solid #44697c;border-radius:var(--cockpit-r);box-shadow:var(--cockpit-shadow)}
+.next-case-card{transition:transform .13s ease,border-color .13s ease,box-shadow .13s ease}
+.next-case-card:hover{transform:translateY(-2px);border-color:var(--cockpit-accent)}
+.next-stage-layout{
+ border:1px solid #668b9b99;
+ box-shadow:0 26px 55px #0008,0 0 0 1px #cdeaf010;
+ grid-template-columns:minmax(0,2.3fr) minmax(330px,.88fr);
+}
+.next-scene-top{
+ background:linear-gradient(100deg,#071d2bed,#123448c9);
+ gap:12px;
+}
+.next-scene-label{color:#d8eef2}
+.next-canvas-wrap{min-height:425px;background:radial-gradient(ellipse at 50% 50%,#9dc2c51d,#071f2b20 70%)}
+.next-canvas-wrap canvas{height:clamp(425px,38vw,615px);min-height:425px}
+.next-cinema-hud{font-weight:720;letter-spacing:.09em}
+.next-ready-toggle,.next-fullscreen,.next-view-tabs button{min-height:44px;line-height:1.25}
+.next-ready-toggle{box-shadow:0 5px 15px #001a2345}
+.next-view-tabs{gap:7px}
+.next-view-tabs button{
+ white-space:nowrap;
+ border-radius:10px;
+ background:#0b3548;
+ border-color:#7196a5;
+}
+.next-view-tabs button:hover,.next-fullscreen:hover{background:#275368}
+.next-view-tabs button[aria-pressed=true]{background:var(--cockpit-accent);color:#072638}
+.next-monitor{background:linear-gradient(160deg,#112e3e,#091b29);padding:22px}
+.next-monitor-head{min-height:58px}
+.next-monitor-kicker{color:var(--cockpit-muted)}
+.next-vital{
+ border-color:#446c80;
+ min-height:145px;
+ background:linear-gradient(165deg,#143344,#09222f);
+}
+.next-vital span{font-weight:680}
+.next-vital small{font-weight:480}
+.next-vital strong{font-size:clamp(2.05rem,2.6vw,3.15rem);font-variant-numeric:tabular-nums}
+.next-monitor-foot{font-size:.76rem;line-height:1.5}
+.next-clock-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.next-clock-controls button{min-height:46px;min-width:0}
+.next-clock-controls #next-play{grid-column:1/-1}
+.next-clock-controls .next-quiet{font-weight:600}
+.next-command-bar{border:1px solid #4f7589;background:#0d2c3c;border-radius:14px;box-shadow:0 8px 24px #0004}
+.next-workspace{border:1px solid #44677a;box-shadow:var(--cockpit-shadow)}
+.next-tools{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));
+ gap:9px;padding:14px 15px;border-bottom-color:#47697b;
+}
+.next-tool{
+ max-width:none;min-height:90px;
+ border:1px solid #416779;
+ background:#16384a;
+ border-radius:12px;
+ font-weight:720;
+ padding:8px;
+}
+.next-tool:hover{background:#235267;border-color:#8fcbbf}
+.next-tool[aria-pressed=true]{background:#235668;border:1px solid #9ee9df}
+.next-tool .next-icon{
+ width:43px;height:43px;
+ border-radius:13px;box-shadow:none;
+ background:linear-gradient(155deg,#32627a,#194052);
+}
+.next-tool[aria-pressed=true] .next-icon{border-color:#c3fff7}
+.next-workspace-main,.next-brief-panel,.next-chart-panel,.next-log,.next-review{min-width:0}
+.next-result{line-height:1.6;overflow-wrap:anywhere}
+.next-patient-switch button{min-height:58px}
+.next-ready-legal{font-size:.73rem;line-height:1.55}
+.next-ready-overlay{background:radial-gradient(ellipse at 50% 18%,#6b909d,#244659 66%,#0a2331)}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{
+ outline:3px solid #ffdf89;
+ outline-offset:3px;
+ box-shadow:0 0 0 5px rgba(12,35,48,.75);
+}
+@media(max-width:1180px){
+ .next-stage-layout{grid-template-columns:minmax(0,1.7fr) minmax(295px,.82fr)}
+ .next-view-tabs{flex-basis:100%;order:3;flex-wrap:nowrap;overflow:auto;scrollbar-width:thin;padding-bottom:3px}
+ .next-canvas-wrap canvas{height:440px}
+}
+@media(max-width:820px){
+ .next-stage-layout{grid-template-columns:minmax(0,1fr)}
+ .next-monitor{border-top:1px solid #557e90;border-left:0}
+ .next-vitals{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .next-vital{min-height:120px;padding:10px}
+ .next-vital strong{font-size:clamp(1.7rem,3.9vw,2.4rem)}
+ .next-clock-controls{grid-template-columns:2fr 1fr 1fr}
+ .next-clock-controls #next-play{grid-column:auto}
+ .next-scene-top{align-items:flex-start}
+ .next-canvas-wrap{min-height:370px}
+ .next-canvas-wrap canvas{min-height:370px;height:420px}
+}
+@media(max-width:600px){
+ .next-shell{padding-inline:10px}
+ .next-header{padding-block:14px}
+ .next-top{padding-block:17px}
+ .next-top h1{font-size:clamp(1.3rem,6vw,2rem)}
+ .next-time{width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 12px;padding:10px 14px}
+ .next-time strong{grid-column:2;grid-row:1/3;font-size:1.75rem}
+ .next-case-card:hover{transform:none}
+ .next-scene-top{padding:11px}
+ .next-ready-toggle{flex:1 1 auto}
+ .next-fullscreen{flex:0 1 auto;max-width:none}
+ .next-view-tabs{width:100%;flex-basis:100%;gap:6px}
+ .next-view-tabs button{min-height:44px;flex:none;padding:9px 12px}
+ .next-canvas-wrap,.next-canvas-wrap canvas{height:clamp(330px,61dvh,465px);min-height:330px}
+ .next-mesh-status{max-width:85%}
+ .next-patient-switch{gap:8px;padding:11px}
+ .next-patient-switch button{font-size:.78rem;min-height:62px;padding:8px 10px}
+ .next-vitals{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .next-vital strong{font-size:clamp(2rem,9vw,2.6rem)}
+ .next-monitor{padding:15px}
+ .next-clock-controls{display:grid;grid-template-columns:1fr 1fr}
+ .next-clock-controls #next-play{grid-column:1/-1}
+ .next-tools{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:11px;gap:8px;scrollbar-width:thin}
+ .next-tool{flex:0 0 92px;min-width:92px;min-height:81px;scroll-snap-align:start;font-size:.72rem}
+ .next-tool .next-icon{width:39px;height:39px}
+ .next-canvas-caption{max-width:65%;font-size:.66rem}
+ .next-ready-legal{font-size:.65rem}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .next-case-card,.next-tool,.next-actions button{transition:none!important;transform:none!important}
+}
+
+
+/* Real-browser visual audit fix A.1:
+ * Keep the patient head unobstructed in the phone-size model viewer.
+ * The compact MENTOR launcher is intentionally absent on this page in mobile:
+ * the always-visible MENTOR OS navigation link remains in the header.
+ */
+@media(max-width:600px){
+ .next-ready-overlay{overflow:hidden}
+ .next-ready-overlay model-viewer{
+   position:absolute;
+   inset:102px 0 54px;
+   width:100%;
+   height:calc(100% - 156px);
+   min-height:0;
+   margin:0;
+ }
+ .next-ready-overlay .next-ready-controls{top:8px;left:8px;right:8px;max-width:calc(100% - 16px)}
+ .next-ready-overlay .next-ready-status{
+   top:62px;left:8px;right:8px;
+   max-width:calc(100% - 16px);
+   font-size:.66rem;
+   padding:6px 9px;
+ }
+ .next-ready-overlay .next-ready-legal{
+   bottom:7px;left:8px;right:8px;
+   margin:0 auto;
+ }
+ .ekab-mentor-launcher,.ekab-mentor-presence{display:none!important}
+}
+
+
+/* v0.7 — unified original Three.js scene, two actual CC0 patient GLBs in one WebGL renderer.
+ * Only one active 3D layer receives pointer input. The fallback remains behind it. */
+.next-unified-overlay{position:absolute;inset:0;z-index:5;overflow:hidden;
+ background:linear-gradient(165deg,#95b0ba,#4b6979 67%,#1c3b49)}
+.next-unified-overlay[hidden]{display:none!important}
+.next-unified-host{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+.next-unified-host .next-unified-canvas{width:100%;height:100%;display:block;touch-action:none;outline:none}
+.next-unified-labels{position:absolute;top:13px;left:16px;right:16px;pointer-events:none;
+ display:flex;justify-content:space-between;gap:12px;
+ color:#f5fdff;font-size:.66rem;font-weight:850;letter-spacing:.11em;text-shadow:0 2px 8px #001b25}
+.next-unified-labels span{padding:7px 11px;background:#0c2837bf;border:1px solid #c2f4ef70;border-radius:8px}
+.next-unified-status{position:absolute;top:57px;left:16px;right:16px;pointer-events:none;
+ max-width:460px;margin:0;padding:7px 11px;background:#102f41d9;color:#d2f5f4;
+ border-radius:9px;font-size:.73rem;font-weight:650;line-height:1.4}
+.next-unified-legal{position:absolute;bottom:12px;left:12px;right:12px;max-width:590px;margin:0 auto;
+ pointer-events:none;color:#e6f5f7;background:#102937de;border:1px solid #84bcc273;
+ border-radius:10px;padding:8px 11px;text-align:center;font-size:.69rem;line-height:1.4}
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-cinema-hud,
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-mesh-status,
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-canvas-caption,
+.next-canvas-wrap:has(.next-unified-overlay:not([hidden])) .next-rotate{display:none}
+@media(max-width:600px){
+ .next-unified-labels{left:8px;right:8px;top:7px;font-size:.56rem;gap:5px}
+ .next-unified-labels span{padding:5px 7px}
+ .next-unified-status{top:43px;left:8px;right:8px;font-size:.63rem;padding:6px 9px}
+ .next-unified-legal{left:8px;right:8px;bottom:7px;font-size:.58rem;padding:5px 8px}
+ .next-unified-host{top:18px;bottom:28px;height:calc(100% - 46px)}
+}
+
+
+/* v0.7 screenshot audit: actual Three.js canvas inherits legacy canvas min-height/z-index.
+ * Neutralize those inherited values so the status, Greek instructions and clinical
+ * limitations remain legible above the real 3D canvas at every viewport. */
+.next-unified-host .next-unified-canvas{
+ position:static!important;
+ min-height:0!important;
+ min-width:0!important;
+ z-index:auto!important;
+ filter:none!important;
+}
+.next-unified-labels,.next-unified-status,.next-unified-legal{z-index:3}
+body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
+@media(max-width:600px){
+ .next-unified-host{inset:0;height:100%;width:100%;bottom:0}
+ .next-unified-status{max-width:min(330px,calc(100% - 16px))}
+ .next-unified-legal{font-size:.6rem}
+}

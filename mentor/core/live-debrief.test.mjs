@@ -1,0 +1,33 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {newLiveSession,inspectLive,stepLive} from './live-sim.mjs';
+import {buildLiveDebrief,exportLiveDebrief,LIVE_REVIEW_STATUS} from './live-debrief.mjs';
+test('MENTOR Live debrief reads the exact current session and does not mutate it',()=>{
+ let a=newLiveSession(); const before=JSON.stringify(a);
+ assert.equal(buildLiveDebrief(a).timeline.length,0);
+ assert.equal(JSON.stringify(a),before);
+ a=inspectLive(a,'dialogue','a','chief');
+ a=stepLive(a,'check-safety');
+ const d=buildLiveDebrief(a);
+ assert.equal(d.timeline.length,1);
+ assert.equal(d.observations.length,1);
+ assert.equal(d.observations[0].person,'Άτομο Α');
+ assert.match(d.observations[0].response,/δυσφορία/);
+ assert.equal(d.minute,2);
+ assert.equal(d.practice,1);
+ assert.equal(d.clinicalStatus,LIVE_REVIEW_STATUS);
+ const raw=exportLiveDebrief(a);
+ assert.match(raw,/MENTOR LIVE DEBRIEF/);
+ assert.match(raw,/Συνθετική απάντηση/);
+ assert.match(raw,/ΔΕΝ ΥΠΑΡΧΕΙ|Δεν αποτελεί ιατρικό έγγραφο/);
+ assert.equal(JSON.stringify(a),JSON.stringify(a));
+});
+test('debrief includes review flags, unreliable handover, and never grants clinical qualification',()=>{
+ let s=newLiveSession();
+ for(const id of ['rush','check-safety','report-two','record-both','invent','verified-handover'])s=stepLive(s,id);
+ const d=buildLiveDebrief(s);
+ assert.equal(d.completed,true);assert.equal(d.review,2);
+ assert.equal(d.unreliableHandover,true);
+ assert.match(exportLiveDebrief(s),/ανεπιβεβαίωτες/);
+ assert.doesNotMatch(exportLiveDebrief(s),/ιατρικά εγκεκριμένο|πιστοποιημένη κλινική/);
+});

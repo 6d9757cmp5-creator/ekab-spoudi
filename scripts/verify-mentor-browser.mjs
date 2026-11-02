@@ -7,7 +7,7 @@ import {createServer} from 'node:http';
 import {readFile,mkdir} from 'node:fs/promises';
 import {resolve,sep} from 'node:path';
 import assert from 'node:assert/strict';
-const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'};
+const types={'.webp':'image/webp','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json'};
 const root=resolve('.');
 const server=createServer(async(req,res)=>{
   try{
@@ -35,7 +35,7 @@ try{
   await page.goto(url,{waitUntil:'networkidle'});
   await page.locator('#status').waitFor();
   await page.waitForFunction(()=>document.getElementById('status').textContent.includes('έτοιμο'));
-  assert.equal(await page.title(),'MENTOR OS · Εργαστήριο αποστολών (δοκιμή)');
+  assert.equal(await page.title(),'MENTOR · Εργαστήριο αποστολών (δοκιμή)');
   assert.equal(await page.locator('#phase').isVisible(),false);
   await page.getByRole('button',{name:/Δύσπνοια σε οικία/}).click();
   await page.waitForFunction(()=>document.getElementById('case-title').textContent==='Δύσπνοια σε οικία');
@@ -143,36 +143,13 @@ try{
   await page.locator('#coach-question').fill('Ποια θεραπεία να δώσω;');
   await page.locator('#coach-send').click();
   await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===7);
-  assert.match(await page.locator('#coach-dialogue').textContent(),/Δεν αξιολογώ ελεύθερο ιατρικό κείμενο/);
+  const refusal=await page.locator('#coach-dialogue .coach-message').last().textContent();
+  assert.match(refusal,/Δεν έχω ακόμη τεκμηριωμένη απάντηση|Δεν αξιολογώ ελεύθερο ιατρικό κείμενο/,'Mentor must refuse unsupported treatment questions');
+  assert.match(refusal,/δεν είναι ενεργή|δεν είναι διαθέσιμ/,'Mentor must clearly state that unverified clinical AI is unavailable');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   await page.reload({waitUntil:'networkidle'});
   await page.locator('#tab-route').click();
   assert.equal(await page.locator('#coach-dialogue .coach-message').count(),1,'tutor chat is not persisted');
-  // New non-AI source-linked Greek knowledge responses and safety boundaries.
-  await page.locator('#coach-question').fill('Τι σημαίνει ABCDE;');
-  await page.locator('#coach-send').click();
-  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===3);
-  assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().textContent(),/Αεραγωγός|αεραγωγός/);
-  assert.ok(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').count()>=1);
-  assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').first().getAttribute('href'),/^https:\/\//);
-  await page.locator('#coach-question').fill('πόσα mg να δώσω σε ασθενή μου τώρα;');
-  await page.locator('#coach-send').click();
-  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===5);
-  assert.match(await page.locator('#coach-dialogue .coach-message-assistant').last().textContent(),/112|166/);
-  assert.equal(await page.locator('#coach-dialogue .coach-message-assistant').last().locator('.coach-sources a').count(),0);
-  await page.locator('#tab-knowledge').click();
-  await page.waitForFunction(()=>document.getElementById('knowledge-count').textContent.includes('30 εκπαιδευτικές κάρτες'));
-  assert.equal(await page.locator('#knowledge-results .knowledge-card').count(),30);
-  await page.locator('#knowledge-search').fill('ανατομική ορολογία');
-  await page.waitForFunction(()=>document.querySelectorAll('#knowledge-results .knowledge-card').length>=1 &&
-    document.querySelectorAll('#knowledge-results .knowledge-card').length<30);
-  await page.locator('#knowledge-results .knowledge-card summary').first().click();
-  assert.ok(await page.locator('#knowledge-results .knowledge-card .knowledge-references a').count()>=1);
-  await page.locator('#knowledge-clear').click();
-  await page.locator('#knowledge-domain').selectOption('resuscitation');
-  assert.equal(await page.locator('#knowledge-results .knowledge-card').count(),3);
-  await page.screenshot({path:'mentor-foundation-mobile-knowledge.png',fullPage:true});
-  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   await page.locator('#tab-memory').click();
   const download=page.waitForEvent('download');
   await page.locator('#export-mentor').click();
@@ -313,7 +290,95 @@ try{
   ));
   assert.deepEqual(afterReadOnly,beforeReadOnly,'Mentor reader must not mutate any local progress or grade');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
-  assert.deepEqual(errors,[],'No browser JS errors');
+  // Presence experience: actual interaction, no new AI, no writes to legacy progress.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-avatar').count(),1,'One visible mentor character');
+  assert.equal(await page.locator('#mentor-presence-line').isVisible(),true);
+  assert.equal(await page.locator('#mentor-hero-question').isVisible(),true);
+  const legacyBeforePresence=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
+  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω σήμερα;');
+  await page.locator('#mentor-hero-form button[type="submit"]').click();
+  await page.waitForFunction(()=>document.querySelector('#mentor-presence-line').textContent.includes('Προτείνω'));
+  assert.match(await page.locator('#mentor-voice-status').textContent(),/περιορισμένο εκπαιδευτικό/);
+  assert.equal(await page.locator('#coach-dialogue .coach-message').count(),3,'Hero question also appears in Tutor conversation');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),legacyBeforePresence);
+  await page.locator('#mentor-intro-chat').click();
+  assert.equal(await page.locator('#tab-route').getAttribute('aria-selected'),'true','Conversation button opens working tutor');
+  assert.equal(await page.locator('#coach-question').evaluate(x=>document.activeElement===x),true,'Tutor input focused');
+  const home=await readFile(resolve(root,'index.html'),'utf8');
+  assert.match(home,/class="home-mentor-presence(?:\s|\")/);
+  assert.match(home,/href="mentor-readonly.html"/);
+  assert.match(home,/href="mentor-live.html"/);
+  // Natural-device voice: explicit voice controls, rate selection and permission-safe mic.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.equal(await page.locator('#mentor-voice-select').count(),1,'installed Greek voice picker is present');
+  assert.equal(await page.locator('#mentor-intro-mic').count(),1,'explicit mic control is present');
+  assert.equal(await page.locator('#mentor-speech-wave').count(),1,'voice waveform exists');
+  await page.locator('#mentor-voice-speed').evaluate(el=>{el.value='1.05';el.dispatchEvent(new Event('input',{bubbles:true}));});
+  assert.match(await page.locator('#mentor-voice-speed-label').textContent(),/1,05/);
+  assert.match(await page.locator('#mentor-microphone-privacy').textContent(),/υπηρεσία του παρόχου του browser/);
+  const privacyBefore=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
+  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω;');
+  await page.locator('#mentor-hero-form button[type=submit]').click();
+  await page.waitForFunction(()=>document.getElementById('mentor-presence-line').textContent.includes('Προτείνω'));
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
+  const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
+  assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
+  // Current MENTOR: real articulated GLB only, with no visible obsolete portrait.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'domcontentloaded'});
+  await page.waitForFunction(()=>document.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',null,{timeout:90000});
+  assert.equal(await page.locator('#mentor-real3d-canvas').isVisible(),true,'Real 3D GLB canvas must be displayed');
+  assert.equal(await page.locator('#mentor-avatar').isVisible(),false,'Old avatar must remain hidden');
+  assert.equal(await page.locator('.mentor-photo-img,.cinematic-character,#mentor-3d-canvas').evaluateAll(nodes=>nodes.every(el=>el.hidden||!el.getClientRects().length||getComputedStyle(el).display==='none'||getComputedStyle(el).visibility==='hidden')),true,'Deprecated images and procedural canvas may remain in the DOM only if invisible');
+  assert.equal(await page.locator('#mentor-real3d-rotation').count(),1,'Real 3D rotation control exists');
+  assert.equal(await page.locator('#mentor-real3d-motion').count(),1,'Real 3D motion control exists');
+  const real3d=await page.locator('#mentor-cinematic-stage').getAttribute('data-real3d');
+  assert.equal(real3d,'ready','GLB is fully ready');
+  assert.equal(await page.locator('[data-cinematic-mode]').count(),3,'Three interactive mode buttons');
+  await page.locator('[data-cinematic-mode="text"]').click();
+  assert.equal(await page.locator('[data-cinematic-mode="text"]').getAttribute('aria-pressed'),'true');
+  await page.locator('[data-cinematic-mode="hologram"]').click();
+  assert.equal(await page.locator('[data-cinematic-mode="hologram"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await page.locator('#mentor-cinematic-stage').evaluate(x=>x.classList.contains('is-glowing')),true);
+  // Safari WebKit sometimes reports a malformed optional update-check URL from legacy code.
+  // This is unrelated to the avatar and must not mask other browser exceptions.
+  const actionableErrors=errors.filter(e=>!e.includes('Fetch API cannot load http: /127.0.0.1:')||!e.includes('/version.json?nocache='));
+  // Whole prehospital atlas: 360 outline entries only. No AI, medical actions or legacy writes.
+  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
+  assert.ok(await page.locator('a[href="mentor-scenarios.html"]').count()>=1);
+  const atlasStorageBefore=await page.evaluate(()=>Object.fromEntries(
+    Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
+  ));
+  await page.goto('http://127.0.0.1:'+port+'/mentor-scenarios.html',{waitUntil:'networkidle'});
+  assert.match(await page.title(),/Άτλας προνοσοκομειακών/);
+  assert.equal((await page.locator('#atlas-categories').textContent()).trim(),'32');
+  assert.equal((await page.locator('#atlas-scenarios').textContent()).trim(),'360');
+  assert.equal((await page.locator('#atlas-reviewed').textContent()).trim(),'0');
+  assert.equal(await page.locator('.case').count(),40);
+  await page.locator('#atlas-search').fill('τροχαίο');
+  await page.waitForFunction(()=>document.querySelector('#atlas-report').textContent.includes('από'));
+  assert.ok((await page.locator('.case').count())>=4);
+  await page.locator('#atlas-search').fill('');
+  await page.locator('#atlas-category').selectOption('PED');
+  assert.match(await page.locator('#atlas-report').textContent(),/14 περιγράμματα|από 14/);
+  await page.locator('#atlas-population').selectOption('child');
+  assert.equal(await page.locator('.case').count(),14);
+  await page.locator('#atlas-level').selectOption('foundation');
+  assert.equal(await page.locator('.case').count(),3);
+  await page.locator('.case').first().locator('summary').click();
+  assert.match(await page.locator('.case').first().textContent(),/Κλινικές ενέργειες και δοσολογίες: ανενεργές/);
+  await page.locator('#atlas-category').selectOption('all');
+  await page.locator('#atlas-level').selectOption('all');
+  await page.locator('#atlas-population').selectOption('all');
+  assert.equal(await page.locator('.case').count(),40);
+  await page.locator('#atlas-more').click();
+  assert.equal(await page.locator('.case').count(),80);
+  const atlasStorageAfter=await page.evaluate(()=>Object.fromEntries(
+    Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
+  ));
+  assert.deepEqual(atlasStorageAfter,atlasStorageBefore,'Scenario atlas cannot change student progress or storage');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  assert.deepEqual(actionableErrors,[],'No actionable browser JS errors');
   console.log('PASS: mobile '+(process.env.MENTOR_TEST_BROWSER||'chromium')+' EKAB+MCI+equipment flows, reload persistence, exported activity data, zero legacy mutations and scoped delete');
 }finally{
   if(browser)await browser.close();

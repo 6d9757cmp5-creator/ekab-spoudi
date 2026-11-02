@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
-<title>MENTOR OS · ECG Lab · Συνθετικά σχήματα</title>
-<link rel="stylesheet" href="mentor-lab.css">
+<title>MENTOR · ECG Lab · Συνθετικά σχήματα</title>
+<link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
 .ecg-wrap{max-width:1050px;margin:0 auto;padding:18px 16px 46px}
 .ecg-head{background:linear-gradient(125deg,#102e4a,#176a75);color:#fff;border-radius:18px;padding:25px 24px;margin:17px 0}
@@ -33,7 +33,7 @@
 </head>
 <body>
 <main class="ecg-wrap">
- <a href="mentor-lab.html">← Επιστροφή στον MENTOR OS</a>
+ <a href="mentor-lab.html">← Επιστροφή στον MENTOR</a>
  <header class="ecg-head">
   <div style="font-weight:850;letter-spacing:.08em">ΕΚΠΑΙΔΕΥΤΙΚΟ ECG LAB</div>
   <h1>Αναγνώριση σχήματος P–QRS–T</h1>
@@ -78,7 +78,24 @@
    <div><strong>T</strong><p>Σχηματικό ευρύτερο τμήμα που ακολουθεί.</p></div>
   </div>
  </section>
+ <section class="ecg-panel" aria-labelledby="ecg-practice-head" id="ecg-practice">
+  <h2 id="ecg-practice-head">Άσκηση: μέτρηση ρυθμού σε λωρίδα 6 δευτερολέπτων</h2>
+  <p class="muted small">Μέτρησε πόσα σύμπλεγμα QRS (οι ψηλές αιχμές) βλέπεις στη λωρίδα. Ο ρυθμός ανά λεπτό προκύπτει από: πλήθος QRS × 10. Η καμπύλη είναι συνθετική· η άσκηση δεν είναι διάγνωση ούτε επίσημη βαθμολογία.</p>
+  <p id="ecg-practice-step" class="ecg-status" role="status" aria-live="polite"></p>
+  <div class="ecg-chart"><svg id="ecg-practice-svg" viewBox="0 0 960 250" role="img" aria-label="Συνθετική λωρίδα έξι δευτερολέπτων για μέτρηση QRS">
+   <rect width="960" height="250" fill="#fbfcfb"/><rect width="960" height="250" fill="url(#ecg-big-grid)"/>
+   <polyline id="ecg-practice-curve" points="" fill="none" stroke="#0d5764" stroke-width="3.1" stroke-linejoin="round" stroke-linecap="round"/>
+   <g id="ecg-practice-marks"></g></svg></div>
+  <div id="ecg-practice-choices" class="ecg-actions" role="group" aria-label="Πόσα QRS βλέπεις;"></div>
+  <p id="ecg-practice-feedback" class="ecg-status" role="status" aria-live="polite"></p>
+  <div class="ecg-actions"><button type="button" id="ecg-practice-next" hidden>Επόμενη λωρίδα</button><button type="button" id="ecg-practice-reset">Νέα προσπάθεια</button></div>
+  <section id="ecg-practice-debrief" hidden aria-labelledby="ecg-debrief-head"><h3 id="ecg-debrief-head">Ανασκόπηση</h3><p id="ecg-debrief-text"></p></section>
+  <p id="ecg-practice-storage" class="muted small"></p>
+ </section>
  <p class="muted small">ECG Intelligence Lab · στάδιο εκμάθησης μορφής. Η πραγματική ανάλυση, οι κλινικά ελεγμένες εξηγήσεις και η σύνδεση AI θα έρθουν μόνο μετά από ανεξάρτητη επιστημονική αξιολόγηση και δική σου έγκριση.</p>
 </main>
+<script type="module" src="mentor-study-bridge.mjs"></script>
+<script type="module" src="tools/ecg-lab/app/ecg-practice.js"></script>
+<script type="module" src="mentor/presence/presence.mjs"></script>
 </body>
 </html>

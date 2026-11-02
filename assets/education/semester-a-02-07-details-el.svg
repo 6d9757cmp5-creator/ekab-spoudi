@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d">
+<title id="t">Ηλεκτρική αγωγή της καρδιάς</title>
+<desc id="d">Σχηματική μετωπιαία τομή καρδιάς με ερεθισματαγωγό σύστημα. Η ώση ξεκινά από τον φλεβόκομβο στον άνω δεξιό κόλπο, διαδίδεται στους κόλπους προς τον κολποκοιλιακό κόμβο και κατέρχεται από το δεμάτιο His και τους κλάδους στις ίνες Purkinje.</desc>
+<defs><marker id="impulse" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#a14d9b"/></marker></defs>
+<rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="108" fill="#347e75"/>
+<text x="555" y="30" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#fff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 07</text>
+<text x="555" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="23" fill="#fff" font-weight="720" text-anchor="middle">Ερεθισματαγωγό σύστημα και καρδιακός κύκλος</text>
+<!-- anatomical outline -->
+<path d="M472 207C440 178 394 192 391 235C388 276 409 310 424 337C441 369 444 424 478 465Q515 511 555 537Q596 510 632 465C666 421 669 370 687 337C704 304 724 273 719 234C713 190 662 178 636 208C610 185 583 179 555 180C525 180 495 185 472 207Z" fill="#fff" stroke="#435c6d" stroke-width="4"/>
+<path d="M408 235C413 208 443 201 472 220Q497 239 498 270L498 294H432C416 275 406 256 408 235Z" fill="#e6f1f7" stroke="#60798a" stroke-width="2"/>
+<path d="M635 220C663 199 702 207 704 237C706 259 696 280 679 294H612V270C612 240 618 229 635 220Z" fill="#f8eeee" stroke="#60798a" stroke-width="2"/>
+<path d="M432 304H498L500 351C500 386 514 424 538 465L555 503Q513 477 482 444C451 411 449 356 432 304Z" fill="#e8f0f5" stroke="#60798a" stroke-width="2"/>
+<path d="M612 304H679C663 356 659 410 628 444Q596 478 555 503L572 465C596 424 611 386 612 351Z" fill="#f6eeee" stroke="#60798a" stroke-width="2"/>
+<path d="M555 185V492" stroke="#60798a" stroke-width="6"/>
+<!-- labels of chambers -->
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#415969" text-anchor="middle">
+<text x="463" y="264">Δεξιός κόλπος</text><text x="649" y="264">Αριστερός κόλπος</text>
+<text x="463" y="384">Δεξιά κοιλία</text><text x="649" y="384">Αριστερή κοιλία</text>
+</g>
+<!-- SA node at upper/posterior right atrium; impulse spreads in atria -->
+<circle cx="431" cy="226" r="11" fill="#f0b33c" stroke="#805a16" stroke-width="2"/>
+<path d="M440 228Q481 218 521 240Q542 252 553 277" fill="none" stroke="#a14d9b" stroke-width="5" stroke-dasharray="10 7" marker-end="url(#impulse)"/>
+<path d="M438 233Q434 260 459 278Q485 296 522 287Q538 283 550 278" fill="none" stroke="#a14d9b" stroke-width="4" stroke-dasharray="8 7" marker-end="url(#impulse)"/>
+<!-- AV node, His bundle, branches and Purkinje network -->
+<circle cx="555" cy="286" r="11" fill="#f0b33c" stroke="#805a16" stroke-width="2"/>
+<path d="M555 298V336" fill="none" stroke="#a14d9b" stroke-width="5" marker-end="url(#impulse)"/>
+<path d="M555 335V421" fill="none" stroke="#a14d9b" stroke-width="4"/>
+<path d="M555 350Q526 374 516 414M555 350Q584 374 594 414" fill="none" stroke="#a14d9b" stroke-width="4" marker-end="url(#impulse)"/>
+<path d="M516 414Q495 436 488 453M516 414Q522 447 540 472M594 414Q615 436 622 453M594 414Q588 447 570 472" fill="none" stroke="#a14d9b" stroke-width="3.5" stroke-linecap="round"/>
+<g fill="#a14d9b">
+<circle cx="488" cy="453" r="4"/><circle cx="540" cy="472" r="4"/><circle cx="622" cy="453" r="4"/><circle cx="570" cy="472" r="4"/>
+<circle cx="503" cy="437" r="4"/><circle cx="607" cy="437" r="4"/>
+</g>
+<!-- callouts -->
+<g font-family="DejaVu Sans,Arial,sans-serif" fill="#253f52">
+<rect x="67" y="180" width="265" height="54" rx="12" fill="#fff" stroke="#d7e2e9" stroke-width="2"/>
+<text x="82" y="202" font-size="17" font-weight="700">Φλεβόκομβος</text><text x="82" y="222" font-size="13">άνω δεξιός κόλπος · φυσιολογικός βηματοδότης</text>
+<path d="M332 207L417 226" fill="none" stroke="#435c6d" stroke-width="1.6"/>
+<rect x="744" y="266" width="300" height="54" rx="12" fill="#fff" stroke="#d7e2e9" stroke-width="2"/>
+<text x="759" y="289" font-size="17" font-weight="700">Κολποκοιλιακός κόμβος</text><text x="759" y="309" font-size="13">καθυστέρηση πριν από την αγωγή στις κοιλίες</text>
+<path d="M744 292L568 287" fill="none" stroke="#435c6d" stroke-width="1.6"/>
+<rect x="744" y="371" width="300" height="65" rx="12" fill="#fff" stroke="#d7e2e9" stroke-width="2"/>
+<text x="759" y="394" font-size="17" font-weight="700">Δεμάτιο His και κλάδοι</text><text x="759" y="416" font-size="13">κατέρχονται στο μεσοκοιλιακό διάφραγμα</text>
+<path d="M744 400L566 378" fill="none" stroke="#435c6d" stroke-width="1.6"/>
+<rect x="744" y="462" width="300" height="54" rx="12" fill="#fff" stroke="#d7e2e9" stroke-width="2"/>
+<text x="759" y="485" font-size="17" font-weight="700">Ίνες Purkinje</text><text x="759" y="505" font-size="13">διανέμουν την ώση στο κοιλιακό μυοκάρδιο</text>
+<path d="M744 487L620 458" fill="none" stroke="#435c6d" stroke-width="1.6"/>
+</g>
+<rect x="84" y="552" width="942" height="44" rx="12" fill="#f2eaf5"/>
+<text x="555" y="571" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#57385e" text-anchor="middle">Κολποειδής ώση → κολποκοιλιακός κόμβος → δεμάτιο His και κλάδοι.</text>
+<text x="555" y="590" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" fill="#57385e" text-anchor="middle">Οι ίνες Purkinje διανέμουν την ώση στο κοιλιακό μυοκάρδιο.</text>
+</svg>

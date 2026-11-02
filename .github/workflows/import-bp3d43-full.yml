@@ -1,0 +1,30 @@
+name: Acquire official high-resolution BodyParts3D 4.3 atlas
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-bp3d43-full.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acquire-43:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retrieve high-resolution BP3D 4.3 mesh batches and build named anatomy atlas
+        run: node tools/anatomy-3d/vendor/open-anatomy-atlas/tools/fetch-data.js --source bp3d43 --dir "$PWD/tools/anatomy-3d/resources/bp3d43"
+      - name: Validate mesh count and package contents
+        run: |
+          node -e "const fs=require('fs');const p='tools/anatomy-3d/resources/bp3d43/atlases/bp3d43/build/';const j=JSON.parse(fs.readFileSync(p+'index.json','utf8'));if((j.counts?.elements||0)<1500||fs.statSync(p+'meshes.bin').size<1024)process.exit(1);console.log(j.version,j.counts)"
+      - name: Archive high-resolution atlas including original mesh batches
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-bodyparts3d-4-3-high-resolution-source-and-atlas
+          path: tools/anatomy-3d/resources/bp3d43/
+          retention-days: 30
+          if-no-files-found: error

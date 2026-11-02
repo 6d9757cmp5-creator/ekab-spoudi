@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="img" aria-labelledby="title description">
+<title id="title">Γυναικείο αναπαραγωγικό σύστημα: μήτρα, ωοθήκες, σάλπιγγες, τράχηλος, κόλπος</title>
+<desc id="description">Σχηματική πρόσθια όψη των εσωτερικών γυναικείων αναπαραγωγικών οργάνων. Οι σάλπιγγες καταλήγουν κοντά στις ωοθήκες χωρίς να συνδέονται άμεσα με αυτές. Οι γραμμές επισήμανσης δείχνουν τις ονομαζόμενες δομές.</desc>
+<rect width="1000" height="620" fill="#f7fafc"/>
+<text x="500" y="45" text-anchor="middle" font-family="Arial,DejaVu Sans,sans-serif" font-size="27" font-weight="bold" fill="#193b53">Γυναικείο αναπαραγωγικό σύστημα</text>
+<text x="500" y="75" text-anchor="middle" font-family="Arial,DejaVu Sans,sans-serif" font-size="17" fill="#456176">Σχηματική πρόσθια όψη · όχι σε κλίμακα</text>
+<!-- Ovaries -->
+<ellipse cx="270" cy="258" rx="38" ry="25" transform="rotate(-19 270 258)" fill="#f6c1a8" stroke="#9b4b49" stroke-width="3"/>
+<ellipse cx="730" cy="258" rx="38" ry="25" transform="rotate(19 730 258)" fill="#f6c1a8" stroke="#9b4b49" stroke-width="3"/>
+<!-- Uterine tubes curve toward ovaries but are not continuous with them -->
+<path d="M440 240 C400 205 364 178 326 191 C306 197 296 211 302 228" fill="none" stroke="#ba6076" stroke-width="18" stroke-linecap="round"/>
+<path d="M560 240 C600 205 636 178 674 191 C694 197 704 211 698 228" fill="none" stroke="#ba6076" stroke-width="18" stroke-linecap="round"/>
+<path d="M440 240 C400 205 364 178 326 191 C306 197 296 211 302 228 M560 240 C600 205 636 178 674 191 C694 197 704 211 698 228" fill="none" stroke="#fce8eb" stroke-width="5" stroke-linecap="round"/>
+<!-- Fimbriae, separate from ovary -->
+<g fill="none" stroke="#ba6076" stroke-width="5" stroke-linecap="round">
+<path d="M302 228 L289 237 M302 228 L299 248 M302 228 L314 238 M698 228 L711 237 M698 228 L701 248 M698 228 L686 238"/>
+</g>
+<!-- Uterine outer wall -->
+<path d="M431 232 C429 213 448 198 467 205 Q500 216 533 205 C552 198 571 213 569 232 C562 272 551 312 530 353 L519 395 L481 395 L470 353 C449 312 438 272 431 232Z" fill="#e99ba5" stroke="#994e65" stroke-width="4"/>
+<!-- Endometrial cavity and lining -->
+<path d="M454 237 Q500 255 546 237 L519 324 Q500 345 481 324Z" fill="#fff0ec" stroke="#bb5d74" stroke-width="3"/>
+<path d="M490 331 L490 399 Q500 410 510 399 L510 331" fill="#fff0ec" stroke="#bb5d74" stroke-width="3"/>
+<!-- Cervix -->
+<path d="M480 371 Q500 382 520 371 L523 414 Q500 431 477 414Z" fill="#dc8797" stroke="#994e65" stroke-width="3"/>
+<path d="M494 385 L494 420 M506 385 L506 420" stroke="#fff0ec" stroke-width="4"/>
+<!-- Vaginal canal -->
+<path d="M478 416 C472 449 468 481 474 520 L490 520 L493 429 M522 416 C528 449 532 481 526 520 L510 520 L507 429" fill="#f5c2ca" stroke="#994e65" stroke-width="3"/>
+<!-- Leaders, endpoints deliberately on named structures -->
+<g stroke="#335e75" stroke-width="2.5" fill="none" stroke-linejoin="round">
+<path d="M225 126 L285 126 L360 187"/>
+<path d="M219 315 L260 260"/>
+<path d="M779 127 L705 127 L650 191"/>
+<path d="M786 304 L730 258"/>
+<path d="M774 365 L615 365 L550 302"/>
+<path d="M771 424 L624 424 L521 397"/>
+<path d="M767 498 L620 498 L523 472"/>
+</g>
+<g fill="#335e75">
+<circle cx="360" cy="187" r="4"/><circle cx="260" cy="260" r="4"/><circle cx="650" cy="191" r="4"/><circle cx="730" cy="258" r="4"/><circle cx="550" cy="302" r="4"/><circle cx="521" cy="397" r="4"/><circle cx="523" cy="472" r="4"/>
+</g>
+<g font-family="Arial,DejaVu Sans,sans-serif" font-size="20" fill="#193b53">
+<text x="45" y="120">Σάλπιγγα</text><text x="45" y="317">Ωοθήκη</text>
+<text x="782" y="122">Σάλπιγγα</text><text x="790" y="304">Ωοθήκη</text>
+<text x="780" y="360">Μήτρα</text><text x="780" y="419">Τράχηλος</text><text x="780" y="493">Κόλπος</text>
+</g>
+<text x="500" y="574" text-anchor="middle" font-family="Arial,DejaVu Sans,sans-serif" font-size="17" fill="#42596c">Το κροσσωτό άκρο της σάλπιγγας βρίσκεται κοντά στην ωοθήκη, χωρίς άμεση συνέχεια.</text>
+<text x="500" y="602" text-anchor="middle" font-family="Arial,DejaVu Sans,sans-serif" font-size="14" fill="#61788b">Πρωτότυπο σχέδιο · CC BY 4.0 · έλεγχος εκκρεμεί</text>
+</svg>

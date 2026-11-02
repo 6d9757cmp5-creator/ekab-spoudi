@@ -9,73 +9,73 @@ const course=match[1];
 // [label, mode, system, focus, optional sex]. Focus is a curated anatomical keyword.
 // No clinical protocol/condition is encoded by the link.
 const R={
-'01':{
-  1:[['Ανατομική θέση','skeleton','skeletal']],
-  2:[['Οστά σώματος','skeleton','skeletal']],
-  3:[['Πνεύμονες','organs','respiratory','lung'],['Θωρακικός κλωβός','skeleton','skeletal','rib']],
-  4:[['Ήπαρ','organs','digestive','liver'],['Στομάχι','organs','digestive','stomach']],
-  5:[['Εγκέφαλος','organs','nervous','brain'],['Καρδιά','organs','cardiac','heart']],
-  7:[['Σπόνδυλοι','skeleton','skeletal','vertebra'],['Νωτιαίος μυελός','organs','nervous','spinalcord']],
-  8:[['Κρανίο','skeleton','skeletal','skull'],['Εγκέφαλος','organs','nervous','brain']],
-  9:[['Μυϊκό σύστημα','both','muscular'],['Οστέινες αρθρώσεις','skeleton','skeletal']],
-  10:[['Καρδιά','organs','cardiac','heart'],['Αορτή','organs','arterial','aorta']],
-  11:[['Τραχεία και αεραγωγοί','organs','respiratory','trachea']],
-  12:[['Στομάχι','organs','digestive','stomach'],['Ήπαρ','organs','digestive','liver']],
-  13:[['Νεφρός','organs','urinary','kidney'],['Μήτρα — γυναικείο','organs','reproductive','uterus','female']],
-  14:[['Όργανα κοιλίας','organs','digestive']]
-},
-'02':{
-  2:[['Πνεύμονες','organs','respiratory','lung']],
-  3:[['Καρδιά','organs','cardiac','heart'],['Αορτή','organs','arterial','aorta']],
-  4:[['Νευρικό σύστημα','organs','nervous','brain']],
-  6:[['Νωτιαίος μυελός','organs','nervous','spinalcord']],
-  7:[['Καρδιά','organs','cardiac','heart']],
-  8:[['Αρτηρίες','organs','arterial','aorta']],
-  9:[['Πνεύμονες','organs','respiratory','lung']],
-  11:[['Νεφρός','organs','urinary','kidney']],
-  12:[['Πεπτικό σύστημα','organs','digestive','stomach']],
-  13:[['Θυρεοειδής','organs','endocrine','thyroid']]
-},
-'05':{
-  8:[['Τραχεία / αεραγωγοί','organs','respiratory','trachea']],
-  9:[['Καρδιά / κυκλοφορία','organs','cardiac','heart']],
-  10:[['Εγκέφαλος','organs','nervous','brain']]
-},
 '10':{
-  1:[['Καρδιά','organs','cardiac','heart']],
-  2:[['Εγκέφαλος','organs','nervous','brain']],
-  3:[['Πνεύμονες','organs','respiratory','lung']],
-  7:[['Καρδιά','organs','cardiac','heart']],
-  8:[['Καρδιά','organs','cardiac','heart']],
-  9:[['Πνεύμονες','organs','respiratory','lung']],
-  10:[['Πνεύμονες','organs','respiratory','lung']],
-  16:[['Όργανα κοιλίας','organs','digestive']],
-  17:[['Νεφροί','organs','urinary','kidney']]
+ 1:[['Καρδιακές δομές','organs','cardiac','heart']],
+ 2:[['Εγκεφαλικές δομές','organs','nervous','brain']],
+ 3:[['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 7:[['Καρδιακές δομές','organs','cardiac','heart']],
+ 8:[['Καρδιακές δομές','organs','cardiac','heart']],
+ 9:[['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 10:[['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 16:[['Κοιλιακές δομές','organs','all','abdomen']],
+ 17:[['Νεφροί','organs','urinary','kidneys']]
 },
 '14':{
-  3:[['Θωρακικός κλωβός','skeleton','skeletal','rib'],['Κρανίο','skeleton','skeletal','skull']],
-  4:[['Μηριαίο οστό','skeleton','skeletal','femur']],
-  7:[['Πλευρές','skeleton','skeletal','rib'],['Πνεύμονες','organs','respiratory','lung']],
-  8:[['Πύελος','skeleton','skeletal','pelvis'],['Όργανα κοιλίας','organs','digestive']],
-  9:[['Κρανίο','skeleton','skeletal','skull'],['Εγκέφαλος','organs','nervous','brain']],
-  10:[['Σπόνδυλοι','skeleton','skeletal','vertebra']],
-  11:[['Μηριαίο οστό','skeleton','skeletal','femur'],['Βραχιόνιο οστό','skeleton','skeletal','humerus']]
+ 3:[['Θωρακικός κλωβός','skeleton','skeletal','thorax'],['Οστά κρανίου','skeleton','skeletal','skull']],
+ 4:[['Μηριαία οστά','skeleton','skeletal','femora']],
+ 7:[['Πλευρές','skeleton','skeletal','ribs'],['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 8:[['Οστά πυέλου','skeleton','skeletal','pelvis'],['Κοιλιακές δομές','organs','all','abdomen']],
+ 9:[['Οστά κρανίου','skeleton','skeletal','skull'],['Εγκεφαλικές δομές','organs','nervous','brain']],
+ 10:[['Σπονδυλική στήλη','skeleton','skeletal','spine']],
+ 11:[['Μηριαία οστά','skeleton','skeletal','femora'],['Βραχιόνια οστά','skeleton','skeletal','humeri']]
 },
 '17':{
-  2:[['Αεραγωγός','organs','respiratory','trachea']],
-  8:[['Τραχεία','organs','respiratory','trachea']],
-  9:[['Καρδιά','organs','cardiac','heart']],
-  10:[['Πνεύμονες','organs','respiratory','lung']],
-  11:[['Καρδιά','organs','cardiac','heart']],
-  12:[['Εγκέφαλος','organs','nervous','brain']]
+ 2:[['Αεραγωγοί','organs','respiratory','airways']],
+ 8:[['Τραχεία','organs','respiratory','trachea']],
+ 9:[['Καρδιακές δομές','organs','cardiac','heart']],
+ 10:[['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 11:[['Καρδιακές δομές','organs','cardiac','heart']],
+ 12:[['Εγκεφαλικές δομές','organs','nervous','brain']]
 },
 '18':{
-  2:[['Οστά άκρων','skeleton','skeletal'],['Αρτηρίες','organs','arterial']],
-  5:[['Αρτηρίες','organs','arterial']],
-  6:[['Μηριαίο οστό','skeleton','skeletal','femur']],
-  8:[['Σπονδυλική στήλη','skeleton','skeletal','vertebra']],
-  9:[['Πλευρές','skeleton','skeletal','rib'],['Πνεύμονες','organs','respiratory','lung']],
-  10:[['Πύελος','skeleton','skeletal','pelvis'],['Όργανα κοιλίας','organs','digestive']]
+ 2:[['Οστά άκρων','skeleton','skeletal','limbs'],['Αρτηρίες','organs','all','arteries']],
+ 5:[['Αρτηρίες','organs','all','arteries']],
+ 6:[['Μηριαία οστά','skeleton','skeletal','femora']],
+ 8:[['Σπονδυλική στήλη','skeleton','skeletal','spine']],
+ 9:[['Πλευρές','skeleton','skeletal','ribs'],['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 10:[['Οστά πυέλου','skeleton','skeletal','pelvis'],['Κοιλιακές δομές','organs','all','abdomen']]
+},
+'01':{
+ 1:[['Σκελετός — ανατομικός προσανατολισμός','skeleton','skeletal']],
+ 2:[['Οστά σώματος','skeleton','skeletal']],
+ 3:[['Πνευμονικές δομές','organs','respiratory','lungs'],['Θωρακικός κλωβός','skeleton','skeletal','thorax']],
+ 4:[['Ηπατικές δομές','organs','digestive','liver'],['Στομάχι','organs','digestive','stomach']],
+ 5:[['Εγκεφαλικές δομές','organs','nervous','brain'],['Καρδιακές δομές','organs','cardiac','heart']],
+ 7:[['Σπονδυλική στήλη','skeleton','skeletal','spine'],['Νωτιαίος μυελός','organs','nervous','cord']],
+ 8:[['Οστά κρανίου','skeleton','skeletal','skull'],['Εγκεφαλικές δομές','organs','nervous','brain']],
+ 9:[['Μυϊκό σύστημα','both','muscular'],['Σκελετός — ανατομική αναφορά','skeleton','skeletal']],
+ 10:[['Καρδιακές δομές','organs','cardiac','heart'],['Αορτή','organs','all','aorta']],
+ 11:[['Αεραγωγοί','organs','respiratory','airways']],
+ 12:[['Στομάχι','organs','digestive','stomach'],['Ηπατικές δομές','organs','digestive','liver']],
+ 13:[['Νεφροί','organs','urinary','kidneys'],['Μήτρα — γυναικείο','organs','reproductive','uterus','female']],
+ 14:[['Κοιλιακές δομές','organs','all','abdomen']]
+},
+'02':{
+ 2:[['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 3:[['Καρδιακές δομές','organs','cardiac','heart'],['Αορτή','organs','all','aorta']],
+ 4:[['Νευρικό σύστημα','organs','nervous','nervous']],
+ 6:[['Νωτιαίος μυελός','organs','nervous','cord']],
+ 7:[['Καρδιακές δομές','organs','cardiac','heart']],
+ 8:[['Αρτηρίες','organs','all','arteries']],
+ 9:[['Πνευμονικές δομές','organs','respiratory','lungs']],
+ 11:[['Νεφροί','organs','urinary','kidneys']],
+ 12:[['Πεπτικό σύστημα','organs','digestive','digestive']],
+ 13:[['Πάγκρεας — ανατομική αναφορά','organs','digestive','pancreas']]
+},
+'05':{
+ 8:[['Αεραγωγοί','organs','respiratory','airways']],
+ 9:[['Κυκλοφορικό σύστημα','organs','all','circulation']],
+ 10:[['Εγκεφαλικές δομές','organs','nervous','brain']]
 }
 };
 const rows=R[course];if(!rows)return;

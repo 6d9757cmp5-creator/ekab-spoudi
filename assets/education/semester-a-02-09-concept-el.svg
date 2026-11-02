@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 110 1110 505" role="img" aria-labelledby="t d">
+<title id="t">Αερισμός, κυψελιδική διάχυση και μεταφορά οξυγόνου</title>
+<desc id="d">Τρία διακριτά στάδια: ο αερισμός ανανεώνει τον αέρα στις κυψελίδες, το οξυγόνο περνά από την κυψελίδα στο τριχοειδές ενώ το διοξείδιο του άνθρακα κινείται αντίθετα, και η αιμοσφαιρίνη των ερυθρών αιμοσφαιρίων μεταφέρει το μεγαλύτερο μέρος του οξυγόνου.</desc>
+<defs>
+<marker id="teal" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker>
+<marker id="oxygen" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c94f46"/></marker>
+<marker id="carbon" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#467ca7"/></marker>
+</defs>
+<rect width="1110" height="630" fill="#f9fbfd"/>
+
+
+<g fill="#fff" stroke="#cad8e0" stroke-width="2"><rect x="32" y="137" width="332" height="420" rx="18"/><rect x="389" y="137" width="332" height="420" rx="18"/><rect x="746" y="137" width="332" height="420" rx="18"/></g>
+<g font-family="DejaVu Sans,Arial,sans-serif" fill="#253f52" text-anchor="middle"><text x="198" y="177" font-size="18" font-weight="700">1 · Κυψελιδικός αερισμός</text><text x="555" y="177" font-size="18" font-weight="700">2 · Διάχυση αερίων</text><text x="912" y="177" font-size="18" font-weight="700">3 · Μεταφορά O2 στο αίμα</text></g>
+<!-- panel 1: airway, alveolus, ventilation -->
+<path d="M198 208V257Q198 275 183 286" fill="none" stroke="#8ca7b4" stroke-width="22" stroke-linecap="round"/>
+<path d="M198 208V259" fill="none" stroke="#347e75" stroke-width="5" marker-end="url(#teal)"/>
+<path d="M183 286Q162 289 148 308M183 286Q172 312 170 331M183 286Q197 301 209 320" fill="none" stroke="#8ca7b4" stroke-width="5" stroke-linecap="round"/>
+<g fill="#e6f3f6" stroke="#5d9cad" stroke-width="3"><circle cx="145" cy="329" r="27"/><circle cx="190" cy="344" r="30"/><circle cx="232" cy="324" r="26"/></g>
+<path d="M253 269V222" fill="none" stroke="#467ca7" stroke-width="4" marker-end="url(#carbon)"/>
+
+<path d="M100 438H296" stroke="#d5e0e6" stroke-width="2"/>
+
+
+<!-- panel 2 alveolus-capillary membrane -->
+<path d="M453 247Q555 195 657 247V305Q555 350 453 305Z" fill="#e6f3f6" stroke="#5d9cad" stroke-width="3"/>
+<text x="555" y="260" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Κυψελίδα</text>
+<path d="M442 354Q478 329 514 354T586 354T658 354V390Q622 414 586 390T514 390T442 390Z" fill="#f4d9d7" stroke="#b95b55" stroke-width="3"/>
+<text x="555" y="438" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Πνευμονικό τριχοειδές</text>
+<path d="M515 302V347" fill="none" stroke="#c94f46" stroke-width="5" marker-end="url(#oxygen)"/>
+<text x="489" y="326" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#9d3e38" text-anchor="end">O2</text>
+<path d="M594 349V307" fill="none" stroke="#467ca7" stroke-width="5" marker-end="url(#carbon)"/>
+<text x="618" y="332" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#356785">CO2</text>
+<path d="M430 464H680" stroke="#d5e0e6" stroke-width="2"/>
+
+
+<!-- panel 3 erythrocyte and hemoglobin oxygen transport -->
+<ellipse cx="845" cy="300" rx="49" ry="37" fill="#f2c7c3" stroke="#b95b55" stroke-width="4"/>
+<ellipse cx="845" cy="300" rx="23" ry="13" fill="#e6a7a2" stroke="#b95b55" stroke-width="2"/><text x="845" y="305" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" fill="#713d3a" font-weight="700" text-anchor="middle">Hb</text>
+<text x="845" y="355" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Ερυθρό αιμοσφαίριο</text>
+<g fill="#f6e3aa" stroke="#b38c36" stroke-width="2"><circle cx="941" cy="260" r="13"/><circle cx="980" cy="290" r="13"/><circle cx="941" cy="324" r="13"/><circle cx="1007" cy="350" r="13"/></g>
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="11" fill="#6f5525" text-anchor="middle"><text x="941" y="264">O2</text><text x="980" y="294">O2</text><text x="941" y="328">O2</text><text x="1007" y="354">O2</text></g>
+<path d="M954 286H899" fill="none" stroke="#c94f46" stroke-width="4" marker-end="url(#oxygen)"/>
+
+
+<path d="M784 452H1040" stroke="#d5e0e6" stroke-width="2"/>
+
+
+
+
+</svg>

@@ -4,7 +4,6 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
-  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
@@ -13,15 +12,28 @@ concurrency:
 jobs:
   media-gate:
     name: media-gate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout history to compare changed media
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Check newly added or modified media
+      - name: Require verifiable review for every added or modified media file
         env:
           MEDIA_GATE_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
         run: python3 scripts/media_gate.py
+      - name: Collect pending review queue without granting approval
+        if: always()
+        env:
+          MEDIA_GATE_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: python3 scripts/media_review_queue.py
+      - name: Publish pending review queue for human inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: media-review-queue
+          path: media-review-queue.json
+          retention-days: 30
+          if-no-files-found: warn

@@ -1,0 +1,30 @@
+name: One-time Cloudflare Free Gemma connectivity check — 2026-11-01
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/cloudflare-free-first-call-20261101.yml
+permissions:
+  contents: read
+jobs:
+  single-synthetic-model-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: One model call at most, no retries, no student data
+        run: node scripts/cloudflare-free-first-call-20261101.mjs
+      - name: Upload proof of availability or exact blocker
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-one-shot-free-gemma-20261101
+          path: audit-results/cloudflare-free-first-call-20261101.json
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,0 +1,49 @@
+name: Persist high resolution BodyParts3D 4.3 anatomical atlas
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/persist-bp3d43-compiled.yml'
+      - 'scripts/stage-bp3d43-shards.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  persist-atlas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retrieve verified official 4.3 atlas from completed GitHub job
+        uses: actions/download-artifact@v4
+        with:
+          name: official-bodyparts3d-4-3-high-resolution-source-and-atlas
+          repository: 6d9757cmp5-creator/ekab-spoudi
+          run-id: 41347864318
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: tools/anatomy-3d/resources/bp3d43/
+      - name: Create persistent hash-verified binary shards for source atlas
+        run: node scripts/stage-bp3d43-shards.mjs
+      - name: Archive reconstructed high resolution index and binary sections
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-bodyparts3d-43-persistable-source-shards
+          path: tools/anatomy-3d/resources/bp3d43/compiled-shards/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Store Anatomy Lab data in dedicated source directory
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f tools/anatomy-3d/resources/bp3d43/compiled-shards/
+          if git diff --cached --quiet; then
+            echo "Full resolution atlas already persisted"
+          else
+            git commit -m "assets(anatomy): persist verified BP3D 4.3 full-resolution atlas shards"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

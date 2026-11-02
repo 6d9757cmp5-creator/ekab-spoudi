@@ -21,3 +21,14 @@
  script.async=true;
  document.head.appendChild(script);
 })();
+
+/* Shared Experience V4: modern interface and chapter navigation on existing pages.
+   Presentation only; no grade or learning-state mutations. */
+(function(){
+ const sheet=document.createElement('link');
+ sheet.rel='stylesheet';sheet.href='experience-v4.css?v=20261101';
+ document.head.appendChild(sheet);
+ const module=document.createElement('script');
+ module.type='module';module.src='experience-v4.mjs?v=20261101';
+ document.head.appendChild(module);
+})();

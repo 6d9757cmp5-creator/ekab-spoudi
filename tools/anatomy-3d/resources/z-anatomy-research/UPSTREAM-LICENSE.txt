@@ -1,0 +1,115 @@
+3d-anatomy - licence of the work as distributed
+================================================
+
+SUMMARY
+-------
+
+This work is a mix of components carrying different upstream licences. When they
+are combined and distributed together, the most restrictive terms propagate to
+the whole. The effective terms of this distribution are therefore:
+
+  Attribution-NonCommercial-ShareAlike 4.0 International
+  (CC BY-NC-SA 4.0) - https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+In practice:
+
+  * NON-COMMERCIAL. This deployment, and any redistribution of it as a whole,
+    must not be primarily intended for or directed toward commercial advantage
+    or monetary compensation.
+  * ATTRIBUTION. Every source listed below must be credited. The required
+    attribution strings are collected verbatim in the NOTICE file next to this
+    one, and the upstream notice is shipped unmodified as
+    public/models/License.txt.
+  * SHARE-ALIKE. Derivative works must be distributed under the same terms.
+
+Where the non-commercial clause comes from is stated explicitly in the
+"Non-commercial clause" section below, because it comes from two components
+only.
+
+
+COMPONENTS AND THEIR UPSTREAM LICENCES
+--------------------------------------
+
+1. Anatomical meshes, base dataset
+   Source: BodyParts3D, The Database Center for Life Science
+   Licence: CC BY-SA 2.1 Japan
+   Covers: the anatomical geometry underlying all files in public/models/.
+
+2. Anatomical meshes, derivative and organisation
+   Source: Z-Anatomy - the open source atlas of anatomy
+   Licence: CC BY-SA 4.0
+   Covers: the reworked, named and grouped version of the BodyParts3D meshes
+   from which every .glb in public/models/ was exported.
+
+3. Cranial nerves and foramina
+   Source: University of Dundee, CAHID
+   Licence: CC BY 4.0
+   Covers: the cranial nerve and foramina meshes embedded in the Z-Anatomy
+   dataset and exported with it. They are not isolated in a single file; the
+   nerve geometry is part of public/models/nervous.glb.
+
+4. Anatomy of the Inner Ear
+   Source: University of Dundee, School of Medicine
+   Licence: CC BY-NC-SA 4.0
+   Covers: the cochlea and vestibule meshes in public/models/nervous.glb.
+   ---> This component is one of the two reasons the distribution is
+        non-commercial.
+
+5. Kidney
+   Source: lissiecowley
+   Licence: CC BY-NC 4.0
+   Covers: the kidney mesh in public/models/visceral.glb.
+   ---> This component is the other reason the distribution is non-commercial.
+
+6. Definitions of the anatomical structures
+   Source: Wikipedia, with very few modifications
+   Licence: CC BY-SA 3.0 and GFDL
+   Covers: the descriptive text shown in the information panel.
+   See https://en.wikipedia.org/wiki/Wikipedia:Copyrights
+
+7. "Brainder" and "White matter", University of Washington
+   The upstream notice (public/models/License.txt, line 30) lists these two
+   datasets as included and adapted, but states no licence for them. No licence
+   is asserted here on their behalf; anyone reusing the brain meshes should
+   check with the upstream authors.
+
+8. Application source code (index.html, src/, public/styles/, tools/,
+   build configuration)
+   Written for this project and released under the same terms as the
+   distribution, CC BY-NC-SA 4.0, so that the repository carries one coherent
+   set of conditions. Note that Creative Commons does not recommend its
+   licences for software; the choice here is about keeping the bundle
+   consistent, not about software-specific concerns such as patent or source
+   availability clauses.
+
+Blender was used to produce the exported models. Its own licence is included in
+the upstream 'Anatomy Blender' distribution and is not reproduced here.
+
+
+NON-COMMERCIAL CLAUSE
+---------------------
+
+Only two components carry a NonCommercial restriction:
+
+  * "Anatomy of the Inner Ear" (cochlea and vestibule, nervous.glb) - CC BY-NC-SA 4.0
+  * "Kidney" by lissiecowley (visceral.glb) - CC BY-NC 4.0
+
+Everything else in public/models/ is share-alike but commercially usable
+(CC BY-SA 2.1 Japan, CC BY-SA 4.0, CC BY 4.0). The owner of this project has
+decided to keep every structure, including those two, and therefore to publish
+the whole work as non-commercial.
+
+If those two components were removed, the remainder could be redistributed
+under CC BY-SA 4.0 with attribution unchanged. That statement describes the
+intent of the licence stack, not legal advice: check the upstream terms
+yourself before any commercial use, and re-verify the contents of the .glb
+files, since the affected meshes are embedded inside larger files rather than
+shipped separately.
+
+
+NO WARRANTY
+-----------
+
+This work is provided as is, without warranty of any kind. It is an educational
+and reference tool. It is not a medical device and must not be used for
+diagnosis, treatment or any other clinical purpose.

@@ -101,3 +101,8 @@ html[data-theme="dark"] .saek-hub .course-tile:hover{background:#1c3a50}
 }
 @media(max-width:360px){.saek-hub .hub-action{padding:10px;min-height:124px}.saek-hub .hub-action-copy strong{font-size:.79rem}.saek-hub .hub-semester-tabs button small{font-size:.56rem}.saek-hub .hub-links{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.saek-hub .hub-action,.saek-hub .hub-progress-track>span{transition:none}}
+
+/* PR #6 — read-only in-app index of the educational image collection. */
+.saek-hub .hub-image-gallery-entry{margin:0 0 18px}
+.saek-hub .hub-image-gallery-entry a{display:inline-flex;align-items:center;min-height:44px;padding:9px 13px;border:1px solid var(--line);border-radius:11px;background:var(--light);font-size:.9rem;font-weight:700;text-decoration:none}
+.saek-hub .hub-image-gallery-entry a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}

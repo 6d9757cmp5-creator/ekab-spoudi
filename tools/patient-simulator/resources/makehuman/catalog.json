@@ -1,0 +1,29 @@
+{
+  "source": "MakeHuman community official core repository",
+  "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+  "license": "CC0-1.0 (only official core assets; not all community add-ons)",
+  "sourceLicense": "https://github.com/makehumancommunity/makehuman/blob/master/LICENSE.ASSETS.md",
+  "coreAssets": [
+    {
+      "name": "base.obj",
+      "bytes": 1749303,
+      "sha": "d26635e9326e3cca30778fd7b9c00062b03cce09",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/3dobjs/base.obj",
+      "output": "tools/patient-simulator/resources/makehuman/base.obj",
+      "license": "CC0-1.0",
+      "status": "approved-original-core-base-mesh-no-rig"
+    },
+    {
+      "name": "base.mhclo",
+      "bytes": 216208,
+      "sha": "0d06e85e20201ba6adfb11e5b2ebe22596af4c17",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/3dobjs/base.mhclo",
+      "output": "tools/patient-simulator/resources/makehuman/base.mhclo",
+      "license": "CC0-1.0",
+      "status": "approved-original-core-base-mesh-no-rig"
+    }
+  ],
+  "clinicalStatus": "NOT VALIDATED",
+  "rigged": false,
+  "notes": "Base OBJ is a source geometry; not a rigged realistic patient and not a ready GLB. Keep separate from Anatomy Lab."
+}

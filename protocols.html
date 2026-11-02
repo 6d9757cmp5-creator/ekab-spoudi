@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123b54">
+<title>Ελληνικά Πρωτόκολλα | ΕΚΑΒ Σπουδή</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="mentor-protocols.css">
+<script type="module" src="protocols-page.mjs" defer></script>
+<link rel="stylesheet" href="mentor-experience-v4.css?v=20261101">
+</head>
+<body>
+<main class="shell">
+ <nav class="nav" aria-label="Κύρια πλοήγηση">
+  <a href="index.html">← ΕΚΑΒ Σπουδή</a>
+  <a href="mentor-lab.html">MENTOR OS ↗</a>
+ </nav>
+ <header class="hero">
+  <div class="eyebrow">ΕΚΑΒ ΣΠΟΥΔΗ · ΒΙΒΛΙΟΘΗΚΗ ΑΝΑΦΟΡΑΣ</div>
+  <h1>Ελληνικά Πρωτόκολλα</h1>
+  <p>Εκπαιδευτική πύλη οργανωμένη ανά επείγον περιστατικό. Βρες το θέμα, δες την προέλευση των πηγών και προχώρησε, αν θέλεις, στην εξάσκηση με τον ίδιο MENTOR.</p>
+ </header>
+ <aside class="note" role="note">
+  <strong>Διαχωρισμός πηγών και αρμοδιοτήτων</strong>
+  <p>Οι καρτέλες είναι <b>εκπαιδευτικά θέματα</b>, όχι δημοσιευμένα ή πιστοποιημένα επιχειρησιακά πρωτόκολλα ΕΚΑΒ. Για να χαρακτηριστεί συγκεκριμένο κείμενο «επίσημο πρωτόκολλο», απαιτείται επαληθευμένη έκδοση, φορέας έγκρισης, πρωτογενής πηγή και ανεξάρτητος κλινικός έλεγχος. Δεν παρέχονται θεραπευτικές οδηγίες για πραγματικά περιστατικά.</p>
+ </aside>
+ <section class="panel" aria-label="Αναζήτηση">
+  <div class="search-row">
+   <label for="protocol-search">Αναζήτηση θέματος</label>
+   <input id="protocol-search" type="search" maxlength="90" placeholder="π.χ. θωρακικό άλγος, τραύμα, παιδιατρικά" autocomplete="off">
+  </div>
+ </section>
+ <div class="catalog-layout">
+  <aside class="panel" aria-label="Κατηγορίες">
+   <h2>Κατηγορίες</h2>
+   <div class="categories" id="protocol-categories"></div>
+  </aside>
+  <section class="panel" aria-labelledby="protocol-list-title">
+   <h2 id="protocol-list-title">Όλα τα εκπαιδευτικά θέματα</h2>
+   <p class="small muted" id="protocol-count" role="status" aria-live="polite"></p>
+   <div class="topic-grid" id="protocol-list"></div>
+   <p class="muted" id="protocol-empty" hidden>Δεν βρέθηκε θέμα. Δοκίμασε άλλη αναζήτηση ή κατηγορία.</p>
+  </section>
+ </div>
+ <section class="panel">
+  <h2>Πώς συνδέεται με τον MENTOR;</h2>
+  <p>Κάθε θέμα διαθέτει τρεις διαδρομές, μέσα από <b>τον υπάρχοντα MENTOR OS</b>: προσωπική καθοδήγηση, MENTOR | PROTOCOL LAB (εκπαιδευτική άσκηση αποφάσεων) και MENTOR DEBRIEF (ανασκόπηση της ίδιας άσκησης). Δεν δημιουργείται δεύτερος ανεξάρτητος εκπαιδευτής ή δεύτερη βαθμολογία ΣΑΕΚ/ΕΟΠΠΕΠ.</p>
+  <div class="actions">
+   <a class="btn" href="mentor-protocol-suite.html?topic=trauma&amp;view=lab">MENTOR | PROTOCOL LAB</a>
+   <a class="btn alt" href="mentor-protocol-suite.html?topic=trauma&amp;view=debrief">MENTOR DEBRIEF</a>
+   <a class="btn soft" href="mentor-lab.html">Άνοιγμα MENTOR OS</a>
+  </div>
+ </section>
+ <section class="panel" aria-labelledby="protocol-sources">
+  <h2 id="protocol-sources">Ελληνικές πηγές αναφοράς</h2>
+  <div class="sources">
+   <div><a href="https://www.ekab.gr/ekpedefsi/iek-ekav/" target="_blank" rel="noopener noreferrer">ΕΚΑΒ — ΣΑΕΚ / επίσημοι οδηγοί κατάρτισης ↗</a><p class="small muted">Επίσημη εκπαιδευτική πηγή για τη διδακτέα ύλη. Δεν τεκμηριώνει από μόνη της επιχειρησιακή έγκριση κάθε καρτέλας.</p></div>
+   <div><a href="https://www.ekab.gr/eclass/modules/document/index.php?course=173&amp;download=%2F67ee99b7DgDN%2F6842d25604SA.pdf" target="_blank" rel="noopener noreferrer">ΕΚΑΒ eClass — «Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών» (εκπαιδευτικό υλικό) ↗</a><p class="small muted">Σύνδεσμος στο δημοσιευμένο εκπαιδευτικό αρχείο. Ελέγχεται η πρόσβαση και η ισχύς του από τον εκάστοτε εκπαιδευόμενο.</p></div>
+  </div>
+ </section>
+ <footer class="footer">ΕΚΑΒ Σπουδή · Εκπαιδευτική ταξινόμηση · Καμία αυτόματη κλινική πιστοποίηση.</footer>
+</main>
+</body></html>
