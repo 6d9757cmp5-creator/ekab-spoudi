@@ -101,7 +101,7 @@ const folder=process.argv.find(v=>v.startsWith('--manifests='))?.slice(12)||'tmp
 await mkdir(folder,{recursive:true});
 const reportNames=(await readdir(folder)).filter(n=>n.endsWith('-RESULT.json'));
 const reports=await Promise.all(reportNames.map(async n=>JSON.parse(await readFile(folder+'/'+n,'utf8'))));
-const result=audit(catalog,segments,reports,assets);result.generatedAt=new Date().toISOString();
+const result=audit(catalog,segments,reports,assets);
 await writeFile('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.json',JSON.stringify(result,null,2)+'\n');
 const table=[
  '# NIH 3D — Verified Archive Status / ATLA Master Plan 2026','',
