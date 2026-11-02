@@ -5,7 +5,8 @@ import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
 import {ATLA_RUNTIME_RULES,teachingApproach} from '../../../atla/ai/teaching-policy.mjs';
 import {collectAndAuditAiStream,verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
-import {riskGuard} from '../../../atla/knowledge/retrieve.mjs';
+import {riskGuard,retrieve} from '../../../atla/knowledge/retrieve.mjs';
+import medicalTerms from '../../../medical-terms.json' with {type:'json'};
 export {MentorBudget};
 const MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/meta/llama-3.1-8b-instruct-fp8-fast','@cf/google/gemma-4-26b-a4b-it'];
 const LEVELS=['beginner','student','advanced','scientific'];
@@ -42,6 +43,25 @@ export function validate(body){
  const passages=(Array.isArray(body.passages)?body.passages:[]).slice(0,4).map(p=>({id:str(p?.id,8),term:str(p?.term,120),definition:str(p?.definition,400)})).filter(p=>p.id&&p.term&&p.definition);
  const history=(Array.isArray(body.history)?body.history:[]).slice(-4).map(h=>({role:h?.role==='user'?'user':'assistant',text:str(h?.text,300)})).filter(h=>h.text);
  return {question,passages,history,level:LEVELS.includes(body.level)?body.level:'student'};
+}
+
+/**
+ * The browser is NOT an authority for medical evidence.
+ * Accept only passages whose exact text and ranking are present in the
+ * repository-pinned, read-only glossary and relevant to the question.
+ * Other sources (SAEK/EOPPEP/chapter passages) stay local until an independently
+ * reviewed, server-side evidence registry is available.
+ *
+ * This is provenance validation, NOT clinical/semantic claim verification.
+ */
+export function verifiedPassages(question,clientPassages){
+ if(!Array.isArray(clientPassages)||!clientPassages.length)return [];
+ const canonical=retrieve(question,medicalTerms.items,{k:4,minScore:3});
+ const matches=clientPassages.map(p=>canonical.find(x=>x.id===p.id &&
+  x.term===p.term && x.definition===p.definition));
+ if(matches.length!==clientPassages.length||matches.some(x=>!x))return [];
+ if(new Set(matches.map(x=>x.id)).size!==matches.length)return [];
+ return matches;
 }
 
 export function buildMessages({question,passages,history,level}){
@@ -105,7 +125,10 @@ export default {
   if(!body)return json({error:'bad_request'},400,headers);
   // The client also guards risky questions, but API callers must not bypass it.
   if(riskGuard(body.question).blocked)return json({error:'unsafe_request'},400,headers);
-  if(!body.passages.length)return json({answer:'Δεν έχω τεκμηριωμένη πηγή για αυτή την ερώτηση στη βιβλιοθήκη μου.'},200,headers);
+  // Never let a caller supply its own citations or definitions to the model.
+  // Unsupported or altered sources fail closed without any AI or paid-budget call.
+  body.passages=verifiedPassages(body.question,body.passages);
+  if(!body.passages.length)return json({answer:'Δεν έχω επαληθευμένη πηγή για αυτή την ερώτηση στη βιβλιοθήκη μου.'},200,headers);
   if(claude)return answerWithClaude(request,env,body,headers);  if(limited(request.headers.get('cf-connecting-ip')||'unknown',env))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
   const model=MODELS.includes(env.MENTOR_MODEL)?env.MENTOR_MODEL:MODELS[0];
   try{

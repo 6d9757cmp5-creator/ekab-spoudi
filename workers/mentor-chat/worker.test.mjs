@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import worker,{validate,buildMessages,SYSTEM_PROMPT,_resetLimits} from "./src/index.js";
+import worker,{validate,buildMessages,verifiedPassages,SYSTEM_PROMPT,_resetLimits} from "./src/index.js";
 
 const ORIGIN="https://6d9757cmp5-creator.github.io";
-const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:"ΚΑΡΠΑ",definition:"Ορισμός."}],level:"student",history:[]};
+const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:"Καρδιοπνευμονική αναζωογόνηση",definition:"Θωρακικές συμπιέσεις και όπου ενδείκνυται αερισμοί για υποστήριξη κυκλοφορίας σε ανακοπή."}],level:"student",history:[]};
 const req=(over={},method="POST",b=body)=>new Request("https://w.example/",{method,headers:{origin:ORIGIN,"content-type":"application/json","cf-connecting-ip":"1.1.1.1",...over},body:method==="POST"?JSON.stringify(b):undefined});
 const aiOk=()=>({AI:{run:async(model,input)=>{aiOk.last={model,input};return new Response("data: {\"response\":\"Εκπαιδευτικός ορισμός. [T1]\"}\n\n").body;}},MENTOR_FREE_PLAN_CONFIRMED:"true"});
 
@@ -39,7 +39,7 @@ test("valid request streams from an allowlisted model with grounded messages",as
  assert.equal(aiOk.last.model,"@cf/meta/llama-3.3-70b-instruct-fp8-fast");
  assert.equal(aiOk.last.input.stream,true);
  assert.ok(aiOk.last.input.max_tokens<=350);
- assert.match(aiOk.last.input.messages.at(-1).content,/\[T1\] ΚΑΡΠΑ: Ορισμός\./);
+ assert.match(aiOk.last.input.messages.at(-1).content,/\[T1\] Καρδιοπνευμονική αναζωογόνηση: Θωρακικές συμπιέσεις/);
 });
 
 test("no passages means no AI call",async()=>{
@@ -47,7 +47,7 @@ test("no passages means no AI call",async()=>{
  const env={AI:{run:async()=>{called=true;}},MENTOR_FREE_PLAN_CONFIRMED:"true"};
  const r=await worker.fetch(req({},"POST",{...body,passages:[]}),env);
  assert.equal(r.status,200);assert.equal(called,false);
- assert.match((await r.json()).answer,/τεκμηριωμένη πηγή/);
+ assert.match((await r.json()).answer,/επαληθευμένη πηγή/);
 });
 
 test("invalid and oversized input is rejected",async()=>{
@@ -129,4 +129,31 @@ test("Claude provider is also buffered, citation-checked and never leaks unsafe 
    else assert.match(text,/Εκπαιδευτικός ορισμός/);
   }
  }finally{globalThis.fetch=oldFetch;}
+});
+
+test("server provenance gate rejects forged, edited, duplicated or irrelevant source before AI",async()=>{
+ let called=0;
+ const env={MENTOR_FREE_PLAN_CONFIRMED:"true",AI:{run:async()=>{called++;throw Error("should never call AI");}}};
+ const p=body.passages[0];
+ for(const b of [
+  {...body,passages:[{...p,definition:"Πλαστός ορισμός από client"}]},
+  {...body,passages:[{...p,id:"T9"}]},
+  {...body,passages:[p,p]},
+  {...body,question:"Εξήγησε τον πλανήτη Ποσειδώνα"}
+ ]){
+  const r=await worker.fetch(req({},"POST",b),env);
+  assert.equal(r.status,200);
+  assert.match((await r.json()).answer,/επαληθευμένη πηγή/);
+ }
+ assert.equal(called,0);
+ assert.equal(verifiedPassages(body.question,body.passages).length,1);
+ assert.equal(verifiedPassages(body.question,[{...p,term:"Κατασκευασμένος όρος"}]).length,0);
+});
+
+test("unverified chapter or exam passage stays local, not sent to AI",async()=>{
+ let called=false;
+ const env={MENTOR_FREE_PLAN_CONFIRMED:"true",AI:{run:async()=>{called=true;}}};
+ const r=await worker.fetch(req({},"POST",{...body,passages:[{id:"T1",term:"ΕΟΠΠΕΠ EOP-A-001",definition:"Αυθαίρετη απάντηση"}]}),env);
+ assert.equal(r.status,200);
+ assert.equal(called,false);
 });
