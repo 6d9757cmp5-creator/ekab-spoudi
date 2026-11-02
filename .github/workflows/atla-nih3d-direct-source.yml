@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - feat/nih3d-source-on-demand-20261103
+      - feat/nih3d-browser-cors-check-20261103
     paths:
       - 'tools/atla-ai/nih3d-original-source-gateway.mjs'
       - 'scripts/verify-nih3d-direct-source.mjs'
