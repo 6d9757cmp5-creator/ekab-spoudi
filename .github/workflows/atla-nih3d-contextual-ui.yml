@@ -8,12 +8,14 @@ on:
       - 'tools/atla-ai/nih3d-research-context.mjs'
       - 'tools/atla-ai/nih3d-learning-surface.mjs'
       - 'scripts/nih3d-contextual-ui.test.mjs'
+      - 'scripts/nih3d-contextual-browser.test.mjs'
       - '.github/workflows/atla-nih3d-contextual-ui.yml'
   pull_request:
     paths:
       - 'tools/atla-ai/nih3d-research-context.mjs'
       - 'tools/atla-ai/nih3d-learning-surface.mjs'
       - 'scripts/nih3d-contextual-ui.test.mjs'
+      - 'scripts/nih3d-contextual-browser.test.mjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -49,3 +51,14 @@ jobs:
           node --check saek-exams.js
           node --check tools/patient-simulator/app/next-sim.mjs
           node scripts/nih3d-contextual-ui.test.mjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/nih3d-contextual-browser.test.mjs
