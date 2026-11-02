@@ -88,6 +88,18 @@ test('getAbstract checks live response PMID before using as evidence',async()=>{
 });
 
 
+test('PubMed EFetch is paced below the unauthenticated NCBI request ceiling',async()=>{
+ const calls=[];
+ const fetcher=async()=>{
+  calls.push(Date.now());
+  return {ok:false,text:async()=>''};
+ };
+ await getAbstract('12345678',fetcher);
+ await getAbstract('12345679',fetcher);
+ assert.equal(calls.length,2);
+ assert.ok(calls[1]-calls[0]>=380,'EFetch requests must be spaced by at least 380ms');
+});
+
 test('entire PubMed outage blocks the new review queue, even if source HEAD checks succeeded',async()=>{
  const scanner=async ({write})=>{
   assert.equal(write,false,'scanner must stage results without writing');
