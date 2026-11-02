@@ -9,6 +9,7 @@ on:
       - 'atla/learning/contextual-tools.mjs'
       - 'scripts/test-atla-pwa.mjs'
       - 'scripts/verify-atla-anatomy-remote.mjs'
+      - 'scripts/verify-atla-3d-full-browser.mjs'
       - 'scripts/verify-atla-pwa-mobile-browser.mjs'
       - '.github/workflows/atla-pwa-mobile.yml'
   workflow_dispatch:
@@ -38,3 +39,22 @@ jobs:
           node-version: '22'
       - name: Verify true anatomical manifests and real compressed mesh chunks
         run: node scripts/verify-atla-anatomy-remote.mjs
+  full-anatomy-webgl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Load complete 3D atlas through real WebGL and focus heart
+        run: node scripts/verify-atla-3d-full-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: atlas-heart-chromium-evidence
+          path: atlas-heart-webgl-smoke.png
+          if-no-files-found: ignore
