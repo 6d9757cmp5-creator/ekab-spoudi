@@ -5,7 +5,7 @@ import worker,{validate,buildMessages,SYSTEM_PROMPT,_resetLimits} from "./src/in
 const ORIGIN="https://6d9757cmp5-creator.github.io";
 const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:"ΚΑΡΠΑ",definition:"Ορισμός."}],level:"student",history:[]};
 const req=(over={},method="POST",b=body)=>new Request("https://w.example/",{method,headers:{origin:ORIGIN,"content-type":"application/json","cf-connecting-ip":"1.1.1.1",...over},body:method==="POST"?JSON.stringify(b):undefined});
-const aiOk=()=>({AI:{run:async(model,input)=>{aiOk.last={model,input};return new Response("data: {\"response\":\"ok\"}\n\n").body;}},MENTOR_FREE_PLAN_CONFIRMED:"true"});
+const aiOk=()=>({AI:{run:async(model,input)=>{aiOk.last={model,input};return new Response("data: {\"response\":\"Εκπαιδευτικός ορισμός. [T1]\"}\n\n").body;}},MENTOR_FREE_PLAN_CONFIRMED:"true"});
 
 test.beforeEach(()=>_resetLimits());
 
