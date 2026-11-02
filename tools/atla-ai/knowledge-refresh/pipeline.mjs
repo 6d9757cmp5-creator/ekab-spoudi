@@ -20,15 +20,32 @@ export function extractAbstract(xml){
  const decode=s=>s.replace(/<[^>]*>/g,' ').replace(/&(?:lt|gt|amp|quot|apos|#39);/g,e=>({'&lt;':'<','&gt;':'>','&amp;':'&','&quot;':'"','&apos;':"'",'&#39;':"'"}[e]||e));
  return clean(fragments.map(f=>decode(f[1])).join(' '),2400);
 }
+/**
+ * PubMed may return multiple records, historical corrections, or an error document.
+ * Never attach an abstract to a bibliographic item unless the primary PMID matches.
+ * Retraction notices remain a separate clinical-review gate; obvious retraction flags block triage.
+ */
+export function extractMatchingAbstract(xml,pmid){
+ const value=String(xml||'');
+ const blocks=[...value.matchAll(/<PubmedArticle(?:\\s[^>]*)?>([\\s\\S]*?)<\\/PubmedArticle>/gi)];
+ if(blocks.length!==1)return '';
+ const article=blocks[0][1];
+ const citation=article.match(/<MedlineCitation(?:\\s[^>]*)?>([\\s\\S]*?)<\\/MedlineCitation>/i)?.[1]||'';
+ const id=citation.match(/<PMID(?:\\s[^>]*)?>(\\d{1,10})<\\/PMID>/i)?.[1]||'';
+ if(id!==String(pmid))return '';
+ if(/<CommentsCorrections\\b[^>]*RefType\\s*=\\s*["'](?:RetractionIn|ExpressionOfConcernIn|RetractionOf)["']/i.test(article))return '';
+ if(/<PublicationType(?:\\s[^>]*)?>\\s*(?:Retracted Publication|Retraction of Publication|Expression of Concern)\\s*<\\/PublicationType>/i.test(article))return '';
+ return extractAbstract(citation);
+}
 export async function getAbstract(pmid,fetcher=fetch){
- if(!/^\d{1,10}$/.test(String(pmid)))return '';
+ if(!/^\\d{1,10}$/.test(String(pmid)))return '';
  const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi');
  for(const [k,v] of Object.entries({db:'pubmed',id:String(pmid),retmode:'xml'}))url.searchParams.set(k,v);
  try{
   const r=await fetcher(url.toString(),{headers:{accept:'application/xml','user-agent':'ATLA-Evidence-Triage/1.0'},signal:AbortSignal.timeout(12000)});
   if(!r.ok)return '';
   const body=await r.text();
-  return body.length<=180000?extractAbstract(body):'';
+  return body.length<=180000?extractMatchingAbstract(body,pmid):'';
  }catch{return '';}
 }
 export function normalizeAssessment(raw){
