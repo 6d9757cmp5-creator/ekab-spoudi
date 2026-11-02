@@ -6,6 +6,11 @@ on:
   push:
     paths:
       - 'tools/atla-ai/knowledge-refresh/scan.mjs'
+      - 'mentor/library/source-index.json'
+      - 'mentor/library/catalog-search.mjs'
+      - 'mentor/app/library.js'
+      - 'mentor-library.html'
+      - 'scripts/test-mentor-source-index.mjs'
       - 'tools/atla-ai/knowledge-refresh/scan.test.mjs'
       - 'tools/atla-ai/knowledge-refresh/source-policy.mjs'
       - 'tools/atla-ai/knowledge-refresh/watchlist.json'
@@ -33,6 +38,7 @@ jobs:
           node --check tools/atla-ai/knowledge-refresh/scan.mjs
           node --check tools/atla-ai/knowledge-refresh/source-policy.mjs
           node --test tools/atla-ai/knowledge-refresh/scan.test.mjs
+          node --test scripts/test-mentor-source-index.mjs
 
   discover:
     needs: verify
