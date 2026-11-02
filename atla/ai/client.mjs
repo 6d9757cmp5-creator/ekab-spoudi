@@ -3,6 +3,7 @@
  * passages, the study level and a short text history. Never sends notes, grades, page text or ids.
  */
 import {LEVELS} from "../student/memory.mjs";
+import {auditAssistantReply} from "./teaching-policy.mjs";
 
 export const LIMIT_MESSAGE="Η ATLA έφτασε προσωρινά το όριο δωρεάν χρήσης AI. Δοκίμασε ξανά αργότερα· οι τοπικές απαντήσεις από τη βιβλιοθήκη εξακολουθούν να λειτουργούν.";
 export const UNAVAILABLE_MESSAGE="Η απάντηση AI δεν είναι διαθέσιμη αυτή τη στιγμή. Χρησιμοποιώ μόνο την τοπική βιβλιοθήκη.";
@@ -61,18 +62,21 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
     while((nl=buf.indexOf("\n"))>=0){
      const parsed=parseSseLine(buf.slice(0,nl).trimEnd());
      buf=buf.slice(nl+1);
-     if(parsed?.token){text+=parsed.token;onToken(text);}
+     if(parsed?.token){text+=parsed.token;}
     }
    }
    const tail=parseSseLine(buf.trim());
-   if(tail?.token){text+=tail.token;onToken(text);}
+   if(tail?.token){text+=tail.token;}
   }else{
    const j=await res.json();
    text=typeof j?.answer==="string"?j.answer:"";
-   if(text)onToken(text);
+   // Never reveal unchecked raw AI text to a UI callback.
   }
   text=text.trim();
-  return text?{ok:true,text}:{ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
+  const audit=auditAssistantReply(text,payload.passages);
+  if(!audit.ok)return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
+  onToken(text); // final, cited and surface-checked text only; no speculative streaming
+  return {ok:true,text};
  }catch{
   return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
  }finally{clearTimeout(timer);}

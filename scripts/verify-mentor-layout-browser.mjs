@@ -69,9 +69,9 @@ try{
  assert.ok(await page.locator('.atla-panel').isVisible(),'ATLAS opt-in from SAEK');
  assert.match(await page.locator('.atla-context').textContent(),/κεφάλαιο ΣΑΕΚ/);
  await page.locator('.atla-close').click();
- const url=await page.locator('#lesson-1 .atlas-practice-cockpit').getAttribute('href');
- assert.match(url,/mentor-next\.html\?from=saek-course-01\.html/);
- await page.goto(new URL(url,base).href,{waitUntil:'domcontentloaded'});
+  assert.equal(await page.locator('#lesson-1 .atlas-practice-cockpit').count(),0,'No unrelated simulator mission should be offered');
+  const oldUrl='mentor-next.html?from=saek-course-01.html&chapter=lesson-1&focus='+encodeURIComponent('Ανατομία');
+  await page.goto(new URL(oldUrl,base).href,{waitUntil:'domcontentloaded'});
  await page.locator('#atlas-cockpit-entry').waitFor({timeout:20000});
  assert.ok(await page.locator('#atlas-cockpit-entry [href^="saek-course-01.html"]').count());
  await page.locator('#atlas-cockpit-entry [data-atla-open]').click();

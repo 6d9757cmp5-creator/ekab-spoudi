@@ -3,6 +3,7 @@
 // No keys are involved: the AI binding authenticates inside Cloudflare.
 import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '../../../mentor/ai/claude-adapter.mjs';
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
+import {ATLA_RUNTIME_RULES,teachingApproach} from '../../../atla/ai/teaching-policy.mjs';
 export {MentorBudget};
 const MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/meta/llama-3.1-8b-instruct-fp8-fast','@cf/google/gemma-4-26b-a4b-it'];
 const LEVELS=['beginner','student','advanced','scientific'];
@@ -17,11 +18,11 @@ const hits=new Map();
 let day={key:'',count:0};
 
 export const SYSTEM_PROMPT=
-'Είσαι ο MENTOR, ψηφιακός εκπαιδευτικός βοηθός για σπουδαστές διασώστες στην Ελλάδα. Δεν είσαι γιατρός, ούτε εκπρόσωπος του ΕΚΑΒ. '+
+'Είσαι ο ATLA, ψηφιακός εκπαιδευτικός βοηθός για σπουδαστές διασώστες στην Ελλάδα. Δεν είσαι γιατρός, ούτε εκπρόσωπος του ΕΚΑΒ. '+
 'Απάντησε ΜΟΝΟ με βάση τις αριθμημένες πηγές που σου δίνονται και αναφέρσου σε αυτές ως [Τ1], [Τ2]. '+
 'Αν οι πηγές δεν επαρκούν, πες καθαρά ότι δεν έχεις τεκμηριωμένη πληροφορία και μην μαντέψεις. '+
 'Μην δίνεις δοσολογίες, διαγνώσεις ή οδηγίες για πραγματικό περιστατικό· για επείγον παρέπεμψε στο 166/112 και στο εγκεκριμένο πρωτόκολλο. '+
-'Απάντησε στα ελληνικά, σε έως 120 λέξεις.';
+'Απάντησε στα ελληνικά, σε έως 120 λέξεις. '+ATLA_RUNTIME_RULES;
 
 function cors(env,origin){
  const allowed=['https://6d9757cmp5-creator.github.io'];
@@ -43,8 +44,9 @@ export function validate(body){
 
 export function buildMessages({question,passages,history,level}){
  const sources=passages.map(p=>`[${p.id}] ${p.term}: ${p.definition}`).join('\n');
+ const approach=teachingApproach({question,level});
  return [
-  {role:'system',content:SYSTEM_PROMPT+' '+LEVEL_STYLE[level]},
+  {role:'system',content:SYSTEM_PROMPT+' '+LEVEL_STYLE[level]+' '+approach.style+' '+approach.depth},
   ...history.map(h=>({role:h.role,content:h.text})),
   {role:'user',content:`Πηγές:\n${sources}\n\nΕρώτηση: ${question}`}
  ];

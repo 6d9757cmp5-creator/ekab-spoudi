@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const rootPages=[
- 'index.html','saek.html','eoppep.html','theory.html','practical_exam.html',
+ 'index.html','paramedic.html','saek.html','eoppep.html','theory.html','practical_exam.html',
  'saek-exams.html','farmaka.html','seminar-prep.html','protocols.html',
  'search.html','profession-law.html','mentor-ecg.html','mentor-next.html',
  ...Array.from({length:20},(_,i)=>'saek-course-'+String(i+1).padStart(2,'0')+'.html')
@@ -23,7 +23,9 @@ test('home removes heavyweight avatar and keeps core learning navigation',()=>{
  assert.ok(!home.includes('id="mentor-home-presence-frame"'));
  assert.ok(!home.includes('src="mentor-home.js"'));
  assert.ok(home.includes('data-atla-open'));
- for(const target of ['saek.html','eoppep.html','farmaka.html','seminar-prep.html'])assert.ok(home.includes('href="'+target+'"'),target);
+ assert.ok(home.includes('href="paramedic.html"'),'Paramedic should be the central learner entry');
+ const paramedic=read('paramedic.html');
+ for(const target of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','farmaka.html','seminar-prep.html'])assert.ok(paramedic.includes('href="'+target+'"'),target);
  const eop=read('eoppep.html');assert.ok(eop.includes('href="practical_exam.html"'));
 });
 test('ATLA reuses one existing AI path, retains no-write behavior and exam guard',()=>{

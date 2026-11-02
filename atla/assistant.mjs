@@ -134,7 +134,7 @@ function boot(){
  }
  const setOpen=(v)=>{visible=!!v;panel.hidden=!visible;launcher.hidden=visible;document.body.classList.toggle('atla-is-open',visible);if(visible){context.textContent='Τρέχουσα ενότητα: '+(document.querySelector('main h1,main h2')?.textContent||document.title).trim().slice(0,100);showHistory();field.focus();}else{window.speechSynthesis?.cancel?.();launcher.focus();}};
  launcher.addEventListener('click',()=>setOpen(true));close.addEventListener('click',()=>setOpen(false));
- document.addEventListener('click',e=>{if(e.target?.closest?.('[data-atla-open]')){e.preventDefault();setOpen(true);}});
+ document.addEventListener('click',e=>{if(e.target?.closest?.('[data-atla-open]')){e.preventDefault();if(!visible)setOpen(true);}});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&visible)setOpen(false);});
  window.addEventListener('ekab:atlas-context',e=>{
   const detail=e.detail||{};
