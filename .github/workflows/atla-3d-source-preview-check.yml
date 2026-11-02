@@ -1,9 +1,7 @@
 name: ATLA 3D Source Viewer Safe Preview
 on:
   push:
-    branches:
-      - feature/atla-3d-model-preview-integration-20261103
-      - feature/atla-anatomy-cockpit-resource-stage2-20261103
+    branches: [main]
     paths:
       - 'tools/atla-ai/model-preview*'
       - 'ui-tools/atla-resource-preview.html'
@@ -22,6 +20,9 @@ on:
       - 'scripts/test-atla-model-preview.mjs'
 permissions:
   contents: read
+concurrency:
+  group: atla-3d-source-preview-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-24.04
