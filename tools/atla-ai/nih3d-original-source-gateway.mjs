@@ -87,5 +87,29 @@ export function selectOriginalFile(entry,{format='GLB',maxInlineBytes=50*1024*10
   if(!entry||entry.scientificReview!=='APPROVED_FOR_EDUCATION')return null;
   const candidates=entry.files.filter(x=>x.format===format.toUpperCase()).sort((a,b)=>(a.sizeBytes??Infinity)-(b.sizeBytes??Infinity));
   const suitable=candidates.find(x=>x.sizeBytes!=null&&x.sizeBytes<=maxInlineBytes);
-  return suitable?{...suitable,downloadOnDemand:true}:null;
+  return suitable?{...suitable,downloadOnDemand:true,browserInlineSupported:false,officialEntryPage:entry.originalPage,delivery:'external-official-source'}:null;
+}
+
+/** Browser safe fallback. Source navigation never implies successful same-origin 3D rendering. */
+export function getApprovedOriginalSourceLink(entry) {
+  if(!entry||entry.scientificReview!=='APPROVED_FOR_EDUCATION')return null;
+  if(!PAGE_URL_RE.test(entry.originalPage??''))return null;
+  return {href:entry.originalPage,target:'_blank',rel:'noopener noreferrer',
+    label:'Προβολή πρωτότυπου 3D στο NIH',mode:'external-official-source',
+    inline3DValidated:false,originalSource:true};
+}
+
+/** Use the stored, same-origin catalog when external NIH metadata fetch is blocked by CORS. */
+export async function getNihEntryWithSafeFallback(entryId,options={}) {
+  const snapshot=await getCataloguedNihEntry(entryId,options);
+  if(!snapshot)return null;
+  if(!options.requestLiveRefresh)return {...snapshot,browserMode:'official-page-link',liveRefreshAttempted:false};
+  try{
+    const current=await getCurrentNihEntry(entryId,options);
+    return {...current,browserMode:'official-page-link',liveRefreshAttempted:true};
+  }catch(error){
+    return {...snapshot,sourceStatus:'catalog_snapshot_live_refresh_unavailable',
+      liveRefreshAttempted:true,liveRefreshUnavailableReason:String(error.message??error).slice(0,160),
+      browserMode:'official-page-link'};
+  }
 }
