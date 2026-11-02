@@ -1,0 +1,44 @@
+name: ATLA public Vercel preview smoke
+on:
+  pull_request:
+    paths:
+      - 'docs/ATLA_IPHONE_SAFARI_VERCEL_ACCEPTANCE_2026-11-02.md'
+      - '.github/workflows/atla-vercel-preview-http.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deployed-preview:
+    if: github.event_name != 'pull_request' || github.event.pull_request.number == 151
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Verify live Vercel preview HTML from outside Vercel
+        shell: bash
+        env:
+          PREVIEW: https://ekab-spoudi-git-feature-atla-contextual-tool-5bb9a4-spoudi-ekav.vercel.app
+        run: |
+          set -euo pipefail
+          for item in "paramedic.html|Τι θέλεις να μάθεις σήμερα" "saek-course-02.html|ηλεκτρικ" "mentor-ecg.html|ECG Lab" "theory.html|ΕΟΠΠΕΠ"; do
+            filename="${item%%|*}"
+            fragment="${item#*|}"
+            ok=0
+            for attempt in 1 2 3 4 5; do
+              tmp="$(mktemp)"
+              status="$(curl --location --silent --show-error --max-time 25 --output "$tmp" --write-out '%{http_code}' "$PREVIEW/$filename" || true)"
+              if [[ "$status" == "200" ]] && grep -Fqi "$fragment" "$tmp"; then
+                echo "PASS live Vercel: $filename (200, expected content)"
+                ok=1
+                rm -f "$tmp"
+                break
+              fi
+              echo "Not yet verified ($filename, HTTP $status, attempt $attempt), title:"
+              grep -oi '<title>[^<]*</title>' "$tmp" | head -c 200 || true
+              rm -f "$tmp"
+              sleep 10
+            done
+            if [[ "$ok" != 1 ]]; then
+              echo "::error::$filename is not verified as the expected live preview (may require Vercel protection/access)."
+              exit 1
+            fi
+          done
