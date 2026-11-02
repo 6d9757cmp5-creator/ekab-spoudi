@@ -172,10 +172,13 @@ test('scheduled queue commit cannot rebase unverified changes onto a moving main
 test('replacement scheduler rejects unsafe source, bibliography and scan queue documents',()=>{
  const safe={
   report:{schema_version:2,stage:'research-only-awaiting-independent-review',
-   source_discovery_completed:true,clinical_knowledge_imported:0,existing_curriculum_changed:false,items:[]},
-  metadata:{schema_version:1,monitored_urls:1,pubmed_topics_checked:10,pubmed_failures:[],
+   source_discovery_completed:true,clinical_knowledge_imported:0,existing_curriculum_changed:false,
+   source_discovery:{monitored_urls:1,monitored_ok:1,pubmed_topics_checked:10,
+    pubmed_topics_failed:0,newly_discovered_papers:1},items:[]},
+  metadata:{schema_version:1,monitored_urls:1,monitored_ok:1,pending_papers:1,
+   newly_discovered_papers:1,pubmed_topics_checked:10,pubmed_failures:[],
    model_training_performed:false,clinical_retrieval_updated:false,full_texts_imported:0},
-  health:{schema_version:1,sources:[{url:'https://www.who.int/guidelines',
+  health:{schema_version:1,sources:[{url:'https://www.who.int/guidelines',ok:true,
    clinical_approval:false,knowledge_ingestion_enabled:false}]},
   pending:{schema_version:1,items:[{...paper,status:'pending-review',
    content_imported:false,clinical_approval:false,atla_ai_retrieval_enabled:false}]}
@@ -202,4 +205,35 @@ test('scheduled workflow checks all four review-only files before staging',()=>{
  assert.match(workflow,/validateQueueFiles/);
  for(const file of ['ai-research-review.json','last-scan.json','source-health.json','pending-pubmed.json'])
   assert.ok(workflow.includes(file),file);
+});
+
+test('cross-file scan consistency rejects mixed or stale review-only evidence',()=>{
+ const item={...paper,status:'pending-review',content_imported:false,
+  clinical_approval:false,atla_ai_retrieval_enabled:false};
+ const base={
+  report:{schema_version:2,stage:'research-only-awaiting-independent-review',
+   source_discovery_completed:true,clinical_knowledge_imported:0,
+   existing_curriculum_changed:false,items:[],
+   source_discovery:{monitored_urls:1,monitored_ok:1,pubmed_topics_checked:10,
+    pubmed_topics_failed:0,newly_discovered_papers:1}},
+  metadata:{schema_version:1,monitored_urls:1,monitored_ok:1,pending_papers:1,
+   newly_discovered_papers:1,pubmed_topics_checked:10,pubmed_failures:[],
+   model_training_performed:false,clinical_retrieval_updated:false,full_texts_imported:0},
+  health:{schema_version:1,sources:[{url:'https://www.who.int/guidelines',ok:true,
+   clinical_approval:false,knowledge_ingestion_enabled:false}]},
+  pending:{schema_version:1,items:[item]}
+ };
+ assert.equal(validateQueueFiles(base),true);
+ const bad=[
+  {...base,metadata:{...base.metadata,monitored_ok:0}},
+  {...base,metadata:{...base.metadata,pending_papers:2}},
+  {...base,report:{...base.report,source_discovery:{...base.report.source_discovery,pubmed_topics_failed:1}}},
+  {...base,report:{...base.report,source_discovery:null}},
+  {...base,report:{...base.report,items:[{id:'pubmed-99999999',pmid:'99999999',
+   status:'pending-independent-scientific-review',full_text_stored:false,
+   clinical_approval:false,atla_ai_retrieval_enabled:false,learner_visible:false,assessment:null}]}},
+  {...base,pending:{...base.pending,items:[item,item]},metadata:{...base.metadata,pending_papers:2}}
+ ];
+ for(const candidate of bad)
+  assert.throws(()=>validateQueueFiles(candidate),/inconsistent-research-queue/);
 });
