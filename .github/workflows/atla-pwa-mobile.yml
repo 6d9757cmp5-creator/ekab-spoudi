@@ -29,6 +29,13 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium webkit
       - run: node scripts/verify-atla-pwa-mobile-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: atla-webkit-virtual-phone-evidence
+          path: atla-webkit-virtual-phone-*.png
+          if-no-files-found: warn
+          retention-days: 14
   anatomy-vendor:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
