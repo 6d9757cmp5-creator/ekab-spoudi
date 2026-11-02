@@ -1,0 +1,51 @@
+name: ATLA NIH3D medical candidate index build
+on:
+  push:
+    branches:
+      - feat/nih3d-durable-r2-b2-staging
+    paths:
+      - scripts/nih3d-medical-classify.mjs
+      - scripts/nih3d-build-medical-index.mjs
+      - scripts/nih3d-medical-classify.test.mjs
+      - .github/workflows/atla-nih3d-medical-index-build.yml
+      - tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json
+      - tools/atla-ai/resources/nih3d-master-plan-2026/segments/**
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atla-nih3d-medical-index-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate scripts and tests
+        run: |
+          node --check scripts/nih3d-medical-classify.mjs
+          node --check scripts/nih3d-build-medical-index.mjs
+          node scripts/nih3d-medical-classify.test.mjs
+      - name: Classify full available NIH metadata
+        run: node scripts/nih3d-build-medical-index.mjs
+      - name: Save generated candidate catalog to source branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/atla-ai/resources/nih3d-medical-index/
+          if ! git diff --cached --quiet; then
+            git commit -m "data(ATLA): regenerate NIH3D candidate medical index from source segments"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Verify persisted summary
+        run: |
+          test -s tools/atla-ai/resources/nih3d-medical-index/summary.json
+          node -e 'const s=require("./tools/atla-ai/resources/nih3d-medical-index/summary.json"); if(s.sourceRecords!==s.sourceCatalogEntries || s.uniqueRecords+s.duplicates!==s.sourceRecords)process.exit(1); console.log("Coverage verified:",s.uniqueRecords,"unique NIH entries");'
