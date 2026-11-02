@@ -5,7 +5,7 @@ const KEY=/^ekab\.saek\.read\.v1\.(0[1-9]|1[0-9]|20)\.([1-9]|[1-9]\d)$/;
 const COURSE=/^saek-course-(0[1-9]|1[0-9]|20)\.html$/;
 export const DAILY_LIMIT=2;
 export const AUTO_GAP_MS=45*60*1000;
-export const WAIT_AFTER_ENABLE_MS=2*60*1000;
+export const WAIT_AFTER_ENABLE_MS=5*60*1000;
 export const STUDY_KEY='ekab.atlas.recall.settings.v1';
 export const FEEDBACK_KEY='ekab.atlas.recall.feedback.v1';
 
@@ -23,8 +23,9 @@ export function safeRoute(path,search=''){
  if(/(?:\?|&)mode=exam(?:&|$)/.test(search))return false;
  return /^(index|saek|eoppep|farmaka|seminar-prep|protocols|mentor-ecg|mentor-next|mentor-lab|tools)\.html$/.test(name)||COURSE.test(name);
 }
+export const localDayKey=now=>{const d=new Date(now);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');};
 export function canInterrupt({enabled=false,now=0,nextAt=0,shownToday=0,day='',visible=true,idleMs=0,blocked=false}={}){
- const today=new Date(now).toISOString().slice(0,10);
+ const today=localDayKey(now);
  return enabled===true&&visible===true&&blocked!==true&&idleMs>=25000&&
   day===today&&shownToday<DAILY_LIMIT&&now>=nextAt;
 }
@@ -53,7 +54,8 @@ export function suitableRecall(question,answer){
  if(/(?:δοσολογ|mg\b|μg\b|mcg\b|χιλιοστ|χορηγ|ενδοφλεβ|ενδομυϊ|διασωλην|βελον|καθετηρ|αποσυμπιεσ|φαρμακο|θεραπει|πρωτοκολλο αντιμετωπισησ)/u.test(s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')))return false;
  return true;
 }
-export function nextSchedule(now,random=Math.random){
- const variance=Math.floor(Math.max(0,Math.min(.9999,Number(random())||0))*3*60000);
- return now+WAIT_AFTER_ENABLE_MS+variance;
+export function nextSchedule(now,random=Math.random,phase='initial'){
+ const r=Math.max(0,Math.min(.999999,Number(random())||0));
+ // First offer 5–15 minutes after study becomes eligible; subsequent offers 45–105 minutes later.
+ return now+(phase==='repeat'?AUTO_GAP_MS+Math.floor(r*60*60000):WAIT_AFTER_ENABLE_MS+Math.floor(r*10*60000));
 }

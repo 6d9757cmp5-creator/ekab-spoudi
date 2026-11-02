@@ -29,10 +29,17 @@ try{
   await page.evaluate(()=>localStorage.setItem('ekab.saek.read.v1.01.1','1'));
   await page.reload({waitUntil:'domcontentloaded'});
   await page.locator('.atlas-recall-chip').waitFor({state:'visible'});
-  assert.equal(await page.locator('.atlas-recall-window:visible').count(),0,'Not unsolicited on opt-in');
-  await page.locator('.atlas-recall-chip').click();
-  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),true);
-  await page.locator('.atlas-recall-chip').click();
+  assert.equal(await page.locator('.atlas-recall-window:visible').count(),0,'Respect initial randomized delay');
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),true,'Automatic recall enabled by default');
+  assert.ok((await page.locator('.atlas-recall-chip').textContent()).includes('Επανάληψη'));
+  // No activation click. Simulate a quiet learner after the persisted randomized deadline.
+  await page.clock.install();
+  await page.evaluate(()=>{
+   const key='ekab.atlas.recall.settings.v1',s=JSON.parse(localStorage.getItem(key));
+   s.nextAt=Date.now()+1000;localStorage.setItem(key,JSON.stringify(s));
+  });
+  await page.clock.fastForward(30000);
+  await page.evaluate(()=>window.dispatchEvent(new Event('ekab:recall-check')));
   await page.locator('.atlas-recall-question').waitFor({state:'visible',timeout:15000});
   assert.match(await page.locator('.atlas-recall-question').innerText(),/εγγύς|άπω/u);
   assert.ok((await page.locator('a[href$="saek-course-01.html#lesson-1"]').count())===1);
@@ -55,7 +62,7 @@ try{
   await page.goto(origin+'theory.html?mode=exam',{waitUntil:'domcontentloaded'});
   assert.equal(await page.locator('.atlas-recall-chip').count(),0,'Never interrupt an examination');
   assert.deepEqual(errors,[],label+': '+errors.join(' | '));
-  console.log('PASS '+label+': opt-in, existing SAEK questions, read-only progress, pause, no exam interruption');
+  console.log('PASS '+label+': automatic random-timed recall without activation, existing SAEK questions, pause, no exam interruption');
   await context.close();
  }
 }finally{

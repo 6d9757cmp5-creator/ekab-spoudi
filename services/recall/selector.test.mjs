@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {completedChapters,chooseChapter,canInterrupt,safeRoute,suitableRecall,nextSchedule,
- DAILY_LIMIT,STUDY_KEY,FEEDBACK_KEY} from './selector.mjs';
+ DAILY_LIMIT,STUDY_KEY,FEEDBACK_KEY,localDayKey} from './selector.mjs';
 
 test('reads ONLY completed existing SAEK chapters; no arbitrary or unseen cards',()=>{
  const entries=[
@@ -22,7 +22,7 @@ test('review scheduling prioritizes remembered mistakes, never invents learned c
  assert.deepEqual(chooseChapter(candidates,{'01:1':{seenAt:now-3600000},'02:3':{seenAt:now-8*3600000}},now,()=>0),candidates[1]);
  assert.equal(chooseChapter([],{},now),null);
 });
-test('prompts remain opt-in, nonintrusive, capped, and suppress exams',()=>{
+test('prompts are automatic when learned content exists, without an enable click; pause remains honored',()=>{
  const now=Date.parse('2026-11-02T12:00:00Z'),day='2026-11-02';
  const settings={enabled:true,now,nextAt:now-1,shownToday:0,day,visible:true,idleMs:30000,blocked:false};
  assert.equal(canInterrupt(settings),true);
@@ -37,7 +37,10 @@ test('prompts remain opt-in, nonintrusive, capped, and suppress exams',()=>{
  for(const page of ['index.html','saek.html','saek-course-01.html','farmaka.html','mentor-next.html'])assert.equal(safeRoute('/'+page),true);
  assert.equal(safeRoute('/index.html','?mode=exam'),false);
  assert.ok(nextSchedule(now,()=>0)>=now+120000);
- assert.ok(nextSchedule(now,()=>.99)<now+5*60000);
+ assert.ok(nextSchedule(now,()=>.99)<now+15*60000);
+ assert.ok(nextSchedule(now,()=>0,'repeat')>=now+45*60000);
+ assert.ok(nextSchedule(now,()=>.99,'repeat')<now+105*60000);
+ assert.equal(localDayKey(now),day);
 });
 test('only safe educational recall snippets appear in ambient cards',()=>{
  assert.equal(suitableRecall('Ποια δύο οστά αποτελούν το αντιβράχιο;','Κερκίδα και ωλένη.'),true);
