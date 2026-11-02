@@ -18,6 +18,15 @@ try{
   const ctx=await browser.newContext({viewport:{width,height},serviceWorkers:'block'});
   const page=await ctx.newPage();
   await visit(page,'/saek-course-01.html');
+  page.on('pageerror',e=>console.log('BROWSER_PAGE_ERROR',String(e)));
+  page.on('console',msg=>{if(msg.type()==='error')console.log('BROWSER_CONSOLE_ERROR',msg.text().slice(0,300));});
+  await page.waitForTimeout(1400);
+  console.log('NIH_LESSON_DIAGNOSTIC',JSON.stringify(await page.evaluate(async()=>{
+   let pick=null;
+   try{const m=await import('/tools/atla-ai/nih3d-research-context.mjs');pick=m.selectNihResearchSource({surface:'lesson',courseId:'01',chapterId:'2',text:document.querySelector('#lesson-2 .reader-main > .reader-paragraph')?.textContent})?.id??null;}
+   catch(e){pick=String(e);}
+   return {pathname:location.pathname,chapter:!!document.querySelector('#lesson-2'),paragraph:document.querySelector('#lesson-2 .reader-main > .reader-paragraph')?.textContent?.slice(0,180),aside:!!document.querySelector('#lesson-2 .saek-anatomy-jump'),actions:!!document.querySelector('#lesson-2 .saek-anatomy-jump-actions'),research:document.querySelectorAll('.nih3d-research-reference').length,pick};
+  })));
   await page.locator('#lesson-2 .nih3d-research-reference a').waitFor({state:'attached',timeout:20000});
   const link=page.locator('#lesson-2 .nih3d-research-reference a');
   assert.equal(await link.getAttribute('href'),'https://3d.nih.gov/entries/3DPX-000170');
