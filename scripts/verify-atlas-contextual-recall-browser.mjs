@@ -54,38 +54,28 @@ try{
   assert.equal(data.recall.answer,'again');
   assert.equal(await page.locator('.atlas-recall-window:visible').count(),0);
   await page.goto(origin+'saek-course-01.html',{waitUntil:'domcontentloaded'});
-  // Module scripts may initialize after DOMContentLoaded; wait for recall service before advancing the fake clock.
   await page.locator('#atlas-recall-window').waitFor({state:'attached',timeout:15000});
   assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No floating recall button on lesson page');
-  await page.clock.install();
-  await page.evaluate(()=>{
+  assert.equal(await page.locator('.atlas-recall-window:visible').count(),0,'No immediate interruption to reading');
+  // Separate fresh session: prove automatic offer and permanent pause without a launcher.
+  const pauseContext=await browser.newContext({viewport:{width,height},serviceWorkers:'block'});
+  const pausePage=await pauseContext.newPage();
+  await pausePage.goto(origin+'index.html',{waitUntil:'domcontentloaded'});
+  await pausePage.evaluate(()=>localStorage.setItem('ekab.saek.read.v1.01.1','1'));
+  await pausePage.reload({waitUntil:'domcontentloaded'});
+  await pausePage.locator('#atlas-recall-window').waitFor({state:'attached',timeout:15000});
+  await pausePage.clock.install();
+  await pausePage.evaluate(()=>{
    const key='ekab.atlas.recall.settings.v1',s=JSON.parse(localStorage.getItem(key));
    s.nextAt=Date.now()+1000;localStorage.setItem(key,JSON.stringify(s));
   });
-  await page.clock.fastForward(30000);
-  await page.evaluate(()=>window.dispatchEvent(new Event('ekab:recall-check')));
-  console.log('RECALL_SECOND_DIAGNOSTIC',label,JSON.stringify(await page.evaluate(()=>({
-    pathname:location.pathname,
-    now:Date.now(),ready:document.readyState,visibility:document.visibilityState,
-    completed:localStorage.getItem('ekab.saek.read.v1.01.1'),
-    settings:localStorage.getItem('ekab.atlas.recall.settings.v1'),
-    panel:!!document.getElementById('atlas-recall-window'),
-    hidden:document.getElementById('atlas-recall-window')?.hidden,
-    question:!!document.getElementById('lesson-1')?.querySelector('.knowledge-check .check-question'),
-    questionContent:document.getElementById('lesson-1')?.querySelector('.knowledge-check .check-question')?.textContent?.trim()?.slice(0,250),
-    answerContent:document.getElementById('lesson-1')?.querySelector('.knowledge-check .check-answer')?.textContent?.trim()?.slice(0,500),
-    pageHasReacted:!!document.querySelector('.atlas-recall-heading'),
-    style:!!document.querySelector('link[href*="recall/popup.css"]'),
-    active:document.activeElement?.tagName,
-    activeInput:!!document.activeElement?.closest('input,textarea,select,[contenteditable="true"],[role="textbox"]'),
-    modal:!!document.querySelector('[aria-modal="true"]:not([hidden]),dialog[open]'),
-    studying:!!document.querySelector('#study:not(.hidden),[data-atla-active-exam="true"]'),
-    anyVideoPlaying:[...document.querySelectorAll('video')].some(v=>!v.paused&&!v.ended),
-    count:document.querySelectorAll('.atlas-recall-question').length
-  }))));
-  await page.locator('.atlas-recall-question').waitFor({state:'visible',timeout:15000});
-  await page.getByRole('button',{name:'Παύση υπενθυμίσεων'}).click();
-  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),false);
+  await pausePage.clock.fastForward(30000);
+  await pausePage.evaluate(()=>window.dispatchEvent(new Event('ekab:recall-check')));
+  await pausePage.locator('.atlas-recall-question').waitFor({state:'visible',timeout:15000});
+  await pausePage.getByRole('button',{name:'Παύση υπενθυμίσεων'}).click();
+  assert.equal(await pausePage.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),false);
+  assert.equal(await pausePage.locator('.atlas-recall-chip').count(),0,'Never show a permanent control, even after pausing');
+  await pauseContext.close();
   await page.goto(origin+'theory.html?mode=exam',{waitUntil:'domcontentloaded'});
   assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No floating launcher on exam pages');
   assert.equal(await page.locator('.atlas-recall-window').count(),0,'Never interrupt an examination');
