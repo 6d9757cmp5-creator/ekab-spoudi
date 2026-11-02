@@ -16,7 +16,9 @@
       "httpStatus": 200,
       "formatValidated": true,
       "status": "SOURCE_BYTES_VERIFIED",
-      "error": null
+      "error": null,
+      "corsAllowOrigin": null,
+      "browserCrossOriginAllowed": false
     },
     {
       "accession": "3DPX-000170",
@@ -29,9 +31,18 @@
       "httpStatus": 200,
       "formatValidated": true,
       "status": "SOURCE_BYTES_VERIFIED",
-      "error": null
+      "error": null,
+      "corsAllowOrigin": null,
+      "browserCrossOriginAllowed": false
     }
   ],
+  "liveMetadata": {
+    "httpStatus": 200,
+    "corsAllowOrigin": null,
+    "browserCrossOriginAllowed": false,
+    "publishedSubmissionFound": true,
+    "error": null
+  },
   "successful": 2,
   "failures": 0
 }
