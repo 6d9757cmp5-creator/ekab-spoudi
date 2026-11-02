@@ -1,0 +1,32 @@
+name: ATLA NIH3D bounded original source probe
+on:
+  push:
+    branches:
+      - feat/nih3d-live-probe-20261103
+    paths:
+      - 'scripts/nih3d-live-original-probe.mjs'
+      - '.github/workflows/atla-nih3d-live-original-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate probe script
+        run: node --check scripts/nih3d-live-original-probe.mjs
+      - name: Verify two public-domain originals against NIH source
+        run: node scripts/nih3d-live-original-probe.mjs
+      - name: Publish small verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-nih3d-original-probe
+          path: docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
+          retention-days: 1
+          if-no-files-found: warn
