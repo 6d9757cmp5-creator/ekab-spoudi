@@ -84,3 +84,24 @@ test("validate clips and drops malformed fields; prompt forbids dosing and guess
  assert.match(SYSTEM_PROMPT,/δοσολογίες/);assert.match(SYSTEM_PROMPT,/μην μαντέψεις/);
  assert.equal(buildMessages(v)[0].role,"system");
 });
+
+
+test("server blocks direct unsafe clinical requests before invoking any model",async()=>{
+ let called=false;
+ const env={MENTOR_FREE_PLAN_CONFIRMED:"true",AI:{run:async()=>{called=true;throw Error("should not run");}}};
+ for(const question of ["Ποια είναι η δοσολογία;","Έχω έναν ασθενή τώρα","Κάνε μου διάγνωση"]){
+  const r=await worker.fetch(req({},"POST",{...body,question}),env);
+  assert.equal(r.status,400,question);
+  assert.equal((await r.json()).error,"unsafe_request");
+ }
+ assert.equal(called,false);
+});
+
+test("worker returns no unvalidated stream bytes for invented citations or dosing",async()=>{
+ for(const unsafe of ["Ισχυρισμός χωρίς πηγές","Αβάσιμη απάντηση [T9]","Δώσε 12 mg [T1]"]){
+  const env={MENTOR_FREE_PLAN_CONFIRMED:"true",AI:{run:async()=>new Response("data: "+JSON.stringify({response:unsafe})+"\n\n").body}};
+  const r=await worker.fetch(req(),env);
+  assert.equal(r.status,503,unsafe);
+  assert.doesNotMatch(await r.text(),/Αβάσιμη|Ισχυρισμός|12 mg/);
+ }
+});
