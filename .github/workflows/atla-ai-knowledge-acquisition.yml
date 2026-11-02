@@ -35,7 +35,9 @@ jobs:
         run: |
           node --check tools/atla-ai/knowledge-refresh/pipeline.mjs
           node --check tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
-          node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs
+          node --check tools/atla-ai/knowledge-refresh/scientific-qa.mjs
+          node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs
+          node tools/atla-ai/knowledge-refresh/scientific-qa.mjs
   live-pubmed-probe:
     # Both live jobs use unauthenticated NCBI E-utilities; run them serially
     # so the independent per-process request pacing does not overlap in CI.
