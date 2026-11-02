@@ -1,5 +1,6 @@
 import { client, cloudFeatures } from './appwrite-client.js?app=27.1.68';
 import { Account } from './vendor/appwrite-29.1.0/account.js';
+import {STUDY_KEY,nextSchedule,localDayKey} from './services/recall/selector.mjs';
 
 const account = new Account(client);
 let user = null;
@@ -55,6 +56,11 @@ export function initAccountUI() {
 <details class="storage-advanced"><summary>Προχωρημένες επιλογές</summary><div class="advanced-content"><h3>Παλαιό αντίγραφο ΕΟΠΠΕΠ</h3><p class="small muted">Μόνο για παλαιότερα αρχεία προόδου v15–v19.</p><div class="file-select"><input id="restore" type="file" accept=".json,application/json" aria-label="Επιλογή παλαιού αντιγράφου ΕΟΠΠΕΠ"><label class="btn compact secondary" for="restore">Επιλογή παλαιού JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div><p class="small muted" id="restoreNotice" role="status" aria-live="polite"></p><div class="reset-progress"><h3>Επαναφορά προόδου ανά ενότητα</h3><p>Διάλεξε τι θέλεις να μηδενίσεις. Τα προσωπικά PDF, ο λογαριασμός και οι ρυθμίσεις σύνδεσης δεν διαγράφονται.</p>
 <div class="actions"><button class="btn compact danger-button" data-reset-scope="eoppep" type="button">Μηδενισμός ΕΟΠΠΕΠ</button><button class="btn compact danger-button" data-reset-scope="saek" type="button">Μηδενισμός ΣΑΕΚ</button><button class="btn compact danger-button" data-reset-scope="seminar:bls" type="button">Μηδενισμός BLS/AED</button><button class="btn compact danger-button" data-reset-scope="seminar:pbls" type="button">Μηδενισμός PBLS</button><button class="btn compact danger-button" data-reset-scope="seminar:ils" type="button">Μηδενισμός ILS</button><button class="btn compact danger-button" data-reset-scope="seminar:phtls" type="button">Μηδενισμός PHTLS</button><button class="btn compact danger-button" data-reset-scope="seminar:als" type="button">Μηδενισμός ALS</button></div><p class="small muted" data-reset-notice role="status" aria-live="polite"></p></div></div></details>
 </div></details>
+    <details class="fold atlas-recall-settings"><summary>Υπενθυμίσεις επανάληψης ATLAS</summary><div class="body">
+      <p class="small muted" data-atlas-recall-status role="status" aria-live="polite"></p>
+      <button class="btn compact secondary" type="button" data-atlas-recall-toggle>Παύση υπενθυμίσεων</button>
+      <p class="small muted">Αυτόματες ερωτήσεις μόνο από διαβασμένη ύλη, χωρίς μόνιμο κουμπί στις σελίδες.</p>
+    </div></details>
     <p class="account-local-note">Η τοπική αποθήκευση παραμένει ενεργή. Ο συγχρονισμός ενεργοποιείται ξεχωριστά σε κάθε συσκευή και συνεχίζει όταν επιστρέψει το internet.</p>
     <p class="small muted" data-appwrite-status role="status" aria-live="polite"></p>
   </div>`;
@@ -62,6 +68,40 @@ export function initAccountUI() {
   const message = dialog.querySelector('[data-account-message]');
   const login = dialog.querySelector('[data-google-login]');
   const logout = dialog.querySelector('[data-account-logout]');
+  const recallToggle=dialog.querySelector('[data-atlas-recall-toggle]');
+  const recallStatus=dialog.querySelector('[data-atlas-recall-status]');
+  function recallSettings(){
+    try {
+      const item=localStorage.getItem(STUDY_KEY);
+      if(!item)return null;
+      const parsed=JSON.parse(item);
+      return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:null;
+    }catch{return null}
+  }
+  function paintRecallSettings(){
+    const paused=recallSettings()?.enabled===false;
+    recallToggle.textContent=paused?'Επανενεργοποίηση υπενθυμίσεων':'Παύση υπενθυμίσεων';
+    recallStatus.textContent=paused?'Οι αυτόματες ερωτήσεις είναι σε παύση στη συσκευή.':
+      'Οι αυτόματες ερωτήσεις είναι ενεργές, εφόσον έχεις ήδη διαβάσει κεφάλαια ΣΑΕΚ.';
+  }
+  recallToggle.addEventListener('click',()=>{
+    const current=recallSettings()||{day:localDayKey(Date.now()),shownToday:0,nextAt:0};
+    const shouldEnable=current.enabled===false;
+    current.enabled=shouldEnable;
+    if(shouldEnable){
+      // Resume on a randomized future deadline, not an immediate pop-up.
+      current.nextAt=nextSchedule(Date.now());
+      if(current.day!==localDayKey(Date.now())){current.day=localDayKey(Date.now());current.shownToday=0}
+    }
+    try{
+      localStorage.setItem(STUDY_KEY,JSON.stringify(current));
+      window.dispatchEvent(new Event('ekab:recall-settings-changed'));
+      paintRecallSettings();
+    }catch{
+      recallStatus.textContent='Η ρύθμιση δεν αποθηκεύτηκε στη συσκευή. Έλεγξε την αποθήκευση του browser.';
+    }
+  });
+
   async function attachSync() {
     if(!user||!cloudFeatures.sync||syncManager)return;
     const panel=dialog.querySelector('[data-cloud-controls]');panel.hidden=false;
@@ -83,6 +123,7 @@ export function initAccountUI() {
   }
   trigger.addEventListener('click', () => {
     paint();
+    paintRecallSettings();
     const version=window.EkabUpdates?.version;
     if(version)dialog.querySelector('#currentAppVersion').textContent='v'+version;
     dialog.showModal();
