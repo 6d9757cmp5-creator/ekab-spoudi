@@ -1,7 +1,7 @@
 name: ATLA Full BodyParts3D Atlases 4.0 and 4.3
 on:
   push:
-    branches: [feature/atla-bp3d43-local-full-atlas-20261103]
+    branches: [main]
     paths:
       - '.github/workflows/atla-bp3d43-local-atlas-check.yml'
       - 'scripts/verify-atla-full-atlas*.mjs'
