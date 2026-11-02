@@ -48,6 +48,9 @@ export async function getAbstract(pmid,fetcher=fetch){
  if(!/^\d{1,10}$/.test(String(pmid)))return '';
  const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi');
  for(const [k,v] of Object.entries({db:'pubmed',id:String(pmid),retmode:'xml'}))url.searchParams.set(k,v);
+ // EFetch shares NCBI's unauthenticated 3-requests/second ceiling with
+ // ESearch/ESummary. Pace consecutive abstract fetches as well as searches.
+ await new Promise(resolve=>setTimeout(resolve,420));
  try{
   const r=await fetcher(url.toString(),{headers:{accept:'application/xml','user-agent':'ATLA-Evidence-Triage/1.0'},signal:AbortSignal.timeout(12000)});
   if(!r.ok)return '';
