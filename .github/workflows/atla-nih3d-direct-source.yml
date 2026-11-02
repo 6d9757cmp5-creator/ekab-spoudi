@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - feat/nih3d-source-on-demand-20261103
+      - feat/nih3d-browser-cors-check-20261103
     paths:
       - 'tools/atla-ai/nih3d-original-source-gateway.mjs'
       - 'scripts/verify-nih3d-direct-source.mjs'
@@ -25,6 +26,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
+          sparse-checkout: |
+            scripts/verify-nih3d-direct-source.mjs
+            scripts/verify-nih3d-direct-source.test.mjs
+            tools/atla-ai/nih3d-original-source-gateway.mjs
+            tools/atla-ai/resources/nih3d-master-plan-2026/
+            docs/ATLA_NIH3D_DIRECT_SOURCE_STATUS_2026.json
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

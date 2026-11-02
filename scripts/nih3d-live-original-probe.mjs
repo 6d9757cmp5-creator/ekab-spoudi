@@ -6,6 +6,7 @@ import {dirname} from 'node:path';
 
 const base='tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json';
 const output='docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json';
+const origin='https://6d9757cmp5-creator.github.io';
 const parsed=JSON.parse(await readFile(base,'utf8'));
 const wanted=[{id:12,format:'GLB'},{id:170,format:'STL'}];
 const record={schemaVersion:1,scope:'TWO_REAL_NIH_ORIGINAL_SOURCE_FILES',binaryArchiveComplete:false,
@@ -18,9 +19,11 @@ for(const target of wanted){
  if(!asset)throw Error('Missing bounded source fixture for NIH entry '+target.id);
  const probe={accession:e.accession,title:e.title,format:target.format,sourceUrl:asset.url,
   catalogBytes:Number(asset.size),actualBytes:null,sha256:null,httpStatus:null,
-  formatValidated:false,status:'FAILED',error:null};
+  formatValidated:false,status:'FAILED',error:null,corsAllowOrigin:null,browserCrossOriginAllowed:false};
  try{
-  const res=await fetch(asset.url,{headers:{Accept:'application/octet-stream'},signal:AbortSignal.timeout(30000)});
+  const res=await fetch(asset.url,{headers:{Accept:'application/octet-stream',Origin:origin},signal:AbortSignal.timeout(30000)});
+  probe.corsAllowOrigin=res.headers.get('access-control-allow-origin');
+  probe.browserCrossOriginAllowed=probe.corsAllowOrigin==='*'||probe.corsAllowOrigin===origin;
   probe.httpStatus=res.status;
   if(!res.ok)throw Error('Original source HTTP '+res.status);
   let length=0;
@@ -45,6 +48,15 @@ for(const target of wanted){
  }catch(error){probe.error=String(error.message??error).slice(0,240);}
  record.tests.push(probe);
 }
+record.liveMetadata=null;
+try{
+ const response=await fetch('https://3d.nih.gov/api/entries/10',{headers:{Accept:'application/json',Origin:origin},signal:AbortSignal.timeout(30000)});
+ const allow=response.headers.get('access-control-allow-origin');
+ const metadata={httpStatus:response.status,corsAllowOrigin:allow,browserCrossOriginAllowed:allow==='*'||allow===origin,publishedSubmissionFound:false,error:null};
+ if(response.ok){const data=await response.json();metadata.publishedSubmissionFound=(data.submissions??[]).some(s=>String(s.submissionStatus).toLowerCase()==='published');}
+ else metadata.error='NIH API HTTP '+response.status;
+ record.liveMetadata=metadata;
+}catch(error){record.liveMetadata={error:String(error.message??error),browserCrossOriginAllowed:false};}
 record.successful=record.tests.filter(x=>x.formatValidated).length;
 record.failures=record.tests.filter(x=>!x.formatValidated).length;
 await mkdir(dirname(output),{recursive:true});
