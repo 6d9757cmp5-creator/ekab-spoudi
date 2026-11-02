@@ -68,6 +68,7 @@ jobs:
           node scripts/nih3d-ghcr-full-anatomy.mjs verify
           digest="$(docker image inspect "$IMAGE:$TAG" --format '{{index .RepoDigests 0}}')"
           export NIH_GHCR_IMAGE_DIGEST="$digest"
+          mkdir -p docs
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           import assert from 'node:assert/strict';
