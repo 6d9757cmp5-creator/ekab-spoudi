@@ -91,7 +91,10 @@ export function validateOutput(report){
  for(const x of report.items){
   if(x.status!=='pending-independent-scientific-review'||x.full_text_stored!==false||
    x.clinical_approval!==false||x.atla_ai_retrieval_enabled!==false||x.learner_visible!==false||
-   x.assessment?.clinical_approval===true||x.assessment?.atla_ai_retrieval_enabled===true)
+   (x.assessment!=null&&(
+    x.assessment.clinical_approval!==false||x.assessment.atla_ai_retrieval_enabled!==false||
+    x.assessment.learner_visible!==false||x.assessment.ai_assessment_unverified!==true||
+    x.assessment.independent_clinical_review!=='required')))
    throw Error('unsafe-research-publication');
  }
  return true;
