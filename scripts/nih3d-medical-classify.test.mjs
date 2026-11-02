@@ -31,6 +31,22 @@ try{
  assert.equal(labels[6].decision,'manual_review');
  assert.equal(labels[7].decision,'medical_candidate');
  assert(labels.every(x=>x.reviewRequired&&x.contextualSelectionRequired));
+ const molecularCases=[
+  {title:'Human mitochondrial enzyme complex',category:'Biomacromolecules'},
+  {title:'Human bone morphogenetic protein',category:'Biomacromolecules'},
+  {title:'SOLUTION STRUCTURE OF OXIDIZED HORSE HEART CYTOCHROME C',category:'Biomacromolecules'},
+  {title:'Human cell membrane receptor',category:'Cells and Organelles'}
+ ];
+ for(const entry of molecularCases){
+  const result=classifyEntry(entry);
+  assert.equal(result.decision,'manual_review','Biomedical molecules must not be treated as validated macroscopic anatomy');
+  assert(result.reviewRequired);
+ }
+ const patella=classifyEntry({title:'Human patella',category:'Anatomy'});
+ assert.equal(patella.decision,'medical_candidate');
+ assert(patella.topics.includes('anatomy'));
+ assert.equal(classifyEntry({title:'Body camera mount',category:'Devices and Hardware'}).decision,'non_medical_candidate');
+
  assert.deepEqual(extractEntries({items}),items);
  assert.deepEqual(extractEntries({entries:items}),items);
  assert.deepEqual(extractEntries(items),items);

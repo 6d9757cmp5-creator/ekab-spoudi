@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const RULES=[
- ['anatomy',/\b(anatom\w*|human|body|skeleton|bone|bones|muscle|arter\w*|vein\w*|nerve\w*|organ|organs|tissue|cranial|spine|vertebr\w*|skull|pelvis|femur)\b/i],
+ ['anatomy',/\b(anatom\w*|skeleton|bone|bones|muscle|arter\w*|vein\w*|nerve\w*|organ|organs|tissue|cranial|spine|vertebr\w*|skull|pelvis|femur|patella|tibia|fibula|humerus|clavicle|scapula|sternum|cartilage|ligament|tendon)\b/i],
  ['cardiovascular',/\b(cardi\w*|heart|coronar\w*|vascular|aorta|ventric\w*|atri\w*|myocard\w*|electrocard\w*)\b/i],
  ['respiratory',/\b(lung|lungs|bronch\w*|trache\w*|alveol\w*|airway|respirat\w*|pulmon\w*)\b/i],
  ['neurology',/\b(brain|neuro\w*|cerebr\w*|spinal|stroke|neuron\w*|encephal\w*)\b/i],
@@ -23,7 +23,8 @@ export function classifyEntry(e){
  const title=clean(e.title??e.name).trim(),category=clean(e.category).trim(),cat=category.toLowerCase();
  const detail=[e.title,e.name,e.description,e.summary,e.tags,e.keywords].map(clean).join(' ');
  const topics=RULES.filter(([,re])=>re.test(detail)).map(([topic])=>topic);
- const direct=cat==='anatomy'||topics.some(x=>STRONG.has(x));
+ // 'human' and 'body' alone are not anatomy evidence: molecular structures also carry those words.
+ const direct=cat==='anatomy'||(!BIO.has(cat)&&topics.some(x=>STRONG.has(x)));
  const bio=BIO.has(cat)||topics.includes('molecular-medicine')||topics.includes('microbiology');
  const decision=direct?'medical_candidate':bio?'manual_review':cat==='devices and hardware'?'non_medical_candidate':'manual_review';
  const originalLicense=e.license??e.licenseRaw??null;
