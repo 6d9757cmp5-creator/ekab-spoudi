@@ -44,6 +44,11 @@ small{color:#b0c7d7}
 <section class="card" aria-label="Πηγαία μοντέλα">
 <h2>Επιλογή μοντέλου</h2>
 <p id="source-count" role="status">Ανάκτηση μητρώου…</p>
+<label for="source-dataset">Συλλογή</label>
+<select id="source-dataset" aria-describedby="source-warning">
+  <option value="primary">Βασική επαληθευμένη συλλογή GLB</option>
+  <option value="secondary">Πρόσθετα μοντέλα — περιορισμένη χρήση</option>
+</select>
 <label for="source-model">Μοντέλο</label>
 <select id="source-model" aria-describedby="source-warning"></select>
 <button id="source-load" type="button" disabled>Φόρτωση επιλεγμένου 3D</button>
@@ -56,6 +61,7 @@ small{color:#b0c7d7}
 </section>
 </div>
 <p id="source-warning" role="note">Οι πόροι δεν αποτελούν κλινικά επικυρωμένη προσομοίωση.</p>
+<p><small>Τα 5 Z-Anatomy παραμένουν σε απομονωμένη ερευνητική προβολή. Οι 3 ήδη υπάρχοντες στατικοί ασθενείς του Cockpit εμφανίζονται ως 3D assets και όχι ως νέοι rigged ασθενείς. Τα MakeHuman είναι πηγές γεωμετρίας/rig, όχι έτοιμα GLB. Οι πλήρεις BodyParts3D 4.0/4.3 άτλαντες διατηρούνται στο Anatomy Lab ως ξεχωριστά δεδομένα υψηλής ανάλυσης· δεν φορτώνονται εδώ ως GLB.</small></p>
 <p><small>Δεν τροποποιούνται η μαθησιακή πρόοδος, οι εξετάσεις, ο κανονικός 3D άτλας ή οι κλινικές σκηνές. Το NIH 3D χρειάζεται ξεχωριστή επαλήθευση και αντιστοίχιση πριν γίνει διαθέσιμο εδώ.</small></p>
 </main>
 </body></html>
