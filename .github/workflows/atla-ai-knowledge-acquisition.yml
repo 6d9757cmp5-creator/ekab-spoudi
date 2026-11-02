@@ -96,7 +96,8 @@ jobs:
             echo "No changes to research review queue"
           else
             git commit -m "chore(atla): update isolated research candidates"
-            git pull --rebase origin main
+            # Fail closed if main advanced after verification; never rebase unverified code.
+            # The next approved scheduled run can retry against a fresh checkout.
             git push origin HEAD:main
           fi
       - name: Research evidence review artifact
