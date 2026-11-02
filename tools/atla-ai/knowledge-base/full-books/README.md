@@ -20,9 +20,9 @@
 | 5 | Health Alterations | 1.664 |
 | 6 | Nursing: Mental Health and Community Concepts, 2e | 1.476 |
 | 7 | Nursing Health Promotion | 2.862 |
-| 8 | Medical Terminology, 2e | 570 |
-| 9 | Nursing Skills, 2e | 1.814 |
-| 10 | Cell and Molecular Biology: What We Know & How We Found Out, 5e | 636 |
+| 8 | Medical Terminology, 2e | 996 |
+| 9 | Nursing Skills, 2e | 1.432 |
+| 10 | Cell and Molecular Biology: What We Know & How We Found Out, 5e | 592 |
 | **Σύνολο** | **10 πλήρη PDFs** | **12.641** |
 
 Οι τίτλοι, εκδότες, άδειες, ακριβείς σύνδεσμοι και αποδείξεις SHA-256 είναι καταγεγραμμένα στο [catalog](catalog.json) και στο [archive manifest](archive-manifest.json). Αρχειοθέτηση επιτρεπόμενων πρωτοτύπων και απόδοση δημιουργού δεν ισοδυναμούν με ανεξάρτητη ιατρική επικύρωση για την Ελλάδα.
