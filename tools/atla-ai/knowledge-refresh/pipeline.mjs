@@ -33,7 +33,7 @@ export function extractMatchingAbstract(xml,pmid){
  const citation=article.match(/<MedlineCitation(?:\s[^>]*)?>([\s\S]*?)<\/MedlineCitation>/i)?.[1]||'';
  const id=citation.match(/<PMID(?:\s[^>]*)?>(\d{1,10})<\/PMID>/i)?.[1]||'';
  if(id!==String(pmid))return '';
- if(/<CommentsCorrections\b[^>]*RefType\s*=\s*["'](?:RetractionIn|ExpressionOfConcernIn|RetractionOf)["']/i.test(article))return '';
+ if(/<CommentsCorrections\b[^>]*RefType\s*=\s*["'](?:RetractionIn|RetractionOf|ExpressionOfConcernIn|ExpressionOfConcernFor)["']/i.test(article))return '';
  if(/<PublicationType(?:\s[^>]*)?>\s*(?:Retracted Publication|Retraction of Publication|Expression of Concern)\s*<\/PublicationType>/i.test(article))return '';
  return extractAbstract(citation);
 }
