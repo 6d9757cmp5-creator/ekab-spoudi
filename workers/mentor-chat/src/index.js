@@ -5,6 +5,7 @@ import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
 import {ATLA_RUNTIME_RULES,teachingApproach} from '../../../atla/ai/teaching-policy.mjs';
 import {collectAndAuditAiStream,verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
+import {riskGuard} from '../../../atla/knowledge/retrieve.mjs';
 export {MentorBudget};
 const MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/meta/llama-3.1-8b-instruct-fp8-fast','@cf/google/gemma-4-26b-a4b-it'];
 const LEVELS=['beginner','student','advanced','scientific'];
@@ -102,6 +103,8 @@ export default {
   let body;
   try{if(Number(request.headers.get('content-length')||0)>8000)return json({error:'too_large'},413,headers);body=validate(await request.json());}catch{body=null;}
   if(!body)return json({error:'bad_request'},400,headers);
+  // The client also guards risky questions, but API callers must not bypass it.
+  if(riskGuard(body.question).blocked)return json({error:'unsafe_request'},400,headers);
   if(!body.passages.length)return json({answer:'Δεν έχω τεκμηριωμένη πηγή για αυτή την ερώτηση στη βιβλιοθήκη μου.'},200,headers);
   if(claude)return answerWithClaude(request,env,body,headers);  if(limited(request.headers.get('cf-connecting-ip')||'unknown',env))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
   const model=MODELS.includes(env.MENTOR_MODEL)?env.MENTOR_MODEL:MODELS[0];
