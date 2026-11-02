@@ -31,10 +31,17 @@ jobs:
       - name: Retrieve actual per-range manifests from the permanent GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: atla-nih3d-master-2026
+          BASE_TAG: atla-nih3d-master-2026
         run: |
+          set -euo pipefail
           mkdir -p tmp/nih3d-reports
-          gh release download "$TAG" --pattern '*-RESULT.json' --dir tmp/nih3d-reports
+          # Read both the historical Release and all canonical per-shard Releases.
+          # GitHub's 1000-assets-per-Release cap makes one Release insufficient.
+          gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" --jq '.[] | select(.tag_name == "atla-nih3d-master-2026" or (.tag_name | startswith("atla-nih3d-master-2026-shard-"))) | .tag_name' |
+            while IFS= read -r release_tag; do
+              gh release download "$release_tag" --pattern '*-RESULT.json' --dir tmp/nih3d-reports --clobber
+            done
+          test "$(find tmp/nih3d-reports -maxdepth 1 -name '*-RESULT.json' | wc -l)" -gt 0
       - name: Reconcile NIH public metadata with real released packages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
