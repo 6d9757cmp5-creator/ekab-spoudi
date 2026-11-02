@@ -31,7 +31,8 @@ async function chromiumOffline(){
  try{
   const context=await browser.newContext({viewport:{width:390,height:844}});
   let page=await context.newPage();
-  await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
+  // Use a page without updates.js to avoid auto-reload while service worker activates.
+  await page.goto(base+'saek-images.html',{waitUntil:'domcontentloaded'});
   const result=await page.evaluate(async()=>{
    if(!('serviceWorker' in navigator))return 'missing api';
    const reg=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});
@@ -39,7 +40,16 @@ async function chromiumOffline(){
    if(!navigator.serviceWorker.controller){
     await new Promise(resolve=>navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true}));
    }
-   return reg.active?.state||'missing active worker';
+   if(reg.active?.state!=='activated'){
+    await new Promise(resolve=>{
+     const active=reg.active;
+     if(!active||active.state==='activated')return resolve();
+     active.addEventListener('statechange',()=>{
+      if(active.state==='activated')resolve();
+     });
+    });
+   }
+   return navigator.serviceWorker.controller&&reg.active?.state==='activated'?'activated':'not controlled';
   });
   assert.equal(result,'activated','real service worker must activate on local host');
   // updates.js reloads its original tab on controllerchange; start with a fresh tab.
