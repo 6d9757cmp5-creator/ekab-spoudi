@@ -1,0 +1,109 @@
+name: ATLA AI knowledge acquisition (review-gated)
+on:
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'tools/atla-ai/knowledge-refresh/**'
+      - '.github/workflows/atla-ai-knowledge-acquisition.yml'
+permissions:
+  contents: read
+concurrency:
+  group: atla-ai-knowledge-acquisition-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Deterministic discovery and AI research gate tests
+        run: |
+          node --check tools/atla-ai/knowledge-refresh/pipeline.mjs
+          node --check tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
+          node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs
+  live-pubmed-probe:
+    needs: verify
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify real NCBI PubMed search and matched PMID abstracts (read-only)
+        run: node tools/atla-ai/knowledge-refresh/live-pubmed-probe.mjs
+
+  live-full-discovery:
+    needs: verify
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Full curated sources and PubMed discovery - no AI credits, no writes
+        run: node tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
+
+  acquire:
+    needs: verify
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    permissions:
+      contents: write
+    env:
+      ATLA_RESEARCH_AI_ENABLED: ${{ vars.ATLA_RESEARCH_AI_ENABLED }}
+      ATLA_RESEARCH_SPENDING_APPROVED: ${{ vars.ATLA_RESEARCH_SPENDING_APPROVED }}
+      ATLA_RESEARCH_ANTHROPIC_API_KEY: ${{ secrets.ATLA_RESEARCH_ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Curated source discovery and AI evidence triage (review queue only)
+        run: node tools/atla-ai/knowledge-refresh/pipeline.mjs
+      - name: Reject any automatic clinical publication
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import {validateOutput} from './tools/atla-ai/knowledge-refresh/pipeline.mjs';
+          const path='tools/atla-ai/knowledge-refresh/queue/';
+          const r=JSON.parse(readFileSync(path+'ai-research-review.json','utf8'));
+          const s=JSON.parse(readFileSync(path+'last-scan.json','utf8'));
+          validateOutput(r);
+          if(s.clinical_retrieval_updated!==false||s.full_texts_imported!==0||r.clinical_knowledge_imported!==0||r.existing_curriculum_changed!==false)throw Error('unsafe-knowledge-publication');
+          NODE
+      - name: Commit isolated review queue only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/atla-ai/knowledge-refresh/queue/
+          if git diff --cached --quiet; then
+            echo "No changes to research review queue"
+          else
+            git commit -m "chore(atla): update isolated research candidates"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Research evidence review artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-ai-research-review
+          path: tools/atla-ai/knowledge-refresh/queue/
+          if-no-files-found: ignore
+          retention-days: 14
