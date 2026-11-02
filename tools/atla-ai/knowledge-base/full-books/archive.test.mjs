@@ -4,13 +4,17 @@ import {readFile} from 'node:fs/promises';
 import {isAllowedSource,validateSource} from './archive.mjs';
 
 const catalog=JSON.parse(await readFile(new URL('./catalog.json',import.meta.url),'utf8'));
-test('ten academically sourced full book candidates, not yet falsely archived',()=>{
+test('ten academically sourced full book candidates and byte-verified archived count',async()=>{
  assert.equal(catalog.schema_version,1);
  assert.equal(catalog.book_count,10);
  assert.equal(catalog.books.length,10);
- assert.equal(catalog.verified_full_books_persisted,0);
+ const report=JSON.parse(await readFile(new URL('./archive-manifest.json',import.meta.url),'utf8'));
+ assert.equal(catalog.verified_full_books_persisted,report.complete_verified);
+ assert.equal(report.books.length,report.complete_verified);
+ assert.ok(report.complete_verified>=7&&report.complete_verified<=10);
+ assert.equal(report.scientific_approval,false);
  assert.equal(new Set(catalog.books.map(x=>x.id)).size,10);
- assert.equal(catalog.books.filter(x=>x.full_book_archival_requested).length,9);
+ assert.equal(catalog.books.filter(x=>x.full_book_archival_requested).length,10);
  assert.ok(catalog.books.some(x=>x.id==='uwm-cell-molecular-biology-5e'));
  assert.ok(catalog.books.every(x=>x.content_status==='NOT_YET_ARCHIVED'&&x.atla_ai_retrieval_enabled===false));
 });
@@ -38,8 +42,9 @@ test('each official PDF is version linked and the complete object is expected',(
   if(x.full_book_archival_requested)assert.doesNotThrow(()=>validateSource(x));
  }
 });
-test('do not automatically archive an enormous textbook in initial collection',()=>{
+test('the full original Nursing Skills textbook is included without pretending it is stored',()=>{
  const large=catalog.books.find(x=>x.source_id==='NBK596735');
- assert.equal(large.full_book_archival_requested,false);
+ assert.equal(large.full_book_archival_requested,true);
+ assert.match(large.official_pdf,/^https:\/\/www.ncbi.nlm.nih.gov\/sites\/books\/NBK596735\/pdf\//);
  assert.equal(large.content_status,'NOT_YET_ARCHIVED');
 });

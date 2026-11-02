@@ -17,8 +17,8 @@ const HERE=dirname(fileURLToPath(import.meta.url));
 const CATALOG=join(HERE,'catalog.json');
 const ARCHIVED=join(HERE,'archive-manifest.json');
 const STORAGE=join(HERE,'complete');
-const MAX_BOOK=160*1024*1024;
-const MAX_TOTAL=450*1024*1024;
+const MAX_BOOK=560*1024*1024; // 449M Nursing Skills 2e must fit intact
+const MAX_TOTAL=1300*1024*1024; // capped complete archive including seven existing books
 const SHARD_BYTES=16*1024*1024;
 const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu','minds.wisc.edu','wtcs.pressbooks.pub']);
 const sha=data=>createHash('sha256').update(data).digest('hex');
@@ -37,7 +37,7 @@ async function redirectSafeFetch(uri,fetcher=fetch){
  let current=uri;
  for(let redirect=0;redirect<5;redirect++){
   if(!isAllowedSource(current))throw Error('Unapproved download destination');
-  const r=await fetcher(current,{redirect:'manual',signal:AbortSignal.timeout(150000),
+  const r=await fetcher(current,{redirect:'manual',signal:AbortSignal.timeout(1200000),
     headers:{'user-agent':'ATLA-OER-Archiver/1.0 (full-book licensed archival; contact repository maintainer)','accept':'application/pdf'}});
   if([301,302,303,307,308].includes(r.status)){
    const target=new URL(r.headers.get('location')||'',current).toString();
@@ -168,6 +168,11 @@ export async function main(){
   clinical_retrieval_enabled:false,scientific_approval:false,
   books:results,failures};
  await writeFile(ARCHIVED,JSON.stringify(report,null,2)+'\n');
+ // Keep summary count synchronized with byte-verified persisted manifest.
+ // This is a metadata counter, NOT scientific or learner-content approval.
+ catalog.verified_full_books_persisted=report.complete_verified;
+ catalog.automatic_archival_candidates=eligible.length;
+ await writeFile(CATALOG,JSON.stringify(catalog,null,2)+'\n');
  console.log(JSON.stringify({catalog_count:report.catalog_count,attempted:report.attempted,
    verified:report.complete_verified,bytes:budget,failed:failures,scientific_approval:false},null,2));
 }

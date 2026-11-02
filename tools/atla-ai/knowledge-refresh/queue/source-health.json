@@ -1,0 +1,781 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-02T09:28:46.857Z",
+  "sources": [
+    {
+      "url": "https://cdn.who.int/media/docs/default-source/integrated-health-services-%28ihs%29/csy/prehospital/bap-syllabus-2025.pdf",
+      "title": "WHO Basic Ambulance Provider course syllabus",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-document-delivery",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"0x8DF08AD5ABD83E8\"",
+      "last_modified": "Wed, 02 Sep 2026 04:47:55 GMT",
+      "final_url": "https://cdn.who.int/media/docs/default-source/integrated-health-services-%28ihs%29/csy/prehospital/bap-syllabus-2025.pdf",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://costr.ilcor.org/about",
+      "title": "ILCOR Consensus on Science with Treatment Recommendations (CoSTR)",
+      "registry_ids": [
+        "global-official-evidence"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://costr.ilcor.org/about",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines",
+      "title": "American Heart Association CPR and Emergency Cardiovascular Care Guidelines",
+      "registry_ids": [
+        "global-official-evidence"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "http_status": 403,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines",
+      "reason": "HTTP 403",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "title": "Z-Anatomy — Models of Human Anatomy",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "technical-research-assets-not-clinical-guidance",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "W/\"2821ba99519e2b10434fffe6762df8c3\"",
+      "last_modified": "",
+      "final_url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://goldcopd.org/2026-gold-report-and-pocket-guide",
+      "title": "GOLD 2026 Report and Pocket Guide",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://kdigo.org/guidelines",
+      "title": "KDIGO Guidelines",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://naemt.org/education/medical-education/amls",
+      "title": "AMLS — Advanced Medical Life Support",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-prehospital-education",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://naemt.org/education/medical-education/amls",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "title": "Anatomy and Physiology 2e",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "open-educational-material",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "W/\"3200680cc290d790237f3722632f3fa8\"",
+      "last_modified": "Fri, 16 Oct 2026 23:31:39 GMT",
+      "final_url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://openstax.org/books/microbiology/pages/1-introduction",
+      "title": "Microbiology",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "open-educational-material",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "W/\"3069a032433419177578b3cd1dd9a9b0\"",
+      "last_modified": "Fri, 16 Oct 2026 23:25:15 GMT",
+      "final_url": "https://openstax.org/books/microbiology/pages/1-introduction",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://physionet.org/content/ptb-xl/1.0.3",
+      "title": "PTB-XL — 12-Lead ECG Database",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "technical-research-assets-not-clinical-guidance",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://professional.diabetes.org/standards-of-care",
+      "title": "ADA Standards of Care in Diabetes 2026",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Fri, 30 Oct 2026 13:24:07 GMT",
+      "final_url": "https://professional.diabetes.org/standards-of-care",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://shop.elsevier.com/books/guyton-and-hall-textbook-of-medical-physiology/hall/978-0-443-11101-3",
+      "title": "Guyton and Hall Textbook of Medical Physiology",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-textbook-publisher-metadata-only",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://shop.elsevier.com/books/guyton-and-hall-textbook-of-medical-physiology/hall/978-0-443-11101-3",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://shop.elsevier.com/books/robbins-cotran-and-kumar-pathologic-basis-of-disease/kumar/978-0-443-26452-8",
+      "title": "Robbins, Cotran & Kumar Pathologic Basis of Disease",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-textbook-publisher-metadata-only",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://shop.elsevier.com/books/robbins-cotran-and-kumar-pathologic-basis-of-disease/kumar/978-0-443-26452-8",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://wtcs.pressbooks.pub/anatphys",
+      "title": "General Anatomy & Physiology",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "open-educational-material",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://wtcs.pressbooks.pub/emergencymedtech",
+      "title": "Emergency Medical Responder",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "open-educational-material",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://wtcs.pressbooks.pub/nursingadvancedskills",
+      "title": "Nursing Advanced Skills",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "open-educational-material",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://www.acog.org/clinical",
+      "title": "ACOG Clinical Guidance",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.acog.org/clinical",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.cdc.gov/antibiotic-use/hcp/clinical-care/index.html",
+      "title": "CDC Outpatient Antibiotic Stewardship",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.cdc.gov/antibiotic-use/hcp/clinical-care/index.html",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.cochrane.org/evidence",
+      "title": "Cochrane — Our evidence (systematic reviews)",
+      "registry_ids": [
+        "global-official-evidence"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"1793605725-gzip\"",
+      "last_modified": "Mon, 02 Nov 2026 07:48:45 GMT",
+      "final_url": "https://www.cochrane.org/evidence",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.ecdc.europa.eu/en/publications-data",
+      "title": "ECDC — Public health scientific guidance",
+      "registry_ids": [
+        "global-official-evidence"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"1793611735\"",
+      "last_modified": "Mon, 02 Nov 2026 09:28:55 GMT",
+      "final_url": "https://www.ecdc.europa.eu/en/publications-data",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.ekab.gr/ekpedefsi/iek-ekav",
+      "title": "EKAB SAEK Study Guides",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "official-prehospital-education",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "fetch failed",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/medicines",
+      "title": "EMA Medicines Finder",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"1793572776\"",
+      "last_modified": "Sun, 01 Nov 2026 22:39:36 GMT",
+      "final_url": "https://www.ema.europa.eu/en/medicines",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.ems.gov/projects/ems-education-standards.html",
+      "title": "National EMS Education Standards",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "reason": "redirect-limit",
+      "signal": "unverified"
+    },
+    {
+      "url": "https://www.erc.edu/science-research/guidelines/guidelines-2025",
+      "title": "Guidelines 2025",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Mon, 02 Nov 2026 07:58:20 GMT",
+      "final_url": "https://www.erc.edu/science-research/guidelines/guidelines-2025",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines",
+      "title": "ESC Clinical Practice Guidelines",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.escardio.org/guidelines/clinical-practice-guidelines",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.hematology.org/education/clinicians/guidelines-and-quality-care/clinical-practice-guidelines",
+      "title": "ASH Clinical Practice Guidelines",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "W/\"reh4onghbi3rs7\"",
+      "last_modified": "",
+      "final_url": "https://www.hematology.org/resources/clinical-practice-guidelines",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.idsociety.org/PracticeGuidelines",
+      "title": "IDSA Clinical Practice Guidelines",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.idsociety.org/PracticeGuidelines",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.msdmanuals.com/professional",
+      "title": "MSD Manual — Professional Edition",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-textbook-publisher-metadata-only",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"656m9dn3qo4m0z\"",
+      "last_modified": "",
+      "final_url": "https://www.msdmanuals.com/professional",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.msdmanuals.com/professional/health-topics",
+      "title": "MSD Manual — Professional Edition",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-textbook-publisher-metadata-only",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"o6n15m272s3lav\"",
+      "last_modified": "",
+      "final_url": "https://www.msdmanuals.com/professional/health-topics",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.naemt.org/education/trauma-education/phtls",
+      "title": "PHTLS — Prehospital Trauma Life Support",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-prehospital-education",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.naemt.org/education/trauma-education/phtls",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK595000",
+      "title": "Open RN Nursing Pharmacology",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "academic-repository-unendorsed",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.ncbi.nlm.nih.gov/books/NBK595000",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK596735",
+      "title": "Open RN Nursing Skills",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "academic-repository-unendorsed",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.ncbi.nlm.nih.gov/books/NBK596735",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK613078",
+      "title": "Open RN Health Alterations",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "academic-repository-unendorsed",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.ncbi.nlm.nih.gov/books/NBK613078",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.nice.org.uk/guidance/published",
+      "title": "NICE Published Clinical Guidance",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "\"b6uabxkuez2ny1\"",
+      "last_modified": "",
+      "final_url": "https://www.nice.org.uk/guidance/published",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.psglearning.com/catalog/productdetails/9781284256789",
+      "title": "Nancy Caroline’s Emergency Care in the Streets",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-textbook-publisher-metadata-only",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.psglearning.com/pagenotfound",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/publications/9789240114067",
+      "title": "Prehospital Emergency Care — Operational Guidance for Ambulance Systems",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.who.int/publications/9789240114067",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/publications/b/82620",
+      "title": "Prehospital Emergency Care: Pocket Reference",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Thu, 29 Oct 2026 19:40:53 GMT",
+      "final_url": "https://www.who.int/publications/b/82620",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/publications/i/item/9789241513081",
+      "title": "Basic Emergency Care",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Mon, 02 Nov 2026 09:14:49 GMT",
+      "final_url": "https://www.who.int/publications/i/item/9789241513081",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/publications/who-guidelines",
+      "title": "WHO Guidelines — Guidelines Review Committee-approved publications",
+      "registry_ids": [
+        "global-official-evidence"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Sun, 01 Nov 2026 07:53:15 GMT",
+      "final_url": "https://www.who.int/publications/who-guidelines",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit",
+      "title": "Emergency Care Toolkit",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Thu, 29 Oct 2026 15:08:04 GMT",
+      "final_url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit",
+      "title": "WHO Prehospital Toolkit",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Thu, 29 Oct 2026 15:12:31 GMT",
+      "final_url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/tools/clinical-checklists",
+      "title": "WHO Emergency Care Checklists",
+      "registry_ids": [
+        "past-project-sources"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Thu, 29 Oct 2026 15:21:17 GMT",
+      "final_url": "https://www.who.int/tools/clinical-checklists",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.who.int/tools/triage",
+      "title": "Integrated Triage Tool",
+      "registry_ids": [
+        "books"
+      ],
+      "source_category": "official-health-guidelines",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": true,
+      "http_status": 200,
+      "etag": "",
+      "last_modified": "Sun, 01 Nov 2026 07:54:59 GMT",
+      "final_url": "https://www.who.int/tools/triage",
+      "reason": "",
+      "signal": "baseline"
+    },
+    {
+      "url": "https://www.wolterskluwer.com/en/solutions/lippincott-medicine/medical-education/lippincott-connect/bates-guide-to-physical-examination",
+      "title": "Bates’ Guide to Physical Examination and History Taking",
+      "registry_ids": [
+        "books",
+        "past-project-sources"
+      ],
+      "source_category": "official-textbook-publisher-metadata-only",
+      "evidence_status": "source-identity-curated-content-not-reviewed",
+      "clinical_approval": false,
+      "knowledge_ingestion_enabled": false,
+      "ok": false,
+      "http_status": 403,
+      "etag": "",
+      "last_modified": "",
+      "final_url": "https://www.wolterskluwer.com/en/solutions/lippincott-medicine/medical-education/lippincott-connect/bates-guide-to-physical-examination",
+      "reason": "HTTP 403",
+      "signal": "unverified"
+    }
+  ]
+}

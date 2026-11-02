@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-02T09:28:46.857Z",
+  "registries": [
+    {
+      "id": "books",
+      "entries": 28
+    },
+    {
+      "id": "past-project-sources",
+      "entries": 35
+    },
+    {
+      "id": "global-official-evidence",
+      "entries": 5
+    }
+  ],
+  "monitored_urls": 44,
+  "monitored_ok": 34,
+  "rejected_uncurated_sources": 5,
+  "monitored_by_source_category": {
+    "official-document-delivery": 1,
+    "official-health-guidelines": 24,
+    "technical-research-assets-not-clinical-guidance": 2,
+    "official-prehospital-education": 3,
+    "open-educational-material": 5,
+    "official-textbook-publisher-metadata-only": 6,
+    "academic-repository-unendorsed": 3
+  },
+  "possible_source_updates": 0,
+  "newly_discovered_papers": 15,
+  "pending_papers": 15,
+  "pubmed_failures": [],
+  "pubmed_excluded": [],
+  "source_quality_policy": "curated publishers plus per-paper evidence-type screening; no articles auto-approved",
+  "full_texts_imported": 0,
+  "model_training_performed": false,
+  "clinical_retrieval_updated": false,
+  "summary": "Scans detect candidates only; no medical/learner knowledge is published automatically."
+}

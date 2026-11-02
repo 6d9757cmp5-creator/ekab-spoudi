@@ -4,7 +4,7 @@
  * It never loads the former 30-card pack, calls AI, or writes grades/progress.
  */
 import {completedChapters,chooseChapter,canInterrupt,safeRoute,suitableRecall,nextSchedule,
- DAILY_LIMIT,AUTO_GAP_MS,STUDY_KEY,FEEDBACK_KEY} from './selector.mjs';
+ DAILY_LIMIT,STUDY_KEY,FEEDBACK_KEY,localDayKey} from './selector.mjs';
 
 const ROOT=new URL('../../',import.meta.url);
 if(!window.__ekabRecallInit)window.__ekabRecallInit=true,boot();
@@ -18,7 +18,7 @@ function boot(){
   set(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}}
  };
  const read=(key)=>{try{const t=store.get(key);return t&&t.length<40000?JSON.parse(t):null}catch{return null}};
- const settings=()=>{const s=read(STUDY_KEY);return s&&typeof s==='object'?s:{enabled:false,day:'',shownToday:0,nextAt:0}};
+ const settings=()=>{const s=read(STUDY_KEY);return s&&typeof s==='object'&&!Array.isArray(s)?s:{enabled:true,day:'',shownToday:0,nextAt:0};};
  const feedback=()=>{const f=read(FEEDBACK_KEY);return f&&typeof f==='object'&&!Array.isArray(f)?f:{}};
  const getCompleted=()=>{
   const entries=[];
@@ -28,24 +28,23 @@ function boot(){
   }}catch{}
   return completedChapters(entries);
  };
- const today=now=>new Date(now).toISOString().slice(0,10);
  const normalized=()=>{
-  const now=Date.now(),s=settings();if(s.day!==today(now)){s.day=today(now);s.shownToday=0;}
+  const now=Date.now(),s=settings();let changed=false;
+  if(s.day!==localDayKey(now)){s.day=localDayKey(now);s.shownToday=0;changed=true;}
+  // Existing explicit pause (enabled:false) is respected across the migration.
+  if(s.enabled===true&&(!Number.isFinite(s.nextAt)||s.nextAt<=0)&&getCompleted().length){
+   s.nextAt=nextSchedule(now);changed=true;
+  }
+  if(changed)store.set(STUDY_KEY,s);
   return s;
  };
  let lastActivity=Date.now(),showing=false,loading=false,card=null;
- const cache=new Map(),chip=$('button','atlas-recall-chip','🧠 Επανάληψη');
- chip.type='button';chip.hidden=true;chip.setAttribute('aria-controls','atlas-recall-window');
- chip.setAttribute('aria-label','Προαιρετικές ερωτήσεις επανάληψης ATLAS');
+ const cache=new Map();
  const panel=$('aside','atlas-recall-window');panel.id='atlas-recall-window';panel.hidden=true;
  panel.setAttribute('aria-label','Ερώτηση εκπαιδευτικής επανάληψης');panel.setAttribute('role','region');
  const hint=$('span','atlas-recall-hint');hint.hidden=true;hint.setAttribute('role','status');
- document.body.append(chip,panel,hint);
- function refresh(){
-  const n=getCompleted().length,s=normalized();
-  chip.hidden=n===0;chip.textContent=s.enabled?'🧠 Επανάληψη · '+n:'🧠 Ενεργοποίηση επανάληψης';
-  chip.title=s.enabled?'Δοκίμασε μία ερώτηση από διαβασμένο κεφάλαιο':'Ενεργοποίησε προαιρετικές υπενθυμίσεις από διαβασμένα κεφάλαια';
- }
+ document.body.append(panel,hint);
+ function refresh(){normalized();}
  function notice(msg){hint.textContent=msg;hint.hidden=false;setTimeout(()=>{hint.hidden=true},5500)}
  const action=(label,onClick,cls='')=>{const button=$('button',cls,label);button.type='button';button.addEventListener('click',onClick);return button};
  function close(){panel.hidden=true;panel.replaceChildren();showing=false;card=null;refresh();}
@@ -93,10 +92,9 @@ function boot(){
   if(document.querySelector('#study:not(.hidden),[data-atla-active-exam="true"]'))return true;
   return false;
  }
- async function show(manual=false){
+ async function show(){
   if(showing||loading||!getCompleted().length||!settings().enabled)return;
-  if(!manual&&(Date.now()-lastActivity<25000||blocked()))return;
-  if(manual&&document.querySelector('[aria-modal="true"]:not([hidden]),dialog[open]'))return;
+  if(Date.now()-lastActivity<25000||blocked())return;
   loading=true;
   const candidates=getCompleted(),tries=Math.min(8,candidates.length);
   let remaining=[...candidates],selected=null;
@@ -111,10 +109,9 @@ function boot(){
   finally{loading=false}
   if(!selected){const s=normalized();s.nextAt=Date.now()+15*60000;store.set(STUDY_KEY,s);return;}
   const s=normalized();
-  if(!manual){
-   if(s.shownToday>=DAILY_LIMIT)return;
-   s.shownToday++;s.nextAt=Date.now()+AUTO_GAP_MS;store.set(STUDY_KEY,s);
-  }
+  // Revalidate after the asynchronous chapter fetch, because the learner may have moved into an exam.
+  if(s.enabled!==true||s.shownToday>=DAILY_LIMIT||blocked())return;
+  s.shownToday++;s.nextAt=nextSchedule(Date.now(),Math.random,'repeat');store.set(STUDY_KEY,s);
   showing=true;card=selected;
   const head=$('div','atlas-recall-heading');
   head.append($('strong','','ATLAS · Μικρή επανάληψη'),action('✕',close,'atlas-recall-close'));
@@ -140,11 +137,6 @@ function boot(){
   panel.append(footer,$('p','atlas-recall-disclaimer','Ερώτηση από ήδη διαβασμένο κεφάλαιο. Χωρίς βαθμολογία ή κλινικές οδηγίες.'));
   panel.hidden=false;
  }
- chip.addEventListener('click',()=>{
-  const s=normalized();
-  if(!s.enabled){s.enabled=true;s.nextAt=nextSchedule(Date.now());store.set(STUDY_KEY,s);refresh();notice('Οι προαιρετικές υπενθυμίσεις ενεργοποιήθηκαν. Πάτησε ξανά για ερώτηση.');return;}
-  void show(true);
- });
  function check(){
   if(panel.hidden===false)return;
   refresh();
@@ -154,8 +146,10 @@ function boot(){
    idleMs:Date.now()-lastActivity,blocked:blocked()}))return;
   void show();
  }
- for(const ev of ['keydown','pointerdown','touchstart'])window.addEventListener(ev,()=>{lastActivity=Date.now()},{passive:true});
+ for(const ev of ['keydown','pointerdown','touchstart','wheel','scroll'])window.addEventListener(ev,()=>{lastActivity=Date.now()},{passive:true});
  window.addEventListener('ekab:progress-changed',refresh);
+ // Explicit event allows a chapter to trigger a safe eligibility recheck without waiting for polling.
+ window.addEventListener('ekab:recall-check',check);
  window.addEventListener('ekab:cloud-applied',refresh);
  window.addEventListener('storage',ev=>{if(ev.key===STUDY_KEY||ev.key===FEEDBACK_KEY||ev.key?.startsWith('ekab.saek.read.'))refresh()});
  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!panel.hidden)close()});

@@ -7,18 +7,18 @@
     "publishedWithSupported3D": 15685
   },
   "binary": {
-    "canonicalShards": 2,
+    "canonicalShards": 14,
     "totalShards": 250,
-    "sourceModelIds": 87,
-    "originalFiles": 3400,
-    "originalDownloadSha256Count": 3400,
-    "originalBytes": 90432044453,
-    "releasePackCount": 76,
-    "verifiedRemotePackBytes": 20051343268,
-    "publishedSourceModelsNotArchived": 15598,
+    "sourceModelIds": 969,
+    "originalFiles": 41517,
+    "originalDownloadSha256Count": 41517,
+    "originalBytes": 1079833116485,
+    "releasePackCount": 923,
+    "verifiedRemotePackBytes": 238665096936,
+    "publishedSourceModelsNotArchived": 14716,
     "failedFiles": 0,
     "sourceErrors": 0,
-    "missingOrUnpublishedNumericIds": 113
+    "missingOrUnpublishedNumericIds": 431
   },
   "overlappingPilotsExcluded": [
     {
@@ -26,21 +26,9 @@
       "end": 175
     }
   ],
-  "problemCount": 250,
+  "problemCount": 238,
   "problems": [
-    "Missing canonical atla-nih3d-00201-00300-RESULT.json",
-    "Missing canonical atla-nih3d-00301-00400-RESULT.json",
-    "Missing canonical atla-nih3d-00401-00500-RESULT.json",
-    "Missing canonical atla-nih3d-00501-00600-RESULT.json",
-    "Missing canonical atla-nih3d-00601-00700-RESULT.json",
-    "Missing canonical atla-nih3d-00701-00800-RESULT.json",
-    "Missing canonical atla-nih3d-00801-00900-RESULT.json",
-    "Missing canonical atla-nih3d-00901-01000-RESULT.json",
-    "Missing canonical atla-nih3d-01001-01100-RESULT.json",
-    "Missing canonical atla-nih3d-01101-01200-RESULT.json",
-    "Missing canonical atla-nih3d-01201-01300-RESULT.json",
     "Missing canonical atla-nih3d-01301-01400-RESULT.json",
-    "Missing canonical atla-nih3d-01401-01500-RESULT.json",
     "Missing canonical atla-nih3d-01501-01600-RESULT.json",
     "Missing canonical atla-nih3d-01601-01700-RESULT.json",
     "Missing canonical atla-nih3d-01701-01800-RESULT.json",
@@ -276,8 +264,8 @@
     "Missing canonical atla-nih3d-24701-24800-RESULT.json",
     "Missing canonical atla-nih3d-24801-24900-RESULT.json",
     "Missing canonical atla-nih3d-24901-25000-RESULT.json",
-    "Published NIH 3D entries without archived source model: 15598",
-    "Canonical shards 2/250"
+    "Published NIH 3D entries without archived source model: 14716",
+    "Canonical shards 14/250"
   ],
   "verificationLimit": "Checks release presence and byte sizes plus download-time source hashes; independent extraction and remote original-file SHA256 verification remains separate.",
   "release": "https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/atla-nih3d-master-2026"

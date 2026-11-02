@@ -5,15 +5,15 @@ State: **PARTIAL_OR_UNVERIFIED**. This reports actual source archives, not just 
 | Measure | Verified |
 |---|---:|
 | Published NIH entries | 15688 |
-| Canonical import groups | 2 / 250 |
-| NIH source models archived | 87 |
-| Original files and recorded SHA256 | 3400 |
-| Released archive packs | 76 |
-| Released archive bytes (size verified) | 20051343268 |
-| Published 3D entries not yet archived | 15598 |
+| Canonical import groups | 14 / 250 |
+| NIH source models archived | 969 |
+| Original files and recorded SHA256 | 41517 |
+| Released archive packs | 923 |
+| Released archive bytes (size verified) | 238665096936 |
+| Published 3D entries not yet archived | 14716 |
 | Failed downloads | 0 |
 | NIH metadata-refresh failures | 0 |
-| QA problems | 250 |
+| QA problems | 238 |
 
 Pilot ranges overlapping canonical ranges are excluded from counts.
 
@@ -21,19 +21,7 @@ Limits: Remote pack presence/size and original-file download-time SHA256 are che
 
 ## Open issues
 
-- Missing canonical atla-nih3d-00201-00300-RESULT.json
-- Missing canonical atla-nih3d-00301-00400-RESULT.json
-- Missing canonical atla-nih3d-00401-00500-RESULT.json
-- Missing canonical atla-nih3d-00501-00600-RESULT.json
-- Missing canonical atla-nih3d-00601-00700-RESULT.json
-- Missing canonical atla-nih3d-00701-00800-RESULT.json
-- Missing canonical atla-nih3d-00801-00900-RESULT.json
-- Missing canonical atla-nih3d-00901-01000-RESULT.json
-- Missing canonical atla-nih3d-01001-01100-RESULT.json
-- Missing canonical atla-nih3d-01101-01200-RESULT.json
-- Missing canonical atla-nih3d-01201-01300-RESULT.json
 - Missing canonical atla-nih3d-01301-01400-RESULT.json
-- Missing canonical atla-nih3d-01401-01500-RESULT.json
 - Missing canonical atla-nih3d-01501-01600-RESULT.json
 - Missing canonical atla-nih3d-01601-01700-RESULT.json
 - Missing canonical atla-nih3d-01701-01800-RESULT.json
@@ -269,7 +257,7 @@ Limits: Remote pack presence/size and original-file download-time SHA256 are che
 - Missing canonical atla-nih3d-24701-24800-RESULT.json
 - Missing canonical atla-nih3d-24801-24900-RESULT.json
 - Missing canonical atla-nih3d-24901-25000-RESULT.json
-- Published NIH 3D entries without archived source model: 15598
-- Canonical shards 2/250
+- Published NIH 3D entries without archived source model: 14716
+- Canonical shards 14/250
 
 [Archived lossless files](https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/atla-nih3d-master-2026)

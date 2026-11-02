@@ -4,8 +4,8 @@
   "last_verified_record_date": "2026-11-02",
   "source_policy": "Only licensed official full PDFs. Never ingest OpenStax into AI without separate written publisher permission. Retain third-party notices.",
   "book_count": 10,
-  "automatic_archival_candidates": 9,
-  "verified_full_books_persisted": 0,
+  "automatic_archival_candidates": 10,
+  "verified_full_books_persisted": 7,
   "books": [
     {
       "id": "open-rn-nbk610445",
@@ -176,11 +176,13 @@
       "license_url": "https://creativecommons.org/licenses/by/4.0/",
       "rights_scope": "Open RN publisher original with individual third-party notices retained; independent reuse review required before ATLA AI retrieval",
       "expected_format": "PDF",
-      "full_book_archival_requested": false,
+      "full_book_archival_requested": true,
       "content_status": "NOT_YET_ARCHIVED",
       "atla_ai_retrieval_enabled": false,
       "independent_clinical_review": "pending",
-      "attribution": "Open Resources for Nursing (Open RN), Chippewa Valley Technical College. Original PDF and notices retained."
+      "attribution": "Open Resources for Nursing (Open RN), Chippewa Valley Technical College. Original PDF and notices retained.",
+      "archival_priority": "complete-the-original-ten-full-books",
+      "storage_mode": "lossless-git-shards-16MiB"
     },
     {
       "id": "uwm-cell-molecular-biology-5e",
@@ -202,5 +204,6 @@
       "attribution": "Bergtrom, Gerald. Cell and Molecular Biology: What We Know & How We Found Out, 5e. University of Wisconsin-Milwaukee. CC BY."
     }
   ],
-  "previous_download_failure": "2026-11-02T00:51:03.947Z: NCBI /books/ download returned HTML; UWM redirected to official minds.wisc.edu. URLs changed to NCBI /sites/books and UWM final host for retry."
+  "previous_download_failure": "2026-11-02T00:51:03.947Z: NCBI /books/ download returned HTML; UWM redirected to official minds.wisc.edu. URLs changed to NCBI /sites/books and UWM final host for retry.",
+  "storage_policy": "Check PDF total bytes and repo storage budget before commit; preserve seven existing verified full PDFs; all 10 candidates are selected."
 }
