@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildWatchlist,mergeCandidates,discoverPubMed,signalFor,preserveProbeHistory,main,probeSource} from './scan.mjs';
+import {buildWatchlist,mergeCandidates,discoverPubMed,recheckPendingPubMed,signalFor,preserveProbeHistory,main,probeSource} from './scan.mjs';
 import {classifySource,screenPubMedArticle} from './source-policy.mjs';
 import {readFileSync} from 'node:fs';
 
@@ -12,10 +12,15 @@ function stub(url,options={}){
  if(options.method==='HEAD')return Promise.resolve(response({}));
  const u=new URL(String(url));
  if(u.pathname.endsWith('/esearch.fcgi'))return Promise.resolve(response({esearchresult:{idlist:['12345678','12345679']}}));
- if(u.pathname.endsWith('/esummary.fcgi'))return Promise.resolve(response({
-  result:{uids:['12345678','12345679'],12345678:{title:'Evidence-based prehospital training review',pubdate:'2026 Nov 01',source:'Research Journal',pubtype:['Systematic Review'],articleids:[{idtype:'doi',value:'10.1234/review'}]},
-   12345679:{title:'Resuscitation training systematic review',pubdate:'2026 Nov 02',source:'Evidence Review',pubtype:['Practice Guideline']}}
- }));
+ if(u.pathname.endsWith('/esummary.fcgi')){
+  const ids=(u.searchParams.get('id')||'').split(',').filter(Boolean);
+  const entries=Object.fromEntries(ids.map(id=>[id,{
+   title:id==='12345679'?'Resuscitation training systematic review':'Evidence-based prehospital training review',
+   pubdate:'2026 Nov 01',source:'Research Journal',pubtype:['Systematic Review'],
+   articleids:[{idtype:'doi',value:'10.1234/review'}]
+  }]));
+  return Promise.resolve(response({result:{uids:ids,...entries}}));
+ }
  throw Error('Unexpected endpoint '+u.pathname);
 }
 test('source watchlist deduplicates registries and rejects outside domains',()=>{
@@ -193,4 +198,27 @@ test('a newly disqualified PMID is removed from pending review, but network sile
  assert.equal(mergeCandidates(first.items,[],later,explicitlyExcluded).items.length,0);
  assert.equal(mergeCandidates(first.items,[item],later,explicitlyExcluded).items.length,0);
  assert.equal(mergeCandidates(first.items,[],later,[]).items.length,1);
+});
+
+test('previously queued PMID is rechecked and removed if PubMed now marks it retracted',async()=>{
+ const old=mergeCandidates([],[{pmid:'23456789',title:'Systematic review of training',
+  published_at:'2026 Nov 01',journal:'Science',publication_types:['Systematic Review'],
+  topic_id:'trauma'}],'2026-11-01T00:00:00Z').items[0];
+ const retracted=async()=>response({result:{uids:['23456789'],
+  23456789:{title:'Systematic review of training',pubdate:'2026 Nov 01',
+   source:'Science',pubtype:['Systematic Review','Retracted Publication']}}});
+ const checked=await recheckPendingPubMed([old],retracted);
+ assert.equal(checked.checked,1);
+ assert.equal(checked.found.length,0);
+ assert.equal(checked.excluded.length,1);
+ assert.equal(mergeCandidates([old],[], '2026-11-02T00:00:00Z',checked.excluded).items.length,0);
+});
+test('incomplete or unreachable PubMed recheck aborts instead of silently retaining stale evidence',async()=>{
+ const old=mergeCandidates([],[{pmid:'23456789',title:'Systematic review of training',
+  published_at:'2026 Nov 01',journal:'Science',publication_types:['Systematic Review'],
+  topic_id:'trauma'}],'2026-11-01T00:00:00Z').items[0];
+ await assert.rejects(()=>recheckPendingPubMed([old],async()=>response({result:{uids:[]}})),
+  /recheck-incomplete/);
+ await assert.rejects(()=>recheckPendingPubMed([old],async()=>({ok:false,status:503})),
+  /HTTP 503/);
 });
