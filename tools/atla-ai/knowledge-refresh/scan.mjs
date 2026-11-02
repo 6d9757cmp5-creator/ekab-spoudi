@@ -160,10 +160,24 @@ export async function discoverPubMed(fetcher=fetch){
 }
 export function signalFor(previous,probe){
  if(!probe?.ok)return 'unverified';
- if(!previous?.ok)return 'baseline';
- if(previous.last_modified&&probe.last_modified&&previous.last_modified!==probe.last_modified)return 'possible-source-update';
- if(previous.etag&&probe.etag&&previous.etag!==probe.etag)return 'possible-source-update';
+ // Compare with the last successful HTTP validators even after a transient
+ // 403/network outage. A failed probe is never evidence of a source update.
+ if(!previous?.ok&&!previous?.last_successful_probe)return 'baseline';
+ const lastModified=previous.last_successful_last_modified??previous.last_modified;
+ const etag=previous.last_successful_etag??previous.etag;
+ if(lastModified&&probe.last_modified&&lastModified!==probe.last_modified)return 'possible-source-update';
+ if(etag&&probe.etag&&etag!==probe.etag)return 'possible-source-update';
  return 'no-confirmed-change';
+}
+export function preserveProbeHistory(previous,probe){
+ // A failed probe stays failed/unverified; only its last known-good validators
+ // survive so a later recovery can still detect a genuine publisher change.
+ const successful=probe?.ok===true;
+ return {
+  last_successful_probe:successful||previous?.last_successful_probe===true||previous?.ok===true,
+  last_successful_etag:successful?(probe.etag||''):(previous?.last_successful_etag??(previous?.ok?previous.etag:''))||'',
+  last_successful_last_modified:successful?(probe.last_modified||''):(previous?.last_successful_last_modified??(previous?.ok?previous.last_modified:''))||''
+ };
 }
 export async function probeSource(source,fetcher=fetch){
  let url=source.url;
@@ -214,7 +228,8 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
   const batch=watchlist.slice(i,i+4);
   const reports=await Promise.all(batch.map(async source=>{
    const probe=await probeSource(source,fetcher);
-   return {...source,...probe,signal:signalFor(previousByUrl.get(source.url),probe)};
+   const prior=previousByUrl.get(source.url);
+   return {...source,...probe,...preserveProbeHistory(prior,probe),signal:signalFor(prior,probe)};
   }));
   sourceResults.push(...reports);
  }
