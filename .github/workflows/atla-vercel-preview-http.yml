@@ -1,4 +1,8 @@
-name: ATLA public Vercel preview smoke
+# This workflow checks Vercel's authenticated deployment readiness through
+# GitHub commit status. Do NOT curl the protected preview without authentication:
+# that returns Vercel Login (HTTP 200), not ATLA page content.
+# Actual page contents are separately verified through the authorized Vercel app.
+name: ATLA Vercel protected preview readiness
 on:
   pull_request:
     paths:
@@ -7,38 +11,30 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  statuses: read
 jobs:
-  deployed-preview:
+  deployment-readiness:
     if: github.event_name != 'pull_request' || github.event.pull_request.number == 151
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 8
     steps:
-      - name: Verify live Vercel preview HTML from outside Vercel
+      - name: Wait for Vercel commit status (no protection bypass)
         shell: bash
         env:
-          PREVIEW: https://ekab-spoudi-git-feature-atla-contextual-tool-5bb9a4-spoudi-ekav.vercel.app
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
-          for item in "paramedic.html|Τι θέλεις να μάθεις σήμερα" "saek-course-02.html|ηλεκτρικ" "mentor-ecg.html|ECG Lab" "theory.html|ΕΟΠΠΕΠ"; do
-            filename="${item%%|*}"
-            fragment="${item#*|}"
-            ok=0
-            for attempt in 1 2 3 4 5; do
-              tmp="$(mktemp)"
-              status="$(curl --location --silent --show-error --max-time 25 --output "$tmp" --write-out '%{http_code}' "$PREVIEW/$filename" || true)"
-              if [[ "$status" == "200" ]] && grep -Fqi "$fragment" "$tmp"; then
-                echo "PASS live Vercel: $filename (200, expected content)"
-                ok=1
-                rm -f "$tmp"
-                break
-              fi
-              echo "Not yet verified ($filename, HTTP $status, attempt $attempt), title:"
-              grep -oi '<title>[^<]*</title>' "$tmp" | head -c 200 || true
-              rm -f "$tmp"
-              sleep 10
-            done
-            if [[ "$ok" != 1 ]]; then
-              echo "::error::$filename is not verified as the expected live preview (may require Vercel protection/access)."
-              exit 1
-            fi
+          echo "Readiness only — content must be tested using authenticated Vercel access."
+          for attempt in $(seq 1 30); do
+            state="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${TARGET_SHA}/statuses" --jq '[.[] | select(.context == "Vercel")][0].state // "pending"')"
+            echo "Vercel status on target SHA: $state (attempt $attempt)"
+            case "$state" in
+              success) echo "PASS: Vercel reports deployment READY for ${TARGET_SHA}"; exit 0 ;;
+              failure|error) echo "::error::Vercel deployment failed for ${TARGET_SHA}"; exit 1 ;;
+              pending) sleep 12 ;;
+              *) echo "::error::Unexpected Vercel status: $state"; exit 1 ;;
+            esac
           done
+          echo "::error::Vercel readiness not confirmed within 6 minutes."
+          exit 1
