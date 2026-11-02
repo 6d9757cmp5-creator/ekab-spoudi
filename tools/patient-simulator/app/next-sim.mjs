@@ -371,6 +371,10 @@ function render(){
  renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
  renderMenu();renderTool();renderReview();renderInsights();
  window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'MENTOR NEXT — '+currentCase.title}}));
+ window.dispatchEvent(new CustomEvent('atla:nih3d-cockpit-anatomy',{detail:{
+  confirmedAnatomy:typeof currentCase.confirmedAnatomy==='string'?currentCase.confirmedAnatomy:null,
+  clinicalStructureConfirmed:currentCase.clinicalStructureConfirmed===true
+ }}));
 }
 for(const button of document.querySelectorAll('[data-next-patient]'))button.addEventListener('click',()=>{
  try{commit(setFocus(state,button.dataset.nextPatient,state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+'.');}catch{}
