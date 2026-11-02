@@ -28,7 +28,7 @@ export const ATLA_RUNTIME_RULES=[
  'Σε ενεργή εξέταση μην αποκαλύπτεις απαντήσεις. Μη δίνεις οδηγίες για πραγματικό περιστατικό, διάγνωση ή δοσολογίες.'
 ].join(' ');
 const CITATION=/\[([ΤT])([1-9][0-9]?)\]/g;
-const DOSE=/\b\d+(?:[.,]\d+)?\s*(?:mg|mcg|ml|μg)\b/iu;
+const DOSE=/(?<![\p{L}\p{N}])\d+(?:[.,]\d+)?\s*(?:mg|mcg|ml|μg|µg|g|iu|ui|μονάδες)(?![\p{L}])/iu;
 /**
  * Fail-closed surface gate for grounded AI output. Cannot prove clinical correctness
  * or semantic consistency; these still require independent scientific QA.
