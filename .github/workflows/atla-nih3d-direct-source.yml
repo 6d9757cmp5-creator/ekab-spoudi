@@ -2,12 +2,15 @@ name: ATLA NIH 3D direct original-source verification
 on:
   push:
     branches:
+      - main
       - feat/nih3d-source-on-demand-20261103
     paths:
       - 'tools/atla-ai/nih3d-original-source-gateway.mjs'
       - 'scripts/verify-nih3d-direct-source.mjs'
       - 'scripts/verify-nih3d-direct-source.test.mjs'
       - '.github/workflows/atla-nih3d-direct-source.yml'
+      - 'tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json'
+      - 'tools/atla-ai/resources/nih3d-master-plan-2026/segments/**'
   workflow_dispatch:
 permissions:
   contents: write
