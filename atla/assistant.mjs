@@ -11,6 +11,7 @@ import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './stud
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
+import {chooseTeachingTool} from './practice/tool-selector.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
@@ -160,11 +161,13 @@ function boot(){
   const studyInsight=localStudyInsight(q,learnerProfile());
   if(studyInsight){add('mentor',studyInsight,'local');return;}
   const link=navigation(q);
+  const teachingTool=chooseTeachingTool({question:q});
   if(demoToggle.checked){
    const level=teachingLevelFor(learnerProfile(),q);
    const pageName=(document.querySelector('main h1,main h2')?.textContent||document.title).trim();
    add('mentor',mockAtlasReply({question:q,page:pageName,level}),'mock');
    if(link)offerLink(link[1],'Δοκίμασε τη μετάβαση: '+link[0]);
+   else if(teachingTool)offerLink(teachingTool.href,teachingTool.label);
    return;
   }
   if(link){add('mentor','Βρήκα την ενότητα «'+link[0]+'». Μπορείς να την ανοίξεις χωρίς να χαθεί η τρέχουσα σελίδα από το ιστορικό.');offerLink(link[1],'Άνοιξε: '+link[0]);return;}
@@ -172,11 +175,12 @@ function boot(){
   try{
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
-   if(!ATLA_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');return;}
+   if(!ATLA_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
    const level=teachingLevelFor(learnerProfile(),q);
    const payload=buildPayload({question:q,passages:found.passages,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
+   if(teachingTool)offerLink(teachingTool.href,teachingTool.label);
   }catch{add('mentor','Η τοπική βιβλιοθήκη δεν είναι διαθέσιμη αυτή τη στιγμή.');}
   finally{send.disabled=false;refreshState();}
  });
