@@ -69,9 +69,82 @@ jobs:
           # GitHub limits each Release to 1000 assets. Isolate each canonical
           # 100-ID shard; never delete or overwrite the original archive Release.
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --target "$GITHUB_SHA" --title "ATLA NIH3D originals $padded_start-$padded_end" --notes "Lossless canonical source shard; consult its RESULT.json for SHA256 and source provenance. Not clinical approval."
+          # Preserve already uploaded assets: do not clobber verified-size
+          # bytes on retries. Any size conflict fails closed for investigation.
+          declare -A remote_sizes=()
+          while IFS=
+      - name: Preserve verified models as GitHub Actions artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-originals-${{ matrix.start }}
+          path: |
+            tmp/nih3d-mirror-${{ matrix.start }}/*.tar.zst*
+            tmp/nih3d-mirror-${{ matrix.start }}/*-RESULT.json
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
+  report:
+    needs: [prepare,mirror]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Count actual uploaded resource packs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_TAG: atla-nih3d-master-2026
+        run: |
+          set -euo pipefail
+          mkdir -p tmp/nih3d-reports
+          # Aggregate canonical manifests from the legacy Release and every
+          # per-shard Release. Never interpret a missing range as success.
+          gh api --paginate "repos/$GITHUB_REPOSITORY/releases?per_page=100" --jq '.[] | select(.tag_name == "atla-nih3d-master-2026" or (.tag_name | startswith("atla-nih3d-master-2026-shard-"))) | .tag_name' |
+            while IFS= read -r release_tag; do
+              if ! gh release download "$release_tag" --pattern '*-RESULT.json' --dir tmp/nih3d-reports --clobber; then
+                echo "::warning::No usable RESULT.json yet in $release_tag; final audit will mark missing canonical groups."
+              fi
+            done
+          node --input-type=module <<'NODE'
+          import {readdirSync,readFileSync,writeFileSync} from 'node:fs';
+          const names=readdirSync('tmp/nih3d-reports').filter(x=>x.endsWith('-RESULT.json'));
+          let files=0,modelIds=0,missing=0,failed=0,sourceErrors=0,packs=0,bytes=0;
+          for(const name of names){
+            const r=JSON.parse(readFileSync('tmp/nih3d-reports/'+name,'utf8'));
+            files+=r.downloadedOriginalFiles||0;modelIds+=r.uniqueEntryIds||0;
+            missing+=r.missingOrUnpublishedIds||0;failed+=r.failedOutputFiles||0;sourceErrors+=r.sourceMetadataErrors||0;
+            packs+=(r.packs||[]).length;
+            for(const f of r.modelFiles||[])bytes+=(f.bytes||0);
+          }
+          const summary={shards:names.length,totalShards:250,originalFiles:files,sourceModels:modelIds,failed,sourceErrors,missing,losslessPacks:packs,sourceBytes:bytes,manifestCoverageComplete:names.length===250&&failed===0&&sourceErrors===0,complete:false,verificationLimit:'Manifest counts only; independent release-asset audit must certify completion.'};
+          writeFileSync('docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md','# ATLA Master Plan 2026 - NIH 3D transferred originals\n\n'+JSON.stringify(summary,null,2)+'\n\nArtifacts: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions\n\nAll packaging is lossless tar.zst, each pack carries model SHA-256 and source license metadata. Artifact storage is temporary; any long-term release requires repository authorization. Unavailable source models are explicitly recorded; this is not independent clinical validation.\n');
+          console.log(JSON.stringify(summary));
+          NODE
+      - name: Record actual mirrored file count in Master Plan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "docs(ATLA): record verified NIH 3D model archive upload totals"
+          git pull --rebase origin main
+          git push origin HEAD:main
+\t' read -r name size; do
+            remote_sizes["$name"]="$size"
+          done < <(gh release view "$TAG" --json assets --jq '.assets[] | [.name, (.size|tostring)] | @tsv')
           shopt -s nullglob
           for file in "$dir"/*.tar.zst* "$dir"/*-RESULT.json; do
-            gh release upload "$TAG" "$file" --clobber
+            name="$(basename "$file")"
+            size="$(stat -c %s "$file")"
+            if [[ -n "${remote_sizes[$name]:-}" ]]; then
+              if [[ "${remote_sizes[$name]}" == "$size" ]]; then
+                echo "PRESENT $name ($size bytes); preserving existing asset"
+                continue
+              fi
+              echo "::error::Existing Release asset $name has a different size; refusing destructive overwrite."
+              exit 1
+            fi
+            gh release upload "$TAG" "$file"
           done
       - name: Preserve verified models as GitHub Actions artifacts
         if: failure()
