@@ -19,11 +19,11 @@ if(!r.ok)fail('search HTTP '+r.status);
 const body=await r.json();
 const ids=(body?.esearchresult?.idlist||[]).filter(x=>/^\d{1,10}$/.test(String(x))).slice(0,4);
 if(!ids.length)fail('no valid search results');
-let success=null;
+let success=null,verifiedAbstract='';
 for(const id of ids){
  await new Promise(resolve=>setTimeout(resolve,420));
  const abstract=await getAbstract(id);
- if(abstract.length>=100){success={pmid:id,abstract_chars:abstract.length};break;}
+ if(abstract.length>=100){success={pmid:id,abstract_chars:abstract.length};verifiedAbstract=abstract;break;}
 }
 if(!success)fail('none of '+ids.length+' returned a verified nonempty matching abstract');
 // Retrieve the actual PubMed summary, not hand-crafted bibliographic evidence.
@@ -51,7 +51,7 @@ validateOutput(report);
 const entry=report.items[0];
 if(report.items.length!==1||entry.pmid!==success.pmid||entry.ai_status!=='ai-disabled-awaiting-explicit-cost-approval'||
  entry.abstract_available!==true||entry.abstract_sha256!==createHash('sha256').update(
- await getAbstract(success.pmid)).digest('hex')||
+ verifiedAbstract).digest('hex')||
  entry.clinical_approval!==false||entry.learner_visible!==false||entry.atla_ai_retrieval_enabled!==false)
  fail('end-to-end isolated research queue verification failed');
 console.log(JSON.stringify({status:'live-eutils-review-queue-verified',...success,
