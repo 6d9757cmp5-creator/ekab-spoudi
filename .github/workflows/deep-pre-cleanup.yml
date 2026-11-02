@@ -2,6 +2,12 @@ name: Deep pre-cleanup audit
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - 'scripts/verify-reader-search.mjs'
+      - 'eoppep-sos.json'
+      - 'official_questions.json'
+      - '.github/workflows/deep-pre-cleanup.yml'
   workflow_dispatch:
 permissions:
   contents: read
