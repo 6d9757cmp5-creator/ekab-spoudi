@@ -66,14 +66,18 @@ function safeDate(value){
  const s=clean(value,40);
  return /^\d{4}(-\d{2}(-\d{2})?)?/.test(s)?s:'not-provided';
 }
-export function mergeCandidates(previous,found,now){
+export function mergeCandidates(previous,found,now,excluded=[]){
+ // If PubMed now explicitly disqualifies an indexed PMID, never retain its
+ // older pending-review snapshot. Network failures alone are not disqualifications.
+ const disqualified=new Set(excluded.map(x=>String(x.pmid)));
  const records=new Map();
  for(const c of Array.isArray(previous)?previous:[]){
-  if(!screenPubMedArticle(c).accepted||c.status!=='pending-review')continue;
+  if(disqualified.has(String(c.pmid))||!screenPubMedArticle(c).accepted||c.status!=='pending-review')continue;
   records.set(String(c.pmid),c);
  }
  let added=0;
  for(const item of found){
+  if(disqualified.has(String(item.pmid)))continue;
   const gate=screenPubMedArticle(item);
   if(!gate.accepted)continue;
   const pmid=String(item.pmid);
@@ -215,7 +219,7 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
   sourceResults.push(...reports);
  }
  const discovered=await discoverPubMed(fetcher);
- const merged=mergeCandidates(lastCandidates.items,discovered.found,now);
+ const merged=mergeCandidates(lastCandidates.items,discovered.found,now,discovered.excluded);
  const metadata={schema_version:1,checked_at:now,registries:registries.map(r=>({id:r.id,entries:r.sources.length})),
   monitored_urls:watchlist.length,monitored_ok:sourceResults.filter(x=>x.ok).length,
   pubmed_topics_checked:TOPICS.length,
