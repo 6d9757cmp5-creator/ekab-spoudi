@@ -1,7 +1,7 @@
 name: MENTOR unified directory validation
 on:
   push:
-    branches: ['refactor/mentor-unified-folder-20261030']
+    branches: ['refactor/mentor-unified-folder-20261030', 'plan/atla-unified-mentor-migration-2026-11-01']
   pull_request:
     paths:
       - 'mentor/**'
