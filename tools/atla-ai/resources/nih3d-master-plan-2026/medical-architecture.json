@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "name": "ATLA NIH 3D medical knowledge pipeline",
+  "scope": "all medically relevant NIH 3D entries, not just paramedic syllabus",
+  "storage": "GitHub Releases, segmented; free-tier target, not guaranteed unlimited",
+  "stages": [
+    {
+      "id": "original-archive",
+      "name": "NIH 3D Original Archive",
+      "outputs": [
+        "original source URL",
+        "original files",
+        "SHA-256",
+        "license and attribution",
+        "source accession",
+        "release asset locator"
+      ]
+    },
+    {
+      "id": "scientific-classification",
+      "name": "Scientific Classification Engine",
+      "outputs": [
+        "medical relevance",
+        "clinical specialty",
+        "anatomical structures",
+        "ontology identifiers",
+        "confidence and review status"
+      ]
+    },
+    {
+      "id": "knowledge-graph",
+      "name": "3D Knowledge Graph",
+      "outputs": [
+        "model relationships",
+        "versions",
+        "provenance",
+        "scientific evidence"
+      ]
+    },
+    {
+      "id": "contextual-selection",
+      "name": "ATLA Contextual Selection",
+      "outputs": [
+        "lesson relevance",
+        "exam relevance",
+        "cockpit relevance",
+        "learning objective matching"
+      ]
+    }
+  ],
+  "consumers": [
+    "lessons",
+    "exams",
+    "cockpit"
+  ],
+  "safeguards": [
+    "Do not claim written authorization has been independently verified",
+    "Do not automatically redistribute items whose source license forbids it",
+    "Never present an unverified transfer as complete",
+    "Never show unrelated models to students",
+    "Do not delete historical binary archives without verified replacement"
+  ]
+}
