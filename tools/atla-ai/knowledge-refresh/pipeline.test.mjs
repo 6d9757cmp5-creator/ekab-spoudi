@@ -121,7 +121,9 @@ test('nested AI research approval flags fail closed before publication',()=>{
   ai_assessment_unverified:true,independent_clinical_review:'required'};
  const item={status:'pending-independent-scientific-review',full_text_stored:false,
   clinical_approval:false,atla_ai_retrieval_enabled:false,learner_visible:false,assessment:safe};
- const report=assessment=>({schema_version:2,items:[{...item,assessment}]});
+ const report=assessment=>({schema_version:2,stage:'research-only-awaiting-independent-review',
+  source_discovery_completed:true,clinical_knowledge_imported:0,existing_curriculum_changed:false,
+  items:[{...item,assessment}]});
  assert.equal(validateOutput(report(safe)),true);
  for(const patch of [
   {learner_visible:true},{clinical_approval:'approved'},{atla_ai_retrieval_enabled:'yes'},
@@ -131,4 +133,15 @@ test('nested AI research approval flags fail closed before publication',()=>{
  }
  const {learner_visible,...missing}=safe;
  assert.throws(()=>validateOutput(report(missing)),/unsafe-research-publication/);
+});
+
+test('top-level research report cannot claim clinical publication or curriculum changes',()=>{
+ const safe={schema_version:2,stage:'research-only-awaiting-independent-review',
+  source_discovery_completed:true,clinical_knowledge_imported:0,existing_curriculum_changed:false,items:[]};
+ assert.equal(validateOutput(safe),true);
+ for(const patch of [
+  {stage:'published'},{stage:undefined},{source_discovery_completed:false},
+  {clinical_knowledge_imported:1},{clinical_knowledge_imported:undefined},
+  {existing_curriculum_changed:true},{existing_curriculum_changed:undefined}
+ ])assert.throws(()=>validateOutput({...safe,...patch}),/unsafe-research-publication/);
 });

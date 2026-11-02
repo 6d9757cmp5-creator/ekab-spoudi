@@ -87,7 +87,11 @@ export function record(article,abstract,triage,now){
   atla_ai_retrieval_enabled:false,learner_visible:false};
 }
 export function validateOutput(report){
- if(report.schema_version!==2||!Array.isArray(report.items)||report.items.length>MAX)throw Error('invalid-report');
+ if(!report||report.schema_version!==2||!Array.isArray(report.items)||report.items.length>MAX)throw Error('invalid-report');
+ // A review-only item is not safe if the surrounding report claims clinical publication.
+ if(report.stage!=='research-only-awaiting-independent-review'||
+  report.source_discovery_completed!==true||report.clinical_knowledge_imported!==0||
+  report.existing_curriculum_changed!==false)throw Error('unsafe-research-publication');
  for(const x of report.items){
   if(x.status!=='pending-independent-scientific-review'||x.full_text_stored!==false||
    x.clinical_approval!==false||x.atla_ai_retrieval_enabled!==false||x.learner_visible!==false||
