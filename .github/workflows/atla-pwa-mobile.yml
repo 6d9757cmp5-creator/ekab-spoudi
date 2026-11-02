@@ -51,10 +51,12 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
       - name: Load complete 3D atlas through real WebGL and focus heart
-        run: node scripts/verify-atla-3d-full-browser.mjs
+        run: |
+          node scripts/verify-atla-3d-full-browser.mjs
+          node scripts/verify-atla-3d-full-browser.mjs --female
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: atlas-heart-chromium-evidence
-          path: atlas-heart-webgl-smoke.png
+          path: atlas-heart-webgl-*.png
           if-no-files-found: ignore
