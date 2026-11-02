@@ -80,12 +80,15 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import {readFileSync} from 'node:fs';
-          import {validateOutput} from './tools/atla-ai/knowledge-refresh/pipeline.mjs';
+          import {validateQueueFiles} from './tools/atla-ai/knowledge-refresh/pipeline.mjs';
           const path='tools/atla-ai/knowledge-refresh/queue/';
-          const r=JSON.parse(readFileSync(path+'ai-research-review.json','utf8'));
-          const s=JSON.parse(readFileSync(path+'last-scan.json','utf8'));
-          validateOutput(r);
-          if(s.clinical_retrieval_updated!==false||s.full_texts_imported!==0||r.clinical_knowledge_imported!==0||r.existing_curriculum_changed!==false)throw Error('unsafe-knowledge-publication');
+          const read=name=>JSON.parse(readFileSync(path+name,'utf8'));
+          validateQueueFiles({
+            report:read('ai-research-review.json'),
+            metadata:read('last-scan.json'),
+            health:read('source-health.json'),
+            pending:read('pending-pubmed.json')
+          });
           NODE
       - name: Commit isolated review queue only
         run: |
