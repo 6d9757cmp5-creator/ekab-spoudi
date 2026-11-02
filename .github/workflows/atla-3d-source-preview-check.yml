@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature/atla-3d-model-preview-integration-20261103
+      - feature/atla-anatomy-cockpit-resource-stage2-20261103
     paths:
       - 'tools/atla-ai/model-preview*'
       - 'ui-tools/atla-resource-preview.html'
@@ -10,6 +11,9 @@ on:
       - 'ui-tools/anatomy-3d/index.html'
       - 'mentor-next.html'
       - 'scripts/test-atla-model-preview.mjs'
+      - 'scripts/verify-atla-model-preview-browser.mjs'
+      - 'tools/patient-simulator/assets/patients/preview-manifest.json'
+      - 'tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json'
       - '.github/workflows/atla-3d-source-preview-check.yml'
   pull_request:
     paths:

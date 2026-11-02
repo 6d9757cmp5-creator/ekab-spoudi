@@ -12,8 +12,11 @@ try{
  if(!ready)throw Error('Local server failed to start');
  browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--no-sandbox']});
  const inputs=[
-  {tool:'anatomy',filename:'tools/anatomy-3d/resources/imported-manifest.json',expected:54},
-  {tool:'cockpit',filename:'tools/patient-simulator/resources/quaternius/imported-manifest.json',expected:2}
+  {tool:'anatomy',filename:'tools/anatomy-3d/resources/imported-manifest.json',sourceType:'primary',expected:54},
+  {tool:'anatomy',filename:'tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json',sourceType:'research',expected:5},
+  {tool:'cockpit',filename:'tools/patient-simulator/resources/quaternius/imported-manifest.json',sourceType:'primary',expected:2},
+  {tool:'cockpit',filename:'tools/patient-simulator/assets/patients/preview-manifest.json',sourceType:'patients',expected:3},
+  {tool:'cockpit',filename:'tools/patient-simulator/resources/makehuman/imported-manifest.json',sourceType:'makehuman',expected:2}
  ];
  for(const test of inputs){
   const page=await browser.newPage({viewport:{width:920,height:720},deviceScaleFactor:1});
@@ -21,9 +24,13 @@ try{
   page.on('pageerror',e=>errors.push(e.message));
   page.on('request',req=>{if(/3d\.nih\.gov/.test(req.url()))requests.push(req.url())});
   const sources=JSON.parse(readFileSync(test.filename,'utf8'));
-  const opts=buildModelList(test.tool,sources);
-  const smallest=opts.reduce((n,a,i)=>a.bytes<opts[n].bytes?i:n,0);
+  const opts=test.sourceType==='makehuman'?
+   [...buildModelList('cockpit',sources,'makehuman'),
+    ...buildModelList('cockpit',JSON.parse(readFileSync('tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json','utf8')),'makehuman')]:
+   buildModelList(test.tool,sources,test.sourceType);
+  const smallest=test.sourceType==='makehuman'?opts.findIndex(a=>a.path.endsWith('/base.obj')):opts.reduce((n,a,i)=>a.bytes<opts[n].bytes?i:n,0);
   await page.goto(BASE+'ui-tools/atla-resource-preview.html?tool='+test.tool,{waitUntil:'domcontentloaded'});
+  if(test.sourceType!=='primary')await page.selectOption('#source-dataset',test.sourceType==='makehuman'?'makehuman':'secondary');
   await page.waitForFunction(count=>document.querySelector('#source-model').options.length===count,test.expected,{timeout:60000});
   if(await page.locator('#source-load').isDisabled())throw Error(test.tool+' cannot select source');
   await page.selectOption('#source-model',String(smallest));
@@ -35,8 +42,8 @@ try{
   }
   if(requests.length)failures.push(test.tool+' made unexpected NIH download requests');
   if(errors.length)failures.push(test.tool+' page errors: '+errors.slice(0,3).join(' | '));
-  await page.screenshot({path:'browser-qa-results/atla-resource-'+test.tool+'.png',fullPage:true});
-  console.log('BROWSER '+test.tool+' assets='+opts.length+' selected='+opts[smallest].label+' errors='+errors.length);
+  await page.screenshot({path:'browser-qa-results/atla-resource-'+test.tool+'-'+test.sourceType+'.png',fullPage:true});
+  console.log('BROWSER '+test.tool+' source='+test.sourceType+' assets='+opts.length+' selected='+opts[smallest].label+' errors='+errors.length);
   await page.close();
  }
 }finally{
