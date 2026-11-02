@@ -1,6 +1,6 @@
 /**
- * Real PWA + WebKit mobile viewport smoke.
- * WebKit on Linux is NOT physical iPhone Safari. 3D external meshes are online-only.
+ * Real STUDY-ONLY offline PWA + WebKit mobile viewport smoke.
+ * WebKit on Linux is NOT physical iPhone Safari. The 3D and ECG tools are online-only.
  */
 import {chromium,webkit} from 'playwright';
 import {createServer} from 'node:http';
@@ -42,18 +42,49 @@ async function chromiumOffline(){
    return reg.active?.state||'missing active worker';
   });
   assert.equal(result,'activated','real service worker must activate on local host');
-  // Let the install cache finish. The brand-new Paramedic entry must load completely offline.
+
+  // Read the actual 314-topic EOPPEP reader and a SAEK chapter before disconnecting.
+  await page.goto(base+'theory.html?question=EOP-A-070',{waitUntil:'domcontentloaded'});
+  await page.locator('#catalogReaderAnswer').waitFor({state:'visible',timeout:25000});
+  assert.ok((await page.locator('#catalogReaderAnswer').innerText()).length>30,'Question answer is populated online');
+  await page.goto(base+'saek-course-01.html#lesson-10',{waitUntil:'domcontentloaded'});
+  await page.locator('#lesson-10 .chapter-heading').waitFor({state:'attached'});
+  await page.locator('img[src="saek-skeleton.svg"]').waitFor({state:'attached'});
+  await page.waitForFunction(()=>document.querySelector('img[src="saek-skeleton.svg"]')?.naturalWidth>0);
+
+  // Educational pictures cache as viewed, not through bulk preload.
+  const image='assets/education/heart-chambers-and-valves-el.svg';
+  await page.goto(base+image,{waitUntil:'load'});
+  await page.waitForFunction(async()=>{
+   const keys=await caches.keys();
+   const active=keys.find(k=>k.includes('study-materials-only-20261102'));
+   if(!active)return false;
+   return Boolean(await (await caches.open(active)).match('./assets/education/heart-chambers-and-valves-el.svg'));
+  },null,{timeout:10000});
+
   await context.setOffline(true);
-  const offline=await page.goto(base+'paramedic.html',{waitUntil:'domcontentloaded',timeout:20000});
-  assert.ok(offline&&offline.status()===200,'Offline Paramedic HTML must return from cache');
-  await page.locator('a[href="saek.html"]').waitFor();
-  assert.ok(await page.locator('a[href="eoppep.html"]').isVisible());
-  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'offline Paramedic fits mobile viewport');
-  // The linked ECG and its scripts must also be in the same-origin PWA cache.
-  await page.goto(base+'mentor-ecg.html?from=02&chapter=7#ecg-practice',{waitUntil:'domcontentloaded',timeout:20000});
-  assert.ok(await page.locator('#ecg-practice').isVisible(),'Offline synthetic ECG retains its learning screen');
-  assert.equal(await page.evaluate(()=>document.querySelector('.ecg-wrap > a')?.getAttribute('href')),'saek-course-02.html#lesson-7');
-  console.log('PASS: real service worker PWA Paramedic and ECG offline in Chromium mobile viewport');
+  await page.goto(base+'theory.html?question=EOP-A-070',{waitUntil:'domcontentloaded',timeout:20000});
+  await page.locator('#catalogReaderAnswer').waitFor({state:'visible',timeout:20000});
+  assert.ok((await page.locator('#catalogReaderAnswer').innerText()).length>30,'EOPPEP answer survives offline');
+  assert.match(await page.locator('#catalogReaderNumber').textContent(),/Ερώτηση 70/);
+  await page.goto(base+'saek-course-01.html#lesson-10',{waitUntil:'domcontentloaded',timeout:20000});
+  await page.locator('#lesson-10 .chapter-heading').waitFor({state:'attached'});
+  assert.ok(await page.locator('img[src="saek-skeleton.svg"]').evaluate(img=>img.complete&&img.naturalWidth>0),'SAEK anatomy image available offline');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'Offline SAEK fits mobile');
+  await page.goto(base+image,{waitUntil:'load',timeout:20000});
+  assert.ok((await page.locator('svg').count())>0,'Viewed education image is cached offline');
+  await assert.rejects(
+   page.goto(base+'mentor-ecg.html?from=02&chapter=7',{waitUntil:'domcontentloaded',timeout:9000}),
+   /ERR_INTERNET_DISCONNECTED|net::|failed|offline/i,
+   'Non-study ECG tool must NOT be artificially available offline'
+  );
+
+  await context.setOffline(false);
+  await page.goto(base+'paramedic.html',{waitUntil:'domcontentloaded'});
+  assert.ok(await page.locator('a[href="saek.html"]').isVisible(),'Paramedic still works normally online');
+  await page.goto(base+'mentor-ecg.html?from=02&chapter=7#ecg-practice',{waitUntil:'domcontentloaded'});
+  assert.ok(await page.locator('#ecg-practice').isVisible(),'ECG works normally online');
+  console.log('PASS: offline EOPPEP answers, SAEK chapters, read images; online-only tools remain online.');
  }finally{await browser.close();}
 }
 async function mobileWebkit(){
