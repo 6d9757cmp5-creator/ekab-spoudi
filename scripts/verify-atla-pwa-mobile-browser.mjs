@@ -100,22 +100,109 @@ async function chromiumOffline(){
  }finally{await browser.close();}
 }
 async function mobileWebkit(){
+ // An actual WebKit engine, run in a Linux virtual mobile viewport with touch;
+ // this is NOT an iPhone/iOS device and does not certify iOS-specific behavior.
  const browser=await webkit.launch({headless:true});
+ const checks=[];
  try{
-  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  const context=await browser.newContext({
+   viewport:{width:390,height:844},isMobile:true,hasTouch:true,
+   deviceScaleFactor:3,serviceWorkers:'block'
+  });
   const page=await context.newPage();
+  const errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  const noOverflow=async label=>{
+   const m=await page.evaluate(()=>({
+    scroll:document.documentElement.scrollWidth,
+    viewport:window.innerWidth
+   }));
+   assert.ok(m.scroll<=m.viewport+2,label+' overflows mobile width: '+JSON.stringify(m));
+  };
+  const pass=(name)=>{checks.push(name);console.log('PASS WebKit virtual phone: '+name);};
+
+  // 1. Learner hub on narrow portrait and rotated landscape viewports.
   await page.goto(base+'paramedic.html',{waitUntil:'domcontentloaded'});
-  assert.ok(await page.locator('h1').isVisible(),'Paramedic title in WebKit mobile emulation');
-  assert.ok(await page.locator('a[href="saek.html"]').isVisible(),'SAEK is nested under Paramedic');
-  assert.ok(await page.locator('a[href="eoppep.html"]').isVisible(),'EOPPEP is nested under Paramedic');
-  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'No mobile horizontal overflow');
+  assert.ok(await page.locator('h1').isVisible(),'Paramedic title in WebKit');
+  assert.ok(await page.locator('a[href="saek.html"]').isVisible());
+  assert.ok(await page.locator('a[href="eoppep.html"]').isVisible());
+  await noOverflow('Paramedic portrait');
+  await page.screenshot({path:'atla-webkit-virtual-phone-paramedic.png'});
+  await page.setViewportSize({width:844,height:390});
+  await noOverflow('Paramedic landscape');
+  await page.setViewportSize({width:390,height:844});
+  pass('Paramedic navigation, portrait and landscape layout');
+
+  // 2. Heart chapter: opt-in first, then actual viewer URL with exact return.
+  await page.goto(base+'saek-course-01.html#lesson-10',{waitUntil:'domcontentloaded'});
+  await page.locator('#lesson-10').evaluate(el=>{el.open=true});
+  await page.locator('#lesson-10 .atlas-chapter-practice > summary').waitFor({timeout:25000});
+  await page.locator('#lesson-10 .atlas-chapter-practice > summary').click();
+  assert.equal(await page.locator('#lesson-10 .atlas-practice-link').count(),0,
+   'No unsolicited 3D recommendation before consent');
+  await page.locator('#lesson-10 .atlas-practice-actions button')
+   .filter({hasText:'Θέλω να εξασκηθώ'}).click();
+  const heartHref=await page.locator('#lesson-10 .atlas-practice-link').getAttribute('href');
+  assert.match(heartHref,/mode=organs&system=cardiac&focus=heart&from=01&chapter=10/);
+  await noOverflow('Heart chapter');
+  await page.goto(new URL(heartHref,base).href,{waitUntil:'domcontentloaded'});
+  await page.locator('#chapterReturn').waitFor({state:'visible',timeout:25000});
+  assert.equal(await page.locator('#chapterReturn').getAttribute('href'),
+   '../../saek-course-01.html#lesson-10');
+  await noOverflow('3D viewer initial layout');
+  await page.screenshot({path:'atla-webkit-virtual-phone-3d-viewer.png'});
+  pass('3D heart deep link and exact chapter return (not full mesh certification)');
+
+  // 3. ECG: correct chapter link, SVG, and exact return route.
   await page.goto(base+'saek-course-02.html#lesson-7',{waitUntil:'domcontentloaded'});
-  await page.locator('#lesson-7').evaluate(node=>{node.open=true});
-  await page.locator('#lesson-7 .atlas-chapter-practice>summary').waitFor({timeout:20000});
-  await page.locator('#lesson-7 .atlas-chapter-practice>summary').click();
-  await page.locator('#lesson-7 .atlas-practice-actions button').filter({hasText:'Θέλω να εξασκηθώ'}).click();
-  assert.match(await page.locator('#lesson-7 .atlas-practice-link').getAttribute('href'),/mentor-ecg\.html\?from=02&chapter=7/);
-  console.log('PASS: WebKit mobile simulation Paramedic navigation and contextual SAEK link');
+  await page.locator('#lesson-7').evaluate(el=>{el.open=true});
+  await page.locator('#lesson-7 .atlas-chapter-practice > summary').waitFor({timeout:25000});
+  await page.locator('#lesson-7 .atlas-chapter-practice > summary').click();
+  await page.locator('#lesson-7 .atlas-practice-actions button')
+   .filter({hasText:'Θέλω να εξασκηθώ'}).click();
+  const ecgHref=await page.locator('#lesson-7 .atlas-practice-link').getAttribute('href');
+  assert.match(ecgHref,/^mentor-ecg\.html\?from=02&chapter=7#ecg-practice$/);
+  await page.goto(new URL(ecgHref,base).href,{waitUntil:'domcontentloaded'});
+  await page.locator('#ecg-practice').waitFor({state:'visible',timeout:20000});
+  await page.waitForFunction(()=>document.querySelector('.ecg-wrap > a')
+   ?.getAttribute('href')==='saek-course-02.html#lesson-7',null,{timeout:20000});
+  await page.locator('.ecg-chart svg').first().waitFor({state:'visible',timeout:20000});
+  await noOverflow('ECG Lab');
+  await page.screenshot({path:'atla-webkit-virtual-phone-ecg.png'});
+  pass('Synthetic ECG graphic and chapter-specific return');
+
+  // 4. The curated EOPPEP A-070 offer must be read-only, opt-in, and
+  // forbidden for the next question and exam mode.
+  await page.goto(base+'theory.html?question=EOP-A-070',{waitUntil:'domcontentloaded'});
+  await page.locator('#atlas-eoppep-tool').waitFor({state:'visible',timeout:30000});
+  assert.match(await page.locator('#catalogReaderNumber').textContent(),/Ερώτηση 70/);
+  assert.equal(await page.locator('#atlas-eoppep-tool .atlas-contextual-link').count(),0);
+  await page.locator('#atlas-eoppep-tool .atlas-contextual-action').click();
+  assert.match(await page.locator('#atlas-eoppep-tool .atlas-contextual-link')
+   .getAttribute('href'),/mentor-ecg\.html\?from=eoppep&question=EOP-A-070/);
+  await noOverflow('EOPPEP reader');
+  await page.screenshot({path:'atla-webkit-virtual-phone-eoppep.png'});
+  await page.goto(base+'theory.html?question=EOP-A-071',{waitUntil:'domcontentloaded'});
+  await page.waitForFunction(()=>document.querySelector('#catalogReaderNumber')
+   ?.textContent?.includes('Ερώτηση 71'),null,{timeout:30000});
+  assert.equal(await page.locator('#atlas-eoppep-tool').isVisible(),false,
+   'No neighboring-question ECG suggestion');
+  await page.goto(base+'theory.html?mode=exam',{waitUntil:'domcontentloaded'});
+  await page.locator('#atlas-eoppep-tool').waitFor({state:'attached',timeout:30000});
+  assert.equal(await page.locator('#atlas-eoppep-tool').isVisible(),false,
+   'No ECG hint in active exam');
+  pass('EOPPEP A-070 opt-in and no hint in unrelated question/active exam');
+
+  // 5. Clinical tool is never suggested in an unrelated ACS lesson.
+  await page.goto(base+'saek-course-10.html#lesson-7',{waitUntil:'domcontentloaded'});
+  await page.locator('#lesson-7 .atlas-chapter-practice > summary').waitFor({timeout:25000});
+  assert.equal(await page.locator('#lesson-7 .atlas-practice-actions button')
+   .filter({hasText:'Θέλω να εξασκηθώ'}).count(),0);
+  assert.equal(await page.locator('#lesson-7 .atlas-practice-cockpit').count(),0);
+  pass('No unapproved ACS ECG shortcut or clinical simulator case');
+
+  assert.deepEqual(errors,[],'WebKit page errors: '+errors.join(' | '));
+  console.log('PASS WebKit virtual phone: 5/5 checks; screenshots saved. This is not physical iOS Safari.');
  }finally{await browser.close();}
 }
 try{await chromiumOffline();await mobileWebkit();}
