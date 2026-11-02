@@ -116,4 +116,5 @@ if(fromHash&&rows[Number(fromHash[1])]){
    requestAnimationFrame(()=>chapter.scrollIntoView({block:'start',behavior:'instant'}))
  }
 }
+void import(new URL('tools/atla-ai/nih3d-learning-surface.mjs',location.href).href).catch(()=>{});
 })();
