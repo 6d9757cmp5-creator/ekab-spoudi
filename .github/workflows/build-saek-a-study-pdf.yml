@@ -1,0 +1,61 @@
+name: SAEK A complete study PDF
+on:
+  push:
+    branches: [study-pdf-semester-a-*]
+    paths:
+      - 'scripts/build_saek_a_study_pdf.py'
+      - '.github/workflows/build-saek-a-study-pdf.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-book:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          lfs: true
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-dejavu-core libcairo2
+          python3 -m pip install --break-system-packages --disable-pip-version-check \
+            reportlab==4.2.5 beautifulsoup4==4.12.3 Pillow==11.1.0 CairoSVG==2.7.1 pypdf==5.1.0
+      - name: Build full study book from original HTML
+        run: |
+          python3 scripts/build_saek_a_study_pdf.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from pypdf import PdfReader
+          pdf=Path('docs/downloads/EKAB_SAEK_A_Examino_Pliris_Yli_Meletis.pdf')
+          record=json.loads(pdf.with_suffix('.json').read_text(encoding='utf-8'))
+          reader=PdfReader(str(pdf))
+          assert record['courses']==6 and record['chapters']==71
+          assert 20<len(reader.pages)<250, len(reader.pages)
+          full='\n'.join((page.extract_text() or '') for page in reader.pages)
+          for value in ('Ανατομία','Φυσιολογία','Προνοσοκομειακή','Αγγλική'):
+              assert value in full, value
+          print('VERIFIED',len(reader.pages),'PAGES',record['figures_included'],'IMAGES',pdf.stat().st_size,'BYTES')
+          PY
+      - name: Commit generated PDF to study branch
+        if: success() && github.ref_type == 'branch'
+        continue-on-error: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/downloads/EKAB_SAEK_A_Examino_Pliris_Yli_Meletis.pdf docs/downloads/EKAB_SAEK_A_Examino_Pliris_Yli_Meletis.json
+          git commit -m "build: publish real A-semester study book" || exit 0
+          git push origin HEAD:$GITHUB_REF_NAME
+      - name: Upload PDF for download
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: SAEK-A-Full-Study-Book-71-Chapters
+          path: |
+            docs/downloads/EKAB_SAEK_A_Examino_Pliris_Yli_Meletis.pdf
+            docs/downloads/EKAB_SAEK_A_Examino_Pliris_Yli_Meletis.json
+          retention-days: 30
+          if-no-files-found: error
