@@ -63,3 +63,21 @@ test('Research and patient paths cannot cross tool boundaries',()=>{
  const patient={sourceType:'patients',path:'tools/patient-simulator/assets/patients/daniel-lying.glb'};
  assert.throws(()=>safeAssetUrl(patient,'anatomy','https://example.org/'));
 });
+
+test('MakeHuman base and eye OBJ files are sources, not animated patients',async()=>{
+ const core=await get('tools/patient-simulator/resources/makehuman/imported-manifest.json');
+ const supplemental=await get('tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json');
+ const items=[...buildModelList('cockpit',core,'makehuman'),...buildModelList('cockpit',supplemental,'makehuman')];
+ assert.equal(items.length,2);
+ assert(items.some(x=>x.path.endsWith('/base.obj')));
+ assert(items.some(x=>x.path.endsWith('/high-poly.obj')));
+ for(const item of items){
+  assert.equal(item.format,'obj');assert.equal(item.clinicallyValidated,false);
+  assert.match(item.status,/Unrigged/);
+  const bytes=await readFile(item.path);
+  assert.equal(bytes.length,item.bytes);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),item.integrity.value);
+  assert.match(safeAssetUrl(item,'cockpit','https://example.org/').pathname,/^\/tools\/patient-simulator\/resources\/makehuman\//);
+ }
+ assert.throws(()=>safeAssetUrl(items[0],'anatomy','https://example.org/'));
+});
