@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const sw=readFileSync(resolve(root,'sw.js'),'utf8');
 const cached=JSON.parse(sw.match(/const ASSETS=(\[[^;]+\]);/)?.[1]||'[]');
-const core=JSON.parse(sw.match(/const CORE=(\[[^;]+\]);/)?.[1]||'[]');
+const core=[...(sw.match(/const CORE=(\[[^;]+\]);/)?.[1]||'').matchAll(/'([^']+)'/g)].map(m=>m[1]);
 test('Offline means full questions, answers, SAEK topics and the code needed to read them',()=>{
  for(const name of ['theory.html','official_questions.json','eoppep-sos.json','eoppep-source.pdf',
  'saek-exams-bank.json','saek-exams.html','saek-images.html','saek-skeleton.svg',
@@ -22,7 +22,8 @@ test('Offline means full questions, answers, SAEK topics and the code needed to 
   if(file==='./')continue;
   assert.ok(existsSync(resolve(root,file.split('?')[0])),'Missing offline asset: '+file);
  }
- assert.equal(new Set([...cached,...core]).size,new Set([...cached,...core]).size);
+ assert.equal(new Set(cached).size,cached.length,'Duplicate optional precache path');
+ assert.equal(new Set(core).size,core.length,'Duplicate core path');
 });
 
 test('Clinical simulator, 3D and ECG files are not preloaded offline',()=>{
