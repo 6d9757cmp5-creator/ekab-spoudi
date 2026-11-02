@@ -18,7 +18,7 @@ const CATALOG=join(HERE,'catalog.json');
 const ARCHIVED=join(HERE,'archive-manifest.json');
 const STORAGE=join(HERE,'complete');
 const MAX_BOOK=560*1024*1024; // 449M Nursing Skills 2e must fit intact
-const MAX_TOTAL=1300*1024*1024; // capped complete archive including seven existing books
+const MAX_TOTAL=1600*1024*1024; // capped complete archive including seven existing books
 const SHARD_BYTES=16*1024*1024;
 const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu','minds.wisc.edu','wtcs.pressbooks.pub']);
 const sha=data=>createHash('sha256').update(data).digest('hex');
