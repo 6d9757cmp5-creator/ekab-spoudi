@@ -20,7 +20,7 @@ const STORAGE=join(HERE,'complete');
 const MAX_BOOK=160*1024*1024;
 const MAX_TOTAL=450*1024*1024;
 const SHARD_BYTES=16*1024*1024;
-const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu','minds.wisc.edu']);
+const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu','minds.wisc.edu','wtcs.pressbooks.pub']);
 const sha=data=>createHash('sha256').update(data).digest('hex');
 export function isAllowedSource(raw){
  try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&ALLOWED_HOSTS.has(u.hostname)}catch{return false}
@@ -29,6 +29,7 @@ const slug=id=>/^[a-z0-9][a-z0-9-]{3,80}$/.test(id);
 export function validateSource(b){
  if(!slug(b.id)||!isAllowedSource(b.official_pdf))throw Error('Unapproved PDF source '+String(b.id));
  if(!/^CC BY 4\.0\b/i.test(b.license))throw Error('No documented CC-BY source approval: '+b.id);
+ if((b.alternate_official_pdfs||[]).some(uri=>!isAllowedSource(uri)))throw Error('Invalid alternate official PDF source');
  if(!b.license_url?.startsWith('https://creativecommons.org/licenses/by/4.0/'))throw Error('Missing approved license: '+b.id);
  if(b.atla_ai_retrieval_enabled!==false||b.content_status!=='NOT_YET_ARCHIVED'||b.independent_clinical_review!=='pending')throw Error('Unsafe source state '+b.id);
 }
@@ -60,7 +61,12 @@ export async function savePdfFully(book,{fetcher=fetch}={}){
  await rm(temp,{force:true});
  let downloaded=0,stream;
  try{
-  const r=await redirectSafeFetch(book.official_pdf,fetcher);
+  let r,downloadSource,downloadErrors=[];
+  for(const uri of [book.official_pdf,...(book.alternate_official_pdfs||[])]){
+   try{r=await redirectSafeFetch(uri,fetcher);downloadSource=uri;break}
+   catch(e){downloadErrors.push(String(e.message));}
+  }
+  if(!r)throw Error('Official full-PDF sources unavailable: '+downloadErrors.join(' | ').slice(0,180));
   const len=Number(r.headers.get('content-length'));
   if(Number.isFinite(len)&&len>MAX_BOOK)throw Error('Full PDF exceeds per-book storage cap');
   const input=Readable.fromWeb(r.body);
@@ -108,6 +114,7 @@ export async function savePdfFully(book,{fetcher=fetch}={}){
     '\nThird-party restrictions/exceptions: '+book.rights_scope+
     '\nThis is a complete byte-for-byte PDF archive, NOT an independently approved clinical source or an AI-indexed textbook.\n');
   const record={id:book.id,title:book.title,source_page:book.source_page,official_pdf:book.official_pdf,
+   download_source_used:downloadSource,
    license:book.license,attribution:book.attribution,archival_status:'full-file-verified',
    clinical_retrieval_enabled:false,independent_clinical_review:'pending',
    original_pdf_bytes:total,original_pdf_sha256:digest,pages,parts:pieces};
