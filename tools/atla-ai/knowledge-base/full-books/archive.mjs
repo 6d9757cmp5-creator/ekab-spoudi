@@ -20,7 +20,7 @@ const STORAGE=join(HERE,'complete');
 const MAX_BOOK=160*1024*1024;
 const MAX_TOTAL=450*1024*1024;
 const SHARD_BYTES=16*1024*1024;
-const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu']);
+const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu','minds.wisc.edu']);
 const sha=data=>createHash('sha256').update(data).digest('hex');
 export function isAllowedSource(raw){
  try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&ALLOWED_HOSTS.has(u.hostname)}catch{return false}
