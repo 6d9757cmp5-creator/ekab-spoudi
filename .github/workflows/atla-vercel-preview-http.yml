@@ -1,0 +1,40 @@
+# This workflow checks Vercel's authenticated deployment readiness through
+# GitHub commit status. Do NOT curl the protected preview without authentication:
+# that returns Vercel Login (HTTP 200), not ATLA page content.
+# Actual page contents are separately verified through the authorized Vercel app.
+name: ATLA Vercel protected preview readiness
+on:
+  pull_request:
+    paths:
+      - 'docs/ATLA_IPHONE_SAFARI_VERCEL_ACCEPTANCE_2026-11-02.md'
+      - '.github/workflows/atla-vercel-preview-http.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  statuses: read
+jobs:
+  deployment-readiness:
+    if: github.event_name != 'pull_request' || github.event.pull_request.number == 151
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Wait for Vercel commit status (no protection bypass)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          echo "Readiness only — content must be tested using authenticated Vercel access."
+          for attempt in $(seq 1 30); do
+            state="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${TARGET_SHA}/statuses" --jq '[.[] | select(.context == "Vercel")][0].state // "pending"')"
+            echo "Vercel status on target SHA: $state (attempt $attempt)"
+            case "$state" in
+              success) echo "PASS: Vercel reports deployment READY for ${TARGET_SHA}"; exit 0 ;;
+              failure|error) echo "::error::Vercel deployment failed for ${TARGET_SHA}"; exit 1 ;;
+              pending) sleep 12 ;;
+              *) echo "::error::Unexpected Vercel status: $state"; exit 1 ;;
+            esac
+          done
+          echo "::error::Vercel readiness not confirmed within 6 minutes."
+          exit 1
