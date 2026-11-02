@@ -243,3 +243,39 @@ test('cross-file scan consistency rejects mixed or stale review-only evidence',(
  for(const candidate of bad)
   assert.throws(()=>validateQueueFiles(candidate),/inconsistent-research-queue/);
 });
+
+test('report article identity and digest must match the pending bibliography',()=>{
+ const scanTime='2026-11-02T02:15:00.000Z';
+ const pendingItem={...paper,status:'pending-review',content_imported:false,
+  clinical_approval:false,atla_ai_retrieval_enabled:false};
+ const reviewItem=record(pendingItem,abstract,
+  {status:'ai-disabled-awaiting-explicit-cost-approval',assessment:null},scanTime);
+ const base={
+  report:{schema_version:2,generated_at:scanTime,stage:'research-only-awaiting-independent-review',
+   source_discovery_completed:true,clinical_knowledge_imported:0,
+   existing_curriculum_changed:false,items:[reviewItem],
+   source_discovery:{monitored_urls:1,monitored_ok:1,pubmed_topics_checked:10,
+    pubmed_topics_failed:0,newly_discovered_papers:1}},
+  metadata:{schema_version:1,checked_at:scanTime,monitored_urls:1,monitored_ok:1,
+   pending_papers:1,newly_discovered_papers:1,pubmed_topics_checked:10,
+   pubmed_failures:[],model_training_performed:false,
+   clinical_retrieval_updated:false,full_texts_imported:0},
+  health:{schema_version:1,checked_at:scanTime,sources:[{
+   url:'https://www.who.int/guidelines',ok:true,
+   clinical_approval:false,knowledge_ingestion_enabled:false}]},
+  pending:{schema_version:1,checked_at:scanTime,items:[pendingItem]}
+ };
+ assert.equal(validateQueueFiles(base),true);
+ for(const patch of [
+  {id:'pubmed-99999999'},
+  {source_url:'https://example.com/fake-paper'},
+  {title:'Unrelated study title'},
+  {topic_ids:['trauma']},
+  {publication_types:['Practice Guideline']},
+  {abstract_sha256:'not-a-sha256'},
+  {abstract_sha256:null,abstract_available:true}
+ ]){
+  const altered={...base,report:{...base.report,items:[{...reviewItem,...patch}]}};
+  assert.throws(()=>validateQueueFiles(altered),/inconsistent-research-queue/);
+ }
+});
