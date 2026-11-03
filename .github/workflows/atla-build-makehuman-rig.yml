@@ -1,7 +1,7 @@
 name: ATLA Build MakeHuman CC0 Rigged Educational Model
 on:
   push:
-    branches: [feature/atla-full-model-workspace-20261103]
+    branches: [main, feature/atla-full-model-workspace-20261103]
     paths:
       - '.github/workflows/atla-build-makehuman-rig.yml'
       - 'scripts/build-atla-makehuman-rig.py'
@@ -57,7 +57,7 @@ jobs:
           JS
       - name: Commit only verified, original-source educational rigged GLB
         env:
-          ATLA_BRANCH: feature/atla-full-model-workspace-20261103
+          ATLA_BRANCH: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           test $(stat -c%s tools/patient-simulator/assets/patients/atla-makehuman-rigged-educational.glb) -lt 90000000
