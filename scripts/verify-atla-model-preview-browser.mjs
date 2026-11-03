@@ -1,4 +1,4 @@
-import {chromium} from 'playwright';
+import {chromium,webkit} from 'playwright';
 import {spawn} from 'node:child_process';
 import {mkdirSync,readFileSync} from 'node:fs';
 import {buildModelList} from '../tools/atla-ai/model-preview-catalog.mjs';
@@ -71,6 +71,29 @@ try{
   console.log('BROWSER '+test.tool+' source='+test.sourceType+' assets='+opts.length+' selected='+opts[smallest].label+' errors='+errors.length);
   await page.close();
  }
+  // WebKit mobile: smoke the two independent viewers with real small source models.
+  const safari=await webkit.launch({headless:true});
+  try {
+   for(const cfg of [{tool:'anatomy',expected:54},{tool:'cockpit',expected:2}]){
+    const mobile=await safari.newPage({viewport:{width:390,height:780},isMobile:true,hasTouch:true});
+    const pageErrors=[];
+    mobile.on('pageerror',e=>pageErrors.push(e.message));
+    await mobile.goto(BASE+'ui-tools/atla-resource-preview.html?tool='+cfg.tool,{waitUntil:'domcontentloaded'});
+    await mobile.waitForFunction(count=>document.querySelector('#source-model').options.length===count,cfg.expected,{timeout:60000});
+    const items=buildModelList(cfg.tool,JSON.parse(readFileSync(
+     cfg.tool==='anatomy'?'tools/anatomy-3d/resources/imported-manifest.json':'tools/patient-simulator/resources/quaternius/imported-manifest.json','utf8')));
+    const smallest=items.reduce((n,a,i)=>a.bytes<items[n].bytes?i:n,0);
+    await mobile.selectOption('#source-model',String(smallest));
+    await mobile.locator('#source-load').click();
+    await mobile.waitForFunction(()=>document.querySelector('#source-status').textContent.includes('Φορτώθηκε'),null,{timeout:120000});
+    if(!await mobile.locator('#part-isolate').isEnabled())failures.push('WebKit '+cfg.tool+' model explorer controls unavailable');
+    await mobile.locator('#view-reset').click();
+    if(pageErrors.length)failures.push('WebKit '+cfg.tool+' exceptions: '+pageErrors.slice(0,2).join(';'));
+    await mobile.screenshot({path:'browser-qa-results/atla-mobile-webkit-'+cfg.tool+'.png'});
+    console.log('PASS WEBKIT MOBILE '+cfg.tool+' '+items[smallest].label);
+    await mobile.close();
+   }
+  }finally{await safari.close()}
 }finally{
  await browser?.close();
  server.kill('SIGTERM');
