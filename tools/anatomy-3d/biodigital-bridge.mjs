@@ -55,7 +55,9 @@ async function openProvider(){
   say('Ο εξωτερικός viewer φορτώνει, αλλά το Viewer API δεν ήταν διαθέσιμο. Τα εξωτερικά χειριστήρια παραμένουν ανενεργά.');return;
  }
  try{
-  const candidate=new window.HumanAPI('providerFrame');
+  const candidate=new window.HumanAPI({iframeId:'providerFrame',onUnsupported:()=>{
+   say('Το BioDigital Viewer δεν υποστηρίζει την τρέχουσα σύνδεση. Έλεγξε το επίσημο Published Viewer URL και το Developer App.');
+  }});
   human=candidate;
   candidate.on('human.ready',()=>{
    if(human!==candidate)return;
@@ -91,6 +93,14 @@ async function openProvider(){
   candidate.on('timeline.completed',()=>{if(human!==candidate)return;tourPlaying=false;controls(true)});
   candidate.on('scene.restored',()=>{if(human!==candidate)return;isolated=false;capturedScene=null;controls(true)});
   providerFrame.src=published;
+  // The provider can show an authentication error inside its cross-origin iframe
+  // without firing human.ready. Never assume the URL alone proves entitlement.
+  setTimeout(()=>{
+   if(human===candidate&&!ready){
+    controls(false);
+    say('Δεν επιβεβαιώθηκε σύνδεση BioDigital Viewer API. Έλεγξε μέσα στο 3D παράθυρο για σφάλμα ταυτοποίησης και χρησιμοποίησε τον επίσημο σύνδεσμο Publish με τα στοιχεία Developer App που απαιτούνται.');
+   }
+  },12000);
  }catch{
   human=null;ready=false;controls(false);say('Αποτυχία σύνδεσης Viewer API. Ο εξωτερικός viewer παραμένει διαθέσιμος.');
   providerFrame.src=published;
