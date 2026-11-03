@@ -245,6 +245,8 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
    }else{failed=true;console.warn('[EKAB Simulator] GLB load failed',r.reason);}
   });
   refreshMarks();
+  gl.domElement.dataset.riggedModel=people.a?.userData.key==='makehuman'&&!!mixers.a?'ready':'off';
+  gl.domElement.dataset.riggedClips=String(people.a?.userData.clipCount||0);
   if(needsFocus)applyFocus();
   report(failed?'partial':people.a&&people.b?'ready':'partial');
  }
