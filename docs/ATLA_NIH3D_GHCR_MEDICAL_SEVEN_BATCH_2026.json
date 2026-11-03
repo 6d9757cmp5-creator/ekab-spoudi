@@ -1,0 +1,708 @@
+{
+  "schemaVersion": 2,
+  "status": "ALL_51_LISTED_ORIGINALS_PERSISTED_AND_ANONYMOUSLY_RESTORED",
+  "scope": "Seven public-domain NIH medical research records only; not full NIH",
+  "imageTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+  "immutableDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+  "models": 7,
+  "files": 51,
+  "totalOriginalBytes": 55278017,
+  "completeForTheseCatalogEntries": true,
+  "allListedOriginalFormatsForTheseCatalogEntries": true,
+  "fullNIHArchiveComplete": false,
+  "everySourceSHA256CheckedAfterRecovery": true,
+  "scientificallyApproved": false,
+  "copyrightAndAttribution": [
+    {
+      "entryId": 105,
+      "accession": "3DPX-000105",
+      "title": "A cryo-electron microscopic study of ribosome-bound termination factor RF2.",
+      "category": "Biomacromolecules",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000105",
+      "sourceVersion": 3,
+      "sourceDescription": "RF2",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 8,
+      "clinicallyReviewed": false
+    },
+    {
+      "entryId": 190,
+      "accession": "3DPX-000190",
+      "title": "X-Ray structure of r[CGCG(5-fluoro)CG]2",
+      "category": "Biomacromolecules",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000190",
+      "sourceVersion": 3,
+      "sourceDescription": "PDB Classification: RNA",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 15,
+      "clinicallyReviewed": false
+    },
+    {
+      "entryId": 251,
+      "accession": "3DPX-000251",
+      "title": "DNA segment based on 1bna",
+      "category": "Biomacromolecules",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000251",
+      "sourceVersion": 3,
+      "sourceDescription": "<p>A simple DNA created for use in an animation a long time ago from pdb ID number 1bna.</p>\r\n",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 5,
+      "clinicallyReviewed": false
+    },
+    {
+      "entryId": 277,
+      "accession": "3DPX-000277",
+      "title": "Dodecameric structure of the small heat shock protein Acr1 from Mycobacterium tuberculosis.",
+      "category": "Biomacromolecules",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000277",
+      "sourceVersion": 3,
+      "sourceDescription": "Negative stain EM map of dodecamer of\n      M.tuberculosis Acr1",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 8,
+      "clinicallyReviewed": false
+    },
+    {
+      "entryId": 334,
+      "accession": "3DPX-000334",
+      "title": "Shoulder Fracture",
+      "category": "Anatomy",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000334",
+      "sourceVersion": 3,
+      "sourceDescription": "",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 5,
+      "clinicallyReviewed": false
+    },
+    {
+      "entryId": 379,
+      "accession": "3DPX-000379",
+      "title": "Lumbar Spine - L4",
+      "category": "Anatomy",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000379",
+      "sourceVersion": 3,
+      "sourceDescription": "<p>L4 Lumbar Spine Model</p>\r\n",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 5,
+      "clinicallyReviewed": false
+    },
+    {
+      "entryId": 451,
+      "accession": "3DPX-000451",
+      "title": "Lymphatic vessel and valve, theoretical construct",
+      "category": "Anatomy",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000451",
+      "sourceVersion": 3,
+      "sourceDescription": "<h1>Lymph vessel with valve</h1>\r\n\r\n<p>The lymphatic microvasculature is responsible for removing interstitial fluids and proteins from the body. &nbsp;Tumor cells and leukocytes may enter the lymphatic microvasculature. &nbsp;The lymphatic vessels are structurally and functionally distinct from the blood vascular system. &nbsp;</p>\r\n\r\n<p>This .STL",
+      "sourceLicense": "Public Domain",
+      "originalFormatsListed": 5,
+      "clinicallyReviewed": false
+    }
+  ],
+  "filesByFormat": {
+    "X3D": 10,
+    "GLB": 15,
+    "WRL": 15,
+    "STL": 7,
+    "OBJ": 4
+  },
+  "sourceManifest": {
+    "originalModels": [
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "title": "A cryo-electron microscopic study of ribosome-bound termination factor RF2.",
+        "category": "Biomacromolecules",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000105",
+        "sourceVersion": 3,
+        "sourceDescription": "RF2",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 8,
+        "clinicallyReviewed": false
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "title": "X-Ray structure of r[CGCG(5-fluoro)CG]2",
+        "category": "Biomacromolecules",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000190",
+        "sourceVersion": 3,
+        "sourceDescription": "PDB Classification: RNA",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 15,
+        "clinicallyReviewed": false
+      },
+      {
+        "entryId": 251,
+        "accession": "3DPX-000251",
+        "title": "DNA segment based on 1bna",
+        "category": "Biomacromolecules",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000251",
+        "sourceVersion": 3,
+        "sourceDescription": "<p>A simple DNA created for use in an animation a long time ago from pdb ID number 1bna.</p>\r\n",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 5,
+        "clinicallyReviewed": false
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "title": "Dodecameric structure of the small heat shock protein Acr1 from Mycobacterium tuberculosis.",
+        "category": "Biomacromolecules",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000277",
+        "sourceVersion": 3,
+        "sourceDescription": "Negative stain EM map of dodecamer of\n      M.tuberculosis Acr1",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 8,
+        "clinicallyReviewed": false
+      },
+      {
+        "entryId": 334,
+        "accession": "3DPX-000334",
+        "title": "Shoulder Fracture",
+        "category": "Anatomy",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000334",
+        "sourceVersion": 3,
+        "sourceDescription": "",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 5,
+        "clinicallyReviewed": false
+      },
+      {
+        "entryId": 379,
+        "accession": "3DPX-000379",
+        "title": "Lumbar Spine - L4",
+        "category": "Anatomy",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000379",
+        "sourceVersion": 3,
+        "sourceDescription": "<p>L4 Lumbar Spine Model</p>\r\n",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 5,
+        "clinicallyReviewed": false
+      },
+      {
+        "entryId": 451,
+        "accession": "3DPX-000451",
+        "title": "Lymphatic vessel and valve, theoretical construct",
+        "category": "Anatomy",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000451",
+        "sourceVersion": 3,
+        "sourceDescription": "<h1>Lymph vessel with valve</h1>\r\n\r\n<p>The lymphatic microvasculature is responsible for removing interstitial fluids and proteins from the body. &nbsp;Tumor cells and leukocytes may enter the lymphatic microvasculature. &nbsp;The lymphatic vessels are structurally and functionally distinct from the blood vascular system. &nbsp;</p>\r\n\r\n<p>This .STL",
+        "sourceLicense": "Public Domain",
+        "originalFormatsListed": 5,
+        "clinicallyReviewed": false
+      }
+    ],
+    "originalFiles": [
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838872",
+        "verifiedBytes": 424373,
+        "sha256": "96239f910390dd3567c6ecdef08850b6f5bea4c9249bc270f7af60cda5fd029b",
+        "archivePath": "originals/3DPX-000105/000.x3d",
+        "originalName": "1010-vol-surf-highres-radial-print_caution-nih3d.x3d"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838875",
+        "verifiedBytes": 890796,
+        "sha256": "9fbb24b234adf815e47cbf0161ccb8f2bfd9f4e14f4495cc7d07e7c3685b4f56",
+        "archivePath": "originals/3DPX-000105/001.glb",
+        "originalName": "1010-vol-surf-highres-radial-print_caution-nih3d.glb"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838876",
+        "verifiedBytes": 320800,
+        "sha256": "3ec788cad732e9d8117ada1a530d1664819910561c537556b7c4b803e231f865",
+        "archivePath": "originals/3DPX-000105/002.wrl",
+        "originalName": "1010-vol-surf-highres-radial.wrl"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838878",
+        "verifiedBytes": 1424869,
+        "sha256": "779d78b2c7284105acd2d409ff16ec6a3c9e932c7c88e6ab3410395fb99feb73",
+        "archivePath": "originals/3DPX-000105/003.wrl",
+        "originalName": "1010-vol-surf-highres-radial-print_caution-nih3d.wrl"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838882",
+        "verifiedBytes": 1600829,
+        "sha256": "4d7a95847ce8c463a12c0fd37386a5540c472b427a588748a39092422b9c4bc6",
+        "archivePath": "originals/3DPX-000105/004.wrl",
+        "originalName": "1010-vol-surf-highres-nocolor-print_caution-nih3d.wrl"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838883",
+        "verifiedBytes": 609916,
+        "sha256": "7b1709ada0d440da8281675ee2ff252d2c0051b2ed07ac702e0d4c629b9fb130",
+        "archivePath": "originals/3DPX-000105/005.glb",
+        "originalName": "1010-vol-surf-highres-nocolor-print_caution-nih3d.glb"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838886",
+        "verifiedBytes": 188700,
+        "sha256": "372eff2236414e86e70897df5db604f679a181f5d64ddc6d85a949efb590fd0c",
+        "archivePath": "originals/3DPX-000105/006.glb",
+        "originalName": "1010-vol-surf-highres-nocolor.glb"
+      },
+      {
+        "entryId": 105,
+        "accession": "3DPX-000105",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838888",
+        "verifiedBytes": 390284,
+        "sha256": "e99aa84cc760193f7189475c5515d143fd71e11b1dc36f88f0c9483ddfe0c06b",
+        "archivePath": "originals/3DPX-000105/007.stl",
+        "originalName": "1010-vol-surf-highres-nocolor-print_caution-nih3d.stl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841623",
+        "verifiedBytes": 350983,
+        "sha256": "42b8b418b2b76e8b8047f51948215615be5dccc9bb4c83cbd159c263ed0f1308",
+        "archivePath": "originals/3DPX-000190/000.x3d",
+        "originalName": "3jxr-ribbon-thick-print_struts-rainbow-print_caution-nih3d.x3d"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841626",
+        "verifiedBytes": 729972,
+        "sha256": "8b413d55d82ccd0e6e7453aabd85340463e29e6d3bdcca24a36a4285bcd20dab",
+        "archivePath": "originals/3DPX-000190/001.glb",
+        "originalName": "3jxr-ribbon-thick-print_struts-rainbow-print_caution-nih3d.glb"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841627",
+        "verifiedBytes": 325137,
+        "sha256": "b81a34ce9f1ea20e2142677ad9bce6633fda59a6bba945a66330b5512f85847f",
+        "archivePath": "originals/3DPX-000190/002.wrl",
+        "originalName": "3jxr-ribbon-thick-print_struts-rainbow.wrl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841629",
+        "verifiedBytes": 1140995,
+        "sha256": "a6b5c76120d03039ccb26c465f9200f59d51809f6dcb0f7256518239ba948975",
+        "archivePath": "originals/3DPX-000190/003.wrl",
+        "originalName": "3jxr-ribbon-thick-print_struts-rainbow-print_caution-nih3d.wrl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841632",
+        "verifiedBytes": 597076,
+        "sha256": "0d81714589adf3b86850a17fb5cf264f857f12091ebf08b3d1e4a7937d5216d7",
+        "archivePath": "originals/3DPX-000190/004.glb",
+        "originalName": "3jxr-mol-surf-lowres-bychain.glb"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841634",
+        "verifiedBytes": 1194053,
+        "sha256": "b85771856d50affb5fa913150d9a448b671e9d0a2de0a00a0d162d57a5ee9d50",
+        "archivePath": "originals/3DPX-000190/005.x3d",
+        "originalName": "3jxr-mol-surf-lowres-bychain-nih3d.x3d"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841635",
+        "verifiedBytes": 511784,
+        "sha256": "f55e396bb5a1cc97a37f3e274517de160709b457a83808cf90e22878691168f9",
+        "archivePath": "originals/3DPX-000190/006.glb",
+        "originalName": "3jxr-mol-surf-lowres-bychain-nih3d.glb"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841639",
+        "verifiedBytes": 1049534,
+        "sha256": "a846f2c108fbb6a951f247f3836238c37ad740ce3c48794ab3e6c8f1cac0115c",
+        "archivePath": "originals/3DPX-000190/007.wrl",
+        "originalName": "3jxr-mol-surf-lowres-bychain-nih3d.wrl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841643",
+        "verifiedBytes": 389137,
+        "sha256": "78b0ebd7a5b9a0df2f6cb8b6d529017cae8cd6592cc2c31fec5019ec96c533a5",
+        "archivePath": "originals/3DPX-000190/008.x3d",
+        "originalName": "3jxr-ribbon-thick-print_struts-bychain-print_caution-nih3d.x3d"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841646",
+        "verifiedBytes": 729972,
+        "sha256": "799aa1d9ab5133578e39815974e6f1ee35d8cc006706e166324fd8ec714830ff",
+        "archivePath": "originals/3DPX-000190/009.glb",
+        "originalName": "3jxr-ribbon-thick-print_struts-bychain-print_caution-nih3d.glb"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841647",
+        "verifiedBytes": 383609,
+        "sha256": "88d580307eb2beac0120bc5e1185fab672b3a5a532cc3b4489066b9b04a70236",
+        "archivePath": "originals/3DPX-000190/010.wrl",
+        "originalName": "3jxr-ribbon-thick-print_struts-bychain.wrl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841649",
+        "verifiedBytes": 1243311,
+        "sha256": "b378c1a08373fb88f220e4547082a98df7e4c281992606ba94abc2e6dbc83909",
+        "archivePath": "originals/3DPX-000190/011.wrl",
+        "originalName": "3jxr-ribbon-thick-print_struts-bychain-print_caution-nih3d.wrl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841654",
+        "verifiedBytes": 347684,
+        "sha256": "f2f98a82fb3ff1db87a4a18bd7a27ec70ff86a397ff189071d5f8ebb881a4db4",
+        "archivePath": "originals/3DPX-000190/012.stl",
+        "originalName": "3jxr-ribbon-thin-nocolor-nih3d.stl"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841656",
+        "verifiedBytes": 215300,
+        "sha256": "b205cb8aa7e947115a5f9b15729efb4aeb8efbeaf1dae7a95f3d022a606f3ff6",
+        "archivePath": "originals/3DPX-000190/013.glb",
+        "originalName": "3jxr-ribbon-thin-nocolor.glb"
+      },
+      {
+        "entryId": 190,
+        "accession": "3DPX-000190",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841657",
+        "verifiedBytes": 93983,
+        "sha256": "79f42aefd2b0d2691f74b032dd76e8c4e64a277fecac07480c7e769446e9a726",
+        "archivePath": "originals/3DPX-000190/014.x3d",
+        "originalName": "3jxr-ribbon-thin-nocolor-nih3d.x3d"
+      },
+      {
+        "entryId": 251,
+        "accession": "3DPX-000251",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838495",
+        "verifiedBytes": 1100084,
+        "sha256": "1bb44c01b6813947d08036b45766ed6e4ae5db7afe6d1b498146e73ef54aa5b7",
+        "archivePath": "originals/3DPX-000251/000.stl",
+        "originalName": "dna-nih3d.stl"
+      },
+      {
+        "entryId": 251,
+        "accession": "3DPX-000251",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838497",
+        "verifiedBytes": 1136935,
+        "sha256": "3abf9ce36dd56e767e622f77eb832dd32385b3c7282c6e4826be3bddfbe36069",
+        "archivePath": "originals/3DPX-000251/001.x3d",
+        "originalName": "dna-nih3d.x3d"
+      },
+      {
+        "entryId": 251,
+        "accession": "3DPX-000251",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838498",
+        "verifiedBytes": 1599204,
+        "sha256": "116d582cf5d492589cc1bc6ad64a2aa8db72f49f7589f85740ce82053b6ed24e",
+        "archivePath": "originals/3DPX-000251/002.glb",
+        "originalName": "dna-nih3d.glb"
+      },
+      {
+        "entryId": 251,
+        "accession": "3DPX-000251",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838500",
+        "verifiedBytes": 4210056,
+        "sha256": "0481d9174992ef497750a79c75604f4864ca49c2e4865e5ab1e7547ecb138a37",
+        "archivePath": "originals/3DPX-000251/003.wrl",
+        "originalName": "dna-nih3d.wrl"
+      },
+      {
+        "entryId": 251,
+        "accession": "3DPX-000251",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838501",
+        "verifiedBytes": 1501559,
+        "sha256": "e3e0d22a69f718d5fd426b44e1ddcc4fdc16d51e2de15e6d04ff28d44cf015e7",
+        "archivePath": "originals/3DPX-000251/004.obj",
+        "originalName": "dna-nih3d.obj"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846797",
+        "verifiedBytes": 2326544,
+        "sha256": "0a8cc6b8058ffdb000bef73757aa7fbce5132dfc48611419631892ebbb2064a0",
+        "archivePath": "originals/3DPX-000277/000.wrl",
+        "originalName": "1149-vol-surf-highres-nocolor-print_caution-nih3d.wrl"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846798",
+        "verifiedBytes": 885404,
+        "sha256": "0a8a6d9937803eeb6999fa5793b30c6e859c39ef68f3a08cd61bca4bd397429e",
+        "archivePath": "originals/3DPX-000277/001.glb",
+        "originalName": "1149-vol-surf-highres-nocolor-print_caution-nih3d.glb"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846801",
+        "verifiedBytes": 273484,
+        "sha256": "fd56f3d3ef2ede2d15aff1089eb16f3f12db881e7d1d5b650567f358615e5f6a",
+        "archivePath": "originals/3DPX-000277/002.glb",
+        "originalName": "1149-vol-surf-highres-nocolor.glb"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846803",
+        "verifiedBytes": 566884,
+        "sha256": "b7b2487f9a7f2e7716c400115b356dbbe07115d7c1f19b7128e84fdc44872719",
+        "archivePath": "originals/3DPX-000277/003.stl",
+        "originalName": "1149-vol-surf-highres-nocolor-print_caution-nih3d.stl"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846807",
+        "verifiedBytes": 607072,
+        "sha256": "575f95bea611da520890b53dbd41433b44bbce13b26f177b28fa9c78ad5f594f",
+        "archivePath": "originals/3DPX-000277/004.x3d",
+        "originalName": "1149-vol-surf-highres-radial-print_caution-nih3d.x3d"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846810",
+        "verifiedBytes": 1293516,
+        "sha256": "83f2f3dab48494ae47c6d7b1c562762332f261298be7b5e9b388a9a81ea3a7bc",
+        "archivePath": "originals/3DPX-000277/005.glb",
+        "originalName": "1149-vol-surf-highres-radial-print_caution-nih3d.glb"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846811",
+        "verifiedBytes": 456872,
+        "sha256": "280834c468ef2c6a42896bc2afc7b88e3d0aa376ac90648a4cea3617df61b076",
+        "archivePath": "originals/3DPX-000277/006.wrl",
+        "originalName": "1149-vol-surf-highres-radial.wrl"
+      },
+      {
+        "entryId": 277,
+        "accession": "3DPX-000277",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846813",
+        "verifiedBytes": 2072148,
+        "sha256": "eb1cb58829d8bb7a185f8116b409121e57c21f0da23485ed5168bcdf69fc7c68",
+        "archivePath": "originals/3DPX-000277/007.wrl",
+        "originalName": "1149-vol-surf-highres-radial-print_caution-nih3d.wrl"
+      },
+      {
+        "entryId": 334,
+        "accession": "3DPX-000334",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840706",
+        "verifiedBytes": 978684,
+        "sha256": "d7ab6234a2f075f75a848dbb5e6561f1cb88c268fc39fef0c72a39e5525a56f6",
+        "archivePath": "originals/3DPX-000334/000.stl",
+        "originalName": "frat_ombro_muito_simples-nih3d.stl"
+      },
+      {
+        "entryId": 334,
+        "accession": "3DPX-000334",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840708",
+        "verifiedBytes": 976243,
+        "sha256": "3db74c1ae0a23d697249422e8eb8fcc6603cc3f9f5a5a204992785d66c3f71af",
+        "archivePath": "originals/3DPX-000334/001.x3d",
+        "originalName": "frat_ombro_muito_simples-nih3d.x3d"
+      },
+      {
+        "entryId": 334,
+        "accession": "3DPX-000334",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840709",
+        "verifiedBytes": 1527512,
+        "sha256": "536eff9e41fbf3bd7412f2b3fa968ced9426b3ec7b193d181d9a4e83fb4ec562",
+        "archivePath": "originals/3DPX-000334/002.glb",
+        "originalName": "frat_ombro_muito_simples-nih3d.glb"
+      },
+      {
+        "entryId": 334,
+        "accession": "3DPX-000334",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840711",
+        "verifiedBytes": 3988410,
+        "sha256": "3f039976fd21ef727b9ca0c38b1b94fe65511b7ae6d91f36b58bfe0c062032c6",
+        "archivePath": "originals/3DPX-000334/003.wrl",
+        "originalName": "frat_ombro_muito_simples-nih3d.wrl"
+      },
+      {
+        "entryId": 334,
+        "accession": "3DPX-000334",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840712",
+        "verifiedBytes": 1537540,
+        "sha256": "0b43ff9fdfd180f0087879d68221d676dbd31731a7db3628d0234e2f80e761d2",
+        "archivePath": "originals/3DPX-000334/004.obj",
+        "originalName": "frat_ombro_muito_simples-nih3d.obj"
+      },
+      {
+        "entryId": 379,
+        "accession": "3DPX-000379",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844886",
+        "verifiedBytes": 840334,
+        "sha256": "be97a2109384950c74e30dd9e005bd322accaa86b887c87cc227d7a6abea40f7",
+        "archivePath": "originals/3DPX-000379/000.stl",
+        "originalName": "col_lombar_apenas_l4-nih3d.stl"
+      },
+      {
+        "entryId": 379,
+        "accession": "3DPX-000379",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844888",
+        "verifiedBytes": 854665,
+        "sha256": "8036ab052566d83e7e5f77023e2dc20d4afce80b3e299e32a34c267215383454",
+        "archivePath": "originals/3DPX-000379/001.x3d",
+        "originalName": "col_lombar_apenas_l4-nih3d.x3d"
+      },
+      {
+        "entryId": 379,
+        "accession": "3DPX-000379",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844889",
+        "verifiedBytes": 1311912,
+        "sha256": "a8d05de6c80901749f7704b07eccb4e7b1b5339263a09cece820d0cae48d4d24",
+        "archivePath": "originals/3DPX-000379/002.glb",
+        "originalName": "col_lombar_apenas_l4-nih3d.glb"
+      },
+      {
+        "entryId": 379,
+        "accession": "3DPX-000379",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844891",
+        "verifiedBytes": 3423040,
+        "sha256": "b1de26ac3760ebb6776995256106f9fe85a5889517dd6bf0d29636653ec93c3d",
+        "archivePath": "originals/3DPX-000379/003.wrl",
+        "originalName": "col_lombar_apenas_l4-nih3d.wrl"
+      },
+      {
+        "entryId": 379,
+        "accession": "3DPX-000379",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844892",
+        "verifiedBytes": 1312454,
+        "sha256": "75b4f10124e628f706633731d1dd0676e79a8e5b2d26fae4c499f358b4d375d1",
+        "archivePath": "originals/3DPX-000379/004.obj",
+        "originalName": "col_lombar_apenas_l4-nih3d.obj"
+      },
+      {
+        "entryId": 451,
+        "accession": "3DPX-000451",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846084",
+        "verifiedBytes": 576084,
+        "sha256": "e38d0f31e52818013b04a830d1a2884e39529ea610293c3d9d6acb7cf2ab42fe",
+        "archivePath": "originals/3DPX-000451/000.stl",
+        "originalName": "lymphvessel-nih3d.stl"
+      },
+      {
+        "entryId": 451,
+        "accession": "3DPX-000451",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846086",
+        "verifiedBytes": 599886,
+        "sha256": "4b60cedbcacbd0cff3b7afa09ce299b9839be7d0fe8d98797e08670159f46ec4",
+        "archivePath": "originals/3DPX-000451/001.x3d",
+        "originalName": "lymphvessel-nih3d.x3d"
+      },
+      {
+        "entryId": 451,
+        "accession": "3DPX-000451",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846087",
+        "verifiedBytes": 898968,
+        "sha256": "4de85235f4a3c55ef93f207fe2fb516aa795dd659de05a25a15db4fc74a9ec62",
+        "archivePath": "originals/3DPX-000451/002.glb",
+        "originalName": "lymphvessel-nih3d.glb"
+      },
+      {
+        "entryId": 451,
+        "accession": "3DPX-000451",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846089",
+        "verifiedBytes": 2400781,
+        "sha256": "7d998ec0870a685cf7d60949428e1efcf4cad7ccb55dcc8aa3e02026da13753c",
+        "archivePath": "originals/3DPX-000451/003.wrl",
+        "originalName": "lymphvessel-nih3d.wrl"
+      },
+      {
+        "entryId": 451,
+        "accession": "3DPX-000451",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846090",
+        "verifiedBytes": 868645,
+        "sha256": "a09190cd931046a613dd71a8457a5eb67ec4110b41f49908bf0449ca61884dff",
+        "archivePath": "originals/3DPX-000451/004.obj",
+        "originalName": "lymphvessel-nih3d.obj"
+      }
+    ]
+  }
+}
