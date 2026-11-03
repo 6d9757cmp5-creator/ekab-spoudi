@@ -26,11 +26,25 @@ try{
  // The Cockpit starts the static 2-person WebGL scene automatically on load.
  // Wait for it to finish before switching to the rigged actor; otherwise the
  // initial loading state used to silently ignore a user click.
- await page.waitForFunction(()=>{
-  const canvas=document.querySelector('#next-unified-host .next-unified-canvas');
-  const toggle=document.querySelector('#next-rigged-toggle');
-  return canvas?.dataset.stageStatus==='ready'&&toggle&&!toggle.disabled;
- },null,{timeout:50000});
+ try {
+  await page.waitForFunction(()=>{
+   const canvas=document.querySelector('#next-unified-host .next-unified-canvas');
+   const toggle=document.querySelector('#next-rigged-toggle');
+   return canvas?.dataset.stageStatus==='ready'&&toggle&&!toggle.disabled;
+  },null,{timeout:45000});
+ }catch(error){
+  const state=await page.evaluate(()=>({
+   readyButton:document.querySelector('#next-ready-toggle')?.outerHTML?.slice(0,400),
+   riggedToggle:document.querySelector('#next-rigged-toggle')?.outerHTML?.slice(0,400),
+   unifiedCanvas:[...document.querySelectorAll('#next-unified-host canvas')].map(n=>({name:n.className,data:{...n.dataset}})),
+   overlayHidden:document.querySelector('#next-unified-overlay')?.hidden,
+   unifiedStatus:document.querySelector('#next-unified-status')?.textContent,
+   fallbackMessage:document.querySelector('#next-result')?.textContent?.slice(0,400),
+   modelStatus:document.querySelector('#next-mesh-status')?.textContent
+  }));
+  await page.screenshot({path:'browser-qa-results/atla-cockpit-rigged-debug.png',fullPage:true});
+  throw Error('INITIAL_STAGE_DIAGNOSTICS '+JSON.stringify({state,errors:errors.slice(-15),requests:requests.slice(-15)}).slice(0,5000)+' '+String(error));
+ }
  assert.equal(await page.locator('#next-rigged-toggle').getAttribute('aria-pressed'),'false');
  // This user choice must not change patient vitals or recorded educational session.
  const original=await page.locator('#next-hr').textContent();
