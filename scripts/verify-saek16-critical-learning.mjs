@@ -34,6 +34,8 @@ assert.match(anaphylaxis,/η ενδομυϊκή αδρεναλίνη είναι 
 assert.match(anaphylaxis,/από τον ίδιο τον ασθενή ή κατάλληλα εκπαιδευμένο πρόσωπο/);
 assert.match(anaphylaxis,/δεν αποτελεί οδηγία αυτόνομης φαρμακευτικής χορήγησης/);
 assert.match(anaphylaxis,/2025-resuscitation-guidelines\/first-aid-guidelines/);
+assert.match(anaphylaxis,/μπορεί να καθίσει με τα πόδια τεντωμένα/);
+assert.match(anaphylaxis,/Δεν πρέπει να σηκώνεται όρθιος ή να βαδίζει/);
 
 const seizures=lesson(10);
 assert.match(seizures,/Σενάριο κρίσης και μετακριτικής σύγχυσης/);
@@ -41,6 +43,8 @@ assert.match(seizures,/Γενικευμένη σπασμωδική κρίση π
 assert.match(seizures,/επαναλαμβανόμενες κρίσεις χωρίς ανάκτηση συνείδησης/);
 assert.match(seizures,/εγκεκριμένο πρωτόκολλο και πραγματοποιείται από εξουσιοδοτημένο\/εκπαιδευμένο προσωπικό/);
 assert.match(seizures,/nice\.org\.uk\/guidance\/ng217\/chapter\/7-Treating-status-epilepticus/);
+assert.match(seizures,/πάνω από 2 λεπτά περισσότερο από τη συνήθη διάρκεια του ατόμου/);
+assert.match(seizures,/τουλάχιστον 3 αυτοπεριοριζόμενες κρίσεις σε 24 ώρες/);
 
 console.log('PASS: SAEK 16 lessons 7/9/10 retain defined safety wording, scope boundaries and source links.');
 console.log('NOT CLINICAL CERTIFICATION: wording must still be reviewed by qualified professionals.');
