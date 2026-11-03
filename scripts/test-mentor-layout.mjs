@@ -61,9 +61,10 @@ test('Public URLs still exist; actual visible pages load centralized styles and 
  assert.match(lab,/src="mentor\/app\/adaptive\.js"/);
  assert.match(lab,/src="mentor\/app\/personal-v1\.js"/);
  assert.match(lab,/href="mentor\/styles\/mentor-lab\.css"/);
- assert.match(text('index.html'),/src="atla\/assistant\.mjs"/);
- assert.doesNotMatch(text('index.html'),/src="mentor-home\.js"/);
- assert.doesNotMatch(text('index.html'),/href="mentor\/styles\/mentor-avatar-live\.css"/);
+ // Keep the current main Mentor home working while the Paramedic hub owns ATLA.
+ assert.match(text('index.html'),/href="paramedic\.html"/);
+ assert.match(text('index.html'),/src="mentor-home\.js"/);
+ assert.match(text('paramedic.html'),/src="atla\/assistant\.mjs"/);
 });
 test('Styles and all 3D assets are centrally available byte-for-byte',()=>{
  for(const style of css)assert.ok(file('mentor/styles/'+style).length>500);
