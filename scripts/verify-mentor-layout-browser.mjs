@@ -50,8 +50,10 @@ try{
   assert.ok((await page.locator('body').innerText()).length>50,p);
  }
  await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
+ assert.ok(await page.locator('a[href="paramedic.html"]').count(),'Home must retain an ATLA Paramedic entry');
+ await page.goto(base+'paramedic.html',{waitUntil:'domcontentloaded'});
  await page.waitForTimeout(800);
- assert.ok(requests.includes('/atla/assistant.mjs'),'ATLA assistant must be loaded');
+ assert.ok(requests.includes('/atla/assistant.mjs'),'ATLA assistant must be loaded on Paramedic hub');
  await page.locator('.atla-launcher').click();
  assert.ok(await page.locator('.atla-panel').isVisible(),'ATLA assistant panel must open');
  await page.locator('.atla-close').click();
