@@ -1,0 +1,87 @@
+name: EKAB - Safe historical NIH3D large artifact rescue
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/recover-nih3d-large.yml'
+      - 'scripts/nih3d_stream_restore.py'
+      - 'scripts/test_nih3d_stream_restore.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/recover-nih3d-large.yml'
+      - 'scripts/nih3d_stream_restore.py'
+      - 'scripts/test_nih3d_stream_restore.py'
+  schedule:
+    - cron: '17 */3 * * *'
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: ekab-nih3d-historical-streamed-rescue
+  cancel-in-progress: false
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d_stream_restore.py
+            scripts/test_nih3d_stream_restore.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and validate bounded HTTP Range recovery
+        run: |
+          python -m py_compile scripts/nih3d_stream_restore.py
+          python -m unittest discover -s scripts -p 'test_nih3d_stream_restore.py' -v
+  plan:
+    needs: tests
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d_stream_restore.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inventory only unexpired missing NIH original bundles
+        id: plan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/nih3d_stream_restore.py plan
+  restore:
+    needs: plan
+    if: needs.plan.result == 'success' && needs.plan.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d_stream_restore.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Stream original ZIP64 members and verify durable asset SHA256
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          python scripts/nih3d_stream_restore.py recover
+          --artifact ${{ matrix.id }}
+          --start ${{ matrix.start }}
