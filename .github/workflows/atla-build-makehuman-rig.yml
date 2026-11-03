@@ -25,9 +25,9 @@ jobs:
       - name: Install Blender offline converter
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends blender
+          sudo apt-get install -y --no-install-recommends blender python3-numpy
       - name: Build educational patient directly from pinned original mesh, skeleton, and weights
-        run: blender --background --threads 2 --python scripts/build-atla-makehuman-rig.py
+        run: PYTHONPATH=/usr/lib/python3/dist-packages blender --background --threads 2 --python scripts/build-atla-makehuman-rig.py
       - name: Verify glTF 2.0 export is really skinned and animated
         run: |
           node --input-type=module <<'JS'
