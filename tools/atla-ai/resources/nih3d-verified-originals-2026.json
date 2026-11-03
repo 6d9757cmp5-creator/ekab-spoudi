@@ -4,13 +4,13 @@
   "catalogSourceEntries": 15688,
   "allCatalogModelsReferenced": 15688,
   "archiveModelsWithAnyOriginal": 7,
-  "modelsWithAllCatalogOriginalFilesVerified": 6,
-  "modelsWithPartialCatalogOriginalsVerified": 1,
+  "modelsWithAllCatalogOriginalFilesVerified": 7,
+  "modelsWithPartialCatalogOriginalsVerified": 0,
   "modelsWithoutAnyVerifiedOriginals": 15681,
   "individualCatalogOriginalFileReferences": 204346,
-  "uniqueVerifiedOriginalFiles": 41,
-  "duplicateCopiesAcrossOCIImages": 1,
-  "totalDistinctVerifiedOriginalBytes": 75574737,
+  "uniqueVerifiedOriginalFiles": 48,
+  "duplicateCopiesAcrossOCIImages": 2,
+  "totalDistinctVerifiedOriginalBytes": 79155710,
   "sourceSHA256AndAnonymousRecoveryVerified": true,
   "fullNIHArchiveComplete": false,
   "clinicalScientificReviewComplete": false,
@@ -36,6 +36,13 @@
       "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb5ab3f10913f9159d4d1b491bf0e63b6b4f34d28d6045dc5463747529d7b780",
       "filesVerifiedInReport": 25,
       "verifiedByAnonymousOCIRecovery": true
+    },
+    {
+      "sourceReport": "docs/ATLA_NIH3D_GHCR_MOLECULAR_BATCH_2026.json",
+      "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+      "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+      "filesVerifiedInReport": 8,
+      "verifiedByAnonymousOCIRecovery": true
     }
   ],
   "models": [
@@ -59,12 +66,109 @@
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:d14066bc91561d0f42c5bcab00eb308bb94ebc9504cc5f25bcebf793a3c3d48b",
             "filePath": "originals/3DPX-000012.glb"
           },
+          "alternateVerifiedOCI": [
+            {
+              "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+              "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+              "filePath": "originals/3DPX-000012/006.glb"
+            }
+          ],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 265496,
+          "sha256": "1b481be62965b969ebba078a47129a8712f4d554a5aaca5966377ec94958fb16",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838851",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/000.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 568476,
+          "sha256": "2d35d983cc9102092d3cf432344635d29aea7369d07f5cba8e3be84f07440d39",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838854",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/001.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 199721,
+          "sha256": "93cbea9062bd76165f278c04b12414ab3b260f342df4666fb88ed3cf4d71c506",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838855",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/002.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 901337,
+          "sha256": "3d2513e2fbf6944c96e1de0703a9bc9b16412e56e33746e3ed3c5960c60953ef",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838857",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1007731,
+          "sha256": "097144f29436bca4f7a1f2d1a216e93d3b4912d542e110d532be8e92bcb57e25",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838861",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/004.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 389328,
+          "sha256": "70d0dcda7b5f724618d688b26e0d912b4bd7924800d61c6e3db8487f89fc9b4a",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838862",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/005.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 248884,
+          "sha256": "144b4fa112eff5262e863201cbbbf764d7d3fc05a2249df81188dba5d5db0c7e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838867",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+            "filePath": "originals/3DPX-000012/007.stl"
+          },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
         }
       ],
-      "missingOriginalFileCount": 7,
-      "allOriginalFilesPersistentlyRecovered": false,
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
       "scientificApproval": "NOT_ESTABLISHED",
       "clinicalUseApproved": false
     },
