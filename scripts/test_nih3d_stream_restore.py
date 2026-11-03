@@ -32,6 +32,20 @@ class RangeRecoveryTests(unittest.TestCase):
         self.assertEqual(count,1)
         self.assertEqual(picked[0]['id'],2)
         self.assertEqual(s.plan(arr,set(),{1301})[1],0)
+    def test_six_shards_prioritized_by_expiry(self):
+        starts=[1301,1501,1601,1701,1801,1901,2001,2101]
+        artifacts=[{'name':f'nih3d-originals-{start}','id':i+1,
+                    'expired':False,'size_in_bytes':1000+i,
+                    'expires_at':f'2026-11-{10+i//4:02d}T{10+i%4:02d}:00:00Z'}
+                   for i,start in enumerate(starts)]
+        selected,total=s.plan(list(reversed(artifacts)),set(),set())
+        self.assertEqual(total,8)
+        self.assertEqual([a['start'] for a in selected],starts[:6])
+        self.assertEqual(len(selected),6)
+        selected,total=s.plan(artifacts,set(),{1301,1501})
+        self.assertEqual(total,6)
+        self.assertEqual(len(selected),6)
+
     def test_zip64_nested_manifest(self):
         blob,pack,manifest=self.artifact()
         with zipfile.ZipFile(io.BytesIO(blob)) as z:
