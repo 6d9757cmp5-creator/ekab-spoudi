@@ -10,13 +10,13 @@
   "reviewRequired": true,
   "expertClinicalApprovals": 0,
   "sourceScanned": 15688,
-  "eligibleRemaining": 283,
+  "eligibleRemaining": 277,
   "skipped": {
-    "alreadyComplete": 43,
+    "alreadyComplete": 49,
     "sourceRightsReview": 10308,
     "noOriginalFiles": 0,
     "fileLimitExceeded": 3015,
-    "batchLimitExceeded": 277,
+    "batchLimitExceeded": 272,
     "malformedSource": 0,
     "unknownScientificCategory": 0,
     "biomedicalReviewRequired": 1765,
@@ -24,19 +24,18 @@
   },
   "selected": [
     {
-      "entryId": 836,
-      "accession": "3DPX-000836",
-      "title": "Shoulder - Proximal Humerus Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000836",
+      "entryId": 820,
+      "accession": "3DPX-000820",
+      "title": "Knee - proximal tibia fracture",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000820",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 17965135,
+      "expectedBytes": 21408507,
       "priority": 0,
       "sourceConceptCandidates": [
-        "ATLA-ANATOMY-humerus",
-        "ATLA-ANATOMY-shoulder"
+        "ATLA-ANATOMY-tibia"
       ],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
       "biomedicalResearchDomain": "human_or_comparative_anatomy",
@@ -45,108 +44,51 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32078/runs/70354c92-32d9-475c-89a4-cd0f8c7b1f7b/output-files/953419",
+          "url": "https://3d.nih.gov/api/submissions/32063/runs/855a1fd3-edae-48b3-9788-5a59eb25503d/output-files/953501",
           "format": "STL",
-          "size": 1901434,
-          "name": "umero_proximal_0-nih3d.stl"
+          "size": 2271884,
+          "name": "frat_plato-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32078/runs/70354c92-32d9-475c-89a4-cd0f8c7b1f7b/output-files/953421",
+          "url": "https://3d.nih.gov/api/submissions/32063/runs/855a1fd3-edae-48b3-9788-5a59eb25503d/output-files/953503",
           "format": "X3D",
-          "size": 1996155,
-          "name": "umero_proximal_0-nih3d.x3d"
+          "size": 2331453,
+          "name": "frat_plato-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32078/runs/70354c92-32d9-475c-89a4-cd0f8c7b1f7b/output-files/953422",
+          "url": "https://3d.nih.gov/api/submissions/32063/runs/855a1fd3-edae-48b3-9788-5a59eb25503d/output-files/953504",
           "format": "GLB",
-          "size": 3194940,
-          "name": "umero_proximal_0-nih3d.glb"
+          "size": 3817560,
+          "name": "frat_plato-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32078/runs/70354c92-32d9-475c-89a4-cd0f8c7b1f7b/output-files/953424",
+          "url": "https://3d.nih.gov/api/submissions/32063/runs/855a1fd3-edae-48b3-9788-5a59eb25503d/output-files/953506",
           "format": "WRL",
-          "size": 7772361,
-          "name": "umero_proximal_0-nih3d.wrl"
+          "size": 9307427,
+          "name": "frat_plato-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32078/runs/70354c92-32d9-475c-89a4-cd0f8c7b1f7b/output-files/953425",
+          "url": "https://3d.nih.gov/api/submissions/32063/runs/855a1fd3-edae-48b3-9788-5a59eb25503d/output-files/953507",
           "format": "OBJ",
-          "size": 3100245,
-          "name": "umero_proximal_0-nih3d.obj"
+          "size": 3680183,
+          "name": "frat_plato-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 827,
-      "accession": "3DPX-000827",
-      "title": "Ankle - Distal Tibia Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000827",
+      "entryId": 808,
+      "accession": "3DPX-000808",
+      "title": "Calcaneal Fracture",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000808",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 20293826,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-tibia",
-        "ATLA-ANATOMY-ankle"
-      ],
-      "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
-      "biomedicalResearchDomain": "human_or_comparative_anatomy",
-      "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32070/runs/13950cc9-1650-4aaa-a6ee-a84e1d2b9693/output-files/953567",
-          "format": "STL",
-          "size": 2146584,
-          "name": "pilao-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32070/runs/13950cc9-1650-4aaa-a6ee-a84e1d2b9693/output-files/953569",
-          "format": "X3D",
-          "size": 2268598,
-          "name": "pilao-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32070/runs/13950cc9-1650-4aaa-a6ee-a84e1d2b9693/output-files/953570",
-          "format": "GLB",
-          "size": 3606624,
-          "name": "pilao-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32070/runs/13950cc9-1650-4aaa-a6ee-a84e1d2b9693/output-files/953572",
-          "format": "WRL",
-          "size": 8777066,
-          "name": "pilao-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32070/runs/13950cc9-1650-4aaa-a6ee-a84e1d2b9693/output-files/953573",
-          "format": "OBJ",
-          "size": 3494954,
-          "name": "pilao-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 821,
-      "accession": "3DPX-000821",
-      "title": "Ankle - Talus Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000821",
-      "sourceVersion": 3,
-      "category": "Anatomy",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 20736859,
+      "expectedBytes": 22051196,
       "priority": 0,
       "sourceConceptCandidates": [
         "ATLA-ANATOMY-ankle"
@@ -158,163 +100,111 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32064/runs/6407a1e9-3539-4512-816c-a71dfeb841fb/output-files/953689",
+          "url": "https://3d.nih.gov/api/submissions/32051/runs/63829301-6844-4a6a-aa29-0d6133a45069/output-files/952170",
           "format": "STL",
-          "size": 2194634,
-          "name": "frat_talus-nih3d.stl"
+          "size": 2333234,
+          "name": "calcaneo-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32064/runs/6407a1e9-3539-4512-816c-a71dfeb841fb/output-files/953691",
+          "url": "https://3d.nih.gov/api/submissions/32051/runs/63829301-6844-4a6a-aa29-0d6133a45069/output-files/952172",
           "format": "X3D",
-          "size": 2294458,
-          "name": "frat_talus-nih3d.x3d"
+          "size": 2434221,
+          "name": "calcaneo-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32064/runs/6407a1e9-3539-4512-816c-a71dfeb841fb/output-files/953692",
+          "url": "https://3d.nih.gov/api/submissions/32051/runs/63829301-6844-4a6a-aa29-0d6133a45069/output-files/952173",
           "format": "GLB",
-          "size": 3687800,
-          "name": "frat_talus-nih3d.glb"
+          "size": 3920688,
+          "name": "calcaneo-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32064/runs/6407a1e9-3539-4512-816c-a71dfeb841fb/output-files/953694",
+          "url": "https://3d.nih.gov/api/submissions/32051/runs/63829301-6844-4a6a-aa29-0d6133a45069/output-files/952175",
           "format": "WRL",
-          "size": 8988315,
-          "name": "frat_talus-nih3d.wrl"
+          "size": 9561228,
+          "name": "calcaneo-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32064/runs/6407a1e9-3539-4512-816c-a71dfeb841fb/output-files/953695",
+          "url": "https://3d.nih.gov/api/submissions/32051/runs/63829301-6844-4a6a-aa29-0d6133a45069/output-files/952176",
           "format": "OBJ",
-          "size": 3571652,
-          "name": "frat_talus-nih3d.obj"
+          "size": 3801825,
+          "name": "calcaneo-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 805,
-      "accession": "3DPX-000805",
-      "title": "Hip Fracture - Acetabulum",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000805",
+      "entryId": 1274,
+      "accession": "3DPX-001274",
+      "title": "Tetralogy of Fallot with Pulmonary Atresia and MAPCAs",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-001274",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 21194376,
+      "expectedBytes": 22344590,
       "priority": 0,
       "sourceConceptCandidates": [
-        "ATLA-ANATOMY-pelvis"
+        "ATLA-ANATOMY-lung"
       ],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
       "biomedicalResearchDomain": "human_or_comparative_anatomy",
       "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32048/runs/1c876c29-6dd1-4741-94d5-60ca46b735da/output-files/952583",
-          "format": "STL",
-          "size": 2244534,
-          "name": "acebatulo_fratura-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32048/runs/1c876c29-6dd1-4741-94d5-60ca46b735da/output-files/952585",
-          "format": "X3D",
-          "size": 2328864,
-          "name": "acebatulo_fratura-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32048/runs/1c876c29-6dd1-4741-94d5-60ca46b735da/output-files/952586",
-          "format": "GLB",
-          "size": 3771576,
-          "name": "acebatulo_fratura-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32048/runs/1c876c29-6dd1-4741-94d5-60ca46b735da/output-files/952588",
-          "format": "WRL",
-          "size": 9191334,
-          "name": "acebatulo_fratura-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32048/runs/1c876c29-6dd1-4741-94d5-60ca46b735da/output-files/952589",
-          "format": "OBJ",
-          "size": 3658068,
-          "name": "acebatulo_fratura-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 10751,
-      "accession": "3DPX-010751",
-      "title": "Gram Negative Cell Wall",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-010751",
-      "sourceVersion": 3,
-      "category": "Cells and Organelles",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 18782178,
-      "priority": 2,
-      "sourceConceptCandidates": [],
-      "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
-      "biomedicalResearchDomain": "cell_biology_and_microbiology",
-      "explicitNonhuman": false,
       "pathologyContext": "normal_or_unspecified",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/34463/runs/d160c6a6-980c-4be9-a511-698b0de1a04e/output-files/1121720",
+          "url": "https://3d.nih.gov/api/submissions/32160/runs/5f9580da-70fe-41e6-aa06-b88a57fba7ac/output-files/963974",
           "format": "STL",
-          "size": 2090534,
-          "name": "gram_negative_membranev5-nih3d.stl"
+          "size": 2357984,
+          "name": "mapcas.stl-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/34463/runs/d160c6a6-980c-4be9-a511-698b0de1a04e/output-files/1121722",
+          "url": "https://3d.nih.gov/api/submissions/32160/runs/5f9580da-70fe-41e6-aa06-b88a57fba7ac/output-files/963976",
           "format": "X3D",
-          "size": 2313997,
-          "name": "gram_negative_membranev5-nih3d.x3d"
+          "size": 2509302,
+          "name": "mapcas.stl-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/34463/runs/d160c6a6-980c-4be9-a511-698b0de1a04e/output-files/1121723",
+          "url": "https://3d.nih.gov/api/submissions/32160/runs/5f9580da-70fe-41e6-aa06-b88a57fba7ac/output-files/963977",
           "format": "GLB",
-          "size": 3254764,
-          "name": "gram_negative_membranev5-nih3d.glb"
+          "size": 3961708,
+          "name": "mapcas.stl-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/34463/runs/d160c6a6-980c-4be9-a511-698b0de1a04e/output-files/1121725",
+          "url": "https://3d.nih.gov/api/submissions/32160/runs/5f9580da-70fe-41e6-aa06-b88a57fba7ac/output-files/963979",
           "format": "WRL",
-          "size": 7959784,
-          "name": "gram_negative_membranev5-nih3d.wrl"
+          "size": 9698778,
+          "name": "mapcas.stl-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/34463/runs/d160c6a6-980c-4be9-a511-698b0de1a04e/output-files/1121726",
+          "url": "https://3d.nih.gov/api/submissions/32160/runs/5f9580da-70fe-41e6-aa06-b88a57fba7ac/output-files/963980",
           "format": "OBJ",
-          "size": 3163099,
-          "name": "gram_negative_membranev5-nih3d.obj"
+          "size": 3816818,
+          "name": "mapcas.stl-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 8616,
-      "accession": "3DPX-008616",
-      "title": "Calcaneus",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-008616",
+      "entryId": 823,
+      "accession": "3DPX-000823",
+      "title": "Spine - Lumbar Scoliosis",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000823",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 504653,
-      "priority": 7,
-      "sourceConceptCandidates": [],
+      "expectedBytes": 24512077,
+      "priority": 0,
+      "sourceConceptCandidates": [
+        "ATLA-ANATOMY-lumbar-spine"
+      ],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
       "biomedicalResearchDomain": "human_or_comparative_anatomy",
       "explicitNonhuman": false,
@@ -322,52 +212,127 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/33523/runs/7808887d-1f6f-4b68-8356-41a311dcdf95/output-files/1035116",
+          "url": "https://3d.nih.gov/api/submissions/32066/runs/0e93a08c-dbaf-4ecc-9680-9c5556360ffc/output-files/953545",
           "format": "STL",
-          "size": 54884,
-          "name": "calcaneus_right-nih3d.stl"
+          "size": 2591034,
+          "name": "lombar_escoliose-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/33523/runs/7808887d-1f6f-4b68-8356-41a311dcdf95/output-files/1035118",
+          "url": "https://3d.nih.gov/api/submissions/32066/runs/0e93a08c-dbaf-4ecc-9680-9c5556360ffc/output-files/953547",
           "format": "X3D",
-          "size": 55435,
-          "name": "calcaneus_right-nih3d.x3d"
+          "size": 2734683,
+          "name": "lombar_escoliose-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/33523/runs/7808887d-1f6f-4b68-8356-41a311dcdf95/output-files/1035119",
+          "url": "https://3d.nih.gov/api/submissions/32066/runs/0e93a08c-dbaf-4ecc-9680-9c5556360ffc/output-files/953548",
           "format": "GLB",
-          "size": 86592,
-          "name": "calcaneus_right-nih3d.glb"
+          "size": 4353708,
+          "name": "lombar_escoliose-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/33523/runs/7808887d-1f6f-4b68-8356-41a311dcdf95/output-files/1035121",
+          "url": "https://3d.nih.gov/api/submissions/32066/runs/0e93a08c-dbaf-4ecc-9680-9c5556360ffc/output-files/953550",
           "format": "WRL",
-          "size": 231351,
-          "name": "calcaneus_right-nih3d.wrl"
+          "size": 10619887,
+          "name": "lombar_escoliose-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/33523/runs/7808887d-1f6f-4b68-8356-41a311dcdf95/output-files/1035122",
+          "url": "https://3d.nih.gov/api/submissions/32066/runs/0e93a08c-dbaf-4ecc-9680-9c5556360ffc/output-files/953551",
           "format": "OBJ",
-          "size": 76391,
-          "name": "calcaneus_right-nih3d.obj"
+          "size": 4212765,
+          "name": "lombar_escoliose-nih3d.obj"
+        }
+      ]
+    },
+    {
+      "entryId": 702,
+      "accession": "3DPX-000702",
+      "title": "Molecular Structure of Unliganded Native HIV-1 gp120 trimer: Spike region",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000702",
+      "sourceVersion": 3,
+      "category": "Viruses",
+      "license": "Public Domain",
+      "expectedFiles": 8,
+      "expectedBytes": 7743183,
+      "priority": 3,
+      "sourceConceptCandidates": [],
+      "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
+      "biomedicalResearchDomain": "virology_and_infectious_agents",
+      "explicitNonhuman": false,
+      "pathologyContext": "normal_or_unspecified",
+      "sourceRefs": [
+        {
+          "i": 0,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242912",
+          "format": "WRL",
+          "size": 2127431,
+          "name": "5019-vol-surf-highres-nocolor-print_caution-nih3d.wrl"
+        },
+        {
+          "i": 1,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242913",
+          "format": "GLB",
+          "size": 808656,
+          "name": "5019-vol-surf-highres-nocolor-print_caution-nih3d.glb"
+        },
+        {
+          "i": 2,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242916",
+          "format": "GLB",
+          "size": 249752,
+          "name": "5019-vol-surf-highres-nocolor.glb"
+        },
+        {
+          "i": 3,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242918",
+          "format": "STL",
+          "size": 517684,
+          "name": "5019-vol-surf-highres-nocolor-print_caution-nih3d.stl"
+        },
+        {
+          "i": 4,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242922",
+          "format": "X3D",
+          "size": 558049,
+          "name": "5019-vol-surf-highres-radial-print_caution-nih3d.x3d"
+        },
+        {
+          "i": 5,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242925",
+          "format": "GLB",
+          "size": 1180900,
+          "name": "5019-vol-surf-highres-radial-print_caution-nih3d.glb"
+        },
+        {
+          "i": 6,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242926",
+          "format": "WRL",
+          "size": 421262,
+          "name": "5019-vol-surf-highres-radial.wrl"
+        },
+        {
+          "i": 7,
+          "url": "https://3d.nih.gov/api/submissions/35163/runs/ce1cdeb7-3cf4-4e76-8834-aa53f72f86d5/output-files/1242928",
+          "format": "WRL",
+          "size": 1879449,
+          "name": "5019-vol-surf-highres-radial-print_caution-nih3d.wrl"
         }
       ]
     }
   ],
-  "selectedModels": 6,
-  "selectedOriginalFiles": 30,
-  "selectedExpectedSourceBytes": 99477027,
-  "unselectedEligible": 277,
+  "selectedModels": 5,
+  "selectedOriginalFiles": 28,
+  "selectedExpectedSourceBytes": 98059553,
+  "unselectedEligible": 272,
   "originalFilesDownloadedByPlanner": 0,
   "originalFilesSHA256VerifiedByPlanner": 0,
   "licenseRule": "Only explicit Public Domain sources automatically considered; others retained for rights review",
   "biomedicalRule": "Only evidence-supported NIH biomedical research categories automatically selected; generic hardware and unresolved chemicals retained for review",
   "sourceAccuracyRule": "Model title/category do not certify anatomical or clinical correctness",
   "sourceCatalogEntries": 15688,
-  "verifiedAlreadyCompleteModels": 43,
+  "verifiedAlreadyCompleteModels": 49,
   "fullNIHArchiveComplete": false
 }
