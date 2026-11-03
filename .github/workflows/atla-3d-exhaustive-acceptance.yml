@@ -16,7 +16,7 @@ permissions:
   contents: read
 concurrency:
   group: atla-3d-exhaustive-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   structural:
     name: All repository GLB and listed source files - geometry / hash
@@ -24,6 +24,23 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            assets/mentor-real-3d.glb
+            mentor/assets/mentor-real-3d.glb
+            tools/anatomy-3d/resources/imported-manifest.json
+            tools/anatomy-3d/resources/hra-v1.2/
+            tools/anatomy-3d/resources/nih3d-approved/
+            tools/anatomy-3d/resources/z-anatomy-research/
+            tools/patient-simulator/assets/
+            tools/patient-simulator/resources/
+            tools/atla-ai/model-preview-catalog.mjs
+            tools/atla-ai/model-preview.mjs
+            ui-tools/atla-resource-preview.html
+            scripts/audit-atla-every-3d-asset.mjs
+            scripts/verify-atla-every-3d-model-browser.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -51,6 +68,23 @@ jobs:
         mode: [hra-0, hra-1, hra-2, research, cockpit]
     steps:
       - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            assets/mentor-real-3d.glb
+            mentor/assets/mentor-real-3d.glb
+            tools/anatomy-3d/resources/imported-manifest.json
+            tools/anatomy-3d/resources/hra-v1.2/
+            tools/anatomy-3d/resources/nih3d-approved/
+            tools/anatomy-3d/resources/z-anatomy-research/
+            tools/patient-simulator/assets/
+            tools/patient-simulator/resources/
+            tools/atla-ai/model-preview-catalog.mjs
+            tools/atla-ai/model-preview.mjs
+            ui-tools/atla-resource-preview.html
+            scripts/audit-atla-every-3d-asset.mjs
+            scripts/verify-atla-every-3d-model-browser.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
