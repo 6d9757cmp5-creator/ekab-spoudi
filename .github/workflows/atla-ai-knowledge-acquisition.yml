@@ -100,9 +100,10 @@ jobs:
     permissions:
       contents: write
     env:
-      ATLA_RESEARCH_AI_ENABLED: ${{ vars.ATLA_RESEARCH_AI_ENABLED }}
-      ATLA_RESEARCH_SPENDING_APPROVED: ${{ vars.ATLA_RESEARCH_SPENDING_APPROVED }}
-      ATLA_RESEARCH_ANTHROPIC_API_KEY: ${{ secrets.ATLA_RESEARCH_ANTHROPIC_API_KEY }}
+      # HARD OFF by owner decision: do not spend AI credits on scheduled runs.
+      # A future explicit reviewed PR is required to enable billable AI.
+      ATLA_RESEARCH_AI_ENABLED: 'false'
+      ATLA_RESEARCH_SPENDING_APPROVED: 'false'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -117,14 +118,23 @@ jobs:
           node --input-type=module <<'NODE'
           import {readFileSync} from 'node:fs';
           import {validateQueueFiles} from './tools/atla-ai/knowledge-refresh/pipeline.mjs';
+          import {audit,enforce} from './tools/atla-ai/knowledge-refresh/scientific-qa.mjs';
           const path='tools/atla-ai/knowledge-refresh/queue/';
           const read=name=>JSON.parse(readFileSync(path+name,'utf8'));
-          validateQueueFiles({
+          const evidence={
             report:read('ai-research-review.json'),
             metadata:read('last-scan.json'),
             health:read('source-health.json'),
             pending:read('pending-pubmed.json')
-          });
+          };
+          validateQueueFiles(evidence);
+          const scientific=audit({pending:evidence.pending,metadata:evidence.metadata,
+            health:evidence.health,review:evidence.report});
+          enforce(scientific);
+          if(scientific.confirmed_clinical_claims!==0 ||
+             scientific.clinical_publication_allowed!==false)throw Error('unsafe-clinical-claims');
+          console.log(JSON.stringify({scientific_qa:scientific.technical_research_gate,
+            clinical_approval:false,medical_claims_approved:0}));
           NODE
       - name: Commit isolated review queue only
         run: |
