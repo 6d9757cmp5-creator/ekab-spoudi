@@ -4,7 +4,7 @@ import {mkdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 const server=spawn('python3',['-m','http.server','8893','--bind','127.0.0.1'],{stdio:'ignore'});
 mkdirSync('browser-qa-results',{recursive:true});
-let browser;const errors=[];
+let browser;const errors=[],requests=[];
 try{
  let ready=false;
  for(let i=0;i<75;i++){try{if((await fetch('http://127.0.0.1:8893/')).ok){ready=true;break}}catch{}await new Promise(r=>setTimeout(r,180))}
@@ -12,16 +12,31 @@ try{
  browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--no-sandbox']});
  const page=await browser.newPage({viewport:{width:1280,height:830}});
  page.on('pageerror',e=>errors.push(e.message));
+ page.on('console',m=>{if(m.type()==='error'||m.type()==='warning')errors.push('console: '+m.text())});
+ page.on('requestfailed',req=>requests.push(req.url()+' '+req.failure()?.errorText));
  await page.goto('http://127.0.0.1:8893/mentor-next.html',{waitUntil:'domcontentloaded'});
  await page.locator('#next-rigged-toggle').waitFor();
  assert.equal(await page.locator('#next-rigged-toggle').getAttribute('aria-pressed'),'false');
  // This user choice must not change patient vitals or recorded educational session.
  const original=await page.locator('#next-hr').textContent();
  await page.locator('#next-rigged-toggle').click();
- await page.waitForFunction(()=>{
-  const canvas=document.querySelector('#next-unified-host .next-unified-canvas');
-  return canvas?.dataset.stageStatus==='ready'&&canvas.dataset.riggedModel==='ready'&&Number(canvas.dataset.riggedClips)>=2;
- },null,{timeout:150000});
+ try {
+  await page.waitForFunction(()=>{
+   const canvas=document.querySelector('#next-unified-host .next-unified-canvas');
+   return canvas?.dataset.stageStatus==='ready'&&canvas.dataset.riggedModel==='ready'&&Number(canvas.dataset.riggedClips)>=2;
+  },null,{timeout:35000});
+ }catch(error){
+  const state=await page.evaluate(()=>({
+   unifiedCanvas:[...document.querySelectorAll('#next-unified-host canvas')].map(x=>({className:x.className,data:{...x.dataset}})),
+   overlayHidden:document.querySelector('#next-unified-overlay')?.hidden,
+   unifiedStatus:document.querySelector('#next-unified-status')?.textContent,
+   result:document.querySelector('#next-result')?.textContent?.slice(0,450),
+   toggle:document.querySelector('#next-rigged-toggle')?.outerHTML?.slice(0,380),
+   stageText:document.querySelector('#next-mesh-status')?.textContent
+  }));
+  await page.screenshot({path:'browser-qa-results/atla-cockpit-rigged-debug.png',fullPage:true});
+  throw Error('RIGGED_STAGE_DIAGNOSTICS '+JSON.stringify({state,errors:errors.slice(-15),requests:requests.slice(-15)}).slice(0,5000)+' '+String(error));
+ }
  assert.equal(await page.locator('#next-unified-overlay').isVisible(),true);
  assert.equal(await page.locator('#next-hr').textContent(),original);
  assert.equal(await page.locator('#next-rigged-toggle').getAttribute('aria-pressed'),'true');
