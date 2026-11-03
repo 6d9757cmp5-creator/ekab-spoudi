@@ -13,6 +13,8 @@ const docs=[
  'docs/ATLA_NIH3D_GHCR_MOLECULAR_BATCH_2026.json',
  'docs/ATLA_NIH3D_GHCR_MEDICAL_SEVEN_BATCH_2026.json'
 ];
+const generated=(await fs.readdir('docs')).filter(name=>/^ATLA_NIH3D_GHCR_BATCH_[a-f0-9]{16}_2026\.json$/.test(name)).sort();
+docs.push(...generated.map(name=>'docs/'+name));
 const provenance=[],records=[];
 const digestPattern=/^ghcr\.io\/6d9757cmp5-creator\/atla-nih3d-archive@sha256:[a-f0-9]{64}$/;
 for(const filepath of docs){
