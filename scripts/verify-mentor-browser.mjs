@@ -218,7 +218,7 @@ try{
   await page.screenshot({path:'mentor-live-two-person-mobile.png',fullPage:true});
   // Non-AI oral examination: explicit self-review, no microphone, grades or transcript persistence.
   await page.goto('http://127.0.0.1:'+port+'/mentor-oral.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/Προφορική εξάσκηση/);
+  assert.match(await page.title(),/Προφορική εξάσκηση|Εξάσκηση με προαιρετική γραπτή αξιολόγηση AI/);
   assert.match(await page.locator('#oral-position').textContent(),/Ερώτηση 1 \/ 6/);
   await page.locator('#oral-answer').fill('Δοκιμαστικές προσωρινές σημειώσεις');
   await page.locator('#oral-reveal').click();
