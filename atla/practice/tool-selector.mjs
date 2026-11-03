@@ -6,12 +6,12 @@
 import {approvedTeachingVideo} from '../ai/teaching-policy.mjs';
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ');
 
-export function chooseTeachingTool({question='',chapterId='',videos=[]}={}){
+export function chooseTeachingTool({question='',courseId='',chapterId='',videos=[]}={}){
  const q=norm(question).slice(0,300);
  if(!q)return null;
  const videoIntent=/(βιντεο|video|οπτικοακουστικ)/.test(q);
  if(videoIntent){
-  const item=approvedTeachingVideo(chapterId,videos);
+  const item=approvedTeachingVideo(courseId,chapterId,videos);
   return item?{kind:'video',href:item.url,label:'Εγκεκριμένο βίντεο μαθήματος',reason:'approved-chapter-match'}:null;
  }
  if(/(?:3d|τρισδιαστατ)/.test(q)&&/(ανατομι|καρδι|πνευμον|εγκεφαλ|αγγει|σκελετ|οστ|μυ|νευρ)/.test(q)){
