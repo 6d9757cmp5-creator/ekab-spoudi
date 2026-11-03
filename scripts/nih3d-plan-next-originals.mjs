@@ -5,6 +5,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {screenSourceResearch} from '../tools/atla-ai/nih3d-scientific-ontology.mjs';
+import {biomedicalScope, NIH_BIOMEDICAL_SCOPE_STATUS as BIOMEDICAL_SCOPE} from '../tools/atla-ai/nih3d-biomedical-scope.mjs';
 
 const FORMAT=new Set(['GLB','STL','OBJ','X3D','WRL','GLTF','PLY','3MF']);
 const SAFE_SOURCE=/^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[a-f0-9-]+\/output-files\/\d+$/i;
@@ -16,7 +17,8 @@ export function planNextBatch(rows,archivedIds,settings={}){
  if(!Number.isSafeInteger(config.maxBatchBytes)||config.maxBatchBytes<=0)throw Error('Bad maximum batch size');
  const archived=new Set([...archivedIds].map(Number));
  const seen=new Set(),eligible=[],skipped={alreadyComplete:0,sourceRightsReview:0,
-  noOriginalFiles:0,fileLimitExceeded:0,batchLimitExceeded:0,malformedSource:0,unknownScientificCategory:0};
+  noOriginalFiles:0,fileLimitExceeded:0,batchLimitExceeded:0,malformedSource:0,unknownScientificCategory:0,
+  biomedicalReviewRequired:0,likelyOutOfMedicalScope:0};
  for(const row of rows){
   const id=Number(row.entryId??row.id);
   if(!Number.isInteger(id)||id<1||id>25000||seen.has(id))throw Error('Unexpected NIH source identity or duplicate: '+id);
@@ -26,6 +28,9 @@ export function planNextBatch(rows,archivedIds,settings={}){
   const category=String(row.category??'');
   const science=screenSourceResearch(row);
   if(!(category in CATEGORY_PRIORITIES)){skipped.unknownScientificCategory++;continue;}
+  const biomedical=biomedicalScope(row);
+  if(biomedical.status===BIOMEDICAL_SCOPE.OUT){skipped.likelyOutOfMedicalScope++;continue;}
+  if(biomedical.status!==BIOMEDICAL_SCOPE.IN){skipped.biomedicalReviewRequired++;continue;}
   if(!/^https:\/\/3d\.nih\.gov\/entries\/3DPX-\d+$/.test(String(row.url??''))){skipped.malformedSource++;continue;}
   if(!Array.isArray(row.files)||row.files.length===0){skipped.noOriginalFiles++;continue;}
   const urls=new Set();let bytes=0,invalid=false,oversize=false;
@@ -44,6 +49,7 @@ export function planNextBatch(rows,archivedIds,settings={}){
     expectedFiles:row.files.length,expectedBytes:bytes,
     priority:category==='Anatomy' ? (science.humanAnatomyResearchCandidate?0:7) : CATEGORY_PRIORITIES[category]+1,
     sourceConceptCandidates:science.conceptCandidates,
+    biomedicalResearchScope:biomedical.status,biomedicalResearchDomain:biomedical.domain,
     explicitNonhuman:science.speciesFlag==='explicitly_nonhuman',
     pathologyContext:science.pathologyContext,
     sourceRefs:row.files.map((f,i)=>({i,url:f.url,format:f.format,size:Number(f.size),name:f.name??null}))});
@@ -67,6 +73,7 @@ export function planNextBatch(rows,archivedIds,settings={}){
   originalFilesDownloadedByPlanner:0,
   originalFilesSHA256VerifiedByPlanner:0,
   licenseRule:'Only explicit Public Domain sources automatically considered; others retained for rights review',
+  biomedicalRule:'Only evidence-supported NIH biomedical research categories automatically selected; generic hardware and unresolved chemicals retained for review',
   sourceAccuracyRule:'Model title/category do not certify anatomical or clinical correctness'};
 }
 export async function buildPlan(catalogRoot,archiveRegistry,output){
