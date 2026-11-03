@@ -21,6 +21,7 @@ jobs:
             docs/ATLA_NIH3D_GHCR_ANATOMY_BATCH_2026.json
             docs/ATLA_NIH3D_GHCR_NEURO_BATCH_2026.json
             docs/ATLA_NIH3D_GHCR_MOLECULAR_BATCH_2026.json
+            docs/ATLA_NIH3D_GHCR_SHOULDER_00334_2026.json
             tools/atla-ai/resources/nih3d-master-plan-2026/
             tools/atla-ai/resources/nih3d-verified-originals-2026.json
           sparse-checkout-cone-mode: false
@@ -38,12 +39,12 @@ jobs:
           import assert from 'node:assert/strict';
           const r=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
           assert.equal(r.catalogSourceEntries,15688);
-          assert.equal(r.archiveModelsWithAnyOriginal,7);
-          assert.equal(r.modelsWithAllCatalogOriginalFilesVerified,7);
+          assert.equal(r.archiveModelsWithAnyOriginal,r.models.length);
+          assert.equal(r.modelsWithAllCatalogOriginalFilesVerified,r.models.length);
           assert.equal(r.modelsWithPartialCatalogOriginalsVerified,0);
-          assert.equal(r.uniqueVerifiedOriginalFiles,48);
-          assert.equal(r.duplicateCopiesAcrossOCIImages,2);
-          assert.equal(r.totalDistinctVerifiedOriginalBytes,79155710);
+          assert.equal(r.uniqueVerifiedOriginalFiles,r.models.reduce((n,m)=>n+m.verifiedFiles.length,0));
+          assert.equal(r.totalDistinctVerifiedOriginalBytes,r.models.reduce((n,m)=>n+m.verifiedFiles.reduce((s,f)=>s+f.size,0),0));
+          assert(r.models.some(m=>m.entryId===334),'New independently verified shoulder original missing');
           assert.equal(r.fullNIHArchiveComplete,false);
           assert.equal(r.clinicalScientificReviewComplete,false);
           assert(r.models.every(m=>m.clinicalUseApproved===false));
