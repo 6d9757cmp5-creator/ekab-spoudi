@@ -1,0 +1,45 @@
+name: ATLA NIH3D bounded original source probe
+on:
+  push:
+    branches:
+      - main
+      - feat/nih3d-live-probe-20261103
+      - feat/nih3d-browser-cors-check-20261103
+    paths:
+      - 'scripts/nih3d-live-original-probe.mjs'
+      - '.github/workflows/atla-nih3d-live-original-probe.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '13 4 * * 1'
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d-live-original-probe.mjs
+            docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
+            tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate probe script
+        run: node --check scripts/nih3d-live-original-probe.mjs
+      - name: Verify two public-domain originals against NIH source
+        run: node scripts/nih3d-live-original-probe.mjs
+      - name: Save small reproducible integrity evidence in Git history
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(atla): preserve two NIH source SHA256 download checks'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

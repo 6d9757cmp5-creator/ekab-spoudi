@@ -75,6 +75,25 @@ try{
   await pausePage.getByRole('button',{name:'Παύση υπενθυμίσεων'}).click();
   assert.equal(await pausePage.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')).enabled),false);
   assert.equal(await pausePage.locator('.atlas-recall-chip').count(),0,'Never show a permanent control, even after pausing');
+  // The existing Account dialog, not a new permanent floating control, owns the resume setting.
+  await pausePage.locator('[data-account-open]').waitFor({state:'visible',timeout:15000});
+  await pausePage.locator('[data-account-open]').click();
+  await pausePage.locator('#accountDialog[open]').waitFor({state:'visible'});
+  await pausePage.locator('details.atlas-recall-settings summary').click();
+  const toggle=pausePage.locator('[data-atlas-recall-toggle]');
+  await toggle.waitFor({state:'visible'});
+  assert.match(await toggle.innerText(),/Επανενεργοποίηση υπενθυμίσεων/);
+  await toggle.click();
+  const resumed=await pausePage.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')));
+  assert.equal(resumed.enabled,true,'Resumed after explicit pause');
+  assert.ok(resumed.nextAt>Date.now(),'Resume must schedule future random offer, not interrupt immediately');
+  assert.match(await toggle.innerText(),/Παύση υπενθυμίσεων/);
+  assert.equal(await pausePage.locator('.atlas-recall-chip').count(),0,'Still no permanent page control after resume');
+  await pausePage.locator('#accountDialog .dialog-close').click();
+  await pausePage.reload({waitUntil:'domcontentloaded'});
+  const saved=await pausePage.evaluate(()=>JSON.parse(localStorage.getItem('ekab.atlas.recall.settings.v1')));
+  assert.equal(saved.enabled,true,'Resume persists across navigation');
+  assert.equal(await pausePage.locator('.atlas-recall-chip').count(),0,'No permanent page button after reload');
   await pauseContext.close();
   await page.goto(origin+'theory.html?mode=exam',{waitUntil:'domcontentloaded'});
   assert.equal(await page.locator('.atlas-recall-chip').count(),0,'No floating launcher on exam pages');

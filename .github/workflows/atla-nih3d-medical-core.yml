@@ -1,0 +1,73 @@
+name: ATLA NIH3D medical knowledge graph rebuild
+on:
+  push:
+    branches:
+      - main
+      - feat/nih3d-medical-knowledge-core-20261103
+      - feat/nih3d-medical-accuracy-20261103
+    paths:
+      - 'scripts/nih3d-*.mjs'
+      - '.github/workflows/atla-nih3d-medical-core.yml'
+      - 'tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json'
+      - 'tools/atla-ai/resources/nih3d-master-plan-2026/segments/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atla-nih-medical-core-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  classify-and-link:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/
+            tools/atla-ai/resources/nih3d-master-plan-2026/
+            tools/atla-ai/resources/nih3d-medical-index/
+            tools/atla-ai/resources/nih3d-knowledge-graph/
+            tools/atla-ai/resources/nih3d-medical-transfer-plan.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate classification, teaching gates and storage estimates
+        run: |
+          set -euo pipefail
+          node --check scripts/nih3d-medical-classify.mjs
+          node --check scripts/nih3d-build-medical-index.mjs
+          node --check scripts/nih3d-build-knowledge-graph.mjs
+          node --check scripts/nih3d-contextual-selection.mjs
+          node scripts/nih3d-medical-classify.test.mjs
+          node scripts/nih3d-graph-selection.test.mjs
+          node scripts/nih3d-plan-medical-transfer.test.mjs
+      - name: Process all 50 original NIH3D segments
+        run: |
+          node scripts/nih3d-build-medical-index.mjs
+          node scripts/nih3d-build-knowledge-graph.mjs
+          node scripts/nih3d-plan-medical-transfer.mjs
+      - name: Verify coverage and avoid fabricated clinical approval
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const index=JSON.parse(readFileSync('tools/atla-ai/resources/nih3d-medical-index/summary.json'));
+          const graph=JSON.parse(readFileSync('tools/atla-ai/resources/nih3d-knowledge-graph/summary.json'));
+          const plan=JSON.parse(readFileSync('tools/atla-ai/resources/nih3d-medical-transfer-plan.json'));
+          if(index.sourceSegments!==50||index.sourceRecords!==15688||index.uniqueRecords!==15688)throw Error('Source catalog incomplete');
+          if(graph.modelNodes!==index.uniqueRecords||graph.scientificEvidenceStatus!=='UNVERIFIED')throw Error('Knowledge graph unsupported');
+          if(plan.medicalCandidates!==index.counts.medical_candidate||plan.status!=='METADATA_ONLY_NO_UPLOAD')throw Error('Missing safe storage estimate');
+          console.log(JSON.stringify({source:index.uniqueRecords,review:index.counts,graphEdges:graph.proposedEdges,releasePartitions:plan.releaseGroups.length}));
+          NODE
+      - name: Persist generated medical index and scientific provenance
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/atla-ai/resources/nih3d-medical-index/ tools/atla-ai/resources/nih3d-knowledge-graph/ tools/atla-ai/resources/nih3d-medical-transfer-plan.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'data(atla): refresh medically relevant NIH 3D graph and provenance'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
