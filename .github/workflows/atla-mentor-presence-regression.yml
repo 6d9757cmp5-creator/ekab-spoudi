@@ -1,0 +1,35 @@
+name: ATLA MENTOR local-answer regression
+on:
+  push:
+    branches:
+      - fix/atla-mentor-presence-local-fallback-20261103
+    paths:
+      - 'scripts/verify-mentor-presence-browser.mjs'
+      - '.github/workflows/atla-mentor-presence-regression.yml'
+  pull_request:
+    paths:
+      - 'scripts/verify-mentor-presence-browser.mjs'
+      - 'mentor/presence/**'
+      - 'mentor/core/quick-answer.mjs'
+permissions:
+  contents: read
+concurrency:
+  group: atla-mentor-presence-regression-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  mentor-local:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify test syntax
+        run: node --check scripts/verify-mentor-presence-browser.mjs
+      - name: Install real Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Run offline MENTOR presence regression on desktop and mobile
+        run: node scripts/verify-mentor-presence-browser.mjs
