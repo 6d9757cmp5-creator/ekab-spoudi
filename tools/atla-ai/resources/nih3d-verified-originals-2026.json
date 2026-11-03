@@ -3,14 +3,14 @@
   "status": "PARTIAL_VERIFIED_PERSISTENT_ORIGINAL_ARCHIVE",
   "catalogSourceEntries": 15688,
   "allCatalogModelsReferenced": 15688,
-  "archiveModelsWithAnyOriginal": 7,
-  "modelsWithAllCatalogOriginalFilesVerified": 7,
+  "archiveModelsWithAnyOriginal": 8,
+  "modelsWithAllCatalogOriginalFilesVerified": 8,
   "modelsWithPartialCatalogOriginalsVerified": 0,
-  "modelsWithoutAnyVerifiedOriginals": 15681,
+  "modelsWithoutAnyVerifiedOriginals": 15680,
   "individualCatalogOriginalFileReferences": 204346,
-  "uniqueVerifiedOriginalFiles": 48,
+  "uniqueVerifiedOriginalFiles": 53,
   "duplicateCopiesAcrossOCIImages": 2,
-  "totalDistinctVerifiedOriginalBytes": 79155710,
+  "totalDistinctVerifiedOriginalBytes": 88164099,
   "sourceSHA256AndAnonymousRecoveryVerified": true,
   "fullNIHArchiveComplete": false,
   "clinicalScientificReviewComplete": false,
@@ -42,6 +42,13 @@
       "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
       "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
       "filesVerifiedInReport": 8,
+      "verifiedByAnonymousOCIRecovery": true
+    },
+    {
+      "sourceReport": "docs/ATLA_NIH3D_GHCR_SHOULDER_00334_2026.json",
+      "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1",
+      "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb668c283ecd349a80447fbb5c66b712da9f773fc50224c05b568b2d17e79aa3",
+      "filesVerifiedInReport": 5,
       "verifiedByAnonymousOCIRecovery": true
     }
   ],
@@ -784,6 +791,87 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-neuro-00252-00278-v1",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb5ab3f10913f9159d4d1b491bf0e63b6b4f34d28d6045dc5463747529d7b780",
             "filePath": "originals/3DPX-000278/014.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 334,
+      "accession": "3DPX-000334",
+      "title": "Shoulder Fracture",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000334",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 978684,
+          "sha256": "d7ab6234a2f075f75a848dbb5e6561f1cb88c268fc39fef0c72a39e5525a56f6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840706",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb668c283ecd349a80447fbb5c66b712da9f773fc50224c05b568b2d17e79aa3",
+            "filePath": "originals/3DPX-000334/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 976243,
+          "sha256": "3db74c1ae0a23d697249422e8eb8fcc6603cc3f9f5a5a204992785d66c3f71af",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840708",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb668c283ecd349a80447fbb5c66b712da9f773fc50224c05b568b2d17e79aa3",
+            "filePath": "originals/3DPX-000334/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 1527512,
+          "sha256": "536eff9e41fbf3bd7412f2b3fa968ced9426b3ec7b193d181d9a4e83fb4ec562",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840709",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb668c283ecd349a80447fbb5c66b712da9f773fc50224c05b568b2d17e79aa3",
+            "filePath": "originals/3DPX-000334/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 3988410,
+          "sha256": "3f039976fd21ef727b9ca0c38b1b94fe65511b7ae6d91f36b58bfe0c062032c6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840711",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb668c283ecd349a80447fbb5c66b712da9f773fc50224c05b568b2d17e79aa3",
+            "filePath": "originals/3DPX-000334/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 1537540,
+          "sha256": "0b43ff9fdfd180f0087879d68221d676dbd31731a7db3628d0234e2f80e761d2",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840712",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb668c283ecd349a80447fbb5c66b712da9f773fc50224c05b568b2d17e79aa3",
+            "filePath": "originals/3DPX-000334/004.obj"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
