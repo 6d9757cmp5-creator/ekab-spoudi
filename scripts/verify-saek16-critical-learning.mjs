@@ -37,6 +37,11 @@ assert.match(anaphylaxis,/δεν αποτελεί οδηγία αυτόνομη�
 assert.match(anaphylaxis,/2025-resuscitation-guidelines\/first-aid-guidelines/);
 assert.match(anaphylaxis,/μπορεί να καθίσει με τα πόδια τεντωμένα/);
 assert.match(anaphylaxis,/Δεν πρέπει να σηκώνεται όρθιος ή να βαδίζει/);
+assert.match(anaphylaxis,/ΠΔ 62\/2007 \(άρθρο 4, σημείο 20\)/);
+assert.match(anaphylaxis,/απευθείας εντολή ιατρού Κινητής Ιατρικής Μονάδας ή Συντονιστικού Κέντρου ΕΚΑΒ/);
+assert.match(anaphylaxis,/δεν ισοδυναμούν με υπηρεσιακή εξουσιοδότηση για αυτόνομη φαρμακευτική χορήγηση/);
+assert.match(anaphylaxis,/ΦΕΚ Α΄70 · άρθρα 4–5/);
+
 
 const seizures=lesson(10);
 assert.match(seizures,/Σενάριο κρίσης και μετακριτικής σύγχυσης/);
