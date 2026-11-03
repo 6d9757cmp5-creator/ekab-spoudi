@@ -45,16 +45,16 @@ test("never calls the network without grounding passages",async()=>{
 test("streams tokens, including a chunk split mid-line",async()=>{
  const seen=[];
  const r=await askAi({endpoint:"https://w.example",payload:buildPayload({question:"q",passages}),
-  fetchImpl:async(url,init)=>{assert.equal(init.credentials,"omit");assert.equal(init.method,"POST");return sse(['data: {"token":"Η ΚΑ','ΡΠΑ"}\n\n','data: {"token":" είναι"}\ndata: [DONE]\n']);},
+  fetchImpl:async(url,init)=>{assert.equal(init.credentials,"omit");assert.equal(init.method,"POST");return sse(['data: {"token":"Η ΚΑ','ΡΠΑ"}\n\n','data: {"token":" είναι [Τ1]"}\ndata: [DONE]\n']);},
   onToken:t=>seen.push(t)});
- assert.equal(r.ok,true);assert.equal(r.text,"Η ΚΑΡΠΑ είναι");
- assert.equal(seen.at(-1),"Η ΚΑΡΠΑ είναι");
+ assert.equal(r.ok,true);assert.equal(r.text,"Η ΚΑΡΠΑ είναι [Τ1]");
+ assert.deepEqual(seen,["Η ΚΑΡΠΑ είναι [Τ1]"]);
 });
 
 test("plain JSON answers work too",async()=>{
  const r=await askAi({endpoint:"https://w.example",payload:buildPayload({question:"q",passages}),
-  fetchImpl:async()=>new Response(JSON.stringify({answer:"Απάντηση"}),{status:200,headers:{"content-type":"application/json"}})});
- assert.deepEqual(r,{ok:true,text:"Απάντηση"});
+  fetchImpl:async()=>new Response(JSON.stringify({answer:"Απάντηση [Τ1]"}),{status:200,headers:{"content-type":"application/json"}})});
+ assert.deepEqual(r,{ok:true,text:"Απάντηση [Τ1]"});
 });
 
 test("429 shows the free-limit notice; other errors fall back quietly",async()=>{
@@ -71,4 +71,11 @@ test("a hung server is aborted by the timeout",async()=>{
  const r=await askAi({endpoint:"https://w.example",timeoutMs:30,payload:buildPayload({question:"q",passages}),
   fetchImpl:(url,init)=>new Promise((_,rej)=>init.signal.addEventListener("abort",()=>rej(new Error("aborted"))))});
  assert.equal(r.reason,"unavailable");
+});
+
+test("surface gate rejects an uncited or unsupported answer without exposing raw tokens",async()=>{
+ const seen=[];
+ const result=await askAi({endpoint:"https://w.example",payload:buildPayload({question:"q",passages}),
+  fetchImpl:async()=>new Response(JSON.stringify({answer:"Ισχυρισμός χωρίς πηγή"}),{status:200,headers:{"content-type":"application/json"}}),onToken:t=>seen.push(t)});
+ assert.equal(result.ok,false);assert.equal(result.reason,"unavailable");assert.deepEqual(seen,[]);
 });
