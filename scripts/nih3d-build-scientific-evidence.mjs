@@ -15,14 +15,23 @@ const originalFiles=(await fs.readdir(path.join(source,'segments'))).filter(x=>/
 assert.equal(originalFiles.length,50,'All 50 NIH source segments required');
 let archived=new Map();
 try{
- const audit=JSON.parse(await fs.readFile('docs/ATLA_NIH3D_GHCR_ANATOMY_BATCH_2026.json','utf8'));
- if(audit.everySourceSHA256CheckedAfterRecovery===true&&audit.completeForTheseCatalogEntries===true&&
-    audit.immutableDigest?.startsWith('ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:')){
-  archived=new Map(audit.sourceManifest.originalModels.map(model=>[model.id,{digest:audit.immutableDigest,
-    originalFiles:audit.sourceManifest.originalFiles.filter(f=>f.entryId===model.id).length,
-    independentlyRestored:true}]));
- }
-}catch{} // Source evidence index remains usable without a saved OCI mirror.
+ const audit=JSON.parse(await fs.readFile('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
+ if(audit.sourceSHA256AndAnonymousRecoveryVerified!==true||audit.catalogSourceEntries!==sourceIndex.publishedEntriesFound)
+  throw Error('Verified archive registry is inconsistent with source catalog');
+ archived=new Map(audit.models.filter(model=>model.allOriginalFilesPersistentlyRecovered&&
+  model.verifiedFiles.length===model.sourceFilesTotal).map(model=>[
+    model.entryId,{
+      originalFiles:model.verifiedFiles.length,
+      versions:model.verifiedFiles.map(file=>file.verifiedOCI.digest),
+      independentlyRestored:true,
+      source:'tools/atla-ai/resources/nih3d-verified-originals-2026.json'
+    }
+  ]));
+}catch(error){
+ if(process.env.REQUIRE_VERIFIED_ORIGINAL_ARCHIVES==='1')throw error;
+ // Source metadata crosswalk still builds, but never implies archival completion.
+ console.warn('Missing verified NIH archive source evidence:',String(error.message??error));
+}
 const termIndex=Object.fromEntries(SCIENTIFIC_CONCEPTS.map(c=>[c.id,[]]));
 const totals={sourceRecords:0,sourceSegments:originalFiles.length,conceptMatched:0,
  explicitNonhuman:0,conditionScoped:0,verifiedOriginalArchiveModels:0,
