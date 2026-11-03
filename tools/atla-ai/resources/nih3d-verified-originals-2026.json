@@ -3,14 +3,14 @@
   "status": "PARTIAL_VERIFIED_PERSISTENT_ORIGINAL_ARCHIVE",
   "catalogSourceEntries": 15688,
   "allCatalogModelsReferenced": 15688,
-  "archiveModelsWithAnyOriginal": 7,
-  "modelsWithAllCatalogOriginalFilesVerified": 7,
+  "archiveModelsWithAnyOriginal": 14,
+  "modelsWithAllCatalogOriginalFilesVerified": 14,
   "modelsWithPartialCatalogOriginalsVerified": 0,
-  "modelsWithoutAnyVerifiedOriginals": 15681,
+  "modelsWithoutAnyVerifiedOriginals": 15674,
   "individualCatalogOriginalFileReferences": 204346,
-  "uniqueVerifiedOriginalFiles": 48,
+  "uniqueVerifiedOriginalFiles": 99,
   "duplicateCopiesAcrossOCIImages": 2,
-  "totalDistinctVerifiedOriginalBytes": 79155710,
+  "totalDistinctVerifiedOriginalBytes": 134433727,
   "sourceSHA256AndAnonymousRecoveryVerified": true,
   "fullNIHArchiveComplete": false,
   "clinicalScientificReviewComplete": false,
@@ -42,6 +42,13 @@
       "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
       "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
       "filesVerifiedInReport": 8,
+      "verifiedByAnonymousOCIRecovery": true
+    },
+    {
+      "sourceReport": "docs/ATLA_NIH3D_GHCR_MEDICAL_SEVEN_BATCH_2026.json",
+      "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+      "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+      "filesVerifiedInReport": 51,
       "verifiedByAnonymousOCIRecovery": true
     }
   ],
@@ -162,6 +169,126 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
             "filePath": "originals/3DPX-000012/007.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 105,
+      "accession": "3DPX-000105",
+      "title": "A cryo-electron microscopic study of ribosome-bound termination factor RF2.",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000105",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 8,
+      "verifiedFiles": [
+        {
+          "format": "X3D",
+          "size": 424373,
+          "sha256": "96239f910390dd3567c6ecdef08850b6f5bea4c9249bc270f7af60cda5fd029b",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838872",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/000.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 890796,
+          "sha256": "9fbb24b234adf815e47cbf0161ccb8f2bfd9f4e14f4495cc7d07e7c3685b4f56",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838875",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/001.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 320800,
+          "sha256": "3ec788cad732e9d8117ada1a530d1664819910561c537556b7c4b803e231f865",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838876",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/002.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1424869,
+          "sha256": "779d78b2c7284105acd2d409ff16ec6a3c9e932c7c88e6ab3410395fb99feb73",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838878",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1600829,
+          "sha256": "4d7a95847ce8c463a12c0fd37386a5540c472b427a588748a39092422b9c4bc6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838882",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/004.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 609916,
+          "sha256": "7b1709ada0d440da8281675ee2ff252d2c0051b2ed07ac702e0d4c629b9fb130",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838883",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/005.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 188700,
+          "sha256": "372eff2236414e86e70897df5db604f679a181f5d64ddc6d85a949efb590fd0c",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838886",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/006.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 390284,
+          "sha256": "e99aa84cc760193f7189475c5515d143fd71e11b1dc36f88f0c9483ddfe0c06b",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30859/runs/459d317a-5355-4f29-a9fe-b8a1abc90195/output-files/838888",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000105/007.stl"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
@@ -422,6 +549,298 @@
       "clinicalUseApproved": false
     },
     {
+      "entryId": 190,
+      "accession": "3DPX-000190",
+      "title": "X-Ray structure of r[CGCG(5-fluoro)CG]2",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000190",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "X3D",
+          "size": 350983,
+          "sha256": "42b8b418b2b76e8b8047f51948215615be5dccc9bb4c83cbd159c263ed0f1308",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841623",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/000.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 729972,
+          "sha256": "8b413d55d82ccd0e6e7453aabd85340463e29e6d3bdcca24a36a4285bcd20dab",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841626",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/001.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 325137,
+          "sha256": "b81a34ce9f1ea20e2142677ad9bce6633fda59a6bba945a66330b5512f85847f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841627",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/002.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1140995,
+          "sha256": "a6b5c76120d03039ccb26c465f9200f59d51809f6dcb0f7256518239ba948975",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841629",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 597076,
+          "sha256": "0d81714589adf3b86850a17fb5cf264f857f12091ebf08b3d1e4a7937d5216d7",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841632",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 1194053,
+          "sha256": "b85771856d50affb5fa913150d9a448b671e9d0a2de0a00a0d162d57a5ee9d50",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841634",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/005.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 511784,
+          "sha256": "f55e396bb5a1cc97a37f3e274517de160709b457a83808cf90e22878691168f9",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841635",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/006.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1049534,
+          "sha256": "a846f2c108fbb6a951f247f3836238c37ad740ce3c48794ab3e6c8f1cac0115c",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841639",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/007.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 389137,
+          "sha256": "78b0ebd7a5b9a0df2f6cb8b6d529017cae8cd6592cc2c31fec5019ec96c533a5",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841643",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/008.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 729972,
+          "sha256": "799aa1d9ab5133578e39815974e6f1ee35d8cc006706e166324fd8ec714830ff",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841646",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 383609,
+          "sha256": "88d580307eb2beac0120bc5e1185fab672b3a5a532cc3b4489066b9b04a70236",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841647",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/010.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1243311,
+          "sha256": "b378c1a08373fb88f220e4547082a98df7e4c281992606ba94abc2e6dbc83909",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841649",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/011.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 347684,
+          "sha256": "f2f98a82fb3ff1db87a4a18bd7a27ec70ff86a397ff189071d5f8ebb881a4db4",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841654",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/012.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 215300,
+          "sha256": "b205cb8aa7e947115a5f9b15729efb4aeb8efbeaf1dae7a95f3d022a606f3ff6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841656",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/013.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 93983,
+          "sha256": "79f42aefd2b0d2691f74b032dd76e8c4e64a277fecac07480c7e769446e9a726",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30893/runs/a155e20a-74b9-4940-ae1c-50cdfcd79c9a/output-files/841657",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000190/014.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 251,
+      "accession": "3DPX-000251",
+      "title": "DNA segment based on 1bna",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000251",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 1100084,
+          "sha256": "1bb44c01b6813947d08036b45766ed6e4ae5db7afe6d1b498146e73ef54aa5b7",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838495",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000251/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 1136935,
+          "sha256": "3abf9ce36dd56e767e622f77eb832dd32385b3c7282c6e4826be3bddfbe36069",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838497",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000251/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 1599204,
+          "sha256": "116d582cf5d492589cc1bc6ad64a2aa8db72f49f7589f85740ce82053b6ed24e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838498",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000251/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 4210056,
+          "sha256": "0481d9174992ef497750a79c75604f4864ca49c2e4865e5ab1e7547ecb138a37",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838500",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000251/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 1501559,
+          "sha256": "e3e0d22a69f718d5fd426b44e1ddcc4fdc16d51e2de15e6d04ff28d44cf015e7",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30919/runs/5790c14c-bf44-4fb4-99a0-75361d0de267/output-files/838501",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000251/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
       "entryId": 252,
       "accession": "3DPX-000252",
       "title": "Corpus callosum",
@@ -573,6 +992,126 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-neuro-00252-00278-v1",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb5ab3f10913f9159d4d1b491bf0e63b6b4f34d28d6045dc5463747529d7b780",
             "filePath": "originals/3DPX-000255/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 277,
+      "accession": "3DPX-000277",
+      "title": "Dodecameric structure of the small heat shock protein Acr1 from Mycobacterium tuberculosis.",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000277",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 8,
+      "verifiedFiles": [
+        {
+          "format": "WRL",
+          "size": 2326544,
+          "sha256": "0a8cc6b8058ffdb000bef73757aa7fbce5132dfc48611419631892ebbb2064a0",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846797",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/000.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 885404,
+          "sha256": "0a8a6d9937803eeb6999fa5793b30c6e859c39ef68f3a08cd61bca4bd397429e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846798",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/001.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 273484,
+          "sha256": "fd56f3d3ef2ede2d15aff1089eb16f3f12db881e7d1d5b650567f358615e5f6a",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846801",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 566884,
+          "sha256": "b7b2487f9a7f2e7716c400115b356dbbe07115d7c1f19b7128e84fdc44872719",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846803",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/003.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 607072,
+          "sha256": "575f95bea611da520890b53dbd41433b44bbce13b26f177b28fa9c78ad5f594f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846807",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/004.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 1293516,
+          "sha256": "83f2f3dab48494ae47c6d7b1c562762332f261298be7b5e9b388a9a81ea3a7bc",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846810",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/005.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 456872,
+          "sha256": "280834c468ef2c6a42896bc2afc7b88e3d0aa376ac90648a4cea3617df61b076",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846811",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 2072148,
+          "sha256": "eb1cb58829d8bb7a185f8116b409121e57c21f0da23485ed5168bcdf69fc7c68",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30933/runs/c4397173-d0f4-4443-bb54-cb2dc28e996b/output-files/846813",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000277/007.wrl"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
@@ -784,6 +1323,249 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-neuro-00252-00278-v1",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb5ab3f10913f9159d4d1b491bf0e63b6b4f34d28d6045dc5463747529d7b780",
             "filePath": "originals/3DPX-000278/014.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 334,
+      "accession": "3DPX-000334",
+      "title": "Shoulder Fracture",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000334",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 978684,
+          "sha256": "d7ab6234a2f075f75a848dbb5e6561f1cb88c268fc39fef0c72a39e5525a56f6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840706",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000334/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 976243,
+          "sha256": "3db74c1ae0a23d697249422e8eb8fcc6603cc3f9f5a5a204992785d66c3f71af",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840708",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000334/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 1527512,
+          "sha256": "536eff9e41fbf3bd7412f2b3fa968ced9426b3ec7b193d181d9a4e83fb4ec562",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840709",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000334/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 3988410,
+          "sha256": "3f039976fd21ef727b9ca0c38b1b94fe65511b7ae6d91f36b58bfe0c062032c6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840711",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000334/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 1537540,
+          "sha256": "0b43ff9fdfd180f0087879d68221d676dbd31731a7db3628d0234e2f80e761d2",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/30969/runs/a2d58c29-fcb1-4ddb-88e1-0c595818cba4/output-files/840712",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000334/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 379,
+      "accession": "3DPX-000379",
+      "title": "Lumbar Spine - L4",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000379",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 840334,
+          "sha256": "be97a2109384950c74e30dd9e005bd322accaa86b887c87cc227d7a6abea40f7",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844886",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000379/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 854665,
+          "sha256": "8036ab052566d83e7e5f77023e2dc20d4afce80b3e299e32a34c267215383454",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844888",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000379/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 1311912,
+          "sha256": "a8d05de6c80901749f7704b07eccb4e7b1b5339263a09cece820d0cae48d4d24",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844889",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000379/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 3423040,
+          "sha256": "b1de26ac3760ebb6776995256106f9fe85a5889517dd6bf0d29636653ec93c3d",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844891",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000379/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 1312454,
+          "sha256": "75b4f10124e628f706633731d1dd0676e79a8e5b2d26fae4c499f358b4d375d1",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31002/runs/0b0c8ee6-d939-4e4d-85e0-a381bdb83865/output-files/844892",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000379/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 451,
+      "accession": "3DPX-000451",
+      "title": "Lymphatic vessel and valve, theoretical construct",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000451",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 576084,
+          "sha256": "e38d0f31e52818013b04a830d1a2884e39529ea610293c3d9d6acb7cf2ab42fe",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846084",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000451/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 599886,
+          "sha256": "4b60cedbcacbd0cff3b7afa09ce299b9839be7d0fe8d98797e08670159f46ec4",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846086",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000451/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 898968,
+          "sha256": "4de85235f4a3c55ef93f207fe2fb516aa795dd659de05a25a15db4fc74a9ec62",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846087",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000451/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 2400781,
+          "sha256": "7d998ec0870a685cf7d60949428e1efcf4cad7ccb55dcc8aa3e02026da13753c",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846089",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000451/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 868645,
+          "sha256": "a09190cd931046a613dd71a8457a5eb67ec4110b41f49908bf0449ca61884dff",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/31054/runs/829d8929-e811-4b2a-8a47-ad6771ea99a5/output-files/846090",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-medical-00105-00451-20261103-v1",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7bbb81239f3050e7298473c93cc447094cad832f9b843358f0a30643cb1477af",
+            "filePath": "originals/3DPX-000451/004.obj"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
