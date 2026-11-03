@@ -133,7 +133,7 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
  gl.toneMapping=THREE.ACESFilmicToneMapping;
  gl.toneMappingExposure=1.23;
  gl.setPixelRatio(Math.min(window.devicePixelRatio||1,1.6));
- gl.shadowMap.enabled=true;gl.shadowMap.type=THREE.PCFSoftShadowMap;
+ gl.shadowMap.enabled=true;gl.shadowMap.type=THREE.PCFShadowMap;
  gl.domElement.className='next-unified-canvas';
  gl.domElement.setAttribute('aria-label','Κοινή τρισδιάστατη εκπαιδευτική σκηνή με δύο εικονικούς ασθενείς και εξοπλισμό.');
  host.append(gl.domElement);
