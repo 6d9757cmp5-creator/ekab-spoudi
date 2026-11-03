@@ -42,10 +42,11 @@ jobs:
           const script=readFileSync(base+'biodigital-bridge.mjs','utf8');
           assert.match(index,/biodigital-bridge\.html/);
           assert.match(page,/biodigital-bridge\.mjs/);
-          for(const id of ['providerFrame','nativeFrame','viewerUrl','openProvider','openTopic','xray','labels','next','previous']){
+          for(const id of ['providerFrame','nativeFrame','viewerUrl','openProvider','openTopic','xray','labels','next','previous','isolate','restoreScene','tourPlay','tourPause','quizEnter','quizExit']){
             assert.ok(page.includes('id="'+id+'"'),'Missing UI: '+id);
           }
           assert.ok(!/localStorage|sessionStorage|document\.cookie/.test(script),'Unexpected local persistent storage');
+          assert.ok(!/labels\.setEnabled|scene\.pickingMode/.test(script),'Undocumented API command');
           assert.ok(!/sk-proj-|BEGIN PRIVATE KEY/.test(page+script),'Unexpected secret');
           console.log('Standalone integration smoke: PASS');
           NODE
