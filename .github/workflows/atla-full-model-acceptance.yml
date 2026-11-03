@@ -1,7 +1,7 @@
 name: ATLA Full Models and Regression Acceptance
 on:
   push:
-    branches: [feature/atla-full-model-workspace-20261103]
+    branches: [main, feature/atla-full-model-workspace-20261103]
   workflow_dispatch:
 permissions:
   contents: read
