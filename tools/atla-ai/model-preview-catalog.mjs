@@ -10,7 +10,8 @@ const configurations=Object.freeze({
  cockpit:Object.freeze({
   primary:Object.freeze({prefix:'tools/patient-simulator/resources/quaternius/',label:'Quaternius',pathKey:'path',hashKey:'sha256',status:'Character/animation research, not a clinical patient'}),
   patients:Object.freeze({prefix:'tools/patient-simulator/assets/patients/',label:'Existing static patients',pathKey:'path',hashKey:'gitBlobSha',status:'Static CC0 patient pose, not a rig or clinical simulation'}),
-  makehuman:Object.freeze({prefix:'tools/patient-simulator/resources/makehuman/',label:'MakeHuman source geometry',pathKey:'path',hashKey:'sha256',extension:'.obj',status:'Unrigged source OBJ - not a prepared animated patient'})
+  makehuman:Object.freeze({prefix:'tools/patient-simulator/resources/makehuman/',label:'MakeHuman source geometry',pathKey:'path',hashKey:'sha256',extension:'.obj',status:'Unrigged source OBJ - not a prepared animated patient'}),
+  rigged:Object.freeze({prefix:'tools/patient-simulator/assets/patients/',label:'Rigged CC0 MakeHuman educational actor',pathKey:'path',hashKey:'sha256',status:'Real skinned/animated source demonstrator; not physiologically or clinically validated'})
  })
 });
 const cleanName=name=>String(name||'').replace(/\.glb$/i,'').replace(/_/g,' ').trim();
@@ -47,7 +48,8 @@ export function getResourceCatalogUrls(rootUrl){
   cockpit:new URL('tools/patient-simulator/resources/quaternius/imported-manifest.json',root),
   cockpitPatients:new URL('tools/patient-simulator/assets/patients/preview-manifest.json',root),
   cockpitMakehumanCore:new URL('tools/patient-simulator/resources/makehuman/imported-manifest.json',root),
-  cockpitMakehumanSupplemental:new URL('tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json',root)
+  cockpitMakehumanSupplemental:new URL('tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json',root),
+  cockpitRigged:new URL('tools/patient-simulator/assets/patients/atla-makehuman-rigged-manifest.json',root)
  };
 }
 export function safeAssetUrl(item,tool,rootUrl){
