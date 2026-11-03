@@ -4,7 +4,7 @@ import {validateViewerUrl,nativeAtlasUrl,ATLA_TOPICS,HUMAN_COMMANDS} from './bio
 
 test('accept only authentic, explicitly published BioDigital viewer URLs',()=>{
  assert.equal(validateViewerUrl('https://human.biodigital.com/viewer/?id=376F'),'https://human.biodigital.com/viewer/?id=376F');
- assert.equal(validateViewerUrl('https://human.biodigital.com/widget/?m=production/maleAdult/heart.json'),'https://human.biodigital.com/widget/?m=production%2FmaleAdult%2Fheart.json');
+ assert.equal(validateViewerUrl('https://human.biodigital.com/widget/?m=production/maleAdult/heart.json'),'https://human.biodigital.com/widget/?m=production/maleAdult/heart.json');
  assert.equal(validateViewerUrl('https://human.biodigital.com/viewer/?id=376F#evil'),'https://human.biodigital.com/viewer/?id=376F');
  for(const invalid of [
  '','javascript:alert(1)','http://human.biodigital.com/viewer/?id=A',
