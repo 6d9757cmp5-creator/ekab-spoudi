@@ -34,12 +34,25 @@ export const HUMAN_COMMANDS=Object.freeze({
   left:['camera.orbit',{yaw:-10}],
   right:['camera.orbit',{yaw:10}],
   reset:['camera.reset',undefined],
-  labelsOn:['labels.setEnabled',{enable:true}],
-  labelsOff:['labels.setEnabled',{enable:false}],
+  labelsOn:['labels.show',undefined],
+  labelsOff:['labels.hide',undefined],
   xrayOn:['scene.enableXray',undefined],
   xrayOff:['scene.disableXray',undefined],
-  dissectOn:['scene.pickingMode','dissect'],
-  dissectOff:['scene.pickingMode','highlight'],
   next:['timeline.nextChapter',undefined],
-  previous:['timeline.previousChapter',undefined]
+  previous:['timeline.previousChapter',undefined],
+  play:['timeline.play',{loop:false}],
+  pause:['timeline.pause',undefined],
+  quizEnter:['quiz.enter',undefined],
+  quizExit:['quiz.exit',undefined],
+  restore:['scene.reset',undefined]
 });
+/** Only IDs reported by BioDigital's own scene.picked event are eligible.
+ * Object-map metadata uses an explicit replace flag to hide other objects.
+ */
+export function isolatePickedObjectMap(objectId){
+  if(typeof objectId!=='string'||objectId.length>240||!/^[a-zA-Z0-9_.:\-]+$/.test(objectId)||['replace','__proto__','constructor','prototype'].includes(objectId))return null;
+  const map=Object.create(null);
+  map.replace=true;
+  map[objectId]=true;
+  return map;
+}

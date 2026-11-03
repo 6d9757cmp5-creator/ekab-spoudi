@@ -21,6 +21,8 @@ jobs:
             tools/anatomy-3d/biodigital-bridge.mjs
             tools/anatomy-3d/biodigital-bridge.html
             tools/anatomy-3d/biodigital-bridge.test.mjs
+            tools/anatomy-3d/vendor/biodigital-human-api-3.0.0.min.js
+            tools/anatomy-3d/vendor/BIODIGITAL_HUMAN_API_LICENSE.txt
           sparse-checkout-cone-mode: false
           filter: blob:none
       - uses: actions/setup-node@v4
@@ -31,6 +33,10 @@ jobs:
           node --check tools/anatomy-3d/biodigital-bridge-core.mjs
           node --check tools/anatomy-3d/biodigital-bridge.mjs
           node --test tools/anatomy-3d/biodigital-bridge.test.mjs
+      - name: Verify upstream MIT artifacts unchanged
+        run: |
+          test "$(git hash-object tools/anatomy-3d/vendor/biodigital-human-api-3.0.0.min.js)" = d6539d90fd77d594a358acdcd423de2a0fd50464
+          test "$(git hash-object tools/anatomy-3d/vendor/BIODIGITAL_HUMAN_API_LICENSE.txt)" = 04f4f423fa3a3d43e53b06f511c237e0755db3a7
       - name: Verify wired standalone entry and no credential exports
         run: |
           node --input-type=module <<'NODE'
@@ -42,10 +48,11 @@ jobs:
           const script=readFileSync(base+'biodigital-bridge.mjs','utf8');
           assert.match(index,/biodigital-bridge\.html/);
           assert.match(page,/biodigital-bridge\.mjs/);
-          for(const id of ['providerFrame','nativeFrame','viewerUrl','openProvider','openTopic','xray','labels','next','previous']){
+          for(const id of ['providerFrame','nativeFrame','viewerUrl','openProvider','openTopic','xray','labels','next','previous','isolate','restoreScene','tourPlay','tourPause','quizEnter','quizExit']){
             assert.ok(page.includes('id="'+id+'"'),'Missing UI: '+id);
           }
           assert.ok(!/localStorage|sessionStorage|document\.cookie/.test(script),'Unexpected local persistent storage');
+          assert.ok(!/labels\.setEnabled|scene\.pickingMode/.test(script),'Undocumented API command');
           assert.ok(!/sk-proj-|BEGIN PRIVATE KEY/.test(page+script),'Unexpected secret');
           console.log('Standalone integration smoke: PASS');
           NODE

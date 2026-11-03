@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {validateViewerUrl,nativeAtlasUrl,ATLA_TOPICS,HUMAN_COMMANDS} from './biodigital-bridge-core.mjs';
+import {validateViewerUrl,nativeAtlasUrl,ATLA_TOPICS,HUMAN_COMMANDS,isolatePickedObjectMap} from './biodigital-bridge-core.mjs';
 
 test('accept only authentic, explicitly published BioDigital viewer URLs',()=>{
  assert.equal(validateViewerUrl('https://human.biodigital.com/viewer/?id=376F'),'https://human.biodigital.com/viewer/?id=376F');
@@ -35,4 +35,22 @@ test('3D actions are finite and do not include arbitrary user commands',()=>{
   assert.ok(!args[0].includes('eval'));
  }
  assert.deepEqual(HUMAN_COMMANDS.xrayOn,['scene.enableXray',undefined]);
+});
+
+test('documented BioDigital messages replace unsupported V1 controls',()=>{
+ assert.deepEqual(HUMAN_COMMANDS.labelsOn,['labels.show',undefined]);
+ assert.deepEqual(HUMAN_COMMANDS.labelsOff,['labels.hide',undefined]);
+ assert.deepEqual(HUMAN_COMMANDS.play,['timeline.play',{loop:false}]);
+ assert.deepEqual(HUMAN_COMMANDS.quizEnter,['quiz.enter',undefined]);
+ assert.ok(!Object.keys(HUMAN_COMMANDS).some(key=>/dissectOn|pickingMode|setEnabled/.test(key)));
+ for(const pair of Object.values(HUMAN_COMMANDS))
+  assert.ok(!/labels.setEnabled|scene.pickingMode/.test(pair[0]));
+});
+test('reversible 3D isolation is restricted to provider-selected object IDs',()=>{
+ const selected=isolatePickedObjectMap('maleAdult_standard-Heart_ID');
+ assert.equal(selected.replace,true);
+ assert.equal(selected['maleAdult_standard-Heart_ID'],true);
+ assert.equal(Object.getPrototypeOf(selected),null);
+ for(const invalid of [null,'','replace','__proto__','a b','x'.repeat(241),'a?b'])
+  assert.equal(isolatePickedObjectMap(invalid),null);
 });
