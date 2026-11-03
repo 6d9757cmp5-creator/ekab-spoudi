@@ -13,7 +13,8 @@ test('one ATLA companion on migrated desktop/mobile entrypoints',()=>{
   const html=read(page);
   if(page==='index.html'){
    assert.match(html,/href="paramedic\.html"/,'Home must link to the ATLA Paramedic hub');
-   assert.match(html,/src="mentor-home\.js"/,'Existing home Mentor must remain available during staged integration');
+   assert.match(html,/src="atla\/assistant\.mjs"/,'ATLA must be the sole home assistant');
+   assert.doesNotMatch(html,/src="mentor-home\.js"|id="mentor-home-presence-frame"/);
    continue;
   }
   assert.ok(html.includes('src="atla/assistant.mjs"'),page+' should load ATLA');
