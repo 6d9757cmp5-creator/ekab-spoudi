@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
+import {screenSourceResearch} from '../tools/atla-ai/nih3d-scientific-ontology.mjs';
 
 const FORMAT=new Set(['GLB','STL','OBJ','X3D','WRL','GLTF','PLY','3MF']);
 const SAFE_SOURCE=/^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[a-f0-9-]+\/output-files\/\d+$/i;
@@ -23,7 +24,9 @@ export function planNextBatch(rows,archivedIds,settings={}){
   if(archived.has(id)){skipped.alreadyComplete++;continue;}
   if(row.license!=='Public Domain'||row.licenseRaw!=='Public Domain'){skipped.sourceRightsReview++;continue;}
   const category=String(row.category??'');
+  const science=screenSourceResearch(row);
   if(!(category in CATEGORY_PRIORITIES)){skipped.unknownScientificCategory++;continue;}
+  if(!/^https:\/\/3d\.nih\.gov\/entries\/3DPX-\d+$/.test(String(row.url??''))){skipped.malformedSource++;continue;}
   if(!Array.isArray(row.files)||row.files.length===0){skipped.noOriginalFiles++;continue;}
   const urls=new Set();let bytes=0,invalid=false,oversize=false;
   for(const file of row.files){
@@ -39,7 +42,10 @@ export function planNextBatch(rows,archivedIds,settings={}){
   eligible.push({entryId:id,accession:row.accession,title:row.title,
     sourcePage:row.url,sourceVersion:row.version??null,category,license:row.licenseRaw,
     expectedFiles:row.files.length,expectedBytes:bytes,
-    priority:CATEGORY_PRIORITIES[category],
+    priority:category==='Anatomy' ? (science.humanAnatomyResearchCandidate?0:7) : CATEGORY_PRIORITIES[category]+1,
+    sourceConceptCandidates:science.conceptCandidates,
+    explicitNonhuman:science.speciesFlag==='explicitly_nonhuman',
+    pathologyContext:science.pathologyContext,
     sourceRefs:row.files.map((f,i)=>({i,url:f.url,format:f.format,size:Number(f.size),name:f.name??null}))});
  }
  // Anatomy first, then cells/microbiology/molecular medicine; smallest first within domain.
