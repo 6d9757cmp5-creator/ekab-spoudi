@@ -81,3 +81,22 @@ test('MakeHuman base and eye OBJ files are sources, not animated patients',async
  }
  assert.throws(()=>safeAssetUrl(items[0],'anatomy','https://example.org/'));
 });
+
+test('Actual skinned educational MakeHuman GLB is pinned, complete, and has two animations',async()=>{
+ const raw=await get('tools/patient-simulator/assets/patients/atla-makehuman-rigged-manifest.json');
+ const models=buildModelList('cockpit',raw,'rigged');
+ assert.equal(models.length,1);
+ const m=models[0];
+ const source=await readFile(m.path);
+ assert.equal(source.byteLength,m.bytes);
+ assert.equal(source.toString('ascii',0,4),'glTF');
+ assert.equal(createHash('sha256').update(source).digest('hex'),m.integrity.value);
+ const chunkLength=source.readUInt32LE(12);
+ const gltf=JSON.parse(source.subarray(20,20+chunkLength).toString());
+ assert(gltf.skins?.length>=1,'MakeHuman avatar must have real skinning');
+ assert(gltf.animations?.length>=2,'MakeHuman avatar must have actual baked animation clips');
+ assert(gltf.nodes?.length>=160);
+ assert.equal(m.clinicallyValidated,false);
+ assert.match(safeAssetUrl(m,'cockpit','https://example.org/').pathname,/atla-makehuman-rigged-educational\.glb$/);
+ assert.throws(()=>safeAssetUrl(m,'anatomy','https://example.org/'));
+});
