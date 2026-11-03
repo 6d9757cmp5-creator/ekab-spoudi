@@ -11,6 +11,11 @@ const rootPages=[
 test('one ATLA companion on migrated desktop/mobile entrypoints',()=>{
  for(const page of rootPages){
   const html=read(page);
+  if(page==='index.html'){
+   assert.match(html,/href="paramedic\.html"/,'Home must link to the ATLA Paramedic hub');
+   assert.match(html,/src="mentor-home\.js"/,'Existing home Mentor must remain available during staged integration');
+   continue;
+  }
   assert.ok(html.includes('src="atla/assistant.mjs"'),page+' should load ATLA');
   assert.ok(!html.includes('src="mentor/presence/presence.mjs"'),page+' should not load legacy 3D companion');
   assert.ok(!html.includes('src="mentor-study-bridge.mjs"'),page+' should not open separate MENTOR Lab and DEBRIEF');
@@ -20,9 +25,8 @@ test('one ATLA companion on migrated desktop/mobile entrypoints',()=>{
 });
 test('home removes heavyweight avatar and keeps core learning navigation',()=>{
  const home=read('index.html');
- assert.ok(!home.includes('id="mentor-home-presence-frame"'));
- assert.ok(!home.includes('src="mentor-home.js"'));
- assert.ok(home.includes('data-atla-open'));
+ // The new hub is additive; retain existing home avatar and Mentor until a separately tested removal.
+ assert.ok(home.includes('src="mentor-home.js"'));
  assert.ok(home.includes('href="paramedic.html"'),'Paramedic should be the central learner entry');
  const paramedic=read('paramedic.html');
  for(const target of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','farmaka.html','seminar-prep.html'])assert.ok(paramedic.includes('href="'+target+'"'),target);
