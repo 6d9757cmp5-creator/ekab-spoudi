@@ -32,10 +32,27 @@ try{
  // Source metadata crosswalk still builds, but never implies archival completion.
  console.warn('Missing verified NIH archive source evidence:',String(error.message??error));
 }
+let structured=new Map();
+try {
+ const audit=JSON.parse(await fs.readFile('docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json','utf8'));
+ if(audit.scientificAccuracyValidated!==0||audit.clinicallyApprovedModels!==0
+    ||audit.counts.sha256Verified!==99||audit.sourceModels!==14)
+  throw Error('Structural QA not independently verified');
+ const byId=new Map();
+ for(const row of audit.files){
+  if(!byId.has(row.entryId))byId.set(row.entryId,{total:0,passes:0,needsReview:0});
+  const model=byId.get(row.entryId);model.total++;
+  if(row.formatCheck.status==='STRUCTURAL_CHECK_PASSED')model.passes++;else model.needsReview++;
+ }
+ structured=byId;
+} catch(error) {
+ if(process.env.REQUIRE_VERIFIED_ORIGINAL_ARCHIVES==='1')throw error;
+ console.warn('No verified NIH structural QA available:',String(error.message??error));
+}
 const termIndex=Object.fromEntries(SCIENTIFIC_CONCEPTS.map(c=>[c.id,[]]));
 const totals={sourceRecords:0,sourceSegments:originalFiles.length,conceptMatched:0,
  explicitNonhuman:0,conditionScoped:0,verifiedOriginalArchiveModels:0,
- scholarlyClinicalApprovals:0,unmatchedRetained:0};
+ scholarlyClinicalApprovals:0,unmatchedRetained:0,originalStructuralQaModels:0,originalStructuralQaFiles:0};
 const recorded=new Set(),candidates=[],sourceRows=new Map();
 await fs.mkdir(path.join(output,'segments'),{recursive:true});
 for(let i=0;i<originalFiles.length;i++){
@@ -53,6 +70,11 @@ for(let i=0;i<originalFiles.length;i++){
   if(row.pathologyContext!=='normal_or_unspecified')totals.conditionScoped++;
   const mirror=archived.get(id);
   if(mirror){row.archiveEvidence=mirror;totals.verifiedOriginalArchiveModels++;}
+  const screen=structured.get(id);
+  if(screen){
+   row.structuralEvidence={...screen,source:'docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json',independentMedicalAccuracyReviewed:false};
+   totals.originalStructuralQaModels++;totals.originalStructuralQaFiles+=screen.total;
+  }
   if(!row.conceptCandidates.length){unmatchedIds.push(id);totals.unmatchedRetained++;continue;}
   totals.conceptMatched++;
   proposals.push(row);
@@ -106,6 +128,7 @@ const summary={
  proposedSourceMatchesByConcept:Object.fromEntries(Object.entries(termIndex).map(([k,v])=>[k,v.length])),
  relatedSourceAnatomyEvidenceLinks:relations.length,
  verifiedFullOriginalsFromPublicGHCR:totals.verifiedOriginalArchiveModels,
+ fileFormatStructuralValidation:'SOURCE_FORMAT_SCREEN_ONLY_NOT_MEDICAL_ACCURACY',
  scientificApprovalStatus:'NOT_COMPLETED',
  originalBinaryMirroringComplete:false,
  knownLimitations:['Anatomy category and exact source title only propose educational relevance.',

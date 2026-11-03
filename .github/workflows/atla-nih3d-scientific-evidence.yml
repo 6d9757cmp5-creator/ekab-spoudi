@@ -1,7 +1,7 @@
 name: ATLA NIH3D reproducible scientific evidence crosswalk
 on:
   push:
-    branches: [fix/nih3d-evidence-verified-original-coverage-20261103]
+    branches: [feat/nih3d-science-archive-evidence-14-20261103]
     paths:
       - tools/atla-ai/nih3d-scientific-ontology.mjs
       - scripts/nih3d-build-scientific-evidence.mjs
@@ -27,6 +27,7 @@ jobs:
             scripts/nih3d-build-scientific-evidence.mjs
             scripts/nih3d-scientific-ontology.test.mjs
             tools/atla-ai/resources/nih3d-verified-originals-2026.json
+            docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json
             saek-course-01.html
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
@@ -51,7 +52,8 @@ jobs:
           if(s.counts.scholarlyClinicalApprovals!==0||s.scientificApprovalStatus!=='NOT_COMPLETED')throw Error('False clinical approval');
           if(s.counts.sourceRecords!==s.counts.conceptMatched+s.counts.unmatchedRetained)throw Error('Dropped NIH source');
           if(s.relatedSourceAnatomyEvidenceLinks!==6)throw Error('NIH CT segmentation relationships unsupported');
-          if(s.counts.verifiedOriginalArchiveModels!==7)throw Error('Scientific evidence archive status lagging behind seven verified original models');
+          if(s.counts.verifiedOriginalArchiveModels!==14)throw Error('Scientific evidence archive status lagging behind seven verified original models');
+          if(s.counts.originalStructuralQaModels!==14||s.counts.originalStructuralQaFiles!==99)throw Error('Source structural QA has incomplete coverage');
           console.log('Verified source ledger',JSON.stringify(s.counts));
           NODE
       - name: Store versioned evidence and educational relevance proposals
