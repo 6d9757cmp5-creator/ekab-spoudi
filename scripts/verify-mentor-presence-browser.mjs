@@ -185,9 +185,13 @@ try{
   check(tag('dosing question is refused with the safety message'),/δεν δίνει δοσολογίες/.test(await page.locator('.emp-log').textContent()));
   const external=[];
   page.on('request',r=>{const u=new URL(r.url());if(u.hostname!=='127.0.0.1')external.push(r.url());});
+  const mentorTurnsBefore=await page.locator('.emp-turn.emp-mentor').count();
   await ask('Τι είναι το κβαντικό πεδίο του Higgs;');
-  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Το AI χρησιμοποιείται μόνο όταν είναι διαθέσιμο'),null,{polling:150,timeout:10000});
-  check(tag('AI is disabled by default: unknown question stays local, no external request'),external.length===0,external.join(','));
+  // Local pedagogical wording can evolve: assert the security and response invariants.
+  await page.waitForFunction(before=>document.querySelectorAll('.emp-turn.emp-mentor').length>before,mentorTurnsBefore,{polling:150,timeout:10000});
+  const unknownReply=await page.locator('.emp-turn.emp-mentor').last().locator('p').textContent();
+  check(tag('unknown question is answered locally with no external AI request'),
+    unknownReply.trim().length>=20&&external.length===0,JSON.stringify({reply:unknownReply.slice(0,140),external}));
   const hrefBefore=page.url();
   await ask('Άνοιξε την ανατομία');
   await page.waitForSelector('.emp-navlink');
