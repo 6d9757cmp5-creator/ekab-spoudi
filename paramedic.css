@@ -1,0 +1,50 @@
+/* Paramedic is a navigation surface, not a new lesson, engine or progress store. */
+:root{--pm-navy:#102f3b;--pm-teal:#0e797b;--pm-border:#d7e4e9;--pm-paper:#fff;--pm-text:#173541;--pm-muted:#526c78}
+.pm-skip{position:absolute;top:-100px;left:12px;padding:10px;background:#fff;color:#102f3b;z-index:30}
+.pm-skip:focus{top:6px}
+.pm-header{background:var(--pm-navy);color:#fff}
+.pm-header-inner{max-width:1040px;margin:auto;padding:14px clamp(16px,3vw,28px);display:flex;justify-content:space-between;align-items:center;gap:15px}
+.pm-brand{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none}
+.pm-logo{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#ffffff24;font-size:25px}
+.pm-brand strong{display:block;font-size:1.25rem;line-height:1.1;letter-spacing:.03em}
+.pm-brand small{display:block;font-size:.7rem;color:#c7e1e3}
+.pm-back{color:#e5f8f8;font-weight:650;text-decoration:none}
+.pm-main{max-width:1040px;margin:0 auto;padding:28px clamp(16px,3vw,28px) 90px}
+.pm-intro{margin-bottom:26px;max-width:720px}
+.pm-eyebrow{margin:0 0 8px;color:var(--pm-teal);font-size:.75rem;font-weight:800;letter-spacing:.11em}
+.pm-intro h1{font-size:clamp(1.65rem,4vw,2.45rem);line-height:1.13;letter-spacing:-.035em;margin:0 0 10px;color:var(--pm-text)}
+.pm-intro>p:last-child{color:var(--pm-muted);margin:0;line-height:1.65}
+.pm-section{margin:24px 0;scroll-margin-top:14px}
+.pm-section-title{margin-bottom:13px}
+.pm-section-title h2{font-size:1.2rem;line-height:1.3;margin:0 0 4px;color:var(--pm-text)}
+.pm-section-title p{margin:0;color:var(--pm-muted);font-size:.88rem}
+.pm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pm-card{min-width:0;display:flex;align-items:flex-start;gap:12px;padding:17px 15px;min-height:117px;background:var(--pm-paper);border:1px solid var(--pm-border);border-radius:15px;color:var(--pm-text);text-decoration:none;box-shadow:0 3px 11px #102c3410}
+.pm-card:hover{border-color:var(--pm-teal);background:#f4fbfb}
+.pm-card:focus-visible,.pm-resources a:focus-visible,.pm-back:focus-visible,.pm-brand:focus-visible,.pm-assistant button:focus-visible{outline:3px solid #10a5a6;outline-offset:3px}
+.pm-main-grid .pm-card{min-height:122px;border-color:#add5d5}
+.pm-icon{display:grid;place-items:center;flex:0 0 43px;height:43px;border-radius:12px;background:#eaf5f5;font-size:23px}
+.pm-card-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+.pm-card-copy strong{font-size:1rem;line-height:1.3}
+.pm-card-copy span{color:var(--pm-muted);font-size:.85rem;line-height:1.4}
+.pm-card-copy small{font-size:.72rem;color:#607d86;line-height:1.35}
+.pm-arrow{font-size:1.7rem;color:var(--pm-teal);line-height:1}
+.pm-wide{min-height:100px}
+.pm-note{font-size:.81rem;color:var(--pm-muted);margin:9px 0 0}
+.pm-resources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pm-resources a{border-radius:12px;border:1px solid var(--pm-border);padding:14px 15px;background:var(--pm-paper);display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--pm-text);font-weight:700;text-decoration:none}
+.pm-resources a span{font-size:1.4rem;color:var(--pm-teal)}
+.pm-assistant{margin-top:30px;padding:18px 20px;background:#eaf5f5;border:1px solid #c8e1e0;border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.pm-assistant h2{font-size:1.08rem;margin:0 0 6px}
+.pm-assistant p{font-size:.86rem;color:#41616c;margin:0;max-width:67ch}
+.pm-assistant button{flex:none;border:0;background:var(--pm-navy);color:#fff;border-radius:11px;min-height:44px;padding:10px 15px;font:700 .9rem system-ui;cursor:pointer}
+.pm-disclaimer{font-size:.77rem;color:var(--pm-muted);margin:25px 0}
+html[data-theme="dark"]{--pm-paper:#193744;--pm-text:#eaf5f6;--pm-muted:#b4cbd3;--pm-border:#41616b}
+html[data-theme="dark"] .pm-card:hover{background:#244954}
+html[data-theme="dark"] .pm-icon{background:#31525f}
+html[data-theme="dark"] .pm-card-copy small{color:#a9c9d3}
+html[data-theme="dark"] .pm-assistant{background:#244853;border-color:#46717d}
+html[data-theme="dark"] .pm-assistant p{color:#c3dee5}
+html[data-theme="dark"] .pm-assistant button{background:#0e6772}
+@media(max-width:680px){.pm-main{padding-top:20px}.pm-grid,.pm-resources{grid-template-columns:1fr}.pm-card{min-height:90px;padding:14px 12px}.pm-assistant{align-items:stretch;flex-direction:column}.pm-assistant button{width:100%}}
+@media(prefers-reduced-motion:reduce){.pm-card{transition:none}}
