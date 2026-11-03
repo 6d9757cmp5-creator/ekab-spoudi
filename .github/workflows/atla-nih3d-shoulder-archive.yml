@@ -1,0 +1,34 @@
+name: ATLA NIH3D shoulder 00334 live source rights preflight
+on:
+  push:
+    branches: [feat/nih3d-public-domain-shoulder-originals-20261103]
+    paths: ['.github/workflows/atla-nih3d-shoulder-archive.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-source-rights:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Inspect current NIH source license before any archive publication
+        run: |
+          node --input-type=module <<'NODE'
+          const url='https://3d.nih.gov/api/entries/334';
+          const response=await fetch(url,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(30000)});
+          if(!response.ok)throw Error('NIH API inaccessible: '+response.status);
+          const data=await response.json();
+          const fields=[];
+          function scan(x,p='',depth=0){
+            if(depth>7||fields.length>100||!x||typeof x!=='object')return;
+            for(const [k,v] of Object.entries(x)){
+              if(/licen|public.domain|rights|version|submissionstatus|status/i.test(k)){
+                fields.push({path:p+'.'+k,value:typeof v==='object'?JSON.stringify(v).slice(0,160):String(v).slice(0,160)});
+              }
+              if(typeof v==='object')scan(v,p+'.'+k,depth+1);
+            }
+          }
+          scan(data);
+          console.log('NIH entry 334 top-level fields:',Object.keys(data).join(','));
+          console.log('NIH entry 334 rights and status fields:',JSON.stringify(fields.slice(0,60)));
+          NODE
