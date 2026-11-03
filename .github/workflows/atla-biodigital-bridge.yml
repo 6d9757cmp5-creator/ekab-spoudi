@@ -54,5 +54,6 @@ jobs:
           assert.ok(!/localStorage|sessionStorage|document\.cookie/.test(script),'Unexpected local persistent storage');
           assert.ok(!/labels\.setEnabled|scene\.pickingMode/.test(script),'Undocumented API command');
           assert.ok(!/sk-proj-|BEGIN PRIVATE KEY/.test(page+script),'Unexpected secret');
+          assert.match(script,/Δεν επιβεβαιώθηκε σύνδεση BioDigital Viewer API/,'Missing auth-failure user feedback');
           console.log('Standalone integration smoke: PASS');
           NODE
