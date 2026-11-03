@@ -14,8 +14,8 @@ import assert from 'node:assert/strict';
 const port=8893,base='http://127.0.0.1:'+port+'/';
 const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});
 const cases=[
-  {n:7,required:'μόλις πραγματοποιηθεί η εκφόρτιση',source:'adult-basic-life-support-guidelines'},
-  {n:9,required:'το ΠΔ 62/2007',source:'first-aid-guidelines'},
+  {n:7,required:'πλήρη επαναφορά του θώρακα',source:'adult-basic-life-support-guidelines'},
+  {n:9,required:'η ενδομυϊκή αδρεναλίνη είναι θεραπεία πρώτης γραμμής',source:'first-aid-guidelines'},
   {n:10,required:'5 λεπτά ή περισσότερο',source:'nice.org.uk/guidance/ng217'}
 ];
 const result={kind:'local-chromium-functional-acceptance',notClinicalCertification:true,
@@ -63,6 +63,8 @@ try{
         assert(hrefs.some(x=>x.includes(c.source)),'Missing expected primary-source link');
         await chapter.locator('.lesson-more > summary').click();
         assert(await chapter.locator('.lesson-more h3').first().isVisible());
+        if(c.n===7) assert((await chapter.locator('.lesson-process').textContent()).includes('μόλις πραγματοποιηθεί η εκφόρτιση'));
+        if(c.n===9) assert((await chapter.locator('.lesson-more').textContent()).includes('ΠΔ 62/2007'));
         await chapter.locator('.knowledge-check > summary').click();
         await chapter.locator('.knowledge-check details > summary').click();
         assert(await chapter.locator('.check-answer').isVisible());
@@ -76,7 +78,7 @@ try{
       await page.locator('#saekChapterNext').click();
       assert.equal(await page.locator('#saekChapterCount').textContent(),'10 / 13');
       assert.equal(await page.evaluate(k=>localStorage.getItem(k),key),'10');
-      await page.reload({waitUntil:'domcontentloaded'});
+      await page.goto(base+'saek-course-16.html',{waitUntil:'domcontentloaded'});
       await page.waitForFunction(()=>document.querySelector('#saekChapterCount')?.textContent==='10 / 13');
       await page.locator('#saekChapterPrev').click();
       assert.equal(await page.locator('#saekChapterCount').textContent(),'9 / 13');
