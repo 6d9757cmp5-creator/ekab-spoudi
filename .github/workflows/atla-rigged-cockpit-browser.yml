@@ -1,7 +1,7 @@
 name: ATLA Clinical Cockpit Rigged Patient Browser Acceptance
 on:
   push:
-    branches: [feature/atla-full-model-workspace-20261103]
+    branches: [main, feature/atla-full-model-workspace-20261103]
     paths:
       - '.github/workflows/atla-rigged-cockpit-browser.yml'
       - 'scripts/verify-atla-rigged-cockpit-browser.mjs'
