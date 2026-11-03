@@ -66,3 +66,11 @@ test("active ATLA bibliography integrates citations, not AI prompts or saved pro
  assert.doesNotMatch(js,/\b(?:localStorage|sessionStorage|indexedDB|askAi|buildPayload|saveProgress)\b/);
  assert.doesNotMatch(js,/\.(?:innerHTML|outerHTML)\s*=/);
 });
+
+test("current AI research review schema version 2 required, legacy version 1 rejected",()=>{
+ const good=data();
+ assert.equal(good.review.schema_version,2);
+ assert.equal(validateResearch(good).count,good.pending.items.length);
+ good.review.schema_version=1;
+ assert.throws(()=>validateResearch(good),/research-source-unverified:review/);
+});

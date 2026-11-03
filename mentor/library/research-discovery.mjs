@@ -24,7 +24,7 @@ export function validateResearch({metadata,health,pending,review}={}){
     health.sources.some(x=>x.clinical_approval!==false||x.knowledge_ingestion_enabled!==false))fail("source-health");
  if(pending?.schema_version!==1||pending.checked_at!==at||!Array.isArray(pending.items)||
     pending.items.length>100||pending.items.length!==metadata.pending_papers)fail("pending");
- if(review?.schema_version!==1||review.generated_at!==at||
+ if(review?.schema_version!==2||review.generated_at!==at||
     review.stage!=="research-only-awaiting-independent-review"||
     review.ai_configured!==false||review.clinical_knowledge_imported!==0||
     review.existing_curriculum_changed!==false||!Array.isArray(review.items)||
