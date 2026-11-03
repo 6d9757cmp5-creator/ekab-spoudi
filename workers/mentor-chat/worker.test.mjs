@@ -5,7 +5,7 @@ import worker,{validate,buildMessages,verifiedPassages,SYSTEM_PROMPT,_resetLimit
 const ORIGIN="https://6d9757cmp5-creator.github.io";
 const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:"Καρδιοπνευμονική αναζωογόνηση",definition:"Θωρακικές συμπιέσεις και όπου ενδείκνυται αερισμοί για υποστήριξη κυκλοφορίας σε ανακοπή."}],level:"student",history:[]};
 const req=(over={},method="POST",b=body)=>new Request("https://w.example/",{method,headers:{origin:ORIGIN,"content-type":"application/json","cf-connecting-ip":"1.1.1.1",...over},body:method==="POST"?JSON.stringify(b):undefined});
-const aiOk=()=>({AI:{run:async(model,input)=>{aiOk.last={model,input};return new Response("data: {\"response\":\"Εκπαιδευτικός ορισμός. [T1]\"}\n\n").body;}},MENTOR_FREE_PLAN_CONFIRMED:"true"});
+const aiOk=()=>({AI:{run:async(model,input)=>{aiOk.last={model,input};return new Response("data: {\"response\":\"Εκπαιδευτικός ορισμός. [T1]\"}\n\ndata: [DONE]\n\n").body;}},MENTOR_FREE_PLAN_CONFIRMED:"true"});
 
 test.beforeEach(()=>_resetLimits());
 

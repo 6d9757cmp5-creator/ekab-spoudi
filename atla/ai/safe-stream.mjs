@@ -13,8 +13,9 @@ export async function collectAndAuditAiStream(stream,passages,{maxBytes=48000,ma
  const parseLine=line=>{
   if(!line.startsWith('data:'))return;
   const data=line.slice(5).trim();
-  if(data==='[DONE]'){sawDone=true;return;}
+  if(data==='[DONE]'){if(sawDone)throw new Error('duplicate-sse-done');sawDone=true;return;}
   if(!data)return;
+  if(sawDone)throw new Error('sse-event-after-done');
   let event;
   try{event=JSON.parse(data);}catch{throw new Error('invalid-sse-json');}
   if(!event||typeof event!=='object'||event.error)throw new Error('invalid-sse-event');
@@ -43,6 +44,8 @@ export async function collectAndAuditAiStream(stream,passages,{maxBytes=48000,ma
   }
   append(decoder.decode());
   if(pending.trim())parseLine(pending.trimEnd());
+  // A truncated stream must never be mistaken for a complete medical answer.
+  if(!sawDone)throw new Error('incomplete-sse');
   const verdict=auditAssistantReply(answer.trim(),passages);
   if(!verdict.ok)return {ok:false,reason:verdict.reason};
   return {ok:true,text:answer.trim()};

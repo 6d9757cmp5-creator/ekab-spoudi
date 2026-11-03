@@ -59,3 +59,19 @@ test('ignores SSE comments and safely combines token events without speculative 
  const got=await collectAndAuditAiStream(streamOf([payload]),passages);
  assert.deepEqual(got,{ok:true,text:'Εκπαιδευτικό περιεχόμενο. [T1]'});
 });
+
+test('rejects truncated cited output and duplicate or post-terminal events',async()=>{
+ const cited=event({token:'Ορισμός από τη βιβλιοθήκη. [T1]'});
+ const cases=[
+  cited, // upstream ended before its terminal marker
+  cited+'data: [DONE]\\n\\n'+event({token:'Επιπλέον κείμενο [T1]'}),
+  cited+'data: [DONE]\\n\\n'+'data: [DONE]\\n\\n',
+  cited+'data: [DONE]\\n\\n'+event({error:'late-upstream-failure'})
+ ];
+ for(const raw of cases){
+  const checked=await collectAndAuditAiStream(streamOf([raw]),passages);
+  assert.equal(checked.ok,false,'truncated/late SSE must fail closed');
+ }
+ const valid=await collectAndAuditAiStream(streamOf([cited+'data: [DONE]\\n\\n']),passages);
+ assert.equal(valid.ok,true);
+});
