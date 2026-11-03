@@ -36,4 +36,19 @@ assert(smaller.unselectedEligible>=1);
 assert.throws(()=>planNextBatch([entry(1,'A','Anatomy'),entry(1,'B','Anatomy')],new Set()),/duplicate/);
 assert.deepEqual(planNextBatch([entry(10,'Unknown','Anatomy','CC BY 4.0')],new Set()).selected,[],
  'CC BY must not be copied without explicit review of attribution');
+const scoped=planNextBatch([
+ entry(21,'Breadboard wire holder','Devices and Hardware'),
+ entry(22,'Water molecule','Small Molecules'),
+ entry(23,'Influenza virus','Viruses'),
+ entry(24,'Human receptor protein','Biomacromolecules'),
+ entry(25,'Artificial hip prosthesis','Prosthetics'),
+ entry(26,'Clinical ventilator holder','Devices and Hardware')
+],new Set(),{maxBatchBytes:8000,maxFileBytes:2000,maxOriginalFiles:8,maxModels:8});
+assert.deepEqual(scoped.selected.map(x=>x.entryId),[23,24,25],
+ 'The medical/scientific archive must skip generic hardware and unresolved chemicals');
+assert.equal(scoped.skipped.likelyOutOfMedicalScope,1);
+assert.equal(scoped.skipped.biomedicalReviewRequired,2);
+assert(scoped.selected.every(x=>x.biomedicalResearchScope==='IN_SCOPE_RESEARCH_CANDIDATE'));
+assert.equal(scoped.sourceScanned,6);
+assert.equal(scoped.selectedOriginalFiles,3);
 console.log('NIH original-source batch planner safety tests passed');
