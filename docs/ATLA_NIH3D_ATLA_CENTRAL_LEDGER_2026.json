@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 1,
+  "title": "ATLA NIH3D + ATLA unified verifiable completion register",
+  "compiledAtUTC": "2026-11-03T19:02:24.245Z",
+  "sourceGitRepository": "6d9757cmp5-creator/ekab-spoudi",
+  "rule": "All original goals must be independently verified before whole-task completion. No metadata-only, job-only, release-only or AI-generated clinical approval claims.",
+  "state": "CENTRAL_TASK_INCOMPLETE",
+  "completionPercentage": null,
+  "verifiedChecks": {
+    "sourceCatalog": true,
+    "scopeCoverage": true,
+    "archiveConsistency": true,
+    "structuralCorrespondence": true,
+    "scientificCoverage": true,
+    "scientificIntegrity": true,
+    "fullLibraryComplete": false
+  },
+  "counts": {
+    "sourceEntries": 15688,
+    "originalMetadataSourceReferences": 204346,
+    "biomedicalCandidates": 10041,
+    "scientificRelevanceReviewsPending": 4275,
+    "likelyNonmedicalPreserved": 1372,
+    "fullOriginalModelsSHARecovered": 54,
+    "partialOriginalModelsSHARecovered": 0,
+    "uniqueOriginalSourceFilesSHARecovered": 326,
+    "uniqueOriginalBytesSHARecovered": 529915495,
+    "currentTechnicalStructuralFilesSHAReverified": 326,
+    "sourceStructuralFormatPassed": 326,
+    "sourceStructuralReviewNeeded": 0,
+    "proposedCourseAnatomyMatches": 298,
+    "independentClinicalModelApprovals": 0,
+    "historicalCanonicalArchiveShards": 14,
+    "historicalTotalIntendedShards": 250,
+    "historicalUnresolvedAuditProblems": 238,
+    "activeLegacyArtifactsFound": 74,
+    "activeLegacyArtifactBytes": 854160282047,
+    "historicalRecoveredReleaseCount": 4,
+    "historicalRecoveredReleaseAssets": 245,
+    "historicalRecoveredReleaseBytes": 64022487622
+  },
+  "statusDefinitions": {
+    "DONE": "VERIFIED_COMPLETE_FOR_STATED_SCOPE",
+    "PARTIAL": "PARTIAL_VERIFIED",
+    "PENDING": "UNVERIFIED_OR_PENDING",
+    "BLOCKED": "BLOCKED"
+  },
+  "github": {
+    "mainSha": "1e0cbf584cb0591ede74effd47e8ac1e814a1979",
+    "pr197": {
+      "number": 197,
+      "draft": true,
+      "headSha": "74cf17bf985793bab437eee2824ba3357ec6cc87",
+      "baseSha": "61781e882fe46c5fa775502f3dce577441d136bd",
+      "mergeable": null,
+      "changedFiles": 104,
+      "url": "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/197",
+      "merged": false
+    },
+    "historicalArtifactRun": 41363970707,
+    "historicalUnexpiredArtifacts": [
+      {
+        "name": "nih3d-originals-8701",
+        "size": 13033551442,
+        "expiresAt": "2026-11-10T18:49:07Z"
+      },
+      {
+        "name": "nih3d-originals-8501",
+        "size": 22711245537,
+        "expiresAt": "2026-11-10T17:35:01Z"
+      },
+      {
+        "name": "nih3d-originals-8601",
+        "size": 13124795582,
+        "expiresAt": "2026-11-10T17:41:23Z"
+      },
+      {
+        "name": "nih3d-originals-8401",
+        "size": 14605725496,
+        "expiresAt": "2026-11-10T16:38:10Z"
+      },
+      {
+        "name": "nih3d-originals-8301",
+        "size": 15344090451,
+        "expiresAt": "2026-11-10T16:08:25Z"
+      },
+      {
+        "name": "nih3d-originals-8201",
+        "size": 16234136061,
+        "expiresAt": "2026-11-10T15:25:47Z"
+      },
+      {
+        "name": "nih3d-originals-8101",
+        "size": 11621919885,
+        "expiresAt": "2026-11-10T15:03:53Z"
+      },
+      {
+        "name": "nih3d-originals-7901",
+        "size": 20117046373,
+        "expiresAt": "2026-11-10T14:13:50Z"
+      },
+      {
+        "name": "nih3d-originals-8001",
+        "size": 11212719149,
+        "expiresAt": "2026-11-10T14:08:49Z"
+      },
+      {
+        "name": "nih3d-originals-7801",
+        "size": 10479956304,
+        "expiresAt": "2026-11-10T13:19:37Z"
+      },
+      {
+        "name": "nih3d-originals-7701",
+        "size": 10139254742,
+        "expiresAt": "2026-11-10T12:55:02Z"
+      },
+      {
+        "name": "nih3d-originals-7501",
+        "size": 37513260963,
+        "expiresAt": "2026-11-10T12:17:48Z"
+      },
+      {
+        "name": "nih3d-originals-7601",
+        "size": 20269943417,
+        "expiresAt": "2026-11-10T12:08:46Z"
+      },
+      {
+        "name": "nih3d-originals-7401",
+        "size": 17085937243,
+        "expiresAt": "2026-11-10T10:51:07Z"
+      },
+      {
+        "name": "nih3d-originals-7301",
+        "size": 12473085896,
+        "expiresAt": "2026-11-10T09:53:45Z"
+      },
+      {
+        "name": "nih3d-originals-7201",
+        "size": 9391952646,
+        "expiresAt": "2026-11-10T09:47:35Z"
+      },
+      {
+        "name": "nih3d-originals-7101",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:55:47Z"
+      },
+      {
+        "name": "nih3d-originals-7001",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:55:16Z"
+      },
+      {
+        "name": "nih3d-originals-6201",
+        "size": 43904863,
+        "expiresAt": "2026-11-10T08:48:06Z"
+      },
+      {
+        "name": "nih3d-originals-6501",
+        "size": 27779585,
+        "expiresAt": "2026-11-10T08:52:11Z"
+      },
+      {
+        "name": "nih3d-originals-5901",
+        "size": 19662924,
+        "expiresAt": "2026-11-10T08:44:47Z"
+      },
+      {
+        "name": "nih3d-originals-6401",
+        "size": 46525184,
+        "expiresAt": "2026-11-10T08:51:06Z"
+      },
+      {
+        "name": "nih3d-originals-5301",
+        "size": 1728784930,
+        "expiresAt": "2026-11-10T08:40:48Z"
+      },
+      {
+        "name": "nih3d-originals-6301",
+        "size": 40699458,
+        "expiresAt": "2026-11-10T08:49:33Z"
+      },
+      {
+        "name": "nih3d-originals-6001",
+        "size": 22896310,
+        "expiresAt": "2026-11-10T08:46:04Z"
+      },
+      {
+        "name": "nih3d-originals-6801",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:53:33Z"
+      },
+      {
+        "name": "nih3d-originals-6701",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:53:04Z"
+      },
+      {
+        "name": "nih3d-originals-6101",
+        "size": 46697929,
+        "expiresAt": "2026-11-10T08:47:01Z"
+      },
+      {
+        "name": "nih3d-originals-5401",
+        "size": 846784757,
+        "expiresAt": "2026-11-10T08:58:52Z"
+      },
+      {
+        "name": "nih3d-originals-5501",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:41:42Z"
+      },
+      {
+        "name": "nih3d-originals-6901",
+        "size": 53306429,
+        "expiresAt": "2026-11-10T08:54:48Z"
+      },
+      {
+        "name": "nih3d-originals-5701",
+        "size": 16056675,
+        "expiresAt": "2026-11-10T08:43:16Z"
+      },
+      {
+        "name": "nih3d-originals-6601",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:52:40Z"
+      },
+      {
+        "name": "nih3d-originals-5801",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:43:45Z"
+      },
+      {
+        "name": "nih3d-originals-5601",
+        "size": 14886,
+        "expiresAt": "2026-11-10T08:42:16Z"
+      },
+      {
+        "name": "nih3d-originals-5201",
+        "size": 2052345743,
+        "expiresAt": "2026-11-10T08:38:47Z"
+      },
+      {
+        "name": "nih3d-originals-5101",
+        "size": 6968267078,
+        "expiresAt": "2026-11-10T07:57:01Z"
+      },
+      {
+        "name": "nih3d-originals-5001",
+        "size": 15340341439,
+        "expiresAt": "2026-11-10T07:51:10Z"
+      },
+      {
+        "name": "nih3d-originals-4801",
+        "size": 13938105533,
+        "expiresAt": "2026-11-10T06:44:19Z"
+      },
+      {
+        "name": "nih3d-originals-4901",
+        "size": 11881412767,
+        "expiresAt": "2026-11-10T06:58:42Z"
+      },
+      {
+        "name": "nih3d-originals-4701",
+        "size": 5701981527,
+        "expiresAt": "2026-11-10T06:07:09Z"
+      },
+      {
+        "name": "nih3d-originals-4601",
+        "size": 17254994194,
+        "expiresAt": "2026-11-10T05:50:51Z"
+      },
+      {
+        "name": "nih3d-originals-4501",
+        "size": 19334400382,
+        "expiresAt": "2026-11-10T05:31:48Z"
+      },
+      {
+        "name": "nih3d-originals-4401",
+        "size": 34297770865,
+        "expiresAt": "2026-11-10T04:46:47Z"
+      },
+      {
+        "name": "nih3d-originals-4301",
+        "size": 17871955982,
+        "expiresAt": "2026-11-10T03:59:19Z"
+      },
+      {
+        "name": "nih3d-originals-4201",
+        "size": 15790166133,
+        "expiresAt": "2026-11-10T03:06:46Z"
+      },
+      {
+        "name": "nih3d-originals-4101",
+        "size": 16184618964,
+        "expiresAt": "2026-11-10T02:49:33Z"
+      },
+      {
+        "name": "nih3d-originals-3901",
+        "size": 13886088024,
+        "expiresAt": "2026-11-10T01:56:03Z"
+      },
+      {
+        "name": "nih3d-originals-4001",
+        "size": 4155074141,
+        "expiresAt": "2026-11-10T01:39:57Z"
+      },
+      {
+        "name": "nih3d-originals-3801",
+        "size": 19607674840,
+        "expiresAt": "2026-11-10T01:14:08Z"
+      },
+      {
+        "name": "nih3d-originals-3701",
+        "size": 20106621065,
+        "expiresAt": "2026-11-10T00:45:07Z"
+      },
+      {
+        "name": "nih3d-originals-3601",
+        "size": 17721132520,
+        "expiresAt": "2026-11-09T23:55:58Z"
+      },
+      {
+        "name": "nih3d-originals-3501",
+        "size": 12191529637,
+        "expiresAt": "2026-11-09T23:25:40Z"
+      },
+      {
+        "name": "nih3d-originals-3401",
+        "size": 12178464047,
+        "expiresAt": "2026-11-09T22:38:07Z"
+      },
+      {
+        "name": "nih3d-originals-3301",
+        "size": 14975827908,
+        "expiresAt": "2026-11-09T22:20:06Z"
+      },
+      {
+        "name": "nih3d-originals-3201",
+        "size": 12384260228,
+        "expiresAt": "2026-11-09T21:35:19Z"
+      },
+      {
+        "name": "nih3d-originals-2901",
+        "size": 21783591095,
+        "expiresAt": "2026-11-09T20:49:53Z"
+      },
+      {
+        "name": "nih3d-originals-3101",
+        "size": 20513288702,
+        "expiresAt": "2026-11-09T20:17:15Z"
+      },
+      {
+        "name": "nih3d-originals-3001",
+        "size": 11073500857,
+        "expiresAt": "2026-11-09T19:10:41Z"
+      },
+      {
+        "name": "nih3d-originals-2801",
+        "size": 11750149091,
+        "expiresAt": "2026-11-09T18:25:01Z"
+      },
+      {
+        "name": "nih3d-originals-2701",
+        "size": 17677503288,
+        "expiresAt": "2026-11-09T17:57:13Z"
+      },
+      {
+        "name": "nih3d-originals-2601",
+        "size": 11574984251,
+        "expiresAt": "2026-11-09T17:37:13Z"
+      },
+      {
+        "name": "nih3d-originals-2501",
+        "size": 14960010488,
+        "expiresAt": "2026-11-09T16:43:38Z"
+      },
+      {
+        "name": "nih3d-originals-2401",
+        "size": 20991256669,
+        "expiresAt": "2026-11-09T16:38:19Z"
+      },
+      {
+        "name": "nih3d-originals-2201",
+        "size": 21261195778,
+        "expiresAt": "2026-11-09T15:19:58Z"
+      },
+      {
+        "name": "nih3d-originals-2301",
+        "size": 22738266722,
+        "expiresAt": "2026-11-09T15:10:36Z"
+      },
+      {
+        "name": "nih3d-originals-2101",
+        "size": 8724266722,
+        "expiresAt": "2026-11-09T13:44:48Z"
+      },
+      {
+        "name": "nih3d-originals-2001",
+        "size": 14196695347,
+        "expiresAt": "2026-11-09T13:20:11Z"
+      },
+      {
+        "name": "nih3d-originals-1901",
+        "size": 13961188448,
+        "expiresAt": "2026-11-09T13:06:19Z"
+      },
+      {
+        "name": "nih3d-originals-1701",
+        "size": 16856977757,
+        "expiresAt": "2026-11-09T12:23:50Z"
+      },
+      {
+        "name": "nih3d-originals-1801",
+        "size": 6087418524,
+        "expiresAt": "2026-11-09T12:12:09Z"
+      },
+      {
+        "name": "nih3d-originals-1601",
+        "size": 15117592451,
+        "expiresAt": "2026-11-09T11:38:22Z"
+      },
+      {
+        "name": "nih3d-originals-1501",
+        "size": 17962985978,
+        "expiresAt": "2026-11-09T11:09:33Z"
+      },
+      {
+        "name": "nih3d-originals-1301",
+        "size": 24854537543,
+        "expiresAt": "2026-11-09T10:37:46Z"
+      }
+    ],
+    "earliestHistoricalArtifactExpiryUTC": "2026-11-09T10:37:46Z",
+    "historicalRecoveredReleaseTags": [
+      {
+        "tag": "ekab-nih3d-recovered-01801-01900",
+        "assets": 25,
+        "bytes": 6087413990,
+        "url": "https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/ekab-nih3d-recovered-01801-01900"
+      },
+      {
+        "tag": "ekab-nih3d-recovered-01601-01700",
+        "assets": 58,
+        "bytes": 15117581355,
+        "url": "https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/ekab-nih3d-recovered-01601-01700"
+      },
+      {
+        "tag": "ekab-nih3d-recovered-01501-01600",
+        "assets": 69,
+        "bytes": 17962972760,
+        "url": "https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/ekab-nih3d-recovered-01501-01600"
+      },
+      {
+        "tag": "ekab-nih3d-recovered-01301-01400",
+        "assets": 93,
+        "bytes": 24854519517,
+        "url": "https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/tag/ekab-nih3d-recovered-01301-01400"
+      }
+    ],
+    "unavailable": []
+  },
+  "issues": [
+    {
+      "id": "NIH-01",
+      "task": "Preserve complete original NIH 3D metadata index (not bulk-copying unrelated devices)",
+      "state": "VERIFIED_COMPLETE_FOR_STATED_SCOPE",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-biomedical-scope-2026/summary.json"
+      ],
+      "scope": "Saved 2026 snapshot: all source identities and referenced formats preserved as metadata",
+      "unmet": "Check current NIH publications and version drift beyond the saved 2026 snapshot"
+    },
+    {
+      "id": "NIH-02",
+      "task": "Complete biomedical relevance triage and expert scientific course mapping",
+      "state": "PARTIAL_VERIFIED",
+      "verified": "Full metadata triage plus 298 proposed anatomy-course matches",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-biomedical-scope-2026/summary.json",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-educational-evidence-2026/summary.json"
+      ],
+      "unmet": "Review 4275 uncertain models, validate geometry/anatomy, SAEK, EOPPEP, Anatomy Lab and Cockpit links by domain experts"
+    },
+    {
+      "id": "NIH-03",
+      "task": "Store ALL selected source original formats including dependent textures/animations where any",
+      "state": "PARTIAL_VERIFIED",
+      "verified": "54 original NIH models, 326 source-file URLs stored and anonymously restored",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-verified-originals-2026.json",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/packages"
+      ],
+      "unmet": "Most biomedical models and any external texture/animation dependencies are not yet proven archived; check original source formats per model and license"
+    },
+    {
+      "id": "NIH-04",
+      "task": "SHA256, manifests, all split parts, long-term preservation and recovery",
+      "state": "PARTIAL_VERIFIED",
+      "verified": "529915495 source bytes revalidated via GHCR and 326 independent format screens",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-verified-originals-2026.json"
+      ],
+      "unmet": "Reconcile 250 RESULT.json, tar.zst + split parts, original file hashes and permanent recovery across every selected package"
+    },
+    {
+      "id": "NIH-05",
+      "task": "Preserve and independently recover expiring historical GitHub Actions artifacts",
+      "state": "PARTIAL_VERIFIED",
+      "verified": "245 recovered GitHub Release assets currently visible",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41363970707",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.json",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/releases"
+      ],
+      "unmet": "Unexpired artifacts require urgent verified extraction; old report records 238 historical archive gaps. Published assets are not verified source SHA-256."
+    },
+    {
+      "id": "NIH-06",
+      "task": "Safe future expansion without duplicating data or unrelated NIH devices",
+      "state": "PARTIAL_VERIFIED",
+      "verified": "Idempotent, biomedical-only, rights-gated bounded GHCR source archive workflow",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/.github/workflows/atla-nih3d-planned-batch-execution.yml",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/scripts/nih3d-plan-next-originals.mjs"
+      ],
+      "unmet": "Guarantee sustained storage, capacity, repository operational limits and robust resume after failures"
+    },
+    {
+      "id": "NIH-07",
+      "task": "3D viewer completeness and visual correctness for textures, animation, layers and interaction",
+      "state": "UNVERIFIED_OR_PENDING",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/actions",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/ATLA_MASTER_PLAN_ANATOMY_LAB_AND_CLINICAL_COCKPIT_2026.md"
+      ],
+      "unmet": "Independent visual screenshot-based mobile/desktop tests of real selected models in full Anatomy Lab and Clinical Cockpit viewer"
+    },
+    {
+      "id": "NIH-08",
+      "task": "Published live browser app loads actual selected original 3D objects",
+      "state": "UNVERIFIED_OR_PENDING",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/workflows/pages/pages-build-deployment",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/ATLA_NIH3D_CONTEXTUAL_INTEGRATION.md"
+      ],
+      "unmet": "Production URL, CORS, real model textures/animations, 3D rendering, clinical correctness and mobile interactions have not been fully verified"
+    },
+    {
+      "id": "NIH-09",
+      "task": "Independent technical and scientific assessment (not automatic clinical certification)",
+      "state": "PARTIAL_VERIFIED",
+      "verified": "Independent technical byte/format checks exist; 0 independent clinical approvals",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/docs/ATLA_INDEPENDENT_SCIENTIFIC_QA_2026-11-03.md"
+      ],
+      "unmet": "Independent credentialed scientific review, per-model medical anatomy accuracy and pedagogical validation"
+    },
+    {
+      "id": "ATLA-01",
+      "task": "Safely synchronize draft PR #197 after completing NIH3D, with zero loss of newer main binaries",
+      "state": "UNVERIFIED_OR_PENDING",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/197",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/blob/main/tools/atla-ai/resources/nih3d-verified-originals-2026.json"
+      ],
+      "unmet": "Preserve draft; rebase/reconcile against current main only after NIH3D audit and ensure all 3D manifests survive"
+    },
+    {
+      "id": "ATLA-02",
+      "task": "One ATLA learning assistant, no duplicate MENTOR and no lost learner progress",
+      "state": "UNVERIFIED_OR_PENDING",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/197"
+      ],
+      "unmet": "PR #197 CI recheck, learner profile migrations, end-to-end navigation and regression, no external AI endpoint activation"
+    },
+    {
+      "id": "ATLA-03",
+      "task": "Final integrated live production browser QA and release acceptance",
+      "state": "UNVERIFIED_OR_PENDING",
+      "evidence": [
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/actions",
+        "https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/197"
+      ],
+      "unmet": "At least desktop/mobile production screenshot and interaction proof, learning progress retention and rollback validation"
+    }
+  ],
+  "workScope": "Complete medically/scientifically relevant subset of NIH; save original metadata for all entries and retain uncertain science/hardware for review",
+  "coreSafety": {
+    "noAIEndpointActivationRequested": true,
+    "noExistingOriginalArchivesRemovedByThisRegister": true,
+    "noClinicalAccuracyInferredFromTechnicalSHA": true,
+    "noDraftPR197MergeUntilNIHComplete": true,
+    "noHistoricalArtifactEquatedWithPermanentPreservation": true
+  },
+  "missingAcceptanceProofs": [
+    {
+      "id": "NIH-02",
+      "required": "Review 4275 uncertain models, validate geometry/anatomy, SAEK, EOPPEP, Anatomy Lab and Cockpit links by domain experts"
+    },
+    {
+      "id": "NIH-03",
+      "required": "Most biomedical models and any external texture/animation dependencies are not yet proven archived; check original source formats per model and license"
+    },
+    {
+      "id": "NIH-04",
+      "required": "Reconcile 250 RESULT.json, tar.zst + split parts, original file hashes and permanent recovery across every selected package"
+    },
+    {
+      "id": "NIH-05",
+      "required": "Unexpired artifacts require urgent verified extraction; old report records 238 historical archive gaps. Published assets are not verified source SHA-256."
+    },
+    {
+      "id": "NIH-06",
+      "required": "Guarantee sustained storage, capacity, repository operational limits and robust resume after failures"
+    },
+    {
+      "id": "NIH-07",
+      "required": "Independent visual screenshot-based mobile/desktop tests of real selected models in full Anatomy Lab and Clinical Cockpit viewer"
+    },
+    {
+      "id": "NIH-08",
+      "required": "Production URL, CORS, real model textures/animations, 3D rendering, clinical correctness and mobile interactions have not been fully verified"
+    },
+    {
+      "id": "NIH-09",
+      "required": "Independent credentialed scientific review, per-model medical anatomy accuracy and pedagogical validation"
+    },
+    {
+      "id": "ATLA-01",
+      "required": "Preserve draft; rebase/reconcile against current main only after NIH3D audit and ensure all 3D manifests survive"
+    },
+    {
+      "id": "ATLA-02",
+      "required": "PR #197 CI recheck, learner profile migrations, end-to-end navigation and regression, no external AI endpoint activation"
+    },
+    {
+      "id": "ATLA-03",
+      "required": "At least desktop/mobile production screenshot and interaction proof, learning progress retention and rollback validation"
+    }
+  ]
+}
