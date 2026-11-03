@@ -13,10 +13,16 @@ test('explicit relevant requests choose the existing minimal resource',()=>{
  assert.equal(chooseTeachingTool({question:'Δείξε μου το πρωτόκολλο'}).kind,'protocol');
  assert.equal(chooseTeachingTool({question:'Προσομοίωση τραυματισμένου ασθενή'}).kind,'simulation');
 });
-test('video never offered before specific, approved, published, reviewed match',()=>{
- const video={url:'https://example.org/approved',chapterIds:['lesson-2'],approved:true,reviewed:true,published:true};
- assert.equal(chooseTeachingTool({question:'Δείξε βίντεο',chapterId:'lesson-2'}),null);
- assert.equal(chooseTeachingTool({question:'Δείξε βίντεο',chapterId:'lesson-3',videos:[video]}),null);
- assert.equal(chooseTeachingTool({question:'Δείξε βίντεο',chapterId:'lesson-2',videos:[{...video,approved:false}]}),null);
- assert.equal(chooseTeachingTool({question:'Δείξε βίντεο',chapterId:'lesson-2',videos:[video]}).href,video.url);
+test('video never offered outside the exact approved, published, reviewed course + chapter',()=>{
+ const video={url:'https://example.org/approved',courseId:'saek-course-01.html',
+  chapterIds:['lesson-2'],approved:true,reviewed:true,published:true};
+ const call=(courseId,chapterId,videos)=>chooseTeachingTool({question:'Δείξε βίντεο',courseId,chapterId,videos});
+ assert.equal(call('saek-course-01.html','lesson-2',[]),null);
+ assert.equal(call('saek-course-01.html','lesson-3',[video]),null);
+ assert.equal(call('saek-course-02.html','lesson-2',[video]),null,
+  'identical chapter number from another course cannot show the video');
+ assert.equal(call('','lesson-2',[video]),null);
+ assert.equal(call('saek-course-01.html','lesson-2',[{...video,approved:false}]),null);
+ assert.equal(call('saek-course-01.html','lesson-2',[{...video,courseId:undefined}]),null);
+ assert.equal(call('saek-course-01.html','lesson-2',[video]).href,video.url);
 });
