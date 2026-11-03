@@ -51,7 +51,9 @@ jobs:
           if(s.counts.scholarlyClinicalApprovals!==0||s.scientificApprovalStatus!=='NOT_COMPLETED')throw Error('False clinical approval');
           if(s.counts.sourceRecords!==s.counts.conceptMatched+s.counts.unmatchedRetained)throw Error('Dropped NIH source');
           if(s.relatedSourceAnatomyEvidenceLinks!==6)throw Error('NIH CT segmentation relationships unsupported');
-          if(s.counts.verifiedOriginalArchiveModels!==7)throw Error('Scientific evidence archive status lagging behind seven verified original models');
+          const r=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
+          if(s.counts.verifiedOriginalArchiveModels!==r.modelsWithAllCatalogOriginalFilesVerified)throw Error('Scientific evidence archive status lagging behind verified original ledger');
+          if(r.models.some(m=>m.clinicalUseApproved!==false))throw Error('Unreviewed NIH source cannot be clinically approved');
           console.log('Verified source ledger',JSON.stringify(s.counts));
           NODE
       - name: Store versioned evidence and educational relevance proposals
