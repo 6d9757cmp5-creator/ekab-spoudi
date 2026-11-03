@@ -20,8 +20,12 @@ jobs:
             scripts/nih3d-build-verified-archive-registry.mjs
             scripts/nih3d-build-scientific-evidence.mjs
             scripts/nih3d-scientific-ontology.test.mjs
+            scripts/nih3d-contextual-ui.test.mjs
             scripts/nih3d-verify-ghcr-ledger.mjs
             tools/atla-ai/nih3d-scientific-ontology.mjs
+            tools/atla-ai/nih3d-research-context.mjs
+            tools/atla-ai/nih3d-learning-surface.mjs
+            tools/atla-ai/nih3d-original-source-gateway.mjs
             tools/atla-ai/resources/nih3d-master-plan-2026/
             tools/atla-ai/resources/nih3d-verified-originals-2026.json
             tools/atla-ai/resources/nih3d-educational-evidence-2026/
@@ -30,7 +34,15 @@ jobs:
             docs/ATLA_NIH3D_GHCR_NEURO_BATCH_2026.json
             docs/ATLA_NIH3D_GHCR_MOLECULAR_BATCH_2026.json
             docs/ATLA_NIH3D_GHCR_SHOULDER_00334_2026.json
+            docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
+            docs/ATLA_NIH3D_GHCR_LEDGER_REVALIDATION_2026.json
             saek-course-01.html
+            saek-exams.html
+            saek-exams.js
+            mentor-next.html
+            ui-tools/anatomy-3d/index.html
+            ui-tools/anatomy-3d/saek-jumps.js
+            tools/patient-simulator/app/next-sim.mjs
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
@@ -45,6 +57,7 @@ jobs:
           node --check scripts/nih3d-build-scientific-evidence.mjs
           node scripts/nih3d-build-verified-archive-registry.mjs
           node scripts/nih3d-scientific-ontology.test.mjs
+          node scripts/nih3d-contextual-ui.test.mjs
           node scripts/nih3d-build-scientific-evidence.mjs
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -97,7 +110,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add tools/atla-ai/resources/nih3d-verified-originals-2026.json
           git add tools/atla-ai/resources/nih3d-educational-evidence-2026/
-          git add docs/ATLA_NIH3D_GHCR_LEDGER_REVALIDATION_2026.json
+          git add --sparse docs/ATLA_NIH3D_GHCR_LEDGER_REVALIDATION_2026.json
           if ! git diff --cached --quiet; then
             git commit -m 'evidence(ATLA NIH3D): independently restore and reconcile 8 complete originals'
             git push origin "HEAD:${GITHUB_REF_NAME}"
