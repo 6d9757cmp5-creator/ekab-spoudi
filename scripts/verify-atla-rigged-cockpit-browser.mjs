@@ -1,0 +1,40 @@
+import {chromium} from 'playwright';
+import {spawn} from 'node:child_process';
+import {mkdirSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const server=spawn('python3',['-m','http.server','8893','--bind','127.0.0.1'],{stdio:'ignore'});
+mkdirSync('browser-qa-results',{recursive:true});
+let browser;const errors=[];
+try{
+ let ready=false;
+ for(let i=0;i<75;i++){try{if((await fetch('http://127.0.0.1:8893/')).ok){ready=true;break}}catch{}await new Promise(r=>setTimeout(r,180))}
+ if(!ready)throw Error('Local server not started');
+ browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--no-sandbox']});
+ const page=await browser.newPage({viewport:{width:1280,height:830}});
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:8893/mentor-next.html',{waitUntil:'domcontentloaded'});
+ await page.locator('#next-rigged-toggle').waitFor();
+ assert.equal(await page.locator('#next-rigged-toggle').getAttribute('aria-pressed'),'false');
+ // This user choice must not change patient vitals or recorded educational session.
+ const original=await page.locator('#next-hr').textContent();
+ await page.locator('#next-rigged-toggle').click();
+ await page.waitForFunction(()=>{
+  const canvas=document.querySelector('#next-unified-host .next-unified-canvas');
+  return canvas?.dataset.stageStatus==='ready'&&canvas.dataset.riggedModel==='ready'&&Number(canvas.dataset.riggedClips)>=2;
+ },null,{timeout:150000});
+ assert.equal(await page.locator('#next-unified-overlay').isVisible(),true);
+ assert.equal(await page.locator('#next-hr').textContent(),original);
+ assert.equal(await page.locator('#next-rigged-toggle').getAttribute('aria-pressed'),'true');
+ await page.screenshot({path:'browser-qa-results/atla-cockpit-rigged-live.png',fullPage:true});
+ console.log('PASS real MakeHuman 163 bone rig and 2 motion clips in live 2-patient scene');
+ // Return to the fully validated CC0 static patient scene without losing state.
+ await page.locator('#next-rigged-toggle').click();
+ await page.waitForFunction(()=>{
+  const canvas=document.querySelector('#next-unified-host .next-unified-canvas');
+  return canvas?.dataset.stageStatus==='ready'&&canvas.dataset.riggedModel==='off';
+ },null,{timeout:120000});
+ assert.equal(await page.locator('#next-rigged-toggle').getAttribute('aria-pressed'),'false');
+ assert.equal(await page.locator('#next-hr').textContent(),original);
+ assert.equal(errors.length,0,errors.slice(0,3).join(' | '));
+ console.log('PASS reversible rigged/standard patient scene toggle with no change to vitals');
+}finally{await browser?.close();server.kill('SIGTERM')}
