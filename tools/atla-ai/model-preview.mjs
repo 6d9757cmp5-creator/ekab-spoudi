@@ -3,15 +3,133 @@ const $=id=>document.getElementById(id);
 const tool=new URLSearchParams(location.search).get('tool')==='cockpit'?'cockpit':'anatomy';
 const root=new URL('../../',import.meta.url);
 const select=$('source-model'),dataset=$('source-dataset'),button=$('source-load'),note=$('source-status');
-if(tool==='anatomy')dataset.querySelector('[value="makehuman"]')?.remove();
+if(tool==='anatomy')for(const value of ['makehuman','rigged'])dataset.querySelector('[value="'+value+'"]')?.remove();
 const status=(v,bad=false)=>{note.textContent=v;note.dataset.error=String(bad)};
 const back=$('source-back');
 back.href=tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html';
 $('source-name').textContent=tool==='anatomy'?'Anatomy Lab · HRA 3D':'Clinical Cockpit · 3D Assets';
 $('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
 let assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
+const partSelect=$('source-part'),animationSelect=$('source-clip'),opacity=$('source-opacity');
+const meshInfo=$('source-mesh-info'),partControls=['part-isolate','part-show','view-reset','view-front','view-side','source-opacity'];
+let meshParts=[],animationClips=[],originalMaterials=new Map(),fullSceneObject=null,animationPaused=false;
+function setEnabled(active){
+ for(const id of partControls)$(id).disabled=!active;
+ partSelect.disabled=!active||!meshParts.length;
+ animationSelect.disabled=!active||!animationClips.length;
+ $('clip-play').disabled=!active||!animationClips.length;
+ $('clip-pause').disabled=!active||!animationClips.length;
+}
+function resetParts(){
+ meshParts=[];animationClips=[];originalMaterials.clear();fullSceneObject=null;
+ meshInfo.textContent='';opacity.value='100';$('opacity-value').textContent='100%';
+ partSelect.replaceChildren(new Option('Φόρτωσε μοντέλο',''));
+ animationSelect.replaceChildren(new Option('Δεν υπάρχει διαθέσιμη κίνηση',''));
+ setEnabled(false);
+}
+function applyOpacity(){
+ const fraction=Number(opacity.value)/100;
+ $('opacity-value').textContent=opacity.value+'%';
+ for(const [m,values] of originalMaterials){
+  m.opacity=values.opacity*fraction;
+  m.transparent=values.transparent||fraction<1;
+  m.depthWrite=fraction===1?values.depthWrite:false;
+  m.needsUpdate=true;
+ }
+}
+function showAll(){
+ meshParts.forEach(p=>{p.visible=true});
+ for(const node of meshParts){let parent=node.parent;while(parent&&parent!==live){parent.visible=true;parent=parent.parent}}
+}
+function selectedMesh(){return meshParts[Number(partSelect.value)]||null}
+function locate(orientation='reset'){
+ if(!live||!camera)return;
+ const mesh=selectedMesh();
+ const box=new THREE.Box3().setFromObject(orientation==='reset'||!mesh?live:mesh);
+ if(box.isEmpty())return;
+ const center=box.getCenter(new THREE.Vector3());
+ const max=box.getSize(new THREE.Vector3()).length();
+ const dist=Math.max(1.2,max*1.4);
+ controls.target.copy(center);
+ const rel=orientation==='front'?new THREE.Vector3(0,.1,1):orientation==='side'?new THREE.Vector3(1,.1,0):new THREE.Vector3(1,.5,1);
+ camera.position.copy(center).addScaledVector(rel.normalize(),dist);
+ camera.near=Math.max(.005,dist/1000);
+ camera.far=Math.max(200,dist*15);
+ camera.updateProjectionMatrix();controls.update();
+}
+function choosePart(index){
+ const p=meshParts[index];
+ if(!p)return;
+ partSelect.value=String(index);
+ meshInfo.textContent=(p.name||'Πλέγμα '+(index+1))+' · '+(p.geometry?.attributes?.position?.count||0).toLocaleString('el-GR')+' κορυφές';
+}
+function applyAnimation(){
+ if(!mixer)return;
+ mixer.stopAllAction();mixer.uncacheRoot(fullSceneObject);
+ const clip=animationClips[Number(animationSelect.value)];
+ if(clip){
+  mixer.clipAction(clip,fullSceneObject).reset().play();
+  mixer.timeScale=animationPaused?0:1;
+ }
+}
+function installModelTools(gltf,modelRoot){
+ fullSceneObject=gltf.scene;
+ meshParts=[];
+ gltf.scene.traverse(node=>{if(node.isMesh||node.isSkinnedMesh)meshParts.push(node)});
+ partSelect.replaceChildren(...meshParts.map((p,i)=>new Option((p.name||'Πλέγμα '+(i+1)).slice(0,110),String(i))));
+ if(meshParts.length)choosePart(0);
+ animationClips=Array.isArray(gltf.animations)?gltf.animations:[];
+ animationSelect.replaceChildren(...(animationClips.length?
+  animationClips.map((clip,i)=>new Option((clip.name||'Animation '+(i+1)).slice(0,100),String(i))):
+  [new Option('Δεν υπάρχει διαθέσιμη κίνηση','')]));
+ originalMaterials.clear();
+ for(const node of meshParts)for(const material of (Array.isArray(node.material)?node.material:[node.material])){
+  if(material&&!originalMaterials.has(material))originalMaterials.set(material,{
+   opacity:material.opacity,transparent:material.transparent,depthWrite:material.depthWrite
+  });
+ }
+ setEnabled(true);
+ animationPaused=false;
+ if(animationClips.length){mixer=new THREE.AnimationMixer(modelRoot);applyAnimation()}
+ meshInfo.textContent=meshParts.length+' επιλέξιμα πλέγματα · '+animationClips.length+' κινήσεις · εκπαιδευτική εξερεύνηση';
+}
+partSelect.addEventListener('change',()=>choosePart(Number(partSelect.value)));
+$('part-isolate').addEventListener('click',()=>{
+ const mesh=selectedMesh();if(!mesh)return;
+ meshParts.forEach(p=>{p.visible=p===mesh});
+ locate('part');
+});
+$('part-show').addEventListener('click',()=>{showAll();locate('reset')});
+$('view-reset').addEventListener('click',()=>locate('reset'));
+$('view-front').addEventListener('click',()=>locate('front'));
+$('view-side').addEventListener('click',()=>locate('side'));
+opacity.addEventListener('input',applyOpacity);
+animationSelect.addEventListener('change',()=>{animationPaused=false;applyAnimation()});
+$('clip-play').addEventListener('click',()=>{animationPaused=false;if(mixer)mixer.timeScale=1});
+$('clip-pause').addEventListener('click',()=>{animationPaused=true;if(mixer)mixer.timeScale=0});
+const pickPoint={x:0,y:0};let pointerStart=null;
+$('source-canvas').addEventListener('pointerdown',event=>{pointerStart={x:event.clientX,y:event.clientY}});
+$('source-canvas').addEventListener('pointerup',event=>{
+ if(!pointerStart||Math.hypot(event.clientX-pointerStart.x,event.clientY-pointerStart.y)>5||!camera||!live)return;
+ const bounds=$('source-canvas').getBoundingClientRect();
+ if(!bounds.width||!bounds.height)return;
+ pickPoint.x=((event.clientX-bounds.left)/bounds.width)*2-1;
+ pickPoint.y=1-((event.clientY-bounds.top)/bounds.height)*2;
+ const ray=new THREE.Raycaster();
+ ray.setFromCamera(pickPoint,camera);
+ const hits=ray.intersectObjects(meshParts.filter(m=>m.visible),false);
+ if(hits.length){
+  const index=meshParts.indexOf(hits[0].object);
+  if(index>=0)choosePart(index);
+ }
+ pointerStart=null;
+});
 function dispose(){
  mixer?.stopAllAction();mixer=null;
+ for(const [m,values] of originalMaterials){
+  m.opacity=values.opacity;m.transparent=values.transparent;m.depthWrite=values.depthWrite;
+ }
+ resetParts();
  if(live){
   scene.remove(live);
   live.traverse(o=>{o.geometry?.dispose?.();if(o.material)for(const m of (Array.isArray(o.material)?o.material:[o.material])){for(const k of ['map','normalMap','roughnessMap','metalnessMap'])m[k]?.dispose?.();m.dispose?.()}});
@@ -64,7 +182,7 @@ button.addEventListener('click',async()=>{
   dispose();
   const center=box.getCenter(new THREE.Vector3());
   model.scene.position.sub(center);const group=new THREE.Group();group.add(model.scene);group.scale.setScalar(2.6/max);scene.add(group);live=group;
-  if(model.animations.length){mixer=new THREE.AnimationMixer(model.scene);mixer.clipAction(model.animations[0]).play()}
+  installModelTools(model,model.scene);
   controls.target.set(0,0,0);camera.position.set(2.5,2,4);controls.update();
   $('source-license').textContent=item.license+' · '+item.status;
   status('Φορτώθηκε '+item.label+' · περιστροφή / μεγέθυνση με αφή ή ποντίκι.');
@@ -77,9 +195,10 @@ async function loadDataset(){
  dispose();status('Έλεγχος επιλεγμένης συλλογής…');
  const secondary=dataset.value==='secondary';
  const makehuman=dataset.value==='makehuman'&&tool==='cockpit';
- const sourceType=makehuman?'makehuman':secondary?(tool==='anatomy'?'research':'patients'):'primary';
+ const rigged=dataset.value==='rigged'&&tool==='cockpit';
+ const sourceType=rigged?'rigged':makehuman?'makehuman':secondary?(tool==='anatomy'?'research':'patients'):'primary';
  const urls=getResourceCatalogUrls(root);
- const selected=makehuman?[urls.cockpitMakehumanCore,urls.cockpitMakehumanSupplemental]:
+ const selected=rigged?[urls.cockpitRigged]:makehuman?[urls.cockpitMakehumanCore,urls.cockpitMakehumanSupplemental]:
   [tool==='anatomy'?(secondary?urls.anatomyResearch:urls.anatomy):(secondary?urls.cockpitPatients:urls.cockpit)];
  try{
   const registries=await Promise.all(selected.map(async url=>{
@@ -94,7 +213,7 @@ async function loadDataset(){
   select.replaceChildren(...assets.map((a,i)=>{
    const o=document.createElement('option');o.value=String(i);o.textContent=a.label;return o;
   }));
-  $('source-count').textContent=assets.length+' πραγματικά 3D αρχεία · '+(makehuman?'MakeHuman OBJ (χωρίς rig/animations)':secondary?(tool==='anatomy'?'Z-Anatomy (research-only)':'Στατικοί ασθενείς (ήδη στο Cockpit)'):'βασική συλλογή');
+  $('source-count').textContent=assets.length+' πραγματικά 3D αρχεία · '+(rigged?'MakeHuman CC0 · 163 οστά · 2 κινήσεις (μη κλινικό)':makehuman?'MakeHuman OBJ (χωρίς rig/animations)':secondary?(tool==='anatomy'?'Z-Anatomy (research-only)':'Στατικοί ασθενείς (ήδη στο Cockpit)'):'βασική συλλογή');
   button.disabled=false;
   status('Επίλεξε μοντέλο. Δεν αλλάζει η ενεργή εκπαιδευτική εφαρμογή.');
  }catch(e){if(request===loadVersion)status('Το μητρώο δεν είναι διαθέσιμο: '+String(e.message||e),true)}
