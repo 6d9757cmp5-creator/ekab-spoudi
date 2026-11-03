@@ -43,3 +43,35 @@ try{
   visible.textContent='Η βιβλιογραφία δεν είναι διαθέσιμη.';
   status.textContent='Αποτυχία φόρτωσης βιβλιογραφίας: '+String(error.message||error);
 }
+
+
+// Research bibliography is citations only, separated from all clinical answers and AI.
+async function showResearch(){
+ const status=document.getElementById("research-status");
+ const search=document.getElementById("research-search");
+ const list=document.getElementById("research-list");
+ if(!status||!search||!list)return;
+ try{
+  const {loadResearch,searchResearch}=await import("../library/research-discovery.mjs");
+  const catalog=await loadResearch();
+  const render=()=>{
+   const results=searchResearch(catalog,search.value,20);
+   list.replaceChildren(...results.rows.map(p=>{
+    const item=el("li");item.className="source-card";
+    item.append(el("h3",p.title),el("p",p.citation),
+      el("p","Μόνο βιβλιογραφική αναφορά. Δεν έχει εγκριθεί ως κλινική γνώση."));
+    const a=el("a","Προβολή πρωτότυπης καταχώρισης PubMed");
+    a.href=p.url;a.target="_blank";a.rel="noopener noreferrer";
+    item.append(a);return item;
+   }));
+   if(!results.rows.length)list.append(el("li","Δεν βρέθηκαν δημοσιεύσεις."));
+   status.textContent="Ερευνητικές αναφορές: "+results.total+
+    " · Καμία κλινική έγκριση · Τελευταία σάρωση "+catalog.checkedAt.slice(0,10);
+  };
+  search.addEventListener("input",render);render();
+ }catch{
+  list.replaceChildren();
+  status.textContent="Η νέα βιβλιογραφία δεν επαληθεύτηκε και αποκλείστηκε. Ο υπάρχων κατάλογος παραμένει διαθέσιμος.";
+ }
+}
+void showResearch();
