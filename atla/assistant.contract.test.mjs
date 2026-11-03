@@ -26,8 +26,10 @@ test('one ATLA companion on migrated desktop/mobile entrypoints',()=>{
 });
 test('home removes heavyweight avatar and keeps core learning navigation',()=>{
  const home=read('index.html');
- // The new hub is additive; retain existing home avatar and Mentor until a separately tested removal.
- assert.ok(home.includes('src="mentor-home.js"'));
+ // Retire the standalone Mentor home, preserving historical progress stores.
+ assert.ok(home.includes('src="atla/assistant.mjs"'));
+ assert.ok(!home.includes('src="mentor-home.js"'));
+ assert.ok(!home.includes('id="mentor-home-presence-frame"'));
  assert.ok(home.includes('href="paramedic.html"'),'Paramedic should be the central learner entry');
  const paramedic=read('paramedic.html');
  for(const target of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','farmaka.html','seminar-prep.html'])assert.ok(paramedic.includes('href="'+target+'"'),target);
