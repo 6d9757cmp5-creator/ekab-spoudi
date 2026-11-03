@@ -166,22 +166,26 @@ try{
   assert.equal((await page.locator('#mci-sessions').textContent()).trim(),'0');
   assert.equal((await page.locator('#equipment-sessions').textContent()).trim(),'0');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
+  // Derive expected counts from the current source registry, not stale hard-coded numbers.
+  const sourceIndex=JSON.parse(await readFile('mentor/library/source-index.json','utf8'));
+  const paramedicSources=sourceIndex.sources.filter(x=>x.learning_tracks?.includes('paramedic'));
+  const identifiedSources=paramedicSources.filter(x=>!x.extracted_for_review);
   // Public Mentor bibliography: mobile Chromium/WebKit search and fail-closed review state.
   await page.goto('http://127.0.0.1:'+port+'/mentor-library.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('library-status').textContent.includes('μόνο στοιχεία πηγών'));
-  assert.equal(await page.locator('#sources-list .source-card').count(),15);
+  assert.equal(await page.locator('#sources-list .source-card').count(),paramedicSources.length);
   assert.match(await page.locator('#source-counts').textContent(),/0 κλινικά εγκεκριμένες/);
   await page.locator('#source-stage').selectOption('identified');
-  assert.equal(await page.locator('#sources-list .source-card').count(),8);
+  assert.equal(await page.locator('#sources-list .source-card').count(),identifiedSources.length);
   await page.locator('#source-search').fill('ERC');
   assert.equal(await page.locator('#sources-list .source-card').count(),1);
   assert.match(await page.locator('#sources-list .source-card h2').textContent(),/Guidelines 2025/);
   await page.locator('#source-stage').selectOption('all');
   await page.locator('#source-search').fill('πηγη-που-δεν-υπαρχει');
   assert.equal(await page.locator('#sources-list .source-card').count(),0);
-  assert.match(await page.locator('#sources-visible').textContent(),/0 από 15/);
+  assert.match(await page.locator('#sources-visible').textContent(),new RegExp('0 από '+paramedicSources.length));
   await page.locator('#source-search').fill('');
-  assert.equal(await page.locator('#sources-list .source-card').count(),15);
+  assert.equal(await page.locator('#sources-list .source-card').count(),paramedicSources.length);
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
