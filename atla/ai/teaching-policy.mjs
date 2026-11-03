@@ -43,10 +43,16 @@ export function auditAssistantReply(reply,passages=[]){
  if(/(?:ξερω|γνωριζω)\s+(?:οτι\s+)?(?:νιωθεισ|αισθανεσαι)/.test(norm(text)))return {ok:false,reason:'emotional-inference'};
  return {ok:true,reason:'surface-check-only'};
 }
-/** Only approved, published, chapter-mapped media may ever be offered; empty means no video. */
-export function approvedTeachingVideo(chapterId,registry=[]){
- const id=String(chapterId??'');
- if(!/^lesson-(?:[1-9]|[1-9][0-9]|100)$/.test(id))return null;
+/** Only approved, published media for an EXACT SAEK course and chapter may be offered.
+ * Numeric lesson identifiers repeat across courses. Never treat `lesson-2` alone
+ * as a globally unique medical topic. Unscoped/legacy registry rows fail closed.
+ */
+export function approvedTeachingVideo(courseId,chapterId,registry=[]){
+ const course=String(courseId??''),chapter=String(chapterId??'');
+ if(!/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(course))return null;
+ if(!/^lesson-(?:[1-9]|[1-9][0-9]|100)$/.test(chapter))return null;
  if(!Array.isArray(registry))return null;
- return registry.find(x=>x&&x.approved===true&&x.reviewed===true&&x.published===true&&Array.isArray(x.chapterIds)&&x.chapterIds.includes(id)&&typeof x.url==='string'&&/^https:\/\//.test(x.url))||null;
+ return registry.find(x=>x&&x.approved===true&&x.reviewed===true&&x.published===true&&
+   x.courseId===course&&Array.isArray(x.chapterIds)&&x.chapterIds.includes(chapter)&&
+   typeof x.url==='string'&&/^https:\/\//.test(x.url))||null;
 }

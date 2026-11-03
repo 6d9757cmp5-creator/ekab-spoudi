@@ -26,10 +26,17 @@ test('surface gate rejects uncited, fabricated citations and unsafe doses',()=>{
  assert.equal(auditAssistantReply('Η κλίμακα GCS έχει 15 βαθμούς. [Τ1]',p).ok,true);
  assert.equal(auditAssistantReply('Ξέρω ότι νιώθεις θλίψη [Τ1]',p).ok,false);
 });
-test('video is future-gated on publication, review and chapter match',()=>{
- const video={url:'https://example.com/lesson',chapterIds:['lesson-2'],approved:true,reviewed:true,published:true};
- assert.equal(approvedTeachingVideo('lesson-2',[]),null);
- assert.equal(approvedTeachingVideo('lesson-1',[video]),null);
- assert.equal(approvedTeachingVideo('lesson-2',[{...video,reviewed:false}]),null);
- assert.equal(approvedTeachingVideo('lesson-2',[video]),video);
+test('video is rejected without an exact approved course + chapter match',()=>{
+ const video={url:'https://example.com/lesson',courseId:'saek-course-01.html',
+  chapterIds:['lesson-2'],approved:true,reviewed:true,published:true};
+ assert.equal(approvedTeachingVideo('saek-course-01.html','lesson-2',[]),null);
+ assert.equal(approvedTeachingVideo('saek-course-01.html','lesson-1',[video]),null);
+ assert.equal(approvedTeachingVideo('saek-course-02.html','lesson-2',[video]),null,
+  'lesson-2 must never bleed into a different SAEK course');
+ assert.equal(approvedTeachingVideo('','lesson-2',[video]),null);
+ assert.equal(approvedTeachingVideo('saek-course-01.html','lesson-2',[{...video,courseId:undefined}]),null,
+  'legacy chapter-only registry rows must fail closed');
+ assert.equal(approvedTeachingVideo('saek-course-01.html','lesson-2',[{...video,reviewed:false}]),null);
+ assert.equal(approvedTeachingVideo('saek-course-01.html','lesson-2',[{...video,url:'http://example.com'}]),null);
+ assert.equal(approvedTeachingVideo('saek-course-01.html','lesson-2',[video]),video);
 });
