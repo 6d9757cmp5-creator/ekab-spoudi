@@ -7,6 +7,9 @@ on:
       - 'scripts/verify-atla-rigged-cockpit-browser.mjs'
       - 'tools/patient-simulator/vendor/unified-stage.bundle.mjs'
       - 'tools/patient-simulator/assets/patients/atla-makehuman-rigged-educational.glb'
+      - 'tools/patient-simulator/app/unified-stage.mjs'
+      - 'tools/patient-simulator/app/next-sim.mjs'
+      - 'mentor-next.html'
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,6 +30,7 @@ jobs:
           node --check tools/patient-simulator/app/unified-stage.mjs
           node --check tools/patient-simulator/app/next-sim.mjs
           node scripts/verify-unified-scene.mjs
+          node -e "const s=require('fs').readFileSync('tools/patient-simulator/vendor/unified-stage.bundle.mjs','utf8');if(!s.includes('riggedModel')||!s.includes('riggedClips'))process.exit(1)"
       - name: Install real Chromium
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
