@@ -21,7 +21,11 @@ assert.match(adultBls,/Ανακοπή: αναγνώριση και ενεργο�
 assert.match(adultBls,/πλήρη επαναφορά του θώρακα/);
 assert.match(adultBls,/χωρίς υπερβολικό αερισμό/);
 assert.match(adultBls,/κανείς δεν αγγίζει τον ασθενή κατά την ανάλυση του ρυθμού ή την εκφόρτιση/);
-assert.match(adultBls,/συμπιέσεις μετά την ανάλυση, είτε υποδείχθηκε εκφόρτιση είτε όχι/);
+// Distinguish shock advised from no-shock: restarting before a recommended shock is unsafe.
+assert.match(adultBls,/Αν υποδειχθεί εκφόρτιση, ο AED την παρέχει αυτόματα ή ζητά να πατηθεί το κουμπί/);
+assert.match(adultBls,/μόλις πραγματοποιηθεί η εκφόρτιση, ξεκίνα ξανά αμέσως θωρακικές συμπιέσεις/);
+assert.match(adultBls,/Αν δεν υποδειχθεί εκφόρτιση, ξεκίνα αμέσως ξανά συμπιέσεις/);
+assert.doesNotMatch(adultBls,/συμπιέσεις μετά την ανάλυση, είτε υποδείχθηκε εκφόρτιση είτε όχι/);
 assert.match(adultBls,/2025-resuscitation-guidelines\/adult-basic-life-support-guidelines/);
 
 const anaphylaxis=lesson(9);
