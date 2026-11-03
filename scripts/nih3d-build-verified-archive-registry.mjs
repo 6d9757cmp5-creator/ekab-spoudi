@@ -9,7 +9,8 @@ const output=process.argv[3]??'tools/atla-ai/resources/nih3d-verified-originals-
 const docs=[
  'docs/ATLA_NIH3D_GHCR_ARCHIVE_PROOF_2026.json',
  'docs/ATLA_NIH3D_GHCR_ANATOMY_BATCH_2026.json',
- 'docs/ATLA_NIH3D_GHCR_NEURO_BATCH_2026.json'
+ 'docs/ATLA_NIH3D_GHCR_NEURO_BATCH_2026.json',
+ 'docs/ATLA_NIH3D_GHCR_MOLECULAR_BATCH_2026.json'
 ];
 const provenance=[],records=[];
 const digestPattern=/^ghcr\.io\/6d9757cmp5-creator\/atla-nih3d-archive@sha256:[a-f0-9]{64}$/;
