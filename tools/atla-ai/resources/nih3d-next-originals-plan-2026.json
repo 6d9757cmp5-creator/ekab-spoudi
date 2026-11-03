@@ -10,190 +10,189 @@
   "reviewRequired": true,
   "expertClinicalApprovals": 0,
   "sourceScanned": 15688,
-  "eligibleRemaining": 1946,
+  "eligibleRemaining": 1930,
   "skipped": {
-    "alreadyComplete": 14,
+    "alreadyComplete": 30,
     "sourceRightsReview": 10308,
     "noOriginalFiles": 0,
     "fileLimitExceeded": 3420,
-    "batchLimitExceeded": 1930,
+    "batchLimitExceeded": 1917,
     "malformedSource": 0,
     "unknownScientificCategory": 0
   },
   "selected": [
     {
-      "entryId": 9391,
-      "accession": "3DPX-009391",
-      "title": "Talus",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-009391",
+      "entryId": 807,
+      "accession": "3DPX-000807",
+      "title": "Calcaneal Fracture",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000807",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 1747160,
+      "expectedBytes": 16687285,
       "priority": 0,
       "sourceConceptCandidates": [
         "ATLA-ANATOMY-ankle"
       ],
       "explicitNonhuman": false,
-      "pathologyContext": "normal_or_unspecified",
+      "pathologyContext": "fracture",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/33536/runs/051b5872-8dfe-4074-97c2-71d0926a09a1/output-files/1035166",
+          "url": "https://3d.nih.gov/api/submissions/32050/runs/577c951a-84f6-4964-9bed-34e0b459a3e3/output-files/952367",
           "format": "STL",
-          "size": 192484,
-          "name": "talus-nih3d.stl"
+          "size": 1774134,
+          "name": "calcaneo_fratura-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/33536/runs/051b5872-8dfe-4074-97c2-71d0926a09a1/output-files/1035168",
+          "url": "https://3d.nih.gov/api/submissions/32050/runs/577c951a-84f6-4964-9bed-34e0b459a3e3/output-files/952369",
           "format": "X3D",
-          "size": 192328,
-          "name": "talus-nih3d.x3d"
+          "size": 1830631,
+          "name": "calcaneo_fratura-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/33536/runs/051b5872-8dfe-4074-97c2-71d0926a09a1/output-files/1035169",
+          "url": "https://3d.nih.gov/api/submissions/32050/runs/577c951a-84f6-4964-9bed-34e0b459a3e3/output-files/952370",
           "format": "GLB",
-          "size": 301092,
-          "name": "talus-nih3d.glb"
+          "size": 2980892,
+          "name": "calcaneo_fratura-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/33536/runs/051b5872-8dfe-4074-97c2-71d0926a09a1/output-files/1035171",
+          "url": "https://3d.nih.gov/api/submissions/32050/runs/577c951a-84f6-4964-9bed-34e0b459a3e3/output-files/952372",
           "format": "WRL",
-          "size": 775087,
-          "name": "talus-nih3d.wrl"
+          "size": 7243199,
+          "name": "calcaneo_fratura-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/33536/runs/051b5872-8dfe-4074-97c2-71d0926a09a1/output-files/1035172",
+          "url": "https://3d.nih.gov/api/submissions/32050/runs/577c951a-84f6-4964-9bed-34e0b459a3e3/output-files/952373",
           "format": "OBJ",
-          "size": 286169,
-          "name": "talus-nih3d.obj"
+          "size": 2858429,
+          "name": "calcaneo_fratura-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 809,
-      "accession": "3DPX-000809",
-      "title": "Shoulder - Distal Clavicle Healed Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000809",
+      "entryId": 830,
+      "accession": "3DPX-000830",
+      "title": "Knee - proximal tibia fracture",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000830",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 3023312,
+      "expectedBytes": 16900618,
       "priority": 0,
       "sourceConceptCandidates": [
-        "ATLA-ANATOMY-clavicle",
-        "ATLA-ANATOMY-shoulder"
+        "ATLA-ANATOMY-tibia"
       ],
       "explicitNonhuman": false,
       "pathologyContext": "fracture",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32052/runs/58bb0a71-7182-4c5e-b822-71b1668fff3c/output-files/952404",
+          "url": "https://3d.nih.gov/api/submissions/32072/runs/e86d23b7-68c8-4941-a635-c77ecbc29373/output-files/953534",
           "format": "STL",
-          "size": 329934,
-          "name": "clavicula_distal_consolidada-nih3d.stl"
+          "size": 1796884,
+          "name": "plato-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32052/runs/58bb0a71-7182-4c5e-b822-71b1668fff3c/output-files/952406",
+          "url": "https://3d.nih.gov/api/submissions/32072/runs/e86d23b7-68c8-4941-a635-c77ecbc29373/output-files/953536",
           "format": "X3D",
-          "size": 333866,
-          "name": "clavicula_distal_consolidada-nih3d.x3d"
+          "size": 1845336,
+          "name": "plato-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32052/runs/58bb0a71-7182-4c5e-b822-71b1668fff3c/output-files/952407",
+          "url": "https://3d.nih.gov/api/submissions/32072/runs/e86d23b7-68c8-4941-a635-c77ecbc29373/output-files/953537",
           "format": "GLB",
-          "size": 515684,
-          "name": "clavicula_distal_consolidada-nih3d.glb"
+          "size": 3019504,
+          "name": "plato-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32052/runs/58bb0a71-7182-4c5e-b822-71b1668fff3c/output-files/952409",
+          "url": "https://3d.nih.gov/api/submissions/32072/runs/e86d23b7-68c8-4941-a635-c77ecbc29373/output-files/953539",
           "format": "WRL",
-          "size": 1336741,
-          "name": "clavicula_distal_consolidada-nih3d.wrl"
+          "size": 7337408,
+          "name": "plato-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32052/runs/58bb0a71-7182-4c5e-b822-71b1668fff3c/output-files/952410",
+          "url": "https://3d.nih.gov/api/submissions/32072/runs/e86d23b7-68c8-4941-a635-c77ecbc29373/output-files/953540",
           "format": "OBJ",
-          "size": 507087,
-          "name": "clavicula_distal_consolidada-nih3d.obj"
+          "size": 2901486,
+          "name": "plato-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 3283,
-      "accession": "3DPX-003283",
-      "title": "Abdominal Aorta Aneurism ",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-003283",
+      "entryId": 819,
+      "accession": "3DPX-000819",
+      "title": "Pelvis Fracture",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000819",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 3295252,
+      "expectedBytes": 17032539,
       "priority": 0,
       "sourceConceptCandidates": [
-        "ATLA-ANATOMY-aorta"
+        "ATLA-ANATOMY-pelvis"
       ],
       "explicitNonhuman": false,
-      "pathologyContext": "normal_or_unspecified",
+      "pathologyContext": "fracture",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32292/runs/31f2425f-763d-4e5e-b318-492ca945dadc/output-files/966820",
+          "url": "https://3d.nih.gov/api/submissions/32062/runs/bbfc003b-1484-4948-b470-a2a65a471a38/output-files/953479",
           "format": "STL",
-          "size": 440084,
-          "name": "abd_aorta_aneurism-nih3d.stl"
+          "size": 1805134,
+          "name": "frat_pelve_e_sacro_com_fe-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32292/runs/31f2425f-763d-4e5e-b318-492ca945dadc/output-files/966822",
+          "url": "https://3d.nih.gov/api/submissions/32062/runs/bbfc003b-1484-4948-b470-a2a65a471a38/output-files/953481",
           "format": "X3D",
-          "size": 391879,
-          "name": "abd_aorta_aneurism-nih3d.x3d"
+          "size": 1888351,
+          "name": "frat_pelve_e_sacro_com_fe-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32292/runs/31f2425f-763d-4e5e-b318-492ca945dadc/output-files/966823",
+          "url": "https://3d.nih.gov/api/submissions/32062/runs/bbfc003b-1484-4948-b470-a2a65a471a38/output-files/953482",
           "format": "GLB",
-          "size": 591788,
-          "name": "abd_aorta_aneurism-nih3d.glb"
+          "size": 3033352,
+          "name": "frat_pelve_e_sacro_com_fe-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32292/runs/31f2425f-763d-4e5e-b318-492ca945dadc/output-files/966825",
+          "url": "https://3d.nih.gov/api/submissions/32062/runs/bbfc003b-1484-4948-b470-a2a65a471a38/output-files/953484",
           "format": "WRL",
-          "size": 1280946,
-          "name": "abd_aorta_aneurism-nih3d.wrl"
+          "size": 7370945,
+          "name": "frat_pelve_e_sacro_com_fe-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32292/runs/31f2425f-763d-4e5e-b318-492ca945dadc/output-files/966826",
+          "url": "https://3d.nih.gov/api/submissions/32062/runs/bbfc003b-1484-4948-b470-a2a65a471a38/output-files/953485",
           "format": "OBJ",
-          "size": 590555,
-          "name": "abd_aorta_aneurism-nih3d.obj"
+          "size": 2934757,
+          "name": "frat_pelve_e_sacro_com_fe-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 834,
-      "accession": "3DPX-000834",
+      "entryId": 837,
+      "accession": "3DPX-000837",
       "title": "Shoulder - Proximal Humerus Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000834",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000837",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 5372478,
+      "expectedBytes": 17265718,
       "priority": 0,
       "sourceConceptCandidates": [
         "ATLA-ANATOMY-humerus",
@@ -204,248 +203,51 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32076/runs/eaedae1b-cce5-46e0-ac3a-9c823cd76cff/output-files/953556",
+          "url": "https://3d.nih.gov/api/submissions/32079/runs/10f0743c-88fa-464e-846b-d09aa4535531/output-files/953406",
           "format": "STL",
-          "size": 588634,
-          "name": "umero_prox_e-nih3d.stl"
+          "size": 1833684,
+          "name": "umero_proximal-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32076/runs/eaedae1b-cce5-46e0-ac3a-9c823cd76cff/output-files/953558",
+          "url": "https://3d.nih.gov/api/submissions/32079/runs/10f0743c-88fa-464e-846b-d09aa4535531/output-files/953408",
           "format": "X3D",
-          "size": 570140,
-          "name": "umero_prox_e-nih3d.x3d"
+          "size": 1900200,
+          "name": "umero_proximal-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32076/runs/eaedae1b-cce5-46e0-ac3a-9c823cd76cff/output-files/953559",
+          "url": "https://3d.nih.gov/api/submissions/32079/runs/10f0743c-88fa-464e-846b-d09aa4535531/output-files/953409",
           "format": "GLB",
-          "size": 919228,
-          "name": "umero_prox_e-nih3d.glb"
+          "size": 3081116,
+          "name": "umero_proximal-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32076/runs/eaedae1b-cce5-46e0-ac3a-9c823cd76cff/output-files/953561",
+          "url": "https://3d.nih.gov/api/submissions/32079/runs/10f0743c-88fa-464e-846b-d09aa4535531/output-files/953411",
           "format": "WRL",
-          "size": 2394493,
-          "name": "umero_prox_e-nih3d.wrl"
+          "size": 7490860,
+          "name": "umero_proximal-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32076/runs/eaedae1b-cce5-46e0-ac3a-9c823cd76cff/output-files/953562",
+          "url": "https://3d.nih.gov/api/submissions/32079/runs/10f0743c-88fa-464e-846b-d09aa4535531/output-files/953412",
           "format": "OBJ",
-          "size": 899983,
-          "name": "umero_prox_e-nih3d.obj"
+          "size": 2959858,
+          "name": "umero_proximal-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 817,
-      "accession": "3DPX-000817",
-      "title": "Shoulder - Clavicle fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000817",
-      "sourceVersion": 3,
-      "category": "Anatomy",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 6361647,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-clavicle",
-        "ATLA-ANATOMY-shoulder"
-      ],
-      "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32060/runs/550704e3-bbce-4df2-bb41-820a2c7910cb/output-files/953455",
-          "format": "STL",
-          "size": 692234,
-          "name": "frat_clavicula-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32060/runs/550704e3-bbce-4df2-bb41-820a2c7910cb/output-files/953457",
-          "format": "X3D",
-          "size": 694604,
-          "name": "frat_clavicula-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32060/runs/550704e3-bbce-4df2-bb41-820a2c7910cb/output-files/953458",
-          "format": "GLB",
-          "size": 1080704,
-          "name": "frat_clavicula-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32060/runs/550704e3-bbce-4df2-bb41-820a2c7910cb/output-files/953460",
-          "format": "WRL",
-          "size": 2816994,
-          "name": "frat_clavicula-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32060/runs/550704e3-bbce-4df2-bb41-820a2c7910cb/output-files/953461",
-          "format": "OBJ",
-          "size": 1077111,
-          "name": "frat_clavicula-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 23373,
-      "accession": "3DPX-023373",
-      "title": "Human Kidney Model 3D",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-023373",
-      "sourceVersion": 2,
-      "category": "Anatomy",
-      "license": "Public Domain",
-      "expectedFiles": 2,
-      "expectedBytes": 7169223,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-kidney"
-      ],
-      "explicitNonhuman": false,
-      "pathologyContext": "normal_or_unspecified",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/37363/runs/ca2fd900-3a7e-4ad8-8594-abc5247e9f41/output-files/1433098",
-          "format": "OBJ",
-          "size": 4472891,
-          "name": "thehuman_kidney-nih3d.obj"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/37363/runs/ca2fd900-3a7e-4ad8-8594-abc5247e9f41/output-files/1433099",
-          "format": "GLB",
-          "size": 2696332,
-          "name": "thehuman_kidney-nih3d.glb"
-        }
-      ]
-    },
-    {
-      "entryId": 814,
-      "accession": "3DPX-000814",
-      "title": "Shoulder - Scapula and Acromium Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000814",
-      "sourceVersion": 3,
-      "category": "Anatomy",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 9744353,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-shoulder"
-      ],
-      "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32057/runs/aee7f56e-e128-4fd4-8f6c-e5b927ab7b44/output-files/953589",
-          "format": "STL",
-          "size": 1055184,
-          "name": "fatura_de_escapula_e_acromio-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32057/runs/aee7f56e-e128-4fd4-8f6c-e5b927ab7b44/output-files/953591",
-          "format": "X3D",
-          "size": 1072667,
-          "name": "fatura_de_escapula_e_acromio-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32057/runs/aee7f56e-e128-4fd4-8f6c-e5b927ab7b44/output-files/953592",
-          "format": "GLB",
-          "size": 1647028,
-          "name": "fatura_de_escapula_e_acromio-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32057/runs/aee7f56e-e128-4fd4-8f6c-e5b927ab7b44/output-files/953594",
-          "format": "WRL",
-          "size": 4300075,
-          "name": "fatura_de_escapula_e_acromio-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32057/runs/aee7f56e-e128-4fd4-8f6c-e5b927ab7b44/output-files/953595",
-          "format": "OBJ",
-          "size": 1669399,
-          "name": "fatura_de_escapula_e_acromio-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 818,
-      "accession": "3DPX-000818",
-      "title": "Shoulder - Clavicle fracture Healed",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000818",
-      "sourceVersion": 3,
-      "category": "Anatomy",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 10397392,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-clavicle",
-        "ATLA-ANATOMY-shoulder"
-      ],
-      "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32061/runs/90b78dcc-9be3-4496-b877-f4f8215a767a/output-files/953578",
-          "format": "STL",
-          "size": 1111034,
-          "name": "frat_consolidada_de_clavicula-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32061/runs/90b78dcc-9be3-4496-b877-f4f8215a767a/output-files/953580",
-          "format": "X3D",
-          "size": 1133346,
-          "name": "frat_consolidada_de_clavicula-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32061/runs/90b78dcc-9be3-4496-b877-f4f8215a767a/output-files/953581",
-          "format": "GLB",
-          "size": 1867328,
-          "name": "frat_consolidada_de_clavicula-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32061/runs/90b78dcc-9be3-4496-b877-f4f8215a767a/output-files/953583",
-          "format": "WRL",
-          "size": 4525184,
-          "name": "frat_consolidada_de_clavicula-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32061/runs/90b78dcc-9be3-4496-b877-f4f8215a767a/output-files/953584",
-          "format": "OBJ",
-          "size": 1760500,
-          "name": "frat_consolidada_de_clavicula-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 832,
-      "accession": "3DPX-000832",
+      "entryId": 835,
+      "accession": "3DPX-000835",
       "title": "Shoulder - Proximal Humerus Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000832",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000835",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 10539073,
+      "expectedBytes": 17965132,
       "priority": 0,
       "sourceConceptCandidates": [
         "ATLA-ANATOMY-humerus",
@@ -456,317 +258,284 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32074/runs/38468607-b369-4489-b951-75207f517737/output-files/953466",
+          "url": "https://3d.nih.gov/api/submissions/32077/runs/48e303cc-eef8-444f-8147-53dd39c3116a/output-files/953440",
           "format": "STL",
-          "size": 1127884,
-          "name": "umero_prox_d-nih3d.stl"
+          "size": 1901434,
+          "name": "umero_proximal_-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32074/runs/38468607-b369-4489-b951-75207f517737/output-files/953468",
+          "url": "https://3d.nih.gov/api/submissions/32077/runs/48e303cc-eef8-444f-8147-53dd39c3116a/output-files/953443",
           "format": "X3D",
-          "size": 1135521,
-          "name": "umero_prox_d-nih3d.x3d"
+          "size": 1996154,
+          "name": "umero_proximal_-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32074/runs/38468607-b369-4489-b951-75207f517737/output-files/953469",
+          "url": "https://3d.nih.gov/api/submissions/32077/runs/48e303cc-eef8-444f-8147-53dd39c3116a/output-files/953445",
           "format": "GLB",
-          "size": 1895648,
-          "name": "umero_prox_d-nih3d.glb"
+          "size": 3194940,
+          "name": "umero_proximal_-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32074/runs/38468607-b369-4489-b951-75207f517737/output-files/953471",
+          "url": "https://3d.nih.gov/api/submissions/32077/runs/48e303cc-eef8-444f-8147-53dd39c3116a/output-files/953448",
           "format": "WRL",
-          "size": 4596465,
-          "name": "umero_prox_d-nih3d.wrl"
+          "size": 7772361,
+          "name": "umero_proximal_-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32074/runs/38468607-b369-4489-b951-75207f517737/output-files/953472",
+          "url": "https://3d.nih.gov/api/submissions/32077/runs/48e303cc-eef8-444f-8147-53dd39c3116a/output-files/953449",
           "format": "OBJ",
-          "size": 1783555,
-          "name": "umero_prox_d-nih3d.obj"
+          "size": 3100243,
+          "name": "umero_proximal_-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 802,
-      "accession": "3DPX-000802",
-      "title": "Shoulder - Proximal Humerus Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000802",
+      "entryId": 5119,
+      "accession": "3DPX-005119",
+      "title": "Structure of Simian Immunodeficiency Virus Envelope Spikes bound with CD4 and Monoclonal Antibody 36D5",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-005119",
       "sourceVersion": 3,
-      "category": "Anatomy",
+      "category": "Viruses",
       "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 11972865,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-humerus",
-        "ATLA-ANATOMY-shoulder"
-      ],
-      "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32045/runs/745b71e9-ff80-4a5d-a5b5-72fa4225576a/output-files/952380",
-          "format": "STL",
-          "size": 1275234,
-          "name": "-_umero_proximal-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32045/runs/745b71e9-ff80-4a5d-a5b5-72fa4225576a/output-files/952382",
-          "format": "X3D",
-          "size": 1317632,
-          "name": "-_umero_proximal-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32045/runs/745b71e9-ff80-4a5d-a5b5-72fa4225576a/output-files/952383",
-          "format": "GLB",
-          "size": 2143188,
-          "name": "-_umero_proximal-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32045/runs/745b71e9-ff80-4a5d-a5b5-72fa4225576a/output-files/952385",
-          "format": "WRL",
-          "size": 5194972,
-          "name": "-_umero_proximal-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32045/runs/745b71e9-ff80-4a5d-a5b5-72fa4225576a/output-files/952386",
-          "format": "OBJ",
-          "size": 2041839,
-          "name": "-_umero_proximal-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 831,
-      "accession": "3DPX-000831",
-      "title": "Elbow - Distal Humeral Fracture with congenital radial dislocation",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000831",
-      "sourceVersion": 3,
-      "category": "Anatomy",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 15960738,
-      "priority": 0,
-      "sourceConceptCandidates": [
-        "ATLA-ANATOMY-humerus",
-        "ATLA-ANATOMY-elbow"
-      ],
-      "explicitNonhuman": false,
-      "pathologyContext": "fracture",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32073/runs/104e8ded-483d-43f2-a350-ab4b2f368bcf/output-files/953490",
-          "format": "STL",
-          "size": 1698484,
-          "name": "po_sic_com_lux_congenita_previa_cab_radio-nih3d.stl"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32073/runs/104e8ded-483d-43f2-a350-ab4b2f368bcf/output-files/953492",
-          "format": "X3D",
-          "size": 1748090,
-          "name": "po_sic_com_lux_congenita_previa_cab_radio-nih3d.x3d"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32073/runs/104e8ded-483d-43f2-a350-ab4b2f368bcf/output-files/953493",
-          "format": "GLB",
-          "size": 2854248,
-          "name": "po_sic_com_lux_congenita_previa_cab_radio-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32073/runs/104e8ded-483d-43f2-a350-ab4b2f368bcf/output-files/953495",
-          "format": "WRL",
-          "size": 6930259,
-          "name": "po_sic_com_lux_congenita_previa_cab_radio-nih3d.wrl"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32073/runs/104e8ded-483d-43f2-a350-ab4b2f368bcf/output-files/953496",
-          "format": "OBJ",
-          "size": 2729657,
-          "name": "po_sic_com_lux_congenita_previa_cab_radio-nih3d.obj"
-        }
-      ]
-    },
-    {
-      "entryId": 17608,
-      "accession": "3DPX-017608",
-      "title": "C Elegans Simple Model",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-017608",
-      "sourceVersion": 3,
-      "category": "Cells and Organelles",
-      "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 215108,
-      "priority": 2,
+      "expectedFiles": 8,
+      "expectedBytes": 7281987,
+      "priority": 3,
       "sourceConceptCandidates": [],
       "explicitNonhuman": false,
       "pathologyContext": "normal_or_unspecified",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/44134/runs/d270d8ff-06f4-4a1e-8509-23f046b72a10/output-files/2149924",
-          "format": "STL",
-          "size": 36084,
-          "name": "c._elegans-nih3d.stl"
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395412",
+          "format": "X3D",
+          "size": 524366,
+          "name": "6538-vol-surf-highres-radial-print_caution-nih3d.x3d"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/44134/runs/d270d8ff-06f4-4a1e-8509-23f046b72a10/output-files/2149926",
-          "format": "X3D",
-          "size": 26495,
-          "name": "c._elegans-nih3d.x3d"
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395415",
+          "format": "GLB",
+          "size": 1112124,
+          "name": "6538-vol-surf-highres-radial-print_caution-nih3d.glb"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/44134/runs/d270d8ff-06f4-4a1e-8509-23f046b72a10/output-files/2149927",
-          "format": "GLB",
-          "size": 35676,
-          "name": "c._elegans-nih3d.glb"
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395416",
+          "format": "WRL",
+          "size": 394150,
+          "name": "6538-vol-surf-highres-radial.wrl"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/44134/runs/d270d8ff-06f4-4a1e-8509-23f046b72a10/output-files/2149929",
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395418",
           "format": "WRL",
-          "size": 81081,
-          "name": "c._elegans-nih3d.wrl"
+          "size": 1789940,
+          "name": "6538-vol-surf-highres-radial-print_caution-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/44134/runs/d270d8ff-06f4-4a1e-8509-23f046b72a10/output-files/2149930",
-          "format": "OBJ",
-          "size": 35772,
-          "name": "c._elegans-nih3d.obj"
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395422",
+          "format": "WRL",
+          "size": 1977015,
+          "name": "6538-vol-surf-highres-nocolor-print_caution-nih3d.wrl"
+        },
+        {
+          "i": 5,
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395423",
+          "format": "GLB",
+          "size": 761548,
+          "name": "6538-vol-surf-highres-nocolor-print_caution-nih3d.glb"
+        },
+        {
+          "i": 6,
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395426",
+          "format": "GLB",
+          "size": 235360,
+          "name": "6538-vol-surf-highres-nocolor.glb"
+        },
+        {
+          "i": 7,
+          "url": "https://3d.nih.gov/api/submissions/36533/runs/15211779-0eb4-446b-8fe9-d2729aa264ee/output-files/1395428",
+          "format": "STL",
+          "size": 487484,
+          "name": "6538-vol-surf-highres-nocolor-print_caution-nih3d.stl"
         }
       ]
     },
     {
-      "entryId": 17609,
-      "accession": "3DPX-017609",
-      "title": "E Coli Simple Model",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-017609",
+      "entryId": 725,
+      "accession": "3DPX-000725",
+      "title": "Characterization of a broadly neutralizing monoclonal antibody that targets the fusion domain of group 2 influenza A virus hemagglutinin",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000725",
       "sourceVersion": 3,
-      "category": "Cells and Organelles",
+      "category": "Biomacromolecules",
       "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 2247558,
-      "priority": 2,
+      "expectedFiles": 8,
+      "expectedBytes": 3562943,
+      "priority": 4,
       "sourceConceptCandidates": [],
       "explicitNonhuman": false,
       "pathologyContext": "normal_or_unspecified",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/44135/runs/47ff62ca-6613-4865-ad73-946f17da3422/output-files/2150045",
-          "format": "STL",
-          "size": 299384,
-          "name": "ecoli-nih3d.stl"
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243016",
+          "format": "X3D",
+          "size": 257223,
+          "name": "6077-vol-surf-highres-radial-print_caution-nih3d.x3d"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/44135/runs/47ff62ca-6613-4865-ad73-946f17da3422/output-files/2150047",
-          "format": "X3D",
-          "size": 304516,
-          "name": "ecoli-nih3d.x3d"
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243019",
+          "format": "GLB",
+          "size": 545000,
+          "name": "6077-vol-surf-highres-radial-print_caution-nih3d.glb"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/44135/runs/47ff62ca-6613-4865-ad73-946f17da3422/output-files/2150048",
-          "format": "GLB",
-          "size": 346204,
-          "name": "ecoli-nih3d.glb"
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243020",
+          "format": "WRL",
+          "size": 193898,
+          "name": "6077-vol-surf-highres-radial.wrl"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/44135/runs/47ff62ca-6613-4865-ad73-946f17da3422/output-files/2150050",
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243022",
           "format": "WRL",
-          "size": 915459,
-          "name": "ecoli-nih3d.wrl"
+          "size": 864524,
+          "name": "6077-vol-surf-highres-radial-print_caution-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/44135/runs/47ff62ca-6613-4865-ad73-946f17da3422/output-files/2150051",
-          "format": "OBJ",
-          "size": 381995,
-          "name": "ecoli-nih3d.obj"
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243026",
+          "format": "WRL",
+          "size": 974274,
+          "name": "6077-vol-surf-highres-nocolor-print_caution-nih3d.wrl"
+        },
+        {
+          "i": 5,
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243027",
+          "format": "GLB",
+          "size": 373412,
+          "name": "6077-vol-surf-highres-nocolor-print_caution-nih3d.glb"
+        },
+        {
+          "i": 6,
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243030",
+          "format": "GLB",
+          "size": 115928,
+          "name": "6077-vol-surf-highres-nocolor.glb"
+        },
+        {
+          "i": 7,
+          "url": "https://3d.nih.gov/api/submissions/35173/runs/4a218f4b-ab4c-4054-bccb-88601fdf4297/output-files/1243032",
+          "format": "STL",
+          "size": 238684,
+          "name": "6077-vol-surf-highres-nocolor-print_caution-nih3d.stl"
         }
       ]
     },
     {
-      "entryId": 10752,
-      "accession": "3DPX-010752",
-      "title": "Gram Positive Bacterial Cell Wall Model",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-010752",
+      "entryId": 8134,
+      "accession": "3DPX-008134",
+      "title": "SiC",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-008134",
       "sourceVersion": 3,
-      "category": "Cells and Organelles",
+      "category": "Small Molecules",
       "license": "Public Domain",
-      "expectedFiles": 5,
-      "expectedBytes": 11242208,
-      "priority": 2,
+      "expectedFiles": 10,
+      "expectedBytes": 986764,
+      "priority": 5,
       "sourceConceptCandidates": [],
       "explicitNonhuman": false,
       "pathologyContext": "normal_or_unspecified",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/34464/runs/5ed9172f-0cf9-42f4-ac20-8e0e585f657d/output-files/1121741",
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/93af9a3a-a58f-4863-b95f-a8559f99b7f1/output-files/994744",
           "format": "STL",
-          "size": 1277184,
-          "name": "gram_positive_wallv3-nih3d.stl"
+          "size": 67584,
+          "name": "sic2-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/34464/runs/5ed9172f-0cf9-42f4-ac20-8e0e585f657d/output-files/1121743",
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/93af9a3a-a58f-4863-b95f-a8559f99b7f1/output-files/994746",
           "format": "X3D",
-          "size": 1396903,
-          "name": "gram_positive_wallv3-nih3d.x3d"
+          "size": 63848,
+          "name": "sic2-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/34464/runs/5ed9172f-0cf9-42f4-ac20-8e0e585f657d/output-files/1121744",
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/93af9a3a-a58f-4863-b95f-a8559f99b7f1/output-files/994747",
           "format": "GLB",
-          "size": 1953692,
-          "name": "gram_positive_wallv3-nih3d.glb"
+          "size": 74612,
+          "name": "sic2-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/34464/runs/5ed9172f-0cf9-42f4-ac20-8e0e585f657d/output-files/1121746",
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/93af9a3a-a58f-4863-b95f-a8559f99b7f1/output-files/994749",
           "format": "WRL",
-          "size": 4737108,
-          "name": "gram_positive_wallv3-nih3d.wrl"
+          "size": 190159,
+          "name": "sic2-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/34464/runs/5ed9172f-0cf9-42f4-ac20-8e0e585f657d/output-files/1121747",
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/93af9a3a-a58f-4863-b95f-a8559f99b7f1/output-files/994750",
           "format": "OBJ",
-          "size": 1877321,
-          "name": "gram_positive_wallv3-nih3d.obj"
+          "size": 75940,
+          "name": "sic2-nih3d.obj"
+        },
+        {
+          "i": 5,
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/b3da91c9-b664-4f61-a0dc-988eb63e4986/output-files/994952",
+          "format": "STL",
+          "size": 71584,
+          "name": "sic1-nih3d.stl"
+        },
+        {
+          "i": 6,
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/b3da91c9-b664-4f61-a0dc-988eb63e4986/output-files/994954",
+          "format": "X3D",
+          "size": 67789,
+          "name": "sic1-nih3d.x3d"
+        },
+        {
+          "i": 7,
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/b3da91c9-b664-4f61-a0dc-988eb63e4986/output-files/994955",
+          "format": "GLB",
+          "size": 82340,
+          "name": "sic1-nih3d.glb"
+        },
+        {
+          "i": 8,
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/b3da91c9-b664-4f61-a0dc-988eb63e4986/output-files/994957",
+          "format": "WRL",
+          "size": 209798,
+          "name": "sic1-nih3d.wrl"
+        },
+        {
+          "i": 9,
+          "url": "https://3d.nih.gov/api/submissions/33196/runs/b3da91c9-b664-4f61-a0dc-988eb63e4986/output-files/994958",
+          "format": "OBJ",
+          "size": 83110,
+          "name": "sic1-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 1708,
-      "accession": "3DPX-001708",
-      "title": "LWM Low Profile Below Knee Prosthetic Quick Connect",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-001708",
+      "entryId": 1691,
+      "accession": "3DPX-001691",
+      "title": "Prosthesis Quick Change Coupler",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-001691",
       "sourceVersion": 3,
       "category": "Prosthetics",
       "license": "Public Domain",
       "expectedFiles": 15,
-      "expectedBytes": 177775,
+      "expectedBytes": 576651,
       "priority": 6,
       "sourceConceptCandidates": [],
       "explicitNonhuman": false,
@@ -774,121 +543,121 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/3bde9c5f-a1b8-4019-be75-145b1caebccc/output-files/859801",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/649f7798-5cf4-4084-a140-16a2c61ef01d/output-files/857502",
           "format": "STL",
-          "size": 21484,
-          "name": "dovetail_f_3_1-nih3d.stl"
+          "size": 25284,
+          "name": "prosthesis_ring-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/3bde9c5f-a1b8-4019-be75-145b1caebccc/output-files/859803",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/649f7798-5cf4-4084-a140-16a2c61ef01d/output-files/857504",
           "format": "X3D",
-          "size": 18934,
-          "name": "dovetail_f_3_1-nih3d.x3d"
+          "size": 21142,
+          "name": "prosthesis_ring-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/3bde9c5f-a1b8-4019-be75-145b1caebccc/output-files/859804",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/649f7798-5cf4-4084-a140-16a2c61ef01d/output-files/857505",
           "format": "GLB",
-          "size": 18632,
-          "name": "dovetail_f_3_1-nih3d.glb"
+          "size": 22764,
+          "name": "prosthesis_ring-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/3bde9c5f-a1b8-4019-be75-145b1caebccc/output-files/859806",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/649f7798-5cf4-4084-a140-16a2c61ef01d/output-files/857507",
           "format": "WRL",
-          "size": 45142,
-          "name": "dovetail_f_3_1-nih3d.wrl"
+          "size": 53495,
+          "name": "prosthesis_ring-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/3bde9c5f-a1b8-4019-be75-145b1caebccc/output-files/859807",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/649f7798-5cf4-4084-a140-16a2c61ef01d/output-files/857508",
           "format": "OBJ",
-          "size": 19248,
-          "name": "dovetail_f_3_1-nih3d.obj"
+          "size": 24850,
+          "name": "prosthesis_ring-nih3d.obj"
         },
         {
           "i": 5,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/722c7522-ce5b-4df6-a0ef-8a30486b08f5/output-files/859722",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/85cfed0d-b07e-434a-b993-8f6691b6559f/output-files/857623",
           "format": "STL",
-          "size": 7384,
-          "name": "knee_thing-nih3d.stl"
+          "size": 8284,
+          "name": "prosthesis_ring_pin_0-nih3d.stl"
         },
         {
           "i": 6,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/722c7522-ce5b-4df6-a0ef-8a30486b08f5/output-files/859724",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/85cfed0d-b07e-434a-b993-8f6691b6559f/output-files/857625",
           "format": "X3D",
-          "size": 5279,
-          "name": "knee_thing-nih3d.x3d"
+          "size": 7341,
+          "name": "prosthesis_ring_pin_0-nih3d.x3d"
         },
         {
           "i": 7,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/722c7522-ce5b-4df6-a0ef-8a30486b08f5/output-files/859725",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/85cfed0d-b07e-434a-b993-8f6691b6559f/output-files/857626",
           "format": "GLB",
-          "size": 7164,
-          "name": "knee_thing-nih3d.glb"
+          "size": 8104,
+          "name": "prosthesis_ring_pin_0-nih3d.glb"
         },
         {
           "i": 8,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/722c7522-ce5b-4df6-a0ef-8a30486b08f5/output-files/859727",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/85cfed0d-b07e-434a-b993-8f6691b6559f/output-files/857628",
           "format": "WRL",
-          "size": 14180,
-          "name": "knee_thing-nih3d.wrl"
+          "size": 17739,
+          "name": "prosthesis_ring_pin_0-nih3d.wrl"
         },
         {
           "i": 9,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/722c7522-ce5b-4df6-a0ef-8a30486b08f5/output-files/859728",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/85cfed0d-b07e-434a-b993-8f6691b6559f/output-files/857629",
           "format": "OBJ",
-          "size": 6279,
-          "name": "knee_thing-nih3d.obj"
+          "size": 7450,
+          "name": "prosthesis_ring_pin_0-nih3d.obj"
         },
         {
           "i": 10,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/af258899-62a0-49b7-a3b3-b099a0cc2e82/output-files/859755",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/bb807579-6fbc-4a75-ac1a-ad06235adcf1/output-files/857669",
           "format": "STL",
-          "size": 2284,
-          "name": "dovetail_m_3_1-nih3d.stl"
+          "size": 64884,
+          "name": "prosthetic_lower-nih3d.stl"
         },
         {
           "i": 11,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/af258899-62a0-49b7-a3b3-b099a0cc2e82/output-files/859757",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/bb807579-6fbc-4a75-ac1a-ad06235adcf1/output-files/857671",
           "format": "X3D",
-          "size": 2070,
-          "name": "dovetail_m_3_1-nih3d.x3d"
+          "size": 51075,
+          "name": "prosthetic_lower-nih3d.x3d"
         },
         {
           "i": 12,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/af258899-62a0-49b7-a3b3-b099a0cc2e82/output-files/859758",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/bb807579-6fbc-4a75-ac1a-ad06235adcf1/output-files/857672",
           "format": "GLB",
-          "size": 2984,
-          "name": "dovetail_m_3_1-nih3d.glb"
+          "size": 57068,
+          "name": "prosthetic_lower-nih3d.glb"
         },
         {
           "i": 13,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/af258899-62a0-49b7-a3b3-b099a0cc2e82/output-files/859760",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/bb807579-6fbc-4a75-ac1a-ad06235adcf1/output-files/857674",
           "format": "WRL",
-          "size": 4823,
-          "name": "dovetail_m_3_1-nih3d.wrl"
+          "size": 144651,
+          "name": "prosthetic_lower-nih3d.wrl"
         },
         {
           "i": 14,
-          "url": "https://3d.nih.gov/api/submissions/31393/runs/af258899-62a0-49b7-a3b3-b099a0cc2e82/output-files/859761",
+          "url": "https://3d.nih.gov/api/submissions/31387/runs/bb807579-6fbc-4a75-ac1a-ad06235adcf1/output-files/857675",
           "format": "OBJ",
-          "size": 1888,
-          "name": "dovetail_m_3_1-nih3d.obj"
+          "size": 62520,
+          "name": "prosthetic_lower-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 2650,
-      "accession": "3DPX-002650",
-      "title": "Graduated mold for US gel",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-002650",
+      "entryId": 11097,
+      "accession": "3DPX-011097",
+      "title": "Cisterna Magna Puncture Apparatus",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-011097",
       "sourceVersion": 3,
       "category": "Devices and Hardware",
       "license": "Public Domain",
-      "expectedFiles": 3,
-      "expectedBytes": 55456,
+      "expectedFiles": 5,
+      "expectedBytes": 11951,
       "priority": 7,
       "sourceConceptCandidates": [],
       "explicitNonhuman": false,
@@ -896,37 +665,193 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/30461/runs/05a5d634-18e7-457d-9273-45dcbd81ea41/output-files/814790",
+          "url": "https://3d.nih.gov/api/submissions/30700/runs/9feed049-e87e-49f7-af65-6f7530445f5c/output-files/821872",
           "format": "STL",
-          "size": 14184,
-          "name": "moldbox5x5x8-repaired-nih3d.stl"
+          "size": 1784,
+          "name": "cis_puncture_app-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/30461/runs/05a5d634-18e7-457d-9273-45dcbd81ea41/output-files/814794",
-          "format": "WRL",
-          "size": 28160,
-          "name": "moldbox5x5x8-repaired-nih3d.wrl"
+          "url": "https://3d.nih.gov/api/submissions/30700/runs/9feed049-e87e-49f7-af65-6f7530445f5c/output-files/821874",
+          "format": "X3D",
+          "size": 1950,
+          "name": "cis_puncture_app-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/30461/runs/05a5d634-18e7-457d-9273-45dcbd81ea41/output-files/814795",
+          "url": "https://3d.nih.gov/api/submissions/30700/runs/9feed049-e87e-49f7-af65-6f7530445f5c/output-files/821875",
           "format": "GLB",
-          "size": 13112,
-          "name": "moldbox5x5x8-repaired-nih3d.glb"
+          "size": 2572,
+          "name": "cis_puncture_app-nih3d.glb"
+        },
+        {
+          "i": 3,
+          "url": "https://3d.nih.gov/api/submissions/30700/runs/9feed049-e87e-49f7-af65-6f7530445f5c/output-files/821877",
+          "format": "WRL",
+          "size": 4071,
+          "name": "cis_puncture_app-nih3d.wrl"
+        },
+        {
+          "i": 4,
+          "url": "https://3d.nih.gov/api/submissions/30700/runs/9feed049-e87e-49f7-af65-6f7530445f5c/output-files/821878",
+          "format": "OBJ",
+          "size": 1574,
+          "name": "cis_puncture_app-nih3d.obj"
+        }
+      ]
+    },
+    {
+      "entryId": 12297,
+      "accession": "3DPX-012297",
+      "title": "ECU Watertight Holder",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-012297",
+      "sourceVersion": 3,
+      "category": "Devices and Hardware",
+      "license": "Public Domain",
+      "expectedFiles": 5,
+      "expectedBytes": 14364,
+      "priority": 7,
+      "sourceConceptCandidates": [],
+      "explicitNonhuman": false,
+      "pathologyContext": "normal_or_unspecified",
+      "sourceRefs": [
+        {
+          "i": 0,
+          "url": "https://3d.nih.gov/api/submissions/30734/runs/691beb09-ac91-43db-aa62-ce787f74f5c7/output-files/823170",
+          "format": "STL",
+          "size": 2484,
+          "name": "ecu_box-nih3d.stl"
+        },
+        {
+          "i": 1,
+          "url": "https://3d.nih.gov/api/submissions/30734/runs/691beb09-ac91-43db-aa62-ce787f74f5c7/output-files/823172",
+          "format": "X3D",
+          "size": 2085,
+          "name": "ecu_box-nih3d.x3d"
+        },
+        {
+          "i": 2,
+          "url": "https://3d.nih.gov/api/submissions/30734/runs/691beb09-ac91-43db-aa62-ce787f74f5c7/output-files/823173",
+          "format": "GLB",
+          "size": 2992,
+          "name": "ecu_box-nih3d.glb"
+        },
+        {
+          "i": 3,
+          "url": "https://3d.nih.gov/api/submissions/30734/runs/691beb09-ac91-43db-aa62-ce787f74f5c7/output-files/823178",
+          "format": "WRL",
+          "size": 4866,
+          "name": "ecu_box-nih3d.wrl"
+        },
+        {
+          "i": 4,
+          "url": "https://3d.nih.gov/api/submissions/30734/runs/691beb09-ac91-43db-aa62-ce787f74f5c7/output-files/823183",
+          "format": "OBJ",
+          "size": 1937,
+          "name": "ecu_box-nih3d.obj"
+        }
+      ]
+    },
+    {
+      "entryId": 13623,
+      "accession": "3DPX-013623",
+      "title": "Waterjet Foam Face Shield",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-013623",
+      "sourceVersion": 3,
+      "category": "Devices and Hardware",
+      "license": "Public Domain",
+      "expectedFiles": 5,
+      "expectedBytes": 23505,
+      "priority": 7,
+      "sourceConceptCandidates": [],
+      "explicitNonhuman": false,
+      "pathologyContext": "normal_or_unspecified",
+      "sourceRefs": [
+        {
+          "i": 0,
+          "url": "https://3d.nih.gov/api/submissions/40096/runs/7ebf3c07-054f-4c07-939b-fb7fa2bc3086/output-files/1760263",
+          "format": "STL",
+          "size": 3884,
+          "name": "visor_foam-nih3d.stl"
+        },
+        {
+          "i": 1,
+          "url": "https://3d.nih.gov/api/submissions/40096/runs/7ebf3c07-054f-4c07-939b-fb7fa2bc3086/output-files/1760265",
+          "format": "X3D",
+          "size": 3429,
+          "name": "visor_foam-nih3d.x3d"
+        },
+        {
+          "i": 2,
+          "url": "https://3d.nih.gov/api/submissions/40096/runs/7ebf3c07-054f-4c07-939b-fb7fa2bc3086/output-files/1760266",
+          "format": "GLB",
+          "size": 4356,
+          "name": "visor_foam-nih3d.glb"
+        },
+        {
+          "i": 3,
+          "url": "https://3d.nih.gov/api/submissions/40096/runs/7ebf3c07-054f-4c07-939b-fb7fa2bc3086/output-files/1760268",
+          "format": "WRL",
+          "size": 8345,
+          "name": "visor_foam-nih3d.wrl"
+        },
+        {
+          "i": 4,
+          "url": "https://3d.nih.gov/api/submissions/40096/runs/7ebf3c07-054f-4c07-939b-fb7fa2bc3086/output-files/1760269",
+          "format": "OBJ",
+          "size": 3491,
+          "name": "visor_foam-nih3d.obj"
+        }
+      ]
+    },
+    {
+      "entryId": 20866,
+      "accession": "3DPX-020866",
+      "title": "LAMP Tube Viewer",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-020866",
+      "sourceVersion": 2,
+      "category": "Devices and Hardware",
+      "license": "Public Domain",
+      "expectedFiles": 3,
+      "expectedBytes": 114133,
+      "priority": 7,
+      "sourceConceptCandidates": [],
+      "explicitNonhuman": false,
+      "pathologyContext": "normal_or_unspecified",
+      "sourceRefs": [
+        {
+          "i": 0,
+          "url": "https://3d.nih.gov/api/submissions/44519/runs/b4117fdf-3fb9-421f-8fd9-30c209d4cee5/output-files/2216967",
+          "format": "WRL",
+          "size": 60585,
+          "name": "lamp-tube-viewer-nih3d.wrl"
+        },
+        {
+          "i": 1,
+          "url": "https://3d.nih.gov/api/submissions/44519/runs/b4117fdf-3fb9-421f-8fd9-30c209d4cee5/output-files/2216968",
+          "format": "GLB",
+          "size": 26364,
+          "name": "lamp-tube-viewer-nih3d.glb"
+        },
+        {
+          "i": 2,
+          "url": "https://3d.nih.gov/api/submissions/44519/runs/b4117fdf-3fb9-421f-8fd9-30c209d4cee5/output-files/2216972",
+          "format": "STL",
+          "size": 27184,
+          "name": "lamp-tube-viewer-nih3d.stl"
         }
       ]
     }
   ],
-  "selectedModels": 16,
-  "selectedOriginalFiles": 85,
-  "selectedExpectedSourceBytes": 99521598,
-  "unselectedEligible": 1930,
+  "selectedModels": 13,
+  "selectedOriginalFiles": 84,
+  "selectedExpectedSourceBytes": 98423590,
+  "unselectedEligible": 1917,
   "originalFilesDownloadedByPlanner": 0,
   "originalFilesSHA256VerifiedByPlanner": 0,
   "licenseRule": "Only explicit Public Domain sources automatically considered; others retained for rights review",
   "sourceAccuracyRule": "Model title/category do not certify anatomical or clinical correctness",
   "sourceCatalogEntries": 15688,
-  "verifiedAlreadyCompleteModels": 14,
+  "verifiedAlreadyCompleteModels": 30,
   "fullNIHArchiveComplete": false
 }
