@@ -8,7 +8,7 @@ on:
       - '.github/workflows/atla-nih3d-next-originals.yml'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   plan:
     runs-on: ubuntu-latest
@@ -45,13 +45,3 @@ jobs:
           if(!p.selected.every(x=>x.license==='Public Domain'))throw Error('Copyright/attribution review gate ignored');
           console.log('Safe next NIH3D original batch planned',JSON.stringify({models:p.selectedModels,files:p.selectedOriginalFiles,bytes:p.selectedExpectedSourceBytes,remaining:p.eligibleRemaining}));
           NODE
-      - name: Preserve planning evidence
-        run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'data(atla): deterministic next permitted NIH original-binary batch plan'
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
