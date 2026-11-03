@@ -15,7 +15,8 @@ assert.equal(r.counts.biomedicalCandidates+r.counts.scientificRelevanceReviewsPe
 assert(r.counts.fullOriginalModelsSHARecovered>0);
 assert(r.counts.fullOriginalModelsSHARecovered<r.counts.biomedicalCandidates);
 assert.equal(r.counts.independentClinicalModelApprovals,0);
-assert(r.counts.currentTechnicalStructuralFilesSHAReverified===r.counts.uniqueOriginalSourceFilesSHARecovered);
+assert(r.counts.currentTechnicalStructuralFilesSHAReverified<=r.counts.uniqueOriginalSourceFilesSHARecovered,'Structural QA cannot exceed source originals');
+if(!r.verifiedChecks.structuralCorrespondence)assert(r.issues.find(x=>x.id==='NIH-04').state!=='VERIFIED_COMPLETE_FOR_STATED_SCOPE');
 assert(r.issues.length>=12);
 assert(r.issues.some(x=>x.id==='NIH-05'&&x.state!=='VERIFIED_COMPLETE_FOR_STATED_SCOPE'));
 assert(r.issues.some(x=>x.id==='ATLA-01'&&x.state==='UNVERIFIED_OR_PENDING'));
