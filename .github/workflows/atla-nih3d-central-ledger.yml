@@ -1,0 +1,69 @@
+name: ATLA NIH3D and ATLA single verified completion ledger
+on:
+  push:
+    branches:
+      - main
+      - feat/atla-nih3d-central-evidence-ledger-20261103
+    paths:
+      - scripts/nih3d-build-central-ledger.mjs
+      - scripts/nih3d-central-ledger.test.mjs
+      - .github/workflows/atla-nih3d-central-ledger.yml
+      - tools/atla-ai/resources/nih3d-verified-originals-2026.json
+      - tools/atla-ai/resources/nih3d-educational-evidence-2026/summary.json
+      - tools/atla-ai/resources/nih3d-biomedical-scope-2026/summary.json
+      - docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json
+  workflow_dispatch:
+  schedule:
+    - cron: '26 2,14 * * *'
+permissions:
+  contents: write
+  actions: read
+  pull-requests: read
+concurrency:
+  group: atla-nih3d-central-ledger-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          sparse-checkout: |
+            scripts/nih3d-build-central-ledger.mjs
+            scripts/nih3d-central-ledger.test.mjs
+            tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json
+            tools/atla-ai/resources/nih3d-biomedical-scope-2026/summary.json
+            tools/atla-ai/resources/nih3d-verified-originals-2026.json
+            tools/atla-ai/resources/nih3d-educational-evidence-2026/summary.json
+            docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json
+            docs/ATLA_NIH3D_MODEL_ARCHIVE_STATUS_2026.json
+            docs/ATLA_NIH3D_ATLA_CENTRAL_LEDGER_2026.json
+            docs/ATLA_NIH3D_ATLA_CENTRAL_LEDGER_2026.md
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate source-backed pending tasks and live historical artifact inventory
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          node --check scripts/nih3d-build-central-ledger.mjs
+          node scripts/nih3d-build-central-ledger.mjs
+      - name: Enforce no fabricated completion and keep PR197 draft
+        run: |
+          set -euo pipefail
+          node scripts/nih3d-central-ledger.test.mjs
+      - name: Preserve live evidence and task blockers
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ATLA_NIH3D_ATLA_CENTRAL_LEDGER_2026.json docs/ATLA_NIH3D_ATLA_CENTRAL_LEDGER_2026.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(atla): update NIH3D and ATLA unified outstanding milestones'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
