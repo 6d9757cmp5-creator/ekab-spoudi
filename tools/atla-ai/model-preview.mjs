@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 const tool=new URLSearchParams(location.search).get('tool')==='cockpit'?'cockpit':'anatomy';
 const root=new URL('../../',import.meta.url);
 const select=$('source-model'),dataset=$('source-dataset'),button=$('source-load'),note=$('source-status');
-if(tool==='anatomy')dataset.querySelector('[value="makehuman"]')?.remove();
+if(tool==='anatomy')for(const value of ['makehuman','rigged'])dataset.querySelector('[value="'+value+'"]')?.remove();
 const status=(v,bad=false)=>{note.textContent=v;note.dataset.error=String(bad)};
 const back=$('source-back');
 back.href=tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html';
@@ -195,9 +195,10 @@ async function loadDataset(){
  dispose();status('Έλεγχος επιλεγμένης συλλογής…');
  const secondary=dataset.value==='secondary';
  const makehuman=dataset.value==='makehuman'&&tool==='cockpit';
- const sourceType=makehuman?'makehuman':secondary?(tool==='anatomy'?'research':'patients'):'primary';
+ const rigged=dataset.value==='rigged'&&tool==='cockpit';
+ const sourceType=rigged?'rigged':makehuman?'makehuman':secondary?(tool==='anatomy'?'research':'patients'):'primary';
  const urls=getResourceCatalogUrls(root);
- const selected=makehuman?[urls.cockpitMakehumanCore,urls.cockpitMakehumanSupplemental]:
+ const selected=rigged?[urls.cockpitRigged]:makehuman?[urls.cockpitMakehumanCore,urls.cockpitMakehumanSupplemental]:
   [tool==='anatomy'?(secondary?urls.anatomyResearch:urls.anatomy):(secondary?urls.cockpitPatients:urls.cockpit)];
  try{
   const registries=await Promise.all(selected.map(async url=>{
@@ -212,7 +213,7 @@ async function loadDataset(){
   select.replaceChildren(...assets.map((a,i)=>{
    const o=document.createElement('option');o.value=String(i);o.textContent=a.label;return o;
   }));
-  $('source-count').textContent=assets.length+' πραγματικά 3D αρχεία · '+(makehuman?'MakeHuman OBJ (χωρίς rig/animations)':secondary?(tool==='anatomy'?'Z-Anatomy (research-only)':'Στατικοί ασθενείς (ήδη στο Cockpit)'):'βασική συλλογή');
+  $('source-count').textContent=assets.length+' πραγματικά 3D αρχεία · '+(rigged?'MakeHuman CC0 · 163 οστά · 2 κινήσεις (μη κλινικό)':makehuman?'MakeHuman OBJ (χωρίς rig/animations)':secondary?(tool==='anatomy'?'Z-Anatomy (research-only)':'Στατικοί ασθενείς (ήδη στο Cockpit)'):'βασική συλλογή');
   button.disabled=false;
   status('Επίλεξε μοντέλο. Δεν αλλάζει η ενεργή εκπαιδευτική εφαρμογή.');
  }catch(e){if(request===loadVersion)status('Το μητρώο δεν είναι διαθέσιμο: '+String(e.message||e),true)}
