@@ -22,7 +22,7 @@ def read_verified(path, manifest):
     entry=next((x for x in candidates if x.get("path")==str(path)),None)
     if not entry: raise RuntimeError(f"No pinned source manifest: {path}")
     data=path.read_bytes()
-    if len(data)!=entry["size"]: raise RuntimeError(f"Byte length changed: {path}")
+    if len(data)!=entry.get("size",entry.get("bytes")): raise RuntimeError(f"Byte length changed: {path}")
     if hashlib.sha256(data).hexdigest()!=entry["sha256"]:raise RuntimeError(f"SHA256 source mismatch: {path}")
     return data
 raw=read_verified(OBJ,ROOT/"imported-manifest.json")
