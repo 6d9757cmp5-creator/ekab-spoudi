@@ -50,7 +50,7 @@ export const HUMAN_COMMANDS=Object.freeze({
  * Object-map metadata uses an explicit replace flag to hide other objects.
  */
 export function isolatePickedObjectMap(objectId){
-  if(typeof objectId!=='string'||objectId.length>240||!/^[a-zA-Z0-9_.:\-]+$/.test(objectId)||objectId==='replace')return null;
+  if(typeof objectId!=='string'||objectId.length>240||!/^[a-zA-Z0-9_.:\-]+$/.test(objectId)||['replace','__proto__','constructor','prototype'].includes(objectId))return null;
   const map=Object.create(null);
   map.replace=true;
   map[objectId]=true;
