@@ -43,9 +43,11 @@ async function openProvider(){
  if(!published){say('Χρειάζεται έγκυρος δημοσιευμένος σύνδεσμος https://human.biodigital.com/viewer/?id=… ή /widget/?…');return}
  human=null;ready=false;chapters=0;xray=false;dissect=false;labels=true;controls(false);
  active('provider');
+ say('Προετοιμασία BioDigital Viewer API. Οι εντολές ενεργοποιούνται μόνο μετά την πραγματική απόκριση human.ready.');
+ // Load the official API script before navigating the iframe to avoid missing human.ready.
+ const apiAvailable=await loadHumanApi();
  providerFrame.src=published;
- say('Φόρτωση εξωτερικού BioDigital Viewer. Οι εντολές ενεργοποιούνται μόνο μετά την πραγματική απόκριση human.ready.');
- if(!(await loadHumanApi())){say('Ο ενσωματωμένος Viewer μπορεί να λειτουργεί, αλλά το επίσημο JavaScript API δεν φορτώθηκε. Χρησιμοποίησε τα χειριστήρια μέσα στο iframe.');return}
+ if(!apiAvailable){say('Ο ενσωματωμένος Viewer μπορεί να λειτουργεί, αλλά το επίσημο JavaScript API δεν φορτώθηκε. Χρησιμοποίησε τα χειριστήρια μέσα στο iframe.');return}
  try{
   const candidate=new window.HumanAPI('providerFrame');
   human=candidate;
