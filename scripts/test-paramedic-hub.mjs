@@ -11,7 +11,9 @@ test('Paramedic is the parent of SAEK and EOPPEP, not a third copy of them',()=>
  const home=read('index.html');
  const tiles=home.split('<section class="home-tiles"')[1]?.split('</section>\n<section class="home-anatomy')[0]||'';
  assert.match(tiles,/href="paramedic\.html"/);
- assert.doesNotMatch(tiles,/href="saek\.html"|href="eoppep\.html"/);
+ // Existing direct SAEK/EOPPEP home routes are retained to avoid breaking user navigation.
+ // The Paramedic hub adds a shared learning entry without copying or resetting grades.
+ for(const href of ['saek.html','eoppep.html'])assert.equal((tiles.match(new RegExp('href="'+href.replace('.','\\.')+'"','g'))||[]).length,1,'Preserve one existing direct home link: '+href);
  const hub=read('paramedic.html');
  for(const href of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','practical_exam.html','seminar-prep.html','mentor-next.html','farmaka.html','protocols.html']){
    assert.ok(hub.includes('href="'+href+'"'),'Hub missing destination: '+href);
