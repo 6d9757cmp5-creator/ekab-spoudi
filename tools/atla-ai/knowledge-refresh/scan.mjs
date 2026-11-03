@@ -66,14 +66,18 @@ function safeDate(value){
  const s=clean(value,40);
  return /^\d{4}(-\d{2}(-\d{2})?)?/.test(s)?s:'not-provided';
 }
-export function mergeCandidates(previous,found,now){
+export function mergeCandidates(previous,found,now,excluded=[]){
+ // If PubMed now explicitly disqualifies an indexed PMID, never retain its
+ // older pending-review snapshot. Network failures alone are not disqualifications.
+ const disqualified=new Set(excluded.map(x=>String(x.pmid)));
  const records=new Map();
  for(const c of Array.isArray(previous)?previous:[]){
-  if(!screenPubMedArticle(c).accepted||c.status!=='pending-review')continue;
+  if(disqualified.has(String(c.pmid))||!screenPubMedArticle(c).accepted||c.status!=='pending-review')continue;
   records.set(String(c.pmid),c);
  }
  let added=0;
  for(const item of found){
+  if(disqualified.has(String(item.pmid)))continue;
   const gate=screenPubMedArticle(item);
   if(!gate.accepted)continue;
   const pmid=String(item.pmid);
@@ -113,6 +117,43 @@ async function requestJson(url,fetcher=fetch){
  if(body.length>1_500_000)throw Error('oversized-source-response');
  return JSON.parse(body);
 }
+/**
+ * Recheck PubMed's linked-correction XML for *every* previously queued PMID.
+ * ESummary publication types can lag behind an editor's linked notice.
+ * The XML is transient and is never persisted to the learner/library registry.
+ * See NLM linked citation guidance: https://www.nlm.nih.gov/bsd/policy/errata.html
+ */
+export function screenPubMedLinkedCorrections(xml,expectedIds){
+ const ids=new Set(expectedIds.map(String));
+ const seen=new Map();
+ const articles=[...String(xml).matchAll(/<PubmedArticle\b[^>]*>([\s\S]*?)<\/PubmedArticle>/gi)];
+ if(articles.length!==ids.size)throw Error('pubmed-linked-corrections-incomplete');
+ for(const [,article] of articles){
+  const citation=article.match(/<MedlineCitation\b[^>]*>([\s\S]*?)<\/MedlineCitation>/i)?.[1]||'';
+  const pmid=citation.match(/<PMID(?:\s[^>]*)?>(\d{1,10})<\/PMID>/i)?.[1]||'';
+  if(!ids.has(pmid)||seen.has(pmid))throw Error('pubmed-linked-corrections-invalid-identity');
+  const links=[...citation.matchAll(/<CommentsCorrections\b([^>]*)>/gi)]
+   .map(([,attrs])=>attrs.match(/\bRefType\s*=\s*["']([^"']+)["']/i)?.[1]||'');
+  const types=[...citation.matchAll(/<PublicationType(?:\s[^>]*)?>([\s\S]*?)<\/PublicationType>/gi)]
+   .map(([,value])=>value.replace(/<[^>]+>/g,' ').trim());
+  const flagged=links.some(x=>/^(RetractionIn|RetractionOf|ExpressionOfConcernIn|ExpressionOfConcernFor|RetractedandRepublishedIn)$/i.test(x))||
+   types.some(x=>/^(Retracted Publication|Retraction Notice|Retraction of Publication|Expression of Concern)$/i.test(x));
+  seen.set(pmid,{pmid,flagged});
+ }
+ if(seen.size!==ids.size)throw Error('pubmed-linked-corrections-incomplete');
+ return [...seen.values()];
+}
+async function fetchPubMedLinkedCorrections(ids,fetcher){
+ const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi');
+ for(const [k,v] of Object.entries({db:'pubmed',id:ids.join(','),retmode:'xml'}))url.searchParams.set(k,v);
+ await new Promise(resolve=>setTimeout(resolve,420));
+ const r=await fetcher(url,{headers:{accept:'application/xml','user-agent':'ATLA-Source-Monitor/1.0 (research-only)'},signal:AbortSignal.timeout(22000)});
+ if(!r.ok)throw Error('PubMed linked-corrections HTTP '+r.status);
+ const xml=await r.text();
+ if(xml.length>6_000_000)throw Error('pubmed-linked-corrections-oversized');
+ return screenPubMedLinkedCorrections(xml,ids);
+}
+
 export async function discoverPubMed(fetcher=fetch){
  const articles=new Map(),failures=[],excluded=[];
  for(const topic of TOPICS){
@@ -121,14 +162,22 @@ export async function discoverPubMed(fetcher=fetch){
    const term='('+topic.term+') AND ("Guideline"[Publication Type] OR "Practice Guideline"[Publication Type] OR "Systematic Review"[Publication Type] OR "Meta-Analysis"[Publication Type]) NOT ("Retracted Publication"[Publication Type] OR "Retraction of Publication"[Publication Type] OR "Preprint"[Publication Type] OR "Published Erratum"[Publication Type])';
    for(const [k,v] of Object.entries({db:'pubmed',term,retmode:'json',retmax:'10',sort:'pub date',reldate:String(PERIOD_DAYS),datetype:'edat'}))search.searchParams.set(k,v);
    const searchResult=await requestJson(search,fetcher);
-   const ids=(searchResult.esearchresult?.idlist||[]).filter(v=>/^\d{1,10}$/.test(String(v))).slice(0,10);
+   // HTTP 200 is not proof of valid NCBI data. Malformed payloads must count
+   // as failed topics, never as legitimate empty search results.
+   const rawIds=searchResult?.esearchresult?.idlist;
+   if(!Array.isArray(rawIds)||rawIds.some(v=>!/^\d{1,10}$/.test(String(v))))
+    throw Error('invalid-pubmed-search-response');
+   const ids=rawIds.slice(0,10).map(String);
    if(!ids.length)continue;
    const lookup=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi');
    for(const [k,v] of Object.entries({db:'pubmed',id:ids.join(','),retmode:'json'}))lookup.searchParams.set(k,v);
    const result=await requestJson(lookup,fetcher);
+   const summaries=result?.result;
+   if(!summaries||!Array.isArray(summaries.uids)||
+      ids.some(pmid=>!summaries.uids.map(String).includes(pmid)||!summaries[pmid]?.title))
+    throw Error('invalid-pubmed-summary-response');
    for(const pmid of ids){
-    const a=result.result?.[pmid];
-    if(!a?.title)continue;
+    const a=summaries[pmid];
     const item={pmid:String(pmid),title:a.title,published_at:a.pubdate||a.epubdate||'',
      journal:a.fulljournalname||a.source||'',topic_id:topic.id,
      doi:(Array.isArray(a.articleids)?a.articleids.find(x=>x.idtype==='doi')?.value:'')||'',
@@ -146,23 +195,90 @@ export async function discoverPubMed(fetcher=fetch){
  const found=[...articles.values()].flatMap(item=>(item.topic_ids||[item.topic_id]).map(topic_id=>({...item,topic_id})));
  return {found,failures,excluded};
 }
+/**
+ * PubMed search deliberately excludes retracted papers, so a previously
+ * queued PMID can disappear from search results without ever being removed.
+ * Recheck all existing candidates against current ESummary metadata before
+ * carrying them forward. A failed/partial recheck aborts persistence.
+ */
+export async function recheckPendingPubMed(previous,fetcher=fetch){
+ const items=Array.isArray(previous)?previous:[];
+ if(!items.length)return {found:[],excluded:[],checked:0};
+ const ids=[...new Set(items.map(x=>String(x.pmid)))];
+ if(ids.length!==items.length||ids.length>LIMIT_CANDIDATES||
+    ids.some(id=>!/^\d{1,10}$/.test(id)))
+  throw Error('invalid-existing-pubmed-queue');
+ const url=new URL('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi');
+ for(const [key,value] of Object.entries({db:'pubmed',id:ids.join(','),retmode:'json'}))
+  url.searchParams.set(key,value);
+ const result=(await requestJson(url,fetcher))?.result;
+ if(!result||!Array.isArray(result.uids)||
+    ids.some(id=>!result.uids.map(String).includes(id)))
+  throw Error('pubmed-existing-records-recheck-incomplete');
+ // Fail closed if any previously queued PMID lacks current linked-correction data.
+ // Do not silently retain retracted papers when ESummary still lists review types.
+ const linked=await fetchPubMedLinkedCorrections(ids,fetcher);
+ const linkedFlags=new Set(linked.filter(x=>x.flagged).map(x=>x.pmid));
+ const found=[],excluded=[];
+ for(const old of items){
+  if(linkedFlags.has(String(old.pmid))){
+   excluded.push({pmid:String(old.pmid),topic_id:old.topic_ids?.[0]||'prehospital',
+    reason:'pubmed-xml-linked-retraction-or-expression-of-concern'});
+   continue;
+  }
+  const id=String(old.pmid),summary=result[id];
+  if(!summary||!summary.title||!Array.isArray(summary.pubtype)||
+     !(summary.fulljournalname||summary.source)||
+     !(summary.pubdate||summary.epubdate))
+   throw Error('pubmed-existing-records-recheck-invalid');
+  const refreshed={...old,pmid:id,title:summary.title,
+   published_at:summary.pubdate||summary.epubdate,
+   journal:summary.fulljournalname||summary.source,
+   publication_types:summary.pubtype,
+   topic_id:old.topic_ids?.[0]||'prehospital'};
+  const decision=screenPubMedArticle(refreshed);
+  if(decision.accepted)found.push(refreshed);
+  else excluded.push({pmid:id,topic_id:refreshed.topic_id,reason:decision.reason});
+ }
+ return {found,excluded,checked:items.length};
+}
 export function signalFor(previous,probe){
  if(!probe?.ok)return 'unverified';
- if(!previous?.ok)return 'baseline';
- if(previous.last_modified&&probe.last_modified&&previous.last_modified!==probe.last_modified)return 'possible-source-update';
- if(previous.etag&&probe.etag&&previous.etag!==probe.etag)return 'possible-source-update';
+ // Compare with the last successful HTTP validators even after a transient
+ // 403/network outage. A failed probe is never evidence of a source update.
+ if(!previous?.ok&&!previous?.last_successful_probe)return 'baseline';
+ const lastModified=previous.last_successful_last_modified??previous.last_modified;
+ const etag=previous.last_successful_etag??previous.etag;
+ if(lastModified&&probe.last_modified&&lastModified!==probe.last_modified)return 'possible-source-update';
+ if(etag&&probe.etag&&etag!==probe.etag)return 'possible-source-update';
  return 'no-confirmed-change';
 }
-async function probeSource(source,fetcher=fetch){
+export function preserveProbeHistory(previous,probe){
+ // A failed probe stays failed/unverified; only its last known-good validators
+ // survive so a later recovery can still detect a genuine publisher change.
+ const successful=probe?.ok===true;
+ return {
+  last_successful_probe:successful||previous?.last_successful_probe===true||previous?.ok===true,
+  last_successful_etag:successful?(probe.etag||''):(previous?.last_successful_etag??(previous?.ok?previous.etag:''))||'',
+  last_successful_last_modified:successful?(probe.last_modified||''):(previous?.last_successful_last_modified??(previous?.ok?previous.last_modified:''))||''
+ };
+}
+export async function probeSource(source,fetcher=fetch){
  let url=source.url;
- for(let hops=0;hops<3;hops++){
+ const visited=new Set();
+ for(let hops=0;hops<5;hops++){
+  if(visited.has(url))return {ok:false,reason:'redirect-loop'};
+  visited.add(url);
   try{
    const r=await fetcher(url,{method:'HEAD',redirect:'manual',signal:AbortSignal.timeout(10000),
     headers:{'user-agent':'ATLA-Source-Monitor/1.0 (metadata-check only)'}});
    if([301,302,303,307,308].includes(r.status)){
-    const next=canonical(new URL(r.headers.get('location')||'',url).toString());
-    if(!next)return {ok:false,http_status:r.status,reason:'redirect-outside-allowlist'};
-    url=next;continue;
+    const target=new URL(r.headers.get('location')||'',url);
+    target.hash='';target.search='';
+    // canonical() normalizes registry keys by dropping trailing '/', but an HTTP
+    // redirect target must retain it or valid sites appear to loop forever.
+    if(!canonical(target.toString()))return {ok:false,http_status:r.status,reason:'redirect-outside-allowlist'};
+    url=target.toString();continue;
    }
    return {ok:r.ok,http_status:r.status,etag:clean(r.headers.get('etag'),100),last_modified:clean(r.headers.get('last-modified'),80),final_url:url,reason:r.ok?'':('HTTP '+r.status)};
   }catch(e){return {ok:false,reason:clean(e.message,120)}}
@@ -196,19 +312,26 @@ export async function main({fetcher=fetch,now=new Date().toISOString(),write=tru
   const batch=watchlist.slice(i,i+4);
   const reports=await Promise.all(batch.map(async source=>{
    const probe=await probeSource(source,fetcher);
-   return {...source,...probe,signal:signalFor(previousByUrl.get(source.url),probe)};
+   const prior=previousByUrl.get(source.url);
+   return {...source,...probe,...preserveProbeHistory(prior,probe),signal:signalFor(prior,probe)};
   }));
   sourceResults.push(...reports);
  }
  const discovered=await discoverPubMed(fetcher);
- const merged=mergeCandidates(lastCandidates.items,discovered.found,now);
+ // Existing PMIDs must be rechecked: search excludes retractions and cannot
+ // itself prove that yesterday's pending article is still eligible.
+ const rechecked=await recheckPendingPubMed(lastCandidates.items,fetcher);
+ const merged=mergeCandidates(lastCandidates.items,[...rechecked.found,...discovered.found],now,
+  [...rechecked.excluded,...discovered.excluded]);
  const metadata={schema_version:1,checked_at:now,registries:registries.map(r=>({id:r.id,entries:r.sources.length})),
   monitored_urls:watchlist.length,monitored_ok:sourceResults.filter(x=>x.ok).length,
+  pubmed_topics_checked:TOPICS.length,
   rejected_uncurated_sources:registries.reduce((n,r)=>n+r.sources.filter(s=>!canonical(s.source_url||s.url)).length,0),
   monitored_by_source_category:Object.fromEntries([...new Set(watchlist.map(x=>x.source_category))].map(category=>[category,watchlist.filter(x=>x.source_category===category).length])),
   possible_source_updates:sourceResults.filter(x=>x.signal==='possible-source-update').length,
   newly_discovered_papers:merged.added,pending_papers:merged.items.length,pubmed_failures:discovered.failures,
-  pubmed_excluded:discovered.excluded,source_quality_policy:'curated publishers plus per-paper evidence-type screening; no articles auto-approved',
+  pubmed_excluded:discovered.excluded,pubmed_previously_queued_excluded:rechecked.excluded,
+  source_quality_policy:'curated publishers plus per-paper evidence-type screening; no articles auto-approved',
   full_texts_imported:0,model_training_performed:false,clinical_retrieval_updated:false,
   summary:'Scans detect candidates only; no medical/learner knowledge is published automatically.'};
  const health={schema_version:1,checked_at:now,sources:sourceResults};
