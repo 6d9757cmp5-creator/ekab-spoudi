@@ -16,6 +16,14 @@ function lesson(n){
   return html.slice(selected.index,idx+1<chapters.length?chapters[idx+1].index:html.length);
 }
 
+const adultBls=lesson(7);
+assert.match(adultBls,/Ανακοπή: αναγνώριση και ενεργοποίηση/);
+assert.match(adultBls,/πλήρη επαναφορά του θώρακα/);
+assert.match(adultBls,/χωρίς υπερβολικό αερισμό/);
+assert.match(adultBls,/κανείς δεν αγγίζει τον ασθενή κατά την ανάλυση του ρυθμού ή την εκφόρτιση/);
+assert.match(adultBls,/συμπιέσεις μετά την ανάλυση, είτε υποδείχθηκε εκφόρτιση είτε όχι/);
+assert.match(adultBls,/2025-resuscitation-guidelines\/adult-basic-life-support-guidelines/);
+
 const anaphylaxis=lesson(9);
 assert.match(anaphylaxis,/Σενάριο σοβαρής αλλεργίας/);
 assert.match(anaphylaxis,/η ενδομυϊκή αδρεναλίνη είναι θεραπεία πρώτης γραμμής/i);
@@ -30,5 +38,5 @@ assert.match(seizures,/επαναλαμβανόμενες κρίσεις χωρ�
 assert.match(seizures,/εγκεκριμένο πρωτόκολλο και πραγματοποιείται από εξουσιοδοτημένο\/εκπαιδευμένο προσωπικό/);
 assert.match(seizures,/nice\.org\.uk\/guidance\/ng217\/chapter\/7-Treating-status-epilepticus/);
 
-console.log('PASS: SAEK 16 lessons 9/10 retain defined educational risk boundaries and source links.');
+console.log('PASS: SAEK 16 lessons 7/9/10 retain defined safety wording, scope boundaries and source links.');
 console.log('NOT CLINICAL CERTIFICATION: wording must still be reviewed by qualified professionals.');
