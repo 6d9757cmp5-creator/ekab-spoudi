@@ -20,6 +20,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Use latest remote branch source to avoid rebasing generated bundles
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B "$GITHUB_REF_NAME" "origin/$GITHUB_REF_NAME"
       - name: Install reproducible pinned MIT-licensed renderer and bundler
         run: |
           npm install --no-save --no-package-lock --no-audit --no-fund three@0.187.0 esbuild@0.28.2
