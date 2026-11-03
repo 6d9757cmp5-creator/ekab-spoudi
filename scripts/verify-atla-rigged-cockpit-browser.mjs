@@ -12,7 +12,14 @@ try{
  browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--no-sandbox']});
  const page=await browser.newPage({viewport:{width:1280,height:830}});
  page.on('pageerror',e=>errors.push(e.message));
- page.on('console',m=>{if(m.type()==='error'||m.type()==='warning')errors.push('console: '+m.text())});
+ page.on('console',m=>{
+  const msg=m.text();
+  // Chromium's software-GPU runner emits this known non-app warning; it does
+  // not indicate a WebGL or patient-render failure. Keep all app errors.
+  const runnerWarning=/Automatic fallback to software WebGL has been deprecated/.test(msg);
+  if(m.type()==='error'||(m.type()==='warning'&&!runnerWarning))
+   errors.push('console: '+msg);
+ });
  page.on('requestfailed',req=>requests.push(req.url()+' '+req.failure()?.errorText));
  await page.goto('http://127.0.0.1:8893/mentor-next.html',{waitUntil:'domcontentloaded'});
  await page.locator('#next-rigged-toggle').waitFor();
