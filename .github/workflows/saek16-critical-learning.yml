@@ -4,12 +4,14 @@ on:
     paths:
       - 'saek-course-16.html'
       - 'scripts/verify-saek16-critical-learning.mjs'
+      - 'scripts/verify-saek16-learning-browser.mjs'
       - '.github/workflows/saek16-critical-learning.yml'
   push:
     branches: [main]
     paths:
       - 'saek-course-16.html'
       - 'scripts/verify-saek16-critical-learning.mjs'
+      - 'scripts/verify-saek16-learning-browser.mjs'
       - '.github/workflows/saek16-critical-learning.yml'
   workflow_dispatch:
 permissions:
@@ -31,3 +33,17 @@ jobs:
           node --check scripts/verify-saek16-critical-learning.mjs
           node scripts/verify-saek16-critical-learning.mjs
           node scripts/verify-saek.mjs
+      - name: Install Chromium for actual browser QA of SAEK 16
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test mobile and desktop chapter UI, navigation, sources and self-check
+        run: node scripts/verify-saek16-learning-browser.mjs
+      - name: Preserve browser acceptance evidence (technical, not clinical)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saek16-learning-browser-evidence
+          path: audit-results/saek16-learning-browser.json
+          if-no-files-found: warn
+          retention-days: 30
