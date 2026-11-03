@@ -14,6 +14,15 @@ jobs:
     timeout-minutes: 4
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools/anatomy-3d/index.html
+            tools/anatomy-3d/biodigital-bridge-core.mjs
+            tools/anatomy-3d/biodigital-bridge.mjs
+            tools/anatomy-3d/biodigital-bridge.html
+            tools/anatomy-3d/biodigital-bridge.test.mjs
+          sparse-checkout-cone-mode: false
+          filter: blob:none
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
