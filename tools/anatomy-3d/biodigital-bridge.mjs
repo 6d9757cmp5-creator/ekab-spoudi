@@ -36,7 +36,7 @@ async function loadHumanApi(){
  if(apiLoad)return apiLoad;
  apiLoad=new Promise(resolve=>{
   const script=document.createElement('script');
-  script.src='https://developer.biodigital.com/builds/api/human-api-3.0.0.min.js';
+  script.src='./vendor/biodigital-human-api-3.0.0.min.js';
   script.async=true;
   script.onload=()=>resolve(typeof window.HumanAPI==='function');
   script.onerror=()=>{apiLoad=null;resolve(false)};
@@ -87,7 +87,7 @@ async function openProvider(){
      say('Αποτέλεσμα BioDigital: '+data.score+'% σε '+data.total+' ερωτήσεις. Δεν καταχωρίζεται ως επίσημη βαθμολογία ATLA.');
    else say('Ολοκληρώθηκε η εξέταση BioDigital. Χωρίς αλλαγή στην πρόοδο ATLA.');
   });
-  candidate.on('timeline.chapterTransition',()=>{if(human!==candidate)return;controls(true)});
+  candidate.on('timeline.chapterTransition',()=>{if(human!==candidate)return;capturedScene=null;isolated=false;pickedId=null;controls(true)});
   candidate.on('timeline.completed',()=>{if(human!==candidate)return;tourPlaying=false;controls(true)});
   candidate.on('scene.restored',()=>{if(human!==candidate)return;isolated=false;capturedScene=null;controls(true)});
   providerFrame.src=published;
