@@ -103,21 +103,29 @@ readyModel.addEventListener('error',()=>{
 // This remains a visual sandbox. No rig, medical finding, diagnosis or treatment response.
 const unifiedOverlay=$('next-unified-overlay'),unifiedHost=$('next-unified-host'),
  unifiedStatus=$('next-unified-status');
+const riggedToggle=$('next-rigged-toggle');
+let riggedPreview=false;
 let unifiedStage=null,unifiedEnabled=false,unifiedLoading=false,lastUnifiedState='';
 const stageState=()=>({
  scene:getCase(state.caseId)?.scene||'road',
- person:state.person,view:state.view
+ person:state.person,view:state.view,rigged:riggedPreview
 });
-const stageAssets=()=>Object.fromEntries(Object.keys(READY_ASSETS).map(k=>[k,readyURL(k)]));
+const stageAssets=()=>({
+ ...Object.fromEntries(Object.keys(READY_ASSETS).map(k=>[k,readyURL(k)])),
+ makehuman:new URL('../assets/patients/atla-makehuman-rigged-educational.glb',import.meta.url).href
+});
 function updateUnifiedStatus(status){
  unifiedStatus.textContent=({
   loading:'Φορτώνονται δύο πραγματικά 3D μοντέλα, περιβάλλον και εξοπλισμός…',
-  ready:'Ενιαία 3D σκηνή · 2 ασθενείς · περιστροφή με αφή · επιλογή από τη σκηνή',
+  ready:riggedPreview?'Ενιαία 3D σκηνή · 1 κινούμενο CC0 εκπαιδευτικό πρότυπο + 1 στατικός ασθενής':'Ενιαία 3D σκηνή · 2 ασθενείς · περιστροφή με αφή · επιλογή από τη σκηνή',
   partial:'Δεν φορτώθηκαν όλα τα μοντέλα. Διαθέσιμη η εφεδρική 3D προβολή.'
  })[status]||'Εναλλακτικό 3D περιβάλλον';
 }
 function disableUnified(){
  unifiedEnabled=false;unifiedLoading=false;lastUnifiedState='';
+ riggedPreview=false;
+ riggedToggle.setAttribute('aria-pressed','false');
+ riggedToggle.textContent='Κινούμενος εκπαιδευτικός ασθενής';
  unifiedOverlay.hidden=true;
  unifiedStage?.dispose();unifiedStage=null;
  patientCanvas.style.removeProperty('visibility');
@@ -128,7 +136,7 @@ function disableUnified(){
 }
 async function enableUnified(){
  if(unifiedEnabled||unifiedLoading)return;
- unifiedLoading=true;readyToggle.disabled=true;
+ unifiedLoading=true;readyToggle.disabled=true;riggedToggle.disabled=true;
  readyToggle.textContent='Φόρτωση ενιαίας 3D σκηνής…';
  try{
   const {mountUnifiedStage}=await import('../vendor/unified-stage.bundle.mjs');
@@ -157,10 +165,32 @@ async function enableUnified(){
   // The reliable legacy textured model-viewer is retained as a secondary fallback.
   await enableRealisticMode();
  }finally{
-  unifiedLoading=false;readyToggle.disabled=false;
+  unifiedLoading=false;readyToggle.disabled=false;riggedToggle.disabled=false;
  }
 }
 
+riggedToggle.addEventListener('click',async()=>{
+ if(unifiedLoading)return;
+ riggedToggle.disabled=true;
+ try{
+  riggedPreview=!riggedPreview;
+  riggedToggle.setAttribute('aria-pressed',String(riggedPreview));
+  riggedToggle.textContent=riggedPreview?'↶ Στατικά μοντέλα':'Κινούμενος εκπαιδευτικός ασθενής';
+  if(!unifiedEnabled){
+   if(riggedPreview)await enableUnified();
+  }else{
+   await unifiedStage.setState(stageState());
+   updateUnifiedStatus(unifiedStage.getStatus());
+   lastUnifiedState=JSON.stringify(stageState());
+  }
+ }catch(error){
+  riggedPreview=false;
+  riggedToggle.setAttribute('aria-pressed','false');
+  riggedToggle.textContent='Κινούμενος εκπαιδευτικός ασθενής';
+  showResult('Το rigged 3D πρότυπο δεν φορτώθηκε. Διατηρείται η στατική προσομοίωση.');
+  if(unifiedEnabled)void unifiedStage.setState(stageState());
+ }finally{riggedToggle.disabled=false}
+});
 const fullscreenButton=$('next-fullscreen');
 fullscreenButton.addEventListener('click',async()=>{
  const stage=$('next-immersive-stage');

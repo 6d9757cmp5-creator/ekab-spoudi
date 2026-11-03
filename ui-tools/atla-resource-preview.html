@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a1c2d">
-<title>ATLA | Δοκιμαστική προβολή 3D πόρων</title>
+<title>ATLA | Πλήρης 3D εξερευνητής μοντέλων</title>
 <script type="importmap">
 {"imports":{
 "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
@@ -23,7 +23,7 @@ nav{display:flex;gap:20px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px s
 .card{background:#11293c;border:1px solid #2d516e;border-radius:16px;padding:18px}
 .layout{display:grid;grid-template-columns:minmax(230px,300px) 1fr;gap:16px;margin:20px 0}
 label{display:block;font-weight:700;margin-bottom:8px}
-select,button{width:100%;padding:12px;border-radius:9px;font:inherit}
+select,button{width:100%;padding:12px;border-radius:9px;font:inherit}input[type=range]{width:100%} .toolrow{display:flex;gap:7px;flex-wrap:wrap}.toolrow button{width:auto;flex:1;min-width:82px;background:#2f6677;color:#f0fcff;padding:9px;margin-top:5px}.toolrow button:disabled{opacity:.45}.meta{font-size:.85rem;overflow-wrap:anywhere} .selector{margin-top:12px}.eyebrow{font-size:.83rem;color:#acd6df}canvas:focus-visible{outline:2px solid #b7eef6}
 select{background:#0c1b2b;color:#fff;border:1px solid #5b839e}
 button{background:#53c3aa;color:#081c24;font-weight:750;border:0;cursor:pointer;margin-top:12px}
 button:disabled{opacity:.5;cursor:wait}
@@ -38,8 +38,8 @@ small{color:#b0c7d7}
 <body>
 <main>
 <nav><a id="source-back" href="../tools/anatomy-3d/index.html">← Επιστροφή</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></nav>
-<h1 id="source-name">3D πόροι ATLA</h1>
-<p>Πρώτη ασφαλής ενσωμάτωση: πραγματική προεπισκόπηση ενός πηγαίου 3D αρχείου (GLB ή OBJ) κάθε φορά, χωριστά από το ενεργό εκπαιδευτικό μοντέλο.</p>
+<h1 id="source-name">Πλήρης 3D εξερευνητής ATLA</h1>
+<p>Διαδραστική εξερεύνηση πηγαίων μοντέλων: επιλογή δομής, απομόνωση, διαφάνεια, ανατομικός προσανατολισμός και διαθέσιμες κινήσεις. Κάθε αρχείο φορτώνεται μόνο μετά από επιλογή.</p>
 <div class="layout">
 <section class="card" aria-label="Πηγαία μοντέλα">
 <h2>Επιλογή μοντέλου</h2>
@@ -48,17 +48,18 @@ small{color:#b0c7d7}
 <select id="source-dataset" aria-describedby="source-warning">
   <option value="primary">Βασική επαληθευμένη συλλογή GLB</option>
   <option value="secondary">Πρόσθετα μοντέλα — περιορισμένη χρήση</option>
+  <option value="rigged">MakeHuman · πραγματικός σκελετός / 2 κινήσεις</option>
   <option value="makehuman">MakeHuman — πρωτότυπα OBJ (χωρίς rig)</option>
 </select>
 <label for="source-model">Μοντέλο</label>
 <select id="source-model" aria-describedby="source-warning"></select>
 <button id="source-load" type="button" disabled>Φόρτωση επιλεγμένου 3D</button>
 <p id="source-status" role="status" aria-live="polite">Αναμονή…</p>
-<small id="source-license"></small>
+<small class="meta" id="source-license"></small><hr style="border:0;border-top:1px solid #2d516e;margin:18px 0"><h2>Δομές και κινήσεις</h2><label for="source-part">Επιλεγμένη δομή</label><select id="source-part" disabled><option>Φόρτωσε μοντέλο</option></select><div class="toolrow"><button type="button" id="part-isolate" disabled>Απομόνωση</button><button type="button" id="part-show" disabled>Όλα ορατά</button></div><label class="selector" for="source-clip">Animation</label><select id="source-clip" disabled><option>Δεν υπάρχει διαθέσιμη κίνηση</option></select><div class="toolrow"><button type="button" id="clip-play" disabled>Αναπαραγωγή</button><button type="button" id="clip-pause" disabled>Παύση</button></div><label class="selector" for="source-opacity">Διαφάνεια μοντέλου <output id="opacity-value">100%</output></label><input id="source-opacity" type="range" min="15" max="100" value="100" step="5" disabled><div class="toolrow"><button type="button" id="view-reset" disabled>Κέντρο</button><button type="button" id="view-front" disabled>Μπροστά</button><button type="button" id="view-side" disabled>Πλάι</button></div><p id="source-mesh-info" class="eyebrow" role="status"></p>
 </section>
 <section class="card" aria-label="Διαδραστική δοκιμαστική προβολή">
-<canvas id="source-canvas" aria-label="3D προβολή πηγαίου μοντέλου"></canvas>
-<p><small>Σύρσιμο: περιστροφή · ροδέλα ή δύο δάχτυλα: μεγέθυνση. Η λήψη γίνεται μόνο μετά από επιλογή.</small></p>
+<canvas id="source-canvas" tabindex="0" aria-label="Διαδραστική 3D προβολή πηγαίου μοντέλου, κλικ σε δομή για επιλογή"></canvas>
+<p><small>Σύρσιμο: περιστροφή · κλικ σε δομή: επιλογή · ροδέλα ή δύο δάχτυλα: μεγέθυνση. Η λήψη γίνεται μόνο μετά από επιλογή.</small></p>
 </section>
 </div>
 <p id="source-warning" role="note">Οι πόροι δεν αποτελούν κλινικά επικυρωμένη προσομοίωση.</p>

@@ -1,0 +1,38 @@
+name: ATLA Full Models and Regression Acceptance
+on:
+  push:
+    branches: [main, feature/atla-full-model-workspace-20261103]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regressions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 19
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify exact source model and SOS registry without deleting user data
+        run: |
+          node --check tools/atla-ai/model-preview.mjs
+          node scripts/verify-reader-search.mjs
+          node --test scripts/test-mentor-quick-answer.mjs
+      - name: Re-run pre-cleanup regressions
+        run: node scripts/audit-pre-cleanup.mjs
+      - name: Install browser engine
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify MENTOR refuses unsupported medical decisions in browser
+        run: node scripts/verify-mentor-browser.mjs
+      - name: Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-full-viewer-regression-evidence
+          path: |
+            browser-qa-results/
+            audit-results/pre-cleanup-tests.json
+          if-no-files-found: warn
