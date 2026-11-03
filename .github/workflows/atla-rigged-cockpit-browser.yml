@@ -1,10 +1,11 @@
 name: ATLA Clinical Cockpit Rigged Patient Browser Acceptance
 on:
   push:
-    branches: [main, feature/atla-full-model-workspace-20261103]
+    branches: [main, feature/atla-full-model-workspace-20261103, fix/atla-cockpit-rigged-browser-and-final-qa-20261103]
     paths:
       - '.github/workflows/atla-rigged-cockpit-browser.yml'
       - 'scripts/verify-atla-rigged-cockpit-browser.mjs'
+      - 'scripts/verify-atla-rigged-cockpit-mobile.mjs'
       - 'tools/patient-simulator/vendor/unified-stage.bundle.mjs'
       - 'tools/patient-simulator/assets/patients/atla-makehuman-rigged-educational.glb'
       - 'tools/patient-simulator/app/unified-stage.mjs'
@@ -37,10 +38,15 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Simulate optional 163-bone patient and preserve original case
         run: node scripts/verify-atla-rigged-cockpit-browser.mjs
+      - name: Verify animated patient controls on mobile viewport
+        run: node scripts/verify-atla-rigged-cockpit-mobile.mjs
       - name: Preserve scene screenshot
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: atla-rigged-cockpit-browser-evidence
-          path: browser-qa-results/atla-cockpit-rigged-live.png
+          path: |
+            browser-qa-results/atla-cockpit-rigged-live.png
+            browser-qa-results/atla-cockpit-rigged-debug.png
+            browser-qa-results/atla-rigged-mobile-*.png
           if-no-files-found: warn
