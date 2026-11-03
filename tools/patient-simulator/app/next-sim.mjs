@@ -136,7 +136,7 @@ function disableUnified(){
 }
 async function enableUnified(){
  if(unifiedEnabled||unifiedLoading)return;
- unifiedLoading=true;readyToggle.disabled=true;
+ unifiedLoading=true;readyToggle.disabled=true;riggedToggle.disabled=true;
  readyToggle.textContent='Φόρτωση ενιαίας 3D σκηνής…';
  try{
   const {mountUnifiedStage}=await import('../vendor/unified-stage.bundle.mjs');
@@ -165,7 +165,7 @@ async function enableUnified(){
   // The reliable legacy textured model-viewer is retained as a secondary fallback.
   await enableRealisticMode();
  }finally{
-  unifiedLoading=false;readyToggle.disabled=false;
+  unifiedLoading=false;readyToggle.disabled=false;riggedToggle.disabled=false;
  }
 }
 
