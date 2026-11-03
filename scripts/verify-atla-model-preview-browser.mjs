@@ -16,7 +16,8 @@ try{
   {tool:'anatomy',filename:'tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json',sourceType:'research',expected:5},
   {tool:'cockpit',filename:'tools/patient-simulator/resources/quaternius/imported-manifest.json',sourceType:'primary',expected:2},
   {tool:'cockpit',filename:'tools/patient-simulator/assets/patients/preview-manifest.json',sourceType:'patients',expected:3},
-  {tool:'cockpit',filename:'tools/patient-simulator/resources/makehuman/imported-manifest.json',sourceType:'makehuman',expected:2}
+  {tool:'cockpit',filename:'tools/patient-simulator/resources/makehuman/imported-manifest.json',sourceType:'makehuman',expected:2},
+  {tool:'cockpit',filename:'tools/patient-simulator/assets/patients/atla-makehuman-rigged-manifest.json',sourceType:'rigged',expected:1}
  ];
  for(const test of inputs){
   const page=await browser.newPage({viewport:{width:920,height:720},deviceScaleFactor:1});
@@ -30,7 +31,7 @@ try{
    buildModelList(test.tool,sources,test.sourceType);
   const smallest=test.sourceType==='makehuman'?opts.findIndex(a=>a.path.endsWith('/base.obj')):opts.reduce((n,a,i)=>a.bytes<opts[n].bytes?i:n,0);
   await page.goto(BASE+'ui-tools/atla-resource-preview.html?tool='+test.tool,{waitUntil:'domcontentloaded'});
-  if(test.sourceType!=='primary')await page.selectOption('#source-dataset',test.sourceType==='makehuman'?'makehuman':'secondary');
+  if(test.sourceType!=='primary')await page.selectOption('#source-dataset',test.sourceType==='makehuman'?'makehuman':test.sourceType==='rigged'?'rigged':'secondary');
   await page.waitForFunction(count=>document.querySelector('#source-model').options.length===count,test.expected,{timeout:60000});
   if(await page.locator('#source-load').isDisabled())throw Error(test.tool+' cannot select source');
   await page.selectOption('#source-model',String(smallest));
@@ -56,6 +57,7 @@ try{
    await page.locator('#source-opacity').fill('100');
   }
   const animations=await page.locator('#source-clip option').count();
+  if(test.sourceType==='rigged'&&animations<2)failures.push('Rigged MakeHuman GLB has no genuine animation clips in browser');
   if(test.tool==='cockpit'&&test.sourceType==='primary'&&opts[smallest].label.includes('universal-animation')){
    if(animations<30)failures.push('Quaternius 43 animation list is incomplete: '+animations);
    else{
