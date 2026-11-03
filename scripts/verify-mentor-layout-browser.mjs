@@ -74,6 +74,9 @@ try{
   assert.equal(await page.locator('#lesson-1 .atlas-practice-cockpit').count(),0,'No unrelated simulator mission should be offered');
   const oldUrl='mentor-next.html?from=saek-course-01.html&chapter=lesson-1&focus='+encodeURIComponent('Ανατομία');
   await page.goto(new URL(oldUrl,base).href,{waitUntil:'domcontentloaded'});
+ await page.locator('#next-rigged-toggle').waitFor({timeout:20000});
+ assert.ok(await page.locator('#next-rigged-toggle').isVisible(),
+  'Preserve the pre-existing rigged educational model control from main');
  await page.locator('#atlas-cockpit-entry').waitFor({timeout:20000});
  assert.ok(await page.locator('#atlas-cockpit-entry [href^="saek-course-01.html"]').count());
  await page.locator('#atlas-cockpit-entry [data-atla-open]').click();
