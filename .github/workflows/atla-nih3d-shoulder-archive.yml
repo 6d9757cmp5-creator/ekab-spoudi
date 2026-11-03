@@ -1,34 +1,106 @@
-name: ATLA NIH3D shoulder 00334 live source rights preflight
+name: ATLA NIH3D bounded original Shoulder Fracture 00334 proof
 on:
   push:
     branches: [feat/nih3d-public-domain-shoulder-originals-20261103]
-    paths: ['.github/workflows/atla-nih3d-shoulder-archive.yml']
+    paths:
+      - 'scripts/nih3d-ghcr-shoulder-00334.mjs'
+      - '.github/workflows/atla-nih3d-shoulder-archive.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+  packages: write
 jobs:
-  live-source-rights:
+  archive-and-verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 25
     steps:
-      - name: Inspect current NIH source license before any archive publication
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d-ghcr-shoulder-00334.mjs
+            tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
+            tools/atla-ai/resources/nih3d-verified-originals-2026.json
+            docs/ATLA_NIH3D_GHCR_SHOULDER_00334_2026.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm source license live, then download and validate all five original bytes
+        env:
+          NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-shoulder-00334
         run: |
+          set -euo pipefail
+          node --check scripts/nih3d-ghcr-shoulder-00334.mjs
+          node scripts/nih3d-ghcr-shoulder-00334.mjs prepare
+      - name: Reject existing OCI tag and upload bounded source originals
+        env:
+          NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-shoulder-00334
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
+          TAG: originals-shoulder-00334-v1
+        run: |
+          set -euo pipefail
+          if docker manifest inspect "$IMAGE:$TAG" >/dev/null 2>&1; then
+            echo '::error::Existing OCI tag must not be replaced'
+            exit 1
+          fi
+          cat > "$NIH_BATCH_DIR/Dockerfile" <<'DOCKER'
+          FROM scratch
+          LABEL org.opencontainers.image.source="https://github.com/6d9757cmp5-creator/ekab-spoudi"
+          LABEL org.opencontainers.image.description="Public Domain NIH 3DPX-000334 original formats; no medical endorsement"
+          COPY originals/ /originals/
+          COPY MANIFEST.json /MANIFEST.json
+          CMD ["/MANIFEST.json"]
+          DOCKER
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker build -t "$IMAGE:$TAG" "$NIH_BATCH_DIR"
+          docker push "$IMAGE:$TAG"
+      - name: Restore anonymously and independently check all original SHA-256 hashes
+        env:
+          NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-shoulder-00334
+          IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
+          TAG: originals-shoulder-00334-v1
+        run: |
+          set -euo pipefail
+          docker logout ghcr.io
+          docker image rm "$IMAGE:$TAG"
+          docker pull "$IMAGE:$TAG"
+          docker create --name atla-nih3d-shoulder-restore "$IMAGE:$TAG" /MANIFEST.json
+          mkdir -p "$NIH_BATCH_DIR/recovered/originals"
+          docker cp atla-nih3d-shoulder-restore:/originals/. "$NIH_BATCH_DIR/recovered/originals/"
+          docker cp atla-nih3d-shoulder-restore:/MANIFEST.json "$NIH_BATCH_DIR/recovered/MANIFEST.json"
+          docker rm atla-nih3d-shoulder-restore
+          node scripts/nih3d-ghcr-shoulder-00334.mjs verify
+          export NIH_GHCR_DIGEST="$(docker image inspect "$IMAGE:$TAG" --format '{{index .RepoDigests 0}}')"
           node --input-type=module <<'NODE'
-          const url='https://3d.nih.gov/api/entries/334';
-          const response=await fetch(url,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(30000)});
-          if(!response.ok)throw Error('NIH API inaccessible: '+response.status);
-          const data=await response.json();
-          const fields=[];
-          function scan(x,p='',depth=0){
-            if(depth>7||fields.length>100||!x||typeof x!=='object')return;
-            for(const [k,v] of Object.entries(x)){
-              if(/licen|public.domain|rights|version|submissionstatus|status/i.test(k)){
-                fields.push({path:p+'.'+k,value:typeof v==='object'?JSON.stringify(v).slice(0,160):String(v).slice(0,160)});
-              }
-              if(typeof v==='object')scan(v,p+'.'+k,depth+1);
-            }
-          }
-          scan(data);
-          console.log('NIH entry 334 top-level fields:',Object.keys(data).join(','));
-          console.log('NIH entry 334 rights and status fields:',JSON.stringify(fields.slice(0,60)));
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const m=JSON.parse(fs.readFileSync(process.env.NIH_BATCH_DIR+'/MANIFEST.json','utf8'));
+          const digest=process.env.NIH_GHCR_DIGEST;
+          assert(/^ghcr\.io\/6d9757cmp5-creator\/atla-nih3d-archive@sha256:[a-f0-9]{64}$/.test(digest));
+          assert(m.files.length===5&&m.totalOriginalBytes===9008389);
+          const sourceManifest={...m,
+            originalModels:[{id:334,accession:m.originalAccession,title:m.originalTitle,license:m.sourceLicense}],
+            originalFiles:m.files.map(f=>({entryId:f.entryId,accession:f.accession,url:f.sourceUrl,
+              originalFormat:f.originalFormat,verifiedBytes:f.bytes,sha256:f.sha256,archivePath:f.archivePath}))};
+          const report={schemaVersion:1,status:'FIVE_PUBLIC_DOMAIN_ORIGINALS_ANONYMOUSLY_RESTORED',
+            scope:'One NIH3D original model only; not a full NIH archive',
+            imageTag:'ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-shoulder-00334-v1',
+            immutableDigest:digest,models:1,files:5,totalOriginalBytes:m.totalOriginalBytes,
+            completeForTheseCatalogEntries:true,everySourceSHA256CheckedAfterRecovery:true,
+            liveNIHSourceLicenseVerified:true,scientificallyApproved:false,
+            fullNIHArchiveComplete:false,sourceManifest};
+          fs.mkdirSync('docs',{recursive:true});
+          fs.writeFileSync('docs/ATLA_NIH3D_GHCR_SHOULDER_00334_2026.json',JSON.stringify(report,null,2)+'\n');
+          console.log('PROVEN_GHCR_PUBLIC_ORIGINALS',JSON.stringify({models:1,files:5,bytes:report.totalOriginalBytes,digest}));
           NODE
+      - name: Commit only the immutable, independently verified evidence report
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ATLA_NIH3D_GHCR_SHOULDER_00334_2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(ATLA NIH3D): verify five original shoulder model files after anonymous OCI restore'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
