@@ -1,0 +1,46 @@
+/**
+ * Read-only source-provenance inventory for the ATLA glossary.
+ * Checking link metadata never establishes scientific truth.
+ */
+import assert from 'node:assert/strict';
+import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+const glossary=JSON.parse(readFileSync('medical-terms.json','utf8'));
+const items=glossary.items;
+assert(Array.isArray(items),'Glossary is not an array');
+assert.equal(glossary.count,items.length,'Stated and actual glossary counts differ');
+const names=new Set(),distribution={};
+for(const item of items){
+ assert.equal(typeof item.term,'string');
+ assert.equal(typeof item.definition,'string');
+ assert(!names.has(item.term),'Duplicate glossary term: '+item.term);
+ names.add(item.term);
+ assert(typeof item.source==='string'&&item.source.startsWith('https://'),'Missing HTTPS source '+item.term);
+ const kind=item.sourceType||'unset';
+ distribution[kind]=(distribution[kind]||0)+1;
+ if(kind==='direct-section'){
+   assert(item.sourceSection&&item.sourceVersion&&item.sourceCrosscheck,'Incomplete direct provenance '+item.term);
+   assert.equal(item.sourceCrosscheck,'2026-11-04-primary-section');
+ }
+}
+const mapped=[
+ ['Καρδιοπνευμονική αναζωογόνηση','adult-basic-life-support-guidelines'],
+ ['Αναφυλαξία','emergency-treatment-anaphylactic-reactions'],
+ ['Αεραγωγός','22-1-organs-and-structures-of-the-respiratory-system'],
+ ['Ηλεκτροκαρδιογράφημα','lab-tests/electrocardiogram/'],
+ ['Αγγειακό εγκεφαλικό επεισόδιο','/stroke.html']
+];
+for(const [term,path] of mapped){
+ const record=items.find(x=>x.term===term);
+ assert(record&&record.sourceType==='direct-section',term+' lacks specific primary-source crosscheck');
+ assert(record.source.includes(path),'Wrong official citation location for '+term);
+}
+const report={date:'2026-11-04',source:'medical-terms.json',total:items.length,
+ distribution,sourceSectionMapped:items.filter(x=>x.sourceType==='direct-section').length,
+ sourceSectionCoveragePercent:Math.round(10000*(distribution['direct-section']||0)/items.length)/100,
+ notes:['Source links alone do not validate clinical correctness.','Unmapped entries must not be presented as claim-by-claim certified.','This audit does not verify live URLs or conduct a second-model review.'],
+ releaseStatus:'BLOCKED_INCOMPLETE_CLAIM_LEVEL_PROVENANCE'};
+mkdirSync('audit-results',{recursive:true});
+writeFileSync('audit-results/atla-glossary-source-coverage-20261104.json',JSON.stringify(report,null,2)+'\n');
+if(report.sourceSectionMapped<items.length&&process.env.ATLA_CLAIM_ALL_SOURCES_VERIFIED==='true')
+ throw Error('Cannot assert ATLA source certification with '+report.sourceSectionMapped+'/'+items.length+' mappings');
+console.log('ATLA_PRIMARY_SOURCE_COVERAGE',report.sourceSectionMapped+'/'+items.length,JSON.stringify(distribution),'RELEASE',report.releaseStatus);
