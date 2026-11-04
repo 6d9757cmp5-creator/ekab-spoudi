@@ -22,6 +22,9 @@ test('01 Αυστηρός — no answer release in an active exam in the ATLA UI
 test('02 Απαιτητικός — clinical scenarios require justification without punitive tone',()=>{
  const x=teachingApproach({question:'Εκπαιδευτικό σενάριο ΚΑΡΠΑ'});
  assert.equal(x.severity,'critical');assert.match(x.style,/αιτιολόγηση/);assert.match(x.style,/ποτέ τιμωρητικός/);
+ const asking=teachingApproach({question:'Ζήτησε να αιτιολογήσω την ΚΑΡΠΑ'});
+ assert.match(asking.depth,/Ζήτησε από τον μαθητή μία αιτιολόγηση/);
+ assert.match(asking.depth,/Μην απαντήσεις την ερώτηση/);
 });
 test('03 Δίκαιος — stored historical assessment grades are never altered by the learner-view',()=>{
  const s=storage([['ekab-eoppep-official-v15',JSON.stringify({'EOP-A-001':{selfAttempts:3,selfCorrect:1}})]]);
@@ -44,6 +47,7 @@ test('06 Επιστημονικά τεκμηριωμένος — reject unsuppor
  assert.equal(auditAssistantReply('Απάντηση χωρίς πηγή',sources).ok,false);
  assert.equal(auditAssistantReply('Εκπαιδευτική απάντηση [Τ9]',sources).ok,false);
  assert.deepEqual(verifiedPassages('Τι είναι η ΚΑΡΠΑ;',[{...sources[0],definition:'Πλαστός ορισμός'}]),[]);
+ assert.match(ATLA_RUNTIME_RULES,/ισχυρισμός πρέπει να στηρίζεται ρητά/);
 });
 test('07 Ειλικρινής — absent evidence yields local acknowledgement and ZERO AI calls',async()=>{
  let calls=0;const response=await worker.fetch(req({question:'Άσχετος όρος εξωγήινης τεχνολογίας',passages:[],level:'student',history:[]}),
