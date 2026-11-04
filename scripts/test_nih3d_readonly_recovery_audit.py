@@ -40,6 +40,27 @@ class ReadOnlyRescueAuditTests(unittest.TestCase):
         out=audit.audit([],set(),{2101},NOW)
         self.assertEqual(out['durable_result_marker_starts'],1)
         self.assertEqual(out['already_saved_artifact_starts_seen'],0)
+    def test_workflow_status_distinguishes_active_scheduler_and_last_result(self):
+        workflow={'state':'active'}
+        runs=[
+            {'id':1,'head_branch':'feature','event':'pull_request','status':'completed',
+             'conclusion':'success','created_at':'2026-11-04T17:00:00Z'},
+            {'id':2,'head_branch':'main','event':'schedule','status':'completed',
+             'conclusion':'success','created_at':'2026-11-04T16:00:00Z',
+             'html_url':'https://github.com/example/run/2'},
+            {'id':3,'head_branch':'main','event':'schedule','status':'in_progress',
+             'conclusion':None,'created_at':'2026-11-04T17:00:00Z'},
+        ]
+        out=audit.workflow_health(workflow,runs)
+        self.assertEqual(out['workflow_state'],'active')
+        self.assertEqual(out['latest_main_run']['id'],3)
+        self.assertEqual(out['recent_main_runs_seen'],2)
+
+    def test_workflow_disabled_does_not_claim_rescue_running(self):
+        out=audit.workflow_health({'state':'disabled_manually'},[])
+        self.assertEqual(out['workflow_state'],'disabled_manually')
+        self.assertIsNone(out['latest_main_run'])
+
     def test_invalid_start_and_unrelated_archives_ignored(self):
         out=audit.audit([artifact(1302),{'name':'some-other-model','id':7},
                         artifact(24901)],set(),set(),NOW)
