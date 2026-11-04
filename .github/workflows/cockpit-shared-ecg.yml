@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Retain parent commits of GitHub's synthetic PR merge; depth 1 masks %P.
       - name: Verify tests run against exact PR plus current main merge candidate
         if: github.event_name == 'pull_request'
         env:
