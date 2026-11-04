@@ -39,7 +39,12 @@ try {
    for(const target of targets){
     const response=await page.goto(BASE+'/'+target.page,{waitUntil:'domcontentloaded',timeout:30000});
     assert.equal(response?.ok(),true,env.label+' '+target.page+' HTTP error');
-    const actual=await page.locator('body').innerText({timeout:25000});
+    // The EOPPEP reader is intentionally hidden until a question is selected.
+    // Confirm the translated label exists in its actual reader DOM, rather than
+    // falsely requiring an unopened reader panel to be visible.
+    const actual=target.page==='theory.html'
+      ? await page.locator('.catalog-ready-sos').textContent({timeout:25000})
+      : await page.locator('body').innerText({timeout:25000});
     assert.ok(actual.includes(target.expected),env.label+' '+target.page+' missing '+target.expected);
     assert.equal(await page.locator('html').getAttribute('lang'),'el',target.page+' locale');
    }
