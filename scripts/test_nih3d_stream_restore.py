@@ -199,4 +199,57 @@ class RangeRecoveryTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'Remote conflict'):
                 s.check_remote_asset(asset,name,4,s.hashlib.sha256(b'1234').hexdigest())
 
+    def test_incomplete_upload_placeholder_is_replaced(self):
+        name='fixture.tar.zst'
+        starter={'id':7,'name':name,'state':'starter','size':2,'digest':None}
+        good={'id':8,'name':name,'state':'uploaded','size':4,'digest':'sha256:'+'a'*64}
+        with patch.object(s,'release_assets',side_effect=[{name:starter},{name:good}]), \
+             patch.object(s,'api',return_value=starter), \
+             patch.object(s,'http',return_value=FakeResponse(b'',204,{})) as request, \
+             patch.object(s,'gh') as gh:
+            self.assertEqual(s.publish_verified_part('tag',name,'/tmp/file',4,'a'*64),good)
+        self.assertEqual(gh.call_count,1)
+        self.assertEqual(request.call_args.kwargs['method'],'DELETE')
+        self.assertTrue(request.call_args.args[0].endswith('/releases/assets/7'))
+
+    def test_upload_failure_leaving_placeholder_retries(self):
+        from subprocess import CalledProcessError
+        name='fixture.tar.zst'
+        starter={'id':7,'name':name,'state':'starter','size':2,'digest':None}
+        good={'id':8,'name':name,'state':'uploaded','size':4,'digest':'sha256:'+'a'*64}
+        with patch.object(s,'release_assets',side_effect=[{},{name:starter},{name:starter},{name:good}]), \
+             patch.object(s,'api',return_value=starter), \
+             patch.object(s,'http',return_value=FakeResponse(b'',204,{})), \
+             patch.object(s,'gh',side_effect=[CalledProcessError(1,['gh'],stderr='HTTP 422 already_exists'),None]) as gh, \
+             patch.object(s.time,'sleep'):
+            self.assertEqual(s.publish_verified_part('tag',name,'/tmp/file',4,'a'*64),good)
+        self.assertEqual(gh.call_count,2)
+
+    def test_placeholder_removal_refuses_uploaded_asset(self):
+        name='fixture.tar.zst'
+        stale={'id':7,'name':name,'state':'starter'}
+        with patch.object(s,'api',return_value={'id':7,'name':name,'state':'uploaded'}), \
+             patch.object(s,'http') as request:
+            with self.assertRaisesRegex(ValueError,'non-placeholder'):
+                s.remove_incomplete_upload(stale,name)
+        request.assert_not_called()
+
+    def test_uploaded_asset_with_wrong_digest_is_never_deleted(self):
+        name='fixture.tar.zst'
+        asset={'id':7,'name':name,'state':'uploaded','size':4,'digest':'sha256:'+'b'*64}
+        with patch.object(s,'release_assets',return_value={name:asset}), \
+             patch.object(s,'http') as request, patch.object(s,'gh') as gh:
+            with self.assertRaisesRegex(ValueError,'Remote conflict'):
+                s.publish_verified_part('tag',name,'/tmp/file',4,'a'*64)
+        request.assert_not_called();gh.assert_not_called()
+
+    def test_placeholder_result_does_not_mark_shard_complete(self):
+        base=s.prefix(1301)
+        release={'id':1,'tag_name':s.recovery_tag(1301)}
+        def fake(path,key=None):
+            if path=='/releases':return [release]
+            return [{'name':base+'-RESULT.json','state':'starter'}]
+        with patch.object(s,'pages',side_effect=fake):
+            self.assertEqual(s.completed(),set())
+
 if __name__=='__main__':unittest.main()
