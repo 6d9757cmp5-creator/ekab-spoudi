@@ -27,7 +27,8 @@ assert.match(adultBls,/μόλις πραγματοποιηθεί η εκφόρτ
 assert.match(adultBls,/Αν δεν υποδειχθεί εκφόρτιση, ξεκίνα αμέσως ξανά συμπιέσεις/);
 assert.doesNotMatch(adultBls,/συμπιέσεις μετά την ανάλυση, είτε υποδείχθηκε εκφόρτιση είτε όχι/);
 assert.match(adultBls,/ERC\/RCUK 2025 ενθαρρύνουν οποιονδήποτε παρευρισκόμενο να χρησιμοποιήσει τον AED/);
-assert.match(adultBls,/Υ4α\/οικ\.15576\/2007 προβλέπει εκπαίδευση Β-ΚΑΑ\/ΑΕΑ για τους επαγγελματίες υγείας/);
+assert.match(adultBls,/Υ4α\/οικ\.15576\/2007 αφορά την οργάνωση της ΚΑΑ στα νοσοκομεία/);
+assert.match(adultBls,/εγκύκλιος 22\.8\.2007 ρυθμίζει τη χρήση ΑΕΑ σε δημόσιους χώρους/);
 assert.match(adultBls,/καλόπιστη άμεση βοήθεια, ακόμη και από μη εκπαιδευμένο άτομο/);
 assert.match(adultBls,/Y4-15576_07\.1452763919875\.pdf/);
 assert.match(adultBls,/2025-resuscitation-guidelines\/adult-basic-life-support-guidelines/);
@@ -55,6 +56,8 @@ assert.match(seizures,/εγκεκριμένο πρωτόκολλο και πρα
 assert.match(seizures,/nice\.org\.uk\/guidance\/ng217\/chapter\/7-Treating-status-epilepticus/);
 assert.match(seizures,/πάνω από 2 λεπτά περισσότερο από τη συνήθη διάρκεια του ατόμου/);
 assert.match(seizures,/τουλάχιστον 3 αυτοπεριοριζόμενες κρίσεις σε 24 ώρες/);
+assert.match(seizures,/όταν είναι αξιόπιστα γνωστή η συνήθης διάρκεια κρίσης/);
+assert.match(seizures,/αν δεν είναι γνωστή, δεν αναβάλλεται η επείγουσα εκτίμηση/);
 
 console.log('PASS: SAEK 16 lessons 7/9/10 retain defined safety wording, scope boundaries and source links.');
 console.log('NOT CLINICAL CERTIFICATION: wording must still be reviewed by qualified professionals.');
