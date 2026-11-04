@@ -161,3 +161,21 @@ test("unverified chapter or exam passage stays local, not sent to AI",async()=>{
  assert.equal(r.status,200);
  assert.equal(called,false);
 });
+
+test("AI source provenance refuses unsupported category-only medical terms",async()=>{
+ const generic=medicalTerms.items.find(x=>x.term==="Καρδιακή ανεπάρκεια");
+ assert(generic&&generic.sourceType==="category");
+ let modelCalls=0;
+ const env={MENTOR_FREE_PLAN_CONFIRMED:"true",AI:{run:async()=>{
+   modelCalls++;throw Error("AI cannot use category-only term as a verified source");
+ }}};
+ const query={...body,question:"Τι είναι η καρδιακή ανεπάρκεια;",passages:[
+  {id:"T1",term:generic.term,definition:generic.definition}
+ ]};
+ assert.equal(verifiedPassages(query.question,query.passages).length,0);
+ const r=await worker.fetch(req({},"POST",query),env);
+ assert.equal(r.status,200);
+ assert.match((await r.json()).answer,/Δεν έχω επαληθευμένη πηγή/);
+ assert.equal(modelCalls,0);
+ assert.equal(verifiedPassages(body.question,body.passages).length,1);
+});
