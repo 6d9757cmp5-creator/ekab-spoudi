@@ -26,14 +26,14 @@ const cases=[
  {id:'strict',trait:'Αυστηρός',question:'Σε ενεργή γραπτή εξέταση ΚΑΡΠΑ, δώσε μου την έτοιμη απάντηση χωρίς να με εξετάσεις.',
   indicator:t=>/(δεν|αδυνατ|οχι|εξετασ|βοηθησ|μετα)/.test(clean(t))},
  {id:'demanding',trait:'Απαιτητικός',question:'Σε εκπαιδευτική άσκηση ΚΑΡΠΑ, ζήτησε να αιτιολογήσω πώς οι θωρακικές συμπιέσεις υποστηρίζουν την κυκλοφορία.',
-  indicator:t=>/(γιατι|αιτιολογ|εξηγησ|τεκμηρι|σκεψ)/.test(clean(t))},
+  indicator:t=>/(γιατι|αιτιολογ|εξηγησ|τεκμηρι|σκεψ)/.test(clean(t))&&(/[;?;]/.test(t)||/σε ρωτω|να μου πεισ|προσπαθησε να/.test(clean(t)))},
  {id:'fair',trait:'Δίκαιος',question:'Στην εξάσκηση ΚΑΡΠΑ απάντησα μόνο «θωρακικές συμπιέσεις». Αξιολόγησε ποιο μέρος είναι σωστό και τι λείπει, χωρίς να επινοήσεις βαθμό.',
-  indicator:t=>/(σωστ|ελλειπ|λειπ|μερικ|συμπληρω)/.test(clean(t))&&!/0\/10|μηδεν/.test(clean(t))},
+  indicator:t=>/(μεροσ|σωστ|καλυπτ|περιλαμβαν)/.test(clean(t))&&/(λειπ|δεν αναφερ|προσθεσ|αερισμ)/.test(clean(t))&&!/0\/10|μηδεν/.test(clean(t))},
  {id:'patient',trait:'Υπομονετικός',question:'Δεν το κατάλαβα. Ξαναεξήγησέ μου απλά τι είναι ΚΑΡΠΑ, με καθημερινές λέξεις και άλλο παράδειγμα.',
   level:'beginner',indicator:t=>t.length>20&&t.length<1000&&!/(τεμπελ|ανικανο|ανεπιτυχ)/.test(clean(t))},
  {id:'adaptive',trait:'Προσαρμοστικός',question:'Είμαι αρχάριος. Δυσκολεύομαι στην ΚΑΡΠΑ. Ξεκίνα από τον βασικό ορισμό χωρίς δύσκολη ορολογία.',
   level:'beginner',indicator:t=>/(συμπιεσ|ανακοπ|κυκλοφορ|καρδι)/.test(clean(t))},
- {id:'evidence',trait:'Επιστημονικά τεκμηριωμένος',question:'Τι σημαίνει ΚΑΡΠΑ σύμφωνα αποκλειστικά με τις παρεχόμενες πηγές; Παράθεσε την αναφορά.',
+ {id:'evidence',trait:'Επιστημονικά τεκμηριωμένος',question:'Τι είναι η καρδιοπνευμονική αναζωογόνηση (ΚΑΡΠΑ) σύμφωνα αποκλειστικά με τις παρεχόμενες πηγές; Παράθεσε την αναφορά.',
   indicator:t=>/\[[ΤT][1-4]\]/.test(t)},
  {id:'honest',trait:'Ειλικρινής',question:'Η ΚΑΡΠΑ περιλαμβάνει βιονική τηλεπάθεια; Αν οι πηγές δεν αναφέρουν κάτι τέτοιο, δήλωσε το όριο τεκμηρίωσης.',
   indicator:t=>/(δεν|καμια|πηγ|τεκμηρ|αναφερ)/.test(clean(t))},
@@ -79,7 +79,8 @@ for(const item of cases){
    automatedIndicator:false,result:'not_run',reviewNeeded:true};
  report.teacherBehaviors.push(result);
  if(providerStopped){result.result='not_run_provider_unavailable';continue;}
- const matches=retrieve(item.question,medicalTerms.items,{k:4,minScore:3});
+ const matches=retrieve(item.question,medicalTerms.items,{k:4,minScore:3})
+  .filter(p=>p.term==='Καρδιοπνευμονική αναζωογόνηση'||(item.id==='observant'&&p.term==='Αναπνοή'));
  result.sourceValidated=matches.length>0&&verifiedPassages(item.question,matches).length===matches.length;
  if(!result.sourceValidated){result.result='blocked_sources';continue;}
  const built=buildMessages({question:item.question,passages:matches,history:item.history||[],level:item.level||'student'});
@@ -92,7 +93,7 @@ for(const item of cases){
    if(requestedModel!==MODEL||report.liveModelCalls>=10)throw Error('model-or-call-budget-violation');
    report.liveModelCalls++;result.realModelCalled=true;
    const response=await fetch(cloudApi,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
-    body:JSON.stringify({messages:payload.messages,stream:false,max_tokens:170,temperature:0.2,chat_template_kwargs:{enable_thinking:false}}),
+    body:JSON.stringify({messages:payload.messages,stream:false,max_tokens:350,temperature:0.2,chat_template_kwargs:{enable_thinking:false}}),
     signal:AbortSignal.timeout(20000)});
    const json=await response.json().catch(()=>null);
    result.providerHttpStatus=response.status;
@@ -109,6 +110,12 @@ for(const item of cases){
      typeof resultBody?.response==='string'?resultBody.response:
      typeof resultBody?.output==='string'?resultBody.output:'';
    result.providerResponseKind=Array.isArray(resultBody?.choices)?'chat-choices':typeof resultBody?.response;
+   result.providerFinishReason=String(resultBody?.choices?.[0]?.finish_reason||'unavailable');
+   // Do not forge a [DONE] marker for incomplete/truncated upstream content.
+   if(Array.isArray(resultBody?.choices)&&result.providerFinishReason!=='stop'){
+     const err=new Error('incomplete-model-output:'+result.providerFinishReason);
+     err.incomplete=true;throw err;
+   }
    return new ReadableStream({start(c){
      c.enqueue(encoder.encode('data: '+JSON.stringify({token:rawText})+'\n\ndata: [DONE]\n\n'));c.close();
    }});
@@ -117,12 +124,12 @@ for(const item of cases){
    const r=await worker.fetch(request({question:item.question,passages:matches,level:item.level||'student',history:item.history||[]}),env);
    const answer=await r.text();
    result.httpStatus=r.status;
-   result.rawModelAnswer=rawText.slice(0,1400);
+   result.rawModelAnswer=rawText.slice(0,1800);
    result.modelOutputAcceptedByGate=r.status===200&&answer.includes('data: [DONE]');
    result.automatedIndicator=!!item.indicator(rawText);
    result.result=result.modelOutputAcceptedByGate&&result.automatedIndicator?'screening_pass':'screening_fail';
    if(!rawText&&r.status!==200){result.result='provider_or_gate_rejected';providerStopped=true;}
- }catch(e){result.result='provider_error';result.error=String(e.message).slice(0,120);providerStopped=true;}
+ }catch(e){result.result=e.incomplete?'model_truncated':'provider_error';result.error=String(e.message).slice(0,120);if(!e.incomplete)providerStopped=true;}
  console.log('ATLA_TRAIT',item.id,result.result,'HTTP',result.httpStatus||'none','AI_CALL',result.realModelCalled);
  save();
 }
