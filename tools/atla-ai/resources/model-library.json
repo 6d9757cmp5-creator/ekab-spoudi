@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "317465245d070d042803e30a9bbd9f55f3a768ae",
+ "ledgerCommit": "83edcc997ee8f820f3742ea8cd432df268f00ced",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -203,7 +203,7 @@
  },
  "counts": {
   "bySource": {
-   "nih3d": 66,
+   "nih3d": 161,
    "hra": 54,
    "z-anatomy": 5,
    "quaternius": 2,
@@ -211,13 +211,15 @@
    "makehuman": 10,
    "makehuman-rigged": 1
   },
-  "nihVerifiedModels": 66,
-  "nihServed": 61,
-  "nihServedBytes": 115920704,
-  "nihContextual": 35,
-  "nihWithSaekChapter": 5,
+  "nihVerifiedModels": 161,
+  "nihServed": 148,
+  "nihServedBytes": 418301500,
+  "nihContextual": 34,
+  "nihWithSaekChapter": 4,
   "nihRestrictions": {
-   "OUT_OF_SCOPE": 5
+   "OUT_OF_SCOPE": 5,
+   "OVERSIZE": 3,
+   "CAPACITY": 5
   }
  },
  "nihCatalog": {
@@ -242,7 +244,7 @@
    "LIKELY_OUT_OF_MEDICAL_SCOPE": 1372,
    "SCIENTIFIC_REVIEW_REQUIRED": 4275
   },
-  "notYetVerifiedInLedger": 15622
+  "notYetVerifiedInLedger": 15527
  },
  "atlases": [
   {
@@ -739,6 +741,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-000259",
+   "accession": "3DPX-000259",
+   "entryId": 259,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · DNA Playset",
+   "greekTitle": null,
+   "originalTitle": "DNA Playset",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000259",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000259.glb",
+    "bytes": 63440,
+    "sha256": "9d32895798708ca561a6bc8d71700bbd6f3577fafdf958d2bf806638f14b3b77",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-000277",
    "accession": "3DPX-000277",
    "entryId": 277,
@@ -839,6 +888,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-000280",
+   "accession": "3DPX-000280",
+   "entryId": 280,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Self-assembling virus",
+   "greekTitle": null,
+   "originalTitle": "Self-assembling virus",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-ND",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000280",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000280.glb",
+    "bytes": 125160,
+    "sha256": "dbd26a29cbd74dbbf04ad63aa81ae5c600875b41bbfc7338a3f79dc7db9ba042",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-000334",
    "accession": "3DPX-000334",
    "entryId": 334,
@@ -885,6 +981,194 @@
     "exam",
     "cockpit",
     "atla"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000338",
+   "accession": "3DPX-000338",
+   "entryId": 338,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Fracture - Superior Glenoid Fracture",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Fracture - Superior Glenoid Fracture",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000338",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000338.glb",
+    "bytes": 9487776,
+    "sha256": "62af833e592ccf6a98432609bd75ee1fa11e90235f9c38ed87ac8990cc76f50a",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000345",
+   "accession": "3DPX-000345",
+   "entryId": 345,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Tibia Fracture",
+   "greekTitle": null,
+   "originalTitle": "Tibia Fracture",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000345",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000345.glb",
+    "bytes": 7970776,
+    "sha256": "a8fbd952fa4d382e31df46386941c2c3bef1179ff4f46e7817c62333e51277c9",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000346",
+   "accession": "3DPX-000346",
+   "entryId": 346,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Proximal Tibia Frature",
+   "greekTitle": null,
+   "originalTitle": "Proximal Tibia Frature",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000346",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000346.glb",
+    "bytes": 6930444,
+    "sha256": "58024b4b23bb9f5bbf91ebe7144de78f4baa798b6bdde57c15f06f1446066d3c",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000353",
+   "accession": "3DPX-000353",
+   "entryId": 353,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Fracture - 4 Part Proximal Humerus",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Fracture - 4 Part Proximal Humerus",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000353",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000353.glb",
+    "bytes": 8228092,
+    "sha256": "c3fdab60ad86fae9938a572725e22831441b3d9a1ed0a198154fcfd854b30122",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -951,6 +1235,711 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-000396",
+   "accession": "3DPX-000396",
+   "entryId": 396,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Cervical Spine",
+   "greekTitle": null,
+   "originalTitle": "Cervical Spine",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000396",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000396.glb",
+    "bytes": 9357592,
+    "sha256": "82a6daa247d0b74223e1e3da2945b1af72ddf2112841cad048d01a733e3efb6f",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000397",
+   "accession": "3DPX-000397",
+   "entryId": 397,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Model",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Model",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000397",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000397.glb",
+    "bytes": 9050840,
+    "sha256": "2639a1f90458f5b1797855aa75b9f2c4a19d0106b7cef7af1bdbbbe7585e84f9",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000399",
+   "accession": "3DPX-000399",
+   "entryId": 399,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Model",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Model",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000399",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000399.glb",
+    "bytes": 9040832,
+    "sha256": "b1bcea82f333d917fe3a04155489af6746be2229330c9d6ffe999b7854f6a232",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000400",
+   "accession": "3DPX-000400",
+   "entryId": 400,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Clavicle",
+   "greekTitle": null,
+   "originalTitle": "Clavicle",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000400",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000400.glb",
+    "bytes": 8291952,
+    "sha256": "41ba5a83d20006c42cccd7be459aa5688ee5fea34cac912515753cdce6432616",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000401",
+   "accession": "3DPX-000401",
+   "entryId": 401,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Proximal Tibia",
+   "greekTitle": null,
+   "originalTitle": "Proximal Tibia",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000401",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000401.glb",
+    "bytes": 7969636,
+    "sha256": "4ec9f1d5aa2f08bb5e546147259bfb87a551d803f02d8ae84fa28e7156af3562",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000403",
+   "accession": "3DPX-000403",
+   "entryId": 403,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Fracture - Proximal Humerus",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Fracture - Proximal Humerus",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000403",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000403.glb",
+    "bytes": 7741064,
+    "sha256": "cffe9d1449bd92bcfc347355a2d8f1eddc3d4d08e4308b338bf126849eda79e0",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000404",
+   "accession": "3DPX-000404",
+   "entryId": 404,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Cervical Spine",
+   "greekTitle": null,
+   "originalTitle": "Cervical Spine",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000404",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000404.glb",
+    "bytes": 7123568,
+    "sha256": "9b9ff39e51592306fa56d1890b41a1c8f53c98af1eb8866f9c2a3f7051154f2d",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000406",
+   "accession": "3DPX-000406",
+   "entryId": 406,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lumbar Spine - Mega Apofisis",
+   "greekTitle": null,
+   "originalTitle": "Lumbar Spine - Mega Apofisis",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000406",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000406.glb",
+    "bytes": 6645584,
+    "sha256": "a6ecb3859b5fe0b97e017e2fda081fee3cadc5e54391faf38535acc2d2835d44",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000407",
+   "accession": "3DPX-000407",
+   "entryId": 407,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lumbar Spine - frature",
+   "greekTitle": null,
+   "originalTitle": "Lumbar Spine - frature",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000407",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000407.glb",
+    "bytes": 6591292,
+    "sha256": "67dbb8f0f57d6c8597cb69096c1330c11bf582a2ccaf5e589bbe71090fa2ef66",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000408",
+   "accession": "3DPX-000408",
+   "entryId": 408,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lumbar Spine - L2 fracture",
+   "greekTitle": null,
+   "originalTitle": "Lumbar Spine - L2 fracture",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000408",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000408.glb",
+    "bytes": 6279184,
+    "sha256": "3e1f9e9acb8b6a55abd5489500caaea41e4f8292fa6296a5c2b7ed41d45d0fbb",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000409",
+   "accession": "3DPX-000409",
+   "entryId": 409,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lumbar Spine",
+   "greekTitle": null,
+   "originalTitle": "Lumbar Spine",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000409",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000409.glb",
+    "bytes": 6107184,
+    "sha256": "d969c76b2fd87c269b594ffd96e95f031954f7bb9527ad7a39d04eed4bfdf339",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000410",
+   "accession": "3DPX-000410",
+   "entryId": 410,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Pelvis",
+   "greekTitle": null,
+   "originalTitle": "Pelvis",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000410",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000410.glb",
+    "bytes": 5572460,
+    "sha256": "9494def5e35b784e76440facc9dc8c8715da45426f8f5815e3951ea46a8f8a88",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000413",
+   "accession": "3DPX-000413",
+   "entryId": 413,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Model",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Model",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000413",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000413.glb",
+    "bytes": 3915460,
+    "sha256": "62260e7060f4fba28894b44a19dc536368840408288fb48413dba2a252f6142f",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000414",
+   "accession": "3DPX-000414",
+   "entryId": 414,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Scafoid",
+   "greekTitle": null,
+   "originalTitle": "Scafoid",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000414",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000414.glb",
+    "bytes": 391112,
+    "sha256": "7822c92306eb6d347e0bb235aa6e504f8f5066ebee4902e2aeeda38cb43fd6d7",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000450",
+   "accession": "3DPX-000450",
+   "entryId": 450,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Version 1 of Trachea for Tracheotomy",
+   "greekTitle": null,
+   "originalTitle": "Version 1 of Trachea for Tracheotomy",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000450",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000450.glb",
+    "bytes": 865104,
+    "sha256": "1824f58c3d245c69a574031cfeedb8eaa1d983cfe6c111b91d59f986ac2fe8a1",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-000451",
    "accession": "3DPX-000451",
    "entryId": 451,
@@ -984,6 +1973,147 @@
     "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000451.glb",
     "bytes": 898968,
     "sha256": "4de85235f4a3c55ef93f207fe2fb516aa795dd659de05a25a15db4fc74a9ec62",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000452",
+   "accession": "3DPX-000452",
+   "entryId": 452,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Semilunar heart valve CAD model design for 3D printing",
+   "greekTitle": null,
+   "originalTitle": "Semilunar heart valve CAD model design for 3D printing",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000452",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000452.glb",
+    "bytes": 336952,
+    "sha256": "3ba5245626640a70871094095adf689a13d33566a7bce21592b7cfbe80ffed20",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000456",
+   "accession": "3DPX-000456",
+   "entryId": 456,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · 3D Printable Wrist Anatomy",
+   "greekTitle": null,
+   "originalTitle": "3D Printable Wrist Anatomy",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000456",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000456.glb",
+    "bytes": 3577188,
+    "sha256": "721c44be4c2203070246840d61b35d4dd3554d0aac6e0ef4e5bb21461448a282",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000522",
+   "accession": "3DPX-000522",
+   "entryId": 522,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Ulnar Nerve Location in Elbow",
+   "greekTitle": null,
+   "originalTitle": "Ulnar Nerve Location in Elbow",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000522",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000522.glb",
+    "bytes": 7729856,
+    "sha256": "97d478f9ad3bc8751eaf197da2e13f43c17e8a9e46cb4dad0344233fff74ad58",
     "format": "glb",
     "derived": false
    },
@@ -1136,6 +2266,100 @@
     "exam",
     "cockpit",
     "atla"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000799",
+   "accession": "3DPX-000799",
+   "entryId": 799,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lumbar Spine",
+   "greekTitle": null,
+   "originalTitle": "Lumbar Spine",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000799",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000799.glb",
+    "bytes": 6397092,
+    "sha256": "6a76ed6d0f256e32a93e40f3b43781094cbdf60dceed82a90ac9ee92c82004b8",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000800",
+   "accession": "3DPX-000800",
+   "entryId": 800,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Knee - proximal tibia fracture",
+   "greekTitle": null,
+   "originalTitle": "Knee - proximal tibia fracture",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000800",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000800.glb",
+    "bytes": 5851736,
+    "sha256": "cce8d50c5dd2053cfc87ea8a8189f4390f75736bfd7214e2937cfc71217af581",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1548,6 +2772,100 @@
     "exam",
     "cockpit",
     "atla"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000815",
+   "accession": "3DPX-000815",
+   "entryId": 815,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Hip Fracture - Acetabulum",
+   "greekTitle": null,
+   "originalTitle": "Hip Fracture - Acetabulum",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000815",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000815.glb",
+    "bytes": 5633292,
+    "sha256": "94a8f553a28dc28fbbd0a0a541ddcab5a41586c20e1cbb109edc89328ca9b0a6",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000816",
+   "accession": "3DPX-000816",
+   "entryId": 816,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Calcaneal Fracture",
+   "greekTitle": null,
+   "originalTitle": "Calcaneal Fracture",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000816",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000816.glb",
+    "bytes": 6771976,
+    "sha256": "e83053460fe3b715ceaeaced379367fede1d67c17c00ed262dac8e6d696f12ae",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2185,6 +3503,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-000833",
+   "accession": "3DPX-000833",
+   "entryId": 833,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Femur",
+   "greekTitle": null,
+   "originalTitle": "Femur",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000833",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000833.glb",
+    "bytes": 7027844,
+    "sha256": "556b5f076b1f83aa07f2b8224b97e8c35e68eeb32adbef800b8063926f8404b2",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-000834",
    "accession": "3DPX-000834",
    "entryId": 834,
@@ -2397,6 +3762,100 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-001001",
+   "accession": "3DPX-001001",
+   "entryId": 1001,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Adaptive Grip Mechanism for Prosthetic Hand",
+   "greekTitle": null,
+   "originalTitle": "Adaptive Grip Mechanism for Prosthetic Hand",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001001",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001001.glb",
+    "bytes": 27772,
+    "sha256": "6f7548d6bb84f901ffc7a98131a69ac1211322371025ae71e4621aef323d15a6",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001203",
+   "accession": "3DPX-001203",
+   "entryId": 1203,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Double Aortic Arch (solid blood pool)",
+   "greekTitle": null,
+   "originalTitle": "Double Aortic Arch (solid blood pool)",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-ND",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001203",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001203.glb",
+    "bytes": 3288576,
+    "sha256": "8d0468f990da6a642fba5cf123a3dd9da3db0d0a6ce11f33148bf3119c7d4ca3",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-001274",
    "accession": "3DPX-001274",
    "entryId": 1274,
@@ -2443,6 +3902,98 @@
     "exam",
     "cockpit",
     "atla"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001315",
+   "accession": "3DPX-001315",
+   "entryId": 1315,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Cervical Vertebra, C2, Colorized Original",
+   "greekTitle": null,
+   "originalTitle": "Cervical Vertebra, C2, Colorized Original",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC BY-ND",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001315",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001315.glb",
+    "bytes": 5427564,
+    "sha256": "1c96625259c4c7a781a1bb05b88db161f18c97d558135dc0d723a46be941c02c",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001334",
+   "accession": "3DPX-001334",
+   "entryId": 1334,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Femoral Head & Acetabular Fossa Repair",
+   "greekTitle": null,
+   "originalTitle": "Femoral Head & Acetabular Fossa Repair",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC BY-ND",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001334",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001334.glb",
+    "bytes": 1107988,
+    "sha256": "fbde63b8e57411d050fb9125012f394096fc75bf6ab981aa3121cf9c32301849",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2497,6 +4048,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-001694",
+   "accession": "3DPX-001694",
+   "entryId": 1694,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Makeup Application Assist Glove (MAAG)",
+   "greekTitle": null,
+   "originalTitle": "Makeup Application Assist Glove (MAAG)",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001694",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001694.glb",
+    "bytes": 38344,
+    "sha256": "becef093844ac2dff3342e6bd5961c5a53552f6317f51cdbc08267d6736af8a5",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-001708",
    "accession": "3DPX-001708",
    "entryId": 1708,
@@ -2530,6 +4128,147 @@
     "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001708.glb",
     "bytes": 2984,
     "sha256": "45b608982be3fd0f8b02755b67774b4f27257312724f9483bbd5b82af308a5a4",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001710",
+   "accession": "3DPX-001710",
+   "entryId": 1710,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Motorcycle Adapter-Prosthetic Hand Attachment",
+   "greekTitle": null,
+   "originalTitle": "Motorcycle Adapter-Prosthetic Hand Attachment",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001710",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001710.glb",
+    "bytes": 25104,
+    "sha256": "be6a62801bd7cd621d60170d19bb4319623e9c7d08226e4bc041a988099dff40",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001944",
+   "accession": "3DPX-001944",
+   "entryId": 1944,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Subcortical Brain Structures - Hippocampus, Amygdala, Brainstem, Nucleus Accumbens, Caudate, Pallidum, Putamen",
+   "greekTitle": null,
+   "originalTitle": "Subcortical Brain Structures - Hippocampus, Amygdala, Brainstem, Nucleus Accumbens, Caudate, Pallidum, Putamen",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001944",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001944.glb",
+    "bytes": 5226612,
+    "sha256": "7e401fea18a55a620c9c95630551499fcbaa018dcc9eac1603b148bb4cb38884",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-002548",
+   "accession": "3DPX-002548",
+   "entryId": 2548,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Skull",
+   "greekTitle": null,
+   "originalTitle": "Skull",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-002548",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-002548.glb",
+    "bytes": 8480692,
+    "sha256": "cd3ff2331b2300ef06892c063304096f6c92c85b962cc6fc160cc5eb8cd4f56c",
     "format": "glb",
     "derived": false
    },
@@ -2634,6 +4373,288 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-003309",
+   "accession": "3DPX-003309",
+   "entryId": 3309,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Saccular aortic aneurysm",
+   "greekTitle": null,
+   "originalTitle": "Saccular aortic aneurysm",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-003309",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003309.glb",
+    "bytes": 7075088,
+    "sha256": "6dbcba58b2c542f09f7ad015f90ee1000ad29c6d94a25c1b6e173d7919ed540a",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-003377",
+   "accession": "3DPX-003377",
+   "entryId": 3377,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Facial bones and cranial base, 28 GW fetal skull",
+   "greekTitle": null,
+   "originalTitle": "Facial bones and cranial base, 28 GW fetal skull",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-003377",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003377.glb",
+    "bytes": 9651452,
+    "sha256": "430f34a2598c37a9446f877cbb843ab26782f0521479088af15a1a9972803368",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-003854",
+   "accession": "3DPX-003854",
+   "entryId": 3854,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Kidney with Renal cell carcinoma (RCC)",
+   "greekTitle": null,
+   "originalTitle": "Kidney with Renal cell carcinoma (RCC)",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-003854",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003854.glb",
+    "bytes": 6283024,
+    "sha256": "0e2724d3468e49f9e88147539215d41d11b118a7bf986fee134c727f56d3245c",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-003892",
+   "accession": "3DPX-003892",
+   "entryId": 3892,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Brainstem with : Amygdala, Colliculi, Medulla oblongata, Pons, Putamen, and nerves",
+   "greekTitle": null,
+   "originalTitle": "Brainstem with : Amygdala, Colliculi, Medulla oblongata, Pons, Putamen, and nerves",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-003892",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003892.glb",
+    "bytes": 553616,
+    "sha256": "e4366d4b3352cbe4fd07b4d8cc160e4117c40fd324992eb468dc9c42eaa93977",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-003952",
+   "accession": "3DPX-003952",
+   "entryId": 3952,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Zebra Finch Brain",
+   "greekTitle": null,
+   "originalTitle": "Zebra Finch Brain",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-003952",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003952.glb",
+    "bytes": 1101440,
+    "sha256": "55b5fada54a4548bed37940e9d8278dd17a57243172f2e93e09b6caacace4a91",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-004318",
+   "accession": "3DPX-004318",
+   "entryId": 4318,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Anterior Skull Base Post Sphenoidotomy",
+   "greekTitle": null,
+   "originalTitle": "Anterior Skull Base Post Sphenoidotomy",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-004318",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-004318.glb",
+    "bytes": 7535164,
+    "sha256": "41f585847648dbd6565c6748e913e42b5bba80ca149733bdef70223ae2ca9c50",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-005119",
    "accession": "3DPX-005119",
    "entryId": 5119,
@@ -2666,6 +4687,100 @@
     "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-005119.glb",
     "bytes": 235360,
     "sha256": "f178e5d0c7277fadf15e53a3810d99824a56bc7f1dbeeb4057be4c58e0523930",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-007477",
+   "accession": "3DPX-007477",
+   "entryId": 7477,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Bicuspid aortic root with calcifications",
+   "greekTitle": null,
+   "originalTitle": "Bicuspid aortic root with calcifications",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-007477",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-007477.glb",
+    "bytes": 1007276,
+    "sha256": "579494e2545a91ae32ee791a0f4c5925d74807ef5ee2024516b40403b6180bc0",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-007496",
+   "accession": "3DPX-007496",
+   "entryId": 7496,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Case Model #17 Double Aortic Arch",
+   "greekTitle": null,
+   "originalTitle": "Case Model #17 Double Aortic Arch",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-007496",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-007496.glb",
+    "bytes": 6632924,
+    "sha256": "e25485ad6f10ad53276de2f9487d29dceb1ca7d5e032893e2d8d45f9b8639975",
     "format": "glb",
     "derived": false
    },
@@ -2770,6 +4885,53 @@
    ],
    "saekChapters": [],
    "scopeStatus": "SCIENTIFIC_REVIEW_REQUIRED",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-008380",
+   "accession": "3DPX-008380",
+   "entryId": 8380,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Aortic Dissection Positive",
+   "greekTitle": null,
+   "originalTitle": "Aortic Dissection Positive",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-008380",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-008380.glb",
+    "bytes": 6989024,
+    "sha256": "a8c9b9fc484abc185657ea138416fe5c8d080f37d9c1c077e928c3673654d085",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
   },
@@ -3015,6 +5177,99 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-011751",
+   "accession": "3DPX-011751",
+   "entryId": 11751,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Right Coronary Artery tree",
+   "greekTitle": null,
+   "originalTitle": "Right Coronary Artery tree",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-011751",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-011751.glb",
+    "bytes": 5551912,
+    "sha256": "90f7cde9fbe0a72a17e51cea3a927343634e5d60f38675be54257705638e7e56",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-011791",
+   "accession": "3DPX-011791",
+   "entryId": 11791,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · dLGN Cell",
+   "greekTitle": null,
+   "originalTitle": "dLGN Cell",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-011791",
+   "archive": {
+    "files": 8,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-011791.glb",
+    "bytes": 425252,
+    "sha256": "a5fbbc776c04a477dcb5229461afb86eed22e5bd4ed3a3915b78c089e465eed1",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-012297",
    "accession": "3DPX-012297",
    "entryId": 12297,
@@ -3054,6 +5309,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-012834",
+   "accession": "3DPX-012834",
+   "entryId": 12834,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Calcified bicuspid aortic valve (BAV) #3",
+   "greekTitle": null,
+   "originalTitle": "Calcified bicuspid aortic valve (BAV) #3",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-012834",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-012834.glb",
+    "bytes": 218304,
+    "sha256": "ead7b18a5721e5f91ab65a9907ba2fd1cc148e6c18f1791e1f5cf8dfbfe179a6",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-013623",
    "accession": "3DPX-013623",
    "entryId": 13623,
@@ -3089,6 +5391,424 @@
    "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "LIKELY_OUT_OF_MEDICAL_SCOPE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-013646",
+   "accession": "3DPX-013646",
+   "entryId": 13646,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · An alpha helix from Hemoglobin as cartoon",
+   "greekTitle": null,
+   "originalTitle": "An alpha helix from Hemoglobin as cartoon",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-013646",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-013646.glb",
+    "bytes": 480536,
+    "sha256": "2ad0f4c4dcd2a9d1e0399085a83001540d333e61776be72b7fee352d0c95fc7f",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-014845",
+   "accession": "3DPX-014845",
+   "entryId": 14845,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Top half of human femur, simplified, hollow",
+   "greekTitle": null,
+   "originalTitle": "Top half of human femur, simplified, hollow",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-014845",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-014845.glb",
+    "bytes": 553400,
+    "sha256": "f08e4d997e17197e2ef009f689f9a892f3567876295ccc91fc5dd08784ef3b42",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-015843",
+   "accession": "3DPX-015843",
+   "entryId": 15843,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · 3D Models of the Female Pelvis with L4, L5 Vertebrae and Proximal Femur",
+   "greekTitle": null,
+   "originalTitle": "3D Models of the Female Pelvis with L4, L5 Vertebrae and Proximal Femur",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-015843",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-015843.glb",
+    "bytes": 2372304,
+    "sha256": "b54cb53cf315072bf5e56db9dd54d0b2dfed388b24cc405b5d63a3bf742430aa",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-015992",
+   "accession": "3DPX-015992",
+   "entryId": 15992,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Hepatitis B P Protein with Tenofovir (Schematic) (PathogenAR)",
+   "greekTitle": null,
+   "originalTitle": "Hepatitis B P Protein with Tenofovir (Schematic) (PathogenAR)",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 5,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-015992",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-015992.glb",
+    "bytes": 1019308,
+    "sha256": "09e1956ab6d0f8747e6cd0270532e9d457db6de1b2c0a99a42e06e8c075d8504",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016415",
+   "accession": "3DPX-016415",
+   "entryId": 16415,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · train",
+   "greekTitle": null,
+   "originalTitle": "train",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016415",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016415.glb",
+    "bytes": 384108,
+    "sha256": "1a1211689c38c23658967d87610bac3ccfa69803de289dc266b316f7da02f636",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016812",
+   "accession": "3DPX-016812",
+   "entryId": 16812,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Clavicle Bone_Human Skeleton",
+   "greekTitle": null,
+   "originalTitle": "Clavicle Bone_Human Skeleton",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016812",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016812.glb",
+    "bytes": 2573532,
+    "sha256": "40ac88b6c7e3270c6a8207f89b8cda092abfc0b041e37e71d9ed182e157e1b90",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016814",
+   "accession": "3DPX-016814",
+   "entryId": 16814,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Wrist Bones_Human Skeleton",
+   "greekTitle": null,
+   "originalTitle": "Wrist Bones_Human Skeleton",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016814",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016814.glb",
+    "bytes": 146460,
+    "sha256": "02863f0f1ec2e0fe0895a80c6db2a0438a0c8fb1bda9dc730cf9add32c56ca5e",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016826",
+   "accession": "3DPX-016826",
+   "entryId": 16826,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Fibula Right_Human Skeleton",
+   "greekTitle": null,
+   "originalTitle": "Fibula Right_Human Skeleton",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016826",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016826.glb",
+    "bytes": 7080148,
+    "sha256": "2d0fe413d4b1fda9796498e5c50620170578674adc2ed1f4036781504144198d",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016827",
+   "accession": "3DPX-016827",
+   "entryId": 16827,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Fibula Left_Human Skeleton",
+   "greekTitle": null,
+   "originalTitle": "Fibula Left_Human Skeleton",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016827",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016827.glb",
+    "bytes": 7139036,
+    "sha256": "fccf6e8d778e1822fd5a0458fad12d3c511c40c62e4b13962f7632fac82f33fe",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
   },
@@ -3187,6 +5907,330 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-017797",
+   "accession": "3DPX-017797",
+   "entryId": 17797,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Alpha helix",
+   "greekTitle": null,
+   "originalTitle": "Alpha helix",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-017797",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017797.glb",
+    "bytes": 336772,
+    "sha256": "e0078cc7f878d9306ad1b9dfedf7dc38109fe3be14711e3ce479fcd3dd06f1e7",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-017978",
+   "accession": "3DPX-017978",
+   "entryId": 17978,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Osteoblast - Part II",
+   "greekTitle": null,
+   "originalTitle": "Osteoblast - Part II",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-017978",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017978.glb",
+    "bytes": 26300,
+    "sha256": "3d3c77d3a70f1acbfe11a64bb36b719f246805c947ffb12c1e4c4821fec5e6f0",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-017980",
+   "accession": "3DPX-017980",
+   "entryId": 17980,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Rod (E. coli) Model - Part II",
+   "greekTitle": null,
+   "originalTitle": "Rod (E. coli) Model - Part II",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-017980",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017980.glb",
+    "bytes": 646976,
+    "sha256": "f727f80f05ee7fa69491a4a57ff7eed53ecf4602689dbbc021273a29ee5e8a59",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-017981",
+   "accession": "3DPX-017981",
+   "entryId": 17981,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Coccus (S. aureus) Model - Part II",
+   "greekTitle": null,
+   "originalTitle": "Coccus (S. aureus) Model - Part II",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-017981",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017981.glb",
+    "bytes": 2083180,
+    "sha256": "c7af910cac145f41de2c94a716873944970f712302d2fea526196ca9840671d4",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020297",
+   "accession": "3DPX-020297",
+   "entryId": 20297,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Kickstand Nail Clipper Brace",
+   "greekTitle": null,
+   "originalTitle": "Kickstand Nail Clipper Brace",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020297",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020297.glb",
+    "bytes": 36800,
+    "sha256": "1058362a659f7bd1da0be0251173d05363f99c395b2092085c60e0b6001a06e1",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020403",
+   "accession": "3DPX-020403",
+   "entryId": 20403,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · 3D phantom",
+   "greekTitle": null,
+   "originalTitle": "3D phantom",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020403",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020403.glb",
+    "bytes": 22444,
+    "sha256": "f089e82f693f8a40680fbb579353abe96b5670eeffa55d7a0dc1b05df2557b22",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020591",
+   "accession": "3DPX-020591",
+   "entryId": 20591,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Skull and Eyes - Visible Human Male",
+   "greekTitle": null,
+   "originalTitle": "Skull and Eyes - Visible Human Male",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020591",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020591.glb",
+    "bytes": 7662468,
+    "sha256": "031179f6942df5ca89e675e6eb75859a2e9751c6046bcadde083708974345a43",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-020866",
    "accession": "3DPX-020866",
    "entryId": 20866,
@@ -3224,6 +6268,1238 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-020966",
+   "accession": "3DPX-020966",
+   "entryId": 20966,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Heart, Female",
+   "greekTitle": null,
+   "originalTitle": "Heart, Female",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020966",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020966.glb",
+    "bytes": 1700176,
+    "sha256": "6af24961f77427151dea77bcefe80b7e76fa4da45e4802b33e03ada4f48d7d7d",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020967",
+   "accession": "3DPX-020967",
+   "entryId": 20967,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Kidney, Female, Left",
+   "greekTitle": null,
+   "originalTitle": "Kidney, Female, Left",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020967",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020967.glb",
+    "bytes": 1328324,
+    "sha256": "b22be5d0944110bfe98805d1931476432e883866730e4921f91cfe862d2fe754",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020968",
+   "accession": "3DPX-020968",
+   "entryId": 20968,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Kidney, Female, Right",
+   "greekTitle": null,
+   "originalTitle": "Kidney, Female, Right",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020968",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020968.glb",
+    "bytes": 1354520,
+    "sha256": "d43646a6648b5521d2c80a58716da32acd0cb730ebc65336a92990187866a79f",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020974",
+   "accession": "3DPX-020974",
+   "entryId": 20974,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lung, Female",
+   "greekTitle": null,
+   "originalTitle": "Lung, Female",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020974",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020979",
+   "accession": "3DPX-020979",
+   "entryId": 20979,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Ovary, Female, Left",
+   "greekTitle": null,
+   "originalTitle": "Ovary, Female, Left",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020979",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020979.glb",
+    "bytes": 8700,
+    "sha256": "34b3962fe6df9dfaa321ef3fcfa73f451f8254ed385005843695e988db13170d",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020980",
+   "accession": "3DPX-020980",
+   "entryId": 20980,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Ovary, Female, Right",
+   "greekTitle": null,
+   "originalTitle": "Ovary, Female, Right",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020980",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020980.glb",
+    "bytes": 8452,
+    "sha256": "dcf754bc0ec42730154be870eb32eb5c16048e7e78c145e74a11341ec7d3c464",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020984",
+   "accession": "3DPX-020984",
+   "entryId": 20984,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Pelvis, Female",
+   "greekTitle": null,
+   "originalTitle": "Pelvis, Female",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020984",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020984.glb",
+    "bytes": 1590820,
+    "sha256": "d22b2ef38fe89d4607491babdca36168b458c697166a228044866a24ead72a6c",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020990",
+   "accession": "3DPX-020990",
+   "entryId": 20990,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Thymus, Female",
+   "greekTitle": null,
+   "originalTitle": "Thymus, Female",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020990",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020990.glb",
+    "bytes": 71480,
+    "sha256": "87c3e5b94b1d7f68607782adcfb8e2e00060ea2a248283de86ee5e576b6941f5",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020991",
+   "accession": "3DPX-020991",
+   "entryId": 20991,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Trachea, Female",
+   "greekTitle": null,
+   "originalTitle": "Trachea, Female",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020991",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020991.glb",
+    "bytes": 673220,
+    "sha256": "7df981f5ffb8fc859f7e0206bb29d4ee3b255caa1e4a39c766cd830ee111dd52",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020996",
+   "accession": "3DPX-020996",
+   "entryId": 20996,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Uterus, Female",
+   "greekTitle": null,
+   "originalTitle": "Uterus, Female",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020996",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020996.glb",
+    "bytes": 859824,
+    "sha256": "62b9b7543172bf813d432ca055a6d10bac1d28bd56d63d958ce1d6dfbbef6aa3",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021000",
+   "accession": "3DPX-021000",
+   "entryId": 21000,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Heart, Male",
+   "greekTitle": null,
+   "originalTitle": "Heart, Male",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021000",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021000.glb",
+    "bytes": 3793932,
+    "sha256": "a1ce1a94795189e73f49cca426b8dbd924f0e727359c96501f870b1f27036d20",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021001",
+   "accession": "3DPX-021001",
+   "entryId": 21001,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Kidney, Male, Left",
+   "greekTitle": null,
+   "originalTitle": "Kidney, Male, Left",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021001",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021001.glb",
+    "bytes": 1535456,
+    "sha256": "d19bbf4dceb2caf9695f8291ef055de982f9241299004d42ed561fba1e8bd991",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021002",
+   "accession": "3DPX-021002",
+   "entryId": 21002,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Kidney, Male, Right",
+   "greekTitle": null,
+   "originalTitle": "Kidney, Male, Right",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021002",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021002.glb",
+    "bytes": 1542768,
+    "sha256": "d2f1c22c008e8ccb3bbb4714ae286cbb406d93665070493c28449fc47b1b7019",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021008",
+   "accession": "3DPX-021008",
+   "entryId": 21008,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lung, Male",
+   "greekTitle": null,
+   "originalTitle": "Lung, Male",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021008",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021014",
+   "accession": "3DPX-021014",
+   "entryId": 21014,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Pelvis, Male",
+   "greekTitle": null,
+   "originalTitle": "Pelvis, Male",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021014",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021014.glb",
+    "bytes": 1345568,
+    "sha256": "c0ae2090b43f7c7696ab8963b0adabf34e25092c55ab016ea8ce344339dac3b3",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021020",
+   "accession": "3DPX-021020",
+   "entryId": 21020,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Thymus, Male",
+   "greekTitle": null,
+   "originalTitle": "Thymus, Male",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021020",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021020.glb",
+    "bytes": 68812,
+    "sha256": "d68c69fcc03c4a47a2b8a1a5bb8b315e61581d1fc6be4903384ea1a8d1223a0b",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021021",
+   "accession": "3DPX-021021",
+   "entryId": 21021,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Trachea, Male",
+   "greekTitle": null,
+   "originalTitle": "Trachea, Male",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021021",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021021.glb",
+    "bytes": 944876,
+    "sha256": "60d37a18cd6105202284cbe89454355e460c43503b268b10ee5d791216d4df23",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021159",
+   "accession": "3DPX-021159",
+   "entryId": 21159,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Well Explained Brain Model (3D)",
+   "greekTitle": null,
+   "originalTitle": "Well Explained Brain Model (3D)",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021159",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021159.glb",
+    "bytes": 2967928,
+    "sha256": "1d0dd2fa2352a57cfec865997ed2abc99c4b6877fe0f5378fca9738ffe5157c3",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021160",
+   "accession": "3DPX-021160",
+   "entryId": 21160,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Human Brain Model",
+   "greekTitle": null,
+   "originalTitle": "Human Brain Model",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021160",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021160.glb",
+    "bytes": 4042284,
+    "sha256": "09b5ce8d552c3226eed6da0dc7980a102632702b4c33190ae238e3d3f18dca02",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021161",
+   "accession": "3DPX-021161",
+   "entryId": 21161,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Detailed Human Brain Model (3D)",
+   "greekTitle": null,
+   "originalTitle": "Detailed Human Brain Model (3D)",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021161",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021281",
+   "accession": "3DPX-021281",
+   "entryId": 21281,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Athlete's heart",
+   "greekTitle": null,
+   "originalTitle": "Athlete's heart",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021281",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021609",
+   "accession": "3DPX-021609",
+   "entryId": 21609,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · SCFE/SUFE Slipped Capital Femoral Epiphysis",
+   "greekTitle": null,
+   "originalTitle": "SCFE/SUFE Slipped Capital Femoral Epiphysis",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021609",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021621",
+   "accession": "3DPX-021621",
+   "entryId": 21621,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Renal Pelvis, Female, Left",
+   "greekTitle": null,
+   "originalTitle": "Renal Pelvis, Female, Left",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021621",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021621.glb",
+    "bytes": 60780,
+    "sha256": "8360b7b33dd5d24761768cfd6f639f5f777ebaa1051bea990b760714c74c92de",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021622",
+   "accession": "3DPX-021622",
+   "entryId": 21622,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Renal Pelvis, Female, Right",
+   "greekTitle": null,
+   "originalTitle": "Renal Pelvis, Female, Right",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021622",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021622.glb",
+    "bytes": 57316,
+    "sha256": "e44fe16d2f0da4c61aa87b5b47d528a4c3199f7331ac7757cb208a20be068715",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021623",
+   "accession": "3DPX-021623",
+   "entryId": 21623,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Renal Pelvis, Male, Left",
+   "greekTitle": null,
+   "originalTitle": "Renal Pelvis, Male, Left",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021623",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021623.glb",
+    "bytes": 68532,
+    "sha256": "6ad8e9c105b7a2b2a018846eb4a655405073af3b1763495db657cba4b3f223c4",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021624",
+   "accession": "3DPX-021624",
+   "entryId": 21624,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Renal Pelvis, Male, Right",
+   "greekTitle": null,
+   "originalTitle": "Renal Pelvis, Male, Right",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021624",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021624.glb",
+    "bytes": 54756,
+    "sha256": "c3f300ae5e6b6f51d339f894ba4e472c4c83c29deff86155c4a953012b163dd2",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021799",
+   "accession": "3DPX-021799",
+   "entryId": 21799,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lymphatic and Venous Valves",
+   "greekTitle": null,
+   "originalTitle": "Lymphatic and Venous Valves",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021799",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021799.glb",
+    "bytes": 531956,
+    "sha256": "1bdb1cc9e4c60916d89bd239d52e298e6ff367825ef804b7c6c4c0e8b13271ad",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-022787",
+   "accession": "3DPX-022787",
+   "entryId": 22787,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Human Heart 3d Model",
+   "greekTitle": null,
+   "originalTitle": "Human Heart 3d Model",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-022787",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-023212",
+   "accession": "3DPX-023212",
+   "entryId": 23212,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Visible Human Heart Vessels and Lungs",
+   "greekTitle": null,
+   "originalTitle": "Visible Human Heart Vessels and Lungs",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-023212",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:0c63ab9c39207ebaaf13a3ad5883908f43d2037889940d661762c2417292f308",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-023373",
    "accession": "3DPX-023373",
    "entryId": 23373,
@@ -3252,45 +7528,11 @@
      "OBJ"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023373.glb",
-    "bytes": 2696332,
-    "sha256": "9f7842bbde2b84954a31d0e6a4a1fd5900704b50f09911ac94981b4997dded2d",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": null,
-   "surfaces": [
-    "library",
-    "lesson",
-    "anatomy",
-    "exam",
-    "cockpit",
-    "atla"
-   ],
-   "saekChapters": [
-    {
-     "chapter": "02/11",
-     "occurrences": 10
-    },
-    {
-     "chapter": "01/13",
-     "occurrences": 6
-    },
-    {
-     "chapter": "10/17",
-     "occurrences": 6
-    },
-    {
-     "chapter": "02/10",
-     "occurrences": 5
-    },
-    {
-     "chapter": "01/4",
-     "occurrences": 4
-    }
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3564,6 +7806,51 @@
     "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023414.glb",
     "bytes": 84428,
     "sha256": "96afbdbda203232e072506bc4c8ceefd7af3cee4bc8281e80c22b27dc76e55b1",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-023525",
+   "accession": "3DPX-023525",
+   "entryId": 23525,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · 3DPX-015843 Female Pelvis Remix (Revised with Holes and Pegs for Assembly)",
+   "greekTitle": null,
+   "originalTitle": "3DPX-015843 Female Pelvis Remix (Revised with Holes and Pegs for Assembly)",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-023525",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023525.glb",
+    "bytes": 181260,
+    "sha256": "3ad8a9bf9a342e0142e5364a4a74c422eb5e7d60ff3978bb84cc3e160dc46e55",
     "format": "glb",
     "derived": false
    },
