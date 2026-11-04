@@ -1,0 +1,40 @@
+name: ATLA glossary source provenance audit (not medical certification)
+on:
+  pull_request:
+    paths:
+      - 'medical-terms.json'
+      - 'scripts/audit-atla-source-provenance-20261104.mjs'
+      - '.github/workflows/atla-glossary-source-coverage.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate all glossary records and compute direct-source coverage (read-only)
+        run: |
+          node --check scripts/audit-atla-source-provenance-20261104.mjs
+          node scripts/audit-atla-source-provenance-20261104.mjs
+      - name: Demonstrate fail-closed incomplete-coverage guard
+        run: |
+          if ATLA_CLAIM_ALL_SOURCES_VERIFIED=true node scripts/audit-atla-source-provenance-20261104.mjs; then
+            echo 'ERROR: unfinished evidence passed release-completeness gate'
+            exit 1
+          fi
+          echo 'PASS: incomplete source provenance cannot claim full verification'
+      - name: Attach a machine-readable source-coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-glossary-source-coverage-20261104
+          path: audit-results/atla-glossary-source-coverage-20261104.json
+          if-no-files-found: error
+          retention-days: 30
