@@ -102,8 +102,13 @@ for(const item of cases){
      const error=new Error('Cloudflare status '+response.status+' / code '+String(json?.errors?.[0]?.code||''));
      error.providerFailure=true;throw error;
    }
-   rawText=typeof json?.result?.response==='string'?json.result.response:
-     typeof json?.result?.output==='string'?json.result.output:'';
+   // Gemma 4 REST results use OpenAI-style choices[0].message.content.
+   // Legacy models may instead return response/output; all are untrusted until audited.
+   const resultBody=json?.result??json;
+   rawText=typeof resultBody?.choices?.[0]?.message?.content==='string'?resultBody.choices[0].message.content:
+     typeof resultBody?.response==='string'?resultBody.response:
+     typeof resultBody?.output==='string'?resultBody.output:'';
+   result.providerResponseKind=Array.isArray(resultBody?.choices)?'chat-choices':typeof resultBody?.response;
    return new ReadableStream({start(c){
      c.enqueue(encoder.encode('data: '+JSON.stringify({token:rawText})+'\n\ndata: [DONE]\n\n'));c.close();
    }});
