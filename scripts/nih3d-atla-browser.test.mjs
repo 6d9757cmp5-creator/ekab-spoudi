@@ -6,7 +6,7 @@ const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.
 let browser;
 async function ready(){
  for(let n=0;n<80;n++){
-  try{const r=await fetch(base+'/saek-course-01.html');if(r.ok)return;}catch{}
+  try{const r=await fetch(base+'/saek-course-01.html');await r.text();if(r.ok)return;}catch{}
   await new Promise(r=>setTimeout(r,250));
  }
  throw Error('ATLA browser test server unavailable');
