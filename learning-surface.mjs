@@ -84,7 +84,7 @@ if(isHome||isSaek||isEop){
    }
    bottom.append(why,steps);
    const panel=e('div','en-surface');panel.append(upper,bottom);
-   section.replaceChildren(panel,e('p','en-disclaimer','Τοπική, αυτοματοποιημένη εκπαιδευτική σύσταση. Δεν αλλάζει βαθμολογίες, δεν εξετάζει σημειώσεις και δεν αποστέλλει στοιχεία στον MENTOR AI.'));
+   section.replaceChildren(panel,e('p','en-disclaimer','Τοπική, αυτοματοποιημένη εκπαιδευτική σύσταση. Δεν αλλάζει βαθμολογίες, δεν εξετάζει σημειώσεις και δεν αποστέλλει στοιχεία στον ATLA.'));
   }
   let refreshQueued=false;
   function refresh(){
