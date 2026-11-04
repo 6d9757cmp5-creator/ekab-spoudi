@@ -10,7 +10,7 @@ import {biomedicalScope, NIH_BIOMEDICAL_SCOPE_STATUS as BIOMEDICAL_SCOPE} from '
 const FORMAT=new Set(['GLB','STL','OBJ','X3D','WRL','GLTF','PLY','3MF']);
 const SAFE_SOURCE=/^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[a-f0-9-]+\/output-files\/\d+$/i;
 const CATEGORY_PRIORITIES={'Anatomy':0,'Cells and Organelles':1,'Viruses':2,'Biomacromolecules':3,'Small Molecules':4,'Prosthetics':5,'Devices and Hardware':6};
-const DEFAULTS=Object.freeze({maxBatchBytes:1_000_000_000,maxFileBytes:200_000_000,maxOriginalFiles:400,maxModels:60});
+export const DEFAULTS=Object.freeze({maxBatchBytes:1_000_000_000,maxFileBytes:200_000_000,maxOriginalFiles:400,maxModels:60});
 // The owner states permission for every NIH source; each model keeps its original license text.
 const declaredLicense=value=>Boolean(String(value??'').trim())&&!/^unknown$/i.test(String(value).trim());
 
