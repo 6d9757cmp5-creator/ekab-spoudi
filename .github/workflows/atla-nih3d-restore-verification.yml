@@ -6,14 +6,12 @@ on:
       - 'scripts/nih3d_verify_release_restore.py'
       - 'scripts/test_nih3d_verify_release_restore.py'
       - '.github/workflows/atla-nih3d-restore-verification.yml'
-  push:
-    branches: [fix/nih3d-restore-verification-20261104]
   schedule:
     - cron: '23 */2 * * *'
 permissions:
   contents: write
 concurrency:
-  group: atla-nih3d-restore-verification-${{ github.ref }}
+  group: atla-nih3d-restore-verification
   cancel-in-progress: false
 jobs:
   verify:
@@ -38,7 +36,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sudo apt-get install -y zstd >/dev/null
-          python scripts/nih3d_verify_release_restore.py --limit 1
+          python scripts/nih3d_verify_release_restore.py --limit 3
       - name: Preserve the proof, including any failure it found
         if: always() && github.event_name != 'pull_request'
         run: |
