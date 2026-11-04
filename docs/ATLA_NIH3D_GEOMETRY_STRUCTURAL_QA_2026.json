@@ -1,15 +1,16 @@
 {
   "schemaVersion": 1,
   "status": "ORIGINAL_GEOMETRY_STRUCTURAL_SCREEN_ONLY",
-  "sourceModels": 54,
+  "sourceModels": 61,
   "counts": {
-    "sourceFilesChecked": 326,
-    "sha256Verified": 326,
-    "formatPassed": 326,
+    "sourceFilesChecked": 401,
+    "sha256Verified": 401,
+    "formatPassed": 401,
     "formatNeedsReview": 0,
     "formatInvalid": 0
   },
-  "verifiedBytes": 529915495,
+  "verifiedBytes": 626905605,
+  "reusedPriorVerificationFiles": 326,
   "scientificAccuracyValidated": 0,
   "clinicallyApprovedModels": 0,
   "sourceGeometryOriginalsVerified": true,
@@ -1938,6 +1939,89 @@
       "clinicalApproval": false
     },
     {
+      "entryId": 798,
+      "sourceAccession": "3DPX-000798",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951521",
+      "originalSHA256": "cf89065d12e64e8247be992f161bc5ac560ef7f6b6bff32d86efcb0f6b888c9b",
+      "verifiedBytes": 2852684,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 57052
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 798,
+      "sourceAccession": "3DPX-000798",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951523",
+      "originalSHA256": "f44b2f01153ece095a057cc11514bef72d4645b38bf53e3f1ee8a50c5f28c17a",
+      "verifiedBytes": 2985970,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 798,
+      "sourceAccession": "3DPX-000798",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951524",
+      "originalSHA256": "351d5f67320fb7ab03d3ad396c4d8a8ff14ee092a42d4f8510b1ce10c9aafa96",
+      "verifiedBytes": 4793396,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 798,
+      "sourceAccession": "3DPX-000798",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951526",
+      "originalSHA256": "d5a3361ac484f3c2d21f8122183b2f0f16c9e9fcf910a000479a371d0fceb351",
+      "verifiedBytes": 11707827,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 798,
+      "sourceAccession": "3DPX-000798",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951527",
+      "originalSHA256": "4d700dae782cd939c96875c2cb0acc4c9756ba5846689bd34dea0100b705b9bf",
+      "verifiedBytes": 4629587,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 27741,
+        "faces": 57052
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
       "entryId": 802,
       "sourceAccession": "3DPX-000802",
       "originalFormat": "STL",
@@ -2929,6 +3013,89 @@
         "kind": "Wavefront-OBJ",
         "vertices": 25596,
         "faces": 51819
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 826,
+      "sourceAccession": "3DPX-000826",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953745",
+      "originalSHA256": "72f38a300d8e705cb8dc19808cc3ce1f87895e19c1a3ea3b8df03c366b057212",
+      "verifiedBytes": 2735484,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 54708
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 826,
+      "sourceAccession": "3DPX-000826",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953747",
+      "originalSHA256": "824c64c3549172fd8e947b703353dee259392b60c0519d3188c627037c3f40f3",
+      "verifiedBytes": 2863502,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 826,
+      "sourceAccession": "3DPX-000826",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953748",
+      "originalSHA256": "5448d599d3f3d5467f63096d1051436e487641ec2981ce2fe8f25148e9ee11ad",
+      "verifiedBytes": 4596092,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 826,
+      "sourceAccession": "3DPX-000826",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953750",
+      "originalSHA256": "36351e8d9321e629bdc494c7277bfc8c6455e12e88d6809403bddf028630a6ba",
+      "verifiedBytes": 11227326,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 826,
+      "sourceAccession": "3DPX-000826",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953751",
+      "originalSHA256": "4c59eeebf4b7a035bef022d9aa752fb20e13d876f473a8cc3be7f4243c4ac5f7",
+      "verifiedBytes": 4479256,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 26569,
+        "faces": 54708
       },
       "medicalAccuracyReview": "NOT_PERFORMED",
       "clinicalApproval": false
@@ -4446,6 +4613,89 @@
       "clinicalApproval": false
     },
     {
+      "entryId": 7815,
+      "sourceAccession": "3DPX-007815",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976000",
+      "originalSHA256": "51cfe0381a5a013b20fb3847a3d4e6dbecbd7c581c11644af76651c1936bf267",
+      "verifiedBytes": 2764684,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 55292
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 7815,
+      "sourceAccession": "3DPX-007815",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976002",
+      "originalSHA256": "383fe833bf60b6a02cfea6a301b0ab19c3ce354d70630ff5eb77eb58705d9392",
+      "verifiedBytes": 2934545,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 7815,
+      "sourceAccession": "3DPX-007815",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976003",
+      "originalSHA256": "473823e85a353c9abb042bd85ea0e488bb58726e576b9b8d366bfe013255f7e3",
+      "verifiedBytes": 4643136,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 7815,
+      "sourceAccession": "3DPX-007815",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976005",
+      "originalSHA256": "7b2d1c4853c906db362f02c6fc5ab886dfcde21cea283e3475c06dc9ed2cb91b",
+      "verifiedBytes": 11311285,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 7815,
+      "sourceAccession": "3DPX-007815",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976006",
+      "originalSHA256": "0f4d1572662b8d6f7f9ed96733d63a751e6a2f6bd944ced323ad8a9c1dc61918",
+      "verifiedBytes": 4479811,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 27478,
+        "faces": 55292
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
       "entryId": 8134,
       "sourceAccession": "3DPX-008134",
       "originalFormat": "STL",
@@ -5439,6 +5689,1029 @@
         "meshCount": 2,
         "primitiveCount": 2,
         "accessorCount": 12
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479976",
+      "originalSHA256": "c10e6e27cd1a0a081f59492669b79bfc2f2297c1b15b6801c906241869bf0a48",
+      "verifiedBytes": 198204,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479978",
+      "originalSHA256": "07311be7a8312832cf8ae4c048354dd85f8377823f36744326ef120d25718d16",
+      "verifiedBytes": 503638,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 4102,
+        "faces": 8200
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479979",
+      "originalSHA256": "b2791d98e3a1ec4b41764dc9e8dd08b4f9d27c66e18e70dbd54127facf26aae8",
+      "verifiedBytes": 148852,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479987",
+      "originalSHA256": "0eacc7a8368e1b08d725489493d4c9ec8053e684cbc5552110970ead74ff0f9e",
+      "verifiedBytes": 296842,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479990",
+      "originalSHA256": "f7e54619bb27d7d8b1299522fbeae0643b599149a8337ef1b001eed476f2e673",
+      "verifiedBytes": 659192,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 4
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479991",
+      "originalSHA256": "315296c1e9638ee31b4ee8b3a73cf8fb29ce412fe0d02fcac4e691e464fa81d6",
+      "verifiedBytes": 236471,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479993",
+      "originalSHA256": "cb3efc56efc71105eda72e391813eff6afad089bda0e6c670e9886e84d89a35c",
+      "verifiedBytes": 1035900,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479996",
+      "originalSHA256": "6f3cd8d36794835aaec92af0144a3ff9a058f508658e3d6125971b9068a75bb3",
+      "verifiedBytes": 110484,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479998",
+      "originalSHA256": "8909466f546db0c0c79e43290a0a324198104ac48ba727e53b2b92f24f198ccf",
+      "verifiedBytes": 268865,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 2388,
+        "faces": 4316
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479999",
+      "originalSHA256": "adb9ef887c21f27c63c1d3257c26e6f1d61eeb5ab1e6492494a69114b4e80119",
+      "verifiedBytes": 84440,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480008",
+      "originalSHA256": "884921cf504eff68704069ed1c3b9c310d47e4a91ab04bed277b6632fb4cbd20",
+      "verifiedBytes": 215884,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 4316
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480010",
+      "originalSHA256": "5e89cb5a9d4f0c4d1cee24f726fda095566d15784cb9707a938b60211e313958",
+      "verifiedBytes": 110484,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480011",
+      "originalSHA256": "72e672dd99110d4d0abdd8d484d72411383ac7856615d241a50e1f44c22716a1",
+      "verifiedBytes": 219048,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480012",
+      "originalSHA256": "e7d3e286ac30eaf0a0aa2653e7d60dce57075391d832e65424c3b172d7f5353e",
+      "verifiedBytes": 84428,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23404,
+      "sourceAccession": "3DPX-023404",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480014",
+      "originalSHA256": "a9c8bec0ffe5fd0f05443a858a97d23573618cbb59f1db7821a5de5e99443147",
+      "verifiedBytes": 230773,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480960",
+      "originalSHA256": "6fe8bdf2e4b28372bd5a7bf3dab347e0c44dec741e90ff0fcbd9dab81db905d6",
+      "verifiedBytes": 186872,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480962",
+      "originalSHA256": "14779e69f3dccd526f1c24937a8877447d9534ee72046aec96b02f8542036c26",
+      "verifiedBytes": 474170,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 3866,
+        "faces": 7728
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480963",
+      "originalSHA256": "5ca903bd55d4222957e05eee1c5496fdf845e7973ca2b54d9a1e4ce0088fb86b",
+      "verifiedBytes": 140356,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480971",
+      "originalSHA256": "dc595dad1dec541ce613bf4d4863d3cdd1c35116130138f0ef45316d023c7d56",
+      "verifiedBytes": 292956,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480974",
+      "originalSHA256": "7c3f15c127064a9a4b48b6745dd36068656b3bc3adb97cdb267596f901668443",
+      "verifiedBytes": 650476,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 4
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480975",
+      "originalSHA256": "35a505f01c662edb57f0e62f084dbf746f27ad414da3b4eeccff18a72209398c",
+      "verifiedBytes": 230581,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480977",
+      "originalSHA256": "5c96ca782b8961d2cfbd5bb586e8faf2bdbcc0a8eadd731a8feacc7b88a5e027",
+      "verifiedBytes": 1027137,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480980",
+      "originalSHA256": "9f62506a311c21a1574e67bce6019f11d8e18e83ea2a5defc621f933ba392802",
+      "verifiedBytes": 110484,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480982",
+      "originalSHA256": "7488887d37c20a6cb0f852e3f0e5b89a0cf9ce2fd99c05cbbd43a4adcc0e45b3",
+      "verifiedBytes": 268399,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 2388,
+        "faces": 4316
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480983",
+      "originalSHA256": "6b6a331aebb3a136f9bdaa5e2dc33544c416f0979a48dc704391b77f29f7db6f",
+      "verifiedBytes": 84444,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480992",
+      "originalSHA256": "40c3d04798c03278bd5361db0649e181dd10ff4dbfce011c992cac0fe43841fb",
+      "verifiedBytes": 215884,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 4316
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480994",
+      "originalSHA256": "b5ab18072ae6b995501aaaf9fc7e6b2b83cc3ff67a2851c3b587fe5bbbf77cc5",
+      "verifiedBytes": 110488,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480995",
+      "originalSHA256": "085537b0866b3b8822eac12f51040e5fdbb0d93f0a69dbb656c1c47fd5222c6d",
+      "verifiedBytes": 220172,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480996",
+      "originalSHA256": "32c19ac1f5d07c251f421e615c7226eb873bee1883dd16286a69f32420fa494c",
+      "verifiedBytes": 84432,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23406,
+      "sourceAccession": "3DPX-023406",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480998",
+      "originalSHA256": "015af4528a5ef17e25788930c529a23adae2f037e613d6811ead66cc359b8f3f",
+      "verifiedBytes": 232084,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479466",
+      "originalSHA256": "06b09e433b1f5e7092d3be77af016f3cb188c45d978b00e7fa8c3aac2f4348ad",
+      "verifiedBytes": 241304,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479468",
+      "originalSHA256": "b23ca0944780dcccb7c46e4135a085b81c60fc69bc83bdb7185af3df47b65f5f",
+      "verifiedBytes": 616365,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 5000,
+        "faces": 9996
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479469",
+      "originalSHA256": "455dd21a33e4fb748fe25166085bb3cb0c26ffa1710eaca4a1aa5bc2ce2730e9",
+      "verifiedBytes": 181176,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479477",
+      "originalSHA256": "4220ee1579e5c4117ce680ea7efce1053d02ec2c63f65ec88466572472c851b9",
+      "verifiedBytes": 310143,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479480",
+      "originalSHA256": "2ea2693cd03dd7966c0f793545ec6fe73afdfce7964e6a123c23b303ce9c8948",
+      "verifiedBytes": 678396,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 4
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479481",
+      "originalSHA256": "a8d8dc1544a8aff42434de93e6ae752cde52d6e116246b194c44994342cd90a2",
+      "verifiedBytes": 251657,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479483",
+      "originalSHA256": "30656802331ea4ceba30d03bd55a9c48006b89bd6ac345fdb2dc1c9afabccee2",
+      "verifiedBytes": 1079699,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479486",
+      "originalSHA256": "68d2f4f5e42b52bdab29b1b2d554e2908311765a9186b441f20e91a3f9f67f8f",
+      "verifiedBytes": 133752,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 4
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479488",
+      "originalSHA256": "67d5d855fade50b3a3f5c5fc86e9cbbc48a9ad43c3efdeb4e1374f4ffc1223e7",
+      "verifiedBytes": 233781,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479489",
+      "originalSHA256": "a1632d285a3d7851df0507fa321dbe6d770a1968c0dd8389c14ed0d49b58dccd",
+      "verifiedBytes": 117084,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 4
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479493",
+      "originalSHA256": "27fa3a7265b1e8561e40db4ce906dff58b3d627968d2d186557c8ca2be01cba0",
+      "verifiedBytes": 225451,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479498",
+      "originalSHA256": "6aa99cb7692636e8513e9882f3ae85887e641509478d4f18da098172ac639c1e",
+      "verifiedBytes": 219884,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 4396
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479500",
+      "originalSHA256": "dd5085bb5e1ba25dcb43c4d5a5f4a416d59e254f2a393aed07734ba054db4bd1",
+      "verifiedBytes": 113748,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479501",
+      "originalSHA256": "8e88ac4b50d08c5173c82a2a529d8d7c43c04c884e1e444278e49b7c8e755421",
+      "verifiedBytes": 224379,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23410,
+      "sourceAccession": "3DPX-023410",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479502",
+      "originalSHA256": "2dc83af82ae5a0be39d6e0e3bbf531d46981181026fcc76b9d105f3fbe89d1df",
+      "verifiedBytes": 87212,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479014",
+      "originalSHA256": "b57b11b427d0008e8c418646962b7c563fad3c5797050ab4f061fbecbecddbe8",
+      "verifiedBytes": 248412,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479016",
+      "originalSHA256": "fd9ea379b939ad3a374f703b06002e27fa4f478dfb6784171c36f5a06c44e379",
+      "verifiedBytes": 635721,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 5148,
+        "faces": 10292
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479017",
+      "originalSHA256": "aec5f892bbbf28e1bc77aa8ef51a60ebc10ed348020438a5f8751f08ad796dfd",
+      "verifiedBytes": 186508,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479025",
+      "originalSHA256": "aaba4be4d195a2011df7cdd85b54713290c9b0f372cbc64db06b310c085a4159",
+      "verifiedBytes": 284654,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479028",
+      "originalSHA256": "07b9a30e2d4f0561b2ad3825242a8d6ad828c11fb0b6f97884b1dd3ba1e9da74",
+      "verifiedBytes": 642656,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 4
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479029",
+      "originalSHA256": "9d589e67516aa5129a16103fb94c73eea087fc5a14b56b016292ef17b910237e",
+      "verifiedBytes": 220270,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479031",
+      "originalSHA256": "757776a6556b74ac646fd630aa323e9a79c2f0cf878e844d2c071a385a246706",
+      "verifiedBytes": 997571,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479034",
+      "originalSHA256": "ed9fa3013f1525c7849f663084bb2fc7043959a62eb2fe92172adf0a6745c542",
+      "verifiedBytes": 110480,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "OBJ",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479036",
+      "originalSHA256": "03cf9b4048d0d102fbefcd906454bb311284a4f9cb8fe2cb3077ee7612ee1401",
+      "verifiedBytes": 268012,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "Wavefront-OBJ",
+        "vertices": 2388,
+        "faces": 4316
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479037",
+      "originalSHA256": "e243151d01834b42a85abab46bfd2db3423d392b43be5aaa475b3f13c523b64f",
+      "verifiedBytes": 84440,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "STL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479046",
+      "originalSHA256": "5d7e5c48ebd30a02b408abbcd78dac0eebb38c6c382754e96d134d35b7c3c9bc",
+      "verifiedBytes": 215884,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "binary-STL",
+        "triangleCount": 4316
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479048",
+      "originalSHA256": "d63e861cb9769cf72705487ae79ba82208541f73b841251954751b2d758c4369",
+      "verifiedBytes": 110480,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "X3D",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479049",
+      "originalSHA256": "bf8860fee67bcc09865e27aa7a04eb46c6dd9f0e8a53f27971053acbe84afffb",
+      "verifiedBytes": 218806,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "X3D-source",
+        "structure": "signature-detected"
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "GLB",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479050",
+      "originalSHA256": "e9a06a5d8f5495de4555e5745a3957c8983218ac8c38fa2d57fa07d608a196ff",
+      "verifiedBytes": 84424,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "glTF-2-GLB",
+        "meshCount": 1,
+        "primitiveCount": 1,
+        "accessorCount": 3
+      },
+      "medicalAccuracyReview": "NOT_PERFORMED",
+      "clinicalApproval": false
+    },
+    {
+      "entryId": 23413,
+      "sourceAccession": "3DPX-023413",
+      "originalFormat": "WRL",
+      "originalFileURL": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479052",
+      "originalSHA256": "047cd6e80dc6c5563ebf9894f2bc7ce04fd4ee0822dcb58ee1599fdbf82a5f02",
+      "verifiedBytes": 230736,
+      "persistedImage": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "formatCheck": {
+        "status": "STRUCTURAL_CHECK_PASSED",
+        "kind": "VRML-source",
+        "structure": "header-detected"
       },
       "medicalAccuracyReview": "NOT_PERFORMED",
       "clinicalApproval": false
