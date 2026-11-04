@@ -6,6 +6,11 @@ const categoryFor=id=>CATEGORIES.find(c=>c.id===id)?.label||'Εκπαιδευτ�
 function appendLink(parent,label,url,cls){
  const a=document.createElement('a');a.textContent=label;a.href=url;a.className=cls;parent.append(a);
 }
+function appendAtlaStudyButton(parent,topic){
+ const button=document.createElement('button');button.type='button';button.className='btn soft';
+ button.textContent='Μελέτη με ATLA';button.dataset.atlaOpen='true';button.dataset.atlaContext=topic;
+ parent.append(button);
+}
 function renderCategories(){
  const nav=$('protocol-categories');nav.replaceChildren();
  const options=[{id:'all',label:'Όλα τα θέματα',icon:'▦'},...CATEGORIES];
@@ -31,9 +36,9 @@ function renderTopics(){
   const badge=document.createElement('span');badge.className='tag';badge.textContent='Όχι επαληθευμένο επιχειρησιακό πρωτόκολλο';
   const actions=document.createElement('div');actions.className='actions';
   const topic=encodeURIComponent(t.id);
-  appendLink(actions,'MENTOR | PROTOCOL LAB','mentor-protocol-suite.html?topic='+topic+'&view=lab','btn');
-  appendLink(actions,'MENTOR DEBRIEF','mentor-protocol-suite.html?topic='+topic+'&view=debrief','btn alt');
-  appendLink(actions,'Μελέτη με MENTOR','mentor-lab.html?topic='+topic+'#mentor-presence','btn soft');
+  appendLink(actions,'ATLA · Πρακτική πρωτοκόλλων','mentor-protocol-suite.html?topic='+topic+'&view=lab','btn');
+  appendLink(actions,'Ανασκόπηση προσπάθειας','mentor-protocol-suite.html?topic='+topic+'&view=debrief','btn alt');
+  appendAtlaStudyButton(actions,t.name);
   card.append(title,category,desc,badge,actions);list.append(card);
  }
 }
