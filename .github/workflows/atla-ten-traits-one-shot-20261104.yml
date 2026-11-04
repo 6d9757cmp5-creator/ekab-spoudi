@@ -1,0 +1,40 @@
+name: ATLA isolated 10 teacher traits — one-shot Free AI QA
+on:
+  push:
+    branches: [test/atla-ten-teacher-behaviors-20261104]
+    paths:
+      - '.github/workflows/atla-ten-traits-one-shot-20261104.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: atla-10-one-shot-20261104
+  cancel-in-progress: false
+jobs:
+  check:
+    if: github.event_name == 'push' && github.event.head_commit.message == 'Run isolated ATLA 10-behavior live audit (Workers Free)'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_FREE_PLAN_CONFIRMED: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify syntax and existing ATLA deterministic safety tests
+        run: |
+          node --check scripts/atla-ten-teacher-behaviors-live-20261104.mjs
+          node --test atla/ai/teaching-policy.test.mjs atla/ai/safe-stream.test.mjs atla/student/profile.test.mjs
+      - name: Ten ATLA teacher traits, synthetic inputs, <= 10 Free-only model calls, no deployment
+        run: node scripts/atla-ten-teacher-behaviors-live-20261104.mjs
+      - name: Keep audit evidence even if a model test fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-ten-traits-free-live-20261104
+          path: audit-results/atla-ten-teacher-behaviors.json
+          if-no-files-found: warn
+          retention-days: 30
