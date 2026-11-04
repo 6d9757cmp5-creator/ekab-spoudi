@@ -46,3 +46,13 @@ test('ATLA reuses one existing AI path, retains no-write behavior and exam guard
  const config=read('atla/ai/config.mjs');
  assert.ok(config.includes('endpoint:""'),'Migrated chat must not claim a deployed AI endpoint');
 });
+
+
+test('legacy simulation and learning recommendation render ATLA-only branding',()=>{
+ const cockpit=read('mentor-live.html');
+ const recommendation=read('learning-surface.mjs');
+ assert.doesNotMatch(cockpit,/>MENTOR DEBRIEF\b/i,'Clinical Cockpit must not display the retired assistant');
+ assert.match(cockpit,/ATLA · εκπαιδευτική ανασκόπηση αποστολής/);
+ assert.doesNotMatch(recommendation,/στον MENTOR AI/i,'Study guidance must not display the retired assistant');
+ assert.match(recommendation,/δεν αποστέλλει στοιχεία στον ATLA/);
+});
