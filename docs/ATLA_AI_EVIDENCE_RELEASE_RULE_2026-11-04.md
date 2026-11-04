@@ -27,8 +27,8 @@
 
 - Εντοπισμός ακριβούς `main`, ανοιχτών PR/branches, πιθανών συγκρούσεων, προστασίας NIH3D και ακεραιότητας δεδομένων.
 - Μόνο στοχευμένες αλλαγές σε απομονωμένο branch με ελεγχόμενο diff και δυνατότητα rollback.
-- Πράσινα αναγκαία GitHub Actions **στο ίδιο τελευταίο commit** και ανεξάρτητος λειτουργικός browser έλεγχος. `Vercel READY` δεν ισοδυναμεί με δοκιμή χρήσης. `BLOCKED` λόγω provider limit δεν ισοδυναμεί με αποτυχία κώδικα.
-- Πριν από production merge ελέγχονται οι ξεχωριστές NIH3D/integration release εξαρτήσεις και δεν παρακάμπτεται κανένα ενεργό GitHub/Vercel/Appwrite security gate.
+- Πράσινα αναγκαία GitHub Actions **στο ίδιο τελευταίο commit** και ανεξάρτητος λειτουργικός browser έλεγχος. Για τη δημοσιευμένη εκπαιδευτική εφαρμογή απαιτείται έλεγχος στο πραγματικό GitHub Pages URL και ταυτοποίηση του commit/SHA. Ο έλεγχος τοπικού browser δεν υποκαθιστά τον έλεγχο δημοσίευσης.
+- Πριν από production merge ελέγχονται οι ξεχωριστές NIH3D/integration release εξαρτήσεις και δεν παρακάμπτεται κανένα ενεργό GitHub/Appwrite security gate. Η υποδομή δημοσίευσης της εκπαιδευτικής εφαρμογής είναι GitHub Pages, χωρίς προϋπόθεση τρίτου hosting.
 - Δημοσίευση μόνο με πραγματικά επαληθευμένο αποτέλεσμα και καταγραφή του τελικού SHA, URL, αποτελεσμάτων και κατηγορίας `SOURCE-CHECKED EDUCATIONAL MATERIAL`. Ποτέ `official EKAB protocol` ή `clinical certification` χωρίς αντίστοιχη απόδειξη.
 
 ## Εφαρμογή στο PR #215
