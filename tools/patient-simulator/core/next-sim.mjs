@@ -12,13 +12,13 @@ export const TOOLS=[
  {id:'position',icon:'♧',label:'Στάση'},
  {id:'dialogue',icon:'◌',label:'Συνομιλία'},
  {id:'exam',icon:'✚',label:'Εξέταση'},
- {id:'monitor',icon:'▤',label:'Παρακολούθηση'},
+ {id:'monitor',icon:'▤',label:'Monitoring'},
  {id:'tests',icon:'◇',label:'Εξετάσεις'},
  {id:'call',icon:'☎',label:'Επικοινωνία'},
  {id:'interventions',icon:'▣',label:'Ενέργειες'},
  {id:'meds',icon:'⊘',label:'Φάρμακα'},
  {id:'records',icon:'▤',label:'Φάκελος'},
- {id:'debrief',icon:'◎',label:'Ανασκόπηση'}
+ {id:'debrief',icon:'◎',label:'Debrief'}
 ];
 export const ACTIONS={
  position:[
