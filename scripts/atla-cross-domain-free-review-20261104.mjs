@@ -52,10 +52,11 @@ const invoke=async(model,messages,cap)=>{
  return {text:content,usage:d?.usage??j?.usage??null,finish};
 };
 const enc=new TextEncoder();
-let failed=false;
+let failed=false,providerStopped=false;
 for(const item of cases){
  const e={id:item.id,term:item.term,question:item.q,called:false,serverValidated:false,workerAccepted:false,markerPassed:false,rawOutput:'',result:'not_run'};
  result.cases.push(e);
+ if(providerStopped){e.result='not_run_after_provider_error';save();continue;}
  const records=retrieve(item.q,medicalTerms.items,{k:4,minScore:3});
  const one=records.filter(x=>x.term===item.term);
  e.serverValidated=one.length===1&&verifiedPassages(item.q,one).length===1;
@@ -66,7 +67,10 @@ for(const item of cases){
  const env={MENTOR_PROVIDER:'workers-ai',MENTOR_FREE_PLAN_CONFIRMED:'true',MENTOR_MODEL:MAIN_MODEL,DAILY_CAP:'6',
    AI:{run:async(model,payload)=>{
      if(model!==MAIN_MODEL)throw Error('unexpected model');
-     const out=await invoke(model,payload.messages,350);e.called=true;modelReply=out.text;e.providerUsage=out.usage;
+     e.called=true;
+     let out;
+     try{out=await invoke(model,payload.messages,350);}catch(err){e.providerError=String(err.message).slice(0,140);throw err;}
+     modelReply=out.text;e.providerUsage=out.usage;
      return new ReadableStream({start(controller){controller.enqueue(enc.encode('data: '+JSON.stringify({token:modelReply})+'\n\ndata: [DONE]\n\n'));controller.close();}});
    }}
  };
@@ -80,7 +84,8 @@ for(const item of cases){
     :item.must.every(word=>norm(modelReply).includes(word));
   e.result=e.workerAccepted&&e.markerPassed?'screening_pass':'screening_fail';
   if(!e.workerAccepted||!e.markerPassed)failed=true;
- }catch(err){e.result='provider_or_guard_error';e.error=String(err.message).slice(0,120);failed=true;}
+  if(e.providerError){providerStopped=true;e.result='provider_unavailable';}
+ }catch(err){e.result='provider_or_guard_error';e.error=String(err.message).slice(0,120);failed=true;providerStopped=true;}
  console.log('ATLA_CROSS_DOMAIN',item.id,e.result,'HTTP',e.workerHttpStatus||'error');
  save();
 }
