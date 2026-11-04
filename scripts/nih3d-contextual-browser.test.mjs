@@ -148,11 +148,10 @@ try{
  const {nih}=tracked(page);
  const results=[];
  for(const model of served){
-  const tool=model.surfaces.includes('cockpit')?'cockpit':'anatomy';
   await visit(page,'/ui-tools/atla-resource-preview.html?tool=anatomy&dataset=nih&model='+model.accession);
   await page.waitForFunction(()=>{const s=document.querySelector('#source-status');return s&&(/Φορτώθηκε/.test(s.textContent)||s.dataset.error==='true')},null,{timeout:90000});
   const status=await page.locator('#source-status').innerText();
-  results.push({accession:model.accession,tool,loaded:/Φορτώθηκε/.test(status),status,bytes:model.delivery.bytes});
+  results.push({accession:model.accession,loaded:/Φορτώθηκε/.test(status),status,bytes:model.delivery.bytes});
  }
  await ctx.close();
  const failed=results.filter(r=>!r.loaded);

@@ -1,0 +1,677 @@
+{
+  "schema": "nih3d-historical-recovery-inventory-v1",
+  "generated_at_utc": "2026-11-04T20:31:50.456162+00:00",
+  "status": "INCOMPLETE",
+  "limitations": [
+    "RESULT marker presence does not independently verify every Release byte",
+    "Missing canonical shards cannot be inferred from current Actions artifacts alone",
+    "NIH model clinical or scientific approval is not assessed",
+    "This inventory does not trigger any additional recovery workflow"
+  ],
+  "unique_canonical_artifact_starts_seen": 114,
+  "durable_result_marker_starts": 26,
+  "durable_result_marker_ids": [
+    1301,
+    1501,
+    1601,
+    1701,
+    1801,
+    1901,
+    2001,
+    2101,
+    2201,
+    2301,
+    2401,
+    2501,
+    2601,
+    2701,
+    2801,
+    2901,
+    3001,
+    3101,
+    3201,
+    3501,
+    3601,
+    3701,
+    3801,
+    3901,
+    4001,
+    4101
+  ],
+  "already_saved_artifact_starts_seen": 26,
+  "recoverable_artifact_starts": 88,
+  "recoverable_bytes": 1107056878926,
+  "earliest_recoverable_expiry_utc": "2026-11-09T22:20:06Z",
+  "expired_without_result_marker_starts": [],
+  "unknown_state_starts": [],
+  "recoverable": [
+    {
+      "start": 3301,
+      "end": 3400,
+      "artifact_id": 13184307512,
+      "size_bytes": 14975827908,
+      "expires_at": "2026-11-09T22:20:06Z"
+    },
+    {
+      "start": 3401,
+      "end": 3500,
+      "artifact_id": 13185840887,
+      "size_bytes": 12178464047,
+      "expires_at": "2026-11-09T22:38:07Z"
+    },
+    {
+      "start": 4201,
+      "end": 4300,
+      "artifact_id": 13200523825,
+      "size_bytes": 15790166133,
+      "expires_at": "2026-11-10T03:06:46Z"
+    },
+    {
+      "start": 4301,
+      "end": 4400,
+      "artifact_id": 13202953349,
+      "size_bytes": 17871955982,
+      "expires_at": "2026-11-10T03:59:19Z"
+    },
+    {
+      "start": 4401,
+      "end": 4500,
+      "artifact_id": 13205356497,
+      "size_bytes": 34297770865,
+      "expires_at": "2026-11-10T04:46:47Z"
+    },
+    {
+      "start": 4501,
+      "end": 4600,
+      "artifact_id": 13207237493,
+      "size_bytes": 19334400382,
+      "expires_at": "2026-11-10T05:31:48Z"
+    },
+    {
+      "start": 4601,
+      "end": 4700,
+      "artifact_id": 13208176357,
+      "size_bytes": 17254994194,
+      "expires_at": "2026-11-10T05:50:51Z"
+    },
+    {
+      "start": 4701,
+      "end": 4800,
+      "artifact_id": 13208198539,
+      "size_bytes": 5701981527,
+      "expires_at": "2026-11-10T06:07:09Z"
+    },
+    {
+      "start": 4801,
+      "end": 4900,
+      "artifact_id": 13210806618,
+      "size_bytes": 13938105533,
+      "expires_at": "2026-11-10T06:44:19Z"
+    },
+    {
+      "start": 4901,
+      "end": 5000,
+      "artifact_id": 13210438876,
+      "size_bytes": 11881412767,
+      "expires_at": "2026-11-10T06:58:42Z"
+    },
+    {
+      "start": 5001,
+      "end": 5100,
+      "artifact_id": 13213197639,
+      "size_bytes": 15340341439,
+      "expires_at": "2026-11-10T07:51:10Z"
+    },
+    {
+      "start": 5101,
+      "end": 5200,
+      "artifact_id": 13213683101,
+      "size_bytes": 6968267078,
+      "expires_at": "2026-11-10T07:57:01Z"
+    },
+    {
+      "start": 5201,
+      "end": 5300,
+      "artifact_id": 13216031977,
+      "size_bytes": 2052345743,
+      "expires_at": "2026-11-10T08:38:47Z"
+    },
+    {
+      "start": 5301,
+      "end": 5400,
+      "artifact_id": 13216925292,
+      "size_bytes": 1728784930,
+      "expires_at": "2026-11-10T08:40:48Z"
+    },
+    {
+      "start": 5401,
+      "end": 5500,
+      "artifact_id": 13216599200,
+      "size_bytes": 846784757,
+      "expires_at": "2026-11-10T08:58:52Z"
+    },
+    {
+      "start": 5501,
+      "end": 5600,
+      "artifact_id": 13216496570,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:41:42Z"
+    },
+    {
+      "start": 5601,
+      "end": 5700,
+      "artifact_id": 13216042527,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:42:16Z"
+    },
+    {
+      "start": 5701,
+      "end": 5800,
+      "artifact_id": 13216221689,
+      "size_bytes": 16056675,
+      "expires_at": "2026-11-10T08:43:16Z"
+    },
+    {
+      "start": 5801,
+      "end": 5900,
+      "artifact_id": 13216101799,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:43:45Z"
+    },
+    {
+      "start": 5901,
+      "end": 6000,
+      "artifact_id": 13217200193,
+      "size_bytes": 19662924,
+      "expires_at": "2026-11-10T08:44:47Z"
+    },
+    {
+      "start": 6001,
+      "end": 6100,
+      "artifact_id": 13216851110,
+      "size_bytes": 22896310,
+      "expires_at": "2026-11-10T08:46:04Z"
+    },
+    {
+      "start": 6101,
+      "end": 6200,
+      "artifact_id": 13216651924,
+      "size_bytes": 46697929,
+      "expires_at": "2026-11-10T08:47:01Z"
+    },
+    {
+      "start": 6201,
+      "end": 6300,
+      "artifact_id": 13217470130,
+      "size_bytes": 43904863,
+      "expires_at": "2026-11-10T08:48:06Z"
+    },
+    {
+      "start": 6301,
+      "end": 6400,
+      "artifact_id": 13216866555,
+      "size_bytes": 40699458,
+      "expires_at": "2026-11-10T08:49:33Z"
+    },
+    {
+      "start": 6401,
+      "end": 6500,
+      "artifact_id": 13217191195,
+      "size_bytes": 46525184,
+      "expires_at": "2026-11-10T08:51:06Z"
+    },
+    {
+      "start": 6501,
+      "end": 6600,
+      "artifact_id": 13217311357,
+      "size_bytes": 27779585,
+      "expires_at": "2026-11-10T08:52:11Z"
+    },
+    {
+      "start": 6601,
+      "end": 6700,
+      "artifact_id": 13216173715,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:52:40Z"
+    },
+    {
+      "start": 6701,
+      "end": 6800,
+      "artifact_id": 13216702641,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:53:04Z"
+    },
+    {
+      "start": 6801,
+      "end": 6900,
+      "artifact_id": 13216832499,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:53:33Z"
+    },
+    {
+      "start": 6901,
+      "end": 7000,
+      "artifact_id": 13216428712,
+      "size_bytes": 53306429,
+      "expires_at": "2026-11-10T08:54:48Z"
+    },
+    {
+      "start": 7001,
+      "end": 7100,
+      "artifact_id": 13217565938,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:55:16Z"
+    },
+    {
+      "start": 7101,
+      "end": 7200,
+      "artifact_id": 13217620258,
+      "size_bytes": 14886,
+      "expires_at": "2026-11-10T08:55:47Z"
+    },
+    {
+      "start": 7201,
+      "end": 7300,
+      "artifact_id": 13219813768,
+      "size_bytes": 9391952646,
+      "expires_at": "2026-11-10T09:47:35Z"
+    },
+    {
+      "start": 7301,
+      "end": 7400,
+      "artifact_id": 13221225536,
+      "size_bytes": 12473085896,
+      "expires_at": "2026-11-10T09:53:45Z"
+    },
+    {
+      "start": 7401,
+      "end": 7500,
+      "artifact_id": 13223104900,
+      "size_bytes": 17085937243,
+      "expires_at": "2026-11-10T10:51:07Z"
+    },
+    {
+      "start": 7501,
+      "end": 7600,
+      "artifact_id": 13230466081,
+      "size_bytes": 37513260963,
+      "expires_at": "2026-11-10T12:17:48Z"
+    },
+    {
+      "start": 7601,
+      "end": 7700,
+      "artifact_id": 13228134871,
+      "size_bytes": 20269943417,
+      "expires_at": "2026-11-10T12:08:46Z"
+    },
+    {
+      "start": 7701,
+      "end": 7800,
+      "artifact_id": 13231623572,
+      "size_bytes": 10139254742,
+      "expires_at": "2026-11-10T12:55:02Z"
+    },
+    {
+      "start": 7801,
+      "end": 7900,
+      "artifact_id": 13234470401,
+      "size_bytes": 10479956304,
+      "expires_at": "2026-11-10T13:19:37Z"
+    },
+    {
+      "start": 7901,
+      "end": 8000,
+      "artifact_id": 13237372568,
+      "size_bytes": 20117046373,
+      "expires_at": "2026-11-10T14:13:50Z"
+    },
+    {
+      "start": 8001,
+      "end": 8100,
+      "artifact_id": 13237087846,
+      "size_bytes": 11212719149,
+      "expires_at": "2026-11-10T14:08:49Z"
+    },
+    {
+      "start": 8101,
+      "end": 8200,
+      "artifact_id": 13242555142,
+      "size_bytes": 11621919885,
+      "expires_at": "2026-11-10T15:03:53Z"
+    },
+    {
+      "start": 8201,
+      "end": 8300,
+      "artifact_id": 13244191736,
+      "size_bytes": 16234136061,
+      "expires_at": "2026-11-10T15:25:47Z"
+    },
+    {
+      "start": 8301,
+      "end": 8400,
+      "artifact_id": 13247762596,
+      "size_bytes": 15344090451,
+      "expires_at": "2026-11-10T16:08:25Z"
+    },
+    {
+      "start": 8401,
+      "end": 8500,
+      "artifact_id": 13249539454,
+      "size_bytes": 14605725496,
+      "expires_at": "2026-11-10T16:38:10Z"
+    },
+    {
+      "start": 8501,
+      "end": 8600,
+      "artifact_id": 13255431861,
+      "size_bytes": 22711245537,
+      "expires_at": "2026-11-10T17:35:01Z"
+    },
+    {
+      "start": 8601,
+      "end": 8700,
+      "artifact_id": 13254834018,
+      "size_bytes": 13124795582,
+      "expires_at": "2026-11-10T17:41:23Z"
+    },
+    {
+      "start": 8701,
+      "end": 8800,
+      "artifact_id": 13261207322,
+      "size_bytes": 13033551442,
+      "expires_at": "2026-11-10T18:49:07Z"
+    },
+    {
+      "start": 8801,
+      "end": 8900,
+      "artifact_id": 13264986233,
+      "size_bytes": 26421141079,
+      "expires_at": "2026-11-10T19:23:06Z"
+    },
+    {
+      "start": 8901,
+      "end": 9000,
+      "artifact_id": 13266512278,
+      "size_bytes": 15969473412,
+      "expires_at": "2026-11-10T20:05:43Z"
+    },
+    {
+      "start": 9001,
+      "end": 9100,
+      "artifact_id": 13270152109,
+      "size_bytes": 25724071650,
+      "expires_at": "2026-11-10T20:44:18Z"
+    },
+    {
+      "start": 9101,
+      "end": 9200,
+      "artifact_id": 13269904500,
+      "size_bytes": 11357200111,
+      "expires_at": "2026-11-10T21:03:17Z"
+    },
+    {
+      "start": 9201,
+      "end": 9300,
+      "artifact_id": 13274310440,
+      "size_bytes": 11206592191,
+      "expires_at": "2026-11-10T21:48:49Z"
+    },
+    {
+      "start": 9301,
+      "end": 9400,
+      "artifact_id": 13274644941,
+      "size_bytes": 13473987383,
+      "expires_at": "2026-11-10T22:12:32Z"
+    },
+    {
+      "start": 9401,
+      "end": 9500,
+      "artifact_id": 13278154999,
+      "size_bytes": 14286814503,
+      "expires_at": "2026-11-10T22:51:43Z"
+    },
+    {
+      "start": 9501,
+      "end": 9600,
+      "artifact_id": 13281916989,
+      "size_bytes": 23566720443,
+      "expires_at": "2026-11-10T23:50:17Z"
+    },
+    {
+      "start": 9601,
+      "end": 9700,
+      "artifact_id": 13282696328,
+      "size_bytes": 12229067629,
+      "expires_at": "2026-11-10T23:51:01Z"
+    },
+    {
+      "start": 9701,
+      "end": 9800,
+      "artifact_id": 13286205024,
+      "size_bytes": 15611866894,
+      "expires_at": "2026-11-11T00:58:00Z"
+    },
+    {
+      "start": 9801,
+      "end": 9900,
+      "artifact_id": 13286128503,
+      "size_bytes": 20896723733,
+      "expires_at": "2026-11-11T01:21:20Z"
+    },
+    {
+      "start": 9901,
+      "end": 10000,
+      "artifact_id": 13289349380,
+      "size_bytes": 21013550033,
+      "expires_at": "2026-11-11T02:20:37Z"
+    },
+    {
+      "start": 10001,
+      "end": 10100,
+      "artifact_id": 13290466747,
+      "size_bytes": 14340179437,
+      "expires_at": "2026-11-11T02:27:33Z"
+    },
+    {
+      "start": 10101,
+      "end": 10200,
+      "artifact_id": 13294458941,
+      "size_bytes": 30141911184,
+      "expires_at": "2026-11-11T04:01:52Z"
+    },
+    {
+      "start": 10201,
+      "end": 10300,
+      "artifact_id": 13295580663,
+      "size_bytes": 24609301044,
+      "expires_at": "2026-11-11T04:10:23Z"
+    },
+    {
+      "start": 10301,
+      "end": 10400,
+      "artifact_id": 13298522447,
+      "size_bytes": 13386258766,
+      "expires_at": "2026-11-11T05:29:04Z"
+    },
+    {
+      "start": 10401,
+      "end": 10500,
+      "artifact_id": 13298352750,
+      "size_bytes": 21275343528,
+      "expires_at": "2026-11-11T05:28:39Z"
+    },
+    {
+      "start": 10501,
+      "end": 10600,
+      "artifact_id": 13300697254,
+      "size_bytes": 9628821942,
+      "expires_at": "2026-11-11T06:22:08Z"
+    },
+    {
+      "start": 10601,
+      "end": 10700,
+      "artifact_id": 13300589809,
+      "size_bytes": 15416280326,
+      "expires_at": "2026-11-11T06:27:49Z"
+    },
+    {
+      "start": 10701,
+      "end": 10800,
+      "artifact_id": 13304727157,
+      "size_bytes": 22680164672,
+      "expires_at": "2026-11-11T07:47:00Z"
+    },
+    {
+      "start": 10801,
+      "end": 10900,
+      "artifact_id": 13305623951,
+      "size_bytes": 25113834562,
+      "expires_at": "2026-11-11T08:07:28Z"
+    },
+    {
+      "start": 10901,
+      "end": 11000,
+      "artifact_id": 13309145534,
+      "size_bytes": 13565878762,
+      "expires_at": "2026-11-11T08:52:27Z"
+    },
+    {
+      "start": 11101,
+      "end": 11200,
+      "artifact_id": 13311414531,
+      "size_bytes": 16089091446,
+      "expires_at": "2026-11-11T09:52:42Z"
+    },
+    {
+      "start": 11201,
+      "end": 11300,
+      "artifact_id": 13314456298,
+      "size_bytes": 11278981689,
+      "expires_at": "2026-11-11T10:32:29Z"
+    },
+    {
+      "start": 11301,
+      "end": 11400,
+      "artifact_id": 13317605537,
+      "size_bytes": 23651485289,
+      "expires_at": "2026-11-11T11:21:34Z"
+    },
+    {
+      "start": 11401,
+      "end": 11500,
+      "artifact_id": 13316422255,
+      "size_bytes": 11898070410,
+      "expires_at": "2026-11-11T11:24:29Z"
+    },
+    {
+      "start": 11501,
+      "end": 11600,
+      "artifact_id": 13318667475,
+      "size_bytes": 9707755199,
+      "expires_at": "2026-11-11T12:03:14Z"
+    },
+    {
+      "start": 11601,
+      "end": 11700,
+      "artifact_id": 13322163916,
+      "size_bytes": 16442831476,
+      "expires_at": "2026-11-11T12:40:46Z"
+    },
+    {
+      "start": 11701,
+      "end": 11800,
+      "artifact_id": 13325650790,
+      "size_bytes": 12745839630,
+      "expires_at": "2026-11-11T13:05:52Z"
+    },
+    {
+      "start": 11801,
+      "end": 11900,
+      "artifact_id": 13330277806,
+      "size_bytes": 21919044859,
+      "expires_at": "2026-11-11T14:06:55Z"
+    },
+    {
+      "start": 11901,
+      "end": 12000,
+      "artifact_id": 13329949608,
+      "size_bytes": 12597108484,
+      "expires_at": "2026-11-11T14:14:32Z"
+    },
+    {
+      "start": 12001,
+      "end": 12100,
+      "artifact_id": 13336850347,
+      "size_bytes": 6473411256,
+      "expires_at": "2026-11-11T15:00:57Z"
+    },
+    {
+      "start": 12101,
+      "end": 12200,
+      "artifact_id": 13340070797,
+      "size_bytes": 20560168670,
+      "expires_at": "2026-11-11T15:40:22Z"
+    },
+    {
+      "start": 12201,
+      "end": 12300,
+      "artifact_id": 13338338911,
+      "size_bytes": 6194427720,
+      "expires_at": "2026-11-11T15:35:13Z"
+    },
+    {
+      "start": 12301,
+      "end": 12400,
+      "artifact_id": 13342056921,
+      "size_bytes": 9621098809,
+      "expires_at": "2026-11-11T16:12:41Z"
+    },
+    {
+      "start": 12401,
+      "end": 12500,
+      "artifact_id": 13343915965,
+      "size_bytes": 11131503992,
+      "expires_at": "2026-11-11T16:32:24Z"
+    },
+    {
+      "start": 12501,
+      "end": 12600,
+      "artifact_id": 13347109057,
+      "size_bytes": 14869986495,
+      "expires_at": "2026-11-11T17:30:47Z"
+    },
+    {
+      "start": 12601,
+      "end": 12700,
+      "artifact_id": 13349761683,
+      "size_bytes": 15698298270,
+      "expires_at": "2026-11-11T17:57:13Z"
+    },
+    {
+      "start": 12701,
+      "end": 12800,
+      "artifact_id": 13356095639,
+      "size_bytes": 17838583342,
+      "expires_at": "2026-11-11T19:13:45Z"
+    },
+    {
+      "start": 12801,
+      "end": 12900,
+      "artifact_id": 13355238348,
+      "size_bytes": 20586135689,
+      "expires_at": "2026-11-11T19:14:27Z"
+    }
+  ],
+  "rescue_automation": {
+    "workflow_state": "active",
+    "recent_main_runs_seen": 6,
+    "latest_main_run": {
+      "id": 41905070288,
+      "event": "push",
+      "status": "queued",
+      "conclusion": null,
+      "created_at": "2026-11-04T20:16:44Z",
+      "html_url": "https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41905070288"
+    }
+  }
+}

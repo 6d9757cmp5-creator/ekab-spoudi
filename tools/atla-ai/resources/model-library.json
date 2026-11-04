@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "c58ff2cba9573ea89d5a99938006f6549aa4782b",
+ "ledgerCommit": null,
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -208,7 +208,7 @@
    "z-anatomy": 5,
    "quaternius": 2,
    "patients": 3,
-   "makehuman": 2,
+   "makehuman": 10,
    "makehuman-rigged": 1
   },
   "nihVerifiedModels": 61,
@@ -4209,6 +4209,118 @@
     "path": "tools/patient-simulator/resources/makehuman/base.mhclo",
     "bytes": 216208,
     "sha256": "3020f534e7fa07961cfcfbb997bab1644ad2e1af95ef992dfe0747b412e3aace"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/rigs/default.mhskel",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "default.mhskel",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/rigs/default.mhskel",
+    "bytes": 117790,
+    "sha256": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/rigs/default_weights.mhw",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "default weights.mhw",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/rigs/default_weights.mhw",
+    "bytes": 897521,
+    "sha256": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/animations/walks/walk1.bvh",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "walk1.bvh",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/animations/walks/walk1.bvh",
+    "bytes": 42516,
+    "sha256": "e6b30b03133b5f54799e62962d3d6c2393771c15fd5a5a2be434358fc332b6bc"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/eyes/high-poly/high-poly.mhclo",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "high-poly.mhclo",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/eyes/high-poly/high-poly.mhclo",
+    "bytes": 72490,
+    "sha256": "b183cfe37120ab726f9b3f2ea6cd3a64c44ce7b4bd91a77c841cf70c04f83a0d"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/eyes/high-poly/high-poly.obj",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "high-poly",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/eyes/high-poly/high-poly.obj",
+    "bytes": 100882,
+    "sha256": "da2493215b708a344c33dc72f2a9a5b8fa985dcc5a70ad3b208995cf871da8e1"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/eyes/materials/brown_eye.png",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "brown eye.png",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/eyes/materials/brown_eye.png",
+    "bytes": 610817,
+    "sha256": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/eyes/materials/brown.mhmat",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "brown.mhmat",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/eyes/materials/brown.mhmat",
+    "bytes": 1247,
+    "sha256": "4abad93ce50541c08127721e77bce035640c9f16bed16cd0f5524b1cd5908465"
+   },
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "tools/patient-simulator/resources/makehuman/skins/default.mhmat",
+   "source": "makehuman",
+   "sourceLabel": "MakeHuman",
+   "tool": "cockpit",
+   "label": "default.mhmat",
+   "license": "CC0-1.0",
+   "delivery": {
+    "path": "tools/patient-simulator/resources/makehuman/skins/default.mhmat",
+    "bytes": 1139,
+    "sha256": "3df4dece5e9293f36a02a2e1fdb6d0f6f33d31584abc9219937b1cbbd8d9a377"
    },
    "clinicalUseApproved": false
   },

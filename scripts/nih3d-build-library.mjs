@@ -99,7 +99,7 @@ async function otherSources(){
   ...await list('quaternius','Quaternius','cockpit','tools/patient-simulator/resources/quaternius/imported-manifest.json',{extra:{restriction:'Μη κλινικός χαρακτήρας· ερευνητική χρήση.'}}),
   ...await list('patients','Στατικοί ασθενείς CC0','cockpit','tools/patient-simulator/assets/patients/preview-manifest.json'),
   ...await list('makehuman','MakeHuman','cockpit','tools/patient-simulator/resources/makehuman/imported-manifest.json',{license:'CC0-1.0'}),
-  ...await list('makehuman','MakeHuman','cockpit','tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json',{license:'CC0-1.0'}),
+  ...await list('makehuman','MakeHuman','cockpit','tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json',{key:'files',license:'CC0-1.0'}),
   ...await list('makehuman-rigged','MakeHuman με σκελετό','cockpit','tools/patient-simulator/assets/patients/atla-makehuman-rigged-manifest.json')
  ];
 }
