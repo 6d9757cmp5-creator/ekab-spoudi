@@ -35,6 +35,9 @@ for(const [term,path] of mapped){
  assert(record.source.includes(path),'Wrong official citation location for '+term);
  if(term==='Αναφυλαξία')assert(record.sourcePage===7,'Anaphylaxis source must identify guideline printed page 7');
 }
+const cpr=items.find(x=>x.term==='Καρδιοπνευμονική αναζωογόνηση');
+assert.match(cpr.definition,/συμπιέσεις.*κυκλοφορίας.*αερισμούς.*αναπνοής/,'CPR roles are clinically ambiguous');
+assert(cpr.independentSource?.includes('cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-basic-life-support'),'Missing independent AHA BLS source');
 const report={date:'2026-11-04',source:'medical-terms.json',total:items.length,
  distribution,sourceSectionMapped:items.filter(x=>x.sourceType==='direct-section').length,
  sourceSectionCoveragePercent:Math.round(10000*(distribution['direct-section']||0)/items.length)/100,
