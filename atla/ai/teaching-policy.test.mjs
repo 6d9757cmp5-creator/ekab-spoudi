@@ -23,7 +23,7 @@ test('surface gate rejects uncited, fabricated citations and unsafe doses',()=>{
  assert.equal(auditAssistantReply('Χορήγησε 0,5 mg/kg [Τ1]',p).ok,false);
  assert.equal(auditAssistantReply('Δώσε 2 μονάδες [Τ1]',p).ok,false);
  assert.equal(auditAssistantReply('Χορήγησε 12 μg [Τ1]',p).ok,false);
- assert.equal(auditAssistantReply('Η κλίμακα GCS έχει 15 βαθμούς. [Τ1]',p).ok,true);
+ assert.equal(auditAssistantReply('Η κλίμακα GCS έχει 15 βαθμούς. [Τ1]',p).ok,false);
  assert.equal(auditAssistantReply('Ξέρω ότι νιώθεις θλίψη [Τ1]',p).ok,false);
 });
 
@@ -51,4 +51,22 @@ test('learner request for justification asks a question instead of giving the wo
 test('source fidelity is required beyond citation syntax',()=>{
  assert.match(ATLA_RUNTIME_RULES,/ισχυρισμός πρέπει να στηρίζεται ρητά/);
  assert.match(ATLA_RUNTIME_RULES,/μη τεκμηριωμένους μηχανισμούς/);
+});
+
+test('source ID does not launder unsupported numerical medical assertions',()=>{
+ const p=[{id:'T1',term:'ΚΑΡΠΑ',definition:'Θωρακικές συμπιέσεις και, όπου ενδείκνυται, αερισμοί.'}];
+ assert.deepEqual(auditAssistantReply('ΚΑΡΠΑ: 30 συμπιέσεις και 2 αερισμοί [Τ1]',p),
+   {ok:false,reason:'unsupported-numeric-claim'});
+ assert.equal(auditAssistantReply('Σε επείγον κάλεσε το 166 ή το 112 [Τ1]',p).ok,true);
+ assert.equal(auditAssistantReply('Συμπιέσεις και, όπου ενδείκνυται, αερισμοί [Τ1]',p).ok,true);
+ const supported=[{...p[0],definition:p[0].definition+' Δοκιμαστικό αναγνωριστικό: 30:2.'}];
+ assert.equal(auditAssistantReply('Ο λόγος είναι 30:2 [Τ1]',supported).ok,true);
+});
+test('source-cited CPR cannot require complete cessation of breathing',()=>{
+ const p=[{id:'T1',term:'Καρδιοπνευμονική αναζωογόνηση',definition:'Θωρακικές συμπιέσεις και, όπου ενδείκνυται, αερισμοί σε ανακοπή.'}];
+ assert.deepEqual(
+  auditAssistantReply('Η ΚΑΡΠΑ είναι η διαδικασία που κάνουμε όταν η καρδιά και η αναπνοή κάποιου σταματήσουν [Τ1]',p),
+  {ok:false,reason:'arrest-breathing-oversimplification'}
+ );
+ assert.equal(auditAssistantReply('Στην ανακοπή μπορεί να υπάρχει μη φυσιολογική αναπνοή [Τ1]',p).ok,true);
 });
