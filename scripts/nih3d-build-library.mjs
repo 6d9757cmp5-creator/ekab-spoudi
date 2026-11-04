@@ -19,12 +19,12 @@ const SCOPE='tools/atla-ai/resources/nih3d-biomedical-scope-2026/segments';
 const OUTPUT='tools/atla-ai/resources/model-library.json';
 export const MAX_MODEL_BYTES=12*1024**2;
 export const MAX_LIBRARY_BYTES=400*1024**2;
-const SERVABLE_LICENSE=/^(Public Domain|CC[- ]BY(?:[- ]SA)?(?: \d\.\d)?)$/i;
+const OPEN_LICENSE=/^(Public Domain|CC[- ]BY(?:[- ]SA)?(?: \d\.\d)?)$/i;
 const CATEGORY_EL={Anatomy:'Ανατομία',Biomacromolecules:'Βιομακρομόριο',Viruses:'Ιός','Cells and Organelles':'Κύτταρα και οργανίδια',
  'Small Molecules':'Μικρό μόριο',Prosthetics:'Προσθετική','Devices and Hardware':'Συσκευή'};
 export const REASONS=Object.freeze({
  NO_GLB:'Δεν υπάρχει πρωτότυπο GLB για προβολή.',
- LICENSE_REVIEW:'Η άδεια (NC/ND ή λογισμικού) χρειάζεται απόφαση πριν από δημόσια διάθεση.',
+ LICENSE_REVIEW:'Δεν υπάρχει δηλωμένη άδεια στην πηγή.',
  OUT_OF_SCOPE:'Συσκευή ή εργαστηριακό αντικείμενο εκτός εκπαιδευτικού πεδίου.',
  OVERSIZE:'Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.',
  CAPACITY:'Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.',
@@ -34,7 +34,7 @@ export const REASONS=Object.freeze({
 export function deliveryRestriction({license,glb,scopeStatus,servedBytes=0}){
  if(!glb)return 'NO_GLB';
  if(scopeStatus==='LIKELY_OUT_OF_MEDICAL_SCOPE')return 'OUT_OF_SCOPE';
- if(!SERVABLE_LICENSE.test(String(license??'').trim()))return 'LICENSE_REVIEW';
+ if(!String(license??'').trim()||/^unknown$/i.test(String(license).trim()))return 'LICENSE_REVIEW';
  if(glb.size>MAX_MODEL_BYTES)return 'OVERSIZE';
  if(servedBytes+glb.size>MAX_LIBRARY_BYTES)return 'CAPACITY';
  return null;
@@ -157,7 +157,7 @@ async function build(stagingRoot){
    label:curated?.greekTitle??(categoryEl+' · '+model.title.trim()),
    greekTitle:curated?.greekTitle??null,originalTitle:model.title.trim(),category:categoryEl,
    kind:curated?.kind??null,structures:curated?.structures??[],finding:curated?.finding??null,
-   laterality:null,license:record.licenseRaw,creator:record.creator||null,sourceVersion:model.sourceVersion??record.version??null,
+   laterality:null,license:record.licenseRaw,rightsBasis:OPEN_LICENSE.test(String(record.licenseRaw).trim())?'SOURCE_LICENSE':'OWNER_STATED_PERMISSION',creator:record.creator||null,sourceVersion:model.sourceVersion??record.version??null,
    originalPage:model.originalPage,archive:{files:model.verifiedFiles.length,image:glb?.verifiedOCI.digest??null,formats:[...new Set(model.verifiedFiles.map(f=>f.format))].sort()},
    delivery:delivered?{path:delivered,bytes:glb.size,sha256:glb.sha256,format:'glb',derived:false}:null,
    restrictionCode:code,restriction:code?REASONS[code]:curated?null:'Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.',

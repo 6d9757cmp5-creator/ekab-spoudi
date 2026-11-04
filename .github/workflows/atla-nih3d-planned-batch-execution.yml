@@ -9,7 +9,7 @@ on:
       - '.github/workflows/atla-nih3d-planned-batch-execution.yml'
   workflow_dispatch:
   schedule:
-    - cron: '41 */3 * * *'
+    - cron: '41 * * * *'
 permissions:
   contents: write
   packages: write
@@ -19,7 +19,7 @@ concurrency:
 jobs:
   archive-verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v4
         with:

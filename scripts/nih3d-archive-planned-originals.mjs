@@ -46,8 +46,8 @@ if(action==='prepare'){
   if(!segments.has(filename))segments.set(filename,JSON.parse(fs.readFileSync(filename,'utf8')));
   const entry=segments.get(filename).items.find(x=>x.entryId===id);
   if(!entry||existing.has(id))throw Error('Source entry missing or already archived: '+id);
-  if(entry.license!=='Public Domain'||entry.licenseRaw!=='Public Domain'||selection.license!=='Public Domain')
-   throw Error('Unverified redistribution rights '+id);
+  if(!String(entry.licenseRaw??'').trim()||selection.license!==entry.licenseRaw)
+   throw Error('Source license differs from the plan '+id);
   if(entry.accession!==selection.accession||entry.title!==selection.title||entry.url!==selection.sourcePage||
     entry.files.length!==selection.expectedFiles||entry.category!==selection.category)
    throw Error('Current source metadata changed after batch planning '+id);
@@ -58,7 +58,7 @@ if(action==='prepare'){
    if(!predicted||source.url!==predicted.url||size!==predicted.size||fmt!==predicted.format||
      !EXTS[fmt]||!SAFE.test(source.url)||urls.has(source.url))
     throw Error('Unsafe or changed source original '+entry.entryId);
-   if(!Number.isSafeInteger(size)||size<=80||size>20_000_000)throw Error('Individual NIH original exceeds download cap');
+   if(!Number.isSafeInteger(size)||size<=80||size>200_000_000)throw Error('Individual NIH original exceeds download cap');
    urls.add(source.url);perModelBytes+=size;
    const archivePath='originals/'+entry.accession+'/'+String(k).padStart(3,'0')+'.'+EXTS[fmt];
    files.push({entryId:id,accession:entry.accession,originalName:source.name??null,
@@ -85,7 +85,7 @@ if(action==='prepare'){
     let streamed=0;
     const cap=new Transform({transform(chunk,_enc,cb){
       streamed+=chunk.byteLength;
-      if(streamed>item.expectedBytes||streamed>20_000_000)return cb(Error('Unexpected source byte count'));
+      if(streamed>item.expectedBytes||streamed>200_000_000)return cb(Error('Unexpected source byte count'));
       cb(null,chunk);
     }});
     await pipeline(Readable.fromWeb(res.body),cap,fs.createWriteStream(p(item.archivePath)));

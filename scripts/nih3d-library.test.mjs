@@ -9,8 +9,10 @@ const glb={size:1000};
 assert.equal(deliveryRestriction({license:'Public Domain',glb,scopeStatus:'IN_SCOPE_RESEARCH_CANDIDATE'}),null);
 assert.equal(deliveryRestriction({license:'CC BY 4.0',glb}),null);
 assert.equal(deliveryRestriction({license:'CC-BY-SA',glb}),null);
-for(const license of ['CC-BY-NC','CC-BY-NC-SA','CC-BY-NC-ND','CC BY-ND','CC-BY-ND','GNU GPLv3','','TAPR'])
- assert.equal(deliveryRestriction({license,glb}),'LICENSE_REVIEW',license);
+for(const license of ['CC-BY-NC','CC-BY-NC-SA','CC-BY-NC-ND','CC BY-ND','CC-BY-ND','GNU GPLv3','TAPR'])
+ assert.equal(deliveryRestriction({license,glb}),null,license);
+for(const license of ['','  ','Unknown',null])
+ assert.equal(deliveryRestriction({license,glb}),'LICENSE_REVIEW',String(license));
 assert.equal(deliveryRestriction({license:'Public Domain',glb:null}),'NO_GLB');
 assert.equal(deliveryRestriction({license:'Public Domain',glb,scopeStatus:'LIKELY_OUT_OF_MEDICAL_SCOPE'}),'OUT_OF_SCOPE');
 assert.equal(deliveryRestriction({license:'Public Domain',glb:{size:MAX_MODEL_BYTES+1}}),'OVERSIZE');
@@ -86,7 +88,8 @@ if(existsSync('tools/atla-ai/resources/model-library.json')){
   assert.equal(m.clinicalUseApproved,false);
   assert.equal(m.scientificApproval,'NOT_ESTABLISHED');
   if(m.delivery){
-   assert.equal(m.delivery.derived,false);
+   assert.equal(m.delivery.derived,false,'Only original bytes are served, so no-derivatives licenses hold');
+   assert(['SOURCE_LICENSE','OWNER_STATED_PERMISSION'].includes(m.rightsBasis),m.accession);
    const bytes=readFileSync(m.delivery.path);
    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.delivery.sha256,m.accession);
    assert.equal(bytes.length,m.delivery.bytes,m.accession);

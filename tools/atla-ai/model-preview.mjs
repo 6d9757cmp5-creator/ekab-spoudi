@@ -157,6 +157,7 @@ function showDetails(item){
  line('Κατάσταση έγκρισης','Χωρίς επιστημονική ή κλινική επικύρωση. Μόνο για εκπαιδευτική εξερεύνηση.');
  if(d.kind==='pathology')line('Σημείωση','Παράδειγμα παθολογίας από την πηγή, όχι εύρημα συγκεκριμένου ασθενούς.');
  line('Περιορισμός',d.restriction);
+ if(d.rightsBasis==='OWNER_STATED_PERMISSION')line('Δικαιώματα','Χρήση με δηλωμένη άδεια του ιδιοκτήτη της εφαρμογής. Αρχική άδεια: '+d.license+'.');
  if(/^https:\/\/3d\.nih\.gov\//.test(d.originalPage||'')){
   const row=document.createElement('p'),a=document.createElement('a');
   a.href=d.originalPage;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Πρωτότυπη σελίδα NIH 3D ↗';
