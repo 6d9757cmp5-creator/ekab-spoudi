@@ -232,7 +232,7 @@ def gh(*args):
 
 def retryable_release_error(error):
     message=(getattr(error,'stderr','') or '')+' '+(getattr(error,'output','') or '')
-    return bool(re.search(r'HTTP (?:404|408|429|500|502|503|504)\\b',message)) or any(
+    return bool(re.search(r'HTTP (?:404|408|429|500|502|503|504)\b',message)) or any(
         phrase in message.lower() for phrase in ('connection reset','timeout','temporarily unavailable','eof'))
 
 def check_remote_asset(asset, name, size, sha):
