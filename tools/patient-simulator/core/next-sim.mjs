@@ -113,9 +113,16 @@ export function setFocus(s,person,view){
  return {...s,person,view};
 }
 export function setPlaying(s,playing){if(!validSession(s)||typeof playing!=='boolean')throw Error('invalid-play');return {...s,playing:s.finished?false:playing};}
+/** A scenario's own steps join the generic actions, sorted so the list does not reveal their order. */
+export function actionsFor(s,tool){
+ const base=ACTIONS[tool]||[];
+ if(tool!=='interventions')return base;
+ const steps=[...(getCase(s.caseId)?.steps||[])].sort((a,b)=>a.label.localeCompare(b.label,'el'));
+ return [...steps,...base];
+}
 export function execute(s,tool,id){
  if(!validSession(s)||s.finished)throw Error('session-finished-or-invalid');
- const action=ACTIONS[tool]?.find(a=>a.id===id);
+ const action=actionsFor(s,tool).find(a=>a.id===id);
  if(!action)throw Error('invalid-action');
  const minute=clamp(s.minute+action.min,0,30),p=getCase(s.caseId).patients.find(x=>x.id===s.person);
  let detail=action.description;
@@ -126,6 +133,8 @@ export function execute(s,tool,id){
  if(tool==='monitor'&&id==='record'){
   const v=patientVitals(s,s.person);detail='Συνθετική καταγραφή: HR '+v.hr+', RR '+v.rr+', SpO₂ '+v.spo2+'%.';
  }
+ const finding=s.person==='a'?getCase(s.caseId).findings?.[id]:null;
+ if(finding)detail=finding;
  const events=[...s.events,{minute,person:s.person,tool,actionId:id,label:action.label,detail}];
  const flags={...s.flags,...(action.flag?{[action.flag]:true}:{})};
  return {...s,minute,events,flags,finished:minute>=30,playing:minute>=30?false:s.playing};
@@ -146,14 +155,16 @@ export function summarize(s){
  const expected=[['safety','Ασφάλεια σκηνής'],['communication','Συνομιλία'],['assessment','Εκτίμηση'],['monitoring','Παρακολούθηση'],['coordination','Συντονισμός'],['reassessment','Επανεκτίμηση'],['handover','Παράδοση']];
  const covered=expected.filter(([key])=>!!s.flags[key]).map(([,label])=>label);
  const missing=expected.filter(([key])=>!s.flags[key]).map(([,label])=>label);
- return {covered,missing,events:s.events.length,minute:s.minute,
+ const practiceSteps=(getCase(s.caseId).steps||[]).map(step=>({label:step.label,done:s.events.some(e=>e.actionId===step.id)}));
+ return {covered,missing,events:s.events.length,minute:s.minute,practiceSteps,
  disclaimer:'Έλεγχος ολοκλήρωσης εκπαιδευτικών βημάτων — όχι κλινική βαθμολογία ή πιστοποίηση.'};
 }
 export function reportText(s){
  const r=summarize(s);return ['MENTOR NEXT · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',getCase(s.caseId).title,r.disclaimer,
  'Χρόνος: '+r.minute+' εικονικά λεπτά','Καταγραφές: '+r.events,
  'Βήματα που καταγράφηκαν: '+(r.covered.join(', ')||'Κανένα'),
- 'Για επανάληψη: '+(r.missing.join(', ')||'Κανένα'),'',
+ 'Για επανάληψη: '+(r.missing.join(', ')||'Κανένα'),
+ ...(r.practiceSteps.length?['','Ελεγμένη σειρά ενεργειών, χωρίς βαθμολόγηση:',...r.practiceSteps.map((step,i)=>(step.done?'✓ ':'○ ')+(i+1)+'. '+step.label)]:[]),'',
  ...s.events.map((e,i)=>(i+1)+'. '+String(e.minute).padStart(2,'0')+'΄ · '+e.person.toUpperCase()+' · '+e.label+'\n'+e.detail)
  ].join('\n')+'\n';
 }
