@@ -102,5 +102,4 @@ jobs:
             audit-results/cockpit-*.png
             audit-results/cockpit-visual-report.json
           if-no-files-found: warn
-      - run: node scripts/verify-mentor-presence-browser.mjs
       - run: node scripts/verify-atla-presence-browser.mjs

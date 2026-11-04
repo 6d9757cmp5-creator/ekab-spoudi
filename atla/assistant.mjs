@@ -153,7 +153,7 @@ function boot(){
  autoRead.checked=prefGet(AUTO_READ_KEY)==='on';
  autoRead.addEventListener('change',()=>prefSet(AUTO_READ_KEY,autoRead.checked?'on':'off'));
  // The 3D teacher is ATLA's body, not a second assistant, and downloads only when the learner asks for it.
- async function show3d(on){
+ async function show3d(on,restored=false){
   body3d.setAttribute('aria-pressed',String(on));
   prefSet(BODY_KEY,on?'on':'off');
   if(on&&!presence()){
@@ -164,7 +164,7 @@ function boot(){
   document.body.classList.toggle('atla-has-3d',on);
   if(!on){presence()?.minimize();return;}
   // On a phone the teacher takes the top of the screen, so it never covers the conversation.
-  if(window.matchMedia?.('(max-width:640px)').matches)presence()?.pin('tl');else presence()?.show();
+  if(!restored&&window.matchMedia?.('(max-width:640px)').matches)presence()?.pin('tl');else presence()?.show();
  }
  body3d.addEventListener('click',()=>show3d(body3d.getAttribute('aria-pressed')!=='true'));
  mic.addEventListener('click',async()=>{
@@ -172,7 +172,7 @@ function boot(){
   if(heard.ok){field.value=heard.text;form.requestSubmit();return;}
   if(heard.reason!=='cancelled')state.textContent='Δεν ακούστηκε ερώτηση. Δοκίμασε ξανά ή γράψε την.';
  });
- if(prefGet(BODY_KEY)==='on')show3d(true);
+ if(prefGet(BODY_KEY)==='on')show3d(true,true);
  function offerLink(href,label){
   if(!href||typeof href!=='string')return;
   try{

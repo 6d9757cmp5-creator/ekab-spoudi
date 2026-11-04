@@ -397,7 +397,7 @@ function boot(){
   finally{askSend.disabled=selBtn.disabled=false;}
  }
  askBtn.addEventListener("click",()=>setAsk(!askOpen));
- if(embedded)askBtn.style.display="none";
+ if(embedded)for(const button of [askBtn,minBtn,hideBtn])button.style.display="none";
  askForm.addEventListener("submit",event=>{event.preventDefault();ask("");});
  askInput.addEventListener("input",()=>voice.stopSpeaking());
  // Keeps the learner's text selection alive when the button is pressed.
@@ -551,6 +551,7 @@ function boot(){
  window.addEventListener("orientationchange",()=>setTimeout(render,200));
  document.addEventListener("keydown",event=>{
   if(event.key==="Escape"&&menuOpen){closeMenu();menuBtn.focus();return;}
+  if(embedded)return;
   if(event.key==="Escape"&&prefs.visibility==="shown"&&root.contains(document.activeElement)){api.minimize();return;}
   if(event.altKey&&event.shiftKey&&event.key.toLowerCase()==="m"){event.preventDefault();api.toggle();}
  });

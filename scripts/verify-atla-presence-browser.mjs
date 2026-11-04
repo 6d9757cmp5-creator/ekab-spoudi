@@ -13,7 +13,7 @@ async function ready(){
  }
  throw Error('ATLA presence test server unavailable');
 }
-const frameState=(page,key)=>page.evaluate(k=>document.querySelector('.ekab-mentor-presence iframe')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset[k]??null,key);
+const widget='.ekab-mentor-presence';
 async function ask(page,question){
  const before=await page.locator('.atla-message').count();
  await page.locator('.atla-input').fill(question);
@@ -71,6 +71,40 @@ try{
   const overlap=Math.max(0,Math.min(stream.y+stream.height,teacher.y+teacher.height)-Math.max(stream.y,teacher.y))*Math.max(0,Math.min(stream.x+stream.width,teacher.x+teacher.width)-Math.max(stream.x,teacher.x));
   assert.equal(overlap,0,device+': the 3D teacher must not cover the conversation');
 
+  // The body keeps every placement control of the old companion.
+  const box=()=>page.locator(widget).boundingBox();
+  const inView=b=>b&&b.x>=0&&b.y>=0&&b.x+b.width<=width+0.5&&b.y+b.height<=height+0.5;
+  const drag=async(dx,dy)=>{
+   const g=await page.locator('.emp-grip').boundingBox();
+   const sx=g.x+g.width/2,sy=g.y+g.height/2;
+   if(isMobile){
+    const cdp=await context.newCDPSession(page);
+    const touch=(type,x,y)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y}]});
+    await touch('touchStart',sx,sy);
+    for(let i=1;i<=8;i++)await touch('touchMove',sx+dx*i/8,sy+dy*i/8);
+    await touch('touchEnd');await cdp.detach();
+   }else{
+    await page.mouse.move(sx,sy);await page.mouse.down();
+    await page.mouse.move(sx+dx,sy+dy,{steps:6});await page.mouse.up();
+   }
+  };
+  for(const label of ['Ελαχιστοποίηση','Απόκρυψη','Ρώτα'])assert.equal(await page.locator('.emp-btn[aria-label^="'+label+'"]').isVisible(),false,label+' belongs to ATLA, not to the body');
+  const start=await box();
+  const moveY=start.y>height/2?-60:30;
+  await drag(40,moveY);
+  const moved=await box();
+  assert(Math.abs(moved.x-start.x)>=20&&Math.abs(moved.y-start.y)>=20&&inView(moved),device+': drag moves the teacher, stays on screen');
+  await drag(-5000,-5000);
+  assert(inView(await box()),device+': dragging past the edges stays clamped');
+  const w0=(await box()).width;
+  await page.locator('.emp-resize').focus();
+  await page.keyboard.press('ArrowRight');await page.keyboard.press('ArrowRight');
+  assert((await box()).width>w0&&inView(await box()),device+': keyboard resize grows the teacher');
+  await page.locator('.emp-btn[aria-haspopup]').click();
+  await page.getByRole('button',{name:/Καρφίτσωμα · Πάνω αριστερά/}).click();
+  const placed=await box();
+  assert(placed.x<=20&&placed.y<=20,device+': pin to the top-left corner');
+
   // The microphone starts only when pressed and asks the transcribed question.
   assert.equal(await page.evaluate(()=>window.__micStarts),0,'The microphone never starts by itself');
   const before=await page.locator('.atla-message').count();
@@ -88,6 +122,8 @@ try{
   await page.goto(base+'/saek-course-02.html',{waitUntil:'load'});
   await page.locator('.ekab-mentor-presence').waitFor({state:'visible',timeout:15000});
   assert.equal(await page.locator('.atla-auto-read input').isChecked(),true);
+  const kept=await box();
+  assert(Math.abs(kept.x-placed.x)<=1&&Math.abs(kept.y-placed.y)<=1,device+': the placement survives navigation');
   await page.locator('.atla-launcher').click();
   await page.locator('.atla-3d').click();
   await page.waitForFunction(()=>!document.querySelector('.ekab-mentor-presence iframe'),null,{timeout:10000});

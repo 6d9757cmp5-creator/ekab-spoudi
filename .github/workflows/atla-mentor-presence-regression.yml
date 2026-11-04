@@ -4,11 +4,11 @@ on:
     branches:
       - fix/atla-mentor-presence-local-fallback-20261103
     paths:
-      - 'scripts/verify-mentor-presence-browser.mjs'
+      - 'scripts/verify-atla-presence-browser.mjs'
       - '.github/workflows/atla-mentor-presence-regression.yml'
   pull_request:
     paths:
-      - 'scripts/verify-mentor-presence-browser.mjs'
+      - 'scripts/verify-atla-presence-browser.mjs'
       - 'mentor/presence/**'
       - 'mentor/core/quick-answer.mjs'
       - 'atla/assistant.mjs'
@@ -29,7 +29,7 @@ jobs:
           node-version: '22'
       - name: Verify legacy and replacement test syntax
         run: |
-          node --check scripts/verify-mentor-presence-browser.mjs
+          node --check scripts/verify-atla-presence-browser.mjs
           node --check scripts/verify-mentor-layout-browser.mjs
       - name: Install real Chromium
         run: |
