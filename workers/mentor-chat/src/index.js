@@ -61,6 +61,15 @@ export function verifiedPassages(question,clientPassages){
   x.term===p.term && x.definition===p.definition));
  if(matches.length!==clientPassages.length||matches.some(x=>!x))return [];
  if(new Set(matches.map(x=>x.id)).size!==matches.length)return [];
+ // A category-level bibliography is NOT evidence that an individual medical
+ // statement is source-checked. Keep those definitions available for offline
+ // study, but do not place them in the generative model's citation context.
+ const directlyMapped=new Set(medicalTerms.items.filter(item=>
+  item.sourceType==='direct-section'&&item.sourceCrosscheck==='2026-11-04-primary-section'&&
+  typeof item.sourceSection==='string'&&item.sourceSection.length>0&&
+  typeof item.sourceVersion==='string'&&item.sourceVersion.length>0
+ ).map(item=>item.term));
+ if(matches.some(x=>!directlyMapped.has(x.term)))return [];
  return matches;
 }
 
