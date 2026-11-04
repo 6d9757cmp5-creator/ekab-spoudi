@@ -50,6 +50,8 @@ jobs:
           STAGING: ${{ runner.temp }}/nih3d-library-staging
         run: node scripts/nih3d-build-library.mjs build "$STAGING"
       - name: Re-verify registry against committed bytes
+        env:
+          NIH_LIBRARY_STRICT: '1'
         run: node scripts/nih3d-library.test.mjs
       - name: Commit registry and exact original GLB copies
         run: |
