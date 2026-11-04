@@ -4,7 +4,27 @@
  * when the question explicitly requests a matching, existing resource.
  */
 import {approvedTeachingVideo} from '../ai/teaching-policy.mjs';
+import {loadLibrary,selectAtlaVisual,viewerHref} from '../../tools/atla-ai/nih3d-library.mjs';
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el').replace(/ς/g,'σ');
+
+const VISUAL_REQUEST=/(?:3d|τρισδιαστατ|δειξε|να (?:το|τη|την|τον) δω|οπτικ)/;
+const STRUGGLING=/(?:δεν (?:το |τη |την |τον )?(?:καταλαβ|κατανο)|πιο απλα|με αλλο τροπο|διαφορετικ)/;
+/**
+ * The specific 3D model that helps with this question, from the shared library.
+ * The registry is fetched only after the learner asks to see something or says it is unclear;
+ * otherwise text is enough and nothing is downloaded. A registry failure just means no offer.
+ */
+export async function chooseTeachingModel({question='',mode='lesson',revealed=false,confirmedAnatomy=false,from='',load=loadLibrary,rootUrl=new URL('../../',import.meta.url)}={}){
+ const q=norm(question).slice(0,300);
+ const requestedVisual=VISUAL_REQUEST.test(q),struggling=STRUGGLING.test(q);
+ if(!q||(!requestedVisual&&!struggling))return null;
+ let library;
+ try{library=await load(rootUrl)}catch{return null}
+ const model=selectAtlaVisual(library,{text:question,mode,revealed,confirmedAnatomy,requestedVisual,struggling});
+ if(!model)return null;
+ return {kind:'anatomy-model',href:viewerHref(model,{rootUrl,tool:mode==='simulation'?'cockpit':'anatomy',from}),
+  label:'Άνοιξε το 3D μοντέλο: '+model.label,reason:'library-structure-match',accession:model.accession};
+}
 
 export function chooseTeachingTool({question='',chapterId='',videos=[]}={}){
  const q=norm(question).slice(0,300);

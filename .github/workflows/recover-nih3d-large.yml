@@ -18,7 +18,7 @@ permissions:
   actions: read
   contents: write
 concurrency:
-  group: ekab-nih3d-historical-streamed-rescue
+  group: ${{ github.event_name == 'pull_request' && format('ekab-nih3d-verify-pr-{0}', github.event.pull_request.number) || 'ekab-nih3d-historical-streamed-rescue' }}
   cancel-in-progress: false
 jobs:
   tests:
@@ -67,7 +67,7 @@ jobs:
     timeout-minutes: 180
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 4
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4

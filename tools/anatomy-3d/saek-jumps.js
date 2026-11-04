@@ -78,6 +78,7 @@ const R={
  10:[['Εγκεφαλικές δομές','organs','nervous','brain']]
 }
 };
+void import(new URL('tools/atla-ai/nih3d-learning-surface.mjs',location.href).href).catch(()=>{});
 const rows=R[course];if(!rows)return;
 function link(item,chapter){const [label,mode,system,focus,sex]=item;
  const url=new URL('ui-tools/anatomy-3d/index.html',location.href);
@@ -116,5 +117,4 @@ if(fromHash&&rows[Number(fromHash[1])]){
    requestAnimationFrame(()=>chapter.scrollIntoView({block:'start',behavior:'instant'}))
  }
 }
-void import(new URL('tools/atla-ai/nih3d-learning-surface.mjs',location.href).href).catch(()=>{});
 })();

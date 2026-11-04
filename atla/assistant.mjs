@@ -13,7 +13,7 @@ import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './stud
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
-import {chooseTeachingTool} from './practice/tool-selector.mjs';
+import {chooseTeachingTool,chooseTeachingModel} from './practice/tool-selector.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
@@ -162,8 +162,12 @@ function boot(){
   const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLA'),'refusal');return;}
   const studyInsight=localStudyInsight(q,learnerProfile());
   if(studyInsight){add('mentor',studyInsight,'local');return;}
-  const link=navigation(q);
-  const teachingTool=chooseTeachingTool({question:q});
+  const teachingModel=await chooseTeachingModel({question:q,from:location.pathname+location.search+location.hash,
+   mode:/(?:^|\/)mentor-next\.html$/.test(location.pathname)?'simulation':'lesson'});
+  if(myId!==requestId)return;
+  // The exact model answers better than opening the whole tool it belongs to.
+  const link=teachingModel?null:navigation(q);
+  const teachingTool=teachingModel||chooseTeachingTool({question:q});
   if(demoToggle.checked){
    const level=teachingLevelFor(learnerProfile(),q);
    const pageName=(document.querySelector('main h1,main h2')?.textContent||document.title).trim();

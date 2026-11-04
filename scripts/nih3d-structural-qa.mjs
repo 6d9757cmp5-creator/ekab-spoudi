@@ -56,8 +56,29 @@ export function inspectGeometry(bytes,format){
   return {status:'NEEDS_FORMAT_REVIEW',kind:fmt,reason:'No safe parser for format'};
  }catch(error){return {status:'NEEDS_FORMAT_REVIEW',kind:fmt,reason:String(error.message??error).slice(0,200)}}
 }
-export async function auditRestoredModels(registryPath,recoveredRoot,out){
+const baselineKey=(entryId,sha,image,bytes)=>[entryId,sha,image,bytes].join('|');
+/** Rows of an earlier report whose exact original bytes were already restored and hashed. */
+export function baselineRows(baseline){
+ const rows=new Map();
+ if(baseline?.clinicallyApprovedModels!==0||baseline?.scientificAccuracyValidated!==0)return rows;
+ for(const row of baseline.files??[]){
+  if(row.formatCheck?.status!=='STRUCTURAL_CHECK_PASSED')continue;
+  rows.set(baselineKey(row.entryId,row.originalSHA256,row.persistedImage,row.verifiedBytes),row);
+ }
+ return rows;
+}
+/** Immutable images that still hold at least one file without an earlier verified row. */
+export function imagesToRestore(registry,baseline){
+ const known=baselineRows(baseline),images=new Set();
+ for(const model of registry.models)for(const file of model.verifiedFiles){
+  if(!known.has(baselineKey(model.entryId,file.sha256,file.verifiedOCI.digest,file.size)))images.add(file.verifiedOCI.digest);
+ }
+ return [...images].sort();
+}
+export async function auditRestoredModels(registryPath,recoveredRoot,out,baselinePath){
  const registry=JSON.parse(await fs.readFile(registryPath,'utf8'));
+ const known=baselineRows(baselinePath?JSON.parse(await fs.readFile(baselinePath,'utf8')):null);
+ let reusedPriorVerificationFiles=0;
  if(!registry.sourceSHA256AndAnonymousRecoveryVerified||registry.fullNIHArchiveComplete)throw Error('Unsupported registry state');
  const rows=[],counts={sourceFilesChecked:0,sha256Verified:0,formatPassed:0,formatNeedsReview:0,formatInvalid:0};
  let verifiedBytes=0;
@@ -65,6 +86,11 @@ export async function auditRestoredModels(registryPath,recoveredRoot,out){
   for(const file of model.verifiedFiles){
    const digest=String(file.verifiedOCI.digest??'').split('@sha256:')[1];
    if(!/^[a-f0-9]{64}$/.test(digest))throw Error('Invalid source OCI digest');
+   const prior=known.get(baselineKey(model.entryId,file.sha256,file.verifiedOCI.digest,file.size));
+   if(prior){
+    verifiedBytes+=file.size;counts.sourceFilesChecked++;counts.sha256Verified++;counts.formatPassed++;
+    reusedPriorVerificationFiles++;rows.push(prior);continue;
+   }
    const filepath=path.join(recoveredRoot,digest,file.verifiedOCI.filePath);
    const bytes=await fs.readFile(filepath);
    const sha=crypto.createHash('sha256').update(bytes).digest('hex');
@@ -84,7 +110,7 @@ export async function auditRestoredModels(registryPath,recoveredRoot,out){
  assert.equal(counts.sha256Verified,registry.uniqueVerifiedOriginalFiles);
  assert.equal(verifiedBytes,registry.totalDistinctVerifiedOriginalBytes);
  const report={schemaVersion:1,status:'ORIGINAL_GEOMETRY_STRUCTURAL_SCREEN_ONLY',
- sourceModels:registry.archiveModelsWithAnyOriginal,counts,verifiedBytes,
+ sourceModels:registry.archiveModelsWithAnyOriginal,counts,verifiedBytes,reusedPriorVerificationFiles,
  scientificAccuracyValidated:0,clinicallyApprovedModels:0,sourceGeometryOriginalsVerified:true,
  allNIHArchiveComplete:false,
  limitations:['SHA-256 validation establishes byte identity, not anatomical or clinical truth.',
@@ -98,7 +124,12 @@ export async function auditRestoredModels(registryPath,recoveredRoot,out){
  return report;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- const [registry,root,out]=process.argv.slice(2);
- if(!registry||!root||!out)throw Error('usage: node scripts/nih3d-structural-qa.mjs <registry.json> <recovered-root> <output.json>');
- await auditRestoredModels(registry,root,out);
+ const [registry,root,out,baseline]=process.argv.slice(2);
+ if(registry==='images-to-restore'){
+  const read=async file=>JSON.parse(await fs.readFile(file,'utf8'));
+  for(const image of imagesToRestore(await read(root),await read(out)))console.log(image);
+ }else{
+  if(!registry||!root||!out)throw Error('usage: node scripts/nih3d-structural-qa.mjs <registry.json> <recovered-root> <output.json> [baseline.json] | images-to-restore <registry.json> <baseline.json>');
+  await auditRestoredModels(registry,root,out,baseline);
+ }
 }

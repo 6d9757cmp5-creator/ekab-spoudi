@@ -3,14 +3,14 @@
   "status": "PARTIAL_VERIFIED_PERSISTENT_ORIGINAL_ARCHIVE",
   "catalogSourceEntries": 15688,
   "allCatalogModelsReferenced": 15688,
-  "archiveModelsWithAnyOriginal": 54,
-  "modelsWithAllCatalogOriginalFilesVerified": 54,
+  "archiveModelsWithAnyOriginal": 66,
+  "modelsWithAllCatalogOriginalFilesVerified": 66,
   "modelsWithPartialCatalogOriginalsVerified": 0,
-  "modelsWithoutAnyVerifiedOriginals": 15634,
+  "modelsWithoutAnyVerifiedOriginals": 15622,
   "individualCatalogOriginalFileReferences": 204346,
-  "uniqueVerifiedOriginalFiles": 326,
+  "uniqueVerifiedOriginalFiles": 446,
   "duplicateCopiesAcrossOCIImages": 2,
-  "totalDistinctVerifiedOriginalBytes": 529915495,
+  "totalDistinctVerifiedOriginalBytes": 724998116,
   "sourceSHA256AndAnonymousRecoveryVerified": true,
   "fullNIHArchiveComplete": false,
   "clinicalScientificReviewComplete": false,
@@ -63,6 +63,20 @@
       "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-386e7c8565a34220",
       "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:8b5eba838979434e3472ef5d06224725ee3448a8a265ed722cf14d00555aae7d",
       "filesVerifiedInReport": 85,
+      "verifiedByAnonymousOCIRecovery": true
+    },
+    {
+      "sourceReport": "docs/ATLA_NIH3D_GHCR_BATCH_73172e61d0a4ba8d_2026.json",
+      "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+      "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+      "filesVerifiedInReport": 45,
+      "verifiedByAnonymousOCIRecovery": true
+    },
+    {
+      "sourceReport": "docs/ATLA_NIH3D_GHCR_BATCH_8abc4c3433082ec4_2026.json",
+      "ociTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+      "ociDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+      "filesVerifiedInReport": 75,
       "verifiedByAnonymousOCIRecovery": true
     },
     {
@@ -1845,6 +1859,168 @@
       "clinicalUseApproved": false
     },
     {
+      "entryId": 798,
+      "accession": "3DPX-000798",
+      "title": "Calcaneal Fracture",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000798",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 2852684,
+          "sha256": "cf89065d12e64e8247be992f161bc5ac560ef7f6b6bff32d86efcb0f6b888c9b",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951521",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000798/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 2985970,
+          "sha256": "f44b2f01153ece095a057cc11514bef72d4645b38bf53e3f1ee8a50c5f28c17a",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951523",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000798/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 4793396,
+          "sha256": "351d5f67320fb7ab03d3ad396c4d8a8ff14ee092a42d4f8510b1ce10c9aafa96",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951524",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000798/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 11707827,
+          "sha256": "d5a3361ac484f3c2d21f8122183b2f0f16c9e9fcf910a000479a371d0fceb351",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951526",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000798/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 4629587,
+          "sha256": "4d700dae782cd939c96875c2cb0acc4c9756ba5846689bd34dea0100b705b9bf",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951527",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000798/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 801,
+      "accession": "3DPX-000801",
+      "title": "Distal Tibia Fracture",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000801",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 3331334,
+          "sha256": "1cd25d83ec411dcb844fe59dcc93fc92c882c45a10d17be494ca417a106b2e52",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951831",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000801/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 3529817,
+          "sha256": "1e59ff1a413ce74e10dd70c991659327c4383672ead679ed29f0e41acccf268f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951833",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000801/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 5597128,
+          "sha256": "5d1d3315c1e9af010ad1f54069f27cfd50cbc64226c93f5a58242b64e7c86f1a",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951834",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000801/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 13698413,
+          "sha256": "c4616ad7f1df7484e99759e177491fec38303ab32963a835c94bd3b875b82bb3",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951836",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000801/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 5453907,
+          "sha256": "088b3533d9ce7267a399d6609d5d613da3623086d04cf2362d977c783fc9272f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951837",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000801/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
       "entryId": 802,
       "accession": "3DPX-000802",
       "title": "Shoulder - Proximal Humerus Fracture",
@@ -2239,6 +2415,87 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-386e7c8565a34220",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:8b5eba838979434e3472ef5d06224725ee3448a8a265ed722cf14d00555aae7d",
             "filePath": "originals/3DPX-000809/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 810,
+      "accession": "3DPX-000810",
+      "title": "Spine - Thoracic Spine Scoliosis",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000810",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 3109384,
+          "sha256": "2d889dccd113354d499691255f6d02d33218c7e3c5f8b50746da80a2a3659532",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952181",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000810/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 3330273,
+          "sha256": "f5648259132ce15d46ce1442a61d9e052dfab9f1afb84a44f9f8c9791a95d057",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952183",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000810/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 5224372,
+          "sha256": "4eb944808a194f491148dd2875e72a08aa495bfde8497941c8847ac7b376d5e1",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952184",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000810/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 12773314,
+          "sha256": "2fdc4814d09034c602597355c06d905ea7dd6794151d9cd7640404851a95ec14",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952186",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000810/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 5092976,
+          "sha256": "41f3dcd50c70e440444235d58f5deaee1bc86e20b0d74af539ea01fc22785d69",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952187",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000810/004.obj"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
@@ -2817,6 +3074,87 @@
       "clinicalUseApproved": false
     },
     {
+      "entryId": 826,
+      "accession": "3DPX-000826",
+      "title": "Pelvis Fracture",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000826",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 2735484,
+          "sha256": "72f38a300d8e705cb8dc19808cc3ce1f87895e19c1a3ea3b8df03c366b057212",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953745",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000826/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 2863502,
+          "sha256": "824c64c3549172fd8e947b703353dee259392b60c0519d3188c627037c3f40f3",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953747",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000826/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 4596092,
+          "sha256": "5448d599d3f3d5467f63096d1051436e487641ec2981ce2fe8f25148e9ee11ad",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953748",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000826/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 11227326,
+          "sha256": "36351e8d9321e629bdc494c7277bfc8c6455e12e88d6809403bddf028630a6ba",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953750",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000826/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 4479256,
+          "sha256": "4c59eeebf4b7a035bef022d9aa752fb20e13d876f473a8cc3be7f4243c4ac5f7",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953751",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-000826/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
       "entryId": 827,
       "accession": "3DPX-000827",
       "title": "Ankle - Distal Tibia Fracture",
@@ -2887,6 +3225,87 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-ea7b952e6330430c",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:ad32203c64074c681bd40a8c17473c8e5874b4614449bd9465623d05d61aeddb",
             "filePath": "originals/3DPX-000827/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 828,
+      "accession": "3DPX-000828",
+      "title": "Pelvis",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000828",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 2908584,
+          "sha256": "28206d473f2c3c799ad86848c0b46fc0baa2d0c8f4186f8cc08342dc247be345",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953734",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000828/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 3017636,
+          "sha256": "952b23577ff9904d4f992b12c1ba5df3db5a5cc3097ed0df92e6f5829a797f66",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953736",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000828/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 4886960,
+          "sha256": "bf8b3bba33fd25a492f60345baf17a43d290cd83623850b2e0f6e27956d490cf",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953737",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000828/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 11942724,
+          "sha256": "2b8509520821ae9a11415fa817199cf9de223a55e8167ef84573cd1992bde97f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953739",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000828/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 4755424,
+          "sha256": "596e5230405c0c743e5fb4bb922e5f9d3fb44271b39da962de5c1168852590bb",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953740",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-000828/004.obj"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
@@ -4224,6 +4643,87 @@
       "clinicalUseApproved": false
     },
     {
+      "entryId": 7815,
+      "accession": "3DPX-007815",
+      "title": "Case Model #51 6wk Normal Heart",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-007815",
+      "sourceVersion": 3,
+      "sourceFilesTotal": 5,
+      "verifiedFiles": [
+        {
+          "format": "STL",
+          "size": 2764684,
+          "sha256": "51cfe0381a5a013b20fb3847a3d4e6dbecbd7c581c11644af76651c1936bf267",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976000",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-007815/000.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 2934545,
+          "sha256": "383fe833bf60b6a02cfea6a301b0ab19c3ce354d70630ff5eb77eb58705d9392",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976002",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-007815/001.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 4643136,
+          "sha256": "473823e85a353c9abb042bd85ea0e488bb58726e576b9b8d366bfe013255f7e3",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976003",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-007815/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 11311285,
+          "sha256": "7b2d1c4853c906db362f02c6fc5ab886dfcde21cea283e3475c06dc9ed2cb91b",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976005",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-007815/003.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 4479811,
+          "sha256": "0f4d1572662b8d6f7f9ed96733d63a751e6a2f6bd944ced323ad8a9c1dc61918",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976006",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-007815/004.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
       "entryId": 8134,
       "accession": "3DPX-008134",
       "title": "SiC",
@@ -5185,6 +5685,1272 @@
             "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-386e7c8565a34220",
             "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:8b5eba838979434e3472ef5d06224725ee3448a8a265ed722cf14d00555aae7d",
             "filePath": "originals/3DPX-023373/001.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 23404,
+      "accession": "3DPX-023404",
+      "title": "Neoantigen 2",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-023404",
+      "sourceVersion": 2,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "GLB",
+          "size": 198204,
+          "sha256": "c10e6e27cd1a0a081f59492669b79bfc2f2297c1b15b6801c906241869bf0a48",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479976",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/000.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 503638,
+          "sha256": "07311be7a8312832cf8ae4c048354dd85f8377823f36744326ef120d25718d16",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479978",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/001.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 148852,
+          "sha256": "b2791d98e3a1ec4b41764dc9e8dd08b4f9d27c66e18e70dbd54127facf26aae8",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479979",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 296842,
+          "sha256": "0eacc7a8368e1b08d725489493d4c9ec8053e684cbc5552110970ead74ff0f9e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479987",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/003.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 659192,
+          "sha256": "f7e54619bb27d7d8b1299522fbeae0643b599149a8337ef1b001eed476f2e673",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479990",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 236471,
+          "sha256": "315296c1e9638ee31b4ee8b3a73cf8fb29ce412fe0d02fcac4e691e464fa81d6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479991",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/005.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1035900,
+          "sha256": "cb3efc56efc71105eda72e391813eff6afad089bda0e6c670e9886e84d89a35c",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479993",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110484,
+          "sha256": "6f3cd8d36794835aaec92af0144a3ff9a058f508658e3d6125971b9068a75bb3",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479996",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/007.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 268865,
+          "sha256": "8909466f546db0c0c79e43290a0a324198104ac48ba727e53b2b92f24f198ccf",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479998",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/008.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84440,
+          "sha256": "adb9ef887c21f27c63c1d3257c26e6f1d61eeb5ab1e6492494a69114b4e80119",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479999",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 215884,
+          "sha256": "884921cf504eff68704069ed1c3b9c310d47e4a91ab04bed277b6632fb4cbd20",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480008",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/010.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110484,
+          "sha256": "5e89cb5a9d4f0c4d1cee24f726fda095566d15784cb9707a938b60211e313958",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480010",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/011.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 219048,
+          "sha256": "72e672dd99110d4d0abdd8d484d72411383ac7856615d241a50e1f44c22716a1",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480011",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/012.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84428,
+          "sha256": "e7d3e286ac30eaf0a0aa2653e7d60dce57075391d832e65424c3b172d7f5353e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480012",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/013.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 230773,
+          "sha256": "a9c8bec0ffe5fd0f05443a858a97d23573618cbb59f1db7821a5de5e99443147",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480014",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023404/014.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 23406,
+      "accession": "3DPX-023406",
+      "title": "N4",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-023406",
+      "sourceVersion": 2,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "GLB",
+          "size": 186872,
+          "sha256": "6fe8bdf2e4b28372bd5a7bf3dab347e0c44dec741e90ff0fcbd9dab81db905d6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480960",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/000.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 474170,
+          "sha256": "14779e69f3dccd526f1c24937a8877447d9534ee72046aec96b02f8542036c26",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480962",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/001.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 140356,
+          "sha256": "5ca903bd55d4222957e05eee1c5496fdf845e7973ca2b54d9a1e4ce0088fb86b",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480963",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 292956,
+          "sha256": "dc595dad1dec541ce613bf4d4863d3cdd1c35116130138f0ef45316d023c7d56",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480971",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/003.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 650476,
+          "sha256": "7c3f15c127064a9a4b48b6745dd36068656b3bc3adb97cdb267596f901668443",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480974",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 230581,
+          "sha256": "35a505f01c662edb57f0e62f084dbf746f27ad414da3b4eeccff18a72209398c",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480975",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/005.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1027137,
+          "sha256": "5c96ca782b8961d2cfbd5bb586e8faf2bdbcc0a8eadd731a8feacc7b88a5e027",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480977",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110484,
+          "sha256": "9f62506a311c21a1574e67bce6019f11d8e18e83ea2a5defc621f933ba392802",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480980",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/007.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 268399,
+          "sha256": "7488887d37c20a6cb0f852e3f0e5b89a0cf9ce2fd99c05cbbd43a4adcc0e45b3",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480982",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/008.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84444,
+          "sha256": "6b6a331aebb3a136f9bdaa5e2dc33544c416f0979a48dc704391b77f29f7db6f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480983",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 215884,
+          "sha256": "40c3d04798c03278bd5361db0649e181dd10ff4dbfce011c992cac0fe43841fb",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480992",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/010.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110488,
+          "sha256": "b5ab18072ae6b995501aaaf9fc7e6b2b83cc3ff67a2851c3b587fe5bbbf77cc5",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480994",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/011.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 220172,
+          "sha256": "085537b0866b3b8822eac12f51040e5fdbb0d93f0a69dbb656c1c47fd5222c6d",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480995",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/012.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84432,
+          "sha256": "32c19ac1f5d07c251f421e615c7226eb873bee1883dd16286a69f32420fa494c",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480996",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/013.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 232084,
+          "sha256": "015af4528a5ef17e25788930c529a23adae2f037e613d6811ead66cc359b8f3f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480998",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023406/014.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 23409,
+      "accession": "3DPX-023409",
+      "title": "N7",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-023409",
+      "sourceVersion": 2,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "GLB",
+          "size": 258488,
+          "sha256": "1f9de94523c9d2ea8f5b7437c9426ed090136015af6a13657a1e4120051e3996",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479302",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/000.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 662080,
+          "sha256": "f51f20d024a37e6f5f25a72a08e141dd2037c4e9f5d87e9150ba5eff0fadf3d3",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479304",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/001.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 194068,
+          "sha256": "076bacf0cbc13f5341d9ecb3da0f2fcd5ec2b662b9e487f3cc16090bf492f451",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479305",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 299840,
+          "sha256": "732db2e9acb053d897b3a53613f732b8bec1dd09d69c5bfec5806fa5d4422ef2",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479313",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/003.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 663716,
+          "sha256": "dd96a449696263dcf9410bcb7845dd5501bdcd21e7f5016bf6647e08815e1e29",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479316",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 239055,
+          "sha256": "bb3687752eda5e88cca5faf5edcab10c84999534bad674f163f69822f7ca8563",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479317",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/005.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1044087,
+          "sha256": "69331c95fbb2964a26e053c77ea7c176ee5bbf8d7a480735c37f57b12fb0857e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479319",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 131736,
+          "sha256": "12c434fcee3d313ebc6b738c89e5208cb58356a7d9af867e8c14e7eae772d7e9",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479322",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/007.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 244907,
+          "sha256": "30c99b49dea5965b48096ad8f84e12567249ce06d16244dc6930af2c5d0e69ee",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479324",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/008.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 115116,
+          "sha256": "b813100d7dc5785e3f8e7e12996c907477bd5e0ad9b4f0aa2fc3bee6b3c192e4",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479325",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 227344,
+          "sha256": "3c170dfd7c1e31cfab5f884a2071518d39dbdc7fce19f9da044fbff427952ce2",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479329",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/010.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 217884,
+          "sha256": "a5821605466f7ef0516f6cb1dd93a27f8e9405c420826fd9ce5921a7bec92c14",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479334",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/011.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 112116,
+          "sha256": "805f1b2e792f47721b994eda5ccb469d8631199115077f7d9149002ec884d54e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479336",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/012.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 221125,
+          "sha256": "c18b39417b187049fb71549968d9acccb67b9b3bd4d2be267a94c60b9e6d7505",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479337",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/013.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 85820,
+          "sha256": "f497449503226aed50cdebc8242428976952563f9189421e52c7797ac670677a",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479338",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023409/014.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 23410,
+      "accession": "3DPX-023410",
+      "title": "N8",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-023410",
+      "sourceVersion": 2,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "GLB",
+          "size": 241304,
+          "sha256": "06b09e433b1f5e7092d3be77af016f3cb188c45d978b00e7fa8c3aac2f4348ad",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479466",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/000.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 616365,
+          "sha256": "b23ca0944780dcccb7c46e4135a085b81c60fc69bc83bdb7185af3df47b65f5f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479468",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/001.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 181176,
+          "sha256": "455dd21a33e4fb748fe25166085bb3cb0c26ffa1710eaca4a1aa5bc2ce2730e9",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479469",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 310143,
+          "sha256": "4220ee1579e5c4117ce680ea7efce1053d02ec2c63f65ec88466572472c851b9",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479477",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/003.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 678396,
+          "sha256": "2ea2693cd03dd7966c0f793545ec6fe73afdfce7964e6a123c23b303ce9c8948",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479480",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 251657,
+          "sha256": "a8d8dc1544a8aff42434de93e6ae752cde52d6e116246b194c44994342cd90a2",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479481",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/005.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1079699,
+          "sha256": "30656802331ea4ceba30d03bd55a9c48006b89bd6ac345fdb2dc1c9afabccee2",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479483",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 133752,
+          "sha256": "68d2f4f5e42b52bdab29b1b2d554e2908311765a9186b441f20e91a3f9f67f8f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479486",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/007.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 233781,
+          "sha256": "67d5d855fade50b3a3f5c5fc86e9cbbc48a9ad43c3efdeb4e1374f4ffc1223e7",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479488",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/008.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 117084,
+          "sha256": "a1632d285a3d7851df0507fa321dbe6d770a1968c0dd8389c14ed0d49b58dccd",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479489",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 225451,
+          "sha256": "27fa3a7265b1e8561e40db4ce906dff58b3d627968d2d186557c8ca2be01cba0",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479493",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/010.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 219884,
+          "sha256": "6aa99cb7692636e8513e9882f3ae85887e641509478d4f18da098172ac639c1e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479498",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/011.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 113748,
+          "sha256": "dd5085bb5e1ba25dcb43c4d5a5f4a416d59e254f2a393aed07734ba054db4bd1",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479500",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/012.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 224379,
+          "sha256": "8e88ac4b50d08c5173c82a2a529d8d7c43c04c884e1e444278e49b7c8e755421",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479501",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/013.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 87212,
+          "sha256": "2dc83af82ae5a0be39d6e0e3bbf531d46981181026fcc76b9d105f3fbe89d1df",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479502",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023410/014.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 23413,
+      "accession": "3DPX-023413",
+      "title": "N11",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-023413",
+      "sourceVersion": 2,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "GLB",
+          "size": 248412,
+          "sha256": "b57b11b427d0008e8c418646962b7c563fad3c5797050ab4f061fbecbecddbe8",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479014",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/000.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 635721,
+          "sha256": "fd9ea379b939ad3a374f703b06002e27fa4f478dfb6784171c36f5a06c44e379",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479016",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/001.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 186508,
+          "sha256": "aec5f892bbbf28e1bc77aa8ef51a60ebc10ed348020438a5f8751f08ad796dfd",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479017",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 284654,
+          "sha256": "aaba4be4d195a2011df7cdd85b54713290c9b0f372cbc64db06b310c085a4159",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479025",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/003.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 642656,
+          "sha256": "07b9a30e2d4f0561b2ad3825242a8d6ad828c11fb0b6f97884b1dd3ba1e9da74",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479028",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 220270,
+          "sha256": "9d589e67516aa5129a16103fb94c73eea087fc5a14b56b016292ef17b910237e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479029",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/005.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 997571,
+          "sha256": "757776a6556b74ac646fd630aa323e9a79c2f0cf878e844d2c071a385a246706",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479031",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110480,
+          "sha256": "ed9fa3013f1525c7849f663084bb2fc7043959a62eb2fe92172adf0a6745c542",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479034",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/007.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 268012,
+          "sha256": "03cf9b4048d0d102fbefcd906454bb311284a4f9cb8fe2cb3077ee7612ee1401",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479036",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/008.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84440,
+          "sha256": "e243151d01834b42a85abab46bfd2db3423d392b43be5aaa475b3f13c523b64f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479037",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 215884,
+          "sha256": "5d7e5c48ebd30a02b408abbcd78dac0eebb38c6c382754e96d134d35b7c3c9bc",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479046",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/010.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110480,
+          "sha256": "d63e861cb9769cf72705487ae79ba82208541f73b841251954751b2d758c4369",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479048",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/011.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 218806,
+          "sha256": "bf8860fee67bcc09865e27aa7a04eb46c6dd9f0e8a53f27971053acbe84afffb",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479049",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/012.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84424,
+          "sha256": "e9a06a5d8f5495de4555e5745a3957c8983218ac8c38fa2d57fa07d608a196ff",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479050",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/013.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 230736,
+          "sha256": "047cd6e80dc6c5563ebf9894f2bc7ce04fd4ee0822dcb58ee1599fdbf82a5f02",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479052",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-8abc4c3433082ec4",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a1d8def2cf5f2eafb908b027ed2805b2b5ae21f5e920951af15d242363507ef4",
+            "filePath": "originals/3DPX-023413/014.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        }
+      ],
+      "missingOriginalFileCount": 0,
+      "allOriginalFilesPersistentlyRecovered": true,
+      "scientificApproval": "NOT_ESTABLISHED",
+      "clinicalUseApproved": false
+    },
+    {
+      "entryId": 23414,
+      "accession": "3DPX-023414",
+      "title": "N12",
+      "originalLicenseRaw": "Public Domain",
+      "originalLicenseCategory": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-023414",
+      "sourceVersion": 2,
+      "sourceFilesTotal": 15,
+      "verifiedFiles": [
+        {
+          "format": "GLB",
+          "size": 286328,
+          "sha256": "e61f4e22010d664ad92a94e826217c49c604d887b503a36eac367f6971ad99e5",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478608",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/000.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 735027,
+          "sha256": "0d6ccf764ba77539e2fde13ababb8be0609ec4d579dc667b3c0f529c2789204f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478610",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/001.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 214948,
+          "sha256": "6312cab1ddc870ae14c04ba12f30c93f40a373629a7db15e5a026a4de5dbe95f",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478611",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/002.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 286630,
+          "sha256": "2d5dd123e682d7b2e28b988ff7546e12643ad80cacaf9bf2b2420bf61f4053e6",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478619",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/003.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 642656,
+          "sha256": "ad5eaa8e974a988f0986e01e8f2a1d1fb94ca514e56cd8e004464c4a64b6fa19",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478622",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/004.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 222368,
+          "sha256": "d6c2a7e34db55c83e9e7f25ac9f754bcf4734428b3d670b601870006afe1e705",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478623",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/005.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 1008872,
+          "sha256": "3c7e0c88b55d0caa1a49ee9c922620f97a19191d60c1e0fc5d38c941dc24cea0",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478625",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/006.wrl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110480,
+          "sha256": "8237752a6bf7b04063045de02a2604f035330bdbf39e624976a639ab0880bb35",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478628",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/007.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "OBJ",
+          "size": 268622,
+          "sha256": "c23f1a1bd07476149cc75c23c7ff0091690c15403a9c16a410e8d4c621d6ec50",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478630",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/008.obj"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84440,
+          "sha256": "ce77fd228346fac2fa375807050007af83239a15362c419cdac4ac62a0afa7fd",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478631",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/009.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "STL",
+          "size": 215884,
+          "sha256": "90d7620f9b5e00fc7a3af0cc4269f050b53f49db7348a7ae945fb2089a550979",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478640",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/010.stl"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 110484,
+          "sha256": "cf480745939b96646d1538c0890d94d6aaef3033576a6fe3642e2a9a0565f3d8",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478642",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/011.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "X3D",
+          "size": 219903,
+          "sha256": "96f70b10e96f4a40f6e41f33e821d4baeb7786275d3be8067819788be46f6a00",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478643",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/012.x3d"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "GLB",
+          "size": 84428,
+          "sha256": "96afbdbda203232e072506bc4c8ceefd7af3cee4bc8281e80c22b27dc76e55b1",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478644",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/013.glb"
+          },
+          "alternateVerifiedOCI": [],
+          "verifiedOriginalSourceAndAnonymousRestore": true
+        },
+        {
+          "format": "WRL",
+          "size": 231813,
+          "sha256": "f3bfcec4659abfad5452d85ce65365f0f8996a23dc90d81e0d587179e082465e",
+          "originalSourceUrl": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478646",
+          "verifiedOCI": {
+            "tag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-plan-73172e61d0a4ba8d",
+            "digest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:215d9bd5a757ff3cc96a429b350d76ebd499cfff14a5b0a11816242cdbb68924",
+            "filePath": "originals/3DPX-023414/014.wrl"
           },
           "alternateVerifiedOCI": [],
           "verifiedOriginalSourceAndAnonymousRestore": true
