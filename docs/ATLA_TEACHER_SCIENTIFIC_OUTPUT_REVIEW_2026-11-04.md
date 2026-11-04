@@ -38,6 +38,25 @@ A subsequent targeted check tied **six more existing definitions** to these veri
 
 Source-section metadata is now **11/203** (~5.42%); **192/203** are not assigned such exact provenance. This does not mean the unmapped terms are wrong, and link-level traceability alone does not certify every clinical statement. Generic references continue to fail closed for real AI; offline local study remains available. A separate independent semantic and source-quotation audit remains necessary for release.
 
+## Further verified primary-source sections — November 2026, batch 3
+
+Ten additional elementary definitions were crosschecked against specific primary source sections, **without changing the definitions**:
+
+| Term | Verified section | Provider |
+|---|---|---|
+| Καρδιακή ανακοπή | Summary — What is sudden cardiac arrest? | [Source](https://medlineplus.gov/suddencardiacarrest.html) |
+| Έμφραγμα μυοκαρδίου | Summary — heart attack, blocked blood supply and heart muscle injury | [Source](https://medlineplus.gov/heartattack.html) |
+| Επιληπτική κρίση | Summary — sudden abnormal brain electrical activity | [Source](https://medlineplus.gov/seizures.html) |
+| Επιληψία | Summary — recurrent seizures from a brain disorder | [Source](https://medlineplus.gov/epilepsy.html) |
+| Πνευμοθώρακας | Collapsed lung (pneumothorax) — pleural air outside the lung | [Source](https://medlineplus.gov/ency/article/000087.htm) |
+| Πνευμονική εμβολή | What is pulmonary embolism? — blood clot blocking pulmonary artery | [Source](https://www.nhlbi.nih.gov/health/pulmonary-embolism) |
+| Υπογλυκαιμία | Summary — What is hypoglycemia? | [Source](https://medlineplus.gov/hypoglycemia.html) |
+| Υποξία | Hypoxia and Hypoxemia — Definition: insufficient tissue oxygen | [Source](https://www.ncbi.nlm.nih.gov/books/NBK482316/) |
+| Υποξαιμία | Hypoxia and Hypoxemia — arterial oxygen vs tissue oxygen distinction | [Source](https://www.ncbi.nlm.nih.gov/books/NBK482316/) |
+| Κορεσμός οξυγόνου | What is pulse oximetry? — measurement of blood oxygen saturation | [Source](https://medlineplus.gov/lab-tests/pulse-oximetry/) |
+
+**Claim-level source anchor coverage: 21/203 (10.34%)**; 182 entries remain without a pinned direct section. This metadata inventory is distinct from a complete medical scientific review; no clinical certification or production release is implied. The Worker must continue to reject non-anchored source passages.
+
 ## Evidence and quality thresholds
 
 - Corpus consists solely of synthetic prompts; student grades, notes, and real cases were never input.

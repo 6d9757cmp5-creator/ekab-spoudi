@@ -33,7 +33,17 @@ const mapped=[
  ['Αρτηριακή πίεση','highbloodpressure.html'],
  ['Αρρυθμία','arrhythmia.html'],
  ['Αναιμία','anemia.html'],
- ['Βιοψία','dictionaries/cancer-terms/def/biopsy']
+ ['Βιοψία','dictionaries/cancer-terms/def/biopsy'],
+ ['Καρδιακή ανακοπή','suddencardiacarrest.html'],
+ ['Έμφραγμα μυοκαρδίου','heartattack.html'],
+ ['Επιληπτική κρίση','seizures.html'],
+ ['Επιληψία','epilepsy.html'],
+ ['Πνευμοθώρακας','ency/article/000087.htm'],
+ ['Πνευμονική εμβολή','health/pulmonary-embolism'],
+ ['Υπογλυκαιμία','hypoglycemia.html'],
+ ['Υποξία','books/NBK482316/'],
+ ['Υποξαιμία','books/NBK482316/'],
+ ['Κορεσμός οξυγόνου','lab-tests/pulse-oximetry/']
 ];
 for(const [term,path] of mapped){
  const record=items.find(x=>x.term===term);
