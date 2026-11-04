@@ -26,7 +26,10 @@ assert.match(adultBls,/Αν υποδειχθεί εκφόρτιση, ο AED τη
 assert.match(adultBls,/μόλις πραγματοποιηθεί η εκφόρτιση, ξεκίνα ξανά αμέσως θωρακικές συμπιέσεις/);
 assert.match(adultBls,/Αν δεν υποδειχθεί εκφόρτιση, ξεκίνα αμέσως ξανά συμπιέσεις/);
 assert.doesNotMatch(adultBls,/συμπιέσεις μετά την ανάλυση, είτε υποδείχθηκε εκφόρτιση είτε όχι/);
-assert.match(adultBls,/ο AED μπορεί να χρησιμοποιηθεί από οποιονδήποτε, χωρίς προϋπόθεση προηγούμενης εκπαίδευσης/);
+assert.match(adultBls,/ERC\/RCUK 2025 ενθαρρύνουν οποιονδήποτε παρευρισκόμενο να χρησιμοποιήσει τον AED/);
+assert.match(adultBls,/Υ4α\/οικ\.15576\/2007 προβλέπει εκπαίδευση Β-ΚΑΑ\/ΑΕΑ για τους επαγγελματίες υγείας/);
+assert.match(adultBls,/καλόπιστη άμεση βοήθεια, ακόμη και από μη εκπαιδευμένο άτομο/);
+assert.match(adultBls,/Y4-15576_07\.1452763919875\.pdf/);
 assert.match(adultBls,/2025-resuscitation-guidelines\/adult-basic-life-support-guidelines/);
 
 const anaphylaxis=lesson(9);
@@ -36,6 +39,7 @@ assert.match(anaphylaxis,/από τον ίδιο τον ασθενή ή κατά
 assert.match(anaphylaxis,/δεν αποτελεί οδηγία αυτόνομης φαρμακευτικής χορήγησης/);
 assert.match(anaphylaxis,/2025-resuscitation-guidelines\/first-aid-guidelines/);
 assert.match(anaphylaxis,/μπορεί να καθίσει με τα πόδια τεντωμένα/);
+assert.match(anaphylaxis,/δυσκολία αναπνοής χωρίς σημεία κυκλοφορικής αστάθειας/);
 assert.match(anaphylaxis,/Δεν πρέπει να σηκώνεται όρθιος ή να βαδίζει/);
 assert.match(anaphylaxis,/ΠΔ 62\/2007 \(άρθρο 4, σημείο 20\)/);
 assert.match(anaphylaxis,/απευθείας εντολή ιατρού Κινητής Ιατρικής Μονάδας ή Συντονιστικού Κέντρου ΕΚΑΒ/);
