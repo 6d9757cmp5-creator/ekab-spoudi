@@ -25,10 +25,10 @@ jobs:
           node --check tools/patient-simulator/app/cockpit-ecg.mjs
           node --check tools/patient-simulator/app/cockpit-ecg.test.mjs
           node --test tools/ecg-lab/core/ecg-synthetic.test.mjs tools/patient-simulator/app/cockpit-ecg.test.mjs
-      - name: Install Chromium for real mobile and desktop acceptance
+      - name: Install Chromium and WebKit for mobile and desktop acceptance
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Real browser acceptance of shared ECG display
         run: node scripts/verify-cockpit-shared-ecg-browser.mjs
       - name: Source-level UI integration and forbidden duplicate engine check
