@@ -43,6 +43,12 @@ try{
     speak(u){window.__spoken.push({text:u.text,lang:u.lang,voice:u.voice&&u.voice.name});setTimeout(()=>{u.onstart?.();u.onboundary?.({charIndex:3});},50);setTimeout(()=>u.onend?.(),700);}
    }});
   });
+  // Pages load ATLA now; here the 3D widget is exercised on its own, with all its controls.
+  await context.route('**/*.html*',async route=>{
+   const response=await route.fetch();
+   const html=(await response.text()).replace(/atla\/assistant\.mjs/g,'mentor/presence/presence.mjs');
+   await route.fulfill({response,body:html});
+  });
   const page=await context.newPage();
   const errors=[];
   page.on('pageerror',e=>errors.push(String(e)));
@@ -147,7 +153,7 @@ try{
   check(tag('ask panel opens and shows the page context in use'),await page.locator('.emp-ask').isVisible()&&/Πλαίσιο σελίδας( \([^)]+\))?: .+/.test(await page.locator('.emp-ctx').textContent()),await page.locator('.emp-ctx').textContent());
   await page.locator('.emp-input').fill('Τι είναι ΚΑΡΠΑ;');
   await page.locator('.emp-send').click();
-  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{polling:150,timeout:20000});
+  await page.waitForFunction(()=>/θωρακικές συμπιέσεις/i.test(document.querySelector('.emp-log')?.textContent||''),null,{polling:150,timeout:20000});
   check(tag('local source-backed Greek answer appears'),true);
   await page.waitForFunction(m=>document.querySelector('.ekab-mentor-presence iframe')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.mentorMood===m,'explanatory',{polling:150,timeout:20000});
   check(tag('avatar shows the explaining expression after an answer'),true);
@@ -175,11 +181,11 @@ try{
   await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
   const ask=async q=>{await page.locator('.emp-input').fill(q);await page.locator('.emp-send').click();};
   await ask('Τι είναι ΚΑΡΠΑ;');
-  await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{polling:150,timeout:15000});
+  await page.waitForFunction(()=>/θωρακικές συμπιέσεις/i.test(document.querySelector('.emp-log')?.textContent||''),null,{polling:150,timeout:15000});
   await page.goto(base+page2,{waitUntil:'load'});
   await page.waitForSelector('.ekab-mentor-presence:not([hidden])');
   await page.locator('.emp-bar button[aria-controls="ekab-mentor-ask"]').click();
-  check(tag('conversation survives page navigation (this tab only)'),/Θωρακικές συμπιέσεις/.test(await page.locator('.emp-log').textContent()));
+  check(tag('conversation survives page navigation (this tab only)'),/θωρακικές συμπιέσεις/i.test(await page.locator('.emp-log').textContent()));
   await ask('Πόσα mg αδρεναλίνης να δώσω;');
   await page.waitForFunction(()=>document.querySelector('.emp-log')?.textContent?.includes('166'),null,{polling:150,timeout:10000});
   check(tag('dosing question is refused with the safety message'),/δεν δίνει δοσολογίες/.test(await page.locator('.emp-log').textContent()));

@@ -14,6 +14,7 @@ import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
 import {chooseTeachingTool,chooseTeachingModel} from './practice/tool-selector.mjs';
+import {createVoice} from '../mentor/presence/voice.mjs';
 
 const ROOT=new URL('../',import.meta.url);
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ').toLocaleLowerCase('el');
@@ -43,6 +44,7 @@ const exam=()=>{
  return examMode(location.pathname);
 };
 let terms=null,questions=null,records=null,visible=false,requestId=0;
+const BODY_KEY='ekab.atla.body3d.v1',AUTO_READ_KEY='ekab.atla.autoread.v1';
 const fetchJSON=async name=>{try{const response=await fetch(new URL(name,ROOT),{credentials:'omit'});if(!response.ok)return null;return await response.json();}catch{return null;}};
 async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
@@ -104,12 +106,17 @@ function boot(){
  const form=$('form','atla-form');
  const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLA για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στο ATLA');
  const send=$('button','atla-send','Αποστολή');send.type='submit';
- form.append(field,send);
+ const mic=$('button','atla-mic','🎙');mic.type='button';mic.setAttribute('aria-label','Ερώτηση με φωνή');mic.setAttribute('aria-pressed','false');
+ mic.hidden=typeof(window.SpeechRecognition||window.webkitSpeechRecognition)!=='function';
+ form.append(field,mic,send);
  const footer=$('div','atla-footer');
  const selected=$('button','','Εξήγησε επιλογή');selected.type='button';
  const clear=$('button','','Καθαρισμός συνομιλίας');clear.type='button';
  const speak=$('button','','🔊 Ανάγνωση');speak.type='button';
- footer.append(selected,speak,clear);
+ const body3d=$('button','atla-3d','🧑‍⚕️ 3D εκπαιδευτής');body3d.type='button';body3d.setAttribute('aria-pressed','false');
+ const autoRow=$('label','atla-auto-read');const autoRead=$('input');autoRead.type='checkbox';
+ autoRow.append(autoRead,$('span','','Αυτόματη ανάγνωση'));
+ footer.append(selected,speak,body3d,autoRow,clear);
  const note=$('p','atla-note','Εκπαιδευτικό εργαλείο, όχι ιατρική οδηγία. Δεν διαβάζει αυτόματα βαθμούς ή προσωπικές σημειώσεις.');
  panel.append(head,state,demoRow,context,stream,form,footer,note);
  document.body.append(panel,launcher);
@@ -131,7 +138,41 @@ function boot(){
   for(const t of turns){const b=$('p','atla-message '+(t.role==='user'?'atla-user':'atla-reply')+(t.mode==='mock'&&t.role!=='user'?' atla-mock':''),t.text);stream.append(b);}
   stream.scrollTop=stream.scrollHeight;
  }
- const add=(role,text,mode='local')=>{try{appendTurn(storage,{role:role==='user'?'user':'mentor',text,mode});}catch{}showHistory();};
+ const presence=()=>window.EkabMentorPresence||null;
+ const voice=createVoice({win:window,onState:s=>{mic.setAttribute('aria-pressed',String(s.listening));mic.classList.toggle('is-on',s.listening);}});
+ const speakAloud=text=>(presence()?.speak||voice.speak)(text);
+ const add=(role,text,mode='local')=>{
+  try{appendTurn(storage,{role:role==='user'?'user':'mentor',text,mode});}catch{}
+  showHistory();
+  if(role==='user')return;
+  presence()?.cueTurn?.({role:'mentor',mode});
+  if(autoRead.checked&&mode!=='refusal')speakAloud(text);
+ };
+ const prefGet=key=>{try{return localStorage.getItem(key);}catch{return null;}};
+ const prefSet=(key,value)=>{try{localStorage.setItem(key,value);}catch{}};
+ autoRead.checked=prefGet(AUTO_READ_KEY)==='on';
+ autoRead.addEventListener('change',()=>prefSet(AUTO_READ_KEY,autoRead.checked?'on':'off'));
+ // The 3D teacher is ATLA's body, not a second assistant, and downloads only when the learner asks for it.
+ async function show3d(on){
+  body3d.setAttribute('aria-pressed',String(on));
+  prefSet(BODY_KEY,on?'on':'off');
+  if(on&&!presence()){
+   window.__atlaPresenceEmbedded=true;
+   try{await import('../mentor/presence/presence.mjs');}
+   catch{body3d.setAttribute('aria-pressed','false');prefSet(BODY_KEY,'off');state.textContent='Ο 3D εκπαιδευτής δεν φορτώθηκε. Η συνομιλία συνεχίζεται κανονικά.';return;}
+  }
+  document.body.classList.toggle('atla-has-3d',on);
+  if(!on){presence()?.minimize();return;}
+  // On a phone the teacher takes the top of the screen, so it never covers the conversation.
+  if(window.matchMedia?.('(max-width:640px)').matches)presence()?.pin('tl');else presence()?.show();
+ }
+ body3d.addEventListener('click',()=>show3d(body3d.getAttribute('aria-pressed')!=='true'));
+ mic.addEventListener('click',async()=>{
+  const heard=await voice.listen();
+  if(heard.ok){field.value=heard.text;form.requestSubmit();return;}
+  if(heard.reason!=='cancelled')state.textContent='Δεν ακούστηκε ερώτηση. Δοκίμασε ξανά ή γράψε την.';
+ });
+ if(prefGet(BODY_KEY)==='on')show3d(true);
  function offerLink(href,label){
   if(!href||typeof href!=='string')return;
   try{
@@ -157,7 +198,7 @@ function boot(){
   field.focus();
  });
  clear.addEventListener('click',()=>{try{clearTurns(storage);}catch{}showHistory();});
- speak.addEventListener('click',()=>{if(!('speechSynthesis'in window))return;window.speechSynthesis.cancel();const last=[...stream.querySelectorAll('.atla-reply')].at(-1)?.textContent;if(last){const u=new SpeechSynthesisUtterance(last.slice(0,700));u.lang='el-GR';window.speechSynthesis.speak(u);}});
+ speak.addEventListener('click',()=>{const last=[...stream.querySelectorAll('.atla-reply')].at(-1)?.textContent;if(last&&!speakAloud(last).ok)state.textContent='Δεν βρέθηκε ελληνική φωνή σε αυτή τη συσκευή.';});
  selected.addEventListener('click',()=>{const t=String(window.getSelection?.()||'').trim().slice(0,300);if(t){field.value='Εξήγησέ μου: '+t;field.focus();}else{state.textContent='Επίλεξε πρώτα ένα μικρό απόσπασμα της σελίδας.';}});
  form.addEventListener('submit',async e=>{
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q,demoToggle.checked?'mock':'local');

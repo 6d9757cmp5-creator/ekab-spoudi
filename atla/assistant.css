@@ -43,3 +43,27 @@
 @media(max-width:640px){.atla-demo-row{min-height:43px;box-sizing:border-box}}
 
 .atla-demo-row[hidden]{display:none}
+
+.atla-mic{align-self:flex-end;min-width:44px;min-height:44px;border-radius:12px;border:1px solid #8aa6ba;background:#fff;font-size:1.1rem;cursor:pointer}
+.atla-mic.is-on{background:#ffe3df;border-color:#c0392b}
+.atla-mic[hidden]{display:none}
+.atla-3d[aria-pressed="true"]{background:#d9f3ea;font-weight:700}
+.atla-auto-read{display:inline-flex;align-items:center;gap:6px;font-size:.85rem}
+.atla-launcher,.atla-panel{z-index:2147483001}
+.atla-input{max-height:96px}
+.atla-auto-read input{width:auto;min-width:0;margin:0;flex:0 0 auto}
+.atla-auto-read span{white-space:nowrap}
+@media(max-width:640px){
+ body.atla-has-3d .atla-panel{inset:auto 0 0;height:60dvh;border-radius:16px 16px 0 0}
+ body.atla-has-3d .ekab-mentor-presence{max-height:38dvh}
+}
+.atla-input{height:62px;flex:1 1 auto;align-self:stretch}
+.atla-form{align-items:flex-end}
+.atla-stream{min-height:150px}
+@media(max-width:640px){
+ .atla-stream{min-height:0}
+ body.atla-has-3d .atla-stream{min-height:120px}
+ body.atla-has-3d .atla-note,body.atla-has-3d .atla-context,body.atla-has-3d .atla-availability{display:none}
+ body.atla-has-3d .atla-input{height:48px}
+ body.atla-has-3d .atla-footer button{min-height:36px;padding:5px 8px}
+}
