@@ -3,6 +3,7 @@ import {CASES,getCase,TOOLS,ACTIONS,newSession,loadSession,loadCaseSession,caseP
 import {mountPatientScene} from './next-scene.mjs';
 import {patientCameraPreset} from './patient-camera.mjs';
 import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
+import {buildCockpitEcgPoints} from './cockpit-ecg.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 let state=loadSession(localStorage),tool='dialogue',result='Επίλεξε τον ασθενή και ένα εργαλείο για να ξεκινήσεις.';
@@ -372,6 +373,8 @@ function render(){
  $('next-person-name').textContent=patient.name;
  $('next-person-description').textContent=patient.description;
  $('next-hr').textContent=String(v.hr);$('next-rr').textContent=String(v.rr);$('next-spo2').textContent=String(v.spo2);
+ const ecgWave=$('next-ecg-wave');
+ if(ecgWave)ecgWave.setAttribute('points',buildCockpitEcgPoints(v.hr));
  for(const button of document.querySelectorAll('[data-next-patient]'))button.setAttribute('aria-pressed',String(button.dataset.nextPatient===state.person));
  for(const button of document.querySelectorAll('[data-next-view]'))button.setAttribute('aria-pressed',String(button.dataset.nextView===state.view));
  if(readyEnabled&&lastReadyPerson!==state.person){

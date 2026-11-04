@@ -240,7 +240,7 @@ try{
   assert.equal(await page.locator('a[href="mentor-oral.html"]').count(),2);
   // ECG Lab: synthetic signal only, local control without personal clinical inference.
   await page.goto('http://127.0.0.1:'+port+'/mentor-ecg.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/ECG Lab/);
+  assert.match(await page.title(),/Εργαστήριο ΗΚΓ/);
   const ecgBefore=await page.locator('#ecg-curve').getAttribute('points');
   assert.ok(ecgBefore.split(' ').length>=400);
   await page.locator('[data-ecg-rate="115"]').click();
