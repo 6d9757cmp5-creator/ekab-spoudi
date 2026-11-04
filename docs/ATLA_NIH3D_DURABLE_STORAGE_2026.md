@@ -46,6 +46,10 @@ Sources:
 - [Master catalog scan](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41355252898)
 - [NIH 3D discovery](https://3d.nih.gov/discover)
 
+## Απόφαση ιδιοκτήτη για τα δικαιώματα — 04/11/2026
+
+Ο ιδιοκτήτης δηλώνει ότι το έργο έχει άδεια για όλα τα αρχεία NIH 3D. Η αρχειοθέτηση και η βιβλιοθήκη δεν φιλτράρουν πλέον βάσει άδειας. Η αρχική άδεια μένει με κάθε αρχείο, τα μη ανοικτά μοντέλα σημειώνονται `OWNER_STATED_PERMISSION` και διατίθενται μόνο τα αυτούσια bytes.
+
 ## Νεότερος επιβεβαιωμένος έλεγχος — 02/11/2026
 
 Μετά την αλλαγή **Settings → Actions → Workflow permissions** από τον ιδιοκτήτη, το `GITHUB_TOKEN` απέκτησε δικαίωμα εγγραφής GitHub Releases:

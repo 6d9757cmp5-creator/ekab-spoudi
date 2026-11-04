@@ -10,7 +10,9 @@ import {biomedicalScope, NIH_BIOMEDICAL_SCOPE_STATUS as BIOMEDICAL_SCOPE} from '
 const FORMAT=new Set(['GLB','STL','OBJ','X3D','WRL','GLTF','PLY','3MF']);
 const SAFE_SOURCE=/^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[a-f0-9-]+\/output-files\/\d+$/i;
 const CATEGORY_PRIORITIES={'Anatomy':0,'Cells and Organelles':1,'Viruses':2,'Biomacromolecules':3,'Small Molecules':4,'Prosthetics':5,'Devices and Hardware':6};
-const DEFAULTS=Object.freeze({maxBatchBytes:100_000_000,maxFileBytes:20_000_000,maxOriginalFiles:85,maxModels:20});
+const DEFAULTS=Object.freeze({maxBatchBytes:1_000_000_000,maxFileBytes:200_000_000,maxOriginalFiles:400,maxModels:60});
+// The owner states permission for every NIH source; each model keeps its original license text.
+const declaredLicense=value=>Boolean(String(value??'').trim())&&!/^unknown$/i.test(String(value).trim());
 
 export function planNextBatch(rows,archivedIds,settings={}){
  const config={...DEFAULTS,...settings};
@@ -24,7 +26,7 @@ export function planNextBatch(rows,archivedIds,settings={}){
   if(!Number.isInteger(id)||id<1||id>25000||seen.has(id))throw Error('Unexpected NIH source identity or duplicate: '+id);
   seen.add(id);
   if(archived.has(id)){skipped.alreadyComplete++;continue;}
-  if(row.license!=='Public Domain'||row.licenseRaw!=='Public Domain'){skipped.sourceRightsReview++;continue;}
+  if(!declaredLicense(row.licenseRaw)){skipped.sourceRightsReview++;continue;}
   const category=String(row.category??'');
   const science=screenSourceResearch(row);
   if(!(category in CATEGORY_PRIORITIES)){skipped.unknownScientificCategory++;continue;}
@@ -72,7 +74,7 @@ export function planNextBatch(rows,archivedIds,settings={}){
   unselectedEligible:eligible.length-selected.length,
   originalFilesDownloadedByPlanner:0,
   originalFilesSHA256VerifiedByPlanner:0,
-  licenseRule:'Only explicit Public Domain sources automatically considered; others retained for rights review',
+  licenseRule:'Every declared source license, on the owner-stated permission; the original license stays with each file',
   biomedicalRule:'Only evidence-supported NIH biomedical research categories automatically selected; generic hardware and unresolved chemicals retained for review',
   sourceAccuracyRule:'Model title/category do not certify anatomical or clinical correctness'};
 }
