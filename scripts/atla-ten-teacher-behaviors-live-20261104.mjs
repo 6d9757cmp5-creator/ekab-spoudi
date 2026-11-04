@@ -14,7 +14,7 @@ import {canonicalLearnerProfile,teachingLevelFor} from '../atla/student/profile.
 
 const MODEL='@cf/google/gemma-4-26b-a4b-it';
 const account=process.env.CLOUDFLARE_ACCOUNT_ID||'';
-const token=process.env.CLOUDFLARE_API_TOKEN||'';
+const token=process.env.CLOUDFLARE_WORKERS_AI_TEST_TOKEN||'';
 const origin='https://6d9757cmp5-creator.github.io';
 const report={checkedAt:new Date().toISOString(),scope:'ATLA educator ONLY — ten traits; five grader cases explicitly excluded',
   branch:process.env.GITHUB_REF_NAME||'',model:MODEL,liveModelCalls:0,productionDeployments:0,
