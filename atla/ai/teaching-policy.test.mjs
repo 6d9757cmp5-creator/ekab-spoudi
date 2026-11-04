@@ -70,3 +70,11 @@ test('source-cited CPR cannot require complete cessation of breathing',()=>{
  );
  assert.equal(auditAssistantReply('Στην ανακοπή μπορεί να υπάρχει μη φυσιολογική αναπνοή [Τ1]',p).ok,true);
 });
+
+test('reject mixed Cyrillic and Hangul artifacts in Greek ATLA medical output',()=>{
+ const p=[{id:'T1',definition:'Θωρακικές συμπιέσεις και, όπου ενδείκνυται, αερισμοί.'}];
+ assert.deepEqual(auditAssistantReply('ΚΑΡΠΑ με 실시ση θωρακικών συμπιέσεων [T1]',p),{ok:false,reason:'unexpected-non-greek-script'});
+ assert.deepEqual(auditAssistantReply('Σε επείγον επικοινώνйся με το 166 [T1]',p),{ok:false,reason:'unexpected-non-greek-script'});
+ assert.equal(auditAssistantReply('ΚΑΡΠΑ με θωρακικές συμπιέσεις [T1]',p).ok,true);
+ assert.match(ATLA_RUNTIME_RULES,/Απάντησε σε φυσικά ελληνικά/);
+});
