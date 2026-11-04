@@ -46,3 +46,11 @@ jobs:
           assert.match(adapter,/import \{createSyntheticEcg,toSvgPoints\} from '\.\.\/\.\.\/ecg-lab\/core\/ecg-synthetic\.mjs'/);
           console.log('Cockpit shared ECG wiring verified; no change to clinical patient engine');
           NODE
+      - name: Save ECG browser evidence for independent visual inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-ecg-browser-evidence
+          path: audit-results/shared-ecg/
+          if-no-files-found: warn
+          retention-days: 30
