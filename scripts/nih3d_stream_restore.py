@@ -235,8 +235,52 @@ def retryable_release_error(error):
     return bool(re.search(r'HTTP (?:404|408|429|500|502|503|504)\b',message)) or any(
         phrase in message.lower() for phrase in ('connection reset','timeout','temporarily unavailable','eof'))
 
+def verify_asset_without_api_digest(asset, name, size, sha):
+    """Read back the real Release bytes when GitHub reports digest: null.
+
+    This is bounded streaming verification, not a second upload, overwrite,
+    or blind acceptance of a missing API checksum.
+    """
+    from urllib.parse import unquote
+    url=asset.get('browser_download_url')
+    parsed=urlparse(url or '')
+    segments=unquote(parsed.path).split('/')
+    owner, repo=REPO.split('/')
+    if (parsed.scheme!='https' or parsed.hostname!='github.com'
+            or parsed.username or parsed.password or parsed.fragment
+            or len(segments)!=7 or segments[1:5]!=[owner,repo,'releases','download']
+            or not re.fullmatch(r'ekab-nih3d-recovered-\\d{5}-\\d{5}',segments[5])
+            or segments[6]!=name):
+        raise ValueError('Cannot safely verify missing remote digest: '+name)
+    for attempt in range(3):
+        try:
+            h=hashlib.sha256();received=0
+            with http(url, headers={'Accept':'application/octet-stream'}) as response:
+                if response.status!=200 or 'json' in response.headers.get('Content-Type','').lower():
+                    raise ValueError('Release asset did not return verified binary bytes: '+name)
+                while True:
+                    chunk=response.read(min(CHUNK, size-received+1))
+                    if not chunk:break
+                    received+=len(chunk)
+                    if received>size:raise ValueError('Remote asset exceeds expected size: '+name)
+                    h.update(chunk)
+            if received!=size or h.hexdigest().lower()!=sha.lower():
+                raise ValueError('Remote conflict; overwrites forbidden: '+name)
+            print('REMOTE_STREAM_SHA256_VERIFIED',name,size,flush=True)
+            return
+        except (HTTPError,URLError,TimeoutError) as error:
+            if isinstance(error,HTTPError) and error.code not in (404,408,429,500,502,503,504):
+                raise
+            if attempt==2:raise
+            time.sleep(2**attempt)
+
 def check_remote_asset(asset, name, size, sha):
-    if asset.get('size')!=size or str(asset.get('digest','')).lower()!='sha256:'+sha:
+    if asset.get('size')!=size:
+        raise ValueError('Remote conflict; overwrites forbidden: '+name)
+    digest=asset.get('digest')
+    if digest is None:
+        verify_asset_without_api_digest(asset,name,size,sha)
+    elif not isinstance(digest,str) or digest.lower()!='sha256:'+sha.lower():
         raise ValueError('Remote conflict; overwrites forbidden: '+name)
 
 def create_recovery_release(tag, start, artifact_id=None, attempts=5):
