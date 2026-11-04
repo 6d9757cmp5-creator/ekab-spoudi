@@ -95,6 +95,9 @@ for(const item of cases){
     body:JSON.stringify({messages:payload.messages,stream:false,max_tokens:170,temperature:0.2,chat_template_kwargs:{enable_thinking:false}}),
     signal:AbortSignal.timeout(20000)});
    const json=await response.json().catch(()=>null);
+   result.providerHttpStatus=response.status;
+   result.providerErrorCode=String(json?.errors?.[0]?.code??'').slice(0,24);
+   result.providerResponseKind=typeof json?.result?.response;
    if(!response.ok||json?.success===false){
      const error=new Error('Cloudflare status '+response.status+' / code '+String(json?.errors?.[0]?.code||''));
      error.providerFailure=true;throw error;
