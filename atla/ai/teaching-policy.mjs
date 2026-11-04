@@ -42,6 +42,20 @@ export function auditAssistantReply(reply,passages=[]){
  const citations=[...text.matchAll(CITATION)].map(m=>'T'+m[2]);
  if(!citations.length||citations.some(id=>!allowed.has(id)))return {ok:false,reason:'missing-or-unknown-citation'};
  if(DOSE.test(text))return {ok:false,reason:'unsafe-dose-output'};
+ // A source ID alone never validates a new numerical claim. Emergency contact
+ // numbers are platform safety guidance, not lesson evidence.
+ const withoutCitations=text.replace(/\[(?:[ΤT][1-9][0-9]?)(?:\s*,\s*[ΤT][1-9][0-9]?)*\]/g,'');
+ const claimNumbers=[...withoutCitations.matchAll(/\d+(?:[.,]\d+)?/g)].map(m=>m[0].replace(',','.'));
+ const evidenceText=(Array.isArray(passages)?passages:[]).map(p=>String(p?.term??'')+' '+String(p?.definition??'')).join(' ');
+ const sourcedNumbers=new Set([...evidenceText.matchAll(/\d+(?:[.,]\d+)?/g)].map(m=>m[0].replace(',','.')));
+ if(claimNumbers.some(n=>n!=='166'&&n!=='112'&&!sourcedNumbers.has(n)))
+   return {ok:false,reason:'unsupported-numeric-claim'};
+ // ERC 2025: cardiac arrest may present with abnormal or agonal breathing.
+ // Do not define CPR as requiring simultaneous cessation of heart and breathing.
+ const statement=norm(withoutCitations);
+ if(/καρδια\s+και\s+(?:η\s+)?αναπνοη.{0,75}σταματ/.test(statement)&&
+    /καρδιοπνευμον|καρπα|ανακοπ/.test(norm(evidenceText)+' '+statement))
+   return {ok:false,reason:'arrest-breathing-oversimplification'};
  // Conservative, source-specific red flags: a citation must not authorize an extra mechanism.
  const sourceText=norm((Array.isArray(passages)?passages:[]).map(p=>p?.definition||'').join(' '));
  const unverifiedMechanisms=['ενδοθωρακικ','ενδοκαρδιακ','αορτ','στεφανιαι','αιμοδυναμ','θωρακικ πιεσ','αντλητικ πιεσ'];
