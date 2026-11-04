@@ -14,7 +14,8 @@ export function teachingApproach({question='',level='student',approvedScenarioSe
  const severity=approvedScenarioSeverity==='critical'||CRITICAL.test(q)?'critical':approvedScenarioSeverity==='serious'||SERIOUS.test(q)?'serious':'ordinary';
  const simplify=SIMPLIFY.test(q);
  const style=severity==='critical'?'Απαιτητικός σε κλινική ασφάλεια, βήματα, αιτιολόγηση και όρια· ποτέ τιμωρητικός.':severity==='serious'?'Σοβαρός, σαφής και ακριβής· επισήμανε κρίσιμες προϋποθέσεις.':'Άμεσος, κατανοητός και φιλικός.';
- const depth=simplify?'Εξήγησε ξανά πιο απλά, με άλλο παράδειγμα, χωρίς καμία ποινή ή διαγραφή προόδου.':level==='beginner'?'Ξεκίνα από τα βασικά.':'Δίδαξε στο επίπεδο του συγκεκριμένου εκπαιδευτικού στόχου.';
+ const wantsReasoning=/(αιτιολογ|ρωτησε με|εξετασε με|καλεσε με να εξηγησ)/.test(q);
+ const depth=wantsReasoning?'Ζήτησε από τον μαθητή μία αιτιολόγηση με τη μορφή ερώτησης. Μην απαντήσεις την ερώτηση εκ μέρους του.':simplify?'Εξήγησε ξανά πιο απλά, με άλλο παράδειγμα, χωρίς καμία ποινή ή διαγραφή προόδου.':level==='beginner'?'Ξεκίνα από τα βασικά.':'Δίδαξε στο επίπεδο του συγκεκριμένου εκπαιδευτικού στόχου.';
  return {severity,simplify,style,depth};
 }
 export const ATLA_RUNTIME_RULES=[
