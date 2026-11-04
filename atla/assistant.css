@@ -41,3 +41,5 @@
 .atla-mock{background:#fff7db!important;color:#65440f!important;border:1px dashed #bb8d36;white-space:pre-wrap}
 .atla-mock::first-line{font-weight:850}
 @media(max-width:640px){.atla-demo-row{min-height:43px;box-sizing:border-box}}
+
+.atla-demo-row[hidden]{display:none}

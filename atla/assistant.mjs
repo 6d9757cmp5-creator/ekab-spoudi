@@ -90,7 +90,10 @@ function boot(){
  head.append(brand,close);
  const state=$('p','atla-availability','');
  const demoRow=$('label','atla-demo-row');
- const demoToggle=$('input','atla-demo-toggle');demoToggle.type='checkbox';demoToggle.checked=!ATLA_AI.endpoint;
+ const demoToggle=$('input','atla-demo-toggle');demoToggle.type='checkbox';
+ // Learners always get real local knowledge. Fake replies exist only for an explicit UI test.
+ const demoAllowed=new URLSearchParams(location.search).get('atla-demo')==='1';
+ demoToggle.checked=demoAllowed;demoRow.hidden=!demoAllowed;
  const demoCopy=$('span','','Δοκιμαστικό AI · εικονικές απαντήσεις');
  demoRow.append(demoToggle,demoCopy);
  const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA AI · χρειάζεται έλεγχος πραγματικής υπηρεσίας':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
@@ -165,6 +168,12 @@ function boot(){
   const teachingModel=await chooseTeachingModel({question:q,from:location.pathname+location.search+location.hash,
    mode:/(?:^|\/)mentor-next\.html$/.test(location.pathname)?'simulation':'lesson'});
   if(myId!==requestId)return;
+  // A request to see a model is answered by that model, not by a text search on the words "3D" or "show".
+  if(teachingModel?.requestedVisual&&!demoToggle.checked){
+   add('mentor','Βρήκα το 3D μοντέλο «'+teachingModel.modelLabel+'» στη βιβλιοθήκη μας. Είναι εκπαιδευτικό μοντέλο, χωρίς κλινική επικύρωση.');
+   offerLink(teachingModel.href,teachingModel.label);
+   return;
+  }
   // The exact model answers better than opening the whole tool it belongs to.
   const link=teachingModel?null:navigation(q);
   const teachingTool=teachingModel||chooseTeachingTool({question:q});

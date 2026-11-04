@@ -32,6 +32,8 @@ test('text is enough: the 3D registry is not even downloaded',async()=>{
 test('asked or struggling learners get the exact model, with a way back',async()=>{
  const asked=(await model({question:'Δείξε μου την επιγονατίδα σε 3D',from:'/app/saek-course-01.html#lesson-2'})).result;
  assert.equal(asked.accession,'3DPX-000170');
+ assert.equal(asked.requestedVisual,true);
+ assert.equal(asked.modelLabel,'Επιγονατίδα');
  assert.match(asked.href,/dataset=nih&model=3DPX-000170&from=%2Fapp%2Fsaek-course-01\.html%23lesson-2$/);
  assert.equal((await model({question:'Δεν κατάλαβα την επιγονατίδα'})).result.accession,'3DPX-000170');
  assert.equal((await model({question:'Πες το πιο απλά για την επιγονατίδα'})).result.accession,'3DPX-000170');

@@ -31,10 +31,13 @@ try{
  await page.locator('.atla-launcher').click();
  await ask(page,'Τι είναι η επιγονατίδα;');
  assert.equal(await modelLinks(page).count(),0,'Text is enough: no model is offered');
+ assert.doesNotMatch(await page.locator('.atla-message').last().innerText(),/ΔΟΚΙΜΑΣΤΙΚΗ|Εικονικό AI/,'Learners never get fake replies');
+ assert.equal(await page.locator('.atla-demo-row').isVisible(),false,'The demo switch is hidden from learners');
  await ask(page,'Δείξε μου την επιγονατίδα σε 3D');
  const offer=modelLinks(page).last();
  await offer.waitFor({state:'attached',timeout:15000});
  assert.match(await offer.innerText(),/3D μοντέλο: Επιγονατίδα/);
+ assert.match(await page.locator('.atla-message').last().innerText(),/μοντέλο «Επιγονατίδα»/,'The reply is about the requested model');
  const href=await offer.getAttribute('href');
  assert.match(href,/model=3DPX-000170/);
  assert.match(href,/from=%2Fsaek-course-02\.html/,'A return point is carried along');

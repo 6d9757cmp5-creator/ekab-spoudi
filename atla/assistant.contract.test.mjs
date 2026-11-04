@@ -9,6 +9,11 @@ const rootPages=[
  'search.html','profession-law.html','mentor-ecg.html','mentor-next.html',
  ...Array.from({length:20},(_,i)=>'saek-course-'+String(i+1).padStart(2,'0')+'.html')
 ];
+test('fake AI replies are never the default for learners',()=>{
+ const source=read('atla/assistant.mjs');
+ assert.ok(source.includes("get('atla-demo')==='1'"),'Demo replies need an explicit test parameter');
+ assert.ok(!/demoToggle\.checked=!ATLA_AI\.endpoint/.test(source),'A closed AI endpoint must not switch learners to fake replies');
+});
 test('one ATLA companion on migrated desktop/mobile entrypoints',()=>{
  for(const page of rootPages){
   const html=read(page);

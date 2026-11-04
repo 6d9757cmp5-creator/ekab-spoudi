@@ -23,7 +23,8 @@ export async function chooseTeachingModel({question='',mode='lesson',revealed=fa
  const model=selectAtlaVisual(library,{text:question,mode,revealed,confirmedAnatomy,requestedVisual,struggling});
  if(!model)return null;
  return {kind:'anatomy-model',href:viewerHref(model,{rootUrl,tool:mode==='simulation'?'cockpit':'anatomy',from}),
-  label:'Άνοιξε το 3D μοντέλο: '+model.label,reason:'library-structure-match',accession:model.accession};
+  label:'Άνοιξε το 3D μοντέλο: '+model.label,reason:'library-structure-match',accession:model.accession,
+  modelLabel:model.label,requestedVisual};
 }
 
 export function chooseTeachingTool({question='',chapterId='',videos=[]}={}){
