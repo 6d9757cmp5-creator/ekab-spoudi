@@ -29,6 +29,8 @@ jobs:
             scripts/nih3d-archive-planned-originals.mjs
             scripts/nih3d-build-verified-archive-registry.mjs
             scripts/nih3d-build-scientific-evidence.mjs
+            scripts/nih3d-structural-qa.mjs
+            scripts/nih3d-structural-qa.test.mjs
             scripts/nih3d-scientific-ontology.test.mjs
             scripts/nih3d-biomedical-scope.test.mjs
             tools/atla-ai/nih3d-scientific-ontology.mjs
@@ -50,6 +52,7 @@ jobs:
           node scripts/nih3d-plan-next-originals.test.mjs
           node scripts/nih3d-scientific-ontology.test.mjs
           node scripts/nih3d-biomedical-scope.test.mjs
+          node scripts/nih3d-structural-qa.test.mjs
           node --check scripts/nih3d-archive-planned-originals.mjs
       - name: Select next limited NIH batch from full source catalogue
         run: node scripts/nih3d-plan-next-originals.mjs
@@ -129,6 +132,22 @@ jobs:
         run: |
           set -euo pipefail
           node scripts/nih3d-build-verified-archive-registry.mjs
+          # The evidence gate compares against structural QA, so QA must first cover the new batch.
+          qa=docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json
+          registry=tools/atla-ai/resources/nih3d-verified-originals-2026.json
+          staging="$RUNNER_TEMP/nih3d-qa-originals"
+          mapfile -t images < <(node scripts/nih3d-structural-qa.mjs images-to-restore "$registry" "$qa")
+          for image in "${images[@]}"; do
+            [[ "$image" =~ ^ghcr\.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:[a-f0-9]{64}$ ]] || { echo "Untrusted image $image"; exit 1; }
+            digest="${image##*@sha256:}"
+            docker pull "$image"
+            cid="$(docker create "$image" /MANIFEST.json)"
+            mkdir -p "$staging/$digest/originals"
+            docker cp "$cid:/originals/." "$staging/$digest/originals/"
+            docker rm "$cid" >/dev/null
+          done
+          cp "$qa" "$RUNNER_TEMP/nih3d-qa-baseline.json"
+          node scripts/nih3d-structural-qa.mjs "$registry" "$staging" "$qa" "$RUNNER_TEMP/nih3d-qa-baseline.json"
           node scripts/nih3d-build-scientific-evidence.mjs
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -157,7 +176,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/ATLA_NIH3D_GHCR_BATCH_*_2026.json tools/atla-ai/resources/nih3d-verified-originals-2026.json tools/atla-ai/resources/nih3d-educational-evidence-2026/ tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
+          git add docs/ATLA_NIH3D_GHCR_BATCH_*_2026.json docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json tools/atla-ai/resources/nih3d-verified-originals-2026.json tools/atla-ai/resources/nih3d-educational-evidence-2026/ tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
           if ! git diff --cached --quiet; then
             git commit -m 'evidence(atla): restore next NIH original sources from GHCR with SHA256'
             git pull --rebase origin "${GITHUB_REF_NAME}"
