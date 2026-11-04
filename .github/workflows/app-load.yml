@@ -103,3 +103,4 @@ jobs:
             audit-results/cockpit-visual-report.json
           if-no-files-found: warn
       - run: node scripts/verify-atla-presence-browser.mjs
+      - run: node scripts/verify-atla-offline-browser.mjs
