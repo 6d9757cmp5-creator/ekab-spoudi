@@ -5,14 +5,26 @@ on:
       - main
       - feat/nih3d-contextual-ui-20261103
     paths:
-      - 'tools/atla-ai/nih3d-research-context.mjs'
+      - 'tools/atla-ai/nih3d-library.mjs'
+      - 'tools/atla-ai/model-preview.mjs'
+      - 'tools/atla-ai/model-preview-catalog.mjs'
+      - 'tools/atla-ai/resources/model-library.json'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'scripts/nih3d-library.test.mjs'
+      - 'scripts/nih3d-build-library.mjs'
       - 'tools/atla-ai/nih3d-learning-surface.mjs'
       - 'scripts/nih3d-contextual-ui.test.mjs'
       - 'scripts/nih3d-contextual-browser.test.mjs'
       - '.github/workflows/atla-nih3d-contextual-ui.yml'
   pull_request:
     paths:
-      - 'tools/atla-ai/nih3d-research-context.mjs'
+      - 'tools/atla-ai/nih3d-library.mjs'
+      - 'tools/atla-ai/model-preview.mjs'
+      - 'tools/atla-ai/model-preview-catalog.mjs'
+      - 'tools/atla-ai/resources/model-library.json'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'scripts/nih3d-library.test.mjs'
+      - 'scripts/nih3d-build-library.mjs'
       - 'tools/atla-ai/nih3d-learning-surface.mjs'
       - 'scripts/nih3d-contextual-ui.test.mjs'
       - 'scripts/nih3d-contextual-browser.test.mjs'
@@ -28,7 +40,12 @@ jobs:
         with:
           sparse-checkout: |
             scripts/nih3d-contextual-ui.test.mjs
-            tools/atla-ai/nih3d-research-context.mjs
+            scripts/nih3d-library.test.mjs
+            scripts/nih3d-build-library.mjs
+            tools/atla-ai/nih3d-library.mjs
+            tools/atla-ai/resources/model-library.json
+            tools/atla-ai/resources/nih3d-library/
+            tools/atla-ai/resources/nih3d-verified-originals-2026.json
             tools/atla-ai/nih3d-learning-surface.mjs
             tools/atla-ai/nih3d-original-source-gateway.mjs
             tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
@@ -45,21 +62,27 @@ jobs:
           node-version: '22'
       - name: JS syntax and strict source-reference gates
         run: |
-          node --check tools/atla-ai/nih3d-research-context.mjs
+          node --check tools/atla-ai/nih3d-library.mjs
           node --check tools/atla-ai/nih3d-learning-surface.mjs
           node --check scripts/nih3d-contextual-ui.test.mjs
           node --check saek-exams.js
           node --check tools/patient-simulator/app/next-sim.mjs
           node scripts/nih3d-contextual-ui.test.mjs
+          node scripts/nih3d-library.test.mjs
   browser:
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: npm install --no-save --no-package-lock playwright@1.56.1
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: node scripts/nih3d-contextual-browser.test.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nih3d-library-browser-evidence
+          path: browser-qa-results/
+          retention-days: 90
