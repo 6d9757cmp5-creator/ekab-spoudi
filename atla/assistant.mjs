@@ -6,7 +6,7 @@
 // Preserve the existing local-only spaced-review popup as the legacy shell is retired.
 import '../services/recall/popup.mjs';
 import {retrieve,riskGuard,RISK_MESSAGE} from './knowledge/retrieve.mjs';
-import {askAi,buildPayload} from './ai/client.mjs';
+import {askAi,buildPayload,eligibleAiPassages} from './ai/client.mjs';
 import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
 import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './student/profile.mjs';
@@ -177,9 +177,10 @@ function boot(){
   try{
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
-   if(!ATLA_AI.endpoint||!found.passages.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
+   const verifiedForAi=eligibleAiPassages(found.passages,terms);
+   if(!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
    const level=teachingLevelFor(learnerProfile(),q);
-   const payload=buildPayload({question:q,passages:found.passages,level,history:historyForAi(history(),4)});
+   const payload=buildPayload({question:q,passages:verifiedForAi,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
    if(teachingTool)offerLink(teachingTool.href,teachingTool.label);

@@ -8,6 +8,24 @@ import {auditAssistantReply} from "./teaching-policy.mjs";
 export const LIMIT_MESSAGE="Η ATLA έφτασε προσωρινά το όριο δωρεάν χρήσης AI. Δοκίμασε ξανά αργότερα· οι τοπικές απαντήσεις από τη βιβλιοθήκη εξακολουθούν να λειτουργούν.";
 export const UNAVAILABLE_MESSAGE="Η απάντηση AI δεν είναι διαθέσιμη αυτή τη στιγμή. Χρησιμοποιώ μόνο την τοπική βιβλιοθήκη.";
 
+/** Only locally pinned direct-section sources may be sent to the generative
+ * Worker. The Worker independently rechecks canonical term, text and ranking.
+ * Non-verified EOPPEP/SAEK/category passages remain available locally.
+ */
+export function eligibleAiPassages(passages,glossaryItems){
+ if(!Array.isArray(passages)||!Array.isArray(glossaryItems))return [];
+ const approved=new Set(glossaryItems.filter(item=>
+  item?.sourceType==='direct-section'&&
+  item.sourceCrosscheck==='2026-11-04-primary-section'&&
+  typeof item.sourceSection==='string'&&item.sourceSection.length>0&&
+  typeof item.sourceVersion==='string'&&item.sourceVersion.length>0&&
+  typeof item.source==='string'&&item.source.startsWith('https://')
+ ).map(item=>item.term+'\u0000'+item.definition));
+ return passages.slice(0,4).filter(p=>
+  p&&/^T[1-4]$/.test(p.id)&&
+  approved.has(p.term+'\u0000'+p.definition));
+}
+
 export function buildPayload({question,passages,level,history}){
  const q=String(question||"").trim().slice(0,300);
  const ps=(Array.isArray(passages)?passages:[]).slice(0,4).map(p=>({

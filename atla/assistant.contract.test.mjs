@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {eligibleAiPassages} from './ai/client.mjs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const rootPages=[
  'index.html','paramedic.html','saek.html','eoppep.html','theory.html','practical_exam.html',
@@ -81,4 +82,26 @@ test('ATLA-only visible entrypoints and in-place protocol tutor keep legacy stat
  // Data compatibility must remain stable until a separately proven migration.
  assert.match(runtime,/ekab:mentor:protocol-foundation:v2/);
  assert.match(read('atla/student/memory.mjs'),/ekab\.mentor\.chat\.v1/);
+});
+
+test('ATLA sends only exact section-verified citations, preserving canonical ranking IDs',()=>{
+ const glossary=JSON.parse(read('medical-terms.json')).items;
+ const cpr=glossary.find(x=>x.term==='Καρδιοπνευμονική αναζωογόνηση');
+ const generic=glossary.find(x=>x.sourceType==='category');
+ assert(cpr&&generic&&cpr.sourceType==='direct-section');
+ const mixed=[
+  {id:'T1',term:generic.term,definition:generic.definition},
+  {id:'T2',term:cpr.term,definition:cpr.definition}
+ ];
+ const before=JSON.stringify(mixed);
+ assert.deepEqual(eligibleAiPassages(mixed,glossary),[mixed[1]]);
+ assert.equal(JSON.stringify(mixed),before);
+ assert.deepEqual(eligibleAiPassages([mixed[0]],glossary),[]);
+ assert.deepEqual(eligibleAiPassages([{...mixed[1],definition:'Forged'}],glossary),[]);
+ assert.deepEqual(eligibleAiPassages([{...mixed[1],id:'T9'}],glossary),[]);
+ assert.deepEqual(eligibleAiPassages([{id:'T1',term:'ΕΟΠΠΕΠ',definition:'Εξέταση'}],glossary),[]);
+ assert.deepEqual(eligibleAiPassages(mixed,[]),[]);
+ const shell=read('atla/assistant.mjs');
+ assert.match(shell,/eligibleAiPassages\(found\.passages,terms\)/);
+ assert.match(shell,/passages:verifiedForAi/);
 });
