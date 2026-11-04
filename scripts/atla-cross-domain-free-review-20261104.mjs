@@ -37,9 +37,11 @@ if(!/^[a-f0-9]{32}$/i.test(account)||!token||process.env.CLOUDFLARE_FREE_PLAN_CO
 const invoke=async(model,messages,cap)=>{
  if(result.liveCallCount>=6)throw Error('hard call budget exceeded');
  result.liveCallCount++;
+ const input={messages,stream:false,max_tokens:cap,temperature:0.15};
+ if(model===MAIN_MODEL)input.chat_template_kwargs={enable_thinking:false};
  const response=await fetch('https://api.cloudflare.com/client/v4/accounts/'+account+'/ai/run/'+model,{
    method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
-   body:JSON.stringify({messages,stream:false,max_tokens:cap,temperature:0.15}),
+   body:JSON.stringify(input),
    signal:AbortSignal.timeout(22000)
  });
  const j=await response.json().catch(()=>null);
