@@ -164,4 +164,39 @@ class RangeRecoveryTests(unittest.TestCase):
         self.assertEqual(conn.call_count,2)
         self.assertEqual(sleep.call_count,1)
 
+    def test_null_release_digest_reads_back_real_sha256_stream(self):
+        payload=b'1234'
+        name='atla-nih3d-01301-01400-part-000.tar.zst'
+        asset={'size':4,'digest':None,
+               'browser_download_url':'https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/download/ekab-nih3d-recovered-01301-01400/'+name}
+        with patch.object(s,'http',return_value=FakeResponse(payload,200,{'Content-Type':'application/octet-stream'})) as request:
+            s.check_remote_asset(asset,name,len(payload),s.hashlib.sha256(payload).hexdigest())
+        self.assertEqual(request.call_count,1)
+
+    def test_null_release_digest_wrong_bytes_fails_closed(self):
+        payload=b'bad!'
+        name='atla-nih3d-01301-01400-part-000.tar.zst'
+        asset={'size':4,'digest':None,
+               'browser_download_url':'https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/download/ekab-nih3d-recovered-01301-01400/'+name}
+        with patch.object(s,'http',return_value=FakeResponse(payload,200,{'Content-Type':'application/octet-stream'})):
+            with self.assertRaisesRegex(ValueError,'Remote conflict'):
+                s.check_remote_asset(asset,name,4,s.hashlib.sha256(b'1234').hexdigest())
+
+    def test_null_release_digest_missing_or_untrusted_url_fails_closed(self):
+        for url in (None,'https://other.example.net/release/asset',
+                    'http://github.com/6d9757cmp5-creator/ekab-spoudi/releases/download/ekab-nih3d-recovered-01301-01400/test'):
+            asset={'size':4,'digest':None,'browser_download_url':url}
+            with patch.object(s,'http') as request:
+                with self.assertRaisesRegex(ValueError,'Cannot safely verify'):
+                    s.check_remote_asset(asset,'test',4,s.hashlib.sha256(b'1234').hexdigest())
+            request.assert_not_called()
+
+    def test_null_release_digest_short_download_fails_closed(self):
+        name='atla-nih3d-01301-01400-part-000.tar.zst'
+        asset={'size':4,'digest':None,
+               'browser_download_url':'https://github.com/6d9757cmp5-creator/ekab-spoudi/releases/download/ekab-nih3d-recovered-01301-01400/'+name}
+        with patch.object(s,'http',return_value=FakeResponse(b'123',200,{'Content-Type':'application/octet-stream'})):
+            with self.assertRaisesRegex(ValueError,'Remote conflict'):
+                s.check_remote_asset(asset,name,4,s.hashlib.sha256(b'1234').hexdigest())
+
 if __name__=='__main__':unittest.main()
