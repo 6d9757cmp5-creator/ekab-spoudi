@@ -26,10 +26,29 @@ test('surface gate rejects uncited, fabricated citations and unsafe doses',()=>{
  assert.equal(auditAssistantReply('Η κλίμακα GCS έχει 15 βαθμούς. [Τ1]',p).ok,true);
  assert.equal(auditAssistantReply('Ξέρω ότι νιώθεις θλίψη [Τ1]',p).ok,false);
 });
+
+test('high-stakes mechanistic assertions need source support even when a citation exists',()=>{
+ const minimal=[{id:'T1',definition:'Καρδιοπνευμονική αναζωογόνηση: θωρακικές συμπιέσεις, όπου ενδείκνυται αερισμοί, για υποστήριξη κυκλοφορίας.'}];
+ assert.equal(auditAssistantReply('Η ενδοθωρακική πίεση στηρίζει την κυκλοφορία [Τ1]',minimal).ok,false);
+ assert.equal(auditAssistantReply('Συμπιέσεις για υποστήριξη κυκλοφορίας [Τ1]',minimal).ok,true);
+ const detailed=[{id:'T1',definition:'Οι αλλαγές της ενδοθωρακικής πίεσης μπορεί να επηρεάζουν τη ροή.'}];
+ assert.equal(auditAssistantReply('Η ενδοθωρακική πίεση αλλάζει [Τ1]',detailed).ok,true);
+});
 test('video is future-gated on publication, review and chapter match',()=>{
  const video={url:'https://example.com/lesson',chapterIds:['lesson-2'],approved:true,reviewed:true,published:true};
  assert.equal(approvedTeachingVideo('lesson-2',[]),null);
  assert.equal(approvedTeachingVideo('lesson-1',[video]),null);
  assert.equal(approvedTeachingVideo('lesson-2',[{...video,reviewed:false}]),null);
  assert.equal(approvedTeachingVideo('lesson-2',[video]),video);
+});
+
+test('learner request for justification asks a question instead of giving the worked solution',()=>{
+ const approach=teachingApproach({question:'Σε άσκηση ΚΑΡΠΑ, ζήτησε να αιτιολογήσω την απάντησή μου.'});
+ assert.match(approach.depth,/Ζήτησε από τον μαθητή μία αιτιολόγηση/);
+ assert.match(approach.depth,/Μην απαντήσεις την ερώτηση/);
+ assert.match(approach.depth,/Ρώτησε μόνο για όσα περιγράφονται ρητά/);
+});
+test('source fidelity is required beyond citation syntax',()=>{
+ assert.match(ATLA_RUNTIME_RULES,/ισχυρισμός πρέπει να στηρίζεται ρητά/);
+ assert.match(ATLA_RUNTIME_RULES,/μη τεκμηριωμένους μηχανισμούς/);
 });
