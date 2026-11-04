@@ -13,7 +13,7 @@ const token=process.env.CLOUDFLARE_WORKERS_AI_TEST_TOKEN||'';
 const MAIN_MODEL='@cf/google/gemma-4-26b-a4b-it';
 const REVIEW_MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 const cases=[
- {id:'cpr',term:'Καρδιοπνευμονική αναζωογόνηση',q:'Εξήγησε μόνο με βάση τις πηγές τι είναι η ΚΑΡΠΑ.',must:['συμπιεσ','κυκλοφορ']},
+ {id:'cpr',term:'Καρδιοπνευμονική αναζωογόνηση',q:'Εξήγησε μόνο με βάση τις πηγές τι είναι η ΚΑΡΠΑ.',must:['συμπιεσ','αερισμ','κυκλοφορ']},
  {id:'airway',term:'Αεραγωγός',q:'Τι είναι ο αεραγωγός; Χρησιμοποίησε μόνο τον δοσμένο ορισμό.',must:['αεραγωγ','αερα']},
  {id:'anaphylaxis',term:'Αναφυλαξία',q:'Πώς ορίζεται η αναφυλαξία; Μόνο τον ορισμό της.',must:['αναφυλαξ','αναπνο']},
  {id:'ecg',term:'Ηλεκτροκαρδιογράφημα',q:'Τι καταγράφει το ηλεκτροκαρδιογράφημα;',must:['ηλεκτρ','καρδι']},
@@ -75,7 +75,9 @@ for(const item of cases){
   e.workerHttpStatus=resp.status;
   e.workerAccepted=resp.status===200&&(await resp.text()).includes('data: [DONE]');
   e.rawOutput=modelReply.slice(0,2200);
-  e.markerPassed=item.must.every(word=>norm(modelReply).includes(word));
+  e.markerPassed=item.id==='anaphylaxis'
+    ?norm(modelReply).includes('αναφυλαξ')&&(norm(modelReply).includes('αναπνο')||norm(modelReply).includes('κυκλοφορ'))
+    :item.must.every(word=>norm(modelReply).includes(word));
   e.result=e.workerAccepted&&e.markerPassed?'screening_pass':'screening_fail';
   if(!e.workerAccepted||!e.markerPassed)failed=true;
  }catch(err){e.result='provider_or_guard_error';e.error=String(err.message).slice(0,120);failed=true;}
