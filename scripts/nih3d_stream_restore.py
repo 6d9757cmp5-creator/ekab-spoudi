@@ -239,7 +239,7 @@ def check_remote_asset(asset, name, size, sha):
     if asset.get('size')!=size or str(asset.get('digest','')).lower()!='sha256:'+sha:
         raise ValueError('Remote conflict; overwrites forbidden: '+name)
 
-def create_recovery_release(tag, start, attempts=5):
+def create_recovery_release(tag, start, artifact_id=None, attempts=5):
     for attempt in range(attempts):
         already=release_assets(tag)
         if already is not None:
@@ -247,7 +247,7 @@ def create_recovery_release(tag, start, attempts=5):
         try:
             gh('release','create',tag,'--repo',REPO,'--target',os.getenv('GITHUB_SHA','main'),
                '--title','EKAB NIH3D historical recovery '+prefix(start),
-               '--notes','Historical NIH3D fallback package; not clinical approval.')
+               '--notes','Historical NIH3D fallback package from GitHub artifact '+str(artifact_id)+'; not clinical approval.')
         except subprocess.CalledProcessError as exc:
             # The upload may have succeeded even when CLI exits nonzero.
             already=release_assets(tag)
@@ -321,7 +321,7 @@ def recover(artifact_id,start):
     tag=recovery_tag(start)
     existing=release_assets(tag)
     if existing is None:
-        existing=create_recovery_release(tag,start)
+        existing=create_recovery_release(tag,start,artifact_id)
     for i,filename in enumerate(filenames,1):
         with tempfile.TemporaryDirectory(prefix='nih3d-range-') as td:
             if shutil.disk_usage(td).free<MAX_PART+512*1024**2:raise RuntimeError('Insufficient disk for one part')
