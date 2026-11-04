@@ -1,0 +1,41 @@
+name: ATLA five-domain source-grounded live AI review (Free, one-shot)
+on:
+  push:
+    branches: [audit/atla-source-fidelity-20261104]
+    paths:
+      - '.github/workflows/atla-cross-domain-one-shot-20261104.yml'
+permissions:
+  contents: read
+concurrency:
+  group: atla-five-domain-once-20261104
+  cancel-in-progress: false
+jobs:
+  scoped-review:
+    if: github.event.head_commit.message == 'Run one-shot ATLA cross-domain six-call Free QA'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_WORKERS_AI_TEST_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TEST_TOKEN }}
+      CLOUDFLARE_FREE_PLAN_CONFIRMED: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Dry-run syntax and source-protection regression before any AI calls
+        run: |
+          node --check scripts/atla-cross-domain-free-review-20261104.mjs
+          node --test atla/ai/teaching-policy.test.mjs atla/ai/safe-stream.test.mjs
+      - name: Five synthetic ATLA teacher answers and one distinct model challenge — max six calls
+        run: node scripts/atla-cross-domain-free-review-20261104.mjs
+      - name: Preserve evidence even when any scientific screen fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-five-domain-source-screen-20261104
+          path: audit-results/atla-cross-domain-20261104.json
+          if-no-files-found: warn
+          retention-days: 30
