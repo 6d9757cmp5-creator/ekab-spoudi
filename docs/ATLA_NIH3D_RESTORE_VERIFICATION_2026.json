@@ -2,17 +2,17 @@
  "schemaVersion": 1,
  "scope": "Byte identity of archived packages. Not scientific or clinical approval.",
  "counts": {
-  "packagedRangesPublished": 43,
-  "rangesVerified": 0,
-  "rangesFailed": 1,
-  "filesVerified": 0,
-  "bytesVerified": 0
+  "packagedRangesPublished": 44,
+  "rangesVerified": 1,
+  "rangesFailed": 0,
+  "filesVerified": 1126,
+  "bytesVerified": 37729757018
  },
  "ranges": [
   {
    "range": "atla-nih3d-00001-00100",
    "tag": "atla-nih3d-master-2026",
-   "status": "FAILED",
+   "status": "ANONYMOUS_RESTORE_VERIFIED",
    "expectedFiles": 1126,
    "verifiedFiles": 1126,
    "verifiedBytes": 37729757018,
@@ -20,42 +20,9 @@
    "missingFiles": [],
    "missingFileCount": 0,
    "missingParts": [],
-   "unlistedFiles": [
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json",
-    "MANIFEST.json"
-   ],
+   "unlistedFiles": [],
    "errors": [],
-   "checkedAtUtc": "2026-11-04T20:46:43Z"
+   "checkedAtUtc": "2026-11-04T20:51:51Z"
   }
  ]
 }
