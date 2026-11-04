@@ -10,8 +10,8 @@ import {retrieve} from '../atla/knowledge/retrieve.mjs';
 import {ATLA_AI} from '../atla/ai/config.mjs';
 const account=process.env.CLOUDFLARE_ACCOUNT_ID||'';
 const token=process.env.CLOUDFLARE_WORKERS_AI_TEST_TOKEN||'';
-const MAIN_MODEL='@cf/google/gemma-4-26b-a4b-it';
-const REVIEW_MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+const MAIN_MODEL='@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+const REVIEW_MODEL='@cf/google/gemma-4-26b-a4b-it';
 const cases=[
  {id:'cpr',term:'Καρδιοπνευμονική αναζωογόνηση',q:'Εξήγησε μόνο με βάση τις πηγές τι είναι η ΚΑΡΠΑ.',must:['συμπιεσ','αερισμ','κυκλοφορ']},
  {id:'airway',term:'Αεραγωγός',q:'Τι είναι ο αεραγωγός; Χρησιμοποίησε μόνο τον δοσμένο ορισμό.',must:['αεραγωγ','αερα']},
@@ -38,7 +38,7 @@ const invoke=async(model,messages,cap)=>{
  if(result.liveCallCount>=6)throw Error('hard call budget exceeded');
  result.liveCallCount++;
  const input={messages,stream:false,max_tokens:cap,temperature:0.15};
- if(model===MAIN_MODEL)input.chat_template_kwargs={enable_thinking:false};
+ if(model.includes('/gemma-'))input.chat_template_kwargs={enable_thinking:false};
  const response=await fetch('https://api.cloudflare.com/client/v4/accounts/'+account+'/ai/run/'+model,{
    method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
    body:JSON.stringify(input),
