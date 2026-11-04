@@ -77,6 +77,10 @@ def verify_tar(stream, expected, state):
                 continue
             name = PurePosixPath(member.name).name
             row = expected.get(name)
+            if row is None and name == 'MANIFEST.json':
+                # Each package carries its own manifest; the package hash already covers it.
+                state['manifests'] = state.get('manifests', 0) + 1
+                continue
             if row is None:
                 state['unlisted'].append(name)
                 continue

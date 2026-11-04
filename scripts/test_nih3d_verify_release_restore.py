@@ -43,6 +43,12 @@ class VerifyTests(unittest.TestCase):
         verify.verify_tar(tar_bytes({'b.stl': b'x'}), {}, s)
         self.assertEqual(verify.summarize('r', 't', 0, s, [], [], [])['status'], 'FAILED')
 
+    def test_package_manifest_is_metadata_not_an_unlisted_file(self):
+        s = state()
+        verify.verify_tar(tar_bytes({'MANIFEST.json': b'{}', 'a.stl': b'aaa'}), {'a.stl': row('a.stl', b'aaa')}, s)
+        self.assertEqual(s['unlisted'], [])
+        self.assertEqual(verify.summarize('r', 't', 1, s, [], [], [])['status'], 'ANONYMOUS_RESTORE_VERIFIED')
+
     def test_missing_file_or_part_or_error_fails(self):
         for missing_files, missing_parts, errors in ((['a'], [], []), ([], ['p'], []), ([], [], ['e'])):
             out = verify.summarize('r', 't', 1, state(), missing_files, missing_parts, errors)
