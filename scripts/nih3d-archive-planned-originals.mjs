@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import {Readable,Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
+import {DEFAULTS} from './nih3d-plan-next-originals.mjs';
 
 const action=process.argv[2],root=process.env.NIH_BATCH_DIR;
 if(!root||!['prepare','verify'].includes(action))throw Error('NIH_BATCH_DIR required and prepare|verify action');
@@ -36,8 +37,8 @@ if(action==='prepare'){
  assert.equal(plan.sourceCatalogEntries,index.publishedEntriesFound);
  assert.equal(originalRegistry.catalogSourceEntries,index.publishedEntriesFound);
  assert.equal(plan.verifiedAlreadyCompleteModels,originalRegistry.modelsWithAllCatalogOriginalFilesVerified);
- assert(plan.selectedModels>0&&plan.selectedModels<=20&&plan.selectedOriginalFiles>0&&plan.selectedOriginalFiles<=85);
- assert(plan.selectedExpectedSourceBytes>0&&plan.selectedExpectedSourceBytes<=100_000_000);
+ assert(plan.selectedModels>0&&plan.selectedModels<=DEFAULTS.maxModels&&plan.selectedOriginalFiles>0&&plan.selectedOriginalFiles<=DEFAULTS.maxOriginalFiles);
+ assert(plan.selectedExpectedSourceBytes>0&&plan.selectedExpectedSourceBytes<=DEFAULTS.maxBatchBytes);
  const existing=new Set(originalRegistry.models.filter(x=>x.allOriginalFilesPersistentlyRecovered).map(x=>x.entryId));
  const segments=new Map(),models=[],files=[],urls=new Set();
  for(const selection of plan.selected){
@@ -58,7 +59,7 @@ if(action==='prepare'){
    if(!predicted||source.url!==predicted.url||size!==predicted.size||fmt!==predicted.format||
      !EXTS[fmt]||!SAFE.test(source.url)||urls.has(source.url))
     throw Error('Unsafe or changed source original '+entry.entryId);
-   if(!Number.isSafeInteger(size)||size<=80||size>200_000_000)throw Error('Individual NIH original exceeds download cap');
+   if(!Number.isSafeInteger(size)||size<=80||size>DEFAULTS.maxFileBytes)throw Error('Individual NIH original exceeds download cap');
    urls.add(source.url);perModelBytes+=size;
    const archivePath='originals/'+entry.accession+'/'+String(k).padStart(3,'0')+'.'+EXTS[fmt];
    files.push({entryId:id,accession:entry.accession,originalName:source.name??null,
@@ -85,7 +86,7 @@ if(action==='prepare'){
     let streamed=0;
     const cap=new Transform({transform(chunk,_enc,cb){
       streamed+=chunk.byteLength;
-      if(streamed>item.expectedBytes||streamed>200_000_000)return cb(Error('Unexpected source byte count'));
+      if(streamed>item.expectedBytes||streamed>DEFAULTS.maxFileBytes)return cb(Error('Unexpected source byte count'));
       cb(null,chunk);
     }});
     await pipeline(Readable.fromWeb(res.body),cap,fs.createWriteStream(p(item.archivePath)));
