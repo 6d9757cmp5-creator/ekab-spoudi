@@ -26,8 +26,8 @@ const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
  ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
- ['ATLAS Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
- ['ATLAS Clinical Cockpit','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
+ ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
+ ['ATLA Clinical Cockpit','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
  ['ECG Lab','mentor-ecg.html',['ecg','ηκγ','ηλεκτροκαρδιογρ']],
  ['Σεμινάρια','seminar-prep.html',['σεμιναρ','bls','phtls']],
@@ -82,24 +82,24 @@ function boot(){
  if(window.__ekabAtlaAssistant)return;
  window.__ekabAtlaAssistant=true;
  const css=$('link');css.rel='stylesheet';css.href=new URL('./assistant.css',import.meta.url);document.head.append(css);
- const launcher=$('button','atla-launcher','ATLAS');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLAS');
- const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLAS — AI εκπαιδευτικός βοηθός');
+ const launcher=$('button','atla-launcher','ATLA');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLA');
+ const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLA — AI εκπαιδευτικός βοηθός');
  const head=$('header','atla-head');
- const brand=$('div','atla-brand');brand.append($('strong','', 'ATLAS'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
- const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLAS');
+ const brand=$('div','atla-brand');brand.append($('strong','', 'ATLA'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
+ const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLA');
  head.append(brand,close);
  const state=$('p','atla-availability','');
  const demoRow=$('label','atla-demo-row');
  const demoToggle=$('input','atla-demo-toggle');demoToggle.type='checkbox';demoToggle.checked=!ATLA_AI.endpoint;
  const demoCopy=$('span','','Δοκιμαστικό AI · εικονικές απαντήσεις');
  demoRow.append(demoToggle,demoCopy);
- const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLAS AI · χρειάζεται έλεγχος πραγματικής υπηρεσίας':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
+ const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA AI · χρειάζεται έλεγχος πραγματικής υπηρεσίας':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
  refreshState();
  demoToggle.addEventListener('change',refreshState);
  const context=$('p','atla-context');
  const stream=$('div','atla-stream');stream.setAttribute('role','log');stream.setAttribute('aria-live','polite');
  const form=$('form','atla-form');
- const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLAS για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στο ATLAS');
+ const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLA για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στο ATLA');
  const send=$('button','atla-send','Αποστολή');send.type='submit';
  form.append(field,send);
  const footer=$('div','atla-footer');
@@ -124,7 +124,7 @@ function boot(){
  function showHistory(){
   stream.replaceChildren();
   const turns=history();
-  if(!turns.length){stream.append($('p','atla-welcome','Είμαι το ATLAS. Μπορώ να σε βοηθήσω με εκπαιδευτική ορολογία, ΕΟΠΠΕΠ και τη μετακίνηση στις ενότητες.'));return;}
+  if(!turns.length){stream.append($('p','atla-welcome','Είμαι το ATLA. Μπορώ να σε βοηθήσω με εκπαιδευτική ορολογία, ΕΟΠΠΕΠ και τη μετακίνηση στις ενότητες.'));return;}
   for(const t of turns){const b=$('p','atla-message '+(t.role==='user'?'atla-user':'atla-reply')+(t.mode==='mock'&&t.role!=='user'?' atla-mock':''),t.text);stream.append(b);}
   stream.scrollTop=stream.scrollHeight;
  }
@@ -140,7 +140,7 @@ function boot(){
  }
  const setOpen=(v)=>{visible=!!v;panel.hidden=!visible;launcher.hidden=visible;document.body.classList.toggle('atla-is-open',visible);if(visible){context.textContent='Τρέχουσα ενότητα: '+(document.querySelector('main h1,main h2')?.textContent||document.title).trim().slice(0,100);showHistory();field.focus();}else{window.speechSynthesis?.cancel?.();launcher.focus();}};
  launcher.addEventListener('click',()=>setOpen(true));close.addEventListener('click',()=>setOpen(false));
- document.addEventListener('click',e=>{if(e.target?.closest?.('[data-atla-open]')){e.preventDefault();if(!visible)setOpen(true);}});
+ document.addEventListener('click',e=>{const trigger=e.target?.closest?.('[data-atla-open]');if(!trigger)return;e.preventDefault();if(!visible)setOpen(true);const topic=String(trigger.getAttribute('data-atla-context')||'').trim().slice(0,110);if(topic){context.textContent='Εκπαιδευτικό θέμα: '+topic;field.value='Βοήθησέ με να κατανοήσω το εκπαιδευτικό θέμα «'+topic+'» με τεκμηριωμένες πηγές.';field.focus();}});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&visible)setOpen(false);});
  window.addEventListener('ekab:atlas-context',e=>{
   const detail=e.detail||{};
@@ -159,7 +159,7 @@ function boot(){
  form.addEventListener('submit',async e=>{
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q,demoToggle.checked?'mock':'local');
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
-  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLAS'),'refusal');return;}
+  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLA'),'refusal');return;}
   const studyInsight=localStudyInsight(q,learnerProfile());
   if(studyInsight){add('mentor',studyInsight,'local');return;}
   const link=navigation(q);
