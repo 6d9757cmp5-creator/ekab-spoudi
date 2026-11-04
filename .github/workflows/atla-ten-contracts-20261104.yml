@@ -1,0 +1,20 @@
+name: ATLA 10 isolated deterministic teaching contracts (no AI)
+on:
+  push:
+    branches: [test/atla-ten-teacher-behaviors-20261104]
+    paths:
+      - '.github/workflows/atla-ten-contracts-20261104.yml'
+permissions:
+  contents: read
+jobs:
+  deterministic:
+    if: github.event.head_commit.message == 'Run isolated ATLA ten deterministic contracts'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ten independently named ATLA behavioral contract tests
+        run: node --test atla/ai/teacher-ten-contract-20261104.test.mjs
