@@ -183,8 +183,9 @@ def main():
     rows = []
     for base in pending(groups, report)[:args.limit]:
         row = verify_group(base, groups[base])
-        print('NIH3D_RESTORE', json.dumps({k: row[k] for k in ('range', 'status', 'expectedFiles', 'verifiedFiles', 'missingFileCount')}), flush=True)
+        print('NIH3D_RESTORE', json.dumps({k: row[k] for k in ('range', 'status', 'expectedFiles', 'verifiedFiles', 'missingFileCount', 'missingParts', 'unlistedFiles', 'mismatchedFiles', 'errors')}), flush=True)
         rows.append(row)
+    REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text(json.dumps(merge(report, rows, groups), indent=1) + '\n', encoding='utf8')
     if any(row['status'] == 'FAILED' for row in rows):
         raise SystemExit('Restore verification found failures; see the report')
