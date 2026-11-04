@@ -249,7 +249,7 @@ def verify_asset_without_api_digest(asset, name, size, sha):
     if (parsed.scheme!='https' or parsed.hostname!='github.com'
             or parsed.username or parsed.password or parsed.fragment
             or len(segments)!=7 or segments[1:5]!=[owner,repo,'releases','download']
-            or not re.fullmatch(r'ekab-nih3d-recovered-\\d{5}-\\d{5}',segments[5])
+            or not re.fullmatch(r'ekab-nih3d-recovered-\d{5}-\d{5}',segments[5])
             or segments[6]!=name):
         raise ValueError('Cannot safely verify missing remote digest: '+name)
     for attempt in range(3):
