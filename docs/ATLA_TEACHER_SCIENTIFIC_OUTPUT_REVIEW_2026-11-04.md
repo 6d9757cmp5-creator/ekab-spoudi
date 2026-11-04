@@ -19,6 +19,7 @@
 | A3 | HIGH | Existing prior unit test accepted `Η κλίμακα GCS έχει 15 βαθμούς. [Τ1]` when evidence was only `{id:'T1'}`, with no source definition. | A syntactically valid citation is not proof of a numerical clinical claim. Add rejection for numbers not found in the referenced source record (with fixed Greek emergency-number allowlist). **Corrected in isolated audit branch; remains subject to CI / integration.** |
 | A4 | MEDIUM | All 10 synthetic probes concerned CPR. | This shows 10 scoped behaviors over one medical topic, **not** quality across trauma, airway, ECG, pharmacology, ALS, pediatric populations, or all source datasets. **Broader cross-domain evidence pending.** |
 | A5 | MEDIUM | Text assertion gate can only enforce structural citation validity, numeric coverage, and selected red-flag expressions. | It cannot verify arbitrary semantic entailment. No evidence of comprehensive independent second-model claim review. **Do not present 10/10 as medical or pedagogical certification.** |
+| A6 | HIGH | Repository `medical-terms.json` records: 203 terms; 185 `sourceType: category`, 17 with unset sourceType, 1 `anatomy`. | A generic category link is not traceable claim-level evidence. These source entries **cannot be marked independently verified** from their URL alone. No claim-based publication authorization is supplied by 10/10 response-format tests. **Source-level mapping remains open for the broader term registry.** |
 
 ## Evidence and quality thresholds
 
@@ -27,7 +28,7 @@
 - New tests reject the known A1/A3 examples and preserve legitimate concise source-bound CPR wording.
 - Before integrating PR #197, test on latest `main`, confirm protected SAEK16 browser regression, and review changes in 16 intervening base commits. Do not allow a stale broad PR merge to override newer course material or protective gates.
 - Reject the affected output if evidence is insufficient, rather than generating a plausible unsupported clinical explanation.
-- **Release status:** `BLOCKED_PENDING_SOURCE_CORRECTIONS_AND_CURRENT_BRANCH_CI`; not clinical use; public AI remains OFF.
+- **Release status:** `BLOCKED_PENDING_GLOSSARY_SOURCE_MAPPING_AND_SAFE_INTEGRATION`; source-citation coverage is incomplete, clinical use is out of scope, public AI remains OFF.
 
 ## Evidence records
 
