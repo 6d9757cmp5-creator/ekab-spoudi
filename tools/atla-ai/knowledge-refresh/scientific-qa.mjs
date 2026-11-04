@@ -20,15 +20,15 @@ export function titleScopeFlags(title){
   ...(/\b(economic|cost|financial|utilization|aviation|flight-based)\b/i.test(t)?['SAEK-learning-objective-review']:[])
  ];
 }
-export const MANUAL_GATES=Object.freeze([
- 'full-text-and-methods-read-by-qualified-reviewer',
- 'risk-of-bias-reviewed-using-appropriate-tool',
+export const EVIDENCE_GATES=Object.freeze([
+ 'full-text-and-methods-verified-with-claim-and-page',
+ 'risk-of-bias-assessed-using-appropriate-tool',
  'GRADE-certainty-assessed-for-each-clinical-outcome',
  'linked-retractions-and-expressions-of-concern-rechecked',
  'funding-and-conflicts-of-interest-assessed',
  'per-work-copyright-and-permissions-verified',
- 'SAEK-learning-goals-and-Greek-EMS-scope-mapped',
- 'second-independent-qualified-medical-reviewer-signoff'
+ 'SAEK-learning-goals-and-Greek-EMS-scope-mapped-with-uncertainties',
+ 'second-independent-AI-source-crosscheck-with-verifiable-evidence'
 ]);
 export function audit({pending,metadata,health,review=null}){
  const critical=[],warnings=[];
@@ -104,7 +104,7 @@ export function audit({pending,metadata,health,review=null}){
   inspected_indexed_records:Array.isArray(items)?items.length:0,
   title_only_scope_hints:Array.isArray(items)?items.flatMap(x=>
    titleScopeFlags(x.title).length?[{pmid:String(x.pmid),flags:titleScopeFlags(x.title)}]:[]):[],
-  mandatory_human_reviews_pending:MANUAL_GATES,
+  mandatory_evidence_checks_pending:EVIDENCE_GATES,
   critical,warnings
  };
 }
