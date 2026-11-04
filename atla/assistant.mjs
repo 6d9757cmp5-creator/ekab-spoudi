@@ -3,6 +3,8 @@
  * Reuses the legacy MENTOR retrieval/AI contract for zero backend duplication.
  * No grade or note writes; old lesson/exam stores remain untouched.
  */
+// Preserve the existing local-only spaced-review popup as the legacy shell is retired.
+import '../services/recall/popup.mjs';
 import {retrieve,riskGuard,RISK_MESSAGE} from './knowledge/retrieve.mjs';
 import {askAi,buildPayload} from './ai/client.mjs';
 import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
