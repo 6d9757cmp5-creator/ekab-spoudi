@@ -1,9 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import medicalTerms from "../../medical-terms.json" with {type:"json"};
 import worker,{validate,buildMessages,verifiedPassages,SYSTEM_PROMPT,_resetLimits} from "./src/index.js";
 
 const ORIGIN="https://6d9757cmp5-creator.github.io";
-const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:"Καρδιοπνευμονική αναζωογόνηση",definition:"Θωρακικές συμπιέσεις και όπου ενδείκνυται αερισμοί για υποστήριξη κυκλοφορίας σε ανακοπή."}],level:"student",history:[]};
+const canonicalCpr=medicalTerms.items.find(x=>x.term==="Καρδιοπνευμονική αναζωογόνηση");
+assert(canonicalCpr,"Canonical CPR glossary record must be present");
+assert.match(canonicalCpr.definition,/θωρακικές συμπιέσεις.*κυκλοφορίας.*αερισμούς.*αναπνοής/);
+const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:canonicalCpr.term,definition:canonicalCpr.definition}],level:"student",history:[]};
 const req=(over={},method="POST",b=body)=>new Request("https://w.example/",{method,headers:{origin:ORIGIN,"content-type":"application/json","cf-connecting-ip":"1.1.1.1",...over},body:method==="POST"?JSON.stringify(b):undefined});
 const aiOk=()=>({AI:{run:async(model,input)=>{aiOk.last={model,input};return new Response("data: {\"response\":\"Εκπαιδευτικός ορισμός. [T1]\"}\n\ndata: [DONE]\n\n").body;}},MENTOR_FREE_PLAN_CONFIRMED:"true"});
 
@@ -39,7 +43,7 @@ test("valid request streams from an allowlisted model with grounded messages",as
  assert.equal(aiOk.last.model,"@cf/meta/llama-3.3-70b-instruct-fp8-fast");
  assert.equal(aiOk.last.input.stream,true);
  assert.ok(aiOk.last.input.max_tokens<=350);
- assert.match(aiOk.last.input.messages.at(-1).content,/\[T1\] Καρδιοπνευμονική αναζωογόνηση: Θωρακικές συμπιέσεις/);
+ assert.ok(aiOk.last.input.messages.at(-1).content.includes("[T1] "+canonicalCpr.term+": "+canonicalCpr.definition));
 });
 
 test("no passages means no AI call",async()=>{
