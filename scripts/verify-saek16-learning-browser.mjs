@@ -84,6 +84,20 @@ try{
       assert.equal(await page.locator('#saekChapterCount').textContent(),'9 / 13');
       assert.equal(await page.evaluate(k=>localStorage.getItem(k),key),'9');
     });
+    await check(device+' read-progress retains original key and survives reload',async()=>{
+      await page.goto(base+'saek-course-16.html#lesson-9',{waitUntil:'domcontentloaded'});
+      await page.waitForFunction(()=>document.querySelector('#saekChapterCount')?.textContent==='9 / 13');
+      const key='ekab.saek.read.v1.16.9';
+      assert.equal(await page.evaluate(k=>localStorage.getItem(k),key),null);
+      await page.locator('#lesson-9 .read-button').click();
+      assert.equal(await page.evaluate(k=>localStorage.getItem(k),key),'1');
+      assert.match(await page.locator('#read-summary').textContent(),/1\/13/);
+      await page.goto(base+'saek-course-16.html',{waitUntil:'domcontentloaded'});
+      await page.waitForFunction(()=>document.querySelector('#saekChapterCount')?.textContent==='9 / 13');
+      assert.equal(await page.evaluate(k=>localStorage.getItem(k),key),'1');
+      assert.equal(await page.locator('#lesson-9 .read-button').getAttribute('aria-pressed'),'true');
+      assert.match(await page.locator('#read-summary').textContent(),/1\/13/);
+    });
     await check(device+' no uncaught page errors',async()=>assert.deepEqual(errors,[]));
     await ctx.close();
   }
