@@ -50,12 +50,19 @@ try{
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    assert.ok(overflow<=4,device+': horizontal overflow '+overflow);
    assert.equal(await page.locator('#next-case-list .next-case-card').count(),3,'preserve all original cases');
+   const slug=device.toLowerCase().replace(/[^a-z0-9]+/g,'-');
    for(const caseId of cases){
     await page.locator('[data-case-id="'+caseId+'"]').click();
     await page.waitForFunction(()=>document.querySelector('#next-ecg-wave')?.getAttribute('points')?.split(' ').length===240);
     const a=await curve.getAttribute('points');
+    await page.locator('.next-monitor').screenshot({
+      path:evidenceDir+'/'+slug+'-'+caseId+'-person-a.png',animations:'disabled'
+    });
     await page.locator('[data-next-patient="b"]').click();
     const b=await curve.getAttribute('points');
+    await page.locator('.next-monitor').screenshot({
+      path:evidenceDir+'/'+slug+'-'+caseId+'-person-b.png',animations:'disabled'
+    });
     assert.notEqual(a,b,device+': both patients supported in '+caseId);
    }
    // The new waveform must preserve existing local learner progress and patient focus on reload.
@@ -79,7 +86,6 @@ try{
    assert.equal(await page.locator('[data-next-patient="b"]').getAttribute('aria-pressed'),'true');
    assert.equal(await page.locator('[data-case-id="'+cases[cases.length-1]+'"]').getAttribute('aria-pressed'),'true');
    assert.match(await page.locator('.next-monitor').innerText(),/Ενδεικτικό εκπαιδευτικό ΗΚΓ/);
-   const slug=device.toLowerCase().replace(/[^a-z0-9]+/g,'-');
    await page.locator('.next-monitor').screenshot({path:evidenceDir+'/'+slug+'-cockpit-monitor.png',animations:'disabled'});
    // Standalone ECG Lab must remain independent with the same canonical engine.
    const lab=await page.goto(BASE+'/mentor-ecg.html',{waitUntil:'domcontentloaded',timeout:30000});
