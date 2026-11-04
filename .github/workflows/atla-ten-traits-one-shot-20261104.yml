@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   check:
-    if: github.event_name == 'push' && github.event.head_commit.message == 'Run isolated ATLA 10-behavior live audit (Workers Free)'
+    if: github.event_name == 'push' && github.event.head_commit.message == 'Diagnose isolated ATLA model first response (Workers Free)'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     env:
