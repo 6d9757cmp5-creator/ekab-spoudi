@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {audit,enforce,MANUAL_GATES,titleScopeFlags} from './scientific-qa.mjs';
+import {audit,enforce,EVIDENCE_GATES,titleScopeFlags} from './scientific-qa.mjs';
 const at='2026-11-02T09:28:46.857Z';
 const paper={id:'pubmed-12345678',pmid:'12345678',title:'Prehospital trauma review',
  journal:'Journal',published_at:'2026 Nov 01',publication_types:['Systematic Review'],
@@ -17,7 +17,9 @@ test('systematic-review indexing NEVER yields clinical certification',()=>{
  assert.equal(a.scientific_approval,'NOT_GRANTED');
  assert.equal(a.clinical_publication_allowed,false);
  assert.equal(a.independent_accreditation,false);
- assert.equal(MANUAL_GATES.length,8);
+ assert.equal(EVIDENCE_GATES.length,8);
+ assert.ok(EVIDENCE_GATES.includes('second-independent-AI-source-crosscheck-with-verifiable-evidence'));
+ assert.equal(a.mandatory_evidence_checks_pending,EVIDENCE_GATES);
  assert.equal(enforce(a),true);
 });
 test('reject forged clinical, imported or academically approved bibliography',()=>{
@@ -46,7 +48,7 @@ test('unavailable sources stay unverified; no invented approval',()=>{
  assert.ok(a.warnings.includes('some-publisher-probes-unverified'));
  assert.equal(a.clinical_publication_allowed,false);
 });
-test('title-only hints are NOT a human evidence appraisal',()=>{
+test('title-only hints are NOT a full-text evidence appraisal',()=>{
  assert.ok(titleScopeFlags('Anxiety in patients with cancer and emergency department use').includes('prehospital-transferability-review'));
  assert.ok(titleScopeFlags('Economic evaluation in hospital care').includes('SAEK-learning-objective-review'));
  assert.equal(titleScopeFlags('Prehospital trauma review').length,0);

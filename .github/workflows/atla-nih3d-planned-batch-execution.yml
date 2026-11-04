@@ -1,11 +1,15 @@
 name: ATLA NIH3D archive next planned originals and reconcile scientific evidence
 on:
   push:
-    branches: [feat/nih3d-next-batch-planner-20261103]
+    branches: [main, feat/nih3d-recurring-verified-archive-20261103]
     paths:
       - 'scripts/nih3d-archive-planned-originals.mjs'
+      - 'scripts/nih3d-plan-next-originals.mjs'
+      - 'tools/atla-ai/nih3d-biomedical-scope.mjs'
       - '.github/workflows/atla-nih3d-planned-batch-execution.yml'
   workflow_dispatch:
+  schedule:
+    - cron: '41 */3 * * *'
 permissions:
   contents: write
   packages: write
@@ -26,7 +30,9 @@ jobs:
             scripts/nih3d-build-verified-archive-registry.mjs
             scripts/nih3d-build-scientific-evidence.mjs
             scripts/nih3d-scientific-ontology.test.mjs
+            scripts/nih3d-biomedical-scope.test.mjs
             tools/atla-ai/nih3d-scientific-ontology.mjs
+            tools/atla-ai/nih3d-biomedical-scope.mjs
             tools/atla-ai/resources/nih3d-master-plan-2026/
             tools/atla-ai/resources/nih3d-verified-originals-2026.json
             tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
@@ -43,6 +49,7 @@ jobs:
           set -euo pipefail
           node scripts/nih3d-plan-next-originals.test.mjs
           node scripts/nih3d-scientific-ontology.test.mjs
+          node scripts/nih3d-biomedical-scope.test.mjs
           node --check scripts/nih3d-archive-planned-originals.mjs
       - name: Select next limited NIH batch from full source catalogue
         run: node scripts/nih3d-plan-next-originals.mjs
@@ -128,8 +135,20 @@ jobs:
           const r=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
           const s=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-educational-evidence-2026/summary.json','utf8'));
           const p=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-next-originals-plan-2026.json','utf8'));
-          if(r.catalogSourceEntries!==15688||r.modelsWithAllCatalogOriginalFilesVerified!==14+p.selectedModels)throw Error('Registry archive count mismatch');
-          if(r.uniqueVerifiedOriginalFiles!==99+p.selectedOriginalFiles||r.totalDistinctVerifiedOriginalBytes!==134433727+p.selectedExpectedSourceBytes)throw Error('Source original SHA coverage discrepancy');
+          import {execFileSync} from 'node:child_process';
+          const previous=JSON.parse(execFileSync('git',['show','HEAD:tools/atla-ai/resources/nih3d-verified-originals-2026.json'],{encoding:'utf8'}));
+          if(previous.catalogSourceEntries!==r.catalogSourceEntries||previous.catalogSourceEntries!==p.sourceCatalogEntries)
+            throw Error('Source registry and plan refer to different catalogs');
+          if(p.verifiedAlreadyCompleteModels!==previous.modelsWithAllCatalogOriginalFilesVerified)
+            throw Error('Planner used stale pre-existing model baseline');
+          if(r.modelsWithAllCatalogOriginalFilesVerified!==previous.modelsWithAllCatalogOriginalFilesVerified+p.selectedModels)
+            throw Error('Verified complete model count did not increase by the full planned batch');
+          if(r.uniqueVerifiedOriginalFiles!==previous.uniqueVerifiedOriginalFiles+p.selectedOriginalFiles)
+            throw Error('Missing/duplicate original NIH source files after anonymous recovery');
+          if(r.totalDistinctVerifiedOriginalBytes!==previous.totalDistinctVerifiedOriginalBytes+p.selectedExpectedSourceBytes)
+            throw Error('Original NIH byte count differs from preserved package');
+          if(r.fullNIHArchiveComplete!==false||r.modelsWithPartialCatalogOriginalsVerified!==0)
+            throw Error('Unsupported full-completion claim or partial original model introduced');
           if(s.counts.verifiedOriginalArchiveModels!==r.modelsWithAllCatalogOriginalFilesVerified||s.counts.scholarlyClinicalApprovals!==0)throw Error('Medical evidence status mismatch');
           console.log('Verified complete NIH model archives:',r.modelsWithAllCatalogOriginalFilesVerified,'source files:',r.uniqueVerifiedOriginalFiles);
           NODE
@@ -141,5 +160,6 @@ jobs:
           git add docs/ATLA_NIH3D_GHCR_BATCH_*_2026.json tools/atla-ai/resources/nih3d-verified-originals-2026.json tools/atla-ai/resources/nih3d-educational-evidence-2026/ tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
           if ! git diff --cached --quiet; then
             git commit -m 'evidence(atla): restore next NIH original sources from GHCR with SHA256'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

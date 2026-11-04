@@ -5,17 +5,9 @@
  * Does not alter registry metadata or study progress.
  */
 import fs from 'node:fs';
+import {hasSourceCheckedEducationalImage,statusIsSafeForEducationalInventory} from './saek-educational-image-evidence.mjs';
 const registry = JSON.parse(fs.readFileSync('saek-image-audit-2026.json', 'utf8'));
 const assets = registry.assets ?? {};
-const hasDocumentedHumanReview = a =>
-  a.clinicalReview === 'approved' &&
-  typeof a.independentReviewer === 'string' && !!a.independentReviewer.trim() &&
-  typeof a.independentReviewDate === 'string' && /^\d{4}-\d{2}-\d{2}/.test(a.independentReviewDate) &&
-  typeof a.independentReviewEvidence?.documentUrl === 'string' &&
-  /^https:\/\//.test(a.independentReviewEvidence.documentUrl) &&
-  typeof a.independentReviewEvidence?.reviewerQualification === 'string' &&
-  !!a.independentReviewEvidence.reviewerQualification.trim() &&
-  !/(?:Claude|Anthropic|ChatGPT|OpenAI|GPT|LLM|\bAI\b)/i.test(a.independentReviewer);
 const byAsset = new Map();
 for (const course of registry.courses ?? []) {
   for (let i = 0; i < (course.chapters ?? []).length; i++) {
@@ -40,8 +32,9 @@ const records = Object.entries(assets).sort(([a], [b]) => a.localeCompare(b)).ma
   const sourcePageReviewed = typeof a.sourcePageReviewed === 'string' &&
     /^\d{4}-\d{2}-\d{2}/.test(a.sourcePageReviewed);
   if (!sourcePageReviewed) reasons.push('source-page-review-not-dated');
-  const clinicalReviewRecorded = hasDocumentedHumanReview(a);
-  if (!clinicalReviewRecorded) reasons.push('independent-clinical-review-not-recorded');
+  const sourceEvidenceRecorded = hasSourceCheckedEducationalImage(a);
+  if (!sourceEvidenceRecorded) reasons.push('educational-source-evidence-not-recorded');
+  if (!statusIsSafeForEducationalInventory(a)) reasons.push('unsupported-clinical-claim-or-unsubstantiated-source-review');
   return {
     assetId: id,
     path: a.localPath ?? null,
@@ -50,7 +43,8 @@ const records = Object.entries(assets).sort(([a], [b]) => a.localeCompare(b)).ma
     usedInLessons: placement.length > 0,
     visualReviewCurrentSha: visualHashBound,
     datedSourcePageReview: sourcePageReviewed,
-    clinicalApprovalRecorded: clinicalReviewRecorded,
+    educationalSourceReviewRecorded: sourceEvidenceRecorded,
+    clinicalApprovalRecorded: false,
     clinicalApprovalIndependentlyValidated: false,
     mobileSafariZoomOfflineVerified: false,
     rightsIndependentlyValidated: false,
@@ -67,8 +61,8 @@ const summary = {
   pendingVisualReviews: count(r => !r.visualReviewCurrentSha),
   datedSourcePageReviews: count(r => r.datedSourcePageReview),
   pendingSourcePageReviews: count(r => !r.datedSourcePageReview),
-  clinicalApprovalsRecordedUnverified: count(r => r.clinicalApprovalRecorded),
-  clinicalApprovalsNotRecorded: count(r => !r.clinicalApprovalRecorded),
+  sourceCheckedEducationalReviewRecords: count(r => r.educationalSourceReviewRecorded),
+  pendingEducationalSourceReviews: count(r => !r.educationalSourceReviewRecorded),
   fullyCertified: 0
 };
 const output = {

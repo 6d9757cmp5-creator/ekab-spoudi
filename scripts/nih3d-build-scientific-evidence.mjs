@@ -14,8 +14,10 @@ const originalFiles=(await fs.readdir(path.join(source,'segments'))).filter(x=>/
  .sort((a,b)=>Number(a.split('-')[1])-Number(b.split('-')[1]));
 assert.equal(originalFiles.length,50,'All 50 NIH source segments required');
 let archived=new Map();
+let archivedRegistry=null;
 try{
  const audit=JSON.parse(await fs.readFile('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
+ archivedRegistry=audit;
  if(audit.sourceSHA256AndAnonymousRecoveryVerified!==true||audit.catalogSourceEntries!==sourceIndex.publishedEntriesFound)
   throw Error('Verified archive registry is inconsistent with source catalog');
  archived=new Map(audit.models.filter(model=>model.allOriginalFilesPersistentlyRecovered&&
@@ -36,8 +38,10 @@ let structured=new Map();
 try {
  const audit=JSON.parse(await fs.readFile('docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json','utf8'));
  if(audit.scientificAccuracyValidated!==0||audit.clinicallyApprovedModels!==0
-    ||audit.counts.sha256Verified!==99||audit.sourceModels!==14)
-  throw Error('Structural QA not independently verified');
+    ||!archivedRegistry||audit.counts.sha256Verified!==archivedRegistry.uniqueVerifiedOriginalFiles
+    ||audit.sourceModels!==archivedRegistry.archiveModelsWithAnyOriginal
+    ||audit.verifiedBytes!==archivedRegistry.totalDistinctVerifiedOriginalBytes)
+  throw Error('Structural QA does not cover the same independently restored originals');
  const byId=new Map();
  for(const row of audit.files){
   if(!byId.has(row.entryId))byId.set(row.entryId,{total:0,passes:0,needsReview:0});

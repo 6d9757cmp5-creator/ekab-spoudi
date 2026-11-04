@@ -60,9 +60,14 @@ footer{color:#afc5d0;font-size:.84rem;margin-top:20px;line-height:1.5}
 <button type="button" data-human-command="reset" disabled>Επαναφορά</button>
 <button type="button" id="labels" data-human-command="labels" aria-pressed="true" disabled>Labels</button>
 <button type="button" id="xray" data-human-command="xray" aria-pressed="false" disabled>X-ray</button>
-<button type="button" id="dissect" data-human-command="dissect" aria-pressed="false" disabled>Dissect</button>
+<button type="button" id="isolate" data-human-command="isolate" disabled>Απομόνωση επιλεγμένου</button>
+<button type="button" id="restoreScene" data-human-command="restore" disabled>Επαναφορά οργάνων</button>
 <button type="button" id="previous" data-human-command="previous" disabled>← Κεφάλαιο</button>
 <button type="button" id="next" data-human-command="next" disabled>Κεφάλαιο →</button>
+<button type="button" id="tourPlay" data-human-command="tourPlay" disabled>▶ Εκκίνηση ξενάγησης</button>
+<button type="button" id="tourPause" data-human-command="tourPause" disabled>⏸ Παύση ξενάγησης</button>
+<button type="button" id="quizEnter" data-human-command="quizEnter" disabled>Εξέταση 3D</button>
+<button type="button" id="quizExit" data-human-command="quizExit" disabled>Έξοδος εξέτασης</button>
 </div>
 <p class="subtle">Η διαθεσιμότητα ελέγχων, quiz και guided tours εξαρτάται από τη συγκεκριμένη δημοσιευμένη σκηνή και την άδεια BioDigital. Η εφαρμογή δεν αντιγράφει τον engine ή τα πρωτότυπα 3D αρχεία.</p>
 </div>
@@ -83,7 +88,7 @@ footer{color:#afc5d0;font-size:.84rem;margin-top:20px;line-height:1.5}
 <h2 id="providerHeading">Αδειοδοτημένο BioDigital</h2>
 <label for="viewerUrl">Επίσημος δημοσιευμένος σύνδεσμος Viewer</label>
 <input id="viewerUrl" type="url" autocomplete="off" spellcheck="false" placeholder="https://human.biodigital.com/viewer/?id=…" aria-describedby="viewerHelp">
-<small id="viewerHelp">Αντέγραψε το URL από το <em>Publish → Copy link / embed src</em>. Δεν ζητούνται ούτε αποθηκεύονται API secrets. Μόνο διευθύνσεις human.biodigital.com/viewer ή /widget γίνονται δεκτές.</small>
+<small id="viewerHelp">Αντέγραψε το URL από το <em>Publish → Copy link / embed src</em>. Δεν ζητούνται ούτε αποθηκεύονται API secrets. Ο σύνδεσμος Publish πρέπει να περιλαμβάνει την ταυτοποίηση Developer App που απαιτεί η BioDigital. Μόνο διευθύνσεις human.biodigital.com/viewer ή /widget γίνονται δεκτές.</small>
 <div class="actions">
 <button id="openProvider" class="primary" type="button">Άνοιγμα BioDigital</button>
 <button id="closeProvider" type="button">Κλείσιμο BioDigital</button>

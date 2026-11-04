@@ -86,7 +86,7 @@ def completed():
             done.add(s)
     return done
 
-def plan(artifacts, legacy, done, count=2):
+def plan(artifacts, legacy, done, count=6):
     selected=[]
     for a in artifacts:
         m=NAME.fullmatch(a.get('name',''))

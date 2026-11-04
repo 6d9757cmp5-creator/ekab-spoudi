@@ -1,0 +1,42 @@
+name: ATLA educational source-evidence policy tests (not clinical certification)
+on:
+  pull_request:
+    paths:
+      - 'scripts/clinical_review_gate.py'
+      - 'scripts/test_clinical_review_gate.py'
+      - 'clinical-review.json'
+      - 'tools/atla-ai/knowledge-refresh/scientific-qa.mjs'
+      - 'tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs'
+      - '.github/workflows/atla-educational-evidence-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/clinical_review_gate.py'
+      - 'scripts/test_clinical_review_gate.py'
+      - 'clinical-review.json'
+      - 'tools/atla-ai/knowledge-refresh/scientific-qa.mjs'
+      - 'tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs'
+      - '.github/workflows/atla-educational-evidence-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence-policy:
+    name: Static educational evidence and research fail-closed checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reject forged clinical authorization and unsupported evidence records
+        run: |
+          python3 scripts/clinical_review_gate.py
+          python3 -m unittest discover -s scripts -p 'test_clinical_review_gate.py' -v
+      - name: Verify independent source-evidence research queue retains safety gates
+        run: |
+          node --check tools/atla-ai/knowledge-refresh/scientific-qa.mjs
+          node --test tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs

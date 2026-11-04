@@ -1,0 +1,35 @@
+name: ATLA — Build isolated full-book text index
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/atla-build-book-text-index.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Verify extraction logic
+        run: |
+          node --check tools/atla-ai/knowledge-base/full-books/build-text-index.mjs
+          node --test tools/atla-ai/knowledge-base/full-books/build-text-index.test.mjs
+      - name: Verify all PDF shards and extract page-level text
+        run: node tools/atla-ai/knowledge-base/full-books/build-text-index.mjs
+      - name: Publish isolated index for inspection only
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-full-books-page-index
+          path: tools/atla-ai/knowledge-base/full-books/text-index-output/*.json*
+          if-no-files-found: error
+          retention-days: 7
