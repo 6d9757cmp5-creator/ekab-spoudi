@@ -85,11 +85,34 @@ def audit(artifacts, legacy_names, release_markers, now=None):
         'recoverable':expiring
     }
 
+def workflow_health(workflow, runs):
+    """Check main-branch rescue orchestration without dispatching a second run."""
+    candidates = [x for x in runs
+                  if x.get('head_branch')=='main'
+                  and x.get('event') in ('schedule','workflow_dispatch','push')]
+    candidates.sort(key=lambda x: x.get('created_at') or '', reverse=True)
+    latest = candidates[0] if candidates else None
+    return {
+        'workflow_state':workflow.get('state','UNKNOWN'),
+        'recent_main_runs_seen':len(candidates),
+        'latest_main_run': ({
+            'id': latest.get('id'),
+            'event': latest.get('event'),
+            'status': latest.get('status'),
+            'conclusion': latest.get('conclusion'),
+            'created_at': latest.get('created_at'),
+            'html_url':latest.get('html_url')
+        } if latest else None)
+    }
+
 def main():
     legacy = recovery.current_legacy_names()
     saved = recovery.completed()
     artifacts = recovery.pages('/actions/artifacts','artifacts')
     snapshot = audit(artifacts,legacy,saved)
+    workflow = recovery.api('/actions/workflows/recover-nih3d-large.yml')
+    runs = recovery.api('/actions/workflows/recover-nih3d-large.yml/runs?per_page=12')
+    snapshot['rescue_automation'] = workflow_health(workflow,runs.get('workflow_runs',[]))
     output = Path(os.environ.get('NIH3D_AUDIT_JSON','nih3d-recovery-inventory.json'))
     output.write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     print('NIH3D_READ_ONLY_RECOVERY_AUDIT',json.dumps({
@@ -100,7 +123,8 @@ def main():
         'eligible_bytes':snapshot['recoverable_bytes'],
         'earliest_expiry':snapshot['earliest_recoverable_expiry_utc'],
         'expired_unpreserved':len(snapshot['expired_without_result_marker_starts']),
-        'unknown':len(snapshot['unknown_state_starts'])},sort_keys=True))
+        'unknown':len(snapshot['unknown_state_starts']),
+        'rescue_automation':snapshot['rescue_automation']},sort_keys=True))
 
 if __name__=='__main__':
     main()
