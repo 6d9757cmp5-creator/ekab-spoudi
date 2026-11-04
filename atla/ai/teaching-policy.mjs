@@ -15,7 +15,7 @@ export function teachingApproach({question='',level='student',approvedScenarioSe
  const simplify=SIMPLIFY.test(q);
  const style=severity==='critical'?'Απαιτητικός σε κλινική ασφάλεια, βήματα, αιτιολόγηση και όρια· ποτέ τιμωρητικός.':severity==='serious'?'Σοβαρός, σαφής και ακριβής· επισήμανε κρίσιμες προϋποθέσεις.':'Άμεσος, κατανοητός και φιλικός.';
  const wantsReasoning=/(αιτιολογ|ρωτησε με|εξετασε με|καλεσε με να εξηγησ)/.test(q);
- const depth=wantsReasoning?'Ζήτησε από τον μαθητή μία αιτιολόγηση με τη μορφή ερώτησης. Μην απαντήσεις την ερώτηση εκ μέρους του.':simplify?'Εξήγησε ξανά πιο απλά, με άλλο παράδειγμα, χωρίς καμία ποινή ή διαγραφή προόδου.':level==='beginner'?'Ξεκίνα από τα βασικά.':'Δίδαξε στο επίπεδο του συγκεκριμένου εκπαιδευτικού στόχου.';
+ const depth=wantsReasoning?'Ζήτησε από τον μαθητή μία αιτιολόγηση με τη μορφή ερώτησης. Μην απαντήσεις την ερώτηση εκ μέρους του. Ρώτησε μόνο για όσα περιγράφονται ρητά στα δοσμένα αποσπάσματα· μην εισάγεις επιπλέον μηχανισμούς ή τεχνικούς όρους, ούτε μέσα στην ερώτηση.':simplify?'Εξήγησε ξανά πιο απλά, με άλλο παράδειγμα, χωρίς καμία ποινή ή διαγραφή προόδου.':level==='beginner'?'Ξεκίνα από τα βασικά.':'Δίδαξε στο επίπεδο του συγκεκριμένου εκπαιδευτικού στόχου.';
  return {severity,simplify,style,depth};
 }
 export const ATLA_RUNTIME_RULES=[
@@ -42,6 +42,11 @@ export function auditAssistantReply(reply,passages=[]){
  const citations=[...text.matchAll(CITATION)].map(m=>'T'+m[2]);
  if(!citations.length||citations.some(id=>!allowed.has(id)))return {ok:false,reason:'missing-or-unknown-citation'};
  if(DOSE.test(text))return {ok:false,reason:'unsafe-dose-output'};
+ // Conservative, source-specific red flags: a citation must not authorize an extra mechanism.
+ const sourceText=norm((Array.isArray(passages)?passages:[]).map(p=>p?.definition||'').join(' '));
+ const unverifiedMechanisms=['ενδοθωρακικ','ενδοκαρδιακ','αορτ','στεφανιαι','αιμοδυναμ','θωρακικ πιεσ','αντλητικ πιεσ'];
+ if(unverifiedMechanisms.some(term=>norm(text).includes(term)&&!sourceText.includes(term)))
+   return {ok:false,reason:'unsupported-advanced-mechanism'};
  if(/(?:ξερω|γνωριζω)\s+(?:οτι\s+)?(?:νιωθεισ|αισθανεσαι)/.test(norm(text)))return {ok:false,reason:'emotional-inference'};
  return {ok:true,reason:'surface-check-only'};
 }
