@@ -25,6 +25,7 @@ test('02 Απαιτητικός — clinical scenarios require justification wit
  const asking=teachingApproach({question:'Ζήτησε να αιτιολογήσω την ΚΑΡΠΑ'});
  assert.match(asking.depth,/Ζήτησε από τον μαθητή μία αιτιολόγηση/);
  assert.match(asking.depth,/Μην απαντήσεις την ερώτηση/);
+ assert.match(asking.depth,/Ρώτησε μόνο για όσα περιγράφονται ρητά/);
 });
 test('03 Δίκαιος — stored historical assessment grades are never altered by the learner-view',()=>{
  const s=storage([['ekab-eoppep-official-v15',JSON.stringify({'EOP-A-001':{selfAttempts:3,selfCorrect:1}})]]);
