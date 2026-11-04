@@ -14,7 +14,8 @@ export function teachingApproach({question='',level='student',approvedScenarioSe
  const severity=approvedScenarioSeverity==='critical'||CRITICAL.test(q)?'critical':approvedScenarioSeverity==='serious'||SERIOUS.test(q)?'serious':'ordinary';
  const simplify=SIMPLIFY.test(q);
  const style=severity==='critical'?'Απαιτητικός σε κλινική ασφάλεια, βήματα, αιτιολόγηση και όρια· ποτέ τιμωρητικός.':severity==='serious'?'Σοβαρός, σαφής και ακριβής· επισήμανε κρίσιμες προϋποθέσεις.':'Άμεσος, κατανοητός και φιλικός.';
- const depth=simplify?'Εξήγησε ξανά πιο απλά, με άλλο παράδειγμα, χωρίς καμία ποινή ή διαγραφή προόδου.':level==='beginner'?'Ξεκίνα από τα βασικά.':'Δίδαξε στο επίπεδο του συγκεκριμένου εκπαιδευτικού στόχου.';
+ const wantsReasoning=/(αιτιολογ|ρωτησε με|εξετασε με|καλεσε με να εξηγησ)/.test(q);
+ const depth=wantsReasoning?'Ζήτησε από τον μαθητή μία αιτιολόγηση με τη μορφή ερώτησης. Μην απαντήσεις την ερώτηση εκ μέρους του. Ρώτησε μόνο για όσα περιγράφονται ρητά στα δοσμένα αποσπάσματα· μην εισάγεις επιπλέον μηχανισμούς ή τεχνικούς όρους, ούτε μέσα στην ερώτηση.':simplify?'Εξήγησε ξανά πιο απλά, με άλλο παράδειγμα, χωρίς καμία ποινή ή διαγραφή προόδου.':level==='beginner'?'Ξεκίνα από τα βασικά.':'Δίδαξε στο επίπεδο του συγκεκριμένου εκπαιδευτικού στόχου.';
  return {severity,simplify,style,depth};
 }
 export const ATLA_RUNTIME_RULES=[
@@ -22,6 +23,7 @@ export const ATLA_RUNTIME_RULES=[
  'Είσαι ο ATLA: μία ενιαία εκπαιδευτική ταυτότητα, όχι πολλοί χαρακτήρες.',
  'Πριν απαντήσεις έλεγξε επάρκεια στοιχείων, σαφήνεια, συνέπεια και πηγές. Αν δεν επαρκούν, πες τι λείπει· μην εικάζεις.',
  'Σε ιατρικό ζήτημα χρησιμοποίησε αποκλειστικά σχετικές αριθμημένες πηγές και παράθεσε ακριβείς ενδείξεις [Τ1]· χωρίς πηγή μη δίνεις βέβαιη ιατρική πληροφορία.',
+ 'Κάθε συγκεκριμένος επιστημονικός ισχυρισμός πρέπει να στηρίζεται ρητά στο αντίστοιχο απόσπασμα. Αν η πηγή δίνει μόνο ορισμό, περιορίσου στον ορισμό· μην προσθέτεις μη τεκμηριωμένους μηχανισμούς. Η αναφορά [Τ1] δεν κάνει αληθή έναν άσχετο ισχυρισμό.',
  'Αν η προηγούμενη εξήγηση μπέρδεψε τον μαθητή, επανεξέτασέ την και απλοποίησε. Μην αφαιρείς πρόοδο ή βαθμό.',
  'Μία σωστή απάντηση ή μία ανάγνωση δεν αποδεικνύει κατάκτηση δεξιότητας. Μην ισχυρίζεσαι ότι αξιολόγησες επίδοση χωρίς αποδείξεις.',
  'Μην ισχυρίζεσαι ότι ανιχνεύεις συναισθήματα. Μην προτείνεις αυτόματα διάλειμμα ή αλλαγή δραστηριότητας.',
@@ -40,6 +42,11 @@ export function auditAssistantReply(reply,passages=[]){
  const citations=[...text.matchAll(CITATION)].map(m=>'T'+m[2]);
  if(!citations.length||citations.some(id=>!allowed.has(id)))return {ok:false,reason:'missing-or-unknown-citation'};
  if(DOSE.test(text))return {ok:false,reason:'unsafe-dose-output'};
+ // Conservative, source-specific red flags: a citation must not authorize an extra mechanism.
+ const sourceText=norm((Array.isArray(passages)?passages:[]).map(p=>p?.definition||'').join(' '));
+ const unverifiedMechanisms=['ενδοθωρακικ','ενδοκαρδιακ','αορτ','στεφανιαι','αιμοδυναμ','θωρακικ πιεσ','αντλητικ πιεσ'];
+ if(unverifiedMechanisms.some(term=>norm(text).includes(term)&&!sourceText.includes(term)))
+   return {ok:false,reason:'unsupported-advanced-mechanism'};
  if(/(?:ξερω|γνωριζω)\s+(?:οτι\s+)?(?:νιωθεισ|αισθανεσαι)/.test(norm(text)))return {ok:false,reason:'emotional-inference'};
  return {ok:true,reason:'surface-check-only'};
 }
