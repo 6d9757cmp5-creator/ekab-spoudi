@@ -28,14 +28,16 @@ assert.equal(plan.skipped.fileLimitExceeded,1);
 assert.equal(plan.skipped.alreadyComplete,1);
 assert.equal(plan.skipped.malformedSource,1);
 assert.equal(plan.originalFilesDownloadedByPlanner,0);
+const restricted=planNextBatch([entry(8,'Human femur','Anatomy','CC-BY-NC-ND')],new Set());
+assert.equal(restricted.selected[0].license,'CC-BY-NC-ND','The original license stays with the file');
 assert.equal(plan.expertClinicalApprovals,0);
 const smaller=planNextBatch([entry(15,'Heart anatomy','Anatomy'),entry(16,'Brain anatomy','Anatomy')],
  new Set(),{maxBatchBytes:1000,maxFileBytes:2000,maxOriginalFiles:1,maxModels:1});
 assert.equal(smaller.selectedModels,1);
 assert(smaller.unselectedEligible>=1);
 assert.throws(()=>planNextBatch([entry(1,'A','Anatomy'),entry(1,'B','Anatomy')],new Set()),/duplicate/);
-assert.deepEqual(planNextBatch([entry(10,'Unknown','Anatomy','CC BY 4.0')],new Set()).selected,[],
- 'CC BY must not be copied without explicit review of attribution');
+assert.deepEqual(planNextBatch([entry(10,'Human femur','Anatomy','CC BY 4.0')],new Set()).selected.map(x=>x.license),['CC BY 4.0'],
+ 'Every declared license is archived, and the license stays with the file');
 const scoped=planNextBatch([
  entry(21,'Breadboard wire holder','Devices and Hardware'),
  entry(22,'Water molecule','Small Molecules'),

@@ -38,7 +38,7 @@ class RangeRecoveryTests(unittest.TestCase):
                     'expired':False,'size_in_bytes':1000+i,
                     'expires_at':f'2026-11-{10+i//4:02d}T{10+i%4:02d}:00:00Z'}
                    for i,start in enumerate(starts)]
-        selected,total=s.plan(list(reversed(artifacts)),set(),set())
+        selected,total=s.plan(list(reversed(artifacts)),set(),set(),count=6)
         self.assertEqual(total,8)
         self.assertEqual([a['start'] for a in selected],starts[:6])
         self.assertEqual(len(selected),6)

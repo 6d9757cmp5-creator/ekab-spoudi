@@ -73,7 +73,7 @@ export function nihAssetsFromLibrary(library,tool){
  const assets=(library?.models??[]).filter(m=>m.source==='nih3d'&&m.delivery&&m.clinicalUseApproved===false&&m.surfaces?.includes(surface))
   .map(m=>({path:m.delivery.path,bytes:m.delivery.bytes,sha256:m.delivery.sha256,name:m.label,license:m.license,details:{
    accession:m.accession,originalTitle:m.originalTitle,category:m.category,originalPage:m.originalPage,sourceVersion:m.sourceVersion,
-   creator:m.creator,restriction:m.restriction,kind:m.kind,greekStructures:(m.structures??[]).map(id=>library.vocabulary.structures[id]?.greek).filter(Boolean)
+   creator:m.creator,restriction:m.restriction,license:m.license,rightsBasis:m.rightsBasis,kind:m.kind,greekStructures:(m.structures??[]).map(id=>library.vocabulary.structures[id]?.greek).filter(Boolean)
   }}));
  return {assets};
 }

@@ -2,7 +2,7 @@ name: ATLA shared 3D library build from verified NIH originals
 on:
   workflow_dispatch:
   push:
-    branches: [main, feature/nih3d-shared-library-1a-20261104]
+    branches: [main]
     paths:
       - 'tools/atla-ai/resources/nih3d-library/curation.json'
       - 'scripts/nih3d-build-library.mjs'
