@@ -1,4 +1,5 @@
 name: ATLA five-domain source-grounded live AI review (Free, one-shot)
+# Re-run after fail-closed HTTP diagnostics and provider error short-circuit.
 on:
   push:
     branches: [audit/atla-source-fidelity-20261104]
