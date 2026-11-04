@@ -1,5 +1,5 @@
 name: ATLA isolated 10 teacher traits — one-shot Free AI QA
-# Isolated owner-authorized full-length Gemma-4 response validation, ten synthetic behaviors.
+# Isolated final rerun: stronger Socratic teaching and scientific-fidelity audit, ten cases.
 on:
   push:
     branches: [test/atla-ten-teacher-behaviors-20261104]
@@ -27,7 +27,7 @@ jobs:
       - name: Verify syntax and existing ATLA deterministic safety tests
         run: |
           node --check scripts/atla-ten-teacher-behaviors-live-20261104.mjs
-          node --test atla/ai/teaching-policy.test.mjs atla/ai/safe-stream.test.mjs atla/student/profile.test.mjs
+          node --test atla/ai/teaching-policy.test.mjs atla/ai/safe-stream.test.mjs atla/student/profile.test.mjs atla/ai/teacher-ten-contract-20261104.test.mjs
       - name: Ten ATLA teacher traits, synthetic inputs, <= 10 Free-only model calls, no deployment
         run: node scripts/atla-ten-teacher-behaviors-live-20261104.mjs
       - name: Keep audit evidence even if a model test fails
