@@ -1,0 +1,65 @@
+name: ATLA shared 3D library build from verified NIH originals
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, feature/nih3d-shared-library-1a-20261104]
+    paths:
+      - 'tools/atla-ai/resources/nih3d-library/curation.json'
+      - 'scripts/nih3d-build-library.mjs'
+      - '.github/workflows/atla-nih3d-library-build.yml'
+  workflow_run:
+    workflows: ['ATLA NIH3D archive next planned originals and reconcile scientific evidence']
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: write
+concurrency:
+  group: atla-shared-3d-library-build
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test library policy and educational selection
+        run: node scripts/nih3d-library.test.mjs
+      - name: Anonymously restore only originals missing from same-origin delivery
+        env:
+          STAGING: ${{ runner.temp }}/nih3d-library-staging
+        run: |
+          set -euo pipefail
+          mapfile -t images < <(node scripts/nih3d-build-library.mjs images-to-restore)
+          for image in "${images[@]}"; do
+            [[ "$image" =~ ^ghcr\.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:[a-f0-9]{64}$ ]] || { echo "Untrusted image $image"; exit 1; }
+            digest="${image##*@sha256:}"
+            docker pull "$image"
+            cid="$(docker create "$image" /MANIFEST.json)"
+            mkdir -p "$STAGING/$digest/originals"
+            docker cp "$cid:/originals/." "$STAGING/$digest/originals/"
+            docker rm "$cid" >/dev/null
+          done
+      - name: Verify SHA-256 and rebuild the single registry
+        env:
+          STAGING: ${{ runner.temp }}/nih3d-library-staging
+        run: node scripts/nih3d-build-library.mjs build "$STAGING"
+      - name: Re-verify registry against committed bytes
+        run: node scripts/nih3d-library.test.mjs
+      - name: Commit registry and exact original GLB copies
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/atla-ai/resources/model-library.json tools/atla-ai/resources/nih3d-library/models
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(atla): ενημέρωση κοινής βιβλιοθήκης 3D από επαληθευμένα πρωτότυπα NIH'
+            branch="$(git rev-parse --abbrev-ref HEAD)"
+            git pull --rebase origin "$branch"
+            git push origin "HEAD:$branch"
+          fi

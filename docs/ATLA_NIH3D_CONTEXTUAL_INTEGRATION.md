@@ -1,3 +1,5 @@
+> **Νεότερη αρχιτεκτονική (04/11/2026):** Η παρακάτω πιλοτική εξωτερική αναφορά αντικαταστάθηκε από την κοινή βιβλιοθήκη `tools/atla-ai/resources/model-library.json`. Τα μοντέλα φορτώνονται πλέον από τη δική μας υποδομή, μέσω του `tools/atla-ai/nih3d-library.mjs`, με έλεγχο SHA-256 πριν από την προβολή. Οι περιορισμοί κάθε επιφάνειας παραμένουν. Το μητρώο παράγεται από το `scripts/nih3d-build-library.mjs` και ενημερώνεται αυτόματα από το workflow `atla-nih3d-library-build.yml`. Καμία προβολή δεν συνιστά επιστημονική ή κλινική έγκριση.
+
 # ATLA NIH 3D — contextual educational source links (pilot)
 
 ## Purpose
