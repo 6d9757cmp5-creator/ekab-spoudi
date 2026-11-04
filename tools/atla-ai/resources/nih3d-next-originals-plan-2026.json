@@ -10,13 +10,13 @@
   "reviewRequired": true,
   "expertClinicalApprovals": 0,
   "sourceScanned": 15688,
-  "eligibleRemaining": 272,
+  "eligibleRemaining": 265,
   "skipped": {
-    "alreadyComplete": 54,
+    "alreadyComplete": 61,
     "sourceRightsReview": 10308,
     "noOriginalFiles": 0,
     "fileLimitExceeded": 3015,
-    "batchLimitExceeded": 265,
+    "batchLimitExceeded": 260,
     "malformedSource": 0,
     "unknownScientificCategory": 0,
     "biomedicalReviewRequired": 1765,
@@ -24,15 +24,15 @@
   },
   "selected": [
     {
-      "entryId": 826,
-      "accession": "3DPX-000826",
-      "title": "Pelvis Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000826",
+      "entryId": 828,
+      "accession": "3DPX-000828",
+      "title": "Pelvis",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000828",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 25901660,
+      "expectedBytes": 27511328,
       "priority": 0,
       "sourceConceptCandidates": [
         "ATLA-ANATOMY-pelvis"
@@ -40,58 +40,58 @@
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
       "biomedicalResearchDomain": "human_or_comparative_anatomy",
       "explicitNonhuman": false,
-      "pathologyContext": "fracture",
+      "pathologyContext": "normal_or_unspecified",
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953745",
+          "url": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953734",
           "format": "STL",
-          "size": 2735484,
-          "name": "pelve_fratura_e_sacro-nih3d.stl"
+          "size": 2908584,
+          "name": "pelve-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953747",
+          "url": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953736",
           "format": "X3D",
-          "size": 2863502,
-          "name": "pelve_fratura_e_sacro-nih3d.x3d"
+          "size": 3017636,
+          "name": "pelve-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953748",
+          "url": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953737",
           "format": "GLB",
-          "size": 4596092,
-          "name": "pelve_fratura_e_sacro-nih3d.glb"
+          "size": 4886960,
+          "name": "pelve-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953750",
+          "url": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953739",
           "format": "WRL",
-          "size": 11227326,
-          "name": "pelve_fratura_e_sacro-nih3d.wrl"
+          "size": 11942724,
+          "name": "pelve-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32069/runs/af5d1ef6-f423-4123-9916-198c8747f99a/output-files/953751",
+          "url": "https://3d.nih.gov/api/submissions/32071/runs/94136d24-3476-4119-9195-e5ca27bbf97f/output-files/953740",
           "format": "OBJ",
-          "size": 4479256,
-          "name": "pelve_fratura_e_sacro-nih3d.obj"
+          "size": 4755424,
+          "name": "pelve-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 7815,
-      "accession": "3DPX-007815",
-      "title": "Case Model #51 6wk Normal Heart",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-007815",
+      "entryId": 810,
+      "accession": "3DPX-000810",
+      "title": "Spine - Thoracic Spine Scoliosis",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000810",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 26133461,
+      "expectedBytes": 29530319,
       "priority": 0,
       "sourceConceptCandidates": [
-        "ATLA-ANATOMY-heart"
+        "ATLA-ANATOMY-thoracic-spine"
       ],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
       "biomedicalResearchDomain": "human_or_comparative_anatomy",
@@ -100,54 +100,54 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976000",
+          "url": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952181",
           "format": "STL",
-          "size": 2764684,
-          "name": "c_36052635_bp_18_001-nih3d.stl"
+          "size": 3109384,
+          "name": "col_dorsal_escoliose-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976002",
+          "url": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952183",
           "format": "X3D",
-          "size": 2934545,
-          "name": "c_36052635_bp_18_001-nih3d.x3d"
+          "size": 3330273,
+          "name": "col_dorsal_escoliose-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976003",
+          "url": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952184",
           "format": "GLB",
-          "size": 4643136,
-          "name": "c_36052635_bp_18_001-nih3d.glb"
+          "size": 5224372,
+          "name": "col_dorsal_escoliose-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976005",
+          "url": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952186",
           "format": "WRL",
-          "size": 11311285,
-          "name": "c_36052635_bp_18_001-nih3d.wrl"
+          "size": 12773314,
+          "name": "col_dorsal_escoliose-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32668/runs/ddbb2555-5119-4e47-a5cd-170b0f5e675d/output-files/976006",
+          "url": "https://3d.nih.gov/api/submissions/32053/runs/7765e1e2-a8d6-48a2-be44-873da6af63d5/output-files/952187",
           "format": "OBJ",
-          "size": 4479811,
-          "name": "c_36052635_bp_18_001-nih3d.obj"
+          "size": 5092976,
+          "name": "col_dorsal_escoliose-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 798,
-      "accession": "3DPX-000798",
-      "title": "Calcaneal Fracture",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-000798",
+      "entryId": 801,
+      "accession": "3DPX-000801",
+      "title": "Distal Tibia Fracture",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-000801",
       "sourceVersion": 3,
       "category": "Anatomy",
       "license": "Public Domain",
       "expectedFiles": 5,
-      "expectedBytes": 26969464,
+      "expectedBytes": 31610599,
       "priority": 0,
       "sourceConceptCandidates": [
-        "ATLA-ANATOMY-ankle"
+        "ATLA-ANATOMY-tibia"
       ],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
       "biomedicalResearchDomain": "human_or_comparative_anatomy",
@@ -156,51 +156,51 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951521",
+          "url": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951831",
           "format": "STL",
-          "size": 2852684,
-          "name": "-_calcaneo-nih3d.stl"
+          "size": 3331334,
+          "name": "-_pilao-nih3d.stl"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951523",
+          "url": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951833",
           "format": "X3D",
-          "size": 2985970,
-          "name": "-_calcaneo-nih3d.x3d"
+          "size": 3529817,
+          "name": "-_pilao-nih3d.x3d"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951524",
+          "url": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951834",
           "format": "GLB",
-          "size": 4793396,
-          "name": "-_calcaneo-nih3d.glb"
+          "size": 5597128,
+          "name": "-_pilao-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951526",
+          "url": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951836",
           "format": "WRL",
-          "size": 11707827,
-          "name": "-_calcaneo-nih3d.wrl"
+          "size": 13698413,
+          "name": "-_pilao-nih3d.wrl"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/32041/runs/9b3382a3-ab94-4acc-9f3e-d3c727582eff/output-files/951527",
+          "url": "https://3d.nih.gov/api/submissions/32044/runs/04d21250-e17c-4747-832a-5ff8fd6d6d15/output-files/951837",
           "format": "OBJ",
-          "size": 4629587,
-          "name": "-_calcaneo-nih3d.obj"
+          "size": 5453907,
+          "name": "-_pilao-nih3d.obj"
         }
       ]
     },
     {
-      "entryId": 23406,
-      "accession": "3DPX-023406",
-      "title": "N4",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-023406",
+      "entryId": 23409,
+      "accession": "3DPX-023409",
+      "title": "N7",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-023409",
       "sourceVersion": 2,
       "category": "Biomacromolecules",
       "license": "Public Domain",
       "expectedFiles": 15,
-      "expectedBytes": 4328935,
+      "expectedBytes": 4717382,
       "priority": 4,
       "sourceConceptCandidates": [],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -210,121 +210,121 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480960",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479302",
           "format": "GLB",
-          "size": 186872,
+          "size": 258488,
           "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain.glb"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480962",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479304",
           "format": "OBJ",
-          "size": 474170,
+          "size": 662080,
           "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.obj"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480963",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479305",
           "format": "GLB",
-          "size": 140356,
+          "size": 194068,
           "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480971",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479313",
           "format": "X3D",
-          "size": 292956,
+          "size": 299840,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.x3d"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480974",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479316",
           "format": "GLB",
-          "size": 650476,
+          "size": 663716,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.glb"
         },
         {
           "i": 5,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480975",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479317",
           "format": "WRL",
-          "size": 230581,
+          "size": 239055,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow.wrl"
         },
         {
           "i": 6,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480977",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479319",
           "format": "WRL",
-          "size": 1027137,
+          "size": 1044087,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.wrl"
         },
         {
           "i": 7,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480980",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479322",
           "format": "GLB",
-          "size": 110484,
+          "size": 131736,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary.glb"
         },
         {
           "i": 8,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480982",
-          "format": "OBJ",
-          "size": 268399,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.obj"
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479324",
+          "format": "X3D",
+          "size": 244907,
+          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.x3d"
         },
         {
           "i": 9,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480983",
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479325",
           "format": "GLB",
-          "size": 84444,
+          "size": 115116,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.glb"
         },
         {
           "i": 10,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480992",
-          "format": "STL",
-          "size": 215884,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.stl"
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479329",
+          "format": "WRL",
+          "size": 227344,
+          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.wrl"
         },
         {
           "i": 11,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480994",
-          "format": "GLB",
-          "size": 110488,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor.glb"
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479334",
+          "format": "STL",
+          "size": 217884,
+          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.stl"
         },
         {
           "i": 12,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480995",
-          "format": "X3D",
-          "size": 220172,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.x3d"
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479336",
+          "format": "GLB",
+          "size": 112116,
+          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor.glb"
         },
         {
           "i": 13,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480996",
-          "format": "GLB",
-          "size": 84432,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.glb"
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479337",
+          "format": "X3D",
+          "size": 221125,
+          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.x3d"
         },
         {
           "i": 14,
-          "url": "https://3d.nih.gov/api/submissions/37332/runs/06da2af8-6322-4ad5-8def-166209f842c6/output-files/1480998",
-          "format": "WRL",
-          "size": 232084,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.wrl"
+          "url": "https://3d.nih.gov/api/submissions/37329/runs/3fc3fd1b-0905-43c0-b892-0fd209e69275/output-files/1479338",
+          "format": "GLB",
+          "size": 85820,
+          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.glb"
         }
       ]
     },
     {
-      "entryId": 23404,
-      "accession": "3DPX-023404",
-      "title": "Neoantigen 2",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-023404",
+      "entryId": 23414,
+      "accession": "3DPX-023414",
+      "title": "N12",
+      "sourcePage": "https://3d.nih.gov/entries/3DPX-023414",
       "sourceVersion": 2,
       "category": "Biomacromolecules",
       "license": "Public Domain",
       "expectedFiles": 15,
-      "expectedBytes": 4403505,
+      "expectedBytes": 4722883,
       "priority": 4,
       "sourceConceptCandidates": [],
       "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -334,370 +334,122 @@
       "sourceRefs": [
         {
           "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479976",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478608",
           "format": "GLB",
-          "size": 198204,
+          "size": 286328,
           "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain.glb"
         },
         {
           "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479978",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478610",
           "format": "OBJ",
-          "size": 503638,
+          "size": 735027,
           "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.obj"
         },
         {
           "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479979",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478611",
           "format": "GLB",
-          "size": 148852,
+          "size": 214948,
           "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.glb"
         },
         {
           "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479987",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478619",
           "format": "X3D",
-          "size": 296842,
+          "size": 286630,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.x3d"
         },
         {
           "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479990",
-          "format": "GLB",
-          "size": 659192,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.glb"
-        },
-        {
-          "i": 5,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479991",
-          "format": "WRL",
-          "size": 236471,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow.wrl"
-        },
-        {
-          "i": 6,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479993",
-          "format": "WRL",
-          "size": 1035900,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.wrl"
-        },
-        {
-          "i": 7,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479996",
-          "format": "GLB",
-          "size": 110484,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary.glb"
-        },
-        {
-          "i": 8,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479998",
-          "format": "OBJ",
-          "size": 268865,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.obj"
-        },
-        {
-          "i": 9,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1479999",
-          "format": "GLB",
-          "size": 84440,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.glb"
-        },
-        {
-          "i": 10,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480008",
-          "format": "STL",
-          "size": 215884,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.stl"
-        },
-        {
-          "i": 11,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480010",
-          "format": "GLB",
-          "size": 110484,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor.glb"
-        },
-        {
-          "i": 12,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480011",
-          "format": "X3D",
-          "size": 219048,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.x3d"
-        },
-        {
-          "i": 13,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480012",
-          "format": "GLB",
-          "size": 84428,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.glb"
-        },
-        {
-          "i": 14,
-          "url": "https://3d.nih.gov/api/submissions/37334/runs/3012a146-0420-4a37-986b-b98c8dcee06f/output-files/1480014",
-          "format": "WRL",
-          "size": 230773,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.wrl"
-        }
-      ]
-    },
-    {
-      "entryId": 23413,
-      "accession": "3DPX-023413",
-      "title": "N11",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-023413",
-      "sourceVersion": 2,
-      "category": "Biomacromolecules",
-      "license": "Public Domain",
-      "expectedFiles": 15,
-      "expectedBytes": 4539054,
-      "priority": 4,
-      "sourceConceptCandidates": [],
-      "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
-      "biomedicalResearchDomain": "biomedical_molecular_structure",
-      "explicitNonhuman": false,
-      "pathologyContext": "normal_or_unspecified",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479014",
-          "format": "GLB",
-          "size": 248412,
-          "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain.glb"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479016",
-          "format": "OBJ",
-          "size": 635721,
-          "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.obj"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479017",
-          "format": "GLB",
-          "size": 186508,
-          "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479025",
-          "format": "X3D",
-          "size": 284654,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.x3d"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479028",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478622",
           "format": "GLB",
           "size": 642656,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.glb"
         },
         {
           "i": 5,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479029",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478623",
           "format": "WRL",
-          "size": 220270,
+          "size": 222368,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow.wrl"
         },
         {
           "i": 6,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479031",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478625",
           "format": "WRL",
-          "size": 997571,
+          "size": 1008872,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.wrl"
         },
         {
           "i": 7,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479034",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478628",
           "format": "GLB",
           "size": 110480,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary.glb"
         },
         {
           "i": 8,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479036",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478630",
           "format": "OBJ",
-          "size": 268012,
+          "size": 268622,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.obj"
         },
         {
           "i": 9,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479037",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478631",
           "format": "GLB",
           "size": 84440,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.glb"
         },
         {
           "i": 10,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479046",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478640",
           "format": "STL",
           "size": 215884,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.stl"
         },
         {
           "i": 11,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479048",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478642",
           "format": "GLB",
-          "size": 110480,
+          "size": 110484,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor.glb"
         },
         {
           "i": 12,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479049",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478643",
           "format": "X3D",
-          "size": 218806,
+          "size": 219903,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.x3d"
         },
         {
           "i": 13,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479050",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478644",
           "format": "GLB",
-          "size": 84424,
+          "size": 84428,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.glb"
         },
         {
           "i": 14,
-          "url": "https://3d.nih.gov/api/submissions/37325/runs/b773a1a1-072f-4634-8a2d-10e8b85df472/output-files/1479052",
+          "url": "https://3d.nih.gov/api/submissions/37324/runs/78203440-3ba9-4668-91ce-871ac753005f/output-files/1478646",
           "format": "WRL",
-          "size": 230736,
+          "size": 231813,
           "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.wrl"
-        }
-      ]
-    },
-    {
-      "entryId": 23410,
-      "accession": "3DPX-023410",
-      "title": "N8",
-      "sourcePage": "https://3d.nih.gov/entries/3DPX-023410",
-      "sourceVersion": 2,
-      "category": "Biomacromolecules",
-      "license": "Public Domain",
-      "expectedFiles": 15,
-      "expectedBytes": 4714031,
-      "priority": 4,
-      "sourceConceptCandidates": [],
-      "biomedicalResearchScope": "IN_SCOPE_RESEARCH_CANDIDATE",
-      "biomedicalResearchDomain": "biomedical_molecular_structure",
-      "explicitNonhuman": false,
-      "pathologyContext": "normal_or_unspecified",
-      "sourceRefs": [
-        {
-          "i": 0,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479466",
-          "format": "GLB",
-          "size": 241304,
-          "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain.glb"
-        },
-        {
-          "i": 1,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479468",
-          "format": "OBJ",
-          "size": 616365,
-          "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.obj"
-        },
-        {
-          "i": 2,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479469",
-          "format": "GLB",
-          "size": 181176,
-          "name": "fold_2026_03_06_17_17_model_4-mol-surf-lowres-bychain-nih3d.glb"
-        },
-        {
-          "i": 3,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479477",
-          "format": "X3D",
-          "size": 310143,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.x3d"
-        },
-        {
-          "i": 4,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479480",
-          "format": "GLB",
-          "size": 678396,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.glb"
-        },
-        {
-          "i": 5,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479481",
-          "format": "WRL",
-          "size": 251657,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow.wrl"
-        },
-        {
-          "i": 6,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479483",
-          "format": "WRL",
-          "size": 1079699,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thick-print_struts-rainbow-print_caution-nih3d.wrl"
-        },
-        {
-          "i": 7,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479486",
-          "format": "GLB",
-          "size": 133752,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary.glb"
-        },
-        {
-          "i": 8,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479488",
-          "format": "X3D",
-          "size": 233781,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.x3d"
-        },
-        {
-          "i": 9,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479489",
-          "format": "GLB",
-          "size": 117084,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.glb"
-        },
-        {
-          "i": 10,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479493",
-          "format": "WRL",
-          "size": 225451,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-secondary-nih3d.wrl"
-        },
-        {
-          "i": 11,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479498",
-          "format": "STL",
-          "size": 219884,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.stl"
-        },
-        {
-          "i": 12,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479500",
-          "format": "GLB",
-          "size": 113748,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor.glb"
-        },
-        {
-          "i": 13,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479501",
-          "format": "X3D",
-          "size": 224379,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.x3d"
-        },
-        {
-          "i": 14,
-          "url": "https://3d.nih.gov/api/submissions/37328/runs/b75c8599-7cbb-4764-ba50-189437284757/output-files/1479502",
-          "format": "GLB",
-          "size": 87212,
-          "name": "fold_2026_03_06_17_17_model_4-ribbon-thin-nocolor-nih3d.glb"
         }
       ]
     }
   ],
-  "selectedModels": 7,
-  "selectedOriginalFiles": 75,
-  "selectedExpectedSourceBytes": 96990110,
-  "unselectedEligible": 265,
+  "selectedModels": 5,
+  "selectedOriginalFiles": 45,
+  "selectedExpectedSourceBytes": 98092511,
+  "unselectedEligible": 260,
   "originalFilesDownloadedByPlanner": 0,
   "originalFilesSHA256VerifiedByPlanner": 0,
   "licenseRule": "Only explicit Public Domain sources automatically considered; others retained for rights review",
   "biomedicalRule": "Only evidence-supported NIH biomedical research categories automatically selected; generic hardware and unresolved chemicals retained for review",
   "sourceAccuracyRule": "Model title/category do not certify anatomical or clinical correctness",
   "sourceCatalogEntries": 15688,
-  "verifiedAlreadyCompleteModels": 54,
+  "verifiedAlreadyCompleteModels": 61,
   "fullNIHArchiveComplete": false
 }
