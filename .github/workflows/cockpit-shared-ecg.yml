@@ -16,6 +16,22 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Verify tests run against exact PR plus current main merge candidate
+        if: github.event_name == 'pull_request'
+        env:
+          EXPECTED_BASE: ${{ github.event.pull_request.base.sha }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          parents="$(git show -s --format='%P' HEAD)"
+          read -r base_parent head_parent other <<< "$parents"
+          echo "Proposed merge: $(git rev-parse HEAD)"
+          echo "Main parent: $base_parent"
+          echo "ECG PR parent: $head_parent"
+          test -z "${other:-}"
+          test "$base_parent" = "$EXPECTED_BASE"
+          test "$head_parent" = "$EXPECTED_HEAD"
+          echo "PASS: browser and unit tests execute on the exact PR merge candidate"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
