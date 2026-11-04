@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Bounded streaming recovery of historical NIH3D GitHub Actions ZIP64 artifacts.
 
-Never deletes or overwrites. Publishes only canonical manifests and listed parts.
+Never overwrites or deletes uploaded assets. The only removal allowed is a failed
+upload placeholder (state=starter), which holds no retrievable bytes and is replaced
+from the verified source. Publishes only canonical manifests and listed parts.
 The final RESULT.json is an integrity-verified completion marker.
 """
 import argparse
@@ -79,7 +81,7 @@ def current_legacy_names():
     except HTTPError as e:
         if e.code==404: return set()
         raise
-    return {a['name'] for a in pages('/releases/'+str(rel['id'])+'/assets')}
+    return {a['name'] for a in pages('/releases/'+str(rel['id'])+'/assets') if a.get('state')=='uploaded'}
 
 def completed():
     done=set()
@@ -91,7 +93,7 @@ def completed():
         try: base=prefix(s)
         except ValueError: continue
         if e!=s+99: continue
-        if base+'-RESULT.json' in {a['name'] for a in pages('/releases/'+str(r['id'])+'/assets')}:
+        if base+'-RESULT.json' in {a['name'] for a in pages('/releases/'+str(r['id'])+'/assets') if a.get('state')=='uploaded'}:
             done.add(s)
     return done
 
@@ -308,9 +310,22 @@ def create_recovery_release(tag, start, artifact_id=None, attempts=5):
             return already
     raise RuntimeError('Release retry budget exhausted')
 
+def remove_incomplete_upload(asset, name):
+    """Delete one failed upload placeholder, rechecked by id immediately before."""
+    path='/releases/assets/'+str(asset['id'])
+    fresh=api(path)
+    if fresh.get('name')!=name or fresh.get('state')!='starter':
+        raise ValueError('Refusing to delete a non-placeholder asset: '+name)
+    with http(API+path,method='DELETE') as response:
+        if response.status!=204:raise ValueError('Placeholder removal not confirmed: '+name)
+    print('REMOVED_INCOMPLETE_UPLOAD',name,fresh.get('size'),flush=True)
+
 def publish_verified_part(tag, name, path, size, sha, attempts=5):
     for attempt in range(attempts):
         existing=release_assets(tag) or {}
+        if name in existing and existing[name].get('state')=='starter':
+            remove_incomplete_upload(existing[name],name)
+            del existing[name]
         if name in existing:
             check_remote_asset(existing[name],name,size,sha)
             print('VERIFIED_EXISTING',name,flush=True)
@@ -320,11 +335,12 @@ def publish_verified_part(tag, name, path, size, sha, attempts=5):
         except subprocess.CalledProcessError as exc:
             # Refresh before retry: an HTTP 500/404 may still have saved the asset.
             existing=release_assets(tag) or {}
-            if name in existing:
+            incomplete=existing.get(name,{}).get('state')=='starter'
+            if name in existing and not incomplete:
                 check_remote_asset(existing[name],name,size,sha)
                 print('VERIFIED_AFTER_UPLOAD_ERROR',name,flush=True)
                 return existing[name]
-            if not retryable_release_error(exc) or attempt==attempts-1:
+            if not (incomplete or retryable_release_error(exc)) or attempt==attempts-1:
                 raise
             print('RETRY_TRANSIENT_RELEASE_UPLOAD',name,attempt+1,flush=True)
             time.sleep(min(2 ** attempt,16))
@@ -371,7 +387,7 @@ def recover(artifact_id,start):
             if shutil.disk_usage(td).free<MAX_PART+512*1024**2:raise RuntimeError('Insufficient disk for one part')
             path=Path(td)/filename
             size,sha=download_part(artifact_id,filename,path)
-            if filename in existing:
+            if filename in existing and existing[filename].get('state')!='starter':
                 check_remote_asset(existing[filename],filename,size,sha)
                 print('VERIFIED_EXISTING',filename,flush=True)
                 continue
