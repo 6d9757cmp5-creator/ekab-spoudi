@@ -4,7 +4,6 @@ on:
     branches: [test/atla-ten-teacher-behaviors-20261104]
     paths:
       - '.github/workflows/atla-ten-traits-one-shot-20261104.yml'
-  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
@@ -12,11 +11,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   check:
-    if: github.event_name == 'push' && github.event.head_commit.message == 'Diagnose isolated ATLA model first response (Workers Free)'
+    if: github.event_name == 'push' && github.event.head_commit.message == 'Run ATLA 10 live traits with dedicated Workers AI test credential'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_WORKERS_AI_TEST_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TEST_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CLOUDFLARE_FREE_PLAN_CONFIRMED: 'true'
     steps:
