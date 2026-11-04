@@ -14,7 +14,7 @@
 <div class="next-shell" id="next-root">
 <header class="next-header">
  <div class="next-brand"><span class="next-symbol">✚</span><div><strong>ΕΚΑΒ <em>SIMULATOR</em></strong><small>ΕΚΑΒ Σπουδή · Ανεξάρτητος Προσομοιωτής Ασθενών</small></div></div>
- <nav class="next-links" aria-label="Πλοήγηση προσομοίωσης"><a href="#next-stage">Simulation Cockpit</a><a href="mentor-live.html">← Κλασική αποστολή</a><a href="mentor-lab.html">MENTOR OS</a><a href="ui-tools/atla-resource-preview.html?tool=cockpit">3D πόροι · δοκιμή</a></nav>
+ <nav class="next-links" aria-label="Πλοήγηση προσομοίωσης"><a href="#next-stage">Simulation Cockpit</a><a href="mentor-live.html">← Κλασική αποστολή</a><a href="mentor-scenarios.html">Άτλας περιστατικών</a><a href="ui-tools/atla-resource-preview.html?tool=cockpit">3D πόροι · δοκιμή</a></nav>
 </header>
 <section class="next-top">
  <div><p class="next-eyebrow">PREHOSPITAL SIMULATION · CRETE</p><h1 id="next-case-title">Τροχαίο · Δύο εμπλεκόμενοι</h1>
@@ -52,7 +52,7 @@
     <div id="next-unified-host" class="next-unified-host"></div>
     <div class="next-unified-labels" aria-hidden="true"><span>ΕΚΑΒ ΣΠΟΥΔΗ · 3D COCKPIT</span><span>2 ΑΣΘΕΝΕΙΣ</span></div>
     <p id="next-unified-status" class="next-unified-status" role="status" aria-live="polite">Φόρτωση 3D σκηνής…</p>
-    <p class="next-unified-legal">CC0 στατικά μοντέλα και προαιρετικό rigged MakeHuman με 163 οστά. Οι κινήσεις είναι ερευνητικές, δεν αποτελούν αναπνοή, τραύμα, ιατρική πράξη ή κλινικά έγκυρη απόκριση.</p>
+    <p class="next-unified-legal">Στατικά 3D μοντέλα CC0 · Η προβολή δεν προσομοιώνει αναπνοή, τραύμα ή θεραπευτικές επιδράσεις.</p>
    </div>
    <div id="next-ready-overlay" class="next-ready-overlay" hidden>
     <model-viewer id="next-ready-model" camera-controls min-field-of-view="15deg" max-field-of-view="70deg" interaction-prompt="auto" shadow-intensity="0.9" exposure="1.15" environment-image="neutral" alt="Στατικός τρισδιάστατος εικονικός ασθενής από ελεύθερο μοντέλο CC0"></model-viewer>
@@ -125,11 +125,11 @@
 </details>
 <div class="next-bottom">
  <section class="next-log"><div class="next-section-title"><h2>Χρονολόγιο αποστολής</h2><button type="button" id="next-download">↓ Αναφορά TXT</button></div><ol id="next-events"><li>Καμία καταγραφή ακόμη.</li></ol></section>
- <aside class="next-review"><h2>MENTOR DEBRIEF</h2><p>Έλεγχος εκπαιδευτικών βημάτων, όχι κλινική βαθμολογία.</p><div id="next-review-body"></div><button type="button" id="next-finish">Ολοκλήρωση / Ανασκόπηση</button><p id="next-save-note" role="status" class="next-save-note"></p></aside>
+ <aside class="next-review"><h2>Ανασκόπηση αποστολής</h2><p>Έλεγχος εκπαιδευτικών βημάτων, όχι κλινική βαθμολογία.</p><div id="next-review-body"></div><button type="button" id="next-finish">Ολοκλήρωση / Ανασκόπηση</button><p id="next-save-note" role="status" class="next-save-note"></p></aside>
 </div>
 </main>
 <footer class="next-footer">Προσομοιωτής Ασθενών v0.7 · Visual Baseline A · Πρωτότυπος κώδικας ΕΚΑΒ Σπουδή · Χωρίς στοιχεία πραγματικών ασθενών, ιατρικό AI ή πιστοποίηση. <a href="mentor-live.html">Προηγούμενη εκπαιδευτική αποστολή</a></footer>
 </div>
 <script type="module" src="tools/atla-ai/nih3d-learning-surface.mjs"></script>
-<script type="module" src="mentor/presence/presence.mjs"></script>
+<script type="module" src="atla/assistant.mjs"></script>
 </body></html>

@@ -1,4 +1,4 @@
-/** MENTOR shared foundation lab + debrief.
+/** ATLA shared foundation lab + debrief.
  * Scripted source-literacy and communication practice, NOT a clinical decision engine.
  * No backend, AI chat, diagnosis, treatment, or changes to SAEK/EOPPEP marks.
  */
@@ -33,7 +33,7 @@ function save(){
  catch{$('lab-storage').textContent='Η αποθήκευση δεν είναι διαθέσιμη στον browser. Η προσπάθεια ισχύει μόνο όσο μένει ανοιχτή η σελίδα.';}
 }
 const href=(kind)=>makeJourneyUrl('mentor-protocol-suite.html',journeyContext,kind)+'&role='+encodeURIComponent(role);
-$('suite-title').textContent=view==='lab'?'MENTOR | PROTOCOL LAB':'MENTOR DEBRIEF';
+$('suite-title').textContent=view==='lab'?'ATLA | PROTOCOL LAB':'ATLA ΑΝΑΣΚΟΠΗΣΗ';
 $('suite-topic').textContent=topic.name;
 $('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.'+
  (journeyContext.focus?' Συνδεδεμένη ενότητα: '+journeyContext.focus+'.':'');
@@ -48,7 +48,7 @@ if(returnHref){
 $('suite-lab-link').href=href('lab');$('suite-debrief-link').href=href('debrief');
 $('suite-lab-link').removeAttribute('aria-current');$('suite-debrief-link').removeAttribute('aria-current');
 $(view==='lab'?'suite-lab-link':'suite-debrief-link').setAttribute('aria-current','page');
-$('suite-mentor-link').href=makeJourneyUrl('mentor-lab.html',journeyContext);
+$('suite-mentor-link').dataset.atlaOpen='true';
 $('lab-screen').hidden=view!=='lab';$('debrief-screen').hidden=view!=='debrief';
 $('debrief-repeat').href=href('lab');
 function mentorSay(msg){$('mentor-comment').textContent=msg;}
@@ -66,10 +66,10 @@ function showLab(){
  $('lab-next').hidden=true;
  if(completed){
   $('lab-header').textContent='Η εξάσκηση ολοκληρώθηκε';
-  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στο MENTOR DEBRIEF.';
-  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα MENTOR DEBRIEF';
+  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στο ATLA ΑΝΑΣΚΟΠΗΣΗ.';
+  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα ATLA ΑΝΑΣΚΟΠΗΣΗ';
   $('lab-choices').append(a);
-  mentorSay('Ολοκλήρωσες την άσκηση. Στο DEBRIEF θα εξετάσουμε τη λογική κάθε επιλογής.');
+  mentorSay('Ολοκλήρωσες την άσκηση. Στο ΑΝΑΣΚΟΠΗΣΗ θα εξετάσουμε τη λογική κάθε επιλογής.');
   return;
  }
  const stage=stages[session.index];
@@ -90,12 +90,12 @@ function choose(choiceId){
  session.answers.push({stage:current,choice:choiceId,pass:chosen[2],dimension:stage.dimension});
  session.index+=1;session.completed=session.index>=stages.length;save();
  [...$('lab-choices').querySelectorAll('button')].forEach(b=>b.disabled=true);
- const feedback=session.mode==='guided'?chosen[3]:'Η επιλογή σου καταγράφηκε. Η αναλυτική αιτιολόγηση θα εμφανιστεί στο DEBRIEF.';
+ const feedback=session.mode==='guided'?chosen[3]:'Η επιλογή σου καταγράφηκε. Η αναλυτική αιτιολόγηση θα εμφανιστεί στο ΑΝΑΣΚΟΠΗΣΗ.';
  $('lab-feedback').textContent=feedback;$('lab-feedback').className='feedback'+(chosen[2]?'':' review');$('lab-feedback').hidden=false;
  mentorSay(feedback);
  $('lab-stage').textContent='Ολοκληρώθηκε το βήμα '+session.index+' / '+stages.length;
  $('lab-progress').style.width=Math.round(100*session.index/stages.length)+'%';
- $('lab-next').textContent=session.completed?'Δες το MENTOR DEBRIEF':'Επόμενο εκπαιδευτικό βήμα →';
+ $('lab-next').textContent=session.completed?'Δες το ATLA ΑΝΑΣΚΟΠΗΣΗ':'Επόμενο εκπαιδευτικό βήμα →';
  $('lab-next').hidden=false;
 }
 function readStoredInterview(){
@@ -121,7 +121,7 @@ function renderDebrief(){
  const summary=$('debrief-summary'),history=$('debrief-history');summary.replaceChildren();history.replaceChildren();
  if(!session.answers.length){
   const p=document.createElement('p');p.textContent='Δεν έχεις ακόμη καταχωρισμένη προσπάθεια για αυτό το θέμα. Μπορείς να ξεκινήσεις από το PROTOCOL LAB.';history.append(p);
-  $('debrief-advice').textContent='Ο MENTOR θα δείξει αναλυτικά τα βήματα όταν ολοκληρώσεις την πρώτη άσκηση.';
+  $('debrief-advice').textContent='Ο ATLA θα δείξει αναλυτικά τα βήματα όταν ολοκληρώσεις την πρώτη άσκηση.';
   mentorSay('Δεν υπάρχουν αποφάσεις για ανασκόπηση. Ξεκίνα μια εκπαιδευτική αποστολή.');
   return;
  }
@@ -140,8 +140,8 @@ function renderDebrief(){
   li.append(title,detail,review);history.append(li);
  });
  const weak=session.answers.find(a=>!a.pass);
- const message=weak?'MENTOR: Σημείο προς επανάληψη — '+stages[weak.stage].dimension+'. Αναθεώρησε την επιλογή, έλεγξε την πρωτογενή πηγή και ξαναδοκίμασε.':
- 'MENTOR: Ολοκλήρωσες τους εκπαιδευτικούς στόχους αυτής της δοκιμής. Αυτό δεν αποτελεί κλινική πιστοποίηση.';
+ const message=weak?'ATLA: Σημείο προς επανάληψη — '+stages[weak.stage].dimension+'. Αναθεώρησε την επιλογή, έλεγξε την πρωτογενή πηγή και ξαναδοκίμασε.':
+ 'ATLA: Ολοκλήρωσες τους εκπαιδευτικούς στόχους αυτής της δοκιμής. Αυτό δεν αποτελεί κλινική πιστοποίηση.';
  $('debrief-advice').textContent=message;mentorSay(message);
  if(weak){
   const button=document.createElement('button');button.type='button';button.className='btn soft';
@@ -159,7 +159,7 @@ $('lab-role').addEventListener('change',e=>{
 $('lab-mode').addEventListener('change',e=>{if(!session.answers.length){session.mode=e.target.value;save();showLab();}});
 $('lab-next').addEventListener('click',()=>{if(session.completed)location.href=href('debrief');else showLab();});
 $('lab-restart').addEventListener('click',()=>{
- if(session.answers.length&&!confirm('Να ξεκινήσεις ξανά; Θα αντικατασταθεί μόνο η τοπική δοκιμή αυτού του θέματος MENTOR.'))return;
+ if(session.answers.length&&!confirm('Να ξεκινήσεις ξανά; Θα αντικατασταθεί μόνο η τοπική δοκιμή αυτού του θέματος ATLA.'))return;
  const mode=session.mode;session=emptySession();session.mode=mode;save();showLab();
 });
 $('debrief-export').addEventListener('click',()=>{
@@ -173,7 +173,7 @@ $('debrief-export').addEventListener('click',()=>{
 $('mentor-speak').addEventListener('click',()=>{
  const text=$('mentor-comment').textContent;
  const started=speakGreek(text,{env:window,requireMale:true,requireGreek:true,rate:.96,onError:()=>{$('mentor-voice-status').textContent='Η ελληνική φωνή δεν ήταν διαθέσιμη στη συσκευή.';}});
- $('mentor-voice-status').textContent=started?'Αναπαραγωγή ελληνικής φωνής MENTOR…':'Δεν βρέθηκε συμβατή ανδρική ελληνική φωνή. Το σχόλιο παραμένει διαθέσιμο ως κείμενο.';
+ $('mentor-voice-status').textContent=started?'Αναπαραγωγή ελληνικής φωνής ATLA…':'Δεν βρέθηκε συμβατή ανδρική ελληνική φωνή. Το σχόλιο παραμένει διαθέσιμο ως κείμενο.';
 });
 $('mentor-stop').addEventListener('click',()=>{stopGreek(window);$('mentor-voice-status').textContent='Η ομιλία σταμάτησε.';});
 window.addEventListener('pagehide',()=>stopGreek(window));

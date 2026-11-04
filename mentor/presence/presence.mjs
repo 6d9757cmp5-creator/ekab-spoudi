@@ -51,6 +51,8 @@ function el(tag,attrs={},children=[]){
 
 function boot(){
  if(alreadyPresent())return;
+ // Inside ATLA this widget is the 3D body only: ATLA owns the conversation and the entry button.
+ const embedded=window.__atlaPresenceEmbedded===true;
 
  let prefs=parsePrefs(readStorage());
  let frame=null,dragging=null,menuOpen=false,askOpen=false,voice=null;
@@ -167,7 +169,7 @@ function boot(){
  function render(){
   const open=prefs.visibility==="shown";
   root.hidden=!open;
-  launcher.hidden=prefs.visibility!=="minimized";
+  launcher.hidden=embedded||prefs.visibility!=="minimized";
   if(open){
    const box=currentBox();
    root.dataset.mode=prefs.mode;
@@ -242,6 +244,9 @@ function boot(){
   float(){set({visibility:"shown",mode:"floating"},"Ελεύθερη μετακίνηση");},
   dock(){set({visibility:"shown",mode:"docked"},"Προσαρτήθηκε στο πλάι");},
   getState(){return structuredClone(prefs);},
+  speak(text){return voice.speak(text);},
+  stopSpeaking(){voice?.stopSpeaking();},
+  cueTurn(turn){sendCue(cueForTurn(turn));},
   destroy(){unmountFrame();applyDockPadding({});root.remove();launcher.remove();probe.remove();live.remove();delete window.__ekabMentorPresence;}
  };
 
@@ -392,6 +397,7 @@ function boot(){
   finally{askSend.disabled=selBtn.disabled=false;}
  }
  askBtn.addEventListener("click",()=>setAsk(!askOpen));
+ if(embedded)for(const button of [askBtn,minBtn,hideBtn])button.style.display="none";
  askForm.addEventListener("submit",event=>{event.preventDefault();ask("");});
  askInput.addEventListener("input",()=>voice.stopSpeaking());
  // Keeps the learner's text selection alive when the button is pressed.
@@ -545,6 +551,7 @@ function boot(){
  window.addEventListener("orientationchange",()=>setTimeout(render,200));
  document.addEventListener("keydown",event=>{
   if(event.key==="Escape"&&menuOpen){closeMenu();menuBtn.focus();return;}
+  if(embedded)return;
   if(event.key==="Escape"&&prefs.visibility==="shown"&&root.contains(document.activeElement)){api.minimize();return;}
   if(event.altKey&&event.shiftKey&&event.key.toLowerCase()==="m"){event.preventDefault();api.toggle();}
  });

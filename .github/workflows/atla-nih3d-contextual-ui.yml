@@ -11,6 +11,9 @@ on:
       - 'tools/atla-ai/resources/model-library.json'
       - 'ui-tools/atla-resource-preview.html'
       - 'scripts/nih3d-library.test.mjs'
+      - 'scripts/nih3d-atla-browser.test.mjs'
+      - 'atla/assistant.mjs'
+      - 'atla/practice/tool-selector.mjs'
       - 'scripts/nih3d-build-library.mjs'
       - 'tools/atla-ai/nih3d-learning-surface.mjs'
       - 'scripts/nih3d-contextual-ui.test.mjs'
@@ -24,6 +27,9 @@ on:
       - 'tools/atla-ai/resources/model-library.json'
       - 'ui-tools/atla-resource-preview.html'
       - 'scripts/nih3d-library.test.mjs'
+      - 'scripts/nih3d-atla-browser.test.mjs'
+      - 'atla/assistant.mjs'
+      - 'atla/practice/tool-selector.mjs'
       - 'scripts/nih3d-build-library.mjs'
       - 'tools/atla-ai/nih3d-learning-surface.mjs'
       - 'scripts/nih3d-contextual-ui.test.mjs'
@@ -80,6 +86,7 @@ jobs:
       - run: npm install --no-save --no-package-lock playwright@1.56.1
       - run: npx playwright install --with-deps chromium webkit
       - run: node scripts/nih3d-contextual-browser.test.mjs
+      - run: node scripts/nih3d-atla-browser.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

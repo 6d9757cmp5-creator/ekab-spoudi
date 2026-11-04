@@ -3,6 +3,10 @@
 // No keys are involved: the AI binding authenticates inside Cloudflare.
 import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '../../../mentor/ai/claude-adapter.mjs';
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
+import {ATLA_RUNTIME_RULES,teachingApproach} from '../../../atla/ai/teaching-policy.mjs';
+import {collectAndAuditAiStream,verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
+import {riskGuard,retrieve} from '../../../atla/knowledge/retrieve.mjs';
+import medicalTerms from '../../../medical-terms.json' with {type:'json'};
 export {MentorBudget};
 const MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/meta/llama-3.1-8b-instruct-fp8-fast','@cf/google/gemma-4-26b-a4b-it'];
 const LEVELS=['beginner','student','advanced','scientific'];
@@ -17,11 +21,11 @@ const hits=new Map();
 let day={key:'',count:0};
 
 export const SYSTEM_PROMPT=
-'Είσαι ο MENTOR, ψηφιακός εκπαιδευτικός βοηθός για σπουδαστές διασώστες στην Ελλάδα. Δεν είσαι γιατρός, ούτε εκπρόσωπος του ΕΚΑΒ. '+
+'Είσαι ο ATLA, ψηφιακός εκπαιδευτικός βοηθός για σπουδαστές διασώστες στην Ελλάδα. Δεν είσαι γιατρός, ούτε εκπρόσωπος του ΕΚΑΒ. '+
 'Απάντησε ΜΟΝΟ με βάση τις αριθμημένες πηγές που σου δίνονται και αναφέρσου σε αυτές ως [Τ1], [Τ2]. '+
 'Αν οι πηγές δεν επαρκούν, πες καθαρά ότι δεν έχεις τεκμηριωμένη πληροφορία και μην μαντέψεις. '+
 'Μην δίνεις δοσολογίες, διαγνώσεις ή οδηγίες για πραγματικό περιστατικό· για επείγον παρέπεμψε στο 166/112 και στο εγκεκριμένο πρωτόκολλο. '+
-'Απάντησε στα ελληνικά, σε έως 120 λέξεις.';
+'Απάντησε στα ελληνικά, σε έως 120 λέξεις. '+ATLA_RUNTIME_RULES;
 
 function cors(env,origin){
  const allowed=['https://6d9757cmp5-creator.github.io'];
@@ -41,10 +45,39 @@ export function validate(body){
  return {question,passages,history,level:LEVELS.includes(body.level)?body.level:'student'};
 }
 
+/**
+ * The browser is NOT an authority for medical evidence.
+ * Accept only passages whose exact text and ranking are present in the
+ * repository-pinned, read-only glossary and relevant to the question.
+ * Other sources (SAEK/EOPPEP/chapter passages) stay local until an independently
+ * reviewed, server-side evidence registry is available.
+ *
+ * This is provenance validation, NOT clinical/semantic claim verification.
+ */
+export function verifiedPassages(question,clientPassages){
+ if(!Array.isArray(clientPassages)||!clientPassages.length)return [];
+ const canonical=retrieve(question,medicalTerms.items,{k:4,minScore:3});
+ const matches=clientPassages.map(p=>canonical.find(x=>x.id===p.id &&
+  x.term===p.term && x.definition===p.definition));
+ if(matches.length!==clientPassages.length||matches.some(x=>!x))return [];
+ if(new Set(matches.map(x=>x.id)).size!==matches.length)return [];
+ // A category-level bibliography is NOT evidence that an individual medical
+ // statement is source-checked. Keep those definitions available for offline
+ // study, but do not place them in the generative model's citation context.
+ const directlyMapped=new Set(medicalTerms.items.filter(item=>
+  item.sourceType==='direct-section'&&item.sourceCrosscheck==='2026-11-04-primary-section'&&
+  typeof item.sourceSection==='string'&&item.sourceSection.length>0&&
+  typeof item.sourceVersion==='string'&&item.sourceVersion.length>0
+ ).map(item=>item.term));
+ if(matches.some(x=>!directlyMapped.has(x.term)))return [];
+ return matches;
+}
+
 export function buildMessages({question,passages,history,level}){
  const sources=passages.map(p=>`[${p.id}] ${p.term}: ${p.definition}`).join('\n');
+ const approach=teachingApproach({question,level});
  return [
-  {role:'system',content:SYSTEM_PROMPT+' '+LEVEL_STYLE[level]},
+  {role:'system',content:SYSTEM_PROMPT+' '+LEVEL_STYLE[level]+' '+approach.style+' '+approach.depth},
   ...history.map(h=>({role:h.role,content:h.text})),
   {role:'user',content:`Πηγές:\n${sources}\n\nΕρώτηση: ${question}`}
  ];
@@ -63,6 +96,12 @@ function limited(ip,env,now=Date.now()){
 }
 export function _resetLimits(){hits.clear();day={key:'',count:0};}
 
+// Buffer the complete model output; never stream unvalidated medical text to callers.
+async function checkedModelResponse(stream,passages,headers){
+ const checked=await collectAndAuditAiStream(stream,passages);
+ return checked.ok?verifiedSseResponse(checked.text,headers):json({error:'unavailable'},503,headers);
+}
+
 async function answerWithClaude(request,env,body,headers){
  const messages=buildMessages(body),maxTokens=clampMaxTokens(env.CLAUDE_MAX_TOKENS);
  let req;try{req=buildClaudeRequest({messages,model:env.MENTOR_MODEL,maxTokens});}catch{return json({error:'bad_request'},400,headers);}
@@ -76,7 +115,7 @@ async function answerWithClaude(request,env,body,headers){
  if(!verdict?.ok)return json({error:'limit'},429,{...headers,'retry-after':'3600'});
  const out=await callClaude({apiKey:env.ANTHROPIC_API_KEY,request:req,signal:AbortSignal.timeout(25000)});
  if(!out.ok)return json({error:out.status===429?'limit':'unavailable'},out.status===429?429:503,headers);
- return new Response(out.stream,{status:200,headers:{...headers,'content-type':'text/event-stream; charset=utf-8','cache-control':'no-store'}});
+ return checkedModelResponse(out.stream,body.passages,headers);
 }
 export default {
  async fetch(request,env){
@@ -93,12 +132,17 @@ export default {
   let body;
   try{if(Number(request.headers.get('content-length')||0)>8000)return json({error:'too_large'},413,headers);body=validate(await request.json());}catch{body=null;}
   if(!body)return json({error:'bad_request'},400,headers);
-  if(!body.passages.length)return json({answer:'Δεν έχω τεκμηριωμένη πηγή για αυτή την ερώτηση στη βιβλιοθήκη μου.'},200,headers);
+  // The client also guards risky questions, but API callers must not bypass it.
+  if(riskGuard(body.question).blocked)return json({error:'unsafe_request'},400,headers);
+  // Never let a caller supply its own citations or definitions to the model.
+  // Unsupported or altered sources fail closed without any AI or paid-budget call.
+  body.passages=verifiedPassages(body.question,body.passages);
+  if(!body.passages.length)return json({answer:'Δεν έχω επαληθευμένη πηγή για αυτή την ερώτηση στη βιβλιοθήκη μου.'},200,headers);
   if(claude)return answerWithClaude(request,env,body,headers);  if(limited(request.headers.get('cf-connecting-ip')||'unknown',env))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
   const model=MODELS.includes(env.MENTOR_MODEL)?env.MENTOR_MODEL:MODELS[0];
   try{
    const stream=await env.AI.run(model,{messages:buildMessages(body),stream:true,max_tokens:350,temperature:0.2});
-   return new Response(stream,{status:200,headers:{...headers,'content-type':'text/event-stream; charset=utf-8','cache-control':'no-store'}});
+   return checkedModelResponse(stream,body.passages,headers);
   }catch{
    return json({error:'unavailable'},503,headers);
   }

@@ -1,0 +1,9 @@
+.atlas-cockpit-entry{margin:16px auto;padding:18px 20px;border:1px solid #549596;border-radius:16px;background:linear-gradient(120deg,#103b4d,#135d62);color:#e7f8f6;max-width:1250px;box-sizing:border-box}
+.atlas-cockpit-entry h2{font-size:clamp(1.05rem,2vw,1.4rem);color:#fff;margin:0 0 7px}
+.atlas-cockpit-entry p{font-size:.86rem;line-height:1.6;margin:8px 0;color:#d3eeed;max-width:85ch}
+.atlas-cockpit-entry-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.atlas-cockpit-entry-actions>a,.atlas-cockpit-entry-actions>button{min-height:44px;display:inline-flex;justify-content:center;align-items:center;box-sizing:border-box;padding:10px 14px;border-radius:10px;border:1px solid #a4dcda;background:#e1faf1;color:#113f47;font:750 .86rem/1.4 system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.atlas-cockpit-entry-actions>button{background:#117a78;color:#fff}
+.atlas-cockpit-entry-actions>:focus-visible{outline:3px solid #c8f9e0;outline-offset:3px}
+.atlas-cockpit-entry .atlas-cockpit-entry-note{font-size:.75rem;color:#d2e4e8}
+@media(max-width:600px){.atlas-cockpit-entry{margin:12px;padding:16px}.atlas-cockpit-entry-actions{flex-direction:column}.atlas-cockpit-entry-actions>*{width:100%}}

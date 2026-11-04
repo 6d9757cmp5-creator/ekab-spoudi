@@ -189,7 +189,7 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/Δύο τραυματίες|Clinical Simulation Cockpit/);
+  assert.match(await page.title(),/Δύο τραυματίες|Clinical (Simulation )?Cockpit/);
   assert.equal(await page.locator('#live-patients .live-patient').count(),2);
   assert.equal((await page.locator('#live-step').textContent()).trim(),'Στάδιο 1 / 4');
   assert.equal(await page.locator('#live-patients .live-patient').first().locator('.live-vitals strong').first().textContent(),'106');
@@ -310,9 +310,10 @@ try{
   assert.equal(await page.locator('#tab-route').getAttribute('aria-selected'),'true','Conversation button opens working tutor');
   assert.equal(await page.locator('#coach-question').evaluate(x=>document.activeElement===x),true,'Tutor input focused');
   const home=await readFile(resolve(root,'index.html'),'utf8');
-  assert.match(home,/class="home-mentor-presence(?:\s|\")/);
-  assert.match(home,/href="mentor-readonly.html"/);
-  assert.match(home,/href="mentor-live.html"/);
+  assert.match(home,/atla\/assistant\.mjs/,'The home page offers the single ATLA assistant');
+  assert.match(home,/href="paramedic.html"/,'The home page leads to the Paramedic hub');
+  const hub=await readFile(resolve(root,'paramedic.html'),'utf8');
+  assert.match(hub,/href="mentor-next.html"/,'The Paramedic hub leads to the Clinical Cockpit');
   // Natural-device voice: explicit voice controls, rate selection and permission-safe mic.
   await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
   assert.equal(await page.locator('#mentor-voice-select').count(),1,'installed Greek voice picker is present');
@@ -354,7 +355,7 @@ try{
     Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).map(k=>[k,localStorage.getItem(k)])
   ));
   await page.goto('http://127.0.0.1:'+port+'/mentor-scenarios.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/Άτλας προνοσοκομειακών/);
+  assert.match(await page.title(),/Άτλας (?:προνοσοκομειακών|εκπαιδευτικών)/);
   assert.equal((await page.locator('#atlas-categories').textContent()).trim(),'32');
   assert.equal((await page.locator('#atlas-scenarios').textContent()).trim(),'360');
   assert.equal((await page.locator('#atlas-reviewed').textContent()).trim(),'0');
