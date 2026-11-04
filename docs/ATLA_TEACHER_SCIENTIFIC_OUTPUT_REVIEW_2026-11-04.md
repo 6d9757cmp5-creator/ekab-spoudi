@@ -23,6 +23,21 @@
 
 | A7 | MEDIUM | Real five-domain Gemma output included Korean `실시ση` in CPR explanation and Cyrillic `επικοινώνйся` in stroke explanation, while the independent Llama 3.3 reviewer marked all five output meanings SUPPORTED. | AI-generated Greek wording had measurable mixed-script defects despite passing the prior 5/5 content-screen. Added `unexpected-non-greek-script` output rejection and regression tests on draft PR, and strengthened the Greek-only system prompt. A re-run against the new guard must be separately checked; do not reuse the earlier 5/5 as proof of clean language. |
 
+## Additional primary-section source anchors — 04/11/2026 (scope extension, not clinical sign-off)
+
+A subsequent targeted check tied **six more existing definitions** to these verified official source sections, with **no change to their definition text**:
+
+| Term | Primary-source section | Source |
+|---|---|---|
+| Αυτόματος εξωτερικός απινιδωτής | When and how to use an AED — automatic rhythm analysis and shock if advised | [Official source](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines) |
+| Απινίδωση | Adult Advanced Life Support 2025 flowchart — shockable VF/Pulseless VT | [Official source](https://www.resus.org.uk/sites/default/files/2025-10/Adult%20ALS%20algorithm%202025.pdf) |
+| Αρτηριακή πίεση | Summary — What is blood pressure? | [Official source](https://medlineplus.gov/highbloodpressure.html) |
+| Αρρυθμία | Summary — What is an arrhythmia? | [Official source](https://medlineplus.gov/arrhythmia.html) |
+| Αναιμία | Summary — Oxygen carrying capacity of the blood | [Official source](https://medlineplus.gov/anemia.html) |
+| Βιοψία | NCI Dictionary of Cancer Terms — biopsy | [Official source](https://www.cancer.gov/publications/dictionaries/cancer-terms/def/biopsy) |
+
+Source-section metadata is now **11/203** (~5.42%); **192/203** are not assigned such exact provenance. This does not mean the unmapped terms are wrong, and link-level traceability alone does not certify every clinical statement. Generic references continue to fail closed for real AI; offline local study remains available. A separate independent semantic and source-quotation audit remains necessary for release.
+
 ## Evidence and quality thresholds
 
 - Corpus consists solely of synthetic prompts; student grades, notes, and real cases were never input.

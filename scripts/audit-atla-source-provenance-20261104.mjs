@@ -27,7 +27,13 @@ const mapped=[
  ['Αναφυλαξία','Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf'],
  ['Αεραγωγός','22-1-organs-and-structures-of-the-respiratory-system'],
  ['Ηλεκτροκαρδιογράφημα','lab-tests/electrocardiogram/'],
- ['Αγγειακό εγκεφαλικό επεισόδιο','/stroke.html']
+ ['Αγγειακό εγκεφαλικό επεισόδιο','/stroke.html'],
+ ['Αυτόματος εξωτερικός απινιδωτής','adult-basic-life-support-guidelines'],
+ ['Απινίδωση','Adult%20ALS%20algorithm%202025.pdf'],
+ ['Αρτηριακή πίεση','highbloodpressure.html'],
+ ['Αρρυθμία','arrhythmia.html'],
+ ['Αναιμία','anemia.html'],
+ ['Βιοψία','dictionaries/cancer-terms/def/biopsy']
 ];
 for(const [term,path] of mapped){
  const record=items.find(x=>x.term===term);
