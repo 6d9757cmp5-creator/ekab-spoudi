@@ -24,7 +24,7 @@ for(const item of items){
 }
 const mapped=[
  ['Καρδιοπνευμονική αναζωογόνηση','adult-basic-life-support-guidelines'],
- ['Αναφυλαξία','emergency-treatment-anaphylactic-reactions'],
+ ['Αναφυλαξία','Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf'],
  ['Αεραγωγός','22-1-organs-and-structures-of-the-respiratory-system'],
  ['Ηλεκτροκαρδιογράφημα','lab-tests/electrocardiogram/'],
  ['Αγγειακό εγκεφαλικό επεισόδιο','/stroke.html']
@@ -33,6 +33,7 @@ for(const [term,path] of mapped){
  const record=items.find(x=>x.term===term);
  assert(record&&record.sourceType==='direct-section',term+' lacks specific primary-source crosscheck');
  assert(record.source.includes(path),'Wrong official citation location for '+term);
+ if(term==='Αναφυλαξία')assert(record.sourcePage===7,'Anaphylaxis source must identify guideline printed page 7');
 }
 const report={date:'2026-11-04',source:'medical-terms.json',total:items.length,
  distribution,sourceSectionMapped:items.filter(x=>x.sourceType==='direct-section').length,
