@@ -1,0 +1,49 @@
+name: Mentor WHO and Medical-Surgical book import
+on:
+  push:
+    branches: [feature/mentor-clinical-library]
+    paths:
+      - 'mentor/library/import_pdf_books.py'
+      - '.github/workflows/mentor-pdf-books.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/mentor-clinical-library
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install reliable PDF text extractor
+        run: python -m pip install --disable-pip-version-check pymupdf==1.26.5
+      - name: Download two official PDFs and extract full text
+        run: python mentor/library/import_pdf_books.py
+      - name: Validate imported files
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path("mentor/library/corpus")
+          manifest=json.loads((root/"manifest.json").read_text())
+          assert len(manifest['books'])>=7
+          for id in ('who-bec','medical-surgical-nursing'):
+              entry=next(x for x in manifest['books'] if x['source_id']==id)
+              data=json.loads((root/(id+'.json')).read_text())
+              assert len(data['passages'])==entry['passage_count']
+              assert entry['word_count']>20000
+              assert all(x['review_status']=='draft' for x in data['passages'])
+          print('PASS: both official PDFs extracted, without certifying medical content.')
+          PY
+      - name: Commit PDF book text to review branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mentor/library/corpus
+          if ! git diff --cached --quiet; then
+            git commit -m "Mentor: import WHO BEC and Medical-Surgical textbook text"
+            git push origin HEAD:feature/mentor-clinical-library
+          fi
