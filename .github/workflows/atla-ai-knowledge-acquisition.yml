@@ -28,6 +28,12 @@ jobs:
             mentor/library
             mentor/knowledge
             mentor/clinical-desk
+            mentor/ai/claude-adapter.mjs
+            scripts/educational-scientific-review.mjs
+            scripts/test-educational-scientific-review.mjs
+            docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md
+            docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md
+            official_questions.json
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -37,6 +43,7 @@ jobs:
           node --check tools/atla-ai/knowledge-refresh/live-full-discovery.mjs
           node --check tools/atla-ai/knowledge-refresh/scientific-qa.mjs
           node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs tools/atla-ai/knowledge-refresh/upstream-evidence.test.mjs
+          node --test scripts/test-educational-scientific-review.mjs
           # Legacy checked-in 2026-11-02 scan lacks the newer topic-count field.
           # Deterministic unit tests run here; the unified scientific audit runs
           # on the FRESH current PubMed scan in live-full-discovery, fail-closed.
