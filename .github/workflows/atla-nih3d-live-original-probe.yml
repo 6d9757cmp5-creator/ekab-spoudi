@@ -32,10 +32,21 @@ jobs:
           node-version: '22'
       - name: Validate probe script
         run: node --check scripts/nih3d-live-original-probe.mjs
+      - name: Skip unreviewed NIH 3D source files before any transfer
+        id: credibility
+        run: |
+          if node -e 'const r=require("./tools/atla-ai/resources/nih3d-credibility-approvals.json");if(![12,170].every(id=>r.approvals.some(a=>a.entryId===id)))process.exit(1)'; then
+            echo 'approved=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'approved=false' >> "$GITHUB_OUTPUT"
+            echo "::warning::No independent source approval: binary retrieval skipped."
+          fi
       - name: Verify two public-domain originals against NIH source
+        if: steps.credibility.outputs.approved == 'true'
         run: node scripts/nih3d-live-original-probe.mjs
       - name: Save small reproducible integrity evidence in Git history
-        if: success()
+        if: steps.credibility.outputs.approved == 'true'
+        if: steps.credibility.outputs.approved == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
