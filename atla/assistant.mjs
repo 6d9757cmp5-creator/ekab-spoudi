@@ -27,6 +27,7 @@ const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
  ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
+ ['Βιβλία ανατομίας','anatomy-books.html',['βιβλια ανατομ','βιβλιο ανατομ']],
  ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
  ['ATLA Κλινικός Προσομοιωτής','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
@@ -50,7 +51,7 @@ async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
  if(questions===null){const data=await fetchJSON('official_questions.json');questions=Array.isArray(data)?data:[];}
  if(records===null){
-  const chapters=SOURCES.filter(x=>x.kind==='saek');
+  const chapters=SOURCES.filter(x=>x.kind==='saek'||x.kind==='book');
   const parts=await Promise.allSettled(chapters.map(async x=>transformSource(x,await fetchJSON(x.file))));
   records=parts.flatMap(p=>p.status==='fulfilled'?p.value:[]);
  }
@@ -74,9 +75,11 @@ function answerFromLibrary(q){
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
- if(chapters.length){
-  const passages=chapters.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:c.body.slice(0,400)}));
-  return {text:chapters.map(c=>c.title+'\n'+c.body.slice(0,950)).join('\n\n')+'\n\nΜπορείς να συνεχίσεις στο αντίστοιχο κεφάλαιο ΣΑΕΚ.',passages,href:chapters[0].href};
+ const books=records.length?searchRecords(records,cleaned,'book',chapters.length?1:2).rows:[];
+ const hits2=[...chapters,...books];
+ if(hits2.length){
+  const passages=hits2.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:c.body.slice(0,400)}));
+  return {text:hits2.map(c=>c.title+'\n'+c.body.slice(0,950)).join('\n\n'),passages,href:hits2[0].href};
  }
  return {text:'Δεν βρήκα επαρκή αντιστοιχία στη διαθέσιμη τοπική βιβλιοθήκη. Μπορείς να δοκιμάσεις συγκεκριμένο ιατρικό όρο ή κωδικό ΕΟΠΠΕΠ (π.χ. EOP-A-001).',passages:[],href:null};
 }
