@@ -125,7 +125,7 @@ export async function mountActivities({scope,notify,onChange=()=>{}}){
    const next=performActivity(sessions[kind],actionId,{at:new Date().toISOString()});
    sessions[kind]=await store.save(scope,next);
    render(kind);
-   if(next.finished)notify('Ολοκληρώθηκε εκπαιδευτική άσκηση Mentor. Οι παλιοί βαθμοί δεν άλλαξαν.');
+   if(next.finished)notify('Ολοκληρώθηκε εκπαιδευτική άσκηση ATLA. Οι παλιοί βαθμοί δεν άλλαξαν.');
    await onChange();
   }catch(e){notify('Δεν καταγράφηκε η επιλογή: '+e.message,true);render(kind);}
   finally{busy[kind]=false;}

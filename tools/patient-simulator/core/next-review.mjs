@@ -64,7 +64,7 @@ export function vitalTrend(s,id,metric){
  return result;
 }
 export function buildEvidenceReport(s){
- const e=missionEvidence(s),out=['MENTOR NEXT · ΑΝΑΣΚΟΠΗΣΗ ΑΝΑ ΑΣΘΕΝΗ',getCase(s.caseId).title,e.disclaimer,
+ const e=missionEvidence(s),out=['ATLA NEXT · ΑΝΑΣΚΟΠΗΣΗ ΑΝΑ ΑΣΘΕΝΗ',getCase(s.caseId).title,e.disclaimer,
  'Χρόνος: '+s.minute+' εκπαιδευτικά λεπτά','Καταγραφές: '+s.events.length,''];
  for(const p of e.people){
   out.push('ΑΣΘΕΝΗΣ '+p.id.toUpperCase(),...p.steps.map(x=>(x.done?'[x] ':'[ ] ')+x.label),

@@ -71,11 +71,11 @@ $('mentor-personal-goal').addEventListener('change',event=>{
  current=null;note(save()?'Η προτεραιότητα μελέτης άλλαξε.':'Η αποθήκευση δεν είναι διαθέσιμη.');render();
 });
 $('mentor-personal-forget').addEventListener('click',()=>{
- if(!confirm('Διαγραφή μόνο της προσωπικής μνήμης του MENTOR;'))return;
+ if(!confirm('Διαγραφή μόνο της προσωπικής μνήμης του ATLA;'))return;
  memory=engine.newMemory();current=null;
  try{localStorage.removeItem(STORE);}catch{}
- note('Η μνήμη του MENTOR μηδενίστηκε. Οι βαθμοί της ΕΚΑΒ Σπουδή παρέμειναν ανεπηρέαστοι.');
+ note('Η μνήμη του ATLA μηδενίστηκε. Οι βαθμοί της ΕΚΑΒ Σπουδή παρέμειναν ανεπηρέαστοι.');
  render();
 });
-if(!engine||!engine.TOPICS)throw Error('MENTOR adaptive engine missing');
+if(!engine||!engine.TOPICS)throw Error('ATLA adaptive engine missing');
 render();

@@ -193,7 +193,7 @@ async function renderMemory(){
         competence.practiced+' ολοκληρωμένα βήματα · '+competence.needs_review+' για επανάληψη');
       row.append(left,info);list.append(row);
     }
-  }catch(e){notify('Δεν φορτώθηκε η μνήμη Mentor: '+e.message,true);}
+  }catch(e){notify('Δεν φορτώθηκε η μνήμη ATLA: '+e.message,true);}
 }
 function currentStudyPreferences(){
   return {
@@ -243,7 +243,7 @@ function wireStudyPreferences(){
 let lastCoachReply='';
 function addCoachMessage(role,message){
   const row=make('div','coach-message coach-message-'+role);
-  row.append(make('strong',null,role==='assistant'?'MENTOR · Εκπαιδευτική απάντηση':'Ερώτησή μου'));
+  row.append(make('strong',null,role==='assistant'?'ATLA · Εκπαιδευτική απάντηση':'Ερώτησή μου'));
   row.append(make('p',null,message));
   $('coach-dialogue').append(row);
   // Keep the current-page dialogue bounded; no persistence or network transmission.
@@ -328,7 +328,7 @@ function wireMentorPresence(){
         ' · αναγνωρισμένες γυναικείες: '+device.femaleCount+
         (device.femaleNames.length?' ('+device.femaleNames.join(', ')+')':'')+'. '+
         (!device.canSpeakFemale?
-          'Δεν βρέθηκε αναγνωρισμένη γυναικεία φωνή· ο MENTOR θα χρησιμοποιήσει μια ελληνική φωνή της συσκευής, αν υπάρχει.':
+          'Δεν βρέθηκε αναγνωρισμένη γυναικεία φωνή· ο ATLA θα χρησιμοποιήσει μια ελληνική φωνή της συσκευής, αν υπάρχει.':
           'Πάτησε «Άκουσε» για να δοκιμάσεις.');
     }
     voiceProbe.disabled=!device.canTestGreek;
@@ -367,7 +367,7 @@ function wireMentorPresence(){
       onVoiceResolved:result=>{
         if(current===speakingGeneration){
           voiceStatus.textContent='Δοκιμή ηχείου με '+(result.voice?.name||'ελληνική φωνή')+
-            '. Αυτή η φωνή δεν επιλέγεται αυτόματα για τον MENTOR.';
+            '. Αυτή η φωνή δεν επιλέγεται αυτόματα για τον ATLA.';
         }
       },
       onStart:()=>{
@@ -422,7 +422,7 @@ function wireMentorPresence(){
         section?.dispatchEvent(new CustomEvent('mentor:presence',{
           bubbles:true,detail:publicDeliveryCue(mentorDelivery)
         }));
-        voiceStatus.textContent='Ο MENTOR μιλά στα ελληνικά με '+mentorDelivery.label.toLocaleLowerCase('el')+' ύφος. '+resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
+        voiceStatus.textContent='Ο ATLA μιλά στα ελληνικά με '+mentorDelivery.label.toLocaleLowerCase('el')+' ύφος. '+resolveMentorGreekVoice(window.speechSynthesis.getVoices(),voiceSelect.value).label;
       },
       onFinish:()=>{
         if(current!==speakingGeneration)return;
@@ -524,7 +524,7 @@ function wireCoach(){
   const available=supportsSpeech(window);
   $('coach-speak').disabled=!available;
   $('coach-stop').disabled=!available;
-  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές Mentor ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
+  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές ATLA ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
 }
 async function renderPlan(){
   renderPersonalPlan();
@@ -538,7 +538,7 @@ async function renderPlan(){
     target.append(
       make('strong',null,'Πρόταση: '+label),
       make('p',null,'Μελέτη '+Math.round(minutes*.35)+' λεπτά · Διαδραστική αποστολή '+Math.round(minutes*.5)+' λεπτά · Ανασκόπηση '+(minutes-Math.round(minutes*.35)-Math.round(minutes*.5))+' λεπτά.'),
-      make('p','muted small','Πρόταση βάσει καταγραφών Mentor, όχι πιστοποιημένη εκτίμηση ικανότητας.')
+      make('p','muted small','Πρόταση βάσει καταγραφών ATLA, όχι πιστοποιημένη εκτίμηση ικανότητας.')
     );
     if(state.activities){
       const extra=await state.activities.summary();
@@ -559,17 +559,17 @@ async function exportMentor(){
     anchor.href=url;anchor.download='mentor-os-study-backup.json';
     document.body.append(anchor);anchor.click();anchor.remove();
     setTimeout(()=>URL.revokeObjectURL(url),5000);
-    notify('Έγινε λήψη αντιγράφου δοκιμών Mentor.');
+    notify('Έγινε λήψη αντιγράφου δοκιμών ATLA.');
   }catch(e){notify('Η εξαγωγή απέτυχε: '+e.message,true);}
 }
 async function eraseMentor(){
-  if(!confirm('Να διαγραφούν οι δοκιμαστικές αποστολές και η μνήμη Mentor από αυτή την καρτέλα; Η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ δεν επηρεάζεται.'))return;
+  if(!confirm('Να διαγραφούν οι δοκιμαστικές αποστολές και η μνήμη ATLA από αυτή την καρτέλα; Η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ δεν επηρεάζεται.'))return;
   try{
     await state.store.erase(state.scope);
     if(state.activities)await state.activities.erase();
     state.session=null;
     renderMission();await renderMemory();await renderPlan();
-    notify('Διαγράφηκαν μόνο οι δοκιμαστικές καταγραφές Mentor.');
+    notify('Διαγράφηκαν μόνο οι δοκιμαστικές καταγραφές ATLA.');
   }catch(e){notify('Η διαγραφή απέτυχε: '+e.message,true);}
 }
 function viewLegacy(){
@@ -604,7 +604,7 @@ async function boot(){
       onChange:async()=>{await renderMemory();await renderPlan();}});
     state.initialized=true;
     $('privacy-text').textContent=state.store.persistent?
-      'Οι δοκιμές Mentor αποθηκεύονται τοπικά σε δύο ξεχωριστές βάσεις IndexedDB. Η δοκιμαστική ταυτότητα επισκέπτη ισχύει μόνο για αυτή την καρτέλα. Δεν γίνεται συγχρονισμός στο cloud.':
+      'Οι δοκιμές ATLA αποθηκεύονται τοπικά σε δύο ξεχωριστές βάσεις IndexedDB. Η δοκιμαστική ταυτότητα επισκέπτη ισχύει μόνο για αυτή την καρτέλα. Δεν γίνεται συγχρονισμός στο cloud.':
       'Η τοπική αποθήκευση IndexedDB δεν είναι διαθέσιμη· οι δοκιμές θα χαθούν αν κλείσεις την καρτέλα. Δεν γίνεται συγχρονισμός.';
     notify(state.store.persistent?'Το εργαστήριο είναι έτοιμο. Η υπάρχουσα πρόοδος παραμένει ανέπαφη.':'Δοκιμαστική λειτουργία χωρίς μόνιμη αποθήκευση.');
     renderMission();await renderMemory();await renderPlan();

@@ -10,17 +10,17 @@ if(context&&main&&!document.querySelector('[data-mentor-connected-study]')){
  const panel=document.createElement('section');
  panel.className='mentor-connected-study';
  panel.dataset.mentorConnectedStudy='true';
- panel.setAttribute('aria-label','Κοινή εκπαιδευτική διαδρομή με τον MENTOR OS');
+ panel.setAttribute('aria-label','Κοινή εκπαιδευτική διαδρομή με τον ATLA OS');
  const label=document.createElement('h2');
- label.textContent='Συνέχισε με τον ίδιο MENTOR';
+ label.textContent='Συνέχισε με τον ίδιο ATLA';
  const explanation=document.createElement('p');
  explanation.textContent='Εκπαιδευτικό θέμα: '+(context.focus||context.topic)+'. Η άσκηση και η ανασκόπηση θα χρησιμοποιούν το ίδιο θέμα, με δυνατότητα επιστροφής σε αυτή την ενότητα. Δεν μεταφέρονται βαθμοί, σημειώσεις ή προσωπικά δεδομένα.';
  const actions=document.createElement('div');
  actions.className='mentor-connected-actions';
  const links=[
-  ['MENTOR | LAB',makeJourneyUrl('mentor-protocol-suite.html',context,'lab')],
-  ['MENTOR DEBRIEF',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')],
-  ['MENTOR OS',makeJourneyUrl('mentor-lab.html',context)]
+  ['ATLA | LAB',makeJourneyUrl('mentor-protocol-suite.html',context,'lab')],
+  ['ATLA DEBRIEF',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')],
+  ['ATLA OS',makeJourneyUrl('mentor-lab.html',context)]
  ];
  for(const [title,dest] of links){
   const a=document.createElement('a');a.href=new URL(dest,new URL('./',import.meta.url)).href;

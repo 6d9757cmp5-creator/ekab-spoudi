@@ -304,7 +304,7 @@ function renderTool(){
    r.practiceSteps.forEach((step,i)=>list.append(el('li',(step.done?'✓ ':'○ ')+(i+1)+'. '+step.label)));
    actions.append(list);
   }
-  actions.append(actionButton('Μετάβαση στο MENTOR DEBRIEF',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
+  actions.append(actionButton('Μετάβαση στο ATLA DEBRIEF',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
  }else for(const a of activeActions){
   actions.append(actionButton(a.label+' · '+a.min+'′',()=>{
    try{const updated=execute(state,tool,a.id);commit(updated,updated.events.at(-1).detail);}
@@ -420,7 +420,7 @@ function render(){
  renderer.setPaused(unifiedEnabled||!state.playing);
  renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
  renderMenu();renderTool();renderReview();renderInsights();
- window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'MENTOR NEXT — '+currentCase.title}}));
+ window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'ATLA NEXT — '+currentCase.title}}));
  window.dispatchEvent(new CustomEvent('atla:nih3d-cockpit-anatomy',{detail:{
   confirmedAnatomy:typeof currentCase.confirmedAnatomy==='string'?currentCase.confirmedAnatomy:null,
   clinicalStructureConfirmed:currentCase.clinicalStructureConfirmed===true

@@ -26,7 +26,7 @@ try{hiddenByUser=localStorage.getItem("ekab-mentor-home-hidden")==="1";}catch{}
 function updateVisibility(hide){
  hiddenByUser=hide;
  visual.hidden=hide;
- toggle.textContent=hide?"Εμφάνιση μορφής MENTOR":"Απόκρυψη μορφής";
+ toggle.textContent=hide?"Εμφάνιση μορφής ATLA":"Απόκρυψη μορφής";
  toggle.setAttribute("aria-expanded",String(!hide));
  try{localStorage.setItem("ekab-mentor-home-hidden",hide?"1":"0");}catch{}
  if(hide)send({type:"mentor:speech",speaking:false,viseme:"rest"});
@@ -40,7 +40,7 @@ window.addEventListener("message",event=>{
  if(event.origin!==location.origin||event.source!==frame?.contentWindow)return;
  if(event.data?.type==="mentor:stage"){
    const state=event.data.state;
-   if(state==="ready")$("mentor-home-3d-status").textContent="Ο MENTOR είναι παρών σε 3D.";
+   if(state==="ready")$("mentor-home-3d-status").textContent="Ο ATLA είναι παρών σε 3D.";
    else $("mentor-home-3d-status").textContent="Η μορφή 3D δεν φορτώθηκε. Δεν εμφανίζεται παλιό μοντέλο.";
  }
 });
@@ -85,7 +85,7 @@ function play(text){
    rate:voiceStyle.rate,pitch:voiceStyle.pitch,volume:voiceStyle.volume,
    onStart:()=>{
      if(ticket!==generation)return;
-     paintSpeaking(true);status.textContent=deviceVoice?"Ο MENTOR μιλά με την ελληνική φωνή της συσκευής (δεν βρέθηκε γυναικεία).":"Ο MENTOR μιλά με γυναικεία ελληνική φωνή.";
+     paintSpeaking(true);status.textContent=deviceVoice?"Ο ATLA μιλά με την ελληνική φωνή της συσκευής (δεν βρέθηκε γυναικεία).":"Ο ATLA μιλά με γυναικεία ελληνική φωνή.";
      send({type:"mentor:presence",detail:publicDeliveryCue(delivery)});
      send({type:"mentor:speech",speaking:true,viseme:"open"});
    },
