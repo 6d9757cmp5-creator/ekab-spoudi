@@ -29,7 +29,7 @@ const GROUPS=Object.freeze({
     'openstax.org','www.openstax.org','wtcs.pressbooks.pub'
   ]),
   'technical-research-assets-not-clinical-guidance':Object.freeze([
-    'humanatlas.io','physionet.org','github.com'
+    'humanatlas.io','physionet.org','3d.nih.gov','github.com'
   ]),
   'official-document-delivery':Object.freeze([
     'cdn.who.int'
