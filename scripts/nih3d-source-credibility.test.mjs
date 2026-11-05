@@ -18,7 +18,7 @@ const reviewed=(row)=>({
  independentEvidence:['https://doi.org/10.0000/only-a-test-fixture']
 });
 const a=entry(),b=entry(169);
-assert.deepEqual(readApprovalRegistry(),empty,'Production ledger must start with zero invented approvals');
+assert.equal(readApprovalRegistry().policy,'DENY_UNREVIEWED','Production registry remains fail closed even after real approvals are added');
 assert.equal(checkSourceCredibility(a,empty).approved,false,'NIH hosting is not scientific approval');
 assert.throws(()=>requireSourceCredibility(a,empty),/NIH_SOURCE_REVIEW_REQUIRED/);
 assert.throws(()=>requireRangeSourceCredibility([a,b],empty),/NIH3D_CREDIBILITY_BLOCKED_RANGE/);
