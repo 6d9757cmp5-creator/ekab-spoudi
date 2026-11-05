@@ -18,6 +18,8 @@ jobs:
         with:
           sparse-checkout: |
             scripts/nih3d-ghcr-seven-medical-batch.mjs
+            tools/atla-ai/nih3d-credibility-gate.mjs
+            tools/atla-ai/resources/nih3d-credibility-approvals.json
             tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
             tools/atla-ai/resources/nih3d-verified-originals-2026.json
             docs/ATLA_NIH3D_GHCR_MEDICAL_SEVEN_BATCH_2026.json
