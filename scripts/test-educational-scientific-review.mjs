@@ -178,6 +178,23 @@ test('audit records are excluded from paid review but lessons and questions are 
 });
 
 
+test('3D anatomy assets enter the educational audit but require visual review without exact upstream proof',async()=>{
+ for(const ext of ['glb','gltf','obj','stl','x3d','wrl','fbx','dae','ply','usdz'])
+  assert.equal(isEducationPath('future/anatomy/organ.'+ext),true,ext);
+ const root=await mkdtemp(join(tmpdir(),'atla-3d-review-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await mkdir(join(root,'future/anatomy'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'safe review rules');
+  await writeFile(join(root,'future/anatomy/organ.glb'),Buffer.from('glTF 2.0 test bytes'));
+  const res=await runReview({manual:'future/anatomy/organ.glb',root,dryRun:true,fetchImpl:()=>{throw Error('billable request');}});
+  assert.equal(res.status,'incomplete');
+  assert.equal(res.upstream_evidence_reused_count,0);
+  assert.ok(res.pending.some(x=>x.reason==='visual_or_media_review_required'));
+  assert.equal(res.files[0].mode,'binary_media');
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
 test('full educational review reuses only authenticated, byte-identical upstream original',async()=>{
  const root=await mkdtemp(join(tmpdir(),'atla-evidence-e2e-'));
  const path='future/official-source/material.md';
