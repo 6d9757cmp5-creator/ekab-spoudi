@@ -10,6 +10,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {Readable,Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
+import {readApprovalRegistry,requireSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 
 const cmd=process.argv[2],root=process.env.NIH_BATCH_DIR;
 if(!root||!['prepare','verify'].includes(cmd))throw Error('Usage: NIH_BATCH_DIR=<path> node scripts/nih3d-ghcr-full-anatomy.mjs prepare|verify');
@@ -19,11 +20,13 @@ const EXT={GLB:'glb',STL:'stl',OBJ:'obj',WRL:'wrl',X3D:'x3d',GLTF:'gltf',PLY:'pl
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const file=(rel)=>path.join(root,rel);
 if(cmd==='prepare'){
+ const credibilityRegistry=readApprovalRegistry();
  const catalog=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json','utf8'));
  const selected=ids.map(id=>catalog.items.find(x=>x.entryId===id));
  if(selected.some(x=>!x))throw Error('Missing NIH source entry');
  const items=[],files=[],urls=new Set();let estimated=0;
  for(const entry of selected){
+  requireSourceCredibility(entry,credibilityRegistry);
   if(entry.category!=='Anatomy'||entry.license!=='CC BY 4.0')throw Error('Source category/license not independently eligible '+entry.entryId);
   if(!Array.isArray(entry.files)||entry.files.length<5||entry.files.length>30)throw Error('Unexpected count of original files '+entry.entryId);
   const formats=new Set(entry.files.map(f=>String(f.format).toUpperCase()));
