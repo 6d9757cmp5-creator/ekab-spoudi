@@ -19,7 +19,7 @@ export function mountCockpitEntry(root=document,search=location.search){
  panel.id='atlas-cockpit-entry';
  panel.className='atlas-cockpit-entry';
  panel.setAttribute('aria-label','Συνέχεια εξάσκησης και προαιρετική βοήθεια ATLAS');
- const h=root.createElement('h2');h.textContent='Εξάσκηση · Clinical Cockpit';
+ const h=root.createElement('h2');h.textContent='Εξάσκηση · Κλινικός Προσομοιωτής';
  const p=root.createElement('p');
  p.textContent=entry?'Προήλθες από κεφάλαιο ΣΑΕΚ'+(entry.focus?' «'+entry.focus+'»':'')+'. Ο σημερινός Προσομοιωτής έχει γενικά συνθετικά περιστατικά και δεν ισχυρίζεται ότι αυτά αντιστοιχούν ιατρικά στο κεφάλαιο.':'Ο Προσομοιωτής εκτελεί συνθετικές ασκήσεις. Μπορείς προαιρετικά να ζητήσεις εκπαιδευτική καθοδήγηση από το ATLAS.';
  const actions=root.createElement('div');actions.className='atlas-cockpit-entry-actions';

@@ -9,13 +9,13 @@ for(const item of PRACTICAL_CASES){
  const details=document.getElementById(item.returnAnchor);
  if(!details)continue;
  const row=document.createElement('p');row.className='practical-cockpit-row';
- row.append(scenarioLink(item,item.returnAnchor,'🩺 Εξάσκηση στο Clinical Cockpit · Σενάριο '+item.practicalNumber));
+ row.append(scenarioLink(item,item.returnAnchor,'🩺 Εξάσκηση στον Κλινικό Προσομοιωτή · Σενάριο '+item.practicalNumber));
  details.before(row);
 }
 const skillsDetails=document.getElementById('practical-video-2');
 if(skillsDetails){
  const box=document.createElement('section');box.className='practical-cockpit-skills';box.id='practical-skills-cockpit';
- const title=document.createElement('h3');title.textContent='Οι 12 δεξιότητες στο Clinical Cockpit';
+ const title=document.createElement('h3');title.textContent='Οι 12 δεξιότητες στον Κλινικό Προσομοιωτή';
  const note=document.createElement('p');note.textContent='Κάθε δεξιότητα ασκείται μέσα από τα σενάρια όπου εμφανίζεται. Η εξάσκηση είναι καταγραφή ενεργειών σε συνθετικό περιβάλλον, δεν αποτελεί πράξη ούτε βαθμολόγηση.';
  const list=document.createElement('ul');
  for(const skill of PRACTICAL_SKILLS){

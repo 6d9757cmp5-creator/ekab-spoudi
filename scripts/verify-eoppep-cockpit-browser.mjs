@@ -47,7 +47,7 @@ try{
    const before=await page.locator('#next-hr,#next-vitals').first().innerText().catch(()=>'');
    await page.locator('#next-actions button',{hasText:item.steps[0].label}).click();
    assert.match(await page.locator('#next-result').innerText(),/άσκησης/);
-   await openTool(page,'Debrief');
+   await openTool(page,'Ανασκόπηση');
    const debrief=await page.locator('#next-actions').innerText();
    assert.match(debrief,/Ελεγμένη σειρά/);
    assert.match(debrief,new RegExp('✓ 1\\. '+item.steps[0].label.slice(0,20)),'The recorded step is ticked');
@@ -55,7 +55,7 @@ try{
    assert.doesNotMatch(debrief,/κανένα βήμα/,'The debrief must not contradict the ticks');
    assert.doesNotMatch(debrief,/\d+\s*\/\s*\d+\s*(?:μονάδες|βαθμ)/,'No grading');
    if(item.practicalNumber===3){
-    await openTool(page,'Monitoring');
+    await openTool(page,'Παρακολούθηση');
     await page.locator('#next-actions button',{hasText:'Έλεγχος ΑΠ'}).click();
     const bp=await page.locator('#next-result').innerText();
     assert.match(bp,/δεν δίνει τιμή/);

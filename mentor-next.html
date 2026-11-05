@@ -13,18 +13,18 @@
 <a class="skip" href="#next-stage">Μετάβαση στην προσομοίωση</a>
 <div class="next-shell" id="next-root">
 <header class="next-header">
- <div class="next-brand"><span class="next-symbol">✚</span><div><strong>ΕΚΑΒ <em>SIMULATOR</em></strong><small>ΕΚΑΒ Σπουδή · Ανεξάρτητος Προσομοιωτής Ασθενών</small></div></div>
- <nav class="next-links" aria-label="Πλοήγηση προσομοίωσης"><a href="#next-stage">Simulation Cockpit</a><a href="mentor-live.html">← Κλασική αποστολή</a><a href="mentor-scenarios.html">Άτλας περιστατικών</a><a href="ui-tools/atla-resource-preview.html?tool=cockpit">3D πόροι · δοκιμή</a></nav>
+ <div class="next-brand"><span class="next-symbol">✚</span><div><strong>ΕΚΑΒ <em>ΠΡΟΣΟΜΟΙΩΤΗΣ</em></strong><small>ΕΚΑΒ Σπουδή · Ανεξάρτητος Προσομοιωτής Ασθενών</small></div></div>
+ <nav class="next-links" aria-label="Πλοήγηση προσομοίωσης"><a href="#next-stage">Κλινικός Προσομοιωτής</a><a href="mentor-live.html">← Κλασική αποστολή</a><a href="mentor-scenarios.html">Άτλας περιστατικών</a><a href="ui-tools/atla-resource-preview.html?tool=cockpit">3D πόροι · δοκιμή</a></nav>
 </header>
 <section class="next-top">
  <a id="next-return" class="next-return" hidden>← Επιστροφή στο μάθημα</a>
- <div><p class="next-eyebrow">PREHOSPITAL SIMULATION · CRETE</p><h1 id="next-case-title">Τροχαίο · Δύο εμπλεκόμενοι</h1>
+ <div><p class="next-eyebrow">ΠΡΟΝΟΣΟΚΟΜΕΙΑΚΗ ΠΡΟΣΟΜΟΙΩΣΗ · ΚΡΗΤΗ</p><h1 id="next-case-title">Τροχαίο · Δύο εμπλεκόμενοι</h1>
  <p id="next-case-briefing">Δύο ενήλικες, εικονική σκηνή. Τα δεδομένα είναι συνθετικά.</p></div>
  <div class="next-time"><span>Χρόνος περιστατικού</span><strong id="next-minute">00:00</strong><small id="next-status">Έτοιμο</small></div>
 </section>
 <p class="next-warning" role="note"><strong>Συνθετικό εκπαιδευτικό πρωτότυπο.</strong> Οι ασθενείς, οι ενδείξεις και οι μεταβολές είναι επινοημένες, όχι επιστημονικά επικυρωμένη φυσιολογία. Δεν πραγματοποιούνται ιατρικές πράξεις, χορηγήσεις ή διαλογή. Το αποτέλεσμα δεν αποτελεί κλινική βαθμολογία.</p>
 <section id="next-case-library" class="next-library" aria-label="Βιβλιοθήκη εκπαιδευτικών αποστολών">
- <div class="next-library-heading"><div><p class="next-eyebrow">ΕΚΑΒ CASE LIBRARY · ΕΚΠΑΙΔΕΥΤΙΚΗ ΕΞΑΣΚΗΣΗ</p><h2>Επίλεξε αποστολή</h2></div><span>3 πρωτότυπα ελληνικά περιβάλλοντα</span></div>
+ <div class="next-library-heading"><div><p class="next-eyebrow">ΕΚΑΒ ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ · ΕΚΠΑΙΔΕΥΤΙΚΗ ΕΞΑΣΚΗΣΗ</p><h2>Επίλεξε αποστολή</h2></div><span>3 πρωτότυπα ελληνικά περιβάλλοντα</span></div>
  <p>Κάθε αποστολή έχει διαφορετικούς εικονικούς ασθενείς, διάλογο και συνθετικά ζωτικά. Η πρόοδος κρατιέται χωριστά στη συσκευή.</p>
  <div id="next-case-list" class="next-case-grid" role="group" aria-label="Επιλογή εκπαιδευτικής αποστολής"></div>
  <h3 class="next-practical-heading">Πρακτικό ΕΟΠΠΕΠ · τα έξι σενάρια</h3>
@@ -50,7 +50,7 @@
   </div>
   <div class="next-canvas-wrap">
    <canvas id="next-canvas" aria-label="Δύο διαδραστικά τρισδιάστατα εκπαιδευτικά μοντέλα ενηλίκων σε συνθετικό περιβάλλον. Χρησιμοποίησε τους χειρισμούς εστίασης και περιστροφής."></canvas>
-   <div class="next-cinema-hud" aria-hidden="true"><span class="next-hud-dot"></span><span>ΕΚΑΒ / SIMULATION FEED</span><span>SCENE 3D</span></div>
+   <div class="next-cinema-hud" aria-hidden="true"><span class="next-hud-dot"></span><span>ΕΚΑΒ / ΡΟΗ ΠΡΟΣΟΜΟΙΩΣΗΣ</span><span>ΣΚΗΝΗ 3D</span></div>
    <div id="next-mesh-status" class="next-mesh-status" role="status">Φόρτωση ανεξάρτητου 3D μοντέλου CC0…</div>
    <div id="next-unified-overlay" class="next-unified-overlay" hidden aria-label="Ενιαία τρισδιάστατη εκπαιδευτική σκηνή ασθενών">
     <div id="next-unified-host" class="next-unified-host"></div>
@@ -70,9 +70,9 @@
   </div>
   <div class="next-patient-switch" role="group" aria-label="Επιλογή εικονικού ασθενούς"><button type="button" data-next-patient="a" aria-pressed="true">Άτομο Α <small>Δίπλα στο όχημα</small></button><button type="button" data-next-patient="b" aria-pressed="false">Άτομο Β <small>Λίγο πιο πέρα</small></button></div>
  </div>
- <aside class="next-monitor" aria-label="Εικονικό monitor">
+ <aside class="next-monitor" aria-label="Εικονική οθόνη παρακολούθησης">
   <div class="next-monitor-head"><span class="next-live-dot"></span><div><h2 id="next-person-name">Άτομο Α</h2><p id="next-person-description">Εικονικός ασθενής</p></div></div>
-  <p class="next-monitor-kicker">SYNTHETIC MULTIPARAMETER DISPLAY</p>
+  <p class="next-monitor-kicker">ΣΥΝΘΕΤΙΚΗ ΟΘΟΝΗ ΠΟΛΛΑΠΛΩΝ ΠΑΡΑΜΕΤΡΩΝ</p>
   <div class="next-vitals">
    <div class="next-vital"><span>Παλμοί (HR) <small>/λεπτό</small></span><strong id="next-hr">—</strong><svg viewBox="0 0 120 28" role="img" aria-label="Ενδεικτική συνθετική κυματομορφή ΗΚΓ. Δεν αποτελεί πραγματικό ΗΚΓ."><polyline id="next-ecg-wave" points=""></polyline></svg><span class="next-vital-caption">Ενδεικτικό εκπαιδευτικό ΗΚΓ</span></div>
    <div class="next-vital"><span>SpO₂ <small>%</small></span><strong id="next-spo2">—</strong><div class="next-bars" aria-hidden="true">▁ ▃ ▅ ▇ ▆ ▄ ▂ ▅ ▇</div></div>
@@ -114,7 +114,7 @@
   </div>
  </div>
  <div class="next-chart-panel">
-  <div class="next-insights-title"><div><p class="next-eyebrow">MONITORING HISTORY</p><h2>Πορεία ζωτικών</h2></div></div>
+  <div class="next-insights-title"><div><p class="next-eyebrow">ΙΣΤΟΡΙΚΟ ΠΑΡΑΚΟΛΟΥΘΗΣΗΣ</p><h2>Πορεία ζωτικών</h2></div></div>
   <label for="next-trend-metric">Προβολή συνθετικής ένδειξης</label>
   <select id="next-trend-metric"><option value="hr">HR · Παλμοί</option><option value="rr">RR · Αναπνοές</option><option value="spo2">SpO₂ · Κορεσμός</option></select>
   <div class="next-chart-legend"><span><i class="next-mark-a"></i> Άτομο Α</span><span><i class="next-mark-b"></i> Άτομο Β</span></div>
@@ -132,7 +132,7 @@
  <aside class="next-review"><h2>Ανασκόπηση αποστολής</h2><p>Έλεγχος εκπαιδευτικών βημάτων, όχι κλινική βαθμολογία.</p><div id="next-review-body"></div><button type="button" id="next-finish">Ολοκλήρωση / Ανασκόπηση</button><p id="next-save-note" role="status" class="next-save-note"></p></aside>
 </div>
 </main>
-<footer class="next-footer">Προσομοιωτής Ασθενών v0.7 · Visual Baseline A · Πρωτότυπος κώδικας ΕΚΑΒ Σπουδή · Χωρίς στοιχεία πραγματικών ασθενών, ιατρικό AI ή πιστοποίηση. <a href="mentor-live.html">Προηγούμενη εκπαιδευτική αποστολή</a></footer>
+<footer class="next-footer">Προσομοιωτής Ασθενών v0.7 · Οπτικό πρότυπο Α · Πρωτότυπος κώδικας ΕΚΑΒ Σπουδή · Χωρίς στοιχεία πραγματικών ασθενών, ιατρικό AI ή πιστοποίηση. <a href="mentor-live.html">Προηγούμενη εκπαιδευτική αποστολή</a></footer>
 </div>
 <script type="module" src="tools/atla-ai/nih3d-learning-surface.mjs"></script>
 <script type="module" src="atla/assistant.mjs"></script>

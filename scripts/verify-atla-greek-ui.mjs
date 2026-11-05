@@ -8,11 +8,12 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
 const expectations=[
- {file:'index.html',good:['ΖΩΝΤΑΝΗ 3D ΠΡΟΒΟΛΗ'],bad:['>3D LIVE<']},
- {file:'protocols.html',good:['MENTOR | ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ','ΑΝΑΣΚΟΠΗΣΗ MENTOR'],bad:['MENTOR | PROTOCOL LAB','MENTOR DEBRIEF']},
- {file:'ui-tools/anatomy-3d/index.html',good:['ΑΝΑΤΟΜΙΑ <span>ΕΡΓΑΣΤΗΡΙΟ 3D</span>','ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D','Εργαστήριο 3D Ανατομίας'],bad:['>3D LAB<','>3D LIVE<','3D Anatomy Lab']},
- {file:'mentor-live.html',good:['ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ','ΑΝΑΣΚΟΠΗΣΗ ΑΠΟΣΤΟΛΗΣ'],bad:['SIMULATION COCKPIT','MENTOR DEBRIEF']},
- {file:'mentor-lab.html',good:['Εργαστήριο Πρωτοκόλλων','Εργαστήριο ΗΚΓ','Ανασκόπηση MENTOR'],bad:['>PROTOCOL LAB<','>MENTOR DEBRIEF<','ECG Lab']},
+ {file:'index.html',good:['ATLA · Ο προσωπικός σου εκπαιδευτικός βοηθός','Κέντρο Διασώστη'],bad:['>3D LIVE<','PROTOCOL LAB','DEBRIEF']},
+ {file:'protocols.html',good:['ATLA · Πρακτική πρωτοκόλλων','Ανασκόπηση προσπάθειας','ATLA · Κέντρο Διασώστη'],bad:['PROTOCOL LAB','DEBRIEF','MENTOR']},
+ {file:'ui-tools/anatomy-3d/index.html',good:['ΑΝΑΤΟΜΙΑ <span>ΕΡΓΑΣΤΗΡΙΟ 3D</span>','ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D','Εργαστήριο 3D Ανατομίας'],bad:['>3D LAB<','Zoom με']},
+ {file:'mentor-live.html',good:['ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ','ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΝΑΣΚΟΠΗΣΗ'],bad:['SIMULATION COCKPIT','CLINICAL COCKPIT','DEBRIEF']},
+ {file:'mentor-next.html',good:['ΠΡΟΣΟΜΟΙΩΤΗΣ','Κλινικός Προσομοιωτής','ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ'],bad:['SIMULATOR','CASE LIBRARY','PREHOSPITAL','MULTIPARAMETER','MONITORING HISTORY']},
+ {file:'mentor-lab.html',good:['Εργαστήριο ΗΚΓ','ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ','ΑΝΑΣΚΟΠΗΣΗ'],bad:['>PROTOCOL LAB<','ECG Lab','>MENTOR']},
  {file:'theory.html',good:['Εκπαιδευτικές υπενθυμίσεις SOS'],bad:['AI Hint SOS']},
  {file:'ui-tools/anatomy-full-atlas.html',good:['← Εργαστήριο 3D Ανατομίας'],bad:['← Anatomy Lab']},
  {file:'ui-tools/atla-resource-preview.html',good:['>Κίνηση<'],bad:['>Animation<']},
@@ -29,7 +30,7 @@ test('Greek-first headings are present and historic English-only labels are abse
 
 test('public learning routes and controls are preserved',()=>{
  const home=readFileSync('index.html','utf8');
- for(const route of ['saek.html','eoppep.html','farmaka.html','mentor-lab.html','ui-tools/anatomy-3d/index.html']){
+ for(const route of ['saek.html','eoppep.html','paramedic.html']){
   assert.ok(home.includes(route),'homepage must preserve '+route);
  }
  const mentor=readFileSync('mentor-lab.html','utf8');

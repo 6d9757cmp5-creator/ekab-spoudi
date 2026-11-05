@@ -77,4 +77,4 @@ export function nihAssetsFromLibrary(library,tool){
   }}));
  return {assets};
 }
-export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Clinical Cockpit'});
+export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Κλινικός Προσομοιωτής'});

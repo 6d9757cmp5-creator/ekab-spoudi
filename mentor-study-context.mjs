@@ -24,7 +24,7 @@ if(topic){
    panel.append(back);
   }
   const lab=document.createElement('a');lab.href=makeJourneyUrl('mentor-protocol-suite.html',context,'lab');
-  lab.textContent='ATLA | PROTOCOL LAB →';lab.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
+  lab.textContent='ATLA | Εργαστήριο πρωτοκόλλων →';lab.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
   panel.append(lab);
   hero.insertBefore(panel,hero.firstChild);
  }

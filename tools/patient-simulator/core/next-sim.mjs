@@ -12,13 +12,13 @@ export const TOOLS=[
  {id:'position',icon:'♧',label:'Στάση'},
  {id:'dialogue',icon:'◌',label:'Συνομιλία'},
  {id:'exam',icon:'✚',label:'Εξέταση'},
- {id:'monitor',icon:'▤',label:'Monitoring'},
+ {id:'monitor',icon:'▤',label:'Παρακολούθηση'},
  {id:'tests',icon:'◇',label:'Εξετάσεις'},
  {id:'call',icon:'☎',label:'Επικοινωνία'},
  {id:'interventions',icon:'▣',label:'Ενέργειες'},
  {id:'meds',icon:'⊘',label:'Φάρμακα'},
  {id:'records',icon:'▤',label:'Φάκελος'},
- {id:'debrief',icon:'◎',label:'Debrief'}
+ {id:'debrief',icon:'◎',label:'Ανασκόπηση'}
 ];
 export const ACTIONS={
  position:[
@@ -160,7 +160,7 @@ export function summarize(s){
  disclaimer:'Έλεγχος ολοκλήρωσης εκπαιδευτικών βημάτων — όχι κλινική βαθμολογία ή πιστοποίηση.'};
 }
 export function reportText(s){
- const r=summarize(s);return ['ATLA NEXT · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',getCase(s.caseId).title,r.disclaimer,
+ const r=summarize(s);return ['ATLA · Προσομοιωτής · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',getCase(s.caseId).title,r.disclaimer,
  'Χρόνος: '+r.minute+' εικονικά λεπτά','Καταγραφές: '+r.events,
  'Βήματα που καταγράφηκαν: '+(r.covered.join(', ')||'Κανένα'),
  'Για επανάληψη: '+(r.missing.join(', ')||'Κανένα'),

@@ -21,7 +21,7 @@ export const PRACTICAL_SKILLS=Object.freeze([
 const [AMSS,AIRWAY,BREATHING,CIRCULATION,NEURO,EXPOSURE,SPECIAL,ARREST,BOARD,SPLINT,IV,TRANSPORT]=PRACTICAL_SKILLS;
 const practical=(n,fields)=>({id:'eoppep-practical-'+n,group:'eoppep-practical',practicalNumber:n,
  tag:'ΕΟΠΠΕΠ πρακτικό',level:'Σενάριο '+n,source:SOURCE,vitalsNote:SYNTHETIC,returnAnchor:'practical-video-'+(n+2),
- goal:'Οργάνωσε τις ενέργειές σου σε έως 30 λεπτά, όπως ορίζει το έγγραφο. Στο Debrief βλέπεις την ελεγμένη σειρά, χωρίς βαθμολόγηση.',...fields});
+ goal:'Οργάνωσε τις ενέργειές σου σε έως 30 λεπτά, όπως ορίζει το έγγραφο. Στο Ανασκόπηση βλέπεις την ελεγμένη σειρά, χωρίς βαθμολόγηση.',...fields});
 export const PRACTICAL_CASES=Object.freeze([
  practical(1,{scene:'square',location:'Καφενείο',title:'Σενάριο 1 · Αιφνίδια απώλεια συνείδησης',
   briefing:'Είστε πλήρωμα στο ασθενοφόρο και καλείστε να αντιμετωπίσετε νεαρό άνδρα σε καφενείο, ο οποίος παρουσιάζει αιφνίδια απώλεια συνειδήσεως. Ποιες είναι οι ενέργειες που θα κάνετε;',
