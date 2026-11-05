@@ -131,12 +131,21 @@ async function placeOriginal(model,glb,stagingRoot){
  await fs.writeFile(target,bytes);
  return target;
 }
+/** Limited delivery space goes first to models lessons depend on, then anatomy, smallest first. */
+export function deliveryPriority(model,curated,category){
+ const glb=chooseGlb(model);
+ return [curated?0:category==='Anatomy'?1:2,glb?.size??Number.MAX_SAFE_INTEGER,model.entryId];
+}
+const comparePriority=(a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2];
 async function build(stagingRoot){
  const [ledger,curation,catalog,scope,chapters,others]=await Promise.all([
   readJson(LEDGER),readJson(CURATION),segments(CATALOG,'items'),segments(SCOPE,'sourceModels'),courseChapters(),otherSources()]);
  const vocabulary={structures:curation.structures,findings:curation.findings,exclude:curation.exclude};
  const models=[],restrictions={};let servedBytes=0,served=0;
- for(const model of [...ledger.models].sort((a,b)=>a.entryId-b.entryId)){
+ const ordered=[...ledger.models].sort((a,b)=>comparePriority(
+  deliveryPriority(a,curation.models[a.accession],catalog.get(a.entryId)?.category),
+  deliveryPriority(b,curation.models[b.accession],catalog.get(b.entryId)?.category)));
+ for(const model of ordered){
   const record=catalog.get(model.entryId),scoped=scope.get(model.entryId);
   assert(record,'Ledger model missing from catalog: '+model.accession);
   assert.equal(model.scientificApproval,'NOT_ESTABLISHED');
@@ -165,6 +174,7 @@ async function build(stagingRoot){
    scopeStatus:scoped?.status??null,scientificApproval:'NOT_ESTABLISHED',clinicalUseApproved:false
   });
  }
+ models.sort((a,b)=>a.entryId-b.entryId);
  const licenses={},scopes={};
  for(const row of catalog.values())licenses[row.licenseRaw]=(licenses[row.licenseRaw]??0)+1;
  for(const row of scope.values())scopes[row.status]=(scopes[row.status]??0)+1;

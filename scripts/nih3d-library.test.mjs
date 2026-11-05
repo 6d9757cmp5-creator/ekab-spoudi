@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import crypto from 'node:crypto';
 import {selectLibraryModels,selectAtlaVisual,safeReturnHref,viewerHref,simplify,structureHits} from '../tools/atla-ai/nih3d-library.mjs';
-import {deliveryRestriction,chapterEvidence,parseCourseChapters,MAX_MODEL_BYTES,MODELS_DIR} from './nih3d-build-library.mjs';
+import {deliveryRestriction,deliveryPriority,chapterEvidence,parseCourseChapters,MAX_MODEL_BYTES,MODELS_DIR} from './nih3d-build-library.mjs';
 
 // Delivery policy: every refusal has a specific cause.
 const glb={size:1000};
@@ -17,6 +17,13 @@ assert.equal(deliveryRestriction({license:'Public Domain',glb:null}),'NO_GLB');
 assert.equal(deliveryRestriction({license:'Public Domain',glb,scopeStatus:'LIKELY_OUT_OF_MEDICAL_SCOPE'}),'OUT_OF_SCOPE');
 assert.equal(deliveryRestriction({license:'Public Domain',glb:{size:MAX_MODEL_BYTES+1}}),'OVERSIZE');
 assert.equal(deliveryRestriction({license:'Public Domain',glb,servedBytes:400*1024**2}),'CAPACITY');
+
+// Limited space never pushes out what lessons depend on.
+const sized=(entryId,size)=>({entryId,verifiedFiles:[{format:'GLB',size,sha256:'a'.repeat(64)}]});
+const rank=(model,curated,category)=>deliveryPriority(model,curated,category)[0];
+assert(rank(sized(9,9e6),{kind:'anatomy'},'Anatomy')<rank(sized(1,1),null,'Anatomy'),'Curated models come first, whatever their size');
+assert(rank(sized(1,1),null,'Anatomy')<rank(sized(2,1),null,'Biomacromolecules'),'Anatomy comes before other categories');
+assert(deliveryPriority(sized(5,10),null,'Anatomy')[1]<deliveryPriority(sized(1,20),null,'Anatomy')[1],'Smaller files fit more models');
 
 // Same-named vessels and nerves are not bones.
 const vocab={
@@ -96,6 +103,7 @@ if(existsSync('tools/atla-ai/resources/model-library.json')){
    assert.equal(m.restrictionCode,null,m.accession);
   }else assert(m.restriction&&m.restrictionCode,'Unserved model needs a stated reason: '+m.accession);
  }
+ for(const m of nih.filter(x=>x.kind))assert.notEqual(m.restrictionCode,'CAPACITY','A curated model lost its place: '+m.accession);
  const femur=nih.find(m=>m.accession==='3DPX-000168');
  assert.equal(femur.kind,'anatomy');
  assert.equal(selectLibraryModels(real,{surface:'anatomy',text:'Μηριαία αρτηρία'}).length,0,'A vessel does not open the femur');
