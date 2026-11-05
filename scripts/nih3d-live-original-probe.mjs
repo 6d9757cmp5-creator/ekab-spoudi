@@ -3,17 +3,20 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {dirname} from 'node:path';
+import {readApprovalRegistry,requireSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 
 const base='tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json';
 const output='docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json';
 const origin='https://6d9757cmp5-creator.github.io';
 const parsed=JSON.parse(await readFile(base,'utf8'));
+const credibilityRegistry=readApprovalRegistry();
 const wanted=[{id:12,format:'GLB'},{id:170,format:'STL'}];
 const record={schemaVersion:1,scope:'TWO_REAL_NIH_ORIGINAL_SOURCE_FILES',binaryArchiveComplete:false,
  independentlyVerifiedAllFiles:false,downloadedTotalBytes:0,tests:[]};
 for(const target of wanted){
  const e=(parsed.items??[]).find(x=>x.entryId===target.id);
- const candidates=(e?.files??[]).filter(x=>x.format===target.format&&Number(x.size)>0&&Number(x.size)<500000)
+ requireSourceCredibility(e,credibilityRegistry);
+  const candidates=(e?.files??[]).filter(x=>x.format===target.format&&Number(x.size)>0&&Number(x.size)<500000)
   .sort((a,b)=>Number(a.size)-Number(b.size));
  const asset=candidates[0];
  if(!asset)throw Error('Missing bounded source fixture for NIH entry '+target.id);
