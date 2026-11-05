@@ -121,11 +121,12 @@ def plan(artifacts, legacy, done, count=16):
         if s in done or base+'-RESULT.json' in legacy: continue
         selected.append({'id':a['id'],'start':s,'bytes':a['size_in_bytes'],
                          'expires_at':a.get('expires_at','') or ''})
-    selected.sort(key=lambda a:(a['expires_at'],-a['id']))
-    unique={}; 
-    for a in selected:
+    # A re-fetched range supersedes its older artifact, which may lack the RESULT manifest.
+    unique={}
+    for a in sorted(selected,key=lambda a:-a['id']):
         if a['start'] not in unique:unique[a['start']]=a
-    return list(unique.values())[:count],len(unique)
+    ordered=sorted(unique.values(),key=lambda a:(a['expires_at'],-a['id']))
+    return ordered[:count],len(ordered)
 
 def signed_url(artifact_id):
     r=http(API+f'/actions/artifacts/{artifact_id}/zip', follow=False)

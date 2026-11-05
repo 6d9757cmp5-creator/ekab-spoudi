@@ -1,0 +1,40 @@
+name: EKAB - Re-fetch one NIH3D range from source
+# For a range whose artifact has no RESULT manifest. The rescue workflow picks up the new artifact.
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: 'First entry of the 100-entry range, for example 12701'
+        required: true
+        type: number
+permissions:
+  contents: read
+jobs:
+  refetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download all published NIH 3D formats with lossless compression
+        env:
+          RANGE_START: ${{ inputs.start }}
+        run: |
+          set -euo pipefail
+          case "$RANGE_START" in *[!0-9]*|'') exit 1;; esac
+          [ $((RANGE_START % 100)) -eq 1 ] || { echo 'A range starts at xx01'; exit 1; }
+          sudo apt-get update -qq && sudo apt-get install -qq -y zstd
+          node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$((RANGE_START+99))" --out="tmp/nih3d-mirror-$RANGE_START"
+      # Only a finished run has a RESULT manifest, so a partial download cannot replace anything.
+      - name: Preserve the finished range for the rescue workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-originals-${{ inputs.start }}
+          path: |
+            tmp/nih3d-mirror-${{ inputs.start }}/*.tar.zst*
+            tmp/nih3d-mirror-${{ inputs.start }}/*-RESULT.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
