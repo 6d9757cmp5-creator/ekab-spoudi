@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {screenSourceResearch} from '../tools/atla-ai/nih3d-scientific-ontology.mjs';
 import {biomedicalScope, NIH_BIOMEDICAL_SCOPE_STATUS as BIOMEDICAL_SCOPE} from '../tools/atla-ai/nih3d-biomedical-scope.mjs';
+import {readApprovalRegistry,checkSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 
 const FORMAT=new Set(['GLB','STL','OBJ','X3D','WRL','GLTF','PLY','3MF']);
 const SAFE_SOURCE=/^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[a-f0-9-]+\/output-files\/\d+$/i;
@@ -15,12 +16,14 @@ export const DEFAULTS=Object.freeze({maxBatchBytes:1_000_000_000,maxFileBytes:20
 const declaredLicense=value=>Boolean(String(value??'').trim())&&!/^unknown$/i.test(String(value).trim());
 
 export function planNextBatch(rows,archivedIds,settings={}){
- const config={...DEFAULTS,...settings};
+ const {credibilityRegistry,...limits}=settings;
+ const registry=credibilityRegistry===undefined?readApprovalRegistry():credibilityRegistry;
+ const config={...DEFAULTS,...limits};
  if(!Number.isSafeInteger(config.maxBatchBytes)||config.maxBatchBytes<=0)throw Error('Bad maximum batch size');
  const archived=new Set([...archivedIds].map(Number));
  const seen=new Set(),eligible=[],skipped={alreadyComplete:0,sourceRightsReview:0,
   noOriginalFiles:0,fileLimitExceeded:0,batchLimitExceeded:0,malformedSource:0,unknownScientificCategory:0,
-  biomedicalReviewRequired:0,likelyOutOfMedicalScope:0};
+  biomedicalReviewRequired:0,likelyOutOfMedicalScope:0,credibilityReviewRequired:0};
  for(const row of rows){
   const id=Number(row.entryId??row.id);
   if(!Number.isInteger(id)||id<1||id>25000||seen.has(id))throw Error('Unexpected NIH source identity or duplicate: '+id);
@@ -33,6 +36,8 @@ export function planNextBatch(rows,archivedIds,settings={}){
   const biomedical=biomedicalScope(row);
   if(biomedical.status===BIOMEDICAL_SCOPE.OUT){skipped.likelyOutOfMedicalScope++;continue;}
   if(biomedical.status!==BIOMEDICAL_SCOPE.IN){skipped.biomedicalReviewRequired++;continue;}
+  const trust=checkSourceCredibility(row,registry);
+  if(!trust.approved){skipped.credibilityReviewRequired++;continue;}
   if(!/^https:\/\/3d\.nih\.gov\/entries\/3DPX-\d+$/.test(String(row.url??''))){skipped.malformedSource++;continue;}
   if(!Array.isArray(row.files)||row.files.length===0){skipped.noOriginalFiles++;continue;}
   const urls=new Set();let bytes=0,invalid=false,oversize=false;
@@ -52,6 +57,7 @@ export function planNextBatch(rows,archivedIds,settings={}){
     priority:category==='Anatomy' ? (science.humanAnatomyResearchCandidate?0:7) : CATEGORY_PRIORITIES[category]+1,
     sourceConceptCandidates:science.conceptCandidates,
     biomedicalResearchScope:biomedical.status,biomedicalResearchDomain:biomedical.domain,
+    independentSourceCredibility:trust.reason,sourceReliabilityScore:trust.score,
     explicitNonhuman:science.speciesFlag==='explicitly_nonhuman',
     pathologyContext:science.pathologyContext,
     sourceRefs:row.files.map((f,i)=>({i,url:f.url,format:f.format,size:Number(f.size),name:f.name??null}))});
@@ -76,6 +82,7 @@ export function planNextBatch(rows,archivedIds,settings={}){
   originalFilesSHA256VerifiedByPlanner:0,
   licenseRule:'Every declared source license, on the owner-stated permission; the original license stays with each file',
   biomedicalRule:'Only evidence-supported NIH biomedical research categories automatically selected; generic hardware and unresolved chemicals retained for review',
+  sourceCredibilityRule:'Default deny unless independently documented and version-bound source reliability score is at least 80',
   sourceAccuracyRule:'Model title/category do not certify anatomical or clinical correctness'};
 }
 export async function buildPlan(catalogRoot,archiveRegistry,output){
@@ -99,7 +106,7 @@ export async function buildPlan(catalogRoot,archiveRegistry,output){
  const archived=new Set(stored.models.filter(m=>m.allOriginalFilesPersistentlyRecovered)
   .map(m=>Number(m.entryId)));
  const report=planNextBatch(entries,archived);
- if(report.selectedModels===0)throw Error('No safely licensed bounded original-source batch is currently eligible');
+ // Empty trusted queue is a legitimate, safe outcome. The workflow skips download steps.
  report.sourceCatalogEntries=index.publishedEntriesFound;
  report.verifiedAlreadyCompleteModels=archived.size;
  report.fullNIHArchiveComplete=false;
