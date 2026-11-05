@@ -19,7 +19,7 @@ if(context&&main&&!document.querySelector('[data-mentor-connected-study]')){
  actions.className='mentor-connected-actions';
  const links=[
   ['ATLA | LAB',makeJourneyUrl('mentor-protocol-suite.html',context,'lab')],
-  ['ATLA DEBRIEF',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')],
+  ['ATLA · ΑΝΑΣΚΟΠΗΣΗ',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')],
   ['ATLA OS',makeJourneyUrl('mentor-lab.html',context)]
  ];
  for(const [title,dest] of links){

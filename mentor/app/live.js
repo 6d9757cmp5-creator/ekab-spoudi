@@ -126,7 +126,7 @@ function renderCockpit(snapshot){
   }
   if(!snapshot.inspections.length)list.append(create('li','Καμία καταγραφή εργαλείου ακόμη.'));
   target.append(intro,list);
-  const link=create('a','ATLA DEBRIEF — εκπαιδευτική διαδρομή');
+  const link=create('a','ATLA · ΑΝΑΣΚΟΠΗΣΗ — εκπαιδευτική διαδρομή');
   link.href='#live-debrief';
   target.append(link);
  }else if(LIVE_ACTIONS[selectedTool]){

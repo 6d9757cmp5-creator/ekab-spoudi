@@ -44,7 +44,7 @@ export function buildDebriefReport({topic, role, session, stages, interviewTurns
   ) : [];
   if (!entries.length && !interview.length) throw Error("empty-study-report");
   const lines = [
-    "ΕΚΑΒ ΣΠΟΥΔΗ — ATLA DEBRIEF",
+    "ΕΚΑΒ ΣΠΟΥΔΗ — ATLA · ΑΝΑΣΚΟΠΗΣΗ",
     status,
     "",
     "Εκπαιδευτικό θέμα: " + String(topic.name).slice(0,160),

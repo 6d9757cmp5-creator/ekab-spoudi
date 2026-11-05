@@ -72,7 +72,7 @@ const exercises=JSON.parse(read('extra-exercises-search.json'));
 assert.equal(exercises.count,121);
 assert.equal(exercises.items.length,121);
 assert.ok(read('search.html').includes('globalSearchResultsPage'));
-assert.ok(index.includes('🤖 AI Hint SOS'));
+assert.ok(index.includes('🤖 Εκπαιδευτικές υπενθυμίσεις SOS'));
 assert.ok(app.includes('openCatalogQuestion(requested)'),'EOPPEP global result must open reader instead of exam');
 
 assert.ok(app.includes('never display stale SOS')&&app.includes('listed.every(point=>source.includes(point))'),'safe fallback for newer answers missing');

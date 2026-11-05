@@ -1,2 +1,2 @@
-/* Legacy export forwarding to independent ECG Lab. */
+/* Legacy export forwarding to independent Εργαστήριο ΗΚΓ. */
 export * from '../../tools/ecg-lab/core/ecg-synthetic.mjs';

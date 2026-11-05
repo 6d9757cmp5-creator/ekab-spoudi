@@ -31,7 +31,7 @@ export function buildLiveDebrief(session){
 export function exportLiveDebrief(session){
  const report=buildLiveDebrief(session);
  const lines=[
-  'ΕΚΑΒ ΣΠΟΥΔΗ — ATLA LIVE DEBRIEF',
+  'ΕΚΑΒ ΣΠΟΥΔΗ — ATLA · ΑΝΑΣΚΟΠΗΣΗ ΑΠΟΣΤΟΛΗΣ',
   report.title,report.disclaimer,'',
   'Κατάσταση: '+(report.completed?'Ολοκληρωμένη εκπαιδευτική αποστολή':'Αποστολή σε εξέλιξη'),
   'Συνθετικός χρόνος: '+report.minute+' λεπτά',

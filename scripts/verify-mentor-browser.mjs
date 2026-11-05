@@ -189,7 +189,7 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/Δύο τραυματίες|Clinical (Simulation )?Cockpit/);
+  assert.match(await page.title(),/Δύο τραυματίες|Κλινικός Προσομοιωτής/);
   assert.equal(await page.locator('#live-patients .live-patient').count(),2);
   assert.equal((await page.locator('#live-step').textContent()).trim(),'Στάδιο 1 / 4');
   assert.equal(await page.locator('#live-patients .live-patient').first().locator('.live-vitals strong').first().textContent(),'106');
@@ -256,10 +256,10 @@ try{
   await page.goto('http://127.0.0.1:'+port+'/ui-tools/mentor-roadmap.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.querySelectorAll('.capability-card').length===25);
   assert.equal(await page.locator('.capability-card').count(),25);
-  const ecgCapability=page.locator('.capability-card').filter({hasText:'ECG Lab — διαδραστικό συνθετικό σχήμα'});
+  const ecgCapability=page.locator('.capability-card').filter({hasText:'Εργαστήριο ΗΚΓ — διαδραστικό συνθετικό σχήμα'});
   const oralCapability=page.locator('.capability-card').filter({hasText:'Προφορική εξάσκηση — χωρίς AI'});
   await ecgCapability.locator('summary').click();
-  assert.equal(await ecgCapability.getByRole('link',{name:'Άνοιγμα συνθετικού ECG Lab'}).count(),1);
+  assert.equal(await ecgCapability.getByRole('link',{name:'Άνοιγμα συνθετικού Εργαστηρίου ΗΚΓ'}).count(),1);
   await oralCapability.locator('summary').click();
   assert.equal(await oralCapability.getByRole('link',{name:'Άνοιγμα προφορικής εξάσκησης'}).count(),1);
   assert.match(await page.locator('.capability-card').filter({hasText:'Πλήρης AI καθηγητής'}).textContent(),/Μη διαθέσιμο/);
