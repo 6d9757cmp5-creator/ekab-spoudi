@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-04T09:19:11.623Z",
+  "checked_at": "2026-11-05T09:30:18.437Z",
   "registries": [
     {
       "id": "books",
@@ -16,7 +16,7 @@
     }
   ],
   "monitored_urls": 44,
-  "monitored_ok": 40,
+  "monitored_ok": 35,
   "pubmed_topics_checked": 10,
   "rejected_uncurated_sources": 5,
   "monitored_by_source_category": {
@@ -28,10 +28,51 @@
     "official-textbook-publisher-metadata-only": 6,
     "academic-repository-unendorsed": 3
   },
-  "possible_source_updates": 11,
-  "newly_discovered_papers": 2,
+  "possible_source_updates": 9,
+  "newly_discovered_papers": 0,
   "pending_papers": 17,
-  "pubmed_failures": [],
+  "pubmed_failures": [
+    {
+      "topic_id": "prehospital",
+      "reason": "invalid-pubmed-search-response"
+    },
+    {
+      "topic_id": "resuscitation",
+      "reason": "HTTP 500"
+    },
+    {
+      "topic_id": "trauma",
+      "reason": "invalid-pubmed-search-response"
+    },
+    {
+      "topic_id": "airway-respiratory",
+      "reason": "HTTP 500"
+    },
+    {
+      "topic_id": "cardiac-emergency",
+      "reason": "HTTP 500"
+    },
+    {
+      "topic_id": "stroke-neurology",
+      "reason": "HTTP 500"
+    },
+    {
+      "topic_id": "pediatric-emergency",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "topic_id": "sepsis-shock",
+      "reason": "HTTP 500"
+    },
+    {
+      "topic_id": "medication-safety",
+      "reason": "The operation was aborted due to timeout"
+    },
+    {
+      "topic_id": "simulation-training",
+      "reason": "HTTP 500"
+    }
+  ],
   "pubmed_excluded": [],
   "pubmed_previously_queued_excluded": [],
   "source_quality_policy": "curated publishers plus per-paper evidence-type screening; no articles auto-approved",

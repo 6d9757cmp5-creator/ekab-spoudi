@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-04T09:19:11.623Z",
+  "checked_at": "2026-11-05T09:30:18.437Z",
   "sources": [
     {
       "url": "https://cdn.who.int/media/docs/default-source/integrated-health-services-%28ihs%29/csy/prehospital/bap-syllabus-2025.pdf",
@@ -78,12 +78,12 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "W/\"437ff5646529155c18a4d9acea9eb7a5\"",
+      "etag": "W/\"cab0071bc9a4b2d0a78d98d7cf11c545\"",
       "last_modified": "",
       "final_url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "W/\"437ff5646529155c18a4d9acea9eb7a5\"",
+      "last_successful_etag": "W/\"cab0071bc9a4b2d0a78d98d7cf11c545\"",
       "last_successful_last_modified": "",
       "signal": "possible-source-update"
     },
@@ -230,12 +230,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Tue, 03 Nov 2026 21:33:36 GMT",
+      "last_modified": "Wed, 04 Nov 2026 20:23:53 GMT",
       "final_url": "https://professional.diabetes.org/standards-of-care",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Tue, 03 Nov 2026 21:33:36 GMT",
+      "last_successful_last_modified": "Wed, 04 Nov 2026 20:23:53 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -407,7 +407,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "\"1793770691-gzip\"",
       "last_successful_last_modified": "Wed, 04 Nov 2026 05:38:11 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.ecdc.europa.eu/en/publications-data",
@@ -421,13 +421,13 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1793783957\"",
-      "last_modified": "Wed, 04 Nov 2026 09:19:17 GMT",
+      "etag": "\"1793870832-gzip\"",
+      "last_modified": "Thu, 05 Nov 2026 09:27:12 GMT",
       "final_url": "https://www.ecdc.europa.eu/en/publications-data",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1793783957\"",
-      "last_successful_last_modified": "Wed, 04 Nov 2026 09:19:17 GMT",
+      "last_successful_etag": "\"1793870832-gzip\"",
+      "last_successful_last_modified": "Thu, 05 Nov 2026 09:27:12 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -459,13 +459,13 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1793783527-gzip\"",
-      "last_modified": "Wed, 04 Nov 2026 09:12:07 GMT",
+      "etag": "\"1793871021\"",
+      "last_modified": "Thu, 05 Nov 2026 09:30:21 GMT",
       "final_url": "https://www.ema.europa.eu/en/medicines",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1793783527-gzip\"",
-      "last_successful_last_modified": "Wed, 04 Nov 2026 09:12:07 GMT",
+      "last_successful_etag": "\"1793871021\"",
+      "last_successful_last_modified": "Thu, 05 Nov 2026 09:30:21 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -544,14 +544,14 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "W/\"cvwh67h863rs7\"",
+      "etag": "W/\"en6dt4qxje3rtm-df\"",
       "last_modified": "",
       "final_url": "https://www.hematology.org/resources/clinical-practice-guidelines",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "W/\"cvwh67h863rs7\"",
+      "last_successful_etag": "W/\"en6dt4qxje3rtm-df\"",
       "last_successful_last_modified": "",
-      "signal": "no-confirmed-change"
+      "signal": "possible-source-update"
     },
     {
       "url": "https://www.idsociety.org/PracticeGuidelines",
@@ -714,12 +714,12 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"hz5odmo4n72nvf\"",
+      "etag": "\"ifmtpk7vcr2nvf\"",
       "last_modified": "",
       "final_url": "https://www.nice.org.uk/guidance/published",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"hz5odmo4n72nvf\"",
+      "last_successful_etag": "\"ifmtpk7vcr2nvf\"",
       "last_successful_last_modified": "",
       "signal": "possible-source-update"
     },
@@ -756,16 +756,12 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": true,
-      "http_status": 200,
-      "etag": "",
-      "last_modified": "",
-      "final_url": "https://www.who.int/publications/9789240114067",
-      "reason": "",
+      "ok": false,
+      "reason": "The operation was aborted due to timeout",
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "",
-      "signal": "no-confirmed-change"
+      "signal": "unverified"
     },
     {
       "url": "https://www.who.int/publications/b/82620",
@@ -781,13 +777,13 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Tue, 03 Nov 2026 09:38:27 GMT",
+      "last_modified": "Wed, 04 Nov 2026 18:00:16 GMT",
       "final_url": "https://www.who.int/publications/b/82620",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Tue, 03 Nov 2026 09:38:27 GMT",
-      "signal": "no-confirmed-change"
+      "last_successful_last_modified": "Wed, 04 Nov 2026 18:00:16 GMT",
+      "signal": "possible-source-update"
     },
     {
       "url": "https://www.who.int/publications/i/item/9789241513081",
@@ -799,16 +795,12 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": true,
-      "http_status": 200,
-      "etag": "",
-      "last_modified": "",
-      "final_url": "https://www.who.int/publications/i/item/9789241513081",
-      "reason": "",
+      "ok": false,
+      "reason": "The operation was aborted due to timeout",
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "",
-      "signal": "no-confirmed-change"
+      "signal": "unverified"
     },
     {
       "url": "https://www.who.int/publications/who-guidelines",
@@ -823,12 +815,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Wed, 04 Nov 2026 07:44:17 GMT",
+      "last_modified": "Thu, 05 Nov 2026 08:17:38 GMT",
       "final_url": "https://www.who.int/publications/who-guidelines",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Wed, 04 Nov 2026 07:44:17 GMT",
+      "last_successful_last_modified": "Thu, 05 Nov 2026 08:17:38 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -844,12 +836,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Tue, 03 Nov 2026 19:13:03 GMT",
+      "last_modified": "Wed, 04 Nov 2026 18:09:47 GMT",
       "final_url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Tue, 03 Nov 2026 19:13:03 GMT",
+      "last_successful_last_modified": "Wed, 04 Nov 2026 18:09:47 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -862,16 +854,12 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": true,
-      "http_status": 200,
-      "etag": "",
-      "last_modified": "Tue, 03 Nov 2026 19:05:20 GMT",
-      "final_url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit",
-      "reason": "",
+      "ok": false,
+      "reason": "The operation was aborted due to timeout",
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Tue, 03 Nov 2026 19:05:20 GMT",
-      "signal": "possible-source-update"
+      "signal": "unverified"
     },
     {
       "url": "https://www.who.int/tools/clinical-checklists",
@@ -883,16 +871,12 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": true,
-      "http_status": 200,
-      "etag": "",
-      "last_modified": "Tue, 03 Nov 2026 19:19:25 GMT",
-      "final_url": "https://www.who.int/tools/clinical-checklists",
-      "reason": "",
+      "ok": false,
+      "reason": "The operation was aborted due to timeout",
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Tue, 03 Nov 2026 19:19:25 GMT",
-      "signal": "possible-source-update"
+      "signal": "unverified"
     },
     {
       "url": "https://www.who.int/tools/triage",
@@ -904,16 +888,12 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": true,
-      "http_status": 200,
-      "etag": "",
-      "last_modified": "Wed, 04 Nov 2026 07:40:21 GMT",
-      "final_url": "https://www.who.int/tools/triage",
-      "reason": "",
+      "ok": false,
+      "reason": "The operation was aborted due to timeout",
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Wed, 04 Nov 2026 07:40:21 GMT",
-      "signal": "possible-source-update"
+      "signal": "unverified"
     },
     {
       "url": "https://www.wolterskluwer.com/en/solutions/lippincott-medicine/medical-education/lippincott-connect/bates-guide-to-physical-examination",
