@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "22b83f8738fcebb377149833e6abf0452028611a",
+ "ledgerCommit": "d733e9a77b379c7adf564ffe3386ecf4cbbff8d2",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -203,7 +203,7 @@
  },
  "counts": {
   "bySource": {
-   "nih3d": 197,
+   "nih3d": 215,
    "hra": 54,
    "z-anatomy": 5,
    "quaternius": 2,
@@ -211,14 +211,14 @@
    "makehuman": 10,
    "makehuman-rigged": 1
   },
-  "nihVerifiedModels": 197,
-  "nihServed": 155,
-  "nihServedBytes": 418294876,
+  "nihVerifiedModels": 215,
+  "nihServed": 138,
+  "nihServedBytes": 419391060,
   "nihContextual": 35,
   "nihWithSaekChapter": 5,
   "nihRestrictions": {
-   "CAPACITY": 27,
-   "OVERSIZE": 10,
+   "CAPACITY": 53,
+   "OVERSIZE": 19,
    "OUT_OF_SCOPE": 5
   }
  },
@@ -244,7 +244,7 @@
    "LIKELY_OUT_OF_MEDICAL_SCOPE": 1372,
    "SCIENTIFIC_REVIEW_REQUIRED": 4275
   },
-  "notYetVerifiedInLedger": 15491
+  "notYetVerifiedInLedger": 15473
  },
  "atlases": [
   {
@@ -290,18 +290,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000012.glb",
-    "bytes": 120584,
-    "sha256": "3dd3269c9f657dc2f5ea2edb8d15a89472314f92f6c64a9b0698b2dab5b84ae0",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -336,18 +328,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000105.glb",
-    "bytes": 188700,
-    "sha256": "372eff2236414e86e70897df5db604f679a181f5d64ddc6d85a949efb590fd0c",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -568,18 +552,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000190.glb",
-    "bytes": 215300,
-    "sha256": "b205cb8aa7e947115a5f9b15729efb4aeb8efbeaf1dae7a95f3d022a606f3ff6",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -808,18 +784,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000277.glb",
-    "bytes": 273484,
-    "sha256": "fd56f3d3ef2ede2d15aff1089eb16f3f12db881e7d1d5b650567f358615e5f6a",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -909,18 +877,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000280.glb",
-    "bytes": 125160,
-    "sha256": "dbd26a29cbd74dbbf04ad63aa81ae5c600875b41bbfc7338a3f79dc7db9ba042",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1355,6 +1315,45 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-000355",
+   "accession": "3DPX-000355",
+   "entryId": 355,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Shoulder Fracture - Proximal Humerus + Glenoid",
+   "greekTitle": null,
+   "originalTitle": "Shoulder Fracture - Proximal Humerus + Glenoid",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000355",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-000379",
    "accession": "3DPX-000379",
    "entryId": 379,
@@ -1409,6 +1408,84 @@
      "occurrences": 2
     }
    ],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000389",
+   "accession": "3DPX-000389",
+   "entryId": 389,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Knee - Proximal Tibia Frature",
+   "greekTitle": null,
+   "originalTitle": "Knee - Proximal Tibia Frature",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000389",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000390",
+   "accession": "3DPX-000390",
+   "entryId": 390,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Knee Model - Patella Fracture",
+   "greekTitle": null,
+   "originalTitle": "Knee Model - Patella Fracture",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000390",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2452,18 +2529,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000702.glb",
-    "bytes": 249752,
-    "sha256": "14232845948449e71323ffaab519c5974ef2b24a77b1178b86e3f39a469a0483",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -2498,18 +2567,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000725.glb",
-    "bytes": 115928,
-    "sha256": "ddf1560db622bb52fe894307581069ba9f8acbc3d77e734eedad66b6ccf253b2",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -3054,6 +3115,45 @@
    "delivery": null,
    "restrictionCode": "CAPACITY",
    "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000812",
+   "accession": "3DPX-000812",
+   "entryId": 812,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Lumbar Spine",
+   "greekTitle": null,
+   "originalTitle": "Lumbar Spine",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000812",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
    "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -4175,6 +4275,45 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-000902",
+   "accession": "3DPX-000902",
+   "entryId": 902,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Upper mandible with teeth",
+   "greekTitle": null,
+   "originalTitle": "Upper mandible with teeth",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000902",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-001001",
    "accession": "3DPX-001001",
    "entryId": 1001,
@@ -4208,6 +4347,53 @@
     "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001001.glb",
     "bytes": 27772,
     "sha256": "6f7548d6bb84f901ffc7a98131a69ac1211322371025ae71e4621aef323d15a6",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001193",
+   "accession": "3DPX-001193",
+   "entryId": 1193,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Peter Bryan's brain reconstruction (by hemisphere)",
+   "greekTitle": null,
+   "originalTitle": "Peter Bryan's brain reconstruction (by hemisphere)",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001193",
+   "archive": {
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001193.glb",
+    "bytes": 8399880,
+    "sha256": "e20ed86502206ec42af385b4f81633bd32583722f6237920aad4536bccd4e482",
     "format": "glb",
     "derived": false
    },
@@ -4316,6 +4502,45 @@
     "cockpit",
     "atla"
    ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-001277",
+   "accession": "3DPX-001277",
+   "entryId": 1277,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Partial Brain Vascular Network",
+   "greekTitle": null,
+   "originalTitle": "Partial Brain Vascular Network",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-001277",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -4848,18 +5073,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-002684.glb",
-    "bytes": 913964,
-    "sha256": "5e0b8fc1c43f84a6ade42e2fa2e311d331a5e1ed9cbb686d563c431387ec1547",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -5310,6 +5527,45 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-004803",
+   "accession": "3DPX-004803",
+   "entryId": 4803,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Multiple skull fractures",
+   "greekTitle": null,
+   "originalTitle": "Multiple skull fractures",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-004803",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-004807",
    "accession": "3DPX-004807",
    "entryId": 4807,
@@ -5580,18 +5836,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-005119.glb",
-    "bytes": 235360,
-    "sha256": "f178e5d0c7277fadf15e53a3810d99824a56bc7f1dbeeb4057be4c58e0523930",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -5973,6 +6221,92 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-008970",
+   "accession": "3DPX-008970",
+   "entryId": 8970,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · AORTA OF A CAT",
+   "greekTitle": null,
+   "originalTitle": "AORTA OF A CAT",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-008970",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-009210",
+   "accession": "3DPX-009210",
+   "entryId": 9210,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Simulated Aneurysmal Aortic Phantom Mold",
+   "greekTitle": null,
+   "originalTitle": "Simulated Aneurysmal Aortic Phantom Mold",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-009210",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-009210.glb",
+    "bytes": 54100,
+    "sha256": "3f199d8202f840727222ed88b6ff36864150abf0664abd9358ec2044074815fe",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-009353",
    "accession": "3DPX-009353",
    "entryId": 9353,
@@ -6305,18 +6639,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-011791.glb",
-    "bytes": 425252,
-    "sha256": "a5fbbc776c04a477dcb5229461afb86eed22e5bd4ed3a3915b78c089e465eed1",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6391,18 +6717,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-012319.glb",
-    "bytes": 504788,
-    "sha256": "f5d820e2f80d7d2a918b06b32f67f356302367cd339f8ecdee2c1e4488c48b56",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6524,18 +6842,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-013646.glb",
-    "bytes": 480536,
-    "sha256": "2ad0f4c4dcd2a9d1e0399085a83001540d333e61776be72b7fee352d0c95fc7f",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6571,18 +6881,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-013774.glb",
-    "bytes": 478512,
-    "sha256": "c06c3fce8663f11d12e718e29be3c7707e0663170f3b06d97eefc0febfe5a883",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6630,6 +6932,84 @@
    "surfaces": [
     "library"
    ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-015597",
+   "accession": "3DPX-015597",
+   "entryId": 15597,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Treponema succinifaciens 3D model (.stl)",
+   "greekTitle": null,
+   "originalTitle": "Treponema succinifaciens 3D model (.stl)",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-015597",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-015598",
+   "accession": "3DPX-015598",
+   "entryId": 15598,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Treponema succinifaciens 3D model (numbered 21)",
+   "greekTitle": null,
+   "originalTitle": "Treponema succinifaciens 3D model (numbered 21)",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-015598",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6709,18 +7089,49 @@
      "OBJ"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-015992.glb",
-    "bytes": 1019308,
-    "sha256": "09e1956ab6d0f8747e6cd0270532e9d457db6de1b2c0a99a42e06e8c075d8504",
-    "format": "glb",
-    "derived": false
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016412",
+   "accession": "3DPX-016412",
+   "entryId": 16412,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Case Model #98 Pulmonary Artery Aneurysm",
+   "greekTitle": null,
+   "originalTitle": "Case Model #98 Pulmonary Artery Aneurysm",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016412",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
    },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "OVERSIZE",
+   "restriction": "Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6754,18 +7165,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016415.glb",
-    "bytes": 384108,
-    "sha256": "1a1211689c38c23658967d87610bac3ccfa69803de289dc266b316f7da02f636",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -7036,18 +7439,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017609.glb",
-    "bytes": 346204,
-    "sha256": "253502142949c2ef5cb20deb721bff2af4ea0f9c8c53dd0525a0db032d45552f",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -7083,10 +7478,49 @@
      "X3D"
     ]
    },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-017938",
+   "accession": "3DPX-017938",
+   "entryId": 17938,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Ligand-Based NMR Study of C-X-C Chemokine Receptor Type 4 (CXCR4)-Ligand Interactions in Living Cancer Cells",
+   "greekTitle": null,
+   "originalTitle": "Ligand-Based NMR Study of C-X-C Chemokine Receptor Type 4 (CXCR4)-Ligand Interactions in Living Cancer Cells",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-017938",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
    "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017797.glb",
-    "bytes": 336772,
-    "sha256": "e0078cc7f878d9306ad1b9dfedf7dc38109fe3be14711e3ce479fcd3dd06f1e7",
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017938.glb",
+    "bytes": 56804,
+    "sha256": "fbb2fcf649cc01eb3b1bc9986d64c3e206f28b49da4717179e4a62d64f564216",
     "format": "glb",
     "derived": false
    },
@@ -7216,18 +7650,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-017980.glb",
-    "bytes": 646976,
-    "sha256": "f727f80f05ee7fa69491a4a57ff7eed53ecf4602689dbbc021273a29ee5e8a59",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -7273,6 +7699,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-018171",
+   "accession": "3DPX-018171",
+   "entryId": 18171,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Sars-cov2 ORF6 protein",
+   "greekTitle": null,
+   "originalTitle": "Sars-cov2 ORF6 protein",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-018171",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-018171.glb",
+    "bytes": 38324,
+    "sha256": "e5820dba93922a1f2623bd79dff4d168c8753c9461a1d75974b8e36cbfbef103",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-018268",
    "accession": "3DPX-018268",
    "entryId": 18268,
@@ -7305,6 +7778,90 @@
     "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-018268.glb",
     "bytes": 6449588,
     "sha256": "734bdab84418e806bf70a1c7a5fa0164df8e6adb83f8ebe941bbe170e49f857a",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020292",
+   "accession": "3DPX-020292",
+   "entryId": 20292,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Brace Plate",
+   "greekTitle": null,
+   "originalTitle": "Brace Plate",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020292",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020296",
+   "accession": "3DPX-020296",
+   "entryId": 20296,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Humeral Conductor",
+   "greekTitle": null,
+   "originalTitle": "Humeral Conductor",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020296",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020296.glb",
+    "bytes": 22084,
+    "sha256": "29145f367beada90c573d6b046455d341b5693046bd5c0fd47a2097861694fcf",
     "format": "glb",
     "derived": false
    },
@@ -8739,6 +9296,53 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-021789",
+   "accession": "3DPX-021789",
+   "entryId": 21789,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Equilibras– Upper Limb Assistive Device for Children, Launched by team Gre-nable",
+   "greekTitle": null,
+   "originalTitle": "Equilibras– Upper Limb Assistive Device for Children, Launched by team Gre-nable",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC-SA",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021789",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021789.glb",
+    "bytes": 12000,
+    "sha256": "824e0438cb8bac775a55c20af86e7af0453cee6d3c9f95ca46625bc84518e299",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-021799",
    "accession": "3DPX-021799",
    "entryId": 21799,
@@ -8958,18 +9562,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023404.glb",
-    "bytes": 84428,
-    "sha256": "e7d3e286ac30eaf0a0aa2653e7d60dce57075391d832e65424c3b172d7f5353e",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9005,18 +9601,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023406.glb",
-    "bytes": 84432,
-    "sha256": "32c19ac1f5d07c251f421e615c7226eb873bee1883dd16286a69f32420fa494c",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9052,18 +9640,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023409.glb",
-    "bytes": 85820,
-    "sha256": "f497449503226aed50cdebc8242428976952563f9189421e52c7797ac670677a",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9099,18 +9679,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023410.glb",
-    "bytes": 87212,
-    "sha256": "2dc83af82ae5a0be39d6e0e3bbf531d46981181026fcc76b9d105f3fbe89d1df",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9193,18 +9765,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023414.glb",
-    "bytes": 84428,
-    "sha256": "96afbdbda203232e072506bc4c8ceefd7af3cee4bc8281e80c22b27dc76e55b1",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
