@@ -252,6 +252,29 @@ class RangeRecoveryTests(unittest.TestCase):
         with patch.object(s,'pages',side_effect=fake):
             self.assertEqual(s.completed(),set())
 
+class RateLimitTests(unittest.TestCase):
+    def error(self, code, **headers):
+        return HTTPError('https://api.github.com/x', code, 'limited', headers, None)
+
+    def test_plan_waits_for_the_rate_limit_reset_instead_of_failing(self):
+        limited = self.error(403, **{'x-ratelimit-remaining': '0', 'x-ratelimit-reset': '1100'})
+        with patch.object(s, 'http', side_effect=[limited, FakeResponse(b'{"ok":true}', 200, {})]),              patch.object(s.time, 'time', return_value=1000), patch.object(s.time, 'sleep') as sleep:
+            self.assertEqual(s.api('/x'), {'ok': True})
+        sleep.assert_called_once_with(101)
+
+    def test_secondary_limit_uses_retry_after(self):
+        self.assertEqual(s.rate_limit_wait(self.error(403, **{'retry-after': '60'})), 61)
+
+    def test_wait_is_bounded(self):
+        self.assertEqual(s.rate_limit_wait(self.error(429, **{'retry-after': '99999'})), 3600)
+
+    def test_permission_403_still_fails_at_once(self):
+        denied = self.error(403, **{'x-ratelimit-remaining': '4000'})
+        with patch.object(s, 'http', side_effect=denied), patch.object(s.time, 'sleep') as sleep:
+            with self.assertRaises(HTTPError):
+                s.api('/x')
+        sleep.assert_not_called()
+
 class EmptyRangeTests(unittest.TestCase):
     def report(self, **extra):
         base = {'range': {'start': 5501, 'end': 5600}, 'packs': [], 'modelFiles': [], 'downloadedOriginalFiles': 0,
