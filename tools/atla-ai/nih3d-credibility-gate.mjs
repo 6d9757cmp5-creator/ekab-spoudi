@@ -5,7 +5,13 @@ export const APPROVALS_PATH='tools/atla-ai/resources/nih3d-credibility-approvals
 export function sourceFingerprint(entry) {
  const id=Number(entry?.entryId??entry?.id);
  if(!Number.isSafeInteger(id)||id<1||id>25000)throw Error('Invalid NIH source identity');
- const fields=[id,entry.accession,entry.title,entry.category,entry.url,entry.licenseRaw??entry.license,entry.sourceVersion??entry.version,entry.creator??''];
+ if(!Array.isArray(entry.files)||entry.files.length===0)throw Error('NIH source has no listed 3D originals');
+ const originals=entry.files.map(f=>[
+  String(f.url??''),String(f.format??'').toUpperCase(),
+  Number.isFinite(Number(f.size))?Number(f.size):null,String(f.name??'')
+ ]).sort((a,b)=>a[0].localeCompare(b[0]));
+ const fields=[id,entry.accession,entry.title,entry.category,entry.url,
+  entry.licenseRaw??entry.license,entry.sourceVersion??entry.version,entry.creator??'',originals];
  return createHash('sha256').update(JSON.stringify(fields)).digest('hex');
 }
 export function validateApprovalRegistry(registry){
