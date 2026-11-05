@@ -66,7 +66,7 @@ assert.equal(scoped.skipped.biomedicalReviewRequired,2);
 assert(scoped.selected.every(x=>x.biomedicalResearchScope==='IN_SCOPE_RESEARCH_CANDIDATE'));
 assert.equal(scoped.sourceScanned,6);
 assert.equal(scoped.selectedOriginalFiles,3);
-const unreviewed=planNextBatch([entry(45,'Unrated user upload','Anatomy')],new Set());
+const unreviewed=planNextBatch([entry(45,'Unrated user upload','Anatomy')],new Set(),{credibilityRegistry:{schemaVersion:1,policy:'DENY_UNREVIEWED',minimumCredibilityScore:80,approvals:[]}});
 assert.equal(unreviewed.selectedModels,0,'No approved contributor evidence means no automatic download');
 assert.equal(unreviewed.skipped.credibilityReviewRequired,1);
 assert(plan.selected.every(row=>row.sourceReliabilityScore>=80),'Accepted samples retain their score');
