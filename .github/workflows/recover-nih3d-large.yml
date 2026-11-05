@@ -14,6 +14,7 @@ on:
       - 'scripts/test_nih3d_stream_restore.py'
   schedule:
     - cron: '17 * * * *'
+    - cron: '47 * * * *'
 permissions:
   actions: read
   contents: write
