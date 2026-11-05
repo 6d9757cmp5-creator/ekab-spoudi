@@ -252,6 +252,15 @@ class RangeRecoveryTests(unittest.TestCase):
         with patch.object(s,'pages',side_effect=fake):
             self.assertEqual(s.completed(),set())
 
+class RefetchTests(unittest.TestCase):
+    def test_newest_artifact_of_a_range_replaces_the_older_one(self):
+        artifacts = [
+            {'id': 5, 'name': 'nih3d-originals-12701', 'size_in_bytes': 9, 'expired': False, 'expires_at': '2026-11-11T19:13:45Z'},
+            {'id': 9, 'name': 'nih3d-originals-12701', 'size_in_bytes': 9, 'expired': False, 'expires_at': '2026-11-13T00:00:00Z'},
+        ]
+        selected, total = s.plan(artifacts, set(), set())
+        self.assertEqual((total, selected[0]['id']), (1, 9))
+
 class RateLimitTests(unittest.TestCase):
     def error(self, code, **headers):
         return HTTPError('https://api.github.com/x', code, 'limited', headers, None)
