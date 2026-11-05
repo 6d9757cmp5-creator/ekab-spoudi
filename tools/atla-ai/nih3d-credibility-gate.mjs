@@ -40,6 +40,19 @@ export function checkSourceCredibility(entry,registry){
   return {approved:false,reason:'SOURCE_METADATA_CHANGED'};
  return {approved:true,reason:'DOCUMENTED_REVIEW',score:record.reliabilityScore};
 }
+export function requireRangeSourceCredibility(rows,registry){
+ validateApprovalRegistry(registry);
+ const rejected=[];
+ for(const row of rows){
+  if(!Array.isArray(row.files)||row.files.length===0)continue;
+  const result=checkSourceCredibility(row,registry);
+  if(!result.approved)rejected.push({entryId:row.entryId??row.id,reason:result.reason});
+ }
+ if(rejected.length){
+  throw Error('NIH3D_CREDIBILITY_BLOCKED_RANGE: '+rejected.length+' unpublished-quality source assessments missing; example '+rejected.slice(0,5).map(x=>x.entryId+':'+x.reason).join(', '));
+ }
+ return {approvedRows:rows.filter(row=>Array.isArray(row.files)&&row.files.length>0).length};
+}
 export function requireSourceCredibility(entry,registry){
  const result=checkSourceCredibility(entry,registry);
  if(!result.approved)throw Error('NIH_SOURCE_REVIEW_REQUIRED '+(entry.entryId??entry.id)+' '+result.reason);
