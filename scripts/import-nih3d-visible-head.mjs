@@ -2,9 +2,11 @@
 /* Approved large NIH 3D head GLB as verifiable research-only source shards. */
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {readApprovalRegistry,requireSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 const catalog=JSON.parse(await readFile('tools/atla-ai/resources/nih3d-catalog/entries-1-250.json','utf8'));
 const e=catalog.items.find(e=>e.entryId===10);
 if(!e||e.category!=='Anatomy'||e.license!=='Public Domain'||e.accession!=='3DPX-000010')throw Error('NIH 3D anatomical head license changed');
+requireSourceCredibility(e,readApprovalRegistry());
 const file=e.files.find(f=>f.format==='GLB');
 if(!file||file.size!==99985956||!file.url.startsWith('https://3d.nih.gov/api/submissions/'))throw Error('Unexpected NIH head source');
 const resp=await fetch(file.url,{signal:AbortSignal.timeout(150000)});
