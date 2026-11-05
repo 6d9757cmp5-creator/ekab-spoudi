@@ -97,4 +97,8 @@ jobs:
       - name: Start the next rescue batch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run recover-nih3d-large.yml --repo "$GITHUB_REPOSITORY" --ref main
+        # A batch that rescued nothing would only repeat itself, so it waits for the schedule instead.
+        run: |
+          rescued=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs?per_page=100" --jq '[.jobs[]|select((.name|startswith("restore"))and .conclusion=="success")]|length')
+          if [ "$rescued" = 0 ]; then echo "No range was rescued in this run; leaving the next attempt to the schedule."; exit 0; fi
+          gh workflow run recover-nih3d-large.yml --repo "$GITHUB_REPOSITORY" --ref main

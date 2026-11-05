@@ -53,17 +53,30 @@ def http(url, *, method='GET', headers=None, follow=True):
         if e.code in (301,302,303,307,308): return e
         raise
 
+def rate_limit_wait(error):
+    """Seconds until GitHub accepts requests again, or None if this is not a rate limit."""
+    if not isinstance(error,HTTPError) or error.code not in (403,429) or not error.headers:
+        return None
+    retry_after=error.headers.get('retry-after')
+    if retry_after and retry_after.isdigit():
+        return min(int(retry_after)+1,3600)
+    reset=error.headers.get('x-ratelimit-reset')
+    if error.headers.get('x-ratelimit-remaining')=='0' and reset and reset.isdigit():
+        return min(max(int(reset)-int(time.time()),0)+1,3600)
+    return None
+
 def api(path):
     # Transient REST errors must not abort an expiry-bound recovery batch.
     for attempt in range(4):
         try:
             with http(API+path) as r: return json.load(r)
         except (HTTPError, URLError, TimeoutError) as error:
-            if isinstance(error, HTTPError) and error.code not in (408, 429, 500, 502, 503, 504):
+            wait=rate_limit_wait(error)
+            if isinstance(error, HTTPError) and wait is None and error.code not in (408, 429, 500, 502, 503, 504):
                 raise
             if attempt == 3:
                 raise
-            time.sleep(2 ** attempt)
+            time.sleep(wait if wait is not None else 2 ** attempt)
 
 def pages(path,key=None):
     output=[]
