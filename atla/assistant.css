@@ -67,3 +67,32 @@
  body.atla-has-3d .atla-input{height:48px}
  body.atla-has-3d .atla-footer button{min-height:36px;padding:5px 8px}
 }
+
+/* Teacher identity and conversation quality. */
+.atla-launcher{border:0;border-radius:999px;background:linear-gradient(135deg,#176d77,#12475a);box-shadow:0 10px 26px #0a2d3a55;letter-spacing:.03em;transition:transform .15s ease,box-shadow .15s ease}
+.atla-launcher:hover,.atla-launcher:focus-visible{transform:translateY(-2px);box-shadow:0 14px 30px #0a2d3a66;background:linear-gradient(135deg,#1b8290,#14536a)}
+.atla-panel{border-radius:20px;box-shadow:0 22px 60px #082a3644}
+.atla-head{background:linear-gradient(120deg,#123c50,#17697a);padding:13px 14px}
+.atla-identity{display:flex;align-items:center;gap:11px;min-width:0}
+.atla-badge{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:50%;background:#ffffff1f;border:1px solid #ffffff4d;font-size:19px;line-height:1}
+.atla-stream{display:flex;flex-direction:column;background:#f7fbfb}
+.atla-message{line-height:1.5;font-size:14.5px;box-shadow:0 1px 2px #12394a14}
+.atla-user{border-bottom-right-radius:4px}
+.atla-reply{align-self:flex-start;background:#fff;border:1px solid #dcebee;border-bottom-left-radius:4px}
+.atla-welcome{background:#fff;border:1px solid #cfe5e7;line-height:1.5;font-size:14.5px}
+.atla-route{align-self:flex-start;display:inline-flex;align-items:center;min-height:42px;margin:0 0 10px;padding:8px 13px;border-radius:11px;background:#e2f5f1;border:1px solid #a9dccf;color:#0e5245;font-weight:700;font-size:13.5px;text-decoration:none}
+.atla-route:hover,.atla-route:focus-visible{background:#d2efe8}
+.atla-next{margin-top:10px}
+.atla-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.atla-chip{min-height:40px;padding:7px 12px;border-radius:999px;border:1px solid #9fc8cf;background:#fff;color:#15525f;font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;cursor:pointer}
+.atla-chip:hover,.atla-chip:focus-visible{background:#e8f5f6}
+.atla-send{border-radius:12px;min-height:44px}
+@media(prefers-reduced-motion:reduce){.atla-launcher{transition:none}.atla-launcher:hover,.atla-launcher:focus-visible{transform:none}}
+@media(prefers-color-scheme:dark){
+ .atla-stream{background:#0f2530}
+ .atla-reply,.atla-welcome{background:#17333f;border-color:#2c5262;color:#e6f3f5}
+ .atla-chip{background:#17333f;color:#d8f0f2;border-color:#3a6474}
+ .atla-route{background:#16413a;border-color:#2f7566;color:#d9f6ee}
+}
+.atla-panel .atla-input{height:60px;min-height:0;max-height:96px;resize:none}
+@media(max-width:640px){body.atla-has-3d .atla-panel .atla-input{height:46px}}

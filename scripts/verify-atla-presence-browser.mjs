@@ -42,6 +42,16 @@ try{
   assert.equal(glb.length,0,'The 3D teacher is not downloaded until requested');
   await page.locator('.atla-launcher').click();
 
+  // The welcome gives a next step and working prompts, without exposing grades.
+  const welcome=await page.locator('.atla-stream').innerText();
+  assert.doesNotMatch(welcome,/βαθμ|λάθη|\d+\s*%/i,'No implicit exposure of grades');
+  assert.equal(await page.locator('.atla-chip').count(),3);
+  await page.locator('.atla-chip',{hasText:'Τι να επαναλάβω'}).click();
+  await page.waitForFunction(()=>/τοπικό ιστορικό/.test([...document.querySelectorAll('.atla-message')].at(-1)?.textContent||''),null,{timeout:15000});
+  await page.screenshot({path:'audit-results/atla-panel-'+device+'.png'});
+  await page.locator('.atla-footer button',{hasText:'Καθαρισμός'}).click();
+  await page.locator('.atla-chip').first().waitFor({timeout:5000});
+
   // Answers work with no 3D at all, and fake replies never appear.
   await ask(page,'Τι είναι ΚΑΡΠΑ;');
   assert.match(await page.locator('.atla-message').last().innerText(),/θωρακικές συμπιέσεις/i);

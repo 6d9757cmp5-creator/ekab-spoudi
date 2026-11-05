@@ -14,9 +14,10 @@ const STRUGGLING=/(?:δεν (?:το |τη |την |τον )?(?:καταλαβ|κ
  * The registry is fetched only after the learner asks to see something or says it is unclear;
  * otherwise text is enough and nothing is downloaded. A registry failure just means no offer.
  */
-export async function chooseTeachingModel({question='',mode='lesson',revealed=false,confirmedAnatomy=false,from='',load=loadLibrary,rootUrl=new URL('../../',import.meta.url)}={}){
+export async function chooseTeachingModel({question='',mode='lesson',revealed=false,confirmedAnatomy=false,from='',needsSupport=false,load=loadLibrary,rootUrl=new URL('../../',import.meta.url)}={}){
  const q=norm(question).slice(0,300);
- const requestedVisual=VISUAL_REQUEST.test(q),struggling=STRUGGLING.test(q);
+ // needsSupport comes from the learner's own history; a model is then offered without being asked for.
+ const requestedVisual=VISUAL_REQUEST.test(q),struggling=needsSupport||STRUGGLING.test(q);
  if(!q||(!requestedVisual&&!struggling))return null;
  let library;
  try{library=await load(rootUrl)}catch{return null}
