@@ -44,7 +44,7 @@ export function buildDebriefReport({topic, role, session, stages, interviewTurns
   ) : [];
   if (!entries.length && !interview.length) throw Error("empty-study-report");
   const lines = [
-    "ΕΚΑΒ ΣΠΟΥΔΗ — MENTOR DEBRIEF",
+    "ΕΚΑΒ ΣΠΟΥΔΗ — ATLA DEBRIEF",
     status,
     "",
     "Εκπαιδευτικό θέμα: " + String(topic.name).slice(0,160),
@@ -69,7 +69,7 @@ export function buildDebriefReport({topic, role, session, stages, interviewTurns
     for (const turn of interview) {
       lines.push("", (turn.stage+1)+". "+(turn.ok?"Στόχος επικοινωνίας":"Για επανάληψη"),
         "Απάντηση: "+wrap(turn.reply,78,"  "),
-        "MENTOR: "+wrap(turn.feedback,78,"  "));
+        "ATLA: "+wrap(turn.feedback,78,"  "));
     }
   } else lines.push("Δεν υπάρχει αποθηκευμένη συνομιλία για το θέμα και τον ρόλο.");
   lines.push(

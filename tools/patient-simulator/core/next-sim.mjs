@@ -160,7 +160,7 @@ export function summarize(s){
  disclaimer:'Έλεγχος ολοκλήρωσης εκπαιδευτικών βημάτων — όχι κλινική βαθμολογία ή πιστοποίηση.'};
 }
 export function reportText(s){
- const r=summarize(s);return ['MENTOR NEXT · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',getCase(s.caseId).title,r.disclaimer,
+ const r=summarize(s);return ['ATLA NEXT · ΣΥΝΘΕΤΙΚΗ ΑΠΟΣΤΟΛΗ',getCase(s.caseId).title,r.disclaimer,
  'Χρόνος: '+r.minute+' εικονικά λεπτά','Καταγραφές: '+r.events,
  'Βήματα που καταγράφηκαν: '+(r.covered.join(', ')||'Κανένα'),
  'Για επανάληψη: '+(r.missing.join(', ')||'Κανένα'),
