@@ -74,7 +74,7 @@ export function transformSource(source,payload){
       p.href,(p.semester||"")+"΄ εξάμηνο · κεφάλαιο "+p.chapter,source.file));break;
    case "book":
     rows.push(entry(p.id,"book",p.book+" · "+p.chapter+" · σελ. "+p.page,p.text||"",source.label,
-      "anatomy-books.html#"+p.id,p.chapter,source.file));break;
+      null,p.chapter,source.file));break;
    case "eoppep":
     rows.push(entry(p.id||"eoppep-"+i,"eoppep",
       p.question||("Ερώτηση "+(i+1)),p.answer||"",source.label,
