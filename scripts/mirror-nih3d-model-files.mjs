@@ -40,6 +40,10 @@ for(const dir of sources){
 if(!foundMetadata)throw Error('No NIH source metadata catalog has been archived yet');
 // Fail before any network request; a partly reviewed historical range must not be marked complete.
 requireRangeSourceCredibility([...all.values()],credibilityRegistry);
+if(args['check-only']==='true'){
+ console.log('NIH 3D source credibility preflight passed; no network transfers attempted');
+ process.exit(0);
+}
 const prefix='atla-nih3d-'+String(first).padStart(5,'0')+'-'+String(last).padStart(5,'0');
 let currentBytes=0,memberFiles=[],packageNumber=0;
 async function flush(){
