@@ -18,6 +18,8 @@ jobs:
         with:
           sparse-checkout: |
             scripts/nih3d-ghcr-molecular-complete.mjs
+            tools/atla-ai/nih3d-credibility-gate.mjs
+            tools/atla-ai/resources/nih3d-credibility-approvals.json
             tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
             docs/ATLA_NIH3D_GHCR_MOLECULAR_BATCH_2026.json
           sparse-checkout-cone-mode: false
