@@ -252,4 +252,28 @@ class RangeRecoveryTests(unittest.TestCase):
         with patch.object(s,'pages',side_effect=fake):
             self.assertEqual(s.completed(),set())
 
+class EmptyRangeTests(unittest.TestCase):
+    def report(self, **extra):
+        base = {'range': {'start': 5501, 'end': 5600}, 'packs': [], 'modelFiles': [], 'downloadedOriginalFiles': 0,
+                'failedOutputFiles': 0, 'failed': [], 'sourceMetadataErrors': 0, 'sourceRefreshFailures': [],
+                'missingOrUnpublishedIds': 100, 'missing': [{'entryId': i, 'reason': 'x'} for i in range(5501, 5601)]}
+        base.update(extra)
+        return base
+
+    def test_confirmed_empty_range_publishes_only_its_result(self):
+        self.assertEqual(s.validate(5501, {'atla-nih3d-05501-05600-RESULT.json': object()}, self.report()), ['atla-nih3d-05501-05600-RESULT.json'])
+
+    def test_any_failure_or_gap_is_not_empty(self):
+        for extra in ({'failed': [{'entryId': 5501}]}, {'failedOutputFiles': 1}, {'sourceMetadataErrors': 1},
+                      {'sourceRefreshFailures': [5501]}, {'missingOrUnpublishedIds': 99},
+                      {'missing': [{'entryId': i} for i in range(5501, 5600)]}, {'downloadedOriginalFiles': 1},
+                      {'modelFiles': [{'sha256': 'a' * 64}]}):
+            with self.assertRaises(ValueError, msg=str(extra)):
+                s.validate(5501, {'atla-nih3d-05501-05600-RESULT.json': object()}, self.report(**extra))
+
+    def test_empty_report_next_to_an_archive_is_rejected(self):
+        with self.assertRaises(ValueError):
+            s.validate(5501, {'atla-nih3d-05501-05600-RESULT.json': object(), 'atla-nih3d-05501-05600-part-000.tar.zst': object()}, self.report())
+
+
 if __name__=='__main__':unittest.main()

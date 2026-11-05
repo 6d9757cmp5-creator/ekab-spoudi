@@ -189,9 +189,20 @@ def members(archive):
         out[name]=info
     return out
 
+def empty_range(start,report):
+    """True only if every id was confirmed unpublished and nothing failed: there is nothing to rescue."""
+    missing=report.get('missing')
+    return (report.get('packs')==[] and report.get('modelFiles')==[] and report.get('downloadedOriginalFiles')==0
+            and report.get('failedOutputFiles')==0 and report.get('failed')==[] and report.get('sourceMetadataErrors')==0
+            and not report.get('sourceRefreshFailures') and report.get('missingOrUnpublishedIds')==100
+            and isinstance(missing,list) and {m.get('entryId') for m in missing if isinstance(m,dict)}==set(range(start,start+100)))
+
 def validate(start,index,report):
     base=prefix(start)
     if report.get('range')!={'start':start,'end':start+99}:raise ValueError('Range mismatch')
+    if empty_range(start,report):
+        if any('.tar.zst' in n for n in index):raise ValueError('Unlisted archive')
+        return [base+'-RESULT.json']
     packs=report.get('packs');models=report.get('modelFiles')
     if not isinstance(packs,list) or not packs or not isinstance(models,list) or not models or report.get('downloadedOriginalFiles')!=len(models):
         raise ValueError('Invalid manifest')
