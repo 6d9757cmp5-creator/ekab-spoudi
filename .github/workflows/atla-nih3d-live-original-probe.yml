@@ -23,6 +23,8 @@ jobs:
           sparse-checkout: |
             scripts/nih3d-live-original-probe.mjs
             docs/ATLA_NIH3D_LIVE_ORIGINAL_PROBE_2026.json
+            tools/atla-ai/nih3d-credibility-gate.mjs
+            tools/atla-ai/resources/nih3d-credibility-approvals.json
             tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
