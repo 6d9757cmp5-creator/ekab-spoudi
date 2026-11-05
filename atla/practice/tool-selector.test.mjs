@@ -38,6 +38,14 @@ test('asked or struggling learners get the exact model, with a way back',async()
  assert.equal((await model({question:'Δεν κατάλαβα την επιγονατίδα'})).result.accession,'3DPX-000170');
  assert.equal((await model({question:'Πες το πιο απλά για την επιγονατίδα'})).result.accession,'3DPX-000170');
 });
+test('a topic the learner keeps missing gets the model without asking, and only that',async()=>{
+ const helped=await model({question:'Τι είναι η επιγονατίδα;',needsSupport:true});
+ assert.equal(helped.result.accession,'3DPX-000170');
+ assert.equal(helped.result.requestedVisual,false,'The text answer still comes first');
+ const none=await model({question:'Τι είναι η καρδιά;',needsSupport:true});
+ assert.equal(none.result,null,'No invented model for a structure the library does not hold');
+ assert.equal((await model({question:'Τι είναι η επιγονατίδα;',needsSupport:true,mode:'exam',revealed:false})).result,null,'History never overrides the exam gate');
+});
 test('no matching structure or no finding means no invented model',async()=>{
  assert.equal((await model({question:'Δείξε 3D φάρμακο'})).result,null);
  assert.equal((await model({question:'Δείξε μου το βραχιόνιο σε 3D'})).result,null,'A bone name never opens a fracture');

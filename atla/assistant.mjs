@@ -84,12 +84,14 @@ function boot(){
  if(window.__ekabAtlaAssistant)return;
  window.__ekabAtlaAssistant=true;
  const css=$('link');css.rel='stylesheet';css.href=new URL('./assistant.css',import.meta.url);document.head.append(css);
- const launcher=$('button','atla-launcher','ATLA');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLA');
+ const launcher=$('button','atla-launcher','✚ ATLA');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLA');
  const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLA — AI εκπαιδευτικός βοηθός');
  const head=$('header','atla-head');
- const brand=$('div','atla-brand');brand.append($('strong','', 'ATLA'),$('span','','Εκπαιδευτικός βοηθός ΕΚΑΒ Σπουδή'));
+ const brand=$('div','atla-brand');brand.append($('strong','', 'ATLA'),$('span','','Ο εκπαιδευτής σου στο ΕΚΑΒ Σπουδή'));
+ const badge=$('span','atla-badge','✚');badge.setAttribute('aria-hidden','true');
+ const identity=$('div','atla-identity');identity.append(badge,brand);
  const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLA');
- head.append(brand,close);
+ head.append(identity,close);
  const state=$('p','atla-availability','');
  const demoRow=$('label','atla-demo-row');
  const demoToggle=$('input','atla-demo-toggle');demoToggle.type='checkbox';
@@ -104,7 +106,7 @@ function boot(){
  const context=$('p','atla-context');
  const stream=$('div','atla-stream');stream.setAttribute('role','log');stream.setAttribute('aria-live','polite');
  const form=$('form','atla-form');
- const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε το ATLA για την ύλη ή τα εργαλεία…';field.setAttribute('aria-label','Ερώτηση στο ATLA');
+ const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε τον ATLA…';field.setAttribute('aria-label','Ερώτηση στο ATLA');
  const send=$('button','atla-send','Αποστολή');send.type='submit';
  const mic=$('button','atla-mic','🎙');mic.type='button';mic.setAttribute('aria-label','Ερώτηση με φωνή');mic.setAttribute('aria-pressed','false');
  mic.hidden=typeof(window.SpeechRecognition||window.webkitSpeechRecognition)!=='function';
@@ -134,7 +136,20 @@ function boot(){
  function showHistory(){
   stream.replaceChildren();
   const turns=history();
-  if(!turns.length){stream.append($('p','atla-welcome','Είμαι το ATLA. Μπορώ να σε βοηθήσω με εκπαιδευτική ορολογία, ΕΟΠΠΕΠ και τη μετακίνηση στις ενότητες.'));return;}
+  if(!turns.length){
+   stream.append($('p','atla-welcome','Γεια σου, είμαι ο ATLA. Ρώτησέ με για την ύλη, ζήτα να σου δείξω μια δομή σε 3D ή να το πω πιο απλά.'));
+   // Only the next step is shown here; grades and history appear only if the learner asks.
+   const next=learnerProfile().recommendation;
+   if(next?.href&&next?.label){const a=$('a','atla-route atla-next','Επόμενο βήμα: '+next.label);a.href=new URL(next.href,ROOT).href;stream.append(a);}
+   const chips=$('div','atla-chips');
+   for(const prompt of ['Τι να επαναλάβω;','Τι είναι η ΚΑΡΠΑ;','Δείξε μου την επιγονατίδα σε 3D']){
+    const chip=$('button','atla-chip',prompt);chip.type='button';
+    chip.addEventListener('click',()=>{field.value=prompt;form.requestSubmit();});
+    chips.append(chip);
+   }
+   stream.append(chips);
+   return;
+  }
   for(const t of turns){const b=$('p','atla-message '+(t.role==='user'?'atla-user':'atla-reply')+(t.mode==='mock'&&t.role!=='user'?' atla-mock':''),t.text);stream.append(b);}
   stream.scrollTop=stream.scrollHeight;
  }
@@ -207,6 +222,7 @@ function boot(){
   const studyInsight=localStudyInsight(q,learnerProfile());
   if(studyInsight){add('mentor',studyInsight,'local');return;}
   const teachingModel=await chooseTeachingModel({question:q,from:location.pathname+location.search+location.hash,
+   needsSupport:teachingLevelFor(learnerProfile(),q)==='beginner',
    mode:/(?:^|\/)mentor-next\.html$/.test(location.pathname)?'simulation':'lesson'});
   if(myId!==requestId)return;
   // A request to see a model is answered by that model, not by a text search on the words "3D" or "show".
