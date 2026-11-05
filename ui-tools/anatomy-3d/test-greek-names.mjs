@@ -1,3 +1,4 @@
+import {ATLAS_TERMS} from './greek-atlas-terms.js';
 import assert from 'node:assert/strict';
 import {anatomicalGreek,anatomyName,eligibleQuizName} from './greek-names.js';
 const samples={
@@ -71,4 +72,20 @@ assert.equal(eligibleQuizName('Unexpected highly specific structure','skeletal')
 assert.equal(eligibleQuizName('Right kidney','urinary'),true);
 assert.equal(eligibleQuizName('Left femur','skeletal'),true);
 assert.equal(eligibleQuizName('Left ovary','integumentary'),false);
+// Full atlas lexicon: sides, grammar and accents survive in every form.
+assert.equal(anatomicalGreek('Left femoral artery'),'Αριστερή μηριαία αρτηρία');
+assert.equal(anatomicalGreek('Right gluteus maximus'),'Δεξιός μέγας γλουτιαίος μυς');
+assert.equal(anatomicalGreek('angular gyrus (left)'),'Αριστερή γωνιώδης έλικα');
+assert.equal(anatomicalGreek('Distal phalanx of right index finger'),'Άπω φάλαγγα δεξιού δείκτη');
+assert.equal(anatomicalGreek('Set of left levatores costarum breves'),'Σύνολο αριστερών βραχέων ανελκτήρων των πλευρών');
+assert.equal(anatomicalGreek('Communicating branch of left nasociliary nerve with right ciliary ganglion'),'Αναστομωτικός κλάδος αριστερού ρινοακτινωτού νεύρου με το δεξιό ακτινωτό γάγγλιο');
+assert.equal(anatomicalGreek('Left thalamus'),'Αριστερός θάλαμος');
+assert.equal(anatomicalGreek('Right talus'),'Δεξιός αστράγαλος');
+assert.equal(anatomicalGreek('Left hippocampus'),'Αριστερός ιππόκαμπος');
+assert.equal(anatomicalGreek('Right ureter'),'Δεξιός ουρητήρας');
+assert.equal(anatomicalGreek('Tarsal plate of right upper eyelid'),'Ταρσικό πέταλο του δεξιού άνω βλεφάρου');
+for(const [key,term] of Object.entries(ATLAS_TERMS)){
+ assert.equal((term.match(/\{[a-z]+\}/g)||[]).length,(key.match(/@/g)||[]).length,'Every side needs one token: '+key);
+ assert.ok(!/[a-z]/i.test(term.replace(/\{[a-z]+\}/g,'')),'Latin letters in Greek term: '+key);
+}
 console.log('PASS Greek-first anatomy terms, precise side/number mapping and verified-only quiz pool');

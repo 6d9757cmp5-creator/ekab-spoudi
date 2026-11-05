@@ -1,9 +1,10 @@
 /**
- * Human-curated display lexicon: EL first. No generative/dictionary guessing.
+ * Display lexicon: EL first. No generative/dictionary guessing at runtime.
  * If a name does not match a known whole term or documented pattern, return null
  * and display the original only in the opt-in untranslated inventory.
  * This is a learning aid, not an independently validated Terminologia Anatomica.
  */
+import {ATLAS_TERMS} from './greek-atlas-terms.js';
 const CORE={
  'skull':'Κρανίο','cranium':'Κρανίο','frontal bone':'Μετωπιαίο οστό','parietal bone':'Βρεγματικό οστό',
  'temporal bone':'Κροταφικό οστό','occipital bone':'Ινιακό οστό','sphenoid bone':'Σφηνοειδές οστό',
@@ -206,7 +207,7 @@ const CORE={
 const NUMS={first:1,second:2,third:3,fourth:4,fifth:5,sixth:6,seventh:7,eighth:8,ninth:9,tenth:10,eleventh:11,twelfth:12};
 const WORDS={incisor:'τομέας',canine:'κυνόδοντας',premolar:'προγόμφιος',molar:'γομφίος'};
 const FEMININE=/^(Πλευρά|Κλείδα|Ωμοπλάτη|Ωλένη|Κερκίδα|Κνήμη|Περόνη|Πτέρνα|Πύελος|Επιγονατίδα|Τραχεία|Αορτή|Ωοθήκη|Ουρήθρα|Σάλπιγγα|Κοιλία|Χοληδόχος κύστη|Κάτω γνάθος|Άνω γνάθος|Νεφρική πύελος)/;
-const MASCULINE=/^(Πνεύμονας|Νεφρός|Βρόγχος|Κόλπος|Όρχις|Αδένας|Κόκκυγας|Λάρυγγας|Φάρυγγας|Σπόνδυλος|Αυχενικός|Θωρακικός|Οσφυϊκός|Κυνόδοντας|Γομφίος|Προγόμφιος|Τομέας|Θυρεοειδής|Προστάτης)/;
+const MASCULINE=/^(Οσφρητικός βολβός|Πρόσθιος οσφρητικός|Θάλαμος|Ιππόκαμπος|Αστράγαλος|Ουρητήρας|Πνεύμονας|Νεφρός|Βρόγχος|Κόλπος|Όρχις|Αδένας|Κόκκυγας|Λάρυγγας|Φάρυγγας|Σπόνδυλος|Αυχενικός|Θωρακικός|Οσφυϊκός|Κυνόδοντας|Γομφίος|Προγόμφιος|Τομέας|Θυρεοειδής|Προστάτης)/;
 const ordinal=(n,fem=false)=>n+(fem?'η':'ο');
 function prefix(side,word){
  if(!side)return word;
@@ -219,9 +220,22 @@ function prefix(side,word){
  return form+' '+word.toLocaleLowerCase('el');
 }
 function simplify(raw){return String(raw||'').trim().replace(/\s+/g,' ').toLowerCase()}
+const SIDE_FORMS={m:['αριστερός','δεξιός'],f:['αριστερή','δεξιά'],n:['αριστερό','δεξιό'],gm:['αριστερού','δεξιού'],gn:['αριστερού','δεξιού'],gf:['αριστερής','δεξιάς'],af:['αριστερή','δεξιά'],an:['αριστερό','δεξιό'],pm:['αριστεροί','δεξιοί'],pf:['αριστερές','δεξιές'],gp:['αριστερών','δεξιών']};
+function atlasTerm(base){
+ const sides=[];
+ const key=base.replace(/\b(left|right)\b/g,side=>{sides.push(side);return '@'});
+ const term=ATLAS_TERMS[key];
+ if(!term)return null;
+ const text=term.replace(/\{([a-z]+)\}/g,(_,form)=>SIDE_FORMS[form][sides.shift()==='left'?0:1]);
+ return text[0].toUpperCase()+text.slice(1);
+}
 // A parenthesized side is anatomical information, never an ignorable suffix.
 export function anatomicalGreek(name){
  const raw=String(name||'').trim();if(!raw)return null;
+ const greek=lexiconGreek(raw);
+ return greek||atlasTerm(simplify(raw));
+}
+function lexiconGreek(raw){
  let base=simplify(raw);
  const trailingSide=base.match(/^(.+?) \((left|right)\)$/);
  if(trailingSide){
