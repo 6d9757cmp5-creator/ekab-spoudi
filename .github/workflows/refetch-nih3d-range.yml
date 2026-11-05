@@ -1,18 +1,31 @@
-name: EKAB - Re-fetch one NIH3D range from source
-# For a range whose artifact has no RESULT manifest. The rescue workflow picks up the new artifact.
+name: EKAB - Re-fetch NIH3D ranges from source
+# Each finished range becomes an artifact that the rescue workflow picks up.
 on:
   workflow_dispatch:
     inputs:
-      start:
-        description: 'First entry of the 100-entry range, for example 12701'
+      starts:
+        description: 'JSON list of range starts, for example [12701,12801]'
         required: true
-        type: number
+        type: string
+      parallel:
+        description: 'How many ranges to download at once'
+        required: true
+        default: '2'
+        type: string
 permissions:
   contents: read
 jobs:
   refetch:
     runs-on: ubuntu-24.04
     timeout-minutes: 350
+    permissions:
+      actions: write
+      contents: read
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJSON(inputs.parallel) }}
+      matrix:
+        start: ${{ fromJSON(inputs.starts) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,7 +33,7 @@ jobs:
           node-version: '22'
       - name: Download all published NIH 3D formats with lossless compression
         env:
-          RANGE_START: ${{ inputs.start }}
+          RANGE_START: ${{ matrix.start }}
         run: |
           set -euo pipefail
           case "$RANGE_START" in *[!0-9]*|'') exit 1;; esac
@@ -31,10 +44,14 @@ jobs:
       - name: Preserve the finished range for the rescue workflow
         uses: actions/upload-artifact@v4
         with:
-          name: nih3d-originals-${{ inputs.start }}
+          name: nih3d-originals-${{ matrix.start }}
           path: |
-            tmp/nih3d-mirror-${{ inputs.start }}/*.tar.zst*
-            tmp/nih3d-mirror-${{ inputs.start }}/*-RESULT.json
+            tmp/nih3d-mirror-${{ matrix.start }}/*.tar.zst*
+            tmp/nih3d-mirror-${{ matrix.start }}/*-RESULT.json
           if-no-files-found: error
           compression-level: 0
           retention-days: 7
+      - name: Start the rescue of the finished range
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run recover-nih3d-large.yml --repo "$GITHUB_REPOSITORY" --ref main

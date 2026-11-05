@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {normalizeGreek,retrieve} from './retrieval.mjs';
+import {compile} from './ingest.mjs';
+const p={id:'abc-01',source_id:'who-bec',title:'Επείγουσα εκτίμηση',text:'Το ABCDE χρησιμοποιείται ως οργανωμένη αρχική προσέγγιση στην επείγουσα εκτίμηση.',source_url:'https://www.who.int/',review_status:'human-reviewed',topics:['assessment']};
+test('Greek accents and sigma normalized',()=>assert.equal(normalizeGreek('Εκτίμησης'), 'εκτιμησησ'));
+test('Reviewed source matches and cites',()=>{const a=retrieve({query:'επείγουσα εκτίμηση',passages:[p]});assert.equal(a.length,1);assert.equal(a[0].source_url,p.source_url)});
+test('Draft content cannot be retrieved',()=>assert.deepEqual(retrieve({query:'εκτίμηση',passages:[{...p,review_status:'draft'}]}),[]));
+test('Unregistered source rejected',()=>assert.throws(()=>compile([{...p,source_id:'unknown'}],{sources:[{id:'who-bec'}]}),/Unregistered/));
+test('Duplicate ids rejected',()=>assert.throws(()=>compile([p,p],{sources:[{id:'who-bec'}]}),/Duplicate/));
+test('Topic filter enforced',()=>assert.equal(retrieve({query:'εκτίμηση',passages:[p],topics:['pharmacology']}).length,0));
