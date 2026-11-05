@@ -259,7 +259,7 @@ try{
   const ecgCapability=page.locator('.capability-card').filter({hasText:'Εργαστήριο ΗΚΓ — διαδραστικό συνθετικό σχήμα'});
   const oralCapability=page.locator('.capability-card').filter({hasText:'Προφορική εξάσκηση — χωρίς AI'});
   await ecgCapability.locator('summary').click();
-  assert.equal(await ecgCapability.getByRole('link',{name:'Άνοιγμα συνθετικού Εργαστήριο ΗΚΓ'}).count(),1);
+  assert.equal(await ecgCapability.getByRole('link',{name:'Άνοιγμα συνθετικού Εργαστηρίου ΗΚΓ'}).count(),1);
   await oralCapability.locator('summary').click();
   assert.equal(await oralCapability.getByRole('link',{name:'Άνοιγμα προφορικής εξάσκησης'}).count(),1);
   assert.match(await page.locator('.capability-card').filter({hasText:'Πλήρης AI καθηγητής'}).textContent(),/Μη διαθέσιμο/);
