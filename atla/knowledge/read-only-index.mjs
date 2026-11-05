@@ -9,6 +9,7 @@ export const SOURCES=Object.freeze([
   {file:"saek-search-B.json",kind:"saek",label:"ΣΑΕΚ · Β΄ εξάμηνο"},
   {file:"saek-search-C.json",kind:"saek",label:"ΣΑΕΚ · Γ΄ εξάμηνο"},
   {file:"saek-search-D.json",kind:"saek",label:"ΣΑΕΚ · Δ΄ εξάμηνο"},
+  {file:"anatomy-books.json",kind:"book",label:"Βιβλία ανατομίας και φυσιολογίας"},
   {file:"official_questions.json",kind:"eoppep",label:"ΕΟΠΠΕΠ · Ερωτήσεις/απαντήσεις"},
   {file:"eoppep-sos.json",kind:"sos",label:"ΕΟΠΠΕΠ · Έτοιμα SOS"},
   {file:"saek-exams-bank.json",kind:"saekExam",label:"ΣΑΕΚ · Ερωτήσεις αυτοελέγχου"},
@@ -22,6 +23,7 @@ export const SOURCES=Object.freeze([
 export const KINDS=Object.freeze([
   {value:"all",label:"Όλο το ΕΚΑΒ Σπουδή"},
   {value:"saek",label:"Κεφάλαια ΣΑΕΚ"},
+  {value:"book",label:"Βιβλία ανατομίας"},
   {value:"eoppep",label:"Ερωτήσεις ΕΟΠΠΕΠ"},
   {value:"sos",label:"SOS ΕΟΠΠΕΠ"},
   {value:"saekExam",label:"Αυτοέλεγχος ΣΑΕΚ"},
@@ -70,6 +72,9 @@ export function transformSource(source,payload){
     rows.push(entry("saek-"+clean(p.courseId)+"-"+clean(p.chapter), "saek",
       (p.course||"Μάθημα")+" · "+(p.chapterTitle||"Κεφάλαιο"),p.searchText||p.preview||"",source.label,
       p.href,(p.semester||"")+"΄ εξάμηνο · κεφάλαιο "+p.chapter,source.file));break;
+   case "book":
+    rows.push(entry(p.id,"book",p.book+" · "+p.chapter+" · σελ. "+p.page,p.text||"",source.label,
+      null,p.chapter,source.file));break;
    case "eoppep":
     rows.push(entry(p.id||"eoppep-"+i,"eoppep",
       p.question||("Ερώτηση "+(i+1)),p.answer||"",source.label,
