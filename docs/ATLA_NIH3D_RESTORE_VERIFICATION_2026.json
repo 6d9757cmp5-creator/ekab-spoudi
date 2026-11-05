@@ -3,10 +3,10 @@
  "scope": "Byte identity of archived packages. Not scientific or clinical approval.",
  "counts": {
   "packagedRangesPublished": 162,
-  "rangesVerified": 32,
+  "rangesVerified": 35,
   "rangesFailed": 0,
-  "filesVerified": 97181,
-  "bytesVerified": 2293706570148
+  "filesVerified": 107591,
+  "bytesVerified": 2501338010727
  },
  "ranges": [
   {
@@ -488,6 +488,51 @@
    "unlistedFiles": [],
    "errors": [],
    "checkedAtUtc": "2026-11-05T18:32:36Z"
+  },
+  {
+   "range": "atla-nih3d-03101-03200",
+   "tag": "ekab-nih3d-recovered-03101-03200",
+   "status": "ANONYMOUS_RESTORE_VERIFIED",
+   "expectedFiles": 3252,
+   "verifiedFiles": 3252,
+   "verifiedBytes": 87513318886,
+   "mismatchedFiles": [],
+   "missingFiles": [],
+   "missingFileCount": 0,
+   "missingParts": [],
+   "unlistedFiles": [],
+   "errors": [],
+   "checkedAtUtc": "2026-11-05T18:39:18Z"
+  },
+  {
+   "range": "atla-nih3d-03201-03300",
+   "tag": "ekab-nih3d-recovered-03201-03300",
+   "status": "ANONYMOUS_RESTORE_VERIFIED",
+   "expectedFiles": 3754,
+   "verifiedFiles": 3754,
+   "verifiedBytes": 55472981587,
+   "mismatchedFiles": [],
+   "missingFiles": [],
+   "missingFileCount": 0,
+   "missingParts": [],
+   "unlistedFiles": [],
+   "errors": [],
+   "checkedAtUtc": "2026-11-05T18:42:55Z"
+  },
+  {
+   "range": "atla-nih3d-03301-03400",
+   "tag": "ekab-nih3d-recovered-03301-03400",
+   "status": "ANONYMOUS_RESTORE_VERIFIED",
+   "expectedFiles": 3404,
+   "verifiedFiles": 3404,
+   "verifiedBytes": 64645140106,
+   "mismatchedFiles": [],
+   "missingFiles": [],
+   "missingFileCount": 0,
+   "missingParts": [],
+   "unlistedFiles": [],
+   "errors": [],
+   "checkedAtUtc": "2026-11-05T18:47:16Z"
   }
  ]
 }
