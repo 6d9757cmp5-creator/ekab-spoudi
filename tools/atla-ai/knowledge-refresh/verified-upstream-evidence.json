@@ -1,5 +1,46 @@
 {
   "schema_version": 1,
-  "description": "Checked publisher-specific evidence records for byte-exact, unchanged source material. Empty until publisher primary-record verification; uploader metadata is not eligible.",
+  "description": "Primary publisher evidence index. Collection-level evidence must not authorize individual files. Only records with independently matched exact artifact bytes and original-item review proof may be used to skip duplicate scientific assessment.",
+  "as_of": "2026-11-06",
+  "publisherCollectionEvidence": [
+    {
+      "id": "hra-v1.2",
+      "name": "Human Reference Atlas v1.2 reference organ collection",
+      "officialSource": "https://3d.nih.gov/collections",
+      "kind": "expert-reviewed-3d-reference-organ-collection",
+      "publisherEvidence": [
+        "https://hubmapconsortium.github.io/ccf/pages/ccf-3d-reference-library.html",
+        "https://zenodo.org/records/5944197",
+        "https://zenodo.org/records/10358858",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10043028/"
+      ],
+      "evidenceScope": "Institutional model-approval workflow and HRA v1.2 scholarly provenance, not confirmation of every local copy/version",
+      "fileLevelApproval": false
+    },
+    {
+      "id": "nih-heart-library",
+      "name": "NIH 3D Heart Library",
+      "officialSource": "https://3d.nih.gov/collections/heart-library",
+      "kind": "peer-reviewed-curated-heart-library",
+      "publisherEvidence": [
+        "https://3d.nih.gov/faqs",
+        "https://3d.nih.gov/collections/heart-library"
+      ],
+      "evidenceScope": "NIH states that Heart Library models are peer-reviewed; inclusion of a specific NIH model must be established before reuse",
+      "fileLevelApproval": false
+    },
+    {
+      "id": "who-icrc-bec",
+      "name": "WHO–ICRC Basic Emergency Care (BEC) training course",
+      "officialSource": "https://www.who.int/publications/i/item/9789241513081",
+      "kind": "official-publisher-developed-educational-course",
+      "publisherEvidence": [
+        "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/bec",
+        "https://www.who.int/publications/i/item/9789241513081"
+      ],
+      "evidenceScope": "Official WHO–ICRC–IFEM education materials; imported excerpts and ATLA-derived content are not byte-identical source copies",
+      "fileLevelApproval": false
+    }
+  ],
   "records": []
 }
