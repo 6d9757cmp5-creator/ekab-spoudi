@@ -6,6 +6,7 @@ contained file against its RESULT.json. Read-only towards Releases; writes one r
 An upload that merely reports success is never counted as verified here.
 """
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -22,6 +23,7 @@ API = 'https://api.github.com/repos/' + REPO
 REPORT = Path('docs/ATLA_NIH3D_RESTORE_VERIFICATION_2026.json')
 PREFIX = re.compile(r'^(atla-nih3d-\d{5}-\d{5})-(RESULT\.json|part-\d{3}\.tar\.zst)$')
 CHUNK = 8 * 1024**2
+PART_ATTEMPTS = 3
 TOKEN = os.getenv('GH_TOKEN') or os.getenv('GITHUB_TOKEN')
 
 def api(path):
@@ -114,16 +116,23 @@ def verify_part(asset, expected, state):
             process.stdin.close()
     thread = threading.Thread(target=feed)
     thread.start()
+    tar_error = None
     try:
-        verify_tar(process.stdout, expected, state)
+        try:
+            verify_tar(process.stdout, expected, state)
+        except tarfile.TarError as error:
+            tar_error = error
         while process.stdout.read(CHUNK):
             pass
     finally:
         thread.join()
         process.stdout.close()
         code = process.wait()
+    # A failed download reaches tarfile as an empty stream, so the download error is the real cause.
     if failure or code:
         raise ValueError(f"Package restore failed: {asset['name']} {failure or code}")
+    if tar_error:
+        raise tar_error
     if received[0] != asset['size']:
         raise ValueError('Package length differs: ' + asset['name'])
     digest = asset.get('digest')
@@ -138,10 +147,18 @@ def verify_group(base, group):
     state = {'seen': set(), 'mismatched': [], 'unlisted': [], 'bytes': 0}
     errors = []
     for asset in group['parts']:
-        try:
-            verify_part(asset, expected, state)
-        except (ValueError, OSError, tarfile.TarError) as error:
-            errors.append(str(error)[:300])
+        for attempt in range(PART_ATTEMPTS):
+            before = copy.deepcopy(state)
+            try:
+                verify_part(asset, expected, state)
+                break
+            except (ValueError, OSError, tarfile.TarError) as error:
+                state.clear()
+                state.update(before)
+                if attempt == PART_ATTEMPTS - 1:
+                    errors.append(str(error)[:300])
+                else:
+                    time.sleep(30 * (attempt + 1))
     listed = {pack['name'] for pack in result.get('packs', [])}
     published = {asset['name'] for asset in group['parts']}
     missing_files = sorted(set(expected) - state['seen'])
