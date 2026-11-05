@@ -36,6 +36,11 @@ jobs:
         with:
           sparse-checkout: |
             scripts/nih3d-plan-next-originals.mjs
+            scripts/import-nih3d-license-reviewed.mjs
+            scripts/mirror-nih3d-model-files.mjs
+            scripts/nih3d-ghcr-full-anatomy.mjs
+            scripts/nih3d-ghcr-neuro-batch.mjs
+            scripts/nih3d-ghcr-molecular-complete.mjs
             scripts/nih3d-plan-next-originals.test.mjs
             scripts/nih3d-source-credibility.test.mjs
             scripts/nih3d-archive-planned-originals.mjs
@@ -64,6 +69,12 @@ jobs:
         run: |
           set -euo pipefail
           node scripts/nih3d-source-credibility.test.mjs
+          node --check tools/atla-ai/nih3d-credibility-gate.mjs
+          node --check scripts/mirror-nih3d-model-files.mjs
+          node --check scripts/import-nih3d-license-reviewed.mjs
+          node --check scripts/nih3d-ghcr-full-anatomy.mjs
+          node --check scripts/nih3d-ghcr-neuro-batch.mjs
+          node --check scripts/nih3d-ghcr-molecular-complete.mjs
           node scripts/nih3d-plan-next-originals.test.mjs
           node scripts/nih3d-scientific-ontology.test.mjs
           node scripts/nih3d-biomedical-scope.test.mjs
