@@ -10,6 +10,7 @@ on:
     - cron: '23 */2 * * *'
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: atla-nih3d-restore-verification
   cancel-in-progress: false
@@ -31,6 +32,7 @@ jobs:
       - name: Test verification logic
         run: python -m unittest discover -s scripts -p 'test_nih3d_verify_release_restore.py' -v
       - name: Download anonymously, decompress and hash every archived file
+        id: verify
         if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,3 +53,9 @@ jobs:
             git pull --rebase origin "$branch"
             git push origin "HEAD:$branch"
           fi
+      # GitHub skips scheduled runs under load, so a clean run with ranges left starts the next one.
+      - name: Continue with the remaining ranges
+        if: success() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && steps.verify.outputs.remaining != '0' && steps.verify.outputs.remaining != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run atla-nih3d-restore-verification.yml --repo "$GITHUB_REPOSITORY" --ref main

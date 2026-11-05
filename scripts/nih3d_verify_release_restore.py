@@ -189,6 +189,11 @@ def main():
         row = verify_group(base, groups[base])
         print('NIH3D_RESTORE', json.dumps({k: row[k] for k in ('range', 'status', 'expectedFiles', 'verifiedFiles', 'missingFileCount', 'missingParts', 'unlistedFiles', 'mismatchedFiles', 'errors')}), flush=True)
         rows.append(row)
+    # A failed range stays in the report and stops the chain, so it can never loop forever.
+    remaining = len(pending(groups, merge(report, rows, groups))) if not any(row['status'] == 'FAILED' for row in rows) else 0
+    if os.getenv('GITHUB_OUTPUT'):
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+            output.write('remaining=' + str(remaining) + '\n')
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     REPORT.write_text(json.dumps(merge(report, rows, groups), indent=1) + '\n', encoding='utf8')
     if any(row['status'] == 'FAILED' for row in rows):
