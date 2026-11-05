@@ -86,3 +86,15 @@ jobs:
           python scripts/nih3d_stream_restore.py recover
           --artifact ${{ matrix.id }}
           --start ${{ matrix.start }}
+  # GitHub skips scheduled runs under load, so a run with work left starts the next one itself.
+  continue:
+    needs: [plan, restore]
+    if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.plan.result == 'success' && needs.plan.outputs.count != '0' && !cancelled()
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: write
+    steps:
+      - name: Start the next rescue batch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run recover-nih3d-large.yml --repo "$GITHUB_REPOSITORY" --ref main
