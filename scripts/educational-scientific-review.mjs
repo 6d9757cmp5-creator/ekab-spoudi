@@ -118,7 +118,7 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  }
  // An evidence-ledger change must be evaluated as new provenance first;
  // it cannot make its own unreviewed content bypass this very PR's audit.
- if(changed().includes(UPSTREAM_LEDGER))upstreamRecords=[];
+ if(resolve(root)===ROOT&&changed().includes(UPSTREAM_LEDGER))upstreamRecords=[];
  let rules;try{rules=await readFile(resolve(root,RULES),'utf8');
   // Completion policy is repository-wide; test fixtures may supply only their own review rules.
   const completion=await readFile(resolve(ROOT,'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md'),'utf8');
