@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import {Readable,Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
 import {DEFAULTS} from './nih3d-plan-next-originals.mjs';
+import {readApprovalRegistry,requireSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 
 const action=process.argv[2],root=process.env.NIH_BATCH_DIR;
 if(!root||!['prepare','verify'].includes(action))throw Error('NIH_BATCH_DIR required and prepare|verify action');
@@ -30,6 +31,7 @@ function inspectHeader(b,type){
  }
 }
 if(action==='prepare'){
+ const credibilityRegistry=readApprovalRegistry();
  const plan=JSON.parse(fs.readFileSync(PLAN_PATH,'utf8'));
  const index=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-master-plan-2026/catalog-index.json','utf8'));
  const originalRegistry=JSON.parse(fs.readFileSync(REGISTRY,'utf8'));
@@ -47,6 +49,7 @@ if(action==='prepare'){
   if(!segments.has(filename))segments.set(filename,JSON.parse(fs.readFileSync(filename,'utf8')));
   const entry=segments.get(filename).items.find(x=>x.entryId===id);
   if(!entry||existing.has(id))throw Error('Source entry missing or already archived: '+id);
+  requireSourceCredibility(entry,credibilityRegistry);
   if(!String(entry.licenseRaw??'').trim()||selection.license!==entry.licenseRaw)
    throw Error('Source license differs from the plan '+id);
   if(entry.accession!==selection.accession||entry.title!==selection.title||entry.url!==selection.sourcePage||
