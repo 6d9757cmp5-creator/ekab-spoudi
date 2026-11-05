@@ -35,6 +35,7 @@ for(const altered of [
  {...a,creator:'Unknown third party'},
  {...a,version:2},
  {...a,licenseRaw:'CC-BY-NC'},
+ {...a,files:[{...a.files[0],url:'https://3d.nih.gov/api/submissions/999/runs/111-222/output-files/123'}]},
  {...a,url:'https://3d.nih.gov/entries/3DPX-999999'}
 ])assert.equal(checkSourceCredibility(altered,allowed).approved,false,'An approval cannot survive a changed source');
 
