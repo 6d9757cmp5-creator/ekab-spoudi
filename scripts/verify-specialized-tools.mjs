@@ -11,7 +11,7 @@ const pharma='tools/pharmacology/';
 const seminar='tools/seminars/';
 const ecg='tools/ecg-lab/';
 for(const d of [anatomy,pharma,seminar,ecg])yes(d+'README.md');
-for(const p of ['index.html','hires-anatomy.js','greek-names.js','anatomy.css','anatomy-responsive.css','test-greek-names.mjs'])yes(anatomy+p);
+for(const p of ['index.html','hires-anatomy.js','greek-names.js','greek-atlas-terms.js','anatomy.css','anatomy-responsive.css','test-greek-names.mjs'])yes(anatomy+p);
 const oldAtlas=yes('ui-tools/anatomy-3d/index.html');
 for(const item of ['../../tools/anatomy-3d/hires-anatomy.js','../../tools/anatomy-3d/anatomy.css','../../tools/anatomy-3d/anatomy-responsive.css'])
  assert(oldAtlas.includes(item),'Legacy 3D anatomy page not delegated to canonical source: '+item);
