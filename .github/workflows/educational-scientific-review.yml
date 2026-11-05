@@ -41,6 +41,7 @@ jobs:
         run: |
           node --check scripts/educational-scientific-review.mjs
           node --test scripts/test-educational-scientific-review.mjs
+          node --test tools/atla-ai/knowledge-refresh/upstream-evidence.test.mjs
       - name: Deterministic registry and official-wording check (free, no API)
         run: python3 scripts/validate-registries.py
       - name: Restore review cache (unchanged text is never re-sent)
