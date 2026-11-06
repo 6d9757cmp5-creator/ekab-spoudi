@@ -37,6 +37,8 @@ const GROUPS=Object.freeze({
 });
 const lookup=new Map(Object.entries(GROUPS).flatMap(([category,hosts])=>hosts.map(h=>[h,category])));
 const isPermittedGitHub=u=>/^\/(?:Z-Anatomy\/Models-of-human-anatomy|CognitionLabSNUC\/open-anatomy-atlas)(?:\/|$)/i.test(u.pathname);
+const isPinnedHraOriginal=u=>u.hostname==='raw.githubusercontent.com'&&!u.search&&!u.hash&&
+ /^\/hubmapconsortium\/ccf-releases\/b036a91aaf7234f462b1249d4a5f4fb0e982f412\/v1\.2\/models\/[A-Za-z0-9_.-]+\.glb$/.test(u.pathname);
 const SOURCE_DENIAL=Object.freeze({
   unknown:'unrecognized-publisher-or-platform',
   unsafe:'url-must-be-plain-https-with-exact-host'
@@ -46,11 +48,11 @@ export function classifySource(url){
  try{u=new URL(url)}catch{return {accepted:false,reason:SOURCE_DENIAL.unsafe};}
  if(u.protocol!=='https:'||u.username||u.password||u.port||!u.hostname||u.hostname.endsWith('.')||u.hostname.includes('%'))return {accepted:false,reason:SOURCE_DENIAL.unsafe};
  const hostname=u.hostname.toLowerCase(),category=lookup.get(hostname);
- if(!category)return {accepted:false,reason:SOURCE_DENIAL.unknown};
+ if(!category&&!isPinnedHraOriginal(u))return {accepted:false,reason:SOURCE_DENIAL.unknown};
  if(hostname==='github.com'&&!isPermittedGitHub(u))return {accepted:false,reason:'unreviewed-repository-owner'};
  // Official publisher/index/platform ownership does not imply per-work approval.
- return {accepted:true,category,source_host:hostname,
-   source_identity:'curated-owner-domain-not-individual-document-validation',
+ return {accepted:true,category:category||'technical-research-assets-not-clinical-guidance',source_host:hostname,
+   source_identity:isPinnedHraOriginal(u)?'pinned-HRA-v1.2-original-file-not-automatic-review':'curated-owner-domain-not-individual-document-validation',
    content_verified:false,publication_quality_verified:false,
    clinical_use_approved:false,automatic_training_allowed:false,
    medical_knowledge_ingestion_allowed:false,
