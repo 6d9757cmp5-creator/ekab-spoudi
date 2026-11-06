@@ -9,7 +9,7 @@ import {chromium,webkit} from 'playwright';
 const PORT=8775,BASE='http://127.0.0.1:'+PORT;
 const server=spawn('python3',['-m','http.server',String(PORT),'--bind','127.0.0.1'],{stdio:'ignore'});
 const targets=[
- {page:'index.html',expected:'Εκπαιδευτικός βοηθός · Εξηγήσεις και μελέτη'},
+ {page:'index.html',expected:'ATLAS · Εκπαιδευτικός βοηθός'},
  {page:'protocols.html',expected:'Πρακτική πρωτοκόλλων'},
  {page:'ui-tools/anatomy-3d/index.html',expected:'ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D'},
  {page:'mentor-live.html',expected:'ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ'},
