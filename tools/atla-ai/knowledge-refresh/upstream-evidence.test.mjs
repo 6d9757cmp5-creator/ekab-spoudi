@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {assessUpstreamEvidence,reuseDecisionForPath} from './upstream-evidence.mjs';
+import {readFileSync} from 'node:fs';
 
 const hash='a'.repeat(64),now='2026-11-05T23:00:00.000Z';
 const artifact=()=>({
@@ -87,4 +88,37 @@ test('per-file matching is unique; missing or duplicate ledger entries never byp
  assert.equal(reuseDecisionForPath({path:a.path,sha256:hash,records:[a,a],now}).externalEvidenceReused,false);
  assert.equal(reuseDecisionForPath({path:'../outside',sha256:hash,records:[a],now}).externalEvidenceReused,false);
  assert.equal(reuseDecisionForPath({path:'elsewhere/file',sha256:hash,records:[a],now}).externalEvidenceReused,false);
+});
+
+
+test('four actual HRA v1.2 originals have publisher-evaluated evidence tied to exact sha256',()=>{
+ const data=JSON.parse(readFileSync(new URL('./verified-upstream-evidence.json',import.meta.url),'utf8'));
+ assert.equal(data.schema_version,1);
+ assert.equal(data.publisherCollectionEvidence.find(x=>x.id==='hra-v1.2').linkedLocalCandidates.count,54);
+ assert.equal(data.records.length,4);
+ const known=new Set(['hra-1.2-vh-f-ovary-r','hra-1.2-vh-f-thymus','hra-1.2-vh-f-pancreas','hra-1.2-vh-f-knee-l']);
+ for(const row of data.records){
+  assert.ok(known.has(row.sourceId));
+  assert.equal(row.verifiedFromPrimaryPublisher,true);
+  assert.equal(row.reviewEvidenceUrl,'https://3d.nih.gov/collections');
+  assert.equal(row.publisherReviewStatus,'publisher-expert-reviewed');
+  assert.equal(row.usage,'educational-original');
+  assert.equal(row.verificationDetails.sha256IndependentlyRecomputed,true);
+  const d=reuseDecisionForPath({path:row.path,sha256:row.sha256,records:data.records,now:'2026-11-06T01:00:00Z'});
+  assert.equal(d.status,'SOURCE_REVIEW_REUSED',JSON.stringify(d));
+  assert.equal(d.clinicalApproval,false);
+  const altered=reuseDecisionForPath({path:row.path,sha256:'0'.repeat(64),records:data.records,now:'2026-11-06T01:00:00Z'});
+  assert.equal(altered.externalEvidenceReused,false);
+ }
+ const noMatching= reuseDecisionForPath({path:'future/unverified.nih.glb',sha256:'a'.repeat(64),records:data.records,now:'2026-11-06T01:00:00Z'});
+ assert.equal(noMatching.externalEvidenceReused,false);
+});
+test('only exact immutable HRA upstream origins are recognized, not adjacent GitHub repositories or unpinned files',()=>{
+ const source='https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Thymus.glb';
+ const a={...artifact(),sourceUrl:source,sourceId:'hra-1.2-vh-f-thymus',sourceVersion:'b036a91aaf7234f462b1249d4a5f4fb0e982f412'};
+ const rec={...verified(),sourceUrl:source,sourceId:a.sourceId,sourceVersion:a.sourceVersion,reviewedSourceId:a.sourceId,reviewedSourceVersion:a.sourceVersion,reviewEvidenceUrl:'https://3d.nih.gov/collections',publisherReviewStatus:'publisher-expert-reviewed'};
+ assert.equal(check(a,rec).status,'SOURCE_REVIEW_REUSED');
+ assert.equal(check({...a,sourceUrl:source.replace('ccf-releases','other-repo')},rec).externalEvidenceReused,false);
+ assert.equal(check({...a,sourceUrl:source.replace('b036a91','a036a91')},rec).externalEvidenceReused,false);
+ assert.equal(check({...a,sourceUrl:source+'?unverified=1'},rec).externalEvidenceReused,false);
 });
