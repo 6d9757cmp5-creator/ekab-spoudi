@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
+import { ATLA_AI } from '../atla/ai/config.mjs';
 const server=spawn('python3',['-m','http.server','8765','--bind','127.0.0.1'],{stdio:'ignore'});
 let browser;
 try {
@@ -13,14 +14,23 @@ try {
   for(const [device,width,height,isMobile] of [['mobile',390,844,true],['desktop',1440,900,false]]) {
     const context=await browser.newContext({viewport:{width,height},isMobile,hasTouch:isMobile,serviceWorkers:'block'});
     const page=await context.newPage();
+    // No network use or billing during browser tests. Validate permitted AI
+    // attempts and exercise the local knowledge fallback.
+    const aiRequests=[];
+    await page.route(/(?:anthropic|workers\.dev|openai)/i,async route=>{
+      const request=route.request();
+      let payload=null;
+      try{payload=request.postDataJSON();}catch{}
+      aiRequests.push({url:request.url(),method:request.method(),payload});
+      await route.abort('blockedbyclient');
+    });
     const response=await page.goto('http://127.0.0.1:8765/index.html',{waitUntil:'load',timeout:30000});
     if(!response?.ok())throw Error(device+': HTTP '+response?.status());
     const loaded=await page.locator('body').evaluate(el=>Boolean(el.textContent?.trim())&&getComputedStyle(el).display!=='none');
     if(!loaded)throw Error(device+': page body did not render');
     console.log('PASS '+device+': application loads');
-    // The home page has one assistant: ATLA, answering basic questions locally with no AI usage.
-    const aiRequests=[];
-    page.on('request',r=>{if(/anthropic|workers\.dev|openai/.test(r.url()))aiRequests.push(r.url())});
+    // One ATLA assistant; verified-source questions may request AI in production,
+    // but the smoke never contacts a live external AI service.
     await page.locator('.atla-launcher').click();
     if(!await page.locator('.atla-panel').isVisible())throw Error(device+': ATLA panel did not open');
     for(const question of ['Τι είναι ΚΑΡΠΑ;','ΚΑΡΠΑ']){
@@ -32,10 +42,25 @@ try {
         return asked>=0&&replies.slice(asked+1).some(t=>/θωρακικές συμπιέσεις/i.test(t)&&!/Εικονικό AI/.test(t));
       },question,{timeout:20000});
     }
-    if(aiRequests.length)throw Error(device+': a basic ATLA answer used AI: '+aiRequests[0]);
+    if(aiRequests.length>2)throw Error(device+': duplicate or unexpected AI attempts: '+aiRequests.length);
+    for(const request of aiRequests){
+      if(!ATLA_AI.endpoint||request.url!==ATLA_AI.endpoint||request.method!=='POST')
+        throw Error(device+': unapproved AI endpoint/method: '+request.url);
+      const data=request.payload;
+      if(!data||Object.keys(data).sort().join(',')!=='history,level,passages,question')
+        throw Error(device+': unexpected AI payload fields');
+      if(!['Τι είναι ΚΑΡΠΑ;','ΚΑΡΠΑ'].includes(data.question))
+        throw Error(device+': unrelated question sent to AI');
+      if(!Array.isArray(data.passages)||!data.passages.length||data.passages.length>4||
+         data.passages.some(p=>!/^T[1-4]$/.test(p.id)||!p.term||!p.definition||
+           Object.keys(p).sort().join(',')!=='definition,id,term'))
+        throw Error(device+': AI call without restricted educational passages');
+      if(!Array.isArray(data.history)||data.history.length>4)
+        throw Error(device+': AI history scope exceeded');
+    }
     await page.locator('.atla-close').click();
     if(await page.locator('.atla-panel').isVisible())throw Error(device+': ATLA panel did not close');
-    console.log('PASS '+device+': bare ΚΑΡΠΑ answered locally through ATLA with zero AI usage');
+    console.log('PASS '+device+': local fallback and safe ATLA AI request gate; '+aiRequests.length+' requests intercepted, zero external AI calls');
 
     const mentorPage=await page.goto('http://127.0.0.1:8765/mentor-lab.html',{waitUntil:'domcontentloaded',timeout:30000});
     if(!mentorPage?.ok())throw Error(device+': MENTOR page does not load');
