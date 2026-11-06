@@ -13,7 +13,7 @@ export const REFERENCE_INDEX=Object.freeze({
 });
 export const ROLE_TRACKS=Object.freeze({
   ekab:{label:'Σπουδαστής / Διασώστης ΕΚΑΒ',scope_status:'requires_greek_legal_verification'},
-  paramedic:{label:'Paramedic (άλλο σύστημα υγείας)',scope_status:'varies_by_country_and_credential'},
+  paramedic:{label:'Διασώστης άλλου συστήματος υγείας',scope_status:'varies_by_country_and_credential'},
   physician:{label:'Ιατρός προνοσοκομειακής',scope_status:'requires_professional_and_clinical_review'}
 });
 export const SKILLS=Object.freeze({

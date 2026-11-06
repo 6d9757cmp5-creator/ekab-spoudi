@@ -5,6 +5,8 @@
  */
 import {SOURCES,KINDS,parsePublishedSource,transformSource,searchRecords} from "../core/read-only-index.mjs";
 import {readLegacySnapshot} from "../core/legacy-readonly.mjs";
+// Source file names are internal details, not something a student can use.
+const publicMeta=meta=>String(meta||"").split(" · ").filter(part=>!/\.(?:json|js)$/.test(part)).join(" · ");
 const $=id=>document.getElementById(id);
 const create=(tag,cls,text)=>{
  const e=document.createElement(tag);
@@ -27,7 +29,7 @@ function renderRecord(record){
  summary.append(header,create("span","reader-tag",record.kind==="eoppep"?"ΕΟΠΠΕΠ":KINDS.find(x=>x.value===record.kind)?.label||record.kind));
  details.append(summary);
  const content=create("div","reader-fulltext");
- content.append(create("p","source-detail","Πηγή: "+record.source+" · "+record.meta));
+ content.append(create("p","source-detail","Πηγή: "+[record.source,publicMeta(record.meta)].filter(Boolean).join(" · ")));
  if(record.kind==="eoppep")content.append(create("strong",null,"Καταχωρισμένη εκπαιδευτική απάντηση — όχι επίσημο λυσάρι ή ιατρική πιστοποίηση"));
  if(record.kind==="pharma")content.append(create("strong",null,"Μόνο μελέτη. Δεν αποτελεί εντολή χορήγησης ή κλινικό πρωτόκολλο."));
  const body=create("p","reader-text",record.body||"Δεν υπάρχει αναγνώσιμο κείμενο στον κατάλογο. Μπορείς να ανοίξεις την αρχική ενότητα.");
