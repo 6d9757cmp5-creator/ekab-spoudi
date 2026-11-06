@@ -108,7 +108,7 @@ function boot(){
  demoToggle.checked=demoAllowed;demoRow.hidden=!demoAllowed;
  const demoCopy=$('span','','Δοκιμαστικό AI · εικονικές απαντήσεις');
  demoRow.append(demoToggle,demoCopy);
- const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA AI · χρειάζεται έλεγχος πραγματικής υπηρεσίας':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
+ const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA AI · απαντά μόνο από επαληθευμένες πηγές':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
  refreshState();
  demoToggle.addEventListener('change',refreshState);
  const context=$('p','atla-context');
