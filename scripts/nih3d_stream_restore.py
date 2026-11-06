@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Bounded streaming recovery of historical NIH3D GitHub Actions ZIP64 artifacts.
 
-Never deletes or overwrites. Publishes only canonical manifests and listed parts.
+Never overwrites or deletes uploaded assets. The only removal allowed is a failed
+upload placeholder (state=starter), which holds no retrievable bytes and is replaced
+from the verified source. Publishes only canonical manifests and listed parts.
 The final RESULT.json is an integrity-verified completion marker.
 """
 import argparse
@@ -51,8 +53,30 @@ def http(url, *, method='GET', headers=None, follow=True):
         if e.code in (301,302,303,307,308): return e
         raise
 
+def rate_limit_wait(error):
+    """Seconds until GitHub accepts requests again, or None if this is not a rate limit."""
+    if not isinstance(error,HTTPError) or error.code not in (403,429) or not error.headers:
+        return None
+    retry_after=error.headers.get('retry-after')
+    if retry_after and retry_after.isdigit():
+        return min(int(retry_after)+1,3600)
+    reset=error.headers.get('x-ratelimit-reset')
+    if error.headers.get('x-ratelimit-remaining')=='0' and reset and reset.isdigit():
+        return min(max(int(reset)-int(time.time()),0)+1,3600)
+    return None
+
 def api(path):
-    with http(API+path) as r: return json.load(r)
+    # Transient REST errors must not abort an expiry-bound recovery batch.
+    for attempt in range(4):
+        try:
+            with http(API+path) as r: return json.load(r)
+        except (HTTPError, URLError, TimeoutError) as error:
+            wait=rate_limit_wait(error)
+            if isinstance(error, HTTPError) and wait is None and error.code not in (408, 429, 500, 502, 503, 504):
+                raise
+            if attempt == 3:
+                raise
+            time.sleep(wait if wait is not None else 2 ** attempt)
 
 def pages(path,key=None):
     output=[]
@@ -70,7 +94,7 @@ def current_legacy_names():
     except HTTPError as e:
         if e.code==404: return set()
         raise
-    return {a['name'] for a in pages('/releases/'+str(rel['id'])+'/assets')}
+    return {a['name'] for a in pages('/releases/'+str(rel['id'])+'/assets') if a.get('state')=='uploaded'}
 
 def completed():
     done=set()
@@ -82,11 +106,11 @@ def completed():
         try: base=prefix(s)
         except ValueError: continue
         if e!=s+99: continue
-        if base+'-RESULT.json' in {a['name'] for a in pages('/releases/'+str(r['id'])+'/assets')}:
+        if base+'-RESULT.json' in {a['name'] for a in pages('/releases/'+str(r['id'])+'/assets') if a.get('state')=='uploaded'}:
             done.add(s)
     return done
 
-def plan(artifacts, legacy, done, count=6):
+def plan(artifacts, legacy, done, count=16):
     selected=[]
     for a in artifacts:
         m=NAME.fullmatch(a.get('name',''))
@@ -97,11 +121,12 @@ def plan(artifacts, legacy, done, count=6):
         if s in done or base+'-RESULT.json' in legacy: continue
         selected.append({'id':a['id'],'start':s,'bytes':a['size_in_bytes'],
                          'expires_at':a.get('expires_at','') or ''})
-    selected.sort(key=lambda a:(a['expires_at'],-a['id']))
-    unique={}; 
-    for a in selected:
+    # A re-fetched range supersedes its older artifact, which may lack the RESULT manifest.
+    unique={}
+    for a in sorted(selected,key=lambda a:-a['id']):
         if a['start'] not in unique:unique[a['start']]=a
-    return list(unique.values())[:count],len(unique)
+    ordered=sorted(unique.values(),key=lambda a:(a['expires_at'],-a['id']))
+    return ordered[:count],len(ordered)
 
 def signed_url(artifact_id):
     r=http(API+f'/actions/artifacts/{artifact_id}/zip', follow=False)
@@ -178,9 +203,20 @@ def members(archive):
         out[name]=info
     return out
 
+def empty_range(start,report):
+    """True only if every id was confirmed unpublished and nothing failed: there is nothing to rescue."""
+    missing=report.get('missing')
+    return (report.get('packs')==[] and report.get('modelFiles')==[] and report.get('downloadedOriginalFiles')==0
+            and report.get('failedOutputFiles')==0 and report.get('failed')==[] and report.get('sourceMetadataErrors')==0
+            and not report.get('sourceRefreshFailures') and report.get('missingOrUnpublishedIds')==100
+            and isinstance(missing,list) and {m.get('entryId') for m in missing if isinstance(m,dict)}==set(range(start,start+100)))
+
 def validate(start,index,report):
     base=prefix(start)
     if report.get('range')!={'start':start,'end':start+99}:raise ValueError('Range mismatch')
+    if empty_range(start,report):
+        if any('.tar.zst' in n for n in index):raise ValueError('Unlisted archive')
+        return [base+'-RESULT.json']
     packs=report.get('packs');models=report.get('modelFiles')
     if not isinstance(packs,list) or not packs or not isinstance(models,list) or not models or report.get('downloadedOriginalFiles')!=len(models):
         raise ValueError('Invalid manifest')
@@ -214,7 +250,134 @@ def release_assets(tag):
 
 def gh(*args):
     if not TOKEN:raise RuntimeError('Missing GH_TOKEN')
-    subprocess.run(['gh',*args],check=True,env={**os.environ,'GH_TOKEN':TOKEN},timeout=1800)
+    cmd=['gh',*args]
+    proc=subprocess.run(cmd,check=False,env={**os.environ,'GH_TOKEN':TOKEN},
+                        stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+                        text=True,timeout=1800)
+    if proc.returncode:
+        raise subprocess.CalledProcessError(proc.returncode,cmd,output=proc.stdout,stderr=proc.stderr)
+
+def retryable_release_error(error):
+    message=(getattr(error,'stderr','') or '')+' '+(getattr(error,'output','') or '')
+    return bool(re.search(r'HTTP (?:404|408|429|500|502|503|504)\b',message)) or any(
+        phrase in message.lower() for phrase in ('connection reset','timeout','temporarily unavailable','eof'))
+
+def verify_asset_without_api_digest(asset, name, size, sha):
+    """Read back the real Release bytes when GitHub reports digest: null.
+
+    This is bounded streaming verification, not a second upload, overwrite,
+    or blind acceptance of a missing API checksum.
+    """
+    from urllib.parse import unquote
+    url=asset.get('browser_download_url')
+    parsed=urlparse(url or '')
+    segments=unquote(parsed.path).split('/')
+    owner, repo=REPO.split('/')
+    if (parsed.scheme!='https' or parsed.hostname!='github.com'
+            or parsed.username or parsed.password or parsed.fragment
+            or len(segments)!=7 or segments[1:5]!=[owner,repo,'releases','download']
+            or not re.fullmatch(r'ekab-nih3d-recovered-\d{5}-\d{5}',segments[5])
+            or segments[6]!=name):
+        raise ValueError('Cannot safely verify missing remote digest: '+name)
+    for attempt in range(3):
+        try:
+            h=hashlib.sha256();received=0
+            with http(url, headers={'Accept':'application/octet-stream'}) as response:
+                if response.status!=200 or 'json' in response.headers.get('Content-Type','').lower():
+                    raise ValueError('Release asset did not return verified binary bytes: '+name)
+                while True:
+                    chunk=response.read(min(CHUNK, size-received+1))
+                    if not chunk:break
+                    received+=len(chunk)
+                    if received>size:raise ValueError('Remote asset exceeds expected size: '+name)
+                    h.update(chunk)
+            if received!=size or h.hexdigest().lower()!=sha.lower():
+                raise ValueError('Remote conflict; overwrites forbidden: '+name)
+            print('REMOTE_STREAM_SHA256_VERIFIED',name,size,flush=True)
+            return
+        except (HTTPError,URLError,TimeoutError) as error:
+            if isinstance(error,HTTPError) and error.code not in (404,408,429,500,502,503,504):
+                raise
+            if attempt==2:raise
+            time.sleep(2**attempt)
+
+def check_remote_asset(asset, name, size, sha):
+    if asset.get('size')!=size:
+        raise ValueError('Remote conflict; overwrites forbidden: '+name)
+    digest=asset.get('digest')
+    if digest is None:
+        verify_asset_without_api_digest(asset,name,size,sha)
+    elif not isinstance(digest,str) or digest.lower()!='sha256:'+sha.lower():
+        raise ValueError('Remote conflict; overwrites forbidden: '+name)
+
+def create_recovery_release(tag, start, artifact_id=None, attempts=5):
+    for attempt in range(attempts):
+        already=release_assets(tag)
+        if already is not None:
+            return already
+        try:
+            gh('release','create',tag,'--repo',REPO,'--target',os.getenv('GITHUB_SHA','main'),
+               '--title','EKAB NIH3D historical recovery '+prefix(start),
+               '--notes','Historical NIH3D fallback package from GitHub artifact '+str(artifact_id)+'; not clinical approval.')
+        except subprocess.CalledProcessError as exc:
+            # The upload may have succeeded even when CLI exits nonzero.
+            already=release_assets(tag)
+            if already is not None:
+                return already
+            if not retryable_release_error(exc) or attempt==attempts-1:
+                raise
+            print('RETRY_TRANSIENT_RELEASE_CREATE',tag,attempt+1,flush=True)
+            time.sleep(min(2 ** attempt,16))
+        else:
+            already=release_assets(tag)
+            if already is None:
+                raise RuntimeError('Release creation not confirmed')
+            return already
+    raise RuntimeError('Release retry budget exhausted')
+
+def remove_incomplete_upload(asset, name):
+    """Delete one failed upload placeholder, rechecked by id immediately before."""
+    path='/releases/assets/'+str(asset['id'])
+    fresh=api(path)
+    if fresh.get('name')!=name or fresh.get('state')!='starter':
+        raise ValueError('Refusing to delete a non-placeholder asset: '+name)
+    with http(API+path,method='DELETE') as response:
+        if response.status!=204:raise ValueError('Placeholder removal not confirmed: '+name)
+    print('REMOVED_INCOMPLETE_UPLOAD',name,fresh.get('size'),flush=True)
+
+def publish_verified_part(tag, name, path, size, sha, attempts=5):
+    for attempt in range(attempts):
+        existing=release_assets(tag) or {}
+        if name in existing and existing[name].get('state')=='starter':
+            remove_incomplete_upload(existing[name],name)
+            del existing[name]
+        if name in existing:
+            check_remote_asset(existing[name],name,size,sha)
+            print('VERIFIED_EXISTING',name,flush=True)
+            return existing[name]
+        try:
+            gh('release','upload',tag,str(path),'--repo',REPO)
+        except subprocess.CalledProcessError as exc:
+            # Refresh before retry: an HTTP 500/404 may still have saved the asset.
+            existing=release_assets(tag) or {}
+            incomplete=existing.get(name,{}).get('state')=='starter'
+            if name in existing and not incomplete:
+                check_remote_asset(existing[name],name,size,sha)
+                print('VERIFIED_AFTER_UPLOAD_ERROR',name,flush=True)
+                return existing[name]
+            if not (incomplete or retryable_release_error(exc)) or attempt==attempts-1:
+                raise
+            print('RETRY_TRANSIENT_RELEASE_UPLOAD',name,attempt+1,flush=True)
+            time.sleep(min(2 ** attempt,16))
+            continue
+        for poll in range(6):
+            found=(release_assets(tag) or {}).get(name)
+            if found is not None:
+                check_remote_asset(found,name,size,sha)
+                return found
+            time.sleep(2)
+        raise RuntimeError('Uploaded Release asset not visible for SHA256 verification: '+name)
+    raise RuntimeError('Release upload retry budget exhausted: '+name)
 
 def download_part(artifact_id,name,target):
     with RangeReader(signed_url(artifact_id),refresh=lambda:signed_url(artifact_id)) as reader:
@@ -243,31 +406,17 @@ def recover(artifact_id,start):
     tag=recovery_tag(start)
     existing=release_assets(tag)
     if existing is None:
-        gh('release','create',tag,'--repo',REPO,'--target',os.getenv('GITHUB_SHA','main'),
-           '--title','EKAB NIH3D historical recovery '+prefix(start),
-           '--notes','Historical NIH3D fallback package from GitHub artifact '+str(artifact_id)+'; not clinical approval.')
-        existing=release_assets(tag)
-        if existing is None:raise RuntimeError('Release creation not confirmed')
+        existing=create_recovery_release(tag,start,artifact_id)
     for i,filename in enumerate(filenames,1):
         with tempfile.TemporaryDirectory(prefix='nih3d-range-') as td:
             if shutil.disk_usage(td).free<MAX_PART+512*1024**2:raise RuntimeError('Insufficient disk for one part')
             path=Path(td)/filename
             size,sha=download_part(artifact_id,filename,path)
-            if filename in existing:
-                a=existing[filename]
-                if a.get('size')!=size or a.get('digest','').lower()!='sha256:'+sha:
-                    raise ValueError('Remote conflict; overwrites forbidden: '+filename)
+            if filename in existing and existing[filename].get('state')!='starter':
+                check_remote_asset(existing[filename],filename,size,sha)
                 print('VERIFIED_EXISTING',filename,flush=True)
                 continue
-            gh('release','upload',tag,str(path),'--repo',REPO)
-            found=None
-            for retry in range(5):
-                found=(release_assets(tag) or {}).get(filename)
-                if found:break
-                time.sleep(2)
-            if not found or found.get('size')!=size or found.get('digest','').lower()!='sha256:'+sha:
-                raise RuntimeError('Uploaded Release asset failed SHA256/size check')
-            existing[filename]=found
+            existing[filename]=publish_verified_part(tag,filename,path,size,sha)
             print('PUBLISHED_VERIFIED',i,len(filenames),filename,size,flush=True)
     print('RECOVERY_SUCCESS',prefix(start),tag,flush=True)
 

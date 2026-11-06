@@ -11,7 +11,7 @@ button?.addEventListener("click",()=>{
   const prefs=parsePrefs(localStorage.getItem(STORAGE_KEY)||"");
   if(prefs.visibility==="hidden")prefs.visibility="minimized";
   localStorage.setItem(STORAGE_KEY,serializePrefs(prefs));
-  say("Ο πλωτός MENTOR θα εμφανιστεί ως κουμπί «MENTOR» στις υπόλοιπες σελίδες.");
+  say("Ο πλωτός ATLA θα εμφανιστεί ως κουμπί «ATLA» στις υπόλοιπες σελίδες.");
  }catch{
   say("Δεν ήταν δυνατή η αποθήκευση ρύθμισης σε αυτόν τον browser.");
  }

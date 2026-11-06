@@ -39,7 +39,7 @@ try{
     ['desktop',{viewport:{width:1440,height:900}}],
     ['mobile',{viewport:{width:390,height:844},isMobile:true,hasTouch:true}]
   ]){
-    const ctx=await browser.newContext(opts);
+    const ctx=await browser.newContext({...opts,reducedMotion:'reduce'});
     const page=await ctx.newPage();
     const errors=[];page.on('pageerror',e=>errors.push(String(e)));
     result.devices.push(device);
@@ -65,9 +65,12 @@ try{
         assert(await chapter.locator('.lesson-more h3').first().isVisible());
         if(c.n===7) assert((await chapter.locator('.lesson-process').textContent()).includes('μόλις πραγματοποιηθεί η εκφόρτιση'));
         if(c.n===9) assert((await chapter.locator('.lesson-more').textContent()).includes('ΠΔ 62/2007'));
+        await page.waitForLoadState('load');
+        await chapter.locator('.knowledge-check > summary').waitFor({state:'visible',timeout:8000});
         await chapter.locator('.knowledge-check > summary').click();
+        await chapter.locator('.knowledge-check details > summary').waitFor({state:'visible',timeout:8000});
         await chapter.locator('.knowledge-check details > summary').click();
-        assert(await chapter.locator('.check-answer').isVisible());
+        await chapter.locator('.check-answer').waitFor({state:'visible',timeout:8000});
       });
     }
     await check(device+' adjacent navigation and storage remain functional',async()=>{

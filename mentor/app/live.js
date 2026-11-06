@@ -126,7 +126,7 @@ function renderCockpit(snapshot){
   }
   if(!snapshot.inspections.length)list.append(create('li','Καμία καταγραφή εργαλείου ακόμη.'));
   target.append(intro,list);
-  const link=create('a','MENTOR DEBRIEF — εκπαιδευτική διαδρομή');
+  const link=create('a','ATLA · ΑΝΑΣΚΟΠΗΣΗ — εκπαιδευτική διαδρομή');
   link.href='#live-debrief';
   target.append(link);
  }else if(LIVE_ACTIONS[selectedTool]){
@@ -224,17 +224,17 @@ $('sim-pause').addEventListener('click',()=>{
 
 $('live-reset').addEventListener('click',()=>{
  if(busy)return;
- if((state.events.length||state.inspections?.length)&&!confirm('Να ξεκινήσει νέα συνθετική αποστολή; Θα επαναφερθεί μόνο η μνήμη αυτής της νέας αποστολής Mentor.'))return;
+ if((state.events.length||state.inspections?.length)&&!confirm('Να ξεκινήσει νέα συνθετική αποστολή; Θα επαναφερθεί μόνο η μνήμη αυτής της νέας αποστολής ATLA.'))return;
  clearLive(localStorage);
  state=newLiveSession();
  selectedPerson='a';selectedTool='dialogue';selectedView='all';paused=false;drawerOpen=true;
  $('sim-tool-result').textContent='';
  $('live-export-status').textContent='Η νέα αποστολή δεν περιέχει προηγούμενες καταγραφές.';
  $('live-feedback').textContent='';
- $('live-storage').textContent='Ξεκινάς νέα προσπάθεια. Οι υπόλοιπες καταγραφές Mentor και ΣΑΕΚ/ΕΟΠΠΕΠ μένουν ανέπαφες.';
+ $('live-storage').textContent='Ξεκινάς νέα προσπάθεια. Οι υπόλοιπες καταγραφές ATLA και ΣΑΕΚ/ΕΟΠΠΕΠ μένουν ανέπαφες.';
  render();
 });
 render();
 // The floating MENTOR module loads after this one: announce the open step again once everything is ready.
 window.addEventListener('load',render);
-$('live-storage').textContent=state.events.length?'Φορτώθηκε η προηγούμενη δοκιμή αυτής της αποστολής.':'Η αποστολή είναι έτοιμη. Μόνο η νέα τοπική μνήμη Mentor θα αλλάξει.';
+$('live-storage').textContent=state.events.length?'Φορτώθηκε η προηγούμενη δοκιμή αυτής της αποστολής.':'Η αποστολή είναι έτοιμη. Μόνο η νέα τοπική μνήμη ATLA θα αλλάξει.';

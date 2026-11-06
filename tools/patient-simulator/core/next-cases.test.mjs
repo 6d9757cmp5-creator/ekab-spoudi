@@ -1,16 +1,55 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {CASES,getCase,CASE,newSession,patientVitals,execute,askPatient,validSession,saveSession,loadSession,loadCaseSession,caseProgress,reportText} from './next-sim.mjs';
+import {PRACTICAL_CASES,PRACTICAL_SKILLS} from './eoppep-practical-cases.mjs';
+import {CASES,getCase,CASE,newSession,patientVitals,execute,askPatient,validSession,saveSession,loadSession,loadCaseSession,caseProgress,reportText,summarize,actionsFor,setFocus} from './next-sim.mjs';
 import {missionEvidence,vitalTrend} from './next-review.mjs';
 const store=()=>{const m=new Map();return{getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v),read:()=>m};};
 test('three distinct original scenes, descriptions and independent synthetic trajectories',()=>{
- assert.equal(CASES.length,3);
- assert.deepEqual(CASES.map(c=>c.scene),['road','home','square']);
+ const original=CASES.filter(c=>!c.group);
+ assert.equal(original.length,3);
+ assert.deepEqual(original.map(c=>c.scene),['road','home','square']);
  assert(CASES.every(c=>c.patients.length===2&&c.patients.every(p=>p.dialogue.feeling&&p.dialogue.event)));
  assert.equal(CASE.id,CASES[0].id);
  assert.equal(getCase('invalid'),null);
  assert.notDeepEqual(patientVitals(newSession(CASES[0].id),'a'),patientVitals(newSession(CASES[1].id),'a'));
  assert.throws(()=>newSession('unknown'));
+});
+test('six EOPPEP scenarios keep the official wording, synthetic labels and no reactive vitals',()=>{
+ assert.equal(PRACTICAL_CASES.length,6);
+ assert.equal(PRACTICAL_SKILLS.length,12);
+ const pdf=['νεαρό άνδρα σε καφενείο','άνδρα 55 ετών','23η εβδομάδα κύησης','ανοιχτό πνευμοθώρακα','θέλει να φύγει','αδυναμία κίνησης αριστερού κάτω άκρου'];
+ PRACTICAL_CASES.forEach((c,i)=>{
+  assert.ok(c.briefing.includes(pdf[i]),c.id);
+  assert.ok(c.vitalsNote.includes('συνθετικές'));
+  for(const p of c.patients)assert.deepEqual(p.slope,{hr:0,rr:0,spo2:0},'The source gives no trajectory');
+  assert.ok(c.steps.every(step=>step.label.length<=160),'Event labels stay within the session limit');
+ });
+ for(const skill of PRACTICAL_SKILLS)assert.ok(PRACTICAL_CASES.some(c=>c.steps.some(s=>s.skills.includes(skill))),skill);
+ assert.equal(new Set(PRACTICAL_CASES.flatMap(c=>c.steps.map(s=>s.id))).size,PRACTICAL_CASES.flatMap(c=>c.steps).length);
+ assert.ok(!JSON.stringify(PRACTICAL_CASES).replaceAll('166/112','').match(/\b\d{2,3}\/\d{2,3}\b/),'No invented blood pressure');
+});
+test('scenario steps act only inside their scenario, never change vitals and are not graded',()=>{
+ const [first,second]=PRACTICAL_CASES;
+ let s=newSession(first.id);
+ const before=patientVitals(s,'a');
+ const stepId=first.steps[0].id;
+ s=execute(s,'interventions',stepId);
+ assert.ok(s.events.at(-1).detail.includes('Δεν εκτελείται κλινική πράξη'));
+ assert.ok(validSession(s));
+ const after=patientVitals({...s,minute:30},'a');
+ assert.deepEqual(after,before,'Vitals never react to actions or time');
+ assert.throws(()=>execute(newSession(second.id),'interventions',stepId));
+ assert.throws(()=>execute(newSession(CASES[0].id),'interventions',stepId));
+ const summary=summarize(s);
+ assert.deepEqual(summary.practiceSteps.filter(x=>x.done).map(x=>x.label),[first.steps[0].label]);
+ assert.equal('score' in summary,false);
+ assert.equal(summarize(newSession(CASES[0].id)).practiceSteps.length,0);
+ assert.match(reportText(s),/χωρίς βαθμολόγηση/);
+ const listed=actionsFor(s,'interventions').slice(0,first.steps.length).map(a=>a.label);
+ assert.deepEqual(listed,[...listed].sort((a,b)=>a.localeCompare(b,'el')),'The list does not reveal the order');
+ assert.match(execute(newSession(PRACTICAL_CASES[2].id),'monitor','bp').events.at(-1).detail,/δεν δίνει τιμή/);
+ const witness=setFocus(newSession(PRACTICAL_CASES[2].id),'b','scene');
+ assert.doesNotMatch(execute(witness,'monitor','bp').events.at(-1).detail,/Υπέρταση/,'Findings belong to the patient');
 });
 test('scenario-specific dialogue and briefing never leak between cases',()=>{
  const a=askPatient(newSession(CASES[0].id),'Τι συνέβη;');

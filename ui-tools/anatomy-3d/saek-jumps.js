@@ -6,6 +6,7 @@
 const match=location.pathname.match(/(?:^|\/)saek-course-(\d{2})\.html$/);
 if(!match)return;
 const course=match[1];
+void import(new URL('tools/atla-ai/nih3d-learning-surface.mjs',location.href).href).catch(()=>{});
 // [label, mode, system, focus, optional sex]. Focus is a curated anatomical keyword.
 // No clinical protocol/condition is encoded by the link.
 const R={
@@ -116,5 +117,4 @@ if(fromHash&&rows[Number(fromHash[1])]){
    requestAnimationFrame(()=>chapter.scrollIntoView({block:'start',behavior:'instant'}))
  }
 }
-void import(new URL('tools/atla-ai/nih3d-learning-surface.mjs',location.href).href).catch(()=>{});
 })();

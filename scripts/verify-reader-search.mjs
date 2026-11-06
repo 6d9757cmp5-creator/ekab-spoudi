@@ -57,6 +57,12 @@ assert.ok(globalTools.includes('saek-search-')&&globalTools.includes('official_q
 assert.ok(globalTools.includes('extra-exercises-search.json')&&globalTools.includes('medical-terms.json'));
 assert.ok(globalTools.includes('theory.html?question=')&&globalTools.includes('search.html?q='),'EOPPEP results must open the separate theory reader');
 const termData=JSON.parse(read('medical-terms.json'));
+const lexicon=JSON.parse(read('medical-lexicon.json'));
+assert.ok(lexicon.items.length>=7000,'hygiene and epidemiology lexicon should be imported in full');
+assert.ok(lexicon.items.every(item=>item.en&&(item.el?.length||item.see||item.definition)),'every lexicon entry needs content');
+assert.ok(!lexicon.items.some(item=>[...(item.el||[]),item.definition||'',item.see||''].some(text=>text.includes(':='))),'no lexicon entry may hide another entry');
+assert.equal(lexicon.items.find(item=>item.en==='resuscitation').el[0],'ανάνηψη');
+assert.ok(globalTools.includes('medical-lexicon.json'),'medical dictionary should search the lexicon');
 assert.ok(termData.items.length>=17,'general bilingual medical glossary should have 17+ starter terms');
 const termCategories=termData.categories||[...new Set(termData.items.map(item=>item.category))];
 assert.ok(termCategories.length>=8,'include different medical disciplines');
@@ -72,7 +78,7 @@ const exercises=JSON.parse(read('extra-exercises-search.json'));
 assert.equal(exercises.count,121);
 assert.equal(exercises.items.length,121);
 assert.ok(read('search.html').includes('globalSearchResultsPage'));
-assert.ok(index.includes('🤖 AI Hint SOS'));
+assert.ok(index.includes('🤖 Εκπαιδευτικές υπενθυμίσεις SOS'));
 assert.ok(app.includes('openCatalogQuestion(requested)'),'EOPPEP global result must open reader instead of exam');
 
 assert.ok(app.includes('never display stale SOS')&&app.includes('listed.every(point=>source.includes(point))'),'safe fallback for newer answers missing');

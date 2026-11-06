@@ -11,13 +11,13 @@ const pharma='tools/pharmacology/';
 const seminar='tools/seminars/';
 const ecg='tools/ecg-lab/';
 for(const d of [anatomy,pharma,seminar,ecg])yes(d+'README.md');
-for(const p of ['index.html','hires-anatomy.js','greek-names.js','anatomy.css','anatomy-responsive.css','test-greek-names.mjs'])yes(anatomy+p);
+for(const p of ['index.html','hires-anatomy.js','greek-names.js','greek-atlas-terms.js','anatomy.css','anatomy-responsive.css','test-greek-names.mjs'])yes(anatomy+p);
 const oldAtlas=yes('ui-tools/anatomy-3d/index.html');
 for(const item of ['../../tools/anatomy-3d/hires-anatomy.js','../../tools/anatomy-3d/anatomy.css','../../tools/anatomy-3d/anatomy-responsive.css'])
  assert(oldAtlas.includes(item),'Legacy 3D anatomy page not delegated to canonical source: '+item);
 const atlas=yes(anatomy+'index.html');
 assert(atlas.includes('src="hires-anatomy.js?'),'Canonical 3D anatomy entry not functional');
-assert(atlas.includes('../../mentor/presence/presence.mjs'),'Mentor optional companion missing');
+assert(atlas.includes('../../atla/assistant.mjs'),'ATLA missing from the canonical anatomy page');
 for(const f of ['farmaka-catalog.js','farmaka-clinical-2026.js','farmaka-ui.js','farmaka-adaptive-bank.js','farmaka-cases.js'])
  yes(pharma+f);
 const page=yes('farmaka.html'),ordering=['farmaka-catalog.js','farmaka-clinical-2026.js','farmaka-ui.js','farmaka-adaptive-bank.js','farmaka-cases.js'];

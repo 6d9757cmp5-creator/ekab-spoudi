@@ -1,16 +1,18 @@
-name: ATLA MENTOR local-answer regression
+name: ATLA MENTOR local-answer regression (migration-aware)
 on:
   push:
     branches:
       - fix/atla-mentor-presence-local-fallback-20261103
     paths:
-      - 'scripts/verify-mentor-presence-browser.mjs'
+      - 'scripts/verify-atla-presence-browser.mjs'
       - '.github/workflows/atla-mentor-presence-regression.yml'
   pull_request:
     paths:
-      - 'scripts/verify-mentor-presence-browser.mjs'
+      - 'scripts/verify-atla-presence-browser.mjs'
       - 'mentor/presence/**'
       - 'mentor/core/quick-answer.mjs'
+      - 'atla/assistant.mjs'
+      - 'scripts/verify-mentor-layout-browser.mjs'
 permissions:
   contents: read
 concurrency:
@@ -25,11 +27,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify test syntax
-        run: node --check scripts/verify-mentor-presence-browser.mjs
+      - name: Verify legacy and replacement test syntax
+        run: |
+          node --check scripts/verify-atla-presence-browser.mjs
+          node --check scripts/verify-mentor-layout-browser.mjs
       - name: Install real Chromium
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: Run offline MENTOR presence regression on desktop and mobile
-        run: node scripts/verify-mentor-presence-browser.mjs
+      # The integration intentionally removes the old floating MENTOR presence.
+      # Test the replacement ATLA entry and the retained legacy learning URLs;
+      # keep the old presence regression available for the original main surface.
+      - name: Run real-browser ATLA replacement and legacy route regression
+        run: node scripts/verify-mentor-layout-browser.mjs

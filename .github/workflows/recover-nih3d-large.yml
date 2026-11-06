@@ -14,11 +14,12 @@ on:
       - 'scripts/test_nih3d_stream_restore.py'
   schedule:
     - cron: '17 * * * *'
+    - cron: '47 * * * *'
 permissions:
   actions: read
   contents: write
 concurrency:
-  group: ekab-nih3d-historical-streamed-rescue
+  group: ${{ github.event_name == 'pull_request' && format('ekab-nih3d-verify-pr-{0}', github.event.pull_request.number) || 'ekab-nih3d-historical-streamed-rescue' }}
   cancel-in-progress: false
 jobs:
   tests:
@@ -67,7 +68,7 @@ jobs:
     timeout-minutes: 180
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 10
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
@@ -85,3 +86,19 @@ jobs:
           python scripts/nih3d_stream_restore.py recover
           --artifact ${{ matrix.id }}
           --start ${{ matrix.start }}
+  # GitHub skips scheduled runs under load, so a run with work left starts the next one itself.
+  continue:
+    needs: [plan, restore]
+    if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.plan.result == 'success' && needs.plan.outputs.count != '0' && !cancelled()
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: write
+    steps:
+      - name: Start the next rescue batch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # A batch that rescued nothing would only repeat itself, so it waits for the schedule instead.
+        run: |
+          rescued=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs?per_page=100" --jq '[.jobs[]|select((.name|startswith("restore"))and .conclusion=="success")]|length')
+          if [ "$rescued" = 0 ]; then echo "No range was rescued in this run; leaving the next attempt to the schedule."; exit 0; fi
+          gh workflow run recover-nih3d-large.yml --repo "$GITHUB_REPOSITORY" --ref main

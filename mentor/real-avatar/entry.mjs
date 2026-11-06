@@ -215,7 +215,7 @@ export async function mountRealMentor(doc=document,{loadModel=null,onReady=()=>{
     photo.setAttribute("aria-hidden","true");
     canvas.hidden=false;
     active=true;
-    if(stageLabel)stageLabel.textContent="MENTOR · ΖΩΝΤΑΝΟ 3D";
+    if(stageLabel)stageLabel.textContent="ATLA · ΖΩΝΤΑΝΟ 3D";
     status.textContent="Πλήρες τρισδιάστατο rig και μορφές προσώπου ενεργά. Η φωνή συσκευής δεν δίνει ακριβή χρονοσήματα φωνημάτων.";
     toggle.setAttribute("aria-pressed","true");
     restore.setAttribute("aria-pressed","false");

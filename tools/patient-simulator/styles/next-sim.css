@@ -162,3 +162,13 @@ body{background:radial-gradient(ellipse at 50% -18%,#1d5260 0%,#0b2532 36%,#0613
 .next-ready-status:empty{display:none}
 @media(max-width:820px){.next-ready-overlay model-viewer{height:100%}}
 @media(max-width:560px){.next-ready-toggle{flex:1;min-width:0}.next-ready-controls{top:10px;left:9px;max-width:calc(100% - 18px)}.next-ready-controls select{max-width:130px}.next-ready-legal{left:9px;right:9px;bottom:10px;font-size:.62rem}}
+
+.next-practical-heading{margin:18px 0 8px}
+.next-case-practical{display:grid;gap:4px;margin:10px 0;font-size:.9rem}
+.next-case-practical[hidden]{display:none}
+.next-case-practical span{display:block}
+.next-practice-steps{margin:6px 0;padding-left:0;list-style:none}
+.next-practice-steps li{margin:6px 0}
+.next-return{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid currentColor;font-weight:700;text-decoration:none}
+.next-return[hidden]{display:none}
+.next-practice-intro,.next-practice-steps{grid-column:1/-1}

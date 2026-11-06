@@ -51,6 +51,8 @@ function el(tag,attrs={},children=[]){
 
 function boot(){
  if(alreadyPresent())return;
+ // Inside ATLA this widget is the 3D body only: ATLA owns the conversation and the entry button.
+ const embedded=window.__atlaPresenceEmbedded===true;
 
  let prefs=parsePrefs(readStorage());
  let frame=null,dragging=null,menuOpen=false,askOpen=false,voice=null;
@@ -65,32 +67,32 @@ function boot(){
  const live=el("div",{class:"emp-live",role:"status","aria-live":"polite"});
 
  const grip=el("button",{type:"button",class:"emp-grip",
-  "aria-label":"MENTOR. Μετακίνηση: σύρε ή χρησιμοποίησε τα βέλη"},[el("span",{"aria-hidden":"true",text:"⠿"}),el("span",{class:"emp-grip-text",text:"MENTOR"})]);
- const askBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Ρώτα τον MENTOR","aria-expanded":"false","aria-controls":"ekab-mentor-ask",text:"💬"});
- const menuBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Επιλογές θέσης MENTOR","aria-haspopup":"true","aria-expanded":"false",text:"⋯"});
- const minBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Ελαχιστοποίηση MENTOR",text:"–"});
- const hideBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Απόκρυψη MENTOR",text:"✕"});
+  "aria-label":"ATLA. Μετακίνηση: σύρε ή χρησιμοποίησε τα βέλη"},[el("span",{"aria-hidden":"true",text:"⠿"}),el("span",{class:"emp-grip-text",text:"ATLA"})]);
+ const askBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Ρώτα τον ATLA","aria-expanded":"false","aria-controls":"ekab-mentor-ask",text:"💬"});
+ const menuBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Επιλογές θέσης ATLA","aria-haspopup":"true","aria-expanded":"false",text:"⋯"});
+ const minBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Ελαχιστοποίηση ATLA",text:"–"});
+ const hideBtn=el("button",{type:"button",class:"emp-btn","aria-label":"Απόκρυψη ATLA",text:"✕"});
  const bar=el("div",{class:"emp-bar"},[grip,askBtn,menuBtn,minBtn,hideBtn]);
  const status=el("p",{class:"emp-status",role:"status",text:"Φόρτωση 3D εκπαιδευτή…"});
  const ctxLine=el("p",{class:"emp-ctx"});
  const ctxToggle=el("button",{type:"button",class:"emp-link","aria-pressed":"true",text:"Απενεργοποίηση"});
- const journeyLink=el("a",{class:"emp-link",hidden:true,text:"↗ Συνέχισε αυτό το θέμα στο MENTOR | LAB"});
- const askInput=el("input",{type:"text",class:"emp-input",maxlength:"300",autocomplete:"off","aria-label":"Ερώτηση προς τον MENTOR",placeholder:"Π.χ. Τι είναι η ΚΑΡΠΑ;"});
- const micBtn=el("button",{type:"button",class:"emp-mic","aria-pressed":"false","aria-label":"Μίλησε στον MENTOR (ενεργοποιεί το μικρόφωνο)",text:"🎙"});
+ const journeyLink=el("a",{class:"emp-link",hidden:true,text:"↗ Συνέχισε αυτό το θέμα στο ATLA | LAB"});
+ const askInput=el("input",{type:"text",class:"emp-input",maxlength:"300",autocomplete:"off","aria-label":"Ερώτηση προς τον ATLA",placeholder:"Π.χ. Τι είναι η ΚΑΡΠΑ;"});
+ const micBtn=el("button",{type:"button",class:"emp-mic","aria-pressed":"false","aria-label":"Μίλησε στον ATLA (ενεργοποιεί το μικρόφωνο)",text:"🎙"});
  const askSend=el("button",{type:"submit",class:"emp-send",text:"Ρώτα"});
  const askForm=el("form",{class:"emp-form"},[askInput,micBtn,askSend]);
  const selBtn=el("button",{type:"button",class:"emp-link",text:"Εξήγησε την επιλογή μου"});
  const stopVoiceBtn=el("button",{type:"button",class:"emp-link",text:"■ Σίγαση",hidden:true});
  const clearBtn=el("button",{type:"button",class:"emp-link",text:"Διαγραφή συνομιλίας"});
  const micState=el("p",{class:"emp-mic-state",role:"status","aria-live":"polite",hidden:true});
- const logEl=el("div",{class:"emp-log",role:"log","aria-live":"polite","aria-label":"Συνομιλία με τον MENTOR"});
+ const logEl=el("div",{class:"emp-log",role:"log","aria-live":"polite","aria-label":"Συνομιλία με τον ATLA"});
  const navBox=el("div",{class:"emp-nav",hidden:true});
  const levelSel=el("select",{class:"emp-select","aria-label":"Επίπεδο εξήγησης"},
   Object.entries(LEVEL_LABELS).map(([v,l])=>el("option",{value:v,text:l})));
  const autoSpeakBox=el("input",{type:"checkbox",id:"emp-autospeak"});
  const focusBox=el("input",{type:"checkbox",id:"emp-focus"});
  const settings=el("details",{class:"emp-settings"},[
-  el("summary",{text:"Ρυθμίσεις MENTOR"}),
+  el("summary",{text:"Ρυθμίσεις ATLA"}),
   el("label",{},[el("span",{text:"Επίπεδο: "}),levelSel]),
   el("label",{class:"emp-check"},[autoSpeakBox,el("span",{text:"Ανάγνωση απαντήσεων με φωνή"})]),
   el("label",{class:"emp-check"},[focusBox,el("span",{text:"Ελαχιστοποίηση σε σελίδες εξέτασης"})]),
@@ -100,11 +102,11 @@ function boot(){
   [el("div",{class:"emp-ctxrow"},[ctxLine,ctxToggle]),journeyLink,logEl,navBox,askForm,micState,
    el("div",{class:"emp-actions"},[selBtn,stopVoiceBtn,clearBtn]),settings]);
  const stage=el("div",{class:"emp-stage"},[status,askPanel]);
- const resize=el("button",{type:"button",class:"emp-resize","aria-label":"Αλλαγή μεγέθους MENTOR (βέλη ή + και −)"});
- const menu=el("div",{class:"emp-menu",role:"group","aria-label":"Θέση MENTOR",hidden:true});
- const root=el("aside",{class:"ekab-mentor-presence","aria-label":"MENTOR — ψηφιακός εκπαιδευτής",hidden:true},[bar,stage,resize,menu]);
- const launcher=el("button",{type:"button",class:"ekab-mentor-launcher","aria-label":"Άνοιγμα του MENTOR",hidden:true},
-  [el("span",{class:"emp-dot","aria-hidden":"true"}),el("span",{text:"MENTOR"})]);
+ const resize=el("button",{type:"button",class:"emp-resize","aria-label":"Αλλαγή μεγέθους ATLA (βέλη ή + και −)"});
+ const menu=el("div",{class:"emp-menu",role:"group","aria-label":"Θέση ATLA",hidden:true});
+ const root=el("aside",{class:"ekab-mentor-presence","aria-label":"ATLA — ψηφιακός εκπαιδευτής",hidden:true},[bar,stage,resize,menu]);
+ const launcher=el("button",{type:"button",class:"ekab-mentor-launcher","aria-label":"Άνοιγμα του ATLA",hidden:true},
+  [el("span",{class:"emp-dot","aria-hidden":"true"}),el("span",{text:"ATLA"})]);
 
  function menuItem(label,action,pressed){
   const b=el("button",{type:"button","aria-pressed":String(!!pressed),text:label});
@@ -167,7 +169,7 @@ function boot(){
  function render(){
   const open=prefs.visibility==="shown";
   root.hidden=!open;
-  launcher.hidden=prefs.visibility!=="minimized";
+  launcher.hidden=embedded||prefs.visibility!=="minimized";
   if(open){
    const box=currentBox();
    root.dataset.mode=prefs.mode;
@@ -188,7 +190,7 @@ function boot(){
 
  function mountFrame(){
   if(frame)return;
-  frame=el("iframe",{src:FRAME_SRC,title:"Ζωντανή τρισδιάστατη μορφή του εκπαιδευτή MENTOR",loading:"lazy",allow:""});
+  frame=el("iframe",{src:FRAME_SRC,title:"Ζωντανή τρισδιάστατη μορφή του εκπαιδευτή ATLA",loading:"lazy",allow:""});
   stage.append(frame);
   status.hidden=false;
   status.textContent="Φόρτωση 3D εκπαιδευτή…";
@@ -230,9 +232,9 @@ function boot(){
  }
 
  const api={
-  show(){set({visibility:"shown"},"Ο MENTOR εμφανίστηκε");grip.focus({preventScroll:true});},
-  minimize(){voice?.stopAll();set({visibility:"minimized"},"Ο MENTOR ελαχιστοποιήθηκε");launcher.focus({preventScroll:true});},
-  hide(){voice?.stopAll();set({visibility:"hidden"},"Ο MENTOR κρύφτηκε. Alt+Shift+M για επαναφορά");},
+  show(){set({visibility:"shown"},"Ο ATLA εμφανίστηκε");grip.focus({preventScroll:true});},
+  minimize(){voice?.stopAll();set({visibility:"minimized"},"Ο ATLA ελαχιστοποιήθηκε");launcher.focus({preventScroll:true});},
+  hide(){voice?.stopAll();set({visibility:"hidden"},"Ο ATLA κρύφτηκε. Alt+Shift+M για επαναφορά");},
   restore(){api.show();},
   toggle(){prefs.visibility==="shown"?api.minimize():api.show();},
   pin(corner){
@@ -242,6 +244,9 @@ function boot(){
   float(){set({visibility:"shown",mode:"floating"},"Ελεύθερη μετακίνηση");},
   dock(){set({visibility:"shown",mode:"docked"},"Προσαρτήθηκε στο πλάι");},
   getState(){return structuredClone(prefs);},
+  speak(text){return voice.speak(text);},
+  stopSpeaking(){voice?.stopSpeaking();},
+  cueTurn(turn){sendCue(cueForTurn(turn));},
   destroy(){unmountFrame();applyDockPadding({});root.remove();launcher.remove();probe.remove();live.remove();delete window.__ekabMentorPresence;}
  };
 
@@ -312,7 +317,7 @@ function boot(){
  function paintTurns(){
   logEl.replaceChildren(...turns.map(t=>{
    const row=el("div",{class:"emp-turn emp-"+t.role+(t.mode==="refusal"?" is-refusal":"")});
-   row.append(el("span",{class:"emp-who",text:t.role==="user"?"Εσύ":"MENTOR"+(t.mode==="ai"?" · AI":"")}),el("p",{text:t.text}));
+   row.append(el("span",{class:"emp-who",text:t.role==="user"?"Εσύ":"ATLA"+(t.mode==="ai"?" · AI":"")}),el("p",{text:t.text}));
    if(t.role==="mentor"&&t.reason!=="exam"){
     const listen=el("button",{type:"button",class:"emp-link emp-listen","aria-label":"Άκουσε αυτή την απάντηση",text:"🔊 Άκουσε"});
     listen.addEventListener("click",()=>{const r=voice.speak(t.text);if(!r.ok)announce("Δεν βρέθηκε ελληνική φωνή σε αυτή τη συσκευή.");});
@@ -392,6 +397,7 @@ function boot(){
   finally{askSend.disabled=selBtn.disabled=false;}
  }
  askBtn.addEventListener("click",()=>setAsk(!askOpen));
+ if(embedded)for(const button of [askBtn,minBtn,hideBtn])button.style.display="none";
  askForm.addEventListener("submit",event=>{event.preventDefault();ask("");});
  askInput.addEventListener("input",()=>voice.stopSpeaking());
  // Keeps the learner's text selection alive when the button is pressed.
@@ -545,6 +551,7 @@ function boot(){
  window.addEventListener("orientationchange",()=>setTimeout(render,200));
  document.addEventListener("keydown",event=>{
   if(event.key==="Escape"&&menuOpen){closeMenu();menuBtn.focus();return;}
+  if(embedded)return;
   if(event.key==="Escape"&&prefs.visibility==="shown"&&root.contains(document.activeElement)){api.minimize();return;}
   if(event.altKey&&event.shiftKey&&event.key.toLowerCase()==="m"){event.preventDefault();api.toggle();}
  });

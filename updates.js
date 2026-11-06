@@ -66,7 +66,9 @@ document.addEventListener('click',event=>{
   if(event.target.closest('#checkAppUpdates'))check();
 });$('applyUpdate')?.addEventListener('click',apply);$('dismissUpdate')?.addEventListener('click',()=>{$('updateBanner').hidden=true});
 if(!('serviceWorker'in navigator)||location.protocol==='file:'){report('Έκδοση v'+CURRENT+' · Ο offline μηχανισμός δεν υποστηρίζεται εδώ.');return}
-try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying)return;location.reload()});registration.addEventListener('updatefound',()=>{const worker=registration.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)check()})});await check();window.addEventListener('online',check);setInterval(()=>{if(document.visibilityState==='visible')check()},CHECK_INTERVAL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()})}catch(e){report('Έκδοση v'+CURRENT+' · Αδυναμία εγγραφής ενημερώσεων.');}}
+// A first visit gains its first worker with nothing stale to replace, so it must not reload the page.
+const hadController=!!navigator.serviceWorker.controller;
+try{registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(applying||!hadController)return;location.reload()});registration.addEventListener('updatefound',()=>{const worker=registration.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)check()})});await check();window.addEventListener('online',check);setInterval(()=>{if(document.visibilityState==='visible')check()},CHECK_INTERVAL_MS);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()})}catch(e){report('Έκδοση v'+CURRENT+' · Αδυναμία εγγραφής ενημερώσεων.');}}
 window.EkabUpdates={check,version:CURRENT};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
