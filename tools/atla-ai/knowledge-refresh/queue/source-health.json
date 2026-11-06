@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-06T09:24:19.664Z",
+  "checked_at": "2026-11-06T14:08:09.874Z",
   "sources": [
     {
       "url": "https://cdn.who.int/media/docs/default-source/integrated-health-services-%28ihs%29/csy/prehospital/bap-syllabus-2025.pdf",
@@ -78,12 +78,12 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "W/\"512dfb04d6d030e86ddd1b243c8dd1dd\"",
+      "etag": "W/\"f3a54bf3cf6dd53499caf27ef5cc195e\"",
       "last_modified": "",
       "final_url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "W/\"512dfb04d6d030e86ddd1b243c8dd1dd\"",
+      "last_successful_etag": "W/\"f3a54bf3cf6dd53499caf27ef5cc195e\"",
       "last_successful_last_modified": "",
       "signal": "possible-source-update"
     },
@@ -118,16 +118,12 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": true,
-      "http_status": 200,
-      "etag": "",
-      "last_modified": "",
-      "final_url": "https://kdigo.org/guidelines/",
-      "reason": "",
+      "ok": false,
+      "reason": "The operation was aborted due to timeout",
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "",
-      "signal": "no-confirmed-change"
+      "signal": "unverified"
     },
     {
       "url": "https://naemt.org/education/medical-education/amls",
@@ -236,7 +232,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Thu, 05 Nov 2026 16:30:28 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://shop.elsevier.com/books/guyton-and-hall-textbook-of-medical-physiology/hall/978-0-443-11101-3",
@@ -421,13 +417,13 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1793954999-gzip\"",
-      "last_modified": "Fri, 06 Nov 2026 08:49:59 GMT",
+      "etag": "\"1793974103\"",
+      "last_modified": "Fri, 06 Nov 2026 14:08:23 GMT",
       "final_url": "https://www.ecdc.europa.eu/en/publications-data",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1793954999-gzip\"",
-      "last_successful_last_modified": "Fri, 06 Nov 2026 08:49:59 GMT",
+      "last_successful_etag": "\"1793974103\"",
+      "last_successful_last_modified": "Fri, 06 Nov 2026 14:08:23 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -459,13 +455,13 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1793956787-gzip\"",
-      "last_modified": "Fri, 06 Nov 2026 09:19:47 GMT",
+      "etag": "\"1793973392-gzip\"",
+      "last_modified": "Fri, 06 Nov 2026 13:56:32 GMT",
       "final_url": "https://www.ema.europa.eu/en/medicines",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1793956787-gzip\"",
-      "last_successful_last_modified": "Fri, 06 Nov 2026 09:19:47 GMT",
+      "last_successful_etag": "\"1793973392-gzip\"",
+      "last_successful_last_modified": "Fri, 06 Nov 2026 13:56:32 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -509,7 +505,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Thu, 05 Nov 2026 06:28:03 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines",
@@ -551,7 +547,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "W/\"wao0tr8ta83rs7\"",
       "last_successful_last_modified": "",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.idsociety.org/PracticeGuidelines",
@@ -721,7 +717,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "\"13smiq2tf9w2nvf\"",
       "last_successful_last_modified": "",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.psglearning.com/catalog/productdetails/9781284256789",
@@ -787,7 +783,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Thu, 05 Nov 2026 21:20:52 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/publications/i/item/9789241513081",
@@ -823,12 +819,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Thu, 05 Nov 2026 20:36:08 GMT",
+      "last_modified": "Fri, 06 Nov 2026 09:14:51 GMT",
       "final_url": "https://www.who.int/publications/who-guidelines",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Thu, 05 Nov 2026 20:36:08 GMT",
+      "last_successful_last_modified": "Fri, 06 Nov 2026 09:14:51 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -850,7 +846,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Thu, 05 Nov 2026 15:44:13 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit",
@@ -871,7 +867,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Thu, 05 Nov 2026 17:24:22 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/tools/clinical-checklists",
@@ -886,12 +882,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Thu, 05 Nov 2026 15:49:38 GMT",
+      "last_modified": "Fri, 06 Nov 2026 10:56:35 GMT",
       "final_url": "https://www.who.int/tools/clinical-checklists",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Thu, 05 Nov 2026 15:49:38 GMT",
+      "last_successful_last_modified": "Fri, 06 Nov 2026 10:56:35 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -907,12 +903,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Fri, 06 Nov 2026 09:11:12 GMT",
+      "last_modified": "Fri, 06 Nov 2026 14:08:38 GMT",
       "final_url": "https://www.who.int/tools/triage",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Fri, 06 Nov 2026 09:11:12 GMT",
+      "last_successful_last_modified": "Fri, 06 Nov 2026 14:08:38 GMT",
       "signal": "possible-source-update"
     },
     {
