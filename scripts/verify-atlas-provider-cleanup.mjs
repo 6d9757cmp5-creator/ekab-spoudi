@@ -7,8 +7,8 @@ test('retired BioDigital files are not deployed and native anatomy remains',()=>
  for(const p of ["tools/anatomy-3d/biodigital-bridge.html","tools/anatomy-3d/biodigital-bridge.mjs","tools/anatomy-3d/biodigital-bridge-core.mjs","tools/anatomy-3d/biodigital-bridge.test.mjs","tools/anatomy-3d/vendor/biodigital-human-api-3.0.0.min.js","tools/anatomy-3d/vendor/BIODIGITAL_HUMAN_API_LICENSE.txt",".github/workflows/atla-biodigital-bridge.yml"])assert.equal(existsSync(p),false,p);
  const canonical=read('tools/anatomy-3d/index.html');
  assert.doesNotMatch(canonical,/biodigital-bridge/);
- assert.match(canonical,/src="hires-anatomy\\.js\\?/);
- assert.match(read('ui-tools/anatomy-3d/index.html'),/tools\\/anatomy-3d\\/hires-anatomy\\.js/);
+ assert.ok(canonical.includes('src="hires-anatomy.js?'),'canonical anatomy viewer must load');
+ assert.ok(read('ui-tools/anatomy-3d/index.html').includes('tools/anatomy-3d/hires-anatomy.js?'),'public anatomy viewer must share engine');
  assert.ok(existsSync('tools/atla-ai/resources/model-library.json'));
 });
 test('video asset selection uses only approved non-provider anatomy',()=>{
@@ -26,6 +26,6 @@ test('ATLAS is the visible name of the one teaching assistant',()=>{
  assert.match(read('paramedic.html'),/Ρώτησε τον ATLAS/);
  const tutor=read('atla/assistant.mjs');
  assert.match(tutor,/Γεια σου, είμαι ο ATLAS/);
- assert.match(tutor,/window\\.__ekabAtlaAssistant/);
+ assert.ok(tutor.includes('window.__ekabAtlaAssistant'),'one assistant instance guard');
  assert.equal((read('paramedic.html').match(/data-atla-open/g)||[]).length,1);
 });
