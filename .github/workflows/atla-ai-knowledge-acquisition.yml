@@ -34,6 +34,11 @@ jobs:
             docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md
             docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md
             official_questions.json
+            tools/anatomy-3d/resources/imported-manifest.json
+            tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ovary_R.glb
+            tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Thymus.glb
+            tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Pancreas.glb
+            tools/anatomy-3d/resources/hra-v1.2/limbs/VH_F_Knee_L.glb
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -44,6 +49,9 @@ jobs:
           node --check tools/atla-ai/knowledge-refresh/scientific-qa.mjs
           node --test tools/atla-ai/knowledge-refresh/scan.test.mjs tools/atla-ai/knowledge-refresh/pipeline.test.mjs tools/atla-ai/knowledge-refresh/scientific-qa.test.mjs tools/atla-ai/knowledge-refresh/upstream-evidence.test.mjs
           node --test scripts/test-educational-scientific-review.mjs
+          node --test tools/atla-ai/knowledge-refresh/verify-originals.test.mjs
+      - name: Independently verify HRA source originals (read-only, no AI charge)
+        run: node tools/atla-ai/knowledge-refresh/verify-originals.mjs
           # Legacy checked-in 2026-11-02 scan lacks the newer topic-count field.
           # Deterministic unit tests run here; the unified scientific audit runs
           # on the FRESH current PubMed scan in live-full-discovery, fail-closed.
