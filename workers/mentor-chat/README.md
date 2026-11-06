@@ -1,6 +1,6 @@
 # MENTOR chat Worker
 
-Grounded, educational Greek answers through Cloudflare Workers AI. **Disabled by default**; the site ships with `mentor/ai/config.mjs` → `endpoint: ""`, so no AI request is made.
+Grounded, educational Greek answers through Cloudflare Workers AI. Live on the Cloudflare free plan; the site reaches it through `endpoint` in `atla/ai/config.mjs`. Claude stays off.
 
 ## What the owner must do (human steps)
 1. Cloudflare account on the **Workers Free** plan; confirm no paid billing is attached.

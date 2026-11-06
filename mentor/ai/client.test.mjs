@@ -6,8 +6,8 @@ import {MENTOR_AI} from "./config.mjs";
 const passages=[{id:"T1",term:"ΚΑΡΠΑ",definition:"Ορισμός.",source:"https://x.example",score:9}];
 const sse=chunks=>new Response(new ReadableStream({start(c){for(const x of chunks)c.enqueue(new TextEncoder().encode(x));c.close();}}),{status:200,headers:{"content-type":"text/event-stream"}});
 
-test("shipped config keeps AI disabled until the owner sets an endpoint",()=>{
- assert.equal(MENTOR_AI.endpoint,"");
+test("shipped config uses only the deployed chat Worker",()=>{
+ assert.equal(MENTOR_AI.endpoint,"https://ekab-spoudi-mentor-chat.6d9757cmp5.workers.dev/");
 });
 
 test("payload carries only question, passages, level and short history",()=>{
