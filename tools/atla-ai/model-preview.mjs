@@ -11,7 +11,7 @@ const back=$('source-back');
 back.href=safeReturnHref(params.get('from'),location.href,tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html');
 if(params.get('dataset')==='nih')dataset.value='nih';
 let deepLinkModel=params.get('dataset')==='nih'?params.get('model'):null;
-$('source-name').textContent=tool==='anatomy'?'Εργαστήριο Ανατομίας · HRA 3D':'Κλινικός Προσομοιωτής · 3D αρχεία';
+$('source-name').textContent=tool==='anatomy'?'Βιβλιοθήκη 3D Μοντέλων · Ανατομία':'Βιβλιοθήκη 3D Μοντέλων · Προσομοίωση';
 $('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
 let assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
 const partSelect=$('source-part'),animationSelect=$('source-clip'),opacity=$('source-opacity');
