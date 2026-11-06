@@ -78,17 +78,12 @@ test('rejects truncated cited output and duplicate or post-terminal events',asyn
 
 test('reads OpenAI-style Workers AI chunks and their usage-only final event',async()=>{
  const chunk=content=>event({id:'x',choices:[{index:0,delta:{content}}],usage:{neurons:1},response:''});
- const result=await collectAndAuditAiStream(streamOf([chunk('Η ΚΑΡΠΑ '),chunk('είναι εκπαιδευτικός ορισμός [Τ1].'),event({choices:[],usage:{total_tokens:9}}),'data: [DONE]
-
-']),passages);
+ const result=await collectAndAuditAiStream(streamOf([chunk('Η ΚΑΡΠΑ '),chunk('είναι εκπαιδευτικός ορισμός [T1].'),event({choices:[],usage:{total_tokens:9}}),'data: [DONE]\n\n']),passages);
  assert.equal(result.ok,true);
- assert.equal(result.text,'Η ΚΑΡΠΑ είναι εκπαιδευτικός ορισμός [Τ1].');
+ assert.equal(result.text,'Η ΚΑΡΠΑ είναι εκπαιδευτικός ορισμός [T1].');
 });
 
 test('still rejects an event of unknown shape',async()=>{
- const result=await collectAndAuditAiStream(streamOf([event({something:'else'}),'data: [DONE]
-
-']),passages);
+ const result=await collectAndAuditAiStream(streamOf([event({something:'else'}),'data: [DONE]\n\n']),passages);
  assert.equal(result.ok,false);
 });
-

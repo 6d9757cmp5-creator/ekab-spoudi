@@ -40,5 +40,5 @@ test('ATLAS is optional, synthetic cases are still simulator-owned',()=>{
  const bridge=read('atla/practice/cockpit-entry.mjs');
  assert.doesNotMatch(bridge,/execute\(|setFocus\(|saveSession\(|patientVitals\(/);
  const ai=read('atla/ai/config.mjs');
- assert.match(ai,/endpoint:""/);
+ assert.match(ai,/endpoint:"https:\/\/ekab-spoudi-mentor-chat\.6d9757cmp5\.workers\.dev\/"/);
 });
