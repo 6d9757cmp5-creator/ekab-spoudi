@@ -135,15 +135,28 @@ $('source-canvas').addEventListener('pointerup',event=>{
  }
  pointerStart=null;
 });
-/** Every locally delivered 3D file is checked against the central registry SHA-256 before parsing. */
+/** Verify SHA-256; legacy patient meshes use the original Git blob SHA-1. */
+async function matchesRegistryHash(item,bytes){
+ const integrity=item?.integrity;
+ if(!integrity||!['sha256','gitBlobSha'].includes(integrity.algorithm))return false;
+ let payload=bytes;
+ if(integrity.algorithm==='gitBlobSha'){
+  const header=new TextEncoder().encode('blob '+bytes.byteLength+'\0');
+  const combined=new Uint8Array(header.byteLength+bytes.byteLength);
+  combined.set(header,0);combined.set(new Uint8Array(bytes),header.byteLength);
+  payload=combined;
+ }
+ const digest=await crypto.subtle.digest(integrity.algorithm==='sha256'?'SHA-256':'SHA-1',payload);
+ const actual=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');
+ return actual===integrity.value;
+}
+/** Verify bytes BEFORE parsing to avoid accepting a mismatched 3D model. */
 async function loadVerifiedGlb(item,url){
  const response=await fetch(url);
  if(!response.ok)throw Error('Το αρχείο δεν είναι διαθέσιμο (HTTP '+response.status+').');
  const bytes=await response.arrayBuffer();
  if(bytes.byteLength!==item.bytes)throw Error('Το μέγεθος του αρχείου δεν ταιριάζει με το μητρώο.');
- const digest=await crypto.subtle.digest('SHA-256',bytes);
- const hex=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');
- if(!item.integrity||hex!==item.integrity.value)throw Error('Το αρχείο απέτυχε στον έλεγχο ακεραιότητας SHA-256.');
+ if(!await matchesRegistryHash(item,bytes))throw Error('Το αρχείο απέτυχε στον έλεγχο ακεραιότητας του μητρώου.');
  return loader.parseAsync(bytes,'');
 }
 function showDetails(item){
@@ -225,9 +238,7 @@ button.addEventListener('click',async()=>{
    if(!response.ok)throw Error('HTTP '+response.status);
    const bytes=await response.arrayBuffer();
    if(bytes.byteLength!==item.bytes)throw Error('Το μέγεθος του αρχείου δεν ταιριάζει.');
-   const digest=await crypto.subtle.digest('SHA-256',bytes);
-   const hex=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');
-   if(hex!==item.integrity?.value)throw Error('Αποτυχία SHA-256 για το OBJ.');
+   if(!await matchesRegistryHash(item,bytes))throw Error('Αποτυχία ελέγχου ακεραιότητας για το OBJ.');
    model={scene:new OBJLoader().parse(new TextDecoder().decode(bytes)),animations:[]};
   }else model=await loadVerifiedGlb(item,modelUrl);
   if(current!==loadVersion){model.scene.traverse(n=>{n.geometry?.dispose?.();if(n.material)(Array.isArray(n.material)?n.material:[n.material]).forEach(m=>m.dispose?.())});return;}

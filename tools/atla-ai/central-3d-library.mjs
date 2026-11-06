@@ -7,9 +7,9 @@ const SHA256=/^[a-f0-9]{64}$/i;
 const ALLOWED_PATH=/^[A-Za-z0-9/_.-]+$/;
 const bytesOK=x=>Number.isSafeInteger(x)&&x>=1000&&x<=250*1024*1024;
 const simple=s=>String(s??'').normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el').replace(/ς/g,'σ').replace(/[_-]+/g,' ').trim();
-const deliveryOK=d=>Boolean(d&&typeof d.path==='string'&&
+const deliveryOK=(d,source='')=>Boolean(d&&typeof d.path==='string'&&
  ALLOWED_PATH.test(d.path)&&!d.path.startsWith('/')&&!d.path.includes('..')&&!d.path.includes('//')&&
- /\.(?:glb|obj)$/i.test(d.path)&&bytesOK(d.bytes)&&SHA256.test(d.sha256||''));
+ /\.(?:glb|obj)$/i.test(d.path)&&bytesOK(d.bytes)&&(SHA256.test(d.sha256||'')||(source==='patients'&&/^[a-f0-9]{40}$/i.test(d.sha256||''))));
 const knownSources=Object.freeze({
  nih3d:'NIH 3D',hra:'HRA/HuBMAP','z-anatomy':'Z-Anatomy',
  quaternius:'Quaternius',patients:'Ασθενείς CC0',makehuman:'MakeHuman',
@@ -28,7 +28,7 @@ export function audit3DLibrary(library){
   const sourceKnown=Object.hasOwn(knownSources,source);
   const duplicateId=!id||ids.has(id);
   ids.add(id);
-  const validDelivery=deliveryOK(m?.delivery);
+  const validDelivery=deliveryOK(m?.delivery,source);
   const missingRights=!String(m?.license||'').trim();
   const anomaly=!sourceKnown||duplicateId||missingRights||(m?.delivery!=null&&!validDelivery);
   const restricted=Boolean(m?.restrictionCode||source==='z-anatomy');
@@ -36,7 +36,7 @@ export function audit3DLibrary(library){
   statuses.push({id,source,state,label:String(m?.label||''),bytes:validDelivery?m.delivery.bytes:0});
   bySource[source]=(bySource[source]||0)+1;
   if(validDelivery){
-   const sha=m.delivery.sha256.toLowerCase();
+   const sha=(source==='patients'?'gitblob:':'sha256:')+m.delivery.sha256.toLowerCase();
    if(shaSeen.has(sha))duplicateContent.push({first:shaSeen.get(sha),second:id,sha256:sha});
    else shaSeen.set(sha,id);
   }

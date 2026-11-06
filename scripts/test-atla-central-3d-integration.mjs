@@ -15,6 +15,8 @@ test('the shared library supplies all existing source viewer datasets without pe
   assert.equal(rows.length,count,tool+'/'+dataset);
   assert(rows.every(a=>a.available&&a.tool===tool),'available assets must be in proper tool namespace');
   for(const row of rows)assert.equal(safeAssetUrl(row,row.tool,'https://example.org/ekab/').origin,'https://example.org');
+  if(tool==='cockpit'&&dataset==='secondary')assert(rows.every(x=>x.integrity.algorithm==='gitBlobSha'));
+  else assert(rows.every(x=>x.integrity.algorithm==='sha256'));
  }
  const all=sharedRegistryAssets(lib,{tool:'anatomy',dataset:'all'});
  assert.equal(all.length,lib.models.length);
