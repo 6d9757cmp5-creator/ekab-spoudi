@@ -43,6 +43,31 @@ export function retrieve(question,items,{k=4,minScore=3}={}){
  }));
 }
 
+/** Share of the question's words found in the item's own names, 0 to 1. A term that names only part of the question is not its answer. */
+export function nameCoverage(question,item){
+ const q=[...new Set(tokens(String(question||"").slice(0,300)).map(stem))];
+ if(!q.length||!item)return 0;
+ const names=new Set(tokens([item.term,item.en,...(item.symbols||[]),...(item.aliases||[])].filter(Boolean).join(" ")).map(stem));
+ return q.filter(word=>names.has(word)).length/q.length;
+}
+
+/** The part of a long text that holds the most question words, starting at a sentence. */
+export function focusSnippet(body,query,length=950){
+ const text=String(body||"");
+ if(text.length<=length)return text;
+ const wanted=[...new Set(tokens(query))];
+ const hits=[...text.matchAll(/\p{L}+/gu)].map(m=>({at:m.index,word:wanted.find(w=>norm(m[0]).includes(w))})).filter(h=>h.word);
+ if(!hits.length)return text.slice(0,length);
+ let best=hits[0].at,bestCount=0;
+ for(const hit of hits){
+  const count=new Set(hits.filter(h=>h.at>=hit.at&&h.at<hit.at+length).map(h=>h.word)).size;
+  if(count>bestCount){best=hit.at;bestCount=count;}
+ }
+ const sentence=Math.max(text.lastIndexOf(". ",best),text.lastIndexOf("; ",best));
+ const start=sentence>=0&&best-sentence<300?sentence+2:best;
+ return (start>0?"…":"")+text.slice(start,start+length);
+}
+
 const DOSE=/(δοσολογ|δοση|δοσεις|\bmg\b|\bμg\b|\bmcg\b|\bml\b|πόσα\s*(mg|ml|χιλιοστ)|να\s+(του|της|τον|την)\s+δωσω|πρεπει\s+να\s+δωσω)/i;
 const REAL_PATIENT=/(ο\s+ασθενης\s+μου|η\s+ασθενης\s+μου|εχω\s+(εναν|μια|ενα)\s+ασθεν|στο\s+περιστατικο\s+που\s+εχω|αυτη\s+τη\s+στιγμη\s+(εχω|βρισκομαι)|εκτακτη\s+αναγκη\s+τωρα|πραγματικο\s+περιστατικο|συγγενης\s+μου\s+(εχει|παθαινει))/i;
 const DIAGNOSE=/(τι\s+εχει\s+(ο|η|το)\s+\p{L}+|κανε\s+μου\s+διαγνωση|διαγνωσε|ποια\s+ειναι\s+η\s+διαγνωση\s+μου)/iu;

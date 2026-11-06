@@ -5,7 +5,7 @@
  */
 // Preserve the existing local-only spaced-review popup as the legacy shell is retired.
 import '../services/recall/popup.mjs';
-import {retrieve,riskGuard,RISK_MESSAGE} from './knowledge/retrieve.mjs';
+import {retrieve,riskGuard,RISK_MESSAGE,nameCoverage,focusSnippet} from './knowledge/retrieve.mjs';
 import {askAi,buildPayload,eligibleAiPassages} from './ai/client.mjs';
 import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
@@ -70,16 +70,22 @@ function answerFromLibrary(q){
   }
  }
  const hits=retrieve(q,terms,{k:4,minScore:3});
- if(hits.length)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
+ const direct=hits.length>0&&nameCoverage(q,terms.find(t=>t.term===hits[0].term))>=0.5;
+ if(direct)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
- const books=records.length?searchRecords(records,cleaned,'book',chapters.length?1:2).rows:[];
+ const count=chapters.length?1:2;
+ // Books inflect their terms, so a miss is retried on word stems: οστό also finds οστά.
+ const stems=cleaned.split(' ').map(word=>word.slice(0,word.length>4?-2:-1)).join(' ');
+ let books=records.length?searchRecords(records,cleaned,'book',count).rows:[];
+ if(!books.length&&records.length)books=searchRecords(records,stems,'book',count).rows;
  const hits2=[...chapters,...books];
  if(hits2.length){
-  const passages=hits2.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:c.body.slice(0,400)}));
-  return {text:hits2.map(c=>c.title+'\n'+c.body.slice(0,950)).join('\n\n'),passages,href:hits2[0].href};
+  const passages=hits2.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:focusSnippet(c.body,cleaned,400)}));
+  return {text:hits2.map(c=>c.title+'\n'+focusSnippet(c.body,cleaned)).join('\n\n'),passages,href:hits2[0].href};
  }
+ if(hits.length)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
  return {text:'Δεν βρήκα επαρκή αντιστοιχία στη διαθέσιμη τοπική βιβλιοθήκη. Μπορείς να δοκιμάσεις συγκεκριμένο ιατρικό όρο ή κωδικό ΕΟΠΠΕΠ (π.χ. EOP-A-001).',passages:[],href:null};
 }
 function boot(){
