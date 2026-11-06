@@ -7,7 +7,12 @@ const library=JSON.parse(readFileSync('tools/atla-ai/resources/model-library.jso
 const pick=context=>selectLibraryModels(library,context)[0]?.accession??null;
 const PATELLA='3DPX-000170';
 assert.equal(mountNih3dResearchReferences(),'no-dom');
-assert(selectLibraryModels(library,{surface:'lesson',courseId:'01',chapterId:'2'}).some(m=>m.accession===PATELLA));
+// The library has expanded: the chapter shows up to three highest-ranked models, not a fixed accession.
+const selectedLessonModels=selectLibraryModels(library,{surface:'lesson',courseId:'01',chapterId:'2'});
+assert(selectedLessonModels.length>0&&selectedLessonModels.length<=3,'Chapter links remain relevant and bounded');
+assert(selectedLessonModels.every(m=>m.saekChapters?.some(c=>c.chapter==='01/2')),'Top-ranked links must have evidence in the chapter');
+assert(library.models.find(m=>m.accession===PATELLA)?.saekChapters?.some(c=>c.chapter==='01/2'),
+ 'Patella remains linked to the chapter even if higher-ranked models take the three visible slots');
 assert.equal(pick({surface:'lesson',courseId:'01',chapterId:'1'}),null);
 assert.equal(pick({surface:'exam',text:'Τι γνωρίζεις για την επιγονατίδα;',revealed:false}),null);
 assert.equal(pick({surface:'exam',text:'Τι γνωρίζεις για την επιγονατίδα;',revealed:true}),PATELLA);
