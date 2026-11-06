@@ -69,6 +69,15 @@ export function chapterEvidence(chapters,model,vocabulary){
  }
  return links.sort((a,b)=>b.occurrences-a.occurrences);
 }
+/** Trauma lessons rarely name a bone and a fracture in one sentence, so these links are chosen by hand per structure. */
+export function fractureLessonLinks(model,fractureLessons={}){
+ if(model.kind!=='pathology'||model.finding!=='fracture')return [];
+ return [...new Set(model.structures.flatMap(id=>fractureLessons[id]??[]))].map(chapter=>({chapter,occurrences:1}));
+}
+export function mergeChapterLinks(evidence,chosen){
+ const known=new Set(evidence.map(link=>link.chapter));
+ return [...evidence,...chosen.filter(link=>!known.has(link.chapter))];
+}
 export function parseCourseChapters(course,html){
  const parts=html.split(/<details[^>]*\bid="lesson-(\d+)"/);
  const out=[];
@@ -170,7 +179,7 @@ async function build(stagingRoot){
    originalPage:model.originalPage,archive:{files:model.verifiedFiles.length,image:glb?.verifiedOCI.digest??null,formats:[...new Set(model.verifiedFiles.map(f=>f.format))].sort()},
    delivery:delivered?{path:delivered,bytes:glb.size,sha256:glb.sha256,format:'glb',derived:false}:null,
    restrictionCode:code,restriction:code?REASONS[code]:curated?null:'Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.',
-   surfaces,saekChapters:curated&&delivered?chapterEvidence(chapters,curated,vocabulary):[],
+   surfaces,saekChapters:curated&&delivered?mergeChapterLinks(chapterEvidence(chapters,curated,vocabulary),fractureLessonLinks(curated,curation.fractureLessons)):[],
    scopeStatus:scoped?.status??null,scientificApproval:'NOT_ESTABLISHED',clinicalUseApproved:false
   });
  }

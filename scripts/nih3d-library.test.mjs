@@ -2,7 +2,14 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import crypto from 'node:crypto';
 import {selectLibraryModels,selectAtlaVisual,safeReturnHref,viewerHref,simplify,structureHits} from '../tools/atla-ai/nih3d-library.mjs';
-import {deliveryRestriction,deliveryPriority,chapterEvidence,parseCourseChapters,MAX_MODEL_BYTES,MODELS_DIR} from './nih3d-build-library.mjs';
+import {deliveryRestriction,deliveryPriority,chapterEvidence,parseCourseChapters,fractureLessonLinks,mergeChapterLinks,MAX_MODEL_BYTES,MODELS_DIR} from './nih3d-build-library.mjs';
+
+// Chosen fracture lessons apply only to fractures and never replace text evidence.
+const lessons={tibia:['14/11'],pelvis:['14/8']};
+assert.deepEqual(fractureLessonLinks({kind:'pathology',finding:'fracture',structures:['tibia']},lessons),[{chapter:'14/11',occurrences:1}]);
+assert.deepEqual(fractureLessonLinks({kind:'anatomy',structures:['tibia']},lessons),[]);
+assert.deepEqual(fractureLessonLinks({kind:'pathology',finding:'scoliosis',structures:['pelvis']},lessons),[]);
+assert.deepEqual(mergeChapterLinks([{chapter:'14/11',occurrences:4}],[{chapter:'14/11',occurrences:1},{chapter:'14/8',occurrences:1}]),[{chapter:'14/11',occurrences:4},{chapter:'14/8',occurrences:1}]);
 
 // Delivery policy: every refusal has a specific cause.
 const glb={size:1000};
