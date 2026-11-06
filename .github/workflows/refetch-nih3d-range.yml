@@ -12,6 +12,11 @@ on:
         required: true
         default: '2'
         type: string
+      size:
+        description: 'Entries in each range; other than 100 only for SPLIT_RANGES in the rescue script'
+        required: true
+        default: '100'
+        type: string
 permissions:
   contents: read
 jobs:
@@ -34,12 +39,13 @@ jobs:
       - name: Download all published NIH 3D formats with lossless compression
         env:
           RANGE_START: ${{ matrix.start }}
+          RANGE_SIZE: ${{ inputs.size }}
         run: |
           set -euo pipefail
-          case "$RANGE_START" in *[!0-9]*|'') exit 1;; esac
-          [ $((RANGE_START % 100)) -eq 1 ] || { echo 'A range starts at xx01'; exit 1; }
+          case "$RANGE_START$RANGE_SIZE" in *[!0-9]*|'') exit 1;; esac
+          [ "$RANGE_SIZE" != 100 ] || [ $((RANGE_START % 100)) -eq 1 ] || { echo 'A range starts at xx01'; exit 1; }
           sudo apt-get update -qq && sudo apt-get install -qq -y zstd
-          node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$((RANGE_START+99))" --out="tmp/nih3d-mirror-$RANGE_START"
+          node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$((RANGE_START+RANGE_SIZE-1))" --out="tmp/nih3d-mirror-$RANGE_START"
       # Only a finished run has a RESULT manifest, so a partial download cannot replace anything.
       - name: Preserve the finished range for the rescue workflow
         uses: actions/upload-artifact@v4

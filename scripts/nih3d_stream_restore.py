@@ -30,13 +30,23 @@ CHUNK = 8 * 1024**2
 MAX_PART = 1950 * 1024**2
 NAME = re.compile(r'^nih3d-originals-(\d+)$')
 
-def prefix(start):
-    if type(start) is not int or start < 1 or start > 24901 or (start-1)%100:
+# These ranges hold too much data to download within one GitHub job, so each half has its own artifact.
+SPLIT_RANGES = {22401: 22450, 22451: 22500}
+
+def range_end(start):
+    if type(start) is not int or start < 1 or start > 24901:
         raise ValueError('Noncanonical shard start')
-    return f'atla-nih3d-{start:05d}-{start+99:05d}'
+    if start in SPLIT_RANGES:
+        return SPLIT_RANGES[start]
+    if (start-1)%100:
+        raise ValueError('Noncanonical shard start')
+    return start+99
+
+def prefix(start):
+    return f'atla-nih3d-{start:05d}-{range_end(start):05d}'
 
 def recovery_tag(start):
-    return 'ekab-nih3d-recovered-' + f'{start:05d}-{start+99:05d}'
+    return 'ekab-nih3d-recovered-' + f'{start:05d}-{range_end(start):05d}'
 
 def http(url, *, method='GET', headers=None, follow=True):
     h={'Accept':'application/vnd.github+json','User-Agent':'ekab-nih3d-recovery'}
@@ -105,7 +115,7 @@ def completed():
         s,e=map(int,m.groups())
         try: base=prefix(s)
         except ValueError: continue
-        if e!=s+99: continue
+        if e!=range_end(s): continue
         if base+'-RESULT.json' in {a['name'] for a in pages('/releases/'+str(r['id'])+'/assets') if a.get('state')=='uploaded'}:
             done.add(s)
     return done
@@ -208,12 +218,12 @@ def empty_range(start,report):
     missing=report.get('missing')
     return (report.get('packs')==[] and report.get('modelFiles')==[] and report.get('downloadedOriginalFiles')==0
             and report.get('failedOutputFiles')==0 and report.get('failed')==[] and report.get('sourceMetadataErrors')==0
-            and not report.get('sourceRefreshFailures') and report.get('missingOrUnpublishedIds')==100
-            and isinstance(missing,list) and {m.get('entryId') for m in missing if isinstance(m,dict)}==set(range(start,start+100)))
+            and not report.get('sourceRefreshFailures') and report.get('missingOrUnpublishedIds')==range_end(start)-start+1
+            and isinstance(missing,list) and {m.get('entryId') for m in missing if isinstance(m,dict)}==set(range(start,range_end(start)+1)))
 
 def validate(start,index,report):
     base=prefix(start)
-    if report.get('range')!={'start':start,'end':start+99}:raise ValueError('Range mismatch')
+    if report.get('range')!={'start':start,'end':range_end(start)}:raise ValueError('Range mismatch')
     if empty_range(start,report):
         if any('.tar.zst' in n for n in index):raise ValueError('Unlisted archive')
         return [base+'-RESULT.json']

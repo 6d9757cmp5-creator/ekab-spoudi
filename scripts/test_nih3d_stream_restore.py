@@ -252,6 +252,19 @@ class RangeRecoveryTests(unittest.TestCase):
         with patch.object(s,'pages',side_effect=fake):
             self.assertEqual(s.completed(),set())
 
+class SplitRangeTests(unittest.TestCase):
+    def test_split_range_names_and_rejections(self):
+        self.assertEqual(s.prefix(22401), 'atla-nih3d-22401-22450')
+        self.assertEqual(s.prefix(22451), 'atla-nih3d-22451-22500')
+        self.assertEqual(s.recovery_tag(22451), 'ekab-nih3d-recovered-22451-22500')
+        self.assertEqual(s.prefix(22501), 'atla-nih3d-22501-22600')
+        with self.assertRaises(ValueError):
+            s.prefix(22452)
+
+    def test_split_range_report_must_match_its_half(self):
+        with self.assertRaisesRegex(ValueError, 'Range mismatch'):
+            s.validate(22401, {}, {'range': {'start': 22401, 'end': 22500}})
+
 class RefetchTests(unittest.TestCase):
     def test_newest_artifact_of_a_range_replaces_the_older_one(self):
         artifacts = [
