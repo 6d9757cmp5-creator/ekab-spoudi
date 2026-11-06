@@ -78,3 +78,61 @@ export function nihAssetsFromLibrary(library,tool){
  return {assets};
 }
 export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Κλινικός Προσομοιωτής'});
+
+/**
+ * Compatibility adapter for the ONE shared registry. Legacy source manifest
+ * helpers above remain available for reproducible upstream/build tests only.
+ * The learner browser must not fetch seven unrelated source catalogs.
+ */
+const sharedSourceConfig=Object.freeze({
+ hra:{tool:'anatomy',type:'primary'},
+ 'z-anatomy':{tool:'anatomy',type:'research'},
+ nih3d:{tool:'anatomy',type:'nih'},
+ quaternius:{tool:'cockpit',type:'primary'},
+ patients:{tool:'cockpit',type:'patients'},
+ makehuman:{tool:'cockpit',type:'makehuman'},
+ 'makehuman-rigged':{tool:'cockpit',type:'rigged'}
+});
+export function sharedRegistryAssets(library,{tool='anatomy',dataset='primary'}={}){
+ if(!Array.isArray(library?.models))throw Error('Invalid central 3D library');
+ const all=dataset==='all';
+ const result=[];
+ for(const m of library.models){
+  const route=sharedSourceConfig[m?.source];
+  if(!route)continue;
+  if(!all&&!(dataset==='nih'?m.source==='nih3d':
+    (route.tool===tool&&route.type===(dataset==='secondary'?(tool==='anatomy'?'research':'patients'):dataset))))continue;
+  const cfg=configurations[route.tool]?.[route.type];
+  const d=m.delivery;
+  // NIH playback remains scoped by the existing explicit library/cockpit eligibility.
+  const surface=tool==='cockpit'?'cockpit':'library';
+  const eligible=m.source!=='nih3d'||m.surfaces?.includes(surface)||(all&&m.surfaces?.includes('library'));
+  const path=d?.path;
+  const extension=cfg?.extension||'.glb';
+  const legacyGitBlob=m.source==='patients'&&/^[a-f0-9]{40}$/i.test(d?.sha256||'');
+  const valid=eligible&&allowedPath(path,cfg?.prefix||'',extension)&&
+   (/^[a-f0-9]{64}$/i.test(d?.sha256||'')||legacyGitBlob)&&
+   Number.isSafeInteger(d?.bytes)&&d.bytes>=1000&&d.bytes<=250*1048576;
+  // Keep unavailable items visible in the full inventory, but never downloadable.
+  if(!valid&&!all)continue;
+  const type=route.type;
+  result.push({
+   id:String(m.id||''),source:m.source,tool:route.tool,
+   sourceType:type,label:cleanName(m.label||m.id),path:valid?path:null,
+   bytes:valid?d.bytes:0,format:extension.slice(1),
+   status:valid?(m.restriction?'Περιορισμένη προβολή · '+m.restriction:'Διαθέσιμο από το κοινό μητρώο'):
+    'Μόνο καταχώριση · το πρωτότυπο δεν είναι διαθέσιμο για προβολή',
+   license:String(m.license||'').slice(0,150),
+   integrity:valid?{algorithm:legacyGitBlob?'gitBlobSha':'sha256',value:d.sha256.toLowerCase()}:null,
+   available:Boolean(valid),
+   details:{
+    accession:m.accession||m.id,originalTitle:m.originalTitle||m.label,
+    category:m.category,originalPage:m.originalPage,sourceVersion:m.sourceVersion,
+    creator:m.creator,restriction:m.restriction,license:m.license,
+    rightsBasis:m.rightsBasis,kind:m.kind,
+    greekStructures:(m.structures||[]).map(id=>library.vocabulary?.structures?.[id]?.greek).filter(Boolean)
+   },clinicallyValidated:false
+  });
+ }
+ return result.sort((a,b)=>a.label.localeCompare(b.label,'el')||a.id.localeCompare(b.id));
+}
