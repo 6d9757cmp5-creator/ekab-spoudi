@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "d733e9a77b379c7adf564ffe3386ecf4cbbff8d2",
+ "ledgerCommit": "28c1028c64a0135d015d46d10b87cefc04879fa4",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -161,6 +161,129 @@
      "aorta",
      "aortic"
     ]
+   },
+   "cervical-spine": {
+    "greek": "Αυχενική μοίρα σπονδυλικής στήλης",
+    "international": "Cervical spine",
+    "match": [
+     "αυχενικ\\p{L}* (?:μοιρ|σπονδυλ)",
+     "cervical spine",
+     "cervical vertebra"
+    ]
+   },
+   "thoracic-spine": {
+    "greek": "Θωρακική μοίρα σπονδυλικής στήλης",
+    "international": "Thoracic spine",
+    "match": [
+     "θωρακικ\\p{L}* (?:μοιρ|σπονδυλ)",
+     "thoracic spine"
+    ]
+   },
+   "skull": {
+    "greek": "Κρανίο",
+    "international": "Skull",
+    "match": [
+     "κρανι",
+     "skull"
+    ]
+   },
+   "trachea": {
+    "greek": "Τραχεία",
+    "international": "Trachea",
+    "match": [
+     "τραχει(?:α|ας)(?!\\p{L})",
+     "trachea"
+    ]
+   },
+   "spinal-cord": {
+    "greek": "Νωτιαίος μυελός",
+    "international": "Spinal cord",
+    "match": [
+     "νωτιαι\\p{L}* μυελ",
+     "spinal cord"
+    ]
+   },
+   "brain": {
+    "greek": "Εγκέφαλος",
+    "international": "Brain",
+    "match": [
+     "εγκεφαλ(?:ος|ου|ο)(?!\\p{L})",
+     "brain"
+    ]
+   },
+   "lung": {
+    "greek": "Πνεύμονας",
+    "international": "Lung",
+    "match": [
+     "πνευμον(?:ας|α|ες|ων)(?!\\p{L})",
+     "lung"
+    ]
+   },
+   "wrist": {
+    "greek": "Καρπός",
+    "international": "Wrist",
+    "match": [
+     "καρπ(?:ος|ου|ο|ικ)",
+     "wrist",
+     "carpal"
+    ]
+   },
+   "scaphoid": {
+    "greek": "Σκαφοειδές οστό",
+    "international": "Scaphoid",
+    "match": [
+     "σκαφοειδ",
+     "scaphoid",
+     "scafoid"
+    ]
+   },
+   "elbow": {
+    "greek": "Αγκώνας",
+    "international": "Elbow",
+    "match": [
+     "αγκων",
+     "elbow"
+    ]
+   },
+   "thymus": {
+    "greek": "Θύμος αδένας",
+    "international": "Thymus",
+    "match": [
+     "θυμ(?:ος|ου|ο) αδεν",
+     "thymus"
+    ]
+   },
+   "uterus": {
+    "greek": "Μήτρα",
+    "international": "Uterus",
+    "match": [
+     "μητρ(?:α|ας)(?!\\p{L})",
+     "uterus"
+    ]
+   },
+   "ovary": {
+    "greek": "Ωοθήκη",
+    "international": "Ovary",
+    "match": [
+     "ωοθηκ",
+     "ovary"
+    ]
+   },
+   "coronary": {
+    "greek": "Στεφανιαίες αρτηρίες",
+    "international": "Coronary arteries",
+    "match": [
+     "στεφανιαι",
+     "coronary"
+    ]
+   },
+   "renal-pelvis": {
+    "greek": "Νεφρική πύελος",
+    "international": "Renal pelvis",
+    "match": [
+     "νεφρικ\\p{L}* πυελ",
+     "renal pelvis"
+    ]
    }
   },
   "findings": {
@@ -192,13 +315,21 @@
      "tetralogy",
      "fallot"
     ]
+   },
+   "dissection": {
+    "greek": "Διαχωρισμός",
+    "match": [
+     "διαχωρισμ",
+     "dissection"
+    ]
    }
   },
   "exclude": {
    "femur": "μηριαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
    "tibia": "κνημιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
    "fibula": "περονιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
-   "kidney": "νεφρικ\\p{L}* (?:αρτηρ|φλεβ)"
+   "kidney": "νεφρικ\\p{L}* (?:αρτηρ|φλεβ)",
+   "skull": "κρανιακ\\p{L}* νευρ"
   }
  },
  "counts": {
@@ -212,12 +343,12 @@
    "makehuman-rigged": 1
   },
   "nihVerifiedModels": 215,
-  "nihServed": 138,
-  "nihServedBytes": 419391060,
-  "nihContextual": 35,
-  "nihWithSaekChapter": 5,
+  "nihServed": 136,
+  "nihServedBytes": 419407356,
+  "nihContextual": 102,
+  "nihWithSaekChapter": 37,
   "nihRestrictions": {
-   "CAPACITY": 53,
+   "CAPACITY": 55,
    "OVERSIZE": 19,
    "OUT_OF_SCOPE": 5
   }
@@ -1009,13 +1140,15 @@
    "entryId": 333,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Elbow Fracture - coronoid process",
-   "greekTitle": null,
+   "label": "Κάταγμα κορωνοειδούς απόφυσης (αγκώνας)",
+   "greekTitle": "Κάταγμα κορωνοειδούς απόφυσης (αγκώνας)",
    "originalTitle": "Elbow Fracture - coronoid process",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "elbow"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1033,10 +1166,22 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000333.glb",
+    "bytes": 12236056,
+    "sha256": "f5f0ca6a2d11e963b023bf9b7c70453f23085c2733a817cab01c884b01d2f8d5",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1101,13 +1246,15 @@
    "entryId": 338,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Shoulder Fracture - Superior Glenoid Fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα γλήνης ώμου",
+   "greekTitle": "Κάταγμα γλήνης ώμου",
    "originalTitle": "Shoulder Fracture - Superior Glenoid Fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "shoulder"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1125,10 +1272,22 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000338.glb",
+    "bytes": 9487776,
+    "sha256": "62af833e592ccf6a98432609bd75ee1fa11e90235f9c38ed87ac8990cc76f50a",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1140,13 +1299,15 @@
    "entryId": 344,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Femoral Head Fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα κεφαλής μηριαίου",
+   "greekTitle": "Κάταγμα κεφαλής μηριαίου",
    "originalTitle": "Femoral Head Fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "femur"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1164,10 +1325,22 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000344.glb",
+    "bytes": 10330276,
+    "sha256": "ec4e1a23ae5b0fbec01324cfe1b5bf409177fdf6807c71a63d6b3470e4f4c072",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1179,13 +1352,15 @@
    "entryId": 345,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Tibia Fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα κνήμης",
+   "greekTitle": "Κάταγμα κνήμης",
    "originalTitle": "Tibia Fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1211,9 +1386,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1226,13 +1405,15 @@
    "entryId": 346,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Proximal Tibia Frature",
-   "greekTitle": null,
+   "label": "Κάταγμα κεντρικής κνήμης",
+   "greekTitle": "Κάταγμα κεντρικής κνήμης",
    "originalTitle": "Proximal Tibia Frature",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1258,9 +1439,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1273,13 +1458,15 @@
    "entryId": 353,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Shoulder Fracture - 4 Part Proximal Humerus",
-   "greekTitle": null,
+   "label": "Κάταγμα κεντρικού βραχιονίου σε 4 τμήματα",
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου σε 4 τμήματα",
    "originalTitle": "Shoulder Fracture - 4 Part Proximal Humerus",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1305,9 +1492,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1535,13 +1726,15 @@
    "entryId": 394,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Hand and Wrist Model - Scafoid Fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα σκαφοειδούς",
+   "greekTitle": "Κάταγμα σκαφοειδούς",
    "originalTitle": "Hand and Wrist Model - Scafoid Fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "scaphoid"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "CC-BY",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1559,10 +1752,22 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000394.glb",
+    "bytes": 10474004,
+    "sha256": "b3cf3b0252fc8a14b2ebcd1224118d338bb71292e25f9e6e7e7d9b084fc25d6b",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1613,12 +1818,14 @@
    "entryId": 396,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Cervical Spine",
-   "greekTitle": null,
+   "label": "Αυχενική μοίρα",
+   "greekTitle": "Αυχενική μοίρα",
    "originalTitle": "Cervical Spine",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -1645,9 +1852,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1660,12 +1872,14 @@
    "entryId": 397,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Shoulder Model",
-   "greekTitle": null,
+   "label": "Ώμος",
+   "greekTitle": "Ώμος",
    "originalTitle": "Shoulder Model",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -1692,9 +1906,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1731,18 +1950,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000399.glb",
-    "bytes": 9040832,
-    "sha256": "b1bcea82f333d917fe3a04155489af6746be2229330c9d6ffe999b7854f6a232",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1754,12 +1965,14 @@
    "entryId": 400,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Clavicle",
-   "greekTitle": null,
+   "label": "Κλείδα",
+   "greekTitle": "Κλείδα",
    "originalTitle": "Clavicle",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "clavicle"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -1786,9 +1999,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1801,12 +2019,14 @@
    "entryId": 401,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Proximal Tibia",
-   "greekTitle": null,
+   "label": "Κεντρικό τμήμα κνήμης",
+   "greekTitle": "Κεντρικό τμήμα κνήμης",
    "originalTitle": "Proximal Tibia",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "tibia"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -1833,11 +2053,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/2",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1848,13 +2082,15 @@
    "entryId": 403,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Shoulder Fracture - Proximal Humerus",
-   "greekTitle": null,
+   "label": "Κάταγμα κεντρικού βραχιονίου",
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
    "originalTitle": "Shoulder Fracture - Proximal Humerus",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "CC-BY",
    "rightsBasis": "SOURCE_LICENSE",
@@ -1880,9 +2116,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1895,12 +2135,14 @@
    "entryId": 404,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Cervical Spine",
-   "greekTitle": null,
+   "label": "Αυχενική μοίρα",
+   "greekTitle": "Αυχενική μοίρα",
    "originalTitle": "Cervical Spine",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -1927,9 +2169,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -1966,18 +2213,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000406.glb",
-    "bytes": 6645584,
-    "sha256": "a6ecb3859b5fe0b97e017e2fda081fee3cadc5e54391faf38535acc2d2835d44",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -1989,13 +2228,15 @@
    "entryId": 407,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Lumbar Spine - frature",
-   "greekTitle": null,
+   "label": "Κάταγμα οσφυϊκής μοίρας",
+   "greekTitle": "Κάταγμα οσφυϊκής μοίρας",
    "originalTitle": "Lumbar Spine - frature",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "lumbar-spine"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "CC-BY",
    "rightsBasis": "SOURCE_LICENSE",
@@ -2021,9 +2262,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2036,13 +2281,15 @@
    "entryId": 408,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Lumbar Spine - L2 fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα οσφυϊκού σπονδύλου Ο2",
+   "greekTitle": "Κάταγμα οσφυϊκού σπονδύλου Ο2",
    "originalTitle": "Lumbar Spine - L2 fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "lumbar-vertebra"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "CC-BY",
    "rightsBasis": "SOURCE_LICENSE",
@@ -2068,9 +2315,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2083,12 +2334,14 @@
    "entryId": 409,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Lumbar Spine",
-   "greekTitle": null,
+   "label": "Οσφυϊκή μοίρα",
+   "greekTitle": "Οσφυϊκή μοίρα",
    "originalTitle": "Lumbar Spine",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -2115,11 +2368,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/10",
+     "occurrences": 8
+    },
+    {
+     "chapter": "14/3",
+     "occurrences": 7
+    },
+    {
+     "chapter": "01/7",
+     "occurrences": 6
+    },
+    {
+     "chapter": "18/8",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 5
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2130,12 +2409,14 @@
    "entryId": 410,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Pelvis",
-   "greekTitle": null,
+   "label": "Πύελος",
+   "greekTitle": "Πύελος",
    "originalTitle": "Pelvis",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -2162,11 +2443,33 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "14/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 3
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2177,12 +2480,14 @@
    "entryId": 413,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Shoulder Model",
-   "greekTitle": null,
+   "label": "Ώμος",
+   "greekTitle": "Ώμος",
    "originalTitle": "Shoulder Model",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -2209,9 +2514,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2224,12 +2534,14 @@
    "entryId": 414,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Scafoid",
-   "greekTitle": null,
+   "label": "Σκαφοειδές οστό",
+   "greekTitle": "Σκαφοειδές οστό",
    "originalTitle": "Scafoid",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "scaphoid"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -2256,9 +2568,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2271,12 +2588,14 @@
    "entryId": 450,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Version 1 of Trachea for Tracheotomy",
-   "greekTitle": null,
+   "label": "Τραχεία για άσκηση τραχειοτομής",
+   "greekTitle": "Τραχεία για άσκηση τραχειοτομής",
    "originalTitle": "Version 1 of Trachea for Tracheotomy",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "trachea"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY-NC-SA",
@@ -2303,11 +2622,29 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/6",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/11",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/3",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2412,12 +2749,14 @@
    "entryId": 456,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · 3D Printable Wrist Anatomy",
-   "greekTitle": null,
+   "label": "Ανατομία καρπού",
+   "greekTitle": "Ανατομία καρπού",
    "originalTitle": "3D Printable Wrist Anatomy",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "wrist"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -2444,9 +2783,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2483,18 +2827,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000522.glb",
-    "bytes": 7729856,
-    "sha256": "97d478f9ad3bc8751eaf197da2e13f43c17e8a9e46cb4dad0344233fff74ad58",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -2635,12 +2971,14 @@
    "entryId": 799,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Lumbar Spine",
-   "greekTitle": null,
+   "label": "Οσφυϊκή μοίρα",
+   "greekTitle": "Οσφυϊκή μοίρα",
    "originalTitle": "Lumbar Spine",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ],
    "finding": null,
    "laterality": null,
    "license": "Public Domain",
@@ -2667,11 +3005,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/10",
+     "occurrences": 8
+    },
+    {
+     "chapter": "14/3",
+     "occurrences": 7
+    },
+    {
+     "chapter": "01/7",
+     "occurrences": 6
+    },
+    {
+     "chapter": "18/8",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 5
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2682,13 +3046,15 @@
    "entryId": 800,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Knee - proximal tibia fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα κεντρικής κνήμης (γόνατο)",
+   "greekTitle": "Κάταγμα κεντρικής κνήμης (γόνατο)",
    "originalTitle": "Knee - proximal tibia fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -2714,9 +3080,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2729,13 +3099,15 @@
    "entryId": 801,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Distal Tibia Fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα περιφερικής κνήμης",
+   "greekTitle": "Κάταγμα περιφερικής κνήμης",
    "originalTitle": "Distal Tibia Fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -2761,9 +3133,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -3041,13 +3417,15 @@
    "entryId": 810,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Spine - Thoracic Spine Scoliosis",
-   "greekTitle": null,
+   "label": "Θωρακική σκολίωση",
+   "greekTitle": "Θωρακική σκολίωση",
    "originalTitle": "Spine - Thoracic Spine Scoliosis",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "thoracic-spine"
+   ],
+   "finding": "scoliosis",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -3073,9 +3451,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -3258,13 +3640,15 @@
    "entryId": 815,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Hip Fracture - Acetabulum",
-   "greekTitle": null,
+   "label": "Κάταγμα κοτύλης",
+   "greekTitle": "Κάταγμα κοτύλης",
    "originalTitle": "Hip Fracture - Acetabulum",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -3290,9 +3674,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -3305,13 +3693,15 @@
    "entryId": 816,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Calcaneal Fracture",
-   "greekTitle": null,
+   "label": "Κάταγμα πτέρνας",
+   "greekTitle": "Κάταγμα πτέρνας",
    "originalTitle": "Calcaneal Fracture",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -3337,9 +3727,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -3776,12 +4170,14 @@
    "entryId": 828,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Pelvis",
-   "greekTitle": null,
+   "label": "Πύελος",
+   "greekTitle": "Πύελος",
    "originalTitle": "Pelvis",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "Public Domain",
@@ -3808,11 +4204,33 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "14/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 3
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3982,12 +4400,14 @@
    "entryId": 833,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Femur",
-   "greekTitle": null,
+   "label": "Μηριαίο οστό",
+   "greekTitle": "Μηριαίο οστό",
    "originalTitle": "Femur",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ],
    "finding": null,
    "laterality": null,
    "license": "Public Domain",
@@ -4014,11 +4434,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 8
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4390,18 +4824,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001193.glb",
-    "bytes": 8399880,
-    "sha256": "e20ed86502206ec42af385b4f81633bd32583722f6237920aad4536bccd4e482",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -4552,12 +4978,14 @@
    "entryId": 1315,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Cervical Vertebra, C2, Colorized Original",
-   "greekTitle": null,
+   "label": "Αυχενικός σπόνδυλος Α2",
+   "greekTitle": "Αυχενικός σπόνδυλος Α2",
    "originalTitle": "Cervical Vertebra, C2, Colorized Original",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC BY-ND",
@@ -4582,9 +5010,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -4903,18 +5336,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-001944.glb",
-    "bytes": 5226612,
-    "sha256": "7e401fea18a55a620c9c95630551499fcbaa018dcc9eac1603b148bb4cb38884",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -4965,12 +5390,14 @@
    "entryId": 2548,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Skull",
-   "greekTitle": null,
+   "label": "Κρανίο",
+   "greekTitle": "Κρανίο",
    "originalTitle": "Skull",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -4997,11 +5424,33 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/9",
+     "occurrences": 7
+    },
+    {
+     "chapter": "01/8",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/5",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -5127,13 +5576,15 @@
    "entryId": 3257,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Aortic aneurysm",
-   "greekTitle": null,
+   "label": "Ανεύρυσμα αορτής",
+   "greekTitle": "Ανεύρυσμα αορτής",
    "originalTitle": "Aortic aneurysm",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm",
    "laterality": null,
    "license": "CC-BY-SA",
    "rightsBasis": "SOURCE_LICENSE",
@@ -5151,10 +5602,22 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003257.glb",
+    "bytes": 11625072,
+    "sha256": "9dfc5f98762df60bab41c1b24990a729a3f693cf8a9e8ae723b4604f0143f076",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -5219,13 +5682,15 @@
    "entryId": 3309,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Saccular aortic aneurysm",
-   "greekTitle": null,
+   "label": "Σακοειδές ανεύρυσμα αορτής",
+   "greekTitle": "Σακοειδές ανεύρυσμα αορτής",
    "originalTitle": "Saccular aortic aneurysm",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm",
    "laterality": null,
    "license": "CC-BY-SA",
    "rightsBasis": "SOURCE_LICENSE",
@@ -5251,9 +5716,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -5368,18 +5837,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-003854.glb",
-    "bytes": 6283024,
-    "sha256": "0e2724d3468e49f9e88147539215d41d11b118a7bf986fee134c727f56d3245c",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -5509,18 +5970,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-004318.glb",
-    "bytes": 7535164,
-    "sha256": "41f585847648dbd6565c6748e913e42b5bba80ca149733bdef70223ae2ca9c50",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -5649,13 +6102,15 @@
    "entryId": 4813,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Multiple fractures of the skull",
-   "greekTitle": null,
+   "label": "Πολλαπλά κατάγματα κρανίου",
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
    "originalTitle": "Multiple fractures of the skull",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture",
    "laterality": null,
    "license": "CC-BY-NC-SA",
    "rightsBasis": "OWNER_STATED_PERMISSION",
@@ -5673,11 +6128,28 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
-   "saekChapters": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-004813.glb",
+    "bytes": 10555164,
+    "sha256": "58c0ee9c3908f9c04c7243a8c42767632b6587bb60d56d4027c96313039185cf",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
+   "saekChapters": [
+    {
+     "chapter": "01/8",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -5766,13 +6238,15 @@
    "entryId": 4892,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Aortic Dissection Close Up",
-   "greekTitle": null,
+   "label": "Διαχωρισμός αορτής",
+   "greekTitle": "Διαχωρισμός αορτής",
    "originalTitle": "Aortic Dissection Close Up",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -5798,9 +6272,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -5922,18 +6400,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-007496.glb",
-    "bytes": 6632924,
-    "sha256": "e25485ad6f10ad53276de2f9487d29dceb1ca7d5e032893e2d8d45f9b8639975",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -6125,13 +6595,15 @@
    "entryId": 8380,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Aortic Dissection Positive",
-   "greekTitle": null,
+   "label": "Διαχωρισμός αορτής",
+   "greekTitle": "Διαχωρισμός αορτής",
    "originalTitle": "Aortic Dissection Positive",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
-   "finding": null,
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection",
    "laterality": null,
    "license": "Public Domain",
    "rightsBasis": "SOURCE_LICENSE",
@@ -6157,9 +6629,13 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -6569,12 +7045,14 @@
    "entryId": 11751,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Right Coronary Artery tree",
-   "greekTitle": null,
+   "label": "Δεξιά στεφανιαία αρτηρία",
+   "greekTitle": "Δεξιά στεφανιαία αρτηρία",
    "originalTitle": "Right Coronary Artery tree",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "coronary"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY-SA",
@@ -6601,11 +7079,29 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "10/7",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/10",
+     "occurrences": 3
+    },
+    {
+     "chapter": "06/7",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -6896,12 +7392,14 @@
    "entryId": 14845,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Top half of human femur, simplified, hollow",
-   "greekTitle": null,
+   "label": "Άνω τμήμα μηριαίου",
+   "greekTitle": "Άνω τμήμα μηριαίου",
    "originalTitle": "Top half of human femur, simplified, hollow",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -6928,11 +7426,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 8
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -7021,12 +7533,15 @@
    "entryId": 15843,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · 3D Models of the Female Pelvis with L4, L5 Vertebrae and Proximal Femur",
-   "greekTitle": null,
+   "label": "Γυναικεία πύελος με σπονδύλους Ο4 και Ο5",
+   "greekTitle": "Γυναικεία πύελος με σπονδύλους Ο4 και Ο5",
    "originalTitle": "3D Models of the Female Pelvis with L4, L5 Vertebrae and Proximal Femur",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "pelvis",
+    "lumbar-vertebra"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY-NC-SA",
@@ -7053,11 +7568,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "14/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 3
+    },
+    {
+     "chapter": "01/7",
+     "occurrences": 2
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -7180,12 +7721,14 @@
    "entryId": 16812,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Clavicle Bone_Human Skeleton",
-   "greekTitle": null,
+   "label": "Κλείδα",
+   "greekTitle": "Κλείδα",
    "originalTitle": "Clavicle Bone_Human Skeleton",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "clavicle"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -7212,9 +7755,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -7227,12 +7775,14 @@
    "entryId": 16814,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Wrist Bones_Human Skeleton",
-   "greekTitle": null,
+   "label": "Οστά καρπού",
+   "greekTitle": "Οστά καρπού",
    "originalTitle": "Wrist Bones_Human Skeleton",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "wrist"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -7259,9 +7809,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -7274,12 +7829,14 @@
    "entryId": 16826,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Fibula Right_Human Skeleton",
-   "greekTitle": null,
+   "label": "Δεξιά περόνη",
+   "greekTitle": "Δεξιά περόνη",
    "originalTitle": "Fibula Right_Human Skeleton",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "fibula"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -7306,11 +7863,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/2",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -7321,12 +7892,14 @@
    "entryId": 16827,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Fibula Left_Human Skeleton",
-   "greekTitle": null,
+   "label": "Αριστερή περόνη",
+   "greekTitle": "Αριστερή περόνη",
    "originalTitle": "Fibula Left_Human Skeleton",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "fibula"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -7353,11 +7926,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/2",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -7774,18 +8361,10 @@
      "X3D"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-018268.glb",
-    "bytes": 6449588,
-    "sha256": "734bdab84418e806bf70a1c7a5fa0164df8e6adb83f8ebe941bbe170e49f857a",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -7973,12 +8552,14 @@
    "entryId": 20591,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Skull and Eyes - Visible Human Male",
-   "greekTitle": null,
+   "label": "Κρανίο",
+   "greekTitle": "Κρανίο",
    "originalTitle": "Skull and Eyes - Visible Human Male",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8002,11 +8583,33 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/9",
+     "occurrences": 7
+    },
+    {
+     "chapter": "01/8",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/5",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8126,12 +8729,14 @@
    "entryId": 20966,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Heart, Female",
-   "greekTitle": null,
+   "label": "Καρδιά (γυναίκα)",
+   "greekTitle": "Καρδιά (γυναίκα)",
    "originalTitle": "Heart, Female",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8156,11 +8761,69 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/7",
+     "occurrences": 12
+    },
+    {
+     "chapter": "01/10",
+     "occurrences": 8
+    },
+    {
+     "chapter": "02/3",
+     "occurrences": 8
+    },
+    {
+     "chapter": "02/7",
+     "occurrences": 7
+    },
+    {
+     "chapter": "01/5",
+     "occurrences": 6
+    },
+    {
+     "chapter": "10/1",
+     "occurrences": 5
+    },
+    {
+     "chapter": "11/5",
+     "occurrences": 5
+    },
+    {
+     "chapter": "02/4",
+     "occurrences": 4
+    },
+    {
+     "chapter": "10/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/3",
+     "occurrences": 3
+    },
+    {
+     "chapter": "06/1",
+     "occurrences": 3
+    },
+    {
+     "chapter": "11/1",
+     "occurrences": 3
+    },
+    {
+     "chapter": "02/8",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8171,12 +8834,14 @@
    "entryId": 20967,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Kidney, Female, Left",
-   "greekTitle": null,
+   "label": "Αριστερός νεφρός (γυναίκα)",
+   "greekTitle": "Αριστερός νεφρός (γυναίκα)",
    "originalTitle": "Kidney, Female, Left",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8200,11 +8865,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "02/11",
+     "occurrences": 10
+    },
+    {
+     "chapter": "01/13",
+     "occurrences": 6
+    },
+    {
+     "chapter": "10/17",
+     "occurrences": 6
+    },
+    {
+     "chapter": "02/10",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/4",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8215,12 +8906,14 @@
    "entryId": 20968,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Kidney, Female, Right",
-   "greekTitle": null,
+   "label": "Δεξιός νεφρός (γυναίκα)",
+   "greekTitle": "Δεξιός νεφρός (γυναίκα)",
    "originalTitle": "Kidney, Female, Right",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8244,11 +8937,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "02/11",
+     "occurrences": 10
+    },
+    {
+     "chapter": "01/13",
+     "occurrences": 6
+    },
+    {
+     "chapter": "10/17",
+     "occurrences": 6
+    },
+    {
+     "chapter": "02/10",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/4",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8296,12 +9015,14 @@
    "entryId": 20979,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Ovary, Female, Left",
-   "greekTitle": null,
+   "label": "Αριστερή ωοθήκη",
+   "greekTitle": "Αριστερή ωοθήκη",
    "originalTitle": "Ovary, Female, Left",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "ovary"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8325,11 +9046,21 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/13",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8340,12 +9071,14 @@
    "entryId": 20980,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Ovary, Female, Right",
-   "greekTitle": null,
+   "label": "Δεξιά ωοθήκη",
+   "greekTitle": "Δεξιά ωοθήκη",
    "originalTitle": "Ovary, Female, Right",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "ovary"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8369,11 +9102,21 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/13",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8384,12 +9127,14 @@
    "entryId": 20984,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Pelvis, Female",
-   "greekTitle": null,
+   "label": "Γυναικεία πύελος",
+   "greekTitle": "Γυναικεία πύελος",
    "originalTitle": "Pelvis, Female",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8413,11 +9158,33 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "14/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 3
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8428,12 +9195,14 @@
    "entryId": 20990,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Thymus, Female",
-   "greekTitle": null,
+   "label": "Θύμος αδένας (γυναίκα)",
+   "greekTitle": "Θύμος αδένας (γυναίκα)",
    "originalTitle": "Thymus, Female",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "thymus"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8457,9 +9226,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -8472,12 +9246,14 @@
    "entryId": 20991,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Trachea, Female",
-   "greekTitle": null,
+   "label": "Τραχεία (γυναίκα)",
+   "greekTitle": "Τραχεία (γυναίκα)",
    "originalTitle": "Trachea, Female",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "trachea"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8502,11 +9278,29 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/6",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/11",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/3",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8517,12 +9311,14 @@
    "entryId": 20996,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Uterus, Female",
-   "greekTitle": null,
+   "label": "Μήτρα",
+   "greekTitle": "Μήτρα",
    "originalTitle": "Uterus, Female",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "uterus"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8547,11 +9343,21 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/13",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8562,12 +9368,14 @@
    "entryId": 21000,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Heart, Male",
-   "greekTitle": null,
+   "label": "Καρδιά (άνδρας)",
+   "greekTitle": "Καρδιά (άνδρας)",
    "originalTitle": "Heart, Male",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8592,11 +9400,69 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/7",
+     "occurrences": 12
+    },
+    {
+     "chapter": "01/10",
+     "occurrences": 8
+    },
+    {
+     "chapter": "02/3",
+     "occurrences": 8
+    },
+    {
+     "chapter": "02/7",
+     "occurrences": 7
+    },
+    {
+     "chapter": "01/5",
+     "occurrences": 6
+    },
+    {
+     "chapter": "10/1",
+     "occurrences": 5
+    },
+    {
+     "chapter": "11/5",
+     "occurrences": 5
+    },
+    {
+     "chapter": "02/4",
+     "occurrences": 4
+    },
+    {
+     "chapter": "10/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/3",
+     "occurrences": 3
+    },
+    {
+     "chapter": "06/1",
+     "occurrences": 3
+    },
+    {
+     "chapter": "11/1",
+     "occurrences": 3
+    },
+    {
+     "chapter": "02/8",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8607,12 +9473,14 @@
    "entryId": 21001,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Kidney, Male, Left",
-   "greekTitle": null,
+   "label": "Αριστερός νεφρός (άνδρας)",
+   "greekTitle": "Αριστερός νεφρός (άνδρας)",
    "originalTitle": "Kidney, Male, Left",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8636,11 +9504,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "02/11",
+     "occurrences": 10
+    },
+    {
+     "chapter": "01/13",
+     "occurrences": 6
+    },
+    {
+     "chapter": "10/17",
+     "occurrences": 6
+    },
+    {
+     "chapter": "02/10",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/4",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8651,12 +9545,14 @@
    "entryId": 21002,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Kidney, Male, Right",
-   "greekTitle": null,
+   "label": "Δεξιός νεφρός (άνδρας)",
+   "greekTitle": "Δεξιός νεφρός (άνδρας)",
    "originalTitle": "Kidney, Male, Right",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8680,11 +9576,37 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "02/11",
+     "occurrences": 10
+    },
+    {
+     "chapter": "01/13",
+     "occurrences": 6
+    },
+    {
+     "chapter": "10/17",
+     "occurrences": 6
+    },
+    {
+     "chapter": "02/10",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/4",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8732,12 +9654,14 @@
    "entryId": 21014,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Pelvis, Male",
-   "greekTitle": null,
+   "label": "Ανδρική πύελος",
+   "greekTitle": "Ανδρική πύελος",
    "originalTitle": "Pelvis, Male",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8761,11 +9685,33 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "14/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 3
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8776,12 +9722,14 @@
    "entryId": 21018,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Spinal Cord, Male",
-   "greekTitle": null,
+   "label": "Νωτιαίος μυελός",
+   "greekTitle": "Νωτιαίος μυελός",
    "originalTitle": "Spinal Cord, Male",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8806,11 +9754,29 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/7",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "02/6",
+     "occurrences": 3
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8821,12 +9787,14 @@
    "entryId": 21020,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Thymus, Male",
-   "greekTitle": null,
+   "label": "Θύμος αδένας (άνδρας)",
+   "greekTitle": "Θύμος αδένας (άνδρας)",
    "originalTitle": "Thymus, Male",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "thymus"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8851,9 +9819,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -8866,12 +9839,14 @@
    "entryId": 21021,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Trachea, Male",
-   "greekTitle": null,
+   "label": "Τραχεία (άνδρας)",
+   "greekTitle": "Τραχεία (άνδρας)",
    "originalTitle": "Trachea, Male",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "trachea"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8895,11 +9870,29 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "06/6",
+     "occurrences": 6
+    },
+    {
+     "chapter": "01/11",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/3",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8910,12 +9903,14 @@
    "entryId": 21159,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Well Explained Brain Model (3D)",
-   "greekTitle": null,
+   "label": "Εγκέφαλος",
+   "greekTitle": "Εγκέφαλος",
    "originalTitle": "Well Explained Brain Model (3D)",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8939,11 +9934,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/8",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/5",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -8954,12 +9963,14 @@
    "entryId": 21160,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Human Brain Model",
-   "greekTitle": null,
+   "label": "Εγκέφαλος",
+   "greekTitle": "Εγκέφαλος",
    "originalTitle": "Human Brain Model",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -8983,11 +9994,25 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "01/8",
+     "occurrences": 5
+    },
+    {
+     "chapter": "01/5",
+     "occurrences": 4
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -9057,18 +10082,10 @@
      "WRL"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021281.glb",
-    "bytes": 5027968,
-    "sha256": "2d3103b7f224add14fd313f21f00f93e96fbbb3de889ae911ce4c481a42bdf3c",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9102,18 +10119,10 @@
      "WRL"
     ]
    },
-   "delivery": {
-    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021609.glb",
-    "bytes": 7990100,
-    "sha256": "515df7bf93f6f8ee39fa85858ce161fc32607a45f77aaa437d79586ad90889cd",
-    "format": "glb",
-    "derived": false
-   },
-   "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
-   "surfaces": [
-    "library"
-   ],
+   "delivery": null,
+   "restrictionCode": "CAPACITY",
+   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
+   "surfaces": [],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9125,12 +10134,14 @@
    "entryId": 21621,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Renal Pelvis, Female, Left",
-   "greekTitle": null,
+   "label": "Αριστερή νεφρική πύελος (γυναίκα)",
+   "greekTitle": "Αριστερή νεφρική πύελος (γυναίκα)",
    "originalTitle": "Renal Pelvis, Female, Left",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -9154,9 +10165,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -9169,12 +10185,14 @@
    "entryId": 21622,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Renal Pelvis, Female, Right",
-   "greekTitle": null,
+   "label": "Δεξιά νεφρική πύελος (γυναίκα)",
+   "greekTitle": "Δεξιά νεφρική πύελος (γυναίκα)",
    "originalTitle": "Renal Pelvis, Female, Right",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -9198,9 +10216,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -9213,12 +10236,14 @@
    "entryId": 21623,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Renal Pelvis, Male, Left",
-   "greekTitle": null,
+   "label": "Αριστερή νεφρική πύελος (άνδρας)",
+   "greekTitle": "Αριστερή νεφρική πύελος (άνδρας)",
    "originalTitle": "Renal Pelvis, Male, Left",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -9242,9 +10267,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -9257,12 +10287,14 @@
    "entryId": 21624,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Renal Pelvis, Male, Right",
-   "greekTitle": null,
+   "label": "Δεξιά νεφρική πύελος (άνδρας)",
+   "greekTitle": "Δεξιά νεφρική πύελος (άνδρας)",
    "originalTitle": "Renal Pelvis, Male, Right",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -9286,9 +10318,14 @@
     "derived": false
    },
    "restrictionCode": null,
-   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "restriction": null,
    "surfaces": [
-    "library"
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
    ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -9429,12 +10466,15 @@
    "entryId": 23212,
    "source": "nih3d",
    "sourceLabel": "NIH 3D",
-   "label": "Ανατομία · Visible Human Heart Vessels and Lungs",
-   "greekTitle": null,
+   "label": "Καρδιά, αγγεία και πνεύμονες",
+   "greekTitle": "Καρδιά, αγγεία και πνεύμονες",
    "originalTitle": "Visible Human Heart Vessels and Lungs",
    "category": "Ανατομία",
-   "kind": null,
-   "structures": [],
+   "kind": "anatomy",
+   "structures": [
+    "heart",
+    "lung"
+   ],
    "finding": null,
    "laterality": null,
    "license": "CC-BY",
@@ -9451,11 +10491,85 @@
      "WRL"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
-   "saekChapters": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023212.glb",
+    "bytes": 12100624,
+    "sha256": "4f18ae3529c3b51da31b89570d353a852e60d0187a85e89cafee97b048afb356",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
+   "saekChapters": [
+    {
+     "chapter": "06/7",
+     "occurrences": 12
+    },
+    {
+     "chapter": "01/10",
+     "occurrences": 11
+    },
+    {
+     "chapter": "01/3",
+     "occurrences": 8
+    },
+    {
+     "chapter": "01/5",
+     "occurrences": 8
+    },
+    {
+     "chapter": "02/3",
+     "occurrences": 8
+    },
+    {
+     "chapter": "02/7",
+     "occurrences": 7
+    },
+    {
+     "chapter": "02/10",
+     "occurrences": 5
+    },
+    {
+     "chapter": "10/1",
+     "occurrences": 5
+    },
+    {
+     "chapter": "11/5",
+     "occurrences": 5
+    },
+    {
+     "chapter": "02/4",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/6",
+     "occurrences": 4
+    },
+    {
+     "chapter": "10/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "06/1",
+     "occurrences": 3
+    },
+    {
+     "chapter": "11/1",
+     "occurrences": 3
+    },
+    {
+     "chapter": "02/8",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -9562,10 +10676,18 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023404.glb",
+    "bytes": 84428,
+    "sha256": "e7d3e286ac30eaf0a0aa2653e7d60dce57075391d832e65424c3b172d7f5353e",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -9765,10 +10887,18 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "CAPACITY",
-   "restriction": "Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023414.glb",
+    "bytes": 84428,
+    "sha256": "96afbdbda203232e072506bc4c8ceefd7af3cee4bc8281e80c22b27dc76e55b1",
+    "format": "glb",
+    "derived": false
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
