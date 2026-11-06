@@ -8,14 +8,14 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
 const expectations=[
- {file:'index.html',good:['ATLA · Ο προσωπικός σου εκπαιδευτικός βοηθός','Κέντρο Διασώστη'],bad:['>3D LIVE<','PROTOCOL LAB','DEBRIEF']},
- {file:'protocols.html',good:['ATLA · Πρακτική πρωτοκόλλων','Ανασκόπηση προσπάθειας','ATLA · Κέντρο Διασώστη'],bad:['PROTOCOL LAB','DEBRIEF','MENTOR']},
- {file:'ui-tools/anatomy-3d/index.html',good:['ΑΝΑΤΟΜΙΑ <span>ΕΡΓΑΣΤΗΡΙΟ 3D</span>','ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D','Εργαστήριο 3D Ανατομίας'],bad:['>3D LAB<','Zoom με']},
+ {file:'index.html',good:['Προσωπικός Εκπαιδευτής · ATLA','Κέντρο Διασώστη'],bad:['>3D LIVE<','PROTOCOL LAB','DEBRIEF']},
+ {file:'protocols.html',good:['Εξάσκηση σε Πρωτόκολλα','Ανασκόπηση προσπάθειας','ATLA · Κέντρο Διασώστη'],bad:['PROTOCOL LAB','DEBRIEF','MENTOR']},
+ {file:'ui-tools/anatomy-3d/index.html',good:['ΤΡΙΣΔΙΑΣΤΑΤΗ <span>ΑΝΑΤΟΜΙΑ</span>','ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D','Εργαστήριο 3D Ανατομίας'],bad:['>3D LAB<','Zoom με']},
  {file:'mentor-live.html',good:['ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ','ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΝΑΣΚΟΠΗΣΗ'],bad:['SIMULATION COCKPIT','CLINICAL COCKPIT','DEBRIEF']},
- {file:'mentor-next.html',good:['ΠΡΟΣΟΜΟΙΩΤΗΣ','Κλινικός Προσομοιωτής','ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ'],bad:['SIMULATOR','CASE LIBRARY','PREHOSPITAL','MULTIPARAMETER','MONITORING HISTORY']},
+ {file:'mentor-next.html',good:['ΠΡΟΣΟΜΟΙΩΤΗΣ','Προσομοιωτής Ασθενών','ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ'],bad:['SIMULATOR','CASE LIBRARY','PREHOSPITAL','MULTIPARAMETER','MONITORING HISTORY']},
  {file:'mentor-lab.html',good:['Εργαστήριο ΗΚΓ','ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ','ΑΝΑΣΚΟΠΗΣΗ'],bad:['>PROTOCOL LAB<','ECG Lab','>MENTOR']},
  {file:'theory.html',good:['Εκπαιδευτικές υπενθυμίσεις SOS'],bad:['AI Hint SOS']},
- {file:'ui-tools/anatomy-full-atlas.html',good:['← Εργαστήριο 3D Ανατομίας'],bad:['← Anatomy Lab']},
+ {file:'ui-tools/anatomy-full-atlas.html',good:['← Τρισδιάστατη Ανατομία'],bad:['← Anatomy Lab']},
  {file:'ui-tools/atla-resource-preview.html',good:['>Κίνηση<'],bad:['>Animation<']},
 ];
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a1c2d">
-<title>ATLA | Πλήρης 3D εξερευνητής μοντέλων</title>
+<title>Βιβλιοθήκη 3D Μοντέλων | ΕΚΑΒ Σπουδή</title>
 <script type="importmap">
 {"imports":{
 "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
@@ -38,11 +38,11 @@ small{color:#b0c7d7}
 <body>
 <main>
 <nav><a id="source-back" href="../tools/anatomy-3d/index.html">← Επιστροφή</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></nav>
-<h1 id="source-name">Πλήρης 3D εξερευνητής ATLA</h1>
-<p>Διαδραστική εξερεύνηση πηγαίων μοντέλων: επιλογή δομής, απομόνωση, διαφάνεια, ανατομικός προσανατολισμός και διαθέσιμες κινήσεις. Κάθε αρχείο φορτώνεται μόνο μετά από επιλογή.</p>
+<h1 id="source-name">Βιβλιοθήκη 3D Μοντέλων</h1>
+<p>Εξερεύνηση ανατομικών και εκπαιδευτικών 3D μοντέλων: επιλογή δομής, απομόνωση, διαφάνεια, ανατομικός προσανατολισμός και διαθέσιμες κινήσεις. Κάθε αρχείο φορτώνεται μόνο μετά από επιλογή.</p>
 <div class="layout">
-<section class="card" aria-label="Πηγαία μοντέλα">
-<h2>Επιλογή μοντέλου</h2>
+<section class="card" aria-label="Συλλογές τρισδιάστατων μοντέλων">
+<h2>Επίλεξε συλλογή και μοντέλο</h2>
 <p id="source-count" role="status">Ανάκτηση μητρώου…</p>
 <label for="source-dataset">Συλλογή</label>
 <select id="source-dataset" aria-describedby="source-warning">
@@ -54,7 +54,7 @@ small{color:#b0c7d7}
 </select>
 <label for="source-model">Μοντέλο</label>
 <select id="source-model" aria-describedby="source-warning"></select>
-<button id="source-load" type="button" disabled>Φόρτωση επιλεγμένου 3D</button>
+<button id="source-load" type="button" disabled>Άνοιγμα επιλεγμένου 3D μοντέλου</button>
 <p id="source-status" role="status" aria-live="polite">Αναμονή…</p>
 <small class="meta" id="source-license"></small><div id="source-details" hidden></div><hr style="border:0;border-top:1px solid #2d516e;margin:18px 0"><h2>Δομές και κινήσεις</h2><label for="source-part">Επιλεγμένη δομή</label><select id="source-part" disabled><option>Φόρτωσε μοντέλο</option></select><div class="toolrow"><button type="button" id="part-isolate" disabled>Απομόνωση</button><button type="button" id="part-show" disabled>Όλα ορατά</button></div><label class="selector" for="source-clip">Κίνηση</label><select id="source-clip" disabled><option>Δεν υπάρχει διαθέσιμη κίνηση</option></select><div class="toolrow"><button type="button" id="clip-play" disabled>Αναπαραγωγή</button><button type="button" id="clip-pause" disabled>Παύση</button></div><label class="selector" for="source-opacity">Διαφάνεια μοντέλου <output id="opacity-value">100%</output></label><input id="source-opacity" type="range" min="15" max="100" value="100" step="5" disabled><div class="toolrow"><button type="button" id="view-reset" disabled>Κέντρο</button><button type="button" id="view-front" disabled>Μπροστά</button><button type="button" id="view-side" disabled>Πλάι</button></div><p id="source-mesh-info" class="eyebrow" role="status"></p>
 </section>
