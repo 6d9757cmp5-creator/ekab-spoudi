@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "28c1028c64a0135d015d46d10b87cefc04879fa4",
+ "ledgerCommit": "cd4b7cf700b3e617d7da3a027fdf8db23bd3245c",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -329,7 +329,8 @@
    "tibia": "κνημιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
    "fibula": "περονιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
    "kidney": "νεφρικ\\p{L}* (?:αρτηρ|φλεβ)",
-   "skull": "κρανιακ\\p{L}* νευρ"
+   "skull": "κρανιακ\\p{L}* νευρ",
+   "heart": "καρδιακ\\p{L}* (?:συχνοτ|παλμ|ρυθμ)|heart rate"
   }
  },
  "counts": {
@@ -346,7 +347,7 @@
   "nihServed": 136,
   "nihServedBytes": 419407356,
   "nihContextual": 102,
-  "nihWithSaekChapter": 37,
+  "nihWithSaekChapter": 73,
   "nihRestrictions": {
    "CAPACITY": 55,
    "OVERSIZE": 19,
@@ -1182,7 +1183,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1235,7 +1245,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1288,7 +1307,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1341,7 +1369,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1394,7 +1431,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1447,7 +1493,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1500,7 +1555,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -1768,7 +1832,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2124,7 +2197,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2270,7 +2352,20 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/10",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/3",
+     "occurrences": 1
+    },
+    {
+     "chapter": "18/8",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2323,7 +2418,20 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/10",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/3",
+     "occurrences": 1
+    },
+    {
+     "chapter": "18/8",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -2379,24 +2487,8 @@
    ],
    "saekChapters": [
     {
-     "chapter": "14/10",
-     "occurrences": 8
-    },
-    {
-     "chapter": "14/3",
-     "occurrences": 7
-    },
-    {
      "chapter": "01/7",
-     "occurrences": 6
-    },
-    {
-     "chapter": "18/8",
-     "occurrences": 6
-    },
-    {
-     "chapter": "01/2",
-     "occurrences": 5
+     "occurrences": 2
     }
    ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -2960,7 +3052,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3016,24 +3117,8 @@
    ],
    "saekChapters": [
     {
-     "chapter": "14/10",
-     "occurrences": 8
-    },
-    {
-     "chapter": "14/3",
-     "occurrences": 7
-    },
-    {
      "chapter": "01/7",
-     "occurrences": 6
-    },
-    {
-     "chapter": "18/8",
-     "occurrences": 6
-    },
-    {
-     "chapter": "01/2",
-     "occurrences": 5
+     "occurrences": 2
     }
    ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -3088,7 +3173,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3141,7 +3235,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3194,7 +3297,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3247,7 +3359,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/8",
+     "occurrences": 1
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3300,7 +3421,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3353,7 +3483,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3406,7 +3545,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3629,7 +3777,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3682,7 +3839,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/8",
+     "occurrences": 1
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3735,7 +3901,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3788,7 +3963,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3841,7 +4025,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3894,7 +4087,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/8",
+     "occurrences": 1
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -3947,7 +4149,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4000,7 +4211,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4106,7 +4326,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/8",
+     "occurrences": 1
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4159,7 +4388,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4283,7 +4521,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4336,7 +4583,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4389,7 +4645,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4505,7 +4770,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4558,7 +4832,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4611,7 +4894,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -4664,7 +4956,16 @@
     "cockpit",
     "atla"
    ],
-   "saekChapters": [],
+   "saekChapters": [
+    {
+     "chapter": "14/11",
+     "occurrences": 1
+    },
+    {
+     "chapter": "14/4",
+     "occurrences": 1
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -6148,6 +6449,10 @@
     {
      "chapter": "01/8",
      "occurrences": 1
+    },
+    {
+     "chapter": "14/9",
+     "occurrences": 1
     }
    ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
@@ -7590,10 +7895,6 @@
      "occurrences": 3
     },
     {
-     "chapter": "01/7",
-     "occurrences": 2
-    },
-    {
      "chapter": "18/10",
      "occurrences": 2
     }
@@ -8772,7 +9073,7 @@
    "saekChapters": [
     {
      "chapter": "06/7",
-     "occurrences": 12
+     "occurrences": 11
     },
     {
      "chapter": "01/10",
@@ -8780,10 +9081,6 @@
     },
     {
      "chapter": "02/3",
-     "occurrences": 8
-    },
-    {
-     "chapter": "02/7",
      "occurrences": 7
     },
     {
@@ -8795,11 +9092,7 @@
      "occurrences": 5
     },
     {
-     "chapter": "11/5",
-     "occurrences": 5
-    },
-    {
-     "chapter": "02/4",
+     "chapter": "02/7",
      "occurrences": 4
     },
     {
@@ -8808,10 +9101,6 @@
     },
     {
      "chapter": "01/3",
-     "occurrences": 3
-    },
-    {
-     "chapter": "06/1",
      "occurrences": 3
     },
     {
@@ -9411,7 +9700,7 @@
    "saekChapters": [
     {
      "chapter": "06/7",
-     "occurrences": 12
+     "occurrences": 11
     },
     {
      "chapter": "01/10",
@@ -9419,10 +9708,6 @@
     },
     {
      "chapter": "02/3",
-     "occurrences": 8
-    },
-    {
-     "chapter": "02/7",
      "occurrences": 7
     },
     {
@@ -9434,11 +9719,7 @@
      "occurrences": 5
     },
     {
-     "chapter": "11/5",
-     "occurrences": 5
-    },
-    {
-     "chapter": "02/4",
+     "chapter": "02/7",
      "occurrences": 4
     },
     {
@@ -9447,10 +9728,6 @@
     },
     {
      "chapter": "01/3",
-     "occurrences": 3
-    },
-    {
-     "chapter": "06/1",
      "occurrences": 3
     },
     {
@@ -10509,11 +10786,11 @@
    ],
    "saekChapters": [
     {
-     "chapter": "06/7",
-     "occurrences": 12
+     "chapter": "01/10",
+     "occurrences": 11
     },
     {
-     "chapter": "01/10",
+     "chapter": "06/7",
      "occurrences": 11
     },
     {
@@ -10526,10 +10803,6 @@
     },
     {
      "chapter": "02/3",
-     "occurrences": 8
-    },
-    {
-     "chapter": "02/7",
      "occurrences": 7
     },
     {
@@ -10541,11 +10814,7 @@
      "occurrences": 5
     },
     {
-     "chapter": "11/5",
-     "occurrences": 5
-    },
-    {
-     "chapter": "02/4",
+     "chapter": "02/7",
      "occurrences": 4
     },
     {
@@ -10555,10 +10824,6 @@
     {
      "chapter": "10/8",
      "occurrences": 4
-    },
-    {
-     "chapter": "06/1",
-     "occurrences": 3
     },
     {
      "chapter": "11/1",
