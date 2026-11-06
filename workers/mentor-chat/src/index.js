@@ -99,7 +99,7 @@ export function _resetLimits(){hits.clear();day={key:'',count:0};}
 // Buffer the complete model output; never stream unvalidated medical text to callers.
 async function checkedModelResponse(stream,passages,headers){
  const checked=await collectAndAuditAiStream(stream,passages);
- return checked.ok?verifiedSseResponse(checked.text,headers):json({error:'unavailable'},503,headers);
+ return checked.ok?verifiedSseResponse(checked.text,headers):json({error:'unavailable',debug:checked.reason},503,headers);
 }
 
 async function answerWithClaude(request,env,body,headers){
@@ -143,8 +143,8 @@ export default {
   try{
    const stream=await env.AI.run(model,{messages:buildMessages(body),stream:true,max_tokens:350,temperature:0.2});
    return checkedModelResponse(stream,body.passages,headers);
-  }catch{
-   return json({error:'unavailable'},503,headers);
+  }catch(e){
+   return json({error:'unavailable',debug:String(e?.message||e).slice(0,200)},503,headers);
   }
  }
 };
