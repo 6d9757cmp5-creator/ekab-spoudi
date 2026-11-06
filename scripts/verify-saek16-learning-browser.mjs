@@ -3,7 +3,7 @@
  * Real local Chromium browser acceptance: SAEK 16 chapters 7/9/10.
  * This checks rendered navigation, SOS, sources, details, self-check and storage
  * isolation at mobile/desktop viewports. NOT a clinical certification, physical
- * iPhone Safari test, or verification of protected Vercel preview access.
+ * iPhone Safari test, or verification of the actual GitHub Pages deployment.
  */
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
