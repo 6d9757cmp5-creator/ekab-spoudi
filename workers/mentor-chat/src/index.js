@@ -143,6 +143,7 @@ export default {
   const model=MODELS.includes(env.MENTOR_MODEL)?env.MENTOR_MODEL:MODELS[0];
   try{
    const stream=await env.AI.run(model,{messages:buildMessages(body),stream:true,max_tokens:350,temperature:0.2});
+   if(env.MENTOR_DEBUG==='true'){const raw=await new Response(stream).text();return json({model,head:raw.slice(0,700),tail:raw.slice(-400)},200,headers);}
    return checkedModelResponse(stream,body.passages,headers);
   }catch(e){
    return json({error:'unavailable',...(env.MENTOR_DEBUG==='true'?{debug:String(e?.message||e).slice(0,200)}:{})},503,headers);
