@@ -1,75 +1,1267 @@
 {
-  "schemaVersion": 1,
-  "scope": "Χειροκίνητη επιμέλεια ονομασιών και κανόνων αντιστοίχισης. Δεν συνιστά επιστημονική ή κλινική έγκριση.",
-  "exclude": {
-    "femur": "μηριαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
-    "tibia": "κνημιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
-    "fibula": "περονιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
-    "kidney": "νεφρικ\\p{L}* (?:αρτηρ|φλεβ)"
+ "schemaVersion": 1,
+ "scope": "Χειροκίνητη επιμέλεια ονομασιών και κανόνων αντιστοίχισης. Δεν συνιστά επιστημονική ή κλινική έγκριση.",
+ "exclude": {
+  "femur": "μηριαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
+  "tibia": "κνημιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
+  "fibula": "περονιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
+  "kidney": "νεφρικ\\p{L}* (?:αρτηρ|φλεβ)",
+  "skull": "κρανιακ\\p{L}* νευρ"
+ },
+ "structures": {
+  "femur": {
+   "greek": "Μηριαίο οστό",
+   "international": "Femur",
+   "match": [
+    "μηριαι",
+    "femur"
+   ]
   },
-  "structures": {
-    "femur": {"greek": "Μηριαίο οστό", "international": "Femur", "match": ["μηριαι", "femur"]},
-    "tibia": {"greek": "Κνήμη", "international": "Tibia", "match": ["κνημ", "tibia"]},
-    "fibula": {"greek": "Περόνη", "international": "Fibula", "match": ["περον", "fibula"]},
-    "patella": {"greek": "Επιγονατίδα", "international": "Patella", "match": ["επιγονατιδ", "patella"]},
-    "corpus-callosum": {"greek": "Μεσολόβιο", "international": "Corpus callosum", "match": ["μεσολοβ", "corpus callosum"]},
-    "medulla-oblongata": {"greek": "Προμήκης μυελός", "international": "Medulla oblongata", "match": ["προμηκ", "medulla oblongata"]},
-    "brain-ventricles": {"greek": "Κοιλίες του εγκεφάλου", "international": "Cerebral ventricles", "match": ["εγκεφαλικ\\p{L}* κοιλι", "κοιλι\\p{L}* (?:του )?εγκεφαλ", "brain ventricles"]},
-    "lumbar-vertebra": {"greek": "Οσφυϊκός σπόνδυλος", "international": "Lumbar vertebra", "match": ["οσφυικ\\p{L}* (?:μοιρ|σπονδυλ)", "lumbar"]},
-    "calcaneus": {"greek": "Πτέρνα", "international": "Calcaneus", "match": ["πτερν", "calcane"]},
-    "talus": {"greek": "Αστράγαλος", "international": "Talus", "match": ["αστραγαλ", "talus"]},
-    "kidney": {"greek": "Νεφρός", "international": "Kidney", "match": ["νεφρ", "kidney"]},
-    "shoulder": {"greek": "Ώμος", "international": "Shoulder", "match": ["ωμ(?:ος|ου|ο)(?!\\p{L})", "shoulder"]},
-    "humerus": {"greek": "Βραχιόνιο οστό", "international": "Humerus", "match": ["βραχιον", "humer"]},
-    "clavicle": {"greek": "Κλείδα", "international": "Clavicle", "match": ["κλειδ(?:α|ας|ες|ων)(?!\\p{L})", "clavicle"]},
-    "scapula": {"greek": "Ωμοπλάτη", "international": "Scapula", "match": ["ωμοπλατ", "scapula"]},
-    "pelvis": {"greek": "Πύελος", "international": "Pelvis", "match": ["πυελ", "κοτυλ", "pelvi", "acetabul"]},
-    "lumbar-spine": {"greek": "Οσφυϊκή μοίρα σπονδυλικής στήλης", "international": "Lumbar spine", "match": ["οσφυικ\\p{L}* (?:μοιρ|σπονδυλ)", "σπονδυλικ\\p{L}* στηλ", "lumbar"]},
-    "heart": {"greek": "Καρδιά", "international": "Heart", "match": ["καρδι", "heart"]},
-    "aorta": {"greek": "Αορτή", "international": "Aorta", "match": ["αορτ", "aorta", "aortic"]}
+  "tibia": {
+   "greek": "Κνήμη",
+   "international": "Tibia",
+   "match": [
+    "κνημ",
+    "tibia"
+   ]
   },
-  "findings": {
-    "fracture": {"greek": "Κάταγμα", "match": ["καταγμ", "fracture"]},
-    "scoliosis": {"greek": "Σκολίωση", "match": ["σκολιωσ", "scoliosis"]},
-    "aneurysm": {"greek": "Ανεύρυσμα", "match": ["ανευρυσμ", "aneurysm"]},
-    "tetralogy": {"greek": "Τετραλογία Fallot", "match": ["τετραλογ", "tetralogy", "fallot"]}
+  "fibula": {
+   "greek": "Περόνη",
+   "international": "Fibula",
+   "match": [
+    "περον",
+    "fibula"
+   ]
   },
-  "models": {
-    "3DPX-000168": {"greekTitle": "Μηριαίο οστό", "kind": "anatomy", "structures": ["femur"]},
-    "3DPX-000169": {"greekTitle": "Κνήμη και περόνη", "kind": "anatomy", "structures": ["tibia", "fibula"]},
-    "3DPX-000170": {"greekTitle": "Επιγονατίδα", "kind": "anatomy", "structures": ["patella"]},
-    "3DPX-000252": {"greekTitle": "Μεσολόβιο", "kind": "anatomy", "structures": ["corpus-callosum"]},
-    "3DPX-000255": {"greekTitle": "Προμήκης μυελός", "kind": "anatomy", "structures": ["medulla-oblongata"]},
-    "3DPX-000278": {"greekTitle": "Κοιλίες του εγκεφάλου", "kind": "anatomy", "structures": ["brain-ventricles"]},
-    "3DPX-000379": {"greekTitle": "Οσφυϊκός σπόνδυλος Ο4", "kind": "anatomy", "structures": ["lumbar-vertebra"]},
-    "3DPX-008616": {"greekTitle": "Πτέρνα", "kind": "anatomy", "structures": ["calcaneus"]},
-    "3DPX-009391": {"greekTitle": "Αστράγαλος", "kind": "anatomy", "structures": ["talus"]},
-    "3DPX-023373": {"greekTitle": "Νεφρός", "kind": "anatomy", "structures": ["kidney"]},
-
-    "3DPX-000334": {"greekTitle": "Κάταγμα ώμου", "kind": "pathology", "structures": ["shoulder"], "finding": "fracture"},
-    "3DPX-000802": {"greekTitle": "Κάταγμα κεντρικού βραχιονίου", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000832": {"greekTitle": "Κάταγμα κεντρικού βραχιονίου", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000834": {"greekTitle": "Κάταγμα κεντρικού βραχιονίου", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000835": {"greekTitle": "Κάταγμα κεντρικού βραχιονίου", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000836": {"greekTitle": "Κάταγμα κεντρικού βραχιονίου", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000837": {"greekTitle": "Κάταγμα κεντρικού βραχιονίου", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000831": {"greekTitle": "Κάταγμα περιφερικού βραχιονίου (αγκώνας)", "kind": "pathology", "structures": ["humerus"], "finding": "fracture"},
-    "3DPX-000805": {"greekTitle": "Κάταγμα κοτύλης", "kind": "pathology", "structures": ["pelvis"], "finding": "fracture"},
-    "3DPX-000819": {"greekTitle": "Κάταγμα πυέλου", "kind": "pathology", "structures": ["pelvis"], "finding": "fracture"},
-    "3DPX-000826": {"greekTitle": "Κάταγμα πυέλου", "kind": "pathology", "structures": ["pelvis"], "finding": "fracture"},
-    "3DPX-000798": {"greekTitle": "Κάταγμα πτέρνας", "kind": "pathology", "structures": ["calcaneus"], "finding": "fracture"},
-    "3DPX-000807": {"greekTitle": "Κάταγμα πτέρνας", "kind": "pathology", "structures": ["calcaneus"], "finding": "fracture"},
-    "3DPX-000808": {"greekTitle": "Κάταγμα πτέρνας", "kind": "pathology", "structures": ["calcaneus"], "finding": "fracture"},
-    "3DPX-000809": {"greekTitle": "Πωρωμένο κάταγμα περιφερικής κλείδας", "kind": "pathology", "structures": ["clavicle"], "finding": "fracture"},
-    "3DPX-000817": {"greekTitle": "Κάταγμα κλείδας", "kind": "pathology", "structures": ["clavicle"], "finding": "fracture"},
-    "3DPX-000818": {"greekTitle": "Πωρωμένο κάταγμα κλείδας", "kind": "pathology", "structures": ["clavicle"], "finding": "fracture"},
-    "3DPX-000814": {"greekTitle": "Κάταγμα ωμοπλάτης και ακρωμίου", "kind": "pathology", "structures": ["scapula"], "finding": "fracture"},
-    "3DPX-000820": {"greekTitle": "Κάταγμα κεντρικής κνήμης", "kind": "pathology", "structures": ["tibia"], "finding": "fracture"},
-    "3DPX-000830": {"greekTitle": "Κάταγμα κεντρικής κνήμης", "kind": "pathology", "structures": ["tibia"], "finding": "fracture"},
-    "3DPX-000827": {"greekTitle": "Κάταγμα περιφερικής κνήμης", "kind": "pathology", "structures": ["tibia"], "finding": "fracture"},
-    "3DPX-000821": {"greekTitle": "Κάταγμα αστραγάλου", "kind": "pathology", "structures": ["talus"], "finding": "fracture"},
-    "3DPX-000823": {"greekTitle": "Οσφυϊκή σκολίωση", "kind": "pathology", "structures": ["lumbar-spine"], "finding": "scoliosis"},
-    "3DPX-001274": {"greekTitle": "Τετραλογία Fallot με πνευμονική ατρησία", "kind": "pathology", "structures": ["heart"], "finding": "tetralogy"},
-    "3DPX-003283": {"greekTitle": "Ανεύρυσμα κοιλιακής αορτής", "kind": "pathology", "structures": ["aorta"], "finding": "aneurysm"}
+  "patella": {
+   "greek": "Επιγονατίδα",
+   "international": "Patella",
+   "match": [
+    "επιγονατιδ",
+    "patella"
+   ]
+  },
+  "corpus-callosum": {
+   "greek": "Μεσολόβιο",
+   "international": "Corpus callosum",
+   "match": [
+    "μεσολοβ",
+    "corpus callosum"
+   ]
+  },
+  "medulla-oblongata": {
+   "greek": "Προμήκης μυελός",
+   "international": "Medulla oblongata",
+   "match": [
+    "προμηκ",
+    "medulla oblongata"
+   ]
+  },
+  "brain-ventricles": {
+   "greek": "Κοιλίες του εγκεφάλου",
+   "international": "Cerebral ventricles",
+   "match": [
+    "εγκεφαλικ\\p{L}* κοιλι",
+    "κοιλι\\p{L}* (?:του )?εγκεφαλ",
+    "brain ventricles"
+   ]
+  },
+  "lumbar-vertebra": {
+   "greek": "Οσφυϊκός σπόνδυλος",
+   "international": "Lumbar vertebra",
+   "match": [
+    "οσφυικ\\p{L}* (?:μοιρ|σπονδυλ)",
+    "lumbar"
+   ]
+  },
+  "calcaneus": {
+   "greek": "Πτέρνα",
+   "international": "Calcaneus",
+   "match": [
+    "πτερν",
+    "calcane"
+   ]
+  },
+  "talus": {
+   "greek": "Αστράγαλος",
+   "international": "Talus",
+   "match": [
+    "αστραγαλ",
+    "talus"
+   ]
+  },
+  "kidney": {
+   "greek": "Νεφρός",
+   "international": "Kidney",
+   "match": [
+    "νεφρ",
+    "kidney"
+   ]
+  },
+  "shoulder": {
+   "greek": "Ώμος",
+   "international": "Shoulder",
+   "match": [
+    "ωμ(?:ος|ου|ο)(?!\\p{L})",
+    "shoulder"
+   ]
+  },
+  "humerus": {
+   "greek": "Βραχιόνιο οστό",
+   "international": "Humerus",
+   "match": [
+    "βραχιον",
+    "humer"
+   ]
+  },
+  "clavicle": {
+   "greek": "Κλείδα",
+   "international": "Clavicle",
+   "match": [
+    "κλειδ(?:α|ας|ες|ων)(?!\\p{L})",
+    "clavicle"
+   ]
+  },
+  "scapula": {
+   "greek": "Ωμοπλάτη",
+   "international": "Scapula",
+   "match": [
+    "ωμοπλατ",
+    "scapula"
+   ]
+  },
+  "pelvis": {
+   "greek": "Πύελος",
+   "international": "Pelvis",
+   "match": [
+    "πυελ",
+    "κοτυλ",
+    "pelvi",
+    "acetabul"
+   ]
+  },
+  "lumbar-spine": {
+   "greek": "Οσφυϊκή μοίρα σπονδυλικής στήλης",
+   "international": "Lumbar spine",
+   "match": [
+    "οσφυικ\\p{L}* (?:μοιρ|σπονδυλ)",
+    "σπονδυλικ\\p{L}* στηλ",
+    "lumbar"
+   ]
+  },
+  "heart": {
+   "greek": "Καρδιά",
+   "international": "Heart",
+   "match": [
+    "καρδι",
+    "heart"
+   ]
+  },
+  "aorta": {
+   "greek": "Αορτή",
+   "international": "Aorta",
+   "match": [
+    "αορτ",
+    "aorta",
+    "aortic"
+   ]
+  },
+  "cervical-spine": {
+   "greek": "Αυχενική μοίρα σπονδυλικής στήλης",
+   "international": "Cervical spine",
+   "match": [
+    "αυχενικ\\p{L}* (?:μοιρ|σπονδυλ)",
+    "cervical spine",
+    "cervical vertebra"
+   ]
+  },
+  "thoracic-spine": {
+   "greek": "Θωρακική μοίρα σπονδυλικής στήλης",
+   "international": "Thoracic spine",
+   "match": [
+    "θωρακικ\\p{L}* (?:μοιρ|σπονδυλ)",
+    "thoracic spine"
+   ]
+  },
+  "skull": {
+   "greek": "Κρανίο",
+   "international": "Skull",
+   "match": [
+    "κρανι",
+    "skull"
+   ]
+  },
+  "trachea": {
+   "greek": "Τραχεία",
+   "international": "Trachea",
+   "match": [
+    "τραχει(?:α|ας)(?!\\p{L})",
+    "trachea"
+   ]
+  },
+  "spinal-cord": {
+   "greek": "Νωτιαίος μυελός",
+   "international": "Spinal cord",
+   "match": [
+    "νωτιαι\\p{L}* μυελ",
+    "spinal cord"
+   ]
+  },
+  "brain": {
+   "greek": "Εγκέφαλος",
+   "international": "Brain",
+   "match": [
+    "εγκεφαλ(?:ος|ου|ο)(?!\\p{L})",
+    "brain"
+   ]
+  },
+  "lung": {
+   "greek": "Πνεύμονας",
+   "international": "Lung",
+   "match": [
+    "πνευμον(?:ας|α|ες|ων)(?!\\p{L})",
+    "lung"
+   ]
+  },
+  "wrist": {
+   "greek": "Καρπός",
+   "international": "Wrist",
+   "match": [
+    "καρπ(?:ος|ου|ο|ικ)",
+    "wrist",
+    "carpal"
+   ]
+  },
+  "scaphoid": {
+   "greek": "Σκαφοειδές οστό",
+   "international": "Scaphoid",
+   "match": [
+    "σκαφοειδ",
+    "scaphoid",
+    "scafoid"
+   ]
+  },
+  "elbow": {
+   "greek": "Αγκώνας",
+   "international": "Elbow",
+   "match": [
+    "αγκων",
+    "elbow"
+   ]
+  },
+  "thymus": {
+   "greek": "Θύμος αδένας",
+   "international": "Thymus",
+   "match": [
+    "θυμ(?:ος|ου|ο) αδεν",
+    "thymus"
+   ]
+  },
+  "uterus": {
+   "greek": "Μήτρα",
+   "international": "Uterus",
+   "match": [
+    "μητρ(?:α|ας)(?!\\p{L})",
+    "uterus"
+   ]
+  },
+  "ovary": {
+   "greek": "Ωοθήκη",
+   "international": "Ovary",
+   "match": [
+    "ωοθηκ",
+    "ovary"
+   ]
+  },
+  "coronary": {
+   "greek": "Στεφανιαίες αρτηρίες",
+   "international": "Coronary arteries",
+   "match": [
+    "στεφανιαι",
+    "coronary"
+   ]
+  },
+  "renal-pelvis": {
+   "greek": "Νεφρική πύελος",
+   "international": "Renal pelvis",
+   "match": [
+    "νεφρικ\\p{L}* πυελ",
+    "renal pelvis"
+   ]
   }
+ },
+ "findings": {
+  "fracture": {
+   "greek": "Κάταγμα",
+   "match": [
+    "καταγμ",
+    "fracture"
+   ]
+  },
+  "scoliosis": {
+   "greek": "Σκολίωση",
+   "match": [
+    "σκολιωσ",
+    "scoliosis"
+   ]
+  },
+  "aneurysm": {
+   "greek": "Ανεύρυσμα",
+   "match": [
+    "ανευρυσμ",
+    "aneurysm"
+   ]
+  },
+  "tetralogy": {
+   "greek": "Τετραλογία Fallot",
+   "match": [
+    "τετραλογ",
+    "tetralogy",
+    "fallot"
+   ]
+  },
+  "dissection": {
+   "greek": "Διαχωρισμός",
+   "match": [
+    "διαχωρισμ",
+    "dissection"
+   ]
+  }
+ },
+ "models": {
+  "3DPX-000168": {
+   "greekTitle": "Μηριαίο οστό",
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ]
+  },
+  "3DPX-000169": {
+   "greekTitle": "Κνήμη και περόνη",
+   "kind": "anatomy",
+   "structures": [
+    "tibia",
+    "fibula"
+   ]
+  },
+  "3DPX-000170": {
+   "greekTitle": "Επιγονατίδα",
+   "kind": "anatomy",
+   "structures": [
+    "patella"
+   ]
+  },
+  "3DPX-000252": {
+   "greekTitle": "Μεσολόβιο",
+   "kind": "anatomy",
+   "structures": [
+    "corpus-callosum"
+   ]
+  },
+  "3DPX-000255": {
+   "greekTitle": "Προμήκης μυελός",
+   "kind": "anatomy",
+   "structures": [
+    "medulla-oblongata"
+   ]
+  },
+  "3DPX-000278": {
+   "greekTitle": "Κοιλίες του εγκεφάλου",
+   "kind": "anatomy",
+   "structures": [
+    "brain-ventricles"
+   ]
+  },
+  "3DPX-000379": {
+   "greekTitle": "Οσφυϊκός σπόνδυλος Ο4",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-vertebra"
+   ]
+  },
+  "3DPX-008616": {
+   "greekTitle": "Πτέρνα",
+   "kind": "anatomy",
+   "structures": [
+    "calcaneus"
+   ]
+  },
+  "3DPX-009391": {
+   "greekTitle": "Αστράγαλος",
+   "kind": "anatomy",
+   "structures": [
+    "talus"
+   ]
+  },
+  "3DPX-023373": {
+   "greekTitle": "Νεφρός",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-000334": {
+   "greekTitle": "Κάταγμα ώμου",
+   "kind": "pathology",
+   "structures": [
+    "shoulder"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000802": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000832": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000834": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000835": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000836": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000837": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000831": {
+   "greekTitle": "Κάταγμα περιφερικού βραχιονίου (αγκώνας)",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000805": {
+   "greekTitle": "Κάταγμα κοτύλης",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000819": {
+   "greekTitle": "Κάταγμα πυέλου",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000826": {
+   "greekTitle": "Κάταγμα πυέλου",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000798": {
+   "greekTitle": "Κάταγμα πτέρνας",
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000807": {
+   "greekTitle": "Κάταγμα πτέρνας",
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000808": {
+   "greekTitle": "Κάταγμα πτέρνας",
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000809": {
+   "greekTitle": "Πωρωμένο κάταγμα περιφερικής κλείδας",
+   "kind": "pathology",
+   "structures": [
+    "clavicle"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000817": {
+   "greekTitle": "Κάταγμα κλείδας",
+   "kind": "pathology",
+   "structures": [
+    "clavicle"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000818": {
+   "greekTitle": "Πωρωμένο κάταγμα κλείδας",
+   "kind": "pathology",
+   "structures": [
+    "clavicle"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000814": {
+   "greekTitle": "Κάταγμα ωμοπλάτης και ακρωμίου",
+   "kind": "pathology",
+   "structures": [
+    "scapula"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000820": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000830": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000827": {
+   "greekTitle": "Κάταγμα περιφερικής κνήμης",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000821": {
+   "greekTitle": "Κάταγμα αστραγάλου",
+   "kind": "pathology",
+   "structures": [
+    "talus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000823": {
+   "greekTitle": "Οσφυϊκή σκολίωση",
+   "kind": "pathology",
+   "structures": [
+    "lumbar-spine"
+   ],
+   "finding": "scoliosis"
+  },
+  "3DPX-001274": {
+   "greekTitle": "Τετραλογία Fallot με πνευμονική ατρησία",
+   "kind": "pathology",
+   "structures": [
+    "heart"
+   ],
+   "finding": "tetralogy"
+  },
+  "3DPX-003283": {
+   "greekTitle": "Ανεύρυσμα κοιλιακής αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-000333": {
+   "greekTitle": "Κάταγμα κορωνοειδούς απόφυσης (αγκώνας)",
+   "kind": "pathology",
+   "structures": [
+    "elbow"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000338": {
+   "greekTitle": "Κάταγμα γλήνης ώμου",
+   "kind": "pathology",
+   "structures": [
+    "shoulder"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000344": {
+   "greekTitle": "Κάταγμα κεφαλής μηριαίου",
+   "kind": "pathology",
+   "structures": [
+    "femur"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000345": {
+   "greekTitle": "Κάταγμα κνήμης",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000346": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000353": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου σε 4 τμήματα",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000355": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου και γλήνης",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000389": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης (γόνατο)",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000390": {
+   "greekTitle": "Κάταγμα επιγονατίδας",
+   "kind": "pathology",
+   "structures": [
+    "patella"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000391": {
+   "greekTitle": "Ατελές κάταγμα σκαφοειδούς",
+   "kind": "pathology",
+   "structures": [
+    "scaphoid"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000394": {
+   "greekTitle": "Κάταγμα σκαφοειδούς",
+   "kind": "pathology",
+   "structures": [
+    "scaphoid"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000403": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000407": {
+   "greekTitle": "Κάταγμα οσφυϊκής μοίρας",
+   "kind": "pathology",
+   "structures": [
+    "lumbar-spine"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000408": {
+   "greekTitle": "Κάταγμα οσφυϊκού σπονδύλου Ο2",
+   "kind": "pathology",
+   "structures": [
+    "lumbar-vertebra"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000800": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης (γόνατο)",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000801": {
+   "greekTitle": "Κάταγμα περιφερικής κνήμης",
+   "kind": "pathology",
+   "structures": [
+    "tibia"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000813": {
+   "greekTitle": "Κάταγμα οσφυϊκής μοίρας",
+   "kind": "pathology",
+   "structures": [
+    "lumbar-spine"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000815": {
+   "greekTitle": "Κάταγμα κοτύλης",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000816": {
+   "greekTitle": "Κάταγμα πτέρνας",
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004803": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004807": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004808": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004813": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004816": {
+   "greekTitle": "Κατάγματα κρανίου και άνω γνάθου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004818": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000810": {
+   "greekTitle": "Θωρακική σκολίωση",
+   "kind": "pathology",
+   "structures": [
+    "thoracic-spine"
+   ],
+   "finding": "scoliosis"
+  },
+  "3DPX-003257": {
+   "greekTitle": "Ανεύρυσμα αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-003309": {
+   "greekTitle": "Σακοειδές ανεύρυσμα αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-004892": {
+   "greekTitle": "Διαχωρισμός αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-008379": {
+   "greekTitle": "Διαχωρισμός αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-008380": {
+   "greekTitle": "Διαχωρισμός αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-000396": {
+   "greekTitle": "Αυχενική μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-000404": {
+   "greekTitle": "Αυχενική μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-001315": {
+   "greekTitle": "Αυχενικός σπόνδυλος Α2",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-000397": {
+   "greekTitle": "Ώμος",
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ]
+  },
+  "3DPX-000399": {
+   "greekTitle": "Ώμος",
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ]
+  },
+  "3DPX-000413": {
+   "greekTitle": "Ώμος",
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ]
+  },
+  "3DPX-000400": {
+   "greekTitle": "Κλείδα",
+   "kind": "anatomy",
+   "structures": [
+    "clavicle"
+   ]
+  },
+  "3DPX-016812": {
+   "greekTitle": "Κλείδα",
+   "kind": "anatomy",
+   "structures": [
+    "clavicle"
+   ]
+  },
+  "3DPX-000401": {
+   "greekTitle": "Κεντρικό τμήμα κνήμης",
+   "kind": "anatomy",
+   "structures": [
+    "tibia"
+   ]
+  },
+  "3DPX-000409": {
+   "greekTitle": "Οσφυϊκή μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000799": {
+   "greekTitle": "Οσφυϊκή μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000811": {
+   "greekTitle": "Οσφυϊκή μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000812": {
+   "greekTitle": "Οσφυϊκή μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000899": {
+   "greekTitle": "Οσφυϊκός σπόνδυλος",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-vertebra"
+   ]
+  },
+  "3DPX-000410": {
+   "greekTitle": "Πύελος",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-000828": {
+   "greekTitle": "Πύελος",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-020984": {
+   "greekTitle": "Γυναικεία πύελος",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-021014": {
+   "greekTitle": "Ανδρική πύελος",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-015843": {
+   "greekTitle": "Γυναικεία πύελος με σπονδύλους Ο4 και Ο5",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis",
+    "lumbar-vertebra"
+   ]
+  },
+  "3DPX-000414": {
+   "greekTitle": "Σκαφοειδές οστό",
+   "kind": "anatomy",
+   "structures": [
+    "scaphoid"
+   ]
+  },
+  "3DPX-000450": {
+   "greekTitle": "Τραχεία για άσκηση τραχειοτομής",
+   "kind": "anatomy",
+   "structures": [
+    "trachea"
+   ]
+  },
+  "3DPX-020991": {
+   "greekTitle": "Τραχεία (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "trachea"
+   ]
+  },
+  "3DPX-021021": {
+   "greekTitle": "Τραχεία (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "trachea"
+   ]
+  },
+  "3DPX-000456": {
+   "greekTitle": "Ανατομία καρπού",
+   "kind": "anatomy",
+   "structures": [
+    "wrist"
+   ]
+  },
+  "3DPX-016814": {
+   "greekTitle": "Οστά καρπού",
+   "kind": "anatomy",
+   "structures": [
+    "wrist"
+   ]
+  },
+  "3DPX-000833": {
+   "greekTitle": "Μηριαίο οστό",
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ]
+  },
+  "3DPX-014845": {
+   "greekTitle": "Άνω τμήμα μηριαίου",
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ]
+  },
+  "3DPX-016826": {
+   "greekTitle": "Δεξιά περόνη",
+   "kind": "anatomy",
+   "structures": [
+    "fibula"
+   ]
+  },
+  "3DPX-016827": {
+   "greekTitle": "Αριστερή περόνη",
+   "kind": "anatomy",
+   "structures": [
+    "fibula"
+   ]
+  },
+  "3DPX-002548": {
+   "greekTitle": "Κρανίο",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-020591": {
+   "greekTitle": "Κρανίο",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-020966": {
+   "greekTitle": "Καρδιά (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-021000": {
+   "greekTitle": "Καρδιά (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-022787": {
+   "greekTitle": "Καρδιά",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-020967": {
+   "greekTitle": "Αριστερός νεφρός (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-020968": {
+   "greekTitle": "Δεξιός νεφρός (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-021001": {
+   "greekTitle": "Αριστερός νεφρός (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-021002": {
+   "greekTitle": "Δεξιός νεφρός (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-010649": {
+   "greekTitle": "Νεφρός",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-021621": {
+   "greekTitle": "Αριστερή νεφρική πύελος (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ]
+  },
+  "3DPX-021622": {
+   "greekTitle": "Δεξιά νεφρική πύελος (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ]
+  },
+  "3DPX-021623": {
+   "greekTitle": "Αριστερή νεφρική πύελος (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ]
+  },
+  "3DPX-021624": {
+   "greekTitle": "Δεξιά νεφρική πύελος (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "renal-pelvis"
+   ]
+  },
+  "3DPX-020974": {
+   "greekTitle": "Πνεύμονας (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "lung"
+   ]
+  },
+  "3DPX-021008": {
+   "greekTitle": "Πνεύμονας (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "lung"
+   ]
+  },
+  "3DPX-023212": {
+   "greekTitle": "Καρδιά, αγγεία και πνεύμονες",
+   "kind": "anatomy",
+   "structures": [
+    "heart",
+    "lung"
+   ]
+  },
+  "3DPX-011751": {
+   "greekTitle": "Δεξιά στεφανιαία αρτηρία",
+   "kind": "anatomy",
+   "structures": [
+    "coronary"
+   ]
+  },
+  "3DPX-021018": {
+   "greekTitle": "Νωτιαίος μυελός",
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ]
+  },
+  "3DPX-020990": {
+   "greekTitle": "Θύμος αδένας (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "thymus"
+   ]
+  },
+  "3DPX-021020": {
+   "greekTitle": "Θύμος αδένας (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "thymus"
+   ]
+  },
+  "3DPX-020996": {
+   "greekTitle": "Μήτρα",
+   "kind": "anatomy",
+   "structures": [
+    "uterus"
+   ]
+  },
+  "3DPX-020979": {
+   "greekTitle": "Αριστερή ωοθήκη",
+   "kind": "anatomy",
+   "structures": [
+    "ovary"
+   ]
+  },
+  "3DPX-020980": {
+   "greekTitle": "Δεξιά ωοθήκη",
+   "kind": "anatomy",
+   "structures": [
+    "ovary"
+   ]
+  },
+  "3DPX-020959": {
+   "greekTitle": "Εγκέφαλος (γυναίκα)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-020960": {
+   "greekTitle": "Εγκέφαλος (άνδρας)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-021160": {
+   "greekTitle": "Εγκέφαλος",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-021159": {
+   "greekTitle": "Εγκέφαλος",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-021161": {
+   "greekTitle": "Εγκέφαλος",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-000320": {
+   "greekTitle": "Εγκέφαλος",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  }
+ }
 }
