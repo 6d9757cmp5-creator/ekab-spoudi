@@ -1,3 +1,4 @@
+import {nameCoverage,focusSnippet} from './knowledge/retrieve.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -109,4 +110,18 @@ test('ATLA sends only exact section-verified citations, preserving canonical ran
  const shell=read('atla/assistant.mjs');
  assert.match(shell,/eligibleAiPassages\(found\.passages,terms\)/);
  assert.match(shell,/passages:verifiedForAi/);
+});
+
+test('a term naming only part of the question does not answer it',()=>{
+ const bone={term:'Οστό',en:'Bone',definition:'Ιστός.'};
+ assert(nameCoverage('Τι είναι το πυραμοειδές οστό του καρπού;',bone)<0.5);
+ assert.equal(nameCoverage('Τι είναι το οστό;',bone),1);
+ assert.equal(nameCoverage('Τι είναι η ΚΑΡΠΑ;',{term:'Καρδιοπνευμονική αναζωογόνηση',aliases:['ΚΑΡΠΑ']}),1);
+});
+
+test('long passages show the part about the question',()=>{
+ const text='Αρχή κειμένου. '+'Άσχετη πρόταση. '.repeat(120)+'Ο θυρεοειδής αδένας παράγει θυροξίνη. '+'Τέλος. '.repeat(120);
+ const snippet=focusSnippet(text,'θυρεοειδης αδενας',200);
+ assert.match(snippet,/^…Ο θυρεοειδής αδένας παράγει θυροξίνη/);
+ assert.equal(focusSnippet('Μικρό κείμενο.','οστό'),'Μικρό κείμενο.');
 });
