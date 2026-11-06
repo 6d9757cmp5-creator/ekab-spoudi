@@ -1,0 +1,36 @@
+name: ATLA Central 3D Library contract
+on:
+  pull_request:
+    paths:
+      - 'tools/atla-ai/central-3d-library.mjs'
+      - 'tools/atla-ai/model-preview-catalog.mjs'
+      - 'tools/atla-ai/model-preview.mjs'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'scripts/test-atla-central-3d-library.mjs'
+      - 'scripts/test-atla-central-3d-integration.mjs'
+      - '.github/workflows/atla-central-3d-library.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/atla-ai/central-3d-library.mjs'
+      - 'tools/atla-ai/model-preview-catalog.mjs'
+      - 'tools/atla-ai/model-preview.mjs'
+      - 'ui-tools/atla-resource-preview.html'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check tools/atla-ai/central-3d-library.mjs
+          node --check tools/atla-ai/model-preview-catalog.mjs
+          node --check tools/atla-ai/model-preview.mjs
+      - name: Real manifest quality, composition safety and adaptive policy
+        run: node --test scripts/test-atla-central-3d-library.mjs scripts/test-atla-central-3d-integration.mjs
