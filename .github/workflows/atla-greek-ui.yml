@@ -11,6 +11,10 @@ on:
       - 'mentor-lab.html'
       - 'theory.html'
       - 'scripts/verify-atla-greek-ui.mjs'
+      - 'scripts/verify-atlas-provider-cleanup.mjs'
+      - 'educational-animation-sources.js'
+      - 'tools/anatomy-3d/index.html'
+      - 'atla/assistant.mjs'
       - 'scripts/verify-atla-greek-ui-browser.mjs'
       - '.github/workflows/atla-greek-ui.yml'
   workflow_dispatch:
@@ -28,6 +32,7 @@ jobs:
       - name: Targeted Greek labels and preserved learner routes
         run: |
           node --test scripts/verify-atla-greek-ui.mjs
+          node --test scripts/verify-atlas-provider-cleanup.mjs
           node --test scripts/verify-mentor-roadmap.test.mjs
           node --check scripts/verify-atla-greek-ui-browser.mjs
       - name: Install Chromium and WebKit

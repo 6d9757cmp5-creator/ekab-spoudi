@@ -92,13 +92,13 @@ function boot(){
  if(window.__ekabAtlaAssistant)return;
  window.__ekabAtlaAssistant=true;
  const css=$('link');css.rel='stylesheet';css.href=new URL('./assistant.css',import.meta.url);document.head.append(css);
- const launcher=$('button','atla-launcher','✚ ATLA');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLA');
- const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLA — AI εκπαιδευτικός βοηθός');
+ const launcher=$('button','atla-launcher','✚ ATLAS');launcher.type='button';launcher.setAttribute('aria-label','Άνοιγμα ATLAS');
+ const panel=$('aside','atla-panel');panel.hidden=true;panel.setAttribute('aria-label','ATLAS — AI εκπαιδευτικός βοηθός');
  const head=$('header','atla-head');
- const brand=$('div','atla-brand');brand.append($('strong','', 'ATLA'),$('span','','Ο εκπαιδευτής σου στο ΕΚΑΒ Σπουδή'));
+ const brand=$('div','atla-brand');brand.append($('strong','', 'ATLAS'),$('span','','Ο εκπαιδευτής σου στο ΕΚΑΒ Σπουδή'));
  const badge=$('span','atla-badge','✚');badge.setAttribute('aria-hidden','true');
  const identity=$('div','atla-identity');identity.append(badge,brand);
- const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLA');
+ const close=$('button','atla-close','×');close.type='button';close.setAttribute('aria-label','Κλείσιμο ATLAS');
  head.append(identity,close);
  const state=$('p','atla-availability','');
  const demoRow=$('label','atla-demo-row');
@@ -108,13 +108,13 @@ function boot(){
  demoToggle.checked=demoAllowed;demoRow.hidden=!demoAllowed;
  const demoCopy=$('span','','Δοκιμαστικό AI · εικονικές απαντήσεις');
  demoRow.append(demoToggle,demoCopy);
- const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA AI · απαντά μόνο από επαληθευμένες πηγές':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
+ const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLAS AI · απαντά μόνο από επαληθευμένες πηγές':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
  refreshState();
  demoToggle.addEventListener('change',refreshState);
  const context=$('p','atla-context');
  const stream=$('div','atla-stream');stream.setAttribute('role','log');stream.setAttribute('aria-live','polite');
  const form=$('form','atla-form');
- const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε τον ATLA…';field.setAttribute('aria-label','Ερώτηση στο ATLA');
+ const field=$('textarea','atla-input');field.rows=2;field.maxLength=300;field.placeholder='Ρώτησε τον ATLAS…';field.setAttribute('aria-label','Ερώτηση στον ATLAS');
  const send=$('button','atla-send','Αποστολή');send.type='submit';
  const mic=$('button','atla-mic','🎙');mic.type='button';mic.setAttribute('aria-label','Ερώτηση με φωνή');mic.setAttribute('aria-pressed','false');
  mic.hidden=typeof(window.SpeechRecognition||window.webkitSpeechRecognition)!=='function';
@@ -145,7 +145,7 @@ function boot(){
   stream.replaceChildren();
   const turns=history();
   if(!turns.length){
-   stream.append($('p','atla-welcome','Γεια σου, είμαι ο ATLA. Ρώτησέ με για την ύλη, ζήτα να σου δείξω μια δομή σε 3D ή να το πω πιο απλά.'));
+   stream.append($('p','atla-welcome','Γεια σου, είμαι ο ATLAS. Ρώτησέ με για την ύλη, ζήτα να σου δείξω μια δομή σε 3D ή να το πω πιο απλά.'));
    // Only the next step is shown here; grades and history appear only if the learner asks.
    const next=learnerProfile().recommendation;
    if(next?.href&&next?.label){const a=$('a','atla-route atla-next','Επόμενο βήμα: '+next.label);a.href=new URL(next.href,ROOT).href;stream.append(a);}
@@ -226,7 +226,7 @@ function boot(){
  form.addEventListener('submit',async e=>{
   e.preventDefault();const q=field.value.trim();if(!q)return;field.value='';const myId=++requestId;add('user',q,demoToggle.checked?'mock':'local');
   if(exam()){add('mentor','Σε ενεργή εξέταση δεν παρέχω έτοιμες απαντήσεις. Μόλις ολοκληρώσεις, μπορούμε να αναλύσουμε τα λάθη σου.','refusal');return;}
-  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLA'),'refusal');return;}
+  const guard=riskGuard(q);if(guard.blocked){add('mentor',RISK_MESSAGE.replace('MENTOR','ATLAS'),'refusal');return;}
   const studyInsight=localStudyInsight(q,learnerProfile());
   if(studyInsight){add('mentor',studyInsight,'local');return;}
   const teachingModel=await chooseTeachingModel({question:q,from:location.pathname+location.search+location.hash,

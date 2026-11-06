@@ -68,7 +68,7 @@ test('ATLA-only visible entrypoints and in-place protocol tutor keep legacy stat
  const assistant=read('atla/assistant.mjs');
  const learning=read('learning-surface.mjs');
  assert.match(assistant,/data-atla-context/,'Topic study should open the same ATLA assistant');
- assert.doesNotMatch(assistant,/['"]ATLAS(?:[\s'"]|$)/);
+ assert.ok(assistant.includes("$('strong','', 'ATLAS')"),'Learner-facing teacher must keep the ATLAS name');
  assert.doesNotMatch(learning,/στον MENTOR AI|ATLAS ·/);
  const protocol=read('protocols.html');
  const cards=read('protocols-page.mjs');

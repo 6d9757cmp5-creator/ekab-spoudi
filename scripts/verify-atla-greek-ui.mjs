@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
 const expectations=[
- {file:'index.html',good:['Εκπαιδευτικός βοηθός · Εξηγήσεις και μελέτη','Μαθήματα και εργαλεία Διασώστη'],bad:['>3D LIVE<','PROTOCOL LAB','DEBRIEF']},
+ {file:'index.html',good:['ATLAS · Εκπαιδευτικός βοηθός','Μαθήματα και εργαλεία Διασώστη'],bad:['>3D LIVE<','PROTOCOL LAB','DEBRIEF']},
  {file:'protocols.html',good:['ATLA · Πρακτική πρωτοκόλλων','Ανασκόπηση προσπάθειας','ATLA · Κέντρο Διασώστη'],bad:['PROTOCOL LAB','DEBRIEF','MENTOR']},
  {file:'ui-tools/anatomy-3d/index.html',good:['ΑΝΑΤΟΜΙΑ <span>ΕΡΓΑΣΤΗΡΙΟ 3D</span>','ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D','Εργαστήριο 3D Ανατομίας'],bad:['>3D LAB<','Zoom με']},
  {file:'mentor-live.html',good:['ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ','ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΝΑΣΚΟΠΗΣΗ'],bad:['SIMULATION COCKPIT','CLINICAL COCKPIT','DEBRIEF']},
