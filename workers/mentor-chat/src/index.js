@@ -99,7 +99,7 @@ export function _resetLimits(){hits.clear();day={key:'',count:0};}
 // Buffer the complete model output; never stream unvalidated medical text to callers.
 async function checkedModelResponse(stream,passages,headers){
  const checked=await collectAndAuditAiStream(stream,passages);
- if(!checked.ok)console.log('atla-ai-debug',checked.reason);globalThis.__lastReason=checked.reason;return checked.ok?verifiedSseResponse(checked.text,headers):json({error:'unavailable',...(globalThis.__dbg?{debug:checked.reason}:{})},503,headers);
+ return checked.ok?verifiedSseResponse(checked.text,headers):json({error:'unavailable'},503,headers);
 }
 
 async function answerWithClaude(request,env,body,headers){
@@ -139,14 +139,12 @@ export default {
   body.passages=verifiedPassages(body.question,body.passages);
   if(!body.passages.length)return json({answer:'Δεν έχω επαληθευμένη πηγή για αυτή την ερώτηση στη βιβλιοθήκη μου.'},200,headers);
   if(claude)return answerWithClaude(request,env,body,headers);  if(limited(request.headers.get('cf-connecting-ip')||'unknown',env))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
-  globalThis.__dbg=env.MENTOR_DEBUG==='true';
   const model=MODELS.includes(env.MENTOR_MODEL)?env.MENTOR_MODEL:MODELS[0];
   try{
    const stream=await env.AI.run(model,{messages:buildMessages(body),stream:true,max_tokens:350,temperature:0.2});
-   if(env.MENTOR_DEBUG==='true'){const raw=await new Response(stream).text();return json({model,head:raw.slice(0,700),tail:raw.slice(-400)},200,headers);}
    return checkedModelResponse(stream,body.passages,headers);
-  }catch(e){
-   return json({error:'unavailable',...(env.MENTOR_DEBUG==='true'?{debug:String(e?.message||e).slice(0,200)}:{})},503,headers);
+  }catch{
+   return json({error:'unavailable'},503,headers);
   }
  }
 };

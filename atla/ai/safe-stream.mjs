@@ -6,7 +6,7 @@
  */
 import {auditAssistantReply} from './teaching-policy.mjs';
 
-export async function collectAndAuditAiStream(stream,passages,{maxBytes=48000,maxChars=6000}={}){
+export async function collectAndAuditAiStream(stream,passages,{maxBytes=400000,maxChars=6000}={}){
  if(!stream||typeof stream.getReader!=='function')return {ok:false,reason:'missing-stream'};
  const reader=stream.getReader(),decoder=new TextDecoder('utf-8',{fatal:true});
  let bytes=0,pending='',answer='',sawDone=false,failed=false;
@@ -19,8 +19,11 @@ export async function collectAndAuditAiStream(stream,passages,{maxBytes=48000,ma
   let event;
   try{event=JSON.parse(data);}catch{throw new Error('invalid-sse-json');}
   if(!event||typeof event!=='object'||event.error)throw new Error('invalid-sse-event');
-  const token=typeof event.token==='string'?event.token:typeof event.response==='string'?event.response:null;
-  if(token===null)throw new Error('unknown-sse-event');
+  // Workers AI now also sends OpenAI-style chunks, with text in choices[0].delta and final usage-only events.
+  const delta=Array.isArray(event.choices)?event.choices[0]?.delta?.content:undefined;
+  const known=[event.token,event.response,delta].filter(value=>typeof value==='string');
+  if(!known.length&&!Array.isArray(event.choices)&&(typeof event.usage!=='object'||event.usage===null))throw new Error('unknown-sse-event');
+  const token=known.find(Boolean)||'';
   if(sawDone&&token)throw new Error('tokens-after-done');
   if(answer.length+token.length>maxChars)throw new Error('oversized-reply');
   answer+=token;
