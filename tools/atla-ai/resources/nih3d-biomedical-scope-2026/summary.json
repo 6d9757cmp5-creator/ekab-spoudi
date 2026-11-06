@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "status": "RESEARCH_SCOPE_CLASSIFICATION_NOT_INDEPENDENT_SCIENTIFIC_APPROVAL",
+  "source": "NIH 3D Master Plan 2026 saved catalog snapshot",
+  "originalScannedIdRange": 25000,
+  "uniqueSourceModelRecords": 15688,
+  "sourceSegments": 50,
+  "totalOriginalModelFileReferences": 204346,
+  "totalOriginalBytesFromMetadata": 4387889702158,
+  "byScope": {
+    "IN_SCOPE_RESEARCH_CANDIDATE": 10041,
+    "LIKELY_OUT_OF_MEDICAL_SCOPE": 1372,
+    "SCIENTIFIC_REVIEW_REQUIRED": 4275
+  },
+  "byNIHCategory": {
+    "Biomacromolecules": 8374,
+    "Cells and Organelles": 488,
+    "Viruses": 347,
+    "Anatomy": 691,
+    "Devices and Hardware": 1754,
+    "Prosthetics": 141,
+    "Small Molecules": 3893
+  },
+  "byLicenseReview": {
+    "SOURCE_LABEL_PERMITS_POSSIBLE_REUSE_WITH_LICENSE_CONDITIONS": 14384,
+    "LICENSE_REQUIRES_INDIVIDUAL_REVIEW": 1304
+  },
+  "byReason": {
+    "NIH explicitly classifies this entry in a biomedical research domain": 9900,
+    "Generic hardware has no verified medical or biomedical purpose": 1372,
+    "Scientific relevance of hardware requires subject-matter review": 84,
+    "NIH labels source as a prosthetic/rehabilitation model": 141,
+    "Chemical structure requires therapeutic/biological relevance review": 3893,
+    "Possible clinical/laboratory tool requires domain review": 298
+  },
+  "metadataReferencesInLikelyOutOfScopeHardware": 11002,
+  "primaryBiomedicalCandidatePublicDomainFileReferences": 44532,
+  "primaryBiomedicalCandidatePublicDomainBytesEstimate": 1367699779000,
+  "scientificDomainReviewsPending": 15688,
+  "independentlyScientificModelsApproved": 0,
+  "medicalUseApprovedModels": 0,
+  "classificationHumanReviewRequiredForAll": true,
+  "sourceFilesActuallyCopiedByThisTool": 0,
+  "sourceFilesSHA256VerifiedByThisTool": 0,
+  "invalidSourceFileReferenceRecords": 0,
+  "sourceIntegrityExceptions": [],
+  "caveats": [
+    "Scientific research category is not expert validation of clinical use, geometry, morphology or molecular identity.",
+    "Devices and Hardware may be useful; generic hardware is only tentatively out-of-scope and is retained in original catalog.",
+    "Small Molecules are held for therapeutic relevance review; not automatically copied in bulk.",
+    "Licensing status is based on NIH metadata labels, not a universal reuse or redistribution grant.",
+    "Original NIH saved source catalog may omit newly published models and versions.",
+    "No data removed and all 15,688 source identities remain discoverable."
+  ]
+}

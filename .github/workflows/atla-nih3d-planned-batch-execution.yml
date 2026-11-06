@@ -1,0 +1,184 @@
+name: ATLA NIH3D archive next planned originals and reconcile scientific evidence
+on:
+  push:
+    branches: [main, feat/nih3d-recurring-verified-archive-20261103]
+    paths:
+      - 'scripts/nih3d-archive-planned-originals.mjs'
+      - 'scripts/nih3d-plan-next-originals.mjs'
+      - 'tools/atla-ai/nih3d-biomedical-scope.mjs'
+      - '.github/workflows/atla-nih3d-planned-batch-execution.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '41 * * * *'
+permissions:
+  contents: write
+  packages: write
+concurrency:
+  group: nih3d-bounded-originals-execution
+  cancel-in-progress: false
+jobs:
+  archive-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d-plan-next-originals.mjs
+            scripts/nih3d-plan-next-originals.test.mjs
+            scripts/nih3d-archive-planned-originals.mjs
+            scripts/nih3d-build-verified-archive-registry.mjs
+            scripts/nih3d-build-scientific-evidence.mjs
+            scripts/nih3d-structural-qa.mjs
+            scripts/nih3d-structural-qa.test.mjs
+            scripts/nih3d-scientific-ontology.test.mjs
+            scripts/nih3d-biomedical-scope.test.mjs
+            tools/atla-ai/nih3d-scientific-ontology.mjs
+            tools/atla-ai/nih3d-biomedical-scope.mjs
+            tools/atla-ai/resources/nih3d-master-plan-2026/
+            tools/atla-ai/resources/nih3d-verified-originals-2026.json
+            tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
+            tools/atla-ai/resources/nih3d-educational-evidence-2026/
+            docs/ATLA_NIH3D_GHCR_*.json
+            docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json
+            saek-course-01.html
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source rights, model priority and scientific safeguards
+        run: |
+          set -euo pipefail
+          node scripts/nih3d-plan-next-originals.test.mjs
+          node scripts/nih3d-scientific-ontology.test.mjs
+          node scripts/nih3d-biomedical-scope.test.mjs
+          node scripts/nih3d-structural-qa.test.mjs
+          node --check scripts/nih3d-archive-planned-originals.mjs
+      - name: Select next limited NIH batch from full source catalogue
+        run: node scripts/nih3d-plan-next-originals.mjs
+      - name: Download all original NIH formats and verify source SHA-256
+        env:
+          NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-planned-originals
+        run: node scripts/nih3d-archive-planned-originals.mjs prepare
+      - name: Publish source originals or verify existing matching package
+        env:
+          NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-planned-originals
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
+        run: |
+          set -euo pipefail
+          plan_hash="$(sha256sum tools/atla-ai/resources/nih3d-next-originals-plan-2026.json | cut -c1-16)"
+          tag="originals-plan-${plan_hash}"
+          echo "GHCR_BATCH_TAG=${tag}" >> "$GITHUB_ENV"
+          cat > "$NIH_BATCH_DIR/Dockerfile" <<'DOCKER'
+          FROM scratch
+          LABEL org.opencontainers.image.source="https://github.com/6d9757cmp5-creator/ekab-spoudi"
+          LABEL org.opencontainers.image.description="Source-verified NIH 3D original files, bounded rights-filtered automatic archive"
+          COPY originals/ /originals/
+          COPY MANIFEST.json /MANIFEST.json
+          CMD ["/MANIFEST.json"]
+          DOCKER
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          if docker manifest inspect "$IMAGE:$tag" >/dev/null 2>&1; then
+            echo "Source package already exists: will verify the immutable recovered bytes rather than overwrite"
+          else
+            docker build -t "$IMAGE:$tag" "$NIH_BATCH_DIR"
+            docker push "$IMAGE:$tag"
+          fi
+      - name: Anonymous independent source restore and per-file SHA-256 checks
+        env:
+          NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-planned-originals
+          IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
+        run: |
+          set -euo pipefail
+          docker logout ghcr.io
+          docker image rm "$IMAGE:$GHCR_BATCH_TAG" >/dev/null 2>&1 || true
+          docker pull "$IMAGE:$GHCR_BATCH_TAG"
+          digest="$(docker image inspect "$IMAGE:$GHCR_BATCH_TAG" --format '{{index .RepoDigests 0}}')"
+          test -n "$digest"
+          cid="$(docker create "$IMAGE:$GHCR_BATCH_TAG" /MANIFEST.json)"
+          mkdir -p "$NIH_BATCH_DIR/recovered/originals"
+          docker cp "$cid:/originals/." "$NIH_BATCH_DIR/recovered/originals/"
+          docker cp "$cid:/MANIFEST.json" "$NIH_BATCH_DIR/recovered/MANIFEST.json"
+          docker rm "$cid" >/dev/null
+          node scripts/nih3d-archive-planned-originals.mjs verify
+          export NIH_GHCR_IMAGE_DIGEST="$digest"
+          mkdir -p docs
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const m=JSON.parse(fs.readFileSync(process.env.NIH_BATCH_DIR+'/MANIFEST.json','utf8'));
+          const digest=process.env.NIH_GHCR_IMAGE_DIGEST;
+          assert(/^ghcr\.io\/6d9757cmp5-creator\/atla-nih3d-archive@sha256:[a-f0-9]{64}$/.test(digest));
+          const tag=process.env.GHCR_BATCH_TAG;
+          assert(/^originals-plan-[a-f0-9]{16}$/.test(tag));
+          const proof={
+            schemaVersion:2,status:'ALL_LISTED_SOURCE_FILES_PERSISTED_AND_ANONYMOUSLY_RESTORED',
+            scope:'One bounded licensed NIH original-source batch, NOT a full library archive',
+            imageTag:'ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:'+tag,
+            immutableDigest:digest,models:m.originalModelCount,files:m.originalFileCount,
+            totalOriginalBytes:m.originalByteCount,completeForTheseCatalogEntries:true,
+            allListedOriginalFormatsForTheseCatalogEntries:true,
+            fullNIHArchiveComplete:false,everySourceSHA256CheckedAfterRecovery:true,
+            scientificallyApproved:false,sourceManifest:m
+          };
+          const name='docs/ATLA_NIH3D_GHCR_BATCH_'+tag.slice('originals-plan-'.length)+'_2026.json';
+          fs.writeFileSync(name,JSON.stringify(proof,null,2)+'\n');
+          console.log('FULL SOURCE SHA256 RESTORE VERIFIED',JSON.stringify({models:proof.models,files:proof.files,bytes:proof.totalOriginalBytes,digest,name}));
+          NODE
+      - name: Update full verified SHA registry and medical source evidence from new proof
+        env:
+          REQUIRE_VERIFIED_ORIGINAL_ARCHIVES: '1'
+        run: |
+          set -euo pipefail
+          node scripts/nih3d-build-verified-archive-registry.mjs
+          # The evidence gate compares against structural QA, so QA must first cover the new batch.
+          qa=docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json
+          registry=tools/atla-ai/resources/nih3d-verified-originals-2026.json
+          staging="$RUNNER_TEMP/nih3d-qa-originals"
+          mapfile -t images < <(node scripts/nih3d-structural-qa.mjs images-to-restore "$registry" "$qa")
+          for image in "${images[@]}"; do
+            [[ "$image" =~ ^ghcr\.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:[a-f0-9]{64}$ ]] || { echo "Untrusted image $image"; exit 1; }
+            digest="${image##*@sha256:}"
+            docker pull "$image"
+            cid="$(docker create "$image" /MANIFEST.json)"
+            mkdir -p "$staging/$digest/originals"
+            docker cp "$cid:/originals/." "$staging/$digest/originals/"
+            docker rm "$cid" >/dev/null
+          done
+          cp "$qa" "$RUNNER_TEMP/nih3d-qa-baseline.json"
+          node scripts/nih3d-structural-qa.mjs "$registry" "$staging" "$qa" "$RUNNER_TEMP/nih3d-qa-baseline.json"
+          node scripts/nih3d-build-scientific-evidence.mjs
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const r=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
+          const s=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-educational-evidence-2026/summary.json','utf8'));
+          const p=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-next-originals-plan-2026.json','utf8'));
+          import {execFileSync} from 'node:child_process';
+          const previous=JSON.parse(execFileSync('git',['show','HEAD:tools/atla-ai/resources/nih3d-verified-originals-2026.json'],{encoding:'utf8'}));
+          if(previous.catalogSourceEntries!==r.catalogSourceEntries||previous.catalogSourceEntries!==p.sourceCatalogEntries)
+            throw Error('Source registry and plan refer to different catalogs');
+          if(p.verifiedAlreadyCompleteModels!==previous.modelsWithAllCatalogOriginalFilesVerified)
+            throw Error('Planner used stale pre-existing model baseline');
+          if(r.modelsWithAllCatalogOriginalFilesVerified!==previous.modelsWithAllCatalogOriginalFilesVerified+p.selectedModels)
+            throw Error('Verified complete model count did not increase by the full planned batch');
+          if(r.uniqueVerifiedOriginalFiles!==previous.uniqueVerifiedOriginalFiles+p.selectedOriginalFiles)
+            throw Error('Missing/duplicate original NIH source files after anonymous recovery');
+          if(r.totalDistinctVerifiedOriginalBytes!==previous.totalDistinctVerifiedOriginalBytes+p.selectedExpectedSourceBytes)
+            throw Error('Original NIH byte count differs from preserved package');
+          if(r.fullNIHArchiveComplete!==false||r.modelsWithPartialCatalogOriginalsVerified!==0)
+            throw Error('Unsupported full-completion claim or partial original model introduced');
+          if(s.counts.verifiedOriginalArchiveModels!==r.modelsWithAllCatalogOriginalFilesVerified||s.counts.scholarlyClinicalApprovals!==0)throw Error('Medical evidence status mismatch');
+          console.log('Verified complete NIH model archives:',r.modelsWithAllCatalogOriginalFilesVerified,'source files:',r.uniqueVerifiedOriginalFiles);
+          NODE
+      - name: Commit evidence of real original storage, not merely metadata
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ATLA_NIH3D_GHCR_BATCH_*_2026.json docs/ATLA_NIH3D_GEOMETRY_STRUCTURAL_QA_2026.json tools/atla-ai/resources/nih3d-verified-originals-2026.json tools/atla-ai/resources/nih3d-educational-evidence-2026/ tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(atla): restore next NIH original sources from GHCR with SHA256'
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

@@ -17,6 +17,8 @@ on:
       - 'scripts/verify-saek-image-integration.mjs'
       - 'scripts/verify-saek-review-hashes.py'
       - 'scripts/build-saek-certification-queue.mjs'
+      - 'scripts/saek-educational-image-evidence.mjs'
+      - 'scripts/saek-educational-image-evidence.test.mjs'
       - 'scripts/validate-saek-svg.py'
       - 'scripts/check-saek-browser-text.cjs'
       - 'scripts/verify-saek-gallery-browser.mjs'
@@ -40,6 +42,8 @@ on:
       - 'scripts/verify-saek-image-integration.mjs'
       - 'scripts/verify-saek-review-hashes.py'
       - 'scripts/build-saek-certification-queue.mjs'
+      - 'scripts/saek-educational-image-evidence.mjs'
+      - 'scripts/saek-educational-image-evidence.test.mjs'
       - 'scripts/validate-saek-svg.py'
       - 'scripts/check-saek-browser-text.cjs'
       - 'scripts/verify-saek-gallery-browser.mjs'
@@ -65,6 +69,7 @@ jobs:
       - name: Audit registry, source provenance, and lesson placements
         run: |
           node --check saek-images.js
+          node --test scripts/saek-educational-image-evidence.test.mjs
           node scripts/check-saek-images.mjs
           node scripts/check-saek-lesson-image-fit.mjs
           node scripts/verify-saek-image-integration.mjs

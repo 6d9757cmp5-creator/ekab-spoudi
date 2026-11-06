@@ -9,10 +9,15 @@ import {run} from "../../scripts/claude-connection-test.mjs";
 
 const KEY="sk-ant-TESTKEY-0000000000000000";
 const ORIGIN="https://6d9757cmp5-creator.github.io";
-const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:"ΚΑΡΠΑ",definition:"Ορισμός."}],level:"student",history:[]};
+const canonicalCpr=JSON.parse(readFileSync(new URL("../../medical-terms.json",import.meta.url),"utf8")).items.find(x=>x.term==="Καρδιοπνευμονική αναζωογόνηση");
+assert(canonicalCpr,"Canonical CPR glossary record must be present");
+const body={question:"Τι είναι η ΚΑΡΠΑ;",passages:[{id:"T1",term:canonicalCpr?.term,definition:canonicalCpr?.definition}],level:"student",history:[]};
 const req=(over={})=>new Request("https://w.example/",{method:"POST",headers:{origin:ORIGIN,"content-type":"application/json","cf-connecting-ip":"1.1.1.1",...over},body:JSON.stringify(body)});
 const memStore=()=>{const m=new Map();return {get:async k=>m.get(k),put:async(k,v)=>{m.set(k,v);},m};};
 function budgetBinding(store){return {idFromName:()=>"g",get:()=>({fetch:async(_u,init)=>{const b=JSON.parse(init.body);return Response.json(await charge(store,{ipKey:b.ipKey,tokens:b.tokens,limits:b.limits}));}})};}
+// The only model reply the output gate accepts: cited, with a closed stream.
+const CITED='Εκπαιδευτικός ορισμός. [T1]';
+const citedReply=()=>sse(['data: '+JSON.stringify({type:"content_block_delta",delta:{type:"text_delta",text:CITED}}),'data: {"type":"message_stop"}']);
 const sse=lines=>new Response(new ReadableStream({start(c){const e=new TextEncoder();for(const l of lines)c.enqueue(e.encode(l+"\n"));c.close();}}),{status:200,headers:{"content-type":"text/event-stream"}});
 const on=(extra={})=>({MENTOR_PROVIDER:"claude",MENTOR_CLAUDE_ENABLED:"true",MENTOR_SPEND_LIMIT_CONFIRMED:"true",ANTHROPIC_API_KEY:KEY,
  MENTOR_TEST_TOKEN:"private-test-token-123",BUDGET:budgetBinding(memStore()),...extra});
@@ -78,7 +83,7 @@ test("Worker: Claude is OFF unless every switch, the secret and the budget store
  }
 });
 test("Worker: private mode needs the test token; a wrong one never reaches Claude",async()=>{
- let calls=0;globalThis.fetch=async()=>{calls++;return sse([]);};
+ let calls=0;globalThis.fetch=async()=>{calls++;return citedReply();};
  assert.equal((await worker.fetch(req(),on())).status,401);
  assert.equal((await worker.fetch(req({"x-mentor-test-token":"nope"}),on())).status,401);
  assert.equal((await worker.fetch(req(auth),on({MENTOR_TEST_TOKEN:""}))).status,401);
@@ -88,15 +93,15 @@ test("Worker: private mode needs the test token; a wrong one never reaches Claud
 });
 test("Worker: success streams tokens; key never appears in headers or body",async()=>{
  let sent;
- globalThis.fetch=async(u,i)=>{sent=JSON.parse(i.body);return sse(['data: {"type":"content_block_delta","delta":{"type":"text_delta","text":"ok"}}']);};
+ globalThis.fetch=async(u,i)=>{sent=JSON.parse(i.body);return citedReply();};
  const r=await worker.fetch(req(auth),on());
  const text=await r.text();
- assert.equal(r.status,200);assert.match(text,/"token":"ok"/);
+ assert.equal(r.status,200);assert.ok(text.includes(CITED));
  assert.ok(![...r.headers.values(),text].some(v=>v.includes(KEY)));
  assert.equal(sent.model,"claude-haiku-5-5");assert.ok(sent.max_tokens<=HARD_MAX_TOKENS);
 });
 test("Worker: no passages means no paid call; limits return 429 without calling Claude",async()=>{
- let calls=0;globalThis.fetch=async()=>{calls++;return sse([]);};
+ let calls=0;globalThis.fetch=async()=>{calls++;return citedReply();};
  const noPass=new Request("https://w.example/",{method:"POST",headers:{origin:ORIGIN,"content-type":"application/json",...auth},body:JSON.stringify({...body,passages:[]})});
  assert.equal((await worker.fetch(noPass,on())).status,200);assert.equal(calls,0);
  const env=on({CLAUDE_IP_HOURLY:"1"});
@@ -123,7 +128,7 @@ test("browser code never contains a key and the shipped endpoint stays empty (AI
  for(const f of files)assert.doesNotMatch(readFileSync(f,"utf8"),/sk-ant-[A-Za-z0-9_-]{20,}/,f);
  const page=files.filter(f=>f.startsWith("mentor")&&!f.endsWith(".test.mjs")&&!f.includes("claude-adapter")&&!f.includes("guard.mjs"));
  for(const f of page)assert.doesNotMatch(readFileSync(f,"utf8"),/api\.anthropic\.com|ANTHROPIC_API_KEY/,f);
- assert.match(readFileSync("mentor/ai/config.mjs","utf8"),/endpoint:""/);
+ assert.match(readFileSync("atla/ai/config.mjs","utf8"),/endpoint:""/);
  const wr=readFileSync("workers/mentor-chat/wrangler.jsonc","utf8");
  for(const v of ["MENTOR_CLAUDE_ENABLED","MENTOR_SPEND_LIMIT_CONFIRMED","MENTOR_PUBLIC"])assert.match(wr,new RegExp('"'+v+'": "false"'));
 });

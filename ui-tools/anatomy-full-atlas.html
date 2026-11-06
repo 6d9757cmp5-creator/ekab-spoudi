@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATLA · Πλήρης BodyParts3D άτλας</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color-scheme:dark;background:#081a2b;color:#edf6fb}
+*{box-sizing:border-box}body{margin:0}main{max-width:1300px;margin:auto;padding:16px 18px 30px}
+header{display:flex;align-items:center;flex-wrap:wrap;gap:18px}a{color:#8fdef1}h1{margin:.5em 0 .2em;font-size:clamp(1.3rem,3vw,2rem)}
+p{color:#c4d7e4;max-width:1050px}section{background:#112a3c;border:1px solid #2b5569;border-radius:14px;padding:16px}
+.controls{display:flex;align-items:end;flex-wrap:wrap;gap:12px}.controls label{display:grid;gap:5px;min-width:240px;flex:1}
+select,button{font:inherit;padding:10px 12px;border-radius:8px;min-height:44px}
+select{background:#071724;color:#f1f6fb;border:1px solid #6894a8}
+button{background:#52c9ad;color:#08211d;border:0;font-weight:700;cursor:pointer}
+button.secondary{background:#355166;color:white}button:focus-visible,a:focus-visible{outline:3px solid #fff}
+iframe{display:block;width:100%;height:75vh;min-height:500px;border:1px solid #47667f;border-radius:14px;margin-top:12px;background:#112b3c}
+iframe[hidden]{display:none}#state{min-height:20px;font-weight:600}
+small{color:#b8ccdc}ul{margin:.5rem 0 1rem}
+</style>
+</head>
+<body>
+<main>
+<header><a href="../tools/anatomy-3d/index.html">← Εργαστήριο 3D Ανατομίας</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></header>
+<h1>BodyParts3D · Πλήρης τοπικός άτλας</h1>
+<p>Ανεξάρτητη προβολή των ήδη αποθηκευμένων BodyParts3D ατλάντων. Τα αρχεία διαβάζονται από την ίδια εγκατάσταση της ΕΚΑΒ Σπουδή, όχι από νέο εξωτερικό server. Δεν αλλάζουν τα κανονικά μαθήματα, η μαθησιακή πρόοδος ή ο ενεργός 3D viewer.</p>
+<section>
+<div class="controls">
+<label for="atlas">Έκδοση ανατομικού άτλαντα
+<select id="atlas">
+<option value="bp3d40">BodyParts3D 4.0 · 1.259 πλέγματα · ~68 MiB</option>
+<option value="bp3d43">BodyParts3D 4.3 · 3.210 πλέγματα · ~193 MiB</option>
+</select></label>
+<button id="load" type="button">Φόρτωση άτλαντα</button>
+<button id="unload" type="button" class="secondary" disabled>Κλείσιμο · ελευθέρωση μνήμης</button>
+</div>
+<p id="state" role="status" aria-live="polite">Δεν φορτώθηκε κανένας άτλας. Η λήψη ξεκινά μόνο όταν πατήσεις «Φόρτωση».</p>
+<p><small>Η έκδοση 4.3 απαιτεί περίπου 193 MiB για λήψη, επιπλέον μνήμη για την τρισδιάστατη απεικόνιση και WebGL2. Σε κινητά ή με περιορισμένα δεδομένα προτίμησε 4.0. Πρόκειται για εκπαιδευτική ανατομία, όχι επικυρωμένο κλινικό διαγνωστικό εργαλείο.</small></p>
+</section>
+<iframe id="viewer" title="Πλήρης διαδραστικός BodyParts3D άτλας" hidden loading="lazy"></iframe>
+<p><small>Συλλογή BodyParts3D © DBCLS · CC BY 4.0 · αρχικός κώδικας Open Anatomy Atlas MIT, με τοπική προσαρμογή για τις ήδη αποθηκευμένες πηγές. Ο έλεγχος περιλαμβάνει την ορθότητα των αποθηκευμένων αρχείων, όχι πιστοποίηση ανατομικής/κλινικής ακρίβειας.</small></p>
+</main>
+<script>
+const atlas=document.getElementById('atlas'),viewer=document.getElementById('viewer'),state=document.getElementById('state');
+const load=document.getElementById('load'),unload=document.getElementById('unload');
+const paths={
+ bp3d40:'../tools/anatomy-3d/vendor/open-anatomy-atlas/src/renderer/index.html?atla=bp3d40',
+ bp3d43:'../tools/anatomy-3d/vendor/open-anatomy-atlas/src/renderer/index.html?atla=bp3d43'
+};
+load.addEventListener('click',()=>{
+ const selected=atlas.value;
+ if(!Object.prototype.hasOwnProperty.call(paths,selected))return;
+ if(selected==='bp3d43'&&!confirm('Η πλήρης έκδοση 4.3 χρειάζεται λήψη περίπου 193 MiB και πολλή μνήμη. Να συνεχίσουμε;'))return;
+ viewer.hidden=false;viewer.src=paths[selected];unload.disabled=false;
+ state.textContent='Εκκινήθηκε η προβολή '+selected+'. Παρακολούθησε την ένδειξη φόρτωσης μέσα στον viewer.';
+});
+unload.addEventListener('click',()=>{viewer.removeAttribute('src');viewer.hidden=true;unload.disabled=true;state.textContent='Ο άτλας έκλεισε. Η προσωρινή μνήμη της προβολής μπορεί να απελευθερωθεί.'});
+</script>
+</body></html>

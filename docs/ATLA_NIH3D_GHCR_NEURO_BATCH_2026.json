@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "status": "ALL_25_LISTED_ORIGINALS_PERSISTED_AND_ANONYMOUSLY_RESTORED",
+  "scope": "Three neuroanatomy source records only, not all NIH 3D models",
+  "imageTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-neuro-00252-00278-v1",
+  "immutableDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:cb5ab3f10913f9159d4d1b491bf0e63b6b4f34d28d6045dc5463747529d7b780",
+  "models": 3,
+  "files": 25,
+  "totalOriginalBytes": 34787919,
+  "completeForTheseCatalogEntries": true,
+  "allListedOriginalFormatsForTheseCatalogEntries": true,
+  "fullNIHArchiveComplete": false,
+  "everySourceSHA256CheckedAfterRecovery": true,
+  "scientificallyApproved": false,
+  "copyrightAndAttribution": [
+    {
+      "id": 252,
+      "accession": "3DPX-000252",
+      "title": "Corpus callosum",
+      "license": "CC BY 4.0",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000252",
+      "sourceCategory": "Anatomy",
+      "independentScientificApproval": false
+    },
+    {
+      "id": 255,
+      "accession": "3DPX-000255",
+      "title": "Medulla oblongata",
+      "license": "CC BY 4.0",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000255",
+      "sourceCategory": "Anatomy",
+      "independentScientificApproval": false
+    },
+    {
+      "id": 278,
+      "accession": "3DPX-000278",
+      "title": "Brain Ventricles",
+      "license": "CC BY 4.0",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000278",
+      "sourceCategory": "Anatomy",
+      "independentScientificApproval": false
+    }
+  ],
+  "filesByFormat": {
+    "STL": 5,
+    "X3D": 5,
+    "GLB": 5,
+    "WRL": 5,
+    "OBJ": 5
+  },
+  "sourceManifest": {
+    "schemaVersion": 1,
+    "mode": "REAL_ORIGINAL_FILES_NO_TRANSFORM",
+    "source": "NIH 3D",
+    "snapshot": "ATLA Master Plan 2026",
+    "sourceCatalogEntries": 285,
+    "scope": "3 CC BY 4.0 human neuro-anatomical records",
+    "allListedFormatsForSelectedModels": true,
+    "selectedEntryIDs": [
+      252,
+      255,
+      278
+    ],
+    "originalModelCount": 3,
+    "originalFileCount": 25,
+    "originalByteCount": 34787919,
+    "independentlyScientificallyApproved": false,
+    "fullNIHArchiveComplete": false,
+    "originalModels": [
+      {
+        "id": 252,
+        "accession": "3DPX-000252",
+        "title": "Corpus callosum",
+        "license": "CC BY 4.0",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000252",
+        "sourceCategory": "Anatomy",
+        "independentScientificApproval": false
+      },
+      {
+        "id": 255,
+        "accession": "3DPX-000255",
+        "title": "Medulla oblongata",
+        "license": "CC BY 4.0",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000255",
+        "sourceCategory": "Anatomy",
+        "independentScientificApproval": false
+      },
+      {
+        "id": 278,
+        "accession": "3DPX-000278",
+        "title": "Brain Ventricles",
+        "license": "CC BY 4.0",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000278",
+        "sourceCategory": "Anatomy",
+        "independentScientificApproval": false
+      }
+    ],
+    "originalFiles": [
+      {
+        "entryId": 252,
+        "accession": "3DPX-000252",
+        "originalName": "corpus_callosum-3004-nih3d.stl",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30920/runs/7a396156-7e47-432f-a09f-bb43f0f089f1/output-files/838649",
+        "expectedBytes": 1552284,
+        "archivePath": "originals/3DPX-000252/000.stl",
+        "sha256": "7c5c9715657fa0f6717e6d697bb4ee1e24a2f69e63d639e25fb168fc85ac5797",
+        "verifiedBytes": 1552284
+      },
+      {
+        "entryId": 252,
+        "accession": "3DPX-000252",
+        "originalName": "corpus_callosum-3004-nih3d.x3d",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30920/runs/7a396156-7e47-432f-a09f-bb43f0f089f1/output-files/838651",
+        "expectedBytes": 1630110,
+        "archivePath": "originals/3DPX-000252/001.x3d",
+        "sha256": "ce35aef36a496cd0a0a3762554b0cfdb5fcf9bb281d7b3e66ba361da54fa4726",
+        "verifiedBytes": 1630110
+      },
+      {
+        "entryId": 252,
+        "accession": "3DPX-000252",
+        "originalName": "corpus_callosum-3004-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30920/runs/7a396156-7e47-432f-a09f-bb43f0f089f1/output-files/838652",
+        "expectedBytes": 2607480,
+        "archivePath": "originals/3DPX-000252/002.glb",
+        "sha256": "830e8843850478f92e8c187f04ad58c8159095dccf207592d96cdb2304ffe3bf",
+        "verifiedBytes": 2607480
+      },
+      {
+        "entryId": 252,
+        "accession": "3DPX-000252",
+        "originalName": "corpus_callosum-3004-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30920/runs/7a396156-7e47-432f-a09f-bb43f0f089f1/output-files/838654",
+        "expectedBytes": 6349434,
+        "archivePath": "originals/3DPX-000252/003.wrl",
+        "sha256": "578a118b659334c81b3eb6552692bedfc162a7df7e008353183565bed2668e38",
+        "verifiedBytes": 6349434
+      },
+      {
+        "entryId": 252,
+        "accession": "3DPX-000252",
+        "originalName": "corpus_callosum-3004-nih3d.obj",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30920/runs/7a396156-7e47-432f-a09f-bb43f0f089f1/output-files/838655",
+        "expectedBytes": 2458471,
+        "archivePath": "originals/3DPX-000252/004.obj",
+        "sha256": "8dea0e3c9cb6c5e6293fd9ebd0224a4f594e18bcc08566c6640324c10727551d",
+        "verifiedBytes": 2458471
+      },
+      {
+        "entryId": 255,
+        "accession": "3DPX-000255",
+        "originalName": "medulla_oblongata-61-nih3d.stl",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30923/runs/16943e52-bb7b-45fb-a5b3-86b8d44d117c/output-files/838711",
+        "expectedBytes": 400484,
+        "archivePath": "originals/3DPX-000255/000.stl",
+        "sha256": "fbd78b5ce3d459575a8d4ad5a3d9c8aa9bdfae41bb05dbe0d9c72e8e0b2da382",
+        "verifiedBytes": 400484
+      },
+      {
+        "entryId": 255,
+        "accession": "3DPX-000255",
+        "originalName": "medulla_oblongata-61-nih3d.x3d",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30923/runs/16943e52-bb7b-45fb-a5b3-86b8d44d117c/output-files/838713",
+        "expectedBytes": 411958,
+        "archivePath": "originals/3DPX-000255/001.x3d",
+        "sha256": "af23d24eaa80ccc170c8b43e061a2ae72a325bb5ff3674abe701bd8a1da7b9b6",
+        "verifiedBytes": 411958
+      },
+      {
+        "entryId": 255,
+        "accession": "3DPX-000255",
+        "originalName": "medulla_oblongata-61-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30923/runs/16943e52-bb7b-45fb-a5b3-86b8d44d117c/output-files/838714",
+        "expectedBytes": 625312,
+        "archivePath": "originals/3DPX-000255/002.glb",
+        "sha256": "0f9e0eda7500de95e16afe876e177abba5236e37522aee25e4759dd03adf3108",
+        "verifiedBytes": 625312
+      },
+      {
+        "entryId": 255,
+        "accession": "3DPX-000255",
+        "originalName": "medulla_oblongata-61-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30923/runs/16943e52-bb7b-45fb-a5b3-86b8d44d117c/output-files/838716",
+        "expectedBytes": 1641390,
+        "archivePath": "originals/3DPX-000255/003.wrl",
+        "sha256": "0c52f6e1cd90859d688e476afe8532edf014e42a793dd5db8eb119a34a82324b",
+        "verifiedBytes": 1641390
+      },
+      {
+        "entryId": 255,
+        "accession": "3DPX-000255",
+        "originalName": "medulla_oblongata-61-nih3d.obj",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30923/runs/16943e52-bb7b-45fb-a5b3-86b8d44d117c/output-files/838717",
+        "expectedBytes": 607603,
+        "archivePath": "originals/3DPX-000255/004.obj",
+        "sha256": "183753af6699846950fd70e699754bdf3ff6f719f390af83fe94783eae28df91",
+        "verifiedBytes": 607603
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "left_lateral_ventricle-4-nih3d.stl",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/0f6503ac-1543-435e-b2d7-e176406cf052/output-files/840836",
+        "expectedBytes": 718484,
+        "archivePath": "originals/3DPX-000278/000.stl",
+        "sha256": "e59591ce584558b258772a81e13895bf2cb3522c953d305463c0d3b453632cc9",
+        "verifiedBytes": 718484
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "left_lateral_ventricle-4-nih3d.x3d",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/0f6503ac-1543-435e-b2d7-e176406cf052/output-files/840838",
+        "expectedBytes": 740451,
+        "archivePath": "originals/3DPX-000278/001.x3d",
+        "sha256": "ecc834f8e3784eb06ab48b1ca70008a310b8bf7012d3f2d7294369573461055b",
+        "verifiedBytes": 740451
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "left_lateral_ventricle-4-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/0f6503ac-1543-435e-b2d7-e176406cf052/output-files/840839",
+        "expectedBytes": 1121164,
+        "archivePath": "originals/3DPX-000278/002.glb",
+        "sha256": "07b024f79a289390be3dfe7686b6cb202338642e89abf1fe6f002962171c73b0",
+        "verifiedBytes": 1121164
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "left_lateral_ventricle-4-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/0f6503ac-1543-435e-b2d7-e176406cf052/output-files/840841",
+        "expectedBytes": 2956970,
+        "archivePath": "originals/3DPX-000278/003.wrl",
+        "sha256": "41d211246cb61402cc0edceb84d56932180d3219f6283ebddf6655b93c33093f",
+        "verifiedBytes": 2956970
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "left_lateral_ventricle-4-nih3d.obj",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/0f6503ac-1543-435e-b2d7-e176406cf052/output-files/840842",
+        "expectedBytes": 1106673,
+        "archivePath": "originals/3DPX-000278/004.obj",
+        "sha256": "63dbe89374b330435d1e900aed834c9bd218585dfb5e5de1a2481e3dc7b612e9",
+        "verifiedBytes": 1106673
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "fourth_ventricle-15-nih3d.stl",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/20d01aeb-ab12-4c28-abe8-80ac61f6a790/output-files/839140",
+        "expectedBytes": 420884,
+        "archivePath": "originals/3DPX-000278/005.stl",
+        "sha256": "5dc56950da514afb09e72c06d04c9391289580b427f5af76611fb3aa5d1c9334",
+        "verifiedBytes": 420884
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "fourth_ventricle-15-nih3d.x3d",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/20d01aeb-ab12-4c28-abe8-80ac61f6a790/output-files/839142",
+        "expectedBytes": 431050,
+        "archivePath": "originals/3DPX-000278/006.x3d",
+        "sha256": "0fcb274e305c4dba0f0d74dd1997a7b3d32dff2521938bbe30fb7c802b84a247",
+        "verifiedBytes": 431050
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "fourth_ventricle-15-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/20d01aeb-ab12-4c28-abe8-80ac61f6a790/output-files/839143",
+        "expectedBytes": 657472,
+        "archivePath": "originals/3DPX-000278/007.glb",
+        "sha256": "1a4cbbe80350c888efc36f35e1d96c8e68f065f2e79cfa77f96d2816dff56b2c",
+        "verifiedBytes": 657472
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "fourth_ventricle-15-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/20d01aeb-ab12-4c28-abe8-80ac61f6a790/output-files/839145",
+        "expectedBytes": 1726991,
+        "archivePath": "originals/3DPX-000278/008.wrl",
+        "sha256": "d01d013f721e5f3a4700e5bfd627fa8ad1f64b73c059d814971a2db6c315286b",
+        "verifiedBytes": 1726991
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "fourth_ventricle-15-nih3d.obj",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/20d01aeb-ab12-4c28-abe8-80ac61f6a790/output-files/839146",
+        "expectedBytes": 637260,
+        "archivePath": "originals/3DPX-000278/009.obj",
+        "sha256": "36ee04e6da7efb0058bcc40a7ec2ffcc0d035f24e413af6bbc60b6ccd250e475",
+        "verifiedBytes": 637260
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "right_lateral_ventricle-43_1-nih3d.stl",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/4ef14e59-a96d-4103-823c-07ef3b044444/output-files/838660",
+        "expectedBytes": 652884,
+        "archivePath": "originals/3DPX-000278/010.stl",
+        "sha256": "51b351c098f0e5c19e1cee71e36331a23a8d070c59db4d26908071ddbb2e2a51",
+        "verifiedBytes": 652884
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "right_lateral_ventricle-43_1-nih3d.x3d",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/4ef14e59-a96d-4103-823c-07ef3b044444/output-files/838662",
+        "expectedBytes": 667150,
+        "archivePath": "originals/3DPX-000278/011.x3d",
+        "sha256": "ea04425c61b18a33886c546626dc81da3aeaa8cda35ce58423d8754d09b16c4a",
+        "verifiedBytes": 667150
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "right_lateral_ventricle-43_1-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/4ef14e59-a96d-4103-823c-07ef3b044444/output-files/838663",
+        "expectedBytes": 1018980,
+        "archivePath": "originals/3DPX-000278/012.glb",
+        "sha256": "c809c53e050f9fd1abab103217857b68c342fce053d2093e4d93fb6559ee7b76",
+        "verifiedBytes": 1018980
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "right_lateral_ventricle-43_1-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/4ef14e59-a96d-4103-823c-07ef3b044444/output-files/838665",
+        "expectedBytes": 2650550,
+        "archivePath": "originals/3DPX-000278/013.wrl",
+        "sha256": "7368df54b6ffce1febd4dd313f46bc1572ceaa9a7d42d71411bf9a418a168c92",
+        "verifiedBytes": 2650550
+      },
+      {
+        "entryId": 278,
+        "accession": "3DPX-000278",
+        "originalName": "right_lateral_ventricle-43_1-nih3d.obj",
+        "originalFormat": "OBJ",
+        "url": "https://3d.nih.gov/api/submissions/30934/runs/4ef14e59-a96d-4103-823c-07ef3b044444/output-files/838666",
+        "expectedBytes": 996430,
+        "archivePath": "originals/3DPX-000278/014.obj",
+        "sha256": "ed581f94d4b8e688d23351e1ee26c1fff23c75900115a221bbbfd104016c5483",
+        "verifiedBytes": 996430
+      }
+    ]
+  }
+}

@@ -2,6 +2,12 @@ name: Deep browser journeys
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - 'atla/**'
+      - 'learning-surface.mjs'
+      - 'scripts/audit-browser-journeys.mjs'
+      - '.github/workflows/deep-browser-journeys.yml'
   workflow_dispatch:
 permissions:
   contents: read

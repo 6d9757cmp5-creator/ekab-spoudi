@@ -1,0 +1,68 @@
+name: ATLA 3D Source Viewer Safe Preview
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/atla-ai/model-preview*'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'tools/anatomy-3d/index.html'
+      - 'ui-tools/anatomy-3d/index.html'
+      - 'mentor-next.html'
+      - 'scripts/test-atla-model-preview.mjs'
+      - 'scripts/verify-atla-model-preview-browser.mjs'
+      - 'tools/patient-simulator/assets/patients/preview-manifest.json'
+      - 'tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json'
+      - '.github/workflows/atla-3d-source-preview-check.yml'
+  pull_request:
+    paths:
+      - 'tools/atla-ai/model-preview*'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'scripts/test-atla-model-preview.mjs'
+permissions:
+  contents: read
+concurrency:
+  group: atla-3d-source-preview-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JS module syntax
+        run: |
+          node --check tools/atla-ai/model-preview-catalog.mjs
+          node --check tools/atla-ai/model-preview.mjs
+          node --check scripts/test-atla-model-preview.mjs
+      - name: Run source-routing and no-duplication tests
+        run: node --test scripts/test-atla-model-preview.mjs
+      - name: Verify linked opt-in views and safe import map
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          source=Path('ui-tools/atla-resource-preview.html').read_text()
+          assert 'three@0.180.0' in source
+          assert 'id="source-canvas"' in source
+          assert 'id="source-load"' in source
+          assert 'tools/atla-ai/model-preview.mjs' in source
+          assert 'atla-resource-preview.html?tool=anatomy' in Path('tools/anatomy-3d/index.html').read_text()
+          assert 'atla-resource-preview.html?tool=anatomy' in Path('ui-tools/anatomy-3d/index.html').read_text()
+          assert 'atla-resource-preview.html?tool=cockpit' in Path('mentor-next.html').read_text()
+          print('PASS: opt-in links, import map and independent tools')
+          PY
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: "Browser smoke: real GLB rendering, both independent tools"
+        run: node scripts/verify-atla-model-preview-browser.mjs
+      - name: Save browser screenshots and model-loading evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-anatomy-cockpit-3d-model-previews
+          path: browser-qa-results/atla-resource-*.png
+          if-no-files-found: warn

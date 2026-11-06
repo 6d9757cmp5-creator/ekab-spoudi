@@ -61,12 +61,14 @@ try{
   const open=async path=>{const r=await page.goto(base+path,{waitUntil:'domcontentloaded',timeout:45000});assert(r?.ok(),'Unable to load '+path);};
   await check(device.name+' home theme and primary navigation',async()=>{
    await open('index.html');
-   for(const path of ['saek.html','eoppep.html','farmaka.html','seminar-prep.html','protocols.html','mentor-lab.html'])assert(await page.locator('a[href="'+path+'"]').count()>0,'Missing home link '+path);
+   for(const path of ['paramedic.html','farmaka.html','seminar-prep.html','protocols.html'])assert(await page.locator('a[href="'+path+'"]').count()>0,'Missing home link '+path);
    const toggle=page.locator('#themeToggle');
    await toggle.click();
    assert.equal(await toggle.getAttribute('aria-pressed'),'true','Dark theme did not switch on');
    await toggle.click();
    assert.equal(await toggle.getAttribute('aria-pressed'),'false','Dark theme did not switch off');
+   await open('paramedic.html');
+   for(const path of ['saek.html','eoppep.html','mentor-ecg.html','seminar-prep.html'])assert(await page.locator('a[href="'+path+'"]').count()>0,'Missing Paramedic route '+path);
   });
   await check(device.name+' SAEK all-semesters and tabs',async()=>{
    await open('saek.html');
@@ -138,6 +140,23 @@ try{
    await page.locator('#examLeave').click();
    assert(await page.locator('#examSetup').isVisible(),'Exam did not save and exit');
    assert(await page.locator('#examResume').isVisible(),'Resume is absent');
+  });
+  await check(device.name+' ATLA local learner model preserves all historical grades and notes',async()=>{
+   await open('saek.html');
+   const keys=['ekab.saek.exams.v1','ekab-eoppep-official-v15','ekab.personal-notes.v1'];
+   const original={
+    'ekab.saek.exams.v1':JSON.stringify({history:{'saek-01-1':{correct:1,incorrect:2,partial:0}}}),
+    'ekab-eoppep-official-v15':JSON.stringify({'EOP-A-001':{selfAttempts:3,selfCorrect:1}}),
+    'ekab.personal-notes.v1':JSON.stringify({private:'preserve exactly'})
+   };
+   await page.evaluate(entries=>{for(const [k,v] of Object.entries(entries))localStorage.setItem(k,v)},original);
+   const before=await page.evaluate(keys=>keys.map(k=>localStorage.getItem(k)),keys);
+   await page.locator('.atla-launcher').click();
+   await page.locator('.atla-input').fill('Πού δυσκολεύομαι;');
+   await page.locator('.atla-send').click();
+   await page.waitForFunction(()=>Array.from(document.querySelectorAll('.atla-reply')).some(el=>el.textContent.includes('τοπικό ιστορικό')));
+   const after=await page.evaluate(keys=>keys.map(k=>localStorage.getItem(k)),keys);
+   assert.deepEqual(after,before,'ATLA must never mutate protected learning and notes stores');
   });
   await ctx.close();
  }

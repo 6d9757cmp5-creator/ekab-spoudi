@@ -39,18 +39,12 @@ function boot(){
   return s;
  };
  let lastActivity=Date.now(),showing=false,loading=false,card=null;
- const cache=new Map(),chip=$('button','atlas-recall-chip','🧠 Επανάληψη');
- chip.type='button';chip.hidden=true;chip.setAttribute('aria-controls','atlas-recall-window');
- chip.setAttribute('aria-label','Προαιρετικές ερωτήσεις επανάληψης ATLAS');
+ const cache=new Map();
  const panel=$('aside','atlas-recall-window');panel.id='atlas-recall-window';panel.hidden=true;
  panel.setAttribute('aria-label','Ερώτηση εκπαιδευτικής επανάληψης');panel.setAttribute('role','region');
  const hint=$('span','atlas-recall-hint');hint.hidden=true;hint.setAttribute('role','status');
- document.body.append(chip,panel,hint);
- function refresh(){
-  const n=getCompleted().length,s=normalized();
-  chip.hidden=n===0;chip.textContent=s.enabled?'🧠 Επανάληψη':'🧠 Επανάληψη σε παύση';
-  chip.title=s.enabled?'Ερώτηση από τη διαβασμένη ύλη (οι υπενθυμίσεις λειτουργούν ήδη αυτόματα)':'Οι υπενθυμίσεις είναι σε παύση. Πάτησε για επαναφορά.';
- }
+ document.body.append(panel,hint);
+ function refresh(){normalized();}
  function notice(msg){hint.textContent=msg;hint.hidden=false;setTimeout(()=>{hint.hidden=true},5500)}
  const action=(label,onClick,cls='')=>{const button=$('button',cls,label);button.type='button';button.addEventListener('click',onClick);return button};
  function close(){panel.hidden=true;panel.replaceChildren();showing=false;card=null;refresh();}
@@ -98,10 +92,9 @@ function boot(){
   if(document.querySelector('#study:not(.hidden),[data-atla-active-exam="true"]'))return true;
   return false;
  }
- async function show(manual=false){
+ async function show(){
   if(showing||loading||!getCompleted().length||!settings().enabled)return;
-  if(!manual&&(Date.now()-lastActivity<25000||blocked()))return;
-  if(manual&&document.querySelector('[aria-modal="true"]:not([hidden]),dialog[open]'))return;
+  if(Date.now()-lastActivity<25000||blocked())return;
   loading=true;
   const candidates=getCompleted(),tries=Math.min(8,candidates.length);
   let remaining=[...candidates],selected=null;
@@ -116,11 +109,9 @@ function boot(){
   finally{loading=false}
   if(!selected){const s=normalized();s.nextAt=Date.now()+15*60000;store.set(STUDY_KEY,s);return;}
   const s=normalized();
-  if(!manual){
-   // Revalidate after the asynchronous chapter fetch, because the learner may have moved into an exam.
-   if(s.enabled!==true||s.shownToday>=DAILY_LIMIT||blocked())return;
-   s.shownToday++;s.nextAt=nextSchedule(Date.now(),Math.random,'repeat');store.set(STUDY_KEY,s);
-  }
+  // Revalidate after the asynchronous chapter fetch, because the learner may have moved into an exam.
+  if(s.enabled!==true||s.shownToday>=DAILY_LIMIT||blocked())return;
+  s.shownToday++;s.nextAt=nextSchedule(Date.now(),Math.random,'repeat');store.set(STUDY_KEY,s);
   showing=true;card=selected;
   const head=$('div','atlas-recall-heading');
   head.append($('strong','','ATLAS · Μικρή επανάληψη'),action('✕',close,'atlas-recall-close'));
@@ -146,11 +137,6 @@ function boot(){
   panel.append(footer,$('p','atlas-recall-disclaimer','Ερώτηση από ήδη διαβασμένο κεφάλαιο. Χωρίς βαθμολογία ή κλινικές οδηγίες.'));
   panel.hidden=false;
  }
- chip.addEventListener('click',()=>{
-  const s=normalized();
-  if(!s.enabled){s.enabled=true;s.nextAt=nextSchedule(Date.now());store.set(STUDY_KEY,s);refresh();notice('Οι υπενθυμίσεις ξεκίνησαν ξανά και θα εμφανίζονται αυτόματα.');return;}
-  void show(true);
- });
  function check(){
   if(panel.hidden===false)return;
   refresh();
@@ -165,6 +151,7 @@ function boot(){
  // Explicit event allows a chapter to trigger a safe eligibility recheck without waiting for polling.
  window.addEventListener('ekab:recall-check',check);
  window.addEventListener('ekab:cloud-applied',refresh);
+ window.addEventListener('ekab:recall-settings-changed',()=>{if(settings().enabled===false&&!panel.hidden)close();refresh();});
  window.addEventListener('storage',ev=>{if(ev.key===STUDY_KEY||ev.key===FEEDBACK_KEY||ev.key?.startsWith('ekab.saek.read.'))refresh()});
  document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!panel.hidden)close()});
  refresh();

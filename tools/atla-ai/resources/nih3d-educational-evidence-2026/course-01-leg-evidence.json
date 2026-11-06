@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "source": "SAEK course 01 anatomy source + original NIH descriptions",
+  "course": "01",
+  "chapter": "2",
+  "clinicalUse": "RESEARCH_REFERENCE_ONLY",
+  "academicApproval": "NOT_ESTABLISHED",
+  "anatomyStructureProposals": [
+    {
+      "entryId": 168,
+      "concept": "ATLA-ANATOMY-femur",
+      "sourceEvidence": "NIH CT segmentation description + explicit SAEK skeletal reference"
+    },
+    {
+      "entryId": 169,
+      "concepts": [
+        "ATLA-ANATOMY-tibia",
+        "ATLA-ANATOMY-fibula"
+      ],
+      "sourceEvidence": "NIH CT segmentation description + explicit SAEK skeletal reference"
+    },
+    {
+      "entryId": 170,
+      "concept": "ATLA-ANATOMY-patella",
+      "sourceEvidence": "NIH CT segmentation description + explicit SAEK skeletal reference"
+    }
+  ],
+  "relationEvidence": [
+    {
+      "from": "nih3d:168",
+      "to": "nih3d:169",
+      "type": "NIH_SOURCE_DESCRIBES_MATCHING_LEG_SEGMENTATION",
+      "evidenceSource": "https://3d.nih.gov/entries/3DPX-000168",
+      "evidenceExcerpt": " Segmentation of a full human femur based on a CT scan of a full leg. Matches with tibia & fibula and patella models. \r\n",
+      "externalScientificReview": "NOT_COMPLETED",
+      "inferenceRule": "Exact matching structure terms in NIH source description"
+    },
+    {
+      "from": "nih3d:168",
+      "to": "nih3d:170",
+      "type": "NIH_SOURCE_DESCRIBES_MATCHING_LEG_SEGMENTATION",
+      "evidenceSource": "https://3d.nih.gov/entries/3DPX-000168",
+      "evidenceExcerpt": " Segmentation of a full human femur based on a CT scan of a full leg. Matches with tibia & fibula and patella models. \r\n",
+      "externalScientificReview": "NOT_COMPLETED",
+      "inferenceRule": "Exact matching structure terms in NIH source description"
+    },
+    {
+      "from": "nih3d:169",
+      "to": "nih3d:168",
+      "type": "NIH_SOURCE_DESCRIBES_MATCHING_LEG_SEGMENTATION",
+      "evidenceSource": "https://3d.nih.gov/entries/3DPX-000169",
+      "evidenceExcerpt": " Segmentation of a full human tibia and fibula based on a CT scan of a full leg. Matches with femur and patella models. \r\n",
+      "externalScientificReview": "NOT_COMPLETED",
+      "inferenceRule": "Exact matching structure terms in NIH source description"
+    },
+    {
+      "from": "nih3d:169",
+      "to": "nih3d:170",
+      "type": "NIH_SOURCE_DESCRIBES_MATCHING_LEG_SEGMENTATION",
+      "evidenceSource": "https://3d.nih.gov/entries/3DPX-000169",
+      "evidenceExcerpt": " Segmentation of a full human tibia and fibula based on a CT scan of a full leg. Matches with femur and patella models. \r\n",
+      "externalScientificReview": "NOT_COMPLETED",
+      "inferenceRule": "Exact matching structure terms in NIH source description"
+    },
+    {
+      "from": "nih3d:170",
+      "to": "nih3d:168",
+      "type": "NIH_SOURCE_DESCRIBES_MATCHING_LEG_SEGMENTATION",
+      "evidenceSource": "https://3d.nih.gov/entries/3DPX-000170",
+      "evidenceExcerpt": " Segmentation of a human patella based on a CT scan of a full leg. Matches with tibia & fibula and femur models. \r\n",
+      "externalScientificReview": "NOT_COMPLETED",
+      "inferenceRule": "Exact matching structure terms in NIH source description"
+    },
+    {
+      "from": "nih3d:170",
+      "to": "nih3d:169",
+      "type": "NIH_SOURCE_DESCRIBES_MATCHING_LEG_SEGMENTATION",
+      "evidenceSource": "https://3d.nih.gov/entries/3DPX-000170",
+      "evidenceExcerpt": " Segmentation of a human patella based on a CT scan of a full leg. Matches with tibia & fibula and femur models. \r\n",
+      "externalScientificReview": "NOT_COMPLETED",
+      "inferenceRule": "Exact matching structure terms in NIH source description"
+    }
+  ],
+  "requiresNoExamAnswerLeak": true,
+  "requiresExplicitConfirmationInClinicalCases": true
+}

@@ -1,0 +1,51 @@
+name: ATLA NIH3D safe original-source batch planning across complete catalog
+on:
+  push:
+    branches: [fix/nih3d-medical-only-batch-scope-20261103]
+    paths:
+      - 'scripts/nih3d-plan-next-originals.mjs'
+      - 'scripts/nih3d-plan-next-originals.test.mjs'
+      - '.github/workflows/atla-nih3d-next-originals.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d-plan-next-originals.mjs
+            scripts/nih3d-plan-next-originals.test.mjs
+            tools/atla-ai/nih3d-scientific-ontology.mjs
+            tools/atla-ai/nih3d-biomedical-scope.mjs
+            scripts/nih3d-biomedical-scope.test.mjs
+            tools/atla-ai/resources/nih3d-master-plan-2026/
+            tools/atla-ai/resources/nih3d-verified-originals-2026.json
+            tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify licence restrictions, limits and idempotence
+        run: |
+          set -euo pipefail
+          node --check scripts/nih3d-plan-next-originals.mjs
+          node scripts/nih3d-plan-next-originals.test.mjs
+          node scripts/nih3d-biomedical-scope.test.mjs
+      - name: Scan all original NIH metadata and create next safe archive plan
+        run: node scripts/nih3d-plan-next-originals.mjs
+      - name: Verify no unsupported archive completion claims
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const p=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-next-originals-plan-2026.json','utf8'));
+          const reg=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
+          if(p.sourceScanned!==reg.catalogSourceEntries||p.verifiedAlreadyCompleteModels!==reg.modelsWithAllCatalogOriginalFilesVerified)throw Error('Archive planning source not current');
+          if(p.originalFilesDownloadedByPlanner!==0||p.expertClinicalApprovals!==0||p.fullNIHArchiveComplete!==false)throw Error('False claim of archive or science completion');
+          if(p.selectedModels>20||p.selectedOriginalFiles>85||p.selectedExpectedSourceBytes>100000000)throw Error('Unsafe batch plan');
+          if(!p.selected.every(x=>x.license==='Public Domain'&&x.biomedicalResearchScope==='IN_SCOPE_RESEARCH_CANDIDATE'))throw Error('Medical scientific scope or copyright gate ignored');
+          console.log('Safe next NIH3D original batch planned',JSON.stringify({models:p.selectedModels,files:p.selectedOriginalFiles,bytes:p.selectedExpectedSourceBytes,remaining:p.eligibleRemaining}));
+          NODE

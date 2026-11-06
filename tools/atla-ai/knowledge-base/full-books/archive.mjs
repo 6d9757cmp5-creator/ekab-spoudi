@@ -17,8 +17,8 @@ const HERE=dirname(fileURLToPath(import.meta.url));
 const CATALOG=join(HERE,'catalog.json');
 const ARCHIVED=join(HERE,'archive-manifest.json');
 const STORAGE=join(HERE,'complete');
-const MAX_BOOK=160*1024*1024;
-const MAX_TOTAL=450*1024*1024;
+const MAX_BOOK=560*1024*1024; // 449M Nursing Skills 2e must fit intact
+const MAX_TOTAL=1600*1024*1024; // capped complete archive including seven existing books
 const SHARD_BYTES=16*1024*1024;
 const ALLOWED_HOSTS=new Set(['www.ncbi.nlm.nih.gov','minds.wisconsin.edu','minds.wisc.edu','wtcs.pressbooks.pub']);
 const sha=data=>createHash('sha256').update(data).digest('hex');
@@ -31,13 +31,20 @@ export function validateSource(b){
  if(!/^CC BY 4\.0\b/i.test(b.license))throw Error('No documented CC-BY source approval: '+b.id);
  if((b.alternate_official_pdfs||[]).some(uri=>!isAllowedSource(uri)))throw Error('Invalid alternate official PDF source');
  if(!b.license_url?.startsWith('https://creativecommons.org/licenses/by/4.0/'))throw Error('Missing approved license: '+b.id);
- if(b.atla_ai_retrieval_enabled!==false||b.content_status!=='NOT_YET_ARCHIVED'||b.independent_clinical_review!=='pending')throw Error('Unsafe source state '+b.id);
+ if(b.atla_ai_retrieval_enabled!==false||
+    !['NOT_YET_ARCHIVED','FULL_PDF_ARCHIVED_SHA256_VERIFIED'].includes(b.content_status)||
+    b.independent_clinical_review!=='pending')throw Error('Unsafe source state '+b.id);
+ if(b.content_status==='FULL_PDF_ARCHIVED_SHA256_VERIFIED'&&
+    (!/^[a-f0-9]{64}$/i.test(b.archived_pdf_sha256||'')||
+     !Number.isSafeInteger(b.archived_pdf_bytes)||b.archived_pdf_bytes<30000||
+     !Number.isSafeInteger(b.archived_pages)||b.archived_pages<20))
+    throw Error('Archived source is missing PDF evidence '+b.id);
 }
 async function redirectSafeFetch(uri,fetcher=fetch){
  let current=uri;
  for(let redirect=0;redirect<5;redirect++){
   if(!isAllowedSource(current))throw Error('Unapproved download destination');
-  const r=await fetcher(current,{redirect:'manual',signal:AbortSignal.timeout(150000),
+  const r=await fetcher(current,{redirect:'manual',signal:AbortSignal.timeout(1200000),
     headers:{'user-agent':'ATLA-OER-Archiver/1.0 (full-book licensed archival; contact repository maintainer)','accept':'application/pdf'}});
   if([301,302,303,307,308].includes(r.status)){
    const target=new URL(r.headers.get('location')||'',current).toString();
@@ -168,6 +175,26 @@ export async function main(){
   clinical_retrieval_enabled:false,scientific_approval:false,
   books:results,failures};
  await writeFile(ARCHIVED,JSON.stringify(report,null,2)+'\n');
+ // Keep summary count synchronized with byte-verified persisted manifest.
+ // This is a metadata counter, NOT scientific or learner-content approval.
+ catalog.verified_full_books_persisted=report.complete_verified;
+ catalog.automatic_archival_candidates=eligible.length;
+ catalog.last_archive_manifest_verified_at=report.checked_at;
+ for(const book of catalog.books){
+  const archived=results.find(r=>r.id===book.id);
+  if(archived){
+   book.content_status='FULL_PDF_ARCHIVED_SHA256_VERIFIED';
+   book.archived_pdf_sha256=archived.original_pdf_sha256;
+   book.archived_pdf_bytes=archived.original_pdf_bytes;
+   book.archived_pages=archived.pages;
+   book.archived_parts=archived.parts.length;
+   book.archive_verified_at=report.checked_at;
+  }else{
+   book.content_status='NOT_YET_ARCHIVED';
+   for(const field of ['archived_pdf_sha256','archived_pdf_bytes','archived_pages','archived_parts','archive_verified_at'])delete book[field];
+  }
+ }
+ await writeFile(CATALOG,JSON.stringify(catalog,null,2)+'\n');
  console.log(JSON.stringify({catalog_count:report.catalog_count,attempted:report.attempted,
    verified:report.complete_verified,bytes:budget,failed:failures,scientific_approval:false},null,2));
 }

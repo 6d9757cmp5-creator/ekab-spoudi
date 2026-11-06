@@ -26,7 +26,7 @@
 </head>
 <body>
 <main class="sources-wrap">
-<p><a href="mentor-lab.html">← Εργαστήριο MENTOR</a></p>
+<p><a href="mentor-lab.html">← Εργαστήριο ATLA</a></p>
 <h1>ATLA · Βιβλιογραφία Paramedic</h1>
 <p>Εκπαιδευτικές πηγές διασώστη. Η εξειδικευμένη Ιατρική είναι εσωτερική βιβλιογραφική γνώση του ATLA AI και δεν αποτελεί δεύτερη μαθητική διαδρομή.</p>
 <p>Απογραφή πηγών και βιβλίων, όχι πρόσβαση στα πλήρη κείμενά τους. <strong>Δεν αποτελεί εγκεκριμένη κλινική βιβλιοθήκη.</strong> Οι σύνδεσμοι οδηγούν στον αρχικό εκδότη.</p>
@@ -37,7 +37,7 @@
   <label for="source-stage">Κατάσταση εισαγωγής</label>
   <select id="source-stage">
     <option value="all">Όλες οι πηγές</option>
-    <option value="extracted">Εξαγωγή σε δοκιμαστικό branch</option>
+    <option value="extracted">Εξαγμένο κείμενο, σε έλεγχο</option>
     <option value="identified">Χωρίς εισαγμένο πλήρες κείμενο</option>
   </select>
 </section>
@@ -45,6 +45,15 @@
 <p role="status" id="library-status">Φόρτωση καταλόγου…</p>
 <ul id="sources-list" class="sources-list" aria-label="Πηγές βιβλιογραφίας"></ul>
 <p class="muted small">Η εξαγωγή κειμένου για εσωτερικό έλεγχο δεν ισοδυναμεί με άδεια δημοσίευσης ή ανεξάρτητη επιστημονική έγκριση. Δεν εμφανίζεται κλινικό κείμενο από τις υπό εξέταση πηγές.</p>
+
+<section aria-labelledby="research-title">
+<h2 id="research-title">Νέα επιστημονική βιβλιογραφία — υπό αξιολόγηση</h2>
+<p>Μόνο τίτλοι, PMID και βιβλιογραφικά στοιχεία από τη σάρωση PubMed. <strong>Δεν αποτελούν εγκεκριμένες θεραπευτικές οδηγίες ούτε χρησιμοποιούνται σε AI απαντήσεις.</strong></p>
+<label for="research-search">Αναζήτηση δημοσίευσης ή PMID</label>
+<input type="search" id="research-search" maxlength="140" autocomplete="off" placeholder="π.χ. prehospital, trauma, PMID" style="width:100%;min-height:46px;padding:10px;margin:8px 0 12px;border-radius:10px;background:var(--surface2);color:var(--ink);border:1px solid var(--border)">
+<p id="research-status" role="status" aria-live="polite">Επαλήθευση ερευνητικών εγγραφών…</p>
+<ul id="research-list" class="sources-list" aria-label="Επιστημονικές δημοσιεύσεις προς αξιολόγηση"></ul>
+</section>
 </main>
-<script type="module" src="mentor/presence/presence.mjs"></script></body>
+<script type="module" src="atla/assistant.mjs"></script></body>
 </html>

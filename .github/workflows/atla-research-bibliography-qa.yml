@@ -1,0 +1,41 @@
+name: ATLA read-only research bibliography QA
+on:
+  push:
+    branches: [feature/atla-cited-research-library-20261103]
+    paths:
+      - 'mentor/library/research-discovery.*'
+      - 'mentor/app/library.js'
+      - 'mentor-library.html'
+      - '.github/workflows/atla-research-bibliography-qa.yml'
+  pull_request:
+    paths:
+      - 'mentor/library/research-discovery.*'
+      - 'mentor/app/library.js'
+      - 'mentor-library.html'
+      - '.github/workflows/atla-research-bibliography-qa.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            mentor/library
+            mentor/app/library.js
+            mentor-library.html
+            mentor/knowledge
+            atla/knowledge
+            medical-terms.json
+            tools/atla-ai/knowledge-refresh/queue
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify clinical quarantine and research-only metadata, no AI credits
+        run: |
+          node --check mentor/app/library.js
+          node --check mentor/library/research-discovery.mjs
+          node --test mentor/library/research-discovery.test.mjs mentor/knowledge/retrieve.test.mjs

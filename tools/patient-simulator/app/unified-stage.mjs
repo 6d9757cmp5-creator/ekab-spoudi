@@ -7,13 +7,14 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {clone as cloneSkinned} from 'three/addons/utils/SkeletonUtils.js';
 
 export const SCENE_PATIENTS=Object.freeze({
  road:Object.freeze({a:'alex',b:'daniel'}),
  home:Object.freeze({a:'amara',b:'alex'}),
  square:Object.freeze({a:'alex',b:'amara'})
 });
-const CLINICAL_DISCLAIMER='Στατικά μοντέλα CC0 — δεν προσομοιώνουν αναπνοή, τραύμα ή επίδραση θεραπείας.';
+const CLINICAL_DISCLAIMER='Μοντέλα CC0 · ο προαιρετικός rigged avatar κινείται μόνο εκπαιδευτικά, χωρίς κλινικά έγκυρη αναπνοή, τραύμα ή επίδραση θεραπείας.';
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
 function material(color,roughness=.77,metalness=.04){return new THREE.MeshStandardMaterial({color,roughness,metalness});}
 function box(w,h,d,mat,x=0,y=0,z=0,group=null){
@@ -112,7 +113,7 @@ function selectionMark(color){
 function normalizeModel(object,key){
  const bounds=new THREE.Box3().setFromObject(object),size=bounds.getSize(new THREE.Vector3());
  if(!Number.isFinite(size.length())||size.length()<.001)throw Error('Invalid GLB bounds: '+key);
- const scale=(key==='alex'?1.76:key==='daniel'?1.82:1.34)/Math.max(size.x,size.y,size.z);
+ const scale=(key==='alex'?1.76:key==='daniel'?1.82:key==='makehuman'?1.75:1.34)/Math.max(size.x,size.y,size.z);
  object.scale.multiplyScalar(scale);object.updateMatrixWorld(true);
  const b=new THREE.Box3().setFromObject(object),center=b.getCenter(new THREE.Vector3());
  object.position.x-=center.x;object.position.z-=center.z;object.position.y-=b.min.y;
@@ -132,7 +133,7 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
  gl.toneMapping=THREE.ACESFilmicToneMapping;
  gl.toneMappingExposure=1.23;
  gl.setPixelRatio(Math.min(window.devicePixelRatio||1,1.6));
- gl.shadowMap.enabled=true;gl.shadowMap.type=THREE.PCFSoftShadowMap;
+ gl.shadowMap.enabled=true;gl.shadowMap.type=THREE.PCFShadowMap;
  gl.domElement.className='next-unified-canvas';
  gl.domElement.setAttribute('aria-label','Κοινή τρισδιάστατη εκπαιδευτική σκηνή με δύο εικονικούς ασθενείς και εξοπλισμό.');
  host.append(gl.domElement);
@@ -152,19 +153,19 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
  const loader=new GLTFLoader();
  const cache=new Map();let background=null,equipment=null;
  const active=new THREE.Group();active.name='Εικονικοί ασθενείς';scene.add(active);
- const people={a:null,b:null},marks={};
+ const people={a:null,b:null},mixers={a:null,b:null},marks={};
  for(const id of ['a','b']){
   marks[id]=selectionMark(id==='a'?'#6fe7d4':'#88bafa');
   scene.add(marks[id]);
  }
  const positions={a:new THREE.Vector3(-1.2,0,.2),b:new THREE.Vector3(1.25,0,-.15)};
- let current={scene:'road',person:'a',view:'scene'},environmentKind=null,disposed=false,revision=0,raf=0,lastRender=0;
+ let current={scene:'road',person:'a',view:'scene',rigged:false},environmentKind=null,disposed=false,revision=0,raf=0,lastRender=0,lastAnimTime=0;
  const pointer={x:0,y:0},cast=new THREE.Raycaster(),mouse=new THREE.Vector2();
  const report=(status)=>{gl.domElement.dataset.stageStatus=status;onStatus(status,CLINICAL_DISCLAIMER);};
  function fetchModel(key){
   if(!assets[key])return Promise.reject(Error('Missing GLB '+key));
   if(!cache.has(key))cache.set(key,new Promise((resolve,reject)=>{
-   loader.load(assets[key],gltf=>resolve(gltf.scene),undefined,reject);
+   loader.load(assets[key],gltf=>resolve({scene:gltf.scene,animations:gltf.animations||[]}),undefined,reject);
   }));
   return cache.get(key);
  }
@@ -212,19 +213,25 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
   const nextView=['scene','full','head','torso','legs'].includes(next?.view)?next.view:'scene';
   const needsScene=kind!==current.scene||!background;
   const needsFocus=needsScene||nextPerson!==current.person||nextView!==current.view;
-  current={...current,scene:kind,person:nextPerson,view:nextView};
+  current={...current,scene:kind,person:nextPerson,view:nextView,rigged:!!next?.rigged};
   setEnvironment(kind);
-  const token=++revision,models=SCENE_PATIENTS[kind];
+  const token=++revision,models=current.rigged?{...SCENE_PATIENTS[kind],a:'makehuman'}:SCENE_PATIENTS[kind];
   const pending=['a','b'].filter(id=>people[id]?.userData?.key!==models[id]);
   if(pending.length)report('loading');
   const loads=await Promise.allSettled(pending.map(async id=>{
-   const key=models[id],sceneRoot=(await fetchModel(key)).clone(true);
+   const key=models[id],source=await fetchModel(key),sceneRoot=cloneSkinned(source.scene);
    normalizeModel(sceneRoot,key);
    const content=new THREE.Group();content.name='Ασθενής '+id.toUpperCase();content.userData.key=key;
    const bb=new THREE.Box3().setFromObject(sceneRoot),size=bb.getSize(new THREE.Vector3());
    content.userData.height=size.y;
    content.userData.standing=key!=='daniel';
    content.add(sceneRoot);content.position.copy(positions[id]);
+   if(key==='makehuman'&&source.animations.length){
+    const animator=new THREE.AnimationMixer(sceneRoot);
+    animator.clipAction(source.animations[0]).play();
+    content.userData.mixer=animator;
+    content.userData.clipCount=source.animations.length;
+   }
    return{id,content};
   }));
   if(disposed||token!==revision)return;
@@ -232,11 +239,14 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
   loads.forEach((r,i)=>{
    if(r.status==='fulfilled'){
     const {id,content}=r.value;
+    if(mixers[id]){mixers[id].stopAllAction();mixers[id]=null}
     if(people[id])active.remove(people[id]);
-    people[id]=content;active.add(content);
+    people[id]=content;mixers[id]=content.userData.mixer||null;active.add(content);
    }else{failed=true;console.warn('[EKAB Simulator] GLB load failed',r.reason);}
   });
   refreshMarks();
+  gl.domElement.dataset.riggedModel=people.a?.userData.key==='makehuman'&&!!mixers.a?'ready':'off';
+  gl.domElement.dataset.riggedClips=String(people.a?.userData.clipCount||0);
   if(needsFocus)applyFocus();
   report(failed?'partial':people.a&&people.b?'ready':'partial');
  }
@@ -266,7 +276,10 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
   if(disposed)return;
   raf=requestAnimationFrame(tick);
   if(document.hidden||now-lastRender<minFrame)return;
-  lastRender=now;controls.update();gl.render(scene,camera);
+  const delta=lastAnimTime?Math.min(.07,(now-lastAnimTime)/1000):0;
+  lastAnimTime=now;lastRender=now;
+  for(const mixer of Object.values(mixers))mixer?.update(delta);
+  controls.update();gl.render(scene,camera);
  }
  raf=requestAnimationFrame(tick);
  report('loading');
@@ -276,6 +289,7 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
   dispose(){
    if(disposed)return;disposed=true;revision++;
    cancelAnimationFrame(raf);observer.disconnect();controls.dispose();
+   for(const mixer of Object.values(mixers))mixer?.stopAllAction();
    gl.domElement.removeEventListener('pointerdown',onPointerDown);
    gl.domElement.removeEventListener('pointerup',onPointerUp);
    for(const obj of [background,equipment,...Object.values(people),...Object.values(marks)]){

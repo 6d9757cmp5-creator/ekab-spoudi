@@ -3,6 +3,7 @@
  * These three entries demonstrate software interactions, NOT clinical cases vetted by experts.
  * Signs, vitals, slopes, statements, and environments are invented. No diagnosis or care advice.
  */
+import {PRACTICAL_CASES} from './eoppep-practical-cases.mjs';
 export const CASES=[
  {
   id:'crete-two-persons-next-v1',scene:'road',tag:'Τροχαίο',level:'Εκπαιδευτική δοκιμή',
@@ -35,5 +36,6 @@ export const CASES=[
   ]
  }
 ];
+CASES.push(...PRACTICAL_CASES);
 export const CASE=CASES[0]; // Backwards-compatible name for previous entrypoints/tests.
 export function getCase(id){return CASES.find(c=>c.id===id)||null;}

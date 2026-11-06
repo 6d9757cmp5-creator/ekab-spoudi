@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "status": "ALL_8_LISTED_ORIGINALS_PERSISTED_AND_ANONYMOUSLY_RESTORED",
+  "scope": "One NIH molecular research source record only, not all NIH 3D models",
+  "imageTag": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive:originals-molecular-00012-v1",
+  "immutableDigest": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:88d93c7e8fe94abfeb325d835b35c783318dc1d8dcdb7bcaee50052a92b2668a",
+  "models": 1,
+  "files": 8,
+  "totalOriginalBytes": 3701557,
+  "completeForTheseCatalogEntries": true,
+  "allListedOriginalFormatsForTheseCatalogEntries": true,
+  "fullNIHArchiveComplete": false,
+  "everySourceSHA256CheckedAfterRecovery": true,
+  "scientificallyApproved": false,
+  "copyrightAndAttribution": [
+    {
+      "id": 12,
+      "accession": "3DPX-000012",
+      "title": "Structure of NtrC1 ATPase in complex with Sigma-54 and promoter DNA",
+      "license": "Public Domain",
+      "originalPage": "https://3d.nih.gov/entries/3DPX-000012",
+      "sourceCategory": "Biomacromolecules",
+      "independentScientificApproval": false
+    }
+  ],
+  "filesByFormat": {
+    "X3D": 1,
+    "GLB": 3,
+    "WRL": 3,
+    "STL": 1
+  },
+  "sourceManifest": {
+    "schemaVersion": 1,
+    "mode": "REAL_ORIGINAL_FILES_NO_TRANSFORM",
+    "source": "NIH 3D",
+    "snapshot": "ATLA Master Plan 2026",
+    "sourceCatalogEntries": 285,
+    "scope": "1 public-domain NIH biomedical molecular model record",
+    "allListedFormatsForSelectedModels": true,
+    "selectedEntryIDs": [
+      12
+    ],
+    "originalModelCount": 1,
+    "originalFileCount": 8,
+    "originalByteCount": 3701557,
+    "independentlyScientificallyApproved": false,
+    "fullNIHArchiveComplete": false,
+    "originalModels": [
+      {
+        "id": 12,
+        "accession": "3DPX-000012",
+        "title": "Structure of NtrC1 ATPase in complex with Sigma-54 and promoter DNA",
+        "license": "Public Domain",
+        "originalPage": "https://3d.nih.gov/entries/3DPX-000012",
+        "sourceCategory": "Biomacromolecules",
+        "independentScientificApproval": false
+      }
+    ],
+    "originalFiles": [
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-radial-print_caution-nih3d.x3d",
+        "originalFormat": "X3D",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838851",
+        "expectedBytes": 265496,
+        "archivePath": "originals/3DPX-000012/000.x3d",
+        "sha256": "1b481be62965b969ebba078a47129a8712f4d554a5aaca5966377ec94958fb16",
+        "verifiedBytes": 265496
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-radial-print_caution-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838854",
+        "expectedBytes": 568476,
+        "archivePath": "originals/3DPX-000012/001.glb",
+        "sha256": "2d35d983cc9102092d3cf432344635d29aea7369d07f5cba8e3be84f07440d39",
+        "verifiedBytes": 568476
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-radial.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838855",
+        "expectedBytes": 199721,
+        "archivePath": "originals/3DPX-000012/002.wrl",
+        "sha256": "93cbea9062bd76165f278c04b12414ab3b260f342df4666fb88ed3cf4d71c506",
+        "verifiedBytes": 199721
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-radial-print_caution-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838857",
+        "expectedBytes": 901337,
+        "archivePath": "originals/3DPX-000012/003.wrl",
+        "sha256": "3d2513e2fbf6944c96e1de0703a9bc9b16412e56e33746e3ed3c5960c60953ef",
+        "verifiedBytes": 901337
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-nocolor-print_caution-nih3d.wrl",
+        "originalFormat": "WRL",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838861",
+        "expectedBytes": 1007731,
+        "archivePath": "originals/3DPX-000012/004.wrl",
+        "sha256": "097144f29436bca4f7a1f2d1a216e93d3b4912d542e110d532be8e92bcb57e25",
+        "verifiedBytes": 1007731
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-nocolor-print_caution-nih3d.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838862",
+        "expectedBytes": 389328,
+        "archivePath": "originals/3DPX-000012/005.glb",
+        "sha256": "70d0dcda7b5f724618d688b26e0d912b4bd7924800d61c6e3db8487f89fc9b4a",
+        "verifiedBytes": 389328
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-nocolor.glb",
+        "originalFormat": "GLB",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838865",
+        "expectedBytes": 120584,
+        "archivePath": "originals/3DPX-000012/006.glb",
+        "sha256": "3dd3269c9f657dc2f5ea2edb8d15a89472314f92f6c64a9b0698b2dab5b84ae0",
+        "verifiedBytes": 120584
+      },
+      {
+        "entryId": 12,
+        "accession": "3DPX-000012",
+        "originalName": "5698-vol-surf-highres-nocolor-print_caution-nih3d.stl",
+        "originalFormat": "STL",
+        "url": "https://3d.nih.gov/api/submissions/30836/runs/e0cd9782-8d3e-4aca-a112-c8115fbb81b3/output-files/838867",
+        "expectedBytes": 248884,
+        "archivePath": "originals/3DPX-000012/007.stl",
+        "sha256": "144b4fa112eff5262e863201cbbbf764d7d3fc05a2249df81188dba5d5db0c7e",
+        "verifiedBytes": 248884
+      }
+    ]
+  }
+}

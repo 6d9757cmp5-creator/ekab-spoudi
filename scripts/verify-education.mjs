@@ -83,12 +83,15 @@ if(!index.includes('updates.js?v='+version))fail('Home update script version mis
 if(!theory.includes('app.js?v=')||!theory.includes('updates.js?v='))fail('EOPPEP theory reader scripts missing');
 if(!index.includes("location.replace('theory.html'"))fail('Old EOPPEP reader links do not redirect');
 
-// Prevent future changes from adding misleading direct Theory/Practical buttons
-// to the homepage when the EOPPEP certification hub already provides both.
-const certHomeCard=index.match(/<section class="home-card home-card-eoppep">([\s\S]*?)<\/section>/)?.[1]||'';
-if(!certHomeCard.includes('href="eoppep.html"'))fail('Homepage certification card must open the EOPPEP hub');
-if(certHomeCard.includes('home-suboptions')||/href="(?:theory|practical_exam)\.html"/.test(certHomeCard))
- fail('Homepage must describe Theory/Practical without separate clickable links');
+// The consolidated ATLA Paramedic hub is the primary home route to SAEK/EOPPEP.
+// Theory and practical examination remain reachable through the EOPPEP hub.
+const paramedicHomeCard=index.match(/<section class="home-card home-card-paramedic">([\s\S]*?)<\/section>/)?.[1]||'';
+if(!paramedicHomeCard.includes('href="paramedic.html"'))fail('Homepage Paramedic card must open the consolidated hub');
+if(/href="(?:theory|practical_exam|eoppep)\.html"/.test(paramedicHomeCard))
+ fail('Homepage must not bypass Paramedic and EOPPEP learning hubs');
+const paramedicHub=read('paramedic.html');
+if(!paramedicHub.includes('href="saek.html"')||!paramedicHub.includes('href="eoppep.html"'))
+ fail('Paramedic hub must provide SAEK and EOPPEP learning routes');
 const eopHub=read('eoppep.html'),eopHubJs=read('eoppep-hub.js');
 if(!eopHub.includes('data-eop-group="A"')||!eopHub.includes('data-eop-group="B"')||
  !eopHub.includes('theory.html?view=catalog')||!eopHub.includes('theory.html?mode=exam')||

@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "title": "ATLA NIH3D scientific-source evidence ledger",
+  "scope": "Complete 15,688 NIH metadata identities screened; no unsupported clinical scientific approvals",
+  "sourceCatalogSnapshot": "ATLA NIH3D Master Plan 2026",
+  "counts": {
+    "sourceRecords": 15688,
+    "sourceSegments": 50,
+    "conceptMatched": 298,
+    "explicitNonhuman": 264,
+    "conditionScoped": 174,
+    "verifiedOriginalArchiveModels": 215,
+    "scholarlyClinicalApprovals": 0,
+    "unmatchedRetained": 15390,
+    "originalStructuralQaModels": 215,
+    "originalStructuralQaFiles": 1291
+  },
+  "conceptVocabulary": [
+    {
+      "id": "ATLA-ANATOMY-patella",
+      "greek": "Επιγονατίδα",
+      "aliases": [
+        "patella",
+        "επιγονατιδ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-femur",
+      "greek": "Μηριαίο οστό",
+      "aliases": [
+        "femur",
+        "femoral",
+        "μηριαι"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-tibia",
+      "greek": "Κνήμη",
+      "aliases": [
+        "tibia",
+        "tibial",
+        "κνημ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-fibula",
+      "greek": "Περόνη",
+      "aliases": [
+        "fibula",
+        "περον"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-clavicle",
+      "greek": "Κλείδα",
+      "aliases": [
+        "clavicle",
+        "κλειδ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-pelvis",
+      "greek": "Πύελος",
+      "aliases": [
+        "pelvis",
+        "pelvic",
+        "acetabulum",
+        "πυελ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-humerus",
+      "greek": "Βραχιόνιο",
+      "aliases": [
+        "humerus",
+        "humeral",
+        "βραχιον"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-skull",
+      "greek": "Κρανίο",
+      "aliases": [
+        "skull",
+        "cranial bone",
+        "κρανι"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-wrist",
+      "greek": "Καρπός",
+      "aliases": [
+        "wrist",
+        "carpal",
+        "scaphoid",
+        "scafoid",
+        "καρπ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-elbow",
+      "greek": "Αγκώνας",
+      "aliases": [
+        "elbow",
+        "coronoid process",
+        "αγκων"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-ankle",
+      "greek": "Ποδοκνημική",
+      "aliases": [
+        "ankle",
+        "talus",
+        "calcaneal",
+        "ποδοκνημ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-shoulder",
+      "greek": "Ώμος",
+      "aliases": [
+        "shoulder",
+        "glenoid",
+        "scapula",
+        "ωμ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-lumbar-spine",
+      "greek": "Οσφυϊκή μοίρα",
+      "aliases": [
+        "lumbar",
+        "οσφυ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-cervical-spine",
+      "greek": "Αυχενική μοίρα",
+      "aliases": [
+        "cervical spine",
+        "αυχεν"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-thoracic-spine",
+      "greek": "Θωρακική μοίρα",
+      "aliases": [
+        "thoracic spine",
+        "θωρακικ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-vertebra",
+      "greek": "Σπόνδυλος",
+      "aliases": [
+        "vertebra",
+        "vertebral",
+        "σπονδυλ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-brain",
+      "greek": "Εγκέφαλος",
+      "aliases": [
+        "brain",
+        "cerebrum",
+        "εγκεφαλ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-brain-ventricles",
+      "greek": "Εγκεφαλικές κοιλίες",
+      "aliases": [
+        "brain ventricles",
+        "cerebral ventricles",
+        "εγκεφαλικ κοιλι"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-medulla-oblongata",
+      "greek": "Προμήκης μυελός",
+      "aliases": [
+        "medulla oblongata",
+        "προμηκ μυελ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-corpus-callosum",
+      "greek": "Μεσολόβιο",
+      "aliases": [
+        "corpus callosum",
+        "μεσολοβ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-trachea",
+      "greek": "Τραχεία",
+      "aliases": [
+        "trachea",
+        "tracheal",
+        "τραχει"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-lung",
+      "greek": "Πνεύμονας",
+      "aliases": [
+        "lung",
+        "pulmonary",
+        "πνευμον"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-heart",
+      "greek": "Καρδιά",
+      "aliases": [
+        "heart",
+        "cardiac anatomy",
+        "καρδι"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-aorta",
+      "greek": "Αορτή",
+      "aliases": [
+        "aorta",
+        "aortic",
+        "αορτ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-artery",
+      "greek": "Αρτηρία",
+      "aliases": [
+        "artery",
+        "arterial",
+        "αρτηρ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-vein",
+      "greek": "Φλέβα",
+      "aliases": [
+        "vein",
+        "venous",
+        "φλεβ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-kidney",
+      "greek": "Νεφρός",
+      "aliases": [
+        "kidney",
+        "renal",
+        "νεφρ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-uterus",
+      "greek": "Μήτρα",
+      "aliases": [
+        "uterus",
+        "uterine",
+        "μητρ"
+      ]
+    },
+    {
+      "id": "ATLA-ANATOMY-teeth",
+      "greek": "Δόντια",
+      "aliases": [
+        "teeth",
+        "tooth",
+        "dental",
+        "δοντ"
+      ]
+    }
+  ],
+  "proposedSourceMatchesByConcept": {
+    "ATLA-ANATOMY-patella": 4,
+    "ATLA-ANATOMY-femur": 10,
+    "ATLA-ANATOMY-tibia": 14,
+    "ATLA-ANATOMY-fibula": 3,
+    "ATLA-ANATOMY-clavicle": 6,
+    "ATLA-ANATOMY-pelvis": 24,
+    "ATLA-ANATOMY-humerus": 12,
+    "ATLA-ANATOMY-skull": 42,
+    "ATLA-ANATOMY-wrist": 8,
+    "ATLA-ANATOMY-elbow": 6,
+    "ATLA-ANATOMY-ankle": 12,
+    "ATLA-ANATOMY-shoulder": 27,
+    "ATLA-ANATOMY-lumbar-spine": 15,
+    "ATLA-ANATOMY-cervical-spine": 5,
+    "ATLA-ANATOMY-thoracic-spine": 5,
+    "ATLA-ANATOMY-vertebra": 4,
+    "ATLA-ANATOMY-brain": 23,
+    "ATLA-ANATOMY-brain-ventricles": 1,
+    "ATLA-ANATOMY-medulla-oblongata": 3,
+    "ATLA-ANATOMY-corpus-callosum": 1,
+    "ATLA-ANATOMY-trachea": 4,
+    "ATLA-ANATOMY-lung": 15,
+    "ATLA-ANATOMY-heart": 20,
+    "ATLA-ANATOMY-aorta": 36,
+    "ATLA-ANATOMY-artery": 5,
+    "ATLA-ANATOMY-vein": 2,
+    "ATLA-ANATOMY-kidney": 16,
+    "ATLA-ANATOMY-uterus": 2,
+    "ATLA-ANATOMY-teeth": 6
+  },
+  "relatedSourceAnatomyEvidenceLinks": 6,
+  "verifiedFullOriginalsFromPublicGHCR": 215,
+  "fileFormatStructuralValidation": "SOURCE_FORMAT_SCREEN_ONLY_NOT_MEDICAL_ACCURACY",
+  "scientificApprovalStatus": "NOT_COMPLETED",
+  "originalBinaryMirroringComplete": false,
+  "knownLimitations": [
+    "Anatomy category and exact source title only propose educational relevance.",
+    "NIH descriptions establish source claims, not independent expert assessment or geometric correctness.",
+    "No model is authorized for real-patient diagnosis or intervention by this ledger.",
+    "All unmatched sources remain accessible in the original NIH catalog, including molecular candidates.",
+    "Only externally separately approved models may render inline for an educational goal."
+  ]
+}

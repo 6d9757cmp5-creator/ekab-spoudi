@@ -17,7 +17,7 @@ test('MENTOR Live debrief reads the exact current session and does not mutate it
  assert.equal(d.practice,1);
  assert.equal(d.clinicalStatus,LIVE_REVIEW_STATUS);
  const raw=exportLiveDebrief(a);
- assert.match(raw,/MENTOR LIVE DEBRIEF/);
+ assert.match(raw,/ATLA · ΑΝΑΣΚΟΠΗΣΗ ΑΠΟΣΤΟΛΗΣ/);
  assert.match(raw,/Συνθετική απάντηση/);
  assert.match(raw,/ΔΕΝ ΥΠΑΡΧΕΙ|Δεν αποτελεί ιατρικό έγγραφο/);
  assert.equal(JSON.stringify(a),JSON.stringify(a));

@@ -73,7 +73,7 @@ export function answerStudyQuestion(question,{items=[],overview=null}={}){
  if(["focus","progress","exercise"].includes(intent.intent)||(intent.intent==="explain"&&intent.topic&&!matched)){
   return {text:coachResponse({intent:intent.intent,topic:intent.topic,overview}),source:null,type:"study"};
  }
- return {text:"Για την ερώτησή σου χρειάζεται αναλυτική, επαληθευμένη εξήγηση· δεν θα υποθέσω ιατρικές οδηγίες. Για σύντομο ορισμό γράψε μόνο τον όρο (π.χ. «ΚΑΡΠΑ», «ABCDE», «AED»). Μπορείς επίσης να μελετήσεις το αντίστοιχο κεφάλαιο. Το AI χρησιμοποιείται μόνο όταν είναι διαθέσιμο και η τοπική βιβλιοθήκη δεν αρκεί.",
+ return {text:"Για την ερώτησή σου χρειάζεται αναλυτική, επαληθευμένη εξήγηση· δεν θα υποθέσω ιατρικές οδηγίες. Για σύντομο ορισμό γράψε μόνο τον όρο (π.χ. «ΚΑΡΠΑ», «ABCDE», «AED»). Μπορείς επίσης να μελετήσεις το αντίστοιχο κεφάλαιο. Δεν έχω ακόμη τεκμηριωμένη απάντηση για αυτή την κλινική ερώτηση. Η μη επαληθευμένη AI κλινική καθοδήγηση δεν είναι διαθέσιμη στην τοπική λειτουργία. Μπορείς να μελετήσεις επίσημο πρωτόκολλο ή το αντίστοιχο κεφάλαιο.",
    source:null,type:"unavailable"};
 }
 let cached=null,loading=null;

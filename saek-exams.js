@@ -78,6 +78,7 @@ function renderQuestion(){
  $('examNext').disabled=a.index===a.total-1||requestPending;
  $('examNext').textContent=a.index+1===a.total-1?'Τελευταία ερώτηση':'Επόμενη ερώτηση';
  $('examFinish').disabled=requestPending;
+ window.dispatchEvent(new CustomEvent('atla:saek-exam-question',{detail:{text:q.question,revealed:Boolean(step.grade||step.revealed),courseId:q.courseId}}));
 }
 function manualReveal(){
  if(requestPending)return;

@@ -1,16 +1,12 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-02T01:00:18.069Z",
+  "checked_at": "2026-11-03T00:40:27.306Z",
   "catalog_count": 10,
-  "attempted": 9,
-  "complete_verified": 7,
-  "complete_total_bytes": 420229182,
-  "not_archived": [
-    "open-rn-nbk607454",
-    "open-rn-nbk596735",
-    "uwm-cell-molecular-biology-5e"
-  ],
-  "status": "PARTIAL",
+  "attempted": 10,
+  "complete_verified": 10,
+  "complete_total_bytes": 1062150913,
+  "not_archived": [],
+  "status": "VERIFIED_FOR_ARCHIVED_FILES_ONLY",
   "clinical_retrieval_enabled": false,
   "scientific_approval": false,
   "books": [
@@ -270,18 +266,258 @@
           "sha256": "a7c7c915f6dad96106b2985c4662e35f0b14f0051f59739de45f4407b289fb62"
         }
       ]
-    }
-  ],
-  "failures": [
+    },
     {
       "id": "open-rn-nbk607454",
-      "error": "Total archive budget reached; full source deferred",
-      "status": "not-archived"
+      "title": "Medical Terminology, 2e",
+      "source_page": "https://www.ncbi.nlm.nih.gov/books/NBK607454/",
+      "official_pdf": "https://www.ncbi.nlm.nih.gov/sites/books/NBK607454/pdf/Bookshelf_NBK607454.pdf",
+      "download_source_used": "https://www.ncbi.nlm.nih.gov/sites/books/NBK607454/pdf/Bookshelf_NBK607454.pdf",
+      "license": "CC BY 4.0, except where otherwise noted",
+      "attribution": "Open Resources for Nursing (Open RN), Chippewa Valley Technical College. Original PDF and notices retained.",
+      "archival_status": "full-file-verified",
+      "clinical_retrieval_enabled": false,
+      "independent_clinical_review": "pending",
+      "original_pdf_bytes": 96510782,
+      "original_pdf_sha256": "4adf5b307973cc36496402c8de668b446a0bfa9a09bbbabf3daddf391a2c16c1",
+      "pages": 996,
+      "parts": [
+        {
+          "file": "part-0001.bin",
+          "size": 16777216,
+          "sha256": "4ba5db68d4cf415d4a5cc3db978f97c68fb871a4b4a7c7c0fdd669890c93d48f"
+        },
+        {
+          "file": "part-0002.bin",
+          "size": 16777216,
+          "sha256": "97d203c0e4f169358d348e056621a33f36fde274cc05f6192d28d22c758283be"
+        },
+        {
+          "file": "part-0003.bin",
+          "size": 16777216,
+          "sha256": "1718b3904576bc37f9dea7905d5af58004cbad778d57c177203b3572939f75a0"
+        },
+        {
+          "file": "part-0004.bin",
+          "size": 16777216,
+          "sha256": "859976b0fca591ea596f11faaba5636c2219e145ec317fcc3200c4f9464754c8"
+        },
+        {
+          "file": "part-0005.bin",
+          "size": 16777216,
+          "sha256": "0145b98fdabad640b1747af771da9ee894a040e279140bce548af17897b6ffdc"
+        },
+        {
+          "file": "part-0006.bin",
+          "size": 12624702,
+          "sha256": "dc957e74178975fd6c0196c712e42ae0d11a5db892abe4ff3c243f865409ac83"
+        }
+      ]
+    },
+    {
+      "id": "open-rn-nbk596735",
+      "title": "Nursing Skills, 2e",
+      "source_page": "https://www.ncbi.nlm.nih.gov/books/NBK596735/",
+      "official_pdf": "https://www.ncbi.nlm.nih.gov/sites/books/NBK596735/pdf/Bookshelf_NBK596735.pdf",
+      "download_source_used": "https://www.ncbi.nlm.nih.gov/sites/books/NBK596735/pdf/Bookshelf_NBK596735.pdf",
+      "license": "CC BY 4.0, except where otherwise noted",
+      "attribution": "Open Resources for Nursing (Open RN), Chippewa Valley Technical College. Original PDF and notices retained.",
+      "archival_status": "full-file-verified",
+      "clinical_retrieval_enabled": false,
+      "independent_clinical_review": "pending",
+      "original_pdf_bytes": 471104485,
+      "original_pdf_sha256": "2ca73a22527f9326d074d006e56992abca75659f4da776f031eed38d751b8cbd",
+      "pages": 1432,
+      "parts": [
+        {
+          "file": "part-0001.bin",
+          "size": 16777216,
+          "sha256": "442e6b21eb5b340c04630919ae5405a77a57aeaf3a679e62d877d0be3e0ac7d0"
+        },
+        {
+          "file": "part-0002.bin",
+          "size": 16777216,
+          "sha256": "24bf53bd4c1395774e0fa0c27a7bd224c843735f60d14fc5e55a220edbf88b3e"
+        },
+        {
+          "file": "part-0003.bin",
+          "size": 16777216,
+          "sha256": "7498ba996abfc907db23fd02b2e173da2c00081bb16977c94665d845aa4ee0df"
+        },
+        {
+          "file": "part-0004.bin",
+          "size": 16777216,
+          "sha256": "3b264f0b85a2794eaf265e75cef2fff0872da621481b66507a0c2294ebaf987d"
+        },
+        {
+          "file": "part-0005.bin",
+          "size": 16777216,
+          "sha256": "857eb38afb481f6b02629187c00e99a03eaf6dddd8767b0b94b37f462af549ba"
+        },
+        {
+          "file": "part-0006.bin",
+          "size": 16777216,
+          "sha256": "6168640b5c16240cc4c55d75792f639aae11493c2b62e34821d6d5c868ba6be2"
+        },
+        {
+          "file": "part-0007.bin",
+          "size": 16777216,
+          "sha256": "512e6e2359474f7dbf6c70593254af7a96108d9543115fe8fe78f86424b33620"
+        },
+        {
+          "file": "part-0008.bin",
+          "size": 16777216,
+          "sha256": "70a0eeee9cfe5c1ed1825c5b966f2e483fadb73a29089267ba51f003f914ef1d"
+        },
+        {
+          "file": "part-0009.bin",
+          "size": 16777216,
+          "sha256": "3d3fd1358ee55495e527cecd8aef0fe6cf114c4ee4c5a0e81d7a167c7a82c5c4"
+        },
+        {
+          "file": "part-0010.bin",
+          "size": 16777216,
+          "sha256": "6e8964053bb66fc3e8d6c93b424f3e9733ec7eee2388ddd0d68b49e9fc2c7651"
+        },
+        {
+          "file": "part-0011.bin",
+          "size": 16777216,
+          "sha256": "44d89919bc11f2e110e0b34f1369b0ccff78ac5271215c4af86ff4fe57d4f03a"
+        },
+        {
+          "file": "part-0012.bin",
+          "size": 16777216,
+          "sha256": "eff7e0648538a9c7fa8c69403d6db9519f8ac9822eab27c5905e68881599feed"
+        },
+        {
+          "file": "part-0013.bin",
+          "size": 16777216,
+          "sha256": "26a2e9f166380da475e947f8adaaed8f75da41089061b195fcb712973a87fb67"
+        },
+        {
+          "file": "part-0014.bin",
+          "size": 16777216,
+          "sha256": "4e26bd7e8d4798822917af66dfe81352a05688696dea4ebcdc9727833e83cb59"
+        },
+        {
+          "file": "part-0015.bin",
+          "size": 16777216,
+          "sha256": "32323ece87fc13b19fbb3a663f96ae560e25b8db6172dad30d8c3a48417c1931"
+        },
+        {
+          "file": "part-0016.bin",
+          "size": 16777216,
+          "sha256": "deaf9c25f631c7285eb4fea9a31f9bd37082ec86d30f0303af92378fcda11f64"
+        },
+        {
+          "file": "part-0017.bin",
+          "size": 16777216,
+          "sha256": "9fa5e5bf41c1485d81955f4f7413255c97fa2c7bc54c46967304442012d5311a"
+        },
+        {
+          "file": "part-0018.bin",
+          "size": 16777216,
+          "sha256": "ca26e509de12b037ea280de2785611e7fcce20a5f1546c5af05ab96debb54f65"
+        },
+        {
+          "file": "part-0019.bin",
+          "size": 16777216,
+          "sha256": "deba8248123828fdbd97f4d1d86cd6eea5816fb907cb32b2cafa7faf68252346"
+        },
+        {
+          "file": "part-0020.bin",
+          "size": 16777216,
+          "sha256": "d071710f92800db38cc90b57614901b015d558ec7021c0ccd67e85c5d39f0f7f"
+        },
+        {
+          "file": "part-0021.bin",
+          "size": 16777216,
+          "sha256": "bd794dbd6364a293e4e72bf7812ff6810d9af79f644a19f3473cac0c3ed31fe3"
+        },
+        {
+          "file": "part-0022.bin",
+          "size": 16777216,
+          "sha256": "d89405f3ab0fc2e10458dc11ea5b89c535d0e924c75f9a7f705974d04a1cc88a"
+        },
+        {
+          "file": "part-0023.bin",
+          "size": 16777216,
+          "sha256": "5beee1530ad8997a390c3067c51332c1148730fb580119612e7c18330c491740"
+        },
+        {
+          "file": "part-0024.bin",
+          "size": 16777216,
+          "sha256": "01df9755e3fb5a5548c8a1240ded78225ca7d50daa72a60de25e5985010844ac"
+        },
+        {
+          "file": "part-0025.bin",
+          "size": 16777216,
+          "sha256": "bc00f283300d4bad09c8093eb3d6747d0be15ee9f8338f063376a5f6c027deda"
+        },
+        {
+          "file": "part-0026.bin",
+          "size": 16777216,
+          "sha256": "15af9c95448f1dd84737369129b6128a51b1523f3ddf313220d0b59c0d326e18"
+        },
+        {
+          "file": "part-0027.bin",
+          "size": 16777216,
+          "sha256": "bef3275fac33555afb61b1c6e10ebfe3a6bec426e5bd1bd49bfc6034ff67780d"
+        },
+        {
+          "file": "part-0028.bin",
+          "size": 16777216,
+          "sha256": "13ee6ddf1e073c3fd1937ba6da27ba91d3d2adcd13c535b590999afcb81d73e1"
+        },
+        {
+          "file": "part-0029.bin",
+          "size": 1342437,
+          "sha256": "6dfb7a28f99ef8ad1188f823d51b0d7fcb933c77b1547b10af6262153caed72b"
+        }
+      ]
     },
     {
       "id": "uwm-cell-molecular-biology-5e",
-      "error": "Total archive budget reached; full source deferred",
-      "status": "not-archived"
+      "title": "Cell and Molecular Biology: What We Know & How We Found Out, 5e",
+      "source_page": "https://open.umn.edu/opentextbooks/textbooks/cell-and-molecular-biology-2e-what-we-know-how-we-found-out",
+      "official_pdf": "https://minds.wisc.edu/bitstream/handle/1793/94437/10_19_22_Basic_CMB5e_1.pdf?sequence=1&isAllowed=y",
+      "download_source_used": "https://minds.wisc.edu/bitstream/handle/1793/94437/10_19_22_Basic_CMB5e_1.pdf?sequence=1&isAllowed=y",
+      "license": "CC BY 4.0 (textbook; third-party credited content must be checked separately)",
+      "attribution": "Bergtrom, Gerald. Cell and Molecular Biology: What We Know & How We Found Out, 5e. University of Wisconsin-Milwaukee. CC BY.",
+      "archival_status": "full-file-verified",
+      "clinical_retrieval_enabled": false,
+      "independent_clinical_review": "pending",
+      "original_pdf_bytes": 74306464,
+      "original_pdf_sha256": "a319085d1beadc63bb5b19f4c6bd5ea408efe7a49d8fea7501af8a9bd1cb8f0c",
+      "pages": 592,
+      "parts": [
+        {
+          "file": "part-0001.bin",
+          "size": 16777216,
+          "sha256": "f3d1ad2e68760ff70f596d572be27a14127decea8c151596c7134c0d28ba8c6e"
+        },
+        {
+          "file": "part-0002.bin",
+          "size": 16777216,
+          "sha256": "1bcc409715bc8fbf257bbc99f4f0da1882e37a0dc38e824cc1a100e8a4a992cf"
+        },
+        {
+          "file": "part-0003.bin",
+          "size": 16777216,
+          "sha256": "2919d47fcd90fcf66149d8c0b24532a72bc7feef29cae840305805e9bd25b968"
+        },
+        {
+          "file": "part-0004.bin",
+          "size": 16777216,
+          "sha256": "5922471ed7725f3979a853f36446eb89b7124999e958ba682725258c27579a0a"
+        },
+        {
+          "file": "part-0005.bin",
+          "size": 7197600,
+          "sha256": "e91f8bba0b9763e78034bebcd9a450fe66f03cf6d10d1f2d4963e0d15369c109"
+        }
+      ]
     }
-  ]
+  ],
+  "failures": []
 }

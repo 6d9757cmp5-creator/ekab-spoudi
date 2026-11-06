@@ -6,6 +6,12 @@
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => [...document.querySelectorAll(s)];
   const host = window.atlasHost || null;
+  // ATLA: explicit, local-only source selection. No arbitrary URL input.
+  const atlaChoice = new URLSearchParams(location.search).get('atla');
+  const atlaDataBase = ({
+    bp3d40: '../../../../resources/bp3d40/atlases/bp3d40/build/',
+    bp3d43: '../../../../resources/bp3d43/compiled-shards/'
+  })[atlaChoice] || null;
   const EYE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>';
   const el = (tag, attrs = {}, kids = []) => {
     const n = document.createElement(tag);
@@ -64,7 +70,20 @@
     if (!r.ok) throw new Error('No atlas at ' + base);
     const index = await r.json();
     // Large atlases on static hosting are split into parts (GitHub limits single files).
-    const parts = index.parts || [{ file: 'meshes.bin', size: index.buffers.indices[0] + index.buffers.indices[1] }];
+    let parts = index.parts;
+    if (atlaChoice === 'bp3d43' && atlaDataBase === base && !parts) {
+      // ATLA stores the full 192 MiB body atlas in GitHub-safe binary shards.
+      // Discover the 4 original byte-perfect shards from their pinned manifest.
+      const manifestRes = await fetch(base + 'manifest.json', { cache: 'no-cache' });
+      if (!manifestRes.ok) throw new Error('BodyParts3D 4.3 shard manifest not found');
+      const manifest = await manifestRes.json();
+      if (manifest.anatomyElements !== 3210 || manifest.partCount !== 4 ||
+          !Array.isArray(manifest.parts) || manifest.parts.length !== 4 ||
+          manifest.parts.some(p => !/^mesh-part-\d{2}\.bin$/.test(p.file) || !Number.isInteger(p.bytes) || p.bytes <= 0))
+        throw new Error('Invalid BodyParts3D 4.3 manifest');
+      parts = manifest.parts.map(p => ({file:p.file,size:p.bytes}));
+    }
+    if (!parts) parts = [{ file: 'meshes.bin', size: index.buffers.indices[0] + index.buffers.indices[1] }];
     const total = parts.reduce((t, p) => t + p.size, 0);
     let got = 0;
     const tick = (k) => { got += k; showLoading(`Loading ${index.name} ${index.version}: ${(got / 1048576).toFixed(0)} of ${(total / 1048576).toFixed(0)} MB`, got / total); };
@@ -112,6 +131,9 @@
   }
 
   async function loadBest() {
+    // ATLA manually selected its own verified BodyParts3D atlas on the wrapper page.
+    // Never silently substitute a demo/remote atlas for this explicit request.
+    if (atlaDataBase) return fetchAtlas(atlaDataBase);
     site = await loadSiteManifest();
     if (site) {
       try { return await loadSiteAtlas(pickSiteAtlas()); } catch (e) { console.error(e); }
@@ -926,7 +948,13 @@
     renderer.onFrame = positionPin;
     bindStage();
     bindUI();
-    useAtlas(await loadBest());
+    try { useAtlas(await loadBest()); }
+    catch (error) {
+      $('#loading').hidden = false;
+      $('#loading').textContent = 'Δεν φορτώθηκε ο επιλεγμένος BodyParts3D άτλας: ' + String(error.message || error);
+      console.error('ATLA forced source load failed', error);
+      return;
+    }
     if (host && atlas.isDemo) openDataDialog();
     window.__atlasDebug = { get atlas() { return atlas; }, get renderer() { return renderer; }, select };
   }

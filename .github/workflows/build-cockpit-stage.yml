@@ -1,6 +1,7 @@
 name: Build original unified patient 3D renderer
 on:
   push:
+    branches: [main, feature/atla-full-model-workspace-20261103]
     paths:
       - tools/patient-simulator/app/unified-stage.mjs
       - .github/workflows/build-cockpit-stage.yml
@@ -19,6 +20,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Use latest remote branch source to avoid rebasing generated bundles
+        run: |
+          git fetch origin "$GITHUB_REF_NAME"
+          git checkout -B "$GITHUB_REF_NAME" "origin/$GITHUB_REF_NAME"
       - name: Install reproducible pinned MIT-licensed renderer and bundler
         run: |
           npm install --no-save --no-package-lock --no-audit --no-fund three@0.187.0 esbuild@0.28.2
@@ -54,8 +59,8 @@ jobs:
           if git diff --cached --quiet; then echo "Current bundle already committed"; exit 0; fi
           git commit -m "build(simulator): vendor pinned Three.js r187 unified patient scene and MIT license"
           for attempt in 1 2 3 4; do
-            git pull --rebase origin main
-            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then exit 0; fi
             echo "Retry $attempt"
             sleep 3
           done

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1c2d">
+<title>ATLA | Πλήρης 3D εξερευνητής μοντέλων</title>
+<script type="importmap">
+{"imports":{
+"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+"three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+}}
+</script>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color-scheme:dark;background:#091725;color:#edf4fa}
+*{box-sizing:border-box}
+body{margin:0;line-height:1.5}
+main{max-width:1100px;margin:auto;padding:clamp(14px,3vw,32px)}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:16px 0 6px}
+p{color:#b5cddd}
+a{color:#8bd4f0}
+nav{display:flex;gap:20px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid #25435c}
+.card{background:#11293c;border:1px solid #2d516e;border-radius:16px;padding:18px}
+.layout{display:grid;grid-template-columns:minmax(230px,300px) 1fr;gap:16px;margin:20px 0}
+label{display:block;font-weight:700;margin-bottom:8px}
+select,button{width:100%;padding:12px;border-radius:9px;font:inherit}input[type=range]{width:100%} .toolrow{display:flex;gap:7px;flex-wrap:wrap}.toolrow button{width:auto;flex:1;min-width:82px;background:#2f6677;color:#f0fcff;padding:9px;margin-top:5px}.toolrow button:disabled{opacity:.45}.meta{font-size:.85rem;overflow-wrap:anywhere} .selector{margin-top:12px}.eyebrow{font-size:.83rem;color:#acd6df}canvas:focus-visible{outline:2px solid #b7eef6}
+select{background:#0c1b2b;color:#fff;border:1px solid #5b839e}
+button{background:#53c3aa;color:#081c24;font-weight:750;border:0;cursor:pointer;margin-top:12px}
+button:disabled{opacity:.5;cursor:wait}
+canvas{display:block;width:100%;height:min(64vh,570px);min-height:360px;touch-action:none;border-radius:12px;background:#0a1c2d}
+#source-details{font-size:.9rem;margin-top:10px}#source-details p{margin:4px 0}#source-status{min-height:48px;font-weight:600;color:#b8edca}
+#source-status[data-error="true"]{color:#ffc3a7}
+small{color:#b0c7d7}
+@media(max-width:700px){.layout{grid-template-columns:1fr}canvas{height:47vh;min-height:300px}}
+</style>
+<script type="module" src="../tools/atla-ai/model-preview.mjs"></script>
+</head>
+<body>
+<main>
+<nav><a id="source-back" href="../tools/anatomy-3d/index.html">← Επιστροφή</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></nav>
+<h1 id="source-name">Πλήρης 3D εξερευνητής ATLA</h1>
+<p>Διαδραστική εξερεύνηση πηγαίων μοντέλων: επιλογή δομής, απομόνωση, διαφάνεια, ανατομικός προσανατολισμός και διαθέσιμες κινήσεις. Κάθε αρχείο φορτώνεται μόνο μετά από επιλογή.</p>
+<div class="layout">
+<section class="card" aria-label="Πηγαία μοντέλα">
+<h2>Επιλογή μοντέλου</h2>
+<p id="source-count" role="status">Ανάκτηση μητρώου…</p>
+<label for="source-dataset">Συλλογή</label>
+<select id="source-dataset" aria-describedby="source-warning">
+  <option value="primary">Βασική επαληθευμένη συλλογή GLB</option>
+  <option value="nih">NIH 3D — πρωτότυπα από το δικό μας αρχείο</option>
+  <option value="secondary">Πρόσθετα μοντέλα — περιορισμένη χρήση</option>
+  <option value="rigged">MakeHuman · πραγματικός σκελετός / 2 κινήσεις</option>
+  <option value="makehuman">MakeHuman — πρωτότυπα OBJ (χωρίς rig)</option>
+</select>
+<label for="source-model">Μοντέλο</label>
+<select id="source-model" aria-describedby="source-warning"></select>
+<button id="source-load" type="button" disabled>Φόρτωση επιλεγμένου 3D</button>
+<p id="source-status" role="status" aria-live="polite">Αναμονή…</p>
+<small class="meta" id="source-license"></small><div id="source-details" hidden></div><hr style="border:0;border-top:1px solid #2d516e;margin:18px 0"><h2>Δομές και κινήσεις</h2><label for="source-part">Επιλεγμένη δομή</label><select id="source-part" disabled><option>Φόρτωσε μοντέλο</option></select><div class="toolrow"><button type="button" id="part-isolate" disabled>Απομόνωση</button><button type="button" id="part-show" disabled>Όλα ορατά</button></div><label class="selector" for="source-clip">Κίνηση</label><select id="source-clip" disabled><option>Δεν υπάρχει διαθέσιμη κίνηση</option></select><div class="toolrow"><button type="button" id="clip-play" disabled>Αναπαραγωγή</button><button type="button" id="clip-pause" disabled>Παύση</button></div><label class="selector" for="source-opacity">Διαφάνεια μοντέλου <output id="opacity-value">100%</output></label><input id="source-opacity" type="range" min="15" max="100" value="100" step="5" disabled><div class="toolrow"><button type="button" id="view-reset" disabled>Κέντρο</button><button type="button" id="view-front" disabled>Μπροστά</button><button type="button" id="view-side" disabled>Πλάι</button></div><p id="source-mesh-info" class="eyebrow" role="status"></p>
+</section>
+<section class="card" aria-label="Διαδραστική δοκιμαστική προβολή">
+<canvas id="source-canvas" tabindex="0" aria-label="Διαδραστική 3D προβολή πηγαίου μοντέλου, κλικ σε δομή για επιλογή"></canvas>
+<p><small>Σύρσιμο: περιστροφή · κλικ σε δομή: επιλογή · ροδέλα ή δύο δάχτυλα: μεγέθυνση. Η λήψη γίνεται μόνο μετά από επιλογή.</small></p>
+</section>
+</div>
+<p id="source-warning" role="note">Οι πόροι δεν αποτελούν κλινικά επικυρωμένη προσομοίωση.</p>
+<p><small>Τα 5 Z-Anatomy παραμένουν σε απομονωμένη ερευνητική προβολή. Οι 3 ήδη υπάρχοντες στατικοί ασθενείς του Cockpit εμφανίζονται ως 3D assets και όχι ως νέοι rigged ασθενείς. Τα MakeHuman OBJ μπορούν να προβληθούν ως γεωμετρία, αλλά τα υπόλοιπα αρχεία skeleton/weights/BVH δεν αποτελούν έτοιμο rigged patient GLB. Οι πλήρεις BodyParts3D 4.0/4.3 άτλαντες διατηρούνται στο Anatomy Lab ως ξεχωριστά δεδομένα υψηλής ανάλυσης· δεν φορτώνονται εδώ ως GLB.</small></p>
+<p><small>Δεν τροποποιούνται η μαθησιακή πρόοδος, οι εξετάσεις, ο κανονικός 3D άτλας ή οι κλινικές σκηνές. Το NIH 3D χρειάζεται ξεχωριστή επαλήθευση και αντιστοίχιση πριν γίνει διαθέσιμο εδώ.</small></p>
+</main>
+</body></html>

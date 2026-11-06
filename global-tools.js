@@ -21,8 +21,18 @@ const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.classN
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
 let searchCache=null,glossaryCache=null;
 const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json'];
+const LEXICON_CATEGORY='Υγιεινή και επιδημιολογία';
+function lexiconTerm(item){
+ const greek=item.el||[];
+ return {term:greek[0]||item.en,en:item.en,category:LEXICON_CATEGORY,aliases:[...greek.slice(1),...(item.enAliases||[])],
+  definition:item.definition||(item.see?'Βλέπε: '+item.see:'')};
+}
 async function loadGlossary(){
- if(!glossaryCache)glossaryCache=fetchJson('medical-terms.json?v=27.1.62').then(o=>o.items||[]).catch(e=>{glossaryCache=null;throw e});
+ if(!glossaryCache)glossaryCache=Promise.all([
+  fetchJson('medical-terms.json?v=27.1.62').then(o=>o.items||[]),
+  // The reviewed glossary must keep working even if the larger lexicon cannot load.
+  fetchJson('medical-lexicon.json?v=1').then(o=>(o.items||[]).map(lexiconTerm)).catch(()=>[])
+ ]).then(([terms,lexicon])=>[...terms,...lexicon]).catch(e=>{glossaryCache=null;throw e});
  return glossaryCache;
 }
 function entries(parts){
@@ -242,7 +252,7 @@ function installGlossary(){
    const arrow=el('span','medical-glossary-arrow',expanded?'⌄':'›');arrow.setAttribute('aria-hidden','true');
    toggle.append(titles,arrow);card.append(toggle);
    if(expanded){
-    const detail=el('div','medical-glossary-detail');detail.append(el('p','medical-glossary-definition',t.definition));
+    const detail=el('div','medical-glossary-detail');if(t.definition)detail.append(el('p','medical-glossary-definition',t.definition));
     if(t.category)detail.append(el('p','medical-glossary-category',t.category));
     if(t.aliases?.length)detail.append(el('p','medical-glossary-aliases','Συνώνυμα / σχετικοί όροι: '+t.aliases.join(' · ')));
     if(t.image&&(/^(?:https:\/\/commons\.wikimedia\.org\/wiki\/Special:FilePath\/|\.\/assets\/education\/[A-Za-z0-9._-]+\.svg$)/.test(t.image.url||''))){

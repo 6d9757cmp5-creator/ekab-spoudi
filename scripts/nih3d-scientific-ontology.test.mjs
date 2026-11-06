@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {screenSourceResearch,selectScientificSources,suggestObjectiveConcepts,SCIENTIFIC_CONCEPTS} from '../tools/atla-ai/nih3d-scientific-ontology.mjs';
+const cat=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json','utf8'));
+const byId=id=>cat.items.find(x=>x.entryId===id);
+for(const [id,concept] of [[168,'femur'],[169,'tibia'],[170,'patella']]){
+ const entry=screenSourceResearch(byId(id));
+ assert(entry.humanAnatomyResearchCandidate, 'NIH anatomical entry should be research candidate '+id);
+ assert(entry.conceptCandidates.includes('ATLA-ANATOMY-'+concept));
+ assert.equal(entry.reviewStatus,'SCIENTIFIC_REVIEW_NOT_COMPLETED');
+ assert.equal(entry.suitableForClinicalAdvice,false);
+}
+assert(screenSourceResearch(byId(169)).conceptCandidates.includes('ATLA-ANATOMY-fibula'));
+assert.equal(screenSourceResearch(byId(282)).humanAnatomyResearchCandidate,false,'Dog skull not human anatomy');
+assert.equal(screenSourceResearch(byId(12)).conceptCandidates.length,0,'Molecular ATPase is not macro anatomy');
+assert.equal(screenSourceResearch(byId(324)).conceptCandidates.length,0,'Horse heart cytochrome is not human heart geometry');
+assert.equal(screenSourceResearch(byId(381)).pathologyContext,'fracture');
+assert(suggestObjectiveConcepts('Ο μηριαίος και η επιγονατίδα').includes('ATLA-ANATOMY-patella'));
+assert(suggestObjectiveConcepts('Κνήμη και περόνη').includes('ATLA-ANATOMY-fibula'));
+assert(!suggestObjectiveConcepts('Βιοχημική δομή ανθρώπινης πρωτεΐνης').includes('ATLA-ANATOMY-femur'));
+const rows=[168,169,170,282,381].map(id=>screenSourceResearch(byId(id)));
+const lesson=selectScientificSources(rows,{surface:'lesson',objective:'μηριαίο οστό'});
+assert.deepEqual(lesson.map(x=>x.id),[168]);
+assert.equal(lesson[0].clinicalValidation,'NOT_ESTABLISHED');
+assert.equal(lesson[0].role,'official-research-reference-only');
+assert.equal(selectScientificSources(rows,{surface:'exam',objective:'επιγονατίδα'}).length,0,'No pre-answer exam hints');
+assert.deepEqual(selectScientificSources(rows,{surface:'exam',objective:'επιγονατίδα',examAnswerRevealed:true}).map(x=>x.id),[170]);
+assert.equal(selectScientificSources(rows,{surface:'cockpit',objective:'επιγονατίδα'}).length,0,'No implied patient condition');
+assert.deepEqual(selectScientificSources(rows,{surface:'cockpit',objective:'επιγονατίδα',confirmedClinicalStructure:true}).map(x=>x.id),[170]);
+assert.equal(selectScientificSources(rows,{surface:'lesson',objective:'επιγονατίδα',requireDisplay3D:true}).length,0,'No 3D render without explicit approval');
+assert.deepEqual(selectScientificSources(rows,{surface:'lesson',objective:'επιγονατίδα',requireDisplay3D:true,approvedModelIds:[170]}).map(x=>x.id),[170]);
+assert.equal(selectScientificSources(rows,{surface:'lesson',objective:'patella'}).length,1,'Fracture-only 3D not substituted for healthy anatomy');
+assert.deepEqual(selectScientificSources(rows,{surface:'cockpit',objective:'patella fracture',confirmedClinicalStructure:true,clinicalCondition:'fracture'}).map(x=>x.id),[170,381]);
+assert(SCIENTIFIC_CONCEPTS.length>=20);
+console.log('ATLA NIH3D structured academic triage and no-clinical-overclaim tests passed');

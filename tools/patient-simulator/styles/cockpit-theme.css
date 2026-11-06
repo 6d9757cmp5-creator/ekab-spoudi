@@ -20,7 +20,7 @@ body{
  background:radial-gradient(ellipse 68% 43% at 52% -7%,#224151,#0b2230 68%,#071823 125%);
 }
 .next-shell{max-width:1660px;padding-left:clamp(12px,2.2vw,34px);padding-right:clamp(12px,2.2vw,34px)}
-.next-header{border-bottom:1px solid #51788b66}
+.next-header{border-bottom:1px solid #51788b66;box-sizing:border-box;max-width:100%}
 .next-top{gap:16px;padding-block:24px}
 .next-top h1{letter-spacing:-.032em;line-height:1.15}
 .next-time{background:linear-gradient(165deg,#17394a,#0c2534);box-shadow:inset 0 1px #a4d8de19}

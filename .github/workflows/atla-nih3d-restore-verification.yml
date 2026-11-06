@@ -1,0 +1,61 @@
+name: ATLA NIH3D anonymous restore verification
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/nih3d_verify_release_restore.py'
+      - 'scripts/test_nih3d_verify_release_restore.py'
+      - '.github/workflows/atla-nih3d-restore-verification.yml'
+  schedule:
+    - cron: '23 */2 * * *'
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: atla-nih3d-restore-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/nih3d_verify_release_restore.py
+            scripts/test_nih3d_verify_release_restore.py
+            docs/ATLA_NIH3D_RESTORE_VERIFICATION_2026.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test verification logic
+        run: python -m unittest discover -s scripts -p 'test_nih3d_verify_release_restore.py' -v
+      - name: Download anonymously, decompress and hash every archived file
+        id: verify
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get install -y zstd >/dev/null
+          python scripts/nih3d_verify_release_restore.py --limit 3
+      - name: Preserve the proof, including any failure it found
+        if: always() && github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          test -f docs/ATLA_NIH3D_RESTORE_VERIFICATION_2026.json || exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ATLA_NIH3D_RESTORE_VERIFICATION_2026.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'evidence(atla): ανώνυμη επαλήθευση ανάκτησης αρχειοθηκών NIH'
+            branch="${GITHUB_REF_NAME}"
+            git pull --rebase origin "$branch"
+            git push origin "HEAD:$branch"
+          fi
+      # GitHub skips scheduled runs under load, so a clean run with ranges left starts the next one.
+      - name: Continue with the remaining ranges
+        if: success() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && steps.verify.outputs.remaining != '0' && steps.verify.outputs.remaining != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run atla-nih3d-restore-verification.yml --repo "$GITHUB_REPOSITORY" --ref main

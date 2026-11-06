@@ -18,24 +18,24 @@ try {
     const loaded=await page.locator('body').evaluate(el=>Boolean(el.textContent?.trim())&&getComputedStyle(el).display!=='none');
     if(!loaded)throw Error(device+': page body did not render');
     console.log('PASS '+device+': application loads');
-    await page.waitForFunction(()=>document.querySelector('#mentor-home-presence-frame')?.contentDocument?.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',null,{timeout:90000});
-    if(!await page.locator('#mentor-home-visual-shell').isVisible())throw Error(device+': no permanent MENTOR 3D on home');
-    const embedded=page.frameLocator('#mentor-home-presence-frame');
-    if(!await embedded.locator('#mentor-real3d-canvas').isVisible())throw Error(device+': embedded 3D character not visible');
-    await page.locator('#mentor-home-visual-toggle').click();
-    if(await page.locator('#mentor-home-visual-shell').isVisible())throw Error(device+': hide 3D character failed');
-    await page.locator('#mentor-home-visual-toggle').click();
-    if(!await page.locator('#mentor-home-visual-shell').isVisible())throw Error(device+': show 3D character failed');
-    await page.locator('#mentor-home-question').fill('Τι είναι ΚΑΡΠΑ;');
-    await page.locator('#mentor-home-question-form button[type=submit]').click();
-    await page.waitForFunction(()=>document.getElementById('mentor-home-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
-    await page.locator('#mentor-home-question').fill('ΚΑΡΠΑ');
-    await page.locator('#mentor-home-question-form button[type=submit]').click();
-    await page.waitForFunction(()=>document.getElementById('mentor-home-answer')?.textContent?.includes('Θωρακικές συμπιέσεις'),null,{timeout:20000});
-    const costLabel=await page.locator('#mentor-home-speech-status').textContent();
-    if(!costLabel.includes('0 AI credits'))throw Error(device+': basic MENTOR answer was not labelled free/local');
-    console.log('PASS '+device+': bare ΚΑΡΠΑ answered locally with zero AI usage');
-    console.log('PASS '+device+': visible MENTOR 3D, user hide/show and local Greek Q&A');
+    // The home page has one assistant: ATLA, answering basic questions locally with no AI usage.
+    const aiRequests=[];
+    page.on('request',r=>{if(/anthropic|workers\.dev|openai/.test(r.url()))aiRequests.push(r.url())});
+    await page.locator('.atla-launcher').click();
+    if(!await page.locator('.atla-panel').isVisible())throw Error(device+': ATLA panel did not open');
+    for(const question of ['Τι είναι ΚΑΡΠΑ;','ΚΑΡΠΑ']){
+      await page.locator('.atla-input').fill(question);
+      await page.locator('.atla-send').click();
+      await page.waitForFunction(q=>{
+        const replies=[...document.querySelectorAll('.atla-message')].map(m=>m.textContent);
+        const asked=replies.lastIndexOf(q);
+        return asked>=0&&replies.slice(asked+1).some(t=>/θωρακικές συμπιέσεις/i.test(t)&&!/Εικονικό AI/.test(t));
+      },question,{timeout:20000});
+    }
+    if(aiRequests.length)throw Error(device+': a basic ATLA answer used AI: '+aiRequests[0]);
+    await page.locator('.atla-close').click();
+    if(await page.locator('.atla-panel').isVisible())throw Error(device+': ATLA panel did not close');
+    console.log('PASS '+device+': bare ΚΑΡΠΑ answered locally through ATLA with zero AI usage');
 
     const mentorPage=await page.goto('http://127.0.0.1:8765/mentor-lab.html',{waitUntil:'domcontentloaded',timeout:30000});
     if(!mentorPage?.ok())throw Error(device+': MENTOR page does not load');
