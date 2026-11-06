@@ -6,6 +6,17 @@ on:
       - 'scripts/nih3d-archive-planned-originals.mjs'
       - 'scripts/nih3d-plan-next-originals.mjs'
       - 'tools/atla-ai/nih3d-biomedical-scope.mjs'
+      - 'tools/atla-ai/nih3d-credibility-gate.mjs'
+      - 'tools/atla-ai/resources/nih3d-credibility-approvals.json'
+      - '.github/workflows/atla-nih3d-planned-batch-execution.yml'
+  pull_request:
+    paths:
+      - 'scripts/nih3d-plan-next-originals.mjs'
+      - 'scripts/nih3d-archive-planned-originals.mjs'
+      - 'scripts/nih3d-source-credibility.test.mjs'
+      - 'scripts/nih3d-plan-next-originals.test.mjs'
+      - 'tools/atla-ai/nih3d-credibility-gate.mjs'
+      - 'tools/atla-ai/resources/nih3d-credibility-approvals.json'
       - '.github/workflows/atla-nih3d-planned-batch-execution.yml'
   workflow_dispatch:
   schedule:
@@ -25,7 +36,13 @@ jobs:
         with:
           sparse-checkout: |
             scripts/nih3d-plan-next-originals.mjs
+            scripts/import-nih3d-license-reviewed.mjs
+            scripts/mirror-nih3d-model-files.mjs
+            scripts/nih3d-ghcr-full-anatomy.mjs
+            scripts/nih3d-ghcr-neuro-batch.mjs
+            scripts/nih3d-ghcr-molecular-complete.mjs
             scripts/nih3d-plan-next-originals.test.mjs
+            scripts/nih3d-source-credibility.test.mjs
             scripts/nih3d-archive-planned-originals.mjs
             scripts/nih3d-build-verified-archive-registry.mjs
             scripts/nih3d-build-scientific-evidence.mjs
@@ -35,6 +52,8 @@ jobs:
             scripts/nih3d-biomedical-scope.test.mjs
             tools/atla-ai/nih3d-scientific-ontology.mjs
             tools/atla-ai/nih3d-biomedical-scope.mjs
+            tools/atla-ai/nih3d-credibility-gate.mjs
+            tools/atla-ai/resources/nih3d-credibility-approvals.json
             tools/atla-ai/resources/nih3d-master-plan-2026/
             tools/atla-ai/resources/nih3d-verified-originals-2026.json
             tools/atla-ai/resources/nih3d-next-originals-plan-2026.json
@@ -49,18 +68,35 @@ jobs:
       - name: Verify source rights, model priority and scientific safeguards
         run: |
           set -euo pipefail
+          node scripts/nih3d-source-credibility.test.mjs
+          node --check tools/atla-ai/nih3d-credibility-gate.mjs
+          node --check scripts/mirror-nih3d-model-files.mjs
+          node --check scripts/import-nih3d-license-reviewed.mjs
+          node --check scripts/nih3d-ghcr-full-anatomy.mjs
+          node --check scripts/nih3d-ghcr-neuro-batch.mjs
+          node --check scripts/nih3d-ghcr-molecular-complete.mjs
           node scripts/nih3d-plan-next-originals.test.mjs
           node scripts/nih3d-scientific-ontology.test.mjs
           node scripts/nih3d-biomedical-scope.test.mjs
           node scripts/nih3d-structural-qa.test.mjs
           node --check scripts/nih3d-archive-planned-originals.mjs
       - name: Select next limited NIH batch from full source catalogue
-        run: node scripts/nih3d-plan-next-originals.mjs
+        id: plan
+        run: |
+          node scripts/nih3d-plan-next-originals.mjs
+          if [ "$(node -p "require('./tools/atla-ai/resources/nih3d-next-originals-plan-2026.json').selectedModels")" -gt 0 ]; then
+            echo 'has_models=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_models=false' >> "$GITHUB_OUTPUT"
+            echo 'No independently reviewed NIH source is eligible; all download and publication steps will be skipped.'
+          fi
       - name: Download all original NIH formats and verify source SHA-256
+        if: github.event_name != 'pull_request' && steps.plan.outputs.has_models == 'true'
         env:
           NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-planned-originals
         run: node scripts/nih3d-archive-planned-originals.mjs prepare
       - name: Publish source originals or verify existing matching package
+        if: github.event_name != 'pull_request' && steps.plan.outputs.has_models == 'true'
         env:
           NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-planned-originals
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -86,6 +122,7 @@ jobs:
             docker push "$IMAGE:$tag"
           fi
       - name: Anonymous independent source restore and per-file SHA-256 checks
+        if: github.event_name != 'pull_request' && steps.plan.outputs.has_models == 'true'
         env:
           NIH_BATCH_DIR: ${{ runner.temp }}/nih3d-planned-originals
           IMAGE: ghcr.io/6d9757cmp5-creator/atla-nih3d-archive
@@ -127,6 +164,7 @@ jobs:
           console.log('FULL SOURCE SHA256 RESTORE VERIFIED',JSON.stringify({models:proof.models,files:proof.files,bytes:proof.totalOriginalBytes,digest,name}));
           NODE
       - name: Update full verified SHA registry and medical source evidence from new proof
+        if: github.event_name != 'pull_request' && steps.plan.outputs.has_models == 'true'
         env:
           REQUIRE_VERIFIED_ORIGINAL_ARCHIVES: '1'
         run: |
@@ -172,6 +210,7 @@ jobs:
           console.log('Verified complete NIH model archives:',r.modelsWithAllCatalogOriginalFilesVerified,'source files:',r.uniqueVerifiedOriginalFiles);
           NODE
       - name: Commit evidence of real original storage, not merely metadata
+        if: github.event_name != 'pull_request' && steps.plan.outputs.has_models == 'true'
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'

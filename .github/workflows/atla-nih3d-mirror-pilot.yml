@@ -16,13 +16,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Source credibility gate before pilot transfer
+        id: credibility
+        run: |
+          if node scripts/mirror-nih3d-model-files.mjs --start=160 --end=175 --check-only=true --out=tmp/nih3d-pilot; then
+            echo 'approved=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'approved=false' >> "$GITHUB_OUTPUT"
+            echo "::warning::NIH 3D pilot skipped because a source has no independent review."
+          fi
       - name: Validate and install lossless compressor
+        if: steps.credibility.outputs.approved == 'true'
         run: |
           node --check scripts/mirror-nih3d-model-files.mjs
           sudo apt-get update -qq && sudo apt-get install -qq -y zstd
       - name: Mirror actual NIH 3D geometry, preserving original bytes and SHA256
+        if: steps.credibility.outputs.approved == 'true'
         run: node scripts/mirror-nih3d-model-files.mjs --start=160 --end=175 --out=tmp/nih3d-pilot
       - name: Preserve complete lossless source archive and verification report
+        if: steps.credibility.outputs.approved == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: atla-nih3d-originals-160-175

@@ -31,7 +31,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify complete historical range has independently reviewed sources
+        id: credibility
+        env:
+          RANGE_START: ${{ matrix.start }}
+        run: |
+          set -euo pipefail
+          if node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$((RANGE_START+99))" --check-only=true; then
+            echo 'approved=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'approved=false' >> "$GITHUB_OUTPUT"
+            echo "::warning::Historical source refetch withheld: unreviewed NIH uploader(s); no model files downloaded."
+          fi
       - name: Download all published NIH 3D formats with lossless compression
+        if: steps.credibility.outputs.approved == 'true'
         env:
           RANGE_START: ${{ matrix.start }}
         run: |
@@ -42,6 +55,7 @@ jobs:
           node scripts/mirror-nih3d-model-files.mjs --start="$RANGE_START" --end="$((RANGE_START+99))" --out="tmp/nih3d-mirror-$RANGE_START"
       # Only a finished run has a RESULT manifest, so a partial download cannot replace anything.
       - name: Preserve the finished range for the rescue workflow
+        if: steps.credibility.outputs.approved == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: nih3d-originals-${{ matrix.start }}
@@ -52,6 +66,7 @@ jobs:
           compression-level: 0
           retention-days: 7
       - name: Start the rescue of the finished range
+        if: steps.credibility.outputs.approved == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run recover-nih3d-large.yml --repo "$GITHUB_REPOSITORY" --ref main

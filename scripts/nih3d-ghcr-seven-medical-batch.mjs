@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {Readable,Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
+import {readApprovalRegistry,requireSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 const action=process.argv[2],root=process.env.NIH_BATCH_DIR;
 const IDS=[105,190,251,277,334,379,451],MAX_TOTAL=70_000_000,MAX_FILE=12_000_000,MAX_COUNT=60;
 const SOURCE_RE=/^https:\/\/3d\.nih\.gov\/api\/submissions\/\d+\/runs\/[a-f0-9-]+\/output-files\/\d+$/i;
@@ -19,6 +20,7 @@ function checkFormat(bytes,fmt){
  if(fmt==='STL'){assert(bytes.readUInt32LE(80)*50+84===bytes.length||bytes.subarray(0,5).toString('ascii').toLowerCase()==='solid','Invalid STL');}
 }
 if(action==='prepare'){
+ const credibilityRegistry=readApprovalRegistry();
  const catalog=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-master-plan-2026/segments/entries-1-500.json','utf8'));
  const previous=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
  const already=new Set(previous.models.map(m=>m.entryId));
@@ -26,6 +28,7 @@ if(action==='prepare'){
  if(entries.some(x=>!x))throw Error('Missing NIH source entry');
  const files=[],models=[],urls=new Set();
  for(const e of entries){
+  requireSourceCredibility(e,credibilityRegistry);
   if(already.has(e.entryId))throw Error('Already archived model: '+e.entryId);
   if(e.license!=='Public Domain'||e.licenseRaw!=='Public Domain')throw Error('Unapproved source license '+e.entryId);
   if(!['Anatomy','Biomacromolecules'].includes(e.category))throw Error('Unexpected source category');

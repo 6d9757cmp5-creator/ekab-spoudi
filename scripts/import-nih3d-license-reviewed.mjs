@@ -3,7 +3,9 @@
 import {writeFile,mkdir,rename} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {dirname} from 'node:path';
+import {readApprovalRegistry,checkSourceCredibility,requireSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 const argv=process.argv.slice(2);
+const credibilityRegistry=readApprovalRegistry();
 function num(name,def){const x=argv.find(s=>s.startsWith('--'+name+'='));return x?Number(x.slice(name.length+3)):def;}
 const start=num('start',1),end=num('end',120),limit=num('max-files',8),maxBytes=num('max-mb',4)*1048576;
 if(![start,end,limit,maxBytes].every(Number.isFinite)||start<1||end<start||end-start>600||limit>30||maxBytes>20*1048576)throw Error('Invalid controlled batch or size limit');
@@ -57,16 +59,18 @@ for(let id=start;id<=end;id++){
 await mkdir(catalog,{recursive:true});
 const range=start+'-'+end;
 const eligible=found.filter(x=>x.license&&x.route&&x.files.length);
-await writeFile(catalog+'entries-'+range+'.json',JSON.stringify({source:'NIH 3D',terms:'https://3d.nih.gov/terms',date:new Date().toISOString(),range:{start,end},totalEntries:found.length,eligible:eligible.length,items:found,errors},null,2)+'\n');
+const approved=eligible.filter(x=>checkSourceCredibility(x,credibilityRegistry).approved);
+await writeFile(catalog+'entries-'+range+'.json',JSON.stringify({source:'NIH 3D',terms:'https://3d.nih.gov/terms',date:new Date().toISOString(),range:{start,end},totalEntries:found.length,eligible:eligible.length,sourceApproved:approved.length,items:found,errors},null,2)+'\n');
 console.log('AUDIT',JSON.stringify({range,found:found.length,eligible:eligible.length,licenseCounts:Object.fromEntries([...new Set(found.map(x=>x.licenseRaw))].map(x=>[x,found.filter(y=>y.licenseRaw===x).length])),sample:found.filter(x=>x.route).slice(0,8).map(x=>({title:x.title,cat:x.category,license:x.licenseRaw,files:x.files.length})),errors:errors.length}));
 if(argv.includes('--audit-only'))process.exit(0);
-const candidates=eligible.filter(x=>relevant.test(x.title)&&x.files.some(f=>f.format==='GLB'||f.format==='STL')).sort((a,b)=>Number(b.files.some(f=>f.format==='GLB'))-Number(a.files.some(f=>f.format==='GLB'))||a.entryId-b.entryId);
+const candidates=approved.filter(x=>relevant.test(x.title)&&x.files.some(f=>f.format==='GLB'||f.format==='STL')).sort((a,b)=>Number(b.files.some(f=>f.format==='GLB'))-Number(a.files.some(f=>f.format==='GLB'))||a.entryId-b.entryId);
 const imported=[];
 for(const row of candidates){
  if(imported.length>=limit)break;
  const f=row.files.filter(x=>['GLB','STL'].includes(x.format)).sort((a,b)=>Number(b.format==='GLB')-Number(a.format==='GLB')).find(x=>!x.size||Number(x.size)<=maxBytes);
  if(!f)continue;
  try{
+  const review=requireSourceCredibility(row,credibilityRegistry);
   const response=await fetch(f.url,{signal:AbortSignal.timeout(45000)});
   if(!response.ok)throw Error('Download HTTP '+response.status);
   if(Number(response.headers.get('content-length')||0)>maxBytes)throw Error('File size budget exceeded');
@@ -77,7 +81,7 @@ for(const row of candidates){
   const dest=row.route+'nih3d-'+String(row.entryId).padStart(6,'0')+'.'+f.format.toLowerCase();
   await mkdir(dirname(dest),{recursive:true});
   await writeFile(dest+'.incoming',bytes);await rename(dest+'.incoming',dest);
-  imported.push({entryId:row.entryId,accession:row.accession,title:row.title,originalUrl:row.url,sourceFileUrl:f.url,path:dest,format:f.format,license:row.license,licenseExact:row.licenseRaw,creator:row.creator,citation:row.citation,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),status:'research-only; not clinically validated'});
+  imported.push({entryId:row.entryId,accession:row.accession,title:row.title,originalUrl:row.url,sourceFileUrl:f.url,path:dest,format:f.format,license:row.license,licenseExact:row.licenseRaw,creator:row.creator,citation:row.citation,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),status:'research-only; not clinically validated',sourceReliabilityScore:review.score});
   console.log('VERIFIED',row.accession,row.title,bytes.length,row.license);
  }catch(e){errors.push({id:row.entryId,assetError:String(e.message).slice(0,140)});}
 }

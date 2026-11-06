@@ -17,17 +17,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Skip unreviewed NIH 3D source files before any transfer
+        id: credibility
+        run: |
+          if node -e 'const r=require("./tools/atla-ai/resources/nih3d-credibility-approvals.json");if(![10].every(id=>r.approvals.some(a=>a.entryId===id)))process.exit(1)'; then
+            echo 'approved=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'approved=false' >> "$GITHUB_OUTPUT"
+            echo "::warning::No independent source approval: binary retrieval skipped."
+          fi
       - name: Validate NIH 3D individual public-domain entry
+        if: steps.credibility.outputs.approved == 'true'
         run: |
           node --check scripts/import-nih3d-visible-head.mjs
           node scripts/import-nih3d-visible-head.mjs
       - name: Preserve high-detail human head GLB with exact source provenance
+        if: steps.credibility.outputs.approved == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: nih3d-visible-human-head-public-domain-glb
           path: tools/anatomy-3d/resources/nih3d-approved/head-3dpx-000010/
           retention-days: 30
       - name: Persist verified research-only shards inside Anatomy Lab
+        if: steps.credibility.outputs.approved == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

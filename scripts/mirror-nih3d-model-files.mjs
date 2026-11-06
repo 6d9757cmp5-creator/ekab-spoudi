@@ -13,6 +13,7 @@ import {pipeline} from 'node:stream/promises';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {join,basename} from 'node:path';
+import {readApprovalRegistry,requireSourceCredibility,requireRangeSourceCredibility} from '../tools/atla-ai/nih3d-credibility-gate.mjs';
 
 const args=Object.fromEntries(process.argv.slice(2).filter(x=>x.startsWith('--')).map(x=>{let i=x.indexOf('=');return i<0?[x.slice(2),'true']:[x.slice(2,i),x.slice(i+1)];}));
 const first=Number(args.start||1),last=Number(args.end||100);
@@ -21,6 +22,7 @@ const sources=['tools/atla-ai/resources/nih3d-master-plan-2026/segments','tools/
 const out=args.out||'tmp/atla-nih3d-packs',work=join(out,'work'),maxPack=1200*1024**2,maxIndividual=7500*1024**2;
 const wait=ms=>new Promise(r=>setTimeout(r,ms)),allowed=new Set(['GLB','GLTF','STL','OBJ','X3D','WRL','PLY','3MF']);
 const all=new Map(),missing=[],failed=[],done=[],packs=[];
+const credibilityRegistry=readApprovalRegistry();
 const safe=s=>String(s||'model').replace(/[^a-zA-Z0-9._-]/g,'_').slice(0,85);
 await mkdir(out,{recursive:true});await mkdir(work,{recursive:true});
 let foundMetadata=false;
@@ -36,6 +38,12 @@ for(const dir of sources){
  }
 }
 if(!foundMetadata)throw Error('No NIH source metadata catalog has been archived yet');
+// Fail before any network request; a partly reviewed historical range must not be marked complete.
+requireRangeSourceCredibility([...all.values()],credibilityRegistry);
+if(args['check-only']==='true'){
+ console.log('NIH 3D source credibility preflight passed; no network transfers attempted');
+ process.exit(0);
+}
 const prefix='atla-nih3d-'+String(first).padStart(5,'0')+'-'+String(last).padStart(5,'0');
 let currentBytes=0,memberFiles=[],packageNumber=0;
 async function flush(){
@@ -121,7 +129,11 @@ async function currentPublishedOutputs(id,original){
 for(let id=first;id<=last;id++){
  let item=all.get(id);
  if(!item){missing.push({entryId:id,reason:'No published metadata was stored for this source ID (may be unpublished or nonexistent)'});continue}
+ const failuresBefore=sourceRefreshFailures.length;
  item=await currentPublishedOutputs(id,item);
+ if(sourceRefreshFailures.length!==failuresBefore)throw Error('NIH3D live metadata refresh required before download: '+id);
+ item={...item,licenseRaw:item.licenseExact??item.licenseRaw};
+ requireSourceCredibility(item,credibilityRegistry);
  const files=(item.files||[]).filter(f=>allowed.has(String(f.format||'').toUpperCase())&&/^https:\/\/3d\.nih\.gov\/api\/submissions\//.test(f.url||''));
  if(!files.length){failed.push({entryId:id,reason:'No supported 3D output attached in source metadata'});continue}
  for(let i=0;i<files.length;i++){
