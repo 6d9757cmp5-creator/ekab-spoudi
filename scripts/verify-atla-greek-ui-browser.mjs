@@ -9,13 +9,13 @@ import {chromium,webkit} from 'playwright';
 const PORT=8775,BASE='http://127.0.0.1:'+PORT;
 const server=spawn('python3',['-m','http.server',String(PORT),'--bind','127.0.0.1'],{stdio:'ignore'});
 const targets=[
- {page:'index.html',expected:'Ο προσωπικός σου εκπαιδευτικός βοηθός'},
+ {page:'index.html',expected:'Εκπαιδευτικός βοηθός · Εξηγήσεις και μελέτη'},
  {page:'protocols.html',expected:'Πρακτική πρωτοκόλλων'},
  {page:'ui-tools/anatomy-3d/index.html',expected:'ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D'},
  {page:'mentor-live.html',expected:'ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ'},
  {page:'mentor-lab.html',expected:'Εργαστήριο ΗΚΓ'},
  {page:'theory.html',expected:'Εκπαιδευτικές υπενθυμίσεις SOS'},
- {page:'ui-tools/anatomy-full-atlas.html',expected:'Εργαστήριο 3D Ανατομίας'},
+ {page:'ui-tools/anatomy-full-atlas.html',expected:'Τρισδιάστατη ανατομία'},
  {page:'ui-tools/atla-resource-preview.html',expected:'Κίνηση'},
 ];
 const environments=[
