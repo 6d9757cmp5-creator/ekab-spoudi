@@ -1,0 +1,106 @@
+name: ATLA Exhaustive 3D Asset and Viewer Acceptance
+on:
+  push:
+    branches: [audit/atla-3d-exhaustive-20261103]
+    paths:
+      - '.github/workflows/atla-3d-exhaustive-acceptance.yml'
+      - 'scripts/audit-atla-every-3d-asset.mjs'
+      - 'scripts/verify-atla-every-3d-model-browser.mjs'
+  pull_request:
+    paths:
+      - '.github/workflows/atla-3d-exhaustive-acceptance.yml'
+      - 'scripts/audit-atla-every-3d-asset.mjs'
+      - 'scripts/verify-atla-every-3d-model-browser.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: atla-3d-exhaustive-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  structural:
+    name: All repository GLB and listed source files - geometry / hash
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            assets/mentor-real-3d.glb
+            mentor/assets/mentor-real-3d.glb
+            tools/anatomy-3d/resources/imported-manifest.json
+            tools/anatomy-3d/resources/hra-v1.2/
+            tools/anatomy-3d/resources/nih3d-approved/
+            tools/anatomy-3d/resources/z-anatomy-research/
+            tools/patient-simulator/assets/
+            tools/patient-simulator/resources/
+            tools/atla-ai/model-preview-catalog.mjs
+            tools/atla-ai/model-preview.mjs
+            ui-tools/atla-resource-preview.html
+            scripts/audit-atla-every-3d-asset.mjs
+            scripts/verify-atla-every-3d-model-browser.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check scripts/audit-atla-every-3d-asset.mjs
+          node --check scripts/verify-atla-every-3d-model-browser.mjs
+      - name: Exhaustive structural checks
+        run: node scripts/audit-atla-every-3d-asset.mjs
+      - name: Preserve per-file checks and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-3d-exhaustive-all-glb-structural
+          path: audit-results/atla-3d-every-glb-structural.json
+          retention-days: 30
+          if-no-files-found: warn
+  browser:
+    name: Every actual model render - ${{ matrix.mode }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [hra-0, hra-1, hra-2, research, cockpit]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            assets/mentor-real-3d.glb
+            mentor/assets/mentor-real-3d.glb
+            tools/anatomy-3d/resources/imported-manifest.json
+            tools/anatomy-3d/resources/hra-v1.2/
+            tools/anatomy-3d/resources/nih3d-approved/
+            tools/anatomy-3d/resources/z-anatomy-research/
+            tools/patient-simulator/assets/
+            tools/patient-simulator/resources/
+            tools/atla-ai/model-preview-catalog.mjs
+            tools/atla-ai/model-preview.mjs
+            ui-tools/atla-resource-preview.html
+            scripts/audit-atla-every-3d-asset.mjs
+            scripts/verify-atla-every-3d-model-browser.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and real Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exhaustively load every listed model and exercise mesh controls
+        run: node scripts/verify-atla-every-3d-model-browser.mjs ${{ matrix.mode }}
+      - name: Preserve per-model proof and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-3d-exhaustive-${{ matrix.mode }}
+          path: |
+            audit-results/atla-3d-browser-${{ matrix.mode }}.json
+            browser-qa-results/atla-exhaustive-${{ matrix.mode }}-*.png
+          if-no-files-found: warn
+          retention-days: 30
