@@ -33,7 +33,7 @@ function save(){
  catch{$('lab-storage').textContent='Η αποθήκευση δεν είναι διαθέσιμη στον browser. Η προσπάθεια ισχύει μόνο όσο μένει ανοιχτή η σελίδα.';}
 }
 const href=(kind)=>makeJourneyUrl('mentor-protocol-suite.html',journeyContext,kind)+'&role='+encodeURIComponent(role);
-$('suite-title').textContent=view==='lab'?'ATLA | Εργαστήριο πρωτοκόλλων':'ATLA · ΑΝΑΣΚΟΠΗΣΗ';
+$('suite-title').textContent=view==='lab'?'Εξάσκηση σε Πρωτόκολλα':'Ανασκόπηση Πρωτοκόλλου';
 $('suite-topic').textContent=topic.name;
 $('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.'+
  (journeyContext.focus?' Συνδεδεμένη ενότητα: '+journeyContext.focus+'.':'');
@@ -66,10 +66,10 @@ function showLab(){
  $('lab-next').hidden=true;
  if(completed){
   $('lab-header').textContent='Η εξάσκηση ολοκληρώθηκε';
-  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στο ATLA · ΑΝΑΣΚΟΠΗΣΗ.';
-  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα ATLA · ΑΝΑΣΚΟΠΗΣΗ';
+  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στην Ανασκόπηση Πρωτοκόλλου.';
+  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα Ανασκόπησης Πρωτοκόλλου';
   $('lab-choices').append(a);
-  mentorSay('Ολοκλήρωσες την άσκηση. Στο ΑΝΑΣΚΟΠΗΣΗ θα εξετάσουμε τη λογική κάθε επιλογής.');
+  mentorSay('Ολοκλήρωσες την άσκηση. Στην Ανασκόπηση Πρωτοκόλλου θα εξετάσουμε τη λογική κάθε επιλογής.');
   return;
  }
  const stage=stages[session.index];
@@ -90,12 +90,12 @@ function choose(choiceId){
  session.answers.push({stage:current,choice:choiceId,pass:chosen[2],dimension:stage.dimension});
  session.index+=1;session.completed=session.index>=stages.length;save();
  [...$('lab-choices').querySelectorAll('button')].forEach(b=>b.disabled=true);
- const feedback=session.mode==='guided'?chosen[3]:'Η επιλογή σου καταγράφηκε. Η αναλυτική αιτιολόγηση θα εμφανιστεί στο ΑΝΑΣΚΟΠΗΣΗ.';
+ const feedback=session.mode==='guided'?chosen[3]:'Η επιλογή σου καταγράφηκε. Η αναλυτική αιτιολόγηση θα εμφανιστεί στην Ανασκόπηση Πρωτοκόλλου.';
  $('lab-feedback').textContent=feedback;$('lab-feedback').className='feedback'+(chosen[2]?'':' review');$('lab-feedback').hidden=false;
  mentorSay(feedback);
  $('lab-stage').textContent='Ολοκληρώθηκε το βήμα '+session.index+' / '+stages.length;
  $('lab-progress').style.width=Math.round(100*session.index/stages.length)+'%';
- $('lab-next').textContent=session.completed?'Δες το ATLA · ΑΝΑΣΚΟΠΗΣΗ':'Επόμενο εκπαιδευτικό βήμα →';
+ $('lab-next').textContent=session.completed?'Δες την Ανασκόπηση Πρωτοκόλλου':'Επόμενο εκπαιδευτικό βήμα →';
  $('lab-next').hidden=false;
 }
 function readStoredInterview(){
