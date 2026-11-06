@@ -7,9 +7,11 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {dirname,resolve} from 'node:path';
 import {ANTHROPIC_URL,ANTHROPIC_VERSION,CLAUDE_MODELS} from '../mentor/ai/claude-adapter.mjs';
+import {reuseDecisionForPath} from '../tools/atla-ai/knowledge-refresh/upstream-evidence.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const OUTPUT='audit-results/educational-scientific-review.json';
 const RULES='docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md';
+const UPSTREAM_LEDGER='tools/atla-ai/knowledge-refresh/verified-upstream-evidence.json';
 export const MAX_FILES=25,MAX_CHARS=10500,CONCURRENCY=4,MAX_CHUNKS=200,MIN_SPLIT=1200;
 // File-type based discovery: new courses, subjects, names and directories are covered
 // automatically. Never depend on a fixed list of today's feature names.
@@ -24,7 +26,7 @@ export function isEducationPath(p){
    /^docs\/primary-source-crosscheck-[^/]+\//i.test(p)||/^docs\/EOPPEP-SOURCE-INVENTORY[^/]*\.json$/i.test(p))return false;
  // Future lesson pages, medical figures, courses, question banks, modules,
  // guides and multimedia are all discovered regardless of their names.
- return /\.(?:html?|md|mdx|txt|rst|csv|json|jsonl|ipynb|xml|ya?ml|[cm]?js|jsx|tsx?|py|vue|svelte|astro|svg|pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm)$/i.test(p);
+ return /\.(?:html?|md|mdx|txt|rst|csv|json|jsonl|ipynb|xml|ya?ml|[cm]?js|jsx|tsx?|py|vue|svelte|astro|svg|pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm|glb|gltf|obj|stl|x3d|wrl|fbx|dae|ply|usdz)$/i.test(p);
 }
 export function choosePaths(changed,manual=''){
  return [...new Set((manual?manual.split(','):changed).map(x=>x.trim()).filter(isEducationPath))].sort();
@@ -102,8 +104,21 @@ export async function askChunk(key,system,path,mode,text,fetchImpl,wait=sleep){
 export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=globalThis.fetch}={}){
  const paths=choosePaths(changed(),manual),key=process.env.ANTHROPIC_API_KEY||'';
  const report={schema_version:1,educational_rule:'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md',created_at:new Date().toISOString(),commit:process.env.GITHUB_SHA||git(['rev-parse','HEAD'])||null,
-  requested_count:paths.length,reviewed_count:0,files:[],findings:[],pending:paths.slice(MAX_FILES).map(path=>({path,reason:'file_limit'})),status:'not_applicable'};
+  requested_count:paths.length,reviewed_count:0,upstream_evidence_reused_count:0,files:[],findings:[],pending:paths.slice(MAX_FILES).map(path=>({path,reason:'file_limit'})),status:'not_applicable'};
  if(!paths.length)return report;
+ // A registry entry is never itself proof: only separately verified primary
+ // publisher evidence, tied to exact source bytes, can reuse an upstream review.
+ let upstreamRecords=[];
+ try{
+  const ledger=JSON.parse(await readFile(resolve(root,UPSTREAM_LEDGER),'utf8'));
+  if(ledger.schema_version!==1||!Array.isArray(ledger.records))throw Error('invalid-evidence-ledger');
+  upstreamRecords=ledger.records;
+ }catch(error){
+  if(error.code!=='ENOENT'){report.status='error_invalid_upstream_evidence_ledger';return report;}
+ }
+ // An evidence-ledger change must be evaluated as new provenance first;
+ // it cannot make its own unreviewed content bypass this very PR's audit.
+ if(resolve(root)===ROOT&&changed().includes(UPSTREAM_LEDGER))upstreamRecords=[];
  let rules;try{rules=await readFile(resolve(root,RULES),'utf8');
   // Completion policy is repository-wide; test fixtures may supply only their own review rules.
   const completion=await readFile(resolve(ROOT,'docs/primary-source-crosscheck-2026-10-28/EDUCATIONAL_COMPLETION_RULE.md'),'utf8');
@@ -132,9 +147,20 @@ export async function runReview({manual='',dryRun=false,root=ROOT,fetchImpl=glob
  };
  const reviewOne=async path=>{
   if(!existsSync(resolve(root,path))){report.pending.push({path,reason:'missing_or_deleted_file'});return;}
+  // No duplicate medical/scientific review for an independently evidenced,
+  // byte-identical original. This does not authorize new claims, transform
+  // source content, grant clinical approval or skip final release checks.
+  const digest=createHash('sha256').update(await readFile(resolve(root,path))).digest('hex');
+  const reuse=reuseDecisionForPath({path,sha256:digest,records:upstreamRecords,now:report.created_at});
+  if(reuse.externalEvidenceReused){
+   report.files.push({path,status:'source-reviewed-reused',mode:'exact-upstream-source-evidence',
+    sha256:digest,sourceEvidence:reuse.sourceEvidence,clinical_approval:false});
+   report.reviewed_count++;report.upstream_evidence_reused_count++;
+   return;
+  }
   // Binary education assets require visual/media review; do not decode as text
   // or claim a scientific assessment based on corrupted bytes.
-  if(/\.(?:pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm)$/i.test(path)){
+  if(/\.(?:pdf|docx?|xlsx?|pptx?|odt|ods|odp|png|jpe?g|webp|gif|mp4|webm|glb|gltf|obj|stl|x3d|wrl|fbx|dae|ply|usdz)$/i.test(path)){
    report.files.push({path,status:'pending',mode:'binary_media'});
    report.pending.push({path,reason:'visual_or_media_review_required'});
    return;

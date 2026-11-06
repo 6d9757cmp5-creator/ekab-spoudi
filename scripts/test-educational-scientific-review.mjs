@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
+import {createHash} from 'node:crypto';
 import {isEducationPath,choosePaths,validateReview,runReview,MAX_FILES} from './educational-scientific-review.mjs';
 // CI sets these for the real run; tests must not inherit a cache or a budget.
 for(const k of ['AUDIT_CACHE_FILE','AUDIT_MAX_CALLS','AUDIT_PATHS','AUDIT_BASE_SHA'])delete process.env[k];
@@ -174,4 +175,77 @@ test('audit records are excluded from paid review but lessons and questions are 
  for(const p of ['docs/primary-source-crosscheck-2026-10-28/eoppep-314.json','docs/primary-source-crosscheck-2026-10-28/claude_tools.py',
   'docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.cjs','docs/primary-source-crosscheck-2026-10-28/CLAUDE_SAEK_REPORT.md','docs/EOPPEP-SOURCE-INVENTORY-2026-10-26.json'])assert.equal(isEducationPath(p),false,p);
  for(const p of ['official_questions.json','eoppep-sos.json','saek-course-05.html','docs/SAEK-REVIEW-SUMMARY-2026-10-25.md'])assert.equal(isEducationPath(p),true,p);
+});
+
+
+test('3D anatomy assets enter the educational audit but require visual review without exact upstream proof',async()=>{
+ for(const ext of ['glb','gltf','obj','stl','x3d','wrl','fbx','dae','ply','usdz'])
+  assert.equal(isEducationPath('future/anatomy/organ.'+ext),true,ext);
+ const root=await mkdtemp(join(tmpdir(),'atla-3d-review-'));
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await mkdir(join(root,'future/anatomy'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'safe review rules');
+  await writeFile(join(root,'future/anatomy/organ.glb'),Buffer.from('glTF 2.0 test bytes'));
+  const res=await runReview({manual:'future/anatomy/organ.glb',root,dryRun:true,fetchImpl:()=>{throw Error('billable request');}});
+  assert.equal(res.status,'incomplete');
+  assert.equal(res.upstream_evidence_reused_count,0);
+  assert.ok(res.pending.some(x=>x.reason==='visual_or_media_review_required'));
+  assert.equal(res.files[0].mode,'binary_media');
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('full educational review reuses only authenticated, byte-identical upstream original',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'atla-evidence-e2e-'));
+ const path='future/official-source/material.md';
+ const ledgerPath='tools/atla-ai/knowledge-refresh/verified-upstream-evidence.json';
+ try{
+  await mkdir(join(root,'docs'),{recursive:true});
+  await mkdir(join(root,'future/official-source'),{recursive:true});
+  await mkdir(join(root,'tools/atla-ai/knowledge-refresh'),{recursive:true});
+  await writeFile(join(root,'docs/INDEPENDENT_EDUCATIONAL_SCIENTIFIC_AUDIT.md'),'Existing scientific review instructions');
+  const bytes='Unchanged publisher original sample\n';
+  await writeFile(join(root,path),bytes);
+  const sha256=createHash('sha256').update(bytes).digest('hex');
+  const now=new Date().toISOString();
+  const verified={
+   path,sourceUrl:'https://www.who.int/publications/i/item/9789241513081',
+   reviewEvidenceUrl:'https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/bec',
+   sourceId:'WHO-BEC-ORIGINAL',reviewedSourceId:'WHO-BEC-ORIGINAL',
+   sourceVersion:'2018',reviewedSourceVersion:'2018',
+   sha256,exactSourceSha256:sha256,originalMaterialSha256:sha256,
+   publisherReviewStatus:'publisher-official-guideline',
+   verifiedFromPrimaryPublisher:true,publisherDocumentEvidenceMatched:true,
+   retracted:false,superseded:false,materiallyDisputed:false,
+   primaryEvidenceCheckedAt:now,retractionCheckedAt:now,
+   changed:false,transformed:false,generatedClaims:false,
+   scope:'educational-reference',usage:'educational-original'
+  };
+  const writeLedger=records=>writeFile(join(root,ledgerPath),JSON.stringify({schema_version:1,records}));
+  const forbidNetwork=()=>{throw Error('unexpected-paid-network-access');};
+  await writeLedger([verified]);
+  const good=await runReview({manual:path,root,dryRun:true,fetchImpl:forbidNetwork});
+  assert.equal(good.status,'screened');
+  assert.equal(good.reviewed_count,1);
+  assert.equal(good.upstream_evidence_reused_count,1);
+  assert.equal(good.paid_calls,0);
+  assert.equal(good.files[0].status,'source-reviewed-reused');
+  assert.equal(good.files[0].clinical_approval,false);
+  // Modifying one byte invalidates upstream review without making any paid call.
+  await writeFile(join(root,path),bytes+'ATLA adds an explanation.\n');
+  const modified=await runReview({manual:path,root,dryRun:true,fetchImpl:forbidNetwork});
+  assert.equal(modified.status,'incomplete');
+  assert.equal(modified.reviewed_count,0);
+  assert.equal(modified.upstream_evidence_reused_count,0);
+  assert.ok(modified.pending.some(x=>x.reason==='dry_run'));
+  // Collection-level authority evidence cannot bootstrap individual approval.
+  await writeLedger([]);
+  const empty=await runReview({manual:path,root,dryRun:true,fetchImpl:forbidNetwork});
+  assert.equal(empty.status,'incomplete');
+  assert.equal(empty.upstream_evidence_reused_count,0);
+  // Malformed ledger fails closed before publication or any paid review.
+  await writeFile(join(root,ledgerPath),'{invalid json');
+  const broken=await runReview({manual:path,root,dryRun:true,fetchImpl:forbidNetwork});
+  assert.equal(broken.status,'error_invalid_upstream_evidence_ledger');
+ }finally{await rm(root,{recursive:true,force:true});}
 });
