@@ -1,0 +1,44 @@
+name: NIH3D rescuer display copies (extract, verify, compress)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test extraction planning
+        run: python3 -m unittest discover -s scripts -p 'test_nih3d_extract_models.py' -v
+      - name: Install pinned glTF tools
+        run: |
+          sudo apt-get install -y zstd >/dev/null
+          mkdir -p "$RUNNER_TEMP/gt"
+          npm install --prefix "$RUNNER_TEMP/gt" --no-save @gltf-transform/cli@4.5.1
+          cp scripts/nih3d-compress-models.mjs "$RUNNER_TEMP/gt/"
+      - name: Extract and verify originals from the archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 -c "import json;json.dump([m['entryId'] for m in json.load(open('tools/atla-ai/resources/nih3d-library/rescuer-selection.json'))['models']],open('$RUNNER_TEMP/ids.json','w'))"
+          cd scripts
+          python3 nih3d_extract_models.py "$RUNNER_TEMP/ids.json" --out "$RUNNER_TEMP/originals" --shard "${{ matrix.shard }}/10"
+      - name: Compress and check geometry
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/gt/nih3d-compress-models.mjs" "$RUNNER_TEMP/originals" "$RUNNER_TEMP/display"
+          cp "$RUNNER_TEMP/originals/EXTRACTED.json" "$RUNNER_TEMP/display/"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nih3d-rescuer-display-${{ matrix.shard }}
+          path: ${{ runner.temp }}/display/
+          retention-days: 30
