@@ -11,7 +11,11 @@ const back=$('source-back');
 back.href=safeReturnHref(params.get('from'),location.href,tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html');
 if(params.get('dataset')==='nih')dataset.value='nih';
 let deepLinkModel=params.get('dataset')==='nih'?params.get('model'):null;
-$('source-name').textContent=tool==='anatomy'?'Εργαστήριο Ανατομίας · HRA 3D':'Κλινικός Προσομοιωτής · 3D αρχεία';
+const showSourceName=()=>{$('source-name').textContent=tool!=='anatomy'?'Κλινικός Προσομοιωτής · 3D αρχεία':dataset.value==='nih'?'Εργαστήριο Ανατομίας · NIH 3D':'Εργαστήριο Ανατομίας · HRA 3D'};
+showSourceName();
+dataset.addEventListener('change',showSourceName);
+const openedFromLesson=Boolean(deepLinkModel);
+let scrolledToModel=false;
 $('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
 let assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
 const partSelect=$('source-part'),animationSelect=$('source-clip'),opacity=$('source-opacity');
@@ -227,6 +231,8 @@ button.addEventListener('click',async()=>{
   $('source-license').textContent=item.license+' · '+item.status;
   showDetails(item);
   status('Φορτώθηκε '+item.label+' · περιστροφή / μεγέθυνση με αφή ή ποντίκι.');
+  // A student arriving from a lesson came to see this model, not the controls above it.
+  if(openedFromLesson&&!scrolledToModel){scrolledToModel=true;$('source-canvas').scrollIntoView({block:'center'});}
  }catch(e){if(current===loadVersion)status('Αδυναμία φόρτωσης: '+String(e.message||e).slice(0,170),true)}
  finally{if(current===loadVersion)button.disabled=false}
 });
