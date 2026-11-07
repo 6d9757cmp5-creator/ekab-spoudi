@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
- * Build the single shared 3D library: every stored source in one registry, with NIH GLB originals
- * copied byte-for-byte to same-origin delivery after SHA-256 verification. Original archive files
- * stay in GHCR/Releases. Every model that cannot be served records the exact reason.
+ * Build the single shared 3D library: every stored source in one registry. NIH models are served as
+ * Draco/WebP display copies of SHA-256-verified originals (same triangles, see display-copies.json), or
+ * as the original bytes where no copy exists yet. Original archive files stay in GHCR/Releases.
+ * Every model that cannot be served records the exact reason.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -13,30 +14,30 @@ import {simplify,structureHits} from '../tools/atla-ai/nih3d-library.mjs';
 
 export const MODELS_DIR='tools/atla-ai/resources/nih3d-library/models/';
 const CURATION='tools/atla-ai/resources/nih3d-library/curation.json';
+const DISPLAY='tools/atla-ai/resources/nih3d-library/display-copies.json';
 const LEDGER='tools/atla-ai/resources/nih3d-verified-originals-2026.json';
 const CATALOG='tools/atla-ai/resources/nih3d-master-plan-2026/segments';
 const SCOPE='tools/atla-ai/resources/nih3d-biomedical-scope-2026/segments';
 const OUTPUT='tools/atla-ai/resources/model-library.json';
-export const MAX_MODEL_BYTES=12*1024**2;
-export const MAX_LIBRARY_BYTES=400*1024**2;
+export const MAX_MODEL_BYTES=25*1024**2;
+export const MAX_LIBRARY_BYTES=700*1024**2;
 const OPEN_LICENSE=/^(Public Domain|CC[- ]BY(?:[- ]SA)?(?: \d\.\d)?)$/i;
 const CATEGORY_EL={Anatomy:'Ανατομία',Biomacromolecules:'Βιομακρομόριο',Viruses:'Ιός','Cells and Organelles':'Κύτταρα και οργανίδια',
  'Small Molecules':'Μικρό μόριο',Prosthetics:'Προσθετική','Devices and Hardware':'Συσκευή'};
 export const REASONS=Object.freeze({
  NO_GLB:'Δεν υπάρχει πρωτότυπο GLB για προβολή.',
- LICENSE_REVIEW:'Δεν υπάρχει δηλωμένη άδεια στην πηγή.',
  OUT_OF_SCOPE:'Συσκευή ή εργαστηριακό αντικείμενο εκτός εκπαιδευτικού πεδίου.',
- OVERSIZE:'Το αρχείο υπερβαίνει το όριο των 12 MiB για κινητές συσκευές.',
+ OVERSIZE:'Το αρχείο υπερβαίνει το όριο των 25 MiB για κινητές συσκευές.',
  CAPACITY:'Έχει εξαντληθεί το όριο χωρητικότητας της άμεσης διάθεσης.',
  RESTORE_PENDING:'Το πρωτότυπο δεν έχει ανακτηθεί ακόμη για διάθεση.'
 });
-/** Why a stored original may not be served in the browser, or null when it may. */
-export function deliveryRestriction({license,glb,scopeStatus,servedBytes=0}){
+/** Why a stored model may not be served in the browser, or null when it may. The owner holds permission
+ * for every NIH model, so the source licence never blocks delivery. Sizes are those of the served file. */
+export function deliveryRestriction({glb,scopeStatus,servedBytes=0,bytes=glb?.size}){
  if(!glb)return 'NO_GLB';
  if(scopeStatus==='LIKELY_OUT_OF_MEDICAL_SCOPE')return 'OUT_OF_SCOPE';
- if(!String(license??'').trim()||/^unknown$/i.test(String(license).trim()))return 'LICENSE_REVIEW';
- if(glb.size>MAX_MODEL_BYTES)return 'OVERSIZE';
- if(servedBytes+glb.size>MAX_LIBRARY_BYTES)return 'CAPACITY';
+ if(bytes>MAX_MODEL_BYTES)return 'OVERSIZE';
+ if(servedBytes+bytes>MAX_LIBRARY_BYTES)return 'CAPACITY';
  return null;
 }
 const chooseGlb=model=>model.verifiedFiles.filter(f=>f.format==='GLB').sort((a,b)=>a.size-b.size||a.sha256.localeCompare(b.sha256))[0]??null;
@@ -113,14 +114,34 @@ async function otherSources(){
  ];
 }
 /** Immutable images holding a selected GLB that is not yet present in same-origin delivery. */
-export async function imagesToRestore(ledger,catalog,scope){
+export async function imagesToRestore(ledger,catalog,scope,display={}){
  const images=new Set();
  for(const model of ledger.models){
   const glb=chooseGlb(model);
-  if(deliveryRestriction({license:catalog.get(model.entryId)?.licenseRaw,glb,scopeStatus:scope.get(model.entryId)?.status}))continue;
+  if(display[model.accession]||deliveryRestriction({glb,scopeStatus:scope.get(model.entryId)?.status}))continue;
   if(!await exists(MODELS_DIR+model.accession+'.glb'))images.add(glb.verifiedOCI.digest);
  }
  return [...images].sort();
+}
+/** A committed display copy, checked against the hash recorded when it was made from the verified original. */
+async function placeDisplayCopy(model,copy){
+ const target=MODELS_DIR+model.accession+'.glb';
+ if(!await exists(target))return null;
+ const bytes=await fs.readFile(target);
+ assert.equal(bytes.length,copy.display.bytes,'Display copy size differs: '+target);
+ assert.equal(sha256(bytes),copy.display.sha256,'Display copy differs from its record: '+target);
+ return target;
+}
+/** Display-copy models from the release archive that the older GHCR ledger does not list, shaped like ledger rows. */
+export function archiveModels(display,ledger,catalog){
+ const known=new Set(ledger.models.map(m=>m.accession));
+ return Object.entries(display).filter(([accession])=>!known.has(accession)).map(([accession,copy])=>{
+  const record=catalog.get(copy.entryId);
+  assert(record,'Display copy missing from catalog: '+accession);
+  return {entryId:copy.entryId,accession,title:record.title,originalPage:record.url,sourceVersion:record.version??null,
+   verifiedFiles:[{format:'GLB',size:copy.original.bytes,sha256:copy.original.sha256,archive:copy.original.archive}],
+   scientificApproval:'NOT_ESTABLISHED',clinicalUseApproved:false};
+ });
 }
 async function placeOriginal(model,glb,stagingRoot){
  const target=MODELS_DIR+model.accession+'.glb';
@@ -141,33 +162,35 @@ async function placeOriginal(model,glb,stagingRoot){
  return target;
 }
 /** Limited delivery space goes first to models lessons depend on, then anatomy, smallest first. */
-export function deliveryPriority(model,curated,category){
- const glb=chooseGlb(model);
- return [curated?0:category==='Anatomy'?1:2,glb?.size??Number.MAX_SAFE_INTEGER,model.entryId];
+export function deliveryPriority(model,curated,category,servedSize=chooseGlb(model)?.size){
+ return [curated?0:category==='Anatomy'?1:2,servedSize??Number.MAX_SAFE_INTEGER,model.entryId];
 }
 const comparePriority=(a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2];
 async function build(stagingRoot){
- const [ledger,curation,catalog,scope,chapters,others]=await Promise.all([
-  readJson(LEDGER),readJson(CURATION),segments(CATALOG,'items'),segments(SCOPE,'sourceModels'),courseChapters(),otherSources()]);
+ const [ledger,curation,catalog,scope,chapters,others,displayFile]=await Promise.all([
+  readJson(LEDGER),readJson(CURATION),segments(CATALOG,'items'),segments(SCOPE,'sourceModels'),courseChapters(),otherSources(),readJson(DISPLAY)]);
+ const display=displayFile.models;
  const vocabulary={structures:curation.structures,findings:curation.findings,exclude:curation.exclude};
  const models=[],restrictions={};let servedBytes=0,served=0;
- const ordered=[...ledger.models].sort((a,b)=>comparePriority(
-  deliveryPriority(a,curation.models[a.accession],catalog.get(a.entryId)?.category),
-  deliveryPriority(b,curation.models[b.accession],catalog.get(b.entryId)?.category)));
+ const servedSize=model=>display[model.accession]?.display.bytes??chooseGlb(model)?.size;
+ const priority=model=>deliveryPriority(model,curation.models[model.accession],catalog.get(model.entryId)?.category,servedSize(model));
+ const ordered=[...ledger.models,...archiveModels(display,ledger,catalog)].sort((a,b)=>comparePriority(priority(a),priority(b)));
  for(const model of ordered){
   const record=catalog.get(model.entryId),scoped=scope.get(model.entryId);
   assert(record,'Ledger model missing from catalog: '+model.accession);
   assert.equal(model.scientificApproval,'NOT_ESTABLISHED');
   assert.equal(model.clinicalUseApproved,false);
-  const glb=chooseGlb(model),curated=curation.models[model.accession]??null;
-  let code=deliveryRestriction({license:record.licenseRaw,glb,scopeStatus:scoped?.status,servedBytes});
+  const glb=chooseGlb(model),curated=curation.models[model.accession]??null,copy=display[model.accession]??null;
+  if(copy)assert.equal(copy.original.sha256,glb.sha256,'Display copy was made from another file: '+model.accession);
+  const bytes=servedSize(model);
+  let code=deliveryRestriction({glb,scopeStatus:scoped?.status,servedBytes,bytes});
   let delivered=null;
   if(!code){
-   delivered=await placeOriginal(model,glb,stagingRoot);
+   delivered=copy?await placeDisplayCopy(model,copy):await placeOriginal(model,glb,stagingRoot);
    if(!delivered)code='RESTORE_PENDING';
   }
   if(code)restrictions[code]=(restrictions[code]??0)+1;
-  else{servedBytes+=glb.size;served++;}
+  else{servedBytes+=bytes;served++;}
   const categoryEl=CATEGORY_EL[record.category]??record.category;
   const surfaces=!delivered?[]:!curated?['library']:curated.kind==='anatomy'?['library','lesson','anatomy','exam','cockpit','atla']:['library','lesson','exam','cockpit','atla'];
   models.push({
@@ -176,8 +199,10 @@ async function build(stagingRoot){
    greekTitle:curated?.greekTitle??null,originalTitle:model.title.trim(),category:categoryEl,
    kind:curated?.kind??null,structures:curated?.structures??[],finding:curated?.finding??null,
    laterality:null,license:record.licenseRaw,rightsBasis:OPEN_LICENSE.test(String(record.licenseRaw).trim())?'SOURCE_LICENSE':'OWNER_STATED_PERMISSION',creator:record.creator||null,sourceVersion:model.sourceVersion??record.version??null,
-   originalPage:model.originalPage,archive:{files:model.verifiedFiles.length,image:glb?.verifiedOCI.digest??null,formats:[...new Set(model.verifiedFiles.map(f=>f.format))].sort()},
-   delivery:delivered?{path:delivered,bytes:glb.size,sha256:glb.sha256,format:'glb',derived:false}:null,
+   originalPage:model.originalPage,archive:{files:model.verifiedFiles.length,image:glb?.verifiedOCI?.digest??null,release:glb?.archive??null,formats:[...new Set(model.verifiedFiles.map(f=>f.format))].sort()},
+   delivery:!delivered?null:copy?{path:delivered,bytes:copy.display.bytes,sha256:copy.display.sha256,format:'glb',derived:true,
+    transform:displayFile.settings,triangles:copy.display.triangles,original:{bytes:glb.size,sha256:glb.sha256}}
+    :{path:delivered,bytes:glb.size,sha256:glb.sha256,format:'glb',derived:false},
    restrictionCode:code,restriction:code?REASONS[code]:curated?null:'Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.',
    surfaces,saekChapters:curated&&delivered?mergeChapterLinks(chapterEvidence(chapters,curated,vocabulary),fractureLessonLinks(curated,curation.fractureLessons)):[],
    scopeStatus:scoped?.status??null,scientificApproval:'NOT_ESTABLISHED',clinicalUseApproved:false
@@ -206,8 +231,8 @@ async function build(stagingRoot){
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const [mode,arg]=process.argv.slice(2);
  if(mode==='images-to-restore'){
-  const [ledger,catalog,scope]=await Promise.all([readJson(LEDGER),segments(CATALOG,'items'),segments(SCOPE,'sourceModels')]);
-  for(const image of await imagesToRestore(ledger,catalog,scope))console.log(image);
+  const [ledger,catalog,scope,displayFile]=await Promise.all([readJson(LEDGER),segments(CATALOG,'items'),segments(SCOPE,'sourceModels'),readJson(DISPLAY)]);
+  for(const image of await imagesToRestore(ledger,catalog,scope,displayFile.models))console.log(image);
  }else if(mode==='build')await build(arg);
  else throw Error('usage: node scripts/nih3d-build-library.mjs images-to-restore | build [staging-root]');
 }
