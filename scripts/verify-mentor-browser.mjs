@@ -189,7 +189,7 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/Δύο τραυματίες|Κλινικός Προσομοιωτής/);
+  assert.match(await page.title(),/Δύο τραυματίες|Κλινικός Προσομοιωτής|Παλαιότερη εκπαιδευτική αποστολή/);
   assert.equal(await page.locator('#live-patients .live-patient').count(),2);
   assert.equal((await page.locator('#live-step').textContent()).trim(),'Στάδιο 1 / 4');
   assert.equal(await page.locator('#live-patients .live-patient').first().locator('.live-vitals strong').first().textContent(),'106');
