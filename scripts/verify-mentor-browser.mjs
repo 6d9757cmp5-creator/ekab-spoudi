@@ -277,7 +277,8 @@ try{
   await page.goto('http://127.0.0.1:'+port+'/mentor-readonly.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('loaded-summary').textContent.includes('καταχωρίσεις από'),{timeout:20000});
   const loadedSources=await page.locator('#loaded-summary').textContent();
-  assert.match(loadedSources,/13\/13 πηγές/,'Mentor reader should load all available public source files');
+  // Every listed source must load, however many the index holds.
+  assert.match(loadedSources,/ (\d+)\/\1 πηγές/,'Mentor reader should load all available public source files');
   assert.ok(Number(loadedSources.match(/^\d+/)?.[0]||0)>=800,'catalog includes educational course and exam data');
   await page.locator('#reader-kind').selectOption('eoppep');
   assert.match(await page.locator('#reader-status').textContent(),/314 αποτελέσματα/);
