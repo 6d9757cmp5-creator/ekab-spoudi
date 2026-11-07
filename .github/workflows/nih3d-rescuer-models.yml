@@ -1,6 +1,11 @@
 name: NIH3D rescuer display copies (extract, verify, compress)
 on:
   workflow_dispatch:
+    inputs:
+      ids:
+        description: 'JSON list of entry ids; empty means the whole rescuer selection'
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
@@ -27,9 +32,12 @@ jobs:
       - name: Extract and verify originals from the archive
         env:
           GH_TOKEN: ${{ github.token }}
+          IDS: ${{ inputs.ids }}
         run: |
           set -euo pipefail
-          python3 -c "import json;json.dump([m['entryId'] for m in json.load(open('tools/atla-ai/resources/nih3d-library/rescuer-selection.json'))['models']],open('$RUNNER_TEMP/ids.json','w'))"
+          if [ -n "$IDS" ]; then echo "$IDS" > "$RUNNER_TEMP/ids.json"; else
+            python3 -c "import json;json.dump([m['entryId'] for m in json.load(open('tools/atla-ai/resources/nih3d-library/rescuer-selection.json'))['models']],open('$RUNNER_TEMP/ids.json','w'))"
+          fi
           cd scripts
           python3 nih3d_extract_models.py "$RUNNER_TEMP/ids.json" --out "$RUNNER_TEMP/originals" --shard "${{ matrix.shard }}/10"
       - name: Compress and check geometry

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Make phone-sized display copies of verified NIH GLB originals: Draco geometry and WebP textures,
- * never simplification. A copy is kept only when it has exactly the original's triangles and its
- * bounds stay within 0.1% of the original's. Originals stay untouched in the archive.
+ * never simplification. A copy is kept only when it has exactly the original's triangles, less any
+ * zero-area ones (invisible, dropped by the optimizer), and its bounds stay within 0.1% of the
+ * original's. Originals stay untouched in the archive.
  *
  * Bare imports resolve next to the script, so it runs from a copy placed in the directory where
  * @gltf-transform/cli@4.5.1 is installed: node <that-dir>/nih3d-compress-models.mjs <in-dir> <out-dir>
@@ -26,17 +27,25 @@ const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
  'draco3d.decoder':await draco3d.createDecoderModule(),'draco3d.encoder':await draco3d.createEncoderModule()});
 const sha256=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 
-/** Triangle count and scene bounds; the measure that decides whether a copy shows the same shape. */
+/** Triangles, zero-area triangles and scene bounds; the measure that decides whether a copy shows the same shape. */
 async function geometry(file){
  const doc=await io.read(file);
- let triangles=0;
+ let triangles=0,degenerate=0;
+ const a=[],b=[],c=[],same=(x,y)=>x[0]===y[0]&&x[1]===y[1]&&x[2]===y[2];
  for(const mesh of doc.getRoot().listMeshes())for(const prim of mesh.listPrimitives()){
-  const count=prim.getIndices()?.getCount()??prim.getAttribute('POSITION')?.getCount()??0;
-  triangles+=prim.getMode()===4?count/3:0;
+  const position=prim.getAttribute('POSITION'),indices=prim.getIndices();
+  if(prim.getMode()!==4||!position)continue;
+  const count=indices?indices.getCount():position.getCount();
+  const at=i=>indices?indices.getScalar(i):i;
+  triangles+=count/3;
+  for(let t=0;t<count;t+=3){
+   position.getElement(at(t),a);position.getElement(at(t+1),b);position.getElement(at(t+2),c);
+   if(same(a,b)||same(b,c)||same(a,c))degenerate++;
+  }
  }
  const scene=doc.getRoot().getDefaultScene()??doc.getRoot().listScenes()[0];
  const {min,max}=getBounds(scene);
- return {triangles,min,max};
+ return {triangles,degenerate,min,max};
 }
 export function boundsDrift(a,b){
  const size=Math.max(...a.max.map((v,i)=>v-a.min[i]))||1;
@@ -47,8 +56,9 @@ async function compress(source,target){
   {stdio:['ignore','ignore','pipe'],timeout:1800000,maxBuffer:64*1024**2});
  const [before,after]=[await geometry(source),await geometry(target)];
  const drift=boundsDrift(before,after);
- const problem=after.triangles!==before.triangles?'TRIANGLES_CHANGED':!(drift<=MAX_BOUNDS_DRIFT)?'BOUNDS_CHANGED':null;
- return {triangles:before.triangles,boundsDrift:Number(drift.toExponential(3)),problem};
+ const removed=before.triangles-after.triangles;
+ const problem=removed<0||removed>before.degenerate?'TRIANGLES_CHANGED':!(drift<=MAX_BOUNDS_DRIFT)?'BOUNDS_CHANGED':null;
+ return {triangles:after.triangles,originalTriangles:before.triangles,zeroAreaRemoved:removed,boundsDrift:Number(drift.toExponential(3)),problem};
 }
 
 const [inDir,outDir]=process.argv.slice(2);
