@@ -4,6 +4,10 @@ for(const file of ['ui-tools/anatomy-3d/index.html','tools/anatomy-3d/index.html
  const html=readFileSync(file,'utf8');
  assert.match(html,/id="base-anatomy"/);
  assert.match(html,/id="models"/);
+ assert.match(html,/id="atlas-canvas"/);
+ assert.match(html,/id="atlas-version"/);
+ assert.match(html,/id="atlas-load"/);
+ assert.match(html,/id="atlas-unload"/);
  assert.match(html,/id="unified-basic"/);
  assert.match(html,/id="unified-catalog"/);
  assert.match(html,/unified-workspace\.mjs/);
@@ -18,4 +22,9 @@ for(const file of ['ui-tools/anatomy-3d/index.html','tools/anatomy-3d/index.html
 const logic=readFileSync('tools/anatomy-3d/unified-workspace.mjs','utf8');
 assert.match(logic,/import\('\.\.\/atla-ai\/model-preview\.mjs'\)/);
 assert.match(logic,/history\.replaceState/);
+const atlas=readFileSync('tools/anatomy-3d/inline-atlas.js','utf8');
+assert.match(atlas,/new AtlasRenderer\(canvas\)/);
+assert.match(atlas,/bp3d40/);
+assert.match(atlas,/bp3d43/);
+assert.match(atlas,/crypto\.subtle\.digest/);
 console.log('PASS unified anatomy single-page contract (both entrypoints, unique IDs, lazy first-party viewer).');
