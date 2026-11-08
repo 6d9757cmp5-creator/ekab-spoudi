@@ -18,7 +18,7 @@ async function ask(page,question){
  await page.waitForFunction(n=>document.querySelectorAll('.atla-message').length>n+1,before,{timeout:30000});
  await page.waitForFunction(()=>!document.querySelector('.atla-send')?.disabled,null,{timeout:30000});
 }
-const modelLinks=page=>page.locator('.atla-panel a[href*="dataset=nih"]');
+const modelLinks=page=>page.locator('.atla-panel a[href*="ui-tools/anatomy-3d/index.html"][href*="model="]');
 try{
  await ready();
  browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-webgl','--ignore-gpu-blocklist','--no-sandbox']});
