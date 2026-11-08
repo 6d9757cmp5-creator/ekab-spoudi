@@ -6,7 +6,7 @@
 export const LIBRARY_PATH='tools/atla-ai/resources/model-library.json';
 const VIEWER_PATH='ui-tools/atla-resource-preview.html';
 const SURFACES=new Set(['lesson','anatomy','exam','cockpit','atla']);
-const LESSON_LIMIT=6;
+const LESSON_LIMIT=12;
 export const simplify=value=>String(value??'').normalize('NFD').replace(/\p{M}/gu,'')
  .toLocaleLowerCase('el').replace(/ς/g,'σ').replace(/\s+/g,' ').trim();
 // Terms are curated in normalized lower case; only the final sigma is folded to match simplify().

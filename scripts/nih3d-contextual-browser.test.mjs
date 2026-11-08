@@ -32,7 +32,7 @@ async function contextualSurfaces(ctx,name){
  const href=await link.getAttribute('href');
  assert.match(href,/atla-resource-preview\.html\?tool=anatomy&dataset=nih&model=3DPX-000170&from=/);
  assert.equal(await link.getAttribute('target'),null,'A lesson link keeps the same tab so the return works');
- assert(await refs(page,'#lesson-2').count()<=6,'No mass listing in a chapter');
+ assert(await refs(page,'#lesson-2').count()<=12,'No mass listing in a chapter');
  assert.equal(await refs(page,'#lesson-1').count(),0,'No model without chapter evidence');
  await visit(page,'/saek-exams.html');
  const exam=(text,revealed)=>page.evaluate(detail=>window.dispatchEvent(new CustomEvent('atla:saek-exam-question',{detail})),{text,revealed});
