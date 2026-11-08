@@ -9,9 +9,9 @@
 *{box-sizing:border-box}body{margin:0}main{max-width:1300px;margin:auto;padding:16px 18px 30px}
 header{display:flex;align-items:center;flex-wrap:wrap;gap:18px}a{color:#8fdef1}h1{margin:.5em 0 .2em;font-size:clamp(1.3rem,3vw,2rem)}
 p{color:#c4d7e4;max-width:1050px}section{background:#112a3c;border:1px solid #2b5569;border-radius:14px;padding:16px}
-.controls{display:flex;align-items:end;flex-wrap:wrap;gap:12px}.controls label{display:grid;gap:5px;min-width:240px;flex:1}
+.controls{display:flex;align-items:end;flex-wrap:wrap;gap:12px}.controls label{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;min-width:min(240px,100%);flex:1}
 select,button{font:inherit;padding:10px 12px;border-radius:8px;min-height:44px}
-select{background:#071724;color:#f1f6fb;border:1px solid #6894a8}
+select{background:#071724;color:#f1f6fb;border:1px solid #6894a8;width:100%;max-width:100%;min-width:0}
 button{background:#52c9ad;color:#08211d;border:0;font-weight:700;cursor:pointer}
 button.secondary{background:#355166;color:white}button:focus-visible,a:focus-visible{outline:3px solid #fff}
 iframe{display:block;width:100%;height:75vh;min-height:500px;border:1px solid #47667f;border-radius:14px;margin-top:12px;background:#112b3c}
@@ -21,7 +21,7 @@ small{color:#b8ccdc}ul{margin:.5rem 0 1rem}
 </head>
 <body>
 <main>
-<header><a href="anatomy-3d/index.html">← Τρισδιάστατη ανατομία</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></header>
+<header><a href="anatomy-3d/index.html">← Τρισδιάστατη ανατομία</a><a href="3d-library.html">Βιβλιοθήκη 3D μοντέλων</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></header>
 <h1>Λεπτομερής 3D άτλας ανθρώπινου σώματος (BodyParts3D)</h1>
 <p>Ανεξάρτητη προβολή των ήδη αποθηκευμένων BodyParts3D ατλάντων. Τα αρχεία διαβάζονται από την ίδια εγκατάσταση της ΕΚΑΒ Σπουδή, όχι από νέο εξωτερικό server. Δεν αλλάζουν τα κανονικά μαθήματα, η μαθησιακή πρόοδος ή ο ενεργός 3D viewer.</p>
 <section>
