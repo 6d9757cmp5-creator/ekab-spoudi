@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": null,
+ "ledgerCommit": "5a90dd95ef61ad885aa2c6c51300387b862a5c4c",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -548,12 +548,11 @@
    "makehuman-rigged": 1
   },
   "nihVerifiedModels": 225,
-  "nihServed": 446,
-  "nihServedBytes": 525205592,
-  "nihContextual": 307,
-  "nihWithSaekChapter": 223,
+  "nihServed": 449,
+  "nihServedBytes": 527194792,
+  "nihContextual": 308,
+  "nihWithSaekChapter": 224,
   "nihRestrictions": {
-   "RESTORE_PENDING": 3,
    "OUT_OF_SCOPE": 5
   }
  },
@@ -6572,10 +6571,24 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "RESTORE_PENDING",
-   "restriction": "Το πρωτότυπο δεν έχει ανακτηθεί ακόμη για διάθεση.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000761.glb",
+    "bytes": 854604,
+    "sha256": "4381c7abe78a3295e410e452ac3da2309f905896ca70096c03961ed2543f81a9",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 209292,
+    "original": {
+     "bytes": 17574152,
+     "sha256": "e2a9fcec2871535610fc9d5cd46e68d047949c4cc01ad13de1ca4027af2651fd"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -15155,10 +15168,24 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "RESTORE_PENDING",
-   "restriction": "Το πρωτότυπο δεν έχει ανακτηθεί ακόμη για διάθεση.",
-   "surfaces": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-004799.glb",
+    "bytes": 920196,
+    "sha256": "ea75bcdd77573b987593286314074f9ec26c62ebf8a3c8fa222239cb8996ae2c",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 209610,
+    "original": {
+     "bytes": 17606464,
+     "sha256": "e79d620163d8aa239c35fc71f0311796567a8f78d91a7ac7e0eb7c4e7eb5fe50"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
    "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
@@ -19971,11 +19998,47 @@
      "X3D"
     ]
    },
-   "delivery": null,
-   "restrictionCode": "RESTORE_PENDING",
-   "restriction": "Το πρωτότυπο δεν έχει ανακτηθεί ακόμη για διάθεση.",
-   "surfaces": [],
-   "saekChapters": [],
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-014841.glb",
+    "bytes": 214400,
+    "sha256": "49a9dd72462e0a44f9a11816883eccf4b30d55d4d12b5ce6bdd0abbeea851684",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 52054,
+    "original": {
+     "bytes": 4372504,
+     "sha256": "3119d960f3df9becafd22d07bf0072e4bed4ee214db1fa7e7ff7b6255baab6dc"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": null,
+   "surfaces": [
+    "library",
+    "lesson",
+    "anatomy",
+    "exam",
+    "cockpit",
+    "atla"
+   ],
+   "saekChapters": [
+    {
+     "chapter": "06/5",
+     "occurrences": 4
+    },
+    {
+     "chapter": "14/8",
+     "occurrences": 4
+    },
+    {
+     "chapter": "01/2",
+     "occurrences": 3
+    },
+    {
+     "chapter": "18/10",
+     "occurrences": 2
+    }
+   ],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
