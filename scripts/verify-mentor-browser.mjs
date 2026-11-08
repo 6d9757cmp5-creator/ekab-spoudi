@@ -130,26 +130,8 @@ try{
   await page.locator('#read-legacy').click();
   await page.waitForFunction(()=>document.getElementById('legacy-result').textContent.includes('1 / 314'));
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
-  // Guided Mentor tutor: read-only adaptation from existing synthetic learning history.
-  await page.locator('#coach-form').waitFor();
-  assert.equal(await page.locator('#coach-dialogue .coach-message').count(),1);
-  await page.locator('[data-coach-intent="focus"]').click();
-  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===3);
-  assert.match(await page.locator('#coach-dialogue').textContent(),/Ασφάλεια σκηνής/);
-  await page.locator('#coach-question').fill('Πώς τα πάω στην παράδοση;');
-  await page.locator('#coach-send').click();
-  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===5);
-  assert.match(await page.locator('#coach-dialogue').textContent(),/Δομημένη παράδοση/);
-  await page.locator('#coach-question').fill('Ποια θεραπεία να δώσω;');
-  await page.locator('#coach-send').click();
-  await page.waitForFunction(()=>document.querySelectorAll('#coach-dialogue .coach-message').length===7);
-  const refusal=await page.locator('#coach-dialogue .coach-message').last().textContent();
-  assert.match(refusal,/Δεν έχω ακόμη τεκμηριωμένη απάντηση|Δεν αξιολογώ ελεύθερο ιατρικό κείμενο/,'Mentor must refuse unsupported treatment questions');
-  assert.match(refusal,/δεν είναι ενεργή|δεν είναι διαθέσιμ/,'Mentor must clearly state that unverified clinical AI is unavailable');
-  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
-  await page.reload({waitUntil:'networkidle'});
-  await page.locator('#tab-route').click();
-  assert.equal(await page.locator('#coach-dialogue .coach-message').count(),1,'tutor chat is not persisted');
+  // The old MENTOR tutor chat is gone: questions go to the one ATLA.
+  assert.equal(await page.locator('#coach-form,#coach-dialogue').count(),0,'No second ATLA chat in the route tab');
   await page.locator('#tab-memory').click();
   const download=page.waitForEvent('download');
   await page.locator('#export-mentor').click();

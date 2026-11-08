@@ -588,7 +588,7 @@ async function boot(){
   wireTabs();
   wireModes();
   wireStudyPreferences();
-  wireCoach();
+  if($('coach-form'))wireCoach();
   // The page has one ATLA: its button opens the same assistant as every other page.
   if($('mentor-hero-form'))wireMentorPresence();
   $('atla-open-chat')?.addEventListener('click',()=>document.querySelector('.atla-launcher')?.click());
