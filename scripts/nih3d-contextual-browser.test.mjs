@@ -30,7 +30,7 @@ async function contextualSurfaces(ctx,name){
  const link=page.locator('#lesson-2 .nih3d-research-reference a[data-accession="3DPX-000170"]');
  await link.waitFor({state:'attached',timeout:20000});
  const href=await link.getAttribute('href');
- assert.match(href,/atla-resource-preview\.html\?tool=anatomy&dataset=nih&model=3DPX-000170&from=/);
+ assert.match(href,/ui-tools\/anatomy-3d\/index\.html\?tool=anatomy&dataset=all&model=3DPX-000170&from=/);
  assert.equal(await link.getAttribute('target'),null,'A lesson link keeps the same tab so the return works');
  assert(await refs(page,'#lesson-2').count()<=12,'No mass listing in a chapter');
  assert.equal(await refs(page,'#lesson-1').count(),0,'No model without chapter evidence');
