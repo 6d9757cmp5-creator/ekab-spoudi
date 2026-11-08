@@ -1,12 +1,17 @@
 /* EKAB shared navigation: native media gestures and accessible controls. */
 (()=>{'use strict';
-const home=/^(index\.html)?$/.test(location.pathname.split('/').pop());
+// Resolve the app root from this script, so pages in subfolders find the real home page.
+const self=document.currentScript;
+const site=new URL('./',self?.src||location.href);
+const home=new URL('./index.html',site).pathname===location.pathname||site.pathname===location.pathname;
+const backOnly=self?.hasAttribute('data-ekab-back-only');
 const root=()=>document.querySelector('main')||document.body;
-function back(){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign('index.html')}
+function back(){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign(new URL('./index.html',site).href)}
 function make(tag,cls,label){const n=document.createElement(tag);n.className=cls;n.textContent=label;return n}
 function init(){
- if(!home&&!document.querySelector('header.top .nav')&&!document.querySelector('[data-ekab-back]')){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';b.addEventListener('click',back);root().prepend(b)}
- if(!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}
+ const spot=document.querySelector('[data-ekab-back-spot]');
+ if(!home&&!document.querySelector('[data-ekab-back]')&&(spot||!document.querySelector('header.top .nav'))){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';b.addEventListener('click',back);if(spot){b.classList.add('inline');spot.before(b);if(spot.dataset.ekabBackSpot==='replace')spot.style.display='none'}else root().prepend(b)}
+ if(!backOnly&&!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}
  let start=null;
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];start=t.clientX<25?{x:t.clientX,y:t.clientY,target:e.target}:null},{passive:true});
  document.addEventListener('touchcancel',()=>{start=null},{passive:true});
