@@ -2,7 +2,7 @@
 import {CASES,getCase,TOOLS,ACTIONS,actionsFor,newSession,loadSession,loadCaseSession,caseProgress,saveSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,validSession} from '../core/next-sim.mjs';
 import {mountPatientScene} from './next-scene.mjs';
 import {patientCameraPreset} from './patient-camera.mjs';
-import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
+import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport,buildHandoverDraft} from '../core/next-review.mjs';
 import {buildCockpitEcgPoints} from './cockpit-ecg.mjs';
 import {safeReturnHref} from '../../atla-ai/nih3d-library.mjs';
 const $=id=>document.getElementById(id);
@@ -414,11 +414,36 @@ function drawChart(){
 
 function renderReview(){
  const r=summarize(state),target=$('next-review-body');
+ const expandedHandover=new Set([...target.querySelectorAll('.next-handover-person[open]')].map(x=>x.dataset.patient));
  target.replaceChildren();
  target.append(el('h3','Καταγεγραμμένα · '+r.covered.length+'/7'));
  const have=el('ul');for(const label of r.covered)have.append(el('li',label));if(!r.covered.length)have.append(el('li','Δεν υπάρχουν ακόμη.'));target.append(have);
  target.append(el('h3','Για επανάληψη · '+r.missing.length));
  const need=el('ul');for(const label of r.missing)need.append(el('li',label));if(!r.missing.length)need.append(el('li','Όλα τα οργανωτικά βήματα έχουν καταγραφεί.'));target.append(need);
+ const handover=el('section',undefined,'next-handover');
+ handover.append(el('h3','Πρόβα παράδοσης · S/B/A/R'));
+ handover.append(el('p','Ξεχωριστό προσχέδιο για κάθε άτομο. Μόνο ήδη καταγεγραμμένα συνθετικά στοιχεία· η προβολή και αντιγραφή δεν καταγράφουν ενέργεια.','next-handover-note'));
+ for(const patient of getCase(state.caseId).patients){
+  const details=el('details',undefined,'next-handover-person');
+  details.dataset.patient=patient.id;
+  details.open=expandedHandover.has(patient.id);
+  details.append(el('summary',patient.name+' · Προσχέδιο επικοινωνίας'));
+  const draft=el('pre',buildHandoverDraft(state,patient.id),'next-handover-text');
+  const copy=el('button','Αντιγραφή προσχεδίου '+patient.name);
+  copy.type='button';copy.className='next-handover-copy';
+  const status=el('p','', 'next-handover-status');status.setAttribute('role','status');
+  copy.addEventListener('click',async()=>{
+   try{
+    await navigator.clipboard.writeText(buildHandoverDraft(state,patient.id));
+    status.textContent='Το εκπαιδευτικό προσχέδιο αντιγράφηκε.';
+   }catch{
+    status.textContent='Η αντιγραφή δεν υποστηρίζεται. Επίλεξε το εμφανιζόμενο κείμενο.';
+   }
+  });
+  details.append(draft,copy,status);
+  handover.append(details);
+ }
+ target.append(handover);
  const events=$('next-events');events.replaceChildren();
  if(!state.events.length)events.append(el('li','Καμία καταγραφή ακόμη.'));
  else state.events.forEach((e,i)=>{
