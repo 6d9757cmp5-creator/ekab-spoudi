@@ -342,3 +342,34 @@ body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
  margin:10px 16px;
 }
 #atlas-cockpit-entry.atlas-cockpit-optional[open]{padding-bottom:10px}
+
+
+/* Evidence-only handover drafts: legible on phones and screen readers.
+ * Disclosures never imply a medical intervention or clinical confirmation. */
+.next-handover{
+ margin-top:18px;padding-top:14px;border-top:1px solid #456b7e;
+}
+.next-handover h3{margin:0 0 7px;line-height:1.4}
+.next-handover-note{font-size:.78rem;line-height:1.5;color:#bfd3dc}
+.next-handover-person{
+ margin:10px 0;background:#102b3a;border:1px solid #54798a;border-radius:11px;
+ overflow:hidden;
+}
+.next-handover-person>summary{
+ cursor:pointer;padding:13px 12px;min-height:46px;box-sizing:border-box;
+ font-size:.85rem;font-weight:750;line-height:1.5;color:#e2f4f7;
+}
+.next-handover-person[open]>summary{border-bottom:1px solid #426b7b}
+.next-handover-text{
+ white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;
+ font:inherit;font-size:.76rem;line-height:1.62;
+ padding:12px;margin:0;color:#d7e8ec;
+}
+.next-handover-copy{
+ display:block;max-width:100%;min-height:44px;
+ margin:0 12px 11px;padding:10px 12px;
+ border-radius:9px;border:1px solid #80dacf;
+ background:#20556a;color:#f3ffff;font-weight:750;cursor:pointer;
+}
+.next-handover-copy:hover{background:#2c697c}
+.next-handover-status{margin:0 12px 12px;font-size:.76rem;color:#b5e1da;line-height:1.4}
