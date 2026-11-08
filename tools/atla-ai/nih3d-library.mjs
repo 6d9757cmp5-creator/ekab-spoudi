@@ -29,9 +29,11 @@ function textScore(model,library,text){
 }
 const deliverable=(model,surface)=>Boolean(model.delivery)&&model.clinicalUseApproved===false&&model.surfaces?.includes(surface);
 /** One model stands for its structures and finding, so a chapter never lists near-identical models. */
-function ranked(rows,limit){
+function ranked(rows,limit,specific=false){
  const seen=new Set(),shown=new Set(),out=[];
- rows.sort((a,b)=>b.score-a.score||a.model.entryId-b.model.entryId);
+ // For a single answer, on equal evidence the model of exactly that structure beats a composite that merely includes it.
+ const breadth=model=>specific?model.structures?.length??0:0;
+ rows.sort((a,b)=>b.score-a.score||breadth(a.model)-breadth(b.model)||a.model.entryId-b.model.entryId);
  for(const {model} of rows){
   if(model.kind==='pathology'){
    const key=model.structures.join()+'|'+model.finding;
@@ -65,7 +67,7 @@ export function selectLibraryModels(library,{surface,text='',courseId='',chapter
   const score=textScore(model,library,text);
   if(score)rows.push({model,score});
  }
- return ranked(rows,1);
+ return ranked(rows,1,true);
 }
 /**
  * ATLA offers a model only when it helps: the learner asked, or is struggling with the concept.

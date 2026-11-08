@@ -55,7 +55,8 @@ async function contextualSurfaces(ctx,name){
  assert.equal(await refs(page).count(),0);
  await cockpit('Βραχιόνιο',true);
  await page.waitForTimeout(500);
- assert.equal(await refs(page).count(),0,'A named structure alone never shows a fracture');
+ // A named structure may show its normal anatomy, never a fracture.
+ assert(!/κάταγμα/i.test((await refs(page).allTextContents()).join(' ')),'A named structure alone never shows a fracture');
  await cockpit('Επιγονατίδα',true);
  await page.locator('.nih3d-research-reference[data-cockpit]').waitFor({state:'attached'});
  await cockpit('Τροχαίο',true);
