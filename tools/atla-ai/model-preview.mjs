@@ -1,4 +1,4 @@
-import {buildModelList,getResourceCatalogUrls,safeAssetUrl,nihAssetsFromLibrary} from './model-preview-catalog.mjs';
+import {buildModelList,getResourceCatalogUrls,safeAssetUrl,libraryAssets} from './model-preview-catalog.mjs';
 import {safeReturnHref} from './nih3d-library.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
@@ -9,15 +9,18 @@ if(tool==='anatomy')for(const value of ['makehuman','rigged'])dataset.querySelec
 const status=(v,bad=false)=>{note.textContent=v;note.dataset.error=String(bad)};
 const back=$('source-back');
 back.href=safeReturnHref(params.get('from'),location.href,tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html');
-if(params.get('dataset')==='nih')dataset.value='nih';
-let deepLinkModel=params.get('dataset')==='nih'?params.get('model'):null;
-const showSourceName=()=>{$('source-name').textContent=tool!=='anatomy'?'Κλινικός Προσομοιωτής · 3D αρχεία':dataset.value==='nih'?'Εργαστήριο Ανατομίας · NIH 3D':'Εργαστήριο Ανατομίας · HRA 3D'};
+// The 3D library and lessons link straight to one model of any collection.
+const wantedDataset=params.get('dataset');
+if(wantedDataset&&dataset.querySelector('option[value="'+CSS.escape(wantedDataset)+'"]'))dataset.value=wantedDataset;
+let deepLinkModel=dataset.value===wantedDataset?params.get('model'):null;
+const COLLECTION_NAMES={anatomy:{primary:'HRA 3D',nih:'NIH 3D',secondary:'Z-Anatomy'},cockpit:{primary:'Quaternius',nih:'NIH 3D',secondary:'Στατικοί ασθενείς',makehuman:'MakeHuman',rigged:'MakeHuman με σκελετό'}};
+const showSourceName=()=>{$('source-name').textContent=(tool==='anatomy'?'Εργαστήριο Ανατομίας':'Κλινικός Προσομοιωτής')+' · '+(COLLECTION_NAMES[tool][dataset.value]??'3D αρχεία')};
 showSourceName();
 dataset.addEventListener('change',showSourceName);
 const openedFromLesson=Boolean(deepLinkModel);
 let scrolledToModel=false;
 $('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
-let assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
+let libraryRequest=null,assets=[],renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
 const partSelect=$('source-part'),animationSelect=$('source-clip'),opacity=$('source-opacity');
 const meshInfo=$('source-mesh-info'),partControls=['part-isolate','part-show','view-reset','view-front','view-side','source-opacity'];
 let meshParts=[],animationClips=[],originalMaterials=new Map(),fullSceneObject=null,animationPaused=false;
@@ -246,28 +249,25 @@ async function loadDataset(){
  const rigged=dataset.value==='rigged'&&tool==='cockpit';
  const nih=dataset.value==='nih';
  const sourceType=nih?'nih':rigged?'rigged':makehuman?'makehuman':secondary?(tool==='anatomy'?'research':'patients'):'primary';
- const urls=getResourceCatalogUrls(root);
- const selected=nih?[urls.library]:rigged?[urls.cockpitRigged]:makehuman?[urls.cockpitMakehumanCore,urls.cockpitMakehumanSupplemental]:
-  [tool==='anatomy'?(secondary?urls.anatomyResearch:urls.anatomy):(secondary?urls.cockpitPatients:urls.cockpit)];
  try{
-  const registries=await Promise.all(selected.map(async url=>{
-   const resp=await fetch(url,{cache:'no-store'});
+  // Every collection comes from the one shared 3D library registry.
+  libraryRequest??=fetch(getResourceCatalogUrls(root).library,{cache:'no-store'}).then(resp=>{
    if(!resp.ok)throw Error('Μητρώο HTTP '+resp.status);
    return resp.json();
-  }));
-  const next=registries.flatMap(raw=>buildModelList(tool,nih?nihAssetsFromLibrary(raw,tool):raw,sourceType));
+  }).catch(error=>{libraryRequest=null;throw error});
+  const next=buildModelList(tool,libraryAssets(await libraryRequest,tool,sourceType),sourceType);
   if(request!==loadVersion)return;
   if(!next.length)throw Error('Δεν υπάρχουν επιτρεπόμενα πηγαία 3D αρχεία');
   assets=next;
   select.replaceChildren(...assets.map((a,i)=>{
    const o=document.createElement('option');o.value=String(i);o.textContent=a.label;return o;
   }));
-  $('source-count').textContent=assets.length+' πραγματικά 3D αρχεία · '+(rigged?'MakeHuman CC0 · 163 οστά · 2 κινήσεις (μη κλινικό)':makehuman?'MakeHuman OBJ (χωρίς rig/animations)':secondary?(tool==='anatomy'?'Z-Anatomy (research-only)':'Στατικοί ασθενείς (ήδη στο Cockpit)'):'βασική συλλογή');
+  $('source-count').textContent=assets.length+' πραγματικά 3D αρχεία · '+(rigged?'MakeHuman CC0 · 163 οστά · 2 κινήσεις (μη κλινικό)':makehuman?'MakeHuman OBJ (χωρίς σκελετό και κινήσεις)':secondary?(tool==='anatomy'?'Z-Anatomy (μόνο ερευνητική χρήση)':'Στατικοί ασθενείς (ήδη στον Κλινικό Προσομοιωτή)'):'βασική συλλογή');
   button.disabled=false;
   status('Επίλεξε μοντέλο. Δεν αλλάζει η ενεργή εκπαιδευτική εφαρμογή.');
   // A learner who followed a contextual link already chose this model, so it opens directly.
   if(deepLinkModel){
-   const wanted=assets.findIndex(a=>a.details?.accession===deepLinkModel);
+   const wanted=assets.findIndex(a=>a.details?.accession===deepLinkModel||a.path===deepLinkModel);
    deepLinkModel=null;
    if(wanted>=0){select.value=String(wanted);button.click()}
    else status('Το ζητούμενο μοντέλο δεν είναι διαθέσιμο σε αυτό το εργαλείο.',true);
