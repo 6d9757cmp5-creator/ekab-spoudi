@@ -320,3 +320,25 @@ body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
   white-space:normal;overflow-wrap:anywhere;
  }
 }
+
+
+/* Optional tutor is a discreet disclosure on direct simulator entry.
+ * SAEK deep-link context/return banner remains fully expanded and unchanged. */
+#atlas-cockpit-entry.atlas-cockpit-optional{
+ margin:0 0 12px;padding:0;
+ border:1px solid #426c79;border-radius:11px;
+ background:#102c3b;box-shadow:none;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional>summary{
+ min-height:44px;display:list-item;cursor:pointer;
+ padding:11px 16px;font-size:.83rem;font-weight:750;
+ color:#c9e7e8;line-height:1.45;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional>summary:focus-visible{
+ outline:3px solid #89e5d9;outline-offset:3px;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional>p,
+#atlas-cockpit-entry.atlas-cockpit-optional>.atlas-cockpit-entry-actions{
+ margin:10px 16px;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional[open]{padding-bottom:10px}
