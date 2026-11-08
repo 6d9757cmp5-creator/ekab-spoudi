@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'tools/atla-ai/resources/nih3d-library/curation.json'
+      - 'tools/atla-ai/resources/library-greek-names.json'
       - 'scripts/nih3d-build-library.mjs'
       - 'scripts/nih3d-compress-models.mjs'
       - 'scripts/nih3d-adopt-display-copies.mjs'

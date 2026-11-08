@@ -15,6 +15,7 @@ import {simplify,structureHits} from '../tools/atla-ai/nih3d-library.mjs';
 export const MODELS_DIR='tools/atla-ai/resources/nih3d-library/models/';
 const CURATION='tools/atla-ai/resources/nih3d-library/curation.json';
 const DISPLAY='tools/atla-ai/resources/nih3d-library/display-copies.json';
+const GREEK_NAMES='tools/atla-ai/resources/library-greek-names.json';
 const LEDGER='tools/atla-ai/resources/nih3d-verified-originals-2026.json';
 const CATALOG='tools/atla-ai/resources/nih3d-master-plan-2026/segments';
 const SCOPE='tools/atla-ai/resources/nih3d-biomedical-scope-2026/segments';
@@ -98,9 +99,14 @@ async function courseChapters(){
  return chapters;
 }
 async function otherSources(){
+ const {names}=await readJson(GREEK_NAMES);
  const list=async(id,label,tool,file,{key='assets',pathKey='path',hashKey='sha256',license,extra={}}={})=>{
   const raw=await readJson(file);
-  return (raw[key]??[]).map(a=>({id:a[pathKey],source:id,sourceLabel:label,tool,label:String(a.name||a[pathKey].split('/').pop()).replace(/\.(glb|obj)$/i,'').replace(/_/g,' '),
+  return (raw[key]??[]).map(a=>({id:a[pathKey],source:id,sourceLabel:label,tool,
+   label:names[a[pathKey]]??String(a.name||a[pathKey].split('/').pop()).replace(/\.(glb|obj)$/i,'').replace(/_/g,' '),
+   greekTitle:names[a[pathKey]]??null,region:a.region??null,
+   // Only meshes open in the viewer; textures, rigs and motion files support them.
+   viewable:/\.(glb|obj)$/i.test(a[pathKey]),
    license:String(a.license||license||raw.license||raw.sourceLicense||''),
    delivery:{path:a[pathKey],bytes:Number(a.bytes??a.size),sha256:a[hashKey]??a.gitBlobSha??null},clinicalUseApproved:false,...extra}));
  };
@@ -223,8 +229,8 @@ async function build(stagingRoot){
    nihContextual:models.filter(m=>m.surfaces.includes('lesson')).length,
    nihWithSaekChapter:models.filter(m=>m.saekChapters.length).length,nihRestrictions:restrictions},
   nihCatalog:{publishedRecords:catalog.size,licenses,scopes,notYetVerifiedInLedger:catalog.size-ledger.models.length},
-  atlases:[{id:'bp3d40',label:'BodyParts3D 4.0',path:'tools/anatomy-3d/resources/bp3d40/',tool:'anatomy'},
-   {id:'bp3d43',label:'BodyParts3D 4.3',path:'tools/anatomy-3d/resources/bp3d43/',tool:'anatomy'}],
+  atlases:[{id:'bp3d40',label:'Πλήρης ανατομικός άτλας BodyParts3D 4.0 · 1.259 δομές',path:'tools/anatomy-3d/resources/bp3d40/',tool:'anatomy',href:'ui-tools/anatomy-full-atlas.html'},
+   {id:'bp3d43',label:'Πλήρης ανατομικός άτλας BodyParts3D 4.3 · 3.210 δομές',path:'tools/anatomy-3d/resources/bp3d43/',tool:'anatomy',href:'ui-tools/anatomy-full-atlas.html'}],
   models:[...models,...others]};
  await fs.writeFile(OUTPUT,JSON.stringify(report,null,1)+'\n');
  console.log('MODEL LIBRARY',JSON.stringify(report.counts));

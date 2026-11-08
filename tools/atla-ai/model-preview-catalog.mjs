@@ -77,4 +77,54 @@ export function nihAssetsFromLibrary(library,tool){
   }}));
  return {assets};
 }
+/** Which library source each viewer collection shows. */
+const LIBRARY_SOURCES=Object.freeze({
+ anatomy:Object.freeze({primary:'hra',research:'z-anatomy'}),
+ cockpit:Object.freeze({primary:'quaternius',patients:'patients',makehuman:'makehuman',rigged:'makehuman-rigged'})
+});
+/** One collection of the shared 3D library in the viewer's asset shape: every tool reads the same registry. */
+export function libraryAssets(library,tool,sourceType){
+ if(sourceType==='nih')return nihAssetsFromLibrary(library,tool);
+ const source=LIBRARY_SOURCES[tool]?.[sourceType],cfg=configurations[tool]?.[sourceType];
+ if(!source||!cfg)throw Error('Unknown 3D collection');
+ const assets=(library?.models??[]).filter(m=>m.source===source&&m.delivery&&m.viewable!==false&&m.clinicalUseApproved===false)
+  .map(m=>({[cfg.pathKey]:m.delivery.path,[cfg.hashKey]:m.delivery.sha256,bytes:m.delivery.bytes,name:m.label,
+   region:m.region??'',license:m.license}));
+ return {assets};
+}
+/** Viewer tool and collection for each library source. */
+const VIEWER_COLLECTION=Object.freeze({
+ nih3d:['anatomy','nih'],hra:['anatomy','primary'],'z-anatomy':['anatomy','secondary'],
+ quaternius:['cockpit','primary'],patients:['cockpit','secondary'],makehuman:['cockpit','makehuman'],'makehuman-rigged':['cockpit','rigged']
+});
+const SOURCE_NAMES=Object.freeze({nih3d:'NIH 3D',hra:'HRA / HuBMAP','z-anatomy':'Z-Anatomy',quaternius:'Quaternius',patients:'Στατικοί ασθενείς',
+ makehuman:'MakeHuman','makehuman-rigged':'MakeHuman με σκελετό',bp3d:'BodyParts3D'});
+const fold=value=>String(value??'').normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el').replace(/ς/g,'σ');
+/**
+ * Every model of the shared 3D library as one list for the library page: what it is called, which
+ * group it belongs to and the viewer address that opens it. Atlases open in the full atlas.
+ */
+export function libraryEntries(library,{viewer='atla-resource-preview.html',atlas='anatomy-full-atlas.html',from=''}={}){
+ const structures=library?.vocabulary?.structures??{},findings=library?.vocabulary?.findings??{};
+ const entries=[];
+ for(const m of library?.models??[]){
+  const collection=VIEWER_COLLECTION[m.source];
+  if(!collection||!m.delivery||m.viewable===false||m.clinicalUseApproved!==false)continue;
+  if(m.source==='nih3d'&&!m.surfaces?.includes('library'))continue;
+  const [tool,dataset]=collection;
+  const group=m.source==='nih3d'?(m.kind==='pathology'?'pathology':m.kind==='anatomy'?'anatomy':'science')
+   :tool==='cockpit'?'simulation':'anatomy';
+  const terms=[...(m.structures??[]).map(id=>structures[id]?.greek),findings[m.finding]?.greek].filter(Boolean);
+  const params=new URLSearchParams({tool,dataset,model:m.source==='nih3d'?m.accession:m.delivery.path});
+  if(from)params.set('from',from);
+  entries.push({id:m.source+':'+(m.accession??m.delivery.path),label:m.label,source:m.source,sourceLabel:SOURCE_NAMES[m.source],group,
+   terms,bytes:m.delivery.bytes,restriction:m.restriction??null,href:viewer+'?'+params,
+   search:fold([m.label,m.originalTitle,SOURCE_NAMES[m.source],...terms].join(' '))});
+ }
+ for(const a of library?.atlases??[])entries.push({id:'atlas:'+a.id,label:a.label,source:'bp3d',sourceLabel:SOURCE_NAMES.bp3d,group:'atlas',
+  terms:[],bytes:null,restriction:null,href:atlas,search:fold(a.label+' '+SOURCE_NAMES.bp3d+' ατλαντας')});
+ const order={atlas:0,anatomy:1,pathology:2,simulation:3,science:4};
+ return entries.sort((a,b)=>order[a.group]-order[b.group]||a.label.localeCompare(b.label,'el'));
+}
+export const searchKey=fold;
 export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Κλινικός Προσομοιωτής'});
