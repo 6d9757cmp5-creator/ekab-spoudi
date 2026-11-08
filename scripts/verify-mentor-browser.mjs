@@ -295,57 +295,18 @@ try{
   ));
   assert.deepEqual(afterReadOnly,beforeReadOnly,'Mentor reader must not mutate any local progress or grade');
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
-  // Presence experience: actual interaction, no new AI, no writes to legacy progress.
+  // One ATLA: the LAB page has no 3D figure and no second question box; its button opens the shared ATLA.
   await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
-  assert.equal(await page.locator('#mentor-avatar').count(),1,'One visible mentor character');
-  assert.equal(await page.locator('#mentor-presence-line').isVisible(),true);
-  assert.equal(await page.locator('#mentor-hero-question').isVisible(),true);
+  assert.equal(await page.locator('#mentor-avatar,#mentor-cinematic-stage,#mentor-real3d-canvas,#mentor-hero-form').count(),0,'No 3D figure or second ATLA on the LAB page');
   const legacyBeforePresence=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
-  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω σήμερα;');
-  await page.locator('#mentor-hero-form button[type="submit"]').click();
-  await page.waitForFunction(()=>document.querySelector('#mentor-presence-line').textContent.includes('Προτείνω'));
-  assert.match(await page.locator('#mentor-voice-status').textContent(),/περιορισμένο εκπαιδευτικό/);
-  assert.equal(await page.locator('#coach-dialogue .coach-message').count(),3,'Hero question also appears in Tutor conversation');
+  await page.locator('#atla-open-chat').click();
+  await page.locator('.atla-panel').waitFor({state:'visible',timeout:15000});
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),legacyBeforePresence);
-  await page.locator('#mentor-intro-chat').click();
-  assert.equal(await page.locator('#tab-route').getAttribute('aria-selected'),'true','Conversation button opens working tutor');
-  assert.equal(await page.locator('#coach-question').evaluate(x=>document.activeElement===x),true,'Tutor input focused');
   const home=await readFile(resolve(root,'index.html'),'utf8');
   assert.match(home,/atla\/assistant\.mjs/,'The home page offers the single ATLA assistant');
   assert.match(home,/href="paramedic.html"/,'The home page leads to the Paramedic hub');
   const hub=await readFile(resolve(root,'paramedic.html'),'utf8');
   assert.match(hub,/href="mentor-next.html"/,'The Paramedic hub leads to the Clinical Cockpit');
-  // Natural-device voice: explicit voice controls, rate selection and permission-safe mic.
-  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'networkidle'});
-  assert.equal(await page.locator('#mentor-voice-select').count(),1,'installed Greek voice picker is present');
-  assert.equal(await page.locator('#mentor-intro-mic').count(),1,'explicit mic control is present');
-  assert.equal(await page.locator('#mentor-speech-wave').count(),1,'voice waveform exists');
-  await page.locator('#mentor-voice-speed').evaluate(el=>{el.value='1.05';el.dispatchEvent(new Event('input',{bubbles:true}));});
-  assert.match(await page.locator('#mentor-voice-speed-label').textContent(),/1,05/);
-  assert.match(await page.locator('#mentor-microphone-privacy').textContent(),/υπηρεσία του παρόχου του browser/);
-  const privacyBefore=await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15'));
-  await page.locator('#mentor-hero-question').fill('Τι να μελετήσω;');
-  await page.locator('#mentor-hero-form button[type=submit]').click();
-  await page.waitForFunction(()=>document.getElementById('mentor-presence-line').textContent.includes('Προτείνω'));
-  assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),privacyBefore,'mentor voice settings did not touch legacy EOPPEP');
-  const micSupported=await page.evaluate(()=>typeof(window.SpeechRecognition||window.webkitSpeechRecognition)==='function');
-  assert.equal(await page.locator('#mentor-intro-mic').isDisabled(),!micSupported,'mic available only where browser supports recognition');
-  // Current MENTOR: real articulated GLB only, with no visible obsolete portrait.
-  await page.goto('http://127.0.0.1:'+port+'/mentor-lab.html',{waitUntil:'domcontentloaded'});
-  await page.waitForFunction(()=>document.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',null,{timeout:90000});
-  assert.equal(await page.locator('#mentor-real3d-canvas').isVisible(),true,'Real 3D GLB canvas must be displayed');
-  assert.equal(await page.locator('#mentor-avatar').isVisible(),false,'Old avatar must remain hidden');
-  assert.equal(await page.locator('.mentor-photo-img,.cinematic-character,#mentor-3d-canvas').evaluateAll(nodes=>nodes.every(el=>el.hidden||!el.getClientRects().length||getComputedStyle(el).display==='none'||getComputedStyle(el).visibility==='hidden')),true,'Deprecated images and procedural canvas may remain in the DOM only if invisible');
-  assert.equal(await page.locator('#mentor-real3d-rotation').count(),1,'Real 3D rotation control exists');
-  assert.equal(await page.locator('#mentor-real3d-motion').count(),1,'Real 3D motion control exists');
-  const real3d=await page.locator('#mentor-cinematic-stage').getAttribute('data-real3d');
-  assert.equal(real3d,'ready','GLB is fully ready');
-  assert.equal(await page.locator('[data-cinematic-mode]').count(),3,'Three interactive mode buttons');
-  await page.locator('[data-cinematic-mode="text"]').click();
-  assert.equal(await page.locator('[data-cinematic-mode="text"]').getAttribute('aria-pressed'),'true');
-  await page.locator('[data-cinematic-mode="hologram"]').click();
-  assert.equal(await page.locator('[data-cinematic-mode="hologram"]').getAttribute('aria-pressed'),'true');
-  assert.equal(await page.locator('#mentor-cinematic-stage').evaluate(x=>x.classList.contains('is-glowing')),true);
   // Safari WebKit sometimes reports a malformed optional update-check URL from legacy code.
   // This is unrelated to the avatar and must not mask other browser exceptions.
   const actionableErrors=errors.filter(e=>!e.includes('Fetch API cannot load http: /127.0.0.1:')||!e.includes('/version.json?nocache='));
