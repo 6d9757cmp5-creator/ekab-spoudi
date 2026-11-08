@@ -12,8 +12,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/Allen_F_Brain.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/Allen_F_Brain.glb",
       "sourceGitBlob": "46be1ef8f30b42b1bda45efc909d09badc2c1013",
-      "bytes": 11977884,
-      "sha256": "c5711a1a8bc62ca930b8bcf076def15315c11f5ad9bc7901e51f698406d38dbc",
+      "bytes": 2554028,
+      "sha256": "4d5b5ae0e09a52ea636a0970a66fa532cf7b28c3b41ca08ea2059305b0fe84ff",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -21,7 +21,10 @@
         "nodes": 286,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 11977884,
+      "sourceSha256": "c5711a1a8bc62ca930b8bcf076def15315c11f5ad9bc7901e51f698406d38dbc",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-allen-m-brain",
@@ -30,8 +33,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/Allen_M_Brain.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/Allen_M_Brain.glb",
       "sourceGitBlob": "b87f9f5cae36ef916d526a0dc300c466980a84ff",
-      "bytes": 11977312,
-      "sha256": "2b9ad5b53e40e9f0936da74f7be38d2eed15604e26358c3870a0ea13499b9a35",
+      "bytes": 2553460,
+      "sha256": "2b06bc1cbd89afc1655509adddb9addcdc3522b736ab19118ae215c13234cd34",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -39,7 +42,10 @@
         "nodes": 286,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 11977312,
+      "sourceSha256": "2b9ad5b53e40e9f0936da74f7be38d2eed15604e26358c3870a0ea13499b9a35",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-nih-f-lymph-node",
@@ -48,8 +54,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/lymphatic/NIH_F_Lymph_Node.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/NIH_F_Lymph_Node.glb",
       "sourceGitBlob": "fddecfec57b79db1c91faf65209129e2fb9f22cc",
-      "bytes": 4542832,
-      "sha256": "4c2bf104b7b6ec1aabaa68014411b3df383846480d040c5547c0a1a05a18c563",
+      "bytes": 771212,
+      "sha256": "46df1ee14026981228a2e8129be55f7d2f0bcf4581da333305323a2bf3ebc2af",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -57,7 +63,10 @@
         "nodes": 8,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 4542832,
+      "sourceSha256": "4c2bf104b7b6ec1aabaa68014411b3df383846480d040c5547c0a1a05a18c563",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-nih-m-lymph-node",
@@ -66,8 +75,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/lymphatic/NIH_M_Lymph_Node.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/NIH_M_Lymph_Node.glb",
       "sourceGitBlob": "5c8fd0b2c61cf5e5f1434c7043d8bb92ec7d2a0a",
-      "bytes": 7413900,
-      "sha256": "7b047002cbb1dc06f37baa441783390d76cdb444b6144d6caa623923707953fd",
+      "bytes": 772884,
+      "sha256": "9944b24457fc142007a6a7bc884bcbb96f606c10fc05305a93466a386b14364f",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -75,7 +84,10 @@
         "nodes": 8,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 7413900,
+      "sourceSha256": "7b047002cbb1dc06f37baa441783390d76cdb444b6144d6caa623923707953fd",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-sbu-f-intestine-large",
@@ -84,8 +96,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/SBU_F_Intestine_Large.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/SBU_F_Intestine_Large.glb",
       "sourceGitBlob": "0eb339ecc96642d02c54e43717a78c8dcc87bd9e",
-      "bytes": 387184,
-      "sha256": "a14bca59d855546b8343e732c1bf0a146fbdb8ef4d73a3eac333fc298ecb5d1d",
+      "bytes": 76576,
+      "sha256": "604efaa3549a6f0f59ddbbbfd2593f38263e4e3a75178785de9d1091d69ee441",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -93,7 +105,10 @@
         "nodes": 11,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 387184,
+      "sourceSha256": "a14bca59d855546b8343e732c1bf0a146fbdb8ef4d73a3eac333fc298ecb5d1d",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-sbu-m-intestine-large",
@@ -102,8 +117,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/SBU_M_Intestine_Large.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/SBU_M_Intestine_Large.glb",
       "sourceGitBlob": "a36ab258f8e3179d82da12b08c1f4a5149db0418",
-      "bytes": 686888,
-      "sha256": "84a66fb4e2dd07dffc284435da896284c3bddc5b6eb6f8e2f8c1b9130387b66b",
+      "bytes": 119816,
+      "sha256": "707205743979dffb02e51a6aa1736809e965f632a5c1e6d6a3e9b4e016ae850d",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -111,7 +126,10 @@
         "nodes": 11,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 686888,
+      "sourceSha256": "84a66fb4e2dd07dffc284435da896284c3bddc5b6eb6f8e2f8c1b9130387b66b",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-blood-vasculature",
@@ -120,8 +138,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/cardiovascular/VH_F_Blood_Vasculature.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Blood_Vasculature.glb",
       "sourceGitBlob": "e5ee60b7c3e58b913e00fb0d860a93667db166e3",
-      "bytes": 7262232,
-      "sha256": "4b034a65527938ccbeba4f3514c282bd399a4384fb23ba8095b01e2a3219486a",
+      "bytes": 988028,
+      "sha256": "8299ed8c730f140a91669c6b230340487ae0ccc2b7d6b7328906c3c4908f869c",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -129,7 +147,10 @@
         "nodes": 155,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 7262232,
+      "sourceSha256": "4b034a65527938ccbeba4f3514c282bd399a4384fb23ba8095b01e2a3219486a",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-eye-l",
@@ -138,8 +159,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_F_Eye_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Eye_L.glb",
       "sourceGitBlob": "71e7bfef9b3fba1936d08d8c047c71cadff38d3f",
-      "bytes": 9610916,
-      "sha256": "b8468c1eabc6effbeb3f6dec990d57dff0c29717a5ec23029e08ec122cb35a00",
+      "bytes": 1011908,
+      "sha256": "8f3d13458eb77489c33a0c47a961801a3d5cf9d840b3ec1e5561368d86b94c7f",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -147,7 +168,10 @@
         "nodes": 24,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 9610916,
+      "sourceSha256": "b8468c1eabc6effbeb3f6dec990d57dff0c29717a5ec23029e08ec122cb35a00",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-eye-r",
@@ -156,8 +180,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_F_Eye_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Eye_R.glb",
       "sourceGitBlob": "6d07e686c58a8ce6104131829d98e2068ca7d44f",
-      "bytes": 9511360,
-      "sha256": "aade6c5f75f8ef48aa2a6062c8413fc9b8b08fc79b1bea45f93cae6c814f7e69",
+      "bytes": 1014112,
+      "sha256": "58131c4d924c30b2ad06ca192a620883013c49f959ec08b7a8c2b9138e53a9fe",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -165,7 +189,10 @@
         "nodes": 24,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 9511360,
+      "sourceSha256": "aade6c5f75f8ef48aa2a6062c8413fc9b8b08fc79b1bea45f93cae6c814f7e69",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-fallopian-tube-l",
@@ -174,8 +201,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Fallopian_Tube_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Fallopian_Tube_L.glb",
       "sourceGitBlob": "560433afd71368c354d97b8e40e80cb255db04f7",
-      "bytes": 336676,
-      "sha256": "5025453048a83c26393b866bc69859a255b4c38816f34ed3a196bfe7d4f33dd1",
+      "bytes": 54472,
+      "sha256": "3e1c29a99cce44edf4d516ee72ba2c3b148ccbea93fe3e4ca6f83a0c41049a09",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -183,7 +210,10 @@
         "nodes": 5,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 336676,
+      "sourceSha256": "5025453048a83c26393b866bc69859a255b4c38816f34ed3a196bfe7d4f33dd1",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-fallopian-tube-r",
@@ -192,8 +222,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Fallopian_Tube_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Fallopian_Tube_R.glb",
       "sourceGitBlob": "d653750c7bd1a112a6c9ed6f51be59cd2a6bc2a8",
-      "bytes": 327448,
-      "sha256": "17aef41a430e068705dc21ac8ccf746a74f14f47ffc1a31908198b0b026849df",
+      "bytes": 52460,
+      "sha256": "070a88f869db91256d8495c9bc5bdf7be64b8c605161d61a21fe8a0725f87251",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -201,7 +231,10 @@
         "nodes": 5,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 327448,
+      "sourceSha256": "17aef41a430e068705dc21ac8ccf746a74f14f47ffc1a31908198b0b026849df",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-heart",
@@ -210,8 +243,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Heart.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Heart.glb",
       "sourceGitBlob": "7e4709ac174f4f43bedb80ed488fdcb62d02aac3",
-      "bytes": 1745284,
-      "sha256": "9afdfb2ccf926869813582cfe150dce8cb28377417a968a4f29a5b8dc060428b",
+      "bytes": 247508,
+      "sha256": "7f1de02b2ef68b51076f50d2567a5ac39e5b2eb7c219e183512ab9398980bf3e",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -219,7 +252,10 @@
         "nodes": 18,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1745284,
+      "sourceSha256": "9afdfb2ccf926869813582cfe150dce8cb28377417a968a4f29a5b8dc060428b",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-kidney-l",
@@ -228,8 +264,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_F_Kidney_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Kidney_L.glb",
       "sourceGitBlob": "03a86aa33b02608ede00b41d4dc68b0680a268f4",
-      "bytes": 1330900,
-      "sha256": "8ac1228e4db8c07cbf9f6c6dc7ca522c5b8d61f641927233a29ae6609b577403",
+      "bytes": 219376,
+      "sha256": "dc90d76d829059eb6adb17d10e5951472cb90d1929200fabbfb5f2c3c14f59c1",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -237,7 +273,10 @@
         "nodes": 19,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1330900,
+      "sourceSha256": "8ac1228e4db8c07cbf9f6c6dc7ca522c5b8d61f641927233a29ae6609b577403",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-kidney-r",
@@ -246,8 +285,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_F_Kidney_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Kidney_R.glb",
       "sourceGitBlob": "f2dc4787682c1b355f17674a6069dd21001f896a",
-      "bytes": 1356976,
-      "sha256": "a67508e6948723d34a29fea2bc8c96931a8fe2f8a08293fd1c3161cfcf13968e",
+      "bytes": 227144,
+      "sha256": "9007d1aa58d57f815b51057a917dad57cfa6e566c9e6fc4ef529013d0d3d53ad",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -255,7 +294,10 @@
         "nodes": 18,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1356976,
+      "sourceSha256": "a67508e6948723d34a29fea2bc8c96931a8fe2f8a08293fd1c3161cfcf13968e",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-knee-l",
@@ -264,8 +306,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_F_Knee_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Knee_L.glb",
       "sourceGitBlob": "93a0754dfc8888aeb1dd94eb78c0f186b1ff190c",
-      "bytes": 347952,
-      "sha256": "7cf9a73e1332ba674d92577b50ace274a774c3044d990463dc37338bc119125f",
+      "bytes": 71544,
+      "sha256": "9e77f3776aacb42ed60f1d43b39dd0919af92cfcfe5ea65908c44317c410de64",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -273,7 +315,10 @@
         "nodes": 22,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 347952,
+      "sourceSha256": "7cf9a73e1332ba674d92577b50ace274a774c3044d990463dc37338bc119125f",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-knee-r",
@@ -282,8 +327,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_F_Knee_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Knee_R.glb",
       "sourceGitBlob": "21c6783356b10448f2b53405fb9df3b0945f3c89",
-      "bytes": 347996,
-      "sha256": "f8b20c89a0bfa064d5ba0601f39e933d968fe6b34cb2dd9870b35017113118e6",
+      "bytes": 71888,
+      "sha256": "531ef071a4a892283afafa9215ec767c134c284ef8a1384356076d480a58ebd6",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -291,7 +336,10 @@
         "nodes": 22,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 347996,
+      "sourceSha256": "f8b20c89a0bfa064d5ba0601f39e933d968fe6b34cb2dd9870b35017113118e6",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-liver",
@@ -300,8 +348,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Liver.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Liver.glb",
       "sourceGitBlob": "c24c6fbcd37162e26d43a6870afc238aa27f09c1",
-      "bytes": 1738032,
-      "sha256": "ad9b0be0ff253e7bfe31bfffc00017dafce226d4f3e7804a81cbb4c2e269d598",
+      "bytes": 235084,
+      "sha256": "48f6f2dd80039597bd53ecaabff3b001cc42ea1b1ef55e63591b3b47d872c89c",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -309,7 +357,10 @@
         "nodes": 33,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1738032,
+      "sourceSha256": "ad9b0be0ff253e7bfe31bfffc00017dafce226d4f3e7804a81cbb4c2e269d598",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-lung",
@@ -318,8 +369,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Lung.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Lung.glb",
       "sourceGitBlob": "68a100eda66459764a2cd6558bd575e3006df57b",
-      "bytes": 11240608,
-      "sha256": "a6a81718f4d0974bcbab47c6dc38efc941ad5c7f5f256bf7ff112c710a7fd932",
+      "bytes": 1221100,
+      "sha256": "aeef4426e2d4ce51e97c98080fe2db359516d9ad4eb63ff0aaf1cee0edcaea55",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -327,7 +378,10 @@
         "nodes": 85,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 11240608,
+      "sourceSha256": "a6a81718f4d0974bcbab47c6dc38efc941ad5c7f5f256bf7ff112c710a7fd932",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-ovary-l",
@@ -336,8 +390,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ovary_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ovary_L.glb",
       "sourceGitBlob": "1f83e9ce3a58bc0de6c5a9cc1a5126867e43dfbc",
-      "bytes": 8984,
-      "sha256": "ed91414a667dec5e4e14aeaa2f8641731f06725dbc914bc0da3dd8b5d77f5062",
+      "bytes": 2904,
+      "sha256": "e6eedebffa94c6b4adff51188a21d25425d812246050939f74f43172e47015c3",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -345,7 +399,10 @@
         "nodes": 1,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 8984,
+      "sourceSha256": "ed91414a667dec5e4e14aeaa2f8641731f06725dbc914bc0da3dd8b5d77f5062",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-ovary-r",
@@ -354,8 +411,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ovary_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ovary_R.glb",
       "sourceGitBlob": "9af44606e833b9dd3a035e2a1d5698ae001302fd",
-      "bytes": 8744,
-      "sha256": "99cc2b91602feacaee08ec1771b993fc0f8b0e32a08bdd7fd6b990a6736aa53b",
+      "bytes": 2848,
+      "sha256": "d1f2d80770b20e1f66503b508a4a555e13e88624b1bf3a608d2895389874fdc2",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -363,7 +420,10 @@
         "nodes": 1,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 8744,
+      "sourceSha256": "99cc2b91602feacaee08ec1771b993fc0f8b0e32a08bdd7fd6b990a6736aa53b",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-pancreas",
@@ -372,8 +432,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Pancreas.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Pancreas.glb",
       "sourceGitBlob": "e3e32b07cee1e1c84689c603f8b8373180dd9bd3",
-      "bytes": 216380,
-      "sha256": "7aed6a1c35d5bd8514a8b6c77a8b57f02ffd61ba555e83405d037b8ee4e3d2f3",
+      "bytes": 39780,
+      "sha256": "deda04e6d7714506b1f2dcc16062c259e93d86eff26c8629006afae7c72d7836",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -381,7 +441,10 @@
         "nodes": 6,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 216380,
+      "sourceSha256": "7aed6a1c35d5bd8514a8b6c77a8b57f02ffd61ba555e83405d037b8ee4e3d2f3",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-pelvis",
@@ -390,8 +453,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Pelvis.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Pelvis.glb",
       "sourceGitBlob": "eb6e1ae3743c1d30250f2771e7185b4324b217e5",
-      "bytes": 1593336,
-      "sha256": "155603d0c44a8ed1e0ca307f1ec3037941304f29f4187631135a9a150fab048d",
+      "bytes": 263820,
+      "sha256": "e95bad8b1cba33c0915f952011b3a67c094a0760d721cf48b1e672b42e4d76a6",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -399,7 +462,10 @@
         "nodes": 24,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1593336,
+      "sourceSha256": "155603d0c44a8ed1e0ca307f1ec3037941304f29f4187631135a9a150fab048d",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-placenta",
@@ -408,8 +474,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Placenta.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Placenta.glb",
       "sourceGitBlob": "22e0fa26bd50da263dd70e9d5abede007b543830",
-      "bytes": 4917240,
-      "sha256": "6cc1142de48906e4e42bb1cddce901588b256a41b9b3ac300c0a739cb478cbc6",
+      "bytes": 442136,
+      "sha256": "cc0dca396d7d4b92f22768fbf8fbf95a558c7a85eff6d9b8c1a1e9dc7bd3738a",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -417,7 +483,10 @@
         "nodes": 10,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 4917240,
+      "sourceSha256": "6cc1142de48906e4e42bb1cddce901588b256a41b9b3ac300c0a739cb478cbc6",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-skin",
@@ -426,8 +495,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/integumentary/VH_F_Skin.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Skin.glb",
       "sourceGitBlob": "cbbe2b63e739d2466f10227c047a478f6f878798",
-      "bytes": 22959832,
-      "sha256": "b658bd4ffd01e0b11ba225779c9a6dd40568917a9d559d5148ba231bdec1c270",
+      "bytes": 761020,
+      "sha256": "dd0775e7ae08464f1067ca55bc460e36e2466a71f6303da01c1bf027a637ba69",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -435,7 +504,10 @@
         "nodes": 2,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 22959832,
+      "sourceSha256": "b658bd4ffd01e0b11ba225779c9a6dd40568917a9d559d5148ba231bdec1c270",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-small-intestine",
@@ -444,8 +516,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Small_Intestine.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Small_Intestine.glb",
       "sourceGitBlob": "6ca631189a55dcd5fe625be2f139048a36c11339",
-      "bytes": 856388,
-      "sha256": "34cc2d8aa0c782080cadc2e8474a727dce50f829bec3a4857202eba97e110efb",
+      "bytes": 135512,
+      "sha256": "75f3ed2d536b3cdbde8d7f62771b470435e9a9cb41a5b0c6b4f40bd5be3b319c",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -453,7 +525,10 @@
         "nodes": 11,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 856388,
+      "sourceSha256": "34cc2d8aa0c782080cadc2e8474a727dce50f829bec3a4857202eba97e110efb",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-spinal-cord",
@@ -462,8 +537,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/neurology/VH_F_Spinal_Cord.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Spinal_Cord.glb",
       "sourceGitBlob": "b7fe688162b02c9023f7de4ca2a78636282d404c",
-      "bytes": 7656588,
-      "sha256": "d9bfc840783a415068e34b8a1a9343fff40ad03d0025fafabf74f9d8664887f8",
+      "bytes": 596636,
+      "sha256": "9702d6bf454b0ddbfe0692f598e143022692ad3ea6e0778f5f0b9c6fcf55e50c",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -471,7 +546,10 @@
         "nodes": 30,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 7656588,
+      "sourceSha256": "d9bfc840783a415068e34b8a1a9343fff40ad03d0025fafabf74f9d8664887f8",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-spleen",
@@ -480,8 +558,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_F_Spleen.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Spleen.glb",
       "sourceGitBlob": "acba45ef717cd8cca488fd17cbf8dd988df68420",
-      "bytes": 276712,
-      "sha256": "e9ce0e379f86747c2d12ff56ea71a8389d97b7e1135c4e9ad1f6b4c32cf369d4",
+      "bytes": 27284,
+      "sha256": "8802ed4dd47e4b277d6a4c02b0804ab26e87804eaea803ef96b960e1cbb9ff98",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -489,7 +567,10 @@
         "nodes": 6,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 276712,
+      "sourceSha256": "e9ce0e379f86747c2d12ff56ea71a8389d97b7e1135c4e9ad1f6b4c32cf369d4",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-thymus",
@@ -498,8 +579,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_F_Thymus.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Thymus.glb",
       "sourceGitBlob": "14eac0d3ceb4d007de52237763a0819d7e21a4dc",
-      "bytes": 71928,
-      "sha256": "fce2572d19c72282353730aaa30e2a25cef0b49c2e9fce3512e329f7dcc276a4",
+      "bytes": 14420,
+      "sha256": "ce6c9c57d47e045c938a6c9e33379e1da116bf7ae4bd04067f5cdfb9360de440",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -507,7 +588,10 @@
         "nodes": 3,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 71928,
+      "sourceSha256": "fce2572d19c72282353730aaa30e2a25cef0b49c2e9fce3512e329f7dcc276a4",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-ureter-l",
@@ -516,8 +600,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ureter_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ureter_L.glb",
       "sourceGitBlob": "6d1b5084eef08232a519e53cd244cf8f0f030483",
-      "bytes": 707996,
-      "sha256": "90bdf4d8076691290dc89c3f212419bfdfc15018f210d54f359b162156206f46",
+      "bytes": 133872,
+      "sha256": "510cdb67f9640b5fa98242d313a7abefb3a6d0b5f5520f07cd4423d03ca04c1b",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -525,7 +609,10 @@
         "nodes": 32,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 707996,
+      "sourceSha256": "90bdf4d8076691290dc89c3f212419bfdfc15018f210d54f359b162156206f46",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-ureter-r",
@@ -534,8 +621,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Ureter_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Ureter_R.glb",
       "sourceGitBlob": "e7cf8de3a1afbe4dc44bb736922a38079278398f",
-      "bytes": 637764,
-      "sha256": "35259f8afd8850ed90cb3051d1d4d94575634bd28f6fa1513c906bdd4710bbb1",
+      "bytes": 124796,
+      "sha256": "66a8713afe0cfe9cc67415c80c22534cd05052287649c9e816817fd752032621",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -543,7 +630,10 @@
         "nodes": 30,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 637764,
+      "sourceSha256": "35259f8afd8850ed90cb3051d1d4d94575634bd28f6fa1513c906bdd4710bbb1",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-urinary-bladder",
@@ -552,8 +642,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Urinary_Bladder.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Urinary_Bladder.glb",
       "sourceGitBlob": "fb121cf1c9c6b3a1deddb1640120cd0dd7929d7c",
-      "bytes": 765100,
-      "sha256": "9c5732fc9628cd192bb8c8f2b4bbf22b9822a0dff5378a0d366d2f3cb2205b6a",
+      "bytes": 86344,
+      "sha256": "7719b192def6acb514e22e99275f5355753a04f08b1d6ca8a339b19be5c8ba77",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -561,7 +651,10 @@
         "nodes": 8,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 765100,
+      "sourceSha256": "9c5732fc9628cd192bb8c8f2b4bbf22b9822a0dff5378a0d366d2f3cb2205b6a",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-f-uterus",
@@ -570,8 +663,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_F_Uterus.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Uterus.glb",
       "sourceGitBlob": "05284300f02da90b7321a0dcf6a7d6d21e774770",
-      "bytes": 909772,
-      "sha256": "a484956788ecc2ab05ca7720d9b33d265677e238f144cc28481aad2f7a0c9a95",
+      "bytes": 102332,
+      "sha256": "efb20ca7de21df50978f0ee88a069fa2b8fa9542e24ed637d6200ef215b60f50",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -579,7 +672,10 @@
         "nodes": 11,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 909772,
+      "sourceSha256": "a484956788ecc2ab05ca7720d9b33d265677e238f144cc28481aad2f7a0c9a95",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-blood-vasculature",
@@ -588,8 +684,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/cardiovascular/VH_M_Blood_Vasculature.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Blood_Vasculature.glb",
       "sourceGitBlob": "90016b0b5f8028ad0afa9d39672352ffce625498",
-      "bytes": 7436204,
-      "sha256": "a31ebed6d527b1cff31942e3e50d7c074c30b574337f68c4b89e9c88e4309d0d",
+      "bytes": 1022644,
+      "sha256": "3143e7e04e250def6511beb9d2abc74c2e6e3250f11ad296b1436dad272d6c7e",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -597,7 +693,10 @@
         "nodes": 153,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 7436204,
+      "sourceSha256": "a31ebed6d527b1cff31942e3e50d7c074c30b574337f68c4b89e9c88e4309d0d",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-eye-l",
@@ -606,8 +705,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_M_Eye_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Eye_L.glb",
       "sourceGitBlob": "c4cecec60f945508bc5a513caf4ddca34b07f44a",
-      "bytes": 9610816,
-      "sha256": "052114e9184af6e1f969e45cd39597cb453379472be835851722eaf009daaa52",
+      "bytes": 1011528,
+      "sha256": "a3d20f0d58fcb87468270249c3d2f29db62cdc92d5553d02544a904e68b0bfe1",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -615,7 +714,10 @@
         "nodes": 25,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 9610816,
+      "sourceSha256": "052114e9184af6e1f969e45cd39597cb453379472be835851722eaf009daaa52",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-eye-r",
@@ -624,8 +726,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/head-brain/VH_M_Eye_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Eye_R.glb",
       "sourceGitBlob": "1a6a40174cd3e55c03b1f8cc00ef0acf41578115",
-      "bytes": 9511464,
-      "sha256": "bea519c0ef230c98899830de74806941c8cf8de857839aee21d00f348783e4a3",
+      "bytes": 1013968,
+      "sha256": "bf7a532f8d62342da42152a66c5939fba17b25bf4ff61a1535613027ad36b358",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -633,7 +735,10 @@
         "nodes": 25,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 9511464,
+      "sourceSha256": "bea519c0ef230c98899830de74806941c8cf8de857839aee21d00f348783e4a3",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-heart",
@@ -642,8 +747,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Heart.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Heart.glb",
       "sourceGitBlob": "7efc2cf858b4434249a48c6f104842e1662c9043",
-      "bytes": 4071500,
-      "sha256": "b1237e7e765178e9357fd2ea7ccf19d55d0bf9ca55e187886635febe28244c70",
+      "bytes": 424908,
+      "sha256": "860c4b80cb981078aa91233e7a4fb2ddb96be6bcce37214bde70d884507d8dbc",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -651,7 +756,10 @@
         "nodes": 18,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 4071500,
+      "sourceSha256": "b1237e7e765178e9357fd2ea7ccf19d55d0bf9ca55e187886635febe28244c70",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-kidney-l",
@@ -660,8 +768,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_M_Kidney_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Kidney_L.glb",
       "sourceGitBlob": "b243680fe62520242cabfa55a8d29a57dac5dcb7",
-      "bytes": 1536532,
-      "sha256": "733eef9ec169796196470e538dc248c4397bce0ff7ed679f7b7eb0bb9f185612",
+      "bytes": 258052,
+      "sha256": "b11c7f68c26e6df6e95d262012c0bfb6027f838e4154d8abe2c1e1d41c726cf0",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -669,7 +777,10 @@
         "nodes": 27,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1536532,
+      "sourceSha256": "733eef9ec169796196470e538dc248c4397bce0ff7ed679f7b7eb0bb9f185612",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-kidney-r",
@@ -678,8 +789,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/urinary/VH_M_Kidney_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Kidney_R.glb",
       "sourceGitBlob": "5c3330722f238d480571aff608411c9404d33b83",
-      "bytes": 1546868,
-      "sha256": "ff9821e0b8fb7fa6174a07b9cafb9f98bb25feca34ddc0e802beeefb24cd3779",
+      "bytes": 263116,
+      "sha256": "30a801b84e929ddae3c8a19922ac7cc3d5ca64a54ccd78019e98b15f611a5403",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -687,7 +798,10 @@
         "nodes": 29,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1546868,
+      "sourceSha256": "ff9821e0b8fb7fa6174a07b9cafb9f98bb25feca34ddc0e802beeefb24cd3779",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-knee-l",
@@ -696,8 +810,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_M_Knee_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Knee_L.glb",
       "sourceGitBlob": "5bb27b98c6839a906681f128ef7ccf0adbc212ee",
-      "bytes": 439644,
-      "sha256": "5280a184ece7c68bbde26d5d72468e94b478511b9e370f81f0d8ffbca7c4957d",
+      "bytes": 82648,
+      "sha256": "42dbc3b3f3b5ed5e52c1e2220d677f3fc3f305a66d215a903a1fe23f598a86f0",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -705,7 +819,10 @@
         "nodes": 22,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 439644,
+      "sourceSha256": "5280a184ece7c68bbde26d5d72468e94b478511b9e370f81f0d8ffbca7c4957d",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-knee-r",
@@ -714,8 +831,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/limbs/VH_M_Knee_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Knee_R.glb",
       "sourceGitBlob": "fc70ceeb3039cdc8b1e6c4d4face5b305784bf54",
-      "bytes": 439704,
-      "sha256": "fa894303d88ecc2337ed48cabd047604fa967d8be060aa57354a3dfe1274e1e5",
+      "bytes": 82360,
+      "sha256": "2380446219d56429f6c44966cfd51cc684f95f3c2046627734fbb8929b3b759f",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -723,7 +840,10 @@
         "nodes": 22,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 439704,
+      "sourceSha256": "fa894303d88ecc2337ed48cabd047604fa967d8be060aa57354a3dfe1274e1e5",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-liver",
@@ -732,8 +852,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Liver.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Liver.glb",
       "sourceGitBlob": "7a140a4d527b6364ee6486a540e9927dffacfe29",
-      "bytes": 1135892,
-      "sha256": "e94f18646d1b8f72cc45b92bdd67bbb4eb71d5bf954888bc8b8f8b52b3940b6a",
+      "bytes": 188664,
+      "sha256": "b81f6f93518c6481d8e250b6f2c55a0824e1d1ca1c56ae168524c237f8161985",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -741,7 +861,10 @@
         "nodes": 33,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1135892,
+      "sourceSha256": "e94f18646d1b8f72cc45b92bdd67bbb4eb71d5bf954888bc8b8f8b52b3940b6a",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-lung",
@@ -750,8 +873,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Lung.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Lung.glb",
       "sourceGitBlob": "80262031f1f90abfd1287ce70aa1290657d68087",
-      "bytes": 6355840,
-      "sha256": "e64351b72b0bc5289a4dc32ba2b402b9c974f9ec0b1972bf06b436864f917913",
+      "bytes": 901992,
+      "sha256": "c5bc4e8c6c3289789156bacb312f9c869d04569b2a586528f379da59ac222c5f",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -759,7 +882,10 @@
         "nodes": 87,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 6355840,
+      "sourceSha256": "e64351b72b0bc5289a4dc32ba2b402b9c974f9ec0b1972bf06b436864f917913",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-pancreas",
@@ -768,8 +894,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Pancreas.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Pancreas.glb",
       "sourceGitBlob": "911cb272dc9e2ee781fa5af48fbb54730a9c94e0",
-      "bytes": 265276,
-      "sha256": "ff05d94c539ec8f6ea4620d2a0128ce9911a2c3674330c8eafdb0c96b9999ea3",
+      "bytes": 46056,
+      "sha256": "17683dd53fddf241be8303e538a6422fd6f33d3693f0425bf3745cb5427b2dfd",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -777,7 +903,10 @@
         "nodes": 6,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 265276,
+      "sourceSha256": "ff05d94c539ec8f6ea4620d2a0128ce9911a2c3674330c8eafdb0c96b9999ea3",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-pelvis",
@@ -786,8 +915,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Pelvis.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Pelvis.glb",
       "sourceGitBlob": "395bebeaa1313225704b1786aa433243b66e1652",
-      "bytes": 1348060,
-      "sha256": "06349b8c70a019b3fd36d4e059e02efed915bf305cf15f8e32547732c6865b09",
+      "bytes": 224348,
+      "sha256": "8fd2a8f5976d737f8fe2b6355bd6b823f6ba89bed2d140d5b316e18db840a91e",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -795,7 +924,10 @@
         "nodes": 24,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 1348060,
+      "sourceSha256": "06349b8c70a019b3fd36d4e059e02efed915bf305cf15f8e32547732c6865b09",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-prostate",
@@ -804,8 +936,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Prostate.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Prostate.glb",
       "sourceGitBlob": "4b6b933ff2940e7f4008e57473a06e4f84358be1",
-      "bytes": 4086328,
-      "sha256": "ec1023e0a1b81f71865872bb720404abc7bb6378a54ac71fa9f24579b097f48a",
+      "bytes": 504164,
+      "sha256": "7e433af9fa3da08d665f8f88dbb95d1f3f799e08424a36917572d08b381f4ce8",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -813,7 +945,10 @@
         "nodes": 27,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 4086328,
+      "sourceSha256": "ec1023e0a1b81f71865872bb720404abc7bb6378a54ac71fa9f24579b097f48a",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-skin",
@@ -822,8 +957,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/integumentary/VH_M_Skin.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Skin.glb",
       "sourceGitBlob": "57b4af235eb34e2dce104b619c55b09ec44dae63",
-      "bytes": 5931700,
-      "sha256": "8cab299d04323e6364938a271647df5671138a2177f412e741a0d6bd4536ee1c",
+      "bytes": 297436,
+      "sha256": "63f0c2fd5611b2624f35bef4cf9a055e11e10d1a4c5c5d706b6b20f7a27da661",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -831,7 +966,10 @@
         "nodes": 1,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 5931700,
+      "sourceSha256": "8cab299d04323e6364938a271647df5671138a2177f412e741a0d6bd4536ee1c",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-small-intestine",
@@ -840,8 +978,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Small_Intestine.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Small_Intestine.glb",
       "sourceGitBlob": "aa882262ba5c25541bef6987acafe00182ec3266",
-      "bytes": 618560,
-      "sha256": "e9d05a22c0132d375f8c242ad491ea68365681904cb391e648187de5247b4570",
+      "bytes": 112832,
+      "sha256": "54fc4790b7539db2fcc5993df7e89890e85d58fbb76364c388c260e85bbbf20d",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -849,7 +987,10 @@
         "nodes": 12,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 618560,
+      "sourceSha256": "e9d05a22c0132d375f8c242ad491ea68365681904cb391e648187de5247b4570",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-spinal-cord",
@@ -858,8 +999,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/neurology/VH_M_Spinal_Cord.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Spinal_Cord.glb",
       "sourceGitBlob": "70ae7aaff86cf529df3da67600acac42bd5e82a7",
-      "bytes": 489992,
-      "sha256": "a7858d88c2237aa7d559c4c1d638923d213d2a9f46c575dea03d6ba67a9975c0",
+      "bytes": 93820,
+      "sha256": "f9e45d777fe011b6dc7f112835192cac6aad0d416c0f21819f000c49c6bdb88c",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -867,7 +1008,10 @@
         "nodes": 31,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 489992,
+      "sourceSha256": "a7858d88c2237aa7d559c4c1d638923d213d2a9f46c575dea03d6ba67a9975c0",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-spleen",
@@ -876,8 +1020,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/abdomen/VH_M_Spleen.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Spleen.glb",
       "sourceGitBlob": "096b1800255c56ce0fb06b2f2da97d9d8d868937",
-      "bytes": 540236,
-      "sha256": "572ca93068f6e7506d5653ca16292ec3048ad52957d34f389cb67c8961a7c8fb",
+      "bytes": 48760,
+      "sha256": "747b634fe96c32107033e854e32908ecae9bb8f8a619c90b91e36e3777e2dd1d",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -885,7 +1029,10 @@
         "nodes": 6,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 540236,
+      "sourceSha256": "572ca93068f6e7506d5653ca16292ec3048ad52957d34f389cb67c8961a7c8fb",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-thymus",
@@ -894,8 +1041,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/thorax/VH_M_Thymus.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Thymus.glb",
       "sourceGitBlob": "3cebb701e86e8bbe8ba90b801c77a29b3e70980c",
-      "bytes": 74876,
-      "sha256": "fd048515346fce788ade60c618743c875d26dd837815ab83f555c1ee2ff0a10d",
+      "bytes": 11592,
+      "sha256": "595c96f472ab37280d82e07e54a01543e5b98faa59ae2a5c1e43788020d609e6",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -903,7 +1050,10 @@
         "nodes": 3,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 74876,
+      "sourceSha256": "fd048515346fce788ade60c618743c875d26dd837815ab83f555c1ee2ff0a10d",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-ureter-l",
@@ -912,8 +1062,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Ureter_L.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Ureter_L.glb",
       "sourceGitBlob": "0c0e9585b5aacefa8bd52a5b1cc6ee8795499cd1",
-      "bytes": 682796,
-      "sha256": "b6e27766b5e5663fe31d96052caa49cd4fab782eed39367c26fec517b3ba0ebb",
+      "bytes": 101276,
+      "sha256": "17671b44d874324e6e798e21b7163f0017d19eca42dabb755f1dc80fbbb4ac2b",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -921,7 +1071,10 @@
         "nodes": 18,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 682796,
+      "sourceSha256": "b6e27766b5e5663fe31d96052caa49cd4fab782eed39367c26fec517b3ba0ebb",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-ureter-r",
@@ -930,8 +1083,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Ureter_R.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Ureter_R.glb",
       "sourceGitBlob": "2bbc2ffed77fc590568e60177b415d72fd1ee558",
-      "bytes": 540712,
-      "sha256": "be2d0331aed637f2f291a342ee760dda41d3418a9e2e9a4070e1e845e3b3e581",
+      "bytes": 95304,
+      "sha256": "c15f68a81672e38e4fd21c28b769b13f508d885a895e7d7c28bb1f0aa862024a",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -939,7 +1092,10 @@
         "nodes": 17,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 540712,
+      "sourceSha256": "be2d0331aed637f2f291a342ee760dda41d3418a9e2e9a4070e1e845e3b3e581",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-urethra",
@@ -948,8 +1104,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Urethra.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Urethra.glb",
       "sourceGitBlob": "a7ea134891dd3c09950fe4eb6c0e6d656f7aea42",
-      "bytes": 176688,
-      "sha256": "5cd26495cb6c674e04393ea3ed467c0ab29af870a591623f822b7e0adde4d62d",
+      "bytes": 24944,
+      "sha256": "bb5e1bf6b55210d145369c1daabd0544e8e74925239b24f47255600e73db4c93",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -957,7 +1113,10 @@
         "nodes": 3,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 176688,
+      "sourceSha256": "5cd26495cb6c674e04393ea3ed467c0ab29af870a591623f822b7e0adde4d62d",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     },
     {
       "id": "hra-1.2-vh-m-urinary-bladder",
@@ -966,8 +1125,8 @@
       "output": "tools/anatomy-3d/resources/hra-v1.2/pelvis/VH_M_Urinary_Bladder.glb",
       "source": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_M_Urinary_Bladder.glb",
       "sourceGitBlob": "e61c58959555f2c47755b46af64614aec7e031da",
-      "bytes": 198936,
-      "sha256": "43b7f17e3f498d5e494a7757ce86c183ae458f83724ceaf922f6bdd6a35ff339",
+      "bytes": 34988,
+      "sha256": "17ab78516f2c144d3380e93ec46e0396010921200c7612defa492e624884f16b",
       "license": "CC-BY-4.0",
       "attribution": "HuBMAP CCF 3D Reference Object Library / Human Reference Atlas, v1.2; Browne et al. 2022",
       "glb": {
@@ -975,7 +1134,10 @@
         "nodes": 9,
         "version": "2.0"
       },
-      "status": "staged-not-clinically-validated"
+      "status": "staged-not-clinically-validated",
+      "sourceBytes": 198936,
+      "sourceSha256": "43b7f17e3f498d5e494a7757ce86c183ae458f83724ceaf922f6bdd6a35ff339",
+      "displayCopy": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false"
     }
   ]
 }

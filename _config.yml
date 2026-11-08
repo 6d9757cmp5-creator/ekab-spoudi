@@ -1,0 +1,24 @@
+# GitHub Pages builds this repository with Jekyll. Data used only by build scripts and tests is
+# left out of the published site to keep it within the Pages size limit; it stays in the
+# repository. Jekyll's own default exclusions are repeated because a list here replaces them.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  # Raw textbook archives; the app reads only the generated indexes.
+  - tools/atla-ai/knowledge-base/full-books/complete/
+  # Superseded NIH copies; the app serves tools/atla-ai/resources/nih3d-library/models/.
+  - tools/anatomy-3d/resources/nih3d-approved/
+  - tools/patient-simulator/resources/nih3d-approved/
+  # NIH catalog and planning data read by the archive scripts only.
+  - tools/atla-ai/resources/nih3d-master-plan-2026/
+  - tools/atla-ai/resources/nih3d-biomedical-scope-2026/
+  - tools/atla-ai/resources/nih3d-medical-index/
+  - tools/atla-ai/resources/nih3d-knowledge-graph/
+  - tools/atla-ai/resources/nih3d-catalog/
+  # BodyParts3D 4.0 source download; the atlas loads the built meshes.
+  - tools/anatomy-3d/resources/bp3d40/atlases/bp3d40/raw/
