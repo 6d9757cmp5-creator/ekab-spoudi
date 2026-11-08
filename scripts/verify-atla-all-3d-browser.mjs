@@ -58,7 +58,7 @@ try {
       const text=await page.locator('#source-status').textContent();
       if(!text.includes('Φορτώθηκε')||await page.locator('#source-status').getAttribute('data-error')==='true')
        throw Error('Viewer rejected file: '+text);
-      const hasCanvas=await page.locator('#source-canvas canvas').count()>0;
+      const hasCanvas=await page.locator('canvas#source-canvas').count()>0;
       const meshes=await page.locator('#source-part option').count();
       if(!hasCanvas||meshes<1)throw Error('No actual canvas / selectable mesh elements: '+meshes);
       report.passes++;ok++;
