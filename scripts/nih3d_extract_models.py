@@ -32,6 +32,17 @@ def range_of(groups, entry_id):
             return base
     return None
 
+def fetch_json(url):
+    """A RESULT manifest, retried because Releases answer with transient 5xx under load."""
+    for attempt in range(5):
+        try:
+            with anonymous(url) as response:
+                return json.load(response)
+        except OSError:
+            if attempt == 4:
+                raise
+            time.sleep(15 * (attempt + 1))
+
 def pack_of(result):
     """Files are packed in RESULT order, so cumulative pack counts give each file's package."""
     owner, index = {}, 0
@@ -55,8 +66,7 @@ def plan(groups, entry_ids):
             continue
         by_range.setdefault(base, []).append(entry_id)
     for base, ids in sorted(by_range.items()):
-        with anonymous(groups[base]['result']['browser_download_url']) as response:
-            result = json.load(response)
+        result = fetch_json(groups[base]['result']['browser_download_url'])
         owner = pack_of(result)
         for entry_id in ids:
             row = smallest_glb([r for r in result['modelFiles'] if r['entryId'] == entry_id])

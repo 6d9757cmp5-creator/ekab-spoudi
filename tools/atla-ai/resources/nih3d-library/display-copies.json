@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
  "gltfTransform": "4.5.1",
- "settings": "optimize --compress draco --texture-compress webp --simplify false",
- "scope": "Display copies for phones: Draco geometry and WebP textures, no simplification. Only zero-area triangles may be dropped.",
+ "settings": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+ "scope": "Display copies for phones: Draco geometry and WebP textures, no simplification and no merging. Only zero-area triangles may be dropped; every selectable part is kept.",
  "models": {
   "3DPX-000010": {
    "entryId": 10,
@@ -33,8 +33,8 @@
     }
    },
    "display": {
-    "bytes": 18432,
-    "sha256": "73f8e75903e973914b60b5997843c500a3e44e1826c652688f780dd38d002a20",
+    "bytes": 18468,
+    "sha256": "56ed5c59275ca9d071347e71ce8a988765d6bec03d536b2861a6499662e0eac6",
     "triangles": 4976,
     "boundsDrift": 1.515e-05
    }
@@ -50,8 +50,8 @@
     }
    },
    "display": {
-    "bytes": 25664,
-    "sha256": "33e88d6f3c27cf830d4daf8a5cd30c5f44a9b9f712f1ed8f94cf1af00d397ba0",
+    "bytes": 25700,
+    "sha256": "6d3269565807e5eeda70556dcbcbf6ad19f498c6605be73b3c957676939bbe32",
     "triangles": 7804,
     "boundsDrift": 8.744e-06
    }
@@ -118,8 +118,8 @@
     }
    },
    "display": {
-    "bytes": 21920,
-    "sha256": "2324f88e6f52474863cff5fc95f21b40a1e6b7234effa3e3722be5d2268089dd",
+    "bytes": 22236,
+    "sha256": "3aadd5e8248586d0bf3f3c6b23529f3cebfb16544835de342db64972100a1dab",
     "triangles": 6952,
     "boundsDrift": 2.127e-05
    }
@@ -221,8 +221,8 @@
     }
    },
    "display": {
-    "bytes": 34744,
-    "sha256": "94cdb10cb16aadc6be83e4a91cafd6300c6088d7788ce3270461864f8a644a24",
+    "bytes": 34780,
+    "sha256": "004c964d2a0254dc7f0c2a89df756a246f215950944686d790634f297f0444ec",
     "triangles": 11336,
     "boundsDrift": 1.355e-07
    }
@@ -285,9 +285,8 @@
     "bytes": 15153584,
     "sha256": "db3e49192ec3af2684890db3a40e94b9c478e977f6f9fa33e330b6da22e44acf",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-014.tar.zst",
-     "file": "000320-002-fullbrain-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-000320/002.glb"
     }
    },
    "display": {
@@ -514,9 +513,8 @@
     "bytes": 17250408,
     "sha256": "49501dc6cd888f0257540db49435aab0cfc30400965a213a3039b318a5f24498",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-027.tar.zst",
-     "file": "000339-002-instabilidade_pre_op_glenoide_repaired-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-000339/002.glb"
     }
    },
    "display": {
@@ -586,9 +584,8 @@
     "bytes": 16896132,
     "sha256": "27d433521084bba96734cda0531a80af9ed0cc38fb485a3e0ae200a5091815b0",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-028.tar.zst",
-     "file": "000343-002-ombro_hill_sachs_e_bankart_limpo-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-000343/002.glb"
     }
    },
    "display": {
@@ -655,9 +652,8 @@
     "bytes": 18542144,
     "sha256": "da715000a140d593aba3ae2abdb93f60d24353ec3d89452dbd0cdaa81c6b225d",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-028.tar.zst",
-     "file": "000347-002-po_tnz_com_placa_azul_limpo_simplificado-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-000347/002.glb"
     }
    },
    "display": {
@@ -798,9 +794,8 @@
     "bytes": 14359860,
     "sha256": "8445b3c37f5f890b62fea01cab39cbf0ea272854f5a3bb2142bf37bd9fe5f7ae",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-029.tar.zst",
-     "file": "000355-002-umero_proximal_glenoide_tub_menor_tub_maior_limpo_simplificado-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-000355/002.glb"
     }
    },
    "display": {
@@ -995,9 +990,8 @@
     "bytes": 14047028,
     "sha256": "4754f795e70ac1f12a69a2921d4c508af7b9944f9034c194a8ea7ef1222f5a3c",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-039.tar.zst",
-     "file": "000389-002-plato_limpo_simplificado_0-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-000389/002.glb"
     }
    },
    "display": {
@@ -1013,9 +1007,8 @@
     "bytes": 14007220,
     "sha256": "b812288381fa5cff1403d297f64261b3e017261c9cf21b36b53389fe9b3e1aaa",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-039.tar.zst",
-     "file": "000390-002-fx_patela_osteoporose_limpo-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-000390/002.glb"
     }
    },
    "display": {
@@ -1031,9 +1024,8 @@
     "bytes": 12582192,
     "sha256": "723965b2b95882a31c2e5cbb32f9c4588effb6374e948a8e646d514cde1aeb66",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-039.tar.zst",
-     "file": "000391-002-punho_normal-escafoide_limpo_simplificado-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-000391/002.glb"
     }
    },
    "display": {
@@ -1537,8 +1529,8 @@
     }
    },
    "display": {
-    "bytes": 30800,
-    "sha256": "524b10300ff748f2e295202e4a7be64df9a006d6f3d7a0ea747b93aceb23a380",
+    "bytes": 30836,
+    "sha256": "ed73a880b5bba431b7c2dd1ed8b7f930f05e22e96d9749ec25a43affa786514a",
     "triangles": 10352,
     "boundsDrift": 2.44e-05
    }
@@ -1572,8 +1564,8 @@
     }
    },
    "display": {
-    "bytes": 16868,
-    "sha256": "12ae6f6a09388edd12dec29ab399a96fa84f00eb7e093fcab321f825bbc063d9",
+    "bytes": 16904,
+    "sha256": "fbc1f8807b9ddaec0fd2710ba81ff6d815aa92510b65c8dea9d3f0afb1b8d211",
     "triangles": 4772,
     "boundsDrift": 2.107e-05
    }
@@ -1862,9 +1854,8 @@
     "bytes": 12113168,
     "sha256": "400f6d9e4210854028a5e329dcaf301647a5bcb504eb3a17427e1bbde63a7a2a",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00801-00900-part-000.tar.zst",
-     "file": "000811-002-col_lombar_artrose_l4l5-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-000811/002.glb"
     }
    },
    "display": {
@@ -1880,9 +1871,8 @@
     "bytes": 16457588,
     "sha256": "13dbdc0586f0f7da6b91c2f84489f7ed4583c7e49b83b71ca32e1092e8850165",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00801-00900-part-000.tar.zst",
-     "file": "000812-002-col_lombar_com_artrose-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-000812/002.glb"
     }
    },
    "display": {
@@ -1898,9 +1888,8 @@
     "bytes": 12904848,
     "sha256": "7cc60487e24cac968cc70081251bbef4e09a8675e010345116e2e735921eb865",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00801-00900-part-000.tar.zst",
-     "file": "000813-002-col_lombar_fratura-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-000813/002.glb"
     }
    },
    "display": {
@@ -2381,9 +2370,8 @@
     "bytes": 16019792,
     "sha256": "e1d8326a86544dda39ad387635e4ae9371701fb08b83ce74da001f1ba4bdc950",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00901-01000-part-004.tar.zst",
-     "file": "000902-002-upper_mandible-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-000902/002.glb"
     }
    },
    "display": {
@@ -2522,9 +2510,8 @@
     "bytes": 3256840,
     "sha256": "d1ececfd6c7fdc1a210fba70e08c374e3e0cbf79e4537d4779df48e3fff22eed",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-01201-01300-part-001.tar.zst",
-     "file": "001204-012-cm0017_bpc_a-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-001204/012.glb"
     }
    },
    "display": {
@@ -2557,9 +2544,8 @@
     "bytes": 16494120,
     "sha256": "02c3e92cd1a80264b48a9e3a0b822e3642ea5f1d000494f77fc92d56f4c7b744",
     "archive": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-01201-01300-part-023.tar.zst",
-     "file": "001277-002-brain_vessels-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-001277/002.glb"
     }
    },
    "display": {
@@ -2615,8 +2601,8 @@
     }
    },
    "display": {
-    "bytes": 558028,
-    "sha256": "e96c2d0ba9415eb8f26674f8d6c88024bd46c11a6429e30818cb01091f19d89b",
+    "bytes": 558064,
+    "sha256": "232f282d570c085f7009f653b65e6effbeae4b73c7fc22e2343dbdf827148670",
     "triangles": 191166,
     "boundsDrift": 2.883e-05
    }
@@ -2855,9 +2841,8 @@
     "bytes": 13630232,
     "sha256": "4827be34042c0e786d39c790cdebe36483c5560dcfb576fc628568c8e334d1b4",
     "archive": {
-     "release": "ekab-nih3d-recovered-02001-02100",
-     "package": "atla-nih3d-02001-02100-part-044.tar.zst",
-     "file": "002058-002-heart_model_-_whole-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-002058/002.glb"
     }
    },
    "display": {
@@ -3147,8 +3132,8 @@
     }
    },
    "display": {
-    "bytes": 2459604,
-    "sha256": "fc5bc3158e44ad8fca37d245222070e7e0fdd2d7eade47230745bca5bddab932",
+    "bytes": 2459684,
+    "sha256": "1b499e431c4e75b53f8b2f9e7a4cb5fc84da45a4b300e9888754232b87837abc",
     "triangles": 1000000,
     "boundsDrift": 1.765e-05
    }
@@ -3165,8 +3150,8 @@
     }
    },
    "display": {
-    "bytes": 2553220,
-    "sha256": "d8ef0b41d8e997016cc81353733e60d3115dcc666370c8a3a8a9608424b7a1fd",
+    "bytes": 2553300,
+    "sha256": "7bab354f1191b06fab4b09bb4485da29b6750faeb184348b0b881bdbcece7460",
     "triangles": 1038022,
     "boundsDrift": 2.422e-05
    }
@@ -3183,8 +3168,8 @@
     }
    },
    "display": {
-    "bytes": 2462112,
-    "sha256": "3ee58571d98930db6c1665bf5212436be135c11ab4d01e755d4420bafc4c0013",
+    "bytes": 2462192,
+    "sha256": "11d643c4d5221e5d82fcb9b98929c7c5afc3debe1248fb93feeb7e9e2e62e8e8",
     "triangles": 1019020,
     "boundsDrift": 2.889e-05
    }
@@ -3201,8 +3186,8 @@
     }
    },
    "display": {
-    "bytes": 2541688,
-    "sha256": "3ececf0b3b2677faa9fca047d29748a1bc959158d300879681945ad6a9538e71",
+    "bytes": 2541768,
+    "sha256": "8f4c4509b46bd1f54d3b535418547bef8df74da5032fe38c3a87cdaf813b33a0",
     "triangles": 1010921,
     "boundsDrift": 2.561e-05
    }
@@ -3532,9 +3517,8 @@
     "bytes": 13063536,
     "sha256": "dd34ec824eb9af7b070f3b1a43d3da84a2903bdb7105f12d335398503b1fd7ce",
     "archive": {
-     "release": "ekab-nih3d-recovered-03301-03400",
-     "package": "atla-nih3d-03301-03400-part-043.tar.zst",
-     "file": "003378-002-darryl_skull_ct-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-003378/002.glb"
     }
    },
    "display": {
@@ -3714,8 +3698,8 @@
     }
    },
    "display": {
-    "bytes": 226216,
-    "sha256": "e32372a24f69b9bf94f30b885471d9201af33a9f6d3e55b15c106c0bf9ab076c",
+    "bytes": 226264,
+    "sha256": "96bfa42498a44220baa403372fc7e519d38c3c4aa7d7fd7b7f74f7eb7c163b64",
     "triangles": 132468,
     "boundsDrift": 8.366e-06
    }
@@ -3924,9 +3908,8 @@
     "bytes": 14826592,
     "sha256": "1093b048cc46b574b7ae8f44997ebc34635bc6e09f007971db4e6e4650f5d739",
     "archive": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-000.tar.zst",
-     "file": "004803-002-ferraro_0-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-004803/002.glb"
     }
    },
    "display": {
@@ -3978,9 +3961,8 @@
     "bytes": 13814592,
     "sha256": "3402ad20514f4c528e790e0f6b729e5f52cbe8bc6598ccd1376b3a7affb6c4ce",
     "archive": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-000.tar.zst",
-     "file": "004807-002-glunk-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-004807/002.glb"
     }
    },
    "display": {
@@ -3996,9 +3978,8 @@
     "bytes": 13767028,
     "sha256": "f8339ebe9a4850deb178e7224934649ffbd835474108292007dfde0fe6874d65",
     "archive": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-000.tar.zst",
-     "file": "004808-002-olliff-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-004808/002.glb"
     }
    },
    "display": {
@@ -4103,9 +4084,8 @@
     "bytes": 10512004,
     "sha256": "a0fefc2ea187e3bb8e53dedf0db480444eaa8fee7cc3bc46eb926d909a1c4425",
     "archive": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-001.tar.zst",
-     "file": "004816-002-glass-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:77fb18fbe46592d6a7eed6aa84657c5bda83fb53bac28d173f14a327a730089b",
+     "file": "originals/3DPX-004816/002.glb"
     }
    },
    "display": {
@@ -4139,9 +4119,8 @@
     "bytes": 12972472,
     "sha256": "c86e857ffda199f4a6fc60d1d7525cf3df60faaa0804758e6bbfe130477b9928",
     "archive": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-001.tar.zst",
-     "file": "004818-002-green-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-004818/002.glb"
     }
    },
    "display": {
@@ -4377,8 +4356,8 @@
     }
    },
    "display": {
-    "bytes": 29292,
-    "sha256": "9113bdf4b5cef0419e4e3297c7aa61f8d919bcc84874951a32fe648f1882a288",
+    "bytes": 29328,
+    "sha256": "5359c4051840f1b901e3dd86bf80e2e6849ea47728e707e4a0ce6336aa4aca3e",
     "triangles": 9748,
     "boundsDrift": 2.425e-05
    }
@@ -4517,8 +4496,8 @@
     }
    },
    "display": {
-    "bytes": 2769328,
-    "sha256": "d4e64759c60db5cad19270656647b6092839877a79bcf750b5bd4183726233ed",
+    "bytes": 2769408,
+    "sha256": "0affa5554b8aa64c1beb0850c8a9d1e90146c88f4430549b832bb5ceb4bd062d",
     "triangles": 1000000,
     "boundsDrift": 3.038e-05
    }
@@ -4570,8 +4549,8 @@
     }
    },
    "display": {
-    "bytes": 2907600,
-    "sha256": "0baebd9fb16b7980c3f8df42398113a19fc141aa53f5bb8c2c1a3bb33f5cc8ff",
+    "bytes": 2907680,
+    "sha256": "8b1155e88a54cdc172333878d3b8d6742a29b0b01f55becd30f08efad4aa6167",
     "triangles": 999999,
     "boundsDrift": 2.956e-05
    }
@@ -4582,9 +4561,8 @@
     "bytes": 9715052,
     "sha256": "9941410800afd7c2558b8b27a254a8a7b4614972fff27f050f67b7416f8a94fd",
     "archive": {
-     "release": "ekab-nih3d-recovered-08301-08400",
-     "package": "atla-nih3d-08301-08400-part-049.tar.zst",
-     "file": "008379-002-4.14.2017.1a_3m_no_supports_1-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:77fb18fbe46592d6a7eed6aa84657c5bda83fb53bac28d173f14a327a730089b",
+     "file": "originals/3DPX-008379/002.glb"
     }
    },
    "display": {
@@ -4724,9 +4702,8 @@
     "bytes": 15685696,
     "sha256": "af0ac03a3c970baea5f04f83c92f870baca7ec09f447d25928d1de0fa37246c0",
     "archive": {
-     "release": "ekab-nih3d-recovered-08901-09000",
-     "package": "atla-nih3d-08901-09000-part-041.tar.zst",
-     "file": "008970-002-aorta-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-008970/002.glb"
     }
    },
    "display": {
@@ -4829,9 +4806,8 @@
     "bytes": 17303432,
     "sha256": "e938348f667db6039638652368465b2fd62a5051665d98484929a32f30273499",
     "archive": {
-     "release": "ekab-nih3d-recovered-09501-09600",
-     "package": "atla-nih3d-09501-09600-part-006.tar.zst",
-     "file": "009511-002-top_heart-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-009511/002.glb"
     }
    },
    "display": {
@@ -4847,9 +4823,8 @@
     "bytes": 12160188,
     "sha256": "72d03594d994ecfce67059163a8c514d69f85954a50e2ecca728d49de7845978",
     "archive": {
-     "release": "ekab-nih3d-recovered-10601-10700",
-     "package": "atla-nih3d-10601-10700-part-028.tar.zst",
-     "file": "010649-002-rein_impri-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-010649/002.glb"
     }
    },
    "display": {
@@ -4957,8 +4932,8 @@
     }
    },
    "display": {
-    "bytes": 60768,
-    "sha256": "73622fe09ca7766626f7d2fe534217f00c260305b8b423ae3ce261f542d3a01c",
+    "bytes": 60808,
+    "sha256": "cd31db4fdfef163e19fb86b9b9682121c99bacfa6b204c2f377c08b4db79a423",
     "triangles": 17740,
     "boundsDrift": 5.406e-06
    }
@@ -5193,24 +5168,6 @@
     "boundsDrift": 2.897e-05
    }
   },
-  "3DPX-014841": {
-   "entryId": 14841,
-   "original": {
-    "bytes": 3942408,
-    "sha256": "974099026da2cecb3fbcc75e0953f06d5c1d2ca1f93deefbad5deb99d025738d",
-    "archive": {
-     "release": "ekab-nih3d-recovered-14801-14900",
-     "package": "atla-nih3d-14801-14900-part-023.tar.zst",
-     "file": "014841-017-sm_l5_0-nih3d.glb.glb"
-    }
-   },
-   "display": {
-    "bytes": 205160,
-    "sha256": "3b3b54e9e33716a6e769e81f678f33924fe201202aeae9482af42cce7068008a",
-    "triangles": 46926,
-    "boundsDrift": 2.963e-05
-   }
-  },
   "3DPX-014845": {
    "entryId": 14845,
    "original": {
@@ -5252,9 +5209,8 @@
     "bytes": 3049444,
     "sha256": "8bb49adf7cbf7edd1484e2760be92da0c016bfa47e1f05a15f959283f19e0802",
     "archive": {
-     "release": "ekab-nih3d-recovered-15501-15600",
-     "package": "atla-nih3d-15501-15600-part-054.tar.zst",
-     "file": "015597-002-treponema_succinifaciens_3d_model-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-015597/002.glb"
     }
    },
    "display": {
@@ -5270,9 +5226,8 @@
     "bytes": 3073744,
     "sha256": "7723112c79f82fd0f1a95eb121fcfdb371e6d2c149e764694213dc848a7e5792",
     "archive": {
-     "release": "ekab-nih3d-recovered-15501-15600",
-     "package": "atla-nih3d-15501-15600-part-054.tar.zst",
-     "file": "015598-002-treponema_succinifaciens_3d_model_numbered_21-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-015598/002.glb"
     }
    },
    "display": {
@@ -5358,9 +5313,8 @@
     "bytes": 15520764,
     "sha256": "d9d0ba1def8c9a7f180346a5fc875afae57fab402d82f47bae073574b32591f6",
     "archive": {
-     "release": "ekab-nih3d-recovered-16401-16500",
-     "package": "atla-nih3d-16401-16500-part-010.tar.zst",
-     "file": "016412-002-cm0098_pa_aneurysm_aorta_stent_calcium-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-016412/002.glb"
     }
    },
    "display": {
@@ -5715,9 +5669,8 @@
     "bytes": 17608416,
     "sha256": "4c0718d3558c1907c55ef2ea163f5f09de716bbf25e8d34fb8e62b0476b746a4",
     "archive": {
-     "release": "ekab-nih3d-recovered-16801-16900",
-     "package": "atla-nih3d-16801-16900-part-017.tar.zst",
-     "file": "016824-002-mysegmenter_tibia-r-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-016824/002.glb"
     }
    },
    "display": {
@@ -5733,9 +5686,8 @@
     "bytes": 17458200,
     "sha256": "8f463e015cca127bbc7b70707d9a86e2eae3fb895a8eef1a5f1ef59a797f6240",
     "archive": {
-     "release": "ekab-nih3d-recovered-16801-16900",
-     "package": "atla-nih3d-16801-16900-part-017.tar.zst",
-     "file": "016825-002-mysegmenter_tibia-l-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:364eee544c5a3caddc4e11eeaff678c4bec0d4a2907e1d9faff92441b5d70997",
+     "file": "originals/3DPX-016825/002.glb"
     }
    },
    "display": {
@@ -6075,8 +6027,8 @@
     }
    },
    "display": {
-    "bytes": 8408,
-    "sha256": "b4df479337c77166c98f5af3ef6573882f357c0195aa769e584797b8a2a69420",
+    "bytes": 8488,
+    "sha256": "0a2f3148f2b5adec07b266384fcca189217ca8a71e1ea9b7278cb688c4e0f66b",
     "triangles": 2876,
     "boundsDrift": 1.676e-05
    }
@@ -6087,9 +6039,8 @@
     "bytes": 1213656,
     "sha256": "e4a7ce5ff4a7fc264304a892f38191d19102198cfbbbec3141ca3911e4b6df31",
     "archive": {
-     "release": "ekab-nih3d-recovered-17901-18000",
-     "package": "atla-nih3d-17901-18000-part-063.tar.zst",
-     "file": "017975-002-rod_bottom-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-017975/002.glb"
     }
    },
    "display": {
@@ -6161,8 +6112,8 @@
     }
    },
    "display": {
-    "bytes": 6144,
-    "sha256": "28cf6842b824a93294b87814ffcd7b2a2ffe2d6a6a8e8e5d66f0f212ada1009d",
+    "bytes": 6200,
+    "sha256": "eca7c4d65a714c6801a1b170626b1f0e57fe774ebd71f1f59ca9afbfd12080a1",
     "triangles": 1916,
     "boundsDrift": 2.88e-05
    }
@@ -6179,8 +6130,8 @@
     }
    },
    "display": {
-    "bytes": 416184,
-    "sha256": "ce887c086fa96102f961eb91fbc5646834f6bc13854a7aec4655febc0f4118eb",
+    "bytes": 416216,
+    "sha256": "32ac91d5309d7c5f2e4627aec2493cd778265bc348e0dec622c57775e7265332",
     "triangles": 261320,
     "boundsDrift": 2.239e-05
    }
@@ -6196,8 +6147,8 @@
     }
    },
    "display": {
-    "bytes": 563468,
-    "sha256": "4077bd31c8cd7e1b85b48a663e904b9107b069b223401c3eb55fdc64604f6fb9",
+    "bytes": 563500,
+    "sha256": "9ab3c164a3b1ff29c3b3e401a28d385be9233964625e844f01cd9502ef138533",
     "triangles": 358250,
     "boundsDrift": 9.16e-06
    }
@@ -6214,8 +6165,8 @@
     }
    },
    "display": {
-    "bytes": 681636,
-    "sha256": "3f34fa4285696c782082c33f51208519e574ff0cbd454bf2104d27c3fd717d31",
+    "bytes": 681668,
+    "sha256": "8ad01bf29e2440b530938d550c55d642aba891c0d22a314315dfc23172b32686",
     "triangles": 461052,
     "boundsDrift": 3.039e-05
    }
@@ -6226,9 +6177,8 @@
     "bytes": 292888,
     "sha256": "0d87fbceeab3c8f956de2888a0c7281c52dea62c300f8c31d0bd9696c0f6dfa9",
     "archive": {
-     "release": "ekab-nih3d-recovered-20201-20300",
-     "package": "atla-nih3d-20201-20300-part-048.tar.zst",
-     "file": "020292-002-brace_plate-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:5a46c17db6c9ef5553bcda513f6b9063c1f01eb7703013f45d4a47a265d79755",
+     "file": "originals/3DPX-020292/001.glb"
     }
    },
    "display": {
@@ -6300,10 +6250,10 @@
     }
    },
    "display": {
-    "bytes": 472044,
-    "sha256": "94433d70de728ce2a66e1dfce959f9e838db78bc3a6e81a01f0f687871c13055",
+    "bytes": 500984,
+    "sha256": "6179de96565f966e1788537f750f27dcabadb4719736810c414a50a9928b9df6",
     "triangles": 53745,
-    "boundsDrift": 1.541e-05
+    "boundsDrift": 1e-05
    }
   },
   "3DPX-020598": {
@@ -6336,8 +6286,8 @@
     }
    },
    "display": {
-    "bytes": 2965068,
-    "sha256": "5b4c1cf74d0dc37434d6c59a196c333403966c2861ed3fdfd55a161430e6f868",
+    "bytes": 2965148,
+    "sha256": "0c5af8c28940d38958ad826c13ea111a6064ffd5ccb1398116c75b365c807381",
     "triangles": 1160040,
     "boundsDrift": 6.403e-06
    }
@@ -6354,10 +6304,10 @@
     }
    },
    "display": {
-    "bytes": 1448352,
-    "sha256": "dcf3a70fb088672b08f697fcdf18a72cab6d2124fda06928922f1c5f634f78fa",
+    "bytes": 1471636,
+    "sha256": "95131fdbaf5c05b8e601dfccdb069161764c5ff7ed415c5ff3b9fd93b14bff40",
     "triangles": 614528,
-    "boundsDrift": 1.989e-05
+    "boundsDrift": 1.194e-05
    }
   },
   "3DPX-020871": {
@@ -6372,8 +6322,8 @@
     }
    },
    "display": {
-    "bytes": 13708040,
-    "sha256": "d6df77b9da2256902b75b54dcf6e3ca61a0cc47d756a864803ed693b7555c166",
+    "bytes": 13931108,
+    "sha256": "abd0cbdba8410038c86389ea5d1d442fda36fb36d36386293ced1d8615d86036",
     "triangles": 3246035,
     "boundsDrift": 2.681e-05
    }
@@ -6390,8 +6340,8 @@
     }
    },
    "display": {
-    "bytes": 13165176,
-    "sha256": "fee0f434db1d4897c45147ec0b0e8abace34ac02abd161436f745cd7f7cb2dcf",
+    "bytes": 13337216,
+    "sha256": "fcea000445b289653653b88544fcf1a69c80f6e6cd5742fe7c1ee3c5d3fdb9c5",
     "triangles": 3077629,
     "boundsDrift": 2.917e-05
    }
@@ -6402,16 +6352,15 @@
     "bytes": 12149388,
     "sha256": "2c1156671e2762e4c23c7049dcbed32596c390a0f18234cd474b0fc088b66074",
     "archive": {
-     "release": "ekab-nih3d-recovered-20901-21000",
-     "package": "atla-nih3d-20901-21000-part-053.tar.zst",
-     "file": "020959-001-3d-vh-f-allen-brain-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:77fb18fbe46592d6a7eed6aa84657c5bda83fb53bac28d173f14a327a730089b",
+     "file": "originals/3DPX-020959/001.glb"
     }
    },
    "display": {
-    "bytes": 1996420,
-    "sha256": "86fc1b88b74c82c1da90865f077dcfbf82a71a67b3c144faf0eac7c8a89d876c",
+    "bytes": 2463428,
+    "sha256": "6054d2683bcc8a7e1ed196c27b4a3389bf86f041e7b3aa9df30abf25e51960f9",
     "triangles": 653210,
-    "boundsDrift": 1.916e-05
+    "boundsDrift": 1.534e-05
    }
   },
   "3DPX-020960": {
@@ -6420,16 +6369,15 @@
     "bytes": 12149092,
     "sha256": "737c9988a1e7cd69562546b4e19f2ce751fb7348206d1ed70f7b93d008890288",
     "archive": {
-     "release": "ekab-nih3d-recovered-20901-21000",
-     "package": "atla-nih3d-20901-21000-part-053.tar.zst",
-     "file": "020960-001-3d-vh-m-allen-brain-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:77fb18fbe46592d6a7eed6aa84657c5bda83fb53bac28d173f14a327a730089b",
+     "file": "originals/3DPX-020960/001.glb"
     }
    },
    "display": {
-    "bytes": 1996548,
-    "sha256": "bb2177559ec1ee76fc57c883bf5535733f6dd9dbe5f524a960abee8eb1af1359",
+    "bytes": 2463572,
+    "sha256": "55183786cfff74b84cd6e735ec088347a20e46dbd1bba59e7bfe31e684210899",
     "triangles": 653210,
-    "boundsDrift": 1.905e-05
+    "boundsDrift": 1.57e-05
    }
   },
   "3DPX-020962": {
@@ -6444,8 +6392,8 @@
     }
    },
    "display": {
-    "bytes": 1528720,
-    "sha256": "db175c3dce34732ab8730ee13f32566087860f0fc9ce41a371bd47405096a65b",
+    "bytes": 1522072,
+    "sha256": "8a2619ac6621c334327d178696ef79703b18d90c8420d6296d185cd8d026fbdb",
     "triangles": 346625,
     "boundsDrift": 2.546e-05
    }
@@ -6462,8 +6410,8 @@
     }
    },
    "display": {
-    "bytes": 1518456,
-    "sha256": "0a5b4c8a77924755bb21414d8a19626e5fb65b3950460351004c28c92182882f",
+    "bytes": 1509256,
+    "sha256": "44bb39d4639efc488a81f916d7a5cb91566beec5859088afbb2cc8ada6503123",
     "triangles": 346625,
     "boundsDrift": 2.546e-05
    }
@@ -6479,10 +6427,10 @@
     }
    },
    "display": {
-    "bytes": 217144,
-    "sha256": "4d106f9e839a7db3040b012cf9efcabc890af8a2618712aa4fab5247b5cfc269",
+    "bytes": 242632,
+    "sha256": "2ec2a3389ab6cf57d338308bc74b1c0bbfa2f6df95d2409ff212409f68c5b221",
     "triangles": 85914,
-    "boundsDrift": 2.133e-05
+    "boundsDrift": 3.1e-06
    }
   },
   "3DPX-020967": {
@@ -6496,8 +6444,8 @@
     }
    },
    "display": {
-    "bytes": 194708,
-    "sha256": "b41a8c18ab248ebf8189cf19684a19a2346daa07f125918445302f8302d6ade2",
+    "bytes": 214336,
+    "sha256": "9e36edc3e1f21e9e0b8192dd664a6d3ea0356658eb93370f921ac4b1b730fc36",
     "triangles": 72784,
     "boundsDrift": 2.545e-05
    }
@@ -6513,8 +6461,8 @@
     }
    },
    "display": {
-    "bytes": 201804,
-    "sha256": "cbb0008dab78bed9ff3e775ec3d1453a497c1d0d7203079db5d8c3bbfde2defe",
+    "bytes": 222480,
+    "sha256": "c36a2872460347c05038dbb1dbbbfa08c93223524c44a7b98948f32de0326322",
     "triangles": 74281,
     "boundsDrift": 2.863e-05
    }
@@ -6531,10 +6479,10 @@
     }
    },
    "display": {
-    "bytes": 45888,
-    "sha256": "19ece07bb4c533432fe05b11c3e278eda10cd05a220eedf580b84edcd0bc1b18",
+    "bytes": 65324,
+    "sha256": "807b4240ec2eb4946c935572b2f403580a9d0f4163b3a1799be85dc79f894b7a",
     "triangles": 17844,
-    "boundsDrift": 2.9e-05
+    "boundsDrift": 3.302e-06
    }
   },
   "3DPX-020970": {
@@ -6549,10 +6497,10 @@
     }
    },
    "display": {
-    "bytes": 46164,
-    "sha256": "64f84b9f42729f80179ad90282048158a16bbdfc6fe414c7864c4aa1c6045460",
+    "bytes": 65656,
+    "sha256": "47cf6b98b0f9eff37426c31a046eb7860648df9109be57d94301c4fa009a9947",
     "triangles": 17844,
-    "boundsDrift": 2.899e-05
+    "boundsDrift": 1.289e-05
    }
   },
   "3DPX-020972": {
@@ -6567,10 +6515,10 @@
     }
    },
    "display": {
-    "bytes": 47868,
-    "sha256": "92a08cea9995409eed3ef09b001f9c6529221bb5ff0be266ca4f7389efaedda7",
+    "bytes": 58696,
+    "sha256": "8c9bc5adb2f5c80edd9c63759285cbbed2183afb160a7ba33b7f16c605016a17",
     "triangles": 17491,
-    "boundsDrift": 2.874e-05
+    "boundsDrift": 1.549e-05
    }
   },
   "3DPX-020973": {
@@ -6585,10 +6533,10 @@
     }
    },
    "display": {
-    "bytes": 195404,
-    "sha256": "61d72838e7e07bfa21d0e8b12cefa18b9d31e4cf5b31ddb2924152380d4da1e8",
+    "bytes": 227084,
+    "sha256": "1dd766928c77073caaa18f55f608e012b828bdb8b75f5cba39017f4ced088331",
     "triangles": 93303,
-    "boundsDrift": 1.93e-06
+    "boundsDrift": 1.519e-05
    }
   },
   "3DPX-020974": {
@@ -6597,16 +6545,15 @@
     "bytes": 21308976,
     "sha256": "58dd66461fc29a8e9002583b18edf22182cac2fae6d6d819b463826524eff242",
     "archive": {
-     "release": "ekab-nih3d-recovered-20901-21000",
-     "package": "atla-nih3d-20901-21000-part-053.tar.zst",
-     "file": "020974-001-3d-vh-f-lung-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+     "file": "originals/3DPX-020974/001.glb"
     }
    },
    "display": {
-    "bytes": 1499488,
-    "sha256": "fdc01881a1ba62201222d84b409c8199bfede036a05790b90236c234102e9a31",
+    "bytes": 1613760,
+    "sha256": "84f7de610ba59162eb74c066ab5c30362add5c3ccc9b80edf1fafd1a56563473",
     "triangles": 297097,
-    "boundsDrift": 1.936e-05
+    "boundsDrift": 1.424e-06
    }
   },
   "3DPX-020976": {
@@ -6621,10 +6568,10 @@
     }
    },
    "display": {
-    "bytes": 199448,
-    "sha256": "0cd15d67ef3c2b3795f5e9dbd32bde25d6b56bb0d4dcd7780f1eedf11d377a7c",
+    "bytes": 208160,
+    "sha256": "ea571150e2d0ab682ae727390bba8b64c731347b64070daac9504f91743945e3",
     "triangles": 33865,
-    "boundsDrift": 2.826e-05
+    "boundsDrift": 1.14e-05
    }
   },
   "3DPX-020979": {
@@ -6672,10 +6619,10 @@
     }
    },
    "display": {
-    "bytes": 223920,
-    "sha256": "fdee2706487fc6377720231dc2b26872f1fea7623e2cf33bc8425c97514e1e04",
+    "bytes": 259128,
+    "sha256": "17b5db61cb6f8046f9dc06d7d125bcc38288538a2d8e7581db6706d4d3b82d1b",
     "triangles": 87448,
-    "boundsDrift": 1.953e-05
+    "boundsDrift": 1.176e-05
    }
   },
   "3DPX-020985": {
@@ -6690,10 +6637,10 @@
     }
    },
    "display": {
-    "bytes": 420568,
-    "sha256": "1fe16cad05c3066e563cdb39144743aaad9500cf4082088a1746d9dcd05d51c9",
+    "bytes": 439480,
+    "sha256": "ad9fa9842e52f8a3da6456b971921816c99eaef5af906dbd2707d66ca66be525",
     "triangles": 188360,
-    "boundsDrift": 2.875e-05
+    "boundsDrift": 2.791e-05
    }
   },
   "3DPX-020988": {
@@ -6708,10 +6655,10 @@
     }
    },
    "display": {
-    "bytes": 399024,
-    "sha256": "b69bd92b33a9c79b8e45986dcd0f539397c74aae7bd74ff98869cf4d15d10a38",
+    "bytes": 585352,
+    "sha256": "8d9d9e44e568e054c582b79a50e630b62836d1aaf4805694ee5a807781f1efb0",
     "triangles": 288912,
-    "boundsDrift": 1.987e-05
+    "boundsDrift": 8.93e-07
    }
   },
   "3DPX-020989": {
@@ -6726,10 +6673,10 @@
     }
    },
    "display": {
-    "bytes": 21684,
-    "sha256": "20160c1fd00fe0ed4f57fc36a90f95ee3844daf4506f669a9bf745d136e53ed1",
+    "bytes": 25632,
+    "sha256": "2a79590af2fb559634571ba5acf3fbdb088af5fb409f5f60806fdabf110dbf12",
     "triangles": 8544,
-    "boundsDrift": 1.915e-05
+    "boundsDrift": 1.733e-05
    }
   },
   "3DPX-020990": {
@@ -6743,10 +6690,10 @@
     }
    },
    "display": {
-    "bytes": 12444,
-    "sha256": "041284f81e27937e30d92ae12eb13d5599e184db4765ae0095a337b3857038d0",
+    "bytes": 13792,
+    "sha256": "0f93afcce56b65bd9e845ffd609e642957727f5903c07a3fc0f0d313537d1362",
     "triangles": 3864,
-    "boundsDrift": 2.508e-05
+    "boundsDrift": 1.978e-05
    }
   },
   "3DPX-020991": {
@@ -6760,8 +6707,8 @@
     }
    },
    "display": {
-    "bytes": 83484,
-    "sha256": "1aefe8d600e63e5a16843918776fdf03cb267e0674ff4e797dcd59d80445f343",
+    "bytes": 88408,
+    "sha256": "39da93e0a16f2d0ba54218b04c09f226f99808b0e61d8fb6ddea4ed84710d8d8",
     "triangles": 27707,
     "boundsDrift": 2.401e-05
    }
@@ -6778,8 +6725,8 @@
     }
    },
    "display": {
-    "bytes": 14583600,
-    "sha256": "3d8ab62db889eeb0d0c236432b364a0ad89fc7e1de0427c1c3a09a2c26826cc3",
+    "bytes": 17656192,
+    "sha256": "b1328f5e86ab6f5372f59332cede85f34a2dd6e8d7bcd03f5f2d8076d9d58276",
     "triangles": 5554056,
     "boundsDrift": 2.566e-05
    }
@@ -6796,10 +6743,10 @@
     }
    },
    "display": {
-    "bytes": 80056,
-    "sha256": "408eefcb45cd51afee5f2e2dd6decb5b5aaadc5601d5b9976355d0a981ad52bc",
+    "bytes": 84232,
+    "sha256": "2e64233d2b9ff987e57745d58761b643c11dc578d0ce237f853344b5560bb237",
     "triangles": 41290,
-    "boundsDrift": 2.127e-05
+    "boundsDrift": 2.569e-05
    }
   },
   "3DPX-020996": {
@@ -6813,10 +6760,10 @@
     }
    },
    "display": {
-    "bytes": 87372,
-    "sha256": "0206b7859c2fa0c666a0ea05b4f1cecd3f26d322769f714dd5956997bedf8ba0",
+    "bytes": 98296,
+    "sha256": "9004dc317b1625d896fc291381b3c5423bd4345a4606516cffe5c44ff6e85fcd",
     "triangles": 37183,
-    "boundsDrift": 2.196e-05
+    "boundsDrift": 2.044e-05
    }
   },
   "3DPX-020998": {
@@ -6831,8 +6778,8 @@
     }
    },
    "display": {
-    "bytes": 1528404,
-    "sha256": "4d9d9b5f6fb2c6660d2d2d2e050c8c2d9e2ed6b6222e89315c4cc3c6a125ba76",
+    "bytes": 1521896,
+    "sha256": "7f5f109a93d26744df6d429977a12c83c86eec018361285c7f5118ae30e82d89",
     "triangles": 346625,
     "boundsDrift": 2.778e-05
    }
@@ -6849,8 +6796,8 @@
     }
    },
    "display": {
-    "bytes": 1518152,
-    "sha256": "2e30df6560541a4cfa238f480ffe0a5e8929bc2bcde6607b4ea609ab6d1b35fd",
+    "bytes": 1508980,
+    "sha256": "3b862ec55164e883730a2647ccd343afbbc7afb422c3d4ad0a59071a0e6722c8",
     "triangles": 346625,
     "boundsDrift": 2.546e-05
    }
@@ -6866,10 +6813,10 @@
     }
    },
    "display": {
-    "bytes": 387408,
-    "sha256": "8e517f8b0b5f3bf9ef7c963057d23e781a3824c487faa4317c198a5da518709a",
+    "bytes": 420440,
+    "sha256": "14c41f0658807043ca7f057a37ca6484ff07fc4a54ee84c241e24a663cfa056b",
     "triangles": 163317,
-    "boundsDrift": 8.149e-06
+    "boundsDrift": 9.167e-06
    }
   },
   "3DPX-021001": {
@@ -6883,8 +6830,8 @@
     }
    },
    "display": {
-    "bytes": 222096,
-    "sha256": "d63e573dc6280f883cf2f9b01ce7f7463ccb8fa100738998dfac4a0026981239",
+    "bytes": 250924,
+    "sha256": "424dfda88bbba8328456f7fc79412e3571438a35ba5e08e39486f3b8bc3ea0cc",
     "triangles": 83691,
     "boundsDrift": 2.35e-05
    }
@@ -6900,8 +6847,8 @@
     }
    },
    "display": {
-    "bytes": 221700,
-    "sha256": "337d779f669f4f54dbf246d2d92b73fe913da864d6085d97d35f2ff8ea2db9d9",
+    "bytes": 255080,
+    "sha256": "984f069deaf9cf1989deeda9f6b1399c15d4d1ee48dbaf92362ac9f2804e571a",
     "triangles": 84086,
     "boundsDrift": 1.65e-05
    }
@@ -6918,10 +6865,10 @@
     }
    },
    "display": {
-    "bytes": 56644,
-    "sha256": "4146c267a1b4f79de85860079f28c06dce7c8c91c31f7dc6bdcff81927e6966a",
+    "bytes": 76508,
+    "sha256": "fc29ef7c27a26911c70c106f932bbbb796b2ab46a9a2d75873137eda60040dd1",
     "triangles": 22892,
-    "boundsDrift": 2.099e-05
+    "boundsDrift": 1.095e-05
    }
   },
   "3DPX-021004": {
@@ -6936,10 +6883,10 @@
     }
    },
    "display": {
-    "bytes": 56984,
-    "sha256": "991a43661b06cfdc27c6597a6bd66f3d5eb69f85bfa26fd7bebdaa033b7793ea",
+    "bytes": 76208,
+    "sha256": "e331368ea3b3faedd8b4f91915d588029266a64827dcc4f9fe18121de96dd87a",
     "triangles": 22892,
-    "boundsDrift": 2.101e-05
+    "boundsDrift": 1.339e-06
    }
   },
   "3DPX-021006": {
@@ -6954,10 +6901,10 @@
     }
    },
    "display": {
-    "bytes": 39580,
-    "sha256": "ba871db838efaa12c111279a07bb655b0e91437528ad59bd16c48f54daf16ca7",
+    "bytes": 46172,
+    "sha256": "39ae3d3b9d3aa539de58a9c95b9abac7b09765bd4e16d360d4f87b198f49d00a",
     "triangles": 13238,
-    "boundsDrift": 2.093e-05
+    "boundsDrift": 1.057e-05
    }
   },
   "3DPX-021007": {
@@ -6972,8 +6919,8 @@
     }
    },
    "display": {
-    "bytes": 152340,
-    "sha256": "c39830e2bc75b43f23f278614c0c78d180a5cd1d2621a770040d8895c47d7db4",
+    "bytes": 180684,
+    "sha256": "7a70b52a2c801afc87ccbe80c28468fe4ab90e44d0b36f8f1bcab5a5ade9a43a",
     "triangles": 60369,
     "boundsDrift": 1.433e-05
    }
@@ -6984,16 +6931,15 @@
     "bytes": 21308976,
     "sha256": "58dd66461fc29a8e9002583b18edf22182cac2fae6d6d819b463826524eff242",
     "archive": {
-     "release": "ekab-nih3d-recovered-21001-21100",
-     "package": "atla-nih3d-21001-21100-part-000.tar.zst",
-     "file": "021008-001-3d-vh-f-lung-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+     "file": "originals/3DPX-021008/001.glb"
     }
    },
    "display": {
-    "bytes": 1499488,
-    "sha256": "fdc01881a1ba62201222d84b409c8199bfede036a05790b90236c234102e9a31",
+    "bytes": 1613760,
+    "sha256": "84f7de610ba59162eb74c066ab5c30362add5c3ccc9b80edf1fafd1a56563473",
     "triangles": 297097,
-    "boundsDrift": 1.936e-05
+    "boundsDrift": 1.424e-06
    }
   },
   "3DPX-021010": {
@@ -7008,10 +6954,10 @@
     }
    },
    "display": {
-    "bytes": 25752,
-    "sha256": "05f9c7e96655e98c79ea096e173bc40785bbaac41c6999f9e09071578a210092",
+    "bytes": 29380,
+    "sha256": "d1c3e59f9c34b8b10ea115e9f407e63837242681aa41dda3a262cb0f0a202bfc",
     "triangles": 6023,
-    "boundsDrift": 2.927e-05
+    "boundsDrift": 4.786e-06
    }
   },
   "3DPX-021014": {
@@ -7025,10 +6971,10 @@
     }
    },
    "display": {
-    "bytes": 188572,
-    "sha256": "97cab9a5c7931b26fb469afe1a20f4a77cc0253171ee21dd96de94b6c67aacfd",
+    "bytes": 219676,
+    "sha256": "915a3761b50fc464bc789d1b1788b01c757c2d4047544f3cc0c2668f3805752f",
     "triangles": 73862,
-    "boundsDrift": 2.707e-05
+    "boundsDrift": 1.035e-05
    }
   },
   "3DPX-021018": {
@@ -7042,10 +6988,10 @@
     }
    },
    "display": {
-    "bytes": 38168,
-    "sha256": "1abd7f8030ebeb82b4c5e83149aefd593e6931d07ab94a5672398aeaf7372713",
+    "bytes": 82176,
+    "sha256": "3dc6adff23bbd5d27a8e5cc2bbcd44182ba642a270ae9aad9ded8ca0716a43d2",
     "triangles": 16358,
-    "boundsDrift": 2.342e-05
+    "boundsDrift": 1.132e-06
    }
   },
   "3DPX-021019": {
@@ -7060,8 +7006,8 @@
     }
    },
    "display": {
-    "bytes": 43108,
-    "sha256": "cf1f476b47c022b12ce382e33f346990feadac2d84b79ae48127679b3294711d",
+    "bytes": 47476,
+    "sha256": "06c7e6911c6ace6ca2556b27bb4551488e7c34091a3009e9c9c357b87ef6c3c3",
     "triangles": 16872,
     "boundsDrift": 3.027e-05
    }
@@ -7077,10 +7023,10 @@
     }
    },
    "display": {
-    "bytes": 10040,
-    "sha256": "c292a2038e3775f154bfbca90adc560866c3c0da3bd79fec9a9efa5429c4e787",
+    "bytes": 10924,
+    "sha256": "1f0e4da3efb6ce4964657a0e7135fc9ce2996c5ec4f62ba90a2425e0b66304a3",
     "triangles": 2730,
-    "boundsDrift": 1.803e-05
+    "boundsDrift": 2.051e-05
    }
   },
   "3DPX-021021": {
@@ -7094,10 +7040,10 @@
     }
    },
    "display": {
-    "bytes": 108328,
-    "sha256": "d01b5c7aae416ed03be1ce7e29c9cf8682857f13048fb9bc6f3546df8b2cf1ae",
+    "bytes": 110432,
+    "sha256": "3d298dda5bc3a61a4481a67d3336d9d1d1a46ce22dbaf7d92c48e6aa1899b74e",
     "triangles": 44042,
-    "boundsDrift": 2.353e-05
+    "boundsDrift": 5.174e-06
    }
   },
   "3DPX-021022": {
@@ -7112,8 +7058,8 @@
     }
    },
    "display": {
-    "bytes": 10689920,
-    "sha256": "cba2dfd7cba17750e17fcc2a90306eb477595175352a90ed34556d647b696aef",
+    "bytes": 13650852,
+    "sha256": "eee43286534705919c1147cb8445504c3bd962b7e9ca5bf5d92e4a93a0ea3d8a",
     "triangles": 4013954,
     "boundsDrift": 1.684e-05
    }
@@ -7130,10 +7076,10 @@
     }
    },
    "display": {
-    "bytes": 27672,
-    "sha256": "5e1d806d0e09d0ce2ee6c085bf15c32a54b0e4ccbfe24381768627dc5a1b5d2c",
+    "bytes": 32892,
+    "sha256": "4e4918f7373d73ba5b6b091368372b663e059c0b87fa1d6c88073cf67b121846",
     "triangles": 10073,
-    "boundsDrift": 2.21e-05
+    "boundsDrift": 8.5e-06
    }
   },
   "3DPX-021124": {
@@ -7148,8 +7094,8 @@
     }
    },
    "display": {
-    "bytes": 483040,
-    "sha256": "93ec1e17c95ff68cb2e5925181abd7b746e499b6a52e37268e144d6b9d5eba19",
+    "bytes": 483284,
+    "sha256": "b9c822d83a2272b15b2e9cdcb6666e428e6af0aeeb78b6ab9711a3cddaa64da2",
     "triangles": 64960,
     "boundsDrift": 3.006e-05
    }
@@ -7184,8 +7130,8 @@
     }
    },
    "display": {
-    "bytes": 12282476,
-    "sha256": "44553d5d82873d626cf589e1e6b4ca1b8ebe43c71941764b16aba5a12e2f8026",
+    "bytes": 12282824,
+    "sha256": "c7ce1d1367eec9dc2d193b9c14177be81ec21b27680a24833d825e9b8adedf5f",
     "triangles": 10979,
     "boundsDrift": 1.8e-05
    }
@@ -7201,8 +7147,8 @@
     }
    },
    "display": {
-    "bytes": 299532,
-    "sha256": "40cad883ae42f7056b509360856cc08736378d39e37db6ee5ed8f67350c670a2",
+    "bytes": 299788,
+    "sha256": "96b51a35b032b8901d745652e58097307698a0c015a7b96d6c8b09de308a6efb",
     "triangles": 9527,
     "boundsDrift": 1.85e-05
    }
@@ -7218,8 +7164,8 @@
     }
    },
    "display": {
-    "bytes": 522376,
-    "sha256": "8e8b12e95956ee418201378ded29f139f01a6b473b9a80a66fa37e618fde1074",
+    "bytes": 522676,
+    "sha256": "29defd276715f763c1d67e7d3b7877955f808c82ad3f5b5add278b247f818185",
     "triangles": 4850,
     "boundsDrift": 1.817e-05
    }
@@ -7230,16 +7176,15 @@
     "bytes": 12151308,
     "sha256": "3f439d7ed94bc11d2ff1641c569840b9accdc2d5a9f4ad9e2da910f6ae3b61df",
     "archive": {
-     "release": "ekab-nih3d-recovered-21101-21200",
-     "package": "atla-nih3d-21101-21200-part-045.tar.zst",
-     "file": "021161-001-brain_human-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+     "file": "originals/3DPX-021161/001.glb"
     }
    },
    "display": {
-    "bytes": 4403356,
-    "sha256": "4a7fbf88afc7ec7555716f491fb2a3777a13a7b794e96c54cc533ff6451ff7d4",
+    "bytes": 4191104,
+    "sha256": "483a5d31822f8abba6d66a36ca89376c6275ec2739c22d0ed2ce798ab2e931c5",
     "triangles": 377701,
-    "boundsDrift": 1.721e-05
+    "boundsDrift": 2.168e-05
    }
   },
   "3DPX-021281": {
@@ -7306,8 +7251,8 @@
     }
    },
    "display": {
-    "bytes": 23132,
-    "sha256": "f5980c221d6b5387b2973002ed41f4285ba152567d617f56516824010f15bdb8",
+    "bytes": 23180,
+    "sha256": "d6f0462b34dfc037e0824d7e976e6734e0e598c8304bd47cfae8dd10754afc20",
     "triangles": 8526,
     "boundsDrift": 1.389e-05
    }
@@ -7323,8 +7268,8 @@
     }
    },
    "display": {
-    "bytes": 10804,
-    "sha256": "d524778edc55e7c8cf919e5a5c3b57fb30788ac300fd571739a05115f28ce672",
+    "bytes": 11036,
+    "sha256": "0ac8c6d1b6c87aff76ecdbb203806ba72db4cd7162d42b7cf8444d65c2202991",
     "triangles": 3206,
     "boundsDrift": 2.855e-05
    }
@@ -7340,8 +7285,8 @@
     }
    },
    "display": {
-    "bytes": 10352,
-    "sha256": "5715a62c817dcbb7a3eef9740fa285ef7481bd7896250b28311bab493d269a68",
+    "bytes": 10584,
+    "sha256": "3152437a97443e8086ab4554a493d3c0d6d126337d38ea79965531d5b3d5fc1b",
     "triangles": 3012,
     "boundsDrift": 1.943e-05
    }
@@ -7456,9 +7401,8 @@
     "bytes": 16737944,
     "sha256": "31adacc10a662372ea676033bae8fe689d4f3646de328c7e7d6e62db810ecdb4",
     "archive": {
-     "release": "ekab-nih3d-recovered-22701-22800",
-     "package": "atla-nih3d-22701-22800-part-103.tar.zst",
-     "file": "022787-001-heart-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:374564bcaee4079260c0bf9ac76d3e91fec84b98ded7a35e272f377e93fbf534",
+     "file": "originals/3DPX-022787/001.glb"
     }
    },
    "display": {
@@ -7568,10 +7512,10 @@
     }
    },
    "display": {
-    "bytes": 220408,
-    "sha256": "ff71acf6e0e7b609bb4c70d58088818bd61f3b279414fdc31f76f7ad61c76a08",
+    "bytes": 224008,
+    "sha256": "577cb65f168a703a64e67ac94ddce0641caffe69eb2bc691acb07fcfafc86d5e",
     "triangles": 48936,
-    "boundsDrift": 6.245e-06
+    "boundsDrift": 2.24e-05
    }
   },
   "3DPX-023404": {
@@ -7585,8 +7529,8 @@
     }
    },
    "display": {
-    "bytes": 11704,
-    "sha256": "d28881e87d42c63901240a6453551c93e98c591f400fd8880be2f4a927e4c5b1",
+    "bytes": 11764,
+    "sha256": "0d7275b50a096548ec19232973ea94901d0b031b9d8fa9358382bec02a19e9fd",
     "triangles": 4316,
     "boundsDrift": 1.43e-05
    }
@@ -7602,8 +7546,8 @@
     }
    },
    "display": {
-    "bytes": 11712,
-    "sha256": "435e60b059e669c2023ff719d99b6a0fd25a9cb7925cd9ff6b0189969059ed10",
+    "bytes": 11772,
+    "sha256": "a33789481eb49c34361b37e37422f7cec51f82a527c353df1b5ef58dee9388b9",
     "triangles": 4316,
     "boundsDrift": 2.62e-05
    }
@@ -7619,8 +7563,8 @@
     }
    },
    "display": {
-    "bytes": 12068,
-    "sha256": "3aa978b9e267e31fac22f852e34e9dc68a25417cc63d123535628452c6ca6753",
+    "bytes": 12128,
+    "sha256": "0043039e082706662dc2949576679bd963e20b84a597d8b00f82ee4e06b4b596",
     "triangles": 4356,
     "boundsDrift": 1.371e-05
    }
@@ -7636,8 +7580,8 @@
     }
    },
    "display": {
-    "bytes": 12964,
-    "sha256": "77fe41cceee83f7a5a037cddb50173ab76ca36aa3fcb3fec52da68e58af6db14",
+    "bytes": 13024,
+    "sha256": "f075052bb459a8bca112c5a2884b68101751b7f86f724b01a5c20721d3006bb2",
     "triangles": 4396,
     "boundsDrift": 1.783e-05
    }
@@ -7653,8 +7597,8 @@
     }
    },
    "display": {
-    "bytes": 11332,
-    "sha256": "359322fd9318f5e2e87ba92749e4c0de9902afc349dd9d9dfd19edac93811a7d",
+    "bytes": 11392,
+    "sha256": "84c5cebb372c883c3d0ee3ef39d516bb698b0389e50d02ebe0caf14f93c67f38",
     "triangles": 4316,
     "boundsDrift": 2.946e-05
    }
@@ -7670,8 +7614,8 @@
     }
    },
    "display": {
-    "bytes": 11116,
-    "sha256": "2dcc4adfc19a1a871eb4368a1c2c3ac3a7ad406d63b7f4201ea0f9ad82b7060f",
+    "bytes": 11176,
+    "sha256": "f4a9bac91450b39b9bbc824b590ed0c001d97d4b0ebc3687706fdd7d76402ccb",
     "triangles": 4316,
     "boundsDrift": 2.757e-05
    }
@@ -7682,9 +7626,8 @@
     "bytes": 2753172,
     "sha256": "45e9ff3a8f6cf918af31edf48c111163edabac6e57426c36213b2d0aca5326b3",
     "archive": {
-     "release": "ekab-nih3d-recovered-23401-23500",
-     "package": "atla-nih3d-23401-23500-part-043.tar.zst",
-     "file": "023480-002-bipolar_neuron-nih3d.glb.glb"
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:a45f57dbfe5fc5f9661b3d6d0733e3dadfa1a8212e25be55c6f319e73699c124",
+     "file": "originals/3DPX-023480/002.glb"
     }
    },
    "display": {
@@ -7812,8 +7755,8 @@
     }
    },
    "display": {
-    "bytes": 32516,
-    "sha256": "d1b05bb89318032099a4e93c45e20887de364b93a659020d6f7abcd844946274",
+    "bytes": 32568,
+    "sha256": "7c963fbece0c19fa66a451592797dc535dbcd995d328576735d5e3a10fcea276",
     "triangles": 9876,
     "boundsDrift": 2.83e-05
    }
@@ -7830,10 +7773,10 @@
     }
    },
    "display": {
-    "bytes": 6831588,
-    "sha256": "3e046d74d33e1483f94fa1294092ef512629c8e34b74226caf721998ef878492",
+    "bytes": 6886856,
+    "sha256": "426902c46f3faf9dffa016861f1d296b5eeafc5e5be6c4eec0c887175edd7bcb",
     "triangles": 1646924,
-    "boundsDrift": 2.064e-05
+    "boundsDrift": 1.04e-05
    }
   },
   "3DPX-023607": {
@@ -7848,8 +7791,8 @@
     }
    },
    "display": {
-    "bytes": 94868,
-    "sha256": "b51f9a6f57a17dd4c60fcee4215acbb5f399abe2244c23f87b9fae146ccea876",
+    "bytes": 94920,
+    "sha256": "3fb74ef8ba848efb394bb981396c1f5e4e47f1981de62a234e1128b37b6ed5bc",
     "triangles": 24234,
     "boundsDrift": 2.043e-05
    }
