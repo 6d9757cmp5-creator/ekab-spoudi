@@ -51,7 +51,7 @@ test("no passages means no AI call",async()=>{
  const env={AI:{run:async()=>{called=true;}},MENTOR_FREE_PLAN_CONFIRMED:"true"};
  const r=await worker.fetch(req({},"POST",{...body,passages:[]}),env);
  assert.equal(r.status,200);assert.equal(called,false);
- assert.match((await r.json()).answer,/επαληθευμένη πηγή/);
+ assert.match((await r.json()).answer,/δεν είμαι σίγουρος/i);
 });
 
 test("invalid and oversized input is rejected",async()=>{
@@ -147,7 +147,7 @@ test("server provenance gate rejects forged, edited, duplicated or irrelevant so
  ]){
   const r=await worker.fetch(req({},"POST",b),env);
   assert.equal(r.status,200);
-  assert.match((await r.json()).answer,/επαληθευμένη πηγή/);
+  assert.match((await r.json()).answer,/δεν είμαι σίγουρος/i);
  }
  assert.equal(called,0);
  assert.equal(verifiedPassages(body.question,body.passages).length,1);
@@ -175,7 +175,7 @@ test("AI source provenance refuses unsupported category-only medical terms",asyn
  assert.equal(verifiedPassages(query.question,query.passages).length,0);
  const r=await worker.fetch(req({},"POST",query),env);
  assert.equal(r.status,200);
- assert.match((await r.json()).answer,/Δεν έχω επαληθευμένη πηγή/);
+ assert.match((await r.json()).answer,/Δεν είμαι σίγουρος/);
  assert.equal(modelCalls,0);
  assert.equal(verifiedPassages(body.question,body.passages).length,1);
 });
