@@ -105,8 +105,10 @@ try{
   await shelf.getByRole('link',{name:/Κακώσεις και παθολογία/}).click();
   await shelf.getByRole('link',{name:/^Κατάγματα/}).click();
   await shelf.getByRole('link',{name:/^Κάτω άκρο/}).click();
-  await shelf.waitForFunction(()=>document.querySelectorAll('#library-list .item').length>0);
-  if(!/Κάτω άκρο/.test(await shelf.locator('#library-path').textContent()))failures.push('3D library breadcrumb lost its branch');
+  // The fracture level already lists models, so wait for the breadcrumb of the region itself.
+  await shelf.waitForFunction(()=>/Κάτω άκρο/.test(document.querySelector('#library-path [aria-current]')?.textContent||''),null,{timeout:15000})
+   .catch(()=>failures.push('3D library breadcrumb lost its branch'));
+  if(!await shelf.locator('#library-list .item').count())failures.push('3D library region branch lists no models');
   await shelf.goBack();
   await shelf.waitForFunction(()=>/Κατάγματα/.test(document.querySelector('#library-path [aria-current]')?.textContent||''));
   await shelf.getByRole('link',{name:'Βιβλιοθήκη'}).click();
