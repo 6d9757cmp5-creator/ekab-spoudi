@@ -62,9 +62,7 @@ function bootInlineAtlas(){
  if(atlasPending)return atlasPending;
  const base=new URL('./vendor/open-anatomy-atlas/src/renderer/',import.meta.url);
  const scripts=[new URL('mat4.js',base),new URL('gl.js',base),new URL('atlas.js',base),
-  new URL('../../../../inline-atlas.js',base)];
- // The local controller lives next to the unified workspace, unlike vendor files.
- scripts[3]=new URL('./inline-atlas.js',import.meta.url);
+  new URL('./inline-atlas.js',import.meta.url)];
  atlasPending=(async()=>{
   for(const url of scripts){
    await new Promise((resolve,reject)=>{
