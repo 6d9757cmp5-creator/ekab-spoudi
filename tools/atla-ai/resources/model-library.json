@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "a7af5ee5b96cfda48ae8f2299503ebaeae637c19",
+ "ledgerCommit": "745be94a7a7c48de011989eac1d44baf31a1aadf",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -539,7 +539,7 @@
  },
  "counts": {
   "bySource": {
-   "nih3d": 463,
+   "nih3d": 465,
    "hra": 54,
    "z-anatomy": 5,
    "quaternius": 2,
@@ -547,9 +547,9 @@
    "makehuman": 10,
    "makehuman-rigged": 1
   },
-  "nihVerifiedModels": 242,
-  "nihServed": 458,
-  "nihServedBytes": 527977820,
+  "nihVerifiedModels": 251,
+  "nihServed": 460,
+  "nihServedBytes": 529009616,
   "nihContextual": 308,
   "nihWithSaekChapter": 224,
   "nihRestrictions": {
@@ -578,7 +578,7 @@
    "LIKELY_OUT_OF_MEDICAL_SCOPE": 1372,
    "SCIENTIFIC_REVIEW_REQUIRED": 4275
   },
-  "notYetVerifiedInLedger": 15446
+  "notYetVerifiedInLedger": 15437
  },
  "atlases": [
   {
@@ -1696,15 +1696,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000327",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-024.tar.zst",
-     "file": "000327-002-frax_de_clavicula_coracoide_e_luxacao_posterior_clavicula_limpo_simplificado-nih3d.gl.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -12450,15 +12450,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-002739",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-02701-02800",
-     "package": "atla-nih3d-02701-02800-part-025.tar.zst",
-     "file": "002739-002-brain_mri_nevit_dilmen-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -12695,15 +12695,12 @@
    "sourceVersion": 4,
    "originalPage": "https://3d.nih.gov/entries/3DPX-003092",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-03001-03100",
-     "package": "atla-nih3d-03001-03100-part-039.tar.zst",
-     "file": "003092-000-study_1_series_1-bone.glb.glb"
-    },
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ"
     ]
    },
    "delivery": {
@@ -12749,15 +12746,12 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-003093",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-03001-03100",
-     "package": "atla-nih3d-03001-03100-part-039.tar.zst",
-     "file": "003093-000-study_1_series_1-bone.glb.glb"
-    },
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ"
     ]
    },
    "delivery": {
@@ -16250,15 +16244,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-004819",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-001.tar.zst",
-     "file": "004819-002-fenimore-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -16726,15 +16720,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-004924",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-04901-05000",
-     "package": "atla-nih3d-04901-05000-part-009.tar.zst",
-     "file": "004924-002-wurtzel-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -20769,6 +20763,59 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-015985",
+   "accession": "3DPX-015985",
+   "entryId": 15985,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ιός · Cryo-electron microscopy of hepatitis B virions reveals variability in envelope capsid interactions.",
+   "greekTitle": null,
+   "originalTitle": "Cryo-electron microscopy of hepatitis B virions reveals variability in envelope capsid interactions.",
+   "category": "Ιός",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-015985",
+   "archive": {
+    "files": 8,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-015985.glb",
+    "bytes": 63812,
+    "sha256": "3cb428bbb0f54c91246588379b1252903a63cd736f7f750499ab7d39bb473e17",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 20848,
+    "original": {
+     "bytes": 496528,
+     "sha256": "cfc9ec7d5328828675f5a8036946de3a6aa87dddf5ec7fb5ef333c05791a0154"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-015992",
    "accession": "3DPX-015992",
    "entryId": 15992,
@@ -20807,6 +20854,60 @@
     "original": {
      "bytes": 1019308,
      "sha256": "09e1956ab6d0f8747e6cd0270532e9d457db6de1b2c0a99a42e06e8c075d8504"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016081",
+   "accession": "3DPX-016081",
+   "entryId": 16081,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Case Model #82 Single Ventricle Heart s/p Fontan",
+   "greekTitle": null,
+   "originalTitle": "Case Model #82 Single Ventricle Heart s/p Fontan",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016081",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016081.glb",
+    "bytes": 967984,
+    "sha256": "93fce9556c5d02eb0207397bfedf3503a88fdf2f3c3b09ed7eda4e8a3ec33860",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 261526,
+    "original": {
+     "bytes": 21476968,
+     "sha256": "d1ac6643713a8925c1fb0748323a32abbba03b8fb06a9b7ded3b62b34484454b"
     }
    },
    "restrictionCode": null,
@@ -21893,15 +21994,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-016815",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-16801-16900",
-     "package": "atla-nih3d-16801-16900-part-008.tar.zst",
-     "file": "016815-002-wrist_bones-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:9a558ce662f6ef704eb418326e08013f0e788bbefeda0243d0fb5194469d5f37",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
