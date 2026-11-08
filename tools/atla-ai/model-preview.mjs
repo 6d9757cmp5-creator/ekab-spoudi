@@ -220,7 +220,7 @@ async function init3D(){
  if(typeof ResizeObserver==='function')new ResizeObserver(resize).observe(canvas);
  resize();
  let previousFrame=0;
- const loop=now=>{if(!renderer)return;raf=requestAnimationFrame(loop);if(document.hidden||now-previousFrame<1000/quality.targetFps)return;previousFrame=now;mixer?.update(Math.min(0.05,clock.getDelta()));controls.update();renderer.render(scene,camera)};
+ const loop=now=>{if(!renderer)return;raf=requestAnimationFrame(loop);if(document.hidden||!canvas.getClientRects().length||now-previousFrame<1000/quality.targetFps)return;previousFrame=now;mixer?.update(Math.min(0.05,clock.getDelta()));controls.update();renderer.render(scene,camera)};
  loop();
 }
 button.addEventListener('click',async()=>{
@@ -316,7 +316,7 @@ async function loadDataset(){
   renderChoices();
   status('Το κοινό μητρώο φορτώθηκε. Επίλεξε μοντέλο για έλεγχο και προεπισκόπηση.');
   if(deepLinkModel){
-   const index=assets.findIndex(a=>a.details?.accession===deepLinkModel);
+   const index=assets.findIndex(a=>a.details?.accession===deepLinkModel||a.path===deepLinkModel||a.id===deepLinkModel);
    deepLinkModel=null;
    if(index>=0){
     select.value=String(index);showSelection();
