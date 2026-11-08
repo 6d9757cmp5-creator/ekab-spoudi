@@ -99,6 +99,38 @@ const VIEWER_COLLECTION=Object.freeze({
 });
 const SOURCE_NAMES=Object.freeze({nih3d:'NIH 3D',hra:'HRA / HuBMAP','z-anatomy':'Z-Anatomy',quaternius:'Quaternius',patients:'Στατικοί ασθενείς',
  makehuman:'MakeHuman','makehuman-rigged':'MakeHuman με σκελετό',bp3d:'BodyParts3D'});
+/** Body regions that branch the library, and which region each anatomical structure belongs to. */
+export const REGIONS=Object.freeze({head:'Κεφαλή και εγκέφαλος',spine:'Σπονδυλική στήλη και νωτιαίος μυελός',chest:'Θώρακας και αναπνευστικό',
+ heart:'Καρδιά και αγγεία',abdomen:'Κοιλία και νεφροί',pelvis:'Πύελος και ουρογεννητικό',upper:'Άνω άκρο',lower:'Κάτω άκρο',
+ body:'Ολόκληρο σώμα και συστήματα',other:'Δέρμα, λεμφικό και λοιπά'});
+const STRUCTURE_REGION=Object.freeze(Object.fromEntries(Object.entries({
+ head:['skull','face','jaw','brain','brain-ventricles','corpus-callosum','medulla-oblongata','eye','nose'],
+ spine:['cervical-spine','thoracic-spine','lumbar-spine','lumbar-vertebra','spine','spinal-cord'],
+ chest:['lung','trachea','bronchi','larynx','upper-airway','ribs','sternum','thymus'],
+ heart:['heart','aorta','coronary'],abdomen:['liver','spleen','stomach','kidney','renal-pelvis'],
+ pelvis:['pelvis','hip','sacrum','bladder','uterus','ovary','placenta'],
+ upper:['humerus','shoulder','clavicle','scapula','elbow','forearm','wrist','scaphoid','hand'],
+ lower:['femur','tibia','fibula','patella','knee','ankle','calcaneus','talus','foot'],body:['skeleton']
+}).flatMap(([region,ids])=>ids.map(id=>[id,region]))));
+// HRA organs carry no structure ids, so their file names place them.
+const HRA_REGION=[[/Brain|Eye/,'head'],[/Spinal_Cord/,'spine'],[/Lung|Thymus/,'chest'],[/Heart|Vasculature/,'heart'],
+ [/Liver|Spleen|Pancreas|Intestine|Kidney/,'abdomen'],[/Pelvis|Bladder|Uterus|Ovary|Fallopian|Prostate|Urethra|Ureter|Placenta/,'pelvis'],
+ [/Knee/,'lower']];
+export const FINDINGS=Object.freeze({fracture:'Κατάγματα',dislocation:'Εξαρθρήματα',aneurysm:'Ανευρύσματα',dissection:'Διαχωρισμός αορτής',
+ scoliosis:'Σκολίωση',tetralogy:'Συγγενείς καρδιοπάθειες'});
+const regionOf=m=>m.source==='hra'?(HRA_REGION.find(([re])=>re.test(m.delivery.path))?.[1]??'other')
+ :m.source==='z-anatomy'?'body':(m.structures??[]).map(id=>STRUCTURE_REGION[id]).find(Boolean)??'other';
+/** Where a model sits in the library tree: section, branch and, for large branches, a sub-branch. */
+function placeOf(m,group){
+ if(group==='anatomy')return {branch:regionOf(m),branchLabel:REGIONS[regionOf(m)]};
+ if(group==='pathology'){
+  const region=regionOf(m);
+  return {branch:m.finding??'other',branchLabel:FINDINGS[m.finding]??'Λοιπά ευρήματα',sub:region,subLabel:REGIONS[region]};
+ }
+ if(group==='simulation')return m.source==='patients'?{branch:'patients',branchLabel:'Ασθενείς'}:{branch:'body',branchLabel:'Ανθρώπινο σώμα και κινήσεις'};
+ const category=String(m.category||'Λοιπά');
+ return {branch:category,branchLabel:category==='Ανατομία'?'Άλλα ανατομικά και παθολογικά':category};
+}
 const fold=value=>String(value??'').normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el').replace(/ς/g,'σ');
 /**
  * Every model of the shared 3D library as one list for the library page: what it is called, which
@@ -117,11 +149,11 @@ export function libraryEntries(library,{viewer='atla-resource-preview.html',atla
   const terms=[...(m.structures??[]).map(id=>structures[id]?.greek),findings[m.finding]?.greek].filter(Boolean);
   const params=new URLSearchParams({tool,dataset,model:m.source==='nih3d'?m.accession:m.delivery.path});
   if(from)params.set('from',from);
-  entries.push({id:m.source+':'+(m.accession??m.delivery.path),label:m.label,source:m.source,sourceLabel:SOURCE_NAMES[m.source],group,
+  entries.push({id:m.source+':'+(m.accession??m.delivery.path),label:m.label,source:m.source,sourceLabel:SOURCE_NAMES[m.source],group,...placeOf(m,group),
    terms,bytes:m.delivery.bytes,restriction:m.restriction??null,href:viewer+'?'+params,
    search:fold([m.label,m.originalTitle,SOURCE_NAMES[m.source],...terms].join(' '))});
  }
- for(const a of library?.atlases??[])entries.push({id:'atlas:'+a.id,label:a.label,source:'bp3d',sourceLabel:SOURCE_NAMES.bp3d,group:'atlas',
+ for(const a of library?.atlases??[])entries.push({id:'atlas:'+a.id,label:a.label,source:'bp3d',sourceLabel:SOURCE_NAMES.bp3d,group:'atlas',branch:'bp3d',branchLabel:'BodyParts3D',
   terms:[],bytes:null,restriction:null,href:atlas,search:fold(a.label+' '+SOURCE_NAMES.bp3d+' ατλαντας')});
  const order={atlas:0,anatomy:1,pathology:2,simulation:3,science:4};
  return entries.sort((a,b)=>order[a.group]-order[b.group]||a.label.localeCompare(b.label,'el'));
