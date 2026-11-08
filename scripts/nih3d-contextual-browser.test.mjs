@@ -90,6 +90,10 @@ async function viewerJourney(ctx,name,accession){
  const details=await page.locator('#source-details').innerText();
  for(const text of ['Κατάσταση έγκρισης','Χωρίς επιστημονική ή κλινική επικύρωση','Πλευρικότητα',accession,'Πρωτότυπη σελίδα NIH 3D'])assert(details.includes(text),'Missing detail: '+text);
  assert.equal(await page.locator('#source-license').innerText().then(t=>t.includes('Public Domain')),true);
+ // The unified Anatomy Lab deliberately keeps expert model controls collapsed.
+ // Open them explicitly, as a user would, rather than clicking invisible elements.
+ if(new URL(page.url()).pathname.endsWith('/anatomy-3d/index.html'))
+  await page.locator('#models details > summary').click();
  for(const id of ['part-isolate','part-show','view-front','view-side','view-reset'])await page.click('#'+id);
  await page.fill('#source-opacity','40').catch(()=>page.locator('#source-opacity').evaluate(e=>{e.value='40';e.dispatchEvent(new Event('input'))}));
  assert.equal(await page.locator('#opacity-value').innerText(),'40%');
