@@ -39,7 +39,8 @@ try{
  assert.ok(requests.includes('/mentor/app/lab.js'));
  assert.ok(requests.includes('/mentor/voice/speech.mjs'));
  assert.ok(requests.includes('/mentor/styles/mentor-lab.css'));
- assert.ok(requests.includes('/mentor/avatar/real3d.bundle.mjs'));
+ // The 3D figure was removed; the page must not download it.
+ assert.ok(!requests.some(path=>/real3d|cinematic/.test(path)),'no 3D figure on the ATLA page');
  assert.ok(requests.includes('/mentor/app/adaptive.js'));
  assert.ok(requests.includes('/mentor/app/personal-v1.js'));
  await page.locator('#tab-memory').click();

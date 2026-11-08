@@ -39,11 +39,12 @@ try {
 
     const mentorPage=await page.goto('http://127.0.0.1:8765/mentor-lab.html',{waitUntil:'domcontentloaded',timeout:30000});
     if(!mentorPage?.ok())throw Error(device+': MENTOR page does not load');
-    await page.waitForFunction(()=>document.getElementById('mentor-cinematic-stage')?.dataset.real3d==='ready',
-      null,{timeout:70000});
-    if(await page.locator('#mentor-3d-canvas,.mentor-photo-img,img.cinematic-character').count())throw Error(device+': legacy character still visible');
-    if(!await page.locator('#mentor-real3d-canvas').isVisible())throw Error(device+': actual GLB canvas not visible');
-    console.log('PASS '+device+': 3D MENTOR loads without old avatar');
+    await page.locator('#atla-open-chat').waitFor({state:'visible',timeout:30000});
+    if(await page.locator('#mentor-cinematic-stage,#mentor-real3d-canvas,#mentor-3d-canvas,.mentor-photo-img,img.cinematic-character').count())throw Error(device+': the 3D figure is still on the ATLA page');
+    await page.locator('#atla-open-chat').click();
+    await page.locator('.atla-panel').waitFor({state:'visible',timeout:15000});
+    await page.locator('.atla-close').click();
+    console.log('PASS '+device+': ATLA page opens the one ATLA, with no 3D figure');
     const protocolPage=await page.goto('http://127.0.0.1:8765/protocols.html',{waitUntil:'load',timeout:30000});
     if(!protocolPage?.ok())throw Error(device+': protocols page did not load');
     await page.waitForFunction(()=>document.querySelectorAll('#protocol-list .topic').length>=10);

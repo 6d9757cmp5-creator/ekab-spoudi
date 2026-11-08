@@ -589,7 +589,9 @@ async function boot(){
   wireModes();
   wireStudyPreferences();
   wireCoach();
-  wireMentorPresence();
+  // The page has one ATLA: its button opens the same assistant as every other page.
+  if($('mentor-hero-form'))wireMentorPresence();
+  $('atla-open-chat')?.addEventListener('click',()=>document.querySelector('.atla-launcher')?.click());
   $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
