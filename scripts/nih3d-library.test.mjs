@@ -87,7 +87,7 @@ const base='https://example.org/ekab-spoudi/';
 assert.equal(safeReturnHref('/ekab-spoudi/saek-course-01.html#lesson-2',base,'x'),'/ekab-spoudi/saek-course-01.html#lesson-2');
 for(const bad of ['https://evil.example/','//evil.example/','javascript:alert(1)','\\\\evil','', null,'saek.html'])
  assert.equal(safeReturnHref(bad,base,'x'),'x',String(bad));
-assert.match(viewerHref({accession:'3DPX-000170'},{rootUrl:base,from:'/a#b'}),/atla-resource-preview\.html\?tool=anatomy&dataset=nih&model=3DPX-000170&from=%2Fa%23b$/);
+assert.match(viewerHref({accession:'3DPX-000170'},{rootUrl:base,from:'/a#b'}),/ui-tools\/anatomy-3d\/index\.html\?tool=anatomy&dataset=all&model=3DPX-000170&from=%2Fa%23b#models$/);
 
 // Once built, the real registry must describe real committed bytes, and every model must be accounted for.
 if(existsSync('tools/atla-ai/resources/model-library.json')){
