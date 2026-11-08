@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {viewerHref} from '../atla-ai/nih3d-library.mjs';
 for(const file of ['ui-tools/anatomy-3d/index.html','tools/anatomy-3d/index.html']){
  const html=readFileSync(file,'utf8');
  assert.match(html,/id="base-anatomy"/);
  assert.match(html,/id="models"/);
  assert.match(html,/id="atlas-canvas"/);
+ assert.match(html,/<select id="source-dataset" hidden/);
+ assert.match(html,/id="source-canvas"/);
  assert.match(html,/id="atlas-version"/);
  assert.match(html,/id="atlas-load"/);
  assert.match(html,/id="atlas-unload"/);
@@ -27,4 +30,13 @@ assert.match(atlas,/new AtlasRenderer\(canvas\)/);
 assert.match(atlas,/bp3d40/);
 assert.match(atlas,/bp3d43/);
 assert.match(atlas,/crypto\.subtle\.digest/);
+const origin='https://example.test/ekab-spoudi/';
+const nih=viewerHref({accession:'TEST-ACCESSION'},{rootUrl:origin,tool:'anatomy'});
+assert.match(nih,/\/ui-tools\/anatomy-3d\/index\.html\?/);
+assert.match(nih,/dataset=all/);
+assert.match(nih,/model=TEST-ACCESSION/);
+assert.match(nih,/#models$/);
+const cockpit=viewerHref({accession:'TEST-ACCESSION'},{rootUrl:origin,tool:'cockpit'});
+assert.match(cockpit,/atla-resource-preview\.html/);
+assert.doesNotMatch(cockpit,/#models$/);
 console.log('PASS unified anatomy single-page contract (both entrypoints, unique IDs, lazy first-party viewer).');
