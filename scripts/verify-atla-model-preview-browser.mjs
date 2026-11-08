@@ -100,7 +100,16 @@ try{
   const shelfErrors=[];shelf.on('pageerror',e=>shelfErrors.push(e.message));
   await shelf.goto(BASE+'ui-tools/3d-library.html',{waitUntil:'domcontentloaded'});
   const total=libraryEntries(library).length;
-  await shelf.waitForFunction(n=>document.querySelector('#count').textContent.startsWith(n+' μοντέλα'),total,{timeout:30000});
+  await shelf.waitForFunction(n=>document.querySelector('#count').textContent.includes(n+' μοντέλα συνολικά'),total,{timeout:30000});
+  // Branches: section, then kind, then body region, with the back button walking up again.
+  await shelf.getByRole('link',{name:/Κακώσεις και παθολογία/}).click();
+  await shelf.getByRole('link',{name:/^Κατάγματα/}).click();
+  await shelf.getByRole('link',{name:/^Κάτω άκρο/}).click();
+  await shelf.waitForFunction(()=>document.querySelectorAll('#library-list .item').length>0);
+  if(!/Κάτω άκρο/.test(await shelf.locator('#library-path').textContent()))failures.push('3D library breadcrumb lost its branch');
+  await shelf.goBack();
+  await shelf.waitForFunction(()=>/Κατάγματα/.test(document.querySelector('#library-path [aria-current]')?.textContent||''));
+  await shelf.getByRole('link',{name:'Βιβλιοθήκη'}).click();
   await shelf.fill('#library-search','καταγμα πτερνας');
   await shelf.waitForFunction(()=>document.querySelectorAll('#library-list .item').length>0);
   if(await shelf.evaluate(()=>document.documentElement.scrollWidth>innerWidth))failures.push('3D library overflows a phone screen');
