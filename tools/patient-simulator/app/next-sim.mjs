@@ -159,8 +159,8 @@ async function enableUnified(){
    assets:stageAssets(),
    onStatus:(code)=>updateUnifiedStatus(code),
    onSelect:(id)=>{
-    if(!unifiedEnabled||id===state.person)return;
-    try{commit(setFocus(state,id,state.view),'Επιλέχθηκε ο εικονικός ασθενής '+id.toUpperCase()+' στη 3D σκηνή.');}
+    if(!unifiedEnabled||(id===state.person&&state.view!=='scene'))return;
+    try{commit(setFocus(state,id,state.view==='scene'?'full':state.view),'Επιλέχθηκε ο ασθενής '+id.toUpperCase()+' · κοντινή 3D προβολή.');}
     catch{showResult('Δεν ήταν δυνατή η επιλογή ασθενούς.');}
    }
   });
@@ -378,7 +378,7 @@ function renderInsights(){
   }
   card.append(ul);
   card.append(actionButton('Επιλογή ατόμου '+p.id.toUpperCase(),()=>{
-   commit(setFocus(state,p.id,state.view),'Εστιάζεις στο Άτομο '+p.id.toUpperCase()+'.');
+   commit(setFocus(state,p.id,state.view==='scene'?'full':state.view),'Εστιάζεις στο Άτομο '+p.id.toUpperCase()+' · κοντινή προβολή.');
   }));
   grid.append(card);
  }
@@ -476,7 +476,7 @@ function render(){
  }}));
 }
 for(const button of document.querySelectorAll('[data-next-patient]'))button.addEventListener('click',()=>{
- try{commit(setFocus(state,button.dataset.nextPatient,state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+'.');}catch{}
+ try{commit(setFocus(state,button.dataset.nextPatient,state.view==='scene'?'full':state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+' · κοντινή προβολή.');}catch{}
 });
 for(const button of document.querySelectorAll('[data-next-view]'))button.addEventListener('click',()=>{
  try{commit(setFocus(state,state.person,button.dataset.nextView),'Άλλαξε η γωνία προβολής.');}catch{}
