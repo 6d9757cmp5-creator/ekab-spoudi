@@ -15,9 +15,9 @@ export function mountCockpitEntry(root=document,search=location.search){
  const section=root.getElementById('next-case-library');
  if(!section||root.getElementById('atlas-cockpit-entry'))return false;
  const entry=readCockpitEntry(search);
- const panel=root.createElement('section');
+ const panel=root.createElement(entry?'section':'details');
  panel.id='atlas-cockpit-entry';
- panel.className='atlas-cockpit-entry';
+ panel.className='atlas-cockpit-entry'+(entry?' atlas-cockpit-source':' atlas-cockpit-optional');
  panel.setAttribute('aria-label','Συνέχεια εξάσκησης και προαιρετική βοήθεια ATLAS');
  const h=root.createElement('h2');h.textContent='Εξάσκηση · Κλινικός Προσομοιωτής';
  const p=root.createElement('p');
@@ -34,7 +34,12 @@ export function mountCockpitEntry(root=document,search=location.search){
  actions.append(ask);
  const note=root.createElement('p');note.className='atlas-cockpit-entry-note';
  note.textContent='Το ATLAS δεν αλλάζει ασθενείς, ζωτικά ή αποτελέσματα. Σε DEMO παρέχει μόνο εικονικές απαντήσεις· το πραγματικό AI δεν έχει ενεργοποιηθεί.';
- panel.append(h,p,actions,note);
+ if(entry)panel.append(h,p,actions,note);
+ else {
+  const summary=root.createElement('summary');
+  summary.textContent='ATLAS · Προαιρετική εκπαιδευτική βοήθεια';
+  panel.append(summary,p,actions,note);
+ }
  section.insertAdjacentElement('beforebegin',panel);
  return true;
 }

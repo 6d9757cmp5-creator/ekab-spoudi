@@ -23,12 +23,24 @@
  <div class="next-time"><span>Χρόνος περιστατικού</span><strong id="next-minute">00:00</strong><small id="next-status">Έτοιμο</small></div>
 </section>
 <p class="next-warning" role="note"><strong>Συνθετικό εκπαιδευτικό πρωτότυπο.</strong> Οι ασθενείς, οι ενδείξεις και οι μεταβολές είναι επινοημένες, όχι επιστημονικά επικυρωμένη φυσιολογία. Δεν πραγματοποιούνται ιατρικές πράξεις, χορηγήσεις ή διαλογή. Το αποτέλεσμα δεν αποτελεί κλινική βαθμολογία.</p>
+<section class="next-quickstart" aria-labelledby="next-quickstart-title">
+ <div class="next-quickstart-copy">
+  <p class="next-eyebrow">ΓΡΗΓΟΡΗ ΕΝΑΡΞΗ · ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΣΚΗΣΗ</p>
+  <h2 id="next-quickstart-title">Το επόμενο βήμα, χωρίς να ψάχνεις στα μενού</h2>
+  <p id="next-guide-step" role="status" aria-live="polite">Εντοπίζεται το επόμενο εκπαιδευτικό βήμα…</p>
+  <p id="next-guide-progress" class="next-guide-progress">Οι ενέργειες καταγράφονται μόνο όταν τις επιλέξεις.</p>
+ </div>
+ <button type="button" id="next-guide-action">▶ Δείξε μου το επόμενο βήμα</button>
+</section>
 <section id="next-case-library" class="next-library" aria-label="Βιβλιοθήκη εκπαιδευτικών αποστολών">
+ <details class="next-case-picker">
+  <summary>▣ Επιλογή / αλλαγή περιστατικού <small>9 διαθέσιμες εκπαιδευτικές αποστολές</small></summary>
  <div class="next-library-heading"><div><p class="next-eyebrow">ΕΚΑΒ ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ · ΕΚΠΑΙΔΕΥΤΙΚΗ ΕΞΑΣΚΗΣΗ</p><h2>Επίλεξε αποστολή</h2></div><span>3 πρωτότυπα ελληνικά περιβάλλοντα</span></div>
  <p>Κάθε αποστολή έχει διαφορετικούς εικονικούς ασθενείς, διάλογο και συνθετικά ζωτικά. Η πρόοδος κρατιέται χωριστά στη συσκευή.</p>
  <div id="next-case-list" class="next-case-grid" role="group" aria-label="Επιλογή εκπαιδευτικής αποστολής"></div>
  <h3 class="next-practical-heading">Πρακτικό ΕΟΠΠΕΠ · τα έξι σενάρια</h3>
  <div id="next-practical-list" class="next-case-grid" role="group" aria-label="Σενάρια πρακτικού ΕΟΠΠΕΠ"></div>
+ </details>
  <p id="next-case-practical" class="next-case-practical" hidden></p>
  <p id="next-case-goal" class="next-case-goal"></p>
 </section>
@@ -68,6 +80,7 @@
    <div class="next-canvas-caption">Σύρε για περιστροφή · επίλεξε ασθενή · εστίασε σε σώμα / κεφάλι / θώρακα</div>
    <div class="next-rotate"><button type="button" id="next-rotate-left" aria-label="Περιστροφή αριστερά">↶</button><button type="button" id="next-rotate-right" aria-label="Περιστροφή δεξιά">↷</button></div>
   </div>
+  <p id="next-render-notice" class="next-render-notice" role="status" aria-live="polite">Η 3D σκηνή φορτώνει. Οι επιλογές εξάσκησης λειτουργούν και χωρίς 3D.</p>
   <div class="next-patient-switch" role="group" aria-label="Επιλογή εικονικού ασθενούς"><button type="button" data-next-patient="a" aria-pressed="true">Άτομο Α <small>Δίπλα στο όχημα</small></button><button type="button" data-next-patient="b" aria-pressed="false">Άτομο Β <small>Λίγο πιο πέρα</small></button></div>
  </div>
  <aside class="next-monitor" aria-label="Εικονική οθόνη παρακολούθησης">
@@ -84,7 +97,7 @@
  </aside>
 </section>
 <div class="next-command-bar" aria-label="Διαχείριση εργαλείων και επόμενων βημάτων">
- <button type="button" id="next-nextstep">✦ Επόμενο οργανωτικό βήμα</button>
+ <button type="button" id="next-nextstep">✦ Βοήθεια: επόμενο βήμα</button>
  <span>Οι επιλογές αυτές οργανώνουν την εξάσκηση, όχι την κλινική φροντίδα.</span>
 </div>
 <details id="next-tool-panels" class="next-panel-section" open>

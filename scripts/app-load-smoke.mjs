@@ -131,6 +131,19 @@ try {
     const nextResponse=await page.goto('http://127.0.0.1:8765/mentor-next.html',{waitUntil:'load',timeout:30000});
     if(!nextResponse?.ok())throw Error(device+': MENTOR NEXT HTTP '+nextResponse?.status());
     await page.locator('#next-hr').waitFor();
+    await page.locator('#atlas-cockpit-entry.atlas-cockpit-optional > summary').waitFor({state:'visible',timeout:15000});
+    if(await page.locator('#atlas-cockpit-entry.atlas-cockpit-optional').evaluate(el=>el.open))
+      throw Error(device+': optional ATLAS tutor must not obscure the patient scene on direct entry');
+    if(await page.locator('.next-case-picker').evaluate(el=>el.open))
+      throw Error(device+': the large case library should be collapsed on entry');
+    if(!await page.locator('#next-guide-step').textContent().then(t=>t.includes('ασφάλεια')))
+      throw Error(device+': guided flow should start with scene safety');
+    const priorGuidedEvents=await page.locator('#next-events li').count();
+    await page.locator('#next-guide-action').click();
+    if(!await page.locator('#next-tool-title').textContent().then(t=>t.includes('Εξέταση')))
+      throw Error(device+': guided flow did not open safety tool');
+    if(await page.locator('#next-events li').count()!==priorGuidedEvents)
+      throw Error(device+': navigation guide must not log a clinical action');
     const nextInitial=await page.locator('#next-hr').textContent();
     if(!/^\d+$/.test(nextInitial))throw Error(device+': MENTOR NEXT vitals absent');
     await page.locator('#next-step').click();
@@ -144,6 +157,7 @@ try {
     await page.locator('#next-question').fill('Τι αισθάνεστε;');
     await page.locator('#next-ask-form button').click();
     if(!await page.locator('#next-result').textContent().then(s=>s.includes('αναστατωμένος')))throw Error(device+': MENTOR NEXT patient dialogue');
+    await page.locator('.next-tool-more').click();
     await page.locator('#next-tools button').filter({hasText:'Φάρμακα'}).click();
     if(!await page.locator('#next-actions').textContent().then(s=>s.includes('Κλειδωμένο')))throw Error(device+': MENTOR NEXT safety lock');
     const [nextReport]=await Promise.all([page.waitForEvent('download',{timeout:10000}),page.locator('#next-download').click()]);
@@ -175,8 +189,13 @@ try {
     // MENTOR NEXT v0.3: distinct cases, independent data, and resume.
     if(await page.locator('#next-case-list .next-case-card').count()!==3)
       throw Error(device+': MENTOR NEXT v0.3 missing three selectable scenarios');
+    const selectSimulatorCase=async id=>{
+      const picker=page.locator('.next-case-picker');
+      if(!await picker.evaluate(el=>el.open))await picker.locator('summary').click();
+      await page.locator('[data-case-id="'+id+'"]').click();
+    };
     const previousCount=await page.locator('#next-events li').count();
-    await page.locator('[data-case-id="home-welfare-next-v1"]').click();
+    await selectSimulatorCase('home-welfare-next-v1');
     if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('κατοικία')))
       throw Error(device+': MENTOR NEXT did not switch to home case');
     if(!await page.locator('#next-location').textContent().then(t=>t.includes('Κατοικία')))
@@ -185,20 +204,20 @@ try {
     await page.locator('#next-ask-form button').click();
     if(!await page.locator('#next-result').textContent().then(t=>t.includes('δωμάτιο')))
       throw Error(device+': MENTOR NEXT home patient case-specific reply failed');
-    await page.locator('[data-case-id="public-square-next-v1"]').click();
+    await selectSimulatorCase('public-square-next-v1');
     if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('πλατεία')))
       throw Error(device+': MENTOR NEXT square case not selected');
     await page.locator('#next-question').fill('Τι συνέβη;');
     await page.locator('#next-ask-form button').click();
     if(!await page.locator('#next-result').textContent().then(t=>t.includes('παγκάκι')))
       throw Error(device+': MENTOR NEXT square-specific dialogue missing');
-    await page.locator('[data-case-id="home-welfare-next-v1"]').click();
+    await selectSimulatorCase('home-welfare-next-v1');
     if(!await page.locator('#next-events').textContent().then(t=>t.includes('δωμάτιο')))
       throw Error(device+': MENTOR NEXT per-case resume lost home history');
     await page.reload({waitUntil:'load'});
     if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('κατοικία')))
       throw Error(device+': MENTOR NEXT active case not restored after reload');
-    await page.locator('[data-case-id="crete-two-persons-next-v1"]').click();
+    await selectSimulatorCase('crete-two-persons-next-v1');
     if(await page.locator('#next-events li').count()!==previousCount)
       throw Error(device+': MENTOR NEXT original road case history lost');
     console.log('PASS '+device+': MENTOR NEXT v0.3 three original scenarios, contextual dialogue and independent save/resume');
@@ -249,9 +268,11 @@ try {
       throw Error(device+': actual two-patient WebGL canvas not visible');
     await page.locator('[data-next-patient="b"]').click();
     if(!await page.locator('#next-person-name').textContent())throw Error(device+': selecting patient B failed');
+    if(await page.locator('[data-next-view="full"]').getAttribute('aria-pressed')!=='true')
+      throw Error(device+': patient selection did not open closer full-body view');
     await page.locator('[data-next-view="head"]').click();
     await page.locator('[data-next-view="full"]').click();
-    await page.locator('[data-case-id="public-square-next-v1"]').click();
+    await selectSimulatorCase('public-square-next-v1');
     await page.waitForFunction(()=>document.querySelector('.next-unified-canvas')?.dataset.stageStatus==='ready',null,{timeout:25000});
     if(!await page.locator('#next-unified-host canvas').isVisible())
       throw Error(device+': scene failed after case switch');

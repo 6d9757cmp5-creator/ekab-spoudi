@@ -11,6 +11,14 @@ on:
       - 'tools/patient-simulator/app/unified-stage.mjs'
       - 'tools/patient-simulator/app/next-sim.mjs'
       - 'mentor-next.html'
+  pull_request:
+    paths:
+      - 'mentor-next.html'
+      - 'tools/patient-simulator/app/**'
+      - 'tools/patient-simulator/styles/**'
+      - 'tools/patient-simulator/vendor/unified-stage.bundle.mjs'
+      - 'scripts/verify-atla-rigged-cockpit-*.mjs'
+      - '.github/workflows/atla-rigged-cockpit-browser.yml'
   workflow_dispatch:
 permissions:
   contents: read

@@ -9,11 +9,16 @@ const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 const params=new URLSearchParams(location.search);
 // A scenario opened from a lesson page starts there; its saved progress resumes on its own.
-let state=getCase(params.get('case'))?loadCaseSession(localStorage,params.get('case')):loadSession(localStorage),tool='dialogue',result='Επίλεξε τον ασθενή και ένα εργαλείο για να ξεκινήσεις.';
+let state=getCase(params.get('case'))?loadCaseSession(localStorage,params.get('case')):loadSession(localStorage),tool='exam',result='Ξεκίνα από τον έλεγχο ασφάλειας σκηνής ή επίλεξε επόμενο βήμα.';
 const returnHref=safeReturnHref(params.get('from'),location.href,'');
 if(returnHref){$('next-return').href=returnHref;$('next-return').hidden=false;}
 let renderer=mountPatientScene($('next-canvas'));
 const meshText=$('next-mesh-status'),patientCanvas=$('next-canvas');
+const renderNotice=$('next-render-notice');
+function setRenderNotice(message,state='info'){
+ renderNotice.textContent=message;
+ renderNotice.dataset.state=state;
+}
 function updatePatientAssetStatus(){
  const status=patientCanvas.dataset.humanModel;
  meshText.textContent=status==='ready'?'Ανθρώπινο 3D πλέγμα CC0 · διαδραστική εκπαιδευτική απεικόνιση':
@@ -68,7 +73,8 @@ function disableRealisticMode(){
  readyModel.removeAttribute('data-focus-view');
  lastCameraKey='';
  readyToggle.disabled=false;
- readyToggle.textContent='✦ Έτοιμοι 3D ασθενείς';
+ readyToggle.textContent='✦ Ενιαία 3D σκηνή';
+ setRenderNotice('Ενεργή η ελαφριά εφεδρική 3D απεικόνιση. Η εξάσκηση συνεχίζεται.','fallback');
  readyToggle.setAttribute('aria-pressed','false');
  patientCanvas.style.removeProperty('visibility');
 }
@@ -85,7 +91,8 @@ async function enableRealisticMode(){
   patientCanvas.style.setProperty('visibility','hidden');
   lastReadyPerson=state.person;
   updateReadyModel(state.person==='b'?'amara':'alex');
-  readyToggle.textContent='↶ Παλιά 3D σκηνή';
+  readyToggle.textContent='↶ Ελαφριά 3D προβολή';
+  setRenderNotice('Εμφανίζεται στατικό 3D μοντέλο. Δεν αντιδρά στις εκπαιδευτικές ενέργειες.','ready');
   readyToggle.setAttribute('aria-pressed','true');
  }catch(error){
   disableRealisticMode();
@@ -99,7 +106,8 @@ readyModel.addEventListener('load',()=>{
  applyReadyCamera(true);
 });
 readyModel.addEventListener('error',()=>{
- readyStatus.textContent='Αδυναμία εμφάνισης μοντέλου. Ενεργή η παλιά σκηνή 3D.';
+ readyStatus.textContent='Αδυναμία εμφάνισης μοντέλου. Ενεργή η εφεδρική προβολή.';
+ setRenderNotice('Το 3D μοντέλο δεν φορτώθηκε. Συνέχισε με το περιστατικό και τα εργαλεία.','fallback');
  readyModel.dataset.assetReady='false';
  disableRealisticMode();
 });
@@ -138,6 +146,7 @@ function disableUnified(){
  readyToggle.disabled=false;
  readyToggle.textContent='✦ Ενιαία 3D σκηνή';
  readyToggle.setAttribute('aria-pressed','false');
+ setRenderNotice('Ενεργή ελαφριά προβολή. Πάτησε «Ενιαία 3D σκηνή» για πλήρη οπτική σκηνή.','info');
  renderer.setPaused?.(!state.playing);
 }
 async function enableUnified(){
@@ -150,8 +159,8 @@ async function enableUnified(){
    assets:stageAssets(),
    onStatus:(code)=>updateUnifiedStatus(code),
    onSelect:(id)=>{
-    if(!unifiedEnabled||id===state.person)return;
-    try{commit(setFocus(state,id,state.view),'Επιλέχθηκε ο εικονικός ασθενής '+id.toUpperCase()+' στη 3D σκηνή.');}
+    if(!unifiedEnabled||(id===state.person&&state.view!=='scene'))return;
+    try{commit(setFocus(state,id,state.view==='scene'?'full':state.view),'Επιλέχθηκε ο ασθενής '+id.toUpperCase()+' · κοντινή 3D προβολή.');}
     catch{showResult('Δεν ήταν δυνατή η επιλογή ασθενούς.');}
    }
   });
@@ -163,11 +172,13 @@ async function enableUnified(){
   patientCanvas.style.setProperty('visibility','hidden');
   lastUnifiedState=JSON.stringify(stageState());
   renderer.setPaused?.(true);
-  readyToggle.textContent='↶ Παλαιά 3D προβολή';
+  readyToggle.textContent='↶ Ελαφριά 3D προβολή';
   readyToggle.setAttribute('aria-pressed','true');
+  setRenderNotice('Η ενιαία 3D σκηνή φορτώθηκε. Μπορείς να επιλέξεις τα άτομα Α και Β.','ready');
  }catch(error){
   disableUnified();
   showResult('Η ενιαία σκηνή δεν φορτώθηκε. Διατηρείται η προηγούμενη 3D προβολή: '+String(error?.message||error).slice(0,125));
+  setRenderNotice('Η πλήρης 3D σκηνή απέτυχε. Γίνεται εναλλαγή στην εφεδρική προβολή.','fallback');
   // The reliable legacy textured model-viewer is retained as a secondary fallback.
   await enableRealisticMode();
  }finally{
@@ -252,21 +263,56 @@ function renderCaseLibrary(){
    if(c.id===state.caseId)return;
    tool='dialogue';result='Φορτώθηκε η αποστολή «'+c.title+'». Το προηγούμενο περιστατικό παραμένει αποθηκευμένο τοπικά.';
    commit(loadCaseSession(localStorage,c.id),result);
+   document.querySelector('.next-case-picker').open=false;
    $('next-stage').scrollIntoView({behavior:'smooth',block:'start'});
   });
   (c.group?practical:cases).append(button);
  }
 }
 
+let showAdvancedTools=false;
+const advancedToolIds=new Set(['view','position','tests','meds','records']);
+function nextGuideStep(){
+ const review=missionEvidence(state);
+ if(state.finished)return {label:'Άνοιξε την ανασκόπηση της ολοκληρωμένης προσπάθειας',tool:'debrief',person:null,actionId:null,complete:true};
+ if(!review.shared[0].done)return {label:'Έλεγξε την ασφάλεια της σκηνής',tool:'exam',person:state.person,actionId:'scene'};
+ const patients=[review.people.find(p=>p.id===state.person),...review.people.filter(p=>p.id!==state.person)].filter(Boolean);
+ const paths={
+  dialogue:{label:'Συνομίλησε με τον εικονικό ασθενή',tool:'dialogue',actionId:'symptoms'},
+  exam:{label:'Κατάγραψε αρχική οπτική εκτίμηση',tool:'exam',actionId:'initial'},
+  monitor:{label:'Κατάγραψε τα συνθετικά ζωτικά',tool:'monitor',actionId:'record'},
+  reassessment:{label:'Κάνε επανεκτίμηση',tool:'exam',actionId:'reassess'}
+ };
+ for(const patient of patients){
+  const missing=patient.steps.find(item=>!item.done);
+  if(missing)return {...paths[missing.id],person:patient.id};
+ }
+ if(!review.shared[1].done)return {label:'Πρόβα επικοινωνίας με τον συντονισμό',tool:'call',person:null,actionId:'coordination'};
+ if(!review.shared[2].done)return {label:'Δομημένη παράδοση των καταγραφών',tool:'interventions',person:null,actionId:'handover'};
+ return {label:'Δες την ανασκόπηση και ολοκλήρωσε την προσπάθεια',tool:'debrief',person:null,actionId:null};
+}
+function renderGuide(){
+ const review=missionEvidence(state),done=review.shared.filter(x=>x.done).length+review.people.reduce((sum,p)=>sum+p.covered,0);
+ const next=nextGuideStep();
+ $('next-guide-step').textContent='Επόμενο: '+next.label+(next.person?' · Άτομο '+next.person.toUpperCase():'');
+ $('next-guide-progress').textContent='Καταγεγραμμένα '+done+'/11 εκπαιδευτικά βήματα · Καμία ενέργεια δεν εκτελείται αυτόματα.';
+ $('next-guide-action').textContent=state.finished?'◎ Άνοιξε την ανασκόπηση':'▶ Πήγαινε στο επόμενο βήμα';
+}
 function renderMenu(){
  const nav=$('next-tools');nav.replaceChildren();
  for(const t of TOOLS){
   const button=el('button',undefined,'next-tool');button.type='button';button.title=t.label;
   button.append(el('span',t.icon,'next-icon'),el('span',t.label));
   button.setAttribute('aria-pressed',String(tool===t.id));
+  button.hidden=advancedToolIds.has(t.id)&&!showAdvancedTools&&tool!==t.id;
   button.addEventListener('click',()=>{tool=t.id;renderMenu();renderTool();});
   nav.append(button);
  }
+ const more=el('button',showAdvancedTools?'− Λιγότερα εργαλεία':'+ Όλα τα εργαλεία','next-tool next-tool-more');
+ more.type='button';
+ more.setAttribute('aria-expanded',String(showAdvancedTools));
+ more.addEventListener('click',()=>{showAdvancedTools=!showAdvancedTools;renderMenu();});
+ nav.append(more);
 }
 function renderTool(){
  const active=TOOLS.find(t=>t.id===tool)||TOOLS[0],actions=$('next-actions');
@@ -306,10 +352,13 @@ function renderTool(){
   }
   actions.append(actionButton('Μετάβαση στην ΑΝΑΣΚΟΠΗΣΗ',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
  }else for(const a of activeActions){
-  actions.append(actionButton(a.label+' · '+a.min+'′',()=>{
+  const button=actionButton(a.label+' · '+a.min+'′',()=>{
    try{const updated=execute(state,tool,a.id);commit(updated,updated.events.at(-1).detail);}
    catch{showResult('Η ενέργεια δεν ήταν διαθέσιμη.');}
-  },state.finished));
+  },state.finished);
+  const next=nextGuideStep();
+  if(next.tool===tool&&next.actionId===a.id&&(!next.person||next.person===state.person))button.classList.add('next-suggested-action');
+  actions.append(button);
  }
  $('next-result').textContent=result;
 }
@@ -329,7 +378,7 @@ function renderInsights(){
   }
   card.append(ul);
   card.append(actionButton('Επιλογή ατόμου '+p.id.toUpperCase(),()=>{
-   commit(setFocus(state,p.id,state.view),'Εστιάζεις στο Άτομο '+p.id.toUpperCase()+'.');
+   commit(setFocus(state,p.id,state.view==='scene'?'full':state.view),'Εστιάζεις στο Άτομο '+p.id.toUpperCase()+' · κοντινή προβολή.');
   }));
   grid.append(card);
  }
@@ -419,7 +468,7 @@ function render(){
  }
  renderer.setPaused(unifiedEnabled||!state.playing);
  renderer.setPoses?.({a:patientPose(state,'a'),b:patientPose(state,'b')});
- renderMenu();renderTool();renderReview();renderInsights();
+ renderMenu();renderTool();renderReview();renderInsights();renderGuide();
  window.dispatchEvent(new CustomEvent('mentor:context',{detail:{kind:'scenario',id:currentCase.id,label:'ATLA · Προσομοιωτής — '+currentCase.title}}));
  window.dispatchEvent(new CustomEvent('atla:nih3d-cockpit-anatomy',{detail:{
   confirmedAnatomy:typeof currentCase.confirmedAnatomy==='string'?currentCase.confirmedAnatomy:null,
@@ -427,7 +476,7 @@ function render(){
  }}));
 }
 for(const button of document.querySelectorAll('[data-next-patient]'))button.addEventListener('click',()=>{
- try{commit(setFocus(state,button.dataset.nextPatient,state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+'.');}catch{}
+ try{commit(setFocus(state,button.dataset.nextPatient,state.view==='scene'?'full':state.view),'Επέλεξες '+labelPerson(button.dataset.nextPatient)+' · κοντινή προβολή.');}catch{}
 });
 for(const button of document.querySelectorAll('[data-next-view]'))button.addEventListener('click',()=>{
  try{commit(setFocus(state,state.person,button.dataset.nextView),'Άλλαξε η γωνία προβολής.');}catch{}
@@ -460,19 +509,17 @@ const clock=setInterval(()=>{
 },1000);
 // The native <details> element owns close/reopen, independent of JavaScript and the floating MENTOR.
 // Guided next process step, never clinical advice.
-$('next-nextstep').addEventListener('click',()=>{
- const r=missionEvidence(state),p=r.people.find(x=>x.id===state.person);
- if(!r.shared[0].done)tool='exam';
- else if(p.steps.some(x=>!x.done)){
-  const first=p.steps.find(x=>!x.done);
-  tool=first.id==='dialogue'?'dialogue':first.id==='exam'?'exam':first.id==='monitor'?'monitor':'exam';
- }else if(!r.shared[1].done)tool='call';
- else if(!r.shared[2].done)tool='interventions';
- else tool='debrief';
+function openGuidedStep(){
+ const next=nextGuideStep();
+ tool=next.tool;
+ if(next.person&&state.person!==next.person)commit(setFocus(state,next.person,state.view),'Επιλέχθηκε το άτομο '+next.person.toUpperCase()+'. Διάλεξε την εκπαιδευτική ενέργεια.');
  $('next-tool-panels').open=true;
  renderMenu();renderTool();
- $('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
-});
+ if(state.finished)$('next-review-body').scrollIntoView({behavior:'smooth',block:'center'});
+ else $('next-tool-title').scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('next-nextstep').addEventListener('click',openGuidedStep);
+$('next-guide-action').addEventListener('click',openGuidedStep);
 window.addEventListener('pagehide',()=>{clearInterval(clock);meshObserver.disconnect();unifiedStage?.dispose();renderer.dispose();},{once:true});
 render();
 // Heavy GLBs load after core controls are interactive; reduced-data users opt in manually.

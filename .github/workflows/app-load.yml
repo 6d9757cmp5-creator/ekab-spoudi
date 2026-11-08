@@ -2,6 +2,13 @@ name: App loads on mobile and desktop
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - 'mentor-next.html'
+      - 'tools/patient-simulator/**'
+      - 'scripts/app-load-smoke.mjs'
+      - 'scripts/verify-cockpit-visual.mjs'
+      - '.github/workflows/app-load.yml'
   workflow_dispatch:
 permissions:
   contents: read
