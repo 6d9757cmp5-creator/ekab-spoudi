@@ -20,7 +20,7 @@
 .seminar-course-header h2{font-size:1.65rem;margin:0}
 .seminar-course-header p{margin:4px 0;color:var(--muted)}
 .seminar-course-progress{font-size:.73rem;font-weight:650;max-width:340px}
-.seminar-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0 0 14px;padding:5px;border:1px solid var(--line);border-radius:13px;background:var(--light)}
+.seminar-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:0 0 14px;padding:5px;border:1px solid var(--line);border-radius:13px;background:var(--light)}
 .seminar-tabs button{color:var(--ink);background:transparent;border:0;border-radius:9px;padding:12px 8px;font-weight:750;font-size:.83rem;min-width:0}
 .seminar-tabs button.active,.seminar-tabs button[aria-selected=true]{background:var(--navy);color:white}
 .seminar-learn{display:grid;grid-template-columns:minmax(180px,220px) minmax(0,1fr);gap:14px;align-items:start}
@@ -147,3 +147,10 @@ html[data-theme=dark] .seminar-result-uncertain .seminar-result-flag{background:
 .seminar-retry-archive{padding-top:11px;font-size:.81rem;line-height:1.5;overflow-wrap:anywhere}
 .seminar-retry-archive p{margin:6px 0}
 html[data-theme=dark] .seminar-retry-history,html[data-theme=dark] .seminar-retry-history-item{border-color:#45657a}
+.seminar-exam{display:grid;gap:12px;max-width:790px}.seminar-exam-card h4{margin:0 0 8px;font-size:1.05rem}.seminar-exam-card p{margin:0 0 10px}
+.seminar-exam-head{display:flex;justify-content:space-between;gap:10px;font-weight:750;font-size:.85rem;color:var(--muted)}.seminar-exam-clock{font-variant-numeric:tabular-nums}.seminar-exam-clock.is-low{color:#b42318}
+.seminar-exam-bar{height:6px;border-radius:6px;background:var(--line);margin:8px 0 14px;overflow:hidden}.seminar-exam-bar span{display:block;height:100%;background:var(--navy);transition:width .2s}
+.seminar-exam-choices{display:grid;gap:8px}.seminar-exam-scene{font-style:italic}.seminar-exam-situation{font-weight:750}
+.seminar-exam-verdict{font-weight:800;padding:10px 12px;border-radius:10px}.seminar-exam-verdict.is-pass{background:#e3f6ea;color:#14532d}.seminar-exam-verdict.is-fail{background:#fdecea;color:#7a1d14}
+.seminar-exam-review{padding-left:20px;display:grid;gap:12px}.seminar-exam-review p{margin:4px 0}.seminar-exam-review .is-correct{color:#14532d;font-weight:700}
+html[data-theme=dark] .seminar-exam-verdict.is-pass{background:#173b26;color:#c9f2d6}html[data-theme=dark] .seminar-exam-verdict.is-fail{background:#4a1f1a;color:#ffd8d2}html[data-theme=dark] .seminar-exam-review .is-correct{color:#9be3b4}
