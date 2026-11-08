@@ -237,6 +237,8 @@ html[data-theme="dark"] .study-resume-play{background:#27576f;color:#c7efff}
 
 /* One clear 3D Anatomy entry: all skeleton/organ options live inside the atlas. */
 .home-anatomy-single-wrap{margin:14px 0 0}
+.home-3d-library-link{display:inline-block;margin:10px 4px 0;color:#8bd4f0;font-weight:600;text-decoration:none}
+.home-3d-library-link:hover,.home-3d-library-link:focus-visible{text-decoration:underline}
 .home-anatomy-single-eyebrow{font-size:.65rem;font-weight:850;letter-spacing:.09em;color:var(--blue,#186c91);margin:0 0 7px}
 .home-anatomy-single{display:flex;align-items:center;gap:14px;min-height:90px;padding:13px 17px;border:1px solid #a6cfdc;border-radius:16px;background:linear-gradient(110deg,#eef9fc,#f6fcfd);box-shadow:0 4px 14px #0626390b;text-decoration:none;color:#173d54;transition:background .14s ease,border-color .14s ease}
 .home-anatomy-single:hover{border-color:#3a9dba;background:#e5f6fb}
