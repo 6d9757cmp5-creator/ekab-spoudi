@@ -63,6 +63,45 @@ export function vitalTrend(s,id,metric){
  const result=[];for(let minute=0;minute<=s.minute;minute++)result.push({minute,value:patientVitals({...s,minute},id)[metric]});
  return result;
 }
+
+/**
+ * Original educational S/B/A/R handover draft. Only previously logged fictional
+ * observations appear as findings. Missing information stays explicitly missing.
+ * This is not a medical recommendation, care plan, or verified patient report.
+ */
+export function buildHandoverDraft(s,id){
+ ensure(s);
+ const scenario=getCase(s.caseId),patient=scenario.patients.find(p=>p.id===id);
+ if(!patient)throw Error('unknown-person');
+ const records=s.events.filter(e=>e.person===id);
+ const dialogue=records.filter(e=>e.tool==='dialogue');
+ const observations=records.filter(e=>e.tool==='exam'&&e.actionId!=='scene');
+ const recordedVitals=records.filter(e=>e.tool==='monitor'&&e.actionId==='record');
+ const items=(events,empty)=>events.length
+  ?events.map(e=>'- '+e.minute+'′ · '+e.label+': '+e.detail).join('\n')
+  :'- '+empty;
+ const gaps=[];
+ if(!dialogue.length)gaps.push('δεν καταγράφηκε συνομιλία');
+ if(!observations.length)gaps.push('δεν καταγράφηκε ατομική παρατήρηση');
+ if(!recordedVitals.length)gaps.push('δεν καταγράφηκαν συνθετικά ζωτικά');
+ if(!s.events.some(e=>e.tool==='exam'&&e.actionId==='scene'||e.tool==='interventions'&&e.actionId==='safety'))
+  gaps.push('δεν καταγράφηκε έλεγχος κινδύνων σκηνής');
+ return [
+  'S / ΚΑΤΑΣΤΑΣΗ',
+  'Συνθετική άσκηση: '+scenario.title,
+  patient.name+' · '+patient.setting+' · εικονικός χρόνος '+s.minute+'′',
+  'B / ΙΣΤΟΡΙΚΟ ΑΠΟ ΚΑΤΑΓΡΑΦΕΣ',
+  items(dialogue,'Δεν καταγράφηκε συνομιλία ή ιστορικό.'),
+  'A / ΚΑΤΑΓΕΓΡΑΜΜΕΝΕΣ ΠΑΡΑΤΗΡΗΣΕΙΣ',
+  items(observations,'Δεν καταγράφηκε ατομική παρατήρηση.'),
+  items(recordedVitals,'Δεν καταγράφηκαν συνθετικά ζωτικά για το συγκεκριμένο άτομο.'),
+  'R / ΕΚΚΡΕΜΟΤΗΤΕΣ ΕΚΠΑΙΔΕΥΤΙΚΗΣ ΑΝΑΣΚΟΠΗΣΗΣ',
+  gaps.length?gaps.map(g=>'- '+g).join('\n'):'- Δεν εντοπίστηκαν ελλείψεις στις συγκεκριμένες κατηγορίες καταγραφών.',
+  'Δεν διατυπώνεται θεραπευτική ή κλινική σύσταση.',
+  'ΜΟΝΟ ΕΚΠΑΙΔΕΥΤΙΚΟ ΠΡΟΣΧΕΔΙΟ · ΟΧΙ ΠΡΑΓΜΑΤΙΚΗ ΠΑΡΑΔΟΣΗ ΑΣΘΕΝΟΥΣ'
+ ].join('\n');
+}
+
 export function buildEvidenceReport(s){
  const e=missionEvidence(s),out=['ATLA · Προσομοιωτής · ΑΝΑΣΚΟΠΗΣΗ ΑΝΑ ΑΣΘΕΝΗ',getCase(s.caseId).title,e.disclaimer,
  'Χρόνος: '+s.minute+' εκπαιδευτικά λεπτά','Καταγραφές: '+s.events.length,''];
@@ -72,5 +111,6 @@ export function buildEvidenceReport(s){
  }
  out.push('ΚΟΙΝΑ ΟΡΓΑΝΩΤΙΚΑ ΒΗΜΑΤΑ',...e.shared.map(x=>(x.done?'[x] ':'[ ] ')+x.label));
  if(e.caution.length)out.push('','ΣΗΜΕΙΑ ΓΙΑ ΕΠΑΝΑΛΗΨΗ',...e.caution);
+ out.push('','ΠΡΟΣΧΕΔΙΑ ΔΟΜΗΜΕΝΗΣ ΠΑΡΑΔΟΣΗΣ — ΜΟΝΟ ΣΥΝΘΕΤΙΚΕΣ ΚΑΤΑΓΡΑΦΕΣ',...e.people.map(p=>buildHandoverDraft(s,p.id)+'\n'));
  return out.join('\n')+'\n';
 }
