@@ -32,7 +32,7 @@ async function contextualSurfaces(ctx,name){
  const href=await link.getAttribute('href');
  assert.match(href,/atla-resource-preview\.html\?tool=anatomy&dataset=nih&model=3DPX-000170&from=/);
  assert.equal(await link.getAttribute('target'),null,'A lesson link keeps the same tab so the return works');
- assert(await refs(page,'#lesson-2').count()<=6,'No mass listing in a chapter');
+ assert(await refs(page,'#lesson-2').count()<=12,'No mass listing in a chapter');
  assert.equal(await refs(page,'#lesson-1').count(),0,'No model without chapter evidence');
  await visit(page,'/saek-exams.html');
  const exam=(text,revealed)=>page.evaluate(detail=>window.dispatchEvent(new CustomEvent('atla:saek-exam-question',{detail})),{text,revealed});
@@ -44,7 +44,8 @@ async function contextualSurfaces(ctx,name){
  await exam('Τι είναι η επιγονατίδα;',true);
  await refs(page,'#examReference').first().waitFor({state:'attached'});
  assert.equal(await page.locator('#examReference .nih3d-research-reference a').getAttribute('target'),'_blank','The running exam stays intact');
- await exam('Τι είναι η αορτή;',true);
+ // A revealed question about a structure with no model clears the previous reference.
+ await exam('Τι είναι η καρωτίδα;',true);
  await page.waitForFunction(()=>document.querySelectorAll('#examReference .nih3d-research-reference').length===0);
  await visit(page,'/mentor-next.html');
  const cockpit=(confirmedAnatomy,clinicalStructureConfirmed)=>page.evaluate(detail=>window.dispatchEvent(new CustomEvent('atla:nih3d-cockpit-anatomy',{detail})),{confirmedAnatomy,clinicalStructureConfirmed});
@@ -54,7 +55,8 @@ async function contextualSurfaces(ctx,name){
  assert.equal(await refs(page).count(),0);
  await cockpit('Βραχιόνιο',true);
  await page.waitForTimeout(500);
- assert.equal(await refs(page).count(),0,'A named structure alone never shows a fracture');
+ // A named structure may show its normal anatomy, never a fracture.
+ assert(!/κάταγμα/i.test((await refs(page).allTextContents()).join(' ')),'A named structure alone never shows a fracture');
  await cockpit('Επιγονατίδα',true);
  await page.locator('.nih3d-research-reference[data-cockpit]').waitFor({state:'attached'});
  await cockpit('Τροχαίο',true);

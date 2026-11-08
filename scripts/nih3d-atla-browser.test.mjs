@@ -44,7 +44,8 @@ try{
  await ask(page,'Ανατομία της επιγονατίδας σε 3D');
  assert.match(await modelLinks(page).last().getAttribute('href'),/model=3DPX-000170/,'The exact model wins over generic navigation');
  await ask(page,'Δείξε μου το βραχιόνιο σε 3D');
- assert.equal(await modelLinks(page).count(),0,'A bone name never opens a fracture example');
+ // A bone name opens that normal bone, never a fracture example.
+ assert.match(await modelLinks(page).last().getAttribute('href'),/model=3DPX-016809/,'A bone name never opens a fracture example');
  await page.goto(new URL(href,base).href,{waitUntil:'domcontentloaded'});
  await page.waitForFunction(()=>/Φορτώθηκε/.test(document.querySelector('#source-status')?.textContent||''),null,{timeout:90000});
  await page.click('#source-back');

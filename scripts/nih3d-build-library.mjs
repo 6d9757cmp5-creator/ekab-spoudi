@@ -195,8 +195,9 @@ async function build(stagingRoot){
   const surfaces=!delivered?[]:!curated?['library']:curated.kind==='anatomy'?['library','lesson','anatomy','exam','cockpit','atla']:['library','lesson','exam','cockpit','atla'];
   models.push({
    id:model.accession,accession:model.accession,entryId:model.entryId,source:'nih3d',sourceLabel:'NIH 3D',
-   label:curated?.greekTitle??(categoryEl+' · '+model.title.trim()),
-   greekTitle:curated?.greekTitle??null,originalTitle:model.title.trim(),category:categoryEl,
+   // Library-only models carry a Greek title without lesson links.
+   label:curated?.greekTitle??curation.titles?.[model.accession]??(categoryEl+' · '+model.title.trim()),
+   greekTitle:curated?.greekTitle??curation.titles?.[model.accession]??null,originalTitle:model.title.trim(),category:categoryEl,
    kind:curated?.kind??null,structures:curated?.structures??[],finding:curated?.finding??null,
    laterality:null,license:record.licenseRaw,rightsBasis:OPEN_LICENSE.test(String(record.licenseRaw).trim())?'SOURCE_LICENSE':'OWNER_STATED_PERMISSION',creator:record.creator||null,sourceVersion:model.sourceVersion??record.version??null,
    originalPage:model.originalPage,archive:{files:model.verifiedFiles.length,image:glb?.verifiedOCI?.digest??null,release:glb?.archive??null,formats:[...new Set(model.verifiedFiles.map(f=>f.format))].sort()},

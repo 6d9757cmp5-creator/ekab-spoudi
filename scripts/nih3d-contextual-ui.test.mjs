@@ -15,7 +15,8 @@ assert.equal(pick({surface:'cockpit',text:'Επιγονατίδα',confirmedAnat
 assert.equal(pick({surface:'cockpit',text:'Τροχαίο, πιθανό τραύμα',confirmedAnatomy:true}),null);
 assert.equal(pick({surface:'cockpit',text:'Επιγονατίδα',confirmedAnatomy:true}),PATELLA);
 assert.equal(pick({surface:'anatomy',text:'Επιγονατίδες'}),PATELLA);
-assert.equal(pick({surface:'anatomy',text:'Σπονδυλική στήλη'}),null);
+// The whole column opens a whole-column model, never one segment of it.
+assert.deepEqual(selectLibraryModels(library,{surface:'anatomy',text:'Σπονδυλική στήλη'})[0]?.structures,['spine']);
 assert.equal(pick({surface:'learning',text:'Επιγονατίδα'}),null);
 const patella=library.models.find(m=>m.accession===PATELLA);
 assert.equal(patella.originalPage,'https://3d.nih.gov/entries/3DPX-000170');
