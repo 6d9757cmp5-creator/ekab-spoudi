@@ -28,6 +28,8 @@ export function initAccountUI() {
     trigger.textContent = 'Σύνδεση';
     host.prepend(trigger);
   }
+  // The button shows only on the home page; elsewhere it stays hidden so sync still starts.
+  if (!/(?:^|\/)(?:index\.html)?$/.test(window.location.pathname)) trigger.style.display = 'none';
   trigger.setAttribute('aria-haspopup', 'dialog');
   trigger.setAttribute('aria-controls', 'accountDialog');
   trigger.disabled = false;
