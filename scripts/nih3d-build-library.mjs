@@ -20,7 +20,8 @@ const CATALOG='tools/atla-ai/resources/nih3d-master-plan-2026/segments';
 const SCOPE='tools/atla-ai/resources/nih3d-biomedical-scope-2026/segments';
 const OUTPUT='tools/atla-ai/resources/model-library.json';
 export const MAX_MODEL_BYTES=25*1024**2;
-export const MAX_LIBRARY_BYTES=700*1024**2;
+// GitHub Pages publishes at most 1 GB; the rest of the site takes about 480 MB of it.
+export const MAX_LIBRARY_BYTES=540*1024**2;
 const OPEN_LICENSE=/^(Public Domain|CC[- ]BY(?:[- ]SA)?(?: \d\.\d)?)$/i;
 const CATEGORY_EL={Anatomy:'Ανατομία',Biomacromolecules:'Βιομακρομόριο',Viruses:'Ιός','Cells and Organelles':'Κύτταρα και οργανίδια',
  'Small Molecules':'Μικρό μόριο',Prosthetics:'Προσθετική','Devices and Hardware':'Συσκευή'};
