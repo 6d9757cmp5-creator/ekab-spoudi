@@ -10,7 +10,8 @@ const select=$('source-model'),dataset=$('source-dataset'),button=$('source-load
 const status=(v,bad=false)=>{note.textContent=v;note.dataset.error=String(bad)};
 const back=$('source-back');
 back.href=safeReturnHref(params.get('from'),location.href,tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html');
-if(['nih','all','secondary','rigged','makehuman'].includes(params.get('dataset')))dataset.value=params.get('dataset');
+if(document.getElementById('unified-catalog'))dataset.value='all';
+else if(['nih','all','secondary','rigged','makehuman'].includes(params.get('dataset')))dataset.value=params.get('dataset');
 let deepLinkModel=params.get('model');
 $('source-name').textContent=LIBRARY_HEADING;
 $('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
@@ -278,7 +279,7 @@ function renderChoices(){
  });
  select.replaceChildren(...assets.map((a,i)=>{
   const option=new Option((a.available?'':'[Μόνο στοιχεία] ')+
-   (dataset.value==='all'?a.source+' · ':'')+a.label,String(i));
+   a.label,String(i));
   return option;
  }));
  $('source-count').textContent=assets.length+' εγγραφές στην επιλεγμένη προβολή · '+allAssets.filter(x=>x.available).length+' διαθέσιμες για 3D από τον κατάλογο';
