@@ -6,6 +6,7 @@
  */
 import {analyseLearning,choosePrimary,validQuestion} from '../learning/next-step.mjs';
 import {loadLearning} from './memory.mjs';
+import {practiceSummary,practiceLines,PRACTICE_SOURCES} from './practice.mjs';
 
 const EOP_KEY='ekab-eoppep-official-v15';
 const SAEK_KEY='ekab.saek.exams.v1';
@@ -65,10 +66,11 @@ export function canonicalLearnerProfile(storage,{scheduler=null,now=new Date()}=
  const readOnlyRecommendation=choosePrimary(stats);
  return Object.freeze({
   schema:1,
-  sources:Object.freeze([EOP_KEY,SAEK_KEY,RESUME_KEY,'ekab.saek.read.v1.*']),
+  sources:Object.freeze([EOP_KEY,SAEK_KEY,RESUME_KEY,'ekab.saek.read.v1.*',...PRACTICE_SOURCES]),
   stats,
   preferences:loadLearning(store),
   recommendation:readOnlyRecommendation,
+  practice:practiceSummary(store),
   understanding:Object.freeze({
    status:repeatedAssessmentItems?'partial-evidence':'insufficient-evidence',
    repeatedAssessmentItems,
@@ -100,6 +102,7 @@ export function localStudyInsight(question,profile){
   s.eoppep.attempted+' ερωτήσεις ΕΟΠΠΕΠ με καταγεγραμμένη εξάσκηση. '+
   'Εντοπίζονται '+u.eopNeedsReview.length+' θέματα ΕΟΠΠΕΠ με επαναλαμβανόμενες αλλά όχι όλες σωστές προσπάθειες και '+
   u.saekNeedsReview.length+' θέματα ΣΑΕΚ με πολλαπλά ιστορικά λάθη. '+
+  practiceLines(profile.practice).map(line=>line+' ').join('')+
   'Προτεινόμενο επόμενο βήμα: '+next.label+'. '+
   'Αυτές είναι ενδείξεις μελέτης, όχι απόδειξη γνώσης ή κλινικής επάρκειας. Δεν άλλαξα βαθμούς ή πρόοδο.';
 }
