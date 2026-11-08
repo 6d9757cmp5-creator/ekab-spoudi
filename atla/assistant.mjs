@@ -66,12 +66,12 @@ function answerFromLibrary(q){
   const id='EOP-'+match[1]+'-'+match[2];
   const item=questions.find(r=>r.id===id);
   if(item&&typeof item.answer==='string'&&item.answer.trim()&&(!item.answerStatus||item.answerStatus.startsWith('reviewed'))){
-   return {text:'ΕΟΠΠΕΠ '+id+': '+item.question+'\n\nΕκπαιδευτική απάντηση: '+item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id)};
+   return {text:'ΕΟΠΠΕΠ '+id+': '+item.question+'\n\nΕκπαιδευτική απάντηση: '+item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id),direct:true};
   }
  }
  const hits=retrieve(q,terms,{k:4,minScore:3});
  const direct=hits.length>0&&nameCoverage(q,terms.find(t=>t.term===hits[0].term))>=0.5;
- if(direct)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
+ if(direct)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null,direct:true};
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
@@ -256,7 +256,8 @@ function boot(){
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
    const verifiedForAi=eligibleAiPassages(found.passages,terms);
-   if(!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
+   // A reviewed definition or official answer is already the answer; AI is for questions that need explaining.
+   if(found.direct||!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
    const level=teachingLevelFor(learnerProfile(),q);
    const payload=buildPayload({question:q,passages:verifiedForAi,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});

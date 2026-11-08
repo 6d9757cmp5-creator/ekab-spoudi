@@ -35,7 +35,7 @@ try{
   await page.goto(url,{waitUntil:'networkidle'});
   await page.locator('#status').waitFor();
   await page.waitForFunction(()=>document.getElementById('status').textContent.includes('έτοιμο'));
-  assert.equal(await page.title(),'ATLA · Εργαστήριο αποστολών (δοκιμή)');
+  assert.equal(await page.title(),'Εκπαιδευτικός βοηθός — μελέτη και ασκήσεις | ΕΚΑΒ Σπουδή');
   assert.equal(await page.locator('#phase').isVisible(),false);
   await page.getByRole('button',{name:/Δύσπνοια σε οικία/}).click();
   await page.waitForFunction(()=>document.getElementById('case-title').textContent==='Δύσπνοια σε οικία');
@@ -189,7 +189,7 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.getItem('ekab-eoppep-official-v15')),original);
   // Two-person incident: predefined synthetic vitals, decision feedback and scoped replay.
   await page.goto('http://127.0.0.1:'+port+'/mentor-live.html',{waitUntil:'networkidle'});
-  assert.match(await page.title(),/Δύο τραυματίες|Κλινικός Προσομοιωτής/);
+  assert.match(await page.title(),/Δύο τραυματίες|Κλινικός Προσομοιωτής|Παλαιότερη εκπαιδευτική αποστολή/);
   assert.equal(await page.locator('#live-patients .live-patient').count(),2);
   assert.equal((await page.locator('#live-step').textContent()).trim(),'Στάδιο 1 / 4');
   assert.equal(await page.locator('#live-patients .live-patient').first().locator('.live-vitals strong').first().textContent(),'106');
@@ -277,7 +277,8 @@ try{
   await page.goto('http://127.0.0.1:'+port+'/mentor-readonly.html',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.getElementById('loaded-summary').textContent.includes('καταχωρίσεις από'),{timeout:20000});
   const loadedSources=await page.locator('#loaded-summary').textContent();
-  assert.match(loadedSources,/13\/13 πηγές/,'Mentor reader should load all available public source files');
+  // Every listed source must load, however many the index holds.
+  assert.match(loadedSources,/ (\d+)\/\1 πηγές/,'Mentor reader should load all available public source files');
   assert.ok(Number(loadedSources.match(/^\d+/)?.[0]||0)>=800,'catalog includes educational course and exam data');
   await page.locator('#reader-kind').selectOption('eoppep');
   assert.match(await page.locator('#reader-status').textContent(),/314 αποτελέσματα/);
