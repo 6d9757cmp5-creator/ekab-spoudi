@@ -189,10 +189,12 @@ function switchView(target){
  $('seminarTheory').hidden=view!=='theory';
  $('seminarQuiz').hidden=view!=='quiz';
  $('seminarOral').hidden=view!=='oral';
+ $('seminarExam').hidden=view!=='exam';
  if(target==='quiz'&&!current().mixedRun){current().mixedRun=createRun();save();}
  updateCourseProgress();
  if(target==='theory')renderTheory();
  else if(target==='quiz')renderMixed();
+ else if(target==='exam')window.EkabSeminarExamUI?.open(selected);
  else renderOral();
 }
 function renderTheory(){
