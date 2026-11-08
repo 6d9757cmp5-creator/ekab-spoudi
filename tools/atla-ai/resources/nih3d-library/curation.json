@@ -6,7 +6,12 @@
   "tibia": "κνημιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
   "fibula": "περονιαι\\p{L}* (?:αρτηρ|φλεβ|νευρ)",
   "kidney": "νεφρικ\\p{L}* (?:αρτηρ|φλεβ)",
-  "skull": "κρανιακ\\p{L}* νευρ"
+  "skull": "κρανιακ\\p{L}* νευρ",
+  "heart": "καρδιακ\\p{L}* (?:συχνοτ|παλμ|ρυθμ)|heart rate",
+  "liver": "ηπατιτ",
+  "stomach": "γαστρεντερ\\p{L}* (?:λοιμωξ|ιωσ)",
+  "hip": "ισχιακ\\p{L}* νευρ",
+  "eye": "(?:προστασ|γυαλι|ασπιδ)\\p{L}* (?:\\p{L}+ ){0,2}οφθαλμ|οφθαλμ\\p{L}* (?:\\p{L}+ ){0,2}(?:προστασ|γυαλι|ασπιδ)"
  },
  "structures": {
   "femur": {
@@ -145,7 +150,6 @@
    "international": "Lumbar spine",
    "match": [
     "οσφυικ\\p{L}* (?:μοιρ|σπονδυλ)",
-    "σπονδυλικ\\p{L}* στηλ",
     "lumbar"
    ]
   },
@@ -288,6 +292,200 @@
     "νεφρικ\\p{L}* πυελ",
     "renal pelvis"
    ]
+  },
+  "knee": {
+   "greek": "Γόνατο",
+   "international": "Knee",
+   "match": [
+    "γονατ",
+    "knee"
+   ]
+  },
+  "ankle": {
+   "greek": "Ποδοκνημική άρθρωση",
+   "international": "Ankle",
+   "match": [
+    "ποδοκνημικ",
+    "ankle"
+   ]
+  },
+  "hip": {
+   "greek": "Ισχίο",
+   "international": "Hip",
+   "match": [
+    "ισχι(?:ο|ου|α|ων)(?!\\p{L})",
+    "κοτυλ",
+    "hip"
+   ]
+  },
+  "forearm": {
+   "greek": "Αντιβράχιο",
+   "international": "Forearm",
+   "match": [
+    "αντιβραχι",
+    "κερκιδ",
+    "ωλεν",
+    "forearm"
+   ]
+  },
+  "foot": {
+   "greek": "Άκρος πόδας",
+   "international": "Foot",
+   "match": [
+    "ακρ\\p{L}* ποδ",
+    "μεταταρσ",
+    "foot"
+   ]
+  },
+  "hand": {
+   "greek": "Άκρα χείρα",
+   "international": "Hand",
+   "match": [
+    "ακρ\\p{L}* χειρ",
+    "μετακαρπ",
+    "φαλαγγ"
+   ]
+  },
+  "spine": {
+   "greek": "Σπονδυλική στήλη",
+   "international": "Vertebral column",
+   "match": [
+    "σπονδυλικ\\p{L}* στηλ",
+    "spine"
+   ]
+  },
+  "face": {
+   "greek": "Οστά του προσώπου",
+   "international": "Facial bones",
+   "match": [
+    "οστ\\p{L}* (?:του )?προσωπ",
+    "σπλαχνοκρανι",
+    "facial bone"
+   ]
+  },
+  "jaw": {
+   "greek": "Γνάθοι",
+   "international": "Jaws",
+   "match": [
+    "γναθ",
+    "mandib",
+    "maxill"
+   ]
+  },
+  "liver": {
+   "greek": "Ήπαρ",
+   "international": "Liver",
+   "match": [
+    "ηπαρ",
+    "ηπατ",
+    "liver"
+   ]
+  },
+  "spleen": {
+   "greek": "Σπλήνας",
+   "international": "Spleen",
+   "match": [
+    "σπλην",
+    "spleen"
+   ]
+  },
+  "stomach": {
+   "greek": "Στόμαχος",
+   "international": "Stomach",
+   "match": [
+    "στομαχ",
+    "stomach"
+   ]
+  },
+  "bladder": {
+   "greek": "Ουροδόχος κύστη",
+   "international": "Urinary bladder",
+   "match": [
+    "ουροδοχ",
+    "bladder"
+   ]
+  },
+  "eye": {
+   "greek": "Οφθαλμός",
+   "international": "Eye",
+   "match": [
+    "οφθαλμ"
+   ]
+  },
+  "larynx": {
+   "greek": "Λάρυγγας",
+   "international": "Larynx",
+   "match": [
+    "λαρυγγ",
+    "larynx"
+   ]
+  },
+  "bronchi": {
+   "greek": "Βρόγχοι",
+   "international": "Bronchi",
+   "match": [
+    "βρογχ",
+    "bronch"
+   ]
+  },
+  "upper-airway": {
+   "greek": "Ανώτεροι αεραγωγοί",
+   "international": "Upper airway",
+   "match": [
+    "ανωτερ\\p{L}* αεραγωγ",
+    "φαρυγγ",
+    "upper airway"
+   ]
+  },
+  "nose": {
+   "greek": "Ρινική κοιλότητα",
+   "international": "Nasal cavity",
+   "match": [
+    "ρινοσ",
+    "ρινικ\\p{L}* (?:κοιλοτ|διαφραγμ|αιμορραγ|οστ)",
+    "επισταξ"
+   ]
+  },
+  "placenta": {
+   "greek": "Πλακούντας",
+   "international": "Placenta",
+   "match": [
+    "πλακουντ",
+    "placenta"
+   ]
+  },
+  "sacrum": {
+   "greek": "Ιερό οστό",
+   "international": "Sacrum",
+   "match": [
+    "ιερ\\p{L}* οστ",
+    "sacrum"
+   ]
+  },
+  "ribs": {
+   "greek": "Θωρακικός κλωβός και πλευρές",
+   "international": "Rib cage",
+   "match": [
+    "πλευρ(?:ες|ων)(?!\\p{L})",
+    "θωρακικ\\p{L}* (?:κλωβ|τοιχωμ)",
+    "rib"
+   ]
+  },
+  "sternum": {
+   "greek": "Στέρνο",
+   "international": "Sternum",
+   "match": [
+    "στερν",
+    "sternum"
+   ]
+  },
+  "skeleton": {
+   "greek": "Σκελετός",
+   "international": "Skeleton",
+   "match": [
+    "σκελετ",
+    "skeleton"
+   ]
   }
  },
  "findings": {
@@ -325,6 +523,13 @@
    "match": [
     "διαχωρισμ",
     "dissection"
+   ]
+  },
+  "dislocation": {
+   "greek": "Εξάρθρημα",
+   "match": [
+    "εξαρθρ",
+    "dislocat"
    ]
   }
  },
@@ -820,14 +1025,14 @@
    "greekTitle": "Οσφυϊκή μοίρα",
    "kind": "anatomy",
    "structures": [
-    "lumbar-spine"
+    "lumbar-vertebra"
    ]
   },
   "3DPX-000799": {
    "greekTitle": "Οσφυϊκή μοίρα",
    "kind": "anatomy",
    "structures": [
-    "lumbar-spine"
+    "lumbar-vertebra"
    ]
   },
   "3DPX-000410": {
@@ -862,8 +1067,7 @@
    "greekTitle": "Γυναικεία πύελος με σπονδύλους Ο4 και Ο5",
    "kind": "anatomy",
    "structures": [
-    "pelvis",
-    "lumbar-vertebra"
+    "pelvis"
    ]
   },
   "3DPX-000414": {
@@ -1090,6 +1294,1806 @@
    "structures": [
     "brain"
    ]
+  },
+  "3DPX-000253": {
+   "greekTitle": "Λευκή ουσία των ημισφαιρίων του εγκεφάλου",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-000307": {
+   "greekTitle": "Πρώτος οσφυϊκός σπόνδυλος (Visible Human)",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-vertebra"
+   ]
+  },
+  "3DPX-000320": {
+   "greekTitle": "Ολόκληρος εγκέφαλος",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-000327": {
+   "greekTitle": "Κάταγμα κλείδας και κορακοειδούς με οπίσθιο εξάρθρημα ακρωμιοκλειδικής",
+   "kind": "pathology",
+   "structures": [
+    "clavicle",
+    "shoulder"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000328": {
+   "greekTitle": "Κάταγμα κοτύλης μετά από χειρουργική αποκατάσταση",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000330": {
+   "greekTitle": "Κάταγμα πτέρνας",
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000331": {
+   "greekTitle": "Οσφυϊκή μοίρα σπονδυλικής στήλης",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000335": {
+   "greekTitle": "Κάταγμα κοτύλης",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000336": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης (μεσοκονδύλιο έπαρμα)",
+   "kind": "pathology",
+   "structures": [
+    "tibia",
+    "knee"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000337": {
+   "greekTitle": "Κάταγμα πτέρνας (ποδοκνημική)",
+   "kind": "pathology",
+   "structures": [
+    "calcaneus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000339": {
+   "greekTitle": "Υποτροπιάζον εξάρθρημα ώμου (ωμογλήνη)",
+   "kind": "pathology",
+   "structures": [
+    "shoulder"
+   ],
+   "finding": "dislocation"
+  },
+  "3DPX-000340": {
+   "greekTitle": "Εξάρθρημα ώμου με βλάβη Hill-Sachs",
+   "kind": "pathology",
+   "structures": [
+    "shoulder"
+   ],
+   "finding": "dislocation"
+  },
+  "3DPX-000342": {
+   "greekTitle": "Κάταγμα-εξάρθρημα ώμου",
+   "kind": "pathology",
+   "structures": [
+    "shoulder",
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000343": {
+   "greekTitle": "Εξάρθρημα ώμου με βλάβες Hill-Sachs και Bankart",
+   "kind": "pathology",
+   "structures": [
+    "shoulder"
+   ],
+   "finding": "dislocation"
+  },
+  "3DPX-000347": {
+   "greekTitle": "Κάταγμα ποδοκνημικής μετά από οστεοσύνθεση με πλάκα και βίδες",
+   "kind": "pathology",
+   "structures": [
+    "ankle"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000348": {
+   "greekTitle": "Κάταγμα σκαφοειδούς (άκρα χείρα και καρπός)",
+   "kind": "pathology",
+   "structures": [
+    "scaphoid",
+    "wrist"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000350": {
+   "greekTitle": "Ενδαρθρικό κάταγμα περιφερικού βραχιονίου (αγκώνας)",
+   "kind": "pathology",
+   "structures": [
+    "humerus",
+    "elbow"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000351": {
+   "greekTitle": "Κάταγμα κοτύλης (περίπτωση 2)",
+   "kind": "pathology",
+   "structures": [
+    "pelvis"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000352": {
+   "greekTitle": "Κάταγμα αστραγάλου",
+   "kind": "pathology",
+   "structures": [
+    "talus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000354": {
+   "greekTitle": "Φυσιολογική ποδοκνημική άρθρωση",
+   "kind": "anatomy",
+   "structures": [
+    "ankle"
+   ]
+  },
+  "3DPX-000355": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου και ωμογλήνης",
+   "kind": "pathology",
+   "structures": [
+    "humerus",
+    "shoulder"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000356": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου με εξάρθρημα",
+   "kind": "pathology",
+   "structures": [
+    "humerus",
+    "shoulder"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000380": {
+   "greekTitle": "Αυχενική μοίρα σπονδυλικής στήλης",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-000381": {
+   "greekTitle": "Κάταγμα επιγονατίδας με οστεοσύνθεση τριών βιδών",
+   "kind": "pathology",
+   "structures": [
+    "patella"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000382": {
+   "greekTitle": "Θωρακική μοίρα σπονδυλικής στήλης",
+   "kind": "anatomy",
+   "structures": [
+    "thoracic-spine"
+   ]
+  },
+  "3DPX-000384": {
+   "greekTitle": "Κάταγμα θωρακικής μοίρας σπονδυλικής στήλης",
+   "kind": "pathology",
+   "structures": [
+    "thoracic-spine"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000385": {
+   "greekTitle": "Θωρακική μοίρα σπονδυλικής στήλης (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "thoracic-spine"
+   ]
+  },
+  "3DPX-000386": {
+   "greekTitle": "Κάταγμα κεντρικού βραχιονίου (άνω άκρο)",
+   "kind": "pathology",
+   "structures": [
+    "humerus"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000387": {
+   "greekTitle": "Άρθρωση ώμου",
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ]
+  },
+  "3DPX-000388": {
+   "greekTitle": "Άρθρωση γόνατος",
+   "kind": "anatomy",
+   "structures": [
+    "knee"
+   ]
+  },
+  "3DPX-000389": {
+   "greekTitle": "Κάταγμα κεντρικής κνήμης (γόνατο)",
+   "kind": "pathology",
+   "structures": [
+    "tibia",
+    "knee"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000390": {
+   "greekTitle": "Κάταγμα επιγονατίδας",
+   "kind": "pathology",
+   "structures": [
+    "patella"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000391": {
+   "greekTitle": "Ατελές κάταγμα σκαφοειδούς (άκρα χείρα και καρπός)",
+   "kind": "pathology",
+   "structures": [
+    "scaphoid",
+    "wrist"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000393": {
+   "greekTitle": "Άρθρωση ισχίου",
+   "kind": "anatomy",
+   "structures": [
+    "hip"
+   ]
+  },
+  "3DPX-000399": {
+   "greekTitle": "Άρθρωση ώμου (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "shoulder"
+   ]
+  },
+  "3DPX-000405": {
+   "greekTitle": "Κερκίδα και ωλένη",
+   "kind": "anatomy",
+   "structures": [
+    "forearm"
+   ]
+  },
+  "3DPX-000411": {
+   "greekTitle": "Κάταγμα κυβοειδούς και μεταταρσίων (άκρος πόδας)",
+   "kind": "pathology",
+   "structures": [
+    "foot"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000412": {
+   "greekTitle": "Άρθρωση ισχίου (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "hip"
+   ]
+  },
+  "3DPX-000522": {
+   "greekTitle": "Θέση του ωλένιου νεύρου στον αγκώνα",
+   "kind": "anatomy",
+   "structures": [
+    "elbow"
+   ]
+  },
+  "3DPX-000601": {
+   "greekTitle": "Αυχενική μοίρα σπονδυλικής στήλης (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-000757": {
+   "greekTitle": "Αριστερό ημισφαίριο εγκεφάλου",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-000758": {
+   "greekTitle": "Δεξί ημισφαίριο εγκεφάλου",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-000760": {
+   "greekTitle": "Δεμάτια ινών του εγκεφάλου",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-000803": {
+   "greekTitle": "Οσφυϊκή μοίρα σπονδυλικής στήλης (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000804": {
+   "greekTitle": "Θωρακική μοίρα σπονδυλικής στήλης (μοντέλο 3)",
+   "kind": "anatomy",
+   "structures": [
+    "thoracic-spine"
+   ]
+  },
+  "3DPX-000811": {
+   "greekTitle": "Οσφυϊκή μοίρα σπονδυλικής στήλης (μοντέλο 3)",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000812": {
+   "greekTitle": "Οσφυϊκή μοίρα σπονδυλικής στήλης (μοντέλο 4)",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-spine"
+   ]
+  },
+  "3DPX-000813": {
+   "greekTitle": "Κάταγμα οσφυϊκής μοίρας σπονδυλικής στήλης",
+   "kind": "pathology",
+   "structures": [
+    "lumbar-spine"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000822": {
+   "greekTitle": "Κάταγμα οστών του προσώπου",
+   "kind": "pathology",
+   "structures": [
+    "face"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-000824": {
+   "greekTitle": "Άκρος πόδας",
+   "kind": "anatomy",
+   "structures": [
+    "foot"
+   ]
+  },
+  "3DPX-000825": {
+   "greekTitle": "Αυχενική μοίρα σπονδυλικής στήλης (μοντέλο 3)",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-000849": {
+   "greekTitle": "Κρανίο και οστά του προσώπου",
+   "kind": "anatomy",
+   "structures": [
+    "skull",
+    "face"
+   ]
+  },
+  "3DPX-000850": {
+   "greekTitle": "Αυχενική μοίρα σπονδυλικής στήλης (από αξονική τομογραφία)",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-000899": {
+   "greekTitle": "Οσφυϊκός σπόνδυλος",
+   "kind": "anatomy",
+   "structures": [
+    "lumbar-vertebra"
+   ]
+  },
+  "3DPX-000900": {
+   "greekTitle": "Καρδιά (αξονική τομογραφία)",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-000902": {
+   "greekTitle": "Άνω γνάθος με δόντια",
+   "kind": "anatomy",
+   "structures": [
+    "jaw"
+   ]
+  },
+  "3DPX-000903": {
+   "greekTitle": "Οστά του άκρου πόδα με αρθρικές επιφάνειες",
+   "kind": "anatomy",
+   "structures": [
+    "foot"
+   ]
+  },
+  "3DPX-000904": {
+   "greekTitle": "Οστά του άκρου πόδα (ενιαίο μοντέλο με βάση)",
+   "kind": "anatomy",
+   "structures": [
+    "foot"
+   ]
+  },
+  "3DPX-000905": {
+   "greekTitle": "Σπονδυλική στήλη (σύνθετο εκπαιδευτικό σετ)",
+   "kind": "anatomy",
+   "structures": [
+    "spine"
+   ]
+  },
+  "3DPX-000906": {
+   "greekTitle": "Καρδιά, αορτή και νεφρός (σχέδιο CAD)",
+   "kind": "anatomy",
+   "structures": [
+    "heart",
+    "aorta",
+    "kidney"
+   ]
+  },
+  "3DPX-001193": {
+   "greekTitle": "Ανασυγκρότηση εγκεφάλου ανά ημισφαίριο",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-001482": {
+   "greekTitle": "Ήπαρ",
+   "kind": "anatomy",
+   "structures": [
+    "liver"
+   ]
+  },
+  "3DPX-001486": {
+   "greekTitle": "Ήπαρ (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "liver"
+   ]
+  },
+  "3DPX-001614": {
+   "greekTitle": "Άκρα χείρα με χρωματισμένα οστά",
+   "kind": "anatomy",
+   "structures": [
+    "hand"
+   ]
+  },
+  "3DPX-001652": {
+   "greekTitle": "Κεφαλή (μαγνητική τομογραφία)",
+   "kind": "anatomy",
+   "structures": [
+    "skull",
+    "brain"
+   ]
+  },
+  "3DPX-001654": {
+   "greekTitle": "Κρανίο",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-001944": {
+   "greekTitle": "Υποφλοιώδεις δομές εγκεφάλου (ιππόκαμπος, αμυγδαλή, στέλεχος, βασικά γάγγλια)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-002305": {
+   "greekTitle": "Εκμαγείο ανώτερων αεραγωγών",
+   "kind": "anatomy",
+   "structures": [
+    "upper-airway"
+   ]
+  },
+  "3DPX-002307": {
+   "greekTitle": "Αυχενικοί σπόνδυλοι Α1–Α4",
+   "kind": "anatomy",
+   "structures": [
+    "cervical-spine"
+   ]
+  },
+  "3DPX-002386": {
+   "greekTitle": "Εγκέφαλος (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-002416": {
+   "greekTitle": "Εγκεφαλονωτιαίο υγρό (κοιλίες εγκεφάλου)",
+   "kind": "anatomy",
+   "structures": [
+    "brain-ventricles"
+   ]
+  },
+  "3DPX-002448": {
+   "greekTitle": "Κρανίο (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-002545": {
+   "greekTitle": "Κρανίο (μοντέλο 3)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-002554": {
+   "greekTitle": "Πνεύμονας",
+   "kind": "anatomy",
+   "structures": [
+    "lung"
+   ]
+  },
+  "3DPX-002591": {
+   "greekTitle": "Αγγεία κοιλίας (αξονική αγγειογραφία)",
+   "kind": "anatomy",
+   "structures": [
+    "aorta",
+    "kidney"
+   ]
+  },
+  "3DPX-002636": {
+   "greekTitle": "Φυσιολογική καρδιά εφήβου",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-002727": {
+   "greekTitle": "Κρανίο από αξονική τομογραφία (με διορθωμένο πλέγμα)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-002739": {
+   "greekTitle": "Εγκέφαλος (μοντέλο 3)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-003079": {
+   "greekTitle": "Κρανιοεγκεφαλική κάκωση (άγνωστος μηχανισμός)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-003108": {
+   "greekTitle": "Αιματική δεξαμενή πλακούντα",
+   "kind": "anatomy",
+   "structures": [
+    "placenta"
+   ]
+  },
+  "3DPX-003118": {
+   "greekTitle": "Κρανίο του Phineas Gage (διατιτραίνουσα κάκωση)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-003169": {
+   "greekTitle": "Κρανίο βρέφους",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-003225": {
+   "greekTitle": "Ουροδόχος κύστη",
+   "kind": "anatomy",
+   "structures": [
+    "bladder"
+   ]
+  },
+  "3DPX-003266": {
+   "greekTitle": "Ουροδόχος κύστη (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "bladder"
+   ]
+  },
+  "3DPX-003304": {
+   "greekTitle": "Ανεύρυσμα αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-003333": {
+   "greekTitle": "Στεφανιαίες αρτηρίες (αξονική στεφανιογραφία)",
+   "kind": "anatomy",
+   "structures": [
+    "coronary",
+    "heart"
+   ]
+  },
+  "3DPX-003378": {
+   "greekTitle": "Κρανίο ανδρός με τους κρανιακούς βόθρους",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-003379": {
+   "greekTitle": "Πνεύμονες και τραχεία",
+   "kind": "anatomy",
+   "structures": [
+    "lung",
+    "trachea"
+   ]
+  },
+  "3DPX-003381": {
+   "greekTitle": "Κάτω γνάθος ανδρός 50–65 ετών",
+   "kind": "anatomy",
+   "structures": [
+    "jaw"
+   ]
+  },
+  "3DPX-003455": {
+   "greekTitle": "Εγκέφαλος (μοντέλο 4)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-003765": {
+   "greekTitle": "Εγκέφαλος (μοντέλο 5)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-003892": {
+   "greekTitle": "Εγκεφαλικό στέλεχος με αμυγδαλή, διδύμια, προμήκη, γέφυρα και νεύρα",
+   "kind": "anatomy",
+   "structures": [
+    "medulla-oblongata",
+    "brain"
+   ]
+  },
+  "3DPX-004645": {
+   "greekTitle": "Οστά της πυέλου και ιερό οστό",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis",
+    "sacrum"
+   ]
+  },
+  "3DPX-004646": {
+   "greekTitle": "Κεφαλή και τράχηλος από αξονική τομογραφία",
+   "kind": "anatomy",
+   "structures": [
+    "skull",
+    "cervical-spine"
+   ]
+  },
+  "3DPX-004655": {
+   "greekTitle": "Πολλαπλά κατάγματα γνάθων",
+   "kind": "pathology",
+   "structures": [
+    "jaw",
+    "face"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004709": {
+   "greekTitle": "Διαχωρισμός αορτής (τμήμα 1)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-004744": {
+   "greekTitle": "Πύελος από αξονική τομογραφία",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-004803": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004805": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου (περίπτωση 2)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004806": {
+   "greekTitle": "Πολλαπλά συντριπτικά κατάγματα κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004807": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου (περίπτωση 3)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004808": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου (περίπτωση 4)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004809": {
+   "greekTitle": "Κρανίο με μαλακά μόρια (αξονική τομογραφία)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-004815": {
+   "greekTitle": "Κρανιοεγκεφαλική κάκωση",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004816": {
+   "greekTitle": "Κατάγματα κρανίου με συμμετοχή της αριστερής άνω γνάθου",
+   "kind": "pathology",
+   "structures": [
+    "skull",
+    "face"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004817": {
+   "greekTitle": "Κρανιοεγκεφαλική κάκωση με μάζα βάσης κρανίου",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004818": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου (περίπτωση 5)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004896": {
+   "greekTitle": "Ηβικά οστά γυναίκας 34 ετών",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-004899": {
+   "greekTitle": "Διαχωρισμός αορτής (όψη 3)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-004913": {
+   "greekTitle": "Διαχωρισμός αορτής (όψεις 4 και 5)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-004924": {
+   "greekTitle": "Πολλαπλά κατάγματα κρανίου (περίπτωση 6)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-004926": {
+   "greekTitle": "Κρανιοεγκεφαλική κάκωση (περίπτωση 2)",
+   "kind": "pathology",
+   "structures": [
+    "skull"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-005015": {
+   "greekTitle": "Διαχωρισμός αορτής (συνδετικά τμήματα)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-007207": {
+   "greekTitle": "Φυσιολογική καρδιά εφήβου (οβελιαία τομή)",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-007464": {
+   "greekTitle": "Ανεύρυσμα κοιλιακής αορτής (οβελιαίο αρνητικό αποτύπωμα)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-007801": {
+   "greekTitle": "Φυσιολογική καρδιά βρέφους 6 εβδομάδων",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-007815": {
+   "greekTitle": "Φυσιολογική καρδιά βρέφους 6 εβδομάδων (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-007875": {
+   "greekTitle": "Λευκή ουσία εγκεφάλου (απεικόνιση τανυστή διάχυσης)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-008145": {
+   "greekTitle": "Κρανίο βρέφους (καθαρισμένο μοντέλο)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-008188": {
+   "greekTitle": "Κεφαλή και τράχηλος",
+   "kind": "anatomy",
+   "structures": [
+    "skull",
+    "cervical-spine"
+   ]
+  },
+  "3DPX-008379": {
+   "greekTitle": "Διαχωρισμός αορτής (οβελιαία λεπτομέρεια)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "dissection"
+  },
+  "3DPX-008678": {
+   "greekTitle": "Ανεύρυσμα ανιούσας αορτής",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-008679": {
+   "greekTitle": "Άκροι πόδες αμφοτερόπλευρα",
+   "kind": "anatomy",
+   "structures": [
+    "foot"
+   ]
+  },
+  "3DPX-009210": {
+   "greekTitle": "Ομοίωμα αορτικού ανευρύσματος (καλούπι)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-009353": {
+   "greekTitle": "Ομοίωμα αορτικού ανευρύσματος (καλούπι 2)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-009511": {
+   "greekTitle": "Καρδιά σε επιμήκη παραστερνική λήψη",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-010649": {
+   "greekTitle": "Νεφρός",
+   "kind": "anatomy",
+   "structures": [
+    "kidney"
+   ]
+  },
+  "3DPX-011473": {
+   "greekTitle": "Κεφαλή και τράχηλος (μοντέλο 2)",
+   "kind": "anatomy",
+   "structures": [
+    "skull",
+    "cervical-spine"
+   ]
+  },
+  "3DPX-012260": {
+   "greekTitle": "Κρανίο ανδρός (Visible Human)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-013408": {
+   "greekTitle": "Αναπνευστικό σύστημα – πνεύμονες (Visible Human)",
+   "kind": "anatomy",
+   "structures": [
+    "lung",
+    "trachea",
+    "bronchi"
+   ]
+  },
+  "3DPX-014756": {
+   "greekTitle": "Λάρυγγας (διαδραστικό μοντέλο)",
+   "kind": "anatomy",
+   "structures": [
+    "larynx"
+   ]
+  },
+  "3DPX-014841": {
+   "greekTitle": "Οστά πυέλου ενήλικης γυναίκας (αρθρωμένα)",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-015682": {
+   "greekTitle": "Ανδρική πύελος με σπονδύλους Ο4–Ο5 και κεντρικό μηριαίο",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis",
+    "lumbar-spine",
+    "femur"
+   ]
+  },
+  "3DPX-015850": {
+   "greekTitle": "Ανατομικό μοντέλο άκρου πόδα",
+   "kind": "anatomy",
+   "structures": [
+    "foot"
+   ]
+  },
+  "3DPX-016666": {
+   "greekTitle": "Οστά μηρού, γόνατος και κνήμης γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "femur",
+    "tibia",
+    "fibula",
+    "knee"
+   ]
+  },
+  "3DPX-016667": {
+   "greekTitle": "Οστά της μασχάλης (ωμική ζώνη)",
+   "kind": "anatomy",
+   "structures": [
+    "scapula",
+    "clavicle",
+    "humerus"
+   ]
+  },
+  "3DPX-016800": {
+   "greekTitle": "Κάτω γνάθος (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "jaw"
+   ]
+  },
+  "3DPX-016801": {
+   "greekTitle": "Κρανίο (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-016807": {
+   "greekTitle": "Αριστερό άνω άκρο (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "humerus",
+    "forearm",
+    "hand"
+   ]
+  },
+  "3DPX-016808": {
+   "greekTitle": "Δεξί άνω άκρο (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "humerus",
+    "forearm",
+    "hand"
+   ]
+  },
+  "3DPX-016809": {
+   "greekTitle": "Βραχιόνιο οστό (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "humerus"
+   ]
+  },
+  "3DPX-016810": {
+   "greekTitle": "Ωλένη (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "forearm"
+   ]
+  },
+  "3DPX-016811": {
+   "greekTitle": "Κερκίδα (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "forearm"
+   ]
+  },
+  "3DPX-016813": {
+   "greekTitle": "Ωμοπλάτη (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "scapula"
+   ]
+  },
+  "3DPX-016815": {
+   "greekTitle": "Οστά καρπού και άκρας χείρας (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "wrist",
+    "hand"
+   ]
+  },
+  "3DPX-016819": {
+   "greekTitle": "Αριστερό κάτω άκρο (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "femur",
+    "tibia",
+    "fibula"
+   ]
+  },
+  "3DPX-016820": {
+   "greekTitle": "Δεξί κάτω άκρο (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "femur",
+    "tibia",
+    "fibula"
+   ]
+  },
+  "3DPX-016821": {
+   "greekTitle": "Οστά του άκρου πόδα (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "foot"
+   ]
+  },
+  "3DPX-016822": {
+   "greekTitle": "Δεξί μηριαίο οστό (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ]
+  },
+  "3DPX-016823": {
+   "greekTitle": "Αριστερό μηριαίο οστό (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "femur"
+   ]
+  },
+  "3DPX-016824": {
+   "greekTitle": "Δεξιά κνήμη (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "tibia"
+   ]
+  },
+  "3DPX-016825": {
+   "greekTitle": "Αριστερή κνήμη (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "tibia"
+   ]
+  },
+  "3DPX-016828": {
+   "greekTitle": "Επιγονατίδα (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "patella"
+   ]
+  },
+  "3DPX-016829": {
+   "greekTitle": "Πύελος (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-016830": {
+   "greekTitle": "Ιερό οστό και κόκκυγας (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "sacrum"
+   ]
+  },
+  "3DPX-016835": {
+   "greekTitle": "Σπονδυλική στήλη (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "spine"
+   ]
+  },
+  "3DPX-016836": {
+   "greekTitle": "Θωρακικός κλωβός (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "ribs"
+   ]
+  },
+  "3DPX-016837": {
+   "greekTitle": "Θωρακικός κλωβός και σπονδυλική στήλη (ανθρώπινος σκελετός)",
+   "kind": "anatomy",
+   "structures": [
+    "ribs",
+    "spine"
+   ]
+  },
+  "3DPX-016838": {
+   "greekTitle": "Ανθρώπινος σκελετός",
+   "kind": "anatomy",
+   "structures": [
+    "skeleton"
+   ]
+  },
+  "3DPX-016976": {
+   "greekTitle": "Ανεύρυσμα αορτής με πεταλοειδή νεφρό (προεγχειρητικά)",
+   "kind": "pathology",
+   "structures": [
+    "aorta"
+   ],
+   "finding": "aneurysm"
+  },
+  "3DPX-017237": {
+   "greekTitle": "Ανατομικό πρότυπο υγιούς άκρας χείρας ενήλικα",
+   "kind": "anatomy",
+   "structures": [
+    "hand"
+   ]
+  },
+  "3DPX-017249": {
+   "greekTitle": "Οστά υγιούς άκρας χείρας και καρπού ενήλικα",
+   "kind": "anatomy",
+   "structures": [
+    "hand",
+    "wrist"
+   ]
+  },
+  "3DPX-017321": {
+   "greekTitle": "Γυναικεία πύελος με δομές και μύες του περινέου",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-017368": {
+   "greekTitle": "Εγκέφαλος γυναίκας (μοντέλο F. J. Steger)",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-017488": {
+   "greekTitle": "Προσομοιωτής κατάγματος υποκονδύλιας μοίρας κάτω γνάθου",
+   "kind": "pathology",
+   "structures": [
+    "jaw"
+   ],
+   "finding": "fracture"
+  },
+  "3DPX-018268": {
+   "greekTitle": "Προμήκης μυελός ημιπληγικού ατόμου",
+   "kind": "anatomy",
+   "structures": [
+    "medulla-oblongata"
+   ]
+  },
+  "3DPX-020598": {
+   "greekTitle": "Ρινικό διάφραγμα",
+   "kind": "anatomy",
+   "structures": [
+    "nose"
+   ]
+  },
+  "3DPX-020626": {
+   "greekTitle": "Κρανίο από αξονική τομογραφία (ερευνητική μέθοδος)",
+   "kind": "anatomy",
+   "structures": [
+    "skull"
+   ]
+  },
+  "3DPX-020646": {
+   "greekTitle": "Θώρακας από αξονική τομογραφία",
+   "kind": "anatomy",
+   "structures": [
+    "ribs",
+    "lung"
+   ]
+  },
+  "3DPX-020959": {
+   "greekTitle": "Εγκέφαλος γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-020960": {
+   "greekTitle": "Εγκέφαλος ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-020962": {
+   "greekTitle": "Αριστερός οφθαλμός γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "eye"
+   ]
+  },
+  "3DPX-020963": {
+   "greekTitle": "Δεξιός οφθαλμός γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "eye"
+   ]
+  },
+  "3DPX-020969": {
+   "greekTitle": "Αριστερό γόνατο γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "knee"
+   ]
+  },
+  "3DPX-020970": {
+   "greekTitle": "Δεξί γόνατο γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "knee"
+   ]
+  },
+  "3DPX-020972": {
+   "greekTitle": "Λάρυγγας γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "larynx"
+   ]
+  },
+  "3DPX-020973": {
+   "greekTitle": "Ήπαρ γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "liver"
+   ]
+  },
+  "3DPX-020974": {
+   "greekTitle": "Πνεύμονας γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "lung"
+   ]
+  },
+  "3DPX-020976": {
+   "greekTitle": "Κύριος βρόγχος γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "bronchi"
+   ]
+  },
+  "3DPX-020985": {
+   "greekTitle": "Πλακούντας τελειόμηνης κύησης",
+   "kind": "anatomy",
+   "structures": [
+    "placenta"
+   ]
+  },
+  "3DPX-020988": {
+   "greekTitle": "Νωτιαίος μυελός γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ]
+  },
+  "3DPX-020989": {
+   "greekTitle": "Σπλήνας γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "spleen"
+   ]
+  },
+  "3DPX-020995": {
+   "greekTitle": "Ουροδόχος κύστη γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "bladder"
+   ]
+  },
+  "3DPX-020998": {
+   "greekTitle": "Αριστερός οφθαλμός ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "eye"
+   ]
+  },
+  "3DPX-020999": {
+   "greekTitle": "Δεξιός οφθαλμός ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "eye"
+   ]
+  },
+  "3DPX-021003": {
+   "greekTitle": "Αριστερό γόνατο ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "knee"
+   ]
+  },
+  "3DPX-021004": {
+   "greekTitle": "Δεξί γόνατο ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "knee"
+   ]
+  },
+  "3DPX-021006": {
+   "greekTitle": "Λάρυγγας ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "larynx"
+   ]
+  },
+  "3DPX-021007": {
+   "greekTitle": "Ήπαρ ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "liver"
+   ]
+  },
+  "3DPX-021008": {
+   "greekTitle": "Πνεύμονας ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "lung"
+   ]
+  },
+  "3DPX-021010": {
+   "greekTitle": "Κύριος βρόγχος ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "bronchi"
+   ]
+  },
+  "3DPX-021019": {
+   "greekTitle": "Σπλήνας ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "spleen"
+   ]
+  },
+  "3DPX-021025": {
+   "greekTitle": "Ουροδόχος κύστη ανδρός",
+   "kind": "anatomy",
+   "structures": [
+    "bladder"
+   ]
+  },
+  "3DPX-021124": {
+   "greekTitle": "Στόμαχος",
+   "kind": "anatomy",
+   "structures": [
+    "stomach"
+   ]
+  },
+  "3DPX-021147": {
+   "greekTitle": "Περιφερική κνήμη",
+   "kind": "anatomy",
+   "structures": [
+    "tibia"
+   ]
+  },
+  "3DPX-021148": {
+   "greekTitle": "Πνεύμονες και βρόγχοι κατά την αναπνοή",
+   "kind": "anatomy",
+   "structures": [
+    "lung",
+    "bronchi"
+   ]
+  },
+  "3DPX-021161": {
+   "greekTitle": "Λεπτομερές μοντέλο ανθρώπινου εγκεφάλου",
+   "kind": "anatomy",
+   "structures": [
+    "brain"
+   ]
+  },
+  "3DPX-021620": {
+   "greekTitle": "Στέρνο γυναίκας",
+   "kind": "anatomy",
+   "structures": [
+    "sternum"
+   ]
+  },
+  "3DPX-022787": {
+   "greekTitle": "Ανθρώπινη καρδιά",
+   "kind": "anatomy",
+   "structures": [
+    "heart"
+   ]
+  },
+  "3DPX-022804": {
+   "greekTitle": "Μοντέλο ανάταξης επιγονατίδας",
+   "kind": "pathology",
+   "structures": [
+    "patella"
+   ],
+   "finding": "dislocation"
+  },
+  "3DPX-023483": {
+   "greekTitle": "Εγκάρσια τομή νωτιαίου μυελού στην αυχενική μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ]
+  },
+  "3DPX-023484": {
+   "greekTitle": "Εγκάρσια τομή νωτιαίου μυελού στη θωρακική μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ]
+  },
+  "3DPX-023485": {
+   "greekTitle": "Εγκάρσια τομή νωτιαίου μυελού στην οσφυοϊερή μοίρα",
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ]
+  },
+  "3DPX-023489": {
+   "greekTitle": "Αισθητικές και κινητικές οδοί αυχενικού νωτιαίου μυελού",
+   "kind": "anatomy",
+   "structures": [
+    "spinal-cord"
+   ]
+  },
+  "3DPX-023525": {
+   "greekTitle": "Γυναικεία πύελος (συναρμολογούμενη εκδοχή)",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
+  },
+  "3DPX-023527": {
+   "greekTitle": "Ανδρική πύελος (συναρμολογούμενη εκδοχή)",
+   "kind": "anatomy",
+   "structures": [
+    "pelvis"
+   ]
   }
+ },
+ "fractureLessons": {
+  "femur": [
+   "14/11",
+   "14/4"
+  ],
+  "tibia": [
+   "14/11",
+   "14/4"
+  ],
+  "fibula": [
+   "14/11",
+   "14/4"
+  ],
+  "patella": [
+   "14/11",
+   "14/4"
+  ],
+  "humerus": [
+   "14/11",
+   "14/4"
+  ],
+  "shoulder": [
+   "14/11",
+   "14/4"
+  ],
+  "clavicle": [
+   "14/11",
+   "14/4"
+  ],
+  "scapula": [
+   "14/11",
+   "14/4"
+  ],
+  "calcaneus": [
+   "14/11",
+   "14/4"
+  ],
+  "talus": [
+   "14/11",
+   "14/4"
+  ],
+  "scaphoid": [
+   "14/11",
+   "14/4"
+  ],
+  "elbow": [
+   "14/11",
+   "14/4"
+  ],
+  "wrist": [
+   "14/11",
+   "14/4"
+  ],
+  "skull": [
+   "14/9",
+   "01/8"
+  ],
+  "lumbar-spine": [
+   "14/10",
+   "14/3",
+   "18/8"
+  ],
+  "lumbar-vertebra": [
+   "14/10",
+   "14/3",
+   "18/8"
+  ],
+  "pelvis": [
+   "14/8",
+   "18/10"
+  ],
+  "knee": [
+   "14/11",
+   "14/4"
+  ],
+  "ankle": [
+   "14/11",
+   "14/4"
+  ],
+  "forearm": [
+   "14/11",
+   "14/4"
+  ],
+  "foot": [
+   "14/11",
+   "14/4"
+  ],
+  "hand": [
+   "14/11",
+   "14/4"
+  ],
+  "hip": [
+   "14/8",
+   "18/10"
+  ],
+  "cervical-spine": [
+   "14/10",
+   "14/3",
+   "18/8"
+  ],
+  "thoracic-spine": [
+   "14/10",
+   "14/3",
+   "18/8"
+  ],
+  "face": [
+   "14/9",
+   "01/8"
+  ],
+  "jaw": [
+   "14/9",
+   "01/8"
+  ],
+  "ribs": [
+   "14/7",
+   "14/3",
+   "18/9"
+  ]
+ },
+ "titles": {
+  "3DPX-000010": "Κεφαλή ανδρός (Visible Human, τομή)",
+  "3DPX-000012": "Δομή της ATPάσης NtrC1 με τον παράγοντα σ54 και DNA",
+  "3DPX-000105": "Ριβόσωμα με τον παράγοντα τερματισμού RF2 (κρυο-ηλεκτρονική μικροσκοπία)",
+  "3DPX-000190": "Δομή μορίου RNA με φθοριωμένη βάση",
+  "3DPX-000251": "Τμήμα DNA",
+  "3DPX-000259": "Εκπαιδευτικό σετ DNA",
+  "3DPX-000277": "Μικρή πρωτεΐνη θερμικού σοκ Acr1 του Mycobacterium tuberculosis",
+  "3DPX-000280": "Αυτοσυναρμολογούμενος ιός",
+  "3DPX-000329": "Αρθρίτιδα αγκώνα από ρευματοειδή αρθρίτιδα",
+  "3DPX-000332": "Πρωτοπαθής αρθρίτιδα αγκώνα",
+  "3DPX-000341": "Γόνατο με οστεοχόνδρωμα (καλοήθης όγκος οστού)",
+  "3DPX-000349": "Παραμόρφωση ισχίου (ραιβό ισχίο)",
+  "3DPX-000395": "Ώμος μετά από επέμβαση Latarjet",
+  "3DPX-000406": "Οσφυϊκή μοίρα με διογκωμένη εγκάρσια απόφυση",
+  "3DPX-000451": "Λεμφαγγείο και βαλβίδα (θεωρητικό μοντέλο)",
+  "3DPX-000452": "Μηνοειδής βαλβίδα καρδιάς (σχέδιο για εκτύπωση)",
+  "3DPX-000528": "Σπονδυλική στήλη (ελλιπής)",
+  "3DPX-000581": "Έφηβος με κολποκοιλιακό κανάλι, πλήρη κολποκοιλιακό αποκλεισμό και ανεύρυσμα χώρου εξόδου αριστερής κοιλίας",
+  "3DPX-000702": "Γλυκοπρωτεΐνη gp120 του HIV-1 (τριμερές ακίδας)",
+  "3DPX-000718": "Υοειδές οστό",
+  "3DPX-000725": "Μονοκλωνικό αντίσωμα έναντι της αιμοσυγκολλητίνης του ιού γρίπης Α",
+  "3DPX-000806": "Αρθρίτιδα γόνατος",
+  "3DPX-001001": "Μηχανισμός λαβής για προσθετική άκρα χείρα",
+  "3DPX-001203": "Διπλό αορτικό τόξο (αιματική δεξαμενή)",
+  "3DPX-001204": "Διπλό αορτικό τόξο",
+  "3DPX-001277": "Μερικό αγγειακό δίκτυο εγκεφάλου",
+  "3DPX-001334": "Αποκατάσταση μηριαίας κεφαλής και κοτύλης",
+  "3DPX-001549": "Καρδιαγγειακή νόσος (εκπαιδευτικό μοντέλο)",
+  "3DPX-001558": "Νεφρική νόσος (εκπαιδευτικό μοντέλο)",
+  "3DPX-001560": "Διαβητικό πόδι (εκπαιδευτικό μοντέλο)",
+  "3DPX-001617": "Αυτί",
+  "3DPX-001691": "Σύνδεσμος ταχείας αλλαγής προσθέματος",
+  "3DPX-001694": "Γάντι βοήθειας για εφαρμογή μακιγιάζ",
+  "3DPX-001708": "Σύνδεσμος χαμηλού προφίλ για πρόθεση κάτω γόνατος",
+  "3DPX-001710": "Προσαρμογέας προσθετικής χείρας για μοτοσυκλέτα",
+  "3DPX-002058": "Καρδιά εμβρύου κοτόπουλου (ζώο)",
+  "3DPX-002604": "Αρτηρίες του κρανίου",
+  "3DPX-002684": "Κύτταρο αμφιβληστροειδούς",
+  "3DPX-002766": "Εγκέφαλος εμβρύου 23–37 εβδομάδων κύησης",
+  "3DPX-003091": "Μάζα κρανίου",
+  "3DPX-003092": "Μάζα κρανίου (περίπτωση 2)",
+  "3DPX-003093": "Μάζα κρανίου μετά από χειρουργείο",
+  "3DPX-003095": "Μάζα κρανίου (περίπτωση 3)",
+  "3DPX-003096": "Μάζα κρανίου (περίπτωση 4)",
+  "3DPX-003097": "Μάζα κρανίου μετά από χειρουργείο (περίπτωση 2)",
+  "3DPX-003098": "Μάζα κρανίου μετά από χειρουργείο (περίπτωση 3)",
+  "3DPX-003145": "Κλασματική ανισοτροπία εγκεφάλου (μαγνητική τομογραφία)",
+  "3DPX-003250": "Ανεύρυσμα καρωτίδας στην έκφυση της οφθαλμικής αρτηρίας",
+  "3DPX-003267": "Ουροδόχος κύστη με εκκολπώματα",
+  "3DPX-003377": "Οστά προσώπου και βάση κρανίου εμβρύου 28 εβδομάδων",
+  "3DPX-003410": "Γλουτιαίοι μύες",
+  "3DPX-003854": "Νεφρός με νεφροκυτταρικό καρκίνωμα",
+  "3DPX-003952": "Εγκέφαλος σπίνου (ζώο)",
+  "3DPX-004318": "Πρόσθια βάση κρανίου μετά από σφηνοειδοτομή",
+  "3DPX-004418": "Αιμοφόρα αγγεία",
+  "3DPX-004452": "Πρόθεση άκρας χείρας και αντιβραχίου K1",
+  "3DPX-004542": "Κρανίο και γνάθος πούμα (ζώο)",
+  "3DPX-004653": "Κακόηθες μελάνωμα άνω γνάθου",
+  "3DPX-004654": "Επιθετική μάζα βάσης κρανίου",
+  "3DPX-004656": "Όγκος υοειδούς οστού",
+  "3DPX-004800": "Πολλαπλά οστικά ελλείμματα κρανίου",
+  "3DPX-004812": "Επιθετική μάζα ρινός",
+  "3DPX-004814": "Επιθετική βλάβη μετωπιαίου κόλπου",
+  "3DPX-004819": "Κρανίο με βλάβη άνω γνάθου",
+  "3DPX-004821": "Εκτεταμένο απόστημα προσώπου",
+  "3DPX-004922": "Μάζα δεξιού τραχήλου",
+  "3DPX-004923": "Μάζα δεξιού τραχήλου (περίπτωση 2)",
+  "3DPX-005000": "Συγγενής παραμόρφωση σπονδυλικής στήλης",
+  "3DPX-005119": "Ακίδες περιβλήματος του ιού SIV με CD4 και αντίσωμα",
+  "3DPX-007477": "Δίπτυχη αορτική ρίζα με επασβεστώσεις",
+  "3DPX-007496": "Διπλό αορτικό τόξο (περίπτωση 17)",
+  "3DPX-008097": "Οστεομυελίτιδα κάτω γνάθου",
+  "3DPX-008134": "Καρβίδιο του πυριτίου (SiC)",
+  "3DPX-008610": "Τρισδιάστατη σάρωση κορμού",
+  "3DPX-008635": "Τρισδιάστατη σάρωση κορμού (μοντέλο 2)",
+  "3DPX-008908": "Πεταλοειδής νεφρός",
+  "3DPX-008970": "Αορτή γάτας (ζώο)",
+  "3DPX-009507": "Κρανιοσυνοστέωση λαμβδοειδούς ραφής",
+  "3DPX-009508": "Κρανιοσυνοστέωση",
+  "3DPX-010751": "Κυτταρικό τοίχωμα Gram-αρνητικού βακτηρίου",
+  "3DPX-010752": "Κυτταρικό τοίχωμα Gram-θετικού βακτηρίου",
+  "3DPX-011385": "Έσω ους (εκπαιδευτικό μοντέλο)",
+  "3DPX-011791": "Κύτταρο του έξω γονατώδους σώματος",
+  "3DPX-012319": "Μόριο μεθανίου",
+  "3DPX-012628": "Μύες αριστερού άνω άκρου (Visible Human)",
+  "3DPX-012629": "Μύες δεξιού άνω άκρου (Visible Human)",
+  "3DPX-012831": "Επασβεστωμένη δίπτυχη αορτική βαλβίδα (περίπτωση 1)",
+  "3DPX-012832": "Επασβεστωμένη δίπτυχη αορτική βαλβίδα (περίπτωση 2)",
+  "3DPX-012834": "Επασβεστωμένη δίπτυχη αορτική βαλβίδα (περίπτωση 3)",
+  "3DPX-012835": "Επασβεστωμένη δίπτυχη αορτική βαλβίδα (περίπτωση 4)",
+  "3DPX-013646": "Α-έλικα αιμοσφαιρίνης (απεικόνιση ταινίας)",
+  "3DPX-013774": "Α-έλικα αιμοσφαιρίνης (απεικόνιση επιφάνειας)",
+  "3DPX-014739": "Κροταφικό οστό για προσομοίωση ωτοχειρουργικής",
+  "3DPX-015142": "Ανθρωπομετρικά ψηφιακά ομοιώματα κεφαλής NIOSH",
+  "3DPX-015597": "Treponema succinifaciens",
+  "3DPX-015598": "Treponema succinifaciens (αριθμημένο μοντέλο)",
+  "3DPX-015992": "Πρωτεΐνη P του ιού ηπατίτιδας Β με τενοφοβίρη (σχηματικό)",
+  "3DPX-016412": "Ανεύρυσμα πνευμονικής αρτηρίας (περίπτωση 98)",
+  "3DPX-016415": "Μοντέλο εκπαίδευσης (χωρίς περιγραφή)",
+  "3DPX-017608": "C. elegans (απλό μοντέλο)",
+  "3DPX-017609": "E. coli (απλό μοντέλο)",
+  "3DPX-017797": "Α-έλικα πρωτεΐνης",
+  "3DPX-017938": "Αλληλεπίδραση του υποδοχέα CXCR4 με προσδέτες σε καρκινικά κύτταρα",
+  "3DPX-017975": "Ραβδοειδές βακτήριο (μέρος Ι)",
+  "3DPX-017978": "Οστεοβλάστη (μέρος ΙΙ)",
+  "3DPX-017980": "Ραβδοειδές βακτήριο E. coli (μέρος ΙΙ)",
+  "3DPX-017981": "Κόκκος S. aureus (μέρος ΙΙ)",
+  "3DPX-018171": "Πρωτεΐνη ORF6 του SARS-CoV-2",
+  "3DPX-018266": "Άνω αυχενικά γάγγλια",
+  "3DPX-020227": "Έσω ους",
+  "3DPX-020292": "Πλάκα στήριξης (βοήθημα)",
+  "3DPX-020296": "Βοήθημα οδήγησης για τον βραχίονα",
+  "3DPX-020297": "Νυχοκόπτης με στήριγμα (βοήθημα)",
+  "3DPX-020403": "Τρισδιάστατο ομοίωμα απεικόνισης",
+  "3DPX-020871": "Οστεοσάρκωμα αριστερού θωρακικού τοιχώματος",
+  "3DPX-020872": "Μεταστατικός όγκος από γεννητικά κύτταρα",
+  "3DPX-020992": "Σώμα γυναίκας (δέρμα)",
+  "3DPX-021022": "Σώμα ανδρός (δέρμα)",
+  "3DPX-021281": "Καρδιά αθλητή",
+  "3DPX-021332": "Πυρήνας φακού του οφθαλμού (μεγεθυμένο μοντέλο)",
+  "3DPX-021609": "Επιφυσιολίσθηση μηριαίας κεφαλής",
+  "3DPX-021675": "Μεταστατικοί όζοι πνευμόνων",
+  "3DPX-021789": "Βοήθημα άνω άκρου για παιδιά",
+  "3DPX-021799": "Βαλβίδες λεμφαγγείων και φλεβών",
+  "3DPX-022753": "Κρανίο αμερικανικού μπουλντόγκ (ζώο)",
+  "3DPX-022818": "Λεπτομερές μοντέλο ανθρώπινου κορμού",
+  "3DPX-023220": "Κρανίο καπιμπάρα (ζώο)",
+  "3DPX-023244": "Κρανίο σκύλου pug (ζώο)",
+  "3DPX-023404": "Νεοαντιγόνο 2",
+  "3DPX-023406": "Νεοαντιγόνο N4",
+  "3DPX-023409": "Νεοαντιγόνο N7",
+  "3DPX-023410": "Νεοαντιγόνο N8",
+  "3DPX-023413": "Νεοαντιγόνο N11",
+  "3DPX-023414": "Νεοαντιγόνο N12",
+  "3DPX-023480": "Δίπολος νευρώνας",
+  "3DPX-023600": "Επιπλοϊκή απόφυση εγκάρσιου κόλου γυναίκας",
+  "3DPX-023604": "Λειτουργική μονάδα σπειράματος νεφρού",
+  "3DPX-023607": "Επιπλοϊκή απόφυση εγκάρσιου κόλου ανδρός",
+  "3DPX-023687": "Ρινική ανατομία με διάτρηση διαφράγματος"
  }
 }

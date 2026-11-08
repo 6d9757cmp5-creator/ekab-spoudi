@@ -1,7 +1,10 @@
 import {chromium,webkit} from 'playwright';
 import {spawn} from 'node:child_process';
 import {mkdirSync,readFileSync} from 'node:fs';
-import {buildModelList} from '../tools/atla-ai/model-preview-catalog.mjs';
+import {buildModelList,libraryAssets,libraryEntries} from '../tools/atla-ai/model-preview-catalog.mjs';
+// The viewer lists every collection from the one shared library registry, and so does this check.
+const library=JSON.parse(readFileSync('tools/atla-ai/resources/model-library.json','utf8'));
+const listed=(tool,sourceType)=>buildModelList(tool,libraryAssets(library,tool,sourceType),sourceType);
 const BASE='http://127.0.0.1:8876/';
 mkdirSync('browser-qa-results',{recursive:true});
 const server=spawn('python3',['-m','http.server','8876','--bind','127.0.0.1'],{stdio:'ignore'});
@@ -24,11 +27,8 @@ try{
   const errors=[],requests=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('request',req=>{if(/3d\.nih\.gov/.test(req.url()))requests.push(req.url())});
-  const sources=JSON.parse(readFileSync(test.filename,'utf8'));
-  const opts=test.sourceType==='makehuman'?
-   [...buildModelList('cockpit',sources,'makehuman'),
-    ...buildModelList('cockpit',JSON.parse(readFileSync('tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json','utf8')),'makehuman')]:
-   buildModelList(test.tool,sources,test.sourceType);
+  const opts=listed(test.tool,test.sourceType);
+  if(opts.length!==test.expected)failures.push(test.tool+' '+test.sourceType+' registry lists '+opts.length+', expected '+test.expected);
   const smallest=test.sourceType==='makehuman'?opts.findIndex(a=>a.path.endsWith('/base.obj')):opts.reduce((n,a,i)=>a.bytes<opts[n].bytes?i:n,0);
   await page.goto(BASE+'ui-tools/atla-resource-preview.html?tool='+test.tool,{waitUntil:'domcontentloaded'});
   if(test.sourceType!=='primary')await page.selectOption('#source-dataset',test.sourceType==='makehuman'?'makehuman':test.sourceType==='rigged'?'rigged':'secondary');
@@ -82,8 +82,7 @@ try{
     mobile.on('pageerror',e=>pageErrors.push(e.message));
     await mobile.goto(BASE+'ui-tools/atla-resource-preview.html?tool='+cfg.tool,{waitUntil:'domcontentloaded'});
     await mobile.waitForFunction(count=>document.querySelector('#source-model').options.length===count,cfg.expected,{timeout:60000});
-    const items=buildModelList(cfg.tool,JSON.parse(readFileSync(
-     cfg.tool==='anatomy'?'tools/anatomy-3d/resources/imported-manifest.json':'tools/patient-simulator/resources/quaternius/imported-manifest.json','utf8')));
+    const items=listed(cfg.tool,'primary');
     const smallest=items.reduce((n,a,i)=>a.bytes<items[n].bytes?i:n,0);
     await mobile.selectOption('#source-model',String(smallest));
     await mobile.locator('#source-load').click();
@@ -96,6 +95,32 @@ try{
     await mobile.close();
    }
   }finally{await safari.close()}
+  // The 3D library page lists the whole registry, and each entry opens its model in the viewer.
+  const shelf=await browser.newPage({viewport:{width:390,height:844}});
+  const shelfErrors=[];shelf.on('pageerror',e=>shelfErrors.push(e.message));
+  await shelf.goto(BASE+'ui-tools/3d-library.html',{waitUntil:'domcontentloaded'});
+  const total=libraryEntries(library).length;
+  await shelf.waitForFunction(n=>document.querySelector('#count').textContent.includes(n+' μοντέλα συνολικά'),total,{timeout:30000});
+  // Branches: section, then kind, then body region, with the back button walking up again.
+  await shelf.getByRole('link',{name:/Κακώσεις και παθολογία/}).click();
+  await shelf.getByRole('link',{name:/^Κατάγματα/}).click();
+  await shelf.getByRole('link',{name:/^Κάτω άκρο/}).click();
+  // The fracture level already lists models, so wait for the breadcrumb of the region itself.
+  await shelf.waitForFunction(()=>/Κάτω άκρο/.test(document.querySelector('#library-path [aria-current]')?.textContent||''),null,{timeout:15000})
+   .catch(()=>failures.push('3D library breadcrumb lost its branch'));
+  if(!await shelf.locator('#library-list .item').count())failures.push('3D library region branch lists no models');
+  await shelf.goBack();
+  await shelf.waitForFunction(()=>/Κατάγματα/.test(document.querySelector('#library-path [aria-current]')?.textContent||''));
+  await shelf.getByRole('link',{name:'Βιβλιοθήκη'}).click();
+  await shelf.fill('#library-search','καταγμα πτερνας');
+  await shelf.waitForFunction(()=>document.querySelectorAll('#library-list .item').length>0);
+  if(await shelf.evaluate(()=>document.documentElement.scrollWidth>innerWidth))failures.push('3D library overflows a phone screen');
+  await Promise.all([shelf.waitForURL(/atla-resource-preview\.html/),shelf.locator('#library-list .open').first().click()]);
+  await shelf.waitForFunction(()=>/Φορτώθηκε/.test(document.querySelector('#source-status').textContent),null,{timeout:120000});
+  if(!/3d-library\.html$/.test(await shelf.locator('#source-back').getAttribute('href')))failures.push('Viewer opened from the library does not return to it');
+  if(shelfErrors.length)failures.push('3D library page errors: '+shelfErrors.slice(0,2).join(' | '));
+  console.log('PASS 3D LIBRARY '+total+' entries, search and open in viewer');
+  await shelf.close();
 }finally{
  await browser?.close();
  server.kill('SIGTERM');

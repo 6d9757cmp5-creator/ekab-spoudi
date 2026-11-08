@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="paramedic.css">
 <script src="theme-init.js"></script>
 <script type="module" src="atla/assistant.mjs" defer></script>
-</head>
+<link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script></head>
 <body>
 <a class="pm-skip" href="#main">Μετάβαση στο περιεχόμενο</a>
 <header class="pm-header">
  <div class="pm-header-inner">
   <a class="pm-brand" href="index.html"><span class="pm-logo" aria-hidden="true">✚</span><span><strong>ATLA</strong><small>ΕΚΑΒ Σπουδή</small></span></a>
-  <a class="pm-back" href="index.html">← Αρχική</a>
+  <a data-ekab-back-spot class="pm-back" href="index.html">← Αρχική</a>
  </div>
 </header>
 <main id="main" class="pm-main">
@@ -36,6 +36,7 @@
   <div class="pm-grid">
    <a class="pm-card" href="mentor-ecg.html"><span class="pm-icon" aria-hidden="true">〽️</span><span class="pm-card-copy"><strong>Εξάσκηση σε ηλεκτροκαρδιογράφημα (ΗΚΓ)</strong><span>Βασική μορφή P–QRS–T και εξάσκηση μέτρησης QRS</span><small>Συνθετικά σχήματα · όχι κλινικό ΗΚΓ</small></span><span class="pm-arrow" aria-hidden="true">›</span></a>
    <a class="pm-card" href="ui-tools/anatomy-3d/index.html"><span class="pm-icon" aria-hidden="true">🫀</span><span class="pm-card-copy"><strong>Τρισδιάστατη ανατομία ανθρώπινου σώματος</strong><span>Μελέτη ανατομικών δομών</span><small>Υποστηρικτική οπτική εκμάθηση</small></span><span class="pm-arrow" aria-hidden="true">›</span></a>
+   <a class="pm-card" href="ui-tools/3d-library.html"><span class="pm-icon" aria-hidden="true">🧊</span><span class="pm-card-copy"><strong>Βιβλιοθήκη 3D μοντέλων</strong><span>Όλα τα μοντέλα: ανατομία, κακώσεις, άτλαντες, προσομοιωτής</span><small>Αναζήτηση και άνοιγμα με ένα πάτημα</small></span><span class="pm-arrow" aria-hidden="true">›</span></a>
    <a class="pm-card" href="practical_exam.html"><span class="pm-icon" aria-hidden="true">🧰</span><span class="pm-card-copy"><strong>Πρακτική ΕΟΠΠΕΠ</strong><span>Δεξιότητες και ενδεικτικά σενάρια εξέτασης</span><small>Προετοιμασία · όχι πιστοποίηση επάρκειας</small></span><span class="pm-arrow" aria-hidden="true">›</span></a>
    <a class="pm-card" href="seminar-prep.html"><span class="pm-icon" aria-hidden="true">🩺</span><span class="pm-card-copy"><strong>Σεμινάρια και αναζωογόνηση</strong><span>Προετοιμασία για BLS/AED, PBLS και άλλες ενότητες</span><small>Εκπαιδευτικό υλικό και επανάληψη</small></span><span class="pm-arrow" aria-hidden="true">›</span></a>
   </div>
@@ -50,6 +51,23 @@
   <nav class="pm-resources" aria-label="Εργαλεία αναφοράς">
    <a href="farmaka.html">Φαρμακολογία <span aria-hidden="true">›</span></a>
    <a href="protocols.html">Ελληνικά Πρωτόκολλα <span aria-hidden="true">›</span></a>
+  </nav>
+ </section>
+ <section class="pm-section" aria-labelledby="pm-atla-title">
+  <div class="pm-section-title"><h2 id="pm-atla-title">Εκπαιδευτικός βοηθός ATLA</h2><p>Μελέτη, εξάσκηση και ανάγνωση με τη βοήθεια του ATLA.</p></div>
+  <nav class="pm-resources" aria-label="Εργαλεία ATLA">
+   <a href="mentor-lab.html">Μελέτη και ασκήσεις <span aria-hidden="true">›</span></a>
+   <a href="mentor-oral.html">Προφορική εξάσκηση <span aria-hidden="true">›</span></a>
+   <a href="mentor-library.html">Βιβλιογραφία διασώστη <span aria-hidden="true">›</span></a>
+   <a href="mentor-readonly.html">Ανάγνωση όλης της γνώσης <span aria-hidden="true">›</span></a>
+  </nav>
+ </section>
+ <section class="pm-section" aria-labelledby="pm-help-title">
+  <div class="pm-section-title"><h2 id="pm-help-title">Βοήθεια</h2><p>Οδηγίες χρήσης, αναζήτηση και επιδιόρθωση εμφάνισης.</p></div>
+  <nav class="pm-resources" aria-label="Βοήθεια">
+   <a href="manual.html">Οδηγός χρήσης <span aria-hidden="true">›</span></a>
+   <a href="search.html">Αναζήτηση σε όλη την εφαρμογή <span aria-hidden="true">›</span></a>
+   <a href="repair.html">Επιδιόρθωση εμφάνισης <span aria-hidden="true">›</span></a>
   </nav>
  </section>
  <section class="pm-assistant" aria-label="Εκπαιδευτικός βοηθός">

@@ -47,14 +47,15 @@ test("streams tokens, including a chunk split mid-line",async()=>{
  const r=await askAi({endpoint:"https://w.example",payload:buildPayload({question:"q",passages}),
   fetchImpl:async(url,init)=>{assert.equal(init.credentials,"omit");assert.equal(init.method,"POST");return sse(['data: {"token":"Η ΚΑ','ΡΠΑ"}\n\n','data: {"token":" είναι [Τ1]"}\ndata: [DONE]\n']);},
   onToken:t=>seen.push(t)});
- assert.equal(r.ok,true);assert.equal(r.text,"Η ΚΑΡΠΑ είναι [Τ1]");
- assert.deepEqual(seen,["Η ΚΑΡΠΑ είναι [Τ1]"]);
+ // The citation is required by the audit but never shown to the learner.
+ assert.equal(r.ok,true);assert.equal(r.text,"Η ΚΑΡΠΑ είναι");
+ assert.deepEqual(seen,["Η ΚΑΡΠΑ είναι"]);
 });
 
 test("plain JSON answers work too",async()=>{
  const r=await askAi({endpoint:"https://w.example",payload:buildPayload({question:"q",passages}),
   fetchImpl:async()=>new Response(JSON.stringify({answer:"Απάντηση [Τ1]"}),{status:200,headers:{"content-type":"application/json"}})});
- assert.deepEqual(r,{ok:true,text:"Απάντηση [Τ1]"});
+ assert.deepEqual(r,{ok:true,text:"Απάντηση"});
 });
 
 test("429 shows the free-limit notice; other errors fall back quietly",async()=>{

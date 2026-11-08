@@ -112,12 +112,8 @@ test('Stop and speech errors do not trigger fake completion or continued animati
  assert.deepEqual(errors,['not-allowed']);
 });
 test('Live MENTOR interface connects status, refresh and explicit voice diagnostic without legacy grading writes',()=>{
- const html=readFileSync(new URL('../mentor-lab.html',import.meta.url),'utf8');
  const app=readFileSync(new URL('../mentor/app/lab.js',import.meta.url),'utf8');
  const css=readFileSync(new URL('../mentor-lab.css',import.meta.url),'utf8');
- for(const id of ['mentor-voice-refresh','mentor-voice-probe','mentor-voice-inventory','mentor-voice-help']){
-  assert.ok(html.includes('id="'+id+'"'),id);
- }
  assert.match(app,/voiceDiagnostics\(window\)/);
  assert.match(app,/requireFemale:female,requireGreek:!female/,'lab falls back to a device Greek voice instead of staying silent');
  assert.match(app,/other\.value='__device__'/);

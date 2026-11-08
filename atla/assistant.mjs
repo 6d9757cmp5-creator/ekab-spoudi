@@ -27,6 +27,7 @@ const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
  ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
+ ['Βιβλιοθήκη 3D μοντέλων','ui-tools/3d-library.html',['βιβλιοθηκη 3d','3d βιβλιοθηκη','3d μοντελα','μοντελα 3d']],
  ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
  ['ATLA Κλινικός Προσομοιωτής','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
@@ -44,7 +45,7 @@ const exam=()=>{
  return examMode(location.pathname);
 };
 let terms=null,questions=null,records=null,visible=false,requestId=0;
-const BODY_KEY='ekab.atla.body3d.v1',AUTO_READ_KEY='ekab.atla.autoread.v1';
+const AUTO_READ_KEY='ekab.atla.autoread.v1';
 const fetchJSON=async name=>{try{const response=await fetch(new URL(name,ROOT),{credentials:'omit'});if(!response.ok)return null;return await response.json();}catch{return null;}};
 async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
@@ -60,18 +61,24 @@ function navigation(text){
  if(!/(ανοιξε|πηγαινε|δειξε|μεταβαση|βρες|open)/.test(n))return null;
  return routes.find(([, ,keys])=>keys.some(key=>n.includes(normalize(key))))||null;
 }
+/** Definitions told the way a trainer would say them, not as a list of entries. */
+function conversational(hits){
+ const [first,...rest]=hits;
+ const lead=first.term+': '+first.definition;
+ return rest.length?lead+'\n\nΣχετικά με αυτό: '+rest.map(h=>h.term+' — '+h.definition).join(' '):lead;
+}
 function answerFromLibrary(q){
  const match=q.toUpperCase().match(officialId);
  if(match){
   const id='EOP-'+match[1]+'-'+match[2];
   const item=questions.find(r=>r.id===id);
   if(item&&typeof item.answer==='string'&&item.answer.trim()&&(!item.answerStatus||item.answerStatus.startsWith('reviewed'))){
-   return {text:'ΕΟΠΠΕΠ '+id+': '+item.question+'\n\nΕκπαιδευτική απάντηση: '+item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id)};
+   return {text:item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id),direct:true};
   }
  }
  const hits=retrieve(q,terms,{k:4,minScore:3});
  const direct=hits.length>0&&nameCoverage(q,terms.find(t=>t.term===hits[0].term))>=0.5;
- if(direct)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
+ if(direct)return {text:conversational(hits),passages:hits,href:null,direct:true};
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
@@ -83,10 +90,11 @@ function answerFromLibrary(q){
  const hits2=[...chapters,...books];
  if(hits2.length){
   const passages=hits2.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:focusSnippet(c.body,cleaned,400)}));
-  return {text:hits2.map(c=>c.title+'\n'+focusSnippet(c.body,cleaned)).join('\n\n'),passages,href:hits2[0].href};
+  // The learner gets the explanation itself; where it came from stays behind the scenes.
+  return {text:hits2.map(c=>focusSnippet(c.body,cleaned)).join('\n\n'),passages,href:hits2[0].href};
  }
- if(hits.length)return {text:hits.map(h=>h.term+': '+h.definition).join('\n\n'),passages:hits,href:null};
- return {text:'Δεν βρήκα επαρκή αντιστοιχία στη διαθέσιμη τοπική βιβλιοθήκη. Μπορείς να δοκιμάσεις συγκεκριμένο ιατρικό όρο ή κωδικό ΕΟΠΠΕΠ (π.χ. EOP-A-001).',passages:[],href:null};
+ if(hits.length)return {text:conversational(hits),passages:hits,href:null};
+ return {text:'Δεν είμαι σίγουρος ότι το έπιασα. Πες μου το με άλλα λόγια ή με έναν συγκεκριμένο όρο και θα το δούμε μαζί.',passages:[],href:null};
 }
 function boot(){
  if(window.__ekabAtlaAssistant)return;
@@ -108,7 +116,7 @@ function boot(){
  demoToggle.checked=demoAllowed;demoRow.hidden=!demoAllowed;
  const demoCopy=$('span','','Δοκιμαστικό AI · εικονικές απαντήσεις');
  demoRow.append(demoToggle,demoCopy);
- const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA AI · απαντά μόνο από επαληθευμένες πηγές':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
+ const refreshState=()=>{state.textContent=demoToggle.checked?'DEMO · Εικονικές απαντήσεις, χωρίς κλήση AI':ATLA_AI.endpoint?'ATLA · ρώτα με ό,τι σε απασχολεί':'Τοπική γνώση · η ζωντανή συνομιλία AI είναι απενεργοποιημένη';};
  refreshState();
  demoToggle.addEventListener('change',refreshState);
  const context=$('p','atla-context');
@@ -123,10 +131,9 @@ function boot(){
  const selected=$('button','','Εξήγησε επιλογή');selected.type='button';
  const clear=$('button','','Καθαρισμός συνομιλίας');clear.type='button';
  const speak=$('button','','🔊 Ανάγνωση');speak.type='button';
- const body3d=$('button','atla-3d','🧑‍⚕️ 3D εκπαιδευτής');body3d.type='button';body3d.setAttribute('aria-pressed','false');
  const autoRow=$('label','atla-auto-read');const autoRead=$('input');autoRead.type='checkbox';
  autoRow.append(autoRead,$('span','','Αυτόματη ανάγνωση'));
- footer.append(selected,speak,body3d,autoRow,clear);
+ footer.append(selected,speak,autoRow,clear);
  const note=$('p','atla-note','Εκπαιδευτικό εργαλείο, όχι ιατρική οδηγία. Δεν διαβάζει αυτόματα βαθμούς ή προσωπικές σημειώσεις.');
  panel.append(head,state,demoRow,context,stream,form,footer,note);
  document.body.append(panel,launcher);
@@ -175,27 +182,11 @@ function boot(){
  const prefSet=(key,value)=>{try{localStorage.setItem(key,value);}catch{}};
  autoRead.checked=prefGet(AUTO_READ_KEY)==='on';
  autoRead.addEventListener('change',()=>prefSet(AUTO_READ_KEY,autoRead.checked?'on':'off'));
- // The 3D teacher is ATLA's body, not a second assistant, and downloads only when the learner asks for it.
- async function show3d(on,restored=false){
-  body3d.setAttribute('aria-pressed',String(on));
-  prefSet(BODY_KEY,on?'on':'off');
-  if(on&&!presence()){
-   window.__atlaPresenceEmbedded=true;
-   try{await import('../mentor/presence/presence.mjs');}
-   catch{body3d.setAttribute('aria-pressed','false');prefSet(BODY_KEY,'off');state.textContent='Ο 3D εκπαιδευτής δεν φορτώθηκε. Η συνομιλία συνεχίζεται κανονικά.';return;}
-  }
-  document.body.classList.toggle('atla-has-3d',on);
-  if(!on){presence()?.minimize();return;}
-  // On a phone the teacher takes the top of the screen, so it never covers the conversation.
-  if(!restored&&window.matchMedia?.('(max-width:640px)').matches)presence()?.pin('tl');else presence()?.show();
- }
- body3d.addEventListener('click',()=>show3d(body3d.getAttribute('aria-pressed')!=='true'));
  mic.addEventListener('click',async()=>{
   const heard=await voice.listen();
   if(heard.ok){field.value=heard.text;form.requestSubmit();return;}
   if(heard.reason!=='cancelled')state.textContent='Δεν ακούστηκε ερώτηση. Δοκίμασε ξανά ή γράψε την.';
  });
- if(prefGet(BODY_KEY)==='on')show3d(true,true);
  function offerLink(href,label){
   if(!href||typeof href!=='string')return;
   try{
@@ -251,18 +242,19 @@ function boot(){
    return;
   }
   if(link){add('mentor','Βρήκα την ενότητα «'+link[0]+'». Μπορείς να την ανοίξεις χωρίς να χαθεί η τρέχουσα σελίδα από το ιστορικό.');offerLink(link[1],'Άνοιξε: '+link[0]);return;}
-  send.disabled=true;state.textContent='Αναζήτηση στην εκπαιδευτική βιβλιοθήκη…';
+  send.disabled=true;state.textContent='Σκέφτομαι…';
   try{
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
    const verifiedForAi=eligibleAiPassages(found.passages,terms);
-   if(!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
+   // A reviewed definition or official answer is already the answer; AI is for questions that need explaining.
+   if(found.direct||!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
    const level=teachingLevelFor(learnerProfile(),q);
    const payload=buildPayload({question:q,passages:verifiedForAi,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
    if(teachingTool)offerLink(teachingTool.href,teachingTool.label);
-  }catch{add('mentor','Η τοπική βιβλιοθήκη δεν είναι διαθέσιμη αυτή τη στιγμή.');}
+  }catch{add('mentor','Κάτι δεν πήγε καλά μόλις τώρα. Δοκίμασε ξανά σε λίγο.');}
   finally{send.disabled=false;refreshState();}
  });
  showHistory();

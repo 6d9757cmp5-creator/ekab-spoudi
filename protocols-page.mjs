@@ -36,7 +36,7 @@ function renderTopics(){
   const badge=document.createElement('span');badge.className='tag';badge.textContent='Όχι επαληθευμένο επιχειρησιακό πρωτόκολλο';
   const actions=document.createElement('div');actions.className='actions';
   const topic=encodeURIComponent(t.id);
-  appendLink(actions,'ATLA · Πρακτική πρωτοκόλλων','mentor-protocol-suite.html?topic='+topic+'&view=lab','btn');
+  appendLink(actions,'Πρακτική πρωτοκόλλων','mentor-protocol-suite.html?topic='+topic+'&view=lab','btn');
   appendLink(actions,'Ανασκόπηση προσπάθειας','mentor-protocol-suite.html?topic='+topic+'&view=debrief','btn alt');
   appendAtlaStudyButton(actions,t.name);
   card.append(title,category,desc,badge,actions);list.append(card);

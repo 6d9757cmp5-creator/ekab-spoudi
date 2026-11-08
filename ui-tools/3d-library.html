@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1c2d">
+<title>Βιβλιοθήκη 3D μοντέλων | ΕΚΑΒ Σπουδή</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color-scheme:dark;background:#091725;color:#edf4fa}
+*{box-sizing:border-box}
+body{margin:0;line-height:1.5}
+main{max-width:1100px;margin:auto;padding:clamp(14px,3vw,32px)}
+.top{display:flex;gap:20px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid #25435c}
+a{color:#8bd4f0}
+h1{font-size:clamp(1.4rem,3vw,2rem);margin:16px 0 6px}
+p{color:#b5cddd;margin:6px 0}
+input{width:100%;padding:12px;border-radius:9px;font:inherit;background:#0c1b2b;color:#fff;border:1px solid #5b839e;margin:16px 0 4px}
+.path{font-size:.95rem;margin:12px 0;overflow-wrap:anywhere}.path a{color:#8bd4f0}.path a[aria-current="page"]{color:#edf4fa;font-weight:700;text-decoration:none}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:4px 0 14px}
+.tiles:empty{display:none}
+.tile{display:flex;flex-direction:column;gap:4px;background:#11293c;border:1px solid #2d516e;border-radius:14px;padding:14px 16px;text-decoration:none;color:#edf4fa;min-height:76px}
+.tile:hover,.tile:focus-visible{border-color:#53c3aa;background:#143349}
+.tile strong{font-size:1.02rem;line-height:1.3}.tile small{color:#a9c6d8;font-size:.84rem}
+#count{font-weight:600;color:#b8edca;min-height:1.5em}
+.grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.item{background:#11293c;border:1px solid #2d516e;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.item h3{font-size:1rem;margin:0;line-height:1.35;overflow-wrap:anywhere}
+.meta{font-size:.82rem;color:#a9c6d8}
+.terms{font-size:.82rem;color:#cfe7f3}
+.note{font-size:.8rem;color:#ffd7a8}
+.open{margin-top:auto;align-self:flex-start;background:#53c3aa;color:#081c24;font-weight:750;text-decoration:none;padding:8px 14px;border-radius:9px}
+#more{display:block;margin:16px auto;font:inherit;padding:11px 18px;border-radius:9px;border:0;background:#2f6677;color:#f0fcff;cursor:pointer}
+</style>
+<script type="module" src="../tools/atla-ai/3d-library.mjs"></script>
+<link rel="stylesheet" href="../navigation.css?v=4"><script src="../navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script></head>
+<body>
+<main>
+<nav class="top"><a data-ekab-back-spot href="../index.html">← ΕΚΑΒ Σπουδή</a><a href="anatomy-3d/index.html">Εργαστήριο 3D Ανατομίας</a></nav>
+<h1>Βιβλιοθήκη 3D μοντέλων</h1>
+<p>Όλα τα τρισδιάστατα μοντέλα της εφαρμογής σε ένα σημείο: ανατομία, κακώσεις, πλήρεις άτλαντες και μοντέλα του Κλινικού Προσομοιωτή. Από εδώ παίρνουν τα μοντέλα τους τα μαθήματα, το εργαστήριο, οι εξετάσεις και ο ATLA.</p>
+<input id="library-search" type="search" placeholder="Αναζήτηση, π.χ. κάταγμα, καρδιά, πύελος" aria-label="Αναζήτηση μοντέλου">
+<nav class="path" id="library-path" aria-label="Διαδρομή στη βιβλιοθήκη"></nav>
+<div class="tiles" id="library-branches"></div>
+<p id="count" role="status" aria-live="polite">Φόρτωση βιβλιοθήκης…</p>
+<ul class="grid" id="library-list"></ul>
+<button type="button" id="more" hidden>Εμφάνιση περισσότερων</button>
+<p><small>Εκπαιδευτικά μοντέλα χωρίς κλινική επικύρωση. Κάθε αρχείο κατεβαίνει μόνο όταν το ανοίξεις.</small></p>
+</main>
+<script type="module" src="../atla/assistant.mjs"></script>
+</body></html>

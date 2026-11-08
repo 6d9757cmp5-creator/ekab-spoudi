@@ -155,7 +155,7 @@ jobs:
           const s=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-educational-evidence-2026/summary.json','utf8'));
           const p=JSON.parse(fs.readFileSync('tools/atla-ai/resources/nih3d-next-originals-plan-2026.json','utf8'));
           import {execFileSync} from 'node:child_process';
-          const previous=JSON.parse(execFileSync('git',['show','HEAD:tools/atla-ai/resources/nih3d-verified-originals-2026.json'],{encoding:'utf8'}));
+          const previous=JSON.parse(execFileSync('git',['show','HEAD:tools/atla-ai/resources/nih3d-verified-originals-2026.json'],{encoding:'utf8',maxBuffer:256*1024**2}));
           if(previous.catalogSourceEntries!==r.catalogSourceEntries||previous.catalogSourceEntries!==p.sourceCatalogEntries)
             throw Error('Source registry and plan refer to different catalogs');
           if(p.verifiedAlreadyCompleteModels!==previous.modelsWithAllCatalogOriginalFilesVerified)

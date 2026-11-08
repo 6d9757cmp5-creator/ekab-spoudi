@@ -5,8 +5,10 @@
 import {LEVELS} from "../student/memory.mjs";
 import {auditAssistantReply} from "./teaching-policy.mjs";
 
-export const LIMIT_MESSAGE="Η ATLA έφτασε προσωρινά το όριο δωρεάν χρήσης AI. Δοκίμασε ξανά αργότερα· οι τοπικές απαντήσεις από τη βιβλιοθήκη εξακολουθούν να λειτουργούν.";
-export const UNAVAILABLE_MESSAGE="Η απάντηση AI δεν είναι διαθέσιμη αυτή τη στιγμή. Χρησιμοποιώ μόνο την τοπική βιβλιοθήκη.";
+/** Removes [Τ1]-style markers and the space they leave before punctuation. */
+export const stripCitations=text=>String(text).replace(/\s*\[(?:[ΤT][1-9][0-9]?)(?:\s*,\s*[ΤT][1-9][0-9]?)*\]/g,'').replace(/[ \t]+([.,;·!?])/g,'$1').replace(/[ \t]{2,}/g,' ').trim();
+export const LIMIT_MESSAGE="Έχω πολλές ερωτήσεις αυτή τη στιγμή. Δοκίμασε ξανά σε λίγο· τους βασικούς ορισμούς μπορώ να σου τους πω κανονικά.";
+export const UNAVAILABLE_MESSAGE="Δεν μπορώ να το αναλύσω περισσότερο αυτή τη στιγμή, αλλά σου λέω ό,τι ξέρω σίγουρα.";
 
 /** Only locally pinned direct-section sources may be sent to the generative
  * Worker. The Worker independently rechecks canonical term, text and ranking.
@@ -93,7 +95,9 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
   text=text.trim();
   const audit=auditAssistantReply(text,payload.passages);
   if(!audit.ok)return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
-  onToken(text); // final, cited and surface-checked text only; no speculative streaming
+  // Citations are kept for the audit above; the learner reads plain, natural text.
+  text=stripCitations(text);
+  onToken(text); // final, checked text only; no speculative streaming
   return {ok:true,text};
  }catch{
   return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};

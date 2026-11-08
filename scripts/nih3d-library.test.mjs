@@ -2,21 +2,28 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import crypto from 'node:crypto';
 import {selectLibraryModels,selectAtlaVisual,safeReturnHref,viewerHref,simplify,structureHits} from '../tools/atla-ai/nih3d-library.mjs';
-import {deliveryRestriction,deliveryPriority,chapterEvidence,parseCourseChapters,MAX_MODEL_BYTES,MODELS_DIR} from './nih3d-build-library.mjs';
+import {deliveryRestriction,deliveryPriority,chapterEvidence,parseCourseChapters,fractureLessonLinks,mergeChapterLinks,MAX_MODEL_BYTES,MAX_LIBRARY_BYTES,MODELS_DIR} from './nih3d-build-library.mjs';
+
+// Chosen fracture lessons apply only to fractures and never replace text evidence.
+const lessons={tibia:['14/11'],pelvis:['14/8']};
+assert.deepEqual(fractureLessonLinks({kind:'pathology',finding:'fracture',structures:['tibia']},lessons),[{chapter:'14/11',occurrences:1}]);
+assert.deepEqual(fractureLessonLinks({kind:'anatomy',structures:['tibia']},lessons),[]);
+assert.deepEqual(fractureLessonLinks({kind:'pathology',finding:'scoliosis',structures:['pelvis']},lessons),[]);
+assert.deepEqual(mergeChapterLinks([{chapter:'14/11',occurrences:4}],[{chapter:'14/11',occurrences:1},{chapter:'14/8',occurrences:1}]),[{chapter:'14/11',occurrences:4},{chapter:'14/8',occurrences:1}]);
 
 // Delivery policy: every refusal has a specific cause.
 const glb={size:1000};
 assert.equal(deliveryRestriction({license:'Public Domain',glb,scopeStatus:'IN_SCOPE_RESEARCH_CANDIDATE'}),null);
 assert.equal(deliveryRestriction({license:'CC BY 4.0',glb}),null);
 assert.equal(deliveryRestriction({license:'CC-BY-SA',glb}),null);
-for(const license of ['CC-BY-NC','CC-BY-NC-SA','CC-BY-NC-ND','CC BY-ND','CC-BY-ND','GNU GPLv3','TAPR'])
- assert.equal(deliveryRestriction({license,glb}),null,license);
-for(const license of ['','  ','Unknown',null])
- assert.equal(deliveryRestriction({license,glb}),'LICENSE_REVIEW',String(license));
+// The owner holds permission for every NIH model, so no licence text, or none at all, blocks delivery.
+for(const license of ['CC-BY-NC','CC-BY-NC-SA','CC-BY-NC-ND','CC BY-ND','CC-BY-ND','GNU GPLv3','TAPR','','  ','Unknown',null])
+ assert.equal(deliveryRestriction({license,glb}),null,String(license));
 assert.equal(deliveryRestriction({license:'Public Domain',glb:null}),'NO_GLB');
 assert.equal(deliveryRestriction({license:'Public Domain',glb,scopeStatus:'LIKELY_OUT_OF_MEDICAL_SCOPE'}),'OUT_OF_SCOPE');
 assert.equal(deliveryRestriction({license:'Public Domain',glb:{size:MAX_MODEL_BYTES+1}}),'OVERSIZE');
-assert.equal(deliveryRestriction({license:'Public Domain',glb,servedBytes:400*1024**2}),'CAPACITY');
+assert.equal(deliveryRestriction({license:'Public Domain',glb,servedBytes:MAX_LIBRARY_BYTES}),'CAPACITY');
+assert.equal(deliveryRestriction({glb:{size:MAX_MODEL_BYTES*9},bytes:1000}),null,'A small display copy of a large original is served');
 
 // Limited space never pushes out what lessons depend on.
 const sized=(entryId,size)=>({entryId,verifiedFiles:[{format:'GLB',size,sha256:'a'.repeat(64)}]});
@@ -87,7 +94,8 @@ if(existsSync('tools/atla-ai/resources/model-library.json')){
  const real=JSON.parse(readFileSync('tools/atla-ai/resources/model-library.json','utf8'));
  const ledger=JSON.parse(readFileSync('tools/atla-ai/resources/nih3d-verified-originals-2026.json','utf8'));
  const nih=real.models.filter(m=>m.source==='nih3d');
- const verified=new Set(ledger.models.map(m=>m.accession));
+ const display=JSON.parse(readFileSync('tools/atla-ai/resources/nih3d-library/display-copies.json','utf8')).models;
+ const verified=new Set([...ledger.models.map(m=>m.accession),...Object.keys(display)]);
  assert(nih.every(m=>verified.has(m.accession)),'The library lists only verified originals');
  // The archive grows on its own schedule, so the build step alone demands full coverage.
  if(process.env.NIH_LIBRARY_STRICT==='1')assert.equal(nih.length,verified.size,'Every verified NIH model belongs to the library');
@@ -95,7 +103,13 @@ if(existsSync('tools/atla-ai/resources/model-library.json')){
   assert.equal(m.clinicalUseApproved,false);
   assert.equal(m.scientificApproval,'NOT_ESTABLISHED');
   if(m.delivery){
-   assert.equal(m.delivery.derived,false,'Only original bytes are served, so no-derivatives licenses hold');
+   // A display copy is a format change only: same triangles as the verified original it names.
+   if(m.delivery.derived){
+    const copy=display[m.accession];
+    assert(copy,'Display copy without a record: '+m.accession);
+    assert.deepEqual(m.delivery.original,{bytes:copy.original.bytes,sha256:copy.original.sha256},m.accession);
+    assert.equal(m.delivery.triangles,copy.display.triangles,m.accession);
+   }else assert.equal(m.delivery.derived,false,m.accession);
    assert(['SOURCE_LICENSE','OWNER_STATED_PERMISSION'].includes(m.rightsBasis),m.accession);
    const bytes=readFileSync(m.delivery.path);
    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),m.delivery.sha256,m.accession);

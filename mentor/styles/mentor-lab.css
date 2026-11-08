@@ -237,3 +237,6 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .mentor-hero-answer{margin:12px 0;padding:14px;border:1px solid #4bc3eb75;border-radius:12px;background:#0b3550;color:#f1fbff;line-height:1.55}
 .mentor-hero-answer[hidden],#mentor-hero-answer-source[hidden]{display:none!important}
 #mentor-hero-answer-source{display:inline-block;margin:5px 0 12px;font-size:.82rem;color:#8bdefe;text-decoration:underline}
+.atla-tool-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}.atla-tool-list a{display:block;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-weight:700;text-decoration:none;color:inherit;background:var(--surface)}.atla-tool-list a:hover,.atla-tool-list a:focus-visible{border-color:currentColor}
+.atla-lab-fold>summary{cursor:pointer;font-weight:800;font-size:1.05rem;min-height:44px;display:flex;align-items:center}.atla-lab-fold[open]>summary{margin-bottom:12px}
+.atla-lab-hero{display:block}.atla-lab-hero .action{max-width:100%;white-space:normal;margin-top:6px}

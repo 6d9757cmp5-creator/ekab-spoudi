@@ -130,8 +130,8 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
 
 /* Shared back button, mobile edge swipe and replacement user guide. */
 if(!document.querySelector('script[data-ekab-navigation]')){
- const css=document.createElement('link');css.rel='stylesheet';css.href='navigation.css?v=3';document.head.append(css);
- const script=document.createElement('script');script.src='navigation.js?v=3';script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
+ const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./navigation.css?v=4',document.currentScript?.src||document.baseURI).href;document.head.append(css);
+ const script=document.createElement('script');script.src=new URL('./navigation.js?v=4',document.currentScript?.src||document.baseURI).href;script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
 }
 
 /* Classroom image presentation mode. */

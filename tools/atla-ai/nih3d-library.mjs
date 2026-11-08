@@ -6,7 +6,7 @@
 export const LIBRARY_PATH='tools/atla-ai/resources/model-library.json';
 const VIEWER_PATH='ui-tools/atla-resource-preview.html';
 const SURFACES=new Set(['lesson','anatomy','exam','cockpit','atla']);
-const LESSON_LIMIT=3;
+const LESSON_LIMIT=12;
 export const simplify=value=>String(value??'').normalize('NFD').replace(/\p{M}/gu,'')
  .toLocaleLowerCase('el').replace(/ς/g,'σ').replace(/\s+/g,' ').trim();
 // Terms are curated in normalized lower case; only the final sigma is folded to match simplify().
@@ -28,14 +28,20 @@ function textScore(model,library,text){
  return score;
 }
 const deliverable=(model,surface)=>Boolean(model.delivery)&&model.clinicalUseApproved===false&&model.surfaces?.includes(surface);
-/** A pathology example stands for its group, so one finding never lists six near-identical models. */
-function ranked(rows,limit){
- const seen=new Set(),out=[];
- rows.sort((a,b)=>b.score-a.score||a.model.entryId-b.model.entryId);
+/** One model stands for its structures and finding, so a chapter never lists near-identical models. */
+function ranked(rows,limit,specific=false){
+ const seen=new Set(),shown=new Set(),out=[];
+ // For a single answer, on equal evidence the model of exactly that structure beats a composite that merely includes it.
+ const breadth=model=>specific?model.structures?.length??0:0;
+ rows.sort((a,b)=>b.score-a.score||breadth(a.model)-breadth(b.model)||a.model.entryId-b.model.entryId);
  for(const {model} of rows){
-  const key=model.kind==='pathology'?model.structures.join()+'|'+model.finding:model.accession;
-  if(seen.has(key))continue;
-  seen.add(key);out.push(model);
+  if(model.kind==='pathology'){
+   const key=model.structures.join()+'|'+model.finding;
+   if(seen.has(key))continue;
+   seen.add(key);
+  }else if(model.structures?.length&&model.structures.every(id=>shown.has(id)))continue;
+  else model.structures?.forEach(id=>shown.add(id));
+  out.push(model);
   if(out.length===limit)break;
  }
  return out;
@@ -61,7 +67,7 @@ export function selectLibraryModels(library,{surface,text='',courseId='',chapter
   const score=textScore(model,library,text);
   if(score)rows.push({model,score});
  }
- return ranked(rows,1);
+ return ranked(rows,1,true);
 }
 /**
  * ATLA offers a model only when it helps: the learner asked, or is struggling with the concept.

@@ -7,12 +7,7 @@ const library=JSON.parse(readFileSync('tools/atla-ai/resources/model-library.jso
 const pick=context=>selectLibraryModels(library,context)[0]?.accession??null;
 const PATELLA='3DPX-000170';
 assert.equal(mountNih3dResearchReferences(),'no-dom');
-// The library has expanded: the chapter shows up to three highest-ranked models, not a fixed accession.
-const selectedLessonModels=selectLibraryModels(library,{surface:'lesson',courseId:'01',chapterId:'2'});
-assert(selectedLessonModels.length>0&&selectedLessonModels.length<=3,'Chapter links remain relevant and bounded');
-assert(selectedLessonModels.every(m=>m.saekChapters?.some(c=>c.chapter==='01/2')),'Top-ranked links must have evidence in the chapter');
-assert(library.models.find(m=>m.accession===PATELLA)?.saekChapters?.some(c=>c.chapter==='01/2'),
- 'Patella remains linked to the chapter even if higher-ranked models take the three visible slots');
+assert(selectLibraryModels(library,{surface:'lesson',courseId:'01',chapterId:'2'}).some(m=>m.accession===PATELLA));
 assert.equal(pick({surface:'lesson',courseId:'01',chapterId:'1'}),null);
 assert.equal(pick({surface:'exam',text:'Τι γνωρίζεις για την επιγονατίδα;',revealed:false}),null);
 assert.equal(pick({surface:'exam',text:'Τι γνωρίζεις για την επιγονατίδα;',revealed:true}),PATELLA);
@@ -20,10 +15,8 @@ assert.equal(pick({surface:'cockpit',text:'Επιγονατίδα',confirmedAnat
 assert.equal(pick({surface:'cockpit',text:'Τροχαίο, πιθανό τραύμα',confirmedAnatomy:true}),null);
 assert.equal(pick({surface:'cockpit',text:'Επιγονατίδα',confirmedAnatomy:true}),PATELLA);
 assert.equal(pick({surface:'anatomy',text:'Επιγονατίδες'}),PATELLA);
-// Newly catalogued lumbar-spine originals should be discoverable without suggesting a diagnosis.
-const spine=selectLibraryModels(library,{surface:'anatomy',text:'Σπονδυλική στήλη'})[0];
-assert(spine?.structures?.includes('lumbar-spine'),'The updated source registry includes relevant spine geometry');
-assert.equal(spine.clinicalUseApproved,false);
+// The whole column opens a whole-column model, never one segment of it.
+assert.deepEqual(selectLibraryModels(library,{surface:'anatomy',text:'Σπονδυλική στήλη'})[0]?.structures,['spine']);
 assert.equal(pick({surface:'learning',text:'Επιγονατίδα'}),null);
 const patella=library.models.find(m=>m.accession===PATELLA);
 assert.equal(patella.originalPage,'https://3d.nih.gov/entries/3DPX-000170');

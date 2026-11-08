@@ -5,7 +5,10 @@ on:
     branches: [main]
     paths:
       - 'tools/atla-ai/resources/nih3d-library/curation.json'
+      - 'tools/atla-ai/resources/library-greek-names.json'
       - 'scripts/nih3d-build-library.mjs'
+      - 'scripts/nih3d-compress-models.mjs'
+      - 'scripts/nih3d-adopt-display-copies.mjs'
       - '.github/workflows/atla-nih3d-library-build.yml'
   workflow_run:
     workflows: ['ATLA NIH3D archive next planned originals and reconcile scientific evidence']
@@ -49,6 +52,20 @@ jobs:
         env:
           STAGING: ${{ runner.temp }}/nih3d-library-staging
         run: node scripts/nih3d-build-library.mjs build "$STAGING"
+      - name: Replace newly served originals with phone-sized display copies
+        env:
+          STAGING: ${{ runner.temp }}/nih3d-library-staging
+        run: |
+          set -euo pipefail
+          raw="$RUNNER_TEMP/nih3d-raw"; mkdir -p "$raw"
+          node -e "const l=require('./tools/atla-ai/resources/model-library.json');for(const m of l.models)if(m.source==='nih3d'&&m.delivery&&!m.delivery.derived)console.log(m.delivery.path)" | while read -r file; do cp "$file" "$raw/"; done
+          if [ -z "$(ls -A "$raw")" ]; then echo 'Every served NIH model is already a display copy'; exit 0; fi
+          gt="$RUNNER_TEMP/gt"; mkdir -p "$gt"
+          npm install --prefix "$gt" --no-save @gltf-transform/cli@4.5.1
+          cp scripts/nih3d-compress-models.mjs "$gt/"
+          node "$gt/nih3d-compress-models.mjs" "$raw" "$RUNNER_TEMP/nih3d-display"
+          node scripts/nih3d-adopt-display-copies.mjs "$RUNNER_TEMP/nih3d-display"
+          node scripts/nih3d-build-library.mjs build "$STAGING"
       - name: Re-verify registry against committed bytes
         env:
           NIH_LIBRARY_STRICT: '1'
@@ -58,7 +75,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add tools/atla-ai/resources/model-library.json tools/atla-ai/resources/nih3d-library/models
+          git add tools/atla-ai/resources/model-library.json tools/atla-ai/resources/nih3d-library/models tools/atla-ai/resources/nih3d-library/display-copies.json
           if ! git diff --cached --quiet; then
             git commit -m 'evidence(atla): ενημέρωση κοινής βιβλιοθήκης 3D από επαληθευμένα πρωτότυπα NIH'
             branch="$(git rev-parse --abbrev-ref HEAD)"
