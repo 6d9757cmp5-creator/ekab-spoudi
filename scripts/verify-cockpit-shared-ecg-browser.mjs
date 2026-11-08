@@ -52,6 +52,8 @@ try{
    assert.equal(await page.locator('#next-case-list .next-case-card').count(),3,'preserve all original cases');
    const slug=device.toLowerCase().replace(/[^a-z0-9]+/g,'-');
    for(const caseId of cases){
+    const picker=page.locator('.next-case-picker');
+    if(!await picker.evaluate(el=>el.open))await picker.locator('summary').click();
     await page.locator('[data-case-id="'+caseId+'"]').click();
     await page.waitForFunction(()=>document.querySelector('#next-ecg-wave')?.getAttribute('points')?.split(' ').length===240);
     const a=await curve.getAttribute('points');
