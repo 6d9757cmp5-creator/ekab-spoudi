@@ -162,6 +162,8 @@ function openCourse(id,updateHash=true){
  $('seminarHome').hidden=true;$('seminarCourse').hidden=false;
  $('seminarCourseTitle').textContent=course.name;
  $('seminarCourseSub').textContent=course.subtitle;
+ // Show which guidelines the content follows, so learners can check the source.
+ const basis=$('seminarCourseBasis');if(basis)basis.textContent=course.sources?.length?'Βάση: '+course.sources.filter(s=>!/^https?:/.test(s)).join(' · '):'';
  if(updateHash)history.replaceState(null,'','#'+id);
  switchView('theory');window.scrollTo({top:0,behavior:'instant'});
 }
