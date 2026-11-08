@@ -66,3 +66,7 @@
 - Τα υπάρχοντα κουμπιά «Σκηνή», «Σώμα», «Κεφάλι», «Θώρακας», «Πόδια» ελέγχουν τώρα την **ορατή** GLB κάμερα του model-viewer, όχι μόνον το κρυφό procedural WebGL. Browser tests επιβεβαιώνουν αλλαγή σε `camera-orbit`, `data-focus-view` και επάνοδο full view.
 - Η τοποθέτηση περιοχών είναι **προσεγγιστική** για όρθια μοντέλα, από όρια πλέγματος, όχι ακριβή ανατομία. Δεν υπάρχουν bones, animation, διασύνδεση εξοπλισμού, θεραπεία ή κλινική επαλήθευση.
 - Στόχος πλέον είναι *engineering, visual και functional parity/excellence*, **όχι πρόσβαση/αντιγραφή κλειστού κώδικα Body Interact**. Κριτήρια: [Simulation Cockpit Design & Code Acceptance](SIMULATION_COCKPIT_VISUAL_SPEC_2026.md).
+
+
+## Διεθνής σύγκριση και άδειες · 09/11/2026
+Η συμπληρωματική [πολυπρομηθευτική μελέτη](ATLA_GLOBAL_SIMULATOR_COMPARISON_2026-11-09.md) συγκρίνει Body Interact, vSim, SimX, Oxford Medical Simulation και OpenLabyrinth, καταγράφει τα σημερινά τεχνικά ελλείμματα και ορίζει ανά-asset κανόνες προέλευσης/CC0/GPL/NIH. Το πρωτότυπο S/B/A/R σε feature branch **δεν ισοδυναμεί** με επιστημονικά επικυρωμένη παράδοση ασθενούς.
