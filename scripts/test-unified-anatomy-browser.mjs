@@ -64,6 +64,25 @@ try{
   await page.locator('#atlas-unload').click();
   assert.equal(await page.locator('#atlas-stage').isVisible(),false);
   console.log('PASS real local BodyParts3D 4.0 WebGL2 render, picking and unload');
+  if(process.env.ATLA_REAL_ATLAS_43==='1'){
+   const errors=[];page.on('pageerror',error=>errors.push(String(error)));
+   await page.locator('#atlas-version').selectOption('bp3d43');
+   page.once('dialog',dialog=>dialog.accept());
+   await page.locator('#atlas-load').click();
+   await page.waitForFunction(()=>/Έτοιμος ο άτλας BodyParts3D 4\.3/.test(document.getElementById('atlas-status')?.textContent||'')||
+    /Αποτυχία προβολής|Αδυναμία εκκίνησης/.test(document.getElementById('atlas-status')?.textContent||''),null,{timeout:300000});
+   const message43=await page.locator('#atlas-status').textContent();
+   assert.match(message43,/Έτοιμος ο άτλας BodyParts3D 4\.3.*3\.210/,'4.3 integrity-checked geometry load failed: '+message43);
+   assert(await page.locator('#atlas-canvas').isVisible(),'4.3 canvas hidden');
+   await page.locator('#atlas-search').fill('femur');
+   await page.locator('#atlas-results button').first().waitFor({state:'visible',timeout:20000});
+   await page.locator('#atlas-results button').first().click();
+   assert.match(await page.locator('#atlas-selected').textContent(),/Επιλογή:/);
+   await page.locator('#atlas-unload').click();
+   assert.equal(await page.locator('#atlas-stage').isVisible(),false);
+   assert.deepEqual(errors,[],'Uncaught browser errors while rendering 4.3');
+   console.log('PASS real local BodyParts3D 4.3 four SHA-256 shards, 3210 meshes, WebGL2, selection and unload');
+  }
   await page.close();
  }
 }finally{await browser?.close();server.kill();}

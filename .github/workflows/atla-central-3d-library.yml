@@ -37,7 +37,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -58,5 +58,5 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: Real browser 390 / 1440 + actual BodyParts3D 4.0 WebGL2 load
-        run: ATLA_REAL_ATLAS=1 node scripts/test-unified-anatomy-browser.mjs
+      - name: Real browser 390 / 1440 + BodyParts3D 4.0 and 4.3 WebGL2 loads
+        run: ATLA_REAL_ATLAS=1 ATLA_REAL_ATLAS_43=1 node scripts/test-unified-anatomy-browser.mjs
