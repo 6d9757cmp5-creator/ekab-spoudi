@@ -86,7 +86,8 @@ html { scroll-padding-top:18px; }
   .reference { margin-top:18px; }
 }
 @media(max-width:560px) {
-  .topbar { min-height:61px; }
+  /* Every link stays reachable on a phone instead of pushing the page sideways. */
+  .topbar { min-height:61px;flex-wrap:wrap;row-gap:6px; }
   .brand small { font-size:9px; }
   .intro { padding:16px 2px 13px; }
   .intro h1 { font-size:25px;line-height:1.15; }
