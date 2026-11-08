@@ -31,7 +31,7 @@ test('BLS 2025: call before checking breathing, 100–120/min, 5–6 cm, 30:2, c
  assert.match(bls[2][1],/πριν ελέγξεις την αναπνοή/);
  assert.ok(bls.findIndex(u=>u[0]==='Κλήση βοήθειας')<bls.findIndex(u=>u[0]==='Αναπνοή και gasping'));
  const t=text('bls');
- for(const fact of ['100–120','5 cm','6 cm','30:2','10 δευτερόλεπτα','5 χτυπήματα στην πλάτη','5 κοιλιακές ωθήσεις'])assert.ok(t.includes(fact),fact);
+ for(const fact of ['100–120','5 cm','6 cm','30:2','5 χτυπήματα στην πλάτη','5 κοιλιακές ωθήσεις','επαγγελματία υγείας'])assert.ok(t.includes(fact),fact);
 });
 test('PBLS 2025: 5 initial breaths, 15:2 if trained else 30:2, one third depth never over 6 cm, 25 kg AED',()=>{
  const t=text('pbls');

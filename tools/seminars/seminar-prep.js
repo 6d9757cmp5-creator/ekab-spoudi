@@ -162,8 +162,19 @@ function openCourse(id,updateHash=true){
  $('seminarHome').hidden=true;$('seminarCourse').hidden=false;
  $('seminarCourseTitle').textContent=course.name;
  $('seminarCourseSub').textContent=course.subtitle;
- // Show which guidelines the content follows, so learners can check the source.
- const basis=$('seminarCourseBasis');if(basis)basis.textContent=course.sources?.length?'Βάση: '+course.sources.filter(s=>!/^https?:/.test(s)).join(' · '):'';
+ // Show which guidelines the content follows; web sources open as links so learners can check them.
+ const basis=$('seminarCourseBasis');
+ if(basis){
+  basis.replaceChildren();
+  if(course.sources?.length){
+   basis.append('Πηγές: ');
+   course.sources.forEach((source,i)=>{
+    if(i)basis.append(' · ');
+    if(/^https:\/\//.test(source)){const a=make('a',null,/first-aid/.test(source)?'Οδηγίες Πρώτων Βοηθειών 2025 (resus.org.uk)':'Οδηγίες ERC 2025 (resus.org.uk)');a.href=source;a.target='_blank';a.rel='noopener noreferrer';basis.append(a);}
+    else basis.append(source);
+   });
+  }
+ }
  if(updateHash)history.replaceState(null,'','#'+id);
  switchView('theory');window.scrollTo({top:0,behavior:'instant'});
 }
