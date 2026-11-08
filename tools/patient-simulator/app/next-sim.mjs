@@ -304,7 +304,7 @@ function renderTool(){
    r.practiceSteps.forEach((step,i)=>list.append(el('li',(step.done?'✓ ':'○ ')+(i+1)+'. '+step.label)));
    actions.append(list);
   }
-  actions.append(actionButton('Μετάβαση στο ATLA · ΑΝΑΣΚΟΠΗΣΗ',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
+  actions.append(actionButton('Μετάβαση στην ΑΝΑΣΚΟΠΗΣΗ',()=>{$('next-review-body').scrollIntoView({behavior:'smooth'});}));
  }else for(const a of activeActions){
   actions.append(actionButton(a.label+' · '+a.min+'′',()=>{
    try{const updated=execute(state,tool,a.id);commit(updated,updated.events.at(-1).detail);}

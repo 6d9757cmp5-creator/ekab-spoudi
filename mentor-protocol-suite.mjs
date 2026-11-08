@@ -33,7 +33,7 @@ function save(){
  catch{$('lab-storage').textContent='Η αποθήκευση δεν είναι διαθέσιμη στον browser. Η προσπάθεια ισχύει μόνο όσο μένει ανοιχτή η σελίδα.';}
 }
 const href=(kind)=>makeJourneyUrl('mentor-protocol-suite.html',journeyContext,kind)+'&role='+encodeURIComponent(role);
-$('suite-title').textContent=view==='lab'?'ATLA | Εργαστήριο πρωτοκόλλων':'ATLA · ΑΝΑΣΚΟΠΗΣΗ';
+$('suite-title').textContent=view==='lab'?'Εργαστήριο πρωτοκόλλων':'ΑΝΑΣΚΟΠΗΣΗ';
 $('suite-topic').textContent=topic.name;
 $('suite-context').textContent='Εκπαιδευτικό σενάριο: '+topic.scenario+'. Εστίαση: '+topic.focus+'.'+
  (journeyContext.focus?' Συνδεδεμένη ενότητα: '+journeyContext.focus+'.':'');
@@ -66,8 +66,8 @@ function showLab(){
  $('lab-next').hidden=true;
  if(completed){
   $('lab-header').textContent='Η εξάσκηση ολοκληρώθηκε';
-  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στο ATLA · ΑΝΑΣΚΟΠΗΣΗ.';
-  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα ATLA · ΑΝΑΣΚΟΠΗΣΗ';
+  $('lab-prompt').textContent='Οι τέσσερις αποφάσεις καταγράφηκαν. Η ανάλυση βρίσκεται στην ΑΝΑΣΚΟΠΗΣΗ.';
+  const a=document.createElement('a');a.className='btn';a.href=href('debrief');a.textContent='Άνοιγμα ΑΝΑΣΚΟΠΗΣΗΣ';
   $('lab-choices').append(a);
   mentorSay('Ολοκλήρωσες την άσκηση. Στο ΑΝΑΣΚΟΠΗΣΗ θα εξετάσουμε τη λογική κάθε επιλογής.');
   return;
@@ -95,7 +95,7 @@ function choose(choiceId){
  mentorSay(feedback);
  $('lab-stage').textContent='Ολοκληρώθηκε το βήμα '+session.index+' / '+stages.length;
  $('lab-progress').style.width=Math.round(100*session.index/stages.length)+'%';
- $('lab-next').textContent=session.completed?'Δες το ATLA · ΑΝΑΣΚΟΠΗΣΗ':'Επόμενο εκπαιδευτικό βήμα →';
+ $('lab-next').textContent=session.completed?'Δες την ΑΝΑΣΚΟΠΗΣΗ':'Επόμενο εκπαιδευτικό βήμα →';
  $('lab-next').hidden=false;
 }
 function readStoredInterview(){
