@@ -135,8 +135,8 @@
         <aside class="source-panel" aria-label="Εξειδικευμένη αναζήτηση">
           <label for="source-query">Αναζήτηση μοντέλου ή ανατομικής δομής</label>
           <input type="search" id="source-query" placeholder="π.χ. μηριαίο, καρδιά, κάταγμα, νευρώνας…" autocomplete="off">
-          <label for="source-dataset">Φίλτρο συλλογής</label>
-          <select id="source-dataset">
+          <label for="source-dataset" hidden>Ενιαίος κατάλογος συλλογών</label>
+          <select id="source-dataset" hidden aria-label="Ενιαίος κατάλογος συλλογών">
             <option value="all" selected>Όλα τα διαθέσιμα και καταχωρισμένα</option>
             <option value="primary">Ανατομικά HRA / HuBMAP</option>
             <option value="nih">Μοντέλα NIH 3D</option>
