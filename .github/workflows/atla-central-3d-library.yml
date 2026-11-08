@@ -5,6 +5,7 @@ on:
       - 'tools/atla-ai/central-3d-library.mjs'
       - 'tools/atla-ai/model-preview-catalog.mjs'
       - 'tools/atla-ai/model-preview.mjs'
+      - 'scripts/test-unified-anatomy-browser.mjs'
       - 'tools/anatomy-3d/inline-atlas.js'
       - 'tools/anatomy-3d/unified-workspace.mjs'
       - 'tools/anatomy-3d/unified-workspace.css'
@@ -22,6 +23,7 @@ on:
       - 'tools/atla-ai/central-3d-library.mjs'
       - 'tools/atla-ai/model-preview-catalog.mjs'
       - 'tools/atla-ai/model-preview.mjs'
+      - 'scripts/test-unified-anatomy-browser.mjs'
       - 'tools/anatomy-3d/inline-atlas.js'
       - 'tools/anatomy-3d/unified-workspace.mjs'
       - 'tools/anatomy-3d/unified-workspace.css'
@@ -35,7 +37,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,8 +48,15 @@ jobs:
           node --check tools/atla-ai/central-3d-library.mjs
           node --check tools/atla-ai/model-preview-catalog.mjs
           node --check tools/atla-ai/model-preview.mjs
+          node --check scripts/test-unified-anatomy-browser.mjs
           node --check tools/anatomy-3d/inline-atlas.js
           node --check tools/anatomy-3d/unified-workspace.mjs
           node --check tools/anatomy-3d/hires-anatomy.js
       - name: Real manifest quality, composition safety and adaptive policy
         run: node --test scripts/test-atla-central-3d-library.mjs scripts/test-atla-central-3d-integration.mjs tools/anatomy-3d/unified-workspace.test.mjs
+      - name: Install Chromium for real unified anatomy smoke
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Real browser 390 / 1440 + actual BodyParts3D 4.0 WebGL2 load
+        run: ATLA_REAL_ATLAS=1 node scripts/test-unified-anatomy-browser.mjs
