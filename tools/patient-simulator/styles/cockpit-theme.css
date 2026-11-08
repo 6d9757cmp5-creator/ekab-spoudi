@@ -281,3 +281,42 @@ body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
  .next-render-notice{padding:8px 12px}
  .next-actions .next-suggested-action::after{display:block;padding-top:4px}
 }
+
+
+/* Compact three-row patient toolbar on phones: preserve all 3D actions without
+   making users scroll through four separate control rows. */
+@media(max-width:600px){
+ .next-scene .next-scene-top{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+  align-items:center;
+  padding:10px;
+ }
+ .next-scene .next-scene-label{
+  grid-column:1;grid-row:1;min-width:0;
+  font-size:.64rem;white-space:normal;
+ }
+ .next-scene #next-fullscreen{
+  grid-column:2;grid-row:1;justify-self:end;
+  margin:0;max-width:100%;min-height:42px;
+ }
+ .next-scene #next-ready-toggle,.next-scene #next-rigged-toggle{
+  grid-row:2;min-height:50px;padding:7px;
+  font-size:.73rem;line-height:1.25;
+  white-space:normal;overflow-wrap:anywhere;
+  width:100%;min-width:0;box-sizing:border-box;
+ }
+ .next-scene #next-ready-toggle{grid-column:1}
+ .next-scene #next-rigged-toggle{grid-column:2}
+ .next-scene .next-view-tabs{
+  grid-column:1/-1;grid-row:3;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:4px;margin:0;min-width:0;
+ }
+ .next-scene .next-view-tabs button{
+  min-height:40px;min-width:0;
+  padding:5px 2px;font-size:.68rem;
+  white-space:normal;overflow-wrap:anywhere;
+ }
+}
