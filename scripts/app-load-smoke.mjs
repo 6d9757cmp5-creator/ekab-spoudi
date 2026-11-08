@@ -157,6 +157,25 @@ try {
     await page.locator('#next-question').fill('Τι αισθάνεστε;');
     await page.locator('#next-ask-form button').click();
     if(!await page.locator('#next-result').textContent().then(s=>s.includes('αναστατωμένος')))throw Error(device+': MENTOR NEXT patient dialogue');
+    // SBAR previews must be strictly per-patient and must not record actions.
+    const handoverCards=page.locator('.next-handover-person');
+    if(await handoverCards.count()!==2)throw Error(device+': S/B/A/R handover must have exactly two separate patients');
+    const aDraft=handoverCards.filter({has:page.locator('summary:text("Άτομο Α")')});
+    const bDraft=handoverCards.filter({has:page.locator('summary:text("Άτομο Β")')});
+    if(await aDraft.count()!==1||await bDraft.count()!==1)throw Error(device+': missing per-person handover');
+    await bDraft.locator('summary').click();
+    const bText=await bDraft.locator('pre').textContent();
+    const aText=await aDraft.locator('pre').textContent();
+    if(!bText.includes('αναστατωμένος')||aText.includes('αναστατωμένος'))
+      throw Error(device+': S/B/A/R leaked an observation across patients');
+    if(!aText.includes('Δεν καταγράφηκαν συνθετικά ζωτικά'))
+      throw Error(device+': S/B/A/R fabricated unrecorded vitals');
+    const beforeDraftEvents=await page.locator('#next-events li').count();
+    await bDraft.locator('.next-handover-copy').click();
+    if(await page.locator('#next-events li').count()!==beforeDraftEvents)
+      throw Error(device+': copying S/B/A/R unexpectedly logged an action');
+    console.log('PASS '+device+': evidence-only patient-isolated S/B/A/R preview and safe copy action');
+
     await page.locator('.next-tool-more').click();
     await page.locator('#next-tools button').filter({hasText:'Φάρμακα'}).click();
     if(!await page.locator('#next-actions').textContent().then(s=>s.includes('Κλειδωμένο')))throw Error(device+': MENTOR NEXT safety lock');
