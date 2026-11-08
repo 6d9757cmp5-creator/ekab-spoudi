@@ -131,6 +131,9 @@ try {
     const nextResponse=await page.goto('http://127.0.0.1:8765/mentor-next.html',{waitUntil:'load',timeout:30000});
     if(!nextResponse?.ok())throw Error(device+': MENTOR NEXT HTTP '+nextResponse?.status());
     await page.locator('#next-hr').waitFor();
+    await page.locator('#atlas-cockpit-entry.atlas-cockpit-optional > summary').waitFor({state:'visible',timeout:15000});
+    if(await page.locator('#atlas-cockpit-entry.atlas-cockpit-optional').evaluate(el=>el.open))
+      throw Error(device+': optional ATLAS tutor must not obscure the patient scene on direct entry');
     if(await page.locator('.next-case-picker').evaluate(el=>el.open))
       throw Error(device+': the large case library should be collapsed on entry');
     if(!await page.locator('#next-guide-step').textContent().then(t=>t.includes('ασφάλεια')))
