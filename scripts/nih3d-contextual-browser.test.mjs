@@ -120,7 +120,7 @@ async function failureModes(ctx,name){
  });
  await visit(page,url);
  await page.waitForFunction(()=>document.querySelector('#source-status')?.dataset.error==='true',null,{timeout:60000});
- assert.match(await page.locator('#source-status').innerText(),/SHA-256/,'Altered bytes never reach the parser');
+ assert.match(await page.locator('#source-status').innerText(),/SHA-256|ακεραιότητα|ακεραιότητας/,'Altered bytes fail integrity verification before parsing');
  assert.doesNotMatch(await page.locator('#source-back').getAttribute('href'),/evil/,'No external return redirect');
  await page.unroute('**/models/'+accession+'.glb');
  await page.route('**/models/'+accession+'.glb',route=>route.fulfill({status:503,body:'x'}));
