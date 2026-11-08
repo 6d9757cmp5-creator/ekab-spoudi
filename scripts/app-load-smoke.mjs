@@ -265,6 +265,8 @@ try {
       throw Error(device+': actual two-patient WebGL canvas not visible');
     await page.locator('[data-next-patient="b"]').click();
     if(!await page.locator('#next-person-name').textContent())throw Error(device+': selecting patient B failed');
+    if(await page.locator('[data-next-view="full"]').getAttribute('aria-pressed')!=='true')
+      throw Error(device+': patient selection did not open closer full-body view');
     await page.locator('[data-next-view="head"]').click();
     await page.locator('[data-next-view="full"]').click();
     await selectSimulatorCase('public-square-next-v1');
