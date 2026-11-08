@@ -44,7 +44,8 @@ async function contextualSurfaces(ctx,name){
  await exam('Τι είναι η επιγονατίδα;',true);
  await refs(page,'#examReference').first().waitFor({state:'attached'});
  assert.equal(await page.locator('#examReference .nih3d-research-reference a').getAttribute('target'),'_blank','The running exam stays intact');
- await exam('Τι είναι η αορτή;',true);
+ // A revealed question about a structure with no model clears the previous reference.
+ await exam('Τι είναι η καρωτίδα;',true);
  await page.waitForFunction(()=>document.querySelectorAll('#examReference .nih3d-research-reference').length===0);
  await visit(page,'/mentor-next.html');
  const cockpit=(confirmedAnatomy,clinicalStructureConfirmed)=>page.evaluate(detail=>window.dispatchEvent(new CustomEvent('atla:nih3d-cockpit-anatomy',{detail})),{confirmedAnatomy,clinicalStructureConfirmed});
