@@ -4,6 +4,23 @@
  "settings": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
  "scope": "Display copies for phones: Draco geometry and WebP textures, no simplification and no merging. Only zero-area triangles may be dropped; every selectable part is kept.",
  "models": {
+  "3DPX-000005": {
+   "entryId": 5,
+   "original": {
+    "bytes": 7318276,
+    "sha256": "d7ce20000a019e7f8772245b61a4602359c77877071bf3a8715a667c492e80ec",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-000005/001.glb"
+    }
+   },
+   "display": {
+    "bytes": 215880,
+    "sha256": "fd16d87cf25ca6b46d23dd360a505ed7cac901d6c2c9b88699da5ce25b9f85d6",
+    "triangles": 63704,
+    "boundsDrift": 0.00002159
+   }
+  },
   "3DPX-000010": {
    "entryId": 10,
    "original": {
@@ -2468,6 +2485,23 @@
     "sha256": "f55855963c56f79539321632833cf5236fed89173942447f99651a4b1f6d8f33",
     "triangles": 640130,
     "boundsDrift": 0.00002354
+   }
+  },
+  "3DPX-000998": {
+   "entryId": 998,
+   "original": {
+    "bytes": 214516,
+    "sha256": "7b1ae50e8f50d2d5e976d589fbeacbfb485a18f37a735d74a025d5d85adba732",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-000998/002.glb"
+    }
+   },
+   "display": {
+    "bytes": 16204,
+    "sha256": "efa012ff41a33aea66bdac836c26ca045bc945cf4a6858e2aa1368bc58f2b230",
+    "triangles": 3902,
+    "boundsDrift": 0.00001909
    }
   },
   "3DPX-001001": {
@@ -4938,6 +4972,23 @@
     "boundsDrift": 0.0000226
    }
   },
+  "3DPX-011716": {
+   "entryId": 11716,
+   "original": {
+    "bytes": 31260,
+    "sha256": "0772de0c1693e5f5a33da1a0de5b02f6c6ec5b52c7f6f9d1356b8fde7b688b79",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-011716/007.glb"
+    }
+   },
+   "display": {
+    "bytes": 7296,
+    "sha256": "ec7f191e41dcdf5156e97b746f702f56263ce698f52cb0c396a03c1a87fd087d",
+    "triangles": 1664,
+    "boundsDrift": 0.0000265
+   }
+  },
   "3DPX-011751": {
    "entryId": 11751,
    "original": {
@@ -5132,6 +5183,23 @@
     "boundsDrift": 0.00002465
    }
   },
+  "3DPX-013441": {
+   "entryId": 13441,
+   "original": {
+    "bytes": 2974684,
+    "sha256": "c7b176d88dcbca634d159a7b084331e7e167a0c4929e82350365d877b57df65c",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-013441/002.glb"
+    }
+   },
+   "display": {
+    "bytes": 109952,
+    "sha256": "4a090000df06d3ecf3461266d2fd98d56bc6f3dcb32b251a609899abfcaf3144",
+    "triangles": 47568,
+    "boundsDrift": 0.000006437
+   }
+  },
   "3DPX-013646": {
    "entryId": 13646,
    "original": {
@@ -5164,6 +5232,23 @@
     "sha256": "cf9846a7156d88978e0788f7db2d7a6b07faf75af3822eb4daab92e84b88d33d",
     "triangles": 6360,
     "boundsDrift": 0.0000168
+   }
+  },
+  "3DPX-014289": {
+   "entryId": 14289,
+   "original": {
+    "bytes": 709084,
+    "sha256": "05cb5eb5f8d053b647ef0ef89d583231346d5cd5b3fee0bef5b3b03e84a07ee5",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-014289/002.glb"
+    }
+   },
+   "display": {
+    "bytes": 41420,
+    "sha256": "0af6041545852e389f2d8786ae70131419b1ca4daf9d51ad3de3243c86385f91",
+    "triangles": 9102,
+    "boundsDrift": 0.00001839
    }
   },
   "3DPX-014739": {
@@ -5356,6 +5441,40 @@
     "sha256": "b7b46c9ea344653904c75994c1e891d2ac39c7d6ec813bccb2e09725ebd9148d",
     "triangles": 7143,
     "boundsDrift": 0.00001309
+   }
+  },
+  "3DPX-016308": {
+   "entryId": 16308,
+   "original": {
+    "bytes": 3089844,
+    "sha256": "07843be49667d1b2ee3978a1dbe4c872240e01b23ccf55d37b87bc2af3129fc6",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-016308/002.glb"
+    }
+   },
+   "display": {
+    "bytes": 92536,
+    "sha256": "042f4da7780291502181db17f1c7c809cd651634cd360a134729a88da7b38a5d",
+    "triangles": 38246,
+    "boundsDrift": 0.00002812
+   }
+  },
+  "3DPX-016309": {
+   "entryId": 16309,
+   "original": {
+    "bytes": 3011028,
+    "sha256": "204f7b19162b3de288e6e74e2dcd0551bed96dffcc0da68216dd8c85d13cb0ff",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-016309/002.glb"
+    }
+   },
+   "display": {
+    "bytes": 84096,
+    "sha256": "9741d12fc9d37cde031482c60c00f65052527ac18b57bbac6bb1f593c5d8cd41",
+    "triangles": 37168,
+    "boundsDrift": 0.00002812
    }
   },
   "3DPX-016412": {
@@ -6271,6 +6390,23 @@
     "sha256": "e912bed4e17bea4cfbe30dbfe622b01180a610ee721f66901b45a7748f1bd6b5",
     "triangles": 580,
     "boundsDrift": 0.0000236
+   }
+  },
+  "3DPX-020306": {
+   "entryId": 20306,
+   "original": {
+    "bytes": 18216,
+    "sha256": "e906eb0d89d589d3faacddae9b1a960a7f80afd2a95e2ad466c778b6ad5b13aa",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-020306/007.glb"
+    }
+   },
+   "display": {
+    "bytes": 2616,
+    "sha256": "ee037e00ff5b78f6c4a53da1dc571fbacc3af59c3339757e39772dfee5b72559",
+    "triangles": 342,
+    "boundsDrift": 0.00001378
    }
   },
   "3DPX-020403": {
@@ -7271,6 +7407,23 @@
     "sha256": "d493e3fc8d63e91b9163d15e5774599b05f331e01970a44ece583d1bf287d173",
     "triangles": 3032,
     "boundsDrift": 0.00001657
+   }
+  },
+  "3DPX-021600": {
+   "entryId": 21600,
+   "original": {
+    "bytes": 7439152,
+    "sha256": "3bd81c39e423707d89d7e3ad7e0247ed2c3ad61dc2c9867f544640e4ade37348",
+    "archive": {
+     "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+     "file": "originals/3DPX-021600/001.glb"
+    }
+   },
+   "display": {
+    "bytes": 213028,
+    "sha256": "8ecf329c6fafa76e51af495e3f6ea36f14780ce05ac710225dfe56a881e5144f",
+    "triangles": 62050,
+    "boundsDrift": 0.00001088
    }
   },
   "3DPX-021609": {

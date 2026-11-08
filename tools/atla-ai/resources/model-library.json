@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "30b1e97c492754891f69d0031f15ac4818d3a7aa",
+ "ledgerCommit": "a7af5ee5b96cfda48ae8f2299503ebaeae637c19",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -539,7 +539,7 @@
  },
  "counts": {
   "bySource": {
-   "nih3d": 454,
+   "nih3d": 463,
    "hra": 54,
    "z-anatomy": 5,
    "quaternius": 2,
@@ -547,9 +547,9 @@
    "makehuman": 10,
    "makehuman-rigged": 1
   },
-  "nihVerifiedModels": 225,
-  "nihServed": 449,
-  "nihServedBytes": 527194792,
+  "nihVerifiedModels": 242,
+  "nihServed": 458,
+  "nihServedBytes": 527977820,
   "nihContextual": 308,
   "nihWithSaekChapter": 224,
   "nihRestrictions": {
@@ -578,7 +578,7 @@
    "LIKELY_OUT_OF_MEDICAL_SCOPE": 1372,
    "SCIENTIFIC_REVIEW_REQUIRED": 4275
   },
-  "notYetVerifiedInLedger": 15463
+  "notYetVerifiedInLedger": 15446
  },
  "atlases": [
   {
@@ -597,6 +597,58 @@
   }
  ],
  "models": [
+  {
+   "id": "3DPX-000005",
+   "accession": "3DPX-000005",
+   "entryId": 5,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Cartoon of Plasmodium",
+   "greekTitle": null,
+   "originalTitle": "Cartoon of Plasmodium",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000005",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000005.glb",
+    "bytes": 215880,
+    "sha256": "fd16d87cf25ca6b46d23dd360a505ed7cac901d6c2c9b88699da5ce25b9f85d6",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 63704,
+    "original": {
+     "bytes": 7318276,
+     "sha256": "d7ce20000a019e7f8772245b61a4602359c77877071bf3a8715a667c492e80ec"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
   {
    "id": "3DPX-000010",
    "accession": "3DPX-000010",
@@ -2500,15 +2552,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000340",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-027.tar.zst",
-     "file": "000340-002-instabilidade_pre_op_umero_repaired-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -2615,15 +2667,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000342",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-028.tar.zst",
-     "file": "000342-002-ombro_frat_2_partes_com_luxacao_posterior_limpo_simplificado-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -3021,15 +3073,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000348",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-028.tar.zst",
-     "file": "000348-002-punho_fx_escafoidelimpo_simplificado-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -3283,15 +3335,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000352",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-028.tar.zst",
-     "file": "000352-002-tnz_frat_talus_limpo_simplifcado-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -4023,15 +4075,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000386",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-038.tar.zst",
-     "file": "000386-002-umero_proximal_bra_o_limpo_simplificado-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -4092,15 +4144,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000387",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-038.tar.zst",
-     "file": "000387-002-ombro_normal_limpo-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -9938,6 +9990,60 @@
      "occurrences": 2
     }
    ],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-000998",
+   "accession": "3DPX-000998",
+   "entryId": 998,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Printed Flat Raptor Reloaded Gauntlet",
+   "greekTitle": null,
+   "originalTitle": "Printed Flat Raptor Reloaded Gauntlet",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-000998",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-000998.glb",
+    "bytes": 16204,
+    "sha256": "efa012ff41a33aea66bdac836c26ca045bc945cf4a6858e2aa1368bc58f2b230",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 3902,
+    "original": {
+     "bytes": 214516,
+     "sha256": "7b1ae50e8f50d2d5e976d589fbeacbfb485a18f37a735d74a025d5d85adba732"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
    "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
    "scientificApproval": "NOT_ESTABLISHED",
    "clinicalUseApproved": false
@@ -16008,15 +16114,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-004817",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-04801-04900",
-     "package": "atla-nih3d-04801-04900-part-001.tar.zst",
-     "file": "004817-002-odonnell-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -18985,6 +19091,60 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-011716",
+   "accession": "3DPX-011716",
+   "entryId": 11716,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · gA PMF with NHD",
+   "greekTitle": null,
+   "originalTitle": "gA PMF with NHD",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-011716",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-011716.glb",
+    "bytes": 7296,
+    "sha256": "ec7f191e41dcdf5156e97b746f702f56263ce698f52cb0c396a03c1a87fd087d",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 1664,
+    "original": {
+     "bytes": 31260,
+     "sha256": "0772de0c1693e5f5a33da1a0de5b02f6c6ec5b52c7f6f9d1356b8fde7b688b79"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-011751",
    "accession": "3DPX-011751",
    "entryId": 11751,
@@ -19696,6 +19856,60 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-013441",
+   "accession": "3DPX-013441",
+   "entryId": 13441,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Soap Capsule",
+   "greekTitle": null,
+   "originalTitle": "Soap Capsule",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-013441",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-013441.glb",
+    "bytes": 109952,
+    "sha256": "4a090000df06d3ecf3461266d2fd98d56bc6f3dcb32b251a609899abfcaf3144",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 47568,
+    "original": {
+     "bytes": 2974684,
+     "sha256": "c7b176d88dcbca634d159a7b084331e7e167a0c4929e82350365d877b57df65c"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-013623",
    "accession": "3DPX-013623",
    "entryId": 13623,
@@ -19831,6 +20045,60 @@
     "original": {
      "bytes": 478512,
      "sha256": "c06c3fce8663f11d12e718e29be3c7707e0663170f3b06d97eefc0febfe5a883"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-014289",
+   "accession": "3DPX-014289",
+   "entryId": 14289,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · B-DNA dodecamer in a classical cartoon view",
+   "greekTitle": null,
+   "originalTitle": "B-DNA dodecamer in a classical cartoon view",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-014289",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-014289.glb",
+    "bytes": 41420,
+    "sha256": "0af6041545852e389f2d8786ae70131419b1ca4daf9d51ad3de3243c86385f91",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 9102,
+    "original": {
+     "bytes": 709084,
+     "sha256": "05cb5eb5f8d053b647ef0ef89d583231346d5cd5b3fee0bef5b3b03e84a07ee5"
     }
    },
    "restrictionCode": null,
@@ -20539,6 +20807,114 @@
     "original": {
      "bytes": 1019308,
      "sha256": "09e1956ab6d0f8747e6cd0270532e9d457db6de1b2c0a99a42e06e8c075d8504"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016308",
+   "accession": "3DPX-016308",
+   "entryId": 16308,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Vibrio cholerae",
+   "greekTitle": null,
+   "originalTitle": "Vibrio cholerae",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016308",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016308.glb",
+    "bytes": 92536,
+    "sha256": "042f4da7780291502181db17f1c7c809cd651634cd360a134729a88da7b38a5d",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 38246,
+    "original": {
+     "bytes": 3089844,
+     "sha256": "07843be49667d1b2ee3978a1dbe4c872240e01b23ccf55d37b87bc2af3129fc6"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016309",
+   "accession": "3DPX-016309",
+   "entryId": 16309,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Vibrio cholerae",
+   "greekTitle": null,
+   "originalTitle": "Vibrio cholerae",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016309",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016309.glb",
+    "bytes": 84096,
+    "sha256": "9741d12fc9d37cde031482c60c00f65052527ac18b57bbac6bb1f593c5d8cd41",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 37168,
+    "original": {
+     "bytes": 3011028,
+     "sha256": "204f7b19162b3de288e6e74e2dcd0551bed96dffcc0da68216dd8c85d13cb0ff"
     }
    },
    "restrictionCode": null,
@@ -21394,15 +21770,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-016813",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-16801-16900",
-     "package": "atla-nih3d-16801-16900-part-008.tar.zst",
-     "file": "016813-002-scapula-left-nih3d.glb.glb"
-    },
+    "files": 10,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -23903,6 +24279,58 @@
     "original": {
      "bytes": 36800,
      "sha256": "1058362a659f7bd1da0be0251173d05363f99c395b2092085c60e0b6001a06e1"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-020306",
+   "accession": "3DPX-020306",
+   "entryId": 20306,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Προσθετική · Radial Conductor",
+   "greekTitle": null,
+   "originalTitle": "Radial Conductor",
+   "category": "Προσθετική",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-020306",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-020306.glb",
+    "bytes": 2616,
+    "sha256": "ee037e00ff5b78f6c4a53da1dc571fbacc3af59c3339757e39772dfee5b72559",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 342,
+    "original": {
+     "bytes": 18216,
+     "sha256": "e906eb0d89d589d3faacddae9b1a960a7f80afd2a95e2ad466c778b6ad5b13aa"
     }
    },
    "restrictionCode": null,
@@ -27856,6 +28284,58 @@
     "original": {
      "bytes": 347028,
      "sha256": "e1fe0a960d43d5636bd8694e96b8f029401993b1ddf7155c909a11a4b79dba1c"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-021600",
+   "accession": "3DPX-021600",
+   "entryId": 21600,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Common haircap (Polytrichum commune) spore",
+   "greekTitle": null,
+   "originalTitle": "Common haircap (Polytrichum commune) spore",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-NC",
+   "rightsBasis": "OWNER_STATED_PERMISSION",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-021600",
+   "archive": {
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:73fe4702c01698c3545b086544de8b1c96d9d27d7a42c1208e84ef292d4cf982",
+    "release": null,
+    "formats": [
+     "GLB",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-021600.glb",
+    "bytes": 213028,
+    "sha256": "8ecf329c6fafa76e51af495e3f6ea36f14780ce05ac710225dfe56a881e5144f",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 62050,
+    "original": {
+     "bytes": 7439152,
+     "sha256": "3bd81c39e423707d89d7e3ad7e0247ed2c3ad61dc2c9867f544640e4ade37348"
     }
    },
    "restrictionCode": null,
