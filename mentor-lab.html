@@ -8,14 +8,10 @@
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 
 
-<link rel="stylesheet" href="mentor/styles/mentor-cinematic.css">
-<link rel="stylesheet" href="mentor/styles/mentor-real3d.css">
 <script src="mentor/app/adaptive.js" defer></script>
 <script src="mentor/app/personal-v1.js" defer></script>
 <script type="module" src="mentor-lab.js" defer></script>
 
-<script type="module" src="mentor-cinematic.mjs" defer></script>
-<script type="module" src="mentor-real3d.bundle.mjs" defer></script>
 <script type="module" src="mentor-study-context.mjs" defer></script>
 <link rel="stylesheet" href="mentor-experience-v4.css?v=20261101">
 <link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script></head>
@@ -28,106 +24,28 @@
   </div>
 </header>
 <main id="main" class="layout">
-  <section class="hero mentor-intro-hero cinematic-mentor-hero" id="mentor-presence" aria-labelledby="welcome">
-<div class="mentor-intro-copy">
-      <p class="eyebrow cinematic-eyebrow">✦ ΔΙΑΔΡΑΣΤΙΚΗ ΕΚΠΑΙΔΕΥΣΗ ΕΚΑΒ</p>
-      <h1 id="welcome">Ο εκπαιδευτικός σου <span>ATLA</span> σε κάθε περιστατικό</h1><p class="cinematic-lead">Μάθε, εξασκήσου και προετοιμάσου για το ΕΚΑΒ με εκπαιδευτικά σενάρια, ελληνική φωνή και προσωπική καθοδήγηση.</p><div class="cinematic-lead-actions"><a class="cinematic-btn cinematic-primary" href="mentor-next.html">▶ ATLA · Προσομοιωτής · Νέα 3D αποστολή</a><a class="cinematic-btn cinematic-secondary" href="mentor-live.html">Κλασική αποστολή</a><a class="cinematic-btn cinematic-secondary" href="mentor-scenarios.html">Εξερεύνησε σενάρια</a><a class="cinematic-btn cinematic-secondary" href="protocols.html">Ελληνικά Πρωτόκολλα</a><a class="cinematic-btn cinematic-secondary" href="mentor-protocol-suite.html?topic=trauma&amp;view=lab">ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ</a><a class="cinematic-btn cinematic-secondary" href="mentor-protocol-suite.html?topic=trauma&amp;view=debrief">ATLA · ΑΝΑΣΚΟΠΗΣΗ</a><button type="button" class="cinematic-btn cinematic-secondary" id="mentor-show-floating">Εμφάνιση πλωτού ATLA</button></div><p id="mentor-show-floating-note" role="status" aria-live="polite"></p>
-      <p id="mentor-presence-line" class="mentor-intro-message" role="status" aria-live="polite">«Καλώς ήρθες. Πες μου τι θέλεις να μελετήσουμε ή διάλεξε μια αποστολή.»</p>
-      <form class="mentor-intro-form" id="mentor-hero-form">
-        <label for="mentor-hero-question">Ρώτησε τον ATLA</label>
-        <input id="mentor-hero-question" type="text" maxlength="300" autocomplete="off" placeholder="Π.χ. Τι να διαβάσω σήμερα;">
-        <button type="submit">Ρώτησε</button>
-      </form>
-      <p id="mentor-hero-answer" class="mentor-hero-answer" role="status" aria-live="polite" hidden></p>
-      <a id="mentor-hero-answer-source" href="#" target="_blank" rel="noopener noreferrer" hidden>Πηγή εκπαιδευτικού ορισμού</a>
-      <div class="mentor-presence-actions">
-        <button id="mentor-intro-speak" type="button">🔊 Άκουσε</button>
-        <button id="mentor-intro-stop" type="button">◼ Σταμάτα</button>
-        <button id="mentor-intro-mic" type="button">🎙 Μίλα μου</button>
-        <button id="mentor-intro-chat" type="button">💬 Άνοιξε συνομιλία</button>
-      </div>
-      <div class="mentor-speech-wave" id="mentor-speech-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="mentor-voice-preferences" aria-label="Ρυθμίσεις φωνής του ATLA">
-        <label for="mentor-voice-select">Ελληνική φωνή ATLA (προτεραιότητα στη γυναικεία)</label>
-        <select id="mentor-voice-select"><option value="">Αυτόματη επιλογή γυναικείας ελληνικής, όπου διατίθεται</option></select>
-        <p id="mentor-male-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Ελέγχεται αν το Safari βλέπει εγκατεστημένη ελληνική γυναικεία φωνή.</p>
-        <div class="mentor-voice-diagnostics" role="group" aria-label="Έλεγχος ελληνικής φωνής στο κινητό">
-          <button id="mentor-voice-refresh" type="button">↻ Έλεγξε ξανά τις φωνές</button>
-          <button id="mentor-voice-probe" type="button">🔈 Δοκιμή ήχου συσκευής (μπορεί να μην είναι γυναικεία)</button>
-        </div>
-        <p id="mentor-voice-inventory" class="mentor-presence-caption" role="status" aria-live="polite">Οι διαθέσιμες φωνές αναγνωρίζονται από τον browser· ο ATLA δεν υποκαθιστά κρυφά τη γυναικεία φωνή.</p>
-        <details class="mentor-voice-help" id="mentor-voice-help">
-          <summary>Δεν ακούγεται; Οδηγίες για iPhone</summary>
-          <p>Άνοιξε Ρυθμίσεις → Προσβασιμότητα → Εκφωνούμενο περιεχόμενο → Φωνές → Ελληνικά και, αν υπάρχει, κάνε λήψη της γυναικείας φωνής «Μελίνα». Κλείσε και άνοιξε ξανά το Safari, πάτησε «Έλεγξε ξανά τις φωνές» και μετά «Άκουσε». Αν το Safari δεν εμφανίζει τη φωνή, δεν μπορεί να την αναπαραγάγει ο ATLA με το υπάρχον σύστημα.</p>
-          <p>Για δοκιμή του ηχείου μόνο, πάτησε «Δοκιμή ήχου συσκευής»· αυτή μπορεί να χρησιμοποιήσει διαφορετική διαθέσιμη ελληνική φωνή, χωρίς να την αποθηκεύει ή να την επιλέγει για τον ATLA.</p>
-        </details>
-        <p id="mentor-delivery-status" class="mentor-presence-caption" role="status" aria-live="polite">Ο ATLA προσαρμόζει την εκφώνηση και τις χειρονομίες σύμφωνα με την εξάσκηση.</p>
-        <label for="mentor-voice-speed">Ρυθμός ομιλίας <output id="mentor-voice-speed-label" for="mentor-voice-speed">0,95×</output></label>
-        <input id="mentor-voice-speed" type="range" min="0.8" max="1.1" step="0.05" value="0.95">
-      </div>
-      <p id="mentor-voice-status" class="mentor-presence-caption" role="status" aria-live="polite">Διαδραστικός εκπαιδευτικός οδηγός · ελληνική φωνή της συσκευής · όχι πλήρες AI.</p>
-      <section class="cinematic-scenarios" aria-label="Δημοφιλή εκπαιδευτικά σενάρια">
-        <div class="cinematic-section-caption">ΔΗΜΟΦΙΛΗ ΕΚΠΑΙΔΕΥΤΙΚΑ ΣΕΝΑΡΙΑ</div>
-        <div class="cinematic-scenario-list">
-          <a href="seminar-prep.html" class="cinematic-scenario scenario-cpr"><span class="scenario-thumbnail"></span><b>Καρδιοαναπνευστική αναζωογόνηση</b><small>BLS / AED · Μελέτη</small></a>
-          <a href="mentor-live.html" class="cinematic-scenario scenario-trauma"><span class="scenario-thumbnail"></span><b>Τραύμα</b><small>Συνθετική αποστολή</small></a>
-          <a href="mentor-scenarios.html" class="cinematic-scenario scenario-airway"><span class="scenario-thumbnail"></span><b>Αεραγωγός</b><small>Εκπαιδευτικά σενάρια</small></a>
-        </div>
-      </section>
-      <p id="mentor-microphone-privacy" class="mentor-voice-privacy">Το μικρόφωνο ενεργοποιείται μόνο όταν πατήσεις «Μίλα μου», εφόσον το υποστηρίζει ο browser. Η αναγνώριση μπορεί να πραγματοποιείται από υπηρεσία του παρόχου του browser. Η αναγνωρισμένη ερώτηση δεν υποβάλλεται αυτόματα και δεν αποθηκεύεται από τον ATLA.</p>
-    </div>
-    
-<div class="mentor-intro-visual mentor-only-real3d">
-  <div class="mentor-cinematic-stage" id="mentor-cinematic-stage" data-real3d="loading">
-    <span class="cinematic-grid" aria-hidden="true"></span>
-    <span class="cinematic-light cinematic-light-left" aria-hidden="true"></span>
-    <span class="cinematic-light cinematic-light-right" aria-hidden="true"></span>
-    <canvas id="mentor-real3d-canvas" class="mentor-real3d-canvas" hidden width="320" height="760" role="img" aria-label="Πραγματικός 3D εκπαιδευτής ATLA, με ανθρώπινο σκελετό και εκφράσεις"></canvas>
-    <span class="cinematic-character" hidden aria-hidden="true"></span>
-    <button type="button" id="mentor-real3d-toggle" hidden aria-pressed="false" disabled></button>
-    <button type="button" id="mentor-real3d-photo" hidden aria-pressed="false"></button>
-    <span class="cinematic-stage-label">ATLA <span>·</span> ΖΩΝΤΑΝΟ 3D</span>
-    <span class="cinematic-stage-base" aria-hidden="true"></span>
-    <div class="mentor-real3d-options"><label>Περιστροφή <input id="mentor-real3d-rotation" type="range" min="-110" max="110" value="0" disabled></label><label><input id="mentor-real3d-motion" type="checkbox" checked> Φυσικές κινήσεις</label></div>
-    <p class="mentor-real3d-status" id="mentor-real3d-status" role="status" aria-live="polite">Φόρτωση του πραγματικού 3D εκπαιδευτή. Κανένα παλιό μοντέλο δεν εμφανίζεται.</p>
-  </div>
-  <div id="mentor-avatar" data-viseme="rest" hidden aria-hidden="true"></div>
-  <small>Μόνο ανθρώπινο 3D · γυναικεία ελληνική φωνή όπου υπάρχει · προσεγγιστική κίνηση στόματος.</small>
-</div>
-<aside class="mentor-cinematic-side" aria-label="Βοηθός εκπαιδευτή και ενότητες">
-      <section class="cinematic-panel cinematic-mode-panel">
-        <h2>ΛΕΙΤΟΥΡΓΙΑ ΒΟΗΘΟΥ ATLA</h2>
-        <div class="cinematic-mode-list" role="group" aria-label="Τρόπος αλληλεπίδρασης">
-          <button type="button" class="cinematic-mode is-current" data-cinematic-mode="hologram" aria-pressed="true"><span aria-hidden="true">⬡</span>Ολόγραμμα</button>
-          <button type="button" class="cinematic-mode" data-cinematic-mode="voice" aria-pressed="false"><span aria-hidden="true">◉</span>Φωνή</button>
-          <button type="button" class="cinematic-mode" data-cinematic-mode="text" aria-pressed="false"><span aria-hidden="true">▤</span>Κείμενο</button>
-        </div>
-        <p id="cinematic-mode-description">Πραγματικό 3D σώμα με κινήσεις, εκφράσεις, περιστροφή και ολογραφικό φωτισμό.</p>
-      </section>
-      <section class="cinematic-panel cinematic-questions">
-        <h2>ΡΩΤΗΣΕ ΤΟΝ ATLA</h2>
-        <div class="cinematic-greeting"><span aria-hidden="true">✚</span><p><strong>Γεια σου!</strong> Είμαι ο ATLA, ο προσωπικός σου εκπαιδευτικός οδηγός. Τι θέλεις να μελετήσουμε;</p></div>
-        <div class="cinematic-prompts">
-          <button type="button" data-cinematic-question="Πες μου τα βήματα για ΚΑΡΠΑ" >♡ Πες μου τα βήματα για ΚΑΡΠΑ <span aria-hidden="true">›</span></button>
-          <button type="button" data-cinematic-question="Πώς διαχειριζόμαστε τον αεραγωγό;" >♧ Πώς διαχειριζόμαστε τον αεραγωγό; <span aria-hidden="true">›</span></button>
-          <button type="button" data-cinematic-question="Τι να μελετήσω για το τραύμα;" >◇ Μελέτη εκτίμησης τραύματος <span aria-hidden="true">›</span></button>
-          <button type="button" data-cinematic-question="Ποια είναι τα φυσιολογικά ζωτικά σημεία;" >⌁ Ποια είναι τα φυσιολογικά ζωτικά σημεία; <span aria-hidden="true">›</span></button>
-        </div>
-      </section>
-      <section class="cinematic-panel cinematic-vitals">
-        <h2>ΠΑΡΑΔΕΙΓΜΑ ΖΩΤΙΚΩΝ ΣΗΜΕΙΩΝ</h2>
-        <div class="cinematic-vitals-grid">
-          <div><small>HR</small><strong>78</strong><span>bpm</span></div>
-          <div><small>SpO₂</small><strong>98</strong><span>%</span></div>
-          <div><small>RR</small><strong>16</strong><span>/min</span></div>
-          <div><small>ΑΠ</small><strong>118/76</strong><span>mmHg</span></div>
-          <div><small>Θερμ.</small><strong>36,6</strong><span>°C</span></div>
-        </div>
-        <p>Αποκλειστικά συνθετικές τιμές εκπαιδευτικής απεικόνισης — όχι μετρήσεις ασθενούς.</p>
-      </section>
-    </aside>
+  <section class="hero atla-lab-hero" id="mentor-presence" aria-labelledby="welcome">
+    <p class="eyebrow">ATLA · ΜΕΛΕΤΗ ΚΑΙ ΑΣΚΗΣΕΙΣ</p>
+    <h1 id="welcome">Μελέτη και εξάσκηση με τον ATLA</h1>
+    <p>Κάνε μια ερώτηση στον ATLA ή διάλεξε μια άσκηση από τη λίστα.</p>
+    <button type="button" class="action" id="atla-open-chat">💬 Ρώτησε τον ATLA</button>
   </section>
-  <section class="panel mentor-personal" id="mentor-personal" aria-labelledby="mentor-personal-heading">
+  <section class="panel atla-lab-tools" aria-labelledby="atla-tools-title">
+    <h2 id="atla-tools-title">Εξάσκηση</h2>
+    <ul class="atla-tool-list">
+      <li><a href="mentor-next.html">🚑 Προσομοιωτής · νέα αποστολή</a></li>
+      <li><a href="mentor-live.html">🚑 Κλασική αποστολή · δύο τραυματίες</a></li>
+      <li><a href="mentor-scenarios.html">🗂️ Άτλας σεναρίων · 360 θέματα</a></li>
+      <li><a href="mentor-protocol-suite.html?topic=trauma&amp;view=lab">📋 ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ</a></li>
+      <li><a href="mentor-protocol-suite.html?topic=trauma&amp;view=debrief">🔁 ΑΝΑΣΚΟΠΗΣΗ περιστατικού</a></li>
+      <li><a href="mentor-oral.html">🎙️ Προφορική εξάσκηση</a></li>
+      <li><a href="mentor-ecg.html">📈 Εργαστήριο ΗΚΓ</a></li>
+      <li><a href="protocols.html">📘 Ελληνικά Πρωτόκολλα</a></li>
+    </ul>
+  </section>
+  <details class="panel atla-lab-fold">
+    <summary>✺ Το προσωπικό μου πλάνο μελέτης</summary>
+    <section class="panel mentor-personal" id="mentor-personal" aria-labelledby="mentor-personal-heading">
   <div class="mentor-personal-header"><span class="mentor-personal-icon" aria-hidden="true">✺</span><div><p class="eyebrow">Μία ταυτότητα · Όλες οι γνώσεις</p><h2 id="mentor-personal-heading">ATLA</h2><p>Ο προσωπικός σου καθηγητής προσαρμόζει τη διαδρομή στις ανάγκες σου. Δεν υπάρχουν ξεχωριστοί εκπαιδευτές.</p></div></div>
   <div class="mentor-personal-metrics"><div><strong id="mentor-personal-studied">0</strong><small>Θεματικές που μελέτησες</small></div><div><strong id="mentor-personal-due">0</strong><small>Επαναλήψεις που εκκρεμούν</small></div></div>
   <form id="mentor-personal-form"><label for="mentor-personal-query">Τι θέλεις να μάθεις σήμερα;</label><div class="mentor-personal-entry"><input id="mentor-personal-query" maxlength="180" type="text" placeholder="Π.χ. ανατομία, ΚΑΡΠΑ, τραύμα, ΕΟΠΠΕΠ" autocomplete="off"><button type="submit" class="action">Πάμε</button></div></form>
@@ -140,37 +58,19 @@
   <p id="mentor-personal-status" role="status" aria-live="polite" class="muted small"></p>
   <p class="muted small">Τοπική μαθησιακή μνήμη βάσει δικής σου εκτίμησης, χωρίς συνδεδεμένο AI ή αξιολόγηση ιατρικής επάρκειας. Δεν αποθηκεύεται το ελεύθερο κείμενο της ερώτησης· δεν αλλάζουν βαθμοί ή συγχρονισμός.</p>
 </section>
-  <section class="panel" aria-labelledby="mentor-reader-title">
-    <h2 id="mentor-reader-title">📖 Αναγνωστήριο ΕΚΑΒ Σπουδή · μόνο ανάγνωση</h2>
-    <p>Αναζήτησε την ήδη δημοσιευμένη ύλη των τεσσάρων εξαμήνων ΣΑΕΚ, τις 314 καταχωρισμένες ερωτήσεις/απαντήσεις ΕΟΠΠΕΠ, SOS, ασκήσεις, φαρμακολογία και σεμινάρια. Η προβολή δεν αλλάζει βαθμολογίες, πρόοδο ή cloud και δεν συνδέεται με AI.</p>
-    <a class="action secondary" href="mentor-readonly.html">Άνοιξε το αναγνωστήριο ΕΚΑΒ Σπουδή</a>
-  </section>
-  <section class="panel" aria-labelledby="mentor-atlas-title">
-    <h2 id="mentor-atlas-title">🚑 Άτλας προνοσοκομειακών σεναρίων · 360 θέματα</h2>
-    <p>Κατάλογος 32 κατηγοριών με ελληνική αναζήτηση, πληθυσμούς, επίπεδα δυσκολίας και εκπαιδευτικούς στόχους. Πρόκειται για περιγράμματα προς ανάπτυξη και έλεγχο — όχι 360 πλήρεις κλινικές προσομοιώσεις.</p>
-    <a class="action secondary" href="mentor-scenarios.html">Άνοιξε τον άτλαντα περιστατικών</a>
-  </section>
-  <p><a href="mentor-library.html">📚 Βιβλιογραφία ATLA — 15 πηγές (υπό επιστημονικό έλεγχο)</a></p>
-  <p><a href="ui-tools/mentor-roadmap.html" style="display:inline-block;padding:10px 13px;border:1px solid currentColor;border-radius:10px;font-weight:750">🧭 Όλες οι δυνατότητες ATLA · Διαθέσιμο / Εκκρεμεί / Μη διαθέσιμο</a></p>
+  </details>
+  <details class="panel atla-lab-fold">
+    <summary>📖 Ανάγνωση, βιβλιογραφία και όλες οι λειτουργίες</summary>
+    <ul class="atla-tool-list">
+      <li><a href="mentor-readonly.html">📖 Αναγνωστήριο ΕΚΑΒ Σπουδή · όλη η ύλη, μόνο ανάγνωση</a></li>
+      <li><a href="mentor-library.html">📚 Βιβλιογραφία ATLA · 15 πηγές</a></li>
+      <li><a href="ui-tools/mentor-roadmap.html">🧭 Όλες οι λειτουργίες του ATLA</a></li>
+    </ul>
+  </details>
   <div class="disclaimer" role="note">
     <strong>Δοκιμαστική προσομοίωση — όχι ιατρική οδηγία.</strong>
     Τα περιστατικά είναι συνθετικά και εκκρεμεί ανεξάρτητος κλινικός έλεγχος. Δεν προσομοιώνουν πραγματικά ζωτικά σημεία, θεραπεία ή AI γιατρό. Οι βαθμοί ΣΑΕΚ/ΕΟΠΠΕΠ δεν αλλάζουν.
   </div>
-  <section class="panel" aria-label="Νέα αποστολή ATLA">
-    <h2>🚑 ΕΚΑΒ Αποστολή · Νέα εκπαιδευτική αποστολή</h2>
-    <p>Τροχαίο με δύο τραυματίες στην Κρήτη, παρατηρήσεις με συνθετικά μεταβαλλόμενα ζωτικά, αποφάσεις ανά στάδιο και ανατροφοδότηση. Χωρίς AI ή κλινική πιστοποίηση.</p>
-    <a class="action" href="mentor-live.html">Άνοιξε την αποστολή δύο τραυματιών</a>
-  </section>
-  <section class="panel" aria-label="Εκπαιδευτική προφορική εξάσκηση">
-    <h2>🎙️ Προφορική εξάσκηση · χωρίς AI</h2>
-    <p>Έξι ελληνικές εκπαιδευτικές ερωτήσεις. Μίλα μόνος σου, δες σημεία αυτοελέγχου και άκουσε την ερώτηση από τη συσκευή. Δεν υπάρχει μικρόφωνο, αυτόματη βαθμολόγηση ή αποθήκευση απαντήσεων.</p>
-    <a class="action secondary" href="mentor-oral.html">Άνοιξε την προφορική εξάσκηση</a>
-  </section>
-  <section class="panel" aria-label="ECG εκπαιδευτικό εργαστήριο">
-    <h2>📈 Εργαστήριο ΗΚΓ · συνθετικό εκπαιδευτικό σήμα</h2>
-    <p>Πειραματίσου με τη συχνότητα επανάληψης μιας σχεδιασμένης καμπύλης P–QRS–T. Δεν είναι πραγματικό ΗΚΓ, αναγνώριση αρρυθμίας ή κλινική ερμηνεία. Χωρίς AI.</p>
-    <a class="action secondary" href="mentor-ecg.html">Άνοιξε το Εργαστήριο ΗΚΓ</a>
-  </section>
   <nav class="tabs" role="tablist" aria-label="Ενότητες ATLA OS">
     <button type="button" id="tab-mission" role="tab" aria-controls="panel-mission" aria-selected="true" data-tab="mission">Αποστολή</button>
     <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
@@ -311,5 +211,5 @@
   </section>
   <footer>ATLA · Δοκιμή προσομοίωσης v0.2 · Καμία αυτόματη αλλαγή στην ΕΚΑΒ Σπουδή</footer>
 </main>
-<script type="module" src="mentor/presence/restore.mjs"></script>
+<script type="module" src="atla/assistant.mjs"></script>
 </body></html>

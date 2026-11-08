@@ -45,7 +45,7 @@ const exam=()=>{
  return examMode(location.pathname);
 };
 let terms=null,questions=null,records=null,visible=false,requestId=0;
-const BODY_KEY='ekab.atla.body3d.v1',AUTO_READ_KEY='ekab.atla.autoread.v1';
+const AUTO_READ_KEY='ekab.atla.autoread.v1';
 const fetchJSON=async name=>{try{const response=await fetch(new URL(name,ROOT),{credentials:'omit'});if(!response.ok)return null;return await response.json();}catch{return null;}};
 async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
@@ -131,10 +131,9 @@ function boot(){
  const selected=$('button','','Εξήγησε επιλογή');selected.type='button';
  const clear=$('button','','Καθαρισμός συνομιλίας');clear.type='button';
  const speak=$('button','','🔊 Ανάγνωση');speak.type='button';
- const body3d=$('button','atla-3d','🧑‍⚕️ 3D εκπαιδευτής');body3d.type='button';body3d.setAttribute('aria-pressed','false');
  const autoRow=$('label','atla-auto-read');const autoRead=$('input');autoRead.type='checkbox';
  autoRow.append(autoRead,$('span','','Αυτόματη ανάγνωση'));
- footer.append(selected,speak,body3d,autoRow,clear);
+ footer.append(selected,speak,autoRow,clear);
  const note=$('p','atla-note','Εκπαιδευτικό εργαλείο, όχι ιατρική οδηγία. Δεν διαβάζει αυτόματα βαθμούς ή προσωπικές σημειώσεις.');
  panel.append(head,state,demoRow,context,stream,form,footer,note);
  document.body.append(panel,launcher);
@@ -183,27 +182,11 @@ function boot(){
  const prefSet=(key,value)=>{try{localStorage.setItem(key,value);}catch{}};
  autoRead.checked=prefGet(AUTO_READ_KEY)==='on';
  autoRead.addEventListener('change',()=>prefSet(AUTO_READ_KEY,autoRead.checked?'on':'off'));
- // The 3D teacher is ATLA's body, not a second assistant, and downloads only when the learner asks for it.
- async function show3d(on,restored=false){
-  body3d.setAttribute('aria-pressed',String(on));
-  prefSet(BODY_KEY,on?'on':'off');
-  if(on&&!presence()){
-   window.__atlaPresenceEmbedded=true;
-   try{await import('../mentor/presence/presence.mjs');}
-   catch{body3d.setAttribute('aria-pressed','false');prefSet(BODY_KEY,'off');state.textContent='Ο 3D εκπαιδευτής δεν φορτώθηκε. Η συνομιλία συνεχίζεται κανονικά.';return;}
-  }
-  document.body.classList.toggle('atla-has-3d',on);
-  if(!on){presence()?.minimize();return;}
-  // On a phone the teacher takes the top of the screen, so it never covers the conversation.
-  if(!restored&&window.matchMedia?.('(max-width:640px)').matches)presence()?.pin('tl');else presence()?.show();
- }
- body3d.addEventListener('click',()=>show3d(body3d.getAttribute('aria-pressed')!=='true'));
  mic.addEventListener('click',async()=>{
   const heard=await voice.listen();
   if(heard.ok){field.value=heard.text;form.requestSubmit();return;}
   if(heard.reason!=='cancelled')state.textContent='Δεν ακούστηκε ερώτηση. Δοκίμασε ξανά ή γράψε την.';
  });
- if(prefGet(BODY_KEY)==='on')show3d(true,true);
  function offerLink(href,label){
   if(!href||typeof href!=='string')return;
   try{
