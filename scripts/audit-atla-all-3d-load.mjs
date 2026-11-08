@@ -33,7 +33,7 @@ for(const m of library.models){
   const sha=String(d.sha256??'');
   let actual;
   if(sha.length===64)actual=createHash('sha256').update(buffer).digest('hex');
-  else if(sha.length===40)actual=createHash('sha1').update('blob '+buffer.length+'\\0').update(buffer).digest('hex');
+  else if(sha.length===40)actual=createHash('sha1').update('blob '+buffer.length+String.fromCharCode(0)).update(buffer).digest('hex');
   else throw Error('Missing SHA-256 or legacy Git blob SHA-1');
   assert.equal(actual,sha,'Content hash differs from library');
   if(ext==='glb'){
@@ -49,7 +49,7 @@ for(const m of library.models){
    assert((json.meshes?.length??0)>0||(json.nodes?.length??0)>0,'No mesh or node geometry');
   }else if(ext==='obj'){
    const text=buffer.toString('utf8');
-   assert(/^v\\s+[-.0-9]/m.test(text)&&/^f\\s+[0-9]/m.test(text),'OBJ lacks vertices or faces');
+   assert(/^v\s+[-.0-9]/m.test(text)&&/^f\s+[0-9]/m.test(text),'OBJ lacks vertices or faces');
   }
   report.bySource[source].verified++;
   report.checks.push({id,source,bytes:buffer.length,hash:'MATCH',format:ext});
@@ -63,7 +63,7 @@ try {
  assert.equal(report.excluded.length,5,'Unexpected restricted model count');
 }catch(e){failure('SUMMARY',e.message);}
 mkdirSync('audit-results',{recursive:true});
-writeFileSync('audit-results/atla-every-3d-asset.json',JSON.stringify(report,null,2)+'\\n');
+writeFileSync('audit-results/atla-every-3d-asset.json',JSON.stringify(report,null,2)+String.fromCharCode(10));
 console.log('ATLA 3D ASSET COVERAGE',JSON.stringify({total:report.total,served:report.served,viewable:report.viewableGeometry,
   support:report.supportFiles,excluded:report.excluded.length,verified:report.checks.length,failures:report.failures.length}));
 for(const f of report.failures.slice(0,35))console.error('FAIL',f.id,f.reason);
