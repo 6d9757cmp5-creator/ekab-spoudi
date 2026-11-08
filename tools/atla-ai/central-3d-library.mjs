@@ -103,7 +103,7 @@ export function search3DModels(library,{text='',source='all',limit=50}={}){
  return library.models.filter(m=>{
   if(source!=='all'&&m.source!==source)return false;
   if(!tokens.length)return true;
-  const hay=simple([m.label,m.originalTitle,m.sourceLabel,m.category,
+  const hay=simple([m.label,m.originalTitle,m.sourceLabel,m.category,m.id,m.delivery?.path,
    ...(m.structures||[]).map(x=>library.vocabulary?.structures?.[x]?.greek||x)].join(' '));
   return tokens.every(t=>hay.includes(t));
  }).slice(0,max);
