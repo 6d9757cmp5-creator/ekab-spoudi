@@ -35,7 +35,7 @@ try{
    assert.equal(await page.locator('#models').isVisible(),true,'specialist tab must be in-page');
    assert.equal(await page.locator('#source-canvas').count(),1);
    assert.equal(await page.locator('iframe').count(),0);
-   assert.equal(new URL(page.url()).pathname,'/ui-tools/anatomy-3d/index.html'===('/'+path)?'/'+path:'/'+path,'no new page');
+   assert.equal(new URL(page.url()).pathname,'/'+path,'same-path navigation');
    await page.locator('#source-query').fill('μηριαίο');
    assert.equal(await page.locator('#source-query').inputValue(),'μηριαίο');
    await page.locator('#atlas-version').selectOption('bp3d43');
