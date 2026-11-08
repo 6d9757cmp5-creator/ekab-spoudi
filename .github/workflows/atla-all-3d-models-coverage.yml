@@ -1,0 +1,45 @@
+name: ATLA - every displayed 3D model real loading and integrity
+on:
+  push:
+    branches: [audit/atla-all-3d-load-20261108]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: atla-all-models-readonly-validation
+  cancel-in-progress: false
+jobs:
+  validate-all-3d:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate test JavaScript syntax
+        run: |
+          node --check scripts/audit-atla-all-3d-load.mjs
+          node --check scripts/verify-atla-all-3d-browser.mjs
+      - name: Verify all available source files, byte counts, SHA hashes and GLB metadata
+        run: node scripts/audit-atla-all-3d-load.mjs
+      - name: Install the real browser engine
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Render every viewable 3D model with real WebGL
+        run: node scripts/verify-atla-all-3d-browser.mjs
+      - name: Verify both original BodyParts3D atlases in the real renderer
+        run: node scripts/verify-atla-full-atlas-browser.mjs
+      - name: Archive inspectable results without committing binary changes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atla-full-3d-coverage-evidence
+          path: |
+            audit-results/atla-every-3d-asset.json
+            audit-results/atla-every-3d-render.json
+            audit-results/failed-*.png
+            browser-qa-results/atla-bp3d40-full-atlas.png
+            browser-qa-results/atla-bp3d43-full-atlas.png
+          if-no-files-found: warn
