@@ -5,6 +5,7 @@ on:
       - 'tools/atla-ai/central-3d-library.mjs'
       - 'tools/atla-ai/model-preview-catalog.mjs'
       - 'tools/atla-ai/model-preview.mjs'
+      - 'tools/anatomy-3d/inline-atlas.js'
       - 'tools/anatomy-3d/unified-workspace.mjs'
       - 'tools/anatomy-3d/unified-workspace.css'
       - 'tools/anatomy-3d/unified-workspace.test.mjs'
@@ -21,6 +22,7 @@ on:
       - 'tools/atla-ai/central-3d-library.mjs'
       - 'tools/atla-ai/model-preview-catalog.mjs'
       - 'tools/atla-ai/model-preview.mjs'
+      - 'tools/anatomy-3d/inline-atlas.js'
       - 'tools/anatomy-3d/unified-workspace.mjs'
       - 'tools/anatomy-3d/unified-workspace.css'
       - 'tools/anatomy-3d/unified-workspace.test.mjs'
@@ -44,6 +46,7 @@ jobs:
           node --check tools/atla-ai/central-3d-library.mjs
           node --check tools/atla-ai/model-preview-catalog.mjs
           node --check tools/atla-ai/model-preview.mjs
+          node --check tools/anatomy-3d/inline-atlas.js
           node --check tools/anatomy-3d/unified-workspace.mjs
           node --check tools/anatomy-3d/hires-anatomy.js
       - name: Real manifest quality, composition safety and adaptive policy
