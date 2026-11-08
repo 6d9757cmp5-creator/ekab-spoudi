@@ -149,6 +149,17 @@
           <p id="source-status" role="status" aria-live="polite">Επιλέξτε μοντέλο.</p>
           <p class="source-note" id="source-license"></p>
           <div id="source-details" hidden></div>
+
+          <div class="atlas-entry" aria-label="Πλήρεις άτλαντες στον ίδιο προβολέα">
+            <h3>Πλήρεις ανατομικοί άτλαντες</h3>
+            <label for="atlas-version">Έκδοση BodyParts3D</label>
+            <select id="atlas-version">
+              <option value="bp3d40">4.0 · 1.259 πλέγματα · ~68 MiB</option>
+              <option value="bp3d43">4.3 · 3.210 πλέγματα · ~193 MiB</option>
+            </select>
+            <button id="atlas-load" type="button">Άνοιγμα άτλαντα εδώ</button>
+            <p id="atlas-status" class="source-note" role="status" aria-live="polite">Οι άτλαντες παραμένουν αποθηκευμένοι στην εφαρμογή. Η λήψη γίνεται μόνο με επιλογή.</p>
+          </div>
           <details>
             <summary>Εργαλεία εξερεύνησης του μοντέλου</summary>
             <label for="source-part">Μέρος μοντέλου</label>
@@ -174,8 +185,33 @@
           </details>
         </aside>
         <section class="source-panel" aria-label="Ενιαία ενσωματωμένη προβολή 3D">
+          <div id="source-stage">
           <canvas id="source-canvas" tabindex="0" aria-label="3D μοντέλο, περιστροφή και επιλογή με κλικ"></canvas>
           <p class="source-note">Σύρσιμο για περιστροφή, ροδέλα ή δύο δάχτυλα για μεγέθυνση. Η εφαρμογή χρησιμοποιεί τον δικό της προβολέα και τα μοντέλα του υπάρχοντος εσωτερικού αρχείου.</p>
+
+          </div>
+          <div id="atlas-stage" hidden>
+            <div class="atlas-toolbar">
+              <label for="atlas-layer">Προβολή</label>
+              <select id="atlas-layer">
+                <option value="both">Σκελετός και όργανα</option>
+                <option value="skeleton">Μόνο σκελετός</option>
+                <option value="organs">Μόνο όργανα και συστήματα</option>
+              </select>
+              <div class="source-tools">
+                <button id="atlas-front" type="button">Εμπρός</button>
+                <button id="atlas-side" type="button">Πλάι</button>
+                <button id="atlas-center" type="button">Κέντρο</button>
+              </div>
+            </div>
+            <canvas id="atlas-canvas" tabindex="0" aria-label="Ενσωματωμένος πλήρης άτλας BodyParts3D"></canvas>
+            <p id="atlas-selected" class="source-note" role="status"></p>
+            <label for="atlas-search">Εύρεση μεμονωμένης ανατομικής δομής</label>
+            <input id="atlas-search" type="search" autocomplete="off" placeholder="π.χ. μηριαίο οστό, femur, heart…">
+            <div id="atlas-results" class="atlas-results" aria-label="Αποτελέσματα άτλαντα"></div>
+            <button id="atlas-unload" type="button" disabled>Αποφόρτωση άτλαντα</button>
+            <p class="source-note">BodyParts3D © DBCLS, CC BY 4.0. Χρήση προσαρμοσμένου τοπικού WebGL2 μηχανισμού (βάση Open Anatomy Atlas, MIT). Εκπαιδευτικό υλικό, χωρίς κλινική πιστοποίηση.</p>
+          </div>
           <p id="source-warning" class="source-note" role="note">Εκπαιδευτική εξερεύνηση, όχι διαγνωστικό ή κλινικά επικυρωμένο εργαλείο.</p>
         </section>
       </div>
