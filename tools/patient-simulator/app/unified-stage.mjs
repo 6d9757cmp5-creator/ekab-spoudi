@@ -25,12 +25,12 @@ function texturedGround(color){
  if(!ctx)return material(color,.97);
  ctx.fillStyle='#e3e5e4';ctx.fillRect(0,0,128,128);
  let seed=0x19a7c483;
- for(let i=0;i<3800;i++){
+ for(let i=0;i<1550;i++){
   seed=(Math.imul(seed,1664525)+1013904223)>>>0;
   const x=seed&127,y=(seed>>>11)&127;
-  const shade=180+(seed>>>22)%59;
+  const shade=215+(seed>>>22)%18;
   ctx.fillStyle='rgb('+shade+','+shade+','+shade+')';
-  ctx.fillRect(x,y,1+(seed>>>19)%2,1+(seed>>>17)%2);
+  ctx.fillRect(x,y,1,1);
  }
  const texture=new THREE.CanvasTexture(canvas);
  texture.colorSpace=THREE.SRGBColorSpace;
