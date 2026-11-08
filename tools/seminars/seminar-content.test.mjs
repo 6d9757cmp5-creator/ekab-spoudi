@@ -47,3 +47,20 @@ test('ILS and PHTLS keep their key steps',()=>{
  for(const fact of ['ABCDE','SBAR','υπεργλωττιδική','94–98%'])assert.ok(text('ils').includes(fact),fact);
  for(const fact of ['XABCDE','5–7 cm','μειζόνων τροχαντήρων','ATMIST','αεριζόμενο'])assert.ok(text('phtls').includes(fact),fact);
 });
+test('practice exam: every course has a written bank of at least 20 and a practical scenario with one right option per step',()=>{
+ const exam={window:{}};
+ vm.runInNewContext(readFileSync(new URL('tools/seminars/seminar-exam-data.js',root),'utf8'),exam);
+ const E=JSON.parse(JSON.stringify(exam.window.EkabSeminarExam));
+ assert.deepEqual(Object.keys(E).sort(),COURSES.map(c=>c.id).sort());
+ for(const c of COURSES){
+  const e=E[c.id];
+  assert.ok(e.format,c.id);
+  assert.ok(e.written.every(q=>q.length===6&&new Set(q.slice(1,5)).size===4),c.id);
+  assert.ok(MCQ[c.id].length+e.written.length>=20,c.id+' bank of at least 20');
+  assert.ok(e.scenario.steps.length>=6,c.id);
+  for(const s of e.scenario.steps)assert.equal(s.options.filter(o=>o[1]===true).length,1,c.id+': '+s.situation);
+  assert.ok(e.scenario.steps.flatMap(s=>s.options).every(o=>o.length===4&&!(o[1]&&o[3])),c.id+' a right option is never critical');
+ }
+ const als=JSON.stringify(E.als);
+ for(const fact of ['300 mg','150 mg','1 mg','μετά το 3ο σοκ','150 J'])assert.ok(als.includes(fact),fact);
+});

@@ -32,7 +32,7 @@
 <section id="seminarCourse" hidden aria-labelledby="seminarCourseTitle">
  <button class="seminar-back" type="button" id="seminarBack">‹ Όλα τα σεμινάρια</button>
  <div class="seminar-course-header"><div><p class="eyebrow">Δοκιμαστική προετοιμασία</p><h2 id="seminarCourseTitle"></h2><p id="seminarCourseSub"></p><p id="seminarCourseBasis" class="small muted"></p></div><p id="seminarCourseProgress" class="seminar-course-progress" aria-live="polite"></p></div>
- <div class="seminar-tabs" role="tablist" aria-label="Τρόπος μελέτης"><button type="button" data-seminar-tab="theory" role="tab" aria-selected="true">Θεωρία</button><button type="button" data-seminar-tab="quiz" role="tab" aria-selected="false">Τεστ γνώσεων</button><button type="button" data-seminar-tab="oral" role="tab" aria-selected="false">Κλινικά σενάρια</button></div>
+ <div class="seminar-tabs" role="tablist" aria-label="Τρόπος μελέτης"><button type="button" data-seminar-tab="theory" role="tab" aria-selected="true">Θεωρία</button><button type="button" data-seminar-tab="quiz" role="tab" aria-selected="false">Τεστ γνώσεων</button><button type="button" data-seminar-tab="oral" role="tab" aria-selected="false">Κλινικά σενάρια</button><button type="button" data-seminar-tab="exam" role="tab" aria-selected="false">Εξέταση</button></div>
  <section id="seminarTheory" class="seminar-learn" aria-label="Μελέτη θεματικών">
   <div id="seminarUnits" class="seminar-units" aria-label="Επιλογή θεματικής"></div>
   <article class="panel seminar-lesson"><p class="eyebrow" id="seminarUnitNumber"></p><h3 id="seminarUnitTitle"></h3><p id="seminarUnitTheory"></p><h4>Κύρια προτεραιότητα</h4><p id="seminarUnitPriority"></p><h4>Προσοχή</h4><p id="seminarUnitAvoid"></p><h4>Ενδεικτικό σενάριο</h4><p id="seminarUnitCase"></p>
@@ -72,6 +72,7 @@
   <button type="button" id="seminarRepeatQuiz" class="btn">Νέο τεστ με άλλες ερωτήσεις</button>
  </div>
  </section>
+ <section id="seminarExam" class="seminar-exam" hidden aria-label="Δοκιμαστική εξέταση"></section>
  <section id="seminarOral" class="panel seminar-practice" hidden aria-label="Κλινικά σενάρια">
   <button type="button" class="btn secondary compact" id="seminarRestartOral">Νέος κύκλος 12 σεναρίων</button>
   <div id="seminarOralQuestion">
@@ -109,7 +110,7 @@
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα · Δεν απονέμει πιστοποίηση · Οι εκπαιδευτικές ασκήσεις δεν αντικαθιστούν πρακτική εκπαίδευση ή τοπικά πρωτόκολλα.</footer>
 </main>
 <script src="ai-grading-config.js?v=27.1.82"></script><script src="ai-grading-client.js?v=grading-compact-lock-1"></script>
-<script src="tools/seminars/seminar-tracks.js?v=mcq-1"></script><script src="tools/seminars/seminar-prep.js?v=seminar-sync-1"></script><script src="updates.js?v=27.1.113" defer></script>
+<script src="tools/seminars/seminar-tracks.js?v=erc2025-1"></script><script src="tools/seminars/seminar-exam-data.js?v=erc2025-1"></script><script src="tools/seminars/seminar-exam.js?v=erc2025-1"></script><script src="tools/seminars/seminar-prep.js?v=exam-1"></script><script src="updates.js?v=27.1.113" defer></script>
 
 
 <script type="module" src="atla/assistant.mjs"></script>
