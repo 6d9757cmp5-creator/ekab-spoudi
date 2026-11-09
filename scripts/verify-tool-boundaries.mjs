@@ -19,7 +19,7 @@ const expected=[
 for(const path of expected)file(dir+'/'+path);
 for(const name of ['README.md','mentor-os/README.md','protocol-lab/README.md','saek-study/README.md','eoppep-exams/README.md','shared/README.md'])
  file('tools/'+name);
-for(const name of ['index.html','mentor-lab.html','mentor-live.html','mentor-next.html','saek.html','eoppep.html','protocols.html','sw.js'])
+for(const name of ['index.html','mentor-lab.html','mentor-next.html','saek.html','eoppep.html','protocols.html','sw.js'])
  file(name);
 const html=read('mentor-next.html');
 assert(html.includes('href="tools/patient-simulator/styles/next-sim.css"'));

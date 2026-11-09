@@ -10,7 +10,7 @@ const select=$('source-model'),dataset=$('source-dataset'),button=$('source-load
 const status=(v,bad=false)=>{note.textContent=v;note.dataset.error=String(bad)};
 const back=$('source-back');
 const inUnifiedAnatomy=Boolean(document.getElementById('unified-catalog'));
-back.href=safeReturnHref(params.get('from'),location.href,inUnifiedAnatomy?'../../index.html':tool==='anatomy'?'../tools/anatomy-3d/index.html':'../mentor-next.html');
+back.href=safeReturnHref(params.get('from'),location.href,inUnifiedAnatomy?'../../index.html':tool==='anatomy'?'../tools/anatomy-3d/index.html':'../index.html');
 if(inUnifiedAnatomy)back.hidden=!params.get('from');
 if(document.getElementById('unified-catalog'))dataset.value='all';
 else if(['nih','all','secondary','rigged','makehuman'].includes(params.get('dataset')))dataset.value=params.get('dataset');

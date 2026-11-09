@@ -18,8 +18,7 @@ if(context&&main&&!document.querySelector('[data-mentor-connected-study]')){
  const actions=document.createElement('div');
  actions.className='mentor-connected-actions';
  const links=[
-  ['Εργαστήριο πρωτοκόλλων',makeJourneyUrl('mentor-protocol-suite.html',context,'lab')],
-  ['Ανασκόπηση περιστατικού',makeJourneyUrl('mentor-protocol-suite.html',context,'debrief')]
+  ['Μελέτη του θέματος με τον ATLA',makeJourneyUrl('mentor-lab.html',context)]
  ];
  for(const [title,dest] of links){
   const a=document.createElement('a');a.href=new URL(dest,new URL('./',import.meta.url)).href;

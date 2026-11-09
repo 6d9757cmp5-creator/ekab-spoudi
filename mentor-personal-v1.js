@@ -6,12 +6,12 @@ const ROUTES=Object.freeze({
  anatomy:'ui-tools/anatomy-3d/index.html',
  ecg:'mentor-ecg.html',
  resuscitation:'seminar-prep.html',
- trauma:'mentor-live.html',
+ trauma:'practical_exam.html',
  pharmacology:'farmaka.html',
  certification:'eoppep.html',
- triage:'mentor-lab.html#module-mci',
- equipment:'mentor-lab.html#module-equipment',
- missions:'mentor-live.html',
+ triage:'practical_exam.html',
+ equipment:'practical_exam.html',
+ missions:'practical_exam.html',
  learning:'saek.html'
 });
 let memory=engine.newMemory();

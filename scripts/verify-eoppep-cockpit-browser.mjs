@@ -36,13 +36,11 @@ try{
    await page.waitForURL(new RegExp('case='+item.id));
    await page.waitForFunction(title=>document.getElementById('next-case-title')?.textContent===title,item.title,{timeout:20000});
    assert.equal(await page.locator('#next-case-briefing').innerText(),item.briefing,'The official wording is shown');
-   assert.equal(await page.locator('#next-case-list .next-case-card').count(),3,'The three original missions stay');
+   assert.equal(await page.locator('#next-general-group,#next-case-list,[data-next-case-category]').count(),0,'No general clinical cases remain');
    assert.equal(await page.locator('#next-practical-list .next-case-card').count(),6);
-   assert.equal(await page.locator('[data-next-case-category="practical"]').getAttribute('aria-pressed'),'true','EOPPEP deep link opens only practical category');
    assert.equal(await page.locator('#next-practical-group').isVisible(),false,'Collapsed picker keeps case group out of view');
-   assert.equal(await page.locator('#next-practical-group').getAttribute('hidden'),null,'Practical category must be selected');
-   assert.notEqual(await page.locator('#next-general-group').getAttribute('hidden'),null,'General category must be hidden');
-   assert.match(await page.locator('#next-case-category-status').innerText(),/6 πρακτικά/);
+   assert.equal(await page.locator('#next-practical-group').getAttribute('hidden'),null,'Practical scenarios are the only library');
+   assert.match(await page.locator('#next-case-category-status').textContent(),/6 πρακτικά/);
    assert.equal(await page.locator('.next-case-card[data-case-id="'+item.id+'"]').getAttribute('aria-pressed'),'true');
    const facts=await page.locator('#next-case-practical').innerText();
    assert.match(facts,/συνθετικές/,'Synthetic values are labelled');
@@ -65,7 +63,7 @@ try{
      await page.locator('input[name="practical-equipment"][value="'+resource+'"]').check();
    }
    await page.locator('.next-practice-rehearsal-submit').click();
-   assert.match(await page.locator('#next-result').innerText(),/Γραπτή πρόβα/,'A documented rehearsal should be acknowledged');
+   assert.match(await page.locator('#next-result').innerText(),/γραπτή πρόβα/i,'A documented rehearsal should be acknowledged');
    assert.equal(await page.locator('#next-hr').innerText(),before,'Rehearsal must not cause therapeutic physiological change');
    assert.match(await page.locator('#next-actions').innerText(),/Γραπτές πρόβες: 1/,'Practice count stays evidence-based');
    await openTool(page,'Ανασκόπηση');
@@ -93,20 +91,18 @@ try{
   await page.goto(base+'/mentor-next.html?case='+PRACTICAL_CASES[0].id,{waitUntil:'load'});
   await page.waitForFunction(title=>document.getElementById('next-case-title')?.textContent===title,PRACTICAL_CASES[0].title);
   await page.locator('.next-case-picker > summary').click();
-  const activeBeforeCategorySwitch=await page.locator('#next-case-title').innerText();
-  const eventsBeforeCategorySwitch=await page.locator('#next-events li').count();
-  await page.locator('[data-next-case-category="general"]').click();
-  assert.equal(await page.locator('[data-next-case-category="general"]').getAttribute('aria-pressed'),'true');
-  assert.equal(await page.locator('#next-general-group').getAttribute('hidden'),null,'General missions visible after switching');
-  assert.notEqual(await page.locator('#next-practical-group').getAttribute('hidden'),null,'Practical missions hidden after switching');
-  assert.equal(await page.locator('#next-case-title').innerText(),activeBeforeCategorySwitch,'Category switch cannot start a scenario');
-  assert.equal(await page.locator('#next-events li').count(),eventsBeforeCategorySwitch,'Category switch cannot log a clinical event');
-  await page.locator('#next-case-list .next-case-card').first().click();
-  await page.waitForFunction(()=>/Κρήτη/.test(document.getElementById('next-case-title')?.textContent||''));
-  assert.equal(await page.locator('[data-next-case-category="general"]').getAttribute('aria-pressed'),'true');
+  // Switching between practical scenarios never logs a clinical event in the other scenario.
+  const eventsBefore=await page.locator('#next-events li').count();
+  await page.locator('.next-case-card[data-case-id="'+PRACTICAL_CASES[3].id+'"]').click();
+  await page.waitForFunction(title=>document.getElementById('next-case-title')?.textContent===title,PRACTICAL_CASES[3].title);
   await openTool(page,'Ενέργειες');
-  const generic=await page.locator('#next-actions button').allInnerTexts();
-  assert(!generic.some(b=>/ΑΕΑ|ΚΑΡΠΑ/.test(b)),'Scenario steps stay inside their scenario');
+  const other=await page.locator('#next-actions button').allInnerTexts();
+  for(const step of PRACTICAL_CASES[0].steps.filter(s=>!PRACTICAL_CASES[3].steps.some(t=>t.label===s.label)))
+   assert(!other.some(b=>b.startsWith(step.label)),'Scenario steps stay inside their scenario: '+step.label);
+  await page.locator('.next-case-picker > summary').click();
+  await page.locator('.next-case-card[data-case-id="'+PRACTICAL_CASES[0].id+'"]').click();
+  await page.waitForFunction(title=>document.getElementById('next-case-title')?.textContent===title,PRACTICAL_CASES[0].title);
+  assert.equal(await page.locator('#next-events li').count(),eventsBefore,'Scenario 1 timeline is restored unchanged');
   await page.goto(base+'/mentor-next.html?case=does-not-exist',{waitUntil:'load'});
   await page.locator('#next-case-title').waitFor();
   await page.goto(base+'/mentor-next.html?case='+PRACTICAL_CASES[0].id+'&from=https://evil.example/',{waitUntil:'load'});

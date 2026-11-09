@@ -23,9 +23,7 @@ jobs:
           node-version: '22'
       - name: Verify Mentor speech and JavaScript syntax
         run: |
-          node --check mentor-voice.mjs
           node --check mentor-lab.js
-          node --test scripts/test-mentor-voice.mjs
           node --check functions/answer-grader/main.js
           node --check workers/answer-grader/src/index.js
           node --check functions/answer-grader/semantic-grading-policy.mjs
@@ -85,21 +83,10 @@ jobs:
           node --check tools/patient-simulator/app/practical-panel.mjs
           node --test tools/patient-simulator/core/practical-workshop.test.mjs
           node --test tools/patient-simulator/core/next-sim.test.mjs tools/patient-simulator/core/next-review.test.mjs tools/patient-simulator/core/next-cases.test.mjs
-          node --check mentor/core/live-debrief.mjs
-          node --check mentor/core/live-interactions.mjs
-          node --check mentor/app/live.js
-          node --check mentor-scenario-paths.mjs
-          node --check mentor-debrief-export.mjs
-          node --check mentor-patient-interview.mjs
-          node --check mentor-protocol-suite.mjs
           node --check mentor-study-bridge.mjs
           node --check mentor-study-context.mjs
-          node --test scripts/test-mentor-protocols.mjs
-          node --test scripts/test-mentor-debrief-export.mjs
-          node --test scripts/test-mentor-patient-interview.mjs
           node --test scripts/test-mentor-quick-answer.mjs
-          node --check mentor/presence/presence.mjs
-          node --test mentor/presence/presence-state.test.mjs mentor/presence/memory-navigate.test.mjs mentor/context/bridge.test.mjs mentor/knowledge/retrieve.test.mjs mentor/ai/client.test.mjs mentor/ai/claude.test.mjs workers/mentor-chat/worker.test.mjs mentor/presence/mouth-expression.test.mjs mentor/core/live-debrief.test.mjs mentor/core/live-sim.test.mjs mentor/core/ecg-practice.test.mjs mentor/context/anatomy-announce.test.mjs
+          node --test mentor/presence/presence-state.test.mjs mentor/presence/memory-navigate.test.mjs mentor/context/bridge.test.mjs mentor/knowledge/retrieve.test.mjs mentor/ai/client.test.mjs mentor/ai/claude.test.mjs workers/mentor-chat/worker.test.mjs mentor/presence/mouth-expression.test.mjs mentor/core/ecg-practice.test.mjs mentor/context/anatomy-announce.test.mjs
       - run: npm install --no-save --no-package-lock playwright@1.56.1
       - run: npx playwright install --with-deps chromium
       - run: node scripts/app-load-smoke.mjs

@@ -4,10 +4,10 @@ import {PRACTICAL_CASES,PRACTICAL_SKILLS} from './eoppep-practical-cases.mjs';
 import {CASES,getCase,CASE,newSession,patientVitals,execute,askPatient,validSession,saveSession,loadSession,loadCaseSession,caseProgress,reportText,summarize,actionsFor,setFocus} from './next-sim.mjs';
 import {missionEvidence,vitalTrend} from './next-review.mjs';
 const store=()=>{const m=new Map();return{getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v),read:()=>m};};
-test('three distinct original scenes, descriptions and independent synthetic trajectories',()=>{
- const original=CASES.filter(c=>!c.group);
- assert.equal(original.length,3);
- assert.deepEqual(original.map(c=>c.scene),['road','home','square']);
+test('the simulator offers only the six EOPPEP practical scenarios',()=>{
+ assert.deepEqual(CASES.map(c=>c.id),PRACTICAL_CASES.map(c=>c.id));
+ assert(CASES.every(c=>c.group),'No general clinical case remains');
+ for(const removed of ['crete-two-persons-next-v1','home-welfare-next-v1','public-square-next-v1'])assert.equal(getCase(removed),null);
  assert(CASES.every(c=>c.patients.length===2&&c.patients.every(p=>p.dialogue.feeling&&p.dialogue.event)));
  assert.equal(CASE.id,CASES[0].id);
  assert.equal(getCase('invalid'),null);
@@ -39,11 +39,11 @@ test('scenario steps act only inside their scenario, never change vitals and are
  const after=patientVitals({...s,minute:30},'a');
  assert.deepEqual(after,before,'Vitals never react to actions or time');
  assert.throws(()=>execute(newSession(second.id),'interventions',stepId));
- assert.throws(()=>execute(newSession(CASES[0].id),'interventions',stepId));
+ assert.throws(()=>execute(newSession(PRACTICAL_CASES[3].id),'interventions',stepId));
  const summary=summarize(s);
  assert.deepEqual(summary.practiceSteps.filter(x=>x.done).map(x=>x.label),[first.steps[0].label]);
  assert.equal('score' in summary,false);
- assert.equal(summarize(newSession(CASES[0].id)).practiceSteps.length,0);
+ assert.equal(summarize(newSession(second.id)).practiceSteps.filter(x=>x.done).length,0);
  assert.match(reportText(s),/χωρίς βαθμολόγηση/);
  const listed=actionsFor(s,'interventions').slice(0,first.steps.length).map(a=>a.label);
  assert.deepEqual(listed,[...listed].sort((a,b)=>a.localeCompare(b,'el')),'The list does not reveal the order');
@@ -57,7 +57,7 @@ test('scenario-specific dialogue and briefing never leak between cases',()=>{
  const c=askPatient(newSession(CASES[2].id),'Τι συνέβη;');
  assert.notEqual(a.events[0].detail,b.events[0].detail);
  assert.notEqual(b.events[0].detail,c.events[0].detail);
- assert.match(reportText(b),/Κλήση σε κατοικία/);
+ assert.match(reportText(b),/Δύσπνοια/);
  assert(!reportText(b).includes(CASES[0].title));
 });
 test('all cases have independent process evidence and 30-minute bounded trends',()=>{

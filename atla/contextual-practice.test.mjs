@@ -1,44 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import {practiceHref} from './practice/saek-practice.mjs';
-import {readCockpitEntry} from './practice/cockpit-entry.mjs';
+import {readFileSync,existsSync} from 'node:fs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+const exists=path=>existsSync(new URL('../'+path,import.meta.url));
 
-test('SAEK active recall links preserve exact chapter context without grade or notes',()=>{
- const url=practiceHref('saek-course-01.html','lesson-10','Καρδιά, μεγάλα αγγεία και βαλβίδες');
- assert.ok(url.startsWith('mentor-next.html?'));
- const query=url.split('?')[1];
- const parsed=readCockpitEntry(query);
- assert.deepEqual(parsed,{from:'saek-course-01.html',chapter:'lesson-10',focus:'Καρδιά, μεγάλα αγγεία και βαλβίδες',returnHref:'saek-course-01.html#lesson-10'});
- assert.equal(practiceHref('../evil.html','lesson-1','test'),'');
- assert.equal(practiceHref('saek-course-01.html','lesson-101','test'),'');
- assert.equal(practiceHref('saek-course-21.html','lesson-1','test'),'');
- assert.equal(readCockpitEntry('from=saek-course-01.html&chapter=lesson-999'),null);
- assert.equal(readCockpitEntry('from=javascript%3Aevil&chapter=lesson-1'),null);
+test('SAEK chapters no longer inject simulator practice links',()=>{
+ const app=read('atla/assistant.mjs');
+ assert.doesNotMatch(app,/practice\/saek-practice|practice\/cockpit-entry/);
+ assert.equal(exists('atla/practice/saek-practice.mjs'),false);
+ assert.equal(exists('atla/practice/cockpit-entry.mjs'),false);
+ assert.match(app,/ekab:atlas-context/);
 });
 
-test('practice is one shared opt-in module, not 247 copied simulators',()=>{
+test('ATLA routes simulation requests to the EOPPEP practical exam only',()=>{
  const app=read('atla/assistant.mjs');
- assert.match(app,/import\('\.\/practice\/saek-practice\.mjs'\)/);
- assert.match(app,/import\('\.\/practice\/cockpit-entry\.mjs'\)/);
- assert.match(app,/ekab:atlas-context/);
- const practice=read('atla/practice/saek-practice.mjs');
- assert.match(practice,/\.reader-chapters > details\.reader-fold/);
- assert.match(practice,/\.lesson-sos/);
- assert.match(practice,/dataset\.atlaOpen='true'/);
- assert.doesNotMatch(practice,/localStorage|sessionStorage|indexedDB|grader|score.*=/);
- const cockpit=read('atla/practice/cockpit-entry.mjs');
- assert.match(cockpit,/dataset\.atlaOpen='true'/);
- assert.match(cockpit,/returnHref/);
- assert.match(cockpit,/δεν ισχυρίζεται ότι αυτά αντιστοιχούν ιατρικά/);
+ assert.doesNotMatch(app,/'mentor-next\.html'/,'ATLA has no general clinical simulator route');
+ assert.match(app,/\['Πρακτικό ΕΟΠΠΕΠ','practical_exam\.html'/);
 });
 
 test('ATLAS is optional, synthetic cases are still simulator-owned',()=>{
  const app=read('tools/patient-simulator/app/next-sim.mjs');
  assert.match(app,/from '\.\.\/core\/next-sim\.mjs'/);
- const bridge=read('atla/practice/cockpit-entry.mjs');
- assert.doesNotMatch(bridge,/execute\(|setFocus\(|saveSession\(|patientVitals\(/);
  const ai=read('atla/ai/config.mjs');
  assert.match(ai,/endpoint:"https:\/\/ekab-spoudi-mentor-chat\.6d9757cmp5\.workers\.dev\/"/);
 });

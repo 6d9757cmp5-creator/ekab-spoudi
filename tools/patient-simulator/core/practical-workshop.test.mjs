@@ -52,7 +52,7 @@ test('no cross-patient or cross-case rehearsal; no false completion by legacy on
  const witness=setFocus(s,'b','scene');
  assert.throws(()=>rehearse(witness,'s1-call'),/choose-patient-a/);
  assert.throws(()=>rehearse(s,'s2-oxygen'),/unknown-practical-step/);
- assert.throws(()=>rehearse(newSession(CASES[0].id),'s1-call'),/unknown-practical-step/);
+ assert.throws(()=>rehearse(newSession(PRACTICAL_CASES[2].id),'s1-call'),/unknown-practical-step/);
  const clickOnly=execute(s,'interventions','s1-call');
  assert.equal(summarize(clickOnly).practiceSteps.find(x=>x.label.includes('ενεργοποίηση')).done,true);
  assert.equal(practicalRehearsalReview(clickOnly).recorded,0,'legacy click without equipment/rationale is not a documented rehearsal');

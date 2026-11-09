@@ -29,8 +29,6 @@ jobs:
       - name: Syntax and integration-contract tests
         run: |
           node --check atla/assistant.mjs
-          node --check atla/practice/saek-practice.mjs
-          node --check atla/practice/cockpit-entry.mjs
           node --check tools/patient-simulator/core/mission-activity-engine.mjs
           node --check learning-surface.mjs
           node --test atla/assistant.contract.test.mjs atla/atlas-boundaries.test.mjs tools/patient-simulator/core/mission-migration.test.mjs atla/contextual-practice.test.mjs atla/student/profile.test.mjs atla/student/practice.test.mjs atla/practice/tool-selector.test.mjs
