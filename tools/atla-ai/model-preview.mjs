@@ -1,6 +1,7 @@
 import {sharedRegistryAssets,safeAssetUrl} from './model-preview-catalog.mjs';
 import {audit3DLibrary,proposeBodyComposition,choose3DQuality,LIBRARY_HEADING,studyScope3D} from './central-3d-library.mjs';
 import {safeReturnHref,loadLibrary} from './nih3d-library.mjs';
+import {atlasRole,detailKeysForStructure,modelShowsStructures} from './anatomy-curation.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const tool=params.get('tool')==='cockpit'?'cockpit':'anatomy';
@@ -313,6 +314,10 @@ function renderChoices(){
    .normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el');
   return !q||q.split(/\s+/).every(token=>key.includes(token));
  });
+ renderList();
+}
+function renderList(){
+ const scope=studyFilter?.value||'all';
  select.replaceChildren(...assets.map((a,i)=>{
   const tag=scope==='all'?'['+({anatomy:'Ανατομία',pathology:'Παθολογία',research:'Έρευνα'}[studyScope3D(a)])+'] ':'';
   const option=new Option(tag+(a.available?'':'[Μόνο στοιχεία] ')+a.label,String(i));
@@ -331,7 +336,7 @@ function showSelection(){
  showDetails(selected||{details:null});
  if(!selected)status('Δεν βρέθηκαν μοντέλα σε αυτή την κατηγορία. Δοκίμασε άλλη επιλογή.');
  else if(!selected.available)status('Υπάρχουν μόνο μεταδεδομένα: δεν υπάρχει εγκεκριμένο για λήψη αρχείο σε αυτό το μητρώο.');
- else status('Επιλεγμένο: '+selected.label+'. Πάτησε «Προβολή 3D εδώ».');
+ else status('Επιλεγμένο: '+selected.label+'. Πάτησε «Προβολή 3D».');
 }
 function invalidatePreview(){
  ++loadVersion;
@@ -358,7 +363,15 @@ async function loadDataset(){
    audit.totals.ready+' διαθέσιμα · '+audit.totals['metadata-only']+' μόνο μεταδεδομένα · '+
    audit.totals.restricted+' περιορισμένα · '+audit.duplicateContent.length+' πιθανές ταυτόσημες εγγραφές.';
   refreshComposition();
-  const next=sharedRegistryAssets(data,{tool,dataset:dataset.value});
+  let next=sharedRegistryAssets(data,{tool,dataset:dataset.value});
+  if(inUnifiedAnatomy){
+   // The student atlas shows only curated human anatomy and labelled pathology examples.
+   const byId=new Map(data.models.map(m=>[String(m.id),m]));
+   next=next.filter(item=>item.available).flatMap(item=>{
+    const role=atlasRole(byId.get(item.id)).role;
+    return role?[{...item,details:{...item.details,kind:role},kind:role}]:[];
+   });
+  }
   allAssets=next;
   if(!next.length)throw Error('Δεν υπάρχουν μοντέλα σε αυτή τη συλλογή');
   renderChoices();
@@ -374,6 +387,21 @@ async function loadDataset(){
   }else showSelection();
  }catch(e){if(request===loadVersion)status('Το κοινό μητρώο δεν είναι διαθέσιμο: '+String(e.message||e),true)}
 }
+/** Opens the curated detail models of one structure selected in the whole-body atlas. */
+function applyExplore(request){
+ if(!request||!allAssets.length||!inUnifiedAnatomy)return;
+ if(studyFilter)studyFilter.value='all';
+ $('source-query').value='';
+ const keys=detailKeysForStructure(request.english);
+ const byId=new Map(registry.models.map(m=>[String(m.id),m]));
+ const vocabulary=registry.vocabulary?.structures||{};
+ assets=allAssets.filter(item=>modelShowsStructures(byId.get(item.id),keys,vocabulary));
+ renderList();
+ if(assets.length){showSelection();status('Λεπτομερή μοντέλα για «'+request.greek+'»: '+assets.length+'. Επίλεξε μοντέλο και πάτησε «Προβολή 3D».');return}
+ showDetails({details:null});button.disabled=true;
+ status('Δεν υπάρχει ακόμη επαληθευμένο λεπτομερές μοντέλο για «'+request.greek+'». Η δομή φαίνεται στο πλήρες σώμα.',true);
+}
+window.addEventListener('atla:explore-structure',event=>{invalidatePreview();applyExplore(event.detail)});
 dataset.addEventListener('change',loadDataset);
-loadDataset();
+loadDataset().then(()=>{if(window.ATLA_EXPLORE_REQUEST)applyExplore(window.ATLA_EXPLORE_REQUEST)});
 window.addEventListener('pagehide',()=>{dispose();cancelAnimationFrame(raf);controls?.dispose();draco?.dispose();renderer?.dispose();renderer=null});

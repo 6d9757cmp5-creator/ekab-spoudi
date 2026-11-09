@@ -115,5 +115,7 @@ export function studyScope3D(item){
  if(item?.source==='nih3d'&&kind==='anatomy')return 'anatomy';
  if(item?.source==='nih3d'&&kind==='pathology')return 'pathology';
  if(item?.source==='hra')return 'anatomy';
+ // Curated atlas entries carry an explicit role (see anatomy-curation.mjs).
+ if(item?.source==='z-anatomy'&&kind==='anatomy')return 'anatomy';
  return 'research';
 }

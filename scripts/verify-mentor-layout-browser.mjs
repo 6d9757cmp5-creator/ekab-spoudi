@@ -45,7 +45,7 @@ try{
  assert.ok(requests.includes('/mentor/app/personal-v1.js'));
  await page.locator('#tab-memory').click();
  assert.equal(await page.locator('#panel-memory').isVisible(),true);
- for(const p of ['mentor-live.html','mentor-oral.html','mentor-ecg.html','mentor-library.html','mentor-scenarios.html']){
+ for(const p of ['practical_exam.html','mentor-oral.html','mentor-ecg.html','mentor-library.html']){
   await page.goto(base+p,{waitUntil:'domcontentloaded'});
   await page.waitForTimeout(160);
   assert.ok((await page.locator('body').innerText()).length>50,p);

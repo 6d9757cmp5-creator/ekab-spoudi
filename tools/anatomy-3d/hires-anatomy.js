@@ -163,6 +163,8 @@ const INTRO={skeletal:'Οστό που συμμετέχει στη στήριξ�
 function describeSelected(){
  const p=partsById.get(ui.selected),card=$('detailCard'),group=FOCUS_GROUPS[ui.groupFocus];
  card.hidden=!p&&!group;
+ const exploreButton=$('detailExplore');
+ if(exploreButton){exploreButton.hidden=(!p&&!group)||ui.quiz;if(group){exploreButton.dataset.greek=group.name;exploreButton.dataset.english=ui.groupFocus;}}
  const banner=$('selectedBanner');banner.hidden=(!p&&!group)||ui.quiz;
  card.querySelector('.detail-label').textContent=group?'ΕΠΙΛΕΓΜΕΝΗ ΟΜΑΔΑ ΔΟΜΩΝ':'ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ';
  if(group){
@@ -184,6 +186,7 @@ function describeSelected(){
  $('detailSystem').textContent=n.systemName;
  $('detailDescription').textContent=(/\b(gingiva|tooth|teeth)\b/i.test(p.name)?'Δομή της στοματικής κοιλότητας, που αφορά τα ούλα ή την οδοντοστοιχία.':(INTRO[p.system]||'Εκπαιδευτική προβολή της θέσης και των σχέσεων αυτής της ανατομικής δομής.'))+(n.el?'':' Δεν υπάρχει ακόμη ελεγμένη ελληνική ονομασία για το συγκεκριμένο πλέγμα.');
  $('detailOriginal').textContent='Πρωτότυπη ονομασία πηγής: '+p.name;
+ if(exploreButton){exploreButton.dataset.greek=n.label;exploreButton.dataset.english=p.name;}
  const lesson=$('detailStudy'),chapter=TOPIC_LINKS[p.system];
  lesson.hidden=!chapter;
  if(chapter){lesson.href='../../saek-course-01.html#lesson-'+chapter;lesson.textContent='Μελέτη σχετικού κεφαλαίου ΣΑΕΚ ↗';}

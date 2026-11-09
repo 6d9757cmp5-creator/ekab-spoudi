@@ -54,7 +54,7 @@ jobs:
           anatomy=Path('ui-tools/anatomy-3d/index.html').read_text()
           assert 'id="unified-catalog"' in anatomy and 'id="source-canvas"' in anatomy
           assert 'atla-resource-preview.html?tool=anatomy' not in anatomy
-          assert 'atla-resource-preview.html?tool=cockpit' in Path('mentor-next.html').read_text()
+          assert 'atla-resource-preview.html?tool=cockpit' not in Path('mentor-next.html').read_text()
           print('PASS: opt-in links, import map and independent tools')
           PY
       - name: Install Playwright and Chromium

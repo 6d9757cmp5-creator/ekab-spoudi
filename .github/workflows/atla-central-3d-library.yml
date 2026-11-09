@@ -53,7 +53,7 @@ jobs:
           node --check tools/anatomy-3d/unified-workspace.mjs
           node --check tools/anatomy-3d/hires-anatomy.js
       - name: Real manifest quality, composition safety and adaptive policy
-        run: node --test scripts/test-atla-central-3d-library.mjs scripts/test-atla-central-3d-integration.mjs tools/anatomy-3d/unified-workspace.test.mjs
+        run: node --test scripts/test-atla-central-3d-library.mjs scripts/test-atla-central-3d-integration.mjs tools/anatomy-3d/unified-workspace.test.mjs tools/atla-ai/anatomy-curation.test.mjs
       - name: Install Chromium for real unified anatomy smoke
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1

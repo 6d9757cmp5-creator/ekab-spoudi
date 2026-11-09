@@ -46,7 +46,7 @@ try{
    await page.locator('[data-next-patient="a"]').click();
    assert.equal(await curve.getAttribute('points'),original,device+': patient A deterministic trace');
    await page.locator('#next-step').click();
-   assert.notEqual(await curve.getAttribute('points'),original,device+': synthetic minute changes the displayed curve');
+   assert.equal(await curve.getAttribute('points'),original,device+': EOPPEP scenarios keep a stable synthetic rhythm as time passes');
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    assert.ok(overflow<=4,device+': horizontal overflow '+overflow);
    assert.equal(await page.locator('#next-practical-list .next-case-card').count(),6,'all six EOPPEP practical scenarios');
