@@ -309,7 +309,7 @@ function renderChoices(){
  const q=$('source-query').value.trim().normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el');
  assets=allAssets.filter(item=>{
   if(scope!=='all'&&studyScope3D(item)!==scope)return false;
-  const key=[item.label,item.source,item.details?.category,...(item.details?.greekStructures||[])].join(' ')
+  const key=[item.label,item.id,item.path,item.source,item.details?.accession,item.details?.originalTitle,item.details?.category,...(item.details?.greekStructures||[])].join(' ')
    .normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el');
   return !q||q.split(/\s+/).every(token=>key.includes(token));
  });

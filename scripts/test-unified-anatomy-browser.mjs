@@ -45,6 +45,10 @@ try{
    await page.locator('#study-filter').selectOption('anatomy');
    await page.locator('#source-query').fill('επιγονατίδα');
    assert.match(await page.locator('#source-education-summary').textContent(),/Ανατομική δομή/,'normal anatomy explained');
+   await page.locator('#source-query').fill('3DPX-000170');
+   assert.match(await page.locator('#source-education-summary').textContent(),/Επιγονατίδα/,'NIH accession search works');
+   await page.locator('#source-query').fill('patella');
+   assert.match(await page.locator('#source-education-summary').textContent(),/Επιγονατίδα/,'original English NIH title search works');
    await page.locator('#source-query').fill('');
    assert.equal(await page.locator('#models').isVisible(),true,'specialist tab must be in-page');
    assert.equal(await page.locator('#source-canvas').count(),1);
