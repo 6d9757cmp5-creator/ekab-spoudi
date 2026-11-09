@@ -342,3 +342,40 @@ body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
  margin:10px 16px;
 }
 #atlas-cockpit-entry.atlas-cockpit-optional[open]{padding-bottom:10px}
+
+
+/* Distinct category views: EOPPEP practical missions and general EKAB simulations.
+ * Case data and session storage remain unchanged; switching category is not an action. */
+.next-case-category-switch{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 9px;
+}
+.next-case-category-switch button{
+ box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+ gap:4px;min-height:64px;width:100%;padding:11px 15px;
+ border:1px solid #537b8e;border-radius:11px;background:#0d293b;
+ color:#eaf6fa;font-weight:800;font-size:.92rem;line-height:1.35;text-align:left;cursor:pointer;
+}
+.next-case-category-switch button small{color:#b1cad2;font-size:.74rem;font-weight:580}
+.next-case-category-switch button[aria-pressed=true]{
+ border:2px solid #7ee3d4;background:#1d5362;color:#fff;
+}
+.next-case-category-switch button[aria-pressed=true] small{color:#d8f5f3}
+.next-case-category-switch button:focus-visible{
+ outline:3px solid #ffdf89;outline-offset:2px;
+}
+.next-case-category-panel[hidden]{display:none!important}
+.next-case-category-panel{
+ padding:11px 0 5px;min-width:0;
+}
+.next-case-category-panel h3{margin:2px 0 7px}
+.next-case-category-panel p{
+ margin:0 0 12px;color:#c2dae1;line-height:1.55;font-size:.82rem;
+}
+.next-case-category-status{
+ margin:0;color:#b8d5de;font-size:.78rem;line-height:1.5;
+}
+@media(max-width:600px){
+ .next-case-category-switch{grid-template-columns:1fr;gap:7px}
+ .next-case-category-switch button{min-height:52px;padding:10px 12px;font-size:.85rem}
+ .next-case-category-switch button small{font-size:.71rem}
+}
