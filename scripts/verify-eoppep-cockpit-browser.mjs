@@ -3,6 +3,7 @@ import {mkdirSync} from 'node:fs';
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import {PRACTICAL_CASES,PRACTICAL_SKILLS} from '../tools/patient-simulator/core/eoppep-practical-cases.mjs';
+import {practicalTasks} from '../tools/patient-simulator/core/practical-workshop.mjs';
 const port=8787,base='http://127.0.0.1:'+port;
 const server=spawn(process.env.PYTHON_BIN||'python3',['-m','http.server',String(port),'--bind','127.0.0.1'],{stdio:'ignore'});
 mkdirSync('audit-results',{recursive:true});
@@ -49,14 +50,31 @@ try{
    await openTool(page,'Ενέργειες');
    const buttons=await page.locator('#next-actions button').allInnerTexts();
    for(const step of item.steps)assert(buttons.some(b=>b.startsWith(step.label)),'Missing step: '+step.label);
-   const before=await page.locator('#next-hr,#next-vitals').first().innerText().catch(()=>'');
-   await page.locator('#next-actions button',{hasText:item.steps[0].label}).click();
-   assert.match(await page.locator('#next-result').innerText(),/άσκησης/);
+   const first=practicalTasks(item.id)[0];
+   const oldEvents=await page.locator('#next-events li').count();
+   const before=await page.locator('#next-hr').innerText();
+   await page.locator('#next-actions button[data-practical-step="'+first.id+'"]').click();
+   assert.equal(await page.locator('#next-events li').count(),oldEvents,'Selecting a step must not instantly mark it done');
+   assert.equal(await page.locator('.next-practice-rehearsal-panel').getAttribute('data-active-step'),first.id);
+   await page.locator('textarea[name="practical-reason"]').fill('Περιγράφω τι εξετάζω, τι αναφέρω στον εξεταστή και για ποιον λόγο επιλέγω τη συγκεκριμένη ενέργεια.');
+   if(first.requiredEquipment.length){
+    await page.locator('.next-practice-rehearsal-submit').click();
+    assert.match(await page.locator('#next-result').innerText(),/Χρειάζεται να επιλέξεις/,'Missing equipment must prevent completion');
+    assert.equal(await page.locator('#next-events li').count(),oldEvents,'Missing equipment must not log an action');
+    for(const resource of first.requiredEquipment)
+     await page.locator('input[name="practical-equipment"][value="'+resource+'"]').check();
+   }
+   await page.locator('.next-practice-rehearsal-submit').click();
+   assert.match(await page.locator('#next-result').innerText(),/Γραπτή πρόβα/,'A documented rehearsal should be acknowledged');
+   assert.equal(await page.locator('#next-hr').innerText(),before,'Rehearsal must not cause therapeutic physiological change');
+   assert.match(await page.locator('#next-actions').innerText(),/Γραπτές πρόβες: 1/,'Practice count stays evidence-based');
    await openTool(page,'Ανασκόπηση');
    const debrief=await page.locator('#next-actions').innerText();
    assert.match(debrief,/Ελεγμένη σειρά/);
    assert.match(debrief,new RegExp('✓ 1\\. '+item.steps[0].label.slice(0,20)),'The recorded step is ticked');
    assert.match(debrief,/χωρίς βαθμολόγηση/);
+   assert.match(debrief,/Γραπτές πρόβες: 1/);
+   assert.match(debrief,/πρακτική επίδειξη/);
    assert.doesNotMatch(debrief,/κανένα βήμα/,'The debrief must not contradict the ticks');
    assert.doesNotMatch(debrief,/\d+\s*\/\s*\d+\s*(?:μονάδες|βαθμ)/,'No grading');
    if(item.practicalNumber===3){
