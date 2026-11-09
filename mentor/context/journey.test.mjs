@@ -13,6 +13,8 @@ test('return page is strictly allowlisted including SAEK reader pages',()=>{
  assert.equal(validSource('saek-course-01.html'),'saek-course-01.html');
  assert.equal(validSource('saek-course-20.html'),'saek-course-20.html');
  assert.equal(validSource('ui-tools/anatomy-3d/index.html'),'ui-tools/anatomy-3d/index.html');
+ assert.equal(validSource('mentor-live.html'),'','retired patient simulation may not be a return destination');
+ assert.equal(topicForSource('mentor-live.html'),'','retired simulator may not be a learning topic source');
  for(const value of ['../index.html','https://evil.example/','javascript:alert(1)','saek-course-99.html','mentor-lab.html']){
   assert.equal(validSource(value),'');
  }

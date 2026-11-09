@@ -9,7 +9,7 @@ import {ALL_TOPICS} from '../../protocols-data.mjs';
 const TOPICS=new Set(ALL_TOPICS.map(item=>item.id));
 const SOURCES=new Set([
   'saek.html','eoppep.html','farmaka.html','seminar-prep.html',
-  'mentor-ecg.html','protocols.html','mentor-live.html','ui-tools/anatomy-3d/index.html'
+  'mentor-ecg.html','protocols.html','ui-tools/anatomy-3d/index.html'
 ]);
 const COURSE=/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/;
 const tidy=(value,max)=>String(value??'').replace(/[\x00-\x1f\x7f<>]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
@@ -43,7 +43,7 @@ export function topicForSource(from){
   return {
     'eoppep.html':'eoppep','farmaka.html':'pharmacy',
     'seminar-prep.html':'seminars','mentor-ecg.html':'ecg',
-    'protocols.html':'trauma','mentor-live.html':'trauma',
+    'protocols.html':'trauma',
     'ui-tools/anatomy-3d/index.html':'anatomy'
   }[source]||'';
 }
