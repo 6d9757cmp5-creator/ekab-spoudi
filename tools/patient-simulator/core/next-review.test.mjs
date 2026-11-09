@@ -29,7 +29,7 @@ test('S/B/A/R starts with missing observations, never fabricates vitals or treat
  assert.match(draft,/S \/ ΚΑΤΑΣΤΑΣΗ/);
  assert.match(draft,/B \/ ΙΣΤΟΡΙΚΟ/);
  assert.match(draft,/A \/ ΚΑΤΑΓΕΓΡΑΜΜΕΝΕΣ/);
- assert.match(draft,/R \/ ΕΚΚΡΕΜΟΤΗΤΕΣ/);
+ assert.match(draft,/R \/ ΣΥΣΤΑΣΗ Ή ΑΙΤΗΜΑ/);
  assert.match(draft,/Δεν καταγράφηκαν συνθετικά ζωτικά/);
  assert.doesNotMatch(draft,/HR 106|SpO₂ 97|διάγνωση:/);
  assert.match(draft,/Δεν διατυπώνεται θεραπευτική ή κλινική σύσταση/);
