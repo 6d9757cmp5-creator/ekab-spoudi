@@ -10,6 +10,7 @@ const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefine
 const params=new URLSearchParams(location.search);
 // A scenario opened from a lesson page starts there; its saved progress resumes on its own.
 let state=getCase(params.get('case'))?loadCaseSession(localStorage,params.get('case')):loadSession(localStorage),tool='exam',result='Ξεκίνα από τον έλεγχο ασφάλειας σκηνής ή επίλεξε επόμενο βήμα.';
+let caseCategory=getCase(state.caseId)?.group?'practical':'general';
 const returnHref=safeReturnHref(params.get('from'),location.href,'');
 if(returnHref){$('next-return').href=returnHref;$('next-return').hidden=false;}
 let renderer=mountPatientScene($('next-canvas'));
@@ -235,8 +236,19 @@ function actionButton(text,onClick,disabled=false){
  const b=el('button',text);b.type='button';b.disabled=disabled;b.addEventListener('click',onClick);return b;
 }
 
+function showCaseCategory(){
+ const current=getCase(state.caseId),practical=caseCategory==='practical';
+ $('next-practical-group').hidden=!practical;
+ $('next-general-group').hidden=practical;
+ for(const button of document.querySelectorAll('[data-next-case-category]'))
+  button.setAttribute('aria-pressed',String(button.dataset.nextCaseCategory===caseCategory));
+ const status=$('next-case-category-status');
+ status.textContent=(practical?'Προβολή: 6 πρακτικά σενάρια ΕΟΠΠΕΠ.':'Προβολή: 3 γενικά περιστατικά ΕΚΑΒ.')+
+  (Boolean(current.group)===practical?' Τρέχουσα άσκηση: '+current.title+'.':' Επίλεξε σενάριο παρακάτω για να αλλάξει η τρέχουσα άσκηση. Η προηγούμενη παραμένει αποθηκευμένη.');
+}
 function renderCaseLibrary(){
  const active=getCase(state.caseId),cases=$('next-case-list'),progress=caseProgress(localStorage);
+ showCaseCategory();
  $('next-case-title').textContent=active.title;
  $('next-case-briefing').textContent=active.briefing;
  $('next-case-goal').textContent=active.goal;
@@ -261,6 +273,7 @@ function renderCaseLibrary(){
     el('small',c.location+' · '+(stored.events?stored.events+' καταγραφές · '+stored.minutes+'′':'Δεν έχει ξεκινήσει')));
   button.addEventListener('click',()=>{
    if(c.id===state.caseId)return;
+   caseCategory=c.group?'practical':'general';
    tool='dialogue';result='Φορτώθηκε η αποστολή «'+c.title+'». Το προηγούμενο περιστατικό παραμένει αποθηκευμένο τοπικά.';
    commit(loadCaseSession(localStorage,c.id),result);
    document.querySelector('.next-case-picker').open=false;
@@ -270,6 +283,12 @@ function renderCaseLibrary(){
  }
 }
 
+for(const button of document.querySelectorAll('[data-next-case-category]'))button.addEventListener('click',()=>{
+ const next=button.dataset.nextCaseCategory;
+ if(!['practical','general'].includes(next))return;
+ caseCategory=next;
+ showCaseCategory();
+});
 let showAdvancedTools=false;
 const advancedToolIds=new Set(['view','position','tests','meds','records']);
 function nextGuideStep(){
