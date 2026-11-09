@@ -69,6 +69,7 @@ try{
   // Each scenario resumes separately and nothing leaks into the original missions.
   await page.goto(base+'/mentor-next.html?case='+PRACTICAL_CASES[0].id,{waitUntil:'load'});
   await page.waitForFunction(title=>document.getElementById('next-case-title')?.textContent===title,PRACTICAL_CASES[0].title);
+  await page.locator('.next-case-picker > summary').click();
   await page.locator('#next-case-list .next-case-card').first().click();
   await page.waitForFunction(()=>/Κρήτη/.test(document.getElementById('next-case-title')?.textContent||''));
   await openTool(page,'Ενέργειες');

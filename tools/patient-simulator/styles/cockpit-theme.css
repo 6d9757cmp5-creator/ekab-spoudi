@@ -228,3 +228,117 @@ body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
  .next-unified-status{max-width:min(330px,calc(100% - 16px))}
  .next-unified-legal{font-size:.6rem}
 }
+
+
+/* Guided simulator usability: one visible next action, optional controls, and renderer status.
+ * Does not change clinical content, simulation state or the shared 3D library. */
+.next-quickstart{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+ background:#103343;border:1px solid #538499;border-radius:16px;
+ padding:16px 20px;margin:0 0 14px;
+}
+.next-quickstart-copy{flex:1 1 340px;min-width:0}
+.next-quickstart h2{margin:3px 0 8px;font-size:clamp(1.03rem,2.2vw,1.38rem);line-height:1.3}
+.next-quickstart p{margin:6px 0;line-height:1.5;color:#d4e7ed;font-size:.87rem}
+.next-quickstart .next-guide-progress{color:#a7c6d0;font-size:.78rem}
+#next-guide-action{
+ flex:0 1 auto;border:1px solid #7ee3d4;border-radius:11px;
+ background:#246e74;color:#fff;font-size:.94rem;font-weight:800;
+ min-height:48px;padding:10px 19px;cursor:pointer;
+}
+#next-guide-action:hover{background:#2e8588}
+#next-guide-action:focus-visible,.next-case-picker>summary:focus-visible{
+ outline:3px solid #a4f5e3;outline-offset:3px;
+}
+.next-case-picker>summary{
+ cursor:pointer;font-weight:800;font-size:.95rem;line-height:1.5;
+ border:1px solid #486f83;background:#0c2d3f;border-radius:12px;
+ padding:13px 17px;color:#e1f4f7;min-height:48px;
+}
+.next-case-picker>summary small{display:inline-block;margin-left:8px;font-size:.76rem;color:#a6c7d1;font-weight:550}
+.next-case-picker[open]>summary{margin-bottom:16px}
+.next-tools .next-tool[hidden]{display:none!important}
+.next-tools .next-tool-more{border:1px dashed #62949f;background:#14384a;color:#d2e8ee}
+.next-tools .next-tool-more[aria-expanded="true"]{background:#235466}
+.next-actions .next-suggested-action{
+ border:2px solid #7ee3d4;background:#205968;
+ box-shadow:0 0 0 2px #16424b;
+}
+.next-actions .next-suggested-action::after{
+ content:" · Προτεινόμενο βήμα";font-size:.72rem;color:#bff5e9;
+}
+.next-render-notice{
+ margin:0;padding:10px 15px;background:#123447;
+ color:#cde5ed;border-top:1px solid #385f72;border-bottom:1px solid #385f72;
+ font-size:.78rem;line-height:1.5;
+}
+.next-render-notice[data-state="fallback"]{border-left:3px solid #deae60;color:#ffe1b2}
+.next-render-notice[data-state="ready"]{border-left:3px solid #70d6bb}
+@media(max-width:600px){
+ .next-quickstart{padding:13px;gap:10px}
+ #next-guide-action{width:100%;flex:1 1 100%;font-size:.9rem}
+ .next-case-picker>summary small{display:block;margin:1px 0 0}
+ .next-render-notice{padding:8px 12px}
+ .next-actions .next-suggested-action::after{display:block;padding-top:4px}
+}
+
+
+/* Compact three-row patient toolbar on phones: preserve all 3D actions without
+   making users scroll through four separate control rows. */
+@media(max-width:600px){
+ .next-scene .next-scene-top{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+  align-items:center;
+  padding:10px;
+ }
+ .next-scene .next-scene-label{
+  grid-column:1;grid-row:1;min-width:0;
+  font-size:.64rem;white-space:normal;
+ }
+ .next-scene #next-fullscreen{
+  grid-column:2;grid-row:1;justify-self:end;
+  margin:0;max-width:100%;min-height:42px;
+ }
+ .next-scene #next-ready-toggle,.next-scene #next-rigged-toggle{
+  grid-row:2;min-height:50px;padding:7px;
+  font-size:.73rem;line-height:1.25;
+  white-space:normal;overflow-wrap:anywhere;
+  width:100%;min-width:0;box-sizing:border-box;
+ }
+ .next-scene #next-ready-toggle{grid-column:1}
+ .next-scene #next-rigged-toggle{grid-column:2}
+ .next-scene .next-view-tabs{
+  grid-column:1/-1;grid-row:3;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:4px;margin:0;min-width:0;
+ }
+ .next-scene .next-view-tabs button{
+  min-height:40px;min-width:0;
+  padding:5px 2px;font-size:.68rem;
+  white-space:normal;overflow-wrap:anywhere;
+ }
+}
+
+
+/* Optional tutor is a discreet disclosure on direct simulator entry.
+ * SAEK deep-link context/return banner remains fully expanded and unchanged. */
+#atlas-cockpit-entry.atlas-cockpit-optional{
+ margin:0 0 12px;padding:0;
+ border:1px solid #426c79;border-radius:11px;
+ background:#102c3b;box-shadow:none;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional>summary{
+ min-height:44px;display:list-item;cursor:pointer;
+ padding:11px 16px;font-size:.83rem;font-weight:750;
+ color:#c9e7e8;line-height:1.45;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional>summary:focus-visible{
+ outline:3px solid #89e5d9;outline-offset:3px;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional>p,
+#atlas-cockpit-entry.atlas-cockpit-optional>.atlas-cockpit-entry-actions{
+ margin:10px 16px;
+}
+#atlas-cockpit-entry.atlas-cockpit-optional[open]{padding-bottom:10px}
