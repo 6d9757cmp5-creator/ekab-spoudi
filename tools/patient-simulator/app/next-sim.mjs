@@ -299,6 +299,10 @@ function nextGuideStep(){
  const review=missionEvidence(state);
  if(state.finished)return {label:'Άνοιξε την ανασκόπηση της ολοκληρωμένης προσπάθειας',tool:'debrief',person:null,actionId:null,complete:true};
  if(!review.shared[0].done)return {label:'Έλεγξε την ασφάλεια της σκηνής',tool:'exam',person:state.person,actionId:'scene'};
+ const practical=practicalRehearsalReview(state);
+ if(practical.total&&practical.recorded<practical.total){
+  return {label:'Εξασκήσου σε βήμα πρακτικής ΕΟΠΠΕΠ ('+practical.recorded+'/'+practical.total+')',tool:'interventions',person:'a',actionId:null};
+ }
  const patients=[review.people.find(p=>p.id===state.person),...review.people.filter(p=>p.id!==state.person)].filter(Boolean);
  const paths={
   dialogue:{label:'Συνομίλησε με τον εικονικό ασθενή',tool:'dialogue',actionId:'symptoms'},
@@ -318,7 +322,10 @@ function renderGuide(){
  const review=missionEvidence(state),done=review.shared.filter(x=>x.done).length+review.people.reduce((sum,p)=>sum+p.covered,0);
  const next=nextGuideStep();
  $('next-guide-step').textContent='Επόμενο: '+next.label+(next.person?' · Άτομο '+next.person.toUpperCase():'');
- $('next-guide-progress').textContent='Καταγεγραμμένα '+done+'/11 εκπαιδευτικά βήματα · Καμία ενέργεια δεν εκτελείται αυτόματα.';
+ const practical=practicalRehearsalReview(state);
+ $('next-guide-progress').textContent=practical.total
+  ?'Γραπτές πρόβες '+practical.recorded+'/'+practical.total+' βημάτων ΕΟΠΠΕΠ · Καμία ιατρική πράξη δεν εκτελείται από το λογισμικό.'
+  :'Καταγεγραμμένα '+done+'/11 εκπαιδευτικά βήματα · Καμία ενέργεια δεν εκτελείται αυτόματα.';
  $('next-guide-action').textContent=state.finished?'◎ Άνοιξε την ανασκόπηση':'▶ Πήγαινε στο επόμενο βήμα';
 }
 function renderMenu(){
