@@ -90,12 +90,16 @@ export function safeReturnHref(from,baseUrl,fallback){
  }catch{return fallback}
 }
 export function viewerHref(model,{rootUrl,tool='anatomy',from=''}={}){
- const url=new URL(VIEWER_PATH,rootUrl);
- url.searchParams.set('tool',tool==='cockpit'?'cockpit':'anatomy');
- url.searchParams.set('dataset','nih');
+ // Anatomy and specialist medical models share ONE public Anatomy Lab workspace.
+ // The clinical cockpit retains its separate, restricted educational surface.
+ const anatomy=tool!=='cockpit';
+ const url=new URL(anatomy?'ui-tools/anatomy-3d/index.html':VIEWER_PATH,rootUrl);
+ url.searchParams.set('tool',anatomy?'anatomy':'cockpit');
+ url.searchParams.set('dataset',anatomy?'all':'nih');
  url.searchParams.set('model',model.accession);
  if(from)url.searchParams.set('from',from);
- return url.pathname+url.search;
+ if(anatomy)url.hash='models';
+ return url.pathname+url.search+url.hash;
 }
 const rootOf=()=>new URL('../../',import.meta.url);
 let pending=null;

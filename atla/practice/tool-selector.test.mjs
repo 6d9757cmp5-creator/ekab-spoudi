@@ -34,7 +34,7 @@ test('asked or struggling learners get the exact model, with a way back',async()
  assert.equal(asked.accession,'3DPX-000170');
  assert.equal(asked.requestedVisual,true);
  assert.equal(asked.modelLabel,'Επιγονατίδα');
- assert.match(asked.href,/dataset=nih&model=3DPX-000170&from=%2Fapp%2Fsaek-course-01\.html%23lesson-2$/);
+ assert.match(asked.href,/ui-tools\/anatomy-3d\/index\.html\?tool=anatomy&dataset=all&model=3DPX-000170&from=%2Fapp%2Fsaek-course-01\.html%23lesson-2#models$/);
  assert.equal((await model({question:'Δεν κατάλαβα την επιγονατίδα'})).result.accession,'3DPX-000170');
  assert.equal((await model({question:'Πες το πιο απλά για την επιγονατίδα'})).result.accession,'3DPX-000170');
 });

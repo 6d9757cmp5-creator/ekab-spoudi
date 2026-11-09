@@ -57,7 +57,7 @@ const GREEK={
  'prostate':'Προστάτης','testis':'Όρχις','penis':'Πέος',
  'thyroid gland':'Θυρεοειδής αδένας','adrenal gland':'Επινεφρίδιο'};
 const TRANSLATE=Object.entries(GREEK).sort((a,b)=>b[0].length-a[0].length);
-const ui={sex:'male',mode:'skeleton',system:'all',selected:null,groupFocus:null,isolate:false,opacity:.14,tab:'explore',quiz:false,answered:false,target:null,score:0,attempts:0,prev:null};
+const ui={sex:'male',mode:'both',system:'all',selected:null,groupFocus:null,isolate:false,opacity:.14,tab:'explore',quiz:false,answered:false,target:null,score:0,attempts:0,prev:null};
 
 /* Safe, shareable chapter links. Values are allow-listed; no storage and no open redirect. */
 function readDeepLink(){
