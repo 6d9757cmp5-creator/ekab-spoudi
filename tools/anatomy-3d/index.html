@@ -134,6 +134,14 @@
       </div>
       <div class="source-layout">
         <aside class="source-panel" aria-label="Εξειδικευμένη αναζήτηση">
+          <label for="study-filter">Τι θέλεις να εξερευνήσεις;</label>
+          <select id="study-filter" aria-label="Κατηγορία εξειδικευμένων μοντέλων">
+            <option value="anatomy" selected>Ανατομία · ξεκίνα από εδώ</option>
+            <option value="pathology">Παθολογικά παραδείγματα</option>
+            <option value="research">Ερευνητικά και βοηθητικά αρχεία</option>
+            <option value="all">Όλος ο κατάλογος · όλα τα μοντέλα</option>
+          </select>
+          <p class="source-filter-help">Κατηγορίες από τα στοιχεία των αρχικών πηγών. Κανένα αρχείο δεν αποκρύπτεται οριστικά.</p>
           <label for="source-query">Αναζήτηση μοντέλου ή ανατομικής δομής</label>
           <input type="search" id="source-query" placeholder="π.χ. μηριαίο, καρδιά, κάταγμα, νευρώνας…" autocomplete="off">
           <label for="source-dataset" hidden>Ενιαίος κατάλογος συλλογών</label>
@@ -148,6 +156,7 @@
           <select id="source-model" aria-label="Μοντέλο από την κοινή βιβλιοθήκη"></select>
           <button type="button" id="source-load" disabled>Προβολή 3D εδώ</button>
           <p id="source-status" role="status" aria-live="polite">Επιλέξτε μοντέλο.</p>
+          <div id="source-education-summary" class="source-study-card" role="note" aria-live="polite"></div>
           <p class="source-note" id="source-license"></p>
           <div id="source-details" hidden></div>
 
@@ -187,7 +196,14 @@
         </aside>
         <section class="source-panel" aria-label="Ενιαία ενσωματωμένη προβολή 3D">
           <div id="source-stage">
+          <p id="source-preview-caption" class="source-preview-caption" role="status">Εδώ εμφανίζεται το μοντέλο που θα επιλέξεις.</p>
           <canvas id="source-canvas" tabindex="0" aria-label="3D μοντέλο, περιστροφή και επιλογή με κλικ"></canvas>
+          <div class="source-preview-controls" role="group" aria-label="Κοντινή και μακρινή όψη 3D">
+            <button id="source-zoom-in" type="button">+ Μεγέθυνση</button>
+            <button id="source-zoom-out" type="button">− Σμίκρυνση</button>
+            <button id="source-camera-reset" type="button">Επαναφορά όψης</button>
+          </div>
+          <p id="source-quality-note" class="source-quality-note" role="status"></p>
           <p class="source-note">Σύρσιμο για περιστροφή, ροδέλα ή δύο δάχτυλα για μεγέθυνση. Η εφαρμογή χρησιμοποιεί τον δικό της προβολέα και τα μοντέλα του υπάρχοντος εσωτερικού αρχείου.</p>
 
           </div>

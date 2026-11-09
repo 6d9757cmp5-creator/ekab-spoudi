@@ -108,3 +108,12 @@ export function search3DModels(library,{text='',source='all',limit=50}={}){
   return tokens.every(t=>hay.includes(t));
  }).slice(0,max);
 }
+
+/** Study scope from source metadata ONLY; never an inferred diagnosis. */
+export function studyScope3D(item){
+ const kind=item?.kind??item?.details?.kind;
+ if(item?.source==='nih3d'&&kind==='anatomy')return 'anatomy';
+ if(item?.source==='nih3d'&&kind==='pathology')return 'pathology';
+ if(item?.source==='hra')return 'anatomy';
+ return 'research';
+}

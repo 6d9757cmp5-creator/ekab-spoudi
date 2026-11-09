@@ -37,3 +37,15 @@
 .unified-library #atlas-status[data-error=true]{color:#ffc2a8}
 .unified-library #atlas-unload{background:#315268;color:#eef5f9;margin-top:6px}
 @media(max-width:820px){.unified-library #atlas-canvas{height:48vh;min-height:300px}}
+
+/* Study-first educational clarity without changing the original 3D datasets. */
+.unified-library .source-filter-help{font-size:.83rem;margin:5px 0 12px;color:#b8d9e7}
+.unified-library .source-study-card{border:1px solid #486f85;border-left:4px solid #41b8cb;border-radius:10px;padding:11px 12px;margin:12px 0;background:#0a2335;line-height:1.48}
+.unified-library .source-study-card strong{color:#f3f9fe}
+.unified-library .source-study-card p{margin:5px 0;font-size:.9rem}
+.unified-library .source-study-card .study-note{font-size:.82rem;color:#c2d9e6}
+.unified-library .source-preview-caption{font-weight:750;font-size:1rem;margin:2px 0 10px;color:#f4fcff}
+.unified-library .source-preview-controls{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.unified-library .source-preview-controls button{flex:1;min-width:130px;min-height:44px}
+.unified-library .source-quality-note{font-size:.86rem;line-height:1.45;margin:6px 0 12px}
+@media(max-width:820px){.unified-library #source-stage{scroll-margin-top:10px}.unified-library .source-preview-controls button{min-width:105px}}

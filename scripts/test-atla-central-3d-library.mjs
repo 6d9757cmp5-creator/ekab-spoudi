@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {audit3DLibrary,proposeBodyComposition,choose3DQuality,search3DModels,LIBRARY_HEADING} from '../tools/atla-ai/central-3d-library.mjs';
+import {audit3DLibrary,proposeBodyComposition,choose3DQuality,search3DModels,LIBRARY_HEADING,studyScope3D} from '../tools/atla-ai/central-3d-library.mjs';
 const data=JSON.parse(readFileSync('tools/atla-ai/resources/model-library.json','utf8'));
 test('one canonical 3D library covers stored models and BodyParts3D atlases',()=>{
  const audit=audit3DLibrary(data);
@@ -53,4 +53,14 @@ test('search across the original shared manifest without edits or duplicate copi
  assert(hits.length>=1);
  assert(hits.every(x=>x.source==='hra'));
  assert.equal(JSON.stringify(data),source);
+});
+
+test('curated categories retain all original registry records',()=>{
+ const scopes={anatomy:0,pathology:0,research:0};
+ for(const m of data.models)scopes[studyScope3D(m)]++;
+ assert.deepEqual(scopes,{anatomy:264,pathology:98,research:178});
+ assert.equal(Object.values(scopes).reduce((a,b)=>a+b,0),data.models.length);
+ assert.equal(studyScope3D(data.models.find(x=>x.id==='3DPX-000168')),'anatomy');
+ assert.equal(studyScope3D({source:'nih3d',details:{kind:'pathology'}}),'pathology');
+ assert.equal(studyScope3D({source:'nih3d',details:{kind:null}}),'research');
 });

@@ -13,6 +13,8 @@ for(const file of ['ui-tools/anatomy-3d/index.html','tools/anatomy-3d/index.html
  assert.match(html,/id="atlas-unload"/);
  assert.match(html,/id="unified-basic"/);
  assert.match(html,/id="unified-catalog"/);
+ for(const id of ['study-filter','source-education-summary','source-preview-caption','source-quality-note','source-zoom-in','source-zoom-out','source-camera-reset'])
+  assert.match(html,new RegExp('id="'+id+'"'),'usable 3D model view: '+id);
  assert.match(html,/unified-workspace\.mjs/);
  assert.match(html,/unified-workspace\.css/);
  assert.doesNotMatch(html,/iframe/i,'no iframe: same-page viewer');
