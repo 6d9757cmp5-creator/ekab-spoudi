@@ -53,7 +53,8 @@ for(const entry of registry.entries){
  assert(Array.isArray(entry.implementation)&&entry.implementation.length>0);
  for(const p of entry.implementation)assert(existsSync(file(p)),'missing registered code: '+p);
 }
-assert(registry.entries.length>=18,'inventory misses existing tools/services');
+assert(registry.entries.length>=16,'inventory misses existing active services and tools');
+assert(!registry.entries.some(entry=>['patient-simulator','scenario-library'].includes(entry.id)),'retired simulator must not remain active in registry');
 for(const source of [
  'services/README.md','services/notes/README.md','services/sync/README.md',
  'services/ai-grading/README.md','services/progress/README.md','services/notifications/README.md',
