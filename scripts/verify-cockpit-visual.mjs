@@ -23,7 +23,8 @@ try{
  ]){
   const context=await browser.newContext({viewport:{width,height},isMobile:mobile,hasTouch:mobile,serviceWorkers:'block',reducedMotion:'reduce'});
   const page=await context.newPage();
-  const response=await page.goto(BASE+'/mentor-next.html',{waitUntil:'domcontentloaded',timeout:30000});
+  // Scenario 4 (open pneumothorax) is a road scene, where the CC0 asphalt is used.
+  const response=await page.goto(BASE+'/mentor-next.html?case=eoppep-practical-4',{waitUntil:'domcontentloaded',timeout:30000});
   if(!response?.ok())throw Error(device+': HTTP '+response?.status());
   await page.locator('#next-canvas').waitFor({state:'visible',timeout:20000});
   await page.waitForFunction(()=>['ready','fallback'].includes(document.querySelector('#next-canvas')?.dataset.humanModel),null,{timeout:25000});
