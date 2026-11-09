@@ -12,7 +12,7 @@ const targets=[
  {page:'index.html',expected:'Εκπαιδευτικός βοηθός · Εξηγήσεις και μελέτη'},
  {page:'protocols.html',expected:'Πρακτική πρωτοκόλλων'},
  {page:'ui-tools/anatomy-3d/index.html',expected:'ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D'},
- {page:'mentor-live.html',expected:'ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ'},
+ {page:'mentor-ecg.html',expected:'ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ ΗΚΓ'},
  {page:'mentor-lab.html',expected:'Εργαστήριο ΗΚΓ'},
  {page:'theory.html',expected:'Εκπαιδευτικές υπενθυμίσεις SOS'},
  {page:'ui-tools/anatomy-full-atlas.html',expected:'Τρισδιάστατη ανατομία'},

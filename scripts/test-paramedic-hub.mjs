@@ -15,10 +15,11 @@ test('Paramedic is the parent of SAEK and EOPPEP, not a third copy of them',()=>
  // The Paramedic hub adds a shared learning entry without copying or resetting grades.
  for(const href of ['saek.html','eoppep.html'])assert.equal((tiles.match(new RegExp('href="'+href.replace('.','\\.')+'"','g'))||[]).length,1,'Preserve one existing direct home link: '+href);
  const hub=read('paramedic.html');
- for(const href of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','practical_exam.html','seminar-prep.html','mentor-next.html','farmaka.html','protocols.html']){
+ for(const href of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','practical_exam.html','seminar-prep.html','farmaka.html','protocols.html']){
    assert.ok(hub.includes('href="'+href+'"'),'Hub missing destination: '+href);
    assert.ok(existsSync(resolve(root,href)),'Missing existing destination: '+href);
  }
+ assert.doesNotMatch(hub,/href="mentor-(?:next|live|scenarios)\.html"/,'No retired simulator link');
  assert.match(hub,/<section id="skills"/);
  assert.match(hub,/data-atla-open/);
  assert.match(hub,/atla\/assistant\.mjs/);

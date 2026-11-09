@@ -11,9 +11,9 @@ const expectations=[
  {file:'index.html',good:['Εκπαιδευτικός βοηθός · Εξηγήσεις και μελέτη','Μαθήματα και εργαλεία Διασώστη'],bad:['>3D LIVE<','PROTOCOL LAB','DEBRIEF']},
  {file:'protocols.html',good:['Πρακτική πρωτοκόλλων','Ανασκόπηση προσπάθειας','Κέντρο Διασώστη'],bad:['PROTOCOL LAB','DEBRIEF','MENTOR']},
  {file:'ui-tools/anatomy-3d/index.html',good:['ΑΝΑΤΟΜΙΑ <span>ΕΡΓΑΣΤΗΡΙΟ 3D</span>','ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D','Εργαστήριο 3D Ανατομίας'],bad:['>3D LAB<','Zoom με']},
- {file:'mentor-live.html',good:['ΚΛΙΝΙΚΟΣ ΠΡΟΣΟΜΟΙΩΤΗΣ','ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΝΑΣΚΟΠΗΣΗ'],bad:['SIMULATION COCKPIT','CLINICAL COCKPIT','DEBRIEF']},
- {file:'mentor-next.html',good:['ΠΡΟΣΟΜΟΙΩΤΗΣ','Εκπαιδευτική προσομοίωση περιστατικού','ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ'],bad:['SIMULATOR','CASE LIBRARY','PREHOSPITAL','MULTIPARAMETER','MONITORING HISTORY']},
- {file:'mentor-lab.html',good:['Εργαστήριο ΗΚΓ','ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ','ΑΝΑΣΚΟΠΗΣΗ'],bad:['>PROTOCOL LAB<','ECG Lab','>MENTOR']},
+ {file:'mentor-live.html',good:['Η ενότητα προσομοιώσεων καταργήθηκε','mentor-ecg.html'],bad:['src="mentor-live.js"','CLINICAL COCKPIT']},
+ {file:'mentor-next.html',good:['Η ενότητα προσομοιώσεων καταργήθηκε','mentor-ecg.html'],bad:['src="tools/patient-simulator/app/next-sim.mjs"','CASE LIBRARY']},
+ {file:'mentor-lab.html',good:['Ηλεκτροκαρδιογράφημα','προσωπικό πλάνο ATLA'],bad:['mentor-next.html','mentor-live.html','mentor-scenarios.html']},
  {file:'theory.html',good:['Εκπαιδευτικές υπενθυμίσεις SOS'],bad:['AI Hint SOS']},
  {file:'ui-tools/anatomy-full-atlas.html',good:['← Τρισδιάστατη ανατομία'],bad:['← Anatomy Lab']},
  {file:'ui-tools/atla-resource-preview.html',good:['>Κίνηση<'],bad:['>Animation<']},
@@ -34,7 +34,7 @@ test('public learning routes and controls are preserved',()=>{
   assert.ok(home.includes(route),'homepage must preserve '+route);
  }
  const mentor=readFileSync('mentor-lab.html','utf8');
- for(const route of ['mentor-ecg.html','mentor-next.html','mentor-protocol-suite.html']){
+ for(const route of ['mentor-ecg.html','eoppep.html','saek.html']){
   assert.ok(mentor.includes(route),'mentor must preserve '+route);
  }
  const theory=readFileSync('theory.html','utf8');
@@ -69,5 +69,5 @@ test('μία δημόσια διαδρομή ανά εργαλείο και κο
  assert.ok(detailed.includes('href="anatomy-3d/index.html"'),'detailed atlas returns to public viewer');
  assert.ok(library.includes("export const LIBRARY_PATH='tools/atla-ai/resources/model-library.json'"),'one 3D model registry');
  assert.equal((hub.match(/data-atla-open/g)||[]).length,1,'one assistant action in hub');
- assert.ok(hub.includes('href="mentor-next.html"'),'hub uses canonical patient simulator');
+ assert.ok(!hub.includes('href="mentor-next.html"'),'retired patient simulator must not be accessible from hub');
 });

@@ -7,7 +7,7 @@ const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 const rootPages=[
  'index.html','paramedic.html','saek.html','eoppep.html','theory.html','practical_exam.html',
  'saek-exams.html','farmaka.html','seminar-prep.html','protocols.html',
- 'search.html','profession-law.html','mentor-ecg.html','mentor-next.html',
+ 'search.html','profession-law.html','mentor-ecg.html',
  ...Array.from({length:20},(_,i)=>'saek-course-'+String(i+1).padStart(2,'0')+'.html')
 ];
 test('fake AI replies are never the default for learners',()=>{
@@ -55,12 +55,13 @@ test('ATLA reuses one existing AI path, retains no-write behavior and exam guard
 });
 
 
-test('legacy simulation and learning recommendation render ATLA-only branding',()=>{
- const cockpit=read('mentor-live.html');
+test('retired simulations preserve ATLA learning guidance without exposing patient cockpit',()=>{
+ const legacy=read('mentor-live.html');
  const recommendation=read('learning-surface.mjs');
- assert.doesNotMatch(cockpit,/>MENTOR DEBRIEF\b/i,'Clinical Cockpit must not display the retired assistant');
- assert.match(cockpit,/ATLA · εκπαιδευτική ανασκόπηση αποστολής/);
- assert.doesNotMatch(recommendation,/στον MENTOR AI/i,'Study guidance must not display the retired assistant');
+ assert.match(legacy,/http-equiv="refresh"/);
+ assert.match(legacy,/mentor-ecg\.html/);
+ assert.doesNotMatch(legacy,/src="mentor-live\.js"/);
+ assert.doesNotMatch(recommendation,/στον MENTOR AI/i);
  assert.match(recommendation,/δεν αποστέλλει στοιχεία στον ATLA/);
 });
 
@@ -78,12 +79,11 @@ test('ATLA-only visible entrypoints and in-place protocol tutor keep legacy stat
  assert.doesNotMatch(protocol,/>MENTOR(?:\s|<)/);
  assert.match(cards,/appendAtlaStudyButton\(actions,t\.name\)/,'Study buttons should provide topic context');
  assert.doesNotMatch(cards,/Μελέτη με MENTOR/);
- assert.match(suite,/src="atla\/assistant\.mjs"/,'The legacy URL should show the unified ATLA tutor');
- assert.match(suite,/data-atla-open/);
- assert.doesNotMatch(suite,/src="mentor-presence\.html"/,'No duplicate 3D tutor in the protocol lab');
- assert.doesNotMatch(suite,/>MENTOR(?:\s|<)/);
+ assert.match(suite,/http-equiv="refresh"/,'Retired protocol lab must not run a second tutor');
+ assert.match(suite,/protocols\.html/);
+ assert.doesNotMatch(suite,/src="mentor-protocol-suite\.mjs"/);
  assert.match(runtime,/dataset\.atlaOpen='true'/);
- assert.match(read('mentor-live.html'),/ATLA · εκπαιδευτική ανασκόπηση αποστολής/);
+ assert.match(read('mentor-live.html'),/http-equiv="refresh"/);
  assert.doesNotMatch(read('mentor-live.html'),/MENTOR DEBRIEF/);
  // Data compatibility must remain stable until a separately proven migration.
  assert.match(runtime,/ekab:mentor:protocol-foundation:v2/);

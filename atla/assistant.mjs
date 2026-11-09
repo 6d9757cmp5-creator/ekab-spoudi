@@ -142,10 +142,6 @@ function boot(){
   addAddonCss('./practice/saek-practice.css');
   void import('./practice/saek-practice.mjs').catch(()=>{});
  }
- if(currentPage==='mentor-next.html'){
-  addAddonCss('./practice/cockpit-entry.css');
-  void import('./practice/cockpit-entry.mjs').catch(()=>{});
- }
  const history=()=>{try{return loadTurns(storage);}catch{return [];}};
  function showHistory(){
   stream.replaceChildren();
@@ -221,7 +217,7 @@ function boot(){
   if(studyInsight){add('mentor',studyInsight,'local');return;}
   const teachingModel=await chooseTeachingModel({question:q,from:location.pathname+location.search+location.hash,
    needsSupport:teachingLevelFor(learnerProfile(),q)==='beginner',
-   mode:/(?:^|\/)mentor-next\.html$/.test(location.pathname)?'simulation':'lesson'});
+   mode:'lesson'});
   if(myId!==requestId)return;
   // A request to see a model is answered by that model, not by a text search on the words "3D" or "show".
   if(teachingModel?.requestedVisual&&!demoToggle.checked){
