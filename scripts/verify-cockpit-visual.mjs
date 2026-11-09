@@ -28,6 +28,7 @@ try{
   await page.locator('#next-canvas').waitFor({state:'visible',timeout:20000});
   await page.waitForFunction(()=>['ready','fallback'].includes(document.querySelector('#next-canvas')?.dataset.humanModel),null,{timeout:25000});
   await page.waitForFunction(()=>!document.querySelector('#next-unified-overlay')?.hidden&&document.querySelector('.next-unified-canvas')?.dataset.stageStatus==='ready',null,{timeout:45000});
+  await page.waitForFunction(()=>document.querySelector('.next-unified-canvas')?.dataset.roadMaterial==='pbr-cc0',null,{timeout:30000});
   await page.locator('#next-stage').scrollIntoViewIfNeeded();
   await page.locator('#next-immersive-stage').scrollIntoViewIfNeeded();
   const state=await page.evaluate(()=>{
@@ -40,6 +41,7 @@ try{
     theme:getComputedStyle(root).getPropertyValue('--cockpit-accent').trim(),
     stage,scene,monitor,playSize:{width:sizes?.width,height:sizes?.height},
     patientSource:document.querySelector('.next-unified-canvas')?.dataset.stageStatus,
+    roadMaterial:document.querySelector('.next-unified-canvas')?.dataset.roadMaterial,
     unifiedVisible:!$('#next-unified-overlay')?.hidden,
     videoCount:document.querySelectorAll('video').length,
     sentinel:!!$('#next-vitals')||!!$('.next-vitals'),
@@ -48,6 +50,7 @@ try{
   });
   if(state.theme!=='#76e3d4')throw Error(device+': cockpit design theme missing: '+state.theme);
   if(state.patientSource!=='ready'||!state.unifiedVisible)throw Error(device+': unified two-patient renderer missing during real screenshots');
+  if(state.roadMaterial!=='pbr-cc0')throw Error(device+': real photo-derived CC0 asphalt maps did not load');
   if(state.scrollWidth>state.clientWidth+2)throw Error(device+': horizontal page overflow '+JSON.stringify(state));
   if(!state.stage||!state.scene||!state.monitor||!state.sentinel||!state.warningVisible)throw Error(device+': missing UI section');
   if((state.playSize.height||0)<44)throw Error(device+': touch control below 44 CSS px');
@@ -57,8 +60,21 @@ try{
   await page.screenshot({path:file,animations:'disabled',fullPage:false});
   const stageFile='audit-results/cockpit-stage-'+device+'.png';
   await page.locator('#next-immersive-stage').screenshot({path:stageFile,animations:'disabled'});
-  results.push({device,viewport:[width,height],assetStatus:state.patientSource,horizontalOverflow:state.scrollWidth-state.clientWidth,screenshot:file,stageScreenshot:stageFile});
+  results.push({device,viewport:[width,height],assetStatus:state.patientSource,roadMaterial:state.roadMaterial,horizontalOverflow:state.scrollWidth-state.clientWidth,screenshot:file,stageScreenshot:stageFile});
   console.log('PASS '+device+': visual cockpit layout, responsive hierarchy, local 3D status '+state.patientSource+', screenshot '+file);
+  if(device==='mobile'){
+   // Proven fallback: deny every licensed material path and still render two GLB patients.
+   const noMaps=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'});
+   await noMaps.route('**/tools/patient-simulator/assets/materials/**',route=>route.abort());
+   const pageFallback=await noMaps.newPage();
+   await pageFallback.goto(BASE+'/mentor-next.html',{waitUntil:'domcontentloaded',timeout:30000});
+   await pageFallback.waitForFunction(()=>{
+    const canvas=document.querySelector('.next-unified-canvas');
+    return canvas?.dataset.stageStatus==='ready'&&canvas?.dataset.roadMaterial==='fallback';
+   },null,{timeout:60000});
+   console.log('PASS mobile: blocked PBR assets fall back to original procedural road while 3D patients remain ready');
+   await noMaps.close();
+  }
   await context.close();
  }
  writeFileSync('audit-results/cockpit-visual-report.json',JSON.stringify({schema:1,mode:'visual-technical-baseline',clinicalValidation:false,bodyInteractParity:false,results},null,2)+'\n');
