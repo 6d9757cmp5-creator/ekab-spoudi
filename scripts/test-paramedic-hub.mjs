@@ -42,5 +42,8 @@ test('Existing learning pages link back to Paramedic without changes to stored p
 });
 
 test('Do not inject unrelated simulator missions into every SAEK chapter',()=>{
- assert.doesNotMatch(read('atla/assistant.mjs'),/saek-practice/);
+ const practice=read('atla/practice/saek-practice.mjs');
+ assert.doesNotMatch(practice,/cockpit\.href\s*=|controls\.append\(compare,cockpit|mentor-next/);
+ assert.match(practice,/No automatic simulator link/);
+ assert.match(practice,/lesson-sos/);
 });

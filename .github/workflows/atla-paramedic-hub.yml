@@ -28,4 +28,5 @@ jobs:
       - run: node --check atla/ai/safe-stream.mjs
       - run: node --check atla/ai/client.mjs
       - run: node --check workers/mentor-chat/src/index.js
+      - run: node --check atla/practice/saek-practice.mjs
       - run: node --test scripts/test-paramedic-hub.mjs atla/contextual-practice.test.mjs atla/ai/teaching-policy.test.mjs atla/ai/safe-stream.test.mjs atla/student/profile.test.mjs atla/practice/tool-selector.test.mjs mentor/ai/client.test.mjs workers/mentor-chat/*.test.mjs

@@ -138,6 +138,10 @@ function boot(){
  document.body.append(panel,launcher);
  const currentPage=location.pathname.split('/').pop()||'';
  const addAddonCss=path=>{const node=$('link');node.rel='stylesheet';node.href=new URL(path,import.meta.url).href;document.head.append(node);};
+ if(/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(currentPage)){
+  addAddonCss('./practice/saek-practice.css');
+  void import('./practice/saek-practice.mjs').catch(()=>{});
+ }
  const history=()=>{try{return loadTurns(storage);}catch{return [];}};
  function showHistory(){
   stream.replaceChildren();
