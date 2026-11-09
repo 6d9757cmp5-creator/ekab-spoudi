@@ -1,0 +1,62 @@
+name: ATLA Central 3D Library contract
+on:
+  pull_request:
+    paths:
+      - 'tools/atla-ai/central-3d-library.mjs'
+      - 'tools/atla-ai/model-preview-catalog.mjs'
+      - 'tools/atla-ai/model-preview.mjs'
+      - 'scripts/test-unified-anatomy-browser.mjs'
+      - 'tools/anatomy-3d/inline-atlas.js'
+      - 'tools/anatomy-3d/unified-workspace.mjs'
+      - 'tools/anatomy-3d/unified-workspace.css'
+      - 'tools/anatomy-3d/unified-workspace.test.mjs'
+      - 'tools/anatomy-3d/index.html'
+      - 'ui-tools/anatomy-3d/index.html'
+      - 'tools/anatomy-3d/hires-anatomy.js'
+      - 'ui-tools/atla-resource-preview.html'
+      - 'scripts/test-atla-central-3d-library.mjs'
+      - 'scripts/test-atla-central-3d-integration.mjs'
+      - '.github/workflows/atla-central-3d-library.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/atla-ai/central-3d-library.mjs'
+      - 'tools/atla-ai/model-preview-catalog.mjs'
+      - 'tools/atla-ai/model-preview.mjs'
+      - 'scripts/test-unified-anatomy-browser.mjs'
+      - 'tools/anatomy-3d/inline-atlas.js'
+      - 'tools/anatomy-3d/unified-workspace.mjs'
+      - 'tools/anatomy-3d/unified-workspace.css'
+      - 'tools/anatomy-3d/unified-workspace.test.mjs'
+      - 'tools/anatomy-3d/index.html'
+      - 'ui-tools/anatomy-3d/index.html'
+      - 'tools/anatomy-3d/hires-anatomy.js'
+      - 'ui-tools/atla-resource-preview.html'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check tools/atla-ai/central-3d-library.mjs
+          node --check tools/atla-ai/model-preview-catalog.mjs
+          node --check tools/atla-ai/model-preview.mjs
+          node --check scripts/test-unified-anatomy-browser.mjs
+          node --check tools/anatomy-3d/inline-atlas.js
+          node --check tools/anatomy-3d/unified-workspace.mjs
+          node --check tools/anatomy-3d/hires-anatomy.js
+      - name: Real manifest quality, composition safety and adaptive policy
+        run: node --test scripts/test-atla-central-3d-library.mjs scripts/test-atla-central-3d-integration.mjs tools/anatomy-3d/unified-workspace.test.mjs
+      - name: Install Chromium for real unified anatomy smoke
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Real browser 390 / 1440 + BodyParts3D 4.0 and 4.3 WebGL2 loads
+        run: ATLA_REAL_ATLAS=1 ATLA_REAL_ATLAS_43=1 node scripts/test-unified-anatomy-browser.mjs

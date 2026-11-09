@@ -10,6 +10,10 @@
 <link rel="stylesheet" href="../../tools/anatomy-3d/anatomy.css?v=greek-quiz-20261029">
 <link rel="stylesheet" href="../../tools/anatomy-3d/anatomy-responsive.css?v=responsive-20261029-1">
 <script type="module" src="../../tools/anatomy-3d/hires-anatomy.js?v=focus-groups-20261101-2"></script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+<link rel="stylesheet" href="../../tools/anatomy-3d/unified-workspace.css?v=1">
+<script type="module" src="../../tools/anatomy-3d/unified-workspace.mjs?v=1"></script>
 <link rel="stylesheet" href="../../navigation.css?v=4"><script src="../../navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script></head>
 <body>
 <a href="#main" class="skip">Μετάβαση στο περιεχόμενο</a>
@@ -17,12 +21,16 @@
   <header class="topbar">
     <a data-ekab-back-spot="replace" href="../../index.html" class="back" aria-label="Επιστροφή στην ΕΚΑΒ Σπουδή"><span aria-hidden="true">←</span> ΕΚΑΒ Σπουδή</a>
     <div class="brand"><span class="brand-mark" aria-hidden="true">✚</span><div><strong>ΑΝΑΤΟΜΙΑ <span>ΕΡΓΑΣΤΗΡΙΟ 3D</span></strong><small>Εργαστήριο Διαδραστικής Ανατομίας</small></div></div>
-    <a class="top-link" href="../3d-library.html">Βιβλιοθήκη 3D μοντέλων</a>
-    <a class="top-link" href="../anatomy-full-atlas.html">Λεπτομερής ανατομικός άτλας (BodyParts3D)</a>
-    <a class="top-link" href="../atla-resource-preview.html?tool=anatomy">Προεπισκόπηση πρόσθετων 3D μοντέλων</a>
-    <a class="top-link" href="../../anatomia.html">Βιβλίο Ανατομίας <span aria-hidden="true">↗</span></a>
+    
+    
+    
   </header>
   <main id="main">
+    <div class="one-anatomy-tabs" role="tablist" aria-label="Ενιαίος χώρος ανατομίας">
+      <button type="button" id="unified-basic" role="tab" aria-controls="base-anatomy" aria-selected="true">Ανθρώπινο σώμα · Σκελετός / Όργανα</button>
+      <button type="button" id="unified-catalog" role="tab" aria-controls="models" aria-selected="false">Εξειδικευμένα 3D · Όλη η βιβλιοθήκη</button>
+    </div>
+    <div id="base-anatomy" role="tabpanel" aria-labelledby="unified-basic">
     <section class="intro">
       <div class="intro-copy"><div class="eyebrow"><span class="pulse"></span> ΕΡΓΑΣΤΗΡΙΟ ΑΝΑΤΟΜΙΑΣ · ΕΚΑΒ ΣΠΟΥΔΗ</div><h1>Γνώρισε το <em>ανθρώπινο σώμα</em> από κάθε γωνία.</h1><p>Περιστροφή 360°, σκελετός και εσωτερικά όργανα, με εναλλαγή ανδρικού / γυναικείου μοντέλου και ελληνικές ανατομικές ονομασίες.</p></div>
       <div class="intro-stat"><strong>3D</strong><span>Ζωντανή αλληλεπίδραση</span></div>
@@ -33,9 +41,9 @@
         <div class="controls-top">
           <fieldset class="mode-switch" aria-label="Επιλογή ανατομικής απεικόνισης">
             <legend>Προβολή</legend>
-            <button type="button" data-mode="skeleton" class="active" aria-pressed="true">🦴 Σκελετός</button>
+            <button type="button" data-mode="skeleton" aria-pressed="false">🦴 Σκελετός</button>
             <button type="button" data-mode="organs" aria-pressed="false">🫀 Όργανα</button>
-            <button type="button" data-mode="both" aria-pressed="false">◈ Συνδυασμός</button>
+            <button type="button" data-mode="both" class="active" aria-pressed="true">◈ Συνδυασμός</button>
           </fieldset>
           <fieldset class="sex-switch" aria-label="Επιλογή ανατομικού μοντέλου">
             <legend>Μοντέλο</legend>
@@ -49,7 +57,7 @@
             <div id="loading" class="loading" role="status"><span class="spinner" aria-hidden="true"></span><strong>Φόρτωση 3D μοντέλου…</strong><small>Προετοιμασία ανατομικών στοιχείων</small></div>
             <div id="errorBox" class="error-box" role="alert" hidden><strong>Η υψηλής λεπτομέρειας 3D ανατομία δεν φορτώθηκε.</strong><p>Απαιτείται WebGL και σύνδεση για τα ανατομικά αρχεία. Δεν προβάλλεται σχηματικό υποκατάστατο ως ακριβής ανατομία.</p><button type="button" id="retryBtn">Νέα προσπάθεια</button></div>
             <button type="button" id="quizBackToAnswers" class="quiz-back-to-answers" hidden>↓ Επιστροφή στις 4 απαντήσεις</button>
-            <div class="viewport-head"><span id="modelTag">ΑΝΔΡΙΚΟ ΜΟΝΤΕΛΟ · ΣΚΕΛΕΤΟΣ</span><span class="live-dot" aria-label="Τρισδιάστατη διαδραστική προβολή">ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D</span></div>
+            <div class="viewport-head"><span id="modelTag">ΑΝΔΡΙΚΟ ΜΟΝΤΕΛΟ · ΣΥΝΔΥΑΣΜΟΣ</span><span class="live-dot" aria-label="Τρισδιάστατη διαδραστική προβολή">ΖΩΝΤΑΝΗ ΠΡΟΒΟΛΗ 3D</span></div>
             <div class="view-guide" aria-hidden="true"><span class="guide-line"></span><span>ΠΡΟΣΘΙΑ ΟΨΗ</span></div>
             <div id="viewHint" class="view-hint">↻ Περιστροφή με σύρσιμο · Μεγέθυνση με δύο δάχτυλα · Μεγάλα 3D αρχεία</div>
             <div class="camera-tools" role="group" aria-label="Έλεγχοι κάμερας">
@@ -108,6 +116,123 @@
       </aside>
     </div>
     <section class="reference"><div><span class="eyebrow">ΕΠΙΣΤΗΜΟΝΙΚΗ ΤΕΚΜΗΡΙΩΣΗ</span><h2>Μάθε την ανατομία με ασφάλεια</h2><p>Ενδεικτικές διαφορές στη λεκάνη και στο αναπαραγωγικό σύστημα. Οι διαφορές φύλου είναι πληθυσμιακές τάσεις, όχι απόλυτοι κανόνες για κάθε άνθρωπο.</p></div><div class="reference-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK545204/" target="_blank" rel="noopener noreferrer">NCBI · Οστέινη λεκάνη ↗</a><a href="https://my.clevelandclinic.org/health/body/pelvis" target="_blank" rel="noopener noreferrer">Cleveland Clinic · Πύελος ↗</a><a href="../../anatomia.html">Ύλη ΣΑΕΚ · Ανατομία ↗</a></div></section>
+    </div>
+
+    <section id="models" class="unified-library" role="tabpanel" aria-labelledby="unified-catalog" hidden>
+      <header class="unified-library-heading">
+        <h2>Εξειδικευμένα ιατρικά 3D μοντέλα</h2>
+        <a id="source-back" href="../../index.html" hidden>← Επιστροφή στο μάθημα</a>
+        <p>Ένα ενιαίο μητρώο για ανατομία, μεμονωμένα μέρη, κακώσεις, κύτταρα και ερευνητικά μοντέλα. Αναζήτησε και άνοιξε το μοντέλο εδώ, χωρίς μετάβαση σε άλλη σελίδα. Κάθε αρχείο φορτώνεται μόνο όταν το επιλέξεις.</p>
+      </header>
+      <p id="unified-library-message" role="status">Προετοιμασία κοινής βιβλιοθήκης…</p>
+      <div hidden aria-hidden="true">
+        <h3 id="source-name"></h3>
+        <p id="library-audit"></p><p id="quality-status"></p>
+        <select id="composition-sex"><option value="male">Ανδρικό</option><option value="female">Γυναικείο</option></select>
+        <ul id="composition-parts"></ul><p id="composition-status"></p>
+      </div>
+      <div class="source-layout">
+        <aside class="source-panel" aria-label="Εξειδικευμένη αναζήτηση">
+          <label for="study-filter">Τι θέλεις να εξερευνήσεις;</label>
+          <select id="study-filter" aria-label="Κατηγορία εξειδικευμένων μοντέλων">
+            <option value="anatomy" selected>Ανατομία · ξεκίνα από εδώ</option>
+            <option value="pathology">Παθολογικά παραδείγματα</option>
+            <option value="research">Ερευνητικά και βοηθητικά αρχεία</option>
+            <option value="all">Όλος ο κατάλογος · όλα τα μοντέλα</option>
+          </select>
+          <p class="source-filter-help">Κατηγορίες από τα στοιχεία των αρχικών πηγών. Κανένα αρχείο δεν αποκρύπτεται οριστικά.</p>
+          <label for="source-query">Αναζήτηση μοντέλου ή ανατομικής δομής</label>
+          <input type="search" id="source-query" placeholder="π.χ. μηριαίο, καρδιά, κάταγμα, νευρώνας…" autocomplete="off">
+          <label for="source-dataset" hidden>Ενιαίος κατάλογος συλλογών</label>
+          <select id="source-dataset" hidden aria-label="Ενιαίος κατάλογος συλλογών">
+            <option value="all" selected>Όλα τα διαθέσιμα και καταχωρισμένα</option>
+            <option value="primary">Ανατομικά HRA / HuBMAP</option>
+            <option value="nih">Μοντέλα NIH 3D</option>
+            <option value="secondary">Ερευνητικά ανατομικά</option>
+          </select>
+          <p id="source-count" role="status">Ανάκτηση κοινής βιβλιοθήκης…</p>
+          <label for="source-model">Επιλογή συγκεκριμένου μοντέλου</label>
+          <select id="source-model" aria-label="Μοντέλο από την κοινή βιβλιοθήκη"></select>
+          <button type="button" id="source-load" disabled>Προβολή 3D εδώ</button>
+          <p id="source-status" role="status" aria-live="polite">Επιλέξτε μοντέλο.</p>
+          <div id="source-education-summary" class="source-study-card" role="note" aria-live="polite"></div>
+          <p class="source-note" id="source-license"></p>
+          <div id="source-details" hidden></div>
+
+          <div class="atlas-entry" aria-label="Πλήρεις άτλαντες στον ίδιο προβολέα">
+            <h3>Πλήρεις ανατομικοί άτλαντες</h3>
+            <label for="atlas-version">Έκδοση BodyParts3D</label>
+            <select id="atlas-version">
+              <option value="bp3d40">4.0 · 1.259 πλέγματα · ~68 MiB</option>
+              <option value="bp3d43">4.3 · 3.210 πλέγματα · ~193 MiB</option>
+            </select>
+            <button id="atlas-load" type="button">Άνοιγμα άτλαντα εδώ</button>
+            <p id="atlas-status" class="source-note" role="status" aria-live="polite">Οι άτλαντες παραμένουν αποθηκευμένοι στην εφαρμογή. Η λήψη γίνεται μόνο με επιλογή.</p>
+          </div>
+          <details>
+            <summary>Εργαλεία εξερεύνησης του μοντέλου</summary>
+            <label for="source-part">Μέρος μοντέλου</label>
+            <select id="source-part" disabled><option>Φόρτωσε μοντέλο</option></select>
+            <div class="source-tools">
+              <button id="part-isolate" type="button" disabled>Απομόνωση</button>
+              <button id="part-show" type="button" disabled>Προβολή όλων</button>
+            </div>
+            <label for="source-clip">Διαθέσιμη κίνηση</label>
+            <select id="source-clip" disabled><option>Καμία κίνηση</option></select>
+            <div class="source-tools">
+              <button id="clip-play" type="button" disabled>Εκκίνηση</button>
+              <button id="clip-pause" type="button" disabled>Παύση</button>
+            </div>
+            <label for="source-opacity">Διαφάνεια <output id="opacity-value">100%</output></label>
+            <input id="source-opacity" type="range" min="15" max="100" step="5" value="100" disabled>
+            <div class="source-tools">
+              <button id="view-reset" type="button" disabled>Κέντρο</button>
+              <button id="view-front" type="button" disabled>Εμπρός</button>
+              <button id="view-side" type="button" disabled>Πλάι</button>
+            </div>
+            <p id="source-mesh-info" role="status"></p>
+          </details>
+        </aside>
+        <section class="source-panel" aria-label="Ενιαία ενσωματωμένη προβολή 3D">
+          <div id="source-stage">
+          <p id="source-preview-caption" class="source-preview-caption" role="status">Εδώ εμφανίζεται το μοντέλο που θα επιλέξεις.</p>
+          <canvas id="source-canvas" tabindex="0" aria-label="3D μοντέλο, περιστροφή και επιλογή με κλικ"></canvas>
+          <div class="source-preview-controls" role="group" aria-label="Κοντινή και μακρινή όψη 3D">
+            <button id="source-zoom-in" type="button">+ Μεγέθυνση</button>
+            <button id="source-zoom-out" type="button">− Σμίκρυνση</button>
+            <button id="source-camera-reset" type="button">Επαναφορά όψης</button>
+          </div>
+          <p id="source-quality-note" class="source-quality-note" role="status"></p>
+          <p class="source-note">Σύρσιμο για περιστροφή, ροδέλα ή δύο δάχτυλα για μεγέθυνση. Η εφαρμογή χρησιμοποιεί τον δικό της προβολέα και τα μοντέλα του υπάρχοντος εσωτερικού αρχείου.</p>
+
+          </div>
+          <div id="atlas-stage" hidden>
+            <div class="atlas-toolbar">
+              <label for="atlas-layer">Προβολή</label>
+              <select id="atlas-layer">
+                <option value="both">Σκελετός και όργανα</option>
+                <option value="skeleton">Μόνο σκελετός</option>
+                <option value="organs">Μόνο όργανα και συστήματα</option>
+              </select>
+              <div class="source-tools">
+                <button id="atlas-front" type="button">Εμπρός</button>
+                <button id="atlas-side" type="button">Πλάι</button>
+                <button id="atlas-center" type="button">Κέντρο</button>
+              </div>
+            </div>
+            <canvas id="atlas-canvas" tabindex="0" aria-label="Ενσωματωμένος πλήρης άτλας BodyParts3D"></canvas>
+            <p id="atlas-selected" class="source-note" role="status"></p>
+            <label for="atlas-search">Εύρεση μεμονωμένης ανατομικής δομής</label>
+            <input id="atlas-search" type="search" autocomplete="off" placeholder="π.χ. μηριαίο οστό, femur, heart…">
+            <div id="atlas-results" class="atlas-results" aria-label="Αποτελέσματα άτλαντα"></div>
+            <button id="atlas-unload" type="button" disabled>Αποφόρτωση άτλαντα</button>
+            <p class="source-note">BodyParts3D © DBCLS, CC BY 4.0. Χρήση προσαρμοσμένου τοπικού WebGL2 μηχανισμού (βάση Open Anatomy Atlas, MIT). Εκπαιδευτικό υλικό, χωρίς κλινική πιστοποίηση.</p>
+          </div>
+          <p id="source-warning" class="source-note" role="note">Εκπαιδευτική εξερεύνηση, όχι διαγνωστικό ή κλινικά επικυρωμένο εργαλείο.</p>
+        </section>
+      </div>
+    </section>
+
   </main>
   <footer class="page-footer"><span>ΕΚΑΒ Σπουδή · Εργαστήριο 3D Ανατομίας</span><span>BodyParts3D © DBCLS · HuBMAP © Browne / Schlehlein · προσαρμογές slorksmo / Mahendra Beniwal · CC BY 4.0 · Εκκρεμεί επιστημονική επιθεώρηση</span></footer>
 </div>

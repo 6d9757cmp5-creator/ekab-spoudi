@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a1c2d">
-<title>Προεπισκόπηση πρόσθετων 3D μοντέλων | ΕΚΑΒ Σπουδή</title>
+<title>Κεντρική Βιβλιοθήκη Τρισδιάστατων Μοντέλων | ATLA</title>
 <script type="importmap">
 {"imports":{
 "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
@@ -23,8 +23,15 @@ nav{display:flex;gap:20px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px s
 .card{background:#11293c;border:1px solid #2d516e;border-radius:16px;padding:18px}
 .layout{display:grid;grid-template-columns:minmax(230px,300px) 1fr;gap:16px;margin:20px 0}
 label{display:block;font-weight:700;margin-bottom:8px}
-select,button{width:100%;padding:12px;border-radius:9px;font:inherit}input[type=range]{width:100%} .toolrow{display:flex;gap:7px;flex-wrap:wrap}.toolrow button{width:auto;flex:1;min-width:82px;background:#2f6677;color:#f0fcff;padding:9px;margin-top:5px}.toolrow button:disabled{opacity:.45}.meta{font-size:.85rem;overflow-wrap:anywhere} .selector{margin-top:12px}.eyebrow{font-size:.83rem;color:#acd6df}canvas:focus-visible{outline:2px solid #b7eef6}
-select{background:#0c1b2b;color:#fff;border:1px solid #5b839e}
+select,button,input[type=search]{width:100%;padding:12px;border-radius:9px;font:inherit}input[type=range]{width:100%} .toolrow{display:flex;gap:7px;flex-wrap:wrap}.toolrow button{width:auto;flex:1;min-width:82px;background:#2f6677;color:#f0fcff;padding:9px;margin-top:5px}.toolrow button:disabled{opacity:.45}.meta{font-size:.85rem;overflow-wrap:anywhere} .selector{margin-top:12px}.eyebrow{font-size:.83rem;color:#acd6df}canvas:focus-visible{outline:2px solid #b7eef6}
+select,input[type=search]{background:#0c1b2b;color:#fff;border:1px solid #5b839e}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.info-grid h2{margin-top:0;font-size:1.1rem}
+#composition-status[data-ready=false]{color:#ffdbb0}
+#composition-parts{padding-left:24px}
+.info{font-weight:550;color:#b9edcd}
+@media(max-width:700px){.info-grid{grid-template-columns:1fr}}
+
 button{background:#53c3aa;color:#081c24;font-weight:750;border:0;cursor:pointer;margin-top:12px}
 button:disabled{opacity:.5;cursor:wait}
 canvas{display:block;width:100%;height:min(64vh,570px);min-height:360px;touch-action:none;border-radius:12px;background:#0a1c2d}
@@ -37,20 +44,39 @@ small{color:#b0c7d7}
 <link rel="stylesheet" href="../navigation.css?v=4"><script src="../navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script></head>
 <body>
 <main>
-<nav><a data-ekab-back-spot id="source-back" href="../tools/anatomy-3d/index.html">← Επιστροφή</a><a href="3d-library.html">Βιβλιοθήκη 3D μοντέλων</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></nav>
-<h1 id="source-name">Προεπισκόπηση πρόσθετων 3D μοντέλων</h1>
-<p>Διαδραστική εξερεύνηση πηγαίων μοντέλων: επιλογή δομής, απομόνωση, διαφάνεια, ανατομικός προσανατολισμός και διαθέσιμες κινήσεις. Κάθε αρχείο φορτώνεται μόνο μετά από επιλογή.</p>
+<nav><a data-ekab-back-spot id="source-back" href="../tools/anatomy-3d/index.html">← Επιστροφή</a><a href="anatomy-full-atlas.html">Άτλαντες BodyParts3D</a><a href="../index.html">ΕΚΑΒ Σπουδή</a></nav>
+<h1 id="source-name">Κεντρική Βιβλιοθήκη Τρισδιάστατων Μοντέλων</h1>
+<p>Μία βιβλιοθήκη για όλες τις πηγές 3D του ATLA: αυτόματη επιθεώρηση μητρώου, αναζήτηση, ανατομική αντιστοίχιση και προβολή. Τα πραγματικά αρχεία φορτώνονται μόνο μετά από επιλογή. <a href="?dataset=all">Δες όλα τα καταχωρισμένα μοντέλα</a>.</p>
+<div class="info-grid">
+<section class="card" aria-label="Έλεγχος κοινής βιβλιοθήκης">
+<h2>Ενιαίο μητρώο και τεχνικοί έλεγχοι</h2>
+<p id="library-audit" class="info" role="status">Έλεγχος καταχωρίσεων…</p>
+<p><small>Έλεγχοι μεταδεδομένων και αποτύπωσης αρχείων, χωρίς διαγραφή πρωτοτύπων. Το SHA-256 ελέγχεται ξανά κατά τη φόρτωση κάθε 3D αρχείου.</small></p>
+<p id="quality-status" class="info" role="status">Υπολογισμός προσαρμοσμένης ποιότητας…</p>
+</section>
+<section class="card" aria-label="Έξυπνη σύνθεση ανθρώπινου σώματος">
+<h2>Έξυπνη σύνθεση ανθρώπινου σώματος</h2>
+<label for="composition-sex">Ανατομικό μοντέλο</label>
+<select id="composition-sex"><option value="male">Ανδρικό</option><option value="female">Γυναικείο</option></select>
+<ul id="composition-parts"></ul>
+<p id="composition-status" role="status">Ανάλυση διαθέσιμων ανατομικών δομών…</p>
+<small>Η σύνθεση ενεργοποιείται μόνο όταν υπάρχει τεκμηριωμένη αντιστοίχιση θέσης, κλίμακας και συντεταγμένων. Τα υποψήφια μοντέλα δεν ενώνονται αυθαίρετα.</small>
+</section>
+</div>
 <div class="layout">
 <section class="card" aria-label="Πηγαία μοντέλα">
 <h2>Επιλογή μοντέλου</h2>
 <p id="source-count" role="status">Ανάκτηση μητρώου…</p>
+<label for="source-query">Αναζήτηση μοντέλου</label>
+<input id="source-query" type="search" placeholder="π.χ. καρδιά, femur, NIH…" autocomplete="off">
 <label for="source-dataset">Συλλογή</label>
 <select id="source-dataset" aria-describedby="source-warning">
   <option value="primary">Βασική επαληθευμένη συλλογή GLB</option>
   <option value="nih">NIH 3D — πρωτότυπα από το δικό μας αρχείο</option>
   <option value="secondary">Πρόσθετα μοντέλα — περιορισμένη χρήση</option>
   <option value="rigged">MakeHuman · πραγματικός σκελετός / 2 κινήσεις</option>
-  <option value="makehuman">MakeHuman — πρωτότυπα OBJ (χωρίς σκελετό)</option>
+  <option value="makehuman">MakeHuman — πρωτότυπα OBJ (χωρίς rig)</option>
+  <option value="all">Όλα τα μοντέλα από το κοινό μητρώο (και μόνο μεταδεδομένα)</option>
 </select>
 <label for="source-model">Μοντέλο</label>
 <select id="source-model" aria-describedby="source-warning"></select>
@@ -64,7 +90,7 @@ small{color:#b0c7d7}
 </section>
 </div>
 <p id="source-warning" role="note">Οι πόροι δεν αποτελούν κλινικά επικυρωμένη προσομοίωση.</p>
-<p><small>Τα 5 μοντέλα Z-Anatomy εμφανίζονται μόνο για ερευνητική προβολή. Οι 3 στατικοί ασθενείς του Κλινικού Προσομοιωτή είναι τρισδιάστατα μοντέλα σε σταθερή στάση, χωρίς σκελετό κίνησης. Τα μοντέλα MakeHuman OBJ προβάλλονται ως γεωμετρία· τα αρχεία σκελετού, βαρών και κινήσεων που τα συνοδεύουν δεν είναι έτοιμος κινούμενος ασθενής. Οι πλήρεις άτλαντες BodyParts3D 4.0 και 4.3 ανοίγουν από τη <a href="3d-library.html">Βιβλιοθήκη 3D</a> και τον λεπτομερή ανατομικό άτλαντα.</small></p>
-<p><small>Δεν τροποποιούνται η μαθησιακή πρόοδος, οι εξετάσεις, ο κανονικός 3D άτλας ή οι κλινικές σκηνές. Το NIH 3D χρειάζεται ξεχωριστή επαλήθευση και αντιστοίχιση πριν γίνει διαθέσιμο εδώ.</small></p>
+<p><small>Τα 5 Z-Anatomy παραμένουν σε απομονωμένη ερευνητική προβολή. Οι 3 ήδη υπάρχοντες στατικοί ασθενείς του Cockpit εμφανίζονται ως 3D assets και όχι ως νέοι rigged ασθενείς. Τα MakeHuman OBJ μπορούν να προβληθούν ως γεωμετρία, αλλά τα υπόλοιπα αρχεία skeleton/weights/BVH δεν αποτελούν έτοιμο rigged patient GLB. Οι πλήρεις BodyParts3D 4.0/4.3 άτλαντες διατηρούνται στο Anatomy Lab ως ξεχωριστά δεδομένα υψηλής ανάλυσης· δεν φορτώνονται εδώ ως GLB.</small></p>
+<p><small>Δεν τροποποιούνται η μαθησιακή πρόοδος, οι εξετάσεις, ο κανονικός 3D άτλας ή οι κλινικές σκηνές. Τα διαθέσιμα NIH 3D ελέγχονται βάσει του ήδη υπάρχοντος μητρώου πηγών. Η βιβλιοθήκη δεν μετατρέπει ερευνητικό 3D σε κλινική προσομοίωση.</small></p>
 </main>
 </body></html>
