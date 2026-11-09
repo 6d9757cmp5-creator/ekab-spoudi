@@ -30,7 +30,7 @@ async function contextualSurfaces(ctx,name){
  const link=page.locator('#lesson-2 .nih3d-research-reference a[data-accession="3DPX-000170"]');
  await link.waitFor({state:'attached',timeout:20000});
  const href=await link.getAttribute('href');
- assert.match(href,/atla-resource-preview\.html\?tool=anatomy&dataset=nih&model=3DPX-000170&from=/);
+ assert.match(href,/ui-tools\/anatomy-3d\/index\.html\?tool=anatomy&dataset=all&model=3DPX-000170&from=/);
  assert.equal(await link.getAttribute('target'),null,'A lesson link keeps the same tab so the return works');
  assert(await refs(page,'#lesson-2').count()<=12,'No mass listing in a chapter');
  assert.equal(await refs(page,'#lesson-1').count(),0,'No model without chapter evidence');
@@ -90,6 +90,10 @@ async function viewerJourney(ctx,name,accession){
  const details=await page.locator('#source-details').innerText();
  for(const text of ['Κατάσταση έγκρισης','Χωρίς επιστημονική ή κλινική επικύρωση','Πλευρικότητα',accession,'Πρωτότυπη σελίδα NIH 3D'])assert(details.includes(text),'Missing detail: '+text);
  assert.equal(await page.locator('#source-license').innerText().then(t=>t.includes('Public Domain')),true);
+ // The unified Anatomy Lab deliberately keeps expert model controls collapsed.
+ // Open them explicitly, as a user would, rather than clicking invisible elements.
+ if(new URL(page.url()).pathname.endsWith('/anatomy-3d/index.html'))
+  await page.locator('#models details > summary').click();
  for(const id of ['part-isolate','part-show','view-front','view-side','view-reset'])await page.click('#'+id);
  await page.fill('#source-opacity','40').catch(()=>page.locator('#source-opacity').evaluate(e=>{e.value='40';e.dispatchEvent(new Event('input'))}));
  assert.equal(await page.locator('#opacity-value').innerText(),'40%');
@@ -116,7 +120,7 @@ async function failureModes(ctx,name){
  });
  await visit(page,url);
  await page.waitForFunction(()=>document.querySelector('#source-status')?.dataset.error==='true',null,{timeout:60000});
- assert.match(await page.locator('#source-status').innerText(),/SHA-256/,'Altered bytes never reach the parser');
+ assert.match(await page.locator('#source-status').innerText(),/SHA-256|ακεραιότητα|ακεραιότητας/,'Altered bytes fail integrity verification before parsing');
  assert.doesNotMatch(await page.locator('#source-back').getAttribute('href'),/evil/,'No external return redirect');
  await page.unroute('**/models/'+accession+'.glb');
  await page.route('**/models/'+accession+'.glb',route=>route.fulfill({status:503,body:'x'}));

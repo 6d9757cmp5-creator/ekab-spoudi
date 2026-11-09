@@ -46,7 +46,10 @@ jobs:
           const index=readFileSync(base+'index.html','utf8');
           const page=readFileSync(base+'biodigital-bridge.html','utf8');
           const script=readFileSync(base+'biodigital-bridge.mjs','utf8');
-          assert.match(index,/biodigital-bridge\.html/);
+          // Legacy compatibility files remain available, but current anatomy is a single first-party page.
+          assert.doesNotMatch(index,/href=["'][^"']*biodigital-bridge\.html/,'Legacy viewer must not be linked from anatomy');
+          assert.match(index,/id="unified-catalog"/,'Anatomy must have the in-page specialized catalog');
+          assert.match(index,/id="models"/,'Anatomy must contain its own 3D model viewer');
           assert.match(page,/biodigital-bridge\.mjs/);
           for(const id of ['providerFrame','nativeFrame','viewerUrl','openProvider','openTopic','xray','labels','next','previous','isolate','restoreScene','tourPlay','tourPause','quizEnter','quizExit']){
             assert.ok(page.includes('id="'+id+'"'),'Missing UI: '+id);
