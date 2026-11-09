@@ -64,7 +64,7 @@ test('μία δημόσια διαδρομή ανά εργαλείο και κο
  assert.ok(home.includes('href="ui-tools/anatomy-3d/index.html"'),'home uses public anatomy');
  assert.ok(hub.includes('href="ui-tools/anatomy-3d/index.html"'),'hub uses public anatomy');
  assert.ok(publicAtlas.includes('src="../../tools/anatomy-3d/hires-anatomy.js?'),'public anatomy uses shared engine');
- assert.ok(legacyAtlas.includes('src="hires-anatomy.js?'),'legacy entry uses shared engine');
+ assert.ok(legacyAtlas.includes("location.replace('../../ui-tools/anatomy-3d/index.html'"),'legacy entry forwards to the one public atlas');
  assert.ok(detailed.includes('href="anatomy-3d/index.html"'),'detailed atlas returns to public viewer');
  assert.ok(library.includes("export const LIBRARY_PATH='tools/atla-ai/resources/model-library.json'"),'one 3D model registry');
  assert.equal((hub.match(/data-atla-open/g)||[]).length,1,'one assistant action in hub');
