@@ -1,18 +1,8 @@
 {
   "schema": 1,
-  "updated": "2026-11-01",
-  "description": "Source-backed ownership registry. owner-mapped means existing implementation remains at a historical path; it is NOT a completed move or verification of clinical correctness.",
+  "updated": "2026-11-10",
+  "description": "Source-backed ownership registry. owner-mapped means existing implementation remains at a historical path; it is NOT a completed move or verification of clinical correctness. Patient/scenario simulators retired from the public app; prior versions remain recoverable in Git history.",
   "entries": [
-    {
-      "id": "patient-simulator",
-      "kind": "tool",
-      "status": "canonical",
-      "owner": "tools/patient-simulator",
-      "implementation": [
-        "mentor-next.html",
-        "tools/patient-simulator/core/next-sim.mjs"
-      ]
-    },
     {
       "id": "anatomy-3d",
       "kind": "tool",
@@ -142,16 +132,6 @@
       "implementation": [
         "mentor-oral.html",
         "mentor-oral.js"
-      ]
-    },
-    {
-      "id": "scenario-library",
-      "kind": "tool",
-      "status": "owner-mapped",
-      "owner": "tools/scenario-library",
-      "implementation": [
-        "mentor-scenarios.html",
-        "mentor-scenarios.js"
       ]
     },
     {

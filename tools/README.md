@@ -4,7 +4,6 @@
 
 | Εργαλείο | Φάκελος ιδιοκτησίας | Ενεργές θέσεις |
 |---|---|---|
-| Προσομοιωτής Ασθενών | [patient-simulator](patient-simulator/) | Canonical app, core, tests, 3D assets όλα μέσα σε αυτόν |
 | MENTOR OS | [mentor-os](mentor-os/) | Υφιστάμενος ενεργός φάκελος mentor/ για compatibility |
 | Ελληνικά Πρωτόκολλα | [protocol-lab](protocol-lab/) | protocols.html, mentor-protocol-suite.html |
 | ΣΑΕΚ | [saek-study](saek-study/) | saek.html και σελίδες μαθημάτων |
@@ -32,7 +31,6 @@
 - [Επάγγελμα & νομοθεσία](profession-law/) — στοιχεία με επίσημες πηγές και ημερομηνία.
 - [Πρόγραμμα μελέτης](study-planner/) — χρησιμοποιεί τον κοινό scheduler.
 - [Προφορική εξάσκηση](oral-practice/) — χρησιμοποιεί την κοινή βαθμολόγηση.
-- [Άτλας περιστατικών](scenario-library/) — μοιράζεται περιπτώσεις με Προσομοιωτή, όχι τα ίδια assets.
 - [Κοινές υπηρεσίες](../services/) — σημειώσεις, sync, AI grading, progress, notifications, search, media.
 - [Εκπαιδευτικό περιεχόμενο](../content/library/) — πηγές και έλεγχος ποιότητας.
 

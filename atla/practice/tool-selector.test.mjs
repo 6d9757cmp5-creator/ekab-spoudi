@@ -11,7 +11,7 @@ test('explicit relevant requests choose the existing minimal resource',()=>{
  assert.equal(chooseTeachingTool({question:'Δείξε 3D ανατομία καρδιάς'}).kind,'anatomy');
  assert.equal(chooseTeachingTool({question:'Θέλω άσκηση ECG'}).kind,'ecg');
  assert.equal(chooseTeachingTool({question:'Δείξε μου το πρωτόκολλο'}).kind,'protocol');
- assert.equal(chooseTeachingTool({question:'Προσομοίωση τραυματισμένου ασθενή'}).kind,'simulation');
+ assert.equal(chooseTeachingTool({question:'Προσομοίωση τραυματισμένου ασθενή'}),null);
 });
 const delivery={path:'tools/atla-ai/resources/nih3d-library/models/3DPX-000170.glb',bytes:1000,sha256:'a'.repeat(64)};
 const library={vocabulary:{structures:{patella:{match:['επιγονατιδ']},humerus:{match:['βραχιον']}},findings:{fracture:{match:['καταγμ']}},exclude:{}},models:[

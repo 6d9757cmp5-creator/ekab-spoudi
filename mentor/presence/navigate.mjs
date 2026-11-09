@@ -11,11 +11,9 @@ export const ROUTES=Object.freeze([
  {label:"Εξετάσεις ΣΑΕΚ",href:"saek-exams.html",keywords:["εξετασεις σαεκ","εξεταση σαεκ"]},
  {label:"Πιστοποίηση ΕΟΠΠΕΠ",href:"eoppep.html",keywords:["εοππεπ"]},
  {label:"Προετοιμασία σεμιναρίων",href:"seminar-prep.html",keywords:["σεμιναρ"]},
- {label:"Εργαστήριο αποστολών ATLA",href:"mentor-lab.html",keywords:["εργαστηρι","αποστολ"]},
- {label:"Προσομοίωση ΕΚΑΒ Αποστολή",href:"mentor-live.html",keywords:["live","προσομοιωση","τραυματιες"]},
+ {label:"Μελέτη με τον ATLA",href:"mentor-lab.html",keywords:["μελετη","atla"]},
  {label:"Προφορική εξάσκηση",href:"mentor-oral.html",keywords:["προφορικ"]},
  {label:"Βιβλιογραφία ATLA",href:"mentor-library.html",keywords:["βιβλιογραφι","πηγες"]},
- {label:"Άτλας σεναρίων",href:"mentor-scenarios.html",keywords:["σεναρι","ατλας"]},
  {label:"Χρήσιμα τηλέφωνα",href:"contacts.html",keywords:["τηλεφων","επαφες"]},
  {label:"Αναζήτηση",href:"search.html",keywords:["αναζητηση","ψαξε"]},
  {label:"Αρχική",href:"index.html",keywords:["αρχικη","αρχικο μενου"]}

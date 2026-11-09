@@ -29,7 +29,6 @@ const routes=[
  ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
  ['Βιβλιοθήκη 3D μοντέλων','ui-tools/3d-library.html',['βιβλιοθηκη 3d','3d βιβλιοθηκη','3d μοντελα','μοντελα 3d']],
  ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
- ['ATLA Κλινικός Προσομοιωτής','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
  ['Εργαστήριο ΗΚΓ','mentor-ecg.html',['ecg','ηκγ','ηλεκτροκαρδιογρ']],
  ['Σεμινάρια','seminar-prep.html',['σεμιναρ','bls','phtls']],
