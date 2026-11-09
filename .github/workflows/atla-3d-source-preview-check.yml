@@ -48,8 +48,12 @@ jobs:
           assert 'id="source-canvas"' in source
           assert 'id="source-load"' in source
           assert 'tools/atla-ai/model-preview.mjs' in source
-          assert 'atla-resource-preview.html?tool=anatomy' in Path('tools/anatomy-3d/index.html').read_text()
-          assert 'atla-resource-preview.html?tool=anatomy' in Path('ui-tools/anatomy-3d/index.html').read_text()
+          anatomy=Path('tools/anatomy-3d/index.html').read_text()
+          assert 'id="unified-catalog"' in anatomy and 'id="source-canvas"' in anatomy
+          assert 'atla-resource-preview.html?tool=anatomy' not in anatomy
+          anatomy=Path('ui-tools/anatomy-3d/index.html').read_text()
+          assert 'id="unified-catalog"' in anatomy and 'id="source-canvas"' in anatomy
+          assert 'atla-resource-preview.html?tool=anatomy' not in anatomy
           assert 'atla-resource-preview.html?tool=cockpit' in Path('mentor-next.html').read_text()
           print('PASS: opt-in links, import map and independent tools')
           PY

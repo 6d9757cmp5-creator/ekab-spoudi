@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-08T09:03:44.442Z",
+  "checked_at": "2026-11-09T09:53:18.521Z",
   "sources": [
     {
       "url": "https://cdn.who.int/media/docs/default-source/integrated-health-services-%28ihs%29/csy/prehospital/bap-syllabus-2025.pdf",
@@ -76,12 +76,16 @@
       "evidence_status": "source-identity-curated-content-not-reviewed",
       "clinical_approval": false,
       "knowledge_ingestion_enabled": false,
-      "ok": false,
-      "reason": "The operation was aborted due to timeout",
+      "ok": true,
+      "http_status": 200,
+      "etag": "W/\"5e8786fdeb4afd87bde3d91cdbbf177e\"",
+      "last_modified": "",
+      "final_url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+      "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "W/\"ff9d5bc88dc10092eda2762c529d578c\"",
+      "last_successful_etag": "W/\"5e8786fdeb4afd87bde3d91cdbbf177e\"",
       "last_successful_last_modified": "",
-      "signal": "unverified"
+      "signal": "possible-source-update"
     },
     {
       "url": "https://goldcopd.org/2026-gold-report-and-pocket-guide",
@@ -396,14 +400,14 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1793770691-gzip\"",
-      "last_modified": "Wed, 04 Nov 2026 05:38:11 GMT",
+      "etag": "\"1794216701-gzip\"",
+      "last_modified": "Mon, 09 Nov 2026 09:31:41 GMT",
       "final_url": "https://www.cochrane.org/evidence",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1793770691-gzip\"",
-      "last_successful_last_modified": "Wed, 04 Nov 2026 05:38:11 GMT",
-      "signal": "no-confirmed-change"
+      "last_successful_etag": "\"1794216701-gzip\"",
+      "last_successful_last_modified": "Mon, 09 Nov 2026 09:31:41 GMT",
+      "signal": "possible-source-update"
     },
     {
       "url": "https://www.ecdc.europa.eu/en/publications-data",
@@ -417,13 +421,13 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1794128639\"",
-      "last_modified": "Sun, 08 Nov 2026 09:03:59 GMT",
+      "etag": "\"1794218003\"",
+      "last_modified": "Mon, 09 Nov 2026 09:53:23 GMT",
       "final_url": "https://www.ecdc.europa.eu/en/publications-data",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1794128639\"",
-      "last_successful_last_modified": "Sun, 08 Nov 2026 09:03:59 GMT",
+      "last_successful_etag": "\"1794218003\"",
+      "last_successful_last_modified": "Mon, 09 Nov 2026 09:53:23 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -455,13 +459,13 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"1794125438\"",
-      "last_modified": "Sun, 08 Nov 2026 08:10:38 GMT",
+      "etag": "\"1794217404-gzip\"",
+      "last_modified": "Mon, 09 Nov 2026 09:43:24 GMT",
       "final_url": "https://www.ema.europa.eu/en/medicines",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"1794125438\"",
-      "last_successful_last_modified": "Sun, 08 Nov 2026 08:10:38 GMT",
+      "last_successful_etag": "\"1794217404-gzip\"",
+      "last_successful_last_modified": "Mon, 09 Nov 2026 09:43:24 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -499,12 +503,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Sun, 08 Nov 2026 09:04:00 GMT",
+      "last_modified": "Thu, 17 Sep 2026 16:42:05 GMT",
       "final_url": "https://www.erc.edu/science-research/guidelines/guidelines-2025",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Sun, 08 Nov 2026 09:04:00 GMT",
+      "last_successful_last_modified": "Thu, 17 Sep 2026 16:42:05 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -583,12 +587,12 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"656m9dn3qo4m0z\"",
+      "etag": "\"s1rlsqz66k4m0z\"",
       "last_modified": "",
       "final_url": "https://www.msdmanuals.com/professional",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"656m9dn3qo4m0z\"",
+      "last_successful_etag": "\"s1rlsqz66k4m0z\"",
       "last_successful_last_modified": "",
       "signal": "possible-source-update"
     },
@@ -604,12 +608,12 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"13s27r57gnc3mva\"",
+      "etag": "\"o6n15m272s3lav\"",
       "last_modified": "",
       "final_url": "https://www.msdmanuals.com/professional/health-topics",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"13s27r57gnc3mva\"",
+      "last_successful_etag": "\"o6n15m272s3lav\"",
       "last_successful_last_modified": "",
       "signal": "possible-source-update"
     },
@@ -710,12 +714,12 @@
       "knowledge_ingestion_enabled": false,
       "ok": true,
       "http_status": 200,
-      "etag": "\"o0x7174z0c2nvf\"",
+      "etag": "\"gnecf5yrl82nvf\"",
       "last_modified": "",
       "final_url": "https://www.nice.org.uk/guidance/published",
       "reason": "",
       "last_successful_probe": true,
-      "last_successful_etag": "\"o0x7174z0c2nvf\"",
+      "last_successful_etag": "\"gnecf5yrl82nvf\"",
       "last_successful_last_modified": "",
       "signal": "possible-source-update"
     },
@@ -783,7 +787,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Sat, 07 Nov 2026 16:59:17 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/publications/i/item/9789241513081",
@@ -819,12 +823,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Sat, 07 Nov 2026 14:26:42 GMT",
+      "last_modified": "Mon, 09 Nov 2026 09:49:59 GMT",
       "final_url": "https://www.who.int/publications/who-guidelines",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Sat, 07 Nov 2026 14:26:42 GMT",
+      "last_successful_last_modified": "Mon, 09 Nov 2026 09:49:59 GMT",
       "signal": "possible-source-update"
     },
     {
@@ -846,7 +850,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Sat, 07 Nov 2026 14:48:18 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit",
@@ -867,7 +871,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Sat, 07 Nov 2026 14:49:39 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/tools/clinical-checklists",
@@ -888,7 +892,7 @@
       "last_successful_probe": true,
       "last_successful_etag": "",
       "last_successful_last_modified": "Sat, 07 Nov 2026 14:53:50 GMT",
-      "signal": "possible-source-update"
+      "signal": "no-confirmed-change"
     },
     {
       "url": "https://www.who.int/tools/triage",
@@ -903,12 +907,12 @@
       "ok": true,
       "http_status": 200,
       "etag": "",
-      "last_modified": "Sat, 07 Nov 2026 14:29:10 GMT",
+      "last_modified": "Mon, 09 Nov 2026 09:49:20 GMT",
       "final_url": "https://www.who.int/tools/triage",
       "reason": "",
       "last_successful_probe": true,
       "last_successful_etag": "",
-      "last_successful_last_modified": "Sat, 07 Nov 2026 14:29:10 GMT",
+      "last_successful_last_modified": "Mon, 09 Nov 2026 09:49:20 GMT",
       "signal": "possible-source-update"
     },
     {

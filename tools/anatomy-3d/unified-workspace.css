@@ -1,0 +1,51 @@
+/* Own unified, first-party anatomy surface. Existing viewers keep their IDs and engines. */
+.one-anatomy-tabs{display:flex;gap:10px;padding:8px 0 16px;margin:4px 0 8px;flex-wrap:wrap;border-bottom:1px solid #2d5267}
+.one-anatomy-tabs button{background:#14364c;color:#e2f5fb;border:1px solid #3e6d81;border-radius:12px;padding:12px 18px;min-height:48px;font:inherit;font-weight:750;cursor:pointer}
+.one-anatomy-tabs button[aria-selected="true"]{background:#42bed1;color:#051e2a;border-color:#42bed1}
+.one-anatomy-tabs button:focus-visible,.unified-library button:focus-visible,.unified-library select:focus-visible,.unified-library input:focus-visible{outline:3px solid #f2e4a4;outline-offset:2px}
+#base-anatomy[hidden],#models[hidden]{display:none!important}
+.unified-library{padding:10px 0 24px;color:#eaf6fd}
+.unified-library h2{margin:0 0 6px;font-size:clamp(1.3rem,2vw,1.65rem)}
+.unified-library p{color:#c2d9e6}
+.unified-library .source-layout{display:grid;grid-template-columns:minmax(250px,340px) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
+.unified-library .source-panel{border:1px solid #2d5a75;border-radius:16px;background:#102b3e;padding:16px}
+.unified-library .source-panel label{display:block;font-weight:650;margin:12px 0 5px}
+.unified-library input[type=search],.unified-library select{background:#061e31;border:1px solid #5d8ba3;border-radius:9px;color:#f4faff;font:inherit;padding:10px;width:100%;min-width:0}
+.unified-library button{font:inherit;font-weight:700;background:#37b5b8;color:#051e27;border:0;border-radius:9px;padding:10px;cursor:pointer}
+.unified-library button:disabled{opacity:.48;cursor:not-allowed}
+.unified-library #source-load{margin-top:12px;width:100%;min-height:46px}
+.unified-library .source-tools{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
+.unified-library .source-tools button{flex:1;min-width:70px}
+.unified-library #source-canvas{display:block;background:#08192b;border:1px solid #2b5470;border-radius:12px;width:100%;height:min(65vh,620px);min-height:360px;touch-action:none}
+.unified-library .source-note,.unified-library #source-count,.unified-library #source-license,.unified-library #source-mesh-info{font-size:.9rem;overflow-wrap:anywhere}
+.unified-library #source-status[data-error=true]{color:#ffc2a8}
+.unified-library #source-status{color:#bce9d7;font-weight:650;min-height:1.4em}
+.unified-library #source-details p{font-size:.85rem;margin:.25rem 0}
+.unified-library #source-opacity{width:100%}
+.unified-library details{margin:12px 0}
+@media(max-width:820px){.unified-library .source-layout{grid-template-columns:1fr}.unified-library #source-canvas{height:48vh;min-height:300px}.one-anatomy-tabs button{flex:1 1 160px}}
+
+
+.unified-library .atlas-entry{margin:15px 0;padding:13px;border:1px solid #45718d;background:#163a4f;border-radius:12px}
+.unified-library .atlas-entry h3{margin:0;font-size:1.05rem}
+.unified-library .atlas-entry #atlas-load{margin-top:10px;width:100%}
+.unified-library #atlas-stage[hidden],.unified-library #source-stage[hidden]{display:none!important}
+.unified-library #atlas-canvas{display:block;background:#08192b;border:1px solid #2b5470;border-radius:12px;width:100%;height:min(65vh,620px);min-height:360px;touch-action:none}
+.unified-library #atlas-stage label{display:block;margin:8px 0;font-weight:650}
+.unified-library .atlas-results{display:flex;flex-direction:column;gap:5px;max-height:240px;overflow:auto;margin:8px 0}
+.unified-library .atlas-result{background:#193e50;color:#eef5f9;text-align:left;font-size:.85rem;padding:7px 9px;min-height:34px}
+.unified-library #atlas-status[data-error=true]{color:#ffc2a8}
+.unified-library #atlas-unload{background:#315268;color:#eef5f9;margin-top:6px}
+@media(max-width:820px){.unified-library #atlas-canvas{height:48vh;min-height:300px}}
+
+/* Study-first educational clarity without changing the original 3D datasets. */
+.unified-library .source-filter-help{font-size:.83rem;margin:5px 0 12px;color:#b8d9e7}
+.unified-library .source-study-card{border:1px solid #486f85;border-left:4px solid #41b8cb;border-radius:10px;padding:11px 12px;margin:12px 0;background:#0a2335;line-height:1.48}
+.unified-library .source-study-card strong{color:#f3f9fe}
+.unified-library .source-study-card p{margin:5px 0;font-size:.9rem}
+.unified-library .source-study-card .study-note{font-size:.82rem;color:#c2d9e6}
+.unified-library .source-preview-caption{font-weight:750;font-size:1rem;margin:2px 0 10px;color:#f4fcff}
+.unified-library .source-preview-controls{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.unified-library .source-preview-controls button{flex:1;min-width:130px;min-height:44px}
+.unified-library .source-quality-note{font-size:.86rem;line-height:1.45;margin:6px 0 12px}
+@media(max-width:820px){.unified-library #source-stage{scroll-margin-top:10px}.unified-library .source-preview-controls button{min-width:105px}}
