@@ -5,7 +5,9 @@ on:
   pull_request:
     paths:
       - 'mentor-next.html'
-      - 'tools/patient-simulator/**'
+      - 'mentor-ecg.html'
+      - 'mentor-lab.html'
+      - 'tools/ecg-lab/**'
       - 'scripts/app-load-smoke.mjs'
       - 'scripts/verify-cockpit-visual.mjs'
       - '.github/workflows/app-load.yml'
@@ -101,14 +103,14 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: node scripts/app-load-smoke.mjs
       - run: node scripts/verify-cockpit-visual.mjs
-      - name: Archive real Cockpit screenshots
+      - name: Archive ECG display screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: patient-simulator-visual-baseline
+          name: ecg-visual-baseline
           path: |
-            audit-results/cockpit-*.png
-            audit-results/cockpit-visual-report.json
+            audit-results/ecg-visual-*.png
+            audit-results/ecg-visual-report.json
           if-no-files-found: warn
       - run: node scripts/verify-atla-presence-browser.mjs
       - run: node scripts/verify-atla-offline-browser.mjs

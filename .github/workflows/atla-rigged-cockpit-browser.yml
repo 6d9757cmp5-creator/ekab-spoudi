@@ -1,60 +1,47 @@
-name: ATLA Clinical Cockpit Rigged Patient Browser Acceptance
+name: Retired patient-simulation URLs and surviving ECG acceptance
 on:
   push:
-    branches: [main, feature/atla-full-model-workspace-20261103, fix/atla-cockpit-rigged-browser-and-final-qa-20261103]
+    branches: [main]
     paths:
-      - '.github/workflows/atla-rigged-cockpit-browser.yml'
-      - 'scripts/verify-atla-rigged-cockpit-browser.mjs'
-      - 'scripts/verify-atla-rigged-cockpit-mobile.mjs'
-      - 'tools/patient-simulator/vendor/unified-stage.bundle.mjs'
-      - 'tools/patient-simulator/assets/patients/atla-makehuman-rigged-educational.glb'
-      - 'tools/patient-simulator/app/unified-stage.mjs'
-      - 'tools/patient-simulator/app/next-sim.mjs'
       - 'mentor-next.html'
+      - 'mentor-live.html'
+      - 'mentor-scenarios.html'
+      - 'mentor-ecg.html'
+      - '.github/workflows/atla-rigged-cockpit-browser.yml'
   pull_request:
     paths:
       - 'mentor-next.html'
-      - 'tools/patient-simulator/app/**'
-      - 'tools/patient-simulator/styles/**'
-      - 'tools/patient-simulator/vendor/unified-stage.bundle.mjs'
-      - 'scripts/verify-atla-rigged-cockpit-*.mjs'
+      - 'mentor-live.html'
+      - 'mentor-scenarios.html'
+      - 'mentor-ecg.html'
+      - 'scripts/verify-retired-simulations-browser.mjs'
       - '.github/workflows/atla-rigged-cockpit-browser.yml'
   workflow_dispatch:
 permissions:
   contents: read
-concurrency:
-  group: atla-rigged-cockpit-browser-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
   acceptance:
     runs-on: ubuntu-24.04
-    timeout-minutes: 18
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate source and bundled scene with real pinned GLB
+      - name: Verify retired routes and preserved independent ECG
         run: |
-          node --check tools/patient-simulator/app/unified-stage.mjs
-          node --check tools/patient-simulator/app/next-sim.mjs
           node scripts/verify-unified-scene.mjs
-          node -e "const s=require('fs').readFileSync('tools/patient-simulator/vendor/unified-stage.bundle.mjs','utf8');if(!s.includes('riggedModel')||!s.includes('riggedClips'))process.exit(1)"
-      - name: Install real Chromium
+          node --test tools/ecg-lab/core/ecg-synthetic.test.mjs tools/ecg-lab/core/ecg-practice.test.mjs
+      - name: Install Chromium for mobile and desktop
         run: |
           npm install --no-save --no-package-lock playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: Simulate optional 163-bone patient and preserve original case
-        run: node scripts/verify-atla-rigged-cockpit-browser.mjs
-      - name: Verify animated patient controls on mobile viewport
-        run: node scripts/verify-atla-rigged-cockpit-mobile.mjs
-      - name: Preserve scene screenshot
+      - name: Validate retired simulator URLs in real browser
+        run: node scripts/verify-retired-simulations-browser.mjs
+      - name: Preserve browser evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: atla-rigged-cockpit-browser-evidence
-          path: |
-            browser-qa-results/atla-cockpit-rigged-live.png
-            browser-qa-results/atla-cockpit-rigged-debug.png
-            browser-qa-results/atla-rigged-mobile-*.png
+          name: retired-patient-simulator-route-evidence
+          path: audit-results/retired-sim/
           if-no-files-found: warn
