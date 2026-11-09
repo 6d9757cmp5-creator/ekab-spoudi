@@ -106,10 +106,10 @@ function installModelTools(gltf,modelRoot){
  animationPaused=false;
  if(animationClips.length){mixer=new THREE.AnimationMixer(modelRoot);applyAnimation()}
  const triangles=meshParts.reduce((sum,p)=>sum+Math.floor((p.geometry?.index?.count??p.geometry?.attributes?.position?.count??0)/3),0);
- meshInfo.textContent=meshParts.length+' τμήματα 3D · περίπου '+triangles.toLocaleString('el-GR')+' τρίγωνα · '+animationClips.length+' κινήσεις.';
+ meshInfo.textContent=meshParts.length+' '+(meshParts.length===1?'τμήμα':'τμήματα')+' 3D · περίπου '+triangles.toLocaleString('el-GR')+' τρίγωνα · '+animationClips.length+' κινήσεις.';
  if(qualityNote)qualityNote.textContent=triangles<2000?
   'Απλή γεωμετρία: η επιφάνεια μπορεί να φαίνεται γωνιώδης. Η εμφάνιση εξαρτάται από το πρωτότυπο αρχείο.':
-  'Η γεωμετρία έχει περίπου '+triangles.toLocaleString('el-GR')+' τρίγωνα. Πολλά πολύγωνα δεν εγγυώνται ανατομική ακρίβεια.';
+  'Το 3D αποτελείται από περίπου '+triangles.toLocaleString('el-GR')+' μικρές τριγωνικές επιφάνειες. Ο αριθμός τους δεν εγγυάται ανατομική ακρίβεια.';
 }
 partSelect.addEventListener('change',()=>choosePart(Number(partSelect.value)));
 $('part-isolate').addEventListener('click',()=>{
