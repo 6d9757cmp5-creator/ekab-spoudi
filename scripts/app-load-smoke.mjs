@@ -222,6 +222,35 @@ try {
       throw Error(device+': MENTOR NEXT original road case history lost');
     console.log('PASS '+device+': MENTOR NEXT v0.3 three original scenarios, contextual dialogue and independent save/resume');
 
+    // Distinct category selector: tabs reveal only the chosen library and never
+    // change the running case or mutate the per-case action timeline.
+    const picker=page.locator('.next-case-picker');
+    await picker.locator('summary').click();
+    if(await page.locator('#next-case-list .next-case-card').count()!==3||await page.locator('#next-practical-list .next-case-card').count()!==6)
+      throw Error(device+': practical/general library counts are wrong');
+    const originalTitle=await page.locator('#next-case-title').textContent();
+    const originalEvents=await page.locator('#next-events li').count();
+    await page.locator('[data-next-case-category="practical"]').click();
+    if(!await page.locator('#next-practical-group').isVisible()||await page.locator('#next-general-group').isVisible())
+      throw Error(device+': practical category switch has mixed or hidden cases');
+    if(await page.locator('#next-case-title').textContent()!==originalTitle||
+       await page.locator('#next-events li').count()!==originalEvents)
+      throw Error(device+': category switch changed current case or recorded an action');
+    await page.locator('#next-practical-list [data-case-id="eoppep-practical-1"]').click();
+    if(!await page.locator('#next-case-title').textContent().then(t=>t.includes('Αιφνίδια απώλεια συνείδησης')))
+      throw Error(device+': practical case not selected');
+    if(await page.locator('[data-next-case-category="practical"]').getAttribute('aria-pressed')!=='true')
+      throw Error(device+': deep practical case selection lost category');
+    await picker.locator('summary').click();
+    await page.locator('[data-next-case-category="general"]').click();
+    if(!await page.locator('#next-general-group').isVisible()||await page.locator('#next-practical-group').isVisible())
+      throw Error(device+': general category leaked practical cases');
+    await page.locator('#next-case-list [data-case-id="crete-two-persons-next-v1"]').click();
+    if(await page.locator('#next-events li').count()!==originalEvents)
+      throw Error(device+': returning to general case did not restore its original timeline');
+    console.log('PASS '+device+': independent EOPPEP/general libraries, no implicit case action, safe return');
+
+
 
     // v0.4 visual regression: browser loads a CC0 human mesh or explicitly reports fallback.
     const humanAsset=await page.request.get('http://127.0.0.1:8765/tools/patient-simulator/assets/cc0-human-body.glb');
