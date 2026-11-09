@@ -26,10 +26,9 @@ const learnerProfile=()=>{try{return canonicalLearnerProfile(localStorage,{sched
 const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
- ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
- ['Βιβλιοθήκη 3D μοντέλων','ui-tools/3d-library.html',['βιβλιοθηκη 3d','3d βιβλιοθηκη','3d μοντελα','μοντελα 3d']],
+ ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ','προσομοιωτ']],
+ ['Λεπτομερής εξερεύνηση 3D','ui-tools/anatomy-3d/index.html#models',['βιβλιοθηκη 3d','3d βιβλιοθηκη','3d μοντελα','μοντελα 3d']],
  ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
- ['ATLA Κλινικός Προσομοιωτής','mentor-next.html',['προσομοιωτ','ασθεν','cockpit']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
  ['Εργαστήριο ΗΚΓ','mentor-ecg.html',['ecg','ηκγ','ηλεκτροκαρδιογρ']],
  ['Σεμινάρια','seminar-prep.html',['σεμιναρ','bls','phtls']],
@@ -142,10 +141,6 @@ function boot(){
  if(/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(currentPage)){
   addAddonCss('./practice/saek-practice.css');
   void import('./practice/saek-practice.mjs').catch(()=>{});
- }
- if(currentPage==='mentor-next.html'){
-  addAddonCss('./practice/cockpit-entry.css');
-  void import('./practice/cockpit-entry.mjs').catch(()=>{});
  }
  const history=()=>{try{return loadTurns(storage);}catch{return [];}};
  function showHistory(){

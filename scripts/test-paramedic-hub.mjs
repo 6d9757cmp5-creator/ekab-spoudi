@@ -15,10 +15,11 @@ test('Paramedic is the parent of SAEK and EOPPEP, not a third copy of them',()=>
  // The Paramedic hub adds a shared learning entry without copying or resetting grades.
  for(const href of ['saek.html','eoppep.html'])assert.equal((tiles.match(new RegExp('href="'+href.replace('.','\\.')+'"','g'))||[]).length,1,'Preserve one existing direct home link: '+href);
  const hub=read('paramedic.html');
- for(const href of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','practical_exam.html','seminar-prep.html','mentor-next.html','farmaka.html','protocols.html']){
+ for(const href of ['saek.html','eoppep.html','mentor-ecg.html','ui-tools/anatomy-3d/index.html','practical_exam.html','seminar-prep.html','farmaka.html','protocols.html']){
    assert.ok(hub.includes('href="'+href+'"'),'Hub missing destination: '+href);
    assert.ok(existsSync(resolve(root,href)),'Missing existing destination: '+href);
  }
+ assert.doesNotMatch(hub,/href="mentor-next.html"/,'The hub reaches the simulator only through the EOPPEP practical page');
  assert.match(hub,/<section id="skills"/);
  assert.match(hub,/data-atla-open/);
  assert.match(hub,/atla\/assistant\.mjs/);
@@ -42,7 +43,7 @@ test('Existing learning pages link back to Paramedic without changes to stored p
 
 test('Do not inject unrelated simulator missions into every SAEK chapter',()=>{
  const practice=read('atla/practice/saek-practice.mjs');
- assert.doesNotMatch(practice,/cockpit\.href\s*=|controls\.append\(compare,cockpit/);
+ assert.doesNotMatch(practice,/cockpit\.href\s*=|controls\.append\(compare,cockpit|mentor-next/);
  assert.match(practice,/No automatic simulator link/);
  assert.match(practice,/lesson-sos/);
 });

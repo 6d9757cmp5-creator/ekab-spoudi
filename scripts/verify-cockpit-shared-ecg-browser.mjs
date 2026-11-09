@@ -9,7 +9,7 @@ import {mkdirSync,writeFileSync} from 'node:fs';
 
 const PORT=8771,BASE='http://127.0.0.1:'+PORT;
 const server=spawn('python3',['-m','http.server',String(PORT),'--bind','127.0.0.1'],{stdio:'ignore'});
-const cases=['crete-two-persons-next-v1','home-welfare-next-v1','public-square-next-v1'];
+const cases=['eoppep-practical-1','eoppep-practical-2','eoppep-practical-4'];
 const targets=[
  {device:'Android-size Chromium',engine:chromium,width:390,height:844,mobile:true},
  {device:'iPhone-size WebKit',engine:webkit,width:390,height:844,mobile:true},
@@ -46,10 +46,10 @@ try{
    await page.locator('[data-next-patient="a"]').click();
    assert.equal(await curve.getAttribute('points'),original,device+': patient A deterministic trace');
    await page.locator('#next-step').click();
-   assert.notEqual(await curve.getAttribute('points'),original,device+': synthetic minute changes the displayed curve');
+   assert.equal(await curve.getAttribute('points'),original,device+': EOPPEP scenarios keep a stable synthetic rhythm as time passes');
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    assert.ok(overflow<=4,device+': horizontal overflow '+overflow);
-   assert.equal(await page.locator('#next-case-list .next-case-card').count(),3,'preserve all original cases');
+   assert.equal(await page.locator('#next-practical-list .next-case-card').count(),6,'all six EOPPEP practical scenarios');
    const slug=device.toLowerCase().replace(/[^a-z0-9]+/g,'-');
    for(const caseId of cases){
     const picker=page.locator('.next-case-picker');

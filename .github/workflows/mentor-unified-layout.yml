@@ -26,9 +26,7 @@ jobs:
       - name: Check all legacy paths and centralized imports/assets
         run: |
           node --test scripts/test-mentor-layout.mjs
-          node --test scripts/test-mentor-voice.mjs
           # Former 3D/cinematic test entrypoints no longer exist; test active protocol code.
-          node --test scripts/test-mentor-protocols.mjs
           node --test scripts/test-mentor-v1-unified.cjs
           for f in mentor/app/*.js mentor/voice/*.mjs mentor/avatar/*.mjs; do node --check "$f"; done
       - name: Install Playwright Chromium

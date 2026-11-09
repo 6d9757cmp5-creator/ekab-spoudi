@@ -342,3 +342,98 @@ body .ekab-mentor-launcher,body .ekab-mentor-presence{display:none!important}
  margin:10px 16px;
 }
 #atlas-cockpit-entry.atlas-cockpit-optional[open]{padding-bottom:10px}
+
+
+/* Distinct category views: EOPPEP practical missions and general EKAB simulations.
+ * Case data and session storage remain unchanged; switching category is not an action. */
+.next-case-category-switch{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 9px;
+}
+.next-case-category-switch button{
+ box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+ gap:4px;min-height:64px;width:100%;padding:11px 15px;
+ border:1px solid #537b8e;border-radius:11px;background:#0d293b;
+ color:#eaf6fa;font-weight:800;font-size:.92rem;line-height:1.35;text-align:left;cursor:pointer;
+}
+.next-case-category-switch button small{color:#b1cad2;font-size:.74rem;font-weight:580}
+.next-case-category-switch button[aria-pressed=true]{
+ border:2px solid #7ee3d4;background:#1d5362;color:#fff;
+}
+.next-case-category-switch button[aria-pressed=true] small{color:#d8f5f3}
+.next-case-category-switch button:focus-visible{
+ outline:3px solid #ffdf89;outline-offset:2px;
+}
+.next-case-category-panel[hidden]{display:none!important}
+.next-case-category-panel{
+ padding:11px 0 5px;min-width:0;
+}
+.next-case-category-panel h3{margin:2px 0 7px}
+.next-case-category-panel p{
+ margin:0 0 12px;color:#c2dae1;line-height:1.55;font-size:.82rem;
+}
+.next-case-category-status{
+ margin:0;color:#b8d5de;font-size:.78rem;line-height:1.5;
+}
+@media(max-width:600px){
+ .next-case-category-switch{grid-template-columns:1fr;gap:7px}
+ .next-case-category-switch button{min-height:52px;padding:10px 12px;font-size:.85rem}
+ .next-case-category-switch button small{font-size:.71rem}
+}
+
+
+/* EOPPEP written rehearsal: case-specific equipment and student rationale.
+ * These are observation controls, never medical actions or proof of hands-on skills. */
+.next-practice-rehearsal-intro,.next-practice-rehearsal-progress{
+ color:#d0e7ed;line-height:1.55;font-size:.86rem;
+}
+.next-practice-rehearsal-progress{font-weight:750;color:#92ebde}
+.next-practice-task-list{display:grid;grid-template-columns:1fr;gap:8px;margin:13px 0}
+.next-actions .next-practice-task-button{
+ width:100%;min-height:46px;line-height:1.5;
+ padding:10px 12px;text-align:left;border:1px solid #537b8c;
+ background:#143449;color:#e9f6f9;border-radius:10px;
+}
+.next-actions .next-practice-task-button[aria-expanded=true]{
+ border:2px solid #82e5d5;background:#205263;
+}
+.next-actions .next-practice-task-button.next-practice-task-done{
+ border-color:#426c67;background:#21463f;color:#ddf4eb;
+}
+.next-practice-rehearsal-panel{
+ margin:13px 0;padding:14px;border:1px solid #629bb0;
+ border-radius:12px;background:#0d2737;color:#eaf4f7;
+}
+.next-practice-rehearsal-panel h4{margin:0 0 10px;font-size:.98rem;line-height:1.5}
+.next-practice-rehearsal-warning{
+ border-left:3px solid #e3b569;padding-left:11px;
+ color:#f3e3c3;line-height:1.55;font-size:.82rem;
+}
+.next-practice-rehearsal-success{color:#bfe8de;font-size:.84rem}
+.next-practice-rehearsal-form{display:grid;gap:14px}
+.next-practice-equipment{
+ border:1px solid #527c8b;border-radius:9px;
+ padding:12px;margin:0;min-width:0;display:grid;gap:9px;
+}
+.next-practice-equipment legend{font-weight:760;line-height:1.5;padding:0 5px}
+.next-practice-equipment-item{
+ display:flex;align-items:flex-start;gap:9px;
+ min-height:40px;padding:6px 3px;line-height:1.48;
+ font-size:.82rem;overflow-wrap:anywhere;
+}
+.next-practice-equipment-item input{width:19px;height:19px;flex:0 0 19px;accent-color:#76e3d4;margin:2px 0 0}
+.next-practice-equipment-help{font-size:.75rem;line-height:1.5;color:#b9d6de}
+.next-practice-reason-label{display:grid;gap:8px;font-weight:750;line-height:1.5}
+.next-practice-reason-label textarea{
+ width:100%;min-height:105px;border-radius:9px;border:1px solid #5c8697;
+ background:#08202e;color:#eaf9f9;padding:12px;
+ font:inherit;font-size:.89rem;line-height:1.5;resize:vertical;
+}
+.next-practice-reason-label textarea:focus-visible,.next-practice-task-button:focus-visible{
+ outline:3px solid #f9d681;outline-offset:2px;
+}
+.next-actions .next-practice-rehearsal-submit{
+ min-height:48px;width:100%;border-radius:10px;
+ background:#236e6a;border:1px solid #81dbc9;color:#fff;
+ padding:11px;font-weight:800;cursor:pointer;
+}
+.next-practice-form-status{font-size:.83rem;color:#ffe3af;line-height:1.5}

@@ -55,11 +55,8 @@ test('ATLA reuses one existing AI path, retains no-write behavior and exam guard
 });
 
 
-test('legacy simulation and learning recommendation render ATLA-only branding',()=>{
- const cockpit=read('mentor-live.html');
+test('learning recommendation renders ATLA-only branding',()=>{
  const recommendation=read('learning-surface.mjs');
- assert.doesNotMatch(cockpit,/>MENTOR DEBRIEF\b/i,'Clinical Cockpit must not display the retired assistant');
- assert.match(cockpit,/ATLA · εκπαιδευτική ανασκόπηση αποστολής/);
  assert.doesNotMatch(recommendation,/στον MENTOR AI/i,'Study guidance must not display the retired assistant');
  assert.match(recommendation,/δεν αποστέλλει στοιχεία στον ATLA/);
 });
@@ -72,21 +69,12 @@ test('ATLA-only visible entrypoints and in-place protocol tutor keep legacy stat
  assert.doesNotMatch(learning,/στον MENTOR AI|ATLAS ·/);
  const protocol=read('protocols.html');
  const cards=read('protocols-page.mjs');
- const suite=read('mentor-protocol-suite.html');
- const runtime=read('mentor-protocol-suite.mjs');
  assert.match(protocol,/data-atla-open/,'The protocol reference page should open ATLA, not the retired teacher');
  assert.doesNotMatch(protocol,/>MENTOR(?:\s|<)/);
  assert.match(cards,/appendAtlaStudyButton\(actions,t\.name\)/,'Study buttons should provide topic context');
  assert.doesNotMatch(cards,/Μελέτη με MENTOR/);
- assert.match(suite,/src="atla\/assistant\.mjs"/,'The legacy URL should show the unified ATLA tutor');
- assert.match(suite,/data-atla-open/);
- assert.doesNotMatch(suite,/src="mentor-presence\.html"/,'No duplicate 3D tutor in the protocol lab');
- assert.doesNotMatch(suite,/>MENTOR(?:\s|<)/);
- assert.match(runtime,/dataset\.atlaOpen='true'/);
- assert.match(read('mentor-live.html'),/ATLA · εκπαιδευτική ανασκόπηση αποστολής/);
- assert.doesNotMatch(read('mentor-live.html'),/MENTOR DEBRIEF/);
- // Data compatibility must remain stable until a separately proven migration.
- assert.match(runtime,/ekab:mentor:protocol-foundation:v2/);
+ // The protocol catalogue no longer links to the removed protocol simulator.
+ assert.doesNotMatch(protocol+cards,/mentor-protocol-suite/);
  assert.match(read('atla/student/memory.mjs'),/ekab\.mentor\.chat\.v1/);
 });
 
