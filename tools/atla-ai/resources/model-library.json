@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "scope": "Κοινός κατάλογος όλων των αποθηκευμένων πηγών 3D. Τα πρωτότυπα NIH παραμένουν στο αρχείο, αυτούσια.",
- "ledgerCommit": "e2f457b3be0c6aab12ceb720a51a2d21e719b9e1",
+ "ledgerCommit": "0aeb0047bc0ca66d8add58c114dce5383b9e04a8",
  "clinicalUseApproved": false,
  "vocabulary": {
   "structures": {
@@ -539,7 +539,7 @@
  },
  "counts": {
   "bySource": {
-   "nih3d": 473,
+   "nih3d": 479,
    "hra": 54,
    "z-anatomy": 5,
    "quaternius": 2,
@@ -547,9 +547,9 @@
    "makehuman": 10,
    "makehuman-rigged": 1
   },
-  "nihVerifiedModels": 264,
-  "nihServed": 467,
-  "nihServedBytes": 529646780,
+  "nihVerifiedModels": 277,
+  "nihServed": 473,
+  "nihServedBytes": 530857444,
   "nihContextual": 308,
   "nihWithSaekChapter": 224,
   "nihRestrictions": {
@@ -579,7 +579,7 @@
    "LIKELY_OUT_OF_MEDICAL_SCOPE": 1372,
    "SCIENTIFIC_REVIEW_REQUIRED": 4275
   },
-  "notYetVerifiedInLedger": 15424
+  "notYetVerifiedInLedger": 15411
  },
  "atlases": [
   {
@@ -3871,15 +3871,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000382",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-038.tar.zst",
-     "file": "000382-002-col_dorsal_grande_limpo-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -4010,15 +4010,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000385",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00301-00400-part-038.tar.zst",
-     "file": "000385-002-col_dorsal_grande_limpo_0-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -6407,15 +6407,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000757",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00701-00800-part-034.tar.zst",
-     "file": "000757-002-lh-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -6477,15 +6477,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-000758",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "atla-nih3d-master-2026",
-     "package": "atla-nih3d-00701-00800-part-034.tar.zst",
-     "file": "000758-002-rh-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -18275,6 +18275,60 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-008931",
+   "accession": "3DPX-008931",
+   "entryId": 8931,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Ανατομία · Test- Skull Fracture Child",
+   "greekTitle": null,
+   "originalTitle": "Test- Skull Fracture Child",
+   "category": "Ανατομία",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-008931",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-008931.glb",
+    "bytes": 832260,
+    "sha256": "9691e755d98ade162e785b7b33ea5c0f8753376b280b4974ecbdfe1f71fe314b",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 286542,
+    "original": {
+     "bytes": 24014692,
+     "sha256": "a1280223166f40d5ac73bf64ec282f7eedd1c5299773c97fe7914ab24fd135e2"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-008970",
    "accession": "3DPX-008970",
    "entryId": 8970,
@@ -19359,6 +19413,59 @@
     "original": {
      "bytes": 425252,
      "sha256": "a5fbbc776c04a477dcb5229461afb86eed22e5bd4ed3a3915b78c089e465eed1"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-011854",
+   "accession": "3DPX-011854",
+   "entryId": 11854,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Tomographic subvolume average of Ebola (EBOV-Makona) glycoprotein on the surface of virus-like particles",
+   "greekTitle": null,
+   "originalTitle": "Tomographic subvolume average of Ebola (EBOV-Makona) glycoprotein on the surface of virus-like particles",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-011854",
+   "archive": {
+    "files": 8,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
+    "formats": [
+     "GLB",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-011854.glb",
+    "bytes": 21208,
+    "sha256": "1ff99b1dcd4b995aa3a44980f2ea6970896228d80dc82d76b6c0ae167721e241",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 6292,
+    "original": {
+     "bytes": 152268,
+     "sha256": "89b9da646bac3f96ff3b4e4af539e0c4c381711a0c9c8c86872c46ec3f202507"
     }
    },
    "restrictionCode": null,
@@ -20922,6 +21029,57 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-015988",
+   "accession": "3DPX-015988",
+   "entryId": 15988,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · Hepatitis B Relaxed Circular DNA (PathogenAR)",
+   "greekTitle": null,
+   "originalTitle": "Hepatitis B Relaxed Circular DNA (PathogenAR)",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 5,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-015988",
+   "archive": {
+    "files": 2,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-015988.glb",
+    "bytes": 202428,
+    "sha256": "1e3b552d67bbfbaea038158928373df83deb27ac5f6401231d72fec38481f195",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 40101,
+    "original": {
+     "bytes": 1114832,
+     "sha256": "bedb43e9f004e4332f1d69870dcb8001b760e9f7a5f1afa34ebaec02d2695bf8"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-015992",
    "accession": "3DPX-015992",
    "entryId": 15992,
@@ -21122,6 +21280,60 @@
     "original": {
      "bytes": 3011028,
      "sha256": "204f7b19162b3de288e6e74e2dcd0551bed96dffcc0da68216dd8c85d13cb0ff"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-016310",
+   "accession": "3DPX-016310",
+   "entryId": 16310,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Κύτταρα και οργανίδια · Streptococcus salivarius (monococcus)",
+   "greekTitle": null,
+   "originalTitle": "Streptococcus salivarius (monococcus)",
+   "category": "Κύτταρα και οργανίδια",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "CC-BY-SA",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 3,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-016310",
+   "archive": {
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-016310.glb",
+    "bytes": 129952,
+    "sha256": "62a9f0179183862906e2950f34de4c5c258a52cec95a67ef1cc0460cdfc77597",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 63232,
+    "original": {
+     "bytes": 4769772,
+     "sha256": "c16525908affd99d5bb4d104ef724bf26f4921686ac87f52a97900bebd2b087c"
     }
    },
    "restrictionCode": null,
@@ -22366,15 +22578,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-016822",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-16801-16900",
-     "package": "atla-nih3d-16801-16900-part-016.tar.zst",
-     "file": "016822-002-mysegmenter_femur-r-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -22436,15 +22648,15 @@
    "sourceVersion": 3,
    "originalPage": "https://3d.nih.gov/entries/3DPX-016823",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-16801-16900",
-     "package": "atla-nih3d-16801-16900-part-016.tar.zst",
-     "file": "016823-002-mysegmenter_femur-l-nih3d.glb.glb"
-    },
+    "files": 5,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -27717,15 +27929,13 @@
    "sourceVersion": 2,
    "originalPage": "https://3d.nih.gov/entries/3DPX-021010",
    "archive": {
-    "files": 1,
-    "image": null,
-    "release": {
-     "release": "ekab-nih3d-recovered-21001-21100",
-     "package": "atla-nih3d-21001-21100-part-000.tar.zst",
-     "file": "021010-001-3d-vh-m-main-bronchus-nih3d.glb.glb"
-    },
+    "files": 3,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
     "formats": [
-     "GLB"
+     "GLB",
+     "WRL",
+     "X3D"
     ]
    },
    "delivery": {
@@ -29955,6 +30165,60 @@
    "clinicalUseApproved": false
   },
   {
+   "id": "3DPX-023405",
+   "accession": "3DPX-023405",
+   "entryId": 23405,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · N3",
+   "greekTitle": null,
+   "originalTitle": "N3",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-023405",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023405.glb",
+    "bytes": 11644,
+    "sha256": "10d2b9161a31fd3fca3bc2eeb910af7fdedd578cbfb30b6267d998d8cf5c1864",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 4316,
+    "original": {
+     "bytes": 84428,
+     "sha256": "1e5eff23e703e6d184d09fc8b64945e12484a659401546b87ec37de1f2a773ea"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
    "id": "3DPX-023406",
    "accession": "3DPX-023406",
    "entryId": 23406,
@@ -29996,6 +30260,60 @@
     "original": {
      "bytes": 84432,
      "sha256": "32c19ac1f5d07c251f421e615c7226eb873bee1883dd16286a69f32420fa494c"
+    }
+   },
+   "restrictionCode": null,
+   "restriction": "Δεν έχει τεκμηριωθεί εκπαιδευτική σύνδεση· μόνο χειροκίνητη προβολή.",
+   "surfaces": [
+    "library"
+   ],
+   "saekChapters": [],
+   "scopeStatus": "IN_SCOPE_RESEARCH_CANDIDATE",
+   "scientificApproval": "NOT_ESTABLISHED",
+   "clinicalUseApproved": false
+  },
+  {
+   "id": "3DPX-023407",
+   "accession": "3DPX-023407",
+   "entryId": 23407,
+   "source": "nih3d",
+   "sourceLabel": "NIH 3D",
+   "label": "Βιομακρομόριο · N5",
+   "greekTitle": null,
+   "originalTitle": "N5",
+   "category": "Βιομακρομόριο",
+   "kind": null,
+   "structures": [],
+   "finding": null,
+   "laterality": null,
+   "license": "Public Domain",
+   "rightsBasis": "SOURCE_LICENSE",
+   "creator": null,
+   "sourceVersion": 2,
+   "originalPage": "https://3d.nih.gov/entries/3DPX-023407",
+   "archive": {
+    "files": 15,
+    "image": "ghcr.io/6d9757cmp5-creator/atla-nih3d-archive@sha256:7861de4f827f3fac2e4e99025f66f00929cfd56f32732a61034f2a98a0a665d8",
+    "release": null,
+    "formats": [
+     "GLB",
+     "OBJ",
+     "STL",
+     "WRL",
+     "X3D"
+    ]
+   },
+   "delivery": {
+    "path": "tools/atla-ai/resources/nih3d-library/models/3DPX-023407.glb",
+    "bytes": 13172,
+    "sha256": "221efcaca117c31291627b4f7f90000107caf01a1e19aed88610e5617d6e6772",
+    "format": "glb",
+    "derived": true,
+    "transform": "optimize --compress draco --texture-compress webp --simplify false --join false --flatten false --instance false --palette false",
+    "triangles": 4796,
+    "original": {
+     "bytes": 93648,
+     "sha256": "3191752dd05d0d95b4a68ece96f8b4b6b616e15c3a80cc450ba9f4845cf60ae8"
     }
    },
    "restrictionCode": null,
