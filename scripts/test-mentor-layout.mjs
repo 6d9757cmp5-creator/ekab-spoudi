@@ -11,17 +11,13 @@ const text=path=>file(path).toString('utf8');
 const modules={
  'mentor-lab.js':'mentor/app/lab.js',
  'mentor-home.js':'mentor/app/home.js',
- 'mentor-live.js':'mentor/app/live.js',
  'mentor-library.js':'mentor/app/library.js',
  'mentor-oral.js':'mentor/app/oral.js',
  'mentor-ecg.js':'tools/ecg-lab/app/ecg.js', // canonical owner moved to ECG Lab (AGENTS.md)
- 'mentor-scenarios.js':'mentor/app/scenarios.js',
  'mentor-readonly.js':'mentor/app/readonly.js',
- 'mentor-voice.mjs':'mentor/voice/speech.mjs',
  'mentor-avatar-live.mjs':'mentor/avatar/live.mjs',
  'mentor-cinematic.mjs':'mentor/avatar/cinematic.mjs',
- 'mentor-3d.mjs':'mentor/avatar/hologram.mjs',
- 'mentor-real3d.bundle.mjs':'mentor/avatar/real3d.bundle.mjs'
+ 'mentor-3d.mjs':'mentor/avatar/hologram.mjs'
 };
 const css=['mentor-lab.css','mentor-cinematic.css','mentor-real3d.css',
  'mentor-avatar-live.css','mentor-3d.css'];
@@ -52,9 +48,8 @@ test('All canonical internal JavaScript imports resolve locally',()=>{
  }
 });
 test('Public URLs still exist; actual visible pages load centralized styles and classic scripts',()=>{
- const html=['index.html','mentor-lab.html','mentor-live.html','mentor-oral.html',
-  'mentor-ecg.html','mentor-library.html','mentor-readonly.html','mentor-scenarios.html',
-  'mentor-presence.html'];
+ const html=['index.html','mentor-lab.html','mentor-oral.html',
+  'mentor-ecg.html','mentor-library.html','mentor-readonly.html'];
  for(const p of html)assert.ok(existsSync(join(root,p)),p);
  const lab=text('mentor-lab.html');
  assert.match(lab,/src="mentor-lab\.js"/);

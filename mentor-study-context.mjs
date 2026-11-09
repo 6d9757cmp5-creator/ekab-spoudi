@@ -23,15 +23,7 @@ if(topic){
    back.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
    panel.append(back);
   }
-  const lab=document.createElement('a');lab.href=makeJourneyUrl('mentor-protocol-suite.html',context,'lab');
-  lab.textContent='Εργαστήριο πρωτοκόλλων →';lab.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
-  panel.append(lab);
   hero.insertBefore(panel,hero.firstChild);
- }
- // Existing CTAs must open the SAME topic; do not create another MENTOR instance.
- for(const anchor of document.querySelectorAll('a[href^="mentor-protocol-suite.html?"]')){
-  const previous=new URL(anchor.href,location.href);
-  anchor.href=makeJourneyUrl('mentor-protocol-suite.html',context,previous.searchParams.get('view'));
  }
  if(field&&!field.value)field.value='Θέλω να μελετήσω το θέμα: '+focus;
 }

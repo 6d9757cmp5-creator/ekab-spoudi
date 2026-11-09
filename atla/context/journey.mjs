@@ -9,7 +9,7 @@ import {ALL_TOPICS} from '../../protocols-data.mjs';
 const TOPICS=new Set(ALL_TOPICS.map(item=>item.id));
 const SOURCES=new Set([
   'saek.html','eoppep.html','farmaka.html','seminar-prep.html',
-  'mentor-ecg.html','protocols.html','mentor-live.html','ui-tools/anatomy-3d/index.html'
+  'mentor-ecg.html','protocols.html','ui-tools/anatomy-3d/index.html'
 ]);
 const COURSE=/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/;
 const tidy=(value,max)=>String(value??'').replace(/[\x00-\x1f\x7f<>]/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
@@ -25,7 +25,7 @@ export function contextFromQuery(query){
   return {topic,from:validSource(q.get('from')),focus:safeFocus(q.get('focus')),...(chapter?{chapter}:{})};
 }
 export function makeJourneyUrl(page,{topic,from='',focus='',chapter=''},view=''){
-  if(!['mentor-lab.html','mentor-protocol-suite.html'].includes(page))return '';
+  if(page!=='mentor-lab.html')return '';
   const id=validTopic(topic);
   if(!id)return '';
   const params=new URLSearchParams({topic:id});
@@ -34,8 +34,7 @@ export function makeJourneyUrl(page,{topic,from='',focus='',chapter=''},view='')
   const caption=safeFocus(focus);
   if(caption)params.set('focus',caption);
   if(source&&COURSE.test(source)&&safeChapter(chapter))params.set('chapter',chapter);
-  if(page==='mentor-protocol-suite.html')params.set('view',view==='debrief'?'debrief':'lab');
-  return page+'?'+params.toString()+(page==='mentor-lab.html'?'#mentor-presence':'');
+  return page+'?'+params.toString()+'#mentor-presence';
 }
 export function topicForSource(from){
   const source=validSource(from);
@@ -43,7 +42,7 @@ export function topicForSource(from){
   return {
     'eoppep.html':'eoppep','farmaka.html':'pharmacy',
     'seminar-prep.html':'seminars','mentor-ecg.html':'ecg',
-    'protocols.html':'trauma','mentor-live.html':'trauma',
+    'protocols.html':'trauma',
     'ui-tools/anatomy-3d/index.html':'anatomy'
   }[source]||'';
 }

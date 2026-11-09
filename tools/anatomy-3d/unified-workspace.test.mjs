@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {viewerHref} from '../atla-ai/nih3d-library.mjs';
-for(const file of ['ui-tools/anatomy-3d/index.html','tools/anatomy-3d/index.html']){
+for(const file of ['ui-tools/anatomy-3d/index.html']){
  const html=readFileSync(file,'utf8');
  assert.match(html,/id="base-anatomy"/);
  assert.match(html,/id="models"/);

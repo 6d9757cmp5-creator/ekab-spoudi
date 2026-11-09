@@ -6,11 +6,6 @@
 const COURSE=/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/;
 const LESSON=/^lesson-(?:[1-9]|[1-9][0-9]|100)$/;
 const $=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
-export function practiceHref(file,lesson,title){
- if(!COURSE.test(file)||!LESSON.test(lesson))return '';
- const query=new URLSearchParams({from:file,chapter:lesson,focus:String(title||'').trim().slice(0,90)});
- return 'mentor-next.html?'+query.toString();
-}
 export function installSaekPractice(root=document){
  const file=location.pathname.split('/').pop()||'';
  if(!COURSE.test(file))return 0;

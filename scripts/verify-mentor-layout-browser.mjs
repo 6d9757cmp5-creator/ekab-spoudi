@@ -45,7 +45,7 @@ try{
  assert.ok(requests.includes('/mentor/app/personal-v1.js'));
  await page.locator('#tab-memory').click();
  assert.equal(await page.locator('#panel-memory').isVisible(),true);
- for(const p of ['mentor-live.html','mentor-oral.html','mentor-ecg.html','mentor-library.html','mentor-scenarios.html']){
+ for(const p of ['practical_exam.html','mentor-oral.html','mentor-ecg.html','mentor-library.html']){
   await page.goto(base+p,{waitUntil:'domcontentloaded'});
   await page.waitForTimeout(160);
   assert.ok((await page.locator('body').innerText()).length>50,p);
@@ -78,10 +78,9 @@ try{
  await page.locator('#next-rigged-toggle').waitFor({timeout:20000});
  assert.ok(await page.locator('#next-rigged-toggle').isVisible(),
   'Preserve the pre-existing rigged educational model control from main');
- await page.locator('#atlas-cockpit-entry').waitFor({timeout:20000});
- assert.ok(await page.locator('#atlas-cockpit-entry [href^="saek-course-01.html"]').count());
- await page.locator('#atlas-cockpit-entry [data-atla-open]').click();
- assert.ok(await page.locator('.atla-panel').isVisible(),'ATLAS opt-in from Cockpit');
+ // An old lesson link into the simulator now lands on the EOPPEP practical exam, without a lesson bridge.
+ assert.equal(await page.locator('#atlas-cockpit-entry').count(),0,'No SAEK lesson bridge into the simulator');
+ assert.match(await page.title(),/Πρακτική Εξέταση ΕΟΠΠΕΠ/);
  await page.setViewportSize({width:390,height:844});
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
  assert.equal(overflow,false,'Cockpit ATLAS entry must not cause horizontal overflow on mobile');

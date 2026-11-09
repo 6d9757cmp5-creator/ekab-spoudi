@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
 import {mockAtlasReply,MOCK_LABEL} from './ai/mock.mjs';
 import {appendTurn,loadTurns,historyForAi} from './student/memory.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
@@ -36,14 +36,11 @@ test('ATLAS mock is local and does not share the AI-grading evaluator',()=>{
  assert.match(grader,/ekab-spoudi-answer-grader/);
  assert.doesNotMatch(assistant,/ai-grading-config\.js|ai-grading-client\.js/);
 });
-test('Clinical Cockpit owns the surviving mission entrypoints',()=>{
+test('Only the EOPPEP practical exam remains as a patient simulation',()=>{
  const cockpit=read('mentor-next.html');
- assert.match(cockpit,/href="mentor-live\.html"/);
- assert.match(cockpit,/href="mentor-scenarios\.html"/);
+ assert.match(cockpit,/<title>Πρακτική Εξέταση ΕΟΠΠΕΠ/);
  assert.match(cockpit,/Ανασκόπηση αποστολής/);
- for(const page of ['mentor-live.html','mentor-scenarios.html']){
-  const code=read(page);
-  assert.match(code,/src="atla\/assistant\.mjs"/);
-  assert.doesNotMatch(code,/src="mentor\/presence\/presence\.mjs"/);
- }
+ assert.doesNotMatch(cockpit,/mentor-live|mentor-scenarios|next-general-group/);
+ for(const page of ['mentor-live.html','mentor-scenarios.html','mentor-presence.html','mentor-protocol-suite.html'])
+  assert.equal(existsSync(new URL('../'+page,import.meta.url)),false,page+' must stay removed');
 });

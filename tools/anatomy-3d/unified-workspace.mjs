@@ -49,6 +49,13 @@ for(const button of [basicButton,modelsButton]){
   (target==='base'?basicButton:modelsButton).focus();
  });
 }
+// «Λεπτομερής εξερεύνηση» of the selected structure: same page, detail pane, that structure only.
+document.getElementById('detailExplore')?.addEventListener('click',event=>{
+ const {greek='',english=''}=event.currentTarget.dataset;
+ window.ATLA_EXPLORE_REQUEST={greek,english};
+ window.dispatchEvent(new CustomEvent('atla:explore-structure',{detail:{greek,english}}));
+ switchTo('models');
+});
 window.addEventListener('hashchange',()=>show(location.hash==='#models'?'models':'base'));
 show(location.hash==='#models'?'models':'base');
 

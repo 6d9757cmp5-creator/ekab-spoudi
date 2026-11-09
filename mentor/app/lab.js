@@ -102,6 +102,8 @@ async function startCase(caseId){
   finally{state.busy=false;}
 }
 function renderMission(){
+  // The mission panel was removed with the general simulators; only EOPPEP practical remains.
+  if(!$('case-list'))return;
   renderCards();
   const session=state.session;
   if(!session){
@@ -533,11 +535,11 @@ async function renderPlan(){
     const summary=await state.store.overview(state.scope);
     const minutes=Number($('study-duration').value)||25;
     const focus=summary.suggested_focus;
-    const label=focus?COMPETENCIES[focus]:'Επόμενη αποστολή';
+    const label=focus?COMPETENCIES[focus]:'Πρακτική ΕΟΠΠΕΠ';
     const target=$('plan-output');target.replaceChildren();
     target.append(
       make('strong',null,'Πρόταση: '+label),
-      make('p',null,'Μελέτη '+Math.round(minutes*.35)+' λεπτά · Διαδραστική αποστολή '+Math.round(minutes*.5)+' λεπτά · Ανασκόπηση '+(minutes-Math.round(minutes*.35)-Math.round(minutes*.5))+' λεπτά.'),
+      make('p',null,'Μελέτη '+Math.round(minutes*.35)+' λεπτά · Πρακτική ΕΟΠΠΕΠ '+Math.round(minutes*.5)+' λεπτά · Ανασκόπηση '+(minutes-Math.round(minutes*.35)-Math.round(minutes*.5))+' λεπτά.'),
       make('p','muted small','Πρόταση βάσει καταγραφών ATLA, όχι πιστοποιημένη εκτίμηση ικανότητας.')
     );
     if(state.activities){
@@ -592,7 +594,7 @@ async function boot(){
   // The page has one ATLA: its button opens the same assistant as every other page.
   if($('mentor-hero-form'))wireMentorPresence();
   $('atla-open-chat')?.addEventListener('click',()=>document.querySelector('.atla-launcher')?.click());
-  $('restart').addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
+  $('restart')?.addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
   $('clear-mentor').addEventListener('click',()=>void eraseMentor());
@@ -602,7 +604,7 @@ async function boot(){
     try{state.store=createMentorStore(await openMentorDb());}
     catch{state.store=createVolatileMentorStore();}
     state.session=await state.store.active(state.scope);
-    state.activities=await mountActivities({scope:state.scope,notify,
+    if($('mci-picker'))state.activities=await mountActivities({scope:state.scope,notify,
       onChange:async()=>{await renderMemory();await renderPlan();}});
     state.initialized=true;
     $('privacy-text').textContent=state.store.persistent?

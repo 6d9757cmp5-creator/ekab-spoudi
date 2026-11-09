@@ -28,7 +28,7 @@
   <main id="main">
     <div class="one-anatomy-tabs" role="tablist" aria-label="Ενιαίος χώρος ανατομίας">
       <button type="button" id="unified-basic" role="tab" aria-controls="base-anatomy" aria-selected="true">Ανθρώπινο σώμα · Σκελετός / Όργανα</button>
-      <button type="button" id="unified-catalog" role="tab" aria-controls="models" aria-selected="false">Εξειδικευμένα 3D · Όλη η βιβλιοθήκη</button>
+      <button type="button" id="unified-catalog" role="tab" aria-controls="models" aria-selected="false">Λεπτομερής εξερεύνηση</button>
     </div>
     <div id="base-anatomy" role="tabpanel" aria-labelledby="unified-basic">
     <section class="intro">
@@ -96,7 +96,7 @@
           <button type="button" role="tab" aria-selected="false" aria-controls="quizPanel" id="quizTab">Αυτοέλεγχος</button>
         </div>
         <div id="explorePanel" role="tabpanel" aria-labelledby="exploreTab">
-          <article class="detail-card" id="detailCard" aria-live="polite" hidden><span class="detail-label">ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ</span><div class="detail-title"><span id="detailIcon" class="detail-icon">✚</span><div><h3 id="detailName"></h3><span id="detailSystem"></span></div></div><p id="detailDescription"></p><small id="detailOriginal" class="detail-original"></small><a id="detailStudy" class="detail-study" href="../../saek-course-01.html" hidden>Άνοιγμα σχετικού κεφαλαίου ΣΑΕΚ <span aria-hidden="true">↗</span></a></article>
+          <article class="detail-card" id="detailCard" aria-live="polite" hidden><span class="detail-label">ΕΠΙΛΕΓΜΕΝΟ ΣΗΜΕΙΟ</span><div class="detail-title"><span id="detailIcon" class="detail-icon">✚</span><div><h3 id="detailName"></h3><span id="detailSystem"></span></div></div><p id="detailDescription"></p><small id="detailOriginal" class="detail-original"></small><button type="button" id="detailExplore" class="detail-study detail-explore" hidden>Λεπτομερής εξερεύνηση <span aria-hidden="true">⌕</span></button><a id="detailStudy" class="detail-study" href="../../saek-course-01.html" hidden>Άνοιγμα σχετικού κεφαλαίου ΣΑΕΚ <span aria-hidden="true">↗</span></a></article>
           <div class="list-header"><span>ΑΝΑΤΟΜΙΚΑ ΣΗΜΕΙΑ</span><span id="itemCount">—</span></div>
           <div id="anatomyList" class="anatomy-list" aria-label="Λίστα ανατομικών σημείων"></div>
           
@@ -120,9 +120,9 @@
 
     <section id="models" class="unified-library" role="tabpanel" aria-labelledby="unified-catalog" hidden>
       <header class="unified-library-heading">
-        <h2>Εξειδικευμένα ιατρικά 3D μοντέλα</h2>
+        <h2>Λεπτομερής εξερεύνηση</h2>
         <a id="source-back" href="../../index.html" hidden>← Επιστροφή στο μάθημα</a>
-        <p>Ένα ενιαίο μητρώο για ανατομία, μεμονωμένα μέρη, κακώσεις, κύτταρα και ερευνητικά μοντέλα. Αναζήτησε και άνοιξε το μοντέλο εδώ, χωρίς μετάβαση σε άλλη σελίδα. Κάθε αρχείο φορτώνεται μόνο όταν το επιλέξεις.</p>
+        <p>Λεπτομερή μοντέλα πραγματικών ανθρώπινων δομών, μέσα στον ίδιο άτλαντα. Ξεκίνα επιλέγοντας μια δομή στο σώμα ή αναζήτησέ τη εδώ. Τα παθολογικά παραδείγματα σημειώνονται χωριστά και δεν αποτελούν πρότυπο φυσιολογικής ανατομίας.</p>
       </header>
       <p id="unified-library-message" role="status">Προετοιμασία κοινής βιβλιοθήκης…</p>
       <div hidden aria-hidden="true">
@@ -137,12 +137,11 @@
           <select id="study-filter" aria-label="Κατηγορία εξειδικευμένων μοντέλων">
             <option value="anatomy" selected>Ανατομία · ξεκίνα από εδώ</option>
             <option value="pathology">Παθολογικά παραδείγματα</option>
-            <option value="research">Ερευνητικά και βοηθητικά αρχεία</option>
-            <option value="all">Όλος ο κατάλογος · όλα τα μοντέλα</option>
+            <option value="all">Ανατομία και παθολογικά παραδείγματα</option>
           </select>
-          <p class="source-filter-help">Κατηγορίες από τα στοιχεία των αρχικών πηγών. Κανένα αρχείο δεν αποκρύπτεται οριστικά.</p>
+          <p class="source-filter-help">Εμφανίζονται μόνο ελεγμένες ανθρώπινες δομές. Μόρια, κύτταρα, συσκευές, ζωικά δείγματα και χαρακτήρες προσομοίωσης δεν ανήκουν στον άτλαντα.</p>
           <label for="source-query">Αναζήτηση μοντέλου ή ανατομικής δομής</label>
-          <input type="search" id="source-query" placeholder="π.χ. μηριαίο, καρδιά, κάταγμα, νευρώνας…" autocomplete="off">
+          <input type="search" id="source-query" placeholder="π.χ. μηριαίο, καρδιά, γόνατο, σπόνδυλος…" autocomplete="off">
           <label for="source-dataset" hidden>Ενιαίος κατάλογος συλλογών</label>
           <select id="source-dataset" hidden aria-label="Ενιαίος κατάλογος συλλογών">
             <option value="all" selected>Όλα τα διαθέσιμα και καταχωρισμένα</option>
@@ -151,9 +150,9 @@
             <option value="secondary">Ερευνητικά ανατομικά</option>
           </select>
           <p id="source-count" role="status">Ανάκτηση κοινής βιβλιοθήκης…</p>
-          <label for="source-model">Επιλογή συγκεκριμένου μοντέλου</label>
+          <label for="source-model">Επιλογή δομής</label>
           <select id="source-model" aria-label="Μοντέλο από την κοινή βιβλιοθήκη"></select>
-          <button type="button" id="source-load" disabled>Προβολή 3D εδώ</button>
+          <button type="button" id="source-load" disabled>Προβολή 3D</button>
           <p id="source-status" role="status" aria-live="polite">Επιλέξτε μοντέλο.</p>
           <div id="source-education-summary" class="source-study-card" role="note" aria-live="polite"></div>
           <p class="source-note" id="source-license"></p>

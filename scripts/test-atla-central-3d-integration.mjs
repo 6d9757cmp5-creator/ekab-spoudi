@@ -46,6 +46,6 @@ test('public UI is a Greek central library with explicit render, integrity and c
  assert.match(script,/choose3DQuality\(/);
  assert.match(script,/loadVerifiedGlb\(item,modelUrl\)/);
  assert.match(script,/matchesRegistryHash\(item,bytes\)/,'Both GLB and OBJ must verify against the registry');
- assert.match(read('ui-tools/anatomy-3d/index.html'),/Εξειδικευμένα ιατρικά 3D μοντέλα/);
- assert.match(read('mentor-next.html'),/Προεπισκόπηση πρόσθετων 3D μοντέλων/);
+ assert.match(read('ui-tools/anatomy-3d/index.html'),/Λεπτομερής εξερεύνηση/);
+ assert.doesNotMatch(read('mentor-next.html'),/atla-resource-preview/,'Anatomy and the EOPPEP practical stay separate');
 });

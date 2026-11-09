@@ -3,18 +3,19 @@ import assert from 'node:assert/strict';
 import {newSession,patientVitals,nextMinute,setFocus,setPlaying,execute,askPatient,summarize,reportText,loadSession,saveSession,validSession} from './next-sim.mjs';
 test('two independent patients and synthetic timed trends',()=>{
  let s=newSession();assert.notDeepEqual(patientVitals(s,'a'),patientVitals(s,'b'));
- s=nextMinute(s,5);assert.equal(s.minute,5);assert.notDeepEqual(patientVitals(s,'a'),patientVitals(newSession(),'a'));
+ // EOPPEP practical scenarios keep stable synthetic vitals while synthetic time advances.
+ s=nextMinute(s,5);assert.equal(s.minute,5);assert.deepEqual(patientVitals(s,'a'),patientVitals(newSession(),'a'));
  assert.equal(summarize(s).covered.length,0);
 });
 test('records actions and flags without treatment-driven physiology',()=>{
  let s=newSession();s=execute(s,'exam','scene');assert(s.flags.safety);
  const before=patientVitals(s,'a');s=execute(s,'interventions','handover');
- assert(s.flags.handover);assert.notDeepEqual(before,patientVitals(s,'a'));
+ assert(s.flags.handover);assert.deepEqual(before,patientVitals(s,'a'),'actions never drive the synthetic physiology');
  assert.equal(s.events.length,2);assert.match(reportText(s),/ΣΥΝΘΕΤΙΚΗ/);
 });
 test('free form uses bounded scripted replies, never calls AI',()=>{
  let s=askPatient(newSession(),'Τι αισθάνεστε;');
- assert.match(s.events[0].detail,/ενόχληση/);
+ assert.match(s.events[0].detail,/Δεν απαντά/,'the unconscious patient of scenario 1 does not answer');
  s=askPatient(s,'δόση αγωγής?');
  assert.match(s.events[1].detail,/Δεν έχω διαθέσιμη/);
  assert.throws(()=>askPatient(s,''));
