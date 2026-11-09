@@ -47,20 +47,10 @@ async function contextualSurfaces(ctx,name){
  // A revealed question about a structure with no model clears the previous reference.
  await exam('Τι είναι η καρωτίδα;',true);
  await page.waitForFunction(()=>document.querySelectorAll('#examReference .nih3d-research-reference').length===0);
+ // The clinical simulator was retired; old bookmarked URL must never mount a patient.
  await visit(page,'/mentor-next.html');
- const cockpit=(confirmedAnatomy,clinicalStructureConfirmed)=>page.evaluate(detail=>window.dispatchEvent(new CustomEvent('atla:nih3d-cockpit-anatomy',{detail})),{confirmedAnatomy,clinicalStructureConfirmed});
- assert.equal(await refs(page).count(),0,'Synthetic incidents are not confirmed fractures');
- await cockpit('Επιγονατίδα',false);
- await page.waitForTimeout(500);
- assert.equal(await refs(page).count(),0);
- await cockpit('Βραχιόνιο',true);
- await page.waitForTimeout(500);
- // A named structure may show its normal anatomy, never a fracture.
- assert(!/κάταγμα/i.test((await refs(page).allTextContents()).join(' ')),'A named structure alone never shows a fracture');
- await cockpit('Επιγονατίδα',true);
- await page.locator('.nih3d-research-reference[data-cockpit]').waitFor({state:'attached'});
- await cockpit('Τροχαίο',true);
- await page.waitForFunction(()=>document.querySelectorAll('.nih3d-research-reference').length===0);
+ await page.waitForURL(/mentor-ecg\.html$/, {timeout:15000});
+ assert.equal(await refs(page).count(),0,'Retired simulator cannot inject NIH clinical case references');
  await visit(page,'/ui-tools/anatomy-3d/index.html');
  await page.evaluate(()=>{
   document.querySelector('#detailName').textContent='Επιγονατίδα';

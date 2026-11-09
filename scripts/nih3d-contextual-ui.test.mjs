@@ -31,11 +31,15 @@ assert.equal(row.url,patella.originalPage);
 assert.equal(getApprovedOriginalSourceLink(normalizeNihEntry(row)),null,'A scientific approval is still not implied');
 for(const [file,needle] of [
  ['saek-exams.html','tools/atla-ai/nih3d-learning-surface.mjs'],
- ['mentor-next.html','tools/atla-ai/nih3d-learning-surface.mjs'],
  ['ui-tools/anatomy-3d/index.html','tools/atla-ai/nih3d-learning-surface.mjs'],
  ['ui-tools/anatomy-3d/saek-jumps.js','nih3d-learning-surface.mjs'],
  ['saek-exams.js','atla:saek-exam-question'],
- ['tools/patient-simulator/app/next-sim.mjs','atla:nih3d-cockpit-anatomy']]){
+ ['saek-exams.html','tools/atla-ai/nih3d-learning-surface.mjs']]){
  assert(readFileSync(file,'utf8').includes(needle),'Missing integration: '+file);
 }
-console.log('ATLA NIH contextual references over the shared library passed (lesson, anatomy, exam, cockpit, source integrity).');
+for(const p of ['mentor-next.html','mentor-live.html','mentor-scenarios.html']){
+ const html=readFileSync(p,'utf8');
+ assert.match(html,/http-equiv="refresh" content="0; url=mentor-ecg\.html"/);
+ assert.doesNotMatch(html,/src="tools\/patient-simulator\//);
+}
+console.log('ATLA NIH contextual references passed (lesson, anatomy, exam, source integrity, retired cockpit).');
