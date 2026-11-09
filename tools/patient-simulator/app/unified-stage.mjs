@@ -39,6 +39,54 @@ function texturedGround(color){
  texture.anisotropy=2;
  return new THREE.MeshStandardMaterial({color,roughness:.96,metalness:0,map:texture});
 }
+
+const ROAD_MATERIAL_FILES=Object.freeze([
+ '../assets/materials/asphalt_03_diff_1k.jpg',
+ '../assets/materials/asphalt_03_normal_1k.jpg',
+ '../assets/materials/asphalt_03_rough_1k.jpg'
+]);
+/** Real photograph-derived local CC0 PBR maps. Procedural fallback remains functional offline. */
+function photographicRoad(onStatus=()=>{}){
+ const fallback=texturedGround('#4c545b');
+ const loader=new THREE.TextureLoader();
+ onStatus('loading');
+ Promise.allSettled(ROAD_MATERIAL_FILES.map(file=>loader.loadAsync(new URL(file,import.meta.url).href)))
+  .then(results=>{
+   const loaded=results.filter(x=>x.status==='fulfilled').map(x=>x.value);
+   if(fallback.userData.atlaDisposed){loaded.forEach(t=>t.dispose());return;}
+   if(results.some(x=>x.status!=='fulfilled')){
+    loaded.forEach(t=>t.dispose());
+    onStatus('fallback');
+    return;
+   }
+   const [diffuse,normal,rough]=loaded;
+   for(const texture of loaded){
+    texture.wrapS=texture.wrapT=THREE.RepeatWrapping;
+    texture.repeat.set(11,2);
+    texture.anisotropy=4;
+   }
+   diffuse.colorSpace=THREE.SRGBColorSpace;
+   const prior=fallback.map;
+   fallback.map=diffuse;
+   fallback.normalMap=normal;
+   fallback.roughnessMap=rough;
+   fallback.color.set('#ffffff');
+   fallback.roughness=1;
+   fallback.metalness=0;
+   fallback.normalScale.set(.42,.42);
+   fallback.needsUpdate=true;
+   prior?.dispose();
+   onStatus('pbr-cc0');
+  }).catch(()=>onStatus('fallback'));
+ return fallback;
+}
+function disposeStageMaterial(mat){
+ if(!mat)return;
+ mat.userData.atlaDisposed=true;
+ for(const key of ['map','normalMap','roughnessMap'])mat[key]?.dispose?.();
+ mat.dispose?.();
+}
+
 function box(w,h,d,mat,x=0,y=0,z=0,group=null){
  const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
  mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;group?.add(mesh);return mesh;
@@ -47,9 +95,9 @@ function cylinder(r1,r2,h,mat,x,y,z,group){
  const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,16),mat);
  mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);return mesh;
 }
-function buildEnvironment(scene){
+function buildEnvironment(scene,onMaterialStatus=()=>{}){
  const root=new THREE.Group();root.name='Συνθετικό περιβάλλον';
- const road=texturedGround('#4c545b'),white=material('#e8eceb',.5),teal=material('#286677',.54),red=material('#a33c40',.65);
+ const road=scene==='road'?photographicRoad(onMaterialStatus):texturedGround('#4c545b'),white=material('#e8eceb',.5),teal=material('#286677',.54),red=material('#a33c40',.65);
  const sand=material('#b4b5af'),warm=material('#7b695c'),glass=new THREE.MeshPhysicalMaterial({color:'#7895a3',metalness:.06,roughness:.18,transparent:true,opacity:.74,clearcoat:.5});
  const ground=new THREE.Mesh(new THREE.PlaneGeometry(55,55),texturedGround(scene==='road'?'#69777d':scene==='home'?'#a19b91':'#9ba9ad'));
  ground.rotation.x=-Math.PI/2;ground.position.y=-0.055;ground.receiveShadow=true;root.add(ground);
@@ -242,12 +290,16 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
    background.traverse(node=>{
     if(node.isMesh){
      const mats=Array.isArray(node.material)?node.material:[node.material];
-     for(const mat of mats){mat?.map?.dispose?.();mat?.dispose?.();}
+     for(const mat of mats)disposeStageMaterial(mat);
      node.geometry?.dispose?.();
     }
    });
   }
-  background=buildEnvironment(desired);scene.add(background);
+  gl.domElement.dataset.roadMaterial=desired==='road'?'loading':'not-used';
+  background=buildEnvironment(desired,status=>{
+   if(!disposed&&environmentKind===desired)gl.domElement.dataset.roadMaterial=status;
+  });
+  scene.add(background);
   if(equipment)scene.remove(equipment);
   equipment=buildEquipment();scene.add(equipment);
   scene.background=new THREE.Color(desired==='home'?'#b0b4b1':desired==='square'?'#b4bec1':'#9daeb4');
@@ -338,7 +390,7 @@ export function mountUnifiedStage(host,{assets,onStatus=()=>{},onSelect=()=>{}}=
    gl.domElement.removeEventListener('pointerdown',onPointerDown);
    gl.domElement.removeEventListener('pointerup',onPointerUp);
    for(const obj of [background,equipment,...Object.values(people),...Object.values(marks)]){
-    obj?.traverse?.(node=>{node.geometry?.dispose?.();if(node.material&&(obj===background||obj===equipment||Object.values(marks).includes(obj))){const ms=Array.isArray(node.material)?node.material:[node.material];ms.forEach(m=>{m.map?.dispose?.();m.dispose?.();});}});
+    obj?.traverse?.(node=>{node.geometry?.dispose?.();if(node.material&&(obj===background||obj===equipment||Object.values(marks).includes(obj))){const ms=Array.isArray(node.material)?node.material:[node.material];ms.forEach(disposeStageMaterial);}});
    }
    gl.dispose();gl.domElement.remove();
   }
