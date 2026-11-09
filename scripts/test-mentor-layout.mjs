@@ -57,7 +57,8 @@ test('Public URLs still exist; actual visible pages load centralized styles and 
   'mentor-presence.html'];
  for(const p of html)assert.ok(existsSync(join(root,p)),p);
  const lab=text('mentor-lab.html');
- assert.match(lab,/src="mentor-lab\.js"/);
+ assert.doesNotMatch(lab,/src="mentor-lab\.js"/,'retired simulator controller must not load');
+ assert.match(lab,/src="atla\/assistant\.mjs"/,'ATLA assistant remains available');
  assert.match(lab,/src="mentor\/app\/adaptive\.js"/);
  assert.match(lab,/src="mentor\/app\/personal-v1\.js"/);
  assert.match(lab,/href="mentor\/styles\/mentor-lab\.css"/);
