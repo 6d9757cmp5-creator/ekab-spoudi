@@ -4,6 +4,8 @@ import {mountPatientScene} from './next-scene.mjs';
 import {patientCameraPreset} from './patient-camera.mjs';
 import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport} from '../core/next-review.mjs';
 import {buildCockpitEcgPoints} from './cockpit-ecg.mjs';
+import {renderPracticalPanel} from './practical-panel.mjs';
+import {practicalRehearsalReview,recordPracticalRehearsal,practicalReport} from '../core/practical-workshop.mjs';
 import {safeReturnHref} from '../../atla-ai/nih3d-library.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
@@ -11,6 +13,7 @@ const params=new URLSearchParams(location.search);
 // A scenario opened from a lesson page starts there; its saved progress resumes on its own.
 let state=getCase(params.get('case'))?loadCaseSession(localStorage,params.get('case')):loadSession(localStorage),tool='exam',result='Ξεκίνα από τον έλεγχο ασφάλειας σκηνής ή επίλεξε επόμενο βήμα.';
 let caseCategory=getCase(state.caseId)?.group?'practical':'general';
+let selectedPracticalStepId=null;
 const returnHref=safeReturnHref(params.get('from'),location.href,'');
 if(returnHref){$('next-return').href=returnHref;$('next-return').hidden=false;}
 let renderer=mountPatientScene($('next-canvas'));
@@ -274,6 +277,7 @@ function renderCaseLibrary(){
   button.addEventListener('click',()=>{
    if(c.id===state.caseId)return;
    caseCategory=c.group?'practical':'general';
+   selectedPracticalStepId=null;
    tool='dialogue';result='Φορτώθηκε η αποστολή «'+c.title+'». Το προηγούμενο περιστατικό παραμένει αποθηκευμένο τοπικά.';
    commit(loadCaseSession(localStorage,c.id),result);
    document.querySelector('.next-case-picker').open=false;
@@ -333,6 +337,19 @@ function renderMenu(){
  more.addEventListener('click',()=>{showAdvancedTools=!showAdvancedTools;renderMenu();});
  nav.append(more);
 }
+
+function messageForPracticeError(message){
+ const problems={
+  'choose-patient-a':'Για την πρακτική εξάσκηση επίλεξε πρώτα τον ασθενή του σεναρίου (Άτομο Α).',
+  'explain-action':'Περιέγραψε τι και γιατί θα έκανες με τουλάχιστον 12 χαρακτήρες.',
+  'invalid-equipment':'Ο επιλεγμένος εξοπλισμός δεν ανήκει στο τρέχον σενάριο.',
+  'step-already-recorded':'Έχει ήδη καταγραφεί αυτό το βήμα στην προσπάθεια.',
+  'session-finished-or-invalid':'Η προσπάθεια έχει ολοκληρωθεί. Ξεκίνα νέα για εξάσκηση.'
+ };
+ if(message.startsWith('missing-equipment:'))return 'Χρειάζεται να επιλέξεις: '+message.slice('missing-equipment:'.length);
+ if(message.startsWith('unrelated-equipment:'))return 'Έχεις επιλέξει άσχετο εξοπλισμό γι’ αυτό το βήμα: '+message.slice('unrelated-equipment:'.length);
+ return problems[message]||'Δεν καταγράφηκε η πρόβα. Εξέτασε τα στοιχεία και προσπάθησε ξανά.';
+}
 function renderTool(){
  const active=TOOLS.find(t=>t.id===tool)||TOOLS[0],actions=$('next-actions');
  $('next-tool-title').textContent=active.label+' · '+labelPerson(state.person);
@@ -360,10 +377,27 @@ function renderTool(){
  }else if(tool==='records'){
   actions.append(el('p','Καταγεγραμμένες ενέργειες: '+state.events.length+'. Τα δεδομένα παραμένουν στη συσκευή. Ο «Φάκελος» δεν αποτελεί ιατρικό έγγραφο.'));
   actions.append(actionButton('Μετάβαση στο ιστορικό',()=>{$('next-events').scrollIntoView({behavior:'smooth'});}));
+ }else if(tool==='interventions'&&practicalRehearsalReview(state).total){
+  renderPracticalPanel(actions,state,selectedPracticalStepId,id=>{
+   selectedPracticalStepId=id;renderTool();
+  },(id,answers)=>{
+   try{
+    const updated=recordPracticalRehearsal(state,id,answers);
+    commit(updated,'Καταγράφηκε γραπτή πρόβα εξοπλισμού και περιγραφής. Δεν εκτελέστηκε ιατρική πράξη.');
+    return '';
+   }catch(error){
+    const message=messageForPracticeError(String(error?.message||''));
+    showResult(message);
+    return message;
+   }
+  });
  }else if(tool==='debrief'){
   const r=summarize(state);
   if(!r.practiceSteps.length)actions.append(el('p','Καταγράφηκαν: '+(r.covered.join(' · ')||'κανένα βήμα')+'. Για επανάληψη: '+(r.missing.join(' · ')||'κανένα')+'.'));
   else{
+   const rehearsal=practicalRehearsalReview(state);
+   actions.append(el('p','Γραπτές πρόβες: '+rehearsal.recorded+'/'+rehearsal.total+'. Δεν βεβαιώνουν πρακτική επίδειξη ή κλινική δεξιότητα.','next-practice-intro'));
+   if(rehearsal.outOfOrder)actions.append(el('p','Η σειρά καταγραφής διαφέρει από την ακολουθία του διαθέσιμου υλικού. Επανάλαβε την άσκηση.','next-practice-rehearsal-warning'));
    actions.append(el('p','Ελεγμένη σειρά ενεργειών του σεναρίου, χωρίς βαθμολόγηση:','next-practice-intro'));
    const list=el('ul',undefined,'next-practice-steps');
    r.practiceSteps.forEach((step,i)=>list.append(el('li',(step.done?'✓ ':'○ ')+(i+1)+'. '+step.label)));
@@ -438,6 +472,13 @@ function renderReview(){
  const have=el('ul');for(const label of r.covered)have.append(el('li',label));if(!r.covered.length)have.append(el('li','Δεν υπάρχουν ακόμη.'));target.append(have);
  target.append(el('h3','Για επανάληψη · '+r.missing.length));
  const need=el('ul');for(const label of r.missing)need.append(el('li',label));if(!r.missing.length)need.append(el('li','Όλα τα οργανωτικά βήματα έχουν καταγραφεί.'));target.append(need);
+ const practical=practicalRehearsalReview(state);
+ if(practical.total){
+  target.append(el('h3','Πρακτική ΕΟΠΠΕΠ · Γραπτές πρόβες '+practical.recorded+'/'+practical.total));
+  target.append(el('p',practical.disclaimer));
+  if(practical.outOfOrder)target.append(el('p','Η σειρά καταγραφής αποκλίνει από το διαθέσιμο εκπαιδευτικό υλικό.','next-practice-rehearsal-warning'));
+  if(practical.pendingLab.length)target.append(el('p','Απαιτείται πραγματική εργαστηριακή επίδειξη για: '+practical.pendingLab.join(' · ')));
+ }
  const events=$('next-events');events.replaceChildren();
  if(!state.events.length)events.append(el('li','Καμία καταγραφή ακόμη.'));
  else state.events.forEach((e,i)=>{
@@ -517,7 +558,7 @@ $('next-finish').addEventListener('click',()=>{
  $('next-review-body').scrollIntoView({behavior:'smooth'});
 });
 $('next-download').addEventListener('click',()=>{
- const blob=new Blob([reportText(state)+'\n'+buildEvidenceReport(state)],{type:'text/plain;charset=utf-8'});
+ const blob=new Blob([reportText(state)+'\n'+buildEvidenceReport(state)+'\n'+practicalReport(state)],{type:'text/plain;charset=utf-8'});
  const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='mentor-next-ekab-report.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 let elapsed=0;
