@@ -36,14 +36,17 @@ test('ATLAS mock is local and does not share the AI-grading evaluator',()=>{
  assert.match(grader,/ekab-spoudi-answer-grader/);
  assert.doesNotMatch(assistant,/ai-grading-config\.js|ai-grading-client\.js/);
 });
-test('Clinical Cockpit owns the surviving mission entrypoints',()=>{
- const cockpit=read('mentor-next.html');
- assert.match(cockpit,/href="mentor-live\.html"/);
- assert.match(cockpit,/href="mentor-scenarios\.html"/);
- assert.match(cockpit,/Ανασκόπηση αποστολής/);
- for(const page of ['mentor-live.html','mentor-scenarios.html']){
-  const code=read(page);
-  assert.match(code,/src="atla\/assistant\.mjs"/);
-  assert.doesNotMatch(code,/src="mentor\/presence\/presence\.mjs"/);
+test('retired public patient simulators cannot restart but ATLA and ECG remain reachable',()=>{
+ const ecg=read('mentor-ecg.html');
+ assert.match(ecg,/src="tools\/ecg-lab\/app\/ecg-practice\.js"/);
+ for(const path of ['mentor-next.html','mentor-live.html','mentor-scenarios.html']){
+  const html=read(path);
+  assert.match(html,/http-equiv="refresh" content="0; url=mentor-ecg\.html"/,path);
+  assert.doesNotMatch(html,/src="mentor\/app\/live\.js"|src="tools\/patient-simulator\//);
  }
+ const lab=read('mentor-lab.html');
+ assert.match(lab,/src="atla\/assistant\.mjs"/);
+ assert.doesNotMatch(lab,/src="mentor-lab\.js"/);
+ assert.match(read('paramedic.html'),/href="mentor-ecg\.html"/);
+ assert.doesNotMatch(read('paramedic.html'),/href="mentor-(?:next|live|scenarios)\.html"/);
 });
