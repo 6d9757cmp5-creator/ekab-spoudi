@@ -81,6 +81,9 @@ jobs:
           node --check tools/patient-simulator/app/next-patient-mesh.mjs
           node --test tools/patient-simulator/app/next-patient-mesh.test.mjs
           node --check tools/patient-simulator/core/next-review.mjs
+          node --check tools/patient-simulator/core/practical-workshop.mjs
+          node --check tools/patient-simulator/app/practical-panel.mjs
+          node --test tools/patient-simulator/core/practical-workshop.test.mjs
           node --test tools/patient-simulator/core/next-sim.test.mjs tools/patient-simulator/core/next-review.test.mjs tools/patient-simulator/core/next-cases.test.mjs
           node --check mentor/core/live-debrief.mjs
           node --check mentor/core/live-interactions.mjs
