@@ -1,7 +1,7 @@
 name: Build original unified patient 3D renderer
 on:
   push:
-    branches: [main, feature/atla-full-model-workspace-20261103]
+    branches: [main, feature/atla-full-model-workspace-20261103, feat/atla-cc0-asphalt-pbr-20261109]
     paths:
       - tools/patient-simulator/app/unified-stage.mjs
       - .github/workflows/build-cockpit-stage.yml
