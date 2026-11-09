@@ -3,7 +3,6 @@ on:
   pull_request:
     paths:
       - 'theme-init.js'
-      - 'mentor/presence/presence.mjs'
       - 'services/recall/**'
       - 'scripts/verify-atlas-contextual-recall-browser.mjs'
       - '.github/workflows/pr124-contextual-recall.yml'
@@ -22,7 +21,6 @@ jobs:
       - name: Source syntax, policy and real progress selection
         run: |
           node --check theme-init.js
-          node --check mentor/presence/presence.mjs
           node --check services/recall/selector.mjs
           node --check services/recall/popup.mjs
           node --test services/recall/selector.test.mjs

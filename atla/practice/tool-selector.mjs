@@ -46,7 +46,7 @@ export function chooseTeachingTool({question='',chapterId='',videos=[]}={}){
   return {kind:'protocol',href:'protocols.html',label:'Άνοιξε τη βιβλιοθήκη πρωτοκόλλων',reason:'explicit-protocol-reference'};
  }
  if(/(?:προσομοιω|κλινικο σεναριο|σεναριο περιστατικ)/.test(q)&&/(τραυμα|ασθεν|περιστατικ|προσομοιω)/.test(q)){
-  return {kind:'simulation',href:'mentor-next.html',label:'Άνοιξε εκπαιδευτικό προσομοιωτή',reason:'explicit-simulation-practice'};
+  return {kind:'simulation',href:'practical_exam.html',label:'Άνοιξε την Πρακτική Εξέταση ΕΟΠΠΕΠ',reason:'explicit-simulation-practice'};
  }
  return null;
 }

@@ -36,22 +36,22 @@ test('S/B/A/R starts with missing observations, never fabricates vitals or treat
  assert.throws(()=>buildHandoverDraft(session,'c'),/unknown-person/);
 });
 test('S/B/A/R isolates patient records; includes only explicitly recorded synthetic values',()=>{
- let s=execute(newSession(),'exam','scene');
+ let s=execute(newSession('eoppep-practical-2'),'exam','scene');
  s=execute(s,'dialogue','symptoms');
  s=execute(s,'monitor','record');
  const a=buildHandoverDraft(s,'a'),b=buildHandoverDraft(s,'b');
  const monitorEvent=s.events.find(e=>e.actionId==='record');
  assert(a.includes(monitorEvent.detail));
- assert(a.includes('Έχω μια ενόχληση'));
+ assert(a.includes('Δεν μπορώ να πάρω ανάσα'));
  assert(!b.includes(monitorEvent.detail));
- assert(!b.includes('Έχω μια ενόχληση'));
+ assert(!b.includes('Δεν μπορώ να πάρω ανάσα'));
  assert.match(b,/Δεν καταγράφηκε συνομιλία/);
  s=setFocus(s,'b','full');
  s=askPatient(s,'Τι αισθάνεστε;');
  const after=buildHandoverDraft(s,'b');
- assert(after.includes('αναστατωμένος'));
- assert(!buildHandoverDraft(s,'a').includes('αναστατωμένος'));
+ assert(after.includes('Εγώ είμαι καλά'));
+ assert(!buildHandoverDraft(s,'a').includes('Εγώ είμαι καλά'));
  const exported=buildEvidenceReport(s);
  assert(exported.includes('ΠΡΟΣΧΕΔΙΑ ΔΟΜΗΜΕΝΗΣ ΠΑΡΑΔΟΣΗΣ'));
- assert(exported.includes('Άτομο Α')&&exported.includes('Άτομο Β'));
+ assert(exported.includes('Άνδρας 55 ετών')&&exported.includes('Μάρτυρας'));
 });

@@ -58,7 +58,8 @@ test('search across the original shared manifest without edits or duplicate copi
 test('curated categories retain all original registry records',()=>{
  const scopes={anatomy:0,pathology:0,research:0};
  for(const m of data.models)scopes[studyScope3D(m)]++;
- assert.deepEqual(scopes,{anatomy:264,pathology:98,research:178});
+ // The NIH import keeps adding models, so curated counts are floors rather than exact values.
+ for(const [k,min] of Object.entries({anatomy:264,pathology:98,research:178}))assert(scopes[k]>=min,k+' dropped below '+min+': '+scopes[k]);
  assert.equal(Object.values(scopes).reduce((a,b)=>a+b,0),data.models.length);
  assert.equal(studyScope3D(data.models.find(x=>x.id==='3DPX-000168')),'anatomy');
  assert.equal(studyScope3D({source:'nih3d',details:{kind:'pathology'}}),'pathology');

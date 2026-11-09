@@ -18,12 +18,11 @@ test('return page is strictly allowlisted including SAEK reader pages',()=>{
  }
 });
 test('context URL carries only public focus, topic and whitelisted return page',()=>{
- const url=makeJourneyUrl('mentor-protocol-suite.html',{topic:'saek',from:'saek-course-05.html',focus:'Η καρδιά και τα αγγεία'},'lab');
+ const url=makeJourneyUrl('mentor-lab.html',{topic:'saek',from:'saek-course-05.html',focus:'Η καρδιά και τα αγγεία'});
  const query=contextFromQuery(new URL(url,'https://example.test/').search);
  assert.deepEqual(query,{topic:'saek',from:'saek-course-05.html',focus:'Η καρδιά και τα αγγεία'});
  assert.equal(returnPage(query),'saek-course-05.html');
- const debrief=makeJourneyUrl('mentor-protocol-suite.html',query,'debrief');
- assert.match(debrief,/view=debrief/);
+ assert.equal(makeJourneyUrl('mentor-protocol-suite.html',query,'debrief'),'','Removed simulator pages are not journey targets');
  const mentor=makeJourneyUrl('mentor-lab.html',query);
  assert.match(mentor,/#mentor-presence$/);
  assert.ok(!mentor.includes('grade'));
@@ -49,7 +48,7 @@ test('source-to-mentor route handles root and nested course pages without person
 test('active SAEK chapter anchor survives Lab, Debrief and return navigation',()=>{
  const origin=journeyFromPage('/ekab-spoudi/saek-course-01.html','Αεραγωγός','lesson-11');
  assert.equal(origin.chapter,'lesson-11');
- const href=makeJourneyUrl('mentor-protocol-suite.html',origin,'debrief');
+ const href=makeJourneyUrl('mentor-lab.html',origin);
  const result=contextFromQuery(new URL(href,'https://example.test').search);
  assert.equal(result.chapter,'lesson-11');
  assert.equal(returnPage(result),'saek-course-01.html#lesson-11');

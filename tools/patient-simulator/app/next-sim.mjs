@@ -4,12 +4,15 @@ import {mountPatientScene} from './next-scene.mjs';
 import {patientCameraPreset} from './patient-camera.mjs';
 import {patientPose,missionEvidence,vitalTrend,buildEvidenceReport,buildHandoverDraft} from '../core/next-review.mjs';
 import {buildCockpitEcgPoints} from './cockpit-ecg.mjs';
+import {renderPracticalPanel} from './practical-panel.mjs';
+import {practicalRehearsalReview,recordPracticalRehearsal,practicalReport} from '../core/practical-workshop.mjs';
 import {safeReturnHref} from '../../atla-ai/nih3d-library.mjs';
 const $=id=>document.getElementById(id);
 const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 const params=new URLSearchParams(location.search);
 // A scenario opened from a lesson page starts there; its saved progress resumes on its own.
 let state=getCase(params.get('case'))?loadCaseSession(localStorage,params.get('case')):loadSession(localStorage),tool='exam',result='Ξεκίνα από τον έλεγχο ασφάλειας σκηνής ή επίλεξε επόμενο βήμα.';
+let selectedPracticalStepId=null;
 const returnHref=safeReturnHref(params.get('from'),location.href,'');
 if(returnHref){$('next-return').href=returnHref;$('next-return').hidden=false;}
 let renderer=mountPatientScene($('next-canvas'));
@@ -235,8 +238,12 @@ function actionButton(text,onClick,disabled=false){
  const b=el('button',text);b.type='button';b.disabled=disabled;b.addEventListener('click',onClick);return b;
 }
 
+function showCaseCategory(){
+ $('next-case-category-status').textContent='Προβολή: 6 πρακτικά σενάρια ΕΟΠΠΕΠ. Τρέχουσα άσκηση: '+getCase(state.caseId).title+'.';
+}
 function renderCaseLibrary(){
- const active=getCase(state.caseId),cases=$('next-case-list'),progress=caseProgress(localStorage);
+ const active=getCase(state.caseId),progress=caseProgress(localStorage);
+ showCaseCategory();
  $('next-case-title').textContent=active.title;
  $('next-case-briefing').textContent=active.briefing;
  $('next-case-goal').textContent=active.goal;
@@ -246,7 +253,7 @@ function renderCaseLibrary(){
   btn.replaceChildren(document.createTextNode(p.name+' '),el('small',p.setting));
  }
  const practical=$('next-practical-list'),facts=$('next-case-practical');
- cases.replaceChildren();practical.replaceChildren();
+ practical.replaceChildren();
  facts.hidden=!active.group;
  facts.replaceChildren();
  if(active.group){
@@ -261,12 +268,13 @@ function renderCaseLibrary(){
     el('small',c.location+' · '+(stored.events?stored.events+' καταγραφές · '+stored.minutes+'′':'Δεν έχει ξεκινήσει')));
   button.addEventListener('click',()=>{
    if(c.id===state.caseId)return;
+   selectedPracticalStepId=null;
    tool='dialogue';result='Φορτώθηκε η αποστολή «'+c.title+'». Το προηγούμενο περιστατικό παραμένει αποθηκευμένο τοπικά.';
    commit(loadCaseSession(localStorage,c.id),result);
    document.querySelector('.next-case-picker').open=false;
    $('next-stage').scrollIntoView({behavior:'smooth',block:'start'});
   });
-  (c.group?practical:cases).append(button);
+  practical.append(button);
  }
 }
 
@@ -276,6 +284,10 @@ function nextGuideStep(){
  const review=missionEvidence(state);
  if(state.finished)return {label:'Άνοιξε την ανασκόπηση της ολοκληρωμένης προσπάθειας',tool:'debrief',person:null,actionId:null,complete:true};
  if(!review.shared[0].done)return {label:'Έλεγξε την ασφάλεια της σκηνής',tool:'exam',person:state.person,actionId:'scene'};
+ const practical=practicalRehearsalReview(state);
+ if(practical.total&&practical.recorded<practical.total){
+  return {label:'Εξασκήσου σε βήμα πρακτικής ΕΟΠΠΕΠ ('+practical.recorded+'/'+practical.total+')',tool:'interventions',person:'a',actionId:null};
+ }
  const patients=[review.people.find(p=>p.id===state.person),...review.people.filter(p=>p.id!==state.person)].filter(Boolean);
  const paths={
   dialogue:{label:'Συνομίλησε με τον εικονικό ασθενή',tool:'dialogue',actionId:'symptoms'},
@@ -295,7 +307,10 @@ function renderGuide(){
  const review=missionEvidence(state),done=review.shared.filter(x=>x.done).length+review.people.reduce((sum,p)=>sum+p.covered,0);
  const next=nextGuideStep();
  $('next-guide-step').textContent='Επόμενο: '+next.label+(next.person?' · Άτομο '+next.person.toUpperCase():'');
- $('next-guide-progress').textContent='Καταγεγραμμένα '+done+'/11 εκπαιδευτικά βήματα · Καμία ενέργεια δεν εκτελείται αυτόματα.';
+ const practical=practicalRehearsalReview(state);
+ $('next-guide-progress').textContent=practical.total
+  ?'Γραπτές πρόβες '+practical.recorded+'/'+practical.total+' βημάτων ΕΟΠΠΕΠ · Καμία ιατρική πράξη δεν εκτελείται από το λογισμικό.'
+  :'Καταγεγραμμένα '+done+'/11 εκπαιδευτικά βήματα · Καμία ενέργεια δεν εκτελείται αυτόματα.';
  $('next-guide-action').textContent=state.finished?'◎ Άνοιξε την ανασκόπηση':'▶ Πήγαινε στο επόμενο βήμα';
 }
 function renderMenu(){
@@ -313,6 +328,19 @@ function renderMenu(){
  more.setAttribute('aria-expanded',String(showAdvancedTools));
  more.addEventListener('click',()=>{showAdvancedTools=!showAdvancedTools;renderMenu();});
  nav.append(more);
+}
+
+function messageForPracticeError(message){
+ const problems={
+  'choose-patient-a':'Για την πρακτική εξάσκηση επίλεξε πρώτα τον ασθενή του σεναρίου (Άτομο Α).',
+  'explain-action':'Περιέγραψε τι και γιατί θα έκανες με τουλάχιστον 12 χαρακτήρες.',
+  'invalid-equipment':'Ο επιλεγμένος εξοπλισμός δεν ανήκει στο τρέχον σενάριο.',
+  'step-already-recorded':'Έχει ήδη καταγραφεί αυτό το βήμα στην προσπάθεια.',
+  'session-finished-or-invalid':'Η προσπάθεια έχει ολοκληρωθεί. Ξεκίνα νέα για εξάσκηση.'
+ };
+ if(message.startsWith('missing-equipment:'))return 'Χρειάζεται να επιλέξεις: '+message.slice('missing-equipment:'.length);
+ if(message.startsWith('unrelated-equipment:'))return 'Έχεις επιλέξει άσχετο εξοπλισμό γι’ αυτό το βήμα: '+message.slice('unrelated-equipment:'.length);
+ return problems[message]||'Δεν καταγράφηκε η πρόβα. Εξέτασε τα στοιχεία και προσπάθησε ξανά.';
 }
 function renderTool(){
  const active=TOOLS.find(t=>t.id===tool)||TOOLS[0],actions=$('next-actions');
@@ -341,10 +369,27 @@ function renderTool(){
  }else if(tool==='records'){
   actions.append(el('p','Καταγεγραμμένες ενέργειες: '+state.events.length+'. Τα δεδομένα παραμένουν στη συσκευή. Ο «Φάκελος» δεν αποτελεί ιατρικό έγγραφο.'));
   actions.append(actionButton('Μετάβαση στο ιστορικό',()=>{$('next-events').scrollIntoView({behavior:'smooth'});}));
+ }else if(tool==='interventions'&&practicalRehearsalReview(state).total){
+  renderPracticalPanel(actions,state,selectedPracticalStepId,id=>{
+   selectedPracticalStepId=id;renderTool();
+  },(id,answers)=>{
+   try{
+    const updated=recordPracticalRehearsal(state,id,answers);
+    commit(updated,'Καταγράφηκε γραπτή πρόβα εξοπλισμού και περιγραφής. Δεν εκτελέστηκε ιατρική πράξη.');
+    return '';
+   }catch(error){
+    const message=messageForPracticeError(String(error?.message||''));
+    showResult(message);
+    return message;
+   }
+  });
  }else if(tool==='debrief'){
   const r=summarize(state);
   if(!r.practiceSteps.length)actions.append(el('p','Καταγράφηκαν: '+(r.covered.join(' · ')||'κανένα βήμα')+'. Για επανάληψη: '+(r.missing.join(' · ')||'κανένα')+'.'));
   else{
+   const rehearsal=practicalRehearsalReview(state);
+   actions.append(el('p','Γραπτές πρόβες: '+rehearsal.recorded+'/'+rehearsal.total+'. Δεν βεβαιώνουν πρακτική επίδειξη ή κλινική δεξιότητα.','next-practice-intro'));
+   if(rehearsal.outOfOrder)actions.append(el('p','Η σειρά καταγραφής διαφέρει από την ακολουθία του διαθέσιμου υλικού. Επανάλαβε την άσκηση.','next-practice-rehearsal-warning'));
    actions.append(el('p','Ελεγμένη σειρά ενεργειών του σεναρίου, χωρίς βαθμολόγηση:','next-practice-intro'));
    const list=el('ul',undefined,'next-practice-steps');
    r.practiceSteps.forEach((step,i)=>list.append(el('li',(step.done?'✓ ':'○ ')+(i+1)+'. '+step.label)));
@@ -420,6 +465,13 @@ function renderReview(){
  const have=el('ul');for(const label of r.covered)have.append(el('li',label));if(!r.covered.length)have.append(el('li','Δεν υπάρχουν ακόμη.'));target.append(have);
  target.append(el('h3','Για επανάληψη · '+r.missing.length));
  const need=el('ul');for(const label of r.missing)need.append(el('li',label));if(!r.missing.length)need.append(el('li','Όλα τα οργανωτικά βήματα έχουν καταγραφεί.'));target.append(need);
+ const practical=practicalRehearsalReview(state);
+ if(practical.total){
+  target.append(el('h3','Πρακτική ΕΟΠΠΕΠ · Γραπτές πρόβες '+practical.recorded+'/'+practical.total));
+  target.append(el('p',practical.disclaimer));
+  if(practical.outOfOrder)target.append(el('p','Η σειρά καταγραφής αποκλίνει από το διαθέσιμο εκπαιδευτικό υλικό.','next-practice-rehearsal-warning'));
+  if(practical.pendingLab.length)target.append(el('p','Απαιτείται πραγματική εργαστηριακή επίδειξη για: '+practical.pendingLab.join(' · ')));
+ }
  const handover=el('section',undefined,'next-handover');
  handover.append(el('h3','Πρόβα παράδοσης · S/B/A/R'));
  handover.append(el('p','Ξεχωριστό προσχέδιο για κάθε άτομο. Μόνο ήδη καταγεγραμμένα συνθετικά στοιχεία· η προβολή και αντιγραφή δεν καταγράφουν ενέργεια.','next-handover-note'));
@@ -523,7 +575,7 @@ $('next-finish').addEventListener('click',()=>{
  $('next-review-body').scrollIntoView({behavior:'smooth'});
 });
 $('next-download').addEventListener('click',()=>{
- const blob=new Blob([reportText(state)+'\n'+buildEvidenceReport(state)],{type:'text/plain;charset=utf-8'});
+ const blob=new Blob([reportText(state)+'\n'+buildEvidenceReport(state)+'\n'+practicalReport(state)],{type:'text/plain;charset=utf-8'});
  const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='mentor-next-ekab-report.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 let elapsed=0;

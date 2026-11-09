@@ -33,11 +33,7 @@
   <section class="panel atla-lab-tools" aria-labelledby="atla-tools-title">
     <h2 id="atla-tools-title">Εξάσκηση</h2>
     <ul class="atla-tool-list">
-      <li><a href="mentor-next.html">🚑 Προσομοιωτής · νέα αποστολή</a></li>
-      <li><a href="mentor-live.html">🚑 Κλασική αποστολή · δύο τραυματίες</a></li>
-      <li><a href="mentor-scenarios.html">🗂️ Άτλας σεναρίων · 360 θέματα</a></li>
-      <li><a href="mentor-protocol-suite.html?topic=trauma&amp;view=lab">📋 ΕΡΓΑΣΤΗΡΙΟ ΠΡΩΤΟΚΟΛΛΩΝ</a></li>
-      <li><a href="mentor-protocol-suite.html?topic=trauma&amp;view=debrief">🔁 ΑΝΑΣΚΟΠΗΣΗ περιστατικού</a></li>
+      <li><a href="practical_exam.html">🩺 Πρακτική Εξέταση ΕΟΠΠΕΠ</a></li>
       <li><a href="mentor-oral.html">🎙️ Προφορική εξάσκηση</a></li>
       <li><a href="mentor-ecg.html">📈 Εργαστήριο ΗΚΓ</a></li>
       <li><a href="protocols.html">📘 Ελληνικά Πρωτόκολλα</a></li>
@@ -67,84 +63,12 @@
       <li><a href="ui-tools/mentor-roadmap.html">🧭 Όλες οι λειτουργίες του ATLA</a></li>
     </ul>
   </details>
-  <div class="disclaimer" role="note">
-    <strong>Δοκιμαστική προσομοίωση — όχι ιατρική οδηγία.</strong>
-    Τα περιστατικά είναι συνθετικά και εκκρεμεί ανεξάρτητος κλινικός έλεγχος. Δεν προσομοιώνουν πραγματικά ζωτικά σημεία, θεραπεία ή AI γιατρό. Οι βαθμοί ΣΑΕΚ/ΕΟΠΠΕΠ δεν αλλάζουν.
-  </div>
   <nav class="tabs" role="tablist" aria-label="Ενότητες εργαστηρίου">
-    <button type="button" id="tab-mission" role="tab" aria-controls="panel-mission" aria-selected="true" data-tab="mission">Αποστολή</button>
-    <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="false" tabindex="-1" data-tab="memory">Μνήμη</button>
+    <button type="button" id="tab-memory" role="tab" aria-controls="panel-memory" aria-selected="true" data-tab="memory">Μνήμη</button>
     <button type="button" id="tab-route" role="tab" aria-controls="panel-route" aria-selected="false" tabindex="-1" data-tab="route">Διαδρομή</button>
   </nav>
   <p class="status" id="status" role="status" aria-live="polite">Φόρτωση εργαστηρίου…</p>
-  <section id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
-<section class="module-select" aria-label="Επιλογή εργαστηρίου">
-      <p class="eyebrow">Εκπαιδευτικά εργαστήρια</p>
-      <div class="mode-buttons" role="group" aria-label="Τύπος αποστολής">
-        <button type="button" class="mode-choice" id="mode-ekab" data-mode="ekab" aria-pressed="true">🚑 ΕΚΑΒ Αποστολή</button>
-        <button type="button" class="mode-choice" id="mode-mci" data-mode="mci" aria-pressed="false">🚨 Πολλαπλοί εμπλεκόμενοι</button>
-        <button type="button" class="mode-choice" id="mode-equipment" data-mode="equipment" aria-pressed="false">🧰 Εργαστήριο εξοπλισμού</button>
-      </div>
-    </section>
-    <div id="module-ekab">
-    <div class="section-heading"><div><h2>ΕΚΑΒ Αποστολή · Αποστολές</h2><p>Επιλογές με προβλέψιμη εξέλιξη, χωρίς τυχαίες ιατρικές αποφάσεις.</p></div></div>
-    <div id="case-list" class="case-grid" aria-label="Δοκιμαστικά περιστατικά"></div>
-    <article class="mission" id="mission-card" aria-live="polite">
-      <div class="mission-head">
-        <div><p class="eyebrow" id="case-kicker">Επέλεξε ένα περιστατικό</p><h3 id="case-title">Έτοιμος για αποστολή;</h3></div>
-        <span id="step-count" class="step-counter">0 / 4</span>
-      </div>
-      <p id="case-context" class="case-context">Τα περιστατικά είναι εκπαιδευτικές ασκήσεις διαχείρισης και επικοινωνίας.</p>
-      <div id="phase" hidden>
-        <div class="divider"></div>
-        <p class="eyebrow" id="phase-name"></p>
-        <h4 id="phase-question"></h4>
-        <div id="phase-actions" class="choices"></div>
-      </div>
-      <div id="feedback" class="feedback" hidden role="status" aria-live="polite"></div>
-      <div id="case-finish" hidden>
-        <h4>Η αποστολή ολοκληρώθηκε</h4>
-        <p>Έφτασες στην παράδοση του περιστατικού. Δες τη μνήμη για τα σημεία που χρειάζονται επανάληψη. Αυτό δεν είναι βαθμός ή πιστοποίηση.</p>
-        <button type="button" class="action secondary" id="restart">Ξεκίνα νέα αποστολή</button>
-      </div>
-    </article>
-    </div>
-    <div id="module-mci" hidden>
-      <div class="section-heading"><div><h2>Μαζικό συμβάν · Εργαστήριο καταγραφής</h2>
-        <p>Πολλαπλοί εμπλεκόμενοι, καταμέτρηση και συντονισμός. Δεν πρόκειται ακόμη για ιατρική διαλογή ή χρωματική ταξινόμηση.</p></div></div>
-      <div class="case-grid" id="mci-picker" aria-label="Εκπαιδευτικά μαζικά συμβάντα"></div>
-      <article class="mission" id="mci-board">
-        <div class="mission-head"><div><p class="eyebrow">Συνθετικό συμβάν · εκκρεμεί κλινικός έλεγχος</p>
-          <h3 id="mci-title">Επίλεξε συμβάν</h3></div><span class="step-counter" id="mci-count">0 / 4</span></div>
-        <p class="case-context" id="mci-description">Επίλεξε ένα συμβάν για να δεις όλους τους αναφερόμενους εμπλεκόμενους.</p>
-        <div id="mci-people" class="people-grid" aria-label="Συνθετικοί εμπλεκόμενοι"></div>
-        <div id="mci-stage" hidden><div class="divider"></div><p class="eyebrow" id="mci-stage-title"></p>
-          <h4 id="mci-question"></h4><div id="mci-actions" class="choices"></div></div>
-        <div id="mci-feedback" class="feedback" hidden role="status" aria-live="polite"></div>
-        <div id="mci-done" hidden class="activity-done"><h4>Ολοκληρώθηκε η καταγραφή</h4>
-          <p>Εξασκήθηκες στην αναγνώριση όλων των αναφερόμενων ατόμων και στη δομημένη επικοινωνία. Δεν αποδόθηκαν κλινικές προτεραιότητες.</p>
-          <button id="mci-restart" type="button" class="action secondary">Νέο συμβάν</button></div>
-      </article>
-    </div>
-    <div id="module-equipment" hidden>
-      <div class="section-heading"><div><h2>Εργαστήριο αναγνώρισης εξοπλισμού</h2>
-        <p>Τρεις διαδραστικές εκπαιδευτικές κάρτες. Δεν αποτελούν εγχειρίδιο χρήσης, πραγματική προσομοίωση συσκευής ή πιστοποίηση.</p></div></div>
-      <div class="case-grid" id="equipment-picker" aria-label="Εκπαιδευτικές κάρτες συσκευών"></div>
-      <article class="mission" id="equipment-board">
-        <div class="mission-head"><div><p class="eyebrow">Σχηματική κάρτα · όχι πραγματική συσκευή</p>
-          <h3 id="equipment-title">Επίλεξε συσκευή</h3></div><span class="step-counter" id="equipment-count">0 / 3</span></div>
-        <p class="case-context" id="equipment-description">Επίλεξε μια κάρτα για τη θεωρητική αναγνώριση του εξοπλισμού.</p>
-        <div id="equipment-visual" class="device-placeholder" hidden aria-label="Σχηματική εκπαιδευτική κάρτα"></div>
-        <div id="equipment-stage" hidden><div class="divider"></div><p class="eyebrow" id="equipment-stage-title"></p>
-          <h4 id="equipment-question"></h4><div id="equipment-actions" class="choices"></div></div>
-        <div id="equipment-feedback" class="feedback" hidden role="status" aria-live="polite"></div>
-        <div id="equipment-done" hidden class="activity-done"><h4>Ολοκλήρωσες την εκπαιδευτική κάρτα</h4>
-          <p>Αναγνώρισες τον σκοπό, την ανάγκη εκπαίδευσης και τις αρχές επικοινωνίας. Η πραγματική χρήση απαιτεί πιστοποιημένη πρακτική εκπαίδευση.</p>
-          <button id="equipment-restart" type="button" class="action secondary">Νέα προσπάθεια</button></div>
-      </article>
-    </div>
-  </section>
-  <section id="panel-memory" role="tabpanel" aria-labelledby="tab-memory" hidden>
+  <section id="panel-memory" role="tabpanel" aria-labelledby="tab-memory">
     <div class="section-heading"><div><h2>Μνήμη μάθησης</h2><p>Μόνο οι δοκιμαστικές δραστηριότητες του ATLA. Καμία αλλαγή σε βαθμούς.</p></div></div>
     <div class="stats"><div><small>Συνεδρίες</small><strong id="sessions-count">0</strong></div><div><small>Ολοκληρωμένες αποστολές</small><strong id="completed-count">0</strong></div><div><small>Επιλογές για επανάληψη</small><strong id="review-count">0</strong></div></div>
     <div class="stats stats-secondary"><div><small>Συμβάντα με πολλούς εμπλεκόμενους</small><strong id="mci-sessions">0</strong></div>

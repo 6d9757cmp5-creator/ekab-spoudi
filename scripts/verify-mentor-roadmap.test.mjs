@@ -13,14 +13,14 @@ test('Mentor registry tracks 25 unique capabilities and truthful no-AI constrain
  }
  assert.match(src,/title:"ECG Intelligence Lab — πραγματική κλινική ερμηνεία",status:"pending"/);
  assert.match(src,/title:"Πλήρης AI καθηγητής με φυσική συνομιλία",status:"unavailable"/);
- assert.match(src,/href:"..\/mentor-live.html"/);
+ assert.match(src,/href:"..\/practical_exam.html"/);
  assert.match(src,/href:"..\/mentor-oral.html"/);
  assert.match(src,/href:"..\/mentor-ecg.html"/);
 });
 test('all three educational labs and the master roadmap are present',async()=>{
  const html=await read('ui-tools/mentor-roadmap.html');
  assert.match(html,/AI τελευταίο/);
- for(const path of ['mentor-live.html','mentor-oral.html','mentor-ecg.html','mentor-lab.html']){
+ for(const path of ['practical_exam.html','mentor-oral.html','mentor-ecg.html','mentor-lab.html']){
   const content=await read(path);
   assert.ok(content.includes('<!doctype html>'),path);
  }
