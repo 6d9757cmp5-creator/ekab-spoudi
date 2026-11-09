@@ -35,11 +35,21 @@
 <section id="next-case-library" class="next-library" aria-label="Βιβλιοθήκη εκπαιδευτικών αποστολών">
  <details class="next-case-picker">
   <summary>▣ Επιλογή / αλλαγή περιστατικού <small>9 διαθέσιμες εκπαιδευτικές αποστολές</small></summary>
- <div class="next-library-heading"><div><p class="next-eyebrow">ΕΚΑΒ ΒΙΒΛΙΟΘΗΚΗ ΠΕΡΙΣΤΑΤΙΚΩΝ · ΕΚΠΑΙΔΕΥΤΙΚΗ ΕΞΑΣΚΗΣΗ</p><h2>Επίλεξε αποστολή</h2></div><span>3 πρωτότυπα ελληνικά περιβάλλοντα</span></div>
- <p>Κάθε αποστολή έχει διαφορετικούς εικονικούς ασθενείς, διάλογο και συνθετικά ζωτικά. Η πρόοδος κρατιέται χωριστά στη συσκευή.</p>
- <div id="next-case-list" class="next-case-grid" role="group" aria-label="Επιλογή εκπαιδευτικής αποστολής"></div>
- <h3 class="next-practical-heading">Πρακτικό ΕΟΠΠΕΠ · τα έξι σενάρια</h3>
- <div id="next-practical-list" class="next-case-grid" role="group" aria-label="Σενάρια πρακτικού ΕΟΠΠΕΠ"></div>
+ <div class="next-library-heading"><div><p class="next-eyebrow">ΔΥΟ ΑΝΕΞΑΡΤΗΤΕΣ ΚΑΤΗΓΟΡΙΕΣ ΑΣΚΗΣΕΩΝ</p><h2>Επίλεξε κατηγορία προσομοίωσης</h2></div></div>
+ <div id="next-case-category-switch" class="next-case-category-switch" role="group" aria-label="Κατηγορία περιστατικών">
+  <button type="button" data-next-case-category="practical" aria-controls="next-practical-group" aria-pressed="false">Πρακτική ΕΟΠΠΕΠ <small>6 εξεταστικά σενάρια</small></button>
+  <button type="button" data-next-case-category="general" aria-controls="next-general-group" aria-pressed="true">Γενικές προσομοιώσεις ΕΚΑΒ <small>3 ανεξάρτητες ασκήσεις</small></button>
+ </div>
+ <section id="next-practical-group" class="next-case-category-panel" aria-labelledby="next-practical-heading" hidden>
+  <h3 id="next-practical-heading" class="next-practical-heading">Πρακτική ΕΟΠΠΕΠ · 6 εξεταστικά σενάρια</h3>
+  <p>Τα 6 σενάρια των διαθέσιμων εξεταστικών σελίδων 17–18, με ανεξάρτητη πρόοδο ανά άσκηση. Οι 12 πρακτικές δεξιότητες περιλαμβάνονται ως βήματα — δεν είναι 12 πρόσθετα σενάρια. <a href="practical_exam.html">Δες τη θεωρία και τις πρακτικές δεξιότητες</a>.</p>
+  <div id="next-practical-list" class="next-case-grid" role="group" aria-label="Σενάρια πρακτικού ΕΟΠΠΕΠ"></div>
+ </section>
+ <section id="next-general-group" class="next-case-category-panel" aria-labelledby="next-general-heading">
+  <h3 id="next-general-heading" class="next-practical-heading">Γενικές προσομοιώσεις ΕΚΑΒ · 3 ανεξάρτητα περιστατικά</h3>
+  <p>Τροχαίο, κατοικία και πλατεία. Ξεχωριστή βιβλιοθήκη από την πρακτική ΕΟΠΠΕΠ, με δική της πρόοδο ανά περιστατικό.</p>
+  <div id="next-case-list" class="next-case-grid" role="group" aria-label="Γενικά εκπαιδευτικά περιστατικά ΕΚΑΒ"></div>
+ </section>
  </details>
  <p id="next-case-practical" class="next-case-practical" hidden></p>
  <p id="next-case-goal" class="next-case-goal"></p>
