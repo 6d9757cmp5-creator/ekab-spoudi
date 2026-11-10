@@ -418,3 +418,7 @@ html[data-theme="dark"] .home-mentor-presence{background:radial-gradient(circle 
  .mentor-home-presence-frame{height:290px;min-height:290px}
  .home-mentor-presence.mentor-cinema:has(.mentor-home-visual-shell[hidden]){grid-template-areas:"copy" "voice"}
 }
+
+/* Readability (2026-11-10): text at least 12px and 4.5:1 contrast on phones. */
+body:has(.home-main) .home-card-subtitle,body:has(.home-main) .home-app-note,body:has(.home-main) .home-main footer,
+.home-anatomy-single-copy small,.home-anatomy-single-copy span{font-size:.75rem}
