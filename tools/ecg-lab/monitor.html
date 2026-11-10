@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ATLA | Ανάγνωση ΗΚΓ</title>
+  <style>
+:root { font: 16px system-ui, sans-serif; color: #e4eef7; background: #101a25; }
+body { margin: 0; }
+main { max-width: 94rem; padding: clamp(1rem, 4vw, 3rem); margin: auto; }
+header { margin-block-end: 2rem; }
+h1 { margin: .35rem 0; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; }
+.brand { color: #77ded1; font-weight: 700; }
+.controls { display: flex; flex-wrap: wrap; gap: 1rem; }
+label { display: grid; gap: .4rem; font-weight: 600; }
+input, select { font: inherit; color: inherit; background: #1e3042; border: 1px solid #6d8095; border-radius: .4rem; padding: .55rem; max-width: 100%; box-sizing: border-box; }
+input:focus-visible, select:focus-visible { outline: 2px solid #77ded1; outline-offset: 2px; }
+label:first-child { min-width: 0; }
+#status { color: #b4c8da; }
+#paper { overflow: auto; border-radius: .4rem; background: #fffaf7; }
+#paper:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
+#paper[hidden] + #paper-tip { display: none; }
+svg { display: block; }
+.trainer { background: #192738; padding: clamp(.9rem, 2.4vw, 1.8rem); border: 1px solid #395169; border-radius: .75rem; margin-bottom: 2.5rem; }
+.trainer h2, .trainer p { margin-block: 0 .55rem; }
+.trainer-heading, .monitor-heading { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+#score { color: #77ded1; font-weight: 700; }
+.monitor { border: 1px solid #42615d; border-radius: .55rem; background: #081612; color: #93f8bf; margin-block: .85rem 1rem; overflow: hidden; }
+.monitor-heading { padding: .65rem .9rem; font: 600 .9rem monospace; }
+#trace { display: block; width: 100%; height: clamp(140px, 23vw, 210px); }
+.quiz-controls { display: flex; flex-wrap: wrap; gap: .75rem; align-items: end; }
+.quiz-controls label { min-width: 0; max-width: 100%; grid-template-columns: minmax(0, 1fr); }
+button { font: inherit; font-weight: 650; background: #77ded1; color: #0d2625; border: 1px solid transparent; border-radius: .4rem; padding: .55rem .8rem; cursor: pointer; }
+button:disabled, select:disabled { opacity: .55; cursor: default; }
+button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
+#feedback { margin-block: .8rem 0; min-height: 1.5em; }
+
+</style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="brand">ATLA / Εργαστήριο</p>
+      <h1>Ανάγνωση ΗΚΓ</h1>
+      <p>Εξάσκηση αναγνώρισης ρυθμού και προβολή καταγραφής 12 απαγωγών.</p>
+    </header>
+    <section class="trainer" aria-labelledby="trainer-title">
+      <div class="trainer-heading">
+        <div><h2 id="trainer-title">Monitor ρυθμού</h2><p>Συνθετικές κυματομορφές για εκπαιδευτική εξάσκηση.</p></div>
+        <output id="score">0 / 0 σωστά</output>
+      </div>
+      <div class="monitor">
+        <div class="monitor-heading"><span>ECG · II</span><span>Σχηματική κλίμακα · 25 mm/s · 10 mm/mV</span></div>
+        <canvas id="trace" role="img" aria-label="Κυλιόμενη συνθετική κυματομορφή ΗΚΓ απαγωγής II"></canvas>
+      </div>
+      <div class="quiz-controls">
+        <button id="next-case" type="button">Έναρξη εξάσκησης</button>
+        <button id="pause-monitor" type="button" disabled>Παύση</button>
+        <label>Αναγνώριση ρυθμού <select id="answer" disabled><option value="">Επίλεξε ρυθμό</option></select></label>
+        <button id="submit-answer" type="button" disabled>Έλεγχος απάντησης</button>
+      </div>
+      <p id="feedback" role="status">Ξεκίνα για να εμφανιστεί το πρώτο περιστατικό.</p>
+      <p>Προσοχή: η ηλεκτρική δραστηριότητα στο ΗΚΓ δεν αποδεικνύει παρουσία σφυγμού. Η άσφυγμη ηλεκτρική δραστηριότητα (PEA) δεν αναγνωρίζεται μόνο από την κυματομορφή. <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-advanced-life-support" style="color:#9be9fc">AHA 2025 — Adult Advanced Life Support</a>.</p>
+    </section>
+    <h2>Προβολή καταγραφής 12 απαγωγών</h2>
+    <section aria-label="Ρυθμίσεις καταγραφής" class="controls">
+      <label>Αρχείο καταγραφής JSON <input id="recording" type="file" accept=".json,application/json"></label>
+      <label>Ταχύτητα <select id="speed"><option value="25">25 mm/s</option><option value="50">50 mm/s</option></select></label>
+      <label>Ενίσχυση <select id="gain"><option value="5">5 mm/mV</option><option value="10" selected>10 mm/mV</option><option value="20">20 mm/mV</option></select></label>
+      <label>Λωρίδα ρυθμού <select id="rhythm"></select></label>
+    </section>
+    <p role="status" id="status">Επίλεξε καταγραφή 10 δευτερολέπτων.</p>
+    <p>Η προβολή JSON δεν ερμηνεύει κλινικά το ΗΚΓ. Χρησιμοποίησε μόνο καταγραφές που επιτρέπεται να επεξεργαστείς και αφαίρεσε στοιχεία ταυτοποίησης ασθενούς.</p>
+    <section id="paper" tabindex="0" aria-label="Χαρτί ηλεκτροκαρδιογραφήματος. Σε μικρή οθόνη κύλιση οριζόντια για όλες τις απαγωγές" hidden></section>
+    <p id="paper-tip">Σε κινητό ή μικρή οθόνη, σύρε οριζόντια στο χαρτί για να δεις και τις 12 απαγωγές.</p>
+  </main>
+  <script>
+{
+const leadNames = Object.freeze([
+  'I', 'II', 'III', 'aVR', 'aVL', 'aVF', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6'
+]);
+
+const leadGroups = [
+  ['I', 'aVR', 'V1', 'V4'],
+  ['II', 'aVL', 'V2', 'V5'],
+  ['III', 'aVF', 'V3', 'V6']
+];
+
+function validateRecording(recording) {
+  const { sampleRate, samples } = recording ?? {};
+  if (!Number.isInteger(sampleRate) || sampleRate < 1 || sampleRate > 2000 ||
+      !Array.isArray(samples) || samples.length !== sampleRate * 10) {
+    throw new Error('Απαιτείται καταγραφή 10 δευτερολέπτων με ακέραιο ρυθμό έως 2000 Hz.');
+  }
+  for (const sample of samples) {
+    if (!sample || leadNames.some(lead => !Number.isFinite(sample[lead]))) {
+      throw new Error('Κάθε δείγμα πρέπει να περιέχει και τις 12 απαγωγές σε mV.');
+    }
+  }
+  return recording;
+}
+
+function paperLayout(recording, { speed, gain, rhythmLead }) {
+  const { samples, sampleRate } = validateRecording(recording);
+  if (![25, 50].includes(speed) || ![5, 10, 20].includes(gain) || !leadNames.includes(rhythmLead)) {
+    throw new Error('Μη υποστηριζόμενη ρύθμιση προβολής ΗΚΓ.');
+  }
+  const left = 15;
+  const rowHeight = 50;
+  const width = left + 10 * speed;
+  function trace(lead, row, start, end) {
+    const baseline = (row + 0.5) * rowHeight;
+    const x = left + start * speed;
+    const points = [];
+    for (let i = Math.ceil(start * sampleRate); i < Math.ceil(end * sampleRate); i++) {
+      points.push([left + i / sampleRate * speed, baseline - samples[i][lead] * gain]);
+    }
+    return { lead, row, baseline, x, width: (end - start) * speed, points };
+  }
+  const traces = leadGroups.flatMap((group, row) =>
+    group.map((lead, column) => trace(lead, row, column * 2.5, (column + 1) * 2.5)));
+  traces.push(trace(rhythmLead, 3, 0, 10));
+  return { width, height: rowHeight * 4, rowHeight, traces };
+}
+
+
+const file = document.querySelector('#recording');
+const speed = document.querySelector('#speed');
+const gain = document.querySelector('#gain');
+const rhythm = document.querySelector('#rhythm');
+const status = document.querySelector('#status');
+const paper = document.querySelector('#paper');
+let recording;
+let loadNumber = 0;
+
+for (const lead of leadNames) rhythm.add(new Option(lead, lead, false, lead === 'II'));
+
+function svgElement(name, attributes) {
+  const element = document.createElementNS('http://www.w3.org/2000/svg', name);
+  for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
+  return element;
+}
+
+function render() {
+  if (!recording) return;
+  const { width, height, rowHeight, traces } = paperLayout(recording, {
+    speed: Number(speed.value), gain: Number(gain.value), rhythmLead: rhythm.value
+  });
+  const svg = svgElement('svg', {
+    viewBox: `0 0 ${width} ${height}`,
+    width: `${width}mm`, height: `${height}mm`,
+    role: 'img', 'aria-label': 'Δώδεκα απαγωγές και λωρίδα ρυθμού'
+  });
+  const defs = svgElement('defs', {});
+  for (const [size, color] of [[1, '#f6d9d7'], [5, '#e9aaa7']]) {
+    const pattern = svgElement('pattern', { id: `grid-${size}`, width: size, height: size, patternUnits: 'userSpaceOnUse' });
+    pattern.append(svgElement('path', { d: `M ${size} 0 H 0 V ${size}`, fill: 'none', stroke: color, 'stroke-width': .25 }));
+    defs.append(pattern);
+  }
+  svg.append(defs);
+  for (const size of [1, 5]) svg.append(svgElement('rect', { width, height, fill: `url(#grid-${size})` }));
+  traces.forEach((trace, index) => {
+    const clip = svgElement('clipPath', { id: `lead-${index}` });
+    clip.append(svgElement('rect', { x: trace.x, y: trace.row * rowHeight, width: trace.width, height: rowHeight }));
+    defs.append(clip);
+    const line = svgElement('polyline', {
+      points: trace.points.map(([x, y]) => `${x.toFixed(3)},${y.toFixed(3)}`).join(' '),
+      fill: 'none', stroke: '#14232a', 'stroke-width': .26, 'clip-path': `url(#lead-${index})`
+    });
+    const label = svgElement('text', { x: trace.x + 1, y: trace.row * rowHeight + 5, 'font-size': 3 });
+    label.textContent = trace.lead;
+    svg.append(line, label);
+  });
+  const baseline = rowHeight / 2;
+  const pulseHeight = Number(gain.value);
+  const pulseWidth = Number(speed.value) * .2;
+  svg.append(svgElement('path', {
+    d: `M 1 ${baseline} h 1 v ${-pulseHeight} h ${pulseWidth} v ${pulseHeight} h 1`,
+    fill: 'none', stroke: '#14232a', 'stroke-width': .32
+  }));
+  paper.replaceChildren(svg);
+  paper.hidden = false;
+}
+
+file.addEventListener('change', async () => {
+  const selected = file.files[0];
+  if (!selected) return;
+  const attempt = ++loadNumber;
+  recording = undefined;
+  paper.hidden = true;
+  paper.replaceChildren();
+  status.textContent = 'Φόρτωση…';
+  try {
+    if (selected.size > 15_000_000) throw new Error('Το αρχείο ξεπερνά τα 15 MB.');
+    const parsed = JSON.parse(await selected.text());
+    if (attempt !== loadNumber) return;
+    recording = validateRecording(parsed);
+    render();
+    status.textContent = `${selected.name} · ${recording.sampleRate} Hz · 10 s`;
+  } catch (error) {
+    if (attempt !== loadNumber) return;
+    status.textContent = `Αδυναμία φόρτωσης. ${error.message}`;
+  }
+});
+
+for (const control of [speed, gain, rhythm]) control.addEventListener('change', render);
+
+}
+</script>
+  <script type="module">
+import {educationalRhythmCases as rhythms} from './core/ecg-synthetic.mjs';
+const canvas = document.querySelector('#trace');
+const context = canvas.getContext('2d');
+const next = document.querySelector('#next-case');
+const pause = document.querySelector('#pause-monitor');
+const answer = document.querySelector('#answer');
+const submit = document.querySelector('#submit-answer');
+const feedback = document.querySelector('#feedback');
+const score = document.querySelector('#score');
+const pixelsPerMm = 96 / 25.4;
+const speed = 25 * pixelsPerMm;
+const gain = 10 * pixelsPerMm;
+let deck = [];
+let current;
+let elapsed = 0;
+let started = 0;
+let paused = true;
+let frame = 0;
+let correct = 0;
+let attempts = 0;
+
+for (const rhythm of rhythms) answer.add(new Option(rhythm.label, rhythm.id));
+
+function draw(now) {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+  const pixelWidth = Math.round(width * dpr);
+  const pixelHeight = Math.round(height * dpr);
+  if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+    canvas.width = pixelWidth;
+    canvas.height = pixelHeight;
+  }
+  context.setTransform(dpr, 0, 0, dpr, 0, 0);
+  context.clearRect(0, 0, width, height);
+  context.beginPath();
+  for (let x = 0; x < width; x += 5 * pixelsPerMm) {
+    context.moveTo(x, 0);
+    context.lineTo(x, height);
+  }
+  for (let y = height / 2 % (5 * pixelsPerMm); y < height; y += 5 * pixelsPerMm) {
+    context.moveTo(0, y);
+    context.lineTo(width, y);
+  }
+  context.strokeStyle = '#1b392f';
+  context.lineWidth = 1;
+  context.stroke();
+  if (!current) return;
+
+  const time = elapsed + (paused ? 0 : (now - started) / 1000);
+  const duration = width / speed;
+  const cursor = time % duration * speed;
+  const origin = time - cursor / speed;
+  context.beginPath();
+  let previousX = -10;
+  for (let x = 0; x < width; x++) {
+    const ahead = x > cursor;
+    if (ahead && x < cursor + 12) continue;
+    const sampleTime = origin + x / speed - (ahead ? duration : 0);
+    if (sampleTime < 0) continue;
+    const y = height / 2 - gain * current.sample(sampleTime);
+    if (x === previousX + 1) context.lineTo(x, y);
+    else context.moveTo(x, y);
+    previousX = x;
+  }
+  context.strokeStyle = '#8bffc0';
+  context.lineWidth = 1.45;
+  context.stroke();
+}
+
+function animate(now) {
+  draw(now);
+  frame = requestAnimationFrame(animate);
+}
+
+next.addEventListener('click', () => {
+  if (!deck.length) deck = [...rhythms];
+  const otherCases = deck.filter(rhythm => rhythm !== current);
+  const candidates = otherCases.length ? otherCases : deck;
+  current = candidates[Math.floor(Math.random() * candidates.length)];
+  deck.splice(deck.indexOf(current), 1);
+  elapsed = 0;
+  started = performance.now();
+  paused = false;
+  answer.value = '';
+  answer.disabled = false;
+  submit.disabled = true;
+  pause.disabled = false;
+  pause.textContent = 'Παύση';
+  next.textContent = 'Επόμενο περιστατικό';
+  feedback.textContent = 'Παρατήρησε τη λωρίδα και επίλεξε τι βλέπεις.';
+  cancelAnimationFrame(frame);
+  frame = requestAnimationFrame(animate);
+});
+
+pause.addEventListener('click', () => {
+  if (paused) {
+    started = performance.now();
+    paused = false;
+    pause.textContent = 'Παύση';
+    frame = requestAnimationFrame(animate);
+    return;
+  }
+  elapsed += (performance.now() - started) / 1000;
+  paused = true;
+  cancelAnimationFrame(frame);
+  draw(performance.now());
+  pause.textContent = 'Συνέχεια';
+});
+
+answer.addEventListener('change', () => { submit.disabled = !answer.value; });
+submit.addEventListener('click', () => {
+  if (!current || !answer.value || answer.disabled) return;
+  const matched = answer.value === current.id;
+  attempts++;
+  if (matched) correct++;
+  score.textContent = `${correct} / ${attempts} σωστά`;
+  feedback.textContent = `${matched ? 'Σωστά.' : 'Η απάντηση είναι'} ${current.label}. ${current.explanation}`;
+  answer.disabled = true;
+  submit.disabled = true;
+});
+
+new ResizeObserver(() => draw(performance.now())).observe(canvas);
+</script>
+</body>
+</html>
