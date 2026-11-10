@@ -58,3 +58,14 @@ html[data-theme="dark"] .ekab-next .en-step{background:#21434a;color:#bddbd9}
 html[data-theme="dark"] .ekab-next .en-step.current{background:#24544c;color:#d5fff0;border-color:#488c76}
 html[data-theme="dark"] .ekab-next .en-selector select option{background:#213c48;color:#fff}
 @media(prefers-reduced-motion:reduce){.home-main .home-card{transition:none}}
+
+/* Reserved space while the card is still empty, close to its filled height, so the page does not jump. */
+.ekab-next:empty{min-height:390px}
+.ekab-next.en-compact:empty{min-height:305px}
+@media(max-width:820px){.ekab-next:empty{min-height:440px}.ekab-next.en-compact:empty{min-height:350px}}
+@media(max-width:480px){.ekab-next:empty{min-height:610px}.ekab-next.en-compact:empty{min-height:520px}}
+
+/* Readability (2026-11-10): text at least 12px and 4.5:1 contrast on phones. */
+.ekab-next .en-disclaimer,.ekab-next .en-indicator span,.ekab-next .en-step{font-size:.75rem}
+.ekab-next .en-step.current{color:#06706b}
+html[data-theme="dark"] .ekab-next .en-step.current{color:var(--en-primary)}

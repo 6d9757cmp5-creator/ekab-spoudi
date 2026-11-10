@@ -22,10 +22,14 @@ if(isHome||isSaek||isEop){
    try{return canonicalLearnerProfile(localStorage,{scheduler:window.EkabStudyScheduler}).stats;}
    catch{return canonicalLearnerProfile(null).stats;}
   }
-  const section=e('section','ekab-next'+(isHome?'':' en-compact'));
-  section.setAttribute('aria-label','Προσωπική εκπαιδευτική διαδρομή ATLA');
-  section.setAttribute('data-learning-surface','1');
-  main.insertBefore(section,anchor);
+  // The page reserves the card in its HTML (no layout jump); older pages still get it inserted.
+  let section=main.querySelector('[data-learning-surface]');
+  if(!section){
+   section=e('section','ekab-next'+(isHome?'':' en-compact'));
+   section.setAttribute('aria-label','Προσωπική εκπαιδευτική διαδρομή ATLA');
+   section.setAttribute('data-learning-surface','1');
+   main.insertBefore(section,anchor);
+  }
   let chosen=isHome?'auto':isSaek?'saek':'eoppep';
   function makeLink(href,label,cls){
    const node=e('a',cls,label);

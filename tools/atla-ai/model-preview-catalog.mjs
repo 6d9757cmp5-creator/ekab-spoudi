@@ -180,7 +180,7 @@ const fold=value=>String(value??'').normalize('NFD').replace(/\p{M}/gu,'').toLoc
  * Every model of the shared 3D library as one list for the library page: what it is called, which
  * group it belongs to and the viewer address that opens it. Atlases open in the full atlas.
  */
-export function libraryEntries(library,{viewer='atla-resource-preview.html',atlas='anatomy-full-atlas.html',from=''}={}){
+export function libraryEntries(library,{viewer='anatomy-3d/index.html',atlas='anatomy-3d/index.html#models',from=''}={}){
  const structures=library?.vocabulary?.structures??{},findings=library?.vocabulary?.findings??{};
  const entries=[];
  for(const m of library?.models??[]){
