@@ -10,7 +10,7 @@ os.makedirs(output,exist_ok=True)
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.object.delete(use_global=False)
 def import_gltf(name):
-    path=os.path.join(repo,'tools/anatomy-3d/resources/hra-v1.2/thorax',name)
+    path=os.path.join(os.environ.get('HRA_PREVIEW_MODEL_DIR',os.path.join(repo,'tools/anatomy-3d/resources/hra-v1.2/thorax')),name)
     if not os.path.isfile(path): raise FileNotFoundError(path)
     old=set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=path)

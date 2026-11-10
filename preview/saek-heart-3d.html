@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
 const host=document.getElementById('canvas'),status=document.getElementById('status');
 const sc=new THREE.Scene();sc.background=new THREE.Color('#071220');
 const camera=new THREE.PerspectiveCamera(37,1,.005,200);
@@ -16,6 +17,7 @@ sc.add(new THREE.HemisphereLight('#b6d9f7','#405063',2.4));
 const key=new THREE.DirectionalLight('#ffd0b1',3.2);key.position.set(4,5,8);sc.add(key);
 const fill=new THREE.DirectionalLight('#80c7ff',2);fill.position.set(-6,1,-5);sc.add(fill);
 const loader=new GLTFLoader(),group=new THREE.Group();sc.add(group);
+const draco=new DRACOLoader();draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/libs/draco/');loader.setDRACOLoader(draco);
 const root='https://raw.githubusercontent.com/6d9757cmp5-creator/ekab-spoudi/main/tools/anatomy-3d/resources/hra-v1.2/thorax/';
 const heartColor=new THREE.MeshStandardMaterial({color:'#a82d3d',roughness:.6,metalness:.03,side:THREE.DoubleSide});
 const lungColor=new THREE.MeshStandardMaterial({color:'#78b7cf',roughness:.7,transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide});

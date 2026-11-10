@@ -29,8 +29,12 @@ jobs:
           blender --version | head -3
       - name: Real Blender scene (HuBMAP HRA CC BY)
         run: |
-          mkdir -p pilots/heart/public/render
-          xvfb-run -a blender --background --factory-startup --python pilots/heart/scene.py -- "$PWD" "$PWD/pilots/heart/public/render" > /tmp/blender-preview.log 2>&1 || { tail -100 /tmp/blender-preview.log; exit 1; }
+          mkdir -p pilots/heart/public/render /tmp/hra-source
+          curl --fail --location --retry 3 -sS -o /tmp/hra-source/VH_F_Heart.glb https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Heart.glb
+          curl --fail --location --retry 3 -sS -o /tmp/hra-source/VH_F_Lung.glb https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Lung.glb
+          echo '9afdfb2ccf926869813582cfe150dce8cb28377417a968a4f29a5b8dc060428b  /tmp/hra-source/VH_F_Heart.glb' | sha256sum --check
+          echo 'a6a81718f4d0974bcbab47c6dc38efc941ad5c7f5f256bf7ff112c710a7fd932  /tmp/hra-source/VH_F_Lung.glb' | sha256sum --check
+          HRA_PREVIEW_MODEL_DIR=/tmp/hra-source xvfb-run -a blender --background --factory-startup --python pilots/heart/scene.py -- "$PWD" "$PWD/pilots/heart/public/render" > /tmp/blender-preview.log 2>&1 || { tail -100 /tmp/blender-preview.log; exit 1; }
           tail -100 /tmp/blender-preview.log
           echo "Rendered frames: $(find pilots/heart/public/render -type f -name 'frame_*.png' | wc -l)"
           test "$(find pilots/heart/public/render -type f -name 'frame_*.png' | wc -l)" -eq 60
