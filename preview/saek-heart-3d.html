@@ -1,0 +1,39 @@
+<!doctype html><html lang="el"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3D Preview • Καρδιά / ΣΑΕΚ (ΜΗ ΔΗΜΟΣΙΕΥΜΕΝΟ)</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#071220;color:#eef7ff;font:16px system-ui,-apple-system,sans-serif}header{padding:17px 22px;background:#0d2338;display:flex;gap:15px;justify-content:space-between;flex-wrap:wrap;align-items:center;border-bottom:1px solid #26445a}header strong{font-size:18px}small{color:#b7ccd8}main{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,330px);min-height:calc(100vh - 88px)}#canvas{min-height:530px;position:relative}canvas{width:100%!important;height:100%!important;display:block}aside{padding:26px 25px;background:#102236;border-left:1px solid #274159;line-height:1.55}h1{font-size:28px;line-height:1.12;margin:12px 0 20px}p{color:#d0dfe8}button{border:1px solid #7cbed0;color:#fff;background:#1c485c;padding:12px 15px;border-radius:9px;cursor:pointer;font:inherit;margin:8px 0}button:focus-visible{outline:3px solid #fff}#status{position:absolute;left:15px;bottom:15px;background:#061522df;padding:11px 14px;border-radius:7px;font-size:13px;max-width:calc(100% - 30px)}@media(max-width:800px){main{grid-template-columns:1fr}#canvas{min-height:55vh;max-height:65vh}aside{border-left:0;border-top:1px solid #274159;padding:20px}}
+</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script></head><body><header><strong>ΕΚΑΒ Σπουδή • Πιλοτική 3D προεπισκόπηση</strong><small>Ιδιωτική αξιολόγηση · όχι δημοσιευμένο μάθημα</small></header><main><section id="canvas" aria-label="Τρισδιάστατη περιστρεφόμενη καρδιά και πνεύμονες"><div id="status" aria-live="polite">Φόρτωση πραγματικών ανατομικών μοντέλων…</div></section><aside><small>ΑΝΑΤΟΜΙΑ · Α΄ ΕΞΑΜΗΝΟ</small><h1>Η θέση της καρδιάς</h1><p>Δες τη σχέση καρδιάς και πνευμόνων με πραγματικά 3D μοντέλα από το HuBMAP Human Reference Atlas.</p><p><strong>Κίνηση:</strong> σύρε για περιστροφή· τσίμπησε για μεγέθυνση.</p><button id="heart" type="button">Εστίαση στην καρδιά</button> <button id="all" type="button">Δείξε και τους πνεύμονες</button><p>Ανατομία: μέσο μεσοθωράκιο, πίσω από το στέρνο και πάνω στο διάφραγμα.</p><small>HuBMAP CCF/HRA v1.2 (Browne et al., 2022), CC BY 4.0. Δεν περιέχει προσομοίωση φυσιολογίας, κλινική επικύρωση ή οδηγίες περίθαλψης.</small></aside></main>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const host=document.getElementById('canvas'),status=document.getElementById('status');
+const sc=new THREE.Scene();sc.background=new THREE.Color('#071220');
+const camera=new THREE.PerspectiveCamera(37,1,.005,200);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
+host.prepend(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;
+sc.add(new THREE.HemisphereLight('#b6d9f7','#405063',2.4));
+const key=new THREE.DirectionalLight('#ffd0b1',3.2);key.position.set(4,5,8);sc.add(key);
+const fill=new THREE.DirectionalLight('#80c7ff',2);fill.position.set(-6,1,-5);sc.add(fill);
+const loader=new GLTFLoader(),group=new THREE.Group();sc.add(group);
+const root='https://raw.githubusercontent.com/6d9757cmp5-creator/ekab-spoudi/main/tools/anatomy-3d/resources/hra-v1.2/thorax/';
+const heartColor=new THREE.MeshStandardMaterial({color:'#a82d3d',roughness:.6,metalness:.03,side:THREE.DoubleSide});
+const lungColor=new THREE.MeshStandardMaterial({color:'#78b7cf',roughness:.7,transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide});
+let heartGroup,lungGroup;
+try{
+ const [h,l]=await Promise.all(['VH_F_Heart.glb','VH_F_Lung.glb'].map(n=>loader.loadAsync(root+n)));
+ heartGroup=h.scene;lungGroup=l.scene;
+ for(const [model,mat] of [[heartGroup,heartColor],[lungGroup,lungColor]]){model.traverse(o=>{if(o.isMesh){o.material=mat;}});group.add(model);}
+ const b=new THREE.Box3().setFromObject(group),size=b.getSize(new THREE.Vector3()),center=b.getCenter(new THREE.Vector3());
+ if(!Number.isFinite(size.length())||size.length()<=0) throw Error('Το μοντέλο έχει μη έγκυρες διαστάσεις');
+ group.position.sub(center);const extent=Math.max(size.x,size.y,size.z);
+ group.scale.setScalar(3/extent);
+ camera.position.set(4.5,1.7,7);camera.lookAt(0,0,0);controls.target.set(0,0,0);controls.update();
+ status.textContent='Ετοιμο — σύρε το μοντέλο για περιστροφή';
+}catch(e){status.textContent='Δεν ήταν δυνατή η φόρτωση του πραγματικού 3D: '+e.message;}
+document.getElementById('heart').onclick=()=>{if(lungGroup)lungGroup.visible=false;status.textContent='Προβολή καρδιάς';};
+document.getElementById('all').onclick=()=>{if(lungGroup)lungGroup.visible=true;status.textContent='Προβολή καρδιάς και πνευμόνων';};
+function resize(){const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(host);resize();
+function loop(){requestAnimationFrame(loop);controls.update();renderer.render(sc,camera);}loop();
+</script></body></html>
