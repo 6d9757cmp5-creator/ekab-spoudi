@@ -1,14 +1,11 @@
 /* Standalone MENTOR OS Foundation demo.
  * No calls to AI graders; no legacy writes; no medical intervention logic.
  */
-import {CASES,COMPETENCIES,getCase} from '../core/scenarios.mjs';
-import {newSession,currentPhase,perform,feedbackFor} from '../core/engine.mjs';
 import {openMentorDb,createMentorStore,createVolatileMentorStore} from '../core/store.mjs';
 import {resolveMentorScope} from '../core/identity.mjs';
 import {readLegacySnapshot} from '../core/legacy-readonly.mjs';
 import {readStudyPreferences,saveStudyPreferences,planForGoals} from '../core/study-goals.mjs';
 import {coachResponse,interpretQuestion,chooseFocus} from '../core/guided-coach.mjs';
-import {mountActivities} from '../activities-ui.mjs';
 import {supportsSpeech,listGreekVoices,isKnownFemaleGreekVoice,resolveMentorGreekVoice,voiceDiagnostics,speakGreek,stopGreek} from '../voice/speech.mjs';
 import {chooseMentorDelivery,deliverySpeechSettings,publicDeliveryCue} from '../core/presence-director.mjs';
 import {createMentorAvatar} from '../avatar/live.mjs';
@@ -44,20 +41,7 @@ function switchTab(target,focus=false){
     if(focus&&isCurrent)tab.focus();
     $('panel-'+tab.dataset.tab).hidden=!isCurrent;
   }
-  if(target==='memory')void renderMemory();
   if(target==='route')void renderPlan();
-}
-function wireModes(){
-  for(const button of document.querySelectorAll('[data-mode]')){
-    button.addEventListener('click',()=>{
-      const mode=button.dataset.mode;
-      if(!['ekab','mci','equipment'].includes(mode))return;
-      for(const peer of document.querySelectorAll('[data-mode]'))
-        peer.setAttribute('aria-pressed',String(peer.dataset.mode===mode));
-      for(const kind of ['ekab','mci','equipment'])
-        $('module-'+kind).hidden=kind!==mode;
-    });
-  }
 }
 function wireTabs(){
   const tabs=[...document.querySelectorAll('[data-tab]')];
@@ -71,131 +55,6 @@ function wireTabs(){
       switchTab(tabs[index].dataset.tab,true);
     });
   }
-}
-function renderCards(){
-  const target=$('case-list');target.replaceChildren();
-  for(const item of CASES){
-    const button=make('button','case-option');
-    button.type='button';
-    button.dataset.active=String(state.session?.case_id===item.id);
-    button.setAttribute('aria-pressed',button.dataset.active);
-    const icon=make('span','case-icon',item.icon);
-    icon.setAttribute('aria-hidden','true');
-    const text=make('span');
-    text.append(make('strong',null,item.title),make('small',null,item.subtitle));
-    button.append(icon,text);
-    button.addEventListener('click',()=>{void startCase(item.id)});
-    target.append(button);
-  }
-}
-async function startCase(caseId){
-  if(state.busy||!state.store)return;
-  state.busy=true;
-  try{
-    const session=newSession(caseId,{id:crypto.randomUUID(),at:new Date().toISOString()});
-    state.session=await state.store.save(state.scope,session);
-    setMentorDelivery(chooseMentorDelivery({intent:'exercise',assessment:true}));
-    notify(state.store.persistent?'Νέα δοκιμαστική αποστολή αποθηκεύτηκε τοπικά.':'Η λειτουργία αποθήκευσης δεν είναι διαθέσιμη. Η αποστολή υπάρχει μόνο προσωρινά.');
-    renderMission();
-    void renderMemory();
-  }catch(e){notify('Δεν ξεκίνησε η αποστολή: '+e.message,true);}
-  finally{state.busy=false;}
-}
-function renderMission(){
-  // The mission panel was removed with the general simulators; only EOPPEP practical remains.
-  if(!$('case-list'))return;
-  renderCards();
-  const session=state.session;
-  if(!session){
-    $('case-kicker').textContent='Επέλεξε ένα περιστατικό';
-    $('case-title').textContent='Έτοιμος για αποστολή;';
-    $('case-context').textContent='Επίλεξε ένα από τα συνθετικά περιστατικά. Η προσομοίωση αφορά οργανωτική σκέψη, όχι θεραπείες.';
-    $('step-count').textContent='0 / 4';
-    $('phase').hidden=true;$('feedback').hidden=true;$('case-finish').hidden=true;
-    return;
-  }
-  const def=getCase(session.case_id);
-  $('case-kicker').textContent='Δοκιμαστικό περιστατικό · '+def.subtitle;
-  $('case-title').textContent=def.title;
-  $('case-context').textContent=def.description;
-  $('step-count').textContent=session.stage_index+' / '+def.phases.length;
-  $('case-finish').hidden=!session.finished;
-  $('phase').hidden=session.finished;
-  const feedback=feedbackFor(session);
-  $('feedback').hidden=!feedback || session.finished;
-  if(feedback){
-    $('feedback').dataset.result=feedback.result;
-    $('feedback').textContent=(feedback.result==='review'?'Για επανάληψη: ':'Εκπαιδευτική ανατροφοδότηση: ')+feedback.text;
-  }
-  if(session.finished)return;
-  const phase=currentPhase(session);
-  $('phase-name').textContent=phase.title;
-  $('phase-question').textContent=phase.prompt;
-  const actions=$('phase-actions');actions.replaceChildren();
-  for(let i=0;i<phase.actions.length;i++){
-    const a=phase.actions[i];
-    const btn=make('button','choice');
-    btn.type='button';
-    btn.append(make('span','num',String(i+1)),make('span',null,a.label));
-    btn.addEventListener('click',()=>void choose(a.id));
-    actions.append(btn);
-  }
-}
-async function choose(id){
-  if(!state.session||state.session.finished||state.busy)return;
-  state.busy=true;
-  const buttons=[...document.querySelectorAll('#phase-actions button')];
-  buttons.forEach(b=>b.disabled=true);
-  try{
-    const next=perform(state.session,id,{at:new Date().toISOString()});
-    state.session=await state.store.save(state.scope,next);
-    renderMission();
-    const feedback=feedbackFor(next);
-    if(feedback){
-      const topic=next.events.at(-1)?.competency_id||'scene';
-      let overview=null;
-      try{overview=await state.store.overview(state.scope);}catch{}
-      const warning=feedback.result==='review';
-      setMentorDelivery(chooseMentorDelivery({
-        intent:warning?'focus':'progress',
-        topic,overview,
-        corrected:warning,
-        safety:warning&&topic==='scene'
-      }));
-      // The original clinical feedback is unchanged; the delivery adapts.
-      lastCoachReply=feedback.text;
-      const greeting=$('mentor-presence-line');
-      if(greeting)greeting.textContent=feedback.text;
-    }
-    if(next.finished)notify('Ολοκληρώθηκε μία εκπαιδευτική αποστολή. Οι επίσημοι βαθμοί δεν άλλαξαν.');
-    void renderMemory();
-  }catch(e){
-    notify('Αδυναμία καταγραφής επιλογής: '+e.message,true);
-    buttons.forEach(b=>b.disabled=false);
-  }finally{state.busy=false;}
-}
-async function renderMemory(){
-  if(!state.store)return;
-  try{
-    const overview=await state.store.overview(state.scope);
-    $('sessions-count').textContent=String(overview.total_sessions);
-    $('completed-count').textContent=String(overview.completed_sessions);
-    $('review-count').textContent=String(Object.values(overview.competencies).reduce((n,c)=>n+c.needs_review,0));
-    const extra=state.activities?await state.activities.summary():null;
-    $('mci-sessions').textContent=String(extra?.mci.total||0);
-    $('equipment-sessions').textContent=String(extra?.equipment.total||0);
-    $('extra-completed').textContent=String(extra?.completed||0);
-    const list=$('competency-list');list.replaceChildren();
-    for(const competence of Object.values(overview.competencies)){
-      const row=make('div','skill');
-      const left=make('div');
-      left.append(make('strong',null,competence.label),
-        make('small',null,competence.attempts?'Εκπαιδευτική προσπάθεια καταγεγραμμένη':'Δεν υπάρχουν ακόμη δοκιμές'));
-      const info=make('div','skill-count',
-        competence.practiced+' ολοκληρωμένα βήματα · '+competence.needs_review+' για επανάληψη');
-      row.append(left,info);list.append(row);
-    }
-  }catch(e){notify('Δεν φορτώθηκε η μνήμη ATLA: '+e.message,true);}
 }
 function currentStudyPreferences(){
   return {
@@ -526,29 +385,17 @@ function wireCoach(){
   const available=supportsSpeech(window);
   $('coach-speak').disabled=!available;
   $('coach-stop').disabled=!available;
-  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές ATLA ή ζήτησε μια μικρή άσκηση. Αξιοποιώ μόνο καταγραφές των εκπαιδευτικών αποστολών εδώ.');
+  addCoachMessage('assistant','Καλώς ήρθες! Ρώτησέ με τι να μελετήσεις, πώς πηγαίνουν οι δοκιμές ATLA ή ζήτησε μια μικρή άσκηση. Δεν χρησιμοποιώ βαθμούς ή προσωπικά δεδομένα.');
 }
 async function renderPlan(){
   renderPersonalPlan();
-  if(!state.store)return;
-  try{
-    const summary=await state.store.overview(state.scope);
-    const minutes=Number($('study-duration').value)||25;
-    const focus=summary.suggested_focus;
-    const label=focus?COMPETENCIES[focus]:'Πρακτική ΕΟΠΠΕΠ';
-    const target=$('plan-output');target.replaceChildren();
-    target.append(
-      make('strong',null,'Πρόταση: '+label),
-      make('p',null,'Μελέτη '+Math.round(minutes*.35)+' λεπτά · Πρακτική ΕΟΠΠΕΠ '+Math.round(minutes*.5)+' λεπτά · Ανασκόπηση '+(minutes-Math.round(minutes*.35)-Math.round(minutes*.5))+' λεπτά.'),
-      make('p','muted small','Πρόταση βάσει καταγραφών ATLA, όχι πιστοποιημένη εκτίμηση ικανότητας.')
-    );
-    if(state.activities){
-      const extra=await state.activities.summary();
-      target.append(make('p','muted small',
-        'Επιπλέον εξάσκηση: '+extra.mci.total+' καταγραφές συμβάντων, '+extra.equipment.total+
-        ' καρτέλες εξοπλισμού, '+extra.reviews+' επιλογές που χρειάζονται επανάληψη.'));
-    }
-  }catch(e){notify('Δεν υπολογίστηκε η εκπαιδευτική διαδρομή: '+e.message,true);}
+  const minutes=Number($('study-duration').value)||25;
+  const target=$('plan-output');target.replaceChildren();
+  target.append(
+    make('strong',null,'Πρόταση: Πρακτική ΕΟΠΠΕΠ και ΗΚΓ'),
+    make('p',null,'Μελέτη ύλης '+Math.round(minutes*.5)+' λεπτά · Εξάσκηση ΗΚΓ '+Math.round(minutes*.3)+' λεπτά · Επανάληψη '+(minutes-Math.round(minutes*.5)-Math.round(minutes*.3))+' λεπτά.'),
+    make('p','muted small','Γενική πρόταση χρόνου, όχι πιστοποιημένη εκτίμηση ικανότητας.')
+  );
 }
 async function exportMentor(){
   try{
@@ -565,12 +412,12 @@ async function exportMentor(){
   }catch(e){notify('Η εξαγωγή απέτυχε: '+e.message,true);}
 }
 async function eraseMentor(){
-  if(!confirm('Να διαγραφούν οι δοκιμαστικές αποστολές και η μνήμη ATLA από αυτή την καρτέλα; Η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ δεν επηρεάζεται.'))return;
+  if(!confirm('Να διαγραφεί η τοπική μνήμη ATLA από αυτή τη συσκευή; Η πρόοδος ΣΑΕΚ/ΕΟΠΠΕΠ δεν επηρεάζεται.'))return;
   try{
     await state.store.erase(state.scope);
     if(state.activities)await state.activities.erase();
     state.session=null;
-    renderMission();await renderMemory();await renderPlan();
+    await renderPlan();
     notify('Διαγράφηκαν μόνο οι δοκιμαστικές καταγραφές ATLA.');
   }catch(e){notify('Η διαγραφή απέτυχε: '+e.message,true);}
 }
@@ -588,13 +435,11 @@ function viewLegacy(){
 }
 async function boot(){
   wireTabs();
-  wireModes();
   wireStudyPreferences();
   if($('coach-form'))wireCoach();
   // The page has one ATLA: its button opens the same assistant as every other page.
   if($('mentor-hero-form'))wireMentorPresence();
   $('atla-open-chat')?.addEventListener('click',()=>document.querySelector('.atla-launcher')?.click());
-  $('restart')?.addEventListener('click',()=>{if(state.session)void startCase(state.session.case_id)});
   $('read-legacy').addEventListener('click',viewLegacy);
   $('export-mentor').addEventListener('click',()=>void exportMentor());
   $('clear-mentor').addEventListener('click',()=>void eraseMentor());
@@ -604,14 +449,12 @@ async function boot(){
     try{state.store=createMentorStore(await openMentorDb());}
     catch{state.store=createVolatileMentorStore();}
     state.session=await state.store.active(state.scope);
-    if($('mci-picker'))state.activities=await mountActivities({scope:state.scope,notify,
-      onChange:async()=>{await renderMemory();await renderPlan();}});
     state.initialized=true;
     $('privacy-text').textContent=state.store.persistent?
       'Οι δοκιμές ATLA αποθηκεύονται τοπικά σε δύο ξεχωριστές βάσεις IndexedDB. Η δοκιμαστική ταυτότητα επισκέπτη ισχύει μόνο για αυτή την καρτέλα. Δεν γίνεται συγχρονισμός στο cloud.':
       'Η τοπική αποθήκευση IndexedDB δεν είναι διαθέσιμη· οι δοκιμές θα χαθούν αν κλείσεις την καρτέλα. Δεν γίνεται συγχρονισμός.';
     notify(state.store.persistent?'Το εργαστήριο είναι έτοιμο. Η υπάρχουσα πρόοδος παραμένει ανέπαφη.':'Δοκιμαστική λειτουργία χωρίς μόνιμη αποθήκευση.');
-    renderMission();await renderMemory();await renderPlan();
+    await renderPlan();
   }catch(e){notify('Το εργαστήριο δεν μπορεί να ξεκινήσει: '+e.message,true);}
 }
 void boot();
