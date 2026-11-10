@@ -24,7 +24,8 @@ jobs:
       - name: Install offline render dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq blender xvfb libgl1-mesa-dri
+          sudo apt-get install -y -qq blender xvfb libgl1-mesa-dri python3-numpy
+          blender --background --factory-startup --python-expr "import numpy; print('NumPy ready')"
           blender --version | head -3
       - name: Real Blender scene (HuBMAP HRA CC BY)
         run: |
