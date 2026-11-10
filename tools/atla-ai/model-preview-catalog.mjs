@@ -11,11 +11,7 @@ const configurations=Object.freeze({
   research:Object.freeze({prefix:'tools/anatomy-3d/resources/z-anatomy-research/',label:'Z-Anatomy (research only)',pathKey:'path',hashKey:'sha256',status:'NC-SA research model, not cleared for live use'})
  }),
  cockpit:Object.freeze({
-  nih:Object.freeze({prefix:NIH_PREFIX,label:'NIH 3D',pathKey:'path',hashKey:'sha256',status:NIH_STATUS}),
-  primary:Object.freeze({prefix:'tools/patient-simulator/resources/quaternius/',label:'Quaternius',pathKey:'path',hashKey:'sha256',status:'Character/animation research, not a clinical patient'}),
-  patients:Object.freeze({prefix:'tools/patient-simulator/assets/patients/',label:'Existing static patients',pathKey:'path',hashKey:'gitBlobSha',status:'Static CC0 patient pose, not a rig or clinical simulation'}),
-  makehuman:Object.freeze({prefix:'tools/patient-simulator/resources/makehuman/',label:'MakeHuman source geometry',pathKey:'path',hashKey:'sha256',extension:'.obj',status:'Unrigged source OBJ - not a prepared animated patient'}),
-  rigged:Object.freeze({prefix:'tools/patient-simulator/assets/patients/',label:'Rigged CC0 MakeHuman educational actor',pathKey:'path',hashKey:'sha256',status:'Real skinned/animated source demonstrator; not physiologically or clinically validated'})
+  nih:Object.freeze({prefix:NIH_PREFIX,label:'NIH 3D',pathKey:'path',hashKey:'sha256',status:NIH_STATUS})
  })
 });
 const cleanName=name=>String(name||'').replace(/\.glb$/i,'').replace(/_/g,' ').trim();
@@ -50,12 +46,7 @@ export function getResourceCatalogUrls(rootUrl){
  return {
   library:new URL('tools/atla-ai/resources/model-library.json',root),
   anatomy:new URL('tools/anatomy-3d/resources/imported-manifest.json',root),
-  anatomyResearch:new URL('tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json',root),
-  cockpit:new URL('tools/patient-simulator/resources/quaternius/imported-manifest.json',root),
-  cockpitPatients:new URL('tools/patient-simulator/assets/patients/preview-manifest.json',root),
-  cockpitMakehumanCore:new URL('tools/patient-simulator/resources/makehuman/imported-manifest.json',root),
-  cockpitMakehumanSupplemental:new URL('tools/patient-simulator/resources/makehuman/supplemental-imported-manifest.json',root),
-  cockpitRigged:new URL('tools/patient-simulator/assets/patients/atla-makehuman-rigged-manifest.json',root)
+  anatomyResearch:new URL('tools/anatomy-3d/resources/z-anatomy-research/imported-manifest.json',root)
  };
 }
 export function safeAssetUrl(item,tool,rootUrl){
@@ -77,7 +68,7 @@ export function nihAssetsFromLibrary(library,tool){
   }}));
  return {assets};
 }
-export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Κλινικός Προσομοιωτής'});
+export const toolOptions=Object.freeze({anatomy:'Anatomy Lab'});
 
 /**
  * Compatibility adapter for the ONE shared registry. Legacy source manifest
@@ -87,11 +78,7 @@ export const toolOptions=Object.freeze({anatomy:'Anatomy Lab',cockpit:'Κλιν�
 const sharedSourceConfig=Object.freeze({
  hra:{tool:'anatomy',type:'primary'},
  'z-anatomy':{tool:'anatomy',type:'research'},
- nih3d:{tool:'anatomy',type:'nih'},
- quaternius:{tool:'cockpit',type:'primary'},
- patients:{tool:'cockpit',type:'patients'},
- makehuman:{tool:'cockpit',type:'makehuman'},
- 'makehuman-rigged':{tool:'cockpit',type:'rigged'}
+ nih3d:{tool:'anatomy',type:'nih'}
 });
 export function sharedRegistryAssets(library,{tool='anatomy',dataset='primary'}={}){
  if(!Array.isArray(library?.models))throw Error('Invalid central 3D library');
@@ -139,8 +126,7 @@ export function sharedRegistryAssets(library,{tool='anatomy',dataset='primary'}=
 
 /** Which library source each viewer collection shows. */
 const LIBRARY_SOURCES=Object.freeze({
- anatomy:Object.freeze({primary:'hra',research:'z-anatomy'}),
- cockpit:Object.freeze({primary:'quaternius',patients:'patients',makehuman:'makehuman',rigged:'makehuman-rigged'})
+ anatomy:Object.freeze({primary:'hra',research:'z-anatomy'})
 });
 /** One collection of the shared 3D library in the viewer's asset shape: every tool reads the same registry. */
 export function libraryAssets(library,tool,sourceType){
@@ -154,11 +140,9 @@ export function libraryAssets(library,tool,sourceType){
 }
 /** Viewer tool and collection for each library source. */
 const VIEWER_COLLECTION=Object.freeze({
- nih3d:['anatomy','nih'],hra:['anatomy','primary'],'z-anatomy':['anatomy','secondary'],
- quaternius:['cockpit','primary'],patients:['cockpit','secondary'],makehuman:['cockpit','makehuman'],'makehuman-rigged':['cockpit','rigged']
+ nih3d:['anatomy','nih'],hra:['anatomy','primary'],'z-anatomy':['anatomy','secondary']
 });
-const SOURCE_NAMES=Object.freeze({nih3d:'NIH 3D',hra:'HRA / HuBMAP','z-anatomy':'Z-Anatomy',quaternius:'Quaternius',patients:'Στατικοί ασθενείς',
- makehuman:'MakeHuman','makehuman-rigged':'MakeHuman με σκελετό',bp3d:'BodyParts3D'});
+const SOURCE_NAMES=Object.freeze({nih3d:'NIH 3D',hra:'HRA / HuBMAP','z-anatomy':'Z-Anatomy',bp3d:'BodyParts3D'});
 /** Body regions that branch the library, and which region each anatomical structure belongs to. */
 export const REGIONS=Object.freeze({head:'Κεφαλή και εγκέφαλος',spine:'Σπονδυλική στήλη και νωτιαίος μυελός',chest:'Θώρακας και αναπνευστικό',
  heart:'Καρδιά και αγγεία',abdomen:'Κοιλία και νεφροί',pelvis:'Πύελος και ουρογεννητικό',upper:'Άνω άκρο',lower:'Κάτω άκρο',

@@ -4,7 +4,7 @@ import {safeReturnHref,loadLibrary} from './nih3d-library.mjs';
 import {atlasRole,detailKeysForStructure,modelShowsStructures} from './anatomy-curation.mjs';
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
-const tool=params.get('tool')==='cockpit'?'cockpit':'anatomy';
+const tool='anatomy'; // The patient simulator was removed; every viewer is the anatomy atlas.
 const root=new URL('../../',import.meta.url);
 const select=$('source-model'),dataset=$('source-dataset'),button=$('source-load'),note=$('source-status');
 // All catalogs are visible through one shared inventory. Context still controls safe deep links.

@@ -4,17 +4,6 @@
   "description": "Source-backed ownership registry. owner-mapped means existing implementation remains at a historical path; it is NOT a completed move or verification of clinical correctness.",
   "entries": [
     {
-      "id": "patient-simulator",
-      "kind": "tool",
-      "status": "retired",
-      "owner": "tools/patient-simulator",
-      "implementation": [
-        "mentor-next.html",
-        "tools/patient-simulator/core/next-sim.mjs"
-      ],
-      "note": "Retired 2026-11-10: patient simulations removed; old URLs forward to mentor-ecg.html."
-    },
-    {
       "id": "anatomy-3d",
       "kind": "tool",
       "status": "canonical",
