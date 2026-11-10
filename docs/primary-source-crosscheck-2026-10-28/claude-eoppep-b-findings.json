@@ -1,0 +1,3585 @@
+{
+ "status": "IN_PROGRESS_NOT_CERTIFIED",
+ "scope": "Targeted scientific cross-check of EOPPEP group-B questions that had no targetedReview in PR #39. Not an independent scientific certification.",
+ "entries": [
+  {
+   "id": "EOP-B-001",
+   "question": "Οινόπνευμα και οδήγηση.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "WHO Road traffic injuries: ο κίνδυνος συντριβής ξεκινά από χαμηλά επίπεδα αλκοόλ και αυξάνεται σημαντικά σε BAC ≥0,04 g/dl· οδήγηση υπό επήρεια αυξάνει τον κίνδυνο θανάτου/σοβαρού τραυματισμού. Η απάντηση συμφωνεί. Οι επιμέρους επιδράσεις (όραση, αντίδραση) δεν αναφέρονται στη σελίδα αυτή.",
+   "sources": [
+    {
+     "title": "WHO — Road traffic injuries",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-002",
+   "question": "Συμπεριφορά κατά την κίνηση σε στροφή",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. ΚΟΚ ν. 2696/1999 άρθρο 19 παρ. 2–3, 7 και ν. 5209/2025 άρθρο 23: ο οδηγός μειώνει την ταχύτητα σε στροφές/περιορισμένη ορατότητα, λαμβάνει υπόψη οδόστρωμα και συνθήκες και τηρεί αποστάσεις ασφαλείας· για οχήματα άμεσης ανάγκης (άρθρο 48) η εξαίρεση ισχύει μόνο όταν δεν δημιουργείται κίνδυνος. Η αποθηκευμένη απάντηση συμφωνεί νομικά. Τα «ομαλό τιμόνι/επιτάχυνση» και «αποφυγή απότομου φρεναρίσματος εντός στροφής» δεν βρέθηκαν αυτολεξεί, αντιστοιχούν όμως στο αντικείμενο των ασκήσεων EVOC (NHTSA).",
+   "sources": [
+    {
+     "title": "ΚΟΚ άρθρο 19 (lawspot)",
+     "url": "https://www.lawspot.gr/nomothesia/k-odikis-kykloforias/arthro-19-kodikas-odikis-kykloforias-tahytita/"
+    },
+    {
+     "title": "ν. 5209/2025 — ΕΛΙΝΥΑΕ",
+     "url": "https://www.elinyae.gr/ethniki-nomothesia/n-52092025-fek-100a-1362025"
+    },
+    {
+     "title": "NHTSA — Characterizing Ambulance Driver Training (2019)",
+     "url": "https://www.ems.gov/assets/NHTSA_Characterizing_Ambulance_Driver_Training_in__EMS_Systems_Dec__2019.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: το άρθρο 48 ΚΟΚ δεν καλύπτει οδήγηση που δημιουργεί κίνδυνο· άνεση ασθενούς (υψηλό κέντρο βάρους)."
+  },
+  {
+   "id": "EOP-B-003",
+   "question": "Εξοπλισμός τηλεματικής υγείας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "HHS Telehealth: αναφέρονται ως παραδείγματα απομακρυσμένης παρακολούθησης πιεσόμετρα, μετρητές γλυκόζης, οξύμετρα· συνιστώνται ιδιωτικοί χώροι, πλατφόρμες συμβατές με HIPAA και ενημερωμένη συναίνεση. Η σελίδα ΔΕΝ ορίζει προδιαγραφές εξοπλισμού ούτε αναφέρει ΗΚΓ/monitor· η απάντηση σωστά τονίζει ασφάλεια και διαλειτουργικότητα.",
+   "sources": [
+    {
+     "title": "HHS — Telehealth getting started",
+     "url": "https://telehealth.hhs.gov/providers/getting-started"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-004",
+   "question": "Σωστή σειρά ενεργειών σε VF/pVT κατά την ALS.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (ΚΑΡΠΑ)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK/ERC 2025 ALS: μεμονωμένες απινιδώσεις και μετά ΚΑΡΠΑ 2 λεπτών, κυκλικός αλγόριθμος· VF/pVT ως απινιδώσιμοι ρυθμοί. Η αλληλουχία της απάντησης (ΚΑΡΠΑ → monitor/ρυθμός → απινίδωση → ΚΑΡΠΑ 2′ → επανέλεγχος) συμφωνεί. Η χρονική θέση των φαρμάκων (μετά τον 3ο παλμό) είχε επαληθευτεί στην B-018. Η σελίδα ALS που διαβάστηκε δεν παρέθετε ρητά το βήμα «σύνδεση monitor» ως ξεχωριστό. Η παραπομπή (resus.org.uk/cy/node/36438) είναι γενική και δεν στηρίζει άμεσα τη σειρά.",
+   "suggestedChange": "Παραπομπή στη σελίδα ALS 2025 αντί του node/36438.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-005",
+   "question": "Αρχική ενέργεια απινίδωσης σε ενήλικα και παιδί.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (απινίδωση)",
+   "certainty": "υψηλή για ενήλικες, χαμηλή για παιδιά",
+   "checkedAt": "2026-10-31",
+   "findings": "Ενήλικες επιβεβαιώθηκαν: RCUK 2025 «first shock at least 150 J» (rectilinear/truncated exponential) και 130–150 J για pulsed biphasic· συμφωνεί με την απάντηση. Παιδιά: η σελίδα PALS 2025 δεν άνοιξε (client_error), άρα το «4 J/kg» ΔΕΝ επαληθεύτηκε σε αυτό το πέρασμα (ισχύει στις γνωστές οδηγίες ERC αλλά χωρίς πηγή εδώ). Η φράση «ανώτατο όριο ανά ηλικία/μηχάνημα» δεν στηρίχθηκε.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+    },
+    {
+     "title": "RCUK PALS 2025 (μη προσβάσιμη)",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-advanced-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Παιδιατρική ενέργεια χωρίς επαληθευμένη πηγή· έλεγχος από κλινικό/ERC 2025 PALS."
+  },
+  {
+   "id": "EOP-B-006",
+   "question": "Μέχρι πότε συνεχίζεται η ΒLS ΚΑΡΠΑ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή-μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα RCUK Adult BLS 2025 δεν δίνει κριτήρια διακοπής ΚΑΡΠΑ ούτε χρονικό όριο (μόνο: επανέναρξη συμπιέσεων μετά από παλμό/οδηγίες ΑΕΑ). Η ALS σελίδα επίσης δεν ορίζει σημείο διακοπής. Άρα οι τρεις προϋποθέσεις της απάντησης (παράδοση σε εξειδικευμένη βοήθεια, σημεία ζωής, εξάντληση) είναι κοινή πρακτική αλλά δεν στηρίζονται από τις συγκεκριμένες σελίδες.",
+   "suggestedChange": "Παραπομπή σε ERC/RCUK κείμενο για διακοπή ΚΑΡΠΑ ή ελληνικό πρωτόκολλο.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult BLS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Κριτήρια διακοπής ΚΑΡΠΑ: κλινική/νομική κρίση, όχι αποκλειστικά οδηγία."
+  },
+  {
+   "id": "EOP-B-007",
+   "question": "Ρυθμοί καρδιακής ανακοπής.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "VF/pVT ως απινιδώσιμοι επιβεβαιώνονται στη σελίδα ALS 2025. Η ασυστολία/PEA ως μη απινιδώσιμοι είναι καθιερωμένη ταξινόμηση, αλλά η σελίδα δεν την ορίζει ρητά (δεν αναφέρει PEA). Η απάντηση είναι ορθή και συμβατή με το ERC.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-advanced-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-008",
+   "question": "Πώς διαπιστώνεται καρδιακή ανακοπή σε άτομο που έπεσε αναίσθητο.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK 2025 BLS: «Suspect cardiac arrest in any person who is unresponsive»· αγωνιώδεις αναπνοές/παθολογικό πρότυπο αναγνωρίζονται ως ανακοπή· κλήση βοήθειας χωρίς καθυστέρηση, ΑΕΑ το ταχύτερο. Συμφωνεί. Οι αριθμοί 112/166 είναι ελληνικοί (εκτός των πηγών) — να επιβεβαιωθούν από ΕΚΑΒ.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult BLS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-009",
+   "question": "Εκδηλώσεις καρδιακής ανεπάρκειας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: δύσπνοια προσπάθειας ή ηρεμίας, ορθόπνοια, οιδήματα, κόπωση· σημεία: διάταση σφαγίτιδων, εισπνευστικοί βασικοί ρόγχοι, S3. Συμφωνεί. Η παροξυσμική νυχτερινή δύσπνοια και η αύξηση βάρους δεν αναφέρονται στο απόσπασμα· η διάταση σφαγίτιδων και ο S3 λείπουν από την απάντηση.",
+   "sources": [
+    {
+     "title": "Merck — Acute heart failure",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/acute-heart-failure"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-010",
+   "question": "Πέντε επιπλοκές οξέος εμφράγματος.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: αρρυθμίες (έως 90%, VF στις πρώτες 24 ώρες, κολπική μαρμαρυγή, αποκλεισμός), καρδιακή ανεπάρκεια (14–36%), καρδιογενές shock (5–10%), μηχανικές επιπλοκές (ρήξη μεσοκοιλιακού διαφράγματος, ρήξη θηλοειδούς μυός, ρήξη ελεύθερου τοιχώματος), ανεύρυσμα/θρόμβωση, περικαρδίτιδα/σύνδρομο Dressler. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "MSD — Complications of ACS",
+     "url": "https://www.msdmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/complications-of-acute-coronary-syndromes"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-011",
+   "question": "Πόνος εμφράγματος.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: «deep, substernal, visceral pain, aching or pressure»· ακτινοβολία σε πλάτη, γνάθο, αριστερό/δεξί βραχίονα, ώμους· συνοδά δύσπνοια, εφίδρωση, ναυτία/έμετος· σιωπηλά εμφράγματα ~20% (έως 30% σε διαβητικούς). Συμφωνεί.",
+   "sources": [
+    {
+     "title": "Merck — Acute myocardial infarction",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-012",
+   "question": "Προνοσοκομειακή αντιμετώπιση εμφράγματος.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: προνοσοκομειακά οξυγόνο (τυπικά 2 L με ρινικό καθετήρα), ασπιρίνη, νιτρώδη, μεταφορά σε κατάλληλο κέντρο, IV γραμμή, συνεχής ΗΚΓ. Η απάντηση λέει οξυγόνο μόνο σε υποξαιμία· η εμφανής σελίδα δεν αναφέρει αυτόν τον περιορισμό (υποσημείωση κομμένη). Δεν προσδιορίζεται δόση ασπιρίνης στην απάντηση.",
+   "sources": [
+    {
+     "title": "Merck — Acute myocardial infarction",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Οξυγόνο/ασπιρίνη/νιτρώδη στο έμφραγμα: κατά ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-013",
+   "question": "Συνηθέστερες αιτίες βραδυκαρδίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Sinus Bradycardia: φυσιολογική στους αθλητές (αυξημένος παρασυμπαθητικός τόνος), β-αποκλειστές, ανταγωνιστές ασβεστίου, διγοξίνη, υποξία, ισχαιμική καρδιοπάθεια/έμφραγμα, υπερκαλιαιμία, ενδοκράνια υπέρταση. Η υποθερμία δεν περιλαμβάνεται στους καταλόγους αιτιών του άρθρου (αναφέρεται μόνο ότι πρέπει να θερμανθεί ο ασθενής πριν από οριστικές αποφάσεις)· η αύξηση ΕΚΠ λείπει από την απάντηση.",
+   "suggestedChange": "Προαιρετικά να προστεθεί η αυξημένη ενδοκράνια πίεση.",
+   "sources": [
+    {
+     "title": "StatPearls — Sinus Bradycardia",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK493201/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-014",
+   "question": "Δώστε τον ορισμό της καρδιοαναπνευστικής ανακοπής.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η αποθηκευμένη απάντηση (παύση αποτελεσματικής κυκλοφορίας, απουσία φυσιολογικής αναπνοής, άμεση ΚΑΡΠΑ/ΑΕΑ) συμφωνεί με το RCUK/ERC 2025 BLS: «If any person is unresponsive with abnormal breathing, cardiac arrest should be assumed». Ο ορισμός «παύση αποτελεσματικής κυκλοφορίας» είναι γενικός κλινικός ορισμός· η σελίδα δεν δίνει τυπικό ορισμό, μόνο κριτήριο αναγνώρισης.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult Basic Life Support (δημ. 27/10/2025)",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-015",
+   "question": "Να αναφέρετε το πρωτόκολλο της Βασικής Καρδιοπνευμονικής Αναζωογόνησης.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμπιέσεις 100–120/min, βάθος 5–6 cm (RCUK: «at least 5 cm, but not more than 6 cm»), 30:2 για εκπαιδευμένους, συνεχείς συμπιέσεις για μη εκπαιδευμένους, ΑΕΑ το συντομότερο ακολουθώντας τις οδηγίες, άμεση επανέναρξη συμπιέσεων μετά το σοκ ή όταν δεν ενδείκνυται σοκ. Όλα συμφωνούν με την αποθηκευμένη απάντηση. Η απάντηση δεν αναφέρει ρητά τη συνέχιση συμπιέσεων από μη εκπαιδευμένους χωρίς εμφυσήσεις.",
+   "suggestedChange": "Προαιρετικά: προσθήκη «οι μη εκπαιδευμένοι δίνουν συνεχείς συμπιέσεις χωρίς διακοπή».",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult Basic Life Support",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-016",
+   "question": "Να αναφέρετε το πρωτόκολλο της Εξειδικευμένης Καρδιοπνευμονικής Αναζωογόνησης.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η δομή (υψηλής ποιότητας ΚΑΡΠΑ, απινιδώσιμος/μη απινιδώσιμος ρυθμός, μονές απινιδώσεις με κύκλους 2 λεπτών, αναστρέψιμα αίτια) συμφωνεί με το κείμενο ALS του RCUK 2025 που διαβάστηκε (μονές απινιδώσεις και κύκλος συμπιέσεων 2 λεπτών). Η αναφορά στα «4H/4T» και στον εξειδικευμένο αεραγωγό/αγγειακή πρόσβαση δεν επιβεβαιώθηκε από το απόσπασμα της σελίδας που ανοίχτηκε.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult Advanced Life Support",
+     "url": "https://www.resus.org.uk/print/pdf/node/36438"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος του ακριβούς αλγορίθμου ALS και του ελληνικού επιχειρησιακού πρωτοκόλλου από κλινικό."
+  },
+  {
+   "id": "EOP-B-017",
+   "question": "Σε ποια περίπτωση προβαίνουμε σε προκάρδια πλήξη στον ασθενή μας;",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή-μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η αποθηκευμένη απάντηση λέει ότι η προκάρδια πλήξη δεν είναι ρουτίνα, δεν καθυστερεί ΚΑΡΠΑ/απινιδωτή και μπορεί να εξεταστεί μόνο σε μαρτυρημένη, παρακολουθούμενη ανακοπή με απινιδώσιμο ρυθμό χωρίς άμεσο απινιδωτή. Οι σελίδες BLS και ALS RCUK 2025 που διαβάστηκαν δεν αναφέρουν προκάρδια πλήξη, άρα η συγκεκριμένη συνθήκη δεν επιβεβαιώθηκε από πρωτογενή πηγή 2025 εδώ. Η παραπομπή της εγγραφής (node/36438) είναι η σελίδα ALS, που δεν τη στηρίζει ρητά.",
+   "suggestedChange": "Είτε προσθήκη ακριβούς παραπομπής στο σχετικό απόσπασμα των ERC 2025 είτε σαφής επισήμανση ότι η συνθήκη προέρχεται από παλαιότερες οδηγίες και χρειάζεται επιβεβαίωση.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult BLS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    },
+    {
+     "title": "RCUK/ERC 2025 Adult ALS",
+     "url": "https://www.resus.org.uk/print/pdf/node/36438"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Απαιτείται κλινική κρίση και επιβεβαίωση από το πλήρες κείμενο ERC 2025 αν και πότε επιτρέπεται η πλήξη."
+  },
+  {
+   "id": "EOP-B-018",
+   "question": "Κατά τη διαδικασία Εξειδικευμένης ΚΑΡΠΑ ποια φάρμακα πρώτης γραμμής χρησιμοποιούμε, σε ποιες ποσότητες και σε ποια χρονικά διαστήματα;",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακα)",
+   "certainty": "υψηλή για τις δόσεις",
+   "checkedAt": "2026-10-31",
+   "findings": "Δόσεις επιβεβαιωμένες: αδρεναλίνη 1 mg ανά 3–5 λεπτά, αμιοδαρόνη 300 mg μετά το τρίτο σοκ και 150 mg μετά το πέμπτο (RCUK 2025). Έλλειψη ακρίβειας στον χρονισμό: για απινιδώσιμο ρυθμό η αδρεναλίνη δίνεται μετά το ΤΡΙΤΟ σοκ, για μη απινιδώσιμο το συντομότερο δυνατό. Η αποθηκευμένη απάντηση λέει μόνο «με χρονισμό ανάλογα». Η λιδοκαΐνη 100 mg ως εναλλακτική στην αμιοδαρόνη δεν αναφέρεται.",
+   "suggestedChange": "Προσθήκη: «απινιδώσιμος ρυθμός: αδρεναλίνη μετά το 3ο σοκ· μη απινιδώσιμος: το συντομότερο· λιδοκαΐνη 100 mg εναλλακτικά αν δεν υπάρχει αμιοδαρόνη».",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS",
+     "url": "https://www.resus.org.uk/print/pdf/node/36438"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Οι δόσεις φαρμάκων και ο ελληνικός επιχειρησιακός ρόλος του διασώστη (όχι αυτόνομη χορήγηση) θέλουν έλεγχο από κλινικό."
+  },
+  {
+   "id": "EOP-B-019",
+   "question": "Έλεγχος βατότητας αεραγωγών",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η πηγή περιγράφει «look–listen–feel»: ομιλία (καθαρή φωνή = πιθανώς βατός αεραγωγός), ροχαλητό (πτώση γλώσσας), στριδόρ, γουργουρητό (υγρά), σιωπή (πλήρης απόφραξη), αίσθηση ροής αέρα, ορατές εκκρίσεις/ξένα σώματα. Η αποθηκευμένη απάντηση καλύπτει τα ίδια στοιχεία. Δευτερογενής πηγή εκπαιδευτικού εγχειριδίου.",
+   "sources": [
+    {
+     "title": "Sheffield Hallam SMART manual 2020 — Part 3 Airway and breathing",
+     "url": "https://sites.google.com/my.shu.ac.uk/smart-manual-2020/part-3-airway-and-breathing"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-020",
+   "question": "Συχνότερα αίτια απόφραξης αεραγωγού",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Πηγή: μειωμένη συνείδηση, ξένα σώματα/έμετος/αίμα/εκκρίσεις, βρογχόσπασμος, λοίμωξη με οίδημα, αναφυλαξία. Η αποθηκευμένη απάντηση τα καλύπτει (και προσθέτει τραύμα/έγκαυμα εισπνοής, που είναι αποδεκτά αίτια).",
+   "sources": [
+    {
+     "title": "Sheffield Hallam SMART manual 2020 — Part 3 Airway and breathing",
+     "url": "https://sites.google.com/my.shu.ac.uk/smart-manual-2020/part-3-airway-and-breathing"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-021",
+   "question": "Ορισμός κυάνωσης, είδη και παθολογικές καταστάσεις με κυάνωση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί: κυάνωση = κυανή χροιά δέρματος/βλεννογόνων από αύξηση της αποξυγονωμένης Hb (StatPearls: ≥5,0 g/dL)· κεντρική (βλεννογόνοι, ανεπαρκής οξυγόνωση) έναντι περιφερικής (άκρα, αγγειοσύσπαση/χαμηλή παροχή). Η πηγή δηλώνει ότι η κυάνωση «δεν είναι ευαίσθητος ούτε ειδικός δείκτης υποξαιμίας» — συμβατό με το «η απουσία κυάνωσης δεν αποκλείει υποξία». Ελλείψεις: η ερώτηση ζητά ρητά παθολογικές καταστάσεις· η απάντηση δίνει λίγα παραδείγματα. Λείπουν π.χ. πνευμονικά (άσθμα, πνευμονία, ΧΑΠ, πνευμονική εμβολή), καρδιακά (καρδιακή ανεπάρκεια, δεξιοαριστερά shunt), μεθαιμοσφαιριναιμία, υποθερμία (κεντρική)· περιφερική: shock, κρύο, φλεβική στάση.",
+   "suggestedChange": "Συμπλήρωση λίστας καταστάσεων όπως παραπάνω. Σημείωση για αναιμία: χρειάζεται μεγαλύτερη αποκορεσμός ώστε να εμφανιστεί κυάνωση.",
+   "sources": [
+    {
+     "title": "StatPearls — Cyanosis (NBK559167)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK559167/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-022",
+   "question": "Τρόποι επιβεβαίωσης ορθής τοποθέτησης του τραχειοσωλήνα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (αεραγωγός)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το κύριο τεκμήριο (συνεχής κυματομορφική καπνογραφία) επιβεβαιώνεται: RCUK/ERC 2025 ALS «Use waveform capnography to confirm correct tracheal tube placement during CPR» και «A sustained ETCO2 trace… must be used to exclude oesophageal placement». ΛΑΘΟΣ ΠΑΡΑΠΟΜΠΗ: η εγγραφή παραπέμπει στη σελίδα Post-resuscitation care, ενώ το χωρίο βρίσκεται στη σελίδα Adult ALS. Τα υπόλοιπα (οπτική παρατήρηση διόδου, συμμετρική ανύψωση/ακρόαση) δεν αναφέρονται στη σελίδα που διαβάστηκε και δεν εμφανίζονται ως ισοδύναμα με την καπνογραφία.",
+   "suggestedChange": "Διόρθωση παραπομπής στη σελίδα Adult ALS.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS (airway/capnography)",
+     "url": "https://www.resus.org.uk/print/pdf/node/36438"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-023",
+   "question": "Οριστική αποκατάσταση αεραγωγού και τρεις περιπτώσεις που χρειάζονται οριστικό αεραγωγό.",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός (αεραγωγός)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η αποθηκευμένη απάντηση (τραχειοσωλήνας με cuff από εξειδικευμένο επαγγελματία· ενδείξεις: αδυναμία προστασίας αεραγωγού, αποτυχία οξυγόνωσης/αερισμού, αναμενόμενη απόφραξη/τραύμα) είναι κλινικά εύλογη αλλά η παραπομπή (Post-resuscitation care) δεν περιλαμβάνει ενδείξεις οριστικού αεραγωγού. Το ALS 2025 περιορίζει τη διασωλήνωση σε διασώστες με υψηλό ποσοστό επιτυχίας (>95% σε 2 προσπάθειες, συναίνεση ειδικών) με συνεχή καπνογραφία — δεν αντικατοπτρίζεται. Επιχειρησιακά (ποιος διασωλήνωνει στην Ελλάδα) δεν ελέγχθηκε.",
+   "suggestedChange": "Σωστή παραπομπή και μνεία των περιορισμών εμπειρίας/καπνογραφίας.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS",
+     "url": "https://www.resus.org.uk/print/pdf/node/36438"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Οι ενδείξεις οριστικού αεραγωγού και ο ρόλος του διασώστη ΕΚΑΒ χρειάζονται κλινική/επιχειρησιακή κρίση."
+  },
+  {
+   "id": "EOP-B-024",
+   "question": "Αποφραγμένος αεραγωγός από ξένο σώμα σε παιδί.",
+   "verdict": "consistent",
+   "risk": "υψηλός (παιδί)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK/ERC 2025 Paediatric BLS: έως 5 χτυπήματα ανάμεσα στις ωμοπλάτες, βρέφος: έως 5 θωρακικές ωθήσεις (τεχνική δύο αντίχειρων), παιδί/έφηβος: έως 5 κοιλιακές ωθήσεις, 5 αρχικές αναπνοές στην απώλεια συνείδησης, όχι τυφλή σάρωση. Λεπτομέρεια: η πηγή λέει «children and adolescents» (όχι ρητά «>1 έτος»), η αποθηκευμένη απάντηση χρησιμοποιεί το όριο του ενός έτους (συμβατό με την κλασική πρακτική). Η απάντηση δεν λέει «μία ματιά για ορατό αντικείμενο» (single sweep) — προαιρετική συμπλήρωση.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric Basic Life Support",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-025",
+   "question": "Αποφραγμένος αεραγωγός από ξένο σώμα σε ενήλικα.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK First Aid 2025: ενθάρρυνση βήχα, έως 5 χτυπήματα στην πλάτη, έως 5 κοιλιακές ωθήσεις και εναλλαγή, ΚΑΡΠΑ όταν γίνει αναντίδραστος, όχι τυφλή αναζήτηση με δάκτυλα. Η παραπομπή είναι οδηγός πρώτων βοηθειών (όχι ALS) — κατάλληλη για την ερώτηση.",
+   "sources": [
+    {
+     "title": "RCUK First Aid Guidelines 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-026",
+   "question": "Βαθιά προώθηση του τραχειοσωλήνα — επίπτωση στον αερισμό.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η απάντηση (δεξιά κύρια βρογχική διασωλήνωση, αερισμός κυρίως του δεξιού πνεύμονα, κίνδυνος υποξαιμίας/ατελεκτασίας) αντιστοιχεί σε κλασική γνώση, αλλά η παραπομπή (σελίδα ALS) δεν περιέχει αυτό το σημείο. Η μνεία της καπνογραφίας ως επιβεβαίωσης είναι ορθή αλλά η καπνογραφία μόνη δεν ανιχνεύει πάντα ενδοβρογχική θέση· χρειάζεται ακρόαση/απεικόνιση.",
+   "suggestedChange": "Αλλαγή παραπομπής σε πηγή που αναφέρει ρητά την ενδοβρογχική διασωλήνωση.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult ALS (δεν στηρίζει το σημείο)",
+     "url": "https://www.resus.org.uk/print/pdf/node/36438"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος ότι ο συνδυασμός μεθόδων επιβεβαίωσης είναι σωστός."
+  },
+  {
+   "id": "EOP-B-027",
+   "question": "Ενδείξεις – αντενδείξεις στοματοφαρυγγικού αεραγωγού.",
+   "verdict": "consistent",
+   "risk": "υψηλός (αεραγωγός)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με Merck Manual (professional): ενδείξεις = αναίσθητος ασθενής που χρειάζεται αερισμό με ασκό-βαλβίδα-μάσκα, ή βαθιά μειωμένη συνείδηση χωρίς αντανακλαστικό εμέτου με απόφραξη μαλακών μορίων· απόλυτη αντένδειξη = ασθενής με συνείδηση ή με αντανακλαστικό εμέτου· σχετική = στοματικό τραύμα/τρισμός. Έλλειψη: δεν αναφέρεται ο τρόπος μέτρησης μεγέθους (άκρο στη γωνία της κάτω γνάθου, πτερύγιο στη γωνία του στόματος) και η εναλλακτική του ρινοφαρυγγικού αεραγωγού.",
+   "sources": [
+    {
+     "title": "Merck Manual Professional — How to insert an oropharyngeal airway",
+     "url": "https://www.merckmanuals.com/professional/critical-care-medicine/how-to-do-basic-airway-procedures/how-to-insert-an-oropharyngeal-airway"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-028",
+   "question": "Ενδείξεις – αντενδείξεις ρινοφαρυγγικού αεραγωγού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: ενδείκνυται σε ασθενή ξύπνιο/ημισυνείδητο που δεν ανέχεται OPA λόγω αντανακλαστικού εμέτου· απόλυτη αντένδειξη: σημαντικός τραυματισμός μέσου προσώπου με ΥΠΟΨΙΑ κατάγματος ηθμοειδούς πλάκας/βάσης κρανίου· σχετικές: ανατομικές ανωμαλίες ρινός (τραύμα, πολύποδες, πρόσφατη χειρουργική). Συμφωνεί. Η σελίδα ΔΕΝ αναφέρει διαταραχές πήξης· η απάντηση λέει «σημαντικό τραύμα μέσου προσώπου» χωρίς το «με υποψία κατάγματος βάσης».",
+   "sources": [
+    {
+     "title": "Merck Manual Professional — Airway and respiratory devices",
+     "url": "https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/airway-and-respiratory-devices"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-029",
+   "question": "Ενδείξεις – αντενδείξεις λαρυγγικής μάσκας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (αεραγωγός)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "MSD: ενδείξεις — άπνοια/σοβαρή αναπνευστική ανεπάρκεια/επικείμενη ανακοπή όταν δεν επιτυγχάνεται διασωλήνωση· δύσκολος αερισμός με μάσκα. Απόλυτες αντενδείξεις: περιορισμένο άνοιγμα στόματος και μη διαβατή απόφραξη ανώτερου αεραγωγού. Σχετικές: ύπαρξη αντανακλαστικών (συνείδηση), κίνδυνος παλινδρόμησης/εισρόφησης (παρατεταμένος αερισμός BVM, παχυσαρκία, κύηση >10 εβδ.), ανάγκη υψηλών πιέσεων. Η αποθηκευμένη απάντηση καλύπτει την ουσία· οι όροι «γεμάτο στομάχι» και «στοματοφαρυγγική παθολογία» δεν υπάρχουν αυτούσια στην πηγή.",
+   "sources": [
+    {
+     "title": "MSD Manual Professional — LMA",
+     "url": "https://www.msdmanuals.com/professional/critical-care-medicine/how-to-do-other-airway-procedures/how-to-insert-a-laryngeal-mask-airway"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος αντενδείξεων υπεργλωττιδικών αεραγωγών στο πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-030",
+   "question": "Συμπτώματα εσωτερικής αιμορραγίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Hemorrhagic Shock: η ταχυκαρδία είναι συνήθως το πρώτο παθολογικό ζωτικό σημείο, ακολουθούν ταχύπνοια και στένωση σφυγμικής πίεσης· ψυχρά άκρα και καθυστερημένη τριχοειδική επαναπλήρωση· η πίεση μπορεί να παραμείνει φυσιολογική αρχικά, με σημαντική πτώση και αλλοίωση συνείδησης στην κλάση 3–4. Συμφωνεί με την ουσία της απάντησης (φυσιολογική αρχική πίεση δεν αποκλείει). Ωχρότητα, ψυχρός ιδρώτας, δίψα και τοπικά ευρήματα (διάταση, εκχύμωση) δεν επιβεβαιώθηκαν από αυτή την πηγή. (Ελληνική πηγή: έντυπο πρώτων βοηθειών ΕΚΑΒ για το κοινό, αρχείο που παρείχε ο χρήστης· δεν είναι επαγγελματικό πρωτόκολλο διασωστών.) Συμπλήρωμα: το έντυπο ΕΚΑΒ αναγνωρίζει την εσωτερική αιμορραγία από τον μηχανισμό (τροχαίο, πτώση, πλήξη, πυροβολισμός, μαχαίρωμα) και αναφέρει δέρμα ωχρό, κρύο, υγρό, ζάλη, αίσθημα ψύχους, πιθανή απώλεια συνείδησης — επιβεβαιώνονται ωχρότητα, ψυχρός ιδρώτας, ζάλη.",
+   "sources": [
+    {
+     "title": "StatPearls — Hemorrhagic Shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470382/"
+    },
+    {
+     "title": "ΕΚΑΒ — «Μαθαίνω Πρώτες Βοήθειες - Είμαι ασφαλής» (έντυπο για το κοινό)",
+     "url": "https://www.ekab.gr/files/entypa/EKAB-protes-voithies.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-031",
+   "question": "Προνοσοκομειακή αντιμετώπιση ρινορραγίας.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "NHS: καθιστή στάση, κεφάλι προς τα ΜΠΡΟΣ και στόμα ανοιχτό, πίεση στο μαλακό τμήμα της μύτης 10–15 λεπτά, αναπνοή από το στόμα· επείγουσα αξιολόγηση αν διαρκεί >10–15′, υπερβολική αιμορραγία, μετά από κτύπημα στο κεφάλι, αδυναμία/ζάλη, δύσπνοια, κατάποση αίματος με έμετο. Συμφωνεί. Προαιρετικά: παγοκύστη (ασθενής ένδειξη).",
+   "sources": [
+    {
+     "title": "NHS — Nosebleed",
+     "url": "https://www.nhs.uk/conditions/nosebleed/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-032",
+   "question": "Μέθοδοι αντιμετώπισης εξωτερικής αιμορραγίας.",
+   "verdict": "consistent",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK First Aid 2025: ισχυρή άμεση πίεση, κοινός ή (προτιμότερα) αιμοστατικός επίδεσμος στο τραύμα, τουρνικέ ΑΜΕΣΑ σε απειλητική αιμορραγία άκρου όταν αποτύχει η πίεση. Προσθήκη που λείπει: το τουρνικέ δεν χαλαρώνεται από μη επαγγελματία υγείας. Η αναφορά σε υποθερμία/καταπληξία δεν υπάρχει στην ενότητα αιμορραγίας.",
+   "suggestedChange": "Προσθήκη «το τουρνικέ δεν λύνεται — μόνο από επαγγελματία υγείας».",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-033",
+   "question": "Ορισμός και αίτια αιμόπτυσης.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: αιμόπτυση είναι η απόχρεμψη αίματος από το αναπνευστικό· αίτια βρογχίτιδα, βρογχεκτασίες, φυματίωση, καρκίνος, πνευμονική εμβολή, πνευμονία. Διαφοροποίηση από αιματέμεση (πηγή ανώτερο ΓΕΣ) και ψευδοαιμόπτυση. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "MSD — Hemoptysis",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/symptoms-of-pulmonary-disorders/hemoptysis"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-034",
+   "question": "Συμπτώματα/κλινική εικόνα καρδιακού επιπωματισμού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD Cardiac Tamponade: τριάδα Beck (υπόταση, υποφωνητικοί/βύθιοι καρδιακοί τόνοι, αύξηση φλεβικής πίεσης/διάταση σφαγίτιδων) «διαγνωστική αλλά όχι πάντα παρούσα»· στο τραύμα είναι αναξιόπιστη (διάταση σφαγίτιδων μπορεί να λείπει σε υποογκαιμία)· παράδοξος σφυγμός ως ενδεικτικό αλλά δύσκολο εύρημα. Συμφωνεί με την απάντηση. Η ταχυκαρδία δεν αναφέρεται στο απόσπασμα που διαβάστηκε (δεν επιβεβαιώθηκε από αυτή την πηγή).",
+   "sources": [
+    {
+     "title": "MSD — Cardiac Tamponade",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/cardiac-tamponade"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-035",
+   "question": "Ίσχαιμη περίδεση (τουρνικέ).",
+   "verdict": "consistent",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: πρώτα ισχυρή άμεση πίεση/αιμοστατικός επίδεσμος· τουρνικέ ΑΜΕΣΑ σε απειλητική αιμορραγία άκρου όταν αποτύχει η πίεση· δεν λύνεται παρά μόνο από επαγγελματία υγείας. Συμφωνεί. Η ταύτιση του όρου «ίσχαιμη περίδεση» με το τουρνικέ είναι ερμηνεία της απάντησης.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-036",
+   "question": "Ενδείξεις – αντενδείξεις ασπιρίνης.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck (οξύ έμφραγμα): «All patients are given aspirin 160 to 325 mg (not enteric-coated), if not contraindicated»· το πρώτο δισκίο μασιέται. Η αποθηκευμένη απάντηση δεν αναφέρει δόση ούτε τρόπο χορήγησης. Οι αντενδείξεις (υπερευαισθησία, ενεργός αιμορραγία) είναι εύλογες αλλά δεν αναφέρονται στο απόσπασμα.",
+   "sources": [
+    {
+     "title": "Merck — Acute myocardial infarction",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/acute-myocardial-infarction-mi"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη δόσης και τρόπου (μάσημα) κατά πρωτόκολλο.",
+   "clinicalNote": "Δόση ασπιρίνης κατά ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-037",
+   "question": "Πίνακας αντιδότων: οπιούχα, οργανοφωσφορικά, βενζοδιαζεπίνες, κυανιούχα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή (CDC MMG, malathion) στηρίζει ΜΟΝΟ τα οργανοφωσφορικά: ατροπίνη, πραλιδοξίμη, διαζεπάμη/λοραζεπάμη για σπασμούς, «do not induce emesis». Δεν στηρίζει τα άλλα τρία. Ναλοξόνη (οπιοειδή) και υδροξοκοβαλαμίνη (κυανιούχα) είναι τα καθιερωμένα αντίδοτα· η φλουμαζενίλη στηρίζεται στο StatPearls (δες B-038). Η φράση «δεν είναι οδηγία αυτόνομης χορήγησης» είναι σωστή.",
+   "suggestedChange": "Προσθήκη ξεχωριστής παραπομπής ανά ουσία (οπιοειδή, κυανιούχα, βενζοδιαζεπίνες).",
+   "sources": [
+    {
+     "title": "CDC MMG — malathion",
+     "url": "https://wwwn.cdc.gov/TSP/MMG/MMGDetails.aspx?mmgid=517&toxid=92"
+    },
+    {
+     "title": "StatPearls — Flumazenil",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK482238/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος αντιδότων και ορίων χορήγησης από κλινικό."
+  },
+  {
+   "id": "EOP-B-038",
+   "question": "Φάρμακο εκλογής σε αναπνευστική καταστολή από βενζοδιαζεπίνη.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με StatPearls: η φλουμαζενίλη είναι ανταγωνιστής βενζοδιαζεπινικών υποδοχέων, αλλά «in most cases, the risks … usually outweigh the benefits in acute toxicity»· κίνδυνοι: σπασμοί και αρρυθμίες (ιδίως PSVT), οξύ στερητικό σε χρόνια εξάρτηση. Η απάντηση σωστά δίνει προτεραιότητα στην υποστήριξη αεραγωγού/αερισμού. Η αναφορά σε «μικτή δηλητηρίαση» ως κίνδυνο δεν υπάρχει στο συγκεκριμένο άρθρο (είναι κοινή κλινική γνώση). Δεν δίνεται δόση — σωστά για εκπαιδευτικό κείμενο.",
+   "sources": [
+    {
+     "title": "StatPearls — Flumazenil (NBK482238)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK482238/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Η ανταπόκριση «φάρμακο εκλογής» στις εξετάσεις και ο ρόλος του διασώστη θέλουν κλινική επιβεβαίωση."
+  },
+  {
+   "id": "EOP-B-039",
+   "question": "Ενδείξεις χορήγησης αδρεναλίνης.",
+   "verdict": "consistent",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK/ERC 2025 Special circumstances: αναφυλαξία — «Immediately inject intramuscular adrenaline 500 mcg (1 mg/mL) at first suspicion», επανάληψη αν δεν υπάρξει βελτίωση σε 5 λεπτά· επίσης ανακοπή (ALS). Οι παιδιατρικές δόσεις ανά ηλικία δεν υπάρχουν στη σελίδα· η απάντηση σωστά δεν δίνει δόσεις και τονίζει ότι οι ενδείξεις δεν είναι εναλλάξιμες.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Special circumstances",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-040",
+   "question": "Αντενδείξεις χορήγησης αδρεναλίνης.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το SmPC (Martindale 1 mg/mL, αναθ. 07/07/2026) αναφέρει ότι οι αντενδείξεις είναι σχετικές σε απειλητικές καταστάσεις — συμβατό με την απάντηση. Αντενδείξεις: υπερευαισθησία στη δραστική ουσία/έκδοχα και ΜΗ χρήση σε δάκτυλα, αυτιά, μύτη, γεννητικά όργανα, γλουτούς (κίνδυνος ισχαιμικής νέκρωσης) — τα τελευταία ΔΕΝ αναφέρονται στην αποθηκευμένη απάντηση.",
+   "suggestedChange": "Προσθήκη: δεν ενίεται σε δάκτυλα, αυτιά, μύτη, γεννητικά όργανα ή γλουτούς· μόνο αν δεν αλλοιώθηκε το διάλυμα.",
+   "sources": [
+    {
+     "title": "emc SmPC — Adrenaline 1 mg/mL (Martindale)",
+     "url": "https://www.medicines.org.uk/emc/product/3673/smpc"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος σχέσης σχετικών αντενδείξεων με επείγουσα χρήση."
+  },
+  {
+   "id": "EOP-B-041",
+   "question": "Ενδείξεις χορήγησης ατροπίνης.",
+   "verdict": "consistent",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "SmPC ατροπίνης (Aguettant 1 mg/5 mL): επείγουσα βραδυκαρδία/κολποκοιλιακός αποκλεισμός από αυξημένο τόνο πνευμονογαστρικού, ΚΑΡΠΑ για συμπτωματική βραδυκαρδία, αντίδοτο σε δηλητηρίαση από αναστολείς ακετυλοχολινεστεράσης (οργανοφωσφορικά, καρβαμιδικά). Συμφωνεί με την απάντηση. ΠΡΟΣΟΧΗ: το SmPC έχει αναθεώρηση 13/05/2016 (παλιό)· το «όχι ρουτίνα στην ασυστολία» δεν αναφέρεται στο SmPC και δεν επαληθεύτηκε σε κείμενο 2025.",
+   "sources": [
+    {
+     "title": "emc SmPC — Atropine 1 mg/5 mL",
+     "url": "https://www.medicines.org.uk/emc/product/5361/smpc"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-042",
+   "question": "Αντενδείξεις χορήγησης ατροπίνης.",
+   "verdict": "consistent",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί: SmPC — υπερευαισθησία, γλαύκωμα κλειστής γωνίας, κατακράτηση ούρων από προστατική/ουρηθρική νόσο, αχαλασία, παραλυτικός ειλεός, τοξικό μεγάκολο· δυνατότητα να μην ισχύουν σε απειλητική βραδυαρρυθμία/δηλητηρίαση (το γράφει η ετικέτα). Η απάντηση περιλαμβάνει την ουσία. Προσοχή σε ταχυαρρυθμίες/καρδιακή ανεπάρκεια/στεφανιαία νόσο επίσης στο SmPC (2016).",
+   "sources": [
+    {
+     "title": "emc SmPC — Atropine 1 mg/5 mL",
+     "url": "https://www.medicines.org.uk/emc/product/5361/smpc"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-043",
+   "question": "Ενδείξεις χορήγησης νιτρωδών.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Το SmPC του GTN spray (400 μg/δόση, αναθ. 05/06/2023) δίνει ως ένδειξη την οξεία στηθάγχη και την πρόληψη προκλητής στηθάγχης. Η αποθηκευμένη απάντηση προσθέτει «επιλεγμένο πνευμονικό οίδημα με κατάλληλη αιμοδυναμική κατάσταση», που ΔΕΝ υπάρχει στο SmPC (προέρχεται από κατευθυντήριες/πρωτόκολλα). Επίσης αναφέρει «ισχαιμικό θωρακικό άλγος» ενώ η ένδειξη είναι στηθάγχη.",
+   "suggestedChange": "Διευκρίνιση ότι η χρήση σε πνευμονικό οίδημα βασίζεται σε πρωτόκολλο και όχι στο SmPC· σαφής παραπομπή.",
+   "sources": [
+    {
+     "title": "emc SmPC — GTN spray 400 μg",
+     "url": "https://www.medicines.org.uk/emc/product/674/smpc"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος σύμφωνα με το ελληνικό πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-044",
+   "question": "Αντενδείξεις χορήγησης νιτρωδών.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "SmPC: σοβαρή υπόταση (ΣΑΠ <90 mmHg) και υποτασικό shock, ταυτόχρονη χρήση PDE5 (σιλδεναφίλη, ταδαλαφίλη, βαρδεναφίλη) και ριοσιγουάτη, στηθάγχη από υπερτροφική αποφρακτική μυοκαρδιοπάθεια, στένωση αορτικής/μιτροειδούς, εγκεφαλική αιμορραγία και κρανιοεγκεφαλική κάκωση. Στην απάντηση ΕΛΛΕΙΠΟΥΝ: ριοσιγουάτη και εγκεφαλική αιμορραγία/κρανιοεγκεφαλική κάκωση (σημαντικό σε τραύμα). Η αναφορά σε δεξιά κοιλία είναι κλινική πρακτική και δεν υπάρχει στο SmPC.",
+   "suggestedChange": "Προσθήκη ΣΑΠ <90, ριοσιγουάτης και εγκεφαλικής αιμορραγίας/ΚΕΚ.",
+   "sources": [
+    {
+     "title": "emc SmPC — GTN spray 400 μg",
+     "url": "https://www.medicines.org.uk/emc/product/674/smpc"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος αντενδείξεων νιτρωδών σε προνοσοκομειακό πλαίσιο."
+  },
+  {
+   "id": "EOP-B-045",
+   "question": "Οδοί χορήγησης φαρμάκων και ταξινόμηση κατά ταχύτητα δράσης.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls αναφέρει τις οδούς (στοματική, υπογλώσσια, παρειακή, ορθική, ενδοφλέβια, ενδομυϊκή, υποδόρια, ενδοαρτηριακή, ενδορρινική, εισπνεόμενη, κολπική, διαδερμική, ενδοοστική) αλλά ΔΕΝ ταξινομεί κατά ταχύτητα. Η αποθηκευμένη απάντηση το δηλώνει ρητά: δεν υπάρχει καθολική σειρά· η ενδοφλέβια είναι γενικά ταχύτερη. Είναι ειλικρινής αλλά η ερώτηση ζητά ταξινόμηση.",
+   "suggestedChange": "Αν θέλουμε ενδεικτική σειρά για μελέτη (ΕΦ > εισπνοή/υπογλώσσια > ΕΜ > ΥΔ > από στόματος > ορθική > διαδερμική), να σημειώνεται ότι είναι γενίκευση και όχι από την πηγή.",
+   "sources": [
+    {
+     "title": "StatPearls — Routes of drug administration (NBK568677)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK568677/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-046",
+   "question": "Εξέλιξη μετά από λήψη παρακουάτ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τοξικολογία)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "CDC: κύρια προσβολή πνεύμονες, ήπαρ, νεφροί· ουλώδης βλάβη πνεύμονα, νεφρική/ηπατική/καρδιακή ανεπάρκεια, βλάβη οισοφάγου· «Too much oxygen may worsen the poisoning»· δεν υπάρχει αντίδοτο· μεγάλη κατάποση: «not likely to survive». Συμφωνεί (και η προσοχή στο οξυγόνο). Κενά: δεν αναφέρονται η απουσία αντιδότου, η πολύ κακή πρόγνωση και ο απολύμανση/ενεργός άνθρακας ή γη Fuller.",
+   "sources": [
+    {
+     "title": "CDC — Paraquat",
+     "url": "https://www.cdc.gov/chemical-emergencies/chemical-fact-sheets/paraquat.html"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: δεν υπάρχει ειδικό αντίδοτο· κακή πρόγνωση σε μεγάλη κατάποση."
+  },
+  {
+   "id": "EOP-B-047",
+   "question": "Αρχική ποσότητα υγρών στο shock παιδιών.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (παιδιατρικό, υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK/ERC 2025 Paediatric (σελίδα PBLS, ευρύτερη σελίδα): «one or more fluid boluses of 10 mL/kg in hypovolaemic, obstructive or distributive shock»· συμφωνεί. Κενά: στο αιμορραγικό shock ελαχιστοποιούνται οι κρυσταλλοειδείς (max 20 mL/kg), στο καρδιογενές ~5 mL/kg· ολικός όγκος 40–60 mL/kg την 1η ώρα σε υποογκαιμικό/διανεμητικό. Τελευταίοι ~9.600 χαρακτήρες της σελίδας δεν διαβάστηκαν.",
+   "suggestedChange": "Προσθήκη εξαιρέσεων (αιμορραγικό, καρδιογενές).",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric guidelines",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Δόσεις υγρών σε παιδιά: επιβεβαίωση από κλινικό και ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-048",
+   "question": "Ορισμός και είδη shock.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: «Shock is tissue hypoperfusion caused by acute circulatory failure»· είδη: υποογκαιμικό, διανεμητικό (αναφυλαξία, σηπτικό, νευρογενές), καρδιογενές, αποφρακτικό (υπό τάση πνευμοθώρακας, επιπωματισμός, μαζική ΠΕ). Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "Merck — Shock",
+     "url": "https://www.merckmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-049",
+   "question": "Τι αποφεύγουμε σε δήγμα φιδιού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "WHO: αποφυγή σφιχτού αρτηριακού τουρνικέ, χάραξης/αφαίρεσης/αναρρόφησης, παραδοσιακών ή βοτανικών θεραπειών· μεταφορά χωρίς καθυστέρηση· ακινητοποίηση άκρου. Συμφωνεί. «Δεν καίμε/παγώνουμε» δεν αναφέρεται ρητά στη σελίδα. Κενά: αφαίρεση δαχτυλιδιών/βραχιολιών, μέθοδος πίεσης–ακινητοποίησης μόνο για νευροτοξικά φίδια χωρίς τοπικό οίδημα, πλάγια θέση (όχι ύπτια), παρακολούθηση αεραγωγού.",
+   "suggestedChange": "Προσθήκη αφαίρεσης κοσμημάτων, πλάγιας θέσης, και ότι η πίεση–ακινητοποίηση ισχύει μόνο σε ορισμένα νευροτοξικά δήγματα.",
+   "sources": [
+    {
+     "title": "WHO — Snakebite envenoming: treatment",
+     "url": "https://www.who.int/teams/control-of-neglected-tropical-diseases/snakebite-envenoming/treatment"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-050",
+   "question": "Στάδια του τοκετού.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) StatPearls: 1ο στάδιο από την έναρξη τακτικών συστολών έως πλήρη διαστολή 10 cm (λανθάνουσα φάση 0–4/6 cm, ενεργός 6 cm–πλήρης)· 2ο από την πλήρη διαστολή έως τη γέννηση· 3ο από τη γέννηση έως την έξοδο του πλακούντα. Συμφωνεί με την απάντηση.",
+   "sources": [
+    {
+     "title": "StatPearls — Stages of Labor",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK544290/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-051",
+   "question": "Κλινική εικόνα και αντιμετώπιση εκλαμψίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "WHO Pre-eclampsia: η εκλαμψία είναι εξέλιξη της προεκλαμψίας με σπασμούς, απειλητική για τη ζωή· κύρια θεραπεία το θειικό μαγνήσιο· αντιϋπερτασικά για έλεγχο της πίεσης. Συμφωνεί με την απάντηση (Mg και αντιυπερτασικά από εξουσιοδοτημένη ομάδα). Η σελίδα δεν δίνει ορισμό για λοχεία, ούτε βήματα ABCDE/πλάγιας θέσης· αυτά προέρχονται από γενική πρακτική. Προειδοποιητικά σημεία προεκλαμψίας: κεφαλαλγία, διαταραχές όρασης, επιγαστρικό άλγος.",
+   "suggestedChange": "Προσθήκη προειδοποιητικών συμπτωμάτων (κεφαλαλγία, όραση, επιγάστριο).",
+   "sources": [
+    {
+     "title": "WHO — Pre-eclampsia",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/pre-eclampsia"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Μαιευτική επείγουσα αντιμετώπιση και ρόλος διασώστη."
+  },
+  {
+   "id": "EOP-B-052",
+   "question": "Πότε χρησιμοποιείται το διαιρούμενο φορείο",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "FPHC (2013): το scoop συνιστάται για μεταφορά και σπονδυλική ακινητοποίηση με ελάχιστο χειρισμό (μικρή κλίση, λίγο προσωπικό), αλλά είναι λιγότερο κατάλληλο για μακρινή μεταφορά και δεν έχει ειδική ακινητοποίηση κεφαλής/αυχένα· η μακρά σανίδα δεν πρέπει πια να χρησιμοποιείται για ακινητοποίηση/μεταφορά. Η αποθηκευμένη απάντηση είναι συμβατή· λείπει ο συσχετισμός με την αρχή του ελάχιστου χειρισμού και ο περιορισμός χρόνου.",
+   "sources": [
+    {
+     "title": "Faculty of Pre-hospital Care (RCSEd) — Minimal patient handling consensus (Moss, Porter, Greaves, Emerg Med J 2013)",
+     "url": "https://fphc.rcsed.ac.uk/media/3605/minimal-patient-handling.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: χρήση με ελάχιστο χειρισμό (scoop-to-skin), όχι για παρατεταμένη παραμονή· σκέψη στρώματος κενού αν αναμένεται παραμονή >~45 λεπτά (ενδεικτικό όριο, όχι ισχυρή τεκμηρίωση)."
+  },
+  {
+   "id": "EOP-B-053",
+   "question": "Πότε χρησιμοποιείται το στρώμα κενού",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "FPHC (2013): στρώμα κενού όταν αναμένεται μεγάλος χρόνος στο scoop (ενδεικτικά >45 λεπτά)· πιο άνετο, χαμηλότερη συχνότητα πιεστικών βλαβών, αλλά ακριβό και θέλει συντήρηση. Η αποθηκευμένη απάντηση (ακινητοποίηση, κατανομή πιέσεων, επανέλεγχος) είναι συμβατή. Το ελληνικό εκπαιδευτικό υλικό ΙΕΚ το αναφέρει ως «στρώμα πολυτραυματία με τρόμπα» (εξοπλισμός).",
+   "sources": [
+    {
+     "title": "Faculty of Pre-hospital Care (RCSEd) — Minimal patient handling consensus (Moss, Porter, Greaves, Emerg Med J 2013)",
+     "url": "https://fphc.rcsed.ac.uk/media/3605/minimal-patient-handling.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-054",
+   "question": "Πότε χρησιμοποιείται η μακριά άκαμπτη σανίδα ακινητοποίησης πολυτραυματία;",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Το ελληνικό πρωτόκολλο (σελ. 6, 49) προβλέπει «Σε περιπτώσεις τραυματισμού, ακινητοποίηση σε μακριά σανίδα, για προστασία της Σ.Σ.» και «Απεγκλωβισμός–ακινητοποίηση σε μακριά άκαμπτη σανίδα». Η αποθηκευμένη απάντηση λέει ότι η σανίδα είναι κυρίως για εξαγωγή και ότι δεν συνιστάται η παρατεταμένη διακομιδή πάνω της (NICE NG41, που δεν ήταν προσβάσιμο). Υπάρχει ΔΙΑΦΟΡΑ μεταξύ της ελληνικής εκπαιδευτικής πρακτικής του 2017 και της σύγχρονης διεθνούς οδηγίας· η εξέταση πιθανώς ακολουθεί το ελληνικό κείμενο.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), Να ξεκαθαριστεί στην απάντηση ποια πρακτική ζητά ο ΕΟΠΠΕΠ (ελληνικό πρωτόκολλο) και ποια η σύγχρονη διεθνής σύσταση, με πηγή. — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "σελ. 6, 49",
+   "clinicalNote": "Κλινική/υπηρεσιακή απόφαση για χρήση μακριάς σανίδας στη διακομιδή (ελληνικό πρωτόκολλο έναντι NICE NG41)."
+  },
+  {
+   "id": "EOP-B-055",
+   "question": "Πότε χρησιμοποιείται ο ΑΕΑ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK BLS 2025: «Anyone can use an AED», «use an AED as soon as it is available», μετά το σοκ ή χωρίς ένδειξη σοκ επανεκκίνηση συμπιέσεων και ακολουθία οδηγιών συσκευής. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Adult BLS",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/adult-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-056",
+   "question": "Τεχνική τοποθέτησης αυχενικού κολάρου.",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή NICE NG41 δεν άνοιξε. RCUK First Aid 2025 περιορίζει τη χρήση κολάρων σε εξειδικευμένους («selective use of spinal motion restriction devices and collars using their existing protocols») και συστήνει ελαχιστοποίηση κίνησης του αυχένα, όχι εξαναγκασμό σε θέση. Η απάντηση συμφωνεί στο πνεύμα αλλά η τεχνική δεν επαληθεύτηκε.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "NICE NG41 (μη προσβάσιμη)",
+     "url": "https://www.nice.org.uk/guidance/ng41/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος με ελληνικό πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-057",
+   "question": "Μέτρηση μεγέθους αυχενικού κολάρου και είδη",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Δύο διαφορετικές τεκμηριωμένες τεχνικές: RCH — απόσταση από την κορυφή του ώμου έως τη γωνία της γνάθου, που αντιστοιχίζεται στο «measuring post» του κολάρου· QAS (μαλακό κολάρο) — από τη βάση του πηγουνιού έως το σφαγιτιδικό εντύπωμα. Άρα η τεχνική ΔΙΑΦΕΡΕΙ ανά τύπο/κατασκευαστή, όπως λέει η αποθηκευμένη απάντηση. Η συγκεκριμένη οδηγία για Ambu Perfit ACE δεν επαληθεύτηκε από πηγή κατασκευαστή. Το QAS σημειώνει ότι κανένα κολάρο δεν ακινητοποιεί πλήρως και ότι τα άκαμπτα έχουν επιπλοκές.",
+   "sources": [
+    {
+     "title": "Royal Children's Hospital Melbourne — Sizing a one-piece hard collar",
+     "url": "https://www.rch.org.au/clinicalguide/guideline_index/Sizing_a_one-piece_hard_collar/"
+    },
+    {
+     "title": "Queensland Ambulance Service — Cervical collar CPP (Feb 2021)",
+     "url": "https://ambulance.qld.gov.au/__data/assets/pdf_file/0030/219279/cpp_cervical-collar.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Η γενική διατύπωση «ακολουθούμε τις οδηγίες του κατασκευαστή του συγκεκριμένου κολάρου» είναι ασφαλής· αν διατηρηθεί το παράδειγμα Ambu, να επιβεβαιωθεί από το φυλλάδιο του κατασκευαστή."
+  },
+  {
+   "id": "EOP-B-058",
+   "question": "Πότε χρησιμοποιούνται αερονάρθηκες.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls «Joint Immobilization» (ενημ. 15/02/2026): ένδειξη όταν υπάρχουν σημεία κάκωσης οστού/συνδέσμου/άρθρωσης· ο αερονάρθηκας φουσκώνει προσεκτικά ώστε να μη καλύπτει τον νευραγγειακό έλεγχο· νευραγγειακός έλεγχος πριν και μετά, χαλάρωση σε επιδείνωση, αποφυγή υπερβολικής πίεσης. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "StatPearls — Joint Immobilization (NBK557703)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK557703/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-059",
+   "question": "Οπίσθια σύγκρουση: πορεία επιβάτη και κακώσεις",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls (2023): η οπίσθια σύγκρουση αυξάνει τον κίνδυνο κακώσεων κάμψης/έκτασης αυχένα και πιθανών καταγμάτων σπονδύλων. Quebec Task Force: ο ακριβής μηχανισμός whiplash δεν είναι πλήρως κατανοητός· στις χαμηλές ταχύτητες δεν παρατηρείται πάντα η κλασική υπερέκταση-υπερκάμψη, παίζουν ρόλο η θέση προσκέφαλου και η ζώνη. Η αποθηκευμένη απάντηση (έκταση και κάμψη, whiplash, εξάρτηση από προσκέφαλο/ζώνη/ταχύτητα) είναι συμβατή ως εκπαιδευτική απλοποίηση.",
+   "sources": [
+    {
+     "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
+    },
+    {
+     "title": "Quebec Task Force — Whiplash mechanism",
+     "url": "https://chiro.org/Whiplash/FULL/Quebec_Task_Force/mechanism.htm"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-060",
+   "question": "Μετωπική σύγκρουση: πορεία και κακώσεις",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: σε μετωπική/εγγύς πλευρά πρόσκρουση ο επιβάτης χτυπά τιμόνι/ταμπλό — κακώσεις κεφαλής, αυχένα, θώρακα (θλάσεις πνευμόνων, κατάγματα πλευρών) και κοιλίας· μη σωστή χρήση ζώνης αυξάνει κακώσεις κάτω άκρων/πυέλου/κοιλίας. Συμφωνεί με την αποθηκευμένη απάντηση. Η «τριπλή σύγκρουση» (όχημα, σώμα, όργανα) περιγράφεται επίσης.",
+   "sources": [
+    {
+     "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-061",
+   "question": "Πλάγια σύγκρουση: πορεία και κακώσεις",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: στην πλάγια (T-bone) πρόσκρουση ο επιβάτης στην πλευρά πρόσκρουσης υφίσταται εισβολή/σύνθλιψη· συσχετίζονται κακώσεις αορτής/οργάνων και κατάγματα πυέλου, αυχένα, κλείδας, κρανίου. Συμφωνεί με την αποθηκευμένη απάντηση (πλευρές, πνεύμονας, κοιλιακά όργανα, λεκάνη, ώμος, κεφαλή, αυχένας).",
+   "sources": [
+    {
+     "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-062",
+   "question": "Παράγοντες βαρύτητας σε πτώση από ύψος",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Fujii 2021 (179 ασθενείς, 1 κέντρο): ύψος ≥5 m και θέση σώματος κατά την πρόσκρουση (κεφαλή, πλάγια, ραχιαία) συνδέονται με υψηλότερη βαρύτητα/χαμηλότερη επιβίωση· η επιφάνεια αναφέρεται αλλά η εργασία είναι εσωτερικά αντιφατική· η ηλικία ΔΕΝ βρέθηκε σημαντική σε αυτή τη μελέτη. Η αποθηκευμένη απάντηση (ύψος, επιφάνεια, θέση σώματος, ηλικία/ευθραυστότητα) συμφωνεί στα τρία πρώτα· η ηλικία είναι κλινικά παραδεκτός παράγοντας αλλά δεν στηρίχθηκε από αυτή την πηγή.",
+   "sources": [
+    {
+     "title": "Fujii et al., Sci Rep 2021 — Factors influencing ISS in falls from height",
+     "url": "https://link.springer.com/10.1038/s41598-021-95226-w"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-063",
+   "question": "Παράγοντες βαρύτητας κακώσεων σε εκρήξεις",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls (blast injuries): πρωτογενείς (κύμα πίεσης, βαρότραυμα σε πνεύμονες/αυτιά/έντερο), δευτερογενείς (θραύσματα — η συχνότερη αιτία θανάτου), τριτογενείς (εκτόπιση σώματος, πρόσκρουση), τεταρτογενείς (εγκαύματα, εισπνοή καπνού/σκόνης, τοξικά, ψυχολογικά). Παράγοντες βαρύτητας: ενέργεια έκρηξης, απόσταση, προστασία/θωράκιση, τοποθεσία και τύπος έκρηξης. Συμφωνεί με την αποθηκευμένη απάντηση (απόσταση, περιορισμός χώρου, θραύσματα, μετατόπιση, θερμότητα/καπνός, κατάρρευση κατασκευών). Ο περιορισμένος χώρος και η κατάρρευση κατασκευών δεν τεκμηριώνονται ρητά στη συγκεκριμένη πηγή (αναφέρονται μόνο παρεμπιπτόντως).",
+   "sources": [
+    {
+     "title": "StatPearls — Blast injuries",
+     "url": "https://www.statpearls.com/point-of-care/18363"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-064",
+   "question": "Τύποι συγκρούσεων σε σύγκρουση αυτοκινήτων",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: τρεις διαδοχικές συγκρούσεις (όχημα με εμπόδιο, σώμα με το εσωτερικό, εσωτερικά όργανα με τις κοιλότητες) και τύποι μετωπική/πλάγια/οπίσθια/ανατροπή. Συμφωνεί πλήρως με την αποθηκευμένη απάντηση.",
+   "sources": [
+    {
+     "title": "StatPearls — Motor Vehicle Collisions (Toney-Butler & Varacallo, updated 28/8/2023)",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK441955/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-065",
+   "question": "Παράγοντες βαρύτητας διατιτραίνοντος τραύματος",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: η ταχύτητα/ενέργεια του βλήματος (κινητική ενέργεια ανάλογη του τετραγώνου της ταχύτητας), πυκνότητα ιστού, τροχιά, όργανα/αγγεία που εμπλέκονται (αγγειακή βλάβη = μεγαλύτερη θνητότητα), τύπος όπλου (πυροβόλο > μαχαίρι), καθυστέρηση/shock. Η αποθηκευμένη απάντηση καλύπτει ενέργεια/βλήμα, όργανα, αιμορραγία, καθυστέρηση· λείπει η πυκνότητα ιστού και η σπηλαιοποίηση.",
+   "sources": [
+    {
+     "title": "StatPearls point-of-care — Penetrating trauma",
+     "url": "https://statpearls.com/point-of-care/17023"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: πυκνότητα ιστού, προσωρινή σπηλαίωση και δευτερογενή βλήματα (θραύσματα οστών)."
+  },
+  {
+   "id": "EOP-B-066",
+   "question": "Διάκριση πύλης εισόδου/εξόδου πυροβολισμού",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "ACEP Now: η είσοδος μπορεί να έχει δακτύλιο εκδοράς, tattooing/stippling, αιθάλη κ.ά., ανάλογα με την απόσταση· το μέγεθος ΔΕΝ είναι αξιόπιστο κριτήριο (τραύματα επαφής φαίνονται μεγάλα και μπερδεύονται με έξοδο)· μη εξειδικευμένοι κλινικοί δεν πρέπει να χαρακτηρίζουν «είσοδο/έξοδο», αλλά να περιγράφουν θέση, μέγεθος, μορφή. Η αποθηκευμένη απάντηση το λέει ήδη, με ανάλογες επιφυλάξεις. Η πηγή δεν περιγράφει την πύλη εξόδου.",
+   "sources": [
+    {
+     "title": "ACEP Now — Clinical forensic evaluation of gunshot wounds in the ED",
+     "url": "https://www.acepnow.com/article/the-clinical-forensic-evaluation-of-gunshot-wounds-in-the-ed/"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη φράσης: «ο χαρακτηρισμός είσοδος/έξοδος δεν γίνεται προνοσοκομειακά· καταγράφεται περιγραφικά (θέση, μέγεθος, μορφή)»."
+  },
+  {
+   "id": "EOP-B-067",
+   "question": "Παράδοξη κίνηση θωρακικού τοιχώματος (ασταθής θώρακας).",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: «paradoxical chest wall movement associated with 3 or more ribs broken in 2 or more places»· το τμήμα κινείται αντίθετα από το υπόλοιπο θωρακικό τοίχωμα (προς τα μέσα στην εισπνοή, έξω στην εκπνοή). Συμφωνεί με την απάντηση.",
+   "sources": [
+    {
+     "title": "Merck — Overview of thoracic trauma",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/overview-of-thoracic-trauma"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-068",
+   "question": "Κλινικά σημεία κατάγματος.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: παραμόρφωση, οίδημα, εντοπισμένη ευαισθησία, ψηλαφητό έλλειμμα οστού, κριγμός. Συμφωνεί. «Περιορισμός λειτουργίας»/εκχύμωση δεν αναφέρονται στο απόσπασμα (συνήθη σημεία).",
+   "sources": [
+    {
+     "title": "Merck — Overview of fractures",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/fractures/overview-of-fractures"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-069",
+   "question": "Αίτια κάκωσης σπονδυλικής στήλης.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ενήλικες — τροχαία (~38%), πτώσεις (~30%), βία (~13%), αθλήματα (~9%)· ηλικιωμένοι σε αυξημένο κίνδυνο· δεν καλύπτει παιδιά. Η απάντηση αναφέρει τροχαία, πτώσεις, καταδύσεις, τραύματα· λείπουν βία (τραύμα από πυροβολισμό/μαχαίρι) και αθλήματα για ενήλικες. Τα στοιχεία για παιδιά δεν επαληθεύτηκαν.",
+   "sources": [
+    {
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-070",
+   "question": "Γενικά βήματα σε υποψία κάκωσης σπονδυλικής.",
+   "verdict": "consistent",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: προτιμάται ο όρος «spinal motion restriction» αντί ακινητοποίησης· ενδείξεις: διαταραχή συνείδησης, πόνος μέσης γραμμής, εστιακά νευρολογικά, παραμόρφωση, αποσπαστικοί τραυματισμοί· πρωτογενής εκτίμηση ABCDE και άμεση αναζωογόνηση. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-071",
+   "question": "Πιο επικίνδυνος τύπος παιδικών καταγμάτων.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "OrthoInfo: τα κατάγματα αυξητικής πλάκας (Salter–Harris I–V) μπορεί να προκαλέσουν οστική γέφυρα, καθυστέρηση ανάπτυξης ή καμπυλότητα· κίνδυνος εξαρτάται από ηλικία, οστό, μοτίβο, μετατόπιση· περιοχή γόνατος = περισσότερα προβλήματα. Η σελίδα ΔΕΝ ιεραρχεί τους τύπους ως προς επικινδυνότητα· ο ισχυρισμός «τύποι III–V» δεν στηρίζεται από αυτή. Η απάντηση σωστά παραδέχεται ότι η επιλογή δεν είναι μοναδική.",
+   "sources": [
+    {
+     "title": "OrthoInfo — Growth plate fractures",
+     "url": "https://www.orthoinfo.org/diseases--conditions/growth-plate-fractures/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-072",
+   "question": "Προσοχή στην ακινητοποίηση κατάγματος/πολυκαταγματία.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: τα κατάγματα πυέλου/μηριαίου μπορεί να προκαλέσουν αιμορραγικό shock· ακινητοποίηση των αρθρώσεων άνω και κάτω από το κάταγμα για πόνο/βλάβη μαλακών μορίων. StatPearls Joint Immobilization (B-058): νευραγγειακός έλεγχος πριν και μετά, χαλάρωση σε επιδείνωση. Συμφωνεί με την απάντηση.",
+   "sources": [
+    {
+     "title": "Merck — Overview of fractures",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/fractures/overview-of-fractures"
+    },
+    {
+     "title": "StatPearls — Joint Immobilization",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK557703/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-073",
+   "question": "Παθοφυσιολογία νευρογενούς shock.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: διακοπή κάθοδων συμπαθητικών οδών → διαστολή αγγείων, αδιάλειπτος πνευμονογαστρικός τόνος → βραδυκαρδία· χαρακτηριστικά: υπόταση με βραδυκαρδία, δέρμα ζεστό και ροδαλό. Συμφωνεί (το «ξηρό» δεν αναφέρεται). Σωστά προτάσσεται ο αποκλεισμός αιμορραγίας.",
+   "sources": [
+    {
+     "title": "StatPearls — Neurogenic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459361/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-074",
+   "question": "Φάρμακο στην 1η ώρα σε κάκωση σπονδυλικής στήλης.",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός (φάρμακο, αμφισβητούμενο)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Spinal cord injuries: η χρήση στεροειδών είναι αμφισβητούμενη· οι οδηγίες που παραθέτει (2017) αναφέρουν ότι «μπορεί να εξεταστεί» υψηλή δόση μεθυλπρεδνιζολόνης 24 ωρών σε ενήλικες εντός 8 ωρών. Η αποθηκευμένη απάντηση παρουσιάζει το NICE NG41 ως ρητή οδηγία ΜΗ χρήσης· το NG41 δεν επαληθεύτηκε, και οι διεθνείς οδηγίες διαφέρουν. Η απάντηση δεν προτείνει στεροειδή (ασφαλής προς την πλευρά της αποφυγής), αλλά η διατύπωση «ρητά όχι» είναι υπεραπλούστευση.",
+   "sources": [
+    {
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Διατύπωση ότι οι οδηγίες διαφωνούν· η προνοσοκομειακή χορήγηση δεν είναι ρόλος διασώστη.",
+   "clinicalNote": "Αμφισβητούμενη θεραπεία — απαιτείται κλινική απόφαση."
+  },
+  {
+   "id": "EOP-B-075",
+   "question": "Κλινική εικόνα αγγειακού εγκεφαλικού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή για την κλινική εικόνα",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: αιφνίδια έναρξη, μούδιασμα/αδυναμία άκρων ή προσώπου, αφασία/σύγχυση, οπτικές διαταραχές, ζάλη/απώλεια ισορροπίας, κεφαλαλγία (αιφνίδια έντονη → υπαραχνοειδής). Συμφωνεί. Η σελίδα ΔΕΝ αναφέρει FAST (περιγράφει NIHSS) ούτε γλυκόζη/χρόνο τελευταίας φυσιολογικής κατάστασης· αυτά είναι κοινή πρακτική (η παραπομπή NICE NG128 δεν άνοιξε).",
+   "sources": [
+    {
+     "title": "Merck — Overview of stroke",
+     "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/overview-of-stroke"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Παραπομπή σε πηγή που περιγράφει FAST και καταγραφή χρόνου έναρξης."
+  },
+  {
+   "id": "EOP-B-076",
+   "question": "Υποσκληρίδιο αιμάτωμα.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: οξύ — διαταραχή προσανατολισμού/εγρήγορσης/γνώσης, κεφαλαλγία, σπασμοί, ημιπάρεση, σημεία αυξημένης ΕΚΠ, ασυμμετρία κορών· χρόνιο — αυξανόμενη καθημερινή κεφαλαλγία, υπνηλία/σύγχυση, εστιακά ελλείμματα, σπασμοί. Συμφωνεί (οι έμετοι δεν αναφέρονται ρητά).",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-077",
+   "question": "GCS: μάτια σε εντολή, συγχυσμένη ομιλία, εντοπίζει.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Έλεγχος αθροίσματος: E3+V4+M5=12, όσο και η απάντηση (12). Οι περιγραφές της κλίμακας (μάτια: αυθόρμητα/σε ήχο/σε πίεση/καθόλου· λεκτική: προσανατολισμένος/συγχυσμένος/λέξεις/ήχοι/καθόλου· κινητική: υπακούει/εντοπίζει/φυσιολογική κάμψη/ανώμαλη κάμψη/έκταση/καθόλου) επιβεβαιώνονται από το glasgowcomascale.org· ο βαθμός ανά περιγραφή (1–4, 1–5, 1–6) είναι η καθιερωμένη βαθμολόγηση και δεν αναγράφεται αριθμητικά στη σελίδα. ",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-078",
+   "question": "GCS: μάτια σε πόνο, ακατάληπτοι ήχοι, ανώμαλη κάμψη.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Έλεγχος αθροίσματος: E2+V2+M3=7, όσο και η απάντηση (7). Οι περιγραφές της κλίμακας (μάτια: αυθόρμητα/σε ήχο/σε πίεση/καθόλου· λεκτική: προσανατολισμένος/συγχυσμένος/λέξεις/ήχοι/καθόλου· κινητική: υπακούει/εντοπίζει/φυσιολογική κάμψη/ανώμαλη κάμψη/έκταση/καθόλου) επιβεβαιώνονται από το glasgowcomascale.org· ο βαθμός ανά περιγραφή (1–4, 1–5, 1–6) είναι η καθιερωμένη βαθμολόγηση και δεν αναγράφεται αριθμητικά στη σελίδα. Αποφλοίωση = ανώμαλη κάμψη = M3 (η εκτατική αντίδραση/απεγκεφαλισμός είναι M2).",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-079",
+   "question": "GCS: καθόλου μάτια, καθόλου ομιλία, απεγκεφαλισμός.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Έλεγχος αθροίσματος: E1+V1+M2=4, όσο και η απάντηση (4). Οι περιγραφές της κλίμακας (μάτια: αυθόρμητα/σε ήχο/σε πίεση/καθόλου· λεκτική: προσανατολισμένος/συγχυσμένος/λέξεις/ήχοι/καθόλου· κινητική: υπακούει/εντοπίζει/φυσιολογική κάμψη/ανώμαλη κάμψη/έκταση/καθόλου) επιβεβαιώνονται από το glasgowcomascale.org· ο βαθμός ανά περιγραφή (1–4, 1–5, 1–6) είναι η καθιερωμένη βαθμολόγηση και δεν αναγράφεται αριθμητικά στη σελίδα. Η αντιστοίχιση «απεγκεφαλισμός = έκταση = M2» είναι σωστή· το κείμενο της ερώτησης έχει σπασμένο πίνακα και η απάντηση το αναφέρει ως «σαφή στοιχεία».",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-080",
+   "question": "Συνηθέστερη αιτία διέγερσης σε ΚΕΚ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή-μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD αναφέρει την υποξία/υπόταση ως δευτερογενείς εγκεφαλικές βλάβες και την ανάγκη αγωγής της υποξίας και υπερκαπνίας, αλλά ΔΕΝ ορίζει την υποξία ως «συνηθέστερη αιτία διέγερσης». Η απάντηση βασίζεται σε ερώτηση του ελληνικού οδηγού κατάρτισης (minedu) που δεν ανοίχτηκε εδώ.",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Αναμενόμενη απάντηση εξέτασης: επιβεβαίωση από τον οδηγό."
+  },
+  {
+   "id": "EOP-B-081",
+   "question": "Ορός/υγρά σε ΚΕΚ.",
+   "verdict": "consistent",
+   "risk": "υψηλός (υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: στόχος ορρού ισοωσμωτικός ή ελαφρά υπερωσμωτικός· «Hypotonic fluids (especially 5% D/W) are contraindicated» επειδή επιδεινώνουν το εγκεφαλικό οίδημα. Συμφωνεί (η σελίδα δεν κατονομάζει ρητά «ισότονο»).",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επιλογή υγρού σε ΚΕΚ: κλινική απόφαση/πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-082",
+   "question": "Αποφυγή υπερκαπνίας σε ΚΕΚ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: «Aggressive early management of hypoxia, hypercapnia, hypotension, and increased ICP»· στόχος PaCO2 38–42 mm Hg· προφυλακτικός υπεραερισμός (PaCO2 25–35) δεν συνιστάται. Συμφωνεί με την απάντηση (νορμοκαπνία). Ο μηχανισμός (αγγειοδιαστολή) είναι καθιερωμένη φυσιολογία, δεν αναφέρεται στη σελίδα.",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-083",
+   "question": "Επιδείνωση συνείδησης σε ΚΕΚ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: δευτερογενείς βλάβες (υπόταση, υποξία) και αυξημένη ΕΚΠ/εγκολεασμός· οξύ υποσκληρίδιο με κώμα από συμπίεση στελέχους. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-084",
+   "question": "Ορισμός διαγνωστικού σημείου και συμπτώματος",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Σύμπτωμα: υποκειμενική εμπειρία που αναφέρει μόνο ο ασθενής (π.χ. ναυτία, πονοκέφαλος)· σημείο: αντικειμενική ένδειξη που παρατηρεί/μετρά ο εξεταστής (πυρετός, εξάνθημα, ψηλή πίεση). Συμφωνεί με την αποθηκευμένη απάντηση.",
+   "sources": [
+    {
+     "title": "EBSCO Research Starters — Understanding disease signs and symptoms",
+     "url": "https://www.ebsco.com/research-starters/health-and-medicine/understanding-disease-signs-and-symptoms"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-085",
+   "question": "Ορισμός ωχρότητας και αίτια",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η ωχρότητα ορίζεται ως ωχρό χρώμα δέρματος (μειωμένη οξυαιμοσφαιρίνη) και ορατή κυρίως στο πρόσωπο, στις παλάμες και στους επιπεφυκότες· αίτια: αναιμία/απώλεια αίματος, κυκλοφορική (shock, υποογκαιμία), συναισθηματικά, ενδοκρινικά, λοιμώξεις. Η αποθηκευμένη απάντηση (αγγειοσύσπαση, υποάρδευση, αναιμία, απώλεια αίματος) είναι συμβατή. Δευτερογενής πηγή.",
+   "sources": [
+    {
+     "title": "Wikipedia — Pallor (δευτερογενής πηγή)",
+     "url": "https://en.wikipedia.org/wiki/Pallor"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-086",
+   "question": "Ταχύπνοια/βραδύπνοια.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Οι ορισμοί (>20/min και <12/min ενηλίκου) και τα αίτια είναι συνήθεις αλλά αναπόδεικτοι εδώ.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-087",
+   "question": "Σημεία λήψης σφυγμού.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: κερκιδική, βραχιόνια, μηριαία, ιγνυακή, οπίσθια κνημιαία, ραχιαία ποδός. Η απάντηση τα περιλαμβάνει και προσθέτει καρωτιδική και κροταφική (κλασικές θέσεις, όχι στο απόσπασμα).",
+   "sources": [
+    {
+     "title": "StatPearls — Peripheral pulse",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK542175/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-088",
+   "question": "Ορισμός αρτηριακής υπέρτασης και κυριότερες επιπλοκές.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) MSD ορίζει την υπέρταση ως επίμονη αύξηση ≥130 συστολική ή ≥80 διαστολική (κριτήρια ACC/AHA), ενώ η απάντηση παραθέτει ≥140/90 (NICE NG136)· η απάντηση αναγνωρίζει ότι τα όρια διαφέρουν ανά οδηγία, όμως η ημερομηνία ενημέρωσης NICE (26/02/2026) δεν επαληθεύτηκε (NICE μη προσβάσιμο). Επιπλοκές (ΑΕΕ, στεφανιαία νόσος/έμφραγμα, καρδιακή ανεπάρκεια, νεφρική νόσος, αμφιβληστροειδοπάθεια) επιβεβαιώνονται· η περιφερική αγγειοπάθεια δεν επιβεβαιώθηκε στο απόσπασμα που διαβάστηκε.",
+   "suggestedChange": "Να αναφέρεται ρητά ότι τα όρια διαφέρουν (ESC/NICE ≥140/90, ACC/AHA ≥130/80) και να ακολουθείται το όριο του εγκεκριμένου συγγράμματος.",
+   "sources": [
+    {
+     "title": "MSD — Hypertension",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/hypertension/hypertension"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-089",
+   "question": "Συμπτώματα/σημεία βλάβης ανώτερου αναπνευστικού σε εγκαυματία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) PMC4624587 (Diagnosis and management of inhalation injury): εγκαύματα προσώπου, καμένες τρίχες προσώπου/μύτης, αιθάλη στο πρόσωπο ή τα πτύελα, στριδορώδης αναπνοή/οίδημα/βλάβη βλεννογόνου, ταχέως εξελισσόμενο οίδημα φάρυγγα. Επιβεβαιώνονται αιθάλη, εγκαύματα προσώπου/στοματοφάρυγγα, οίδημα, stridor. Βράγχος φωνής και δυσκαταποσία δεν αναφέρονται στο άρθρο (δεν επιβεβαιώθηκαν εδώ)· οι καμένες τρίχες και τα αιθαλώδη πτύελα λείπουν από την απάντηση. (Ελληνική πηγή: έντυπο πρώτων βοηθειών ΕΚΑΒ για το κοινό, αρχείο που παρείχε ο χρήστης· δεν είναι επαγγελματικό πρωτόκολλο διασωστών.) Συμπλήρωμα: το έντυπο ΕΚΑΒ περιγράφει το εισπνευστικό έγκαυμα με ανθρακοειδή πτύελα, έγκαυμα προσώπου, καψαλισμένα μαλλιά/φρύδια, βραχνάδα φωνής, δυσκολία αναπνοής — επιβεβαιώνεται το «βράγχος φωνής» που δεν υπήρχε στην πρώτη πηγή. Η δυσκαταποσία δεν επιβεβαιώθηκε.",
+   "suggestedChange": "Προαιρετική προσθήκη: καμένες τρίχες προσώπου/ρινός, αιθαλώδη πτύελα.",
+   "sources": [
+    {
+     "title": "PMC — Diagnosis and management of inhalation injury: an updated review",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4624587/"
+    },
+    {
+     "title": "ΕΚΑΒ — «Μαθαίνω Πρώτες Βοήθειες - Είμαι ασφαλής» (έντυπο για το κοινό)",
+     "url": "https://www.ekab.gr/files/entypa/EKAB-protes-voithies.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-090",
+   "question": "Οδηγός επαρκούς χορήγησης υγρών σε εγκαυματία.",
+   "verdict": "consistent",
+   "risk": "υψηλός (υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "ACI NSW: διούρηση ενηλίκων 0,5 mL/kg/ώρα, παιδιών 1 mL/kg/ώρα· «Infusion rate is guided by urine output, not by formula». Συμφωνεί πλήρως. Συμπλήρωμα: ο τροποποιημένος Parkland δίνει 3 mL Hartmann × kg × %TBSA (το ήμισυ τις πρώτες 8 ώρες) και αναζωογόνηση χρειάζεται για έγκαυμα >20% TBSA (ενήλικες), >10% (παιδιά).",
+   "sources": [
+    {
+     "title": "ACI NSW — Burn fluid resuscitation",
+     "url": "https://aci.health.nsw.gov.au/networks/burn-injury/resources/patient-management/fluid-resuscitation"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υγρά εγκαύματος: ρόλος διασώστη/πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-091",
+   "question": "Χημικό έγκαυμα οφθαλμού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "NHS: έκπλυση με δροσερό νερό ΤΟΥΛΑΧΙΣΤΟΝ 20 λεπτά, ήπια ροή, συνέχιση της έκπλυσης μέχρι την άφιξη βοήθειας, ΜΗ τρίψιμο, μεταφορά με το δοχείο του προϊόντος, επείγουσα αξιολόγηση. Η απάντηση δεν αναφέρει διάρκεια. Η αφαίρεση φακών και το «φυσιολογικός ορός» δεν περιγράφονται στη σελίδα NHS (το CDC για παρακουάτ αναφέρει 10–15′ και αφαίρεση φακών).",
+   "sources": [
+    {
+     "title": "NHS — Eye injuries",
+     "url": "https://www.nhs.uk/conditions/eye-injuries/"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη ελάχιστης διάρκειας 20′ και μεταφοράς του δοχείου."
+  },
+  {
+   "id": "EOP-B-092",
+   "question": "Πυρετικός σπασμός.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (παιδιατρικό)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: δεν υπάρχει ενότητα για πυρετικό σπασμό· η ενότητα Seizures ορίζει ότι κάθε κρίση ≥5′ (status epilepticus) θέλει βενζοδιαζεπίνη πρώτης γραμμής. Η απάντηση («παρατεταμένο επεισόδιο επείγουσα αντιμετώπιση») είναι συμβατή αλλά δεν δίνει το όριο των 5′.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη ορίου 5 λεπτών για θεραπεία.",
+   "clinicalNote": "Φαρμακευτική αντιμετώπιση παιδιατρικού σπασμού: κλινικός."
+  },
+  {
+   "id": "EOP-B-093",
+   "question": "Επιληπτική κρίση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025 (Seizures): κρίση ≥5 λεπτά απαιτεί βενζοδιαζεπίνη πρώτης γραμμής· δεύτερης γραμμής π.χ. levetiracetam. Η απάντηση καλύπτει προστασία/αεραγωγό/γλυκόζη αλλά όχι το κριτήριο θεραπείας (5′) ούτε αντιεπιληπτική αγωγή.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη κριτηρίου 5′ και αναφοράς σε βενζοδιαζεπίνη κατά πρωτόκολλο.",
+   "clinicalNote": "Έλεγχος με ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-094",
+   "question": "Προνοσοκομειακή αντιμετώπιση επιληψίας στα παιδιά",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "EMRS CG004 v2 (2024): κρίση >5 λεπτά → βενζοδιαζεπίνη (πρώτη επιλογή midazolam bucc./ρινικά/IM· παιδιά 0,3 mg/kg ή ανά ηλικία· lorazepam ή diazepam ως εναλλακτικά)· υψηλής ροής Ο₂ και στόχος SpO₂ 94–98%, έλεγχος γλυκόζης (θεραπεία αν <4 mmol/L), επανάληψη μία φορά μετά 5–10 λεπτά. Η αποθηκευμένη απάντηση (προστασία, χρονομέτρηση, ABC, γλυκόζη, βενζοδιαζεπίνη ≥5 λεπτά) είναι συμβατή και δεν δίνει δόσεις. Οι δόσεις και η διαδρομή εξαρτώνται από το ισχύον ελληνικό πρωτόκολλο/εξουσιοδότηση.",
+   "sources": [
+    {
+     "title": "EMRS Scotland CG004 Status Epilepticus v2 (18/3/2024)",
+     "url": "https://www.emrsscotland.org/s/CG004-Status-Epilepticus-v2.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αν προστεθούν δόσεις: midazolam 0,3 mg/kg (ή ανά ηλικία) buccal/ρινικά ή IM, μία επανάληψη μετά 5–10 λεπτά — μόνο μετά έγκριση κλινικού."
+  },
+  {
+   "id": "EOP-B-095",
+   "question": "Αναπνευστικά προβλήματα παιδιών — αντιμετώπιση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (παιδιατρικό)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: «Initially give 100% oxygen for all children with respiratory, circulatory, or neurological failure»· η απάντηση λέει «στοχευμένο O2» χωρίς να αναφέρει την αρχική 100% χορήγηση. Η εκτίμηση work of breathing, stridor, SpO2 συμφωνεί.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Διευκρίνιση: αρχικά 100% O2 σε αναπνευστική ανεπάρκεια, μετά τιτλοποίηση.",
+   "clinicalNote": "Στόχος οξυγόνου σε παιδιά: κλινικός."
+  },
+  {
+   "id": "EOP-B-096",
+   "question": "Κλινική εικόνα αναπνευστικής δυσχέρειας παιδιών.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: work of breathing (ρυθμός, εισολκές, γογγυσμός, ρινικό πτερύγισμα, tracheal tug, θέση), stridor/snoring ως μερική απόφραξη, SpO2 <90% ως σοβαρή υποξαιμία, κυάνωση/ωχρότητα. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-097",
+   "question": "Αίτια δύσπνοιας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (πίνακας οξείας δύσπνοιας): άσθμα/βρογχόσπασμος, ξένο σώμα, πνευμοθώρακας, πνευμονική εμβολή, τοξική βλάβη αεραγωγού, οξεία ισχαιμία/έμφραγμα, ρήξη θηλοειδούς μυός, αγχώδης υπεραερισμός. Πνευμονία, πνευμονικό οίδημα, αναιμία και οξέωση δεν υπάρχουν στον πίνακα οξείας δύσπνοιας (είναι σωστά αίτια γενικά). Η απάντηση δεν αναφέρει αγχώδη υπεραερισμό.",
+   "sources": [
+    {
+     "title": "Merck — Dyspnea",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/symptoms-of-pulmonary-disorders/dyspnea"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-098",
+   "question": "Τρεις παθήσεις κυκλοφορικού με δύσπνοια προσπάθειας",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: καρδιακή ανεπάρκεια (συχνότερη αιτία), στεφανιαία νόσος/οξύ στεφανιαίο σύνδρομο, βαλβιδοπάθειες. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "StatPearls — Dyspnea on exertion",
+     "url": "https://www.statpearls.com/sp/md/90/20809/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-099",
+   "question": "Πέντε παράγοντες ασφυξίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Οι αιτίες της απάντησης (ξένο σώμα, πνιγμός, συμπίεση λαιμού, τοξικά αέρια/καπνός, βαρύ άσθμα, οπιοειδή) είναι κλινικά ορθές αλλά αναπόδεικτες από την παραπομπή.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αντικατάσταση παραπομπής."
+  },
+  {
+   "id": "EOP-B-100",
+   "question": "Αρχές οξυγονοθεραπείας.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "BTS: στόχος SpO2 94–98% για οξέως πάσχοντες χωρίς κίνδυνο υπερκαπνίας, 88–92% για κίνδυνο υπερκαπνικής αναπνευστικής ανεπάρκειας· «controlling oxygen to a target saturation is paramount». Συμφωνεί.",
+   "sources": [
+    {
+     "title": "BTS Emergency oxygen",
+     "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-101",
+   "question": "Παλμικό οξύμετρο.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Oxygen therapy: το παλμικό οξύμετρο δεν διακρίνει την αιμοσφαιρίνη δεσμευμένη με CO ή μεθαιμοσφαιρίνη από την οξυγονωμένη. Συμφωνεί για το CO· οι υπόλοιποι περιορισμοί (κίνηση, κακή αιμάτωση, βερνίκι) δεν αναφέρονται στο απόσπασμα.",
+   "sources": [
+    {
+     "title": "StatPearls — Oxygen therapy",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK551617/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-102",
+   "question": "Τρόποι χορήγησης Ο2 και περιεκτικότητες.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ρινική κάνουλα 1–6 L/min, FiO2 ~24–40%· απλή μάσκα 5–10 L/min, FiO2 ~40–60%· μάσκα μη επανεισπνοής 10–15 L/min, FiO2 ~0,6–0,8· Venturi υψηλής ροής. Η απάντηση σωστά λέει ότι η πραγματική FiO2 εξαρτάται από ροή/αναπνοή/εφαρμογή, αλλά η ερώτηση ζητά περιεκτικότητες και δεν δίνονται τα εύρη.",
+   "sources": [
+    {
+     "title": "StatPearls — Oxygen therapy",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK551617/"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη των ενδεικτικών ευρών ροής/FiO2 ανά συσκευή.",
+   "clinicalNote": "Ροές/FiO2 κατά πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-103",
+   "question": "Μάσκα μη επανεισπνοής.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Oxygen therapy: ροή 10–15 L/min, FiO2 ~0,6–0,8, ασκός αποθήκευσης και μονόδρομες βαλβίδες. Συμφωνεί με την απάντηση (10–15 L/min, υψηλή αλλά μεταβλητή FiO2).",
+   "sources": [
+    {
+     "title": "StatPearls — Oxygen therapy",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK551617/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-104",
+   "question": "Σύστημα ασκός–αποθήκευσης–παροχή οξυγόνου (BVM).",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "MSD: αυτοδιατεινόμενος ασκός, μονόδρομη βαλβίδα, μάσκα, δοχείο αποθήκευσης, πηγή 100% O2 στα 15 L/min· δόση 6–8 mL/kg (≈500 mL) σε 1 s· ΚΑΡΠΑ: όχι >8–10 αναπνοές/min. Συμφωνεί με την απάντηση· λείπουν οι ποσοτικές παράμετροι (15 L/min, 6–8 mL/kg, 8–10/min).",
+   "sources": [
+    {
+     "title": "MSD — BVM ventilation",
+     "url": "https://www.msdmanuals.com/professional/critical-care-medicine/how-to-do-basic-airway-procedures/how-to-do-bag-valve-mask-bvm-ventilation"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη 15 L/min, 6–8 mL/kg και ορίου αναπνοών."
+  },
+  {
+   "id": "EOP-B-105",
+   "question": "Οξυγόνωση, αερισμός και διαφορά.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "OpenStax: αερισμός = κίνηση αέρα προς και από τους πνεύμονες· ανταλλαγή αερίων = διάχυση O2 στο αίμα και CO2 προς τα έξω. Συμφωνεί. Η δήλωση ότι κάποιος μπορεί να έχει καλό SpO2 με ανεπαρκή αερισμό (υπερκαπνία) είναι κλινικά ορθή αλλά δεν περιλαμβάνεται στη σελίδα.",
+   "sources": [
+    {
+     "title": "OpenStax — Gas exchange",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-106",
+   "question": "Αίτια πνευμονικού οιδήματος.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: οξεία στεφανιαία ισχαιμία ~30–40%, αντιρροπούμενη καρδιακή ανεπάρκεια, αρρυθμία, οξεία βαλβιδοπάθεια, υπερφόρτωση υγρών (IV). Τα μη καρδιογενή αίτια (λοίμωξη, εισπνευστική βλάβη, ARDS) της απάντησης δεν περιγράφονται στη σελίδα.",
+   "sources": [
+    {
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-107",
+   "question": "Προδιαθεσικοί παράγοντες πνευμονικού οιδήματος.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: HFpEF από υπέρταση, ισχαιμία, αρρυθμία, βαλβιδοπάθεια, υπερφόρτωση υγρών, μη συμμόρφωση σε φάρμακα/δίαιτα. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-108",
+   "question": "Χειρισμοί στο οξύ πνευμονικό οίδημα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: οξυγόνο πρώτο βήμα, BiPAP σε σημαντική υποξία, ενδοφλέβια διουρητικά, νιτρώδη (μερικές φορές), μορφίνη όλο και λιγότερο. Η απάντηση συμφωνεί (οξυγόνο σε υποξαιμία, NIV/CPAP, φάρμακα κατά πρωτόκολλο). Τα αριθμητικά κριτήρια (RR>25, SpO2<90%) από το ESC 2026 δεν επαληθεύτηκαν.",
+   "sources": [
+    {
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Κριτήρια CPAP/NIV."
+  },
+  {
+   "id": "EOP-B-109",
+   "question": "Πόνος στην πνευμονική εμβολή.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: οξεία δύσπνοια· πλευριτικός θωρακικός πόνος «όταν υπάρχει πνευμονικό έμφραγμα»· λιγότερο συχνά βήχας/αιμόπτυση· μαζική ΠΕ: υπόταση, ταχυκαρδία, συγκοπή. Συμφωνεί (η απάντηση σωστά αναφέρει ότι μπορεί να λείπει ο χαρακτηριστικός πόνος).",
+   "sources": [
+    {
+     "title": "Merck — Pulmonary embolism",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism/pulmonary-embolism-pe"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-110",
+   "question": "Πέντε άμεσα απειλητικές κακώσεις θώρακα.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: massive hemothorax, tension pneumothorax, open pneumothorax, cardiac tamponade, flail chest. Συμφωνεί (η απάντηση προσθέτει πνευμονική θλάση στον ασταθή θώρακα).",
+   "sources": [
+    {
+     "title": "Merck — Overview of thoracic trauma",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/overview-of-thoracic-trauma"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-111",
+   "question": "Διατεταμένες φλέβες τραχήλου σε τραυματία.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: διάταση σφαγίτιδων μπορεί να παρατηρηθεί σε υπό τάση πνευμοθώρακα ή καρδιακό επιπωματισμό (αν υπάρχει επαρκής όγκος)· συμφωνεί, και σωστά σημειώνει ότι μπορεί να λείπει σε σοβαρή αιμορραγία.",
+   "sources": [
+    {
+     "title": "Merck — Overview of thoracic trauma",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/overview-of-thoracic-trauma"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-112",
+   "question": "Συμπτώματα πνευμονικού οιδήματος.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: έντονη δύσπνοια με ανησυχία και αίσθημα πνιγμού, βήχας με αιματηρά πτύελα, ωχρότητα, κυάνωση, ιδρώτας, λεπτοί εισπνευστικοί ρόγχοι, συριγμός. Συμφωνεί (ορθόπνοια/αφρώδη πτύελα της απάντησης είναι κλασικά).",
+   "sources": [
+    {
+     "title": "Merck — Pulmonary edema",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/heart-failure/pulmonary-edema"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-113",
+   "question": "Έξι αίτια θωρακικού πόνου.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: ισχαιμία μυοκαρδίου και διαχωρισμός αορτής, πνευμονική εμβολή, υπό τάση πνευμοθώρακας (άμεσες απειλές)· περικαρδίτιδα, μυοκαρδίτιδα, πνευμονία, πνευμοθώρακας, παγκρεατίτιδα, ρήξη οισοφάγου· μυοσκελετικός πόνος, ΓΟΠΝ, έρπης ζωστήρας κ.ά. Η λίστα της απάντησης (ΟΣΣ, ΠΕ, πνευμοθώρακας, αορτικός διαχωρισμός, περικαρδίτιδα, μυοσκελετικός, παλινδρόμηση, πνευμονία) συμφωνεί.",
+   "sources": [
+    {
+     "title": "Merck — Chest pain",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/symptoms-of-cardiovascular-disorders/chest-pain"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-114",
+   "question": "Αρχές προνοσοκομειακής αντιμετώπισης υποθερμίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Special circumstances 2025 καλύπτει υποθερμική ανακοπή (έλεγχος ζωτικών έως 1′, καθυστέρηση/διακοπτόμενη ΚΑΡΠΑ <28°C, καθυστέρηση περαιτέρω απινιδώσεων μετά 3 σοκ, αδρεναλίνη όταν ≥30°C, VA-ECMO) αλλά ΔΕΝ περιέχει χειρισμό, αφαίρεση βρεγμένων ρούχων ή μόνωση. First Aid 2025: μόνο πρόληψη (στεγνά καλύμματα, αφαίρεση βρεγμένων). Άρα τα βήματα θέρμανσης/χειρισμού της απάντησης δεν στηρίζονται από την παραπομπή.",
+   "suggestedChange": "Προσθήκη δεύτερης πηγής για τη θέρμανση, και αναφορά ορίων 28°C/30°C στην ανακοπή.",
+   "sources": [
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    },
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Υποθερμική ανακοπή και θέρμανση: κλινική επιβεβαίωση."
+  },
+  {
+   "id": "EOP-B-115",
+   "question": "Προνοσοκομειακή αντιμετώπιση πιθανής ΠΕ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: «In patients with hypoxemia, oxygen should be given»· αντιπηκτική αγωγή είναι ο κορμός της θεραπείας (νοσοκομειακά)· σε υπόταση προσεκτικά υγρά/αγγειοσυσπαστικά. Συμφωνεί: η απάντηση σωστά δεν θεωρεί την αντιπηκτική/θρομβολυτική αγωγή πράξη πληρώματος.",
+   "sources": [
+    {
+     "title": "Merck — Pulmonary embolism",
+     "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism/pulmonary-embolism-pe"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-116",
+   "question": "Κρυοπαγήματα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck Frostbite: εμβάπτιση σε ζεστό (όχι ξηρή θερμότητα) νερό· σε νοσοκομείο 37–39°C, 15–30′· αποφυγή απόψυξης–επαναπαγώματος· αποφυγή τριψίματος· αναλγησία. Η απάντηση συμφωνεί στην αποφυγή τριψίματος και επαναπαγώματος αλλά λέει «αποφυγή απόψυξης» και «αποφυγή άμεσης ξηρής θερμότητας»: η σελίδα προτείνει επαναθέρμανση σε νερό όταν δεν υπάρχει κίνδυνος επαναπαγώματος. Λείπουν η αναλγησία και το θερμό νερό.",
+   "sources": [
+    {
+     "title": "Merck — Frostbite",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/cold-injury/frostbite"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Διευκρίνιση: επαναθέρμανση σε ζεστό νερό μόνο αν δεν υπάρχει κίνδυνος επαναπαγώματος.",
+   "clinicalNote": "Επαναθέρμανση προνοσοκομειακά: πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-117",
+   "question": "Ηλεκτροπληξία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα RCUK First Aid 2025 δεν έχει ενότητα για ηλεκτρικό τραυματισμό· η σελίδα Special circumstances δεν ελέγχθηκε για ηλεκτροπληξία σε αυτό το πέρασμα. Η αλληλουχία (απομόνωση πηγής, ασφάλεια, ABCDE, αρρυθμίες) είναι καθιερωμένη αλλά αναπόδεικτη εδώ.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Έλεγχος με πηγή ηλεκτροπληξίας."
+  },
+  {
+   "id": "EOP-B-118",
+   "question": "Κίνδυνοι δηλητηρίασης από αλκοόλ κατά τη μεταφορά.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: εμετός και κίνδυνος εισρόφησης, υπογλυκαιμία, υπόταση, αναπνευστική καταστολή· BAC ≥400 mg/dL μπορεί να είναι θανατηφόρο. Συμφωνεί (η υποθερμία δεν αναφέρεται στη σελίδα).",
+   "sources": [
+    {
+     "title": "Merck — Alcohol toxicity and withdrawal",
+     "url": "https://www.merckmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-119",
+   "question": "Βασικές αρχές προνοσοκομειακής αντιμετώπισης ασθενούς σε κώμα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) MSD Coma: άμεση εξασφάλιση αεραγωγού, αναπνοής, κυκλοφορίας· διασωλήνωση σε αναπνευστική δυσχέρεια, υποξία, ↑ΕΚΠ, σπασμούς, έμετο, αστάθεια· διόρθωση υπότασης· έλεγχος και διόρθωση γλυκόζης· ακινητοποίηση αυχένα σε υποψία τραύματος· θεραπεία υποκείμενης αιτίας. Συμφωνεί με την απάντηση. Στο MSD η γλυκόζη χορηγείται ΜΕΤΑ από θειαμίνη και ναλοξόνη για υποψία οπιοειδών (νοσοκομειακή/ALS πρακτική)· το «τίποτα από το στόμα» δεν αναφέρεται στην πηγή (λογικό για μη προστατευμένο αεραγωγό αλλά δεν επαληθεύτηκε).",
+   "suggestedChange": "Προαιρετικά: αναφορά ναλοξόνης/θειαμίνης ως ενέργειες εξειδικευμένης ομάδας.",
+   "sources": [
+    {
+     "title": "MSD — Overview of Coma and Impaired Consciousness",
+     "url": "https://www.msdmanuals.com/professional/neurologic-disorders/coma-and-impaired-consciousness/overview-of-coma-and-impaired-consciousness"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-120",
+   "question": "Διάσωση από νερό/πνιγμός.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK 2025: όσοι δεν είναι εκπαιδευμένοι δεν μπαίνουν στο νερό· προσφορά πλωτού και απομάκρυνση· στον πνιγμό 5 εμφυσήσεις με 100% O2 και μετά κανονική ΚΑΡΠΑ· η ακινητοποίηση σπονδυλικής στο νερό δεν καθυστερεί την έξοδο. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-121",
+   "question": "Αποσυμπίεση με βελόνα πνευμοθώρακα υπό τάση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (επεμβατική πράξη)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls EMS Pneumothorax: το 2ο μεσοπλεύριο στη μεσοκλειδική γραμμή «was traditionally taught», αλλά οι νεότερες συστάσεις προτιμούν πλάγια προσπέλαση στο 4ο ή 5ο μεσοπλεύριο στη μέση μασχαλιαία· βελόνες/καθετήρες 14G μήκους 8 cm· τοποθέτηση ακριβώς πάνω από το πλευρό· η βελτίωση ζωτικών είναι ο πιο αξιόπιστος δείκτης επιτυχίας· εναλλακτικά δακτυλική θωρακοστομία. Τα σημεία της απάντησης (2ο μεσοκλ. και 5ο προσθ. μασχαλιαία) είναι συμβατά. Λείπουν το μέγεθος βελόνας, η θέση πάνω από το πλευρό και ο έλεγχος επιτυχίας.",
+   "sources": [
+    {
+     "title": "StatPearls — EMS Pneumothorax",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK482161/"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη 14G/8 cm, πάνω από το πλευρό και ελέγχου επιτυχίας.",
+   "clinicalNote": "Επεμβατική πράξη — απαιτείται κλινική επιβεβαίωση και εκπαίδευση."
+  },
+  {
+   "id": "EOP-B-122",
+   "question": "Αρχές προνοσοκομειακής αντιμετώπισης status epilepticus",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "EMRS CG004 v2: ορισμός >5 λεπτά κρίσης, Ο₂, monitor, i.v./i.o. γραμμή, γλυκόζη, βενζοδιαζεπίνη (midazolam ενήλικες 10 mg, 5 mg αν ηλικιωμένος/<50 kg), επανάληψη μία φορά, πρόσκληση για δεύτερης γραμμής αντιεπιληπτικό >30 λεπτά. Η αποθηκευμένη απάντηση καλύπτει τις αρχές χωρίς δόσεις· ορίζει «παρατεταμένη ή επαναλαμβανόμενη κρίση χωρίς ανάκτηση συνείδησης» (συμβατό).",
+   "sources": [
+    {
+     "title": "EMRS Scotland CG004 Status Epilepticus v2 (18/3/2024)",
+     "url": "https://www.emrsscotland.org/s/CG004-Status-Epilepticus-v2.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-123",
+   "question": "Διακομιδή με ενσφηνωμένο αντικείμενο.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το θέμα ΔΕΝ υπάρχει στη σελίδα RCUK First Aid 2025 που παραπέμπεται· δεν αφαιρείται το αντικείμενο και σταθεροποιείται με ογκώδη επιθέματα είναι καθιερωμένη πρακτική αλλά αναπόδεικτη εδώ.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αντικατάσταση παραπομπής με πηγή που καλύπτει ενσφηνωμένα αντικείμενα."
+  },
+  {
+   "id": "EOP-B-124",
+   "question": "Διακομιδή με εκσπλάχνωση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Το θέμα ΔΕΝ υπάρχει στη σελίδα RCUK First Aid 2025 που παραπέμπεται. Η πρακτική (δεν επανατοποθετούνται τα όργανα, κάλυψη, αποφυγή από το στόμα) είναι καθιερωμένη· το είδος επιθέματος (υγρό/στεγνό) διαφέρει ανά πρωτόκολλο.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Είδος επιθέματος κατά πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-125",
+   "question": "Θερμοπληξία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: χρυσό πρότυπο εμβάπτιση σε κρύο νερό (λαιμός προς τα κάτω) και «cool first, transfer second» — δηλαδή ψύξη ΠΡΙΝ τη μεταφορά. Η απάντηση βάζει πρώτη την «άμεση μεταφορά σε δροσερό χώρο» και μετά την ψύξη· διαφορά στη σειρά προτεραιότητας.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Διόρθωση: ψύξη πρώτα, μεταφορά δεύτερη (cool first, transfer second).",
+   "clinicalNote": "Σειρά ψύξης/μεταφοράς: κλινική επιβεβαίωση."
+  },
+  {
+   "id": "EOP-B-126",
+   "question": "Ποιος είναι υπεύθυνος για την είσοδο στην Περιοχή Κινδύνου (DANGER AREA);",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Σχέδιο μαζικού ατυχήματος (σελ. 66–67): «Λόγω κινδύνου κανείς δεν εισέρχεται στην περίμετρο της D.A. χωρίς την έγκριση του υπεύθυνου της Πυροσβεστικής»· η Περιοχή Κινδύνου ελέγχεται από την Πυροσβεστική (πυροσβέστες και διασώστες ΕΚΑΒ με ειδικές στολές). Η αποθηκευμένη απάντηση (επιχειρησιακά ορισμένος επικεφαλής/υπεύθυνος ασφαλείας, μόνο εξουσιοδοτημένο εκπαιδευμένο προσωπικό με ΜΑΠ) συμφωνεί στην αρχή αλλά δεν κατονομάζει τον υπεύθυνο της Πυροσβεστικής που ζητά η ερώτηση.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), Να προστεθεί ρητά ότι η έγκριση εισόδου δίνεται από τον υπεύθυνο της Πυροσβεστικής (σύμφωνα με το ελληνικό σχέδιο). — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "σελ. 66–67"
+  },
+  {
+   "id": "EOP-B-127",
+   "question": "Triage: 35 αναπνοές/λεπτό.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls START: κόκκινο αν αναπνευστική συχνότητα >30, ή απόν κερκιδικός σφυγμός/επαναπλήρωση >2 s, ή αδυναμία εκτέλεσης απλών εντολών. Η απάντηση (>30/min αρκεί για κόκκινο) συμφωνεί.",
+   "sources": [
+    {
+     "title": "StatPearls — EMS mass casualty triage",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459369/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-128",
+   "question": "Σύστημα των 3 ζωνών σε μαζικό ατύχημα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "[ΔΙΟΡΘΩΘΗΚΕ 31/10/2026 στην εφαρμογή] (Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Σχέδιο μαζικού ατυχήματος (σελ. 66–67): το Τοπικό Συντονιστικό Όργανο ορίζει Περιοχή Κινδύνου (Danger Area, ελέγχεται από Πυροσβεστική), Περιοχή Ελέγχου (Control Area: ιατρική υπηρεσία, χώρος διαλογής/triage και άμεσης αντιμετώπισης, κόκκινα σταθεροποιούνται εδώ) και Περιοχή Πρόσβασης (Holding Area: ασθενοφόρα/οχήματα, χώρος συγκέντρωσης κίτρινων-πράσινων). Η αποθηκευμένη απάντηση περιγράφει το μοντέλο επικίνδυνων υλικών θερμή/ενδιάμεση/ψυχρή (hot/warm/cold) και δεν αντιστοιχούσε στις τρεις ζώνες του ελληνικού σχεδίου μαζικού ατυχήματος που προφανώς ζητά η ερώτηση. Η απάντηση αντικαταστάθηκε με τις τρεις ζώνες του σχεδίου μαζικού ατυχήματος ΙΕΚ ΕΚΑΒ 2017 (Danger/Control/Holding Area) και το hot/warm/cold μένει ως ξεχωριστό μοντέλο ΧΒΡΠ. Πηγή: έντυπο 2017 που παρείχε ο χρήστης· ανθρώπινη επιβεβαίωση ότι το ισχύον σχέδιο δεν έχει αλλάξει.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), Να αντικατασταθεί/συμπληρωθεί η απάντηση με Danger Area / Control Area / Holding Area, κρατώντας το hot-warm-cold ως ξεχωριστό μοντέλο για ΧΒΡΠ. — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "clinicalNote": "Επιβεβαίωση από τον εγκεκριμένο οδηγό ΕΚΑΒ ποιο μοντέλο ζωνών ισχύει στην εξέταση."
+  },
+  {
+   "id": "EOP-B-129",
+   "question": "Χρώματα triage.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls START: μαύρο — δεν αναπνέει ακόμη και μετά από διάνοιξη αεραγωγού· κόκκινο — άμεση· κίτρινο — σοβαρή αλλά όχι άμεσα απειλητική· πράσινο — ελαφρά (βαδίζοντες). Συμφωνεί με την απάντηση, που σωστά σημειώνει ότι τα χρώματα διαφέρουν ανά σύστημα.",
+   "sources": [
+    {
+     "title": "StatPearls — EMS mass casualty triage",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459369/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-130",
+   "question": "Κοπή αντιβραχίου με ποτήρι: ενέργειες, αιτία αδυναμίας",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Πρωτόκολλο EMS (Santa Cruz 2020): άμεση πίεση με γάζα/επίδεσμο πίεσης· τουρνικέ μόνο σε μη ελεγχόμενη αιμορραγία άκρου, τοποθέτηση 2–3 ίντσες πάνω από το τραύμα, σημείωση ώρας, έλεγχος περιφερικής κυκλοφορίας. Η αποθηκευμένη απάντηση (ΑΜΠ, ABCDE, πίεση, τουρνικέ αν απειλητική, έλεγχος αισθητικότητας/κίνησης/σφύξεων, ακινητοποίηση, διακομιδή) είναι συμβατή. Για το (β) δεν βρέθηκε πηγή· η απάντηση δεν δίνει οριστική αιτία (τένοντας/μυς/νεύρο) — ασφαλές. Πηγή: τοπικό αμερικανικό πρωτόκολλο, όχι ελληνικό.",
+   "sources": [
+    {
+     "title": "Santa Cruz County EMS — Protocol 700-T4 Hemorrhage Control (2020)",
+     "url": "https://www.santacruzhealth.org/Portals/7/Pdfs/PublicHealth/Emergency%20Medical%20Services/Policies/Section700/700-T4_Hemorrhage_Control.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-131",
+   "question": "Πολυτραυματίας με RR>35, HR 130, ΑΠ 85/65.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο σοκ (σελ. 39–40): το υπογκαιμικό-αιμορραγικό σοκ — ψυχρό κολλώδες δέρμα, ωχρό χρώμα, πτώση ΑΠ, επηρεασμένη συνείδηση, αργή τριχοειδική επαναπλήρωση· αντιμετώπιση Ο₂ με μάσκα, i.v. γραμμή, πρόληψη υποθερμίας, ύπτια θέση. Πρωτόκολλο τραύματος (σελ. 53): ABCDE με προστασία αυχένα, έλεγχος εξωτερικής αιμορραγίας, «Χρυσή ώρα» — ελαχιστοποίηση χρόνου επί τόπου. Συμφωνεί με την απάντηση. Δεν συγκρίθηκαν υγρά/ποσότητες (το κείμενο των υγρών στο σοκ διαβάστηκε μερικώς).",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 39–40, 53 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-132",
+   "question": "Εργάτης ΔΕΗ, ηλεκτροπληξία από καλώδιο υψηλής τάσης.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο ηλεκτροπληξίας (σελ. 26–27): βεβαιώνεται ότι η πηγή ρεύματος είναι κλειστή και παραμένει κλειστή· αεραγωγός, Ο₂ με μάσκα, SpO₂, i.v. γραμμή, ΑΠ, ΗΚΓ monitoring, έλεγχος συνείδησης, επισκόπηση για περιφερικά εγκαύματα (συνήθως 3ου βαθμού) και σύνδρομο διαμερίσματος, κλήση βοήθειας, διακομιδή. Αναφέρει αρρυθμίες/κοιλιακή μαρμαρυγή (πρώτες 24–48 ώρες σε υψηλή τάση), νεφρική βλάβη, σύνδρομο διαμερίσματος. Συμφωνεί με την αποθηκευμένη απάντηση (απομόνωση ρεύματος πριν την προσέγγιση, ABCDE, αρρυθμία/ανακοπή, εγκαύματα, τραύμα από πτώση).",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 26–27 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-133",
+   "question": "Παιδί με τσίμπημα μέλισσας/γνωστή αλλεργία, εξάνθημα και δύσπνοια (αναφυλαξία).",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "[ΔΙΟΡΘΩΘΗΚΕ 31/10/2026 στην εφαρμογή] (Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο αναφυλαξίας (σελ. 7): απομάκρυνση αιτίου, αεραγωγός, Ο₂ σε μεγάλη συγκέντρωση, SpO₂, i.v. γραμμή, ΑΠ, monitoring, αδρεναλίνη «10 μg/kg (0,01 ml/kg από την αραίωση 1:10.000) βαθιά ενδομυϊκά ή ενδοφλέβια αργά», υδροκορτιζόνη 4 mg/kg, διμεθινδένη 1 mg/10 kg. ΠΡΟΣΟΧΗ ΑΡΙΘΜΗΤΙΚΗ ΑΣΥΜΦΩΝΙΑ: το 1:10.000 περιέχει 100 μg/mL, άρα 0,01 mL/kg = 1 μg/kg και ΟΧΙ 10 μg/kg (10 μg/kg = 0,1 mL/kg του 1:10.000 ή 0,01 mL/kg του 1:1.000). Η RCUK 2021 δίνει ενδομυϊκά σταθερές δόσεις 1:1.000 (6–12 ετών 300 μg, 6 μήνες–6 ετών 150 μg), και δεν συστήνει αντιισταμινικά/στεροειδή ως αρχική θεραπεία. Η αποθηκευμένη απάντηση (ύποπτη αναφυλαξία, ΙΜ αδρεναλίνη κατά πρωτόκολλο, τα αντιισταμινικά δεν την υποκαθιστούν) είναι συμβατή με τη διεθνή πρακτική και δεν δίνει δόση· όμως το ελληνικό κείμενο διαφέρει στη δοσολογία και στον ρόλο υδροκορτιζόνης/αντιισταμινικού. Η απάντηση συμπληρώθηκε με συγκεκριμένη δόση: IM αδρεναλίνη 1 mg/mL (1:1000) 0,01 mg/kg, μέγιστο 0,5 mg (RCUK: 6 μηνών–6 ετών 150 μg, 6–12 ετών 300 μg, >12 ετών 500 μg· επανάληψη μετά 5 λεπτά· Australian Prescriber/ASCIA: 0,01 mg/kg, μέγ. 0,5 mg). Η αριθμητική ασυμφωνία του εντύπου ΙΕΚ 2017 (0,01 ml/kg του 1:10.000) σημειώνεται στην απάντηση.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 7 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    },
+    {
+     "title": "RCUK — Emergency treatment of anaphylaxis (May 2021)",
+     "url": "https://www.resus.org.uk/sites/default/files/2021-05/Emergency%20Treatment%20of%20Anaphylaxis%20May%202021_0.pdf"
+    },
+    {
+     "title": "Resuscitation Council UK — Emergency treatment of anaphylaxis (2021)",
+     "url": "https://resus.org.uk/media/333/download"
+    },
+    {
+     "title": "Australian Prescriber — Updated anaphylaxis guidelines: infants and children",
+     "url": "https://www.nps.org.au/australian-prescriber/articles/updated-anaphylaxis-guidelines-management-in-infants-and-children"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επιβεβαίωση δόσης αδρεναλίνης από κλινικό/εκπαιδευτή και ευθυγράμμιση με το ισχύον πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-134",
+   "question": "Ασθενής με κόπωση, χαμηλό πυρετό, νυχτερινή εφίδρωση, απώλεια βάρους",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "WHO/CDC: τα συμπτώματα ενεργού φυματίωσης είναι παρατεταμένος βήχας (≥3 εβδομάδες), πυρετός, νυχτερινή εφίδρωση, απώλεια βάρους, κόπωση· αερογενής μετάδοση· στα ιδρύματα απαιτούνται αναπνευστήρες/αερισμός και μάσκα στον ασθενή. Η αποθηκευμένη απάντηση (υποψία φυματίωσης, μέτρα προφύλαξης, ABCDE, ενημέρωση υποδοχής) συμφωνεί.",
+   "sources": [
+    {
+     "title": "WHO — Tuberculosis fact sheet",
+     "url": "https://www.who.int/news-room/fact-sheets/detail/tuberculosis"
+    },
+    {
+     "title": "CDC — Signs and symptoms of TB",
+     "url": "https://www.cdc.gov/tb/signs-symptoms/index.html"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-135",
+   "question": "Διαβητικός με απόπνοια οξόνης και αναπνοή Kussmaul.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο υπεργλυκαιμίας (σελ. 43): εκτίμηση — έμετοι, πολυδιψία, πολυουρία, αφυδάτωση, αύξηση αναπνευστικής συχνότητας, νωθρότητα, απόπνοια κετόνης, έλλειψη ινσουλίνης· αντιμετώπιση ABCDE, Ο₂ με μάσκα, SpO₂, i.v. γραμμή, ΑΠ, ΗΚΓ monitoring, διακομιδή. Συμφωνεί με την απάντηση (πιθανή διαβητική κετοξέωση, ABCDE, αφυδάτωση/συνείδηση, επείγουσα διακομιδή, η ινσουλίνη/υγρά απαιτούν κλινικό έλεγχο).",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 43 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-136",
+   "question": "Άνδρας 67 ετών με ημιπάρεση αριστερά, κεφαλαλγία, ναυτία",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "NICE NG128: χρήση έγκυρου εργαλείου (FAST) εκτός νοσοκομείου, έλεγχος υπογλυκαιμίας, ασπιρίνη μόνο αφού αποκλειστεί αιμορραγία με απεικόνιση, μείωση πίεσης στην ενδοεγκεφαλική αιμορραγία μόνο σε νοσοκομείο με στόχο συστολική ≤140 mmHg. Η αποθηκευμένη απάντηση (ύποπτο ΑΕΕ, χρόνος έναρξης, FAST, γλυκόζη, ειδοποίηση μονάδας ΑΕΕ, όχι ασπιρίνη, όχι αυθαίρετη μείωση πίεσης) συμφωνεί.",
+   "sources": [
+    {
+     "title": "NICE NG128 — Stroke and TIA recommendations",
+     "url": "https://www.nice.org.uk/guidance/ng128/chapter/Recommendations"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-137",
+   "question": "12χρονο με πυρετό, σύγχυση, εμέτους, πόνο στον αυχένα (ύποπτη μηνιγγίτιδα).",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο μηνιγγίτιδας (σελ. 61): στα μεγαλύτερα παιδιά κλινική εικόνα όπως στους ενήλικες (αυχενική δυσκαμψία, φωτοφοβία, κεφαλαλγία, έμετοι, σπασμοί ή κώμα)· «ΔΕΝ ΠΡΕΠΕΙ ΝΑ ΚΑΘΥΣΤΕΡΕΙ Η ΧΟΡΗΓΗΣΗ ΑΓΩΓΗΣ ΑΚΟΜΑ ΚΑΙ ΣΕ ΥΠΟΨΙΑ»· ABCDE, οξυγόνο, i.v. γραμμή, αντιβίωση (βενζυλοπενικιλλίνη 1,8 g ή κεφαλοσπορίνη 3ης γενιάς), ενημέρωση νοσοκομείου. Η αποθηκευμένη απάντηση (ABCDE, παρακολούθηση, ειδοποίηση νοσοκομείου, ταχεία διακομιδή, κίνδυνος σηψαιμίας) συμφωνεί στην ουσία, αλλά δεν αναφέρει την έγκαιρη χορήγηση αντιβίωσης που προβλέπει το ελληνικό πρωτόκολλο· το κείμενο 2017 περιέχει και δεξαμεθαζόνη πριν την αντιβίωση σε υποψία αιμόφιλου, πρακτική που πρέπει να επιβεβαιωθεί ως προς το σήμερα.",
+   "suggestedChange": "Να διευκρινιστεί αν το πλήρωμα χορηγεί αντιβίωση σύμφωνα με το ισχύον πρωτόκολλο· να ελεγχθεί η δεξαμεθαζόνη/δοσολογίες με σύγχρονη πηγή.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 61 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Προνοσοκομειακή αντιβίωση και στεροειδή στη μηνιγγίτιδα: επιβεβαίωση από ισχύον πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-138",
+   "question": "Νεαρός σε κώμα, βραδύπνοια 6/min, μύση, ενδείξεις IV χρήσης ουσιών.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο κατάχρησης ουσιών (σελ. 29–30): οξεία δηλητηρίαση από οπιοειδή → καταστολή ΚΝΣ, κώμα, έντονη μύση, επιπόλαιη αναπνοή, κυάνωση, ασθενής σφυγμός, υπόταση· αντιμετώπιση — ιστορικό και συλλογή σύριγγων/ουσιών, έλεγχος κορών, έλεγχος ABCD, ετοιμότητα για υποβοήθηση αναπνοής, χρήση Narcan και Ο₂, i.v. γραμμή, διατήρηση ξύπνιου και θερμοκρασίας. Στο πρωτόκολλο κώματος (σελ. 33) η ναλοξόνη δίνεται 0,8–2–4 mg. Συμφωνεί με την απάντηση (ισχυρή υποψία οπιοειδούς, ασφαλής αεραγωγός/αερισμός, ναλοξόνη από εκπαιδευμένο, παρακολούθηση για υποτροπή). Η δόση ναλοξόνης δεν δίνεται στην απάντηση· τα 0,8–4 mg του PDF δεν συγκρίθηκαν με σύγχρονη πηγή.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 29–30, 33 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-139",
+   "question": "Μετωπική σύγκρουση: κάμψη, προσαγωγή, έσω στροφή, βράχυνση σκέλους",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Northwestern: το κλασικό εύρημα οπίσθιου εξαρθρήματος ισχίου είναι βραχυμένο, ελαφρά κεκαμμένο, έσω στρεφόμενο και σε προσαγωγή σκέλος, με πιθανή βλάβη ισχιακού νεύρου (δυσκολία ραχιαίας/πελματιαίας κάμψης, ελάττωση αισθητικότητας). Το ελληνικό υλικό ΙΕΚ λέει να ελέγχεται η αγγείωση/νεύρωση πριν και μετά την ακινητοποίηση. Η αποθηκευμένη απάντηση συμφωνεί· το «όχι επιτόπια ανάταξη» δεν αναφέρεται ρητά στις πηγές αλλά είναι αποδεκτή πρακτική.",
+   "sources": [
+    {
+     "title": "Northwestern Feinberg Orthopaedics — Posterior hip dislocation, history and exam",
+     "url": "https://www.ortho-teaching.feinberg.northwestern.edu/cases/pelvis-hip/case3/case3historyphysicalexam.html"
+    },
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (2017) — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-140",
+   "question": "45χρονος με πόνο στο στήθος.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF του ΙΕΚ ΕΚΑΒ που παρείχε ο χρήστης· έκδοση 2017, παλαιότερη από RCUK/ERC 2025.) Πρωτόκολλο πόνου στο στήθος (σελ. 36–37) και εμφράγματος (σελ. 23): ιστορικό (εντόπιση, φύση, παράγοντες, συνοδά), ABCDE, Ο₂ με μάσκα, SpO₂, i.v. γραμμή, ΑΠ, ΗΚΓ monitoring· στο έμφραγμα: ασπιρίνη 160–320 mg εκτός αντενδείξεων, νιτρώδη υπογλώσσια μόνο αν ΣΑΠ>100 mmHg. Η αποθηκευμένη απάντηση συμφωνεί (ιστορικό, ABCDE, ΗΚΓ, προειδοποίηση καρδιολογικής διαδρομής, ασπιρίνη/νιτρώδη μόνο όταν ενδείκνυνται). Διαφορά: το ελληνικό κείμενο δίνει Ο₂ σε όλους, ενώ η απάντηση το περιορίζει σε υποξαιμία (σύμφωνα με νεότερες οδηγίες)· το ΗΚΓ 12 απαγωγών δεν αναφέρεται ρητά στη σελίδα που διαβάστηκε.",
+   "suggestedChange": "Να διευκρινιστεί ότι η ελληνική υπηρεσιακή πρακτική (Ο₂ σε όλους, 2017) διαφέρει από τις σύγχρονες οδηγίες (Ο₂ σε υποξαιμία).",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 23, 36–37 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-141",
+   "question": "GCS πολυτραυματία: άναρθρες κραυγές, εντοπίζει, μάτια στον πόνο.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Έλεγχος αθροίσματος: E2+V2+M5=9, όσο και η απάντηση (9). Οι περιγραφές της κλίμακας (μάτια: αυθόρμητα/σε ήχο/σε πίεση/καθόλου· λεκτική: προσανατολισμένος/συγχυσμένος/λέξεις/ήχοι/καθόλου· κινητική: υπακούει/εντοπίζει/φυσιολογική κάμψη/ανώμαλη κάμψη/έκταση/καθόλου) επιβεβαιώνονται από το glasgowcomascale.org· ο βαθμός ανά περιγραφή (1–4, 1–5, 1–6) είναι η καθιερωμένη βαθμολόγηση και δεν αναγράφεται αριθμητικά στη σελίδα. ",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-142",
+   "question": "Πρώτες ερωτήσεις σε κλήση για τροχαίο",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. Υπουργείο Υγείας/ΕΚΑΒ (οδηγίες 166): τηλέφωνο καλούντος, ακριβής διεύθυνση/χιλιομετρική θέση και κατεύθυνση, αριθμός θυμάτων, να μην κλείσει πρώτος το τηλέφωνο. MPDS (IAED) Protocol 29: διεύθυνση, τηλέφωνο, «τι ακριβώς συνέβη», εγρήγορση ασθενών, παγίδευση, επικίνδυνα υλικά, κίνδυνοι σκηνής. Η αποθηκευμένη απάντηση συμφωνεί. Δεν βρέθηκε δημόσιο εσωτερικό πρωτόκολλο διαλογής ΕΚΑΒ.",
+   "sources": [
+    {
+     "title": "Υπουργείο Υγείας — 166 ΕΚΑΒ",
+     "url": "https://www.moh.gov.gr/articles/citizen/xrhsima-thlefwna-amp-dieythynseis/196-166-ekab"
+    },
+    {
+     "title": "ΕΚΑΒ — Οδηγίες σωστής χρήσης",
+     "url": "https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/"
+    },
+    {
+     "title": "IAED Journal — Mechanism of Injury (MPDS Protocol 29)",
+     "url": "https://www.iaedjournal.org/mechanism-of-injury"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Σύγκριση με το εσωτερικό πρωτόκολλο διαλογής κλήσεων του ΕΚΑΒ (αν χρησιμοποιεί MPDS ή δικό του)."
+  },
+  {
+   "id": "EOP-B-143",
+   "question": "Σύντομο ιστορικό τραυματία",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "SAMPLE: σημεία/συμπτώματα, αλλεργίες, φάρμακα, ιστορικό, τελευταία λήψη τροφής/υγρών, γεγονότα που προηγήθηκαν. Συμφωνεί με την αποθηκευμένη απάντηση (SAMPLE/AMPLE). Δευτερογενής πηγή.",
+   "sources": [
+    {
+     "title": "Wikipedia — SAMPLE history (δευτερογενής πηγή)",
+     "url": "https://en.wikipedia.org/wiki/SAMPLE_history"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-144",
+   "question": "Δράση του παρασυμπαθητικού σε καρδιά, αγγεία, βρόγχους, έντερο, αδένες.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Parasympathetic NS: καρδιά — μείωση συχνότητας και ταχύτητας αγωγής στον κολποκοιλιακό κόμβο· βρόγχοι — βρογχοσύσπαση και αυξημένη βλέννα· έντερο — αυξημένη κινητικότητα, εκκρίσεις, χάλαση σφιγκτήρων· σιελογόνοι αδένες — αυξημένη έκκριση. Συμφωνούν με την απάντηση. Για τα αγγεία το άρθρο αναφέρει αγγειοδιαστολή (M3), ενώ η απάντηση λέει «ήπια επίδραση στα περισσότερα αγγεία»· η διατύπωση δεν επαληθεύτηκε ακριβώς.",
+   "suggestedChange": "Προαιρετικά: διευκρίνιση ότι η παρασυμπαθητική αγγειοδιαστολή είναι εντοπισμένη, με βάση το εγκεκριμένο σύγγραμμα.",
+   "sources": [
+    {
+     "title": "StatPearls — Neuroanatomy, Parasympathetic Nervous System",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK553141/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-145",
+   "question": "Δράση συμπαθητικού.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "OpenStax 15.2: καρδιά — αύξηση συχνότητας· αγγεία — σύσπαση και αύξηση πίεσης (με διαστολή στους σκελετικούς μυς). Η σελίδα ΔΕΝ περιγράφει βρόγχους ή έντερο για το συμπαθητικό· η βρογχοδιαστολή και η μείωση κινητικότητας της απάντησης είναι σωστά αλλά αναπόδεικτα εδώ. Τα υποδοχεία β1/α1/β2 δεν αναφέρονται.",
+   "sources": [
+    {
+     "title": "OpenStax — Autonomic reflexes",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-2-autonomic-reflexes-and-homeostasis"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-146",
+   "question": "Αντίδραση οργανισμού σε αιμορραγία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: αύξηση συχνότητας και συσταλτικότητας, συμπαθητική ενεργοποίηση με βαροϋποδοχείς, περιφερική αγγειοσύσπαση, αναδιανομή αίματος σε καρδιά/εγκέφαλο, αναερόβιος μεταβολισμός/οξέωση. Συμφωνεί. Η μετακίνηση υγρού από το διάμεσο και η κατακράτηση Na/νερού δεν αναφέρονται στη σελίδα.",
+   "sources": [
+    {
+     "title": "StatPearls — Hemorrhagic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470382/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-147",
+   "question": "Επίδραση του χαμηλού CO2 στα αγγεία εγκεφάλου και περιφέρειας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) PMC7885708: η υποκαπνία προκαλεί εγκεφαλική αγγειοσύσπαση και μείωση εγκεφαλικής ροής/όγκου αίματος· η επίδραση δεν διατηρείται και η παρατεταμένη υποκαπνία σχετίζεται με χειρότερη έκβαση σε ΚΕΚ. Συμφωνεί για τον εγκέφαλο· το περιφερικό σκέλος της απάντησης δεν ελέγχθηκε από την πηγή.",
+   "sources": [
+    {
+     "title": "PMC7885708 — CO2 and cerebral blood flow",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7885708/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-148",
+   "question": "Επίδραση του αυξημένου CO2 στα αγγεία εγκεφάλου και περιφέρειας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) PMC7885708: η υπερκαπνία προκαλεί εγκεφαλική αγγειοδιαστολή και αυξάνει τη ροή, με πιθανό εγκεφαλικό οίδημα και αύξηση ΕΚΠ. Συμφωνεί για τον εγκέφαλο· το περιφερικό σκέλος δεν ελέγχθηκε από την πηγή.",
+   "sources": [
+    {
+     "title": "PMC7885708 — CO2 and cerebral blood flow",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7885708/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-149",
+   "question": "Κλινική εικόνα μηνιγγίτιδας ενηλίκων.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: πυρετός, αυχενική δυσκαμψία, αλλοιωμένη νοητική κατάσταση — η τριάδα υπάρχει μόνο στο 41%· κεφαλαλγία, σύγχυση, νυσταγμός Kernig/Brudzinski· ταχέως εξαπλούμενο πετεχειώδες εξάνθημα (purpura fulminans) → μηνιγγιτιδόκοκκος. Συμφωνεί (η φωτοφοβία δεν αναφέρεται στη σελίδα).",
+   "sources": [
+    {
+     "title": "StatPearls — Bacterial meningitis",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470351/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-150",
+   "question": "Αναλογία/ρυθμός ΚΑΡΠΑ ενηλίκων και παιδιών.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Ενήλικες: 30:2 και 100–120/min (επιβεβαιωμένο στο B-015). Παιδιά: RCUK Paediatric 2025 — 15:2 αν εκπαιδευμένος στην παιδιατρική BLS, αλλιώς 30:2· «five initial breaths»· ρυθμός 100–120/min. Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-151",
+   "question": "Αίτια ανακοπής ενηλίκων/παιδιών.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή για παιδιά",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: στα παιδιά η ανακοπή είναι «most often secondary to progressive respiratory or circulatory failure, or neurological emergencies»· η σελίδα επισημαίνει ότι οι αλγόριθμοι διαφέρουν λόγω διαφορετικών αιτίων. Τα καρδιακά αίτια ενηλίκων δεν αναφέρονται στη σελίδα (κοινή γνώση).",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-152",
+   "question": "Επίδραση πυρετού/οπιοειδών στην αναπνευστική συχνότητα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Η αύξηση συχνότητας με πυρετό και η καταστολή από οπιοειδή είναι καθιερωμένη φυσιολογία/φαρμακολογία αλλά αναπόδεικτη εδώ· η σελίδα επιβεβαιώνει μόνο ότι η πτώση του O2 διεγείρει συχνότητα/βάθος αναπνοής.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-153",
+   "question": "Αναπνοή Kussmaul.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: βαθιές, γρήγορες αναπνοές για αντιρρόπηση οξυαιμίας (Kussmaul) στη διαβητική κετοξέωση. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "Merck — Acute complications of diabetes",
+     "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-154",
+   "question": "Φάρμακα στην αναφυλαξία.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: IM αδρεναλίνη και δεύτερη δόση αν δεν υπάρξει βελτίωση· η σελίδα δεν αναφέρει αντιισταμινικά. Η δήλωση ότι αντιισταμινικά/κορτικοστεροειδή δεν αντικαθιστούν την αδρεναλίνη είναι ορθή αλλά δεν στηρίζεται από αυτή τη σελίδα· συμφωνεί με Special circumstances (B-039).",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    },
+    {
+     "title": "RCUK Special circumstances 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-155",
+   "question": "Δηλητηρίαση από CO.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "CDC: διαταράσσει τη χρήση οξυγόνου σε κυτταρικό επίπεδο· συμπτώματα: κεφαλαλγία, ζάλη, αδυναμία, ναυτία, έμετος, θωρακικό άλγος, αλλοίωση συνείδησης· ισχαιμία μυοκαρδίου, αρρυθμίες· «conventional pulse oximeter is not accurate when COHgb is present». Συμφωνεί. Θεραπεία: 100% οξυγόνο έως υποχώρηση συμπτωμάτων (συνήθως 4–5 ώρες)· υπερβαρικό σε βαριές περιπτώσεις.",
+   "sources": [
+    {
+     "title": "CDC — CO clinical guidance",
+     "url": "https://www.cdc.gov/carbon-monoxide/hcp/clinical-guidance/index.html"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-156",
+   "question": "Ζωτικές παράμετροι σε shock κατά τη μεταφορά.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: ΑΠ (ΣΑΠ <90 ή ΜΑΠ <65 mm Hg), καρδιακή συχνότητα (>100/min), διούρηση (<0,5 mL/kg/ώρα), γαλακτικό (>2 mmol/L), SpO2· καμία παράμετρος μόνη της διαγνωστική. Συμφωνεί με την απάντηση (GCS, αναπνευστική συχνότητα, SpO2, καρδιακή συχνότητα, ΑΠ, τριχοειδική επαναπλήρωση/δέρμα, ETCO2/διούρηση).",
+   "sources": [
+    {
+     "title": "Merck — Shock",
+     "url": "https://www.merckmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-157",
+   "question": "Ανίχνευση σφυγμού.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: κερκιδική, βραχιόνια, μηριαία, ιγνυακή, οπίσθια κνημιαία, ραχιαία ποδός. Συμφωνεί (καρωτιδική/κροταφική επιπλέον).",
+   "sources": [
+    {
+     "title": "StatPearls — Peripheral pulse",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK542175/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-158",
+   "question": "Επιφανειακό έγκαυμα.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "NHS: τρεχούμενο δροσερό νερό 20 λεπτά (εντός 3 ωρών), αφαίρεση κοσμημάτων που δεν κολλούν, χαλαρή κάλυψη με πλαστική μεμβράνη, όχι κρέμες/λάδια/βούτυρο, όχι σκάσιμο φουσκαλών. Συμφωνεί. Ο πάγος δεν αναφέρεται στη σελίδα· η φράση «όχι πάγο» είναι συμβατή πρακτική.",
+   "sources": [
+    {
+     "title": "NHS — Burns and scalds",
+     "url": "https://www.nhs.uk/conditions/burns-and-scalds/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-159",
+   "question": "Αντιμετώπιση πνευμοθώρακα υπό τάση.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls EMS Pneumothorax: αναγνώριση κλινικά, επείγουσα αποσυμπίεση με βελόνη (ή δακτυλική θωρακοστομία), βελτίωση ζωτικών ως ένδειξη επιτυχίας. Η απάντηση (κλινική διάγνωση χωρίς ακτινογραφία, οξυγόνωση, αποσυμπίεση από εξουσιοδοτημένο) συμφωνεί.",
+   "sources": [
+    {
+     "title": "StatPearls — EMS Pneumothorax",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK482161/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-160",
+   "question": "Αντιμετώπιση εκλαμψίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls Eclampsia: διατήρηση βατού αεραγωγού και αναρρόφηση εκκρίσεων, οξυγόνο 8–10 L/min με μάσκα, πλάγια κατακεκλιμένη θέση, θειικό μαγνήσιο (προτιμώμενο, αντίδοτο ασβέστιο γλυκονικό), αντιϋπερτασικά (στόχος ΣΑΠ 140–160), η εκλαμψία είναι ένδειξη τοκετού. Συμφωνεί· λείπουν η ροή οξυγόνου, η αναρρόφηση και ο κίνδυνος τοξικότητας Mg.",
+   "sources": [
+    {
+     "title": "StatPearls — Eclampsia",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK554392/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Φάρμακα εκλαμψίας: κλινικός/ελληνικό πρωτόκολλο."
+  },
+  {
+   "id": "EOP-B-161",
+   "question": "Αντιμετώπιση ανοιχτού πνευμοθώρακα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: προτιμώνται αεριζόμενες (vented) ή βαλβιδωτές αποφρακτικές επιθέσεις θώρακα· παραδοσιακά επίθεμα με ταινία σε 3 πλευρές· η πλήρης σφράγιση χωρίς εξαερισμό μπορεί να προκαλέσει πνευμοθώρακα υπό τάση (έτοιμη αποσυμπίεση). MSD: επίθεμα κλεισμένο με ταινία σε 3 μόνο πλευρές, θωρακοστομία όταν σταθεροποιηθεί ο ασθενής. Η απάντηση συμφωνεί (παρακολούθηση για υπό τάση, εξειδικευμένα επιθέματα κατά πρωτόκολλο). Ο ισχυρισμός για το NICE NG39 δεν επαληθεύτηκε.",
+   "sources": [
+    {
+     "title": "StatPearls — EMS Pneumothorax",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK482161/"
+    },
+    {
+     "title": "MSD — Open pneumothorax",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/thoracic-trauma/pneumothorax-open"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επίθεμα θώρακα (3 ή 4 πλευρές/vented): κατά πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-162",
+   "question": "GCS οδηγού σε σύγκρουση και ακινητοποίηση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (τραύμα)",
+   "certainty": "υψηλή για το GCS, χαμηλή για το (β)",
+   "checkedAt": "2026-10-31",
+   "findings": "(α) E2+V2+M5=9 — σωστό. (β) Η ερώτηση ζητά ΣΥΓΚΕΚΡΙΜΕΝΟ μέσο ακινητοποίησης· η απάντηση λέει «σύγχρονο κατάλληλο σύστημα» χωρίς να το κατονομάζει (π.χ. κολάρο και διαιρούμενο φορείο/στρώμα κενού). RCUK First Aid 2025 αναφέρει ότι τα κολάρα/συσκευές περιορισμού κίνησης είναι επιλεκτική χρήση από εξειδικευμένους κατά το πρωτόκολλό τους. Οι πηγές NICE NG41/NG39 δεν άνοιξαν.",
+   "suggestedChange": "Κατονόμαση του μέσου σύμφωνα με το πρωτόκολλο ΕΚΑΒ και αιτιολόγηση (μειωμένη συνείδηση, μηχανισμός).",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    },
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επιλογή μέσου ακινητοποίησης σε τραύμα: πρωτόκολλο ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-163",
+   "question": "Σημεία υποογκαιμικού shock.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls (ATLS): ταχυκαρδία, ταχύπνοια, αλλοίωση συνείδησης, μειωμένη διούρηση, καθυστερημένη τριχοειδική επαναπλήρωση, ψυχρά άκρα· υπόταση όψιμη (κλάση 3–4)· η ΑΠ/καρδιακή συχνότητα «cannot be relied upon as the sole means of diagnosis». Συμφωνεί.",
+   "sources": [
+    {
+     "title": "StatPearls — Hemorrhagic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470382/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-164",
+   "question": "GCS: μάτια στον πόνο, ακατάλληλες λέξεις, αποτραβιέται.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Έλεγχος αθροίσματος: E2+V3+M4=9, όσο και η απάντηση (9). Οι περιγραφές της κλίμακας (μάτια: αυθόρμητα/σε ήχο/σε πίεση/καθόλου· λεκτική: προσανατολισμένος/συγχυσμένος/λέξεις/ήχοι/καθόλου· κινητική: υπακούει/εντοπίζει/φυσιολογική κάμψη/ανώμαλη κάμψη/έκταση/καθόλου) επιβεβαιώνονται από το glasgowcomascale.org· ο βαθμός ανά περιγραφή (1–4, 1–5, 1–6) είναι η καθιερωμένη βαθμολόγηση και δεν αναγράφεται αριθμητικά στη σελίδα. ",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-165",
+   "question": "Κοιλιακή ταχυκαρδία με σφυγμό.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck: κοιλιακή ταχυκαρδία = ευρύ QRS· «Assume a regular, wide-complex tachyarrhythmia is VT until proven otherwise». Η σελίδα που ανοίχτηκε δεν περιγράφει θεραπεία. Η σελίδα Merck για VT και το NICE CG95 δεν άνοιξαν. Η απάντηση (ΗΚΓ/monitor, συγχρονισμένη καρδιοανάταξη σε αστάθεια, όχι ως άσφυγμη) είναι συμβατή με την καθιερωμένη πρακτική αλλά δεν επαληθεύτηκε από πηγή.",
+   "sources": [
+    {
+     "title": "Merck — Overview of arrhythmias",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/overview-of-arrhythmias"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Αντιμετώπιση VT με σφυγμό (ηλεκτρική ανάταξη, φάρμακα): κλινικός έλεγχος."
+  },
+  {
+   "id": "EOP-B-166",
+   "question": "Ορισμός και τύποι ταχυκαρδίας.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (εναλλακτική πηγή· η παραπομπή NICE CG95 δεν άνοιξε και δεν αφορά αρρυθμίες): ταχυαρρυθμία >100/min σε ενήλικο σε ηρεμία· φλεβοκομβική, κολπική μαρμαρυγή, κολπικός πτερυγισμός, υπερκοιλιακή (AVNRT/AVRT), κοιλιακή. Συμφωνεί με την απάντηση.",
+   "sources": [
+    {
+     "title": "Merck — Overview of arrhythmias",
+     "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/overview-of-arrhythmias"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Αντικατάσταση παραπομπής NICE CG95 με πηγή αρρυθμιών."
+  },
+  {
+   "id": "EOP-B-167",
+   "question": "Αντιμετώπιση στέρησης αλκοόλ.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (φάρμακο)",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: βενζοδιαζεπίνες «mainstay of therapy»· διαζεπάμη/λοραζεπάμη· θειαμίνη 100 mg IV για πρόληψη Wernicke· σοβαρή στέρηση/DT σε ΜΕΘ. Η απάντηση συμφωνεί στη βενζοδιαζεπίνη αλλά δεν αναφέρει θειαμίνη.",
+   "sources": [
+    {
+     "title": "Merck — Alcohol toxicity and withdrawal",
+     "url": "https://www.merckmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Φαρμακευτική αγωγή στέρησης: κλινικός."
+  },
+  {
+   "id": "EOP-B-168",
+   "question": "Κλινική εικόνα στέρησης αλκοόλ.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: τρόμος, εφίδρωση, κεφαλαλγία, γαστρεντερικά (6 ώρες)· σπασμοί 6–48 ώρες· ψευδαισθήσεις 12–24 ώρες· DT 48–72 ώρες με σύγχυση και αυτόνομη υπερδραστηριότητα. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "Merck — Alcohol toxicity and withdrawal",
+     "url": "https://www.merckmanuals.com/professional/special-subjects/illicit-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-169",
+   "question": "Κωλικός νεφρού/ουρητήρα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: πόνος από τη γωνία πλευροσπονδυλίου προς τη βουβωνική/όρχι, κωλικοειδής, ανησυχία, ναυτία/έμετος, αιματουρία (~85%)· πρώτης γραμμής NSAIDs. Συμφωνεί. Πυρετός/σήψη/ανουρία ως σημεία κινδύνου είναι κλινικά ορθά αλλά δεν αναφέρονται στο απόσπασμα.",
+   "sources": [
+    {
+     "title": "StatPearls — Acute renal colic",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK431091/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-170",
+   "question": "Που και πώς τοποθετείτε το ασθενοφόρο στη σκηνή τροχαίου;",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Πρωτόκολλο (σελ. 6): αν το ασθενοφόρο είναι το πρώτο όχημα έκτακτης ανάγκης, τοποθετείται πίσω από το σημείο σύγκρουσης σε γωνία 20°–30° για προστασία διασωστών/τραυματιών· αν υπάρχουν αστυνομία/πυροσβεστική, αυτά μπαίνουν πίσω από το σημείο και το ασθενοφόρο μπροστά· όλα τα οχήματα στη λωρίδα της σύγκρουσης. Η αποθηκευμένη απάντηση (ασφαλής θέση, χωρίς να κλείνει διαδρομές, οδηγίες αστυνομίας/πυροσβεστικής, προστασία ζώνης εργασίας) είναι συμβατή αλλά λιγότερο συγκεκριμένη από το ελληνικό κείμενο (γωνία 20–30°).",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), Προαιρετικά: προσθήκη της γωνίας 20–30° και της σειράς οχημάτων του ελληνικού πρωτοκόλλου. — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "σελ. 6"
+  },
+  {
+   "id": "EOP-B-171",
+   "question": "Προσέγγιση ασθενοφόρου σε πτητικό μέσο",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "EMRS SG004 v2 (2021): προσέγγιση μόνο μετά από ένδειξη (thumbs-up) πιλότου, από μπροστά (τόξο 10–2), ποτέ από πίσω/ουρά, ασφάλιση χαλαρών αντικειμένων, προσοχή στους ρότορες. Άλλη πηγή (Metro Life Flight) λέει προσέγγιση από το πλάι σε ορθή γωνία — άρα η κατεύθυνση ορίζεται από το πλήρωμα/πιλότο. Η αποθηκευμένη απάντηση συμφωνεί στα βασικά (άδεια, όχι ουρά). Δεν εξετάστηκε ελληνικό (ΕΚΑΒ/ΠΑ) πρωτόκολλο.",
+   "sources": [
+    {
+     "title": "EMRS Scotland SG004 — Approaching and working around helicopters v2 (1/6/2021)",
+     "url": "https://www.emrsscotland.org/s/SG004-y7m9.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-172",
+   "question": "Απαραίτητος εξοπλισμός αεροδιακομιδής",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. AoA/NACCS 2019 και ICS/FICM 2019: φορητός αναπνευστήρας με συναγερμό, μόνιτορ (ΗΚΓ, ΑΠ, SpO₂, EtCO₂), ΑΒΜ, υλικά αεραγωγού, απινιδωτής, αναρρόφηση, αντλίες, εφεδρικές μπαταρίες· οξυγόνο: εφεδρεία ≥1 ώρα ή διπλάσιος του αναμενόμενου χρόνου. EN 13718-1/-2 και EASA SPA.HEMS.110: ο εξοπλισμός πρέπει να είναι αεροπορικά εγκεκριμένος και η εγκατάστασή του πιστοποιημένη. Η αποθηκευμένη απάντηση συμφωνεί αλλά δεν αναφέρει αεροπορική πιστοποίηση, κανόνα εφεδρείας Ο₂, επιπτώσεις υψομέτρου (πνευμοθώρακας, αεροθάλαμος τραχειοσωλήνα) και προστασία ακοής. Η ΚΥΑ ΦΕΚ Β' 2982/2025 δεν έχει αναλυτική λίστα· παραπέμπει σε Εθνικό Σχέδιο που δεν ανακτήθηκε.",
+   "sources": [
+    {
+     "title": "ICS/FICM — Transfer of the critically ill adult (2019)",
+     "url": "https://www.ficm.ac.uk/sites/ficm/files/documents/2021-10/Transfer_of_Critically_Ill_Adult.pdf"
+    },
+    {
+     "title": "AoA/NACCS — Safe transfer of the brain-injured patient (2019)",
+     "url": "https://www.wyccn.org/uploads/6/5/1/9/65199375/aa_safe_transfer_of_teh_brain_injured_patient_trauma___stroke_2019.pdf"
+    },
+    {
+     "title": "EN 13718-2 (πεδίο εφαρμογής)",
+     "url": "https://standards.iteh.ai/catalog/standards/cen/e9157260-0a3b-4d70-82b2-1c419a096275/en-13718-2-2015a1-2020"
+    },
+    {
+     "title": "ΚΥΑ ΦΕΚ Β' 2982/2025",
+     "url": "https://dailypharmanews.gr/wp-content/uploads/2025/06/fek_b_2982_2025-1.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη: αεροπορικά εγκεκριμένος εξοπλισμός, εφεδρεία Ο₂ (≥1 ώρα ή διπλάσιος χρόνος), μέτρα υψομέτρου, προστασία ακοής, εκπαιδευμένο προσωπικό.",
+   "clinicalNote": "Επιβεβαίωση με τη λίστα του Εθνικού Σχεδίου Αεροδιακομιδών/ΕΚΑΒ."
+  },
+  {
+   "id": "EOP-B-173",
+   "question": "Υπολογισμός Ο2 για διακομιδή 3 ωρών με αναπνευστήρα (600 mL × 15/min).",
+   "verdict": "consistent",
+   "risk": "υψηλός (διακομιδή)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Αριθμητικός έλεγχος: 0,6 L × 15 = 9 L/min· × 180 min = 1.620 L — συμφωνεί με την απάντηση. Hamilton Medical: κατανάλωση O2 = (ExpMinVol + base flow + MVleak) × (FiO2% − 20,9)/79,1· παράδειγμα 5,93 L/min, 712 L για 120 min, «actual consumption may be higher». Η απάντηση σωστά προειδοποιεί ότι το 1.620 L δεν είναι ασφαλής υπολογισμός (bias flow, διαρροές, FiO2, εφεδρεία). Σε FiO2 100% ο τύπος δίνει MV + base flow.",
+   "sources": [
+    {
+     "title": "Hamilton Medical — Calculating oxygen consumption",
+     "url": "https://www.hamilton-medical.com/Resource-center/Article-page~knowledge-base~c1b09f7f-3224-45b9-aa12-4cfd37e6d5ff~Calculating-oxygen-consumption-for-Hamilton-Medical-ventilators~.html"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-174",
+   "question": "Απαραίτητος εξοπλισμός διακομιδής",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-11-01",
+   "findings": "Σημ.: η πηγή προήλθε από ερευνητική αναφορά (1/11/2026)· δεν ανακτήθηκε πλήρως από τον Claude. EN 1789:2020+A1:2023 ορίζει τύπους ασθενοφόρου (A1/A2, B, C) και λίστα εξοπλισμού (το πλήρες κείμενο είναι επί πληρωμή, ελέγχθηκε μόνο το πεδίο εφαρμογής)· οι τεχνικές προδιαγραφές ΕΚΑΒ παραπέμπουν σε EN 1789 τύπου B και EN 1865 (φορεία). ICS/FICM 2019: ασφαλής στερέωση όλου του φορητού εξοπλισμού, έλεγχος πριν την αναχώρηση. Η αποθηκευμένη απάντηση συμφωνεί· λείπει η σύνδεση με τον τύπο ασθενοφόρου και η στερέωση εξοπλισμού.",
+   "sources": [
+    {
+     "title": "EN 1789:2020 (iTeh)",
+     "url": "https://standards.iteh.ai/catalog/standards/cen/667cd080-7755-45fc-a462-7305ecc7a2eb/en-1789-2020"
+    },
+    {
+     "title": "ΕΚΑΒ — Τεχνικές προδιαγραφές ασθενοφόρων",
+     "url": "https://www.ekab.gr/files/2017/06/asth_tech_pro_BC.pdf"
+    },
+    {
+     "title": "ICS/FICM — Transfer of the critically ill adult (2019)",
+     "url": "https://www.ficm.ac.uk/sites/ficm/files/documents/2021-10/Transfer_of_Critically_Ill_Adult.pdf"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη: ο ελάχιστος εξοπλισμός εξαρτάται από τον τύπο ασθενοφόρου (EN 1789 B/C)· ασφαλής στερέωση όλου του εξοπλισμού.",
+   "clinicalNote": "Επιβεβαίωση με την ισχύουσα λίστα εξοπλισμού ΕΚΑΒ ανά τύπο ασθενοφόρου."
+  },
+  {
+   "id": "EOP-B-175",
+   "question": "Τι εκτιμά η GCS και ποιες οι παράμετροι.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα επιβεβαιώνει τρεις παραμέτρους (μάτια, λεκτική, κινητική) και εύρος σκορ 3–15. Συμφωνεί με την απάντηση. Οι περιορισμοί (π.χ. διασωλήνωση) και η καταγραφή υποκλιμάκων δεν αναφέρονται στην fetched σελίδα· είναι καθιερωμένη πρακτική.",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-176",
+   "question": "GCS σε παιδιά < 4 ετών.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα glasgowcomascale.org που ελέγχθηκε δεν περιέχει σημείωση για παιδιά. Η απάντηση (αναπτυξιακή προσαρμογή της λεκτικής απόκρισης) είναι κλινικά εύλογη (υπάρχει παιδιατρική GCS) αλλά δεν στηρίζεται από την παραπομπή. Η απάντηση δεν δίνει τις συγκεκριμένες διαφορές (π.χ. V5 = κοχλάζει/χαμογελά, V4 = κλαίει αλλά παρηγορείται).",
+   "suggestedChange": "Παραπομπή σε παιδιατρική GCS και ένταξη του πίνακα των διαφορών.",
+   "sources": [
+    {
+     "title": "Glasgow Coma Scale — what is GCS",
+     "url": "https://www.glasgowcomascale.org/what-is-gcs/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-177",
+   "question": "Αίτια ανισοκορίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "χαμηλή-μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: ασυμμετρία κορών στο οξύ υποσκληρίδιο και διαστολή με απώλεια αντίδρασης στον εγκολεασμό. Τα υπόλοιπα αίτια της απάντησης (φυσιολογική, Horner, III συζυγία, φάρμακα) είναι κλασικά αλλά δεν υπάρχουν στη σελίδα.",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-178",
+   "question": "Τι προκαλεί η δηλητηρίαση από κυανίδια (CN).",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: PDF ΙΕΚ ΕΚΑΒ 2017 που παρείχε ο χρήστης· παλαιότερο από τις διεθνείς οδηγίες 2025.) Πρωτόκολλο εγκαύματος αεραγωγού (σελ. 18–19): υπενθυμίζει την πιθανή τοξική δηλητηρίαση από CO και κυανίδια και αναφέρει αντιμετώπιση με υδροξυκοβαλαμίνη 5 g IV (επαναλαμβάνεται μία φορά) και διττανθρακικά IV. Συμφωνεί με το αντίδοτο της απάντησης (υδροξοκοβαλαμίνη από αρμόδια ομάδα). Ο μηχανισμός (αναστολή κυτοχρωμικής οξειδάσης) δεν περιγράφεται στο σημείο που διαβάστηκε και δεν επαληθεύτηκε εδώ.",
+   "sources": [
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (επικαιροποίηση Οκτώβριος 2017), σελ. 18–19 — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/modules/document/file.php/173/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1%20%CE%94%20%CE%95%CE%9E%CE%91%CE%9C%CE%97%CE%9D%CE%9F%CE%A51.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-179",
+   "question": "Ελάχιστο O2 για διακομιδή 3 ωρών με 15 L/min.",
+   "verdict": "consistent",
+   "risk": "υψηλός (διακομιδή)",
+   "certainty": "υψηλή (αριθμητικός έλεγχος)",
+   "checkedAt": "2026-10-31",
+   "findings": "Αριθμητικός έλεγχος: 15 L/min × 180 min = 2.700 L — συμφωνεί. Η απάντηση σωστά δεν αποφαίνεται για αριθμό φιαλών χωρίς πίεση πλήρωσης/εφεδρεία. Η παραπομπή (BTS doi) δεν άνοιξε και δεν χρειάζεται για τον υπολογισμό.",
+   "sources": [
+    {
+     "title": "Αριθμητικός υπολογισμός (όχι εξωτερική πηγή)",
+     "url": "https://doi.org/10.1136/THORAXJNL-2016-209729"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-180",
+   "question": "Νεφρικός κωλικός — εντόπιση, κλινική εικόνα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ξεκινά στη γωνία πλευροσπονδυλίου και ακτινοβολεί προς τη βουβωνική/όρχι, ναυτία/έμετος, αιματουρία σε ~85%. Συμφωνεί· πυρετός/ανουρία ως υψηλού κινδύνου δεν αναφέρονται.",
+   "sources": [
+    {
+     "title": "StatPearls — Acute renal colic",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK431091/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-181",
+   "question": "Αναζωογόνηση νεογνού ERC/RCUK 2025.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Συμφωνεί με RCUK 2025 newborn: 5 εμφυσήσεις (2–3 s), αρχή συμπιέσεων μόνο αν HR <60 μετά ≥30 s αποτελεσματικού αερισμού, 3:1 (90+30/min), 100% O2 στις συμπιέσεις, επανεκτίμηση ανά 30 s, θερμοκρασία 36,5–37,5°C. Κενά: αρχική συγκέντρωση O2 (21% ≥32 εβδ., ≥30% <32 εβδ.), πίεση εμφύσησης 30/25 cmH2O, ξήρανση/μεμβράνη για πρόωρα. Το «~30 αναπνοές/min» κατά τον αερισμό δεν επαληθεύτηκε στη σελίδα.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Newborn",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth"
+    }
+   ],
+   "clinicalReview": true,
+   "suggestedChange": "Προσθήκη αρχικού O2 21%/≥30% και ξήρανσης/πλαστικής μεμβράνης.",
+   "clinicalNote": "Νεογνική ΚΑΡΠΑ: ελληνικό πρωτόκολλο και ρυθμός αερισμού."
+  },
+  {
+   "id": "EOP-B-182",
+   "question": "Ανατομικές διαφορές ενήλικα–παιδιού σε ύπτια ουδέτερη θέση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Airway Management: το μεγάλο ινίο προκαλεί κάμψη της κεφαλής και απόφραξη από τη βάση της γλώσσας· ο λάρυγγας είναι πιο ροστρικά/πρόσθια τοποθετημένος· για ουδέτερη θέση χρειάζεται διπλωμένη πετσέτα ή ρολό στους ώμους. Συμφωνεί με την απάντηση. Δεν αναφέρεται στην απάντηση ότι ο παιδιατρικός αεραγωγός είναι στενότερος στην υπογλωττιδική περιοχή (ενήλικας: γλωττίδα)· «μικρότερη γνάθος» δεν επιβεβαιώθηκε.",
+   "suggestedChange": "Προαιρετικά: προσθήκη στενότερης περιοχής υπογλωττιδικά και διπλωμένης πετσέτας/ρολού στους ώμους.",
+   "sources": [
+    {
+     "title": "StatPearls — Airway Management",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470403/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-183",
+   "question": "APGAR.",
+   "verdict": "consistent_with_gaps",
+   "risk": "χαμηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Η σελίδα RCUK 2025 αναφέρει μόνο «Record APGAR scores, including individual score components» και δεν περιγράφει τη βαθμολόγηση. Η απάντηση (5 παράμετροι, 0–2 η καθεμία, 0–10, 1ο και 5ο λεπτό) είναι η καθιερωμένη κλίμακα αλλά δεν στηρίζεται από τη σελίδα· σωστά τονίζει ότι δεν καθυστερεί την αναζωογόνηση.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Newborn",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/newborn-resuscitation-and-support-transition-infants-birth"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-184",
+   "question": "Πρωτόκολλο ασθματικής κρίσης",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "BTS/SIGN 2019: οξεία βαριά = αδυναμία ολοκλήρωσης πρότασης, RR ≥25, σφύξεις ≥110· απειλητική για τη ζωή = σιωπηλός θώρακας, SpO₂ <92%, κυάνωση, κόπωση/διαταραχή συνείδησης· Ο₂ με στόχο SpO₂ 94–98%, νεφελοποιημένη σαλβουταμόλη 5 mg + ιπρατρόπιο 0,5 mg, πρεδνιζολόνη 40–50 mg, χωρίς ηρεμιστικά. Το ελληνικό πρωτόκολλο ΙΕΚ (2017) είναι γενικό (ABCDE, Ο₂ με μάσκα, οξύμετρο, i.v., monitor, διακομιδή) χωρίς δόσεις. Η αποθηκευμένη απάντηση (σοβαρά σημεία, ανεκτή θέση, SpO₂, ταχεία εισπνεόμενη βρογχοδιαστολή) συμβαδίζει.",
+   "sources": [
+    {
+     "title": "BTS/SIGN 158 asthma (2019) — Management of acute asthma in adults (Right Decisions Scotland)",
+     "url": "https://rightdecisions.scot.nhs.uk/asthma-pathway-bts-nice-sign-sign-244/managing-acute-asthma/management-of-acute-asthma-in-adults/asthma-management-algorithms-for-adults/management-of-acute-asthma-in-adults-in-hospital"
+    },
+    {
+     "title": "ΙΕΚ ΕΚΑΒ — Πρωτόκολλα αντιμετώπισης επειγόντων περιστατικών (2017) — αρχείο που παρείχε ο χρήστης",
+     "url": "https://www.ekab.gr/eclass/"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προαιρετική προσθήκη: στόχος SpO₂ 94–98%, νεφελοποιημένη σαλβουταμόλη (δόση κατά ισχύον πρωτόκολλο)."
+  },
+  {
+   "id": "EOP-B-185",
+   "question": "Συνέπειες διατομής νωτιαίου πάνω από Θ4.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: πάνω από C5 απώλεια νεύρωσης διαφράγματος· πάνω από μέσο θωρακικό επίπεδο απώλεια συμπαθητικού τόνου → νευρογενές shock· διαταραχή θερμορρύθμισης· αυτόνομη δυσαντανακλαστικότητα κυρίως σε βλάβες ≥Θ6. Η σελίδα δεν αναφέρει ειδικά το Θ4. Η απάντηση συμφωνεί στην ουσία· λείπει η αυτόνομη δυσαντανακλαστικότητα.",
+   "sources": [
+    {
+     "title": "StatPearls — Spinal cord injuries",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK560721/"
+    },
+    {
+     "title": "StatPearls — Neurogenic shock",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK459361/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-186",
+   "question": "Άλλοι τραυματισμοί από κατάγματα πλευρών 1-3, 4-9, 10-12 και στέρνου.",
+   "verdict": "needs_clinical_review",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) StatPearls (rib fractures) δεν υποστηρίζει την αντιστοίχιση ανά επίπεδο όπως διατυπώνεται: αναφέρει ότι οι πλευρές 1–3 σπάνε δύσκολα και δηλώνουν σημαντική ενέργεια· κατάγματα κατώτερων πλευρών απαιτούν έλεγχο νεφρού, ήπατος, σπλήνα· πνευμοθώρακας/αιμοθώρακας/θλάση πνεύμονα αναφέρονται ως πιθανές συνοδές κακώσεις γενικά, όχι ανά επίπεδο. Μεγάλα αγγεία/βραχιόνιο πλέγμα δεν αναφέρονται στο άρθρο (αν και διδάσκονται κλασικά, δεν επαληθεύτηκαν εδώ)· το στέρνο δεν ελέγχθηκε. Η απάντηση είναι εύλογη ως διδακτική σχηματοποίηση αλλά δεν τεκμηριώνεται πλήρως.",
+   "suggestedChange": "Να διατυπωθεί ως «συνήθως/ενδεικτικά» και να επιβεβαιωθεί με ATLS ή το εγκεκριμένο σύγγραμμα.",
+   "sources": [
+    {
+     "title": "StatPearls — Rib Fractures",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK541020/"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Επιβεβαίωση κατανομής κακώσεων ανά πλευρά από ATLS/εγκεκριμένο σύγγραμμα."
+  },
+  {
+   "id": "EOP-B-187",
+   "question": "Ποιες είναι οι αρχές ακινητοποίησης μιας εξάρθρωσης για την διακομιδή του ασθενούς;",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Ελληνική πηγή: έντυπο πρώτων βοηθειών ΕΚΑΒ για το κοινό, αρχείο που παρείχε ο χρήστης· δεν είναι επαγγελματικό πρωτόκολλο διασωστών.) Εξάρθρημα: ψυχρά επιθέματα, ακινητοποίηση άρθρωσης με πρόχειρο νάρθηκα, τοποθέτηση σε αναπαυτική θέση, άμεση μεταφορά στο νοσοκομείο, «απαγορεύεται ανάταξη από μη ειδικό ιατρό». Συμφωνεί με την απάντηση (ακινητοποίηση σε ανεκτή θέση, επείγουσα μεταφορά, όχι προνοσοκομειακή ανάταξη). Ο έλεγχος κυκλοφορίας/κινητικότητας/αισθητικότητας πριν και μετά δεν αναφέρεται στο έντυπο (δεν επαληθεύτηκε).",
+   "suggestedChange": "Επαλήθευση με προσβάσιμη πρωτογενή πηγή ή ανθρώπινο έλεγχο.",
+   "sources": [
+    {
+     "title": "ΕΚΑΒ — «Μαθαίνω Πρώτες Βοήθειες - Είμαι ασφαλής» (έντυπο για το κοινό)",
+     "url": "https://www.ekab.gr/files/entypa/EKAB-protes-voithies.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-188",
+   "question": "Αίτια μυδρίασης.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή-μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: διαστολή με απώλεια αντίδρασης στο φως υποδηλώνει εγκολεασμό. Τα φαρμακολογικά/οφθαλμικά αίτια της απάντησης δεν επαληθεύτηκαν εδώ.",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-189",
+   "question": "Κανόνας των εννέα σε ενήλικα και παιδί.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "ACI NSW ενήλικες: κεφαλή 9%, κάθε άνω άκρο 9%, πρόσθιος και οπίσθιος κορμός 18%, κάθε κάτω άκρο 18%, περίνεο/χέρι 1% — συμφωνεί. Παιδιά <9 ετών (ACI): κεφαλή 18%, κάθε κάτω άκρο 14%, με μείωση 1% στην κεφαλή και αύξηση 0,5% σε κάθε κάτω άκρο ανά έτος ζωής· κανόνας παλάμης ≈1%. Η απάντηση δεν δίνει αριθμούς για παιδιά και προτείνει Lund–Browder, που δεν αναφέρεται στη σελίδα.",
+   "sources": [
+    {
+     "title": "ACI NSW — Paediatric burn assessment",
+     "url": "https://aci.health.nsw.gov.au/ecat/paediatric/assessment/burn"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη των παιδιατρικών ποσοστών (κεφαλή 18%, κάτω άκρα 14%)."
+  },
+  {
+   "id": "EOP-B-190",
+   "question": "Αναπνοή Cheyne–Stokes.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: «cyclical episodes of apnea and hyperventilation», πρότυπο crescendo–decrescendo μεταξύ κεντρικών αποπνοιών· συσχέτιση με καρδιακή ανεπάρκεια και εγκεφαλικό. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "StatPearls — Cheyne-Stokes respiration",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK448165/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-191",
+   "question": "Χειρισμοί σε ασθματική κρίση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK First Aid 2025: βοήθεια για χρήση του δικού τους reliever inhaler με spacer αν υπάρχει· ειδική θέση δεν περιγράφεται. Η απάντηση δεν αναφέρει ρητά τον reliever inhaler του ασθενούς.",
+   "sources": [
+    {
+     "title": "RCUK First Aid 2025",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines"
+    }
+   ],
+   "clinicalReview": false,
+   "suggestedChange": "Προσθήκη: υποστήριξη χρήσης του reliever inhaler (με spacer)."
+  },
+  {
+   "id": "EOP-B-192",
+   "question": "Αίτια μη καρδιογενούς πνευμονικού οιδήματος.",
+   "verdict": "consistent_with_gaps",
+   "risk": "μέτριος",
+   "certainty": "χαμηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Η παραπομπή OpenStax (κεφ. 22) δεν περιέχει το θέμα της ερώτησης. Η λίστα (ARDS, εισπνοή τοξικών, τραύμα, εισρόφηση, νευρογενές, αρνητική πίεση) είναι ορθή κλινική γνώση αλλά αναπόδεικτη εδώ.",
+   "sources": [
+    {
+     "title": "OpenStax A&P 2e — ch.22 review",
+     "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-chapter-review"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-193",
+   "question": "Έκτοπος κύηση.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) Merck: εμφύτευση εκτός ενδομητρίου, συχνότερα στη σάλπιγγα· πυελικό άλγος και/ή κολπική αιμορραγία· ρήξη με ξαφνικό έντονο πόνο, συγκοπή, αιμορραγικό shock· υποψία σε κάθε γυναίκα αναπαραγωγικής ηλικίας με πόνο/αιμορραγία/συγκοπή· ασταθής ασθενής → άμεση χειρουργική αντιμετώπιση. Συμφωνεί. Η αμηνόρροια δεν αναφέρεται (η σελίδα λέει ότι ασθενείς με ακανόνιστους κύκλους μπορεί να μην γνωρίζουν ότι είναι έγκυες)· η απάντηση δεν αναφέρει ρητά τη συγκοπή ή την προσοχή στην ψηλάφηση.",
+   "sources": [
+    {
+     "title": "Merck — Ectopic pregnancy",
+     "url": "https://www.merckmanuals.com/professional/gynecology-and-obstetrics/early-pregnancy-disorders/ectopic-pregnancy"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-194",
+   "question": "Κατώτερο πεπτικό και αίτια αιμορραγίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: η αιματοχεσία «συνήθως αντανακλά κατώτερη αιμορραγία» αλλά μπορεί να είναι από ταχεία ανώτερη· η σελίδα δεν ορίζει ούτε εξηγεί τα αίτια της κατώτερης. Οι αιτίες της απάντησης (εκκολπωματική νόσος, αγγειοδυσπλασίες, ΙΦΝΕ, νεοπλάσματα, αιμορροΐδες, ισχαιμική κολίτιδα) είναι κλασικές αλλά αναπόδεικτες εδώ.",
+   "sources": [
+    {
+     "title": "StatPearls — Upper GI bleeding",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470300/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-195",
+   "question": "Ανώτερο πεπτικό και αίτια αιμορραγίας.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ΑΠΕ = αιμορραγία από οισοφάγο, στομάχι ή δωδεκαδάκτυλο, «ιστορικά πάνω από τον σύνδεσμο του Treitz»· συχνότερα: πεπτικό έλκος, οισοφαγίτιδα, γαστροδωδεκαδακτυλίτιδα, κιρσοί· επίσης Mallory–Weiss· αιματέμεση, μέλαινα. Συμφωνεί.",
+   "sources": [
+    {
+     "title": "StatPearls — Upper GI bleeding",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK470300/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-196",
+   "question": "Βλάβες ΚΝΣ που προκαλούν μύση",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "GPnotebook: αίτια μύσης — οπιοειδή, σύνδρομο Horner, Argyll Robertson, ραγοειδίτιδα, βλάβες γέφυρας (pontine). Η αποθηκευμένη απάντηση (συμπαθητική οδός/Horner, γεφυρική βλάβη, οπιοειδή) συμφωνεί· η πηγή αναφέρει «pontine lesions» και όχι ειδικά αιμορραγία.",
+   "sources": [
+    {
+     "title": "GPnotebook — Miosis",
+     "url": "https://gpnotebook.com/en-GB/pages/ophthalmology/miosis"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-197",
+   "question": "Τριάδα Cushing.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: ΕΚΠ >25 mm Hg εκδηλώνεται με υπέρταση με διευρυμένη πίεση παλμού, βραδυκαρδία και αναπνευστική καταστολή (Cushing triad). Συμφωνεί (η απάντηση λέει «ανώμαλος αναπνευστικός ρυθμός»).",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-198",
+   "question": "Σημεία και συμπτώματα οξείας φλεγμονής.",
+   "verdict": "consistent",
+   "risk": "χαμηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Acute Inflammatory Response: πέντε κύρια σημεία — ερυθρότητα, θερμότητα, οίδημα, πόνος, απώλεια λειτουργίας (rubor, calor, tumor, dolor, functio laesa). Συμφωνεί. Ο πυρετός/η κακουχία που αναφέρει η απάντηση ως πιθανά συνοδά δεν αναφέρονται στη συγκεκριμένη σελίδα (κοινή κλινική γνώση, δεν επαληθεύτηκε εδώ).",
+   "sources": [
+    {
+     "title": "StatPearls — Acute Inflammatory Response",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK556083/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-199",
+   "question": "Φυσιολογική αναπνευστική συχνότητα παιδιού 1–2 ετών.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "CDC cheat sheet: 12 μήνες και 2 έτη — αναπνευστική συχνότητα 22–30/min. Συμφωνεί ακριβώς. Η απάντηση σωστά τονίζει ότι δεν είναι καθολικό όριο.",
+   "sources": [
+    {
+     "title": "CDC Stacks 157259 (πίνακας ζωτικών)",
+     "url": "https://stacks.cdc.gov/view/cdc/157259/cdc_157259_DS1.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-200",
+   "question": "Φυσιολογική καρδιακή συχνότητα παιδιού 1–2 ετών.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "CDC cheat sheet: 12 μήνες 110–170/min (μέσος 135), 2 έτη 90–150/min (μέσος 120). Συμφωνεί ακριβώς.",
+   "sources": [
+    {
+     "title": "CDC Stacks 157259 (πίνακας ζωτικών)",
+     "url": "https://stacks.cdc.gov/view/cdc/157259/cdc_157259_DS1.pdf"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-201",
+   "question": "Αντενδείξεις νάρθηκα έλξης μηρού.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) MSD Femoral Traction Splint: ένδειξη κάταγμα διάφυσης μηριαίου· αντενδείξεις κάταγμα πυέλου, ομόπλευρο κάταγμα αστραγάλου/άκρου ποδός/κνήμης και ομόπλευρη κάκωση γόνατος. Συμφωνεί με την απάντηση (πύελος, γόνατο, κνήμη, ποδοκνημική). Το ισχίο δεν αναφέρεται ρητά στο MSD· η απάντηση σωστά παραπέμπει στις οδηγίες (IFU) της κάθε συσκευής.",
+   "sources": [
+    {
+     "title": "MSD — How to Apply a Femoral Traction Splint",
+     "url": "https://www.merckmanuals.com/professional/injuries-poisoning/how-to-splint-or-immobilize-a-lower-limb/how-to-apply-a-femoral-traction-splint"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-202",
+   "question": "Εσωτερική απώλεια αίματος ανά κάταγμα.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Clinician.com (Damage Control Resuscitation): πλευρό 125 mL, κερκίδα/ωλένη 250–500, βραχιόνιο 500–750, κνήμη/περόνη 500–1000, μηριαίο 1000–2000, πύελος 1000+. Συμφωνούν ακριβώς με τις τιμές της απάντησης, που σωστά δηλώνει ότι είναι τάξεις μεγέθους.",
+   "sources": [
+    {
+     "title": "Clinician.com — Damage control resuscitation",
+     "url": "https://www.clinician.com/articles/135668-damage-control-resuscitation"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-203",
+   "question": "Φωτεινό διάστημα.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) MSD: «the period without symptoms is the so-called lucid interval» (επισκληρίδιο αιμάτωμα). Συμφωνεί.",
+   "sources": [
+    {
+     "title": "MSD Manual — Traumatic brain injury",
+     "url": "https://www.msdmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-204",
+   "question": "Δόση εφόδου υγρών σε υποογκαιμικό shock παιδιού.",
+   "verdict": "consistent",
+   "risk": "υψηλός (παιδιατρικό, υγρά)",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "RCUK Paediatric 2025: 10 mL/kg και επανεκτίμηση μετά από κάθε bolus· αιμορραγικό shock: ελαχιστοποίηση κρυσταλλοειδών (μέγιστο 20 mL/kg). Συμφωνεί πλήρως.",
+   "sources": [
+    {
+     "title": "RCUK/ERC 2025 Paediatric",
+     "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/paediatric-basic-life-support-guidelines"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Δόσεις υγρών σε παιδιά: τελική έγκριση από κλινικό."
+  },
+  {
+   "id": "EOP-B-205",
+   "question": "Πολύ βαθιά προώθηση τραχειοσωλήνα.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός (αεραγωγός)",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "StatPearls: «right mainstem intubation is common when an endotracheal tube is inserted blindly beyond the carina»· αερισμός ενός πνεύμονα → υποξαιμία λόγω shunt (ενδεικτικά έως 50% θεωρητικά). Η σελίδα δεν εξετάζει ρητά τον απλό τραχειοσωλήνα· ο σύνδεσμος με υποξία είναι συμπέρασμα. Η απάντηση (δεξιός κύριος βρόγχος, υποαερισμός/ατελεκτασία αριστερά, έλεγχος θέσης/ETCO2) είναι συμβατή.",
+   "sources": [
+    {
+     "title": "StatPearls (NBK555933)",
+     "url": "https://www.ncbi.nlm.nih.gov/books/NBK555933/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-206",
+   "question": "Κλινική εικόνα υπεργλυκαιμίας.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "μέτρια-υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (εναλλακτική πηγή· η παραπομπή WHO BEC δεν είναι αναγνώσιμη): DKA — υπεργλυκαιμία, κετόνες, οξέωση· ναυτία, έμετος, κοιλιακό άλγος, λήθαργος/υπνηλία, υπόταση, ταχυκαρδία, Kussmaul, οσμή ακετόνης. Συμφωνεί. Πολυουρία/πολυδιψία/θολή όραση της απάντησης είναι τα κλασικά συμπτώματα υπεργλυκαιμίας (ο ορισμός «symptoms of hyperglycemia» αναφέρεται, χωρίς λίστα).",
+   "sources": [
+    {
+     "title": "Merck — Acute complications of diabetes (DKA)",
+     "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-207",
+   "question": "Προνοσοκομειακή αντιμετώπιση υπεργλυκαιμίας.",
+   "verdict": "consistent_with_gaps",
+   "risk": "υψηλός",
+   "certainty": "μέτρια",
+   "checkedAt": "2026-10-31",
+   "findings": "Merck (νοσοκομειακή αντιμετώπιση DKA): ταχεία ενδοφλέβια χορήγηση 1–1,5 L NaCl 0,9% την 1η ώρα, ινσουλίνη 0,1 U/kg/ώρα ΜΟΝΟ μετά έλεγχο καλίου (≥3,3 mmol/L), αντικατάσταση καλίου. Η απάντηση σωστά λέει ότι υγρά/ινσουλίνη δεν χορηγούνται αυθαίρετα από πλήρωμα και θέλουν έλεγχο ηλεκτρολυτών/κετονών, αλλά δεν αναφέρει ρητά τον κίνδυνο υποκαλιαιμίας με ινσουλίνη.",
+   "sources": [
+    {
+     "title": "Merck — Acute complications of diabetes (DKA)",
+     "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-hypoglycemia/acute-complications-of-diabetes-mellitus"
+    }
+   ],
+   "clinicalReview": true,
+   "clinicalNote": "Προνοσοκομειακά υγρά σε DKA: ρόλος διασώστη."
+  },
+  {
+   "id": "EOP-B-208",
+   "question": "Παράγοντες απώλειας θερμότητας.",
+   "verdict": "consistent",
+   "risk": "μέτριος",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή· η αρχική παραπομπή δεν ήταν προσβάσιμη.) StatPearls: ακτινοβολία (~60%), εξάτμιση (~22%), αγωγή και συναγωγή (~15%)· το νερό άγει θερμότητα 100 φορές πιο γρήγορα από τον αέρα. Συμφωνεί. Η αναπνευστική απώλεια θερμότητας είναι μέρος της εξάτμισης.",
+   "sources": [
+    {
+     "title": "StatPearls — Physiology, heat loss",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK541107/"
+    }
+   ],
+   "clinicalReview": false
+  },
+  {
+   "id": "EOP-B-209",
+   "question": "Σκοποί τραχειοβρογχικής αναρρόφησης.",
+   "verdict": "consistent",
+   "risk": "υψηλός",
+   "certainty": "υψηλή",
+   "checkedAt": "2026-10-31",
+   "findings": "(Εναλλακτική πηγή.) StatPearls Airway Suctioning: σκοπός η διατήρηση βατότητας και η απομάκρυνση εκκρίσεων/ορατής εισρόφησης που δεν αποβάλλονται· ενδείκνυται σε τεχνητούς αεραγωγούς, μειωμένη συνείδηση, νευρομυϊκή νόσο, υπερέκκριση. Επιπλοκές: υποξαιμία, αρρυθμία/βραδυκαρδία, τραυματισμός βλεννογόνου, βρογχόσπασμος, λοίμωξη. Συμφωνεί με την απάντηση (κίνδυνοι υποξαιμίας, τραυματισμού, αρρυθμίας).",
+   "sources": [
+    {
+     "title": "StatPearls — Surgical Airway Suctioning",
+     "url": "https://www.ncbi.nlm.nih.gov/sites/books/NBK448077/"
+    }
+   ],
+   "clinicalReview": false
+  }
+ ]
+}
