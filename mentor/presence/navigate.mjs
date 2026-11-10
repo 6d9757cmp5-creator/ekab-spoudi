@@ -12,7 +12,7 @@ export const ROUTES=Object.freeze([
  {label:"Πιστοποίηση ΕΟΠΠΕΠ",href:"eoppep.html",keywords:["εοππεπ"]},
  {label:"Προετοιμασία σεμιναρίων",href:"seminar-prep.html",keywords:["σεμιναρ"]},
  {label:"Εργαστήριο ATLA",href:"mentor-lab.html",keywords:["εργαστηρι"]},
- {label:"Πρακτική Εξέταση ΕΟΠΠΕΠ",href:"practical_exam.html",keywords:["πρακτικ","προσομοιωση"]},
+ {label:"Πρακτική Εξέταση ΕΟΠΠΕΠ",href:"practical_exam.html",keywords:["πρακτικ"]},
  {label:"Προφορική εξάσκηση",href:"mentor-oral.html",keywords:["προφορικ"]},
  {label:"Βιβλιογραφία ATLA",href:"mentor-library.html",keywords:["βιβλιογραφι","πηγες"]},
  {label:"Χρήσιμα τηλέφωνα",href:"contacts.html",keywords:["τηλεφων","επαφες"]},
