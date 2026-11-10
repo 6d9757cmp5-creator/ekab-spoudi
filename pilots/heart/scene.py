@@ -77,7 +77,8 @@ bpy.context.collection.objects.link(cam);bpy.context.scene.camera=cam
 cam.location=(4,-5,2.2);aim(cam,(0,0,0))
 cam.data.type='ORTHO';cam.data.ortho_scale=4.45
 scene=bpy.context.scene
-scene.render.engine='CYCLES';scene.cycles.samples=8
+scene.render.engine='CYCLES';scene.cycles.samples=12
+bpy.context.view_layer.cycles.use_denoising=False # Ubuntu's Blender package omits OpenImageDenoiser
 scene.render.threads_mode='FIXED';scene.render.threads=4
 scene.render.resolution_x=720;scene.render.resolution_y=720;scene.render.resolution_percentage=100
 scene.render.image_settings.file_format='PNG'
