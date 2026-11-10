@@ -48,7 +48,7 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
         <output id="score">0 / 0 σωστά</output>
       </div>
       <div class="monitor">
-        <div class="monitor-heading"><span>ECG · II</span><span>25 mm/s · 10 mm/mV</span></div>
+        <div class="monitor-heading"><span>ECG · II</span><span>Σχηματική κλίμακα · 25 mm/s · 10 mm/mV</span></div>
         <canvas id="trace" role="img" aria-label="Κυλιόμενη συνθετική κυματομορφή ΗΚΓ απαγωγής II"></canvas>
       </div>
       <div class="quiz-controls">
@@ -59,7 +59,7 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
       </div>
       <p id="feedback" role="status">Ξεκίνα για να εμφανιστεί το πρώτο περιστατικό.</p>
     </section>
-    <h2>Καταγραφή 12 απαγωγών</h2>
+    <h2>Προβολή καταγραφής 12 απαγωγών</h2>
     <section aria-label="Ρυθμίσεις καταγραφής" class="controls">
       <label>Αρχείο καταγραφής JSON <input id="recording" type="file" accept=".json,application/json"></label>
       <label>Ταχύτητα <select id="speed"><option value="25">25 mm/s</option><option value="50">50 mm/s</option></select></label>
@@ -67,6 +67,7 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
       <label>Λωρίδα ρυθμού <select id="rhythm"></select></label>
     </section>
     <p role="status" id="status">Επίλεξε καταγραφή 10 δευτερολέπτων.</p>
+    <p>Η προβολή JSON δεν ερμηνεύει κλινικά το ΗΚΓ. Χρησιμοποίησε μόνο καταγραφές που επιτρέπεται να επεξεργαστείς και αφαίρεσε στοιχεία ταυτοποίησης ασθενούς.</p>
     <section id="paper" aria-label="Χαρτί ηλεκτροκαρδιογραφήματος" hidden></section>
   </main>
   <script>
