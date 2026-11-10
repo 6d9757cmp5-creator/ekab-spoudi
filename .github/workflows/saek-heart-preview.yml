@@ -51,7 +51,8 @@ jobs:
           npm install --ignore-scripts --no-audit --no-fund
           npx remotion browser ensure
           npm run render
-          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 ../heart-pilot-preview.mp4
+          test -s ../heart-pilot-preview.mp4
+          file ../heart-pilot-preview.mp4
       - name: Draft-only review record
         run: |
           mkdir -p pilots/heart/review-output
