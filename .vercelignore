@@ -1,0 +1,4 @@
+# Whole medical textbook PDF shards are archival research data, NOT runtime web assets.
+# Prevent a ~1GB scientific archive from being copied into the Vercel deployment.
+tools/atla-ai/knowledge-base/full-books/complete/
+# Only the public bibliography metadata is exposed in the student application.
