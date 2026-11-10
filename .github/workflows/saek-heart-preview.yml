@@ -11,7 +11,7 @@ permissions:
   contents: read
 concurrency:
   group: saek-heart-preview
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   preview:
     name: Isolated draft only (no release)
@@ -21,6 +21,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 1
+          lfs: false
+          sparse-checkout: |
+            pilots/heart
       - name: Install offline render dependencies
         run: |
           sudo apt-get update -qq
