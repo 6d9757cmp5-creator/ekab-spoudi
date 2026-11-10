@@ -26,7 +26,7 @@ const learnerProfile=()=>{try{return canonicalLearnerProfile(localStorage,{sched
 const routes=[
  ['ΣΑΕΚ','saek.html',['σαεκ','μαθημα','κεφαλαι']],
  ['ΕΟΠΠΕΠ','eoppep.html',['εοππεπ','εοπεπ','πιστοποιηση']],
- ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ','προσομοιωτ']],
+ ['Πρακτικό ΕΟΠΠΕΠ','practical_exam.html',['πρακτικο εοππεπ']],
  ['Λεπτομερής εξερεύνηση 3D','ui-tools/anatomy-3d/index.html#models',['βιβλιοθηκη 3d','3d βιβλιοθηκη','3d μοντελα','μοντελα 3d']],
  ['ATLA Anatomy Lab','ui-tools/anatomy-3d/index.html',['ανατομι','3d ανατομια']],
  ['Φαρμακολογία','farmaka.html',['φαρμακολογ','φαρμακα']],
@@ -217,7 +217,7 @@ function boot(){
   if(studyInsight){add('mentor',studyInsight,'local');return;}
   const teachingModel=await chooseTeachingModel({question:q,from:location.pathname+location.search+location.hash,
    needsSupport:teachingLevelFor(learnerProfile(),q)==='beginner',
-   mode:/(?:^|\/)mentor-next\.html$/.test(location.pathname)?'simulation':'lesson'});
+   mode:'lesson'});
   if(myId!==requestId)return;
   // A request to see a model is answered by that model, not by a text search on the words "3D" or "show".
   if(teachingModel?.requestedVisual&&!demoToggle.checked){
