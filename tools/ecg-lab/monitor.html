@@ -18,6 +18,8 @@ input:focus-visible, select:focus-visible { outline: 2px solid #77ded1; outline-
 label:first-child { min-width: 0; }
 #status { color: #b4c8da; }
 #paper { overflow: auto; border-radius: .4rem; background: #fffaf7; }
+#paper:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
+#paper[hidden] + #paper-tip { display: none; }
 svg { display: block; }
 .trainer { background: #192738; padding: clamp(.9rem, 2.4vw, 1.8rem); border: 1px solid #395169; border-radius: .75rem; margin-bottom: 2.5rem; }
 .trainer h2, .trainer p { margin-block: 0 .55rem; }
@@ -69,7 +71,8 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
     </section>
     <p role="status" id="status">Επίλεξε καταγραφή 10 δευτερολέπτων.</p>
     <p>Η προβολή JSON δεν ερμηνεύει κλινικά το ΗΚΓ. Χρησιμοποίησε μόνο καταγραφές που επιτρέπεται να επεξεργαστείς και αφαίρεσε στοιχεία ταυτοποίησης ασθενούς.</p>
-    <section id="paper" aria-label="Χαρτί ηλεκτροκαρδιογραφήματος" hidden></section>
+    <section id="paper" tabindex="0" aria-label="Χαρτί ηλεκτροκαρδιογραφήματος. Σε μικρή οθόνη κύλιση οριζόντια για όλες τις απαγωγές" hidden></section>
+    <p id="paper-tip">Σε κινητό ή μικρή οθόνη, σύρε οριζόντια στο χαρτί για να δεις και τις 12 απαγωγές.</p>
   </main>
   <script>
 {
