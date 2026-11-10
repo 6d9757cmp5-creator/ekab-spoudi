@@ -84,7 +84,7 @@ scene.render.image_settings.file_format='PNG'
 scene.render.film_transparent=False
 scene.render.use_file_extension=True
 scene.render.engine='CYCLES'
-scene.view_settings.view_transform='AgX' if 'AgX' in [e.identifier for e in bpy.types.ColorManagedViewSettings.bl_rna.properties['view_transform'].enum_items] else 'Standard'
+scene.view_settings.view_transform='Standard'
 scene.frame_start=1;scene.frame_end=60
 scene.render.fps=10
 # Model rotates smoothly; NO invented heart-beat / valve kinematics.

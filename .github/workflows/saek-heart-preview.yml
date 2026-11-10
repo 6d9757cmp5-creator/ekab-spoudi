@@ -30,6 +30,8 @@ jobs:
         run: |
           mkdir -p pilots/heart/public/render
           xvfb-run -a blender --background --factory-startup --python pilots/heart/scene.py -- "$PWD" "$PWD/pilots/heart/public/render" > /tmp/blender-preview.log 2>&1 || { tail -100 /tmp/blender-preview.log; exit 1; }
+          tail -100 /tmp/blender-preview.log
+          echo "Rendered frames: $(find pilots/heart/public/render -type f -name 'frame_*.png' | wc -l)"
           test "$(find pilots/heart/public/render -type f -name 'frame_*.png' | wc -l)" -eq 60
       - uses: actions/setup-node@v4
         with:
