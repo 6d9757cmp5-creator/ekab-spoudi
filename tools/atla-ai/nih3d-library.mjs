@@ -4,7 +4,7 @@
  * Nothing selected is clinically approved, and nothing here touches progress or grading.
  */
 export const LIBRARY_PATH='tools/atla-ai/resources/model-library.json';
-const VIEWER_PATH='ui-tools/atla-resource-preview.html';
+const VIEWER_PATH='ui-tools/anatomy-3d/index.html';
 const SURFACES=new Set(['lesson','anatomy','exam','cockpit','atla']);
 const LESSON_LIMIT=12;
 export const simplify=value=>String(value??'').normalize('NFD').replace(/\p{M}/gu,'')

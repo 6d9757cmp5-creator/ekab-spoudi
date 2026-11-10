@@ -13,3 +13,7 @@ html[data-theme="dark"] .eoppep-hub .eop-shortcuts small{color:#c2dbe7}
 html[data-theme="dark"] .eoppep-hub .eop-practical{background:#132639;color:#eaf5fb;border-color:#3a5366}
 @media(max-width:570px){.eoppep-hub .eop-shortcuts{gap:7px}.eoppep-hub .eop-shortcuts>a{padding:10px 7px;gap:5px;font-size:.78rem}.eoppep-hub .eop-shortcuts strong{font-size:.74rem}.eoppep-hub .eop-shortcuts small{font-size:.64rem}.eoppep-hub .eop-practical{min-height:70px;padding:13px}.eoppep-hub .eop-practical .hub-action-icon{margin:0}.eoppep-hub .eop-practical .hub-action-arrow{position:static;margin-left:auto}}
 @media(max-width:345px){.eoppep-hub .eop-shortcuts{grid-template-columns:1fr}}
+
+/* Readability (2026-11-10): 4.5:1 contrast. */
+.eoppep-hub .eop-shortcuts small{color:#4f6576}
+html[data-theme="dark"] .eoppep-hub .eop-shortcuts small{color:#c2dbe7}

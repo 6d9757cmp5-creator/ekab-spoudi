@@ -55,3 +55,7 @@ html[data-theme="dark"] .practical-dialog-head button,html[data-theme="dark"] .p
 .practical-audit-summary p{line-height:1.55}
 html[data-theme="dark"] .practical-verified{background:#1d3648;border-color:#385367}
 html[data-theme="dark"] .practical-verified>summary{color:#e9f3f8}
+
+/* Readability (2026-11-10): text at least 12px and 4.5:1 contrast on phones. */
+.practical-page-button span,.practical-video-copy>span{color:#4f6576}
+html[data-theme="dark"] .practical-page-button span,html[data-theme="dark"] .practical-video-copy>span{color:#aec5d6}

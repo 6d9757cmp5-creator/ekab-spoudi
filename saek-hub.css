@@ -106,3 +106,12 @@ html[data-theme="dark"] .saek-hub .course-tile:hover{background:#1c3a50}
 .saek-hub .hub-image-gallery-entry{margin:0 0 18px}
 .saek-hub .hub-image-gallery-entry a{display:inline-flex;align-items:center;min-height:44px;padding:9px 13px;border:1px solid var(--line);border-radius:11px;background:var(--light);font-size:.9rem;font-weight:700;text-decoration:none}
 .saek-hub .hub-image-gallery-entry a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* Readability (2026-11-10): text at least 12px and 4.5:1 contrast on phones. */
+.saek-hub .course-tile-main small,.saek-hub footer,.saek-hub .hub-links a small,.saek-hub .hub-resources>summary small,
+.saek-hub .hub-action-copy small,.saek-hub .hub-semester-tabs button small{font-size:.75rem}
+.saek-hub .hub-semester-tabs button[aria-pressed="true"] small{color:#fff}
+
+/* Readability (2026-11-10): 4.5:1 contrast. */
+.saek-hub .hub-semester-tabs button:not([aria-pressed="true"]) small{color:#4f6576}
+html[data-theme="dark"] .saek-hub .hub-semester-tabs button:not([aria-pressed="true"]) small{color:#bfd5e4}

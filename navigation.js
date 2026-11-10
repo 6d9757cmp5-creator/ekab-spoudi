@@ -9,6 +9,8 @@ const root=()=>document.querySelector('main')||document.body;
 function back(){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign(new URL('./index.html',site).href)}
 function make(tag,cls,label){const n=document.createElement(tag);n.className=cls;n.textContent=label;return n}
 function init(){
+ // A back button already written in the page (no layout jump) only needs its behaviour.
+ for(const b of document.querySelectorAll('button[data-ekab-back]'))if(!b.dataset.ekabBound){b.dataset.ekabBound='1';b.addEventListener('click',back)}
  const spot=document.querySelector('[data-ekab-back-spot]');
  if(!home&&!document.querySelector('[data-ekab-back]')&&(spot||!document.querySelector('header.top .nav'))){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';b.addEventListener('click',back);if(spot){b.classList.add('inline');spot.before(b);if(spot.dataset.ekabBackSpot==='replace')spot.style.display='none'}else root().prepend(b)}
  if(!backOnly&&!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}

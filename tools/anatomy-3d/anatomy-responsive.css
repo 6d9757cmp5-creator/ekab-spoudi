@@ -125,3 +125,6 @@ html { scroll-padding-top:18px; }
 @media(prefers-reduced-motion:reduce) {
   .controls-top button,.viewer-footer>button { transition:none; }
 }
+
+/* Readability (2026-11-10): text at least 12px and 4.5:1 contrast on phones. */
+.item-system,.notice p,.page-footer,.translation-help{font-size:.75rem}
