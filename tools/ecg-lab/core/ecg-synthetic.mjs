@@ -78,6 +78,44 @@ const flutterQrs = regular(150, { p: false });
 const afQrs = irregular([.61, .82, .52, .7, .99, .48, .77, .58, .89, .64, .55, .93, .71, .49, .81, .6, 1.03, .57], { p: false });
 const sinus = regular(76);
 
+/* Simplified timing exercises for AV conduction; still NOT clinical ECG recordings. */
+const modulo = (value, period) => ((value % period) + period) % period;
+function atrialPulseTrain(t, period, phase = 0) {
+  const x = modulo(t - phase, period);
+  return .16 * (gaussian(x, 0, .032) + gaussian(x, period, .032));
+}
+function wenckebach(t) {
+  const atrial = .72, cycle = 4 * atrial;
+  let voltage = 0;
+  for (let cycleIndex = Math.floor(t / cycle)-1; cycleIndex <= Math.floor(t / cycle)+1; cycleIndex++) {
+    for (let i=0;i<4;i++) {
+      const pAt = cycleIndex*cycle + i*atrial;
+      voltage += .16 * gaussian(t,pAt,.032);
+      if (i<3) voltage += beat(t-pAt-[.14,.20,.26][i],{p:false});
+    }
+  }
+  return voltage;
+}
+function mobitzII(t) {
+  const atrial = .72, cycle = 4 * atrial;
+  let voltage = 0;
+  for (let cycleIndex = Math.floor(t / cycle)-1; cycleIndex <= Math.floor(t / cycle)+1; cycleIndex++) {
+    for (let i=0;i<4;i++) {
+      const pAt=cycleIndex*cycle+i*atrial;
+      voltage += .16*gaussian(t,pAt,.032);
+      if(i!==2) voltage += beat(t-pAt-.17,{p:false});
+    }
+  }
+  return voltage;
+}
+const pacedPeriod=60/70;
+function pacedVentricular(t) {
+  const pos=modulo(t+.048,pacedPeriod);
+  const spike=.84*(gaussian(pos,0,.007)+gaussian(pos,pacedPeriod,.007));
+  return regularPaced(t)+spike;
+}
+const regularPaced=regular(70,{p:false,wide:true});
+
 const rhythms = [
   ['sinus', 'Φλεβοκομβικός ρυθμός', 'Σταθερά RR και κύμα P πριν από κάθε στενό QRS.', sinus],
   ['brady', 'Φλεβοκομβική βραδυκαρδία', 'Φλεβοκομβική μορφολογία με κανονικά και αραιά QRS.', regular(44)],
@@ -89,6 +127,29 @@ const rhythms = [
   ['vt', 'Μονόμορφη κοιλιακή ταχυκαρδία', 'Τακτικά, γρήγορα και ευρέα συμπλέγματα ίδιας μορφής. Ο σφυγμός χρειάζεται χωριστή αξιολόγηση.', regular(169, { p: false, wide: true })],
   ['vf', 'Κοιλιακή μαρμαρυγή', 'Χαοτικές διακυμάνσεις χωρίς αναγνωρίσιμα οργανωμένα QRS.', t => .4 * Math.sin(24 * t + 1.2 * Math.sin(3.1 * t)) + .22 * Math.sin(37.7 * t) + .13 * Math.sin(49.1 * t)],
   ['asystole', 'Ασυστολία', 'Απουσία αναγνωρίσιμης κοιλιακής δραστηριότητας σε αυτή τη λωρίδα. Έλεγξε και τη σύνδεση, την ενίσχυση και άλλη απαγωγή.', t => .008 * Math.sin(4 * t)],
-  ['artifact', 'Τεχνικό παράσιτο πάνω σε φλεβοκομβικό ρυθμό', 'Οι αιχμές και η μετατόπιση της γραμμής βάσης συνυπάρχουν με οργανωμένα QRS που συνεχίζουν στον ίδιο ρυθμό.', t => sinus(t) + (.22 + .17 * Math.sin(3.4 * t)) * Math.sin(91 * t) + .18 * Math.sin(5 * t)]
+  ['artifact', 'Τεχνικό παράσιτο πάνω σε φλεβοκομβικό ρυθμό', 'Οι αιχμές και η μετατόπιση της γραμμής βάσης συνυπάρχουν με οργανωμένα QRS που συνεχίζουν στον ίδιο ρυθμό.', t => sinus(t) + (.22 + .17 * Math.sin(3.4 * t)) * Math.sin(91 * t) + .18 * Math.sin(5 * t)],
+
+  ['av1', 'Κολποκοιλιακός αποκλεισμός 1ου βαθμού',
+   'Στο σχηματικό μοτίβο, κάθε P ακολουθείται από QRS με σταθερά παρατεταμένο PR (>200 ms).',
+   t => regular(72,{p:false})(t)+atrialPulseTrain(t,60/72,-.26)],
+  ['wenckebach', 'Κολποκοιλιακός αποκλεισμός 2ου βαθμού Mobitz I',
+   'Σταδιακή επιμήκυνση PR πριν από μη αγόμενη κολπική εκπόλωση P. Πρόσεξε τον κύκλο των 4 P.',
+   wenckebach],
+  ['mobitz2', 'Κολποκοιλιακός αποκλεισμός 2ου βαθμού Mobitz II',
+   'Σταθερό PR στις αγόμενες συστολές και αιφνίδια μη αγόμενη P χωρίς προοδευτική επιμήκυνση.',
+   mobitzII],
+  ['complete-block', 'Πλήρης κολποκοιλιακός αποκλεισμός',
+   'Κύματα P και αργότερα QRS με ανεξάρτητους ρυθμούς. Η μορφή της διαφυγής είναι σχηματική.',
+   t => atrialPulseTrain(t,.70,.12)+regular(42,{p:false,wide:true})(t)],
+  ['junctional', 'Κομβικός ρυθμός διαφυγής (σχηματικός)',
+   'Αργός τακτικός ρυθμός με στενά QRS και χωρίς ορατά P σε αυτή τη σχηματική λωρίδα.',
+   regular(54,{p:false})],
+  ['paced', 'Κοιλιακά βηματοδοτούμενος ρυθμός (σχηματικός)',
+   'Σχηματική στενή αιχμή βηματοδότη πριν από ευρύτερο QRS. Δεν ελέγχεται ηλεκτρική ή μηχανική σύλληψη.',
+   pacedVentricular],
+  ['polymorphic-vt', 'Πολυμορφική κοιλιακή ταχυκαρδία (σχηματική)',
+   'Γρήγορη κυματομορφή με μεταβολή πλάτους και μορφής. Δεν τεκμηριώνει υποτύπο Torsades de pointes.',
+   t => (.55+.36*Math.sin(2*Math.PI*.90*t))*Math.sin(2*Math.PI*5.1*t+.28*Math.sin(2*Math.PI*.6*t))
+     + .13*Math.sin(2*Math.PI*10.2*t)]
 ].map(([id, label, explanation, sample]) => ({ id, label, explanation, sample }));
 export const educationalRhythmCases = Object.freeze(rhythms);
