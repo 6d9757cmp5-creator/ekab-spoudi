@@ -50,17 +50,26 @@
  (function () {
   const frame = document.getElementById('ecg-advanced-frame');
   if (!frame) return;
+  let observer;
   const fit = function () {
    try {
-    const doc = frame.contentDocument;
-    if (!doc || !doc.body) return;
-    const height = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-    if (Number.isFinite(height) && height > 0) frame.style.height = (height + 8) + 'px';
-   } catch (_) { /* The monitor remains usable at its fallback height. */ }
+    const body = frame.contentDocument?.body;
+    if (!body) return;
+    // documentElement.scrollHeight is at least the iframe viewport height.
+    // Reading it here and adding padding can produce an unbounded resize loop.
+    const height = Math.ceil(body.scrollHeight) + 8;
+    if (Number.isFinite(height) && height > 0 && Math.abs(frame.offsetHeight - height) > 2) {
+     frame.style.height = height + 'px';
+    }
+   } catch (_) { /* Use the fallback iframe height when inaccessible. */ }
   };
   frame.addEventListener('load', function () {
    fit();
-   try { new ResizeObserver(fit).observe(frame.contentDocument.documentElement); } catch (_) {}
+   try {
+    observer?.disconnect();
+    observer = new ResizeObserver(fit);
+    observer.observe(frame.contentDocument.body);
+   } catch (_) {}
   });
  })();
  </script>
