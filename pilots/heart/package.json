@@ -1,0 +1,17 @@
+{
+  "name": "saek-heart-pilot-preview",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "render": "remotion render src.jsx HeartAnatomyPilot ../heart-pilot-preview.mp4 --codec h264 --log=error --concurrency=2"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "remotion": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "@remotion/bundler": "4.0.539",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  }
+}

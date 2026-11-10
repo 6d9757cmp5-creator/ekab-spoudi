@@ -1,0 +1,55 @@
+name: Private pilot | real 3D anatomy MP4
+on:
+  push:
+    branches:
+      - feature/saek-visual-pilot-20261111
+    paths:
+      - "pilots/heart/**"
+      - ".github/workflows/saek-heart-preview.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: saek-heart-preview
+  cancel-in-progress: false
+jobs:
+  preview:
+    name: Isolated draft only (no release)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install offline render dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq blender xvfb libgl1-mesa-dri
+          blender --version | head -3
+      - name: Real Blender scene (HuBMAP HRA CC BY)
+        run: |
+          mkdir -p pilots/heart/public/render
+          xvfb-run -a blender --background --factory-startup --python pilots/heart/scene.py -- "$PWD" "$PWD/pilots/heart/public/render" > /tmp/blender-preview.log 2>&1 || { tail -100 /tmp/blender-preview.log; exit 1; }
+          test "$(find pilots/heart/public/render -type f -name 'frame_*.png' | wc -l)" -eq 60
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Remotion video composition
+        working-directory: pilots/heart
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund
+          npx remotion browser ensure
+          npm run render
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 ../heart-pilot-preview.mp4
+      - name: Draft-only review record
+        run: |
+          mkdir -p pilots/heart/review-output
+          cp pilots/heart/pilot-status.json pilots/heart/review-output/
+          sha256sum pilots/heart-pilot-preview.mp4 > pilots/heart/review-output/sha256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: saek-heart-pilot-3d-UNPUBLISHED
+          path: |
+            pilots/heart-pilot-preview.mp4
+            pilots/heart/review-output/
+          retention-days: 7
