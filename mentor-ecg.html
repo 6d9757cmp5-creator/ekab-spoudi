@@ -40,6 +40,30 @@
   <p>Παρατήρησε πώς αλλάζει η επανάληψη μιας τεχνητής καμπύλης όταν αλλάζεις τον επιλεγμένο ρυθμό. Δεν χρησιμοποιείται πραγματικό ηλεκτροκαρδιογράφημα.</p>
  </header>
  <div class="disclaimer" role="note"><strong>Όχι ιατρική ερμηνεία.</strong> Η γραμμή δημιουργείται από απλές μαθηματικές συναρτήσεις και δεν είναι πιστό κλινικό ΗΚΓ. Δεν αναγνωρίζει αρρυθμίες, δεν μετρά αληθινούς παλμούς και δεν υποκαθιστά κλινική εκπαίδευση. Δεν χρησιμοποιείται τεχνητή νοημοσύνη.</div>
+
+ <section class="ecg-panel" id="ecg-monitor-training" aria-labelledby="ecg-monitor-training-heading">
+  <h2 id="ecg-monitor-training-heading">Monitor ΗΚΓ — εξάσκηση αναγνώρισης ρυθμών</h2>
+  <p class="muted small">Διαδραστικό εκπαιδευτικό monitor με 11 συνθετικά παραδείγματα ρυθμών, παύση και ανατροφοδότηση. Η προβολή 12 απαγωγών απαιτεί εισαγωγή συμβατής καταγραφής JSON. Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
+  <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό monitor καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html" loading="eager" style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
+ </section>
+ <script>
+ (function () {
+  const frame = document.getElementById('ecg-advanced-frame');
+  if (!frame) return;
+  const fit = function () {
+   try {
+    const doc = frame.contentDocument;
+    if (!doc || !doc.body) return;
+    const height = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+    if (Number.isFinite(height) && height > 0) frame.style.height = (height + 8) + 'px';
+   } catch (_) { /* The monitor remains usable at its fallback height. */ }
+  };
+  frame.addEventListener('load', function () {
+   fit();
+   try { new ResizeObserver(fit).observe(frame.contentDocument.documentElement); } catch (_) {}
+  });
+ })();
+ </script>
  <section class="ecg-panel" aria-labelledby="ecg-heading">
   <h2 id="ecg-heading">Συνθετική κυματομορφή</h2>
   <div class="ecg-chart">
