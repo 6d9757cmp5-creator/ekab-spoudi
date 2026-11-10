@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { educationalRhythmCases, createSyntheticEcg, toSvgPoints } from './ecg-synthetic.mjs';
 
-test('recognition trainer contains eleven distinct labelled cases', () => {
-  assert.equal(educationalRhythmCases.length, 11);
-  assert.equal(new Set(educationalRhythmCases.map(({ id }) => id)).size, 11);
+test('recognition trainer contains eighteen distinct labelled cases', () => {
+  assert.equal(educationalRhythmCases.length, 18);
+  assert.equal(new Set(educationalRhythmCases.map(({ id }) => id)).size, 18);
   for (const entry of educationalRhythmCases) {
     assert.ok(entry.id && entry.label && entry.explanation);
     assert.equal(typeof entry.sample, 'function');

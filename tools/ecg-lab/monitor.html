@@ -35,6 +35,35 @@ button:disabled, select:disabled { opacity: .55; cursor: default; }
 button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
 #feedback { margin-block: .8rem 0; min-height: 1.5em; }
 
+
+/* Educational monitor: an enlarged, device-inspired workspace, never a medical device. */
+main { max-width: 95rem; padding: clamp(.75rem, 2.1vw, 1.55rem); }
+header { margin-block-end: 1rem; }
+h1 { font-size: clamp(1.45rem, 3vw, 2.15rem); }
+.trainer { padding: clamp(.8rem, 2vw, 1.35rem); margin-bottom: 1.55rem; }
+.monitor { border: 7px solid #253a41; border-radius: 1.05rem; box-shadow: 0 14px 34px #0006, inset 0 0 0 1px #54706e; }
+.monitor-heading { background: #071d17; color: #c0efd9; min-height: 44px; gap: 1rem; }
+.monitor-heading > span:first-child { color: #9dfabc; font-weight: 800; font-size: 1.06rem; }
+.monitor-heading small { color: #f2c475; margin-left: .6rem; font-size: .7rem; }
+#trace { height: clamp(220px, 34vw, 390px); }
+.monitor-readout { border-top: 1px solid #25473b; padding: .7rem 1rem; display: flex; flex-wrap: wrap; gap: .9rem 1.8rem; align-items: center; font: 600 .83rem/1.4 monospace; }
+.monitor-readout strong { font: 800 1.65rem/1.1 system-ui,sans-serif; color:#a2f7c0; }
+#fullscreen-monitor { font: 650 .8rem system-ui,sans-serif; padding:.36rem .65rem; background:transparent; color:#baf6d8; border:1px solid #639080; }
+#monitor-screen:fullscreen { width:100vw; height:100dvh; box-sizing:border-box; display:flex; flex-direction:column; border-radius:0; margin:0; }
+#monitor-screen:fullscreen #trace { flex:1; min-height: 0; height: auto; }
+.monitor-adjust { margin: .5rem 0 1rem; }
+.monitor-adjust label { font-size:.88rem; }
+.example-select { display:grid; gap:.65rem; border:1px solid #375a64; padding:1rem; border-radius:.6rem; background:#122330; margin:1rem 0; }
+.example-select label { max-width: 42rem; }
+#example-note { margin:0; color:#d1e4e7; line-height:1.5; }
+#paper { scrollbar-color: #6a8c90 #f1f1f1; }
+@media (max-width:650px) {
+  #trace { height: 238px; }
+  .monitor { border-width:4px; }
+  .monitor-heading { font-size: .72rem; gap: .5rem; }
+  .monitor-readout { gap:.4rem 1rem; font-size:.72rem; }
+  #fullscreen-monitor { min-height:40px; }
+}
 </style>
 </head>
 <body>
@@ -49,9 +78,21 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
         <div><h2 id="trainer-title">Monitor ρυθμού</h2><p>Συνθετικές κυματομορφές για εκπαιδευτική εξάσκηση.</p></div>
         <output id="score">0 / 0 σωστά</output>
       </div>
-      <div class="monitor">
-        <div class="monitor-heading"><span>ECG · II</span><span>Σχηματική κλίμακα · 25 mm/s · 10 mm/mV</span></div>
-        <canvas id="trace" role="img" aria-label="Κυλιόμενη συνθετική κυματομορφή ΗΚΓ απαγωγής II"></canvas>
+      <div class="monitor" id="monitor-screen">
+        <div class="monitor-heading">
+          <span>ECG · II <small>DEMO / SYNTHETIC</small></span>
+          <span id="monitor-settings-label">Σχηματική κλίμακα · 25 mm/s · 10 mm/mV</span>
+          <button id="fullscreen-monitor" type="button" aria-label="Προβολή monitor σε πλήρη οθόνη">⛶ Πλήρης οθόνη</button>
+        </div>
+        <canvas id="trace" role="img" aria-label="Μεγάλη κυλιόμενη εκπαιδευτική συνθετική κυματομορφή απαγωγής II"></canvas>
+        <div class="monitor-readout" aria-live="off">
+          <span><strong id="monitor-rate">--</strong> /min · ενδεικτικός ρυθμός</span>
+          <span>ΕΚΠΑΙΔΕΥΤΙΚΗ ΠΡΟΣΟΜΟΙΩΣΗ — ΟΧΙ ΠΡΑΓΜΑΤΙΚΟ ΣΗΜΑ</span>
+        </div>
+      </div>
+      <div class="monitor-adjust controls" aria-label="Ρυθμίσεις εμφάνισης συνθετικού monitor">
+        <label>Σάρωση monitor <select id="monitor-speed"><option value="25">25 mm/s (σχηματικά)</option><option value="50">50 mm/s (σχηματικά)</option></select></label>
+        <label>Ενίσχυση monitor <select id="monitor-gain"><option value="5">5 mm/mV (σχηματικά)</option><option value="10" selected>10 mm/mV (σχηματικά)</option><option value="20">20 mm/mV (σχηματικά)</option></select></label>
       </div>
       <div class="quiz-controls">
         <button id="next-case" type="button">Έναρξη εξάσκησης</button>
@@ -63,6 +104,13 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
       <p>Προσοχή: η ηλεκτρική δραστηριότητα στο ΗΚΓ δεν αποδεικνύει παρουσία σφυγμού. Η άσφυγμη ηλεκτρική δραστηριότητα (PEA) δεν αναγνωρίζεται μόνο από την κυματομορφή. <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-advanced-life-support" style="color:#9be9fc">AHA 2025 — Adult Advanced Life Support</a>.</p>
     </section>
     <h2>Προβολή καταγραφής 12 απαγωγών</h2>
+    <section class="example-select" aria-labelledby="example-title">
+      <h3 id="example-title">Άνοιξε έτοιμο εκπαιδευτικό ΗΚΓ</h3>
+      <label>Εκπαιδευτικό παράδειγμα 10 δευτερολέπτων
+        <select id="example-recording"><option value="">Επίλεξε συνθετική καταγραφή 12 απαγωγών</option></select>
+      </label>
+      <p id="example-note" role="status">Όλα τα ενσωματωμένα παραδείγματα παράγονται μαθηματικά και δεν προέρχονται από ασθενείς ή κλινική βάση δεδομένων.</p>
+    </section>
     <section aria-label="Ρυθμίσεις καταγραφής" class="controls">
       <label>Αρχείο καταγραφής JSON <input id="recording" type="file" accept=".json,application/json"></label>
       <label>Ταχύτητα <select id="speed"><option value="25">25 mm/s</option><option value="50">50 mm/s</option></select></label>
@@ -74,7 +122,8 @@ button:focus-visible { outline: 2px solid #77ded1; outline-offset: 3px; }
     <section id="paper" tabindex="0" aria-label="Χαρτί ηλεκτροκαρδιογραφήματος. Σε μικρή οθόνη κύλιση οριζόντια για όλες τις απαγωγές" hidden></section>
     <p id="paper-tip">Σε κινητό ή μικρή οθόνη, σύρε οριζόντια στο χαρτί για να δεις και τις 12 απαγωγές.</p>
   </main>
-  <script>
+  <script type="module">
+import {ECG_EXAMPLE_CASES, createEducationalTwelveLead} from './core/ecg-examples.mjs';
 {
 const leadNames = Object.freeze([
   'I', 'II', 'III', 'aVR', 'aVL', 'aVF', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6'
@@ -124,6 +173,9 @@ function paperLayout(recording, { speed, gain, rhythmLead }) {
 }
 
 
+const examples = document.querySelector('#example-recording');
+const exampleNote = document.querySelector('#example-note');
+for (const item of ECG_EXAMPLE_CASES) examples.add(new Option(item.label, item.id));
 const file = document.querySelector('#recording');
 const speed = document.querySelector('#speed');
 const gain = document.querySelector('#gain');
@@ -182,9 +234,32 @@ function render() {
   paper.hidden = false;
 }
 
+examples.addEventListener('change', () => {
+  const attempt = ++loadNumber;
+  paper.hidden = true;
+  paper.replaceChildren();
+  recording = undefined;
+  if (!examples.value) {
+    status.textContent = 'Επίλεξε έτοιμο παράδειγμα ή αρχείο JSON.';
+    exampleNote.textContent = 'Τα έτοιμα παραδείγματα είναι τεχνητές καμπύλες, όχι καταγραφές ασθενών.';
+    return;
+  }
+  try {
+    const demo = ECG_EXAMPLE_CASES.find(item => item.id === examples.value);
+    recording = validateRecording(createEducationalTwelveLead(demo.id));
+    if (attempt !== loadNumber) return;
+    render();
+    status.textContent = 'ΣΥΝΘΕΤΙΚΟ ΕΚΠΑΙΔΕΥΤΙΚΟ · ' + demo.label + ' · ' + recording.sampleRate + ' Hz · 10 s';
+    exampleNote.textContent = demo.description + ' Οποιαδήποτε ερμηνεία πραγματικού ασθενούς απαιτεί κλινικά επικυρωμένο ΗΚΓ.';
+  } catch (error) {
+    status.textContent = 'Αποτυχία φόρτωσης παραδείγματος. ' + error.message;
+  }
+});
 file.addEventListener('change', async () => {
   const selected = file.files[0];
   if (!selected) return;
+  examples.value = '';
+  exampleNote.textContent = 'Εξωτερική καταγραφή JSON: χρησιμοποίησε μόνο νόμιμα αποκτημένα, αποταυτοποιημένα δεδομένα.';
   const attempt = ++loadNumber;
   recording = undefined;
   paper.hidden = true;
@@ -218,8 +293,40 @@ const submit = document.querySelector('#submit-answer');
 const feedback = document.querySelector('#feedback');
 const score = document.querySelector('#score');
 const pixelsPerMm = 96 / 25.4;
-const speed = 25 * pixelsPerMm;
-const gain = 10 * pixelsPerMm;
+const monitorScreen = document.querySelector('#monitor-screen');
+const fullscreenButton = document.querySelector('#fullscreen-monitor');
+const speedSelect = document.querySelector('#monitor-speed');
+const gainSelect = document.querySelector('#monitor-gain');
+const settingsLabel = document.querySelector('#monitor-settings-label');
+const rateReadout = document.querySelector('#monitor-rate');
+let speed = 25 * pixelsPerMm;
+let gain = 10 * pixelsPerMm;
+const rateHints = Object.freeze({
+  sinus:76,brady:44,tachy:118,flutter:150,svt:185,vt:169,
+  av1:72,'complete-block':42,junctional:54,paced:70,
+  wenckebach:62,mobitz2:62
+});
+function syncSettings() {
+  speed = Number(speedSelect.value) * pixelsPerMm;
+  gain = Number(gainSelect.value) * pixelsPerMm;
+  settingsLabel.textContent = 'Σχηματική κλίμακα · ' + speedSelect.value + ' mm/s · ' + gainSelect.value + ' mm/mV';
+  draw(performance.now());
+}
+speedSelect.addEventListener('change',syncSettings);
+gainSelect.addEventListener('change',syncSettings);
+fullscreenButton.addEventListener('click', async () => {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await monitorScreen.requestFullscreen();
+  } catch (_) {
+    feedback.textContent = 'Η πλήρης οθόνη δεν επιτρέπεται σε αυτόν τον browser.';
+  }
+});
+document.addEventListener('fullscreenchange', () => {
+  fullscreenButton.textContent = document.fullscreenElement ? 'Έξοδος από πλήρη οθόνη' : '⛶ Πλήρης οθόνη';
+  fullscreenButton.setAttribute('aria-label', document.fullscreenElement ? 'Έξοδος από πλήρη οθόνη' : 'Προβολή monitor σε πλήρη οθόνη');
+  draw(performance.now());
+});
 let deck = [];
 let current;
 let elapsed = 0;
@@ -289,6 +396,7 @@ next.addEventListener('click', () => {
   const candidates = otherCases.length ? otherCases : deck;
   current = candidates[Math.floor(Math.random() * candidates.length)];
   deck.splice(deck.indexOf(current), 1);
+  rateReadout.textContent = rateHints[current.id] ?? '--';
   elapsed = 0;
   started = performance.now();
   paused = false;

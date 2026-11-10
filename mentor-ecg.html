@@ -7,7 +7,7 @@
 <title>ATLA · Εργαστήριο ΗΚΓ · Συνθετικές κυματομορφές</title>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
-.ecg-wrap{max-width:1050px;margin:0 auto;padding:18px 16px 46px}
+.ecg-wrap{max-width:1380px;margin:0 auto;padding:18px 16px 46px}
 .ecg-head{background:linear-gradient(125deg,#102e4a,#176a75);color:#fff;border-radius:18px;padding:25px 24px;margin:17px 0}
 .ecg-head h1{color:#fff;font-size:clamp(1.6rem,4vw,2.3rem);margin:6px 0}
 .ecg-head p{color:#dbedf2;line-height:1.55}
@@ -39,14 +39,14 @@
  <header class="ecg-head">
   <div style="font-weight:850;letter-spacing:.08em">ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ ΗΚΓ</div>
   <h1>Εργαστήριο ΗΚΓ — αναγνώριση ρυθμών και κυμάτων</h1>
-  <p>Εξασκήσου σε 11 σχηματικά παραδείγματα ρυθμών, στην αναγνώριση κυμάτων P–QRS–T και στη μέτρηση συχνότητας. Μπορείς επίσης να προβάλλεις συμβατή καταγραφή JSON 12 απαγωγών. Το εργαλείο είναι εκπαιδευτικό και όχι κλινικό monitor.</p>
+  <p>Εξασκήσου σε 18 σχηματικά παραδείγματα ρυθμών, στην αναγνώριση κυμάτων P–QRS–T και στη μέτρηση συχνότητας. Μπορείς επίσης να ανοίξεις 5 έτοιμες συνθετικές καταγραφές 12 απαγωγών ή να εισαγάγεις συμβατό JSON. Το εργαλείο είναι εκπαιδευτικό και όχι κλινικό monitor.</p>
  </header>
  <div class="disclaimer" role="note"><strong>Εκπαιδευτική χρήση — όχι ιατρική ερμηνεία.</strong> Οι συνθετικές καμπύλες είναι μαθηματικά σχήματα και δεν αναπαριστούν πιστά κλινικά ΗΚΓ. Η άσκηση ζητά από τον μαθητή να επιλέξει ετικέτες ρυθμών· δεν εκτελεί αυτόματη αναγνώριση αρρυθμιών ούτε διάγνωση πραγματικών καταγραφών. Δεν μετρά πραγματικούς παλμούς, δεν υποκαθιστά την κλινική εκπαίδευση και δεν χρησιμοποιεί τεχνητή νοημοσύνη.</div>
 
  <section class="ecg-panel" id="ecg-monitor-training" aria-labelledby="ecg-monitor-training-heading">
   <h2 id="ecg-monitor-training-heading">Monitor ΗΚΓ — εξάσκηση αναγνώρισης ρυθμών</h2>
-  <p class="muted small">Διαδραστικό εκπαιδευτικό monitor με 11 συνθετικά παραδείγματα ρυθμών, παύση και ανατροφοδότηση. Η προβολή 12 απαγωγών απαιτεί εισαγωγή συμβατής καταγραφής JSON. Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
-  <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό monitor καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html" loading="eager" style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
+  <p class="muted small">Διαδραστικό εκπαιδευτικό monitor με 18 συνθετικά παραδείγματα ρυθμών, παύση, πλήρη οθόνη, ρυθμίσεις σάρωσης και ανατροφοδότηση. Περιλαμβάνονται 5 έτοιμα συνθετικά παραδείγματα 12 απαγωγών, με δυνατότητα εισαγωγής συμβατού JSON. Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
+  <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό monitor καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html" loading="eager" allow="fullscreen" allowfullscreen style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
  </section>
  <script>
  (function () {
