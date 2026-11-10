@@ -32,3 +32,9 @@
 
 /* Isolate is unavailable until a real structure has been selected. */
 #isolateBtn:disabled{opacity:.55;cursor:not-allowed;border-style:dashed}
+
+/* Background loading: the body is usable, remaining detail arrives behind a small badge. */
+.loading.is-background{inset:46px auto auto 12px;flex-direction:row;gap:8px;padding:8px 12px;border-radius:12px;background:#071b2ae6;pointer-events:none;max-width:calc(100% - 24px)}
+.loading.is-background .spinner{width:16px;height:16px;border-width:2px}
+.loading.is-background strong{font-size:.8rem}
+.loading.is-background small{display:none}
