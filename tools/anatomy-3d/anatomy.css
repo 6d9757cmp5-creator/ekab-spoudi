@@ -38,3 +38,6 @@
 .loading.is-background .spinner{width:16px;height:16px;border-width:2px}
 .loading.is-background strong{font-size:.8rem}
 .loading.is-background small{display:none}
+
+/* First-download question on phones (UX review #6). */
+.loading .atlas-download-go{margin-top:12px;min-height:46px;padding:10px 18px;border:0;border-radius:12px;background:#176d77;color:#fff;font:700 1rem system-ui,sans-serif;cursor:pointer}
