@@ -316,13 +316,47 @@ function renderChoices(){
  });
  renderList();
 }
+// Greek names for the two titles the source gives only in English.
+const LABEL_FIX={'Ανατομία · Brain subcortical meshes':'Υποφλοιώδεις δομές εγκεφάλου',
+ 'Ανατομία · Case Model #82 Single Ventricle Heart s/p Fontan':'Καρδιά με μονήρη κοιλία μετά από επέμβαση Fontan'};
+/**
+ * The same HRA organ was imported twice (NIH 3D copy and HRA file): keep the HRA file.
+ * Different models that share a name are numbered, so every entry is distinguishable.
+ */
+function tidyAtlasList(items,byId){
+ items=items.map(a=>LABEL_FIX[a.label]?{...a,label:LABEL_FIX[a.label]}:a);
+ const same=label=>label.replace(/ \(άνδρας\)$/,' ανδρός').replace(/ \(γυναίκα\)$/,' γυναίκας');
+ const hraLabels=new Set(items.filter(a=>byId.get(a.id)?.source==='hra').map(a=>same(a.label)));
+ items=items.filter(a=>!(byId.get(a.id)?.source==='nih3d'&&hraLabels.has(same(a.label))));
+ const total={},seen={};
+ for(const a of items)total[a.label]=(total[a.label]||0)+1;
+ return items.map(a=>total[a.label]>1?{...a,label:a.label+' · μοντέλο '+(seen[a.label]=(seen[a.label]||0)+1)}:a);
+}
+// Body systems for the grouped list (matched on the Greek name).
+const SYSTEMS=[
+ ['Νευρικό σύστημα',/εγκεφαλ|νωτιαί|μεσολόβ|υποφλοιώδ|προμήκ/i],
+ ['Καρδιά και αγγεία',/καρδι|αορτ|αγγεί|αρτηρ|φλέβ|ανεύρυσ|στεφαν|fontan|fallot|διαχωρισμ/i],
+ ['Αναπνευστικό',/πνεύμον|πνευμον|βρόγχ|τραχεί|λάρυγγ|αεραγωγ|ρινικ|διάφραγμα/i],
+ ['Πεπτικό',/ήπαρ|ηπατ|σπλήν|στόμαχ|έντερ|πάγκρε|χοληδ|κόλον/i],
+ ['Ουροποιητικό και αναπαραγωγικό',/νεφρ|(^|\s)ουρ|κύστη|μήτρα|ωοθήκ|σάλπιγγ|πλακούντ|προστάτ|κύηση|έμβρυ/i],
+ ['Οφθαλμός και δέρμα',/οφθαλμ|φακ|δέρμα|ους|κερατοειδ/i],
+ ['Σκελετός, αρθρώσεις και μύες',/./]
+];
+const systemOf=label=>SYSTEMS.find(([,re])=>re.test(label))[0];
 function renderList(){
  const scope=studyFilter?.value||'all';
- select.replaceChildren(...assets.map((a,i)=>{
+ const options=assets.map((a,i)=>{
   const tag=scope==='all'?'['+({anatomy:'Ανατομία',pathology:'Παθολογία',research:'Έρευνα'}[studyScope3D(a)])+'] ':'';
-  const option=new Option(tag+(a.available?'':'[Μόνο στοιχεία] ')+a.label,String(i));
-  return option;
- }));
+  return new Option(tag+(a.available?'':'[Μόνο στοιχεία] ')+a.label,String(i));
+ });
+ if(inUnifiedAnatomy&&assets.length>12){
+  const groups=new Map(SYSTEMS.map(([name])=>[name,[]]));
+  assets.forEach((a,i)=>groups.get(systemOf(a.label)).push(options[i]));
+  select.replaceChildren(...[...groups].filter(([,list])=>list.length).map(([name,list])=>{
+   const group=document.createElement('optgroup');group.label=name+' ('+list.length+')';group.append(...list);return group;
+  }));
+  select.selectedIndex=0;
+ }else select.replaceChildren(...options);
  $('source-count').textContent=assets.filter(x=>x.available).length+' μοντέλα για προβολή 3D.';
  button.disabled=!assets[0]?.available;
  $('source-license').textContent='';
@@ -371,6 +405,7 @@ async function loadDataset(){
     return role?[{...item,details:{...item.details,kind:role},kind:role}]:[];
    });
   }
+  if(inUnifiedAnatomy)next=tidyAtlasList(next,new Map(data.models.map(m=>[String(m.id),m])));
   allAssets=next;
   if(!next.length)throw Error('Δεν υπάρχουν μοντέλα σε αυτή τη συλλογή');
   renderChoices();
