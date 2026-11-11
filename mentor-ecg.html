@@ -29,29 +29,41 @@
 .ecg-key[hidden]{display:none}
 @media(max-width:650px){.ecg-head{padding:18px}.ecg-panel{padding:14px}.ecg-key{grid-template-columns:1fr}}
 </style>
-<script type="module" src="mentor-ecg.js" defer></script>
+<script type="module" src="mentor-ecg.js"></script>
 <link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script><meta name="description" content="Εργαστήριο ΗΚΓ: εξάσκηση στην ανάγνωση ηλεκτροκαρδιογραφήματος με συνθετικές κυματομορφές.">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
 <body>
 <main class="ecg-wrap"><button type="button" class="ekab-nav-back" data-ekab-back>← Πίσω</button>
- <a data-ekab-back-spot href="paramedic.html#skills">← Κέντρο Διασώστη · Κλινικές δεξιότητες</a>
+ <a data-ekab-back-spot href="paramedic.html#skills">← Εργαλεία μελέτης</a>
  <header class="ecg-head">
   <div style="font-weight:850;letter-spacing:.08em">ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ ΗΚΓ</div>
   <h1>Εργαστήριο ΗΚΓ — αναγνώριση ρυθμών και κυμάτων</h1>
-  <p>Εξασκήσου σε 18 σχηματικά παραδείγματα ρυθμών, στην αναγνώριση κυμάτων P–QRS–T και στη μέτρηση συχνότητας. Μπορείς επίσης να ανοίξεις 5 έτοιμες συνθετικές καταγραφές 12 απαγωγών ή να εισαγάγεις συμβατό JSON. Το εργαλείο είναι εκπαιδευτικό και όχι κλινικό monitor.</p>
+  <p>Εξασκήσου σε 18 σχηματικά παραδείγματα ρυθμών, στην αναγνώριση κυμάτων P–QRS–T και στη μέτρηση συχνότητας. Μπορείς επίσης να ανοίξεις 8 έτοιμες συνθετικές καταγραφές 12 απαγωγών (ανάμεσά τους πρόσθιο, κατώτερο και πλάγιο έμφραγμα) ή να εισαγάγεις συμβατό JSON. Το εργαλείο είναι εκπαιδευτικό και όχι κλινικό monitor.</p>
  </header>
  <div class="disclaimer" role="note"><strong>Εκπαιδευτική χρήση — όχι ιατρική ερμηνεία.</strong> Οι συνθετικές καμπύλες είναι μαθηματικά σχήματα και δεν αναπαριστούν πιστά κλινικά ΗΚΓ. Η άσκηση ζητά από τον μαθητή να επιλέξει ετικέτες ρυθμών· δεν εκτελεί αυτόματη αναγνώριση αρρυθμιών ούτε διάγνωση πραγματικών καταγραφών. Δεν μετρά πραγματικούς παλμούς, δεν υποκαθιστά την κλινική εκπαίδευση και δεν χρησιμοποιεί τεχνητή νοημοσύνη.</div>
 
  <section class="ecg-panel" id="ecg-monitor-training" aria-labelledby="ecg-monitor-training-heading">
   <h2 id="ecg-monitor-training-heading">Monitor ΗΚΓ — εξάσκηση αναγνώρισης ρυθμών</h2>
-  <p class="muted small">Διαδραστικό εκπαιδευτικό monitor με 18 συνθετικά παραδείγματα ρυθμών, παύση, πλήρη οθόνη, ρυθμίσεις σάρωσης και ανατροφοδότηση. Περιλαμβάνονται 5 έτοιμα συνθετικά παραδείγματα 12 απαγωγών, με δυνατότητα εισαγωγής συμβατού JSON. Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
+  <p class="muted small">Διαδραστικό εκπαιδευτικό monitor με 18 συνθετικά παραδείγματα ρυθμών, παύση, πλήρη οθόνη, ρυθμίσεις σάρωσης και ανατροφοδότηση. Περιλαμβάνονται 8 έτοιμα συνθετικά παραδείγματα 12 απαγωγών, ανάμεσά τους 3 σχηματικά εμφράγματα (STEMI), με δυνατότητα εισαγωγής συμβατού JSON. Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
   <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό monitor καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html" loading="eager" allow="fullscreen" allowfullscreen style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
  </section>
  <script>
  (function () {
   const frame = document.getElementById('ecg-advanced-frame');
   if (!frame) return;
+  const example = new URLSearchParams(location.search).get('example');
+  if (example && /^[a-z0-9-]{1,40}$/.test(example)) {
+   frame.src = 'tools/ecg-lab/monitor.html?example=' + encodeURIComponent(example);
+   frame.addEventListener('load', function () {
+    setTimeout(function () {
+     try {
+      const target = frame.contentDocument.querySelector('.example-select');
+      if (target) window.scrollTo({ top: frame.getBoundingClientRect().top + window.scrollY + target.offsetTop - 12, behavior: 'smooth' });
+     } catch (_) { /* The anchor on the section is the fallback. */ }
+    }, 400);
+   }, { once: true });
+  }
   let observer;
   const fit = function () {
    try {
