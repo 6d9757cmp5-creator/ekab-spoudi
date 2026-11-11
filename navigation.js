@@ -6,13 +6,21 @@ const site=new URL('./',self?.src||location.href);
 const home=new URL('./index.html',site).pathname===location.pathname||site.pathname===location.pathname;
 const backOnly=self?.hasAttribute('data-ekab-back-only');
 const root=()=>document.querySelector('main')||document.body;
-function back(){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign(new URL('./index.html',site).href)}
+// Where "← Πίσω" leads when the page was opened directly (no page of the app to go back to).
+const PARENT_PAGE=file=>/^saek-course-\d+\.html$/.test(file)||/^(saek-exams|saek-images|eclass|pdf-library|apantiseis|piges)\.html$/.test(file)?'saek.html'
+ :/^(theory|practical_exam|written_exam|supplementary_practice|exam_focus|study_map)\.html$/.test(file)?'eoppep.html'
+ :/^(anatomia|fysiologia|diasostis|dimosia_ygeia|ektimisi|agglika)\.html$/.test(file)?({anatomia:'01',fysiologia:'02',diasostis:'03',dimosia_ygeia:'04',ektimisi:'05',agglika:'06'})[file.replace('.html','')].replace(/^/,'saek-course-')+'.html'
+ :/^mentor-[a-z-]+\.html$/.test(file)?'paramedic.html'
+ :'index.html';
+function back(fallback){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign(new URL(fallback||PARENT_PAGE(location.pathname.split('/').pop()),site).href)}
 function make(tag,cls,label){const n=document.createElement(tag);n.className=cls;n.textContent=label;return n}
 function init(){
  // A back button already written in the page (no layout jump) only needs its behaviour.
- for(const b of document.querySelectorAll('button[data-ekab-back]'))if(!b.dataset.ekabBound){b.dataset.ekabBound='1';b.addEventListener('click',back)}
+ for(const b of document.querySelectorAll('button[data-ekab-back]'))if(!b.dataset.ekabBound){b.dataset.ekabBound='1';b.addEventListener('click',()=>back())}
  const spot=document.querySelector('[data-ekab-back-spot]');
- if(!home&&!document.querySelector('[data-ekab-back]')&&(spot||!document.querySelector('header.top .nav'))){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';b.addEventListener('click',back);if(spot){b.classList.add('inline');spot.before(b);if(spot.dataset.ekabBackSpot==='replace')spot.style.display='none'}else root().prepend(b)}
+ if(!home&&!document.querySelector('[data-ekab-back]')&&(spot||!document.querySelector('header.top .nav'))){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';const fallback=spot?.getAttribute('href');b.addEventListener('click',()=>back(fallback));if(spot){b.classList.add('inline');spot.before(b);spot.style.display='none'}else root().prepend(b)}
+ // A page that already has its own back button keeps only that one.
+ if(spot&&spot.style.display!=='none'&&document.querySelector('[data-ekab-back]'))spot.style.display='none';
  if(!backOnly&&!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}
  let start=null;
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];start=t.clientX<25?{x:t.clientX,y:t.clientY,target:e.target}:null},{passive:true});
