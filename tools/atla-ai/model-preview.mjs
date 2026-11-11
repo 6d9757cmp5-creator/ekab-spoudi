@@ -397,11 +397,14 @@ function applyExplore(request){
  const vocabulary=registry.vocabulary?.structures||{};
  assets=allAssets.filter(item=>modelShowsStructures(byId.get(item.id),keys,vocabulary));
  renderList();
- if(assets.length){showSelection();status('Λεπτομερή μοντέλα για «'+request.greek+'»: '+assets.length+'. Επίλεξε μοντέλο και πάτησε «Προβολή 3D».');return}
+ const closeup=$('source-atlas-closeup');
+ if(closeup)closeup.hidden=Boolean(assets.length);
+ if(assets.length){showSelection();status('Λεπτομερή μοντέλα για «'+request.greek+'»: '+assets.length+'. Επίλεξε μοντέλο και πάτησε «Προβολή 3D». Μπορείς επίσης να δεις τη δομή από κοντά στον πλήρη άτλαντα.');if(closeup)closeup.hidden=false;return}
  showDetails({details:null});button.disabled=true;
- status('Δεν υπάρχει ακόμη επαληθευμένο λεπτομερές μοντέλο για «'+request.greek+'». Η δομή φαίνεται στο πλήρες σώμα.',true);
+ status('Για «'+request.greek+'» η λεπτομερής προβολή γίνεται στον πλήρη άτλαντα BodyParts3D: πάτησε «Δες τη δομή από κοντά».');
 }
 window.addEventListener('atla:explore-structure',event=>{invalidatePreview();applyExplore(event.detail)});
+$('source-atlas-closeup')?.addEventListener('click',()=>window.dispatchEvent(new CustomEvent('atla:atlas-closeup')));
 dataset.addEventListener('change',loadDataset);
 loadDataset().then(()=>{if(window.ATLA_EXPLORE_REQUEST)applyExplore(window.ATLA_EXPLORE_REQUEST)});
 window.addEventListener('pagehide',()=>{dispose();cancelAnimationFrame(raf);controls?.dispose();draco?.dispose();renderer?.dispose();renderer=null});
