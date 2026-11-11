@@ -124,7 +124,7 @@ function sourceModal(q){
  }else{
   text('Η απάντηση είναι ΠΡΟΣΧΕΔΙΟ σε εκκρεμή επιστημονικό έλεγχο και δεν βαθμολογείται.');
  }
- if(q.sourceReview){const titles={documented_source_check:'Καταγεγραμμένος έλεγχος πηγής',historical_targeted_review:'Παλαιότερη στοχευμένη ανασκόπηση',citation_indexed_pending_passage_check:'Πηγή καταχωρισμένη — εκκρεμεί επαλήθευση σχετικού χωρίου'};text('Ατομική καρτέλα τεκμηρίωσης: '+(titles[q.sourceReview.status]||'Καταγραφή πηγής'));text(q.sourceReview.reviewNote||'');if(q.sourceReview.sourceKind?.startsWith('γενική'))text('Σημείωση: η παρούσα παραπομπή είναι γενική και χρειάζεται ακριβέστερη υποενότητα.');text('Ο έλεγχος δεν αποτελεί επίσημο λυσάρι ή κλινική πιστοποίηση.');}
+ if(q.sourceReview){const titles={documented_source_check:'Καταγεγραμμένος έλεγχος πηγής',historical_targeted_review:'Παλαιότερη στοχευμένη ανασκόπηση',citation_indexed_pending_passage_check:'Πηγή καταχωρισμένη — εκκρεμεί επαλήθευση σχετικού χωρίου'};text('Ατομική καρτέλα τεκμηρίωσης: '+(titles[q.sourceReview.status]||'Καταγραφή πηγής'));text(q.sourceReview.reviewNote||'');if(q.sourceReview.sourceKind?.startsWith('γενική'))text('Σημείωση: η παρούσα παραπομπή είναι γενική και χρειάζεται ακριβέστερη υποενότητα.');text('Ο έλεγχος δεν αποτελεί επίσημη λύση ή κλινική πιστοποίηση.');}
  if(q.sourceUrl){const p=document.createElement('p');addLink(p,q.sourceUrl,'Άνοιγμα βιβλιογραφικής πηγής');area.append(p)}
  if(q.sourceLocation)text(`Παραπομπή: ${q.sourceLocation}`);
  if(q.sourceChecked)text(`Καταγραφή ελέγχου: ${q.sourceChecked}`);
@@ -164,7 +164,7 @@ function lockExamAnswer(){
  $('#showAnswer').disabled=true;$('#showAnswer').hidden=true;
  $('#assessment').classList.add('hidden');
 }
-function showAnswer(){const q=pool[index];shownAnswer=true;$('#answerPanel').classList.remove('hidden');const known=q.answerStatus==='reviewed_educational',draft=q.answerStatus==='editorial_review_needed';$('#solution').classList.toggle('hidden',!(known||draft));$('#solution').classList.toggle('review',!known);$('#nosolution').classList.toggle('hidden',known||draft);$('#assessment').classList.toggle('hidden',!known);$('#solution').textContent=(known?'Ενδεικτική εκπαιδευτική απάντηση — όχι επίσημο λυσάρι:\n\n':'ΠΡΟΣΧΕΔΙΟ — σε ειδικό έλεγχο, χωρίς βαθμολογία:\n\n')+(q.answer||'');const p=$('#sourceLine');p.replaceChildren();addLink(p,qSourceLink(q),'ΕΟΠΠΕΠ — πρωτότυπο θέμα');p.append(document.createTextNode(' · '));if(!addLink(p,q.sourceUrl,'Βιβλιογραφική πηγή'))p.append(document.createTextNode('Πηγή μη διαθέσιμη'));let b=document.createElement('button');b.type='button';b.className='pill-button';b.style.marginLeft='8px';b.textContent='Λεπτομέρειες πηγής ⓘ';b.onclick=()=>sourceModal(q);p.append(b)}
+function showAnswer(){const q=pool[index];shownAnswer=true;$('#answerPanel').classList.remove('hidden');const known=q.answerStatus==='reviewed_educational',draft=q.answerStatus==='editorial_review_needed';$('#solution').classList.toggle('hidden',!(known||draft));$('#solution').classList.toggle('review',!known);$('#nosolution').classList.toggle('hidden',known||draft);$('#assessment').classList.toggle('hidden',!known);$('#solution').textContent=(known?'Ενδεικτική εκπαιδευτική απάντηση — όχι επίσημη λύση:\n\n':'ΠΡΟΣΧΕΔΙΟ — σε ειδικό έλεγχο, χωρίς βαθμολογία:\n\n')+(q.answer||'');const p=$('#sourceLine');p.replaceChildren();addLink(p,qSourceLink(q),'ΕΟΠΠΕΠ — πρωτότυπο θέμα');p.append(document.createTextNode(' · '));if(!addLink(p,q.sourceUrl,'Βιβλιογραφική πηγή'))p.append(document.createTextNode('Πηγή μη διαθέσιμη'));let b=document.createElement('button');b.type='button';b.className='pill-button';b.style.marginLeft='8px';b.textContent='Λεπτομέρειες πηγής ⓘ';b.onclick=()=>sourceModal(q);p.append(b)}
 function assess(result){
  const q=pool[index];if(!q||!shownAnswer||q.answerStatus!=='reviewed_educational')return;
  const s=st(q),outcome=scheduler.record(s,result);
@@ -273,7 +273,7 @@ function renderCatalogReader(q){
  $('#catalogReaderAnswer').textContent=q.answer||'Δεν υπάρχει καταχωρισμένη απάντηση.';
  loadReadySos(q.id);
  const caution=$('#catalogReaderCaution');
- caution.textContent=q.answerStatus==='reviewed_educational'?'Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημο λυσάρι ΕΟΠΠΕΠ.':'ΠΡΟΣΟΧΗ: Η ενδεικτική απάντηση παραμένει σε εκπαιδευτικό/επιστημονικό έλεγχο.';
+ caution.textContent=q.answerStatus==='reviewed_educational'?'Ενδεικτική εκπαιδευτική απάντηση, όχι επίσημη λύση ΕΟΠΠΕΠ.':'ΠΡΟΣΟΧΗ: Η ενδεικτική απάντηση παραμένει σε εκπαιδευτικό/επιστημονικό έλεγχο.';
  caution.classList.toggle('review',q.answerStatus!=='reviewed_educational');
  const sources=$('#catalogReaderSources');sources.replaceChildren();
  const p=document.createElement('p');addLink(p,qSourceLink(q),'Πρωτότυπη ερώτηση στο PDF (σελ. '+(Number(q.page)||1)+')');sources.append(p);
