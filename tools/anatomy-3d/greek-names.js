@@ -229,9 +229,53 @@ function atlasTerm(base){
  const text=term.replace(/\{([a-z]+)\}/g,(_,form)=>SIDE_FORMS[form][sides.shift()==='left'?0:1]);
  return text[0].toUpperCase()+text.slice(1);
 }
+/**
+ * Terminology review (2026-11-11): every atlas name was read against standard Greek
+ * anatomical terminology. These corrections win over the generated phrases.
+ */
+const REVIEWED={
+ "left branch of portal vein": "Αριστερός κλάδος της πυλαίας φλέβας",
+ "right branch of portal vein": "Δεξιός κλάδος της πυλαίας φλέβας",
+ "caudate lobe branch of left portal vein": "Κλάδος του κερκοφόρου λοβού από τον αριστερό κλάδο της πυλαίας φλέβας",
+ "caudate lobe branch of right portal vein": "Κλάδος του κερκοφόρου λοβού από τον δεξιό κλάδο της πυλαίας φλέβας",
+ "caudate lobe branch of left hepatic artery": "Κλάδος του κερκοφόρου λοβού από την αριστερή ηπατική αρτηρία",
+ "caudate lobe branch of right hepatic artery": "Κλάδος του κερκοφόρου λοβού από τη δεξιά ηπατική αρτηρία",
+ "left lobe branch of left hepatic artery": "Κλάδος του αριστερού λοβού από την αριστερή ηπατική αρτηρία",
+ "right lobe branch of right hepatic artery": "Κλάδος του δεξιού λοβού από τη δεξιά ηπατική αρτηρία",
+ "middle hepatic artery branch of left hepatic artery": "Μέση ηπατική αρτηρία, κλάδος της αριστερής ηπατικής αρτηρίας",
+ "left anterior cusp of pulmonary valve": "Αριστερή πρόσθια γλωχίνα της πνευμονικής βαλβίδας",
+ "right anterior cusp of pulmonary valve": "Δεξιά πρόσθια γλωχίνα της πνευμονικής βαλβίδας",
+ "left posterior cusp of aortic valve": "Αριστερή οπίσθια γλωχίνα της αορτικής βαλβίδας",
+ "right posterior cusp of aortic valve": "Δεξιά οπίσθια γλωχίνα της αορτικής βαλβίδας",
+ "left posterior descending branch of circumflex branch of left coronary artery": "Αριστερός οπίσθιος κατιών κλάδος του περισπώμενου κλάδου της αριστερής στεφανιαίας αρτηρίας",
+ "posterior ventricular branch of circumflex coronary artery": "Οπίσθιος κοιλιακός κλάδος του περισπώμενου κλάδου της στεφανιαίας αρτηρίας",
+ "anterior division of left renal artery": "Πρόσθιος κλάδος της αριστερής νεφρικής αρτηρίας",
+ "anterior division of right renal artery": "Πρόσθιος κλάδος της δεξιάς νεφρικής αρτηρίας",
+ "posterior division of left renal artery": "Οπίσθιος κλάδος της αριστερής νεφρικής αρτηρίας",
+ "posterior division of right renal artery": "Οπίσθιος κλάδος της δεξιάς νεφρικής αρτηρίας",
+ "stomach": "Στόμαχος",
+ "mammillary body": "Θηλοειδές σώμα",
+ "mammillary region of hth (left)": "Αριστερή περιοχή των θηλοειδών σωμάτων του υποθαλάμου",
+ "mammillary region of hth (right)": "Δεξιά περιοχή των θηλοειδών σωμάτων του υποθαλάμου",
+ "mammillothalamic tract (left)": "Αριστερό θηλοθαλαμικό δεμάτιο",
+ "mammillothalamic tract (right)": "Δεξιό θηλοθαλαμικό δεμάτιο",
+ "tuberal region of hth (left)": "Αριστερή περιοχή του φαιού φύματος του υποθαλάμου",
+ "tuberal region of hth (right)": "Δεξιά περιοχή του φαιού φύματος του υποθαλάμου",
+ "claustrum (left)": "Αριστερό πρόφραγμα",
+ "claustrum (right)": "Δεξιό πρόφραγμα",
+ "left mesosalpinx": "Αριστερό μεσοσαλπίγγιο",
+ "right mesosalpinx": "Δεξιό μεσοσαλπίγγιο",
+ "suspensory ligament of left ovary": "Κρεμαστήριος σύνδεσμος της αριστερής ωοθήκης",
+ "suspensory ligament of right ovary": "Κρεμαστήριος σύνδεσμος της δεξιάς ωοθήκης",
+ "right main bronchus proper": "Δεξιός κύριος βρόγχος (κύριο τμήμα)",
+ "vertebral bone 1": "Άτλαντας (1ος αυχενικός σπόνδυλος)",
+ "vertebral bone 2": "Άξονας (2ος αυχενικός σπόνδυλος)",
+ "lumbar vertebra 6": "6ος οσφυϊκός σπόνδυλος (ανατομική παραλλαγή)"
+};
 // A parenthesized side is anatomical information, never an ignorable suffix.
 export function anatomicalGreek(name){
  const raw=String(name||'').trim();if(!raw)return null;
+ if(REVIEWED[simplify(raw)])return REVIEWED[simplify(raw)];
  const greek=lexiconGreek(raw);
  return greek||atlasTerm(simplify(raw));
 }

@@ -54,7 +54,7 @@ const expandedSamples={
   "Left posterior basal segmental vein": "Αριστερή οπίσθια βασική τμηματική φλέβα",
   "Right lateral basal segmental artery": "Δεξιά έξω βασική τμηματική αρτηρία",
   "Circumflex branch of left coronary artery": "Περισπώμενος κλάδος της αριστερής στεφανιαίας αρτηρίας",
-  "Anterior division of right renal artery": "Πρόσθια μοίρα της δεξιάς νεφρικής αρτηρίας",
+  "Anterior division of right renal artery": "Πρόσθιος κλάδος της δεξιάς νεφρικής αρτηρίας",
   "Artery of left precentral sulcus": "Αρτηρία της αριστερής προκεντρικής αύλακας",
   "External anal sphincter": "Έξω σφιγκτήρας του πρωκτού"
 };
