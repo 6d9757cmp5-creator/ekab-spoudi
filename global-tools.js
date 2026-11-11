@@ -64,6 +64,15 @@ async function loadSearch(){
  return searchCache;
 }
 const weight={saek:4,eoppep:4,practical:3,practice:3,page:2};
+// Abbreviations and spellings students use for the same thing (single words, matched like the query).
+const SYNONYMS=[['gcs','glasgow','γλασκωβη'],['καρπα','cpr','αναζωογονηση'],['αεα','aed','απινιδωτης','απινιδωτη'],
+ ['αδρεναλινη','επινεφρινη','adrenaline','epinephrine'],['ηκγ','ecg','ηλεκτροκαρδιογραφημα'],['stemi','εμφραγμα'],
+ ['αεε','εγκεφαλικο','stroke'],['ταχυκαρδια','tachycardia'],['βραδυκαρδια','bradycardia'],['avpu','επιπεδο συνειδησης']];
+let synonymIndex=null;
+function alternatives(word){
+ if(!synonymIndex){synonymIndex=new Map();for(const group of SYNONYMS){const g=group.map(normalize);for(const w of g)synonymIndex.set(w,g)}}
+ return synonymIndex.get(word)||[word];
+}
 function find(query,data){
  const needle=normalize(query);
  if(!needle)return [];
@@ -73,12 +82,12 @@ function find(query,data){
  for(const item of data){
   const t=normalize(item.title),sub=normalize(item.subtitle),keys=normalize(item.keywords),body=normalize(item.searchText),prev=normalize(item.preview);
   const full=t+' '+sub+' '+keys+' '+body+' '+prev;
-  if(!words.every(w=>full.includes(w)))continue;
+  if(!words.every(w=>alternatives(w).some(a=>full.includes(a))))continue;
   let score=weight[item.kind]||0;
   if(t===needle)score+=250;
   if(t.startsWith(needle))score+=145;
   if(keys.split(/\s+/).includes(needle))score+=110;
-  for(const word of words){
+  for(const word of words.flatMap(alternatives)){
    if(t.includes(word))score+=52;
    if(keys.includes(word))score+=31;
    if(sub.includes(word))score+=20;
@@ -303,7 +312,9 @@ function showSearchPage(){
  const query=new URLSearchParams(location.search).get('q')||'';
  const heading=document.getElementById('globalSearchQuery');
  if(heading)heading.textContent=query?'Αποτελέσματα για: '+query:'Αναζήτηση στην ΕΚΑΒ Σπουδή';
- if(!query){results.replaceChildren(el('p',null,'Πληκτρολόγησε κάτι στην αναζήτηση από το εικονίδιο αναζήτησης στην κορυφή.'));return}
+ const field=document.getElementById('globalSearchPageInput');
+ if(field){field.value=query;if(!query)field.focus()}
+ if(!query){results.replaceChildren(el('p',null,'Γράψε έναν όρο και πάτησε «Αναζήτηση».'));return}
  results.replaceChildren(el('p',null,'Φόρτωση αποτελεσμάτων…'));
  loadSearch().then(data=>{
   const found=find(query,data);results.replaceChildren();

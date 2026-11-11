@@ -39,9 +39,10 @@ function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));window.d
 function st(q){return state[q.id]||(state[q.id]={seen:0,weak:0,selfCorrect:0,selfAttempts:0,streak:0,draft:''})}
 function qSourceLink(q){return `eoppep-source.pdf#page=${Number(q.page)||1}`}
 function addLink(parent,href,label){if(typeof href!=='string'||!/^https:\/\//i.test(href)&&!/^eoppep-source\.pdf(?:#page=\d+)?$/.test(href))return null;const a=document.createElement('a');a.href=href;a.textContent=label;a.target='_blank';a.rel='noopener noreferrer';parent.append(a);return a}
+const groupLetter=g=>({A:'Α',B:'Β'})[g]||g;
 function hasDocumentedReview(q){return Boolean(q.sourceChecked||q.reviewAudit20261026||q.reviewAudit20261026Followup||q.finalAudit20261026||q.webResearch20261026)}
 function scoped(){const group=$('#group').value,topic=$('#topic').value,status=$('#statusFilter').value,find=$('#search').value.trim().toLocaleLowerCase('el');return bank.filter(q=>(group==='all'||q.group===group)&&(topic==='all'||q.studyTopic===topic)&&(status==='all'||(status==='directly_checked'&&Boolean(q.sourceChecked))||(status==='documented_review'&&hasDocumentedReview(q))||(status==='passage_check_pending'&&q.sourceReview?.status==='citation_indexed_pending_passage_check')||q.answerStatus===status)&&(!find||q.question.toLocaleLowerCase('el').includes(find)||q.id.toLowerCase().includes(find)))}
-function labelStatus(q){const status=q.sourceReview?.status;if(status==='documented_source_check')return 'Απάντηση · καταγεγραμμένος έλεγχος πηγής ⓘ';if(status==='historical_targeted_review')return 'Απάντηση · ιστορική ανασκόπηση ⓘ';if(status==='citation_indexed_pending_passage_check')return 'Απάντηση με πηγή · εκκρεμεί έλεγχος χωρίου ⓘ';if(hasDocumentedReview(q))return 'Απάντηση · ιστορικό ανασκόπησης ⓘ';return 'Εκπαιδευτική απάντηση · δείτε την τεκμηρίωση ⓘ'}
+function labelStatus(q){const status=q.sourceReview?.status;if(status==='documented_source_check')return 'Απάντηση · καταγεγραμμένος έλεγχος πηγής ⓘ';if(status==='historical_targeted_review')return 'Απάντηση · ιστορική ανασκόπηση ⓘ';if(status==='citation_indexed_pending_passage_check')return 'Απάντηση με πηγή ⓘ';if(hasDocumentedReview(q))return 'Απάντηση · ιστορικό ανασκόπησης ⓘ';return 'Εκπαιδευτική απάντηση · δείτε την τεκμηρίωση ⓘ'}
 // A question is learned only after successful recalls on separate dates.
 function learning(q){return scheduler.evaluate(state[q.id])}
 function isStudied(q){return learning(q).studied}
@@ -61,7 +62,7 @@ function renderDueToday(){
  for(const q of due.slice(0,8)){
   const button=document.createElement('button');button.type='button';button.className='due-item';
   const preview=q.question.length>105?q.question.slice(0,105)+'…':q.question;
-  button.textContent=`Ομάδα ${q.group} · ${q.number} — ${preview}`;
+  button.textContent=`Ομάδα ${groupLetter(q.group)} · ${q.number} — ${preview}`;
   button.addEventListener('click',()=>openScheduledQuestion(q.id));
   container.append(button);
  }
@@ -81,7 +82,7 @@ function updateMetrics(){
   const percent=items.length?Math.round(100*studied/items.length):0;
   const node=document.createElement('div');node.className='progress-row';
   const top=document.createElement('div');top.className='line';
-  const name=document.createElement('strong');name.textContent=`Ομάδα ${g} · ${title}`;
+  const name=document.createElement('strong');name.textContent=`Ομάδα ${groupLetter(g)} · ${title}`;
   const label=document.createElement('strong');label.textContent=percent+'%';top.append(name,label);
   const progress=document.createElement('div');progress.className='bar';progress.setAttribute('role','progressbar');
   progress.setAttribute('aria-label',`Μελετημένες ερωτήσεις ομάδας ${g}`);
@@ -116,7 +117,7 @@ function makePool(){
 function sourceModal(q){
  const area=$('#sourceDialogContent');area.replaceChildren();
  const text=(str)=>{let p=document.createElement('p');p.textContent=str;area.append(p);return p};
- text(`Πρωτότυπη ερώτηση: ΕΟΠΠΕΠ, Ομάδα ${q.group}, αριθμός ${q.number}, σελίδα ${q.page} του 18σέλιδου καταλόγου.`);
+ text(`Πρωτότυπη ερώτηση: ΕΟΠΠΕΠ, Ομάδα ${groupLetter(q.group)}, αριθμός ${q.number}, σελίδα ${q.page} του 18σέλιδου καταλόγου.`);
  const base=document.createElement('p');addLink(base,qSourceLink(q),'Άνοιγμα πρωτότυπου PDF στην αντίστοιχη σελίδα');area.append(base);
  if(q.answerStatus==='reviewed_educational'){
   text(hasDocumentedReview(q)?'Υπάρχει παλαιότερη καταγεγραμμένη στοχευμένη ανασκόπηση, διαφορετικού βάθους και πιθανώς με επιφυλάξεις. Αυτό δεν αποτελεί επίσημη απάντηση ή ανεξάρτητη επιστημονική πιστοποίηση.':'Υπάρχει εκπαιδευτική απάντηση με βιβλιογραφικό σύνδεσμο, αλλά δεν υπάρχει ξεχωριστή καταγραφή στοχευμένης ανασκόπησης για το συγκεκριμένο θέμα. Αυτό δεν αποδεικνύει ότι κανείς δεν το διάβασε παλιότερα.');
@@ -141,7 +142,7 @@ function present(){
  if(!pool.length){$('#study').classList.add('hidden');$('#setup').classList.remove('hidden');return}
  const q=pool[index],s=st(q);s.seen=(s.seen||0)+1;save();updateMetrics();shownAnswer=false;
  $('#eoppepAIResult').hidden=true;$('#eoppepGradeAI').disabled=false;$('#eoppepGradeAI').hidden=false;$('#showAnswer').hidden=false;$('#showAnswer').disabled=false;$('#eoppepGradeAI').textContent='Υποβολή αξιολόγησης';
- $('#qmeta').textContent=`Ομάδα ${q.group} · Θέμα ${q.number}`;
+ $('#qmeta').textContent=`Ομάδα ${groupLetter(q.group)} · Θέμα ${q.number}`;
  $('#qOriginal').href=qSourceLink(q);
  $('#qcount').textContent=`${index+1} / ${pool.length}`;
  $('#qstatus').textContent=labelStatus(q);
@@ -266,7 +267,7 @@ function renderCatalogReader(q){
  reader.classList.remove('hidden');
  $('#catalogReaderPlaceholder').hidden=true;
  $('#catalogReaderContent').hidden=false;
- $('#catalogReaderNumber').textContent=`Ομάδα ${q.group} · Ερώτηση ${q.number} / ${q.group==='A'?105:209}`;
+ $('#catalogReaderNumber').textContent=`Ομάδα ${groupLetter(q.group)} · Ερώτηση ${q.number} / ${q.group==='A'?105:209}`;
  $('#catalogReaderQuestion').textContent=q.question;
  $('#catalogReaderTopic').textContent=q.studyTopic||'ΕΟΠΠΕΠ · Θεωρία';
  $('#catalogReaderAnswer').textContent=q.answer||'Δεν υπάρχει καταχωρισμένη απάντηση.';
