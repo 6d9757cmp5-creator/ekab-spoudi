@@ -439,6 +439,12 @@ submit.addEventListener('click', () => {
 });
 
 new ResizeObserver(() => draw(performance.now())).observe(canvas);
+
+{
+ const requested=new URLSearchParams(location.search).get('example');
+ const select=document.querySelector('#example-recording');
+ if(requested&&select&&[...select.options].some(o=>o.value===requested)){select.value=requested;select.dispatchEvent(new Event('change'));}
+}
 </script>
 </body>
 </html>

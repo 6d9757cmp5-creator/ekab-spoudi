@@ -14,7 +14,16 @@ export const ECG_EXAMPLE_CASES = Object.freeze([
   {id:'af-irregular', label:'Ακανόνιστο μοτίβο τύπου ΚΜ', rate:null, pattern:'af',
    description:'Συνθετικό παράδειγμα ακανόνιστων RR χωρίς διακριτά P· όχι αυθεντική καταγραφή κολπικής μαρμαρυγής.'},
   {id:'paced64', label:'Σχηματικό κοιλιακά βηματοδοτούμενο · 64/min', rate:64, pattern:'paced',
-   description:'Σχηματικές αιχμές βηματοδότη και ευρύτερα QRS. Δεν αξιολογεί σύλληψη ή λειτουργία συσκευής.'}
+   description:'Σχηματικές αιχμές βηματοδότη και ευρύτερα QRS. Δεν αξιολογεί σύλληψη ή λειτουργία συσκευής.'},
+  {id:'stemi-anterior', label:'Πρόσθιο έμφραγμα (STEMI) · σχηματικό', rate:84,
+   st:{I:.08,II:-.16,V1:.32,V2:.58,V3:.58,V4:.42,V5:.12,V6:0},
+   description:'Σχηματικό παράδειγμα: ανάσπαση ST στις V1–V4 (πρόσθιο τοίχωμα) με αντικατοπτρική κατάσπαση στις II, III, aVF. Δεν είναι κλινική καταγραφή ούτε διαγνωστικό κριτήριο.'},
+  {id:'stemi-inferior', label:'Κατώτερο έμφραγμα (STEMI) · σχηματικό', rate:68,
+   st:{I:0,II:.40,V1:-.08,V2:-.12,V3:-.08,V4:0,V5:0,V6:0},
+   description:'Σχηματικό παράδειγμα: ανάσπαση ST στις II, III, aVF (κατώτερο τοίχωμα) με αντικατοπτρική κατάσπαση στην aVL. Δεν είναι κλινική καταγραφή ούτε διαγνωστικό κριτήριο.'},
+  {id:'stemi-lateral', label:'Πλάγιο έμφραγμα (STEMI) · σχηματικό', rate:78,
+   st:{I:.32,II:0,V1:-.08,V2:0,V3:0,V4:.12,V5:.32,V6:.32},
+   description:'Σχηματικό παράδειγμα: ανάσπαση ST στις I, aVL, V5, V6 (πλάγιο τοίχωμα) με αντικατοπτρική κατάσπαση στις III, aVF. Δεν είναι κλινική καταγραφή ούτε διαγνωστικό κριτήριο.'}
 ]);
 const byId = new Map(ECG_EXAMPLE_CASES.map(item => [item.id, item]));
 const LEADS = Object.freeze(['I','II','III','aVR','aVL','aVF','V1','V2','V3','V4','V5','V6']);
@@ -32,7 +41,7 @@ function eventsFor(profile) {
   return events;
 }
 function partsAt(t, events, profile) {
-  let p=0,q=0,r=0,s=0,tw=0,spike=0;
+  let p=0,q=0,r=0,s=0,tw=0,spike=0,st=0;
   const paced = profile.pattern === 'paced';
   for (const at of events) {
     const x = t - at;
@@ -49,9 +58,11 @@ function partsAt(t, events, profile) {
       r += 1.10 * g(x,0,.012);
       s += -.30 * g(x,.030,.014);
       tw += .28 * g(x,.255,.072);
+      // ST segment hump from the J point into the T wave (used only by the STEMI examples).
+      st += g(x,.13,.07);
     }
   }
-  return {p,q,r,s,tw,spike};
+  return {p,q,r,s,tw,spike,st};
 }
 function voltageFor(t, events, profile) {
   const x = partsAt(t,events,profile);
@@ -59,16 +70,17 @@ function voltageFor(t, events, profile) {
     ? .018 * Math.sin(2 * Math.PI * 6.3 * t) + .010 * Math.sin(2 * Math.PI * 8.1 * t)
     : 0;
   const drift = .015 * Math.sin(2 * Math.PI * .18 * t);
-  const I = .70*x.p + .80*x.r + .48*x.q + .70*x.s + .58*x.tw + .65*x.spike + fibrillatory + drift;
-  const II = 1.06*x.p + 1.08*x.r + x.q + x.s + x.tw + .90*x.spike + fibrillatory + drift;
+  const st = profile.st ?? {};
+  const I = .70*x.p + .80*x.r + .48*x.q + .70*x.s + .58*x.tw + .65*x.spike + (st.I??0)*x.st + fibrillatory + drift;
+  const II = 1.06*x.p + 1.08*x.r + x.q + x.s + x.tw + .90*x.spike + (st.II??0)*x.st + fibrillatory + drift;
   return {
     I, II, III:II-I, aVR:-(I+II)/2, aVL:I-II/2, aVF:II-I/2,
-    V1: .26*x.p + .12*x.r + .20*x.q + 2.1*x.s + .20*x.tw + .42*x.spike + fibrillatory,
-    V2: .36*x.p + .36*x.r + .65*x.q + 1.85*x.s + .45*x.tw + .50*x.spike + fibrillatory,
-    V3: .40*x.p + .75*x.r + .70*x.q + 1.25*x.s + .76*x.tw + .58*x.spike + fibrillatory,
-    V4: .45*x.p + 1.26*x.r + .85*x.q + .66*x.s + .96*x.tw + .70*x.spike + fibrillatory,
-    V5: .42*x.p + 1.18*x.r + .90*x.q + .37*x.s + .88*x.tw + .72*x.spike + fibrillatory,
-    V6: .36*x.p + .96*x.r + .86*x.q + .32*x.s + .70*x.tw + .65*x.spike + fibrillatory
+    V1: .26*x.p + .12*x.r + .20*x.q + 2.1*x.s + .20*x.tw + .42*x.spike + (st.V1??0)*x.st + fibrillatory,
+    V2: .36*x.p + .36*x.r + .65*x.q + 1.85*x.s + .45*x.tw + .50*x.spike + (st.V2??0)*x.st + fibrillatory,
+    V3: .40*x.p + .75*x.r + .70*x.q + 1.25*x.s + .76*x.tw + .58*x.spike + (st.V3??0)*x.st + fibrillatory,
+    V4: .45*x.p + 1.26*x.r + .85*x.q + .66*x.s + .96*x.tw + .70*x.spike + (st.V4??0)*x.st + fibrillatory,
+    V5: .42*x.p + 1.18*x.r + .90*x.q + .37*x.s + .88*x.tw + .72*x.spike + (st.V5??0)*x.st + fibrillatory,
+    V6: .36*x.p + .96*x.r + .86*x.q + .32*x.s + .70*x.tw + .65*x.spike + (st.V6??0)*x.st + fibrillatory
   };
 }
 export function createEducationalTwelveLead(id, sampleRate=200) {

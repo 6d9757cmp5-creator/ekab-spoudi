@@ -4,9 +4,9 @@ import {ECG_EXAMPLE_CASES, createEducationalTwelveLead} from './ecg-examples.mjs
 
 const leads=['I','II','III','aVR','aVL','aVF','V1','V2','V3','V4','V5','V6'];
 
-test('five labelled synthetic examples exist and are not claimed as patient recordings', () => {
-  assert.equal(ECG_EXAMPLE_CASES.length,5);
-  assert.equal(new Set(ECG_EXAMPLE_CASES.map(c=>c.id)).size,5);
+test('eight labelled synthetic examples exist and are not claimed as patient recordings', () => {
+  assert.equal(ECG_EXAMPLE_CASES.length,8);
+  assert.equal(new Set(ECG_EXAMPLE_CASES.map(c=>c.id)).size,8);
   for(const c of ECG_EXAMPLE_CASES){
     assert.ok(c.label && c.description);
     const recording=createEducationalTwelveLead(c.id);
@@ -40,4 +40,25 @@ test('examples are deterministic, distinct, and reject unknown ids or invalid ra
   assert.throws(()=>createEducationalTwelveLead('unknown'));
   assert.throws(()=>createEducationalTwelveLead('sinus72',20));
   assert.throws(()=>createEducationalTwelveLead('sinus72',1000));
+});
+
+// ST level 150 ms after each R wave, relative to the PR segment, minus the same value of the normal example.
+function stShift(id){
+  const measure=rid=>{
+    const {samples,sampleRate}=createEducationalTwelveLead(rid);
+    const II=samples.map(x=>x.II),beats=[];
+    for(let i=5;i<II.length-60;i++)if(II[i]>.6&&II[i]>=II[i-1]&&II[i]>=II[i+1]&&(!beats.length||i-beats.at(-1)>40))beats.push(i);
+    return Object.fromEntries(leads.map(lead=>[lead,beats.reduce((v,b)=>v+samples[b+Math.round(.15*sampleRate)][lead]-samples[b-Math.round(.08*sampleRate)][lead],0)/beats.length]));
+  };
+  const base=measure('sinus72'),st=measure(id);
+  return Object.fromEntries(leads.map(lead=>[lead,st[lead]-base[lead]]));
+}
+test('schematic STEMI examples raise ST in their territory with reciprocal depression', () => {
+  const up=(st,ls)=>ls.forEach(l=>assert.ok(st[l]>.15,l+' should be elevated: '+st[l].toFixed(2)));
+  const down=(st,ls)=>ls.forEach(l=>assert.ok(st[l]<-.05,l+' should be depressed: '+st[l].toFixed(2)));
+  const anterior=stShift('stemi-anterior');up(anterior,['V1','V2','V3','V4']);down(anterior,['III','aVF']);
+  const inferior=stShift('stemi-inferior');up(inferior,['II','III','aVF']);down(inferior,['aVL']);
+  const lateral=stShift('stemi-lateral');up(lateral,['I','aVL','V5','V6']);down(lateral,['III']);
+  for(const id of ['stemi-anterior','stemi-inferior','stemi-lateral'])
+    assert.match(ECG_EXAMPLE_CASES.find(c=>c.id===id).description,/Σχηματικό παράδειγμα.*Δεν είναι κλινική καταγραφή/);
 });

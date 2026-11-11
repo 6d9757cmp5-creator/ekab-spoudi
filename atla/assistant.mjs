@@ -142,6 +142,8 @@ function boot(){
   addAddonCss('./practice/saek-practice.css');
   void import('./practice/saek-practice.mjs').catch(()=>{});
  }
+ // Chapters and EOPPEP questions about the ECG link to the matching part of the ECG lab.
+ if(/^saek-course-(?:0[1-9]|1[0-9]|20)\.html$/.test(currentPage)||currentPage==='theory.html')void import('./practice/ecg-links.mjs').catch(()=>{});
  const history=()=>{try{return loadTurns(storage);}catch{return [];}};
  function showHistory(){
   stream.replaceChildren();
