@@ -2,6 +2,9 @@ import {CATEGORIES,TOPICS} from './protocols-data.mjs';
 const $=id=>document.getElementById(id);
 const safeText=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('el');
 let current='all';
+// Search terms that find each topic in the SAEK chapters and EOPPEP questions.
+const MATERIAL={chest:'θωρακικό πόνο',palpitations:'ταχυκαρδία',dyspnea:'δύσπνοια',airway:'αεραγωγός',trauma:'τραύμα',bleeding:'αιμορραγία',
+ stroke:'εγκεφαλικό',consciousness:'συνείδηση',pediatric:'παιδί',obstetric:'κύηση',mci:'πολλαπλών',transport:'διακομιδή'};
 const categoryFor=id=>CATEGORIES.find(c=>c.id===id)?.label||'Εκπαιδευτικό θέμα';
 function appendLink(parent,label,url,cls){
  const a=document.createElement('a');a.textContent=label;a.href=url;a.className=cls;parent.append(a);
@@ -33,11 +36,11 @@ function renderTopics(){
   const title=document.createElement('h3');title.textContent=t.name;
   const category=document.createElement('p');category.textContent=categoryFor(t.category);
   const desc=document.createElement('p');desc.textContent='Εκπαιδευτική εστίαση: '+t.focus+'.';
-  const badge=document.createElement('span');badge.className='tag';badge.textContent='Όχι επαληθευμένο επιχειρησιακό πρωτόκολλο';
   const actions=document.createElement('div');actions.className='actions';
   const topic=encodeURIComponent(t.id);
+  if(MATERIAL[t.id])appendLink(actions,'Στην ύλη ΣΑΕΚ και ΕΟΠΠΕΠ ›','search.html?q='+encodeURIComponent(MATERIAL[t.id]),'btn');
   appendAtlaStudyButton(actions,t.name);
-  card.append(title,category,desc,badge,actions);list.append(card);
+  card.append(title,category,desc,actions);list.append(card);
  }
 }
 $('protocol-search').addEventListener('input',renderTopics);
