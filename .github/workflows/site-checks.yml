@@ -1,0 +1,70 @@
+name: Site checks
+# Basic checks on every pull request and on main, so a broken page, link or test is seen
+# before students see it. Details of each check: tools/ci/site-checks.mjs and page-smoke.mjs.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  files:
+    name: Scripts, JSON, offline cache and links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax, JSON, service worker list and local links
+        run: node tools/ci/site-checks.mjs
+      - name: Unit tests
+        run: |
+          node --test tools/atla-ai/anatomy-curation.test.mjs tools/ecg-lab/core/*.test.mjs
+          node tools/anatomy-3d/test-greek-names.mjs
+          node ui-tools/anatomy-3d/test-greek-names.mjs
+
+  html:
+    name: W3C HTML validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate every published page
+        run: |
+          npm install --no-save --no-audit --no-fund vnu-jar@24.10.17
+          pages=$(ls *.html | grep -v '^pr6-images-preview\.html$')
+          # ::details-content is valid CSS that this validator release does not know yet.
+          java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --format gnu \
+            --filterpattern '.*details-content.*' $pages ui-tools/anatomy-3d/index.html
+
+  pages:
+    name: Every page opens without JavaScript errors
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Open each page on phone and desktop width
+        run: |
+          python3 -m http.server 8799 --bind 127.0.0.1 >/dev/null 2>&1 &
+          sleep 2
+          node tools/ci/page-smoke.mjs http://127.0.0.1:8799
