@@ -66,8 +66,8 @@ export function installSaekEcgLinks(doc=document,base=new URL('../../',import.me
 
 /** EOPPEP reader: the box follows the question on screen; never shown in the exam view. */
 export function eoppepQuestionId(text){
- const m=/^Ομάδα ([AB]) · Ερώτηση (\d+) \/ (105|209)$/.exec(String(text||'').trim());
- return m?'EOP-'+m[1]+'-'+String(Number(m[2])).padStart(3,'0'):'';
+ const m=/^Ομάδα ([ABΑΒ]) · Ερώτηση (\d+) \/ (105|209)$/.exec(String(text||'').trim());
+ return m?'EOP-'+({'Α':'A','Β':'B'}[m[1]]||m[1])+'-'+String(Number(m[2])).padStart(3,'0'):'';
 }
 export function installEoppepEcgLinks(doc=document,base=new URL('../../',import.meta.url)){
  const number=doc.getElementById('catalogReaderNumber'),anchor=doc.getElementById('catalogReaderReadySos');

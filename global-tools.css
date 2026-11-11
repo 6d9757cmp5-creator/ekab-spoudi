@@ -225,8 +225,9 @@ html[data-theme="dark"] .ekab-search-glossary{background:#1c4053;color:#dcf1fc;b
 html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
 
 /* Inline application version — small, readable and synced with CURRENT. */
+/* The version stays in Λογαριασμός › Έκδοση; next to the logo it only distracted students. */
 .top .brand h1 .brand-version {
- display:inline-block;
+ display:none;
  margin-left:5px;
  font-size:.55em;
  font-weight:600;
@@ -236,3 +237,9 @@ html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
  white-space:nowrap;
  color:#bed8e8;
 }
+
+/* Search field on search.html */
+.global-search-page-form{margin:14px 0 18px}.global-search-page-form label{display:block;font-weight:700;margin-bottom:6px}
+.global-search-page-row{display:flex;gap:8px;flex-wrap:wrap}.global-search-page-row input{flex:1 1 220px;min-height:46px;padding:10px 12px;font:inherit;border:1px solid #9bb7c4;border-radius:10px}
+.global-search-page-row .btn{min-height:46px}
+html[data-theme="dark"] .global-search-page-row input{background:#173244;color:#eef7fb;border-color:#41657a}

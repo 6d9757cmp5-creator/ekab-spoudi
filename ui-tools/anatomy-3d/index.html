@@ -63,8 +63,8 @@
             <div class="camera-tools" role="group" aria-label="Έλεγχοι κάμερας">
               <button type="button" id="zoomIn" aria-label="Μεγέθυνση">+</button>
               <button type="button" id="zoomOut" aria-label="Σμίκρυνση">−</button>
-              <button type="button" id="frontView" title="Πρόσθια όψη">Εμπρός</button>
-              <button type="button" id="backView" title="Οπίσθια όψη">Πίσω</button>
+              <button type="button" id="frontView">Πρόσθια όψη</button>
+              <button type="button" id="backView">Οπίσθια όψη</button>
               <button type="button" id="resetView" title="Επαναφορά προβολής" aria-label="Επαναφορά προβολής">⟲</button>
             </div>
             <div id="hotspot" class="hotspot" hidden></div>
@@ -176,8 +176,8 @@
             <input id="source-opacity" type="range" min="15" max="100" step="5" value="100" disabled>
             <div class="source-tools">
               <button id="view-reset" type="button" disabled>Κέντρο</button>
-              <button id="view-front" type="button" disabled>Εμπρός</button>
-              <button id="view-side" type="button" disabled>Πλάι</button>
+              <button id="view-front" type="button" disabled>Πρόσθια όψη</button>
+              <button id="view-side" type="button" disabled>Πλάγια όψη</button>
             </div>
             <p id="source-mesh-info" role="status"></p>
           </details>
@@ -204,8 +204,8 @@
                 <option value="organs">Μόνο όργανα και συστήματα</option>
               </select>
               <div class="source-tools">
-                <button id="atlas-front" type="button">Εμπρός</button>
-                <button id="atlas-side" type="button">Πλάι</button>
+                <button id="atlas-front" type="button">Πρόσθια όψη</button>
+                <button id="atlas-side" type="button">Πλάγια όψη</button>
                 <button id="atlas-center" type="button">Κέντρο</button>
               </div>
             </div>

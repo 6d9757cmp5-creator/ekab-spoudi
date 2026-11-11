@@ -234,3 +234,9 @@ html[data-theme] .ekab-note-actions .ekab-note-delete:hover{
 #ekabNotesHideFloating{min-width:39px;min-height:39px;border:1px solid #557089;border-radius:11px;background:#263d57;color:#f5e9d8;font:750 1.15rem/1 system-ui,-apple-system,Segoe UI,sans-serif;cursor:pointer;touch-action:manipulation}
 #ekabNotesHideFloating:hover{background:#354f6d;border-color:#f0b96e;color:#ffe1aa}
 @media(max-width:600px){#ekabNotesHideFloating{min-width:36px;min-height:36px}}
+
+/* v27.1.132 — the notes button sits right above the ATLA button instead of under it,
+   and every page keeps room at the end so the two buttons never cover the last action. */
+.ekab-notes-fab{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+@media(max-width:600px){.ekab-notes-fab{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
+body:has(.ekab-notes-fab)::after{content:'';display:block;height:calc(140px + env(safe-area-inset-bottom,0px))}
