@@ -122,7 +122,7 @@
       <header class="unified-library-heading">
         <h2>Λεπτομερής εξερεύνηση</h2>
         <a id="source-back" href="../../index.html" hidden>← Επιστροφή στο μάθημα</a>
-        <p>Λεπτομερή μοντέλα πραγματικών ανθρώπινων δομών, μέσα στον ίδιο άτλαντα. Ξεκίνα επιλέγοντας μια δομή στο σώμα ή αναζήτησέ τη εδώ. Τα παθολογικά παραδείγματα σημειώνονται χωριστά και δεν αποτελούν πρότυπο φυσιολογικής ανατομίας.</p>
+        <p>Ξεχωριστά, λεπτομερή μοντέλα πραγματικών ανθρώπινων δομών. Ο πλήρης άτλαντας του σώματος βρίσκεται στο «Πλήρες σώμα». Εδώ αναζητάς μία δομή και τη βλέπεις μόνη της, από κοντά. Τα παθολογικά παραδείγματα σημειώνονται χωριστά και δεν αποτελούν πρότυπο φυσιολογικής ανατομίας.</p>
       </header>
       <p id="unified-library-message" role="status">Προετοιμασία κοινής βιβλιοθήκης…</p>
       <div hidden aria-hidden="true">
@@ -142,7 +142,6 @@
           <p class="source-filter-help">Εμφανίζονται μόνο ελεγμένες ανθρώπινες δομές. Μόρια, κύτταρα, συσκευές, ζωικά δείγματα και χαρακτήρες προσομοίωσης δεν ανήκουν στον άτλαντα.</p>
           <label for="source-query">Αναζήτηση μοντέλου ή ανατομικής δομής</label>
           <input type="search" id="source-query" placeholder="π.χ. μηριαίο, καρδιά, γόνατο, σπόνδυλος…" autocomplete="off">
-          <label for="source-dataset" hidden>Ενιαίος κατάλογος συλλογών</label>
           <select id="source-dataset" hidden aria-label="Ενιαίος κατάλογος συλλογών">
             <option value="all" selected>Όλα τα διαθέσιμα και καταχωρισμένα</option>
             <option value="primary">Ανατομικά HRA / HuBMAP</option>
@@ -159,18 +158,8 @@
           <p class="source-note" id="source-license"></p>
           <div id="source-details" hidden></div>
 
-          <div class="atlas-entry" role="group" aria-label="Πλήρεις άτλαντες στον ίδιο προβολέα">
-            <h3>Πλήρεις ανατομικοί άτλαντες</h3>
-            <label for="atlas-version">Έκδοση BodyParts3D</label>
-            <select id="atlas-version">
-              <option value="bp3d40">4.0 · 1.259 πλέγματα · ~68 MiB</option>
-              <option value="bp3d43">4.3 · 3.210 πλέγματα · ~193 MiB</option>
-            </select>
-            <button id="atlas-load" type="button">Άνοιγμα άτλαντα εδώ</button>
-            <p id="atlas-status" class="source-note" role="status" aria-live="polite">Οι άτλαντες παραμένουν αποθηκευμένοι στην εφαρμογή. Η λήψη γίνεται μόνο με επιλογή.</p>
-          </div>
           <details>
-            <summary>Εργαλεία εξερεύνησης του μοντέλου</summary>
+            <summary>Εργαλεία προβολής: μέρη, διαφάνεια, όψη</summary>
             <label for="source-part">Μέρος μοντέλου</label>
             <select id="source-part" disabled><option>Φόρτωσε μοντέλο</option></select>
             <div class="source-tools">

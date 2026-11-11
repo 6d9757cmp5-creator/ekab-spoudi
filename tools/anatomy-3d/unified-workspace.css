@@ -26,15 +26,11 @@
 @media(max-width:820px){.unified-library .source-layout{grid-template-columns:1fr}.unified-library #source-canvas{height:48vh;min-height:300px}.one-anatomy-tabs button{flex:1 1 160px}}
 
 
-.unified-library .atlas-entry{margin:15px 0;padding:13px;border:1px solid #45718d;background:#163a4f;border-radius:12px}
-.unified-library .atlas-entry h3{margin:0;font-size:1.05rem}
-.unified-library .atlas-entry #atlas-load{margin-top:10px;width:100%}
 .unified-library #atlas-stage[hidden],.unified-library #source-stage[hidden]{display:none!important}
 .unified-library #atlas-canvas{display:block;background:#08192b;border:1px solid #2b5470;border-radius:12px;width:100%;height:min(65vh,620px);min-height:360px;touch-action:none}
 .unified-library #atlas-stage label{display:block;margin:8px 0;font-weight:650}
 .unified-library .atlas-results{display:flex;flex-direction:column;gap:5px;max-height:240px;overflow:auto;margin:8px 0}
 .unified-library .atlas-result{background:#193e50;color:#eef5f9;text-align:left;font-size:.85rem;padding:7px 9px;min-height:34px}
-.unified-library #atlas-status[data-error=true]{color:#ffc2a8}
 .unified-library #atlas-unload{background:#315268;color:#eef5f9;margin-top:6px}
 @media(max-width:820px){.unified-library #atlas-canvas{height:48vh;min-height:300px}}
 
