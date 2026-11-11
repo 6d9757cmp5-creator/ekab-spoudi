@@ -118,6 +118,12 @@ function resultLink(item){
  if(item.preview)link.append(el('span','saek-result-preview',item.preview));
  return link;
 }
+// Where "← Πίσω" leads when the page was opened directly (no page of the app to go back to).
+const PARENT_PAGE=file=>/^saek-course-\d+\.html$/.test(file)||/^(saek-exams|saek-images|eclass|pdf-library|apantiseis|piges)\.html$/.test(file)?'saek.html'
+ :/^(theory|practical_exam|written_exam|supplementary_practice|exam_focus|study_map)\.html$/.test(file)?'eoppep.html'
+ :/^(anatomia|fysiologia|diasostis|dimosia_ygeia|ektimisi|agglika)\.html$/.test(file)?({anatomia:'01',fysiologia:'02',diasostis:'03',dimosia_ygeia:'04',ektimisi:'05',agglika:'06'})[file.replace('.html','')].replace(/^/,'saek-course-')+'.html'
+ :/^mentor-[a-z-]+\.html$/.test(file)?'paramedic.html'
+ :'index.html';
 function installSectionNav(){
  const nav=document.querySelector('header.top .nav');if(!nav||nav.classList.contains('ekab-breadcrumb'))return;
  const file=location.pathname.split('/').pop()||'index.html';
@@ -125,7 +131,7 @@ function installSectionNav(){
  const names={'theory.html':'Θεωρία ΕΟΠΠΕΠ','practical_exam.html':'Πρακτικό ΕΟΠΠΕΠ','saek.html':'Κατάρτιση ΣΑΕΚ','farmaka.html':'Φαρμακολογία','search.html':'Αποτελέσματα αναζήτησης'};
  const existing=nav.querySelector('a.active')?.textContent?.trim();
  const current=names[file]||(file.startsWith('saek-course-')?'Μάθημα ΣΑΕΚ':existing||'Εκπαιδευτικό υλικό');
- const home=el('a','ekab-home-back','← Πίσω');home.href=file==='saek.html'?'index.html':'index.html';home.addEventListener('click',event=>{try{if(history.length>1&&document.referrer&&new URL(document.referrer).origin===location.origin){event.preventDefault();history.back()}}catch{}});
+ const home=el('a','ekab-home-back','← Πίσω');home.href=PARENT_PAGE(file);home.addEventListener('click',event=>{try{if(history.length>1&&document.referrer&&new URL(document.referrer).origin===location.origin){event.preventDefault();history.back()}}catch{}});
  nav.className='nav ekab-breadcrumb';nav.replaceChildren(home,el('span','ekab-section-name',current));
 }
 function installSearch(){

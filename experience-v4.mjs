@@ -39,8 +39,7 @@ function start(){
    if(target.tagName==='DETAILS')target.open=true;
    target.scrollIntoView({behavior:'smooth',block:'start'});
   });
-  const back=h('a','','← Όλα τα μαθήματα');back.href='saek.html';
-  nav.append(title,label,select,contents,back);
+  nav.append(title,label,select,contents);
   const breadcrumb=main.querySelector('.reader-breadcrumb');
   if(breadcrumb)breadcrumb.insertAdjacentElement('afterend',nav);
   else main.prepend(nav);
@@ -62,8 +61,7 @@ function start(){
  select.addEventListener('change',()=>{
   const item=groups.find(s=>s.id===select.value);if(item)item.scrollIntoView({block:'start',behavior:'smooth'});
  });
- const back=h('a','','← Αρχική');back.href='index.html';
- nav.append(label,select,back);
+ nav.append(label,select);
  main.prepend(nav);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
