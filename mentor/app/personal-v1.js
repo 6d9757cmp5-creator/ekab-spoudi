@@ -58,7 +58,9 @@ document.querySelectorAll('[data-mentor-self-review]').forEach(button=>button.ad
  memory=engine.recordReview(memory,current.id,quality);
  const due=memory.topics[current.id]?.due||'';
  const stored=save();
- note(stored?'Προγραμματίστηκε προσωπική επανάληψη: '+due+'. Δεν ενημερώθηκαν βαθμοί ΣΑΕΚ/ΕΟΠΠΕΠ.':'Η αποθήκευση δεν είναι διαθέσιμη.');
+ document.querySelectorAll('[data-mentor-self-review]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ button.textContent=button.textContent.replace(/^✓ /,'');button.textContent='✓ '+button.textContent;
+ note(stored?'✓ Καταγράφηκε. Επόμενη επανάληψη: '+due+'.':'Η αποθήκευση δεν είναι διαθέσιμη σε αυτή τη συσκευή.');
  current=engine.guide(memory,'',{});
  render();
 }));

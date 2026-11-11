@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ATLA · Βιβλιογραφία Paramedic · ΕΚΑΒ Σπουδή</title>
+<title>Βιβλιογραφία · ΕΚΑΒ Σπουδή</title>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
 .sources-wrap{max-width:1000px;margin:0 auto;padding:18px}
@@ -25,19 +25,21 @@
 <script type="module" src="mentor-library.js"></script>
 <link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script><meta name="description" content="ATLA · Βιβλιογραφία Paramedic · ΕΚΑΒ Σπουδή — ΕΚΑΒ Σπουδή, εκπαιδευτική εφαρμογή για Διασώστη – Πλήρωμα Ασθενοφόρου.">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>.sources-start{padding:12px 14px;border-left:4px solid #176d77;background:#e9f6f4;border-radius:8px}html[data-theme="dark"] .sources-start{background:#173b3f}</style>
 </head>
 <body>
 <main class="sources-wrap">
-<p><a data-ekab-back-spot href="mentor-lab.html">← Μελέτη και ασκήσεις</a></p>
-<h1>ATLA · Βιβλιογραφία Paramedic</h1>
-<p>Εκπαιδευτικές πηγές διασώστη. Η εξειδικευμένη Ιατρική είναι εσωτερική βιβλιογραφική γνώση του ATLA AI και δεν αποτελεί δεύτερη μαθητική διαδρομή.</p>
-<p>Απογραφή πηγών και βιβλίων, όχι πρόσβαση στα πλήρη κείμενά τους. <strong>Δεν αποτελεί εγκεκριμένη κλινική βιβλιοθήκη.</strong> Οι σύνδεσμοι οδηγούν στον αρχικό εκδότη.</p>
+<p><a data-ekab-back-spot href="paramedic.html">← Εργαλεία μελέτης</a></p>
+<h1>Βιβλιογραφία</h1>
+<p class="sources-start"><strong>Ξεκίνα από το επίσημο ελληνικό εγχειρίδιο.</strong> Ο <a href="study_map.html">Χάρτης μελέτης ΕΟΠΠΕΠ ↔ ΣΑΕΚ</a> δείχνει για κάθε μάθημα τις σελίδες του εγχειριδίου.</p>
+<h2>Περαιτέρω διάβασμα</h2>
+<p>Διεθνείς πηγές για διασώστες, κυρίως στα αγγλικά. Οι σύνδεσμοι οδηγούν στον εκδότη.</p>
 <div id="source-counts" class="sources-summary" aria-live="polite"></div>
 <section class="sources-filters" role="search" aria-label="Αναζήτηση βιβλιογραφίας">
   <label for="source-search">Αναζήτηση πηγής ή φορέα</label>
   <input id="source-search" type="search" autocomplete="off" placeholder="π.χ. WHO, Nursing, ERC" maxlength="120">
-  <label for="source-stage">Κατάσταση εισαγωγής</label>
-  <select id="source-stage">
+  <label for="source-stage" hidden>Κατάσταση εισαγωγής</label>
+  <select id="source-stage" hidden>
     <option value="all">Όλες οι πηγές</option>
     <option value="extracted">Εξαγμένο κείμενο, σε έλεγχο</option>
     <option value="identified">Χωρίς εισαγμένο πλήρες κείμενο</option>
