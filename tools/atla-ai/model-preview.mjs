@@ -323,8 +323,7 @@ function renderList(){
   const option=new Option(tag+(a.available?'':'[Μόνο στοιχεία] ')+a.label,String(i));
   return option;
  }));
- $('source-count').textContent=assets.length+' εγγραφές στην προβολή · '+
-  assets.filter(x=>x.available).length+' διαθέσιμες για 3D · '+allAssets.length+' συνολικά στη βιβλιοθήκη.';
+ $('source-count').textContent=assets.filter(x=>x.available).length+' μοντέλα για προβολή 3D.';
  button.disabled=!assets[0]?.available;
  $('source-license').textContent='';
  showDetails(assets[0]||{details:null});
