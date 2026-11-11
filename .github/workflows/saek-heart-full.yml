@@ -1,0 +1,75 @@
+name: UNPUBLISHED full SAEK heart lesson
+on:
+  push:
+    branches:
+      - feature/saek-heart-complete-video-20261111
+    paths:
+      - "pilots/heart/full/**"
+      - ".github/workflows/saek-heart-full.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: saek-full-heart-draft
+  cancel-in-progress: true
+jobs:
+  draft:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          lfs: false
+          fetch-depth: 1
+          sparse-checkout: |
+            pilots/heart
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq blender xvfb libgl1-mesa-dri python3-numpy python3-venv ffmpeg
+          python3 -m venv /tmp/heart-tts-venv
+          /tmp/heart-tts-venv/bin/pip -q install "edge-tts>=7,<8"
+      - name: Render Greek narration and exact timing
+        run: |
+          /tmp/heart-tts-venv/bin/python pilots/heart/full/prepare_audio.py
+          test -s pilots/heart/full/timing.json
+          test "$(find pilots/heart/public/audio -name '*.mp3' | wc -l)" -eq 8
+      - name: Download immutable HRA sources and verify
+        run: |
+          mkdir -p pilots/heart/public/render /tmp/hra-source
+          curl -fsSL --retry 3 -o /tmp/hra-source/VH_F_Heart.glb https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Heart.glb
+          curl -fsSL --retry 3 -o /tmp/hra-source/VH_F_Lung.glb https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.2/models/VH_F_Lung.glb
+          echo '9afdfb2ccf926869813582cfe150dce8cb28377417a968a4f29a5b8dc060428b  /tmp/hra-source/VH_F_Heart.glb' | sha256sum -c
+          echo 'a6a81718f4d0974bcbab47c6dc38efc941ad5c7f5f256bf7ff112c710a7fd932  /tmp/hra-source/VH_F_Lung.glb' | sha256sum -c
+      - name: Blender render anatomical models plus identified 3D structures
+        run: |
+          HRA_PREVIEW_MODEL_DIR=/tmp/hra-source xvfb-run -a blender --background --factory-startup --python pilots/heart/full/scene_full.py -- "$PWD" "$PWD/pilots/heart/public/render" >/tmp/saek-blender.log 2>&1 || { tail -90 /tmp/saek-blender.log; exit 1; }
+          tail -18 /tmp/saek-blender.log
+          test "$(find pilots/heart/public/render -name '*.png' | wc -l)" -eq 108
+          ls -lh pilots/heart/public/render/frame_0030.png
+      - name: Remotion build and H264 export
+        working-directory: pilots/heart
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund
+          npx remotion browser ensure
+          npx remotion render full/full.jsx HeartComplete ../saek-kardia-complete-UNPUBLISHED.mp4 --codec h264 --log=error --concurrency=3 --quality=85
+          test -s ../saek-kardia-complete-UNPUBLISHED.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,r_frame_rate -of default=noprint_wrappers=1 ../saek-kardia-complete-UNPUBLISHED.mp4
+          ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1 ../saek-kardia-complete-UNPUBLISHED.mp4
+      - name: Publish to Actions ARTIFACT only, never GitHub Pages
+        run: |
+          mkdir -p pilots/heart/review-output
+          cp pilots/heart/full/timing.json pilots/heart/review-output/full-timing.json
+          sha256sum pilots/saek-kardia-complete-UNPUBLISHED.mp4 > pilots/heart/review-output/sha256.txt
+          printf 'UNPUBLISHED. NOT CLINICALLY VALIDATED. NO LIVE SITE MODIFICATIONS.\n' > pilots/heart/review-output/STATUS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SAEK-FULL-HEART-LESSON-REVIEW-UNPUBLISHED
+          path: |
+            pilots/saek-kardia-complete-UNPUBLISHED.mp4
+            pilots/heart/review-output/
+          retention-days: 21
