@@ -56,6 +56,11 @@ document.getElementById('detailExplore')?.addEventListener('click',event=>{
  window.dispatchEvent(new CustomEvent('atla:explore-structure',{detail:{greek,english}}));
  switchTo('models');
 });
+// Close-up of the selected structure in the full atlas (the structure stays selected while the pane changes).
+window.addEventListener('atla:atlas-closeup',()=>{
+ switchTo('base');
+ requestAnimationFrame(()=>{const focus=document.getElementById('isolateBtn');if(focus&&!focus.disabled)focus.click();document.getElementById('base-anatomy')?.scrollIntoView({behavior:'smooth',block:'start'});});
+});
 window.addEventListener('hashchange',()=>show(location.hash==='#models'?'models':'base'));
 show(location.hash==='#models'?'models':'base');
 
