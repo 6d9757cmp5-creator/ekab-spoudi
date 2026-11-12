@@ -137,19 +137,36 @@ async function collectTokens(stream){
   if(text.length>6000)break;}
  return text;
 }
+/** The conversation plus the model's own answer and a request to add the source markers. */
+export function citeRepair(messages,draft){
+ return [...messages,{role:'assistant',content:draft},
+  {role:'user',content:'Ξαναγράψε ακριβώς την ίδια απάντηση, βάζοντας μετά από κάθε πρόταση με πληροφορία την ένδειξη του αποσπάσματος από το οποίο προέρχεται, π.χ. [Τ1]. Αφαίρεσε ό,τι δεν στηρίζεται σε απόσπασμα. Γράψε μόνο την απάντηση.'}];
+}
 /** Tries each model in order; the first answer that passes the safety audit wins. */
 export async function answer(request,env,body,{askers}={}){
  const messages=buildMessages(body);
  const chain=askers||[
-  ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages)})):[]),
-  ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
+  ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
+  ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
   {name:'claude',ask:()=>askClaude(request,env,messages)}
  ];
  const trace=[];
+ let repaired=false;
  for(const step of chain){
   let text='';
   try{text=String(await step.ask()||'').trim();}catch{text='';}
-  const verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
+  let verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
+  // Free models often write a good answer but forget the [Τ1] markers. Once per question, the same
+  // free model is asked to add them; the rewrite passes the full audit again. Never for the paid model.
+  if(!verdict.ok&&verdict.reason==='missing-or-unknown-citation'&&!repaired&&step.repair){
+   repaired=true;
+   trace.push(step.name+':'+verdict.reason);
+   try{text=String(await step.repair(text)||'').trim();}catch{text='';}
+   verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
+   if(verdict.ok)return {text,provider:step.name+'+cite',trace};
+   trace.push(step.name+'+cite:'+verdict.reason);
+   continue;
+  }
   if(verdict.ok)return {text,provider:step.name,trace};
   trace.push(step.name+':'+verdict.reason);
  }
@@ -199,6 +216,6 @@ export default {
   // Which models were tried and why they were rejected (reasons only, never text).
   if(!result.text)return json({error:'unavailable'},503,{...headers,'x-atla-trace':result.trace.join(' ').slice(0,300)});
   if(key)ctx?.waitUntil?.(caches.default.put(key,new Response(JSON.stringify(result),{headers:{'content-type':'application/json','cache-control':'max-age='+CACHE_DAYS*86400}})));
-  return verifiedSseResponse(result.text,{...headers,'x-atla-provider':result.provider});
+  return verifiedSseResponse(result.text,{...headers,'x-atla-provider':result.provider,'x-atla-trace':result.trace.join(' ').slice(0,300)});
  }
 };

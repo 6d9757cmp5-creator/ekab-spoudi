@@ -33,6 +33,16 @@ export const ATLA_RUNTIME_RULES=[
 ].join(' ');
 const CITATION=/\[([ΤT])([1-9][0-9]?)\]/g;
 const DOSE=/(?<![\p{L}\p{N}])\d+(?:[.,]\d+)?\s*(?:mg|mcg|ml|μg|µg|g|iu|ui|μονάδες)(?![\p{L}])/iu;
+const DOSE_ALL=new RegExp(DOSE.source,'giu');
+const squashLower=s=>String(s??'').toLowerCase().replace(/\s+/g,'');
+// A measured value copied from a lesson passage ("70 mg/dl" glucose, "70 ml" stroke volume) is
+// physiology, not dosing. Values from the drug catalog, or from a passage with no known source, stay blocked.
+function doseOutsideLessons(text,passages){
+ const lessons=(Array.isArray(passages)?passages:[])
+  .filter(p=>/^[\w.-]+#/.test(String(p?.ref??''))&&!String(p.ref).startsWith('farmaka'))
+  .map(p=>squashLower(p.definition));
+ return [...text.matchAll(DOSE_ALL)].some(m=>!lessons.some(d=>d.includes(squashLower(m[0]))));
+}
 /**
  * Fail-closed surface gate for grounded AI output. Cannot prove clinical correctness
  * or semantic consistency; these still require independent scientific QA.
@@ -45,7 +55,7 @@ export function auditAssistantReply(reply,passages=[]){
  if(!citations.length||citations.some(id=>!allowed.has(id)))return {ok:false,reason:'missing-or-unknown-citation'};
  if(/[\u0400-\u052F\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF]/u.test(text))
    return {ok:false,reason:'unexpected-non-greek-script'};
- if(DOSE.test(text))return {ok:false,reason:'unsafe-dose-output'};
+ if(doseOutsideLessons(text,passages))return {ok:false,reason:'unsafe-dose-output'};
  if(/[a-z][α-ωάέήίόύώϊϋΐΰ]|[α-ωάέήίόύώϊϋΐΰ][a-z]/i.test(text))return {ok:false,reason:'mixed-script-word'};
  // A source ID alone never validates a new numerical claim. Emergency contact
  // numbers are platform safety guidance, not lesson evidence.
