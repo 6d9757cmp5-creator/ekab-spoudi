@@ -365,6 +365,9 @@ function openCurrentChapterHash(){
  const a=document.querySelector('.chapter-toc a[href="'+hash+'"]');
  if(a){a.click();document.querySelector(hash)?.scrollIntoView({block:'start'})}
 }
-function init(){installSectionNav();installSearch();installGlossary();showSearchPage();showExtraExercise();window.addEventListener('hashchange',openCurrentChapterHash)}
+// Short captions shown next to the header icons on wide screens (UX review #30); phones keep icons only.
+const ICON_CAPTIONS={'Άνοιγμα γενικής αναζήτησης':'Αναζήτηση','Ενεργοποίηση σκοτεινού θέματος':'Θέμα','Ενεργοποίηση φωτεινού θέματος':'Θέμα','Επάγγελμα και Νομοθεσία':'Νομοθεσία','Επαφές και τηλέφωνα ΕΚΑΒ':'Επαφές','Ειδοποιήσεις':'Ειδοποιήσεις','Απόκρυψη αιωρούμενων σημειώσεων':'Σημειώσεις','Εμφάνιση αιωρούμενων σημειώσεων':'Σημειώσεις'};
+function captionHeaderIcons(){for(const b of document.querySelectorAll('header.top .utility a, header.top .utility button')){const c=ICON_CAPTIONS[b.getAttribute('aria-label')||''];if(c&&!b.dataset.caption)b.dataset.caption=c}}
+function init(){installSectionNav();installSearch();installGlossary();captionHeaderIcons();setTimeout(captionHeaderIcons,1500);showSearchPage();showExtraExercise();window.addEventListener('hashchange',openCurrentChapterHash)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
