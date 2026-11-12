@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102f3b">
+<meta name="description" content="ΕΚΑΒ Σπουδή: εργαστήριο επικοινωνίας και παράδοσης με συνθετικά περιστατικά, κλειστό κύκλο, ATMIST, καταγραφή και μεταβίβαση ευθύνης, με αντικειμενικό έλεγχο απαντήσεων.">
+<title>ATLA · Εργαστήριο Επικοινωνίας &amp; Παράδοσης | ΕΚΑΒ Σπουδή</title>
+<link rel="stylesheet" href="mentor-vitals.css">
+<link rel="stylesheet" href="tools/handover-lab/handover.css">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="navigation.css?v=4">
+<script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script>
+<script type="module" src="atla/assistant.mjs"></script>
+<script type="module" src="tools/handover-lab/app.mjs"></script>
+</head>
+<body>
+<a class="vs-skip" href="#learning">Μετάβαση στην εξάσκηση</a>
+<header class="vs-topbar">
+ <div class="vs-toprow">
+  <a href="paramedic.html#lab-communication" class="vs-back">← Εργαλεία μελέτης</a>
+  <span class="vs-brand">✚ ATLA <small>ΕΚΑΒ ΣΠΟΥΔΗ</small></span>
+ </div>
+</header>
+<main class="vs-container">
+ <header class="vs-hero">
+  <div>
+   <p class="vs-eyebrow">ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ · ΠΙΛΟΤΙΚΗ ΛΕΙΤΟΥΡΓΙΑ</p>
+   <h1>Επικοινωνία <span>&amp;</span> Παράδοση</h1>
+   <p>Διάβασε το συνθετικό περιστατικό, κάνε την άσκηση και δες αμέσως τι ήταν σωστό και γιατί, με παραπομπή στην ύλη.</p>
+   <div class="vs-hero-links"><a href="mentor-oral.html?practice=handover">🎙️ Προφορική εξάσκηση</a><a href="mentor-vitals.html">❤️ Ζωτικά Σημεία</a></div>
+  </div>
+ </header>
+ <div class="vs-safety" role="note"><strong>Μόνο για εκπαιδευτική χρήση.</strong> Τα περιστατικά, τα ονόματα, οι διευθύνσεις και οι τιμές είναι επινοημένα. Ο έλεγχος αφορά τη δομή και την ακρίβεια της επικοινωνίας· δεν πιστοποιεί πρακτική επάρκεια και δεν αντικαθιστά τις οδηγίες της υπηρεσίας ή τον εκπαιδευτή.</div>
+ <div class="vs-layout" id="learning">
+  <aside class="vs-aside" aria-labelledby="hl-topics-heading">
+   <h2 id="hl-topics-heading">Υποενότητες</h2>
+   <nav id="hl-topic-nav" aria-label="Εργαστήριο Επικοινωνίας και Παράδοσης"></nav>
+   <label class="vs-select-label" for="hl-case">Περιστατικό
+    <select id="hl-case"></select>
+   </label>
+   <div class="vs-session">
+    <strong>Προσωρινή πρόοδος εξάσκησης</strong>
+    <p id="hl-score" aria-live="polite">Σωστά σημεία: 0 / 0</p>
+    <p>Η επίδοση δεν αποθηκεύεται ούτε μεταβάλλει τους βαθμούς ΣΑΕΚ/ΕΟΠΠΕΠ.</p>
+    <button id="hl-reset" type="button">Νέα εξάσκηση</button>
+   </div>
+  </aside>
+  <div class="vs-content">
+   <section class="vs-panel" aria-labelledby="hl-title">
+    <div class="vs-panel-heading"><div><p class="vs-eyebrow" id="hl-eyebrow">ΥΠΟΕΝΟΤΗΤΑ</p><h2 id="hl-title">Λήψη στοιχείων</h2></div><span id="hl-index" class="vs-index">1 / 6</span></div>
+    <p id="hl-goal" class="vs-hint"></p>
+    <div id="hl-exercise"></div>
+   </section>
+   <section class="vs-panel vs-sources" aria-labelledby="hl-sources-heading"><details open><summary>Πηγές και αντίστοιχη ύλη</summary>
+    <h2 id="hl-sources-heading">Πηγές και ύλη</h2>
+    <p>Κάθε άσκηση στηρίζεται στα παρακάτω κεφάλαια της ΣΑΕΚ και στον Οδηγό ΕΟΠΠΕΠ. Η υπηρεσία μπορεί να χρησιμοποιεί προσαρμοσμένη μορφή αναφοράς.</p>
+    <ul id="hl-source-list"></ul></details>
+   </section>
+  </div>
+ </div>
+ <footer class="vs-footer"><a href="paramedic.html#lab-communication">← Επιστροφή στα Εργαλεία Μελέτης</a><button type="button" data-atla-open data-atla-context="Δομημένη παράδοση ATMIST, κλειστός κύκλος επικοινωνίας και μεταβίβαση ευθύνης">Ρώτα τον ATLA</button></footer>
+</main>
+</body>
+</html>

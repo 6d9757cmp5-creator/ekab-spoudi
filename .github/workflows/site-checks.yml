@@ -25,7 +25,7 @@ jobs:
         run: node tools/ci/site-checks.mjs
       - name: Unit tests
         run: |
-          node --test tools/atla-ai/anatomy-curation.test.mjs tools/ecg-lab/core/*.test.mjs services/study-plan/plan.test.mjs tools/pharmacology/build-search.test.mjs tools/vital-signs/core.test.mjs
+          node --test tools/atla-ai/anatomy-curation.test.mjs tools/ecg-lab/core/*.test.mjs services/study-plan/plan.test.mjs tools/pharmacology/build-search.test.mjs tools/vital-signs/core.test.mjs tools/handover-lab/core.test.mjs
           node tools/atla-ai/build-worker-corpus.mjs && node --test workers/mentor-chat/worker.test.mjs
           node tools/anatomy-3d/test-greek-names.mjs
           node ui-tools/anatomy-3d/test-greek-names.mjs
@@ -69,4 +69,5 @@ jobs:
           python3 -m http.server 8799 --bind 127.0.0.1 >/dev/null 2>&1 &
           sleep 2
           node tools/vital-signs/browser-smoke.mjs http://127.0.0.1:8799
+          node tools/handover-lab/browser-smoke.mjs http://127.0.0.1:8799
           node tools/ci/page-smoke.mjs http://127.0.0.1:8799
