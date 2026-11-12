@@ -14,6 +14,8 @@ try{
   try{
    await page.goto(base+'/mentor-vitals.html',{waitUntil:'load',timeout:45000});
    await page.locator('#vs-hr').waitFor();
+   const noHorizontalOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+   assert.equal(noHorizontalOverflow,true,'no horizontal overflow on vital-signs page');
    assert.equal((await page.locator('#vs-hr').textContent()).trim(),'78','default pulse');
    await page.locator('#vs-next-record').click();
    assert.equal((await page.locator('#vs-hr').textContent()).trim(),'82','next pulse');
