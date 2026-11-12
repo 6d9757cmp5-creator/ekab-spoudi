@@ -22,6 +22,7 @@
 | [Φαρμακολογία](pharmacology/) | `tools/pharmacology/` | `farmaka.html` | 5 ενεργά classic scripts από canonical κατάλογο, τα root παλιά scripts δεν φορτώνονται αλλά διατηρούνται ιστορικά |
 | [Σεμινάρια](seminars/) | `tools/seminars/` | `seminar-prep.html` | Εκπαιδευτικό υλικό/engine/CSS από canonical κατάλογο, κοινό sync και AI παραμένουν στα shared |
 | [ECG Lab](ecg-lab/) | `tools/ecg-lab/` | `mentor-ecg.html` | Πλήρης μεταφορά engine, UI, unit tests· παλιά paths μικρές γέφυρες |
+| [Vital Signs Lab · πιλοτικό](vital-signs/) | `tools/vital-signs/` | `mentor-vitals.html` | Εκτελέσιμο εκπαιδευτικό εργαλείο με 7 θεματικές, χωρίς κλινική πιστοποίηση ή δεύτερη μηχανή ΗΚΓ |
 
 Οι παραπάνω μεταφορές είναι **αρχιτεκτονικές**: δεν προσθέτουν κλινική επικύρωση ούτε αλλάζουν το αποθηκευμένο μαθητικό σκορ. Τα HTML URLs και η αρχική της ΕΚΑΒ Σπουδή παραμένουν στη ρίζα. Δοκιμή διαχωρισμού `scripts/verify-specialized-tools.mjs`.
 
