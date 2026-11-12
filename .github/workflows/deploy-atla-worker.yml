@@ -10,6 +10,9 @@ on:
       - 'atla/knowledge/**'
       - 'mentor/ai/**'
       - 'tools/atla-ai/build-worker-corpus.mjs'
+      - 'tools/atla-ai/books/**'
+      - 'tools/atla-ai/knowledge-base/full-books/**'
+      - 'mentor/library/corpus/**'
       - 'medical-terms.json'
       - 'official_questions.json'
       - 'saek-search-*.json'
@@ -30,7 +33,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,6 +41,11 @@ jobs:
           node-version: '22'
       - name: Build ATLA's copy of the published material
         run: node tools/atla-ai/build-worker-corpus.mjs
+      - name: Build ATLA's searchable copy of the open textbooks
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends poppler-utils >/dev/null
+          node tools/atla-ai/books/build-book-assets.mjs
       - name: Worker tests
         run: node --test workers/mentor-chat/worker.test.mjs
       - name: Deploy

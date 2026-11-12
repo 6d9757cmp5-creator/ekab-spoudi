@@ -61,7 +61,8 @@ export async function collectAndAuditAiStream(stream,passages,{maxBytes=400000,m
  }
 }
 
-export function verifiedSseResponse(text,headers={}){
- const data='data: '+JSON.stringify({token:text})+'\n\n'+'data: [DONE]\n\n';
+/** The checked answer as one SSE event; textbook passages the answer may cite go first. */
+export function verifiedSseResponse(text,headers={},sources=[]){
+ const data=(sources?.length?'data: '+JSON.stringify({sources})+'\n\n':'')+'data: '+JSON.stringify({token:text})+'\n\n'+'data: [DONE]\n\n';
  return new Response(data,{status:200,headers:{...headers,'content-type':'text/event-stream; charset=utf-8','cache-control':'no-store'}});
 }

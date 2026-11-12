@@ -31,6 +31,14 @@ export function buildPayload({question,passages,level,history}){
  };
 }
 
+/** Textbook passages the Worker added (T5 and after): kept only in this exact shape, with an https origin. */
+export function bookSources(list){
+ return (Array.isArray(list)?list:[]).slice(0,4).filter(s=>s&&/^T[5-9]$/.test(s.id)&&/^book:[\w.-]+#\d+$/.test(s.ref)&&
+  typeof s.term==="string"&&typeof s.definition==="string"&&typeof s.book?.title==="string"&&/^https:\/\//.test(s.book?.origin||""))
+  .map(s=>({id:s.id,ref:s.ref,term:s.term.slice(0,200),definition:s.definition.slice(0,1500),
+   book:{title:s.book.title.slice(0,160),origin:s.book.origin.slice(0,300),licence:String(s.book.licence||"").slice(0,80),publisher:String(s.book.publisher||"").slice(0,120)}}));
+}
+
 /** Extracts a text delta from one SSE data line (Worker format or Workers AI native format). */
 export function parseSseLine(line){
  if(!line.startsWith("data:"))return null;
@@ -38,6 +46,7 @@ export function parseSseLine(line){
  if(!body||body==="[DONE]")return {done:body==="[DONE]",token:""};
  try{
   const j=JSON.parse(body);
+  if(Array.isArray(j.sources))return {done:false,token:"",sources:bookSources(j.sources)};
   const token=typeof j.token==="string"?j.token:typeof j.response==="string"?j.response:"";
   return {done:false,token};
  }catch{return null;}
@@ -62,7 +71,7 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
   const type=res.headers?.get?.("content-type")||"";
   // Which model answered (free or paid), for the 👍/👎 review.
   const provider=res.headers?.get?.("x-atla-provider")||"";
-  let text="";
+  let text="",sources=[];
   if(type.includes("text/event-stream")&&res.body?.getReader){
    const reader=res.body.getReader(),dec=new TextDecoder();
    let buf="";
@@ -74,6 +83,7 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
     while((nl=buf.indexOf("\n"))>=0){
      const parsed=parseSseLine(buf.slice(0,nl).trimEnd());
      buf=buf.slice(nl+1);
+     if(parsed?.sources)sources=parsed.sources;
      if(parsed?.token){text+=parsed.token;}
     }
    }
@@ -85,12 +95,15 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
    // Never reveal unchecked raw AI text to a UI callback.
   }
   text=text.trim();
-  const audit=auditAssistantReply(text,payload.passages);
+  const audit=auditAssistantReply(text,[...payload.passages,...sources]);
   if(!audit.ok)return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
+  // The books the answer actually cites, named under it (CC BY attribution).
+  const cited=new Set([...text.matchAll(/\[([^\]]{1,40})\]/g)].flatMap(m=>[...m[1].matchAll(/[ΤT]([1-9][0-9]?)/g)].map(x=>"T"+x[1])));
+  const books=sources.filter(s=>cited.has(s.id)).map(s=>s.book);
   // Citations are kept for the audit above; the learner reads plain, natural text.
   text=stripCitations(text);
   onToken(text); // final, checked text only; no speculative streaming
-  return {ok:true,text,provider};
+  return {ok:true,text,provider,books};
  }catch{
   return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
  }finally{clearTimeout(timer);}
