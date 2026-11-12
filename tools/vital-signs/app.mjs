@@ -1,14 +1,16 @@
 /** Interactive first-release vital signs skill drills. Synthetic records only.
  * No personal data, diagnostic thresholds, external calls, or progress persistence.
  */
-import {TOPICS,SOURCES,EXAMPLES,STRIPS,ratePerMinute,getExample,changesFor,handoverText,topicQuestions,grade} from './core.mjs';
+import {TOPICS,SOURCES,EXAMPLES,STRIPS,QUESTIONS,ratePerMinute,getExample,changesFor,handoverText,topicQuestions,grade} from './core.mjs';
 const $=id=>document.getElementById(id);
 const create=(tag,cls,content)=>{
  const el=document.createElement(tag);if(cls)el.className=cls;
  if(content!==undefined)el.textContent=content;return el;
 };
 const names={pulse:'Σφυγμός',bp:'Αρτηριακή πίεση',resp:'Αναπνοές',spo2:'Οξυμετρία',temp:'Θερμοκρασία',conscious:'AVPU',trend:'Επανεκτίμηση'};
-let topicIndex=0,exampleIndex=0,recordIndex=0;
+const requestedTopic=new URLSearchParams(location.search).get('topic');
+const requestedIndex=TOPICS.findIndex(topic=>topic.id===requestedTopic);
+let topicIndex=requestedIndex>=0?requestedIndex:0,exampleIndex=0,recordIndex=0;
 const questionIndex=new Map(),answers=new Map(),stripIndex=new Map([['pulse',0],['resp',0]]);
 const example=()=>EXAMPLES[exampleIndex];
 const current=()=>example().records[recordIndex];
@@ -16,7 +18,7 @@ const clear=n=>n.replaceChildren();
 const fmtDelta=n=>(n>0?'+':'')+n;
 function updateScore(){
  const answered=[...answers.values()];
- const correct=answered.filter(x=>x===true).length;
+ const correct=[...answers.entries()].filter(([id,index])=>{const q=QUESTIONS.find(item=>item.id===id);return q&&q.correct===index;}).length;
  $('vs-score').textContent='Ορθές: '+correct+' / '+answered.length+' απαντημένες · '+12+' διαθέσιμες';
 }
 function wavePath(){
