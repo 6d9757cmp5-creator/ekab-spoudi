@@ -29,17 +29,23 @@ export function canInterrupt({enabled=false,now=0,nextAt=0,shownToday=0,day='',v
  return enabled===true&&visible===true&&blocked!==true&&idleMs>=25000&&
   day===today&&shownToday<DAILY_LIMIT&&now>=nextAt;
 }
-export function chooseChapter(chapters,feedback={},now=Date.now(),random=Math.random){
+/**
+ * With a SAEK exam in the exam calendar, chapters of its courses come first and a chapter counts
+ * as "ready for review" after about 15% of the time left (Cepeda et al., 2008); otherwise after a week.
+ */
+export function chooseChapter(chapters,feedback={},now=Date.now(),random=Math.random,exam=null){
  if(!Array.isArray(chapters)||!chapters.length)return null;
  const recent=chapters.filter(c=>{
   const v=feedback[c.id]||{};
   return !Number.isFinite(v.seenAt)||now-v.seenAt>=6*60*60*1000;
  });
- const pool=recent.length?recent:chapters;
+ let pool=recent.length?recent:chapters;
+ if(exam&&Array.isArray(exam.courses)){const inExam=pool.filter(c=>exam.courses.includes(c.course));if(inExam.length)pool=inExam;}
+ const gapMs=(exam&&exam.gapDays>0?exam.gapDays:7)*86400000;
  const scored=pool.map(c=>{
   const f=feedback[c.id]||{};
   const weight=f.answer==='again'?5:f.answer==='remembered'?0.65:2;
-  const age=Number.isFinite(f.seenAt)?Math.min(2,Math.max(0,(now-f.seenAt)/(7*86400000))):2;
+  const age=Number.isFinite(f.seenAt)?Math.min(2,Math.max(0,(now-f.seenAt)/gapMs)):2;
   return {chapter:c,weight:weight+age};
  });
  const sum=scored.reduce((a,x)=>a+x.weight,0);

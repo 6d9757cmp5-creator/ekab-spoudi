@@ -13,6 +13,7 @@ import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './stud
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
+import {STUDY_METHOD_ANSWER,isStudyMethodQuestion} from '../services/study-plan/plan.mjs';
 import {chooseTeachingTool,chooseTeachingModel} from './practice/tool-selector.mjs';
 import {createVoice} from '../mentor/presence/voice.mjs';
 
@@ -33,6 +34,7 @@ const routes=[
  ['Εργαστήριο ΗΚΓ','mentor-ecg.html',['ecg','ηκγ','ηλεκτροκαρδιογρ']],
  ['Σεμινάρια','seminar-prep.html',['σεμιναρ','bls','phtls']],
  ['Θέματα επειγόντων','protocols.html',['πρωτοκολλ','επειγοντ']],
+ ['Ημερολόγιο εξετάσεων','study-plan.html',['ημερολογ','πλανο μελετ','προγραμμα μελετ']],
  ['Βιβλιοθήκη και αναζήτηση','search.html',['λεξικο','βιβλιοθηκ','αναζητ']]
 ];
 const officialId=/\bEOP-([AB])-(\d{3})\b/i;
@@ -67,6 +69,8 @@ function conversational(hits){
  return rest.length?lead+'\n\nΣχετικά με αυτό: '+rest.map(h=>h.term+' — '+h.definition).join(' '):lead;
 }
 function answerFromLibrary(q){
+ // How to study: two peer-reviewed sources (Cepeda et al. 2008; Dunlosky et al. 2013), and the exam calendar.
+ if(isStudyMethodQuestion(q))return {text:STUDY_METHOD_ANSWER,passages:[],href:'study-plan.html',direct:true};
  const match=q.toUpperCase().match(officialId);
  if(match){
   const id='EOP-'+match[1]+'-'+match[2];

@@ -3,6 +3,9 @@
  * Reads existing completed SAEK chapter marks; fetches ONE existing lesson on demand.
  * It never loads the former 30-card pack, calls AI, or writes grades/progress.
  */
+import {STORAGE_KEY as EXAMS_KEY,parseExams,nextExam,daysUntil,reviewGap} from '../study-plan/plan.mjs';
+// Nearest SAEK exam from the exam calendar, with its review gap (Cepeda et al., 2008).
+function saekExam(){let raw='[]';try{raw=localStorage.getItem(EXAMS_KEY)||'[]'}catch{}const e=nextExam(parseExams(raw),['saek']);return e?{courses:e.courses,gapDays:reviewGap(daysUntil(e.date)).use}:null}
 import {completedChapters,chooseChapter,canInterrupt,safeRoute,suitableRecall,nextSchedule,
  DAILY_LIMIT,STUDY_KEY,FEEDBACK_KEY,localDayKey} from './selector.mjs';
 
@@ -100,7 +103,7 @@ function boot(){
   let remaining=[...candidates],selected=null;
   try{
    for(let i=0;i<tries&&remaining.length;i++){
-    const chapter=chooseChapter(remaining,feedback(),Date.now());
+    const chapter=chooseChapter(remaining,feedback(),Date.now(),Math.random,saekExam());
     remaining=remaining.filter(x=>x.id!==chapter.id);
     const result=await getLesson(chapter);
     if(result){selected=result;break}

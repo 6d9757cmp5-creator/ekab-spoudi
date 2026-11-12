@@ -243,3 +243,13 @@ html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
 .global-search-page-row{display:flex;gap:8px;flex-wrap:wrap}.global-search-page-row input{flex:1 1 220px;min-height:46px;padding:10px 12px;font:inherit;border:1px solid #9bb7c4;border-radius:10px}
 .global-search-page-row .btn{min-height:46px}
 html[data-theme="dark"] .global-search-page-row input{background:#173244;color:#eef7fb;border-color:#41657a}
+
+/* Exam calendar (study-plan.html) */
+.plan-form{display:grid;gap:8px;max-width:560px;margin-top:12px}.plan-form label{font-weight:700}.plan-form select,.plan-form input[type=date]{min-height:46px;padding:8px 10px;font:inherit;border:1px solid #9bb7c4;border-radius:10px}
+.plan-courses fieldset{border:1px solid #d6e3e8;border-radius:10px;margin:6px 0;padding:8px 10px;display:grid;gap:4px}.plan-courses label{font-weight:500;display:flex;gap:8px;align-items:flex-start;min-height:32px}
+.plan-list{display:grid;gap:14px;margin:14px 0}.plan-exam{background:var(--card,#fff);border:1px solid #cfe0e6;border-left:5px solid #176d77;border-radius:14px;padding:14px 16px}
+.plan-exam-head{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between}.plan-exam-head h2{margin:0;font-size:1.15rem}.plan-date{margin:0;color:#3f5d66;font-weight:600}
+.plan-stats{margin:8px 0}.plan-today{background:#eef9f7;border-radius:10px;padding:10px 12px;margin:8px 0}.plan-today h3{margin:0 0 6px}.plan-label{margin:8px 0 4px;font-weight:700}
+.plan-items{margin:0 0 8px;padding-left:18px;display:grid;gap:4px}.plan-items a{display:inline-block;min-height:32px;padding:4px 0}.plan-week table{width:100%;border-collapse:collapse}.plan-week th,.plan-week td{text-align:left;padding:6px 4px;border-bottom:1px solid #e3ecef}.plan-week summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:700}
+html[data-theme="dark"] .plan-exam{background:#132b38;border-color:#2f5468}html[data-theme="dark"] .plan-today{background:#173b3f}html[data-theme="dark"] .plan-date{color:#b8d4d6}html[data-theme="dark"] .plan-form select,html[data-theme="dark"] .plan-form input[type=date]{background:#173244;color:#eef7fb;border-color:#41657a}
+.plan-items li{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.plan-items label{display:inline-flex!important;align-items:center;gap:8px;font-weight:500;margin:0;min-height:40px}.plan-items input[type=checkbox]{width:22px;height:22px;margin:0;flex:none;accent-color:#176d77}
