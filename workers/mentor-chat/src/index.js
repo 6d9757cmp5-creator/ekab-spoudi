@@ -169,7 +169,8 @@ export function cheapPaidProviders(env){
 async function askOpenAiCompatible(p,messages){
  const r=await fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
   body:JSON.stringify({model:p.model,messages,max_tokens:MAX_OUTPUT,temperature:0.3}),signal:AbortSignal.timeout(20000)});
- if(!r.ok)return '';
+ // The status code (never the key or the reply) explains a failure in x-atla-trace: 401 key, 404 model, 429 quota.
+ if(!r.ok)throw Error('http-'+r.status);
  const j=await r.json();return typeof j?.choices?.[0]?.message?.content==='string'?j.choices[0].message.content:'';
 }
 async function askWorkersAi(env,model,messages){
@@ -196,6 +197,14 @@ async function collectTokens(stream){
   if(text.length>6000)break;}
  return text;
 }
+/** A short, safe reason for a failed model call: an HTTP status, the Workers AI daily limit, or a timeout. */
+export function failureReason(error){
+ const m=String(error?.message||'');
+ if(/^http-[0-9]{3}$/.test(m))return m;
+ if(/4006|neuron|allocation/i.test(m))return 'daily-limit';
+ if(/timeout|abort/i.test(m))return 'timeout';
+ return 'error';
+}
 /** The conversation plus the model's own answer and a request to add the source markers. */
 export function citeRepair(messages,draft){
  return [...messages,{role:'assistant',content:draft},
@@ -216,8 +225,9 @@ export async function answer(request,env,body,{askers}={}){
  let repaired=false;
  for(const step of chain){
   let text='';
-  try{text=String(await step.ask()||'').trim();}catch{text='';}
-  let verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
+  let failure='no-answer';
+  try{text=String(await step.ask()||'').trim();}catch(e){text='';failure=failureReason(e);}
+  let verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:failure};
   // Free models often write a good answer but forget the [Τ1] markers. Once per question, the same
   // free model is asked to add them; the rewrite passes the full audit again. Never for the paid model.
   if(!verdict.ok&&verdict.reason==='missing-or-unknown-citation'&&!repaired&&step.repair){

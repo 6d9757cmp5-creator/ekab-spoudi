@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages,failureReason} from './src/index.js';
 import {tokens,shardOf} from '../../tools/atla-ai/books/text.mjs';
 import {verifiedSseResponse} from '../../atla/ai/safe-stream.mjs';
 import {parseSseLine,bookSources} from '../../atla/ai/client.mjs';
@@ -40,7 +40,7 @@ test('free models first; an answer that fails the safety audit moves on to the n
  ]});
  assert.deepEqual(calls,['first','second','third'],'the paid model is not called when a free one answered');
  assert.equal(result.provider,'third');
- assert.deepEqual(result.trace,['first:missing-or-unknown-citation','second:no-answer']);
+ assert.deepEqual(result.trace,['first:missing-or-unknown-citation','second:error']);
 });
 
 test('a free model that forgot the [Τ1] markers gets one chance to add them; the paid model never does',async()=>{
@@ -134,4 +134,11 @@ test('the tutor prompt asks for an explanation, an example and a check question'
  const m=buildMessages({question:'q',passages:[{id:'T1',term:'t',definition:'d'}],history:[],level:'student'});
  assert.match(m[0].content,/ερώτηση ελέγχου/);
  assert.match(m.at(-1).content,/\[T1\] t: d/);
+});
+
+test('a failed model call is explained by a short reason, never by its text',()=>{
+ assert.equal(failureReason(Error('http-401')),'http-401');
+ assert.equal(failureReason(Error('4006: you have used up your daily free allocation of 10,000 neurons')),'daily-limit');
+ assert.equal(failureReason(Object.assign(Error('The operation was aborted due to timeout'),{name:'TimeoutError'})),'timeout');
+ assert.equal(failureReason(Error('secret sk-abc leaked')),'error');
 });
