@@ -50,28 +50,59 @@ html[data-theme="dark"] .pm-assistant button{background:#0e6772}
 @media(prefers-reduced-motion:reduce){.pm-card{transition:none}}
 
 
-/* Learning-laboratory hub: existing ECG plus four clearly non-operational future stations. */
-.pm-lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.pm-lab-card{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-height:238px;scroll-margin-top:16px}
-.pm-lab-top{display:flex;align-items:flex-start;gap:12px}
-.pm-lab-top h3{font-size:1rem;line-height:1.35;margin:0}
-.pm-lab-state{display:inline-flex;align-self:flex-start;max-width:100%;font-size:.72rem;font-weight:750;line-height:1.4;border-radius:8px;padding:5px 9px}
-.pm-lab-planned{background:#fff3df;color:#785017}
-.pm-lab-available{background:#dff6ec;color:#165b42}
-.pm-lab-links{border-top:1px solid var(--pm-border);padding-top:12px;display:flex;flex-wrap:wrap;gap:7px 9px}
-.pm-lab-links a{color:var(--pm-teal);font-size:.82rem;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:5px 2px}
-.pm-lab-links .pm-lab-start{background:var(--pm-navy);color:#fff;border-radius:9px;padding:8px 12px;text-decoration:none}
-.pm-lab-atla{margin-top:auto;border:1px solid var(--pm-border);background:var(--pm-paper);color:var(--pm-text);border-radius:9px;min-height:41px;font:700 .81rem system-ui;cursor:pointer}
+/* Five connected, accessible learning laboratories. Experimental nav surface only. */
+.pm-lab-jump{display:flex;flex-wrap:wrap;gap:9px;margin:13px 0 20px}
+.pm-lab-jump a{display:inline-flex;align-items:center;gap:7px;padding:10px 12px;border:1px solid var(--pm-border);border-radius:13px;background:var(--pm-paper);text-decoration:none;color:var(--pm-text);font-weight:750;font-size:.82rem;line-height:1.35}
+.pm-lab-jump a:hover,.pm-lab-jump a:focus-visible{border-color:var(--pm-teal);background:#eaf5f5}
+.pm-lab-jump a span{font-size:19px}
+.pm-lab-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pm-lab-group{min-width:0;display:flex;flex-direction:column;gap:13px;background:var(--pm-paper);border:1px solid var(--pm-border);box-shadow:0 4px 22px #1037440b;border-radius:20px;padding:clamp(15px,2.4vw,23px);scroll-margin-top:15px}
+.pm-lab-group:target{outline:3px solid var(--pm-teal);outline-offset:3px}
+#lab-vitals{grid-column:1/-1;background:linear-gradient(135deg,#eef8fa 0%,var(--pm-paper) 49%);border:2px solid #c2dfe4}
+.pm-lab-group-head{display:flex;align-items:flex-start;gap:12px}
+.pm-lab-group-icon{display:grid;place-items:center;width:48px;height:48px;flex:0 0 48px;background:#e4f4f4;border-radius:14px;font-size:24px}
+.pm-lab-group-copy{min-width:0;flex:1}
+.pm-lab-group-copy h3{font-size:clamp(1.03rem,1.6vw,1.25rem);line-height:1.25;margin:2px 0 7px;color:var(--pm-text)}
+.pm-lab-group-copy p{color:var(--pm-muted);font-size:.86rem;line-height:1.55;margin:0}
+.pm-lab-state{display:inline-block;align-self:flex-start;font-size:.72rem;font-weight:800;line-height:1.45;border-radius:8px;padding:6px 10px;margin:0}
+.pm-lab-planned{background:#fff3df;color:#795016}
+.pm-lab-available{background:#ddf5ea;color:#156346}
+.pm-lab-expand{border-top:1px solid var(--pm-border);border-bottom:1px solid var(--pm-border);padding:4px 0}
+.pm-lab-expand summary{list-style:none;cursor:pointer;font-size:.9rem;font-weight:800;color:var(--pm-teal);padding:10px 2px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pm-lab-expand summary::-webkit-details-marker{display:none}
+.pm-lab-expand summary span{font-size:21px;transition:transform .15s}
+.pm-lab-expand[open] summary span{transform:rotate(180deg)}
+.pm-lab-units{list-style:none;padding:4px 0 14px;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;counter-reset:labunit}
+.pm-lab-units li{counter-increment:labunit;min-width:0;border:1px solid var(--pm-border);border-radius:12px;padding:11px 12px;background:var(--pm-paper);display:flex;flex-direction:column;gap:5px}
+.pm-lab-units li strong{font-size:.85rem;line-height:1.32;color:var(--pm-text)}
+.pm-lab-units li strong:before{content:counter(labunit,decimal-leading-zero) " · ";color:var(--pm-teal)}
+.pm-lab-units li span{color:var(--pm-muted);font-size:.77rem;line-height:1.45}
+.pm-lab-units li small{font-size:.69rem;color:var(--pm-teal);font-weight:800;margin-top:auto}
+.pm-lab-experience{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 15px}
+.pm-lab-experience p{padding:11px 12px;background:#edf7f7;border-radius:11px;margin:0;font-size:.8rem;line-height:1.48}
+.pm-lab-experience strong{display:block;margin-bottom:5px;color:var(--pm-text)}
+.pm-lab-experience span{display:block;color:var(--pm-muted)}
+.pm-lab-education,.pm-lab-related{padding:12px 0 4px}
+.pm-lab-education{border-top:1px solid var(--pm-border)}
+.pm-lab-education h4,.pm-lab-related h4{color:var(--pm-text);font-size:.85rem;margin:0 0 9px}
+.pm-lab-education nav,.pm-lab-related nav{display:flex;gap:7px;flex-wrap:wrap}
+.pm-lab-education a,.pm-lab-related a{font-size:.77rem;line-height:1.4;font-weight:700;text-decoration:none;border:1px solid var(--pm-border);border-radius:9px;padding:8px 10px;color:var(--pm-teal)}
+.pm-lab-education a:hover,.pm-lab-related a:hover{border-color:var(--pm-teal)}
+.pm-lab-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.pm-lab-actions .pm-lab-start{background:var(--pm-navy);color:#fff;border-radius:10px;padding:11px 13px;text-decoration:none;font-size:.84rem;font-weight:800;line-height:1.35}
+.pm-lab-atla{border:1px solid var(--pm-border);background:var(--pm-paper);color:var(--pm-text);border-radius:10px;padding:11px 13px;font:750 .83rem system-ui;cursor:pointer;line-height:1.35}
 .pm-lab-atla:hover{border-color:var(--pm-teal)}
-.pm-lab-links a:focus-visible,.pm-lab-atla:focus-visible{outline:3px solid #10a5a6;outline-offset:2px}
-html[data-theme="dark"] .pm-lab-planned{background:#574327;color:#ffe6af}
-html[data-theme="dark"] .pm-lab-available{background:#245943;color:#d6fae8}
-html[data-theme="dark"] .pm-lab-links a{color:#9ee5e0}
-html[data-theme="dark"] .pm-lab-links .pm-lab-start{color:#fff}
-@media(max-width:680px){.pm-lab-grid{grid-template-columns:1fr}.pm-lab-card{min-height:0}}
-
-/* Communication and handover: priority in the four planned stations. */
-.pm-lab-featured{grid-column:1 / -1;border-width:2px;border-color:var(--pm-teal);background:var(--pm-paper)}
-.pm-lab-featured .pm-lab-top h3{font-size:1.1rem}
-.pm-lab-featured .pm-lab-start{font-size:.9rem}
-@media(max-width:680px){.pm-lab-featured{grid-column:auto}}
+.pm-lab-jump a:focus-visible,.pm-lab-expand summary:focus-visible,.pm-lab-actions button:focus-visible,.pm-lab-group a:focus-visible{outline:3px solid #10a5a6;outline-offset:3px}
+html[data-theme="dark"] #lab-vitals{background:linear-gradient(135deg,#1b4852,var(--pm-paper) 70%);border-color:#3d7a84}
+html[data-theme="dark"] .pm-lab-jump a:hover{background:#244954}
+html[data-theme="dark"] .pm-lab-group-icon{background:#315460}
+html[data-theme="dark"] .pm-lab-planned{background:#594329;color:#ffe3b1}
+html[data-theme="dark"] .pm-lab-available{background:#24533f;color:#d6fae8}
+html[data-theme="dark"] .pm-lab-units li{background:#173541}
+html[data-theme="dark"] .pm-lab-experience p{background:#254852}
+html[data-theme="dark"] .pm-lab-experience strong{color:#eaf5f6}
+html[data-theme="dark"] .pm-lab-expand summary{color:#9ce6de}
+html[data-theme="dark"] .pm-lab-education a,html[data-theme="dark"] .pm-lab-related a{color:#9ce6de}
+@media(max-width:700px){.pm-lab-groups{grid-template-columns:1fr}#lab-vitals{grid-column:auto}.pm-lab-jump{display:grid;grid-template-columns:1fr 1fr}.pm-lab-experience{grid-template-columns:1fr}}
+@media(max-width:460px){.pm-lab-jump{grid-template-columns:1fr}.pm-lab-units{grid-template-columns:1fr}.pm-lab-group{padding:15px}.pm-lab-group-head{gap:9px}.pm-lab-group-icon{width:42px;height:42px;flex-basis:42px}}
+@media(prefers-reduced-motion:reduce){.pm-lab-expand summary span{transition:none}}
