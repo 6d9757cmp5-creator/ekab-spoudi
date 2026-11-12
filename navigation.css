@@ -5,3 +5,8 @@
 
 /* Tap targets of at least 44px (UX review #27). */
 a[data-ekab-back-spot]{display:inline-flex;align-items:center;min-height:44px}
+
+/* Shared app bar for pages without their own header (UX review #18). */
+.ekab-appbar{background:#153c54;color:#fff;padding:8px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center}
+.ekab-appbar-brand{color:#fff!important;font:800 1.05rem/1.2 system-ui,-apple-system,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.ekab-appbar-logo{width:34px;height:34px;border-radius:10px;background:#c9f2e8;color:#0f3b4c;display:grid;place-items:center;font-size:1.2rem}
