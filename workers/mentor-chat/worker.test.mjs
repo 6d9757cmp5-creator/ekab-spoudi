@@ -2,7 +2,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages} from './src/index.js';
+import {tokens,shardOf} from '../../tools/atla-ai/books/text.mjs';
+import {verifiedSseResponse} from '../../atla/ai/safe-stream.mjs';
+import {parseSseLine,bookSources} from '../../atla/ai/client.mjs';
 import {auditAssistantReply} from '../../atla/ai/teaching-policy.mjs';
 const corpus=JSON.parse(readFileSync(new URL('./corpus.json',import.meta.url),'utf8'));
 const key=Object.keys(corpus.records).find(k=>k.startsWith('saek-search-B.json#')&&corpus.records[k].body.length>600);
@@ -78,6 +81,45 @@ test('the weekly check skips the per-IP limit but never the daily cap',()=>{
  for(let i=0;i<5;i++)limited('1.2.3.4',{DAILY_CAP:'5'},Date.now(),{trusted:true});
  assert.equal(limited('1.2.3.4',{DAILY_CAP:'5'},Date.now(),{trusted:true}),true,'daily cap still applies');
  _resetLimits();
+});
+
+// A tiny stand-in for the textbook assets, built with the same word functions as the real index.
+function fakeBooks(chunks,weight=12){
+ const index={};
+ chunks.forEach((c,i)=>{for(const t of new Set(tokens(c.text))){const s=shardOf(t);((index[s]??={})[t]??=[]).push([i,weight]);}});
+ const files={'books.json':{chunks:chunks.length,group:64,books:{emr:{title:'Emergency Medical Responder',origin:'https://example.org/emr',licence:'CC BY 4.0',publisher:'WisTech'}},glossary:{}},'chunks/0.json':chunks};
+ for(const [s,terms] of Object.entries(index))files[`index/${s}.json`]=terms;
+ return {fetch:async req=>{const path=new URL(req.url).pathname.slice(1);return files[path]?new Response(JSON.stringify(files[path])):new Response('',{status:404});}};
+}
+
+test('textbook passages: numbered after the Greek ones, need enough weight, carry the book', async()=>{
+ const BOOKS=fakeBooks([
+  {book:'emr',page:null,text:'Hypoxia means low oxygen in the tissues. Signs of hypoxia include restlessness and cyanosis of the lips.'},
+  {book:'emr',page:12,text:'Oxygen cylinders must be stored upright and secured in the ambulance.'}
+ ]);
+ const found=await bookPassages({BOOKS},'Τι είναι η υποξία;',3,{keywords:async()=>['hypoxia','cyanosis']});
+ assert.equal(found.length,1);
+ assert.equal(found[0].id,'T3');
+ assert.match(found[0].ref,/^book:emr#0$/);
+ assert.equal(found[0].book.licence,'CC BY 4.0');
+ assert.deepEqual(await bookPassages({BOOKS},'x',2,{keywords:async()=>['fracture']}),[],'word not in any book');
+ assert.deepEqual(await bookPassages({BOOKS:fakeBooks([{book:'emr',page:null,text:'Hypoxia means low oxygen.'}],3)},'x',2,{keywords:async()=>['hypoxia']}),[],'too weak a match');
+ assert.deepEqual(await bookPassages({},'x',1),[],'no assets: no textbook passages');
+});
+
+test('a dose copied from a textbook passage is still blocked',()=>{
+ const book=[{id:'T5',ref:'book:openrn-pharm#10',term:'Nursing Pharmacology',definition:'Give 500 mg every six hours.'}];
+ assert.equal(auditAssistantReply('Δίνεις 500 mg [Τ5].',book).reason,'unsafe-dose-output');
+});
+
+test('the browser receives the textbook passages before the answer and checks their shape',()=>{
+ const src=[{id:'T5',ref:'book:emr#0',term:'Emergency Medical Responder',definition:'text',book:{title:'Emergency Medical Responder',origin:'https://example.org/emr',licence:'CC BY 4.0'}}];
+ const body=verifiedSseResponse('Απάντηση [Τ5].',{},src);
+ return body.text().then(t=>{
+  const first=parseSseLine(t.split('\n')[0]);
+  assert.equal(first.sources.length,1);
+  assert.deepEqual(bookSources([{...src[0],ref:'evil'},{...src[0],book:{...src[0].book,origin:'javascript:alert(1)'}}]),[],'malformed sources dropped');
+ });
 });
 
 test('free providers are used only when their key is configured',()=>{

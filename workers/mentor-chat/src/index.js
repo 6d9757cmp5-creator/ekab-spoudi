@@ -7,6 +7,7 @@ import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
 import {ATLA_RUNTIME_RULES,teachingApproach,auditAssistantReply} from '../../../atla/ai/teaching-policy.mjs';
 import {verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
+import {tokens,shardOf,normGreek} from '../../../tools/atla-ai/books/text.mjs';
 import corpus from '../corpus.json' with {type:'json'};
 export {MentorBudget};
 
@@ -30,6 +31,7 @@ export const SYSTEM_PROMPT=
 'Μίλα σαν έμπειρος εκπαιδευτής που κάθεται δίπλα στον σπουδαστή: ζεστά, φυσικά, με δικά σου λόγια, όχι αντιγραφή του κειμένου. '+
 'Δομή: πρώτα η ουσία σε μία-δύο προτάσεις, μετά το «γιατί» ή ένα απλό παράδειγμα από τη δουλειά του διασώστη, '+
 'και στο τέλος μία σύντομη ερώτηση ελέγχου για να σκεφτεί ο σπουδαστής (χωρίς να δώσεις την απάντησή της). '+
+'Τα αποσπάσματα από αγγλικά βιβλία τα αποδίδεις στα ελληνικά, μόνο όσο σχετίζονται με την ερώτηση. Η ελληνική ύλη (ΣΑΕΚ, ΕΟΠΠΕΠ) έχει προτεραιότητα· αν διαφωνεί με βιβλίο, ακολούθησε την ελληνική ύλη. '+
 'Αν τα αποσπάσματα δεν απαντούν στην ερώτηση, πες ειλικρινά τι δεν καλύπτουν και τι μπορεί να ρωτήσει αντί γι’ αυτό· μην μαντέψεις. '+
 'Μη γράφεις αριθμούς που δεν υπάρχουν στα αποσπάσματα. Μη δίνεις δοσολογίες, διαγνώσεις ή οδηγίες για πραγματικό περιστατικό· για επείγον παρέπεμψε στο 166/112. '+
 'Απάντησε στα ελληνικά, σε 80–180 λέξεις. '+ATLA_RUNTIME_RULES;
@@ -77,8 +79,58 @@ export function verifiedPassages(clientPassages,records=corpus.records){
  return out;
 }
 
+/** English keywords for the open textbooks: glossary names found in the question, plus a short translation by the small free model. */
+async function bookKeywords(env,question,glossary){
+ const q=normGreek(question);
+ const words=Object.entries(glossary||{}).filter(([greek])=>q.includes(greek)).map(([,en])=>en);
+ if(env.AI){
+  try{
+   const r=await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8-fast',{messages:[
+    {role:'system',content:'Translate the student question into 2 to 5 English medical search keywords. Reply only with the keywords, separated by commas.'},
+    {role:'user',content:question}],max_tokens:40,temperature:0});
+   words.push(String(r?.response||'').slice(0,200));
+  }catch{}
+ }
+ return [...new Set(tokens(words.join(' ')))].slice(0,8);
+}
+
+/**
+ * Up to two passages from the open textbooks (Cloudflare static assets built on every deployment by
+ * tools/atla-ai/books/build-book-assets.mjs). The Worker reads them itself, so their text is exact.
+ * A chunk is used only if its search words weigh enough (MIN_BOOK_SCORE).
+ */
+const MIN_BOOK_SCORE=10;
+export async function bookPassages(env,question,firstNumber,{keywords=bookKeywords}={}){
+ if(!env.BOOKS||firstNumber>8)return [];
+ const asset=async path=>{try{const r=await env.BOOKS.fetch(new Request('https://books/'+path));return r.ok?await r.json():null;}catch{return null;}};
+ const meta=await asset('books.json');
+ if(!meta)return [];
+ const terms=await keywords(env,question,meta.glossary);
+ if(!terms.length)return [];
+ const shardIds=[...new Set(terms.map(shardOf))];
+ const shards=Object.fromEntries(await Promise.all(shardIds.map(async s=>[s,await asset('index/'+s+'.json')||{}])));
+ const score=new Map(),matched=new Map();
+ // Words too common in the books ("signs", "treatment") are not indexed and so do not count.
+ const indexed=terms.filter(t=>shards[shardOf(t)][t]);
+ for(const t of indexed)for(const [chunk,weight] of shards[shardOf(t)][t]){
+  score.set(chunk,(score.get(chunk)||0)+weight);matched.set(chunk,(matched.get(chunk)||0)+1);
+ }
+ // One strongly weighted word is enough ("hypoxia" in its definition); more words add a little.
+ const rank=c=>score.get(c)*(1+0.3*(matched.get(c)-1));
+ const best=[...score.keys()].filter(c=>rank(c)>=MIN_BOOK_SCORE).sort((a,b)=>rank(b)-rank(a)).slice(0,2);
+ const out=[];
+ for(const index of best){
+  const group=await asset('chunks/'+Math.floor(index/meta.group)+'.json');
+  const chunk=group?.[index%meta.group],book=chunk&&meta.books[chunk.book];
+  if(!book)continue;
+  out.push({id:'T'+(firstNumber+out.length),ref:`book:${chunk.book}#${index}`,term:book.title+(chunk.page?' · σ. '+chunk.page:''),
+   definition:chunk.text.slice(0,1200),book:{title:book.title,origin:book.origin,licence:book.licence,publisher:book.publisher||''}});
+ }
+ return out;
+}
+
 export function buildMessages({question,passages,history,level}){
- const sources=passages.map(p=>`[${p.id}] ${p.term}: ${p.definition}`).join('\n');
+ const sources=passages.map(p=>p.book?`[${p.id}] (αγγλικό βιβλίο: ${p.term}) ${p.definition}`:`[${p.id}] ${p.term}: ${p.definition}`).join('\n');
  const approach=teachingApproach({question,level});
  return [
   {role:'system',content:SYSTEM_PROMPT+' '+LEVEL_STYLE[level]+' '+approach.style+' '+approach.depth},
@@ -184,7 +236,8 @@ export async function answer(request,env,body,{askers}={}){
 async function cacheKey(body){
  const material=JSON.stringify({q:squash(body.question).toLocaleLowerCase('el'),p:body.passages.map(p=>p.ref+'|'+p.definition),l:body.level});
  const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(material));
- return new Request('https://atla-cache.invalid/v1/'+[...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join(''));
+ // v2: answers may also draw on the open textbooks, so answers cached before them are not reused.
+ return new Request('https://atla-cache.invalid/v2/'+[...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join(''));
 }
 
 async function feedback(request,env,headers){
@@ -218,13 +271,18 @@ export default {
   if(!body.passages.length)return json({error:'no_sources'},422,headers);
   // Follow-up questions depend on the conversation, so only first questions are cached.
   const key=body.history.length?null:await cacheKey(body);
-  if(key){const hit=await caches.default.match(key);if(hit){const c=await hit.json();return verifiedSseResponse(c.text,{...headers,'x-atla-provider':c.provider+'+cache'});}}
+  if(key){const hit=await caches.default.match(key);if(hit){const c=await hit.json();return verifiedSseResponse(c.text,{...headers,'x-atla-provider':c.provider+'+cache'},c.sources);}}
   const trusted=tokenMatches(request.headers.get('x-atla-admin')||'',env.ATLA_ADMIN_TOKEN);
   if(limited(request.headers.get('cf-connecting-ip')||'unknown',env,Date.now(),{trusted}))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
+  // Textbook passages come after the Greek material (T1–T4) and are sent back to the browser,
+  // which checks the answer against the same passages and names the book under the answer.
+  const fromBooks=await bookPassages(env,body.question,body.passages.length+1);
+  body.passages=[...body.passages,...fromBooks];
   const result=await answer(request,env,body);
   // Which models were tried and why they were rejected (reasons only, never text).
   if(!result.text)return json({error:'unavailable'},503,{...headers,'x-atla-trace':result.trace.join(' ').slice(0,300)});
+  result.sources=fromBooks.map(({id,ref,term,definition,book})=>({id,ref,term,definition,book}));
   if(key)ctx?.waitUntil?.(caches.default.put(key,new Response(JSON.stringify(result),{headers:{'content-type':'application/json','cache-control':'max-age='+CACHE_DAYS*86400}})));
-  return verifiedSseResponse(result.text,{...headers,'x-atla-provider':result.provider,'x-atla-trace':result.trace.join(' ').slice(0,300)});
+  return verifiedSseResponse(result.text,{...headers,'x-atla-provider':result.provider,'x-atla-trace':result.trace.join(' ').slice(0,300)},result.sources);
  }
 };

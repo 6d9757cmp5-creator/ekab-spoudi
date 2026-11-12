@@ -211,6 +211,18 @@ function boot(){
   }
   stream.append(box);
  }
+ /** Names the open textbooks an answer used, with their licence and a link to the original (CC BY attribution). */
+ function offerBooks(books){
+  const seen=new Set();
+  for(const b of Array.isArray(books)?books:[]){
+   if(seen.has(b.title))continue;seen.add(b.title);
+   const line=$('p','atla-book-source','Από το βιβλίο: ');
+   const a=$('a','',b.title);a.href=b.origin;a.target='_blank';a.rel='noopener noreferrer';
+   const licence=(String(b.licence).match(/CC[ -][A-Z-]+ \d\.\d(?: IGO)?/)||[''])[0];
+   line.append(a,document.createTextNode([b.publisher,licence].filter(Boolean).map(x=>' · '+x).join('')));
+   stream.append(line);
+  }
+ }
  function offerLink(href,label){
   if(!href||typeof href!=='string')return;
   try{
@@ -277,6 +289,7 @@ function boot(){
    const payload=buildPayload({question:q,passages:verifiedForAi,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
+   if(response.ok)offerBooks(response.books);
    if(response.ok)offerFeedback(q,response.text,response.provider);
    offerLink(found.href,/^search\.html/.test(found.href||'')?'Βρες το στην ύλη':'Άνοιξε τη σχετική ενότητα');
    if(teachingTool)offerLink(teachingTool.href,teachingTool.label);
