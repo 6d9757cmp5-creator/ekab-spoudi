@@ -1,0 +1,62 @@
+name: ATLA weekly check
+# Every Monday: asks the live ATLA the 30 fixed study questions plus 10 random glossary terms,
+# in a real browser as a student would, and posts the result on one tracking issue. A drop below
+# 26/30 fixed or 7/10 random answers is marked with a warning. Nothing is changed automatically.
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+permissions:
+  issues: write
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund --ignore-scripts playwright@1.48.2
+          node node_modules/playwright/cli.js install --with-deps chromium
+      - name: Ask ATLA 40 questions
+        env:
+          ATLA_EVAL_RANDOM: '10'
+          ATLA_ADMIN_TOKEN: ${{ secrets.ATLA_ADMIN_TOKEN }}
+        run: node tools/atla-ai/eval/run.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: atla-answers
+          path: |
+            tools/atla-ai/eval/report.md
+            tools/atla-ai/eval/summary.json
+      - name: Post the result
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          node -e '
+            const s=JSON.parse(require("fs").readFileSync("tools/atla-ai/eval/summary.json","utf8"));
+            const low=s.fixed.answered<Math.ceil(s.fixed.total*0.85)||(s.random.total&&s.random.answered<Math.ceil(s.random.total*0.7));
+            const lines=["## "+(low?"⚠️ Πτώση ποιότητας · ":"✅ ")+s.at.slice(0,10),"",
+              "| | |","|---|---|",
+              "| Σταθερές ερωτήσεις | "+s.fixed.answered+"/"+s.fixed.total+" |",
+              "| Τυχαίοι όροι | "+s.random.answered+"/"+s.random.total+" |",
+              "| «Δεν είμαι σίγουρος» | "+s.unsure+" |",
+              "| Μέσο μήκος | "+s.words+" λέξεις |",
+              ...(s.limited?["| Δεν μετρήθηκαν (όριο ερωτήσεων ανά ώρα) | "+s.limited+" |"]:[]),"",
+              ...(s.failures.length?["Χωρίς απάντηση μοντέλου:",...s.failures.map(f=>"- "+f.q+" · `"+f.provider.slice(0,160)+"`"),""]:[]),
+              "Όλες οι απαντήσεις: "+process.env.RUN_URL+" (atla-answers)"];
+            require("fs").writeFileSync("comment.md",lines.join("\n"));console.log(lines.slice(0,8).join("\n"));
+          '
+          issue=$(gh issue list -R "$REPO" --label atla-quality --state open --json number --jq '.[0].number')
+          if [ -z "$issue" ]; then
+            gh label create atla-quality -R "$REPO" --color 1D76DB --description "Εβδομαδιαίος αυτοέλεγχος ATLA" 2>/dev/null || true
+            gh issue create -R "$REPO" --title "ATLA: εβδομαδιαίος αυτοέλεγχος απαντήσεων" --label atla-quality --body-file comment.md
+          else
+            gh issue comment "$issue" -R "$REPO" --body-file comment.md
+          fi

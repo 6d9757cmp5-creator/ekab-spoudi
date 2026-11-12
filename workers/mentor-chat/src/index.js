@@ -38,7 +38,7 @@ function cors(env,origin){
  const allowed=['https://6d9757cmp5-creator.github.io'];
  if(env.ALLOW_LOCAL==='true')allowed.push('http://localhost:8080','http://127.0.0.1:8080','http://127.0.0.1:8812');
  if(!allowed.includes(origin))return null;
- return {'access-control-allow-origin':origin,'access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, x-mentor-test-token','access-control-expose-headers':'x-atla-provider, x-atla-trace','vary':'origin'};
+ return {'access-control-allow-origin':origin,'access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, x-mentor-test-token, x-atla-admin','access-control-expose-headers':'x-atla-provider, x-atla-trace','vary':'origin'};
 }
 const json=(body,status,extra={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store',...extra}});
 const str=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
@@ -87,11 +87,13 @@ export function buildMessages({question,passages,history,level}){
  ];
 }
 
-function limited(ip,env,now=Date.now()){
+/** Per-IP hourly limit and a daily cap. The owner's weekly check (admin token) skips only the per-IP limit. */
+export function limited(ip,env,now=Date.now(),{trusted=false}={}){
  const dayKey=new Date(now).toISOString().slice(0,10);
  if(day.key!==dayKey)day={key:dayKey,count:0};
  const cap=Number(env.DAILY_CAP||300);
  if(day.count>=cap)return true;
+ if(trusted){day.count++;return false;}
  const list=(hits.get(ip)||[]).filter(t=>now-t<IP_WINDOW_MS);
  if(list.length>=IP_LIMIT){hits.set(ip,list);return true;}
  list.push(now);hits.set(ip,list);day.count++;
@@ -217,7 +219,8 @@ export default {
   // Follow-up questions depend on the conversation, so only first questions are cached.
   const key=body.history.length?null:await cacheKey(body);
   if(key){const hit=await caches.default.match(key);if(hit){const c=await hit.json();return verifiedSseResponse(c.text,{...headers,'x-atla-provider':c.provider+'+cache'});}}
-  if(limited(request.headers.get('cf-connecting-ip')||'unknown',env))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
+  const trusted=tokenMatches(request.headers.get('x-atla-admin')||'',env.ATLA_ADMIN_TOKEN);
+  if(limited(request.headers.get('cf-connecting-ip')||'unknown',env,Date.now(),{trusted}))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
   const result=await answer(request,env,body);
   // Which models were tried and why they were rejected (reasons only, never text).
   if(!result.text)return json({error:'unavailable'},503,{...headers,'x-atla-trace':result.trace.join(' ').slice(0,300)});
