@@ -27,6 +27,16 @@
   const mastered=run.length>=5&&days>=3&&span>=7*DAY;
   return {studied,mastered,correctCount:run.length,distinctDays:days,due:isDue(state,time),nextReviewAt:state?.nextReviewAt||null};
  }
+ // With an EOPPEP theory exam in the exam calendar, no review gap exceeds ~15% of the time left
+ // (Cepeda et al., 2008, Psychological Science 19:1095) and none falls after the exam.
+ const EXAMS_KEY='ekab.study.exams.v1';
+ function examCapDays(time){
+  let list=[];try{list=JSON.parse(root.localStorage?.getItem(EXAMS_KEY)||'[]')}catch(e){list=[]}
+  const start=new Date(time.getTime());start.setHours(0,0,0,0);
+  const left=(Array.isArray(list)?list:[]).filter(e=>e&&e.type==='eoppep-theory'&&/^\d{4}-\d{2}-\d{2}$/.test(e.date))
+   .map(e=>Math.round((new Date(e.date+'T00:00:00')-start)/DAY)).filter(n=>n>=1).sort((a,b)=>a-b)[0];
+  return left?Math.max(1,Math.min(Math.round(left*0.15),left-1)):Infinity;
+ }
  function isDue(state,now){
   if(!state||typeof state!=='object')return false;
   const time=when(now),hist=events(state);
@@ -45,7 +55,7 @@
    state.selfCorrect=(Number(state.selfCorrect)||0)+1;
    state.streak=(Number(state.streak)||0)+1;
    const count=correctRun(state).length;
-   const days=INTERVAL_DAYS[Math.min(count-1,INTERVAL_DAYS.length-1)];
+   const days=Math.min(INTERVAL_DAYS[Math.min(count-1,INTERVAL_DAYS.length-1)],examCapDays(time));
    state.nextReviewAt=new Date(time.getTime()+days*DAY).toISOString();
   }else{
    state.streak=0;
@@ -68,5 +78,5 @@
   if(!iso||!Number.isFinite(Date.parse(iso)))return '';
   return new Intl.DateTimeFormat('el-GR',{day:'numeric',month:'short',year:'numeric'}).format(new Date(iso));
  }
- root.EkabStudyScheduler=Object.freeze({evaluate,isDue,record,markReview,dayKey,dateLabel,intervals:INTERVAL_DAYS.slice()});
+ root.EkabStudyScheduler=Object.freeze({evaluate,isDue,record,markReview,dayKey,dateLabel,examCapDays,intervals:INTERVAL_DAYS.slice()});
 })(typeof window!=='undefined'?window:globalThis);
