@@ -27,10 +27,79 @@
   <p>Όσα συμπληρώνουν τα μαθήματα ΣΑΕΚ και την πιστοποίηση ΕΟΠΠΕΠ της αρχικής σελίδας.</p>
  </div>
  <section id="skills" aria-labelledby="pm-skills-title" class="pm-section">
-  <div class="pm-section-title"><h2 id="pm-skills-title">Εργαστήριο ΗΚΓ</h2><p>Εξάσκηση στην ανάγνωση ηλεκτροκαρδιογραφήματος.</p></div>
-  <div class="pm-grid">
-   <a class="pm-card" href="mentor-ecg.html"><span class="pm-icon" aria-hidden="true">〽️</span><span class="pm-card-copy"><strong>Εξάσκηση σε ηλεκτροκαρδιογράφημα (ΗΚΓ)</strong><span>Βασική μορφή P–QRS–T και εξάσκηση μέτρησης QRS</span><small>Συνθετικά σχήματα · όχι κλινικό ΗΚΓ</small></span><span class="pm-arrow" aria-hidden="true">›</span></a>
+  <div class="pm-section-title">
+   <h2 id="pm-skills-title">Εργαστήρια δεξιοτήτων</h2>
+   <p>Έξι συνδεδεμένες διαδρομές εξάσκησης: το ΗΚΓ λειτουργεί ήδη. Τα πέντε υπόλοιπα είναι θέσεις προγραμματισμένων εργαστηρίων, με ελεγμένους συνδέσμους προς τη σχετική ύλη.</p>
   </div>
+  <div class="pm-lab-grid">
+   <article class="pm-card pm-lab-card pm-lab-live" id="lab-ecg">
+    <div class="pm-lab-top"><span class="pm-icon" aria-hidden="true">〽️</span><div class="pm-card-copy"><h3>Ηλεκτροκαρδιογράφημα (ΗΚΓ)</h3><span>Αναγνώριση εκπαιδευτικών κυματομορφών, καταμέτρηση QRS και εξάσκηση ρυθμών.</span></div></div>
+    <span class="pm-lab-state pm-lab-available">Διαθέσιμο · Συνθετικά σήματα, όχι κλινικά ΗΚΓ</span>
+    <nav class="pm-lab-links" aria-label="Εργαστήριο ΗΚΓ και σχετική ύλη">
+     <a class="pm-lab-start" href="mentor-ecg.html">Άνοιξε το ΗΚΓ</a>
+     <a href="saek-course-02.html#lesson-7">ΣΑΕΚ: Ηλεκτρική αγωγή</a>
+     <a href="#lab-auscultation">Σχετικό εργαστήριο</a>
+    </nav>
+   </article>
+   <article class="pm-card pm-lab-card" id="lab-auscultation">
+    <div class="pm-lab-top"><span class="pm-icon" aria-hidden="true">🩺</span><div class="pm-card-copy"><h3>1. Ακρόαση</h3><span>Εκπαίδευση στην αναγνώριση καρδιακών και πνευμονικών ήχων από αδειοδοτημένες, επιστημονικά ελεγμένες ηχογραφήσεις.</span></div></div>
+    <span class="pm-lab-state pm-lab-planned">Σε σχεδιασμό · Το εργαστήριο δεν λειτουργεί ακόμη</span>
+    <nav class="pm-lab-links" aria-label="Σχετική μελέτη για 1. Ακρόαση">
+     <a href="saek-course-01.html#lesson-3">ΣΑΕΚ: Θώρακας και αναπνευστικό</a>
+     <a href="saek-course-02.html#lesson-2">ΣΑΕΚ: Φυσιολογία αναπνοής</a>
+     <a href="#lab-airway">Σχετικό εργαστήριο</a>
+    </nav>
+    <button type="button" class="pm-lab-atla" data-atla-open data-atla-context="Φυσιολογία της αναπνοής">Άνοιξε τον ATLA για το θέμα</button>
+   </article>
+
+   <article class="pm-card pm-lab-card" id="lab-airway">
+    <div class="pm-lab-top"><span class="pm-icon" aria-hidden="true">🫁</span><div class="pm-card-copy"><h3>2. Αεραγωγός και Αερισμός</h3><span>Εξοπλισμός αεραγωγού, BVM και συσκευές οξυγόνου: αναγνώριση, προϋποθέσεις και θεωρητικός έλεγχος σειράς ενεργειών.</span></div></div>
+    <span class="pm-lab-state pm-lab-planned">Σε σχεδιασμό · Το εργαστήριο δεν λειτουργεί ακόμη</span>
+    <nav class="pm-lab-links" aria-label="Σχετική μελέτη για 2. Αεραγωγός και Αερισμός">
+     <a href="saek-course-01.html#lesson-11">ΣΑΕΚ: Ανώτεροι και κατώτεροι αεραγωγοί</a>
+     <a href="saek-course-05.html#lesson-8">ΣΑΕΚ: Αεραγωγός και αναπνοή</a>
+     <a href="#lab-procedures">Σχετικό εργαστήριο</a>
+    </nav>
+    <button type="button" class="pm-lab-atla" data-atla-open data-atla-context="Αεραγωγός και αναπνευστική προσπάθεια">Άνοιξε τον ATLA για το θέμα</button>
+   </article>
+
+   <article class="pm-card pm-lab-card" id="lab-equipment">
+    <div class="pm-lab-top"><span class="pm-icon" aria-hidden="true">🧰</span><div class="pm-card-copy"><h3>3. Εξοπλισμός Ασθενοφόρου</h3><span>Αναγνώριση συσκευών, έλεγχοι ετοιμότητας, ασφαλής στερέωση και εκπαιδευτικές δοκιμασίες εντοπισμού λαθών.</span></div></div>
+    <span class="pm-lab-state pm-lab-planned">Σε σχεδιασμό · Το εργαστήριο δεν λειτουργεί ακόμη</span>
+    <nav class="pm-lab-links" aria-label="Σχετική μελέτη για 3. Εξοπλισμός Ασθενοφόρου">
+     <a href="saek-course-09.html#lesson-8">ΣΑΕΚ: Ασφάλιση εξοπλισμού</a>
+     <a href="saek-course-09.html#lesson-9">ΣΑΕΚ: Προβλεπτικός έλεγχος</a>
+     <a href="#lab-procedures">Σχετικό εργαστήριο</a>
+    </nav>
+    <button type="button" class="pm-lab-atla" data-atla-open data-atla-context="Προβλεπτικός έλεγχος και ασφαλής στερέωση εξοπλισμού ασθενοφόρου">Άνοιξε τον ATLA για το θέμα</button>
+   </article>
+
+   <article class="pm-card pm-lab-card" id="lab-communication">
+    <div class="pm-lab-top"><span class="pm-icon" aria-hidden="true">🎙️</span><div class="pm-card-copy"><h3>4. Επικοινωνία και Παράδοση</h3><span>Δομημένη προφορική αναφορά, επιβεβαίωση πληροφοριών και έλεγχος σημαντικών παραλείψεων.</span></div></div>
+    <span class="pm-lab-state pm-lab-planned">Σε σχεδιασμό · Το εργαστήριο δεν λειτουργεί ακόμη</span>
+    <nav class="pm-lab-links" aria-label="Σχετική μελέτη για 4. Επικοινωνία και Παράδοση">
+     <a href="saek-course-20.html#lesson-7">ΣΑΕΚ: Παράδοση σε ΤΕΠ</a>
+     <a href="saek-course-07.html#lesson-9">ΣΑΕΚ: Κλειστός κύκλος επικοινωνίας</a>
+     <a href="mentor-oral.html">Υπάρχουσα προφορική εξάσκηση</a>
+     <a href="#lab-procedures">Σχετικό εργαστήριο</a>
+    </nav>
+    <button type="button" class="pm-lab-atla" data-atla-open data-atla-context="Δομημένη παράδοση ασθενούς και κλειστός κύκλος επικοινωνίας">Άνοιξε τον ATLA για το θέμα</button>
+   </article>
+
+   <article class="pm-card pm-lab-card" id="lab-procedures">
+    <div class="pm-lab-top"><span class="pm-icon" aria-hidden="true">🧤</span><div class="pm-card-copy"><h3>5. Πρακτικές Διαδικασίες</h3><span>Εκπαιδευτικοί σταθμοί βημάτων, προετοιμασίας υλικών και αναγνώρισης λαθών. Δεν είναι προσομοιωτής ασθενών ούτε πιστοποίηση πρακτικής επάρκειας.</span></div></div>
+    <span class="pm-lab-state pm-lab-planned">Σε σχεδιασμό · Το εργαστήριο δεν λειτουργεί ακόμη</span>
+    <nav class="pm-lab-links" aria-label="Σχετική μελέτη για 5. Πρακτικές Διαδικασίες">
+     <a href="saek-course-18.html#lesson-5">ΣΑΕΚ: Έλεγχος σοβαρής αιμορραγίας</a>
+     <a href="saek-course-18.html#lesson-6">ΣΑΕΚ: Σταθμός νάρθηκα</a>
+     <a href="saek-course-20.html#lesson-8">ΣΑΕΚ: Μεταφορά μεταξύ φορείων</a>
+     <a href="#lab-equipment">Σχετικό εργαστήριο</a>
+    </nav>
+    <button type="button" class="pm-lab-atla" data-atla-open data-atla-context="Εκπαιδευτικές πρακτικές δεξιότητες: νάρθηκας, αιμορραγία, ασφαλής μετακίνηση">Άνοιξε τον ATLA για το θέμα</button>
+   </article>
+
+  </div>
+  <p class="pm-note">Οι σύνδεσμοι «ΣΑΕΚ» οδηγούν στα ήδη υπάρχοντα κεφάλαια, όχι σε ανύπαρκτες ασκήσεις. Ο ATLA ανοίγει με προεπιλεγμένο θέμα αλλά απαντά μόνο εντός των υφιστάμενων περιορισμών τεκμηρίωσης. Για τις νέες δεξιότητες απαιτούνται ανεξάρτητος επιστημονικός έλεγχος και πρακτική εκπαίδευση με εκπαιδευτή.</p>
  </section>
  <section class="pm-section" aria-labelledby="pm-atla-title">
   <div class="pm-section-title"><h2 id="pm-atla-title">Εκπαιδευτικός βοηθός ATLA</h2><p>Μελέτη, εξάσκηση και ανάγνωση με τη βοήθεια του ATLA.</p></div>
