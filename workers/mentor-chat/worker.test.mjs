@@ -36,6 +36,7 @@ test('free models first; an answer that fails the safety audit moves on to the n
  ]});
  assert.deepEqual(calls,['first','second','third'],'the paid model is not called when a free one answered');
  assert.equal(result.provider,'third');
+ assert.deepEqual(result.trace,['first:missing-or-unknown-citation','second:no-answer']);
 });
 
 test('free providers are used only when their key is configured',()=>{

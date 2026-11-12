@@ -46,6 +46,7 @@ export function auditAssistantReply(reply,passages=[]){
  if(/[\u0400-\u052F\u1100-\u11FF\u3130-\u318F\uAC00-\uD7AF]/u.test(text))
    return {ok:false,reason:'unexpected-non-greek-script'};
  if(DOSE.test(text))return {ok:false,reason:'unsafe-dose-output'};
+ if(/[a-z][α-ωάέήίόύώϊϋΐΰ]|[α-ωάέήίόύώϊϋΐΰ][a-z]/i.test(text))return {ok:false,reason:'mixed-script-word'};
  // A source ID alone never validates a new numerical claim. Emergency contact
  // numbers are platform safety guidance, not lesson evidence.
  const withoutCitations=text.replace(/\[(?:[ΤT][1-9][0-9]?)(?:\s*,\s*[ΤT][1-9][0-9]?)*\]/g,'');

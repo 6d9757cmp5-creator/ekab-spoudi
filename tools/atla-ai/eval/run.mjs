@@ -12,15 +12,14 @@ const site=(process.argv[2]||'https://6d9757cmp5-creator.github.io/ekab-spoudi/'
 const out=new URL('./report.md',import.meta.url);
 const questions=JSON.parse(readFileSync(new URL('./questions.json',import.meta.url),'utf8'));
 const browser=await chromium.launch();
-const page=await (await browser.newContext({viewport:{width:1280,height:900}})).newPage();
 let provider='';
-page.on('response',r=>{if(/workers\.dev\/?$/.test(r.url())&&r.request().method()==='POST')provider=r.headers()['x-atla-provider']||('http '+r.status())});
 const rows=[];
 for(const [i,q] of questions.entries()){
- // A fresh conversation for every question, so answers do not depend on each other.
- await page.goto(site+'index.html',{waitUntil:'load'});
- await page.evaluate(()=>{for(const k of Object.keys(localStorage))if(/atla|mentor/i.test(k)&&/turn|history|chat/i.test(k))localStorage.removeItem(k)});
- await page.reload({waitUntil:'load'});await page.waitForTimeout(1200);
+ // A new browser profile for every question, so answers do not depend on each other.
+ const context=await browser.newContext({viewport:{width:1280,height:900}});
+ const page=await context.newPage();
+ page.on('response',r=>{if(/workers\.dev\/?$/.test(r.url())&&r.request().method()==='POST'){const t=r.headers()['x-atla-trace'];provider=r.headers()['x-atla-provider']||('http '+r.status()+(t?' · '+t:''))}});
+ await page.goto(site+'index.html',{waitUntil:'load'});await page.waitForTimeout(1200);
  await page.locator('.atla-launcher').click();await page.waitForTimeout(500);
  provider='';
  await page.locator('[class*=atla] textarea:visible').first().fill(q.q);
@@ -30,6 +29,7 @@ for(const [i,q] of questions.entries()){
  const answer=(await page.locator('.atla-reply').last().innerText().catch(()=>'')).trim();
  rows.push({...q,answer,provider:provider||'τοπικό (χωρίς μοντέλο)',words:answer.split(/\s+/).filter(Boolean).length});
  process.stdout.write((i+1)+'/'+questions.length+' '+(provider||'local')+'\n');
+ await context.close();
 }
 await browser.close();
 const byModel={};for(const r of rows){const k=r.provider.replace(/\+cache$/,'');byModel[k]=(byModel[k]||0)+1}

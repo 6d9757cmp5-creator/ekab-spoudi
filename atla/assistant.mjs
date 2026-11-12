@@ -87,13 +87,15 @@ function answerFromLibrary(q){
  const direct=hits.length>0&&nameCoverage(q,terms.find(t=>t.term===hits[0].term))>=0.5;
  // A definition also leads to where the term is taught (UX review #32).
  const inMaterial=h=>'search.html?q='+encodeURIComponent(h.term);
- const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
+ const stop=new Set(['ποια','ποιο','ποιεσ','ποιοι','ειναι','τι','πωσ','πως','εξηγησε','μου','στο','στη','στον','στην','σε','και','για','απο','τον','την','του','τησ','της','κανω','κανουμε','οταν','βρω','γιατι','μπορεισ','πεισ','πιο','απλα','δεν','καταλαβα','ενα','μια','ενασ']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  // Books inflect their terms, so a miss is retried on word stems: οστό also finds οστά.
  const stems=cleaned.split(' ').map(word=>word.slice(0,word.length>4?-2:-1)).join(' ');
  // All words first, then their stems, then only the two most specific words, so long questions still find material.
- const key2=cleaned.split(' ').sort((x,y)=>y.length-x.length).slice(0,2).map(w=>w.slice(0,w.length>5?-2:w.length)).join(' ');
- const find=(kind,n)=>{if(!records.length)return [];for(const query of [cleaned,stems,key2]){const r=searchRecords(records,query,kind,n).rows;if(r.length)return r}return []};
+ // Word roots (about 60% of the word, at least 5 letters): ανταποκρίνεται also finds ανταπόκριση.
+ const key2=cleaned.split(' ').sort((x,y)=>y.length-x.length).slice(0,2).map(w=>w.slice(0,Math.max(5,Math.ceil(w.length*0.6)))).join(' ');
+ const roots=key2.split(' ').concat(cleaned.split(' ').sort((x,y)=>y.length-x.length).slice(2,3).map(w=>w.slice(0,Math.max(5,Math.ceil(w.length*0.6)))));
+ const find=(kind,n)=>{if(!records.length)return [];for(const query of [cleaned,stems,key2,...roots]){if(!query)continue;const r=searchRecords(records,query,kind,n).rows;if(r.length)return r}return []};
  const chapters=find('saek',2),answers=[...find('eoppep',1),...find('sos',1)].slice(0,1),books=find('book',1),drugs=find('pharma',1);
  // Up to four sources for the model: the definition, then the course chapter, an EOPPEP answer, a book or a drug card.
  const term=h=>({term:h.term,definition:h.definition,ref:'medical-terms.json#'+h.term});
