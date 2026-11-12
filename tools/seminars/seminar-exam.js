@@ -71,7 +71,7 @@ function renderQuestion(){
   const label=make('label','seminar-mcq-option');
   const radio=make('input');radio.type='radio';radio.name='seminarExamAnswer';radio.value=String(original);radio.checked=item.choice===original;
   radio.addEventListener('change',()=>{item.choice=original;fill.style.width=Math.round(100*state.items.filter(i=>i.choice!==null).length/state.items.length)+'%';});
-  label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(65+j)+'. '+q[original+1]));
+  label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(913+j)+'. '+q[original+1]));
   choices.append(label);
  });
  const nav=make('div','seminar-practice-actions');
@@ -131,7 +131,7 @@ function renderStep(){
   const label=make('label','seminar-mcq-option');
   const radio=make('input');radio.type='radio';radio.name='seminarExamStep';radio.value=String(original);radio.checked=item.choice===original;
   radio.addEventListener('change',()=>{item.choice=original;next.disabled=false;});
-  label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(65+j)+'. '+item.s.options[original][0]));
+  label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(913+j)+'. '+item.s.options[original][0]));
   choices.append(label);
  });
  next.addEventListener('click',()=>{if(item.choice===null)return;if(state.pos<state.steps.length-1){state.pos++;renderStep();}else finishScenario();});

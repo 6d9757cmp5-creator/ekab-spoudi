@@ -257,7 +257,7 @@ function renderMultiple(item){
  item.order.forEach((original,j)=>{
   const label=make('label','seminar-mcq-option');
   const radio=make('input');radio.type='radio';radio.name='seminarMCQAnswer';radio.value=String(original);
-  label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(65+j)+'. '+q[original+1]));
+  label.append(radio,make('span','seminar-mcq-label',String.fromCharCode(913+j)+'. '+q[original+1]));
   radio.addEventListener('change',()=>{
    if(!selected||view!=='quiz'||current().mixedRun!==run||run.pos!==pos||run.responses[pos])return;
    const correct=original===0;
