@@ -46,8 +46,8 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: workers/mentor-chat
-          # A version that reads wrangler.jsonc (older 3.x releases needed wrangler.toml).
-          wranglerVersion: "3.114.15"
+          # Reads wrangler.jsonc and bundles JSON import attributes (import ... with {type:"json"}).
+          wranglerVersion: "4.20.0"
       - name: Optional keys (free providers, feedback review)
         working-directory: workers/mentor-chat
         env:
@@ -60,7 +60,7 @@ jobs:
         run: |
           # Each key is copied into the Worker only if it exists as a repository secret.
           for name in GROQ_API_KEY GEMINI_API_KEY OPENROUTER_API_KEY ATLA_ADMIN_TOKEN; do
-            if [ -n "${!name}" ]; then printf '%s' "${!name}" | npx --yes wrangler@3.114.15 secret put "$name"; else echo "$name: not set, skipped"; fi
+            if [ -n "${!name}" ]; then printf '%s' "${!name}" | npx --yes wrangler@4.20.0 secret put "$name"; else echo "$name: not set, skipped"; fi
           done
       - name: Smoke test
         run: |
