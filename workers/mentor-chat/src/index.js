@@ -9,7 +9,8 @@ import {verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
 import corpus from '../corpus.json' with {type:'json'};
 export {MentorBudget};
 
-export const WORKERS_AI_MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/google/gemma-4-26b-a4b-it','@cf/meta/llama-3.1-8b-instruct-fp8-fast'];
+// Gemma (gemma-4-26b-a4b-it) never answered in the checks of 12/11/2026, so Mistral Small 3.1 takes its place.
+export const WORKERS_AI_MODELS=['@cf/meta/llama-3.3-70b-instruct-fp8-fast','@cf/mistralai/mistral-small-3.1-24b-instruct','@cf/meta/llama-3.1-8b-instruct-fp8-fast'];
 const LEVELS=['beginner','student','advanced','scientific'];
 const LEVEL_STYLE={
  beginner:'Εξήγησε πολύ απλά, με καθημερινές λέξεις και σύντομες προτάσεις.',
