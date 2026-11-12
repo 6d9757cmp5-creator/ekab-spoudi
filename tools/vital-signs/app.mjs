@@ -21,18 +21,84 @@ function updateScore(){
  const correct=[...answers.entries()].filter(([id,index])=>{const q=QUESTIONS.find(item=>item.id===id);return q&&q.correct===index;}).length;
  $('vs-score').textContent='Ορθές: '+correct+' / '+answered.length+' απαντημένες · '+12+' διαθέσιμες';
 }
-function wavePath(){
- // Pleth-like visual shape, deliberately NOT a faithful medical waveform.
- let d='M0 61';
- for(let i=0;i<6;i++){
-  const x=i*120;
-  d+=' L'+(x+13)+' 61 Q'+(x+22)+' 57 '+(x+31)+' 60';
-  d+=' Q'+(x+38)+' 64 '+(x+44)+' 50';
-  d+=' Q'+(x+52)+' 7 '+(x+61)+' 35';
-  d+=' Q'+(x+67)+' 48 '+(x+76)+' 49';
-  d+=' Q'+(x+87)+' 50 '+(x+93)+' 61 L'+(x+120)+' 61';
+
+/** Educational signal motion only. The waveform shapes are synthetic and
+ * must not be interpreted as physiological recordings or used diagnostically.
+ * The displayed numbers are fixed to the selected synthetic observation. */
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let traceActive=!reducedMotion;
+let traceFrame=0,elapsedSeconds=0,lastFrameTime=0;
+let bpFrame=0,bpStartedAt=0;
+const wrapPhase=x=>((x%1)+1)%1;
+const respiratoryShape=phase=>Math.sin(2*Math.PI*phase);
+function plethShape(phase){
+ if(phase<.2)return Math.pow(Math.sin(Math.PI*phase/.2),2);
+ if(phase<.38)return .22*Math.pow(Math.sin(Math.PI*(phase-.2)/.18),2);
+ return .075*Math.exp(-(phase-.38)*4);
+}
+function educationalPath(kind,rate,seconds){
+ const baseline=kind==='pleth'?78:50;
+ const verticalScale=kind==='pleth'?59:25;
+ let path='';
+ for(let x=0;x<=720;x+=3){
+  const t=seconds-(720-x)/125;
+  const phase=wrapPhase(t*rate/60);
+  const y=baseline-verticalScale*(kind==='pleth'?plethShape(phase):respiratoryShape(phase));
+  path+=(x===0?'M':'L')+x+' '+y.toFixed(2)+' ';
  }
- return d;
+ return path.trim();
+}
+function drawEducationalTraces(){
+ const record=current();
+ $('vs-pleth').querySelector('path').setAttribute('d',record.spo2Reliable?educationalPath('pleth',record.pulse,elapsedSeconds):'');
+ $('vs-resp-trace').querySelector('path').setAttribute('d',educationalPath('resp',record.resp,elapsedSeconds));
+ $('vs-wave-warning').hidden=record.spo2Reliable;
+}
+function nextTraceFrame(now){
+ if(!traceActive){traceFrame=0;return;}
+ if(!lastFrameTime)lastFrameTime=now;
+ const delta=Math.min(Math.max((now-lastFrameTime)/1000,0),.12);
+ if(delta>=.028){elapsedSeconds+=delta;drawEducationalTraces();lastFrameTime=now;}
+ traceFrame=requestAnimationFrame(nextTraceFrame);
+}
+function setTraceActive(active){
+ traceActive=Boolean(active);cancelAnimationFrame(traceFrame);traceFrame=0;lastFrameTime=0;
+ const b=$('vs-animation-toggle');b.textContent=traceActive?'Παύση κίνησης':'Συνέχεια κίνησης';
+ b.setAttribute('aria-pressed',String(traceActive));
+ $('vs-wave-mode').textContent=traceActive?'Κίνηση εκπαιδευτικού σήματος · χωρίς κλινική πιστότητα':'Προβολή σε παύση · εκπαιδευτικό σήμα';
+ drawEducationalTraces();
+ if(traceActive)traceFrame=requestAnimationFrame(nextTraceFrame);
+}
+const steps=['practice','quiz','handover'];
+function setStep(step){
+ if(!steps.includes(step))return;
+ $('vs-workspace').dataset.step=step;
+ $('vs-observation-panel').hidden=step!=='practice';
+ $('vs-exercise-panel').hidden=step!=='practice';
+ $('vs-quiz-panel').hidden=step!=='quiz';
+ $('vs-handover-panel').hidden=step!=='handover';
+ document.querySelectorAll('[data-vs-step]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.vsStep===step)));
+}
+function resetBpDemo(){
+ cancelAnimationFrame(bpFrame);bpFrame=0;
+ $('vs-bp-start').disabled=false;$('vs-bp-fill').style.width='0%';
+ $('vs-bp-state').textContent='Συνθετική επίδειξη — η καταγραφή πάνω είναι ήδη συμπληρωμένη.';
+}
+function runBpDemo(){
+ resetBpDemo();
+ const btn=$('vs-bp-start'),status=$('vs-bp-state'),fill=$('vs-bp-fill');
+ const result=current().bp;
+ if(reducedMotion){status.textContent='Επίδειξη ολοκληρώθηκε χωρίς κίνηση. Καταγραφή: '+result+' mmHg (συνθετική).';return;}
+ btn.disabled=true;bpStartedAt=0;
+ const progress=now=>{
+  if(!bpStartedAt)bpStartedAt=now;
+  const p=Math.min((now-bpStartedAt)/3500,1);
+  fill.style.width=(p<.48?p/.48*100:(1-p)/.52*100).toFixed(1)+'%';
+  status.textContent=p<.48?'Επίδειξη: σταδιακή διόγκωση περιχειρίδας…':p<1?'Επίδειξη: εκτόνωση και υπολογισμός καταγραφής…':'Ολοκληρώθηκε · '+result+' mmHg (συνθετικό αποτέλεσμα).';
+  if(p<1)bpFrame=requestAnimationFrame(progress);
+  else{bpFrame=0;btn.disabled=false;fill.style.width='0%';}
+ };
+ bpFrame=requestAnimationFrame(progress);
 }
 function renderMonitor(){
  const e=example(),r=current();
@@ -40,9 +106,9 @@ function renderMonitor(){
  for(const [key,val] of [['vs-time',r.time],['vs-hr',r.pulse],['vs-spo2',r.spo2],['vs-rr',r.resp],['vs-bp',r.bp],['vs-temp',r.temp],['vs-avpu',r.conscious]])$(key).textContent=String(val);
  $('vs-quality').dataset.reliable=String(r.spo2Reliable);
  $('vs-quality').textContent=r.spo2Reliable?'Ποιότητα εκπαιδευτικού σήματος: κατάλληλη για σύγκριση στο παράδειγμα':'ΠΡΟΣΟΧΗ: αμφίβολη ένδειξη SpO₂ — μην την παρουσιάζεις ως βέβαιη μέτρηση';
- $('vs-pleth').querySelector('path').setAttribute('d',r.spo2Reliable?wavePath():'');
- $('vs-pleth').setAttribute('aria-label',r.spo2Reliable?'Απλουστευμένη συνθετική κυματομορφή εκπαιδευτικού σήματος':'Αμφίβολο σήμα: δεν διατίθεται κυματομορφή για εκτίμηση');
- $('vs-wave-warning').hidden=r.spo2Reliable;
+ $('vs-pleth').setAttribute('aria-label',r.spo2Reliable?'Κινούμενη σχηματική pleth: συνθετικό εκπαιδευτικό σήμα':'Αμφίβολο οξυμετρικό σήμα: χωρίς αξιολογήσιμη κυματομορφή');
+ drawEducationalTraces();
+ resetBpDemo();
  $('vs-record-position').textContent=(recordIndex+1)+' / '+e.records.length;
  $('vs-prev-record').disabled=recordIndex===0;
  $('vs-next-record').disabled=recordIndex>=e.records.length-1;
@@ -251,6 +317,10 @@ function renderQuestion(){
 }
 function renderTopic(){
  const t=TOPICS[topicIndex];
+ $('vs-workspace').dataset.topic=t.id;
+ $('vs-monitor').dataset.focus=t.id;
+ $('vs-bp-demo').hidden=t.id!=='bp';
+ setStep('practice');
  $('vs-exercise-heading').textContent=t.name;
  $('vs-topic-hint').textContent=t.hint;
  $('vs-topic-number').textContent=(topicIndex+1)+' / '+TOPICS.length;
@@ -280,4 +350,8 @@ $('vs-copy').addEventListener('click',async()=>{
  try{if(!navigator.clipboard?.writeText)throw Error('clipboard unavailable');await navigator.clipboard.writeText(content);status.textContent='Η εκπαιδευτική καταγραφή αντιγράφηκε.';}
  catch{status.textContent='Η αντιγραφή δεν υποστηρίζεται εδώ. Επίλεξε το κείμενο της καταγραφής και αντέγραψέ το χειροκίνητα.';}
 });
-renderNavigation();renderMonitor();renderTopic();renderSourceList();updateScore();
+document.querySelectorAll('[data-vs-step]').forEach(btn=>btn.addEventListener('click',()=>setStep(btn.dataset.vsStep)));
+$('vs-animation-toggle').addEventListener('click',()=>setTraceActive(!traceActive));
+$('vs-bp-start').addEventListener('click',runBpDemo);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)setTraceActive(false);});
+renderNavigation();renderMonitor();renderTopic();renderSourceList();updateScore();setTraceActive(traceActive);
