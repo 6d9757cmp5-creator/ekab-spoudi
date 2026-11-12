@@ -106,3 +106,9 @@ html[data-theme="dark"] .pm-lab-education a,html[data-theme="dark"] .pm-lab-rela
 @media(max-width:700px){.pm-lab-groups{grid-template-columns:1fr}#lab-vitals{grid-column:auto}.pm-lab-jump{display:grid;grid-template-columns:1fr 1fr}.pm-lab-experience{grid-template-columns:1fr}}
 @media(max-width:460px){.pm-lab-jump{grid-template-columns:1fr}.pm-lab-units{grid-template-columns:1fr}.pm-lab-group{padding:15px}.pm-lab-group-head{gap:9px}.pm-lab-group-icon{width:42px;height:42px;flex-basis:42px}}
 @media(prefers-reduced-motion:reduce){.pm-lab-expand summary span{transition:none}}
+
+/* One real entry for each piloted vital signs subtopic. */
+.pm-lab-try{display:inline-flex;align-self:flex-start;font-size:.76rem;font-weight:800;text-decoration:none;color:var(--pm-teal);border:1px solid var(--pm-border);border-radius:8px;padding:6px 9px;line-height:1.35}
+.pm-lab-try:hover{border-color:var(--pm-teal);background:#ecf8f8}
+.pm-lab-try:focus-visible{outline:3px solid #10a5a6;outline-offset:3px}
+html[data-theme="dark"] .pm-lab-try{color:#9ee6df}
