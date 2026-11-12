@@ -5,6 +5,12 @@ import {STUDY_KEY,nextSchedule,localDayKey} from './services/recall/selector.mjs
 const account = new Account(client);
 let user = null;
 let initialized = false;
+// 'none' once the server said there is no session (401), so guests do not ask again on every page.
+// A Google login (?login=…) always asks again; a network error never changes the hint.
+const SESSION_HINT = 'ekab.account.session-hint';
+function sessionHint(value) {
+  try { if (value) localStorage.setItem(SESSION_HINT, value); return localStorage.getItem(SESSION_HINT); } catch { return null; }
+}
 
 // Keep return URLs on this installation, including the GitHub Pages subdirectory.
 export function loginWithGoogle() {
@@ -141,7 +147,7 @@ export function initAccountUI() {
   });
   logout.addEventListener('click', async () => {
     logout.disabled = true;
-    try { syncManager?.stop(); syncManager=null; await account.deleteSession({ sessionId: 'current' }); user = null; dialog.querySelector('[data-cloud-controls]').hidden=true; paint(); }
+    try { syncManager?.stop(); syncManager=null; await account.deleteSession({ sessionId: 'current' }); sessionHint('none'); user = null; dialog.querySelector('[data-cloud-controls]').hidden=true; paint(); }
     catch { message.textContent = 'Η αποσύνδεση δεν ολοκληρώθηκε. Έλεγξε τη σύνδεσή σου.'; }
     finally { logout.disabled = false; }
   });
@@ -223,10 +229,12 @@ export function initAccountUI() {
       clean.searchParams.delete('login');
       history.replaceState(null, '', clean.href);
     }
-    account.get().then(value => {
+    if (params.has('login') || sessionHint() !== 'none') account.get().then(value => {
+      sessionHint('yes');
       user = value; paint(); attachSync();
       if (params.get('login') === 'success') dialog.showModal();
-    }).catch(() => {
+    }).catch(error => {
+      if (error?.code === 401) sessionHint('none');
       if (params.get('login') === 'success') {
         message.textContent = 'Η συνεδρία σύνδεσης δεν επιβεβαιώθηκε. Δοκίμασε ξανά τη σύνδεση Google.';
         dialog.showModal();
