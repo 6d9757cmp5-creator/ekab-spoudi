@@ -40,7 +40,9 @@ function renderMonitor(){
  for(const [key,val] of [['vs-time',r.time],['vs-hr',r.pulse],['vs-spo2',r.spo2],['vs-rr',r.resp],['vs-bp',r.bp],['vs-temp',r.temp],['vs-avpu',r.conscious]])$(key).textContent=String(val);
  $('vs-quality').dataset.reliable=String(r.spo2Reliable);
  $('vs-quality').textContent=r.spo2Reliable?'Ποιότητα εκπαιδευτικού σήματος: κατάλληλη για σύγκριση στο παράδειγμα':'ΠΡΟΣΟΧΗ: αμφίβολη ένδειξη SpO₂ — μην την παρουσιάζεις ως βέβαιη μέτρηση';
- $('vs-pleth').querySelector('path').setAttribute('d',wavePath());
+ $('vs-pleth').querySelector('path').setAttribute('d',r.spo2Reliable?wavePath():'');
+ $('vs-pleth').setAttribute('aria-label',r.spo2Reliable?'Απλουστευμένη συνθετική κυματομορφή εκπαιδευτικού σήματος':'Αμφίβολο σήμα: δεν διατίθεται κυματομορφή για εκτίμηση');
+ $('vs-wave-warning').hidden=r.spo2Reliable;
  $('vs-record-position').textContent=(recordIndex+1)+' / '+e.records.length;
  $('vs-prev-record').disabled=recordIndex===0;
  $('vs-next-record').disabled=recordIndex>=e.records.length-1;
