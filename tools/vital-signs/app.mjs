@@ -1,7 +1,7 @@
 /** Interactive first-release vital signs skill drills. Synthetic records only.
  * No personal data, diagnostic thresholds, external calls, or progress persistence.
  */
-import {TOPICS,SOURCES,EXAMPLES,STRIPS,QUESTIONS,ratePerMinute,getExample,changesFor,handoverText,topicQuestions,grade} from './core.mjs';
+import {TOPICS,SOURCES,EXAMPLES,STRIPS,QUESTIONS,AVPU_EXERCISES,gradeAvpu,gradeTrend,annotateTemperature,ratePerMinute,getExample,changesFor,handoverText,topicQuestions,grade} from './core.mjs';
 const $=id=>document.getElementById(id);
 const create=(tag,cls,content)=>{
  const el=document.createElement(tag);if(cls)el.className=cls;
@@ -86,7 +86,7 @@ function renderCountTask(topic,root){
  const strips=STRIPS[topic],index=stripIndex.get(topic)||0,item=strips[index];
  const task=create('div','vs-task');const isResp=topic==='resp';
  task.append(create('h3','',isResp?'Μέτρησε τους αναπνευστικούς κύκλους':'Μέτρησε τους παλμούς'));
- task.append(create('p','',item.seconds+' δευτερόλεπτα συνθετικού σήματος. Κάθε κορυφή αντιστοιχεί σε έναν κύκλο. Υπολόγισε συχνότητα ανά λεπτό.'));
+ task.append(create('p','',item.seconds+' δευτερόλεπτα συνθετικού τακτικού σήματος (αριθμητική άσκηση, όχι κλινική καταγραφή). Κάθε κορυφή αντιστοιχεί σε έναν κύκλο. Υπολόγισε συχνότητα ανά λεπτό.'));
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
  svg.setAttribute('viewBox','0 0 720 95');svg.setAttribute('role','img');
  svg.setAttribute('aria-label','Εκπαιδευτική λωρίδα '+item.seconds+' δευτερολέπτων με κορυφές για καταμέτρηση');
@@ -147,22 +147,77 @@ function renderSpo2Task(root){
  }
  row.append(good,bad);task.append(row,status);root.append(task);
 }
+
+let avpuIndex=0;
 function renderSimpleTask(topic,root){
- const task=create('div','vs-task');
- const details={
-  temp:['Τεκμηρίωση θερμομέτρησης','Η τιμή θερμοκρασίας δεν αρκεί μόνη της: γράψε και μέθοδο/θέση, μονάδα και ώρα.','Παράδειγμα: 36,8 °C · μέθοδος: [συμπληρώνεται] · 09:00.'],
-  conscious:['Περιγραφή επιπέδου ανταπόκρισης','AVPU = A (Alert), V (Voice), P (Pain), U (Unresponsive). Χρησιμοποίησε τις έννοιες μόνο ως περιγραφή παρατήρησης.','Στο φύλλο Γ το A στις 14:00 γίνεται V στις 14:12. Κατέγραψε τη μεταβολή με ώρα.'],
-  trend:['Διαδοχικές καταγραφές και παράδοση','Χρησιμοποίησε το επάνω κουμπί σύγκρισης: διαφορές σφυγμού και αναπνοών, ποιοτική σημείωση του SpO₂, ακριβής ώρα.','Έπειτα διάβασε την εκπαιδευτική αναφορά και άνοιξε το υπάρχον εργαστήριο προφορικής παράδοσης.']
- }[topic];
- task.append(create('h3','',details[0]),create('p','',details[1]));
- task.append(create('p','vs-task-status',details[2]));
+ const task=create('div','vs-task'),status=create('p','vs-task-status');
+ status.hidden=true;status.setAttribute('role','status');
+ if(topic==='temp'){
+  const r=example().records[0];
+  task.append(create('h3','','Πλήρης καταγραφή χωρίς αυθαίρετα στοιχεία'));
+  task.append(create('p','','Στις '+r.time+' καταγράφηκαν '+r.temp+' °C. Η μέθοδος μέτρησης δεν έχει καταχωριστεί. Τι θα αναφέρεις;'));
+  const label=create('label','vs-select-label','Μέθοδος στην αναφορά');
+  const sel=create('select');sel.setAttribute('aria-label','Μέθοδος καταγραφής θερμοκρασίας');
+  for(const [id,name] of [['','— Επιλογή —'],['tympanic','Τυμπανική'],['axillary','Μασχαλιαία'],['unknown','Μη καταγεγραμμένη']]){
+   const opt=create('option','',name);opt.value=id;sel.append(opt);
+  }
+  label.append(sel);task.append(label);
+  const btn=create('button','','Έλεγξε την καταγραφή');btn.type='button';
+  btn.addEventListener('click',()=>{
+   if(!sel.value){status.textContent='Επίλεξε τι θα καταγράψεις.';status.hidden=false;return;}
+   const answer=annotateTemperature(example(),sel.value);
+   status.textContent=(answer.correct?'Σωστά. ':'Χρειάζεται διόρθωση. ')+answer.text+'. '+answer.explain;
+   status.hidden=false;
+  });
+  task.append(btn,status);
+ }
+ if(topic==='conscious'){
+  const caseItem=AVPU_EXERCISES[avpuIndex];
+  task.append(create('h3','','Αναγνώριση AVPU από καταγεγραμμένη παρατήρηση'));
+  task.append(create('p','',caseItem.observation));
+  const row=create('div','vs-task-row');
+  for(const val of ['A','V','P','U']){
+   const btn=create('button','',val);btn.type='button';btn.setAttribute('aria-label','Επιλογή '+val+' κατά AVPU');
+   btn.addEventListener('click',()=>{
+    const ans=gradeAvpu(caseItem.id,val);
+    status.textContent=(ans.correct?'Σωστά. ':'Χρειάζεται διόρθωση. ')+ans.explain;status.hidden=false;
+   });row.append(btn);
+  }
+  task.append(row,status);
+  const next=create('button','','Άλλη παρατήρηση');next.type='button';
+  next.addEventListener('click',()=>{avpuIndex=(avpuIndex+1)%AVPU_EXERCISES.length;renderTask()});
+  task.append(next,create('p','vs-hint','Μόνο αναγνώριση περιγραφών· όχι εφαρμογή επώδυνων ερεθισμάτων.'));
+ }
  if(topic==='trend'){
-  const button=create('button','','Εμφάνισε τη σύγκριση του φύλλου');button.type='button';
-  button.addEventListener('click',()=>{renderComparison();$('vs-compare-result').scrollIntoView({block:'nearest'});});
-  task.append(button);
+  const ex=example(),r1=ex.records[0],r2=ex.records.at(-1);
+  task.append(create('h3','','Υπολόγισε και τεκμηρίωσε την πραγματική μεταβολή τιμών του φύλλου'));
+  task.append(create('p','',r1.time+' → '+r2.time+': σφυγμός '+r1.pulse+' → '+r2.pulse+'/min, αναπνοές '+r1.resp+' → '+r2.resp+'/min. Γράψε τη διαφορά με πρόσημο.'));
+  const row=create('div','vs-task-row');
+  const lp=create('label','vs-inline-label','Μεταβολή σφυγμού /min');
+  const pr=create('input');pr.type='number';pr.step='1';pr.setAttribute('aria-label','Αριθμητική διαφορά σφυγμού');
+  const lr=create('label','vs-inline-label','Μεταβολή αναπνοών /min');
+  const rr=create('input');rr.type='number';rr.step='1';rr.setAttribute('aria-label','Αριθμητική διαφορά αναπνοών');
+  lp.append(pr);lr.append(rr);row.append(lp,lr);task.append(row);
+  const qual=create('label','vs-uncertainty');
+  const flag=create('input');flag.type='checkbox';
+  qual.append(flag,create('span','','Η δεύτερη τιμή SpO₂ έχει αμφίβολο σήμα.'));
+  task.append(qual);
+  const btn=create('button','','Έλεγξε τις μεταβολές');btn.type='button';
+  btn.addEventListener('click',()=>{
+   if(!pr.value.trim()||!rr.value.trim()||!Number.isInteger(Number(pr.value))||!Number.isInteger(Number(rr.value))){
+    status.textContent='Συμπλήρωσε τις δύο αριθμητικές διαφορές.';status.hidden=false;return;
+   }
+   const ans=gradeTrend(ex,Number(pr.value),Number(rr.value),flag.checked);
+   status.textContent=(ans.correct?'Σωστά. ':'Χρειάζεται διόρθωση. ')+
+    'Σφυγμός '+ans.expectedPulse+'/min, αναπνοές '+ans.expectedResp+
+    '/min. '+(ans.needSignalCheck?'Η μεταβολή SpO₂ δεν υπολογίζεται ως αξιόπιστη.':'Το σήμα SpO₂ είναι κατάλληλο για σύγκριση μόνο στο παράδειγμα.');
+   status.hidden=false;
+  });
+  task.append(btn,status);
  }
  root.append(task);
 }
+
 function renderTask(){
  const topic=TOPICS[topicIndex],root=$('vs-interaction');clear(root);
  if(topic.id==='pulse'||topic.id==='resp')renderCountTask(topic.id,root);
@@ -211,10 +266,10 @@ function renderSourceList(){
 $('vs-example').addEventListener('change',e=>{
  const next=EXAMPLES.findIndex(x=>x.id===e.target.value);
  if(next<0)return;exampleIndex=next;recordIndex=0;renderMonitor();
- if(TOPICS[topicIndex].id==='spo2')renderTask();
+ if(['spo2','temp','trend'].includes(TOPICS[topicIndex].id))renderTask();
 });
-$('vs-prev-record').addEventListener('click',()=>{recordIndex=Math.max(0,recordIndex-1);renderMonitor();if(TOPICS[topicIndex].id==='spo2')renderTask()});
-$('vs-next-record').addEventListener('click',()=>{recordIndex=Math.min(example().records.length-1,recordIndex+1);renderMonitor();if(TOPICS[topicIndex].id==='spo2')renderTask()});
+$('vs-prev-record').addEventListener('click',()=>{recordIndex=Math.max(0,recordIndex-1);renderMonitor();if(['spo2','temp','trend'].includes(TOPICS[topicIndex].id))renderTask()});
+$('vs-next-record').addEventListener('click',()=>{recordIndex=Math.min(example().records.length-1,recordIndex+1);renderMonitor();if(['spo2','temp','trend'].includes(TOPICS[topicIndex].id))renderTask()});
 $('vs-compare').addEventListener('click',renderComparison);
 $('vs-next-question').addEventListener('click',()=>{const t=TOPICS[topicIndex].id;questionIndex.set(t,((questionIndex.get(t)||0)+1)%topicQuestions(t).length);renderQuestion()});
 $('vs-reset').addEventListener('click',()=>{answers.clear();questionIndex.clear();stripIndex.set('pulse',0);stripIndex.set('resp',0);updateScore();renderTopic()});
