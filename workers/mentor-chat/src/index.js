@@ -79,17 +79,22 @@ export function verifiedPassages(clientPassages,records=corpus.records){
  return out;
 }
 
+const KEYWORD_PROMPT=question=>[
+ {role:'system',content:'Translate the student question into 2 to 5 English medical search keywords. Reply only with the keywords, separated by commas.'},
+ {role:'user',content:question}];
 /** English keywords for the open textbooks: glossary names found in the question, plus a short translation by the small free model. */
 async function bookKeywords(env,question,glossary){
  const q=normGreek(question);
  const words=Object.entries(glossary||{}).filter(([greek])=>q.includes(greek)).map(([,en])=>en);
  if(env.AI){
   try{
-   const r=await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8-fast',{messages:[
-    {role:'system',content:'Translate the student question into 2 to 5 English medical search keywords. Reply only with the keywords, separated by commas.'},
-    {role:'user',content:question}],max_tokens:40,temperature:0});
+   const r=await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8-fast',{messages:KEYWORD_PROMPT(question),max_tokens:40,temperature:0});
    words.push(String(r?.response||'').slice(0,200));
   }catch{}
+ }
+ // Workers AI unavailable (daily limit): the first free provider translates instead, in a few tokens.
+ if(words.length<2)for(const p of freeProviders(env).slice(0,2)){
+  try{words.push(String(await askOpenAiCompatible(p,KEYWORD_PROMPT(question),{maxTokens:40})).slice(0,200));break;}catch{}
  }
  return [...new Set(tokens(words.join(' ')))].slice(0,8);
 }
@@ -157,8 +162,9 @@ export function _resetLimits(){hits.clear();day={key:'',count:0};}
 /** OpenAI-compatible free providers, used only when their key is set as a Worker secret. */
 export function freeProviders(env){
  const list=[];
- if(env.GROQ_API_KEY)list.push({name:'groq',url:'https://api.groq.com/openai/v1/chat/completions',modelsUrl:'https://api.groq.com/openai/v1/models',key:env.GROQ_API_KEY,model:env.GROQ_MODEL||'llama-3.3-70b-versatile'});
+ // Gemini first: the best Greek of the free models; Groq has the largest daily quota.
  if(env.GEMINI_API_KEY)list.push({name:'gemini',url:'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',modelsUrl:'https://generativelanguage.googleapis.com/v1beta/openai/models',key:env.GEMINI_API_KEY,model:env.GEMINI_MODEL||'gemini-3.8-flash'});
+ if(env.GROQ_API_KEY)list.push({name:'groq',url:'https://api.groq.com/openai/v1/chat/completions',modelsUrl:'https://api.groq.com/openai/v1/models',key:env.GROQ_API_KEY,model:env.GROQ_MODEL||'llama-3.3-70b-versatile'});
  if(env.OPENROUTER_API_KEY)list.push({name:'openrouter',url:'https://openrouter.ai/api/v1/chat/completions',modelsUrl:'https://openrouter.ai/api/v1/models',key:env.OPENROUTER_API_KEY,model:env.OPENROUTER_MODEL||'meta-llama/llama-3.3-70b-instruct:free'});
  return list;
 }
@@ -199,9 +205,16 @@ async function currentModel(p){
 export function cheapPaidProviders(env){
  return env.DEEPSEEK_API_KEY?[{name:'deepseek',url:'https://api.deepseek.com/chat/completions',key:env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL||'deepseek-chat'}]:[];
 }
-async function askOpenAiCompatible(p,messages){
- const call=model=>fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
-  body:JSON.stringify({model,messages,max_tokens:MAX_OUTPUT,temperature:0.3}),signal:AbortSignal.timeout(20000)});
+async function askOpenAiCompatible(p,messages,{maxTokens=MAX_OUTPUT}={}){
+ // Gemini's thinking counts against max_tokens and is slow; a short answer from course text needs little.
+ let effort=p.name==='gemini'?{reasoning_effort:'low'}:{};
+ const call=async model=>{
+  p.used=model;
+  let r=await fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
+   body:JSON.stringify({model,messages,max_tokens:maxTokens,temperature:0.3,...effort}),signal:AbortSignal.timeout(25000)});
+  if(r.status===400&&effort.reasoning_effort){effort={};r=await call(model);}
+  return r;
+ };
  const remembered=discovered.get(p.name)?.model;
  let r=await call(remembered||p.model);
  // A retired model (404, or 400 on some providers): find the current one once and retry.
@@ -256,7 +269,7 @@ export async function answer(request,env,body,{askers}={}){
  const chain=askers||[
   // Free providers with a key go first: their daily free quotas are far larger than the ~10,000
   // Workers AI neurons (about 70 answers), which then remain as the fallback.
-  ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
+  ...freeProviders(env).map(p=>({name:p.name,label:()=>p.name+'/'+(p.used||p.model),ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
   ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
   ...cheapPaidProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
   {name:'claude',ask:()=>askClaude(request,env,messages)}
@@ -275,11 +288,11 @@ export async function answer(request,env,body,{askers}={}){
    trace.push(step.name+':'+verdict.reason);
    try{text=String(await step.repair(text)||'').trim();}catch{text='';}
    verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
-   if(verdict.ok)return {text,provider:step.name+'+cite',trace};
+   if(verdict.ok)return {text,provider:(step.label?.()||step.name)+'+cite',trace};
    trace.push(step.name+'+cite:'+verdict.reason);
    continue;
   }
-  if(verdict.ok)return {text,provider:step.name,trace};
+  if(verdict.ok)return {text,provider:step.label?.()||step.name,trace};
   trace.push(step.name+':'+verdict.reason);
  }
  return {text:'',provider:'',trace};
