@@ -6,9 +6,13 @@
  * Needs Playwright. Reads nothing private; the questions are in questions.json next to this file.
  */
 import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve,sep} from 'node:path';
+import {tmpdir} from 'node:os';
 import {chromium} from 'playwright';
 const site=(process.argv[2]||'https://6d9757cmp5-creator.github.io/ekab-spoudi/').replace(/\/?$/,'/');
-const out=process.argv[3]||'atla-eval-report.md';
+// The report is written only as a .md file inside the repository or the system temp folder.
+const out=resolve(process.argv[3]||'atla-eval-report.md');
+if(!out.endsWith('.md')||![resolve('.'),resolve(tmpdir())].some(dir=>out.startsWith(dir+sep)))throw Error('report must be a .md file inside the repository or the temp folder');
 const questions=JSON.parse(readFileSync(new URL('./questions.json',import.meta.url),'utf8'));
 const browser=await chromium.launch();
 const page=await (await browser.newContext({viewport:{width:1280,height:900}})).newPage();

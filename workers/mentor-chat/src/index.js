@@ -63,7 +63,10 @@ export function verifiedPassages(clientPassages,records=corpus.records){
  for(const p of clientPassages){
   const record=records[p.ref];
   if(!record||!/^T[1-4]$/.test(p.id)||out.some(x=>x.id===p.id||x.ref===p.ref))continue;
-  const text=squash(p.definition).replace(/^…\s*/,'').replace(/\s*…$/,'');
+  // The browser marks a cut excerpt with "…" at either end; the rest must match exactly.
+  let text=squash(p.definition);
+  if(text.startsWith('…'))text=text.slice(1).trim();
+  if(text.endsWith('…'))text=text.slice(0,-1).trim();
   // Long titles (EOPPEP questions) may arrive shortened by the browser; the start must still match.
   const term=squash(p.term),titleOk=term===record.title||term.length>=60&&record.title.startsWith(term);
   if(!titleOk||text.length<20&&text!==record.body||!record.body.includes(text))continue;
