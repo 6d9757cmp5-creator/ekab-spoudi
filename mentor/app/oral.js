@@ -3,7 +3,9 @@
 import {QUESTIONS,getOralQuestion,checklistSummary} from '../core/oral-practice.mjs';
 const $=id=>document.getElementById(id);
 const examBox=$('oral-exam-mode');
-let index=0,busy=false;
+// Explicit, allowlisted practice deep link. Default remains the first exercise.
+const requestedPractice=new URLSearchParams(window.location.search).get('practice')||'';
+let index=Math.max(0,QUESTIONS.findIndex(q=>q.id===requestedPractice)),busy=false;
 const answers=Array.from({length:QUESTIONS.length},()=>({notes:'',checked:[],revealed:false,feedback:null,feedbackFor:''}));
 const create=(tag,content)=>{
  const el=document.createElement(tag);
