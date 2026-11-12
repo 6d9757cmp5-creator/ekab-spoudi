@@ -12,12 +12,20 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block'});
   const page=await context.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  const open=async topic=>{await page.goto(`${base}/mentor-handover.html?topic=${topic}&case=${c.id}`,{waitUntil:'load',timeout:45000});await page.locator('#hl-exercise').waitFor();};
+  const open=async topic=>{
+   await page.goto(`${base}/mentor-handover.html?topic=${topic}&case=${c.id}`,{waitUntil:'load',timeout:45000});await page.locator('#hl-exercise').waitFor();
+   assert.equal(await overflow(),'',`${width}px ${topic}: no horizontal overflow`);
+  };
   const verdict=async()=>(await page.locator('.hl-verdict').last().textContent()).trim();
-  const noOverflow=()=>page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1);
+  // Returns '' when nothing sticks out, otherwise the widest offending elements (for the CI log).
+  const overflow=()=>page.evaluate(()=>{
+   if(document.documentElement.scrollWidth<=window.innerWidth+1)return '';
+   return [...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>window.innerWidth+1&&!e.closest('.hl-table-wrap'))
+    .slice(0,5).map(e=>e.tagName.toLowerCase()+'#'+e.id+'.'+String(e.className).split(' ')[0]+' '+Math.round(e.getBoundingClientRect().right)).join(', ');
+  });
 
   await open('capture');
-  assert.equal(await noOverflow(),true,width+': no horizontal overflow');
+  assert.equal(await overflow(),'',width+': no horizontal overflow');
   assert.equal(await page.locator('#hl-topic-nav button').count(),6);
   for(const f of c.capture){const el=page.locator(`[data-field="${f.id}"]`);if(f.kind==='choice')await el.selectOption(f.answer);else await el.fill(f.answer);}
   await page.locator('.hl-check').click();
