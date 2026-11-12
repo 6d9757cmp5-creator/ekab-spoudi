@@ -459,3 +459,6 @@ html[data-theme="dark"] .academic-review-link{color:#9ddcf9}
 
 /* Tap targets of at least 44px (UX review #27). */
 .academic-review-link{display:inline-flex;align-items:center;min-height:44px}
+
+/* Progress rules folded behind ⓘ (UX review #15). */
+.study-rule-more{margin-top:6px}.study-rule-more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}.study-rule-more p{margin:4px 0 0}
