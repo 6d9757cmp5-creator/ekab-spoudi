@@ -5,6 +5,12 @@ import {STUDY_KEY,nextSchedule,localDayKey} from './services/recall/selector.mjs
 const account = new Account(client);
 let user = null;
 let initialized = false;
+// 'none' once the server said there is no session (401), so guests do not ask again on every page.
+// A Google login (?login=…) always asks again; a network error never changes the hint.
+const SESSION_HINT = 'ekab.account.session-hint';
+function sessionHint(value) {
+  try { if (value) localStorage.setItem(SESSION_HINT, value); return localStorage.getItem(SESSION_HINT); } catch { return null; }
+}
 
 // Keep return URLs on this installation, including the GitHub Pages subdirectory.
 export function loginWithGoogle() {
@@ -52,13 +58,13 @@ export function initAccountUI() {
 <p class="sync-summary" data-sync-summary role="status" aria-live="polite">Τα τοπικά αντίγραφα είναι διαθέσιμα χωρίς σύνδεση Google.</p><div class="storage-intro"><p>Η πρόοδός σου αποθηκεύεται αυτόματα σε αυτή τη συσκευή.</p><p class="save-state" data-save-status role="status" aria-live="polite">Έλεγχος αποθήκευσης…</p></div>
 <div class="backup-grid">
 <section class="backup-card"><h3>Κράτησε ένα αντίγραφο</h3><p>Κατέβασε την πρόοδο ΕΟΠΠΕΠ και ΣΑΕΚ για να τη μεταφέρεις ή να την επαναφέρεις.</p><button class="btn compact" data-export-all type="button">Λήψη αντιγράφου προόδου</button><p class="small muted backup-hint">Τα προσωπικά PDF εξάγονται ξεχωριστά από τη βιβλιοθήκη «Τα PDF μου».</p></section>
-<section class="backup-card"><h3>Επαναφορά από αντίγραφο</h3><p>Επίλεξε το αρχείο JSON που είχες εξαγάγει. Θα ζητηθεί επιβεβαίωση πριν αντικατασταθεί η πρόοδος.</p><div class="file-select"><input id="importEverything" data-restore-all type="file" accept=".json,application/json" aria-label="Επιλογή αντιγράφου προόδου JSON"><label class="btn compact secondary" for="importEverything">Επιλογή αρχείου JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div></section>
+<section class="backup-card"><h3>Επαναφορά από αντίγραφο</h3><p>Επίλεξε το αρχείο JSON που είχες εξαγάγει. Θα ζητηθεί επιβεβαίωση πριν αντικατασταθεί η πρόοδος.</p><div class="file-select"><input id="importEverything" data-restore-all type="file" accept=".json,application/json" aria-label="Επιλογή αρχείου αντιγράφου προόδου"><label class="btn compact secondary" for="importEverything">Επιλογή αρχείου JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div></section>
 </div>
 <div class="app-version-row"><div><strong>Έκδοση <span id="currentAppVersion">v27.1.73</span></strong><p id="updateCheckStatus" role="status" aria-live="polite">Έλεγχος διαθέσιμης έκδοσης…</p></div><button class="btn compact secondary" id="checkAppUpdates" type="button">Έλεγχος ενημέρωσης</button></div>
 <details class="storage-advanced"><summary>Προχωρημένες επιλογές</summary><div class="advanced-content"><h3>Παλαιό αντίγραφο ΕΟΠΠΕΠ</h3><p class="small muted">Μόνο για παλαιότερα αρχεία προόδου v15–v19.</p><div class="file-select"><input id="restore" type="file" accept=".json,application/json" aria-label="Επιλογή παλαιού αντιγράφου ΕΟΠΠΕΠ"><label class="btn compact secondary" for="restore">Επιλογή παλαιού JSON</label><span data-file-label>Δεν έχει επιλεγεί αρχείο</span></div><p class="small muted" id="restoreNotice" role="status" aria-live="polite"></p><div class="reset-progress"><h3>Επαναφορά προόδου ανά ενότητα</h3><p>Διάλεξε τι θέλεις να μηδενίσεις. Τα προσωπικά PDF, ο λογαριασμός και οι ρυθμίσεις σύνδεσης δεν διαγράφονται.</p>
 <div class="actions"><button class="btn compact danger-button" data-reset-scope="eoppep" type="button">Μηδενισμός ΕΟΠΠΕΠ</button><button class="btn compact danger-button" data-reset-scope="saek" type="button">Μηδενισμός ΣΑΕΚ</button><button class="btn compact danger-button" data-reset-scope="seminar:bls" type="button">Μηδενισμός BLS/AED</button><button class="btn compact danger-button" data-reset-scope="seminar:pbls" type="button">Μηδενισμός PBLS</button><button class="btn compact danger-button" data-reset-scope="seminar:ils" type="button">Μηδενισμός ILS</button><button class="btn compact danger-button" data-reset-scope="seminar:phtls" type="button">Μηδενισμός PHTLS</button><button class="btn compact danger-button" data-reset-scope="seminar:als" type="button">Μηδενισμός ALS</button></div><p class="small muted" data-reset-notice role="status" aria-live="polite"></p></div></div></details>
 </div></details>
-    <details class="fold atlas-recall-settings"><summary>Υπενθυμίσεις επανάληψης ATLAS</summary><div class="body">
+    <details class="fold atlas-recall-settings"><summary>Υπενθυμίσεις επανάληψης ATLA</summary><div class="body">
       <p class="small muted" data-atlas-recall-status role="status" aria-live="polite"></p>
       <button class="btn compact secondary" type="button" data-atlas-recall-toggle>Παύση υπενθυμίσεων</button>
       <p class="small muted">Αυτόματες ερωτήσεις μόνο από διαβασμένη ύλη, χωρίς μόνιμο κουμπί στις σελίδες.</p>
@@ -141,7 +147,7 @@ export function initAccountUI() {
   });
   logout.addEventListener('click', async () => {
     logout.disabled = true;
-    try { syncManager?.stop(); syncManager=null; await account.deleteSession({ sessionId: 'current' }); user = null; dialog.querySelector('[data-cloud-controls]').hidden=true; paint(); }
+    try { syncManager?.stop(); syncManager=null; await account.deleteSession({ sessionId: 'current' }); sessionHint('none'); user = null; dialog.querySelector('[data-cloud-controls]').hidden=true; paint(); }
     catch { message.textContent = 'Η αποσύνδεση δεν ολοκληρώθηκε. Έλεγξε τη σύνδεσή σου.'; }
     finally { logout.disabled = false; }
   });
@@ -223,10 +229,12 @@ export function initAccountUI() {
       clean.searchParams.delete('login');
       history.replaceState(null, '', clean.href);
     }
-    account.get().then(value => {
+    if (params.has('login') || sessionHint() !== 'none') account.get().then(value => {
+      sessionHint('yes');
       user = value; paint(); attachSync();
       if (params.get('login') === 'success') dialog.showModal();
-    }).catch(() => {
+    }).catch(error => {
+      if (error?.code === 401) sessionHint('none');
       if (params.get('login') === 'success') {
         message.textContent = 'Η συνεδρία σύνδεσης δεν επιβεβαιώθηκε. Δοκίμασε ξανά τη σύνδεση Google.';
         dialog.showModal();

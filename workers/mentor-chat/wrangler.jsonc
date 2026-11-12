@@ -4,6 +4,9 @@
   "compatibility_date": "2026-10-28",
   "workers_dev": true,
   "ai": { "binding": "AI" },
+  // Open textbooks, built by tools/atla-ai/books/build-book-assets.mjs before every deployment.
+  // Read only by the Worker (run_worker_first), never served directly.
+  "assets": { "directory": "./books", "binding": "BOOKS", "run_worker_first": true },
   "observability": { "enabled": true },
   "durable_objects": { "bindings": [ { "name": "BUDGET", "class_name": "MentorBudget" } ] },
   "migrations": [ { "tag": "v1", "new_sqlite_classes": ["MentorBudget"] } ],
