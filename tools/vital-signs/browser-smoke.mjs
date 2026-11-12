@@ -22,6 +22,8 @@ try{
    await page.locator('#vs-example').selectOption('artefact');
    await page.locator('#vs-next-record').click();
    assert.match(await page.locator('#vs-quality').textContent(),/αμφίβολη/);
+   assert.equal(await page.locator('#vs-wave-warning').isVisible(),true,'unreliable wave warning');
+   assert.equal(await page.locator('#vs-pleth path').getAttribute('d'),'','no misleading waveform with bad signal');
    await page.locator('#vs-compare').click();
    assert.match(await page.locator('#vs-compare-result').textContent(),/δεν υπολογίζεται ασφαλής διαφορά/);
    await page.locator('#vs-topic-nav button').filter({hasText:'Παλμική οξυμετρία'}).click();
