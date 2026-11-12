@@ -48,3 +48,24 @@ html[data-theme="dark"] .pm-assistant p{color:#c3dee5}
 html[data-theme="dark"] .pm-assistant button{background:#0e6772}
 @media(max-width:680px){.pm-main{padding-top:20px}.pm-grid,.pm-resources{grid-template-columns:1fr}.pm-card{min-height:90px;padding:14px 12px}.pm-assistant{align-items:stretch;flex-direction:column}.pm-assistant button{width:100%}}
 @media(prefers-reduced-motion:reduce){.pm-card{transition:none}}
+
+
+/* Learning-laboratory hub: existing ECG plus five clearly non-operational future stations. */
+.pm-lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pm-lab-card{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-height:238px;scroll-margin-top:16px}
+.pm-lab-top{display:flex;align-items:flex-start;gap:12px}
+.pm-lab-top h3{font-size:1rem;line-height:1.35;margin:0}
+.pm-lab-state{display:inline-flex;align-self:flex-start;max-width:100%;font-size:.72rem;font-weight:750;line-height:1.4;border-radius:8px;padding:5px 9px}
+.pm-lab-planned{background:#fff3df;color:#785017}
+.pm-lab-available{background:#dff6ec;color:#165b42}
+.pm-lab-links{border-top:1px solid var(--pm-border);padding-top:12px;display:flex;flex-wrap:wrap;gap:7px 9px}
+.pm-lab-links a{color:var(--pm-teal);font-size:.82rem;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:5px 2px}
+.pm-lab-links .pm-lab-start{background:var(--pm-navy);color:#fff;border-radius:9px;padding:8px 12px;text-decoration:none}
+.pm-lab-atla{margin-top:auto;border:1px solid var(--pm-border);background:var(--pm-paper);color:var(--pm-text);border-radius:9px;min-height:41px;font:700 .81rem system-ui;cursor:pointer}
+.pm-lab-atla:hover{border-color:var(--pm-teal)}
+.pm-lab-links a:focus-visible,.pm-lab-atla:focus-visible{outline:3px solid #10a5a6;outline-offset:2px}
+html[data-theme="dark"] .pm-lab-planned{background:#574327;color:#ffe6af}
+html[data-theme="dark"] .pm-lab-available{background:#245943;color:#d6fae8}
+html[data-theme="dark"] .pm-lab-links a{color:#9ee5e0}
+html[data-theme="dark"] .pm-lab-links .pm-lab-start{color:#fff}
+@media(max-width:680px){.pm-lab-grid{grid-template-columns:1fr}.pm-lab-card{min-height:0}}
