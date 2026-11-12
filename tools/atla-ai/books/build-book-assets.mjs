@@ -20,6 +20,8 @@ const FULL_BOOKS='tools/atla-ai/knowledge-base/full-books/';
 // Archived PDFs whose text is not already in mentor/library/corpus/.
 const PDF_ONLY=['open-rn-nbk610445','open-rn-nbk610815','open-rn-nbk616982','open-rn-nbk615319','open-rn-nbk607454','uwm-cell-molecular-biology-5e'];
 import {SHARDS,tokens,shardOf,normGreek} from './text.mjs';
+// pdftotext from a fixed install location (Ubuntu runner, Git for Windows), never looked up through PATH.
+const PDFTOTEXT=['/usr/bin/pdftotext','C:/Program Files/Git/ucrt64/bin/pdftotext.exe'].find(p=>existsSync(p));
 const CHUNK=1100, CHUNK_MAX=1500, GROUP=64, TERMS_PER_CHUNK=40, POSTINGS_MAX=200;
 /** Footnotes, licence lines and running page headers of the PDF books carry no teaching content. */
 export function cleanPdfText(text){
@@ -51,7 +53,7 @@ function corpusBooks(){
 }
 
 function pdfBooks(){
- if(spawnSync('pdftotext',['-v']).error){console.warn('pdftotext not found: the',PDF_ONLY.length,'PDF-only books are skipped');return [];}
+ if(!PDFTOTEXT){console.warn('pdftotext not found: the',PDF_ONLY.length,'PDF-only books are skipped');return [];}
  const catalog=JSON.parse(read(FULL_BOOKS+'catalog.json'));
  const temp=join(tmpdir(),'atla-book-pdfs');rmSync(temp,{recursive:true,force:true});mkdirSync(temp,{recursive:true});
  const books=[];
@@ -59,7 +61,7 @@ function pdfBooks(){
   const meta=catalog.books.find(b=>b.id===id);
   const pdf=join(temp,id+'.pdf'),txt=join(temp,id+'.txt');
   const rebuilt=spawnSync(process.execPath,[fileURLToPath(new URL(FULL_BOOKS+'rebuild.mjs',root)),id,pdf]);
-  if(rebuilt.status!==0||spawnSync('pdftotext',['-enc','UTF-8',pdf,txt]).status!==0){console.warn('skipped',id);continue;}
+  if(rebuilt.status!==0||spawnSync(PDFTOTEXT,['-enc','UTF-8',pdf,txt]).status!==0){console.warn('skipped',id);continue;}
   const pages=readFileSync(txt,'utf8').split('\f');
   const pieces=pages.flatMap((page,i)=>chunkText(cleanPdfText(page)).map(text=>({text,page:i+1})));
   books.push({id,title:meta.title,origin:meta.source_page,licence:meta.license,publisher:meta.publisher,pieces});
