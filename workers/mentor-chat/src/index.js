@@ -36,7 +36,7 @@ function cors(env,origin){
  const allowed=['https://6d9757cmp5-creator.github.io'];
  if(env.ALLOW_LOCAL==='true')allowed.push('http://localhost:8080','http://127.0.0.1:8080','http://127.0.0.1:8812');
  if(!allowed.includes(origin))return null;
- return {'access-control-allow-origin':origin,'access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, x-mentor-test-token','access-control-expose-headers':'x-atla-provider','vary':'origin'};
+ return {'access-control-allow-origin':origin,'access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, x-mentor-test-token','access-control-expose-headers':'x-atla-provider, x-atla-trace','vary':'origin'};
 }
 const json=(body,status,extra={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store',...extra}});
 const str=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
@@ -144,12 +144,15 @@ export async function answer(request,env,body,{askers}={}){
   ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
   {name:'claude',ask:()=>askClaude(request,env,messages)}
  ];
+ const trace=[];
  for(const step of chain){
   let text='';
   try{text=String(await step.ask()||'').trim();}catch{text='';}
-  if(text&&auditAssistantReply(text,body.passages).ok)return {text,provider:step.name};
+  const verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
+  if(verdict.ok)return {text,provider:step.name,trace};
+  trace.push(step.name+':'+verdict.reason);
  }
- return null;
+ return {text:'',provider:'',trace};
 }
 
 async function cacheKey(body){
@@ -192,7 +195,8 @@ export default {
   if(key){const hit=await caches.default.match(key);if(hit){const c=await hit.json();return verifiedSseResponse(c.text,{...headers,'x-atla-provider':c.provider+'+cache'});}}
   if(limited(request.headers.get('cf-connecting-ip')||'unknown',env))return json({error:'limit'},429,{...headers,'retry-after':'3600'});
   const result=await answer(request,env,body);
-  if(!result)return json({error:'unavailable'},503,headers);
+  // Which models were tried and why they were rejected (reasons only, never text).
+  if(!result.text)return json({error:'unavailable'},503,{...headers,'x-atla-trace':result.trace.join(' ').slice(0,300)});
   if(key)ctx?.waitUntil?.(caches.default.put(key,new Response(JSON.stringify(result),{headers:{'content-type':'application/json','cache-control':'max-age='+CACHE_DAYS*86400}})));
   return verifiedSseResponse(result.text,{...headers,'x-atla-provider':result.provider});
  }
