@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders,citeRepair} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair} from './src/index.js';
 import {auditAssistantReply} from '../../atla/ai/teaching-policy.mjs';
 const corpus=JSON.parse(readFileSync(new URL('./corpus.json',import.meta.url),'utf8'));
 const key=Object.keys(corpus.records).find(k=>k.startsWith('saek-search-B.json#')&&corpus.records[k].body.length>600);
@@ -72,6 +72,9 @@ test('a value copied from a lesson passage is allowed; the same value from the d
 test('free providers are used only when their key is configured',()=>{
  assert.deepEqual(freeProviders({}),[]);
  assert.deepEqual(freeProviders({GROQ_API_KEY:'k',OPENROUTER_API_KEY:'k'}).map(p=>p.name),['groq','openrouter']);
+ assert.deepEqual(freeProviders({DEEPSEEK_API_KEY:'k'}),[],'DeepSeek is paid, not in the free list');
+ assert.deepEqual(cheapPaidProviders({}),[]);
+ assert.deepEqual(cheapPaidProviders({DEEPSEEK_API_KEY:'k'}).map(p=>p.name),['deepseek']);
 });
 
 test('the tutor prompt asks for an explanation, an example and a check question',()=>{
