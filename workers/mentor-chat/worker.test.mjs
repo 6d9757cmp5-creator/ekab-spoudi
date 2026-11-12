@@ -2,7 +2,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,citeRepair} from './src/index.js';
+import {auditAssistantReply} from '../../atla/ai/teaching-policy.mjs';
 const corpus=JSON.parse(readFileSync(new URL('./corpus.json',import.meta.url),'utf8'));
 const key=Object.keys(corpus.records).find(k=>k.startsWith('saek-search-B.json#')&&corpus.records[k].body.length>600);
 const record=corpus.records[key];
@@ -37,6 +38,35 @@ test('free models first; an answer that fails the safety audit moves on to the n
  assert.deepEqual(calls,['first','second','third'],'the paid model is not called when a free one answered');
  assert.equal(result.provider,'third');
  assert.deepEqual(result.trace,['first:missing-or-unknown-citation','second:no-answer']);
+});
+
+test('a free model that forgot the [Τ1] markers gets one chance to add them; the paid model never does',async()=>{
+ const body=validate({question:'Τι είναι αυτό;',passages:[{id:'T1',ref:key,term:record.title,definition:record.body.slice(0,300)}]});
+ body.passages=verifiedPassages(body.passages);
+ const calls=[];
+ const result=await answer(null,{},body,{askers:[
+  {name:'free',ask:async()=>{calls.push('ask');return 'Η ουσία είναι αυτή.'},repair:async draft=>{calls.push('repair:'+draft);return 'Η ουσία είναι αυτή [Τ1]. Τι θα έλεγχες πρώτα;'}},
+  {name:'paid',ask:async()=>{calls.push('paid');return 'x [Τ1]'}}
+ ]});
+ assert.deepEqual(calls,['ask','repair:Η ουσία είναι αυτή.']);
+ assert.equal(result.provider,'free+cite');
+ const once=[];
+ const failed=await answer(null,{},body,{askers:[
+  {name:'a',ask:async()=>'Χωρίς πηγή.',repair:async()=>{once.push('a');return 'Πάλι χωρίς πηγή.'}},
+  {name:'b',ask:async()=>'Χωρίς πηγή.',repair:async()=>{once.push('b');return 'x [Τ1]'}}
+ ]});
+ assert.deepEqual(once,['a'],'only one repair per question');
+ assert.equal(failed.text,'');
+ const m=citeRepair([{role:'user',content:'q'}],'draft');
+ assert.deepEqual(m.slice(1,2),[{role:'assistant',content:'draft'}]);
+});
+
+test('a value copied from a lesson passage is allowed; the same value from the drug catalog is not',()=>{
+ const lesson=[{id:'T1',ref:'saek-search-B.json#x',term:'Γλυκόζη',definition:'Υπογλυκαιμία όταν η γλυκόζη είναι κάτω από 70 mg/dl.'}];
+ assert.equal(auditAssistantReply('Μιλάμε για υπογλυκαιμία κάτω από 70 mg/dl [Τ1].',lesson).ok,true);
+ assert.equal(auditAssistantReply('Δίνεις 70 mg [Τ1].',[{...lesson[0],ref:'farmaka-catalog.js#x'}]).reason,'unsafe-dose-output');
+ assert.equal(auditAssistantReply('Δίνεις 70 mg [Τ1].',[{...lesson[0],ref:undefined}]).reason,'unsafe-dose-output');
+ assert.equal(auditAssistantReply('Δίνεις 50 ml [Τ1].',lesson).reason,'unsafe-dose-output','not in the passage');
 });
 
 test('free providers are used only when their key is configured',()=>{
