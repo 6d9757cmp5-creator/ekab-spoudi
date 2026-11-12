@@ -86,3 +86,30 @@ export function grade(questionId,index){
  return Object.freeze({correct:index===item.correct,explain:item.explain});
 }
 export function topicQuestions(topic){return QUESTIONS.filter(q=>q.topic===topic)}
+
+
+/** Observational classification only — no instructions to apply painful stimuli. */
+export const AVPU_EXERCISES=freezeRows([
+ {id:'alert',observation:'Το άτομο έχει τα μάτια ανοιχτά και ανταποκρίνεται αυθόρμητα, χωρίς πρόσθετο ερέθισμα.',correct:'A',explain:'A = Alert: αυθόρμητη εγρήγορση και ανταπόκριση.'},
+ {id:'voice',observation:'Δεν παρατηρείται αυθόρμητη ανταπόκριση αλλά υπάρχει απόκριση όταν του απευθύνουν τον λόγο.',correct:'V',explain:'V = Voice: ανταπόκριση σε φωνητικό ερέθισμα.'},
+ {id:'pain',observation:'Η ήδη τεκμηριωμένη κλινική παρατήρηση αναφέρει ανταπόκριση μόνο σε επώδυνο ερέθισμα.',correct:'P',explain:'P = Pain: η κατηγορία περιγράφει καταγεγραμμένη ανταπόκριση. Η ψηφιακή άσκηση δεν διδάσκει εφαρμογή επώδυνων ερεθισμάτων.'},
+ {id:'unresponsive',observation:'Η ήδη τεκμηριωμένη εκτίμηση δεν κατέγραψε ανταπόκριση σε κανένα από τα εξετασθέντα ερεθίσματα.',correct:'U',explain:'U = Unresponsive: δεν έχει διαπιστωθεί ανταπόκριση. Το AVPU είναι περιγραφική κλίμακα, όχι διάγνωση.'}
+]);
+export function gradeAvpu(id,answer){
+ const item=AVPU_EXERCISES.find(x=>x.id===id);
+ if(!item||!['A','V','P','U'].includes(answer))throw RangeError('invalid-avpu-answer');
+ return Object.freeze({correct:item.correct===answer,explain:item.explain});
+}
+/** Grade a comparison strictly on timestamped synthetic facts, not clinical severity. */
+export function gradeTrend(example,pulseDelta,respDelta,qualityFlag){
+ if(typeof qualityFlag!=='boolean'||!Number.isInteger(pulseDelta)||!Number.isInteger(respDelta))throw TypeError('invalid-trend-answer');
+ const changes=changesFor(example);
+ const correct=pulseDelta===changes.pulse&&respDelta===changes.resp&&qualityFlag===changes.needSignalCheck;
+ return Object.freeze({correct,expectedPulse:changes.pulse,expectedResp:changes.resp,needSignalCheck:changes.needSignalCheck});
+}
+/** A missing device method is an unknown fact: never invent it from a reading. */
+export function annotateTemperature(example,method){
+ if(!example||!Array.isArray(example.records)||!example.records.length||!['unknown','axillary','tympanic','oral'].includes(method))throw RangeError('invalid-temperature-method');
+ const row=example.records[0];
+ return Object.freeze({correct:method==='unknown',text:row.time+' · '+row.temp+' °C · μέθοδος: '+(method==='unknown'?'δεν έχει καταγραφεί':'ΔΕΝ ΕΠΙΒΕΒΑΙΩΘΗΚΕ'),explain:'Η συνθετική καταγραφή περιέχει αριθμό και ώρα, αλλά όχι μέθοδο. Δεν επιτρέπεται να συμπληρώσουμε μη τεκμηριωμένη πληροφορία.'});
+}
