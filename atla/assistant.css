@@ -96,3 +96,6 @@
 }
 .atla-panel .atla-input{height:60px;min-height:0;max-height:96px;resize:none}
 @media(max-width:640px){body.atla-has-3d .atla-panel .atla-input{height:46px}}
+
+/* 👍/👎 under model answers */
+.atla-feedback{display:flex;align-items:center;gap:6px;margin:2px 0 10px;font-size:.82rem;color:#4f6567}.atla-feedback-btn{min-width:44px;min-height:40px;border:1px solid #c9d8dd;border-radius:999px;background:#fff;cursor:pointer;font-size:1rem}.atla-feedback-btn:disabled{opacity:.55;cursor:default}html[data-theme="dark"] .atla-feedback{color:#b8d4d6}html[data-theme="dark"] .atla-feedback-btn{background:#173244;border-color:#41657a}

@@ -26,6 +26,7 @@ jobs:
       - name: Unit tests
         run: |
           node --test tools/atla-ai/anatomy-curation.test.mjs tools/ecg-lab/core/*.test.mjs services/study-plan/plan.test.mjs tools/pharmacology/build-search.test.mjs
+          node tools/atla-ai/build-worker-corpus.mjs && node --test workers/mentor-chat/worker.test.mjs
           node tools/anatomy-3d/test-greek-names.mjs
           node ui-tools/anatomy-3d/test-greek-names.mjs
 

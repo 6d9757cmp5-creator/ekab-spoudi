@@ -11,7 +11,7 @@ import {ATLA_AI,atlaAiHeaders} from './ai/config.mjs';
 import {loadTurns,appendTurn,clearTurns,historyForAi,loadLearning,LEVEL_LABELS} from './student/memory.mjs';
 import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './student/profile.mjs';
 import {examMode} from './context/bridge.mjs';
-import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
+import {SOURCES,transformSource,searchRecords,parsePublishedSource} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
 import {STUDY_METHOD_ANSWER,isStudyMethodQuestion} from '../services/study-plan/plan.mjs';
 import {chooseTeachingTool,chooseTeachingModel} from './practice/tool-selector.mjs';
@@ -52,8 +52,12 @@ async function library(){
  if(terms===null){const data=await fetchJSON('medical-terms.json');terms=Array.isArray(data?.items)?data.items:[];}
  if(questions===null){const data=await fetchJSON('official_questions.json');questions=Array.isArray(data)?data:[];}
  if(records===null){
-  const chapters=SOURCES.filter(x=>x.kind==='saek'||x.kind==='book');
-  const parts=await Promise.allSettled(chapters.map(async x=>transformSource(x,await fetchJSON(x.file))));
+  const chapters=SOURCES.filter(x=>['saek','book','sos','pharma','eoppep'].includes(x.kind));
+  const parts=await Promise.allSettled(chapters.map(async x=>{
+   const data=x.kind==='eoppep'?questions:x.kind==='pharma'?parsePublishedSource(x,await (await fetch(new URL(x.file,ROOT))).text()):await fetchJSON(x.file);
+   // The file name goes with every record: the Worker checks each passage against its copy of that file.
+   return transformSource(x,data).map(r=>({...r,file:x.file}));
+  }));
   records=parts.flatMap(p=>p.status==='fulfilled'?p.value:[]);
  }
 }
@@ -70,36 +74,36 @@ function conversational(hits){
 }
 function answerFromLibrary(q){
  // How to study: two peer-reviewed sources (Cepeda et al. 2008; Dunlosky et al. 2013), and the exam calendar.
- if(isStudyMethodQuestion(q))return {text:STUDY_METHOD_ANSWER,passages:[],href:'study-plan.html',direct:true};
+ if(isStudyMethodQuestion(q))return {text:STUDY_METHOD_ANSWER,passages:[],href:'study-plan.html',direct:true,official:true};
  const match=q.toUpperCase().match(officialId);
  if(match){
   const id='EOP-'+match[1]+'-'+match[2];
   const item=questions.find(r=>r.id===id);
   if(item&&typeof item.answer==='string'&&item.answer.trim()&&(!item.answerStatus||item.answerStatus.startsWith('reviewed'))){
-   return {text:item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id),direct:true};
+   return {text:item.answer,passages:[{id:'T1',term:item.question.slice(0,120),definition:item.answer.slice(0,400)}],href:'theory.html?question='+encodeURIComponent(id),direct:true,official:true};
   }
  }
  const hits=retrieve(q,terms,{k:4,minScore:3});
  const direct=hits.length>0&&nameCoverage(q,terms.find(t=>t.term===hits[0].term))>=0.5;
  // A definition also leads to where the term is taught (UX review #32).
  const inMaterial=h=>'search.html?q='+encodeURIComponent(h.term);
- if(direct)return {text:conversational(hits),passages:hits,href:inMaterial(hits[0]),direct:true};
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
- const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
- const count=chapters.length?1:2;
  // Books inflect their terms, so a miss is retried on word stems: οστό also finds οστά.
  const stems=cleaned.split(' ').map(word=>word.slice(0,word.length>4?-2:-1)).join(' ');
- let books=records.length?searchRecords(records,cleaned,'book',count).rows:[];
- if(!books.length&&records.length)books=searchRecords(records,stems,'book',count).rows;
- const hits2=[...chapters,...books];
- if(hits2.length){
-  const passages=hits2.map((c,i)=>({id:'T'+(i+1),term:c.title.slice(0,120),definition:focusSnippet(c.body,cleaned,400)}));
-  // The learner gets the explanation itself; where it came from stays behind the scenes.
-  return {text:hits2.map(c=>focusSnippet(c.body,cleaned)).join('\n\n'),passages,href:hits2[0].href};
- }
- if(hits.length)return {text:conversational(hits),passages:hits,href:inMaterial(hits[0])};
- return {text:'Δεν είμαι σίγουρος ότι το έπιασα. Πες μου το με άλλα λόγια ή με έναν συγκεκριμένο όρο και θα το δούμε μαζί.',passages:[],href:null};
+ // All words first, then their stems, then only the two most specific words, so long questions still find material.
+ const key2=cleaned.split(' ').sort((x,y)=>y.length-x.length).slice(0,2).map(w=>w.slice(0,w.length>5?-2:w.length)).join(' ');
+ const find=(kind,n)=>{if(!records.length)return [];for(const query of [cleaned,stems,key2]){const r=searchRecords(records,query,kind,n).rows;if(r.length)return r}return []};
+ const chapters=find('saek',2),answers=[...find('eoppep',1),...find('sos',1)].slice(0,1),books=find('book',1),drugs=find('pharma',1);
+ // Up to four sources for the model: the definition, then the course chapter, an EOPPEP answer, a book or a drug card.
+ const term=h=>({term:h.term,definition:h.definition,ref:'medical-terms.json#'+h.term});
+ const material=[...chapters,...answers,...books,...drugs].map(c=>({term:c.title.slice(0,160),definition:focusSnippet(c.body,cleaned,600),ref:c.file+'#'+c.id}));
+ const numbered=list=>list.slice(0,4).map((p,i)=>({...p,id:'T'+(i+1)}));
+ if(direct)return {text:conversational(hits),passages:numbered([term(hits[0]),...material]),href:inMaterial(hits[0]),direct:true};
+ const shown=[...chapters,...books];
+ if(shown.length)return {text:shown.map(c=>focusSnippet(c.body,cleaned)).join('\n\n'),passages:numbered(material),href:shown[0].href};
+ if(hits.length)return {text:conversational(hits),passages:numbered([term(hits[0]),...material]),href:inMaterial(hits[0])};
+ return {text:'Δεν είμαι σίγουρος ότι το έπιασα. Πες μου το με άλλα λόγια ή με έναν συγκεκριμένο όρο και θα το δούμε μαζί.',passages:numbered(material),href:null};
 }
 function boot(){
  if(window.__ekabAtlaAssistant)return;
@@ -190,6 +194,21 @@ function boot(){
   if(heard.ok){field.value=heard.text;form.requestSubmit();return;}
   if(heard.reason!=='cancelled')state.textContent='Δεν ακούστηκε ερώτηση. Δοκίμασε ξανά ή γράψε την.';
  });
+ /** 👍/👎 under a model answer: stored by the Worker and reviewed weekly before the material is improved. */
+ function offerFeedback(question,answerText,provider){
+  const box=$('div','atla-feedback','');box.setAttribute('role','group');box.setAttribute('aria-label','Βοήθησε η απάντηση;');
+  const label=$('span','atla-feedback-label','Βοήθησε;');box.append(label);
+  for(const [vote,text,aria] of [['up','👍','Ναι, βοήθησε'],['down','👎','Όχι, δεν βοήθησε']]){
+   const b=$('button','atla-feedback-btn',text);b.type='button';b.setAttribute('aria-label',aria);
+   b.addEventListener('click',()=>{
+    box.querySelectorAll('button').forEach(x=>{x.disabled=true});
+    label.textContent=vote==='up'?'Ευχαριστώ!':'Ευχαριστώ, θα ελεγχθεί.';
+    fetch(new URL('feedback',ATLA_AI.endpoint),{method:'POST',headers:{'content-type':'application/json'},credentials:'omit',
+     body:JSON.stringify({vote,question,answer:answerText.slice(0,1500),provider:provider||''})}).catch(()=>{});
+   });box.append(b);
+  }
+  stream.append(box);
+ }
  function offerLink(href,label){
   if(!href||typeof href!=='string')return;
   try{
@@ -249,13 +268,15 @@ function boot(){
   try{
    await library();if(myId!==requestId)return;
    const found=answerFromLibrary(q);
-   const verifiedForAi=eligibleAiPassages(found.passages,terms);
-   // A reviewed definition or official answer is already the answer; AI is for questions that need explaining.
-   if(found.direct||!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,/^search\.html/.test(found.href||'')?'Βρες το στην ύλη':'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
+   const verifiedForAi=eligibleAiPassages(found.passages);
+   // An official EOPPEP answer is already the answer; everything else is explained by the model.
+   if(found.official||!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,/^search\.html/.test(found.href||'')?'Βρες το στην ύλη':'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
    const level=teachingLevelFor(learnerProfile(),q);
    const payload=buildPayload({question:q,passages:verifiedForAi,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
    add('mentor',response.ok?response.text:found.text, response.ok?'ai':'local');
+   if(response.ok)offerFeedback(q,response.text,response.provider);
+   offerLink(found.href,/^search\.html/.test(found.href||'')?'Βρες το στην ύλη':'Άνοιξε τη σχετική ενότητα');
    if(teachingTool)offerLink(teachingTool.href,teachingTool.label);
   }catch{add('mentor','Κάτι δεν πήγε καλά μόλις τώρα. Δοκίμασε ξανά σε λίγο.');}
   finally{send.disabled=false;refreshState();}

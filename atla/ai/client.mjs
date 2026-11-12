@@ -10,28 +10,18 @@ export const stripCitations=text=>String(text).replace(/\s*\[(?:[ΤT][1-9][0-9]?
 export const LIMIT_MESSAGE="Έχω πολλές ερωτήσεις αυτή τη στιγμή. Δοκίμασε ξανά σε λίγο· τους βασικούς ορισμούς μπορώ να σου τους πω κανονικά.";
 export const UNAVAILABLE_MESSAGE="Δεν μπορώ να το αναλύσω περισσότερο αυτή τη στιγμή, αλλά σου λέω ό,τι ξέρω σίγουρα.";
 
-/** Only locally pinned direct-section sources may be sent to the generative
- * Worker. The Worker independently rechecks canonical term, text and ranking.
- * Non-verified EOPPEP/SAEK/category passages remain available locally.
+/** Passages that name their source record (file#id). The Worker accepts a passage only if its
+ * text is word for word in that record of the published material; anything else is dropped there.
  */
-export function eligibleAiPassages(passages,glossaryItems){
- if(!Array.isArray(passages)||!Array.isArray(glossaryItems))return [];
- const approved=new Set(glossaryItems.filter(item=>
-  item?.sourceType==='direct-section'&&
-  item.sourceCrosscheck==='2026-11-04-primary-section'&&
-  typeof item.sourceSection==='string'&&item.sourceSection.length>0&&
-  typeof item.sourceVersion==='string'&&item.sourceVersion.length>0&&
-  typeof item.source==='string'&&item.source.startsWith('https://')
- ).map(item=>item.term+'\u0000'+item.definition));
- return passages.slice(0,4).filter(p=>
-  p&&/^T[1-4]$/.test(p.id)&&
-  approved.has(p.term+'\u0000'+p.definition));
+export function eligibleAiPassages(passages){
+ if(!Array.isArray(passages))return [];
+ return passages.slice(0,4).filter(p=>p&&/^T[1-4]$/.test(p.id)&&typeof p.ref==='string'&&/^[\w.-]+#.+/.test(p.ref)&&p.term&&p.definition);
 }
 
 export function buildPayload({question,passages,level,history}){
  const q=String(question||"").trim().slice(0,300);
  const ps=(Array.isArray(passages)?passages:[]).slice(0,4).map(p=>({
-  id:String(p.id).slice(0,8),term:String(p.term).slice(0,120),definition:String(p.definition).slice(0,400)
+  id:String(p.id).slice(0,8),ref:String(p.ref||'').slice(0,200),term:String(p.term).slice(0,160),definition:String(p.definition).slice(0,700)
  }));
  return {
   question:q,
@@ -70,6 +60,8 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
   if(res.status===429)return {ok:false,reason:"limit",message:LIMIT_MESSAGE};
   if(!res.ok)return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
   const type=res.headers?.get?.("content-type")||"";
+  // Which model answered (free or paid), for the 👍/👎 review.
+  const provider=res.headers?.get?.("x-atla-provider")||"";
   let text="";
   if(type.includes("text/event-stream")&&res.body?.getReader){
    const reader=res.body.getReader(),dec=new TextDecoder();
@@ -98,7 +90,7 @@ export async function askAi({endpoint,payload,fetchImpl=globalThis.fetch,onToken
   // Citations are kept for the audit above; the learner reads plain, natural text.
   text=stripCitations(text);
   onToken(text); // final, checked text only; no speculative streaming
-  return {ok:true,text};
+  return {ok:true,text,provider};
  }catch{
   return {ok:false,reason:"unavailable",message:UNAVAILABLE_MESSAGE};
  }finally{clearTimeout(timer);}
