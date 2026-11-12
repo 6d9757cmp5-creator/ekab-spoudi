@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits} from './src/index.js';
 import {auditAssistantReply} from '../../atla/ai/teaching-policy.mjs';
 const corpus=JSON.parse(readFileSync(new URL('./corpus.json',import.meta.url),'utf8'));
 const key=Object.keys(corpus.records).find(k=>k.startsWith('saek-search-B.json#')&&corpus.records[k].body.length>600);
@@ -67,6 +67,17 @@ test('a value copied from a lesson passage is allowed; the same value from the d
  assert.equal(auditAssistantReply('Δίνεις 70 mg [Τ1].',[{...lesson[0],ref:'farmaka-catalog.js#x'}]).reason,'unsafe-dose-output');
  assert.equal(auditAssistantReply('Δίνεις 70 mg [Τ1].',[{...lesson[0],ref:undefined}]).reason,'unsafe-dose-output');
  assert.equal(auditAssistantReply('Δίνεις 50 ml [Τ1].',lesson).reason,'unsafe-dose-output','not in the passage');
+});
+
+test('the weekly check skips the per-IP limit but never the daily cap',()=>{
+ _resetLimits();
+ for(let i=0;i<30;i++)assert.equal(limited('1.2.3.4',{}),false);
+ assert.equal(limited('1.2.3.4',{}),true,'31st question in an hour');
+ assert.equal(limited('1.2.3.4',{},Date.now(),{trusted:true}),false);
+ _resetLimits();
+ for(let i=0;i<5;i++)limited('1.2.3.4',{DAILY_CAP:'5'},Date.now(),{trusted:true});
+ assert.equal(limited('1.2.3.4',{DAILY_CAP:'5'},Date.now(),{trusted:true}),true,'daily cap still applies');
+ _resetLimits();
 });
 
 test('free providers are used only when their key is configured',()=>{
