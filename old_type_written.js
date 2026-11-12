@@ -8,7 +8,7 @@ function refresh(){
  const done=items.filter(x=>stats[x.id]?.attempts).length;
  const well=items.filter(x=>(stats[x.id]?.streak||0)>=5).length;
  const weak=items.filter(x=>stats[x.id]?.attempts&&!stats[x.id]?.streak).length;
- $('#metrics').textContent=`Κάλυψη ${done}/${items.length} · 5 συνεχόμενες αυτοαξιολογήσεις: ${well} · Αδύναμα: ${weak}`;
+ $('#metrics').textContent=`Κάλυψη ${done}/${items.length} · Σταθερά σωστές (5 στη σειρά): ${well} · Αδύναμα: ${weak}`;
 }
 function choose(){
  const filtered=items.filter(x=>$('#category').value==='all'||x.category===$('#category').value);

@@ -20,7 +20,7 @@ const normalize=value=>String(value||'').replace(/₂/g,'2').replace(/₃/g,'3')
 const el=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined)n.textContent=content;return n};
 const fetchJson=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r.json()};
 let searchCache=null,glossaryCache=null;
-const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json'];
+const FILES=['saek-search-A.json','saek-search-B.json','saek-search-C.json','saek-search-D.json','official_questions.json','app-pages-search-1.json','app-pages-search-2.json','app-pages-search-3.json','extra-exercises-search.json','farmaka-search.json'];
 const LEXICON_CATEGORY='Υγιεινή και επιδημιολογία';
 function lexiconTerm(item){
  const greek=item.el||[];
@@ -45,7 +45,8 @@ function entries(parts){
  for(const q of Array.isArray(parts[4])?parts[4]:[]){
   results.push({kind:'eoppep',title:q.question,subtitle:'ΕΟΠΠΕΠ · Ομάδα '+q.group+' · '+q.number,preview:'Ενδεικτική απάντηση διαθέσιμη στο αναγνωστήριο',href:'theory.html?question='+encodeURIComponent(q.id),searchText:(q.answer||'').slice(0,3300),keywords:[q.id,q.number,q.group,q.studyTopic].join(' ')});
  }
- for(let i=5;i<=8;i++)for(const p of parts[i]?.items||[]){
+ // 9: pharmacology cards (built from the drug catalog by tools/pharmacology/build-search.mjs).
+ for(let i=5;i<=9;i++)for(const p of parts[i]?.items||[]){
   if(!/^(?:[a-z0-9][a-z0-9_-]*\.html)(?:[?#][\w%=&#.-]+)?$/i.test(p.href))continue;
   results.push({kind:p.kind==='practice'?'practice':p.kind==='practical'?'practical':'page',title:p.title,subtitle:p.subtitle||'Ενότητα εφαρμογής',preview:p.preview||'',href:p.href,searchText:p.searchText||'',keywords:p.kind||''});
  }
@@ -364,6 +365,9 @@ function openCurrentChapterHash(){
  const a=document.querySelector('.chapter-toc a[href="'+hash+'"]');
  if(a){a.click();document.querySelector(hash)?.scrollIntoView({block:'start'})}
 }
-function init(){installSectionNav();installSearch();installGlossary();showSearchPage();showExtraExercise();window.addEventListener('hashchange',openCurrentChapterHash)}
+// Short captions shown next to the header icons on wide screens (UX review #30); phones keep icons only.
+const ICON_CAPTIONS={'Άνοιγμα γενικής αναζήτησης':'Αναζήτηση','Ενεργοποίηση σκοτεινού θέματος':'Θέμα','Ενεργοποίηση φωτεινού θέματος':'Θέμα','Επάγγελμα και Νομοθεσία':'Νομοθεσία','Επαφές και τηλέφωνα ΕΚΑΒ':'Επαφές','Ειδοποιήσεις':'Ειδοποιήσεις','Απόκρυψη αιωρούμενων σημειώσεων':'Σημειώσεις','Εμφάνιση αιωρούμενων σημειώσεων':'Σημειώσεις'};
+function captionHeaderIcons(){for(const b of document.querySelectorAll('header.top .utility a, header.top .utility button')){const c=ICON_CAPTIONS[b.getAttribute('aria-label')||''];if(c&&!b.dataset.caption)b.dataset.caption=c}}
+function init(){installSectionNav();installSearch();installGlossary();captionHeaderIcons();setTimeout(captionHeaderIcons,1500);showSearchPage();showExtraExercise();window.addEventListener('hashchange',openCurrentChapterHash)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

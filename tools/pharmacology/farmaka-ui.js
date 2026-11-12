@@ -133,6 +133,16 @@
   byId('categoryFilter').addEventListener('change', render);
   byId('scopeFilter').addEventListener('change', render);
   render();
+  // A link from the app-wide search (farmaka.html#drug-N) opens that card.
+  function openFromHash() {
+    var m = /^#drug-(\d+)$/.exec(location.hash);
+    if (!m) return;
+    var card = document.getElementById('drug-' + m[1]);
+    if (!card) { byId('drugSearch').value = ''; byId('categoryFilter').value = 'all'; byId('scopeFilter').value = 'all'; render(); card = document.getElementById('drug-' + m[1]); }
+    if (card) { card.open = true; card.scrollIntoView({ block: 'start' }); }
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
 
   Object.keys(lib.sources).forEach(function (key) {
     var source = lib.sources[key];
@@ -168,7 +178,7 @@
     byId('quizQuestion').textContent = item.q;
     byId('quizOptions').replaceChildren();
     item.a.forEach(function (answer, i) {
-      var button = el('button', '', String(i + 1) + '. ' + answer);
+      var button = el('button', '', 'ΑΒΓΔΕΖ'.charAt(i) + '. ' + answer);
       button.type = 'button';
       button.addEventListener('click', function () {
         if (answered) return;

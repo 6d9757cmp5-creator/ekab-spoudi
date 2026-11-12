@@ -14,7 +14,16 @@ const PARENT_PAGE=file=>/^saek-course-\d+\.html$/.test(file)||/^(saek-exams|saek
  :'index.html';
 function back(fallback){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){history.back();return}}catch{}location.assign(new URL(fallback||PARENT_PAGE(location.pathname.split('/').pop()),site).href)}
 function make(tag,cls,label){const n=document.createElement(tag);n.className=cls;n.textContent=label;return n}
+// Pages without an app header of their own get the shared bar: logo and name, leading to Αρχική.
+function appBar(){
+ if(home||document.querySelector('header.top,body>header,.pm-header,header.header,.saek-gallery-header,.legacy-utilities,header.topbar,[data-ekab-appbar]'))return;
+ const bar=make('header','ekab-appbar','');bar.dataset.ekabAppbar='';
+ const a=make('a','ekab-appbar-brand','');a.href=new URL('./index.html',site).href;a.setAttribute('aria-label','ΕΚΑΒ Σπουδή — Αρχική');
+ const logo=make('span','ekab-appbar-logo','✚');logo.setAttribute('aria-hidden','true');
+ a.append(logo,make('span','','ΕΚΑΒ Σπουδή'));bar.append(a);document.body.prepend(bar);
+}
 function init(){
+ appBar();
  // A back button already written in the page (no layout jump) only needs its behaviour.
  for(const b of document.querySelectorAll('button[data-ekab-back]'))if(!b.dataset.ekabBound){b.dataset.ekabBound='1';b.addEventListener('click',()=>back())}
  const spot=document.querySelector('[data-ekab-back-spot]');

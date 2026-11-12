@@ -6,6 +6,7 @@
  * Not a clinical treatment protocol or a replacement for an instructor.
  */
 import {interpretQuestion,coachResponse} from "./guided-coach.mjs";
+import {STUDY_METHOD_ANSWER,isStudyMethodQuestion} from "../../services/study-plan/plan.mjs";
 const normalize=value=>String(value??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ς/g,"σ").toLocaleLowerCase("el").trim();
 const valid=s=>typeof s==="string"&&s.length>0&&s.length<=350;
 export const OFFLINE_CORE_TERMS=Object.freeze([
@@ -62,6 +63,7 @@ export function isSimpleTermQuestion(question,item){
 export function answerStudyQuestion(question,{items=[],overview=null}={}){
  const q=String(question||"").trim().slice(0,300);
  if(!q)return {text:"Γράψε μία ερώτηση για να ξεκινήσουμε.",source:null,type:"empty"};
+ if(isStudyMethodQuestion(q))return {text:STUDY_METHOD_ANSWER,source:"study-plan.html",type:"study-method"};
  const intent=interpretQuestion(q),n=normalize(q);
  const progress=/προοδο|πωσ τα παω|αποτελεσμα|τι να διαβασ|τι να μελετησ/.test(n);
  const pool=Array.isArray(items)&&items.length?[...items,...OFFLINE_CORE_TERMS]:OFFLINE_CORE_TERMS;

@@ -13,6 +13,7 @@ import {canonicalLearnerProfile,teachingLevelFor,localStudyInsight} from './stud
 import {examMode} from './context/bridge.mjs';
 import {SOURCES,transformSource,searchRecords} from './knowledge/read-only-index.mjs';
 import {mockAtlasReply} from './ai/mock.mjs';
+import {STUDY_METHOD_ANSWER,isStudyMethodQuestion} from '../services/study-plan/plan.mjs';
 import {chooseTeachingTool,chooseTeachingModel} from './practice/tool-selector.mjs';
 import {createVoice} from '../mentor/presence/voice.mjs';
 
@@ -33,6 +34,7 @@ const routes=[
  ['Εργαστήριο ΗΚΓ','mentor-ecg.html',['ecg','ηκγ','ηλεκτροκαρδιογρ']],
  ['Σεμινάρια','seminar-prep.html',['σεμιναρ','bls','phtls']],
  ['Θέματα επειγόντων','protocols.html',['πρωτοκολλ','επειγοντ']],
+ ['Ημερολόγιο εξετάσεων','study-plan.html',['ημερολογ','πλανο μελετ','προγραμμα μελετ']],
  ['Βιβλιοθήκη και αναζήτηση','search.html',['λεξικο','βιβλιοθηκ','αναζητ']]
 ];
 const officialId=/\bEOP-([AB])-(\d{3})\b/i;
@@ -67,6 +69,8 @@ function conversational(hits){
  return rest.length?lead+'\n\nΣχετικά με αυτό: '+rest.map(h=>h.term+' — '+h.definition).join(' '):lead;
 }
 function answerFromLibrary(q){
+ // How to study: two peer-reviewed sources (Cepeda et al. 2008; Dunlosky et al. 2013), and the exam calendar.
+ if(isStudyMethodQuestion(q))return {text:STUDY_METHOD_ANSWER,passages:[],href:'study-plan.html',direct:true};
  const match=q.toUpperCase().match(officialId);
  if(match){
   const id='EOP-'+match[1]+'-'+match[2];
@@ -77,7 +81,9 @@ function answerFromLibrary(q){
  }
  const hits=retrieve(q,terms,{k:4,minScore:3});
  const direct=hits.length>0&&nameCoverage(q,terms.find(t=>t.term===hits[0].term))>=0.5;
- if(direct)return {text:conversational(hits),passages:hits,href:null,direct:true};
+ // A definition also leads to where the term is taught (UX review #32).
+ const inMaterial=h=>'search.html?q='+encodeURIComponent(h.term);
+ if(direct)return {text:conversational(hits),passages:hits,href:inMaterial(hits[0]),direct:true};
  const stop=new Set(['ποια','ποιο','ειναι','τι','πως','εξηγησε','μου','στο','στη','και','για','απο','τον','την','του','της','της']);
  const cleaned=normalize(q).split(/[^\p{L}\p{N}]+/u).filter(x=>x.length>2&&!stop.has(x)).join(' ');
  const chapters=records.length?searchRecords(records,cleaned,'saek',2).rows:[];
@@ -92,7 +98,7 @@ function answerFromLibrary(q){
   // The learner gets the explanation itself; where it came from stays behind the scenes.
   return {text:hits2.map(c=>focusSnippet(c.body,cleaned)).join('\n\n'),passages,href:hits2[0].href};
  }
- if(hits.length)return {text:conversational(hits),passages:hits,href:null};
+ if(hits.length)return {text:conversational(hits),passages:hits,href:inMaterial(hits[0])};
  return {text:'Δεν είμαι σίγουρος ότι το έπιασα. Πες μου το με άλλα λόγια ή με έναν συγκεκριμένο όρο και θα το δούμε μαζί.',passages:[],href:null};
 }
 function boot(){
@@ -245,7 +251,7 @@ function boot(){
    const found=answerFromLibrary(q);
    const verifiedForAi=eligibleAiPassages(found.passages,terms);
    // A reviewed definition or official answer is already the answer; AI is for questions that need explaining.
-   if(found.direct||!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
+   if(found.direct||!ATLA_AI.endpoint||!verifiedForAi.length){add('mentor',found.text);offerLink(found.href,/^search\.html/.test(found.href||'')?'Βρες το στην ύλη':'Άνοιξε τη σχετική ενότητα');if(teachingTool)offerLink(teachingTool.href,teachingTool.label);return;}
    const level=teachingLevelFor(learnerProfile(),q);
    const payload=buildPayload({question:q,passages:verifiedForAi,level,history:historyForAi(history(),4)});
    const response=await askAi({endpoint:ATLA_AI.endpoint,payload,headers:atlaAiHeaders(storage),timeoutMs:ATLA_AI.timeoutMs});
