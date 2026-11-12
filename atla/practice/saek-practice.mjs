@@ -32,7 +32,7 @@ export function installSaekPractice(root=document){
   reference.hidden=true;reference.textContent=chapter.querySelector('.lesson-sos')?.textContent?.trim()||'Δεν υπάρχει συνοπτικό SOS γι’ αυτό το κεφάλαιο.';
   compare.addEventListener('click',()=>{reference.hidden=!reference.hidden;compare.textContent=reference.hidden?'Σύγκριση με SOS':'Απόκρυψη SOS';});
   // No automatic simulator link: a case must be mapped and clinically checked for this chapter.
-  const atlas=$('button','atlas-practice-atlas','Ρώτησε το ATLAS');atlas.type='button';atlas.dataset.atlaOpen='true';
+  const atlas=$('button','atlas-practice-atlas','Ρώτησε τον ATLA');atlas.type='button';atlas.dataset.atlaOpen='true';
   atlas.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('ekab:atlas-context',{detail:{source:file,chapter:chapter.id,focus:title}}));});
   controls.append(compare,atlas);
   const note=$('p','atlas-practice-disclaimer','Αυτό είναι αυτοέλεγχος ανάκλησης, όχι βαθμολογούμενη εξέταση. Τα κλινικά περιστατικά θα συνδέονται μόνο μετά από έλεγχο συνάφειας.');

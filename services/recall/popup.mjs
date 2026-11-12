@@ -117,7 +117,7 @@ function boot(){
   s.shownToday++;s.nextAt=nextSchedule(Date.now(),Math.random,'repeat');store.set(STUDY_KEY,s);
   showing=true;card=selected;
   const head=$('div','atlas-recall-heading');
-  head.append($('strong','','ATLAS · Μικρή επανάληψη'),action('✕',close,'atlas-recall-close'));
+  head.append($('strong','','ATLA · Μικρή επανάληψη'),action('✕',close,'atlas-recall-close'));
   head.lastChild.setAttribute('aria-label','Κλείσιμο ερώτησης');
   panel.append(head);
   panel.append($('p','atlas-recall-context',selected.courseTitle+' · '+selected.chapterTitle));
