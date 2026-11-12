@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages,failureReason} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages,failureReason,pickModel} from './src/index.js';
 import {tokens,shardOf} from '../../tools/atla-ai/books/text.mjs';
 import {verifiedSseResponse} from '../../atla/ai/safe-stream.mjs';
 import {parseSseLine,bookSources} from '../../atla/ai/client.mjs';
@@ -134,6 +134,13 @@ test('the tutor prompt asks for an explanation, an example and a check question'
  const m=buildMessages({question:'q',passages:[{id:'T1',term:'t',definition:'d'}],history:[],level:'student'});
  assert.match(m[0].content,/ερώτηση ελέγχου/);
  assert.match(m.at(-1).content,/\[T1\] t: d/);
+});
+
+test('when a provider retires a model, the best current chat model is chosen from its list',()=>{
+ assert.equal(pickModel('gemini',['models/gemini-3.8-flash','models/gemini-4-hydrogen','models/gemini-3.8-flash-lite','models/gemini-embedding-2','models/gemini-3.9-flash','models/gemini-3.9-flash-tts']),'gemini-3.9-flash');
+ assert.equal(pickModel('groq',['whisper-large-v3','openai/gpt-oss-120b','llama-3.1-8b-instant','meta-llama/llama-prompt-guard-2-86m']),'openai/gpt-oss-120b');
+ assert.equal(pickModel('openrouter',['openai/gpt-9','qwen/qwen4-32b:free','perplexity/pplx-decider-flash-v1.3:free']),'qwen/qwen4-32b:free');
+ assert.equal(pickModel('openrouter',['openai/gpt-9']),'','never a paid OpenRouter model');
 });
 
 test('a failed model call is explained by a short reason, never by its text',()=>{

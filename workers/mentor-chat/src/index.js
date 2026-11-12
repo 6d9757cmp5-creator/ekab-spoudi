@@ -157,18 +157,58 @@ export function _resetLimits(){hits.clear();day={key:'',count:0};}
 /** OpenAI-compatible free providers, used only when their key is set as a Worker secret. */
 export function freeProviders(env){
  const list=[];
- if(env.GROQ_API_KEY)list.push({name:'groq',url:'https://api.groq.com/openai/v1/chat/completions',key:env.GROQ_API_KEY,model:env.GROQ_MODEL||'llama-3.3-70b-versatile'});
- if(env.GEMINI_API_KEY)list.push({name:'gemini',url:'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',key:env.GEMINI_API_KEY,model:env.GEMINI_MODEL||'gemini-2.5-flash'});
- if(env.OPENROUTER_API_KEY)list.push({name:'openrouter',url:'https://openrouter.ai/api/v1/chat/completions',key:env.OPENROUTER_API_KEY,model:env.OPENROUTER_MODEL||'meta-llama/llama-3.3-70b-instruct:free'});
+ if(env.GROQ_API_KEY)list.push({name:'groq',url:'https://api.groq.com/openai/v1/chat/completions',modelsUrl:'https://api.groq.com/openai/v1/models',key:env.GROQ_API_KEY,model:env.GROQ_MODEL||'llama-3.3-70b-versatile'});
+ if(env.GEMINI_API_KEY)list.push({name:'gemini',url:'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',modelsUrl:'https://generativelanguage.googleapis.com/v1beta/openai/models',key:env.GEMINI_API_KEY,model:env.GEMINI_MODEL||'gemini-3.8-flash'});
+ if(env.OPENROUTER_API_KEY)list.push({name:'openrouter',url:'https://openrouter.ai/api/v1/chat/completions',modelsUrl:'https://openrouter.ai/api/v1/models',key:env.OPENROUTER_API_KEY,model:env.OPENROUTER_MODEL||'meta-llama/llama-3.3-70b-instruct:free'});
  return list;
+}
+
+// Providers retire models; on a 404 the Worker reads the provider's model list and takes the best
+// general chat model in this order of preference (OpenRouter: free models only).
+const MODEL_PREFERENCES={
+ groq:[/llama-3\.3-70b/,/gpt-oss-120b/,/llama.*70b/,/qwen/,/gpt-oss/,/llama/],
+ gemini:[/^gemini-[0-9.]+-flash$/,/^gemini-[0-9.]+-pro$/,/^gemini-[0-9.]+-flash/,/^gemini-/],
+ openrouter:[/llama-3\.3-70b.*:free$/,/deepseek.*:free$/,/qwen.*:free$/,/gemma.*:free$/,/mistral.*:free$/,/llama.*:free$/,/:free$/],
+ deepseek:[/^deepseek-chat$/,/^deepseek-/]
+};
+const NOT_CHAT=/embed|tts|image|audio|whisper|guard|orpheus|live|native|transcri|vision-only|safeguard|realtime/i;
+const versionOf=id=>(id.match(/\d+(?:\.\d+)?/g)||['0']).map(Number);
+/** The preferred chat model among the ids a provider lists now (highest version first), or ''. */
+export function pickModel(name,ids){
+ const clean=[...new Set((ids||[]).map(id=>String(id).replace(/^models\//,'')))].filter(id=>!NOT_CHAT.test(id));
+ for(const pattern of MODEL_PREFERENCES[name]||[]){
+  const found=clean.filter(id=>pattern.test(id)).sort((a,b)=>{const x=versionOf(a),y=versionOf(b);for(let i=0;i<Math.max(x.length,y.length);i++){if((y[i]||0)!==(x[i]||0))return (y[i]||0)-(x[i]||0);}return a.localeCompare(b);});
+  if(found.length)return found[0];
+ }
+ return '';
+}
+const discovered=new Map();
+async function currentModel(p){
+ const known=discovered.get(p.name);
+ if(known&&Date.now()-known.at<6*3600e3)return known.model;
+ try{
+  const r=await fetch(p.modelsUrl,{headers:{authorization:'Bearer '+p.key},signal:AbortSignal.timeout(8000)});
+  if(!r.ok)return '';
+  const j=await r.json();
+  const model=pickModel(p.name,(j?.data||j?.models||[]).map(m=>m?.id||m?.name));
+  if(model)discovered.set(p.name,{model,at:Date.now()});
+  return model;
+ }catch{return '';}
 }
 /** Low-cost paid providers (prepaid balance, no auto top-up): only after every free model failed, before Claude. */
 export function cheapPaidProviders(env){
  return env.DEEPSEEK_API_KEY?[{name:'deepseek',url:'https://api.deepseek.com/chat/completions',key:env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL||'deepseek-chat'}]:[];
 }
 async function askOpenAiCompatible(p,messages){
- const r=await fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
-  body:JSON.stringify({model:p.model,messages,max_tokens:MAX_OUTPUT,temperature:0.3}),signal:AbortSignal.timeout(20000)});
+ const call=model=>fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
+  body:JSON.stringify({model,messages,max_tokens:MAX_OUTPUT,temperature:0.3}),signal:AbortSignal.timeout(20000)});
+ const remembered=discovered.get(p.name)?.model;
+ let r=await call(remembered||p.model);
+ // A retired model (404, or 400 on some providers): find the current one once and retry.
+ if((r.status===404||r.status===400)&&p.modelsUrl){
+  const model=await currentModel(p);
+  if(model&&model!==(remembered||p.model))r=await call(model);
+ }
  // The status code (never the key or the reply) explains a failure in x-atla-trace: 401 key, 404 model, 429 quota.
  if(!r.ok)throw Error('http-'+r.status);
  const j=await r.json();return typeof j?.choices?.[0]?.message?.content==='string'?j.choices[0].message.content:'';
