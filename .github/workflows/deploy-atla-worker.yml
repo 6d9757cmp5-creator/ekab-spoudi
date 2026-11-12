@@ -1,0 +1,69 @@
+name: Deploy ATLA Worker
+# Rebuilds ATLA's copy of the published study material and deploys the Worker whenever the material,
+# the Worker or ATLA's rules change. New chapters, answers or books therefore reach ATLA by themselves.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/mentor-chat/**'
+      - 'atla/ai/**'
+      - 'atla/knowledge/**'
+      - 'mentor/ai/**'
+      - 'tools/atla-ai/build-worker-corpus.mjs'
+      - 'medical-terms.json'
+      - 'official_questions.json'
+      - 'saek-search-*.json'
+      - 'anatomy-books.json'
+      - 'eoppep-sos.json'
+      - 'saek-exams-bank.json'
+      - 'extra-exercises-search.json'
+      - 'app-pages-search-*.json'
+      - 'farmaka-catalog.js'
+      - 'seminar-tracks.js'
+      - '.github/workflows/deploy-atla-worker.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-atla-worker
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build ATLA's copy of the published material
+        run: node tools/atla-ai/build-worker-corpus.mjs
+      - name: Worker tests
+        run: node --test workers/mentor-chat/worker.test.mjs
+      - name: Deploy
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: workers/mentor-chat
+          # Reads wrangler.jsonc and bundles JSON import attributes (import ... with {type:"json"}).
+          wranglerVersion: "4.20.0"
+      - name: Optional keys (free providers, feedback review)
+        working-directory: workers/mentor-chat
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ATLA_ADMIN_TOKEN: ${{ secrets.ATLA_ADMIN_TOKEN }}
+        run: |
+          # Each key is copied into the Worker only if it exists as a repository secret.
+          for name in GROQ_API_KEY GEMINI_API_KEY OPENROUTER_API_KEY DEEPSEEK_API_KEY ATLA_ADMIN_TOKEN; do
+            if [ -n "${!name}" ]; then printf '%s' "${!name}" | npx --yes wrangler@4.20.0 secret put "$name"; else echo "$name: not set, skipped"; fi
+          done
+      - name: Smoke test
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X OPTIONS https://ekab-spoudi-mentor-chat.6d9757cmp5.workers.dev/ -H 'origin: https://6d9757cmp5-creator.github.io')
+          echo "OPTIONS: $code"; test "$code" = "204"
