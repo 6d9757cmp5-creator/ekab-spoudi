@@ -2,17 +2,14 @@
 /**
  * ATLA answer check: asks the live ATLA (in a real browser, as a student would) a fixed set of
  * 30 study questions and writes every answer to a Markdown report, to compare versions over time.
- * Usage: node tools/atla-ai/eval/run.mjs [site-url] [report.md]
+ * Usage: node tools/atla-ai/eval/run.mjs [site-url]   (writes tools/atla-ai/eval/report.md)
  * Needs Playwright. Reads nothing private; the questions are in questions.json next to this file.
  */
 import {readFileSync,writeFileSync} from 'node:fs';
-import {resolve,sep} from 'node:path';
-import {tmpdir} from 'node:os';
 import {chromium} from 'playwright';
 const site=(process.argv[2]||'https://6d9757cmp5-creator.github.io/ekab-spoudi/').replace(/\/?$/,'/');
-// The report is written only as a .md file inside the repository or the system temp folder.
-const out=resolve(process.argv[3]||'atla-eval-report.md');
-if(!out.endsWith('.md')||![resolve('.'),resolve(tmpdir())].some(dir=>out.startsWith(dir+sep)))throw Error('report must be a .md file inside the repository or the temp folder');
+// The report always goes to the same file next to the questions, so runs can be compared in git.
+const out=new URL('./report.md',import.meta.url);
 const questions=JSON.parse(readFileSync(new URL('./questions.json',import.meta.url),'utf8'));
 const browser=await chromium.launch();
 const page=await (await browser.newContext({viewport:{width:1280,height:900}})).newPage();
@@ -43,4 +40,4 @@ const md=['# Έλεγχος απαντήσεων ATLA','',`Σελίδα: ${site}
  `| Ποιος απάντησε | ${Object.entries(byModel).map(([k,n])=>k+': '+n).join(' · ')} |`,'',
  ...rows.flatMap((r,i)=>[`## ${i+1}. ${r.q}`,`*${r.topic} · ${r.provider} · ${r.words} λέξεις*`,'',r.answer.replace(/\n/g,'\n\n')||'(καμία απάντηση)',''])].join('\n');
 writeFileSync(out,md);
-console.log('report:',out,'| model answers',rows.filter(r=>!/τοπικό|http [^2]/.test(r.provider)).length+'/'+rows.length,'| unsure',unsure);
+console.log('report: tools/atla-ai/eval/report.md','| model answers',rows.filter(r=>!/τοπικό|http [^2]/.test(r.provider)).length+'/'+rows.length,'| unsure',unsure);
