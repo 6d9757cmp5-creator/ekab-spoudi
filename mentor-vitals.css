@@ -36,3 +36,8 @@
 @media(max-width:950px){.vs-layout{grid-template-columns:1fr}.vs-aside{position:static}.vs-aside nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:590px){.vs-container{padding-top:14px}.vs-hero-icon{display:none}.vs-aside nav{grid-template-columns:1fr}.vs-monitor{padding:11px}.vs-monitor-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.vs-readout{padding:10px}.vs-readout strong{font-size:1.62rem}.vs-toolbar button{flex:1}.vs-toolbar>span{order:-1;width:100%;text-align:center}.vs-panel{padding:14px}.vs-toprow{padding:11px 14px}.vs-brand small{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Never display an apparently valid synthetic waveform for a flagged unreliable oximetry sample. */
+.vs-wave{position:relative}
+.vs-wave p{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 14px;background:#112833;color:#ffd69a;font-size:.84rem;font-weight:800;margin:0}
+.vs-wave p[hidden]{display:none}
