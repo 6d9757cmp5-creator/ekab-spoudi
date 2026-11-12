@@ -83,6 +83,22 @@ try{
    assert.equal(await page.locator('a[href="mentor-ecg.html"]').count()>0,true,'existing ECG link');
    assert.equal(await page.locator('a[href="mentor-oral.html?practice=handover"]').count()>0,true,'handover link');
    assert.equal(errors.length,0,'no uncaught JavaScript errors: '+errors.join('; '));
+   // Verify the existing canonical ECG monitor really moves and pause works.
+   const ecgPage=await context.newPage();
+   const ecgErrors=[];ecgPage.on('pageerror',e=>ecgErrors.push(e.message));
+   await ecgPage.goto(base+'/tools/ecg-lab/monitor.html',{waitUntil:'load',timeout:45000});
+   await ecgPage.locator('#pause-monitor:not([disabled])').waitFor();
+   await ecgPage.waitForTimeout(190);
+   const ecgFirst=await ecgPage.locator('#trace').evaluate(el=>el.toDataURL());
+   await ecgPage.waitForTimeout(310);
+   const ecgSecond=await ecgPage.locator('#trace').evaluate(el=>el.toDataURL());
+   assert.notEqual(ecgFirst,ecgSecond,'canonical ECG monitor animates after load');
+   await ecgPage.locator('#pause-monitor').click();
+   const ecgPaused=await ecgPage.locator('#trace').evaluate(el=>el.toDataURL());
+   await ecgPage.waitForTimeout(150);
+   assert.equal(await ecgPage.locator('#trace').evaluate(el=>el.toDataURL()),ecgPaused,'canonical ECG pause stops movement');
+   assert.deepEqual(ecgErrors,[],'ECG browser has no JavaScript errors');
+   await ecgPage.close();
    results.push(width+'px: focused UX, pleth/resp motion, pause, BP cycle, quality, AVPU, quiz & handover OK');
   }finally{await context.close()}
  }
