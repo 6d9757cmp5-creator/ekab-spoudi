@@ -439,6 +439,15 @@ submit.addEventListener('click', () => {
 });
 
 new ResizeObserver(() => draw(performance.now())).observe(canvas);
+/* Existing moving ECG trace starts immediately; reduced motion stays opt-in. */
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) next.click();
+else feedback.textContent='Αυτόματη κίνηση απενεργοποιημένη λόγω ρύθμισης μειωμένης κίνησης. Πάτησε «Έναρξη εξάσκησης».';
+document.addEventListener('visibilitychange',()=>{
+ if(!document.hidden||paused)return;
+ elapsed+=(performance.now()-started)/1000;paused=true;
+ cancelAnimationFrame(frame);draw(performance.now());pause.textContent='Συνέχεια';
+});
+
 
 {
  const requested=new URLSearchParams(location.search).get('example');
