@@ -178,7 +178,7 @@
     byId('quizQuestion').textContent = item.q;
     byId('quizOptions').replaceChildren();
     item.a.forEach(function (answer, i) {
-      var button = el('button', '', String(i + 1) + '. ' + answer);
+      var button = el('button', '', 'ΑΒΓΔΕΖ'.charAt(i) + '. ' + answer);
       button.type = 'button';
       button.addEventListener('click', function () {
         if (answered) return;
