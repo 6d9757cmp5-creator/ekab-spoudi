@@ -38,7 +38,9 @@
     var heading = el('span');
     heading.append(el('span', 'ph-card-name', m.name));
     heading.append(el('div', 'ph-card-en', m.english));
-    heading.append(el('span', 'ph-tag ' + m.scope, scopeNames[m.scope]));
+    // Most cards are in the specialist group: a coloured dot (explained once in the legend) instead of the same label on every card.
+    if (m.scope === 'advanced') { const dot = el('span', 'ph-scope-dot advanced', ''); dot.setAttribute('role', 'img'); dot.setAttribute('aria-label', scopeNames[m.scope]); dot.title = scopeNames[m.scope]; heading.append(dot); }
+    else heading.append(el('span', 'ph-tag ' + m.scope, scopeNames[m.scope]));
     summary.append(heading);
     card.append(summary);
     var body = el('div', 'ph-card-body');
