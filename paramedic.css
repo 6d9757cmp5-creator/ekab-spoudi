@@ -50,7 +50,7 @@ html[data-theme="dark"] .pm-assistant button{background:#0e6772}
 @media(prefers-reduced-motion:reduce){.pm-card{transition:none}}
 
 
-/* Learning-laboratory hub: existing ECG plus five clearly non-operational future stations. */
+/* Learning-laboratory hub: existing ECG plus four clearly non-operational future stations. */
 .pm-lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .pm-lab-card{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-height:238px;scroll-margin-top:16px}
 .pm-lab-top{display:flex;align-items:flex-start;gap:12px}
@@ -69,3 +69,9 @@ html[data-theme="dark"] .pm-lab-available{background:#245943;color:#d6fae8}
 html[data-theme="dark"] .pm-lab-links a{color:#9ee5e0}
 html[data-theme="dark"] .pm-lab-links .pm-lab-start{color:#fff}
 @media(max-width:680px){.pm-lab-grid{grid-template-columns:1fr}.pm-lab-card{min-height:0}}
+
+/* Communication and handover: priority in the four planned stations. */
+.pm-lab-featured{grid-column:1 / -1;border-width:2px;border-color:var(--pm-teal);background:var(--pm-paper)}
+.pm-lab-featured .pm-lab-top h3{font-size:1.1rem}
+.pm-lab-featured .pm-lab-start{font-size:.9rem}
+@media(max-width:680px){.pm-lab-featured{grid-column:auto}}
