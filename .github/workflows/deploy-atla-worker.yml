@@ -56,10 +56,11 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           ATLA_ADMIN_TOKEN: ${{ secrets.ATLA_ADMIN_TOKEN }}
         run: |
           # Each key is copied into the Worker only if it exists as a repository secret.
-          for name in GROQ_API_KEY GEMINI_API_KEY OPENROUTER_API_KEY ATLA_ADMIN_TOKEN; do
+          for name in GROQ_API_KEY GEMINI_API_KEY OPENROUTER_API_KEY DEEPSEEK_API_KEY ATLA_ADMIN_TOKEN; do
             if [ -n "${!name}" ]; then printf '%s' "${!name}" | npx --yes wrangler@4.20.0 secret put "$name"; else echo "$name: not set, skipped"; fi
           done
       - name: Smoke test

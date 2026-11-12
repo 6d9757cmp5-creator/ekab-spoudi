@@ -1,5 +1,6 @@
 // ATLA chat Worker. Educational answers grounded in the app's own published Greek material.
-// Free models first (Cloudflare Workers AI, then any free provider whose key is set), paid Claude last
+// Free models first (Cloudflare Workers AI, then any free provider whose key is set), then low-cost
+// DeepSeek if its key is set, paid Claude last
 // and only when the owner has enabled it with a spend limit. Every answer passes the same safety audit;
 // a failed answer moves on to the next model. Identical questions are answered from a cache.
 import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '../../../mentor/ai/claude-adapter.mjs';
@@ -107,6 +108,10 @@ export function freeProviders(env){
  if(env.OPENROUTER_API_KEY)list.push({name:'openrouter',url:'https://openrouter.ai/api/v1/chat/completions',key:env.OPENROUTER_API_KEY,model:env.OPENROUTER_MODEL||'meta-llama/llama-3.3-70b-instruct:free'});
  return list;
 }
+/** Low-cost paid providers (prepaid balance, no auto top-up): only after every free model failed, before Claude. */
+export function cheapPaidProviders(env){
+ return env.DEEPSEEK_API_KEY?[{name:'deepseek',url:'https://api.deepseek.com/chat/completions',key:env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL||'deepseek-chat'}]:[];
+}
 async function askOpenAiCompatible(p,messages){
  const r=await fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
   body:JSON.stringify({model:p.model,messages,max_tokens:MAX_OUTPUT,temperature:0.3}),signal:AbortSignal.timeout(20000)});
@@ -148,6 +153,7 @@ export async function answer(request,env,body,{askers}={}){
  const chain=askers||[
   ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
   ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
+  ...cheapPaidProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
   {name:'claude',ask:()=>askClaude(request,env,messages)}
  ];
  const trace=[];
