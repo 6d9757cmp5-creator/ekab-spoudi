@@ -38,7 +38,7 @@ function cors(env,origin){
  const allowed=['https://6d9757cmp5-creator.github.io'];
  if(env.ALLOW_LOCAL==='true')allowed.push('http://localhost:8080','http://127.0.0.1:8080','http://127.0.0.1:8812');
  if(!allowed.includes(origin))return null;
- return {'access-control-allow-origin':origin,'access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, x-mentor-test-token','access-control-expose-headers':'x-atla-provider, x-atla-trace','vary':'origin'};
+ return {'access-control-allow-origin':origin,'access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, x-mentor-test-token, x-atla-admin','access-control-expose-headers':'x-atla-provider, x-atla-trace','vary':'origin'};
 }
 const json=(body,status,extra={})=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store',...extra}});
 const str=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
