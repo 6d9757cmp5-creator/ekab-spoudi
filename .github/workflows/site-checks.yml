@@ -68,3 +68,4 @@ jobs:
           python3 -m http.server 8799 --bind 127.0.0.1 >/dev/null 2>&1 &
           sleep 2
           node tools/ci/page-smoke.mjs http://127.0.0.1:8799
+          node tools/vital-signs/browser-smoke.mjs http://127.0.0.1:8799
