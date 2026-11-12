@@ -20,8 +20,8 @@ jobs:
           node-version: '22'
       - name: Install Chromium
         run: |
-          npm install --no-save --no-audit --no-fund playwright@1.48.2
-          npx playwright install --with-deps chromium
+          npm install --no-save --no-audit --no-fund --ignore-scripts playwright@1.48.2
+          node node_modules/playwright/cli.js install --with-deps chromium
       - name: Ask ATLA 40 questions
         env:
           ATLA_EVAL_RANDOM: '10'
