@@ -45,6 +45,14 @@ export async function charge(store,{ipKey,tokens,now=Date.now(),limits}){
 export class MentorBudget{
  constructor(state){this.state=state;}
  async fetch(request){
+  // ATLA answer feedback (👍/👎): the most recent 500 items, read by the weekly review workflow.
+  const path=new URL(request.url).pathname;
+  if(path==="/feedback/list")return Response.json((await this.state.storage.get("feedback"))||[]);
+  if(path==="/feedback/add"){
+   let item;try{item=await request.json();}catch{return Response.json({ok:false},{status:400});}
+   const list=(await this.state.storage.get("feedback"))||[];list.push(item);
+   await this.state.storage.put("feedback",list.slice(-500));return Response.json({ok:true});
+  }
   let b;try{b=await request.json();}catch{return Response.json({ok:false,reason:"bad"},{status:400});}
   if(typeof b?.ipKey!=="string"||!Number.isFinite(b.tokens)||!b.limits)return Response.json({ok:false,reason:"bad"},{status:400});
   const out=await charge(this.state.storage,{ipKey:b.ipKey.slice(0,64),tokens:b.tokens,limits:b.limits});
