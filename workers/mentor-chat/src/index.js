@@ -1,5 +1,5 @@
 // ATLA chat Worker. Educational answers grounded in the app's own published Greek material.
-// Free models first (Cloudflare Workers AI, then any free provider whose key is set), then low-cost
+// Free models first (any free provider whose key is set, then Cloudflare Workers AI), then low-cost
 // DeepSeek if its key is set, paid Claude last
 // and only when the owner has enabled it with a spend limit. Every answer passes the same safety audit;
 // a failed answer moves on to the next model. Identical questions are answered from a cache.
@@ -205,8 +205,10 @@ export function citeRepair(messages,draft){
 export async function answer(request,env,body,{askers}={}){
  const messages=buildMessages(body);
  const chain=askers||[
-  ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
+  // Free providers with a key go first: their daily free quotas are far larger than the ~10,000
+  // Workers AI neurons (about 70 answers), which then remain as the fallback.
   ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
+  ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
   ...cheapPaidProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
   {name:'claude',ask:()=>askClaude(request,env,messages)}
  ];

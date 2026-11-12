@@ -1,10 +1,11 @@
 name: ATLA weekly check
-# Every Monday: asks the live ATLA the 30 fixed study questions plus 10 random glossary terms,
+# Every Sunday night: asks the live ATLA the 30 fixed study questions plus 10 random glossary terms,
 # in a real browser as a student would, and posts the result on one tracking issue. A drop below
 # 26/30 fixed or 7/10 random answers is marked with a warning. Nothing is changed automatically.
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    # Sunday 23:00 UTC: the end of a day's free Workers AI allowance, not the start of Monday's.
+    - cron: '0 23 * * 0'
   workflow_dispatch:
 permissions:
   issues: write
