@@ -41,11 +41,11 @@ export const ATMIST=freeze([
 ]);
 
 /** Τα συνθετικά περιστατικά βρίσκονται στο cases.json· φορτώνονται μία φορά με loadCases(). */
-export let CASES=Object.freeze([]);
+export const CASES=[];
 const deepFreeze=o=>{if(o&&typeof o==='object'){Object.values(o).forEach(deepFreeze);Object.freeze(o);}return o;};
 export function loadCases(list){
  if(!Array.isArray(list)||!list.length||list.some(c=>!c?.id||!Array.isArray(c.narrative)||!Array.isArray(c.statements)))throw Error('invalid-cases');
- CASES=deepFreeze(structuredClone(list));
+ CASES.splice(0,CASES.length,...deepFreeze(structuredClone(list)));
  return CASES;
 }
 

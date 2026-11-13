@@ -232,7 +232,32 @@ function credits(){
  }
 }
 
+/** Ο κοινός σκελετός των τριών σελίδων· κάθε HTML κρατά μόνο τα δικά του (τίτλο, εισαγωγή, σημείωμα ασφάλειας). */
+function shell(){
+ const root=document.getElementById('sl-app');
+ root.innerHTML=`<aside class="vs-aside" aria-labelledby="sl-topics-heading">
+  <h2 id="sl-topics-heading">Υποενότητες</h2><nav id="sl-topic-nav" aria-label="Υποενότητες εργαστηρίου"></nav>
+  <div class="vs-session"><strong>Προσωρινή πρόοδος εξάσκησης</strong><p id="sl-score" aria-live="polite">Σωστά σημεία: 0 / 0</p>
+   <p>Η επίδοση δεν αποθηκεύεται ούτε μεταβάλλει τους βαθμούς ΣΑΕΚ/ΕΟΠΠΕΠ.</p><button id="sl-reset" type="button">Νέα εξάσκηση</button></div>
+ </aside>
+ <div class="vs-content">
+  <section class="vs-panel" aria-labelledby="sl-title">
+   <div class="vs-panel-heading"><div><p class="vs-eyebrow" id="sl-eyebrow">ΥΠΟΕΝΟΤΗΤΑ</p><h2 id="sl-title"></h2></div><span id="sl-index" class="vs-index"></span></div>
+   <p id="sl-goal" class="vs-hint"></p><div id="sl-exercise"></div>
+  </section>
+  <section class="vs-panel vs-sources" aria-labelledby="sl-sources-heading"><details open><summary>Πηγές και αντίστοιχη ύλη</summary>
+   <h2 id="sl-sources-heading">Πηγές και ύλη</h2>
+   <p>Οι απαντήσεις στηρίζονται στα παρακάτω κεφάλαια ΣΑΕΚ και στα ανοιχτά συγγράμματα που αναφέρονται. Ισχύει πάντα το πρωτόκολλο της υπηρεσίας.</p>
+   <ul id="sl-source-list"></ul></details></section>
+  <section class="vs-panel vs-sources" aria-labelledby="sl-credits-heading"><details><summary>Άδειες εικόνων και ήχων</summary>
+   <h2 id="sl-credits-heading">Άδειες εικόνων και ήχων</h2>
+   <p>Κάθε εικόνα και ηχογράφηση χρησιμοποιείται με την άδεια του δημιουργού της· οι αλλαγές αναφέρονται σε κάθε εγγραφή. Τα παράγωγα έργων CC BY-SA διατίθενται με την ίδια άδεια.</p>
+   <ul id="sl-credits"></ul></details></section>
+ </div>`;
+}
+
 function boot(){
+ shell();
  const nav=document.getElementById('sl-topic-nav');
  LAB.topics.forEach((t,i)=>{const b=$('button','',`${i+1}. ${t.title}`);b.type='button';b.dataset.topic=t.id;b.addEventListener('click',()=>{state.topic=t.id;render();document.getElementById('sl-title').focus();});nav.append(b);});
  document.getElementById('sl-reset').addEventListener('click',()=>{state.right=0;state.total=0;document.getElementById('sl-score').textContent='Σωστά σημεία: 0 / 0';render();});
