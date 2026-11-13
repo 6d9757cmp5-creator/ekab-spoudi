@@ -30,7 +30,8 @@ async function answer(sec,e){
 // scrolling misses some buttons in mobile WebKit on Linux. Reduced motion turns off the smooth scrolling
 // of mentor-vitals.css, which WebKit measures mid-scroll.
 const press=async loc=>{
- await loc.evaluate(el=>el.scrollIntoView({block:'center'}));
+ // Two animation frames first: headless WebKit on Linux updates the scroll extent only on a new frame.
+ await loc.evaluate(async el=>{for(let i=0;i<2;i++)await new Promise(r=>requestAnimationFrame(r));void document.documentElement.scrollHeight;el.scrollIntoView({block:'center'});});
  try{await loc.click({timeout:10000});}
  catch(err){throw Error('press failed: '+await loc.evaluate(el=>JSON.stringify({rect:el.getBoundingClientRect(),inner:[innerWidth,innerHeight],vv:[visualViewport?.width,visualViewport?.height,visualViewport?.offsetLeft,visualViewport?.offsetTop,visualViewport?.scale],scroll:[scrollX,scrollY],doc:[document.documentElement.scrollWidth,document.documentElement.scrollHeight,document.body.getBoundingClientRect().height],ex:[...document.querySelectorAll('.sl-ex')].map(s=>s.dataset.exercise+'@'+Math.round(s.getBoundingClientRect().top+scrollY)+'+'+Math.round(s.offsetHeight)),img:[...document.images].map(i=>i.complete+'/'+i.naturalHeight+'/'+Math.round(i.getBoundingClientRect().height))}))+' '+err.message.split('\n')[0]);}
 };
