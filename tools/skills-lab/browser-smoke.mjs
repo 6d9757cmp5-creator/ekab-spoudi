@@ -7,7 +7,8 @@ import {chromium,webkit} from 'playwright';
 import {readFileSync} from 'node:fs';
 const base=(process.argv[2]||'http://127.0.0.1:8799').replace(/\/$/,'');
 const lab=id=>JSON.parse(readFileSync(new URL(`./labs/${id}.json`,import.meta.url),'utf8'));
-// Optional second argument "webkit": the Safari engine, with phone width as a touch device (iPhone behaviour).
+// Optional second argument "webkit": the Safari engine. WEBKIT_MOBILE=1 adds iPhone touch emulation; it passes
+// on Windows WebKit, but headless WebKit on Linux then keeps the first scroll height after the page grows.
 const engine=process.argv[3]==='webkit'?webkit:chromium;
 const browser=await engine.launch(engine===chromium?{args:['--autoplay-policy=no-user-gesture-required']}:{});
 
@@ -40,7 +41,7 @@ const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=inn
 
 try{
  for(const width of [390,1280]){
-  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',reducedMotion:'reduce',...(engine===webkit&&width<500?{isMobile:true,hasTouch:true}:{})});
+  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',reducedMotion:'reduce',...(engine===webkit&&width<500&&process.env.WEBKIT_MOBILE?{isMobile:true,hasTouch:true}:{})});
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   for(const id of ['airway','equipment','auscultation']){
    const L=lab(id);
