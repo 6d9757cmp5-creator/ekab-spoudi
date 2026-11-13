@@ -1,0 +1,66 @@
+/* Εργαστήρια δεξιοτήτων (Αεραγωγός, Εξοπλισμός, Ακρόαση): προσθήκες πάνω στο mentor-vitals.css. */
+#sl-topic-nav{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+#sl-topic-nav button{text-align:left;min-height:44px;padding:8px 12px;border:1px solid #c9d8dd;border-radius:10px;background:#fff;font:inherit;cursor:pointer}
+#sl-topic-nav button[aria-current="true"]{background:#0f4c5c;border-color:#0f4c5c;color:#fff;font-weight:700}
+/* The panel is a grid item: without min-width:0 wide content stretches it past the phone screen. */
+.vs-content>.vs-panel{min-width:0;grid-column:1/-1}
+.sl-ex{border-top:1px solid #d7e3e6;padding-top:14px;margin-top:18px}
+.sl-ex:first-child{border-top:0;margin-top:4px;padding-top:0}
+.sl-ex h3{font-size:1rem;margin:0 0 10px;line-height:1.4}
+.sl-figure{margin:8px 0 12px}
+.sl-figure img{display:block;max-width:100%;max-height:420px;height:auto;margin:0 auto;border-radius:10px;background:#fff}
+.sl-credit{font-size:.78rem;color:#4b5f66;margin-top:4px;overflow-wrap:anywhere}
+.sl-credit a{color:inherit}
+.sl-marker-wrap{position:relative;width:fit-content;max-width:100%;margin:0 auto}
+.sl-marker{position:absolute;transform:translate(-50%,-50%);min-width:30px;height:30px;border-radius:50%;background:#fff;border:3px solid #c2410c;color:#7c2d12;font-weight:800;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.35);font-size:.95rem}
+.sl-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;margin:10px 0}
+.sl-classify{grid-template-columns:1fr}
+.sl-fields label{display:flex;flex-direction:column;gap:4px;font-weight:600;overflow-wrap:anywhere}
+.sl-fields select,.sl-fields input,.sl-card select{font:inherit;min-height:44px;padding:6px 10px;border:1px solid #9fb6bd;border-radius:8px;background:#fff;color:inherit;width:100%;max-width:100%;box-sizing:border-box}
+.sl-input-bad{border-color:#c2410c!important;background:#fff4ed!important}
+.sl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;margin:10px 0}
+.sl-card{border:1px solid #c9d8dd;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0;background:#fff}
+.sl-card-title{margin:0;font-weight:700}
+.sl-card .sl-figure img{max-height:240px}
+.sl-sound{margin:0 0 6px}
+.sl-sound canvas{display:block;width:100%;aspect-ratio:100/32;border-radius:8px;background:#fff;cursor:pointer;border:1px solid #d7e3e6}
+.sl-sound audio{display:block;width:100%;margin-top:6px}
+.sl-sound-info{font-size:.78rem;color:#4b5f66;margin:4px 0 0}
+.sl-statements{padding-left:20px}
+.sl-tf{border:0;padding:0;margin:0 0 10px}
+.sl-tf legend{padding:0;margin-bottom:4px;line-height:1.45}
+.sl-tf label{display:inline-flex;align-items:center;gap:6px;margin-right:14px;min-height:40px}
+.sl-tf input{min-width:20px;min-height:20px}
+.sl-order{padding-left:22px}
+.sl-order li{display:flex;align-items:center;gap:6px;margin:6px 0;padding:6px 8px;border:1px solid #c9d8dd;border-radius:8px;background:#fff}
+.sl-order li span{flex:1;overflow-wrap:anywhere}
+.sl-move{min-width:44px;min-height:44px;border:1px solid #9fb6bd;border-radius:8px;background:#f4f8f9;cursor:pointer;font-size:1.05rem}
+.sl-move:disabled{opacity:.35;cursor:default}
+.sl-chest{position:relative;width:min(100%,420px);margin:8px auto;aspect-ratio:300/280}
+.sl-chest svg{position:absolute;inset:0;width:100%;height:100%}
+.sl-chest-body{fill:#f3ede6;stroke:#7b8c92;stroke-width:2}
+.sl-chest-line{fill:none;stroke:#7b8c92;stroke-width:2}
+.sl-chest-bone{fill:#fbf8f2;stroke:#8a9aa0;stroke-width:1.5}
+.sl-chest-rib{fill:none;stroke:#b7c2c6;stroke-width:1.5}
+.sl-chest-guide{fill:none;stroke:#93a4aa;stroke-width:1;stroke-dasharray:4 4}
+.sl-chest-text{font:600 11px system-ui,sans-serif;fill:#334155}
+.sl-point{position:absolute;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;border:2px solid #0f4c5c;background:#fff;color:#0f4c5c;font-weight:800;cursor:pointer;padding:0}
+.sl-point.sl-point-used{background:#0f4c5c;color:#fff}
+.sl-locate{padding-left:20px}
+.sl-locate-item{font:inherit;text-align:left;width:100%;min-height:44px;margin:4px 0;padding:6px 10px;border:1px solid #c9d8dd;border-radius:8px;background:#fff;cursor:pointer;overflow-wrap:anywhere}
+.sl-locate-item[aria-pressed="true"]{border-color:#c2410c;box-shadow:0 0 0 2px #fed7aa}
+.sl-check{margin:10px 0}
+.sl-verdict{font-weight:700;padding:8px 12px;border-radius:8px}
+.sl-verdict.sl-ok{background:#e3f4ea}.sl-verdict.sl-partial{background:#fff3dc}
+.sl-ok{color:#14603a}.sl-bad{color:#9a3412}
+.sl-why{color:#334155;font-weight:400}
+.sl-rows{padding-left:20px;line-height:1.5}
+.sl-explain{background:#f4f8f9;border-left:4px solid #0f4c5c;padding:8px 12px;border-radius:6px}
+#sl-credits{font-size:.85rem;line-height:1.5;padding-left:20px}
+#sl-credits li{overflow-wrap:anywhere;margin-bottom:4px}
+html[data-theme="dark"] #sl-topic-nav button,html[data-theme="dark"] .sl-order li,html[data-theme="dark"] .sl-fields select,html[data-theme="dark"] .sl-fields input,html[data-theme="dark"] .sl-card,html[data-theme="dark"] .sl-card select,html[data-theme="dark"] .sl-locate-item{background:#173244;border-color:#41657a;color:#e6f1f2}
+html[data-theme="dark"] .sl-explain{background:#132a37}
+html[data-theme="dark"] .sl-credit,html[data-theme="dark"] .sl-sound-info,html[data-theme="dark"] .sl-why{color:#b9c9cf}
+html[data-theme="dark"] .sl-ok{color:#86efac}html[data-theme="dark"] .sl-bad{color:#fdba74}
+html[data-theme="dark"] .sl-verdict.sl-ok{background:#123826}html[data-theme="dark"] .sl-verdict.sl-partial{background:#3b2a10}
+html[data-theme="dark"] .sl-chest-body{fill:#22394a}html[data-theme="dark"] .sl-chest-bone{fill:#2c4658}html[data-theme="dark"] .sl-chest-text{fill:#e6f1f2}
