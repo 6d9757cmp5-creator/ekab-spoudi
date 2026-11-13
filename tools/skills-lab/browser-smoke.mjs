@@ -42,7 +42,9 @@ try{
     assert.equal(await page.locator('#sl-topic-nav button').count(),L.topics.length);
     for(const e of t.exercises){
      const sec=page.locator(`.sl-ex[data-exercise="${e.id}"]`);
-     await answer(sec,e);await sec.locator('.sl-check').click();
+     await answer(sec,e);
+     const wide=await overflow(page);assert.equal(wide,'',`${width}px ${id}/${e.id}: no horizontal overflow before checking`);
+     await sec.locator('.sl-check').click();
      assert.match(await verdict(sec),/^Σωστά (\d+) από \1\./,`${width}px ${id}/${e.id} full marks`);
     }
     assert.equal(await overflow(page),'',`${width}px ${id}/${t.id}: no horizontal overflow`);

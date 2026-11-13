@@ -12,7 +12,10 @@
 .sl-marker-wrap{position:relative;width:fit-content;max-width:100%;margin:0 auto}
 .sl-marker{position:absolute;transform:translate(-50%,-50%);min-width:30px;height:30px;border-radius:50%;background:#fff;border:3px solid #c2410c;color:#7c2d12;font-weight:800;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.35);font-size:.95rem}
 .sl-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;margin:10px 0}
-.sl-classify{grid-template-columns:1fr}
+.sl-classify{grid-template-columns:minmax(0,1fr)}
+/* A select is as wide as its longest option; grid items may shrink below it (Linux fonts are wider). */
+.sl-fields>label,.sl-card,.sl-ex{min-width:0}
+.sl-ex select{width:100%;max-width:100%;min-width:0}
 .sl-fields label{display:flex;flex-direction:column;gap:4px;font-weight:600;overflow-wrap:anywhere}
 .sl-fields select,.sl-fields input,.sl-card select{font:inherit;min-height:44px;padding:6px 10px;border:1px solid #9fb6bd;border-radius:8px;background:#fff;color:inherit;width:100%;max-width:100%;box-sizing:border-box}
 .sl-input-bad{border-color:#c2410c!important;background:#fff4ed!important}
