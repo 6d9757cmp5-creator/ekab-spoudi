@@ -27,7 +27,8 @@ async function answer(sec,e){
  }
 }
 // Bring a control to the middle of the screen before pressing it, as a finger would; Playwright's own
-// scrolling misses some buttons in mobile WebKit on Linux.
+// scrolling misses some buttons in mobile WebKit on Linux. Reduced motion turns off the smooth scrolling
+// of mentor-vitals.css, which WebKit measures mid-scroll.
 const press=async loc=>{
  await loc.evaluate(el=>el.scrollIntoView({block:'center'}));
  try{await loc.click({timeout:10000});}
@@ -38,7 +39,7 @@ const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=inn
 
 try{
  for(const width of [390,1280]){
-  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',...(engine===webkit&&width<500?{isMobile:true,hasTouch:true}:{})});
+  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',reducedMotion:'reduce',...(engine===webkit&&width<500?{isMobile:true,hasTouch:true}:{})});
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   for(const id of ['airway','equipment','auscultation']){
    const L=lab(id);
