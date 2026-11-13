@@ -1,4 +1,6 @@
 /* Εργαστήρια δεξιοτήτων (Αεραγωγός, Εξοπλισμός, Ακρόαση): προσθήκες πάνω στο mentor-vitals.css. */
+/* iPhone Safari enlarges text on its own (text autosizing); keep the designed sizes so layout and scrolling agree. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #sl-topic-nav{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
 #sl-topic-nav button{text-align:left;min-height:44px;padding:8px 12px;border:1px solid #c9d8dd;border-radius:10px;background:#fff;font:inherit;cursor:pointer}
 #sl-topic-nav button[aria-current="true"]{background:#0f4c5c;border-color:#0f4c5c;color:#fff;font-weight:700}
@@ -64,4 +66,5 @@ html[data-theme="dark"] .sl-explain{background:#132a37}
 html[data-theme="dark"] .sl-ok{color:#86efac}html[data-theme="dark"] .sl-bad{color:#fdba74}
 html[data-theme="dark"] .sl-verdict.sl-ok{background:#123826}html[data-theme="dark"] .sl-verdict.sl-partial{background:#3b2a10}
 html[data-theme="dark"] .sl-chest-body{fill:#22394a}html[data-theme="dark"] .sl-chest-bone{fill:#2c4658}html[data-theme="dark"] .sl-chest-text{fill:#e6f1f2}
-.vs-footer .sl-licences{font-size:.8rem;opacity:.75}
+/* Attribution page link: required by the CC licences, kept as unobtrusive as possible. */
+.vs-footer .sl-licences{font-size:.6rem;opacity:.4;color:inherit;text-decoration:none;font-weight:400;margin-left:auto}
