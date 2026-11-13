@@ -37,6 +37,7 @@ async function loadGlossary(){
 }
 function entries(parts){
  const results=[];
+ results.push({kind:'seminar',title:'PHTLS · Προετοιμασία τραύματος',subtitle:'Σεμινάρια · Προετοιμασία PHTLS',preview:'Εκπαιδευτικό πρόγραμμα μελέτης προνοσοκομειακής αντιμετώπισης τραύματος.',href:'seminar-prep.html',searchText:'PHTLS trauma trauma-preparation τραύμα προνοσοκομειακή αντιμετώπιση τραυματία σεμινάριο',keywords:'PHTLS σεμινάριο τραύμα trauma'});
  for(let i=0;i<4;i++){
   for(const ch of parts[i]?.items||[]){
    results.push({kind:'saek',title:ch.chapterTitle,subtitle:'ΣΑΕΚ · '+ch.semester+'΄ εξάμηνο · '+ch.course,preview:ch.preview||'',href:ch.href,searchText:ch.searchText||'',keywords:ch.course+' '+ch.chapter+' '+ch.semester});
@@ -64,7 +65,7 @@ async function loadSearch(){
  }
  return searchCache;
 }
-const weight={saek:4,eoppep:4,practical:3,practice:3,page:2};
+const weight={saek:4,eoppep:4,seminar:5,practical:3,practice:3,page:2};
 // Abbreviations and spellings students use for the same thing (single words, matched like the query).
 const SYNONYMS=[['gcs','glasgow','γλασκωβη'],['καρπα','cpr','αναζωογονηση'],['αεα','aed','απινιδωτης','απινιδωτη'],
  ['αδρεναλινη','επινεφρινη','adrenaline','epinephrine'],['ηκγ','ecg','ηλεκτροκαρδιογραφημα'],['stemi','εμφραγμα'],
@@ -151,6 +152,8 @@ function installSearch(){
  const closeBtn=el('button','ekab-search-close','×');closeBtn.type='button';closeBtn.setAttribute('aria-label','Κλείσιμο αναζήτησης');bar.append(closeBtn);
  const hint=el('p','ekab-search-hint','Πλήρης αναζήτηση σε θεωρία ΕΟΠΠΕΠ, πρακτικό, μαθήματα ΣΑΕΚ και ασκήσεις.');
  const input=el('input','ekab-search-field');
+ const filter=el('select','ekab-search-filter');filter.setAttribute('aria-label','Φίλτρο κατηγορίας αναζήτησης');
+ for(const [value,label] of [['all','Όλες οι κατηγορίες'],['saek','Μαθήματα ΣΑΕΚ'],['eoppep','Ερωτήσεις ΕΟΠΠΕΠ'],['practice','Ασκήσεις'],['seminar','Σεμινάρια'],['practical','Πρακτικό μέρος'],['page','Ενότητες']]){const option=el('option',null,label);option.value=value;filter.append(option)}
  input.id='ekabGlobalSearch';input.type='search';input.autocomplete='off';input.placeholder='π.χ. ΚΑΡΠΑ, αεραγωγός, Glasgow…';
  input.setAttribute('aria-label','Αναζήτηση σε όλη την εφαρμογή');
  input.setAttribute('aria-controls','ekabGlobalResults');input.setAttribute('aria-expanded','false');
@@ -169,9 +172,9 @@ function installSearch(){
  glossaryAction.setAttribute('aria-haspopup','dialog');
  glossaryAction.setAttribute('aria-controls','medicalGlossaryDialog');
  glossaryAction.addEventListener('click',()=>{close();window.EkabOpenMedicalGlossary?.()});
- popup.append(bar,hint,input,examples,results,all,glossaryAction);wrap.append(toggle,popup);utility.prepend(wrap);
+ popup.append(bar,hint,input,filter,examples,results,all,glossaryAction);wrap.append(toggle,popup);utility.prepend(wrap);
  let pending=0,links=[],selected=-1;
- const pageLink=q=>{all.href='search.html'+(q?'?q='+encodeURIComponent(q):'')};
+ const pageLink=q=>{const params=new URLSearchParams();if(q)params.set('q',q);if(filter.value!=='all')params.set('type',filter.value);all.href='search.html'+(params.size?'?'+params.toString():'')};
  const close=()=>{popup.hidden=true;toggle.setAttribute('aria-expanded','false');input.setAttribute('aria-expanded','false');results.hidden=true;links=[];selected=-1};
  const open=()=>{popup.hidden=false;toggle.setAttribute('aria-expanded','true');input.focus();if(input.value.trim())render()};
  toggle.addEventListener('click',()=>popup.hidden?open():close());
@@ -179,6 +182,7 @@ function installSearch(){
  function draw(found,q){
   results.replaceChildren();links=[];selected=-1;
   if(!q.trim()){results.hidden=true;input.setAttribute('aria-expanded','false');return}
+  if(filter.value!=='all')found=found.filter(item=>item.kind===filter.value);
   if(!found.length)results.append(el('p','saek-result-empty','Δεν βρέθηκαν αποτελέσματα. Δοκίμασε άλλη λέξη ή αγγλικό όρο.'));
   else{
    results.append(el('p','saek-result-count',found.length+' αποτελέσματα · Πρόβλεψη από τα μαθήματα'));
@@ -193,9 +197,10 @@ function installSearch(){
   loadSearch().then(data=>{if(token===pending)draw(find(q,data),q)}).catch(()=>{if(token===pending){results.replaceChildren(el('p','saek-result-empty','Δεν φορτώθηκε η αναζήτηση. Έλεγξε τη σύνδεση ή ενημέρωσε την εφαρμογή.'));results.hidden=false}});
  }
  input.addEventListener('input',render);
+ filter.addEventListener('change',()=>{pageLink(input.value.trim());render()});
  input.addEventListener('keydown',e=>{
   if(e.key==='Escape'){e.preventDefault();close();toggle.focus()}
-  if(e.key==='Enter'&&input.value.trim()){e.preventDefault();location.href='search.html?q='+encodeURIComponent(input.value.trim())}
+  if(e.key==='Enter'&&input.value.trim()){e.preventDefault();pageLink(input.value.trim());location.href=all.href}
   if(e.key==='ArrowDown'&&links.length){e.preventDefault();links[0].focus()}
  });
  results.addEventListener('keydown',e=>{
@@ -205,7 +210,7 @@ function installSearch(){
   if(e.key==='ArrowUp'&&links.length){e.preventDefault();links[(idx-1+links.length)%links.length].focus()}
  });
  document.addEventListener('pointerdown',e=>{if(!wrap.contains(e.target))close()});
- if(location.pathname.endsWith('/search.html')){const q=new URLSearchParams(location.search).get('q');if(q){input.value=q;pageLink(q)}}
+ if(location.pathname.endsWith('/search.html')){const params=new URLSearchParams(location.search),q=params.get('q');filter.value=params.get('type')||'all';if(q){input.value=q;pageLink(q)}}
 }
 function medNormal(value){return normalize(String(value??'').replace(/[₂]/g,'2').replace(/[₃]/g,'3').replace(/[₄]/g,'4').replace(/µ/g,'μ'))}
 function findGlossary(q,terms,category){
@@ -316,7 +321,8 @@ function installGlossary(){
 function showSearchPage(){
  const results=document.getElementById('globalSearchResultsPage');
  if(!results)return;
- const query=new URLSearchParams(location.search).get('q')||'';
+ const params=new URLSearchParams(location.search),query=params.get('q')||'',kind=params.get('type')||'all';
+ const typeSelect=document.getElementById('globalSearchType');if(typeSelect){typeSelect.value=kind;typeSelect.addEventListener('change',()=>{const next=new URLSearchParams(location.search);if(typeSelect.value==='all')next.delete('type');else next.set('type',typeSelect.value);location.search=next.toString()})}
  const heading=document.getElementById('globalSearchQuery');
  if(heading)heading.textContent=query?'Αποτελέσματα για: '+query:'Αναζήτηση στην ΕΚΑΒ Σπουδή';
  const field=document.getElementById('globalSearchPageInput');
@@ -324,11 +330,11 @@ function showSearchPage(){
  if(!query){results.replaceChildren(el('p',null,'Γράψε έναν όρο και πάτησε «Αναζήτηση».'));return}
  results.replaceChildren(el('p',null,'Φόρτωση αποτελεσμάτων…'));
  loadSearch().then(data=>{
-  const found=find(query,data);results.replaceChildren();
+  const found=find(query,data).filter(item=>kind==='all'||item.kind===kind);results.replaceChildren();
   const summary=el('p','global-search-summary',found.length+' αποτελέσματα στο δημόσιο εκπαιδευτικό περιεχόμενο της εφαρμογής.');
   results.append(summary);
   if(!found.length){results.append(el('p','saek-result-empty','Δεν βρέθηκε αποτέλεσμα. Δοκίμασε διαφορετική λέξη ή όρο από τα μαθήματα.'));return}
-  const kinds=[['eoppep','Ερωτήσεις ΕΟΠΠΕΠ'],['saek','Κατάρτιση ΣΑΕΚ'],['practical','Πρακτικό ΕΟΠΠΕΠ'],['practice','Συμπληρωματικές ασκήσεις'],['page','Ενότητες και σελίδες']];
+  const kinds=[['eoppep','Ερωτήσεις ΕΟΠΠΕΠ'],['saek','Κατάρτιση ΣΑΕΚ'],['seminar','Σεμινάρια'],['practical','Πρακτικό ΕΟΠΠΕΠ'],['practice','Συμπληρωματικές ασκήσεις'],['page','Ενότητες και σελίδες']];
   for(const [kind,title] of kinds){
    const matches=found.filter(x=>x.kind===kind);if(!matches.length)continue;
    const section=el('section','global-search-category'),h=el('h2',null,title+' ('+matches.length+')');

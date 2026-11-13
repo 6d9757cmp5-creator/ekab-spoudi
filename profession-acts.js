@@ -58,7 +58,7 @@ function run(query){
  if(q&&older>0)archive.open=true;
  else if(q)archive.open=false;
  if(q&&!matches.length&&!older)add(result,'p','act-empty','Δεν βρέθηκε σχετική καταχώριση. Η απουσία δεν αποδεικνύει ούτε άδεια ούτε απαγόρευση πράξης.');
- count.textContent=q?matches.length+' πράξεις · '+older+' άλλα θέματα':'27 καταχωρισμένες πράξεις · 12 επιλεγμένα νομοθετικά θέματα';
+ count.textContent=q?matches.length+' '+(matches.length===1?'πράξη':'πράξεις')+' · '+older+' άλλα θέματα':'27 καταχωρισμένες πράξεις · 12 επιλεγμένα νομοθετικά θέματα';
  showAllButton.textContent=showingAll&&!q?'Απόκρυψη καταλόγου':'Προβολή 27 πράξεων';
  showAllButton.setAttribute('aria-expanded',String(showingAll&&!q));
  shortcut.querySelectorAll('button[data-act]').forEach(b=>b.setAttribute('aria-pressed',String(q===plain(b.dataset.act))));

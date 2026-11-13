@@ -32,6 +32,8 @@ export const SYSTEM_PROMPT=
 'Δομή: πρώτα η ουσία σε μία-δύο προτάσεις, μετά το «γιατί» ή ένα απλό παράδειγμα από τη δουλειά του διασώστη, '+
 'και στο τέλος μία σύντομη ερώτηση ελέγχου για να σκεφτεί ο σπουδαστής (χωρίς να δώσεις την απάντησή της). '+
 'Τα αποσπάσματα από αγγλικά βιβλία τα αποδίδεις στα ελληνικά, μόνο όσο σχετίζονται με την ερώτηση. Η ελληνική ύλη (ΣΑΕΚ, ΕΟΠΠΕΠ) έχει προτεραιότητα· αν διαφωνεί με βιβλίο, ακολούθησε την ελληνική ύλη. '+
+'Τα περισσότερα αγγλικά βιβλία είναι νοσηλευτικά: νοσοκομειακές πράξεις, κλίμακες ή εξετάσεις (π.χ. NIHSS, εργαστηριακές τιμές) δεν τις παρουσιάζεις ποτέ ως καθήκον του διασώστη. '+
+'Βάζεις την ένδειξη [Τn] μόνο σε πρόταση που λέει αυτό που γράφει το συγκεκριμένο απόσπασμα. '+
 'Αν τα αποσπάσματα δεν απαντούν στην ερώτηση, πες ειλικρινά τι δεν καλύπτουν και τι μπορεί να ρωτήσει αντί γι’ αυτό· μην μαντέψεις. '+
 'Μη γράφεις αριθμούς που δεν υπάρχουν στα αποσπάσματα. Μη δίνεις δοσολογίες, διαγνώσεις ή οδηγίες για πραγματικό περιστατικό· για επείγον παρέπεμψε στο 166/112. '+
 'Απάντησε στα ελληνικά, σε 80–180 λέξεις. '+ATLA_RUNTIME_RULES;
@@ -79,17 +81,22 @@ export function verifiedPassages(clientPassages,records=corpus.records){
  return out;
 }
 
+const KEYWORD_PROMPT=question=>[
+ {role:'system',content:'Translate the student question into 2 to 5 English medical search keywords. Reply only with the keywords, separated by commas.'},
+ {role:'user',content:question}];
 /** English keywords for the open textbooks: glossary names found in the question, plus a short translation by the small free model. */
 async function bookKeywords(env,question,glossary){
  const q=normGreek(question);
  const words=Object.entries(glossary||{}).filter(([greek])=>q.includes(greek)).map(([,en])=>en);
  if(env.AI){
   try{
-   const r=await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8-fast',{messages:[
-    {role:'system',content:'Translate the student question into 2 to 5 English medical search keywords. Reply only with the keywords, separated by commas.'},
-    {role:'user',content:question}],max_tokens:40,temperature:0});
+   const r=await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8-fast',{messages:KEYWORD_PROMPT(question),max_tokens:40,temperature:0});
    words.push(String(r?.response||'').slice(0,200));
   }catch{}
+ }
+ // Workers AI unavailable (daily limit): the first free provider translates instead, in a few tokens.
+ if(words.length<2)for(const p of freeProviders(env).slice(0,2)){
+  try{words.push(String(await askOpenAiCompatible(p,KEYWORD_PROMPT(question),{maxTokens:40})).slice(0,200));break;}catch{}
  }
  return [...new Set(tokens(words.join(' ')))].slice(0,8);
 }
@@ -100,6 +107,7 @@ async function bookKeywords(env,question,glossary){
  * A chunk is used only if its search words weigh enough (MIN_BOOK_SCORE).
  */
 const MIN_BOOK_SCORE=10;
+const PREHOSPITAL_BOOKS=new Set(['wistech-emr-2025','who-bec']);
 export async function bookPassages(env,question,firstNumber,{keywords=bookKeywords}={}){
  if(!env.BOOKS||firstNumber>8)return [];
  const asset=async path=>{try{const r=await env.BOOKS.fetch(new Request('https://books/'+path));return r.ok?await r.json():null;}catch{return null;}};
@@ -116,7 +124,12 @@ export async function bookPassages(env,question,firstNumber,{keywords=bookKeywor
   score.set(chunk,(score.get(chunk)||0)+weight);matched.set(chunk,(matched.get(chunk)||0)+1);
  }
  // One strongly weighted word is enough ("hypoxia" in its definition); more words add a little.
- const rank=c=>score.get(c)*(1+0.3*(matched.get(c)-1));
+ // Chunks are stored book after book in books.json order, so a chunk's book follows from its index.
+ // Prehospital books (EMR, WHO Basic Emergency Care) are preferred over hospital nursing texts.
+ const ranges=[];let first=0;
+ for(const [id,b] of Object.entries(meta.books)){ranges.push([first,first+b.chunks,id]);first+=b.chunks;}
+ const bookOf=c=>ranges.find(([a,z])=>c>=a&&c<z)?.[2];
+ const rank=c=>score.get(c)*(1+0.3*(matched.get(c)-1))*(PREHOSPITAL_BOOKS.has(bookOf(c))?1.5:1);
  const best=[...score.keys()].filter(c=>rank(c)>=MIN_BOOK_SCORE).sort((a,b)=>rank(b)-rank(a)).slice(0,2);
  const out=[];
  for(const index of best){
@@ -157,6 +170,7 @@ export function _resetLimits(){hits.clear();day={key:'',count:0};}
 /** OpenAI-compatible free providers, used only when their key is set as a Worker secret. */
 export function freeProviders(env){
  const list=[];
+ // Groq first (largest free quota, answered reliably in the live checks); Gemini second with a short timeout.
  if(env.GROQ_API_KEY)list.push({name:'groq',url:'https://api.groq.com/openai/v1/chat/completions',modelsUrl:'https://api.groq.com/openai/v1/models',key:env.GROQ_API_KEY,model:env.GROQ_MODEL||'llama-3.3-70b-versatile'});
  if(env.GEMINI_API_KEY)list.push({name:'gemini',url:'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',modelsUrl:'https://generativelanguage.googleapis.com/v1beta/openai/models',key:env.GEMINI_API_KEY,model:env.GEMINI_MODEL||'gemini-3.8-flash'});
  if(env.OPENROUTER_API_KEY)list.push({name:'openrouter',url:'https://openrouter.ai/api/v1/chat/completions',modelsUrl:'https://openrouter.ai/api/v1/models',key:env.OPENROUTER_API_KEY,model:env.OPENROUTER_MODEL||'meta-llama/llama-3.3-70b-instruct:free'});
@@ -196,12 +210,24 @@ async function currentModel(p){
  }catch{return '';}
 }
 /** Low-cost paid providers (prepaid balance, no auto top-up): only after every free model failed, before Claude. */
+export const REASONING_MODEL=/gemini|gpt-oss|qwen3|deepseek-r|reason|thinking/i;
 export function cheapPaidProviders(env){
  return env.DEEPSEEK_API_KEY?[{name:'deepseek',url:'https://api.deepseek.com/chat/completions',key:env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL||'deepseek-chat'}]:[];
 }
-async function askOpenAiCompatible(p,messages){
- const call=model=>fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
-  body:JSON.stringify({model,messages,max_tokens:MAX_OUTPUT,temperature:0.3}),signal:AbortSignal.timeout(20000)});
+async function askOpenAiCompatible(p,messages,{maxTokens=MAX_OUTPUT}={}){
+ // Reasoning models (Gemini, gpt-oss, Qwen3…) spend max_tokens on thinking first: ask for little
+ // thinking and leave room for the answer, else the reply comes back empty or too late.
+ let lowEffort=true;
+ const call=async model=>{
+  p.used=model;
+  const reasoning=REASONING_MODEL.test(model);
+  const extra=reasoning&&lowEffort?{reasoning_effort:'low'}:{};
+  let r=await fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
+   body:JSON.stringify({model,messages,max_tokens:reasoning?Math.min(maxTokens*3,1500):maxTokens,temperature:0.3,...extra}),
+   signal:AbortSignal.timeout(p.name==='gemini'?12000:15000)});
+  if(r.status===400&&extra.reasoning_effort){lowEffort=false;r=await call(model);}
+  return r;
+ };
  const remembered=discovered.get(p.name)?.model;
  let r=await call(remembered||p.model);
  // A retired model (404, or 400 on some providers): find the current one once and retry.
@@ -251,19 +277,22 @@ export function citeRepair(messages,draft){
   {role:'user',content:'Ξαναγράψε ακριβώς την ίδια απάντηση, βάζοντας μετά από κάθε πρόταση με πληροφορία την ένδειξη του αποσπάσματος από το οποίο προέρχεται, π.χ. [Τ1]. Αφαίρεσε ό,τι δεν στηρίζεται σε απόσπασμα. Γράψε μόνο την απάντηση.'}];
 }
 /** Tries each model in order; the first answer that passes the safety audit wins. */
-export async function answer(request,env,body,{askers}={}){
+export async function answer(request,env,body,{askers,deadlineMs=27000}={}){
  const messages=buildMessages(body);
  const chain=askers||[
   // Free providers with a key go first: their daily free quotas are far larger than the ~10,000
   // Workers AI neurons (about 70 answers), which then remain as the fallback.
-  ...freeProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
+  ...freeProviders(env).map(p=>({name:p.name,label:()=>p.name+'/'+(p.used||p.model),ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
   ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
   ...cheapPaidProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
   {name:'claude',ask:()=>askClaude(request,env,messages)}
  ];
  const trace=[];
  let repaired=false;
+ // The browser waits 35 s; past ~27 s another model could not answer in time, so stop trying.
+ const started=Date.now();
  for(const step of chain){
+  if(Date.now()-started>deadlineMs){trace.push('deadline');break;}
   let text='';
   let failure='no-answer';
   try{text=String(await step.ask()||'').trim();}catch(e){text='';failure=failureReason(e);}
@@ -272,15 +301,15 @@ export async function answer(request,env,body,{askers}={}){
   // free model is asked to add them; the rewrite passes the full audit again. Never for the paid model.
   if(!verdict.ok&&verdict.reason==='missing-or-unknown-citation'&&!repaired&&step.repair){
    repaired=true;
-   trace.push(step.name+':'+verdict.reason);
+   trace.push((step.label?.()||step.name)+':'+verdict.reason);
    try{text=String(await step.repair(text)||'').trim();}catch{text='';}
    verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
-   if(verdict.ok)return {text,provider:step.name+'+cite',trace};
-   trace.push(step.name+'+cite:'+verdict.reason);
+   if(verdict.ok)return {text,provider:(step.label?.()||step.name)+'+cite',trace};
+   trace.push((step.label?.()||step.name)+'+cite:'+verdict.reason);
    continue;
   }
-  if(verdict.ok)return {text,provider:step.name,trace};
-  trace.push(step.name+':'+verdict.reason);
+  if(verdict.ok)return {text,provider:step.label?.()||step.name,trace};
+  trace.push((step.label?.()||step.name)+':'+verdict.reason);
  }
  return {text:'',provider:'',trace};
 }

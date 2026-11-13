@@ -348,7 +348,7 @@ function addChapterButtons(){
  for(const chapter of document.querySelectorAll('details.reader-fold[id^="lesson-"]')){
   const n=Number(chapter.id.slice(7)),sos=chapter.querySelector('.lesson-sos');
   if(!sos||!Number.isInteger(n)||n<1||n>32||chapter.querySelector('.ekab-notes-chapter'))continue;
-  const chapterName=chapter.querySelector('summary')?.textContent?.replace(/\s+/g,' ').trim().slice(0,75)||'Κεφάλαιο '+n;
+  const chapterName=chapter.querySelector('summary')?.textContent?.replace(/\s+/g,' ').replace(/^\s*\d{1,2}\s*/,'').replace(/\s*(?:Δεν ολοκληρώθηκε|Ολοκληρώθηκε)\s*$/i,'').trim().slice(0,75)||'Κεφάλαιο '+n;
   const btn=button('📝 Προσωπική σημείωση',()=>open({prefill:{
    title:'Σημείωση · '+chapterName,section:'saek',
    context:'ΣΑΕΚ · Μάθημα '+Number(course)+' · Κεφάλαιο '+n,

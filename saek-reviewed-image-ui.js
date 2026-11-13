@@ -21,19 +21,23 @@ function sourceUrl(asset){
  return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(asset.filename);
 }
 function zoom(items,initial){
- let index=initial,scale=1,pinch=0,pinchBase=1,x=null,y=null;
+ let index=initial,scale=1,mode='fit',pinch=0,pinchBase=1,x=null,y=null;
  const dialog=el('dialog','saek-clean-lightbox');
  const close=el('button','saek-clean-close','✕');
  const prev=el('button','saek-clean-prev','‹');
  const next=el('button','saek-clean-next','›');
+ const tools=el('div','saek-clean-tools');
+ const zoomOut=el('button','saek-clean-tool','−'),zoomIn=el('button','saek-clean-tool','+'),actual=el('button','saek-clean-tool','100%'),fit=el('button','saek-clean-tool','Προσαρμογή'),fullscreen=el('button','saek-clean-tool','Πλήρης οθόνη'),captionToggle=el('button','saek-clean-tool','Λεζάντα');
  const image=el('img','saek-clean-image');
  const stage=el('div','saek-clean-stage');
  close.type=prev.type=next.type='button';
  close.setAttribute('aria-label','Κλείσιμο εικόνας');
  prev.setAttribute('aria-label','Προηγούμενη εικόνα');
  next.setAttribute('aria-label','Επόμενη εικόνα');
- function show(n){index=(n+items.length)%items.length;scale=1;image.style.transform='scale(1)';image.src=items[index].url;image.alt=items[index].alt;prev.hidden=next.hidden=items.length<2;}
- function resize(n){scale=Math.max(1,Math.min(5,n));image.style.transform='scale('+scale+')';}
+ function applyScale(){image.style.maxWidth=mode==='fit'?'100%':'none';image.style.maxHeight=mode==='fit'?'100%':'none';image.style.transform='scale('+scale+')'}
+ function show(n){index=(n+items.length)%items.length;scale=1;mode='fit';applyScale();image.src=items[index].url;image.alt=items[index].alt;caption.textContent=items[index].alt;prev.hidden=next.hidden=items.length<2;}
+ function resize(n){mode='natural';scale=Math.max(.25,Math.min(5,n));applyScale();}
+ zoomOut.addEventListener('click',()=>resize(scale-.25));zoomIn.addEventListener('click',()=>resize(scale+.25));actual.addEventListener('click',()=>resize(1));fit.addEventListener('click',()=>{mode='fit';scale=1;applyScale()});fullscreen.addEventListener('click',()=>{if(!document.fullscreenElement)dialog.requestFullscreen?.().catch(()=>{});else document.exitFullscreen?.().catch(()=>{})});captionToggle.addEventListener('click',()=>{caption.hidden=!caption.hidden});
  close.onclick=()=>dialog.close();
  prev.onclick=()=>show(index-1);next.onclick=()=>show(index+1);
  image.addEventListener('dblclick',()=>resize(scale>1?1:2));
@@ -51,7 +55,9 @@ function zoom(items,initial){
  dialog.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(index-1);if(e.key==='ArrowRight')show(index+1);});
  dialog.addEventListener('close',()=>dialog.remove());
  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
- stage.append(image);dialog.append(stage,close,prev,next);
+ const caption=el('p','saek-clean-caption');
+ tools.append(zoomOut,zoomIn,actual,fit,fullscreen,captionToggle);
+ stage.append(image);dialog.append(tools,stage,caption,close,prev,next);
  document.body.append(dialog);show(index);dialog.showModal();
 }
 // A registry fetch failure must not silently remove every lesson image.
