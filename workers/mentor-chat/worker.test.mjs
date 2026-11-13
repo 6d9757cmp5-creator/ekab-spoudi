@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages,failureReason,pickModel} from './src/index.js';
+import {validate,verifiedPassages,answer,buildMessages,freeProviders,cheapPaidProviders,citeRepair,limited,_resetLimits,bookPassages,failureReason,pickModel,REASONING_MODEL} from './src/index.js';
 import {tokens,shardOf} from '../../tools/atla-ai/books/text.mjs';
 import {verifiedSseResponse} from '../../atla/ai/safe-stream.mjs';
 import {parseSseLine,bookSources} from '../../atla/ai/client.mjs';
@@ -148,4 +148,18 @@ test('a failed model call is explained by a short reason, never by its text',()=
  assert.equal(failureReason(Error('4006: you have used up your daily free allocation of 10,000 neurons')),'daily-limit');
  assert.equal(failureReason(Object.assign(Error('The operation was aborted due to timeout'),{name:'TimeoutError'})),'timeout');
  assert.equal(failureReason(Error('secret sk-abc leaked')),'error');
+});
+
+test('reasoning models are recognised; the chain stops at the deadline',async()=>{
+ for(const m of ['gemini-3.8-flash','openai/gpt-oss-120b','qwen/qwen3.8-27b'])assert.match(m,REASONING_MODEL);
+ assert.doesNotMatch('llama-3.3-70b-versatile',REASONING_MODEL);
+ const body=validate({question:'Τι είναι αυτό;',passages:[{id:'T1',ref:key,term:record.title,definition:record.body.slice(0,300)}]});
+ body.passages=verifiedPassages(body.passages);
+ const calls=[];
+ const result=await answer(null,{},body,{deadlineMs:5,askers:[
+  {name:'slow',ask:async()=>{calls.push('slow');await new Promise(r=>setTimeout(r,20));return '';}},
+  {name:'never',ask:async()=>{calls.push('never');return 'x [Τ1]';}}
+ ]});
+ assert.deepEqual(calls,['slow']);
+ assert.deepEqual(result.trace,['slow:no-answer','deadline']);
 });
