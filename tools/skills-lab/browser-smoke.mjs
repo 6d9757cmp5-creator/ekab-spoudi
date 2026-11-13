@@ -3,11 +3,13 @@
  * every subsection renders, every exercise is answered through the page and scores full marks,
  * a wrong answer is reported, sound graphs are computed from the files and audio plays. */
 import assert from 'node:assert/strict';
-import {chromium} from 'playwright';
+import {chromium,webkit} from 'playwright';
 import {readFileSync} from 'node:fs';
 const base=(process.argv[2]||'http://127.0.0.1:8799').replace(/\/$/,'');
 const lab=id=>JSON.parse(readFileSync(new URL(`./labs/${id}.json`,import.meta.url),'utf8'));
-const browser=await chromium.launch({args:['--autoplay-policy=no-user-gesture-required']});
+// Optional second argument "webkit": the Safari engine, with phone width as a touch device (iPhone behaviour).
+const engine=process.argv[3]==='webkit'?webkit:chromium;
+const browser=await engine.launch(engine===chromium?{args:['--autoplay-policy=no-user-gesture-required']}:{});
 
 async function answer(sec,e){
  switch(e.type){
@@ -29,7 +31,7 @@ const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=inn
 
 try{
  for(const width of [390,1280]){
-  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block'});
+  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',...(engine===webkit&&width<500?{isMobile:true,hasTouch:true,deviceScaleFactor:3}:{})});
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   for(const id of ['airway','equipment','auscultation']){
    const L=lab(id);
@@ -47,8 +49,13 @@ try{
     for(const img of await page.locator('.sl-figure img').all()){await img.scrollIntoViewIfNeeded();assert.ok(await img.evaluate(i=>i.complete&&i.naturalWidth>0),`${id}/${t.id} image loads`);}
     assert.ok((await page.locator('#sl-source-list a').count())>=2,`${id}/${t.id} sources listed`);
    }
-   assert.ok((await page.locator('#sl-credits li').count())>=10,id+' credits listed');
+   assert.equal(await page.locator('.sl-credit,#sl-credits').count(),0,id+': no credits inside the lab');
+   assert.equal(await page.locator('a[href="mentor-media-credits.html"]').count(),1,id+': one licences link');
   }
+
+  // Licences live on their own page.
+  await page.goto(`${base}/mentor-media-credits.html`,{waitUntil:'load'});await page.waitForSelector('body[data-ready]',{state:'attached'});
+  assert.ok((await page.locator('#credits li').count())>=30,'licences listed');
 
   // A wrong answer is reported with the right one.
   await page.goto(`${base}/mentor-airway.html?topic=oxygen`,{waitUntil:'load'});await page.waitForSelector('body[data-ready]',{state:'attached'});
@@ -71,6 +78,6 @@ try{
 
   assert.deepEqual(errors,[],width+': no page errors');
   await context.close();
-  console.log('skills labs ok at',width+'px');
+  console.log('skills labs ok at',width+'px',engine.name());
  }
 }finally{await browser.close();}

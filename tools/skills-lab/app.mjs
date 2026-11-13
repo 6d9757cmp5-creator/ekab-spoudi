@@ -2,16 +2,11 @@
  * Εργαστήρια δεξιοτήτων: διεπαφή. Η σελίδα δηλώνει ποιο εργαστήριο φορτώνει με <body data-lab="...">.
  * Όλη η αξιολόγηση γίνεται στο core.mjs· εδώ μόνο εμφάνιση. Δεν αποθηκεύει τίποτα.
  */
-import {loadLab,grade,CHEST_POINTS,mediaOf} from './core.mjs';
+import {loadLab,grade,CHEST_POINTS} from './core.mjs';
 import {parseWav,spectrogram,drawSound,clippedFraction} from './sound.mjs';
 
 const base=new URL('./',import.meta.url);
-const [labJson,mediaList]=await Promise.all([
- fetch(new URL(`labs/${document.body.dataset.lab}.json`,base)).then(r=>r.json()),
- fetch(new URL('media/media.json',base)).then(r=>r.json())
-]);
-const LAB=loadLab(labJson,mediaList);
-const MEDIA=new Map(mediaList.map(m=>[m.file,m]));
+const LAB=loadLab(await fetch(new URL(`labs/${document.body.dataset.lab}.json`,base)).then(r=>r.json()));
 const mediaUrl=f=>new URL('media/'+f,base).href;
 
 const $=(tag,cls='',text='')=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n;};
@@ -37,24 +32,20 @@ function showResult(box,e,r,labelOf){
  box.append(ul);if(e.why)box.append($('p','sl-explain',e.why));
 }
 
-function credit(file){
- const m=MEDIA.get(file),p=$('figcaption','sl-credit');
- const a=$('a','',`${m.author} · ${m.licence}`);a.href=m.source;a.rel='noopener';a.target='_blank';
- p.append('Πηγή: ',a);return p;
-}
 function picture(file,alt){
  const f=$('figure','sl-figure');const img=$('img');img.src=mediaUrl(file);img.alt=alt;img.loading='lazy';img.decoding='async';
- f.append(img,credit(file));return f;
+ f.append(img);return f;
 }
 
 /** Ήχος: κυματομορφή και φασματογράφημα από το ίδιο το αρχείο, δείκτης θέσης κατά την αναπαραγωγή, κλικ για μετάβαση. */
 const soundCache=new Map();
 function soundView(file,label){
  const f=$('figure','sl-sound');
- const canvas=$('canvas');canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`Κυματομορφή (πάνω) και φασματογράφημα (κάτω) του αποσπάσματος «${label}»`);
+ // Σταθερή αναλογία από την αρχή: όταν φορτώσει το γράφημα η σελίδα δεν μετακινείται (Safari).
+ const canvas=$('canvas');canvas.width=1000;canvas.height=320;canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`Κυματομορφή (πάνω) και φασματογράφημα (κάτω) του αποσπάσματος «${label}»`);
  const audio=$('audio');audio.controls=true;audio.preload='none';audio.src=mediaUrl(file);audio.setAttribute('aria-label','Αναπαραγωγή: '+label);
  const info=$('p','sl-sound-info','Φόρτωση γραφήματος…');
- f.append(canvas,audio,info,credit(file));
+ f.append(canvas,audio,info);
  let data=null,raf=0;
  const draw=()=>{if(!data)return;const w=Math.max(200,Math.round(canvas.clientWidth*(devicePixelRatio||1)));if(canvas.width!==w){canvas.width=w;canvas.height=Math.round(w*0.32);}drawSound(canvas,data.sound,data.spec,audio.paused&&!audio.currentTime?-1:audio.currentTime);};
  const tick=()=>{draw();if(!audio.paused)raf=requestAnimationFrame(tick);};
@@ -223,15 +214,6 @@ function render(){
  const url=new URL(location.href);url.searchParams.set('topic',topic.id);history.replaceState(null,'',url);
 }
 
-function credits(){
- const ul=document.getElementById('sl-credits');
- for(const f of mediaOf(LAB)){
-  const m=MEDIA.get(f);const li=$('li');const a=$('a','',m.title);a.href=m.source;a.rel='noopener';a.target='_blank';
-  const lic=$('a','',m.licence);lic.href=m.licenceUrl;lic.rel='license noopener';lic.target='_blank';
-  li.append(a,` · ${m.author} · `,lic,` · Αλλαγές: ${m.changes}`);ul.append(li);
- }
-}
-
 /** Ο κοινός σκελετός των τριών σελίδων· κάθε HTML κρατά μόνο τα δικά του (τίτλο, εισαγωγή, σημείωμα ασφάλειας). */
 function shell(){
  const root=document.getElementById('sl-app');
@@ -249,10 +231,6 @@ function shell(){
    <h2 id="sl-sources-heading">Πηγές και ύλη</h2>
    <p>Οι απαντήσεις στηρίζονται στα παρακάτω κεφάλαια ΣΑΕΚ και στα ανοιχτά συγγράμματα που αναφέρονται. Ισχύει πάντα το πρωτόκολλο της υπηρεσίας.</p>
    <ul id="sl-source-list"></ul></details></section>
-  <section class="vs-panel vs-sources" aria-labelledby="sl-credits-heading"><details><summary>Άδειες εικόνων και ήχων</summary>
-   <h2 id="sl-credits-heading">Άδειες εικόνων και ήχων</h2>
-   <p>Κάθε εικόνα και ηχογράφηση χρησιμοποιείται με την άδεια του δημιουργού της· οι αλλαγές αναφέρονται σε κάθε εγγραφή. Τα παράγωγα έργων CC BY-SA διατίθενται με την ίδια άδεια.</p>
-   <ul id="sl-credits"></ul></details></section>
  </div>`;
 }
 
@@ -262,7 +240,7 @@ function boot(){
  LAB.topics.forEach((t,i)=>{const b=$('button','',`${i+1}. ${t.title}`);b.type='button';b.dataset.topic=t.id;b.addEventListener('click',()=>{state.topic=t.id;render();document.getElementById('sl-title').focus();});nav.append(b);});
  document.getElementById('sl-reset').addEventListener('click',()=>{state.right=0;state.total=0;document.getElementById('sl-score').textContent='Σωστά σημεία: 0 / 0';render();});
  document.getElementById('sl-title').tabIndex=-1;
- credits();render();
+ render();
  document.body.dataset.ready='1';
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();

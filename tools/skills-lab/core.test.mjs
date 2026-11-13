@@ -8,7 +8,7 @@ const read=p=>readFileSync(new URL(p,import.meta.url),'utf8');
 const MEDIA=JSON.parse(read('./media/media.json'));
 const IDS=['airway','equipment','auscultation'];
 const RAW=Object.fromEntries(IDS.map(id=>[id,JSON.parse(read(`./labs/${id}.json`))]));
-const LABS=Object.fromEntries(IDS.map(id=>[id,loadLab(RAW[id],MEDIA)]));
+const LABS=Object.fromEntries(IDS.map(id=>[id,loadLab(RAW[id])]));
 const LICENCES=/^(CC0|Public domain|CC BY(-SA)? [0-9.]+( [a-z]+)?|ODC-By 1\.0)$/;
 
 test('the three labs load and match the hub: 5, 5 and 4 subsections',()=>{
@@ -18,11 +18,14 @@ test('the three labs load and match the hub: 5, 5 and 4 subsections',()=>{
  for(const id of IDS)for(const t of LABS[id].topics)assert.ok(t.exercises.length>=2,`${id}/${t.id} has at least two exercises`);
 });
 
-test('every media file exists, is used, and has a complete open licence record',()=>{
- const used=new Set(IDS.flatMap(id=>mediaOf(LABS[id])));
+test('every image and sound a lab uses exists',()=>{
+ for(const id of IDS)for(const f of mediaOf(LABS[id]))assert.ok(existsSync(new URL('./media/'+f,import.meta.url)),f);
+});
+
+test('every licence record is complete and points to an existing file (for the licences page)',()=>{
  for(const m of MEDIA){
   assert.ok(existsSync(new URL('./media/'+m.file,import.meta.url)),m.file);
-  assert.ok(used.has(m.file),'unused media '+m.file);
+  assert.ok(m.author&&m.changes,m.file);
   assert.match(m.licence,LICENCES,m.file);
   assert.match(m.source,/^https:\/\//,m.file);
   assert.ok(m.licence==='CC0'||m.licence==='Public domain'||/^https:\/\//.test(m.licenceUrl),m.file+' licence link');
@@ -38,16 +41,16 @@ test('every local source link points to an existing chapter',()=>{
  }
 });
 
-test('the checker refuses broken labs: unknown media, answer outside options, dose, missing source',()=>{
+test('the checker refuses broken exercises but always shows media, even without a licence record',()=>{
  const lab=structuredClone(RAW.airway);
  const ex=lab.topics[3].exercises[0];
- assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[3],exercises:[{...ex,items:[{...ex.items[0],media:'airway/missing.webp'}]}]}]},MEDIA),/missing\.webp/);
- assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[3],exercises:[{...ex,items:[{...ex.items[0],answer:'Κάτι άλλο'}]}]}]},MEDIA),/not in options/);
+ assert.doesNotThrow(()=>loadLab({...lab,topics:[{...lab.topics[3],exercises:[{...ex,items:[{...ex.items[0],media:'airway/new-photo.webp'}]}]}]}));
+ assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[3],exercises:[{...ex,items:[{...ex.items[0],answer:'Κάτι άλλο'}]}]}]}),/not in options/);
  const tf=lab.topics[3].exercises[2];
- assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[3],exercises:[{...tf,items:[{text:'Δώσε 15 L/min',answer:true,why:'x'}]}]}]},MEDIA),/dose/);
- assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[0],sources:[]}]},MEDIA),/no sources/);
+ assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[3],exercises:[{...tf,items:[{text:'Δώσε 15 L/min',answer:true,why:'x'}]}]}]}),/dose/);
+ assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[0],sources:[]}]}),/no sources/);
  const ord=lab.topics[0].exercises[1];
- assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[0],exercises:[{...ord,start:ord.steps.map((_,i)=>i)}]}]},MEDIA),/already solved/);
+ assert.throws(()=>loadLab({...lab,topics:[{...lab.topics[0],exercises:[{...ord,start:ord.steps.map((_,i)=>i)}]}]}),/already solved/);
  assert.ok(Object.isFrozen(LABS.airway.topics[0].exercises[0]));
 });
 

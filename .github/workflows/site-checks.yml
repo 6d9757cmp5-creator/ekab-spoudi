@@ -63,7 +63,7 @@ jobs:
       - name: Install Chromium
         run: |
           npm install --no-save --no-audit --no-fund playwright@1.48.2
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Open each page on phone and desktop width
         run: |
           python3 -m http.server 8799 --bind 127.0.0.1 >/dev/null 2>&1 &
@@ -71,4 +71,5 @@ jobs:
           node tools/vital-signs/browser-smoke.mjs http://127.0.0.1:8799
           node tools/handover-lab/browser-smoke.mjs http://127.0.0.1:8799
           node tools/skills-lab/browser-smoke.mjs http://127.0.0.1:8799
+          node tools/skills-lab/browser-smoke.mjs http://127.0.0.1:8799 webkit
           node tools/ci/page-smoke.mjs http://127.0.0.1:8799

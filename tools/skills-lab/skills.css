@@ -9,8 +9,6 @@
 .sl-ex h3{font-size:1rem;margin:0 0 10px;line-height:1.4}
 .sl-figure{margin:8px 0 12px}
 .sl-figure img{display:block;max-width:100%;max-height:420px;height:auto;margin:0 auto;border-radius:10px;background:#fff}
-.sl-credit{font-size:.78rem;color:#4b5f66;margin-top:4px;overflow-wrap:anywhere}
-.sl-credit a{color:inherit}
 .sl-marker-wrap{position:relative;width:fit-content;max-width:100%;margin:0 auto}
 .sl-marker{position:absolute;transform:translate(-50%,-50%);min-width:30px;height:30px;border-radius:50%;background:#fff;border:3px solid #c2410c;color:#7c2d12;font-weight:800;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.35);font-size:.95rem}
 .sl-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;margin:10px 0}
@@ -21,11 +19,13 @@
 .sl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;margin:10px 0}
 .sl-card{border:1px solid #c9d8dd;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0;background:#fff}
 .sl-card-title{margin:0;font-weight:700}
-.sl-card .sl-figure img{max-height:240px}
+/* Fixed box: a card image that loads late does not push the page (Safari taps landing elsewhere). */
+.sl-card .sl-figure img{height:220px;width:100%;max-height:none;object-fit:contain}
 .sl-sound{margin:0 0 6px}
 .sl-sound canvas{display:block;width:100%;aspect-ratio:100/32;border-radius:8px;background:#fff;cursor:pointer;border:1px solid #d7e3e6}
 .sl-sound audio{display:block;width:100%;margin-top:6px}
-.sl-sound-info{font-size:.78rem;color:#4b5f66;margin:4px 0 0}
+/* Room reserved for the text that appears once the graph loads, so nothing below moves. */
+.sl-sound-info{font-size:.78rem;color:#4b5f66;margin:4px 0 0;min-height:3.9em}
 .sl-statements{padding-left:20px}
 .sl-tf{border:0;padding:0;margin:0 0 10px}
 .sl-tf legend{padding:0;margin-bottom:4px;line-height:1.45}
@@ -56,11 +56,9 @@
 .sl-why{color:#334155;font-weight:400}
 .sl-rows{padding-left:20px;line-height:1.5}
 .sl-explain{background:#f4f8f9;border-left:4px solid #0f4c5c;padding:8px 12px;border-radius:6px}
-#sl-credits{font-size:.85rem;line-height:1.5;padding-left:20px}
-#sl-credits li{overflow-wrap:anywhere;margin-bottom:4px}
 html[data-theme="dark"] #sl-topic-nav button,html[data-theme="dark"] .sl-order li,html[data-theme="dark"] .sl-fields select,html[data-theme="dark"] .sl-fields input,html[data-theme="dark"] .sl-card,html[data-theme="dark"] .sl-card select,html[data-theme="dark"] .sl-locate-item{background:#173244;border-color:#41657a;color:#e6f1f2}
 html[data-theme="dark"] .sl-explain{background:#132a37}
-html[data-theme="dark"] .sl-credit,html[data-theme="dark"] .sl-sound-info,html[data-theme="dark"] .sl-why{color:#b9c9cf}
 html[data-theme="dark"] .sl-ok{color:#86efac}html[data-theme="dark"] .sl-bad{color:#fdba74}
 html[data-theme="dark"] .sl-verdict.sl-ok{background:#123826}html[data-theme="dark"] .sl-verdict.sl-partial{background:#3b2a10}
 html[data-theme="dark"] .sl-chest-body{fill:#22394a}html[data-theme="dark"] .sl-chest-bone{fill:#2c4658}html[data-theme="dark"] .sl-chest-text{fill:#e6f1f2}
+.vs-footer .sl-licences{font-size:.8rem;opacity:.75}

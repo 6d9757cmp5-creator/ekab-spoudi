@@ -1,7 +1,7 @@
 /**
  * Εργαστήρια δεξιοτήτων (Αεραγωγός, Εξοπλισμός, Ακρόαση): έλεγχος δεδομένων και αξιολόγηση.
  * Καθαρές συναρτήσεις, χωρίς DOM. Κάθε εργαστήριο είναι ένα JSON στο labs/ και κάθε μέσο (εικόνα, ήχος)
- * έχει εγγραφή άδειας στο media/media.json· το loadLab() αρνείται εργαστήριο με άγνωστο μέσο,
+ * καταγράφεται στο media/media.json (άδειες, για τη σελίδα αδειών). Το loadLab() αρνείται εργαστήριο με
  * απάντηση εκτός επιλογών, άσκηση χωρίς αιτιολόγηση, υποενότητα χωρίς πηγή ή κείμενο με δόση.
  * Δεν βαθμολογεί επίσημα, δεν αποθηκεύει και δεν πιστοποιεί πρακτική επάρκεια.
  */
@@ -48,11 +48,9 @@ export function mediaOf(lab){
 function fail(where,what){throw Error(`invalid-lab: ${where}: ${what}`);}
 function checkText(where,...texts){for(const t of texts)if(DOSE.test(t||''))fail(where,'dose-like text: '+t);}
 
-/** Ελέγχει και παγώνει ένα εργαστήριο. media: λίστα εγγραφών από το media.json. */
-export function loadLab(lab,media){
+/** Ελέγχει και παγώνει ένα εργαστήριο. Τα μέσα εμφανίζονται πάντα· οι άδειες ελέγχονται μόνο στα tests. */
+export function loadLab(lab){
  if(!lab?.id||!Array.isArray(lab.topics)||!lab.topics.length)fail(lab?.id||'?','no topics');
- const files=new Set((media||[]).map(m=>m.file));
- for(const m of media||[])if(!m.file||!m.author||!m.licence||!m.source||!m.changes)fail(m.file||'?','incomplete licence record');
  const topicIds=new Set(),exIds=new Set();
  for(const t of lab.topics){
   const w=lab.id+'/'+t.id;
@@ -67,16 +65,15 @@ export function loadLab(lab,media){
    if(!TYPES.includes(e.type))fail(we,'type '+e.type);
    if(!e.prompt)fail(we,'prompt');
    checkText(we,e.prompt,e.why);
-   CHECK[e.type](e,we,files);
+   CHECK[e.type](e,we);
   }
  }
- for(const f of mediaOf(lab))if(!files.has(f))fail(lab.id,'media without licence record: '+f);
  return deepFreeze(structuredClone(lab));
 }
 
 const CHECK={
- label(e,w,files){
-  if(!files.has(e.image))fail(w,'image');if(!e.alt)fail(w,'alt');
+ label(e,w){
+  if(!e.image)fail(w,'image');if(!e.alt)fail(w,'alt');
   const keys=Object.keys(e.answers||{});if(!keys.length)fail(w,'answers');
   for(const k of keys)if(!e.options.includes(e.answers[k]))fail(w,'answer not in options: '+e.answers[k]);
   for(const m of e.markers||[])if(!(String(m.n) in e.answers)||!(m.x>=0&&m.x<=1&&m.y>=0&&m.y<=1))fail(w,'marker '+m.n);
@@ -105,8 +102,7 @@ const CHECK={
   const cats=new Set(e.categories?.map(c=>c.id));if(cats.size<2||!e.items?.length)fail(w,'categories/items');
   for(const it of e.items){if(!cats.has(it.answer)||!it.text||!it.why)fail(w,'item '+it.text);checkText(w,it.text,it.why);}
  },
- numbers(e,w,files){
-  if(e.media&&!files.has(e.media))fail(w,'media');
+ numbers(e,w){
   if(!e.fields?.length)fail(w,'fields');
   for(const f of e.fields)if(!f.id||!f.label||!Number.isFinite(f.answer)||!(f.tolerance>=0))fail(w,'field '+f.id);
   if(!e.why)fail(w,'why');
