@@ -32,8 +32,9 @@ function showResult(box,e,r,labelOf){
  box.append(ul);if(e.why)box.append($('p','sl-explain',e.why));
 }
 
-function picture(file,alt){
- const f=$('figure','sl-figure');const img=$('img');img.src=mediaUrl(file);img.alt=alt;img.loading='lazy';img.decoding='async';
+/** lazy=false for the large image an exercise starts with: it loads at once, so the page below it does not move later. */
+function picture(file,alt,lazy=true){
+ const f=$('figure','sl-figure');const img=$('img');img.src=mediaUrl(file);img.alt=alt;img.loading=lazy?'lazy':'eager';img.decoding='async';
  f.append(img);return f;
 }
 
@@ -112,7 +113,7 @@ function chestSvg(view){
 
 const RENDER={
  label(e,box){
-  const fig=picture(e.image,e.alt);fig.classList.add('sl-labelled');
+  const fig=picture(e.image,e.alt,false);fig.classList.add('sl-labelled');
   const holder=fig.querySelector('img');const wrap=$('div','sl-marker-wrap');holder.replaceWith(wrap);wrap.append(holder);
   for(const m of e.markers||[]){const s=$('span','sl-marker',String(m.n));s.style.left=m.x*100+'%';s.style.top=m.y*100+'%';s.setAttribute('aria-hidden','true');wrap.append(s);}
   const list=$('div','sl-fields');const sels={};

@@ -32,7 +32,7 @@ async function answer(sec,e){
 const press=async loc=>{
  await loc.evaluate(el=>el.scrollIntoView({block:'center'}));
  try{await loc.click({timeout:10000});}
- catch(err){throw Error('press failed: '+await loc.evaluate(el=>JSON.stringify({rect:el.getBoundingClientRect(),inner:[innerWidth,innerHeight],vv:[visualViewport?.width,visualViewport?.height,visualViewport?.offsetLeft,visualViewport?.offsetTop,visualViewport?.scale],scroll:[scrollX,scrollY],doc:[document.documentElement.scrollWidth,document.documentElement.scrollHeight]}))+' '+err.message.split('\n')[0]);}
+ catch(err){throw Error('press failed: '+await loc.evaluate(el=>JSON.stringify({rect:el.getBoundingClientRect(),inner:[innerWidth,innerHeight],vv:[visualViewport?.width,visualViewport?.height,visualViewport?.offsetLeft,visualViewport?.offsetTop,visualViewport?.scale],scroll:[scrollX,scrollY],doc:[document.documentElement.scrollWidth,document.documentElement.scrollHeight,document.body.getBoundingClientRect().height],ex:[...document.querySelectorAll('.sl-ex')].map(s=>s.dataset.exercise+'@'+Math.round(s.getBoundingClientRect().top+scrollY)+'+'+Math.round(s.offsetHeight)),img:[...document.images].map(i=>i.complete+'/'+i.naturalHeight+'/'+Math.round(i.getBoundingClientRect().height))}))+' '+err.message.split('\n')[0]);}
 };
 const verdict=sec=>sec.locator('.sl-verdict').textContent();
 const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1?'':[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).slice(0,4).map(e=>e.tagName+'.'+e.className).join(', '));
