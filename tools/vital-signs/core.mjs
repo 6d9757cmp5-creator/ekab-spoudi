@@ -7,7 +7,7 @@ export const TOPICS=freezeRows([
  {id:'pulse',name:'Σφυγμός',hint:'Μέτρηση και καταγραφή καρδιακής συχνότητας',chapter:'saek-course-05.html#lesson-11'},
  {id:'bp',name:'Αρτηριακή πίεση',hint:'Σωστή τεχνική και σφάλματα μέτρησης',chapter:'saek-course-05.html#lesson-11'},
  {id:'resp',name:'Αναπνοές',hint:'Καταμέτρηση αναπνευστικής συχνότητας',chapter:'saek-course-05.html#lesson-8'},
- {id:'spo2',name:'Παλμική οξυμετρία',hint:'Τιμή και αξιοπιστία σήματος',chapter:'saek-course-10.html#lesson-9'},
+ {id:'spo2',name:'Παλμική οξυμετρία',hint:'Τιμή και αξιοπιστία σήματος',chapter:'saek-course-02.html#lesson-2'},
  {id:'temp',name:'Θερμοκρασία',hint:'Μονάδες και μέθοδος μέτρησης',chapter:'saek-course-05.html#lesson-11'},
  {id:'conscious',name:'Επίπεδο συνείδησης',hint:'Καταγραφή ανταπόκρισης με AVPU',chapter:'saek-course-05.html#lesson-10'},
  {id:'trend',name:'Επανεκτίμηση & παράδοση',hint:'Σύγκριση τιμών με ακριβή χρόνο',chapter:'saek-course-19.html#lesson-8'}
