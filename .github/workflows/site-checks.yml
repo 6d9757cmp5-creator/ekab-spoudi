@@ -63,7 +63,7 @@ jobs:
       - name: Install Chromium
         run: |
           npm install --no-save --no-audit --no-fund playwright@1.48.2
-          npx playwright install --with-deps chromium webkit
+          npx playwright install --with-deps chromium
       - name: Open each page on phone and desktop width
         run: |
           python3 -m http.server 8799 --bind 127.0.0.1 >/dev/null 2>&1 &
@@ -71,5 +71,19 @@ jobs:
           node tools/vital-signs/browser-smoke.mjs http://127.0.0.1:8799
           node tools/handover-lab/browser-smoke.mjs http://127.0.0.1:8799
           node tools/skills-lab/browser-smoke.mjs http://127.0.0.1:8799
-          node tools/skills-lab/browser-smoke.mjs http://127.0.0.1:8799 webkit
           node tools/ci/page-smoke.mjs http://127.0.0.1:8799
+
+  safari:
+    name: Skills labs on the Safari engine (WebKit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # The Playwright image carries WebKit and its system libraries, which the newest runner image lacks.
+    container: mcr.microsoft.com/playwright:v1.48.2-noble
+    steps:
+      - uses: actions/checkout@v4
+      - name: Answer every exercise on phone and desktop width
+        run: |
+          npm install --no-save --no-audit --no-fund --ignore-scripts playwright@1.48.2
+          python3 -m http.server 8799 --bind 127.0.0.1 >/dev/null 2>&1 &
+          sleep 2
+          node tools/skills-lab/browser-smoke.mjs http://127.0.0.1:8799 webkit
