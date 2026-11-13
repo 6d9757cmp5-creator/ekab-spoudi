@@ -1,7 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {TOPICS,SOURCES,CASES,ATMIST,CLOSED_LOOP,TRANSFER_STEPS,TRANSFER_FLAW,gradeCapture,gradeReadback,gradeOrder,gradePrealert,gradeStructure,gradeRecord,gradeTransferFlaw,modelHandover,norm} from './core.mjs';
+import {TOPICS,SOURCES,ATMIST,CLOSED_LOOP,TRANSFER_STEPS,TRANSFER_FLAW,gradeCapture,gradeReadback,gradeOrder,gradePrealert,gradeStructure,gradeRecord,gradeTransferFlaw,modelHandover,norm,loadCases} from './core.mjs';
+const CASES=loadCases(JSON.parse(readFileSync(new URL('./cases.json',import.meta.url),'utf8')));
+
+test('the case file is checked before use',()=>{
+ assert.throws(()=>loadCases([]));
+ assert.throws(()=>loadCases([{id:'x'}]));
+ assert.ok(Object.isFrozen(CASES[0].narrative[0]),'cases cannot be changed by the page');
+});
 
 test('six subsections, each with at least one source that exists in the published material',()=>{
  assert.deepEqual(TOPICS.map(t=>t.id),['capture','dispatch','prealert','structure','record','transfer']);

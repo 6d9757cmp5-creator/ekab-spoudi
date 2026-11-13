@@ -3,7 +3,9 @@
  * Δεν αποθηκεύει τίποτα· η πρόοδος της συνεδρίας μηδενίζεται με «Νέα εξάσκηση».
  */
 import {TOPICS,CASES,ATMIST,CLOSED_LOOP,TRANSFER_STEPS,TRANSFER_FLAW,RECORD_FIELDS,getCase,getTopic,topicSources,
- gradeCapture,gradeReadback,gradeOrder,gradePrealert,gradeStructure,gradeRecord,gradeTransferFlaw,modelHandover} from './core.mjs';
+ gradeCapture,gradeReadback,gradeOrder,gradePrealert,gradeStructure,gradeRecord,gradeTransferFlaw,modelHandover,loadCases} from './core.mjs';
+
+loadCases(await (await fetch(new URL('./cases.json',import.meta.url))).json());
 
 const $=(tag,cls='',text='')=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n;};
 const params=new URLSearchParams(location.search);

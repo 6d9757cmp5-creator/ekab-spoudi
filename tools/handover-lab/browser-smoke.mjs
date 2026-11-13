@@ -3,7 +3,9 @@
  * subsection renders, accepts a correct answer as fully correct and reports a wrong one. */
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
-import {CASES,ATMIST} from './core.mjs';
+import {readFileSync} from 'node:fs';
+import {ATMIST,loadCases} from './core.mjs';
+const CASES=loadCases(JSON.parse(readFileSync(new URL('./cases.json',import.meta.url),'utf8')));
 const base=(process.argv[2]||'http://127.0.0.1:8799').replace(/\/$/,'');
 const browser=await chromium.launch();
 const c=CASES[0];
