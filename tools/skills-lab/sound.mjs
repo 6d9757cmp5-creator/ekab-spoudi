@@ -80,7 +80,8 @@ export function drawSound(canvas,sound,spec,position=-1){
   spec._img=img;
  }
  ctx.putImageData(spec._img,0,wave);
- ctx.fillStyle=dark?'#cbd5e1':'#334155';ctx.font='11px system-ui,sans-serif';
- ctx.fillText(`${Math.round(spec.rows*spec.hzPerRow)} Hz`,4,wave+12);ctx.fillText('0 Hz',4,h-4);
+ // Ετικέτες συχνότητας: λευκό κείμενο με σκούρο περίγραμμα, ευανάγνωστο πάνω στο φασματογράφημα.
+ const fs=Math.max(11,Math.round(w/70));ctx.font=`600 ${fs}px system-ui,sans-serif`;ctx.lineWidth=3;ctx.strokeStyle='rgba(0,0,0,.75)';ctx.fillStyle='#fff';
+ for(const [t,y] of [[`${Math.round(spec.rows*spec.hzPerRow)} Hz`,wave+fs+3],['0 Hz',h-5]]){ctx.strokeText(t,6,y);ctx.fillText(t,6,y);}
  if(position>=0){const x=Math.round(position/(sound.samples.length/sound.rate)*w);ctx.fillStyle='#e11d48';ctx.fillRect(x-1,0,3,h);}
 }

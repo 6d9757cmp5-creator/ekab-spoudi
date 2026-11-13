@@ -85,8 +85,8 @@ test('order grading rejects duplicates; numbers accept the tolerance and a decim
 
 test('chest points: heart sites on the intercostal spaces of the drawing, patient sides mirrored front/back',()=>{
  const f=Object.fromEntries(CHEST_POINTS.front.map(p=>[p.id,p]));
- // Rib k at the sternum is drawn at y=62+22k: the 2nd space lies between ribs 2 and 3, and so on.
- const space=k=>62+22*k+11;
+ // Rib k at the sternum is drawn at y=50+28k: the 2nd space lies between ribs 2 and 3, and so on.
+ const space=k=>50+28*k+14;
  assert.equal(f.aortic.y,space(2));assert.equal(f.pulmonic.y,space(2));assert.equal(f.erb.y,space(3));
  assert.equal(f.tricuspid.y,space(4));assert.equal(f.mitral.y,space(5));
  assert.ok(f.aortic.x<140&&f.pulmonic.x>160,'aortic right of sternum = left on screen in the front view');
