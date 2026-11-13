@@ -162,9 +162,9 @@ export function _resetLimits(){hits.clear();day={key:'',count:0};}
 /** OpenAI-compatible free providers, used only when their key is set as a Worker secret. */
 export function freeProviders(env){
  const list=[];
- // Gemini first: the best Greek of the free models; Groq has the largest daily quota.
- if(env.GEMINI_API_KEY)list.push({name:'gemini',url:'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',modelsUrl:'https://generativelanguage.googleapis.com/v1beta/openai/models',key:env.GEMINI_API_KEY,model:env.GEMINI_MODEL||'gemini-3.8-flash'});
+ // Groq first (largest free quota, answered reliably in the live checks); Gemini second with a short timeout.
  if(env.GROQ_API_KEY)list.push({name:'groq',url:'https://api.groq.com/openai/v1/chat/completions',modelsUrl:'https://api.groq.com/openai/v1/models',key:env.GROQ_API_KEY,model:env.GROQ_MODEL||'llama-3.3-70b-versatile'});
+ if(env.GEMINI_API_KEY)list.push({name:'gemini',url:'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',modelsUrl:'https://generativelanguage.googleapis.com/v1beta/openai/models',key:env.GEMINI_API_KEY,model:env.GEMINI_MODEL||'gemini-3.8-flash'});
  if(env.OPENROUTER_API_KEY)list.push({name:'openrouter',url:'https://openrouter.ai/api/v1/chat/completions',modelsUrl:'https://openrouter.ai/api/v1/models',key:env.OPENROUTER_API_KEY,model:env.OPENROUTER_MODEL||'meta-llama/llama-3.3-70b-instruct:free'});
  return list;
 }
@@ -202,17 +202,22 @@ async function currentModel(p){
  }catch{return '';}
 }
 /** Low-cost paid providers (prepaid balance, no auto top-up): only after every free model failed, before Claude. */
+export const REASONING_MODEL=/gemini|gpt-oss|qwen3|deepseek-r|reason|thinking/i;
 export function cheapPaidProviders(env){
  return env.DEEPSEEK_API_KEY?[{name:'deepseek',url:'https://api.deepseek.com/chat/completions',key:env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL||'deepseek-chat'}]:[];
 }
 async function askOpenAiCompatible(p,messages,{maxTokens=MAX_OUTPUT}={}){
- // Gemini's thinking counts against max_tokens and is slow; a short answer from course text needs little.
- let effort=p.name==='gemini'?{reasoning_effort:'low'}:{};
+ // Reasoning models (Gemini, gpt-oss, Qwen3…) spend max_tokens on thinking first: ask for little
+ // thinking and leave room for the answer, else the reply comes back empty or too late.
+ let lowEffort=true;
  const call=async model=>{
   p.used=model;
+  const reasoning=REASONING_MODEL.test(model);
+  const extra=reasoning&&lowEffort?{reasoning_effort:'low'}:{};
   let r=await fetch(p.url,{method:'POST',headers:{authorization:'Bearer '+p.key,'content-type':'application/json'},
-   body:JSON.stringify({model,messages,max_tokens:maxTokens,temperature:0.3,...effort}),signal:AbortSignal.timeout(25000)});
-  if(r.status===400&&effort.reasoning_effort){effort={};r=await call(model);}
+   body:JSON.stringify({model,messages,max_tokens:reasoning?Math.min(maxTokens*3,1500):maxTokens,temperature:0.3,...extra}),
+   signal:AbortSignal.timeout(p.name==='gemini'?12000:15000)});
+  if(r.status===400&&extra.reasoning_effort){lowEffort=false;r=await call(model);}
   return r;
  };
  const remembered=discovered.get(p.name)?.model;
@@ -264,7 +269,7 @@ export function citeRepair(messages,draft){
   {role:'user',content:'Ξαναγράψε ακριβώς την ίδια απάντηση, βάζοντας μετά από κάθε πρόταση με πληροφορία την ένδειξη του αποσπάσματος από το οποίο προέρχεται, π.χ. [Τ1]. Αφαίρεσε ό,τι δεν στηρίζεται σε απόσπασμα. Γράψε μόνο την απάντηση.'}];
 }
 /** Tries each model in order; the first answer that passes the safety audit wins. */
-export async function answer(request,env,body,{askers}={}){
+export async function answer(request,env,body,{askers,deadlineMs=27000}={}){
  const messages=buildMessages(body);
  const chain=askers||[
   // Free providers with a key go first: their daily free quotas are far larger than the ~10,000
@@ -276,7 +281,10 @@ export async function answer(request,env,body,{askers}={}){
  ];
  const trace=[];
  let repaired=false;
+ // The browser waits 35 s; past ~27 s another model could not answer in time, so stop trying.
+ const started=Date.now();
  for(const step of chain){
+  if(Date.now()-started>deadlineMs){trace.push('deadline');break;}
   let text='';
   let failure='no-answer';
   try{text=String(await step.ask()||'').trim();}catch(e){text='';failure=failureReason(e);}
@@ -285,15 +293,15 @@ export async function answer(request,env,body,{askers}={}){
   // free model is asked to add them; the rewrite passes the full audit again. Never for the paid model.
   if(!verdict.ok&&verdict.reason==='missing-or-unknown-citation'&&!repaired&&step.repair){
    repaired=true;
-   trace.push(step.name+':'+verdict.reason);
+   trace.push((step.label?.()||step.name)+':'+verdict.reason);
    try{text=String(await step.repair(text)||'').trim();}catch{text='';}
    verdict=text?auditAssistantReply(text,body.passages):{ok:false,reason:'no-answer'};
    if(verdict.ok)return {text,provider:(step.label?.()||step.name)+'+cite',trace};
-   trace.push(step.name+'+cite:'+verdict.reason);
+   trace.push((step.label?.()||step.name)+'+cite:'+verdict.reason);
    continue;
   }
   if(verdict.ok)return {text,provider:step.label?.()||step.name,trace};
-  trace.push(step.name+':'+verdict.reason);
+  trace.push((step.label?.()||step.name)+':'+verdict.reason);
  }
  return {text:'',provider:'',trace};
 }
