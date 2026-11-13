@@ -26,6 +26,9 @@ async function answer(sec,e){
    }
  }
 }
+// Bring a control to the middle of the screen before pressing it, as a finger would; Playwright's own
+// scrolling misses some buttons in mobile WebKit on Linux.
+const press=async loc=>{await loc.evaluate(el=>el.scrollIntoView({block:'center'}));await loc.click();};
 const verdict=sec=>sec.locator('.sl-verdict').textContent();
 const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1?'':[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).slice(0,4).map(e=>e.tagName+'.'+e.className).join(', '));
 
@@ -44,7 +47,7 @@ try{
      const sec=page.locator(`.sl-ex[data-exercise="${e.id}"]`);
      await answer(sec,e);
      const wide=await overflow(page);assert.equal(wide,'',`${width}px ${id}/${e.id}: no horizontal overflow before checking`);
-     await sec.locator('.sl-check').click();
+     await press(sec.locator('.sl-check'));
      assert.match(await verdict(sec),/^Σωστά (\d+) από \1\./,`${width}px ${id}/${e.id} full marks`);
     }
     assert.equal(await overflow(page),'',`${width}px ${id}/${t.id}: no horizontal overflow`);
@@ -62,7 +65,7 @@ try{
   // A wrong answer is reported with the right one.
   await page.goto(`${base}/mentor-airway.html?topic=oxygen`,{waitUntil:'load'});await page.waitForSelector('body[data-ready]',{state:'attached'});
   const tf=page.locator('.sl-ex[data-exercise="o2-safety"]');
-  await tf.locator('input[name="o2-safety-2"][value="true"]').check();await tf.locator('.sl-check').click();
+  await tf.locator('input[name="o2-safety-2"][value="true"]').check();await press(tf.locator('.sl-check'));
   assert.match(await verdict(tf),/^Σωστά 0 από 6\./);
   assert.match(await tf.locator('.sl-rows').textContent(),/καύση/);
 
