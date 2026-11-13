@@ -32,6 +32,8 @@ export const SYSTEM_PROMPT=
 'Δομή: πρώτα η ουσία σε μία-δύο προτάσεις, μετά το «γιατί» ή ένα απλό παράδειγμα από τη δουλειά του διασώστη, '+
 'και στο τέλος μία σύντομη ερώτηση ελέγχου για να σκεφτεί ο σπουδαστής (χωρίς να δώσεις την απάντησή της). '+
 'Τα αποσπάσματα από αγγλικά βιβλία τα αποδίδεις στα ελληνικά, μόνο όσο σχετίζονται με την ερώτηση. Η ελληνική ύλη (ΣΑΕΚ, ΕΟΠΠΕΠ) έχει προτεραιότητα· αν διαφωνεί με βιβλίο, ακολούθησε την ελληνική ύλη. '+
+'Τα περισσότερα αγγλικά βιβλία είναι νοσηλευτικά: νοσοκομειακές πράξεις, κλίμακες ή εξετάσεις (π.χ. NIHSS, εργαστηριακές τιμές) δεν τις παρουσιάζεις ποτέ ως καθήκον του διασώστη. '+
+'Βάζεις την ένδειξη [Τn] μόνο σε πρόταση που λέει αυτό που γράφει το συγκεκριμένο απόσπασμα. '+
 'Αν τα αποσπάσματα δεν απαντούν στην ερώτηση, πες ειλικρινά τι δεν καλύπτουν και τι μπορεί να ρωτήσει αντί γι’ αυτό· μην μαντέψεις. '+
 'Μη γράφεις αριθμούς που δεν υπάρχουν στα αποσπάσματα. Μη δίνεις δοσολογίες, διαγνώσεις ή οδηγίες για πραγματικό περιστατικό· για επείγον παρέπεμψε στο 166/112. '+
 'Απάντησε στα ελληνικά, σε 80–180 λέξεις. '+ATLA_RUNTIME_RULES;
@@ -105,6 +107,7 @@ async function bookKeywords(env,question,glossary){
  * A chunk is used only if its search words weigh enough (MIN_BOOK_SCORE).
  */
 const MIN_BOOK_SCORE=10;
+const PREHOSPITAL_BOOKS=new Set(['wistech-emr-2025','who-bec']);
 export async function bookPassages(env,question,firstNumber,{keywords=bookKeywords}={}){
  if(!env.BOOKS||firstNumber>8)return [];
  const asset=async path=>{try{const r=await env.BOOKS.fetch(new Request('https://books/'+path));return r.ok?await r.json():null;}catch{return null;}};
@@ -121,7 +124,12 @@ export async function bookPassages(env,question,firstNumber,{keywords=bookKeywor
   score.set(chunk,(score.get(chunk)||0)+weight);matched.set(chunk,(matched.get(chunk)||0)+1);
  }
  // One strongly weighted word is enough ("hypoxia" in its definition); more words add a little.
- const rank=c=>score.get(c)*(1+0.3*(matched.get(c)-1));
+ // Chunks are stored book after book in books.json order, so a chunk's book follows from its index.
+ // Prehospital books (EMR, WHO Basic Emergency Care) are preferred over hospital nursing texts.
+ const ranges=[];let first=0;
+ for(const [id,b] of Object.entries(meta.books)){ranges.push([first,first+b.chunks,id]);first+=b.chunks;}
+ const bookOf=c=>ranges.find(([a,z])=>c>=a&&c<z)?.[2];
+ const rank=c=>score.get(c)*(1+0.3*(matched.get(c)-1))*(PREHOSPITAL_BOOKS.has(bookOf(c))?1.5:1);
  const best=[...score.keys()].filter(c=>rank(c)>=MIN_BOOK_SCORE).sort((a,b)=>rank(b)-rank(a)).slice(0,2);
  const out=[];
  for(const index of best){
