@@ -106,7 +106,8 @@ function init(){
   stage.replaceChildren();answered=false;
   if(index>=session.length){ending();return}
   const item=session[index],old=history[item.id];
-  stage.append($('p','ph-case-progress','Ερώτηση '+(index+1)+' / '+session.length+' · Σωστές '+score));
+  const progress=$('p','ph-case-progress','Ερώτηση '+(index+1)+' / '+session.length+' · Σωστές '+score);
+  stage.append(progress);
   stage.append($('p','ph-case-topic',item.topic+' · '+(item.kind==='combo'?'Συνδυασμός':'Μεμονωμένη καρτέλα')));
   stage.append($('h3','ph-case-question',item.question));
   if(old?.attempts)stage.append($('p','ph-case-return','Επανάληψη · Παλαιότερες προσπάθειες '+old.attempts));
@@ -122,6 +123,7 @@ function init(){
    button.addEventListener('click',()=>{
     if(answered)return;answered=true;
     const ok=i===item.correct;if(ok)score++;
+    progress.textContent='Ερώτηση '+(index+1)+' / '+session.length+' · Σωστές '+score;
     record(history,item,ok);
     [...options.children].forEach((b,j)=>{
      b.disabled=true;if(j===item.correct)b.classList.add('correct');

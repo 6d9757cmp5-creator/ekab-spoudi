@@ -18,6 +18,9 @@
 .aed-compact-status[data-error="true"]{color:#f2a99e}
 .aed-compact-status[hidden]{display:none!important}
 .aed-nearby-map .leaflet-popup-content{max-width:250px;line-height:1.45;font-family:inherit}
+.aed-nearby-map .leaflet-popup{max-width:calc(100vw - 40px)}
+.aed-nearby-map .leaflet-popup-content-wrapper{max-width:100%;box-sizing:border-box}
+.aed-nearby-map .leaflet-popup-content{max-width:min(250px,calc(100vw - 104px));overflow-wrap:anywhere}
 .aed-nearby-map .leaflet-popup-content p{margin:5px 0}
 .aed-nearby-map .leaflet-control-attribution{font-size:9px;line-height:1.2}
 .aed-minimal-panel .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0,0,0,0);overflow:hidden;white-space:nowrap}

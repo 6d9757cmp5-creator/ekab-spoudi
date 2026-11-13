@@ -156,6 +156,8 @@
       button.disabled = false;
       const lat = coords.latitude, lon = coords.longitude;
       if (!inCrete(lat, lon)) {
+        currentLocation = null;
+        render();
         msg('Η θέση σου φαίνεται εκτός Κρήτης. Εμφανίζονται μόνο τα επίσημα σημεία της Κρήτης.', true);
         return;
       }

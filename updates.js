@@ -1,15 +1,15 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.128', $=id=>document.getElementById(id);
+const CURRENT='27.1.129', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
- const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.86';style.dataset.ekabGlobalTools='';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.129';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.97';script.dataset.ekabGlobalTools='';document.head.append(script);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.129';script.dataset.ekabGlobalTools='';document.head.append(script);
 }
 
 /* Independent floating notebook: private notes and SOS only, never global search. */

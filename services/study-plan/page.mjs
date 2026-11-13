@@ -15,7 +15,11 @@ function doneSet(exam){
  if(exam.type==='eoppep-theory'){
   let state={};try{state=JSON.parse(read(EOPPEP_KEY,'{}'))||{}}catch{}
   const s=window.EkabStudyScheduler;
-  return new Set(bank.filter(q=>s?s.evaluate(state[q.id]).studied:false).map(q=>q.id));
+  return new Set(bank.filter(q=>{
+   const progress=state[q.id];
+   const read=typeof progress?.readCompletedAt==='string'&&Number.isFinite(Date.parse(progress.readCompletedAt));
+   return read||(s?s.evaluate(progress).studied:false);
+  }).map(q=>q.id));
  }
  if(exam.type==='eoppep-practical'){let t={};try{t=JSON.parse(read(PRACTICAL_KEY,'{}'))||{}}catch{}return new Set(Object.keys(t).filter(k=>t[k]))}
  const done=new Set();
@@ -95,4 +99,5 @@ function sources(){
  for(const s of SOURCES){const li=el('li');const a=el('a','',s.text);a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';li.append(a);ul.append(li)}
 }
 form();sources();render();
+window.addEventListener('pageshow',render);
 fetch('official_questions.json').then(r=>r.json()).then(data=>{bank=Array.isArray(data)?data:data.questions||[];render()}).catch(()=>{$('plan-msg').textContent='Οι ερωτήσεις ΕΟΠΠΕΠ δεν φορτώθηκαν. Δοκίμασε ξανά με σύνδεση.'});
