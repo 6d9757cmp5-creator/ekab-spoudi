@@ -28,13 +28,17 @@ async function answer(sec,e){
 }
 // Bring a control to the middle of the screen before pressing it, as a finger would; Playwright's own
 // scrolling misses some buttons in mobile WebKit on Linux.
-const press=async loc=>{await loc.evaluate(el=>el.scrollIntoView({block:'center'}));await loc.click();};
+const press=async loc=>{
+ await loc.evaluate(el=>el.scrollIntoView({block:'center'}));
+ try{await loc.click({timeout:10000});}
+ catch(err){throw Error('press failed: '+await loc.evaluate(el=>JSON.stringify({rect:el.getBoundingClientRect(),inner:[innerWidth,innerHeight],vv:[visualViewport?.width,visualViewport?.height,visualViewport?.offsetLeft,visualViewport?.offsetTop,visualViewport?.scale],scroll:[scrollX,scrollY],doc:[document.documentElement.scrollWidth,document.documentElement.scrollHeight]}))+' '+err.message.split('\n')[0]);}
+};
 const verdict=sec=>sec.locator('.sl-verdict').textContent();
 const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1?'':[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).slice(0,4).map(e=>e.tagName+'.'+e.className).join(', '));
 
 try{
  for(const width of [390,1280]){
-  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',...(engine===webkit&&width<500?{isMobile:true,hasTouch:true,deviceScaleFactor:3}:{})});
+  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',...(engine===webkit&&width<500?{isMobile:true,hasTouch:true}:{})});
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   for(const id of ['airway','equipment','auscultation']){
    const L=lab(id);
