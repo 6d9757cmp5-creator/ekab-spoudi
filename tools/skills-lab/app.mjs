@@ -2,8 +2,8 @@
  * Εργαστήρια δεξιοτήτων: διεπαφή. Η σελίδα δηλώνει ποιο εργαστήριο φορτώνει με <body data-lab="...">.
  * Όλη η αξιολόγηση γίνεται στο core.mjs· εδώ μόνο εμφάνιση. Δεν αποθηκεύει τίποτα.
  */
-import {loadLab,grade,CHEST_POINTS} from './core.mjs';
-import {parseWav,spectrogram,drawSound,clippedFraction} from './sound.mjs';
+import {loadLab,grade,CHEST_POINTS,displayOrder} from './core.mjs';
+import {parseWav,spectrogram,drawSound,clippedFraction,SATURATED} from './sound.mjs';
 
 const base=new URL('./',import.meta.url);
 const LAB=loadLab(await fetch(new URL(`labs/${document.body.dataset.lab}.json`,base)).then(r=>r.json()));
@@ -52,7 +52,9 @@ function soundView(file,label){
  const f=$('figure','sl-sound');
  // Σταθερή αναλογία από την αρχή: όταν φορτώσει το γράφημα η σελίδα δεν μετακινείται (Safari).
  const canvas=$('canvas');canvas.width=1000;canvas.height=320;canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`Κυματομορφή (πάνω) και φασματογράφημα (κάτω) του αποσπάσματος «${label}»`);
- const audio=$('audio');audio.controls=true;audio.preload='metadata';audio.src=mediaUrl(file);audio.setAttribute('aria-label','Αναπαραγωγή: '+label);
+ // Η αναπαραγωγή ζητά το αρχείο αφού το κατεβάσει το γράφημα, ώστε να το δώσει η cache του browser
+ // (ένα κατέβασμα). Όχι blob URL: το Safari/WebKit δεν παίζει WAV από blob.
+ const audio=$('audio');audio.controls=true;audio.preload='metadata';audio.dataset.file=file;audio.setAttribute('aria-label','Αναπαραγωγή: '+label);
  const info=$('p','sl-sound-info','Φόρτωση γραφήματος…');
  f.append(canvas,audio,info);
  let data=null,raf=0;
@@ -64,11 +66,13 @@ function soundView(file,label){
  const load=async()=>{
   if(!soundCache.has(file))soundCache.set(file,fetch(mediaUrl(file)).then(r=>r.arrayBuffer()).then(b=>{const sound=parseWav(b);return {sound,spec:spectrogram(sound.samples,sound.rate,{maxHz:1500})};}));
   data=await soundCache.get(file);
+  if(!audio.src)audio.src=mediaUrl(file);
   const sec=data.sound.samples.length/data.sound.rate,clip=clippedFraction(data.sound.samples);
-  info.textContent=`${Math.round(sec)} δευτ. · κορεσμός ${(clip*100).toFixed(2).replace('.',',')} %`;
+  // Πάνω από 0,1 % επίπεδων κορυφών η ηχογράφηση θεωρείται κορεσμένη (οι καθαρές έχουν σχεδόν μηδέν).
+  info.textContent=`${Math.round(sec)} δευτ. · κορεσμός: ${clip>=SATURATED?'ΝΑΙ ('+(clip*100).toFixed(1).replace('.',',')+' % των δειγμάτων)':'όχι'}`;
   info.dataset.clipped=String(clip);draw();
  };
- const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();load().catch(()=>{info.textContent='Το γράφημα δεν φορτώθηκε· ο ήχος παίζει κανονικά.';});}},{rootMargin:'200px'});
+ const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();load().catch(()=>{audio.src=mediaUrl(file);info.textContent='Το γράφημα δεν φορτώθηκε· ο ήχος παίζει κανονικά.';});}},{rootMargin:'200px'});
  io.observe(f);
  addEventListener('resize',draw);
  return f;
@@ -125,7 +129,8 @@ const RENDER={
   const holder=fig.querySelector('img');const wrap=$('div','sl-marker-wrap');holder.replaceWith(wrap);wrap.append(holder);
   for(const m of e.markers||[]){const s=$('span','sl-marker',String(m.n));s.style.left=m.x*100+'%';s.style.top=m.y*100+'%';s.setAttribute('aria-hidden','true');wrap.append(s);}
   const list=$('div','sl-fields');const sels={};
-  for(const n of Object.keys(e.answers)){const l=$('label','',`Αριθμός ${n}`);const s=selectOf(e.options,'— επίλεξε —');s.dataset.key=n;sels[n]=s;l.append(s);list.append(l);}
+  const shuffled=displayOrder(e.id,e.options.length).map(i=>e.options[i]);
+  for(const n of Object.keys(e.answers)){const l=$('label','',`Αριθμός ${n}`);const s=selectOf(shuffled,'— επίλεξε —');s.dataset.key=n;sels[n]=s;l.append(s);list.append(l);}
   const out=resultBox();
   box.append(fig,list,checkButton('Έλεγχος',()=>{
    const r=check(out,e,Object.fromEntries(Object.entries(sels).map(([k,s])=>[k,s.value])));if(!r)return;
@@ -168,8 +173,8 @@ const RENDER={
   }),out);
  },
  classify(e,box){
-  const list=$('div','sl-fields sl-classify');const sels=[];
-  e.items.forEach((it,i)=>{const l=$('label','',it.text);const s=$('select');s.append(new Option('— κατηγορία —',''));for(const c of e.categories)s.append(new Option(c.label,c.id));s.dataset.item=String(i);sels.push(s);l.append(s);list.append(l);});
+  const list=$('div','sl-fields sl-classify');const sels=[];const order=displayOrder(e.id,e.items.length);
+  order.map(i=>[e.items[i],i]).forEach(([it,i])=>{const l=$('label','',it.text);const s=$('select');s.append(new Option('— κατηγορία —',''));for(const c of e.categories)s.append(new Option(c.label,c.id));s.dataset.item=String(i);sels[i]=s;l.append(s);list.append(l);});
   const out=resultBox();
   box.append(list,checkButton('Έλεγχος',()=>{
    const r=check(out,e,sels.map(s=>s.value));if(!r)return;sels.forEach((s,i)=>s.classList.toggle('sl-input-bad',!r.rows[i].ok));

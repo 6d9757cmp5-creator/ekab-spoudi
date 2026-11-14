@@ -180,3 +180,5 @@ html[data-theme="dark"] .vs-step-nav button[aria-pressed="true"]{background:#204
 html[data-theme="dark"] .vs-sources summary{color:#8fd8cf}
 html[data-theme="dark"] .vs-panel{box-shadow:none}
 html[data-theme="dark"] .vs-sources details{background:var(--paper)}
+/* Dimmed readouts keep readable unit labels (WCAG AA). */
+.vs-readout>small{color:#d3e4e6}

@@ -28,9 +28,9 @@
      "href": "ektimisi.html#page-100"
     },
     {
-     "label": "Open RN · Nursing Skills 2e, κεφ. 10 Respiratory Assessment (CC BY 4.0)",
+     "label": "Open RN · Nursing Skills 2e, κεφ. 10 Respiratory Assessment",
      "book": "openrn-skills",
-     "href": "https://wtcs.pressbooks.pub/nursingskills/"
+     "href": "https://www.wistechopen.org/textbook/nursing-skills-2nd-edition"
     },
     {
      "label": "Fraiwan et al. · Lung sounds dataset, Mendeley Data 2021 (CC BY 4.0)",
@@ -117,9 +117,9 @@
        "why": "Open RN, κεφ. 10."
       },
       {
-       "text": "Ο stridor ακούγεται συνήθως στην εισπνοή και σχετίζεται με απόφραξη στο ύψος του ανώτερου αεραγωγού ή της τραχείας.",
-       "answer": true,
-       "why": "Open RN, κεφ. 10."
+       "text": "Ο stridor προέρχεται από τους μικρούς αεραγωγούς βαθιά μέσα στους πνεύμονες.",
+       "answer": false,
+       "why": "Ο stridor είναι σκληρός ήχος από απόφραξη στο ύψος του ανώτερου αεραγωγού ή της τραχείας, συνήθως στην εισπνοή (Open RN, κεφ. 10· Εκτίμηση Κ5)."
       },
       {
        "text": "Από τον ήχο και μόνο ο διασώστης μπορεί να διαγνώσει πνευμονία ή καρδιακή ανεπάρκεια.",
@@ -149,9 +149,9 @@
      "href": "saek-course-05.html#lesson-11"
     },
     {
-     "label": "Open RN · Nursing Skills 2e, κεφ. 9 Cardiovascular Assessment (CC BY 4.0)",
+     "label": "Open RN · Nursing Skills 2e, κεφ. 9 Cardiovascular Assessment",
      "book": "openrn-skills",
-     "href": "https://wtcs.pressbooks.pub/nursingskills/"
+     "href": "https://www.wistechopen.org/textbook/nursing-skills-2nd-edition"
     },
     {
      "label": "CirCor DigiScope Phonocardiogram Dataset, PhysioNet (ODC-By 1.0)",
@@ -216,12 +216,17 @@
        "why": "Ο σχολιαστής κατέγραψε φύσημα, πιο ακουστό στη μιτροειδή εστία, όπου έγινε η ηχογράφηση. Στο φασματογράφημα η ενέργεια γεμίζει το διάστημα ανάμεσα στους τόνους."
       },
       {
+       "media": "auscultation/heart-4.wav",
+       "answer": "Και πρόσθετος ήχος (φύσημα) ανάμεσα στους τόνους",
+       "why": "Ο σχολιαστής κατέγραψε φύσημα, πιο ακουστό στην πνευμονική εστία, όπου έγινε η ηχογράφηση."
+      },
+      {
        "media": "auscultation/heart-2.wav",
        "answer": "Μόνο οι δύο τόνοι (S1–S2)",
        "why": "Χωρίς φύσημα κατά τον σχολιαστή: καθαροί, σύντομοι τόνοι με «ήσυχο» διάστημα ανάμεσα."
       },
       {
-       "media": "auscultation/heart-4.wav",
+       "media": "auscultation/heart-5.wav",
        "answer": "Και πρόσθετος ήχος (φύσημα) ανάμεσα στους τόνους",
        "why": "Ο σχολιαστής κατέγραψε φύσημα, πιο ακουστό στην πνευμονική εστία, όπου έγινε η ηχογράφηση."
       },
@@ -229,11 +234,6 @@
        "media": "auscultation/heart-1.wav",
        "answer": "Μόνο οι δύο τόνοι (S1–S2)",
        "why": "Χωρίς φύσημα κατά τον σχολιαστή."
-      },
-      {
-       "media": "auscultation/heart-5.wav",
-       "answer": "Και πρόσθετος ήχος (φύσημα) ανάμεσα στους τόνους",
-       "why": "Ο σχολιαστής κατέγραψε φύσημα, πιο ακουστό στην πνευμονική εστία, όπου έγινε η ηχογράφηση."
       }
      ]
     },
@@ -243,9 +243,9 @@
      "prompt": "Σωστό ή λάθος;",
      "items": [
       {
-       "text": "Οι δύο φυσιολογικοί καρδιακοί τόνοι S1 και S2 ακούγονται σαν «λουπ-ντουπ».",
-       "answer": true,
-       "why": "Open RN, κεφ. 9."
+       "text": "Το «λουπ-ντουπ» που ακούμε σε κάθε κύκλο είναι πρόσθετος, παθολογικός ήχος.",
+       "answer": false,
+       "why": "Είναι οι δύο φυσιολογικοί καρδιακοί τόνοι S1 και S2 (Open RN, κεφ. 9)."
       },
       {
        "text": "Φύσημα είναι ήχος σαν φύσημα ή «σουίς» από στροβιλώδη ροή αίματος.",
@@ -260,7 +260,7 @@
       {
        "text": "Η μέτρηση κύκλων σε 10 δευτερόλεπτα επί 6 δίνει τη συχνότητα ανά λεπτό, αλλά σε ακανόνιστο ρυθμό χρειάζεται μέτρηση για ολόκληρο λεπτό.",
        "answer": true,
-       "why": "Η καλύτερη πρακτική είναι μέτρηση 60 δευτερολέπτων, ιδίως όταν ο ρυθμός είναι ακανόνιστος (Open RN, κεφ. 7 και 9)."
+       "why": "Η καλύτερη πρακτική είναι μέτρηση 60 δευτερολέπτων, ιδίως όταν ο ρυθμός είναι ακανόνιστος (Open RN, κεφ. 1 και 9)."
       }
      ]
     }
@@ -280,9 +280,9 @@
      "href": "saek-course-01.html#lesson-10"
     },
     {
-     "label": "Open RN · Nursing Skills 2e, κεφ. 9 και 10: σημεία ακρόασης (CC BY 4.0)",
+     "label": "Open RN · Nursing Skills 2e, κεφ. 9 και 10: σημεία ακρόασης",
      "book": "openrn-skills",
-     "href": "https://wtcs.pressbooks.pub/nursingskills/"
+     "href": "https://www.wistechopen.org/textbook/nursing-skills-2nd-edition"
     }
    ],
    "exercises": [
@@ -358,9 +358,9 @@
        "why": "Open RN, κεφ. 10: η εναλλαγή δεξιά–αριστερά επιτρέπει σύγκριση."
       },
       {
-       "text": "Ακούμε όλο τον αναπνευστικό κύκλο, εισπνοή και εκπνοή.",
-       "answer": true,
-       "why": "Διαφορετικοί ήχοι μπορεί να ακούγονται στην εισπνοή και στην εκπνοή (Open RN, κεφ. 10)."
+       "text": "Στην ακρόαση πνευμόνων αρκεί να ακούσουμε μόνο την εισπνοή.",
+       "answer": false,
+       "why": "Ακούμε όλο τον αναπνευστικό κύκλο· διαφορετικοί ήχοι μπορεί να ακούγονται στην εισπνοή και στην εκπνοή (Open RN, κεφ. 10)."
       },
       {
        "text": "Η ακρόαση πάνω από ωμοπλάτη ή κλείδα δίνει την καλύτερη μετάδοση του ήχου.",
@@ -386,9 +386,9 @@
      "href": "saek-course-05.html#lesson-8"
     },
     {
-     "label": "Open RN · Nursing Skills 2e, κεφ. 10: θέση στηθοσκοπίου και θόρυβοι τριβής (CC BY 4.0)",
+     "label": "Open RN · Nursing Skills 2e, κεφ. 10: θέση στηθοσκοπίου και θόρυβοι τριβής",
      "book": "openrn-skills",
-     "href": "https://wtcs.pressbooks.pub/nursingskills/"
+     "href": "https://www.wistechopen.org/textbook/nursing-skills-2nd-edition"
     },
     {
      "label": "CirCor DigiScope Phonocardiogram Dataset, PhysioNet (ODC-By 1.0)",
@@ -406,14 +406,14 @@
      ],
      "items": [
       {
-       "media": "auscultation/noisy-1.wav",
-       "answer": "Μη αξιολογήσιμη: χρειάζεται επανάληψη",
-       "why": "Ο σχολιαστής δεν μπόρεσε να κρίνει αν υπάρχει φύσημα («Unknown»). Μεγάλοι θόρυβοι καλύπτουν τους τόνους και μέρος των δειγμάτων φτάνει στο όριο της κλίμακας (κορεσμός)."
-      },
-      {
        "media": "auscultation/heart-4.wav",
        "answer": "Αξιολογήσιμη ηχογράφηση",
        "why": "Καθαροί κύκλοι· ο σχολιαστής μπόρεσε να χαρακτηρίσει την ηχογράφηση (φύσημα παρόν)."
+      },
+      {
+       "media": "auscultation/noisy-1.wav",
+       "answer": "Μη αξιολογήσιμη: χρειάζεται επανάληψη",
+       "why": "Ο σχολιαστής δεν μπόρεσε να κρίνει αν υπάρχει φύσημα («Unknown»). Μεγάλοι θόρυβοι καλύπτουν τους τόνους και μέρος των δειγμάτων φτάνει στο όριο της κλίμακας (κορεσμός)."
       },
       {
        "media": "auscultation/noisy-2.wav",
