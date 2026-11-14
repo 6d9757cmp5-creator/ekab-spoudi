@@ -1,0 +1,36 @@
+{
+  "source": "DBCLS/BodyParts3D 4.3 (Anatomography)",
+  "sourceUri": "https://lifesciencedb.jp/bp3d/",
+  "license": "CC BY 4.0 according to current official license page; verify source release terms",
+  "attribution": "BodyParts3D, The Database Center for Life Science",
+  "category": "ATLA Anatomy Lab only - high resolution research source",
+  "compiledIndex": "index.json",
+  "totalBytes": 201746904,
+  "sha256": "4a1a694572e055b5dcfac3f0414cf380aad064385dd6d5affdb42c9cbf2d57d6",
+  "partCount": 4,
+  "parts": [
+    {
+      "file": "mesh-part-00.bin",
+      "bytes": 67108864,
+      "sha256": "2caf8076628a715915d91394778cb38c3f6a78bcff17fc8e092ab9551723580d"
+    },
+    {
+      "file": "mesh-part-01.bin",
+      "bytes": 67108864,
+      "sha256": "f7e782c1136c47f60fe4335ec7631cf5f215c4fa6d06bfc9bc455f42eceb10be"
+    },
+    {
+      "file": "mesh-part-02.bin",
+      "bytes": 67108864,
+      "sha256": "6e7f8a4a5f3516f38ecbc3557f1a296c4f97dde23bdedec336be02f71145256c"
+    },
+    {
+      "file": "mesh-part-03.bin",
+      "bytes": 420312,
+      "sha256": "8e858b77519f4357fb25f32f1e887ebf4e72424d446be440f9f52cdbf3708343"
+    }
+  ],
+  "anatomyElements": 3210,
+  "namedStructures": 3954,
+  "validation": "Source importer successful; no independent clinical/visual QA"
+}

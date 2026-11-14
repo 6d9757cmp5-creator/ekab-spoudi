@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 730" role="img" aria-labelledby="title desc"><title id="title">Σταθμός διαβιβαστή: εικονογράφηση κάρτας συμβάντος, θέσης και χρόνων</title><desc id="desc">Πρωτότυπη σχηματική κονσόλα επείγουσας κλήσης με ακουστικά, πεδία τοποθεσίας, επικοινωνία επανάκλησης, αναφερόμενο γεγονός, αριθμό ασθενών, μεταβολή κατάστασης, αποστολή πληρώματος, χρονοσήμανση και χάρτη διαδρομής. Δείγμα οθόνης χωρίς πραγματικά δεδομένα ασθενών, αριθμούς ή εφαρμογή.</desc><rect width="1200" height="730" fill="#f5f9fc"/><style>text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#163950}.h{font-size:34px;font-weight:700}.t{font-size:24px;font-weight:700}.s{font-size:19px}.mini{font-size:17px}.lead{fill:none;stroke:#507c97;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.panel{fill:#fff;stroke:#acc8d7;stroke-width:3}</style>
+<text x="600" y="50" text-anchor="middle" class="h">Επείγουσα κλήση · Κονσόλα συντονισμού</text>
+<text x="600" y="83" text-anchor="middle" class="s">Σχηματική οθόνη — τα στοιχεία προέρχονται από αναφορά, δεν θεωρούνται διάγνωση</text>
+<rect x="35" y="117" width="1129" height="537" rx="25" fill="#e6eff5" stroke="#6388a1" stroke-width="6"/>
+<!-- screen -->
+<rect x="81" y="153" width="815" height="456" rx="18" fill="#fff" stroke="#6690a9" stroke-width="5"/>
+<rect x="102" y="175" width="774" height="56" rx="10" fill="#e1eef6"/>
+<text x="123" y="210" class="t">ΚΑΡΤΑ ΣΥΜΒΑΝΤΟΣ · Εκπαιδευτικό δείγμα</text>
+<g transform="translate(108 249)">
+<rect width="368" height="140" rx="12" class="panel"/>
+<text x="20" y="35" class="t">Θέση / πρόσβαση</text>
+<path d="M43 68C15 71 15 104 43 120C73 103 72 75 43 68Z" fill="#dbebf6" stroke="#3d7798" stroke-width="4"/>
+<circle cx="44" cy="86" r="11" fill="#3d7798"/>
+<text x="87" y="90" class="s">Δρόμος · είσοδος · σημείο</text>
+<text x="87" y="118" class="mini">Επαλήθευση με καλούντα</text>
+</g>
+<g transform="translate(497 249)"><rect width="373" height="140" rx="12" class="panel"/><text x="20" y="35" class="t">Καλών / επανάκληση</text>
+<rect x="30" y="61" width="64" height="57" rx="8" fill="#d6edf6" stroke="#4286a1" stroke-width="4"/>
+<path d="M54 70Q44 81 60 102Q76 116 86 105" fill="none" stroke="#4286a1" stroke-width="7" stroke-linecap="round"/>
+<text x="115" y="88" class="s">Στοιχεία επικοινωνίας</text><text x="115" y="117" class="mini">Μόνο τα απολύτως αναγκαία</text></g>
+<g transform="translate(108 410)"><rect width="368" height="174" rx="12" class="panel"/><text x="20" y="39" class="t">Τι συνέβη;</text>
+<path d="M39 71H159M39 102H235M39 133H198" stroke="#6b91a6" stroke-width="8" stroke-linecap="round"/>
+<text x="250" y="85" class="mini">Ασθενείς</text><text x="250" y="115" class="mini">Κίνδυνοι</text><text x="250" y="145" class="mini">Αλλαγές</text></g>
+<g transform="translate(497 410)"><rect width="373" height="174" rx="12" class="panel"/><text x="20" y="39" class="t">Χρόνοι και ανάθεση</text>
+<path d="M40 108H314" class="lead"/>
+<circle cx="72" cy="108" r="16" fill="#d9ebf5" stroke="#56869e" stroke-width="4"/><text x="72" y="145" class="mini" text-anchor="middle">Κλήση</text><circle cx="185" cy="108" r="16" fill="#d9f1e6" stroke="#56869e" stroke-width="4"/><text x="185" y="145" class="mini" text-anchor="middle">Ανάθεση</text><circle cx="292" cy="108" r="16" fill="#fceadb" stroke="#56869e" stroke-width="4"/><text x="292" y="145" class="mini" text-anchor="middle">Ενημέρωση</text></g>
+<!-- Headset / call taker -->
+<circle cx="1020" cy="245" r="83" fill="#e1ecf5" stroke="#6091aa" stroke-width="6"/>
+<path d="M961 229Q961 154 1020 159Q1083 159 1084 233" fill="none" stroke="#3d7596" stroke-width="11"/>
+<rect x="944" y="214" width="28" height="74" rx="13" fill="#42809f"/>
+<rect x="1070" y="214" width="28" height="74" rx="13" fill="#42809f"/>
+<path d="M1088 277Q1074 309 1040 309" fill="none" stroke="#42809f" stroke-width="7"/>
+<circle cx="1036" cy="309" r="9" fill="#42809f"/>
+<path d="M952 376H1085" stroke="#7eabbc" stroke-width="7"/>
+<rect x="930" y="394" width="174" height="95" rx="18" fill="#d3e8f2" stroke="#638fa7" stroke-width="5"/>
+<path d="M966 420L991 437L1034 410L1067 449" stroke="#6391a6" stroke-width="6" fill="none"/>
+<circle cx="999" cy="443" r="10" fill="#c65e68"/>
+<text x="1020" y="538" text-anchor="middle" class="t">Διαβιβαστής</text>
+</svg>

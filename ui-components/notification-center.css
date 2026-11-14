@@ -1,0 +1,32 @@
+/* In-app bell center; does not replace contextual error messages. */
+.ekab-notice-root{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;z-index:101}
+.ekab-notice-trigger{position:relative!important;overflow:visible!important}
+.ekab-notice-count{position:absolute;top:-6px;right:-7px;min-width:17px;height:17px;line-height:17px;border-radius:9px;background:#d54140;color:#fff;font-size:10px;font-weight:800;text-align:center;padding:0 3px;border:1px solid #fff;pointer-events:none}
+.ekab-notice-count[hidden],.ekab-notice-panel[hidden]{display:none!important}
+.ekab-notice-panel{position:absolute;right:0;top:calc(100% + 10px);z-index:10100;width:min(390px,calc(100vw - 20px));max-height:min(70vh,570px);overflow:auto;overscroll-behavior:contain;background:#fff;color:#183548;border:1px solid #cbdde7;border-radius:15px;box-shadow:0 16px 45px #09273b55;padding:14px;font-family:system-ui,-apple-system,sans-serif;text-align:left}
+.ekab-notice-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ekab-notice-head h2{font-size:1rem;line-height:1.3;margin:0}
+.ekab-notice-close,.ekab-notice-markall,.ekab-notice-read{border:0;background:transparent;color:#175c83;cursor:pointer;font-size:.76rem;font-weight:700;padding:8px}
+.ekab-notice-markall{display:block;margin:3px 0 8px auto}
+.ekab-notice-markall:disabled{opacity:.45;cursor:default}
+.ekab-notice-list{display:grid;gap:8px}
+.ekab-notice-empty{font-size:.85rem;color:#637b89;text-align:center;margin:16px 0}
+.ekab-notice-entry{background:#f4f8fb;border:1px solid #e0e9ef;border-radius:11px;padding:10px 12px}
+.ekab-notice-entry.is-unread{border-left:4px solid #1687bd;background:#eef8fd}
+.ekab-notice-entry-heading{display:flex;justify-content:space-between;align-items:baseline;gap:7px}
+.ekab-notice-entry-heading strong{font-size:.84rem;line-height:1.35}
+.ekab-notice-entry-heading time{font-size:.68rem;color:#667f8e;white-space:nowrap}
+.ekab-notice-entry p{font-size:.78rem;line-height:1.45;margin:6px 0}
+.ekab-notice-resolved{font-size:.72rem;color:#53736b}
+.ekab-notice-entry-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
+.ekab-notice-action{background:#176e99;color:#fff;border:0;border-radius:7px;cursor:pointer;font-size:.77rem;padding:8px 11px;font-weight:700}
+.ekab-notice-trigger:focus-visible,.ekab-notice-panel button:focus-visible{outline:2px solid #58b4e8;outline-offset:2px}
+.ekab-notice-center-ready #checkAppUpdates{display:none!important}
+.ekab-notice-center-ready #updateBanner:not([data-ekab-critical="true"]){display:none!important}
+html[data-theme="dark"] .ekab-notice-panel{background:#102739;color:#eff8fd;border-color:#426477}
+html[data-theme="dark"] .ekab-notice-entry{background:#18384b;border-color:#36576a}
+html[data-theme="dark"] .ekab-notice-entry.is-unread{background:#1a4054;border-left-color:#70d7f6}
+html[data-theme="dark"] .ekab-notice-entry-heading time,html[data-theme="dark"] .ekab-notice-empty{color:#b2cbd8}
+html[data-theme="dark"] .ekab-notice-close,html[data-theme="dark"] .ekab-notice-markall,html[data-theme="dark"] .ekab-notice-read{color:#a6e0ff}
+html[data-theme="dark"] .ekab-notice-resolved{color:#a9d3bc}
+@media(max-width:420px){.ekab-notice-panel{position:fixed;left:10px;right:10px;top:calc(64px + env(safe-area-inset-top,0px));width:auto;max-height:72vh}}

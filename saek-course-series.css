@@ -1,0 +1,44 @@
+/* Ανατομία ΣΑΕΚ — ένας προβολέας, πολλά διαδοχικά εκπαιδευτικά μέρη. */
+.saek-series{margin:18px 0}
+.saek-series h2{margin:4px 0 8px}
+.saek-series-intro{font-size:.89rem;line-height:1.55;color:var(--ink)}
+.saek-series-viewport{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.saek-series-track{display:flex;align-items:stretch;transition:transform .32s ease;will-change:transform}
+.saek-series-slide{box-sizing:border-box;flex:0 0 100%;min-width:0;padding:15px}
+.saek-series-slide h3{font-size:1.03rem;margin:0 0 7px}
+.saek-series-slide .saek-series-kicker{font-size:.8rem;color:var(--muted);margin:0 0 5px}
+.saek-series-slide .saek-series-frame{display:block;width:100%;aspect-ratio:16/9;border:none;border-radius:10px;background:#102d40}
+.saek-series-slide .saek-series-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.saek-series-slide .saek-series-actions a{font-size:.86rem;text-decoration:underline}
+.saek-series-swipe-strip{border:1px dashed var(--line);border-radius:10px;padding:11px 12px;margin:10px 0 0;text-align:center;font-size:.83rem;color:var(--muted);touch-action:pan-y;user-select:none}
+.saek-series-controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px}
+.saek-series-controls button{font-weight:700;min-width:94px}
+.saek-series-controls button:disabled{opacity:.45;cursor:not-allowed}
+.saek-series-status{font-size:.85rem;text-align:center;flex:1}
+.saek-series-parts{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;overscroll-behavior-x:contain;padding:0 0 8px;margin-top:12px}
+.saek-series-parts a{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-size:.79rem;padding:9px 12px;cursor:pointer}
+.saek-series-parts a:hover{border-color:#2d84a7;background:#e8f4fa}
+.saek-series-parts a[aria-current="step"]{background:#1c566f;border-color:#1c566f;color:#fff}
+.saek-series-controls button:focus-visible,.saek-series-parts a:focus-visible{outline:3px solid #e5a84c;outline-offset:3px}
+html[data-theme="dark"] .saek-series-viewport,html[data-theme="dark"] .saek-series-parts a{background:#193647;border-color:#34596b;color:#e8f3f8}
+html[data-theme="dark"] .saek-series-swipe-strip{border-color:#34596b;color:#b9d2df}
+html[data-theme="dark"] .saek-series-parts a[aria-current="step"]{background:#266f91;color:#fff}
+@media(max-width:520px){
+ .saek-series-slide{padding:10px}
+ .saek-series-controls{gap:7px}
+ .saek-series-controls button{padding:9px;min-width:75px;font-size:.78rem}
+ .saek-series-status{font-size:.79rem}
+ .saek-series-slide .saek-series-frame{aspect-ratio:16/11}
+}
+@media(prefers-reduced-motion:reduce){.saek-series-track{transition:none}}
+
+/* Mobile embedded player: tall viewport without requiring a manual vertical-view switch. */
+@media(max-width:760px){
+ .saek-series,.saek-series-viewport,.saek-series-track,.saek-series-slide{min-width:0;max-width:100%;box-sizing:border-box}
+ .saek-series-viewport{width:100%;overflow:hidden}
+ .saek-series-slide .saek-series-frame{display:block;width:100%;height:min(72svh,650px);min-height:360px;aspect-ratio:auto;border:0}
+ .saek-series-slide{overflow:hidden}
+}
+@media(max-width:760px) and (orientation:landscape){
+ .saek-series-slide .saek-series-frame{height:min(75svh,480px);min-height:220px}
+}

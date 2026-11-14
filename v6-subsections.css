@@ -1,0 +1,314 @@
+/* V6 palette and shared page treatment for the real learning sections. */
+:root {
+  color-scheme: light;
+  --ink: #20372e;
+  --muted: #66776f;
+  --line: #dfe7df;
+  --bg: #f3f6f0;
+  --navy: #193e33;
+  --blue: #287858;
+  --light: #e9f3e9;
+  --green: #287858;
+  --warm: #f7f0df;
+  --v6-surface: #fffefa;
+  --v6-soft: #edf4eb;
+  --v6-accent: #287858;
+  --v6-accent-strong: #1e6248;
+  --v6-shadow: 0 8px 24px rgba(31, 62, 43, .055);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e7eee9;
+  --muted: #b5c3b8;
+  --line: #394b42;
+  --bg: #17231f;
+  --navy: #192821;
+  --blue: #91cea0;
+  --light: #294438;
+  --green: #91cea0;
+  --warm: #453b28;
+  --v6-surface: #1c2b24;
+  --v6-soft: #263a30;
+  --v6-accent: #91cea0;
+  --v6-accent-strong: #b5e4bb;
+  --v6-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+}
+
+body:not(.v6-home) {
+  background: var(--bg) !important;
+  color: var(--ink);
+}
+
+body:not(.v6-home) :is(.top, .legacy-utilities) {
+  background: var(--navy) !important;
+}
+
+body:not(.v6-home) .top .nav :is(a, button) {
+  color: #e3eee5;
+}
+
+body:not(.v6-home) .top .nav :is(a, button):hover,
+body:not(.v6-home) .top .nav :is(a, button).active,
+body:not(.v6-home) .top .nav :is(a, button)[aria-current="page"] {
+  color: #fff;
+  border-color: #a4d4a8;
+}
+
+body:not(.v6-home) :is(.main, .ph-main, .seminar-main) {
+  color: var(--ink);
+}
+
+body:not(.v6-home) :is(.panel, .fold, .hub-action, .home-card, .hub-study,
+  .ph-panel, .lesson-more, .lesson-process, .knowledge-check, .reader-fold, .course-tile,
+  .reader-layout .video-panel, .cloud-controls, .sync-summary) {
+  background-color: var(--v6-surface) !important;
+  color: var(--ink);
+  border-color: var(--line) !important;
+  border-radius: 15px;
+  box-shadow: var(--v6-shadow);
+}
+
+body:not(.v6-home) :is(.seminar-card, .seminar-unit:not(.active), .seminar-backup,
+  .seminar-tabs, .seminar-quiz-modes, .seminar-result-item, .seminar-mcq-feedback:not(.is-correct):not(.is-incorrect),
+  .saek-series-viewport, .saek-series-swipe-strip, .saek-series-parts a,
+  .saek-gallery-card, .saek-gallery-dialog, .saek-hub .hub-links a,
+  .eoppep-hub .eop-practical) {
+  background-color: var(--v6-surface) !important;
+  color: var(--ink);
+  border-color: var(--line) !important;
+  border-radius: 13px;
+}
+
+body:not(.v6-home) :is(.stat, .library-summary span, .course-icon,
+  .chapter-index, .pill, .pill-button:not(.review), .hub-course-count, .hub-resources-icon) {
+  background-color: var(--v6-soft) !important;
+  border-color: var(--line) !important;
+  color: var(--v6-accent-strong) !important;
+}
+
+body:not(.v6-home) :is(.btn:not(.secondary):not(.ghost), .hub-semester-tabs button[aria-pressed="true"],
+  .hub-course-count[aria-pressed="true"], .saek-series-parts a[aria-current="step"],
+  .saek-gallery-more button, #imageRetryButton, .aed-locate-button,
+  .ph-main .ph-button:not(.secondary), .seminar-unit.active, .seminar-tabs button.active,
+  .seminar-quiz-modes button.active) {
+  background: var(--v6-accent) !important;
+  border-color: var(--v6-accent) !important;
+  color: #fff !important;
+}
+
+body:not(.v6-home) :is(.btn.secondary, .btn.ghost, .hub-semester-tabs button:not([aria-pressed="true"])) {
+  background: var(--v6-soft) !important;
+  border-color: var(--line) !important;
+  color: var(--v6-accent-strong) !important;
+}
+
+body:not(.v6-home) :is(.back, .eyebrow, .reader-breadcrumb a,
+  .chapter-direct-link, .link-inline, .lesson-source-link) {
+  color: var(--v6-accent-strong);
+}
+
+body:not(.v6-home) :is(.lesson-sos, .lesson-expanded, .chapter-toc-links a) {
+  background: var(--v6-soft) !important;
+  border-color: var(--line) !important;
+}
+
+body:not(.v6-home) :is(.lesson-sos, .lesson-expanded) {
+  border-left-color: var(--v6-accent) !important;
+}
+
+body:not(.v6-home) :is(.knowledge-check > summary, .lesson-more > summary,
+  .lesson-process > summary, .chapter-toc-links a) {
+  color: var(--v6-accent-strong) !important;
+}
+
+body:not(.v6-home) .saek-gallery-header {
+  background: var(--navy) !important;
+}
+
+body:not(.v6-home) .ph-main .ph-hero,
+body:not(.v6-home) .eoppep-hub .eop-shortcuts > a {
+  background: linear-gradient(120deg, #e7f1e4, #fffefa) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+body:not(.v6-home) :is(.course-tile, .topic-row, .progress-row, .reader-actions) {
+  border-color: var(--line) !important;
+}
+
+body:not(.v6-home) :is(.course-tile, .hub-action, .home-card, .reader-fold,
+  .hub-semester-tabs button, .hub-course-count, .btn, .pill-button) {
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+body:not(.v6-home) :is(.course-tile, .hub-action, .home-card):hover {
+  border-color: #b7d1b8 !important;
+  box-shadow: 0 10px 26px rgba(31, 62, 43, .09);
+}
+
+body:not(.v6-home) :is(input, select, textarea) {
+  border-color: var(--line);
+  border-radius: 9px;
+  color: var(--ink);
+}
+
+body:not(.v6-home) :is(input, select, textarea):focus-visible,
+body:not(.v6-home) :is(a, button, summary):focus-visible {
+  outline-color: #77ac7d !important;
+}
+
+body:not(.v6-home) :is(.reader-main, .main.reader-main) {
+  max-width: 1040px;
+}
+
+body:not(.v6-home) .ekab-next {
+  --en-ink: #20372e;
+  --en-muted: #66776f;
+  --en-primary: #287858;
+  --en-border: #dfe7df;
+  --en-soft: #e9f3e9;
+  --en-paper: #fffefa;
+}
+
+body:not(.v6-home) .ekab-next .en-upper {
+  background: linear-gradient(115deg, #e7f1e4 0%, #f0f4e9 58%, #e9f2e7 100%) !important;
+  color: #233a30 !important;
+}
+
+body:not(.v6-home) .ekab-next :is(.en-overline, .en-title, .en-subtitle, .en-selector label) {
+  color: #294535 !important;
+}
+
+body:not(.v6-home) .ekab-next .en-primary {
+  background: #287858 !important;
+  color: #fff !important;
+  border-color: #287858 !important;
+}
+
+body:not(.v6-home) .ekab-next .en-selector select {
+  background: #fffefa !important;
+  color: #294535 !important;
+  border-color: #d2dfd0 !important;
+}
+
+body:not(.v6-home) .ekab-next .en-secondary {
+  background: #fffefa !important;
+  color: #41684c !important;
+  border-color: #d4e1d3 !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .ekab-next {
+  --en-ink: #e7eee9;
+  --en-muted: #b5c3b8;
+  --en-primary: #91cea0;
+  --en-border: #394b42;
+  --en-soft: #294438;
+  --en-paper: #1c2b24;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .ekab-next .en-upper {
+  background: linear-gradient(115deg, #22342a, #263a30 58%, #20342a) !important;
+  color: #e7eee9 !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .ekab-next :is(.en-overline, .en-title, .en-subtitle, .en-selector label) {
+  color: #e7eee9 !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .ekab-next .en-secondary {
+  background: #263a30 !important;
+  color: #d6e9d8 !important;
+  border-color: #4b6252 !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .ekab-next .en-primary {
+  background: #91cea0 !important;
+  color: #17231f !important;
+  border-color: #91cea0 !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .ekab-next .en-selector select {
+  background: #22332b !important;
+  color: #e7eee9 !important;
+  border-color: #45584c !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.panel, .fold, .hub-action,
+  .home-card, .hub-study, .ph-panel, .lesson-more, .lesson-process, .course-tile,
+  .knowledge-check, .reader-fold, .reader-layout .video-panel,
+  .cloud-controls, .sync-summary) {
+  background-color: var(--v6-surface) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.seminar-card, .seminar-unit:not(.active),
+  .seminar-backup, .seminar-tabs, .seminar-quiz-modes, .seminar-result-item,
+  .seminar-mcq-feedback:not(.is-correct):not(.is-incorrect), .saek-series-viewport,
+  .saek-series-swipe-strip, .saek-series-parts a, .saek-gallery-card,
+  .saek-gallery-dialog, .saek-hub .hub-links a, .eoppep-hub .eop-practical) {
+  background-color: var(--v6-surface) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.stat, .library-summary span,
+  .course-icon, .chapter-index, .pill, .pill-button:not(.review), .hub-course-count,
+  .hub-resources-icon, .btn.secondary, .btn.ghost) {
+  background-color: var(--v6-soft) !important;
+  color: #d9eadb !important;
+  border-color: #43574a !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.reader-fold, .lesson-more,
+  .lesson-process, .knowledge-check, .cloud-controls, .sync-summary) {
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.course-tile, .topic-row,
+  .progress-row, .reader-actions) {
+  border-color: var(--line) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(input, select, textarea) {
+  background: #22332b !important;
+  color: #e7eee9 !important;
+  border-color: #45584c !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.course-tile, .hub-action,
+  .home-card):hover {
+  background-color: #263a30 !important;
+  border-color: #66856a !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.lesson-sos, .lesson-expanded,
+  .chapter-toc-links a, .ph-main .ph-hero, .eoppep-hub .eop-shortcuts > a) {
+  background: var(--v6-soft) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.lesson-sos, .lesson-expanded) {
+  border-left-color: var(--v6-accent) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) .saek-gallery-header {
+  background: var(--navy) !important;
+}
+
+html[data-theme="dark"] body:not(.v6-home) :is(.saek-source-section, .saek-source-figure) {
+  background: var(--v6-surface) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+
+@media (max-width: 700px) {
+  body:not(.v6-home) :is(.main, .ph-main, .seminar-main) {
+    padding-inline: 14px;
+  }
+  body:not(.v6-home) :is(.panel, .fold, .hub-action, .reader-fold) {
+    border-radius: 13px;
+  }
+}

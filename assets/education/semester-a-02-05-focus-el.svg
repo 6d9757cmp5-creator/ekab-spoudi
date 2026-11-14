@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 630" role="img" aria-labelledby="t d">
+<title id="t">Μεμβρανική μεταφορά — διάχυση, αντλία ιόντων και μεταφορέας</title>
+<desc id="d">Τρία διαφορετικά διαγράμματα: διάχυση σωματιδίων κατά μήκος της συγκέντρωσης, αντλία νατρίου καλίου που καταναλώνει ATP και μεταφορέας που διευκολύνει τη μετακίνηση γλυκόζης.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#347e75"/></marker><marker id="ion" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b25548"/></marker></defs>
+<rect width="1110" height="630" fill="#f9fbfd"/><rect width="1110" height="108" fill="#347e75"/>
+<text x="555" y="30" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" fill="#fff" font-weight="690" text-anchor="middle">Α΄ ΕΞΑΜΗΝΟ · ΜΑΘΗΜΑ 02 · ΚΕΦΑΛΑΙΟ 05</text>
+<text x="555" y="72" font-family="DejaVu Sans,Arial,sans-serif" font-size="23" fill="#fff" font-weight="720" text-anchor="middle">Τρεις τρόποι μεταφοράς ουσιών</text>
+<!-- panels -->
+<g fill="#fff" stroke="#cad8e0" stroke-width="2"><rect x="35" y="145" width="330" height="410" rx="18"/><rect x="390" y="145" width="330" height="410" rx="18"/><rect x="745" y="145" width="330" height="410" rx="18"/></g>
+<g font-family="DejaVu Sans,Arial,sans-serif" fill="#253f52" text-anchor="middle"><text x="200" y="184" font-size="20" font-weight="700">Διάχυση</text><text x="555" y="184" font-size="20" font-weight="700">Αντλία Na+/K+</text><text x="910" y="184" font-size="20" font-weight="700">Μεταφορέας γλυκόζης</text></g>
+<!-- diffusion -->
+<text x="200" y="220" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Υψηλή → χαμηλή συγκέντρωση</text>
+<rect x="65" y="249" width="270" height="137" rx="12" fill="#eef6fa" stroke="#9ab7c6"/>
+<g fill="#2d7ea4"><circle cx="95" cy="278" r="8"/><circle cx="128" cy="306" r="8"/><circle cx="168" cy="272" r="8"/><circle cx="112" cy="351" r="8"/><circle cx="193" cy="347" r="8"/><circle cx="151" cy="328" r="8"/></g>
+<g fill="#2d7ea4"><circle cx="259" cy="293" r="8"/><circle cx="297" cy="344" r="8"/></g>
+<path d="M115 420H283" stroke="#347e75" stroke-width="6" marker-end="url(#ar)"/>
+<text x="200" y="460" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Παθητική· χωρίς ATP</text>
+<text x="200" y="493" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Κίνηση σωματιδίων</text>
+<!-- sodium potassium pump -->
+<text x="555" y="220" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Ενεργός μεταφορά · αντίθετα στις βαθμίδες</text>
+<text x="555" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" fill="#536878" text-anchor="middle">Εξωκυττάριο υγρό</text>
+<!-- bilayer and transmembrane pump -->
+<rect x="423" y="291" width="264" height="56" rx="15" fill="#f4dcba" stroke="#927958" stroke-width="2"/>
+<path d="M423 304H687M423 334H687" stroke="#927958" stroke-width="3"/>
+<rect x="522" y="276" width="66" height="86" rx="24" fill="#d9edf0" stroke="#347e75" stroke-width="4"/>
+<path d="M544 284q-20 20 0 36t0 30m22-66q20 20 0 36t0 30" fill="none" stroke="#347e75" stroke-width="4"/>
+<!-- Na+ exits upward; K+ enters downward -->
+<path d="M543 405V277" stroke="#b25548" stroke-width="4" marker-end="url(#ion)"/>
+<path d="M568 277V405" stroke="#3177a0" stroke-width="4" marker-end="url(#ar)"/>
+<text x="478" y="427" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#8f3e35" text-anchor="middle">3 Na+ έξω</text>
+<text x="636" y="427" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#285f80" text-anchor="middle">2 K+ μέσα</text>
+
+<rect x="509" y="454" width="92" height="36" rx="11" fill="#fff0c9" stroke="#d4a848"/><text x="555" y="477" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#684b1c" text-anchor="middle">ATP → ADP</text>
+<text x="555" y="520" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Αντλία Na+/K+</text>
+<!-- glucose carrier -->
+<text x="910" y="220" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Διευκολυνόμενη διάχυση</text>
+<rect x="770" y="266" width="280" height="118" rx="10" fill="#f3f7f9" stroke="#c7d5dc"/>
+<rect x="770" y="306" width="280" height="42" fill="#f4dcba"/>
+<path d="M770 306H1050M770 348H1050" stroke="#927958" stroke-width="3"/>
+<g fill="#3f84a1"><circle cx="803" cy="286" r="9"/><circle cx="834" cy="369" r="9"/><circle cx="1007" cy="286" r="9"/><circle cx="1024" cy="369" r="9"/></g>
+<path d="M898 290q-36 26 0 53q36 27 0 42t0 37q36-21 0-40q-36-20 0-41t0-51Z" fill="#88b5c5" stroke="#347e75" stroke-width="4"/>
+<path d="M852 327H890" stroke="#347e75" stroke-width="4" marker-end="url(#ar)"/>
+<text x="910" y="450" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Γλυκόζη μέσω πρωτεΐνης</text>
+<text x="910" y="482" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Προς τη χαμηλότερη συγκέντρωση</text>
+<text x="555" y="592" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#536878" text-anchor="middle">Αντλία Na+/K+: ATP · Διάχυση και διευκολυνόμενη διάχυση: χωρίς ATP.</text>
+</svg>

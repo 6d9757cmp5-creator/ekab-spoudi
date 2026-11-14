@@ -1,0 +1,20 @@
+/* Chapter-local practice, consistent with EKAB Spoudi reader and narrow mobile screens. */
+.atlas-chapter-practice{margin:18px 0;border:1px solid #9fc7cc;border-radius:14px;background:#f1f9f8;max-width:100%;overflow:hidden;color:#143946}
+.atlas-chapter-practice>summary{cursor:pointer;padding:13px 15px;font-weight:800;min-height:44px;line-height:1.5}
+.atlas-chapter-practice[open]>summary{border-bottom:1px solid #cee4e5}
+.atlas-chapter-practice-inner{padding:12px 15px 15px}
+.atlas-chapter-practice-inner>p{line-height:1.5}
+.atlas-practice-label{display:block;font-size:.85rem;font-weight:750;margin:9px 0}
+.atlas-practice-answer{box-sizing:border-box;display:block;width:100%;max-width:100%;min-height:90px;border:1px solid #9bbdc3;border-radius:10px;background:#fff;color:#143946;padding:12px;font:inherit;line-height:1.5;resize:vertical}
+.atlas-practice-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.atlas-practice-actions button,.atlas-practice-actions a{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 13px;border-radius:10px;border:1px solid #437987;background:#fff;color:#175268;font:750 .83rem/1.35 system-ui,sans-serif;text-decoration:none;cursor:pointer;text-align:center}
+.atlas-practice-actions .atlas-practice-atlas{background:#175e6d;color:#fff}
+.atlas-practice-reference{padding:12px;background:#e1f2eb;border-radius:10px;color:#173f42}
+.atlas-practice-reference[hidden]{display:none}
+.atlas-practice-disclaimer{font-size:.78rem;color:#486b74}
+.atlas-practice-answer:focus-visible,.atlas-practice-actions :focus-visible,.atlas-chapter-practice>summary:focus-visible{outline:3px solid #17abae;outline-offset:2px}
+@media(max-width:480px){.atlas-practice-actions{flex-direction:column}.atlas-practice-actions a,.atlas-practice-actions button{width:100%}}
+html[data-theme="dark"] .atlas-chapter-practice{background:#183744;color:#ecfbfd;border-color:#537a83}
+html[data-theme="dark"] .atlas-practice-answer{background:#122c36;color:#ecfbfd}
+html[data-theme="dark"] .atlas-practice-reference{background:#174a42;color:#e4fff7}
+html[data-theme="dark"] .atlas-practice-disclaimer{color:#bddce0}

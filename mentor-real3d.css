@@ -1,0 +1,42 @@
+/* MENTOR real rigged 3D: display PBR human model only when loaded and validated.
+ * Only the real rigged GLB is visible; no portrait/cartoon fallback.
+ */
+.mentor-cinematic-stage{isolation:isolate}
+.mentor-real3d-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:pan-y;cursor:grab}
+.mentor-real3d-canvas:active{cursor:grabbing}
+.mentor-cinematic-stage[data-real3d="ready"]>.cinematic-character{visibility:hidden}
+.mentor-cinematic-stage[data-real3d="ready"]>.mentor-real3d-canvas{display:block!important}
+.mentor-cinematic-stage[data-real3d="photo"]>.mentor-real3d-canvas{display:none!important}
+.mentor-real3d-choices{position:absolute;z-index:5;left:50%;bottom:73px;transform:translateX(-50%);
+ display:flex;align-items:center;justify-content:center;gap:7px;width:92%;max-width:340px}
+.mentor-real3d-choices button{flex:1;min-height:38px;color:#dcf2fe;font-weight:800;font-size:.73rem;
+ background:linear-gradient(120deg,#05223dd9,#093b66dc);border:1px solid #3b86bf;
+ border-radius:12px;backdrop-filter:blur(8px);cursor:pointer}
+.mentor-real3d-choices button[aria-pressed="true"]{border-color:#53d2ff;background:#0759a0dd;
+ box-shadow:0 0 14px #12a9ff60}
+.mentor-real3d-choices button:disabled{opacity:.63;cursor:not-allowed}
+.mentor-real3d-options{position:absolute;z-index:5;bottom:42px;left:50%;transform:translateX(-50%);
+ display:flex;justify-content:center;align-items:center;gap:10px;width:90%;font-size:.65rem;
+ color:#d3ecfd;text-shadow:0 0 9px #000}
+.mentor-real3d-options label{display:flex;align-items:center;justify-content:center;gap:5px}
+.mentor-real3d-options input[type=range]{accent-color:#54d0ff;width:83px}
+.mentor-real3d-options input[type=checkbox]{accent-color:#00b5ff}
+.mentor-real3d-status{position:absolute;z-index:5;bottom:8px;left:7%;right:7%;margin:0!important;
+ font-size:.56rem;color:#b3cee1!important;text-align:center;line-height:1.3;
+ text-shadow:0 1px 4px #001427;padding:3px}
+.mentor-cinematic-stage[data-real3d="ready"] .cinematic-stage-base{opacity:.42}
+@media(max-width:700px){
+ .mentor-real3d-choices{bottom:72px}
+ .mentor-real3d-status{font-size:.55rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .mentor-real3d-canvas{cursor:default}
+ .mentor-cinematic-stage[data-real3d="ready"] .cinematic-grid{opacity:.45}
+}
+
+.mentor-only-real3d .cinematic-character,.mentor-only-real3d .mentor-real3d-choices{display:none!important}
+.mentor-only-real3d .mentor-real3d-canvas[hidden]{display:none!important}
+.mentor-only-real3d .mentor-real3d-status{bottom:12px;font-size:.7rem;max-width:95%;margin:0 auto!important}
+.mentor-only-3d-entry{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-decoration:none!important;border:1px solid #40baff88;border-radius:20px;color:#d7f3ff!important;background:radial-gradient(ellipse at 50% 50%,#1673b86b,#041b3199)}
+.mentor-only-3d-entry strong{font-size:clamp(1.5rem,3vw,2.7rem);text-shadow:0 0 20px #00bfff}
+.mentor-only-3d-entry span{font-size:.78rem}

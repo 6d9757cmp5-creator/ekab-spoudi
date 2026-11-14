@@ -1,0 +1,148 @@
+/**
+ * EKAB Experience V4: cohesive navigation, legibility and section density.
+ * Enhances existing pages; never hides MENTOR, content, exercises or feedback.
+ */
+body.ekab-experience{
+ --ex-accent:#0a8179;--ex-accent-strong:#096b68;--ex-bg:#f4f7f7;
+ --ex-white:#fff;--ex-line:#dbe7e9;--ex-soft:#eaf6f2;
+ --ex-text:#193943;--ex-muted:#617b83;
+ background:radial-gradient(ellipse at 8% -16%,#c8ebdf5c,transparent 50%),var(--ex-bg);
+ color:var(--ex-text);font-size:16px;
+}
+body.ekab-experience .top{
+ background:linear-gradient(115deg,#0d2c3c 0%,#103c48 66%,#0e5554 100%);
+ padding:11px 0 0;
+ box-shadow:0 6px 20px #092b390f;
+}
+body.ekab-experience .top .container{max-width:1150px}
+body.ekab-experience .top .header-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:11px}
+body.ekab-experience .top .brand{gap:11px;min-width:0}
+body.ekab-experience .top .logo{width:43px;height:43px;border-radius:14px;background:#bbf6dc;color:#15473f;font-weight:900;box-shadow:inset 0 0 0 1px #ffffff48}
+body.ekab-experience .top .brand h1{font-size:1.2rem;letter-spacing:-.035em}
+body.ekab-experience .top .brand p{font-size:.75rem;line-height:1.2;color:#bfdddc}
+body.ekab-experience .top .utility{margin-left:auto;gap:7px}
+body.ekab-experience .top .utility-button,body.ekab-experience .top .account-button{
+ min-height:39px;min-width:39px;border-radius:11px;border-color:#ffffff3d;
+ background:#ffffff12;color:#e2faf0;
+}
+body.ekab-experience .top .utility-button:hover,body.ekab-experience .top .account-button:hover{background:#ffffff28}
+body.ekab-experience .top .nav{display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin;align-items:center;grid-template-columns:none;margin:0;padding:5px 0 11px;white-space:nowrap}
+body.ekab-experience .top .nav a,body.ekab-experience .top .nav button{
+ padding:10px 14px;border:1px solid transparent;border-radius:12px;min-height:43px;
+ background:#ffffff0d;font-size:.82rem;font-weight:750;color:#d3e7e5;text-decoration:none;flex-shrink:0;
+}
+body.ekab-experience .top .nav a:hover,body.ekab-experience .top .nav button:hover{background:#ffffff24;color:#fff}
+body.ekab-experience .top .nav .active,body.ekab-experience .top .nav [aria-current="page"]{
+ color:#133c3c;background:#b5f1d8;border-color:#b5f1d8;box-shadow:0 1px 5px #091e2819;
+}
+body.ekab-experience .main{max-width:1050px;padding:25px 19px 95px}
+body.ekab-experience .main.reader-main{max-width:970px}
+body.ekab-experience .main.home-main{max-width:1110px}
+body.ekab-experience .main.saek-hub{max-width:1040px}
+body.ekab-experience .ph-main,body.ekab-experience .seminar-main{max-width:1050px}
+body.ekab-experience :is(.main,.ph-main,.seminar-main) .panel{
+ border:1px solid var(--ex-line);border-radius:19px;
+ box-shadow:0 7px 28px #112f3d0a;
+}
+body.ekab-experience :is(.main,.ph-main,.seminar-main) h2,
+body.ekab-experience :is(.main,.ph-main,.seminar-main) h3{
+ letter-spacing:-.027em;line-height:1.28;
+}
+body.ekab-experience .main .eyebrow,body.ekab-experience .ph-eyebrow{color:var(--ex-accent);font-size:.73rem;letter-spacing:.105em}
+body.ekab-experience :is(button,a,input,select,textarea):focus-visible{outline:3px solid #11a396;outline-offset:3px}
+body.ekab-experience :is(.main,.ph-main) :is(button,.btn,a.btn){touch-action:manipulation}
+body.ekab-experience .main .btn.primary,body.ekab-experience .main a.btn:not(.secondary):not(.ghost){border-radius:11px}
+body.ekab-experience .main .progress-row .bar,body.ekab-experience .main .bar{border-radius:999px}
+body.ekab-experience .main .bar>span{background:linear-gradient(90deg,#068980,#77d3b4)}
+/* Homepage: keep all routes, but reduce visual noise and make major categories obvious. */
+body.ekab-experience .home-hero-row{margin-bottom:8px}
+body.ekab-experience .home-intro{text-align:left;margin-bottom:15px}
+body.ekab-experience .home-intro h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:850;letter-spacing:-.04em}
+body.ekab-experience .home-intro>p:last-child{font-size:.86rem;line-height:1.5}
+body.ekab-experience .home-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+body.ekab-experience .home-card{
+ border:1px solid var(--ex-line);background:var(--ex-white);color:var(--ex-text);
+ border-radius:18px;min-height:unset;box-shadow:0 5px 18px #112b390b;
+}
+body.ekab-experience .home-card:nth-child(-n+2){background:linear-gradient(140deg,#fff,#f2fbf6);border-color:#bfddd3}
+body.ekab-experience .home-card .home-card-icon{border-radius:13px}
+body.ekab-experience .home-card .home-card-primary-link{color:inherit}
+body.ekab-experience .home-card .home-card-chevron{color:var(--ex-accent)}
+body.ekab-experience .home-card:hover{box-shadow:0 10px 26px #174c4b1c;border-color:#6dbdaa}
+body.ekab-experience .home-anatomy-single,body.ekab-experience .home-mentor-presence{border-radius:19px}
+body.ekab-experience .home-mentor-wrap{margin-top:20px}
+body.ekab-experience .home-bottom-row{gap:12px}
+/* SAEK and certification share one clear pattern: progress -> two actions -> grouped content. */
+body.ekab-experience .saek-hub .hub-top{padding:19px 21px;background:var(--ex-white);border:1px solid var(--ex-line);border-radius:18px}
+body.ekab-experience .saek-hub .hub-top h2{font-weight:850;font-size:clamp(1.5rem,3vw,2rem)}
+body.ekab-experience .saek-hub .hub-action{border-radius:15px;border-color:var(--ex-line);min-height:94px;box-shadow:0 6px 21px #173b450a}
+body.ekab-experience .saek-hub .hub-action-study{background:linear-gradient(120deg,#effaf5,#fff);border-color:#b5ddd0}
+body.ekab-experience .saek-hub .hub-action-exam{background:linear-gradient(120deg,#f0f5fb,#fff)}
+body.ekab-experience .saek-hub .hub-action-icon{border-radius:12px;width:44px;height:44px;flex-basis:44px}
+body.ekab-experience .saek-hub .hub-action-copy strong{font-size:.98rem}
+body.ekab-experience .saek-hub .hub-semester-tabs button{border-radius:11px;min-height:47px}
+body.ekab-experience .saek-hub .hub-semester-tabs [aria-pressed="true"]{background:#0a827b;border-color:#0a827b;color:#fff}
+body.ekab-experience .saek-hub .course-tile{border-radius:14px;transition:border-color .16s,transform .16s}
+body.ekab-experience .saek-hub .course-tile:hover{transform:translateY(-1px);border-color:#75b9ad}
+body.ekab-experience .eoppep-hub .eop-shortcuts>a{border-radius:13px;min-height:70px}
+body.ekab-experience .saek-hub .hub-study{border-radius:19px;padding:clamp(14px,2.2vw,24px)}
+/* Reader focus and easier long-course navigation. */
+body.ekab-experience .reader-main .panel{margin-bottom:15px}
+body.ekab-experience .reader-main .panel:first-of-type{border-top:3px solid #3aae9c;padding:clamp(17px,2.8vw,25px)}
+body.ekab-experience .reader-main .reader-title{font-size:clamp(1.55rem,3.4vw,2.1rem);letter-spacing:-.045em}
+body.ekab-experience .reader-main :is(.lesson-deep,.reader-chapters,.chapter-toc){max-width:100%}
+body.ekab-experience .reader-main :is(.lesson-deep,.reader-chapters) p{line-height:1.77}
+body.ekab-experience .reader-main :is(.fold,.reader-fold){border-color:var(--ex-line);border-radius:13px}
+body.ekab-experience .reader-main :is(.fold,.reader-fold)>summary{min-height:50px;line-height:1.5;cursor:pointer}
+body.ekab-experience .reader-main :is(.fold,.reader-fold)>summary:focus-visible{outline:3px solid #12a19b;outline-offset:2px}
+body.ekab-experience .reader-main .chapter-toc-links a{line-height:1.45}
+body.ekab-experience .reader-main .reader-breadcrumb a{font-weight:780;color:var(--ex-accent)}
+body.ekab-experience .reader-main .course-diagram{border-radius:13px;max-width:100%}
+body.ekab-experience .reader-main :is(.lesson-deep,.lesson-more,.knowledge-check){border-radius:13px}
+body.ekab-experience .main #eoppepHomeSummary{border-top:3px solid #32af9c}
+body.ekab-experience .main .stat{border-radius:13px}
+body.ekab-experience .ph-main .ph-panel{border-radius:18px;border-color:var(--ex-line)}
+body.ekab-experience .ph-main .ph-hero{background:linear-gradient(130deg,#e5f7f1,#f9fcfb)}
+/* Non-duplicative intra-page chapter navigator, inserted only on long readers. */
+.ekab-experience .ex-section-nav{border:1px solid #b9dbd7;border-radius:15px;background:#fff;box-shadow:0 6px 20px #112f3c0b;padding:13px 15px;margin:13px 0 19px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.ekab-experience .ex-section-nav strong{color:#176c69;font-size:.79rem;white-space:nowrap}
+.ekab-experience .ex-section-nav label{font-size:.75rem;color:#526e75;font-weight:760}
+.ekab-experience .ex-section-nav select{border:1px solid #c9dfe0;border-radius:10px;background:#f4f8f7;color:#153a43;font-size:.8rem;padding:10px;min-height:43px;flex:1;max-width:100%;min-width:170px}
+.ekab-experience .ex-section-nav a,.ekab-experience .ex-section-nav button{border-radius:10px;padding:10px 12px;min-height:43px;font-size:.77rem;font-weight:800;background:#e6f6ef;color:#146b68;text-decoration:none;border:1px solid #c6e5d8}
+.ekab-experience .ex-section-nav a:hover,.ekab-experience .ex-section-nav button:hover{background:#d6eee4}
+.ekab-experience .ex-section-nav .ex-nav-category{font-size:.69rem;color:#63838a;margin:0;line-height:1.35}
+html[data-theme="dark"] body.ekab-experience{
+ --ex-accent:#85e6cf;--ex-accent-strong:#a2f2df;--ex-bg:#0c202d;
+ --ex-white:#143440;--ex-line:#345761;--ex-soft:#1b4a49;--ex-text:#e8f4f5;--ex-muted:#b8cbd0;
+ background:radial-gradient(ellipse at 8% -16%,#20645538,transparent 55%),var(--ex-bg)
+}
+html[data-theme="dark"] body.ekab-experience .home-card:nth-child(-n+2){background:linear-gradient(140deg,#153d43,#1a4545);border-color:#376e64}
+html[data-theme="dark"] body.ekab-experience .saek-hub :is(.hub-action-study,.hub-action-exam){background:linear-gradient(120deg,#193b46,#13323e);border-color:#3c6467}
+html[data-theme="dark"] body.ekab-experience .ph-main .ph-hero{background:linear-gradient(130deg,#18443d,#153541)}
+html[data-theme="dark"] body.ekab-experience .ex-section-nav{background:#143440;border-color:#3a6b69}
+html[data-theme="dark"] body.ekab-experience .ex-section-nav strong{color:#a7e4d5}
+html[data-theme="dark"] body.ekab-experience .ex-section-nav label,html[data-theme="dark"] body.ekab-experience .ex-section-nav .ex-nav-category{color:#b9ccd0}
+html[data-theme="dark"] body.ekab-experience .ex-section-nav :is(select,a,button){background:#214b4c;color:#e0f9f1;border-color:#437475}
+@media(max-width:700px){
+ body.ekab-experience .top{padding-top:8px}
+ body.ekab-experience .top .header-row{flex-wrap:wrap;gap:8px;padding-bottom:7px}
+ body.ekab-experience .top .brand{flex:1}
+ body.ekab-experience .top .brand h1{font-size:1.03rem}
+ body.ekab-experience .top .brand p{font-size:.68rem}
+ body.ekab-experience .top .utility{margin-left:auto}
+ body.ekab-experience .top .nav{margin:0 -7px;padding:6px 7px 10px;gap:5px}
+ body.ekab-experience .top .nav a,body.ekab-experience .top .nav button{font-size:.73rem;padding:9px 11px;min-height:42px}
+ body.ekab-experience .main{padding:19px 13px 84px}
+ body.ekab-experience .home-tiles{gap:9px}
+ body.ekab-experience .home-card{border-radius:15px}
+ body.ekab-experience .saek-hub .hub-top{padding:16px}
+ body.ekab-experience .ex-section-nav{padding:11px;gap:8px}
+ body.ekab-experience .ex-section-nav select{flex-basis:100%}
+}
+@media(max-width:460px){
+ body.ekab-experience .home-tiles{grid-template-columns:1fr}
+ body.ekab-experience .saek-hub .hub-actions{grid-template-columns:1fr}
+ body.ekab-experience .saek-hub .hub-action{min-height:76px}
+ body.ekab-experience .ex-section-nav select{font-size:.77rem}
+}
+@media(prefers-reduced-motion:reduce){body.ekab-experience .saek-hub .course-tile{transition:none}}

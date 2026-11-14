@@ -1,0 +1,14 @@
+/* Non-invasive chapter-based 3D anatomy links; keeps SAEK progress UI unchanged. */
+.saek-anatomy-jump{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:11px 17px;padding:13px 14px;margin:14px 0 18px;border:1px solid #80b7cd;border-radius:14px;background:linear-gradient(110deg,#e8f7fc,#f4fbfc);color:#16465e}
+.saek-anatomy-jump-text{flex:1 1 180px;min-width:0}
+.saek-anatomy-jump-text strong{display:block;font-size:.89rem;line-height:1.34}
+.saek-anatomy-jump-text small{display:block;font-size:.72rem;color:#426c7e;margin-top:3px;line-height:1.35}
+.saek-anatomy-jump-actions{display:flex;flex-wrap:wrap;gap:7px}
+.saek-anatomy-link{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:9px 11px;border-radius:9px;border:1px solid #2e819c;background:#17688b;color:white!important;text-decoration:none;font-size:.75rem;font-weight:800;line-height:1.22;transition:background .14s ease}
+.saek-anatomy-link:hover{background:#104963}
+.saek-anatomy-link:focus-visible{outline:3px solid #d69b3c;outline-offset:3px}
+html[data-theme="dark"] .saek-anatomy-jump{background:linear-gradient(110deg,#173d4d,#112d3b);border-color:#3e7488;color:#effaff}
+html[data-theme="dark"] .saek-anatomy-jump-text small{color:#b9d2df}
+html[data-theme="dark"] .saek-anatomy-link{border-color:#65bdcf;background:#155775}
+@media(max-width:620px){.saek-anatomy-jump{padding:11px;gap:9px}.saek-anatomy-jump-actions{width:100%}.saek-anatomy-link{flex:1 1 130px}}
+@media(prefers-reduced-motion:reduce){.saek-anatomy-link{transition:none}}

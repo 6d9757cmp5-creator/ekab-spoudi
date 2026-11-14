@@ -1,0 +1,24 @@
+/* Discreet bibliography, readable in either theme and with keyboard access. */
+.compact-source-container{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;margin:14px 0!important}
+details.compact-sources{display:block;min-width:0;margin:10px 0;border:0;border-top:1px solid var(--line,#dce7ec);border-radius:0;background:transparent;color:var(--ink,#203b4a);box-shadow:none;font-size:.8rem;line-height:1.5}
+details.compact-sources>summary{display:list-item;list-style:disclosure-closed inside;cursor:pointer;padding:9px 2px;min-height:36px;color:var(--muted,#657c89);font-size:.8rem;font-weight:600;line-height:1.5;background:transparent;border:0;border-radius:0}
+details.compact-sources[open]>summary{list-style-type:disclosure-open}
+details.compact-sources>summary::-webkit-details-marker{display:inline}
+details.compact-sources>summary::after{content:none}
+details.compact-sources>summary h2{display:inline;margin:0!important;font-size:inherit!important;font-weight:inherit;line-height:inherit;color:inherit}
+details.compact-sources>summary:focus-visible{outline:2px solid var(--blue,#28719c);outline-offset:2px;border-radius:4px}
+details.compact-sources>summary>span[aria-hidden]{display:none}
+.compact-sources-body{padding:0 2px 8px;overflow-wrap:anywhere}
+.compact-sources .compact-sources-body :is(p,li,small,a,strong,h3),.compact-sources>ul,.compact-sources .catalog-reader-source-links p{font-size:inherit;line-height:1.5}
+.compact-sources .compact-sources-body p{margin:6px 0}
+.compact-sources .compact-sources-body :is(ul,ol),.compact-sources>ul{margin:6px 0;padding-left:20px}
+.compact-sources .compact-sources-body h3{margin:10px 0 4px}
+.compact-sources .compact-sources-body a{overflow-wrap:anywhere;font-weight:500}
+.compact-sources .ph-sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 16px;max-height:22rem;overflow-y:auto;overscroll-behavior:contain;padding-right:6px}
+@media(max-width:600px){.compact-sources .ph-sources{grid-template-columns:1fr}}
+.compact-sources .ph-sources article{padding:6px 0;border:0;border-bottom:1px solid var(--line,#dce7ec);border-radius:0;background:transparent}
+.compact-sources .ph-sources small{margin-top:2px}
+.compact-sources .source-line{margin:0;font-size:inherit}
+.compact-sources .pill-button,.compact-sources .btn{font-size:.78rem;padding:5px 8px}
+.compact-sources .chapter-source-note,.compact-sources .review-source{font-size:inherit}
+@media print{details.compact-sources>summary{color:inherit}.compact-sources-body{display:block!important}details.compact-sources::details-content{content-visibility:visible;display:block}}

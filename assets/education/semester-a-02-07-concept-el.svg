@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 110 1110 500" role="img" aria-labelledby="t d">
+<title id="t">Καρδιακός κύκλος — κοιλότητες και κατεύθυνση ροής</title>
+<desc id="d">Σχηματική τομή της καρδιάς με δεξιό και αριστερό κόλπο και κοιλία. Βέλη δείχνουν την πορεία από δεξιά καρδιά προς πνεύμονες, επιστροφή στον αριστερό κόλπο και εξώθηση από την αριστερή κοιλία προς το σώμα.</desc>
+<defs><marker id="blue" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2475a5"/></marker><marker id="red" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c94747"/></marker></defs>
+<rect width="1110" height="630" fill="#f9fbfd"/>
+
+
+
+<!-- Heart silhouette and chambers -->
+<path d="M474 196C443 172 394 183 391 225C386 273 409 312 428 350C445 390 444 438 480 477Q520 521 555 546Q592 521 630 477C666 437 666 390 683 350C703 311 726 273 719 225C713 183 666 172 636 196C612 177 583 170 555 170C525 170 497 178 474 196Z" fill="#fff" stroke="#435c6d" stroke-width="4"/>
+<path d="M415 222Q430 195 469 213Q495 228 496 261V303H435Q414 276 415 246Z" fill="#d9ebf7" stroke="#435c6d" stroke-width="2"/>
+<path d="M641 213Q680 195 696 222Q698 276 677 303H614V261Q614 228 641 213Z" fill="#f9dfdf" stroke="#435c6d" stroke-width="2"/>
+<path d="M435 314H496V365Q496 419 536 489L555 516Q516 496 486 468Q453 438 448 390Z" fill="#c8e1f2" stroke="#435c6d" stroke-width="2"/>
+<path d="M614 314H677L663 390Q657 438 624 468Q594 497 555 516L574 489Q614 419 614 365Z" fill="#f5caca" stroke="#435c6d" stroke-width="2"/>
+<path d="M555 176V508" stroke="#435c6d" stroke-width="7"/>
+<!-- valve symbols -->
+<path d="M496 306l10 10 10-10m90 0 10 10 10-10" fill="none" stroke="#435c6d" stroke-width="3"/>
+<!-- labels -->
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#253f52"><text x="456" y="260">Δεξιός</text><text x="456" y="281">κόλπος</text><text x="654" y="260">Αριστερός</text><text x="654" y="281">κόλπος</text><text x="462" y="382">Δεξιά</text><text x="462" y="403">κοιλία</text><text x="650" y="382">Αριστερή</text><text x="650" y="403">κοιλία</text></g>
+<!-- flow from veins into atria, atria to ventricles -->
+<path d="M365 218V258" fill="none" stroke="#2475a5" stroke-width="5" marker-end="url(#blue)"/>
+<path d="M455 285V350" fill="none" stroke="#2475a5" stroke-width="5" marker-end="url(#blue)"/>
+<path d="M655 285V350" fill="none" stroke="#c94747" stroke-width="5" marker-end="url(#red)"/>
+<path d="M745 218V258" fill="none" stroke="#c94747" stroke-width="5" marker-end="url(#red)"/>
+<!-- ventricular ejection paths outward, kept clear of text -->
+<path d="M488 423Q475 455 457 476" fill="none" stroke="#2475a5" stroke-width="5" marker-end="url(#blue)"/>
+<path d="M622 423Q636 455 654 476" fill="none" stroke="#c94747" stroke-width="5" marker-end="url(#red)"/>
+<!-- simple pulmonary/systemic destinations -->
+<rect x="248" y="170" width="126" height="46" rx="13" fill="#eef4f8" stroke="#aabcc8" stroke-width="1.5"/><text x="311" y="199" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Άνω κοίλη φλέβα</text>
+<rect x="736" y="170" width="126" height="46" rx="13" fill="#eef4f8" stroke="#aabcc8" stroke-width="1.5"/><text x="799" y="199" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" fill="#253f52" text-anchor="middle">Πνευμονικές φλέβες</text>
+<rect x="263" y="480" width="180" height="48" rx="13" fill="#e7f1f7" stroke="#7ca7c0" stroke-width="1.5"/><text x="353" y="501" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Προς πνευμονική</text><text x="353" y="519" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">αρτηρία και πνεύμονες</text>
+<rect x="667" y="480" width="180" height="48" rx="13" fill="#f8e8e8" stroke="#d59d9d" stroke-width="1.5"/><text x="757" y="501" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">Προς αορτή</text><text x="757" y="519" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" fill="#253f52" text-anchor="middle">και υπόλοιπο σώμα</text>
+
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+<title id="title">Φαρμακοκινητική: απορρόφηση, κατανομή, μεταβολισμός, αποβολή</title>
+<desc id="desc">Σχηματική ανθρώπινη μορφή με κύκλο απορρόφησης από το γαστρεντερικό, κατανομής μέσω κυκλοφορίας, μεταβολισμού στο ήπαρ και αποβολής στους νεφρούς. Το διάγραμμα περιγράφει τις τέσσερις γενικές έννοιες ADME χωρίς συγκεκριμένο φάρμακο, δοσολογία ή οδό χορήγησης που να εφαρμόζεται σε ασθενή.</desc>
+<rect width="1200" height="740" fill="#f5f9fc"/>
+<style>text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#183b53}.h{font-size:34px;font-weight:700}.t{font-size:24px;font-weight:700}.s{font-size:19px}.en{font-size:17px;fill:#46718a}.panel{fill:#fff;stroke:#b9cfdc;stroke-width:3}.lead{fill:none;stroke:#57839f;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}</style>
+<text x="600" y="50" text-anchor="middle" class="h">Φαρμακοκινητική · πορεία φαρμάκου στο σώμα</text>
+<text x="600" y="82" text-anchor="middle" class="s">Γενικό μοντέλο ADME — δεν ισχύει με τον ίδιο τρόπο για όλες τις ουσίες</text>
+<!-- silhouette -->
+<circle cx="601" cy="192" r="58" fill="#deebf4" stroke="#5b8ba5" stroke-width="5"/>
+<path d="M578 245L536 263L503 333L521 359L550 318L550 520L570 521L574 635L603 635L605 522L619 636L648 633L649 521L668 522L665 318L692 360L715 333L685 263L625 245Z" fill="#deebf4" stroke="#5b8ba5" stroke-width="5"/>
+<!-- liver -->
+<path d="M569 351Q600 329 654 351Q648 394 590 396Q568 384 569 351Z" fill="#d1a87d" stroke="#a27b5b" stroke-width="4"/>
+<!-- stomach GI -->
+<path d="M587 403Q574 445 605 465Q624 476 622 445Q618 423 600 425" fill="none" stroke="#bb7969" stroke-width="10" stroke-linecap="round"/>
+<path d="M573 478Q608 447 634 479Q601 511 571 487" fill="none" stroke="#bb7969" stroke-width="7"/>
+<!-- circulation -->
+<path d="M603 286V334M602 326L559 349M607 327L650 345" stroke="#bb626d" stroke-width="7" fill="none"/>
+<!-- kidney -->
+<path d="M569 503Q544 482 541 517Q538 541 562 550Q584 542 569 527Z" fill="#d7a8b8" stroke="#a76b83" stroke-width="3"/>
+<path d="M635 503Q659 482 661 517Q663 541 640 550Q617 542 635 527Z" fill="#d7a8b8" stroke="#a76b83" stroke-width="3"/>
+<!-- pointers -->
+<path d="M580 460L361 216H292M605 302L366 407H302M643 363L851 220H908M634 524L843 435H908" class="lead"/>
+<g transform="translate(24 138)"><rect width="317" height="150" rx="19" class="panel"/>
+<circle cx="39" cy="41" r="26" fill="#d8ece7" stroke="#4a9b7d" stroke-width="3"/><text x="39" y="50" text-anchor="middle" class="t">1</text>
+<text x="78" y="46" class="t">Απορρόφηση</text><text x="18" y="87" class="en">Absorption</text><text x="18" y="122" class="s">Είσοδος στην κυκλοφορία</text></g>
+<g transform="translate(24 349)"><rect width="317" height="152" rx="19" class="panel"/>
+<circle cx="39" cy="41" r="26" fill="#d8ecf4" stroke="#4b85a1" stroke-width="3"/><text x="39" y="50" text-anchor="middle" class="t">2</text>
+<text x="78" y="46" class="t">Κατανομή</text><text x="18" y="87" class="en">Distribution</text><text x="18" y="122" class="s">Μεταφορά στους ιστούς</text></g>
+<g transform="translate(859 138)"><rect width="317" height="150" rx="19" class="panel"/>
+<circle cx="39" cy="41" r="26" fill="#f9e8d6" stroke="#b58b61" stroke-width="3"/><text x="39" y="50" text-anchor="middle" class="t">3</text>
+<text x="78" y="46" class="t">Μεταβολισμός</text><text x="18" y="87" class="en">Metabolism</text><text x="18" y="122" class="s">Π.χ. ένζυμα ήπατος</text></g>
+<g transform="translate(859 349)"><rect width="317" height="152" rx="19" class="panel"/>
+<circle cx="39" cy="41" r="26" fill="#f6e1eb" stroke="#af6f90" stroke-width="3"/><text x="39" y="50" text-anchor="middle" class="t">4</text>
+<text x="78" y="46" class="t">Αποβολή</text><text x="18" y="87" class="en">Excretion</text><text x="18" y="122" class="s">Π.χ. νεφρική απέκκριση</text></g>
+<rect x="205" y="671" width="790" height="48" rx="13" fill="#e0eef5"/>
+<text x="600" y="701" text-anchor="middle" class="s">Φαρμακοδυναμική = η επίδραση της ουσίας στον οργανισμό · διαφορετική έννοια</text>
+</svg>

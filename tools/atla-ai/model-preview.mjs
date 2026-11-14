@@ -1,0 +1,444 @@
+import {sharedRegistryAssets,safeAssetUrl} from './model-preview-catalog.mjs';
+import {audit3DLibrary,proposeBodyComposition,choose3DQuality,LIBRARY_HEADING,studyScope3D} from './central-3d-library.mjs';
+import {safeReturnHref,loadLibrary} from './nih3d-library.mjs';
+import {atlasRole,detailKeysForStructure,modelShowsStructures} from './anatomy-curation.mjs';
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const tool='anatomy'; // The patient simulator was removed; every viewer is the anatomy atlas.
+const root=new URL('../../',import.meta.url);
+const select=$('source-model'),dataset=$('source-dataset'),button=$('source-load'),note=$('source-status');
+// All catalogs are visible through one shared inventory. Context still controls safe deep links.
+const status=(v,bad=false)=>{note.textContent=v;note.dataset.error=String(bad)};
+const back=$('source-back');
+const inUnifiedAnatomy=Boolean(document.getElementById('unified-catalog'));
+back.href=safeReturnHref(params.get('from'),location.href,inUnifiedAnatomy?'../../index.html':tool==='anatomy'?'../tools/anatomy-3d/index.html':'../index.html');
+if(inUnifiedAnatomy)back.hidden=!params.get('from');
+if(document.getElementById('unified-catalog'))dataset.value='all';
+else if(['nih','all','secondary','rigged','makehuman'].includes(params.get('dataset')))dataset.value=params.get('dataset');
+let deepLinkModel=params.get('model');
+$('source-name').textContent=LIBRARY_HEADING;
+$('source-warning').textContent=tool==='anatomy'?'Ανατομική προεπισκόπηση χωρίς κλινική έγκριση.':'Ερευνητικά χαρακτήρες/animations, όχι επικυρωμένος ασθενής.';
+const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection||{};
+const quality=choose3DQuality({deviceMemory:navigator.deviceMemory,hardwareConcurrency:navigator.hardwareConcurrency,
+ saveData:connection.saveData,effectiveType:connection.effectiveType,
+ pixelRatio:window.devicePixelRatio||1,viewportWidth:window.innerWidth,
+ reducedMotion:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches===true});
+$('quality-status').textContent='Αυτόματη απόδοση: '+quality.tier+' · έως '+quality.targetFps+' FPS · pixel ratio '+quality.pixelRatio.toFixed(2)+' · προτεινόμενος άτλας '+(quality.recommendedAtlas==='bp3d43'?'BodyParts3D 4.3':'BodyParts3D 4.0')+'.';
+let assets=[],allAssets=[],registry=null,renderer,scene,camera,controls,mixer,live,raf=0,loader,draco,THREE,clock,loadVersion=0;
+const partSelect=$('source-part'),animationSelect=$('source-clip'),opacity=$('source-opacity');
+const meshInfo=$('source-mesh-info'),studyFilter=$('study-filter'),studyCard=$('source-education-summary'),previewCaption=$('source-preview-caption'),qualityNote=$('source-quality-note'),partControls=['part-isolate','part-show','view-reset','view-front','view-side','source-opacity'];
+let meshParts=[],animationClips=[],originalMaterials=new Map(),fullSceneObject=null,animationPaused=false;
+function setEnabled(active){
+ for(const id of partControls)$(id).disabled=!active;
+ partSelect.disabled=!active||!meshParts.length;
+ animationSelect.disabled=!active||!animationClips.length;
+ $('clip-play').disabled=!active||!animationClips.length;
+ $('clip-pause').disabled=!active||!animationClips.length;
+}
+function resetParts(){
+ meshParts=[];animationClips=[];originalMaterials.clear();fullSceneObject=null;
+ meshInfo.textContent='';opacity.value='100';$('opacity-value').textContent='100%';
+ partSelect.replaceChildren(new Option('Φόρτωσε μοντέλο',''));
+ animationSelect.replaceChildren(new Option('Δεν υπάρχει διαθέσιμη κίνηση',''));
+ setEnabled(false);
+}
+function applyOpacity(){
+ const fraction=Number(opacity.value)/100;
+ $('opacity-value').textContent=opacity.value+'%';
+ for(const [m,values] of originalMaterials){
+  m.opacity=values.opacity*fraction;
+  m.transparent=values.transparent||fraction<1;
+  m.depthWrite=fraction===1?values.depthWrite:false;
+  m.needsUpdate=true;
+ }
+}
+function showAll(){
+ meshParts.forEach(p=>{p.visible=true});
+ for(const node of meshParts){let parent=node.parent;while(parent&&parent!==live){parent.visible=true;parent=parent.parent}}
+}
+function selectedMesh(){return meshParts[Number(partSelect.value)]||null}
+function locate(orientation='reset'){
+ if(!live||!camera)return;
+ const mesh=selectedMesh();
+ const box=new THREE.Box3().setFromObject(orientation==='reset'||!mesh?live:mesh);
+ if(box.isEmpty())return;
+ const center=box.getCenter(new THREE.Vector3());
+ const max=box.getSize(new THREE.Vector3()).length();
+ const dist=Math.max(1.2,max*1.4);
+ controls.target.copy(center);
+ const rel=orientation==='front'?new THREE.Vector3(0,.1,1):orientation==='side'?new THREE.Vector3(1,.1,0):new THREE.Vector3(1,.5,1);
+ camera.position.copy(center).addScaledVector(rel.normalize(),dist);
+ camera.near=Math.max(.005,dist/1000);
+ camera.far=Math.max(200,dist*15);
+ camera.updateProjectionMatrix();controls.update();
+}
+function choosePart(index){
+ const p=meshParts[index];
+ if(!p)return;
+ partSelect.value=String(index);
+ meshInfo.textContent=(p.name||'Πλέγμα '+(index+1))+' · '+(p.geometry?.attributes?.position?.count||0).toLocaleString('el-GR')+' κορυφές';
+}
+function applyAnimation(){
+ if(!mixer)return;
+ mixer.stopAllAction();mixer.uncacheRoot(fullSceneObject);
+ const clip=animationClips[Number(animationSelect.value)];
+ if(clip){
+  mixer.clipAction(clip,fullSceneObject).reset().play();
+  mixer.timeScale=animationPaused?0:1;
+ }
+}
+function installModelTools(gltf,modelRoot){
+ fullSceneObject=gltf.scene;
+ meshParts=[];
+ gltf.scene.traverse(node=>{if(node.isMesh||node.isSkinnedMesh)meshParts.push(node)});
+ partSelect.replaceChildren(...meshParts.map((p,i)=>new Option((p.name||'Πλέγμα '+(i+1)).slice(0,110),String(i))));
+ if(meshParts.length)choosePart(0);
+ animationClips=Array.isArray(gltf.animations)?gltf.animations:[];
+ animationSelect.replaceChildren(...(animationClips.length?
+  animationClips.map((clip,i)=>new Option((clip.name||'Animation '+(i+1)).slice(0,100),String(i))):
+  [new Option('Δεν υπάρχει διαθέσιμη κίνηση','')]));
+ originalMaterials.clear();
+ for(const node of meshParts)for(const material of (Array.isArray(node.material)?node.material:[node.material])){
+  if(material&&!originalMaterials.has(material))originalMaterials.set(material,{
+   opacity:material.opacity,transparent:material.transparent,depthWrite:material.depthWrite
+  });
+ }
+ setEnabled(true);
+ animationPaused=false;
+ if(animationClips.length){mixer=new THREE.AnimationMixer(modelRoot);applyAnimation()}
+ const triangles=meshParts.reduce((sum,p)=>sum+Math.floor((p.geometry?.index?.count??p.geometry?.attributes?.position?.count??0)/3),0);
+ meshInfo.textContent=meshParts.length+' '+(meshParts.length===1?'τμήμα':'τμήματα')+' 3D · περίπου '+triangles.toLocaleString('el-GR')+' τρίγωνα · '+animationClips.length+' κινήσεις.';
+ if(qualityNote)qualityNote.textContent=triangles<2000?
+  'Απλή γεωμετρία: η επιφάνεια μπορεί να φαίνεται γωνιώδης. Η εμφάνιση εξαρτάται από το πρωτότυπο αρχείο.':
+  'Το 3D αποτελείται από περίπου '+triangles.toLocaleString('el-GR')+' μικρές τριγωνικές επιφάνειες. Ο αριθμός τους δεν εγγυάται ανατομική ακρίβεια.';
+}
+partSelect.addEventListener('change',()=>choosePart(Number(partSelect.value)));
+$('part-isolate').addEventListener('click',()=>{
+ const mesh=selectedMesh();if(!mesh)return;
+ meshParts.forEach(p=>{p.visible=p===mesh});
+ locate('part');
+});
+$('part-show').addEventListener('click',()=>{showAll();locate('reset')});
+$('view-reset').addEventListener('click',()=>locate('reset'));
+$('view-front').addEventListener('click',()=>locate('front'));
+$('view-side').addEventListener('click',()=>locate('side'));
+function zoomModel(factor){
+ if(!live||!controls||!camera)return;
+ const offset=camera.position.clone().sub(controls.target).multiplyScalar(factor);
+ camera.position.copy(controls.target).add(offset);
+ controls.update();
+}
+$('source-zoom-in')?.addEventListener('click',()=>zoomModel(.78));
+$('source-zoom-out')?.addEventListener('click',()=>zoomModel(1.28));
+$('source-camera-reset')?.addEventListener('click',()=>locate('reset'));
+opacity.addEventListener('input',applyOpacity);
+animationSelect.addEventListener('change',()=>{animationPaused=false;applyAnimation()});
+$('clip-play').addEventListener('click',()=>{animationPaused=false;if(mixer)mixer.timeScale=1});
+$('clip-pause').addEventListener('click',()=>{animationPaused=true;if(mixer)mixer.timeScale=0});
+const pickPoint={x:0,y:0};let pointerStart=null;
+$('source-canvas').addEventListener('pointerdown',event=>{pointerStart={x:event.clientX,y:event.clientY}});
+$('source-canvas').addEventListener('pointerup',event=>{
+ if(!pointerStart||Math.hypot(event.clientX-pointerStart.x,event.clientY-pointerStart.y)>5||!camera||!live)return;
+ const bounds=$('source-canvas').getBoundingClientRect();
+ if(!bounds.width||!bounds.height)return;
+ pickPoint.x=((event.clientX-bounds.left)/bounds.width)*2-1;
+ pickPoint.y=1-((event.clientY-bounds.top)/bounds.height)*2;
+ const ray=new THREE.Raycaster();
+ ray.setFromCamera(pickPoint,camera);
+ const hits=ray.intersectObjects(meshParts.filter(m=>m.visible),false);
+ if(hits.length){
+  const index=meshParts.indexOf(hits[0].object);
+  if(index>=0)choosePart(index);
+ }
+ pointerStart=null;
+});
+/** Verify SHA-256; legacy patient meshes use the original Git blob SHA-1. */
+async function matchesRegistryHash(item,bytes){
+ const integrity=item?.integrity;
+ if(!integrity||!['sha256','gitBlobSha'].includes(integrity.algorithm))return false;
+ let payload=bytes;
+ if(integrity.algorithm==='gitBlobSha'){
+  const header=new TextEncoder().encode('blob '+bytes.byteLength+'\0');
+  const combined=new Uint8Array(header.byteLength+bytes.byteLength);
+  combined.set(header,0);combined.set(new Uint8Array(bytes),header.byteLength);
+  payload=combined;
+ }
+ const digest=await crypto.subtle.digest(integrity.algorithm==='sha256'?'SHA-256':'SHA-1',payload);
+ const actual=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');
+ return actual===integrity.value;
+}
+/** Verify bytes BEFORE parsing to avoid accepting a mismatched 3D model. */
+async function loadVerifiedGlb(item,url){
+ const response=await fetch(url);
+ if(!response.ok)throw Error('Το αρχείο δεν είναι διαθέσιμο (HTTP '+response.status+').');
+ const bytes=await response.arrayBuffer();
+ if(bytes.byteLength!==item.bytes)throw Error('Το μέγεθος του αρχείου δεν ταιριάζει με το μητρώο.');
+ if(!await matchesRegistryHash(item,bytes))throw Error('Το αρχείο απέτυχε στον έλεγχο ακεραιότητας του μητρώου.');
+ return loader.parseAsync(bytes,'');
+}
+function showStudyCard(item){
+ if(!studyCard)return;
+ studyCard.replaceChildren();
+ if(!item?.id){studyCard.textContent='Επίλεξε μια δομή για να μάθεις τι ακριβώς δείχνει.';return}
+ const scope=studyScope3D(item),d=item.details||{};
+ const title={anatomy:'Ανατομική δομή',pathology:'Παθολογικό παράδειγμα',research:'Ερευνητικό ή μη ταξινομημένο υλικό'}[scope];
+ const heading=document.createElement('strong');heading.textContent=title;studyCard.append(heading);
+ const add=(txt,small=false)=>{const p=document.createElement('p');p.textContent=txt;if(small)p.className='study-note';studyCard.append(p)};
+ const structures=(d.greekStructures||[]).filter(Boolean);
+ if(structures.length)add('Τι βλέπεις: '+structures.join(', ')+'.');
+ else add('Δεν υπάρχουν επαληθευμένες ονομασίες επιμέρους δομών στο μητρώο.');
+ if(scope==='pathology')add('Παράδειγμα πάθησης ή κάκωσης από την πηγή — όχι πρότυπο φυσιολογικής ανατομίας.');
+ if(scope==='research')add('Δεν έχει επαληθευτεί αντιστοίχιση με τη βασική ύλη ανατομίας.');
+ const names={nih3d:'NIH 3D',hra:'HRA / HuBMAP','z-anatomy':'Z-Anatomy',patients:'Συλλογή ασθενών',makehuman:'MakeHuman',quaternius:'Quaternius','makehuman-rigged':'MakeHuman'};
+ add('Προέλευση: '+(names[item.source]||item.source)+'. Η λεπτομέρεια καθορίζεται από το πρωτότυπο· δεν έχουν προστεθεί επαληθευμένες επισημάνσεις πάνω στο 3D.',true);
+}
+function showDetails(item){
+ showStudyCard(item);
+ const box=$('source-details'),d=item.details;
+ box.replaceChildren();box.hidden=!d;
+ if(!d)return;
+ const line=(label,value)=>{
+  if(!value)return;
+  const row=document.createElement('p');const name=document.createElement('strong');
+  name.textContent=label+': ';row.append(name,String(value));box.append(row);
+ };
+ line('Πρωτότυπη ονομασία',d.originalTitle);
+ line('Κατηγορία',d.category);
+ line('Ανατομική δομή',d.greekStructures?.join(', '));
+ line('Πλευρικότητα','Δεν δηλώνεται στην πηγή');
+ line('Κωδικός και έκδοση',d.accession+(d.sourceVersion?' · έκδοση '+d.sourceVersion:''));
+ line('Δημιουργός',d.creator);
+ line('Κατάσταση έγκρισης','Χωρίς επιστημονική ή κλινική επικύρωση. Μόνο για εκπαιδευτική εξερεύνηση.');
+ if(d.kind==='pathology')line('Σημείωση','Παράδειγμα παθολογίας από την πηγή, όχι εύρημα συγκεκριμένου ασθενούς.');
+ line('Περιορισμός',d.restriction);
+ if(d.rightsBasis==='OWNER_STATED_PERMISSION')line('Δικαιώματα','Χρήση με δηλωμένη άδεια του ιδιοκτήτη της εφαρμογής. Αρχική άδεια: '+d.license+'.');
+ if(/^https:\/\/3d\.nih\.gov\//.test(d.originalPage||'')){
+  const row=document.createElement('p'),a=document.createElement('a');
+  a.href=d.originalPage;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Πρωτότυπη σελίδα NIH 3D ↗';
+  row.append(a);box.append(row);
+ }
+}
+function dispose(){
+ mixer?.stopAllAction();mixer=null;
+ for(const [m,values] of originalMaterials){
+  m.opacity=values.opacity;m.transparent=values.transparent;m.depthWrite=values.depthWrite;
+ }
+ resetParts();
+ if(live){
+  scene.remove(live);
+  live.traverse(o=>{o.geometry?.dispose?.();if(o.material)for(const m of (Array.isArray(o.material)?o.material:[o.material])){for(const k of ['map','normalMap','roughnessMap','metalnessMap'])m[k]?.dispose?.();m.dispose?.()}});
+  live=null;
+ }
+}
+async function init3D(){
+ if(renderer)return;
+ THREE=await import('three');
+ const [{GLTFLoader},{OrbitControls},{DRACOLoader}]=await Promise.all([
+  import('three/addons/loaders/GLTFLoader.js'),
+  import('three/addons/controls/OrbitControls.js'),
+  import('three/addons/loaders/DRACOLoader.js')
+ ]);
+ const canvas=$('source-canvas');
+ renderer=new THREE.WebGLRenderer({canvas,antialias:quality.tier!=='οικονομική',powerPreference:quality.tier==='υψηλή'?'high-performance':'low-power'});
+ renderer.setPixelRatio(quality.pixelRatio);renderer.setClearColor(0x0a1c2d);
+ scene=new THREE.Scene();scene.add(new THREE.HemisphereLight(0xffffff,0x597087,2.5));
+ const sun=new THREE.DirectionalLight(0xffffff,2);sun.position.set(3,6,4);scene.add(sun);
+ camera=new THREE.PerspectiveCamera(42,1,0.01,100);camera.position.set(2.5,2,4);
+ controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.enablePan=true;
+ loader=new GLTFLoader();
+ draco=new DRACOLoader();
+ draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/libs/draco/');
+ loader.setDRACOLoader(draco);
+ clock=new THREE.Clock();
+ const resize=()=>{if(!renderer)return;const w=canvas.clientWidth||320,h=canvas.clientHeight||380;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};
+ if(typeof ResizeObserver==='function')new ResizeObserver(resize).observe(canvas);
+ resize();
+ let previousFrame=0;
+ const loop=now=>{if(!renderer)return;raf=requestAnimationFrame(loop);if(document.hidden||!canvas.getClientRects().length||now-previousFrame<1000/quality.targetFps)return;previousFrame=now;mixer?.update(Math.min(0.05,clock.getDelta()));controls.update();renderer.render(scene,camera)};
+ loop();
+}
+button.addEventListener('click',async()=>{
+ const item=assets[Number(select.value)];if(!item?.available||!item.path)return;
+ const current=++loadVersion;
+ if(item.bytes>quality.maxRecommendedBytes&&!confirm('Αυτό το 3D μοντέλο είναι '+(item.bytes/1048576).toFixed(1)+' MiB και μπορεί να επιβαρύνει τη συσκευή. Να φορτωθεί;'))return;
+ button.disabled=true;status('Φόρτωση '+item.label+'…');
+ try{
+  await init3D();
+  const modelUrl=safeAssetUrl(item,item.tool,root).href;
+  let model;
+  if(item.format==='obj'){
+   const {OBJLoader}=await import('three/addons/loaders/OBJLoader.js');
+   const response=await fetch(modelUrl);
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const bytes=await response.arrayBuffer();
+   if(bytes.byteLength!==item.bytes)throw Error('Το μέγεθος του αρχείου δεν ταιριάζει.');
+   if(!await matchesRegistryHash(item,bytes))throw Error('Αποτυχία ελέγχου ακεραιότητας για το OBJ.');
+   model={scene:new OBJLoader().parse(new TextDecoder().decode(bytes)),animations:[]};
+  }else model=await loadVerifiedGlb(item,modelUrl);
+  if(current!==loadVersion){model.scene.traverse(n=>{n.geometry?.dispose?.();if(n.material)(Array.isArray(n.material)?n.material:[n.material]).forEach(m=>m.dispose?.())});return;}
+  const box=new THREE.Box3().setFromObject(model.scene);
+  const extent=box.getSize(new THREE.Vector3()),max=Math.max(extent.x,extent.y,extent.z);
+  if(box.isEmpty()||!Number.isFinite(max)||max<=0)throw Error('Μη έγκυρη γεωμετρία');
+  dispose();
+  const center=box.getCenter(new THREE.Vector3());
+  model.scene.position.sub(center);const group=new THREE.Group();group.add(model.scene);group.scale.setScalar(2.6/max);scene.add(group);live=group;
+  installModelTools(model,model.scene);
+  controls.target.set(0,0,0);camera.position.set(2.5,2,4);controls.update();
+  $('source-license').textContent=item.license+' · '+item.status;
+  if(previewCaption)previewCaption.textContent='3D προβολή · '+item.label;
+  showDetails(item);
+  status('Φορτώθηκε '+item.label+' · περιστροφή / μεγέθυνση με αφή ή ποντίκι.');
+  if(inUnifiedAnatomy&&window.innerWidth<=820)$('source-stage')?.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(e){if(current===loadVersion)status('Αδυναμία φόρτωσης: '+String(e.message||e).slice(0,170),true)}
+ finally{if(current===loadVersion)button.disabled=false}
+});
+function refreshComposition(){
+ if(!registry)return;
+ const plan=proposeBodyComposition(registry,{sex:$('composition-sex').value});
+ const ul=$('composition-parts');ul.replaceChildren();
+ for(const part of plan.parts){
+  const li=document.createElement('li');
+  li.textContent=part.role+': '+part.label+' ('+part.source+')';
+  ul.append(li);
+ }
+ $('composition-status').textContent=plan.message;
+ $('composition-status').dataset.ready=String(plan.canAssemble);
+}
+$('composition-sex').addEventListener('change',refreshComposition);
+function renderChoices(){
+ const scope=studyFilter?.value||'all';
+ const q=$('source-query').value.trim().normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el');
+ assets=allAssets.filter(item=>{
+  if(scope!=='all'&&studyScope3D(item)!==scope)return false;
+  const key=[item.label,item.id,item.path,item.source,item.details?.accession,item.details?.originalTitle,item.details?.category,...(item.details?.greekStructures||[])].join(' ')
+   .normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('el');
+  return !q||q.split(/\s+/).every(token=>key.includes(token));
+ });
+ renderList();
+}
+// Greek names for the two titles the source gives only in English.
+const LABEL_FIX={'Ανατομία · Brain subcortical meshes':'Υποφλοιώδεις δομές εγκεφάλου',
+ 'Ανατομία · Case Model #82 Single Ventricle Heart s/p Fontan':'Καρδιά με μονήρη κοιλία μετά από επέμβαση Fontan'};
+/**
+ * The same HRA organ was imported twice (NIH 3D copy and HRA file): keep the HRA file.
+ * Different models that share a name are numbered, so every entry is distinguishable.
+ */
+function tidyAtlasList(items,byId){
+ items=items.map(a=>LABEL_FIX[a.label]?{...a,label:LABEL_FIX[a.label]}:a);
+ const same=label=>label.replace(/ \(άνδρας\)$/,' ανδρός').replace(/ \(γυναίκα\)$/,' γυναίκας');
+ const hraLabels=new Set(items.filter(a=>byId.get(a.id)?.source==='hra').map(a=>same(a.label)));
+ items=items.filter(a=>!(byId.get(a.id)?.source==='nih3d'&&hraLabels.has(same(a.label))));
+ const total={},seen={};
+ for(const a of items)total[a.label]=(total[a.label]||0)+1;
+ return items.map(a=>total[a.label]>1?{...a,label:a.label+' · μοντέλο '+(seen[a.label]=(seen[a.label]||0)+1)}:a);
+}
+// Body systems for the grouped list (matched on the Greek name).
+const SYSTEMS=[
+ ['Νευρικό σύστημα',/εγκεφαλ|νωτιαί|μεσολόβ|υποφλοιώδ|προμήκ/i],
+ ['Καρδιά και αγγεία',/καρδι|αορτ|αγγεί|αρτηρ|φλέβ|ανεύρυσ|στεφαν|fontan|fallot|διαχωρισμ/i],
+ ['Αναπνευστικό',/πνεύμον|πνευμον|βρόγχ|τραχεί|λάρυγγ|αεραγωγ|ρινικ|διάφραγμα/i],
+ ['Πεπτικό',/ήπαρ|ηπατ|σπλήν|στόμαχ|έντερ|πάγκρε|χοληδ|κόλον/i],
+ ['Ουροποιητικό και αναπαραγωγικό',/νεφρ|(^|\s)ουρ|κύστη|μήτρα|ωοθήκ|σάλπιγγ|πλακούντ|προστάτ|κύηση|έμβρυ/i],
+ ['Οφθαλμός και δέρμα',/οφθαλμ|φακ|δέρμα|(^|\s)ους(\s|$)|κερατοειδ/i],
+ ['Σκελετός, αρθρώσεις και μύες',/./]
+];
+const systemOf=label=>SYSTEMS.find(([,re])=>re.test(label))[0];
+function renderList(){
+ const scope=studyFilter?.value||'all';
+ const options=assets.map((a,i)=>{
+  const tag=scope==='all'?'['+({anatomy:'Ανατομία',pathology:'Παθολογία',research:'Έρευνα'}[studyScope3D(a)])+'] ':'';
+  return new Option(tag+(a.available?'':'[Μόνο στοιχεία] ')+a.label,String(i));
+ });
+ if(inUnifiedAnatomy&&assets.length>12){
+  const groups=new Map(SYSTEMS.map(([name])=>[name,[]]));
+  assets.forEach((a,i)=>groups.get(systemOf(a.label)).push(options[i]));
+  select.replaceChildren(...[...groups].filter(([,list])=>list.length).map(([name,list])=>{
+   const group=document.createElement('optgroup');group.label=name+' ('+list.length+')';group.append(...list);return group;
+  }));
+  select.selectedIndex=0;
+ }else select.replaceChildren(...options);
+ $('source-count').textContent=assets.filter(x=>x.available).length+' μοντέλα για προβολή 3D.';
+ button.disabled=!assets[0]?.available;
+ $('source-license').textContent='';
+ showDetails(assets[0]||{details:null});
+}
+function showSelection(){
+ const selected=assets[Number(select.value)];
+ button.disabled=!selected?.available;
+ $('source-license').textContent=selected?(selected.license+' · '+selected.status):'';
+ showDetails(selected||{details:null});
+ if(!selected)status('Δεν βρέθηκαν μοντέλα σε αυτή την κατηγορία. Δοκίμασε άλλη επιλογή.');
+ else if(!selected.available)status('Υπάρχουν μόνο μεταδεδομένα: δεν υπάρχει εγκεκριμένο για λήψη αρχείο σε αυτό το μητρώο.');
+ else status('Επιλεγμένο: '+selected.label+'. Πάτησε «Προβολή 3D».');
+}
+function invalidatePreview(){
+ ++loadVersion;
+ dispose();
+ if(previewCaption)previewCaption.textContent='Δεν έχει φορτωθεί το τρέχον επιλεγμένο μοντέλο.';
+ if(qualityNote)qualityNote.textContent='';
+}
+select.addEventListener('change',()=>{invalidatePreview();showSelection()});
+$('source-query').addEventListener('input',()=>{invalidatePreview();renderChoices();showSelection()});
+studyFilter?.addEventListener('change',()=>{invalidatePreview();renderChoices();showSelection()});
+async function loadDataset(){
+ const request=++loadVersion;
+ assets=[];allAssets=[];button.disabled=true;select.replaceChildren();
+ $('source-license').textContent='';$('source-details').replaceChildren();
+ $('source-details').hidden=true;dispose();
+ status('Ανάγνωση της μοναδικής κοινής βιβλιοθήκης 3D…');
+ try{
+  const data=await loadLibrary(root);
+  if(request!==loadVersion)return;
+  registry=data;
+  if(deepLinkModel&&studyFilter)studyFilter.value='all';
+  const audit=audit3DLibrary(data);
+  $('library-audit').textContent=audit.models+' καταχωρισμένα μοντέλα · '+audit.atlases+' άτλαντες BodyParts3D · '+
+   audit.totals.ready+' διαθέσιμα · '+audit.totals['metadata-only']+' μόνο μεταδεδομένα · '+
+   audit.totals.restricted+' περιορισμένα · '+audit.duplicateContent.length+' πιθανές ταυτόσημες εγγραφές.';
+  refreshComposition();
+  let next=sharedRegistryAssets(data,{tool,dataset:dataset.value});
+  if(inUnifiedAnatomy){
+   // The student atlas shows only curated human anatomy and labelled pathology examples.
+   const byId=new Map(data.models.map(m=>[String(m.id),m]));
+   next=next.filter(item=>item.available).flatMap(item=>{
+    const role=atlasRole(byId.get(item.id)).role;
+    return role?[{...item,details:{...item.details,kind:role},kind:role}]:[];
+   });
+  }
+  if(inUnifiedAnatomy)next=tidyAtlasList(next,new Map(data.models.map(m=>[String(m.id),m])));
+  allAssets=next;
+  if(!next.length)throw Error('Δεν υπάρχουν μοντέλα σε αυτή τη συλλογή');
+  renderChoices();
+  status('Το κοινό μητρώο φορτώθηκε. Επίλεξε μοντέλο για έλεγχο και προεπισκόπηση.');
+  if(deepLinkModel){
+   const index=assets.findIndex(a=>a.details?.accession===deepLinkModel||a.path===deepLinkModel||a.id===deepLinkModel);
+   deepLinkModel=null;
+   if(index>=0){
+    select.value=String(index);showSelection();
+    if(assets[index].available)button.click();
+    else status('Το μοντέλο καταγράφεται, αλλά δεν διατίθεται για λήψη.',true);
+   }else status('Το ζητούμενο μοντέλο δεν είναι διαθέσιμο σε αυτή την προβολή.',true);
+  }else showSelection();
+ }catch(e){if(request===loadVersion)status('Το κοινό μητρώο δεν είναι διαθέσιμο: '+String(e.message||e),true)}
+}
+/** Opens the curated detail models of one structure selected in the whole-body atlas. */
+function applyExplore(request){
+ if(!request||!allAssets.length||!inUnifiedAnatomy)return;
+ if(studyFilter)studyFilter.value='all';
+ $('source-query').value='';
+ const keys=detailKeysForStructure(request.english);
+ const byId=new Map(registry.models.map(m=>[String(m.id),m]));
+ const vocabulary=registry.vocabulary?.structures||{};
+ assets=allAssets.filter(item=>modelShowsStructures(byId.get(item.id),keys,vocabulary));
+ renderList();
+ const closeup=$('source-atlas-closeup');
+ if(closeup)closeup.hidden=Boolean(assets.length);
+ if(assets.length){showSelection();status('Λεπτομερή μοντέλα για «'+request.greek+'»: '+assets.length+'. Επίλεξε μοντέλο και πάτησε «Προβολή 3D». Μπορείς επίσης να δεις τη δομή από κοντά στον πλήρη άτλαντα.');if(closeup)closeup.hidden=false;return}
+ showDetails({details:null});button.disabled=true;
+ status('Για «'+request.greek+'» η λεπτομερής προβολή γίνεται στον πλήρη άτλαντα BodyParts3D: πάτησε «Δες τη δομή από κοντά».');
+}
+window.addEventListener('atla:explore-structure',event=>{invalidatePreview();applyExplore(event.detail)});
+$('source-atlas-closeup')?.addEventListener('click',()=>window.dispatchEvent(new CustomEvent('atla:atlas-closeup')));
+dataset.addEventListener('change',loadDataset);
+loadDataset().then(()=>{if(window.ATLA_EXPLORE_REQUEST)applyExplore(window.ATLA_EXPLORE_REQUEST)});
+window.addEventListener('pagehide',()=>{dispose();cancelAnimationFrame(raf);controls?.dispose();draco?.dispose();renderer?.dispose();renderer=null});

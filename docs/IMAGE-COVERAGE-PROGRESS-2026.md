@@ -1,0 +1,297 @@
+# Image coverage continuation checkpoint
+
+**Latest checked state: 2026-10-27 — 247/247 chapters have at least one selected image in the EXISTING DRAFT PR #6.** This is a **source-selection milestone only**, not full topic coverage, independent medical approval, browser verification or public deployment. Continue on branch `coverage/greek-images-20261026` and do not create another PR or reset concurrent commits.
+
+## Distinct quality gates — current draft, not live production
+
+| Semester | Total chapters | Draft: at least one selected image | Missing selected image | Full subject adequacy independently documented | Independent scientific approval documented | Live publication of this draft verified |
+|---|---:|---:|---:|---:|---:|---:|
+| Α | 71 | 71 | 0 | 0 | 0 | 0 |
+| Β | 73 | 73 | 0 | 0 | 0 | 0 |
+| Γ | 51 | 51 | 0 | 0 | 0 | 0 |
+| Δ | 52 | 52 | 0 | 0 | 0 | 0 |
+| **Total** | **247** | **247** | **0** | **0 documented** | **0 documented** | **0 independently confirmed** |
+
+Registry: **95 assets**, **88 locally hosted Greek-labelled SVGs**, **7 external Wikimedia Commons files**. All 247 selected chapters retain status `source-selected-pending-independent-scientific-review` and the draft is **not merged**. Main-branch registry last checked 2026-10-27 has **26/247 selected (Α10, Β5, Γ5, Δ6)**; this is a source-tree comparison, **not proof of public-site availability**. The production version and its deployment must be checked independently; draft service-worker cache **b29** is not a release.
+
+**CI evidence:** [image-audit run 40423256972](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423256972) completed successfully after correcting four actual SHA-256 mismatches; [SAEK quality run 40423268129](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423268129) also passed. The new 247-chapter DOM/precache integration gate, SVG XML/Greek/ARIA/checksum checks and image registry all **passed** in [run 40423331036](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423331036) (commit `782d0b4a`). This is source-level CI only, not browser, clinical or live-publication proof. Earlier image-audit failures were real checksum discrepancies, not clinical review results. Remote Commons HEAD requests can return 429 and remain warnings.
+
+**Next priority after source selection reaches 247:** assess actual topic-specific sufficiency chapter-by-chapter, review anatomical/clinical accuracy with an independent qualified reviewer, render every SVG on phone and desktop, exercise zoom and offline in a real browser, and verify actual deployment only after a reviewed merge. Do not disable recurring work until all gates have evidence.
+
+## Batch 3: actual changes
+
+Four newly drawn original Greek SVG anatomical illustrations, all locally hosted, attributed CC BY 4.0 and registered with SHA-256:
+
+- `01-01` anatomical position, anterior view, patient-right/left, palms anterior, midline and superior/inferior. **Partial**: anatomical planes, cavities and other directional terms still need specific illustrations.
+- `01-04` anterior projection of liver, gallbladder, stomach, spleen, pancreas, small and large intestines, with patient-right/left correctly oriented. **Partial**: no retroperitoneal structures, peritoneum, depth, or full set of abdominal organs.
+- `01-09` synovial joint cross-section: bone, articular cartilage, cavity, capsule, synovial membrane, ligament (bone–bone), tendon (muscle–bone). **Partial**: other joint types and musculature not shown.
+- `01-13` kidneys, ureters, bladder, urethra in anterior view. **Partial**: male and female reproductive anatomy, urethral sex differences and kidney detail not shown.
+
+Source background: OpenStax *Anatomy and Physiology 2e*, sections 1.6, 9.4, 25.2. The diagrams are original and not traced/copied OpenStax illustrations. Their licensing is the author's declared CC BY 4.0 for the original drawing, not an assertion about OpenStax's own image licensing.
+
+Updated `saek-image-audit-2026.json` mappings, `sw.js` offline precache, and added `scripts/validate-saek-svg.py` plus workflow enforcement for XML validity, accessibility labels, visible Greek, local references, prohibited scripts, and SHA-256. CI run [40353543830](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353543830): **passed**; 247 chapter mappings, 43 selected, 22 image assets, 0 errors, 5 warnings (requires separate inspection). XML/SVG validator: **15 local SVG assets, 0 errors (batch 3; batch 4 CI pending)**. SAEK content check [40353551300](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353551300): **passed**.
+
+## Critical quality gates (still open)
+
+1. **Independent medical/scientific review: 0 verified approvals.** The images are drafts with citations, not independently clinically certified. Clinical-technique diagrams need verification against current authoritative practice and qualified independent review before any approval claims.
+2. **Subject adequacy: not complete** for the four new placements; selected-source counts cannot be equated with complete coverage.
+3. **Browser rendering, zoom and offline end-to-end test:** not executed/verified for these new images in a real browser. CI XML parsing and cache-list inclusion do not prove this.
+4. **Live publication:** PR remains draft and unmerged. The public site could not be verified from the available browser/search path; no production increase is claimed.
+5. **Five CI warnings** are HTTP 429 rate limits from Wikimedia Commons direct-file HEAD requests for `upper`, `spine`, `heart`, `respiratory`, `brain_medial` (run [40353733832](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40353733832)). These are NOT confirmed broken links, but availability was not proven. Recheck with respectful rate limits / alternate verification; CI has 0 hard errors.
+
+## Exact continuation
+
+Next add **male and female reproductive system** illustrations to complete the missing half of 01-13. Improve 01-01 with sagittal/coronal/transverse planes and 01-09 with muscle anatomy. Continue profession/public-health/assessment chapters, then remaining semesters, with images that actually depict each topic rather than recap cards.
+
+For each new asset: verify relevance and the original source/license; render and inspect Greek labels and exact arrow endpoints; run registry and SVG checks, browser zoom and offline tests when possible; record source selection, subject adequacy, independent review, and actual production **separately**. Do not touch unrelated lessons, progress, accounts, or sync.
+
+## Batch 4 — 2026-10-26: actual committed changes
+
+- Created `assets/education/anatomical-planes-el.svg` as an original **Greek** three-panel diagram for sagittal, frontal/coronal and transverse planes in anatomy lesson **01-01**. Each panel shows a distinct oriented plane on a stylized body; the caption discloses symbolic perspective and thickness. Definitions checked against [OpenStax A&P 2e §1.6](https://openstax.org/books/anatomy-and-physiology-2e/pages/1-6-anatomical-terminology). Artwork is original (not a copied OpenStax image), declared CC BY 4.0.
+- Rendered the exact SVG locally to PNG; corrected an initial overlap of the body silhouette and bottom labels; visually inspected the corrected rendering for Greek typography and panel alignment. Parsed SVG XML. This is **local** visual QA, not a live-browser or independent clinical review.
+- Registered asset `anatomical_planes` with local path, source, license, SHA-256 `d51da43fa735d5a8200a216b0230bcf212fc4e7eec712ec06696e4258e620c05`, `clinicalReview: pending`, `subjectCompleteness: partial`; added mapping to `01-01` in both placements and course chapters.
+- Added the SVG to `sw.js` precache and incremented the **draft** cache key to `ekab-spoudi-v27.1.68-images-20261026-b6`. No release/version bump or production deployment.
+- Post-commit remote readback confirmed **23 registered assets, 16 local SVG, 247 mapped chapters, 43 with selected imagery** (Α 27/71, Β 5/73, Γ 5/51, Δ 6/52). No new chapter became selected; lesson 01-01 gained a second subject-specific diagram. The 204 missing chapters remain unchanged.
+
+**Still blocked/unverified:** 0 independent scientific approvals; real browser image/zoom/offline end-to-end and GitHub Pages publication not verified; full adequacy of lesson 01-01 still partial (body cavities, oblique planes, etc.). Structural CI for batch 4 should be checked separately after GitHub Actions runs. Never mark this batch clinically approved or published based on SVG parsing or service-worker inclusion.
+
+**Next safe batch:** add accurately sourced, Greek-labelled male/female reproductive anatomy to 01-13 (currently urinary only); then 01-09 muscular anatomy. For new unselected chapters in professional/public health courses, inspect actual lesson content first and choose concrete topic-relevant imagery. Continue in existing draft PR #6 without resetting its branch.
+
+## Batch 5 — 2026-10-26: new selected chapter 04-02
+
+- Inspected the actual text of **04-02** (“Αλυσίδα μετάδοσης λοιμώξεων”) before drawing; created original Greek SVG `assets/education/chain-of-infection-el.svg` showing six ordered components, directional arrows and concrete examples, rather than a generic lesson-summary card.
+- Verified terminology and sequence against official [CDC/NIOSH chain-of-infection components](https://www.cdc.gov/niosh/learning/safetyculturehc/module-2/3.html). Original artwork, declared CC BY 4.0; no CDC graphic copied. Distinct examples in nodes do not imply a single disease. No 2026-specific protocol asserted.
+- Locally parsed SVG and rendered it to PNG. Corrected heading overflow and arrow lengths after visual inspection. Browser zoom, service-worker offline end-to-end and independent scientific assessment **not** verified.
+- Added `infection_chain` asset with SHA-256 `0fb31dc9fd094ab6d197294c72b16539d8d6eed28e4bf5028880f23d1b38fc42` and `clinicalReview: pending`, `subjectCompleteness: partial`. Mapped it to `04-02` in both registry locations and added to offline precache. Draft cache key now `ekab-spoudi-v27.1.68-images-20261026-b7`.
+- New selected-source counts **44/247**: Α **28/71**, Β **5/73**, Γ **5/51**, Δ **6/52**. **203** chapters still have no selected source. Registry has **24** assets, including **17** locally hosted SVG. Selection does not establish full lesson adequacy or approval.
+
+**Remaining quality gates:** 0 documented independent scientific approvals; source/subject completeness pending; production deployment and real browser/offline/zoom verification pending. Public site version remains **27.1.68** according to previous checkpoint; this draft batch has not been merged or published. Next: reproductive anatomy 01-13, muscular anatomy 01-09, then further uncovered 04-xx chapters with verified source-specific figures.
+
+**Post-batch-5 CI readback:** GitHub Actions SAEK quality run [40363485365](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40363485365) completed **successfully** for checkpoint commit `f97d27a12725bd5f322996c7cc25ed65127a5847`; the earlier image mapping and precache commits also had successful SAEK quality runs [40363416900](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40363416900) and [40363437507](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40363437507). A separate image-specific audit CI run for this batch has not been confirmed; do not infer it from SAEK quality CI. Remote readback verified registry counts and mappings. Main registry remains 26 selected (Α 10, Β 5, Γ 5, Δ 6), **not** a live browser publication proof.
+
+## Batch 6 — 2026-10-26: epidemiology 04-05
+
+- Inspected the actual course 04 lesson index and targeted **04-05, Βασικές έννοιες επιδημιολογίας**. Drew `assets/education/incidence-prevalence-el.svg` as a **specific population illustration**, not a generic recap card: the same 20 people at T0/T1, 2 pre-existing cases, 3 new cases, and explicit absence of recovery or attrition. Incidence proportion 3/18 = 16.7%; point prevalence at T1 5/20 = 25%. No person-time incidence rate claimed.
+- Definitions and denominators checked against [CDC Field Epidemiology Manual](https://www.cdc.gov/field-epi-manual/php/chapters/describing-epi-data.html) and [CDC Principles of Epidemiology, Lesson 3](https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson3/section2.html). Diagram is independently drawn and declared CC BY 4.0; no CDC artwork copied.
+- Reproduced the exact SVG locally, XML parsed and rendered to PNG; inspected Greek labels, 20 dots in each panel, 2 purple pre-existing, 3 orange new cases, denominator arithmetic and no overlap. SHA-256 `cafc8c66c26ed6000944c7ed8e065ba8d18c3973c922049fd506edfdb5b06b71` checked against remote GitHub content.
+- Registered `incidence_prevalence` in `assets`, `placements['04-05']`, and course 4 chapter 5. Added local SVG to service-worker precache and advanced **draft cache only** to `ekab-spoudi-v27.1.68-images-20261026-b8`. Existing PR #6 remains draft; no release or production claim.
+- New source-selected count **45/247**: Α **29/71**, Β **5/73**, Γ **5/51**, Δ **6/52**. **202** without any selected image. **25** registered image assets, **18** local SVG. This chapter has **partial** subject coverage only (epidemiology includes other concepts and methods).
+
+**Quality gates:** independent scientific approvals **0 documented**; real-browser load/zoom and offline end-to-end unverified; production **unverified** (main registry remains A10/B5/C5/D6 and is not a proof of live deployment). The new figure is **non-protocol**, not a clinical procedure. Next: reproductive system 01-13, muscular anatomy 01-09, then epidemiology 04-06/04-07 with topic-specific drawings after source and clinical-scope verification. Do not substitute lesson summaries for illustrations. Validate image registry, SHA-256 and SVG structure in CI before any merge.
+
+## Batch 7 — 2026-10-26: reproductive anatomy for 01-13
+
+- Confirmed PR #6 open/draft/unmerged; existing branch ahead of main, 0 commits behind at start. Continued without new PR or reset.
+- Inspected the actual **01-13** lesson: it explicitly teaches urinary plus male and female reproductive organs. Added **two original Greek-labelled anatomical SVGs**: `assets/education/female-reproductive-system-el.svg` (uterus, uterine tubes, ovaries, cervix, vagina) and `assets/education/male-reproductive-system-el.svg` (testis, epididymis, ductus deferens, seminal vesicle, prostate, urethra, penis and bladder). These are actual organ illustrations, not text recap cards. The female image was corrected so ovary label leaders terminate on the organs.
+- Sources for anatomical relationships: [OpenStax A&P 2e 27.2](https://openstax.org/books/anatomy-and-physiology-2e/pages/27-2-anatomy-and-physiology-of-the-ovarian-reproductive-system) and [OpenStax A&P 2e 27.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/27-1-anatomy-and-physiology-of-the-testicular-reproductive-system). **No source figures were copied/traced**; both original SVG artworks are declared CC BY 4.0 with explicit license links. The source licenses are not being asserted as CC BY 4.0.
+- Registered `female_reproductive` and `male_reproductive` in the image audit with SHA-256 and `clinicalReview: pending`, and added both to **01-13** in placements and course chapter mapping. Added both local assets to `sw.js` precache, draft cache **b10**. Source and leader coordinates inspected; **raster rendering, actual browser loading/zoom, offline E2E and independent medical review not yet verified**.
+- Readback: **27 assets / 20 local SVG**, **45/247 selected chapters** (Α 29/71, Β 5/73, Γ 5/51, Δ 6/52); **202 chapters remain without selected images**. Chapter 01-13 improved from urinary-only to urinary plus two reproductive diagrams, but remains **partial** (no full kidney anatomy, pelvic spatial relationships, anatomical variations, or independent review). No additional chapter counted as selected, and no production release claimed.
+- Quality CI was still running when first checked for commit `7ea4ebf`: [workflow run 40384580359](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40384580359). Verify final results separately. No claim of a passing run until it completes.
+
+**Next continuation:** confirm SVG/checksum CI and inspect rendered images (including Greek labels and zoom); then develop subject-specific muscular anatomy for 01-09 and new uncovered lessons, without promoting unreviewed clinical procedures. Keep PR #6 in draft pending quality gates.
+
+**Post-batch verification (2026-10-26):** Remote readback confirmed both files, both chapter mappings and both service-worker precache paths. A source-level safety/Greek-label/ARIA check found no immediate issues. The pull-request-triggered [SAEK quality run 40384655117](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40384655117) **completed successfully** for the checkpoint commit `138b3b9`. This is not the image-audit SVG/checksum workflow and does not establish rendered-browser, zoom, offline E2E, medical review or live publication. Image-specific CI result for batch 7 remains unconfirmed.
+
+## Batch 8 — 2026-10-26: microbe structure illustration for uncovered 04-06
+
+- Verified PR #6 remained **open, draft, unmerged**, and read existing branch checkpoint and registry before changes. No branch reset or duplicate PR.
+- Read actual chapter **04-06, «Βακτήρια, ιοί και μύκητες»** in `saek-course-04.html`. Created an original three-panel **anatomical/biological** SVG `assets/education/microbe-structures-el.svg` with specific labelled structures: a bacterial prokaryotic cell (wall, ribosomes, nucleoid DNA); one **enveloped** virion (spikes, capsid, DNA-or-RNA genome); one **budding yeast** cell (cell wall, nucleus, bud). Diagram states examples are **not to scale** and not universal to all species. No diagnostic or treatment algorithm.
+- Scientific background checked against [OpenStax Microbiology §3.3](https://openstax.org/books/microbiology/pages/3-3-unique-characteristics-of-prokaryotic-cells), [§6.1](https://openstax.org/books/microbiology/pages/6-1-viruses) and [§5.3](https://openstax.org/books/microbiology/pages/5-3-fungi). The SVG is **independently drawn**, not a copy of textbook illustrations, and its original artwork is declared **CC BY 4.0**.
+- Parsed local SVG XML and rasterized it with CairoSVG; inspected the rendered Greek labels and leader endpoints, **corrected the viral spike leader** so it does not cross the virion. Also rendered SVG source in local Chromium via Playwright `page.set_content` and inspected the screenshot; `file://` navigation was blocked by browser environment policy. A Chromium CSS zoom call was exercised, but **actual application zoom and offline end-to-end are not verified**. Remote GitHub readback SHA-256 matches local: `a60ee4d0140da55b663780c8fcc75fd7faa9f71b32525cfe35551ed2e308cc04`.
+- Registered `microbe_structures` in audit assets, placement `04-06`, and course 4 chapter 6; added local SVG to `sw.js` precache. **Draft cache b11**, not a production version bump. The new source selection is **partial** subject coverage and `clinicalReview: pending`.
+- New counts: **46/247** chapters with at least one selected source (**Α 30/71, Β 5/73, Γ 5/51, Δ 6/52**), **201** with none. **28 registered assets, 21 local SVG**. **Independent scientific approvals: 0 documented**. Main-branch registry remains **26/247** as last checked, **not evidence of live publication**.
+- Remaining quality gates: full lesson adequacy (04-06 lacks mould hyphae and broader microbial variety), independent scientific review, complete real-app browser/zoom/offline tests, image-specific CI result and confirmed public deployment. **Do not merge or claim publication.**
+
+**Next safe batch:** add specific Greek-labelled muscular anatomy to **01-09**, or choose **04-07 / 04-08** only after reviewing current official infection-prevention instructions and image licensing. Keep registry, subject adequacy, independent approval and live production counts distinct.
+
+**Batch 8 post-commit verification:** GitHub Actions [SAEK quality run 40385553873](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40385553873) completed **successfully** for checkpoint commit `f2812a05814b46d0efdcb40d866739fe209aaaf0`. Remote registry readback: 247 chapters, 46 selected, no broken registry asset keys or course/placement mismatches, and all local image paths present in `sw.js` precache. Main registry rechecked: A10/B5/C5/D6 (26/247); production version file `27.1.68`. Image-specific GitHub Actions CI not independently confirmed for this batch; no claim of full browser app/zoom/offline E2E or published deployment.
+
+
+## Batch 9: chapter 04-08 — cleaning, disinfection and sterilization (2026-10-26)
+
+- New original Greek-labelled three-panel SVG `assets/education/clean-disinfect-sterilize-el.svg` compares the distinct objectives of cleaning, disinfection and validated sterilization. Caption explicitly distinguishes bacterial spores and warns against treating the illustration as a procedure or proof of effectiveness. Background reference: [CDC infection-control disinfection and sterilization](https://www.cdc.gov/infection-control/hcp/disinfection-sterilization/index.html); original drawing, CC BY 4.0.
+- Added asset key `clean_disinfect_sterilize`, registry placement `04-08`, course 4 chapter 8 source selection; draft service-worker precache b12. **47/247** chapters selected (Α 31/71, Β 5/73, Γ 5/51, Δ 6/52), **200** without an image, **29** registered assets, **22** local SVG. Main remains last observed 26/247; publication unverified.
+- **Quality gates pending:** independent clinical/scientific review, raster/browser visual inspection, actual course rendering and offline end-to-end, SHA-256 recording for this new SVG, new CI result and published app verification. `saek-visual-ui.js` currently hides draft visual panels and course diagrams, so source registration **does not** make the image visible to students. Do not merge or report as published. Other chapter 04-08 instrument risk categories and real procedures are not comprehensively illustrated.
+- **Next:** complete and validate the image-specific checks for batch 9, then add Greek-labelled diagrams for additional genuinely unselected chapters; milestone notification at 50/247, not 47/247.
+
+
+## Batch 10: chapter 04-09 — B-cell memory (2026-10-26)
+
+- Created `assets/education/b-cell-memory-el.svg` original Greek-labelled cellular immunology diagram with antigen, B-cell receptor, helper T cell, plasma cell secreting antibodies, memory B cell and secondary antigen response. Moved helper-T annotation clear of the illustrated cell. SVG SHA-256 `5db766b7286cda61e864b1f37d341f128741bd57f0837d501ed66834370bd0e2` recorded in registry. Original artwork CC BY 4.0.
+- Checked [OpenStax A&P 21.4](https://openstax.org/books/anatomy-and-physiology/pages/21-4-the-adaptive-immune-response-b-lymphocytes-and-antibodies), [OpenStax Microbiology 18.4](https://openstax.org/books/microbiology/pages/18-4-b-lymphocytes-and-humoral-immunity), [CDC vaccines](https://www.cdc.gov/vaccines/basics/explaining-how-vaccines-work.html) (2024). Diagram covers only T-dependent B-cell response, not all immunity or vaccination protocols.
+- Added audit asset `b_cell_memory`, `04-09` placement and Α-semester course 4 lesson 9; added SVG to draft `sw.js` precache **b13**. Existing audited-image renderer reads this registry; no changes to theory, accounts, progress or sync.
+- **Draft selected: 48/247 (Α 32/71, Β 5/73, Γ 5/51, Δ 6/52), 199 unselected; 30 assets, 23 local SVG.** Main last checked: 26/247 (Α10, Β5, Γ5, Δ6), **not verified production**. Version `27.1.68` unchanged.
+- **Remaining gates:** independent scientific approval 0 documented, completeness partial, XML/raster/actual browser/zoom/offline E2E and published deployment unverified; container DNS prevented independent download for raster. This is a draft commit only; do not merge as clinically approved. 04-08 from prior batch is preserved.
+- **Next:** validate 04-08 and 04-09 image rendering/CI, then select genuinely missing 04-07 with current official infection-prevention references. Do not treat image selection as clinical approval or public deployment.
+
+
+## Batch 11: milestone 50 — 04-07 hand hygiene and 04-10 sharps safety (2026-10-26)
+
+- Added original Greek-labelled `assets/education/hand-hygiene-hotspots-el.svg` for 04-07, showing an anatomically schematic palm and high-miss zones (thumb, fingertips, between fingers), alongside the choice of alcohol hand rub versus soap/water and the limitation of gloves. Evidence: [CDC Clinical Safety: Hand Hygiene](https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html) and [CDC core practices](https://www.cdc.gov/infection-control/hcp/core-practices/index.html), checked 2026-10-26. SHA-256: `02542b36d526f73ce1a78da2305dc2ed978ddde1834f8fca3e24264329aac871`.
+- Added original Greek-labelled `assets/education/sharps-disposal-el.svg` for 04-10: syringe/needle, immediate disposal into close-by puncture-resistant container, maximum fill line and crossed-out recapping. Evidence: [CDC NIOSH Sharps Disposal (2024)](https://www.cdc.gov/niosh/healthcare/hcp/pandemic/sharps-disposal-mass-vaccination.html) and [CDC environmental control](https://www.cdc.gov/infection-control/hcp/environmental-control/summary-recommendations.html), checked 2026-10-26. SHA-256: `99b3679bd0ea7b49d577b76382aa2231692207e0365491036668d136023b1826`.
+- Verified remote source readback and SHA-256 for both files. Checked SVG group nesting and basic markup structure; **full XML parser, raster/browser zoom and offline application end-to-end NOT yet verified**. Both are original diagrams, CC BY 4.0. Recorded missing SHA-256 for previous 04-08 asset: `75ced0d681cecdd18bc32f9383314efb841d160a6480936889de5f6e5bef9c69`.
+- Updated audit registry, two chapter placements and `sw.js` precache to draft cache **b14**. Validated registry: **247 chapters, 50 selected, no missing asset keys or chapter-placement mismatches**. Draft selected per semester **Α 34/71, Β 5/73, Γ 5/51, Δ 6/52**, **197 unselected**, **32 assets**, **25 local original SVG**. Main registry last checked **Α10/71, Β5/73, Γ5/51, Δ6/52 = 26/247**, not verified production. App production version **27.1.68**, unchanged.
+- **Critical remaining gates:** independent scientific review still **0 documented**; 04-07 is not full handwashing technique or all PPE, 04-10 not complete biological-waste policy; SVG visual review in real browser, source renderer behavior, offline E2E and public deployment remain unverified. The draft image renderer shows attributed source figures but source-selected status is **not clinical approval**. Do not merge as clinically certified.
+- **Next safe batch:** add a genuinely relevant original diagram for the next unselected chapter after reviewing its content and sources; validate rendered visual appearance and end-to-end when a suitable browser and assets are accessible. Notify user at milestone 50, then next 100.
+
+
+## Batch 12: prevention levels for 04-03 (2026-10-26)
+
+- Created original Greek-labelled SVG `assets/education/prevention-levels-el.svg`, an explicit three-stage progression with anatomical/health symbols and concrete examples: primary prevention (vaccination before illness), secondary prevention (screening/early detection), tertiary prevention (rehabilitation/reducing complications). No patient-specific clinical protocol is depicted.
+- Registered `prevention_levels` in `saek-image-audit-2026.json`, placement `04-03` and course 4 lesson 3. Added asset to `sw.js` precache **b15**. No unrelated app or theory changes.
+- Registry structurally checked in the write operation: **247 chapters, 51 with at least one selected source** (Α35/71, Β5/73, Γ5/51, Δ6/52); **196 without selected source**, 33 registered assets. All selected chapter asset keys resolved in the audit registry.
+- Main-branch registry last checked **26/247** (Α10, Β5, Γ5, Δ6), NOT evidence of live deployment. Production version **27.1.68** unchanged. PR #6 remains draft.
+- **Outstanding:** independent scientific review, live verification of linked reference pages, SVG XML/raster and actual-browser/zoom/offline E2E, source renderer and public deployment. This asset is selected in draft, not certified, clinically approved, or published. Source review date and SHA-256 remain unset until independently verified.
+- **Next:** run XML/raster/real-app checks for recent assets, fill remaining 04-01 or 04-04 only with specific explanatory diagrams; preserve milestone notification schedule (next 100).
+
+
+## Batch 13: public-health foundations 04-01 and 04-04 (2026-10-26)
+
+- Created original Greek-labelled SVGs `assets/education/public-health-cycle-el.svg` (four-stage surveillance → risk assessment → population intervention → evaluation with concrete examples) and `assets/education/social-determinants-pathways-el.svg` (housing, transport and work pathways through exposure/access/risk to health outcomes). Both are subject-specific educational diagrams, not generic text cards or patient protocols. Authored original illustrations licensed CC BY 4.0.
+- Registered `public_health_cycle` for 04-01 and `social_determinants_pathways` for 04-04 in the audit registry, course 4, and `sw.js` draft precache **b16**. No unrelated theory, study progress, login or synchronization modifications.
+- Structural registry checks during commit: **247 total chapters, 53 source-selected (Α37/71, Β5/73, Γ5/51, Δ6/52), 194 missing**, 35 registered assets, no unresolved selected asset keys. Main last verified **26/247 (Α10/71, Β5/73, Γ5/51, Δ6/52)**, not verified production. App version **27.1.68** unchanged.
+- **Quality limits:** no documented independent clinical/scientific review; live source-page verification, SHA-256, full SVG XML/raster inspection, browser/zoom/offline E2E and live deployment remain pending. Do not call draft selections approved or published.
+- **Next:** perform real rendering and offline checks on newly added diagrams and extend coverage to the next genuinely missing lesson, without duplicate PR. Next notification milestone 100 selected chapters.
+
+
+## Batch 14: Emergency dispatch and ambulance safety (2026-10-26)
+
+- Preserved all concurrent edits and the same draft PR #6. Added four original, chapter-specific Greek-labelled vector drawings: `emergency-call-location-el.svg` (07-01, address and entrance on a street map + callback number and situation, based on Greek Ministry of Health and EKAB guidance), `ambulance-pretrip-points-el.svg` (09-01, side-view ambulance with actual tire/light/brake/mirror/equipment inspection leaders), `stopping-distance-ratio-el.svg` (09-05, proportional reaction/braking distance at 30 vs 60 km/h under stipulated constant conditions), and `ambulance-restraint-zones-el.svg` (09-08, overhead illustration of cot locks, patient belts, crew seat belt, secured oxygen and storage). All original CC BY 4.0 drawings, with their source URLs and limitations recorded in audit assets.
+- Registered four explicit matching placements and lesson image keys. `sw.js` contains the four new SVG paths in draft service-worker precache at **b19**. No unrelated theory, accounts, progress or sync edits.
+- Structural markup validation by balanced SVG tag stack / accessibility title+description / no raw ampersands / Greek-content check for each four remote files passed. Confirmed remote blob SHA readback; full XML-parser/raster inspection, real-browser/zoom/offline E2E, independent scientific evaluation and production publication **not confirmed**.
+- Registry selected count at checkpoint: **61/247** (Α 41/71, Β 9/73, Γ 5/51, Δ 6/52); **186 still without image**; 41 registered assets. This includes other concurrent additions and must not be mistaken for four additions alone. Main registry last independently verified **26/247** (Α 10, Β 5, Γ 5, Δ 6), not a live deployment test. Version **27.1.68** unchanged.
+- Reviewed public sources online: https://www.moh.gov.gr/articles/citizen/xrhsima-thlefwna-amp-dieythynseis/196-166-ekab , https://www.ekab.gr/arch/arch_general/odigies-sostis-xrisis-ekab/ , https://www.osha.gov/motor-vehicle-safety/drivers , https://highways.dot.gov/safety/speed-management/guidelines-use-variable-speed-limit-systems-wet-weather/chapter-2-driver , https://www.cdc.gov/niosh/ems/crash-testing/index.html . Their presence does not confer independent clinical certification.
+- **Next:** verify visual/raster rendering and source-aware in-browser zoom/offline display for these diagrams; add only subject-specific images to the next genuinely missing chapters; next user milestone after 50 is 100.
+
+
+## Batch 14 — 2026-10-27: prehospital scene safety and ABCDE (course 05)
+
+- Added **two original Greek-labelled, locally hosted SVG illustrations**: `assets/education/scene-safety-assessment-el.svg` (illustrated road incident with traffic, smoke and electrical hazard; safety assessment and PPE) and `assets/education/primary-survey-abcde-el.svg` (body silhouette with airway, breathing, circulation, neurologic assessment and exposure/thermal protection callouts).
+- The scene-safety diagram is mapped to **05-01 and 05-05**. The anatomically oriented ABCDE diagram is mapped to **05-02 and 05-07**. In both cases, reuse addresses closely related lessons but **does not imply full lesson coverage**.
+- Educational guidance grounded in [Resuscitation Council UK 2025 first-aid guidance](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines) and its [ABCDE approach](https://www.resus.org.uk/library/abcde-approach); the artwork is original, attributed CC BY 4.0, **not copied from the source**. No intervention specifics or jurisdiction-specific operating distances are prescribed.
+- Registry uses exact SHA-256 for both files, `clinicalReview: pending` and `subjectCompleteness: partial`. Also backfilled missing SHA-256 in seven other previously created Greek SVGs (three public-health assets and four other concurrently authored assets). Image-audit source validation was corrected to accept original drawings grounded in named authoritative HTTPS source domains, rather than incorrectly requiring every original to cite only OpenStax Anatomy 2e.
+- Readback after concurrent contributions: **61/247 chapters with a selected source** (semester A 41, B 9, C 5, D 6), **186 still without**, **41 registered assets**, **34 local SVGs**. Changes in courses 07 and 09 were committed by a parallel workstream; they were preserved rather than overwritten. Every local SVG path was present in draft service-worker precache at checkpoint. Production has **not** been verified or changed by this batch.
+- Outstanding gates: **0 documented independent scientific approvals**, full XML/visual browser checking and zoom/offline end-to-end for new files pending, no completed CI result asserted, and PR #6 remains **open, draft, unmerged**. Selected-image totals are not measures of complete chapter illustrations or live app publication.
+- Next work: inspect and test the SVG renderings and remaining course 05/03 chapters, with actual source-specific diagrams and clinical review. Keep live deployment, independent approval and source-selected status distinct.
+
+
+## Batch 15: Route, dispatch report and intersection diagrams (2026-10-26)
+
+- Added three original Greek-labelled explanatory SVGs, all CC BY 4.0 and mapped to distinct uncovered lessons: `patient-transfer-route-el.svg` for **03-07** (a real floor-plan with bed, movable stretcher, obstacles, door arc and stairs), `dispatch-crew-information-el.svg` for **07-03** (call-taker map and incident information transmitted to a crew with reported-vs-verified distinction), `intersection-visibility-el.svg` for **09-07** (intersection aerial map showing occluded lateral traffic by building, an approaching ambulance and risk zone).
+- Sources: WHO unsafe patient handling (`https://www.who.int/tools/occupational-hazards-in-health-sector/unsafe-patient-handling`); OSHA ED musculoskeletal hazards (`https://www.osha.gov/etools/hospitals/emergency-department/work-related-musculoskeletal-disorders`); European Commission emergency medical dispatch (`https://road-safety.transport.ec.europa.eu/european-road-safety-observatory/statistics-and-analysis-archive/post-impact-care/emergency-medical-dispatch_en`); US Fire Administration vehicle safety (`https://www.usfa.fema.gov/downloads/pdf/publications/fa_336.pdf`). These are conceptual safety references, not Greek operational protocols or independently approved clinical procedures.
+- Added 3 audit assets, chapter image keys and placements and precached all 3 under draft SW **ekab-spoudi-v27.1.68-images-20261026-b20**. Validated remote file readback, Greek wording, title/desc metadata, tag-stack structural balance and absence of unsafe raw XML ampersands. Attempted independent raw download for raster rendering but access denied; actual XML-parser, raster, browser zoom and offline E2E **not verified**.
+- At this checkpoint selected total is **64/247** (Α 42/71, Β 11/73, Γ 5/51, Δ 6/52); **183** remain without selected images. 44 image assets in registry. Main registry last independently verified at 26/247 (Α10, Β5, Γ5, Δ6), **not proof of production**.
+- Critical gaps: independent scientific review not documented, subjectCompleteness partial, actual visual browser/zoom/offline checks and live public deployment not verified. The app release version remains **27.1.68**. PR #6 is a draft; do not merge or claim publication on this basis. Next milestone user notification is 100 selected chapters.
+
+
+## Batch 16 — 2026-10-27: assessment diagrams for SAEK course 05
+
+- Created **four original Greek-labelled SVGs** in the existing draft PR #6: `vital-signs-assessment-el.svg`, `breathing-effort-observation-el.svg`, `sample-patient-history-el.svg` and `responsiveness-acvpu-el.svg` under `assets/education/`. Each has a semantic title and description, topic-specific illustrations, declared original CC BY 4.0 artwork, and SHA-256 stored in the audit registry.
+- Actual course 05 text was checked for each placement before selection: vital signs in **05-03 and 05-11**; airway / work of breathing in **05-08**; clinical history SAMPLE in **05-04 and 05-12**; responsiveness / brief neurological observation in **05-10**. Existing source placements in 05-01/02/05/07 were preserved. Six newly selected chapters use these four figures; `subjectCompleteness: partial` and `clinicalReview: pending` for all.
+- Conceptual source references: [RCUK ABCDE guidance](https://www.resus.org.uk/library/abcde-approach) and [RCUK First Aid Guidelines 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines) for physiological observations, airway/breathing and responsiveness; [US National EMS EMT Instructional Guidelines](https://www.ems.gov/assets/EMT_Instructional_Guidelines.pdf) for SAMPLE. No source illustration was copied, no treatment algorithm or local operational protocol is implied.
+- Basic source-level checks for four SVGs: Greek visible labels, title/desc and ARIA attributes present; XML-like tag stack balanced, no unescaped ampersands, inline script, foreignObject or event handler found. This **is not** a complete XML parser, professional anatomical review, mobile browser visual check or rendered offline test. Some SVG labels and sizing may still require visual QA.
+- The audit provenance rule was expanded only to include the official US EMS documentation domain for original diagrams. Updated image registry mappings, source SHA-256 and original educational asset cache to draft SW **b21**. Previously added three parallel-workstream assets with missing SHA-256 were read back and assigned verified content hashes; all local asset paths are currently in precache.
+- After readback, **70/247 source-selected chapters** (Α 48/71, Β 11/73, Γ 5/51, Δ 6/52); **177 unselected**; **48 assets** (41 local SVGs). This is a **draft selection count**, not a claim of fully illustrated content or a live deployed build.
+- Remaining critical gates: independent scientific review 0 documented approvals; actual browser and mobile layout/zoom/offline E2E still unverified, GitHub Actions results must be inspected before merge, no production release claim. Keep this PR draft; next milestone notification is 100/247.
+
+
+## Batch 16 — 2026-10-27: EMS pathway, check-back and driver fatigue
+
+- Starting point at this run: **70/247** source-selected (Α48, Β11, Γ5, Δ6), including six additions by a concurrent workstream since the preceding 64-chapter checkpoint. Continued on the existing branch and **draft PR #6**, no new PR or merge.
+- Added **three new original, Greek-labelled SVG diagrams** and mapped **four previously uncovered chapters**: `03-04` → `prehospital-care-pathway-el.svg` (six illustrated steps from emergency call to handover); `03-09` and `07-09` → `closed-loop-handover-el.svg` (two persons, message, repeat-back, sender confirmation); `09-11` → `driver-fatigue-warning-el.svg` (ambulance drifting near lane marking, warning signs and safer response). All images are original CC BY 4.0 educational artwork, **not copies** of source figures.
+- Sources checked on 2026-10-27: WHO, *Prehospital emergency care — operational guidance for ambulance systems* (15 September 2025), https://www.who.int/publications/9789240114067 ; AHRQ TeamSTEPPS, *Check-Back* (last reviewed July 2023), https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/checkback.html ; CDC/NIOSH, *Driver Fatigue on the Job* (3 April 2024), https://www.cdc.gov/niosh/motor-vehicle/driver-fatigue/index.html . These support the illustrated concepts, **not independent clinical approval or Greek-specific protocol endorsement**.
+- Registered all three with computed SHA-256, `clinicalReview: pending`, `subjectCompleteness: partial` and source notes. Three previously missing SHA-256 values from batch 15 were also verified present in the registry. Added relevant source hosts to the checker allowlist, updated the image UI's Greek disclaimer to distinguish selection from completeness/approval, and precached all three files in draft SW **ekab-spoudi-v27.1.68-images-20261026-b23**.
+- Source-level readback confirmed all six recent SVGs (three from batch 15 plus three new) have Greek labels, title/desc, image role, matched element tags, and SW cache entries. Their registered SHA-256 values are present. The hash function was validated against the standard `abc` SHA-256 test vector. **Not yet verified:** actual XML-parser execution across entire repo, pixel/raster visual review, real-browser image zoom, offline end-to-end, CI workflow pass or production publishing.
+- **Distinct state measures at this checkpoint:** selected-image chapters **74/247** (Α 50/71, Β 13/73, Γ 5/51, Δ 6/52); **173 without selection**. Fully covered chapters: **0 documented as fully reviewed**, not a claim that every chapter is substantively incomplete. Independently scientifically approved chapter images: **0 documented**. Independently verified live published chapters from this PR: **0 documented**; main registry contains 26 selections but this is not production verification. Draft asset registry: **51 assets**.
+- Next user notification only on first crossing of **100 selected chapters**; 50 had been crossed previously. Continue independently reviewing visual fidelity, checking true source relevance, adding remaining images and verifying release before any claim of publication.
+
+
+## Concurrent follow-up checkpoint — 2026-10-27
+
+- Registry now reports **74/247** selected chapters; totals by semester: A 50, B 13, C 5, D 6. Total registered images: **51**, local SVGs **44**. Current main-registry comparison is historical and must not be treated as proven live publication.
+- The latest additional keys from parallel commits are `prehospital_care_pathway`, `closed_loop_handover`, `driver_fatigue_warning`; existing assets and the preceding batch remain intact. These additions are counted from actual current registry mappings rather than an outdated PR title.
+- The latest draft service-worker cache is `ekab-spoudi-v27.1.68-images-20261026-b23`. Local asset checksums are `0` missing at checkpoint. Independent medical review, browser rendering/zoom, offline end-to-end and production deployment are **not** established by this checkpoint.
+
+
+## Batch 17 — milestone **100/247** selected (2026-10-27)
+
+- Continued **existing branch** `coverage/greek-images-20261026` in **existing draft PR #6**, with no merge/deploy. Read original lesson content before selecting new chapter diagrams in courses 03, 05, 19 and 20.
+- Created **8 original, locally hosted, Greek-labelled SVG educational illustrations**: `circulation-observation-el.svg`, `transfer-types-el.svg`, `reassessment-timeline-el.svg`, `opqrst-pain-assessment-el.svg`, `health-information-privacy-el.svg`, `emergency-department-triage-flow-el.svg`, `emergency-bay-equipment-el.svg` and `bed-stretcher-safe-transfer-el.svg`. All original artwork, declared CC BY 4.0. They depict concrete body/medical/operational objects or floor/route views, rather than generic recap panels; no image was copied from its reference.
+- Mapped new illustrations alongside existing subject-relevant images to **26 previously unselected chapters**: 03-01/02/03/06, 05-06/09/13/14, 19-01/02/03/04/05/07/08/12/13, 20-02/03/05/06/07/08/09/11/12. Where an image serves a related but broader chapter, **coverage remains explicitly partial**; reusing an image does not mean the full chapter is illustrated.
+- References for educational concepts: [Resuscitation Council UK ABCDE](https://www.resus.org.uk/library/abcde-approach) and [First Aid Guidelines 2025](https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/first-aid-guidelines); [WHO Prehospital Toolkit](https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/prehospital-toolkit), [WHO triage](https://www.who.int/tools/triage) and [WHO Emergency Care Toolkit](https://www.who.int/teams/integrated-health-services/clinical-services-and-systems/emergency-and-critical-care/emergency-care-toolkit); [OSHA safe patient handling](https://www.osha.gov/healthcare/safe-patient-handling/); [European Data Protection Supervisor health data guidance](https://www.edps.europa.eu/data-protection/data-protection/reference-library/health-data-workplace_en); [EMS.gov EMT training](https://www.ems.gov/assets/EMT_Instructional_Guidelines.pdf). These sources give conceptual grounding, **not** independent medical signoff or current Greek-specific procedural authorization.
+- Current audit registry has **100/247 chapters with a selected source** (A 58/71, B 13/73, C 5/51, D 24/52), 147 with none; **59 registered assets, 52 local SVGs**. Source selections use `clinicalReview: pending`, `subjectCompleteness: partial`. Each new SVG is registered with SHA-256.
+- Source-level consistency checks: 247 numbered chapters; 100 selected; zero unknown asset keys, zero placement/course mapping mismatches and zero missing SVG checksums; all local assets listed in draft service-worker precache `ekab-spoudi-v27.1.68-images-20261026-b24`. This checks source wiring, **not** actual browser/mobile visibility or offline end-to-end.
+- Remaining quality gates: independent medical review **0 documented approvals**; actual SVG rendering/layout and accessibility in the running browser, image zoom, offline end-to-end and live deployment must be independently tested. Do **not** call the 100 chapters complete, scientifically approved, or published. Keep PR in draft pending those gates. Future coverage target may be tracked without increasing source-selected counts artificially.
+
+
+## Batches 18–20 — 2026-10-27: from 100 to **247/247 selected**
+
+- Continued exclusively on existing branch `coverage/greek-images-20261026` / **draft PR #6**, with no merge to `main` and no production deployment claimed.
+- From the original **100/247 source-selected** checkpoint, registered **35 additional original Greek educational SVGs** with CC BY 4.0 artwork declarations, local paths, individual SHA-256 hashes, source pages and image captions; total image registry now **94 assets (87 local SVGs)**. The SVG files and their registered images were actually committed, not proposed or generated only in chat.
+- **106 additional source selections** cover relevant topics through purposeful reuse of new illustrations and earlier existing images, across bilingual anatomical vocabulary, dispatch/communications, ICT, ambulance driving, mass-casualty incident overview, clinical reassessment and other lessons. A source selection **does not** assert that the figure fully illustrates the whole lesson. Repeated use of the same general illustration across multiple related lessons requires especially careful subject-specific follow-up.
+- **23 more selections** used ten distinct original diagrams for pharmacology safety, oxygen equipment, special populations, telemedicine, computer hardware, pulmonary embolism, heart failure, anaphylaxis, seizure and stroke warning concepts.
+- **The final 18 selections** used 15 additional original topic-specific SVGs for psychological/shift strain, callers with accessibility or distress, duplicate calls, medication units, traumatic head injury, burn skin layers, hypothermia, CBRN hazards, protocol organization, BLS/AED training, bag-mask parts, suspected toxic exposure, bilingual injury vocabulary, intubated transfer and air/sea transport.
+- Current source registry: **A 71/71, B 73/73, Γ 51/51, Δ 52/52 = 247/247 source-selected**, 0 chapters left without selected images. Draft service worker precaches new local SVGs using `ekab-spoudi-v27.1.68-images-20261026-b28`. Production version remains **27.1.68** without a verified deployment from this branch.
+- Registry-level evidence from the branch: exact chapter placements match the relevant course chapter keys, no unresolved selected asset keys, no missing SHA-256 for registered local SVGs and no missing local paths from the draft SW precache. These are **registry/source integrity checks**, not medical correctness or proof of successful rendered images.
+- **Critical, outstanding QA before considering publish/merge:** independent medical/scientific and jurisdictional review remains undocumented; complete SVG XML/raster/browser visual QA including overflow, Greek text layout on mobile, popup enlargement and screen reader accessibility has not been independently verified; end-to-end offline PWA, source URLs and public GitHub Pages deployment are not verified. The draft status should remain. Targeted redraw/augmentation may be necessary where the image is only partially relevant. Do not claim all 247 chapters are *fully illustrated*, *clinically approved* or *live*.
+- Recommended next stage is a structured, chapter-by-chapter acceptance review: the selected image must show the topic, Greek labels must be legible and accurate, image attribution must open correctly, the figure must render at mobile and desktop sizes including zoom/offline, and a clinician must sign off where medical content is represented. Only then may a lesson be called fully illustrated and reviewed.
+
+## Batch 18 — 2026-10-27: 247 selected, checksum repair and muscular anatomy
+
+- Read the current audit **before** editing and discovered the registry had advanced concurrently to **247/247 selected** (Α71/71, Β73/73, Γ51/51, Δ52/52), while this progress file still ended at 100. Preserved every concurrent mapping, asset and commit. No duplicate PR, no reset, no merge.
+- Inspected failing image-audit GitHub Actions [run 40422807105](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40422807105): **four real SHA-256 mismatches** for `emergency_call_location`, `ambulance_pretrip_points`, `stopping_distance_ratio`, `ambulance_restraint_zones`. Recomputed SHA-256 from the current remote SVG bytes using an implementation checked against the standard `abc` test vector, verified unchanged Git blob IDs, and corrected **registry hashes only**. Subsequent image CI [40423048136](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423048136) passed. This fixes integrity metadata, not clinical accuracy.
+- Produced **one additional original Greek-labelled image**, `assets/education/muscle-tissue-types-el.svg`, showing **skeletal, cardiac and smooth muscle** with their differing striations, nuclei and cardiac intercalated discs. This is a concrete morphology illustration for **01-09**, supplementing its existing synovial-joint diagram; it does **not** increase selected-chapter count because 01-09 already had an image. Checked the chapter text and compared the depicted features to [OpenStax Anatomy & Physiology 2e §10.1](https://openstax.org/books/anatomy-and-physiology-2e/pages/10-1-overview-of-muscle-tissues) and [OpenStax Biology 2e §33.2](https://openstax.org/books/biology-2e/pages/33-2-animal-primary-tissues). No textbook artwork was copied; original drawing declared CC BY 4.0.
+- Rendered the exact new SVG to a **1140×720 PNG** locally with CairoSVG; inspected Greek text, panel geometry, striations, nuclei and label leader endpoints and removed stray leader lines. Verified the committed remote SVG SHA-256 equals the locally rendered source: `7fb44308ce946304fdc5b833931dfcbb934a46aacea86064e61d5671c1e61f62`. Added registry asset and both 01-09 mappings; included local SVG in draft service-worker precache **b29**. **No independent expert sign-off or real application browser test**.
+- Added `scripts/verify-saek-image-integration.mjs` and wired it into `.github/workflows/saek-image-review.yml`: checks actual 20 lesson HTML files / 247 DOM insertion targets, image UI loader and disclosure, local asset existence, registry mapping, and offline precache wiring. This is **static integration**, not an end-to-end test or clinical approval. The complete [image CI run 40423331036](https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/40423331036) finished **successfully**, including 247 DOM targets, precache paths, SVG XML/ARIA/Greek and SHA-256. It does not establish browser rendering or independent medical review.
+- Distinct state: **247 selected, 0 unselected; 0 independently documented full subject reviews; 0 independent medical approvals; 0 verified live published from this draft**. Keep draft PR #6 open until review and actual deployment are separately verified.
+
+
+## Automated registry-integrity checkpoint — 2026-10-27
+
+A fresh cross-reference inspection of `saek-image-audit-2026.json` confirmed **247/247** chapters with at least one registered image (Α 71/71, Β 73/73, Γ 51/51, Δ 52/52), **95 distinct assets**, **88 locally stored SVG assets**, **zero unresolved chapter-to-asset references**, **zero assets missing title/caption/source URL/license**, and **zero local assets missing recorded SHA-256 metadata**. This is a **metadata and mapping check only**: it does **not** verify that the SHA-256 values match the current bytes, render or inspect every SVG, validate external licenses or references, establish suitability for each chapter, or confer medical/scientific approval. The draft remains unmerged.
+
+
+## Νέα απαίτηση εικονογράφησης — 28/10/2026
+
+**Εγκεκριμένος στόχος προϊόντος:** κάθε κεφάλαιο πρέπει να έχει **τουλάχιστον 2–3 διαφορετικές, ουσιαστικά σχετικές εκπαιδευτικές εικόνες όταν το θέμα το απαιτεί**. Σε σύνθετα θέματα (ανατομία, φυσιολογία, αλγόριθμοι, πρακτικές δεξιότητες) μπορεί να απαιτούνται περισσότερες. Δεν επιτρέπεται να συμπληρώνεται ο αριθμός με άσχετες, διπλότυπες ή τεχνητά επαναχρησιμοποιημένες εικόνες. Εξαιρέσεις για αμιγώς θεωρητικά κεφάλαια πρέπει να αιτιολογούνται ανά κεφάλαιο.
+
+**Μετρημένη αφετηρία από το τρέχον μητρώο του branch:** 247 κεφάλαια, 95 μοναδικά assets (88 τοπικά SVG), 296 συνολικές τοποθετήσεις εικόνων: 203 κεφάλαια με 1 εικόνα, 39 με 2, 5 με 3 ή περισσότερες. Συνεπώς η σημερινή αντιστοίχιση **δεν πληροί** τον νέο στόχο. Οι μετρήσεις αφορούν καταχωρίσεις, όχι έγκριση καταλληλότητας.
+
+**Κριτήρια ολοκλήρωσης PR #6:** (α) έλεγχος της διδακτικής ανάγκης και κατάλληλου πλήθους εικόνων για κάθε κεφάλαιο, (β) διαφορετικές και ακριβείς εικόνες με **ελληνικές ετικέτες** όπου υπάρχουν ορολογίες, (γ) ανεξάρτητος έλεγχος ανατομικής/ιατρικής ακρίβειας και αδειών, (δ) έλεγχος αναγνωσιμότητας και zoom σε κινητό, desktop και προβολέα, (ε) λειτουργικός έλεγχος offline και προσβασιμότητας, (στ) τεκμηρίωση των εξαιρέσεων. **Το 247/247 δεν ισοδυναμεί με ολοκλήρωση.** Μην συγχωνεύσετε ή παρουσιάσετε ως εγκεκριμένο πριν καλυφθούν τα παραπάνω.
+
+
+## Ανεξάρτητος προκαταρκτικός έλεγχος μητρώου — 28/10/2026
+
+Ο έλεγχος αυτός πραγματοποιήθηκε ανεξάρτητα από την περιγραφή του PR, με ανάγνωση του πραγματικού JSON μητρώου από το branch. **Δεν αποτελεί ανεξάρτητη ιατρική ή οπτική πιστοποίηση.**
+
+- 20 μαθήματα, 247 κεφάλαια, 95 μοναδικές καταχωρίσεις εικόνων, 88 τοπικά assets.
+- 203 κεφάλαια έχουν μόνο 1 εικόνα, 39 έχουν 2, 5 έχουν 3 ή περισσότερες.
+- 203 κεφάλαια δεν καλύπτουν το ελάχιστο των 2 εικόνων. **Αποτέλεσμα ελέγχου πληρότητας: FAIL.**
+- Το πλήθος εικόνων από μόνο του δεν πιστοποιεί θεματική συνάφεια, σωστές ελληνικές ετικέτες, επιστημονική ακρίβεια ή δικαιώματα χρήσης. **Αποτέλεσμα κλινικού/οπτικού ελέγχου: NOT VERIFIED.**
+
+### Εκκρεμότητες ανά μάθημα (κεφάλαια με λιγότερες από 2 εικόνες)
+
+| Μάθημα | Σύνολο κεφαλαίων | Με λιγότερες από 2 εικόνες |
+|---|---:|---:|
+| 01 | 14 | 9 |
+| 02 | 13 | 11 |
+| 03 | 10 | 9 |
+| 04 | 10 | 10 |
+| 05 | 14 | 14 |
+| 06 | 10 | 6 |
+| 07 | 11 | 8 |
+| 08 | 11 | 10 |
+| 09 | 11 | 9 |
+| 10 | 17 | 13 |
+| 11 | 11 | 9 |
+| 12 | 12 | 11 |
+| 13 | 11 | 9 |
+| 14 | 14 | 13 |
+| 15 | 13 | 12 |
+| 16 | 13 | 11 |
+| 17 | 13 | 11 |
+| 18 | 13 | 12 |
+| 19 | 13 | 8 |
+| 20 | 13 | 8 |
+
+**Απαίτηση δημοσίευσης:** επαρκής εικονογράφηση με βάση τη διδακτική ανάγκη κάθε κεφαλαίου, αιτιολογημένες εξαιρέσεις, ανεξάρτητη επιστημονική αξιολόγηση και πραγματικός οπτικός έλεγχος. Μην θεωρηθεί έτοιμο το PR #6 λόγω της κάλυψης 247/247 μόνο.

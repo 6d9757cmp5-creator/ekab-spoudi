@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "state": "source-identity-verified-by-official-site-discovery-content-not-reviewed",
+  "purpose": "Global official medical evidence and systematic-review hubs for metadata-only monitoring; not clinical training, approval or automatic ingestion",
+  "sources": [
+    {
+      "id": "who-evidence-guidelines",
+      "title": "WHO Guidelines — Guidelines Review Committee-approved publications",
+      "source_url": "https://www.who.int/publications/who-guidelines",
+      "scope": "global_guidelines",
+      "origin": "World Health Organization",
+      "level": "official-publisher-guidelines"
+    },
+    {
+      "id": "aha-cpr-ecc",
+      "title": "American Heart Association CPR and Emergency Cardiovascular Care Guidelines",
+      "source_url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines",
+      "scope": "resuscitation",
+      "origin": "American Heart Association",
+      "level": "official-guideline"
+    },
+    {
+      "id": "ilcor-costr",
+      "title": "ILCOR Consensus on Science with Treatment Recommendations (CoSTR)",
+      "source_url": "https://costr.ilcor.org/about",
+      "scope": "resuscitation",
+      "origin": "International Liaison Committee on Resuscitation",
+      "level": "official-evidence-synthesis"
+    },
+    {
+      "id": "cochrane-reviews",
+      "title": "Cochrane — Our evidence (systematic reviews)",
+      "source_url": "https://www.cochrane.org/evidence",
+      "scope": "global-evidence",
+      "origin": "Cochrane",
+      "level": "official-systematic-review-publisher"
+    },
+    {
+      "id": "ecdc-guidance",
+      "title": "ECDC — Public health scientific guidance",
+      "source_url": "https://www.ecdc.europa.eu/en/publications-data",
+      "scope": "infection-prevention",
+      "origin": "European Centre for Disease Prevention and Control",
+      "level": "official-public-health-agency"
+    }
+  ]
+}

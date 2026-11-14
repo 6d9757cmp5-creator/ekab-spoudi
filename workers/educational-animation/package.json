@@ -1,0 +1,25 @@
+{
+  "name": "@ekab-spoudi/educational-animation-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "doctor": "node worker.mjs doctor",
+    "verify": "node worker.mjs verify",
+    "route": "node worker.mjs route",
+    "render": "node worker.mjs render",
+    "test": "node --test worker.test.mjs",
+    "check": "node --check worker.mjs && node --check browser-check.mjs && node --check app-check.mjs && node --check bundle-check.mjs && node --check worker.test.mjs",
+    "bundle:prepare": "node worker.mjs prepare"
+  },
+  "dependencies": {
+    "@remotion/renderer": "4.0.539",
+    "playwright": "1.56.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.539"
+  }
+}

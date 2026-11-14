@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102a39">
+<title>ATLA · Εργαστήριο ΗΚΓ · Συνθετικές κυματομορφές</title>
+<script src="theme-apply.js"></script>
+<link rel="stylesheet" href="mentor/styles/mentor-lab.css">
+<style>
+.ecg-optional{border:1px solid #b7d4d5;border-radius:13px;margin:14px 0;background:#edf8f7;color:#103d48;overflow:hidden}
+.ecg-optional>summary{cursor:pointer;padding:16px 19px;font-weight:800;line-height:1.35;min-height:50px}
+.ecg-optional>summary:focus-visible{outline:3px solid #169293;outline-offset:-3px}
+.ecg-optional>.ecg-panel{margin:0 12px 12px}
+#ecg-monitor-training{scroll-margin-top:20px}
+.ecg-wrap{max-width:1380px;margin:0 auto;padding:18px 16px 46px}
+.ecg-head{background:linear-gradient(125deg,#102e4a,#176a75);color:#fff;border-radius:18px;padding:25px 24px;margin:17px 0}
+.ecg-head h1{color:#fff;font-size:clamp(1.6rem,4vw,2.3rem);margin:6px 0}
+.ecg-head p{color:#dbedf2;line-height:1.55}
+.ecg-panel{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 4px 16px #102d4310}
+.ecg-chart{background:#fbfcfb;border:1px solid #bad0cc;border-radius:13px;overflow:hidden}
+.ecg-chart svg{display:block;width:100%;height:auto}
+.ecg-controls{display:grid;grid-template-columns:1fr auto;gap:10px 20px;align-items:center}
+.ecg-controls label{font-weight:750}
+.ecg-controls input{width:100%;accent-color:var(--brand)}
+.ecg-count{font-size:1.25rem;font-weight:900;color:var(--brand);font-variant-numeric:tabular-nums;min-width:82px;text-align:right}
+.ecg-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.ecg-actions button{min-height:44px;border-radius:10px;border:1px solid var(--border);padding:10px 15px;font:inherit;font-weight:750;background:var(--surface2);color:var(--ink);cursor:pointer}
+.ecg-actions button:focus-visible,.ecg-controls input:focus-visible{outline:3px solid var(--brand2);outline-offset:3px}
+.ecg-key{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:16px}
+.ecg-key div{border:1px solid var(--border);background:var(--surface2);padding:13px;border-radius:10px}
+.ecg-key strong{display:block;color:var(--brand)}
+.ecg-key p{font-size:.8rem;margin:6px 0;line-height:1.45}
+.ecg-status{border-left:4px solid var(--brand2);padding:12px 14px;background:var(--surface2);border-radius:7px;line-height:1.5}
+.ecg-key[hidden]{display:none}
+@media(max-width:650px){.ecg-head{padding:18px}.ecg-panel{padding:14px}.ecg-key{grid-template-columns:1fr}}
+
+html[data-theme="dark"] .ecg-optional{background:#12303a;color:#e3eef0;border-color:#2f5560}
+/* ECG paper in the dark theme: dark paper and light trace, colours otherwise kept. */
+html[data-theme="dark"] .ecg-chart svg{filter:invert(.92) hue-rotate(180deg)}
+</style>
+<script type="module" src="mentor-ecg.js"></script>
+<link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script><meta name="description" content="Εργαστήριο ΗΚΓ: εξάσκηση στην ανάγνωση ηλεκτροκαρδιογραφήματος με συνθετικές κυματομορφές.">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+</head>
+<body>
+<main class="ecg-wrap"><button type="button" class="ekab-nav-back" data-ekab-back>← Πίσω</button>
+ <a data-ekab-back-spot href="paramedic.html#skills">← Εργαλεία μελέτης</a>
+ <header class="ecg-head">
+  <div style="font-weight:850;letter-spacing:.08em">ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ ΗΚΓ</div>
+  <h1>Εργαστήριο ΗΚΓ — αναγνώριση ρυθμών και κυμάτων</h1>
+  <p>Εξασκήσου σε 18 σχηματικά παραδείγματα ρυθμών, στην αναγνώριση κυμάτων P–QRS–T και στη μέτρηση συχνότητας. Μπορείς επίσης να ανοίξεις 8 έτοιμες συνθετικές καταγραφές 12 απαγωγών (ανάμεσά τους πρόσθιο, κατώτερο και πλάγιο έμφραγμα). Το εργαλείο είναι εκπαιδευτικό και όχι κλινικό μόνιτορ.</p>
+ </header>
+ <div class="disclaimer" role="note"><strong>Εκπαιδευτική χρήση — όχι ιατρική ερμηνεία.</strong> Οι συνθετικές καμπύλες είναι μαθηματικά σχήματα και δεν αναπαριστούν πιστά κλινικά ΗΚΓ. Η άσκηση ζητά από τον μαθητή να επιλέξει ετικέτες ρυθμών· δεν εκτελεί αυτόματη αναγνώριση αρρυθμιών ούτε διάγνωση πραγματικών καταγραφών. Δεν μετρά πραγματικούς παλμούς, δεν υποκαθιστά την κλινική εκπαίδευση και δεν χρησιμοποιεί τεχνητή νοημοσύνη.</div>
+
+ <section class="ecg-panel" id="ecg-monitor-training" aria-labelledby="ecg-monitor-training-heading">
+  <h2 id="ecg-monitor-training-heading">Μόνιτορ ΗΚΓ — εξάσκηση αναγνώρισης ρυθμών</h2>
+  <p class="muted small">Διαδραστικό εκπαιδευτικό μόνιτορ με 18 συνθετικά παραδείγματα ρυθμών, παύση, πλήρη οθόνη, ρυθμίσεις σάρωσης και ανατροφοδότηση. Περιλαμβάνονται 8 έτοιμα συνθετικά παραδείγματα 12 απαγωγών, ανάμεσά τους 3 σχηματικά εμφράγματα (STEMI). Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
+  <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό μόνιτορ καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html" loading="eager" allow="fullscreen" style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
+ </section>
+ <script>
+ (function () {
+  const frame = document.getElementById('ecg-advanced-frame');
+  if (!frame) return;
+  const example = new URLSearchParams(location.search).get('example');
+  if (example && /^[a-z0-9-]{1,40}$/.test(example)) {
+   frame.src = 'tools/ecg-lab/monitor.html?example=' + encodeURIComponent(example);
+   frame.addEventListener('load', function () {
+    setTimeout(function () {
+     try {
+      const target = frame.contentDocument.querySelector('.example-select');
+      if (target) window.scrollTo({ top: frame.getBoundingClientRect().top + window.scrollY + target.offsetTop - 12, behavior: 'smooth' });
+     } catch (_) { /* The anchor on the section is the fallback. */ }
+    }, 400);
+   }, { once: true });
+  }
+  let observer;
+  const fit = function () {
+   try {
+    const body = frame.contentDocument?.body;
+    if (!body) return;
+    // documentElement.scrollHeight is at least the iframe viewport height.
+    // Reading it here and adding padding can produce an unbounded resize loop.
+    const height = Math.ceil(body.scrollHeight) + 8;
+    if (Number.isFinite(height) && height > 0 && Math.abs(frame.offsetHeight - height) > 2) {
+     frame.style.height = height + 'px';
+    }
+   } catch (_) { /* Use the fallback iframe height when inaccessible. */ }
+  };
+  frame.addEventListener('load', function () {
+   fit();
+   try {
+    observer?.disconnect();
+    observer = new ResizeObserver(fit);
+    observer.observe(frame.contentDocument.body);
+   } catch (_) {}
+  });
+ })();
+ </script>
+ <details class="ecg-optional" id="ecg-pqt-reference"><summary>Προαιρετικά: μελέτη κυμάτων P–QRS–T και συχνότητας</summary>
+ <section class="ecg-panel" aria-labelledby="ecg-heading">
+  <h2 id="ecg-heading">Συνθετική κυματομορφή</h2>
+  <div class="ecg-chart">
+   <svg id="ecg-svg" viewBox="0 0 960 250" role="img" aria-label="Μαθηματικό σχηματικό σήμα που επαναλαμβάνεται με τον επιλεγμένο ρυθμό">
+    <defs><pattern id="ecg-small-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0 L0 0 0 20" fill="none" stroke="#cbe1db" stroke-width=".8"/>
+    </pattern><pattern id="ecg-big-grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#ecg-small-grid)"/>
+      <path d="M100 0 L0 0 0 100" fill="none" stroke="#a0c7c0" stroke-width="1.6"/>
+    </pattern></defs>
+    <rect width="960" height="250" fill="#fbfcfb"/>
+    <rect width="960" height="250" fill="url(#ecg-big-grid)"/>
+    <polyline id="ecg-curve" points="" fill="none" stroke="#0d5764" stroke-width="3.1" stroke-linejoin="round" stroke-linecap="round"/>
+   </svg>
+  </div>
+  <p id="ecg-caption" class="ecg-status" role="status" aria-live="polite">Δημιουργία σχηματικού σήματος…</p>
+ </section>
+ <section class="ecg-panel" aria-labelledby="ecg-controls-head">
+  <h2 id="ecg-controls-head">Δοκίμασε διαφορετική συχνότητα επανάληψης</h2>
+  <div class="ecg-controls">
+   <label for="ecg-rate">Επιλεγμένος σχηματικός ρυθμός</label>
+   <output id="ecg-rate-out" class="ecg-count" for="ecg-rate">75 /λεπτό</output>
+   <input id="ecg-rate" type="range" min="45" max="135" step="5" value="75" aria-describedby="ecg-hint"/>
+   <span>45–135 /λεπτό</span>
+  </div>
+  <p id="ecg-hint" class="muted small">Ο αριθμός είναι παράμετρος της μαθηματικής σχεδίασης, όχι πραγματική μέτρηση ΗΚΓ.</p>
+  <div class="ecg-actions" role="group" aria-label="Παραδείγματα σχηματικής συχνότητας">
+   <button type="button" data-ecg-rate="55">Αργότερη επανάληψη</button>
+   <button type="button" data-ecg-rate="75">Βασικό παράδειγμα</button>
+   <button type="button" data-ecg-rate="115">Ταχύτερη επανάληψη</button>
+   <button type="button" id="ecg-toggle-key" aria-expanded="false" aria-controls="ecg-key">Τι σημαίνουν τα γράμματα;</button>
+  </div>
+  <div id="ecg-key" class="ecg-key" hidden>
+   <div><strong>P</strong><p>Σχηματικό μικρό τμήμα πριν από το κεντρικό σύμπλεγμα.</p></div>
+   <div><strong>QRS</strong><p>Σχηματικό κεντρικό αιχμηρό σύμπλεγμα της τεχνητής καμπύλης.</p></div>
+   <div><strong>T</strong><p>Σχηματικό ευρύτερο τμήμα που ακολουθεί.</p></div>
+  </div>
+ </section>
+ </details>
+ <section class="ecg-panel" aria-labelledby="ecg-practice-head" id="ecg-practice">
+  <h2 id="ecg-practice-head">Άσκηση: μέτρηση ρυθμού σε λωρίδα 6 δευτερολέπτων</h2>
+  <p class="muted small">Μέτρησε πόσα συμπλέγματα QRS (οι ψηλές αιχμές) βλέπεις στη λωρίδα. Ο ρυθμός ανά λεπτό προκύπτει από: πλήθος QRS × 10. Η καμπύλη είναι συνθετική· η άσκηση δεν είναι διάγνωση ούτε επίσημη βαθμολογία.</p>
+  <p id="ecg-practice-step" class="ecg-status" role="status" aria-live="polite"></p>
+  <div class="ecg-chart"><svg id="ecg-practice-svg" viewBox="0 0 960 250" role="img" aria-label="Συνθετική λωρίδα έξι δευτερολέπτων για μέτρηση QRS">
+   <rect width="960" height="250" fill="#fbfcfb"/><rect width="960" height="250" fill="url(#ecg-big-grid)"/>
+   <polyline id="ecg-practice-curve" points="" fill="none" stroke="#0d5764" stroke-width="3.1" stroke-linejoin="round" stroke-linecap="round"/>
+   <g id="ecg-practice-marks"></g></svg></div>
+  <div id="ecg-practice-choices" class="ecg-actions" role="group" aria-label="Πόσα QRS βλέπεις;"></div>
+  <p id="ecg-practice-feedback" class="ecg-status" role="status" aria-live="polite"></p>
+  <div class="ecg-actions"><button type="button" id="ecg-practice-next" hidden>Επόμενη λωρίδα</button><button type="button" id="ecg-practice-reset">Νέα προσπάθεια</button></div>
+  <section id="ecg-practice-debrief" hidden aria-labelledby="ecg-debrief-head"><h3 id="ecg-debrief-head">Ανασκόπηση</h3><p id="ecg-debrief-text"></p></section>
+  <p id="ecg-practice-storage" class="muted small"></p>
+ </section>
+</main>
+
+<script type="module" src="tools/ecg-lab/app/ecg-practice.js"></script>
+
+<script type="module" src="atla/assistant.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+name: ATLA feedback review
+# Every Monday: the week's 👎 answers from students, as a comment on one tracking issue, so the
+# material or ATLA's rules can be corrected by a person. Nothing is changed automatically.
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+permissions:
+  issues: write
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Collect the week's feedback
+        env:
+          TOKEN: ${{ secrets.ATLA_ADMIN_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$TOKEN" ]; then echo "ATLA_ADMIN_TOKEN is not set; nothing to read."; exit 0; fi
+          curl -sf -H "x-atla-admin: $TOKEN" https://ekab-spoudi-mentor-chat.6d9757cmp5.workers.dev/feedback > feedback.json
+          node -e '
+            const all=JSON.parse(require("fs").readFileSync("feedback.json","utf8"));
+            const week=Date.now()-7*864e5,items=all.filter(x=>Date.parse(x.at)>=week);
+            const up=items.filter(x=>x.vote==="up").length,down=items.filter(x=>x.vote==="down");
+            const lines=["## Εβδομάδα έως "+new Date().toISOString().slice(0,10),"","👍 "+up+" · 👎 "+down.length,""];
+            for(const d of down.slice(-40))lines.push("### "+d.question.replace(/\n/g," "),"*"+(d.provider||"")+" · "+d.at.slice(0,10)+"*","",d.answer.replace(/\n/g," ").slice(0,900),"");
+            require("fs").writeFileSync("report.md",lines.join("\n"));console.log(lines.slice(0,3).join(" "));
+          '
+          issue=$(gh issue list -R "$REPO" --label atla-feedback --state open --json number --jq '.[0].number')
+          if [ -z "$issue" ]; then
+            gh label create atla-feedback -R "$REPO" --color 0E8A16 --description "Ανασκόπηση απαντήσεων ATLA" 2>/dev/null || true
+            gh issue create -R "$REPO" --title "ATLA: εβδομαδιαία ανασκόπηση απαντήσεων (👍/👎)" --label atla-feedback --body-file report.md
+          else
+            gh issue comment "$issue" -R "$REPO" --body-file report.md
+          fi

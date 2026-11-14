@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102f3b">
+<meta name="description" content="ΕΚΑΒ Σπουδή: διαδραστική εκπαιδευτική εξάσκηση στις μετρήσεις και στην τεκμηρίωση ζωτικών σημείων, με συνθετικά δεδομένα.">
+<title>ATLA · Εργαστήριο Ζωτικών Σημείων | ΕΚΑΒ Σπουδή</title>
+<script src="theme-apply.js"></script>
+<link rel="stylesheet" href="mentor-vitals.css">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="navigation.css?v=4">
+<script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script>
+<script type="module" src="atla/assistant.mjs"></script>
+<script type="module" src="tools/vital-signs/app.mjs"></script>
+</head>
+<body>
+<a class="vs-skip" href="#learning">Μετάβαση στην εξάσκηση</a>
+<header class="vs-topbar">
+ <div class="vs-toprow">
+  <a href="paramedic.html#lab-vitals" class="vs-back">← Εργαλεία μελέτης</a>
+  <span class="vs-brand">✚ ATLA <small>ΕΚΑΒ ΣΠΟΥΔΗ</small></span>
+ </div>
+</header>
+<main class="vs-container">
+ <header class="vs-hero">
+  <div>
+   <p class="vs-eyebrow">ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ</p>
+   <h1>Ζωτικά Σημεία <span>&</span> Παρακολούθηση</h1>
+   <p>Επίλεξε δεξιότητα, παρακολούθησε το όργανο και κάνε την άσκηση. Συνθετικά δεδομένα, πραγματική ανατροφοδότηση.</p>
+   <div class="vs-hero-links"><a href="mentor-ecg.html">〽️ Υπάρχον ΗΚΓ</a><a href="mentor-oral.html?practice=handover">🎙️ Δομημένη παράδοση</a></div>
+  </div>
+  
+ </header>
+ <div class="vs-safety" role="note"><strong>Μόνο για εκπαιδευτική χρήση.</strong> Όλες οι αριθμητικές καταγραφές είναι επινοημένες. Δεν λαμβάνονται πραγματικά ζωτικά σημεία, δεν εξάγεται διάγνωση ή θεραπευτική σύσταση και η ψηφιακή εξάσκηση δεν πιστοποιεί πρακτική επάρκεια. Για πραγματικά περιστατικά ισχύουν η εκπαίδευση, τα εγκεκριμένα πρωτόκολλα και η επαγγελματική κρίση.</div>
+ <div class="vs-layout" id="learning">
+  <aside class="vs-aside" aria-labelledby="vs-topics-heading">
+   <h2 id="vs-topics-heading">Υποενότητες</h2>
+   <nav id="vs-topic-nav" aria-label="Εργαστήριο Ζωτικών Σημείων"><a href="mentor-ecg.html">Ηλεκτροκαρδιογράφημα (ΗΚΓ)</a></nav>
+   <div class="vs-session">
+    <strong>Προσωρινή πρόοδος εξάσκησης</strong>
+    <p id="vs-score" aria-live="polite">Ορθές απαντήσεις: 0</p>
+    <p>Η επίδοση δεν αποθηκεύεται ούτε μεταβάλλει τους βαθμούς ΣΑΕΚ/ΕΟΠΠΕΠ.</p>
+    <button id="vs-reset" type="button">Νέα εξάσκηση</button>
+   </div>
+  </aside>
+  <div class="vs-content" id="vs-workspace" data-step="practice" data-topic="pulse">
+   <nav class="vs-step-nav" aria-label="Βήμα εξάσκησης">
+    <button type="button" data-vs-step="practice" aria-pressed="true">01 · Εργαλείο & εξάσκηση</button>
+    <button type="button" data-vs-step="quiz" aria-pressed="false">02 · Έλεγχος γνώσης</button>
+    <button type="button" data-vs-step="handover" aria-pressed="false">03 · Καταγραφή & παράδοση</button>
+   </nav>
+   <section class="vs-panel" id="vs-observation-panel" aria-labelledby="vs-observation-title">
+    <div class="vs-panel-heading">
+     <div><p class="vs-eyebrow">ΣΥΝΘΕΤΙΚΟ MONITOR · ΟΧΙ ΙΑΤΡΙΚΗ ΣΥΣΚΕΥΗ</p><h2 id="vs-observation-title">Όργανο παρακολούθησης</h2></div>
+     <label class="vs-select-label" for="vs-example">Φύλλο καταγραφής
+      <select id="vs-example">
+       <option value="stable">Φύλλο Α · δύο μετρήσεις</option>
+       <option value="artefact">Φύλλο Β · αμφίβολο σήμα</option>
+       <option value="change">Φύλλο Γ · μεταβολή τιμών</option>
+      </select>
+     </label>
+    </div>
+    <p class="vs-hint" id="vs-example-note">Συνθετικά δεδομένα.</p>
+    <div class="vs-monitor" id="vs-monitor" data-focus="pulse" aria-label="Συνθετική οθόνη εκπαιδευτικής παρακολούθησης">
+     <div class="vs-monitor-head"><span>ΕΚΠΑΙΔΕΥΤΙΚΑ ΔΕΔΟΜΕΝΑ</span><span id="vs-time">--:--</span></div>
+     <div class="vs-monitor-grid">
+      <div class="vs-readout vs-hr"><span>PR <small>σφυγμός</small></span><strong id="vs-hr">--</strong><small>/min</small></div>
+      <div class="vs-readout vs-spo2"><span>SpO₂ <small>εκτίμηση</small></span><strong id="vs-spo2">--</strong><small>%</small></div>
+      <div class="vs-readout vs-rr"><span>RR <small>αναπνοές</small></span><strong id="vs-rr">--</strong><small>/min</small></div>
+      <div class="vs-readout vs-bp"><span>NIBP <small>αρτ. πίεση</small></span><strong id="vs-bp">--/--</strong><small>mmHg</small></div>
+      <div class="vs-readout vs-temp"><span>T <small>θερμοκρασία</small></span><strong id="vs-temp">--</strong><small>°C</small></div>
+      <div class="vs-readout vs-avpu"><span>AVPU <small>ανταπόκριση</small></span><strong id="vs-avpu">--</strong><small>περιγραφή</small></div>
+     </div>
+     <div class="vs-wave-set" aria-label="Συνθετικές κινούμενες εκπαιδευτικές κυματομορφές">
+      <div class="vs-wave vs-wave-pleth"><div class="vs-wave-label">PLETH <small>σχηματικό</small></div><svg id="vs-pleth" viewBox="0 0 720 100" role="img" aria-label="Κινούμενη συνθετική κυματομορφή παλμικής οξυμετρίας" preserveAspectRatio="none"><path d=""/></svg><p id="vs-wave-warning" hidden>Αμφίβολο σήμα — η κυματομορφή δεν αξιολογείται.</p></div>
+      <div class="vs-wave vs-wave-resp"><div class="vs-wave-label">RESP <small>σχηματικό</small></div><svg id="vs-resp-trace" viewBox="0 0 720 100" role="img" aria-label="Κινούμενη συνθετική αναπνευστική κυματομορφή" preserveAspectRatio="none"><path d=""/></svg></div>
+     </div>
+     <div class="vs-live-control"><span id="vs-wave-mode" aria-live="off">Σχηματικό κινούμενο σήμα · όχι κλινική καταγραφή</span><button type="button" id="vs-animation-toggle" aria-pressed="true">Παύση κίνησης</button></div>
+     <div class="vs-bp-demo" id="vs-bp-demo" hidden><div class="vs-bp-top"><strong>Μη επεμβατική ΑΠ — επίδειξη κύκλου</strong><button type="button" id="vs-bp-start">Εκτέλεση επίδειξης</button></div><div class="vs-bp-meter"><div id="vs-bp-fill"></div></div><p id="vs-bp-state" role="status" aria-live="polite">Συνθετική επίδειξη, χωρίς πραγματική περιχειρίδα.</p></div>
+     <p class="vs-quality" id="vs-quality">Ποιότητα εκπαιδευτικού σήματος: —</p>
+    </div>
+    <div class="vs-toolbar">
+     <button type="button" id="vs-prev-record">← Προηγούμενη καταγραφή</button>
+     <span id="vs-record-position" aria-live="polite">1 / 2</span>
+     <button type="button" id="vs-next-record">Επόμενη καταγραφή →</button>
+    </div>
+    <div class="vs-compare">
+     <button type="button" id="vs-compare" class="vs-primary">Σύγκρινε τις δύο καταγραφές</button>
+     <p id="vs-compare-result" role="status" aria-live="polite" hidden></p>
+    </div>
+   </section>
+   <section class="vs-panel" id="vs-exercise-panel" aria-labelledby="vs-exercise-heading">
+    <div class="vs-panel-heading"><div><p class="vs-eyebrow">02 · ΔΕΞΙΟΤΗΤΑ</p><h2 id="vs-exercise-heading">Επιλογή υποενότητας</h2></div><span id="vs-topic-number" class="vs-index">1 / 7</span></div>
+    <p id="vs-topic-hint" class="vs-hint">Επέλεξε θέμα.</p>
+    <div id="vs-interaction" aria-live="polite"></div>
+   </section>
+   <section class="vs-panel" id="vs-quiz-panel" aria-labelledby="vs-quiz-heading" hidden>
+    <div class="vs-panel-heading"><div><p class="vs-eyebrow">03 · ΕΛΕΓΧΟΣ ΓΝΩΣΗΣ</p><h2 id="vs-quiz-heading">Εξάσκηση με ανατροφοδότηση</h2></div></div>
+    <p id="vs-question"></p>
+    <div id="vs-choices" class="vs-choices"></div>
+    <div id="vs-feedback" role="status" aria-live="polite"></div>
+    <button id="vs-next-question" type="button" class="vs-secondary">Άλλη ερώτηση στο ίδιο θέμα</button>
+   </section>
+   <section class="vs-panel" id="vs-handover-panel" aria-labelledby="vs-handover-heading" hidden>
+    <div class="vs-panel-heading"><div><p class="vs-eyebrow">04 · ΕΠΙΚΟΙΝΩΝΙΑ</p><h2 id="vs-handover-heading">Εκπαιδευτική καταγραφή για παράδοση</h2></div></div>
+    <p class="vs-hint">Συνδυάζει τις συνθετικές μετρήσεις με χρόνο και σημειώσεις αξιοπιστίας. Δεν αποτελεί πραγματικό ιατρικό έγγραφο.</p>
+    <pre id="vs-handover" class="vs-handover" aria-live="polite"></pre>
+    <div class="vs-toolbar"><button id="vs-copy" type="button">Αντιγραφή εκπαιδευτικής αναφοράς</button><a href="mentor-oral.html?practice=handover">Εξάσκηση στην παράδοση →</a></div>
+    <p id="vs-copy-status" role="status" aria-live="polite"></p>
+   </section>
+   <section class="vs-panel vs-sources" id="vs-sources-panel" aria-labelledby="vs-sources-heading"><details><summary>Πηγές και αντίστοιχη ύλη ΣΑΕΚ</summary>
+    <h2 id="vs-sources-heading">Πηγές και ύλη</h2>
+    <p>Η ορθή τεχνική μέτρησης και οι περιορισμοί οργάνων τεκμηριώνονται από πρωτογενείς δημόσιες πηγές. Η τεχνική οικιακής μέτρησης ΑΠ δεν αντικαθιστά ειδικά πρωτόκολλα επείγουσας προνοσοκομειακής φροντίδας.</p>
+    <ul id="vs-source-list"><li><a href="saek-course-05.html#lesson-11">ΣΑΕΚ: Ζωτικά σημεία</a></li></ul></details>
+   </section>
+  </div>
+ </div>
+ <footer class="vs-footer"><a href="paramedic.html#lab-vitals">← Επιστροφή στα Εργαλεία Μελέτης</a><button type="button" data-atla-open data-atla-context="Ζωτικά σημεία και αξιόπιστη μέτρηση, εξήγηση με τεκμηριωμένες πηγές">Ρώτησε τον ATLA</button></footer>
+</main>
+</body>
+</html>

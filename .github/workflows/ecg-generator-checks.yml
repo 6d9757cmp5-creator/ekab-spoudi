@@ -1,0 +1,31 @@
+name: ECG educational generator checks
+on:
+  push:
+    paths:
+      - 'tools/ecg-lab/core/**'
+      - 'tools/ecg-lab/monitor.html'
+      - 'mentor-ecg.html'
+      - '.github/workflows/ecg-generator-checks.yml'
+  pull_request:
+    paths:
+      - 'tools/ecg-lab/core/**'
+      - 'tools/ecg-lab/monitor.html'
+      - 'mentor-ecg.html'
+      - '.github/workflows/ecg-generator-checks.yml'
+permissions:
+  contents: read
+jobs:
+  ecg-node-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check ECG modules
+        run: |
+          node --check tools/ecg-lab/core/ecg-synthetic.mjs
+          node --check tools/ecg-lab/core/ecg-examples.mjs
+      - name: ECG core unit tests (technical only)
+        run: node --test tools/ecg-lab/core/*.test.mjs

@@ -1,0 +1,70 @@
+3d-anatomy - required attributions
+==================================
+
+This file collects the attribution strings the upstream licences require. Keep
+it with any copy or derivative of this work, together with LICENSE and with the
+upstream notice shipped at public/models/License.txt.
+
+The work as distributed is non-commercial (CC BY-NC-SA 4.0). See LICENSE for
+which components impose that restriction.
+
+
+1. REQUIRED VERBATIM ATTRIBUTIONS
+---------------------------------
+
+public/models/License.txt asks that content copied or derived from the models
+be attributed as follows. Lines 9 and 11 of that file, quoted exactly:
+
+    -"BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan"
+
+    -"Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0"
+
+Both strings must appear wherever the models, or renderings derived from them,
+are redistributed.
+
+
+2. ADDITIONAL EMBEDDED MODELS
+-----------------------------
+
+The upstream notice (public/models/License.txt, lines 30 to 33) lists these
+models as included and adapted. Their attribution strings, as written there:
+
+    "Brainder" and "White matter" from the University of Washington
+
+    "Cranial Nerves and Foramina - by University of Dundee, CAHID - CC-BY 4.0"
+
+    "Anatomy of the Inner Ear - by University of Dundee School of Medicine - CC-BY-NC-SA 4.0"
+
+    "Kidney - by lissiecowley - CC-BY-NC 4.0"
+
+No licence is stated upstream for "Brainder" and "White matter"; none is
+asserted here on their behalf.
+
+
+3. TEXT OF THE STRUCTURE DEFINITIONS
+------------------------------------
+
+    Definitions of the anatomical structures: Wikipedia contributors,
+    CC BY-SA 3.0 and GFDL - https://en.wikipedia.org/wiki/Wikipedia:Copyrights
+
+The definitions come mainly from Wikipedia with very few modifications.
+
+
+4. SOFTWARE USED
+----------------
+
+    three.js - MIT Licence - https://threejs.org/
+    Draco decoder (bundled with three.js, in public/draco/) - Apache Licence 2.0
+    Vite - MIT Licence - https://vite.dev/
+    vite-plugin-glsl - MIT Licence
+
+The models were exported from the Z-Anatomy Blender file. Blender's own licence
+is included in the upstream 'Anatomy Blender' distribution.
+
+
+5. LINKS TO THE SOURCES
+-----------------------
+
+    BodyParts3D  https://lifesciencedb.jp/bp3d/
+    Z-Anatomy    https://www.z-anatomy.com/
+    Wikipedia    https://en.wikipedia.org/wiki/Wikipedia:Copyrights

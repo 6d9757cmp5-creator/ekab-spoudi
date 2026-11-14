@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-09T09:53:18.521Z",
+  "registries": [
+    {
+      "id": "books",
+      "entries": 28
+    },
+    {
+      "id": "past-project-sources",
+      "entries": 35
+    },
+    {
+      "id": "global-official-evidence",
+      "entries": 5
+    }
+  ],
+  "monitored_urls": 44,
+  "monitored_ok": 40,
+  "pubmed_topics_checked": 10,
+  "rejected_uncurated_sources": 5,
+  "monitored_by_source_category": {
+    "official-document-delivery": 1,
+    "official-health-guidelines": 24,
+    "technical-research-assets-not-clinical-guidance": 2,
+    "official-prehospital-education": 3,
+    "open-educational-material": 5,
+    "official-textbook-publisher-metadata-only": 6,
+    "academic-repository-unendorsed": 3
+  },
+  "possible_source_updates": 10,
+  "newly_discovered_papers": 1,
+  "pending_papers": 20,
+  "pubmed_failures": [],
+  "pubmed_excluded": [
+    {
+      "pmid": "42977864",
+      "topic_id": "stroke-neurology",
+      "reason": "retracted-preprint-or-non-evidence-publication"
+    }
+  ],
+  "pubmed_previously_queued_excluded": [],
+  "source_quality_policy": "curated publishers plus per-paper evidence-type screening; no articles auto-approved",
+  "full_texts_imported": 0,
+  "model_training_performed": false,
+  "clinical_retrieval_updated": false,
+  "summary": "Scans detect candidates only; no medical/learner knowledge is published automatically."
+}

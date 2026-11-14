@@ -1,0 +1,329 @@
+/* Minimal progress dashboard — spacious, native-feeling on phone and desktop. */
+.home-mini-progress.progress-dashboard{max-width:740px;margin:12px 0 17px;text-align:left}
+#homeMultiTracker{display:block;max-width:740px;color:var(--ink)}
+.progress-panel-header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:4px 0 10px;border-bottom:1px solid var(--line)}
+.progress-panel-header h2{font-size:1.08rem!important;line-height:1.35!important;letter-spacing:-.012em!important;margin:0!important;font-weight:770}
+.progress-panel-header span{color:var(--muted);font-size:.73rem}
+.progress-panel-item{padding:15px 0 17px;border-bottom:1px solid var(--line)}
+.progress-panel-item-head,.progress-panel-numbers,.progress-panel-footer,.progress-panel-stat,.progress-panel-confirm-actions{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.progress-panel-item-head h3{font-size:.99rem;margin:0;font-weight:750}
+.progress-panel-reset,.progress-panel-link{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.73rem;padding:5px 2px;cursor:pointer}
+.progress-panel-link{text-align:right}
+.progress-panel-reset:hover,.progress-panel-link:hover{color:var(--ink)}
+.progress-panel-reset:focus-visible,.progress-panel-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+.progress-panel-numbers{margin:10px 0 9px}
+.progress-panel-numbers>div{display:flex;align-items:baseline;gap:5px;min-width:0}
+.progress-panel-numbers strong{font-size:1.45rem;letter-spacing:-.035em;font-variant-numeric:tabular-nums;font-weight:640}
+.progress-panel-numbers span{font-size:.83rem;color:var(--muted)}
+.progress-panel-number-right{text-align:right}
+.progress-panel-dual{display:flex;width:100%;gap:4px;height:13px;overflow:hidden;border-radius:10px}
+.progress-panel-half{flex:1;min-width:0;background:var(--line);overflow:hidden}
+.progress-panel-half>span{display:block;height:100%;border-radius:inherit;transition:width .2s ease}
+.progress-panel-half.study>span{background:#13a18b}
+.progress-panel-half.exam>span{background:#5487e5}
+.progress-panel-footer{margin-top:11px;color:var(--muted);font-size:.78rem}
+.progress-panel-group{padding:17px 0 0;font-size:.71rem;font-weight:750;letter-spacing:.07em;color:var(--muted)}
+.progress-panel-detail{margin:10px 0 0;padding:13px 15px;background:#f3f5f7;border-radius:13px;display:flex;flex-direction:column;gap:11px}
+.progress-panel-stat{align-items:baseline;font-size:.85rem;line-height:1.35}
+.progress-panel-stat span{color:#5c646d;min-width:0}
+.progress-panel-stat strong{color:#18252f;font-weight:640;font-variant-numeric:tabular-nums;white-space:nowrap}
+.progress-panel-note{margin:2px 0 0!important;color:var(--muted);font-size:.71rem!important;line-height:1.45}
+.progress-panel-confirm{margin-top:12px;padding:13px;border:1px solid #db8888;border-radius:12px}
+.progress-panel-confirm strong{font-size:.83rem}
+.progress-panel-confirm p{font-size:.8rem;line-height:1.5;margin:6px 0 11px}
+.progress-panel-confirm-actions{justify-content:flex-end}
+.progress-panel-confirm-actions button{border:1px solid var(--line);padding:9px 12px;border-radius:9px;font:inherit;font-size:.78rem;cursor:pointer;min-height:39px}
+.progress-panel-cancel{color:var(--ink);background:transparent}
+.progress-panel-danger{background:#b82d36;color:#fff;border-color:#b82d36!important}
+.progress-panel-confirm-actions button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.progress-panel-empty,.progress-panel-notice{color:var(--muted);font-size:.76rem!important;line-height:1.45}
+.progress-panel-empty{margin:10px 0!important}
+.progress-panel-notice{padding:8px 0!important}
+html[data-theme="dark"] .progress-panel-detail{background:#202c38}
+html[data-theme="dark"] .progress-panel-stat strong{color:#f0f5f8}
+html[data-theme="dark"] .progress-panel-stat span{color:#becbd5}
+html[data-theme="dark"] .progress-panel-confirm{border-color:#9c4d56;background:#291e28}
+html[data-theme="dark"] .progress-panel-half{background:#333e49}
+@media(max-width:620px){
+ .home-mini-progress.progress-dashboard{max-width:100%;margin:9px 0 14px}
+ .progress-panel-item{padding:13px 0 15px}
+ .progress-panel-header h2{font-size:1.02rem!important}
+ .progress-panel-numbers strong{font-size:1.37rem}
+ .progress-panel-numbers span{font-size:.79rem}
+ .progress-panel-stat{font-size:.8rem}
+ .progress-panel-detail{padding:12px}
+}
+@media(max-width:360px){
+ .progress-panel-numbers strong{font-size:1.22rem}
+ .progress-panel-numbers span{font-size:.72rem}
+ .progress-panel-reset{font-size:.67rem}
+ .progress-panel-stat{font-size:.74rem}
+}
+@media(prefers-reduced-motion:reduce){.progress-panel-half>span{transition:none}}
+
+/* Home progress — a concise card in the same design family as the landing tiles. */
+.home-mini-progress.progress-dashboard{
+ width:100%;max-width:100%;margin:8px 0 14px;text-align:left;
+}
+#homeMultiTracker{max-width:none}
+.progress-panel-compact{
+ width:100%;padding:13px 18px 15px;
+ background:#fff;border:1px solid var(--line);border-radius:18px;
+ box-shadow:0 5px 16px #051e300b;
+}
+.progress-panel-compact-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.progress-panel-compact-heading h2{
+ margin:0!important;font-size:1.02rem!important;line-height:1.32!important;
+ letter-spacing:-.015em;font-weight:800!important;color:var(--ink)
+}
+.progress-panel-compact-toggle{
+ border:0;background:transparent;color:var(--blue);
+ font:inherit;font-size:.81rem;font-weight:750;cursor:pointer;
+ padding:8px 0 8px 10px;min-height:38px;white-space:nowrap;
+}
+.progress-panel-compact-toggle:hover{color:var(--ink)}
+.progress-panel-compact-toggle:focus-visible,.progress-panel-dialog-close:focus-visible{
+ outline:2px solid var(--blue);outline-offset:3px;border-radius:7px
+}
+.progress-panel-compact-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:8px}
+.progress-panel-compact-course{min-width:0;padding:0 18px 0 0}
+.progress-panel-compact-course+.progress-panel-compact-course{padding:0 0 0 18px;border-left:1px solid var(--line)}
+.progress-panel-compact-course-title{display:block;font-size:.82rem;font-weight:800;line-height:1.35;letter-spacing:.01em}
+.progress-panel-mini-primary{display:flex;align-items:baseline;gap:6px;margin:3px 0 8px}
+.progress-panel-mini-value{font-size:1.31rem;letter-spacing:-.035em;font-weight:740;line-height:1.1;font-variant-numeric:tabular-nums}
+.progress-panel-mini-label{font-size:.77rem;color:var(--muted)}
+.progress-panel-mini-dual{display:flex;gap:3px;width:100%;height:8px;border-radius:99px;overflow:hidden}
+.progress-panel-mini-half{display:block;flex:1;min-width:0;background:var(--line);overflow:hidden}
+.progress-panel-mini-fill{display:block;height:100%;border-radius:inherit;transition:width .25s ease}
+.progress-panel-mini-half.study .progress-panel-mini-fill{background:#13a18b}
+.progress-panel-mini-half.exam .progress-panel-mini-fill{background:#5487e5}
+.progress-panel-mini-practice{display:flex;align-items:baseline;gap:6px;margin-top:7px;color:var(--muted);font-size:.76rem}
+.progress-panel-mini-practice strong{color:var(--ink);font-weight:750;font-variant-numeric:tabular-nums}
+html[data-theme="dark"] .progress-panel-compact{background:#152c3f;border-color:#324f63;box-shadow:none}
+html[data-theme="dark"] .progress-panel-mini-half{background:#33485a}
+
+/* Full information remains available, but never lengthens the home screen. */
+.progress-detail-dialog{
+ width:min(680px,calc(100vw - 26px));max-width:none;
+ max-height:min(85dvh,780px);margin:auto;overflow-y:auto;
+ padding:0;border:1px solid var(--line);border-radius:20px;
+ background:#fff;color:var(--ink);
+ box-shadow:0 18px 80px #0004;
+ overscroll-behavior:contain;
+}
+.progress-detail-dialog::backdrop{background:rgba(7,22,36,.64);backdrop-filter:blur(3px)}
+.progress-detail-body{padding:17px 24px 24px}
+.progress-panel-dialog-heading{
+ position:sticky;top:-17px;z-index:1;
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:0 0 12px;margin:0;
+ background:#fff;border-bottom:1px solid var(--line);
+}
+.progress-panel-dialog-heading h2{margin:0!important;font-size:1.24rem;letter-spacing:-.025em}
+.progress-panel-dialog-close{
+ border:1px solid var(--line);background:transparent;color:var(--ink);
+ width:37px;height:37px;border-radius:11px;font-size:1.1rem;
+ cursor:pointer;flex:none;
+}
+.progress-panel-dialog-close:hover{background:var(--line)}
+.progress-detail-dialog .progress-panel-list{padding-top:3px}
+html[data-theme="dark"] .progress-detail-dialog,
+html[data-theme="dark"] .progress-panel-dialog-heading{background:#122637;color:var(--ink)}
+@media(max-width:620px){
+ .home-mini-progress.progress-dashboard{margin:7px 0 11px;max-width:100%}
+ .progress-panel-compact{padding:10px 12px 12px;border-radius:15px}
+ .progress-panel-compact-heading h2{font-size:.96rem!important}
+ .progress-panel-compact-toggle{font-size:.76rem}
+ .progress-panel-compact-summary{margin-top:5px}
+ .progress-panel-compact-course{padding-right:10px}
+ .progress-panel-compact-course+.progress-panel-compact-course{padding-left:10px}
+ .progress-panel-mini-value{font-size:1.18rem}
+ .progress-panel-mini-label{font-size:.71rem}
+ .progress-panel-mini-practice{font-size:.71rem}
+ .progress-panel-mini-dual{height:7px}
+ .progress-detail-body{padding:14px 15px 19px}
+ .progress-panel-dialog-heading{top:-14px}
+}
+@media(max-width:360px){
+ .progress-panel-compact-course{padding-right:8px}
+ .progress-panel-compact-course+.progress-panel-compact-course{padding-left:8px}
+ .progress-panel-mini-value{font-size:1.08rem}
+ .progress-panel-mini-label,.progress-panel-mini-practice{font-size:.68rem}
+}
+@media(prefers-reduced-motion:reduce){.progress-panel-mini-fill{transition:none}}
+
+/* Align the continue-studying row with the progress card and learning tiles. */
+body:has(.home-main) .study-resume{width:100%;max-width:100%;margin:0 0 11px}
+body:has(.home-main) .study-resume-link{
+ min-height:66px;padding:10px 15px;border:1px solid var(--line);
+ border-radius:16px;background:#fff;color:var(--ink);
+ box-shadow:0 5px 16px #051e300b;
+}
+body:has(.home-main) .study-resume-link:hover{background:#f6fafc;border-color:#94c5dd}
+body:has(.home-main) .study-resume-play{
+ background:#e6f4fa;color:#176385;border-radius:11px;
+ width:37px;height:37px;
+}
+body:has(.home-main) .study-resume-copy strong{font-size:.88rem;font-weight:780}
+body:has(.home-main) .study-resume-caption{font-size:.72rem}
+html[data-theme="dark"] body:has(.home-main) .study-resume-link{
+ background:#152c3f;border-color:#324f63;color:var(--ink);box-shadow:none
+}
+html[data-theme="dark"] body:has(.home-main) .study-resume-link:hover{background:#1c394c;border-color:#4a7590}
+html[data-theme="dark"] body:has(.home-main) .study-resume-play{background:#22475c;color:#b9e9ff}
+@media(max-width:620px){
+ body:has(.home-main) .study-resume{margin-bottom:9px}
+ body:has(.home-main) .study-resume-link{min-height:61px;padding:9px 12px;border-radius:15px}
+}
+
+/* Home: two equal-width cards below the learning tiles; progress always real. */
+body:has(.home-main) .home-hero-row{
+ display:block;width:100%;max-width:100%;margin:0 0 14px;
+}
+body:has(.home-main) .home-hero-row .home-intro{
+ display:block;width:auto;max-width:100%;margin:0;
+}
+body:has(.home-main) .home-bottom-row{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:14px;align-items:stretch;margin:10px 0 13px;
+}
+body:has(.home-main) .home-bottom-row:not(.has-resume) .progress-dashboard{
+ grid-column:1/-1;
+}
+body:has(.home-main) .home-bottom-row .home-mini-progress.progress-dashboard{
+ min-width:0;width:100%;max-width:none;margin:0;
+}
+body:has(.home-main) .home-bottom-row #homeMultiTracker{
+ width:100%;height:100%;max-width:none;
+}
+body:has(.home-main) .home-bottom-row .progress-panel-compact{
+ display:flex;flex-direction:column;min-width:0;width:100%;
+ min-height:155px;height:100%;padding:13px 17px 15px;
+}
+body:has(.home-main) .home-bottom-row .progress-panel-compact-heading{
+ display:flex;align-items:center;justify-content:space-between;gap:9px;
+}
+body:has(.home-main) .home-bottom-row .progress-panel-compact-heading h2{
+ min-width:0;font-size:1rem!important;
+}
+body:has(.home-main) .home-bottom-row .progress-panel-compact-toggle{
+ flex:none;font-size:.76rem;min-height:32px;padding:4px 0 4px 5px;
+}
+body:has(.home-main) .home-bottom-row .progress-panel-compact-summary{
+ display:grid;grid-template-columns:minmax(0,1fr);
+ align-content:center;gap:12px;flex:1;margin-top:7px;
+}
+body:has(.home-main) .progress-panel-total-metric{
+ display:flex;flex-direction:column;min-width:0;gap:6px;
+}
+body:has(.home-main) .progress-panel-total-label{
+ display:flex;justify-content:space-between;align-items:center;gap:8px;
+ font-size:.82rem;font-weight:700;line-height:1.2;
+}
+body:has(.home-main) .progress-panel-total-label strong{
+ font-size:.84rem;font-weight:800;font-variant-numeric:tabular-nums;
+}
+body:has(.home-main) .progress-panel-total-track{
+ width:100%;height:8px;overflow:hidden;border-radius:99px;
+ background:var(--line);
+}
+body:has(.home-main) .progress-panel-total-fill{
+ display:block;height:100%;width:0;border-radius:inherit;
+ transition:width .25s ease;
+}
+body:has(.home-main) .progress-panel-total-metric.study .progress-panel-total-fill{
+ background:#22b468;
+}
+body:has(.home-main) .progress-panel-total-metric.exam .progress-panel-total-fill{
+ background:#568de6;
+}
+body:has(.home-main) .home-bottom-row .study-resume{
+ width:100%;max-width:none;min-width:0;margin:0;align-self:stretch;
+}
+body:has(.home-main) .home-bottom-row .study-resume-link{
+ position:relative;display:flex;flex-direction:column;align-items:flex-start;
+ justify-content:space-between;gap:9px;box-sizing:border-box;
+ width:100%;height:100%;min-height:155px;padding:16px 18px;
+ border:1px solid var(--line);border-radius:18px;
+ background:#fff;color:var(--ink);box-shadow:0 5px 16px #051e300b;
+ text-decoration:none;overflow:hidden;
+ transition:border-color .15s ease,transform .15s ease;
+}
+body:has(.home-main) .home-bottom-row .study-resume-link:hover{
+ transform:translateY(-1px);background:#f6fafc;border-color:#94c5dd;
+}
+body:has(.home-main) .home-bottom-row .study-resume-play{
+ display:grid;place-items:center;flex:none;width:38px;height:38px;
+ min-height:38px;border-radius:12px;
+ background:#e6f4fa;color:#176385;font-size:.92rem;
+}
+body:has(.home-main) .home-bottom-row .study-resume-copy{
+ display:flex;flex:1;flex-direction:column;justify-content:flex-end;
+ gap:5px;min-width:0;width:100%;line-height:1.3;
+}
+body:has(.home-main) .home-bottom-row .study-resume-caption{
+ display:block;color:var(--muted);font-size:.75rem;font-weight:750;
+ text-transform:none;letter-spacing:0;opacity:1;
+}
+body:has(.home-main) .home-bottom-row .study-resume-copy strong{
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+ overflow:hidden;white-space:normal;overflow-wrap:anywhere;
+ font-size:.96rem;font-weight:780;line-height:1.26;color:var(--ink);
+}
+body:has(.home-main) .home-bottom-row .study-resume-arrow{
+ display:block;position:absolute;top:14px;right:16px;
+ font-size:1.45rem;line-height:1;color:var(--blue);
+}
+html[data-theme="dark"] body:has(.home-main) .home-bottom-row .study-resume-link{
+ background:#152c3f;border-color:#324f63;color:var(--ink);box-shadow:none;
+}
+html[data-theme="dark"] body:has(.home-main) .home-bottom-row .study-resume-link:hover{
+ background:#1c394c;border-color:#4a7590;
+}
+html[data-theme="dark"] body:has(.home-main) .progress-panel-total-track{background:#33485a}
+@media(max-width:620px){
+ body:has(.home-main) .home-bottom-row{gap:9px;margin:8px 0 11px}
+ body:has(.home-main) .home-bottom-row .progress-panel-compact{
+  min-height:157px;padding:10px 11px 12px;border-radius:15px;
+ }
+ body:has(.home-main) .home-bottom-row .progress-panel-compact-heading{
+  flex-wrap:wrap;align-content:start;gap:0 7px;
+ }
+ body:has(.home-main) .home-bottom-row .progress-panel-compact-heading h2{
+  font-size:.9rem!important;
+ }
+ body:has(.home-main) .home-bottom-row .progress-panel-compact-toggle{
+  font-size:.7rem;min-height:26px;padding:2px 0;
+ }
+ body:has(.home-main) .home-bottom-row .progress-panel-compact-summary{
+  gap:11px;margin-top:5px;
+ }
+ body:has(.home-main) .progress-panel-total-label{
+  font-size:.75rem;
+ }
+ body:has(.home-main) .progress-panel-total-label strong{font-size:.76rem}
+ body:has(.home-main) .progress-panel-total-track{height:7px}
+ body:has(.home-main) .home-bottom-row .study-resume-link{
+  min-height:157px;padding:11px 12px;border-radius:15px;gap:8px;
+ }
+ body:has(.home-main) .home-bottom-row .study-resume-play{
+  width:31px;height:31px;min-height:31px;border-radius:10px;font-size:.8rem;
+ }
+ body:has(.home-main) .home-bottom-row .study-resume-copy{gap:5px}
+ body:has(.home-main) .home-bottom-row .study-resume-caption{font-size:.7rem}
+ body:has(.home-main) .home-bottom-row .study-resume-copy strong{font-size:.81rem}
+ body:has(.home-main) .home-bottom-row .study-resume-arrow{top:10px;right:12px;font-size:1.15rem}
+}
+@media(max-width:360px){
+ body:has(.home-main) .home-bottom-row{gap:7px}
+ body:has(.home-main) .home-bottom-row .progress-panel-compact{padding:9px}
+ body:has(.home-main) .home-bottom-row .progress-panel-compact-heading h2{font-size:.83rem!important}
+ body:has(.home-main) .home-bottom-row .progress-panel-compact-toggle{font-size:.67rem}
+ body:has(.home-main) .home-bottom-row .study-resume-link{padding:10px}
+ body:has(.home-main) .home-bottom-row .study-resume-copy strong{font-size:.74rem}
+}
+@media(prefers-reduced-motion:reduce){
+ body:has(.home-main) .progress-panel-total-fill,
+ body:has(.home-main) .home-bottom-row .study-resume-link{transition:none}
+ body:has(.home-main) .home-bottom-row .study-resume-link:hover{transform:none}
+}

@@ -1,0 +1,13 @@
+{
+  "VIDEO_GENERATION_ENABLED": false,
+  "maxConcurrentJobs": 1,
+  "maxQueueDepth": 1,
+  "minimumFreeMemoryGiB": 3,
+  "minimumFreeDiskGiB": 20,
+  "maximumCpuLoadPercent": 75,
+  "nodeHeapMiB": 2048,
+  "renderConcurrency": 1,
+  "localLimits": { "width": 1280, "height": 720, "durationSeconds": 30, "sceneCount": 12, "memoryGiB": 2 },
+  "gpuProviderConfigured": false,
+  "remoteDispatchEnabled": false
+}

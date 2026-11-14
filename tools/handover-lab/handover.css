@@ -1,0 +1,44 @@
+/* Εργαστήριο Επικοινωνίας & Παράδοσης: προσθήκες πάνω στο mentor-vitals.css. */
+#hl-topic-nav{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+#hl-topic-nav button{text-align:left;min-height:44px;padding:8px 12px;border:1px solid #c9d8dd;border-radius:10px;background:#fff;font:inherit;cursor:pointer}
+#hl-topic-nav button[aria-current="true"]{background:#0f4c5c;border-color:#0f4c5c;color:#fff;font-weight:700}
+.hl-narrative{margin:10px 0 14px;padding:12px 14px 12px 34px;background:#f4f8f9;border-radius:10px;line-height:1.55}
+.hl-narrative time{font-variant-numeric:tabular-nums;font-weight:700;color:#0f4c5c}
+.hl-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;margin:10px 0}
+.hl-fields label,.hl-wide{display:flex;flex-direction:column;gap:4px;font-weight:600}
+.hl-structure{grid-template-columns:1fr}
+.hl-fields input,.hl-fields select,.hl-wide textarea,.hl-table input{font:inherit;min-height:44px;padding:6px 10px;border:1px solid #9fb6bd;border-radius:8px;background:#fff;color:inherit;max-width:100%;box-sizing:border-box}
+.hl-wide textarea{width:100%}
+.hl-message{margin:10px 0;padding:12px 14px;border-left:4px solid #0f4c5c;background:#eef5f6;font-weight:600}
+.hl-check{margin:12px 0;min-height:46px;padding:10px 22px;border:1px solid;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
+.hl-result{margin-bottom:8px}
+.hl-verdict{font-weight:700;padding:8px 12px;border-radius:8px}
+.hl-verdict.hl-ok{background:#e3f4ea}.hl-verdict.hl-partial{background:#fff3dc}
+.hl-ok{color:#14603a}.hl-bad{color:#9a3412}
+.hl-rows{padding-left:20px;line-height:1.5}
+.hl-order{padding-left:22px}
+.hl-order li{display:flex;align-items:center;gap:6px;margin:6px 0;padding:6px 8px;border:1px solid #c9d8dd;border-radius:8px;background:#fff}
+.hl-order li span{flex:1}
+.hl-move{min-width:44px;min-height:44px;border:1px solid #9fb6bd;border-radius:8px;background:#f4f8f9;cursor:pointer;font-size:1.05rem}
+.hl-move:disabled{opacity:.35;cursor:default}
+.hl-choices,.hl-checklist{border:1px solid #c9d8dd;border-radius:10px;padding:10px 12px;margin:10px 0}
+.hl-choices label,.hl-checklist label{display:flex;gap:8px;align-items:flex-start;padding:6px 0;line-height:1.4}
+.hl-choices input,.hl-checklist input{min-width:20px;min-height:20px;margin-top:2px}
+.hl-table-wrap{overflow-x:auto;margin:10px 0}
+.hl-table{border-collapse:collapse;min-width:560px}
+.hl-table th,.hl-table td{border:1px solid #c9d8dd;padding:4px;text-align:left}
+.hl-table input{width:6.5em;min-height:40px}
+.hl-input-bad{border-color:#c2410c!important;background:#fff4ed!important}
+.hl-model pre,.hl-transcript{white-space:pre-wrap;background:#f4f8f9;padding:10px 12px;border-radius:8px}
+.hl-transcript{list-style:none}
+html[data-theme="dark"] #hl-topic-nav button,html[data-theme="dark"] .hl-order li,html[data-theme="dark"] .hl-fields input,html[data-theme="dark"] .hl-fields select,html[data-theme="dark"] .hl-wide textarea,html[data-theme="dark"] .hl-table input{background:#173244;border-color:#41657a;color:#e6f1f2}
+html[data-theme="dark"] .hl-narrative,html[data-theme="dark"] .hl-message,html[data-theme="dark"] .hl-model pre,html[data-theme="dark"] .hl-transcript{background:#132a37}
+html[data-theme="dark"] .hl-ok{color:#86efac}html[data-theme="dark"] .hl-bad{color:#fdba74}
+html[data-theme="dark"] .hl-verdict.hl-ok{background:#123826}html[data-theme="dark"] .hl-verdict.hl-partial{background:#3b2a10}
+/* The panel is a grid item: without min-width:0 a wide table stretches it past the phone screen. */
+.vs-content>.vs-panel{min-width:0;grid-column:1/-1}
+#hl-exercise h3{font-size:1rem;margin:18px 0 6px}
+/* A select is as wide as its longest option; keep it inside the phone screen. */
+#hl-case,.hl-fields select{width:100%;max-width:100%}
+.hl-narrative li,.hl-fields label,.hl-order li span{overflow-wrap:anywhere}
+html[data-theme="dark"] .hl-narrative time{color:#7fd6c9}
