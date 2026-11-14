@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Append Claude SAEK batches to claude-saek-findings.json and regenerate CLAUDE_SAEK_REPORT.md.
-Usage: claude_tools.py <batch.json>  (list of finding objects). Touches only Claude-owned files."""
+"""Append AI reviewer SAEK batches to review-saek-findings.json and regenerate REVIEW_SAEK_REPORT.md.
+Usage: review_tools.py <batch.json>  (list of finding objects). Touches only AI reviewer-owned files."""
 import json,sys,os,datetime
 D=os.path.dirname(os.path.abspath(__file__))
-F=os.path.join(D,'claude-saek-findings.json'); M=os.path.join(D,'CLAUDE_SAEK_REPORT.md')
+F=os.path.join(D,'review-saek-findings.json'); M=os.path.join(D,'REVIEW_SAEK_REPORT.md')
 data=json.load(open(F,encoding='utf-8')) if os.path.exists(F) else {"status":"IN_PROGRESS_NOT_CERTIFIED","scope":"Targeted scientific cross-check of the 54 SAEK chapters (courses 16-20) that had no targetedReview. Not an independent scientific certification.","entries":[]}
 if len(sys.argv)>1:
     for e in json.load(open(sys.argv[1],encoding='utf-8')):

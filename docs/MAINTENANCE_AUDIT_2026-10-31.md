@@ -4,9 +4,9 @@
 Η εφαρμογή `ΕΚΑΒ Σπουδή` στην έκδοση `v27.1.126` ελέγχθηκε πριν από οργανωτικές μετακινήσεις ιστορικών αρχείων και μετά από αυτές.
 
 ## Αποδεικτικά CI
-- 29/29 υποχρεωτικές αυτοματοποιημένες δοκιμές (περιλαμβάνονται η δομή 20 μαθημάτων/247 κεφαλαίων ΣΑΕΚ, 314 ΕΟΠΠΕΠ, πρόοδος, σημειώσεις, sync, auth, Φαρμακολογία, MENTOR): https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141489826
+- 29/29 υποχρεωτικές αυτοματοποιημένες δοκιμές (περιλαμβάνονται η δομή 20 μαθημάτων/247 κεφαλαίων ΣΑΕΚ, 314 ΕΟΠΠΕΠ, πρόοδος, σημειώσεις, sync, auth, Φαρμακολογία, ATLA): https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141489826
 - 17/17 διαδραστικές δοκιμές browser: όλες οι 60 HTML διαδρομές HTTP 200, κινητό και desktop, κύριες λειτουργίες, πρόοδος και αναίρεση: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141489852
-- 3D Ανατομία: 8/8 WebGL/quiz/φύλο/εστίαση χωρίς σφάλματα JS. MENTOR OS: εκτεταμένες διαδρομές μαθημάτων, συνομιλίας, σεναρίων και διατήρησης προόδου: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141489786
+- 3D Ανατομία: 8/8 WebGL/quiz/φύλο/εστίαση χωρίς σφάλματα JS. ATLA: εκτεταμένες διαδρομές μαθημάτων, συνομιλίας, σεναρίων και διατήρησης προόδου: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141489786
 - Browser smoke κινητού και desktop: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141489851
 - Δημοσίευση GitHub Pages: https://github.com/6d9757cmp5-creator/ekab-spoudi/actions/runs/41141488274
 

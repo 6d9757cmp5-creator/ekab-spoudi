@@ -22,7 +22,7 @@ This document deliberately distinguishes file integrity, browser rendering, righ
 | **Independent human clinical approvals with evidence** | **0/1,114** |
 | Confirmed live Safari/offline/zoom testing of each image | **Not verified** |
 
-The 148 earlier `clinicalReview=approved` records were attributed exclusively to Claude (AI). Their own reviewer descriptions explicitly stated that they were **not independent medical certification**. Their AI pre-review provenance was preserved under `aiPreReview`, and their clinical state was corrected to `pending`, without altering the images or study progress. AI review must not satisfy the human clinical gate.
+The 148 earlier `clinicalReview=approved` records were attributed exclusively to βοηθό AI. Their own reviewer descriptions explicitly stated that they were **not independent medical certification**. Their AI pre-review provenance was preserved under `aiPreReview`, and their clinical state was corrected to `pending`, without altering the images or study progress. AI review must not satisfy the human clinical gate.
 
 ## Reproducible checks
 

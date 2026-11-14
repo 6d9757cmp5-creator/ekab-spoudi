@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Append Claude batches to claude-eoppep-b-findings.json and regenerate CLAUDE_SCIENTIFIC_REPORT.md.
-Usage: claude_tools.py <batch.json>  (list of finding objects). Touches only Claude-owned files."""
+"""Append AI reviewer batches to review-eoppep-b-findings.json and regenerate REVIEW_SCIENTIFIC_REPORT.md.
+Usage: review_tools.py <batch.json>  (list of finding objects). Touches only AI reviewer-owned files."""
 import json,sys,os,datetime
 D=os.path.dirname(os.path.abspath(__file__))
-F=os.path.join(D,'claude-eoppep-b-findings.json'); M=os.path.join(D,'CLAUDE_SCIENTIFIC_REPORT.md')
+F=os.path.join(D,'review-eoppep-b-findings.json'); M=os.path.join(D,'REVIEW_SCIENTIFIC_REPORT.md')
 data=json.load(open(F,encoding='utf-8')) if os.path.exists(F) else {"status":"IN_PROGRESS_NOT_CERTIFIED","scope":"Targeted scientific cross-check of EOPPEP group-B questions that had no targetedReview in PR #39. Not an independent scientific certification.","entries":[]}
 if len(sys.argv)>1:
     for e in json.load(open(sys.argv[1],encoding='utf-8')):
