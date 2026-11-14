@@ -61,3 +61,6 @@ html[data-theme="dark"] .v6-global-topbar{background:rgba(29,36,29,.96)}
  body.v6-page .atla-launcher{bottom:calc(80px + env(safe-area-inset-bottom))!important}
  body.v6-page .ekab-notes-fab{bottom:calc(140px + env(safe-area-inset-bottom))!important}
 }
+/* Whole cards that are links (tools page) read as cards, not as underlined text. */
+.v6-page-content a.panel{text-decoration:none;color:inherit}
+.v6-page-content a.panel:hover h2{text-decoration:underline}

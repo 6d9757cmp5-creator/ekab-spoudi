@@ -22,9 +22,9 @@
  // Same five items, order and wording as the home page; each inner page lights up the section it belongs to.
  const items=[
   ['index.html','home','Σήμερα',[]],
-  ['saek.html','book','Μελέτη',['saek.html',/^saek-course-/,'saek-images.html','theory.html','eoppep.html','practical_exam.html','written_exam.html','exam_focus.html','apantiseis.html','anatomia.html','fysiologia.html','ektimisi.html','diasostis.html','dimosia_ygeia.html','agglika.html','protocols.html','pdf-library.html','eclass.html','piges.html']],
-  ['supplementary_practice.html','target','Εξάσκηση',['supplementary_practice.html','saek-exams.html',/^mentor-oral/]],
-  ['tools.html','tools','Εργαλεία',['tools.html','paramedic.html',/^mentor-/,'study-plan.html','farmaka.html','profession-law.html','contacts.html','search.html','seminar-prep.html','manual.html','repair.html']],
+  ['saek.html','book','Μελέτη',['saek.html',/^saek-course-/,'saek-images.html','theory.html','eoppep.html','practical_exam.html','written_exam.html','exam_focus.html','apantiseis.html','anatomia.html','fysiologia.html','ektimisi.html','diasostis.html','dimosia_ygeia.html','agglika.html','pdf-library.html','eclass.html','piges.html']],
+  ['supplementary_practice.html','target','Εξάσκηση',['supplementary_practice.html','saek-exams.html']],
+  ['tools.html','tools','Εργαλεία',['tools.html','paramedic.html','protocols.html',/^mentor-/,'study-plan.html','farmaka.html','profession-law.html','contacts.html','search.html','seminar-prep.html','manual.html','repair.html']],
   ['progress-v6.html','progress','Πρόοδος',['progress-v6.html']]
  ];
  const active=items.find(x=>x[3].some(v=>v instanceof RegExp?v.test(page):v===page));
