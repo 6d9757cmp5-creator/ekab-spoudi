@@ -1,0 +1,113 @@
+#!/usr/bin/env node
+/** Real browser check of the airway, equipment and auscultation labs on phone and desktop width:
+ * every subsection renders, every exercise is answered through the page and scores full marks,
+ * a wrong answer is reported, sound graphs are computed from the files and audio plays. */
+import assert from 'node:assert/strict';
+import {chromium,webkit} from 'playwright';
+import {readFileSync} from 'node:fs';
+const base=(process.argv[2]||'http://127.0.0.1:8799').replace(/\/$/,'');
+const lab=id=>JSON.parse(readFileSync(new URL(`./labs/${id}.json`,import.meta.url),'utf8'));
+// Optional second argument "webkit": the Safari engine. WEBKIT_MOBILE=1 adds iPhone touch emulation; it passes
+// on Windows WebKit, but headless WebKit on Linux then keeps the first scroll height after the page grows.
+const engine=process.argv[3]==='webkit'?webkit:chromium;
+const browser=await engine.launch(engine===chromium?{args:['--autoplay-policy=no-user-gesture-required']}:{});
+
+async function answer(sec,e){
+ switch(e.type){
+  case 'label':for(const [n,v] of Object.entries(e.answers))await sec.locator(`select[data-key="${n}"]`).selectOption(v);break;
+  case 'identify':for(const [i,it] of e.items.entries())await sec.locator(`select[data-item="${i}"]`).selectOption(it.answer);break;
+  case 'classify':for(const [i,it] of e.items.entries())await sec.locator(`select[data-item="${i}"]`).selectOption(it.answer);break;
+  case 'truefalse':for(const [i,it] of e.items.entries())await sec.locator(`input[name="${e.id}-${i}"][value="${it.answer}"]`).check();break;
+  case 'numbers':for(const f of e.fields)await sec.locator(`input[data-field="${f.id}"]`).fill(String(f.answer));break;
+  case 'locate':for(const [i,it] of e.items.entries()){await sec.locator('.sl-locate-item').nth(i).click();await sec.locator(`.sl-point[data-point="${it.answer}"]`).click();}break;
+  case 'order':
+   for(const [i,s] of e.steps.entries()){
+    for(;;){const ids=await sec.locator('.sl-order li').evaluateAll(l=>l.map(x=>x.dataset.id));const at=ids.indexOf(s.id);if(at<=i)break;
+     await sec.locator(`.sl-order li[data-id="${s.id}"] .sl-move`).first().click();}
+   }
+ }
+}
+// Bring a control to the middle of the screen before pressing it, as a finger would; Playwright's own
+// scrolling misses some buttons in mobile WebKit on Linux. Reduced motion turns off the smooth scrolling
+// of mentor-vitals.css, which WebKit measures mid-scroll.
+const press=async loc=>{
+ // Two animation frames first: headless WebKit on Linux updates the scroll extent only on a new frame.
+ await loc.evaluate(async el=>{for(let i=0;i<2;i++)await new Promise(r=>requestAnimationFrame(r));void document.documentElement.scrollHeight;el.scrollIntoView({block:'center'});});
+ try{await loc.click({timeout:10000});}
+ catch(err){throw Error('press failed: '+await loc.evaluate(el=>JSON.stringify({rect:el.getBoundingClientRect(),inner:[innerWidth,innerHeight],vv:[visualViewport?.width,visualViewport?.height,visualViewport?.offsetLeft,visualViewport?.offsetTop,visualViewport?.scale],scroll:[scrollX,scrollY],doc:[document.documentElement.scrollWidth,document.documentElement.scrollHeight,document.body.getBoundingClientRect().height],ex:[...document.querySelectorAll('.sl-ex')].map(s=>s.dataset.exercise+'@'+Math.round(s.getBoundingClientRect().top+scrollY)+'+'+Math.round(s.offsetHeight)),img:[...document.images].map(i=>i.complete+'/'+i.naturalHeight+'/'+Math.round(i.getBoundingClientRect().height))}))+' '+err.message.split('\n')[0]);}
+};
+const verdict=sec=>sec.locator('.sl-verdict').textContent();
+const overflow=page=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1?'':[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).slice(0,4).map(e=>e.tagName+'.'+e.className).join(', '));
+
+try{
+ for(const width of [390,1280]){
+  const context=await browser.newContext({viewport:{width,height:844},serviceWorkers:'block',reducedMotion:'reduce',...(engine===webkit&&width<500&&process.env.WEBKIT_MOBILE?{isMobile:true,hasTouch:true}:{})});
+  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  for(const id of ['airway','equipment','auscultation']){
+   const L=lab(id);
+   for(const t of L.topics){
+    await page.goto(`${base}/mentor-${id}.html?topic=${t.id}`,{waitUntil:'load',timeout:45000});
+    await page.waitForSelector('body[data-ready]',{state:'attached',timeout:30000});
+    assert.equal(await page.locator('#sl-title').textContent(),t.title);
+    assert.equal(await page.locator('#sl-topic-nav button').count(),L.topics.length);
+    for(const e of t.exercises){
+     const sec=page.locator(`.sl-ex[data-exercise="${e.id}"]`);
+     await answer(sec,e);
+     const wide=await overflow(page);assert.equal(wide,'',`${width}px ${id}/${e.id}: no horizontal overflow before checking`);
+     await press(sec.locator('.sl-check'));
+     assert.match(await verdict(sec),/^Σωστά (\d+) από \1\./,`${width}px ${id}/${e.id} full marks`);
+    }
+    assert.equal(await overflow(page),'',`${width}px ${id}/${t.id}: no horizontal overflow`);
+    for(const img of await page.locator('.sl-figure img').all()){await img.scrollIntoViewIfNeeded();assert.ok(await img.evaluate(i=>i.complete&&i.naturalWidth>0),`${id}/${t.id} image loads`);}
+    assert.ok((await page.locator('#sl-source-list a').count())>=2,`${id}/${t.id} sources listed`);
+   }
+   assert.equal(await page.locator('.sl-credit,#sl-credits').count(),0,id+': no credits inside the lab');
+   assert.equal(await page.locator('a[href="mentor-media-credits.html"]').count(),1,id+': one licences link');
+  }
+
+  // Licences live on their own page.
+  await page.goto(`${base}/mentor-media-credits.html`,{waitUntil:'load'});await page.waitForSelector('body[data-ready]',{state:'attached'});
+  assert.ok((await page.locator('#credits li').count())>=30,'licences listed');
+
+  // A wrong answer is reported with the right one.
+  await page.goto(`${base}/mentor-airway.html?topic=oxygen`,{waitUntil:'load'});await page.waitForSelector('body[data-ready]',{state:'attached'});
+  const tf=page.locator('.sl-ex[data-exercise="o2-safety"]');
+  await tf.locator('input[name="o2-safety-2"][value="true"]').check();await press(tf.locator('.sl-check'));
+  assert.match(await verdict(tf),/^Σωστά 0 από 6\./);
+  assert.match(await tf.locator('.sl-rows').textContent(),/καύση/);
+
+  // Sound: graph computed from the file, saturation measured, audio plays and the marker moves.
+  await page.goto(`${base}/mentor-auscultation.html?topic=technical`,{waitUntil:'load'});await page.waitForSelector('body[data-ready]',{state:'attached'});
+  const first=page.locator('.sl-sound').first();await first.scrollIntoViewIfNeeded();
+  await first.locator('.sl-sound-info[data-clipped]').waitFor({state:'attached',timeout:20000});
+  assert.ok(Number(await first.locator('.sl-sound-info').getAttribute('data-clipped'))>0.005,'noisy recording shows saturation');
+  const clean=page.locator('.sl-sound').nth(1);await clean.scrollIntoViewIfNeeded();
+  await clean.locator('.sl-sound-info[data-clipped]').waitFor({state:'attached',timeout:20000});
+  assert.equal(Number(await clean.locator('.sl-sound-info').getAttribute('data-clipped')),0,'clean recording is not saturated');
+  const played=await first.locator('audio').evaluate(async a=>{a.muted=true;await a.play();await new Promise(r=>setTimeout(r,700));a.pause();return a.currentTime;});
+  assert.ok(played>0.2,'audio plays');
+  assert.ok(await first.locator('canvas').evaluate(c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let red=0;for(let i=0;i<d.length;i+=4)if(d[i]>200&&d[i+1]<60&&d[i+2]<110)red++;return red>c.height;}),'playback marker drawn');
+
+  assert.deepEqual(errors,[],width+': no page errors');
+  await context.close();
+  console.log('skills labs ok at',width+'px',engine.name());
+ }
+
+ // Dark theme chosen on the site: every lab page and its panels turn dark (no light box left behind).
+ {
+  const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block',reducedMotion:'reduce'});
+  await context.addInitScript(()=>{try{localStorage.setItem('ekab.theme.v1','dark')}catch{}});
+  const page=await context.newPage();
+  for(const url of ['mentor-airway.html?topic=bvm','mentor-equipment.html?topic=shift','mentor-auscultation.html?topic=heart','mentor-handover.html','mentor-vitals.html','mentor-media-credits.html']){
+   await page.goto(`${base}/${url}`,{waitUntil:'load'});await page.waitForTimeout(600);
+   const light=await page.evaluate(()=>{
+    const lum=c=>{const m=c.match(/[\d.]+/g);if(!m||(m[3]!==undefined&&+m[3]===0))return null;const [r,g,b]=m.map(Number);return (0.2126*r+0.7152*g+0.0722*b)/255;};
+    const boxes=[document.body,...document.querySelectorAll('.vs-panel,.vs-aside,.sl-card,.sl-ex select,.vs-sources details,.ekab-nav-back,.sl-sound canvas')];
+    return boxes.filter(e=>{const l=lum(getComputedStyle(e).backgroundColor);return l!==null&&l>0.6;}).map(e=>e.tagName+'.'+String(e.className).split(' ')[0]).slice(0,5);
+   });
+   assert.deepEqual(light,[],url+': light boxes in the dark theme');
+   assert.equal(await page.evaluate(()=>document.documentElement.dataset.theme),'dark',url);
+  }
+  await context.close();console.log('dark theme ok');
+ }
+}finally{await browser.close();}

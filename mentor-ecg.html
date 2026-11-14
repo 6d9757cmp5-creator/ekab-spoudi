@@ -5,8 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
 <title>ATLA · Εργαστήριο ΗΚΓ · Συνθετικές κυματομορφές</title>
+<script src="theme-apply.js"></script>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
+.ecg-optional{border:1px solid #b7d4d5;border-radius:13px;margin:14px 0;background:#edf8f7;color:#103d48;overflow:hidden}
+.ecg-optional>summary{cursor:pointer;padding:16px 19px;font-weight:800;line-height:1.35;min-height:50px}
+.ecg-optional>summary:focus-visible{outline:3px solid #169293;outline-offset:-3px}
+.ecg-optional>.ecg-panel{margin:0 12px 12px}
+#ecg-monitor-training{scroll-margin-top:20px}
 .ecg-wrap{max-width:1380px;margin:0 auto;padding:18px 16px 46px}
 .ecg-head{background:linear-gradient(125deg,#102e4a,#176a75);color:#fff;border-radius:18px;padding:25px 24px;margin:17px 0}
 .ecg-head h1{color:#fff;font-size:clamp(1.6rem,4vw,2.3rem);margin:6px 0}
@@ -28,6 +34,10 @@
 .ecg-status{border-left:4px solid var(--brand2);padding:12px 14px;background:var(--surface2);border-radius:7px;line-height:1.5}
 .ecg-key[hidden]{display:none}
 @media(max-width:650px){.ecg-head{padding:18px}.ecg-panel{padding:14px}.ecg-key{grid-template-columns:1fr}}
+
+html[data-theme="dark"] .ecg-optional{background:#12303a;color:#e3eef0;border-color:#2f5560}
+/* ECG paper in the dark theme: dark paper and light trace, colours otherwise kept. */
+html[data-theme="dark"] .ecg-chart svg{filter:invert(.92) hue-rotate(180deg)}
 </style>
 <script type="module" src="mentor-ecg.js"></script>
 <link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script><meta name="description" content="Εργαστήριο ΗΚΓ: εξάσκηση στην ανάγνωση ηλεκτροκαρδιογραφήματος με συνθετικές κυματομορφές.">
@@ -87,6 +97,7 @@
   });
  })();
  </script>
+ <details class="ecg-optional" id="ecg-pqt-reference"><summary>Προαιρετικά: μελέτη κυμάτων P–QRS–T και συχνότητας</summary>
  <section class="ecg-panel" aria-labelledby="ecg-heading">
   <h2 id="ecg-heading">Συνθετική κυματομορφή</h2>
   <div class="ecg-chart">
@@ -125,6 +136,7 @@
    <div><strong>T</strong><p>Σχηματικό ευρύτερο τμήμα που ακολουθεί.</p></div>
   </div>
  </section>
+ </details>
  <section class="ecg-panel" aria-labelledby="ecg-practice-head" id="ecg-practice">
   <h2 id="ecg-practice-head">Άσκηση: μέτρηση ρυθμού σε λωρίδα 6 δευτερολέπτων</h2>
   <p class="muted small">Μέτρησε πόσα συμπλέγματα QRS (οι ψηλές αιχμές) βλέπεις στη λωρίδα. Ο ρυθμός ανά λεπτό προκύπτει από: πλήθος QRS × 10. Η καμπύλη είναι συνθετική· η άσκηση δεν είναι διάγνωση ούτε επίσημη βαθμολογία.</p>

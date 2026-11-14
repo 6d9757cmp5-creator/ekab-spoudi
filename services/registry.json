@@ -44,6 +44,18 @@
       ]
     },
     {
+      "id": "vital-signs-lab",
+      "kind": "tool",
+      "status": "canonical",
+      "owner": "tools/vital-signs",
+      "implementation": [
+        "mentor-vitals.html",
+        "mentor-vitals.css",
+        "tools/vital-signs/core.mjs",
+        "tools/vital-signs/app.mjs"
+      ]
+    },
+    {
       "id": "mentor-os",
       "kind": "tool",
       "status": "owner-mapped",
