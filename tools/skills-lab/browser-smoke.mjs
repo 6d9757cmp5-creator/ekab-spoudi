@@ -85,7 +85,10 @@ try{
   await clean.locator('.sl-sound-info[data-clipped]').waitFor({state:'attached',timeout:20000});
   assert.ok(Number(await clean.locator('.sl-sound-info').getAttribute('data-clipped'))<0.001,'clean recording is not saturated');
   assert.match(await clean.locator('.sl-sound-info').textContent(),/κορεσμός: όχι/);
-  const played=await first.locator('audio').evaluate(async a=>{a.muted=true;await a.play();await new Promise(r=>setTimeout(r,700));a.pause();return a.currentTime;});
+  const played=await first.locator('audio').evaluate(async a=>{a.muted=true;await a.play();
+   // Over the network the file may take a moment to start; wait up to 6 s for real progress.
+   const t0=performance.now();while(a.currentTime<=0.3&&performance.now()-t0<6000)await new Promise(r=>setTimeout(r,100));
+   a.pause();return a.currentTime;});
   assert.ok(played>0.2,'audio plays');
   assert.ok(await first.locator('canvas').evaluate(c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let red=0;for(let i=0;i<d.length;i+=4)if(d[i]>200&&d[i+1]<60&&d[i+2]<110)red++;return red>c.height;}),'playback marker drawn');
 
