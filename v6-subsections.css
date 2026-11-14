@@ -96,6 +96,13 @@ body:not(.v6-home) :is(.btn:not(.secondary):not(.ghost), .hub-semester-tabs butt
   border-color: var(--v6-accent) !important;
   color: #fff !important;
 }
+/* Dark theme: the accent turns light green, so primary buttons use the darker V6 green to keep white text readable. */
+html[data-theme="dark"] body:not(.v6-home) :is(.btn:not(.secondary):not(.ghost), .hub-semester-tabs button[aria-pressed="true"],
+  .hub-course-count[aria-pressed="true"], .saek-series-parts a[aria-current="step"],
+  .saek-gallery-more button, #imageRetryButton, .aed-locate-button,
+  .ph-main .ph-button:not(.secondary), .seminar-unit.active, .seminar-tabs button.active,
+  .seminar-quiz-modes button.active) { background: #3d704b !important; border-color: #3d704b !important; color: #fff !important; }
+
 
 body:not(.v6-home) :is(.btn.secondary, .btn.ghost, .hub-semester-tabs button:not([aria-pressed="true"])) {
   background: var(--v6-soft) !important;
