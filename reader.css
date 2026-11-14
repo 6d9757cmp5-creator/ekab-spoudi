@@ -7,3 +7,24 @@
 .intro summary,.shell summary{min-height:44px;display:flex;align-items:center}
 .mobile-links a{min-height:44px;display:flex;align-items:center}
 .head-inner .brand{min-height:44px}
+/* Dark theme chosen on the site (html[data-theme]): the study books follow it like every other page. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#191e19;--panel:#202a21;--ink:#e3ece1;--muted:#aebbac;--line:#3a483b;--navy:#203127;--teal:#9ccf9f;--light:#26342a;--danger:#3a2f19}
+html[data-theme="dark"] a{color:#9fd3b8}
+html[data-theme="dark"] :is(.intro,.side,.course-card,.mobile-nav,.complete){background:var(--panel);border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .side a{color:#cfdccc}
+html[data-theme="dark"] :is(.side a:hover,.side a.active){background:#2b3a2d;color:#e8f2e4}
+html[data-theme="dark"] .toolbar{background:var(--bg)}
+html[data-theme="dark"] :is(.btn,.toolbar button){background:#243026;border-color:var(--line);color:#d9e6d6}
+html[data-theme="dark"] :is(.btn:hover,.toolbar button:hover){background:#2d3b2f}
+html[data-theme="dark"] .btn.primary{background:#3d704b;border-color:#3d704b;color:#fff}
+html[data-theme="dark"] .toolbar input{background:#1d251e;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .chapter h3{color:#a9d6a6}
+html[data-theme="dark"] .chip{background:#26342a;border-color:#3a483b;color:#cfe0cb}
+html[data-theme="dark"] .chapter th{background:#26342a;color:#e3ece1}
+html[data-theme="dark"] :is(.chapter td,.chapter th,.table-scroll){border-color:var(--line)}
+html[data-theme="dark"] .figure-caption{color:var(--muted)}
+html[data-theme="dark"] :is(.study-note,.selfcheck){background:#233127}
+html[data-theme="dark"] .qa-icon{background:#3a2f19;color:#f0d9a6}
+html[data-theme="dark"] .complete.done{background:#1f3a29;color:#bfe8cc;border-color:#2f5a3e}
+html[data-theme="dark"] mark{background:#5a4c1a;color:#fff4cc}
+html[data-theme="dark"] body{background:var(--bg)}
