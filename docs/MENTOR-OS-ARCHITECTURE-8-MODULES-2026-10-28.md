@@ -1,4 +1,4 @@
-# MENTOR OS — Αρχιτεκτονική υλοποίησης των 8 λειτουργιών
+# ATLA — Αρχιτεκτονική υλοποίησης των 8 λειτουργιών
 **Κατάσταση:** ΣΧΕΔΙΟ ΑΝΑΠΤΥΞΗΣ — όχι λειτουργική έκδοση · 2026-10-28
 
 ## 0. Πραγματική βάση του repository
@@ -15,11 +15,11 @@
 1. **Μηδενική επέμβαση στον grader**: αμετάβλητα \`ai-grading-client.js\`, \`ai-grading-config.js\`, \`functions/answer-grader/**\`, \`workers/answer-grader/**\`, \`saek-exam-engine.js\`, \`study-scheduler.js\`, \`official_questions.json\`, επίσημα rubrics, και semantics βαθμών.
 2. **Μηδενική καταστροφική μετανάστευση** σε \`sync-model.js\`, \`sync-local.js\`, \`cloud-sync.js\`, \`progress.js\`. Τα υπάρχοντα keys/backup/export δεν αλλάζουν. Το \`applyValues\` ανασυνθέτει τη λίστα γνωστών πεδίων: **μην** προσθέσετε απλώς \`mentor:\` keys στο παλιό sync schema.
 3. **Ξεχωριστή ονοματοδοσία/αποθήκευση**: \`ekab.mentor.v1.*\` και IndexedDB \`ekab-mentor-v1\`, stores \`sessions\`, \`attempts\`, \`mastery\`, \`preferences\`, \`events\`. Αν απαιτείται multi-device sync, ξεχωριστό ιδιωτικό Appwrite namespace/bucket/collection με ACL ανά χρήστη και διακριτό protocol version.
-4. **Τα υπάρχοντα δεδομένα μόνο για ανάγνωση**, μετά από ρητή συγκατάθεση σύνδεσης μαθησιακού προφίλ. Mentor mastery **δεν** είναι επίσημη βαθμολογία/πιστοποίηση. Κανένα αποτέλεσμα Mentor δεν γράφει στα EOPPEP/SAEK keys.
+4. **Τα υπάρχοντα δεδομένα μόνο για ανάγνωση**, μετά από ρητή συγκατάθεση σύνδεσης μαθησιακού προφίλ. ATLA mastery **δεν** είναι επίσημη βαθμολογία/πιστοποίηση. Κανένα αποτέλεσμα ATLA δεν γράφει στα EOPPEP/SAEK keys.
 5. **Εκπαιδευτική χρήση, όχι ιατρική πράξη**. Role scope \`learner|responder|physician-theory\`. Ο AI καθηγητής μπορεί να διδάσκει βαθιά ιατρική, αλλά δεν είναι ιατρός, δεν κάνει διάγνωση πραγματικού ασθενούς, δεν δίνει αυτόνομα εξατομικευμένα κλινικά πρωτόκολλα. Όρια ΕΚΑΒ/Ελλάδας και τρέχουσες εγκεκριμένες οδηγίες ορίζονται ξεχωριστά.
 6. **Προέλευση και άδεια ανά απόσπασμα, εικόνα/ΗΚΓ/3D**. Απαραίτητος ανεξάρτητος επιστημονικός έλεγχος πριν χαρακτηριστεί περιεχόμενο ως εγκεκριμένο. Μη χρησιμοποιείται το δημόσιο GitHub Pages branch ως αποθήκη απόρρητων πληροφοριών ή μη-ελεγμένων μεγάλων AI assets.
 
-## 2. Προτεινόμενη αρχιτεκτονική: ξεχωριστό MENTOR OS
+## 2. Προτεινόμενη αρχιτεκτονική: ξεχωριστό ATLA
 
 \`\`\`text
 existing GitHub Pages (unchanged: SAEK / EOPPEP / Grader)
@@ -43,7 +43,7 @@ existing GitHub Pages (unchanged: SAEK / EOPPEP / Grader)
                    ├── text generation / structured output / role advisors
                    ├── speech adapter (opt-in)
                    └── mentor-only learning service
-                          └── per-user private Mentor data
+                          └── per-user private ATLA data
 \`\`\`
 
 Το υπάρχον JS frontend παραμένει vanilla ES modules· οι 3D βιβλιοθήκες φορτώνονται δυναμικά μόνο στην Ανατομία. Το backend είναι απαραίτητο για κλειδιά AI, server-side κλινική ανάκτηση, authentication, κόστος και έλεγχο πρόσβασης. Διαχωρίστε το endpoint από το υπάρχον answer-grader. Οι εξωτερικές υπηρεσίες και τα πραγματικά quota/pricing καθορίζονται στην υλοποίηση, όχι ως δεδομένα που δήθεν υπάρχουν τώρα.
@@ -81,7 +81,7 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 - \`states[]\`: άφιξη, ABCDE/εκτίμηση, αποφάσεις, εξέλιξη, μεταφορά/παράδοση, απολογισμός.
 - \`actions[]\`: κωδικός, ρόλος που επιτρέπεται να εκτελέσει, προϋποθέσεις, διάρκεια, συνέπειες, \`safety_flags\`, επαληθευμένο \`rationale_source\`.
 - \`transitions[]\`: επόμενη κατάσταση, αλλαγή ζωτικών, νέες ενδείξεις και προκαθορισμένη βαθμίδα κινδύνου.
-- \`scoring\`: ΜΟΝΟ εκπαιδευτικός δείκτης Mentor (π.χ. αναγνώριση κινδύνου, κατάλληλη κλήση βοήθειας, αιτιολόγηση), **όχι υπάρχων βαθμός**.
+- \`scoring\`: ΜΟΝΟ εκπαιδευτικός δείκτης ATLA (π.χ. αναγνώριση κινδύνου, κατάλληλη κλήση βοήθειας, αιτιολόγηση), **όχι υπάρχων βαθμός**.
 - \`seed\`: αναπαραγωγή ίδιας περίπτωσης για tests και δίκαιο debrief.
 - Μοντέλο AI: παράγει μόνο φυσική γλώσσα, ερωτήσεις και εξηγήσεις **εντός** των εγκεκριμένων κανόνων· ο deterministic engine αποφασίζει φυσιολογία/έγκυρες μεταβάσεις.
 - Μεταβολή ζωτικών και κλινικές συνέπειες απαιτούν επίβλεψη κλινικού ελεγκτή· ποτέ ad hoc φανταστικοί αριθμοί ως κλινική αλήθεια.
@@ -126,14 +126,14 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 ### Ζ. Προφορικές Εξετάσεις
 - **UI**: μικρόφωνο μόνο κατόπιν συναίνεσης, live transcript, ορατά κουμπιά \`Έναρξη/Παύση/Διαγραφή\`, ισοδύναμη εξέταση μόνο με πληκτρολόγιο, optional TTS.
 - **Backend**: κατάλληλος speech-to-text provider/API μέσω αυθεντικοποιημένου backend, strict limits, no patient-identifying information, clear retention/deletion policy. STT transcript shown for correction before any assessment.
-- **Teaching**: διαδραστικές διαδοχικές ερωτήσεις, \`needs_more_detail\` followups, σωστό/μερικό/αβέβαιο ως **ξεχωριστό formative Mentor feedback**.
+- **Teaching**: διαδραστικές διαδοχικές ερωτήσεις, \`needs_more_detail\` followups, σωστό/μερικό/αβέβαιο ως **ξεχωριστό formative ATLA feedback**.
 - **Acceptance**: χειρισμός σφαλμάτων STT, ελληνικών ιατρικών όρων, αργής σύνδεσης, βραχέων/διακοπτόμενων απαντήσεων, ποτέ αποθήκευση ήχου χωρίς ρητή συναίνεση.
 
 ### Η. Προσωπική Ιατρική Ακαδημία
 - **UI**: «Αποστολή / Μνήμη / Διαδρομή», μητρώο ικανοτήτων ανά γνώση (π.χ. ABCDE, αεραγωγός, ΗΚΓ), θεματικές διαδρομές ΣΑΕΚ→ΕΟΠΠΕΠ→Advanced theory.
-- **Mastery**: εκτιμήσεις από *Mentor-only* response events, πολλαπλά ανεξάρτητα τεκμήρια, recency, confidence, spaced retrieval; **διάβασα κεφάλαιο ≠ γνωρίζω**.
+- **Mastery**: εκτιμήσεις από *ATLA-only* response events, πολλαπλά ανεξάρτητα τεκμήρια, recency, confidence, spaced retrieval; **διάβασα κεφάλαιο ≠ γνωρίζω**.
 - **Legacy adapter**: read-only view των \`ekab.saek.read.v1.*\`, \`ekab.saek.exams.v1\`, \`ekab-eoppep-official-v15\` και events, με ρητά provenance flags. Όχι αντιγραφή/επανερμηνεία ως επίσημη βαθμολογία.
-- **Acceptance**: μαθητής μπορεί να δει γιατί έγινε μια σύσταση, να διορθώσει στόχους, να εξάγει ή να διαγράψει ξεχωριστά δεδομένα Mentor· cloud/device merge tests χωρίς διαγραφή παλιών δεδομένων.
+- **Acceptance**: μαθητής μπορεί να δει γιατί έγινε μια σύσταση, να διορθώσει στόχους, να εξάγει ή να διαγράψει ξεχωριστά δεδομένα ATLA· cloud/device merge tests χωρίς διαγραφή παλιών δεδομένων.
 
 ## 5. Γνώση βιβλίων: έλεγχος → RAG → απάντηση
 
@@ -176,14 +176,14 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 }
 \`\`\`
 
-Διαχωρισμός \`mentor_progress_v1\` από \`EOPPEP/SAEK\` καθώς και versioned migrations **μόνο μέσα στο Mentor**. Άνοιγμα νέου χρήστη/λογαριασμού δεν διαρρέει παλιό profile. Export/delete Mentor independently. Ελέγχουμε real mobile Safari, offline states, account switch, duplicate actions, multiple tabs και rollback.
+Διαχωρισμός \`mentor_progress_v1\` από \`EOPPEP/SAEK\` καθώς και versioned migrations **μόνο μέσα στο ATLA**. Άνοιγμα νέου χρήστη/λογαριασμού δεν διαρρέει παλιό profile. Export/delete ATLA independently. Ελέγχουμε real mobile Safari, offline states, account switch, duplicate actions, multiple tabs και rollback.
 
 ### Ρητές αρνήσεις μεταβολών
 
-- Ο Mentor δεν καλεί \`EkabSaekExamEngine.recordGrade\` ούτε \`EkabStudyScheduler.record\` για δικές του δραστηριότητες.
+- Ο ATLA δεν καλεί \`EkabSaekExamEngine.recordGrade\` ούτε \`EkabStudyScheduler.record\` για δικές του δραστηριότητες.
 - Δεν γράφει \`ekab-eoppep-official-v15\`, \`ekab.saek.exams.v1\` ή \`ekab.personal-notes.v1\` χωρίς ξεχωριστή ενέργεια χρήστη που αφορά την υπάρχουσα εφαρμογή.
 - Δεν επεκτείνει στα τυφλά το \`ekab-sync-v1\`. Ξεχωριστό sync + reconciliation schema και tests.
-- Τα ήδη καταχωρισμένα αποτελέσματα παραμένουν byte-identical μετά από Mentor sessions, και συγκρίνονται με πριν/μετά fixture hashes.
+- Τα ήδη καταχωρισμένα αποτελέσματα παραμένουν byte-identical μετά από ATLA sessions, και συγκρίνονται με πριν/μετά fixture hashes.
 
 ## 8. Στάδια παράδοσης και quality gates
 
@@ -191,8 +191,8 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 - Snapshot/backup test fixtures για ΣΑΕΚ/ΕΟΠΠΕΠ/σημειώσεις/συγχρονισμό, έλεγχος κλινικής ακρίβειας και αδειών, chapter-indexed reviewed corpus, Greek terminology glossary.
 - **Gate:** δεν εμφανίζεται «AI grounded in books» όσο δεν υπάρχουν πραγματικά reviewed passages.
 
-### Stage 1 — Mentor foundations / Academy
-- Ξεχωριστό Mentor page/router, event store, read-only legacy data adapter, study plan/reasons, source retrieval gateway; versioned schema.
+### Stage 1 — ATLA foundations / Academy
+- Ξεχωριστό ATLA page/router, event store, read-only legacy data adapter, study plan/reasons, source retrieval gateway; versioned schema.
 - **Gate:** existing grading files unchanged + no progress mutations after 100+ sample sessions; account isolation and UI mobile audit.
 
 ### Stage 2 — EKAB Live + equipment + structured triage
@@ -204,7 +204,7 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 - **Gate:** benchmark ECG fixtures; labels/laterality; performance on mobile Safari, low-memory devices and no-WebGL mode.
 
 ### Stage 4 — Medical Faculty + Oral Examination
-- Independent Mentor API, structured role outputs with verification and physician-review gates, opt-in STT/TTS, text equivalent.
+- Independent ATLA API, structured role outputs with verification and physician-review gates, opt-in STT/TTS, text equivalent.
 - **Gate:** hallucinated citation red-team, token/cost budget, authorization bypass, prompt injection from book content, private audio handling.
 
 ### Stage 5 — final integration
@@ -216,8 +216,8 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 | Test | Requirement |
 | --- | --- |
 | Existing grader regression | All historical tests pass; grader code untouched |
-| Legacy data integrity | Existing progress, exams, notes and backups equal before/after Mentor usage |
-| Account isolation | Mentor data never leaks between two Appwrite users |
+| Legacy data integrity | Existing progress, exams, notes and backups equal before/after ATLA usage |
+| Account isolation | ATLA data never leaks between two Appwrite users |
 | Offline and Safari | Read-only/2D/text fallback; no silent data loss |
 | Scenario replay | Identical state transitions for fixed seed and input |
 | Simulation medical QA | Clinical reviewer approval for all treatment consequences |
@@ -226,7 +226,7 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 | Faculty RAG | No unreviewed excerpts, false citations or overconfident medical certainty |
 | Voice privacy | Explicit opt-in; stop, cancel, delete, no raw audio in logs |
 | Massive event/sync load | Bounded history, idempotent event processing, race tests |
-| Rollback | Revert Mentor deployment without touching legacy local or cloud data |
+| Rollback | Revert ATLA deployment without touching legacy local or cloud data |
 
 ## 10. Current status — 28 October 2026
 
@@ -235,8 +235,8 @@ functions/mentor-api/  # NEW backend; never modify answer-grader as dependency
 | Source catalog | Implemented in draft PR #83 |
 | Seven full-text extracted books | Implemented in draft PR #83; review pending |
 | Deterministic reviewed-corpus retrieval primitives | Initial code exists; production returns no unreviewed content |
-| Mentor basic read-only planner | Prototype exists in separate draft PR #22 |
-| Production-connected AI Mentor | NOT IMPLEMENTED |
+| ATLA basic read-only planner | Prototype exists in separate draft PR #22 |
+| Production-connected AI ATLA | NOT IMPLEMENTED |
 | Eight advanced modules | NOT IMPLEMENTED |
 | Scientific certification | NOT COMPLETED |
 | Production release | NOT COMPLETED |

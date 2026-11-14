@@ -7,7 +7,7 @@
 - `/services/`: επαναχρησιμοποιούμενη λογική για δεδομένα/AI/σημειώσεις/συγχρονισμό, **μία φορά**.
 - `/content/`: διαχείριση εκπαιδευτικών πηγών χωρίς διπλές εκδόσεις.
 - `/workers/`, `/functions/`: deployment-specific backends με ξεχωριστά permissions, secrets και κόστη.
-- `/mentor/`: ιστορική ενεργή υλοποίηση MENTOR OS. Η προσομοίωση ασθενών ανήκει στο `tools/patient-simulator`.
+- `/mentor/`: ιστορική ενεργή υλοποίηση ATLA. Η προσομοίωση ασθενών ανήκει στο `tools/patient-simulator`.
 
 ### Τι μεταφέρθηκε πραγματικά
 1. Το Patient Simulator και τέσσερα ειδικά εργαλεία είναι ήδη σε canonical `tools/` υλοποιήσεις.

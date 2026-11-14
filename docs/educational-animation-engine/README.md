@@ -3,7 +3,7 @@
 **Scope:** all future educational content types; **initial activation:** SAEK only. EOPPEP examinations excluded. No production videos are generated or published during scientific cross-check.
 
 ## Existing system and migration
-The current static GitHub Pages application includes `saek-course-series.js` and Scrimba-hosted course video links. The old course-series loader is retired. Do not delete the original lesson text, student progress, or Mentor OS. Audit separately any embedded per-chapter media before deleting media files; only remove confirmed legacy video assets, not anatomical images or unrelated files.
+The current static GitHub Pages application includes `saek-course-series.js` and Scrimba-hosted course video links. The old course-series loader is retired. Do not delete the original lesson text, student progress, or ATLA OS. Audit separately any embedded per-chapter media before deleting media files; only remove confirmed legacy video assets, not anatomical images or unrelated files.
 
 ## Hard publication gate
 Each video has `id`, `sourceId`, `sourceHash`, `status`, `videoUrl`, `clinicalApproval`, `coverageApproval`. The browser may display a video **only** when its source hash matches current approved source, clinical and coverage checks are true, and status is `published`. No fallback to outdated video. Approval cannot be inferred from targeted GitHub audit counters. Changes invalidate the affected source/scene approvals. Clinical approval is by qualified human for medical instructions.
@@ -22,7 +22,7 @@ Core client-side publication guard added as `educational-animation-engine.js`. L
 
 ## Acceptance gates
 - Static checks: source/version mismatch => invisible; missing clinical/coverage check => invisible; failed/scheduled/review => invisible; published and all approvals => eligible.
-- No duplicated Mentor or student progress writes.
+- No duplicated ATLA or student progress writes.
 - Real-device browser checks and end-to-end render/approval tests required before marking production-ready.
 
 ## Permission policy
@@ -34,7 +34,7 @@ The owner states that permissions for all planned assets and services are alread
 - Keep per-mesh license/attribution and source/version manifest; check share-alike, noncommercial and model-specific terms before redistribution.
 - Reject unsupported formats, missing anatomy, unreviewed models and assets with unverified rights. Do not invent substitute anatomy.
 - Validate end-to-end import, Blender motion, render, clinical review, Greek narration and publication gate before announcing readiness.
-- Preserve existing lessons, student progress, Mentor OS and the published-only video guard; no placeholder media.
+- Preserve existing lessons, student progress, ATLA OS and the published-only video guard; no placeholder media.
 
 ## Hybrid execution topology — approved design (not yet deployed)
 - **GitHub Actions orchestrator:** schedules and validates jobs, selects workers, tracks retries, and coordinates publication. Use hosted runners for resource-intensive CPU rendering only when benchmarked within their actual memory/time limits. A GPU-capable external runner may be required for demanding 3D; never claim standard hosted runners provide a GPU.

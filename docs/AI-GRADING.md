@@ -12,11 +12,11 @@
 
 ## Ενεργοποίηση από Appwrite Console
 
-1. **Έλεγξε κόστος και όρια.** Το Appwrite Free έχει έως 2 Functions ανά project, αλλά η χρήση της OpenAI API χρεώνεται ξεχωριστά, δεν περιλαμβάνεται στη συνδρομή ChatGPT. Δεν έχει ενεργοποιηθεί αυτόματη αναβάθμιση χρέωσης.
+1. **Έλεγξε κόστος και όρια.** Το Appwrite Free έχει έως 2 Functions ανά project, αλλά η χρήση της OpenAI API χρεώνεται ξεχωριστά, δεν περιλαμβάνεται στη συνδρομή βοηθός AI. Δεν έχει ενεργοποιηθεί αυτόματη αναβάθμιση χρέωσης.
 2. Στο project `6ade83ec00260198ae34` της περιοχής `fra`: **Functions → Create Function → Connect GitHub** → repository `6d9757cmp5-creator/ekab-spoudi`, branch `main`.
 3. Root directory: `functions/answer-grader`. Runtime: **Node.js 22** (ή νεότερο συμβατό), entrypoint: `main.js`. Δεν χρειάζεται npm dependency.
 4. Στο **Settings → Execute access** επέτρεψε **μόνο authenticated users** (Role.users()), όχι guests/any/public. Μη δημιουργήσεις public function domain που δέχεται ανώνυμο περιεχόμενο. Μην δώσεις πρόσθετα project API scopes· δεν χρειάζονται.
-5. Πρόσθεσε **Function environment variable** `OPENAI_API_KEY` (ιδιωτικά στο Console, ΠΟΤΕ στο GitHub), προαιρετικά `OPENAI_MODEL=gpt-4o-mini`. Μετά κάνε deployment / redeployment. Μην χρησιμοποιείς το προσωπικό ChatGPT token.
+5. Πρόσθεσε **Function environment variable** `OPENAI_API_KEY` (ιδιωτικά στο Console, ΠΟΤΕ στο GitHub), προαιρετικά `OPENAI_MODEL=gpt-4o-mini`. Μετά κάνε deployment / redeployment. Μην χρησιμοποιείς το προσωπικό βοηθός AI token.
 6. Αντέγραψε το **Function ID** (δημόσιο αναγνωριστικό, όχι secret) στο `ai-grading-config.js` ως `functionId:'<το πραγματικό id>'`. Δημοσίευσε τον αλλαγμένο κώδικα. Η ενεργοποίηση πρέπει να γίνει **μόνο μετά** από επιτυχές δοκιμαστικό execution.
 7. Δοκίμασε από Google login: παραφρασμένη σωστή απάντηση, ελλιπή απάντηση, επικίνδυνο λάθος, κενή απάντηση, μη συνδεδεμένο χρήστη, offline λειτουργία, υπέρβαση ορίου, διαφορετική ερώτηση ενόσω τρέχει το αίτημα. Έλεγξε ότι η παλιά πρόοδος δεν αντικαθίσταται.
 

@@ -73,7 +73,7 @@
 
 Ένας πρώτος metadata-only bundle έλεγχος αρνήθηκε εργασία λόγω πίεσης πόρων ενώ εκτελούνταν browser checks. Μετά το τέλος τους πέρασε χωρίς χαλάρωση των ορίων. Η πρώτη πρόχειρη δοκιμή είχε ελλείπουσα import, διορθώθηκε πριν από την τελική επιτυχή επαλήθευση. Αποφεύχθηκε επίσης npm lifecycle side effect με μετονομασία του script σε `bundle:prepare`.
 
-Οι browser έλεγχοι απέκλεισαν εξωτερικά requests, POSTs και media, ώστε να μην καλούν AI/TTS ή videos. Είναι έλεγχοι φόρτωσης σε προσομοιωμένα viewports, όχι πραγματική συσκευή κινητού, πλήρης MENTOR 3D αξιολόγηση ή κλινική αποδοχή. Οι πραγματικές render επιδόσεις παραμένουν αδοκίμαστες λόγω της υποχρεωτικής απαγόρευσης.
+Οι browser έλεγχοι απέκλεισαν εξωτερικά requests, POSTs και media, ώστε να μην καλούν AI/TTS ή videos. Είναι έλεγχοι φόρτωσης σε προσομοιωμένα viewports, όχι πραγματική συσκευή κινητού, πλήρης ATLA 3D αξιολόγηση ή κλινική αποδοχή. Οι πραγματικές render επιδόσεις παραμένουν αδοκίμαστες λόγω της υποχρεωτικής απαγόρευσης.
 
 ## 5. GitHub Actions και isolation
 
@@ -106,7 +106,7 @@
 - `workers/educational-animation/worker.ps1`
 - `workers/educational-animation/worker.test.mjs`
 
-Τα node_modules, Chromium cache, runtime ZIP/extracted Node, FFmpeg εγκατάσταση και ignored local state είναι τοπικά artifacts, όχι git περιεχόμενο. Δεν τροποποιήθηκαν εκπαιδευτική ύλη, επιστημονική αντιπαραβολή, MENTOR, student progress ή publication guard.
+Τα node_modules, Chromium cache, runtime ZIP/extracted Node, FFmpeg εγκατάσταση και ignored local state είναι τοπικά artifacts, όχι git περιεχόμενο. Δεν τροποποιήθηκαν εκπαιδευτική ύλη, επιστημονική αντιπαραβολή, ATLA, student progress ή publication guard.
 
 ## 8. Commit και χρήση
 

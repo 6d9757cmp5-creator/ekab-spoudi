@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Append Claude SAEK batches to claude-saek-findings.json and regenerate CLAUDE_SAEK_REPORT.md.
-Usage: claude_tools.py <batch.json>  (list of finding objects). Touches only Claude-owned files."""
+"""Append AI reviewer SAEK batches to review-saek-findings.json and regenerate REVIEW_SAEK_REPORT.md.
+Usage: review_saek_tools.py <batch.json in this folder>  (list of finding objects). Touches only AI reviewer-owned files."""
 import json,sys,os,datetime
 D=os.path.dirname(os.path.abspath(__file__))
-F=os.path.join(D,'claude-saek-findings.json'); M=os.path.join(D,'CLAUDE_SAEK_REPORT.md')
+F=os.path.join(D,'review-saek-findings.json'); M=os.path.join(D,'REVIEW_SAEK_REPORT.md')
 data=json.load(open(F,encoding='utf-8')) if os.path.exists(F) else {"status":"IN_PROGRESS_NOT_CERTIFIED","scope":"Targeted scientific cross-check of the 54 SAEK chapters (courses 16-20) that had no targetedReview. Not an independent scientific certification.","entries":[]}
 if len(sys.argv)>1:
-    for e in json.load(open(sys.argv[1],encoding='utf-8')):
+    # Only a batch file inside this folder is accepted (no paths from elsewhere).
+    batch=os.path.join(D,os.path.basename(sys.argv[1]))
+    for e in json.load(open(batch,encoding='utf-8')):
         data['entries']=[x for x in data['entries'] if x['id']!=e['id']]+[e]
 data['entries'].sort(key=lambda x:x['id']); json.dump(data,open(F,'w',encoding='utf-8'),ensure_ascii=False,indent=1)
 V={'consistent':'Συμφωνεί','consistent_with_gaps':'Συμφωνεί με ελλείψεις','needs_correction':'Χρειάζεται διόρθωση','needs_clinical_review':'Χρειάζεται κλινική αξιολόγηση','source_unreachable':'Πηγή μη προσβάσιμη','no_checkable_clinical_claim':'Οργανωτικό/εκπαιδευτικό — δεν εντοπίστηκε ελέγξιμος κλινικός ισχυρισμός'}
@@ -16,7 +18,7 @@ for _f in ('saek-11-20.json',):
 _ids={e['id'] for e in data['entries']}
 npend=len(_ids&_pend); ncomp=sum(1 for e in data['entries'] if e['id'] in _pend and e['verdict'] not in ('source_unreachable','no_checkable_clinical_claim')); extra=_ids-_pend; missing=sorted(_pend-_ids)
 n=len(data['entries']); from collections import Counter; c=Counter(e['verdict'] for e in data['entries'])
-L=['# CLAUDE — Επιστημονική αντιπαραβολή 54 κεφαλαίων ΣΑΕΚ (μαθήματα 16–20) χωρίς προηγούμενο στοχευμένο έλεγχο','',
+L=['# AI reviewer — Επιστημονική αντιπαραβολή 54 κεφαλαίων ΣΑΕΚ (μαθήματα 16–20) χωρίς προηγούμενο στοχευμένο έλεγχο','',
 '**Κατάσταση: ΣΕ ΕΞΕΛΙΞΗ — ΟΧΙ ΑΝΕΞΑΡΤΗΤΗ ΠΙΣΤΟΠΟΙΗΣΗ.** Στοχευμένη αντιπαραβολή των κλινικών ισχυρισμών του κεφαλαίου με πρωτογενείς πηγές. Δεν άλλαξε εκπαιδευτικό περιεχόμενο, κοινά μητρώα ή το `REPORT.md`. Η ανθρώπινη κλινική αξιολόγηση παραμένει υποχρεωτική στις κρίσιμες αμφιβολίες.','',
 f'**Καταγράφηκαν:** {npend}/54 κεφάλαια, από τα οποία ΜΟΝΟ {ncomp} αντιπαραβλήθηκαν πραγματικά με προσβάσιμη πηγή· τα υπόλοιπα είναι είτε χωρίς ελέγξιμο κλινικό ισχυρισμό είτε «δεν επαληθεύτηκε». Δεν υπάρχει «έγκριση κεφαλαίου». · '+' · '.join(f'{V[k]}: {v}' for k,v in c.items())+(f' · Επιπλέον {len(extra)} κεφάλαια που είχαν ήδη στοχευμένο έλεγχο από άλλον ({", ".join(sorted(extra))}): παρατίθενται για διασταύρωση.' if extra else ''),'',
 'Εκκρεμή (χωρίς targetedReview): SAEK-16-12, 16-13 και όλα τα κεφάλαια των μαθημάτων 17–20 (54 συνολικά).','',
