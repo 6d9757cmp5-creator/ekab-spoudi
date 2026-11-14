@@ -30,7 +30,9 @@ if(isHome||isSaek||isEop){
    section.setAttribute('data-learning-surface','1');
    main.insertBefore(section,anchor);
   }
+  const goalKey='ekab.learning-goal.v1';
   let chosen=isHome?'auto':isSaek?'saek':'eoppep';
+  if(isHome){try{const saved=localStorage.getItem(goalKey);if(['auto','saek','eoppep'].includes(saved))chosen=saved;}catch{}}
   function makeLink(href,label,cls){
    const node=e('a',cls,label);
    node.href=new URL(href,new URL('./',import.meta.url)).href;
@@ -65,7 +67,7 @@ if(isHome||isSaek||isEop){
      const o=e('option','',caption);o.value=value;select.append(o);
     }
     select.value=chosen;
-    select.addEventListener('change',event=>{chosen=event.target.value;draw();});
+    select.addEventListener('change',event=>{chosen=event.target.value;try{localStorage.setItem(goalKey,chosen);}catch{}draw();});
     row.append(label,select);heading.append(row);
    }
    const links=e('div','en-actions');
@@ -89,6 +91,8 @@ if(isHome||isSaek||isEop){
    bottom.append(why,steps);
    const panel=e('div','en-surface');panel.append(upper,bottom);
    section.replaceChildren(panel);
+   const goalMount=document.querySelector('.v6-goal-mount');
+   if(isHome&&goalMount){const selector=section.querySelector('.en-selector');if(selector)goalMount.replaceChildren(selector);}
   }
   let refreshQueued=false;
   function refresh(){
