@@ -6,7 +6,6 @@
 "use strict";
 const fs = require("node:fs");
 const path = require("node:path");
-const {execFileSync} = require("node:child_process");
 const folder=__dirname;
 const registryFile=path.join(folder,"eoppep-314.json");
 const evidenceFile=path.join(folder,"review-eoppep-b-findings.json");
@@ -72,13 +71,8 @@ if(require.main===module){
     const {merged,stats}=mergeFindings(registry,findings);
     process.stdout.write(JSON.stringify({...stats,mode:args.includes("--apply")?"apply":"preview"},null,2)+"\n");
     if(args.includes("--apply")){
-      const branch=execFileSync("git",["branch","--show-current"],{cwd:folder,encoding:"utf8"}).trim();
-      if(branch!=="audit/claude-eoppep-b-crosscheck-20261031")
-        throw new Error("Refusing to alter shared registry outside AI reviewer PR #140 branch. Current: "+branch);
-      const tmp=registryFile+".claude-import-tmp";
-      try{fs.writeFileSync(tmp,JSON.stringify(merged,null,2)+"\n","utf8");fs.renameSync(tmp,registryFile)}
-      finally{if(fs.existsSync(tmp))fs.unlinkSync(tmp)}
-      process.stdout.write("Wrote eoppep-314.json; inspect git diff and tests before committing. Do not merge PRs automatically.\n");
+      // Archived importer: the review branch it was written for is merged, so --apply stays disabled.
+      throw new Error("Archived importer: preview only; the review branch it served is closed.");
     }
-  }catch(e){process.stderr.write("CLAUDE_IMPORT_ERROR: "+e.message+"\n");process.exitCode=1}
+  }catch(e){process.stderr.write("REVIEW_IMPORT_ERROR: "+e.message+"\n");process.exitCode=1}
 }
