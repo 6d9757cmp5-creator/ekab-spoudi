@@ -312,3 +312,69 @@ html[data-theme="dark"] body:not(.v6-home) :is(.saek-source-section, .saek-sourc
     border-radius: 13px;
   }
 }
+body:not(.v6-home) .saek-anatomy-link{background:var(--v6-accent)!important;border-color:var(--v6-accent)!important;color:#fff!important;box-shadow:0 5px 14px rgba(49,91,60,.14)}
+body:not(.v6-home) .saek-anatomy-link:hover{background:var(--v6-accent-strong)!important;border-color:var(--v6-accent-strong)!important;color:#fff!important}
+html[data-theme="dark"] body:not(.v6-home) .saek-anatomy-link{background:#3c704a!important;border-color:#58835b!important;color:#fff!important}
+html[data-theme="dark"] body:not(.v6-home) .saek-anatomy-link:hover{background:#4c8055!important;border-color:#6b956d!important}
+/* Bring shared utilities and searchable controls into the V6 forest-and-linen palette. */
+body:not(.v6-home) :is(.ekab-search-close, .ekab-search-chip, .ekab-search-glossary,
+  .saek-show-all, .saek-source-action, .ekab-notes-chapter, .ekab-notes-tabs button:not([aria-pressed="true"]),
+  .ekab-notes-new, .ekab-notes-more, .ekab-note-actions button, .ekab-note-actions a,
+  .ekab-notes-visibility-toggle, .ekab-notes-visibility-fallback) {
+  background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--v6-accent-strong)!important;
+}
+body:not(.v6-home) :is(.saek-source-summary, .saek-source-section details>summary) {
+  background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--ink)!important;
+}
+body:not(.v6-home) .ekab-notes-fab {background:#315f3d!important;border-color:#789575!important;color:#fff!important;box-shadow:0 8px 22px rgba(40,68,42,.22)!important}
+body:not(.v6-home) .ekab-notes-fab:hover {background:#254c31!important}
+body:not(.v6-home) .ekab-notes-dialog {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+body:not(.v6-home) :is(.ekab-notes-head, .ekab-note-card) {background:var(--v6-surface)!important;border-color:var(--line)!important}
+body:not(.v6-home) :is(.ekab-notes-head h2, .ekab-notes-controls label, .ekab-notes-editor label,
+  .ekab-note-title, .ekab-notes-editor h3, .ekab-note-preview) {color:var(--ink)!important}
+html[data-theme="dark"] body:not(.v6-home) :is(.ekab-search-close, .ekab-search-chip, .ekab-search-glossary,
+  .saek-show-all, .saek-source-action, .ekab-notes-chapter, .ekab-notes-tabs button:not([aria-pressed="true"]),
+  .ekab-notes-new, .ekab-notes-more, .ekab-note-actions button, .ekab-note-actions a,
+  .ekab-notes-visibility-toggle, .ekab-notes-visibility-fallback, .saek-source-summary,
+  .saek-source-section details>summary) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--ink)!important}
+html[data-theme="dark"] body:not(.v6-home) .ekab-notes-tabs button[aria-pressed="true"] {background:#426d48!important;border-color:#608260!important;color:#fff!important}
+html[data-theme="dark"] body:not(.v6-home) .ekab-notes-fab {background:#3d704b!important;border-color:#789575!important;color:#fff!important}
+html[data-theme="dark"] body:not(.v6-home) :is(.ekab-notes-dialog, .ekab-notes-head, .ekab-note-card,
+  .ekab-notes-editor, .ekab-notes-controls, .ekab-notes-results) {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+html[data-theme="dark"] body:not(.v6-home) :is(.ekab-notes-head p, .ekab-notes-controls label, .ekab-notes-editor label,
+  .ekab-note-title, .ekab-note-preview, .ekab-notes-status, .ekab-notes-fine, .ekab-notes-editor h3,
+  .ekab-note-meta, .ekab-note-empty) {color:var(--muted)!important}
+html[data-theme="dark"] body:not(.v6-home) .ekab-notes-dialog :is(input, textarea, select) {background:#22332b!important;color:var(--ink)!important;border-color:var(--line)!important}
+
+/* Keep the shared classroom tools aligned with the V6 forest-and-gold palette. */
+body.v6-home .ekab-notes-fab {background:linear-gradient(145deg,#315f3d,#254c31)!important;border-color:#789575!important;color:#fff!important;box-shadow:0 8px 22px rgba(40,68,42,.22)!important}
+body.v6-home .ekab-notes-fab:hover {background:linear-gradient(145deg,#3d704b,#315f3d)!important}
+body.v6-home .ekab-notes-dialog {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+html[data-theme="dark"] body.v6-home .ekab-notes-fab {background:linear-gradient(145deg,#3d704b,#294c36)!important;border-color:#789575!important;color:#fff!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.reader-breadcrumb a,.eyebrow,.quick-jump strong,.chapter-shortcut strong,.lesson-3d strong,.lesson-3d-title,.saek-section-label) {color:var(--v6-accent-strong)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.lesson-3d,.quick-jump,.chapter-shortcut) {border-color:var(--line)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.lesson-3d,.quick-jump,.chapter-shortcut) {background-color:var(--v6-soft)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.ex-section-nav,.saek-anatomy-jump,.atlas-chapter-practice) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--ink)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.ex-section-nav strong,.ex-section-nav label,.saek-anatomy-jump,.saek-anatomy-jump-text,.saek-anatomy-jump-actions,.saek-anatomy-jump-actions strong,.saek-source-section,.saek-source-title,.atlas-chapter-practice,.atlas-chapter-practice strong) {color:var(--v6-accent-strong)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.reader-breadcrumb a,.lesson-progress,.lesson-progress *, .saek-source-figure,.saek-source-figure img) {border-color:var(--line)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.reader-breadcrumb a,.ex-section-nav strong,.ex-section-nav label) {color:var(--v6-accent-strong)!important}
+body:not(.v6-home).v6-page .v6-page-content .lesson-progress {color:var(--muted)!important}
+body:not(.v6-home).v6-page .v6-page-content .bar {background:var(--v6-soft)!important}
+body:not(.v6-home).v6-page .v6-page-content .bar>span {background:var(--v6-accent)!important}
+body:not(.v6-home).v6-page .v6-page-content .saek-source-figure {background:var(--v6-surface)!important}
+body:not(.v6-home).v6-page .v6-page-content .ekab-manual-link {color:var(--v6-accent-strong)!important}
+body:not(.v6-home).v6-page .ekab-search-popover {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+body:not(.v6-home).v6-page .ekab-search-popover :is(strong,.ekab-search-hint,.ekab-search-examples,.ekab-search-filter) {color:var(--ink)!important}
+body:not(.v6-home).v6-page .ph-tag.protocol {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--v6-accent-strong)!important}
+html[data-theme="dark"] body.v6-home .ekab-notes-dialog {background:#1c2b24!important;border-color:#394b42!important;color:#e7eee9!important}
+body:is(.v6-home,.v6-page) :is(.ekab-notice-panel,.ekab-notice-entry) {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+body:is(.v6-home,.v6-page) .ekab-notice-entry.is-unread {border-left-color:var(--v6-accent)!important;background:var(--v6-soft)!important}
+body:is(.v6-home,.v6-page) :is(.ekab-notice-close,.ekab-notice-markall,.ekab-notice-read) {color:var(--v6-accent-strong)!important}
+body:is(.v6-home,.v6-page) .ekab-notice-action {background:var(--v6-accent)!important;color:#fff!important}
+body:is(.v6-home,.v6-page) .ekab-notice-trigger:focus-visible,
+body:is(.v6-home,.v6-page) .ekab-notice-panel button:focus-visible {outline-color:#77ac7d!important}
+html[data-theme="dark"] body:is(.v6-home,.v6-page) :is(.ekab-notice-panel,.ekab-notice-entry) {background:#1c2b24!important;border-color:#394b42!important;color:#e7eee9!important}
+html[data-theme="dark"] body:is(.v6-home,.v6-page) .ekab-notice-entry.is-unread {background:#263a30!important;border-left-color:#91cea0!important}
+html[data-theme="dark"] body:is(.v6-home,.v6-page) :is(.ekab-notice-close,.ekab-notice-markall,.ekab-notice-read) {color:#b5e4bb!important}
+html[data-theme="dark"] body:is(.v6-home,.v6-page) .ekab-notice-action {background:#91cea0!important;color:#17231f!important}
+html[data-theme="dark"] body:not(.v6-home) .ekab-notes-editor-actions .ekab-notes-save {background:#91cea0!important;border-color:#91cea0!important;color:#17231f!important}

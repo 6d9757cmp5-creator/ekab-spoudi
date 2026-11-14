@@ -1,0 +1,17 @@
+import { canonicalLearnerProfile } from './atla/student/profile.mjs';
+import { choosePrimary } from './atla/learning/next-step.mjs';
+const profile=canonicalLearnerProfile(window.localStorage,{scheduler:window.EkabStudyScheduler||null});
+const stats=profile.stats;
+const integer=n=>new Intl.NumberFormat('el-GR').format(Math.max(0,Math.trunc(Number(n)||0)));
+const pct=(n,total)=>Math.max(0,Math.min(100,total?Number(n)/total*100:0));
+const saek=document.querySelector('#saekRead'),eop=document.querySelector('#eopStudied'),attempted=document.querySelector('#eopAttempted');
+saek.textContent=`${integer(stats.saek.read)} / ${integer(stats.saek.readTotal)}`;
+eop.textContent=`${integer(stats.eoppep.studied)} / 314`;
+attempted.textContent=integer(stats.eoppep.attempted);
+document.querySelector('#saekBar').style.setProperty('--pct',`${pct(stats.saek.read,stats.saek.readTotal)}%`);
+document.querySelector('#eopBar').style.setProperty('--pct',`${pct(stats.eoppep.studied,314)}%`);
+const goal=localStorage.getItem('ekab.learning-goal.v1')||'';
+const pick=choosePrimary(stats,goal);
+document.querySelector('#nextTitle').textContent=pick.goal==='eoppep'?'Επανάλαβε τις ερωτήσεις ΕΟΠΠΕΠ':'Συνέχισε τα μαθήματα ΣΑΕΚ';
+document.querySelector('#nextDescription').textContent=pick.label;
+const link=document.querySelector('#nextLink');link.href=pick.href;link.textContent=pick.label+' →';
