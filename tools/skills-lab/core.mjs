@@ -114,6 +114,18 @@ const CHECK={
  }
 };
 
+/**
+ * Σταθερή «ανακατεμένη» σειρά εμφάνισης (ίδια σε κάθε άνοιγμα) ώστε η σειρά των στοιχείων ή των επιλογών
+ * να μην προδίδει την απάντηση· δεν αλλάζει τα δεδομένα ούτε τη βαθμολόγηση.
+ */
+export function displayOrder(seed,n){
+ let h=2166136261;for(const ch of String(seed))h=Math.imul(h^ch.charCodeAt(0),16777619);
+ const rnd=()=>{h=Math.imul(h^(h>>>15),2246822507);h=Math.imul(h^(h>>>13),3266489909);h^=h>>>16;return (h>>>0)/4294967296;};
+ const order=Array.from({length:n},(_,i)=>i);
+ for(let i=n-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+ return order;
+}
+
 /** Επιστρέφει {correct,total,rows}. answers: ό,τι έδωσε ο χρήστης (ανά τύπο). */
 export function grade(e,answers={}){
  const rows=GRADE[e.type](e,answers);

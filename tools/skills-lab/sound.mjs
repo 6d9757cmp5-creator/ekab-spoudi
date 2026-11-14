@@ -54,10 +54,20 @@ export function spectrogram(samples,rate,{size=512,hop=128,maxHz=2000}={}){
  return {cols,rows,hzPerRow:rate/size,secPerCol:hop/rate,db};
 }
 
-/** Ποσοστό δειγμάτων στο όριο της κλίμακας: αντικειμενική ένδειξη ψαλιδισμένης (κορεσμένης) ηχογράφησης. */
-export function clippedFraction(samples,limit=0.97){
- let n=0;for(const v of samples)if(Math.abs(v)>=limit)n++;
- return samples.length?n/samples.length:0;
+/**
+ * Ποσοστό ψαλιδισμένων δειγμάτων: όσα «κάθονται» στο ίδιο μέγιστο πλάτος, δηλαδή το επίπεδο κόψιμο
+ * της κυματομορφής όταν το μικρόφωνο κορέστηκε. Μετρά και όταν η ένταση έχει χαμηλώσει μετά την ηχογράφηση.
+ * Σε καθαρή ηχογράφηση το μέγιστο είναι μεμονωμένη κορυφή, όχι επίπεδο τμήμα.
+ */
+export const SATURATED=0.001;
+export function clippedFraction(samples){
+ let peak=0;for(const v of samples)peak=Math.max(peak,Math.abs(v));
+ if(!samples.length||peak===0)return 0;
+ // Μόνο συνεχόμενα «επίπεδα» τμήματα (≥3 δείγματα στο μέγιστο) μετρούν ως κόψιμο, όχι μια μεμονωμένη κορυφή.
+ let n=0,run=0;
+ for(const v of samples){if(Math.abs(v)>=peak*0.995)run++;else{if(run>=3)n+=run;run=0;}}
+ if(run>=3)n+=run;
+ return n/samples.length;
 }
 
 /** Σχεδιάζει κυματομορφή (πάνω) και φασματογράφημα (κάτω) σε canvas· position: δευτερόλεπτα για τον δείκτη. */

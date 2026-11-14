@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync,statSync} from 'node:fs';
-import {loadLab,grade,mediaOf,CHEST_POINTS,TYPES} from './core.mjs';
-import {parseWav,spectrogram,clippedFraction} from './sound.mjs';
+import {loadLab,grade,mediaOf,CHEST_POINTS,TYPES,displayOrder} from './core.mjs';
+import {parseWav,spectrogram,clippedFraction,SATURATED} from './sound.mjs';
 
 const read=p=>readFileSync(new URL(p,import.meta.url),'utf8');
 const MEDIA=JSON.parse(read('./media/media.json'));
@@ -98,9 +98,9 @@ const wav=f=>{const b=readFileSync(new URL('./media/'+f,import.meta.url));return
 test('recordings: 8 kHz mono, at least 5 s, clean clips not clipped, the raw noisy clip saturated',()=>{
  for(const m of MEDIA.filter(x=>x.file.endsWith('.wav'))){
   const s=wav(m.file);assert.equal(s.rate,8000,m.file);assert.ok(s.samples.length/s.rate>=5,m.file);
-  if(!m.file.includes('noisy'))assert.ok(clippedFraction(s.samples)<0.0005,m.file+' not clipped');
+  if(!m.file.includes('noisy'))assert.ok(clippedFraction(s.samples)<SATURATED,m.file+' not clipped');
  }
- assert.ok(clippedFraction(wav('auscultation/noisy-1.wav').samples)>0.005,'noisy-1 keeps the saturation of the original');
+ assert.ok(clippedFraction(wav('auscultation/noisy-1.wav').samples)>SATURATED,'noisy-1 keeps the saturation of the original');
 });
 
 test('spectrogram finds the frequency of a pure tone',()=>{
@@ -109,4 +109,16 @@ test('spectrogram finds the frequency of a pure tone',()=>{
  let best=0;for(let r=0;r<sp.rows;r++)if(sp.db[r]>sp.db[best])best=r;
  assert.ok(Math.abs(best*sp.hzPerRow-440)<=sp.hzPerRow,'peak at 440 Hz');
  assert.throws(()=>parseWav(new ArrayBuffer(16)));
+});
+
+test('no answer pattern a student could guess from the order on screen',()=>{
+ for(const id of IDS)for(const t of LABS[id].topics)for(const e of t.exercises){
+  if(e.type==='truefalse'){const tr=e.items.filter(i=>i.answer).length;assert.ok(tr>0&&tr<e.items.length,`${e.id}: both true and false`);assert.ok(tr/e.items.length<=0.7,`${e.id}: not mostly true`);}
+  if(e.type==='classify'){const seq=displayOrder(e.id,e.items.length).map(i=>e.items[i].answer);
+   const groups=seq.filter((v,i)=>i===0||v!==seq[i-1]).length;assert.ok(groups>e.categories.length,`${e.id}: categories not shown in blocks`);}
+  if(e.type==='label'){const shown=displayOrder(e.id,e.options.length).map(i=>e.options[i]);
+   const keys=Object.keys(e.answers);assert.ok(keys.some((n,k)=>shown.indexOf(e.answers[n])!==k),`${e.id}: options not in the order of the numbers`);}
+  if(e.type==='identify'&&e.items.length>=4){const seq=e.items.map(i=>i.answer);
+   assert.ok(!seq.every((v,i)=>i<2||v===seq[i-2]),`${e.id}: answers do not simply alternate`);}
+ }
 });
