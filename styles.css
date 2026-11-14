@@ -462,3 +462,10 @@ html[data-theme="dark"] .academic-review-link{color:#9ddcf9}
 
 /* Progress rules folded behind ⓘ (UX review #15). */
 .study-rule-more{margin-top:6px}.study-rule-more>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}.study-rule-more p{margin:4px 0 0}
+/* Dark theme: the main button colour turns light green, so its text turns dark (WCAG AA). */
+html[data-theme="dark"] .btn:not(.ghost){color:#10261a}
+html[data-theme="dark"] body.v6-page .btn:not(.ghost):not(.secondary){color:#fff}
+/* Footer text readable in both themes (WCAG AA). */
+footer{color:#5f7380}
+html[data-theme="dark"] footer{color:#aebbac}
+html[data-theme="dark"] .intro-note{color:#aebbac}

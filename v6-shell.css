@@ -47,6 +47,8 @@ html[data-theme="dark"] .v6-global-topbar{background:rgba(29,36,29,.96)}
  .v6-shell-nav .v6-icon{width:19px;height:19px}
  .v6-shell-nav a[aria-current="page"]{background:#e9eee2;color:#2f4232;box-shadow:none}
  .v6-shell-nav a[aria-current="page"] .v6-icon{color:#b8953f}
+ /* phone bar keeps its light active pill in the dark theme too */
+ html[data-theme="dark"] .v6-shell-nav a[aria-current="page"]{background:#e9eee2;color:#2f4232}
  .v6-global-main{margin-left:0;padding-bottom:80px}
  .v6-global-topbar{height:auto;min-height:58px;gap:8px;padding:8px 10px}
  .v6-page-title{display:none}

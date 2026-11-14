@@ -391,3 +391,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
 /* Desktop dark sidebar: the dark panel colour belongs to the phone bottom bar only. */
 @media(min-width:721px){body.dark-mode .nav{background:transparent;border-color:transparent}}
+/* Dark theme: small labels and quiet links readable (WCAG AA). */
+body.dark-mode .v6-overline,body.dark-mode [data-atla-goal]{color:#a9c19b}
+body.dark-mode .v6-quiet-link{color:#b3cfa5}
+body.dark-mode .v6-atla-link,body.dark-mode .v6-plan-link,body.dark-mode [data-atla-read]{color:#b3cfa5}
