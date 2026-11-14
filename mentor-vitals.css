@@ -162,3 +162,21 @@
  .vs-select-label{margin-top:12px}
 }
 @media(prefers-reduced-motion:reduce){.vs-readout{transition:none}}
+/* Dark theme, when chosen on the site (theme-apply.js sets html[data-theme]). Shared by all five labs. */
+html[data-theme="dark"]{--surface:#17323f;--text:#e3eef0;--ink:#e3eef0;--muted:#a7bcc2;--paper:#11252f;--bg:#09161d;--edge:#284351;--teal:#6fd3c6;--navy:#1c6b74;--focus:#5fd0e6;color-scheme:dark}
+html[data-theme="dark"] .vs-skip{background:#11252f}
+html[data-theme="dark"] .vs-topbar{background:#06121a}
+html[data-theme="dark"] .vs-safety{background:#2a2213;color:#f0d9a6;border-left-color:#c99a45}
+html[data-theme="dark"] .vs-aside nav button,html[data-theme="dark"] .vs-session button,html[data-theme="dark"] .vs-select-label select,html[data-theme="dark"] .vs-task input[type="number"],html[data-theme="dark"] .vs-task-status,html[data-theme="dark"] .vs-choices button{background:#17323f;color:var(--ink);border-color:var(--edge)}
+html[data-theme="dark"] .vs-aside nav button:hover,html[data-theme="dark"] .vs-aside nav button[aria-current="true"],html[data-theme="dark"] .vs-choices button:hover{background:#1b4650;color:#c9f3ea;border-color:#3f8b88}
+html[data-theme="dark"] .vs-session,html[data-theme="dark"] .vs-task{background:#0f2c36;border-color:var(--edge)}
+html[data-theme="dark"] .vs-index{background:#173b44;color:#9be3d6}
+html[data-theme="dark"] .vs-compare-result,html[data-theme="dark"] .vs-feedback{background:#12352f;color:var(--ink)}
+html[data-theme="dark"] .vs-choices .vs-right{background:#123826;border-color:#3f9b78}
+html[data-theme="dark"] .vs-choices .vs-wrong{background:#3b2a10;border-color:#b58247}
+html[data-theme="dark"] .vs-step-nav{background:#14303b}
+html[data-theme="dark"] .vs-step-nav button{color:#b9cfd4}
+html[data-theme="dark"] .vs-step-nav button[aria-pressed="true"]{background:#20414f;color:var(--ink);border-color:var(--edge)}
+html[data-theme="dark"] .vs-sources summary{color:#8fd8cf}
+html[data-theme="dark"] .vs-panel{box-shadow:none}
+html[data-theme="dark"] .vs-sources details{background:var(--paper)}

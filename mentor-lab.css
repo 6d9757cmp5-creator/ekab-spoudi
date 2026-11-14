@@ -55,15 +55,15 @@ h4{font-size:1.1rem;margin:0 0 17px}.choices{display:grid;gap:10px}
 footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 [hidden]{display:none!important}
 @media(max-width:680px){.layout{padding:16px 14px 30px}.header-inner{padding:13px 14px}.hero{padding:22px}.hero-mark{display:none}.case-grid{grid-template-columns:1fr}.mission,.panel{padding:17px}.stats>div{padding:14px}.stats strong{font-size:1.5rem}.skill{align-items:start;flex-direction:column}.skill-count{text-align:left}}
-@media(prefers-color-scheme:dark){
- :root{--page:#0b1b25;--surface:#142b38;--surface2:#1c3541;--ink:#e7f3f8;--muted:#aac0ca;--border:#355360;--brand:#84d9f3;--brand2:#54bbdf;--danger:#f2a5a5}
- .disclaimer{background:#392f20;color:#f9d8a7;border-color:#d49a47}
- .case-icon,.choice .num{background:#254859;color:#d2f2fd}
- .choice:hover{background:#254a5e}.tabs button[aria-selected="true"]{background:#237d9e}
- .feedback{background:#163d30;color:#c0efd8;border-color:#38765a}
- .feedback[data-result="review"]{background:#3c301b;color:#f4d4a0;border-color:#80662f}
- .hero{background:linear-gradient(120deg,#124159,#155b74)}
-}
+
+ html[data-theme="dark"]{--page:#0b1b25;--surface:#142b38;--surface2:#1c3541;--ink:#e7f3f8;--muted:#aac0ca;--border:#355360;--brand:#84d9f3;--brand2:#54bbdf;--danger:#f2a5a5}
+ html[data-theme="dark"] .disclaimer{background:#392f20;color:#f9d8a7;border-color:#d49a47}
+ html[data-theme="dark"] .case-icon,html[data-theme="dark"] .choice .num{background:#254859;color:#d2f2fd}
+ html[data-theme="dark"] .choice:hover{background:#254a5e}html[data-theme="dark"] .tabs button[aria-selected="true"]{background:#237d9e}
+ html[data-theme="dark"] .feedback{background:#163d30;color:#c0efd8;border-color:#38765a}
+ html[data-theme="dark"] .feedback[data-result="review"]{background:#3c301b;color:#f4d4a0;border-color:#80662f}
+ html[data-theme="dark"] .hero{background:linear-gradient(120deg,#124159,#155b74)}
+
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 /* Foundation v0.2: isolated learning workspaces. */
@@ -91,11 +91,11 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
  .mode-choice{text-align:left;padding:10px 15px;min-height:43px}
  .people-grid{grid-template-columns:1fr}
 }
-@media(prefers-color-scheme:dark){
- .mode-choice[aria-pressed="true"]{background:#1e7899}
- .patient-tag{background:#284856;color:#d4e8f0}
- .patient-tag.noted{background:#1d533e;color:#c9f4e0}
-}
+
+ html[data-theme="dark"] .mode-choice[aria-pressed="true"]{background:#1e7899}
+ html[data-theme="dark"] .patient-tag{background:#284856;color:#d4e8f0}
+ html[data-theme="dark"] .patient-tag.noted{background:#1d533e;color:#c9f4e0}
+
 
 /* Personal-study planner migrated from draft PR #22, scoped to Mentor lab only. */
 .study-goal-choices{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0 3px}
@@ -125,7 +125,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:25px 5px 0}
 .coach-speech-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .coach-quick:focus-visible,.coach-question-line input:focus-visible,.coach-question-line button:focus-visible,.coach-speech-actions button:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 @media(max-width:620px){.coach-question-line{flex-wrap:wrap}.coach-question-line button{width:100%}.coach-message{max-width:100%}}
-@media(prefers-color-scheme:dark){.coach-message-user{background:#1b4856}}
+html[data-theme="dark"] .coach-message-user{background:#1b4856}
 
 /* Interactive MENTOR presence at entry, voice and messages without a hosted AI. */
 .mentor-intro-hero{align-items:stretch;min-height:290px;gap:16px}

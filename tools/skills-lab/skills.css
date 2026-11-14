@@ -70,3 +70,7 @@ html[data-theme="dark"] .sl-chest-body{fill:#22394a}html[data-theme="dark"] .sl-
 /* Attribution page link: required by the CC licences, kept as unobtrusive as possible. */
 .vs-footer .sl-licences{font-size:.6rem;opacity:.4;color:inherit;text-decoration:none;font-weight:400;margin-left:auto}
 @media(max-width:480px){.sl-point{width:28px;height:28px;font-size:.85rem}}
+html[data-theme="dark"] .sl-sound-info,html[data-theme="dark"] .sl-why{color:#b9c9cf}
+/* Drawings keep their white background in the dark theme (dark lines on transparent images). */
+html[data-theme="dark"] .sl-sound canvas{background:#0d1f2a;border-color:#2a4757}
+html[data-theme="dark"] .sl-ex{border-top-color:#284351}

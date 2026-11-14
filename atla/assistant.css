@@ -88,12 +88,12 @@
 .atla-chip:hover,.atla-chip:focus-visible{background:#e8f5f6}
 .atla-send{border-radius:12px;min-height:44px}
 @media(prefers-reduced-motion:reduce){.atla-launcher{transition:none}.atla-launcher:hover,.atla-launcher:focus-visible{transform:none}}
-@media(prefers-color-scheme:dark){
- .atla-stream{background:#0f2530}
- .atla-reply,.atla-welcome{background:#17333f;border-color:#2c5262;color:#e6f3f5}
- .atla-chip{background:#17333f;color:#d8f0f2;border-color:#3a6474}
- .atla-route{background:#16413a;border-color:#2f7566;color:#d9f6ee}
-}
+
+ html[data-theme="dark"] .atla-stream{background:#0f2530}
+ html[data-theme="dark"] .atla-reply,html[data-theme="dark"] .atla-welcome{background:#17333f;border-color:#2c5262;color:#e6f3f5}
+ html[data-theme="dark"] .atla-chip{background:#17333f;color:#d8f0f2;border-color:#3a6474}
+ html[data-theme="dark"] .atla-route{background:#16413a;border-color:#2f7566;color:#d9f6ee}
+
 .atla-panel .atla-input{height:60px;min-height:0;max-height:96px;resize:none}
 @media(max-width:640px){body.atla-has-3d .atla-panel .atla-input{height:46px}}
 

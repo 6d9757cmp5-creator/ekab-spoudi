@@ -10,7 +10,7 @@
 .hl-fields input,.hl-fields select,.hl-wide textarea,.hl-table input{font:inherit;min-height:44px;padding:6px 10px;border:1px solid #9fb6bd;border-radius:8px;background:#fff;color:inherit;max-width:100%;box-sizing:border-box}
 .hl-wide textarea{width:100%}
 .hl-message{margin:10px 0;padding:12px 14px;border-left:4px solid #0f4c5c;background:#eef5f6;font-weight:600}
-.hl-check{margin:10px 0}
+.hl-check{margin:12px 0;min-height:46px;padding:10px 22px;border:1px solid;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
 .hl-result{margin-bottom:8px}
 .hl-verdict{font-weight:700;padding:8px 12px;border-radius:8px}
 .hl-verdict.hl-ok{background:#e3f4ea}.hl-verdict.hl-partial{background:#fff3dc}
@@ -41,3 +41,4 @@ html[data-theme="dark"] .hl-verdict.hl-ok{background:#123826}html[data-theme="da
 /* A select is as wide as its longest option; keep it inside the phone screen. */
 #hl-case,.hl-fields select{width:100%;max-width:100%}
 .hl-narrative li,.hl-fields label,.hl-order li span{overflow-wrap:anywhere}
+html[data-theme="dark"] .hl-narrative time{color:#7fd6c9}

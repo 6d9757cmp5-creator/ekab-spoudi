@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#102a39">
 <title>ATLA · Εργαστήριο ΗΚΓ · Συνθετικές κυματομορφές</title>
+<script src="theme-apply.js"></script>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
 .ecg-optional{border:1px solid #b7d4d5;border-radius:13px;margin:14px 0;background:#edf8f7;color:#103d48;overflow:hidden}
@@ -33,6 +34,10 @@
 .ecg-status{border-left:4px solid var(--brand2);padding:12px 14px;background:var(--surface2);border-radius:7px;line-height:1.5}
 .ecg-key[hidden]{display:none}
 @media(max-width:650px){.ecg-head{padding:18px}.ecg-panel{padding:14px}.ecg-key{grid-template-columns:1fr}}
+
+html[data-theme="dark"] .ecg-optional{background:#12303a;color:#e3eef0;border-color:#2f5560}
+/* ECG paper in the dark theme: dark paper and light trace, colours otherwise kept. */
+html[data-theme="dark"] .ecg-chart svg{filter:invert(.92) hue-rotate(180deg)}
 </style>
 <script type="module" src="mentor-ecg.js"></script>
 <link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script><meta name="description" content="Εργαστήριο ΗΚΓ: εξάσκηση στην ανάγνωση ηλεκτροκαρδιογραφήματος με συνθετικές κυματομορφές.">

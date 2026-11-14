@@ -92,4 +92,22 @@ try{
   await context.close();
   console.log('skills labs ok at',width+'px',engine.name());
  }
+
+ // Dark theme chosen on the site: every lab page and its panels turn dark (no light box left behind).
+ {
+  const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block',reducedMotion:'reduce'});
+  await context.addInitScript(()=>{try{localStorage.setItem('ekab.theme.v1','dark')}catch{}});
+  const page=await context.newPage();
+  for(const url of ['mentor-airway.html?topic=bvm','mentor-equipment.html?topic=shift','mentor-auscultation.html?topic=heart','mentor-handover.html','mentor-vitals.html','mentor-media-credits.html']){
+   await page.goto(`${base}/${url}`,{waitUntil:'load'});await page.waitForTimeout(600);
+   const light=await page.evaluate(()=>{
+    const lum=c=>{const m=c.match(/[\d.]+/g);if(!m||(m[3]!==undefined&&+m[3]===0))return null;const [r,g,b]=m.map(Number);return (0.2126*r+0.7152*g+0.0722*b)/255;};
+    const boxes=[document.body,...document.querySelectorAll('.vs-panel,.vs-aside,.sl-card,.sl-ex select,.vs-sources details,.ekab-nav-back,.sl-sound canvas')];
+    return boxes.filter(e=>{const l=lum(getComputedStyle(e).backgroundColor);return l!==null&&l>0.6;}).map(e=>e.tagName+'.'+String(e.className).split(' ')[0]).slice(0,5);
+   });
+   assert.deepEqual(light,[],url+': light boxes in the dark theme');
+   assert.equal(await page.evaluate(()=>document.documentElement.dataset.theme),'dark',url);
+  }
+  await context.close();console.log('dark theme ok');
+ }
 }finally{await browser.close();}
