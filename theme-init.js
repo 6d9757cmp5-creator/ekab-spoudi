@@ -7,7 +7,7 @@
   if(document.querySelector('link[data-ekab-v6-subsections]'))return;
   const link=document.createElement('link');
   link.rel='stylesheet';
-  link.href=new URL('v6-subsections.css?v=27.1.134',base).href;
+  link.href=new URL('v6-subsections.css?v=27.1.171',base).href;
   link.dataset.ekabV6Subsections='';
   document.head.appendChild(link);
  };
