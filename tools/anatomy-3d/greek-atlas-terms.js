@@ -1,7 +1,7 @@
 /**
  * Greek names for the remaining atlas parts, keyed by the lower-case English name with each
  * side written as @. Each {token} is filled with that side, in order, in the form the phrase needs.
- * Translated with Claude and checked for grammar and consistency; not reviewed by an anatomist.
+ * Translated and checked for grammar and consistency; not reviewed by an anatomist.
  */
 export const ATLAS_TERMS={
  "@ abductor hallucis":"{m} απαγωγός του μεγάλου δακτύλου του ποδιού",

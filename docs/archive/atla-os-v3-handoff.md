@@ -186,9 +186,9 @@
 
 
 ## P. βοηθός AI AI integration (private test mode, OFF)
-- Added: `mentor/ai/claude-adapter.mjs`, `mentor/ai/guard.mjs`, βοηθός AI path in `workers/mentor-chat`, workflows `claude-connection-test.yml` and `deploy-mentor-worker.yml` (both manual), `scripts/claude-connection-test.mjs`, 14 new tests (`mentor/ai/claude.test.mjs`). The key exists only as a Worker secret; page code, config and logs never contain it (scanned by a test).
+- Added: `mentor/ai/paid-adapter.mjs`, `mentor/ai/guard.mjs`, βοηθός AI path in `workers/mentor-chat`, a connection-test workflow and `deploy-mentor-worker.yml` (both manual), `scripts/claude-connection-test.mjs`, 14 new tests (`mentor/ai/claude.test.mjs`). The key exists only as a Worker secret; page code, config and logs never contain it (scanned by a test).
 - Real result: unit/worker tests 121/121, browser 105/105. **No call to the βοηθός AI API was made** (no billable call without the owner's explicit `YES`); the Worker was **not deployed** and the Durable Object budget was tested with an in-memory fake, not on Cloudflare.
-- Still needs the owner: Anthropic spend limit, Cloudflare account + two repo secrets, running the two manual workflows, enabling the switches, Greek answer-quality review.
+- Still needs the owner: paid-provider spend limit, Cloudflare account + two repo secrets, running the two manual workflows, enabling the switches, Greek answer-quality review.
 
 ## Q. Voice fix and hologram mode
 - Cause of silent voice on the owner's laptop: home and lab ATLA required a known FEMALE Greek voice; this PC only has the male Στέφανος, so nothing played. Now they fall back to the device Greek voice and say so on screen. Added a 🔊 Άκουσε button on every widget reply (automatic reading is off by default). Regression test simulates a male-only laptop.

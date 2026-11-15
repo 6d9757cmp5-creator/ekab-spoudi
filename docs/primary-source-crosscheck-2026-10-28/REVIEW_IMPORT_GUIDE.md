@@ -4,10 +4,10 @@
 
 ## Εκτέλεση
 
-Από τη ρίζα του αποθετηρίου, στο branch `audit/claude-eoppep-b-crosscheck-20261031`:
+Από τη ρίζα του αποθετηρίου, στο branch `το branch του ελέγχου (PR #140, έκλεισε)`:
 
 ```bash
-node --test docs/primary-source-crosscheck-2026-10-28/merge-claude-eoppep.test.cjs
+node --test docs/primary-source-crosscheck-2026-10-28/merge-review-eoppep.test.cjs
 node docs/primary-source-crosscheck-2026-10-28/merge-review-eoppep.cjs
 node docs/primary-source-crosscheck-2026-10-28/merge-review-eoppep.cjs --apply
 git diff --check
@@ -33,10 +33,10 @@ git diff -- docs/primary-source-crosscheck-2026-10-28/eoppep-314.json
 | Ισχυρισμός του οδηγού | Σημείο στον κώδικα / test |
 |---|---|
 | Το preview δεν γράφει τίποτα | Η εγγραφή γίνεται μόνο μέσα στο `if(args.includes("--apply"))` (`merge-review-eoppep.cjs:75–79`)· γράφει σε προσωρινό αρχείο και μετά `renameSync` |
-| Το `--apply` επιτρέπεται μόνο στο branch `audit/claude-eoppep-b-crosscheck-20261031` | Έλεγχος και σφάλμα `Refusing to alter shared registry…` (`:77`). **Σημείωση:** στο παρόν κοινό branch του PR #39 το `--apply` αρνείται να τρέξει |
+| Το `--apply` επιτρέπεται μόνο στο branch `το branch του ελέγχου (PR #140, έκλεισε)` | Έλεγχος και σφάλμα `Refusing to alter shared registry…` (`:77`). **Σημείωση:** στο παρόν κοινό branch του PR #39 το `--apply` αρνείται να τρέξει |
 | Δεύτερη ίδια εισαγωγή δεν αλλάζει τίποτα | `stats.unchanged++; continue;` (`:53`) και test `second identical import is a strict no-op` |
 | Αλλαγμένο ήδη εισαγμένο εύρημα αποτυγχάνει | `Changed AI reviewer evidence requires manual reconciliation` (`:52`) και αντίστοιχο test |
 | Δεν αλλάζουν question/answerCharacters/targetedReview κ.λπ. | Σύγκριση κάθε εγγραφής χωρίς `externalReviews` (`:62`) και έλεγχος ότι ο μετρητής `targetedReview` μένει ίδιος (`:61`) |
 | Αποτυγχάνει σε διπλότυπα/άγνωστα ID και μη έγκυρα URL | Tests `duplicate and unknown IDs…`, `invalid source URL fails closed` |
 
-Τα 7 tests περνούν (`node --test merge-claude-eoppep.test.cjs`, 1/11/2026). Ο εισαγωγέας δέχεται μόνο ID `EOP-B-nnn`· τα ευρήματα ΣΑΕΚ δεν περνούν από αυτόν. Οι αριθμοί του «Απολογισμού» (29/24/5/3) και το 310/561 προέρχονται από το PR #39/#140 και **δεν** επαληθεύονται εδώ.
+Τα 7 tests περνούν (`node --test merge-review-eoppep.test.cjs`, 1/11/2026). Ο εισαγωγέας δέχεται μόνο ID `EOP-B-nnn`· τα ευρήματα ΣΑΕΚ δεν περνούν από αυτόν. Οι αριθμοί του «Απολογισμού» (29/24/5/3) και το 310/561 προέρχονται από το PR #39/#140 και **δεν** επαληθεύονται εδώ.

@@ -1,24 +1,24 @@
 /**
- * Server-side Claude (Anthropic Messages API) adapter for the MENTOR chat Worker.
+ * Server-side adapter for the optional paid model of the ATLA chat Worker.
  * Pure functions: the key is passed in by the Worker from its secret binding, is never logged,
  * never returned to a caller and never reaches the browser. Not imported by any page.
  */
-export const ANTHROPIC_URL="https://api.anthropic.com/v1/messages";
-export const ANTHROPIC_VERSION="2023-06-01";
+export const PAID_API_URL="https://api.anthropic.com/v1/messages";
+export const PAID_API_VERSION="2023-06-01";
 /** Allowlist: the smallest/cheapest model only. Anything else falls back to the first entry. */
-export const CLAUDE_MODELS=Object.freeze(["claude-haiku-5-5"]);
+export const PAID_MODELS=Object.freeze(["claude-haiku-5-5"]);
 /** Hard ceilings that no variable can raise. */
 export const HARD_MAX_TOKENS=400;
 export const HARD_MAX_INPUT_CHARS=4000;
 
-export function pickModel(requested){return CLAUDE_MODELS.includes(requested)?requested:CLAUDE_MODELS[0];}
+export function pickModel(requested){return PAID_MODELS.includes(requested)?requested:PAID_MODELS[0];}
 export function clampMaxTokens(value){
  const n=Math.floor(Number(value));
  return Number.isFinite(n)&&n>0?Math.min(n,HARD_MAX_TOKENS):300;
 }
 
-/** Splits OpenAI-style {role,content} messages into Anthropic's {system, messages}. */
-export function toAnthropicMessages(messages){
+/** Splits OpenAI-style {role,content} messages into {system, messages}. */
+export function toApiMessages(messages){
  const system=messages.filter(m=>m.role==="system").map(m=>m.content).join("\n");
  const turns=[];
  for(const m of messages){
@@ -38,11 +38,11 @@ export function estimateInputTokens(messages){
  return Math.ceil(messages.reduce((n,m)=>n+String(m.content||"").length,0)/2);
 }
 
-export function buildClaudeRequest({messages,model,maxTokens}){
- const {system,messages:turns}=toAnthropicMessages(messages);
+export function buildPaidRequest({messages,model,maxTokens}){
+ const {system,messages:turns}=toApiMessages(messages);
  const chars=system.length+turns.reduce((n,m)=>n+m.content.length,0);
  if(!turns.length||chars>HARD_MAX_INPUT_CHARS)throw Error("input-out-of-bounds");
- // Claude Haiku 5.5 uses adaptive thinking by default and does not accept temperature with thinking enabled.
+ // The paid model uses adaptive thinking by default and does not accept temperature with thinking enabled.
  return {model:pickModel(model),max_tokens:clampMaxTokens(maxTokens),stream:true,system,messages:turns};
 }
 
@@ -52,8 +52,8 @@ export function redact(text,secret){
  return secret?s.split(secret).join("[redacted]"):s;
 }
 
-/** Anthropic SSE → the `data: {"token":"…"}` lines the browser adapter already parses. */
-export function anthropicStreamToTokens(body){
+/** Paid-model SSE → the `data: {"token":"…"}` lines the browser adapter already parses. */
+export function apiStreamToTokens(body){
  const dec=new TextDecoder(),enc=new TextEncoder();
  let buf="";
  const emit=(line,ctl)=>{
@@ -77,14 +77,14 @@ export function anthropicStreamToTokens(body){
  * One Messages API call. Returns {ok:true,stream} or {ok:false,status}. Error bodies are never
  * forwarded: they could echo request details.
  */
-export async function callClaude({apiKey,request,fetchImpl=globalThis.fetch,signal}){
+export async function callPaid({apiKey,request,fetchImpl=globalThis.fetch,signal}){
  if(!apiKey||typeof apiKey!=="string")return {ok:false,status:503};
  let res;
  try{
-  res=await fetchImpl(ANTHROPIC_URL,{method:"POST",signal,
-   headers:{"content-type":"application/json","x-api-key":apiKey,"anthropic-version":ANTHROPIC_VERSION},
+  res=await fetchImpl(PAID_API_URL,{method:"POST",signal,
+   headers:{"content-type":"application/json","x-api-key":apiKey,"anthropic-version":PAID_API_VERSION},
    body:JSON.stringify(request)});
  }catch{return {ok:false,status:503};}
  if(!res.ok||!res.body)return {ok:false,status:res.status===429?429:503};
- return {ok:true,stream:anthropicStreamToTokens(res.body)};
+ return {ok:true,stream:apiStreamToTokens(res.body)};
 }

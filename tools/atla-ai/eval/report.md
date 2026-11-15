@@ -7,7 +7,7 @@
 | Απάντησε μοντέλο τεχνητής νοημοσύνης | 29/30 |
 | «Δεν είμαι σίγουρος» | 0/30 |
 | Μέσο μήκος απάντησης | 69 λέξεις |
-| Ποιος απάντησε | llama-3.3-70b-instruct-fp8-fast: 26 · http 503 · llama-3.3-70b-instruct-fp8-fast:missing-or-unknown-citation llama-3.3-70b-instruct-fp8-fast+cite:missing-or-unknown-citation mistral-small-3.1-24b-instruct:missing-or-unknown-citation llama-3.1-8b-instruct-fp8-fast:missing-or-unknown-citation claude:no-answer: 1 · mistral-small-3.1-24b-instruct: 2 · mistral-small-3.1-24b-instruct+cite: 1 |
+| Ποιος απάντησε | llama-3.3-70b-instruct-fp8-fast: 26 · http 503 · llama-3.3-70b-instruct-fp8-fast:missing-or-unknown-citation llama-3.3-70b-instruct-fp8-fast+cite:missing-or-unknown-citation mistral-small-3.1-24b-instruct:missing-or-unknown-citation llama-3.1-8b-instruct-fp8-fast:missing-or-unknown-citation paid:no-answer: 1 · mistral-small-3.1-24b-instruct: 2 · mistral-small-3.1-24b-instruct+cite: 1 |
 
 ## 1. Τι είναι η ταχυκαρδία;
 *Ορισμός · llama-3.3-70b-instruct-fp8-fast · 81 λέξεις*
@@ -19,7 +19,7 @@
 Ποια είναι η σχέση της ταχυκαρδίας με την καρδιοπνευμονική αναζωογόνηση;
 
 ## 2. Τι είναι η υποξία και γιατί είναι επικίνδυνη;
-*Ορισμός · http 503 · llama-3.3-70b-instruct-fp8-fast:missing-or-unknown-citation llama-3.3-70b-instruct-fp8-fast+cite:missing-or-unknown-citation mistral-small-3.1-24b-instruct:missing-or-unknown-citation llama-3.1-8b-instruct-fp8-fast:missing-or-unknown-citation claude:no-answer · 91 λέξεις*
+*Ορισμός · http 503 · llama-3.3-70b-instruct-fp8-fast:missing-or-unknown-citation llama-3.3-70b-instruct-fp8-fast+cite:missing-or-unknown-citation mistral-small-3.1-24b-instruct:missing-or-unknown-citation llama-3.1-8b-instruct-fp8-fast:missing-or-unknown-citation paid:no-answer · 91 λέξεις*
 
 04 Νευρική ρύθμιση και μεταβολισμός Δεν ολοκληρώθηκε Το αυτόνομο νευρικό σύστημα ρυθμίζει ακούσιες λειτουργίες, όπως καρδιακή συχνότητα και αγγειακό τόνο. Ο μεταβολισμός χρησιμοποιεί θρεπτικά συστατικά για την παραγωγή ενέργειας. Η ινσουλίνη και η γλυκαγόνη συμβάλλουν στη ρύθμιση της γλυκόζης. Η φυσιολογία συνδέεται άμεσα με την κατανόηση διαταραχών συνείδησης, υπογλυκαιμίας και stress. SOS · Αυτόνομο νευρικό σύστημα ρυθμίζει ακούσιες λειτουργίες· ινσουλίνη μειώνει και γλυκαγόνη αυξάνει τη γλυκόζη. Περισσότερη εξήγηση Αναλυτική κατανόηση Το αυτόνομο νευρικό σύστημα συντονίζει πολλές ακούσιες λειτουργίες όπως καρδιακή συχνότητα και αγγειακό τόνο. Το συμπαθητικό συνήθως προάγει την απάντηση σε
 
