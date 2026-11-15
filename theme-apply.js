@@ -33,7 +33,7 @@
   window.__ekabV6Reveal=()=>root.classList.remove('v6-booting');
   setTimeout(window.__ekabV6Reveal,6000);
   // Start fetching the shell files now instead of one after another.
-  for(const [href,as] of [['v6-shell.css?v=27.1.174','style'],['v6-subsections.css?v=27.1.171','style'],['v6-shell.js?v=27.1.173','script']]){
+  for(const [href,as] of [['v6-shell.css?v=27.1.177','style'],['v6-subsections.css?v=27.1.171','style'],['v6-shell.js?v=27.1.173','script']]){
    const l=document.createElement('link');l.rel='preload';l.as=as;l.href=url(href);document.head.appendChild(l);
   }
  }

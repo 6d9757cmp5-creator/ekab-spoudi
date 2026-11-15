@@ -9,11 +9,6 @@ const categoryFor=id=>CATEGORIES.find(c=>c.id===id)?.label||'Εκπαιδευτ�
 function appendLink(parent,label,url,cls){
  const a=document.createElement('a');a.textContent=label;a.href=url;a.className=cls;parent.append(a);
 }
-function appendAtlaStudyButton(parent,topic){
- const button=document.createElement('button');button.type='button';button.className='btn soft';
- button.textContent='Μελέτη με ATLA';button.dataset.atlaOpen='true';button.dataset.atlaContext=topic;
- parent.append(button);
-}
 function renderCategories(){
  const nav=$('protocol-categories');nav.replaceChildren();
  const options=[{id:'all',label:'Όλα τα θέματα',icon:'▦'},...CATEGORIES];
@@ -39,7 +34,6 @@ function renderTopics(){
   const actions=document.createElement('div');actions.className='actions';
   const topic=encodeURIComponent(t.id);
   if(MATERIAL[t.id])appendLink(actions,'Στην ύλη ΣΑΕΚ και ΕΟΠΠΕΠ ›','search.html?q='+encodeURIComponent(MATERIAL[t.id]),'btn');
-  appendAtlaStudyButton(actions,t.name);
   card.append(title,category,desc,actions);list.append(card);
  }
 }
