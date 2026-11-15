@@ -7,7 +7,7 @@
 .saek-series-slide{box-sizing:border-box;flex:0 0 100%;min-width:0;padding:15px}
 .saek-series-slide h3{font-size:1.03rem;margin:0 0 7px}
 .saek-series-slide .saek-series-kicker{font-size:.8rem;color:var(--muted);margin:0 0 5px}
-.saek-series-slide .saek-series-frame{display:block;width:100%;aspect-ratio:16/9;border:none;border-radius:10px;background:#102d40}
+.saek-series-slide .saek-series-frame{display:block;width:100%;aspect-ratio:16/9;border:none;border-radius:10px;background:#152f1c}
 .saek-series-slide .saek-series-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
 .saek-series-slide .saek-series-actions a{font-size:.86rem;text-decoration:underline}
 .saek-series-swipe-strip{border:1px dashed var(--line);border-radius:10px;padding:11px 12px;margin:10px 0 0;text-align:center;font-size:.83rem;color:var(--muted);touch-action:pan-y;user-select:none}
@@ -17,12 +17,12 @@
 .saek-series-status{font-size:.85rem;text-align:center;flex:1}
 .saek-series-parts{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;overscroll-behavior-x:contain;padding:0 0 8px;margin-top:12px}
 .saek-series-parts a{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-size:.79rem;padding:9px 12px;cursor:pointer}
-.saek-series-parts a:hover{border-color:#2d84a7;background:#e8f4fa}
-.saek-series-parts a[aria-current="step"]{background:#1c566f;border-color:#1c566f;color:#fff}
+.saek-series-parts a:hover{border-color:#408953;background:#e9f6ec}
+.saek-series-parts a[aria-current="step"]{background:#295a36;border-color:#295a36;color:#fff}
 .saek-series-controls button:focus-visible,.saek-series-parts a:focus-visible{outline:3px solid #e5a84c;outline-offset:3px}
-html[data-theme="dark"] .saek-series-viewport,html[data-theme="dark"] .saek-series-parts a{background:#193647;border-color:#34596b;color:#e8f3f8}
-html[data-theme="dark"] .saek-series-swipe-strip{border-color:#34596b;color:#b9d2df}
-html[data-theme="dark"] .saek-series-parts a[aria-current="step"]{background:#266f91;color:#fff}
+html[data-theme="dark"] .saek-series-viewport,html[data-theme="dark"] .saek-series-parts a{background:#1e3925;border-color:#395d42;color:#e8f4ec}
+html[data-theme="dark"] .saek-series-swipe-strip{border-color:#395d42;color:#b9d5c1}
+html[data-theme="dark"] .saek-series-parts a[aria-current="step"]{background:#357446;color:#fff}
 @media(max-width:520px){
  .saek-series-slide{padding:10px}
  .saek-series-controls{gap:7px}

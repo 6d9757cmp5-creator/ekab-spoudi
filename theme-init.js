@@ -1,3 +1,5 @@
+/* Resolves a site file relative to this script, so pages in subfolders load the same shared files. */
+function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.src).href:p;}
 (function(){try{var x=localStorage.getItem('ekab.theme.v1');document.documentElement.dataset.theme=x==='dark'?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */
@@ -19,21 +21,21 @@
 /* Every page shares the home-brand link; the quick guide only runs on the home page. */
 (function(){
  const script=document.createElement('script');
- script.src='ui-guide.js';
+ script.src=ekabAt('ui-guide.js');
  script.async=true;
  document.head.appendChild(script);
 })();
 
 /* Shared on desktop, phone and tablet: chapter suggestions and starter medical book. */
 (function(){
- const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href='global-tools.css?v=27.1.129';document.head.appendChild(sheet);
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.129';script.async=true;document.head.appendChild(script);
+ const sheet=document.createElement('link');sheet.rel='stylesheet';sheet.href=ekabAt('global-tools.css?v=27.1.129');document.head.appendChild(sheet);
+ const script=document.createElement('script');script.src=ekabAt('global-tools.js?v=27.1.129');script.async=true;document.head.appendChild(script);
 })();
 
 /* One tiny read-only resume tracker shared by Home, SAEK and EOPPEP. */
 (function(){
  const script=document.createElement('script');
- script.src='study-resume.js?v=27.1.109';
+ script.src=ekabAt('study-resume.js?v=27.1.109');
  script.async=true;
  document.head.appendChild(script);
 })();
@@ -42,10 +44,10 @@
    Presentation only; no grade or learning-state mutations. */
 (function(){
  const sheet=document.createElement('link');
- sheet.rel='stylesheet';sheet.href='experience-v4.css?v=20261101';
+ sheet.rel='stylesheet';sheet.href=ekabAt('experience-v4.css?v=20261101');
  document.head.appendChild(sheet);
  const module=document.createElement('script');
- module.type='module';module.src='experience-v4.mjs?v=20261101';
+ module.type='module';module.src=ekabAt('experience-v4.mjs?v=20261101');
  document.head.appendChild(module);
 })();
 
@@ -60,8 +62,11 @@
 (function(){
  // Keep the page hidden (on the V6 background) until the shell and palette are in place, so the
  // old layout never flashes; v6-shell-loader.js reveals it, and a 6 s fallback always does (large chapters on a slow phone network need about 4 s).
- const page=location.pathname.split('/').pop()||'index.html';
- if(page!=='index.html'){
+ // Paths are relative to this script (the site root), so pages in subfolders work too.
+ const base=document.currentScript?.src,url=p=>base?new URL(p,base).href:p;
+ const rootPath=base?new URL('./',base).pathname:'/';
+ const isHome=['','index.html'].includes(location.pathname.startsWith(rootPath)?location.pathname.slice(rootPath.length):'x');
+ if(!isHome){
   const root=document.documentElement;root.classList.add('v6-booting');
   const style=document.createElement('style');
   style.textContent='html.v6-booting body{visibility:hidden}html.v6-booting{background:#f7f6ef}html.v6-booting[data-theme="dark"]{background:#191e19}';
@@ -69,9 +74,9 @@
   window.__ekabV6Reveal=()=>root.classList.remove('v6-booting');
   setTimeout(window.__ekabV6Reveal,6000);
   // Start fetching the shell files now instead of one after another.
-  for(const [href,as] of [['v6-shell.css?v=27.1.171','style'],['v6-subsections.css?v=27.1.171','style'],['v6-shell.js?v=27.1.172','script']]){
-   const l=document.createElement('link');l.rel='preload';l.as=as;l.href=href;document.head.appendChild(l);
+  for(const [href,as] of [['v6-shell.css?v=27.1.174','style'],['v6-subsections.css?v=27.1.171','style'],['v6-shell.js?v=27.1.173','script']]){
+   const l=document.createElement('link');l.rel='preload';l.as=as;l.href=url(href);document.head.appendChild(l);
   }
  }
- const s=document.createElement('script');s.src='v6-shell-loader.js?v=27.1.172';document.head.appendChild(s);
+ const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.173');document.head.appendChild(s);
 })();

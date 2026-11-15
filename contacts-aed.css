@@ -5,14 +5,14 @@
 .aed-minimal-heading .aed-section-title{margin:0}
 .aed-map-source{display:grid;place-items:center;flex:none;width:36px;height:36px;text-decoration:none;border:1px solid var(--line);border-radius:11px;color:var(--blue);font-weight:800;font-size:1.3rem}
 .aed-compact-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:13px}
-.aed-locate-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;flex:1;background:#247da7;border:1px solid #3b91b3;border-radius:13px;color:#fff;font:inherit;font-size:.94rem;font-weight:750;cursor:pointer;padding:10px 16px}
-.aed-locate-button:hover{background:#17658b}
-.aed-locate-button:focus-visible,.aed-map-source:focus-visible,.aed-range-control select:focus-visible{outline:3px solid #6bbcf2;outline-offset:2px}
+.aed-locate-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;flex:1;background:#38834c;border:1px solid #4c9660;border-radius:13px;color:#fff;font:inherit;font-size:.94rem;font-weight:750;cursor:pointer;padding:10px 16px}
+.aed-locate-button:hover{background:#2b6a3c}
+.aed-locate-button:focus-visible,.aed-map-source:focus-visible,.aed-range-control select:focus-visible{outline:3px solid #72c588;outline-offset:2px}
 .aed-locate-button:disabled{opacity:.65;cursor:wait}
 .aed-locate-button span{font-size:1.2rem;line-height:1}
 .aed-range-control{display:block;flex:0 0 auto}
 .aed-range-control select{font:inherit;font-size:.88rem;font-weight:700;min-height:46px;width:104px;max-width:33vw;padding:9px 9px;border-radius:13px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
-.aed-nearby-map{width:100%;height:clamp(380px,62vh,680px);overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#dcebf1;isolation:isolate;z-index:0}
+.aed-nearby-map{width:100%;height:clamp(380px,62vh,680px);overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#deece1;isolation:isolate;z-index:0}
 .aed-nearby-map[hidden]{display:none!important}
 .aed-compact-status{font-size:.8rem;line-height:1.45;margin:12px 0 0;color:var(--muted)}
 .aed-compact-status[data-error="true"]{color:#f2a99e}
@@ -47,7 +47,7 @@ body .ekab-notes-fab{display:none!important}
 /* Preview publisher-hosted 2021 poster; newer ERC 2025 guidance is linked alongside. */
 .aed-poster-preview{margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .aed-poster-preview summary{cursor:pointer;padding:13px 15px;font-weight:750;min-height:46px}
-.aed-poster-preview summary:focus-visible{outline:3px solid #399bbc;outline-offset:-3px}
+.aed-poster-preview summary:focus-visible{outline:3px solid #4ea064;outline-offset:-3px}
 .aed-poster-preview[open] summary{border-bottom:1px solid var(--line)}
 .aed-poster-frame{width:100%;height:clamp(420px,75vw,850px);background:var(--bg);overflow:hidden}
 .aed-poster-frame iframe{width:100%;height:100%;display:block;border:0}

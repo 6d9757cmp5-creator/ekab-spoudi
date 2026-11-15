@@ -2,11 +2,11 @@
 /* iPhone Safari enlarges text on its own (text autosizing); keep the designed sizes so layout and scrolling agree. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #sl-topic-nav{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
-#sl-topic-nav button{text-align:left;min-height:44px;padding:8px 12px;border:1px solid #c9d8dd;border-radius:10px;background:#fff;font:inherit;cursor:pointer}
-#sl-topic-nav button[aria-current="true"]{background:#0f4c5c;border-color:#0f4c5c;color:#fff;font-weight:700}
+#sl-topic-nav button{text-align:left;min-height:44px;padding:8px 12px;border:1px solid #cadace;border-radius:10px;background:#fff;font:inherit;cursor:pointer}
+#sl-topic-nav button[aria-current="true"]{background:#204f2c;border-color:#204f2c;color:#fff;font-weight:700}
 /* The panel is a grid item: without min-width:0 wide content stretches it past the phone screen. */
 .vs-content>.vs-panel{min-width:0;grid-column:1/-1}
-.sl-ex{border-top:1px solid #d7e3e6;padding-top:14px;margin-top:18px}
+.sl-ex{border-top:1px solid #d8e4db;padding-top:14px;margin-top:18px}
 .sl-ex:first-child{border-top:0;margin-top:4px;padding-top:0}
 .sl-ex h3{font-size:1rem;margin:0 0 10px;line-height:1.4}
 .sl-figure{margin:8px 0 12px}
@@ -22,12 +22,12 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .sl-fields select,.sl-fields input,.sl-card select{font:inherit;min-height:44px;padding:6px 10px;border:1px solid #9fb6bd;border-radius:8px;background:#fff;color:inherit;width:100%;max-width:100%;box-sizing:border-box}
 .sl-input-bad{border-color:#c2410c!important;background:#fff4ed!important}
 .sl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;margin:10px 0}
-.sl-card{border:1px solid #c9d8dd;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0;background:#fff}
+.sl-card{border:1px solid #cadace;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0;background:#fff}
 .sl-card-title{margin:0;font-weight:700}
 /* Fixed box: a card image that loads late does not push the page (Safari taps landing elsewhere). */
 .sl-card .sl-figure img{height:220px;width:100%;max-height:none;object-fit:contain}
 .sl-sound{margin:0 0 6px}
-.sl-sound canvas{display:block;width:100%;aspect-ratio:100/32;border-radius:8px;background:#fff;cursor:pointer;border:1px solid #d7e3e6}
+.sl-sound canvas{display:block;width:100%;aspect-ratio:100/32;border-radius:8px;background:#fff;cursor:pointer;border:1px solid #d8e4db}
 .sl-sound audio{display:block;width:100%;margin-top:6px}
 /* Room reserved for the text that appears once the graph loads, so nothing below moves. */
 .sl-sound-info{font-size:.78rem;color:#4b5f66;margin:4px 0 0;min-height:1.6em}
@@ -37,9 +37,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .sl-tf label{display:inline-flex;align-items:center;gap:6px;margin-right:14px;min-height:40px}
 .sl-tf input{min-width:20px;min-height:20px}
 .sl-order{padding-left:22px}
-.sl-order li{display:flex;align-items:center;gap:6px;margin:6px 0;padding:6px 8px;border:1px solid #c9d8dd;border-radius:8px;background:#fff}
+.sl-order li{display:flex;align-items:center;gap:6px;margin:6px 0;padding:6px 8px;border:1px solid #cadace;border-radius:8px;background:#fff}
 .sl-order li span{flex:1;overflow-wrap:anywhere}
-.sl-move{min-width:44px;min-height:44px;border:1px solid #9fb6bd;border-radius:8px;background:#f4f8f9;cursor:pointer;font-size:1.05rem}
+.sl-move{min-width:44px;min-height:44px;border:1px solid #9fb6bd;border-radius:8px;background:#f5f8f6;cursor:pointer;font-size:1.05rem}
 .sl-move:disabled{opacity:.35;cursor:default}
 .sl-chest{position:relative;width:min(100%,440px);margin:8px auto;aspect-ratio:1}
 .sl-chest svg{position:absolute;inset:0;width:100%;height:100%}
@@ -48,30 +48,30 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .sl-chest-bone{fill:#fbf8f2;stroke:#8a9aa0;stroke-width:1.5}
 .sl-chest-rib{fill:none;stroke:#b7c2c6;stroke-width:1.5}
 .sl-chest-guide{fill:none;stroke:#93a4aa;stroke-width:1;stroke-dasharray:4 4}
-.sl-chest-text{font:600 11px system-ui,sans-serif;fill:#334155}
-.sl-point{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid #0f4c5c;background:#fff;color:#0f4c5c;font-weight:800;cursor:pointer;padding:0}
-.sl-point.sl-point-used{background:#0f4c5c;color:#fff}
+.sl-chest-text{font:600 11px system-ui,sans-serif;fill:#2f4535}
+.sl-point{position:absolute;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;border:2px solid #204f2c;background:#fff;color:#204f2c;font-weight:800;cursor:pointer;padding:0}
+.sl-point.sl-point-used{background:#204f2c;color:#fff}
 .sl-locate{padding-left:20px}
-.sl-locate-item{font:inherit;text-align:left;width:100%;min-height:44px;margin:4px 0;padding:6px 10px;border:1px solid #c9d8dd;border-radius:8px;background:#fff;cursor:pointer;overflow-wrap:anywhere}
+.sl-locate-item{font:inherit;text-align:left;width:100%;min-height:44px;margin:4px 0;padding:6px 10px;border:1px solid #cadace;border-radius:8px;background:#fff;cursor:pointer;overflow-wrap:anywhere}
 .sl-locate-item[aria-pressed="true"]{border-color:#c2410c;box-shadow:0 0 0 2px #fed7aa}
 .sl-check{margin:12px 0;border:1px solid;min-height:46px;padding:10px 22px;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
-.sl-empty{margin:4px 0 8px;padding:8px 12px;border-radius:8px;background:#eef5f6;color:#334155}
+.sl-empty{margin:4px 0 8px;padding:8px 12px;border-radius:8px;background:#eff5f1;color:#2f4535}
 .sl-verdict{font-weight:700;padding:8px 12px;border-radius:8px}
 .sl-verdict.sl-ok{background:#e3f4ea}.sl-verdict.sl-partial{background:#fff3dc}
 .sl-ok{color:#14603a}.sl-bad{color:#9a3412}
-.sl-why{color:#334155;font-weight:400}
+.sl-why{color:#2f4535;font-weight:400}
 .sl-rows{padding-left:20px;line-height:1.5}
-.sl-explain{background:#f4f8f9;border-left:4px solid #0f4c5c;padding:8px 12px;border-radius:6px}
-html[data-theme="dark"] #sl-topic-nav button,html[data-theme="dark"] .sl-order li,html[data-theme="dark"] .sl-fields select,html[data-theme="dark"] .sl-fields input,html[data-theme="dark"] .sl-card,html[data-theme="dark"] .sl-card select,html[data-theme="dark"] .sl-locate-item{background:#173244;border-color:#41657a;color:#e6f1f2}
-html[data-theme="dark"] .sl-explain,html[data-theme="dark"] .sl-empty{background:#132a37;color:#e6f1f2}
+.sl-explain{background:#f5f8f6;border-left:4px solid #204f2c;padding:8px 12px;border-radius:6px}
+html[data-theme="dark"] #sl-topic-nav button,html[data-theme="dark"] .sl-order li,html[data-theme="dark"] .sl-fields select,html[data-theme="dark"] .sl-fields input,html[data-theme="dark"] .sl-card,html[data-theme="dark"] .sl-card select,html[data-theme="dark"] .sl-locate-item{background:#1b3422;border-color:#43694d;color:#e8f1eb}
+html[data-theme="dark"] .sl-explain,html[data-theme="dark"] .sl-empty{background:#172c1c;color:#e8f1eb}
 html[data-theme="dark"] .sl-ok{color:#86efac}html[data-theme="dark"] .sl-bad{color:#fdba74}
 html[data-theme="dark"] .sl-verdict.sl-ok{background:#123826}html[data-theme="dark"] .sl-verdict.sl-partial{background:#3b2a10}
-html[data-theme="dark"] .sl-chest-body{fill:#22394a}html[data-theme="dark"] .sl-chest-bone{fill:#2c4658}html[data-theme="dark"] .sl-chest-text{fill:#e6f1f2}
+html[data-theme="dark"] .sl-chest-body{fill:#243c2a}html[data-theme="dark"] .sl-chest-bone{fill:#2e4a35}html[data-theme="dark"] .sl-chest-text{fill:#e8f1eb}
 /* Attribution page link: required by the CC licences, kept as unobtrusive as possible. */
 .vs-footer .sl-licences{font-size:.6rem;opacity:.4;color:inherit;text-decoration:none;font-weight:400;margin-left:auto}
 @media(max-width:480px){.sl-point{width:28px;height:28px;font-size:.85rem}}
 html[data-theme="dark"] .sl-sound-info,html[data-theme="dark"] .sl-why{color:#b9c9cf}
 /* Drawings keep their white background in the dark theme (dark lines on transparent images). */
-html[data-theme="dark"] .sl-sound canvas{background:#0d1f2a;border-color:#2a4757}
-html[data-theme="dark"] .sl-ex{border-top-color:#284351}
+html[data-theme="dark"] .sl-sound canvas{background:#102014;border-color:#2d4935}
+html[data-theme="dark"] .sl-ex{border-top-color:#2b4632}
 html[data-theme="dark"] .sl-input-bad{background:#3a2412!important;border-color:#f59e0b!important;color:#fde7c8!important}

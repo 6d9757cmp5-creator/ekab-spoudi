@@ -1,29 +1,29 @@
 
 /* Common EKAB header controls: responsive SAEK suggestions and small medical dictionary. */
 .saek-global-search{position:relative;z-index:60;min-width:0;width:100%}
-.saek-search-label{display:block!important;font-size:.68rem;line-height:1.15;color:#cbe5f1;margin:0 0 3px;text-align:left;font-weight:700}
-.top .nav .saek-search-field{border:1px solid #7bc5e2;background:#f8fdff;color:#123a50;border-radius:9px;width:100%;padding:8px 11px;min-height:37px;font-size:.82rem;outline-offset:3px}
-.top .nav .saek-search-field::placeholder{color:#5a768a}
-.saek-global-results{position:absolute;top:calc(100% + 6px);left:0;width:max(100%,340px);max-width:min(500px,95vw);max-height:min(60dvh,500px);overflow-y:auto;background:#fff;color:#183548;border:1px solid #cbdce7;border-radius:12px;box-shadow:0 15px 36px #001f3566;z-index:500;padding:6px}
+.saek-search-label{display:block!important;font-size:.68rem;line-height:1.15;color:#cce7d4;margin:0 0 3px;text-align:left;font-weight:700}
+.top .nav .saek-search-field{border:1px solid #84cb97;background:#f8fdff;color:#1a3d24;border-radius:9px;width:100%;padding:8px 11px;min-height:37px;font-size:.82rem;outline-offset:3px}
+.top .nav .saek-search-field::placeholder{color:#587b61}
+.saek-global-results{position:absolute;top:calc(100% + 6px);left:0;width:max(100%,340px);max-width:min(500px,95vw);max-height:min(60dvh,500px);overflow-y:auto;background:#fff;color:#1d3824;border:1px solid #c9dfcf;border-radius:12px;box-shadow:0 15px 36px #0e221366;z-index:500;padding:6px}
 .saek-global-results[hidden]{display:none!important}
-.saek-result-item{display:grid;gap:3px!important;text-align:left!important;color:#173e55!important;border:0!important;background:transparent!important;text-decoration:none!important;border-radius:8px;padding:9px 10px!important;white-space:normal!important}
-.saek-result-item:hover,.saek-result-item:focus-visible{background:#e9f4fa!important;outline:2px solid #378bb4;outline-offset:-2px}
+.saek-result-item{display:grid;gap:3px!important;text-align:left!important;color:#1e4228!important;border:0!important;background:transparent!important;text-decoration:none!important;border-radius:8px;padding:9px 10px!important;white-space:normal!important}
+.saek-result-item:hover,.saek-result-item:focus-visible{background:#e9f5ec!important;outline:2px solid #47915b;outline-offset:-2px}
 .saek-result-item strong{font-size:.86rem;font-weight:750}
-.saek-result-item small{font-size:.73rem;color:#4e6d83}
+.saek-result-item small{font-size:.73rem;color:#4d7257}
 .saek-result-preview{font-size:.74rem;color:#617989;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.saek-result-empty,.saek-result-count{font-size:.76rem;color:#496477;margin:7px;padding:4px 6px;line-height:1.4}
+.saek-result-empty,.saek-result-count{font-size:.76rem;color:#486850;margin:7px;padding:4px 6px;line-height:1.4}
 .top .utility .glossary-open{white-space:nowrap;font-size:.72rem;letter-spacing:0;padding:7px 10px}
-.medical-glossary-dialog{padding:0;width:min(94vw,650px);max-height:88dvh;border:1px solid #a8c3d4;border-radius:18px;box-shadow:0 20px 80px #091e3077;background:#fff;color:#193849}
-.medical-glossary-dialog::backdrop{background:#061927b8}
+.medical-glossary-dialog{padding:0;width:min(94vw,650px);max-height:88dvh;border:1px solid #a5c8ae;border-radius:18px;box-shadow:0 20px 80px #0d201277;background:#fff;color:#1e3b26}
+.medical-glossary-dialog::backdrop{background:#0b1a0fb8}
 .medical-glossary-inner{padding:20px;overflow-y:auto;max-height:85dvh}
 .medical-glossary-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-.medical-eyebrow{color:#197199;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;font-weight:800;margin:0 0 3px}
+.medical-eyebrow{color:#317844;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;font-weight:800;margin:0 0 3px}
 .medical-glossary-head h2{margin:0;font-size:1.45rem}
-.medical-glossary-close{border:1px solid #cbdce7;border-radius:9px;background:#f1f7fb;color:#193849;padding:8px 12px}
+.medical-glossary-close{border:1px solid #c9dfcf;border-radius:9px;background:#f0f8f3;color:#1e3b26;padding:8px 12px}
 .medical-glossary-help{color:#516a79;font-size:.84rem;line-height:1.5}
-.medical-glossary-search{width:100%;min-height:44px;padding:10px;border:1px solid #a8bdcb;border-radius:9px}
+.medical-glossary-search{width:100%;min-height:44px;padding:10px;border:1px solid #a4c1ac;border-radius:9px}
 .medical-glossary-results{display:grid;gap:9px;margin-top:15px}
-.medical-glossary-entry{background:#f4f8fa;border:1px solid #dce9ef;padding:13px;border-radius:10px}
+.medical-glossary-entry{background:#f4f9f5;border:1px solid #dcebe0;padding:13px;border-radius:10px}
 .medical-glossary-entry h3{font-size:1rem;margin:0 0 6px}
 .medical-glossary-entry p{font-size:.85rem;line-height:1.5;margin:0 0 7px}
 .medical-glossary-entry a{font-size:.77rem}
@@ -44,19 +44,19 @@
  .top .nav .saek-search-field{font-size:.79rem}
  .medical-glossary-inner{padding:14px}
 }
-html[data-theme="dark"] .medical-glossary-dialog{background:#142b3c;color:#e3eff5;border-color:#48667c}
-html[data-theme="dark"] .medical-glossary-entry{background:#1e3b4b;border-color:#385a6c}
-html[data-theme="dark"] .medical-glossary-entry p{color:#c9e2f0}
-html[data-theme="dark"] .medical-glossary-help{color:#c7dce8}
-html[data-theme="dark"] .medical-glossary-close{background:#2d4c5f;color:#fff}
+html[data-theme="dark"] .medical-glossary-dialog{background:#172e1d;color:#e3f1e7;border-color:#486b51}
+html[data-theme="dark"] .medical-glossary-entry{background:#223e29;border-color:#3b5e44}
+html[data-theme="dark"] .medical-glossary-entry p{color:#c9e5d0}
+html[data-theme="dark"] .medical-glossary-help{color:#c6dfcc}
+html[data-theme="dark"] .medical-glossary-close{background:#305038;color:#fff}
 
 /* vNEXT: application-wide predictions, bilingual medical categories and complete search page. */
 .top .nav .saek-global-search{z-index:120}
-.top .nav .saek-search-label{color:#d4eaf6}
-.saek-show-all{display:block;margin:5px 3px 3px;padding:11px 9px;border-radius:8px;border-top:1px solid #dce9ef;background:#e7f4fa;color:#185878!important;font-weight:800;font-size:.78rem;text-decoration:none}
-.saek-show-all:hover,.saek-show-all:focus-visible{background:#d5edfa;outline:2px solid #2080aa}
-.medical-glossary-select{display:block;margin:9px 0;width:100%;padding:10px;border:1px solid #9db9c9;border-radius:9px;min-height:43px;background:#fff;color:#14364b}
-.medical-glossary-entry .medical-category{display:block;color:#48798e;font-weight:750;margin:0 0 8px}
+.top .nav .saek-search-label{color:#d4edda}
+.saek-show-all{display:block;margin:5px 3px 3px;padding:11px 9px;border-radius:8px;border-top:1px solid #dcebe0;background:#e8f5ec;color:#265d35!important;font-weight:800;font-size:.78rem;text-decoration:none}
+.saek-show-all:hover,.saek-show-all:focus-visible{background:#d8efdf;outline:2px solid #37874c}
+.medical-glossary-select{display:block;margin:9px 0;width:100%;padding:10px;border:1px solid #9bbea4;border-radius:9px;min-height:43px;background:#fff;color:#1b3923}
+.medical-glossary-entry .medical-category{display:block;color:#4e7c5a;font-weight:750;margin:0 0 8px}
 .global-search-main{max-width:1000px!important}
 .global-search-main .panel>h1{font-size:1.45rem;margin:2px 0 9px}
 .global-search-summary{font-weight:750;color:var(--ink);margin:15px 0}
@@ -69,44 +69,44 @@ html[data-theme="dark"] .medical-glossary-close{background:#2d4c5f;color:#fff}
 .global-exercise-preview li{margin:9px 0}
 .global-exercise-answer{margin-top:12px;padding:12px;border:1px solid var(--line);background:var(--light);border-radius:9px}
 .global-exercise-answer[hidden]{display:none!important}
-html[data-theme="dark"] .medical-glossary-select{background:#193747;color:#e3f5ff;border-color:#557487}
-html[data-theme="dark"] .saek-show-all{background:#1b4155;color:#d8f0ff!important;border-color:#426880}
-html[data-theme="dark"] .global-search-category .saek-result-item{background:#1b3548!important;color:#e8f5fc!important}
-html[data-theme="dark"] .global-search-category .saek-result-item:hover{background:#294a5e!important}
+html[data-theme="dark"] .medical-glossary-select{background:#1e3925;color:#e8f6eb;border-color:#55785e}
+html[data-theme="dark"] .saek-show-all{background:#22452b;color:#def2e3!important;border-color:#456c4f}
+html[data-theme="dark"] .global-search-category .saek-result-item{background:#1e3825!important;color:#e9f6ed!important}
+html[data-theme="dark"] .global-search-category .saek-result-item:hover{background:#2d4e36!important}
 @media(max-width:959px){.top .nav .saek-global-search{grid-column:1/-1!important;max-width:none}}
 @media(min-width:960px){.top .nav .saek-global-search{flex:1 1 220px;max-width:360px}}
 
 /* Expand-on-tap bilingual medical glossary (v27.1.59). */
 .medical-glossary-count{margin:10px 2px 3px;font-size:.77rem;color:#597483;font-weight:700}
 .medical-glossary-results{display:grid;gap:8px}
-.medical-glossary-entry{padding:0;overflow:hidden;border:1px solid #d7e6ee;border-radius:12px;background:#f7fafc}
-.medical-glossary-entry .medical-glossary-term{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;min-height:64px;border:0;background:transparent;color:#133a51;font:inherit;text-align:left;cursor:pointer}
-.medical-glossary-entry .medical-glossary-term:hover,.medical-glossary-entry .medical-glossary-term:focus-visible{background:#e6f3fa;outline:2px solid #2f86a9;outline-offset:-2px}
+.medical-glossary-entry{padding:0;overflow:hidden;border:1px solid #d7e8db;border-radius:12px;background:#f7fafc}
+.medical-glossary-entry .medical-glossary-term{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;min-height:64px;border:0;background:transparent;color:#1b3d24;font:inherit;text-align:left;cursor:pointer}
+.medical-glossary-entry .medical-glossary-term:hover,.medical-glossary-entry .medical-glossary-term:focus-visible{background:#e6f5ea;outline:2px solid #428b55;outline-offset:-2px}
 .medical-glossary-titles{display:flex;flex-direction:column;gap:3px;min-width:0}
 .medical-glossary-titles strong{font-size:.97rem;line-height:1.3;overflow-wrap:anywhere}
-.medical-glossary-titles small{font-size:.78rem;font-weight:600;color:#3f7087}
-.medical-glossary-symbols{font-family:inherit;font-size:.76rem;color:#416781;font-weight:750}
-.medical-glossary-arrow{flex:none;font-size:1.5rem;line-height:1;color:#2b789b}
-.medical-glossary-detail{padding:13px 14px 16px;border-top:1px solid #d5e4ed;background:#fff}
-.medical-glossary-definition{margin:0 0 10px!important;font-size:.89rem!important;line-height:1.65!important;color:#254557}
-.medical-glossary-category,.medical-glossary-aliases{font-size:.75rem!important;color:#536f80;margin:6px 0!important;line-height:1.5!important}
+.medical-glossary-titles small{font-size:.78rem;font-weight:600;color:#467452}
+.medical-glossary-symbols{font-family:inherit;font-size:.76rem;color:#436b4e;font-weight:750}
+.medical-glossary-arrow{flex:none;font-size:1.5rem;line-height:1;color:#3b7e4d}
+.medical-glossary-detail{padding:13px 14px 16px;border-top:1px solid #d4e6d9;background:#fff}
+.medical-glossary-definition{margin:0 0 10px!important;font-size:.89rem!important;line-height:1.65!important;color:#294832}
+.medical-glossary-category,.medical-glossary-aliases{font-size:.75rem!important;color:#52725a;margin:6px 0!important;line-height:1.5!important}
 .medical-glossary-category{font-weight:800}
-.medical-glossary-source{display:inline-block;font-size:.8rem;color:#126b99;text-decoration:underline;margin-top:9px}
-.medical-glossary-figure{max-width:100%;margin:13px 0 6px;padding:10px;border:1px solid #d5e4ed;border-radius:10px;background:#fff;text-align:center}
+.medical-glossary-source{display:inline-block;font-size:.8rem;color:#2e7240;text-decoration:underline;margin-top:9px}
+.medical-glossary-figure{max-width:100%;margin:13px 0 6px;padding:10px;border:1px solid #d4e6d9;border-radius:10px;background:#fff;text-align:center}
 .medical-glossary-figure img{display:block;max-width:100%;width:auto;height:auto;max-height:360px;margin:auto;object-fit:contain}
-.medical-glossary-figure figcaption{margin:8px 0 2px;font-size:.71rem;line-height:1.4;color:#46687c;overflow-wrap:anywhere}
-.medical-glossary-figure a{color:#116b95;text-decoration:underline}
-.medical-glossary-more{padding:11px 15px;margin:12px 0 0;border:1px solid #a8c5d5;border-radius:10px;background:#eaf6fb;color:#164b68;font-weight:800;cursor:pointer}
+.medical-glossary-figure figcaption{margin:8px 0 2px;font-size:.71rem;line-height:1.4;color:#476b51;overflow-wrap:anywhere}
+.medical-glossary-figure a{color:#2e7240;text-decoration:underline}
+.medical-glossary-more{padding:11px 15px;margin:12px 0 0;border:1px solid #a7c9b0;border-radius:10px;background:#ebf7ef;color:#21502e;font-weight:800;cursor:pointer}
 .medical-glossary-more[hidden]{display:none!important}
-html[data-theme="dark"] .medical-glossary-entry{background:#1c384b;border-color:#45657a}
-html[data-theme="dark"] .medical-glossary-entry .medical-glossary-term{color:#eef8ff}
-html[data-theme="dark"] .medical-glossary-titles small,html[data-theme="dark"] .medical-glossary-symbols{color:#b8dbea}
-html[data-theme="dark"] .medical-glossary-entry .medical-glossary-term:hover{background:#294e65}
-html[data-theme="dark"] .medical-glossary-detail{background:#172d40;border-color:#406077}
-html[data-theme="dark"] .medical-glossary-definition{color:#e6f4fb}
-html[data-theme="dark"] .medical-glossary-category,html[data-theme="dark"] .medical-glossary-aliases,html[data-theme="dark"] .medical-glossary-count{color:#c9e1eb}
-html[data-theme="dark"] .medical-glossary-source{color:#a6deff}
-html[data-theme="dark"] .medical-glossary-more{background:#23516a;color:#e2f5ff;border-color:#52819c}
+html[data-theme="dark"] .medical-glossary-entry{background:#203c27;border-color:#46694f}
+html[data-theme="dark"] .medical-glossary-entry .medical-glossary-term{color:#f0f9f2}
+html[data-theme="dark"] .medical-glossary-titles small,html[data-theme="dark"] .medical-glossary-symbols{color:#bbdec5}
+html[data-theme="dark"] .medical-glossary-entry .medical-glossary-term:hover{background:#2e5137}
+html[data-theme="dark"] .medical-glossary-detail{background:#193020;border-color:#41644a}
+html[data-theme="dark"] .medical-glossary-definition{color:#e8f6eb}
+html[data-theme="dark"] .medical-glossary-category,html[data-theme="dark"] .medical-glossary-aliases,html[data-theme="dark"] .medical-glossary-count{color:#cbe3d1}
+html[data-theme="dark"] .medical-glossary-source{color:#b6e1c1}
+html[data-theme="dark"] .medical-glossary-more{background:#2b5536;color:#e8f6eb;border-color:#568662}
 
 
 /* v27.1.66 — prevent header/brand overlap at all viewport widths.
@@ -177,7 +177,7 @@ html[data-theme="dark"] .medical-glossary-more{background:#23516a;color:#e2f5ff;
   display:block;width:26px;height:26px;max-width:100%;flex:none;
 }
 .top .utility .glossary-open:focus-visible {
-  outline:3px solid #a9e6ff;outline-offset:2px;
+  outline:3px solid #c2e6cb;outline-offset:2px;
 }
 
 
@@ -186,34 +186,34 @@ html[data-theme="dark"] .medical-glossary-more{background:#23516a;color:#e2f5ff;
 .top .utility .ekab-search-box{position:relative;z-index:650;flex:none;display:flex;align-items:center}
 .top .utility .ekab-search-toggle{width:40px;height:40px;min-width:40px;min-height:40px;padding:9px;display:grid;place-items:center}
 .ekab-search-toggle svg{display:block;width:23px;height:23px}
-.ekab-search-toggle[aria-expanded="true"]{background:#ffffff33;border-color:#92d9f2}
-.ekab-search-popover{position:absolute;top:calc(100% + 10px);right:0;width:min(410px,calc(100vw - 28px));max-height:70dvh;overflow-y:auto;border:1px solid #b6d5e6;border-radius:16px;background:#fff;color:#1a3b50;box-shadow:0 18px 48px #00182f70;padding:14px;z-index:900}
+.ekab-search-toggle[aria-expanded="true"]{background:#ffffff33;border-color:#a6dbb4}
+.ekab-search-popover{position:absolute;top:calc(100% + 10px);right:0;width:min(410px,calc(100vw - 28px));max-height:70dvh;overflow-y:auto;border:1px solid #b5d9bf;border-radius:16px;background:#fff;color:#1f3e28;box-shadow:0 18px 48px #0b1a0f70;padding:14px;z-index:900}
 .ekab-search-popover[hidden]{display:none!important}
 .ekab-search-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.ekab-search-head strong{font-size:.94rem;color:#183e56;line-height:1.3}
-.ekab-search-close{border:1px solid #d3e3ec;background:#f0f7fb;color:#224a60;border-radius:9px;min-width:32px;min-height:32px;font-size:1.3rem;line-height:1}
-.ekab-search-hint{font-size:.76rem;line-height:1.45;color:#577185;margin:9px 0 10px}
-.top .utility .ekab-search-field{width:100%;min-height:43px;border:1px solid #9dc5da;border-radius:10px;background:#f9fcfe;color:#173b50;font-size:.86rem;padding:10px 12px}
-.top .utility .ekab-search-filter,.global-search-main select{width:100%;min-height:42px;margin:7px 0;padding:8px 10px;border:1px solid #b6d5e6;border-radius:9px;background:#fff;color:#173b50;font:inherit;font-size:.84rem}
+.ekab-search-head strong{font-size:.94rem;color:#1f4228;line-height:1.3}
+.ekab-search-close{border:1px solid #d3e5d8;background:#f0f8f2;color:#294e32;border-radius:9px;min-width:32px;min-height:32px;font-size:1.3rem;line-height:1}
+.ekab-search-hint{font-size:.76rem;line-height:1.45;color:#54755d;margin:9px 0 10px}
+.top .utility .ekab-search-field{width:100%;min-height:43px;border:1px solid #9ccaa9;border-radius:10px;background:#f9fcfe;color:#1e3e27;font-size:.86rem;padding:10px 12px}
+.top .utility .ekab-search-filter,.global-search-main select{width:100%;min-height:42px;margin:7px 0;padding:8px 10px;border:1px solid #b5d9bf;border-radius:9px;background:#fff;color:#1e3e27;font:inherit;font-size:.84rem}
 .ekab-search-examples{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 8px;font-size:.73rem;color:#62798b}
-.ekab-search-chip{border:1px solid #d1e4ee;border-radius:999px;background:#eaf5fb;padding:5px 8px;color:#1a5c7d;font-size:.74rem;font-weight:700}
-.ekab-search-popover .saek-global-results{position:static;width:100%;max-width:100%;max-height:32dvh;overflow:auto;background:transparent;color:inherit;border:0;border-top:1px solid #e5edf2;border-radius:0;box-shadow:none;padding:4px 0;margin-top:6px}
+.ekab-search-chip{border:1px solid #d1e6d7;border-radius:999px;background:#eaf6ed;padding:5px 8px;color:#296238;font-size:.74rem;font-weight:700}
+.ekab-search-popover .saek-global-results{position:static;width:100%;max-width:100%;max-height:32dvh;overflow:auto;background:transparent;color:inherit;border:0;border-top:1px solid #e4eee7;border-radius:0;box-shadow:none;padding:4px 0;margin-top:6px}
 .ekab-search-popover .saek-result-item{display:grid;border-radius:9px}
 .ekab-search-popover .saek-show-all{margin:10px 0 0;text-align:center;padding:11px 9px}
 .top .nav.ekab-breadcrumb{display:flex!important;grid-template-columns:none!important;gap:12px;flex-wrap:wrap;justify-content:flex-start;align-items:center;margin-top:9px;padding-bottom:10px}
-.top .nav.ekab-breadcrumb a.ekab-home-back{font-size:.78rem;flex:none;border:1px solid #ffffff35;border-radius:999px;color:#e4f4fb;padding:6px 12px;background:#ffffff11;text-decoration:none}
-.top .nav.ekab-breadcrumb .ekab-section-name{font-size:.78rem;line-height:1.3;font-weight:650;color:#b9d6e6}
-html[data-theme="dark"] .ekab-search-popover{background:#142b3b;color:#e6f1f8;border-color:#426980}
-html[data-theme="dark"] .ekab-search-head strong{color:#e9f7ff}
-html[data-theme="dark"] .ekab-search-close{background:#28465a;border-color:#547587;color:#e6f5ff}
-html[data-theme="dark"] .ekab-search-hint,html[data-theme="dark"] .ekab-search-examples{color:#c2d6e1}
-html[data-theme="dark"] .top .utility .ekab-search-field{background:#102c40;color:#eef8ff;border-color:#6689a2}
-html[data-theme="dark"] .top .utility .ekab-search-filter,html[data-theme="dark"] .global-search-main select{background:#102c40;color:#eef8ff;border-color:#6689a2}
-html[data-theme="dark"] .ekab-search-chip{background:#254b61;color:#d9f3ff;border-color:#456c84}
-html[data-theme="dark"] .ekab-search-popover .saek-global-results{border-top-color:#38566c}
-html[data-theme="dark"] .ekab-search-popover .saek-result-item strong{color:#eaf6ff}
-html[data-theme="dark"] .ekab-search-popover .saek-result-item small,html[data-theme="dark"] .ekab-search-popover .saek-result-preview,html[data-theme="dark"] .ekab-search-popover .saek-result-count{color:#bdd8e8}
-html[data-theme="dark"] .ekab-search-popover .saek-result-item:hover{background:#28495f!important}
+.top .nav.ekab-breadcrumb a.ekab-home-back{font-size:.78rem;flex:none;border:1px solid #ffffff35;border-radius:999px;color:#e7f5ea;padding:6px 12px;background:#ffffff11;text-decoration:none}
+.top .nav.ekab-breadcrumb .ekab-section-name{font-size:.78rem;line-height:1.3;font-weight:650;color:#b8d9c1}
+html[data-theme="dark"] .ekab-search-popover{background:#172d1d;color:#e4f3e8;border-color:#456e50}
+html[data-theme="dark"] .ekab-search-head strong{color:#edf8f0}
+html[data-theme="dark"] .ekab-search-close{background:#2b4a33;border-color:#54795e;color:#e9f6ec}
+html[data-theme="dark"] .ekab-search-hint,html[data-theme="dark"] .ekab-search-examples{color:#c1d8c7}
+html[data-theme="dark"] .top .utility .ekab-search-field{background:#152f1c;color:#f0f9f2;border-color:#628e6e}
+html[data-theme="dark"] .top .utility .ekab-search-filter,html[data-theme="dark"] .global-search-main select{background:#152f1c;color:#f0f9f2;border-color:#628e6e}
+html[data-theme="dark"] .ekab-search-chip{background:#2b4e34;color:#e3f3e7;border-color:#487152}
+html[data-theme="dark"] .ekab-search-popover .saek-global-results{border-top-color:#395a42}
+html[data-theme="dark"] .ekab-search-popover .saek-result-item strong{color:#ecf7ef}
+html[data-theme="dark"] .ekab-search-popover .saek-result-item small,html[data-theme="dark"] .ekab-search-popover .saek-result-preview,html[data-theme="dark"] .ekab-search-popover .saek-result-count{color:#bbdcc4}
+html[data-theme="dark"] .ekab-search-popover .saek-result-item:hover{background:#2c4d34!important}
 @media(max-width:680px){
  .top .header-row .utility .ekab-search-box{order:-1}
  .ekab-search-popover{right:auto;left:0;width:min(390px,calc(100vw - 28px));max-height:65dvh}
@@ -221,10 +221,10 @@ html[data-theme="dark"] .ekab-search-popover .saek-result-item:hover{background:
 }
 
 /* Medical dictionary is a secondary tool in search, never an educational card. */
-.ekab-search-glossary{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 10px;border:1px solid #d6e5ee;border-radius:10px;background:#f5f9fc;color:#1f5873;font:inherit;font-size:.8rem;font-weight:750;line-height:1.45}
-.ekab-search-glossary:hover,.ekab-search-glossary:focus-visible{background:#e7f2f9;outline:2px solid #73b7d9;outline-offset:1px}
-html[data-theme="dark"] .ekab-search-glossary{background:#1c4053;color:#dcf1fc;border-color:#46687c}
-html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
+.ekab-search-glossary{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 10px;border:1px solid #d5e7da;border-radius:10px;background:#f5f9fc;color:#2b5c38;font:inherit;font-size:.8rem;font-weight:750;line-height:1.45}
+.ekab-search-glossary:hover,.ekab-search-glossary:focus-visible{background:#e6f4e9;outline:2px solid #74be88;outline-offset:1px}
+html[data-theme="dark"] .ekab-search-glossary{background:#22432b;color:#e0f3e5;border-color:#476b51}
+html[data-theme="dark"] .ekab-search-glossary:hover{background:#2f5439}
 
 /* Inline application version — small, readable and synced with CURRENT. */
 /* The version stays in Λογαριασμός › Έκδοση; next to the logo it only distracted students. */
@@ -237,24 +237,24 @@ html[data-theme="dark"] .ekab-search-glossary:hover{background:#2b5067}
  letter-spacing:0;
  vertical-align:baseline;
  white-space:nowrap;
- color:#bed8e8;
+ color:#bcdcc4;
 }
 
 /* Search field on search.html */
 .global-search-page-form{margin:14px 0 18px}.global-search-page-form label{display:block;font-weight:700;margin-bottom:6px}
-.global-search-page-row{display:flex;gap:8px;flex-wrap:wrap}.global-search-page-row input{flex:1 1 220px;min-height:46px;padding:10px 12px;font:inherit;border:1px solid #9bb7c4;border-radius:10px}
+.global-search-page-row{display:flex;gap:8px;flex-wrap:wrap}.global-search-page-row input{flex:1 1 220px;min-height:46px;padding:10px 12px;font:inherit;border:1px solid #9abba3;border-radius:10px}
 .global-search-page-row .btn{min-height:46px}
-html[data-theme="dark"] .global-search-page-row input{background:#173244;color:#eef7fb;border-color:#41657a}
+html[data-theme="dark"] .global-search-page-row input{background:#1b3422;color:#eef8f1;border-color:#43694d}
 
 /* Exam calendar (study-plan.html) */
-.plan-form{display:grid;gap:8px;max-width:560px;margin-top:12px}.plan-form label{font-weight:700}.plan-form select,.plan-form input[type=date]{min-height:46px;padding:8px 10px;font:inherit;border:1px solid #9bb7c4;border-radius:10px}
-.plan-courses fieldset{border:1px solid #d6e3e8;border-radius:10px;margin:6px 0;padding:8px 10px;display:grid;gap:4px}.plan-courses label{font-weight:500;display:flex;gap:8px;align-items:flex-start;min-height:32px}
-.plan-list{display:grid;gap:14px;margin:14px 0}.plan-exam{background:var(--card,#fff);border:1px solid #cfe0e6;border-left:5px solid #176d77;border-radius:14px;padding:14px 16px}
-.plan-exam-head{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between}.plan-exam-head h2{margin:0;font-size:1.15rem}.plan-date{margin:0;color:#3f5d66;font-weight:600}
-.plan-stats{margin:8px 0}.plan-today{background:#eef9f7;border-radius:10px;padding:10px 12px;margin:8px 0}.plan-today h3{margin:0 0 6px}.plan-label{margin:8px 0 4px;font-weight:700}
-.plan-items{margin:0 0 8px;padding-left:18px;display:grid;gap:4px}.plan-items a{display:inline-block;min-height:32px;padding:4px 0}.plan-week table{width:100%;border-collapse:collapse}.plan-week th,.plan-week td{text-align:left;padding:6px 4px;border-bottom:1px solid #e3ecef}.plan-week summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:700}
-html[data-theme="dark"] .plan-exam{background:#132b38;border-color:#2f5468}html[data-theme="dark"] .plan-today{background:#173b3f}html[data-theme="dark"] .plan-date{color:#b8d4d6}html[data-theme="dark"] .plan-form select,html[data-theme="dark"] .plan-form input[type=date]{background:#173244;color:#eef7fb;border-color:#41657a}
-.plan-items li{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.plan-items label{display:inline-flex!important;align-items:center;gap:8px;font-weight:500;margin:0;min-height:40px}.plan-items input[type=checkbox]{width:22px;height:22px;margin:0;flex:none;accent-color:#176d77}
+.plan-form{display:grid;gap:8px;max-width:560px;margin-top:12px}.plan-form label{font-weight:700}.plan-form select,.plan-form input[type=date]{min-height:46px;padding:8px 10px;font:inherit;border:1px solid #9abba3;border-radius:10px}
+.plan-courses fieldset{border:1px solid #d7e5da;border-radius:10px;margin:6px 0;padding:8px 10px;display:grid;gap:4px}.plan-courses label{font-weight:500;display:flex;gap:8px;align-items:flex-start;min-height:32px}
+.plan-list{display:grid;gap:14px;margin:14px 0}.plan-exam{background:var(--card,#fff);border:1px solid #d1e1d5;border-left:5px solid #2e703f;border-radius:14px;padding:14px 16px}
+.plan-exam-head{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between}.plan-exam-head h2{margin:0;font-size:1.15rem}.plan-date{margin:0;color:#425f4a;font-weight:600}
+.plan-stats{margin:8px 0}.plan-today{background:#f3f8f4;border-radius:10px;padding:10px 12px;margin:8px 0}.plan-today h3{margin:0 0 6px}.plan-label{margin:8px 0 4px;font-weight:700}
+.plan-items{margin:0 0 8px;padding-left:18px;display:grid;gap:4px}.plan-items a{display:inline-block;min-height:32px;padding:4px 0}.plan-week table{width:100%;border-collapse:collapse}.plan-week th,.plan-week td{text-align:left;padding:6px 4px;border-bottom:1px solid #e3ede6}.plan-week summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:700}
+html[data-theme="dark"] .plan-exam{background:#172d1d;border-color:#34573d}html[data-theme="dark"] .plan-today{background:#203b27}html[data-theme="dark"] .plan-date{color:#bfd4c4}html[data-theme="dark"] .plan-form select,html[data-theme="dark"] .plan-form input[type=date]{background:#1b3422;color:#eef8f1;border-color:#43694d}
+.plan-items li{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.plan-items label{display:inline-flex!important;align-items:center;gap:8px;font-weight:500;margin:0;min-height:40px}.plan-items input[type=checkbox]{width:22px;height:22px;margin:0;flex:none;accent-color:#2e703f}
 
 /* Header icon captions on wide screens (UX review #30). */
 @media (min-width:1000px){header.top .utility [data-caption]{width:auto!important;min-width:40px;padding:0 12px!important;display:inline-flex;align-items:center;gap:6px}header.top .utility [data-caption]::after{content:attr(data-caption);font-size:.82rem;font-weight:650;white-space:nowrap}}

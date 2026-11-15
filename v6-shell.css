@@ -64,3 +64,6 @@ html[data-theme="dark"] .v6-global-topbar{background:rgba(29,36,29,.96)}
 /* Whole cards that are links (tools page) read as cards, not as underlined text. */
 .v6-page-content a.panel{text-decoration:none;color:inherit}
 .v6-page-content a.panel:hover h2{text-decoration:underline}
+/* Page stylesheets must not restyle the shared search field. */
+body.v6-page .v6-global-search input{background:transparent!important;border:0!important;box-shadow:none!important;outline:none;color:inherit!important;min-height:0!important;padding:0!important;border-radius:0!important}
+html[data-theme] body.v6-page .v6-global-search input,html body.v6-page .v6-global-search input{background:transparent!important;border:0!important;box-shadow:none!important;color:var(--v6-ink)!important}

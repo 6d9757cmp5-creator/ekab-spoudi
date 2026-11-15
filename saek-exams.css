@@ -39,10 +39,10 @@
 #examWeakChapters p{color:var(--muted);font-size:.84rem}
 .saek-exams-main footer{font-size:.72rem;color:var(--muted);line-height:1.5}
 .saek-exams-main button:focus-visible,.saek-exams-main select:focus-visible,.saek-exams-main textarea:focus-visible,.saek-exams-main a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-html[data-theme=dark] .saek-exam-estimate,html[data-theme=dark] .saek-exam-reference,html[data-theme=dark] .saek-exams-stats>div,html[data-theme=dark] #examWeakChapters a{background:#1a364a;border-color:#416179;color:#ecf9ff}
-html[data-theme=dark] .saek-exam-fields select,html[data-theme=dark] .saek-exams-main textarea{background:#132a3d;border-color:#42627a;color:#eef7fc}
-html[data-theme=dark] .saek-exam-note,html[data-theme=dark] .saek-exam-topic,html[data-theme=dark] .saek-exams-head>p:last-child,html[data-theme=dark] .saek-exams-stats span{color:#bfd5e4}
-html[data-theme=dark] .saek-exam-estimate,html[data-theme=dark] .saek-exam-grade-state{color:#83d5ff}
+html[data-theme=dark] .saek-exam-estimate,html[data-theme=dark] .saek-exam-reference,html[data-theme=dark] .saek-exams-stats>div,html[data-theme=dark] #examWeakChapters a{background:#1e3925;border-color:#41654b;color:#f0f9f3}
+html[data-theme=dark] .saek-exam-fields select,html[data-theme=dark] .saek-exams-main textarea{background:#162d1d;border-color:#42674c;color:#eef8f1}
+html[data-theme=dark] .saek-exam-note,html[data-theme=dark] .saek-exam-topic,html[data-theme=dark] .saek-exams-head>p:last-child,html[data-theme=dark] .saek-exams-stats span{color:#bcd9c3}
+html[data-theme=dark] .saek-exam-estimate,html[data-theme=dark] .saek-exam-grade-state{color:#9fd8af}
 html[data-theme=dark] .saek-exams-stats strong{color:#f3faff}
-html[data-theme=dark] .saek-exam-manual{border-color:#42627a}
+html[data-theme=dark] .saek-exam-manual{border-color:#42674c}
 @media(max-width:560px){.saek-exam-fields{grid-template-columns:minmax(0,1fr);gap:12px}.saek-exam-topline{gap:10px}.saek-exam-footer{justify-content:space-between}.saek-exam-footer .btn{font-size:.78rem;padding:10px 8px}.saek-exam-actions>.btn{flex:1 1 160px;font-size:.84rem}}

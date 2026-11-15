@@ -45,10 +45,10 @@ function panel(doc,links,base){
 function style(doc){
  if(doc.getElementById('ecg-lesson-links-style'))return;
  const s=doc.createElement('style');s.id='ecg-lesson-links-style';
- s.textContent='.ecg-lesson-links{margin:14px 0;padding:12px 14px;border:1px solid #9fd3cf;border-radius:12px;background:#eef9f7;color:#163b44}'+
-  '.ecg-lesson-links-title{margin:0 0 8px;font-weight:800}.ecg-lesson-links a{display:block;padding:9px 0;color:#075e63;text-decoration:none;border-top:1px solid #cfe9e6}'+
-  '.ecg-lesson-links a strong{display:block}.ecg-lesson-links a small{display:block;color:#3f5d66;font-size:.8rem}'+
-  'html[data-theme="dark"] .ecg-lesson-links{background:#173b3f;border-color:#3d7a77;color:#e4f6f3}html[data-theme="dark"] .ecg-lesson-links a{color:#9ee6dc;border-color:#2f5e5f}html[data-theme="dark"] .ecg-lesson-links a small{color:#b8d4d6}';
+ s.textContent='.ecg-lesson-links{margin:14px 0;padding:12px 14px;border:1px solid #b1d1b9;border-radius:12px;background:#f3f8f4;color:#1e3d26}'+
+  '.ecg-lesson-links-title{margin:0 0 8px;font-weight:800}.ecg-lesson-links a{display:block;padding:9px 0;color:#276036;text-decoration:none;border-top:1px solid #d7e8dc}'+
+  '.ecg-lesson-links a strong{display:block}.ecg-lesson-links a small{display:block;color:#425f4a;font-size:.8rem}'+
+  'html[data-theme="dark"] .ecg-lesson-links{background:#203b27;border-color:#4c7b59;color:#eaf5ed}html[data-theme="dark"] .ecg-lesson-links a{color:#bee1c8;border-color:#3a5f44}html[data-theme="dark"] .ecg-lesson-links a small{color:#bfd4c4}';
  doc.head.append(s);
 }
 
