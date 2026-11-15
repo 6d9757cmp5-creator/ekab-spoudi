@@ -11,8 +11,8 @@ export function limitsFromEnv(env){
   const n=Math.floor(Number(env?.[name]));
   return Number.isFinite(n)&&n>0?Math.min(n,MAX_LIMITS[key]):DEFAULT_LIMITS[key];
  };
- return {ipPerHour:pick("CLAUDE_IP_HOURLY","ipPerHour"),requestsPerDay:pick("CLAUDE_DAILY_CAP","requestsPerDay"),
-  tokensPerDay:pick("CLAUDE_DAILY_TOKENS","tokensPerDay")};
+ return {ipPerHour:pick("PAID_IP_HOURLY","ipPerHour"),requestsPerDay:pick("PAID_DAILY_CAP","requestsPerDay"),
+  tokensPerDay:pick("PAID_DAILY_TOKENS","tokensPerDay")};
 }
 
 /** Constant-time comparison; false unless the configured token is at least 16 characters. */

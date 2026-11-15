@@ -1,9 +1,9 @@
 // ATLA chat Worker. Educational answers grounded in the app's own published Greek material.
 // Free models first (any free provider whose key is set, then Cloudflare Workers AI), then low-cost
-// DeepSeek if its key is set, paid Claude last
+// DeepSeek if its key is set, the paid model last
 // and only when the owner has enabled it with a spend limit. Every answer passes the same safety audit;
 // a failed answer moves on to the next model. Identical questions are answered from a cache.
-import {buildClaudeRequest,callClaude,estimateInputTokens,clampMaxTokens} from '../../../mentor/ai/claude-adapter.mjs';
+import {buildPaidRequest,callPaid,estimateInputTokens,clampMaxTokens} from '../../../mentor/ai/paid-adapter.mjs';
 import {limitsFromEnv,tokenMatches,ipDigest,MentorBudget} from '../../../mentor/ai/guard.mjs';
 import {ATLA_RUNTIME_RULES,teachingApproach,auditAssistantReply} from '../../../atla/ai/teaching-policy.mjs';
 import {verifiedSseResponse} from '../../../atla/ai/safe-stream.mjs';
@@ -209,7 +209,7 @@ async function currentModel(p){
   return model;
  }catch{return '';}
 }
-/** Low-cost paid providers (prepaid balance, no auto top-up): only after every free model failed, before Claude. */
+/** Low-cost paid providers (prepaid balance, no auto top-up): only after every free model failed, before the paid model. */
 export const REASONING_MODEL=/gemini|gpt-oss|qwen3|deepseek-r|reason|thinking/i;
 export function cheapPaidProviders(env){
  return env.DEEPSEEK_API_KEY?[{name:'deepseek',url:'https://api.deepseek.com/chat/completions',key:env.DEEPSEEK_API_KEY,model:env.DEEPSEEK_MODEL||'deepseek-chat'}]:[];
@@ -243,19 +243,19 @@ async function askWorkersAi(env,model,messages){
  const r=await env.AI.run(model,{messages,max_tokens:MAX_OUTPUT,temperature:0.3});
  return typeof r?.response==='string'?r.response:typeof r?.choices?.[0]?.message?.content==='string'?r.choices[0].message.content:'';
 }
-async function askClaude(request,env,messages){
- if(env.MENTOR_CLAUDE_ENABLED!=='true'||env.MENTOR_SPEND_LIMIT_CONFIRMED!=='true'||!env.ANTHROPIC_API_KEY||!env.BUDGET)return '';
- let req;try{req=buildClaudeRequest({messages,model:env.MENTOR_MODEL,maxTokens:clampMaxTokens(env.CLAUDE_MAX_TOKENS)});}catch{return '';}
+async function askPaid(request,env,messages){
+ if(env.MENTOR_PAID_ENABLED!=='true'||env.MENTOR_SPEND_LIMIT_CONFIRMED!=='true'||!env.ANTHROPIC_API_KEY||!env.BUDGET)return '';
+ let req;try{req=buildPaidRequest({messages,model:env.MENTOR_MODEL,maxTokens:clampMaxTokens(env.PAID_MAX_TOKENS)});}catch{return '';}
  const ipKey=await ipDigest(request.headers.get('cf-connecting-ip')||'unknown');
  const stub=env.BUDGET.get(env.BUDGET.idFromName('global'));
  const verdict=await (await stub.fetch('https://budget/charge',{method:'POST',body:JSON.stringify({ipKey,tokens:estimateInputTokens(messages)+req.max_tokens,limits:limitsFromEnv(env)})})).json();
  if(!verdict?.ok)return '';
- const out=await callClaude({apiKey:env.ANTHROPIC_API_KEY,request:req,signal:AbortSignal.timeout(25000)});
+ const out=await callPaid({apiKey:env.ANTHROPIC_API_KEY,request:req,signal:AbortSignal.timeout(25000)});
  if(!out.ok)return '';
  return collectTokens(out.stream);
 }
 
-/** Joins the {token} events of a converted Claude stream; the caller audits the result. */
+/** Joins the {token} events of a converted paid-model stream; the caller audits the result. */
 async function collectTokens(stream){
  const reader=stream.getReader(),dec=new TextDecoder();let buf='',text='';
  for(;;){const {value,done}=await reader.read();if(done)break;buf+=dec.decode(value,{stream:true});let nl;
@@ -285,7 +285,7 @@ export async function answer(request,env,body,{askers,deadlineMs=27000}={}){
   ...freeProviders(env).map(p=>({name:p.name,label:()=>p.name+'/'+(p.used||p.model),ask:()=>askOpenAiCompatible(p,messages),repair:t=>askOpenAiCompatible(p,citeRepair(messages,t))})),
   ...(env.MENTOR_FREE_PLAN_CONFIRMED==='true'&&env.AI?WORKERS_AI_MODELS.map(m=>({name:m.split('/').pop(),ask:()=>askWorkersAi(env,m,messages),repair:t=>askWorkersAi(env,m,citeRepair(messages,t))})):[]),
   ...cheapPaidProviders(env).map(p=>({name:p.name,ask:()=>askOpenAiCompatible(p,messages)})),
-  {name:'claude',ask:()=>askClaude(request,env,messages)}
+  {name:'paid',ask:()=>askPaid(request,env,messages)}
  ];
  const trace=[];
  let repaired=false;

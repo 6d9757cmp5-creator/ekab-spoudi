@@ -2,18 +2,18 @@
    Never changes questions, answers, targetedReview, fullAnswerReview, resolution or approval.
    Run: node merge-review-eoppep.cjs             (preview)
         node merge-review-eoppep.cjs --apply     (on AI reviewer audit branch only)
-   Run tests: node --test merge-claude-eoppep.test.cjs */
+   Run tests: node --test merge-review-eoppep.test.cjs */
 "use strict";
 const fs = require("node:fs");
 const path = require("node:path");
 const folder=__dirname;
 const registryFile=path.join(folder,"eoppep-314.json");
 const evidenceFile=path.join(folder,"review-eoppep-b-findings.json");
-const mergeFindings = function mergeFindings(registry, claude) {
+const mergeFindings = function mergeFindings(registry, findingsIn) {
   const allowed = new Set(["consistent","consistent_with_gaps","needs_correction","needs_clinical_review","source_unreachable"]);
   const fail = msg => {throw new Error(msg)};
   if (!registry || !Array.isArray(registry.entries) || registry.entries.length !== 314) fail("Registry must contain exactly 314 entries");
-  if (!claude || !Array.isArray(claude.entries)) fail("AI reviewer findings require an entries array");
+  if (!findingsIn || !Array.isArray(findingsIn.entries)) fail("AI reviewer findings require an entries array");
   const out = JSON.parse(JSON.stringify(registry));
   const byId = new Map();
   const groups = {A:0,B:0};
@@ -24,8 +24,8 @@ const mergeFindings = function mergeFindings(registry, claude) {
   }
   if (groups.A!==105 || groups.B!==209) fail("Unexpected canonical group totals");
   const seen=new Set();
-  const stats={source:claude.entries.length,added:0,unchanged:0,alreadyTargeted:0,novel:0,blockedSource:0,clinicalFlag:0,questionParaphrased:0,eligibleForFurtherReview:0,canonicalTargetedBefore:registry.entries.filter(x=>!!x.targetedReview).length};
-  for (const f of claude.entries) {
+  const stats={source:findingsIn.entries.length,added:0,unchanged:0,alreadyTargeted:0,novel:0,blockedSource:0,clinicalFlag:0,questionParaphrased:0,eligibleForFurtherReview:0,canonicalTargetedBefore:registry.entries.filter(x=>!!x.targetedReview).length};
+  for (const f of findingsIn.entries) {
     if (typeof f.id!=="string" || !/^EOP-B-\d{3}$/.test(f.id) || seen.has(f.id)) fail("Invalid or repeated AI reviewer ID: "+f.id);
     seen.add(f.id);
     const row=byId.get(f.id);
@@ -45,13 +45,13 @@ const mergeFindings = function mergeFindings(registry, claude) {
     if (f.clinicalReview)stats.clinicalFlag++;
     if(!row.targetedReview&&!blocked)stats.eligibleForFurtherReview++;
     if (row.externalReviews !== undefined && !Array.isArray(row.externalReviews))fail("Unexpected externalReviews type: "+f.id);
-    const existing=(row.externalReviews||[]).filter(x=>x.origin==="claude-pr140");
+    const existing=(row.externalReviews||[]).filter(x=>x.origin==="review-pr140");
     if(existing.length>1)fail("Repeated AI reviewer origin on "+f.id);
     if(existing.length) {
       if (JSON.stringify(existing[0].evidence)!==JSON.stringify(f)) fail("Changed AI reviewer evidence requires manual reconciliation: "+f.id);
       stats.unchanged++;continue;
     }
-    const review={origin:"claude-pr140",originUrl:"https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",sourcePath:"docs/primary-source-crosscheck-2026-10-28/review-eoppep-b-findings.json",status:blocked?"SOURCE_UNVERIFIED":"AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",canonicalQuestionExactMatch:exact,canonicalQuestionUnmodified:true,fullScientificApproval:false,humanClinicalSignoff:false,requiresClinicalReview:!!f.clinicalReview,evidence:JSON.parse(JSON.stringify(f))};
+    const review={origin:"review-pr140",originUrl:"https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/140",sourcePath:"docs/primary-source-crosscheck-2026-10-28/review-eoppep-b-findings.json",status:blocked?"SOURCE_UNVERIFIED":"AI_DOCUMENTARY_REVIEW_PENDING_SIGNOFF",canonicalQuestionExactMatch:exact,canonicalQuestionUnmodified:true,fullScientificApproval:false,humanClinicalSignoff:false,requiresClinicalReview:!!f.clinicalReview,evidence:JSON.parse(JSON.stringify(f))};
     if(!row.externalReviews)row.externalReviews=[];
     row.externalReviews.push(review);
     stats.added++;
