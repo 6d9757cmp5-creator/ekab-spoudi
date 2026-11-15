@@ -167,7 +167,10 @@ function validateGrade(data){
  };
 }
 async function gradeAnswer(question,answer,env){
- const providers=[...(env.AI?[{id:'cloudflare_binding',model:'@cf/google/gemma-4-26b-a4b-it'}]:[]),...freeProviders(env)];
+ // Workers AI first (free): the grading model, then the larger model ATLA also used; then the free
+ // providers whose keys are configured (Groq, Gemini, OpenRouter), so a busy model does not stop grading.
+ const providers=[...(env.AI?[{id:'cloudflare_binding',model:'@cf/google/gemma-4-26b-a4b-it'},
+  {id:'cloudflare_binding',model:'@cf/meta/llama-3.3-70b-instruct-fp8-fast'}]:[]),...freeProviders(env)];
  const system=(question.clinicalScenario?scenarioSys:sys)+'\n'+SEMANTIC_GRADING_POLICY+'\nΕπέστρεψε αποκλειστικά JSON που τηρεί αυτό το schema: '+JSON.stringify(schema);
  const messages=[{role:'system',content:system},{role:'user',content:JSON.stringify({section:question.kind,question:question.question,reference:question.reference,case:question.context,essentialCriteria:question.criteria||null,studentAnswer:answer})}];
  // Isolated per authenticated user; cache never contains the original student text.
