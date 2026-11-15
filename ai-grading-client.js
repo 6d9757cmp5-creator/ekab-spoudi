@@ -2,6 +2,26 @@
    The backend controls the reference; student content is always rendered as text, never HTML. */
 (function(){
 'use strict';
+const BASE=document.currentScript?.src||'';
+/* "Where to read it": the checked source already recorded for each question in the site's data,
+   never a guess. EOPPEP: source of the official answer; SAEK self-test: its chapter; old written: its reference. */
+const SOURCE_FILES={eoppep:'official_questions.json',saek:'saek-exams-bank.json',old_written:'old_type_written.json'};
+const sourceCache={};
+async function studySource(section,id){
+ const file=SOURCE_FILES[section];if(!file||!id)return null;
+ sourceCache[file]??=fetch(BASE?new URL(file,BASE).href:file).then(r=>r.ok?r.json():[]).catch(()=>[]);
+ const data=await sourceCache[file];
+ const list=Array.isArray(data)?data:(data.items||data.questions||Object.values(data||{}).find(Array.isArray)||[]);
+ const q=list.find(x=>x&&String(x.id)===String(id));if(!q)return null;
+ if(section==='saek'&&/^saek-course-\d+\.html#lesson-\d+$/.test(q.href||''))
+  return {label:'ΣΑΕΚ · '+q.course+' · κεφάλαιο '+q.chapter+': '+q.chapterTitle,href:q.href,external:false};
+ if(section==='eoppep'&&/^https:\/\//.test(q.sourceUrl||''))
+  return {label:q.sourceLocation||q.sourceUrl,href:q.sourceUrl,external:true};
+ if(section==='old_written'&&/^https:\/\//.test(q.answerUrl||''))
+  return {label:q.answerReference||q.answerUrl,href:q.answerUrl,external:true};
+ return null;
+}
+const withSource=async(input,result)=>({...result,studySource:await studySource(input?.section,input?.questionId).catch(()=>null)});
 const labels={correct:'Σωστή',partial:'Μερικώς σωστή',incorrect:'Χρειάζεται διόρθωση',uncertain:'Απαιτεί επανέλεγχο'};
 const allowed=new Set(Object.keys(labels));
 const AI_LIMIT_MESSAGE="Μικρό διάλειμμα από την αξιολόγηση! 📚 Οι διαθέσιμες αξιολογήσεις έχουν φτάσει προσωρινά στο όριό τους. Είναι μια καλή ευκαιρία να κάνεις μια επανάληψη στη θεωρία σου και να επιστρέψεις αργότερα για νέα προσπάθεια. Η απάντησή σου παραμένει αποθηκευμένη και δεν έχει βαθμολογηθεί.";
@@ -36,7 +56,7 @@ async function evaluate(input){
    throw new Error(result.error||'Η αξιολόγηση δεν ολοκληρώθηκε. Η απάντηση παραμένει χωρίς βαθμολογία.');
   }
   if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
-  return {...result,studentAnswer:answer};
+  return withSource(input,{...result,studentAnswer:answer});
   }catch(error){
    // Keep the existing Appwrite grader available if the new Worker is temporarily unavailable.
    if(error.message==='Συνδέσου στον λογαριασμό σου για ασφαλή αξιολόγηση AI.'||error.message===STUDENT_LIMIT_MESSAGE)throw error;
@@ -63,7 +83,7 @@ async function evaluate(input){
  }
  if(result.criticalError&&result.verdict==='correct')result.verdict='uncertain';
  // Only appended in the browser. The server does not receive any extra personal history.
- return {...result,studentAnswer:answer};
+ return withSource(input,{...result,studentAnswer:answer});
 }
 function render(container,result){
  if(!container||!result)return;
@@ -103,6 +123,14 @@ function render(container,result){
  // The takeaway only appears if it adds information, avoiding repeated paragraphs.
  if(takeaway&&takeaway.trim()!==correct?.trim()&&takeaway.trim()!==result.explanation?.trim())
   section('Τι να θυμάσαι',takeaway,'ai-grading-takeaway');
+ const src=result.studySource;
+ if(src&&typeof src.href==='string'&&/^(https:\/\/|saek-course-\d+\.html#lesson-\d+$)/.test(src.href)){
+  const block=document.createElement('section');block.className='ai-grading-section ai-grading-source';
+  const name=document.createElement('strong');name.className='ai-grading-heading';name.textContent='Πού να το διαβάσεις';
+  const link=document.createElement('a');link.href=src.href;link.textContent=String(src.label||src.href);
+  if(src.external){link.target='_blank';link.rel='noopener';link.append(' (εξωτερική πηγή)');}
+  const para=document.createElement('p');para.append(link);block.append(name,para);container.append(block);
+ }
  if(result.criticalError){
   const warning=document.createElement('p');warning.className='ai-grading-warning';
   warning.textContent='Προσοχή: πιθανό κρίσιμο σφάλμα ασφάλειας. Συμβουλεύσου το εκπαιδευτικό υλικό και τον εκπαιδευτή.';
