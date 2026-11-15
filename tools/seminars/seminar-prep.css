@@ -8,7 +8,7 @@
 .seminar-intro h2{font-size:clamp(1.4rem,4vw,1.9rem);line-height:1.2;letter-spacing:-.03em;margin:13px 0 5px}
 .seminar-intro>p:last-child{margin:0;color:var(--muted)}
 .seminar-cards{display:grid;gap:11px}
-.seminar-card{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 19px;border-radius:15px;border:1px solid var(--line);background:#fff;box-shadow:0 3px 12px #14384a0a}
+.seminar-card{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 19px;border-radius:15px;border:1px solid var(--line);background:#fff;box-shadow:0 3px 12px #1b3a240a}
 .seminar-card h2{font-size:1.17rem;letter-spacing:-.02em;margin:0}
 .seminar-card-sub{font-size:.87rem;color:var(--ink);margin:2px 0}
 .seminar-card-stats{color:var(--muted);font-size:.76rem;margin:6px 0 0}
@@ -53,14 +53,14 @@
 .seminar-main footer{font-size:.72rem;line-height:1.6}
 .seminar-main [hidden]{display:none!important}
 .seminar-main button:focus-visible,.seminar-main a:focus-visible,.seminar-main summary:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-html[data-theme=dark] .seminar-card,html[data-theme=dark] .seminar-unit,html[data-theme=dark] .seminar-backup{background:#14283a;border-color:#365267}
-html[data-theme=dark] .seminar-unit.active{background:#21445b;color:#eef9ff;border-color:#75c7ef}
-html[data-theme=dark] .seminar-intro>p:last-child,html[data-theme=dark] .seminar-card-stats,html[data-theme=dark] .seminar-card-sub,html[data-theme=dark] .seminar-hint,html[data-theme=dark] .seminar-fineprint,html[data-theme=dark] .seminar-save-status,html[data-theme=dark] .seminar-state{color:#bad1dc}
-html[data-theme=dark] .seminar-tabs{background:#19354a;border-color:#365267}
-html[data-theme=dark] .seminar-tabs button{color:#e8f5ff}
-html[data-theme=dark] .seminar-tabs button.active{background:#3182aa;color:white}
-html[data-theme=dark] .seminar-feedback{background:#19384e;border-color:#45657a;color:#edf8fe}
-html[data-theme=dark] .seminar-practice textarea{background:#13293b;color:#f1f8fb;border-color:#45657a}
+html[data-theme=dark] .seminar-card,html[data-theme=dark] .seminar-unit,html[data-theme=dark] .seminar-backup{background:#162a1b;border-color:#36553f}
+html[data-theme=dark] .seminar-unit.active{background:#26472f;color:#f2f9f4;border-color:#85cd98}
+html[data-theme=dark] .seminar-intro>p:last-child,html[data-theme=dark] .seminar-card-stats,html[data-theme=dark] .seminar-card-sub,html[data-theme=dark] .seminar-hint,html[data-theme=dark] .seminar-fineprint,html[data-theme=dark] .seminar-save-status,html[data-theme=dark] .seminar-state{color:#bad4c0}
+html[data-theme=dark] .seminar-tabs{background:#1d3824;border-color:#36553f}
+html[data-theme=dark] .seminar-tabs button{color:#eaf6ed}
+html[data-theme=dark] .seminar-tabs button.active{background:#418854;color:white}
+html[data-theme=dark] .seminar-feedback{background:#1e3c26;border-color:#46694f;color:#eff9f2}
+html[data-theme=dark] .seminar-practice textarea{background:#162c1c;color:#f1f8f3;border-color:#46694f}
 @media(max-width:700px){.seminar-learn{grid-template-columns:minmax(0,1fr)}.seminar-units{display:flex;overflow-x:auto;overflow-y:hidden;gap:7px;max-height:none;padding:3px 1px 8px;scroll-snap-type:x mandatory}.seminar-unit{flex:0 0 165px;scroll-snap-align:start;white-space:normal;min-height:48px}.seminar-lesson{padding:17px}.seminar-main{padding-top:13px}}
 @media(max-width:460px){.seminar-intro-top{display:block}.seminar-external{display:inline-block;margin-top:9px;font-size:.66rem}.seminar-card{padding:14px;gap:8px;align-items:center}.seminar-card h2{font-size:1.08rem}.seminar-card-sub{font-size:.78rem}.seminar-card-stats{font-size:.7rem}.seminar-start{min-width:82px;font-size:.78rem;padding:10px 8px}.seminar-tabs button{font-size:.72rem;padding:10px 4px}.seminar-practice{padding:16px}.seminar-next-prev .btn{font-size:.77rem;padding:10px 11px}}
 
@@ -81,13 +81,13 @@ html[data-theme=dark] .seminar-practice textarea{background:#13293b;color:#f1f8f
 .seminar-mcq-feedback.is-correct{border-color:#679c85}
 .seminar-mcq-feedback.is-incorrect{border-color:#b89a62}
 #seminarMCQCheck:disabled{opacity:.52;cursor:not-allowed}
-html[data-theme="dark"] .seminar-quiz-modes{background:#19354a;border-color:#365267}
-html[data-theme="dark"] .seminar-quiz-modes button{color:#e8f5ff}
-html[data-theme="dark"] .seminar-quiz-modes button.active{background:#3182aa;color:#fff}
+html[data-theme="dark"] .seminar-quiz-modes{background:#1d3824;border-color:#36553f}
+html[data-theme="dark"] .seminar-quiz-modes button{color:#eaf6ed}
+html[data-theme="dark"] .seminar-quiz-modes button.active{background:#418854;color:#fff}
 html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option,
-html[data-theme="dark"] .seminar-mcq-feedback{background:#19384e;color:#edf8fe;border-color:#45657a}
-html[data-theme="dark"] .seminar-mcq-instruction{color:#bad1dc}
-html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option:has(input:checked){border-color:#80c8e8}
+html[data-theme="dark"] .seminar-mcq-feedback{background:#1e3c26;color:#eff9f2;border-color:#46694f}
+html[data-theme="dark"] .seminar-mcq-instruction{color:#bad4c0}
+html[data-theme="dark"] .seminar-mcq-choices .seminar-mcq-option:has(input:checked){border-color:#88ce9a}
 @media(max-width:460px){.seminar-quiz-modes button{font-size:.77rem;min-height:41px;padding:9px 5px}.seminar-mcq-choices .seminar-mcq-option{padding:11px;font-size:.82rem}}
 
 
@@ -127,15 +127,15 @@ html[data-theme="dark"] .seminar-mcq-feedback.is-incorrect{background:#4a232b;bo
 .seminar-result-correct .seminar-result-flag{background:#def6e6;color:#145c36;border:1px solid #27884f}
 .seminar-result-incorrect .seminar-result-flag{background:#ffe3e3;color:#932329;border:1px solid #bf4147}
 .seminar-result-partial .seminar-result-flag{background:#fff0cf;color:#885409;border:1px solid #ae7f29}
-.seminar-result-uncertain .seminar-result-flag{background:#e8edf2;color:#415367;border:1px solid #8494a3}
+.seminar-result-uncertain .seminar-result-flag{background:#e6eee8;color:#3e5744;border:1px solid #8494a3}
 .seminar-result-detail{padding:0 14px 16px;border-top:1px solid var(--line);font-size:.87rem;overflow-wrap:anywhere}
 .seminar-result-detail>strong{display:block;margin-top:12px}
 .seminar-result-detail>.ai-grading-result{margin-top:10px}
-html[data-theme=dark] .seminar-result-item{background:#19384e;border-color:#45657a}
+html[data-theme=dark] .seminar-result-item{background:#1e3c26;border-color:#46694f}
 html[data-theme=dark] .seminar-result-correct .seminar-result-flag{background:#16452b;color:#baf3ce;border-color:#3e9b62}
 html[data-theme=dark] .seminar-result-incorrect .seminar-result-flag{background:#552429;color:#ffd2d2;border-color:#d96a71}
 html[data-theme=dark] .seminar-result-partial .seminar-result-flag{background:#4e371a;color:#ffe5ad;border-color:#c3903c}
-html[data-theme=dark] .seminar-result-uncertain .seminar-result-flag{background:#293e52;color:#deebf3;border-color:#657b8f}
+html[data-theme=dark] .seminar-result-uncertain .seminar-result-flag{background:#29412f;color:#ddede2;border-color:#657b8f}
 @media(max-width:460px){.seminar-result-heading{padding:11px;gap:7px}.seminar-result-flag{padding:4px 6px;font-size:.69rem}}
 
 /* Focused clinical scenario retry */
@@ -146,7 +146,7 @@ html[data-theme=dark] .seminar-result-uncertain .seminar-result-flag{background:
 .seminar-retry-history-item>summary{cursor:pointer;font-size:.82rem;font-weight:700}
 .seminar-retry-archive{padding-top:11px;font-size:.81rem;line-height:1.5;overflow-wrap:anywhere}
 .seminar-retry-archive p{margin:6px 0}
-html[data-theme=dark] .seminar-retry-history,html[data-theme=dark] .seminar-retry-history-item{border-color:#45657a}
+html[data-theme=dark] .seminar-retry-history,html[data-theme=dark] .seminar-retry-history-item{border-color:#46694f}
 .seminar-exam{display:grid;gap:12px;max-width:790px}.seminar-exam-card h4{margin:0 0 8px;font-size:1.05rem}.seminar-exam-card p{margin:0 0 10px}
 .seminar-exam-head{display:flex;justify-content:space-between;gap:10px;font-weight:750;font-size:.85rem;color:var(--muted)}.seminar-exam-clock{font-variant-numeric:tabular-nums}.seminar-exam-clock.is-low{color:#b42318}
 .seminar-exam-bar{height:6px;border-radius:6px;background:var(--line);margin:8px 0 14px;overflow:hidden}.seminar-exam-bar span{display:block;height:100%;background:var(--navy);transition:width .2s}

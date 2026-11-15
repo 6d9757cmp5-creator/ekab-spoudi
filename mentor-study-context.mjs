@@ -20,7 +20,7 @@ if(topic){
   if(source){
    const back=document.createElement('a');back.href=new URL(source,new URL('./',import.meta.url)).href;
    back.textContent='← Επιστροφή στην εκπαιδευτική ενότητα';
-   back.style.cssText='font-weight:800;color:#075e78;display:inline-block;margin:4px 12px 7px 0;';
+   back.style.cssText='font-weight:800;color:#286237;display:inline-block;margin:4px 12px 7px 0;';
    panel.append(back);
   }
   hero.insertBefore(panel,hero.firstChild);

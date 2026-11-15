@@ -1,5 +1,5 @@
 /* PR #6: standalone, read-only visual index; no alteration of lesson content. */
-.saek-gallery-header{background:#153c54;color:#fff;padding:13px 18px}
+.saek-gallery-header{background:#1d3f26;color:#fff;padding:13px 18px}
 .saek-gallery-shell{max-width:1080px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .saek-gallery-header a{color:#fff;text-decoration:none;font-weight:650}
 .saek-gallery-back:focus-visible,.saek-gallery-home:focus-visible{outline:3px solid #ffce74;outline-offset:4px}
@@ -9,23 +9,23 @@
 .saek-gallery-intro{max-width:830px;line-height:1.55}
 .saek-gallery-filters{display:grid;grid-template-columns:1fr 1.4fr 1.6fr;gap:12px;margin:22px 0}
 .saek-gallery-filters label{display:flex;flex-direction:column;gap:5px;font-size:.86rem;font-weight:700}
-.saek-gallery-filters select,.saek-gallery-filters input{box-sizing:border-box;width:100%;font:inherit;font-size:.94rem;min-height:46px;padding:9px 11px;border:1px solid #a2bbcb;border-radius:10px;color:#193647;background:#fff}
+.saek-gallery-filters select,.saek-gallery-filters input{box-sizing:border-box;width:100%;font:inherit;font-size:.94rem;min-height:46px;padding:9px 11px;border:1px solid #9fc0a7;border-radius:10px;color:#1e3925;background:#fff}
 .saek-gallery-status{margin:14px 0;font-weight:650}
 .saek-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(218px,1fr));gap:14px}
-.saek-gallery-card{background:#fff;color:#193647;border:1px solid #cedce6;border-radius:13px;overflow:hidden;box-shadow:0 2px 7px #0d2a3b0a}
+.saek-gallery-card{background:#fff;color:#1e3925;border:1px solid #cbded0;border-radius:13px;overflow:hidden;box-shadow:0 2px 7px #132d1a0a}
 .saek-gallery-image-button{display:block;width:100%;padding:0;border:0;background:#f4f8fb;cursor:zoom-in}
 .saek-gallery-image-button img{display:block;width:100%;height:180px;object-fit:contain;background:#fff}
 .saek-gallery-card-body{padding:11px 13px}
-.saek-gallery-card h2{font-size:.98rem;line-height:1.36;margin:0 0 7px;color:#193647}
-.saek-gallery-card p{font-size:.82rem;line-height:1.42;margin:0 0 9px;color:#374f5d}
+.saek-gallery-card h2{font-size:.98rem;line-height:1.36;margin:0 0 7px;color:#1e3925}
+.saek-gallery-card p{font-size:.82rem;line-height:1.42;margin:0 0 9px;color:#37513e}
 .saek-gallery-card .saek-gallery-credit{font-size:.75rem}
-.saek-gallery-card a,.saek-gallery-dialog a{color:#0a5d88}
+.saek-gallery-card a,.saek-gallery-dialog a{color:#286338}
 .saek-gallery-more{text-align:center;margin:22px 0}
-.saek-gallery-more button,#imageRetryButton{min-height:44px;padding:10px 18px;border:1px solid #42789a;border-radius:10px;color:#fff;background:#165b80;cursor:pointer;font:inherit;font-weight:700}
-.saek-gallery-dialog{box-sizing:border-box;width:min(96vw,1080px);max-width:96vw;max-height:94vh;overflow:auto;padding:15px;background:#fff;color:#193647;border:0;border-radius:14px;box-shadow:0 14px 50px #0008}
-.saek-gallery-dialog::backdrop{background:#061827c9}
+.saek-gallery-more button,#imageRetryButton{min-height:44px;padding:10px 18px;border:1px solid #487d56;border-radius:10px;color:#fff;background:#276037;cursor:pointer;font:inherit;font-weight:700}
+.saek-gallery-dialog{box-sizing:border-box;width:min(96vw,1080px);max-width:96vw;max-height:94vh;overflow:auto;padding:15px;background:#fff;color:#1e3925;border:0;border-radius:14px;box-shadow:0 14px 50px #0008}
+.saek-gallery-dialog::backdrop{background:#0a1a0fc9}
 .saek-gallery-dialog-header{position:sticky;top:0;text-align:right;background:#fff;padding:4px 0;z-index:2}
-.saek-gallery-dialog-header button{min-height:44px;border-radius:10px;border:1px solid #7d9bad;background:#153c54;color:#fff;padding:8px 14px;cursor:pointer}
+.saek-gallery-dialog-header button{min-height:44px;border-radius:10px;border:1px solid #78a083;background:#1d3f26;color:#fff;padding:8px 14px;cursor:pointer}
 .saek-gallery-dialog img{display:block;max-height:64vh;max-width:100%;width:auto;height:auto;margin:0 auto;object-fit:contain}
 .saek-gallery-dialog h2{font-size:1.1rem}
 .saek-gallery-dialog p{line-height:1.5}
@@ -35,4 +35,4 @@
 @media(prefers-reduced-motion:reduce){.saek-gallery-main *{scroll-behavior:auto}}
 html[data-theme="dark"] .saek-gallery-image-button{background:#1d251e}
 html[data-theme="dark"] .saek-gallery-dialog-header{background:#202a21}
-html[data-theme="dark"] .saek-gallery-card a,html[data-theme="dark"] .saek-gallery-dialog a{color:#9fd3f0}
+html[data-theme="dark"] .saek-gallery-card a,html[data-theme="dark"] .saek-gallery-dialog a{color:#a1d8b0}

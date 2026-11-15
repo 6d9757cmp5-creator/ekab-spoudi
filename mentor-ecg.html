@@ -8,16 +8,16 @@
 <script src="theme-apply.js"></script>
 <link rel="stylesheet" href="mentor/styles/mentor-lab.css">
 <style>
-.ecg-optional{border:1px solid #b7d4d5;border-radius:13px;margin:14px 0;background:#edf8f7;color:#103d48;overflow:hidden}
+.ecg-optional{border:1px solid #bed3c4;border-radius:13px;margin:14px 0;background:#f1f7f3;color:#1b3f24;overflow:hidden}
 .ecg-optional>summary{cursor:pointer;padding:16px 19px;font-weight:800;line-height:1.35;min-height:50px}
-.ecg-optional>summary:focus-visible{outline:3px solid #169293;outline-offset:-3px}
+.ecg-optional>summary:focus-visible{outline:3px solid #3d9554;outline-offset:-3px}
 .ecg-optional>.ecg-panel{margin:0 12px 12px}
 #ecg-monitor-training{scroll-margin-top:20px}
 .ecg-wrap{max-width:1380px;margin:0 auto;padding:18px 16px 46px}
-.ecg-head{background:linear-gradient(125deg,#102e4a,#176a75);color:#fff;border-radius:18px;padding:25px 24px;margin:17px 0}
+.ecg-head{background:linear-gradient(125deg,#15331d,#2c6c3d);color:#fff;border-radius:18px;padding:25px 24px;margin:17px 0}
 .ecg-head h1{color:#fff;font-size:clamp(1.6rem,4vw,2.3rem);margin:6px 0}
-.ecg-head p{color:#dbedf2;line-height:1.55}
-.ecg-panel{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 4px 16px #102d4310}
+.ecg-head p{color:#deede2;line-height:1.55}
+.ecg-panel{border:1px solid var(--border);background:var(--surface);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 4px 16px #15301d10}
 .ecg-chart{background:#fbfcfb;border:1px solid #bad0cc;border-radius:13px;overflow:hidden}
 .ecg-chart svg{display:block;width:100%;height:auto}
 .ecg-controls{display:grid;grid-template-columns:1fr auto;gap:10px 20px;align-items:center}
@@ -35,7 +35,7 @@
 .ecg-key[hidden]{display:none}
 @media(max-width:650px){.ecg-head{padding:18px}.ecg-panel{padding:14px}.ecg-key{grid-template-columns:1fr}}
 
-html[data-theme="dark"] .ecg-optional{background:#12303a;color:#e3eef0;border-color:#2f5560}
+html[data-theme="dark"] .ecg-optional{background:#18311f;color:#e5efe8;border-color:#35573e}
 /* ECG paper in the dark theme: dark paper and light trace, colours otherwise kept. */
 html[data-theme="dark"] .ecg-chart svg{filter:invert(.92) hue-rotate(180deg)}
 </style>

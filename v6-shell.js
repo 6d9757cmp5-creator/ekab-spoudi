@@ -2,7 +2,9 @@
  'use strict';
  /* V6 shell for the inner pages: the same navigation as the home page (index.html), so every section
     keeps one look. The page's own content moves inside; its old header bars are hidden by v6-shell.css. */
- const page=location.pathname.split('/').pop()||'index.html';
+ // The site root is where this script lives, so pages in subfolders (ui-tools/anatomy-3d/) get the same menu.
+ const ROOT=new URL('./',document.currentScript?.src||location.href);
+ const page=location.pathname.startsWith(ROOT.pathname)?(location.pathname.slice(ROOT.pathname.length)||'index.html'):(location.pathname.split('/').pop()||'index.html');
  const ready=()=>document.dispatchEvent(new Event('ekab:v6-shell-ready'));
  if(page==='index.html'||document.querySelector('body.v6-home'))return ready();
  if(document.querySelector('.v6-page-shell'))return ready();
@@ -25,7 +27,7 @@
   ['index.html','home','Σήμερα',[]],
   ['saek.html','book','Μελέτη',['saek.html',/^saek-course-/,'saek-images.html','theory.html','eoppep.html','practical_exam.html','written_exam.html','exam_focus.html','apantiseis.html','anatomia.html','fysiologia.html','ektimisi.html','diasostis.html','dimosia_ygeia.html','agglika.html','pdf-library.html','eclass.html','piges.html']],
   ['supplementary_practice.html','target','Εξάσκηση',['supplementary_practice.html','saek-exams.html']],
-  ['tools.html','tools','Εργαλεία',['tools.html','paramedic.html','protocols.html',/^mentor-/,'study-plan.html','farmaka.html','profession-law.html','contacts.html','search.html','seminar-prep.html','manual.html','repair.html']],
+  ['tools.html','tools','Εργαλεία',['tools.html','paramedic.html','protocols.html',/^mentor-/,'study-plan.html','farmaka.html','profession-law.html','contacts.html','search.html','seminar-prep.html','manual.html','repair.html',/^ui-tools\//,/^tools\//]],
   ['progress-v6.html','progress','Πρόοδος',['progress-v6.html']]
  ];
  const active=items.find(x=>x[3].some(v=>v instanceof RegExp?v.test(page):v===page));
@@ -46,6 +48,9 @@
  top.querySelector('.v6-page-title b').textContent=title;
  const content=document.createElement('div');content.className='v6-page-content';
  for(const node of [...document.body.children].filter(n=>n.tagName!=='SCRIPT'))content.append(node);
+ // Menu links and search point at the site root, also from pages in subfolders.
+ for(const a of [side,top].flatMap(n=>[...n.querySelectorAll('a[href]')]))a.href=new URL(a.getAttribute('href'),ROOT).href;
+ top.querySelector('form').action=new URL('search.html',ROOT).href;
  main.append(top,content);shell.append(side,main);document.body.append(shell);document.body.classList.add('v6-page');
  const toggle=top.querySelector('.v6-shell-theme');
  const label=()=>{const dark=document.documentElement.dataset.theme==='dark';toggle.innerHTML=icon(dark?'sun':'moon')+`<span>${dark?'Ανοιχτή εμφάνιση':'Σκούρα εμφάνιση'}</span>`;toggle.setAttribute('aria-label',dark?'Ενεργοποίηση ανοιχτής εμφάνισης':'Ενεργοποίηση σκούρας εμφάνισης');};
