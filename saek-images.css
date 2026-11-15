@@ -33,3 +33,6 @@
 @media(max-width:720px){.saek-gallery-filters{grid-template-columns:1fr 1fr}.saek-gallery-filters label:last-child{grid-column:1/-1}}
 @media(max-width:460px){.saek-gallery-filters{grid-template-columns:1fr}.saek-gallery-filters label:last-child{grid-column:auto}.saek-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.saek-gallery-card-body{padding:9px}.saek-gallery-image-button img{height:145px}.saek-gallery-card h2{font-size:.89rem}}
 @media(prefers-reduced-motion:reduce){.saek-gallery-main *{scroll-behavior:auto}}
+html[data-theme="dark"] .saek-gallery-image-button{background:#1d251e}
+html[data-theme="dark"] .saek-gallery-dialog-header{background:#202a21}
+html[data-theme="dark"] .saek-gallery-card a,html[data-theme="dark"] .saek-gallery-dialog a{color:#9fd3f0}

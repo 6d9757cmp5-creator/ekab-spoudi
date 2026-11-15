@@ -2,7 +2,7 @@
 :root {
   color-scheme: light;
   --ink: #20372e;
-  --muted: #66776f;
+  --muted: #59695f;
   --line: #dfe7df;
   --bg: #f3f6f0;
   --navy: #193e33;
@@ -171,7 +171,7 @@ body:not(.v6-home) :is(.reader-main, .main.reader-main) {
 
 body:not(.v6-home) .ekab-next {
   --en-ink: #20372e;
-  --en-muted: #66776f;
+  --en-muted: #59695f;
   --en-primary: #287858;
   --en-border: #dfe7df;
   --en-soft: #e9f3e9;
@@ -385,3 +385,15 @@ html[data-theme="dark"] body:is(.v6-home,.v6-page) .ekab-notice-entry.is-unread 
 html[data-theme="dark"] body:is(.v6-home,.v6-page) :is(.ekab-notice-close,.ekab-notice-markall,.ekab-notice-read) {color:#b5e4bb!important}
 html[data-theme="dark"] body:is(.v6-home,.v6-page) .ekab-notice-action {background:#91cea0!important;color:#17231f!important}
 html[data-theme="dark"] body:not(.v6-home) .ekab-notes-editor-actions .ekab-notes-save {background:#91cea0!important;border-color:#91cea0!important;color:#17231f!important}
+/* Notes panel in the light theme: the surface is linen, so every text and field inside it gets the V6 ink. */
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(.ekab-notes-head p,.ekab-notes-status,.ekab-notes-fine,.ekab-note-empty,.ekab-note-meta,.ekab-notes-controls label,.ekab-notes-editor label,label[for="ekabNotesSearch"]) {color:#4f5f52!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(.ekab-notes-head h2,.ekab-note-title,.ekab-note-preview,.ekab-notes-editor h3) {color:#1f2a22!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog .ekab-notes-drag-hint {color:#7a5512!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(input,textarea,select) {background:#fff!important;color:#1f2a22!important;border-color:#b9c4b5!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(input,textarea)::placeholder {color:#66745f!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog .ekab-notes-tabs button[aria-pressed="true"] {background:#315f3d!important;border-color:#315f3d!important;color:#fff!important;box-shadow:none!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(#ekabNotesResetPosition,#ekabNotesHideFloating,#ekabNotesClose) {background:#e9eee2!important;border-color:#b9c4b5!important;color:#254c31!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog .ekab-note-card {box-shadow:inset 3px 0 0 #315f3d40!important}
+html:not([data-theme="dark"]) body.v6-home:not(.dark-mode) :is(.ekab-notes-head,.ekab-note-card) {background:var(--v6-surface)!important;border-color:var(--line)!important}
+html:not([data-theme="dark"]) body.v6-home:not(.dark-mode) .ekab-notes-dialog :is(.ekab-notes-chapter,.ekab-notes-tabs button:not([aria-pressed="true"]),.ekab-notes-new,.ekab-notes-more,.ekab-note-actions button,.ekab-note-actions a,.ekab-notes-visibility-toggle,.ekab-notes-visibility-fallback) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--v6-accent-strong)!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(input,textarea,select):focus-visible {outline:3px solid #77ac7d!important;outline-offset:1px}

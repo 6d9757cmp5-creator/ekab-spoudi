@@ -55,3 +55,4 @@ body .ekab-notes-fab{display:none!important}
 .aed-guideline-update{margin:12px 0 0;font-size:.85rem;line-height:1.5}
 .aed-guideline-update a{overflow-wrap:anywhere}
 @media(max-width:620px){.aed-poster-frame{height:490px}}
+html:not([data-theme="dark"]) .aed-compact-status[data-error="true"]{color:#a3322a}

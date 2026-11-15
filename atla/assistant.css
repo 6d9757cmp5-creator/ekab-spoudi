@@ -100,3 +100,18 @@
 /* 👍/👎 under model answers */
 .atla-feedback{display:flex;align-items:center;gap:6px;margin:2px 0 10px;font-size:.82rem;color:#4f6567}.atla-feedback-btn{min-width:44px;min-height:40px;border:1px solid #c9d8dd;border-radius:999px;background:#fff;cursor:pointer;font-size:1rem}.atla-feedback-btn:disabled{opacity:.55;cursor:default}html[data-theme="dark"] .atla-feedback{color:#b8d4d6}html[data-theme="dark"] .atla-feedback-btn{background:#173244;border-color:#41657a}
 .atla-book-source{margin:2px 0 6px;font-size:.8rem;color:#4f6567}.atla-book-source a{color:inherit}html[data-theme="dark"] .atla-book-source{color:#b8d4d6}
+
+/* Dark theme for the whole panel: header strip, context line, input row and footer follow the stream. */
+html[data-theme="dark"] .atla-panel{background:#0f2530;color:#e6f3f5;border-color:#2c5262}
+html[data-theme="dark"] .atla-context{background:#132c37;color:#cfe6ea;border-bottom-color:#24424f}
+html[data-theme="dark"] .atla-input{background:#132c37;color:#e6f3f5;border-color:#3a6474}
+html[data-theme="dark"] .atla-input::placeholder{color:#9fbcc3}
+html[data-theme="dark"] .atla-mic{background:#17333f;border-color:#3a6474;color:#e6f3f5}
+html[data-theme="dark"] .atla-footer button{background:#17333f;border-color:#3a6474;color:#d8f0f2}
+html[data-theme="dark"] .atla-footer label{color:#d8f0f2}
+html[data-theme="dark"] .atla-note{color:#b8d4d6;border-top-color:#24424f}
+html[data-theme="dark"] .atla-chip:hover,html[data-theme="dark"] .atla-chip:focus-visible{background:#1f4351}
+html[data-theme="dark"] .atla-demo-row{background:#3a2f12;color:#f3dfa8;border-color:#6b5524}
+html[data-theme="dark"] .atla-mock{background:#3a2f12!important;color:#f3dfa8!important}
+html[data-theme="dark"] .atla-home-callout{background:#17333f;color:#e6f3f5;border-color:#2c5262}
+html[data-theme="dark"] .atla-home-callout p{color:#b8d4d6}
