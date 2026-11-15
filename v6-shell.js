@@ -3,8 +3,9 @@
  /* V6 shell for the inner pages: the same navigation as the home page (index.html), so every section
     keeps one look. The page's own content moves inside; its old header bars are hidden by v6-shell.css. */
  const page=location.pathname.split('/').pop()||'index.html';
- if(page==='index.html'||document.querySelector('body.v6-home'))return;
- if(document.querySelector('.v6-page-shell'))return;
+ const ready=()=>document.dispatchEvent(new Event('ekab:v6-shell-ready'));
+ if(page==='index.html'||document.querySelector('body.v6-home'))return ready();
+ if(document.querySelector('.v6-page-shell'))return ready();
  const ICONS={
   home:'<path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9M9 21v-7h6v7"/>',
   book:'<path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H20v17H5.5A2.5 2.5 0 0 0 3 22z"/><path d="M3 5.5v14A2.5 2.5 0 0 1 5.5 17H20M8 7h8M8 10h7"/>',
@@ -49,5 +50,6 @@
  const toggle=top.querySelector('.v6-shell-theme');
  const label=()=>{const dark=document.documentElement.dataset.theme==='dark';toggle.innerHTML=icon(dark?'sun':'moon')+`<span>${dark?'Ανοιχτή εμφάνιση':'Σκούρα εμφάνιση'}</span>`;toggle.setAttribute('aria-label',dark?'Ενεργοποίηση ανοιχτής εμφάνισης':'Ενεργοποίηση σκούρας εμφάνισης');};
  label();
+ ready();
  toggle.addEventListener('click',()=>{const dark=document.documentElement.dataset.theme!=='dark';document.documentElement.dataset.theme=dark?'dark':'light';try{localStorage.setItem('ekab.theme.v1',dark?'dark':'light')}catch{};label();});
 })();
