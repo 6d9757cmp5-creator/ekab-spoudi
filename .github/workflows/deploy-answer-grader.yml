@@ -1,0 +1,58 @@
+name: Deploy answer grader
+# Deploys the AI answer grader (workers/answer-grader) when its code or rubrics change, and gives it the
+# free-provider keys already stored for ATLA, so grading falls back to Groq, Gemini or OpenRouter when
+# the Workers AI models are busy. Dashboard variables are kept (keep_vars in wrangler.jsonc).
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/answer-grader/**'
+      - 'functions/answer-grader/**'
+      - '.github/workflows/deploy-answer-grader.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-answer-grader
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Grader tests
+        working-directory: functions/answer-grader
+        run: node test.mjs
+      - name: Deploy
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: workers/answer-grader
+          wranglerVersion: "4.20.0"
+      - name: Free-provider keys
+        working-directory: workers/answer-grader
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          # Each key is copied into the Worker only if it exists as a repository secret.
+          for name in GROQ_API_KEY GEMINI_API_KEY OPENROUTER_API_KEY; do
+            if [ -n "${!name}" ]; then printf '%s' "${!name}" | npx --yes wrangler@4.20.0 secret put "$name"; else echo "$name: not set, skipped"; fi
+          done
+      - name: Smoke test
+        run: |
+          url=https://ekab-spoudi-answer-grader.6d9757cmp5.workers.dev/
+          origin=https://6d9757cmp5-creator.github.io
+          options=$(curl -s -o /dev/null -w '%{http_code}' -X OPTIONS "$url" -H "origin: $origin")
+          anonymous=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$url" -H "origin: $origin" -H 'content-type: application/json' \
+            -d '{"section":"eoppep","questionId":"EOP-A-001","answer":"δοκιμή"}')
+          echo "OPTIONS: $options, POST without login: $anonymous"
+          test "$options" = "204" && test "$anonymous" = "401"

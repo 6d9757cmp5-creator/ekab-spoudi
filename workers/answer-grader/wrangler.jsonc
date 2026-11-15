@@ -5,9 +5,15 @@
   "workers_dev": true,
   "ai": { "binding": "AI" },
   "observability": { "enabled": true },
+  // Keep variables already set in the Cloudflare dashboard when deploying from GitHub.
+  "keep_vars": true,
   "vars": {
     "APPWRITE_PROJECT_ID": "6ade83ec00260198ae34",
-    "APPWRITE_ENDPOINT": "https://fra.cloud.appwrite.io/v1"
+    "APPWRITE_ENDPOINT": "https://fra.cloud.appwrite.io/v1",
+    // The owner confirmed these keys are on free plans (15/11/2026).
+    "GROQ_FREE_PLAN_CONFIRMED": "true",
+    "GEMINI_FREE_PLAN_CONFIRMED": "true",
+    "OPENROUTER_FREE_MODEL": "google/gemma-4-31b-it:free"
   }
 }
 
