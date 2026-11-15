@@ -14,7 +14,11 @@
 .atlas-practice-disclaimer{font-size:.78rem;color:#486b74}
 .atlas-practice-answer:focus-visible,.atlas-practice-actions :focus-visible,.atlas-chapter-practice>summary:focus-visible{outline:3px solid #17abae;outline-offset:2px}
 @media(max-width:480px){.atlas-practice-actions{flex-direction:column}.atlas-practice-actions a,.atlas-practice-actions button{width:100%}}
-html[data-theme="dark"] .atlas-chapter-practice{background:#183744;color:#ecfbfd;border-color:#537a83}
-html[data-theme="dark"] .atlas-practice-answer{background:#122c36;color:#ecfbfd}
-html[data-theme="dark"] .atlas-practice-reference{background:#174a42;color:#e4fff7}
-html[data-theme="dark"] .atlas-practice-disclaimer{color:#bddce0}
+/* Dark theme in the V6 green palette of the site, buttons included. */
+html[data-theme="dark"] .atlas-chapter-practice{background:#202a21;color:#e3ece1;border-color:#3a483b}
+html[data-theme="dark"] .atlas-chapter-practice[open]>summary{border-bottom-color:#3a483b}
+html[data-theme="dark"] .atlas-practice-answer{background:#1d251e;color:#e3ece1;border-color:#3a483b}
+html[data-theme="dark"] :is(.atlas-practice-actions button,.atlas-practice-actions a){background:#243026;border-color:#4a5d4b;color:#d9e6d6}
+html[data-theme="dark"] .atlas-practice-actions .atlas-practice-atlas{background:#3d704b;border-color:#3d704b;color:#fff}
+html[data-theme="dark"] .atlas-practice-reference{background:#233127;color:#e3ece1}
+html[data-theme="dark"] .atlas-practice-disclaimer{color:#b9c9bd}
