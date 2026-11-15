@@ -57,9 +57,8 @@ html[data-theme="dark"] .v6-global-topbar{background:rgba(29,36,29,.96)}
  .v6-shell-theme span{display:none}
  .v6-page-content{padding:14px 10px 24px}
  .v6-page-content :is(.main,.ph-main,.seminar-main,.pm-main,.vs-container){padding-inline:0}
- /* Floating ATLA and notes buttons sit above the bottom bar, as on the home page. */
- body.v6-page .atla-launcher{bottom:calc(80px + env(safe-area-inset-bottom))!important}
- body.v6-page .ekab-notes-fab{bottom:calc(140px + env(safe-area-inset-bottom))!important}
+ /* The notes button sits above the bottom bar, as on the home page. */
+ body.v6-page .ekab-notes-fab{bottom:calc(80px + env(safe-area-inset-bottom))!important}
 }
 /* Whole cards that are links (tools page) read as cards, not as underlined text. */
 .v6-page-content a.panel{text-decoration:none;color:inherit}
