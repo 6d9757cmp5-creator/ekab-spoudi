@@ -74,5 +74,7 @@ export function choosePrimary(stats,goal=''){
  if(stats.resume?.href?.startsWith('saek-course-'))return {goal:'saek',...stats.saek.recommendation};
  if(stats.resume?.href?.startsWith('theory.html'))return {goal:'eoppep',...stats.eoppep.recommendation};
  if(stats.saek.examMistakes)return {goal:'saek',...stats.saek.recommendation};
+ if((stats.eoppep.read||0)+(stats.eoppep.attempted||0)>0&&
+    (stats.saek.read||0)+(stats.saek.attempted||0)===0)return {goal:'eoppep',...stats.eoppep.recommendation};
  return {goal:'saek',...stats.saek.recommendation};
 }
