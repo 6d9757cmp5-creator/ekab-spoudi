@@ -52,7 +52,7 @@
  top.querySelector('form').action=new URL('search.html',ROOT).href;
  main.append(top,content);shell.append(side,main);document.body.append(shell);document.body.classList.add('v6-page');
  const quickStyle=document.createElement('link');quickStyle.rel='stylesheet';quickStyle.href=new URL('quick-access.css?v=20261118-1',ROOT).href;document.head.append(quickStyle);
- const quickScript=document.createElement('script');quickScript.src=new URL('quick-access.js?v=20261118-1',ROOT).href;document.head.append(quickScript);
+ const quickScript=document.createElement('script');quickScript.src=new URL('quick-access.js?v=20261118-2',ROOT).href;document.head.append(quickScript);
  const toggle=top.querySelector('.v6-shell-theme');
  const label=()=>{const dark=document.documentElement.dataset.theme==='dark';toggle.innerHTML=icon(dark?'sun':'moon')+`<span>${dark?'Ανοιχτή εμφάνιση':'Σκούρα εμφάνιση'}</span>`;toggle.setAttribute('aria-label',dark?'Ενεργοποίηση ανοιχτής εμφάνισης':'Ενεργοποίηση σκούρας εμφάνισης');};
  label();

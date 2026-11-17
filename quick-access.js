@@ -31,7 +31,6 @@
   const byId = new Map(catalog.map(item => [item[0], item]));
   const pinsKey = 'ekab.quick-access.pins.v1';
   const visitsKey = 'ekab.quick-access.visits.v1';
-  const sessionKey = 'ekab.quick-access.session.v1';
   const element = (tag, className, value) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -48,9 +47,7 @@
     try {
       const stored = Number(localStorage.getItem(visitsKey));
       const previous = Number.isSafeInteger(stored) && stored > 0 ? stored : 0;
-      if (sessionStorage.getItem(sessionKey)) return previous || 1;
       const current = previous + 1;
-      sessionStorage.setItem(sessionKey, '1');
       localStorage.setItem(visitsKey, String(current));
       return current;
     } catch { return 1; }
