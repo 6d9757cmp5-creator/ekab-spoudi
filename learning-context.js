@@ -12,11 +12,12 @@
       ['saek-exams.html', 'practical_exam.html', 'supplementary_practice.html'].includes(file);
     document.body.dataset.learningSection = practice ? 'practice' : 'study';
     const main = document.querySelector('main, .main'); if (!main) return;
-    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'learning-hubs.css?v=20261117-1'; document.head.append(style);
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = 'learning-hubs.css?v=20261118-1'; document.head.append(style);
     const nav = document.createElement('nav'); nav.className = 'learning-context'; nav.setAttribute('aria-label', 'Μελέτη και εξάσκηση');
     const title = document.createElement('strong'); title.textContent = (practice ? 'Εξάσκηση' : 'Μελέτη') + ' · ' + (saek ? 'ΣΑΕΚ' : seminar ? 'Σεμινάρια' : 'ΕΟΠΠΕΠ');
     nav.append(title);
     for (const [mode, label] of [['study', 'Μελέτη'], ['practice', 'Εξάσκηση']]) {
+      if ((mode === 'practice') === practice) continue;
       const a = document.createElement('a'); a.textContent = label;
       a.href = seminar && /^#(bls|pbls|ils|phtls|als)$/.test(location.hash) ? 'seminar-prep.html?section=' + mode + location.hash :
         mode === 'practice' ? type === 'saek' ? 'saek-exams.html' : type === 'eoppep' ? 'theory.html?mode=exam&section=practice' : 'practice.html?type=seminars' : 'study.html?type=' + type;
@@ -30,9 +31,10 @@
     if (practice) {
       const types = document.createElement('nav'); types.className = 'learning-tabs'; types.setAttribute('aria-label', 'Επιλογή εξάσκησης');
       for (const [id, label, href] of [['saek', 'ΣΑΕΚ ΕΚΑΒ', 'saek-exams.html'], ['eoppep', 'ΕΟΠΠΕΠ', 'theory.html?mode=exam&section=practice'], ['seminars', 'Σεμινάρια', 'practice.html?type=seminars']]) {
-        const a = document.createElement('a'); a.textContent = label; a.href = href;
-        if (id === type) a.setAttribute('aria-current', 'page');
-        types.append(a);
+        const current = id === type;
+        const item = document.createElement(current ? 'span' : 'a'); item.textContent = label;
+        if (current) item.setAttribute('aria-current', 'page'); else item.href = href;
+        types.append(item);
       }
       nav.after(types);
     }

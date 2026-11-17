@@ -82,4 +82,4 @@ function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.sr
 })();
 
 /* Shared reading/practice navigation, without another scoring or progress store. */
-(function(){const file=location.pathname.split('/').pop();if(/^(saek-course-\d{2}|saek|saek-exams|theory|eoppep|practical_exam|supplementary_practice|seminar-prep)\.html$/.test(file)){const script=document.createElement('script');script.src=ekabAt('learning-context.js?v=20261117-2');document.head.append(script);}})();
+(function(){const file=location.pathname.split('/').pop();if(/^(saek-course-\d{2}|saek|saek-exams|theory|eoppep|practical_exam|supplementary_practice|seminar-prep)\.html$/.test(file)){const script=document.createElement('script');script.src=ekabAt('learning-context.js?v=20261118-1');document.head.append(script);}})();
