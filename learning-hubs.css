@@ -4,3 +4,5 @@
 body[data-learning-section="study"] [data-seminar-tab]:not([data-seminar-tab="theory"]),body[data-learning-section="practice"] [data-seminar-tab="theory"]{display:none!important}
 
 #study[data-supplementary] > :not(#supplementaryPanel){display:none!important}.supplementary-mixed-options{display:grid;gap:10px;margin:15px 0}.supplementary-mixed-options button{text-align:left;white-space:normal}#supplementaryPanel>button{margin:12px 8px 0 0}
+
+body[data-learning-section="study"] .knowledge-check{display:none!important}

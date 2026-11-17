@@ -19,6 +19,10 @@
     for (const [mode, label] of [['study', 'Μελέτη'], ['practice', 'Εξάσκηση']]) {
       const a = document.createElement('a'); a.textContent = label;
       a.href = seminar && /^#(bls|pbls|ils|phtls|als)$/.test(location.hash) ? 'seminar-prep.html?section=' + mode + location.hash : mode + '.html?type=' + type;
+      const course = /^saek-course-(\d{2})\.html$/.exec(file)?.[1] || params.get('course');
+      if (saek && /^(0[1-9]|1\d|20)$/.test(course || '')) {
+        a.href = mode === 'study' ? 'saek-course-' + course + '.html' : 'saek-exams.html?course=' + course;
+      }
       nav.append(a);
     }
     main.prepend(nav);
