@@ -20,25 +20,28 @@ function crossLink(courses = '') {
 crossLink();
 
 if (type === 'saek') {
-  content.append(node('h2', study ? 'Μαθήματα ΣΑΕΚ' : 'Τεστ και διαγωνίσματα ΣΑΕΚ'));
-  const label = node('label', 'Εξάμηνο'); label.htmlFor = 'hub-semester';
-  const select = node('select'); select.id = 'hub-semester';
-  for (const value of ['all', 'Α', 'Β', 'Γ', 'Δ']) {
-    const option = node('option', value === 'all' ? 'Όλα τα εξάμηνα' : value + '΄ εξάμηνο'); option.value = value; select.append(option);
-  }
-  const list = node('div', null, 'learning-courses');
-  function courses() {
-    list.replaceChildren();
-    if (!study) list.append(link('Όλα τα μαθήματα · ρυθμίσεις εξέτασης', 'saek-exams.html'));
-    for (const course of SAEK_COURSES.filter(c => select.value === 'all' || c.semester === select.value)) {
-      const card = node('article', null, 'learning-course');
-      card.append(node('h3', course.title), node('p', course.semester + '΄ εξάμηνο · ' + course.chapters + ' κεφάλαια'),
-        link(study ? 'Μελέτη μαθήματος' : 'Εξάσκηση μαθήματος', study ? 'saek-course-' + course.id + '.html#lesson-1' :
-          'saek-exams.html?semester=' + encodeURIComponent(course.semester) + '&course=' + course.id));
-      list.append(card);
+  content.append(node('h2', study ? 'Μαθήματα ΣΑΕΚ' : 'Εξάσκηση ΣΑΕΚ'));
+  if (!study) {
+    content.append(node('p', 'Διάλεξε εξάμηνο, μάθημα, αριθμό ερωτήσεων και δυσκολία στην επόμενη σελίδα.'),
+      link('Άνοιγμα εξετάσεων ΣΑΕΚ', 'saek-exams.html'));
+  } else {
+    const label = node('label', 'Εξάμηνο'); label.htmlFor = 'hub-semester';
+    const select = node('select'); select.id = 'hub-semester';
+    for (const value of ['all', 'Α', 'Β', 'Γ', 'Δ']) {
+      const option = node('option', value === 'all' ? 'Όλα τα εξάμηνα' : value + '΄ εξάμηνο'); option.value = value; select.append(option);
     }
+    const list = node('div', null, 'learning-courses');
+    function courses() {
+      list.replaceChildren();
+      for (const course of SAEK_COURSES.filter(c => select.value === 'all' || c.semester === select.value)) {
+        const card = node('article', null, 'learning-course');
+        card.append(node('h3', course.title), node('p', course.semester + '΄ εξάμηνο · ' + course.chapters + ' κεφάλαια'),
+          link('Μελέτη μαθήματος', 'saek-course-' + course.id + '.html#lesson-1'));
+        list.append(card);
+      }
+    }
+    select.addEventListener('change', courses); content.append(label, select, list); courses();
   }
-  select.addEventListener('change', courses); content.append(label, select, list); courses();
 } else if (type === 'eoppep') {
   content.append(node('h2', '314 επίσημες ερωτήσεις ΕΟΠΠΕΠ'), node('p', '105 γενικές και 209 ειδικές ερωτήσεις.'));
   if (study) {
