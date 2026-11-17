@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f6f8f7">
   <title>ΕΚΑΒ Σπουδή · Ακαδημαϊκός χώρος</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="v6-subsections.css?v=27.1.171">
-  <link rel="stylesheet" href="home-v6.css?v=27.1.171">
+  <link rel="stylesheet" href="home-v6.css?v=27.1.171"><link rel="stylesheet" href="quick-access.css?v=20261118-1">
 </head>
 <body class="v6-home">
 <a class="skip-link" href="#content">Μετάβαση στο κύριο περιεχόμενο</a>
@@ -17,7 +17,7 @@
       <a href="saek-exams.html" data-nav="practice"><span class="navicon"><svg class="icon"><use href="#i-target"/></svg></span><span class="nav-text">Εξάσκηση</span></a>
       <a href="tools.html" data-nav="resources"><span class="navicon"><svg class="icon"><use href="#i-tools"/></svg></span><span class="nav-text">Εργαλεία</span></a>
       <a href="progress-v6.html" data-nav="progress"><span class="navicon"><svg class="icon"><use href="#i-progress"/></svg></span><span class="nav-text">Πρόοδος</span></a>
-      </nav>
+      </nav><section class="ekab-quick-access" data-ekab-quick-access></section>
       <button class="sidebar-account" type="button" data-route="progress" aria-label="Άνοιγμα λογαριασμού και προόδου"><span class="account-avatar">Κ</span><span class="account-copy"><b>Κωνσταντίνος</b><small>Ο λογαριασμός μου</small></span><span class="account-arrow" aria-hidden="true">↗</span></button>
     </div></header><div class="maincol"><div class="topbar"><div class="topbar-inner"><div class="crumb" id="breadcrumb"></div><div class="header-tools"><label class="global-search"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><input id="globalSearch" type="search" placeholder="Αναζήτησε σε μαθήματα, ερωτήσεις, εργαλεία…" aria-label="Αναζήτηση σε όλη την εφαρμογή"> <kbd>Ctrl K</kbd></label><span class="edition-active-label">ΕΚΔΟΣΗ 6 · ΑΚΑΔΗΜΑΪΚΗ ΔΙΑΤΑΞΗ</span><button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"><svg class="icon" id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg><span id="themeLabel">Σκούρα εμφάνιση</span></button></div></div></div><main class="content" id="content" tabindex="-1"></main>
   </div>
@@ -74,5 +74,5 @@ document.addEventListener('click',e=>{const target=e.target.closest('[data-route
 document.addEventListener('click',e=>{if(!document.body.classList.contains('contents-open')||e.target.closest('#readerIndex,.contents-toggle'))return;document.body.classList.remove('contents-open');const toggle=document.querySelector('.contents-toggle');if(toggle){toggle.setAttribute('aria-expanded','false');toggle.querySelector('.contents-label').textContent='Περιεχόμενα'}});
 document.querySelector('#globalSearch').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim()){state.searchFilter='Όλα';go('search?q='+encodeURIComponent(e.target.value.trim()))}});document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus()}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();const localFinder=document.querySelector('#chapterSearch');const readerSelect=document.querySelector('#readerJump');(readerSelect||localFinder||search).focus()}});const sidebar=document.querySelector('#sidebar');sidebar.addEventListener('click',e=>{if(e.target.closest('a'))document.body.classList.remove('mobile-open')});window.addEventListener('hashchange',render);if(!location.hash)location.hash='/home';else render();
 </script>
-<script src="study-scheduler.js"></script><link rel="stylesheet" href="learning-hubs.css?v=20261117-1"><script src="study-resume.js?v=20261117-1" defer></script><script type="module" src="home-activity.mjs?v=20261117-1"></script><script src="updates.js?v=27.1.132" defer></script></body>
+<script src="study-scheduler.js"></script><link rel="stylesheet" href="learning-hubs.css?v=20261117-1"><script src="study-resume.js?v=20261117-1" defer></script><script type="module" src="home-activity.mjs?v=20261117-1"></script><script src="quick-access.js?v=20261118-1"></script><script src="updates.js?v=27.1.132" defer></script></body>
 </html>

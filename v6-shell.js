@@ -36,8 +36,7 @@
  side.innerHTML='<a class="v6-shell-brand" href="index.html"><span class="v6-shell-brand-mark" aria-hidden="true">✚</span><span><b>ΕΚΑΒ Σπουδή</b><small>Προσωπικός χώρος μάθησης</small></span></a>'
   +'<div class="v6-shell-label">ΠΛΟΗΓΗΣΗ</div><nav class="v6-shell-nav" aria-label="Κύρια πλοήγηση">'
   +items.map(it=>`<a href="${it[0]}"${it===active?' aria-current="page"':''}>${icon(it[1])}<span>${it[2]}</span></a>`).join('')
-  +'</nav><div class="v6-shell-tools"><div class="v6-shell-label">ΓΡΗΓΟΡΗ ΠΡΟΣΒΑΣΗ</div>'
-  +`<a href="study-plan.html">${icon('calendar')}<span>Ημερολόγιο εξετάσεων</span></a><a href="study.html?type=seminars">${icon('cross')}<span>Σεμινάρια</span></a><a href="contacts.html">${icon('phone')}<span>Επικοινωνία & AED</span></a></div>`
+  +'</nav><section class="ekab-quick-access" data-ekab-quick-access></section>'
   +'<a class="v6-shell-account" href="progress-v6.html"><span class="v6-shell-avatar" aria-hidden="true">Ε</span><span><b>Λογαριασμός & πρόοδος</b><small>Συσκευή και συγχρονισμός</small></span></a>';
  const main=document.createElement('div');main.className='v6-global-main';
  const top=document.createElement('header');top.className='v6-global-topbar';
@@ -52,6 +51,8 @@
  for(const a of [side,top].flatMap(n=>[...n.querySelectorAll('a[href]')]))a.href=new URL(a.getAttribute('href'),ROOT).href;
  top.querySelector('form').action=new URL('search.html',ROOT).href;
  main.append(top,content);shell.append(side,main);document.body.append(shell);document.body.classList.add('v6-page');
+ const quickStyle=document.createElement('link');quickStyle.rel='stylesheet';quickStyle.href=new URL('quick-access.css?v=20261118-1',ROOT).href;document.head.append(quickStyle);
+ const quickScript=document.createElement('script');quickScript.src=new URL('quick-access.js?v=20261118-1',ROOT).href;document.head.append(quickScript);
  const toggle=top.querySelector('.v6-shell-theme');
  const label=()=>{const dark=document.documentElement.dataset.theme==='dark';toggle.innerHTML=icon(dark?'sun':'moon')+`<span>${dark?'Ανοιχτή εμφάνιση':'Σκούρα εμφάνιση'}</span>`;toggle.setAttribute('aria-label',dark?'Ενεργοποίηση ανοιχτής εμφάνισης':'Ενεργοποίηση σκούρας εμφάνισης');};
  label();
