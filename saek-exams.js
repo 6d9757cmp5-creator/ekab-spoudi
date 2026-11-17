@@ -18,7 +18,7 @@ function coursesMenu(){
 }
 function updateSetup(){
  const qs=scope($('examSemester').value,$('examCourse').value),stats=E.getLevel(state.history,qs);
- const estimate=stats.total<8?'Αρχικό · ανεπαρκή δεδομένα':'Εκτίμηση: '+stats.label+' · '+Math.round(stats.ratio*100)+'% σε '+stats.total+' προσπάθειες';
+ const estimate=stats.total<8?'Εκτίμηση επιπέδου μετά από 8 αξιολογημένες απαντήσεις · απομένουν '+(8-stats.total):'Εκτίμηση: '+stats.label+' · '+Math.round(stats.ratio*100)+'% σε '+stats.total+' προσπάθειες';
  $('examLevel').textContent=estimate;
  $('examPoolInfo').textContent=qs.length+' διαθέσιμες ερωτήσεις από πραγματικά κεφάλαια ΣΑΕΚ'+(qs.length<Number($('examCount').value)?' · η εξέταση θα περιέχει '+qs.length+' ερωτήσεις':'')+'.';
  $('examStart').disabled=qs.length===0||requestPending;
