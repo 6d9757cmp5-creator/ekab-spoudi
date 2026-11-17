@@ -258,3 +258,7 @@ html[data-theme="dark"] .plan-exam{background:#172d1d;border-color:#34573d}html[
 
 /* Header icon captions on wide screens (UX review #30). */
 @media (min-width:1000px){header.top .utility [data-caption]{width:auto!important;min-width:40px;padding:0 12px!important;display:inline-flex;align-items:center;gap:6px}header.top .utility [data-caption]::after{content:attr(data-caption);font-size:.82rem;font-weight:650;white-space:nowrap}}
+
+/* V6 global search results stay anchored in the current page. */
+.header-tools .saek-global-results,.v6-global-topbar .saek-global-results{left:auto;right:0;width:min(500px,calc(100vw - 28px));}
+@media(max-width:720px){.header-tools .saek-global-results,.v6-global-topbar .saek-global-results{right:0;width:min(500px,calc(100vw - 20px));}}

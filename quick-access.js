@@ -23,7 +23,6 @@
     ['ecg', 'mentor-ecg.html', 'Εργαστήριο ΗΚΓ'],
     ['protocols', 'protocols.html', 'Θέματα επειγόντων'],
     ['oral', 'mentor-oral.html', 'Προφορική εξάσκηση'],
-    ['mentor', 'mentor-lab.html', 'MENTOR'],
     ['bibliography', 'mentor-library.html', 'Βιβλιογραφία'],
     ['law', 'profession-law.html', 'Επάγγελμα & νομοθεσία'],
     ['pdf', 'pdf-library.html', 'Βιβλιοθήκη PDF']

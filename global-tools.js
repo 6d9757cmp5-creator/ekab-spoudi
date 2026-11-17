@@ -111,6 +111,51 @@ function pickDiverse(found,limit){
  for(const entry of found){if(list.length>=limit)break;if(!used.has(entry))list.push(entry)}
  return list;
 }
+window.EkabGlobalSearch={async query(query,category='Όλα'){
+ let found=find(query,await loadSearch());
+ if(category==='Μαθήματα')found=found.filter(item=>item.kind==='saek');
+ else if(category==='Ερωτήσεις')found=found.filter(item=>item.kind==='eoppep');
+ else if(category==='Σεμινάρια')found=found.filter(item=>item.kind==='seminar');
+ else if(category==='Φάρμακα')found=found.filter(item=>item.href.startsWith('farmaka.html'));
+ else if(category==='Εργαλεία')found=found.filter(item=>['practice','practical'].includes(item.kind)||(item.kind==='page'&&!item.href.startsWith('farmaka.html')));
+ return pickDiverse(found,30);
+}};
+window.dispatchEvent(new Event('ekab:global-search-ready'));
+function mountV6Search(){
+ const inputs=[...document.querySelectorAll('#globalSearch,.v6-global-search input')];
+ for(const input of inputs){
+  if(input.dataset.ekabInlineSearch==='ready')continue;
+  const host=input.closest('.header-tools,.v6-global-topbar');if(!host)continue;
+  input.dataset.ekabInlineSearch='ready';host.style.position='relative';
+  const results=el('div','saek-global-results');results.hidden=true;results.setAttribute('aria-live','polite');host.append(results);
+  let request=0,links=[];
+  const render=()=>{
+   const q=input.value.trim(),token=++request;results.replaceChildren();links=[];
+   if(!q){results.hidden=true;return}
+   results.append(el('p','saek-result-empty','Αναζήτηση…'));results.hidden=false;
+   window.EkabGlobalSearch.query(q,'Όλα').then(found=>{
+    if(token!==request||!input.isConnected)return;
+    results.replaceChildren();
+    if(!found.length)results.append(el('p','saek-result-empty','Δεν βρέθηκαν αποτελέσματα. Δοκίμασε άλλη λέξη.'));
+    else{
+     results.append(el('p','saek-result-count',found.length+' αποτελέσματα · ΕΚΑΒ Σπουδή'));
+     for(const item of found.slice(0,6)){const link=resultLink(item);results.append(link);links.push(link)}
+    }
+    results.hidden=false;
+   }).catch(()=>{if(token===request){results.replaceChildren(el('p','saek-result-empty','Η αναζήτηση δεν φορτώθηκε. Έλεγξε τη σύνδεση.'));results.hidden=false}});
+  };
+  input.addEventListener('input',render);input.addEventListener('focus',()=>{if(input.value.trim())render()});
+  input.addEventListener('keydown',event=>{
+   if(event.key==='Enter'){event.preventDefault();render()}
+   if(event.key==='Escape'){results.hidden=true;links=[]}
+   if(event.key==='ArrowDown'&&links.length){event.preventDefault();links[0].focus()}
+  });
+  document.addEventListener('pointerdown',event=>{if(!host.contains(event.target)){results.hidden=true;links=[]}});
+ }
+}
+window.addEventListener('ekab:global-search-mounted',mountV6Search);
+mountV6Search();
+
 function resultLink(item){
  const link=el('a','saek-result-item');
  link.href=item.href;
@@ -200,7 +245,7 @@ function installSearch(){
  filter.addEventListener('change',()=>{pageLink(input.value.trim());render()});
  input.addEventListener('keydown',e=>{
   if(e.key==='Escape'){e.preventDefault();close();toggle.focus()}
-  if(e.key==='Enter'&&input.value.trim()){e.preventDefault();pageLink(input.value.trim());location.href=all.href}
+  if(e.key==='Enter'&&input.value.trim()){e.preventDefault();render()}
   if(e.key==='ArrowDown'&&links.length){e.preventDefault();links[0].focus()}
  });
  results.addEventListener('keydown',e=>{

@@ -15,6 +15,7 @@
   tools:'<path d="M4 7h16M4 12h10M4 17h7"/><circle cx="18" cy="12" r="2"/><circle cx="15" cy="17" r="2"/>',
   progress:'<path d="M4 19V5M4 19h17"/><path d="m7 15 4-4 3 2 6-7"/><path d="M16 6h4v4"/>',
   search:'<circle cx="10.8" cy="10.8" r="7"/><path d="m16 16 5 5"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
   moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
@@ -37,22 +38,22 @@
   +'<div class="v6-shell-label">ΠΛΟΗΓΗΣΗ</div><nav class="v6-shell-nav" aria-label="Κύρια πλοήγηση">'
   +items.map(it=>`<a href="${it[0]}"${it===active?' aria-current="page"':''}>${icon(it[1])}<span>${it[2]}</span></a>`).join('')
   +'</nav><section class="ekab-quick-access" data-ekab-quick-access></section>'
-  +'<a class="v6-shell-account" href="progress-v6.html"><span class="v6-shell-avatar" aria-hidden="true">Ε</span><span><b>Λογαριασμός & πρόοδος</b><small>Συσκευή και συγχρονισμός</small></span></a>';
+  +'<button class="v6-shell-account" type="button" data-account-open aria-label="Άνοιγμα λογαριασμού και συγχρονισμού"><span class="v6-shell-avatar" aria-hidden="true">Ε</span><span><b>Λογαριασμός</b><small>Σύνδεση και συγχρονισμός</small></span></button>';
  const main=document.createElement('div');main.className='v6-global-main';
  const top=document.createElement('header');top.className='v6-global-topbar';
  // Page name for the breadcrumb: the first part of the title that is not the site name.
  const parts=document.title.split(/\s[—·|–-]\s|\|/).map(s=>s.trim()).filter(s=>s&&!/^ΕΚΑΒ Σπουδή$|^ATLA$/i.test(s));
  const title=parts[0]||document.querySelector('main h1, h1')?.textContent?.trim()||'ΕΚΑΒ Σπουδή';
- top.innerHTML=`<div class="v6-page-title">Ακαδημαϊκός χώρος / <b></b></div><form class="v6-global-search" role="search" action="search.html">${icon('search')}<input type="search" name="q" placeholder="Αναζήτησε σε μαθήματα, ερωτήσεις, εργαλεία" aria-label="Αναζήτηση"></form><button class="v6-shell-theme" type="button"></button>`;
+ top.innerHTML=`<div class="v6-page-title"><b></b></div><form class="v6-global-search" role="search"><button class="v6-search-submit" type="submit" aria-label="Αναζήτηση">${icon('search')}</button><input type="search" name="q" placeholder="Αναζήτηση σε όλη την εφαρμογή" aria-label="Αναζήτηση"></form><button class="v6-shell-mobile-account" type="button" data-account-open aria-label="Άνοιγμα λογαριασμού και συγχρονισμού">${icon('user')}</button><button class="v6-shell-theme" type="button"></button>`;
  top.querySelector('.v6-page-title b').textContent=title;
  const content=document.createElement('div');content.className='v6-page-content';
  for(const node of [...document.body.children].filter(n=>n.tagName!=='SCRIPT'))content.append(node);
  // Menu links and search point at the site root, also from pages in subfolders.
  for(const a of [side,top].flatMap(n=>[...n.querySelectorAll('a[href]')]))a.href=new URL(a.getAttribute('href'),ROOT).href;
- top.querySelector('form').action=new URL('search.html',ROOT).href;
- main.append(top,content);shell.append(side,main);document.body.append(shell);document.body.classList.add('v6-page');
- const quickStyle=document.createElement('link');quickStyle.rel='stylesheet';quickStyle.href=new URL('quick-access.css?v=20261118-1',ROOT).href;document.head.append(quickStyle);
- const quickScript=document.createElement('script');quickScript.src=new URL('quick-access.js?v=20261118-2',ROOT).href;document.head.append(quickScript);
+ top.querySelector('form').addEventListener('submit',event=>{event.preventDefault();const input=top.querySelector('input[name="q"]');if(input.value.trim()){input.focus();input.dispatchEvent(new Event('input',{bubbles:true}));}});
+ main.append(top,content);shell.append(side,main);document.body.append(shell);document.body.classList.add('v6-page');window.dispatchEvent(new Event('ekab:global-search-mounted'));
+ const quickStyle=document.createElement('link');quickStyle.rel='stylesheet';quickStyle.href=new URL('quick-access.css?v=20261118-2',ROOT).href;document.head.append(quickStyle);
+ const quickScript=document.createElement('script');quickScript.src=new URL('quick-access.js?v=20261118-3',ROOT).href;document.head.append(quickScript);
  const toggle=top.querySelector('.v6-shell-theme');
  const label=()=>{const dark=document.documentElement.dataset.theme==='dark';toggle.innerHTML=icon(dark?'sun':'moon')+`<span>${dark?'Ανοιχτή εμφάνιση':'Σκούρα εμφάνιση'}</span>`;toggle.setAttribute('aria-label',dark?'Ενεργοποίηση ανοιχτής εμφάνισης':'Ενεργοποίηση σκούρας εμφάνισης');};
  label();

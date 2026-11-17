@@ -23,22 +23,24 @@ export function loginWithGoogle() {
 export function initAccountUI() {
   if (initialized) return;
   initialized = true;
-  let trigger = document.querySelector('[data-account-open]');
-  if (!trigger) {
+  let triggers = [...document.querySelectorAll('[data-account-open]')];
+  if (!triggers.length) {
     const host = document.querySelector('.header-row .utility, .top .utility');
-    if (!host) return;
-    trigger = document.createElement('button');
+    if (host) {
+    const trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'account-button';
     trigger.setAttribute('data-account-open', '');
     trigger.textContent = 'Σύνδεση';
     host.prepend(trigger);
+    triggers = [trigger];
+    }
   }
-  // The button shows only on the home page; elsewhere it stays hidden so sync still starts.
-  if (!/(?:^|\/)(?:index\.html)?$/.test(window.location.pathname)) trigger.style.display = 'none';
-  trigger.setAttribute('aria-haspopup', 'dialog');
-  trigger.setAttribute('aria-controls', 'accountDialog');
-  trigger.disabled = false;
+  for (const trigger of triggers) {
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.setAttribute('aria-controls', 'accountDialog');
+    trigger.disabled = false;
+  }
   const dialog = document.createElement('dialog');
   let syncManager = null;
   dialog.id = 'accountDialog';
@@ -119,7 +121,6 @@ export function initAccountUI() {
     }catch { panel.querySelector('[data-cloud-status]').textContent='Ο συγχρονισμός δεν είναι διαθέσιμος. Η τοπική αποθήκευση συνεχίζεται.'; }
   }
   function paint() {
-    trigger.textContent = 'Λογαριασμός';
     login.hidden = Boolean(user);
     login.disabled = !cloudFeatures.googleLogin;
     logout.hidden = !user;
@@ -129,7 +130,7 @@ export function initAccountUI() {
         ? 'Συνδέσου με τον λογαριασμό σου Google.'
         : 'Η σύνδεση Google είναι σε προετοιμασία. Μπορείς να συνεχίσεις κανονικά τη μελέτη σου χωρίς λογαριασμό.';
   }
-  trigger.addEventListener('click', () => {
+  const openAccount = () => {
     paint();
     paintRecallSettings();
     const version=window.EkabUpdates?.version;
@@ -137,6 +138,14 @@ export function initAccountUI() {
     dialog.showModal();
     window.EkabProgress?.checkpoint().catch(()=>{});
     window.EkabUpdates?.check?.();
+  };
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-account-open]');
+    if (!trigger) return;
+    event.preventDefault();
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.setAttribute('aria-controls', 'accountDialog');
+    openAccount();
   });
   dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });

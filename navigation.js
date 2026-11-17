@@ -30,7 +30,7 @@ function init(){
  if(!home&&!document.querySelector('[data-ekab-back]')&&(spot||!document.querySelector('header.top .nav'))){const b=make('button','ekab-nav-back','← Πίσω');b.type='button';b.dataset.ekabBack='';const fallback=spot?.getAttribute('href');b.addEventListener('click',()=>back(fallback));if(spot){b.classList.add('inline');spot.before(b);spot.style.display='none'}else root().prepend(b)}
  // A page that already has its own back button keeps only that one.
  if(spot&&spot.style.display!=='none'&&document.querySelector('[data-ekab-back]'))spot.style.display='none';
- if(!backOnly&&!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}
+ if(!backOnly&&!home&&!document.querySelector('.ekab-manual-link')){const a=make('a','ekab-manual-link','ⓘ Οδηγός εφαρμογής');a.href='manual.html';(document.querySelector('footer')||root()).append(' ',a)}
  let start=null;
  document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];start=t.clientX<25?{x:t.clientX,y:t.clientY,target:e.target}:null},{passive:true});
  document.addEventListener('touchcancel',()=>{start=null},{passive:true});

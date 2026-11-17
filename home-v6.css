@@ -396,3 +396,21 @@ body.dark-mode .v6-overline,body.dark-mode [data-atla-goal]{color:#a9c19b}
 body.dark-mode .v6-quiet-link{color:#b3cfa5}
 body.dark-mode .v6-atla-link,body.dark-mode .v6-plan-link,body.dark-mode [data-atla-read]{color:#b3cfa5}
 @media(max-width:720px){body.dark-mode .sidebar{background:#191f19!important;border-top-color:#2c362c!important;box-shadow:none!important}}
+/* Cleaner study home, inline search, and the supplied presidential flag watermark. */
+:root .home-account-mobile{display:none;width:36px;height:36px;flex:none;place-items:center;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--paper,#fffefa);color:var(--green,#3d704b)}
+.home-account-mobile .icon{width:17px;height:17px}
+.global-search .icon{width:17px;height:17px;flex:none}
+.theme-toggle span{display:none!important}.theme-toggle{width:36px;min-width:36px;justify-content:center;padding:0!important}.theme-toggle .icon{width:16px;height:16px}
+.v6-welcome-mark{position:relative;overflow:visible}
+.v6-flag-outline{position:absolute;z-index:0;right:-14px;top:-14px;width:104px;height:104px;background:currentColor;color:#527850;opacity:.12;pointer-events:none;-webkit-mask:url('assets/brand/presidential-flag.svg') center/contain no-repeat;mask:url('assets/brand/presidential-flag.svg') center/contain no-repeat}
+.v6-welcome-mark>span:not(.v6-flag-outline),.v6-welcome-mark>b,.v6-welcome-mark>small{position:relative;z-index:1}
+body.dark-mode .v6-flag-outline{color:#e1d18e;opacity:.2}
+.search-page-field{width:min(100%,650px);height:46px;margin:4px 0 12px}
+.search-filters{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.search-results{display:grid;gap:9px;max-width:940px}
+.search-result-count{margin:0 0 2px;color:var(--sub);font-size:12px;font-weight:700}
+.search-results .result{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none;color:inherit}
+.search-results .result>span:first-child{min-width:0;display:grid;gap:4px}
+.search-results .result b{font-size:14px}.search-results .result small{display:block;color:var(--sub);font-size:11px;line-height:1.45}
+.search-results .result .search-preview{max-width:760px}
+@media(max-width:720px){.home-account-mobile{display:grid}.search-page-field{height:42px}.search-results .result{align-items:flex-start;padding:12px}.search-results .result .badge{flex:none;font-size:9px}}

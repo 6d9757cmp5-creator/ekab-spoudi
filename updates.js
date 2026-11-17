@@ -1,15 +1,15 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.168', $=id=>document.getElementById(id);
+const CURRENT='27.1.169', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
 /* Shared tools load across public pages without duplicating headers or altering saved progress. */
 if(!document.querySelector('link[data-ekab-global-tools]')){
- const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.129';style.dataset.ekabGlobalTools='';document.head.append(style);
+ const style=document.createElement('link');style.rel='stylesheet';style.href='global-tools.css?v=27.1.130';style.dataset.ekabGlobalTools='';document.head.append(style);
 }
 if(!document.querySelector('script[data-ekab-global-tools]')){
- const script=document.createElement('script');script.src='global-tools.js?v=27.1.129';script.dataset.ekabGlobalTools='';document.head.append(script);
+ const script=document.createElement('script');script.src='global-tools.js?v=27.1.130';script.dataset.ekabGlobalTools='';document.head.append(script);
 }
 
 /* Independent floating notebook: private notes and SOS only, never global search. */
@@ -75,7 +75,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 // Optional cloud setup never blocks the local app or update controls.
 import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
   .then(async ({ startAppwrite }) => {
-    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=richer-sync-27.1.105', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
+    try { const { initAccountUI } = await import(new URL('./account-ui.js?app=richer-sync-27.1.106', new URL('./appwrite-client.js?app=27.1.73', document.baseURI)).href); initAccountUI(); }
     finally { startAppwrite(); }
   })
   .catch(() => {
@@ -131,7 +131,7 @@ import(new URL('./appwrite-client.js?app=27.1.73', document.baseURI).href)
 /* Shared back button, mobile edge swipe and replacement user guide. */
 if(!document.querySelector('script[data-ekab-navigation]')){
  const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./navigation.css?v=4',document.currentScript?.src||document.baseURI).href;document.head.append(css);
- const script=document.createElement('script');script.src=new URL('./navigation.js?v=4',document.currentScript?.src||document.baseURI).href;script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
+ const script=document.createElement('script');script.src=new URL('./navigation.js?v=5',document.currentScript?.src||document.baseURI).href;script.defer=true;script.dataset.ekabNavigation='';document.head.append(script);
 }
 
 /* Classroom image presentation mode. */
