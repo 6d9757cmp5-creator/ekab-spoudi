@@ -5,7 +5,7 @@
  const mount=()=>{
   if(document.querySelector('[data-v6-global-shell="css"]'))return;
   const css=document.createElement('link');css.rel='stylesheet';css.href=url('v6-shell.css?v=27.1.177');css.dataset.v6GlobalShell='css';
-  const js=document.createElement('script');js.src=url('v6-shell.js?v=27.1.173');js.dataset.v6GlobalShell='js';
+  const js=document.createElement('script');js.src=url('v6-shell.js?v=27.1.174');js.dataset.v6GlobalShell='js';
   // Reveal the page once the shell is built and its styles and the shared palette have loaded.
   const waits=[settled(css),new Promise(r=>document.addEventListener('ekab:v6-shell-ready',r,{once:true}))];
   // The palette link is added by theme-init.js at DOMContentLoaded, which can come after this runs.

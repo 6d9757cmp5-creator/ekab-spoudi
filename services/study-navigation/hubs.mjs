@@ -6,6 +6,9 @@ const type = ['saek', 'eoppep', 'seminars'].includes(params.get('type')) ? param
 const content = document.getElementById('learning-content');
 const study = mode === 'study';
 const other = study ? 'practice' : 'study';
+if (!study && type !== 'seminars') {
+  location.replace(type === 'saek' ? 'saek-exams.html' : 'theory.html?mode=exam&section=practice' + (params.get('bank') === 'all' ? '&bank=all' : ''));
+}
 const node = (tag, text, cls) => {
   const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; return n;
 };
@@ -14,8 +17,11 @@ document.querySelector(`[data-learning-type="${type}"]`).setAttribute('aria-curr
 content.replaceChildren();
 const cross = document.getElementById('learning-crosslink');
 function crossLink(courses = '') {
+  const destination = study && type !== 'seminars' ?
+    (type === 'saek' ? 'saek-exams.html' : 'theory.html?mode=exam&section=practice') :
+    other + '.html?type=' + type + (courses ? '&courses=' + encodeURIComponent(courses) : '');
   cross.replaceChildren(link(study ? 'Πήγαινε στην εξάσκηση αυτής της ενότητας' : 'Πήγαινε στη μελέτη αυτής της ενότητας',
-    other + '.html?type=' + type + (courses ? '&courses=' + encodeURIComponent(courses) : '')));
+    destination));
 }
 crossLink();
 

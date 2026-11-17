@@ -14,7 +14,7 @@
   <header class="sidebar" id="sidebar"><div class="site-header-inner"><a class="brand" href="#/home"><span class="brandmark">✚</span><span><b>ΕΚΑΒ Σπουδή</b><small>Προσωπικός χώρος μάθησης</small></span></a><nav class="nav" aria-label="Κύρια πλοήγηση">
       <a href="#/home" data-nav="home"><span class="navicon"><svg class="icon"><use href="#i-home"/></svg></span><span class="nav-text">Σήμερα</span></a>
       <a href="study.html" data-nav="library"><span class="navicon"><svg class="icon"><use href="#i-book"/></svg></span><span class="nav-text">Μελέτη</span></a>
-      <a href="practice.html" data-nav="practice"><span class="navicon"><svg class="icon"><use href="#i-target"/></svg></span><span class="nav-text">Εξάσκηση</span></a>
+      <a href="saek-exams.html" data-nav="practice"><span class="navicon"><svg class="icon"><use href="#i-target"/></svg></span><span class="nav-text">Εξάσκηση</span></a>
       <a href="tools.html" data-nav="resources"><span class="navicon"><svg class="icon"><use href="#i-tools"/></svg></span><span class="nav-text">Εργαλεία</span></a>
       <a href="progress-v6.html" data-nav="progress"><span class="navicon"><svg class="icon"><use href="#i-progress"/></svg></span><span class="nav-text">Πρόοδος</span></a>
       </nav>
@@ -44,7 +44,7 @@ function go(to){
  }
  if(/^course\/\d{2}$/.test(path)){location.href='saek-course-'+path.slice(-2)+'.html';return}
  if(/^lesson\/\d{2}\/\d+$/.test(path)){const[,id,n]=path.split('/');location.href='saek-course-'+id+'.html#lesson-'+n;return}
- if(path==='practice'){location.href='practice.html';return}
+ if(path==='practice'){location.href='saek-exams.html';return}
  if(path==='resources'){location.href='tools.html';return}
  if(path==='progress'){location.href='progress-v6.html';return}
  if(path==='search'){

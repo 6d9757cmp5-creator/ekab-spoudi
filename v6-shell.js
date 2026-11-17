@@ -26,7 +26,7 @@
  const items=[
   ['index.html','home','Σήμερα',[]],
   ['study.html','book','Μελέτη',['study.html','saek.html',/^saek-course-/,'saek-images.html','theory.html','eoppep.html','practical_exam.html','written_exam.html','exam_focus.html','apantiseis.html','anatomia.html','fysiologia.html','ektimisi.html','diasostis.html','dimosia_ygeia.html','agglika.html','pdf-library.html','eclass.html','piges.html']],
-  ['practice.html','target','Εξάσκηση',['practice.html','supplementary_practice.html','saek-exams.html']],
+  ['saek-exams.html','target','Εξάσκηση',['practice.html','supplementary_practice.html','saek-exams.html']],
   ['tools.html','tools','Εργαλεία',['tools.html','paramedic.html','protocols.html',/^mentor-/,'study-plan.html','farmaka.html','profession-law.html','contacts.html','search.html','seminar-prep.html','manual.html','repair.html',/^ui-tools\//,/^tools\//]],
   ['progress-v6.html','progress','Πρόοδος',['progress-v6.html']]
  ];

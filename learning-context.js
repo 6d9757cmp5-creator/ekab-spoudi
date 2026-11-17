@@ -18,7 +18,8 @@
     nav.append(title);
     for (const [mode, label] of [['study', 'Μελέτη'], ['practice', 'Εξάσκηση']]) {
       const a = document.createElement('a'); a.textContent = label;
-      a.href = seminar && /^#(bls|pbls|ils|phtls|als)$/.test(location.hash) ? 'seminar-prep.html?section=' + mode + location.hash : mode + '.html?type=' + type;
+      a.href = seminar && /^#(bls|pbls|ils|phtls|als)$/.test(location.hash) ? 'seminar-prep.html?section=' + mode + location.hash :
+        mode === 'practice' ? type === 'saek' ? 'saek-exams.html' : type === 'eoppep' ? 'theory.html?mode=exam&section=practice' : 'practice.html?type=seminars' : 'study.html?type=' + type;
       const course = /^saek-course-(\d{2})\.html$/.exec(file)?.[1] || params.get('course');
       if (saek && /^(0[1-9]|1\d|20)$/.test(course || '')) {
         a.href = mode === 'study' ? 'saek-course-' + course + '.html' : 'saek-exams.html?course=' + course;
@@ -26,10 +27,27 @@
       nav.append(a);
     }
     main.prepend(nav);
+    if (practice) {
+      const types = document.createElement('nav'); types.className = 'learning-tabs'; types.setAttribute('aria-label', 'Επιλογή εξάσκησης');
+      for (const [id, label, href] of [['saek', 'ΣΑΕΚ ΕΚΑΒ', 'saek-exams.html'], ['eoppep', 'ΕΟΠΠΕΠ', 'theory.html?mode=exam&section=practice'], ['seminars', 'Σεμινάρια', 'practice.html?type=seminars']]) {
+        const a = document.createElement('a'); a.textContent = label; a.href = href;
+        if (id === type) a.setAttribute('aria-current', 'page');
+        types.append(a);
+      }
+      nav.after(types);
+    }
     if (file === 'theory.html' && practice) {
       const title = document.querySelector('#setup h2'); if (title) title.textContent = 'Ρυθμίσεις εξάσκησης ΕΟΠΠΕΠ';
       const begin = document.getElementById('begin'); if (begin) begin.textContent = 'Έναρξη εξάσκησης';
       const back = document.getElementById('goHome'); if (back) back.textContent = 'Επιστροφή στις ρυθμίσεις εξάσκησης';
+      const bank = document.getElementById('practiceBank');
+      document.getElementById('practiceBankField').hidden = false;
+      bank.value = params.get('bank') === 'all' ? 'all' : 'official';
+      bank.addEventListener('change', () => {
+        const url = new URL(location.href);
+        if (bank.value === 'all') url.searchParams.set('bank', 'all'); else url.searchParams.delete('bank');
+        location.assign(url.href);
+      });
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true }); else init();
