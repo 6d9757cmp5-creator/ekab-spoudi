@@ -284,14 +284,14 @@ function renderCatalogReader(q){
  if(q.sourceUrl){const p2=document.createElement('p');addLink(p2,q.sourceUrl,'Βιβλιογραφική πηγή');sources.append(p2)}
  if(q.sourceLocation){const p3=document.createElement('p');p3.textContent='Παραπομπή: '+q.sourceLocation;sources.append(p3)}
  if(q.reviewNote){const p4=document.createElement('p');p4.textContent='Σημείωση ελέγχου: '+q.reviewNote;sources.append(p4)}
- $('#catalogReaderSosNotes').value=st(q).sosNotes||'';
- $('#catalogReaderPersonalNotes').value=st(q).readerNotes||'';
+ const personalSos=$('#catalogReaderSosNotes');if(personalSos)personalSos.value=st(q).sosNotes||'';
+ const personalNotes=$('#catalogReaderPersonalNotes');if(personalNotes)personalNotes.value=st(q).readerNotes||'';
   const read=isRead(q),markRead=$('#catalogReaderMarkRead');
   markRead.textContent=read?'✓ Διαβάστηκε · Αναίρεση':'✓ Σημείωσε ως διαβασμένη';
   markRead.setAttribute('aria-pressed',String(read));
   markRead.classList.toggle('is-read',read);
  const previous=$('#catalogReaderReviewState');
- previous.textContent=needsReview(q)?'Είναι ήδη στη λίστα επανάληψης.':'Οι σημειώσεις SOS είναι προσωπικές· δεν αποτελούν επιβεβαιωμένη ιατρική οδηγία.';
+ previous.textContent=needsReview(q)?'Είναι ήδη στη λίστα επανάληψης.':'';
  for(const btn of document.querySelectorAll('#allQuestionsList .all-question-item')){
   const active=btn.dataset.questionId===q.id;
   btn.classList.toggle('selected',active);
@@ -331,7 +331,7 @@ $('#catalogReaderMarkReview').addEventListener('click',()=>{
  scheduler.markReview(st(q));save();updateMetrics();renderCatalogReader(q);
 });
 for(const [field,key] of [['#catalogReaderSosNotes','sosNotes'],['#catalogReaderPersonalNotes','readerNotes']]){
- $(field).addEventListener('input',()=>{
+ $(field)?.addEventListener('input',()=>{
   const q=bank.find(item=>item.id===catalogSelectedId);if(!q)return;
   st(q)[key]=$(field).value.slice(0,15000);save();
  });

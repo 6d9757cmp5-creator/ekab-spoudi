@@ -358,7 +358,7 @@ function addChapterButtons(){
  }
 }
 function install(){
- if($('ekabNotesFab'))return;
+ if($('ekabNotesDialog'))return;
  trigger=button('📝 Σημειώσεις',event=>{
   if(suppressDraggedClick&&event.detail!==0){suppressDraggedClick=false;return}
   open();
@@ -397,9 +397,9 @@ function install(){
    <div class="ekab-notes-editor-actions"><button type="submit" class="ekab-notes-save">Αποθήκευση</button><button type="button" id="ekabNotesCancel">Ακύρωση</button><button type="button" id="ekabNotesRemove" hidden>Διαγραφή</button></div>
   </form>
  </div>`;
- document.body.append(trigger,dialog);
- installVisibilityControl();
- draggable(trigger,trigger,NOTES_FAB_POSITION);
+ // Notes remain available to explicit tool calls; no floating or chapter buttons.
+ trigger.hidden=true;
+ document.body.append(dialog);
  draggable(dialog,$('ekabNotesDragHandle'),NOTES_WINDOW_POSITION);
  if(!trigger.hidden)restorePosition(trigger,NOTES_FAB_POSITION);
  window.addEventListener('resize',refreshFloatingPositions);
@@ -437,7 +437,7 @@ function install(){
   if(dialog.open&&[EOP_KEY,SEM_KEY,'ekab.personal-notes.v1'].includes(e.key))render();
  });
  window.EkabNotes=Object.freeze({open});
- addChapterButtons();
+
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
 else install();
