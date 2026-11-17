@@ -27,9 +27,10 @@ export function analyseLearning({eopRecords={},saekReadKeys=[],saekHistory={},re
  const read=seen.size;
  const records=eopRecords&&typeof eopRecords==='object'&&!Array.isArray(eopRecords)?eopRecords:{};
  const due=[],weak=[],examMistakes=[];
- let studied=0,attempted=0,mastered=0;
+ let readQuestions=0,studied=0,attempted=0,mastered=0;
  for(const [id,value] of Object.entries(records)){
   if(!validQuestion(id)||!value||typeof value!=='object'||Array.isArray(value))continue;
+  if(typeof value.readCompletedAt==='string'&&Number.isFinite(Date.parse(value.readCompletedAt)))readQuestions++;
   const attempts=Number(value.selfAttempts);
   if(Number.isFinite(attempts)&&attempts>0)attempted++;
   try{
@@ -39,8 +40,10 @@ export function analyseLearning({eopRecords={},saekReadKeys=[],saekHistory={},re
   }catch{/* No false claims of due reviews if scheduler is unavailable. */}
  }
  const history=saekHistory&&typeof saekHistory==='object'?saekHistory:{};
+ let saekAttempted=0;
  for(const [id,value] of Object.entries(history)){
   if(!/^saek-(0[1-9]|1\d|20)-([1-9]|[1-9]\d)$/.test(id)||!value||typeof value!=='object')continue;
+  if(['correct','partial','incorrect'].some(grade=>Number(value[grade])>0))saekAttempted++;
   if(Number(value.incorrect)>0)examMistakes.push(id);
  }
  due.sort((a,b)=>a.at-b.at||a.id.localeCompare(b.id));
@@ -60,8 +63,8 @@ export function analyseLearning({eopRecords={},saekReadKeys=[],saekHistory={},re
   source:'due-review'
  }:(eopResume||{href:'eoppep.html',label:'Άνοιξε προετοιμασία ΕΟΠΠΕΠ',source:'course-browser'});
  return {
-  saek:{read,readTotal:247,examMistakes:examMistakes.length,recommendation:saekRecommendation},
-  eoppep:{studied,mastered,attempted,due:due.length,firstDue:dueFirst||'',recommendation:eopRecommendation},
+  saek:{read,readTotal:247,attempted:saekAttempted,examMistakes:examMistakes.length,recommendation:saekRecommendation},
+  eoppep:{read:readQuestions,readTotal:EOP_LIMITS.A+EOP_LIMITS.B,studied,mastered,attempted,due:due.length,firstDue:dueFirst||'',recommendation:eopRecommendation},
   resume:target
  };
 }
