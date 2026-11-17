@@ -1,0 +1,28 @@
+/* Page layout uses the shared V6 palette and navigation. */
+.supplementary-page .top { padding: 22px 0; }
+.supplementary-page .top h1 { margin: 12px 0 6px; font-size: clamp(1.6rem, 5vw, 2rem); }
+.supplementary-page .top p { margin: 0; }
+.supp-back { color: inherit; font-size: .85rem; }
+.supp-context { margin: 0 0 18px; color: var(--muted); font-size: .9rem; }
+.supp-status { margin-bottom: 12px; color: var(--muted); }
+.supplementary-page [hidden] { display: none !important; }
+.supplementary-page label { display: block; margin: 16px 0 6px; font-weight: 600; }
+.supplementary-page select, .supplementary-page input[type="file"] { width: 100%; max-width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: var(--bg); }
+.supplementary-page .btn { min-height: 44px; white-space: normal; }
+.supplementary-page summary { cursor: pointer; padding: 8px 0; font-weight: 600; }
+.supp-how { margin-top: 16px; font-size: .88rem; color: var(--muted); }
+.supp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.supp-options { display: grid; gap: 10px; margin-top: 18px; }
+.supp-options button { text-align: left; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); line-height: 1.5; }
+.supp-options button:disabled { opacity: 1; }
+.supp-options .correct { border-color: var(--green); box-shadow: inset 4px 0 var(--green); }
+.supp-options .wrong { border-color: #b55454; box-shadow: inset 4px 0 #b55454; }
+.supp-feedback { padding: 15px; border: 1px solid var(--line); border-radius: 12px; margin-top: 16px; background: var(--light); overflow-wrap: anywhere; }
+.supp-feedback p { margin: 8px 0; }
+.supp-category { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.supp-category p { margin: 6px 0 0; font-size: .85rem; color: var(--muted); }
+.supp-backup label { font-size: .9rem; }
+.supplementary-page button:focus-visible, .supplementary-page select:focus-visible, .supplementary-page summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+@media (max-width: 480px) { .supp-actions .btn { flex: 1 1 100%; } .supplementary-page .stat b { font-size: 1.15rem; } }
+
+.supplementary-page .supp-page-title { font-size: clamp(1.5rem, 5vw, 1.9rem); margin: 0 0 12px; line-height: 1.3; }
