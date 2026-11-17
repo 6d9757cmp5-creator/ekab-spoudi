@@ -80,3 +80,6 @@ function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.sr
  }
  const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.173');document.head.appendChild(s);
 })();
+
+/* Shared reading/practice navigation, without another scoring or progress store. */
+(function(){const file=location.pathname.split('/').pop();if(/^(saek-course-\d{2}|saek|saek-exams|theory|eoppep|practical_exam|supplementary_practice|seminar-prep)\.html$/.test(file)){const script=document.createElement('script');script.src=ekabAt('learning-context.js?v=20261117-1');document.head.append(script);}})();

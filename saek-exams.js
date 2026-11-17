@@ -194,6 +194,9 @@ async function init(){
   }
   bank=data.items;byId=new Map(bank.map(q=>[q.id,q]));
   coursesMenu();
+  const requestedCourse=new URLSearchParams(location.search).get('course');
+  const course=bank.find(q=>q.courseId===requestedCourse);
+  if(course){$('examSemester').value=course.semester;coursesMenu();$('examCourse').value=course.courseId;}
   if(state.active&&!validSession()){state.active=null;save()}
   updateSetup();
  }catch(error){

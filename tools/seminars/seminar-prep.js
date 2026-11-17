@@ -7,6 +7,7 @@
 const COURSES=window.EkabSeminarTracks||[];
 const MCQ=window.EkabSeminarMCQ||{};
 const STORE='ekab.seminar-prep.local.v1';
+const sectionMode=new URLSearchParams(location.search).get('section');
 const TOTAL=10, MULTIPLE=7, WRITTEN=3;
 const $=id=>document.getElementById(id);
 const make=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e;};
@@ -176,9 +177,11 @@ function openCourse(id,updateHash=true){
   }
  }
  if(updateHash)history.replaceState(null,'','#'+id);
- switchView('theory');window.scrollTo({top:0,behavior:'instant'});
+ switchView(sectionMode==='practice'?'quiz':'theory');window.scrollTo({top:0,behavior:'instant'});
 }
 function switchView(target){
+ if(sectionMode==='study')target='theory';
+ if(sectionMode==='practice'&&target==='theory')target='quiz';
  if(scenarioSubmitting&&target!=='oral')return;
  
  view=target;
@@ -505,7 +508,7 @@ async function submitOralBatch(){
  }
 }
 function bind(){
- $('seminarBack').addEventListener('click',()=>{if(scenarioSubmitting)return;history.replaceState(null,'',location.pathname);showHome();});
+ $('seminarBack').addEventListener('click',()=>{if(scenarioSubmitting)return;history.replaceState(null,'',location.pathname+location.search);showHome();});
  document.querySelectorAll('[data-seminar-tab]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.seminarTab)));
  $('seminarRestartQuiz').addEventListener('click',repeatMixed);
  $('seminarRestartOral').addEventListener('click',restartOralCycle);
@@ -625,5 +628,10 @@ window.addEventListener('ekab:cloud-applied',()=>{
 });
 if(COURSES.length!==5||COURSES.some(c=>c.units?.length!==12||c.units.some(u=>u.length!==5)||MCQ[c.id]?.length!==12||MCQ[c.id].some(q=>q.length!==6||new Set(q.slice(1,5)).size!==4))){
  $('seminarCards').textContent='Το εκπαιδευτικό υλικό δεν φορτώθηκε πλήρως.';
-}else{bind();showHome();}
+}else{
+ bind();
+ if(sectionMode==='study')document.querySelectorAll('[data-seminar-tab]').forEach(b=>{b.hidden=b.dataset.seminarTab!=='theory';});
+ if(sectionMode==='practice')document.querySelectorAll('[data-seminar-tab="theory"]').forEach(b=>{b.hidden=true;});
+ showHome();
+}
 })();

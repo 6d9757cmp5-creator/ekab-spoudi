@@ -25,19 +25,19 @@
  // Same five items, order and wording as the home page; each inner page lights up the section it belongs to.
  const items=[
   ['index.html','home','Σήμερα',[]],
-  ['saek.html','book','Μελέτη',['saek.html',/^saek-course-/,'saek-images.html','theory.html','eoppep.html','practical_exam.html','written_exam.html','exam_focus.html','apantiseis.html','anatomia.html','fysiologia.html','ektimisi.html','diasostis.html','dimosia_ygeia.html','agglika.html','pdf-library.html','eclass.html','piges.html']],
-  ['supplementary_practice.html','target','Εξάσκηση',['supplementary_practice.html','saek-exams.html']],
+  ['study.html','book','Μελέτη',['study.html','saek.html',/^saek-course-/,'saek-images.html','theory.html','eoppep.html','practical_exam.html','written_exam.html','exam_focus.html','apantiseis.html','anatomia.html','fysiologia.html','ektimisi.html','diasostis.html','dimosia_ygeia.html','agglika.html','pdf-library.html','eclass.html','piges.html']],
+  ['practice.html','target','Εξάσκηση',['practice.html','supplementary_practice.html','saek-exams.html']],
   ['tools.html','tools','Εργαλεία',['tools.html','paramedic.html','protocols.html',/^mentor-/,'study-plan.html','farmaka.html','profession-law.html','contacts.html','search.html','seminar-prep.html','manual.html','repair.html',/^ui-tools\//,/^tools\//]],
   ['progress-v6.html','progress','Πρόοδος',['progress-v6.html']]
  ];
- const active=items.find(x=>x[3].some(v=>v instanceof RegExp?v.test(page):v===page));
+ const section=new URLSearchParams(location.search);const practicePage=section.get('section')==='practice'||section.get('mode')==='exam'||['practice.html','saek-exams.html','practical_exam.html','supplementary_practice.html'].includes(page);const active=practicePage?items[2]:['study.html','seminar-prep.html'].includes(page)?items[1]:items.find(x=>x[3].some(v=>v instanceof RegExp?v.test(page):v===page));
  const shell=document.createElement('div');shell.className='v6-page-shell';
  const side=document.createElement('aside');side.className='v6-global-sidebar';side.setAttribute('aria-label','Πλοήγηση εφαρμογής');
  side.innerHTML='<a class="v6-shell-brand" href="index.html"><span class="v6-shell-brand-mark" aria-hidden="true">✚</span><span><b>ΕΚΑΒ Σπουδή</b><small>Προσωπικός χώρος μάθησης</small></span></a>'
   +'<div class="v6-shell-label">ΠΛΟΗΓΗΣΗ</div><nav class="v6-shell-nav" aria-label="Κύρια πλοήγηση">'
-  +items.map(it=>`<a href="${it[0]}"${it===active?' aria-current="page"':''}>${icon(it[1])}<span>${it[2]}</span>${it[1]==='book'?'<span class="v6-nav-count">20 +</span>':''}</a>`).join('')
+  +items.map(it=>`<a href="${it[0]}"${it===active?' aria-current="page"':''}>${icon(it[1])}<span>${it[2]}</span></a>`).join('')
   +'</nav><div class="v6-shell-tools"><div class="v6-shell-label">ΓΡΗΓΟΡΗ ΠΡΟΣΒΑΣΗ</div>'
-  +`<a href="study-plan.html">${icon('calendar')}<span>Ημερολόγιο εξετάσεων</span></a><a href="seminar-prep.html">${icon('cross')}<span>Σεμινάρια</span></a><a href="contacts.html">${icon('phone')}<span>Επικοινωνία & AED</span></a></div>`
+  +`<a href="study-plan.html">${icon('calendar')}<span>Ημερολόγιο εξετάσεων</span></a><a href="study.html?type=seminars">${icon('cross')}<span>Σεμινάρια</span></a><a href="contacts.html">${icon('phone')}<span>Επικοινωνία & AED</span></a></div>`
   +'<a class="v6-shell-account" href="progress-v6.html"><span class="v6-shell-avatar" aria-hidden="true">Ε</span><span><b>Λογαριασμός & πρόοδος</b><small>Συσκευή και συγχρονισμός</small></span></a>';
  const main=document.createElement('div');main.className='v6-global-main';
  const top=document.createElement('header');top.className='v6-global-topbar';

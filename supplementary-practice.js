@@ -96,9 +96,8 @@
     if (answered) return;
     answered = true;
     const correct = index === current.answer;
-    const s = stats[current.id] || { n: 0, c: 0, streak: 0 };
-    s.n++; if (correct) { s.c++; s.streak++; } else s.streak = 0;
-    stats[current.id] = s; save(); refresh();
+    window.EkabAdditionalPractice.record(stats, current.id, correct);
+    save(); refresh();
     [...$('options').children].forEach((button, i) => {
       button.disabled = true;
       if (i === current.answer) { button.classList.add('correct'); button.textContent = 'Σωστή απάντηση: ' + current.options[i]; }

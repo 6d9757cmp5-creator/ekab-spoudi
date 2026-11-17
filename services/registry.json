@@ -230,6 +230,29 @@
         "eoppep-source.pdf",
         "ECLASS_INVENTORY.json"
       ]
+    },
+    {
+      "id": "study-navigation",
+      "kind": "navigation",
+      "status": "canonical",
+      "owner": "services/study-navigation",
+      "implementation": [
+        "study.html",
+        "practice.html",
+        "services/study-navigation/hubs.mjs",
+        "learning-context.js"
+      ],
+      "description": "Reading and practice entrypoints; reuse canonical SAEK, EOPPEP and seminar tools. No new grade store."
+    },
+    {
+      "id": "supplementary-practice-scoring",
+      "kind": "service",
+      "status": "canonical",
+      "owner": "services/grading",
+      "implementation": [
+        "services/grading/additional-practice.js"
+      ],
+      "description": "Shared existing supplementary MCQ counters, same storage key; reused by standalone and mixed practice. No AI or official-progress writes."
     }
   ]
 }

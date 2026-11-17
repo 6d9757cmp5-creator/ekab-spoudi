@@ -20,6 +20,11 @@
   }
   function foldSection(section) {
     if (section.classList.contains('compact-source-container')) return;
+    if (section.tagName === 'DETAILS') {
+      section.classList.add('compact-sources');
+      section.removeAttribute('open');
+      return;
+    }
     var heading = section.querySelector(':scope > h2');
     var fold = disclosure();
     if (heading) {
@@ -32,9 +37,36 @@
   document.querySelectorAll('.course-sources, #references').forEach(foldSection);
   // These headings identify bibliography-only sections, never clinical lessons.
   document.querySelectorAll('section > h2').forEach(function (heading) {
-    if (/^(Πηγή διάρθρωσης μαθημάτων|📚 Έλεγχος πηγών|Ύλη \/ πηγές)$/.test(heading.textContent.trim())) {
+    if (/^(Πηγή διάρθρωσης μαθημάτων|📚 Έλεγχος πηγών|Ύλη \/ πηγές|Ελληνικές πηγές αναφοράς|Κατάσταση πιστοποίησης|📄 Πρωτογενής βάση πιστοποίησης)$/.test(heading.textContent.trim())) {
       foldSection(heading.parentElement);
     }
+  });
+  // Bibliography is available at the end; it must not precede the student's work.
+  document.querySelectorAll('main > section.compact-source-container, .main > section.compact-source-container, main > details#references, .main > details#references, details.hub-resources').forEach(function (section) {
+    if (section.matches('details.hub-resources')) {
+      var summary = section.querySelector(':scope > summary');
+      if (!summary || !/Επίσημο υλικό και πηγές/.test(summary.textContent)) return;
+      summary.textContent = 'Πηγές και τεκμηρίωση';
+      section.classList.add('compact-sources');
+      section.removeAttribute('open');
+    }
+    var main = section.closest('main, .main');
+    if (main && section.parentElement === main) main.append(section);
+  });
+  document.querySelectorAll('.academic-review-link').forEach(function (link) {
+    var main = link.closest('main, .main');
+    if (!main) return;
+    var existing = Array.from(main.children).find(function (child) {
+      return child.matches('.compact-source-container, details.compact-sources');
+    });
+    if (existing) {
+      var body = existing.querySelector('.compact-sources-body, .ph-reference-content') || existing;
+      body.append(link);
+      return;
+    }
+    var fold = disclosure();
+    fold.body.append(link);
+    main.append(fold.details);
   });
   document.querySelectorAll('.chapter-source-note, .review-source, .lesson-source-link, #sourceLine').forEach(wrap);
   document.querySelectorAll('#qsource, #asource').forEach(function (link) { wrap(link.parentElement); });
