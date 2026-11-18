@@ -38,7 +38,7 @@
   +'<div class="v6-shell-label">ΠΛΟΗΓΗΣΗ</div><nav class="v6-shell-nav" aria-label="Κύρια πλοήγηση">'
   +items.map(it=>`<a href="${it[0]}"${it===active?' aria-current="page"':''}>${icon(it[1])}<span>${it[2]}</span></a>`).join('')
   +'</nav><section class="ekab-quick-access" data-ekab-quick-access></section>'
-  +'<button class="v6-shell-account" type="button" data-account-open aria-label="Άνοιγμα λογαριασμού και συγχρονισμού"><span class="v6-shell-avatar" aria-hidden="true">${icon('user')}</span><span><b>Λογαριασμός</b><small>Σύνδεση και συγχρονισμός</small></span></button>';
+  +'<button class="v6-shell-account" type="button" data-account-open aria-label="Άνοιγμα λογαριασμού και συγχρονισμού"><span class="v6-shell-avatar" aria-hidden="true">'+icon('user')+'</span><span><b>Λογαριασμός</b><small>Σύνδεση και συγχρονισμός</small></span></button>';
  const main=document.createElement('div');main.className='v6-global-main';
  const top=document.createElement('header');top.className='v6-global-topbar';
  // Page name for the breadcrumb: the first part of the title that is not the site name.
