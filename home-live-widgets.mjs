@@ -52,9 +52,30 @@ function renderDuty() {
   if (live) live.href = HERAKLION_DUTY_SOURCES.live;
 }
 
+let locationCard = null, watchId = null, latest = null;
+
+function stopLocation(message) {
+  if (watchId !== null && navigator.geolocation) navigator.geolocation.clearWatch(watchId);
+  watchId = null;
+  if (locationCard) {
+    locationCard.querySelector('[data-location-start]').hidden = false;
+    locationCard.querySelector('[data-location-stop]').hidden = true;
+    if (message) locationCard.querySelector('[data-location-status]').textContent = message;
+  }
+}
+
 function initLocation() {
   const card = document.querySelector('[data-ekab-location]');
-  if (!card) return;
+  if (!card) {
+    if (locationCard) stopLocation();
+    locationCard = null;
+    latest = null;
+    return;
+  }
+  if (card === locationCard) return;
+  if (locationCard) stopLocation();
+
+  locationCard = card;
   const startButton = card.querySelector('[data-location-start]');
   const stopButton = card.querySelector('[data-location-stop]');
   const copyButton = card.querySelector('[data-location-copy]');
@@ -62,23 +83,16 @@ function initLocation() {
   const coords = card.querySelector('[data-location-coordinates]');
   const status = card.querySelector('[data-location-status]');
   const mapLink = card.querySelector('[data-location-map]');
-  let watchId = null, latest = null;
 
-  const setStatus = value => { status.textContent = value; };
-  function stop() {
-    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
-    watchId = null;
-    startButton.hidden = false;
-    stopButton.hidden = true;
-  }
   function payload() {
     if (!latest) return '';
     const { latitude, longitude, accuracy, altitude, altitudeAccuracy } = latest.coords;
     const rows = [`Συντεταγμένες: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`, `Ακρίβεια GPS: περίπου ±${Math.round(accuracy)} μ.`];
     if (Number.isFinite(altitude)) rows.push(`Υψόμετρο WGS84: ${Math.round(altitude)} μ.${Number.isFinite(altitudeAccuracy) ? ` (±${Math.round(altitudeAccuracy)} μ.)` : ''}`);
     rows.push(`Χάρτης: https://maps.google.com/?q=${latitude},${longitude}`);
-    return rows.join('\n');
+    return rows.join('\\n');
   }
+
   function receive(position) {
     latest = position;
     const { latitude, longitude, accuracy, altitude } = position.coords;
@@ -88,24 +102,24 @@ function initLocation() {
     mapLink.hidden = false;
     copyButton.hidden = false;
     shareButton.hidden = false;
-    setStatus(`Τελευταίο στίγμα ${formatTime(new Date(position.timestamp))}. Αποθηκεύεται μόνο προσωρινά σε αυτή τη σελίδα.`);
+    status.textContent = `Τελευταίο στίγμα ${formatTime(new Date(position.timestamp))}. Παραμένει προσωρινά σε αυτή τη σελίδα.`;
   }
+
   function error(reason) {
     if (reason.code === 1) {
-      stop();
-      setStatus('Δεν δόθηκε άδεια τοποθεσίας. Επίτρεψέ την από τις ρυθμίσεις του browser.');
+      stopLocation('Η άδεια τοποθεσίας απορρίφθηκε. Επίτρεψε την Τοποθεσία για αυτόν τον ιστότοπο στις ρυθμίσεις του browser και πάτησε ξανά.');
     } else if (reason.code === 2) {
-      setStatus('Δεν βρέθηκε ακόμη στίγμα. Η αναζήτηση συνεχίζεται· δοκίμασε σε ανοιχτό χώρο.');
+      status.textContent = 'Η συσκευή δεν έδωσε στίγμα. Έλεγξε ότι είναι ενεργή η Τοποθεσία και η ακριβής θέση στις ρυθμίσεις κινητού.';
     } else if (reason.code === 3) {
-      setStatus('Η λήψη καθυστερεί. Συνεχίζω να αναζητώ στίγμα· άφησε τη σελίδα ανοιχτή.');
+      status.textContent = 'Αργεί το στίγμα. Συνεχίζω την αναζήτηση· κράτησε ανοιχτή τη σελίδα και ενεργό το GPS.';
     } else {
-      stop();
-      setStatus('Ο εντοπισμός διακόπηκε. Πάτησε ξανά για νέα προσπάθεια.');
+      stopLocation('Η λήψη GPS διακόπηκε. Έλεγξε την άδεια browser και δοκίμασε ξανά.');
     }
   }
+
   startButton.addEventListener('click', () => {
     if (!window.isSecureContext || !navigator.geolocation) {
-      setStatus('Ο browser δεν υποστηρίζει ασφαλή εντοπισμό σε αυτή τη σύνδεση.');
+      status.textContent = 'Ο browser δεν υποστηρίζει ασφαλή εντοπισμό. Άνοιξε τη σελίδα μέσω HTTPS.';
       return;
     }
     if (watchId !== null) return;
@@ -116,44 +130,49 @@ function initLocation() {
     mapLink.hidden = true;
     startButton.hidden = true;
     stopButton.hidden = false;
-    setStatus('Αναμονή άδειας και σήματος GPS…');
+    status.textContent = 'Ζητώ άδεια τοποθεσίας από τον browser και στίγμα GPS…';
     try {
       watchId = navigator.geolocation.watchPosition(receive, error, {
         enableHighAccuracy: true, maximumAge: 0, timeout: 60_000
       });
     } catch {
-      stop();
-      setStatus('Δεν ήταν δυνατή η εκκίνηση GPS. Έλεγξε την άδεια τοποθεσίας του browser.');
+      stopLocation('Δεν ξεκίνησε η λήψη GPS. Έλεγξε την άδεια τοποθεσίας του browser και δοκίμασε ξανά.');
     }
   });
-  stopButton.addEventListener('click', () => { stop(); setStatus('Ο ζωντανός εντοπισμός σταμάτησε.'); });
+
+  stopButton.addEventListener('click', () => stopLocation('Ο ζωντανός εντοπισμός σταμάτησε.'));
   copyButton.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(payload());
-      setStatus('Οι συντεταγμένες αντιγράφηκαν. Δεν στάλθηκαν.');
+      status.textContent = 'Οι συντεταγμένες αντιγράφηκαν. Δεν στάλθηκαν.';
     } catch {
-      setStatus('Η αντιγραφή δεν υποστηρίζεται από τον browser. Άνοιξε τον χάρτη ή χρησιμοποίησε Κοινή χρήση.');
+      status.textContent = 'Η αντιγραφή δεν υποστηρίζεται από τον browser. Άνοιξε τον χάρτη ή χρησιμοποίησε Κοινή χρήση.';
     }
   });
   shareButton.addEventListener('click', async () => {
     if (navigator.share) {
       try { await navigator.share({ title: 'Συντεταγμένες ΕΚΑΒ', text: payload() }); }
-      catch (reason) { if (reason?.name !== 'AbortError') setStatus('Η κοινή χρήση δεν ολοκληρώθηκε.'); }
+      catch (reason) { if (reason?.name !== 'AbortError') status.textContent = 'Η κοινή χρήση δεν ολοκληρώθηκε.'; }
     } else {
       try {
         await navigator.clipboard.writeText(payload());
-        setStatus('Δεν υπάρχει κοινή χρήση σε αυτή τη συσκευή· οι συντεταγμένες αντιγράφηκαν.');
-      } catch { setStatus('Η κοινή χρήση δεν υποστηρίζεται από αυτή τη συσκευή.'); }
+        status.textContent = 'Δεν υπάρχει κοινή χρήση σε αυτή τη συσκευή· οι συντεταγμένες αντιγράφηκαν.';
+      } catch { status.textContent = 'Η κοινή χρήση δεν υποστηρίζεται από αυτή τη συσκευή.'; }
     }
   });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && watchId !== null) {
-      stop();
-      setStatus('Ο εντοπισμός σταμάτησε όταν έκρυψες τη σελίδα.');
-    }
-  });
-  window.addEventListener('pagehide', stop, { once: true });
 }
+
+function handleLocationVisibility() {
+  if (!locationCard) return;
+  if (document.hidden && watchId !== null) {
+    stopLocation('Ο εντοπισμός σταμάτησε όταν έκρυψες τη σελίδα. Πάτησε ξανά για νέο στίγμα.');
+  }
+}
+
+window.addEventListener('ekab:home-ready', initLocation);
+window.addEventListener('pageshow', initLocation);
+window.addEventListener('pagehide', () => stopLocation(), { once: false });
+document.addEventListener('visibilitychange', handleLocationVisibility);
 
 renderDuty();
 renderPulse();
