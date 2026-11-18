@@ -133,6 +133,8 @@ function initLocation() {
         position => receive(position, attempt),
         reason => {
           if (!locationActive || attempt !== locationAttempt) return;
+          clearTimeout(permissionTimer);
+          permissionTimer = null;
           if (reason.code === 1) {
             stopLocation('Δεν δόθηκε άδεια. Επίτρεψε την Τοποθεσία για αυτόν τον ιστότοπο στις ρυθμίσεις του browser.');
           } else if (reason.code === 2 || reason.code === 3) {
