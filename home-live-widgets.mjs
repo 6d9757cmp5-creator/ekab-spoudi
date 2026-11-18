@@ -91,10 +91,17 @@ function initLocation() {
     setStatus(`Τελευταίο στίγμα ${formatTime(new Date(position.timestamp))}. Αποθηκεύεται μόνο προσωρινά σε αυτή τη σελίδα.`);
   }
   function error(reason) {
-    stop();
-    if (reason.code === 1) setStatus('Δεν δόθηκε άδεια τοποθεσίας. Επίτρεψέ την από τις ρυθμίσεις του browser.');
-    else if (reason.code === 2) setStatus('Δεν βρέθηκε σήμα GPS. Δοκίμασε σε ανοιχτό χώρο.');
-    else setStatus('Ο εντοπισμός άργησε. Πάτησε ξανά για νέα προσπάθεια.');
+    if (reason.code === 1) {
+      stop();
+      setStatus('Δεν δόθηκε άδεια τοποθεσίας. Επίτρεψέ την από τις ρυθμίσεις του browser.');
+    } else if (reason.code === 2) {
+      setStatus('Δεν βρέθηκε ακόμη στίγμα. Η αναζήτηση συνεχίζεται· δοκίμασε σε ανοιχτό χώρο.');
+    } else if (reason.code === 3) {
+      setStatus('Η λήψη καθυστερεί. Συνεχίζω να αναζητώ στίγμα· άφησε τη σελίδα ανοιχτή.');
+    } else {
+      stop();
+      setStatus('Ο εντοπισμός διακόπηκε. Πάτησε ξανά για νέα προσπάθεια.');
+    }
   }
   startButton.addEventListener('click', () => {
     if (!window.isSecureContext || !navigator.geolocation) {
@@ -110,9 +117,14 @@ function initLocation() {
     startButton.hidden = true;
     stopButton.hidden = false;
     setStatus('Αναμονή άδειας και σήματος GPS…');
-    watchId = navigator.geolocation.watchPosition(receive, error, {
-      enableHighAccuracy: true, maximumAge: 0, timeout: 20_000
-    });
+    try {
+      watchId = navigator.geolocation.watchPosition(receive, error, {
+        enableHighAccuracy: true, maximumAge: 0, timeout: 60_000
+      });
+    } catch {
+      stop();
+      setStatus('Δεν ήταν δυνατή η εκκίνηση GPS. Έλεγξε την άδεια τοποθεσίας του browser.');
+    }
   });
   stopButton.addEventListener('click', () => { stop(); setStatus('Ο ζωντανός εντοπισμός σταμάτησε.'); });
   copyButton.addEventListener('click', async () => {
@@ -153,3 +165,4 @@ window.addEventListener('ekab:progress-changed', renderPulse);
 window.addEventListener('ekab:activity-updated', renderPulse);
 window.addEventListener('ekab:cloud-applied', renderPulse);
 window.setInterval(renderDuty, 60_000);
+
