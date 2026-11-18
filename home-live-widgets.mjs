@@ -125,7 +125,7 @@ function initLocation() {
       : 'Το πρώτο στίγμα άργησε· συνεχίζω την αναζήτηση GPS.';
     signalTimer = setTimeout(() => {
       if (locationActive && attempt === locationAttempt && !latest) {
-        status.textContent = 'Δεν ήρθε στίγμα. Έλεγξε ότι η Τοποθεσία και η ακριβής θέση είναι ενεργές στο κινητό και στον browser.';
+        status.textContent = 'Δεν ήρθε στίγμα. Έλεγξε ότι η Τοποθεσία και η ακριβής θέση είναι ενεργές στο κινητό και στον browser. Αν είσαι σε ενσωματωμένο browser εφαρμογής, άνοιξε τη σελίδα σε Safari ή Chrome.';
       }
     }, 20_000);
     try {
@@ -138,7 +138,7 @@ function initLocation() {
           if (reason.code === 1) {
             stopLocation('Δεν δόθηκε άδεια. Επίτρεψε την Τοποθεσία για αυτόν τον ιστότοπο στις ρυθμίσεις του browser.');
           } else if (reason.code === 2 || reason.code === 3) {
-            if (!latest) status.textContent = 'Ακόμη δεν υπάρχει στίγμα. Άφησε ανοιχτή τη σελίδα και έλεγξε την Τοποθεσία στις ρυθμίσεις κινητού.';
+            if (!latest) status.textContent = 'Ακόμη δεν υπάρχει στίγμα. Έλεγξε την Τοποθεσία και την ακριβή θέση στις ρυθμίσεις κινητού. Αν είσαι μέσα σε εφαρμογή, άνοιξε τη σελίδα σε Safari ή Chrome.';
             else status.textContent = 'Κρατώ το τελευταίο στίγμα και συνεχίζω για ακριβέστερο GPS.';
           } else {
             stopLocation('Η λήψη GPS διακόπηκε. Έλεγξε τις ρυθμίσεις τοποθεσίας και δοκίμασε ξανά.');
@@ -169,7 +169,7 @@ function initLocation() {
     status.textContent = 'Ζητώ άδεια τοποθεσίας από τον browser…';
     permissionTimer = setTimeout(() => {
       if (locationActive && attempt === locationAttempt && !latest) {
-        status.textContent = 'Αν εμφανίστηκε αίτημα τοποθεσίας, πάτησε «Να επιτρέπεται». Αν όχι, επίτρεψε την Τοποθεσία στις ρυθμίσεις του browser.';
+        status.textContent = 'Αν εμφανίστηκε αίτημα τοποθεσίας, πάτησε «Να επιτρέπεται». Αν όχι, επίτρεψε την Τοποθεσία στις ρυθμίσεις του browser. Αν είσαι μέσα σε εφαρμογή, άνοιξε τη σελίδα σε Safari ή Chrome.';
       }
     }, 10_000);
     try {
