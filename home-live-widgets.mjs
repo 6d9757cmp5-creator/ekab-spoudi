@@ -52,9 +52,19 @@ function renderDuty() {
   if (live) live.href = HERAKLION_DUTY_SOURCES.live;
 }
 
-let locationCard = null, watchId = null, latest = null;
+let locationCard = null, watchId = null, latest = null, locationAttempt = 0, locationActive = false, permissionTimer = null, signalTimer = null;
+
+function clearLocationTimers() {
+  clearTimeout(permissionTimer);
+  clearTimeout(signalTimer);
+  permissionTimer = null;
+  signalTimer = null;
+}
 
 function stopLocation(message) {
+  locationAttempt += 1;
+  locationActive = false;
+  clearLocationTimers();
   if (watchId !== null && navigator.geolocation) navigator.geolocation.clearWatch(watchId);
   watchId = null;
   if (locationCard) {
@@ -87,14 +97,17 @@ function initLocation() {
   function payload() {
     if (!latest) return '';
     const { latitude, longitude, accuracy, altitude, altitudeAccuracy } = latest.coords;
-    const rows = [`Συντεταγμένες: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`, `Ακρίβεια GPS: περίπου ±${Math.round(accuracy)} μ.`];
+    const rows = [`Συντεταγμένες: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`, `Ακρίβεια: περίπου ±${Math.round(accuracy)} μ.`];
     if (Number.isFinite(altitude)) rows.push(`Υψόμετρο WGS84: ${Math.round(altitude)} μ.${Number.isFinite(altitudeAccuracy) ? ` (±${Math.round(altitudeAccuracy)} μ.)` : ''}`);
     rows.push(`Χάρτης: https://maps.google.com/?q=${latitude},${longitude}`);
     return rows.join('\\n');
   }
 
-  function receive(position) {
+  function receive(position, attempt) {
+    if (!locationActive || attempt !== locationAttempt || locationCard !== card) return;
     latest = position;
+    clearTimeout(permissionTimer);
+    clearTimeout(signalTimer);
     const { latitude, longitude, accuracy, altitude } = position.coords;
     coords.textContent = `${latitude.toFixed(6)}, ${longitude.toFixed(6)} · ακρίβεια ±${Math.round(accuracy)} μέτρα` +
       (Number.isFinite(altitude) ? ` · υψόμετρο ${Math.round(altitude)} μέτρα (WGS84)` : ' · υψόμετρο μη διαθέσιμο');
@@ -102,18 +115,37 @@ function initLocation() {
     mapLink.hidden = false;
     copyButton.hidden = false;
     shareButton.hidden = false;
-    status.textContent = `Τελευταίο στίγμα ${formatTime(new Date(position.timestamp))}. Παραμένει προσωρινά σε αυτή τη σελίδα.`;
+    status.textContent = `Λήφθηκε στίγμα ${formatTime(new Date(position.timestamp))}. Η ακρίβεια εμφανίζεται δίπλα στις συντεταγμένες.`;
   }
 
-  function error(reason) {
-    if (reason.code === 1) {
-      stopLocation('Η άδεια τοποθεσίας απορρίφθηκε. Επίτρεψε την Τοποθεσία για αυτόν τον ιστότοπο στις ρυθμίσεις του browser και πάτησε ξανά.');
-    } else if (reason.code === 2) {
-      status.textContent = 'Η συσκευή δεν έδωσε στίγμα. Έλεγξε ότι είναι ενεργή η Τοποθεσία και η ακριβής θέση στις ρυθμίσεις κινητού.';
-    } else if (reason.code === 3) {
-      status.textContent = 'Αργεί το στίγμα. Συνεχίζω την αναζήτηση· κράτησε ανοιχτή τη σελίδα και ενεργό το GPS.';
-    } else {
-      stopLocation('Η λήψη GPS διακόπηκε. Έλεγξε την άδεια browser και δοκίμασε ξανά.');
+  function startHighAccuracyWatch(attempt) {
+    if (!locationActive || attempt !== locationAttempt || watchId !== null) return;
+    status.textContent = latest
+      ? 'Αναζητώ ακριβέστερο στίγμα GPS…'
+      : 'Το πρώτο στίγμα άργησε· συνεχίζω την αναζήτηση GPS.';
+    signalTimer = setTimeout(() => {
+      if (locationActive && attempt === locationAttempt && !latest) {
+        status.textContent = 'Δεν ήρθε στίγμα. Έλεγξε ότι η Τοποθεσία και η ακριβής θέση είναι ενεργές στο κινητό και στον browser.';
+      }
+    }, 20_000);
+    try {
+      watchId = navigator.geolocation.watchPosition(
+        position => receive(position, attempt),
+        reason => {
+          if (!locationActive || attempt !== locationAttempt) return;
+          if (reason.code === 1) {
+            stopLocation('Δεν δόθηκε άδεια. Επίτρεψε την Τοποθεσία για αυτόν τον ιστότοπο στις ρυθμίσεις του browser.');
+          } else if (reason.code === 2 || reason.code === 3) {
+            if (!latest) status.textContent = 'Ακόμη δεν υπάρχει στίγμα. Άφησε ανοιχτή τη σελίδα και έλεγξε την Τοποθεσία στις ρυθμίσεις κινητού.';
+            else status.textContent = 'Κρατώ το τελευταίο στίγμα και συνεχίζω για ακριβέστερο GPS.';
+          } else {
+            stopLocation('Η λήψη GPS διακόπηκε. Έλεγξε τις ρυθμίσεις τοποθεσίας και δοκίμασε ξανά.');
+          }
+        },
+        { enableHighAccuracy: true, maximumAge: 10_000, timeout: 30_000 }
+      );
+    } catch {
+      stopLocation('Δεν ξεκίνησε η λήψη GPS. Έλεγξε την άδεια τοποθεσίας του browser.');
     }
   }
 
@@ -122,21 +154,41 @@ function initLocation() {
       status.textContent = 'Ο browser δεν υποστηρίζει ασφαλή εντοπισμό. Άνοιξε τη σελίδα μέσω HTTPS.';
       return;
     }
-    if (watchId !== null) return;
+    if (locationActive) return;
     latest = null;
-    coords.textContent = 'Αναμονή για νέο στίγμα…';
+    locationActive = true;
+    const attempt = ++locationAttempt;
+    coords.textContent = 'Ζητώ άδεια browser· μετά θα εμφανιστούν εδώ οι συντεταγμένες.';
     copyButton.hidden = true;
     shareButton.hidden = true;
     mapLink.hidden = true;
     startButton.hidden = true;
     stopButton.hidden = false;
-    status.textContent = 'Ζητώ άδεια τοποθεσίας από τον browser και στίγμα GPS…';
+    status.textContent = 'Ζητώ άδεια τοποθεσίας από τον browser…';
+    permissionTimer = setTimeout(() => {
+      if (locationActive && attempt === locationAttempt && !latest) {
+        status.textContent = 'Αν εμφανίστηκε αίτημα τοποθεσίας, πάτησε «Να επιτρέπεται». Αν όχι, επίτρεψε την Τοποθεσία στις ρυθμίσεις του browser.';
+      }
+    }, 10_000);
     try {
-      watchId = navigator.geolocation.watchPosition(receive, error, {
-        enableHighAccuracy: true, maximumAge: 0, timeout: 60_000
-      });
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          receive(position, attempt);
+          startHighAccuracyWatch(attempt);
+        },
+        reason => {
+          if (!locationActive || attempt !== locationAttempt) return;
+          if (reason.code === 1) {
+            stopLocation('Δεν δόθηκε άδεια. Επίτρεψε την Τοποθεσία για αυτόν τον ιστότοπο στις ρυθμίσεις του browser και πάτησε ξανά.');
+          } else {
+            status.textContent = 'Το αρχικό στίγμα άργησε· συνεχίζω με ακριβή αναζήτηση GPS.';
+            startHighAccuracyWatch(attempt);
+          }
+        },
+        { enableHighAccuracy: false, maximumAge: 30_000, timeout: 15_000 }
+      );
     } catch {
-      stopLocation('Δεν ξεκίνησε η λήψη GPS. Έλεγξε την άδεια τοποθεσίας του browser και δοκίμασε ξανά.');
+      stopLocation('Δεν ξεκίνησε η λήψη τοποθεσίας. Έλεγξε την άδεια του browser.');
     }
   });
 
@@ -146,7 +198,7 @@ function initLocation() {
       await navigator.clipboard.writeText(payload());
       status.textContent = 'Οι συντεταγμένες αντιγράφηκαν. Δεν στάλθηκαν.';
     } catch {
-      status.textContent = 'Η αντιγραφή δεν υποστηρίζεται από τον browser. Άνοιξε τον χάρτη ή χρησιμοποίησε Κοινή χρήση.';
+      status.textContent = 'Η αντιγραφή δεν υποστηρίζεται. Άνοιξε τον χάρτη ή χρησιμοποίησε Κοινή χρήση.';
     }
   });
   shareButton.addEventListener('click', async () => {
@@ -163,8 +215,7 @@ function initLocation() {
 }
 
 function handleLocationVisibility() {
-  if (!locationCard) return;
-  if (document.hidden && watchId !== null) {
+  if (locationCard && document.hidden && locationActive) {
     stopLocation('Ο εντοπισμός σταμάτησε όταν έκρυψες τη σελίδα. Πάτησε ξανά για νέο στίγμα.');
   }
 }
