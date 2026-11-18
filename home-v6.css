@@ -401,10 +401,6 @@ body.dark-mode .v6-atla-link,body.dark-mode .v6-plan-link,body.dark-mode [data-a
 .home-account-mobile .icon{width:17px;height:17px}
 .global-search .icon{width:17px;height:17px;flex:none}
 .theme-toggle span{display:none!important}.theme-toggle{width:36px;min-width:36px;justify-content:center;padding:0!important}.theme-toggle .icon{width:16px;height:16px}
-.v6-welcome-mark{position:relative;overflow:visible}
-.v6-flag-outline{position:absolute;z-index:0;right:-14px;top:-14px;width:104px;height:104px;background:currentColor;color:#527850;opacity:.12;pointer-events:none;-webkit-mask:url('assets/brand/presidential-flag.svg') center/contain no-repeat;mask:url('assets/brand/presidential-flag.svg') center/contain no-repeat}
-.v6-welcome-mark>span:not(.v6-flag-outline),.v6-welcome-mark>b,.v6-welcome-mark>small{position:relative;z-index:1}
-body.dark-mode .v6-flag-outline{color:#e1d18e;opacity:.2}
 .search-page-field{width:min(100%,650px);height:46px;margin:4px 0 12px}
 .search-filters{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
 .search-results{display:grid;gap:9px;max-width:940px}
@@ -414,3 +410,17 @@ body.dark-mode .v6-flag-outline{color:#e1d18e;opacity:.2}
 .search-results .result b{font-size:14px}.search-results .result small{display:block;color:var(--sub);font-size:11px;line-height:1.45}
 .search-results .result .search-preview{max-width:760px}
 @media(max-width:720px){.home-account-mobile{display:grid}.search-page-field{height:42px}.search-results .result{align-items:flex-start;padding:12px}.search-results .result .badge{flex:none;font-size:9px}}
+
+/* One account icon and a themed account dialog on the home page. */
+.account-avatar{background:transparent!important;border-color:#d8c47f!important;color:#f0dda0!important}
+.account-avatar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.home-flag-outline{display:block;flex:0 0 32px;width:32px;height:32px;object-fit:contain;opacity:.78;filter:grayscale(1) sepia(.35) saturate(.7)}
+body.dark-mode .home-flag-outline{opacity:.84;filter:grayscale(1) brightness(0) invert(1) sepia(.3) saturate(1.3) hue-rotate(18deg)}
+#accountDialog{width:min(96vw,800px);max-height:90dvh;max-height:90vh;overflow-y:auto;overscroll-behavior:contain;padding:0;border:1px solid var(--line);border-radius:18px;background:var(--paper);color:var(--ink);box-shadow:0 22px 70px rgba(10,20,14,.32)}
+#accountDialog .dialog-inner{padding:22px;background:var(--paper);color:var(--ink)}
+#accountDialog .account-dialog{min-width:0;padding:clamp(15px,3vw,24px);background:var(--paper);color:var(--ink)}
+#accountDialog .account-dialog-heading{position:sticky;top:0;z-index:5;padding:7px 0 10px;background:var(--paper);border-bottom:1px solid var(--line)}
+#accountDialog::backdrop{background:rgba(12,22,16,.58);backdrop-filter:blur(2px)}
+body.dark-mode #accountDialog,body.dark-mode #accountDialog .dialog-inner,body.dark-mode #accountDialog .account-dialog,body.dark-mode #accountDialog .account-dialog-heading{background:#242c24;color:#e7e9dd}
+@media(max-width:720px){.home-flag-outline{flex-basis:27px;width:27px;height:27px}}
+@media(max-width:590px){#accountDialog{width:min(96vw,560px)}#accountDialog .backup-grid{grid-template-columns:1fr;gap:11px}#accountDialog .account-dialog{padding:15px}}

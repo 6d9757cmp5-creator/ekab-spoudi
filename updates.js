@@ -1,6 +1,6 @@
 /* EKAB Σπουδή — safe, user-initiated PWA updates. */
 (function(){'use strict';
-const CURRENT='27.1.169', $=id=>document.getElementById(id);
+const CURRENT='27.1.171', $=id=>document.getElementById(id);
 let registration=null,remoteVersion=null,applying=false;
 const CHECK_INTERVAL_MS=60000;let lastNotice='';
 
