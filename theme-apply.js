@@ -1,5 +1,5 @@
 /* Applies the theme chosen on the site (key ekab.theme.v1) on pages that do not load theme-init.js, before they paint. */
-(function(){try{document.documentElement.dataset.theme=localStorage.getItem('ekab.theme.v1')==='dark'?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();
+(function(){var value=null;try{value=localStorage.getItem('ekab.theme.v1')}catch(e){}if(value!=='dark'&&value!=='light'){try{var item=document.cookie.split(';').map(function(part){return part.trim()}).find(function(part){return part.indexOf('ekab.theme.v1=')===0});value=item?item.slice(14):null}catch(e){value=null}}document.documentElement.dataset.theme=value==='dark'?'dark':'light'})();;
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */
 (function(){
@@ -33,9 +33,9 @@
   window.__ekabV6Reveal=()=>root.classList.remove('v6-booting');
   setTimeout(window.__ekabV6Reveal,6000);
   // Start fetching the shell files now instead of one after another.
-  for(const [href,as] of [['v6-shell.css?v=27.1.177','style'],['v6-subsections.css?v=27.1.171','style'],['v6-shell.js?v=27.1.173','script']]){
+  for(const [href,as] of [['v6-shell.css?v=27.1.177','style'],['v6-subsections.css?v=27.1.171','style'],['v6-shell.js?v=27.1.178','script']]){
    const l=document.createElement('link');l.rel='preload';l.as=as;l.href=url(href);document.head.appendChild(l);
   }
  }
- const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.173');document.head.appendChild(s);
+ const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.175');document.head.appendChild(s);
 })();

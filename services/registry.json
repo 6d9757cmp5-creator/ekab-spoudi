@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated": "2026-11-01",
+  "updated": "2026-11-18",
   "description": "Source-backed ownership registry. owner-mapped means existing implementation remains at a historical path; it is NOT a completed move or verification of clinical correctness.",
   "entries": [
     {
@@ -187,7 +187,17 @@
       "implementation": [
         "progress.js",
         "home-progress-panel.js",
-        "activity-time.js"
+        "activity-time.js",
+        "services/progress/study-pulse.mjs"
+      ]
+    },
+    {
+      "id": "heraklion-on-duty",
+      "kind": "service",
+      "status": "canonical",
+      "owner": "services/on-duty",
+      "implementation": [
+        "services/on-duty/heraklion.mjs"
       ]
     },
     {

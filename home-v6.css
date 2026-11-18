@@ -414,8 +414,8 @@ body.dark-mode .v6-atla-link,body.dark-mode .v6-plan-link,body.dark-mode [data-a
 /* One account icon and a themed account dialog on the home page. */
 .account-avatar{background:transparent!important;border-color:#d8c47f!important;color:#f0dda0!important}
 .account-avatar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.home-flag-outline{display:block;flex:0 0 32px;width:32px;height:32px;object-fit:contain;opacity:.78;filter:grayscale(1) sepia(.35) saturate(.7)}
-body.dark-mode .home-flag-outline{opacity:.84;filter:grayscale(1) brightness(0) invert(1) sepia(.3) saturate(1.3) hue-rotate(18deg)}
+.home-flag-outline{display:block;flex:0 0 32px;width:32px;height:32px;object-fit:contain;opacity:.92;mix-blend-mode:multiply}
+body.dark-mode .home-flag-outline{opacity:.9;mix-blend-mode:screen;filter:grayscale(1) invert(1) sepia(1) saturate(3) hue-rotate(3deg)}
 #accountDialog{width:min(96vw,800px);max-height:90dvh;max-height:90vh;overflow-y:auto;overscroll-behavior:contain;padding:0;border:1px solid var(--line);border-radius:18px;background:var(--paper);color:var(--ink);box-shadow:0 22px 70px rgba(10,20,14,.32)}
 #accountDialog .dialog-inner{padding:22px;background:var(--paper);color:var(--ink)}
 #accountDialog .account-dialog{min-width:0;padding:clamp(15px,3vw,24px);background:var(--paper);color:var(--ink)}
@@ -424,3 +424,20 @@ body.dark-mode .home-flag-outline{opacity:.84;filter:grayscale(1) brightness(0) 
 body.dark-mode #accountDialog,body.dark-mode #accountDialog .dialog-inner,body.dark-mode #accountDialog .account-dialog,body.dark-mode #accountDialog .account-dialog-heading{background:#242c24;color:#e7e9dd}
 @media(max-width:720px){.home-flag-outline{flex-basis:27px;width:27px;height:27px}}
 @media(max-width:590px){#accountDialog{width:min(96vw,560px)}#accountDialog .backup-grid{grid-template-columns:1fr;gap:11px}#accountDialog .account-dialog{padding:15px}}
+.v6-live-widgets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 20px}
+.v6-live-card{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:14px 15px;border:1px solid var(--line);border-radius:15px;background:var(--paper);box-shadow:var(--shadow)}
+.v6-live-card-head{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--quiet);font-size:9px;font-weight:800;letter-spacing:.08em}
+.v6-live-card h2{margin:0;color:var(--ink);font-size:15px;line-height:1.3}
+.v6-live-card p{margin:0;color:var(--sub);font-size:11px;line-height:1.45}
+.v6-live-link,.v6-live-action{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:32px;margin-top:2px;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:var(--green-pale);color:var(--green-dark);font:inherit;font-size:11px;font-weight:700;line-height:1.2;text-decoration:none;cursor:pointer}
+.v6-live-card .v6-live-link:focus-visible,.v6-live-card .v6-live-action:focus-visible{outline:3px solid #bd9955;outline-offset:2px}
+.v6-live-card .v6-live-status{min-height:17px;color:var(--sub);font-size:10px}
+.v6-live-card .v6-location-data{font:600 10px/1.5 ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
+.v6-live-card .v6-location-actions{display:flex;flex-wrap:wrap;gap:6px}
+.v6-live-card .v6-live-source{color:var(--quiet);font-size:9px;text-decoration:underline;text-underline-offset:2px}
+body.dark-mode .v6-live-card{background:#242c24;border-color:#414d3c;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 8px 20px rgba(0,0,0,.15)}
+body.dark-mode .v6-live-card h2{color:#e7e9dd}
+body.dark-mode .v6-live-card p{color:#b6bdab}
+body.dark-mode .v6-live-link,body.dark-mode .v6-live-action{background:#344333;border-color:#4b5a45;color:#e2d18e}
+@media(max-width:720px){.v6-live-widgets{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 16px}.v6-live-card{padding:12px;border-radius:13px}.v6-live-card:last-child{grid-column:1/-1}}
+@media(max-width:370px){.v6-live-widgets{grid-template-columns:1fr}.v6-live-card:last-child{grid-column:auto}}
