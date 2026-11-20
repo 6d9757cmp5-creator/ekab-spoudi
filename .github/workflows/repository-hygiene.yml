@@ -1,0 +1,98 @@
+name: Repository hygiene and privacy gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.js'
+      - '**/*.mjs'
+      - '**/*.json'
+      - '**/*.jsonc'
+      - '**/*.md'
+      - '**/*.html'
+      - '**/*.yml'
+      - '**/*.yaml'
+      - '**/*.py'
+      - '.github/**'
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-hygiene-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Scanner unit tests
+        run: node --test tools/ci/repository-hygiene.test.mjs
+      - name: Scan repository and changed lines
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            node tools/ci/repository-hygiene.mjs --diff-base "$BASE_SHA"
+          else
+            node tools/ci/repository-hygiene.mjs
+          fi
+      - name: Upload sanitized review folder
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repository-hygiene-review
+          path: automation-reports/
+          if-no-files-found: warn
+          retention-days: 30
+
+  publish-report-branch:
+    # Only the trusted main branch may publish a report. Never run untrusted PR code with write access.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate sanitized report
+        run: node tools/ci/repository-hygiene.mjs
+      - name: Update separate report branch (never main)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/hygiene-reports"
+          cp automation-reports/latest.json automation-reports/latest.md "$RUNNER_TEMP/hygiene-reports/"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin automation/repository-hygiene-reports >/dev/null; then
+            git fetch origin automation/repository-hygiene-reports
+            git switch -C automation/repository-hygiene-reports FETCH_HEAD
+          else
+            git switch -c automation/repository-hygiene-reports
+          fi
+          mkdir -p automation-reports
+          cp "$RUNNER_TEMP/hygiene-reports/"* automation-reports/
+          git add -f automation-reports/latest.json automation-reports/latest.md
+          if git diff --cached --quiet; then
+            echo 'Report unchanged'; exit 0
+          fi
+          git commit -m 'docs: update sanitized repository hygiene report'
+          git push origin HEAD:refs/heads/automation/repository-hygiene-reports
