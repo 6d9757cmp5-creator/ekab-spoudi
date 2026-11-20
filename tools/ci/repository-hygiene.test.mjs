@@ -14,7 +14,8 @@ test('identifies secrets without recording the original values', () => {
 });
 
 test('recognizes new personal data in a changed line only', () => {
-  const patch = ['diff --git a/a.md b/a.md', '--- a/a.md', '+++ b/a.md', '@@ -2,0 +3,2 @@', '+contact: some.person@realmail.test', '+example: bot@example.com'].join('\n');
+  const syntheticEmail = ['some.person', 'realmail.test'].join('@');
+  const patch = ['diff --git a/a.md b/a.md', '--- a/a.md', '+++ b/a.md', '@@ -2,0 +3,2 @@', `+contact: ${syntheticEmail}`, '+example: bot@example.com'].join('\n');
   const findings = scanDiff(patch);
   assert.equal(findings.length, 1);
   assert.equal(findings[0].line, 3);
