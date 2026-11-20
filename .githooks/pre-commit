@@ -1,0 +1,4 @@
+#!/bin/sh
+# Opt-in: git config core.hooksPath .githooks
+# Staged content is checked before it can be committed locally.
+node tools/ci/repository-hygiene.mjs --staged --report-dir .git/hygiene-precommit
