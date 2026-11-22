@@ -42,7 +42,7 @@ if (type === 'saek') {
       for (const course of SAEK_COURSES.filter(c => select.value === 'all' || c.semester === select.value)) {
         const card = node('article', null, 'learning-course');
         card.append(node('h3', course.title), node('p', course.semester + '΄ εξάμηνο · ' + course.chapters + ' κεφάλαια'),
-          link('Μελέτη μαθήματος', 'saek-course-' + course.id + '.html#lesson-1'));
+          link('Μελέτη μαθήματος', 'saek-course-' + course.id + '.html#lesson-1'), link('▶ Εισαγωγή', 'saek-course-' + course.id + '.html#course-intro'));
         list.append(card);
       }
     }
