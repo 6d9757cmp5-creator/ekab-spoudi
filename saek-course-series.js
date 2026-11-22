@@ -16,6 +16,19 @@
     }catch{return false;}
   });
   if(!parts.length)return;
+  // Η εισαγωγή του μαθήματος είναι ξεχωριστή· η σειρά περιέχει μόνο τα κεφάλαια (βίντεο Ν = κεφάλαιο Ν).
+  const introPart=parts.find(part=>Number(part.chapter)===0);
+  for(let i=parts.length-1;i>=0;i--)if(Number(parts[i].chapter)===0)parts.splice(i,1);
+  if(introPart){
+    const box=document.createElement('section');
+    box.className='panel saek-series saek-course-intro';box.id='course-intro';box.setAttribute('aria-labelledby','saek-course-intro-title');
+    const k=document.createElement('p');k.className='eyebrow';k.textContent='Εισαγωγή μαθήματος';
+    const h=document.createElement('h2');h.id='saek-course-intro-title';h.textContent=(course.title||'')+' — Εισαγωγή';
+    const v=document.createElement('video');v.className='saek-series-frame';v.controls=true;v.preload='metadata';v.playsInline=true;v.src=introPart.url;
+    v.setAttribute('aria-label','Εισαγωγικό βίντεο μαθήματος: '+(course.title||''));
+    box.append(k,h,v);intro.insertAdjacentElement('afterend',box);
+  }
+  if(!parts.length)return;
 
   const section=document.createElement('section');
   section.className='panel saek-series';
@@ -30,7 +43,7 @@
   heading.textContent=(course.title||document.title.replace(/\s*[—|·]\s*ΕΚΑΒ Σπουδή\s*$/,'').trim())+' — Βίντεο';
   const introText=document.createElement('p');
   introText.className='saek-series-intro';
-  introText.textContent='Επίλεξε εισαγωγή ή κεφάλαιο. Η αναπαραγωγή ξεκινά μόνο όταν πατήσεις το χειριστήριο του βίντεο.';
+  introText.textContent='Κάθε βίντεο αντιστοιχεί σε ένα κεφάλαιο. Όταν αλλάζεις βίντεο, ανοίγει και το αντίστοιχο κεφάλαιο.';
   const viewport=document.createElement('div');
   viewport.className='saek-series-viewport';
   viewport.setAttribute('data-series-viewport','');
@@ -48,11 +61,11 @@
   next.type='button';next.className='btn secondary compact';next.textContent='Επόμενο ›';next.setAttribute('data-series-next','');
   controls.append(prev,status,next);
   const tabs=document.createElement('div');
-  tabs.className='saek-series-parts';tabs.setAttribute('data-series-parts','');tabs.setAttribute('role','group');tabs.setAttribute('aria-label','Βίντεο εισαγωγής και κεφαλαίων');
+  tabs.className='saek-series-parts';tabs.setAttribute('data-series-parts','');tabs.setAttribute('role','group');tabs.setAttribute('aria-label','Βίντεο κεφαλαίων');
   const note=document.createElement('p');note.className='small muted';
-  note.textContent=parts.length+' βίντεο · Η εισαγωγή προηγείται των κεφαλαίων.';
+  note.textContent=parts.length+' βίντεο κεφαλαίων.';
   section.append(eyebrow,heading,introText,viewport,controls,tabs,note);
-  intro.insertAdjacentElement('afterend',section);
+  (document.getElementById('course-intro')||intro).insertAdjacentElement('afterend',section);
 
   const slides=[];
   const tabNodes=[];
@@ -67,12 +80,16 @@
     const media=slide.querySelector('video,iframe');
     if(media&&!media.hasAttribute('src')){media.src=media.dataset.src;}
   }
-  function openWrittenChapter(chapter){
+  let syncing=false;
+  function openWrittenChapter(chapter,scroll){
     if(chapter<1)return;
     const target=document.getElementById('lesson-'+chapter);
     if(!target)return;
+    syncing=true;
+    document.querySelectorAll('details.reader-fold[open]').forEach(d=>{if(d!==target)d.open=false;});
     target.open=true;
-    requestAnimationFrame(()=>target.scrollIntoView({behavior:'smooth',block:'start'}));
+    setTimeout(()=>{syncing=false;},0);
+    if(scroll!==false)requestAnimationFrame(()=>target.scrollIntoView({behavior:'smooth',block:'start'}));
   }
 
   parts.forEach((part,i)=>{
@@ -103,20 +120,21 @@
     track.append(slide);slides.push(slide);
     const tab=document.createElement('button');
     tab.type='button';
-    tab.textContent=(i+1)+'. '+String(part.shortTitle||fullTitle);
+    tab.textContent=part.chapter+'. '+String(part.shortTitle||fullTitle);
     tab.setAttribute('aria-label',isIntro?'Εμφάνιση εισαγωγικού βίντεο: '+fullTitle:'Εμφάνιση βίντεο κεφαλαίου '+part.chapter+': '+fullTitle);
     tab.title=isIntro?'Εισαγωγικό βίντεο':'Βίντεο κεφαλαίου '+part.chapter;
     tab.addEventListener('click',()=>show(i));
     tabs.append(tab);tabNodes.push(tab);
   });
 
-  function show(nextIndex){
+  function show(nextIndex,sync){
     if(!Number.isInteger(nextIndex)||nextIndex<0||nextIndex>=parts.length)return;
     index=nextIndex;
     slides.forEach((slide,i)=>{if(i===index)startMedia(slide);else stopMedia(slide);});
     track.style.transform='translateX(-'+(index*100)+'%)';
     prev.disabled=index===0;next.disabled=index===parts.length-1;
-    status.textContent='Βίντεο '+(index+1)+' από '+parts.length;
+    status.textContent='Κεφάλαιο '+parts[index].chapter+' από '+parts.length;
+    if(sync!==false)openWrittenChapter(Number(parts[index].chapter),false);
     tabNodes.forEach((tab,i)=>{if(i===index)tab.setAttribute('aria-current','step');else tab.removeAttribute('aria-current');});
   }
   prev.addEventListener('click',()=>show(index-1));
@@ -129,5 +147,10 @@
     if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.25)show(index+(dx<0?1:-1));
   },{passive:true});
   section.addEventListener('keydown',event=>{if(event.target!==section)return;if(event.key==='ArrowLeft'){event.preventDefault();show(index-1);}if(event.key==='ArrowRight'){event.preventDefault();show(index+1);}});
-  show(0);
+  // όταν ανοίγει γραπτό κεφάλαιο, το βίντεο πηγαίνει στο ίδιο κεφάλαιο
+  document.querySelectorAll('details.reader-fold[id^="lesson-"]').forEach(d=>d.addEventListener('toggle',()=>{
+    if(!d.open||syncing)return;const n=Number(d.id.slice(7)),i=parts.findIndex(p=>Number(p.chapter)===n);if(i>=0&&i!==index)show(i,false);
+  }));
+  const openNow=document.querySelector('details.reader-fold[id^="lesson-"][open]'),startAt=openNow?parts.findIndex(p=>Number(p.chapter)===Number(openNow.id.slice(7))):0;
+  show(startAt>=0?startAt:0,false);
 })();
