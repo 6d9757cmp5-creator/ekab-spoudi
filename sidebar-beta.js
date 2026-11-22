@@ -1,7 +1,5 @@
 (()=>{
  'use strict';
- const params=new URLSearchParams(location.search);
- if(params.get('ui')!=='sidebar-beta')return;
  const root=document.documentElement;
  root.dataset.sidebarBeta='true';
  const base=new URL('./',document.currentScript?.src||location.href);
@@ -17,8 +15,6 @@
    const toggle=document.createElement('button');toggle.type='button';toggle.className='sidebar-beta-toggle';toggle.dataset.sidebarBetaToggle='';toggle.setAttribute('aria-label','Άνοιγμα πλευρικής πλοήγησης');toggle.setAttribute('aria-expanded','false');toggle.innerHTML=svg;
    const brand=side.querySelector('.brand,.v6-shell-brand');(brand||side.firstElementChild)?.after(toggle);
    if(!brand)side.prepend(toggle);
-   const tag=document.createElement('div');tag.className='sidebar-beta-tag';tag.innerHTML='<span>ΠΡΟΕΠΙΣΚΟΠΗΣΗ BETA</span><a href="#">Έξοδος</a>';side.append(tag);
-   tag.querySelector('a').href=(()=>{const u=new URL(location.href);u.searchParams.delete('ui');return u.href})();
    toggle.addEventListener('click',()=>{
     if(active){pinned=false;hoverSuppressed=!mobile.matches;setOpen(false)}
     else{pinned=true;hoverSuppressed=false;setOpen(true)}
@@ -47,12 +43,6 @@
   }
   for(const a of nav.querySelectorAll('a')){
    a.title=a.textContent.trim();a.setAttribute('aria-label',a.textContent.trim());
-   if(!a.href||a.getAttribute('href').startsWith('#/'))continue;
-   try{const u=new URL(a.href,location.href);if(u.origin===location.origin){u.searchParams.set('ui','sidebar-beta');a.href=u.href}}catch{}
-  }
-  for(const a of document.querySelectorAll('a[href]')){
-   if(a.closest('.sidebar,.v6-global-sidebar')||a.getAttribute('href').startsWith('#'))continue;
-   try{const u=new URL(a.href,location.href);if(u.origin===location.origin&&u.pathname.endsWith('.html')){u.searchParams.set('ui','sidebar-beta');a.href=u.href}}catch{}
   }
   return true;
  };
@@ -68,8 +58,6 @@
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active){e.preventDefault();setOpen(false);return}if(e.key==='Tab'&&active&&mobile.matches){const {side}=get();const list=[...side.querySelectorAll('button:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);if(!list.length)return;const first=list[0],last=list.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
  document.addEventListener('click',e=>{
   if(active&&e.target.closest('.nav a,.v6-shell-nav a'))setOpen(false);
-  const link=e.target.closest('a[href]');if(!link||link.closest('.sidebar-beta-tag')||link.getAttribute('href').startsWith('#'))return;
-  try{const u=new URL(link.href,location.href);if(u.origin===location.origin&&u.pathname.includes(base.pathname)){u.searchParams.set('ui','sidebar-beta');link.href=u.href}}catch{}
  });
  mobile.addEventListener('change',()=>{if(active)setOpen(false)});
  const start=()=>{

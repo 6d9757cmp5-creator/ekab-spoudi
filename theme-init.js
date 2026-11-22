@@ -1,6 +1,6 @@
 /* Resolves a site file relative to this script, so pages in subfolders load the same shared files. */
 function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.src).href:p;}
-(function(){if(new URLSearchParams(location.search).get('ui')!=='sidebar-beta')return;document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261122-4');document.head.appendChild(script)})();
+(function(){document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261122-8');document.head.appendChild(script)})();
 (function(){var value=null;try{value=localStorage.getItem('ekab.theme.v1')}catch(e){}if(value!=='dark'&&value!=='light'){try{var item=document.cookie.split(';').map(function(part){return part.trim()}).find(function(part){return part.indexOf('ekab.theme.v1=')===0});value=item?item.slice(14):null}catch(e){value=null}}document.documentElement.dataset.theme=value==='light'?'light':'dark'})();;
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */
