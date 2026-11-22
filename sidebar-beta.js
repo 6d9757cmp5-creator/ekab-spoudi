@@ -3,7 +3,7 @@
  const root=document.documentElement;
  root.dataset.sidebarBeta='true';
  const base=new URL('./',document.currentScript?.src||location.href);
- const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('sidebar-beta.css?v=20261122-5',base).href;document.head.append(css);
+ const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('sidebar-beta.css?v=20261122-6',base).href;document.head.append(css);
  const mobile=matchMedia('(max-width:720px)');
  const svg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
  const closeSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';

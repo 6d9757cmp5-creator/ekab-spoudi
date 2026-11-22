@@ -1,4 +1,5 @@
 html[data-sidebar-beta="true"]{overflow-x:hidden}
+html[data-sidebar-beta="true"] body.v6-page .preview-side-nav{display:none!important}
 html[data-sidebar-beta="true"] .sidebar,
 html[data-sidebar-beta="true"] .v6-global-sidebar{width:76px;z-index:130;transition:width .34s cubic-bezier(.2,.8,.2,1),transform .34s cubic-bezier(.2,.8,.2,1);overflow-x:hidden;background:linear-gradient(155deg,rgba(25,62,67,.92),rgba(17,43,49,.96));backdrop-filter:blur(18px) saturate(145%);border-right:1px solid rgba(226,235,219,.2);box-shadow:8px 0 32px rgba(7,22,26,.17)}
 html[data-sidebar-beta="true"] .sidebar{width:76px;z-index:130;transition:width .34s cubic-bezier(.2,.8,.2,1),transform .34s cubic-bezier(.2,.8,.2,1);overflow-x:hidden;background:linear-gradient(155deg,rgba(25,62,67,.92),rgba(17,43,49,.96));backdrop-filter:blur(18px) saturate(145%);border-right:1px solid rgba(226,235,219,.2);box-shadow:8px 0 32px rgba(7,22,26,.17)}
