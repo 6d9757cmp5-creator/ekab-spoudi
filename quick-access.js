@@ -21,10 +21,7 @@
     ['skills', 'paramedic.html#skills', 'Εργαστήρια δεξιοτήτων'],
     ['anatomy', 'ui-tools/anatomy-3d/index.html', '3D Ανατομία'],
     ['pharmacology', 'farmaka.html', 'Φαρμακολογία'],
-    ['ecg', 'mentor-ecg.html', 'Εργαστήριο ΗΚΓ'],
     ['protocols', 'protocols.html', 'Θέματα επειγόντων'],
-    ['oral', 'mentor-oral.html', 'Προφορική εξάσκηση'],
-    ['bibliography', 'mentor-library.html', 'Βιβλιογραφία'],
     ['law', 'profession-law.html', 'Επάγγελμα & νομοθεσία'],
     ['pdf', 'pdf-library.html', 'Βιβλιοθήκη PDF']
   ];
