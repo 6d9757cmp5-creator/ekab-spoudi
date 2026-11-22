@@ -56,7 +56,7 @@
           <div class="channel-chat-body">
           <div id="channelChatMessages" class="channel-chat-messages" role="log" aria-live="polite" aria-relevant="additions text"><p>Συνδέσου για να μιλήσεις και να γράψεις.</p></div>
           <form id="channelChatForm" class="channel-chat-form">
-            <input id="channelChatName" type="hidden" value="" aria-label="Αυτόματο ψευδώνυμο για το chat">
+            <input id="channelChatName" type="hidden" value="">
             <input id="channelChatText" maxlength="240" placeholder="Μήνυμα στο δωμάτιο…" aria-label="Μήνυμα" required>
             <button type="submit" id="channelChatSend">Αποστολή</button>
           </form>
@@ -66,7 +66,6 @@
         </details>
         <p class="channel-footnote">Ο ήχος μεταδίδεται μέσω Voxal P2P. Ο πρώτος δημιουργεί δωμάτιο, οι επόμενοι μπαίνουν σε αυτό· η φιλοξενία μεταβιβάζεται όταν αποχωρεί ο αρχικός οικοδεσπότης. Μόνο ήχος, χωρίς κάμερα.</p>
       </div>
-      <div id="channelExternal" hidden><p id="channelExternalText"></p><a id="channelLive" target="_blank" rel="noopener noreferrer" hidden>Άνοιγμα αρχικής εφαρμογής ↗</a><a id="channelSource" target="_blank" rel="noopener noreferrer">Κώδικας αρχικού έργου ↗</a><p class="channel-footnote">Η ζωντανή φωνή λειτουργεί μέσω Voxal P2P. Οι αρχικές εφαρμογές παραμένουν ανεξάρτητες επιλογές.</p></div>
       <div id="channelPrivate" hidden><label class="channel-password-label" for="channelPassword">Προσωπικός κωδικός έγκρισης</label><div class="channel-private-form"><input id="channelPassword" type="password" autocomplete="off" spellcheck="false" placeholder="Κωδικός" aria-label="Ιδιωτικός κωδικός"><button id="channelPrivateJoin" type="button">Έγκριση</button></div><p class="channel-secure-status" id="channelPrivateStatus" role="status" aria-live="polite">Απαιτείται κωδικός για την είσοδο. Δεν δημοσιεύεται στο πρόγραμμα.</p><p class="channel-footnote">Ο server ελέγχει τον κωδικό· η πρόσκληση Voxal πρέπει να μένει μόνο μεταξύ εγκεκριμένων μελών. Το 30+ είναι στόχος, όχι δοκιμασμένο όριο P2P.</p></div>
     </section>
   </section>

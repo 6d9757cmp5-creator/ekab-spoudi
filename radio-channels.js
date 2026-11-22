@@ -335,18 +335,10 @@
     detail.hidden = false;
     $("channelDetailTitle").textContent = providers[channel].title;
     $("channelDetailIntro").textContent = providers[channel].intro;
-    $("channelExternal").hidden = true; // All five built-in channels use the same Voxal adapter.
     $("channelPrivate").hidden = channel !== "private" || privateApproved;
     $("channelVoice").hidden = channel === "private" && !privateApproved;
     updateTabs();
     refreshCount(channel, channel === joined ? actualPeers : null);
-    const provider = providers[channel];
-    if (provider.source) {
-      $("channelExternalText").textContent = provider.note;
-      $("channelSource").href = provider.source;
-      $("channelLive").hidden = !provider.live;
-      if (provider.live) $("channelLive").href = provider.live;
-    }
     if (channel === joined) {
       $("channelVoiceConnect").hidden = true;
       $("channelVoiceLeave").hidden = false;
