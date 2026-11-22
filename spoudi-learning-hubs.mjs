@@ -13,6 +13,36 @@ const node = (tag, text, cls) => {
   const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; return n;
 };
 const link = (text, href) => { const n = node('a', text, 'btn secondary'); n.href = href; return n; };
+// Εισαγωγικό βίντεο μαθήματος: παίζει σε παράθυρο εδώ, χωρίς να ανοίγει κεφάλαιο.
+let seriesReady = null;
+function loadSeries() {
+  if (window.EKAB_COURSE_VIDEO_SERIES) return Promise.resolve();
+  return seriesReady ||= new Promise((resolve, reject) => { const s = document.createElement('script'); s.src = 'saek-videos.js'; s.onload = resolve; s.onerror = reject; document.head.append(s); });
+}
+function introDialog() {
+  let d = document.getElementById('course-intro-dialog');
+  if (d) return d;
+  d = document.createElement('dialog'); d.id = 'course-intro-dialog'; d.className = 'course-intro-dialog'; d.setAttribute('aria-labelledby', 'course-intro-dialog-title');
+  const close = node('button', 'Κλείσιμο ✕', 'btn secondary'); close.type = 'button';
+  const title = node('h2', '', ''); title.id = 'course-intro-dialog-title';
+  const video = document.createElement('video'); video.controls = true; video.preload = 'metadata'; video.playsInline = true;
+  const stop = () => { video.pause(); video.removeAttribute('src'); video.load(); };
+  close.addEventListener('click', () => d.close()); d.addEventListener('close', stop); d.addEventListener('click', e => { if (e.target === d) d.close(); });
+  d.append(close, title, video); document.body.append(d); return d;
+}
+function introButton(course) {
+  const b = node('button', '▶ Εισαγωγή', 'btn secondary'); b.type = 'button';
+  b.setAttribute('aria-label', 'Εισαγωγικό βίντεο: ' + course.title);
+  b.addEventListener('click', async () => {
+    try { await loadSeries(); } catch { return; }
+    const part = (window.EKAB_COURSE_VIDEO_SERIES?.[course.id]?.parts || []).find(p => Number(p.chapter) === 0);
+    if (!part) return;
+    const d = introDialog(); d.querySelector('h2').textContent = 'Εισαγωγή: ' + course.title;
+    const v = d.querySelector('video'); v.src = part.url; v.setAttribute('aria-label', 'Εισαγωγικό βίντεο: ' + course.title);
+    d.showModal();
+  });
+  return b;
+}
 document.querySelector(`[data-learning-type="${type}"]`).setAttribute('aria-current', 'page');
 content.replaceChildren();
 const cross = document.getElementById('learning-crosslink');
@@ -42,7 +72,7 @@ if (type === 'saek') {
       for (const course of SAEK_COURSES.filter(c => select.value === 'all' || c.semester === select.value)) {
         const card = node('article', null, 'learning-course');
         card.append(node('h3', course.title), node('p', course.semester + '΄ εξάμηνο · ' + course.chapters + ' κεφάλαια'),
-          link('Μελέτη μαθήματος', 'saek-course-' + course.id + '.html#lesson-1'), link('▶ Εισαγωγή', 'saek-course-' + course.id + '.html#course-intro'));
+          link('Μελέτη μαθήματος', 'saek-course-' + course.id + '.html#lesson-1'), introButton(course));
         list.append(card);
       }
     }

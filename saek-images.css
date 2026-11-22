@@ -36,3 +36,15 @@
 html[data-theme="dark"] .saek-gallery-image-button{background:#1d251e}
 html[data-theme="dark"] .saek-gallery-dialog-header{background:#202a21}
 html[data-theme="dark"] .saek-gallery-card a,html[data-theme="dark"] .saek-gallery-dialog a{color:#a1d8b0}
+
+/* Βίντεο ΣΑΕΚ (saek-videos.html) */
+.saek-video-thumb{position:relative;display:grid;place-items:center;aspect-ratio:16/9;width:100%;border:0;cursor:pointer;background:linear-gradient(135deg,#1d3b2c,#2f5b40);color:#fff}
+.saek-video-card.is-intro .saek-video-thumb{background:linear-gradient(135deg,#5a4512,#8a6a1c)}
+.saek-video-play{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.18);font-size:1.5rem;transition:transform .18s,background .18s}
+.saek-video-thumb:hover .saek-video-play,.saek-video-thumb:focus-visible .saek-video-play{transform:scale(1.1);background:rgba(255,255,255,.3)}
+.saek-video-badge{position:absolute;left:10px;top:10px;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.35);font:700 .78rem system-ui}
+.saek-gallery-dialog video{display:block;width:min(100%,960px);aspect-ratio:16/9;background:#000;border-radius:10px}
+.saek-video-card .saek-gallery-card-body h2{color:inherit;opacity:1}
+.saek-video-card .saek-gallery-card-body p{color:inherit;opacity:.75}
+html[data-theme=dark] .saek-video-card .saek-gallery-card-body{color:#e9f4ec}
+html:not([data-theme=dark]) .saek-video-card .saek-gallery-card-body{color:#172c34}

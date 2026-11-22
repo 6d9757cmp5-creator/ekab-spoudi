@@ -19,15 +19,6 @@
   // Η εισαγωγή του μαθήματος είναι ξεχωριστή· η σειρά περιέχει μόνο τα κεφάλαια (βίντεο Ν = κεφάλαιο Ν).
   const introPart=parts.find(part=>Number(part.chapter)===0);
   for(let i=parts.length-1;i>=0;i--)if(Number(parts[i].chapter)===0)parts.splice(i,1);
-  if(introPart){
-    const box=document.createElement('section');
-    box.className='panel saek-series saek-course-intro';box.id='course-intro';box.setAttribute('aria-labelledby','saek-course-intro-title');
-    const k=document.createElement('p');k.className='eyebrow';k.textContent='Εισαγωγή μαθήματος';
-    const h=document.createElement('h2');h.id='saek-course-intro-title';h.textContent=(course.title||'')+' — Εισαγωγή';
-    const v=document.createElement('video');v.className='saek-series-frame';v.controls=true;v.preload='metadata';v.playsInline=true;v.src=introPart.url;
-    v.setAttribute('aria-label','Εισαγωγικό βίντεο μαθήματος: '+(course.title||''));
-    box.append(k,h,v);intro.insertAdjacentElement('afterend',box);
-  }
   if(!parts.length)return;
 
   const section=document.createElement('section');
@@ -65,7 +56,7 @@
   const note=document.createElement('p');note.className='small muted';
   note.textContent=parts.length+' βίντεο κεφαλαίων.';
   section.append(eyebrow,heading,introText,viewport,controls,tabs,note);
-  (document.getElementById('course-intro')||intro).insertAdjacentElement('afterend',section);
+  intro.insertAdjacentElement('afterend',section);
 
   const slides=[];
   const tabNodes=[];
@@ -153,4 +144,27 @@
   }));
   const openNow=document.querySelector('details.reader-fold[id^="lesson-"][open]'),startAt=openNow?parts.findIndex(p=>Number(p.chapter)===Number(openNow.id.slice(7))):0;
   show(startAt>=0?startAt:0,false);
+  // Κουμπί «Δες βίντεο μαθήματος (N)» δίπλα στο «Δες εικόνες μαθήματος»
+  const total=parts.length;
+  function placeVideosButton(){
+    if(document.getElementById('saek-course-videos-shortcut'))return true;
+    const imgBar=document.getElementById('saek-course-images-shortcut');
+    const heading=document.querySelector('.saek-lesson-heading')||document.querySelector('h2.reader-title');
+    if(!imgBar&&!heading)return false;
+    const a=document.createElement('a');a.id='saek-course-videos-shortcut';a.className='saek-source-action';
+    a.href='#'+section.id;a.textContent='Δες βίντεο μαθήματος ('+total+')';
+    a.setAttribute('aria-label','Μετάβαση στα βίντεο των '+parts.length+' κεφαλαίων');
+    a.addEventListener('click',event=>{event.preventDefault();section.scrollIntoView({behavior:'smooth',block:'start'});});
+    if(imgBar)imgBar.insertBefore(a,imgBar.children[1]||null);
+    else{const bar=document.createElement('div');bar.className='saek-source-actions';bar.append(a);heading.insertAdjacentElement('afterend',bar);}
+    return true;
+  }
+  // Το «Δες εικόνες» δημιουργείται ασύγχρονα· κρατάμε το κουμπί βίντεο δίπλα του όποτε εμφανιστεί/ξαναχτιστεί.
+  const keep=new MutationObserver(()=>{
+    const imgBar=document.getElementById('saek-course-images-shortcut'),btn=document.getElementById('saek-course-videos-shortcut');
+    if(imgBar&&btn&&btn.parentElement!==imgBar){const old=btn.parentElement;imgBar.insertBefore(btn,imgBar.children[1]||null);if(old&&!old.children.length)old.remove();}
+    else if(!btn)placeVideosButton();
+  });
+  keep.observe(document.body,{childList:true,subtree:true});setTimeout(()=>keep.disconnect(),15000);
+  placeVideosButton();
 })();
