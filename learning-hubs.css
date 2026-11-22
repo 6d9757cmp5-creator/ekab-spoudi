@@ -6,3 +6,8 @@ body[data-learning-section="study"] [data-seminar-tab]:not([data-seminar-tab="th
 #study[data-supplementary] > :not(#supplementaryPanel){display:none!important}.supplementary-mixed-options{display:grid;gap:10px;margin:15px 0}.supplementary-mixed-options button{text-align:left;white-space:normal}#supplementaryPanel>button{margin:12px 8px 0 0}
 
 body[data-learning-section="study"] .knowledge-check{display:none!important}
+
+.course-intro-dialog{width:min(960px,94vw);border:1px solid var(--line,#3a5240);border-radius:16px;padding:16px;background:var(--card,#18261c);color:inherit}
+.course-intro-dialog::backdrop{background:rgba(0,0,0,.6)}
+.course-intro-dialog video{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;margin-top:10px}
+.course-intro-dialog h2{margin:10px 0 0;font-size:1.15rem}

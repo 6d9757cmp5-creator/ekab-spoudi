@@ -15,14 +15,14 @@
    if(typeof p.url!=='string'||!/^https:\/\//.test(p.url))continue;
    const intro=Number(p.chapter)===0;
    entries.push({id,n,semester:SEM(n),course:c.title,chapter:Number(p.chapter),intro,title:intro?'Εισαγωγή: '+c.title:String(p.title||''),url:p.url,
-    link:'saek-course-'+id+'.html'+(intro?'#course-intro':'#lesson-'+p.chapter),searchText:norm(c.title+' '+p.title)});
+    link:intro?'study.html?type=saek':'saek-course-'+id+'.html#lesson-'+p.chapter,searchText:norm(c.title+' '+p.title)});
   }
  }
  function el(tag,text,cls){const x=document.createElement(tag);if(text!=null)x.textContent=text;if(cls)x.className=cls;return x;}
  function open(e){
   large.src=e.url;$('videoLargeTitle').textContent=e.title;
   $('videoLargeCaption').textContent=e.course+(e.intro?' · Εισαγωγή μαθήματος':' · Κεφάλαιο '+e.chapter);
-  const link=$('videoChapterLink');link.href=e.link;link.textContent=e.intro?'Άνοιγμα μαθήματος':'Άνοιγμα κεφαλαίου';
+  const link=$('videoChapterLink');link.href=e.link;link.textContent=e.intro?'Μαθήματα ΣΑΕΚ':'Άνοιγμα κεφαλαίου';
   if(typeof dialog.showModal==='function')dialog.showModal();else location.href=e.url;
  }
  function stop(){large.pause();large.removeAttribute('src');large.load();}
@@ -34,7 +34,7 @@
   btn.addEventListener('click',()=>open(e));
   const body=el('div',null,'saek-gallery-card-body');
   body.append(el('h2',e.title),el('p',e.course+' · '+e.semester+'΄ εξάμηνο'));
-  const a=el('a',e.intro?'Άνοιγμα μαθήματος':'Άνοιγμα κεφαλαίου');a.href=e.link;body.append(a);
+  const a=el('a',e.intro?'Μαθήματα ΣΑΕΚ':'Άνοιγμα κεφαλαίου');a.href=e.link;body.append(a);
   item.append(btn,body);return item;
  }
  function appendMore(){
