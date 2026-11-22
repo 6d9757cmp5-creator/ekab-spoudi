@@ -16,12 +16,13 @@
 .saek-series-controls button:disabled{opacity:.45;cursor:not-allowed}
 .saek-series-status{font-size:.85rem;text-align:center;flex:1}
 .saek-series-parts{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;overscroll-behavior-x:contain;padding:0 0 8px;margin-top:12px}
-.saek-series-parts a{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-size:.79rem;padding:9px 12px;cursor:pointer}
-.saek-series-parts a:hover{border-color:#408953;background:#e9f6ec}
-.saek-series-parts a[aria-current="step"]{background:#295a36;border-color:#295a36;color:#fff}
-.saek-series-controls button:focus-visible,.saek-series-parts a:focus-visible{outline:3px solid #e5a84c;outline-offset:3px}
-html[data-theme="dark"] .saek-series-viewport,html[data-theme="dark"] .saek-series-parts a{background:#1e3925;border-color:#395d42;color:#e8f4ec}
+.saek-series-parts button{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-height:44px;white-space:nowrap;text-decoration:none;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit;font-size:.79rem;padding:9px 12px;cursor:pointer}
+.saek-series-parts button:hover{border-color:#408953;background:#e9f6ec}
+.saek-series-parts button[aria-current="step"]{background:#295a36;border-color:#295a36;color:#fff}
+.saek-series-controls button:focus-visible,.saek-series-parts button:focus-visible{outline:3px solid #e5a84c;outline-offset:3px}
+html[data-theme="dark"] .saek-series-viewport,html[data-theme="dark"] .saek-series-parts button{background:#1e3925;border-color:#395d42;color:#e8f4ec}
 html[data-theme="dark"] .saek-series-swipe-strip{border-color:#395d42;color:#b9d5c1}
+html[data-theme="dark"] .saek-series-parts button[aria-current="step"]{background:#357446;border-color:#357446;color:#fff}
 html[data-theme="dark"] .saek-series-parts a[aria-current="step"]{background:#357446;color:#fff}
 @media(max-width:520px){
  .saek-series-slide{padding:10px}
