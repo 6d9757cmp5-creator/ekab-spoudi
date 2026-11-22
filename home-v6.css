@@ -441,3 +441,6 @@ body.dark-mode .v6-live-card p{color:#b6bdab}
 body.dark-mode .v6-live-link,body.dark-mode .v6-live-action{background:#344333;border-color:#4b5a45;color:#e2d18e}
 @media(max-width:720px){.v6-live-widgets{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 16px}.v6-live-card{padding:12px;border-radius:13px}.v6-live-card:last-child{grid-column:1/-1}}
 @media(max-width:370px){.v6-live-widgets{grid-template-columns:1fr}.v6-live-card:last-child{grid-column:auto}}
+.v6-continue[hidden],.v6-secondary-column[hidden],#atlaCard[hidden]{display:none!important}
+.v6-dashboard.v6-dashboard-no-history{grid-template-columns:minmax(0,1fr)!important}
+body .v6-live-widgets>.v6-dashboard.v6-dashboard-no-history{grid-template-columns:minmax(0,1fr)!important}
