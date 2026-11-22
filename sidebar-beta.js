@@ -9,7 +9,7 @@
  const mobile=matchMedia('(max-width:720px)');
  const svg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
  const closeSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
- let active=false, lastFocus=null, observer;
+ let active=false, pinned=false, hoverCloseTimer=null, lastFocus=null, observer;
  const get=()=>({side:document.querySelector('#sidebar,.v6-global-sidebar'),main:document.querySelector('.maincol,.v6-global-main'),nav:document.querySelector('.nav,.v6-shell-nav'),top:document.querySelector('.topbar-inner,.v6-global-topbar')});
  const addBeta=()=>{
   const {side,main,nav,top}=get();if(!side||!main||!nav)return false;
@@ -19,7 +19,24 @@
    if(!brand)side.prepend(toggle);
    const tag=document.createElement('div');tag.className='sidebar-beta-tag';tag.innerHTML='<span>ΠΡΟΕΠΙΣΚΟΠΗΣΗ BETA</span><a href="#">Έξοδος</a>';side.append(tag);
    tag.querySelector('a').href=(()=>{const u=new URL(location.href);u.searchParams.delete('ui');return u.href})();
-   toggle.addEventListener('click',()=>setOpen(!active));
+   toggle.addEventListener('click',()=>{
+    pinned=!pinned;
+    if(pinned)setOpen(true);
+    else setOpen(!mobile.matches&&side.matches(':hover'));
+   });
+  }
+  if(side.dataset.sidebarBetaHover!=='true'){
+   side.dataset.sidebarBetaHover='true';
+   side.addEventListener('pointerenter',event=>{
+    if(mobile.matches||event.pointerType==='touch')return;
+    clearTimeout(hoverCloseTimer);
+    setOpen(true);
+   });
+   side.addEventListener('pointerleave',event=>{
+    if(mobile.matches||event.pointerType==='touch'||pinned)return;
+    clearTimeout(hoverCloseTimer);
+    hoverCloseTimer=setTimeout(()=>setOpen(false),260);
+   });
   }
   if(top&&!top.querySelector('[data-sidebar-beta-mobile-toggle]')){
    const trigger=document.createElement('button');trigger.type='button';trigger.className='sidebar-beta-mobile-toggle';trigger.dataset.sidebarBetaMobileToggle='';trigger.setAttribute('aria-label','Άνοιγμα πλευρικής πλοήγησης');trigger.setAttribute('aria-expanded','false');trigger.innerHTML=svg;top.prepend(trigger);trigger.addEventListener('click',()=>setOpen(!active));
@@ -40,6 +57,7 @@
  };
  const setOpen=next=>{
   const {side,main}=get();if(!side||!main)return;
+  if(!next){pinned=false;clearTimeout(hoverCloseTimer)}
   active=next;root.classList.toggle('sidebar-beta-open',active);
   const toggle=side.querySelector('[data-sidebar-beta-toggle]');
   toggle?.setAttribute('aria-expanded',String(active));toggle?.setAttribute('aria-label',active?'Κλείσιμο πλευρικής πλοήγησης':'Άνοιγμα πλευρικής πλοήγησης');if(toggle)toggle.innerHTML=active?closeSvg:svg;
