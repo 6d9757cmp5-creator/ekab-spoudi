@@ -551,7 +551,8 @@
         $("voxalShare").disabled = false;
         status("Ζωντανή σύνδεση · κράτα πατημένο το μεγάλο μικρόφωνο για ομιλία.");
         updateLauncher();
-        register(channel, roomCode);
+        await register(channel, roomCode);
+        if (joined !== channel) break;
         startPolling(channel, roomCode);
         break;
       }

@@ -9,7 +9,7 @@
     })
     .then((markup) => {
       document.body.insertAdjacentHTML("beforeend", markup);
-      return ["radio.js", "radio-channels.js"].reduce(
+      return ["radio.js", "radio-channels.js?v=20261122-2"].reduce(
         (chain, file) => chain.then(() => new Promise((resolve, reject) => {
           const node = document.createElement("script");
           node.src = new URL(file, base).href;
