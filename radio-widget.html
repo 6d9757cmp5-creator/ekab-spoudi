@@ -1,0 +1,72 @@
+<svg class="radio-icon-sprite" aria-hidden="true"><symbol id="radio" viewBox="0 0 24 24"><path d="M2 9a14 14 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></symbol></svg>
+<button class="radio-launch" id="radioLaunch" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radioPanel" title="Σύντομο πάτημα: άνοιγμα · παρατεταμένο: ομιλία όταν είσαι συνδεδεμένος"><svg aria-hidden="true"><use href="#radio"/></svg><span>Ασύρματος</span><span class="radio-launch-badge" id="radioBadge">Εκτός σύνδεσης</span></button>
+<section class="radio-panel" id="radioPanel" role="dialog" aria-labelledby="radioTitle" aria-modal="false" hidden>
+    <header class="radio-head"><div><div class="radio-kicker"><span class="radio-head-dot" aria-hidden="true"></span> ΕΚΑΒ ΣΠΟΥΔΗ · PTT</div><h2 id="radioTitle">Ασύρματος σπουδαστών</h2></div><button class="radio-close" id="radioClose" type="button" aria-label="Ελαχιστοποίηση ασυρμάτου">×</button></header>
+    <div class="radio-hardware" id="radioHardware" data-radio-state="offline">
+      <div class="radio-device-top"><span class="radio-device-brand">ΕΚΑΒ <span>RADIO</span></span><span class="radio-device-marks">DIGITAL VOICE · VHF STYLE</span><span class="radio-power-led" aria-hidden="true"></span></div>
+      <div class="radio-display" role="group" aria-label="Οθόνη καναλιού ασυρμάτου">
+        <div class="radio-screen-top"><span>CH 01 <span class="radio-separator">/</span> ΣΠΟΥΔΑΣΤΕΣ</span><span class="radio-signal-bars" aria-label="Σήμα σύνδεσης"><i></i><i></i><i></i><i></i></span></div>
+        <div class="radio-frequency"><span class="radio-frequency-main">01</span><span class="radio-frequency-caption">ΕΚΑΒ<br>ΣΠΟΥΔΗ</span><span class="radio-frequency-icon" aria-hidden="true">◉</span></div>
+        <div class="radio-screen-bottom"><strong id="radioMode">OFFLINE</strong><span id="radioTimer">00:00</span></div>
+      </div>
+      <div class="radio-info"><div><strong id="radioCount">—</strong><small>ΣΥΝΔΕΔΕΜΕΝΟΙ ΣΤΟ ΚΑΝΑΛΙ</small></div><div><span class="speaker-inline"><strong id="radioSpeaker">—</strong><span class="voice-eq" id="radioEqualizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><small>ΕΝΕΡΓΟΣ ΟΜΙΛΗΤΗΣ</small></div></div>
+      <div class="radio-level" aria-label="Ενδείξεις στάθμης εκπομπής"><span>RX</span><div class="radio-meter" id="radioMeter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>TX</span></div>
+      <div class="radio-ptt-row"><div class="radio-ptt-label"><strong>ΚΡΑΤΑ ΠΑΤΗΜΕΝΟ</strong><span>ή Space στο πληκτρολόγιο</span><small>Άφησέ το για να σταματήσεις</small></div><button class="radio-ptt" id="radioPtt" type="button" disabled aria-label="Κράτα πατημένο για ομιλία" aria-pressed="false"><svg aria-hidden="true"><use href="#radio"/></svg><span>PTT</span></button></div>
+      <div class="radio-audio-sink" id="radioAudioSink" aria-hidden="true"></div>
+    </div>
+    <p class="radio-status" id="radioStatus" role="status" aria-live="polite">Εκτός σύνδεσης. Δεν εκπέμπεται ήχος.</p>
+    <div class="radio-actions"><button class="radio-primary" id="radioJoin" type="button">Σύνδεση στο κανάλι</button><button class="radio-secondary" id="radioDemo" type="button">Δοκιμή χειρισμού</button><button class="radio-secondary" id="radioLeave" type="button" hidden>Αποχώρηση</button></div>
+    <div class="radio-bottom"><div class="radio-utilities"><button id="radioChannelsOpen" type="button">Κανάλια ασυρμάτου ↗</button><button id="radioCopy" type="button">Αντιγραφή πρόσκλησης</button><button id="radioSounds" type="button" aria-pressed="true">Εφέ ON</button><a id="radioExternal" href="?radio=1" target="_blank" rel="noopener noreferrer">Ξεχωριστό παράθυρο</a></div><p id="radioProviderNote">Σύντομο πάτημα στον αιωρούμενο ασύρματο: άνοιγμα. Παρατεταμένο: PTT όταν είσαι συνδεδεμένος. Η δοκιμή δεν μεταδίδει φωνή· ο ζωντανός ήχος απαιτεί server.</p></div>
+  </section>
+<section class="channel-hub" id="channelHub" role="dialog" aria-modal="false" aria-labelledby="channelHubTitle" hidden>
+    <header class="channel-head"><div><span class="channel-eyebrow">ΕΚΑΒ ΣΠΟΥΔΗ · RADIO</span><h2 id="channelHubTitle">Ασύρματος</h2><p>Κράτα πατημένο για να μιλήσεις</p></div><div class="channel-head-tools"><button id="channelSoundToggle" type="button" aria-pressed="true" hidden>Εφέ ON</button><button id="channelPauseAudio" class="channel-mini-btn channel-icon-control" type="button" aria-pressed="false" aria-label="Παύση ήχου με προσωρινή αποσύνδεση" title="Παύση ήχου · προσωρινή αποσύνδεση"><span id="channelPauseIcon" aria-hidden="true">⏸</span><span id="channelPauseLabel" class="channel-sr-only">Παύση</span></button><button id="channelHubMinimize" class="channel-mini-btn channel-minimize-btn channel-icon-control" aria-label="Ελαχιστοποίηση χωρίς αποσύνδεση" title="Ελαχιστοποίηση · ο ήχος παραμένει ενεργός" type="button">−</button><button id="channelHubClose" class="channel-mini-btn channel-exit-btn channel-icon-control" aria-label="Αποσύνδεση και έξοδος από τον ασύρματο" title="Έξοδος · αποσύνδεση" type="button"><span aria-hidden="true">⏻</span><span class="channel-sr-only">Έξοδος</span></button></div></header>
+    <nav class="channel-quick" id="channelQuick" aria-label="Γρήγορη αλλαγή καναλιού">
+      <button type="button" data-switch="voxal" aria-pressed="false">01</button>
+      <button type="button" data-switch="walkielazy" aria-pressed="false">02</button>
+      <button type="button" data-switch="walkie" aria-pressed="false">03</button>
+      <button type="button" data-switch="radio1" aria-pressed="false">04</button>
+      <button type="button" data-switch="private" aria-pressed="false" title="Ιδιωτικό κανάλι">05 <span aria-hidden="true">🔒</span></button>
+    </nav>
+    <div class="channel-main" id="channelMain">
+      <div class="channel-list" id="channelList">
+        <button type="button" class="channel-tile" data-channel="voxal"><span class="channel-num">01</span><span class="channel-copy"><strong>Voxal · PTT</strong><small>Αυτόνομο δωμάτιο · χωρίς διοργανωτή</small><em class="channel-state channel-state-test">Live φωνή μέσω Voxal</em></span><span class="channel-occupancy" id="channelCountVoxal">— / 6+</span></button>
+        <button type="button" class="channel-tile" data-channel="walkielazy"><span class="channel-num">02</span><span class="channel-copy"><strong>Walkie Lazy · PTT</strong><small>Δικό μας δωμάτιο + σύνδεσμος εξωτερικής εφαρμογής</small><em class="channel-state channel-state-test">Live φωνή μέσω Voxal</em></span><span class="channel-occupancy" id="channelCountLazy">— / 2*</span></button>
+        <button type="button" class="channel-tile" data-channel="walkie"><span class="channel-num">03</span><span class="channel-copy"><strong>WalkieTalkie · PTT</strong><small>Δικό μας δωμάτιο · επιλογή αρχικού έργου</small><em class="channel-state channel-state-test">Live φωνή μέσω Voxal</em></span><span class="channel-occupancy" id="channelCountWalkie">— / 9*</span></button>
+        <button type="button" class="channel-tile" data-channel="radio1"><span class="channel-num">04</span><span class="channel-copy"><strong>Team Radio · PTT</strong><small>Δικό μας δωμάτιο · επιλογή αρχικού έργου</small><em class="channel-state channel-state-test">Live φωνή μέσω Voxal</em></span><span class="channel-occupancy" id="channelCountRadio1">— / 12*</span></button>
+        <button type="button" class="channel-tile channel-tile-locked" data-channel="private"><span class="channel-num">05</span><span class="channel-copy"><strong>Ιδιωτικό δωμάτιο · Κωδικός</strong><small>Πρώτα έγκριση · μετά ζωντανός ήχος και chat</small><em class="channel-state channel-state-locked">Ελεγχόμενη είσοδος</em></span><span class="channel-occupancy" id="channelCountPrivate">🔒 / 30+*</span></button>
+      </div>
+      <p class="channel-hint">Το «—» σημαίνει άγνωστη πληρότητα. Τα όρια με * αφορούν τα αρχικά έργα ή στόχο σχεδιασμού, <strong>όχι πιστοποιημένη χωρητικότητα του ζωντανού Voxal</strong>.</p>
+    </div>
+    <section class="channel-detail" id="channelDetail" hidden aria-labelledby="channelDetailTitle">
+      <button class="channel-back" id="channelBack" type="button" hidden>Όλα τα κανάλια</button>
+      <h3 id="channelDetailTitle">Κανάλι</h3>
+      <p id="channelDetailIntro"></p>
+      <div id="channelVoice" hidden>
+        <div class="channel-voxal-status" id="voxalStatus" role="status" aria-live="polite">Επίλεξε «Σύνδεση» για πραγματική φωνή.</div>
+        <div class="channel-voice-actions">
+          <button id="channelHardware" class="channel-talk" type="button" disabled aria-label="Κράτα πατημένο για ομιλία"><span aria-hidden="true">🎙</span><strong id="channelTalkLabel">ΚΡΑΤΑ ΓΙΑ ΟΜΙΛΙΑ</strong></button>
+          <div class="channel-voice-meta"><span id="channelSelfName">Αυτόματο ψευδώνυμο…</span><span id="channelCurrentCount" aria-live="polite">— μέσα</span><span class="channel-voice-speaker" id="channelVoiceSpeaker" aria-live="polite" hidden><span id="channelVoiceSpeakerName"></span><span class="voice-eq" id="channelEqualizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span></div>
+          <button id="channelVoiceConnect" class="channel-retry" type="button" hidden>Επανάληψη σύνδεσης</button>
+          <button id="channelVoiceLeave" type="button" hidden>Αποσύνδεση</button>
+        </div>
+        <details class="channel-voice-setup" id="channelVoiceSetup"><summary>Πρόβλημα με το μικρόφωνο; Ρυθμίσεις</summary><div class="channel-voxal-frame"><iframe id="voxalFrame" title="Voxal · σύνδεση ήχου και άδεια μικροφώνου" allow="microphone; autoplay" referrerpolicy="no-referrer" loading="eager"></iframe></div></details>
+        <button class="channel-share" id="voxalShare" type="button" disabled hidden>Αντιγραφή πρόσκλησης στο δωμάτιο</button>
+        <details class="channel-chat" aria-labelledby="channelChatTitle">
+          <summary id="channelChatTitle"><span>💬 Συνομιλία</span><span class="channel-chat-chevron" aria-hidden="true">▾</span></summary>
+          <div class="channel-chat-body">
+          <div id="channelChatMessages" class="channel-chat-messages" role="log" aria-live="polite" aria-relevant="additions text"><p>Συνδέσου για να μιλήσεις και να γράψεις.</p></div>
+          <form id="channelChatForm" class="channel-chat-form">
+            <input id="channelChatName" type="hidden" value="" aria-label="Αυτόματο ψευδώνυμο για το chat">
+            <input id="channelChatText" maxlength="240" placeholder="Μήνυμα στο δωμάτιο…" aria-label="Μήνυμα" required>
+            <button type="submit" id="channelChatSend">Αποστολή</button>
+          </form>
+          <p class="channel-chat-notice">Τα μηνύματα φαίνονται στα μέλη του καναλιού και διαγράφονται αυτόματα μέσα σε 24 ώρες.</p>
+          <p id="channelChatStatus" class="channel-chat-status" aria-live="polite"></p>
+          </div>
+        </details>
+        <p class="channel-footnote">Ο ήχος μεταδίδεται μέσω Voxal P2P. Ο πρώτος δημιουργεί δωμάτιο, οι επόμενοι μπαίνουν σε αυτό· η φιλοξενία μεταβιβάζεται όταν αποχωρεί ο αρχικός οικοδεσπότης. Μόνο ήχος, χωρίς κάμερα.</p>
+      </div>
+      <div id="channelExternal" hidden><p id="channelExternalText"></p><a id="channelLive" target="_blank" rel="noopener noreferrer" hidden>Άνοιγμα αρχικής εφαρμογής ↗</a><a id="channelSource" target="_blank" rel="noopener noreferrer">Κώδικας αρχικού έργου ↗</a><p class="channel-footnote">Η ζωντανή φωνή λειτουργεί μέσω Voxal P2P. Οι αρχικές εφαρμογές παραμένουν ανεξάρτητες επιλογές.</p></div>
+      <div id="channelPrivate" hidden><label class="channel-password-label" for="channelPassword">Προσωπικός κωδικός έγκρισης</label><div class="channel-private-form"><input id="channelPassword" type="password" autocomplete="off" spellcheck="false" placeholder="Κωδικός" aria-label="Ιδιωτικός κωδικός"><button id="channelPrivateJoin" type="button">Έγκριση</button></div><p class="channel-secure-status" id="channelPrivateStatus" role="status" aria-live="polite">Απαιτείται κωδικός για την είσοδο. Δεν δημοσιεύεται στο πρόγραμμα.</p><p class="channel-footnote">Ο server ελέγχει τον κωδικό· η πρόσκληση Voxal πρέπει να μένει μόνο μεταξύ εγκεκριμένων μελών. Το 30+ είναι στόχος, όχι δοκιμασμένο όριο P2P.</p></div>
+    </section>
+  </section>

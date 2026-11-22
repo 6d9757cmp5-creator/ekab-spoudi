@@ -1,0 +1,46 @@
+name: Deploy radio rooms
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/radio-rooms/**'
+      - 'radio-config.js'
+      - 'radio.css'
+      - 'radio-channels.css'
+      - 'radio-widget.html'
+      - 'radio-widget-loader.js'
+      - 'radio.js'
+      - 'radio-channels.js'
+      - '.github/workflows/deploy-radio-rooms.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: deploy-radio-rooms
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check Worker syntax
+        run: node --input-type=module --check < workers/radio-rooms/src/index.js
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: workers/radio-rooms
+          wranglerVersion: '4.20.0'
+      - name: Smoke check
+        run: |
+          url=https://ekab-spoudi-radio.6d9757cmp5.workers.dev/api/radio/voxal/state
+          origin=https://6d9757cmp5-creator.github.io
+          options=$(curl -s -o /dev/null -w '%{http_code}' -X OPTIONS "$url" -H "origin: $origin" -H 'access-control-request-method: GET')
+          state=$(curl -s -o /dev/null -w '%{http_code}' "$url" -H "origin: $origin")
+          echo "OPTIONS: $options, state: $state"
+          test "$options" = '204' && test "$state" = '200'

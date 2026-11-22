@@ -1,0 +1,14 @@
+{
+  "name": "ekab-spoudi-radio",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-22",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "durable_objects": {
+    "bindings": [{ "name": "CHANNELS", "class_name": "RadioChannel" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RadioChannel"] }],
+  "vars": {
+    "ALLOWED_ORIGIN": "https://6d9757cmp5-creator.github.io"
+  }
+}
