@@ -9,7 +9,7 @@
  const mobile=matchMedia('(max-width:720px)');
  const svg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
  const closeSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
- let active=false, pinned=false, hoverCloseTimer=null, lastFocus=null, observer;
+ let active=false, pinned=false, hoverSuppressed=false, hoverCloseTimer=null, lastFocus=null, observer;
  const get=()=>({side:document.querySelector('#sidebar,.v6-global-sidebar'),main:document.querySelector('.maincol,.v6-global-main'),nav:document.querySelector('.nav,.v6-shell-nav'),top:document.querySelector('.topbar-inner,.v6-global-topbar')});
  const addBeta=()=>{
   const {side,main,nav,top}=get();if(!side||!main||!nav)return false;
@@ -20,20 +20,21 @@
    const tag=document.createElement('div');tag.className='sidebar-beta-tag';tag.innerHTML='<span>ΠΡΟΕΠΙΣΚΟΠΗΣΗ BETA</span><a href="#">Έξοδος</a>';side.append(tag);
    tag.querySelector('a').href=(()=>{const u=new URL(location.href);u.searchParams.delete('ui');return u.href})();
    toggle.addEventListener('click',()=>{
-    pinned=!pinned;
-    if(pinned)setOpen(true);
-    else setOpen(!mobile.matches&&side.matches(':hover'));
+    if(active){pinned=false;hoverSuppressed=!mobile.matches;setOpen(false)}
+    else{pinned=true;hoverSuppressed=false;setOpen(true)}
    });
   }
   if(side.dataset.sidebarBetaHover!=='true'){
    side.dataset.sidebarBetaHover='true';
    side.addEventListener('pointerenter',event=>{
-    if(mobile.matches||event.pointerType==='touch')return;
+    if(mobile.matches||event.pointerType==='touch'||hoverSuppressed)return;
     clearTimeout(hoverCloseTimer);
     setOpen(true);
    });
    side.addEventListener('pointerleave',event=>{
-    if(mobile.matches||event.pointerType==='touch'||pinned)return;
+    if(event.pointerType==='touch')return;
+    hoverSuppressed=false;
+    if(mobile.matches||pinned)return;
     clearTimeout(hoverCloseTimer);
     hoverCloseTimer=setTimeout(()=>setOpen(false),260);
    });
