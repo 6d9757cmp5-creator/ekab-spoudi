@@ -88,19 +88,39 @@ function link(item,chapter){const [label,mode,system,focus,sex]=item;
  const a=document.createElement('a');a.href=url.pathname+url.search;
  a.className='saek-anatomy-link';a.textContent=label+' ↗';
  a.setAttribute('aria-label','Άνοιγμα 3D Ανατομίας: '+label);
+ // Ανοίγει σε παράθυρο πάνω από το κεφάλαιο — ο χρήστης δεν φεύγει από το μάθημα.
+ a.addEventListener('click',ev=>{if(ev.ctrlKey||ev.metaKey||ev.shiftKey||ev.button)return;ev.preventDefault();openAtlas(a.href,label);});
  return a
+}
+function openAtlas(href,label){
+ let d=document.getElementById('saek-anatomy-dialog');
+ if(!d){
+  d=document.createElement('dialog');d.id='saek-anatomy-dialog';d.className='saek-anatomy-dialog';d.setAttribute('aria-label','3D ανατομία');
+  const bar=document.createElement('div');bar.className='saek-anatomy-dialog-bar';
+  const t=document.createElement('strong');const close=document.createElement('button');close.type='button';close.textContent='Επιστροφή στο κεφάλαιο ✕';
+  const ext=document.createElement('a');ext.target='_blank';ext.rel='noopener';ext.textContent='Νέα καρτέλα ↗';
+  bar.append(t,ext,close);const f=document.createElement('iframe');f.title='3D ανατομία';f.allow='fullscreen';
+  d.append(bar,f);document.body.append(d);
+  close.addEventListener('click',()=>d.close());d.addEventListener('close',()=>{f.src='about:blank';});
+  // Μέσα στο παράθυρο κρύβεται το κέλυφος της εφαρμογής· «Επιστροφή στο μάθημα» κλείνει το παράθυρο.
+  f.addEventListener('load',()=>{try{const doc=f.contentDocument;if(!doc||!doc.head)return;
+   const st=doc.createElement('style');st.textContent='.v6-global-sidebar,.v6-global-topbar,.sidebar,.topbar,.style-preview-nav,[data-ekab-quick-access],.v6-shell-mobile-nav,.mobile-nav{display:none!important}.v6-global-main,.maincol,.v6-page-shell{margin-left:0!important;padding-left:0!important;grid-template-columns:1fr!important}body{padding-top:0!important}';
+   doc.head.append(st);
+   doc.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a');if(a&&/saek-course-\d\d\.html/.test(a.getAttribute('href')||'')){e.preventDefault();d.close();}},true);
+  }catch(e){}});
+ }
+ d.querySelector('strong').textContent='🧬 '+label;d.querySelector('a').href=href;d.querySelector('iframe').src=href;d.showModal();
 }
 for(const [chapterNumber,items] of Object.entries(rows)){
  const chapter=document.getElementById('lesson-'+chapterNumber);
  if(!chapter||chapter.querySelector('.saek-anatomy-jump'))continue;
  const host=chapter.querySelector('.body .reader-main')||chapter.querySelector('.body');
  if(!host)continue;
- const aside=document.createElement('aside');aside.className='saek-anatomy-jump';
+ // Συμπαγές: μία γραμμή που ανοίγει μόνο όταν την πατήσεις.
+ const aside=document.createElement('details');aside.className='saek-anatomy-jump';
  aside.setAttribute('aria-label','Σχετική διαδραστική 3D ανατομία');
- const copy=document.createElement('div');copy.className='saek-anatomy-jump-text';
- const title=document.createElement('strong');title.textContent='🧬 Δες τη σχετική ανατομία σε 3D';
- const subtitle=document.createElement('small');subtitle.textContent='Επιλεγμένα οστά και όργανα για αυτό το κεφάλαιο';
- copy.append(title,subtitle);aside.append(copy);
+ const summary=document.createElement('summary');summary.className='saek-anatomy-jump-summary';
+ summary.textContent='🧬 3D ανατομία ('+items.length+')';aside.append(summary);
  const buttons=document.createElement('div');buttons.className='saek-anatomy-jump-actions';
  for(const item of items)buttons.append(link(item,Number(chapterNumber)));
  aside.append(buttons);
