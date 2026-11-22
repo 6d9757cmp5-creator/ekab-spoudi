@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="el">
+<html data-theme="dark" lang="el">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -42,21 +42,15 @@ html[data-theme="dark"] .ecg-chart svg{filter:invert(.92) hue-rotate(180deg)}
 <script type="module" src="mentor-ecg.js"></script>
 <link rel="stylesheet" href="navigation.css?v=4"><script src="navigation.js?v=4" defer data-ekab-navigation data-ekab-back-only></script><meta name="description" content="Εργαστήριο ΗΚΓ: εξάσκηση στην ανάγνωση ηλεκτροκαρδιογραφήματος με συνθετικές κυματομορφές.">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-</head>
-<body>
+<style>html[data-theme="dark"] .ecg-chart{background:#202721;border-color:#414a43}</style><style id="preview-compact-layout">main :is(.pagehead,.page-head,.hero,.tool-hero,.lab-hero,.mentor-hero,.ecg-head){padding-block:clamp(.75rem,2vw,1.1rem);margin-block:.65rem;min-height:0}main :is(.pagehead,.page-head,.hero,.tool-hero,.lab-hero,.mentor-hero,.ecg-head) h1{font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.2;margin-block:0 .3rem}main :is(.pagehead,.page-head,.hero,.tool-hero,.lab-hero,.mentor-hero,.ecg-head) p{margin-block:.3rem 0;max-width:72ch}.ecg-head{background:none;border:0;padding-inline:0}.ecg-training-note{color:#c1ccc3;font-size:.88rem;margin:.35rem 0}.ecg-panel#ecg-monitor-training{margin-top:.6rem;padding:clamp(.5rem,2vw,.85rem)}</style><style id="unified-ecg">.ecg-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}#ecg-monitor-training.ecg-panel{padding:0;border:0;box-shadow:none;background:transparent}#ecg-advanced-frame{background:var(--preview-bg)!important;border-radius:0!important}</style><script defer src="arrow-navigation.js"></script><link rel="stylesheet" href="spoudi-theme.css"></head>
+<body><nav class="style-preview-nav" aria-label="Κύριες ενότητες"><strong class="preview-brand"><span>✚</span> ΕΚΑΒ Σπουδή</strong><svg aria-hidden="true" width="0" height="0" style="position:absolute"><symbol id="beta-nav-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/></symbol><symbol id="beta-nav-book" viewBox="0 0 24 24"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H20v17H5.5A2.5 2.5 0 0 0 3 22zM3 5.5v14A2.5 2.5 0 0 1 5.5 17H20M8 7h8M8 10h7"/></symbol><symbol id="beta-nav-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></symbol><symbol id="beta-nav-tools" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/><circle cx="18" cy="12" r="2"/><circle cx="15" cy="17" r="2"/></symbol><symbol id="beta-nav-chart" viewBox="0 0 24 24"><path d="M4 19V5M4 19h17M7 15l4-4 3 2 6-7M16 6h4v4"/></symbol></svg><a href="index.html#/home"><svg class="preview-section-icon" aria-hidden="true"><use href="#beta-nav-home"></use></svg>Αρχική</a><a href="study.html"><svg class="preview-section-icon" aria-hidden="true"><use href="#beta-nav-book"></use></svg>Μελέτη</a><a href="practice.html"><svg class="preview-section-icon" aria-hidden="true"><use href="#beta-nav-target"></use></svg>Εξάσκηση</a><a href="tools.html"><svg class="preview-section-icon" aria-hidden="true"><use href="#beta-nav-tools"></use></svg>Εργαλεία</a><a href="progress-v6.html"><svg class="preview-section-icon" aria-hidden="true"><use href="#beta-nav-chart"></use></svg>Πρόοδος</a></nav>
 <main class="ecg-wrap"><button type="button" class="ekab-nav-back" data-ekab-back>← Πίσω</button>
  <a data-ekab-back-spot href="paramedic.html#skills">← Εργαλεία μελέτης</a>
- <header class="ecg-head">
-  <div style="font-weight:850;letter-spacing:.08em">ΕΚΠΑΙΔΕΥΤΙΚΟ ΕΡΓΑΣΤΗΡΙΟ ΗΚΓ</div>
-  <h1>Εργαστήριο ΗΚΓ — αναγνώριση ρυθμών και κυμάτων</h1>
-  <p>Εξασκήσου σε 18 σχηματικά παραδείγματα ρυθμών, στην αναγνώριση κυμάτων P–QRS–T και στη μέτρηση συχνότητας. Μπορείς επίσης να ανοίξεις 8 έτοιμες συνθετικές καταγραφές 12 απαγωγών (ανάμεσά τους πρόσθιο, κατώτερο και πλάγιο έμφραγμα). Το εργαλείο είναι εκπαιδευτικό και όχι κλινικό μόνιτορ.</p>
- </header>
- <div class="disclaimer" role="note"><strong>Εκπαιδευτική χρήση — όχι ιατρική ερμηνεία.</strong> Οι συνθετικές καμπύλες είναι μαθηματικά σχήματα και δεν αναπαριστούν πιστά κλινικά ΗΚΓ. Η άσκηση ζητά από τον μαθητή να επιλέξει ετικέτες ρυθμών· δεν εκτελεί αυτόματη αναγνώριση αρρυθμιών ούτε διάγνωση πραγματικών καταγραφών. Δεν μετρά πραγματικούς παλμούς, δεν υποκαθιστά την κλινική εκπαίδευση και δεν χρησιμοποιεί τεχνητή νοημοσύνη.</div>
+ <header class="ecg-head"><h1>Εργαστήριο ΗΚΓ</h1><p class="ecg-training-note">Εκπαιδευτικά παραδείγματα ΗΚΓ για εξάσκηση.</p></header>
 
  <section class="ecg-panel" id="ecg-monitor-training" aria-labelledby="ecg-monitor-training-heading">
-  <h2 id="ecg-monitor-training-heading">Μόνιτορ ΗΚΓ — εξάσκηση αναγνώρισης ρυθμών</h2>
-  <p class="muted small">Διαδραστικό εκπαιδευτικό μόνιτορ με 18 συνθετικά παραδείγματα ρυθμών, παύση, πλήρη οθόνη, ρυθμίσεις σάρωσης και ανατροφοδότηση. Περιλαμβάνονται 8 έτοιμα συνθετικά παραδείγματα 12 απαγωγών, ανάμεσά τους 3 σχηματικά εμφράγματα (STEMI). Οι κυματομορφές είναι σχηματικές και δεν αποτελούν κλινικά πιστή αναπαραγωγή ή διαγνωστικό εργαλείο.</p>
-  <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό μόνιτορ καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html" loading="eager" allow="fullscreen" style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
+  <h2 id="ecg-monitor-training-heading" class="ecg-visually-hidden">Μόνιτορ ΗΚΓ</h2>
+  <iframe id="ecg-advanced-frame" title="Εκπαιδευτικό μόνιτορ καρδιακών ρυθμών και προβολή 12 απαγωγών" src="tools/ecg-lab/monitor.html?embedded=1" loading="eager" allow="fullscreen" style="width:100%;height:1100px;display:block;border:0;border-radius:12px;background:#101a25" referrerpolicy="same-origin"></iframe>
  </section>
  <script>
  (function () {
@@ -64,7 +58,9 @@ html[data-theme="dark"] .ecg-chart svg{filter:invert(.92) hue-rotate(180deg)}
   if (!frame) return;
   const example = new URLSearchParams(location.search).get('example');
   if (example && /^[a-z0-9-]{1,40}$/.test(example)) {
-   frame.src = 'tools/ecg-lab/monitor.html?example=' + encodeURIComponent(example);
+   const source = new URL(frame.src);
+   source.searchParams.set('example', example);
+   frame.src = source.href;
    frame.addEventListener('load', function () {
     setTimeout(function () {
      try {

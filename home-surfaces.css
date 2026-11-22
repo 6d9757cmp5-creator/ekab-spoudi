@@ -1,0 +1,35 @@
+/* BETA 22/11: μόνο «αιωρούμενες» κάρτες στον Πίνακα ελέγχου — τα χρώματα μένουν τα αρχικά της κύριας σελίδας */
+.v6-live-card,.v6-path-section,.v6-atla-card,.metric.card,.v6-chart-card,.v6-progress-note{box-shadow:0 1px 2px rgba(39,61,42,.06),0 14px 30px -12px rgba(39,61,42,.22)!important}
+html[data-theme=dark] .v6-live-card,html[data-theme=dark] .v6-path-section,html[data-theme=dark] .v6-atla-card,html[data-theme=dark] .metric.card,html[data-theme=dark] .v6-chart-card{box-shadow:0 1px 2px rgba(0,0,0,.35),0 16px 32px -12px rgba(0,0,0,.6)!important}
+@media (prefers-reduced-motion:no-preference){
+  .v6-live-card,.metric.card,.v6-chart-card{transition:transform .18s ease,box-shadow .18s ease}
+  .v6-live-card:hover,.metric.card:hover,.v6-chart-card:hover{transform:translateY(-2px)}
+}
+html[data-theme=dark] .beta-cal-day.empty{background:transparent!important}
+.beta-focus-btn:focus-visible,.beta-focus-exit:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@keyframes beta-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  .beta-rise{animation:beta-rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .beta-dash .v6-chart-track i,.beta-dash .v6-path-row i b{transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .beta-dash .v6-day-track b{transition:height .9s cubic-bezier(.2,.7,.2,1)}
+  .beta-cal-day.today{animation:beta-pulse 2.4s ease-in-out 1s 2}
+}
+@keyframes beta-pulse{0%,100%{box-shadow:0 0 0 0 rgba(100,136,92,.45)}50%{box-shadow:0 0 0 8px rgba(100,136,92,0)}}
+.beta-demo-tag{display:inline-block;margin:6px 0 0;padding:2px 10px;border-radius:999px;border:1px dashed #bd9955;color:#7a5a1f;font:600 12px/1.6 system-ui;background:#fff8e8}
+html[data-theme=dark] .beta-demo-tag{color:#e8cf95;background:#2b261a;border-color:#8c7340}
+.beta-dash .v6-day-track{position:relative;overflow:hidden}.beta-dash .v6-day-track b{position:absolute;left:0;right:0;bottom:0}
+
+@media (max-width: 760px) {
+  .v6-dashboard .v6-path-section { order: 2 !important; }
+  .v6-dashboard .v6-atla-card { order: 3 !important; }
+  .v6-dashboard .v6-today { order: 4 !important; }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .topbar #themeLabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
+.topbar #themeToggle { min-width: 44px; min-height: 44px; }
+html[data-theme="light"] :is(.v6-live-card-head a,.metric-side small,.metric-caption,.v6-chart-key,.v6-semester-row small,.v6-chart-note,.v6-progress-note p,.v6-note-seal,.v6-path-dot) {
+  color: #435d4b !important;
+}
