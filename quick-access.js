@@ -12,6 +12,7 @@
     ['saek-study', 'study.html?type=saek', 'Μαθήματα ΣΑΕΚ'],
     ['eoppep-study', 'study.html?type=eoppep', 'Ερωτήσεις ΕΟΠΠΕΠ'],
     ['saek-images', 'saek-images.html', 'Εικόνες ΣΑΕΚ'],
+    ['saek-videos', 'saek-videos.html', 'Βίντεο ΣΑΕΚ'],
     ['saek-practice', 'saek-exams.html', 'Εξετάσεις ΣΑΕΚ'],
     ['eoppep-practice', 'theory.html?mode=exam&section=practice', 'Εξάσκηση ΕΟΠΠΕΠ'],
     ['additional-practice', 'supplementary_practice.html', 'Πρόσθετες ασκήσεις'],
