@@ -1,0 +1,38 @@
+/* BETA 22/11: εφέ της σελίδας αναφοράς */
+.bp-card,.v6-live-card,.v6-path-section,.v6-continue,.v6-atla-card,.beta-cal,.metric.card,.v6-chart-card{position:relative;isolation:isolate}
+.bp-card::before,.v6-live-card::before,.v6-path-section::before,.v6-continue::after,.v6-atla-card::before,.metric.card::before,.v6-chart-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(260px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(114,161,120,.17),transparent 72%);opacity:0;transition:opacity .26s ease;z-index:-1}
+.v6-continue::after{background:radial-gradient(260px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(238,220,153,.16),transparent 72%);z-index:0}
+html[data-theme=dark] .bp-card::before,html[data-theme=dark] .v6-live-card::before,html[data-theme=dark] .v6-path-section::before,html[data-theme=dark] .v6-atla-card::before,html[data-theme=dark] .metric.card::before,html[data-theme=dark] .v6-chart-card::before{background:radial-gradient(260px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(168,211,165,.10),transparent 72%)}
+html[data-theme=dark] .v6-continue::after{background:radial-gradient(260px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(238,220,153,.14),transparent 72%)}
+:is(.bp-card,.v6-live-card,.v6-path-section,.v6-atla-card,.metric.card,.v6-chart-card):is(:hover,:focus-within)::before,.v6-continue:is(:hover,:focus-within)::after{opacity:1}
+/* μενού: γραμμή έμφασης + μικρή ένδειξη */
+.fx-side{position:relative;transition:background .2s,transform .24s cubic-bezier(.2,.7,.2,1)}
+.fx-side::before{content:"";position:absolute;left:4px;top:26%;bottom:26%;width:3px;border-radius:5px;background:#e7cf91;transform:scaleY(0);transition:transform .24s cubic-bezier(.2,.7,.2,1)}
+.fx-side:hover::before,.fx-side:focus-visible::before{transform:scaleY(1)}
+.fx-side:hover{background:rgba(255,255,255,.09)!important;transform:translateX(3px)}
+.fx-side[data-mini]::after{content:attr(data-mini);position:absolute;right:10px;top:50%;max-width:90px;font-size:10px;font-weight:600;color:#e7cf91;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transform:translateY(-45%);transition:opacity .18s,transform .18s}
+.fx-side[data-mini]:hover::after,.fx-side[data-mini]:focus-visible::after{opacity:.85;transform:translateY(-50%)}
+.fx-side.active::before{transform:scaleY(1)}
+/* κουμπιά/δακτύλιοι */
+.v6-primary-button,.bp-ghost,.v6-live-action,.theme-toggle,.rd-primary{transition:transform .18s,box-shadow .18s}
+.v6-primary-button:hover,.bp-ghost:hover,.v6-live-action:hover,.theme-toggle:hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(50,75,50,.2)}
+.progressring:hover,.bp-ring-item:hover .bp-ring{box-shadow:0 0 0 5px rgba(255,255,255,.05);border-radius:50%}
+/* λάμψη στις μπάρες */
+.bp-bars i b,.bp-mini i b,.bp-resume-list i b,.v6-chart-track i{background-image:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%),linear-gradient(90deg,var(--bp-green2,#64885c),var(--bp-green,#3d704b))!important;background-size:240% 100%,100% 100%!important;background-repeat:no-repeat!important}
+@keyframes fx-shimmer{0%,55%{background-position:-140% 0,0 0}100%{background-position:215% 0,0 0}}
+/* παλμός και κύμα ΗΚΓ */
+.fx-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3fd0b0;margin-right:6px;vertical-align:middle}
+.fx-wave{width:48px;height:12px;margin-left:8px;vertical-align:middle}.fx-wave path{fill:none;stroke:#3fd0b0;stroke-width:1.6;stroke-dasharray:.3 .7;stroke-linecap:round}
+@keyframes fx-pulse{0%,100%{transform:scale(1)}45%{transform:scale(1.65)}}
+@keyframes fx-wave{0%,100%{stroke-dashoffset:0;opacity:.65}45%{stroke-dashoffset:.5;opacity:1}}
+@keyframes fx-arrive{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes fx-nav{from{opacity:.35;transform:translateX(-9px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.beta-nomotion) .fx-dot{animation:fx-pulse 1.8s ease-in-out infinite}
+  html:not(.beta-nomotion) .fx-wave path{animation:fx-wave 2.2s ease-in-out infinite}
+  html:not(.beta-nomotion) .bp-on .bp-bars i b,html:not(.beta-nomotion) .bp-on .bp-mini i b,html:not(.beta-nomotion) .bp-on .bp-resume-list i b{animation:fx-shimmer 3.2s ease-in-out 1.4s infinite}
+  html:not(.beta-nomotion) .fx-arrive{animation:fx-arrive .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--fx-d,0ms)}
+  html:not(.beta-nomotion) .fx-side{animation:fx-nav .4s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 40ms)}
+}
+html.beta-nomotion .bp-card::before,html.beta-nomotion .v6-live-card::before{transition:none}

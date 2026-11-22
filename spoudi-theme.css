@@ -1,0 +1,34 @@
+html{color-scheme:dark}
+html[data-theme="light"]{color-scheme:light}
+body{--preview-bg:#191d1a;--preview-surface:#252b28;--preview-border:#414a43;--preview-ink:#f6f8f5;--preview-accent:#79d59a;--preview-accent-ink:#14261a;--preview-link:#a1e7b4;--preview-focus:#b6debf;--preview-hover:#303934;background:var(--preview-bg)!important;color:var(--preview-ink)!important}
+html[data-theme="light"] body:has(.style-preview-nav){--preview-bg:#fff;--preview-surface:#f5f8f5;--preview-border:#dce5de;--preview-ink:#243029;--preview-accent:#ceeada;--preview-accent-ink:#193e2a;--preview-link:#30583f;--preview-focus:#386a4d;--preview-hover:#eaf3ec}
+body a{color:var(--preview-link)}
+body :is(.card,.panel,.tool-card){background-color:var(--preview-surface)!important;border-color:var(--preview-border)!important;color:var(--preview-ink)!important}
+body :is(h1,h2,h3){color:var(--preview-ink)}
+body :is(button,a,input):focus-visible{outline:2px solid var(--preview-focus);outline-offset:3px}
+progress{accent-color:var(--preview-accent)}
+.style-preview-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;padding:.6rem max(1rem,calc((100% - 1200px)/2));background:var(--preview-surface);border-bottom:1px solid var(--preview-border)}
+.style-preview-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 .7rem;border-radius:.45rem;color:var(--preview-ink);text-decoration:none}
+.style-preview-nav a[aria-current]{background:var(--preview-accent);color:var(--preview-accent-ink)}
+.style-preview-nav a:focus-visible{outline:2px solid var(--preview-focus)}
+.preview-brand{margin-right:.5rem;color:var(--preview-ink)}.preview-brand span{color:var(--preview-accent)}
+body :is(main article.card,main .panel,main .tool-card,main .ph-panel,main .practical-introduction,main .vs-hero,main .intro){background:var(--preview-surface)!important;color:var(--preview-ink)!important;border-color:var(--preview-border)!important;box-shadow:none}
+@media(max-width:600px){.style-preview-nav{position:static}.preview-brand{width:100%}.style-preview-nav a{padding-inline:.45rem}}
+
+@media(min-width:901px){
+body:has(>.style-preview-nav){padding-inline-start:246px!important;box-sizing:border-box}
+body>.style-preview-nav{position:fixed;inset:0 auto 0 0;width:246px;box-sizing:border-box;align-content:start;align-items:stretch;flex-direction:column;flex-wrap:nowrap;padding:1.35rem .95rem;border:0;border-right:1px solid var(--preview-border);background:var(--preview-surface);overflow:auto}
+.style-preview-nav .preview-brand{padding:.45rem .45rem 1rem}
+}
+.style-preview-nav a:is(:hover,:focus-visible):not([aria-current]){background:var(--preview-hover);color:var(--preview-focus)}
+body:has(>.style-preview-nav) :is(.top,.topbar,.pagehead,.page-head){border-color:var(--preview-border)}
+body:has(>.style-preview-nav) :is(.top,.topbar){background:var(--preview-surface);color:var(--preview-ink)}
+
+body:has(>.style-preview-nav) header.top nav[aria-label="Κύριες ενότητες"]{display:none}
+body:has(>.style-preview-nav) header.top .header-row>.brand{display:none}
+body:has(>.style-preview-nav) header.top .header-row:has(>.brand):not(:has(>.utility)){display:none}
+.style-preview-nav .preview-section-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;flex:none}
+.style-preview-nav>a{gap:.55rem}
+@media(max-width:600px){.style-preview-nav .preview-section-icon{display:none}}
+
+body.v6-page .style-preview-nav { display: none; }

@@ -1,0 +1,44 @@
+/* BETA 22/11: σκούρα εμφάνιση στο ύφος «hospital-phone» (αναφορά: ekab-home-beta-20261118 …?ui=hospital-phone).
+   Ανθρακί-πράσινο, μέντα για ενέργειες, κοραλλί λογότυπο, λεπτή λωρίδα ζωντανών στοιχείων με διαχωριστικά. Μόνο στο σκούρο θέμα. */
+html[data-theme=dark]{--h-bg:#1c2421;--h-bg2:#202926;--h-card:#242d2a;--h-line:#394540;--h-ink:#e8efe9;--h-muted:#a6b2aa;--h-mint:#74d8a0;--h-mint-ink:#0f2a1c;--h-teal:#3fd0b0;--h-coral:#f26b5b}
+html[data-theme=dark] body,html[data-theme=dark] .app,html[data-theme=dark] .maincol,html[data-theme=dark] main.content{background:var(--h-bg)!important;background-image:none!important;color:var(--h-ink)}
+html[data-theme=dark] .sidebar{background:#1a211e!important;border-right:1px solid var(--h-line)}
+html[data-theme=dark] .sidebar a.active{background:var(--h-mint)!important;color:var(--h-mint-ink)!important}
+html[data-theme=dark] .sidebar a.active .navicon,html[data-theme=dark] .sidebar a.active svg{color:var(--h-mint-ink)!important;background:transparent!important}
+html[data-theme=dark] .brandmark{background:var(--h-coral)!important;color:#fff!important;border-radius:12px}
+html[data-theme=dark] .topbar{background:var(--h-bg2)!important;border-bottom:1px solid var(--h-line)}
+html[data-theme=dark] .global-search,html[data-theme=dark] .theme-toggle{background:var(--h-bg)!important;border:1px solid var(--h-line)!important;color:var(--h-ink)!important}
+/* λωρίδα BETA πάνω */
+.beta-strip{display:none}
+html[data-theme=dark] .beta-strip{display:flex;justify-content:center;align-items:center;gap:10px;padding:4px 10px;background:#18201d;border-bottom:1px solid var(--h-line);color:var(--h-muted);font:600 .74rem system-ui}
+html[data-theme=dark] .beta-strip b{padding:1px 8px;border-radius:6px;background:#2c3632;color:var(--h-ink);letter-spacing:.08em}
+html[data-theme=dark] .beta-badge{display:none}
+/* ζωντανά στοιχεία ως λεπτή λωρίδα (εφημερία, θέση) */
+html[data-theme=dark] .v6-live-widgets>.v6-live-card{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:6px 18px!important}
+html[data-theme=dark] .v6-live-widgets>.v6-live-card+.v6-live-card{border-left:1px solid var(--h-line)!important}
+html[data-theme=dark] .v6-live-widgets{border-bottom:1px solid var(--h-line);padding-bottom:10px}
+html[data-theme=dark] .v6-live-action,html[data-theme=dark] .v6-live-link{background:#1f3a2d!important;color:var(--h-mint)!important;border:1px solid #2f5a43!important}
+/* κάρτες */
+html[data-theme=dark] .v6-path-section,html[data-theme=dark] .v6-atla-card,html[data-theme=dark] .metric.card,html[data-theme=dark] .v6-chart-card{background:var(--h-card)!important;border:1px solid var(--h-line)!important}
+html[data-theme=dark] .v6-continue{background:var(--h-card)!important;border:1px solid var(--h-line)!important;color:var(--h-ink)!important}
+html[data-theme=dark] .v6-primary-button{background:var(--h-mint)!important;color:var(--h-mint-ink)!important;border:0!important}
+html[data-theme=dark] .v6-continue .v6-primary-button{background:var(--h-mint)!important;color:var(--h-mint-ink)!important}
+html[data-theme=dark] main.content h1,html[data-theme=dark] main.content h2,html[data-theme=dark] main.content h3{color:var(--h-ink)!important}
+html[data-theme=dark] .v6-overline{color:var(--h-muted)!important;letter-spacing:.08em}
+html[data-theme=dark] .v6-text-link{color:var(--h-ink)!important}
+html[data-theme=dark] .v6-path-icon{background:#2c3632!important;color:var(--h-mint)!important}
+/* επισκόπηση (bp) στην ίδια παλέτα */
+html[data-theme=dark] .bp{--bp-ink:#e8efe9;--bp-muted:#a6b2aa;--bp-line:#394540;--bp-paper:#242d2a;--bp-green:#74d8a0;--bp-green2:#4fbf86;--bp-pale:#2c3632;--bp-gold:#e7c873}
+html[data-theme=dark] .bp-card{box-shadow:0 1px 2px rgba(0,0,0,.35),0 14px 30px -14px rgba(0,0,0,.6)}
+html[data-theme=dark] .bp .v6-primary-button{background:var(--h-mint)!important;color:var(--h-mint-ink)!important}
+/* ένδειξη ασυρμάτου κάτω δεξιά */
+.beta-radio{display:none}
+html[data-theme=dark] .beta-radio{display:inline-flex;position:fixed;right:18px;bottom:18px;z-index:60;align-items:center;gap:10px;padding:8px 12px 8px 14px;border-radius:999px;background:#202926;border:1px solid var(--h-line);color:var(--h-ink);font:700 .9rem system-ui;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+html[data-theme=dark] .beta-radio small{padding:3px 8px;border-radius:8px;background:#2f3a35;color:var(--h-muted);font-weight:700}
+@media (max-width:760px){html[data-theme=dark] .beta-radio{right:12px;bottom:84px}html[data-theme=dark] .v6-live-widgets>.v6-live-card+.v6-live-card{border-left:0!important;border-top:1px solid var(--h-line)!important}}
+html[data-theme=dark] .beta-greet{color:var(--h-muted)}html[data-theme=dark] .beta-greet b{color:var(--h-ink)}
+.beta-focus-btn span,.beta-motion-btn span{display:inline!important}
+html[data-theme=dark] .beta-focus-btn,html[data-theme=dark] .beta-motion-btn{color:var(--h-ink)!important;gap:6px}
+html[data-theme=dark] .beta-focus-btn svg{stroke:var(--h-ink)}
+@media (max-width:760px){.beta-focus-btn span,.beta-motion-btn span:last-child{display:none!important}.beta-motion-btn,.beta-focus-btn{min-width:44px;justify-content:center}}
+html[data-theme=dark] .ekab-quick-mobile{background:#2c3632!important;color:var(--h-ink)!important;border:1px solid var(--h-line)!important}

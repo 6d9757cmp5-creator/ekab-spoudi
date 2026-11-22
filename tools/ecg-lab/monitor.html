@@ -65,7 +65,7 @@ h1 { font-size: clamp(1.45rem, 3vw, 2.15rem); }
   #fullscreen-monitor { min-height:40px; }
 }
 </style>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('ekab.theme.v1')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<script>try { document.documentElement.dataset.theme = localStorage.getItem('ekab.theme.v1') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; } if(new URLSearchParams(location.search).has("embedded"))document.documentElement.classList.add("embedded-ecg")</script>
 <style>
 /* V6 palette around the monitor (it opens inside mentor-ecg.html); the monitor screen itself stays a dark device display. */
 :root{color:#20372e;background:#f7f6ef}
@@ -83,7 +83,7 @@ html[data-theme="dark"] button{background:#3d704b;color:#fff}
 .monitor button,#fullscreen-monitor{background:transparent;color:#baf6d8}
 :is(input,select,button,#paper):focus-visible{outline-color:#77ac7d}
 </style>
-</head>
+<style>html[data-theme="dark"]{color-scheme:dark}html[data-theme="dark"] #paper{background:#202721}html[data-theme="dark"] #paper svg{color:#edf5ed}html[data-theme="dark"] #paper polyline{stroke:#a1e7b4}html[data-theme="dark"] #paper text{fill:#edf5ed}html[data-theme="dark"] #paper pattern path{stroke:#70595e}</style><style id="preview-compact-layout">main :is(.pagehead,.page-head,.hero,.tool-hero,.lab-hero,.mentor-hero,.ecg-head){padding-block:clamp(.75rem,2vw,1.1rem);margin-block:.65rem;min-height:0}main :is(.pagehead,.page-head,.hero,.tool-hero,.lab-hero,.mentor-hero,.ecg-head) h1{font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.2;margin-block:0 .3rem}main :is(.pagehead,.page-head,.hero,.tool-hero,.lab-hero,.mentor-hero,.ecg-head) p{margin-block:.3rem 0;max-width:72ch}.ecg-head{background:none;border:0;padding-inline:0}.ecg-training-note{color:#c1ccc3;font-size:.88rem;margin:.35rem 0}.ecg-panel#ecg-monitor-training{margin-top:.6rem;padding:clamp(.5rem,2vw,.85rem)}</style><style id="embedded-ecg-style">.embedded-ecg,.embedded-ecg body{background:#191d1a;color:#f6f8f5}.embedded-ecg main{padding:0;margin:0;max-width:none}.embedded-ecg main>header{display:none}.embedded-ecg .trainer,.embedded-ecg .example-select{padding:0;border:0;background:transparent;box-shadow:none}.embedded-ecg .trainer-heading>div{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.embedded-ecg .trainer-heading{justify-content:flex-end}.embedded-ecg .monitor{margin-top:.35rem}.embedded-ecg input,.embedded-ecg select{background:#252b28;color:#f6f8f5;border-color:#637668}.embedded-ecg button:not(#fullscreen-monitor){background:#79d59a;color:#14261a}.embedded-ecg button:disabled{opacity:.55}</style><style>.embedded-ecg :is(.monitor-heading,.monitor-readout,.controls,.quiz-controls){flex-wrap:wrap;min-width:0}.embedded-ecg :is(.controls,.quiz-controls)>*{min-width:0;max-width:100%}.embedded-ecg :is(main,.monitor,canvas){max-width:100%;min-width:0}.embedded-ecg .monitor-heading>*{min-width:0;max-width:100%;white-space:normal}.embedded-ecg .controls{grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr))}</style><style>.embedded-ecg .example-select{grid-template-columns:minmax(0,1fr)}.embedded-ecg .example-select>*{min-width:0;max-width:100%}</style><style>#example-recording{display:block;width:100%;min-width:0;max-width:100%}</style><script defer src="../../arrow-navigation.js"></script></head>
 <body>
   <main>
     <header>
