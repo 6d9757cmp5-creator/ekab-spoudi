@@ -153,4 +153,27 @@
   }));
   const openNow=document.querySelector('details.reader-fold[id^="lesson-"][open]'),startAt=openNow?parts.findIndex(p=>Number(p.chapter)===Number(openNow.id.slice(7))):0;
   show(startAt>=0?startAt:0,false);
+  // Κουμπί «Δες βίντεο μαθήματος (N)» δίπλα στο «Δες εικόνες μαθήματος»
+  const total=parts.length+(introPart?1:0);
+  function placeVideosButton(){
+    if(document.getElementById('saek-course-videos-shortcut'))return true;
+    const imgBar=document.getElementById('saek-course-images-shortcut');
+    const heading=document.querySelector('.saek-lesson-heading')||document.querySelector('h2.reader-title');
+    if(!imgBar&&!heading)return false;
+    const a=document.createElement('a');a.id='saek-course-videos-shortcut';a.className='saek-source-action';
+    a.href=introPart?'#course-intro':'#'+section.id;a.textContent='Δες βίντεο μαθήματος ('+total+')';
+    a.setAttribute('aria-label','Μετάβαση στα βίντεο του μαθήματος: εισαγωγή και '+parts.length+' κεφάλαια');
+    a.addEventListener('click',event=>{event.preventDefault();(document.getElementById('course-intro')||section).scrollIntoView({behavior:'smooth',block:'start'});});
+    if(imgBar)imgBar.insertBefore(a,imgBar.children[1]||null);
+    else{const bar=document.createElement('div');bar.className='saek-source-actions';bar.append(a);heading.insertAdjacentElement('afterend',bar);}
+    return true;
+  }
+  // Το «Δες εικόνες» δημιουργείται ασύγχρονα· κρατάμε το κουμπί βίντεο δίπλα του όποτε εμφανιστεί/ξαναχτιστεί.
+  const keep=new MutationObserver(()=>{
+    const imgBar=document.getElementById('saek-course-images-shortcut'),btn=document.getElementById('saek-course-videos-shortcut');
+    if(imgBar&&btn&&btn.parentElement!==imgBar){const old=btn.parentElement;imgBar.insertBefore(btn,imgBar.children[1]||null);if(old&&!old.children.length)old.remove();}
+    else if(!btn)placeVideosButton();
+  });
+  keep.observe(document.body,{childList:true,subtree:true});setTimeout(()=>keep.disconnect(),15000);
+  placeVideosButton();
 })();
