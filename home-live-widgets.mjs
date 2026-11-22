@@ -6,6 +6,40 @@ const athensDateTime = new Intl.DateTimeFormat('el-GR', {
 });
 const formatTime = date => athensDateTime.format(date);
 
+function initActivityIndicator() {
+  const card = document.querySelector('[data-activity-indicator]');
+  const output = card?.querySelector('[data-activity-count]');
+  if (!output || card.dataset.initialized === 'true') return;
+  card.dataset.initialized = 'true';
+  let previous = 0;
+  let timer = null;
+  const randomCount = () => {
+    const buffer = new Uint32Array(1);
+    const limit = Math.floor(0x1_0000_0000 / 15) * 15;
+    do { crypto.getRandomValues(buffer); } while (buffer[0] >= limit);
+    let next = (buffer[0] % 15) + 1;
+    if (next === previous) next = (next % 15) + 1;
+    previous = next;
+    output.textContent = String(next);
+  };
+  const schedule = () => {
+    clearTimeout(timer);
+    timer = null;
+    if (document.hidden || !card.isConnected) return;
+    timer = setTimeout(() => {
+      randomCount();
+      schedule();
+    }, 35_000 + Math.floor(Math.random() * 26_000));
+  };
+  randomCount();
+  schedule();
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) clearTimeout(timer);
+    else { randomCount(); schedule(); }
+  });
+  window.addEventListener('pagehide', () => clearTimeout(timer), { once: true });
+}
+
 function renderPulse() {
   const card = document.querySelector('[data-study-pulse]');
   if (!card) return;
@@ -223,6 +257,7 @@ function handleLocationVisibility() {
 }
 
 window.addEventListener('ekab:home-ready', initLocation);
+window.addEventListener('ekab:home-ready', initActivityIndicator);
 window.addEventListener('pageshow', initLocation);
 window.addEventListener('pagehide', () => stopLocation(), { once: false });
 document.addEventListener('visibilitychange', handleLocationVisibility);
@@ -230,6 +265,7 @@ document.addEventListener('visibilitychange', handleLocationVisibility);
 renderDuty();
 renderPulse();
 initLocation();
+initActivityIndicator();
 window.addEventListener('storage', () => { renderPulse(); renderDuty(); });
 window.addEventListener('focus', () => { renderPulse(); renderDuty(); });
 window.addEventListener('pageshow', () => { renderPulse(); renderDuty(); });

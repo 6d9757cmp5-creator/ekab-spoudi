@@ -10,6 +10,9 @@
   const waits=[settled(css),new Promise(r=>document.addEventListener('ekab:v6-shell-ready',r,{once:true}))];
   // The palette link is added by theme-init.js at DOMContentLoaded, which can come after this runs.
   waits.push(new Promise(r=>{const t0=Date.now();const look=()=>{const l=document.querySelector('link[data-ekab-v6-subsections]');if(l){if(l.sheet)r();else settled(l).then(r,r);return;}if(Date.now()-t0>2500){r();return;}setTimeout(look,25);};look();}));
+  // Keep the shared palette last so page-specific legacy rules cannot repaint shared controls.
+  const palette=document.querySelector('link[data-ekab-theme-system]');
+  if(palette){document.head.appendChild(palette);waits.push(palette.sheet?Promise.resolve():settled(palette));}
   Promise.all(waits).then(()=>requestAnimationFrame(()=>window.__ekabV6Reveal?.()),()=>window.__ekabV6Reveal?.());
   document.head.append(css,js);
  };
