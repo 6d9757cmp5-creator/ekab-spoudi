@@ -46,7 +46,8 @@ jobs:
       - name: Validate every published page
         run: |
           npm install --no-save --no-audit --no-fund vnu-jar@24.10.17
-          pages=$(ls *.html | grep -v '^pr6-images-preview\.html$')
+          # radio-widget.html is an HTML fragment injected into index.html, not a standalone page.
+          pages=$(ls *.html | grep -Ev '^(pr6-images-preview|radio-widget)\.html$')
           # ::details-content is valid CSS that this validator release does not know yet.
           java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --format gnu \
             --filterpattern '.*details-content.*' $pages ui-tools/anatomy-3d/index.html
