@@ -1,5 +1,5 @@
 /* Side navigation: hidden by default, opens as a Liquid Glass overlay drawer that never moves the page. */
-html[data-sidebar-beta="true"] { overflow-x: hidden; }
+html[data-sidebar-beta="true"] { overflow-x: hidden; scrollbar-gutter: stable; }
 html[data-sidebar-beta="true"] body { overflow-x: hidden; }
 
 html[data-sidebar-beta="true"].sidebar-beta-open,
@@ -291,3 +291,10 @@ html[data-sidebar-beta="true"] .global-search { flex: 1 1 0; min-width: 0; }
 @media (min-width: 721px) and (hover: hover) and (pointer: fine) {
   html[data-sidebar-beta="true"] .sidebar-beta-mobile-toggle { display: none; }
 }
+
+/* Opened by hovering: the dim layer is visual only, so the page stays clickable and the menu closes as the pointer leaves;
+   the page keeps scrolling too. */
+html[data-sidebar-beta="true"].sidebar-beta-peek .sidebar-beta-backdrop { pointer-events: none; }
+
+html[data-sidebar-beta="true"].sidebar-beta-peek { overflow: hidden auto; }
+html[data-sidebar-beta="true"].sidebar-beta-peek body { overflow: hidden visible; }

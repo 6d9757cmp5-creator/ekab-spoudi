@@ -4,7 +4,7 @@
 (function(){const base=document.currentScript?.src||location.href;if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('theme-system.css?v=20261127-3',base).href;link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
 
 /* Side navigation drawer (same as pages that load theme-init.js). */
-(function(){if(document.querySelector('script[src*="sidebar-beta.js"]'))return;document.documentElement.dataset.sidebarBeta='true';const s=document.createElement('script');s.src=new URL('sidebar-beta.js?v=20261127-2',document.currentScript?.src||location.href).href;document.head.appendChild(s)})();
+(function(){if(document.querySelector('script[src*="sidebar-beta.js"]'))return;document.documentElement.dataset.sidebarBeta='true';const s=document.createElement('script');s.src=new URL('sidebar-beta.js?v=20261127-3',document.currentScript?.src||location.href).href;document.head.appendChild(s)})();
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */
 (function(){
@@ -44,3 +44,6 @@
  }
  const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.208');document.head.appendChild(s);
 })();
+
+/* Anonymous presence heartbeat for the home "Βάρδια τώρα" strip, from every page. */
+(function(){if(document.querySelector('script[src*="shift-presence.js"]'))return;const s=document.createElement('script');s.src=new URL('shift-presence.js?v=20261127-1',document.currentScript?.src||location.href).href;s.defer=true;document.head.appendChild(s)})();

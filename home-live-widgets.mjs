@@ -6,52 +6,23 @@ const athensDateTime = new Intl.DateTimeFormat('el-GR', {
 });
 const formatTime = date => athensDateTime.format(date);
 
-// Who is on "shift" right now: real anonymous presence (area only) from the radio Worker.
-// Nothing is shown when the service cannot be reached; numbers are never invented.
-const SHIFT_API = (window.EKAB_RADIO_CONFIG?.apiBase || 'https://ekab-spoudi-radio.6d9757cmp5.workers.dev') + '/api/site/presence';
-function shiftId() {
-  try {
-    let id = sessionStorage.getItem('ekab.shift.id');
-    if (!id) { id = [...crypto.getRandomValues(new Uint8Array(12))].map(b => b.toString(36).padStart(2, '0')).join('').slice(0, 24); sessionStorage.setItem('ekab.shift.id', id); }
-    return id;
-  } catch { return null; }
-}
-
+// Who is on "shift" right now: real anonymous presence (area only), sent from every page by
+// shift-presence.js. Nothing is shown when the service cannot be reached; numbers are never invented.
 function initActivityIndicator() {
   const strip = document.querySelector('[data-activity-indicator]');
   const count = strip?.querySelector('[data-activity-count]');
   const places = strip?.querySelector('[data-activity-places]');
   if (!count || strip.dataset.initialized === 'true') return;
   strip.dataset.initialized = 'true';
-  const id = shiftId();
-  let timer = null;
   const render = data => {
+    if (!strip.isConnected) return;
     if (!data || !Number.isFinite(data.total) || data.total < 1) { strip.hidden = true; return; }
     count.textContent = data.total === 1 ? '1 σε υπηρεσία' : `${data.total} σε υπηρεσία`;
     places.textContent = (data.places || []).map(([place, n]) => `${place} ${n}`).join(' · ');
     strip.hidden = false;
   };
-  const beat = async () => {
-    try {
-      const response = await fetch(SHIFT_API, id ? { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id }) } : {});
-      render(response.ok ? await response.json() : null);
-    } catch { render(null); }
-  };
-  const schedule = () => {
-    clearTimeout(timer);
-    if (document.hidden || !strip.isConnected) return;
-    timer = setTimeout(() => { beat(); schedule(); }, 45_000);
-  };
-  beat();
-  schedule();
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) clearTimeout(timer);
-    else { beat(); schedule(); }
-  });
-  window.addEventListener('pagehide', () => {
-    clearTimeout(timer);
-    if (id) fetch(SHIFT_API, { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id, leave: true }) }).catch(() => {});
-  }, { once: true });
+  render(window.__ekabShiftData);
+  window.addEventListener('ekab:shift', event => render(event.detail));
 }
 
 function renderPulse() {

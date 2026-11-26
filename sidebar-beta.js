@@ -5,7 +5,7 @@
  const root=document.documentElement;
  root.dataset.sidebarBeta='true';
  const base=new URL('./',document.currentScript?.src||location.href);
- const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('sidebar-beta.css?v=20261127-2',base).href;document.head.append(css);
+ const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('sidebar-beta.css?v=20261127-3',base).href;document.head.append(css);
  const svg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
  const closeSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
  let active=false, lastFocus=null, observer, hoverTimer=null, openedBy=null;
@@ -41,7 +41,7 @@
  const setOpen=(next,how='click')=>{
   const {side,main}=get();if(!side||!main)return;
   clearTimeout(hoverTimer);const wasHover=openedBy==='hover';openedBy=next?how:null;
-  active=next;root.classList.toggle('sidebar-beta-open',active);
+  active=next;root.classList.toggle('sidebar-beta-open',active);root.classList.toggle('sidebar-beta-peek',active&&how==='hover');
   side.inert=!active&&phone.matches;
   const trigger=document.querySelector('[data-sidebar-beta-mobile-toggle]');trigger?.setAttribute('aria-expanded',String(active));trigger?.setAttribute('aria-label',active?'Κλείσιμο πλευρικής πλοήγησης':'Άνοιγμα πλευρικής πλοήγησης');if(trigger)trigger.innerHTML=active?closeSvg:svg;
   const content=document.querySelector('.content');if(content)content.inert=active&&how!=='hover';
