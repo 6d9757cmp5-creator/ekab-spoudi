@@ -5,9 +5,9 @@
   "workers_dev": true,
   "observability": { "enabled": true },
   "durable_objects": {
-    "bindings": [{ "name": "CHANNELS", "class_name": "RadioChannel" }]
+    "bindings": [{ "name": "CHANNELS", "class_name": "RadioChannel" }, { "name": "SITE", "class_name": "SitePresence" }]
   },
-  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RadioChannel"] }],
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["RadioChannel"] }, { "tag": "v2", "new_sqlite_classes": ["SitePresence"] }],
   "vars": {
     "ALLOWED_ORIGIN": "https://6d9757cmp5-creator.github.io"
   }

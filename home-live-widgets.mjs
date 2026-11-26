@@ -6,38 +6,52 @@ const athensDateTime = new Intl.DateTimeFormat('el-GR', {
 });
 const formatTime = date => athensDateTime.format(date);
 
+// Who is on "shift" right now: real anonymous presence (area only) from the radio Worker.
+// Nothing is shown when the service cannot be reached; numbers are never invented.
+const SHIFT_API = (window.EKAB_RADIO_CONFIG?.apiBase || 'https://ekab-spoudi-radio.6d9757cmp5.workers.dev') + '/api/site/presence';
+function shiftId() {
+  try {
+    let id = sessionStorage.getItem('ekab.shift.id');
+    if (!id) { id = [...crypto.getRandomValues(new Uint8Array(12))].map(b => b.toString(36).padStart(2, '0')).join('').slice(0, 24); sessionStorage.setItem('ekab.shift.id', id); }
+    return id;
+  } catch { return null; }
+}
+
 function initActivityIndicator() {
-  const card = document.querySelector('[data-activity-indicator]');
-  const output = card?.querySelector('[data-activity-count]');
-  if (!output || card.dataset.initialized === 'true') return;
-  card.dataset.initialized = 'true';
-  let previous = 0;
+  const strip = document.querySelector('[data-activity-indicator]');
+  const count = strip?.querySelector('[data-activity-count]');
+  const places = strip?.querySelector('[data-activity-places]');
+  if (!count || strip.dataset.initialized === 'true') return;
+  strip.dataset.initialized = 'true';
+  const id = shiftId();
   let timer = null;
-  const randomCount = () => {
-    const buffer = new Uint32Array(1);
-    const limit = Math.floor(0x1_0000_0000 / 15) * 15;
-    do { crypto.getRandomValues(buffer); } while (buffer[0] >= limit);
-    let next = (buffer[0] % 15) + 1;
-    if (next === previous) next = (next % 15) + 1;
-    previous = next;
-    output.textContent = String(next);
+  const render = data => {
+    if (!data || !Number.isFinite(data.total) || data.total < 1) { strip.hidden = true; return; }
+    count.textContent = data.total === 1 ? '1 σε υπηρεσία' : `${data.total} σε υπηρεσία`;
+    places.textContent = (data.places || []).map(([place, n]) => `${place} ${n}`).join(' · ');
+    strip.hidden = false;
+  };
+  const beat = async () => {
+    try {
+      const response = await fetch(SHIFT_API, id ? { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id }) } : {});
+      render(response.ok ? await response.json() : null);
+    } catch { render(null); }
   };
   const schedule = () => {
     clearTimeout(timer);
-    timer = null;
-    if (document.hidden || !card.isConnected) return;
-    timer = setTimeout(() => {
-      randomCount();
-      schedule();
-    }, 35_000 + Math.floor(Math.random() * 26_000));
+    if (document.hidden || !strip.isConnected) return;
+    timer = setTimeout(() => { beat(); schedule(); }, 45_000);
   };
-  randomCount();
+  beat();
   schedule();
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) clearTimeout(timer);
-    else { randomCount(); schedule(); }
+    else { beat(); schedule(); }
   });
-  window.addEventListener('pagehide', () => clearTimeout(timer), { once: true });
+  window.addEventListener('pagehide', () => {
+    clearTimeout(timer);
+    if (id) fetch(SHIFT_API, { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id, leave: true }) }).catch(() => {});
+  }, { once: true });
 }
 
 function renderPulse() {

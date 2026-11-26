@@ -26,6 +26,15 @@ export default {
 
     const url = new URL(request.url);
     const parts = url.pathname.split("/").filter(Boolean);
+    // Anonymous "who is on shift" counter for the home page: area only, no names, no IP stored.
+    if (parts.length === 3 && parts[0] === "api" && parts[1] === "site" && parts[2] === "presence") {
+      if (request.method !== "GET" && request.method !== "POST") return json({ error: "Μη υποστηριζόμενη μέθοδος." }, 405, headers);
+      const shift = env.SITE.get(env.SITE.idFromName("global"));
+      const internal = new Request("https://site.internal/presence", request);
+      internal.headers.set("x-ekab-place", encodeURIComponent(placeOf(request.cf)));
+      const result = await shift.fetch(internal);
+      return new Response(result.body, { status: result.status, headers: { ...Object.fromEntries(result.headers), ...headers, "cache-control": "no-store" } });
+    }
     if (parts.length !== 4 || parts[0] !== "api" || parts[1] !== "radio" ||
         !CHANNELS.has(parts[2]) || !ACTIONS.has(parts[3])) {
       return json({ error: "Η διαδρομή δεν βρέθηκε." }, 404, headers);
@@ -271,5 +280,58 @@ export class RadioChannel {
       }
     }
     await this.scheduleExpiry();
+  }
+}
+
+// Greek names for the areas Cloudflare reports; anything else is grouped as region or "Εκτός Ελλάδας".
+const CITY_EL = {
+  Heraklion: "Ηράκλειο", Chania: "Χανιά", Rethymno: "Ρέθυμνο", "Agios Nikolaos": "Άγιος Νικόλαος", Ierapetra: "Ιεράπετρα",
+  Athens: "Αθήνα", Piraeus: "Πειραιάς", Peristeri: "Περιστέρι", Kallithea: "Καλλιθέα", Glyfada: "Γλυφάδα", Marousi: "Μαρούσι",
+  Thessaloniki: "Θεσσαλονίκη", Patras: "Πάτρα", Larissa: "Λάρισα", Volos: "Βόλος", Ioannina: "Ιωάννινα", Kalamata: "Καλαμάτα",
+  Rhodes: "Ρόδος", Corfu: "Κέρκυρα", Kavala: "Καβάλα", Serres: "Σέρρες", Alexandroupoli: "Αλεξανδρούπολη", Chalcis: "Χαλκίδα",
+  Lamia: "Λαμία", Tripoli: "Τρίπολη", Kozani: "Κοζάνη", Komotini: "Κομοτηνή", Xanthi: "Ξάνθη", Drama: "Δράμα", Mytilene: "Μυτιλήνη"
+};
+const REGION_EL = {
+  Crete: "Κρήτη", Attica: "Αττική", "Central Macedonia": "Κεντρική Μακεδονία", "Western Greece": "Δυτική Ελλάδα",
+  Thessaly: "Θεσσαλία", Epirus: "Ήπειρος", Peloponnese: "Πελοπόννησος", "South Aegean": "Νότιο Αιγαίο", "North Aegean": "Βόρειο Αιγαίο",
+  "Ionian Islands": "Ιόνια Νησιά", "Central Greece": "Στερεά Ελλάδα", "Western Macedonia": "Δυτική Μακεδονία",
+  "Eastern Macedonia and Thrace": "Ανατολική Μακεδονία και Θράκη"
+};
+function placeOf(cf) {
+  if (!cf || cf.country !== "GR") return cf?.country ? "Εκτός Ελλάδας" : "Άγνωστη περιοχή";
+  return CITY_EL[cf.city] || REGION_EL[cf.region] || "Ελλάδα";
+}
+
+function decodePlace(value) {
+  try { return value ? decodeURIComponent(value).slice(0, 40) : "Ελλάδα"; } catch { return "Ελλάδα"; }
+}
+
+export class SitePresence {
+  constructor(ctx, env) {
+    this.ctx = ctx;
+    this.env = env;
+    this.seen = new Map();
+    this.hits = new Map();
+  }
+
+  async fetch(request) {
+    const now = Date.now();
+    for (const [id, entry] of this.seen) if (now - entry.at > 90_000) this.seen.delete(id);
+    if (request.method === "POST") {
+      const ip = request.headers.get("cf-connecting-ip") || "unknown";
+      const hit = this.hits.get(ip);
+      if (hit && now - hit.start < 60_000 && hit.count >= 30) return json({ error: "Πολλές γρήγορες αιτήσεις." }, 429);
+      this.hits.set(ip, hit && now - hit.start < 60_000 ? { start: hit.start, count: hit.count + 1 } : { start: now, count: 1 });
+      if (this.hits.size > 5000) this.hits.clear();
+      let input;
+      try { input = JSON.parse((await request.text()).slice(0, 512)); } catch { return json({ error: "Μη έγκυρο αίτημα." }, 400); }
+      const id = typeof input?.id === "string" && /^[a-z0-9]{16,40}$/.test(input.id) ? input.id : null;
+      if (!id) return json({ error: "Μη έγκυρο αίτημα." }, 400);
+      if (input.leave === true) this.seen.delete(id);
+      else if (this.seen.size < 20_000 || this.seen.has(id)) this.seen.set(id, { at: now, place: decodePlace(request.headers.get("x-ekab-place")) });
+    }
+    const places = {};
+    for (const { place } of this.seen.values()) places[place] = (places[place] || 0) + 1;
+    return json({ total: this.seen.size, places: Object.entries(places).sort((a, b) => b[1] - a[1]).slice(0, 8) });
   }
 }

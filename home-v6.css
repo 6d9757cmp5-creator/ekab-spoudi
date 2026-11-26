@@ -445,3 +445,14 @@ body.dark-mode .v6-live-link,body.dark-mode .v6-live-action{background:#242019;b
 .v6-continue[hidden],.v6-secondary-column[hidden],#atlaCard[hidden]{display:none!important}
 .v6-dashboard.v6-dashboard-no-history{grid-template-columns:minmax(0,1fr)!important}
 body .v6-live-widgets>.v6-dashboard.v6-dashboard-no-history{grid-template-columns:minmax(0,1fr)!important}
+
+/* Shift strip: live anonymous count of people in the app, by area, like a dispatch board line. */
+.ekab-shift{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin:16px 0 8px;padding:8px 16px;border:1px solid var(--line);border-left:4px solid #2f9e5b;border-radius:12px;background:var(--paper);font-size:15px;line-height:1.5}
+.ekab-shift[hidden]{display:none}
+.ekab-shift strong{font-weight:800}
+.ekab-shift-count{font-weight:700;font-variant-numeric:tabular-nums}
+.ekab-shift-places{color:var(--muted);font-size:14px}
+.ekab-shift-places:empty{display:none}
+.ekab-shift-dot{width:10px;height:10px;border-radius:50%;background:#2f9e5b;box-shadow:0 0 0 0 rgba(47,158,91,.5);animation:ekab-shift-pulse 2.4s ease-out infinite}
+@keyframes ekab-shift-pulse{0%{box-shadow:0 0 0 0 rgba(47,158,91,.5)}70%{box-shadow:0 0 0 8px rgba(47,158,91,0)}100%{box-shadow:0 0 0 0 rgba(47,158,91,0)}}
+@media(prefers-reduced-motion:reduce){.ekab-shift-dot{animation:none}}
