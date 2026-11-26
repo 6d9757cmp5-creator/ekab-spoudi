@@ -10,3 +10,33 @@ const search=document.getElementById('search');const found=document.getElementBy
 const fontBtns=document.querySelectorAll('[data-font]');let fontSize=1.025;fontBtns.forEach(b=>b.addEventListener('click',()=>{fontSize=Math.max(.88,Math.min(1.35,fontSize+(b.dataset.font==='up'?.09:-.09)));document.documentElement.style.setProperty('--read-size',fontSize+'rem')}));
 const firstLink=document.querySelector('.side a[href^="#"]');if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>{for(let e of entries){if(!e.isIntersecting)continue;for(const a of document.querySelectorAll('.side a[href^="#"]'))a.classList.toggle('active',a.hash==='#'+e.target.id)}},{rootMargin:'-10% 0px -80% 0px'});chapters.forEach(el=>io.observe(el))}
 })();
+
+/* One page at a time (2026-11-27): long handbooks show the chosen page only, with previous/next
+   buttons, so readers do not scroll through the whole book. Search and print still show every page. */
+(()=>{'use strict';
+const chapters=[...document.querySelectorAll('.chapter')];if(chapters.length<4)return;
+const root=document.documentElement;root.classList.add('reader-paged');
+const nav=document.createElement('nav');nav.className='reader-pager';nav.setAttribute('aria-label','Σελίδες βιβλίου');
+const prev=document.createElement('button');prev.type='button';prev.className='reader-pager-btn';prev.textContent='‹ Προηγούμενη';
+const next=document.createElement('button');next.type='button';next.className='reader-pager-btn reader-pager-next';next.textContent='Επόμενη ›';
+const count=document.createElement('span');count.className='reader-pager-count';count.setAttribute('aria-live','polite');
+nav.append(prev,count,next);
+let current=0;
+const chapterOf=hash=>{if(!hash||hash.length<2)return -1;let target=null;try{target=document.getElementById(decodeURIComponent(hash.slice(1)))}catch(_){}const ch=target?.closest('.chapter');return ch?chapters.indexOf(ch):-1};
+const show=(i,{scroll=true,push=true}={})=>{
+ current=Math.max(0,Math.min(chapters.length-1,i));
+ chapters.forEach((c,n)=>c.classList.toggle('reader-current',n===current));
+ chapters[current].after(nav);
+ prev.disabled=current===0;next.disabled=current===chapters.length-1;
+ const title=chapters[current].querySelector('h2')?.textContent.trim()||'';
+ count.textContent=`${current+1} από ${chapters.length}`;count.title=title;
+ for(const a of document.querySelectorAll('.side a[href^="#"],.mobile-links a[href^="#"]'))a.classList.toggle('active',chapterOf(a.hash)===current);
+ if(push&&chapters[current].id)history.replaceState(null,'','#'+chapters[current].id);
+ if(scroll)chapters[current].scrollIntoView({block:'start'});
+};
+prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const i=chapterOf(a.hash);if(i<0)return;e.preventDefault();a.closest('details')?.removeAttribute('open');show(i);history.replaceState(null,'',a.hash)});
+window.addEventListener('hashchange',()=>{const i=chapterOf(location.hash);if(i>=0&&i!==current)show(i,{push:false})});
+const search=document.getElementById('search');search?.addEventListener('input',()=>root.classList.toggle('reader-searching',!!search.value.trim()));
+const start=chapterOf(location.hash);show(start<0?0:start,{scroll:start>=0,push:false});
+})();

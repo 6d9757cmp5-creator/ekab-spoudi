@@ -1,24 +1,26 @@
 /* V6 palette and shared page treatment for the real learning sections. */
 :root {
   color-scheme: light;
+
   --ink: #1a1a1a;
-  --muted: #6e6e6e;
+  --muted: #5f5f5f;
   --line: #dbdbdb;
   --bg: #fafafa;
   --navy: #fff;
-  --blue: #9e825c;
+  --blue: #7a6240;
   --light: #f4ece1;
-  --green: #9e825c;
+  --green: #7a6240;
   --warm: #f4ece1;
   --v6-surface: #fff;
   --v6-soft: #f4ece1;
-  --v6-accent: #9e825c;
+  --v6-accent: #7a6240;
   --v6-accent-strong: #735a3b;
-  --v6-shadow: 0 8px 24px rgba(31, 62, 43, .055);
+  --v6-shadow: 0 8px 24px rgb(31 62 43 / 5.5%);
 }
 
 html[data-theme="dark"] {
   color-scheme: dark;
+
   --ink: #e5e5e5;
   --muted: #9e9e9e;
   --line: #262626;
@@ -32,7 +34,7 @@ html[data-theme="dark"] {
   --v6-soft: #242019;
   --v6-accent: #efe4ce;
   --v6-accent-strong: #efe4ce;
-  --v6-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+  --v6-shadow: 0 10px 28px rgb(0 0 0 / 18%);
 }
 
 body:not(.v6-home) {
@@ -70,7 +72,7 @@ body:not(.v6-home) :is(.panel, .fold, .hub-action, .home-card, .hub-study,
 }
 
 body:not(.v6-home) :is(.seminar-card, .seminar-unit:not(.active), .seminar-backup,
-  .seminar-tabs, .seminar-quiz-modes, .seminar-result-item, .seminar-mcq-feedback:not(.is-correct):not(.is-incorrect),
+  .seminar-tabs, .seminar-quiz-modes, .seminar-result-item, .seminar-mcq-feedback:not(.is-correct, .is-incorrect),
   .saek-series-viewport, .saek-series-swipe-strip, .saek-series-parts a,
   .saek-gallery-card, .saek-gallery-dialog, .saek-hub .hub-links a,
   .eoppep-hub .eop-practical) {
@@ -87,7 +89,7 @@ body:not(.v6-home) :is(.stat, .library-summary span, .course-icon,
   color: var(--v6-accent-strong) !important;
 }
 
-body:not(.v6-home) :is(.btn:not(.secondary):not(.ghost), .hub-semester-tabs button[aria-pressed="true"],
+body:not(.v6-home) :is(.btn:not(.secondary, .ghost), .hub-semester-tabs button[aria-pressed="true"],
   .hub-course-count[aria-pressed="true"], .saek-series-parts a[aria-current="step"],
   .saek-gallery-more button, #imageRetryButton, .aed-locate-button,
   .ph-main .ph-button:not(.secondary), .seminar-unit.active, .seminar-tabs button.active,
@@ -96,8 +98,9 @@ body:not(.v6-home) :is(.btn:not(.secondary):not(.ghost), .hub-semester-tabs butt
   border-color: var(--v6-accent) !important;
   color: var(--accent-ink) !important;
 }
+
 /* Dark theme: the accent turns light green, so primary buttons use the darker V6 green to keep white text readable. */
-html[data-theme="dark"] body:not(.v6-home) :is(.btn:not(.secondary):not(.ghost), .hub-semester-tabs button[aria-pressed="true"],
+html[data-theme="dark"] body:not(.v6-home) :is(.btn:not(.secondary, .ghost), .hub-semester-tabs button[aria-pressed="true"],
   .hub-course-count[aria-pressed="true"], .saek-series-parts a[aria-current="step"],
   .saek-gallery-more button, #imageRetryButton, .aed-locate-button,
   .ph-main .ph-button:not(.secondary), .seminar-unit.active, .seminar-tabs button.active,
@@ -151,7 +154,7 @@ body:not(.v6-home) :is(.course-tile, .hub-action, .home-card, .reader-fold,
 
 body:not(.v6-home) :is(.course-tile, .hub-action, .home-card):hover {
   border-color: var(--line) !important;
-  box-shadow: 0 10px 26px rgba(31, 62, 43, .09);
+  box-shadow: 0 10px 26px rgb(31 62 43 / 9%);
 }
 
 body:not(.v6-home) :is(input, select, textarea) {
@@ -252,7 +255,7 @@ html[data-theme="dark"] body:not(.v6-home) :is(.panel, .fold, .hub-action,
 
 html[data-theme="dark"] body:not(.v6-home) :is(.seminar-card, .seminar-unit:not(.active),
   .seminar-backup, .seminar-tabs, .seminar-quiz-modes, .seminar-result-item,
-  .seminar-mcq-feedback:not(.is-correct):not(.is-incorrect), .saek-series-viewport,
+  .seminar-mcq-feedback:not(.is-correct, .is-incorrect), .saek-series-viewport,
   .saek-series-swipe-strip, .saek-series-parts a, .saek-gallery-card,
   .saek-gallery-dialog, .saek-hub .hub-links a, .eoppep-hub .eop-practical) {
   background-color: var(--v6-surface) !important;
@@ -315,14 +318,16 @@ html[data-theme="dark"] body:not(.v6-home) :is(.saek-source-section, .saek-sourc
   body:not(.v6-home) :is(.main, .ph-main, .seminar-main) {
     padding-inline: 14px;
   }
+
   body:not(.v6-home) :is(.panel, .fold, .hub-action, .reader-fold) {
     border-radius: 13px;
   }
 }
-body:not(.v6-home) .saek-anatomy-link{background:var(--v6-accent)!important;border-color:var(--v6-accent)!important;color:var(--accent-ink)!important;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+body:not(.v6-home) .saek-anatomy-link{background:var(--v6-accent)!important;border-color:var(--v6-accent)!important;color:var(--accent-ink)!important;box-shadow:0 5px 14px rgb(0 0 0 / 8%)}
 body:not(.v6-home) .saek-anatomy-link:hover{background:var(--v6-accent)!important;border-color:var(--v6-accent)!important;color:var(--accent-ink)!important}
 html[data-theme="dark"] body:not(.v6-home) .saek-anatomy-link{background:#efe4ce!important;border-color:#efe4ce!important;color:#121212!important}
 html[data-theme="dark"] body:not(.v6-home) .saek-anatomy-link:hover{background:#efe4ce!important;border-color:#efe4ce!important}
+
 /* Bring shared utilities and searchable controls into the V6 forest-and-linen palette. */
 body:not(.v6-home) :is(.ekab-search-close, .ekab-search-chip, .ekab-search-glossary,
   .saek-show-all, .saek-source-action, .ekab-notes-chapter, .ekab-notes-tabs button:not([aria-pressed="true"]),
@@ -330,15 +335,18 @@ body:not(.v6-home) :is(.ekab-search-close, .ekab-search-chip, .ekab-search-gloss
   .ekab-notes-visibility-toggle, .ekab-notes-visibility-fallback) {
   background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--v6-accent-strong)!important;
 }
+
 body:not(.v6-home) :is(.saek-source-summary, .saek-source-section details>summary) {
   background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--ink)!important;
 }
-body:not(.v6-home) .ekab-notes-fab {background:var(--v6-accent)!important;border-color:var(--line)!important;color:var(--accent-ink)!important;box-shadow:0 8px 22px rgba(0,0,0,.18)!important}
+body:not(.v6-home) .ekab-notes-fab {background:var(--v6-accent)!important;border-color:var(--line)!important;color:var(--accent-ink)!important;box-shadow:0 8px 22px rgb(0 0 0 / 18%)!important}
 body:not(.v6-home) .ekab-notes-fab:hover {background:var(--v6-accent)!important}
 body:not(.v6-home) .ekab-notes-dialog {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
 body:not(.v6-home) :is(.ekab-notes-head, .ekab-note-card) {background:var(--v6-surface)!important;border-color:var(--line)!important}
+
 body:not(.v6-home) :is(.ekab-notes-head h2, .ekab-notes-controls label, .ekab-notes-editor label,
   .ekab-note-title, .ekab-notes-editor h3, .ekab-note-preview) {color:var(--ink)!important}
+
 html[data-theme="dark"] body:not(.v6-home) :is(.ekab-search-close, .ekab-search-chip, .ekab-search-glossary,
   .saek-show-all, .saek-source-action, .ekab-notes-chapter, .ekab-notes-tabs button:not([aria-pressed="true"]),
   .ekab-notes-new, .ekab-notes-more, .ekab-note-actions button, .ekab-note-actions a,
@@ -346,21 +354,22 @@ html[data-theme="dark"] body:not(.v6-home) :is(.ekab-search-close, .ekab-search-
   .saek-source-section details>summary) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--ink)!important}
 html[data-theme="dark"] body:not(.v6-home) .ekab-notes-tabs button[aria-pressed="true"] {background:#efe4ce!important;border-color:#262626!important;color:#121212!important}
 html[data-theme="dark"] body:not(.v6-home) .ekab-notes-fab {background:#efe4ce!important;border-color:#262626!important;color:#121212!important}
+
 html[data-theme="dark"] body:not(.v6-home) :is(.ekab-notes-dialog, .ekab-notes-head, .ekab-note-card,
   .ekab-notes-editor, .ekab-notes-controls, .ekab-notes-results) {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
+
 html[data-theme="dark"] body:not(.v6-home) :is(.ekab-notes-head p, .ekab-notes-controls label, .ekab-notes-editor label,
   .ekab-note-title, .ekab-note-preview, .ekab-notes-status, .ekab-notes-fine, .ekab-notes-editor h3,
   .ekab-note-meta, .ekab-note-empty) {color:var(--muted)!important}
 html[data-theme="dark"] body:not(.v6-home) .ekab-notes-dialog :is(input, textarea, select) {background:#22332b!important;color:var(--ink)!important;border-color:var(--line)!important}
 
 /* Keep the shared classroom tools aligned with the V6 forest-and-gold palette. */
-body.v6-home .ekab-notes-fab {background:linear-gradient(145deg,var(--v6-accent),var(--v6-accent))!important;border-color:var(--line)!important;color:#fff!important;box-shadow:0 8px 22px rgba(40,68,42,.22)!important}
+body.v6-home .ekab-notes-fab {background:linear-gradient(145deg,var(--v6-accent),var(--v6-accent))!important;border-color:var(--line)!important;color:#fff!important;box-shadow:0 8px 22px rgb(40 68 42 / 22%)!important}
 body.v6-home .ekab-notes-fab:hover {background:linear-gradient(145deg,var(--v6-accent),var(--v6-accent))!important}
 body.v6-home .ekab-notes-dialog {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
 html[data-theme="dark"] body.v6-home .ekab-notes-fab {background:linear-gradient(145deg,var(--v6-accent),#294c36)!important;border-color:var(--line)!important;color:#fff!important}
 body:not(.v6-home).v6-page .v6-page-content :is(.reader-breadcrumb a,.eyebrow,.quick-jump strong,.chapter-shortcut strong,.lesson-3d strong,.lesson-3d-title,.saek-section-label) {color:var(--v6-accent-strong)!important}
-body:not(.v6-home).v6-page .v6-page-content :is(.lesson-3d,.quick-jump,.chapter-shortcut) {border-color:var(--line)!important}
-body:not(.v6-home).v6-page .v6-page-content :is(.lesson-3d,.quick-jump,.chapter-shortcut) {background-color:var(--v6-soft)!important}
+body:not(.v6-home).v6-page .v6-page-content :is(.lesson-3d,.quick-jump,.chapter-shortcut) {border-color:var(--line)!important;background-color:var(--v6-soft)!important}
 body:not(.v6-home).v6-page .v6-page-content :is(.ex-section-nav,.saek-anatomy-jump,.atlas-chapter-practice) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--ink)!important}
 body:not(.v6-home).v6-page .v6-page-content :is(.ex-section-nav strong,.ex-section-nav label,.saek-anatomy-jump,.saek-anatomy-jump-text,.saek-anatomy-jump-actions,.saek-anatomy-jump-actions strong,.saek-source-section,.saek-source-title,.atlas-chapter-practice,.atlas-chapter-practice strong) {color:var(--v6-accent-strong)!important}
 body:not(.v6-home).v6-page .v6-page-content :is(.reader-breadcrumb a,.lesson-progress,.lesson-progress *, .saek-source-figure,.saek-source-figure img) {border-color:var(--line)!important}
@@ -378,6 +387,7 @@ body:is(.v6-home,.v6-page) :is(.ekab-notice-panel,.ekab-notice-entry) {backgroun
 body:is(.v6-home,.v6-page) .ekab-notice-entry.is-unread {border-left-color:var(--v6-accent)!important;background:var(--v6-soft)!important}
 body:is(.v6-home,.v6-page) :is(.ekab-notice-close,.ekab-notice-markall,.ekab-notice-read) {color:var(--v6-accent-strong)!important}
 body:is(.v6-home,.v6-page) .ekab-notice-action {background:var(--v6-accent)!important;color:var(--accent-ink)!important}
+
 body:is(.v6-home,.v6-page) .ekab-notice-trigger:focus-visible,
 body:is(.v6-home,.v6-page) .ekab-notice-panel button:focus-visible {outline-color:#77ac7d!important}
 html[data-theme="dark"] body:is(.v6-home,.v6-page) :is(.ekab-notice-panel,.ekab-notice-entry) {background:var(--v6-surface)!important;border-color:var(--line)!important;color:var(--ink)!important}
@@ -385,6 +395,7 @@ html[data-theme="dark"] body:is(.v6-home,.v6-page) .ekab-notice-entry.is-unread 
 html[data-theme="dark"] body:is(.v6-home,.v6-page) :is(.ekab-notice-close,.ekab-notice-markall,.ekab-notice-read) {color:var(--v6-accent)!important}
 html[data-theme="dark"] body:is(.v6-home,.v6-page) .ekab-notice-action {background:var(--v6-accent)!important;color:var(--accent-ink)!important}
 html[data-theme="dark"] body:not(.v6-home) .ekab-notes-editor-actions .ekab-notes-save {background:var(--v6-accent)!important;border-color:var(--v6-accent)!important;color:var(--accent-ink)!important}
+
 /* Notes panel in the light theme: the surface is linen, so every text and field inside it gets the V6 ink. */
 html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(.ekab-notes-head p,.ekab-notes-status,.ekab-notes-fine,.ekab-note-empty,.ekab-note-meta,.ekab-notes-controls label,.ekab-notes-editor label,label[for="ekabNotesSearch"]) {color:var(--muted)!important}
 html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(.ekab-notes-head h2,.ekab-note-title,.ekab-note-preview,.ekab-notes-editor h3) {color:var(--ink)!important}
@@ -393,7 +404,7 @@ html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(input,
 html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(input,textarea)::placeholder {color:var(--muted)!important}
 html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog .ekab-notes-tabs button[aria-pressed="true"] {background:var(--v6-accent)!important;border-color:var(--v6-accent)!important;color:var(--accent-ink)!important;box-shadow:none!important}
 html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(#ekabNotesResetPosition,#ekabNotesHideFloating,#ekabNotesClose) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--v6-accent)!important}
-html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog .ekab-note-card {box-shadow:inset 3px 0 0 var(--v6-accent)40!important}
+html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog .ekab-note-card {box-shadow:inset 3px 0 0 color-mix(in srgb,var(--v6-accent) 25%,transparent)!important}
 html:not([data-theme="dark"]) body.v6-home:not(.dark-mode) :is(.ekab-notes-head,.ekab-note-card) {background:var(--v6-surface)!important;border-color:var(--line)!important}
 html:not([data-theme="dark"]) body.v6-home:not(.dark-mode) .ekab-notes-dialog :is(.ekab-notes-chapter,.ekab-notes-tabs button:not([aria-pressed="true"]),.ekab-notes-new,.ekab-notes-more,.ekab-note-actions button,.ekab-note-actions a,.ekab-notes-visibility-toggle,.ekab-notes-visibility-fallback) {background:var(--v6-soft)!important;border-color:var(--line)!important;color:var(--v6-accent-strong)!important}
 html:not([data-theme="dark"]) body:not(.dark-mode) .ekab-notes-dialog :is(input,textarea,select):focus-visible {outline:3px solid var(--v6-accent)!important;outline-offset:1px}

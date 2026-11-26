@@ -52,7 +52,7 @@
  for(const a of [side,top].flatMap(n=>[...n.querySelectorAll('a[href]')]))a.href=new URL(a.getAttribute('href'),ROOT).href;
  top.querySelector('form').addEventListener('submit',event=>{event.preventDefault();const input=top.querySelector('input[name="q"]');if(input.value.trim()){input.focus();input.dispatchEvent(new Event('input',{bubbles:true}));}});
  main.append(top,content);shell.append(side,main);document.body.append(shell);document.body.classList.add('v6-page');window.dispatchEvent(new Event('ekab:global-search-mounted'));
- const quickStyle=document.createElement('link');quickStyle.rel='stylesheet';quickStyle.href=new URL('quick-access.css?v=20261118-2',ROOT).href;document.head.append(quickStyle);
+ const quickStyle=document.createElement('link');quickStyle.rel='stylesheet';quickStyle.href=new URL('quick-access.css?v=20261127-1',ROOT).href;document.head.append(quickStyle);
  const quickScript=document.createElement('script');quickScript.src=new URL('quick-access.js?v=20261118-3',ROOT).href;document.head.append(quickScript);
  const toggle=top.querySelector('.v6-shell-theme');
  const label=()=>{const dark=document.documentElement.dataset.theme==='dark';toggle.innerHTML=icon(dark?'sun':'moon')+`<span>${dark?'Ανοιχτή εμφάνιση':'Σκούρα εμφάνιση'}</span>`;toggle.setAttribute('aria-label',dark?'Ενεργοποίηση ανοιχτής εμφάνισης':'Ενεργοποίηση σκούρας εμφάνισης');};

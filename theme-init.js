@@ -1,7 +1,7 @@
 /* Resolves a site file relative to this script, so pages in subfolders load the same shared files. */
 function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.src).href:p;}
-(function(){document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261122-12');document.head.appendChild(script)})();
-(function(){if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=ekabAt('theme-system.css?v=20261122-10');link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
+(function(){document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261127-2');document.head.appendChild(script)})();
+(function(){if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=ekabAt('theme-system.css?v=20261127-3');link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
 (function(){var value=null;try{value=localStorage.getItem('ekab.theme.v1')}catch(e){}if(value!=='dark'&&value!=='light'){try{var item=document.cookie.split(';').map(function(part){return part.trim()}).find(function(part){return part.indexOf('ekab.theme.v1=')===0});value=item?item.slice(14):null}catch(e){value=null}}document.documentElement.dataset.theme=value==='light'?'light':'dark'})();;
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */
@@ -11,7 +11,7 @@ function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.sr
   if(document.querySelector('link[data-ekab-v6-subsections]'))return;
   const link=document.createElement('link');
   link.rel='stylesheet';
-  link.href=new URL('v6-subsections.css?v=27.1.174',base).href;
+  link.href=new URL('v6-subsections.css?v=27.1.208',base).href;
   link.dataset.ekabV6Subsections='';
   document.head.appendChild(link);
  };
@@ -76,11 +76,11 @@ function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.sr
   window.__ekabV6Reveal=()=>root.classList.remove('v6-booting');
   setTimeout(window.__ekabV6Reveal,6000);
   // Start fetching the shell files now instead of one after another.
-  for(const [href,as] of [['v6-shell.css?v=27.1.178','style'],['v6-subsections.css?v=27.1.174','style'],['v6-shell.js?v=27.1.175','script']]){
+  for(const [href,as] of [['v6-shell.css?v=27.1.178','style'],['v6-subsections.css?v=27.1.208','style'],['v6-shell.js?v=27.1.175','script']]){
    const l=document.createElement('link');l.rel='preload';l.as=as;l.href=url(href);document.head.appendChild(l);
   }
  }
- const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.174');document.head.appendChild(s);
+ const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.208');document.head.appendChild(s);
 })();
 
 /* Shared reading/practice navigation, without another scoring or progress store. */

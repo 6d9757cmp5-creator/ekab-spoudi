@@ -1,7 +1,10 @@
 /* Applies the theme chosen on the site (key ekab.theme.v1) on pages that do not load theme-init.js, before they paint. */
 (function(){var value=null;try{value=localStorage.getItem('ekab.theme.v1')}catch(e){}if(value!=='dark'&&value!=='light'){try{var item=document.cookie.split(';').map(function(part){return part.trim()}).find(function(part){return part.indexOf('ekab.theme.v1=')===0});value=item?item.slice(14):null}catch(e){value=null}}document.documentElement.dataset.theme=value==='light'?'light':'dark'})();;
 
-(function(){const base=document.currentScript?.src||location.href;if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('theme-system.css?v=20261122-10',base).href;link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
+(function(){const base=document.currentScript?.src||location.href;if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('theme-system.css?v=20261127-3',base).href;link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
+
+/* Side navigation drawer (same as pages that load theme-init.js). */
+(function(){if(document.querySelector('script[src*="sidebar-beta.js"]'))return;document.documentElement.dataset.sidebarBeta='true';const s=document.createElement('script');s.src=new URL('sidebar-beta.js?v=20261127-2',document.currentScript?.src||location.href).href;document.head.appendChild(s)})();
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */
 (function(){
@@ -10,7 +13,7 @@
   if(document.querySelector('link[data-ekab-v6-subsections]'))return;
   const link=document.createElement('link');
   link.rel='stylesheet';
-  link.href=new URL('v6-subsections.css?v=27.1.174',base).href;
+  link.href=new URL('v6-subsections.css?v=27.1.208',base).href;
   link.dataset.ekabV6Subsections='';
   document.head.appendChild(link);
  };
@@ -35,9 +38,9 @@
   window.__ekabV6Reveal=()=>root.classList.remove('v6-booting');
   setTimeout(window.__ekabV6Reveal,6000);
   // Start fetching the shell files now instead of one after another.
-  for(const [href,as] of [['v6-shell.css?v=27.1.177','style'],['v6-subsections.css?v=27.1.174','style'],['v6-shell.js?v=27.1.178','script']]){
+  for(const [href,as] of [['v6-shell.css?v=27.1.177','style'],['v6-subsections.css?v=27.1.208','style'],['v6-shell.js?v=27.1.208','script']]){
    const l=document.createElement('link');l.rel='preload';l.as=as;l.href=url(href);document.head.appendChild(l);
   }
  }
- const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.174');document.head.appendChild(s);
+ const s=document.createElement('script');s.src=url('v6-shell-loader.js?v=27.1.208');document.head.appendChild(s);
 })();
