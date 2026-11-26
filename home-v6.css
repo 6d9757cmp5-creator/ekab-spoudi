@@ -414,15 +414,12 @@ body.dark-mode .v6-atla-link,body.dark-mode .v6-plan-link,body.dark-mode [data-a
 /* One account icon and a themed account dialog on the home page. */
 .account-avatar{background:transparent!important;border-color:#d8c47f!important;color:#f0dda0!important}
 .account-avatar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.home-flag-outline{display:block;flex:0 0 32px;width:32px;height:32px;object-fit:contain;opacity:.92;mix-blend-mode:multiply}
-body.dark-mode .home-flag-outline{opacity:.9;mix-blend-mode:screen;filter:grayscale(1) invert(1) sepia(1) saturate(3) hue-rotate(3deg)}
 #accountDialog{width:min(96vw,800px);max-height:90dvh;max-height:90vh;overflow-y:auto;overscroll-behavior:contain;padding:0;border:1px solid var(--line);border-radius:18px;background:var(--paper);color:var(--ink);box-shadow:0 22px 70px rgba(10,20,14,.32)}
 #accountDialog .dialog-inner{padding:22px;background:var(--paper);color:var(--ink)}
 #accountDialog .account-dialog{min-width:0;padding:clamp(15px,3vw,24px);background:var(--paper);color:var(--ink)}
 #accountDialog .account-dialog-heading{position:sticky;top:0;z-index:5;padding:7px 0 10px;background:var(--paper);border-bottom:1px solid var(--line)}
 #accountDialog::backdrop{background:rgba(12,22,16,.58);backdrop-filter:blur(2px)}
 body.dark-mode #accountDialog,body.dark-mode #accountDialog .dialog-inner,body.dark-mode #accountDialog .account-dialog,body.dark-mode #accountDialog .account-dialog-heading{background:#121212;color:#e5e5e5}
-@media(max-width:720px){.home-flag-outline{flex-basis:27px;width:27px;height:27px}}
 @media(max-width:590px){#accountDialog{width:min(96vw,560px)}#accountDialog .backup-grid{grid-template-columns:1fr;gap:11px}#accountDialog .account-dialog{padding:15px}}
 .v6-live-widgets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 20px}
 .v6-live-card{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:14px 15px;border:1px solid var(--line);border-radius:15px;background:var(--paper);box-shadow:var(--shadow)}
@@ -445,14 +442,3 @@ body.dark-mode .v6-live-link,body.dark-mode .v6-live-action{background:#242019;b
 .v6-continue[hidden],.v6-secondary-column[hidden],#atlaCard[hidden]{display:none!important}
 .v6-dashboard.v6-dashboard-no-history{grid-template-columns:minmax(0,1fr)!important}
 body .v6-live-widgets>.v6-dashboard.v6-dashboard-no-history{grid-template-columns:minmax(0,1fr)!important}
-
-/* Shift strip: live anonymous count of people in the app, by area, like a dispatch board line. */
-.ekab-shift{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin:16px 0 8px;padding:8px 16px;border:1px solid var(--line);border-left:4px solid #2f9e5b;border-radius:12px;background:var(--paper);font-size:15px;line-height:1.5}
-.ekab-shift[hidden]{display:none}
-.ekab-shift strong{font-weight:800}
-.ekab-shift-count{font-weight:700;font-variant-numeric:tabular-nums}
-.ekab-shift-places{color:var(--muted);font-size:14px}
-.ekab-shift-places:empty{display:none}
-.ekab-shift-dot{width:10px;height:10px;border-radius:50%;background:#2f9e5b;box-shadow:0 0 0 0 rgba(47,158,91,.5);animation:ekab-shift-pulse 2.4s ease-out infinite}
-@keyframes ekab-shift-pulse{0%{box-shadow:0 0 0 0 rgba(47,158,91,.5)}70%{box-shadow:0 0 0 8px rgba(47,158,91,0)}100%{box-shadow:0 0 0 0 rgba(47,158,91,0)}}
-@media(prefers-reduced-motion:reduce){.ekab-shift-dot{animation:none}}

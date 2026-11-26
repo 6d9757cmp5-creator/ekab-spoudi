@@ -6,25 +6,6 @@ const athensDateTime = new Intl.DateTimeFormat('el-GR', {
 });
 const formatTime = date => athensDateTime.format(date);
 
-// Who is on "shift" right now: real anonymous presence (area only), sent from every page by
-// shift-presence.js. Nothing is shown when the service cannot be reached; numbers are never invented.
-function initActivityIndicator() {
-  const strip = document.querySelector('[data-activity-indicator]');
-  const count = strip?.querySelector('[data-activity-count]');
-  const places = strip?.querySelector('[data-activity-places]');
-  if (!count || strip.dataset.initialized === 'true') return;
-  strip.dataset.initialized = 'true';
-  const render = data => {
-    if (!strip.isConnected) return;
-    if (!data || !Number.isFinite(data.total) || data.total < 1) { strip.hidden = true; return; }
-    count.textContent = data.total === 1 ? '1 σε υπηρεσία' : `${data.total} σε υπηρεσία`;
-    places.textContent = (data.places || []).map(([place, n]) => `${place} ${n}`).join(' · ');
-    strip.hidden = false;
-  };
-  render(window.__ekabShiftData);
-  window.addEventListener('ekab:shift', event => render(event.detail));
-}
-
 function renderPulse() {
   const card = document.querySelector('[data-study-pulse]');
   if (!card) return;
@@ -242,7 +223,6 @@ function handleLocationVisibility() {
 }
 
 window.addEventListener('ekab:home-ready', initLocation);
-window.addEventListener('ekab:home-ready', initActivityIndicator);
 window.addEventListener('pageshow', initLocation);
 window.addEventListener('pagehide', () => stopLocation(), { once: false });
 document.addEventListener('visibilitychange', handleLocationVisibility);
@@ -250,7 +230,6 @@ document.addEventListener('visibilitychange', handleLocationVisibility);
 renderDuty();
 renderPulse();
 initLocation();
-initActivityIndicator();
 window.addEventListener('storage', () => { renderPulse(); renderDuty(); });
 window.addEventListener('focus', () => { renderPulse(); renderDuty(); });
 window.addEventListener('pageshow', () => { renderPulse(); renderDuty(); });

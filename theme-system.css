@@ -381,3 +381,26 @@ body :is(.compact-sources-body a, .ekab-manual-link, .ph-case-option, .ph-disclo
   body .header-tools .global-search { order: 10; flex: 1 0 100%; min-width: 0; }
 }
 
+
+/* "Σε βάρδια" live count next to the search bar (shift-presence.js). */
+.ekab-shift-wrap { position: relative; flex: none; }
+.ekab-shift-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.ekab-shift-chip[hidden] { display: none; }
+.ekab-shift-chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ekab-shift-station { display: inline-block; min-width: 9ch; max-width: 16ch; overflow: hidden; text-overflow: ellipsis; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ekab-shift-in { animation: ekab-shift-in 0.4s ease-out; }
+
+@keyframes ekab-shift-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.ekab-shift-dot { width: 10px; height: 10px; border-radius: 50%; background: #2f9e5b; animation: ekab-shift-pulse 2.4s ease-out infinite; }
+
+@keyframes ekab-shift-pulse { 0% { box-shadow: 0 0 0 0 rgb(47 158 91 / 50%); } 70% { box-shadow: 0 0 0 8px rgb(47 158 91 / 0%); } 100% { box-shadow: 0 0 0 0 rgb(47 158 91 / 0%); } }
+.ekab-shift-places { position: absolute; top: calc(100% + 8px); right: 0; z-index: 1200; width: max-content; min-width: 220px; max-width: 92vw; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); color: var(--ink); box-shadow: 0 16px 40px rgb(0 0 0 / 18%); }
+.ekab-shift-places[hidden] { display: none; }
+.ekab-shift-places p { margin: 0 0 8px; font-weight: 700; }
+.ekab-shift-places ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.ekab-shift-places li { display: flex; justify-content: space-between; gap: 24px; }
+.ekab-shift-places small { display: block; margin-top: 8px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 480px) { .ekab-shift-label { display: none; } .ekab-shift-station { min-width: 0; max-width: 11ch; } .ekab-shift-chip { padding: 0 12px; } .ekab-shift-places { right: auto; left: 0; } }
+
+@media (prefers-reduced-motion: reduce) { .ekab-shift-dot, .ekab-shift-in { animation: none; } }
