@@ -102,10 +102,6 @@ html[data-theme="dark"] .saek-hub .course-tile:hover{background:#203d28}
 @media(max-width:360px){.saek-hub .hub-action{padding:10px;min-height:124px}.saek-hub .hub-action-copy strong{font-size:.79rem}.saek-hub .hub-semester-tabs button small{font-size:.56rem}.saek-hub .hub-links{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.saek-hub .hub-action,.saek-hub .hub-progress-track>span{transition:none}}
 
-/* PR #6 — read-only in-app index of the educational image collection. */
-.saek-hub .hub-image-gallery-entry{margin:0 0 18px}
-.saek-hub .hub-image-gallery-entry a{display:inline-flex;align-items:center;min-height:44px;padding:9px 13px;border:1px solid var(--line);border-radius:11px;background:var(--light);font-size:.9rem;font-weight:700;text-decoration:none}
-.saek-hub .hub-image-gallery-entry a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 
 /* Readability (2026-11-10): text at least 12px and 4.5:1 contrast on phones. */
 .saek-hub .course-tile-main small,.saek-hub footer,.saek-hub .hub-links a small,.saek-hub .hub-resources>summary small,
@@ -115,3 +111,22 @@ html[data-theme="dark"] .saek-hub .course-tile:hover{background:#203d28}
 /* Readability (2026-11-10): 4.5:1 contrast. */
 .saek-hub .hub-semester-tabs button:not([aria-pressed="true"]) small{color:#4f6576}
 html[data-theme="dark"] .saek-hub .hub-semester-tabs button:not([aria-pressed="true"]) small{color:#bcd9c3}
+
+/* Υλικό & εργαλεία (2026-11-26): κάρτες για όλες τις εικόνες και όλα τα βίντεο. */
+.saek-hub .hub-media{margin:0 0 18px;padding:18px}
+.saek-hub .hub-media h3{margin:2px 0 4px}
+.saek-hub .hub-media-lead{margin:0 0 14px;color:var(--muted)}
+.saek-hub .hub-media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.saek-hub .hub-media-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--light);color:inherit;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.saek-hub .hub-media-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.saek-hub .hub-media-card:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.saek-hub .hub-media-thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+.saek-hub .hub-media-thumb img{position:absolute;inset:0;width:100%;height:100%;padding:8px 8px 0;box-sizing:border-box;object-fit:contain;display:block}
+.saek-hub .hub-media-badge{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:999px;background:#fff;color:#1d3a24;font-size:.75rem;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.saek-hub .hub-media-play{position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.saek-hub .hub-media-play::after{content:"";position:absolute;top:50%;left:55%;transform:translate(-50%,-50%);border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #1d3a24}
+.saek-hub .hub-media-body{display:flex;flex-direction:column;gap:4px;padding:14px;flex:1}
+.saek-hub .hub-media-body small{font-size:.85rem;color:var(--muted)}
+.saek-hub .hub-media-go{margin-top:auto;padding-top:10px;font-weight:700;display:flex;justify-content:space-between;min-height:44px;align-items:flex-end}
+@media(max-width:620px){.saek-hub .hub-media{padding:15px 12px}.saek-hub .hub-media-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.saek-hub .hub-media-card{transition:none}}
