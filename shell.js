@@ -207,10 +207,20 @@ function lessonReader(){
   v.setAttribute('aria-label','Βίντεο κεφαλαίου '+n);fig.append(v);
   (f.querySelector('.body')||f).prepend(fig);
  };
+ const course=document.querySelector('.saek-lesson-heading .reader-title');const courseName=course?.textContent.trim()||'';
+ // Extras of a chapter go into one grouped list, in a fixed order (practice may be added later by another script).
+ const group=f=>{
+  const body=f.querySelector('.body');if(!body)return;
+  let g=body.querySelector(':scope>.b-group');if(!g){g=document.createElement('div');g.className='b-group';body.append(g)}
+  for(const sel of ['.saek-anatomy-jump','.lesson-more','.knowledge-check','.atlas-chapter-practice','.compact-sources'])
+   for(const d of body.querySelectorAll(sel))if(d.parentElement!==g)g.append(d);
+  g.hidden=!g.children.length;
+ };
  const show=f=>{
   for(const o of folds)if(o!==f&&o.open){o.open=false;o.querySelector('.b-lesson-video video')?.pause()}
-  addVideo(f);
-  if(label)label.textContent=`Κεφάλαιο ${f.id.slice(7)} από ${total}`;
+  addVideo(f);group(f);setTimeout(()=>group(f),1500);
+  if(course)course.textContent=`${courseName} · Κεφάλαιο ${f.id.slice(7)} από ${total}`;
+  if(label)label.textContent='Κεφάλαια';
   for(const a of document.querySelectorAll('.chapter-toc-links a'))a.setAttribute('aria-current',String(a.getAttribute('href')==='#'+f.id));
  };
  folds.forEach(f=>f.addEventListener('toggle',()=>{if(f.open)show(f)}));
