@@ -75,3 +75,18 @@ html.b-legacy .b-btn{color:var(--accent-ink)!important}
 
 /* The top-bar "‹ Parent" does the breadcrumb's job */
 html.b-legacy .reader-breadcrumb{display:none!important}
+
+/* Decorative gradients and tinted tiles of older pages become plain surfaces */
+html.b-legacy main :is(.hub-action,.hub-top,.saek-gallery-card,.panel){background-image:none!important;background-color:var(--raise)!important;border:1px solid var(--line)!important;border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;color:var(--ink)}
+html.b-legacy main .hub-action :is(.hub-action-copy,.hub-action-icon,.hub-action-arrow){border:0!important;box-shadow:none!important;background-image:none!important}
+html.b-legacy main .hub-action-copy{background:none!important}
+/* "Next step" block (experience-v4): plain surface, readable text in both themes */
+html.b-legacy main .ekab-next{background:var(--raise)!important;background-image:none!important;border:1px solid var(--line)!important;border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;color:var(--ink)!important}
+html.b-legacy main .ekab-next *{color:inherit;text-shadow:none!important}
+html.b-legacy main .ekab-next :is(p,small,span):not([class*="btn"]){color:var(--muted)}
+html.b-legacy main .ekab-next :is(h2,h3,strong,b){color:var(--ink)!important}
+html.b-legacy main .ekab-next :is(div,section,aside):not(:first-child){background:none!important;background-image:none!important}
+html.b-legacy main .ekab-next [class*="stat"],html.b-legacy main .ekab-next [class*="metric"]{background:var(--surface)!important;border:1px solid var(--line)!important;border-radius:var(--radius-in)!important}
+html.b-legacy main .ekab-next a:is([class*="btn"],[class*="primary"],[class*="cta"]){background:var(--accent)!important;color:var(--accent-ink)!important;border:0!important}
+html.b-legacy main :is([class*="eyebrow"],[class*="kicker"],[class*="overline"]){text-transform:none!important;letter-spacing:0!important;color:var(--muted)!important;font-weight:600!important}
+html.b-legacy main h2{font-size:clamp(22px,3vw,28px)}

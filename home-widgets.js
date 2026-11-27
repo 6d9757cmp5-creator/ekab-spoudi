@@ -4,7 +4,7 @@
 import { heraklionOnDuty } from './services/on-duty/heraklion.mjs';
 import { weakestStudyArea } from './services/progress/study-pulse.mjs';
 import { STORAGE_KEY, EXAM_TYPES, SAEK_COURSES, parseExams, daysUntil, examItems, buildPlan } from './services/study-plan/plan.mjs';
-import { store, esc } from './shell.js?v=10';
+import { store, esc } from './shell.js?v=11';
 import { TOOLS } from './home-tools.js?v=2';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -94,7 +94,7 @@ const W = {
       else next.innerHTML = '<span class="w-dot"></span><span>Καμία εξέταση. <a href="./study-plan.html">Πρόσθεσε ημερομηνία</a></span>';
     } },
 
-  progress: { icon: I.ring, group: 'study', title: 'Πρόοδος ΣΑΕΚ', desc: 'Διαβασμένα κεφάλαια ανά εξάμηνο.', size: 'm', link: './courses.html',
+  progress: { icon: I.ring, group: 'study', title: 'Πρόοδος ΣΑΕΚ', desc: 'Διαβασμένα κεφάλαια ανά εξάμηνο.', size: 'm', link: './saek.html',
     html: () => head('ring', 'Πρόοδος ΣΑΕΚ') + '<div class="w-prog"><span class="w-ring" role="img"><b>0%</b></span><div class="w-sems"></div></div>',
     paint(el) {
       let all = 0, done = 0; const sem = {};

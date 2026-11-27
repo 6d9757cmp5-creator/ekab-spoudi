@@ -89,8 +89,8 @@ export function shell(current,opts={}){
  const hub=NAV.some(([h])=>h===here);
  document.documentElement.classList.toggle('b-hubpage',hub);
  // Inner pages: "‹ Parent" at the top left, as in iOS navigation bars.
- const PARENT={'courses.html':['study.html','Μελέτη']};
- const parent=PARENT[here]||(/^saek-course-\d\d\.html$/.test(here)?['courses.html','Μαθήματα']:null)||(()=>{const s=SECTION[here]||current;const n=NAV.find(([h])=>h===s);return n?[n[0],n[2]]:null})();
+ const PARENT={'saek-videos.html':['saek.html','ΣΑΕΚ'],'saek-images.html':['saek.html','ΣΑΕΚ']};
+ const parent=PARENT[here]||(/^saek-course-\d\d\.html$/.test(here)?['saek.html','ΣΑΕΚ']:null)||(()=>{const s=SECTION[here]||current;const n=NAV.find(([h])=>h===s);return n?[n[0],n[2]]:null})();
  const item=([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
  side.innerHTML=NAV.map(item).join('')+
   `<div class="b-side-sub"><a href="study-plan.html"${here==='study-plan.html'?' aria-current="page"':''}>${svg('cal')}Ημερολόγιο εξετάσεων</a><button type="button" class="b-side-btn" data-account-open>${svg('user')}Λογαριασμός</button></div>`+
