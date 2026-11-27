@@ -77,7 +77,7 @@
 </details>
 <footer>ΕΚΑΒ Σπουδή · Ανεξάρτητο εκπαιδευτικό βοήθημα, όχι επίσημη πιστοποίηση</footer>
 </main>
-<script src="saek-hub.js?v=27.1.92-all-courses" defer></script><script src="progress.js" defer></script><script src="updates.js?v=27.1.113" defer></script>
+<script src="saek-hub.js?v=27.1.92-all-courses" defer></script><script src="progress.js" defer></script><script src="updates.js?v=27.1.181" defer></script>
 
 <script type="module" src="study-addons.mjs"></script>
 <script>(()=>{const done=document.getElementById('library-done'),pct=document.getElementById('saekRingPct'),ring=pct?.parentElement;if(!done||!ring)return;const paint=()=>{const m=/(\d+)\s*\/\s*(\d+)/.exec(done.textContent||'');const p=m&&+m[2]?Math.round(+m[1]/+m[2]*100):0;pct.textContent=p+'%';ring.style.setProperty('--p',p)};new MutationObserver(paint).observe(done,{childList:true,characterData:true,subtree:true});paint()})()</script>
