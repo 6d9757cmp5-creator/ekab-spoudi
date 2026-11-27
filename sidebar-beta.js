@@ -5,7 +5,7 @@
  const root=document.documentElement;
  root.dataset.sidebarBeta='true';
  const base=new URL('./',document.currentScript?.src||location.href);
- const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('sidebar-beta.css?v=20261127-3',base).href;document.head.append(css);
+ const css=document.createElement('link');css.rel='stylesheet';css.href=new URL('sidebar-beta.css?v=20261127-5',base).href;document.head.append(css);
  const svg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
  const closeSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
  let active=false, lastFocus=null, observer, hoverTimer=null, openedBy=null;
@@ -21,15 +21,10 @@
   if(!document.querySelector('[data-sidebar-beta-backdrop]')){
    const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='sidebar-beta-backdrop';backdrop.dataset.sidebarBetaBackdrop='';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Κλείσιμο πλοήγησης');document.body.append(backdrop);backdrop.addEventListener('click',()=>setOpen(false));
   }
-  if(!document.querySelector('[data-sidebar-beta-edge]')){
-   // Mouse users: touching the left screen edge opens the drawer; leaving the drawer closes it.
-   const edge=document.createElement('div');edge.className='sidebar-beta-edge';edge.dataset.sidebarBetaEdge='';edge.setAttribute('aria-hidden','true');document.body.append(edge);
-   edge.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse'&&finePointer.matches){clearTimeout(hoverTimer);hoverTimer=setTimeout(()=>setOpen(true,'hover'),120)}});
-   edge.addEventListener('pointerleave',()=>{if(!active)clearTimeout(hoverTimer)});
-  }
   if(side.dataset.sidebarBetaHover!=='true'){
    side.dataset.sidebarBetaHover='true';
-   side.addEventListener('pointerenter',e=>{clearTimeout(hoverTimer);if(!active&&!phone.matches&&e.pointerType==='mouse'&&finePointer.matches)hoverTimer=setTimeout(()=>setOpen(true,'hover'),120)});
+   // Opens only when the mouse actually moves over the rail (Safari reports a pointer that merely rests there after load).
+   side.addEventListener('pointermove',e=>{if(active||phone.matches||e.pointerType!=='mouse'||!finePointer.matches)return;clearTimeout(hoverTimer);hoverTimer=setTimeout(()=>{if(side.matches(':hover'))setOpen(true,'hover')},150)});
    // Keyboard users: tabbing into the rail expands it; tabbing out collapses it.
    side.addEventListener('focusin',()=>{if(!active&&!phone.matches)setOpen(true,'hover')});
    side.addEventListener('focusout',e=>{if(active&&openedBy==='hover'&&!side.contains(e.relatedTarget))setOpen(false)});
@@ -50,6 +45,9 @@
  };
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active){e.preventDefault();setOpen(false);return}if(e.key==='Tab'&&active){const {side}=get();const list=[...side.querySelectorAll('button:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);if(!list.length)return;const first=list[0],last=list.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
  phone.addEventListener('change',()=>{const {side}=get();if(side)side.inert=!active&&phone.matches});
+ // A hover-opened menu also closes when the pointer moves or presses anywhere outside it.
+ const outside=e=>{if(!active){if(e.type==='pointermove'){const {side}=get();if(side&&!side.contains(e.target))clearTimeout(hoverTimer)}return}if(openedBy!=='hover')return;const {side}=get();if(side&&!side.contains(e.target)){clearTimeout(hoverTimer);hoverTimer=setTimeout(()=>{if(openedBy==='hover')setOpen(false)},e.type==='pointerdown'?0:300)}};
+ document.addEventListener('pointermove',outside,{passive:true});document.addEventListener('pointerdown',outside,true);
  document.addEventListener('click',e=>{
   if(active&&e.target.closest('.nav a,.v6-shell-nav a'))setOpen(false);
  });

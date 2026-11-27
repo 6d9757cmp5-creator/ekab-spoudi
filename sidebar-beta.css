@@ -1,5 +1,5 @@
 /* Side navigation: hidden by default, opens as a Liquid Glass overlay drawer that never moves the page. */
-html[data-sidebar-beta="true"] { overflow-x: hidden; scrollbar-gutter: stable; }
+html[data-sidebar-beta="true"] { overflow-x: hidden; }
 html[data-sidebar-beta="true"] body { overflow-x: hidden; }
 
 html[data-sidebar-beta="true"].sidebar-beta-open,
@@ -58,12 +58,6 @@ html[data-sidebar-beta="true"] .v6-global-main {
   filter: none !important;
   transition: none !important;
 }
-
-/* Invisible strip on the left screen edge: mouse hover opens the drawer. */
-html[data-sidebar-beta="true"] .sidebar-beta-edge { position: fixed; inset: 0 auto 0 0; z-index: 1280; width: 12px; }
-
-@media (hover: none), (pointer: coarse) { html[data-sidebar-beta="true"] .sidebar-beta-edge { display: none; } }
-html[data-sidebar-beta="true"].sidebar-beta-open .sidebar-beta-edge { display: none; }
 
 /* Dim layer behind the drawer: tap outside closes it. */
 html[data-sidebar-beta="true"] .sidebar-beta-backdrop { display: none; }
@@ -263,7 +257,6 @@ html[data-sidebar-beta="true"] .global-search { flex: 1 1 0; min-width: 0; }
 
   html[data-sidebar-beta="true"] .maincol,
   html[data-sidebar-beta="true"] .v6-global-main { margin-left: 72px !important; }
-  html[data-sidebar-beta="true"] .sidebar-beta-edge { display: none; }
 
   html[data-sidebar-beta="true"]:not(.sidebar-beta-open) :is(
     .nav-text, .v6-shell-nav a > span:not(.v6-icon), .brand > span:not(.brandmark),

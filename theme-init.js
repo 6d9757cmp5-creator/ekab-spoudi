@@ -1,6 +1,6 @@
 /* Resolves a site file relative to this script, so pages in subfolders load the same shared files. */
 function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.src).href:p;}
-(function(){document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261127-3');document.head.appendChild(script)})();
+(function(){document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261127-5');document.head.appendChild(script)})();
 (function(){if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=ekabAt('theme-system.css?v=20261127-7');link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
 (function(){var value=null;try{value=localStorage.getItem('ekab.theme.v1')}catch(e){}if(value!=='dark'&&value!=='light'){try{var item=document.cookie.split(';').map(function(part){return part.trim()}).find(function(part){return part.indexOf('ekab.theme.v1=')===0});value=item?item.slice(14):null}catch(e){value=null}}document.documentElement.dataset.theme=value==='light'?'light':'dark'})();;
 
@@ -87,4 +87,4 @@ function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.sr
 (function(){const file=location.pathname.split('/').pop();if(/^(saek-course-\d{2}|saek|saek-exams|theory|eoppep|practical_exam|supplementary_practice|seminar-prep)\.html$/.test(file)){const script=document.createElement('script');script.src=ekabAt('learning-context.js?v=20261118-1');document.head.append(script);}})();
 
 /* Anonymous presence heartbeat for the home "Βάρδια τώρα" strip, from every page. */
-(function(){if(document.querySelector('script[src*="shift-presence.js"]'))return;const s=document.createElement('script');s.src=new URL('shift-presence.js?v=20261127-3',document.currentScript?.src||location.href).href;s.defer=true;document.head.appendChild(s)})();
+(function(){if(document.querySelector('script[src*="shift-presence.js"]'))return;const s=document.createElement('script');s.src=new URL('shift-presence.js?v=20261127-4',document.currentScript?.src||location.href).href;s.defer=true;document.head.appendChild(s)})();

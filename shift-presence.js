@@ -3,7 +3,8 @@
    Nothing is shown when the service cannot be reached, so no number is ever invented. */
 (()=>{
  'use strict';
- if(window.__ekabShift||/oauth|auth-callback/.test(location.pathname))return;window.__ekabShift=true;
+ // Only the published site may use the counter (the server accepts no other origin).
+ if(window.__ekabShift||location.origin!=='https://6d9757cmp5-creator.github.io'||/oauth|auth-callback/.test(location.pathname))return;window.__ekabShift=true;
  const api=(window.EKAB_RADIO_CONFIG?.apiBase||'https://ekab-spoudi-radio.6d9757cmp5.workers.dev')+'/api/site/presence';
  let id=null;
  try{id=sessionStorage.getItem('ekab.shift.id');if(!id){id=[...crypto.getRandomValues(new Uint8Array(12))].map(b=>b.toString(36).padStart(2,'0')).join('').slice(0,24);sessionStorage.setItem('ekab.shift.id',id)}}catch(_){id=null}
