@@ -302,6 +302,33 @@ function placeOf(cf) {
   return CITY_EL[cf.city] || REGION_EL[cf.region] || "Ελλάδα";
 }
 
+// Towns used to name an area from a phone's rounded GPS position (about 10 km). Only the town name is kept.
+const TOWNS = [
+  ["Ηράκλειο", 35.34, 25.13], ["Χανιά", 35.51, 24.02], ["Ρέθυμνο", 35.37, 24.47], ["Άγιος Νικόλαος", 35.19, 25.72],
+  ["Ιεράπετρα", 35.01, 25.74], ["Σητεία", 35.21, 26.10], ["Μοίρες", 35.05, 24.87], ["Αθήνα", 37.98, 23.73],
+  ["Πειραιάς", 37.94, 23.65], ["Μαρούσι", 38.05, 23.81], ["Γλυφάδα", 37.86, 23.75], ["Ελευσίνα", 38.04, 23.54],
+  ["Θεσσαλονίκη", 40.64, 22.94], ["Πάτρα", 38.25, 21.73], ["Λάρισα", 39.64, 22.42], ["Βόλος", 39.36, 22.94],
+  ["Ιωάννινα", 39.66, 20.85], ["Καλαμάτα", 37.04, 22.11], ["Τρίπολη", 37.51, 22.37], ["Σπάρτη", 37.07, 22.43],
+  ["Κόρινθος", 37.94, 22.93], ["Ναύπλιο", 37.57, 22.80], ["Πύργος", 37.67, 21.44], ["Αγρίνιο", 38.62, 21.41],
+  ["Λαμία", 38.90, 22.43], ["Χαλκίδα", 38.46, 23.60], ["Θήβα", 38.32, 23.32], ["Λιβαδειά", 38.44, 22.87],
+  ["Τρίκαλα", 39.56, 21.77], ["Καρδίτσα", 39.36, 21.92], ["Κοζάνη", 40.30, 21.79], ["Καστοριά", 40.52, 21.27],
+  ["Φλώρινα", 40.78, 21.41], ["Βέροια", 40.52, 22.20], ["Κατερίνη", 40.27, 22.51], ["Έδεσσα", 40.80, 22.05],
+  ["Κιλκίς", 40.99, 22.87], ["Σέρρες", 41.09, 23.55], ["Δράμα", 41.15, 24.15], ["Καβάλα", 40.94, 24.41],
+  ["Ξάνθη", 41.14, 24.89], ["Κομοτηνή", 41.12, 25.40], ["Αλεξανδρούπολη", 40.85, 25.87], ["Άρτα", 39.16, 20.99],
+  ["Πρέβεζα", 38.96, 20.75], ["Ηγουμενίτσα", 39.50, 20.27], ["Κέρκυρα", 39.62, 19.92], ["Ζάκυνθος", 37.79, 20.90],
+  ["Αργοστόλι", 38.18, 20.49], ["Ρόδος", 36.43, 28.22], ["Κως", 36.89, 27.29], ["Ερμούπολη", 37.44, 24.94],
+  ["Νάξος", 37.10, 25.38], ["Μυτιλήνη", 39.11, 26.55], ["Χίος", 38.37, 26.14], ["Σάμος", 37.75, 26.98]
+];
+function townNear(lat, lon) {
+  if (!Number.isFinite(lat) || !Number.isFinite(lon) || lat < 34 || lat > 42 || lon < 19 || lon > 30) return null;
+  let best = null, bestKm = Infinity;
+  for (const [name, y, x] of TOWNS) {
+    const km = Math.hypot((lat - y) * 111, (lon - x) * 111 * Math.cos(lat * Math.PI / 180));
+    if (km < bestKm) { best = name; bestKm = km; }
+  }
+  return bestKm <= 60 ? best : null;
+}
+
 function decodePlace(value) {
   try { return value ? decodeURIComponent(value).slice(0, 40) : "Ελλάδα"; } catch { return "Ελλάδα"; }
 }
@@ -317,6 +344,7 @@ export class SitePresence {
   async fetch(request) {
     const now = Date.now();
     for (const [id, entry] of this.seen) if (now - entry.at > 90_000) this.seen.delete(id);
+    let me = null;
     if (request.method === "POST") {
       const ip = request.headers.get("cf-connecting-ip") || "unknown";
       const hit = this.hits.get(ip);
@@ -328,10 +356,15 @@ export class SitePresence {
       const id = typeof input?.id === "string" && /^[a-z0-9]{16,40}$/.test(input.id) ? input.id : null;
       if (!id) return json({ error: "Μη έγκυρο αίτημα." }, 400);
       if (input.leave === true) this.seen.delete(id);
-      else if (this.seen.size < 20_000 || this.seen.has(id)) this.seen.set(id, { at: now, place: decodePlace(request.headers.get("x-ekab-place")) });
+      else if (this.seen.size < 20_000 || this.seen.has(id)) {
+        // A rounded GPS position names the nearest town; otherwise the connection's area is used.
+        const gps = townNear(Number(input.lat), Number(input.lon));
+        this.seen.set(id, { at: now, place: gps || decodePlace(request.headers.get("x-ekab-place")), gps: !!gps });
+      }
+      me = this.seen.get(id);
     }
     const places = {};
     for (const { place } of this.seen.values()) places[place] = (places[place] || 0) + 1;
-    return json({ total: this.seen.size, places: Object.entries(places).sort((a, b) => b[1] - a[1]).slice(0, 8) });
+    return json({ total: this.seen.size, places: Object.entries(places).sort((a, b) => b[1] - a[1]).slice(0, 8), me: me ? { place: me.place, gps: me.gps } : null });
   }
 }

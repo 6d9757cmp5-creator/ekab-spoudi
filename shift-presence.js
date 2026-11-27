@@ -1,6 +1,7 @@
 /* "Σε βάρδια" next to the search bar on every page: an anonymous heartbeat (random per-tab id, area worked out
    by the server, no name, no IP stored) and a small live count; tapping it lists the areas.
-   Nothing is shown when the service cannot be reached, so no number is ever invented. */
+   When the browser already allows location, the position is sent rounded to about 10 km so the server can name
+   the nearest town; only that town name is kept. Nothing is shown when the service cannot be reached. */
 (()=>{
  'use strict';
  // Only the published site may use the counter (the server accepts no other origin).
@@ -46,8 +47,18 @@
  window.addEventListener('ekab:home-ready',mount);window.addEventListener('hashchange',()=>setTimeout(mount,50));
 
  let timer=null;
+ // Rounded position: from this session (the home page asks for it) or, if location is already allowed, read once.
+ const geo=async()=>{
+  try{const g=JSON.parse(sessionStorage.getItem('ekab.shift.geo')||'null');if(g&&Number.isFinite(g.lat))return g}catch(_){}
+  try{
+   if(!navigator.geolocation||(await navigator.permissions?.query({name:'geolocation'}))?.state!=='granted')return null;
+   const p=await new Promise((ok,no)=>navigator.geolocation.getCurrentPosition(ok,no,{enableHighAccuracy:false,maximumAge:600000,timeout:8000}));
+   const g={lat:Math.round(p.coords.latitude*10)/10,lon:Math.round(p.coords.longitude*10)/10};sessionStorage.setItem('ekab.shift.geo',JSON.stringify(g));return g;
+  }catch(_){return null}
+ };
  const send=body=>fetch(api,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),keepalive:!!body.leave});
- const beat=async()=>{let data=null;try{const r=await send({id});if(r.ok)data=await r.json()}catch(_){}mount();render(data)};
+ const beat=async()=>{let data=null;try{const g=await geo();const r=await send(g?{id,lat:g.lat,lon:g.lon}:{id});if(r.ok)data=await r.json()}catch(_){}mount();render(data);window.__ekabShiftData=data;window.dispatchEvent(new CustomEvent('ekab:shift',{detail:data}))};
+ window.addEventListener('ekab:geo',()=>beat());
  const schedule=()=>{clearTimeout(timer);if(!document.hidden)timer=setTimeout(()=>{beat();schedule()},45000)};
  beat();schedule();
  document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else{beat();schedule()}});

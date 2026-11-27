@@ -361,10 +361,35 @@ a.w:active{transform:scale(.98)}
 @media (min-width:1101px){
  .b-tiles{grid-template-areas:"duty duty shift streak" "cal cal pulse pulse" "cal cal gps gps"}
  .w-duty{grid-area:duty}.w-shift{grid-area:shift}.w-streak{grid-area:streak}.w-cal-tile{grid-area:cal}.w-pulse{grid-area:pulse}.w-gps{grid-area:gps}
- .w-pulse{flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:20px}
- .w-pulse .w-head{flex-basis:100%}
- .w-pulse .w-sub{flex:1;min-width:0}
 }
 .w-cal span{max-height:36px}
 .b-main{padding-bottom:96px}
 @media (max-width:720px){.w-gps{grid-column:auto}}
+
+/* Home live bar: own position and people on shift, one slim line under the title */
+.b-livebar{display:flex;flex-wrap:wrap;gap:8px;margin:-16px 0 24px}
+.lb-item{display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 4px 4px 14px;border:1px solid var(--line);border-radius:999px;background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);font-size:14px;min-width:0;animation:b-rise .45s cubic-bezier(.2,.7,.2,1) both}
+.lb-item[hidden]{display:none}
+.lb-shift{padding-right:16px;animation-delay:.08s}
+.lb-item>svg{width:18px;height:18px;flex:none;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lb-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+.lb-text b{color:var(--ink);font-weight:600}
+.lb-icon{width:36px;height:36px;flex:none;display:grid;place-items:center;border:0;border-radius:50%;background:none;color:var(--muted);cursor:pointer}
+.lb-icon:hover{background:rgba(118,118,128,.12);color:var(--ink)}
+.lb-icon[hidden]{display:none}
+.lb-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lb-icon.spin svg{animation:lb-spin .9s linear infinite}
+@keyframes lb-spin{to{transform:rotate(360deg)}}
+.b-home .ekab-shift-wrap{display:none}
+
+/* Short notice at the top (someone joined the shift, coordinates copied) */
+.b-toast{position:fixed;top:calc(var(--top) + 12px);left:16px;right:16px;margin:0 auto;width:fit-content;z-index:60;max-width:calc(100vw - 32px);text-align:center;padding:10px 18px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.14);font-size:14px;font-weight:600;transform:translateY(-12px);opacity:0;transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s ease-out;pointer-events:none}
+.b-toast.in{transform:none;opacity:1}
+.b-toast.out{transform:translateY(-12px);opacity:0}
+
+/* Four tiles: on-call and streak/pulse on the left, calendar on the right */
+@media (min-width:1101px){
+ .b-tiles{grid-template-areas:"duty duty cal cal" "streak pulse cal cal"}
+}
+@media (max-width:720px){.lb-item{width:100%}.b-livebar{margin-top:-8px}}
+@media (prefers-reduced-motion:reduce){.lb-icon.spin svg{animation:none}.b-toast{transition:none}}

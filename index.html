@@ -11,14 +11,28 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="./radio.css?v=20261122-1">
 <link rel="stylesheet" href="./radio-channels.css?v=20261122-1">
-<link rel="stylesheet" href="shell.css?v=1">
+<link rel="stylesheet" href="shell.css?v=2">
 <link rel="stylesheet" href="shell-radio.css?v=1">
 </head>
-<body>
+<body class="b-home">
 <main class="b-main" id="main">
  <div class="b-wrap">
   <h1>Καλή μελέτη</h1>
   <p class="b-lead" id="summary">Διάλεξε από πού θα συνεχίσεις.</p>
+  <section class="b-livebar" aria-label="Ζωντανή ενημέρωση">
+   <div class="lb-item lb-gps">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+    <span class="lb-text" role="status" aria-live="polite"><b data-gps-place>Η θέση μου</b> <span data-gps-coords>Αναζήτηση θέσης…</span></span>
+    <a class="lb-icon" data-gps-map href="#" target="_blank" rel="noopener noreferrer" aria-label="Άνοιγμα στον χάρτη" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg></a>
+    <button class="lb-icon" type="button" data-gps-copy aria-label="Αντιγραφή συντεταγμένων" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
+    <button class="lb-icon" type="button" data-gps-refresh aria-label="Ανανέωση θέσης"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button>
+   </div>
+   <div class="lb-item lb-shift" hidden>
+    <span class="w-live" aria-hidden="true"></span>
+    <span class="lb-text"><b data-shift-total></b> <span data-shift-places></span></span>
+   </div>
+  </section>
+  <div class="b-toast" role="status" aria-live="polite" hidden></div>
   <section class="b-section" aria-labelledby="cont-h">
    <div class="b-continue">
     <div><p id="cont-kind">Συνέχισε από εκεί που έμεινες</p><h2 id="cont-h">Ανατομία · Κεφάλαιο 1</h2></div>
@@ -33,12 +47,6 @@
     <p class="w-sub">Φόρτωση προγράμματος</p>
     <div class="w-bar" aria-hidden="true"><i></i></div>
     <a class="w-call" href="#" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.8L8.5 11a16 16 0 0 0 4.4 4.4l1.6-1.5a2 2 0 0 1 1.7-.6l3.1.5a2 2 0 0 1 1.7 2z"/></svg></a>
-   </article>
-   <article class="w w-shift" data-tile="shift">
-    <h2 class="w-head"><span class="w-live" aria-hidden="true"></span>Βάρδια τώρα</h2>
-    <p><span class="w-num">—</span></p>
-    <p class="w-unit">σύνδεση με τη Βάρδια…</p>
-    <ul class="w-list"></ul>
    </article>
    <article class="w w-streak" data-tile="streak">
     <h2 class="w-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/></svg>Συνέπεια μελέτης</h2>
@@ -56,12 +64,6 @@
     <span class="w-ring" role="img" aria-label="Ποσοστό σωστών στο πιο αδύναμο σημείο"><b>—</b></span>
     <p class="w-sub"></p>
    </a>
-   <article class="w w-gps" data-ekab-location>
-    <h2 class="w-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Η θέση μου</h2>
-    <p class="w-coords" data-location-coordinates>Μόνο όταν το ζητήσεις.</p>
-    <div class="w-actions"><button class="b-btn" type="button" data-location-start aria-describedby="location-help">Εντοπισμός</button><button class="b-btn ghost" type="button" data-location-stop hidden>Διακοπή</button><button class="b-btn ghost" type="button" data-location-copy hidden>Αντιγραφή</button><button class="b-btn ghost" type="button" data-location-share hidden>Κοινή χρήση</button><a class="b-btn ghost" data-location-map href="#" target="_blank" rel="noopener noreferrer" hidden>Χάρτης</a></div>
-    <p id="location-help" class="w-status" data-location-status role="status" aria-live="polite">Οι συντεταγμένες δεν αποστέλλονται πουθενά.</p>
-   </article>
   </section>
 
 
@@ -90,9 +92,8 @@ paint();
 addEventListener('storage',paint);addEventListener('pageshow',paint);
 
 </script>
-<script type="module" src="./home-live-widgets.mjs?v=27.1.211"></script>
-<script type="module" src="home-widgets.js?v=1"></script>
-<script src="./shift-presence.js?v=20261127-6" defer></script>
+<script type="module" src="home-widgets.js?v=2"></script>
+<script src="./shift-presence.js?v=20261127-7" defer></script>
 <script src="./radio-config.js?v=20261122-1" defer></script>
 <script src="./radio-widget-loader.js?v=20261122-2" defer></script>
 <script src="updates.js?v=27.1.180" defer></script>

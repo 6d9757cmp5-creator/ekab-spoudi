@@ -105,30 +105,66 @@ function calendar() {
   }
 }
 
-/* Βάρδια: people in the app now, by area (shift-presence.js fills its own list; the tile follows it). */
-function shift() {
-  const tile = $('[data-tile="shift"]'); if (!tile) return;
-  const paint = () => {
-    const places = document.querySelector('.ekab-shift-places');
-    const chip = document.querySelector('.ekab-shift-chip');
-    const rows = places && !chip?.hidden ? [...places.querySelectorAll('li')].map(li => [li.querySelector('span')?.textContent, li.querySelector('b')?.textContent]) : [];
-    const total = rows.reduce((n, [, c]) => n + Number(c || 0), 0);
-    if (!chip || chip.hidden || !total) {
-      $('.w-num', tile).textContent = '—'; $('.w-unit', tile).textContent = 'σύνδεση με τη Βάρδια…';
-      $('.w-list', tile).innerHTML = ''; return;
-    }
-    countTo($('.w-num', tile), total);
-    $('.w-unit', tile).textContent = total === 1 ? 'άτομο σε βάρδια' : 'άτομα σε βάρδια';
-    $('.w-list', tile).innerHTML = rows.slice(0, 3).map(([p, c]) => `<li><span>${esc(p)}</span><b>${esc(c)}</b></li>`).join('');
+/* Live bar: own position on page load (refresh button), people on shift by town, a short notice when someone joins. */
+function gps() {
+  const bar = $('.lb-gps'); if (!bar) return;
+  const place = $('[data-gps-place]', bar), coords = $('[data-gps-coords]', bar), map = $('[data-gps-map]', bar), copy = $('[data-gps-copy]', bar), refresh = $('[data-gps-refresh]', bar);
+  let last = null;
+  const locate = () => {
+    if (!navigator.geolocation) { coords.textContent = 'Ο browser δεν δίνει θέση.'; refresh.hidden = true; return; }
+    refresh.classList.add('spin'); refresh.disabled = true; coords.textContent = 'Αναζήτηση θέσης…';
+    navigator.geolocation.getCurrentPosition(p => {
+      refresh.classList.remove('spin'); refresh.disabled = false;
+      const { latitude: lat, longitude: lon, accuracy } = p.coords;
+      last = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+      coords.textContent = `${last} · ±${Math.round(accuracy)} μ`;
+      map.href = `https://www.google.com/maps?q=${lat.toFixed(5)},${lon.toFixed(5)}`; map.hidden = false; copy.hidden = false;
+      // The shift counter gets the position rounded to about 10 km and names the nearest town.
+      try { sessionStorage.setItem('ekab.shift.geo', JSON.stringify({ lat: Math.round(lat * 10) / 10, lon: Math.round(lon * 10) / 10 })); } catch (_) {}
+      dispatchEvent(new Event('ekab:geo'));
+    }, e => {
+      refresh.classList.remove('spin'); refresh.disabled = false;
+      coords.textContent = e.code === 1 ? 'Η θέση δεν επιτράπηκε. Άλλαξέ το από τις ρυθμίσεις του browser.' : 'Δεν βρέθηκε σήμα. Πάτα ανανέωση.';
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
   };
-  // shift-presence.js mounts after load and refreshes every 45 s; reading its list every few seconds is enough.
-  let last = '';
-  const check = () => { const key = (document.querySelector('.ekab-shift-places')?.textContent || '') + (document.querySelector('.ekab-shift-chip')?.hidden ?? true); if (key !== last) { last = key; paint(); } };
-  paint(); setInterval(check, 3000);
+  refresh.addEventListener('click', locate);
+  copy.addEventListener('click', async () => {
+    if (!last) return;
+    try { await navigator.clipboard.writeText(last); toast('Οι συντεταγμένες αντιγράφηκαν'); } catch (_) { toast('Η αντιγραφή δεν επιτρέπεται εδώ'); }
+  });
+  addEventListener('ekab:shift', e => { const me = e.detail?.me; if (me?.gps) place.textContent = me.place; });
+  locate();
+}
+
+let toastTimer = null;
+function toast(text) {
+  const t = $('.b-toast'); if (!t) return;
+  t.textContent = text; t.hidden = false; t.classList.remove('out'); void t.offsetWidth; t.classList.add('in');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.classList.replace('in', 'out'); setTimeout(() => { t.hidden = true; }, 300); }, 4000);
+}
+
+function shiftLine() {
+  const line = $('.lb-shift'); if (!line) return;
+  let prev = null;
+  const paint = data => {
+    if (!data || !Number.isFinite(data.total) || data.total < 1) { line.hidden = true; return; }
+    line.hidden = false;
+    $('[data-shift-total]', line).textContent = `${data.total} σε βάρδια`;
+    $('[data-shift-places]', line).textContent = (data.places || []).slice(0, 3).map(([p, n]) => `${p} ${n}`).join(' · ');
+    // Someone joined since the last update: name the town that grew.
+    if (prev && data.total > prev.total) {
+      const before = new Map(prev.places || []);
+      const grew = (data.places || []).find(([p, n]) => n > (before.get(p) || 0));
+      toast(grew ? `Μπήκε κάποιος στη βάρδια · ${grew[0]}` : 'Μπήκε κάποιος στη βάρδια');
+    }
+    prev = data;
+  };
+  addEventListener('ekab:shift', e => paint(e.detail));
+  if (window.__ekabShiftData) paint(window.__ekabShiftData);
 }
 
 function all() { duty(); pulse(); streak(); calendar(); }
-all(); shift();
+all(); gps(); shiftLine();
 setInterval(duty, 30e3);
 addEventListener('storage', all);
 addEventListener('pageshow', all);
