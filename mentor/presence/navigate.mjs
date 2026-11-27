@@ -3,8 +3,8 @@
  * of same-site pages. The learner must press the link; MENTOR never navigates by itself.
  */
 export const ROUTES=Object.freeze([
- {label:"Ανατομία",href:"anatomia.html",keywords:["ανατομι"]},
- {label:"Φυσιολογία",href:"fysiologia.html",keywords:["φυσιολογι"]},
+ {label:"Ανατομία",href:"saek-course-01.html",keywords:["ανατομι"]},
+ {label:"Φυσιολογία",href:"saek-course-02.html",keywords:["φυσιολογι"]},
  {label:"Φαρμακολογία",href:"farmaka.html",keywords:["φαρμακ"]},
  {label:"Εργαστήριο ΗΚΓ",href:"mentor-ecg.html",keywords:["ecg","καρδιογραφ","ηκγ"]},
  {label:"Μαθήματα ΣΑΕΚ",href:"saek.html",keywords:["σαεκ","μαθηματα","μαθημα"]},

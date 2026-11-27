@@ -21,7 +21,7 @@ export const SOURCES=freeze([
  {topic:'capture',label:'ΣΑΕΚ 18 · Παράδοση πολυτραυματία (μάρτυρες ≠ επιβεβαιωμένα ευρήματα)',href:'saek-course-18.html#lesson-12'},
  {topic:'dispatch',label:'ΣΑΕΚ 07 · Κλειστός κύκλος επικοινωνίας',href:'saek-course-07.html#lesson-9'},
  {topic:'prealert',label:'ΣΑΕΚ 13 · Επικοινωνία με ΤΕΠ πριν την άφιξη',href:'saek-course-13.html#lesson-11'},
- {topic:'structure',label:'Οδηγός ΕΟΠΠΕΠ · Ε6 Ομάδα και συνεργασία (SBAR, ATMIST)',href:'diasostis.html#page-69'},
+ {topic:'structure',label:'Οδηγός ΕΟΠΠΕΠ · Ε6 Ομάδα και συνεργασία (SBAR, ATMIST)',href:'original.pdf#page=69'},
  {topic:'structure',label:'ΣΑΕΚ 18 · MIST στην παράδοση πολυτραυματία',href:'saek-course-18.html#lesson-12'},
  {topic:'record',label:'ΣΑΕΚ 08 · Καλή πρακτική τεκμηρίωσης',href:'saek-course-08.html#lesson-11'},
  {topic:'record',label:'ΣΑΕΚ 19 · Αναφορές και καταγραφή διακομιδής',href:'saek-course-19.html#lesson-13'},

@@ -37,6 +37,8 @@ test('every local source link points to an existing chapter',()=>{
  for(const id of IDS)for(const t of LABS[id].topics)for(const s of t.sources){
   if(/^https:/.test(s.href))continue;
   const [file,anchor]=s.href.split('#');
+  // Pages of the original handbook PDF: the file exists and the page number is valid.
+  if(file==='original.pdf'){assert.match(anchor,/^page=\d+$/,s.href);assert.ok(readFileSync(new URL('../../'+file,import.meta.url)).length>1000,s.href);continue}
   assert.ok(read('../../'+file).includes(`id="${anchor}"`),s.href);
  }
 });

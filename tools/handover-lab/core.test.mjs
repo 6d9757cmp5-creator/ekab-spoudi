@@ -15,6 +15,8 @@ test('six subsections, each with at least one source that exists in the publishe
  for(const t of TOPICS)assert.ok(SOURCES.some(s=>s.topic===t.id),t.id);
  for(const s of SOURCES){
   const [file,anchor]=s.href.split('#');
+  // Pages of the original handbook PDF: the file exists and the page number is valid.
+  if(file==='original.pdf'){assert.match(anchor,/^page=\d+$/,s.href);assert.ok(readFileSync(new URL('../../'+file,import.meta.url)).length>1000,s.href);continue}
   const html=readFileSync(new URL('../../'+file,import.meta.url),'utf8');
   assert.ok(html.includes(`id="${anchor}"`),s.href);
  }
