@@ -32,3 +32,5 @@ body:has(>.style-preview-nav) header.top .header-row:has(>.brand):not(:has(>.uti
 @media(max-width:600px){.style-preview-nav .preview-section-icon{display:none}}
 
 body.v6-page .style-preview-nav { display: none; }
+/* Main navigation follows the four primary areas; progress remains inside the dashboard. */
+.style-preview-nav a[href="progress-v6.html"]{display:none!important}
