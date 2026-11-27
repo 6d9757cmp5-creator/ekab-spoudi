@@ -97,7 +97,15 @@ export function shell(current){
  // Theme
  const tbtn=top.querySelector('[data-theme-toggle]');
  const paintTheme=()=>{const dark=currentTheme()==='dark';tbtn.innerHTML=svg(dark?'sun':'moon');tbtn.setAttribute('aria-label',dark?'Φωτεινό θέμα':'Σκούρο θέμα');tbtn.title=tbtn.getAttribute('aria-label')};
- tbtn.addEventListener('click',()=>{const next=currentTheme()==='dark'?'light':'dark';store.set('ekab.theme.v1',next);applyTheme(next);paintTheme()});
+ tbtn.addEventListener('click',()=>{
+  const next=currentTheme()==='dark'?'light':'dark';store.set('ekab.theme.v1',next);
+  const swap=()=>{applyTheme(next);paintTheme()};
+  // The new theme spreads out from the button as a circle where the browser supports it.
+  if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches){swap();return}
+  const r=tbtn.getBoundingClientRect(),root=document.documentElement.style;
+  root.setProperty('--vx',r.left+r.width/2+'px');root.setProperty('--vy',r.top+r.height/2+'px');
+  document.startViewTransition(swap);
+ });
  paintTheme();
 
  // Search

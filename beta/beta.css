@@ -189,3 +189,29 @@ button,input{font:inherit;color:inherit}
  .b-results{position:fixed;top:var(--top);left:8px;right:8px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Motion: one entrance on load, theme change as a circular reveal, quiet hover lift. */
+@keyframes b-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes b-pop{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+.b-wrap>*,.b-reader>*{animation:b-rise .45s cubic-bezier(.2,.7,.2,1) both}
+.b-wrap>:nth-child(2){animation-delay:.04s}.b-wrap>:nth-child(3){animation-delay:.08s}
+.b-wrap>:nth-child(4){animation-delay:.12s}.b-wrap>:nth-child(5){animation-delay:.16s}.b-wrap>:nth-child(n+6){animation-delay:.2s}
+.b-results:not([hidden]){animation:b-pop .16s ease-out both;transform-origin:top center}
+.b-quick a,.b-media a,.b-pager a{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease-out,border-color .2s ease-out}
+@media (hover:hover){
+ .b-quick a:hover,.b-media a:hover,.b-pager a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+}
+.b-courses a{transition:background .15s ease-out}
+.b-side a{transition:background .15s ease-out}
+.b-meter i{transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.b-backdrop{transition:opacity .2s ease-out}
+.b-article details>:not(summary){animation:b-rise .25s ease-out both}
+.b-readbar{position:fixed;top:var(--top);left:0;right:0;height:2px;z-index:31;background:var(--accent);transform-origin:0 50%;transform:scaleX(var(--p,0));pointer-events:none}
+@media (min-width:721px){.b-readbar{left:var(--side)}}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){clip-path:circle(0 at var(--vx,100%) var(--vy,0));animation:b-reveal .5s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes b-reveal{to{clip-path:circle(150vmax at var(--vx,100%) var(--vy,0))}}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ ::view-transition-new(root){animation:none!important;clip-path:none!important}
+}

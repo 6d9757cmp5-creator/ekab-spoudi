@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <title>Κεφάλαιο ΣΑΕΚ beta</title>
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="beta.css?v=3">
+<link rel="stylesheet" href="beta.css?v=4">
 </head>
 <body>
 <main class="b-main" id="main">
@@ -28,7 +28,7 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,isRead,setRead,store,esc} from './beta.js?v=2';
+import {COURSES,shell,isRead,setRead,store,esc} from './beta.js?v=3';
 shell('index.html#library');
 
 const p=new URLSearchParams(location.search);
@@ -71,6 +71,11 @@ const pager=()=>{const prev=ch>1?`<a href="course.html?c=${course.id}&ch=${ch-1}
  $('pager').innerHTML=prev+next};
 if(matchMedia('(max-width:1100px)').matches)document.querySelector('.b-outline details').open=false;
 outline();done();pager();
+// Thin reading-progress line under the top bar.
+const bar=document.createElement('div');bar.className='b-readbar';bar.setAttribute('aria-hidden','true');document.body.append(bar);
+const art=document.querySelector('.b-article');
+const prog=()=>{const r=art.getBoundingClientRect(),h=r.height-innerHeight+120;bar.style.setProperty('--p',h>0?Math.min(Math.max(-r.top/h,0),1):1)};
+addEventListener('scroll',prog,{passive:true});addEventListener('resize',prog);prog();
 addEventListener('storage',()=>{outline();done()});
 </script>
 </body>
