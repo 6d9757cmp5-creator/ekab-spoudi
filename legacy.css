@@ -90,3 +90,73 @@ html.b-legacy main .ekab-next [class*="stat"],html.b-legacy main .ekab-next [cla
 html.b-legacy main .ekab-next a:is([class*="btn"],[class*="primary"],[class*="cta"]){background:var(--accent)!important;color:var(--accent-ink)!important;border:0!important}
 html.b-legacy main :is([class*="eyebrow"],[class*="kicker"],[class*="overline"]){text-transform:none!important;letter-spacing:0!important;color:var(--muted)!important;font-weight:600!important}
 html.b-legacy main h2{font-size:clamp(22px,3vw,28px)}
+
+/* SAEK page: courses first, one small progress ring (details live in Progress) */
+html.b-legacy main.saek-hub{display:flex;flex-direction:column;gap:20px}
+html.b-legacy body:has(main.saek-hub) .learning-context{display:none!important}
+html.b-legacy .saek-hub .hub-top{padding:20px 24px!important}
+html.b-legacy .saek-hub .hub-top-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+html.b-legacy .saek-hub .hub-top h2{margin:0;font-size:clamp(26px,4vw,32px)}
+html.b-legacy .saek-hub .hub-top p{margin:4px 0 0;color:var(--muted)}
+html.b-legacy .saek-hub .hub-ring{--p:0;position:relative;flex:none;width:64px;height:64px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),rgba(118,118,128,.18) 0);color:var(--ink)!important;text-decoration:none!important;font-size:14px;font-weight:700}
+html.b-legacy .saek-hub .hub-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--raise)}
+html.b-legacy .saek-hub .hub-ring span{position:relative}
+html.b-legacy .saek-hub .hub-row-progress,html.b-legacy .saek-hub [data-semester-progress]{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html.b-legacy .saek-hub :is(.hub-study,.hub-media,.hub-actions,.hub-resources){margin:0!important}
+html.b-legacy .saek-hub :is(.hub-study,.hub-media) h3,html.b-legacy .saek-hub .hub-actions h3{margin:0 0 12px;font-size:20px}
+html.b-legacy .saek-hub .hub-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html.b-legacy .saek-hub .hub-actions h3{grid-column:1/-1}
+@media (max-width:720px){html.b-legacy .saek-hub .hub-actions{grid-template-columns:1fr}}
+html.b-legacy .saek-hub .hub-semester-tabs{display:flex!important;gap:0!important;padding:3px!important;border-radius:12px!important;background:rgba(118,118,128,.12)!important;border:0!important}
+html.b-legacy .saek-hub .hub-semester-tabs button{flex:1;min-height:52px;border:0!important;border-radius:9px!important;background:none!important;box-shadow:none!important;color:var(--ink)!important}
+html.b-legacy .saek-hub .hub-semester-tabs button[aria-pressed=true]{background:var(--raise)!important;box-shadow:0 1px 4px rgba(0,0,0,.12)!important}
+html.b-legacy .saek-hub .hub-semester-tabs button strong{color:var(--ink)!important;font-size:17px}
+html.b-legacy .saek-hub .hub-semester-tabs button small{color:var(--muted)!important;font-size:12px}
+html.b-legacy .saek-hub .course-tile{display:flex!important;align-items:center;gap:14px;min-height:60px;padding:10px 14px!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;background:var(--raise)!important;box-shadow:none!important;color:var(--ink)!important;text-decoration:none!important}
+html.b-legacy .saek-hub .course-list{display:block!important;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+html.b-legacy .saek-hub .course-list .course-tile:first-child{border-top:0!important}
+html.b-legacy .saek-hub .course-tile:hover{background:var(--surface)!important}
+html.b-legacy .saek-hub .course-icon{flex:none;width:40px;height:40px;display:grid;place-items:center;border-radius:var(--radius-in)!important;background:var(--surface)!important;color:var(--ink)!important;font-weight:700}
+html.b-legacy .saek-hub .course-tile strong{color:var(--ink)!important;font-weight:600}
+html.b-legacy .saek-hub .course-tile small{color:var(--muted)!important}
+html.b-legacy .saek-hub .tile-arrow{margin-left:auto;color:var(--muted)!important}
+html.b-legacy .saek-hub .hub-list-head{display:none}
+html.b-legacy .saek-hub .hub-course-count{min-height:36px;border:0!important;border-radius:999px!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;padding:0 14px!important}
+html.b-legacy .saek-hub .hub-course-count[aria-pressed=true]{background:var(--accent)!important;color:var(--accent-ink)!important}
+html.b-legacy .saek-hub .hub-media-thumb{max-height:120px;overflow:hidden}
+html.b-legacy main.saek-hub .hub-semester-tabs button[aria-pressed="true"],html.b-legacy main.saek-hub .hub-semester-tabs button[aria-pressed="true"]:hover{background:var(--raise)!important;background-image:none!important;color:var(--ink)!important}
+html.b-legacy main.saek-hub .hub-semester-tabs button small{color:var(--ink)!important;opacity:.75}
+html.b-legacy main.saek-hub .hub-semester-tabs button strong{color:var(--ink)!important}
+html.b-legacy body main.saek-hub .hub-semester-tabs button[data-semester-tab][aria-pressed="true"]{background:var(--raise)!important;background-color:var(--raise)!important;color:var(--ink)!important;border-color:transparent!important}
+html.b-legacy body main.saek-hub .hub-semester-tabs button[data-semester-tab]:not([aria-pressed="true"]){background:transparent!important}
+html.b-legacy body main.saek-hub .hub-course-count[aria-pressed="true"]{background:var(--accent)!important;color:var(--accent-ink)!important}
+/* v6-subsections.css lists #imageRetryButton inside :is(), which gives its button rule ID weight; :is(#_) matches the same weight here */
+html.b-legacy body main.saek-hub .hub-semester-tabs button:is(#_,[data-semester-tab])[aria-pressed="true"]{background:var(--raise)!important;color:var(--ink)!important;border-color:transparent!important}
+html.b-legacy body main.saek-hub .hub-course-count:is(#_,#saekAllCoursesToggle)[aria-pressed="true"]{background:var(--accent)!important;color:var(--accent-ink)!important}
+/* SAEK material: compact rows instead of tall image cards */
+html.b-legacy .saek-hub .hub-media-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html.b-legacy .saek-hub .hub-media-card{display:flex!important;flex-direction:row!important;align-items:center;gap:14px;min-height:0!important;padding:10px!important;border:1px solid var(--line)!important;border-radius:var(--radius)!important;background:var(--raise)!important;box-shadow:var(--shadow)!important;text-decoration:none!important;color:var(--ink)!important}
+html.b-legacy .saek-hub .hub-media-thumb{flex:none;width:72px!important;height:72px!important;max-height:none!important;border-radius:var(--radius-in);overflow:hidden;background:var(--surface)}
+html.b-legacy .saek-hub .hub-media-thumb img{width:100%;height:100%;object-fit:cover}
+html.b-legacy .saek-hub :is(.hub-media-badge,.hub-media-go){display:none!important}
+html.b-legacy .saek-hub .hub-media-play{transform:scale(.6)}
+html.b-legacy .saek-hub .hub-media-body strong{display:block;color:var(--ink)!important;font-size:16px}
+html.b-legacy .saek-hub .hub-media-body small{color:var(--muted)!important}
+@media (max-width:720px){html.b-legacy .saek-hub .hub-media-grid{grid-template-columns:1fr}}
+html.b-legacy .saek-gallery-eyebrow{opacity:1!important;color:var(--muted)!important}
+html.b-legacy body main.saek-hub .hub-semester-tabs button:is(#_,[data-eop-group])[aria-pressed="true"]{background:var(--raise)!important;color:var(--ink)!important;border-color:transparent!important}
+html.b-legacy body main.saek-hub .hub-semester-tabs button:is(#_,[data-eop-group]):not([aria-pressed="true"]){background:transparent!important}
+html.b-legacy main .eoppep-scope{background:var(--surface)!important;background-image:none!important;border:1px solid var(--line)!important;border-radius:var(--radius-in)!important;color:var(--ink)!important}
+html.b-legacy main .eoppep-scope :is(p,li){color:var(--ink)!important}
+/* Course pages: one way to reach chapters (the "N κεφάλαια" button in the title); progress lives in Πρόοδος */
+html.b-legacy :is(.learning-context,.ex-section-nav){display:none!important}
+html.b-legacy main.reader-main .lesson-progress,html.b-legacy main.reader-main .lesson-progress+.bar,html.b-legacy main.reader-main .lesson-progress+.bar+p.small.muted{display:none!important}
+/* Older pages keep some tinted dark panels: a slightly lighter secondary text keeps 4.5:1 on them */
+html.b-legacy[data-theme="dark"],html.b-legacy[data-theme="dark"] body{--muted:#aeaeb2!important}
+@media (prefers-color-scheme:dark){html.b-legacy:not([data-theme="light"]),html.b-legacy:not([data-theme="light"]) body{--muted:#aeaeb2!important}}
+
+/* Old section tabs repeat the menu; the practical exam's completeness audit is internal */
+html.b-legacy :is(.learning-tabs,.practical-audit-summary){display:none!important}
+
+/* Bibliography: the counts of the internal source review are not for students */
+html.b-legacy :is(.sources-summary,.sources-summary+.sources-filters~p.muted.small){display:none!important}

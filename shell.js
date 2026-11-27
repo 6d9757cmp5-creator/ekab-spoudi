@@ -53,9 +53,9 @@ export const svg=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icon[n]}</svg
 
 const NAV=[['index.html','home','Αρχική'],['study.html','book','Μελέτη'],['practice.html','target','Εξάσκηση'],['tools.html','tools','Εργαλεία'],['progress-v6.html','chart','Εσύ']];
 // Pages that sit inside a section light up that section in the menu and the tab bar.
-const SECTION={'courses.html':'study.html','chapter.html':'study.html','saek.html':'study.html','saek-videos.html':'study.html','saek-images.html':'study.html',
+const SECTION={'theory.html':'study.html','written_exam.html':'study.html','exam_focus.html':'study.html','study_map.html':'study.html','eoppep.html':'study.html','seminar-prep.html':'study.html','profession-law.html':'study.html','mentor-library.html':'study.html','pdf-library.html':'study.html','eclass.html':'study.html','manual.html':'study.html','ui-tools/anatomy-3d/index.html':'study.html','courses.html':'study.html','chapter.html':'study.html','saek.html':'study.html','saek-videos.html':'study.html','saek-images.html':'study.html',
  'saek-exams.html':'practice.html','theory.html':'practice.html','practical_exam.html':'practice.html','mentor-oral.html':'practice.html',
- 'farmaka.html':'tools.html','protocols.html':'tools.html','contacts.html':'tools.html','pdf-library.html':'tools.html','mentor-library.html':'tools.html',
+ 'farmaka.html':'tools.html','protocols.html':'tools.html','contacts.html':'tools.html','pdf-library.html':'tools.html',
  'study-plan.html':'progress-v6.html'};
 
 const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ς/g,'σ');
@@ -73,35 +73,40 @@ export function legacy(current){
 
 }
 
+// Site root (where this file lives): links work from pages in sub-folders too.
+const ROOT=new URL('./',import.meta.url);
+const at=h=>/^(https?:|#|mailto:|tel:|data:)/.test(h)?h:new URL(String(h).replace(/^\.\//,''),ROOT).href;
+const relPath=()=>location.pathname.startsWith(ROOT.pathname)?location.pathname.slice(ROOT.pathname.length)||'index.html':location.pathname.split('/').pop()||'index.html';
+
 export function shell(current,opts={}){
  applyTheme(store.get('ekab.theme.v1'));
- const here=location.pathname.split('/').pop()||'index.html';
+ const here=relPath();
  const top=document.createElement('header');top.className='b-top';
  top.innerHTML=`<button class="b-icon b-menu" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false" aria-controls="b-side">${svg('menu')}</button>
- <a class="b-brand" href="index.html" aria-label="ΕΚΑΒ Σπουδή, αρχική"><img src="./icon.svg" alt=""><span>ΕΚΑΒ Σπουδή</span></a>
+ <a class="b-brand" href="${at('index.html')}" aria-label="ΕΚΑΒ Σπουδή, αρχική"><img src="${at('icon.svg')}" alt=""><span>ΕΚΑΒ Σπουδή</span></a>
  <div class="b-search" role="search">${svg('search')}<label class="sr-only" for="b-q">Αναζήτηση σε όλη την εφαρμογή</label>
   <input id="b-q" type="search" role="combobox" aria-autocomplete="list" placeholder="Αναζήτηση σε όλη την εφαρμογή" autocomplete="off" aria-controls="b-res" aria-expanded="false">
   <kbd class="b-kbd" aria-hidden="true">Ctrl K</kbd><button class="b-search-cancel" type="button">Άκυρο</button><ul class="b-results" id="b-res" role="listbox" hidden></ul></div>
  <div class="b-tools"><button class="b-icon b-search-btn" type="button" aria-label="Αναζήτηση">${svg('search')}</button><button class="b-icon" type="button" data-theme-toggle></button><button class="b-icon b-account" type="button" data-account-open aria-label="Λογαριασμός και συγχρονισμός" title="Λογαριασμός">${svg('user')}</button></div>`;
  const side=document.createElement('nav');side.className='b-side';side.id='b-side';side.setAttribute('aria-label','Κύριο μενού');
- const sec=current||SECTION[here]||here;
+ const sec=current||(here==='theory.html'&&/mode=exam/.test(location.search)?'practice.html':SECTION[here])||(/^saek-course-\d\d\.html$/.test(here)?'study.html':here);
  // The five section pages need no back button (the menu and tab bar are there).
  const hub=NAV.some(([h])=>h===here);
  document.documentElement.classList.toggle('b-hubpage',hub);
  // Inner pages: "‹ Parent" at the top left, as in iOS navigation bars.
  const PARENT={'saek-videos.html':['saek.html','ΣΑΕΚ'],'saek-images.html':['saek.html','ΣΑΕΚ']};
  const parent=PARENT[here]||(/^saek-course-\d\d\.html$/.test(here)?['saek.html','ΣΑΕΚ']:null)||(()=>{const s=SECTION[here]||current;const n=NAV.find(([h])=>h===s);return n?[n[0],n[2]]:null})();
- const item=([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
+ const item=([href,ic,label])=>`<a href="${at(href)}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
  side.innerHTML=NAV.map(item).join('')+
-  `<div class="b-side-sub"><a href="study-plan.html"${here==='study-plan.html'?' aria-current="page"':''}>${svg('cal')}Ημερολόγιο εξετάσεων</a><button type="button" class="b-side-btn" data-account-open>${svg('user')}Λογαριασμός</button></div>`+
+  `<div class="b-side-sub"><a href="${at('study-plan.html')}"${here==='study-plan.html'?' aria-current="page"':''}>${svg('cal')}Ημερολόγιο εξετάσεων</a><button type="button" class="b-side-btn" data-account-open>${svg('user')}Λογαριασμός</button></div>`+
   `<section class="ekab-quick-access" data-ekab-quick-access></section>`+
-  `<a class="old" href="index-v6.html#/home">Παλιά όψη αρχικής</a>`;
+  `<a class="old" href="${at('index-v6.html#/home')}">Παλιά όψη αρχικής</a>`;
  // Phone: the five sections as a tab bar at the bottom, within reach of the thumb.
  const tabs=document.createElement('nav');tabs.className='b-tabbar';tabs.setAttribute('aria-label','Ενότητες');
- tabs.innerHTML=NAV.map(([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}<span>${label}</span></a>`).join('');
+ tabs.innerHTML=NAV.map(([href,ic,label])=>`<a href="${at(href)}"${href===sec?' aria-current="page"':''}>${svg(ic)}<span>${label}</span></a>`).join('');
  const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='b-backdrop';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Κλείσιμο μενού');
  if(!hub&&parent){
-  const back=document.createElement('a');back.className='b-back';back.href=parent[0];
+  const back=document.createElement('a');back.className='b-back';back.href=at(parent[0]);
   back.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>${parent[1]}</span>`;
   back.setAttribute('aria-label','Πίσω: '+parent[1]);
   // Return to the exact place when the previous page was in the app; otherwise open the parent page.
@@ -140,7 +145,7 @@ export function shell(current,opts={}){
  const q=top.querySelector('#b-q'),res=top.querySelector('#b-res');let sel=-1,timer;
  const close=()=>{res.hidden=true;q.setAttribute('aria-expanded','false');sel=-1};
  const ready=()=>new Promise(ok=>{const t0=Date.now();const w=()=>window.EkabGlobalSearch||Date.now()-t0>8000?ok(window.EkabGlobalSearch):setTimeout(w,100);w()});
- const target=href=>'./'+String(href||'').replace(/^\.\//,'');
+ const target=href=>at(href||'index.html');
  const kinds={saek:'ΣΑΕΚ',eoppep:'ΕΟΠΠΕΠ',seminar:'Σεμινάριο',practical:'Πρακτικό',practice:'Εξάσκηση',page:'Σελίδα'};
  const run=async()=>{
   const v=q.value.trim();if(v.length<2){close();return}
@@ -148,7 +153,7 @@ export function shell(current,opts={}){
   const api=await ready();let hits=[];
   try{hits=api?await api.query(v,'Όλα'):[]}catch(_){hits=[]}
   if(q.value.trim()!==v)return;
-  const all=`search.html?q=${encodeURIComponent(v)}`;
+  const all=at(`search.html?q=${encodeURIComponent(v)}`);
   res.innerHTML=(hits.length?hits.slice(0,10).map((it,i)=>`<li><a role="option" id="b-opt-${i}" href="${esc(target(it.href))}"><b>${esc(it.title)}</b><span>${esc(kinds[it.kind]||'')}${it.subtitle?' · '+esc(it.subtitle):''}</span></a></li>`).join(''):`<li class="empty">${api?'Δεν βρέθηκε κάτι. Δοκίμασε άλλη λέξη.':'Η αναζήτηση δεν φορτώθηκε. Έλεγξε τη σύνδεση.'}</li>`)+
    `<li class="b-res-foot"><a role="option" id="b-opt-all" href="${all}">Όλα τα αποτελέσματα για «${esc(v)}»</a><button type="button" data-lexicon>${svg('lexicon')}Ιατρικό λεξικό</button></li>`;
   sel=-1;
