@@ -160,3 +160,36 @@ html.b-legacy :is(.learning-tabs,.practical-audit-summary){display:none!importan
 
 /* Bibliography: the counts of the internal source review are not for students */
 html.b-legacy :is(.sources-summary,.sources-summary+.sources-filters~p.muted.small){display:none!important}
+
+/* Lesson pages: title row, then video and chapter text in the first screen
+   (side by side on wide screens, video then text on phones). Lessons change with the arrows or by scrolling. */
+html.b-legacy body>main.reader-main:has(.saek-series){max-width:1320px!important}
+html.b-legacy main.reader-main>section.panel:not(.saek-series):not(.course-sources){background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 12px!important}
+html.b-legacy main.reader-main>section.panel:not(.saek-series):not(.course-sources) :is(.eyebrow,.subtitle,.saek-source-actions .small.muted,#saek-course-videos-shortcut){display:none!important}
+html.b-legacy main.reader-main>section.panel:not(.saek-series):not(.course-sources){display:flex!important;flex-wrap:wrap;align-items:center;gap:8px 12px}
+html.b-legacy main.reader-main .saek-lesson-heading{display:flex!important;align-items:center;gap:12px;flex:1 1 auto;margin:0!important}
+html.b-legacy main.reader-main .saek-lesson-heading .reader-title{margin:0!important;font-size:clamp(22px,3vw,28px)!important}
+html.b-legacy main.reader-main .saek-source-actions{display:flex!important;gap:8px;margin:0!important;padding:0!important;border:0!important;background:none!important}
+html.b-legacy main.reader-main :is(.saek-compact-toc>summary,.saek-source-action){min-height:40px!important;display:inline-flex!important;align-items:center;padding:0 14px!important;border:0!important;border-radius:999px!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;font-size:14px!important;font-weight:500!important;text-decoration:none!important;box-shadow:none!important}
+html.b-legacy main.reader-main .saek-series>:is(.eyebrow,h2,.saek-series-intro,p.small.muted){display:none!important}
+html.b-legacy main.reader-main .saek-series{padding:14px!important;margin:0!important}
+html.b-legacy main.reader-main .saek-series-kicker{margin:0!important;font-size:13px!important}
+html.b-legacy main.reader-main .saek-series-slide h3{margin:2px 0 8px!important;font-size:17px!important}
+html.b-legacy main.reader-main .saek-series-frame{width:100%!important;max-height:46vh;background:#000;border-radius:var(--radius-in)}
+@media (min-width:1100px){
+ html.b-legacy main.reader-main:has(.saek-series){display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 20px;align-items:start}
+ html.b-legacy main.reader-main:has(.saek-series)>*{grid-column:1/-1}
+ html.b-legacy main.reader-main:has(.saek-series)>.saek-series{grid-column:1;position:sticky;top:calc(var(--top) + 12px)}
+ html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters{grid-column:2;margin:0!important}
+ html.b-legacy main.reader-main .saek-series-frame{max-height:calc(100vh - var(--top) - 230px)}
+}
+@media (max-width:720px){html.b-legacy main.reader-main .saek-series-frame{max-height:34vh}html.b-legacy main.reader-main .saek-series{padding:10px!important}}
+html.b-legacy main.reader-main .saek-series-frame{aspect-ratio:16/9;height:auto!important;object-fit:contain}
+@media (max-width:720px){html.b-legacy main.reader-main .saek-series-frame{max-height:none}}
+@media (min-width:1100px){
+ /* In the text column a chapter reads in one column: images follow the text */
+ html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters :is(.saek-study-split,.reader-layout){display:block!important}
+ html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters .saek-study-images{margin-top:16px;max-width:none!important;width:auto!important}
+ html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters .reader-main{max-width:none!important;width:auto!important}
+}
+html.b-legacy main.reader-main .saek-series-slide .saek-series-frame{height:auto!important;min-height:0!important;aspect-ratio:16/9!important}
