@@ -6,13 +6,13 @@
 <meta name="robots" content="noindex">
 <title>Κεφάλαιο ΣΑΕΚ beta</title>
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="beta.css?v=5">
+<link rel="stylesheet" href="beta.css?v=6">
 </head>
 <body>
 <main class="b-main" id="main">
  <div class="b-reader">
   <article class="b-article" aria-live="polite">
-   <nav class="b-crumbs" aria-label="Διαδρομή"><a href="index.html">Αρχική</a><span aria-hidden="true">/</span><a href="index.html#library">Μαθήματα ΣΑΕΚ</a><span aria-hidden="true">/</span><span id="crumb-course"></span></nav>
+   <nav class="b-crumbs" aria-label="Διαδρομή"><a href="index.html">Αρχική</a><span aria-hidden="true">/</span><a href="library.html">Μαθήματα ΣΑΕΚ</a><span aria-hidden="true">/</span><span id="crumb-course"></span></nav>
    <span class="b-chapnum" id="chapnum"></span>
    <h1 id="title">Φόρτωση…</h1>
    <div id="body"><p class="b-loading">Φόρτωση κεφαλαίου…</p></div>
@@ -28,8 +28,8 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,isRead,setRead,store,esc} from './beta.js?v=3';
-shell('index.html#library');
+import {COURSES,shell,isRead,setRead,store,esc} from './beta.js?v=4';
+shell('library.html');
 
 const p=new URLSearchParams(location.search);
 const course=COURSES.find(c=>c.id===p.get('c'))||COURSES[0];

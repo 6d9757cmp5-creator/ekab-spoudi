@@ -1,0 +1,117 @@
+/* Radio widget in the beta look: same markup and behaviour as radio.css, neutral surfaces and system type. */
+.radio-launch{right:16px;bottom:16px;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);color:var(--ink);font:600 15px/1 inherit;box-shadow:0 4px 16px rgba(0,0,0,.08);transition:transform .15s ease-out,box-shadow .15s ease-out}
+.radio-launch::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.radio-launch:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.radio-launch.is-connected{border-color:var(--line);background:var(--glass)}
+.radio-launch.is-connected::before{background:#30d158}
+.radio-launch.is-holding{background:#ff3b30;border-color:#ff3b30;color:#fff;box-shadow:none}
+.radio-launch.is-holding::before{background:#fff}
+.radio-launch-badge{font-size:13px;font-weight:500;letter-spacing:0;padding:0;background:none;color:var(--muted)}
+.radio-launch.is-holding .radio-launch-badge{color:#fff}
+.radio-launch svg{display:none}
+
+.radio-panel{right:16px;bottom:72px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);color:var(--ink);box-shadow:0 24px 60px rgba(0,0,0,.18);font-family:inherit}
+.radio-head{padding:16px 16px 12px;background:none;border-bottom:1px solid var(--line);align-items:center}
+.radio-kicker{display:none}
+.radio-head h2{margin:0;font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.radio-close{width:44px;height:44px;flex:0 0 44px;border:0;border-radius:var(--radius-in);background:none;color:var(--muted);font-size:24px}
+.radio-close:hover{background:rgba(118,118,128,.12);color:var(--ink)}
+
+.radio-hardware{margin:12px 16px 0;padding:14px;border:0;border-radius:14px;background:#1c1c1e;box-shadow:none;gap:10px}
+:root[data-theme="dark"] .radio-hardware{background:#2c2c2e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .radio-hardware{background:#2c2c2e}}
+.radio-hardware::before,.radio-hardware::after{display:none}
+.radio-device-brand{font-size:13px;letter-spacing:.5px;color:#f5f5f7}
+.radio-device-brand span{color:#98989d}
+.radio-device-marks{display:none}
+.radio-power-led{box-shadow:none}
+.radio-hardware[data-radio-state="online"] .radio-power-led,.radio-hardware[data-radio-state="rx"] .radio-power-led{background:#30d158;box-shadow:none}
+.radio-hardware[data-radio-state="tx"] .radio-power-led{background:#ff453a;box-shadow:none}
+.radio-hardware[data-radio-state="demo"] .radio-power-led{background:#ffd60a;box-shadow:none}
+.radio-display{border:0;border-radius:var(--radius-in);background:#000;box-shadow:none;color:#f5f5f7}
+.radio-screen-top,.radio-screen-bottom{font-size:13px;letter-spacing:.3px;color:#98989d}
+.radio-signal-bars i{background:#30d158}
+.radio-frequency-main{font-family:inherit;font-weight:600;letter-spacing:-2px;color:#f5f5f7;text-shadow:none}
+.radio-frequency-caption{font-size:13px;letter-spacing:.3px;color:#98989d}
+.radio-frequency-icon{color:#98989d}
+.radio-screen-bottom{border-top-color:rgba(255,255,255,.1)}
+#radioMode{color:#f5f5f7;letter-spacing:.5px}
+.radio-hardware[data-radio-state="tx"] #radioMode{color:#ff453a}
+.radio-hardware[data-radio-state="rx"] #radioMode{color:#30d158}
+.radio-info>div{border:0;background:rgba(255,255,255,.06);border-radius:var(--radius-in);padding:8px 10px}
+.radio-info strong{font-size:15px;font-weight:600;color:#f5f5f7}
+.radio-info small{font-size:12px;letter-spacing:0;color:#98989d}
+.radio-level{font-size:12px;color:#98989d}
+.radio-meter i{background:rgba(255,255,255,.14)}
+.radio-hardware[data-radio-state="tx"] .radio-meter i{background:#ff453a}
+.radio-hardware[data-radio-state="rx"] .radio-meter i{background:#30d158}
+.radio-ptt-row{border-top-color:rgba(255,255,255,.1)}
+.radio-ptt-label strong{font-size:14px;letter-spacing:0;font-weight:600;color:#f5f5f7}
+.radio-ptt-label span,.radio-ptt-label small{font-size:13px;color:#98989d}
+.radio-ptt{width:72px;height:72px;flex:0 0 72px;border:0;border-radius:50%;background:var(--accent);box-shadow:none;transition:transform .12s ease-out,background .12s ease-out}
+.radio-ptt span{font-size:15px;letter-spacing:.5px;font-weight:600}
+.radio-ptt:not(:disabled):hover{filter:none;transform:none;background:var(--accent-hover)}
+.radio-ptt.is-pressed{transform:scale(.94)!important;background:#ff3b30;box-shadow:none}
+.radio-ptt:disabled{filter:none;opacity:1;background:#3a3a3c;color:#98989d}
+
+.radio-status{font-size:14px;color:var(--muted);padding:12px 16px 4px}
+.radio-status[data-state="connected"]{color:#248a3d}
+.radio-status[data-state="error"]{color:#d70015}
+.radio-status[data-state="demo"]{color:#a05a00}
+:root[data-theme="dark"] .radio-status[data-state="connected"]{color:#30d158}
+:root[data-theme="dark"] .radio-status[data-state="error"]{color:#ff6961}
+:root[data-theme="dark"] .radio-status[data-state="demo"]{color:#ffd60a}
+.radio-actions{padding:8px 16px;gap:8px}
+.radio-actions button{min-height:44px;border-radius:var(--radius-in);font-size:15px;font-weight:500;padding:10px 14px}
+.radio-actions button:hover:not(:disabled){transform:none}
+.radio-actions button:active:not(:disabled){transform:scale(.98)}
+.radio-primary,body:is(.dark,.dark-mode) .radio-primary{border:0;background:var(--accent);color:#fff}
+.radio-primary:hover:not(:disabled){background:var(--accent-hover);box-shadow:none}
+.radio-secondary,body:is(.dark,.dark-mode) .radio-secondary{border:0;background:rgba(118,118,128,.12);color:var(--ink)}
+.radio-bottom{padding:4px 16px 16px}
+.radio-utilities{gap:4px 16px}
+.radio-utilities button,.radio-utilities a{min-height:44px;font-size:14px;font-weight:500;color:var(--link)}
+.radio-utilities #radioSounds[aria-pressed="true"]{color:var(--link)}
+.radio-bottom p{font-size:13px;color:var(--muted)}
+.radio-panel :is(button,a):focus-visible,.radio-launch:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus)}
+@media (max-width:610px){.radio-launch{right:12px;bottom:12px}.radio-panel{left:8px;right:8px;bottom:68px}}
+
+/* Channel panel (the one the launcher opens): same neutral look. "html body" outranks the later radio-channels.css passes. */
+html body .channel-hub{right:16px;bottom:72px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);color:var(--ink);box-shadow:0 24px 60px rgba(0,0,0,.18);font-family:inherit}
+html body .channel-head{padding:12px 16px;background:none;border-bottom:1px solid var(--line)}
+html body .channel-head h2{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+html body .channel-head-tools>button.channel-icon-control,html body .channel-head-tools>button.channel-minimize-btn.channel-icon-control{flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;border:0;border-radius:var(--radius-in);background:none;color:var(--muted)}
+html body .channel-head-tools .channel-icon-control:hover{background:rgba(118,118,128,.12);color:var(--ink);border:0}
+html body .channel-head-tools .channel-exit-btn.channel-icon-control:hover{background:rgba(255,59,48,.12);color:#d70015}
+html body .channel-quick{padding:8px 16px;gap:8px;background:none;border-bottom:1px solid var(--line)}
+html body .channel-quick button{min-height:44px;border:0;border-radius:var(--radius-in);background:rgba(118,118,128,.12);color:var(--ink);font:600 15px/1 inherit;box-shadow:none;transition:background .15s ease-out}
+html body .channel-quick button:hover{transform:none;background:rgba(118,118,128,.2);box-shadow:none;border:0}
+html body .channel-quick button.is-active{background:var(--accent);color:#fff;box-shadow:none}
+html body .channel-quick button span{font-size:13px}
+html body .channel-detail{padding:12px 16px 16px}
+html body .channel-voxal-status{font-size:14px;color:var(--muted)}
+html body .channel-voice-actions #channelHardware.channel-talk{height:88px;min-height:88px;border:0;border-radius:var(--radius);background:var(--accent);color:#fff;box-shadow:none;transition:transform .12s ease-out,background .12s ease-out}
+html body .channel-voice-actions #channelHardware.channel-talk:hover:not(:disabled){background:var(--accent-hover)}
+html body .channel-talk>span{font-size:20px;font-weight:600;letter-spacing:.3px}
+html body .channel-talk:disabled{filter:none;opacity:1;background:rgba(118,118,128,.16);color:var(--muted)}
+html body .channel-talk.is-speaking[data-voice-direction="tx"]{background:#ff3b30;transform:scale(.98);box-shadow:none}
+html body .channel-voice-meta{font-size:14px;color:var(--muted)}
+html body .channel-voice-meta #channelSelfName{color:var(--ink)}
+html body .channel-voice-meta #channelCurrentCount{font-size:14px}
+html body .channel-voice-actions .channel-retry{min-height:44px;border:0;border-radius:var(--radius-in);background:rgba(118,118,128,.12);color:var(--ink);font-size:15px;font-weight:500}
+html body .channel-voice-setup>summary{min-height:44px;display:flex;align-items:center;font-size:14px;color:var(--link)}
+html body .channel-voice-setup[open]{border-color:var(--line)}
+html body .channel-voxal-frame{border-color:var(--line);border-radius:var(--radius-in);background:var(--surface)}
+html body .channel-chat{border:1px solid var(--line);border-radius:var(--radius-in);background:var(--surface)}
+html body .channel-chat>summary{min-height:44px;font-size:15px;font-weight:600;color:var(--ink)}
+html body .channel-chat-messages{border-color:var(--line);background:var(--raise)}
+html body .channel-chat-messages p{color:var(--ink);font-size:14px}
+html body .channel-chat-messages strong{color:var(--ink)}
+html body .channel-hub input{min-height:44px;border:0;border-radius:var(--radius-in);background:rgba(118,118,128,.12);color:var(--ink);font-size:15px}
+html body .channel-hub input:focus{outline:none;box-shadow:0 0 0 3px var(--focus)}
+html body .channel-chat-form button{min-height:44px;border:0;border-radius:var(--radius-in);background:var(--accent);color:#fff;font-size:15px;font-weight:500}
+html body .channel-chat-notice,html body .channel-chat-status{font-size:13px;color:var(--muted)}
+html body .channel-voice-speaker{color:var(--ink);font-size:14px}
+html body .voice-eq{color:#30d158}
+html body .channel-hub :is(button,input,summary):focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus)}
+@media (max-width:610px){html body .channel-hub{left:8px;right:8px;bottom:calc(68px + env(safe-area-inset-bottom))}html body .radio-launch{bottom:calc(12px + env(safe-area-inset-bottom))}}

@@ -249,3 +249,29 @@ button,input{font:inherit;color:inherit}
 .ekab-shift-places small{display:block;margin-top:8px;color:var(--muted);font-size:14px}
 @media (max-width:720px){.ekab-shift-label{display:none}.ekab-shift-station{min-width:0;max-width:10ch}.ekab-shift-chip{padding:0 10px}.ekab-shift-places{right:auto;left:0}}
 @media (prefers-reduced-motion:reduce){.ekab-shift-dot,.ekab-shift-in{animation:none}}
+
+/* Home widgets: one-line chips; the full card opens underneath on tap. */
+.b-widgets{display:flex;flex-wrap:wrap;gap:8px;margin:-16px 0 24px;position:relative;z-index:20}
+.b-w{position:relative}
+.b-w>summary{display:flex;align-items:center;gap:8px;min-height:44px;max-width:min(360px,100%);padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--raise);box-shadow:var(--shadow);cursor:pointer;list-style:none;font-size:14px;white-space:nowrap;transition:border-color .15s ease-out}
+.b-w>summary::-webkit-details-marker{display:none}
+.b-w>summary:hover{border-color:var(--accent-soft)}
+.b-w[open]>summary{border-color:var(--accent)}
+.b-w-ic svg{width:18px;height:18px;display:block;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.b-w-label{font-weight:600}
+.b-w-val{color:var(--muted);overflow:hidden;text-overflow:ellipsis;min-width:0}
+.b-w-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:25;width:min(360px,calc(100vw - 32px));animation:b-pop .16s ease-out both}
+.b-w-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);box-shadow:0 16px 40px rgba(0,0,0,.14)}
+.b-w-card h3{margin:0;font-size:17px;font-weight:600;line-height:1.35}
+.b-w-card p{margin:0;font-size:14px;color:var(--muted)}
+.b-w-card .b-btn{align-self:flex-start;min-height:44px;padding:8px 14px;font-size:14px}
+.b-w-card [hidden]{display:none!important}
+.b-w-more{font-size:14px;text-decoration:none}
+@media (max-width:720px){
+ .b-widgets{position:relative;margin:-8px 0 24px}
+ .b-w:not([data-w="duty"]) .b-w-val{display:none}
+ .b-w>summary{padding:0 12px}
+ .b-w{position:static}
+ .b-w-panel{left:0;right:0;width:auto}
+ .b-w>summary{max-width:100%}
+}

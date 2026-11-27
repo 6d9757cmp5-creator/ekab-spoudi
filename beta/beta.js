@@ -45,7 +45,7 @@ const icon={
 export const svg=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icon[n]}</svg>`;
 
 const NAV=[
- ['Μελέτη',[['index.html','home','Αρχική'],['index.html#library','book','Μαθήματα ΣΑΕΚ'],['../saek-videos.html','play','Βίντεο ΣΑΕΚ με τη σειρά'],['../saek-images.html','image','Φωτογραφίες ΣΑΕΚ'],['../theory.html','cert','Θεωρία ΕΟΠΠΕΠ'],['../practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ'],['../seminar-prep.html','cert','Σεμινάρια']]],
+ ['Μελέτη',[['index.html','home','Αρχική'],['library.html','book','Μαθήματα ΣΑΕΚ'],['../saek-videos.html','play','Βίντεο ΣΑΕΚ με τη σειρά'],['../saek-images.html','image','Φωτογραφίες ΣΑΕΚ'],['../theory.html','cert','Θεωρία ΕΟΠΠΕΠ'],['../practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ'],['../seminar-prep.html','cert','Σεμινάρια']]],
  ['Εξάσκηση',[['../saek-exams.html','exam','Εξετάσεις ΣΑΕΚ'],['../theory.html?mode=exam&section=practice','target','Τεστ ΕΟΠΠΕΠ'],['../paramedic.html#skills','hands','Εργαστήρια δεξιοτήτων'],['../mentor-oral.html','mic','Προφορική εξάσκηση']]],
  ['Εργαλεία',[['../farmaka.html','pill','Φαρμακολογία'],['../protocols.html','siren','Θέματα επειγόντων'],['../mentor-ecg.html','ecg','ΗΚΓ'],['../pdf-library.html','book','PDF'],['../mentor-library.html','book','Βιβλιογραφία'],['../contacts.html','phone','Τηλέφωνα ΕΚΑΒ']]],
  ['Εσύ',[['../progress-v6.html','chart','Πρόοδος']]]

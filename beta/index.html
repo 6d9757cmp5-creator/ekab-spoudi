@@ -8,13 +8,34 @@
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../radio.css?v=20261122-1">
 <link rel="stylesheet" href="../radio-channels.css?v=20261122-1">
-<link rel="stylesheet" href="beta.css?v=5">
+<link rel="stylesheet" href="beta.css?v=6">
+<link rel="stylesheet" href="beta-radio.css?v=2">
 </head>
 <body>
 <main class="b-main" id="main">
  <div class="b-wrap">
   <h1>Καλή μελέτη</h1>
   <p class="b-lead" id="summary">Διάλεξε από πού θα συνεχίσεις.</p>
+  <section class="b-widgets" aria-label="Ζωντανές πληροφορίες">
+   <details class="b-w" data-w="pulse">
+    <summary><span class="b-w-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span class="b-w-label">Παλμός μελέτης</span><span class="b-w-val" data-mirror="[data-pulse-title]"></span></summary>
+    <div class="b-w-panel">
+<article class="b-w-card" data-study-pulse><h3 data-pulse-title>Υπολογισμός από την Πρόοδο…</h3><p data-pulse-detail>Ανάγνωση πραγματικών αποτελεσμάτων σε αυτή τη συσκευή.</p><a class="b-btn ghost" data-pulse-action href="../progress-v6.html" hidden>Γρήγορη επανάληψη · 5΄</a><a class="b-w-more" href="../progress-v6.html">Άνοιγμα Πρόοδου</a></article>
+    </div>
+   </details>
+   <details class="b-w" data-w="duty">
+    <summary><span class="b-w-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6M12 7v4M10 9h4"/></svg></span><span class="b-w-label">Εφημερία</span><span class="b-w-val" data-mirror="[data-duty-name]"></span></summary>
+    <div class="b-w-panel">
+<article class="b-w-card" data-heraklion-duty><h3 data-duty-name>Φόρτωση προγράμματος…</h3><p class="b-w-meta" data-duty-status>Ώρα Ελλάδας</p><p data-duty-window>Γενική εφημερία 08:00–08:00.</p><a class="b-btn ghost" data-duty-phone hidden>Κλήση νοσοκομείου</a><div hidden><a class="b-live-src" data-duty-roster href="https://www.7ype.gov.gr/wp-content/uploads/2025/12/2.-%CE%95%CE%A6%CE%97%CE%9C%CE%95%CE%A1%CE%99%CE%95%CE%A3-6%CE%A3%CE%926469%CE%972%CE%99-%CE%94%CE%94%CE%99.pdf" target="_blank" rel="noopener noreferrer">Επίσημο πρόγραμμα ↗</a> · <a class="b-live-src" data-duty-live href="https://www.pagni.gr/index.php/eservices/efimeries" target="_blank" rel="noopener noreferrer">Επιβεβαίωση ↗</a></div></article>
+    </div>
+   </details>
+   <details class="b-w" data-w="gps">
+    <summary><span class="b-w-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><span class="b-w-label">Η θέση μου</span><span class="b-w-val" data-mirror="[data-location-coordinates]"></span></summary>
+    <div class="b-w-panel">
+<article class="b-w-card" data-ekab-location><h3>Η θέση μου</h3><p data-location-coordinates>Δεν γίνεται εντοπισμός μέχρι να πατήσεις το κουμπί.</p><div class="b-live-actions"><button class="b-btn ghost" type="button" data-location-start aria-describedby="location-help">Εντοπισμός GPS</button><button class="b-btn ghost" type="button" data-location-stop hidden>Διακοπή</button><button class="b-btn ghost" type="button" data-location-copy hidden>Αντιγραφή</button><button class="b-btn ghost" type="button" data-location-share hidden>Κοινή χρήση</button><a class="b-btn ghost" data-location-map href="#" target="_blank" rel="noopener noreferrer" hidden>Χάρτης ↗</a></div><p id="location-help" class="b-live-status" data-location-status role="status" aria-live="polite">Πάτησε «Εντοπισμός GPS». Ο browser θα ζητήσει άδεια· οι συντεταγμένες θα εμφανιστούν εδώ και δεν αποστέλλονται.</p></article>
+    </div>
+   </details>
+  </section>
 
   <section class="b-section" aria-labelledby="cont-h">
    <div class="b-continue">
@@ -22,36 +43,10 @@
     <a class="b-btn" id="cont-go" href="course.html?c=01&ch=1">Συνέχεια</a>
    </div>
   </section>
-
-  <section class="b-section b-live" aria-label="Ζωντανές πληροφορίες">
-<article class="b-live-card" data-study-pulse><div class="b-live-head"><span>Παλμός μελέτης</span><a href="../progress-v6.html">Πρόοδος ↗</a></div><h2 data-pulse-title>Υπολογισμός από την Πρόοδο…</h2><p data-pulse-detail>Ανάγνωση πραγματικών αποτελεσμάτων σε αυτή τη συσκευή.</p><a class="b-btn ghost" data-pulse-action href="../progress-v6.html" hidden>Γρήγορη επανάληψη · 5΄</a></article>
-<article class="b-live-card" data-heraklion-duty><div class="b-live-head"><span>Εφημερία Ηρακλείου</span><span data-duty-status>Ώρα Ελλάδας</span></div><h2 data-duty-name>Φόρτωση προγράμματος…</h2><p data-duty-window>Γενική εφημερία 08:00–08:00.</p><a class="b-btn ghost" data-duty-phone hidden>Κλήση νοσοκομείου</a><div hidden><a class="b-live-src" data-duty-roster href="https://www.7ype.gov.gr/wp-content/uploads/2025/12/2.-%CE%95%CE%A6%CE%97%CE%9C%CE%95%CE%A1%CE%99%CE%95%CE%A3-6%CE%A3%CE%926469%CE%972%CE%99-%CE%94%CE%94%CE%99.pdf" target="_blank" rel="noopener noreferrer">Επίσημο πρόγραμμα ↗</a> · <a class="b-live-src" data-duty-live href="https://www.pagni.gr/index.php/eservices/efimeries" target="_blank" rel="noopener noreferrer">Επιβεβαίωση ↗</a></div></article>
-<article class="b-live-card" data-ekab-location><div class="b-live-head"><span>Συντεταγμένες ΕΚΑΒ</span><span>Μόνο με άδειά σου</span></div><h2>Η θέση μου</h2><p data-location-coordinates>Δεν γίνεται εντοπισμός μέχρι να πατήσεις το κουμπί.</p><div class="b-live-actions"><button class="b-btn ghost" type="button" data-location-start aria-describedby="location-help">Εντοπισμός GPS</button><button class="b-btn ghost" type="button" data-location-stop hidden>Διακοπή</button><button class="b-btn ghost" type="button" data-location-copy hidden>Αντιγραφή</button><button class="b-btn ghost" type="button" data-location-share hidden>Κοινή χρήση</button><a class="b-btn ghost" data-location-map href="#" target="_blank" rel="noopener noreferrer" hidden>Χάρτης ↗</a></div><p id="location-help" class="b-live-status" data-location-status role="status" aria-live="polite">Πάτησε «Εντοπισμός GPS». Ο browser θα ζητήσει άδεια· οι συντεταγμένες θα εμφανιστούν εδώ και δεν αποστέλλονται.</p></article>
-  </section>
-
-  <section class="b-section" aria-labelledby="quick-h">
-   <h2 id="quick-h">Εξάσκηση για την εξέταση</h2>
-   <div class="b-quick" id="quick"></div>
-  </section>
-
-  <section class="b-section" id="library" aria-labelledby="lib-h">
-   <div class="b-row"><h2 id="lib-h">Μαθήματα ΣΑΕΚ</h2></div>
-   <div class="b-media">
-    <a href="../saek-videos.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg><span><b>Όλα τα βίντεο με τη σειρά</b><small>Από το μάθημα 01 έως το 20</small></span></a>
-    <a href="../saek-images.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/></svg><span><b>Όλες οι φωτογραφίες</b><small>Δες κάθε εικόνα χωριστά</small></span></a>
-   </div>
-   <div class="b-tabs" role="group" aria-label="Εξάμηνο" id="tabs"></div>
-   <ul class="b-courses" id="courses"></ul>
-  </section>
-
-  <section class="b-section" aria-labelledby="tools-h">
-   <h2 id="tools-h">Εργαλεία και υλικό</h2>
-   <ul class="b-list" id="tools"></ul>
-  </section>
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,readCount,isRead,store,svg,esc} from './beta.js?v=3';
+import {COURSES,shell,readCount,isRead,store} from './beta.js?v=4';
 shell();
 
 const total=COURSES.reduce((n,c)=>n+c.chapters,0);
@@ -68,37 +63,24 @@ const paint=()=>{
  document.getElementById('cont-kind').textContent=kind;
  document.getElementById('cont-h').textContent=`${c.title} · Κεφάλαιο ${ch}`;
  document.getElementById('cont-go').href=`course.html?c=${c.id}&ch=${ch}`;
- list();
 };
-
-const quick=[
- ['../saek-exams.html','exam','Εξετάσεις ΣΑΕΚ','Ερωτήσεις ανά μάθημα με διόρθωση'],
- ['../theory.html?mode=exam&section=practice','target','Τεστ ΕΟΠΠΕΠ','Θεωρία όπως στην πιστοποίηση'],
- ['../practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ','18 σενάρια και δεξιότητες'],
- ['../mentor-oral.html','mic','Προφορική εξάσκηση','Απάντα και δες τι έλειψε']
-];
-document.getElementById('quick').innerHTML=quick.map(([h,i,t,d])=>`<a href="${h}">${svg(i)}<b>${t}</b><span>${d}</span></a>`).join('');
-
-let sem='all';
-const tabs=document.getElementById('tabs');
-tabs.innerHTML=[['all','Όλα'],['Α','Α εξάμηνο'],['Β','Β εξάμηνο'],['Γ','Γ εξάμηνο'],['Δ','Δ εξάμηνο']].map(([v,l])=>`<button type="button" data-sem="${v}" aria-pressed="${v===sem}">${l}</button>`).join('');
-tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sem=b.dataset.sem;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));list()});
-function list(){
- document.getElementById('courses').innerHTML=COURSES.filter(c=>sem==='all'||c.semester===sem).map(c=>{
-  const n=readCount(c),pct=Math.round(n/c.chapters*100);
-  return `<li><a href="course.html?c=${c.id}&ch=1"><span class="b-num">${c.id}</span><span><b>${esc(c.title)}</b><small>${c.semester} εξάμηνο · ${c.chapters} κεφάλαια${n?` · ${n} διαβασμένα`:''}</small></span><span class="b-meter" role="img" aria-label="${pct}% διαβασμένο"><i style="width:${pct}%"></i></span></a></li>`}).join('');
-}
-
-const tools=[
- ['../farmaka.html','Φαρμακολογία','Δόσεις και ενδείξεις'],['../protocols.html','Θέματα επειγόντων','Αλγόριθμοι'],
- ['../mentor-ecg.html','Εργαστήριο ΗΚΓ','Ρυθμοί'],['../paramedic.html#skills','Εργαστήρια δεξιοτήτων','Βήμα βήμα'],
- ['../pdf-library.html','Τα PDF μου','Αρχεία'],['../mentor-library.html','Βιβλιογραφία','Πηγές'],
- ['../study-plan.html','Ημερολόγιο εξετάσεων','Πρόγραμμα μελέτης'],['../contacts.html','Τηλέφωνα ΕΚΑΒ','Επαφές']
-];
-document.getElementById('tools').innerHTML=tools.map(([h,t,d])=>`<li><a href="${h}">${t}<span>${d}</span></a></li>`).join('');
-
 paint();
 addEventListener('storage',paint);addEventListener('pageshow',paint);
+
+// Small widgets: one line each; tapping opens the full card underneath. Only one open at a time.
+const ws=[...document.querySelectorAll('.b-w')];
+ws.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)ws.forEach(o=>{if(o!==d)o.open=false})}));
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('.b-w'))ws.forEach(d=>d.open=false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const o=ws.find(d=>d.open);if(o){o.open=false;o.querySelector('summary').focus()}}});
+// The value shown on each widget follows the live card text.
+for(const v of document.querySelectorAll('[data-mirror]')){
+ const src=v.closest('.b-w').querySelector(v.dataset.mirror);
+ const sync=()=>{let t=src.textContent.trim();
+  if(v.dataset.mirror==='[data-pulse-title]')t=t.startsWith('Αδύναμο σημείο:')?t.slice(15).trim():'Χωρίς δεδομένα';
+  if(v.dataset.mirror==='[data-location-coordinates]')t=/\d/.test(t)?t:'Εντοπισμός';
+  v.textContent=t};
+ sync();new MutationObserver(sync).observe(src,{childList:true,characterData:true,subtree:true});
+}
 </script>
 <script type="module" src="../home-live-widgets.mjs?v=27.1.211"></script>
 <script src="../shift-presence.js?v=20261127-6" defer></script>
