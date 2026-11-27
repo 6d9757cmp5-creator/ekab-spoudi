@@ -219,6 +219,10 @@ function lessonReader(){
  addEventListener('hashchange',()=>{if(/^#lesson-\d+$/.test(location.hash))open(location.hash.slice(1))});
  const start=(/^#lesson-\d+$/.test(location.hash)&&document.getElementById(location.hash.slice(1)))||folds.find(f=>f.open)||folds[0];
  start.open=true;show(start);
+ // A #lesson-N link must not open the page half-way down: the chapter is already the only thing shown.
+ const top=()=>scrollTo(0,0);requestAnimationFrame(top);addEventListener('load',()=>setTimeout(top,0),{once:true});
+ // Tapping a chapter image opens it enlarged (same as its "Μεγέθυνση εικόνας" button).
+ document.querySelector('.reader-chapters')?.addEventListener('click',e=>{const img=e.target.closest('.saek-source-image');if(!img)return;img.closest('figure')?.querySelector('.saek-source-actions button')?.click()});
  // saek-videos.js may load after this runs: add the video once the list is there.
  if(!window.EKAB_LESSON_VIDEOS){let tries=0;const t=setInterval(()=>{if(window.EKAB_LESSON_VIDEOS||++tries>40){clearInterval(t);const f=folds.find(x=>x.open);if(f)addVideo(f)}},250)}
 }

@@ -165,7 +165,7 @@ html.b-legacy :is(.sources-summary,.sources-summary+.sources-filters~p.muted.sma
    Title row with the chapter menu, then the chapter's title, its video, its text and Previous/Next. */
 html.b-legacy body>main.reader-main:has(.reader-chapters){max-width:780px!important}
 html.b-legacy main.reader-main .saek-series{display:none!important}
-html.b-legacy main.reader-main>section.panel:not(.course-sources):not(.saek-series){display:flex!important;flex-wrap:wrap;align-items:center;gap:8px 12px;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 16px!important}
+html.b-legacy main.reader-main>section.panel:not(.course-sources):not(.saek-series){display:flex!important;flex-wrap:wrap;align-items:center;gap:8px 12px;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 auto 16px!important}
 html.b-legacy main.reader-main>section.panel:not(.course-sources):not(.saek-series) :is(.eyebrow,.subtitle,.saek-source-actions .small.muted,#saek-course-videos-shortcut){display:none!important}
 html.b-legacy main.reader-main .saek-lesson-heading{display:flex!important;align-items:center;gap:12px;flex:1 1 auto;margin:0!important}
 html.b-legacy main.reader-main .saek-lesson-heading .reader-title{margin:0!important;font-size:clamp(22px,3vw,28px)!important}
@@ -207,3 +207,21 @@ html.b-legacy main.reader-main .b-lesson-video .ekab-video-controls,html.b-legac
 html.b-legacy main.reader-main>.course-sources{display:none!important}
 html.b-legacy main.reader-main .course-pagination{display:none!important}
 html.b-legacy main.reader-main:has(.reader-chapters>details.reader-fold:last-child[open]) .course-pagination{display:flex!important}
+/* One reading width for the whole lesson; text uses all of it */
+html.b-legacy main.reader-main:has(.reader-chapters)>*{max-width:760px;margin-left:auto!important;margin-right:auto!important;width:100%}
+html.b-legacy main.reader-main .reader-fold .reader-paragraph{max-width:none!important;font-size:17px;line-height:1.6}
+/* Chapter images: two small figures side by side; tap one to enlarge */
+html.b-legacy main.reader-main .saek-source-section{border:0!important;background:none!important;box-shadow:none!important;padding:0!important}
+html.b-legacy main.reader-main .saek-source-section>summary{display:none!important}
+html.b-legacy main.reader-main .saek-source-section{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+html.b-legacy main.reader-main .saek-source-section>:not(figure){display:none!important}
+html.b-legacy main.reader-main .saek-source-figure{margin:0!important;padding:10px!important;border:1px solid var(--line)!important;border-radius:var(--radius-in)!important;background:var(--raise)!important;box-shadow:none!important}
+html.b-legacy main.reader-main .saek-source-title{margin:0 0 8px!important;font-size:14px!important;font-weight:600!important;color:var(--ink)!important}
+html.b-legacy main.reader-main .saek-source-image{display:block;width:100%!important;height:200px!important;object-fit:contain;background:#fff;border-radius:8px;cursor:zoom-in}
+html.b-legacy main.reader-main .saek-source-figure .saek-source-actions{display:none!important}
+html.b-legacy main.reader-main .reader-fold .saek-study-images{width:100%!important;max-width:none!important;flex:none!important;padding:0!important;border:0!important;background:none!important}
+html.b-legacy main.reader-main .reader-fold .saek-source-section{width:100%!important}
+html.b-legacy main.reader-main .saek-source-section{display:block!important}
+html.b-legacy main.reader-main .saek-source-section>figure.saek-source-figure{display:inline-block!important;vertical-align:top;width:calc(50% - 6px)!important;margin:0 8px 8px 0!important}
+html.b-legacy main.reader-main .saek-source-section>figure.saek-source-figure:nth-of-type(2n){margin-right:0!important}
+@media (max-width:520px){html.b-legacy main.reader-main .saek-source-section>figure.saek-source-figure{width:100%!important;margin:0 0 8px!important}}
