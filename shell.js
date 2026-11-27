@@ -71,6 +71,12 @@ export function legacy(current){
  document.documentElement.classList.add('b-legacy');
  shell(current,{legacy:true});
  lessonReader();
+ // Image gallery (Φωτογραφίες ΣΑΕΚ): the same full-screen viewer, across the cards shown on the page.
+ if(relPath()==='saek-images.html')document.addEventListener('click',e=>{
+  const btn=e.target.closest('.saek-gallery-image-button');if(!btn)return;e.preventDefault();e.stopPropagation();
+  const cards=[...document.querySelectorAll('.saek-gallery-card')].filter(c=>c.offsetParent);
+  photoViewer(cards.map(c=>({src:c.querySelector('img').currentSrc||c.querySelector('img').src,title:c.querySelector('h2')?.textContent.trim()||'',caption:[c.querySelector('p')?.textContent.trim(),(c.querySelector('img').alt||'').split('. ').slice(1).join('. ')].filter(Boolean).join(' · '),alt:c.querySelector('img').alt||''})),cards.indexOf(btn.closest('.saek-gallery-card')));
+ },true);
 
 }
 
@@ -232,7 +238,52 @@ function lessonReader(){
  // A #lesson-N link must not open the page half-way down: the chapter is already the only thing shown.
  const top=()=>scrollTo(0,0);requestAnimationFrame(top);addEventListener('load',()=>setTimeout(top,0),{once:true});
  // Tapping a chapter image opens it enlarged (same as its "Μεγέθυνση εικόνας" button).
- document.querySelector('.reader-chapters')?.addEventListener('click',e=>{const img=e.target.closest('.saek-source-image');if(!img)return;img.closest('figure')?.querySelector('.saek-source-actions button')?.click()});
+ document.querySelector('.reader-chapters')?.addEventListener('click',e=>{const img=e.target.closest('.saek-source-image');if(!img)return;e.preventDefault();e.stopPropagation();const figs=[...img.closest('details.reader-fold').querySelectorAll('.saek-source-figure')];photoViewer(figs.map(f=>({src:f.querySelector('img').currentSrc||f.querySelector('img').src,title:f.querySelector('.saek-source-title')?.textContent.trim()||'',caption:f.querySelector('.saek-source-caption')?.textContent.trim()||'',alt:f.querySelector('img').alt||''})),figs.indexOf(img.closest('figure')))},true);
  // saek-videos.js may load after this runs: add the video once the list is there.
  if(!window.EKAB_LESSON_VIDEOS){let tries=0;const t=setInterval(()=>{if(window.EKAB_LESSON_VIDEOS||++tries>40){clearInterval(t);const f=folds.find(x=>x.open);if(f)addVideo(f)}},250)}
+}
+
+/* Full-screen photo viewer (Photos-style): dark backdrop, the image as large as fits, title and "N από M"
+   at the top, the caption below; arrows or swipe for the next image, double-tap to zoom and drag to look around. */
+export function photoViewer(items,start=0){
+ if(!items.length)return;
+ let i=Math.max(0,start),zoom=1,tx=0,ty=0;
+ const d=document.createElement('dialog');d.className='b-viewer';d.setAttribute('aria-label','Προβολή εικόνας');
+ d.innerHTML=`<div class="bv-top"><div class="bv-title"><b></b><span></span></div><button type="button" class="bv-btn bv-close" aria-label="Κλείσιμο">${svg('close')}</button></div>
+  <div class="bv-stage"><img alt=""></div>
+  <button type="button" class="bv-btn bv-prev" aria-label="Προηγούμενη εικόνα"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+  <button type="button" class="bv-btn bv-next" aria-label="Επόμενη εικόνα"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+  <p class="bv-caption"></p>`;
+ document.body.append(d);
+ const img=d.querySelector('img'),stage=d.querySelector('.bv-stage');
+ const apply=()=>{img.style.transform=`translate(${tx}px,${ty}px) scale(${zoom})`;stage.classList.toggle('zoomed',zoom>1)};
+ const go=n=>{
+  i=(n+items.length)%items.length;zoom=1;tx=ty=0;apply();
+  const it=items[i];img.src=it.src;img.alt=it.alt||it.title;
+  d.querySelector('.bv-title b').textContent=it.title;
+  d.querySelector('.bv-title span').textContent=items.length>1?`${i+1} από ${items.length}`:'';
+  d.querySelector('.bv-caption').textContent=it.caption;
+  d.querySelector('.bv-prev').hidden=d.querySelector('.bv-next').hidden=items.length<2;
+ };
+ const close=()=>{d.close();d.remove()};
+ d.querySelector('.bv-close').onclick=close;
+ d.querySelector('.bv-prev').onclick=()=>go(i-1);
+ d.querySelector('.bv-next').onclick=()=>go(i+1);
+ d.addEventListener('cancel',e=>{e.preventDefault();close()});
+ d.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(i-1);if(e.key==='ArrowRight')go(i+1)});
+ // double-click / double-tap toggles 2.5× around the tapped point; drag pans; swipe changes image when not zoomed
+ stage.addEventListener('dblclick',e=>{
+  if(zoom>1){zoom=1;tx=ty=0}else{const r=img.getBoundingClientRect();zoom=2.5;tx=(r.left+r.width/2-e.clientX)*1.5;ty=(r.top+r.height/2-e.clientY)*1.5}
+  apply();
+ });
+ let p=null,lastTap=0;
+ stage.addEventListener('pointerdown',e=>{p={x:e.clientX,y:e.clientY,tx,ty};stage.setPointerCapture(e.pointerId)});
+ stage.addEventListener('pointermove',e=>{if(!p||zoom===1)return;tx=p.tx+e.clientX-p.x;ty=p.ty+e.clientY-p.y;apply()});
+ stage.addEventListener('pointerup',e=>{
+  if(!p)return;const dx=e.clientX-p.x,dy=e.clientY-p.y;p=null;
+  if(zoom===1&&Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(i+(dx<0?1:-1));
+  else if(zoom===1&&e.pointerType!=='mouse'&&Math.abs(dx)<10&&Math.abs(dy)<10){const now=Date.now();if(now-lastTap<300)stage.dispatchEvent(new MouseEvent('dblclick',{clientX:e.clientX,clientY:e.clientY}));lastTap=now}
+ });
+ d.addEventListener('click',e=>{if(e.target===d||e.target===stage)close()});
+ go(i);d.showModal();d.querySelector('.bv-close').focus({focusVisible:false});
 }
