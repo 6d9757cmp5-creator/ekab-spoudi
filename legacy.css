@@ -306,3 +306,29 @@ html.b-legacy main.saek-hub .eop-shortcuts a{justify-content:space-between}
 html.b-legacy main.saek-hub>footer{order:99}
 html.b-legacy main.saek-hub>:is(.course-sources,details.hub-resources:last-of-type){order:98}
 html.b-legacy .saek-gallery-card :is(p,small){opacity:1!important}
+
+/* Anatomy promo on the SAEK page: a breathing, slowly turning skeleton with a scan line; opens 3D anatomy (Tools) */
+html.b-legacy .b-anatomy-promo .b-skeleton{position:relative;display:grid;place-items:center;background:linear-gradient(180deg,#0b1a24,#14384d)!important}
+html.b-legacy .b-anatomy-promo .b-skeleton img{width:70%!important;height:86%!important;object-fit:contain;filter:invert(1) brightness(1.4);animation:b-breathe 4s ease-in-out infinite;transform-origin:50% 60%}
+html.b-legacy .b-anatomy-promo .b-scan{position:absolute;left:8%;right:8%;height:2px;background:linear-gradient(90deg,transparent,#4da3ff,transparent);box-shadow:0 0 8px #4da3ff;animation:b-scan 3s ease-in-out infinite}
+@keyframes b-breathe{0%,100%{transform:perspective(300px) rotateY(-14deg) scale(.98)}50%{transform:perspective(300px) rotateY(14deg) scale(1.02)}}
+@keyframes b-scan{0%,100%{top:12%}50%{top:84%}}
+@media (prefers-reduced-motion:reduce){html.b-legacy .b-anatomy-promo .b-skeleton img,html.b-legacy .b-anatomy-promo .b-scan{animation:none}}
+/* Minimum text size 13px and the 10/12/16 radii of the design system on study pages */
+html.b-legacy main :is(.saek-anatomy-link,.atlas-practice-disclaimer,.saek-video-badge,.ekab-guide-reopen-button,.seminar-external,.seminar-card-stats,.seminar-hint,.seminar-backup>summary,.practical-video-order){font-size:13px!important}
+html.b-legacy main :is(small,label,legend,.small,.stat-question-link span,.practical-page-button span){font-size:max(13px,.8125rem)!important}
+html.b-legacy main :is(.stat-question-link,.practical-page-button){border-radius:12px!important}
+html.b-legacy main .seminar-external{text-transform:none!important;letter-spacing:0!important}
+html.b-legacy main .note{color:var(--ink)!important;background:var(--surface)!important;border-color:var(--line)!important}
+/* Older pages size small text in rem/em (0.77–0.8): a 17px base keeps it at 13px or more */
+html.b-legacy{font-size:17px!important}
+html.b-legacy main .ekab-guide-reopen-button{border-radius:var(--radius-in)!important}
+html.b-legacy main .saek-video-thumb{border-radius:0!important}
+
+/* Seminars: no eyebrow labels; the top-left "‹ Σεμινάρια" replaces the in-page back button */
+html.b-legacy main :is(.eyebrow){display:none!important}
+html.b-legacy main #seminarBack{display:none!important}
+html.b-legacy main .seminar-external{font-size:14px!important;font-weight:500!important;text-decoration:none!important}
+/* "▶ Εισαγωγή" keeps its secondary-button look on older pages; icon only on phones */
+html.b-legacy main .b-intro{display:inline-flex!important;align-items:center;gap:6px;min-height:44px!important;padding:10px 16px!important;border:0!important;border-radius:var(--radius-in)!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;font:500 15px/1.2 inherit!important;box-shadow:none!important}
+@media (max-width:720px){html.b-legacy main .b-course-row>.b-intro{width:44px;padding:0!important;justify-content:center;font-size:0!important}html.b-legacy main .b-course-row>.b-intro svg{width:16px;height:16px}}

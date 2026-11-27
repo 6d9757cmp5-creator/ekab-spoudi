@@ -53,7 +53,7 @@ export const svg=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icon[n]}</svg
 
 const NAV=[['index.html','home','Αρχική'],['study.html','book','Μελέτη'],['practice.html','target','Εξάσκηση'],['tools.html','tools','Εργαλεία'],['progress-v6.html','chart','Εσύ']];
 // Pages that sit inside a section light up that section in the menu and the tab bar.
-const SECTION={'theory.html':'study.html','written_exam.html':'study.html','exam_focus.html':'study.html','study_map.html':'study.html','eoppep.html':'study.html','seminar-prep.html':'study.html','profession-law.html':'study.html','mentor-library.html':'study.html','pdf-library.html':'study.html','eclass.html':'study.html','manual.html':'study.html','ui-tools/anatomy-3d/index.html':'study.html','courses.html':'study.html','chapter.html':'study.html','saek.html':'study.html','saek-videos.html':'study.html','saek-images.html':'study.html',
+const SECTION={'theory.html':'study.html','written_exam.html':'study.html','exam_focus.html':'study.html','study_map.html':'study.html','eoppep.html':'study.html','seminar-prep.html':'study.html','profession-law.html':'tools.html','mentor-library.html':'tools.html','pdf-library.html':'study.html','eclass.html':'study.html','manual.html':'study.html','ui-tools/anatomy-3d/index.html':'tools.html','courses.html':'study.html','chapter.html':'study.html','saek.html':'study.html','saek-videos.html':'study.html','saek-images.html':'study.html',
  'saek-exams.html':'practice.html','theory.html':'practice.html','practical_exam.html':'practice.html','mentor-oral.html':'practice.html',
  'farmaka.html':'tools.html','protocols.html':'tools.html','contacts.html':'tools.html','pdf-library.html':'tools.html',
  'study-plan.html':'progress-v6.html'};
@@ -71,6 +71,7 @@ export function legacy(current){
  document.documentElement.classList.add('b-legacy');
  shell(current,{legacy:true});
  lessonReader();
+ courseIntros();
  // Video gallery (Βίντεο ΣΑΕΚ): the page's own player resolves the file; it is then shown in the full-screen viewer.
  if(relPath()==='saek-videos.html')document.addEventListener('click',e=>{
   const btn=e.target.closest('.saek-video-thumb');if(!btn)return;const card=btn.closest('.saek-gallery-card');
@@ -108,7 +109,7 @@ export function shell(current,opts={}){
  const hub=NAV.some(([h])=>h===here);
  document.documentElement.classList.toggle('b-hubpage',hub);
  // Inner pages: "‹ Parent" at the top left, as in iOS navigation bars.
- const PARENT={'saek-videos.html':['saek.html','ΣΑΕΚ'],'saek-images.html':['saek.html','ΣΑΕΚ']};
+ const PARENT={'saek-videos.html':['saek.html','ΣΑΕΚ'],'saek-images.html':['saek.html','ΣΑΕΚ'],'ui-tools/anatomy-3d/index.html':['tools.html','Εργαλεία'],'eoppep.html':['study.html','Μελέτη'],'theory.html':['eoppep.html','ΕΟΠΠΕΠ'],'practical_exam.html':['eoppep.html','ΕΟΠΠΕΠ'],'written_exam.html':['eoppep.html','ΕΟΠΠΕΠ'],'exam_focus.html':['eoppep.html','ΕΟΠΠΕΠ'],'study_map.html':['eoppep.html','ΕΟΠΠΕΠ']};
  const parent=PARENT[here]||(/^saek-course-\d\d\.html$/.test(here)?['saek.html','ΣΑΕΚ']:null)||(()=>{const s=SECTION[here]||current;const n=NAV.find(([h])=>h===s);return n?[n[0],n[2]]:null})();
  const item=([href,ic,label])=>`<a href="${at(href)}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
  side.innerHTML=NAV.map(item).join('')+
@@ -119,7 +120,10 @@ export function shell(current,opts={}){
  const tabs=document.createElement('nav');tabs.className='b-tabbar';tabs.setAttribute('aria-label','Ενότητες');
  tabs.innerHTML=NAV.map(([href,ic,label])=>`<a href="${at(href)}"${href===sec?' aria-current="page"':''}>${svg(ic)}<span>${label}</span></a>`).join('');
  const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='b-backdrop';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Κλείσιμο μενού');
- if(!hub&&parent){
+ // Inside one seminar the top-left back returns to the list of seminars (the page's own back button does the same).
+ const inSeminar=here==='seminar-prep.html'&&/^#(bls|pbls|ils|phtls|als)$/.test(location.hash);
+ if(inSeminar){const nb=()=>document.getElementById('seminarBack');const bk=document.createElement('a');bk.className='b-back';bk.href=at('seminar-prep.html');bk.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>Σεμινάρια</span>`;bk.setAttribute('aria-label','Πίσω: Σεμινάρια');bk.addEventListener('click',e=>{const x=nb();if(x){e.preventDefault();x.click();bk.remove();document.documentElement.classList.remove('b-has-back')}});top.querySelector('.b-brand').after(bk);document.documentElement.classList.add('b-has-back')}
+ else if(!hub&&parent){
   const back=document.createElement('a');back.className='b-back';back.href=at(parent[0]);
   back.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>${parent[1]}</span>`;
   back.setAttribute('aria-label','Πίσω: '+parent[1]);
@@ -295,4 +299,33 @@ export function photoViewer(items,start=0){
  });
  d.addEventListener('click',e=>{if(e.target===d||e.target===stage)close()});
  go(i);d.showModal();d.querySelector('.bv-close').focus({focusVisible:false});
+}
+
+/* "▶ Εισαγωγή" for every SAEK course: on the course list (saek.html) and in each lesson's title row.
+   The intro is chapter 0 of the course video series (saek-videos.js), shown in the full-screen viewer. */
+let seriesLoad=null;
+const loadSeries=()=>window.EKAB_COURSE_VIDEO_SERIES?Promise.resolve():seriesLoad||=new Promise((ok,no)=>{const n=document.createElement('script');n.src=at('saek-videos.js');n.onload=ok;n.onerror=no;document.head.append(n)});
+async function playIntro(cid,name){
+ try{await loadSeries()}catch(_){return}
+ const part=(window.EKAB_COURSE_VIDEO_SERIES?.[cid]?.parts||[]).find(p=>Number(p.chapter)===0);
+ if(part)photoViewer([{video:part.url,title:'Εισαγωγή: '+name,caption:'Μάθημα ΣΑΕΚ '+cid}],0);
+}
+function introButton(cid,name){
+ const b=document.createElement('button');b.type='button';b.className='b-intro';
+ b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Εισαγωγή';
+ b.setAttribute('aria-label','Εισαγωγικό βίντεο: '+name);
+ b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();playIntro(cid,name)});
+ return b;
+}
+function courseIntros(){
+ const here=relPath();
+ if(here==='saek.html'){
+  for(const a of document.querySelectorAll('a.course-tile[href^="saek-course-"]')){
+   const cid=/saek-course-(\d\d)/.exec(a.getAttribute('href'))?.[1];if(!cid||a.parentElement.classList.contains('b-course-row'))continue;
+   const row=document.createElement('div');row.className='b-course-row';a.before(row);row.append(a,introButton(cid,a.querySelector('strong')?.textContent.trim()||'Μάθημα '+cid));
+  }
+ }
+ const m=/^saek-course-(\d\d)\.html$/.exec(here);
+ if(m){const actions=document.querySelector('main.reader-main>section.panel:not(.course-sources):not(.saek-series)');const name=document.querySelector('.saek-lesson-heading .reader-title')?.textContent.split(' · ')[0].trim()||'';
+  if(actions&&!actions.querySelector('.b-intro'))actions.append(introButton(m[1],name));}
 }

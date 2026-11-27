@@ -8,19 +8,18 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<link rel="stylesheet" href="shell.css?v=19">
+<link rel="stylesheet" href="shell.css?v=20">
 </head>
 <body>
 <main class="b-main" id="main">
  <div class="b-wrap">
   <h1>Μελέτη</h1>
-  <p class="b-lead">Όλη η ύλη σε ένα σημείο: ΣΑΕΚ, πιστοποίηση ΕΟΠΠΕΠ και σεμινάρια.</p>
+  <p class="b-lead">ΣΑΕΚ, πιστοποίηση ΕΟΠΠΕΠ και σεμινάρια.</p>
 
   <div class="b-seg" role="tablist" aria-label="Ενότητες μελέτης">
    <button type="button" role="tab" id="tab-saek" aria-controls="saek" aria-selected="true">ΣΑΕΚ</button>
    <button type="button" role="tab" id="tab-eoppep" aria-controls="eoppep" aria-selected="false">ΕΟΠΠΕΠ</button>
    <button type="button" role="tab" id="tab-seminars" aria-controls="seminars" aria-selected="false">Σεμινάρια</button>
-   <button type="button" role="tab" id="tab-material" aria-controls="material" aria-selected="false">Υλικό</button>
   </div>
 
   <section class="b-section b-hub" id="saek" role="tabpanel" aria-labelledby="tab-saek" data-h="saek-h">
@@ -46,20 +45,13 @@
    </div>
   </section>
 
-  <section class="b-section b-hub" id="material" role="tabpanel" aria-labelledby="tab-material" data-h="mat-h">
-   <ul class="b-list">
-    <li><a href="ui-tools/anatomy-3d/index.html">3D Ανατομία<span>Τρισδιάστατα μοντέλα</span></a></li>
-    <li><a href="profession-law.html">Επάγγελμα και νομοθεσία<span>Πλαίσιο άσκησης</span></a></li>
-    <li><a href="mentor-library.html">Βιβλιογραφία<span>Πηγές ανά θέμα</span></a></li>
-   </ul>
-  </section>
  </div>
 </main>
 <script type="module">
 import {COURSES,shell,readCount,store} from './shell.js?v=11';
 shell();
 // One section at a time. study.html?type=eoppep (older links) and the last tab used choose which.
-const TABS=['saek','eoppep','seminars','material'];
+const TABS=['saek','eoppep','seminars'];
 const show=(id,push)=>{
  for(const t of TABS){const on=t===id;document.getElementById('tab-'+t).setAttribute('aria-selected',String(on));document.getElementById('tab-'+t).tabIndex=on?0:-1;document.getElementById(t).hidden=!on}
  store.set('ekab.study.tab',id);
