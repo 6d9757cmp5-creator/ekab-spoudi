@@ -3,87 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f7f5">
 <title>ΕΚΑΒ Σπουδή</title>
-<script>if(location.hash&&!/^#\/?(home)?$/.test(location.hash))location.replace('index-v6.html'+location.hash)</script>
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<link rel="stylesheet" href="./radio.css?v=20261122-1">
-<link rel="stylesheet" href="./radio-channels.css?v=20261122-1">
-<link rel="stylesheet" href="shell.css?v=20">
-<link rel="stylesheet" href="shell-radio.css?v=1">
-</head>
-<body class="b-home">
-<main class="b-main" id="main">
- <div class="b-wrap">
-  <h1>Καλή μελέτη</h1>
-  <p class="b-lead" id="summary">Διάλεξε από πού θα συνεχίσεις.</p>
-  <section class="b-livebar" aria-label="Ζωντανή ενημέρωση">
-   <div class="lb-item lb-gps">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-    <span class="lb-text" role="status" aria-live="polite"><b data-gps-place>Η θέση μου</b> <span data-gps-coords>Αναζήτηση θέσης…</span></span>
-    <a class="lb-icon" data-gps-map href="#" target="_blank" rel="noopener noreferrer" aria-label="Άνοιγμα στον χάρτη" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg></a>
-    <button class="lb-icon" type="button" data-gps-copy aria-label="Αντιγραφή συντεταγμένων" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
-    <button class="lb-icon" type="button" data-gps-refresh aria-label="Ανανέωση θέσης"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button>
-   </div>
-   <div class="lb-item lb-duty">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6M12 7v4M10 9h4"/></svg>
-    <span class="lb-text"><b>Εφημερία</b> <span data-duty-name>…</span> · <span data-duty-left></span></span>
-    <a class="lb-icon lb-call" data-duty-call href="#" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.8L8.5 11a16 16 0 0 0 4.4 4.4l1.6-1.5a2 2 0 0 1 1.7-.6l3.1.5a2 2 0 0 1 1.7 2z"/></svg></a>
-   </div>
-  </section>
-  <div class="b-toast" role="status" aria-live="polite" hidden></div>
-  <section class="b-section" aria-labelledby="cont-h">
-   <div class="b-continue">
-    <div><p id="cont-kind">Συνέχισε από εκεί που έμεινες</p><h2 id="cont-h">Ανατομία · Κεφάλαιο 1</h2></div>
-    <a class="b-btn" id="cont-go" href="saek-course-01.html#lesson-1">Συνέχεια</a>
-   </div>
-  </section>
-
-  <section class="b-section" aria-labelledby="w-h">
-   <div class="b-row"><h2 id="w-h">Τα widget μου</h2><button class="b-btn ghost b-edit" type="button" data-widgets-edit>Επεξεργασία</button></div>
-   <div class="b-tiles"></div>
-  </section>
-  <dialog class="b-sheet" id="widgets-sheet" aria-labelledby="ws-h">
-   <div class="ws-head"><h2 id="ws-h">Widget αρχικής</h2><button class="b-btn" type="button" data-close>Τέλος</button></div>
-   <h3>Στην αρχική</h3>
-   <ul class="ws-list ws-on"></ul>
-   <h3>Πρόσθεσε</h3>
-   <ul class="ws-list ws-off"></ul>
-   <button class="ws-reset" type="button" data-reset>Επαναφορά βασικών</button>
-  </dialog>
-
-
- </div>
-</main>
-<script type="module">
-import {COURSES,shell,readCount,isRead,store} from './shell.js?v=11';
-shell();
-
-const total=COURSES.reduce((n,c)=>n+c.chapters,0);
-const paint=()=>{
- const done=COURSES.reduce((n,c)=>n+readCount(c),0);
- document.getElementById('summary').textContent=done?`Έχεις διαβάσει ${done} από ${total} κεφάλαια ΣΑΕΚ.`:`${COURSES.length} μαθήματα, ${total} κεφάλαια. Ξεκίνα από όποιο θέλεις.`;
-
- // Last chapter opened here; otherwise the first unread chapter of a started course; otherwise the very first.
- let c=null,ch=1,kind='Συνέχισε από εκεί που έμεινες';
- let last=null;try{const r=JSON.parse(store.get('ekab.study.resume.v1')||'null');if(r?.kind==='saek')last=[null,String(r.course),String(r.chapter)]}catch(_){}
- if(!last)last=/^(\d{2}):(\d+)$/.exec(store.get('ekab.beta.last')||'');
- if(last){c=COURSES.find(x=>x.id===last[1]);ch=+last[2]||1}
- if(!c){c=COURSES.find(x=>{const n=readCount(x);return n>0&&n<x.chapters});if(c){ch=1;while(ch<c.chapters&&isRead(c.id,ch))ch++}}
- if(!c){c=COURSES[0];ch=1;kind='Ξεκίνα την ύλη'}
- document.getElementById('cont-kind').textContent=kind;
- document.getElementById('cont-h').textContent=`${c.title} · Κεφάλαιο ${ch}`;
- document.getElementById('cont-go').href=`saek-course-${c.id}.html#lesson-${ch}`;
-};
-paint();
-addEventListener('storage',paint);addEventListener('pageshow',paint);
-
+<script>
+(function(){
+  var destination=new URL("./index-v6.html",location.href);
+  destination.search=location.search;
+  destination.hash=location.hash||"#/home";
+  location.replace(destination.href);
+})();
 </script>
-<script type="module" src="home-widgets.js?v=7"></script>
-<script src="./shift-presence.js?v=20261127-8" defer></script>
-<script src="./radio-config.js?v=20261122-1" defer></script>
-<script src="./radio-widget-loader.js?v=20261122-2" defer></script>
+<noscript><meta http-equiv="refresh" content="0;url=./index-v6.html#/home"></noscript>
+</head>
+<body>
+<p>Άνοιγμα της ΕΚΑΒ Σπουδή…</p>
+<p><a href="./index-v6.html#/home">Συνέχεια στον πίνακα ελέγχου</a></p>
 </body>
 </html>
