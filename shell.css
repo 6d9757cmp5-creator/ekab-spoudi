@@ -566,3 +566,6 @@ a.w:active{transform:scale(.98)}
 .b-search input{padding-right:64px}
 @media (max-width:720px){.b-search input{padding-right:14px}}
 .b-kbd{color:var(--ink);background:var(--raise)}
+.b-sheet>*{flex-shrink:0}
+.ws-list{overflow:visible}
+@media (max-width:720px){.b-sheet{width:100vw;max-width:100vw;max-height:88dvh;margin:auto auto 0;border-radius:var(--radius) var(--radius) 0 0}}
