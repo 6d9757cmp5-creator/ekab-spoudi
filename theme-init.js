@@ -1,7 +1,7 @@
 /* Resolves a site file relative to this script, so pages in subfolders load the same shared files. */
 function ekabAt(p){const s=document.currentScript;return s&&s.src?new URL(p,s.src).href:p;}
 (function(){document.documentElement.dataset.sidebarBeta='true';const script=document.createElement('script');script.src=ekabAt('sidebar-beta.js?v=20261127-3');document.head.appendChild(script)})();
-(function(){if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=ekabAt('theme-system.css?v=20261127-5');link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
+(function(){if(document.querySelector('[data-ekab-theme-system]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=ekabAt('theme-system.css?v=20261127-7');link.dataset.ekabThemeSystem='';document.head.appendChild(link)})();
 (function(){var value=null;try{value=localStorage.getItem('ekab.theme.v1')}catch(e){}if(value!=='dark'&&value!=='light'){try{var item=document.cookie.split(';').map(function(part){return part.trim()}).find(function(part){return part.indexOf('ekab.theme.v1=')===0});value=item?item.slice(14):null}catch(e){value=null}}document.documentElement.dataset.theme=value==='light'?'light':'dark'})();;
 
 /* Apply V6's shared palette after page-specific styles so every section stays visually consistent. */

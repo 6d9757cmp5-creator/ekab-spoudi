@@ -404,3 +404,17 @@ body :is(.compact-sources-body a, .ekab-manual-link, .ph-case-option, .ph-disclo
 @media (max-width: 480px) { .ekab-shift-label { display: none; } .ekab-shift-station { min-width: 0; max-width: 11ch; } .ekab-shift-chip { padding: 0 12px; } .ekab-shift-places { right: auto; left: 0; } }
 
 @media (prefers-reduced-motion: reduce) { .ekab-shift-dot, .ekab-shift-in { animation: none; } }
+
+/* Contrast fixes found by axe (2026-11-27): text that kept a colour meant for a different background. */
+body .beta-badge { background: #7a6240 !important; color: #fff !important; }
+html[data-theme="light"] body :is(#mainTitle, .practical-introduction > h2) { color: var(--ink) !important; }
+html[data-theme="light"] body .vs-hero { color: var(--ink) !important; }
+html[data-theme="light"] body .vs-hero :is(.vs-eyebrow, p) { color: var(--muted) !important; }
+body .sl-licences { color: var(--muted) !important; opacity: 1 !important; }
+body :is([aria-pressed="true"], [aria-selected="true"]) small { color: inherit !important; }
+body .aed-official-poster-link small { color: #fff !important; }
+body #nextLink { color: #1a1a1a !important; }
+html[data-theme="light"] body :is(.brand-home p, .ekab-section-name) { color: var(--muted) !important; }
+body .pm-lab-start { color: #f4ece1 !important; }
+html[data-theme="dark"] body .saek-gallery-card-body h2 { color: #e9f4ec !important; }
+html[data-theme="dark"] body .saek-gallery-card-body p { color: #b9c7bd !important; }
