@@ -71,6 +71,13 @@ export function legacy(current){
  document.documentElement.classList.add('b-legacy');
  shell(current,{legacy:true});
  lessonReader();
+ // Video gallery (Βίντεο ΣΑΕΚ): the page's own player resolves the file; it is then shown in the full-screen viewer.
+ if(relPath()==='saek-videos.html')document.addEventListener('click',e=>{
+  const btn=e.target.closest('.saek-video-thumb');if(!btn)return;const card=btn.closest('.saek-gallery-card');
+  setTimeout(()=>{const old=document.querySelector('dialog.saek-gallery-dialog[open]'),v=old?.querySelector('video');if(!v?.src)return;
+   const src=v.src;v.pause();old.close();const a=card.querySelector('.saek-gallery-card-body a');
+   photoViewer([{video:src,title:card.querySelector('h2')?.textContent.trim()||'',caption:card.querySelector('.saek-gallery-card-body p')?.textContent.trim()||'',link:a?{href:a.href,text:a.textContent.trim()}:null}],0)},0);
+ });
  // Image gallery (Φωτογραφίες ΣΑΕΚ): the same full-screen viewer, across the cards shown on the page.
  if(relPath()==='saek-images.html')document.addEventListener('click',e=>{
   const btn=e.target.closest('.saek-gallery-image-button');if(!btn)return;e.preventDefault();e.stopPropagation();
@@ -250,34 +257,36 @@ export function photoViewer(items,start=0){
  let i=Math.max(0,start),zoom=1,tx=0,ty=0;
  const d=document.createElement('dialog');d.className='b-viewer';d.setAttribute('aria-label','Προβολή εικόνας');
  d.innerHTML=`<div class="bv-top"><div class="bv-title"><b></b><span></span></div><button type="button" class="bv-btn bv-close" aria-label="Κλείσιμο">${svg('close')}</button></div>
-  <div class="bv-stage"><img alt=""></div>
+  <div class="bv-stage"><img alt=""><video controls playsinline preload="metadata" hidden></video></div>
   <button type="button" class="bv-btn bv-prev" aria-label="Προηγούμενη εικόνα"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
   <button type="button" class="bv-btn bv-next" aria-label="Επόμενη εικόνα"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
   <p class="bv-caption"></p>`;
+ const vid=d.querySelector('video');
  document.body.append(d);
  const img=d.querySelector('img'),stage=d.querySelector('.bv-stage');
  const apply=()=>{img.style.transform=`translate(${tx}px,${ty}px) scale(${zoom})`;stage.classList.toggle('zoomed',zoom>1)};
  const go=n=>{
   i=(n+items.length)%items.length;zoom=1;tx=ty=0;apply();
-  const it=items[i];img.src=it.src;img.alt=it.alt||it.title;
+  const it=items[i];vid.pause();img.hidden=!!it.video;vid.hidden=!it.video;
+  if(it.video){vid.src=it.video;img.removeAttribute('src');vid.play().catch(()=>{})}else{vid.removeAttribute('src');img.src=it.src;img.alt=it.alt||it.title}
   d.querySelector('.bv-title b').textContent=it.title;
   d.querySelector('.bv-title span').textContent=items.length>1?`${i+1} από ${items.length}`:'';
-  d.querySelector('.bv-caption').textContent=it.caption;
+  const cap=d.querySelector('.bv-caption');cap.textContent=it.caption;if(it.link){const a=document.createElement('a');a.href=it.link.href;a.textContent=it.link.text;cap.append(cap.textContent?' · ':'',a)}
   d.querySelector('.bv-prev').hidden=d.querySelector('.bv-next').hidden=items.length<2;
  };
- const close=()=>{d.close();d.remove()};
+ const close=()=>{vid.pause();d.close();d.remove()};
  d.querySelector('.bv-close').onclick=close;
  d.querySelector('.bv-prev').onclick=()=>go(i-1);
  d.querySelector('.bv-next').onclick=()=>go(i+1);
  d.addEventListener('cancel',e=>{e.preventDefault();close()});
  d.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(i-1);if(e.key==='ArrowRight')go(i+1)});
  // double-click / double-tap toggles 2.5× around the tapped point; drag pans; swipe changes image when not zoomed
- stage.addEventListener('dblclick',e=>{
+ stage.addEventListener('dblclick',e=>{if(!vid.hidden)return;
   if(zoom>1){zoom=1;tx=ty=0}else{const r=img.getBoundingClientRect();zoom=2.5;tx=(r.left+r.width/2-e.clientX)*1.5;ty=(r.top+r.height/2-e.clientY)*1.5}
   apply();
  });
  let p=null,lastTap=0;
- stage.addEventListener('pointerdown',e=>{p={x:e.clientX,y:e.clientY,tx,ty};stage.setPointerCapture(e.pointerId)});
+ stage.addEventListener('pointerdown',e=>{if(e.target===vid)return;p={x:e.clientX,y:e.clientY,tx,ty};stage.setPointerCapture(e.pointerId)});
  stage.addEventListener('pointermove',e=>{if(!p||zoom===1)return;tx=p.tx+e.clientX-p.x;ty=p.ty+e.clientY-p.y;apply()});
  stage.addEventListener('pointerup',e=>{
   if(!p)return;const dx=e.clientX-p.x,dy=e.clientY-p.y;p=null;

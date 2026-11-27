@@ -690,3 +690,9 @@ html body dialog.b-viewer .bv-title b{color:#f5f5f7!important}
 html body dialog.b-viewer .bv-title span{color:#a1a1a6!important}
 html body dialog.b-viewer .bv-caption{color:#d1d1d6!important}
 html body dialog.b-viewer .bv-btn{background:rgba(255,255,255,.14)!important;color:#fff!important;border:0!important;box-shadow:none!important;min-height:44px!important;padding:0!important}
+
+.bv-stage video{max-width:calc(100vw - 32px);max-height:calc(100dvh - 150px);width:auto;aspect-ratio:16/9;background:#000;border-radius:8px}
+.bv-stage video[hidden],.bv-stage img[hidden]{display:none}
+html body dialog.b-viewer .bv-caption a{color:#4da3ff!important;text-decoration:none!important;font-weight:500}
+@media (max-width:720px){.bv-stage video{max-width:100vw;border-radius:0;width:100vw}}
+html body dialog.b-viewer .ekab-video-controls{display:none!important}

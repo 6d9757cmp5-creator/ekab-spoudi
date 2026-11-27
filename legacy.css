@@ -276,3 +276,33 @@ html.b-legacy main.reader-main .saek-compact-toc>summary{list-style:none}
 html.b-legacy main.reader-main .saek-compact-toc>summary::-webkit-details-marker{display:none}
 html.b-legacy main.reader-main .b-group>details>summary,html.b-legacy main.reader-main .b-group>details.atlas-chapter-practice>summary{font-weight:500!important}
 html.b-legacy main.reader-main .b-group>details>summary *{font-weight:500!important}
+/* SAEK videos / images galleries: content in the first screen, card titles at the home page size */
+html.b-legacy .saek-gallery-eyebrow{display:none!important}
+html.b-legacy .saek-gallery-intro{max-width:none!important;margin:0 0 12px!important;font-size:14px!important;line-height:1.45;color:var(--muted)!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html.b-legacy main h1{margin-bottom:6px}
+html.b-legacy .saek-gallery-filters{display:grid!important;grid-template-columns:1fr 1fr 1.4fr;gap:8px!important;margin:0 0 12px!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+html.b-legacy .saek-gallery-filters label{display:grid;gap:4px;font-size:13px!important;font-weight:500!important;color:var(--muted)!important}
+html.b-legacy .saek-gallery-filters :is(select,input){min-height:44px!important;font-size:15px!important;font-weight:400!important}
+@media (max-width:720px){html.b-legacy .saek-gallery-filters{grid-template-columns:1fr 1fr}html.b-legacy .saek-gallery-filters>:last-child{grid-column:1/-1}}
+html.b-legacy .saek-gallery-status{margin:0 0 12px!important;font-size:14px!important;font-weight:500!important;color:var(--muted)!important}
+html.b-legacy .saek-gallery-grid{gap:12px!important}
+html.b-legacy .saek-gallery-card{border:1px solid var(--line)!important;border-radius:var(--radius)!important;background:var(--raise)!important;box-shadow:var(--shadow)!important;overflow:hidden}
+html.b-legacy .saek-gallery-card h2,html.b-legacy .saek-gallery-card h3{margin:0 0 4px!important;font-size:16px!important;line-height:1.3!important;font-weight:600!important;letter-spacing:0!important;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html.b-legacy .saek-gallery-card :is(p,small){font-size:13px!important;color:var(--muted)!important}
+html.b-legacy .saek-gallery-card-body{padding:12px 14px!important}
+html.b-legacy .saek-gallery-card-body a{font-size:14px!important;text-decoration:none!important;font-weight:500}
+html.b-legacy .saek-video-badge{background:rgba(0,0,0,.6)!important;color:#fff!important}
+
+/* Hubs (ΣΑΕΚ, ΕΟΠΠΕΠ) in the home page system: white cards, black titles, no emoji icons, sources before the footer */
+html.b-legacy main.saek-hub :is(.hub-action-icon,.hub-resources-icon){display:none!important}
+html.b-legacy main.saek-hub :is(.hub-action,.eop-shortcuts a,.hub-resources>summary){display:flex!important;align-items:center;gap:12px;min-height:60px;padding:14px 18px!important;border:1px solid var(--line)!important;border-radius:var(--radius)!important;background:var(--raise)!important;background-image:none!important;box-shadow:var(--shadow)!important;color:var(--ink)!important;text-decoration:none!important}
+html.b-legacy main.saek-hub .hub-resources{border:0!important;background:none!important;box-shadow:none!important;padding:0!important}
+html.b-legacy main.saek-hub :is(.hub-action,.eop-shortcuts a,.hub-resources>summary) strong{display:block;color:var(--ink)!important;font-size:16px!important;font-weight:600!important}
+html.b-legacy main.saek-hub :is(.hub-action,.eop-shortcuts a,.hub-resources>summary) small{display:block;color:var(--muted)!important;font-size:14px!important;font-weight:400!important}
+html.b-legacy main.saek-hub :is(.hub-action-arrow,.hub-resources-chevron){margin-left:auto;color:var(--muted)!important}
+html.b-legacy main.saek-hub .eop-shortcuts{display:grid!important;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0!important}
+@media (max-width:720px){html.b-legacy main.saek-hub .eop-shortcuts{grid-template-columns:1fr}}
+html.b-legacy main.saek-hub .eop-shortcuts a{justify-content:space-between}
+html.b-legacy main.saek-hub>footer{order:99}
+html.b-legacy main.saek-hub>:is(.course-sources,details.hub-resources:last-of-type){order:98}
+html.b-legacy .saek-gallery-card :is(p,small){opacity:1!important}
