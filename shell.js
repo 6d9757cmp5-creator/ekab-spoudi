@@ -206,7 +206,7 @@ function features(){
  add('study-scheduler.js');              // dated retrieval practice used by reminders and the plan
  add('study-resume.js?v=27.1.109');      // "continue where you left off" history
  add('services/recall/popup.mjs',true);  // review reminders from chapters already read
- add('updates.js?v=27.1.180');           // offline updates; loads the account and device sync
+ add('updates.js?v=27.1.181');           // offline updates; loads the account and device sync
 }
 
 /* SAEK lesson pages: one chapter at a time with its own video (EKAB_LESSON_VIDEOS) above the text.
