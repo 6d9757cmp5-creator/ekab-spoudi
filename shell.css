@@ -622,5 +622,42 @@ a.w:active{transform:scale(.98)}
 @media (max-width:720px){.b-seg{display:flex;width:100%}.b-seg [role=tab]{flex:1;padding:0 8px;font-size:14px}}
 
 /* Back button from navigation.js: not on the five section pages; elsewhere a quiet pill */
-.b-hubpage [data-ekab-back]{display:none!important}
-[data-ekab-back]{min-height:36px!important;padding:0 14px!important;border:0!important;border-radius:999px!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;font:500 14px/1 inherit!important;box-shadow:none!important}
+/* The top-bar "‹ Parent" replaces the in-page back button everywhere */
+[data-ekab-back]{display:none!important}
+.b-back{display:inline-flex;align-items:center;gap:2px;min-height:44px;padding:0 10px 0 4px;border-radius:var(--radius-in);color:var(--link)!important;text-decoration:none!important;font-size:16px;font-weight:500;white-space:nowrap;flex:none}
+.b-back:hover{background:rgba(118,118,128,.12)}
+.b-back svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:720px){.b-has-back .b-brand{display:none}.b-back{padding-right:6px}.b-back span{max-width:28vw;overflow:hidden;text-overflow:ellipsis}}
+
+/* Phone top bar: search as an icon; tapping it opens the field across the bar */
+.b-search-btn,.b-search-cancel{display:none}
+@media (max-width:720px){
+ .b-search{display:none}
+ .b-search-btn{display:grid}
+ .b-tools{margin-left:auto}
+ .b-top.b-searching .b-search{display:block;position:absolute;inset:0;z-index:2;display:flex;align-items:center;gap:8px;padding:0 8px 0 12px;background:var(--raise)}
+ .b-top.b-searching .b-search svg{left:24px;top:auto}
+ .b-top.b-searching .b-search input{flex:1;padding-left:36px!important;padding-right:12px!important}
+ .b-top.b-searching .b-search-cancel{display:block;min-height:44px;padding:0 8px;border:0;background:none;color:var(--link);font-size:16px;cursor:pointer}
+ .b-top.b-searching .b-results{top:var(--top)}
+}
+
+/* Quick access in the side menu reads like the rest of the menu */
+.b-side .ekab-quick-links a{display:flex!important;align-items:center;min-height:44px;padding:8px 12px!important;border-radius:var(--radius-in);color:var(--ink)!important;font-size:15px!important;font-weight:400!important;text-decoration:none!important;background:none!important;border:0!important;box-shadow:none!important}
+.b-side .ekab-quick-links a:hover{background:var(--raise)!important}
+.b-side .ekab-quick-access{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+
+/* Semester filter as a segmented control, like the Study tabs */
+.b-tabs{display:inline-flex;flex-wrap:nowrap;max-width:100%;overflow-x:auto;gap:0;padding:3px;border-radius:12px;background:rgba(118,118,128,.12);scrollbar-width:none}
+.b-tabs button{flex:none;min-height:40px;border:0!important;border-radius:9px!important;background:none!important;color:var(--ink)!important;font-weight:500}
+.b-tabs button[aria-pressed="true"]{background:var(--raise)!important;box-shadow:0 1px 4px rgba(0,0,0,.12);font-weight:600}
+@media (max-width:720px){.b-tabs{display:flex;width:100%}.b-tabs button{flex:1;padding:0 6px;font-size:13px}}
+
+/* Shell chrome stays above anything a page positions on its own */
+.b-top,.b-tabbar{z-index:1000}
+.b-side{z-index:990}
+.b-toast{z-index:1020}
+@media (max-width:720px){.b-side{z-index:1010}.b-open .b-backdrop{z-index:1005}}
+.b-tabs .sem-word{font-weight:inherit}
+@media (max-width:720px){.b-tabs .sem-word{display:none}}

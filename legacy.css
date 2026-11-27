@@ -72,3 +72,6 @@ html.b-legacy[data-theme="dark"],html.b-legacy[data-theme="dark"] body{--accent:
 html.b-legacy :is(.btn,button.btn,a.btn){background:var(--accent)!important;color:var(--accent-ink)!important}
 html.b-legacy .b-brand,html.b-legacy .b-brand span{color:var(--ink)!important}
 html.b-legacy .b-btn{color:var(--accent-ink)!important}
+
+/* The top-bar "‹ Parent" does the breadcrumb's job */
+html.b-legacy .reader-breadcrumb{display:none!important}

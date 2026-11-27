@@ -4,7 +4,7 @@
 import { heraklionOnDuty } from './services/on-duty/heraklion.mjs';
 import { weakestStudyArea } from './services/progress/study-pulse.mjs';
 import { STORAGE_KEY, EXAM_TYPES, SAEK_COURSES, parseExams, daysUntil, examItems, buildPlan } from './services/study-plan/plan.mjs';
-import { store, esc } from './shell.js?v=8';
+import { store, esc } from './shell.js?v=10';
 import { TOOLS } from './home-tools.js?v=2';
 
 const $ = (s, r = document) => r.querySelector(s);

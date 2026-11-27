@@ -81,12 +81,16 @@ export function shell(current,opts={}){
  <a class="b-brand" href="index.html" aria-label="ΕΚΑΒ Σπουδή, αρχική"><img src="./icon.svg" alt=""><span>ΕΚΑΒ Σπουδή</span></a>
  <div class="b-search" role="search">${svg('search')}<label class="sr-only" for="b-q">Αναζήτηση σε όλη την εφαρμογή</label>
   <input id="b-q" type="search" role="combobox" aria-autocomplete="list" placeholder="Αναζήτηση σε όλη την εφαρμογή" autocomplete="off" aria-controls="b-res" aria-expanded="false">
-  <kbd class="b-kbd" aria-hidden="true">Ctrl K</kbd><ul class="b-results" id="b-res" role="listbox" hidden></ul></div>
- <div class="b-tools"><button class="b-icon" type="button" data-theme-toggle></button><button class="b-icon b-account" type="button" data-account-open aria-label="Λογαριασμός και συγχρονισμός" title="Λογαριασμός">${svg('user')}</button></div>`;
+  <kbd class="b-kbd" aria-hidden="true">Ctrl K</kbd><button class="b-search-cancel" type="button">Άκυρο</button><ul class="b-results" id="b-res" role="listbox" hidden></ul></div>
+ <div class="b-tools"><button class="b-icon b-search-btn" type="button" aria-label="Αναζήτηση">${svg('search')}</button><button class="b-icon" type="button" data-theme-toggle></button><button class="b-icon b-account" type="button" data-account-open aria-label="Λογαριασμός και συγχρονισμός" title="Λογαριασμός">${svg('user')}</button></div>`;
  const side=document.createElement('nav');side.className='b-side';side.id='b-side';side.setAttribute('aria-label','Κύριο μενού');
  const sec=current||SECTION[here]||here;
  // The five section pages need no back button (the menu and tab bar are there).
- document.documentElement.classList.toggle('b-hubpage',NAV.some(([h])=>h===here));
+ const hub=NAV.some(([h])=>h===here);
+ document.documentElement.classList.toggle('b-hubpage',hub);
+ // Inner pages: "‹ Parent" at the top left, as in iOS navigation bars.
+ const PARENT={'courses.html':['study.html','Μελέτη']};
+ const parent=PARENT[here]||(/^saek-course-\d\d\.html$/.test(here)?['courses.html','Μαθήματα']:null)||(()=>{const s=SECTION[here]||current;const n=NAV.find(([h])=>h===s);return n?[n[0],n[2]]:null})();
  const item=([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
  side.innerHTML=NAV.map(item).join('')+
   `<div class="b-side-sub"><a href="study-plan.html"${here==='study-plan.html'?' aria-current="page"':''}>${svg('cal')}Ημερολόγιο εξετάσεων</a><button type="button" class="b-side-btn" data-account-open>${svg('user')}Λογαριασμός</button></div>`+
@@ -96,6 +100,14 @@ export function shell(current,opts={}){
  const tabs=document.createElement('nav');tabs.className='b-tabbar';tabs.setAttribute('aria-label','Ενότητες');
  tabs.innerHTML=NAV.map(([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}<span>${label}</span></a>`).join('');
  const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='b-backdrop';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Κλείσιμο μενού');
+ if(!hub&&parent){
+  const back=document.createElement('a');back.className='b-back';back.href=parent[0];
+  back.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg><span>${parent[1]}</span>`;
+  back.setAttribute('aria-label','Πίσω: '+parent[1]);
+  // Return to the exact place when the previous page was in the app; otherwise open the parent page.
+  back.addEventListener('click',e=>{try{if(history.length>1&&document.referrer&&new URL(document.referrer).origin===location.origin){e.preventDefault();history.back()}}catch(_){}});
+  top.querySelector('.b-brand').after(back);document.documentElement.classList.add('b-has-back');
+ }
  document.body.prepend(top,side,backdrop);document.body.append(tabs);
  if(!opts.legacy)features();else{const n=document.createElement('script');n.src=new URL('quick-access.js?v=20261122-1',import.meta.url).href;n.defer=true;document.body.append(n)}
 
@@ -142,7 +154,13 @@ export function shell(current,opts={}){
   sel=-1;
  };
  res.addEventListener('click',e=>{if(e.target.closest('[data-lexicon]')){close();window.EkabOpenMedicalGlossary?.()}});
- document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();q.focus();q.select()}});
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+ // Phones: a search icon opens the field across the whole bar; "Άκυρο" closes it.
+ const openSearch=()=>{top.classList.add('b-searching');q.focus();q.select()};
+ const closeSearch=()=>{top.classList.remove('b-searching');close();q.blur()};
+ top.querySelector('.b-search-btn').addEventListener('click',openSearch);
+ top.querySelector('.b-search-cancel').addEventListener('click',closeSearch);
+ q.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch()});
  q.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(run,120)});
  q.addEventListener('focus',()=>{if(q.value.trim().length>1)run()});
  q.addEventListener('keydown',e=>{
