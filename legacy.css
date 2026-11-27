@@ -161,35 +161,49 @@ html.b-legacy :is(.learning-tabs,.practical-audit-summary){display:none!importan
 /* Bibliography: the counts of the internal source review are not for students */
 html.b-legacy :is(.sources-summary,.sources-summary+.sources-filters~p.muted.small){display:none!important}
 
-/* Lesson pages: title row, then video and chapter text in the first screen
-   (side by side on wide screens, video then text on phones). Lessons change with the arrows or by scrolling. */
-html.b-legacy body>main.reader-main:has(.saek-series){max-width:1320px!important}
-html.b-legacy main.reader-main>section.panel:not(.saek-series):not(.course-sources){background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 12px!important}
-html.b-legacy main.reader-main>section.panel:not(.saek-series):not(.course-sources) :is(.eyebrow,.subtitle,.saek-source-actions .small.muted,#saek-course-videos-shortcut){display:none!important}
-html.b-legacy main.reader-main>section.panel:not(.saek-series):not(.course-sources){display:flex!important;flex-wrap:wrap;align-items:center;gap:8px 12px}
+/* Lesson pages (Apple-style reader): one column, one chapter at a time.
+   Title row with the chapter menu, then the chapter's title, its video, its text and Previous/Next. */
+html.b-legacy body>main.reader-main:has(.reader-chapters){max-width:780px!important}
+html.b-legacy main.reader-main .saek-series{display:none!important}
+html.b-legacy main.reader-main>section.panel:not(.course-sources):not(.saek-series){display:flex!important;flex-wrap:wrap;align-items:center;gap:8px 12px;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 16px!important}
+html.b-legacy main.reader-main>section.panel:not(.course-sources):not(.saek-series) :is(.eyebrow,.subtitle,.saek-source-actions .small.muted,#saek-course-videos-shortcut){display:none!important}
 html.b-legacy main.reader-main .saek-lesson-heading{display:flex!important;align-items:center;gap:12px;flex:1 1 auto;margin:0!important}
 html.b-legacy main.reader-main .saek-lesson-heading .reader-title{margin:0!important;font-size:clamp(22px,3vw,28px)!important}
 html.b-legacy main.reader-main .saek-source-actions{display:flex!important;gap:8px;margin:0!important;padding:0!important;border:0!important;background:none!important}
 html.b-legacy main.reader-main :is(.saek-compact-toc>summary,.saek-source-action){min-height:40px!important;display:inline-flex!important;align-items:center;padding:0 14px!important;border:0!important;border-radius:999px!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;font-size:14px!important;font-weight:500!important;text-decoration:none!important;box-shadow:none!important}
-html.b-legacy main.reader-main .saek-series>:is(.eyebrow,h2,.saek-series-intro,p.small.muted){display:none!important}
-html.b-legacy main.reader-main .saek-series{padding:14px!important;margin:0!important}
-html.b-legacy main.reader-main .saek-series-kicker{margin:0!important;font-size:13px!important}
-html.b-legacy main.reader-main .saek-series-slide h3{margin:2px 0 8px!important;font-size:17px!important}
-html.b-legacy main.reader-main .saek-series-frame{width:100%!important;max-height:46vh;background:#000;border-radius:var(--radius-in)}
-@media (min-width:1100px){
- html.b-legacy main.reader-main:has(.saek-series){display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 20px;align-items:start}
- html.b-legacy main.reader-main:has(.saek-series)>*{grid-column:1/-1}
- html.b-legacy main.reader-main:has(.saek-series)>.saek-series{grid-column:1;position:sticky;top:calc(var(--top) + 12px)}
- html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters{grid-column:2;margin:0!important}
- html.b-legacy main.reader-main .saek-series-frame{max-height:calc(100vh - var(--top) - 230px)}
-}
-@media (max-width:720px){html.b-legacy main.reader-main .saek-series-frame{max-height:34vh}html.b-legacy main.reader-main .saek-series{padding:10px!important}}
-html.b-legacy main.reader-main .saek-series-frame{aspect-ratio:16/9;height:auto!important;object-fit:contain}
-@media (max-width:720px){html.b-legacy main.reader-main .saek-series-frame{max-height:none}}
-@media (min-width:1100px){
- /* In the text column a chapter reads in one column: images follow the text */
- html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters :is(.saek-study-split,.reader-layout){display:block!important}
- html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters .saek-study-images{margin-top:16px;max-width:none!important;width:auto!important}
- html.b-legacy main.reader-main:has(.saek-series)>.reader-chapters .reader-main{max-width:none!important;width:auto!important}
-}
-html.b-legacy main.reader-main .saek-series-slide .saek-series-frame{height:auto!important;min-height:0!important;aspect-ratio:16/9!important}
+html.b-legacy main.reader-main .saek-compact-toc{position:relative}
+html.b-legacy main.reader-main .saek-compact-toc[open] .chapter-toc-links{position:absolute;z-index:40;top:calc(100% + 6px);left:0;width:min(360px,calc(100vw - 32px));max-height:60vh;overflow:auto;padding:6px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);box-shadow:0 16px 40px rgba(0,0,0,.18)}
+html.b-legacy main.reader-main .chapter-toc-links a{display:block;padding:10px 12px;border-radius:var(--radius-in);color:var(--ink)!important;text-decoration:none!important;font-size:15px}
+html.b-legacy main.reader-main .chapter-toc-links a:hover,html.b-legacy main.reader-main .chapter-toc-links a[aria-current="true"]{background:var(--accent-soft)}
+/* only the open chapter is shown; its header is a title, not a toggle */
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold:not([open]){display:none!important}
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold[open]>summary{pointer-events:none;list-style:none}
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold[open]>summary::-webkit-details-marker{display:none}
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold[open]>summary::after{display:none!important}
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold[open]>summary :is(.chapter-heading){font-size:20px;font-weight:600}
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold{border:0!important;box-shadow:none!important;background:none!important}
+html.b-legacy main.reader-main .reader-chapters>details.reader-fold>.body{padding:0!important}
+html.b-legacy main.reader-main .reader-chapters :is(.saek-study-split,.reader-layout){display:block!important}
+html.b-legacy main.reader-main .reader-chapters .reader-main{max-width:none!important;width:auto!important}
+html.b-legacy main.reader-main .b-lesson-video{margin:4px 0 16px}
+html.b-legacy main.reader-main .b-lesson-video video{display:block;width:100%;aspect-ratio:16/9;height:auto;background:#000;border-radius:var(--radius-in)}
+html.b-legacy main.reader-main .b-lesson-video video{width:auto;max-width:100%;max-height:min(44vh,440px);margin:0 auto}
+/* Chapter reading order: video, text, SOS, images, 3D, more explanation, self-check, practice, sources, done + Previous/Next */
+html.b-legacy main.reader-main .reader-fold[open]>.body{display:flex!important;flex-direction:column;gap:12px}
+html.b-legacy main.reader-main .reader-fold[open]>.body :is(.reader-layout,.reader-layout>.reader-main,.saek-study-split,.saek-study-text){display:contents!important}
+html.b-legacy main.reader-main .reader-fold .b-lesson-video{order:0}
+html.b-legacy main.reader-main .reader-fold .reader-paragraph{order:1;margin:0!important}
+html.b-legacy main.reader-main .reader-fold .lesson-sos{order:2;margin:0!important}
+html.b-legacy main.reader-main .reader-fold .saek-study-images{order:3;margin:0!important;position:static!important}
+html.b-legacy main.reader-main .reader-fold .saek-anatomy-jump{order:4;margin:0!important}
+html.b-legacy main.reader-main .reader-fold .lesson-more{order:5;margin:0!important}
+html.b-legacy main.reader-main .reader-fold .knowledge-check{order:6;margin:0!important}
+html.b-legacy main.reader-main .reader-fold .atlas-chapter-practice{order:7;margin:0!important}
+html.b-legacy main.reader-main .reader-fold :is(.compact-sources,.chapter-source-note){order:8;margin:0!important}
+html.b-legacy main.reader-main .reader-fold .reader-actions{order:9;margin:8px 0 0!important}
+/* the video's own controls are enough */
+html.b-legacy main.reader-main .b-lesson-video .ekab-video-controls,html.b-legacy main.reader-main .b-lesson-video+.ekab-video-controls{display:none!important}
+/* sources once per chapter; "next course" only on the last chapter */
+html.b-legacy main.reader-main>.course-sources{display:none!important}
+html.b-legacy main.reader-main .course-pagination{display:none!important}
+html.b-legacy main.reader-main:has(.reader-chapters>details.reader-fold:last-child[open]) .course-pagination{display:flex!important}

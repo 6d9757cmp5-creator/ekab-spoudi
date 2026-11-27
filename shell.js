@@ -70,6 +70,7 @@ const currentTheme=()=>document.documentElement.dataset.theme||(matchMedia('(pre
 export function legacy(current){
  document.documentElement.classList.add('b-legacy');
  shell(current,{legacy:true});
+ lessonReader();
 
 }
 
@@ -189,4 +190,35 @@ function features(){
  add('study-resume.js?v=27.1.109');      // "continue where you left off" history
  add('services/recall/popup.mjs',true);  // review reminders from chapters already read
  add('updates.js?v=27.1.180');           // offline updates; loads the account and device sync
+}
+
+/* SAEK lesson pages: one chapter at a time with its own video (EKAB_LESSON_VIDEOS) above the text.
+   The separate video carousel is hidden; Previous/Next at the end of each chapter and the chapter menu move between chapters. */
+function lessonReader(){
+ const m=/^saek-course-(\d\d)\.html$/.exec(relPath());if(!m)return;
+ const cid=m[1],folds=[...document.querySelectorAll('details.reader-fold[id^="lesson-"]')];if(!folds.length)return;
+ const total=folds.length,label=document.querySelector('.saek-compact-toc>summary');
+ const pics=document.querySelector('#saek-course-images-shortcut .saek-source-action');if(pics)pics.textContent=pics.textContent.replace(/^.*?\((\d+)\).*$/,'Εικόνες ($1)');
+ const addVideo=f=>{
+  if(f.querySelector('.b-lesson-video'))return;
+  const n=f.id.slice(7),url=window.EKAB_LESSON_VIDEOS?.[`${cid}-${n}`];if(!url)return;
+  const fig=document.createElement('figure');fig.className='b-lesson-video';
+  const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='metadata';v.src=url;
+  v.setAttribute('aria-label','Βίντεο κεφαλαίου '+n);fig.append(v);
+  (f.querySelector('.body')||f).prepend(fig);
+ };
+ const show=f=>{
+  for(const o of folds)if(o!==f&&o.open){o.open=false;o.querySelector('.b-lesson-video video')?.pause()}
+  addVideo(f);
+  if(label)label.textContent=`Κεφάλαιο ${f.id.slice(7)} από ${total}`;
+  for(const a of document.querySelectorAll('.chapter-toc-links a'))a.setAttribute('aria-current',String(a.getAttribute('href')==='#'+f.id));
+ };
+ folds.forEach(f=>f.addEventListener('toggle',()=>{if(f.open)show(f)}));
+ // A chapter link (menu, Previous/Next, search result) opens that chapter at the top of the page.
+ const open=id=>{const f=document.getElementById(id);if(!f)return;f.open=true;show(f);document.querySelector('.saek-compact-toc')?.removeAttribute('open');scrollTo({top:0})};
+ addEventListener('hashchange',()=>{if(/^#lesson-\d+$/.test(location.hash))open(location.hash.slice(1))});
+ const start=(/^#lesson-\d+$/.test(location.hash)&&document.getElementById(location.hash.slice(1)))||folds.find(f=>f.open)||folds[0];
+ start.open=true;show(start);
+ // saek-videos.js may load after this runs: add the video once the list is there.
+ if(!window.EKAB_LESSON_VIDEOS){let tries=0;const t=setInterval(()=>{if(window.EKAB_LESSON_VIDEOS||++tries>40){clearInterval(t);const f=folds.find(x=>x.open);if(f)addVideo(f)}},250)}
 }
