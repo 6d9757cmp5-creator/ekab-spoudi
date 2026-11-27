@@ -13,7 +13,7 @@
 
  const chip=document.createElement('button');
  chip.type='button';chip.className='ekab-shift-chip';chip.hidden=true;chip.setAttribute('aria-expanded','false');chip.setAttribute('aria-controls','ekabShiftPlaces');
- chip.innerHTML='<span class="ekab-shift-dot" aria-hidden="true"></span><span class="ekab-shift-label">Βάρδια</span><span class="ekab-shift-station" aria-hidden="true"></span>';
+ chip.innerHTML='<span class="ekab-shift-dot" aria-hidden="true"></span><span class="ekab-shift-label"></span><span class="ekab-shift-station" aria-hidden="true"></span>';
  const list=document.createElement('div');
  list.className='ekab-shift-places';list.id='ekabShiftPlaces';list.hidden=true;list.setAttribute('role','status');
  const wrap=document.createElement('div');wrap.className='ekab-shift-wrap';wrap.append(chip,list);
@@ -33,6 +33,7 @@
  const render=data=>{
   if(!data||!Number.isFinite(data.total)||data.total<1){chip.hidden=true;setOpen(false);return}
   stations=(data.places||[]).map(([place,n])=>`${place} ${n}`);if(!stations.length)stations=[String(data.total)];
+  chip.querySelector('.ekab-shift-label').textContent=data.total+' σε βάρδια';
   rotate(false);
   const rows=(data.places||[]).map(([place,n])=>`<li><span>${place.replace(/[<>&]/g,'')}</span><b>${n}</b></li>`).join('');
   list.innerHTML=`<p>${data.total===1?'1 άτομο':data.total+' άτομα'} στην εφαρμογή τώρα</p><ul>${rows}</ul><small>Περιοχή από τη σύνδεση, χωρίς ονόματα.</small>`;

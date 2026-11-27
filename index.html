@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="./radio.css?v=20261122-1">
 <link rel="stylesheet" href="./radio-channels.css?v=20261122-1">
-<link rel="stylesheet" href="shell.css?v=2">
+<link rel="stylesheet" href="shell.css?v=3">
 <link rel="stylesheet" href="shell-radio.css?v=1">
 </head>
 <body class="b-home">
@@ -27,9 +27,10 @@
     <button class="lb-icon" type="button" data-gps-copy aria-label="Αντιγραφή συντεταγμένων" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
     <button class="lb-icon" type="button" data-gps-refresh aria-label="Ανανέωση θέσης"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button>
    </div>
-   <div class="lb-item lb-shift" hidden>
-    <span class="w-live" aria-hidden="true"></span>
-    <span class="lb-text"><b data-shift-total></b> <span data-shift-places></span></span>
+   <div class="lb-item lb-duty">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6M12 7v4M10 9h4"/></svg>
+    <span class="lb-text"><b>Εφημερία</b> <span data-duty-name>…</span> · <span data-duty-left></span></span>
+    <a class="lb-icon lb-call" data-duty-call href="#" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.8L8.5 11a16 16 0 0 0 4.4 4.4l1.6-1.5a2 2 0 0 1 1.7-.6l3.1.5a2 2 0 0 1 1.7 2z"/></svg></a>
    </div>
   </section>
   <div class="b-toast" role="status" aria-live="polite" hidden></div>
@@ -40,31 +41,18 @@
    </div>
   </section>
 
-  <section class="b-tiles" aria-label="Ζωντανές πληροφορίες">
-   <article class="w w-duty" data-tile="duty">
-    <h2 class="w-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6M12 7v4M10 9h4"/></svg>Εφημερία Ηρακλείου</h2>
-    <p class="w-big">…</p>
-    <p class="w-sub">Φόρτωση προγράμματος</p>
-    <div class="w-bar" aria-hidden="true"><i></i></div>
-    <a class="w-call" href="#" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.8L8.5 11a16 16 0 0 0 4.4 4.4l1.6-1.5a2 2 0 0 1 1.7-.6l3.1.5a2 2 0 0 1 1.7 2z"/></svg></a>
-   </article>
-   <article class="w w-streak" data-tile="streak">
-    <h2 class="w-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/></svg>Συνέπεια μελέτης</h2>
-    <p><span class="w-num">0</span></p>
-    <p class="w-unit">ημέρες στη σειρά</p>
-    <div class="w-week" role="img"></div>
-   </article>
-   <article class="w w-cal-tile" data-tile="cal">
-    <h2 class="w-head"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="w-month">Ημερολόγιο</span><a class="w-edit" href="./study-plan.html">Πρόγραμμα</a></h2>
-    <div class="w-cal"></div>
-    <p class="w-next"></p>
-   </article>
-   <a class="w w-pulse" data-tile="pulse" href="./practice.html">
-    <h2 class="w-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>Παλμός μελέτης</h2>
-    <span class="w-ring" role="img" aria-label="Ποσοστό σωστών στο πιο αδύναμο σημείο"><b>—</b></span>
-    <p class="w-sub"></p>
-   </a>
+  <section class="b-section" aria-labelledby="w-h">
+   <div class="b-row"><h2 id="w-h">Τα widget μου</h2><button class="b-btn ghost b-edit" type="button" data-widgets-edit>Επεξεργασία</button></div>
+   <div class="b-tiles"></div>
   </section>
+  <dialog class="b-sheet" id="widgets-sheet" aria-labelledby="ws-h">
+   <div class="ws-head"><h2 id="ws-h">Widget αρχικής</h2><button class="b-btn" type="button" data-close>Τέλος</button></div>
+   <h3>Στην αρχική</h3>
+   <ul class="ws-list ws-on"></ul>
+   <h3>Πρόσθεσε</h3>
+   <ul class="ws-list ws-off"></ul>
+   <button class="ws-reset" type="button" data-reset>Επαναφορά βασικών</button>
+  </dialog>
 
 
  </div>
@@ -92,8 +80,8 @@ paint();
 addEventListener('storage',paint);addEventListener('pageshow',paint);
 
 </script>
-<script type="module" src="home-widgets.js?v=2"></script>
-<script src="./shift-presence.js?v=20261127-7" defer></script>
+<script type="module" src="home-widgets.js?v=3"></script>
+<script src="./shift-presence.js?v=20261127-8" defer></script>
 <script src="./radio-config.js?v=20261122-1" defer></script>
 <script src="./radio-widget-loader.js?v=20261122-2" defer></script>
 <script src="updates.js?v=27.1.180" defer></script>
