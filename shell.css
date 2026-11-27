@@ -612,8 +612,15 @@ a.w:active{transform:scale(.98)}
 @media (max-width:900px){.b-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.b-feature{padding:16px 18px;gap:12px}.b-meter-lg{display:none}.b-cards,.b-cards-sm{grid-template-columns:1fr 1fr;gap:10px}.b-cards a{padding:14px}.b-jump{margin-top:-4px}}
 
-/* Proposed for removal: orange until the user decides */
-.w-review{border:2px solid #ff9500!important}
-.w-review::before{content:"Πρόταση αφαίρεσης";position:absolute;top:10px;right:12px;padding:2px 8px;border-radius:999px;background:#ff9500;color:#000;font-size:12px;font-weight:600}
-.ws-off li:has(.ws-add) .ws-t b{color:inherit}
-.ws-group:last-of-type{color:#c93400}
+
+/* Segmented control (iOS style) for one section at a time */
+.b-seg{display:inline-flex;max-width:100%;overflow-x:auto;margin:-8px 0 24px;padding:3px;border-radius:12px;background:rgba(118,118,128,.12);scrollbar-width:none}
+.b-seg [role=tab]{flex:none;min-height:40px;padding:0 18px;border:0;border-radius:9px;background:none;color:var(--ink);font-size:15px;font-weight:500;cursor:pointer;transition:background .15s ease-out,box-shadow .15s ease-out}
+.b-seg [aria-selected=true]{background:var(--raise);box-shadow:0 1px 4px rgba(0,0,0,.12);font-weight:600}
+.b-hub[hidden]{display:none}
+.b-hub:not([hidden]){animation:b-rise .3s ease-out}
+@media (max-width:720px){.b-seg{display:flex;width:100%}.b-seg [role=tab]{flex:1;padding:0 8px;font-size:14px}}
+
+/* Back button from navigation.js: not on the five section pages; elsewhere a quiet pill */
+.b-hubpage [data-ekab-back]{display:none!important}
+[data-ekab-back]{min-height:36px!important;padding:0 14px!important;border:0!important;border-radius:999px!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;font:500 14px/1 inherit!important;box-shadow:none!important}

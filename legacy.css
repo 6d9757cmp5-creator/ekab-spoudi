@@ -1,15 +1,8 @@
 /* The new shell around an existing page: its own top bar, side menu and tab bar replace the old ones,
    and the old colour tokens point at the shell's, so every page keeps its features and gains the new look. */
 
-/* Old chrome that the new top bar and menu duplicate: moved into one orange box at the top of the page
-   (links keep working) until the user decides what goes. */
-html.b-legacy .b-review{max-width:1040px;margin:0 auto 16px;padding:12px 14px;border:2px solid #ff9500;border-radius:14px;background:rgba(255,149,0,.08)}
-html.b-legacy .b-review>p{margin:0 0 8px;font-size:14px;font-weight:600;color:var(--ink)}
-html.b-legacy .b-review>p span{display:inline-block;margin-right:8px;padding:2px 10px;border-radius:999px;background:#ff9500;color:#000}
-html.b-legacy .b-review>*:not(p){position:static!important;inset:auto!important;transform:none!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;margin:6px 0 0!important;padding:6px!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;border:1px dashed rgba(255,149,0,.6)!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;z-index:auto!important}
-html.b-legacy .b-review :is(a,button){min-height:40px!important;width:auto!important;height:auto!important}
-html.b-legacy .b-review .container{display:flex;flex-wrap:wrap;gap:8px;align-items:center;max-width:none;padding:0}
-html.b-legacy .sidebar-beta-mobile-toggle,html.b-legacy .sidebar-beta-backdrop{display:none!important}
+/* Old menus and headers: the new top bar, side menu and tab bar replace them */
+html.b-legacy :is(.v6-global-topbar,.v6-global-sidebar,.style-preview-nav,body>header.top,.saek-header-back,body>nav.nav,#sidebar,.sidebar-beta-mobile-toggle,.sidebar-beta-backdrop){display:none!important}
 
 /* Room for the top bar and the side menu */
 html.b-legacy body{padding:var(--top) 0 0 var(--side)!important;margin:0!important;background:var(--bg)!important;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -79,10 +72,3 @@ html.b-legacy[data-theme="dark"],html.b-legacy[data-theme="dark"] body{--accent:
 html.b-legacy :is(.btn,button.btn,a.btn){background:var(--accent)!important;color:var(--accent-ink)!important}
 html.b-legacy .b-brand,html.b-legacy .b-brand span{color:var(--ink)!important}
 html.b-legacy .b-btn{color:var(--accent-ink)!important}
-html.b-legacy .style-preview-nav{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:10px!important;overflow:visible!important;z-index:1!important}
-html.b-legacy .style-preview-nav::before{flex-basis:100%}
-html.b-legacy .style-preview-nav a{width:auto!important;height:auto!important;min-height:44px}
-html.b-legacy .b-review :is(nav,div,aside,ul,section){position:static!important;inset:auto!important;transform:none!important;height:auto!important;min-height:0!important;max-height:none!important;width:auto!important}
-html.b-legacy .b-review :is(nav,ul,.v6-shell-nav,.v6-global-sidebar>div){display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important}
-html.b-legacy .b-review a{flex:0 0 auto!important}
-html.b-legacy .b-review :is(aside,nav,div,a,button,span){visibility:visible!important;opacity:1!important}

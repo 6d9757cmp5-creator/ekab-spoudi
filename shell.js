@@ -70,21 +70,7 @@ const currentTheme=()=>document.documentElement.dataset.theme||(matchMedia('(pre
 export function legacy(current){
  document.documentElement.classList.add('b-legacy');
  shell(current,{legacy:true});
- // The page's own menus and headers duplicate the new ones. Nothing is removed: whatever the page shows is moved
- // into one orange box at the top, marked as a proposal, until the user decides. Some of them are built after load.
- const OLD=['.v6-global-topbar','.v6-global-sidebar','.style-preview-nav','body>header.top','.saek-header-back','body>nav.nav'];
- let box=null;
- const collect=()=>{
-  const found=OLD.map(s=>document.querySelector(s)).filter(n=>n&&!n.closest('.b-review')&&getComputedStyle(n).display!=='none');
-  if(!found.length)return;
-  if(!box){box=document.createElement('section');box.className='b-review';box.setAttribute('aria-label','Πρόταση αφαίρεσης');box.innerHTML='<p><span>Πρόταση αφαίρεσης</span>Τα παλιά μενού αυτής της σελίδας, διπλά με το νέο. Δουλεύουν κανονικά· πες μου αν θα φύγουν.</p>'}
-  box.append(...found);
-  const main=document.querySelector('.v6-global-main main,body>main,body>.maincol,main');
-  if(main&&!box.isConnected)main.before(box);
- };
- collect();document.addEventListener('ekab:v6-shell-ready',collect);
- const mo=new MutationObserver(collect);mo.observe(document.body,{childList:true,subtree:false});setTimeout(()=>mo.disconnect(),10000);
- addEventListener('load',collect);
+
 }
 
 export function shell(current,opts={}){
@@ -99,6 +85,8 @@ export function shell(current,opts={}){
  <div class="b-tools"><button class="b-icon" type="button" data-theme-toggle></button><button class="b-icon b-account" type="button" data-account-open aria-label="Λογαριασμός και συγχρονισμός" title="Λογαριασμός">${svg('user')}</button></div>`;
  const side=document.createElement('nav');side.className='b-side';side.id='b-side';side.setAttribute('aria-label','Κύριο μενού');
  const sec=current||SECTION[here]||here;
+ // The five section pages need no back button (the menu and tab bar are there).
+ document.documentElement.classList.toggle('b-hubpage',NAV.some(([h])=>h===here));
  const item=([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
  side.innerHTML=NAV.map(item).join('')+
   `<div class="b-side-sub"><a href="study-plan.html"${here==='study-plan.html'?' aria-current="page"':''}>${svg('cal')}Ημερολόγιο εξετάσεων</a><button type="button" class="b-side-btn" data-account-open>${svg('user')}Λογαριασμός</button></div>`+

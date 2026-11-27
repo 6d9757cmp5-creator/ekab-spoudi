@@ -8,7 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<link rel="stylesheet" href="shell.css?v=8">
+<link rel="stylesheet" href="shell.css?v=10">
 </head>
 <body>
 <main class="b-main" id="main">
@@ -16,11 +16,14 @@
   <h1>Μελέτη</h1>
   <p class="b-lead">Όλη η ύλη σε ένα σημείο: ΣΑΕΚ, πιστοποίηση ΕΟΠΠΕΠ και σεμινάρια.</p>
 
-  <nav class="b-jump" aria-label="Ενότητες μελέτης">
-   <a href="#saek">ΣΑΕΚ</a><a href="#eoppep">ΕΟΠΠΕΠ</a><a href="#seminars">Σεμινάρια</a><a href="#material">Υλικό</a>
-  </nav>
+  <div class="b-seg" role="tablist" aria-label="Ενότητες μελέτης">
+   <button type="button" role="tab" id="tab-saek" aria-controls="saek" aria-selected="true">ΣΑΕΚ</button>
+   <button type="button" role="tab" id="tab-eoppep" aria-controls="eoppep" aria-selected="false">ΕΟΠΠΕΠ</button>
+   <button type="button" role="tab" id="tab-seminars" aria-controls="seminars" aria-selected="false">Σεμινάρια</button>
+   <button type="button" role="tab" id="tab-material" aria-controls="material" aria-selected="false">Υλικό</button>
+  </div>
 
-  <section class="b-section b-hub" id="saek" aria-labelledby="saek-h">
+  <section class="b-section b-hub" id="saek" role="tabpanel" aria-labelledby="tab-saek" data-h="saek-h">
    <h2 id="saek-h">ΣΑΕΚ · Διασώστης – Πλήρωμα Ασθενοφόρου</h2>
    <a class="b-feature" href="courses.html">
     <span class="b-feature-text"><b>Μαθήματα ΣΑΕΚ</b><span id="saek-sum">20 μαθήματα σε 4 εξάμηνα · 247 κεφάλαια</span></span>
@@ -42,7 +45,7 @@
    </div>
   </section>
 
-  <section class="b-section b-hub" id="eoppep" aria-labelledby="eoppep-h">
+  <section class="b-section b-hub" id="eoppep" role="tabpanel" aria-labelledby="tab-eoppep" data-h="eoppep-h">
    <h2 id="eoppep-h">Πιστοποίηση ΕΟΠΠΕΠ</h2>
    <a class="b-feature" href="theory.html?view=catalog&amp;section=study">
     <span class="b-feature-text"><b>Κατάλογος και απαντήσεις</b><span>314 επίσημες ερωτήσεις · 105 γενικές και 209 ειδικές</span></span>
@@ -57,7 +60,7 @@
    </div>
   </section>
 
-  <section class="b-section b-hub" id="seminars" aria-labelledby="sem-h">
+  <section class="b-section b-hub" id="seminars" role="tabpanel" aria-labelledby="tab-seminars" data-h="sem-h">
    <h2 id="sem-h">Σεμινάρια</h2>
    <div class="b-cards b-cards-sm">
     <a href="seminar-prep.html?section=study#bls"><b>BLS / AED</b><span>Βασική υποστήριξη ζωής</span></a>
@@ -68,7 +71,7 @@
    </div>
   </section>
 
-  <section class="b-section b-hub" id="material" aria-labelledby="mat-h">
+  <section class="b-section b-hub" id="material" role="tabpanel" aria-labelledby="tab-material" data-h="mat-h">
    <h2 id="mat-h">Υλικό</h2>
    <ul class="b-list">
     <li><a href="ui-tools/anatomy-3d/index.html">3D Ανατομία<span>Τρισδιάστατα μοντέλα</span></a></li>
@@ -83,11 +86,20 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,readCount} from './shell.js?v=6';
+import {COURSES,shell,readCount,store} from './shell.js?v=8';
 shell();
-// Older links such as study.html?type=eoppep open the matching section.
-const type=new URLSearchParams(location.search).get('type');
-if(!location.hash&&['saek','eoppep','seminars'].includes(type))document.getElementById(type)?.scrollIntoView();
+// One section at a time. study.html?type=eoppep (older links) and the last tab used choose which.
+const TABS=['saek','eoppep','seminars','material'];
+const show=(id,push)=>{
+ for(const t of TABS){const on=t===id;document.getElementById('tab-'+t).setAttribute('aria-selected',String(on));document.getElementById('tab-'+t).tabIndex=on?0:-1;document.getElementById(t).hidden=!on}
+ store.set('ekab.study.tab',id);
+ if(push){const u=new URL(location.href);u.searchParams.set('type',id);u.hash='';history.replaceState(null,'',u)}
+};
+const asked=new URLSearchParams(location.search).get('type')||location.hash.slice(1);
+show(TABS.includes(asked)?asked:TABS.includes(store.get('ekab.study.tab'))?store.get('ekab.study.tab'):'saek');
+const seg=document.querySelector('.b-seg');
+seg.addEventListener('click',e=>{const b=e.target.closest('[role=tab]');if(b)show(b.id.slice(4),true)});
+seg.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;const i=TABS.indexOf(document.activeElement.id.slice(4)),n=TABS[(i+(e.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length];show(n,true);document.getElementById('tab-'+n).focus()});
 const paint=()=>{
  const total=COURSES.reduce((n,c)=>n+c.chapters,0),done=COURSES.reduce((n,c)=>n+readCount(c),0),pct=Math.round(done/total*100);
  document.getElementById('saek-sum').textContent=done?`${done} από ${total} κεφάλαια διαβασμένα · 20 μαθήματα`:`20 μαθήματα σε 4 εξάμηνα · ${total} κεφάλαια`;
