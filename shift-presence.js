@@ -40,7 +40,7 @@
   chip.hidden=false;
  };
  // The top bar is built by the page shell, sometimes after this script runs.
- const mount=()=>{const search=document.querySelector('.header-tools .global-search, .v6-global-topbar .v6-global-search');if(!search)return false;if(!wrap.isConnected)search.before(wrap);return true};
+ const mount=()=>{const search=document.querySelector('.header-tools .global-search, .v6-global-topbar .v6-global-search, .b-top .b-search');if(!search)return false;if(!wrap.isConnected)search.before(wrap);return true};
  if(!mount()){const mo=new MutationObserver(()=>{if(mount())mo.disconnect()});mo.observe(document.documentElement,{childList:true,subtree:true});setTimeout(()=>mo.disconnect(),15000)}
  // The home page rebuilds its top bar on navigation.
  window.addEventListener('ekab:home-ready',mount);window.addEventListener('hashchange',()=>setTimeout(mount,50));

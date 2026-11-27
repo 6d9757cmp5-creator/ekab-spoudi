@@ -215,3 +215,37 @@ button,input{font:inherit;color:inherit}
  *,*::before,*::after{animation:none!important;transition:none!important}
  ::view-transition-new(root){animation:none!important;clip-path:none!important}
 }
+
+/* Live cards on the home page (study pulse, Heraklion on-call hospital, GPS position) */
+.b-live{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.b-live-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);box-shadow:var(--shadow);min-width:0}
+.b-live-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:14px;color:var(--muted)}
+.b-live-head span:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+.b-live-head a{color:var(--link);text-decoration:none}
+.b-live-card h2{margin:0;font-size:17px;line-height:1.35;font-weight:600;letter-spacing:-.01em}
+.b-live-card p{margin:0;font-size:14px;color:var(--muted)}
+.b-live-card>.b-btn{align-self:flex-start;margin-top:auto}
+.b-live-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.b-live-actions .b-btn,.b-live-card .b-btn{min-height:44px;padding:8px 14px;font-size:14px}
+.b-live-actions [hidden],.b-live-card [hidden]{display:none!important}
+.b-live-status{font-size:14px}
+.b-live-src{font-size:14px}
+@media (max-width:1100px){.b-live{grid-template-columns:1fr 1fr}.b-live-card:last-child{grid-column:1/-1}}
+@media (max-width:720px){.b-live{grid-template-columns:1fr;gap:12px}}
+
+/* "Βάρδια" chip next to the search (shift-presence.js) */
+.ekab-shift-wrap{position:relative;flex:none}
+.ekab-shift-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:0;border-radius:var(--radius-in);background:rgba(118,118,128,.12);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.ekab-shift-chip[hidden]{display:none}
+.ekab-shift-station{display:inline-block;min-width:9ch;max-width:16ch;overflow:hidden;text-overflow:ellipsis;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+.ekab-shift-in{animation:b-rise .4s ease-out}
+.ekab-shift-dot{width:8px;height:8px;border-radius:50%;background:#30d158;animation:b-pulse 2.4s ease-out infinite}
+@keyframes b-pulse{0%{box-shadow:0 0 0 0 rgba(48,209,88,.5)}70%{box-shadow:0 0 0 7px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
+.ekab-shift-places{position:absolute;top:calc(100% + 8px);right:0;z-index:50;min-width:220px;max-width:92vw;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);color:var(--ink);box-shadow:0 16px 40px rgba(0,0,0,.14);animation:b-pop .16s ease-out}
+.ekab-shift-places[hidden]{display:none}
+.ekab-shift-places p{margin:0 0 8px;font-weight:600}
+.ekab-shift-places ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.ekab-shift-places li{display:flex;justify-content:space-between;gap:24px}
+.ekab-shift-places small{display:block;margin-top:8px;color:var(--muted);font-size:14px}
+@media (max-width:720px){.ekab-shift-label{display:none}.ekab-shift-station{min-width:0;max-width:10ch}.ekab-shift-chip{padding:0 10px}.ekab-shift-places{right:auto;left:0}}
+@media (prefers-reduced-motion:reduce){.ekab-shift-dot,.ekab-shift-in{animation:none}}

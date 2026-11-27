@@ -6,7 +6,9 @@
 <meta name="robots" content="noindex">
 <title>ΕΚΑΒ Σπουδή beta</title>
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="beta.css?v=4">
+<link rel="stylesheet" href="../radio.css?v=20261122-1">
+<link rel="stylesheet" href="../radio-channels.css?v=20261122-1">
+<link rel="stylesheet" href="beta.css?v=5">
 </head>
 <body>
 <main class="b-main" id="main">
@@ -19,6 +21,12 @@
     <div><p id="cont-kind">Συνέχισε από εκεί που έμεινες</p><h2 id="cont-h">Ανατομία · Κεφάλαιο 1</h2></div>
     <a class="b-btn" id="cont-go" href="course.html?c=01&ch=1">Συνέχεια</a>
    </div>
+  </section>
+
+  <section class="b-section b-live" aria-label="Ζωντανές πληροφορίες">
+<article class="b-live-card" data-study-pulse><div class="b-live-head"><span>Παλμός μελέτης</span><a href="../progress-v6.html">Πρόοδος ↗</a></div><h2 data-pulse-title>Υπολογισμός από την Πρόοδο…</h2><p data-pulse-detail>Ανάγνωση πραγματικών αποτελεσμάτων σε αυτή τη συσκευή.</p><a class="b-btn ghost" data-pulse-action href="../progress-v6.html" hidden>Γρήγορη επανάληψη · 5΄</a></article>
+<article class="b-live-card" data-heraklion-duty><div class="b-live-head"><span>Εφημερία Ηρακλείου</span><span data-duty-status>Ώρα Ελλάδας</span></div><h2 data-duty-name>Φόρτωση προγράμματος…</h2><p data-duty-window>Γενική εφημερία 08:00–08:00.</p><a class="b-btn ghost" data-duty-phone hidden>Κλήση νοσοκομείου</a><div hidden><a class="b-live-src" data-duty-roster href="https://www.7ype.gov.gr/wp-content/uploads/2025/12/2.-%CE%95%CE%A6%CE%97%CE%9C%CE%95%CE%A1%CE%99%CE%95%CE%A3-6%CE%A3%CE%926469%CE%972%CE%99-%CE%94%CE%94%CE%99.pdf" target="_blank" rel="noopener noreferrer">Επίσημο πρόγραμμα ↗</a> · <a class="b-live-src" data-duty-live href="https://www.pagni.gr/index.php/eservices/efimeries" target="_blank" rel="noopener noreferrer">Επιβεβαίωση ↗</a></div></article>
+<article class="b-live-card" data-ekab-location><div class="b-live-head"><span>Συντεταγμένες ΕΚΑΒ</span><span>Μόνο με άδειά σου</span></div><h2>Η θέση μου</h2><p data-location-coordinates>Δεν γίνεται εντοπισμός μέχρι να πατήσεις το κουμπί.</p><div class="b-live-actions"><button class="b-btn ghost" type="button" data-location-start aria-describedby="location-help">Εντοπισμός GPS</button><button class="b-btn ghost" type="button" data-location-stop hidden>Διακοπή</button><button class="b-btn ghost" type="button" data-location-copy hidden>Αντιγραφή</button><button class="b-btn ghost" type="button" data-location-share hidden>Κοινή χρήση</button><a class="b-btn ghost" data-location-map href="#" target="_blank" rel="noopener noreferrer" hidden>Χάρτης ↗</a></div><p id="location-help" class="b-live-status" data-location-status role="status" aria-live="polite">Πάτησε «Εντοπισμός GPS». Ο browser θα ζητήσει άδεια· οι συντεταγμένες θα εμφανιστούν εδώ και δεν αποστέλλονται.</p></article>
   </section>
 
   <section class="b-section" aria-labelledby="quick-h">
@@ -92,5 +100,9 @@ document.getElementById('tools').innerHTML=tools.map(([h,t,d])=>`<li><a href="${
 paint();
 addEventListener('storage',paint);addEventListener('pageshow',paint);
 </script>
+<script type="module" src="../home-live-widgets.mjs?v=27.1.211"></script>
+<script src="../shift-presence.js?v=20261127-6" defer></script>
+<script src="../radio-config.js?v=20261122-1" defer></script>
+<script src="../radio-widget-loader.js?v=20261122-2" defer></script>
 </body>
 </html>
