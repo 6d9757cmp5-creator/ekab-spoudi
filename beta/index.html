@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ΕΚΑΒ Σπουδή beta</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="beta.css?v=1">
+</head>
+<body>
+<main class="b-main" id="main">
+ <div class="b-wrap">
+  <h1>Καλή μελέτη</h1>
+  <p class="b-lead" id="summary">Διάλεξε από πού θα συνεχίσεις.</p>
+
+  <section class="b-section" aria-labelledby="cont-h">
+   <div class="b-continue">
+    <div><p id="cont-kind">Συνέχισε από εκεί που έμεινες</p><h2 id="cont-h">Ανατομία · Κεφάλαιο 1</h2></div>
+    <a class="b-btn" id="cont-go" href="course.html?c=01&ch=1">Συνέχεια</a>
+   </div>
+  </section>
+
+  <section class="b-section" aria-labelledby="quick-h">
+   <h2 id="quick-h">Εξάσκηση για την εξέταση</h2>
+   <div class="b-quick" id="quick"></div>
+  </section>
+
+  <section class="b-section" id="library" aria-labelledby="lib-h">
+   <div class="b-row"><h2 id="lib-h">Μαθήματα ΣΑΕΚ</h2></div>
+   <div class="b-tabs" role="group" aria-label="Εξάμηνο" id="tabs"></div>
+   <ul class="b-courses" id="courses"></ul>
+  </section>
+
+  <section class="b-section" aria-labelledby="tools-h">
+   <h2 id="tools-h">Εργαλεία και υλικό</h2>
+   <ul class="b-list" id="tools"></ul>
+  </section>
+ </div>
+</main>
+<script type="module">
+import {COURSES,shell,readCount,isRead,store,svg,esc} from './beta.js?v=1';
+shell();
+
+const total=COURSES.reduce((n,c)=>n+c.chapters,0);
+const paint=()=>{
+ const done=COURSES.reduce((n,c)=>n+readCount(c),0);
+ document.getElementById('summary').textContent=done?`Έχεις διαβάσει ${done} από ${total} κεφάλαια ΣΑΕΚ.`:`${COURSES.length} μαθήματα, ${total} κεφάλαια. Ξεκίνα από όποιο θέλεις.`;
+
+ // Last chapter opened here; otherwise the first unread chapter of a started course; otherwise the very first.
+ let c=null,ch=1,kind='Συνέχισε από εκεί που έμεινες';
+ const last=/^(\d{2}):(\d+)$/.exec(store.get('ekab.beta.last')||'');
+ if(last){c=COURSES.find(x=>x.id===last[1]);ch=+last[2]}
+ if(!c){c=COURSES.find(x=>{const n=readCount(x);return n>0&&n<x.chapters});if(c){ch=1;while(ch<c.chapters&&isRead(c.id,ch))ch++}}
+ if(!c){c=COURSES[0];ch=1;kind='Ξεκίνα την ύλη'}
+ document.getElementById('cont-kind').textContent=kind;
+ document.getElementById('cont-h').textContent=`${c.title} · Κεφάλαιο ${ch}`;
+ document.getElementById('cont-go').href=`course.html?c=${c.id}&ch=${ch}`;
+ list();
+};
+
+const quick=[
+ ['../saek-exams.html','exam','Εξετάσεις ΣΑΕΚ','Ερωτήσεις ανά μάθημα με διόρθωση'],
+ ['../theory.html?mode=exam&section=practice','target','Τεστ ΕΟΠΠΕΠ','Θεωρία όπως στην πιστοποίηση'],
+ ['../practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ','18 σενάρια και δεξιότητες'],
+ ['../mentor-oral.html','mic','Προφορική εξάσκηση','Απάντα και δες τι έλειψε']
+];
+document.getElementById('quick').innerHTML=quick.map(([h,i,t,d])=>`<a href="${h}">${svg(i)}<b>${t}</b><span>${d}</span></a>`).join('');
+
+let sem='all';
+const tabs=document.getElementById('tabs');
+tabs.innerHTML=[['all','Όλα'],['Α','Α εξάμηνο'],['Β','Β εξάμηνο'],['Γ','Γ εξάμηνο'],['Δ','Δ εξάμηνο']].map(([v,l])=>`<button type="button" data-sem="${v}" aria-pressed="${v===sem}">${l}</button>`).join('');
+tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;sem=b.dataset.sem;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));list()});
+function list(){
+ document.getElementById('courses').innerHTML=COURSES.filter(c=>sem==='all'||c.semester===sem).map(c=>{
+  const n=readCount(c),pct=Math.round(n/c.chapters*100);
+  return `<li><a href="course.html?c=${c.id}&ch=1"><span class="b-num">${c.id}</span><span><b>${esc(c.title)}</b><small>${c.semester} εξάμηνο · ${c.chapters} κεφάλαια${n?` · ${n} διαβασμένα`:''}</small></span><span class="b-meter" role="img" aria-label="${pct}% διαβασμένο"><i style="width:${pct}%"></i></span></a></li>`}).join('');
+}
+
+const tools=[
+ ['../farmaka.html','Φαρμακολογία','Δόσεις και ενδείξεις'],['../protocols.html','Θέματα επειγόντων','Αλγόριθμοι'],
+ ['../mentor-ecg.html','Εργαστήριο ΗΚΓ','Ρυθμοί'],['../paramedic.html#skills','Εργαστήρια δεξιοτήτων','Βήμα βήμα'],
+ ['../saek-videos.html','Βίντεο ΣΑΕΚ','Ανά μάθημα'],['../saek-images.html','Εικόνες ΣΑΕΚ','Ανά μάθημα'],
+ ['../study-plan.html','Ημερολόγιο εξετάσεων','Πρόγραμμα μελέτης'],['../contacts.html','Τηλέφωνα ΕΚΑΒ','Επαφές']
+];
+document.getElementById('tools').innerHTML=tools.map(([h,t,d])=>`<li><a href="${h}">${t}<span>${d}</span></a></li>`).join('');
+
+paint();
+addEventListener('storage',paint);addEventListener('pageshow',paint);
+</script>
+</body>
+</html>
