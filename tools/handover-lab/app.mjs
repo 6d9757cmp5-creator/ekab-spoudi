@@ -164,7 +164,9 @@ function render(){
  document.getElementById('hl-goal').textContent=topic.goal;
  const box=document.getElementById('hl-exercise');box.replaceChildren();RENDER[topic.id](c,box);
  const list=document.getElementById('hl-source-list');list.replaceChildren();
- for(const s of topicSources(topic.id)){const li=$('li');const a=$('a','',s.label);a.href=s.href;li.append(a);list.append(li);}
+ // Handbook pages (original.pdf) stay in the data as sources but are not shown to students.
+ for(const s of topicSources(topic.id).filter(s=>!/^original\.pdf/.test(s.href||''))){const li=$('li');const a=$('a','',s.label);a.href=s.href;li.append(a);list.append(li);}
+ const srcBox=list.closest('details,section');if(srcBox&&srcBox!==list)srcBox.hidden=!list.children.length;
  for(const a of document.querySelectorAll('#hl-topic-nav button'))a.setAttribute('aria-current',a.dataset.topic===topic.id?'true':'false');
  const url=new URL(location.href);url.searchParams.set('topic',topic.id);url.searchParams.set('case',c.id);history.replaceState(null,'',url);
 }
