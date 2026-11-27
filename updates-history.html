@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f7f5">
+<meta name="description" content="Οι πέντε μεγάλες φάσεις εξέλιξης της πλατφόρμας ΕΚΑΒ Σπουδή.">
+<title>Ιστορικό αναβαθμίσεων — ΕΚΑΒ Σπουδή</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="spoudi-theme.css">
+<style>
+:root{color-scheme:light dark}
+body{margin:0}
+.history-wrap{width:min(920px,calc(100% - 32px));margin:0 auto;padding:24px 0 56px}
+.history-nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px}
+.history-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid var(--border,#d8ded8);border-radius:999px;text-decoration:none;color:inherit}
+.history-head{margin-bottom:28px}
+.history-head h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.12;margin:0 0 10px}
+.history-head p{max-width:70ch;line-height:1.65;color:var(--muted,#68746c)}
+.history-list{display:grid;gap:14px}
+.history-item{padding:clamp(18px,3vw,26px);border:1px solid var(--border,#d8ded8);border-radius:18px;background:var(--surface,#fff)}
+.history-item h2{font-size:1.15rem;line-height:1.35;margin:0 0 8px}
+.history-item p{line-height:1.65;margin:0 0 10px}
+.history-item ul{margin:8px 0 0;padding-left:22px;line-height:1.7}
+.history-meta{font-size:.82rem;color:var(--muted,#68746c);margin-bottom:8px}
+.history-foot{margin-top:24px;padding-top:18px;border-top:1px solid var(--border,#d8ded8);line-height:1.7;color:var(--muted,#68746c)}
+a{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main class="history-wrap">
+<nav class="history-nav" aria-label="Κύρια πλοήγηση">
+<a href="./index.html#/home">Πίνακας ελέγχου</a>
+<a href="./study.html">Μελέτη</a>
+<a href="./saek-exams.html">Εξάσκηση</a>
+<a href="./tools.html">Εργαλεία</a>
+</nav>
+<header class="history-head">
+<p class="history-meta">ΕΚΑΒ Σπουδή · Έκδοση εφαρμογής v27.1.181 · 28/11/2026</p>
+<h1>Οι 5 μεγάλες αναβαθμίσεις</h1>
+<p>Μια συνοπτική, καθαρή καταγραφή της εξέλιξης της πλατφόρμας από τον αρχικό εκπαιδευτικό κορμό έως τη σημερινή ενοποιημένη εμπειρία. Εδώ κρατάμε μόνο τις ουσιαστικές αλλαγές· οι μικρές διορθώσεις και τα τεχνικά commits παραμένουν στο πλήρες ιστορικό του Git.</p>
+</header>
+<section class="history-list" aria-label="Μεγάλες φάσεις εξέλιξης">
+<article class="history-item">
+<div class="history-meta">1 · Αρχικός εκπαιδευτικός κορμός</div>
+<h2>ΣΑΕΚ και ΕΟΠΠΕΠ σε οργανωμένη δομή</h2>
+<p>Δημιουργήθηκε η βασική πλατφόρμα μελέτης και οργανώθηκε η ύλη της ειδικότητας σε σαφή εκπαιδευτική διαδρομή.</p>
+<ul>
+<li>4 εξάμηνα και 20 μαθήματα ΣΑΕΚ με 247 κεφάλαια.</li>
+<li>Αναγνωστήριο 314 θεωρητικών ερωτήσεων ΕΟΠΠΕΠ.</li>
+<li>Βασική πλοήγηση, εκπαιδευτικό περιεχόμενο και τοπική καταγραφή μελέτης.</li>
+</ul>
+</article>
+<article class="history-item">
+<div class="history-meta">2 · Επέκταση της εκπαιδευτικής ροής</div>
+<h2>Εξάσκηση, εργαλεία και προσωπική πρόοδος</h2>
+<p>Η εφαρμογή επεκτάθηκε πέρα από την απλή ανάγνωση ύλης, με εργαλεία προετοιμασίας και λειτουργίες οργάνωσης της προσωπικής μελέτης.</p>
+<ul>
+<li>Προετοιμασία BLS/AED, PBLS, ILS, PHTLS και ALS.</li>
+<li>Φαρμακολογία, ιατρικό λεξικό, επάγγελμα και νομοθεσία.</li>
+<li>Προσωπικές σημειώσεις, αναζήτηση, δείκτες προόδου και προαιρετικός συγχρονισμός.</li>
+</ul>
+</article>
+<article class="history-item">
+<div class="history-meta">3 · Ενοποίηση περιβάλλοντος V6 · κύρια μεταφορά στο main: 22/11/2026</div>
+<h2>Νέα αρχική και κοινή πλοήγηση</h2>
+<p>Η κύρια εμπειρία οργανώθηκε γύρω από έναν ενιαίο πίνακα ελέγχου και τέσσερις βασικές περιοχές: Πίνακας ελέγχου, Μελέτη, Εξάσκηση και Εργαλεία.</p>
+<ul>
+<li>Ενοποιημένη αρχική, κύρια πλοήγηση και γρήγορη πρόσβαση.</li>
+<li>Γενική αναζήτηση, λογαριασμός και λειτουργίες συγχρονισμού.</li>
+<li>Θέματα εμφάνισης και προσαρμοστικά στοιχεία αρχικής σε κινητό και υπολογιστή.</li>
+</ul>
+<p><a href="https://github.com/6d9757cmp5-creator/ekab-spoudi/pull/368">PR #368 — μεταφορά της ενιαίας εμφάνισης</a></p>
+</article>
+<article class="history-item">
+<div class="history-meta">4 · Πρακτικά εργαστήρια και εξειδικευμένα εργαλεία</div>
+<h2>Από τη θεωρία στην εξάσκηση δεξιοτήτων</h2>
+<p>Προστέθηκαν συγκεντρωμένα εργαλεία που υποστηρίζουν την κατανόηση και την εξάσκηση επιμέρους δεξιοτήτων.</p>
+<ul>
+<li>Ζωτικά Σημεία & ΗΚΓ.</li>
+<li>Ακρόαση με ηχητικά παραδείγματα.</li>
+<li>Αεραγωγός, Εξοπλισμός Ασθενοφόρου, Επικοινωνία & Παράδοση.</li>
+<li>Εργαστήριο ΗΚΓ, τρισδιάστατη ανατομία, θέματα επειγόντων και χάρτης απινιδωτών.</li>
+</ul>
+</article>
+<article class="history-item">
+<div class="history-meta">5 · Ανασχεδιασμός Μελέτης · 27/11/2026</div>
+<h2>Καθαρότερος αναγνώστης και ενιαία σχεδιαστική γλώσσα</h2>
+<p>Η περιοχή Μελέτης αναδιοργανώθηκε ώστε ο σπουδαστής να προχωρά στο περιεχόμενο χωρίς διπλές ενότητες και επαναλαμβανόμενα στοιχεία.</p>
+<ul>
+<li>Κόμβοι ΣΑΕΚ και ΕΟΠΠΕΠ και γκαλερί βίντεο/φωτογραφιών με συνεπή εμφάνιση.</li>
+<li>Ανάγνωση ενός κεφαλαίου κάθε φορά, με το αντίστοιχο βίντεο και το εκπαιδευτικό υλικό του.</li>
+<li>Προβολή εικόνων πλήρους οθόνης με πλοήγηση και μεγέθυνση.</li>
+<li>Κοινή σχεδιαστική γλώσσα σε τίτλους, κάρτες, κουμπιά και αποστάσεις.</li>
+</ul>
+<p>Ενδεικτικά τεκμήρια: <a href="https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/8d930415e086c9ad4c6d3150a3f1cff5defccc98">τελικός έλεγχος Μελέτης</a>, <a href="https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/814914f743344ac249327170e3eec927925eb4fa">κόμβοι και γκαλερί</a>, <a href="https://github.com/6d9757cmp5-creator/ekab-spoudi/commit/9925ce2e105662479d40fd313954225e0d2c7d9b">αναγνώστης κεφαλαίων</a>.</p>
+</article>
+</section>
+<footer class="history-foot">
+<p><strong>Σημείωση ακρίβειας:</strong> Οι πέντε ενότητες είναι θεματικά ορόσημα και όχι πέντε αριθμημένες εκδόσεις. Δεν περιλαμβάνουν λειτουργίες που εμφανίζονται μόνο σε παλιά branches ή ιστορικές σημειώσεις. Το ATLA δεν καταγράφεται ως ενεργός ολοκληρωμένος AI εκπαιδευτής ή ελεγκτής περιεχομένου.</p>
+<p><a href="https://github.com/6d9757cmp5-creator/ekab-spoudi/commits/main">Πλήρες ιστορικό commits στο GitHub</a> · <a href="./README.md">README</a></p>
+</footer>
+</main>
+<script src="updates.js?v=27.1.181" defer></script>
+</body>
+</html>
