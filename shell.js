@@ -39,6 +39,7 @@ const icon={
  image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/>',
  chart:'<path d="M4 19V5M4 19h17M7 15l4-4 3 2 6-7"/>',
  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+ tools:'<path d="M4 7h16M4 12h10M4 17h7"/><circle cx="18" cy="12" r="2"/><circle cx="15" cy="17" r="2"/>',
  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
@@ -50,12 +51,12 @@ const icon={
 };
 export const svg=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icon[n]}</svg>`;
 
-const NAV=[
- ['Μελέτη',[['index.html','home','Αρχική'],['./study.html','grid','Όλη η μελέτη'],['courses.html','book','Μαθήματα ΣΑΕΚ'],['./saek-videos.html','play','Βίντεο ΣΑΕΚ με τη σειρά'],['./saek-images.html','image','Φωτογραφίες ΣΑΕΚ'],['./theory.html','cert','Θεωρία ΕΟΠΠΕΠ'],['./practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ'],['./seminar-prep.html','cert','Σεμινάρια']]],
- ['Εξάσκηση',[['./practice.html','grid','Όλη η εξάσκηση'],['./saek-exams.html','exam','Εξετάσεις ΣΑΕΚ'],['./theory.html?mode=exam&section=practice','target','Τεστ ΕΟΠΠΕΠ'],['./paramedic.html#skills','hands','Εργαστήρια δεξιοτήτων'],['./mentor-oral.html','mic','Προφορική εξάσκηση']]],
- ['Εργαλεία',[['./tools.html','grid','Όλα τα εργαλεία'],['./farmaka.html','pill','Φαρμακολογία'],['./protocols.html','siren','Θέματα επειγόντων'],['./mentor-ecg.html','ecg','ΗΚΓ'],['./pdf-library.html','book','PDF'],['./mentor-library.html','book','Βιβλιογραφία'],['./contacts.html','phone','Τηλέφωνα ΕΚΑΒ']]],
- ['Εσύ',[['./progress-v6.html','chart','Πρόοδος'],['./study-plan.html','cal','Ημερολόγιο εξετάσεων'],['#account','user','Λογαριασμός']]]
-];
+const NAV=[['index.html','home','Αρχική'],['study.html','book','Μελέτη'],['practice.html','target','Εξάσκηση'],['tools.html','tools','Εργαλεία'],['progress-v6.html','chart','Εσύ']];
+// Pages that sit inside a section light up that section in the menu and the tab bar.
+const SECTION={'courses.html':'study.html','chapter.html':'study.html','saek.html':'study.html','saek-videos.html':'study.html','saek-images.html':'study.html',
+ 'saek-exams.html':'practice.html','theory.html':'practice.html','practical_exam.html':'practice.html','mentor-oral.html':'practice.html',
+ 'farmaka.html':'tools.html','protocols.html':'tools.html','contacts.html':'tools.html','pdf-library.html':'tools.html','mentor-library.html':'tools.html',
+ 'study-plan.html':'progress-v6.html'};
 
 const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ς/g,'σ');
 
@@ -65,7 +66,28 @@ function applyTheme(t){
 }
 const currentTheme=()=>document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 
-export function shell(current){
+/* An existing page inside the new shell: its own scripts and features stay; theme-init.js already loads the shared ones. */
+export function legacy(current){
+ document.documentElement.classList.add('b-legacy');
+ shell(current,{legacy:true});
+ // The page's own menus and headers duplicate the new ones. Nothing is removed: whatever the page shows is moved
+ // into one orange box at the top, marked as a proposal, until the user decides. Some of them are built after load.
+ const OLD=['.v6-global-topbar','.v6-global-sidebar','.style-preview-nav','body>header.top','.saek-header-back','body>nav.nav'];
+ let box=null;
+ const collect=()=>{
+  const found=OLD.map(s=>document.querySelector(s)).filter(n=>n&&!n.closest('.b-review')&&getComputedStyle(n).display!=='none');
+  if(!found.length)return;
+  if(!box){box=document.createElement('section');box.className='b-review';box.setAttribute('aria-label','Πρόταση αφαίρεσης');box.innerHTML='<p><span>Πρόταση αφαίρεσης</span>Τα παλιά μενού αυτής της σελίδας, διπλά με το νέο. Δουλεύουν κανονικά· πες μου αν θα φύγουν.</p>'}
+  box.append(...found);
+  const main=document.querySelector('.v6-global-main main,body>main,body>.maincol,main');
+  if(main&&!box.isConnected)main.before(box);
+ };
+ collect();document.addEventListener('ekab:v6-shell-ready',collect);
+ const mo=new MutationObserver(collect);mo.observe(document.body,{childList:true,subtree:false});setTimeout(()=>mo.disconnect(),10000);
+ addEventListener('load',collect);
+}
+
+export function shell(current,opts={}){
  applyTheme(store.get('ekab.theme.v1'));
  const here=location.pathname.split('/').pop()||'index.html';
  const top=document.createElement('header');top.className='b-top';
@@ -76,15 +98,18 @@ export function shell(current){
   <kbd class="b-kbd" aria-hidden="true">Ctrl K</kbd><ul class="b-results" id="b-res" role="listbox" hidden></ul></div>
  <div class="b-tools"><button class="b-icon" type="button" data-theme-toggle></button><button class="b-icon b-account" type="button" data-account-open aria-label="Λογαριασμός και συγχρονισμός" title="Λογαριασμός">${svg('user')}</button></div>`;
  const side=document.createElement('nav');side.className='b-side';side.id='b-side';side.setAttribute('aria-label','Κύριο μενού');
- side.innerHTML=NAV.map(([h,links])=>`<h2>${h}</h2>`+links.map(([href,ic,label])=>{
-  const on=current?href===current:href===here;
-  if(href==='#account')return `<button type="button" class="b-side-btn" data-account-open>${svg(ic)}${label}</button>`;
-  return `<a href="${href}"${on?' aria-current="page"':''}>${svg(ic)}${label}</a>`}).join('')).join('')+
+ const sec=current||SECTION[here]||here;
+ const item=([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}${label}</a>`;
+ side.innerHTML=NAV.map(item).join('')+
+  `<div class="b-side-sub"><a href="study-plan.html"${here==='study-plan.html'?' aria-current="page"':''}>${svg('cal')}Ημερολόγιο εξετάσεων</a><button type="button" class="b-side-btn" data-account-open>${svg('user')}Λογαριασμός</button></div>`+
   `<section class="ekab-quick-access" data-ekab-quick-access></section>`+
-  `<h2>Άλλα</h2><a class="old" href="index-v6.html#/home">Παλιά όψη αρχικής</a>`;
+  `<a class="old" href="index-v6.html#/home">Παλιά όψη αρχικής</a>`;
+ // Phone: the five sections as a tab bar at the bottom, within reach of the thumb.
+ const tabs=document.createElement('nav');tabs.className='b-tabbar';tabs.setAttribute('aria-label','Ενότητες');
+ tabs.innerHTML=NAV.map(([href,ic,label])=>`<a href="${href}"${href===sec?' aria-current="page"':''}>${svg(ic)}<span>${label}</span></a>`).join('');
  const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='b-backdrop';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Κλείσιμο μενού');
- document.body.prepend(top,side,backdrop);
- features();
+ document.body.prepend(top,side,backdrop);document.body.append(tabs);
+ if(!opts.legacy)features();else{const n=document.createElement('script');n.src=new URL('quick-access.js?v=20261122-1',import.meta.url).href;n.defer=true;document.body.append(n)}
 
  // Phone drawer
  const menu=top.querySelector('.b-menu'),phone=matchMedia('(max-width:720px)');
@@ -101,7 +126,8 @@ export function shell(current){
  const paintTheme=()=>{const dark=currentTheme()==='dark';tbtn.innerHTML=svg(dark?'sun':'moon');tbtn.setAttribute('aria-label',dark?'Φωτεινό θέμα':'Σκούρο θέμα');tbtn.title=tbtn.getAttribute('aria-label')};
  tbtn.addEventListener('click',()=>{
   const next=currentTheme()==='dark'?'light':'dark';store.set('ekab.theme.v1',next);
-  const swap=()=>{applyTheme(next);paintTheme()};
+  // Older pages also follow the class their own stylesheets use for the dark theme.
+  const swap=()=>{applyTheme(next);document.body.classList.toggle('dark-mode',next==='dark');paintTheme()};
   // The new theme spreads out from the button as a circle where the browser supports it.
   if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches){swap();return}
   const r=tbtn.getBoundingClientRect(),root=document.documentElement.style;
@@ -114,8 +140,7 @@ export function shell(current){
  const q=top.querySelector('#b-q'),res=top.querySelector('#b-res');let sel=-1,timer;
  const close=()=>{res.hidden=true;q.setAttribute('aria-expanded','false');sel=-1};
  const ready=()=>new Promise(ok=>{const t0=Date.now();const w=()=>window.EkabGlobalSearch||Date.now()-t0>8000?ok(window.EkabGlobalSearch):setTimeout(w,100);w()});
- // SAEK chapters open in the new reader; everything else keeps its own page.
- const target=href=>{const m=/^saek-course-(\d{2})\.html#lesson-(\d+)$/.exec(href||'');return m?`chapter.html?c=${m[1]}&ch=${m[2]}`:'./'+String(href||'').replace(/^\.\//,'')};
+ const target=href=>'./'+String(href||'').replace(/^\.\//,'');
  const kinds={saek:'ΣΑΕΚ',eoppep:'ΕΟΠΠΕΠ',seminar:'Σεμινάριο',practical:'Πρακτικό',practice:'Εξάσκηση',page:'Σελίδα'};
  const run=async()=>{
   const v=q.value.trim();if(v.length<2){close();return}

@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="./radio.css?v=20261122-1">
 <link rel="stylesheet" href="./radio-channels.css?v=20261122-1">
-<link rel="stylesheet" href="shell.css?v=6">
+<link rel="stylesheet" href="shell.css?v=8">
 <link rel="stylesheet" href="shell-radio.css?v=1">
 </head>
 <body class="b-home">
@@ -37,7 +37,7 @@
   <section class="b-section" aria-labelledby="cont-h">
    <div class="b-continue">
     <div><p id="cont-kind">Συνέχισε από εκεί που έμεινες</p><h2 id="cont-h">Ανατομία · Κεφάλαιο 1</h2></div>
-    <a class="b-btn" id="cont-go" href="chapter.html?c=01&ch=1">Συνέχεια</a>
+    <a class="b-btn" id="cont-go" href="saek-course-01.html#lesson-1">Συνέχεια</a>
    </div>
   </section>
 
@@ -58,7 +58,7 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,readCount,isRead,store} from './shell.js?v=2';
+import {COURSES,shell,readCount,isRead,store} from './shell.js?v=6';
 shell();
 
 const total=COURSES.reduce((n,c)=>n+c.chapters,0);
@@ -68,19 +68,20 @@ const paint=()=>{
 
  // Last chapter opened here; otherwise the first unread chapter of a started course; otherwise the very first.
  let c=null,ch=1,kind='Συνέχισε από εκεί που έμεινες';
- const last=/^(\d{2}):(\d+)$/.exec(store.get('ekab.beta.last')||'');
- if(last){c=COURSES.find(x=>x.id===last[1]);ch=+last[2]}
+ let last=null;try{const r=JSON.parse(store.get('ekab.study.resume.v1')||'null');if(r?.kind==='saek')last=[null,String(r.course),String(r.chapter)]}catch(_){}
+ if(!last)last=/^(\d{2}):(\d+)$/.exec(store.get('ekab.beta.last')||'');
+ if(last){c=COURSES.find(x=>x.id===last[1]);ch=+last[2]||1}
  if(!c){c=COURSES.find(x=>{const n=readCount(x);return n>0&&n<x.chapters});if(c){ch=1;while(ch<c.chapters&&isRead(c.id,ch))ch++}}
  if(!c){c=COURSES[0];ch=1;kind='Ξεκίνα την ύλη'}
  document.getElementById('cont-kind').textContent=kind;
  document.getElementById('cont-h').textContent=`${c.title} · Κεφάλαιο ${ch}`;
- document.getElementById('cont-go').href=`chapter.html?c=${c.id}&ch=${ch}`;
+ document.getElementById('cont-go').href=`saek-course-${c.id}.html#lesson-${ch}`;
 };
 paint();
 addEventListener('storage',paint);addEventListener('pageshow',paint);
 
 </script>
-<script type="module" src="home-widgets.js?v=5"></script>
+<script type="module" src="home-widgets.js?v=6"></script>
 <script src="./shift-presence.js?v=20261127-8" defer></script>
 <script src="./radio-config.js?v=20261122-1" defer></script>
 <script src="./radio-widget-loader.js?v=20261122-2" defer></script>

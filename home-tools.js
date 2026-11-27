@@ -1,6 +1,6 @@
 /* Interactive home widgets: practice (ERC quiz, review cards) and tools used on a shift.
    Formulas are the standard ones taught in the course; each widget says it is a learning aid. */
-import { store, esc } from './shell.js?v=2';
+import { store, esc } from './shell.js?v=6';
 
 const $ = (s, r = document) => r.querySelector(s);
 const svg = p => `<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;

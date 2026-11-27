@@ -8,7 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<link rel="stylesheet" href="shell.css?v=6">
+<link rel="stylesheet" href="shell.css?v=8">
 </head>
 <body>
 <main class="b-main" id="main">
@@ -28,8 +28,8 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,readCount,esc} from './shell.js?v=2';
-shell();
+import {COURSES,shell,readCount,esc} from './shell.js?v=6';
+shell('study.html');
 let sem='all';
 const tabs=document.getElementById('tabs');
 tabs.innerHTML=[['all','Όλα'],['Α','Α εξάμηνο'],['Β','Β εξάμηνο'],['Γ','Γ εξάμηνο'],['Δ','Δ εξάμηνο']].map(([v,l])=>`<button type="button" data-sem="${v}" aria-pressed="${v===sem}">${l}</button>`).join('');
@@ -37,7 +37,7 @@ tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)retur
 function list(){
  document.getElementById('courses').innerHTML=COURSES.filter(c=>sem==='all'||c.semester===sem).map(c=>{
   const n=readCount(c),pct=Math.round(n/c.chapters*100);
-  return `<li><a href="chapter.html?c=${c.id}&ch=1"><span class="b-num">${c.id}</span><span><b>${esc(c.title)}</b><small>${c.semester} εξάμηνο · ${c.chapters} κεφάλαια${n?` · ${n} διαβασμένα`:''}</small></span><span class="b-meter" role="img" aria-label="${pct}% διαβασμένο"><i style="width:${pct}%"></i></span></a></li>`}).join('');
+  return `<li><a href="saek-course-${c.id}.html#lesson-1"><span class="b-num">${c.id}</span><span><b>${esc(c.title)}</b><small>${c.semester} εξάμηνο · ${c.chapters} κεφάλαια${n?` · ${n} διαβασμένα`:''}</small></span><span class="b-meter" role="img" aria-label="${pct}% διαβασμένο"><i style="width:${pct}%"></i></span></a></li>`}).join('');
 }
 
 list();

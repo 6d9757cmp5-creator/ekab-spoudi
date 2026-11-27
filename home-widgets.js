@@ -4,7 +4,7 @@
 import { heraklionOnDuty } from './services/on-duty/heraklion.mjs';
 import { weakestStudyArea } from './services/progress/study-pulse.mjs';
 import { STORAGE_KEY, EXAM_TYPES, SAEK_COURSES, parseExams, daysUntil, examItems, buildPlan } from './services/study-plan/plan.mjs';
-import { store, esc } from './shell.js?v=2';
+import { store, esc } from './shell.js?v=6';
 import { TOOLS } from './home-tools.js?v=2';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -124,6 +124,86 @@ const W = {
         .map(([x, k]) => `<li><a href="./${esc(x.href)}">${esc(x.title)}</a><small>${k}</small></li>`).join('') || '<li><small>Τίποτα για σήμερα.</small></li>';
     } },
 
+  /* Proposed for removal (info only): kept until the learner decides; shown in orange. */
+  countdown: { icon: I.clock, group: 'review', review: true, title: 'Αντίστροφη μέτρηση', desc: 'Πόσες ημέρες μένουν για την επόμενη εξέτασή σου.', size: 's', link: './study-plan.html',
+    html: () => head('clock', 'Επόμενη εξέταση') + '<p><span class="w-num">—</span></p><p class="w-unit"></p><p class="w-sub"></p>',
+    paint(el) {
+      const up = nextExam();
+      if (!up) { $('.w-num', el).textContent = '—'; $('.w-unit', el).textContent = 'Δεν έχεις βάλει εξέταση'; $('.w-sub', el).textContent = 'Πάτα για να προσθέσεις ημερομηνία.'; return; }
+      const left = daysUntil(up.date); countTo($('.w-num', el), left);
+      $('.w-unit', el).textContent = left === 1 ? 'ημέρα' : 'ημέρες';
+      $('.w-sub', el).textContent = `${EXAM_TYPES[up.type] || 'Εξέταση'} · ${new Date(up.date + 'T12:00:00').toLocaleDateString('el-GR', { day: 'numeric', month: 'long' })}`;
+    } },
+
+  question: { icon: I.q, group: 'review', review: true, title: 'Ερώτηση ημέρας', desc: 'Μία επίσημη ερώτηση ΕΟΠΠΕΠ κάθε μέρα, με την απάντηση κρυμμένη.', size: 'm',
+    html: () => head('q', 'Ερώτηση ημέρας', '<span class="w-tag"></span>') + '<p class="w-q"></p><details class="w-ans"><summary>Δες την απάντηση</summary><p></p></details>',
+    async paint(el) {
+      const d = await load('./official_questions.json'); const list = Array.isArray(d) ? d.filter(q => q.question && q.answer) : [];
+      if (!list.length) { $('.w-q', el).textContent = 'Οι ερωτήσεις δεν φορτώθηκαν.'; return; }
+      const q = list[daily(list.length)];
+      $('.w-tag', el).textContent = `${q.group === 'B' ? 'Β' : 'Α'}-${String(q.number).padStart(3, '0')}`;
+      $('.w-q', el).textContent = q.question; $('.w-ans p', el).textContent = q.answer;
+    } },
+
+  drug: { icon: I.pill, group: 'review', review: true, title: 'Φάρμακο ημέρας', desc: 'Ένα φάρμακο της προνοσοκομειακής φροντίδας κάθε μέρα.', size: 'm',
+    html: () => head('pill', 'Φάρμακο ημέρας') + '<p class="w-big w-drug"></p><p class="w-sub w-drug-en"></p><p class="w-text"></p><a class="w-more" href="./farmaka.html">Περισσότερα</a>',
+    async paint(el) {
+      const d = await load('./farmaka-search.json'); const list = (d?.items || []).filter(x => x.href?.includes('#drug-'));
+      if (!list.length) { $('.w-drug', el).textContent = 'Τα φάρμακα δεν φορτώθηκαν.'; return; }
+      const x = list[daily(list.length)];
+      $('.w-drug', el).textContent = x.title; $('.w-drug-en', el).textContent = (x.subtitle || '').replace(/^Φαρμακολογία · /, '');
+      $('.w-text', el).textContent = x.preview || ''; $('.w-more', el).href = './' + x.href;
+    } },
+
+  term: { icon: I.book, group: 'review', review: true, title: 'Όρος ημέρας', desc: 'Ένας ιατρικός όρος με την αγγλική απόδοση και τον ορισμό του.', size: 'm',
+    html: () => head('book', 'Όρος ημέρας', '<span class="w-tag"></span>') + '<p class="w-big w-term"></p><p class="w-sub w-term-en"></p><p class="w-text"></p>',
+    async paint(el) {
+      const d = await load('./medical-terms.json'); const list = (d?.items || []).filter(x => x.term && x.definition);
+      if (!list.length) { $('.w-term', el).textContent = 'Οι όροι δεν φορτώθηκαν.'; return; }
+      const x = list[daily(list.length)];
+      $('.w-term', el).textContent = x.term; $('.w-tag', el).textContent = x.category || '';
+      $('.w-term-en', el).textContent = [x.en, ...(x.symbols || [])].filter(Boolean).join(' · ');
+      $('.w-text', el).textContent = x.definition;
+    } },
+
+  recent: { icon: I.hist, group: 'review', review: true, title: 'Πρόσφατα', desc: 'Οι ενότητες που άνοιξες τελευταία σε αυτή τη συσκευή.', size: 'm',
+    html: () => head('hist', 'Πρόσφατα') + '<ul class="w-items"></ul>',
+    paint(el) {
+      const h = json('ekab.study.resume.history.v1', []); const ul = $('.w-items', el);
+      const label = x => x.kind === 'saek' ? (x.title || `Μάθημα ${x.course} · κεφάλαιο ${x.chapter}`) : x.kind === 'seminar' ? `Σεμινάριο ${String(x.course || '').toUpperCase()}` : x.kind === 'eoppep' ? (x.mode === 'reader' && x.question ? `ΕΟΠΠΕΠ · ερώτηση ${x.question.slice(4)}` : x.mode === 'exam' ? 'Τεστ ΕΟΠΠΕΠ' : 'Θεωρία ΕΟΠΠΕΠ') : 'Ενότητα';
+      const href = x => x.kind === 'saek' && /^\d{2}$/.test(String(x.course)) ? `./chapter.html?c=${x.course}&ch=${Number(x.chapter) || 1}` : x.kind === 'seminar' ? `./seminar-prep.html#${x.course}` : x.kind === 'eoppep' ? (x.mode === 'reader' && x.question ? `./theory.html?question=${encodeURIComponent(x.question)}` : x.mode === 'exam' ? './theory.html?mode=exam&section=practice' : './theory.html') : './index.html';
+      const rows = (Array.isArray(h) ? h : []).slice(0, 4);
+      ul.innerHTML = rows.length ? rows.map(x => `<li><a href="${esc(href(x))}">${esc(label(x))}</a><small>${x.at ? new Date(x.at).toLocaleDateString('el-GR', { day: 'numeric', month: 'short' }) : ''}</small></li>`).join('') : '<li><small>Δεν έχεις ανοίξει ακόμη κάποια ενότητα.</small></li>';
+    } },
+
+  timer: { icon: I.timer, group: 'review', review: true, title: 'Χρονόμετρο μελέτης', desc: '25 λεπτά μελέτη, 5 διάλειμμα. Συνεχίζει και αν κλείσεις τη σελίδα.', size: 's',
+    html: () => head('timer', 'Χρονόμετρο', '<span class="w-tag w-phase"></span>') + '<p><span class="w-num w-clock">25:00</span></p><div class="w-actions"><button class="b-btn" type="button" data-t="go">Έναρξη</button><button class="b-btn ghost" type="button" data-t="reset">Μηδενισμός</button></div>',
+    paint(el) {
+      const K = 'ekab.home.timer.v1';
+      const get = () => json(K, { phase: 'study', end: 0, left: 1500 });
+      const put = v => store.set(K, JSON.stringify(v));
+      const tick = () => {
+        let t = get();
+        if (t.end && Date.now() >= t.end) { // phase finished: switch study ⇄ break
+          const next = t.phase === 'study' ? 'break' : 'study';
+          t = { phase: next, end: 0, left: next === 'study' ? 1500 : 300 }; put(t);
+          try { navigator.vibrate?.(200); } catch (_) {}
+        }
+        const left = t.end ? Math.ceil((t.end - Date.now()) / 1000) : t.left;
+        $('.w-clock', el).textContent = `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')}`;
+        $('.w-phase', el).textContent = t.phase === 'study' ? 'Μελέτη' : 'Διάλειμμα';
+        $('[data-t="go"]', el).textContent = t.end ? 'Παύση' : 'Έναρξη';
+        el.classList.toggle('w-running', !!t.end);
+      };
+      if (!el.dataset.bound) {
+        el.dataset.bound = '1';
+        $('[data-t="go"]', el).addEventListener('click', () => { const t = get(); if (t.end) put({ ...t, end: 0, left: Math.max(1, Math.ceil((t.end - Date.now()) / 1000)) }); else put({ ...t, end: Date.now() + t.left * 1000 }); tick(); });
+        $('[data-t="reset"]', el).addEventListener('click', () => { put({ phase: 'study', end: 0, left: 1500 }); tick(); });
+        setInterval(tick, 1000);
+      }
+      tick();
+    } },
+
   gcs: { icon: I.brain, group: 'tools', title: 'Κλίμακα Γλασκώβης', desc: 'Υπολογισμός GCS: μάτια, λεκτική και κινητική απάντηση.', size: 'm',
     html: () => head('brain', 'Κλίμακα Γλασκώβης', '<span class="w-gcs-total">GCS <b>15</b></span>') + `<div class="w-gcs">
       <label>Μάτια<select data-g="e"><option value="4">4 · Αυθόρμητα</option><option value="3">3 · Στη φωνή</option><option value="2">2 · Στον πόνο</option><option value="1">1 · Καθόλου</option></select></label>
@@ -156,7 +236,7 @@ const save = list => store.set(KEY, JSON.stringify(list));
 function build() {
   const grid = $('.b-tiles'); if (!grid) return;
   const list = order();
-  grid.innerHTML = list.map(id => { const w = W[id]; const tag = w.link ? 'a' : 'article'; return `<${tag} class="w w-${w.size} wid-${id}" data-w="${id}"${w.link ? ` href="${w.link}"` : ''}>${w.html()}</${tag}>`; }).join('')
+  grid.innerHTML = list.map(id => { const w = W[id]; const tag = w.link ? 'a' : 'article'; return `<${tag} class="w w-${w.size} wid-${id}${w.review ? ' w-review' : ''}" data-w="${id}"${w.link ? ` href="${w.link}"` : ''}>${w.html()}</${tag}>`; }).join('')
     || '<p class="w-empty">Δεν έχεις widget. Πάτα «Επεξεργασία» για να προσθέσεις.</p>';
   paintAll();
 }
@@ -174,7 +254,7 @@ function editor() {
     const row = id => `<li><span class="ws-ic">${svg(W[id].icon)}</span><span class="ws-t"><b>${W[id].title}</b><small>${W[id].desc}</small></span>
       <button type="button" class="ws-b ws-add" data-add="${id}" aria-label="Προσθήκη: ${W[id].title}">${svg('<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>')}</button></li>`;
     const part = (g, name) => { const ids = off.filter(id => W[id].group === g); return ids.length ? `<li class="ws-group">${name}</li>` + ids.map(row).join('') : ''; };
-    $('.ws-off', dlg).innerHTML = part('study', 'Μελέτη') + part('tools', 'Εργαλεία βάρδιας') || '<li class="ws-none">Όλα τα widget είναι ήδη στην αρχική.</li>';
+    $('.ws-off', dlg).innerHTML = part('study', 'Μελέτη') + part('tools', 'Εργαλεία βάρδιας') + part('review', 'Πρόταση αφαίρεσης · αποφασίζεις εσύ') || '<li class="ws-none">Όλα τα widget είναι ήδη στην αρχική.</li>';
   };
   dlg.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;

@@ -1,0 +1,88 @@
+/* The new shell around an existing page: its own top bar, side menu and tab bar replace the old ones,
+   and the old colour tokens point at the shell's, so every page keeps its features and gains the new look. */
+
+/* Old chrome that the new top bar and menu duplicate: moved into one orange box at the top of the page
+   (links keep working) until the user decides what goes. */
+html.b-legacy .b-review{max-width:1040px;margin:0 auto 16px;padding:12px 14px;border:2px solid #ff9500;border-radius:14px;background:rgba(255,149,0,.08)}
+html.b-legacy .b-review>p{margin:0 0 8px;font-size:14px;font-weight:600;color:var(--ink)}
+html.b-legacy .b-review>p span{display:inline-block;margin-right:8px;padding:2px 10px;border-radius:999px;background:#ff9500;color:#000}
+html.b-legacy .b-review>*:not(p){position:static!important;inset:auto!important;transform:none!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;margin:6px 0 0!important;padding:6px!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;border:1px dashed rgba(255,149,0,.6)!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;z-index:auto!important}
+html.b-legacy .b-review :is(a,button){min-height:40px!important;width:auto!important;height:auto!important}
+html.b-legacy .b-review .container{display:flex;flex-wrap:wrap;gap:8px;align-items:center;max-width:none;padding:0}
+html.b-legacy .sidebar-beta-mobile-toggle,html.b-legacy .sidebar-beta-backdrop{display:none!important}
+
+/* Room for the top bar and the side menu */
+html.b-legacy body{padding:var(--top) 0 0 var(--side)!important;margin:0!important;background:var(--bg)!important;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html.b-legacy body>main,html.b-legacy body>.maincol,html.b-legacy body>.v6-global-main{max-width:1040px;margin:0 auto!important;padding:24px 32px 96px!important;box-sizing:border-box}
+@media (max-width:720px){
+ html.b-legacy body{padding:var(--top) 0 calc(64px + env(safe-area-inset-bottom)) 0!important}
+ html.b-legacy body>main,html.b-legacy body>.maincol,html.b-legacy body>.v6-global-main{padding:16px 16px 32px!important}
+}
+
+/* Old tokens follow the shell's (light) */
+html.b-legacy,html.b-legacy body{
+ --paper:var(--raise);--panel:var(--raise);--card:var(--raise);--surface-2:var(--surface);--light:var(--surface);
+ --text:var(--ink);--sub:var(--muted);--quiet:var(--muted);--navy:var(--ink);--blue:var(--link);--green:#248a3d;--green-dark:#1d6e31;--green-pale:rgba(52,199,89,.12);--warm:var(--surface);--gold:#a05a00;
+ --v6-paper:var(--raise);--v6-surface:var(--raise);--v6-soft:var(--surface);--v6-ink:var(--ink);--v6-muted:var(--muted);--v6-line:var(--line);--v6-accent:var(--accent);--v6-accent-strong:var(--accent);--v6-green:#248a3d;--v6-gold:#a05a00;
+ --preview-bg:var(--bg);--preview-surface:var(--raise);--preview-ink:var(--ink);--preview-border:var(--line);--preview-hover:var(--surface);--preview-link:var(--link);--preview-accent:var(--accent-soft);--preview-accent-ink:var(--ink);--preview-focus:var(--focus);
+ --h-bg:var(--bg);--h-card:var(--raise);--h-ink:var(--ink);--h-line:var(--line);
+ --en-paper:var(--raise);--en-ink:var(--ink);--en-muted:var(--muted);--en-border:var(--line);--en-primary:var(--accent);--en-soft:var(--surface);
+ --bp-paper:var(--raise);--bp-ink:var(--ink);--bp-muted:var(--muted);--bp-line:var(--line)
+}
+
+/* Surfaces, controls and type in the shell's style */
+html.b-legacy :is(.panel,.card,.fold,.reader-fold,.learning-course,.v6-card,.tool-card,.metric){background:var(--raise)!important;border:1px solid var(--line)!important;border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;color:var(--ink)}
+html.b-legacy :is(h1,h2,h3){color:var(--ink);letter-spacing:-.01em}
+html.b-legacy h1{font-size:clamp(26px,4vw,32px);font-weight:700}
+html.b-legacy :is(.muted,.small.muted,small){color:var(--muted)}
+html.b-legacy a:not(.btn):not(.b-btn):not([class*="b-"]){color:var(--link)}
+html.b-legacy :is(.btn,button.btn,a.btn){min-height:44px;border:0!important;border-radius:var(--radius-in)!important;background:var(--accent)!important;color:#fff!important;font-weight:500;box-shadow:none!important;text-decoration:none}
+html.b-legacy :is(.btn.secondary,.btn.ghost,.btn.soft,.read-button){background:rgba(118,118,128,.12)!important;color:var(--ink)!important}
+html.b-legacy .read-button[aria-pressed="true"]{background:rgba(52,199,89,.16)!important;color:#1d6e31!important}
+html.b-legacy :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){border:0;border-radius:var(--radius-in);background:rgba(118,118,128,.12);color:var(--ink)}
+html.b-legacy details>summary{cursor:pointer}
+html.b-legacy .lesson-sos{background:var(--sos)!important;border-left:4px solid var(--sos-line)!important;border-radius:0 var(--radius-in) var(--radius-in) 0}
+html.b-legacy .lesson-progress .bar{background:rgba(118,118,128,.16)!important;border-radius:4px}
+html.b-legacy .lesson-progress .bar>*{background:var(--accent)!important}
+html.b-legacy :is(.update-banner,.recovery-banner){border-radius:var(--radius)}
+
+/* Dark: the same mapping; old pages keep their own dark rules for the rest */
+html.b-legacy[data-theme="dark"] body,html.b-legacy[data-theme="dark"] body.dark-mode{background:var(--bg)!important;color:var(--ink)}
+html.b-legacy[data-theme="dark"] .read-button[aria-pressed="true"]{color:#30d158!important}
+
+/* The shell's colours win over the page's own (old stylesheets set the same names on :root and body) */
+html.b-legacy,html.b-legacy body{--bg:#f5f5f7!important;--surface:#f2f2f7!important;--raise:#fff!important;--ink:#1d1d1f!important;--muted:#6e6e73!important;--line:rgba(0,0,0,.08)!important;--accent:#0071e3!important;--accent-hover:#0077ed!important;--accent-soft:rgba(0,113,227,.1)!important;--accent-ink:#fff!important;--link:#0066cc!important;--glass:rgba(255,255,255,.72)!important;--shadow:0 2px 10px rgba(0,0,0,.04)!important;--sos:#fff8e6!important;--sos-line:#d9a520!important;--focus:rgba(0,113,227,.35)!important}
+@media (prefers-color-scheme:dark){html.b-legacy:not([data-theme="light"]),html.b-legacy:not([data-theme="light"]) body{--bg:#000!important;--surface:#1c1c1e!important;--raise:#1c1c1e!important;--ink:#f5f5f7!important;--muted:#98989d!important;--line:rgba(255,255,255,.1)!important;--accent:#0071e3!important;--accent-hover:#0a84ff!important;--accent-soft:rgba(10,132,255,.2)!important;--accent-ink:#fff!important;--link:#4da3ff!important;--glass:rgba(28,28,30,.72)!important;--shadow:none!important;--sos:#2a2414!important;--sos-line:#b8892a!important;--focus:rgba(10,132,255,.5)!important}}
+html.b-legacy[data-theme="dark"],html.b-legacy[data-theme="dark"] body{--bg:#000!important;--surface:#1c1c1e!important;--raise:#1c1c1e!important;--ink:#f5f5f7!important;--muted:#98989d!important;--line:rgba(255,255,255,.1)!important;--accent:#0071e3!important;--accent-hover:#0a84ff!important;--accent-soft:rgba(10,132,255,.2)!important;--accent-ink:#fff!important;--link:#4da3ff!important;--glass:rgba(28,28,30,.72)!important;--shadow:none!important;--sos:#2a2414!important;--sos-line:#b8892a!important;--focus:rgba(10,132,255,.5)!important}
+
+/* Shell controls keep their own look whatever the page styles buttons, links and inputs with */
+html.b-legacy :is(.b-top,.b-side,.b-tabbar,.b-results) :is(button,a,input){font-family:inherit!important;letter-spacing:0!important;text-transform:none!important}
+html.b-legacy .b-top .b-icon{border:0!important;background:none!important;box-shadow:none!important;min-height:44px!important;width:44px!important;padding:0!important;color:var(--ink)!important}
+html.b-legacy .b-top .b-icon:hover{background:rgba(118,118,128,.12)!important}
+html.b-legacy .b-search input{height:36px!important;min-height:36px!important;margin:0!important;padding:0 64px 0 36px!important;border:0!important;border-radius:var(--radius-in)!important;background:rgba(118,118,128,.12)!important;color:var(--ink)!important;font-size:14px!important;box-shadow:none!important}
+html.b-legacy .b-search svg{position:absolute!important}
+html.b-legacy .b-side a,html.b-legacy .b-side .b-side-btn{color:var(--ink)!important;text-decoration:none!important;border:0!important;box-shadow:none!important;background:none;font-size:15px!important;font-weight:400}
+html.b-legacy .b-side a[aria-current="page"]{background:var(--accent-soft)!important;font-weight:600}
+html.b-legacy .b-side a:hover,html.b-legacy .b-side .b-side-btn:hover{background:var(--raise)!important}
+html.b-legacy .b-side .old{color:var(--muted)!important;font-size:14px!important}
+html.b-legacy .b-tabbar a{text-decoration:none!important}
+html.b-legacy .b-results a{text-decoration:none!important;color:var(--ink)!important}
+html.b-legacy .b-results .b-res-foot a{color:var(--link)!important}
+html.b-legacy body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans",system-ui,sans-serif!important}
+html.b-legacy :is(h1,h2,h3,h4,.overline,.eyebrow,.kicker){font-family:inherit!important}
+html.b-legacy :is(.overline,.eyebrow,.kicker){text-transform:none!important;letter-spacing:0!important;color:var(--muted)!important;font-size:14px!important;font-weight:600!important}
+
+/* On older pages the accent is also used for text: a darker blue (lighter in dark mode) keeps 4.5:1 everywhere */
+html.b-legacy,html.b-legacy body{--accent:#0066cc!important;--accent-ink:#fff!important}
+@media (prefers-color-scheme:dark){html.b-legacy:not([data-theme="light"]),html.b-legacy:not([data-theme="light"]) body{--accent:#4da3ff!important;--accent-ink:#000!important}}
+html.b-legacy[data-theme="dark"],html.b-legacy[data-theme="dark"] body{--accent:#4da3ff!important;--accent-ink:#000!important}
+html.b-legacy :is(.btn,button.btn,a.btn){background:var(--accent)!important;color:var(--accent-ink)!important}
+html.b-legacy .b-brand,html.b-legacy .b-brand span{color:var(--ink)!important}
+html.b-legacy .b-btn{color:var(--accent-ink)!important}
+html.b-legacy .style-preview-nav{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:10px!important;overflow:visible!important;z-index:1!important}
+html.b-legacy .style-preview-nav::before{flex-basis:100%}
+html.b-legacy .style-preview-nav a{width:auto!important;height:auto!important;min-height:44px}
+html.b-legacy .b-review :is(nav,div,aside,ul,section){position:static!important;inset:auto!important;transform:none!important;height:auto!important;min-height:0!important;max-height:none!important;width:auto!important}
+html.b-legacy .b-review :is(nav,ul,.v6-shell-nav,.v6-global-sidebar>div){display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important}
+html.b-legacy .b-review a{flex:0 0 auto!important}
+html.b-legacy .b-review :is(aside,nav,div,a,button,span){visibility:visible!important;opacity:1!important}
