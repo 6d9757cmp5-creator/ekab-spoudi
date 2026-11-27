@@ -462,3 +462,107 @@ a.w:active{transform:scale(.98)}
 .ws-add{color:#34c759}
 .ws-none{color:var(--muted);font-size:14px}
 .ws-reset{margin:16px 20px 20px;align-self:flex-start;min-height:44px;border:0;background:none;color:var(--link);font-size:14px;cursor:pointer}
+
+/* Edit sheet scrolls on small screens; groups in the "add" list */
+.b-sheet{overflow:auto;overscroll-behavior:contain}
+.ws-group{min-height:36px!important;padding:12px 12px 4px!important;font-size:13px;font-weight:600;color:var(--muted);background:var(--raise)}
+
+/* Interactive widgets */
+.w-opts{display:grid;gap:6px;margin-top:8px}
+.w-opt{min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius-in);background:var(--surface);color:var(--ink);font-size:14px;text-align:left;cursor:pointer;transition:background .15s ease-out,border-color .15s ease-out}
+.w-opt:hover:not(:disabled){border-color:var(--accent)}
+.w-opt:disabled{cursor:default}
+.w-opt.right{border-color:#34c759;background:rgba(52,199,89,.14)}
+.w-opt.wrong{border-color:#ff3b30;background:rgba(255,59,48,.12)}
+.w-expl{font-size:14px;line-height:1.5;margin:8px 0 0!important;animation:b-rise .25s ease-out}
+.w-card{flex:1;padding:12px 14px;border-radius:var(--radius-in);background:var(--surface)}
+.w-card-a{margin-top:8px!important;padding-top:8px;border-top:1px solid var(--line);font-size:14px;line-height:1.5;animation:b-rise .25s ease-out}
+.w-cpr{display:flex;align-items:center;gap:20px;flex:1}
+.w-beat{width:56px;height:56px;flex:none;border-radius:50%;background:rgba(255,59,48,.16)}
+.w-beat.on{animation:w-beat .25s ease-out}
+@keyframes w-beat{from{background:#ff3b30;transform:scale(1.12)}to{background:rgba(255,59,48,.16);transform:none}}
+.w-running .w-beat{box-shadow:0 0 0 2px rgba(255,59,48,.3)}
+.w-seg{display:inline-flex;border-radius:var(--radius-in);background:rgba(118,118,128,.12);padding:2px}
+.w-seg button{min-width:44px;min-height:32px;border:0;border-radius:8px;background:none;color:var(--ink);font-size:14px;cursor:pointer}
+.w-seg button[aria-pressed="true"]{background:var(--raise);box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600}
+.w-chips{display:flex;flex-wrap:wrap;gap:6px}
+.w-chips button{min-height:36px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:13px;cursor:pointer;transition:background .15s ease-out,transform .1s ease-out}
+.w-chips button:active,.w-chips button.hit{transform:scale(.95)}
+.w-chips button.hit{background:var(--accent);color:#fff}
+.w-chips button[aria-pressed="true"]{background:rgba(255,149,0,.18);border-color:#ff9500;font-weight:600}
+.w-chips small{color:var(--muted)}
+.w-log{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px;font-size:14px;font-variant-numeric:tabular-nums}
+.w-log li{display:flex;gap:8px;align-items:baseline}
+.w-log small{margin-left:auto;color:var(--muted)}
+.w-link{align-self:flex-start;min-height:36px;margin-left:auto;padding:0 4px;border:0;background:none;color:var(--link);font-size:14px;cursor:pointer}
+.w-head .w-link{min-height:0}
+.w-tap-btn{min-width:120px}
+.w-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.w-form-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.w-form label{display:grid;gap:4px;font-size:13px;color:var(--muted);min-width:0}
+.w-form input,.w-form select,.w-input{min-height:40px;min-width:0;width:100%;border:0;border-radius:var(--radius-in);background:rgba(118,118,128,.12);padding:0 10px;font-size:15px;color:var(--ink)}
+.w-form input:focus,.w-form select:focus,.w-input:focus{outline:none;box-shadow:0 0 0 3px var(--focus)}
+.w-result{margin-top:auto!important;padding-top:10px;font-size:15px;color:var(--muted)}
+.w-result b{font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
+.w-result b.warn{color:#d70015}
+:root[data-theme="dark"] .w-result b.warn{color:#ff6961}
+.w-lex li span{white-space:normal;overflow:visible}
+@media (max-width:720px){.w-form{grid-template-columns:1fr 1fr}}
+
+/* Account button and side-menu entry; app-wide search footer */
+.b-side-btn{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 12px;border:0;border-radius:var(--radius-in);background:none;color:var(--ink);font-size:15px;text-align:left;cursor:pointer}
+.b-side-btn:hover{background:var(--raise)}
+.b-side-btn svg{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.b-kbd{position:absolute;right:10px;top:9px;padding:1px 6px;border:1px solid var(--line);border-radius:6px;font:500 12px/1.4 inherit;color:var(--muted);pointer-events:none}
+.b-search input:focus~.b-kbd,.b-search input:not(:placeholder-shown)~.b-kbd{display:none}
+@media (max-width:720px){.b-kbd{display:none}}
+.b-res-foot{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;padding-top:6px;border-top:1px solid var(--line)}
+.b-res-foot a{flex:1;color:var(--link)!important;font-weight:500}
+.b-res-foot button{display:flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border:0;border-radius:8px;background:none;color:var(--link);font-size:14px;cursor:pointer}
+.b-res-foot button:hover{background:var(--accent-soft)}
+.b-res-foot svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Quick access (quick-access.js) inside the side menu */
+.b-side .ekab-quick-access{margin:20px 0 0;padding:0}
+.b-side .ekab-quick-heading{display:flex;align-items:center;justify-content:space-between;margin:0 12px 6px;font-size:14px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
+.b-side .ekab-quick-heading span{font-size:0}
+.b-side .ekab-quick-heading span::before{content:"Γρήγορη πρόσβαση";font-size:14px}
+.b-side .ekab-quick-edit{min-height:32px;padding:0 8px;border:0;border-radius:8px;background:none;color:var(--link);font-size:14px;cursor:pointer}
+.b-side .ekab-quick-links{display:grid}
+.b-side .ekab-quick-links a{font-size:15px}
+
+/* Account dialog (account-ui.js) in the same look */
+#accountDialog,.ekab-quick-dialog{width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 48px);overflow:auto;padding:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--raise);color:var(--ink);box-shadow:0 24px 60px rgba(0,0,0,.25);font:inherit}
+#accountDialog::backdrop,.ekab-quick-dialog::backdrop{background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#accountDialog .dialog-inner{padding:20px;display:grid;gap:12px}
+#accountDialog .account-dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#accountDialog h2{margin:0;font-size:20px}
+#accountDialog h3{margin:8px 0 4px;font-size:16px}
+#accountDialog p{margin:0;font-size:14px;line-height:1.5}
+#accountDialog .small,#accountDialog .muted{color:var(--muted);font-size:13px}
+#accountDialog .dialog-close{width:44px;height:44px;border:0;border-radius:var(--radius-in);background:none;color:var(--muted);font-size:24px;cursor:pointer}
+#accountDialog .dialog-close:hover{background:rgba(118,118,128,.12);color:var(--ink)}
+#accountDialog .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border:0;border-radius:var(--radius-in);background:var(--accent);color:#fff;font:500 15px/1.2 inherit;cursor:pointer;text-decoration:none}
+#accountDialog .btn.secondary,#accountDialog .btn.ghost{background:rgba(118,118,128,.12);color:var(--ink)}
+#accountDialog .btn.compact{min-height:40px;padding:8px 14px;font-size:14px}
+#accountDialog .btn.full{width:100%}
+#accountDialog .btn:disabled{opacity:.5;cursor:default}
+#accountDialog .google-signin{background:var(--raise);color:var(--ink);border:1px solid var(--line)}
+#accountDialog .google-mark{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#4285f4;color:#fff;font-weight:700;font-size:13px}
+#accountDialog .danger-button{background:rgba(255,59,48,.12);color:#d70015}
+#accountDialog .actions{display:flex;flex-wrap:wrap;gap:8px}
+#accountDialog details{border:1px solid var(--line);border-radius:var(--radius-in);background:var(--surface)}
+#accountDialog summary{min-height:44px;display:flex;align-items:center;gap:8px;padding:0 14px;cursor:pointer;font-weight:600;font-size:15px}
+#accountDialog details .body,#accountDialog .advanced-content{padding:0 14px 14px;display:grid;gap:10px}
+#accountDialog .storage-summary-note{margin-left:auto;font-weight:400;font-size:13px;color:var(--muted)}
+#accountDialog .backup-grid{display:grid;gap:10px}
+#accountDialog .backup-card,#accountDialog .cloud-controls{padding:14px;border-radius:var(--radius-in);background:var(--raise);display:grid;gap:8px}
+#accountDialog .file-select{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+#accountDialog .file-select input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+#accountDialog .file-select [data-file-label]{font-size:13px;color:var(--muted)}
+#accountDialog .app-version-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+#accountDialog .storage-advanced{background:var(--raise)}
+#accountDialog [hidden],.ekab-quick-dialog [hidden]{display:none!important}
+.b-search input{padding-right:64px}
+@media (max-width:720px){.b-search input{padding-right:14px}}
+.b-kbd{color:var(--ink);background:var(--raise)}

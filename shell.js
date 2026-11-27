@@ -39,6 +39,10 @@ const icon={
  image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/>',
  chart:'<path d="M4 19V5M4 19h17M7 15l4-4 3 2 6-7"/>',
  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+ grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ lexicon:'<path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2zM4 5v16M9 8h7M9 12h5"/>',
  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
  close:'<path d="M6 6l12 12M18 6 6 18"/>',
  moon:'<path d="M20.5 14.5A8.7 8.7 0 0 1 9.5 3.5 8.8 8.8 0 1 0 20.5 14.5Z"/>',
@@ -47,19 +51,12 @@ const icon={
 export const svg=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icon[n]}</svg>`;
 
 const NAV=[
- ['Μελέτη',[['index.html','home','Αρχική'],['courses.html','book','Μαθήματα ΣΑΕΚ'],['./saek-videos.html','play','Βίντεο ΣΑΕΚ με τη σειρά'],['./saek-images.html','image','Φωτογραφίες ΣΑΕΚ'],['./theory.html','cert','Θεωρία ΕΟΠΠΕΠ'],['./practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ'],['./seminar-prep.html','cert','Σεμινάρια']]],
- ['Εξάσκηση',[['./saek-exams.html','exam','Εξετάσεις ΣΑΕΚ'],['./theory.html?mode=exam&section=practice','target','Τεστ ΕΟΠΠΕΠ'],['./paramedic.html#skills','hands','Εργαστήρια δεξιοτήτων'],['./mentor-oral.html','mic','Προφορική εξάσκηση']]],
- ['Εργαλεία',[['./farmaka.html','pill','Φαρμακολογία'],['./protocols.html','siren','Θέματα επειγόντων'],['./mentor-ecg.html','ecg','ΗΚΓ'],['./pdf-library.html','book','PDF'],['./mentor-library.html','book','Βιβλιογραφία'],['./contacts.html','phone','Τηλέφωνα ΕΚΑΒ']]],
- ['Εσύ',[['./progress-v6.html','chart','Πρόοδος']]]
+ ['Μελέτη',[['index.html','home','Αρχική'],['./study.html','grid','Όλη η μελέτη'],['courses.html','book','Μαθήματα ΣΑΕΚ'],['./saek-videos.html','play','Βίντεο ΣΑΕΚ με τη σειρά'],['./saek-images.html','image','Φωτογραφίες ΣΑΕΚ'],['./theory.html','cert','Θεωρία ΕΟΠΠΕΠ'],['./practical_exam.html','hands','Πρακτικό ΕΟΠΠΕΠ'],['./seminar-prep.html','cert','Σεμινάρια']]],
+ ['Εξάσκηση',[['./practice.html','grid','Όλη η εξάσκηση'],['./saek-exams.html','exam','Εξετάσεις ΣΑΕΚ'],['./theory.html?mode=exam&section=practice','target','Τεστ ΕΟΠΠΕΠ'],['./paramedic.html#skills','hands','Εργαστήρια δεξιοτήτων'],['./mentor-oral.html','mic','Προφορική εξάσκηση']]],
+ ['Εργαλεία',[['./tools.html','grid','Όλα τα εργαλεία'],['./farmaka.html','pill','Φαρμακολογία'],['./protocols.html','siren','Θέματα επειγόντων'],['./mentor-ecg.html','ecg','ΗΚΓ'],['./pdf-library.html','book','PDF'],['./mentor-library.html','book','Βιβλιογραφία'],['./contacts.html','phone','Τηλέφωνα ΕΚΑΒ']]],
+ ['Εσύ',[['./progress-v6.html','chart','Πρόοδος'],['./study-plan.html','cal','Ημερολόγιο εξετάσεων'],['#account','user','Λογαριασμός']]]
 ];
 
-let searchItems=null;
-async function loadSearch(){
- if(searchItems)return searchItems;
- const parts=await Promise.all(['A','B','C','D'].map(s=>fetch(`./saek-search-${s}.json`).then(r=>r.ok?r.json():{items:[]}).catch(()=>({items:[]}))));
- searchItems=parts.flatMap(p=>p.items||[]).map(it=>({...it,hay:norm(`${it.chapterTitle} ${it.course} ${it.preview||''}`)}));
- return searchItems;
-}
 const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ς/g,'σ');
 
 function applyTheme(t){
@@ -74,17 +71,20 @@ export function shell(current){
  const top=document.createElement('header');top.className='b-top';
  top.innerHTML=`<button class="b-icon b-menu" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false" aria-controls="b-side">${svg('menu')}</button>
  <a class="b-brand" href="index.html" aria-label="ΕΚΑΒ Σπουδή, αρχική"><img src="./icon.svg" alt=""><span>ΕΚΑΒ Σπουδή</span></a>
- <div class="b-search" role="search">${svg('search')}<label class="sr-only" for="b-q">Αναζήτηση στην ύλη</label>
-  <input id="b-q" type="search" role="combobox" aria-autocomplete="list" placeholder="Αναζήτηση στα κεφάλαια ΣΑΕΚ" autocomplete="off" aria-controls="b-res" aria-expanded="false">
-  <ul class="b-results" id="b-res" role="listbox" hidden></ul></div>
- <div class="b-tools"><button class="b-icon" type="button" data-theme-toggle></button></div>`;
+ <div class="b-search" role="search">${svg('search')}<label class="sr-only" for="b-q">Αναζήτηση σε όλη την εφαρμογή</label>
+  <input id="b-q" type="search" role="combobox" aria-autocomplete="list" placeholder="Αναζήτηση σε όλη την εφαρμογή" autocomplete="off" aria-controls="b-res" aria-expanded="false">
+  <kbd class="b-kbd" aria-hidden="true">Ctrl K</kbd><ul class="b-results" id="b-res" role="listbox" hidden></ul></div>
+ <div class="b-tools"><button class="b-icon" type="button" data-theme-toggle></button><button class="b-icon b-account" type="button" data-account-open aria-label="Λογαριασμός και συγχρονισμός" title="Λογαριασμός">${svg('user')}</button></div>`;
  const side=document.createElement('nav');side.className='b-side';side.id='b-side';side.setAttribute('aria-label','Κύριο μενού');
  side.innerHTML=NAV.map(([h,links])=>`<h2>${h}</h2>`+links.map(([href,ic,label])=>{
   const on=current?href===current:href===here;
+  if(href==='#account')return `<button type="button" class="b-side-btn" data-account-open>${svg(ic)}${label}</button>`;
   return `<a href="${href}"${on?' aria-current="page"':''}>${svg(ic)}${label}</a>`}).join('')).join('')+
+  `<section class="ekab-quick-access" data-ekab-quick-access></section>`+
   `<h2>Άλλα</h2><a class="old" href="index-v6.html#/home">Παλιά όψη αρχικής</a>`;
  const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='b-backdrop';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Κλείσιμο μενού');
  document.body.prepend(top,side,backdrop);
+ features();
 
  // Phone drawer
  const menu=top.querySelector('.b-menu'),phone=matchMedia('(max-width:720px)');
@@ -113,15 +113,25 @@ export function shell(current){
  // Search
  const q=top.querySelector('#b-q'),res=top.querySelector('#b-res');let sel=-1,timer;
  const close=()=>{res.hidden=true;q.setAttribute('aria-expanded','false');sel=-1};
+ const ready=()=>new Promise(ok=>{const t0=Date.now();const w=()=>window.EkabGlobalSearch||Date.now()-t0>8000?ok(window.EkabGlobalSearch):setTimeout(w,100);w()});
+ // SAEK chapters open in the new reader; everything else keeps its own page.
+ const target=href=>{const m=/^saek-course-(\d{2})\.html#lesson-(\d+)$/.exec(href||'');return m?`chapter.html?c=${m[1]}&ch=${m[2]}`:'./'+String(href||'').replace(/^\.\//,'')};
+ const kinds={saek:'ΣΑΕΚ',eoppep:'ΕΟΠΠΕΠ',seminar:'Σεμινάριο',practical:'Πρακτικό',practice:'Εξάσκηση',page:'Σελίδα'};
  const run=async()=>{
-  const v=norm(q.value.trim());if(v.length<2){close();return}
-  const items=await loadSearch();const words=v.split(/\s+/);
-  const hits=items.filter(it=>words.every(w=>it.hay.includes(w))).slice(0,12);
-  res.innerHTML=hits.length?hits.map((it,i)=>`<li><a role="option" id="b-opt-${i}" href="chapter.html?c=${it.courseId}&ch=${it.chapter}"><b>${esc(it.chapterTitle)}</b><span>${esc(it.courseId)} · ${esc(it.course)}</span></a></li>`).join(''):'<li class="empty">Δεν βρέθηκε κεφάλαιο. Δοκίμασε άλλη λέξη.</li>';
-  res.hidden=false;q.setAttribute('aria-expanded','true');sel=-1;
+  const v=q.value.trim();if(v.length<2){close();return}
+  res.innerHTML='<li class="empty">Αναζήτηση…</li>';res.hidden=false;q.setAttribute('aria-expanded','true');
+  const api=await ready();let hits=[];
+  try{hits=api?await api.query(v,'Όλα'):[]}catch(_){hits=[]}
+  if(q.value.trim()!==v)return;
+  const all=`search.html?q=${encodeURIComponent(v)}`;
+  res.innerHTML=(hits.length?hits.slice(0,10).map((it,i)=>`<li><a role="option" id="b-opt-${i}" href="${esc(target(it.href))}"><b>${esc(it.title)}</b><span>${esc(kinds[it.kind]||'')}${it.subtitle?' · '+esc(it.subtitle):''}</span></a></li>`).join(''):`<li class="empty">${api?'Δεν βρέθηκε κάτι. Δοκίμασε άλλη λέξη.':'Η αναζήτηση δεν φορτώθηκε. Έλεγξε τη σύνδεση.'}</li>`)+
+   `<li class="b-res-foot"><a role="option" id="b-opt-all" href="${all}">Όλα τα αποτελέσματα για «${esc(v)}»</a><button type="button" data-lexicon>${svg('lexicon')}Ιατρικό λεξικό</button></li>`;
+  sel=-1;
  };
+ res.addEventListener('click',e=>{if(e.target.closest('[data-lexicon]')){close();window.EkabOpenMedicalGlossary?.()}});
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();q.focus();q.select()}});
  q.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(run,120)});
- q.addEventListener('focus',()=>{loadSearch();if(q.value.trim().length>1)run()});
+ q.addEventListener('focus',()=>{if(q.value.trim().length>1)run()});
  q.addEventListener('keydown',e=>{
   const opts=[...res.querySelectorAll('a')];
   if(e.key==='Escape'){close();return}
@@ -130,4 +140,17 @@ export function shell(current){
   if(e.key==='Enter'){e.preventDefault();(opts[sel]||opts[0]).click()}
  });
  document.addEventListener('pointerdown',e=>{if(!top.querySelector('.b-search').contains(e.target))close()});
+}
+
+// The same app features the older pages load through theme-init.js; each file loads once.
+function features(){
+ const add=(src,module)=>{if(document.querySelector(`script[src^="${src.split('?')[0]}"],script[data-src="${src}"]`))return;const n=document.createElement('script');n.src=src;n.dataset.src=src;if(module)n.type='module';else n.defer=true;document.body.append(n)};
+ const css=href=>{if(document.querySelector(`link[href^="${href.split('?')[0]}"]`))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.append(l)};
+ css('global-tools.css?v=27.1.129');css('quick-access.css?v=20261122-1');
+ add('global-tools.js?v=27.1.130');      // app-wide search index, medical lexicon, notifications
+ add('quick-access.js?v=20261122-1');    // pinned and rotating shortcuts in the side menu
+ add('study-scheduler.js');              // dated retrieval practice used by reminders and the plan
+ add('study-resume.js?v=27.1.109');      // "continue where you left off" history
+ add('services/recall/popup.mjs',true);  // review reminders from chapters already read
+ add('updates.js?v=27.1.180');           // offline updates; loads the account and device sync
 }

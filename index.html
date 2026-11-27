@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="./radio.css?v=20261122-1">
 <link rel="stylesheet" href="./radio-channels.css?v=20261122-1">
-<link rel="stylesheet" href="shell.css?v=3">
+<link rel="stylesheet" href="shell.css?v=5">
 <link rel="stylesheet" href="shell-radio.css?v=1">
 </head>
 <body class="b-home">
@@ -58,7 +58,7 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,readCount,isRead,store} from './shell.js?v=1';
+import {COURSES,shell,readCount,isRead,store} from './shell.js?v=2';
 shell();
 
 const total=COURSES.reduce((n,c)=>n+c.chapters,0);
@@ -80,10 +80,9 @@ paint();
 addEventListener('storage',paint);addEventListener('pageshow',paint);
 
 </script>
-<script type="module" src="home-widgets.js?v=3"></script>
+<script type="module" src="home-widgets.js?v=5"></script>
 <script src="./shift-presence.js?v=20261127-8" defer></script>
 <script src="./radio-config.js?v=20261122-1" defer></script>
 <script src="./radio-widget-loader.js?v=20261122-2" defer></script>
-<script src="updates.js?v=27.1.180" defer></script>
 </body>
 </html>
