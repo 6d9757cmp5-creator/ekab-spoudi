@@ -8,7 +8,7 @@
 <link rel="icon" href="../icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="beta.css?v=1">
+<link rel="stylesheet" href="beta.css?v=2">
 </head>
 <body>
 <main class="b-main" id="main">
@@ -30,6 +30,10 @@
 
   <section class="b-section" id="library" aria-labelledby="lib-h">
    <div class="b-row"><h2 id="lib-h">Μαθήματα ΣΑΕΚ</h2></div>
+   <div class="b-media">
+    <a href="../saek-videos.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg><span><b>Όλα τα βίντεο με τη σειρά</b><small>Από το μάθημα 01 έως το 20</small></span></a>
+    <a href="../saek-images.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/></svg><span><b>Όλες οι φωτογραφίες</b><small>Δες κάθε εικόνα χωριστά</small></span></a>
+   </div>
    <div class="b-tabs" role="group" aria-label="Εξάμηνο" id="tabs"></div>
    <ul class="b-courses" id="courses"></ul>
   </section>
@@ -41,7 +45,7 @@
  </div>
 </main>
 <script type="module">
-import {COURSES,shell,readCount,isRead,store,svg,esc} from './beta.js?v=1';
+import {COURSES,shell,readCount,isRead,store,svg,esc} from './beta.js?v=2';
 shell();
 
 const total=COURSES.reduce((n,c)=>n+c.chapters,0);
@@ -82,7 +86,7 @@ function list(){
 const tools=[
  ['../farmaka.html','Φαρμακολογία','Δόσεις και ενδείξεις'],['../protocols.html','Θέματα επειγόντων','Αλγόριθμοι'],
  ['../mentor-ecg.html','Εργαστήριο ΗΚΓ','Ρυθμοί'],['../paramedic.html#skills','Εργαστήρια δεξιοτήτων','Βήμα βήμα'],
- ['../saek-videos.html','Βίντεο ΣΑΕΚ','Ανά μάθημα'],['../saek-images.html','Εικόνες ΣΑΕΚ','Ανά μάθημα'],
+ ['../pdf-library.html','Τα PDF μου','Αρχεία'],['../mentor-library.html','Βιβλιογραφία','Πηγές'],
  ['../study-plan.html','Ημερολόγιο εξετάσεων','Πρόγραμμα μελέτης'],['../contacts.html','Τηλέφωνα ΕΚΑΒ','Επαφές']
 ];
 document.getElementById('tools').innerHTML=tools.map(([h,t,d])=>`<li><a href="${h}">${t}<span>${d}</span></a></li>`).join('');
